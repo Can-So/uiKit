@@ -8,21 +8,15 @@ import { getDimensionsWithDefault } from '../../cardLoading';
 
 describe('CardLoading', () => {
   it('should render the right icon based on the itemType', () => {
-    const fileLoading = shallow(<CardLoading mediaItemType="file" />);
-    const linkLoading = shallow(<CardLoading mediaItemType="link" />);
+    const fileLoading = shallow(<CardLoading />);
 
     expect(fileLoading.find(FileIcon)).toHaveLength(1);
-    expect(linkLoading.find(LinkIcon)).toHaveLength(1);
   });
 
   it('should render icon with the right size', () => {
-    const smallLoadingCard = shallow(
-      <CardLoading mediaItemType="link" iconSize="small" />,
-    );
-    const largeLoadingCard = shallow(
-      <CardLoading mediaItemType="file" iconSize="large" />,
-    );
-    const defaultLoadingSize = shallow(<CardLoading mediaItemType="link" />);
+    const smallLoadingCard = shallow(<CardLoading iconSize="small" />);
+    const largeLoadingCard = shallow(<CardLoading iconSize="large" />);
+    const defaultLoadingSize = shallow(<CardLoading />);
 
     expect(smallLoadingCard.find(LinkIcon).props().size).toBe('small');
     expect(largeLoadingCard.find(FileIcon).props().size).toBe('large');

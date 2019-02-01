@@ -9,7 +9,7 @@ jest.mock('../../../src/utils/shouldDisplayImageThumbnail', () => ({
 import * as React from 'react';
 
 import { shallow, mount } from 'enzyme';
-import { FileDetails, LinkDetails, Resource } from '@atlaskit/media-core';
+import { FileDetails } from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
@@ -19,7 +19,6 @@ import {
   CardViewBase,
   CardViewOwnProps,
 } from '../../../src/root/cardView';
-import { LinkCard } from '../../../src/links';
 import { FileCard } from '../../../src/files';
 import { Wrapper } from '../../../src/root/styled';
 import { breakpointSize } from '../../../src/utils/breakpoint';
@@ -37,12 +36,6 @@ describe('CardView', () => {
     processingStatus: 'pending',
     mediaType: 'image',
   };
-  const link: LinkDetails = {
-    id: 'abcd',
-    type: 'wha',
-    url: 'https://example.com/some-path',
-    title: 'foobar',
-  };
 
   let createAnalyticsEventMock: any;
   beforeEach(() => {
@@ -56,7 +49,7 @@ describe('CardView', () => {
   ) =>
     shallow(
       <CardViewBase
-        mediaItemType={props.metadata === link ? 'link' : 'file'}
+        mediaItemType={'file'}
         createAnalyticsEvent={createAnalyticsEventMock}
         status="loading"
         {...props}
@@ -68,25 +61,6 @@ describe('CardView', () => {
     const element = mount(<CardView status="loading" />);
     const fileCard = element.find(FileCard);
     expect(fileCard).toHaveLength(1);
-  });
-
-  it('should render LinkCard with details', () => {
-    const element = shallowCardViewBaseElement({ metadata: link });
-
-    const linkCard = element.find(LinkCard);
-    expect(linkCard).toHaveLength(1);
-    expect(linkCard.props().details).toBe(link);
-  });
-
-  it('should render LinkCard with other props', () => {
-    const element = shallowCardViewBaseElement({
-      metadata: link,
-      appearance: 'image',
-    });
-
-    const linkCard = element.find(LinkCard);
-    expect(linkCard).toHaveLength(1);
-    expect(linkCard.prop('appearance')).toEqual('image');
   });
 
   it('should render FileCard with details', () => {
@@ -106,26 +80,6 @@ describe('CardView', () => {
     const fileCard = element.find(FileCard);
     expect(fileCard).toHaveLength(1);
     expect(fileCard.prop('appearance')).toEqual('image');
-  });
-
-  it('should render LinkCard and NOT use details to determine which card to render when mediaItemType is "link"', () => {
-    const element = shallowCardViewBaseElement({
-      metadata: file,
-      mediaItemType: 'link',
-    });
-
-    const linkCard = element.find(LinkCard);
-    expect(linkCard).toHaveLength(1);
-  });
-
-  it('should render FileCard and NOT use details to determine which card to render when mediaItemType is "file"', () => {
-    const element = shallowCardViewBaseElement({
-      metadata: link,
-      mediaItemType: 'file',
-    });
-
-    const linkCard = element.find(FileCard);
-    expect(linkCard).toHaveLength(1);
   });
 
   it('should fire onClick and onMouseEnter events when file details are passed in', () => {
@@ -150,30 +104,6 @@ describe('CardView', () => {
     expect(hoverHandler).toHaveBeenCalledTimes(1);
     const hoverHandlerArg = hoverHandler.mock.calls[0][0];
     expect(hoverHandlerArg.mediaItemDetails).toEqual(file);
-  });
-
-  it('should fire onClick and onMouseEnter events when link details are passed in', () => {
-    const clickHandler = jest.fn();
-    const hoverHandler = jest.fn();
-    const card = mount(
-      <CardView
-        status="loading"
-        metadata={link}
-        onClick={clickHandler}
-        onMouseEnter={hoverHandler}
-      />,
-    );
-
-    card.simulate('click');
-    card.simulate('mouseEnter');
-
-    expect(clickHandler).toHaveBeenCalledTimes(1);
-    const clickHandlerArg = clickHandler.mock.calls[0][0];
-    expect(clickHandlerArg.mediaItemDetails).toEqual(link);
-
-    expect(hoverHandler).toHaveBeenCalledTimes(1);
-    const hoverHandlerArg = hoverHandler.mock.calls[0][0];
-    expect(hoverHandlerArg.mediaItemDetails).toEqual(link);
   });
 
   it('should NOT fire onSelectChange when card is NOT selectable', () => {
@@ -315,15 +245,6 @@ describe('CardView', () => {
       expect(props.mediaItemType).toEqual('file');
     });
 
-    it('should not use default dimensions for link cards', () => {
-      const linkCard = shallowCardViewBaseElement({
-        status: 'loading',
-        metadata: link,
-      });
-
-      expect(linkCard.find(Wrapper).props().dimensions).toEqual(undefined);
-    });
-
     it('should pass "disableOverlay" prop to <FileCard /> when mediaItemType is "file"', () => {
       const element = shallowCardViewBaseElement(
         {
@@ -337,87 +258,6 @@ describe('CardView', () => {
 
       expect(element.find(FileCard).props().disableOverlay).toEqual(true);
     });
-  });
-
-  it('should fire "clicked" analytics event when loading link card clicked', () => {
-    const clickHandler = jest.fn();
-    const analyticsEventHandler = jest.fn();
-    const card = mount(
-      <AnalyticsListener channel="media" onEvent={analyticsEventHandler}>
-        <CardView status="loading" metadata={link} onClick={clickHandler} />
-      </AnalyticsListener>,
-    );
-
-    card.simulate('click');
-
-    expect(analyticsEventHandler).toHaveBeenCalledTimes(1);
-    const actualEvent: Partial<UIAnalyticsEventInterface> =
-      analyticsEventHandler.mock.calls[0][0];
-    expect(actualEvent.payload).toEqual({ action: 'clicked' });
-    expect(actualEvent.context && actualEvent.context.length).toEqual(1);
-    const actualContext =
-      actualEvent.context &&
-      (actualEvent.context[0] as CardViewAnalyticsContext);
-    expect(actualContext).not.toBeUndefined();
-    if (actualContext) {
-      expect(actualContext.linkAttributes).toEqual({
-        linkDomain: 'example.com',
-      });
-      expect(actualContext.viewAttributes).toEqual({
-        viewPreview: false,
-        viewSize: 'auto',
-        viewActionmenu: false,
-      });
-      expect(actualContext.loadStatus).toEqual('loading_metadata');
-      expect(actualContext.componentName).toEqual('CardView');
-      expect(actualContext.actionSubject).toEqual('MediaCard');
-      expect(actualContext.packageVersion).toEqual(
-        require('../../../package.json').version,
-      );
-      expect(actualContext.type).toEqual('link');
-      expect(actualContext.actionSubjectId).toEqual(
-        'https://example.com/some-path',
-      );
-    }
-  });
-
-  it('should fire "clicked" analytics event when loading link card with preview clicked', () => {
-    const clickHandler = jest.fn();
-    const analyticsEventHandler = jest.fn();
-    const previewResource: Resource = {
-      url: 'http://resource.url',
-    };
-    const metadata: LinkDetails = {
-      ...link,
-      resources: {
-        thumbnail: previewResource,
-        image: previewResource,
-      },
-    };
-    const card = mount(
-      <AnalyticsListener channel="media" onEvent={analyticsEventHandler}>
-        <CardView status="loading" metadata={metadata} onClick={clickHandler} />
-      </AnalyticsListener>,
-    );
-
-    card.simulate('click');
-
-    expect(analyticsEventHandler).toHaveBeenCalledTimes(1);
-    const actualEvent: Partial<UIAnalyticsEventInterface> =
-      analyticsEventHandler.mock.calls[0][0];
-    expect(actualEvent.payload).toEqual({ action: 'clicked' });
-    expect(actualEvent.context && actualEvent.context.length).toEqual(1);
-    const actualContext =
-      actualEvent.context &&
-      (actualEvent.context[0] as CardViewAnalyticsContext);
-    expect(actualContext).not.toBeUndefined();
-    if (actualContext) {
-      expect(actualContext.viewAttributes).toEqual({
-        viewPreview: true,
-        viewSize: 'auto',
-        viewActionmenu: false,
-      });
-    }
   });
 
   it('should fire "clicked" analytics event when loading file card clicked', () => {
@@ -516,7 +356,7 @@ describe('CardView', () => {
     const analyticsEventHandler = jest.fn();
     const card = mount(
       <AnalyticsListener channel="media" onEvent={analyticsEventHandler}>
-        <CardView status="loading" metadata={link} onClick={clickHandler} />
+        <CardView status="loading" metadata={file} onClick={clickHandler} />
       </AnalyticsListener>,
     );
 

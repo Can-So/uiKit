@@ -1,17 +1,15 @@
 import * as React from 'react';
 
-import { FileDetails, MediaItemType, UrlPreview } from '@atlaskit/media-core';
+import { FileDetails, MediaItemType } from '@atlaskit/media-core';
 
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 
 import { shouldDisplayImageThumbnail } from '../utils/shouldDisplayImageThumbnail';
 import { getBaseAnalyticsContext } from '../utils/analyticsUtils';
-import { isLinkDetails } from '../utils/isLinkDetails';
 
 import { CardViewOwnProps } from './cardView';
 import {
   CardViewAnalyticsContext,
-  AnalyticsLinkAttributes,
   AnalyticsFileAttributes,
   CardStatus,
 } from '../index';
@@ -51,31 +49,6 @@ export class WithCardViewAnalyticsContext extends React.Component<
     };
   }
 
-  private getLinkCardAnalyticsContext(
-    metadata: UrlPreview,
-  ): CardViewAnalyticsContext {
-    const analyticsContext = this.getBaseAnalyticsContext();
-
-    const dummyHrefElement = document.createElement('a');
-    dummyHrefElement.href = metadata.url;
-    const hostname = dummyHrefElement.hostname;
-
-    analyticsContext.actionSubjectId = metadata.url;
-    analyticsContext.viewAttributes.viewPreview = !!(
-      metadata.resources &&
-      (metadata.resources.thumbnail || metadata.resources.image)
-    );
-
-    const linkAttributes: AnalyticsLinkAttributes = {
-      linkDomain: hostname,
-    };
-
-    return {
-      ...analyticsContext,
-      linkAttributes,
-    };
-  }
-
   private getFileCardAnalyticsContext(metadata: FileDetails) {
     const { dataURI } = this.props;
     const analyticsContext = this.getBaseAnalyticsContext();
@@ -100,11 +73,7 @@ export class WithCardViewAnalyticsContext extends React.Component<
   private get analyticsContext(): CardViewAnalyticsContext {
     if (this.props.metadata) {
       const metadata = this.props.metadata;
-      if (isLinkDetails(metadata)) {
-        return this.getLinkCardAnalyticsContext(metadata);
-      } else {
-        return this.getFileCardAnalyticsContext(metadata);
-      }
+      return this.getFileCardAnalyticsContext(metadata);
     } else {
       return this.getBaseAnalyticsContext();
     }

@@ -35,7 +35,6 @@ export class CardContent extends PureComponent<CardContentProps, {}> {
     const {
       loading,
       mediaType,
-      mediaItemType,
       dataURI,
       crop,
       stretch,
@@ -43,7 +42,7 @@ export class CardContent extends PureComponent<CardContentProps, {}> {
     } = this.props;
 
     if (loading) {
-      return <CardLoading mediaItemType={mediaItemType} />;
+      return <CardLoading />;
     }
 
     if (shouldDisplayImageThumbnail(dataURI, mediaType)) {

@@ -1,14 +1,11 @@
 import styled from 'styled-components';
 import { akBorderRadius } from '@atlaskit/util-shared-styles';
 import { HTMLAttributes, ComponentClass } from 'react';
-import { MediaItemType } from '@atlaskit/media-core';
 import { CardDimensions, CardAppearance } from '../';
 import { getCSSUnitValue } from '../utils/getCSSUnitValue';
-import { getCSSBoundaries } from '../utils/cardDimensions';
 import { BreakpointSizeValue, breakpointStyles } from '../utils/breakpoint';
 
 export interface WrapperProps {
-  mediaItemType: MediaItemType;
   dimensions?: CardDimensions;
   appearance?: CardAppearance;
   breakpointSize?: BreakpointSizeValue;
@@ -27,21 +24,7 @@ const getWrapperWidth = (dimensions?: CardDimensions) =>
 export const Wrapper: ComponentClass<
   HTMLAttributes<{}> & WrapperProps
 > = styled.div`
-  ${({
-    appearance,
-    dimensions,
-    mediaItemType,
-    breakpointSize = 'medium',
-  }: WrapperProps) => {
-    // Links are responsive and omit passed dimensions, instead they use max and min dimensions
-    // they don't apply breakpoints either
-    if (mediaItemType === 'link') {
-      return `
-        ${getCSSBoundaries(appearance)}
-        position: relative;
-      `;
-    }
-
+  ${({ dimensions, breakpointSize = 'medium' }: WrapperProps) => {
     return `
       ${breakpointStyles({ breakpointSize })}
       ${getWrapperHeight(dimensions)}

@@ -21,12 +21,6 @@ describe('<Filmstrip />', () => {
           mediaItemType: 'file',
         },
       },
-      {
-        identifier: {
-          url: 'some-url',
-          mediaItemType: 'link',
-        },
-      },
     ];
     const component = shallow(
       <Filmstrip context={context} items={items} {...props} />,
