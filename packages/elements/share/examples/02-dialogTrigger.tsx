@@ -3,6 +3,7 @@ import Button from '@atlaskit/button';
 import { ShareDialogWithTrigger } from '../src/components/ShareDialogWithTrigger';
 
 const loadUserOptions = () => [];
+const onShareSubmit = shareContentState => Promise.resolve({});
 
 export default () => (
   <>
@@ -10,17 +11,20 @@ export default () => (
     <ShareDialogWithTrigger
       copyLink="copyLink"
       loadUserOptions={loadUserOptions}
+      onShareSubmit={onShareSubmit}
     />
     <h4>Default share button with text</h4>
     <ShareDialogWithTrigger
       buttonStyle="withText"
       copyLink="copyLink"
       loadUserOptions={loadUserOptions}
+      onShareSubmit={onShareSubmit}
     />
     <h4>Custom share button</h4>
     <ShareDialogWithTrigger
       copyLink="copyLink"
       loadUserOptions={loadUserOptions}
+      onShareSubmit={onShareSubmit}
     >
       {openDialog => <Button onClick={openDialog}>Custom Button</Button>}
     </ShareDialogWithTrigger>

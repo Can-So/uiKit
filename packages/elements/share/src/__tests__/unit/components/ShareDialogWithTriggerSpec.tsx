@@ -10,6 +10,7 @@ import {
 } from '../../../components/ShareDialogWithTrigger';
 
 let wrapper;
+let mockOnShareSubmit;
 const mockLoadOptions = () => [];
 
 beforeEach(() => {
@@ -17,8 +18,13 @@ beforeEach(() => {
     <ShareDialogWithTrigger
       copyLink="copyLink"
       loadUserOptions={mockLoadOptions}
+      onShareSubmit={mockOnShareSubmit}
     />,
   );
+});
+
+beforeAll(() => {
+  mockOnShareSubmit = jest.fn();
 });
 
 describe('ShareDialogWithTrigger', () => {
@@ -57,6 +63,7 @@ describe('ShareDialogWithTrigger', () => {
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
         />,
       );
       wrapper.setState({ isDialogOpen: true });
@@ -85,6 +92,7 @@ describe('ShareDialogWithTrigger', () => {
           copyLink="copyLink"
           capabilities={mockCapabilities}
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
           validateStateWithCapabilities={spiedValidateStateWithCapabilities}
         />,
       );
@@ -94,6 +102,7 @@ describe('ShareDialogWithTrigger', () => {
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
           validateStateWithCapabilities={spiedValidateStateWithCapabilities}
         />,
       );
@@ -120,6 +129,7 @@ describe('ShareDialogWithTrigger', () => {
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
         />,
       );
       wrapper.setState({
@@ -145,6 +155,7 @@ describe('ShareDialogWithTrigger', () => {
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
         >
           {spiedRenderer}
         </ShareDialogWithTrigger>,
@@ -169,6 +180,7 @@ describe('ShareDialogWithTrigger', () => {
           copyLink="copyLink"
           isDisabled={isDisabled}
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
         />,
       );
       let shareButtonProps = wrapper.find(ShareButton).props();
@@ -228,6 +240,7 @@ describe('ShareDialogWithTrigger', () => {
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
         />,
       );
       wrapper.setState({ isDialogOpen: true });
@@ -246,6 +259,7 @@ describe('ShareDialogWithTrigger', () => {
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
         />,
       );
       wrapper.setState({ isDialogOpen: true });
@@ -297,6 +311,7 @@ describe('ShareDialogWithTrigger', () => {
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
           onUsersChange={spiedOnUsersChange}
         />,
       );

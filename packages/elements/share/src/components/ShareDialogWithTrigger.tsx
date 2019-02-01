@@ -36,7 +36,7 @@ type Props = {
   loadUserOptions: LoadOptions;
   onLinkCopy?: Function;
   onCommentChange?: (comment: Comment) => any;
-  onShareSubmit?: (shareContentState: ShareContentState) => Promise<any>;
+  onShareSubmit: (shareContentState: ShareContentState) => Promise<any>;
   onUsersChange?: (users: User[]) => any;
   shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
@@ -198,10 +198,6 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
   };
 
   handleSubmitShare = (event: React.SyntheticEvent) => {
-    if (!this.props.onShareSubmit) {
-      return;
-    }
-
     const shareContentState: ShareContentState = {
       users: this.state.users,
       comment: this.state.comment,
@@ -209,7 +205,8 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
 
     this.setState({ isSharing: true });
 
-    this.props.onShareSubmit!(shareContentState)
+    this.props
+      .onShareSubmit(shareContentState)
       .then(res => {
         this.handleCloseDialog({ isOpen: false, event });
         this.setState({ isSharing: false });
