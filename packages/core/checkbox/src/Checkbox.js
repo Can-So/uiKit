@@ -131,6 +131,7 @@ class Checkbox extends Component<CheckboxProps, State> {
       value,
       onChange,
       isRequired,
+      defaultChecked,
       ...rest
     } = this.props;
     const isChecked = this.getProp('isChecked');
