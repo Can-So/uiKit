@@ -1,1 +1,0 @@
-- FS-3485 call onInputChange for controlled search
