@@ -23,7 +23,7 @@ import {
   encode,
   parseWithSchema,
 } from './_test-helpers';
-
+import { Schema } from 'prosemirror-model';
 import { createJIRASchema } from '@atlaskit/adf-schema';
 
 export const schema = createJIRASchema({ allowSubSup: true });
@@ -72,7 +72,7 @@ describe('JIRATransformer html:', () => {
 
   describe('marks formatting:', () => {
     describe('checkParseEncodeRoundTrips', () => {
-      let customSchema;
+      let customSchema: Schema;
 
       beforeEach(() => {
         customSchema = createJIRASchema({
