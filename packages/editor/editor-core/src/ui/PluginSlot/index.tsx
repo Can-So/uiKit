@@ -3,13 +3,9 @@ import styled from 'styled-components';
 import { EditorView } from 'prosemirror-view';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { EditorAppearance, UIComponentFactory } from '../../types';
-import { EventDispatcher, createDispatch } from '../../event-dispatcher';
+import { EventDispatcher } from '../../event-dispatcher';
 import EditorActions from '../../actions';
-import {
-  analyticsEventKey,
-  AnalyticsDispatch,
-  AnalyticsEventPayload,
-} from '../../plugins/analytics';
+import { AnalyticsEventPayload } from '../../plugins/analytics';
 
 const PluginsComponentsWrapper = styled.div`
   display: flex;
@@ -27,6 +23,7 @@ export interface Props {
   popupsScrollableElement?: HTMLElement;
   containerElement: HTMLElement | undefined;
   disabled: boolean;
+  dispatchAnalyticsEvent: (payload: AnalyticsEventPayload) => void;
 }
 
 export default class PluginSlot extends React.Component<Props, any> {
@@ -57,17 +54,6 @@ export default class PluginSlot extends React.Component<Props, any> {
     );
   }
 
-  fireAnalyticsEvent = (payload: AnalyticsEventPayload): void => {
-    if (this.props.eventDispatcher) {
-      const dispatch: AnalyticsDispatch = createDispatch(
-        this.props.eventDispatcher,
-      );
-      dispatch(analyticsEventKey, {
-        payload,
-      });
-    }
-  };
-
   render() {
     const {
       items,
@@ -81,6 +67,7 @@ export default class PluginSlot extends React.Component<Props, any> {
       popupsScrollableElement,
       containerElement,
       disabled,
+      dispatchAnalyticsEvent,
     } = this.props;
 
     if (!items || !editorView) {
@@ -96,7 +83,7 @@ export default class PluginSlot extends React.Component<Props, any> {
             editorActions: editorActions as EditorActions,
             eventDispatcher: eventDispatcher as EventDispatcher,
             providerFactory,
-            fireAnalyticsEvent: this.fireAnalyticsEvent,
+            dispatchAnalyticsEvent,
             appearance,
             popupsMountPoint,
             popupsBoundariesElement,

@@ -9,13 +9,18 @@ import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
 import { EventDispatcher, createDispatch } from '../event-dispatcher';
 import { processRawValue } from '../utils';
 import createPluginList from './create-plugins-list';
-import { analyticsEventKey, fireAnalyticsEvent } from '../plugins/analytics';
+import {
+  analyticsEventKey,
+  fireAnalyticsEvent,
+  AnalyticsDispatch,
+} from '../plugins/analytics';
 import { EditorProps, EditorConfig, EditorPlugin } from '../types';
 import { PortalProviderAPI } from '../ui/PortalProvider';
 import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,
 } from '../plugins/editor-disabled';
+import { AnalyticsEventPayload } from '../plugins/analytics';
 
 import {
   processPluginsList,
@@ -37,6 +42,7 @@ export interface EditorViewProps {
       config: EditorConfig;
       eventDispatcher: EventDispatcher;
       transformer?: Transformer<string>;
+      dispatchAnalyticsEvent: (payload: AnalyticsEventPayload) => void;
     },
   ) => JSX.Element;
   onEditorCreated: (
@@ -298,6 +304,15 @@ export default class ReactEditorView<T = {}> extends React.Component<
     }
   };
 
+  dispatchAnalyticsEvent = (payload: AnalyticsEventPayload): void => {
+    if (this.eventDispatcher) {
+      const dispatch: AnalyticsDispatch = createDispatch(this.eventDispatcher);
+      dispatch(analyticsEventKey, {
+        payload,
+      });
+    }
+  };
+
   render() {
     const editor = <div key="ProseMirror" ref={this.handleEditorViewRef} />;
     return this.props.render
@@ -307,6 +322,7 @@ export default class ReactEditorView<T = {}> extends React.Component<
           config: this.config,
           eventDispatcher: this.eventDispatcher,
           transformer: this.contentTransformer,
+          dispatchAnalyticsEvent: this.dispatchAnalyticsEvent,
         })
       : editor;
   }

@@ -31,7 +31,7 @@ export type UiComponentFactoryParams = {
   editorView: EditorView;
   editorActions: EditorActions;
   eventDispatcher: EventDispatcher;
-  fireAnalyticsEvent(payload: AnalyticsEventPayload): void;
+  dispatchAnalyticsEvent: (payload: AnalyticsEventPayload) => void;
   providerFactory: ProviderFactory;
   appearance: EditorAppearance;
   popupsMountPoint?: HTMLElement;

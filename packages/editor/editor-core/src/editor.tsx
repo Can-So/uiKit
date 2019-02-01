@@ -303,7 +303,13 @@ export class Editor extends React.Component<EditorProps, {}> {
                         onEditorCreated={this.onEditorCreated}
                         onEditorDestroyed={this.onEditorDestroyed}
                         disabled={this.props.disabled}
-                        render={({ editor, view, eventDispatcher, config }) => (
+                        render={({
+                          editor,
+                          view,
+                          eventDispatcher,
+                          config,
+                          dispatchAnalyticsEvent,
+                        }) => (
                           <BaseTheme
                             dynamicTextSizing={
                               this.props.allowDynamicTextSizing
@@ -316,6 +322,7 @@ export class Editor extends React.Component<EditorProps, {}> {
                               editorView={view}
                               providerFactory={this.providerFactory}
                               eventDispatcher={eventDispatcher}
+                              dispatchAnalyticsEvent={dispatchAnalyticsEvent}
                               maxHeight={this.props.maxHeight}
                               onSave={
                                 this.props.onSave ? this.handleSave : undefined

@@ -1,11 +1,10 @@
 import { Dispatch } from '../../event-dispatcher';
-
-type AEP<Action, ActionSubject, ActionSubjectID, Attributes, Type> = {
+type AEP<Action, ActionSubject, ActionSubjectID, Attributes, EventType> = {
   action: Action;
   actionSubject: ActionSubject;
   actionSubjectId?: ActionSubjectID;
   attributes?: Attributes;
-  eventType: Type;
+  eventType: EventType;
 };
 
 type UIAEP<Action, ActionSubject, ActionSubjectID, Attributes> = AEP<
