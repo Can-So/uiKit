@@ -9,8 +9,8 @@ import JiraCoreIcon from '@atlaskit/logo/dist/esm/JiraCoreLogo/Icon';
 import JiraIcon from '@atlaskit/logo/dist/esm/JiraLogo/Icon';
 import StrideIcon from '@atlaskit/logo/dist/esm/StrideLogo/Icon';
 import AtlassianIcon from '@atlaskit/logo/dist/esm/AtlassianLogo/Icon';
-import PeopleGroupIcon from '@atlaskit/icon/glyph/people-group';
 import JiraOpsIcon from './assets/jira-ops-logo';
+import PeopleIcon from './assets/people';
 import * as React from 'react';
 import { LicenseInformationDataStructure } from '../providers/types';
 
@@ -24,7 +24,7 @@ const getFixedProductLinks = (hostname: string) => [
   {
     key: 'people',
     label: 'People',
-    icon: PeopleGroupIcon,
+    icon: PeopleIcon,
     link: `${hostname}/people`,
   },
   {

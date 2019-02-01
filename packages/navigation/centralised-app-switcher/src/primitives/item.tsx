@@ -14,6 +14,7 @@ const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
   ${elevation.e100}
   background-color: ${({ isAdmin, isCustom }) =>
     isAdmin ? colors.DN70 : isCustom ? colors.N0 : colors.B400}
+  overflow: hidden;
 `;
 
 type Props = {
