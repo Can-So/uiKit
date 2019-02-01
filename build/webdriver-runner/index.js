@@ -119,22 +119,22 @@ function runTestsWithRetry() {
       if (code !== 0 && process.env.CI) {
         results = await rerunFailedTests(results);
         code = getExitCode(results);
-      }
 
-      /**
-       * If the run succeeds,
-       * log the previously failed tests to indicate flakiness
-       */
-      if (code === 0 && process.env.CI) {
-        reporting.reportFailure(
-          results,
-          'atlaskit.qa.integration_test.flakiness',
-        );
-      } else if (code !== 0 && process.env.CI) {
-        reporting.reportFailure(
-          results,
-          'atlaskit.qa.integration_test.testfailure',
-        );
+        /**
+         * If the re-run succeeds,
+         * log the previously failed tests to indicate flakiness
+         */
+        if (code === 0 && process.env.CI) {
+          reporting.reportFailure(
+            results,
+            'atlaskit.qa.integration_test.flakiness',
+          );
+        } else if (code !== 0 && process.env.CI) {
+          reporting.reportFailure(
+            results,
+            'atlaskit.qa.integration_test.testfailure',
+          );
+        }
       }
     } catch (err) {
       console.error(err.toString());
