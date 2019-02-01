@@ -45,9 +45,9 @@ module.exports = {
     }
     return sendLogs(
       JSON.stringify({
-        events: properties.map(property => {
-          buildEventPayload(property, eventName);
-        }),
+        events: properties.map(property =>
+          buildEventPayload(property, eventName),
+        ),
       }),
       () => {
         console.log(
