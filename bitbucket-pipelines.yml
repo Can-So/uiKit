@@ -203,8 +203,8 @@ pipelines:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            # Will work for all pkgs other than editor
-            - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr 
+            - git lfs pull
+            - yarn run test:vr 
       # This will run essentially the branch builds, but without any optimizations and should be manually
       # run in any potentially risky builds
     run-full-suite:
