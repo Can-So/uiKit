@@ -202,17 +202,19 @@ pipelines:
             - yarn test:webdriver:browserstack
           caches:
             - node
+            
     # This will run with the visual regression tool
     build-visual-regression:
       - step:
           image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
           script:
             - source ./build-setup.sh
-            - bolt install --pure-lockfile
             - git lfs pull
+            - bolt install --pure-lockfile
             - yarn run test:vr 
-      # This will run essentially the branch builds, but without any optimizations and should be manually
-      # run in any potentially risky builds
+            
+    # This will run essentially the branch builds, but without any optimizations and should be manually
+    # run in any potentially risky builds
     run-full-suite:
       - step:
           script:
@@ -229,7 +231,6 @@ pipelines:
             - yarn build
 
     # We deliberately don't use the cache here as well
-
     run-bundle-analysis:
       - step:
           script:
