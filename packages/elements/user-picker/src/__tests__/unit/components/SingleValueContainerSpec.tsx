@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { SingleValueContainer } from '../../../components/SingleValueContainer';
-import { testUser } from '../_testUtils';
 import { SizeableAvatar } from '../../../components/SizeableAvatar';
+import { testUser } from '../_testUtils';
 
 describe('SingleValueContainer', () => {
-  const shallowValueContainer = props =>
+  const shallowValueContainer = (props: any) =>
     shallow(<SingleValueContainer {...props} />);
 
   const userValue = {

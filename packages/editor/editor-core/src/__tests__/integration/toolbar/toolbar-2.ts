@@ -1,8 +1,11 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 import { comment, fullpage, editable } from '../_helpers';
 import { messages as blockTypeMessages } from '../../../plugins/block-type/ui/ToolbarBlockType';
 import { messages } from '../../../plugins/block-type/types';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
 
 const changeFormatting = `[aria-label="${
   blockTypeMessages.textStyles.defaultMessage
@@ -15,14 +18,14 @@ const input = 'helloworld';
     `toolbar-2.ts: should be able to select heading1 for ${editor.name} editor`,
     { skip: ['ie', 'safari'] },
     async client => {
-      const browser = new Page(client);
-      await browser.goto(editor.path);
-      await browser.waitForSelector(editor.placeholder);
-      await browser.click(editor.placeholder);
-      await browser.waitForSelector(changeFormatting);
-      await browser.type(editable, input);
+      const page = await goToEditorTestingExample(client);
+      await mountEditor(page, { appearance: editor.appearance });
+
+      await page.click(editable);
+      await page.waitForSelector(changeFormatting);
+      await page.type(editable, input);
       for (let i = 1; i <= 6; i++) {
-        await validateFormat(browser, i);
+        await validateFormat(page, i);
       }
     },
   );

@@ -1,5 +1,30 @@
 # @atlaskit/editor-core
 
+## 98.1.9
+- [patch] [1ee84815dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ee84815dd):
+
+  - ED-6133: Visually apply column resize changes in collab editing
+
+## 98.1.8
+- [patch] [e83a20575b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a20575b):
+
+  - ED-6148: Prevent autoSize tables from being in an endless loop, integrate with new resizing
+
+## 98.1.7
+- [patch] [69e29bab6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69e29bab6c):
+
+  - ED-5860 Prevent invalid steps from being applied in the editor
+
+## 98.1.6
+- [patch] [406cbf0a4e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/406cbf0a4e):
+
+  - ED-6092: allow passing undefined context to media filmstrip
+
+## 98.1.5
+- [patch] [b2b0a00d6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b2b0a00d6a):
+
+  - Fix table creation without rows
+
 ## 98.1.4
 - [patch] [3b9236fb74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b9236fb74):
 

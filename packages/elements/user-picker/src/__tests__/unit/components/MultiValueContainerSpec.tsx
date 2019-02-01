@@ -21,7 +21,7 @@ describe('MultiValueContainer', () => {
     isLoading: false,
   };
 
-  const shallowValueContainer = props =>
+  const shallowValueContainer = (props: any) =>
     shallow(<MultiValueContainer selectProps={selectProps} {...props} />);
 
   test.each([

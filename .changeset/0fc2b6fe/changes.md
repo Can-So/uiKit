@@ -1,0 +1,1 @@
+- Revert table resizing collab change

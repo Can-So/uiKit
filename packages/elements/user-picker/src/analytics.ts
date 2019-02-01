@@ -59,7 +59,7 @@ const optionData2Analytics = ({ id, type }: OptionData) => ({
   type: type || UserType,
 });
 
-const buildValueForAnalytics = (value?: Option[] | Option) => {
+const buildValueForAnalytics = (value?: Option[] | Option | null) => {
   if (value) {
     const valueToConvert = Array.isArray(value) ? value : [value];
     return valueToConvert.map(({ data }) => optionData2Analytics(data));
@@ -82,14 +82,22 @@ export interface EventCreator {
   ): AnalyticsEventPayload;
 }
 
-export const focusEvent: EventCreator = (props, state, session) =>
+export const focusEvent: EventCreator = (
+  props: UserPickerProps,
+  state: UserPickerState,
+  session?: UserPickerSession,
+) =>
   createEvent('ui', 'focused', 'userPicker', {
     sessionId: sessionId(session),
     values: buildValueForAnalytics(state.value),
     pickerType: pickerType(props),
   });
 
-export const clearEvent: EventCreator = (props, state, session) =>
+export const clearEvent: EventCreator = (
+  props: UserPickerProps,
+  state: UserPickerState,
+  session?: UserPickerSession,
+) =>
   createEvent('ui', 'cleared', 'userPicker', {
     pickerType: pickerType(props),
     pickerOpen: state.menuIsOpen,
@@ -97,14 +105,24 @@ export const clearEvent: EventCreator = (props, state, session) =>
     values: values(state),
   });
 
-export const deleteEvent: EventCreator = (props, state, session, ...args) =>
+export const deleteEvent: EventCreator = (
+  _: UserPickerProps,
+  state: UserPickerState,
+  session?: UserPickerSession,
+  ...args: any[]
+) =>
   createEvent('ui', 'deleted', 'userPickerItem', {
     sessionId: sessionId(session),
     value: optionData2Analytics(args[0]),
     pickerOpen: state.menuIsOpen,
   });
 
-export const cancelEvent: EventCreator = (props, state, session, ...args) =>
+export const cancelEvent: EventCreator = (
+  props: UserPickerProps,
+  _: UserPickerState,
+  session?: UserPickerSession,
+  ...args: any[]
+) =>
   createEvent('ui', 'cancelled', 'userPicker', {
     sessionId: sessionId(session),
     sessionDuration: sessionDuration(session),
@@ -115,7 +133,12 @@ export const cancelEvent: EventCreator = (props, state, session, ...args) =>
     pickerType: pickerType(props),
   });
 
-export const selectEvent: EventCreator = (props, state, session, ...args) =>
+export const selectEvent: EventCreator = (
+  props: UserPickerProps,
+  state: UserPickerState,
+  session?: UserPickerSession,
+  ...args: any[]
+) =>
   createEvent('ui', selectEventType(session), 'userPicker', {
     sessionId: sessionId(session),
     pickerType: pickerType(props),
@@ -128,7 +151,11 @@ export const selectEvent: EventCreator = (props, state, session, ...args) =>
     result: result(args[0]),
   });
 
-export const searchedEvent: EventCreator = (props, state, session) =>
+export const searchedEvent: EventCreator = (
+  props: UserPickerProps,
+  state: UserPickerState,
+  session?: UserPickerSession,
+) =>
   createEvent('operational', 'searched', 'userPicker', {
     sessionId: sessionId(session),
     sessionDuration: sessionDuration(session),
@@ -139,7 +166,11 @@ export const searchedEvent: EventCreator = (props, state, session) =>
     pickerType: pickerType(props),
   });
 
-export const failedEvent: EventCreator = (props, state, session) =>
+export const failedEvent: EventCreator = (
+  props: UserPickerProps,
+  _: UserPickerState,
+  session?: UserPickerSession,
+) =>
   createEvent('operational', 'failed', 'userPicker', {
     pickerType: pickerType(props),
     sessionId: sessionId(session),

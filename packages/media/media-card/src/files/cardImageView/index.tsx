@@ -40,8 +40,12 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
     disableOverlay: false,
   };
 
-  private isDownloadingOrProcessing() {
+  private isImageNotReadyForDisplay() {
     const { status, dataURI, mediaType } = this.props;
+
+    if (dataURI) {
+      return false;
+    }
 
     return (
       status === 'loading' ||
@@ -124,7 +128,14 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
   };
 
   private getUploadingContents = (): JSX.Element => {
-    const { actions, mediaName, progress, dataURI, selectable } = this.props;
+    const {
+      actions,
+      mediaName,
+      progress,
+      dataURI,
+      selectable,
+      previewOrientation,
+    } = this.props;
 
     const overlay = selectable ? this.createUploadingCardOverlay() : null;
 
@@ -136,6 +147,9 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
             progress={progress || 0}
             dataURI={dataURI}
             actions={actions}
+            previewOrientation={previewOrientation}
+            crop={this.isCropped}
+            stretch={this.isStretched}
           />
         </div>
         {overlay}
@@ -164,7 +178,7 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
       previewOrientation,
     } = this.props;
     const overlay =
-      this.isDownloadingOrProcessing() || disableOverlay
+      this.isImageNotReadyForDisplay() || disableOverlay
         ? null
         : this.createSuccessCardOverlay();
 
@@ -172,7 +186,7 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
       <div className="wrapper">
         <div className="img-wrapper">
           <CardContent
-            loading={this.isDownloadingOrProcessing()}
+            loading={this.isImageNotReadyForDisplay()}
             mediaItemType="file"
             mediaType={mediaType}
             dataURI={dataURI}

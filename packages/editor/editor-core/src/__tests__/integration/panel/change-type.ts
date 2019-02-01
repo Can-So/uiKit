@@ -1,5 +1,4 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 import {
   editable,
@@ -7,26 +6,32 @@ import {
   fullpage,
   quickInsert,
 } from '../_helpers';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
+import { selectors } from './_utils';
 
 BrowserTestCase(
   'change-type.ts: Change the type of panel to Error',
   { skip: ['edge', 'ie'] },
   async client => {
-    const browser = new Page(client);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowPanel: true,
+    });
 
-    await browser.goto(fullpage.path);
-
-    await browser.waitForSelector(fullpage.placeholder);
-    await browser.click(fullpage.placeholder);
-    await quickInsert(browser, 'Panel');
-
-    await browser.type(editable, 'this text should be in the panel');
+    await page.click(fullpage.placeholder);
+    await quickInsert(page, 'Panel');
+    await page.waitForSelector(selectors.PANEL_EDITOR_CONTAINER);
+    await page.type(editable, 'this text should be in the panel');
 
     // Change panel type to Error
     const selector = `[aria-label="Error"]`;
-    await browser.click(selector);
+    await page.click(selector);
 
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );

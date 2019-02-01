@@ -7,7 +7,7 @@ import { SizeableAvatar } from './SizeableAvatar';
 import { getAvatarUrl } from './utils';
 
 export const scrollToValue = (
-  valueContainer: HTMLElement,
+  valueContainer: HTMLDivElement,
   control: HTMLElement,
 ) => {
   const { top, height } = valueContainer.getBoundingClientRect();
@@ -28,15 +28,20 @@ type Props = {
 };
 
 export class MultiValue extends React.Component<Props> {
-  private containerRef;
-  constructor(props) {
+  private containerRef: React.RefObject<HTMLDivElement>;
+  constructor(props: Props) {
     super(props);
-    this.containerRef = React.createRef();
+    this.containerRef = React.createRef<HTMLDivElement>();
   }
 
   componentDidUpdate() {
     const { isFocused } = this.props;
-    if (isFocused && this.containerRef.current) {
+    if (
+      isFocused &&
+      this.containerRef.current &&
+      this.containerRef.current.parentElement &&
+      this.containerRef.current.parentElement.parentElement
+    ) {
       scrollToValue(
         this.containerRef.current,
         this.containerRef.current.parentElement.parentElement,
