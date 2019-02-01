@@ -1,3 +1,3 @@
-export { ShareDialogContainer } from './component/ShareDialogContainer';
+export { ShareDialogContainer } from './components/ShareDialogContainer';
 export { ShareDialogWithTrigger } from './components/ShareDialogWithTrigger';
 export * from './types';
