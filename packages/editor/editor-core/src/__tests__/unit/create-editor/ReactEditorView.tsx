@@ -139,7 +139,7 @@ describe(name, () => {
 
     it('should forward all events dispatched with analyticsEventKey to analytics plugin', () => {
       const mockFire = jest.fn();
-      jest
+      const mockAnalytics = jest
         .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
         .mockReturnValue(mockFire);
       const wrapper = mount(
@@ -158,11 +158,12 @@ describe(name, () => {
         { payload },
       );
       expect(mockFire).toHaveBeenCalledWith({ payload });
+      mockAnalytics.mockRestore();
     });
 
     it('should trigger editor started analytics event', () => {
       const mockFire = jest.fn();
-      jest
+      const mockAnalytics = jest
         .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
         .mockReturnValue(mockFire);
       mount(
@@ -176,9 +177,13 @@ describe(name, () => {
         />,
       );
 
-      const payload = mockFire.mock.calls[0][0].payload;
-      expect(payload.action).toBe('started');
-      expect(payload.actionSubject).toBe('editor');
+      expect(mockFire).toHaveBeenCalledWith({
+        payload: expect.objectContaining({
+          action: 'started',
+          actionSubject: 'editor',
+        }),
+      });
+      mockAnalytics.mockRestore();
     });
 
     describe('when a transaction is dispatched', () => {
@@ -432,7 +437,7 @@ describe(name, () => {
 
     it('should re-setup analytics event forwarding when createAnalyticsEvent prop changes', () => {
       const mockFire = jest.fn();
-      jest
+      const mockAnalytics = jest
         .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
         .mockReturnValue(mockFire);
       const wrapper = mount(
@@ -453,10 +458,11 @@ describe(name, () => {
       wrapper.setProps({ createAnalyticsEvent: newCreateAnalyticsEvent });
 
       expect(eventDispatcher.off).toHaveBeenCalled();
-      expect(eventDispatcher.off).toHaveBeenCalled();
+      expect(eventDispatcher.on).toHaveBeenCalled();
       expect(AnalyticsPlugin.fireAnalyticsEvent).toHaveBeenCalledWith(
         newCreateAnalyticsEvent,
       );
+      mockAnalytics.mockRestore();
     });
 
     it('should dispatch analytics event', () => {

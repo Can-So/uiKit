@@ -71,6 +71,9 @@ export default class ReactEditorView<T = {}> extends React.Component<
   contentTransformer?: Transformer<string>;
   config: EditorConfig;
   editorState: EditorState;
+  analyticsEventHandler: (
+    { payload, channel }: { payload: AnalyticsEventPayload; channel?: string },
+  ) => void;
 
   static contextTypes = {
     getAtlaskitAnalyticsEventHandlers: PropTypes.func,
@@ -84,10 +87,8 @@ export default class ReactEditorView<T = {}> extends React.Component<
 
     const { createAnalyticsEvent } = props;
     if (createAnalyticsEvent) {
-      this.eventDispatcher.on(
-        analyticsEventKey,
-        fireAnalyticsEvent(createAnalyticsEvent),
-      );
+      this.analyticsEventHandler = fireAnalyticsEvent(createAnalyticsEvent);
+      this.eventDispatcher.on(analyticsEventKey, this.analyticsEventHandler);
     }
 
     this.eventDispatcher.emit(analyticsEventKey, {
@@ -126,14 +127,12 @@ export default class ReactEditorView<T = {}> extends React.Component<
     }
 
     if (nextProps.createAnalyticsEvent !== this.props.createAnalyticsEvent) {
-      this.eventDispatcher.off(
-        analyticsEventKey,
-        fireAnalyticsEvent(this.props.createAnalyticsEvent),
+      this.eventDispatcher.off(analyticsEventKey, this.analyticsEventHandler);
+
+      this.analyticsEventHandler = fireAnalyticsEvent(
+        nextProps.createAnalyticsEvent,
       );
-      this.eventDispatcher.on(
-        analyticsEventKey,
-        fireAnalyticsEvent(nextProps.createAnalyticsEvent),
-      );
+      this.eventDispatcher.on(analyticsEventKey, this.analyticsEventHandler);
     }
   }
 
