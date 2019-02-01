@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.10
+- [patch] [e7dcb7ef15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7dcb7ef15):
+
+  - Revert table resizing collab change
+
 ## 98.1.9
 - [patch] [1ee84815dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ee84815dd):
 
