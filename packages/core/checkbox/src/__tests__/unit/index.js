@@ -7,8 +7,6 @@ import CheckboxIndeterminateIcon from '@atlaskit/icon/glyph/checkbox-indetermina
 import Checkbox, { CheckboxWithoutAnalytics } from '../../Checkbox';
 import { name } from '../../../package.json';
 
-const consoleError = console.error;
-
 describe(name, () => {
   const mountCheckbox = (overridingProps: any) =>
     mount(
@@ -22,17 +20,15 @@ describe(name, () => {
     );
   describe('console errors', () => {
     beforeEach(async () => {
-      console.error = jest.fn();
+      jest.spyOn(global.console, 'error');
     });
 
     afterEach(() => {
-      jest.clearAllMocks();
-      console.error = consoleError;
+      global.console.error.mockRestore();
     });
     it('should not log console error on mount', () => {
-      console.error = jest.fn();
       mountCheckbox({});
-      expect(console.error).not.toHaveBeenCalled();
+      expect(global.console.error).not.toHaveBeenCalled();
     });
   });
   describe('<Checkbox />', () => {
