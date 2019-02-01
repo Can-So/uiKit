@@ -1,9 +1,9 @@
 import * as React from 'react';
 
+import { colors } from '@atlaskit/theme';
 import { ModalSpinner } from '@atlaskit/media-ui';
 import { MediaViewer } from './media-viewer';
 import { MediaViewerProps } from './types';
-import { blanketColor } from '../newgen/styled';
 
 interface AsyncMediaViewerState {
   MediaViewer?: typeof MediaViewer;
@@ -33,7 +33,7 @@ export default class AsyncMediaViewer extends React.PureComponent<
   render() {
     if (!this.state.MediaViewer) {
       return (
-        <ModalSpinner blankedColor={blanketColor} invertSpinnerColor={true} />
+        <ModalSpinner blankedColor={colors.DN30} invertSpinnerColor={true} />
       );
     }
 
