@@ -14,6 +14,7 @@ type AttributesSpec =
   | { type: 'boolean'; optional?: boolean }
   | { type: 'string'; optional?: boolean; minLength?: number; pattern?: RegExp }
   | { type: 'enum'; values: Array<string>; optional?: boolean }
+  | { type: 'array'; items: Array<AttributesSpec>; optional?: boolean }
   | { type: 'object'; optional?: boolean };
 
 interface ValidatorSpec {
@@ -192,7 +193,7 @@ function getOptionsForType(
 }
 
 // TODO: no-implicit-any
-function validateAttrs(spec: AttributesSpec, value: any): boolean {
+export function validateAttrs(spec: AttributesSpec, value: any): boolean {
   // extension_node parameters has no type
   if (!isDefined(spec.type)) {
     return !!spec.optional;
@@ -217,6 +218,17 @@ function validateAttrs(spec: AttributesSpec, value: any): boolean {
       );
     case 'object':
       return isPlainObject(value);
+    case 'array':
+      const types = spec.items;
+      const lastTypeIndex = types.length - 1;
+      if (Array.isArray(value)) {
+        // We are doing this to support tuple which can be defined as [number, string]
+        // NOTE: Not validating tuples strictly
+        return value.every((x, i) =>
+          validateAttrs(types[Math.min(i, lastTypeIndex)], x),
+        );
+      }
+      return false;
     case 'enum':
       return spec.values.indexOf(value) > -1;
   }
