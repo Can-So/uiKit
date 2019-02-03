@@ -1,0 +1,1 @@
+- Code split media-picker: make MediaPicker factory async and make editor use it
