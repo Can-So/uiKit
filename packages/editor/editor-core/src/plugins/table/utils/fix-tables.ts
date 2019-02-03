@@ -51,13 +51,16 @@ const fixTable = (
           }
         }
         // re-create the row with decremented rowspans @see ED-5802
-        rows[j] = row.type.createChecked(row.attrs, cells, row.marks);
+        if (cells.length) {
+          rows[j] = row.type.createChecked(row.attrs, cells, row.marks);
+        }
       }
     }
   }
 
+  // remove the table if it's not fixable
   if (!rows.length) {
-    return tr;
+    return tr.delete(tablePos, tablePos + table.nodeSize);
   }
 
   const newTable = table.type.createChecked(table.attrs, rows, table.marks);
