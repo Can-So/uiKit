@@ -19,6 +19,7 @@ import {
   DropzoneConstructor,
 } from './components/dropzone';
 import { Popup, PopupConfig, PopupConstructor } from './components/popup';
+import { Context } from '@atlaskit/media-core';
 
 export const isBinaryUploader = (
   component: any,
@@ -106,11 +107,11 @@ export {
   PopupConstructor,
 };
 
-export async function MediaPicker<K extends keyof any>(
+export async function MediaPicker<K extends keyof MediaPickerComponents>(
   componentName: K,
-  context: any,
-  pickerConfig?: any[K],
-): Promise<any[K]> {
+  context: Context,
+  pickerConfig?: ComponentConfigs[K],
+): Promise<MediaPickerComponents[K]> {
   switch (componentName) {
     case 'binary':
       const {

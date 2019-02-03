@@ -21,7 +21,7 @@ export interface BrowserWrapperState {
 }
 
 class BrowserWrapper extends Component<{}, BrowserWrapperState> {
-  browserComponents: Browser[];
+  browserComponents: Browser[] = [];
   dropzoneContainer?: HTMLDivElement;
 
   constructor() {
@@ -29,10 +29,13 @@ class BrowserWrapper extends Component<{}, BrowserWrapperState> {
     this.state = {
       previewsData: [],
     };
+  }
+
+  async componentDidMount() {
     this.browserComponents = (Array(5) as any).fill().map(this.createBrowse);
   }
 
-  createBrowse = () => {
+  createBrowse = async () => {
     const context = ContextFactory.create({
       authProvider: mediaPickerAuthProvider(),
     });
@@ -44,7 +47,7 @@ class BrowserWrapper extends Component<{}, BrowserWrapperState> {
         collection: defaultMediaPickerCollectionName,
       },
     };
-    const fileBrowser = MediaPicker('browser', context, browseConfig);
+    const fileBrowser = await MediaPicker('browser', context, browseConfig);
 
     fileBrowser.on('upload-preview-update', data => {
       this.setState({ previewsData: [...this.state.previewsData, data] });

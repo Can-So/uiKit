@@ -2,7 +2,7 @@ jest.mock('../../../service/types');
 
 import { Auth, ContextFactory } from '@atlaskit/media-core';
 import { getMockClipboardEvent, MockFile } from '@atlaskit/media-test-helpers';
-import { Clipboard } from '../../clipboard';
+import { Clipboard, ClipboardImpl } from '../../clipboard';
 import { UploadService, LocalFileSource } from '../../../service/types';
 
 const MockClipboardEvent = getMockClipboardEvent();
@@ -23,7 +23,7 @@ describe.skip('Clipboard', () => {
   });
 
   beforeEach(done => {
-    clipboard = new Clipboard(context);
+    clipboard = new ClipboardImpl(context);
     clipboard.activate();
     document.dispatchEvent(new Event('DOMContentLoaded'));
 

@@ -17,10 +17,10 @@ import { defaultUploadParams } from '../domain/uploadParams';
 import { UploadParams } from '../domain/config';
 import { UploadEventPayloadMap } from '../domain/uploadEvent';
 import { EventEmitter } from '../util/eventEmitter';
+import { LocalUploadConfig } from './localUpload';
 
-export interface PopupConfig {
+export interface PopupConfig extends LocalUploadConfig {
   readonly container?: HTMLElement;
-  readonly uploadParams: UploadParams; // Tenant upload params
   readonly proxyReactContext?: AppProxyReactContext;
   readonly singleSelect?: boolean;
 }
