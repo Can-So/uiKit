@@ -1,0 +1,1 @@
+- Datepicker will now reset the focused date on the calendar every time it is opened
