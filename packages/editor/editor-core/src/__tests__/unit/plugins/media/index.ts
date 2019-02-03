@@ -35,8 +35,9 @@ import mediaPlugin from '../../../../plugins/media';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
-import pickerFacadeLoader from '../../../../plugins/media/picker-facade-loader';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
+import { MediaPicker } from '@atlaskit/media-picker';
+import { ContextFactory } from '@atlaskit/media-core';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -58,6 +59,24 @@ describe('Media plugin', () => {
   const mediaProvider = getFreshMediaProvider();
   const temporaryFileId = `temporary:${randomId()}`;
   const providerFactory = ProviderFactory.create({ mediaProvider });
+
+  const mediaContext = ContextFactory.create({
+    authProvider: () =>
+      Promise.resolve({
+        token: '',
+        clientId: '',
+        baseUrl: '',
+      }),
+    userAuthProvider: () =>
+      Promise.resolve({
+        token: '',
+        clientId: '',
+        baseUrl: '',
+      }),
+  });
+  const mediaUploadConfig = {
+    uploadParams: {},
+  };
 
   const editor = (
     doc: any,
@@ -98,10 +117,14 @@ describe('Media plugin', () => {
     return mediaNodeWithPos!.getPos();
   };
 
-  const waitForMediaPickerReady = async (pluginState: MediaPluginState) =>
+  const waitForMediaPickerReady = (pluginState: MediaPluginState) =>
     Promise.all([
       new Promise(resolve => pluginState.subscribe(resolve)),
-      pickerFacadeLoader(),
+      // MediaPicker('browser', mediaContext, mediaUploadConfig),
+      // MediaPicker('binary', mediaContext, mediaUploadConfig),
+      // MediaPicker('clipboard', mediaContext, mediaUploadConfig),
+      // MediaPicker('dropzone', mediaContext, mediaUploadConfig),
+      // MediaPicker('popup', mediaContext, mediaUploadConfig)
     ]);
 
   afterAll(() => {
@@ -120,6 +143,9 @@ describe('Media plugin', () => {
     await provider.uploadContext;
 
     await waitForMediaPickerReady(pluginState);
+    await waitForMediaPickerReady(pluginState);
+    await waitForMediaPickerReady(pluginState);
+
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     pluginState.binaryPicker!.upload = jest.fn();
@@ -791,7 +817,7 @@ describe('Media plugin', () => {
     });
   });
 
-  it('should trigger analytics events for picking and binary', async () => {
+  it.only('should trigger analytics events for picking and binary', async () => {
     const { pluginState } = editor(doc(p('{<>}')));
     const spy = jest.fn();
     analyticsService.handler = spy as AnalyticsHandler;
@@ -803,7 +829,10 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    while (!pluginState) {
+      await waitForMediaPickerReady(pluginState);
+    }
+
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {

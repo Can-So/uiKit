@@ -42,6 +42,7 @@ export default class PickerFacade {
     pickerType: PickerType,
     readonly config: PickerFacadeConfig,
     readonly pickerConfig?: ExtendedComponentConfigs[PickerType],
+    readonly mediaPickerFactoryClass = MediaPicker,
   ) {
     this.pickerType = pickerType;
     this.errorReporter = config.errorReporter;
@@ -53,7 +54,7 @@ export default class PickerFacade {
     if (this.pickerType === 'customMediaPicker') {
       picker = this.picker = this.pickerConfig as CustomMediaPicker;
     } else {
-      picker = this.picker = await MediaPicker(
+      picker = this.picker = await this.mediaPickerFactoryClass(
         this.pickerType,
         this.config.context,
         this.pickerConfig as any,
