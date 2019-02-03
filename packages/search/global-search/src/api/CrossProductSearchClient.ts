@@ -123,7 +123,7 @@ export default class CrossProductSearchClientImpl
       scopes: [scope],
     };
 
-    const response = await this.makeRequest<CrossProductSearchResponse>(
+    const response = await this.makeRequest<CrossProductExperimentResponse>(
       path,
       body,
     );
@@ -139,10 +139,7 @@ export default class CrossProductSearchClientImpl
     return Promise.resolve(undefined);
   }
 
-  private async makeRequest<T>(
-    path: string,
-    body: object, // TODO: Types? Could probably be anything
-  ): Promise<T> {
+  private async makeRequest<T>(path: string, body: object): Promise<T> {
     const options: RequestServiceOptions = {
       path,
       requestInit: {
