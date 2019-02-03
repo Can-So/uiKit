@@ -80,6 +80,12 @@ describe('Range', () => {
       const input = range.find('input');
       expect(input.props().disabled).toBe(false);
     });
+
+    it('hould pass all the extra props passed down to hidden input', () => {
+      range.setProps({ 'data-foo': 'range-bar' });
+      const input = range.find('input');
+      expect(input.prop('data-foo')).toBe('range-bar');
+    });
   });
   describe('range value percentage', () => {
     let range;

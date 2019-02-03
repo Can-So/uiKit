@@ -65,16 +65,16 @@ export default class TextAreaElement extends React.Component<Props, State> {
   };
 
   render() {
-    const { resize, forwardedRef, ...props } = this.props;
+    const { resize, forwardedRef, ...rest } = this.props;
     const { height } = this.state;
 
     if (resize === 'smart') {
       return (
         <textarea
-          {...props}
           onChange={this.handleOnChange}
           ref={this.getTextAreaRef}
           style={{ height }}
+          {...rest}
         />
       );
     }
