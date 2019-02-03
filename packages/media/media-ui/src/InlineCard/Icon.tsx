@@ -1,11 +1,26 @@
 import styled from 'styled-components';
-import { ImgHTMLAttributes, ComponentClass } from 'react';
+import { ComponentClass, HTMLAttributes } from 'react';
 
-export const Icon: ComponentClass<ImgHTMLAttributes<{}>> = styled.img`
-  display: inline-block;
-  overflow: hidden;
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
-  margin-right: 2px;
+export const IconPlaceholderWrapper: ComponentClass<
+  HTMLAttributes<{}>
+> = styled.div`
+  position: absolute;
+  left: 0;
+`;
+
+export const Icon: ComponentClass<HTMLAttributes<{}>> = styled(
+  IconPlaceholderWrapper,
+)`
+  top: 0.5px;
+  & > img {
+    width: 16px;
+    height: 16px;
+  }
+`;
+
+export const AKIconWrapper: ComponentClass<HTMLAttributes<{}>> = styled(
+  IconPlaceholderWrapper,
+)`
+  top: 0.5px;
+  transform: scale(1.4);
 `;

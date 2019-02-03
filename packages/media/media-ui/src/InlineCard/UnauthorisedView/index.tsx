@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Icon } from '../Icon';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
 import Button from '@atlaskit/button';
 import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
+import { colors } from '@atlaskit/theme';
 
 export interface InlineCardUnauthorizedViewProps {
   /** The url to display */
@@ -33,8 +33,12 @@ export class InlineCardUnauthorizedView extends React.Component<
     return (
       <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
-          icon={typeof icon === 'string' ? <Icon src={icon} /> : icon}
-          title={truncateUrlForErrorView(url)}
+          icon={icon}
+          title={
+            <span style={{ color: colors.N500 }}>
+              {truncateUrlForErrorView(url)}
+            </span>
+          }
         />
         {!onAuthorise ? (
           ''

@@ -6,7 +6,7 @@ import {
   p,
   panel,
   strike,
-  createEditor,
+  createEditorFactory,
   code,
   em,
   mountWithIntl,
@@ -21,6 +21,8 @@ import ToolbarButton from '../../../../../ui/ToolbarButton';
 import panelPlugin from '../../../../../plugins/panel';
 
 describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent = () => {}) =>
     createEditor({
       doc,

@@ -6,6 +6,7 @@ const stats = require('../dist/stats.json');
 const knownSplits = [
   '@atlaskit-internal_editor-core_picker-facade.js',
   '@atlaskit-internal_editor-core-async.js',
+  '@atlaskit-internal_smart-media-editor.js',
   '@atlaskit-internal_media-editor-view.js',
   '@atlaskit-internal_media-viewer-pdf-viewer.js',
 ];

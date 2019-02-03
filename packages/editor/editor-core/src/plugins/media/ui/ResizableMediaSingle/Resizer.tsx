@@ -2,33 +2,16 @@ import * as React from 'react';
 import { RefObject } from 'react';
 import * as classnames from 'classnames';
 import { MediaSingleLayout } from '@atlaskit/adf-schema';
-import {
-  calcColumnsFromPx,
-  akEditorWideLayoutWidth,
-} from '@atlaskit/editor-common';
-import { Props, EnabledHandles } from './types';
+import { Props as ResizableMediaSingleProps, EnabledHandles } from './types';
 
 import Resizable from 're-resizable';
 import { ResizableDirection, NumberSize } from 're-resizable';
 
 import { gridTypeForLayout } from '../../../grid';
 
-export const handleSides = ['left', 'right'];
-export const alignementLayouts = [
-  'align-start',
-  'align-end',
-  'wrap-left',
-  'wrap-right',
-];
+import { snapTo, handleSides } from './utils';
 
-const snapTo = (target: number, points: number[]): number =>
-  points.reduce((point, closest) => {
-    return Math.abs(closest - target) < Math.abs(point - target)
-      ? closest
-      : point;
-  });
-
-type ResizerProps = Props & {
+type ResizerProps = ResizableMediaSingleProps & {
   selected: boolean;
   enable: EnabledHandles;
   calcNewSize: (
@@ -37,9 +20,9 @@ type ResizerProps = Props & {
   ) => { layout: MediaSingleLayout; width: number | null };
   snapPoints: number[];
   scaleFactor?: number;
-  getColumnLeft: () => number;
-  isInlineLike: boolean;
+  highlights: (width: number, snapPoints: number[]) => number[] | string[];
 };
+
 type ResizerState = {
   isResizing: boolean;
 };
@@ -63,7 +46,7 @@ export default class Resizer extends React.Component<
       this.props.displayGrid(
         true,
         gridTypeForLayout(this.props.layout),
-        this.highlights(this.props.width),
+        this.props.highlights(this.props.width, this.props.snapPoints),
       );
     });
   };
@@ -93,46 +76,9 @@ export default class Resizer extends React.Component<
     this.props.displayGrid(
       true,
       gridTypeForLayout(newSize.layout),
-      this.highlights(newWidth),
+      this.props.highlights(newWidth, this.props.snapPoints),
     );
     resizable.updateSize({ width: newWidth, height: 'auto' });
-  };
-
-  highlights = newWidth => {
-    const snapWidth = snapTo(newWidth, this.props.snapPoints);
-
-    if (snapWidth > akEditorWideLayoutWidth) {
-      return ['full-width'];
-    }
-
-    const columns = calcColumnsFromPx(
-      snapWidth,
-      this.props.lineLength,
-      this.props.gridSize,
-    );
-    const columnWidth = Math.round(columns);
-
-    const highlight: number[] = [];
-    if (
-      this.props.layout === 'wrap-left' ||
-      this.props.layout === 'align-start'
-    ) {
-      highlight.push(0);
-      highlight.push(columnWidth);
-    } else if (
-      this.props.layout === 'wrap-right' ||
-      this.props.layout === 'align-end'
-    ) {
-      highlight.push(this.props.gridSize);
-      highlight.push(this.props.gridSize - columnWidth);
-    } else if (this.props.isInlineLike) {
-      highlight.push(this.props.getColumnLeft() + Math.ceil(columns));
-    } else {
-      highlight.push(Math.floor((this.props.gridSize - columnWidth) / 2));
-      highlight.push(Math.ceil((this.props.gridSize + columnWidth) / 2));
-    }
-
-    return highlight;
   };
 
   handleResizeStop = (
@@ -158,7 +104,7 @@ export default class Resizer extends React.Component<
     this.props.displayGrid(
       true,
       gridTypeForLayout(newSize.layout),
-      this.highlights(newWidth),
+      this.props.highlights(newWidth, this.props.snapPoints),
     );
 
     this.setState({ isResizing: false }, () => {
@@ -168,11 +114,6 @@ export default class Resizer extends React.Component<
   };
 
   render() {
-    /** equivalent to `calc: (50% - 12px)` from 40:MediaSingle/styled.ts */
-    const halfSize = this.props.lineLength * 0.5 - 12;
-    const shouldHalfSize =
-      alignementLayouts.indexOf(this.props.layout) > -1 &&
-      this.props.width > this.props.lineLength;
     const handleStyles = {};
     const handles = {};
     handleSides.forEach(side => {
@@ -191,7 +132,7 @@ export default class Resizer extends React.Component<
         ref={this.resizable}
         onResize={this.handleResize}
         size={{
-          width: shouldHalfSize ? halfSize : this.props.width || 0,
+          width: this.props.width,
         }}
         className={classnames(
           'media-single',

@@ -6,8 +6,6 @@
  */
 
 const glob = require('glob');
-const path = require('path');
-const fs = require('fs-extra');
 const pageSelector = '#examples';
 
 async function takeScreenShot(page /*:any*/, url /*:string*/) {
@@ -45,12 +43,11 @@ function getExamplesFor(pkgName /*: string */) /*: Array<Object> */ {
 }
 
 // construct example urls for a given example
-const baseUrl = 'http://localhost:9000';
 const getExampleUrl = (
   group: string,
   packageName: string,
   exampleName: string = '',
-  environment: string = baseUrl,
+  environment: string = global.__BASEURL__,
 ) =>
   `${environment}/examples.html?groupId=${group}&packageId=${packageName}&exampleId=${exampleName}`;
 

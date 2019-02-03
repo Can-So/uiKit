@@ -7,7 +7,7 @@ import {
   doc,
   p,
   RefsNode,
-  createEditor,
+  createEditorFactory,
   sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 import {
@@ -20,19 +20,18 @@ import {
 } from '../../../../../plugins/layout/actions';
 import { Node } from 'prosemirror-model';
 
-const editor = doc =>
-  createEditor({ doc, editorProps: { allowLayouts: true } });
-const toState = (node: RefsNode) =>
-  EditorState.create({
-    doc: node,
-    selection: node.refs['<>']
-      ? TextSelection.create(node, node.refs['<>'])
-      : undefined,
-  });
-
 describe('layout', () => {
+  const createEditor = createEditorFactory();
   const layoutPlugin = createLayoutPlugin({ allowBreakout: true });
-
+  const editor = doc =>
+    createEditor({ doc, editorProps: { allowLayouts: true } });
+  const toState = (node: RefsNode) =>
+    EditorState.create({
+      doc: node,
+      selection: node.refs['<>']
+        ? TextSelection.create(node, node.refs['<>'])
+        : undefined,
+    });
   describe('plugin', () => {
     describe('#init', () => {
       it('should set pos when selection in layout', () => {

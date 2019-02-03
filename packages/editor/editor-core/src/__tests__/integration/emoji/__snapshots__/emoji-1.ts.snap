@@ -115,7 +115,7 @@ Object {
 }
 `;
 
-exports[`should not be able to see emoji inside inline code user should not be able to see emoji inside inline code 1`] = `
+exports[`user should not be able to see emoji inside inline code 1`] = `
 Object {
   "content": Array [
     Object {

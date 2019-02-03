@@ -1,5 +1,5 @@
 import Button from '@atlaskit/button';
-import Form, { FormFooter, FormSection } from '@atlaskit/form';
+import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
 import { LoadOptions } from '@atlaskit/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -14,13 +14,34 @@ const LeftAlignmentContainer = styled.div`
   margin-right: auto;
 `;
 
+type ShareError = {
+  message: string;
+} | null;
+
+type User = UserWithId | UserWithEmail;
+
+type UserWithId = {
+  type: 'user' | 'group' | 'team';
+  id: string;
+};
+
+type UserWithEmail = {
+  email: string;
+};
+
 export type Props = {
-  title?: React.ReactNode;
+  capabilitiesInfoMessage?: React.ReactNode;
+  copyLink: string;
+  isSharing?: boolean;
   loadOptions: LoadOptions;
+  onCommentChange?: (event: React.SyntheticEvent) => void;
   onLinkCopy?: (link: string) => void;
   onShareClick?: Function;
-  copyLink: string;
+  onUsersChange?: (users: User[]) => void;
+  shareError?: ShareError;
+  shouldShowCapabilitiesInfoMessage?: boolean;
   submitButtonLabel?: React.ReactNode;
+  title?: React.ReactNode;
 };
 
 export const ShareForm: React.StatelessComponent<Props> = props => (
@@ -30,6 +51,13 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
         <ShareHeader title={props.title} />
         <FormSection>
           <UserPickerField loadOptions={props.loadOptions} />
+          {props.shouldShowCapabilitiesInfoMessage && (
+            <HelperMessage>
+              {props.capabilitiesInfoMessage || (
+                <FormattedMessage {...messages.capabilitiesInfoMessage} />
+              )}
+            </HelperMessage>
+          )}
           <CommentField />
         </FormSection>
         <FormFooter>
@@ -52,4 +80,5 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
 
 ShareForm.defaultProps = {
   onShareClick: () => {},
+  shouldShowCapabilitiesInfoMessage: false,
 };

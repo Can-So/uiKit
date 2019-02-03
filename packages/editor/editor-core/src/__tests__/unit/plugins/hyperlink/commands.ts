@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   a,
@@ -19,10 +19,11 @@ import {
   LinkAction,
 } from '../../../../plugins/hyperlink/pm-plugins/main';
 
-const editor = doc =>
-  createEditor({ doc, editorProps: { allowCodeBlocks: true } });
-
 describe('hyperlink commands', () => {
+  const createEditor = createEditorFactory();
+  const editor = doc =>
+    createEditor({ doc, editorProps: { allowCodeBlocks: true } });
+
   describe('#setLinkHref', () => {
     it('should not set the link href when pos is not inside a link node', () => {
       const { editorView: view, sel } = editor(doc(p('{<>}')));

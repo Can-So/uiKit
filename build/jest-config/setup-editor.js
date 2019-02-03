@@ -31,6 +31,13 @@ const rangeFixture = {
   getBoundingClientRect: () => clientRectFixture,
 };
 
+Object.defineProperty(rangeFixture, 'commonAncestorContainer', {
+  enumerable: true,
+  get: () => {
+    return document.body;
+  },
+});
+
 if (typeof window !== 'undefined') {
   window.getSelection = () => {
     warnOnce();

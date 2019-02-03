@@ -6,7 +6,7 @@ import {
   strong,
   insertText,
   doc,
-  createEditor,
+  createEditorFactory,
   a as link,
   p,
   h1,
@@ -46,6 +46,8 @@ const autoFormatPatterns = [
 ];
 
 describe('text-formatting input rules', () => {
+  const createEditor = createEditorFactory();
+
   let trackEvent;
   const editor = (doc: any, disableCode = false) =>
     createEditor({

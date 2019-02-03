@@ -47,7 +47,7 @@ describe('extractPropsFromTask()', () => {
 
     it('should build a title', () => {
       expect(buildTaskLink(atlassianTask)).toEqual({
-        link: atlassianTask['@url'],
+        link: atlassianTask.url,
       });
     });
   });

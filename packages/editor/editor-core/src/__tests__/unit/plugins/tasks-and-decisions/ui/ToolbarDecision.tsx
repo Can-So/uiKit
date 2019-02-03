@@ -3,7 +3,7 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   mountWithIntl,
 } from '@atlaskit/editor-test-helpers';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
@@ -11,6 +11,8 @@ import ToolbarDecision from '../../../../../plugins/tasks-and-decisions/ui/Toolb
 import tasksAndDecisionsPlugin from '../../../../../plugins/tasks-and-decisions';
 
 describe('@atlaskit/editor-core/ui/ToolbarDecision', () => {
+  const createEditor = createEditorFactory();
+
   const providerFactory = new ProviderFactory();
   const editor = (doc: any) =>
     createEditor({

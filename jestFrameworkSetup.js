@@ -104,12 +104,6 @@ if (typeof window !== 'undefined' && !('cancelAnimationFrame' in window)) {
   };
 }
 
-function isNodeOrFragment(thing) {
-  // Using a simple `instanceof` check is intentionally avoided here to make
-  // this code agnostic to a specific instance of a Schema.
-  return thing && typeof thing.eq === 'function';
-}
-
 function transformDoc(fn) {
   return doc => {
     const walk = fn => node => {
@@ -332,51 +326,23 @@ expect.addSnapshotSerializer(createSerializer(emotion));
 
 // set up for visual regression
 if (process.env.VISUAL_REGRESSION) {
-  const puppeteer = require('puppeteer');
-  const request = require('request-promise-native');
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
   beforeAll(async () => {
-    if (process.env.CI) {
-      // launch and run puppeteer if inside of CI
-      console.log('puppeteer:', puppeteer.executablePath());
-      global.browser = await puppeteer.launch({
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-        ],
-      });
-      global.page = await global.browser.newPage();
-    } else {
-      // connect to puppeteer running on local docker
-      const options = {
-        uri: `http://localhost:9222/json/version`,
-        json: true,
-        resolveWithFullResponse: true,
-      };
-      const response = await request(options);
-      console.log(
-        'Connecting to webSocket:',
-        response.body.webSocketDebuggerUrl,
-      );
-      const wsEndpoint = response.body.webSocketDebuggerUrl;
-      global.browser = await puppeteer.connect({
-        browserWSEndpoint: wsEndpoint,
-        ignoreHTTPSErrors: true,
-      });
-      global.page = await global.browser.newPage();
-    }
+    global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
   afterAll(async () => {
-    await global.browser.close();
+    await global.page.close();
+    await global.browser.disconnect();
   });
 
-  // TODO tweak failureThreshold to provide best results
-  // TODO: A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
+  // A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
+  const customConfig = { threshold: 0.5 };
   const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
-    customDiffConfig: { threshold: 0.3 },
+    customDiffConfig: customConfig,
+    failureThreshold: '0.03',
+    failureThresholdType: 'percent',
     noColors: true,
   });
 

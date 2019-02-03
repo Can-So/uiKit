@@ -36,6 +36,8 @@ export const Actions = styled.ul`
 `;
 
 export const Action = styled.li`
+  align-items: center;
+  display: flex;
   margin: 0;
   & + &::before {
     color: ${colors.N500};

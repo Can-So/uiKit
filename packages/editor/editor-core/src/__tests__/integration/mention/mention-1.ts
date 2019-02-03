@@ -1,13 +1,16 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 import {
   getDocFromElement,
   editable,
   insertMention,
   typeAheadPicker,
   lozenge,
-  gotoEditor,
+  fullpage,
 } from '../_helpers';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
 
 /*
  * Safari does not understand webdriver keyboard actions so a
@@ -20,14 +23,19 @@ BrowserTestCase(
   'mention-1.ts: user can see mention inside blockquote',
   { skip: ['safari', 'ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '> ');
-    await browser.type(editable, 'blockquote ');
-    await insertMention(browser, 'Carolyn');
-    await browser.waitForSelector(lozenge);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowTables: {
+        advanced: true,
+      },
+    });
+
+    await page.type(editable, '> ');
+    await page.type(editable, 'blockquote ');
+    await insertMention(page, 'Carolyn');
+    await page.waitForSelector(lozenge);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -36,15 +44,18 @@ BrowserTestCase(
   'mention-1.ts: user can see mention inside bulletList',
   { skip: ['safari', 'ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '* ');
-    await browser.waitForSelector('ul');
-    await browser.type(editable, 'this ');
-    await insertMention(browser, 'Carolyn');
-    await browser.waitForSelector(lozenge);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowLists: true,
+    });
+
+    await page.type(editable, '* ');
+    await page.waitForSelector('ul');
+    await page.type(editable, 'this ');
+    await insertMention(page, 'Carolyn');
+    await page.waitForSelector(lozenge);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -53,15 +64,18 @@ BrowserTestCase(
   'mention-1.ts: user can see mention inside orderedList',
   { skip: ['safari', 'ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '1. ');
-    await browser.waitForSelector('ol');
-    await browser.type(editable, 'list ');
-    await insertMention(browser, 'Carolyn');
-    await browser.waitForSelector(lozenge);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowLists: true,
+    });
+
+    await page.type(editable, '1. ');
+    await page.waitForSelector('ol');
+    await page.type(editable, 'list ');
+    await insertMention(page, 'Carolyn');
+    await page.waitForSelector(lozenge);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -70,13 +84,15 @@ BrowserTestCase(
   'mention-1.ts: user can see mention inside decision',
   { skip: ['ie', 'safari'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '<> ');
-    await insertMention(browser, 'Carolyn');
-    await browser.waitForSelector(lozenge);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+    });
+
+    await page.type(editable, '<> ');
+    await insertMention(page, 'Carolyn');
+    await page.waitForSelector(lozenge);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -85,13 +101,15 @@ BrowserTestCase(
   'mention-1.ts: user can see mention inside action',
   { skip: ['ie', 'safari'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '[] ');
-    await insertMention(browser, 'Carolyn');
-    await browser.waitForSelector(lozenge);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+    });
+
+    await page.type(editable, '[] ');
+    await insertMention(page, 'Carolyn');
+    await page.waitForSelector(lozenge);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -100,14 +118,16 @@ BrowserTestCase(
   'mention-1.ts: user can navigate picker using keyboard',
   { skip: ['ie', 'safari'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '@');
-    await browser.waitForSelector(typeAheadPicker);
-    await browser.type(editable, 'ArrowDown');
-    await browser.type(editable, 'Enter');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+    });
+
+    await page.type(editable, '@');
+    await page.waitForSelector(typeAheadPicker);
+    await page.type(editable, 'ArrowDown');
+    await page.type(editable, 'Enter');
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );

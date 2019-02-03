@@ -50,10 +50,10 @@ export class WithDataDisplay extends React.Component<any, any> {
         <div
           style={{
             display: 'flex',
-            'flex-direction': 'column',
+            flexDirection: 'column',
             padding: '10px',
-            'align-items': 'center',
-            'background-color': '#DDD',
+            alignItems: 'center',
+            backgroundColor: '#DDD',
           }}
         >
           {this.props.children({

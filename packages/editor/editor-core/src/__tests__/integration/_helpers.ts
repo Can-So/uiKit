@@ -1,6 +1,7 @@
 import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
 import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
 import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
+import { EditorAppearance } from '../../types';
 
 /**
  * This function will in browser context. Make sure you call `toJSON` otherwise you will get:
@@ -36,32 +37,44 @@ export const insertMentionUsingClick = async (browser, mentionId: string) => {
   await browser.click(`div[data-mention-id="${mentionId}"`);
 };
 
-export const comment = {
+interface EditorHelper {
+  name: string;
+  appearance: EditorAppearance;
+  path: string;
+  placeholder: string;
+}
+
+export const comment: EditorHelper = {
   name: 'comment',
+  appearance: 'comment',
   path: getExampleUrl('editor', 'editor-core', 'comment'),
   placeholder: '[placeholder="What do you want to say?"]',
 };
 
-export const fullpage = {
+export const fullpage: EditorHelper = {
   name: 'fullpage',
+  appearance: 'full-page',
   path: getExampleUrl('editor', 'editor-core', 'full-page-with-toolbar'),
   placeholder: '.ProseMirror',
 };
 
-export const fullpageDisabled = {
+export const fullpageDisabled: EditorHelper = {
   name: 'fullpage-disabled',
+  appearance: 'full-page',
   path: getExampleUrl('editor', 'editor-core', 'full-page-with-content'),
   placeholder: '.ProseMirror',
 };
 
-export const fullpageWithImport = {
+export const fullpageWithImport: EditorHelper = {
   name: 'fullpage-with-import',
+  appearance: 'full-page',
   path: getExampleUrl('editor', 'editor-core', 'full-page-with-adf-import'),
   placeholder: '.ProseMirror',
 };
 
-export const message = {
+export const message: EditorHelper = {
   name: 'message',
+  appearance: 'message',
   path: getExampleUrl('editor', 'editor-core', 'message'),
   placeholder: '.ProseMirror',
 };
@@ -74,10 +87,10 @@ export const clipboardHelper = getExampleUrl(
   'clipboard-helper',
 );
 
-export const clipboardInput = '#input';
+export const clipboardInput = 'textarea';
 
-export const copyAsPlaintextButton = '#copy-as-plaintext';
-export const copyAsHTMLButton = '#copy-as-html';
+export const copyAsPlaintextButton = '.copy-as-plaintext';
+export const copyAsHTMLButton = '.copy-as-html';
 
 export const mediaInsertDelay = 1000;
 
@@ -205,18 +218,33 @@ const get$$Length = result => {
   }
 };
 
+/**
+ * Insert a block using the menu item
+ * @param browser Webdriver browser
+ * @param menuTitle Search pattern (placeholder or aria-label)
+ * @param tagName Tag to look
+ * @param mainToolbar Flag to look the menu in the main toolbar instead of insert menu
+ */
 export const insertBlockMenuItem = async (
   browser,
-  menuTitle,
+  menuTitle: string,
   tagName = 'span',
+  mainToolbar = false,
 ) => {
-  const openInsertBlockMenuSelector = `[aria-label="${
-    insertBlockMessages.insertMenu.defaultMessage
-  }"]`;
+  let menuSelector: string;
+  if (mainToolbar) {
+    menuSelector = `[aria-label="${menuTitle}"]`;
+  } else {
+    // Open insert menu and try to look the menu there
+    const openInsertBlockMenuSelector = `[aria-label="${
+      insertBlockMessages.insertMenu.defaultMessage
+    }"]`;
 
-  await browser.click(openInsertBlockMenuSelector);
+    await browser.click(openInsertBlockMenuSelector);
 
-  const menuSelector = `${tagName}=${menuTitle}`;
+    menuSelector = `${tagName}=${menuTitle}`;
+  }
+
   await browser.waitForSelector(menuSelector);
   await browser.click(menuSelector);
 };
@@ -243,4 +271,19 @@ export const quickInsert = async (browser, insertTitle) => {
   );
 
   await browser.click(`[aria-label="Popup"] [role="button"]`);
+};
+
+export const forEach = async (
+  array: Array<any>,
+  cb: (item: any, index: number) => Promise<void>,
+) => {
+  let idx = 0;
+  for (let item of array) {
+    await cb(item, idx++);
+  }
+};
+
+export const insertMenuItem = async (browser, title) => {
+  await browser.waitForSelector(`button span[aria-label="${title}"]`);
+  await browser.click(`button span[aria-label="${title}"]`);
 };

@@ -2,14 +2,14 @@ import { components } from '@atlaskit/select';
 import * as React from 'react';
 import styled from 'styled-components';
 import { SizeableAvatar } from './SizeableAvatar';
-import { PLACEHOLDER_PADDING } from './styles';
+import { BORDER_PADDING } from './styles';
 
 const PlaceholderIconContainer = styled.div`
-  padding-left: ${PLACEHOLDER_PADDING}px;
+  padding-left: ${BORDER_PADDING}px;
   line-height: 0;
 `;
 
-const showUserAvatar = (inputValue, value) =>
+const showUserAvatar = (inputValue: string, value?: any) =>
   value && value.option && inputValue === value.label;
 
 export class SingleValueContainer extends React.Component<any> {
@@ -31,6 +31,7 @@ export class SingleValueContainer extends React.Component<any> {
         />
       );
     }
+    return null;
   };
 
   render() {

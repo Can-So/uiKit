@@ -10,7 +10,6 @@ async function getPackagesInfo(cwd /*: string */) {
   return await Promise.all(
     packages.map(async pkg => {
       let relativeDir = path.relative(project.dir, pkg.dir);
-
       let srcExists = await exists(path.join(pkg.dir, 'src'));
       let tsConfigExists = await exists(path.join(pkg.dir, 'tsconfig.json'));
       let tslintConfigExists = await exists(path.join(pkg.dir, 'tslint.json'));

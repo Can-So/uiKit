@@ -14,11 +14,12 @@ export type ADFMark = {
 export type visitor = (
   node: ADFNode,
   parent: ADFNodeParent,
+  index: number,
 ) => ADFNode | false | undefined | void;
 
 export type ADFNodeParent = { node?: ADFNode; parent?: ADFNodeParent };
 
-export function validateVisitors(visitors: { [type: string]: visitor }) {
+export function validateVisitors(_visitors: { [type: string]: visitor }) {
   return true;
 }
 
@@ -29,19 +30,20 @@ export function traverse(adf: ADFNode, visitors: { [type: string]: visitor }) {
     );
   }
 
-  return traverseNode(adf, { node: undefined }, visitors);
+  return traverseNode(adf, { node: undefined }, visitors, 0);
 }
 
 function traverseNode(
   adfNode: ADFNode,
   parent: ADFNodeParent,
   visitors: { [type: string]: visitor },
+  index: number,
 ): ADFNode | false {
   const visitor = visitors[adfNode.type] || visitors['any'];
 
   let newNode = { ...adfNode };
   if (visitor) {
-    const processedNode = visitor({ ...newNode }, parent);
+    const processedNode = visitor({ ...newNode }, parent, index);
 
     if (processedNode === false) {
       return false;
@@ -51,17 +53,21 @@ function traverseNode(
   }
 
   if (newNode.content) {
-    newNode.content = newNode.content.reduce<Array<ADFNode>>((acc, node) => {
-      const processedNode = traverseNode(
-        node,
-        { node: newNode, parent },
-        visitors,
-      );
-      if (processedNode !== false) {
-        acc.push(processedNode);
-      }
-      return acc;
-    }, []);
+    newNode.content = newNode.content.reduce<Array<ADFNode>>(
+      (acc, node, idx) => {
+        const processedNode = traverseNode(
+          node,
+          { node: newNode, parent },
+          visitors,
+          idx,
+        );
+        if (processedNode !== false) {
+          acc.push(processedNode);
+        }
+        return acc;
+      },
+      [],
+    );
   }
 
   return newNode;

@@ -6,16 +6,23 @@ import {
   WidthConsumer,
   TableSharedCssClassName,
   akEditorTableNumberColumnWidth,
-  tableCellMinWidth,
+  akEditorWideLayoutWidth,
+  akEditorDefaultLayoutWidth,
+  akEditorFullWidthLayoutWidth,
+  akEditorTableLegacyCellMinWidth,
 } from '@atlaskit/editor-common';
 import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';
 import TableHeader from './tableHeader';
+import { RendererAppearance } from '../../ui/Renderer';
+import { FullPagePadding } from '../../ui/Renderer/style';
 
 export interface TableProps {
   columnWidths?: Array<number>;
   layout: TableLayout;
   isNumberColumnEnabled: boolean;
   children: ReactNode;
+  renderWidth: number;
+  rendererAppearance?: RendererAppearance;
 }
 
 const isHeaderRowEnabled = rows => {
@@ -39,58 +46,96 @@ const addNumberColumnIndexes = rows => {
   });
 };
 
-class Table extends React.Component<TableProps & OverflowShadowProps> {
-  wrapper: HTMLDivElement | null;
+const getTableWidthLimit = (layout: TableLayout) => {
+  switch (layout) {
+    case 'full-width':
+      return akEditorFullWidthLayoutWidth;
+    case 'wide':
+      return akEditorWideLayoutWidth;
+    default:
+      return akEditorDefaultLayoutWidth;
+  }
+};
 
+const fixColumnWidth = (
+  columnWidth: number,
+  tableWidth: number,
+  layoutWidth: number,
+  zeroWidthColumnsCount: number,
+) => {
+  // If the tables total width (including no zero widths col or cols without width) is less than the current layout
+  // We scale up the columns to meet the minimum of the table layout.
+  if (zeroWidthColumnsCount === 0 && tableWidth < layoutWidth) {
+    return (columnWidth * (layoutWidth / tableWidth)).toFixed(2);
+  }
+
+  return columnWidth;
+};
+
+class Table extends React.Component<TableProps & OverflowShadowProps> {
   render() {
-    const { isNumberColumnEnabled, layout, children } = this.props;
+    const { isNumberColumnEnabled, layout, children, renderWidth } = this.props;
 
     return (
-      <WidthConsumer>
-        {({ width }) => (
-          <div
-            className={`${TableSharedCssClassName.TABLE_CONTAINER} ${
-              this.props.shadowClassNames
-            }`}
-            data-layout={layout}
-            ref={ref => {
-              this.wrapper = ref;
-              this.props.handleRef(ref);
-            }}
-            style={{ width: calcTableWidth(layout, width, false) }}
-          >
-            <div className={TableSharedCssClassName.TABLE_NODE_WRAPPER}>
-              <table data-number-column={isNumberColumnEnabled}>
-                {this.renderColgroup()}
-                <tbody>
-                  {isNumberColumnEnabled
-                    ? addNumberColumnIndexes(children)
-                    : children}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-      </WidthConsumer>
+      <div
+        className={`${TableSharedCssClassName.TABLE_CONTAINER} ${
+          this.props.shadowClassNames
+        }`}
+        data-layout={layout}
+        ref={this.props.handleRef}
+        style={{ width: calcTableWidth(layout, renderWidth, false) }}
+      >
+        <div className={TableSharedCssClassName.TABLE_NODE_WRAPPER}>
+          <table data-number-column={isNumberColumnEnabled}>
+            {this.renderColgroup()}
+            <tbody>
+              {isNumberColumnEnabled
+                ? addNumberColumnIndexes(children)
+                : children}
+            </tbody>
+          </table>
+        </div>
+      </div>
     );
   }
 
   private renderColgroup = () => {
-    const { columnWidths, isNumberColumnEnabled } = this.props;
+    const {
+      columnWidths,
+      layout,
+      isNumberColumnEnabled,
+      renderWidth,
+    } = this.props;
     if (!columnWidths) {
       return null;
     }
-    let actualWidth = 0;
-    if (this.wrapper) {
-      actualWidth = this.wrapper.offsetWidth;
-    } else {
-      this.forceUpdate();
-      return;
-    }
 
-    const minTableWidth = columnWidths.reduce((acc: number, width: number) => {
-      return (acc += Math.ceil(width) || tableCellMinWidth);
-    }, 0);
+    // @see ED-6056
+    const widthLimit = getTableWidthLimit(layout);
+    const maxTableWidth = renderWidth < widthLimit ? renderWidth : widthLimit;
+
+    let tableWidth = 0;
+    let minTableWidth = 0;
+    let zeroWidthColumnsCount = 0;
+
+    columnWidths.forEach(width => {
+      if (width) {
+        tableWidth += Math.ceil(width);
+      } else {
+        zeroWidthColumnsCount += 1;
+      }
+      minTableWidth += Math.ceil(width) || akEditorTableLegacyCellMinWidth;
+    });
+    let cellMinWidth = 0;
+    if (zeroWidthColumnsCount > 0 && minTableWidth > maxTableWidth) {
+      const minWidth = Math.ceil(
+        (maxTableWidth - tableWidth) / zeroWidthColumnsCount,
+      );
+      cellMinWidth =
+        minWidth < akEditorTableLegacyCellMinWidth
+          ? akEditorTableLegacyCellMinWidth
+          : minWidth;
+    }
 
     return (
       <colgroup>
@@ -98,15 +143,14 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
           <col style={{ width: akEditorTableNumberColumnWidth }} />
         )}
         {columnWidths.map((colWidth, idx) => {
-          let width;
-          // @see ED-5775:
-          // we can't rely on css min-width as long as we use "table-layout: fixed"
-          // therefore if a column is not resized, we enforce min-width when table is smaller than minimum table width
-          if (colWidth) {
-            width = colWidth < tableCellMinWidth ? tableCellMinWidth : colWidth;
-          } else {
-            width = actualWidth <= minTableWidth ? tableCellMinWidth : 0;
-          }
+          const width =
+            fixColumnWidth(
+              colWidth,
+              minTableWidth,
+              maxTableWidth,
+              zeroWidthColumnsCount,
+            ) || cellMinWidth;
+
           const style = width ? { width: `${width}px` } : {};
           return <col key={idx} style={style} />;
         })}
@@ -115,7 +159,21 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
   };
 }
 
-export default overflowShadow(Table, {
+const TableWithShadows = overflowShadow(Table, {
   overflowSelector: `.${TableSharedCssClassName.TABLE_NODE_WRAPPER}`,
   scrollableSelector: 'table',
 });
+
+const TableWithWidth = (props: TableProps) => (
+  <WidthConsumer>
+    {({ width }) => {
+      const renderWidth =
+        props.rendererAppearance === 'full-page'
+          ? width - FullPagePadding * 2
+          : width;
+      return <TableWithShadows renderWidth={renderWidth} {...props} />;
+    }}
+  </WidthConsumer>
+);
+
+export default TableWithWidth;

@@ -24,6 +24,7 @@ import {
   OptionData,
   UserPickerProps,
   UserPickerState,
+  Appearance,
 } from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
@@ -38,14 +39,12 @@ import {
   optionToSelectableOptions,
 } from './utils';
 
-class UserPickerInternal extends React.Component<
-  UserPickerProps & WithAnalyticsEventProps,
-  UserPickerState
-> {
+type Props = UserPickerProps & WithAnalyticsEventProps;
+
+class UserPickerInternal extends React.Component<Props, UserPickerState> {
   static defaultProps: UserPickerProps = {
     width: 350,
     isMulti: false,
-    appearance: 'normal',
     subtle: false,
     isClearable: true,
   };
@@ -77,11 +76,11 @@ class UserPickerInternal extends React.Component<
     return derivedState;
   }
 
-  private selectRef;
+  private selectRef: any | null;
 
   private session?: UserPickerSession;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       options: [],
@@ -131,7 +130,7 @@ class UserPickerInternal extends React.Component<
       return;
     }
     this.setState({ inputValue: '' });
-    const { onChange, onSelection, isMulti } = this.props;
+    const { onChange, onSelection, onClear, isMulti } = this.props;
     callCallback(onChange, extractOptionValue(value), action);
 
     switch (action) {
@@ -143,6 +142,7 @@ class UserPickerInternal extends React.Component<
         this.session = isMulti ? startSession() : undefined;
         break;
       case 'clear':
+        callCallback(onClear);
         this.fireEvent(clearEvent);
         break;
       case 'remove-value':
@@ -156,7 +156,7 @@ class UserPickerInternal extends React.Component<
     }
   };
 
-  private handleSelectRef = ref => {
+  private handleSelectRef = (ref: any | null) => {
     this.selectRef = ref;
   };
 
@@ -167,7 +167,10 @@ class UserPickerInternal extends React.Component<
           return {
             options: options.concat(
               newOptions.reduce<OptionData[]>(
-                (nextOptions, item) => nextOptions.concat(item[0]),
+                (nextOptions, item) =>
+                  Array.isArray(item)
+                    ? nextOptions.concat(item[0])
+                    : nextOptions.concat(item),
                 [],
               ),
             ),
@@ -192,7 +195,7 @@ class UserPickerInternal extends React.Component<
         const addOptions = this.addOptions.bind(
           this,
           inflightRequest.toString(),
-        );
+        ) as (value: OptionData | OptionData[]) => void | PromiseLike<void>;
         let count = 0;
         if (isIterable(result)) {
           for (const value of result) {
@@ -244,6 +247,7 @@ class UserPickerInternal extends React.Component<
     { action }: { action: InputActionTypes },
   ) => {
     if (action === 'input-change') {
+      callCallback(this.props.onInputChange, search);
       this.setState({ inputValue: search, preventFilter: false });
 
       this.executeLoadOptions(search);
@@ -264,7 +268,7 @@ class UserPickerInternal extends React.Component<
     this.fireEvent(focusEvent);
   };
 
-  componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
+  componentDidUpdate(_: UserPickerProps, prevState: UserPickerState) {
     const { menuIsOpen, options } = this.state;
     // load options when the picker open
     if (menuIsOpen && !prevState.menuIsOpen) {
@@ -292,7 +296,6 @@ class UserPickerInternal extends React.Component<
       if (this.session) {
         this.session.inputChangeTime = Date.now();
       }
-      callCallback(this.props.onInputChange, this.state.inputValue);
     }
   }
 
@@ -332,13 +335,18 @@ class UserPickerInternal extends React.Component<
 
   private getOptions = (): Option[] => getOptions(this.state.options) || [];
 
+  private getAppearance = (): Appearance =>
+    this.props.appearance
+      ? this.props.appearance
+      : this.props.isMulti
+      ? 'compact'
+      : 'normal';
+
   render() {
     const {
-      width,
       isMulti,
       anchor,
       isLoading,
-      appearance,
       subtle,
       placeholder,
       isClearable,
@@ -355,6 +363,9 @@ class UserPickerInternal extends React.Component<
       value,
       inputValue,
     } = this.state;
+    const appearance = this.getAppearance();
+    const width = this.props.width as string | number;
+
     return (
       <Select
         value={value}
@@ -379,7 +390,7 @@ class UserPickerInternal extends React.Component<
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}
-        appearance={isMulti ? 'compact' : appearance}
+        appearance={appearance}
         isClearable={isClearable}
         subtle={isMulti ? false : subtle}
         blurInputOnSelect={!isMulti}

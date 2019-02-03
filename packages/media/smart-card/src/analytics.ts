@@ -5,6 +5,8 @@ import {
 } from '../package.json';
 import { ObjectState } from './Client/types';
 
+export const ANALYTICS_CHANNEL = 'media';
+
 export const context = {
   componentName: 'smart-cards',
   packageName,

@@ -4,9 +4,11 @@
   "main": "index.js",
   "private": true,
   "dependencies": {
+     "@atlaskit/analytics-reporting": "0.1.0",
      "docker-compose": "^0.9.3",
      "ip": "^1.1.5",
      "puppeteer":"^1.10.0",
+     "is-reachable":"^2.4.0",
      "jest-image-snapshot": "^2.4.2"
   }
 }

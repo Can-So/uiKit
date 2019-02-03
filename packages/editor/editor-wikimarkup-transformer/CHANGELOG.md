@@ -1,5 +1,19 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.10.2
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
+## 2.10.1
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-common@31.0.0
+  - @atlaskit/editor-core@98.0.0
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/renderer@38.0.0
+  - @atlaskit/editor-json-transformer@4.1.8
+  - @atlaskit/util-data-test@10.0.36
+
 ## 2.10.0
 - [minor] [f56a86f8ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f56a86f8ff):
 

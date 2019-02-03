@@ -1,6 +1,6 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   mediaGroup,
   media,
@@ -20,6 +20,7 @@ import mediaPlugin from '../../../../plugins/media';
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 describe('media - keymaps', () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
   const providerFactory = new ProviderFactory();
 
   const editor = (doc: any, uploadErrorHandler?: () => void) => {
@@ -30,7 +31,7 @@ describe('media - keymaps', () => {
       includeUserAuthProvider: true,
     });
 
-    return createEditor<MediaPluginState>({
+    return createEditor({
       doc,
       editorPlugins: [mediaPlugin({ provider: mediaProvider })],
       editorProps: {
@@ -51,7 +52,6 @@ describe('media - keymaps', () => {
       sendKeyToPm(editorView, 'Mod-z');
 
       expect(pluginState.ignoreLinks).toBe(true);
-      editorView.destroy();
     });
   });
 
@@ -63,7 +63,6 @@ describe('media - keymaps', () => {
       sendKeyToPm(editorView, 'Enter');
 
       expect(splitMediaGroupSpy).toHaveBeenCalled();
-      editorView.destroy();
     });
   });
 
@@ -85,7 +84,6 @@ describe('media - keymaps', () => {
 
       sendKeyToPm(editorView, 'Shift-Enter');
       expect(splitMediaGroupSpy).toHaveBeenCalled();
-      editorView.destroy();
     });
   });
 });

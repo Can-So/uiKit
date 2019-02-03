@@ -2,7 +2,7 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import {
   doc,
   insertText,
-  createEditor,
+  createEditorFactory,
   p,
   panel,
   sleep,
@@ -11,6 +11,8 @@ import {
 import { pluginKey as quickInsertPluginKey } from '../../../../plugins/quick-insert';
 
 describe('Quick Insert', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, providerFactory?: any) =>
     createEditor({
       doc,

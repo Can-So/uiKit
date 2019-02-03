@@ -1,6 +1,6 @@
 import { browser } from '@atlaskit/editor-common';
 import {
-  createEditor,
+  createEditorFactory,
   a as link,
   blockquote,
   code_block,
@@ -28,6 +28,8 @@ import { clearFormatting } from '../../../../plugins/text-formatting/commands/cl
 import { checkFormattingIsPresent } from '../../../../plugins/text-formatting/utils';
 
 describe('clear-formatting', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (
     doc: any,
     { trackEvent }: { trackEvent: () => void } = { trackEvent: () => {} },
@@ -92,14 +94,12 @@ describe('clear-formatting', () => {
 
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(checkFormattingIsPresent(editorView.state)).toBe(false);
-      editorView.destroy();
     });
 
     it('should be false if all present blocks are cleared', () => {
       const { editorView } = editor(doc(code_block({})('code{<>}block')));
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(checkFormattingIsPresent(editorView.state)).toBe(false);
-      editorView.destroy();
     });
   });
 
@@ -118,8 +118,6 @@ describe('clear-formatting', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(p(nodeType('t'), 'ex', nodeType('t'))),
         );
-
-        editorView.destroy();
       });
     });
 
@@ -131,8 +129,6 @@ describe('clear-formatting', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(p(blackText('t'), 'ex', blackText('t'))),
       );
-
-      editorView.destroy();
     });
 
     it('should remove heading blocks if present', () => {
@@ -140,8 +136,6 @@ describe('clear-formatting', () => {
 
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(editorView.state.doc).toEqualDocument(doc(p('text')));
-
-      editorView.destroy();
     });
 
     it('should remove superscript if present', () => {
@@ -150,7 +144,6 @@ describe('clear-formatting', () => {
       );
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(editorView.state.doc).toEqualDocument(doc(p('text')));
-      editorView.destroy();
     });
 
     it('should remove blockquote if present', () => {
@@ -158,8 +151,6 @@ describe('clear-formatting', () => {
 
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(editorView.state.doc).toEqualDocument(doc(p('text')));
-
-      editorView.destroy();
     });
 
     it('should remove panel if present', () => {
@@ -167,8 +158,6 @@ describe('clear-formatting', () => {
 
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(editorView.state.doc).toEqualDocument(doc(p('text')));
-
-      editorView.destroy();
     });
 
     it('should remove superscript if present', () => {
@@ -178,8 +167,6 @@ describe('clear-formatting', () => {
 
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(editorView.state.doc).toEqualDocument(doc(p('text')));
-
-      editorView.destroy();
     });
 
     it('should remove subscript if present', () => {
@@ -189,8 +176,6 @@ describe('clear-formatting', () => {
 
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(editorView.state.doc).toEqualDocument(doc(p('text')));
-
-      editorView.destroy();
     });
 
     it('should not remove link if present', () => {
@@ -202,8 +187,6 @@ describe('clear-formatting', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(p(link({ href: 'http://www.atlassian.com' })('text'))),
       );
-
-      editorView.destroy();
     });
 
     it('should not remove ordered list item if present', () => {
@@ -211,8 +194,6 @@ describe('clear-formatting', () => {
 
       clearFormatting()(editorView.state, editorView.dispatch);
       expect(editorView.state.doc).toEqualDocument(doc(ol(li(p('text')))));
-
-      editorView.destroy();
     });
   });
 
@@ -234,7 +215,6 @@ describe('clear-formatting', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.clear.keyboard',
       );
-      editorView.destroy();
     });
   });
 });

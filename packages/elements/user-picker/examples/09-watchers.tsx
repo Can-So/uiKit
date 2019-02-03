@@ -4,7 +4,7 @@ import SelectClearIcon from '@atlaskit/icon/glyph/select-clear';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ExampleWrapper } from '../example-helpers/ExampleWrapper';
-import { OptionData } from '../src';
+import { OptionData, Value } from '../src';
 import { UserPicker } from '../src/components/UserPicker';
 import { isUser, isTeam } from '../src/components/utils';
 
@@ -51,23 +51,27 @@ class UserValue extends React.PureComponent<UserValueProps> {
   }
 }
 
-export default class Example extends React.PureComponent<{}, State> {
+type Props = {};
+
+export default class Example extends React.PureComponent<Props, State> {
   private userPickerRef: React.RefObject<any> = React.createRef();
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       value: [],
     };
   }
 
-  private handleOnChange = user => {
+  private handleOnChange = (user: Value) => {
     this.setState(
       ({ value }) => {
-        if (value.indexOf(user) === -1) {
-          return {
-            value: [...value, user],
-          };
+        if (!Array.isArray(user) && isUser(user)) {
+          if (value.indexOf(user) === -1) {
+            return {
+              value: [...value, user],
+            };
+          }
         }
         return null;
       },
@@ -79,7 +83,7 @@ export default class Example extends React.PureComponent<{}, State> {
     );
   };
 
-  private handleRemoveUser = toRemove => {
+  private handleRemoveUser = (toRemove: OptionData) => {
     this.setState(
       ({ value }) => ({
         value: value.filter(user => user !== toRemove),

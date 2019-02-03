@@ -1,7 +1,7 @@
 import {
   doc,
   insertText,
-  createEditor,
+  createEditorFactory,
   p,
   sleep,
 } from '@atlaskit/editor-test-helpers';
@@ -16,6 +16,8 @@ interface InputEvent extends UIEvent, Event {
 }
 
 describe('placeholder', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent = () => {}) =>
     createEditor({
       doc,

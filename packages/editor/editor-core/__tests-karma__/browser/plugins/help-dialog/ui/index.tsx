@@ -4,7 +4,10 @@ import { IntlProvider } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import { createSchema, doc } from '@atlaskit/adf-schema';
 import { browser } from '@atlaskit/editor-common';
-import { createEditor, mountWithIntl } from '@atlaskit/editor-test-helpers';
+import {
+  createEditorFactory,
+  mountWithIntl,
+} from '@atlaskit/editor-test-helpers';
 import HelpDialog, {
   formatting,
   getComponentFromKeymap,
@@ -21,6 +24,8 @@ const { intl } = intlProvider.getChildContext();
 describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
   let editorActions: EditorActions;
   let editorView: EditorView;
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     const editor = createEditor({ editorPlugins: [helpDialog] });
     editorActions = new EditorActions();

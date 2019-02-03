@@ -7,7 +7,8 @@ import {
 const openModalBtn = "[type='button']";
 const modalDialog = "[role='dialog']";
 
-describe('Snapshot Test', () => {
+// TODO: https://ecosystem.atlassian.net/browse/AK-5843
+describe.skip('Snapshot Test', () => {
   it('Select in a modal dialog example should match production example', async () => {
     const url = getExampleUrl(
       'core',

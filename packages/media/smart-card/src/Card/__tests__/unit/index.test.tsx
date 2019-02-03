@@ -21,6 +21,7 @@ import {
   CardLinkView,
   InlineCardErroredView,
   InlineCardUnauthorizedView,
+  InlineCardForbiddenView,
 } from '@atlaskit/media-ui';
 import { ClientConfig } from '../../../Client';
 import Button from '@atlaskit/button';
@@ -73,7 +74,7 @@ describe('Card', () => {
         done();
       });
       mount(
-        <AnalyticsListener onEvent={logger}>
+        <AnalyticsListener onEvent={logger} channel="media">
           <Card appearance="inline" client={customClient} url={url} />
         </AnalyticsListener>,
       );
@@ -304,7 +305,7 @@ describe('Card', () => {
     });
   });
 
-  describe('when there are no auth methods available', async () => {
+  describe('when unauthorized and there are no auth methods available', async () => {
     it('should not render the auth prompt in block card ', async () => {
       const client = createClient([
         {
@@ -352,6 +353,60 @@ describe('Card', () => {
       expect(
         wrapper
           .find(InlineCardUnauthorizedView)
+          .find(Button)
+          .exists(),
+      ).toBeFalsy();
+    });
+  });
+
+  describe('when forbidden and there are no auth methods available', async () => {
+    it('should not render the auth prompt in block card ', async () => {
+      const client = createClient([
+        {
+          status: 'forbidden',
+          definitionId: 'test',
+          services: [],
+        } as ObjectState,
+      ]);
+      const wrapper = mount(
+        <Card
+          appearance="block"
+          client={client}
+          url="https://www.atlassian.com/"
+        />,
+      );
+
+      wrapper.update();
+      expect(wrapper.find(BlockCardForbiddenView).exists()).toBeTruthy();
+      expect(
+        wrapper
+          .find(BlockCardForbiddenView)
+          .find(Button)
+          .exists(),
+      ).toBeFalsy();
+    });
+
+    it('should not render the auth prompt in inline card ', async () => {
+      const client = createClient([
+        {
+          status: 'forbidden',
+          definitionId: 'test',
+          services: [],
+        } as ObjectState,
+      ]);
+      const wrapper = mount(
+        <Card
+          appearance="inline"
+          client={client}
+          url="https://www.atlassian.com/"
+        />,
+      );
+
+      wrapper.update();
+      expect(wrapper.find(InlineCardForbiddenView).exists()).toBeTruthy();
+      expect(
+        wrapper
+          .find(InlineCardForbiddenView)
           .find(Button)
           .exists(),
       ).toBeFalsy();

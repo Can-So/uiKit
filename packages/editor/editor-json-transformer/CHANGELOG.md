@@ -1,5 +1,17 @@
 # @atlaskit/editor-json-transformer
 
+## 4.1.9
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
+## 4.1.8
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-common@31.0.0
+  - @atlaskit/editor-core@98.0.0
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/util-data-test@10.0.36
+
 ## 4.1.7
 - Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
   - @atlaskit/editor-common@30.0.0

@@ -1,5 +1,4 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 import {
   editable,
@@ -8,6 +7,11 @@ import {
   quickInsert,
 } from '../_helpers';
 import { messages as insertBlockMessages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
+import { selectors } from './_utils';
 
 BrowserTestCase(
   'inside-table.ts: Insert panel into table, add text, change panel type',
@@ -18,26 +22,32 @@ BrowserTestCase(
     }"]`;
     const tableControls = '[aria-label="Table floating controls"]';
 
-    const browser = new Page(client);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowPanel: true,
+      allowTables: {
+        advanced: true,
+      },
+    });
 
-    await browser.goto(fullpage.path);
-    await browser.waitForSelector(editable);
-    await browser.click(editable);
-    await browser.click(insertTableMenu);
-    await browser.waitForSelector(tableControls);
+    await page.click(editable);
+    await page.click(insertTableMenu);
+    await page.waitForSelector(tableControls);
 
-    await quickInsert(browser, 'Panel');
+    await quickInsert(page, 'Panel');
+    await page.waitForSelector(selectors.PANEL_EDITOR_CONTAINER);
 
     // type some text
-    await browser.type(editable, 'this text should be in the panel');
+    await page.type(editable, 'this text should be in the panel');
 
     // click on Error label
     const selector = `[aria-label="Error"]`;
-    await browser.click(selector);
+    await page.click(selector);
 
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
-    expect(await browser.isExisting(tableControls)).toBe(false);
-    expect(await browser.isVisible(tableControls)).toBe(false);
+    expect(await page.isExisting(tableControls)).toBe(false);
+    expect(await page.isVisible(tableControls)).toBe(false);
   },
 );

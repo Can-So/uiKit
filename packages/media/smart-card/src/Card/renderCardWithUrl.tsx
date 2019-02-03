@@ -23,9 +23,8 @@ import {
   connectFailedEvent,
   connectSucceededEvent,
   trackAppAccountConnected,
+  ANALYTICS_CHANNEL,
 } from '../analytics';
-
-const ANALYTICS_CHANNEL = 'media';
 
 const getCollapsedIcon = (state: DefinedState): string | undefined => {
   const { data } = state;
@@ -44,7 +43,7 @@ const renderBlockCard = (
 ) => {
   switch (state.status) {
     case 'pending':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView url={url} />;
 
     case 'resolving':
       return (
@@ -116,7 +115,7 @@ const renderInlineCard = (
 ): React.ReactNode => {
   switch (state.status) {
     case 'pending':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView url={url} />;
 
     case 'resolving':
       return (
@@ -168,7 +167,7 @@ const renderInlineCard = (
       );
 
     case 'errored':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView url={url} />;
   }
 };
 

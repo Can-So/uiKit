@@ -18,6 +18,7 @@ import {
   Label,
   LabelText,
   CheckboxWrapper,
+  RequiredIndicator,
 } from './styled/Checkbox';
 import { type CheckboxProps } from './types';
 
@@ -129,7 +130,9 @@ class Checkbox extends Component<CheckboxProps, State> {
       name,
       value,
       onChange,
-      ...props
+      isRequired,
+      defaultChecked,
+      ...rest
     } = this.props;
     const isChecked = this.getProp('isChecked');
     const { isFocused, isActive, isHovered } = this.state;
@@ -137,7 +140,6 @@ class Checkbox extends Component<CheckboxProps, State> {
     return (
       <ThemeProvider theme={emptyTheme}>
         <Label
-          {...props}
           isDisabled={isDisabled}
           onMouseDown={this.onMouseDown}
           onMouseEnter={this.onMouseEnter}
@@ -157,6 +159,8 @@ class Checkbox extends Component<CheckboxProps, State> {
               value={value}
               name={name}
               innerRef={r => (this.checkbox = r)} // eslint-disable-line
+              required={isRequired}
+              {...rest}
             />
             <CheckboxIcon
               isChecked={isChecked}
@@ -171,7 +175,12 @@ class Checkbox extends Component<CheckboxProps, State> {
               label=""
             />
           </CheckboxWrapper>
-          <LabelText>{label}</LabelText>
+          <LabelText>
+            {label}
+            {isRequired && (
+              <RequiredIndicator aria-hidden="true">*</RequiredIndicator>
+            )}
+          </LabelText>
         </Label>
       </ThemeProvider>
     );

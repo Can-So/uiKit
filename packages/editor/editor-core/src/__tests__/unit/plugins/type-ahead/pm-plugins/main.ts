@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   insertText,
@@ -12,6 +12,8 @@ import { selectCurrentItem } from '../../../../../plugins/type-ahead/commands/se
 import { pluginKey as typeAheadPluginKey } from '../../../../../plugins/type-ahead/pm-plugins/main';
 
 describe('typeAhead main plugin', () => {
+  const createEditor = createEditorFactory();
+
   it('should close typeahed if a query starts with a space', () => {
     const plugin = createTypeAheadPlugin();
     const { editorView, sel } = createEditor({

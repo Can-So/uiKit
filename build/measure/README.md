@@ -29,7 +29,7 @@ If changes that have been introduced increase a bundle size beyond the allowed t
 Please make sure that this decision is carefully considered and discussed. The point of measuring bundle size change like this is to prevent things growing unexpectedly. Always ask if there is a better way to do what you are trying to do.
 
 ```sh
-yarn measure [path] --updateSnapshots
+yarn measure:updateSnapshot [path]
 ```
 
 ## In-depth analysis

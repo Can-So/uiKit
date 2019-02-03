@@ -5,7 +5,7 @@ import {
   doc,
   p,
   randomId,
-  createEditor,
+  createEditorFactory,
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
 
@@ -31,6 +31,7 @@ const waitForPluginStateChange = async (pluginState: MediaPluginState) =>
   new Promise(resolve => pluginState.subscribe(resolve));
 
 describe('Media with mock facade', () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
   const mediaProvider = getFreshMediaProvider();
   const providerFactory = ProviderFactory.create({ mediaProvider });
 
@@ -39,7 +40,7 @@ describe('Media with mock facade', () => {
     editorProps = {},
     dropzoneContainer: HTMLElement = document.body,
   ) =>
-    createEditor<MediaPluginState>({
+    createEditor({
       doc,
       editorPlugins: [
         mediaPlugin({

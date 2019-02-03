@@ -4,13 +4,15 @@ import { setProvider } from '../../../../plugins/card/pm-plugins/actions';
 
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   dispatchPasteEvent,
   EditorTestCardProvider,
 } from '@atlaskit/editor-test-helpers';
 
 describe('card', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

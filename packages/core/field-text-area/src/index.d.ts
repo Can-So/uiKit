@@ -1,7 +1,7 @@
 import { Component, FormEvent } from 'react';
 
 export interface Props {
-  autoComplete?: 'on' | 'off';
+  autoComplete?: string;
   form?: string;
   pattern?: string;
   autoFocus?: boolean;

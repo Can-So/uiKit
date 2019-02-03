@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { createEditor, doc, p, panel } from '@atlaskit/editor-test-helpers';
+import {
+  createEditorFactory,
+  doc,
+  p,
+  panel,
+} from '@atlaskit/editor-test-helpers';
 import { ClickAreaBlock } from '../../../../ui/Addon';
 import gapCursorPlugin, {
   GapCursorSelection,
@@ -9,13 +14,14 @@ import gapCursorPlugin, {
 import panelPlugin from '../../../../plugins/panel';
 import * as utils from '../../../../utils';
 
-const editor = (doc: any) =>
-  createEditor({
-    doc,
-    editorPlugins: [gapCursorPlugin, panelPlugin],
-  });
-
 describe('ClickAreaBlock', () => {
+  const createEditor = createEditorFactory();
+  const editor = (doc: any) =>
+    createEditor({
+      doc,
+      editorPlugins: [gapCursorPlugin, panelPlugin],
+    });
+
   it('should create empty terminal empty paragraph when clicked', () => {
     const { editorView } = editor(doc(p('Hello world')));
     const clickWrapper = mount(<ClickAreaBlock editorView={editorView} />);

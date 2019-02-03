@@ -42,6 +42,7 @@ import {
   isHeaderRowSelected,
   isIsolating,
   createControlsHoverDecoration,
+  fixAutoSizedTable,
 } from './utils';
 import { Command } from '../../types';
 import { analyticsService } from '../../analytics';
@@ -944,6 +945,19 @@ export const handleShiftSelection = (event: MouseEvent): Command => (
       }
       return true;
     }
+  }
+
+  return false;
+};
+
+export const autoSizeTable = (
+  node: PMNode,
+  table: HTMLTableElement,
+  basePos: number,
+): Command => (state, dispatch) => {
+  if (dispatch) {
+    dispatch(fixAutoSizedTable(state.tr, node, table, basePos));
+    return true;
   }
 
   return false;

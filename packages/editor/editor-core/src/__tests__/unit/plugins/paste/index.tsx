@@ -10,7 +10,7 @@ import {
   media,
   mediaSingle,
   panel,
-  createEditor,
+  createEditorFactory,
   dispatchPasteEvent,
   bodiedExtension,
   inlineExtension,
@@ -42,6 +42,8 @@ import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import { panelPlugin } from '../../../../plugins';
 
 describe('paste plugins', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,

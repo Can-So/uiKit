@@ -15,7 +15,7 @@ const commit = process.env.BITBUCKET_COMMIT
   ? process.env.USER + uniqIdentifierStamp
   : uniqIdentifierStamp;
 
-async function startBrowserStack() {
+async function startServer() {
   return new Promise((resolve, reject) => {
     bsLocal.start({ key: bsKey, localIdentifier: commit }, error => {
       if (error) {
@@ -28,9 +28,9 @@ async function startBrowserStack() {
   });
 }
 
-function stopBrowserStack() {
+function stopServer() {
   console.log('Disconnecting from BrowserStack');
   bsLocal.stop(() => {});
 }
 
-module.exports = { startBrowserStack, stopBrowserStack };
+module.exports = { startServer, stopServer };

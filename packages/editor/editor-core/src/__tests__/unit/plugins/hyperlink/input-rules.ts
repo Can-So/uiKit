@@ -1,6 +1,6 @@
 import {
   insertText,
-  createEditor,
+  createEditorFactory,
   doc,
   br,
   p,
@@ -13,6 +13,8 @@ import {
 import codeBlockPlugin from '../../../../plugins/code-block';
 
 describe('hyperlink', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent?: () => {}) =>
     createEditor({
       doc,

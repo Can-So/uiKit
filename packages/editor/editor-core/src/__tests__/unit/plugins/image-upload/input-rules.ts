@@ -1,7 +1,7 @@
 import {
   doc,
   insertText,
-  createEditor,
+  createEditorFactory,
   p,
   code_block,
   media,
@@ -12,6 +12,8 @@ import codeBlockPlugin from '../../../../plugins/code-block';
 import mediaPlugin from '../../../../plugins/media';
 
 describe('inputrules', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent?: () => {}) =>
     createEditor({
       doc,

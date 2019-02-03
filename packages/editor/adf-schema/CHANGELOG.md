@@ -1,5 +1,25 @@
 # @atlaskit/adf-schema
 
+## 1.4.6
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
+## 1.4.5
+- [patch] [4552e804d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4552e804d3):
+
+  - dismiss StatusPicker if status node is not selected
+
+## 1.4.4
+- [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
+
+  - Improve typings
+
+## 1.4.3
+- [patch] [d10cf50721](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d10cf50721):
+
+  - added fabric status to ADF full schema
+
 ## 1.4.2
 - [patch] [478a86ae8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/478a86ae8a):
 

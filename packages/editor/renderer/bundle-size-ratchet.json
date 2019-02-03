@@ -3,56 +3,56 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 49817,
-      "gzipSize": 12580
+      "size": 50010,
+      "gzipSize": 12659
     }
   },
   {
     "id": "src.async",
     "name": "async",
     "stats": {
-      "size": 6346,
-      "gzipSize": 1853
+      "size": 6363,
+      "gzipSize": 1846
     }
   },
   {
     "id": "node_modules.main",
     "name": "node_modules [main]",
     "stats": {
-      "size": 1161257,
-      "gzipSize": 382356
+      "size": 1161399,
+      "gzipSize": 382827
     }
   },
   {
     "id": "node_modules.async",
     "name": "node_modules [async]",
     "stats": {
-      "size": 191393,
-      "gzipSize": 48934
+      "size": 191403,
+      "gzipSize": 48855
     }
   },
   {
     "id": "atlaskit.core.main",
     "name": "main",
     "stats": {
-      "size": 155110,
-      "gzipSize": 36699
+      "size": 155330,
+      "gzipSize": 36801
     }
   },
   {
     "id": "atlaskit.core.async",
     "name": "async",
     "stats": {
-      "size": 152396,
-      "gzipSize": 30749
+      "size": 163775,
+      "gzipSize": 32780
     }
   },
   {
     "id": "atlaskit.editor.main",
     "name": "main",
     "stats": {
-      "size": 91731,
-      "gzipSize": 22182
+      "size": 93384,
+      "gzipSize": 23041
     }
   },
   {
@@ -60,39 +60,39 @@
     "name": "async",
     "stats": {
       "size": 2141,
-      "gzipSize": 883
+      "gzipSize": 884
     }
   },
   {
     "id": "atlaskit.elements.main",
     "name": "main",
     "stats": {
-      "size": 30516,
-      "gzipSize": 7914
+      "size": 30515,
+      "gzipSize": 7911
     }
   },
   {
     "id": "atlaskit.elements.async",
     "name": "async",
     "stats": {
-      "size": 15355,
-      "gzipSize": 5057
+      "size": 15422,
+      "gzipSize": 5088
     }
   },
   {
     "id": "atlaskit.media.async",
     "name": "async",
     "stats": {
-      "size": 281313,
-      "gzipSize": 64269
+      "size": 288599,
+      "gzipSize": 66391
     }
   },
   {
     "id": "atlaskit.people-and-teams.main",
     "name": "main",
     "stats": {
-      "size": 84270,
-      "gzipSize": 14812
+      "size": 84438,
+      "gzipSize": 14854
     }
   },
   {
@@ -107,16 +107,16 @@
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 1568436,
-      "gzipSize": 476905
+      "size": 1570761,
+      "gzipSize": 478207
     }
   },
   {
     "id": "combined.async",
     "name": "async",
     "stats": {
-      "size": 646458,
-      "gzipSize": 155833
+      "size": 665192,
+      "gzipSize": 159546
     }
   }
 ]

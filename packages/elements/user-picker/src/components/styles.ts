@@ -3,15 +3,16 @@ import { colors } from '@atlaskit/theme';
 import memoizeOne from 'memoize-one';
 import { getAvatarSize } from './utils';
 
+export const BORDER_PADDING = 6;
 export const PLACEHOLDER_PADDING = 8;
 
-export const getStyles = memoizeOne(width => ({
-  menu: (css, state) => ({
+export const getStyles = memoizeOne((width: string | number) => ({
+  menu: (css: any, state: any) => ({
     ...css,
     width,
     minWidth: state.selectProps.menuMinWidth,
   }),
-  control: (css, state) => ({
+  control: (css: any, state: any) => ({
     ...css,
     width,
     borderColor: state.isFocused
@@ -52,7 +53,7 @@ export const getStyles = memoizeOne(width => ({
     paddingLeft,
     paddingRight,
     ...css
-  }) => ({
+  }: any) => ({
     ...css,
     opacity: 0,
     transition: css.transition + ', opacity 150ms',
@@ -62,7 +63,14 @@ export const getStyles = memoizeOne(width => ({
       color: colors.R400,
     },
   }),
-  valueContainer: ({ paddingTop, paddingBottom, position, ...css }, state) => ({
+  indicatorsContainer: (css: any) => ({
+    ...css,
+    paddingRight: 4,
+  }),
+  valueContainer: (
+    { paddingTop, paddingBottom, position, ...css }: any,
+    state: any,
+  ) => ({
     ...css,
     flexGrow: 1,
     padding: 0,
@@ -72,39 +80,40 @@ export const getStyles = memoizeOne(width => ({
     overflow: 'hidden',
     flexWrap: state.selectProps.isMulti ? 'wrap' : 'nowrap',
   }),
-  multiValue: css => ({
+  multiValue: (css: any) => ({
     ...css,
     borderRadius: 24,
   }),
-  multiValueRemove: css => ({
+  multiValueRemove: (css: any) => ({
     ...css,
     backgroundColor: 'transparent',
     '&:hover': { backgroundColor: 'transparent' },
   }),
-  placeholder: (css, state) => {
+  placeholder: (css: any, state: any) => {
     const avatarSize = getAvatarSize(state.selectProps.appearance);
     return {
       ...css,
       paddingLeft: !state.selectProps.isMulti
-        ? 2 * PLACEHOLDER_PADDING +
+        ? BORDER_PADDING +
+          PLACEHOLDER_PADDING +
           2 * BORDER_WIDTH[avatarSize] +
           AVATAR_SIZES[avatarSize]
         : PLACEHOLDER_PADDING,
+      paddingTop: 2,
       paddingRight: 2,
       display: 'block',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      paddingTop: 2,
       maxWidth: '100%',
       margin: 0,
     };
   },
-  option: css => ({
+  option: (css: any) => ({
     ...css,
     overflow: 'hidden',
   }),
-  input: ({ margin, ...css }) => ({
+  input: ({ margin, ...css }: any) => ({
     ...css,
     display: 'flex',
     alignSelf: 'center',

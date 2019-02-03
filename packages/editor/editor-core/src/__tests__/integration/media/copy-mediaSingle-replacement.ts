@@ -1,6 +1,9 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import { editable, getDocFromElement, fullpageWithImport } from '../_helpers';
+import { editable, getDocFromElement, fullpage } from '../_helpers';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
 
 const baseADF = {
   version: 1,
@@ -79,42 +82,30 @@ const baseADF = {
   ],
 };
 
-const adfInputSelector = '#adf-input';
-const importAdfBtnSelector = '#import-adf';
-
 BrowserTestCase(
   'copy-mediaSingle-replacement.ts: Copies and pastes mediaSingle on fullpage',
   { skip: ['edge', 'ie', 'safari'] },
   async client => {
-    const browser = new Page(client);
-    await browser.goto(fullpageWithImport.path);
-
-    // load ADF
-    await browser.browser.execute(
-      (selector, value) => {
-        (document.querySelector(selector)! as HTMLInputElement).value = value;
-      },
-      adfInputSelector,
-      JSON.stringify(baseADF),
-    );
-
-    await browser.click(importAdfBtnSelector);
-    await browser.waitForSelector(editable);
-
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      defaultValue: JSON.stringify(baseADF),
+      media: {},
+    });
     // select the middle one and copy it
     //
     // uses .overlay since these error without being signed into Media Services
     // use the .wrapper selector if we're able to resolve the image
-    await browser.waitForSelector('.ProseMirror :nth-child(3) .overlay');
-    await browser.click('.ProseMirror :nth-child(3) .overlay');
-    await browser.copy(editable);
+    await page.waitForSelector('.ProseMirror :nth-child(3) .overlay');
+    await page.click('.ProseMirror :nth-child(3) .overlay');
+    await page.copy(editable);
 
     // select the last one and replace it
-    await browser.waitForSelector('.ProseMirror :nth-child(4) .overlay');
-    await browser.click('.ProseMirror :nth-child(4) .overlay');
-    await browser.paste(editable);
+    await page.waitForSelector('.ProseMirror :nth-child(4) .overlay');
+    await page.click('.ProseMirror :nth-child(4) .overlay');
+    await page.paste(editable);
 
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );

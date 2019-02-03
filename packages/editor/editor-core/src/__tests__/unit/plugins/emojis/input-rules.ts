@@ -2,7 +2,7 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import { emoji as emojiData } from '@atlaskit/util-data-test';
 import {
   insertText,
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   code,
@@ -19,6 +19,8 @@ import mentionsPlugin from '../../../../plugins/mentions';
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
 describe('emojis - input rules', () => {
+  const createEditor = createEditorFactory();
+
   const providerFactory = ProviderFactory.create({ emojiProvider });
 
   const editor = (doc: any) =>
@@ -38,7 +40,6 @@ describe('emojis - input rules', () => {
     const { emojiQuery } = editorView.state.schema.marks;
     const cursorFocus = editorView.state.selection.$to.nodeBefore!;
     expect(!!emojiQuery.isInSet(cursorFocus.marks)).toEqual(expected);
-    editorView.destroy();
   };
 
   it('should replace a standalone ":" with emoji-query-mark', () => {

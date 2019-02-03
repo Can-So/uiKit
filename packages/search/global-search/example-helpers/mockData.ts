@@ -311,11 +311,11 @@ export function makeCrossProductSearchData(
 
   for (let i = 0; i < n; i++) {
     peopleData.push({
-      userId: uuid(),
-      displayName: getMockName(),
-      nickName: getMockLastName(),
-      primaryPhoto: getMockAvatarUrl(),
-      title: getMockJobTitle(),
+      account_id: uuid(),
+      name: getMockName(),
+      nickname: getMockLastName(),
+      picture: getMockAvatarUrl(),
+      job_title: getMockJobTitle(),
     });
   }
 
@@ -348,7 +348,7 @@ export function makeCrossProductSearchData(
     );
 
     const filteredPeopleResults = peopleData.filter(
-      item => item.displayName.toLowerCase().indexOf(term) > -1,
+      item => item.name.toLowerCase().indexOf(term) > -1,
     );
 
     const abTest = {

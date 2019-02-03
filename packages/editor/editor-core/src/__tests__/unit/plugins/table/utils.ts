@@ -1,9 +1,8 @@
-import { CellSelection } from 'prosemirror-tables';
 import { isTableSelected } from 'prosemirror-utils';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   td,
@@ -27,29 +26,16 @@ import {
 import { TablePluginState } from '../../../../plugins/table/types';
 import tablesPlugin from '../../../../plugins/table';
 import { pluginKey } from '../../../../plugins/table/pm-plugins/main';
-import { Command } from '../../../../types/';
 
 describe('table plugin: utils', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       pluginKey,
     });
-  const setCellSelection = (anchor: number, head: number): Command => (
-    state,
-    dispatch,
-  ) => {
-    if (dispatch) {
-      dispatch(
-        state.tr.setSelection(new CellSelection(
-          state.doc.resolve(anchor - 2),
-          state.doc.resolve(head - 2),
-        ) as any),
-      );
-    }
-    return true;
-  };
 
   describe('#getColumnsWidths', () => {
     describe('when columns are not merged', () => {
@@ -68,7 +54,6 @@ describe('table plugin: utils', () => {
           expect(typeof width).toEqual('number');
           expect(width > 0).toBe(true);
         });
-        editorView.destroy();
       });
     });
 
@@ -89,7 +74,6 @@ describe('table plugin: utils', () => {
             expect(typeof width).toEqual('number');
             expect(width > 0).toBe(true);
           });
-          editorView.destroy();
         });
       });
       describe('when merged column does not have cells', () => {
@@ -113,7 +97,6 @@ describe('table plugin: utils', () => {
               expect(width > 0).toBe(true);
             }
           });
-          editorView.destroy();
         });
       });
     });
@@ -137,7 +120,6 @@ describe('table plugin: utils', () => {
           expect(typeof height).toEqual('number');
           expect(height > 0).toBe(true);
         });
-        editorView.destroy();
       });
     });
 
@@ -160,7 +142,6 @@ describe('table plugin: utils', () => {
             expect(typeof height).toEqual('number');
             expect(height > 0).toBe(true);
           });
-          editorView.destroy();
         });
       });
     });
@@ -177,76 +158,64 @@ describe('table plugin: utils', () => {
             isColumnInsertButtonVisible(i, editorView.state.selection),
           ).toBe(true);
         }
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection', () => {
       describe('when no columns are fully selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}b3'))),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}b3'))),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             expect(
               isColumnInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
 
       describe('when first column is selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(td({})(p('{head}c1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{cell>}c1')), tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             expect(
               isColumnInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
 
       describe('when two columns are selected', () => {
         it('should return false for second column', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, td({})(p('{head}c2')), tdEmpty),
+                tr(tdEmpty, td({})(p('{cell>}c2')), tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             if (i === 1) {
               expect(
@@ -258,55 +227,46 @@ describe('table plugin: utils', () => {
               ).toBe(true);
             }
           }
-          editorView.destroy();
         });
       });
       describe('when three columns are selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3')), tdEmpty),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3')), tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             expect(
               isColumnInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
       describe('when table is selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             expect(
               isColumnInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
     });
@@ -330,76 +290,64 @@ describe('table plugin: utils', () => {
             true,
           );
         }
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection', () => {
       describe('when no rows are fully selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, td({})(p('{head}c2')), tdEmpty),
+                tr(tdEmpty, td({})(p('{cell>}c2')), tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             expect(
               isRowInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
 
       describe('when first row is selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, td({})(p('{head}a3'))),
+                tr(td({})(p('{<cell}a1')), tdEmpty, td({})(p('{cell>}a3'))),
                 tr(tdEmpty, tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             expect(
               isRowInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
 
       describe('when two rows are selected', () => {
         it('should return false for second row', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}b3'))),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}b3'))),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             if (i === 1) {
               expect(
@@ -411,56 +359,47 @@ describe('table plugin: utils', () => {
               ).toBe(true);
             }
           }
-          editorView.destroy();
         });
       });
       describe('when three rows are selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             expect(
               isRowInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
       describe('when table is elected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           for (let i = 0; i < 2; i++) {
             expect(
               isRowInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
     });
@@ -475,74 +414,61 @@ describe('table plugin: utils', () => {
         expect(isColumnDeleteButtonVisible(editorView.state.selection)).toBe(
           false,
         );
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection', () => {
       describe('when no columns are fully selected', () => {
         it('should return false', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}b3'))),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}b3'))),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           expect(isColumnDeleteButtonVisible(editorView.state.selection)).toBe(
             false,
           );
-          editorView.destroy();
         });
       });
       describe('when a column is selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(td({})(p('{head}c1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{cell>}c1')), tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           expect(isColumnDeleteButtonVisible(editorView.state.selection)).toBe(
             true,
           );
-          editorView.destroy();
         });
       });
       describe('when table is selected', () => {
         it('should return false', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           expect(isColumnDeleteButtonVisible(editorView.state.selection)).toBe(
             false,
           );
-          editorView.destroy();
         });
       });
     });
@@ -557,74 +483,61 @@ describe('table plugin: utils', () => {
         expect(isRowDeleteButtonVisible(editorView.state.selection)).toBe(
           false,
         );
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection', () => {
       describe('when no rows are fully selected', () => {
         it('should return false', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
-                tr(tdEmpty, td({})(p('{head}b3')), tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
+                tr(tdEmpty, td({})(p('{cell>}b3')), tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           expect(isRowDeleteButtonVisible(editorView.state.selection)).toBe(
             false,
           );
-          editorView.destroy();
         });
       });
       describe('when a row is selected', () => {
         it('should return true', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, td({})(p('{head}a1'))),
+                tr(td({})(p('{<cell}a1')), tdEmpty, td({})(p('{cell>}a1'))),
                 tr(tdEmpty, tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           expect(isRowDeleteButtonVisible(editorView.state.selection)).toBe(
             true,
           );
-          editorView.destroy();
         });
       });
       describe('when table is selected', () => {
         it('should return false', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           expect(isRowDeleteButtonVisible(editorView.state.selection)).toBe(
             false,
           );
-          editorView.destroy();
         });
       });
     });
@@ -643,26 +556,22 @@ describe('table plugin: utils', () => {
             editorView.state.selection,
           ),
         ).toBe(null);
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection and 3 columns are selected', () => {
       describe('columnsWidths = [100, 150, 200]', () => {
         it('should return indexes = [0, 1, 2]', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3')), tdEmpty),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3')), tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           const columnsWidths = [100, 150, 200];
           const { indexes, left } = getColumnDeleteButtonParams(
             columnsWidths,
@@ -670,20 +579,16 @@ describe('table plugin: utils', () => {
           )!;
           expect(indexes).toEqual([0, 1, 2]);
           expect(left > 0).toBe(true);
-          editorView.destroy();
         });
       });
       describe('columnsWidths = [100, ,150, ,200]', () => {
         it('should return indexes = [0, 2]', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
                 tr(
-                  td({ colspan: 2 })(p('{anchor}a1')),
+                  td({ colspan: 2 })(p('{<cell}a1')),
                   td({ colspan: 2 })(p('')),
                   tdEmpty,
                 ),
@@ -694,13 +599,13 @@ describe('table plugin: utils', () => {
                 ),
                 tr(
                   td({ colspan: 2 })(p('')),
-                  td({ colspan: 2 })(p('{head}c3')),
+                  td({ colspan: 2 })(p('{cell>}c3')),
                   tdEmpty,
                 ),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           const columnsWidths = [100, , 150, , 200];
           const { indexes, left } = getColumnDeleteButtonParams(
             columnsWidths,
@@ -708,7 +613,6 @@ describe('table plugin: utils', () => {
           )!;
           expect(indexes).toEqual([0, 2]);
           expect(left > 0).toBe(true);
-          editorView.destroy();
         });
       });
     });
@@ -731,27 +635,23 @@ describe('table plugin: utils', () => {
         expect(
           getRowDeleteButtonParams(rowsHeights, editorView.state.selection),
         ).toBe(null);
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection and 3 rows are selected', () => {
       describe('rowsHeights = [100, 150, 200]', () => {
         it('should return indexes = [0, 1, 2]', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           const rowsHeights = [100, 150, 200];
           const { indexes, top } = getRowDeleteButtonParams(
             rowsHeights,
@@ -759,33 +659,29 @@ describe('table plugin: utils', () => {
           )!;
           expect(indexes).toEqual([0, 1, 2]);
           expect(top > 0).toBe(true);
-          editorView.destroy();
         });
       });
       describe('rowsHeights = [100, ,150, ,200]', () => {
         it('should return indexes = [0, 1, 2]', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
                 tr(
-                  td({ rowspan: 2 })(p('{anchor}a1')),
+                  td({ rowspan: 2 })(p('{<cell}a1')),
                   td({ rowspan: 2 })(p('a2')),
                   td({ rowspan: 2 })(p('a3')),
                 ),
                 tr(
                   td({ rowspan: 2 })(p('c1')),
                   td({ rowspan: 2 })(p('c2')),
-                  td({ rowspan: 2 })(p('{head}c3')),
+                  td({ rowspan: 2 })(p('{cell>}c3')),
                 ),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           const rowsHeights = [100, , 150, , 200];
           const { indexes, top } = getRowDeleteButtonParams(
             rowsHeights,
@@ -793,7 +689,6 @@ describe('table plugin: utils', () => {
           )!;
           expect(indexes).toEqual([0, 2]);
           expect(top > 0).toBe(true);
-          editorView.destroy();
         });
       });
     });
@@ -905,20 +800,17 @@ describe('table plugin: utils', () => {
     describe('when selection is a CellSelection', () => {
       describe('when no columns are fully selected', () => {
         it('should return an empty string', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}b3'))),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}b3'))),
                 tr(tdEmpty, tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           const classNames = getColumnClassNames(
             0,
             editorView.state.selection,
@@ -926,25 +818,21 @@ describe('table plugin: utils', () => {
             false,
           );
           expect(classNames).toBe('');
-          editorView.destroy();
         });
       });
       describe('when a column is selected', () => {
         it('return a string containing "active" substring', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           [0, 1, 2].forEach(index => {
             const classNames = getColumnClassNames(
               index,
@@ -957,22 +845,15 @@ describe('table plugin: utils', () => {
         });
         describe('when isInDanger = true', () => {
           it('return a string containing "danger" substring', () => {
-            const {
-              editorView,
-              refs: { anchor, head },
-            } = editor(
+            const { editorView } = editor(
               doc(
                 p('text'),
                 table()(
-                  tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                  tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                   tr(tdEmpty, tdEmpty, tdEmpty),
-                  tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                  tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
                 ),
               ),
-            );
-            setCellSelection(anchor, head)(
-              editorView.state,
-              editorView.dispatch,
             );
             [0, 1, 2].forEach(index => {
               const classNames = getColumnClassNames(
@@ -1041,20 +922,17 @@ describe('table plugin: utils', () => {
     describe('when selection is a CellSelection', () => {
       describe('when no rows are fully selected', () => {
         it('should return an empty string', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, td({})(p('{head}c3')), tdEmpty),
+                tr(tdEmpty, td({})(p('{cell>}c3')), tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           const classNames = getRowClassNames(
             0,
             editorView.state.selection,
@@ -1062,25 +940,21 @@ describe('table plugin: utils', () => {
             false,
           );
           expect(classNames).toBe('');
-          editorView.destroy();
         });
       });
       describe('when a row is selected', () => {
         it('return a string containing "active" substring', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                 tr(tdEmpty, tdEmpty, tdEmpty),
-                tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
           [0, 1, 2].forEach(index => {
             const classNames = getRowClassNames(
               index,
@@ -1093,22 +967,15 @@ describe('table plugin: utils', () => {
         });
         describe('when isInDanger = true', () => {
           it('return a string containing "danger" substring', () => {
-            const {
-              editorView,
-              refs: { anchor, head },
-            } = editor(
+            const { editorView } = editor(
               doc(
                 p('text'),
                 table()(
-                  tr(td({})(p('{anchor}a1')), tdEmpty, tdEmpty),
+                  tr(td({})(p('{<cell}a1')), tdEmpty, tdEmpty),
                   tr(tdEmpty, tdEmpty, tdEmpty),
-                  tr(tdEmpty, tdEmpty, td({})(p('{head}c3'))),
+                  tr(tdEmpty, tdEmpty, td({})(p('{cell>}c3'))),
                 ),
               ),
-            );
-            setCellSelection(anchor, head)(
-              editorView.state,
-              editorView.dispatch,
             );
             [0, 1, 2].forEach(index => {
               const classNames = getRowClassNames(
@@ -1129,40 +996,32 @@ describe('table plugin: utils', () => {
     describe('when table has non-rectangular column CellSelection', () => {
       describe('when first column is selected', () => {
         it('should create a rectangular CellSelection', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), tdEmpty),
+                tr(td({})(p('{<cell}a1')), tdEmpty),
                 tr(td({ colspan: 2 })(p('b1'))),
-                tr(td({})(p('{head}c1')), tdEmpty),
+                tr(td({})(p('{cell>}c1')), tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
 
           expect(isTableSelected(editorView.state.selection)).toBe(true);
         });
       });
       describe('when second column is selected', () => {
         it('should create a rectangular CellSelection', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(tdEmpty, td({})(p('{anchor}a1'))),
+                tr(tdEmpty, td({})(p('{<cell}a1'))),
                 tr(td({ colspan: 2 })(p('b1'))),
-                tr(tdEmpty, td({})(p('{head}c1'))),
+                tr(tdEmpty, td({})(p('{cell>}c1'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
 
           expect(isTableSelected(editorView.state.selection)).toBe(true);
         });
@@ -1172,42 +1031,34 @@ describe('table plugin: utils', () => {
     describe('when table has non-rectangular rpw CellSelection', () => {
       describe('when first row is selected', () => {
         it('should create a rectangular CellSelection', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
                 tr(
-                  td({})(p('{anchor}a1')),
+                  td({})(p('{<cell}a1')),
                   td({ rowspan: 2 })(p('a2')),
-                  td({})(p('{head}a3')),
+                  td({})(p('{cell>}a3')),
                 ),
                 tr(tdEmpty, tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
 
           expect(isTableSelected(editorView.state.selection)).toBe(true);
         });
       });
       describe('when second row is selected', () => {
         it('should create a rectangular CellSelection', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
                 tr(tdEmpty, td({ rowspan: 2 })(p('a2')), tdEmpty),
-                tr(td({})(p('{anchor}b1')), td({})(p('{head}b3'))),
+                tr(td({})(p('{<cell}b1')), td({})(p('{cell>}b3'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
 
           expect(isTableSelected(editorView.state.selection)).toBe(true);
         });

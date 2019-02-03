@@ -6,11 +6,14 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import {
   doc,
   h1,
-  createEditor,
+  createEditorFactory,
   mediaGroup,
   mediaSingle,
   media,
   p,
+  ol,
+  ul,
+  li,
   hr,
   table,
   tr,
@@ -32,6 +35,7 @@ import {
 import { setNodeSelection, setTextSelection } from '../../../../utils';
 import { AnalyticsHandler, analyticsService } from '../../../../analytics';
 import mediaPlugin from '../../../../plugins/media';
+import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
@@ -48,11 +52,22 @@ const getFreshMediaProvider = () =>
     includeUserAuthProvider: true,
   });
 
+const pdfFile = {
+  id: `${randomId()}`,
+  fileName: 'lala.pdf',
+  fileSize: 200,
+  fileMimeType: 'pdf',
+  dimensions: { width: 200, height: 200 },
+  fileId: Promise.resolve('pdf'),
+};
+
 /**
  * Currently skipping these three failing tests
  * TODO: JEST-23 Fix these tests
  */
 describe('Media plugin', () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
+
   const mediaProvider = getFreshMediaProvider();
   const temporaryFileId = `temporary:${randomId()}`;
   const providerFactory = ProviderFactory.create({ mediaProvider });
@@ -62,9 +77,10 @@ describe('Media plugin', () => {
     editorProps = {},
     dropzoneContainer: HTMLElement = document.body,
   ) =>
-    createEditor<MediaPluginState>({
+    createEditor({
       doc,
       editorPlugins: [
+        listPlugin,
         mediaPlugin({
           provider: mediaProvider,
           allowMediaSingle: true,
@@ -538,7 +554,7 @@ describe('Media plugin', () => {
         p(),
       ),
     );
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -601,7 +617,7 @@ describe('Media plugin', () => {
 
     expect(editorView.state.doc).toEqualDocument(doc(p(), p()));
     collectionFromProvider.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -864,7 +880,7 @@ describe('Media plugin', () => {
           ),
         ),
       );
-      editorView.destroy();
+
       pluginState.destroy();
     });
   });
@@ -885,7 +901,7 @@ describe('Media plugin', () => {
         pluginState.removeSelectedMediaContainer();
 
         expect(editorView.state.doc).toEqualDocument(doc(p()));
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
@@ -901,7 +917,7 @@ describe('Media plugin', () => {
         setNodeSelection(editorView, 0);
 
         expect(pluginState.removeSelectedMediaContainer()).toBe(true);
-        editorView.destroy();
+
         pluginState.destroy();
       });
     });
@@ -923,7 +939,7 @@ describe('Media plugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(hr(), mediaGroup(deletingMediaNode())),
         );
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
@@ -939,7 +955,7 @@ describe('Media plugin', () => {
         setNodeSelection(editorView, 0);
 
         expect(pluginState.removeSelectedMediaContainer()).toBe(false);
-        editorView.destroy();
+
         pluginState.destroy();
       });
     });
@@ -960,7 +976,7 @@ describe('Media plugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(p('hello'), mediaGroup(deletingMediaNode())),
         );
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
@@ -1010,7 +1026,7 @@ describe('Media plugin', () => {
       ),
     );
     spy.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -1050,7 +1066,7 @@ describe('Media plugin', () => {
       ),
     );
     collectionFromProvider.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -1089,7 +1105,7 @@ describe('Media plugin', () => {
           p(),
         ),
       );
-      editorView.destroy();
+
       pluginState.destroy();
     });
 
@@ -1128,7 +1144,7 @@ describe('Media plugin', () => {
             ),
           ),
         );
-        editorView.destroy();
+
         pluginState.destroy();
       });
     });
@@ -1477,6 +1493,109 @@ describe('Media plugin', () => {
       pluginState.updateLayout('wrap-right');
 
       expect(subscriber).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('when inserting into a list', () => {
+    it('should insert media group after orderer list', async () => {
+      const listDoc = doc(ol(li(p('text'))));
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ol(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
+    });
+
+    it('should insert media group after unorderer list', async () => {
+      const listDoc = doc(ul(li(p('text'))));
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ul(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
+    });
+
+    it('should insert media in the media group that already exist', async () => {
+      const listDoc = doc(
+        ul(li(p('te{<>}xt'))),
+        mediaGroup(
+          media({
+            id: pdfFile.id,
+            __key: pdfFile.id,
+            type: 'file',
+            __fileMimeType: pdfFile.fileMimeType,
+            __fileName: pdfFile.fileName,
+            __fileSize: pdfFile.fileSize,
+            collection: testCollectionName,
+          })(),
+        ),
+        p(''),
+      );
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ul(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
     });
   });
 });
