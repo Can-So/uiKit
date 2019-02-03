@@ -395,7 +395,7 @@ describe('<ItemViewer />', () => {
         context,
         identifier,
       );
-      expect(createAnalyticsEventSpy).toHaveBeenCalledTimes(4);
+      expect(createAnalyticsEventSpy).toHaveBeenCalledTimes(3);
       expect(createAnalyticsEventSpy).toHaveBeenCalledWith({
         action: 'commenced',
         actionSubject: 'mediaFile',
@@ -476,29 +476,6 @@ describe('<ItemViewer />', () => {
           ...analyticsBaseAttributes,
         },
         eventType: 'operational',
-      });
-    });
-
-    it('should trigger analytics when preview error message is displayed', () => {
-      const context = makeFakeContext(
-        Observable.throw('something bad happened!'),
-      );
-      const { createAnalyticsEventSpy } = mountBaseComponent(
-        context,
-        identifier,
-      );
-      const lastCall = createAnalyticsEventSpy.mock.calls.pop() as any[];
-      expect(lastCall[0]).toEqual({
-        action: 'previewFailed',
-        actionSubject: 'mediaFile',
-        actionSubjectId: '',
-        attributes: {
-          failReason: 'metadataFailed',
-          fileId: '',
-          status: 'fail',
-          ...analyticsBaseAttributes,
-        },
-        eventType: 'screen',
       });
     });
   });

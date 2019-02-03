@@ -89,7 +89,7 @@ export const mediaPreviewFailedEvent = (
         fileId: id,
       };
   return {
-    eventType: 'screen',
+    eventType: 'operational',
     actionSubject: 'mediaFile',
     action: 'previewFailed',
     actionSubjectId: id,
