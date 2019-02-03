@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const analysisServerEndpoint = process.env.ANALYSIS_SERVER_ENDPOINT;
 
-async function main() {
+(async () => {
   try {
     let results = await boltWebpackAnalyzer({
       cwd: process.cwd(),
@@ -33,6 +33,4 @@ async function main() {
     console.error(chalk.red(err));
     process.exit(1);
   }
-}
-
-main();
+})();
