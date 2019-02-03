@@ -26,7 +26,7 @@ describe('Renderer - React/Nodes/BlockCard', () => {
 
   it('should render a <div>-tag', () => {
     node = mount(<BlockCard url={url} />);
-    expect(node.getDOMNode()['tagName']).to.equal('DIV');
+    expect(node.getDOMNode()['tagName']).to.equal('A');
   });
 
   it('should render with url if prop exists', () => {
