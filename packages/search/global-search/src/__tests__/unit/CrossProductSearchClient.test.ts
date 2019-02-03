@@ -23,22 +23,17 @@ import {
   generateRandomJiraProject,
 } from '../../../example-helpers/mockJira';
 
-function apiWillReturn(state: CrossProductSearchResponse) {
-  const opts = {
-    method: 'post',
-    name: 'xpsearch',
-  };
+const DEFAULT_XPSEARCH_OPTS = {
+  method: 'post',
+  name: 'xpsearch',
+};
 
-  fetchMock.mock('localhost/quicksearch/v1', state, opts);
+function apiWillReturn(state: CrossProductSearchResponse) {
+  fetchMock.mock('localhost/quicksearch/v1', state, DEFAULT_XPSEARCH_OPTS);
 }
 
 function experimentApiWillReturn(state: CrossProductExperimentResponse) {
-  const opts = {
-    method: 'post',
-    name: 'xpsearch',
-  };
-
-  fetchMock.mock('localhost/experiment/v1', state, opts);
+  fetchMock.mock('localhost/experiment/v1', state, DEFAULT_XPSEARCH_OPTS);
 }
 
 const abTest: ABTest = {

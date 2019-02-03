@@ -113,7 +113,6 @@ export default class CrossProductSearchClientImpl
     return this.parseResponse(response, searchSession.sessionId);
   }
 
-  // Here
   public async getAbTestData(
     scope: Scope,
     searchSession: SearchSession,
