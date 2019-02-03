@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.11
+- [patch] [be706e55f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be706e55f6):
+
+  - Fixes tableRow validation failure
+
 ## 98.1.10
 - [patch] [e7dcb7ef15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7dcb7ef15):
 
