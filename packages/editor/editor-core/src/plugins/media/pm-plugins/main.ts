@@ -626,8 +626,6 @@ export class MediaPluginState {
     // set new upload params for the pickers
     pickers.forEach(picker => picker.setUploadParams(uploadParams));
 
-    console.log(`picker length ${pickers.length}`);
-
     this.allPickersInitialised = true;
   }
 
