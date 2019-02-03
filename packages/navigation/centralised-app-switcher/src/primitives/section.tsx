@@ -16,7 +16,7 @@ type Props = {
   title: string;
   isAdmin?: boolean;
   isCustom?: boolean;
-  children: React.ReactElement<any>[] | React.ReactElement<any> | null;
+  children: (JSX.Element | null)[] | JSX.Element | null;
 };
 export default ({
   title,
@@ -28,7 +28,7 @@ export default ({
     children,
     child =>
       React.isValidElement(child) &&
-      React.cloneElement(child as React.ReactElement<any>, {
+      React.cloneElement(child as JSX.Element, {
         isAdmin,
         isCustom,
       }),

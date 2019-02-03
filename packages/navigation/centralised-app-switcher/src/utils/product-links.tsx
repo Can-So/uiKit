@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { colors } from '@atlaskit/theme';
 import DiscoverFilledIcon from '@atlaskit/icon/glyph/discover-filled';
 import MarketplaceIcon from '@atlaskit/icon/glyph/marketplace';
@@ -11,8 +12,12 @@ import StrideIcon from '@atlaskit/logo/dist/esm/StrideLogo/Icon';
 import AtlassianIcon from '@atlaskit/logo/dist/esm/AtlassianLogo/Icon';
 import JiraOpsIcon from './assets/jira-ops-logo';
 import PeopleIcon from './assets/people';
-import * as React from 'react';
 import { LicenseInformationDataStructure } from '../providers/types';
+
+enum ProductActivationStatus {
+  ACTIVE = 'ACTIVE',
+  DEACTIVATED = 'DEACTIVATED',
+}
 
 const getLogoIcon = (Icon: React.ReactType): React.ReactType => (
   props: any,
@@ -140,20 +145,29 @@ const getJiraLink = (
 export const getProductLinks = (
   licenseInformationData: LicenseInformationDataStructure,
 ): Array<ProductLink> => {
-  const productLinks = [];
+  const productLinks: Array<ProductLink> = [];
   if (hasAnyJiraProduct(licenseInformationData)) {
     productLinks.push(getJiraLink(licenseInformationData));
   }
-  if (licenseInformationData.products.hasOwnProperty('confluence.ondemand')) {
+  if (
+    licenseInformationData.products.hasOwnProperty('confluence.ondemand') &&
+    licenseInformationData.products['confluence.ondemand'].state ===
+      ProductActivationStatus.ACTIVE
+  ) {
     productLinks.push(
       getProductLink('confluence.ondemand', licenseInformationData.hostname),
     );
   }
-  if (licenseInformationData.products.hasOwnProperty('hipchat.cloud')) {
+  if (
+    licenseInformationData.products.hasOwnProperty('hipchat.cloud') &&
+    licenseInformationData.products['hipchat.cloud'].state ===
+      ProductActivationStatus.ACTIVE
+  ) {
     productLinks.push(
       getProductLink('hipchat.cloud', licenseInformationData.hostname),
     );
   }
+
   return [
     ...productLinks,
     ...getFixedProductLinks(licenseInformationData.hostname),
@@ -184,4 +198,32 @@ export const getAdministrationLinks = (
       link: `${hostname}/admin/s/${cloudId}/billing/addapplication`,
     },
   ];
+};
+
+export const getXSellLink = (
+  licenseInformationData: LicenseInformationDataStructure,
+): ProductLink | null => {
+  if (
+    !licenseInformationData.products.hasOwnProperty('confluence.ondemand') ||
+    licenseInformationData.products['confluence.ondemand'].state ===
+      ProductActivationStatus.DEACTIVATED
+  ) {
+    return getProductLink(
+      'confluence.ondemand',
+      licenseInformationData.hostname,
+    );
+  }
+  if (
+    !licenseInformationData.products.hasOwnProperty(
+      'jira-servicedesk.ondemand',
+    ) ||
+    licenseInformationData.products['jira-servicedesk.ondemand'].state ===
+      ProductActivationStatus.DEACTIVATED
+  ) {
+    return getProductLink(
+      'jira-servicedesk.ondemand',
+      licenseInformationData.hostname,
+    );
+  }
+  return null;
 };

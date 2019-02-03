@@ -46,7 +46,7 @@ const LICENSE_INFORMATION_DATA = {
   maintenanceEndDate: '2017-04-24',
   maintenanceStartDate: '2017-04-17',
   products: {
-    'confluence.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
+    'confluence.ondemand': { billingPeriod: 'ANNUAL', state: 'DEACTIVATED' },
     'hipchat.cloud': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
     'jira-core.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
     'jira-incident-manager.ondemand': {

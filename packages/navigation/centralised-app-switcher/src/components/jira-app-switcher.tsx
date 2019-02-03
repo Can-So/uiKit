@@ -8,15 +8,24 @@ import {
 import { CustomLinksProvider } from '../providers/jira-data-providers';
 import {
   Permissions,
-  RecentContainersProvider,
   LicenseInformationProvider,
   UserPermissionProvider,
 } from '../providers/instance-data-providers';
-import { WithCloudId, RecentContainer, CustomLink } from '../types';
+import { WithCloudId, CustomLink } from '../types';
 import {
   getProductLinks,
   getAdministrationLinks,
+  getXSellLink,
+  ProductLink,
 } from '../utils/product-links';
+import { gridSize } from '@atlaskit/theme';
+import Lozenge from '@atlaskit/lozenge';
+import styled from 'styled-components';
+
+const XSellItemText = styled.span`
+  margin-right: ${gridSize()}px;
+`;
+
 export default ({ cloudId }: WithCloudId) => {
   return (
     // <RecentContainersProvider cloudId={cloudId}>
@@ -40,7 +49,8 @@ export default ({ cloudId }: WithCloudId) => {
                 data: adminPermissionData,
               }) => (
                 <AppSwitcherWrapper>
-                  {adminPermissionData &&
+                  {!isLoadingAdminPermission &&
+                    adminPermissionData &&
                     adminPermissionData.permitted &&
                     licenseInformationData && (
                       <Section title="Administration" isAdmin>
@@ -64,8 +74,8 @@ export default ({ cloudId }: WithCloudId) => {
                     'Loading License Information...'
                   ) : (
                     <Section title="Applications">
-                      {licenseInformationData &&
-                        getProductLinks(licenseInformationData).map(
+                      {licenseInformationData && [
+                        ...getProductLinks(licenseInformationData).map(
                           productData => {
                             const { label, icon, key, link } = productData;
                             return (
@@ -76,7 +86,25 @@ export default ({ cloudId }: WithCloudId) => {
                               >{`${label}`}</AppSwitcherItem>
                             );
                           },
-                        )}
+                        ),
+                        ((
+                          xSellProductLink: ProductLink | null,
+                        ): React.ReactElement<any> | null =>
+                          xSellProductLink && (
+                            <AppSwitcherItem
+                              key={xSellProductLink.key}
+                              icon={xSellProductLink.icon}
+                              href={xSellProductLink.link}
+                            >
+                              <XSellItemText>
+                                {xSellProductLink.label}
+                              </XSellItemText>
+                              <Lozenge appearance="inprogress" isBold>
+                                Try
+                              </Lozenge>
+                            </AppSwitcherItem>
+                          ))(getXSellLink(licenseInformationData)),
+                      ]}
                     </Section>
                   )}
                   {/* {isLoadingRecentContainers ? (

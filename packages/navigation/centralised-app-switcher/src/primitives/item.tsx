@@ -45,7 +45,7 @@ const itemTheme = {
 };
 
 type AppSwitcherItemProps = Props & {
-  children: React.ReactType;
+  children: JSX.Element[] | string;
   key?: string;
 };
 export default ({ isAdmin, isCustom, icon, ...rest }: AppSwitcherItemProps) => (

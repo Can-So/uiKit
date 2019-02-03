@@ -9,6 +9,10 @@ export default class JiraAppSwitcherExample extends Component {
     isDrawerOpen: false,
   };
 
+  componentDidMount() {
+    this.openDrawer();
+  }
+
   openDrawer = () => {
     mockEndpoints('jira');
     this.setState({
