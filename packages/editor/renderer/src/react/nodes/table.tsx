@@ -49,7 +49,7 @@ const addNumberColumnIndexes = rows => {
   });
 };
 
-const getTableWidthLimit = (layout: TableLayout) => {
+const getTableLayoutWidth = (layout: TableLayout) => {
   switch (layout) {
     case 'full-width':
       return akEditorFullWidthLayoutWidth;
@@ -71,7 +71,7 @@ const fixColumnWidth = (
   // We scale up the columns to meet the minimum of the table layout.
   if (zeroWidthColumnsCount === 0) {
     if (scaleDownPercent) {
-      return columnWidth - columnWidth * scaleDownPercent;
+      return (1 - scaleDownPercent) * columnWidth;
     }
     if (tableWidth < layoutWidth) {
       return (columnWidth * (layoutWidth / tableWidth)).toFixed(2);
@@ -120,7 +120,7 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
     }
 
     // @see ED-6056
-    const layoutWidth = getTableWidthLimit(layout);
+    const layoutWidth = getTableLayoutWidth(layout);
     const maxTableWidth = renderWidth < layoutWidth ? renderWidth : layoutWidth;
 
     let tableWidth = 0;
