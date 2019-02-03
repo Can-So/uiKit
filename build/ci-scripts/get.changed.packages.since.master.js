@@ -15,7 +15,7 @@ const packages = require('../utils/packages');
   let changedPackagesRelativePaths = changedPackages.map(
     pkg => pkg.relativeDir,
   );
-  if (process.argv[3].includes('--only')) {
+  if (process.argv[3] && process.argv[3].includes('--only')) {
     const includedPattern = process.argv[3].split('=')[1];
     // We need to include only the component 'packages' for example
     changedPackagesRelativePaths = changedPackagesRelativePaths.filter(pkg =>
