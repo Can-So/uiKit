@@ -19,7 +19,7 @@ export default class PubNubProtocol implements Protocol {
   private lastTimeToken?: string;
   private lastTimeTokenBeforeNetworkDisconnection?: string;
 
-  private config: PubNubProtocolConfig;
+  private config!: PubNubProtocolConfig;
 
   private connectionState: ConnectionState;
 

@@ -49,7 +49,7 @@ export default class PickerFacade {
     this.stateManager = config.stateManager;
   }
 
-  async init() {
+  async init(): Promise<PickerFacade> {
     let picker;
     if (this.pickerType === 'customMediaPicker') {
       picker = this.picker = this.pickerConfig as CustomMediaPicker;
@@ -74,6 +74,8 @@ export default class PickerFacade {
     if (isDropzone(picker) || isClipboard(picker)) {
       picker.activate();
     }
+
+    return this;
   }
 
   get type() {

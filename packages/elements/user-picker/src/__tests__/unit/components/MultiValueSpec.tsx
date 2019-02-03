@@ -6,7 +6,7 @@ import { SizeableAvatar } from '../../../components/SizeableAvatar';
 import { User } from '../../../types';
 import { renderProp } from '../_testUtils';
 
-const mockHtmlElement = (rect: Partial<DOMRect>): HTMLElement =>
+const mockHtmlElement = (rect: Partial<DOMRect>): HTMLDivElement =>
   ({
     getBoundingClientRect: jest.fn(() => rect),
     scrollIntoView: jest.fn(),
@@ -98,16 +98,16 @@ describe('MultiValue', () => {
   });
 
   it('should scroll to open from bottom', () => {
-    const current: HTMLElement = mockHtmlElement({ top: 10, height: 20 });
-    const parent: HTMLElement = mockHtmlElement({ height: 100 });
+    const current = mockHtmlElement({ top: 10, height: 20 });
+    const parent = mockHtmlElement({ height: 100 });
     scrollToValue(current, parent);
     expect(current.scrollIntoView).toHaveBeenCalled();
     expect(current.scrollIntoView).toHaveBeenCalledWith();
   });
 
   it('should scroll to open from top', () => {
-    const current: HTMLElement = mockHtmlElement({ top: 90, height: 20 });
-    const parent: HTMLElement = mockHtmlElement({ height: 100 });
+    const current = mockHtmlElement({ top: 90, height: 20 });
+    const parent = mockHtmlElement({ height: 100 });
     scrollToValue(current, parent);
     expect(current.scrollIntoView).toHaveBeenCalled();
     expect(current.scrollIntoView).toHaveBeenCalledWith(false);

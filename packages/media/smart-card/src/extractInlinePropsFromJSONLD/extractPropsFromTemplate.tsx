@@ -10,7 +10,7 @@ export const buildTemplateIcon: BuildInlineProps<
   InlineCardResolvedViewProps
 > = json => {
   if (json.generator && json.generator['@id'] === CONFLUENCE_GENERATOR_ID) {
-    return { icon: <DocumentFilledIcon label="Confluence" /> };
+    return { icon: <DocumentFilledIcon size="small" label="Confluence" /> };
   }
   return {};
 };

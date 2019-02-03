@@ -22,7 +22,7 @@ import { ProsemirrorGetPosHandler } from '../../../nodeviews';
 import { EditorAppearance } from '../../../types/editor-props';
 import DropPlaceholder, { PlaceholderType } from '../ui/Media/DropPlaceholder';
 import { MediaPluginOptions } from '../media-plugin-options';
-import { insertMediaGroupNode, isNonImagesBanned } from '../utils/media-files';
+import { insertMediaGroupNode } from '../utils/media-files';
 import { removeMediaNode, splitMediaGroup } from '../utils/media-common';
 import PickerFacade, { PickerFacadeConfig } from '../picker-facade';
 import {
@@ -81,6 +81,8 @@ export class MediaPluginState {
   private removeOnCloseListener: () => void = () => {};
 
   private reactContext: () => {};
+
+  public allPickersInitialised = false;
 
   constructor(
     state: EditorState,
@@ -283,13 +285,6 @@ export class MediaPluginState {
     let nonImageAttachments = mediaStates.filter(
       media => !isImage(media.fileMimeType),
     );
-
-    const grandParentNode = this.view.state.selection.$from.node(-1);
-
-    // in case of gap cursor, selection might be at depth=0
-    if (grandParentNode && isNonImagesBanned(grandParentNode)) {
-      nonImageAttachments = [];
-    }
 
     mediaStates.forEach(mediaState => {
       this.stateManager.on(mediaState.id, this.handleMediaState);
@@ -572,50 +567,49 @@ export class MediaPluginState {
 
       if (this.options.customMediaPicker) {
         pickers.push(
-          (this.customPicker = new Picker(
+          (this.customPicker = await new Picker(
             'customMediaPicker',
             pickerFacadeConfig,
             this.options.customMediaPicker,
-          )),
+          ).init()),
         );
-        await this.customPicker.init();
       } else {
         pickers.push(
-          (this.popupPicker = new Picker(
+          (this.popupPicker = await new Picker(
             // Fallback to browser picker for unauthenticated users
             context.config.userAuthProvider ? 'popup' : 'browser',
             pickerFacadeConfig,
             defaultPickerConfig,
-          )),
+          ).init()),
         );
-        await this.popupPicker.init();
 
         pickers.push(
-          (this.binaryPicker = new Picker(
+          (this.binaryPicker = await new Picker(
             'binary',
             pickerFacadeConfig,
             defaultPickerConfig,
-          )),
+          ).init()),
         );
-        await this.binaryPicker.init();
 
         pickers.push(
-          (this.clipboardPicker = new Picker(
+          (this.clipboardPicker = await new Picker(
             'clipboard',
             pickerFacadeConfig,
             defaultPickerConfig,
-          )),
+          ).init()),
         );
-        await this.clipboardPicker.init();
 
         pickers.push(
-          (this.dropzonePicker = new Picker('dropzone', pickerFacadeConfig, {
-            container: this.options.customDropzoneContainer,
-            headless: true,
-            ...defaultPickerConfig,
-          })),
+          (this.dropzonePicker = await new Picker(
+            'dropzone',
+            pickerFacadeConfig,
+            {
+              container: this.options.customDropzoneContainer,
+              headless: true,
+              ...defaultPickerConfig,
+            },
+          ).init()),
         );
-        await this.dropzonePicker.init();
 
         this.dropzonePicker.onDrag(this.handleDrag);
         this.removeOnCloseListener = this.popupPicker.onClose(
@@ -631,6 +625,10 @@ export class MediaPluginState {
 
     // set new upload params for the pickers
     pickers.forEach(picker => picker.setUploadParams(uploadParams));
+
+    console.log(`picker length ${pickers.length}`);
+
+    this.allPickersInitialised = true;
   }
 
   private trackNewMediaEvent(pickerType) {

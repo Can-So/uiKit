@@ -11,6 +11,9 @@ import {
   mediaSingle,
   media,
   p,
+  ol,
+  ul,
+  li,
   hr,
   table,
   tr,
@@ -32,12 +35,11 @@ import {
 import { setNodeSelection, setTextSelection } from '../../../../utils';
 import { AnalyticsHandler, analyticsService } from '../../../../analytics';
 import mediaPlugin from '../../../../plugins/media';
+import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
-import { MediaPicker } from '@atlaskit/media-picker';
-import { ContextFactory } from '@atlaskit/media-core';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -48,6 +50,15 @@ const getFreshMediaProvider = () =>
     stateManager,
     includeUserAuthProvider: true,
   });
+
+const pdfFile = {
+  id: `${randomId()}`,
+  fileName: 'lala.pdf',
+  fileSize: 200,
+  fileMimeType: 'pdf',
+  dimensions: { width: 200, height: 200 },
+  fileId: Promise.resolve('pdf'),
+};
 
 /**
  * Currently skipping these three failing tests
@@ -60,24 +71,6 @@ describe('Media plugin', () => {
   const temporaryFileId = `temporary:${randomId()}`;
   const providerFactory = ProviderFactory.create({ mediaProvider });
 
-  const mediaContext = ContextFactory.create({
-    authProvider: () =>
-      Promise.resolve({
-        token: '',
-        clientId: '',
-        baseUrl: '',
-      }),
-    userAuthProvider: () =>
-      Promise.resolve({
-        token: '',
-        clientId: '',
-        baseUrl: '',
-      }),
-  });
-  const mediaUploadConfig = {
-    uploadParams: {},
-  };
-
   const editor = (
     doc: any,
     editorProps = {},
@@ -86,6 +79,7 @@ describe('Media plugin', () => {
     createEditor({
       doc,
       editorPlugins: [
+        listPlugin,
         mediaPlugin({
           provider: mediaProvider,
           allowMediaSingle: true,
@@ -118,14 +112,7 @@ describe('Media plugin', () => {
   };
 
   const waitForMediaPickerReady = (pluginState: MediaPluginState) =>
-    Promise.all([
-      new Promise(resolve => pluginState.subscribe(resolve)),
-      // MediaPicker('browser', mediaContext, mediaUploadConfig),
-      // MediaPicker('binary', mediaContext, mediaUploadConfig),
-      // MediaPicker('clipboard', mediaContext, mediaUploadConfig),
-      // MediaPicker('dropzone', mediaContext, mediaUploadConfig),
-      // MediaPicker('popup', mediaContext, mediaUploadConfig)
-    ]);
+    new Promise(resolve => pluginState.subscribe(resolve));
 
   afterAll(() => {
     providerFactory.destroy();
@@ -142,9 +129,9 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
 
-    await waitForMediaPickerReady(pluginState);
-    await waitForMediaPickerReady(pluginState);
-    await waitForMediaPickerReady(pluginState);
+    while (!pluginState.allPickersInitialised) {
+      await waitForMediaPickerReady(pluginState);
+    }
 
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
@@ -637,15 +624,12 @@ describe('Media plugin', () => {
     const { pluginState } = editor(doc(h1('text{<>}')));
     expect(pluginState.pickers.length).toBe(0);
 
-    const mediaProvider1 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider1);
-    const mediaProvider2 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider2);
+    await getFreshMediaProvider();
+    await getFreshMediaProvider();
 
-    const resolvedMediaProvider1 = await mediaProvider1;
-    const resolvedMediaProvider2 = await mediaProvider2;
-    await resolvedMediaProvider1.uploadContext;
-    await resolvedMediaProvider2.uploadContext;
+    while (!pluginState.allPickersInitialised) {
+      await waitForMediaPickerReady(pluginState);
+    }
 
     expect(pluginState.pickers.length).toBe(4);
   });
@@ -654,17 +638,21 @@ describe('Media plugin', () => {
     const { pluginState } = editor(doc(h1('text{<>}')));
     expect(pluginState.pickers.length).toBe(0);
 
-    const mediaProvider1 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider1);
-    const resolvedMediaProvider1 = await mediaProvider1;
-    await resolvedMediaProvider1.uploadContext;
+    await getFreshMediaProvider();
+
+    while (!pluginState.allPickersInitialised) {
+      await waitForMediaPickerReady(pluginState);
+    }
+
     const pickersAfterMediaProvider1 = pluginState.pickers;
     expect(pickersAfterMediaProvider1.length).toBe(4);
 
-    const mediaProvider2 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider2);
-    const resolvedMediaProvider2 = await mediaProvider2;
-    await resolvedMediaProvider2.uploadContext;
+    await getFreshMediaProvider();
+
+    while (!pluginState.allPickersInitialised) {
+      await waitForMediaPickerReady(pluginState);
+    }
+
     const pickersAfterMediaProvider2 = pluginState.pickers;
 
     expect(pickersAfterMediaProvider1).toHaveLength(
@@ -712,7 +700,9 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    while (!pluginState.allPickersInitialised) {
+      await waitForMediaPickerReady(pluginState);
+    }
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -755,7 +745,9 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    while (!pluginState.allPickersInitialised) {
+      await waitForMediaPickerReady(pluginState);
+    }
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -793,7 +785,9 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    while (!pluginState.allPickersInitialised) {
+      await waitForMediaPickerReady(pluginState);
+    }
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -817,7 +811,7 @@ describe('Media plugin', () => {
     });
   });
 
-  it.only('should trigger analytics events for picking and binary', async () => {
+  it('should trigger analytics events for picking and binary', async () => {
     const { pluginState } = editor(doc(p('{<>}')));
     const spy = jest.fn();
     analyticsService.handler = spy as AnalyticsHandler;
@@ -829,7 +823,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    while (!pluginState) {
+    while (!pluginState.allPickersInitialised) {
       await waitForMediaPickerReady(pluginState);
     }
 
@@ -1508,6 +1502,109 @@ describe('Media plugin', () => {
       pluginState.updateLayout('wrap-right');
 
       expect(subscriber).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('when inserting into a list', () => {
+    it('should insert media group after orderer list', async () => {
+      const listDoc = doc(ol(li(p('text'))));
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ol(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
+    });
+
+    it('should insert media group after unorderer list', async () => {
+      const listDoc = doc(ul(li(p('text'))));
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ul(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
+    });
+
+    it('should insert media in the media group that already exist', async () => {
+      const listDoc = doc(
+        ul(li(p('te{<>}xt'))),
+        mediaGroup(
+          media({
+            id: pdfFile.id,
+            __key: pdfFile.id,
+            type: 'file',
+            __fileMimeType: pdfFile.fileMimeType,
+            __fileName: pdfFile.fileName,
+            __fileSize: pdfFile.fileSize,
+            collection: testCollectionName,
+          })(),
+        ),
+        p(''),
+      );
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ul(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
     });
   });
 });

@@ -18,7 +18,7 @@ export const buildTaskDescription = (json: any) => {
 };
 
 export const buildTaskLink = (json: any) => {
-  const url = json['@url'] && json['@url'].trim();
+  const url = json.url && json.url.trim();
   return url ? { link: url } : {};
 };
 

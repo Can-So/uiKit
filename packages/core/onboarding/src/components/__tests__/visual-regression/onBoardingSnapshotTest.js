@@ -8,7 +8,7 @@ import {
 const openModalBtn = "[type='button']";
 const modalDialog = "[role='dialog']";
 
-// TODO : https://ecosystem.atlassian.net/browse/AK-5842
+// TODO: https://ecosystem.atlassian.net/browse/AK-5842
 describe.skip('Snapshot Test', () => {
   it('Spotlight different-spotlights should match production example', async () => {
     const url = getExampleUrl(

@@ -20,9 +20,6 @@ export const getCardStatus = (
       if (status === 'complete' && !dataURI) {
         return 'processing';
       }
-      if ((status === 'processing' || status === 'uploading') && dataURI) {
-        return 'complete';
-      }
     } else if (name && size && !disableOverlay && status === 'processing') {
       // If we have enough metadata for non images, we show it
       return 'complete';

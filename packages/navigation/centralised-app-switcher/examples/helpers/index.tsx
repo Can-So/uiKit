@@ -5,6 +5,7 @@ import {
   AppSwitcherItem,
   Section,
   ManageButton,
+  Skeleton,
 } from '../../src/primitives';
 import MockProvider from './mock-provider';
 
@@ -14,15 +15,17 @@ class AppSwitcher extends Component {
       <MockProvider>
         {({ isLoading, data }) =>
           isLoading ? (
-            'Loading...'
+            <Skeleton />
           ) : (
             <AppSwitcherWrapper>
               <Section isAdmin title="First Section">
                 <AppSwitcherItem icon={SettingsIcon}>
-                  {`${data.data} First Item`}
+                  {`${data && data.data} First Item`}
                 </AppSwitcherItem>
-                <AppSwitcherItem>{`${data.data} Second Item`}</AppSwitcherItem>
-                <AppSwitcherItem>{`${data.data} Third Item`}</AppSwitcherItem>
+                <AppSwitcherItem>{`${data &&
+                  data.data} Second Item`}</AppSwitcherItem>
+                <AppSwitcherItem>{`${data &&
+                  data.data} Third Item`}</AppSwitcherItem>
               </Section>
               <Section title="Second Section">
                 <AppSwitcherItem>First Item</AppSwitcherItem>

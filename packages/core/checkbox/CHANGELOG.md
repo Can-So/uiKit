@@ -1,5 +1,10 @@
 # @atlaskit/checkbox
 
+## 5.0.13
+- [patch] [3ae465b6f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ae465b6f0):
+
+  - fix for checkbox logging error on mount
+
 ## 5.0.12
 - [patch] [b0153ee6c9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b0153ee6c9):
 
