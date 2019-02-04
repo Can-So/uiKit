@@ -8,6 +8,7 @@ import { MentionProvider, MentionDescription } from '@atlaskit/mention';
 import { EditorView } from 'prosemirror-view';
 
 describe('mentionTypeahead', () => {
+  const createEditor = createEditorFactory();
   const sessionIdRegex = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
   const mentionProvider = new Promise<any>(resolve => {
     resolve(new MockMentionResource({}));
@@ -15,6 +16,23 @@ describe('mentionTypeahead', () => {
   let editorView: EditorView;
   let sel: number;
   let provider: MentionProvider;
+  let fireCount;
+
+  /**
+   * Sets the editor up to be used in the test suite, using default options
+   * relevant to all tests.
+   *
+   * @param options List of options to add or override when creating the editor.
+   */
+  const setUpEditor = async (options?) => {
+    ({ editorView, sel } = createEditor({
+      doc: doc(p('{<>}')),
+      editorProps: { mentionProvider },
+      providerFactory: ProviderFactory.create({ mentionProvider }),
+      ...options,
+    }));
+    provider = await mentionProvider;
+  };
 
   /**
    * Triggers the mention typeahead in the editor with the provided text to be
@@ -40,24 +58,26 @@ describe('mentionTypeahead', () => {
   };
 
   describe('analytics', () => {
-    const createEditor = createEditorFactory();
-
     let createAnalyticsEvent;
     let event;
 
     beforeEach(async () => {
-      event = { fire: jest.fn().mockName('event.fire') };
+      fireCount = 0;
+      event = {
+        fire: jest
+          .fn()
+          .mockName('event.fire')
+          .mockImplementation(channel => {
+            if (channel === 'fabric-elements') {
+              fireCount++;
+            }
+          }),
+      };
       createAnalyticsEvent = jest
         .fn(() => event)
         .mockName('createAnalyticsEvent');
 
-      ({ editorView, sel } = createEditor({
-        doc: doc(p('{<>}')),
-        editorProps: { mentionProvider },
-        providerFactory: ProviderFactory.create({ mentionProvider }),
-        createAnalyticsEvent,
-      }));
-      provider = await mentionProvider;
+      await setUpEditor({ createAnalyticsEvent });
     });
 
     it('should fire typeahead cancelled event', () => {
@@ -80,7 +100,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(fireCount).toBe(1);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
@@ -88,6 +108,7 @@ describe('mentionTypeahead', () => {
       await triggerMentionTypeahead('here');
 
       event.fire.mockClear();
+      fireCount = 0;
       selectCurrentItem('enter')(editorView.state, editorView.dispatch);
 
       expect(createAnalyticsEvent).toHaveBeenCalledWith(
@@ -109,7 +130,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(fireCount).toBe(1);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
@@ -117,6 +138,7 @@ describe('mentionTypeahead', () => {
       await triggerMentionTypeahead('all');
 
       event.fire.mockClear();
+      fireCount = 0;
       selectCurrentItem()(editorView.state, editorView.dispatch);
 
       expect(createAnalyticsEvent).toHaveBeenCalledWith(
@@ -138,7 +160,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(fireCount).toBe(1);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
@@ -161,7 +183,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(fireCount).toBe(1);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
@@ -184,8 +206,33 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(4);
+      expect(fireCount).toBe(4);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
+    });
+  });
+
+  describe('mentionProvider', () => {
+    describe('when selecting a user', () => {
+      beforeEach(async () => {
+        await setUpEditor();
+      });
+
+      it('should record the selection', async () => {
+        let recordMentionSelectionSpy = jest.spyOn(
+          provider,
+          'recordMentionSelection',
+        );
+        await triggerMentionTypeahead('here');
+
+        selectCurrentItem()(editorView.state, editorView.dispatch);
+
+        expect(recordMentionSelectionSpy).toHaveBeenCalledTimes(1);
+        expect(recordMentionSelectionSpy).toHaveBeenCalledWith(
+          expect.objectContaining({
+            id: 'here',
+          }),
+        );
+      });
     });
   });
 });

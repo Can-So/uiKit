@@ -19,12 +19,12 @@ export class CardLinkView extends React.Component<CardLinkViewProps> {
   };
 
   render() {
-    const { url: text, onClick } = this.props;
+    const { url, onClick } = this.props;
 
     const linkProps = onClick
       ? { onClick: this.handleClick }
-      : { href: text, target: '_blank' };
+      : { href: url, target: '_blank' };
 
-    return <Link {...linkProps}>{text}</Link>;
+    return <Link {...linkProps}>{url}</Link>;
   }
 }
