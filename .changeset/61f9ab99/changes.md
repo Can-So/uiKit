@@ -1,1 +1,0 @@
-- ED-6141: remove broken tables if its not fixable

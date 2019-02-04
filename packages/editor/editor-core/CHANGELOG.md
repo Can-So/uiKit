@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.2.1
+- [patch] [17107bdfb0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/17107bdfb0):
+
+  - ED-6141: remove broken tables if its not fixable
+
 ## 98.2.0
 - [minor] [3fecea2975](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3fecea2975):
 
