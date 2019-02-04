@@ -33,7 +33,7 @@ export interface CrossProductSearchResponse {
 }
 
 export interface CrossProductExperimentResponse {
-  scopes: ExperimentResponse[];
+  scopes: Experiment[];
 }
 
 export type SearchItem = ConfluenceItem | JiraItem | PersonItem;
@@ -51,8 +51,7 @@ export interface ScopeResult {
   abTest?: ABTest; // in case of an error abTest will be undefined
 }
 
-// TODO: See if we can clean up these types a bit to reduce duplication
-export interface ExperimentResponse {
+export interface Experiment {
   id: Scope;
   error?: string;
   abTest?: ABTest;
@@ -128,9 +127,9 @@ export default class CrossProductSearchClientImpl
       body,
     );
 
-    const scopeWithAbTest:
-      | ExperimentResponse
-      | undefined = response.scopes.find(s => s.id === scope);
+    const scopeWithAbTest: Experiment | undefined = response.scopes.find(
+      s => s.id === scope,
+    );
 
     if (scopeWithAbTest) {
       return Promise.resolve(scopeWithAbTest.abTest);
