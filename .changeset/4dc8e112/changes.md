@@ -1,1 +1,0 @@
-- ED-5933 Add analytics plugin to facilitate working with @atlaskit/analytics-next package 
