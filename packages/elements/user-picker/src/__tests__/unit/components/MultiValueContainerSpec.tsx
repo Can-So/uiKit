@@ -59,7 +59,7 @@ describe('MultiValueContainer', () => {
 
       const input = findInput(component);
 
-      expect(input.prop('placeholder')).toBeUndefined();
+      expect(input.prop('placeholder')).toEqual(placeholder);
     },
   );
 
@@ -76,7 +76,7 @@ describe('MultiValueContainer', () => {
     });
     const input = findInput(component);
 
-    expect(input.prop('placeholder')).toEqual('');
+    expect(input.prop('placeholder')).toBeUndefined();
   });
 
   it('should scroll to bottom when adding new items', () => {
