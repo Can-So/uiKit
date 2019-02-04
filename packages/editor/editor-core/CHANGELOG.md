@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.12
+- [patch] [1c62bcce7d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c62bcce7d):
+
+  - Fix a problem with smart cards not appearing sometimes when lazy rendered and lazy loaded after code-split.
+
 ## 98.1.11
 - [patch] [be706e55f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be706e55f6):
 
