@@ -198,10 +198,10 @@ pipelines:
     # This will run with the webdriver tests
     build-webdriver:
       - step:
+          image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
             - HEADLESS=true yarn test:webdriver select
           caches:
             - node
