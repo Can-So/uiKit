@@ -82,8 +82,6 @@ export class MediaPluginState {
 
   private reactContext: () => {};
 
-  public allPickersInitialised = false;
-
   constructor(
     state: EditorState,
     options: MediaPluginOptions,
@@ -625,8 +623,6 @@ export class MediaPluginState {
 
     // set new upload params for the pickers
     pickers.forEach(picker => picker.setUploadParams(uploadParams));
-
-    this.allPickersInitialised = true;
   }
 
   private trackNewMediaEvent(pickerType) {

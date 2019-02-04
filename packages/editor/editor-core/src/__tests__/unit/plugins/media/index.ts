@@ -129,7 +129,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
 
-    while (!pluginState.allPickersInitialised) {
+    while (pluginState.pickers.length < 4) {
       await waitForMediaPickerReady(pluginState);
     }
 
@@ -627,7 +627,7 @@ describe('Media plugin', () => {
     await getFreshMediaProvider();
     await getFreshMediaProvider();
 
-    while (!pluginState.allPickersInitialised) {
+    while (pluginState.pickers.length < 4) {
       await waitForMediaPickerReady(pluginState);
     }
 
@@ -640,7 +640,7 @@ describe('Media plugin', () => {
 
     await getFreshMediaProvider();
 
-    while (!pluginState.allPickersInitialised) {
+    while (pluginState.pickers.length < 4) {
       await waitForMediaPickerReady(pluginState);
     }
 
@@ -649,7 +649,7 @@ describe('Media plugin', () => {
 
     await getFreshMediaProvider();
 
-    while (!pluginState.allPickersInitialised) {
+    while (pluginState.pickers.length < 4) {
       await waitForMediaPickerReady(pluginState);
     }
 
@@ -700,7 +700,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    while (!pluginState.allPickersInitialised) {
+    while (pluginState.pickers.length < 4) {
       await waitForMediaPickerReady(pluginState);
     }
     expect(typeof pluginState.binaryPicker!).toBe('object');
@@ -745,7 +745,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    while (!pluginState.allPickersInitialised) {
+    while (pluginState.pickers.length < 4) {
       await waitForMediaPickerReady(pluginState);
     }
     expect(typeof pluginState.binaryPicker!).toBe('object');
@@ -785,7 +785,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    while (!pluginState.allPickersInitialised) {
+    while (pluginState.pickers.length < 4) {
       await waitForMediaPickerReady(pluginState);
     }
     expect(typeof pluginState.binaryPicker!).toBe('object');
@@ -823,7 +823,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    while (!pluginState.allPickersInitialised) {
+    while (pluginState.pickers.length < 4) {
       await waitForMediaPickerReady(pluginState);
     }
 

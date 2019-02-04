@@ -160,7 +160,7 @@ describe('Media PickerFacade', () => {
 
         const MediaPickerMock = jest
           .fn()
-          .mockImplementation((...args) => Promise.resolve(new MockPopup()));
+          .mockReturnValue(Promise.resolve(new MockPopup()));
 
         stateManager = new DefaultMediaStateManager();
         facade = new PickerFacade(
