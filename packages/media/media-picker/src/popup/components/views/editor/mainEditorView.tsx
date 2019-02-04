@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { BinaryUploader } from '../../../../components/binary';
+import { BinaryUploader } from '../../../../components/types';
 import { State, EditorData, EditorError, FileReference } from '../../../domain';
 import ErrorView from './errorView/errorView';
 import { SpinnerView } from './spinnerView/spinnerView';

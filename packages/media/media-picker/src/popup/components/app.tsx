@@ -54,7 +54,7 @@ import { MediaPickerPopupWrapper, SidebarWrapper, ViewWrapper } from './styled';
 import {
   DropzoneDragEnterEventPayload,
   DropzoneDragLeaveEventPayload,
-} from '../../components/dropzone';
+} from '../../components/types';
 
 export interface AppStateProps {
   readonly selectedServiceName: ServiceName;

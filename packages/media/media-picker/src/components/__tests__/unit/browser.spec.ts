@@ -1,7 +1,8 @@
 jest.mock('../../../service/newUploadServiceImpl');
 
 import { Context, ContextFactory } from '@atlaskit/media-core';
-import { Browser, BrowserImpl, BrowserConfig } from '../../browser';
+import { Browser, BrowserConfig } from '../../types';
+import { BrowserImpl } from '../../browser';
 
 describe('Browser', () => {
   let browser: Browser | undefined;

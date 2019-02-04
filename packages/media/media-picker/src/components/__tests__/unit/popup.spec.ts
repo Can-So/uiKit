@@ -1,7 +1,8 @@
 jest.mock('react-dom');
 import { ContextFactory } from '@atlaskit/media-core';
 import { render } from 'react-dom';
-import { PopupImpl, PopupConfig } from '../../popup';
+import { PopupConfig } from '../../types';
+import { PopupImpl } from '../../popup';
 import { UploadParams } from '../../..';
 
 describe('MediaPickerPopup', () => {

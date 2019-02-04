@@ -3,7 +3,7 @@ import { EventEmitter2 } from 'eventemitter2';
 import { defaultBaseUrl } from '@atlaskit/media-test-helpers';
 import { ContextFactory } from '@atlaskit/media-core';
 import { DropzoneConfig, MediaPicker } from '../../../../index';
-import { Dropzone, DropzoneDragEnterEventPayload } from '../../../dropzone';
+import { Dropzone, DropzoneDragEnterEventPayload } from '../../../types';
 import * as uploadService from '../../../../service/newUploadServiceImpl';
 
 const context = ContextFactory.create({

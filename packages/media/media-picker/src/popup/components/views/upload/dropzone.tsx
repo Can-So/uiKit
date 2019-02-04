@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
 import LocalBrowserButton from './uploadButton';
 import { filesIcon } from '../../../../icons';
-import { Browser } from '../../../../components/browser';
+import { Browser } from '../../../../components/types';
 import {
   ButtonWrapper,
   DefaultImage,

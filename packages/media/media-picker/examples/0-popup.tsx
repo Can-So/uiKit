@@ -34,7 +34,7 @@ import {
   UploadsStartEventPayload,
   UploadStatusUpdateEventPayload,
 } from '../src/domain/uploadEvent';
-import { PopupUploadEventPayloadMap } from '../src/components/popup';
+import { PopupUploadEventPayloadMap } from '../src/components/types';
 import { AuthEnvironment } from '../example-helpers/types';
 
 const context = createStorybookContext();

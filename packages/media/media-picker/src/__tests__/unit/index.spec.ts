@@ -1,10 +1,11 @@
 import { AuthProvider, ContextFactory } from '@atlaskit/media-core';
 import { MediaPicker } from '../..';
-import { PopupConfig, PopupImpl } from '../../components/popup';
+import { PopupImpl } from '../../components/popup';
 import { BinaryUploaderImpl } from '../../components/binary';
 import { BrowserImpl } from '../../components/browser';
 import { ClipboardImpl } from '../../components/clipboard';
 import { DropzoneImpl } from '../../components/dropzone';
+import { PopupConfig } from '../../components/types';
 
 /**
  * These specs should describe the public API.

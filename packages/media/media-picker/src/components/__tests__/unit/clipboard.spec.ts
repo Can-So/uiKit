@@ -2,8 +2,9 @@ jest.mock('../../../service/types');
 
 import { Auth, ContextFactory } from '@atlaskit/media-core';
 import { getMockClipboardEvent, MockFile } from '@atlaskit/media-test-helpers';
-import { Clipboard, ClipboardImpl } from '../../clipboard';
+import { ClipboardImpl } from '../../clipboard';
 import { UploadService, LocalFileSource } from '../../../service/types';
+import { Clipboard } from '../../types';
 
 const MockClipboardEvent = getMockClipboardEvent();
 /**
