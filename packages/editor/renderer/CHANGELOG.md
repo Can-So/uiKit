@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 38.0.3
+- [patch] [a1ad76375d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1ad76375d):
+
+  - ED-6123: scale down table columns by 15if table is bigger than renderer width
+
 ## 38.0.2
 - [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
 
