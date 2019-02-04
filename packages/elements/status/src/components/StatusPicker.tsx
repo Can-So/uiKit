@@ -44,6 +44,8 @@ export class StatusPicker extends PureComponent<Props, any> {
             onKeyPress={this.onKeyPress}
             compact={true}
             innerRef={this.handleInputRef}
+            autoComplete="off"
+            isSpellCheckEnabled={false}
           />
         </FieldTextWrapper>
         <ColorPalette
