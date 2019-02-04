@@ -3,11 +3,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass, ImgHTMLAttributes } from 'react';
-import {
-  akColorB200,
-  akBorderRadius,
-  akGridSizeUnitless,
-} from '@atlaskit/util-shared-styles';
+import { colors, borderRadius, gridSize } from '@atlaskit/theme';
 
 export interface AvatarImageProps {
   isSelected: boolean;
@@ -16,12 +12,12 @@ export interface AvatarImageProps {
 const AvatarImage: ComponentClass<
   ImgHTMLAttributes<{}> & AvatarImageProps
 > = styled.img`
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
   cursor: pointer;
   ${({ isSelected }: AvatarImageProps) =>
     isSelected
       ? `
-    box-shadow: 0px 0px 0px 1px white, 0px 0px 0px 3px ${akColorB200};
+    box-shadow: 0px 0px 0px 1px white, 0px 0px 0px 3px ${colors.B200};
   `
       : ''};
 `;
@@ -29,15 +25,15 @@ const AvatarImage: ComponentClass<
 export const LargeAvatarImage: ComponentClass<
   ImgHTMLAttributes<{}> & AvatarImageProps
 > = styled(AvatarImage)`
-  width: ${akGridSizeUnitless * 9}px;
-  height: ${akGridSizeUnitless * 9}px;
+  width: ${gridSize() * 9}px;
+  height: ${gridSize() * 9}px;
 `;
 
 export const SmallAvatarImage: ComponentClass<
   ImgHTMLAttributes<{}> & AvatarImageProps
 > = styled(AvatarImage)`
-  width: ${akGridSizeUnitless * 5}px;
-  height: ${akGridSizeUnitless * 5}px;
+  width: ${gridSize() * 5}px;
+  height: ${gridSize() * 5}px;
 `;
 
 export const PredefinedAvatarViewWrapper: ComponentClass<

@@ -8,7 +8,7 @@ import {
   ImgHTMLAttributes,
   ButtonHTMLAttributes,
 } from 'react';
-import { akBorderRadius, akColorN50A } from '@atlaskit/util-shared-styles';
+import { borderRadius, colors } from '@atlaskit/theme';
 
 // Using module augmentation to add crossOrigin attribute as it does not exist yet, PR has been opened in
 // DefinitelyTyped for it
@@ -28,7 +28,7 @@ declare module 'react' {
 export const Container: ComponentClass<HTMLAttributes<{}>> = styled.div`
   position: relative;
   overflow: hidden;
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
 `;
 
 export const Image: ComponentClass<ImgHTMLAttributes<{}>> = styled.img`
@@ -38,7 +38,7 @@ export const Image: ComponentClass<ImgHTMLAttributes<{}>> = styled.img`
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
 `;
 
 export const containerPadding = 28;
@@ -53,7 +53,7 @@ const Mask: ComponentClass<HTMLAttributes<{}>> = styled.div`
 `;
 
 export const RectMask: ComponentClass<HTMLAttributes<{}>> = styled(Mask)`
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
 `;
 
 export const CircularMask: ComponentClass<HTMLAttributes<{}>> = styled(Mask)`
@@ -78,7 +78,7 @@ export const RemoveImageContainer: ComponentClass<
 export const RemoveImageButton: ComponentClass<
   ButtonHTMLAttributes<{}>
 > = styled.button`
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
   background-color: transparent;
   width: 24px;
   height: 24px;
@@ -93,6 +93,6 @@ export const RemoveImageButton: ComponentClass<
   }
 
   &:hover {
-    background-color: ${akColorN50A};
+    background-color: ${colors.N50A};
   }
 `;
