@@ -201,6 +201,7 @@ pipelines:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
+            - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
             - HEADLESS=true yarn test:webdriver select
           caches:
             - node
