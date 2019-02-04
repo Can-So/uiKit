@@ -1,0 +1,1 @@
+- Fix a problem with smart cards not appearing sometimes when lazy rendered and lazy loaded after code-split.
