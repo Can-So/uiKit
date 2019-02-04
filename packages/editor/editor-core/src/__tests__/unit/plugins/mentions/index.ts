@@ -16,6 +16,7 @@ describe('mentionTypeahead', () => {
   let editorView: EditorView;
   let sel: number;
   let provider: MentionProvider;
+  let fireCount;
 
   /**
    * Sets the editor up to be used in the test suite, using default options
@@ -61,7 +62,17 @@ describe('mentionTypeahead', () => {
     let event;
 
     beforeEach(async () => {
-      event = { fire: jest.fn().mockName('event.fire') };
+      fireCount = 0;
+      event = {
+        fire: jest
+          .fn()
+          .mockName('event.fire')
+          .mockImplementation(channel => {
+            if (channel === 'fabric-elements') {
+              fireCount++;
+            }
+          }),
+      };
       createAnalyticsEvent = jest
         .fn(() => event)
         .mockName('createAnalyticsEvent');
@@ -89,7 +100,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(fireCount).toBe(1);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
@@ -97,6 +108,7 @@ describe('mentionTypeahead', () => {
       await triggerMentionTypeahead('here');
 
       event.fire.mockClear();
+      fireCount = 0;
       selectCurrentItem('enter')(editorView.state, editorView.dispatch);
 
       expect(createAnalyticsEvent).toHaveBeenCalledWith(
@@ -118,7 +130,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(fireCount).toBe(1);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
@@ -126,6 +138,7 @@ describe('mentionTypeahead', () => {
       await triggerMentionTypeahead('all');
 
       event.fire.mockClear();
+      fireCount = 0;
       selectCurrentItem()(editorView.state, editorView.dispatch);
 
       expect(createAnalyticsEvent).toHaveBeenCalledWith(
@@ -147,7 +160,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(fireCount).toBe(1);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
@@ -170,7 +183,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(fireCount).toBe(1);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
@@ -193,7 +206,7 @@ describe('mentionTypeahead', () => {
           }),
         }),
       );
-      expect(event.fire).toHaveBeenCalledTimes(4);
+      expect(fireCount).toBe(4);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
   });

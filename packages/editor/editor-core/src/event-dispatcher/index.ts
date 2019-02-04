@@ -3,16 +3,16 @@ import { PluginKey } from 'prosemirror-state';
 export interface Listeners {
   [name: string]: Listener[];
 }
-export type Listener = (data: any) => void;
+export type Listener<T = any> = (data: T) => void;
 export type Dispatch<T = any> = (
   eventName: PluginKey | string,
   data: T,
 ) => void;
 
-export class EventDispatcher {
+export class EventDispatcher<T = any> {
   private listeners: Listeners = {};
 
-  on(event: string, cb: Listener): void {
+  on(event: string, cb: Listener<T>): void {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -20,7 +20,7 @@ export class EventDispatcher {
     this.listeners[event].push(cb);
   }
 
-  off(event: string, cb: Listener): void {
+  off(event: string, cb: Listener<T>): void {
     if (!this.listeners[event]) {
       return;
     }
@@ -30,7 +30,7 @@ export class EventDispatcher {
     );
   }
 
-  emit(event: string, data: any): void {
+  emit(event: string, data: T): void {
     if (!this.listeners[event]) {
       return;
     }
@@ -47,8 +47,10 @@ export class EventDispatcher {
  * Creates a dispatch function that can be called inside ProseMirror Plugin
  * to notify listeners about that plugin's state change.
  */
-export function createDispatch(eventDispatcher: EventDispatcher): Dispatch {
-  return (eventName: PluginKey | string, data: any) => {
+export function createDispatch<T>(
+  eventDispatcher: EventDispatcher<T>,
+): Dispatch<T> {
+  return (eventName: PluginKey | string, data: T) => {
     if (!eventName) {
       throw new Error('event name is required!');
     }

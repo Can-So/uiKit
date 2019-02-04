@@ -9,6 +9,7 @@ import {
   InsertMenuCustomItem,
 } from '../types';
 import { CollabEditOptions } from '../plugins/collab-edit';
+import { AnalyticsEventPayload } from '../plugins/analytics';
 
 export interface EditorAppearanceComponentProps {
   onUiReady?: (ref) => void;
@@ -21,6 +22,7 @@ export interface EditorAppearanceComponentProps {
   editorView?: EditorView;
 
   eventDispatcher?: EventDispatcher;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 
   maxHeight?: number;
 

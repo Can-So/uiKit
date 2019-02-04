@@ -9,6 +9,12 @@ import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
 import { EventDispatcher, createDispatch } from '../event-dispatcher';
 import { processRawValue } from '../utils';
 import createPluginList from './create-plugins-list';
+import {
+  analyticsEventKey,
+  fireAnalyticsEvent,
+  AnalyticsDispatch,
+  AnalyticsEventPayload,
+} from '../plugins/analytics';
 import { EditorProps, EditorConfig, EditorPlugin } from '../types';
 import { PortalProviderAPI } from '../ui/PortalProvider';
 import {
@@ -36,6 +42,7 @@ export interface EditorViewProps {
       config: EditorConfig;
       eventDispatcher: EventDispatcher;
       transformer?: Transformer<string>;
+      dispatchAnalyticsEvent: (payload: AnalyticsEventPayload) => void;
     },
   ) => JSX.Element;
   onEditorCreated: (
@@ -64,6 +71,9 @@ export default class ReactEditorView<T = {}> extends React.Component<
   contentTransformer?: Transformer<string>;
   config: EditorConfig;
   editorState: EditorState;
+  analyticsEventHandler: (
+    { payload, channel }: { payload: AnalyticsEventPayload; channel?: string },
+  ) => void;
 
   static contextTypes = {
     getAtlaskitAnalyticsEventHandlers: PropTypes.func,
@@ -73,9 +83,23 @@ export default class ReactEditorView<T = {}> extends React.Component<
   constructor(props: EditorViewProps & T) {
     super(props);
 
-    initAnalytics(props.editorProps.analyticsHandler);
-
     this.editorState = this.createEditorState({ props, replaceDoc: true });
+
+    const { createAnalyticsEvent } = props;
+    if (createAnalyticsEvent) {
+      this.analyticsEventHandler = fireAnalyticsEvent(createAnalyticsEvent);
+      this.eventDispatcher.on(analyticsEventKey, this.analyticsEventHandler);
+    }
+
+    this.eventDispatcher.emit(analyticsEventKey, {
+      payload: {
+        action: 'started',
+        actionSubject: 'editor',
+        attributes: { platform: 'web' },
+        eventType: 'ui',
+      },
+    });
+    initAnalytics(props.editorProps.analyticsHandler);
   }
 
   private broadcastDisabled = (disabled: boolean) => {
@@ -100,6 +124,15 @@ export default class ReactEditorView<T = {}> extends React.Component<
       this.view.setProps({
         editable: state => !nextProps.editorProps.disabled,
       } as DirectEditorProps);
+    }
+
+    if (nextProps.createAnalyticsEvent !== this.props.createAnalyticsEvent) {
+      this.eventDispatcher.off(analyticsEventKey, this.analyticsEventHandler);
+
+      this.analyticsEventHandler = fireAnalyticsEvent(
+        nextProps.createAnalyticsEvent,
+      );
+      this.eventDispatcher.on(analyticsEventKey, this.analyticsEventHandler);
     }
   }
 
@@ -268,6 +301,15 @@ export default class ReactEditorView<T = {}> extends React.Component<
     }
   };
 
+  dispatchAnalyticsEvent = (payload: AnalyticsEventPayload): void => {
+    if (this.eventDispatcher) {
+      const dispatch: AnalyticsDispatch = createDispatch(this.eventDispatcher);
+      dispatch(analyticsEventKey, {
+        payload,
+      });
+    }
+  };
+
   render() {
     const editor = <div key="ProseMirror" ref={this.handleEditorViewRef} />;
     return this.props.render
@@ -277,6 +319,7 @@ export default class ReactEditorView<T = {}> extends React.Component<
           config: this.config,
           eventDispatcher: this.eventDispatcher,
           transformer: this.contentTransformer,
+          dispatchAnalyticsEvent: this.dispatchAnalyticsEvent,
         })
       : editor;
   }
