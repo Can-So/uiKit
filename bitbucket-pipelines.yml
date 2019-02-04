@@ -194,16 +194,16 @@ pipelines:
             - node ./scripts/uploadBundleAnalyticsEvent.js
           caches:
             - node
-    # https://hello.atlassian.net/servicedesk/customer/portal/2/ADM-208362
+   
     # This will run with the webdriver tests
-    # build-webdriver:
-    #   - step:
-    #       script:
-    #         - source ./build-setup.sh
-    #         - bolt install --pure-lockfile
-    #         - yarn test:webdriver:browserstack
-    #       caches:
-    #         - node
+    build-webdriver:
+      - step:
+          script:
+            - source ./build-setup.sh
+            - bolt install --pure-lockfile
+            - yarn test:webdriver
+          caches:
+            - node
             
     # This will run with the visual regression tool
     build-visual-regression:
