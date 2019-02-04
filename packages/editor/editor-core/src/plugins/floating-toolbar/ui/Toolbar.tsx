@@ -22,9 +22,9 @@ export interface Props {
   popupsMountPoint?: HTMLElement;
   popupsBoundariesElement?: HTMLElement;
   popupsScrollableElement?: HTMLElement;
-  providerFactory: ProviderFactory;
+  providerFactory?: ProviderFactory;
   className?: string;
-  focusEditor: () => void;
+  focusEditor?: () => void;
 }
 
 const ToolbarContainer = styled.div`
@@ -110,7 +110,7 @@ export default class Toolbar extends Component<Props> {
                       key={idx}
                       onSubmit={(href, text) => {
                         dispatchCommand(item.onSubmit(href, text));
-                        focusEditor();
+                        focusEditor && focusEditor();
                       }}
                       providerFactory={item.providerFactory}
                       onBlur={value => dispatchCommand(item.onBlur(value))}

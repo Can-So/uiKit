@@ -24,11 +24,6 @@ describe('hyperlink', () => {
     });
   };
 
-  it('should not show toolbar in message editor', () => {
-    const props = { appearance: 'message' } as any;
-    expect(hyperlinkEditorPlugin.contentComponent!(props)).toBe(null);
-  });
-
   describe('link mark behaviour', () => {
     it('should not change the link text when typing text before a link', () => {
       const { editorView, sel } = editor(

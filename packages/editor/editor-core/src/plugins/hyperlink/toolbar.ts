@@ -1,5 +1,9 @@
 import { defineMessages } from 'react-intl';
-import { FloatingToolbarHandler } from '../floating-toolbar/types';
+import {
+  FloatingToolbarHandler,
+  FloatingToolbarItem,
+  AlignType,
+} from '../floating-toolbar/types';
 import OpenIcon from '@atlaskit/icon/glyph/editor/open';
 import UnlinkIcon from '@atlaskit/icon/glyph/editor/unlink';
 
@@ -13,6 +17,7 @@ import {
 } from './commands';
 import { normalizeUrl } from './utils';
 import RecentList from './ui/RecentSearch';
+import { Command } from '../../types';
 
 export const messages = defineMessages({
   openLink: {
@@ -27,7 +32,7 @@ export const messages = defineMessages({
   },
 });
 
-const showTextToolbar = (text, pos) => {
+const showTextToolbar = (text, pos): Array<FloatingToolbarItem<Command>> => {
   return [
     {
       type: 'input',
@@ -38,7 +43,10 @@ const showTextToolbar = (text, pos) => {
   ];
 };
 
-const showLinkEditToolbar = (link, pos) => {
+const showLinkEditToolbar = (
+  link,
+  pos,
+): Array<FloatingToolbarItem<Command>> => {
   return [
     {
       type: 'input',
@@ -71,7 +79,7 @@ export const getToolbarConfig: FloatingToolbarHandler = (
     const hyperLinkToolbar = {
       title: 'Hyperlink floating controls',
       nodeType: state.schema.nodes.paragraph,
-      align: 'left',
+      align: 'left' as AlignType,
       className:
         activeLinkMark.type === 'INSERT' ? 'hyperlink-floating-toolbar' : '',
     };
@@ -100,6 +108,7 @@ export const getToolbarConfig: FloatingToolbarHandler = (
               icon: OpenIcon,
               target: '_blank',
               href: link,
+              onClick: () => true,
               selected: false,
               title: labelOpenLink,
             },
@@ -115,7 +124,7 @@ export const getToolbarConfig: FloatingToolbarHandler = (
       }
 
       case 'INSERT': {
-        const { from, to } = linkState.activeLinkMark;
+        const { from, to } = activeLinkMark;
         return {
           ...hyperLinkToolbar,
           items: [

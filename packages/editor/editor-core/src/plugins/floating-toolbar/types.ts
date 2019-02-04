@@ -13,6 +13,8 @@ import React from 'react';
 export type Icon = React.ComponentType<{ label: string }>;
 export type RenderOptionsProps = RenderOptionsPropsT<Command>;
 
+export type AlignType = 'left' | 'center' | 'right';
+
 export type FloatingToolbarButton<T> = {
   type: 'button';
   title: string;
@@ -43,6 +45,7 @@ export type FloatingToolbarCustom<T> = {
   onBlur: (...args: any[]) => any;
   Component: React.ComponentClass<any>;
   providerFactory: ProviderFactory;
+  hidden?: boolean;
 };
 
 export type FloatingToolbarSelect<T> = {
@@ -92,7 +95,7 @@ export interface FloatingToolbarConfig {
   visible?: boolean;
   nodeType: NodeType | NodeType[];
   items: Array<FloatingToolbarItem<Command>>;
-  align?: 'left' | 'center' | 'right';
+  align?: AlignType;
   className?: string;
 }
 
