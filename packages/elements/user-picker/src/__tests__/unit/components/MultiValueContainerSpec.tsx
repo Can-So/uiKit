@@ -59,7 +59,7 @@ describe('MultiValueContainer', () => {
 
       const input = findInput(component);
 
-      expect(input.prop('placeholder')).toEqual(placeholder);
+      expect(input.prop('placeholder')).toBeUndefined();
     },
   );
 
