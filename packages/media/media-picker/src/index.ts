@@ -1,24 +1,26 @@
+export {
+  DropzoneUploadEventPayloadMap,
+  PopupUploadEventPayloadMap,
+} from './components/types';
+
 import {
   BinaryUploader,
   BinaryUploaderConstructor,
   BinaryConfig,
-} from './components/binary';
-import {
   Browser,
   BrowserConfig,
   BrowserConstructor,
-} from './components/browser';
-import {
-  Clipboard,
   ClipboardConstructor,
   ClipboardConfig,
-} from './components/clipboard';
-import {
-  Dropzone,
+  Clipboard,
+  Popup,
+  PopupConfig,
+  PopupConstructor,
   DropzoneConfig,
   DropzoneConstructor,
-} from './components/dropzone';
-import { Popup, PopupConfig, PopupConstructor } from './components/popup';
+  Dropzone,
+} from './components/types';
+
 import { Context } from '@atlaskit/media-core';
 
 export const isBinaryUploader = (
@@ -37,9 +39,6 @@ export const isPopup = (component: any): component is Popup =>
   ['show', 'cancel', 'teardown', 'hide'].every(
     (prop: string) => prop in component,
   );
-
-export { DropzoneUploadEventPayloadMap } from './components/dropzone';
-export { PopupUploadEventPayloadMap } from './components/popup';
 
 // Events public API and types
 export {

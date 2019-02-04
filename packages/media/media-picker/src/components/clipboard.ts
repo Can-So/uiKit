@@ -1,15 +1,10 @@
 import { Context } from '@atlaskit/media-core';
 
-import { LocalUploadComponent, LocalUploadConfig } from './localUpload';
+import { LocalUploadComponent } from './localUpload';
 import { whenDomReady } from '../util/documentReady';
 import { appendTimestamp } from '../util/appendTimestamp';
 import { LocalFileSource, LocalFileWithSource } from '../service/types';
-
-export interface ClipboardConfig extends LocalUploadConfig {}
-
-export interface ClipboardConstructor {
-  new (context: Context, clipboardConfig: ClipboardConfig): Clipboard;
-}
+import { Clipboard, ClipboardConfig } from './types';
 
 export const getFilesFromClipboard = (files: FileList) => {
   return Array.from(files).map(file => {
@@ -24,10 +19,6 @@ export const getFilesFromClipboard = (files: FileList) => {
   });
 };
 
-export interface Clipboard extends LocalUploadComponent {
-  activate(): Promise<void>;
-  deactivate(): void;
-}
 export class ClipboardImpl extends LocalUploadComponent implements Clipboard {
   constructor(
     context: Context,

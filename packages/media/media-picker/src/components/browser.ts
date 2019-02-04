@@ -1,19 +1,8 @@
-import { LocalUploadComponent, LocalUploadConfig } from './localUpload';
+import { LocalUploadComponent } from './localUpload';
 import { Context } from '@atlaskit/media-core';
 import * as exenv from 'exenv';
-export interface BrowserConfig extends LocalUploadConfig {
-  readonly multiple?: boolean;
-  readonly fileExtensions?: Array<string>;
-}
+import { Browser, BrowserConfig } from './types';
 
-export interface BrowserConstructor {
-  new (context: Context, browserConfig: BrowserConfig): Browser;
-}
-
-export interface Browser extends LocalUploadComponent {
-  browse(): void;
-  teardown(): void;
-}
 export class BrowserImpl extends LocalUploadComponent implements Browser {
   private readonly browseElement: HTMLInputElement;
 

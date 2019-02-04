@@ -11,41 +11,17 @@ import { getFilesInRecents } from '../popup/actions/getFilesInRecents';
 import { State } from '../popup/domain';
 import { hidePopup } from '../popup/actions/hidePopup';
 import { createStore } from '../store';
-import { UploadComponent, UploadEventEmitter } from './component';
+import { UploadComponent } from './component';
 
 import { defaultUploadParams } from '../domain/uploadParams';
 import { UploadParams } from '../domain/config';
-import { UploadEventPayloadMap } from '../domain/uploadEvent';
-import { EventEmitter } from '../util/eventEmitter';
-import { LocalUploadConfig } from './localUpload';
+import {
+  PopupUploadEventPayloadMap,
+  Popup,
+  PopupUploadEventEmitter,
+  PopupConfig,
+} from './types';
 
-export interface PopupConfig extends LocalUploadConfig {
-  readonly container?: HTMLElement;
-  readonly proxyReactContext?: AppProxyReactContext;
-  readonly singleSelect?: boolean;
-}
-
-export interface PopupConstructor {
-  new (context: Context, config: PopupConfig): Popup;
-}
-
-export type PopupUploadEventPayloadMap = UploadEventPayloadMap & {
-  readonly closed: undefined;
-};
-
-export interface PopupUploadEventEmitter extends UploadEventEmitter {
-  emitClosed(): void;
-}
-export interface Popup
-  extends UploadEventEmitter,
-    EventEmitter<PopupUploadEventPayloadMap> {
-  show(): Promise<void>;
-  cancel(uniqueIdentifier?: string | Promise<string>): Promise<void>;
-  teardown(): void;
-  hide(): void;
-  setUploadParams(uploadParams: UploadParams): void;
-  emitClosed(): void;
-}
 export class PopupImpl extends UploadComponent<PopupUploadEventPayloadMap>
   implements PopupUploadEventEmitter, Popup {
   private readonly container?: HTMLElement;

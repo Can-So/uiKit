@@ -12,18 +12,7 @@ import {
 import { UploadComponent } from './component';
 import { UploadParams } from '../domain/config';
 import { NewUploadServiceImpl } from '../service/newUploadServiceImpl';
-
-export interface LocalUploadConfig {
-  uploadParams: UploadParams; // This is tenant upload params
-  shouldCopyFileToRecents?: boolean;
-}
-
-export interface LocalUploadComponent<
-  M extends UploadEventPayloadMap = UploadEventPayloadMap
-> extends UploadComponent<M> {
-  cancel(uniqueIdentifier?: string): void;
-  setUploadParams(uploadParams: UploadParams): void;
-}
+import { LocalUploadConfig } from './types';
 
 export class LocalUploadComponent<
   M extends UploadEventPayloadMap = UploadEventPayloadMap

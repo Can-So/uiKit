@@ -1,44 +1,19 @@
 import { Context } from '@atlaskit/media-core';
-import { IntlProvider, InjectedIntl } from 'react-intl';
-import { LocalUploadComponent, LocalUploadConfig } from '../localUpload';
+import { IntlProvider } from 'react-intl';
+import { LocalUploadComponent } from '../localUpload';
 import { whenDomReady } from '../../util/documentReady';
 import dropzoneUI from './dropzoneUI';
-import { UploadEventPayloadMap } from '../..';
-
-export interface DropzoneReactContext {
-  intl?: InjectedIntl;
-}
-export interface DropzoneConfig extends LocalUploadConfig {
-  container?: HTMLElement;
-  headless?: boolean;
-  proxyReactContext?: DropzoneReactContext;
-}
-
-export interface DropzoneConstructor {
-  new (context: Context, dropzoneConfig: DropzoneConfig): Dropzone;
-}
-
-export interface DropzoneDragEnterEventPayload {
-  length: number;
-}
-
-export interface DropzoneDragLeaveEventPayload {
-  length: number;
-}
-
-export type DropzoneUploadEventPayloadMap = UploadEventPayloadMap & {
-  readonly drop: undefined;
-  readonly 'drag-enter': DropzoneDragEnterEventPayload;
-  readonly 'drag-leave': DropzoneDragLeaveEventPayload;
-};
+import {
+  DropzoneReactContext,
+  DropzoneUploadEventPayloadMap,
+  DropzoneConfig,
+  DropzoneDragEnterEventPayload,
+  DropzoneDragLeaveEventPayload,
+  Dropzone,
+} from '../types';
 
 const toArray = (arr: any) => [].slice.call(arr, 0);
 
-export interface Dropzone
-  extends LocalUploadComponent<DropzoneUploadEventPayloadMap> {
-  activate(): Promise<void>;
-  deactivate(): void;
-}
 export class DropzoneImpl
   extends LocalUploadComponent<DropzoneUploadEventPayloadMap>
   implements Dropzone {
