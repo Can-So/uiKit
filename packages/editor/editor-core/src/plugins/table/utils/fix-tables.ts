@@ -1,6 +1,6 @@
 import { Transaction } from 'prosemirror-state';
 import { Node as PMNode } from 'prosemirror-model';
-
+import { sendLogs } from '../../../utils/sendLogs';
 import { parseDOMColumnWidths } from '../utils';
 
 const fixTable = (
@@ -51,13 +51,31 @@ const fixTable = (
           }
         }
         // re-create the row with decremented rowspans @see ED-5802
-        rows[j] = row.type.createChecked(row.attrs, cells, row.marks);
+        if (cells.length) {
+          rows[j] = row.type.createChecked(row.attrs, cells, row.marks);
+        }
       }
     }
   }
 
+  // remove the table if it's not fixable
   if (!rows.length) {
-    return tr;
+    // ED-6141: send analytics event
+    sendLogs({
+      events: [
+        {
+          name: 'atlaskit.fabric.editor.fixtable',
+          product: 'atlaskit',
+          properties: {
+            message: 'Delete table with empty rows',
+          },
+          serverTime: new Date().getTime(),
+          server: 'local',
+          user: '-',
+        },
+      ],
+    });
+    return tr.delete(tablePos, tablePos + table.nodeSize);
   }
 
   const newTable = table.type.createChecked(table.attrs, rows, table.marks);

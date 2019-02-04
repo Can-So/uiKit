@@ -71,4 +71,15 @@ describe('fix tables', () => {
       );
     });
   });
+
+  describe('when document contains a table with empty rows', () => {
+    it('should remove the table node', () => {
+      global['fetch'] = jest.fn();
+
+      const { editorView } = editor(doc(p('one'), table()(tr()), p('two')));
+
+      expect(editorView.state.doc).toEqualDocument(doc(p('one'), p('two')));
+      expect(global['fetch']).toHaveBeenCalled();
+    });
+  });
 });
