@@ -129,12 +129,13 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
         os_version: '8.1',
         browser_version: '11',
       },
-      iphone: {
-        os: 'ios',
-        os_version: '11.0',
-        device: 'iPhone 8',
-        real_mobile: true,
-      },
+      // Browserstack longer supports emulators or simulators adn our plan does not allow us to test on real devices.
+      // iphone: {
+      //   os: 'ios',
+      //   os_version: '11.0',
+      //   device: 'iPhone 8',
+      //   real_mobile: false,
+      // },
       chrome_latest_osx: {
         browser: 'chrome',
         os: 'OS X',
