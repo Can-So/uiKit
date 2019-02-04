@@ -1,1 +1,0 @@
-- ED-6123: scale down table columns by 15if table is bigger than renderer width
