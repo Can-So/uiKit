@@ -1,6 +1,6 @@
 import { Transaction } from 'prosemirror-state';
 import { Node as PMNode } from 'prosemirror-model';
-
+import { sendLogs } from '../../../utils/sendLogs';
 import { parseDOMColumnWidths } from '../utils';
 
 const fixTable = (
@@ -60,6 +60,21 @@ const fixTable = (
 
   // remove the table if it's not fixable
   if (!rows.length) {
+    // ED-6141: send analytics event
+    sendLogs({
+      events: [
+        {
+          name: 'atlaskit.fabric.editor.fixtable',
+          product: 'atlaskit',
+          properties: {
+            message: 'Delete table with empty rows',
+          },
+          serverTime: new Date().getTime(),
+          server: 'local',
+          user: '-',
+        },
+      ],
+    });
     return tr.delete(tablePos, tablePos + table.nodeSize);
   }
 
