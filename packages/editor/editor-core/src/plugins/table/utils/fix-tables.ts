@@ -82,10 +82,37 @@ const fixTable = (
   return tr.replaceWith(tablePos, tablePos + table.nodeSize, newTable);
 };
 
+// We attempt to patch the document when we have extra, unneeded, column widths
+// Take this node for example:
+//
+//    ['td', { colwidth: [100, 100, 100], colspan: 2 }]
+//
+// This row only spans two columns, yet it contains widths for 3.
+// We remove the third width here, assumed duplicate content.
+export const removeExtraneousColumnWidths = (node, basePos, tr) => {
+  return replaceCells(tr, node, basePos, cell => {
+    const { colwidth, colspan } = cell.attrs;
+
+    if (colwidth && colwidth.length > colspan) {
+      return cell.type.createChecked(
+        {
+          ...cell.attrs,
+          colwidth: colwidth.slice(0, colspan),
+        },
+        cell.content,
+        cell.marks,
+      );
+    }
+
+    return cell;
+  });
+};
+
 export const fixTables = (tr: Transaction): Transaction => {
   tr.doc.descendants((node, pos) => {
     if (node.type.name === 'table') {
       tr = fixTable(node, pos, tr);
+      tr = removeExtraneousColumnWidths(node, pos, tr);
     }
   });
   return tr;
@@ -128,4 +155,40 @@ export const fixAutoSizedTable = (
       __autoSize: false,
     })
     .setMeta('addToHistory', false);
+};
+
+// TODO: move to prosemirror-utils
+const replaceCells = (tr, table, tablePos, modifyCell) => {
+  const rows: PMNode[] = [];
+  let modifiedCells = 0;
+  for (let rowIndex = 0; rowIndex < table.childCount; rowIndex++) {
+    const row = table.child(rowIndex);
+    const cells: PMNode[] = [];
+
+    for (let colIndex = 0; colIndex < row.childCount; colIndex++) {
+      const cell = row.child(colIndex);
+
+      // FIXME
+      // The rowIndex and colIndex are not accurate in a merged cell scenario
+      // e.g. table with 5 columns might have only one cell in a row, colIndex will be 1, where it should be 4
+      const node = modifyCell(cell, rowIndex, colIndex);
+      if (node.sameMarkup(cell) === false) {
+        modifiedCells++;
+      }
+      cells.push(node);
+    }
+
+    if (cells.length) {
+      rows.push(row.type.createChecked(row.attrs, cells, row.marks));
+    }
+  }
+
+  // Check if the table has changed before replacing.
+  // If no cells are modified our counter will be zero.
+  if (rows.length && modifiedCells !== 0) {
+    const newTable = table.type.createChecked(table.attrs, rows, table.marks);
+    return tr.replaceWith(tablePos, tablePos + table.nodeSize, newTable);
+  }
+
+  return tr;
 };
