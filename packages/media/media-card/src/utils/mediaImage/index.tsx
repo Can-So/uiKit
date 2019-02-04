@@ -23,12 +23,9 @@ export interface MediaImageState {
 }
 
 export class MediaImage extends Component<MediaImageProps, MediaImageState> {
-  static defaultProps = {
+  static defaultProps: Partial<MediaImageProps> = {
     crop: true,
     stretch: false,
-    width: '100%',
-    height: '100%',
-    className: '',
   };
   imageRef: React.RefObject<HTMLImageElement>;
 

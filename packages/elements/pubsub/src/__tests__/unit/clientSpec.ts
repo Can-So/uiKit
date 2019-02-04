@@ -242,7 +242,7 @@ describe('Client', () => {
           const handler = protocol.on.mock.calls[1][1];
           protocol.subscribe.mockReset();
 
-          function callAccessDeniedHandler(iteration) {
+          function callAccessDeniedHandler(iteration: number) {
             if (iteration > MAX_RETRY) {
               expect(protocol.subscribe).toHaveBeenCalledTimes(MAX_RETRY);
               done();

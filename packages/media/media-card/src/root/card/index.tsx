@@ -153,13 +153,13 @@ export class Card extends Component<CardProps, CardState> {
     this.subscription = context.file
       .getFileState(resolvedId, { collectionName, occurrenceKey })
       .subscribe({
-        next: async state => {
+        next: async fileState => {
           const {
             dataURI: currentDataURI,
             metadata: currentMetadata,
           } = this.state;
           const metadata = extendMetadata(
-            state,
+            fileState,
             currentMetadata as FileDetails,
           );
           let dataURI: string | undefined;
@@ -168,15 +168,14 @@ export class Card extends Component<CardProps, CardState> {
             const {
               src,
               orientation: previewOrientation,
-            } = await getDataURIFromFileState(state);
+            } = await getDataURIFromFileState(fileState);
             dataURI = src;
             this.notifyStateChange({ dataURI, previewOrientation });
           }
 
-          switch (state.status) {
+          switch (fileState.status) {
             case 'uploading':
-              const { progress } = state;
-
+              const { progress } = fileState;
               this.notifyStateChange({
                 status: 'uploading',
                 progress,

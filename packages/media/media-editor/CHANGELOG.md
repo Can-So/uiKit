@@ -1,5 +1,10 @@
 # @atlaskit/media-editor
 
+## 27.0.1
+- [patch] [9df2a5bd88](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9df2a5bd88):
+
+  - Use media-ui's ModalSpinner
+
 ## 27.0.0
 - [major] [79e21779d4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/79e21779d4):
 

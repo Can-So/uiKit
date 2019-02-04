@@ -24,7 +24,6 @@ import {
   hideControlsClassName,
 } from './styled';
 import { MediaTypeIcon } from './media-type-icon';
-import { FeedbackButton } from './feedback-button';
 import { MediaViewerError, createError } from './error';
 import {
   ToolbarDownloadButton,
@@ -107,10 +106,7 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
     return (
       <HeaderWrapper className={hideControlsClassName}>
         <LeftHeader>{this.renderMetadata()}</LeftHeader>
-        <RightHeader>
-          <FeedbackButton />
-          {this.renderDownload()}
-        </RightHeader>
+        <RightHeader>{this.renderDownload()}</RightHeader>
       </HeaderWrapper>
     );
   }

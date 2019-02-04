@@ -1,5 +1,4 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 import {
   editable,
@@ -7,22 +6,30 @@ import {
   fullpage,
   insertBlockMenuItem,
 } from '../_helpers';
+import { selectors } from './_utils';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
 
 BrowserTestCase(
   'insert-toolbar-menu.ts: Insert panel via toolbar menu',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowPanel: true,
+    });
 
-    await browser.goto(fullpage.path);
-    await browser.waitForSelector(editable);
-    await browser.click(editable);
+    await page.click(editable);
 
-    await insertBlockMenuItem(browser, 'Panel');
+    await insertBlockMenuItem(page, 'Panel', undefined, true);
+    await page.waitForSelector(selectors.PANEL_EDITOR_CONTAINER);
 
-    await browser.type(editable, 'this text should be in the panel');
+    await page.type(editable, 'this text should be in the panel');
 
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );

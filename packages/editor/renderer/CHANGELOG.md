@@ -1,5 +1,20 @@
 # @atlaskit/renderer
 
+## 38.0.3
+- [patch] [a1ad76375d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1ad76375d):
+
+  - ED-6123: scale down table columns by 15if table is bigger than renderer width
+
+## 38.0.2
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
+## 38.0.1
+- [patch] [fab72e17b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fab72e17b1):
+
+  - ED-6122: Handle TinyMCE migrated tables, where total table width is less than defined layout
+
 ## 38.0.0
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/editor-common@31.0.0

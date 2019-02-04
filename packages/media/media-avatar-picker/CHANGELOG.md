@@ -1,5 +1,10 @@
 # @atlaskit/media-avatar-picker
 
+## 13.0.0
+- [major] [a0972d484a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a0972d484a):
+
+  - Remove from export everything but AvatarPickerDialog and Avatar (which is TS interface)
+
 ## 12.1.12
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/media-test-helpers@20.1.0

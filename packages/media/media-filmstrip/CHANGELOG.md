@@ -1,5 +1,10 @@
 # @atlaskit/media-filmstrip
 
+## 26.1.0
+- [minor] [406cbf0a4e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/406cbf0a4e):
+
+  - ED-6092: allow passing undefined context to media filmstrip
+
 ## 26.0.0
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/media-card@52.0.0

@@ -104,9 +104,15 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
     singleRun: !watch,
     concurrency: 20,
     reporters: ['mocha'],
-    browsers: [watch ? 'Chrome' : 'ChromeHeadless'],
+    browsers: [watch ? 'Chrome' : 'ChromeHeadlessNoSandbox'],
     mochaReporter: {
       showDiff: true,
+    },
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox'],
+      },
     },
     client: {
       mocha: {

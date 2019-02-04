@@ -67,6 +67,7 @@ export default class Editor extends React.Component<
       maxHeight,
       disabled,
       editorDOMElement,
+      dispatchAnalyticsEvent,
     } = this.props;
     const maxContentSizeReached =
       maxContentSize && maxContentSize.maxContentSizeReached;
@@ -85,6 +86,7 @@ export default class Editor extends React.Component<
               appearance={this.appearance}
               containerElement={this.containerElement}
               disabled={!!disabled}
+              dispatchAnalyticsEvent={dispatchAnalyticsEvent}
             />
             {editorDOMElement}
           </ContentArea>

@@ -1,11 +1,9 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
+import { editable, quickInsert, getDocFromElement } from '../_helpers';
 import {
-  fullpage,
-  editable,
-  quickInsert,
-  getDocFromElement,
-} from '../_helpers';
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
 
 const dateLozenge = 'span[timestamp]';
 
@@ -13,17 +11,20 @@ BrowserTestCase(
   'quick-insert.ts: Insert date via quick insert',
   { skip: ['firefox', 'edge', 'ie'] },
   async client => {
-    const browser = new Page(client);
-    await browser.goto(fullpage.path);
-    await browser.mockDate(1546261200000, 11); // 1st Jan 2019 00:00 AEST / 31st Dec 2018 13:00 UTC
+    const page = await goToEditorTestingExample(client);
+    await page.mockDate(1546261200000, 11); // 1st Jan 2019 00:00 AEST / 31st Dec 2018 13:00 UTC
 
-    await browser.waitForSelector(editable);
-    await browser.click(editable);
+    await mountEditor(page, {
+      appearance: 'full-page',
+      allowDate: true,
+    });
+
+    await page.click(editable);
 
     // await browser.debug();
-    await quickInsert(browser, 'Date');
+    await quickInsert(page, 'Date');
 
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -32,14 +33,17 @@ BrowserTestCase(
   "quick-insert.ts: Uses today's date in user's local timezone as initial selection",
   { skip: ['firefox', 'edge', 'ie'] },
   async client => {
-    const browser = new Page(client);
-    await browser.goto(fullpage.path);
-    await browser.mockDate(1546261200000, 11); // 1st Jan 2019 00:00 AEST / 31st Dec 2018 13:00 UTC
+    const page = await goToEditorTestingExample(client);
+    await page.mockDate(1546261200000, 11); // 1st Jan 2019 00:00 AEST / 31st Dec 2018 13:00 UTC
 
-    await browser.waitForSelector(editable);
-    await browser.click(editable);
-    await quickInsert(browser, 'Date');
+    await mountEditor(page, {
+      appearance: 'full-page',
+      allowDate: true,
+    });
 
-    expect(await browser.getText(dateLozenge)).toBe('01 Jan 2019');
+    await page.click(editable);
+    await quickInsert(page, 'Date');
+
+    expect(await page.getText(dateLozenge)).toBe('01 Jan 2019');
   },
 );

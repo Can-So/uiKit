@@ -21,7 +21,7 @@ Object {
 }
 `;
 
-exports[`code-block: produces correct ADF after language change for fullpage 1`] = `
+exports[`code-block: produces correct ADF after language change for full-page 1`] = `
 Object {
   "content": Array [
     Object {

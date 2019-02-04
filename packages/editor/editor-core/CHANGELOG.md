@@ -1,5 +1,75 @@
 # @atlaskit/editor-core
 
+## 98.2.1
+- [patch] [17107bdfb0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/17107bdfb0):
+
+  - ED-6141: remove broken tables if its not fixable
+
+## 98.2.0
+- [minor] [3fecea2975](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3fecea2975):
+
+  - ED-5933 Add analytics plugin to facilitate working with @atlaskit/analytics-next package
+
+## 98.1.13
+- [patch] [7ce3cc56ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ce3cc56ff):
+
+  - FS-3500 Fix missing call to recordMentionSelection() when a selection is made in the mention typeahead
+
+## 98.1.12
+- [patch] [1c62bcce7d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c62bcce7d):
+
+  - Fix a problem with smart cards not appearing sometimes when lazy rendered and lazy loaded after code-split.
+
+## 98.1.11
+- [patch] [be706e55f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be706e55f6):
+
+  - Fixes tableRow validation failure
+
+## 98.1.10
+- [patch] [e7dcb7ef15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7dcb7ef15):
+
+  - Revert table resizing collab change
+
+## 98.1.9
+- [patch] [1ee84815dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ee84815dd):
+
+  - ED-6133: Visually apply column resize changes in collab editing
+
+## 98.1.8
+- [patch] [e83a20575b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a20575b):
+
+  - ED-6148: Prevent autoSize tables from being in an endless loop, integrate with new resizing
+
+## 98.1.7
+- [patch] [69e29bab6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69e29bab6c):
+
+  - ED-5860 Prevent invalid steps from being applied in the editor
+
+## 98.1.6
+- [patch] [406cbf0a4e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/406cbf0a4e):
+
+  - ED-6092: allow passing undefined context to media filmstrip
+
+## 98.1.5
+- [patch] [b2b0a00d6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b2b0a00d6a):
+
+  - Fix table creation without rows
+
+## 98.1.4
+- [patch] [3b9236fb74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b9236fb74):
+
+  - MS-1455, MS-1456: Fix max width for the surrounding element for the inline smart cards so that they don't overflow and positioning within li elements
+
+## 98.1.3
+- [patch] [af3918bc89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af3918bc89):
+
+  - The url part of the unauthorized link is now grey
+
+## 98.1.2
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
 ## 98.1.1
 - [patch] [2d14c5dae1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d14c5dae1):
 

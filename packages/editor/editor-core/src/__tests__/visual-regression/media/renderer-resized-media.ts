@@ -1,7 +1,7 @@
 import { getExampleUrl } from '@atlaskit/visual-regression/helper';
 import { snapshot, viewportSizes } from '../_utils';
 
-describe('Snapshot Test: Media', () => {
+describe.skip('Snapshot Test: Media', () => {
   describe('renderer', () => {
     let page;
 
@@ -23,7 +23,7 @@ describe('Snapshot Test: Media', () => {
         it(`should correctly render ${size.width}`, async () => {
           await page.setViewport(size);
           await page.waitFor(100);
-          await snapshot(page, undefined, '.ak-renderer-document');
+          await snapshot(page, '.ak-renderer-document');
         });
       });
     });
