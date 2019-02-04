@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
+import { expectToEqual } from '@atlaskit/media-test-helpers';
 
 import { FileCardImageView } from '../..';
 import { CardOverlay, CardOverlayProps } from '../../cardImageView/cardOverlay';
@@ -7,6 +8,8 @@ import { FileIcon } from '../../../utils';
 import { UploadingView } from '../../../utils/uploadingView';
 import { Wrapper } from '../../cardImageView/styled';
 import { CardAction } from '../../../actions';
+import { CardContent } from '../../cardImageView/cardContent';
+import { CardStatus } from '../../../index';
 
 describe('FileCardView', () => {
   it('should render card with non-persisting overlay when supplied mediaType is "image" and dataUri string is supplied', function() {
@@ -221,5 +224,72 @@ describe('FileCardView', () => {
 
     expect(wrapperAsImage).toMatchSnapshot();
     expect(wrapperNotImage).toMatchSnapshot();
+  });
+
+  it('should render CardContent for image with some default values', () => {
+    const card = mount(
+      <FileCardImageView mediaType="image" dataURI="data" status="complete" />,
+    );
+    expect(card.find(CardContent)).toHaveLength(1);
+    expectToEqual(card.find(CardContent).props(), {
+      loading: false,
+      mediaItemType: 'file',
+      mediaType: 'image',
+      dataURI: 'data',
+      // Default values
+      crop: true,
+      stretch: false,
+      previewOrientation: undefined,
+    });
+  });
+
+  it('should render CardContent for image with all props defined', () => {
+    const card = mount(
+      <FileCardImageView
+        mediaType="image"
+        dataURI="data"
+        status="complete"
+        previewOrientation={6}
+        resizeMode={'stretchy-fit'}
+      />,
+    );
+    expectToEqual(card.find(CardContent).props(), {
+      loading: false,
+      mediaItemType: 'file',
+      mediaType: 'image',
+      dataURI: 'data',
+      crop: false,
+      stretch: true,
+      previewOrientation: 6,
+    });
+  });
+
+  test.each(['loading', 'processing'] as CardStatus[])(
+    'should render CardContent with loading flag when status is %s and no data present',
+    (status: CardStatus) => {
+      const card = mount(
+        <FileCardImageView mediaType="image" status={status} progress={0.5} />,
+      );
+      expectToEqual(card.find(CardContent).props().loading, true);
+    },
+  );
+
+  it('should render CardContent with loading flag when status is complete but no dataURI', () => {
+    const card = mount(
+      <FileCardImageView mediaType="image" status="complete" progress={1} />,
+    );
+    expectToEqual(card.find(CardContent).props().loading, true);
+  });
+
+  it('should render CardContent with no loading flag when progress is 100%', () => {
+    const card = mount(
+      <FileCardImageView
+        mediaType="image"
+        dataURI="data"
+        status="loading"
+        progress={1}
+      />,
+    );
+    expectToEqual(card.find(CardContent).props().loading, false);
   });
 });

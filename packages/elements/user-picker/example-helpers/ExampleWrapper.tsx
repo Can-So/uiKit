@@ -23,7 +23,7 @@ export class ExampleWrapper extends React.PureComponent<
   Props,
   { options: OptionData[] }
 > {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       options: exampleOptions,

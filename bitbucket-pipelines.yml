@@ -111,8 +111,13 @@ pipelines:
               - source ./build-setup.sh
               - git lfs pull
               - bolt install --pure-lockfile
-              - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr:changed --passWithNoTests
-              - TEST_ONLY_PATTERN='packages/editor' yarn run test:vr:changed --passWithNoTests
+              - yarn run test:vr:changed
+            after-script:
+              # Extract all the diff images and store them into a folder for download
+              - mkdir ./imageSnapshotFailures && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
+            # If a failure occurs, you can download the image snapshot of the differences.
+            artifacts: 
+              - imageSnapshotFailures
             caches:
               - node
         - step:
@@ -197,17 +202,19 @@ pipelines:
             - yarn test:webdriver:browserstack
           caches:
             - node
+            
     # This will run with the visual regression tool
     build-visual-regression:
       - step:
           image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
           script:
             - source ./build-setup.sh
+            - git lfs pull
             - bolt install --pure-lockfile
-            # Will work for all pkgs other than editor
-            - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr 
-      # This will run essentially the branch builds, but without any optimizations and should be manually
-      # run in any potentially risky builds
+            - yarn run test:vr 
+            
+    # This will run essentially the branch builds, but without any optimizations and should be manually
+    # run in any potentially risky builds
     run-full-suite:
       - step:
           script:
@@ -224,7 +231,6 @@ pipelines:
             - yarn build
 
     # We deliberately don't use the cache here as well
-
     run-bundle-analysis:
       - step:
           script:

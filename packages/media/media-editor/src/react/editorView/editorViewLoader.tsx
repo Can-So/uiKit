@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Loader from '../loadingView';
+import { ModalSpinner } from '@atlaskit/media-ui';
 import EditorViewType, { EditorViewProps } from './editorView';
 
 interface AsyncEditorViewState {
@@ -30,7 +30,7 @@ export default class AsyncEditorView extends React.PureComponent<
 
   render() {
     if (!this.state.EditorView) {
-      return <Loader />;
+      return <ModalSpinner mode="none" />;
     }
 
     return <this.state.EditorView {...this.props} />;

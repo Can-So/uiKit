@@ -3,6 +3,7 @@ import { history } from 'prosemirror-history';
 import { keymap } from 'prosemirror-keymap';
 import { doc, paragraph, text } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
+import filterStepsPlugin from './pm-plugins/filter-steps';
 import focusHandlerPlugin from './pm-plugins/focus-handler';
 import inlineCursorTargetPlugin from './pm-plugins/inline-cursor-target';
 import { plugin as reactNodeView } from './pm-plugins/react-nodeview';
@@ -10,6 +11,10 @@ import { plugin as reactNodeView } from './pm-plugins/react-nodeview';
 const basePlugin: EditorPlugin = {
   pmPlugins() {
     return [
+      {
+        name: 'filterStepsPlugin',
+        plugin: () => filterStepsPlugin(),
+      },
       {
         name: 'inlineCursorTargetPlugin',
         plugin: () => inlineCursorTargetPlugin(),

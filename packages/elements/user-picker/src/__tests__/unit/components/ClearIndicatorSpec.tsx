@@ -1,11 +1,12 @@
 import { components } from '@atlaskit/select';
+import Tooltip from '@atlaskit/tooltip';
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import Tooltip from '@atlaskit/tooltip';
 import { ClearIndicator } from '../../../components/ClearIndicator';
 
 describe('ClearIndicator', () => {
-  const shallowClearIndicator = props => shallow(<ClearIndicator {...props} />);
+  const shallowClearIndicator = (props: any) =>
+    shallow(<ClearIndicator {...props} />);
 
   it('should clear value onMouseDown', () => {
     const clearValue = jest.fn();

@@ -57,6 +57,21 @@ const getTableWidthLimit = (layout: TableLayout) => {
   }
 };
 
+const fixColumnWidth = (
+  columnWidth: number,
+  tableWidth: number,
+  layoutWidth: number,
+  zeroWidthColumnsCount: number,
+) => {
+  // If the tables total width (including no zero widths col or cols without width) is less than the current layout
+  // We scale up the columns to meet the minimum of the table layout.
+  if (zeroWidthColumnsCount === 0 && tableWidth < layoutWidth) {
+    return (columnWidth * (layoutWidth / tableWidth)).toFixed(2);
+  }
+
+  return columnWidth;
+};
+
 class Table extends React.Component<TableProps & OverflowShadowProps> {
   render() {
     const { isNumberColumnEnabled, layout, children, renderWidth } = this.props;
@@ -121,13 +136,21 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
           ? akEditorTableLegacyCellMinWidth
           : minWidth;
     }
+
     return (
       <colgroup>
         {isNumberColumnEnabled && (
           <col style={{ width: akEditorTableNumberColumnWidth }} />
         )}
         {columnWidths.map((colWidth, idx) => {
-          const width = colWidth ? colWidth : cellMinWidth;
+          const width =
+            fixColumnWidth(
+              colWidth,
+              minTableWidth,
+              maxTableWidth,
+              zeroWidthColumnsCount,
+            ) || cellMinWidth;
+
           const style = width ? { width: `${width}px` } : {};
           return <col key={idx} style={style} />;
         })}

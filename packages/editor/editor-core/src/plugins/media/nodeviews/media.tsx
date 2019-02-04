@@ -71,7 +71,7 @@ class MediaNode extends Component<
   private mediaProvider: MediaProvider;
   private hasBeenMounted: boolean = false;
 
-  state = {
+  state: MediaNodeState = {
     viewContext: undefined,
   };
 
@@ -133,7 +133,7 @@ class MediaNode extends Component<
       editorAppearance,
     } = this.props;
     const { id, type, collection, url, __key } = node.attrs;
-
+    const { viewContext } = this.state;
     /**
      * On mobile we don't receive a collectionName until the `upload-end` event.
      * We don't want to render a proper card until we have a valid collection.
@@ -142,7 +142,7 @@ class MediaNode extends Component<
     const isMobile = editorAppearance === 'mobile';
     let isMobileReady = isMobile ? typeof collection === 'string' : true;
 
-    if (!this.state.viewContext || !isMobileReady) {
+    if (!viewContext || !isMobileReady) {
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
 
@@ -165,7 +165,7 @@ class MediaNode extends Component<
 
     return (
       <Card
-        context={this.state.viewContext!}
+        context={viewContext}
         resizeMode="stretchy-fit"
         dimensions={cardDimensions}
         identifier={identifier}

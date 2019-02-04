@@ -55,6 +55,7 @@ async function main(testPaths) {
       LONG_RUNNING_TESTS_THRESHOLD_SECS,
     );
   }
+  process.exit(!status.results || status.results.success ? 0 : 1);
 }
 
 main().catch(err => {

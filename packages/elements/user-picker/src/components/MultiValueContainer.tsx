@@ -14,17 +14,22 @@ export type State = {
   previousValueSize: number;
 };
 
-export class MultiValueContainer extends React.PureComponent<any, State> {
-  static getDerivedStateFromProps(nextProps, prevState) {
+type Props = {
+  getValue: () => any[];
+  selectProps: any;
+};
+
+export class MultiValueContainer extends React.PureComponent<Props, State> {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     return {
       valueSize: nextProps.getValue ? nextProps.getValue().length : 0,
       previousValueSize: prevState.valueSize,
     };
   }
 
-  private bottomAnchor;
+  private bottomAnchor: HTMLDivElement | null = null;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       valueSize: 0,
@@ -35,11 +40,13 @@ export class MultiValueContainer extends React.PureComponent<any, State> {
   componentDidUpdate() {
     const { previousValueSize, valueSize } = this.state;
     if (valueSize > previousValueSize) {
-      window.setTimeout(() => this.bottomAnchor.scrollIntoView());
+      window.setTimeout(
+        () => this.bottomAnchor && this.bottomAnchor.scrollIntoView(),
+      );
     }
   }
 
-  handleBottomAnchor = ref => {
+  handleBottomAnchor = (ref: HTMLDivElement | null) => {
     this.bottomAnchor = ref;
   };
 

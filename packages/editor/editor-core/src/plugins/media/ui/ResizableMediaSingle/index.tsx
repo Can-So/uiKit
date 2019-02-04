@@ -67,7 +67,7 @@ export default class ResizableMediaSingle extends React.Component<
     const state = await viewContext.file.getCurrentState(
       getMediaNode!.attrs.id,
     );
-    if (state.status !== 'error' && state.mediaType === 'image') {
+    if (state && state.status !== 'error' && state.mediaType === 'image') {
       this.setState({
         isVideoFile: false,
       });

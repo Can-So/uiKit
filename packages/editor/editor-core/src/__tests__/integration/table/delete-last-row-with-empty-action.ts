@@ -1,5 +1,4 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 import {
   editable,
@@ -8,6 +7,10 @@ import {
   quickInsert,
 } from '../_helpers';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
 
 BrowserTestCase(
   'delete-last-row.ts: Delete last table row with empty action',
@@ -15,35 +18,39 @@ BrowserTestCase(
   async client => {
     const FIRST_CELL_FROM_LAST_ROW =
       'table > tbody > tr:last-child > td:first-child';
-    const browser = new Page(client);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowTables: {
+        advanced: true,
+      },
+    });
 
-    await browser.goto(fullpage.path);
-    await browser.waitForSelector(editable);
-    await browser.click(editable);
+    await page.click(editable);
 
     // Insert table and click on first cell
-    await quickInsert(browser, 'Table');
-    await browser.waitForSelector(FIRST_CELL_FROM_LAST_ROW);
-    await browser.click(FIRST_CELL_FROM_LAST_ROW);
+    await quickInsert(page, 'Table');
+    await page.waitForSelector(FIRST_CELL_FROM_LAST_ROW);
+    await page.click(FIRST_CELL_FROM_LAST_ROW);
 
     // Add empty action on first cell from last row
-    await quickInsert(browser, 'Action item');
+    await quickInsert(page, 'Action item');
 
     // Select button wrapper from last row
     const controlSelector = `.${ClassName.ROW_CONTROLS_WRAPPER} .${
       ClassName.ROW_CONTROLS_BUTTON_WRAP
     }:last-child .${ClassName.CONTROLS_BUTTON}`;
-    await browser.waitForSelector(controlSelector);
-    await browser.click(controlSelector);
+    await page.waitForSelector(controlSelector);
+    await page.click(controlSelector);
 
     // Click on delete row button
     const deleteButtonSelector = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP} .${
       ClassName.CONTROLS_DELETE_BUTTON
     }`;
-    await browser.waitForVisible(deleteButtonSelector);
-    await browser.click(deleteButtonSelector);
+    await page.waitForVisible(deleteButtonSelector);
+    await page.click(deleteButtonSelector);
 
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
