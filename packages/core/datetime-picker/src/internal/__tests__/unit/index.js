@@ -1,9 +1,11 @@
 // @flow
 
 import moment from 'moment';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import React from 'react';
 import { parse, format } from 'date-fns';
+import Select from '@atlaskit/select';
+
 import { TimePickerWithoutAnalytics as TimePicker } from '../../../components/TimePicker';
 import { DatePickerWithoutAnalytics as DatePicker } from '../../../components/DatePicker';
 import { DateTimePickerWithoutAnalytics as DateTimePicker } from '../../../components/DateTimePicker';
@@ -112,6 +114,22 @@ test('DatePicker, supplying a custom parseInputValue prop, produces the expected
   datePickerWrapper.first('input').simulate('keyDown', { key: 'Enter' });
 
   expect(onChangeSpy).toBeCalledWith(expectedResult);
+});
+
+test('DatePicker, focused calendar date is reset on open', () => {
+  const value = '1970-01-01';
+  const datePickerWrapper = shallow(<DatePicker value={value} />);
+
+  datePickerWrapper.find(Select).simulate('focus');
+
+  expect(datePickerWrapper.state('view')).toEqual(value);
+
+  const nextValue = '1990-02-02';
+  datePickerWrapper.setProps({ value: nextValue });
+
+  datePickerWrapper.find(Select).simulate('focus');
+
+  expect(datePickerWrapper.state('view')).toEqual(nextValue);
 });
 
 test('TimePicker default parseInputValue', () => {
