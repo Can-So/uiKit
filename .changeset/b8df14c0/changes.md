@@ -1,1 +1,0 @@
-- FS-3500 Fix missing call to recordMentionSelection() when a selection is made in the mention typeahead
