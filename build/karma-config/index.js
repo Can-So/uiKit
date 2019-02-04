@@ -133,7 +133,7 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
         os: 'ios',
         os_version: '11.0',
         device: 'iPhone 8',
-        real_mobile: false,
+        real_mobile: true,
       },
       chrome_latest_osx: {
         browser: 'chrome',
