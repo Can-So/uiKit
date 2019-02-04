@@ -85,16 +85,16 @@ pipelines:
               - node build/ci-scripts/run.if.package.changed.js @atlaskit/adf-schema -- yarn build:adf-schema:checkuptodate
             caches:
               - node
-        # https://hello.atlassian.net/servicedesk/customer/portal/2/ADM-208362
-        # - step:
-        #     name: Browser Unit Testing
-        #     script:
-        #       - source ./build-setup.sh
-        #       - bolt install --pure-lockfile
-        #       - echo "Run browser unit tests using Karma + Browserstack"
-        #       - node build/ci-scripts/run.tool.if.changed.js browserstack  -- yarn test:browser:browserstack
-        #     caches:
-        #       - node
+        - step:
+            name: Browser Unit Testing
+            image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
+            script:
+              - source ./build-setup.sh
+              - bolt install --pure-lockfile
+              - echo "Run browser unit tests using Karma + Browserstack"
+              - yarn test:browser
+            caches:
+              - node
         # https://hello.atlassian.net/servicedesk/customer/portal/2/ADM-208362
         # - step:
         #     name: Browser Integration Testing
