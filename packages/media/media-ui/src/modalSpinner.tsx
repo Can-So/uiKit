@@ -25,7 +25,7 @@ export const SpinnerWrapper = styled.div`
 SpinnerWrapper.displayName = 'SpinnerWrapper';
 
 interface Props {
-  blankedColor: string;
+  blankedColor?: string;
   invertSpinnerColor?: boolean;
 }
 
@@ -34,10 +34,15 @@ const defaultProps: Props = {
   invertSpinnerColor: false,
 };
 
-export default ({ blankedColor, invertSpinnerColor }: Props = defaultProps) => (
-  <Blanket style={{ backgroundColor: blankedColor }}>
+export default ({ blankedColor, invertSpinnerColor }: Props) => (
+  <Blanket
+    style={{ backgroundColor: blankedColor || defaultProps.blankedColor }}
+  >
     <SpinnerWrapper>
-      <Spinner size="large" invertColor={invertSpinnerColor} />
+      <Spinner
+        size="large"
+        invertColor={invertSpinnerColor || defaultProps.invertSpinnerColor}
+      />
     </SpinnerWrapper>
   </Blanket>
 );
