@@ -110,7 +110,9 @@ export default class Toolbar extends Component<Props> {
                       key={idx}
                       onSubmit={(href, text) => {
                         dispatchCommand(item.onSubmit(href, text));
-                        focusEditor && focusEditor();
+                        if (focusEditor) {
+                          focusEditor();
+                        }
                       }}
                       providerFactory={item.providerFactory}
                       onBlur={value => dispatchCommand(item.onBlur(value))}

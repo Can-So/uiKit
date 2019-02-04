@@ -1,5 +1,5 @@
 import { name } from '../../../../package.json';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import * as React from 'react';
 import { TextSelection } from 'prosemirror-state';
 import { ProviderFactory } from '@atlaskit/editor-common';
@@ -128,7 +128,7 @@ describe(name, () => {
     });
 
     it("should set `key` on the ProseMirror div node to aid React's reconciler", () => {
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <ReactEditorView
           editorProps={{}}
           providerFactory={ProviderFactory.create({})}
@@ -147,7 +147,7 @@ describe(name, () => {
       const mockAnalytics = jest
         .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
         .mockReturnValue(mockFire);
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <ReactEditorView
           editorProps={{}}
           providerFactory={ProviderFactory.create({})}
@@ -172,7 +172,7 @@ describe(name, () => {
       const mockAnalytics = jest
         .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
         .mockReturnValue(mockFire);
-      mount(
+      mountWithIntl(
         <ReactEditorView
           editorProps={{}}
           providerFactory={ProviderFactory.create({})}
@@ -218,7 +218,7 @@ describe(name, () => {
 
     it('should call onEditorCreated once the editor is initialised', () => {
       let handleEditorCreated = jest.fn();
-      let wrapper = mount(
+      let wrapper = mountWithIntl(
         <ReactEditorView
           editorProps={{ appearance: 'message' }}
           providerFactory={new ProviderFactory()}
@@ -246,7 +246,7 @@ describe(name, () => {
 
     it('should call onEditorDestroyed when the editor is unmounting', () => {
       let handleEditorDestroyed = jest.fn();
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <ReactEditorView
           editorProps={{ appearance: 'message' }}
           providerFactory={new ProviderFactory()}
@@ -277,7 +277,7 @@ describe(name, () => {
       const mediaProvider = storyMediaProviderFactory({
         includeUserAuthProvider: true,
       });
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <ReactEditorView
           editorProps={{
             mediaProvider: mediaProvider,
@@ -302,7 +302,7 @@ describe(name, () => {
 
     it('should call destroy() on EventDispatcher when it gets unmounted', () => {
       let eventDispatcherDestroySpy;
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <ReactEditorView
           editorProps={{}}
           providerFactory={new ProviderFactory()}
@@ -318,7 +318,7 @@ describe(name, () => {
     });
 
     it('should disable grammarly in the editor', () => {
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <ReactEditorView
           editorProps={{}}
           providerFactory={ProviderFactory.create({})}
@@ -335,7 +335,7 @@ describe(name, () => {
     describe('when re-creating the editor view after a props change', () => {
       it('should call onEditorDestroyed', () => {
         let handleEditorDestroyed = jest.fn();
-        const wrapper = mount(
+        const wrapper = mountWithIntl(
           <ReactEditorView
             editorProps={{ appearance: 'message' }}
             providerFactory={new ProviderFactory()}
@@ -365,7 +365,7 @@ describe(name, () => {
 
       it('should call destroy on the old EditorView', () => {
         let editorViewDestroy;
-        const wrapper = mount(
+        const wrapper = mountWithIntl(
           <ReactEditorView
             editorProps={{}}
             providerFactory={new ProviderFactory()}
@@ -389,7 +389,7 @@ describe(name, () => {
       it('should call onEditorCreated with the new EditorView', () => {
         let oldEditorView;
         let newEditorView;
-        const wrapper = mount(
+        const wrapper = mountWithIntl(
           <ReactEditorView
             editorProps={{}}
             providerFactory={new ProviderFactory()}
@@ -413,7 +413,7 @@ describe(name, () => {
       it('should not re-create the event dispatcher', () => {
         let oldEventDispatcher;
         let eventDispatcherDestroySpy;
-        const wrapper = mount(
+        const wrapper = mountWithIntl(
           <ReactEditorView
             editorProps={{}}
             providerFactory={new ProviderFactory()}
@@ -447,7 +447,7 @@ describe(name, () => {
       const mockAnalytics = jest
         .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
         .mockReturnValue(mockFire);
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <ReactEditorView
           editorProps={{}}
           providerFactory={ProviderFactory.create({})}
@@ -473,6 +473,7 @@ describe(name, () => {
       mockAnalytics.mockRestore();
     });
 
+<<<<<<< HEAD
     describe('dispatch analytics event', () => {
       function setupDispatchAnalyticsTest(allowAnalyticsGASV3: boolean) {
         jest
@@ -519,6 +520,34 @@ describe(name, () => {
 
       it('should NOT call event dispatcher if it is NOT allowed to call analytics', () => {
         const { dispatch, eventDispatcher } = setupDispatchAnalyticsTest(false);
+=======
+    it('should dispatch analytics event', () => {
+      jest
+        .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
+        .mockReturnValue(() => null);
+      let dispatch;
+      const wrapper = mountWithIntl(
+        <ReactEditorView
+          editorProps={{}}
+          providerFactory={ProviderFactory.create({})}
+          portalProviderAPI={portalProviderAPI}
+          onEditorCreated={() => {}}
+          onEditorDestroyed={() => {}}
+          createAnalyticsEvent={jest.fn()}
+          render={({
+            editor,
+            config,
+            eventDispatcher,
+            dispatchAnalyticsEvent,
+          }) => {
+            dispatch = dispatchAnalyticsEvent;
+            return <p>Component</p>;
+          }}
+        />,
+      );
+      const { eventDispatcher } = wrapper.instance() as ReactEditorView;
+      jest.spyOn(eventDispatcher, 'emit');
+>>>>>>> fixing build and lint checks
 
         dispatch(payload);
         expect(eventDispatcher.emit).not.toHaveBeenCalled();
