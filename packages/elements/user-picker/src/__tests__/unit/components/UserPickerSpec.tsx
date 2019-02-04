@@ -4,7 +4,7 @@ jest.mock('../../../components/styles', () => ({
 
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import Select from '@atlaskit/select';
-import { mount, shallow } from 'enzyme';
+import { mount, ReactWrapper, shallow } from 'enzyme';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getStyles } from '../../../components/styles';
@@ -47,7 +47,7 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ options });
     const select = component.find(Select);
     expect(select.prop('options')).toEqual(userOptions);
-    expect(getStyles).toHaveBeenCalledWith(350, 'normal');
+    expect(getStyles).toHaveBeenCalledWith(350);
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
@@ -123,21 +123,19 @@ describe('UserPicker', () => {
     it('should set width', () => {
       shallowUserPicker({ width: 500 });
 
-      expect(getStyles).toHaveBeenCalledWith(500, expect.any(String));
+      expect(getStyles).toHaveBeenCalledWith(500);
     });
 
     it('should infer normal appearance if single picker', () => {
       const component = shallowUserPicker();
 
       expect(component.find(Select).prop('appearance')).toEqual('normal');
-      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'normal');
     });
 
     it('should infer compact appearance if multi picker', () => {
       const component = shallowUserPicker({ isMulti: true });
 
       expect(component.find(Select).prop('appearance')).toEqual('compact');
-      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'compact');
     });
 
     it('should pass in appearance that comes from props', () => {
@@ -147,7 +145,6 @@ describe('UserPicker', () => {
       });
 
       expect(component.find(Select).prop('appearance')).toEqual('normal');
-      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'normal');
     });
   });
 
@@ -257,6 +254,14 @@ describe('UserPicker', () => {
       it('should call props.onInputChange', () => {
         const onInputChange = jest.fn();
         const component = shallowUserPicker({ onInputChange });
+        const select = component.find(Select);
+        select.simulate('inputChange', 'some text', { action: 'input-change' });
+        expect(onInputChange).toHaveBeenCalled();
+      });
+
+      it('should call props.onInputChange with controlled search', () => {
+        const onInputChange = jest.fn();
+        const component = shallowUserPicker({ onInputChange, search: 'text' });
         const select = component.find(Select);
         select.simulate('inputChange', 'some text', { action: 'input-change' });
         expect(onInputChange).toHaveBeenCalled();
@@ -564,7 +569,7 @@ describe('UserPicker', () => {
 
   describe('analytics', () => {
     const onEvent = jest.fn();
-    let component;
+    let component: ReactWrapper;
 
     const AnalyticsTestComponent = (props: Partial<UserPickerProps>) => (
       <AnalyticsListener channel="fabric-elements" onEvent={onEvent}>
@@ -616,7 +621,7 @@ describe('UserPicker', () => {
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 38 });
       input.simulate('keyDown', { keyCode: 13 });
-      component.find(Select).prop('onChange')(
+      component.find<any>(Select).prop('onChange')(
         optionToSelectableOption(options[0]),
         {
           action: 'select-option',
@@ -655,7 +660,7 @@ describe('UserPicker', () => {
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 38 });
-      component.find(Select).prop('onChange')(
+      component.find<any>(Select).prop('onChange')(
         optionToSelectableOption(options[0]),
         {
           action: 'select-option',
@@ -689,7 +694,7 @@ describe('UserPicker', () => {
     it('should trigger cleared event', () => {
       const input = component.find('input');
       input.simulate('focus');
-      component.find(Select).prop('onChange')(
+      component.find<any>(Select).prop('onChange')(
         optionToSelectableOption(options[0]),
         {
           action: 'clear',
@@ -719,7 +724,7 @@ describe('UserPicker', () => {
       component.setProps({ isMulti: true });
       const input = component.find('input');
       input.simulate('focus');
-      component.find(Select).prop('onChange')([], {
+      component.find<any>(Select).prop('onChange')([], {
         action: 'remove-value',
         removedValue: optionToSelectableOption(options[0]),
       });

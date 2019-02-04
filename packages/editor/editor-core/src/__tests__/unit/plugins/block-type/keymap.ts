@@ -72,7 +72,7 @@ describe('codeBlock - keymaps', () => {
         describe('when selection is empty', () => {
           describe('on a non nested structure', () => {
             describe('inside a paragraph', () => {
-              it('doesn not create a new paragraph above', () => {
+              it('does not create a new paragraph above', () => {
                 const { editorView } = editor(doc(p('{<>}text')));
 
                 sendKeyToPm(editorView, 'ArrowUp');

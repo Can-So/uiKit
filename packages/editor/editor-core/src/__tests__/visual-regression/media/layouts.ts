@@ -16,6 +16,7 @@ export const mediaSingleLayouts = {
   'align-end': 'Align right',
 };
 
+// add some comment
 describe('Snapshot Test: Media', () => {
   let page;
   beforeAll(async () => {

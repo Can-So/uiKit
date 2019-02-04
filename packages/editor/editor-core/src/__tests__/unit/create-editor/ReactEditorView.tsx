@@ -19,10 +19,23 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 import { EventDispatcher } from '../../../event-dispatcher';
+import * as AnalyticsPlugin from '../../../plugins/analytics';
+import {
+  analyticsEventKey,
+  AnalyticsEventPayload,
+} from '../../../plugins/analytics';
 
 const portalProviderAPI: any = {
   render() {},
   remove() {},
+};
+
+const payload: AnalyticsEventPayload = {
+  action: 'clicked',
+  actionSubject: 'button',
+  actionSubjectId: 'helpButton',
+  attributes: { inputMethod: 'toolbar' },
+  eventType: 'ui',
 };
 
 describe(name, () => {
@@ -122,6 +135,55 @@ describe(name, () => {
 
       expect(wrapper.children().key()).toEqual('ProseMirror');
       wrapper.unmount();
+    });
+
+    it('should forward all events dispatched with analyticsEventKey to analytics plugin', () => {
+      const mockFire = jest.fn();
+      const mockAnalytics = jest
+        .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
+        .mockReturnValue(mockFire);
+      const wrapper = mount(
+        <ReactEditorView
+          editorProps={{}}
+          providerFactory={ProviderFactory.create({})}
+          portalProviderAPI={portalProviderAPI}
+          onEditorCreated={() => {}}
+          onEditorDestroyed={() => {}}
+          createAnalyticsEvent={jest.fn()}
+        />,
+      );
+
+      (wrapper.instance() as ReactEditorView).eventDispatcher.emit(
+        analyticsEventKey,
+        { payload },
+      );
+      expect(mockFire).toHaveBeenCalledWith({ payload });
+      mockAnalytics.mockRestore();
+    });
+
+    it('should trigger editor started analytics event', () => {
+      const mockFire = jest.fn();
+      const mockAnalytics = jest
+        .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
+        .mockReturnValue(mockFire);
+      mount(
+        <ReactEditorView
+          editorProps={{}}
+          providerFactory={ProviderFactory.create({})}
+          portalProviderAPI={portalProviderAPI}
+          onEditorCreated={() => {}}
+          onEditorDestroyed={() => {}}
+          createAnalyticsEvent={jest.fn()}
+        />,
+      );
+
+      expect(mockFire).toHaveBeenCalledWith({
+        payload: expect.objectContaining({
+          action: 'started',
+          actionSubject: 'editor',
+        }),
+      });
+      mockAnalytics.mockRestore();
     });
 
     describe('when a transaction is dispatched', () => {
@@ -370,6 +432,69 @@ describe(name, () => {
           (wrapper.instance() as ReactEditorView).eventDispatcher,
         );
         expect(eventDispatcherDestroySpy).not.toHaveBeenCalled();
+      });
+    });
+
+    it('should re-setup analytics event forwarding when createAnalyticsEvent prop changes', () => {
+      const mockFire = jest.fn();
+      const mockAnalytics = jest
+        .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
+        .mockReturnValue(mockFire);
+      const wrapper = mount(
+        <ReactEditorView
+          editorProps={{}}
+          providerFactory={ProviderFactory.create({})}
+          portalProviderAPI={portalProviderAPI}
+          onEditorCreated={() => {}}
+          onEditorDestroyed={() => {}}
+          createAnalyticsEvent={jest.fn()}
+        />,
+      );
+      const { eventDispatcher } = wrapper.instance() as ReactEditorView;
+      jest.spyOn(eventDispatcher, 'on');
+      jest.spyOn(eventDispatcher, 'off');
+
+      const newCreateAnalyticsEvent = jest.fn();
+      wrapper.setProps({ createAnalyticsEvent: newCreateAnalyticsEvent });
+
+      expect(eventDispatcher.off).toHaveBeenCalled();
+      expect(eventDispatcher.on).toHaveBeenCalled();
+      expect(AnalyticsPlugin.fireAnalyticsEvent).toHaveBeenCalledWith(
+        newCreateAnalyticsEvent,
+      );
+      mockAnalytics.mockRestore();
+    });
+
+    it('should dispatch analytics event', () => {
+      jest
+        .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
+        .mockReturnValue(() => null);
+      let dispatch;
+      const wrapper = mount(
+        <ReactEditorView
+          editorProps={{}}
+          providerFactory={ProviderFactory.create({})}
+          portalProviderAPI={portalProviderAPI}
+          onEditorCreated={() => {}}
+          onEditorDestroyed={() => {}}
+          createAnalyticsEvent={jest.fn()}
+          render={({
+            editor,
+            config,
+            eventDispatcher,
+            dispatchAnalyticsEvent,
+          }) => {
+            dispatch = dispatchAnalyticsEvent;
+            return <p>Component</p>;
+          }}
+        />,
+      );
+      const { eventDispatcher } = wrapper.instance() as ReactEditorView;
+      jest.spyOn(eventDispatcher, 'emit');
+
+      dispatch(payload);
+      expect(eventDispatcher.emit).toHaveBeenCalledWith(analyticsEventKey, {
+        payload,
       });
     });
   });

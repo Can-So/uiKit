@@ -347,10 +347,6 @@ export const DefaultCoverWrapper = styled.div`
   }
 `;
 
-export const FeedbackWrapper = styled.span`
-  padding-right: 5px;
-`;
-
 export const DownloadButtonWrapper = styled.div`
   margin-top: 28px;
   text-align: center;

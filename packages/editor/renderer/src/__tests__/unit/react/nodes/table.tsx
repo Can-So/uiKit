@@ -141,7 +141,7 @@ describe('Renderer - React/Nodes/Table', () => {
       });
     });
     it('should add an extra <col> node for number column', () => {
-      const columnWidths = [111, 222];
+      const columnWidths = [300, 380];
       const table = mount(
         <Table
           layout="default"
@@ -177,7 +177,7 @@ describe('Renderer - React/Nodes/Table', () => {
 
   describe('When number column is disabled', () => {
     it('should not add an extra <col> node for number column', () => {
-      const columnWidths = [111, 222];
+      const columnWidths = [300, 380];
       const table = mount(
         <Table
           layout="default"
@@ -282,6 +282,101 @@ describe('Renderer - React/Nodes/Table', () => {
             expect(typeof col.prop('style')!.width).to.equal('undefined');
           }
         });
+      });
+    });
+  });
+
+  describe('TinyMCE migrated table', () => {
+    it('should scale columnWidths if total size is less than layout', () => {
+      const columnWidths = [100, 100, 100];
+
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={false}
+          columnWidths={columnWidths}
+          renderWidth={renderWidth}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+
+      expect(table.find('col')).to.have.lengthOf(3);
+      table.find('col').forEach(col => {
+        expect(col.prop('style')!.width).to.equal(`226.67px`);
+      });
+    });
+  });
+
+  describe('when renderWidth is 10% lower than table width', () => {
+    it('should scale down columns widths by 10%', () => {
+      const columnWidths = [200, 200, 280];
+
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={false}
+          columnWidths={columnWidths}
+          renderWidth={612}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+
+      expect(table.find('col')).to.have.lengthOf(3);
+      table.find('col').forEach((col, index) => {
+        const width = columnWidths[index] - columnWidths[index] * 0.1;
+        expect(col.prop('style')!.width).to.equal(`${width}px`);
+      });
+    });
+  });
+
+  describe('when renderWidth is 20% lower than table width', () => {
+    it('should scale down columns widths by 15% and then overflow', () => {
+      const columnWidths = [200, 200, 280];
+
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={false}
+          columnWidths={columnWidths}
+          renderWidth={578}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+
+      expect(table.find('col')).to.have.lengthOf(3);
+      table.find('col').forEach((col, index) => {
+        const width = columnWidths[index] - columnWidths[index] * 0.15;
+        expect(col.prop('style')!.width).to.equal(`${width}px`);
       });
     });
   });

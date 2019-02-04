@@ -87,7 +87,7 @@ export class ConfluenceCardClient extends Client {
 const cardClient = new ConfluenceCardClient();
 const cardProvider = new ConfluenceCardProvider();
 
-export default function Example() {
+export function Example(doc) {
   return (
     // We must wrap the <Editor> with a provider, passing cardClient via prop
     <SmartCardProvider client={cardClient}>
@@ -109,7 +109,7 @@ export default function Example() {
           </p>
         </SectionMessage>
         <FullPageExample
-          defaultValue={exampleDocument}
+          defaultValue={doc}
           UNSAFE_cards={{
             // This is how we pass in the provider for smart cards
             provider: Promise.resolve(cardProvider),
@@ -119,6 +119,160 @@ export default function Example() {
     </SmartCardProvider>
   );
 }
+
+const demoTable = {
+  type: 'table',
+  attrs: { isNumberColumnEnabled: false, layout: 'wide' },
+  content: [
+    {
+      type: 'tableRow',
+      content: [
+        {
+          type: 'tableHeader',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Column 1' }],
+            },
+          ],
+        },
+        {
+          type: 'tableHeader',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Column 2' }],
+            },
+          ],
+        },
+        {
+          type: 'tableHeader',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Column 3' }],
+            },
+          ],
+        },
+        {
+          type: 'tableHeader',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Column 4' }],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'tableRow',
+      content: [
+        {
+          type: 'tableCell',
+          attrs: {},
+          content: [
+            {
+              type: 'bulletList',
+              content: [
+                {
+                  type: 'listItem',
+                  content: [
+                    {
+                      type: 'paragraph',
+                      content: [
+                        {
+                          type: 'inlineCard',
+                          attrs: {
+                            url:
+                              'https://app.box.com/s/2emx282bjxpzvwa5bcz428u6imbgmasg',
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'listItem',
+                  content: [
+                    {
+                      type: 'paragraph',
+                      content: [
+                        {
+                          type: 'inlineCard',
+                          attrs: {
+                            url:
+                              'https://app.box.com/s/2emx282bjxpzvwa5bcz428u6imbgmasg',
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableCell',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'inlineCard',
+                  attrs: {
+                    url:
+                      'https://onedrive.live.com/redir?resid=5D04B397F4A8ABE!1004&authkey=!AN4C7co5280OG_Y',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableCell',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'inlineCard',
+                  attrs: {
+                    url: 'https://1drv.ms/u/s!Ar6KSn85S9AFh2zeAu3KOdvNDhv2',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableCell',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'inlineCard',
+                  attrs: {
+                    url: 'https://1drv.ms/u/s!Ar6KSn85S9AFh2zeAu3KOdvNDhv2',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 const exampleDocument = {
   type: 'doc',
@@ -181,6 +335,7 @@ const exampleDocument = {
         },
       ],
     },
+    demoTable,
     {
       type: 'paragraph',
       content: [
@@ -274,3 +429,5 @@ const exampleDocument = {
     },
   ],
 };
+
+export default () => Example(exampleDocument);

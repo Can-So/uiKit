@@ -19,31 +19,6 @@ describe('getCardStatus()', () => {
       expect(getCardStatus(state, props)).toEqual('uploading');
     });
 
-    it('should override status to complete if preview is available', () => {
-      const processingState = {
-        metadata: {
-          mediaType: 'image',
-        },
-        status: 'processing',
-        dataURI: 'some-preview',
-      } as CardState;
-      const uploadingState = {
-        metadata: {
-          mediaType: 'image',
-        },
-        status: 'uploading',
-        dataURI: 'some-preview',
-      } as CardState;
-      const props = {
-        identifier: {
-          mediaItemType: 'file',
-        },
-      } as CardProps;
-
-      expect(getCardStatus(processingState, props)).toEqual('complete');
-      expect(getCardStatus(uploadingState, props)).toEqual('complete');
-    });
-
     it('should fallback to processing if its complete and no preview is available', () => {
       const state = {
         metadata: {

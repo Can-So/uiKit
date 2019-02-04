@@ -1,5 +1,4 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 import {
   editable,
@@ -8,20 +7,28 @@ import {
   quickInsert,
   insertMentionUsingClick,
 } from '../_helpers';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
+import { selectors } from './_utils';
 
 BrowserTestCase(
   'mention.ts: Can insert mention inside panel using click',
   { skip: ['ie', 'edge', 'safari'] },
   async client => {
-    const browser = new Page(client);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowPanel: true,
+    });
 
-    await browser.goto(fullpage.path);
-    await browser.waitFor(editable);
-    await browser.click(editable);
-    await quickInsert(browser, 'Panel');
+    await page.click(editable);
+    await quickInsert(page, 'Panel');
+    await page.waitForSelector(selectors.PANEL_EDITOR_CONTAINER);
 
-    await insertMentionUsingClick(browser, '0');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    await insertMentionUsingClick(page, '0');
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );

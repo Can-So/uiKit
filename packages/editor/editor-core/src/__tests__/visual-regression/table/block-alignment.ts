@@ -10,7 +10,7 @@ import {
 
 import { setTableLayout, insertColumn, focusTable } from './_table-utils';
 
-describe('Snapshot Test: table block alignment', () => {
+describe.skip('Snapshot Test: table block alignment', () => {
   let page;
 
   beforeAll(async () => {

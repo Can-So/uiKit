@@ -4,7 +4,7 @@ import { UserOption } from './UserOption';
 import { TeamOption } from './TeamOption';
 import { isUser, isTeam } from './utils';
 
-export const Option = props => {
+export const Option = (props: any) => {
   const {
     data: { data },
     status,

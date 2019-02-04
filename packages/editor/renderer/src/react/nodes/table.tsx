@@ -25,6 +25,9 @@ export interface TableProps {
   rendererAppearance?: RendererAppearance;
 }
 
+// we allow scaling down column widths by no more than 15%
+const MAX_SCALING_PERCENT = 0.15;
+
 const isHeaderRowEnabled = rows => {
   if (!rows.length) {
     return false;
@@ -46,7 +49,7 @@ const addNumberColumnIndexes = rows => {
   });
 };
 
-const getTableWidthLimit = (layout: TableLayout) => {
+const getTableLayoutWidth = (layout: TableLayout) => {
   switch (layout) {
     case 'full-width':
       return akEditorFullWidthLayoutWidth;
@@ -55,6 +58,27 @@ const getTableWidthLimit = (layout: TableLayout) => {
     default:
       return akEditorDefaultLayoutWidth;
   }
+};
+
+const fixColumnWidth = (
+  columnWidth: number,
+  tableWidth: number,
+  layoutWidth: number,
+  zeroWidthColumnsCount: number,
+  scaleDownPercent: number,
+) => {
+  // If the tables total width (including no zero widths col or cols without width) is less than the current layout
+  // We scale up the columns to meet the minimum of the table layout.
+  if (zeroWidthColumnsCount === 0) {
+    if (scaleDownPercent) {
+      return (1 - scaleDownPercent) * columnWidth;
+    }
+    if (tableWidth < layoutWidth) {
+      return (columnWidth * (layoutWidth / tableWidth)).toFixed(2);
+    }
+  }
+
+  return columnWidth;
 };
 
 class Table extends React.Component<TableProps & OverflowShadowProps> {
@@ -96,8 +120,8 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
     }
 
     // @see ED-6056
-    const widthLimit = getTableWidthLimit(layout);
-    const maxTableWidth = renderWidth < widthLimit ? renderWidth : widthLimit;
+    const layoutWidth = getTableLayoutWidth(layout);
+    const maxTableWidth = renderWidth < layoutWidth ? renderWidth : layoutWidth;
 
     let tableWidth = 0;
     let minTableWidth = 0;
@@ -112,22 +136,41 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
       minTableWidth += Math.ceil(width) || akEditorTableLegacyCellMinWidth;
     });
     let cellMinWidth = 0;
-    if (zeroWidthColumnsCount > 0 && minTableWidth > maxTableWidth) {
-      const minWidth = Math.ceil(
-        (maxTableWidth - tableWidth) / zeroWidthColumnsCount,
-      );
-      cellMinWidth =
-        minWidth < akEditorTableLegacyCellMinWidth
-          ? akEditorTableLegacyCellMinWidth
-          : minWidth;
+    let scaleDownPercent = 0;
+    // fixes migration tables with zero-width columns
+    if (zeroWidthColumnsCount > 0) {
+      if (minTableWidth > maxTableWidth) {
+        const minWidth = Math.ceil(
+          (maxTableWidth - tableWidth) / zeroWidthColumnsCount,
+        );
+        cellMinWidth =
+          minWidth < akEditorTableLegacyCellMinWidth
+            ? akEditorTableLegacyCellMinWidth
+            : minWidth;
+      }
     }
+    // scaling down
+    else if (renderWidth < tableWidth) {
+      const diffPercent = 1 - renderWidth / tableWidth;
+      scaleDownPercent =
+        diffPercent < MAX_SCALING_PERCENT ? diffPercent : MAX_SCALING_PERCENT;
+    }
+
     return (
       <colgroup>
         {isNumberColumnEnabled && (
           <col style={{ width: akEditorTableNumberColumnWidth }} />
         )}
         {columnWidths.map((colWidth, idx) => {
-          const width = colWidth ? colWidth : cellMinWidth;
+          const width =
+            fixColumnWidth(
+              colWidth,
+              minTableWidth,
+              maxTableWidth,
+              zeroWidthColumnsCount,
+              scaleDownPercent,
+            ) || cellMinWidth;
+
           const style = width ? { width: `${width}px` } : {};
           return <col key={idx} style={style} />;
         })}

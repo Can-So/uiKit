@@ -53,6 +53,7 @@ export default {
     'tableColResizing',
     'blockTypeKeyMap',
     'tableEditing',
+    'filterStepsPlugin',
     'pmCollab',
     'collab',
     'ruleInputRule',

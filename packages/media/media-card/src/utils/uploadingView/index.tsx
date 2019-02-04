@@ -20,11 +20,22 @@ export interface UploadingViewProps {
   progress: number;
   dataURI?: string;
   actions?: CardAction[];
+  crop?: boolean;
+  stretch?: boolean;
+  previewOrientation?: number;
 }
 
 export class UploadingView extends Component<UploadingViewProps, {}> {
   render() {
-    const { title, progress, dataURI, actions } = this.props;
+    const {
+      title,
+      progress,
+      dataURI,
+      actions,
+      previewOrientation,
+      crop,
+      stretch,
+    } = this.props;
 
     return (
       <Wrapper>
@@ -43,7 +54,14 @@ export class UploadingView extends Component<UploadingViewProps, {}> {
             </CardActionsWrapper>
           </Body>
         </Overlay>
-        {dataURI && <MediaImage dataURI={dataURI} />}
+        {dataURI && (
+          <MediaImage
+            dataURI={dataURI}
+            previewOrientation={previewOrientation}
+            crop={crop}
+            stretch={stretch}
+          />
+        )}
       </Wrapper>
     );
   }

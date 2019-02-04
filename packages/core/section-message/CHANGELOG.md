@@ -1,5 +1,10 @@
 # @atlaskit/section-message
 
+## 1.0.17
+- [patch] [b8091afbdd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8091afbdd):
+
+  - Fixed alignment of the separator dots
+
 ## 1.0.16
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

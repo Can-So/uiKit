@@ -1322,6 +1322,10 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/lorem-ipsum/-/lorem-ipsum-1.0.2.tgz#77b11b0284fe315efedb9a31c0f1e1488469d99c"
 
+"@types/memoize-one@^3.0.1":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@types/memoize-one/-/memoize-one-3.1.2.tgz#0c6e21d603b83e6fed22945129d264a236d48979"
+
 "@types/mocha@^2.2.39":
   version "2.2.44"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.44.tgz#1d4a798e53f35212fd5ad4d04050620171cd5b5e"
@@ -12669,9 +12673,9 @@ prosemirror-markdown@^1.2.0:
     markdown-it "^8.4.2"
     prosemirror-model "^1.0.0"
 
-prosemirror-model@>=1.0.0, prosemirror-model@^1.0.0, prosemirror-model@^1.1.0, prosemirror-model@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/prosemirror-model/-/prosemirror-model-1.6.1.tgz#dc5b6b5a2dfcb066d24720900725d41ba2b2c35d"
+prosemirror-model@>=1.0.0, prosemirror-model@^1.0.0, prosemirror-model@^1.1.0, prosemirror-model@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-model/-/prosemirror-model-1.7.0.tgz#1fde0fd7cb2f9ead0be1581ad9f04593002a65aa"
   dependencies:
     orderedmap "^1.0.0"
 
@@ -12709,9 +12713,9 @@ prosemirror-utils@^0.7.5:
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/prosemirror-utils/-/prosemirror-utils-0.7.5.tgz#11b477647b672ec8f10679ab298a5823dad6457a"
 
-prosemirror-view@^1.0.0, prosemirror-view@^1.6.8:
-  version "1.6.8"
-  resolved "https://registry.yarnpkg.com/prosemirror-view/-/prosemirror-view-1.6.8.tgz#33fc1a6e2731633e5d6dc1af1967378f15810b74"
+prosemirror-view@^1.0.0, prosemirror-view@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-view/-/prosemirror-view-1.7.0.tgz#e41af22b571f342310e09c3b8044af86a684d1e7"
   dependencies:
     prosemirror-model "^1.1.0"
     prosemirror-state "^1.0.0"

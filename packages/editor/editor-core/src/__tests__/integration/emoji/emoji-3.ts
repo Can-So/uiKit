@@ -1,33 +1,35 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import { getDocFromElement, editable, gotoEditor } from '../_helpers';
+import { getDocFromElement, editable } from '../_helpers';
 import {
   insertEmoji,
   emojiItem,
   typeahead,
   highlightEmojiInTypeahead,
 } from './_emoji-helpers';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
 
 // safari failure on browserstack
 BrowserTestCase(
   'emoji-3.ts: user can navigate typeahead using keyboard',
   { skip: ['safari', 'ie', 'firefox', 'edge'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, ':');
-    await browser.type(editable, 'smi');
-    await browser.waitForSelector(typeahead);
-    await browser.type(editable, 'ArrowDown');
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page' });
+    await page.type(editable, ':');
+    await page.type(editable, 'smi');
+    await page.waitForSelector(typeahead);
+    await page.type(editable, 'ArrowDown');
 
     // The typeahead may re-order our results.
     // Go down 5 items til we find our desired emoji
-    await highlightEmojiInTypeahead(browser, 'smile');
+    await highlightEmojiInTypeahead(page, 'smile');
 
-    await browser.type(editable, 'Return');
-    await browser.waitForSelector(emojiItem('smile'));
-    const doc = await browser.$eval(editable, getDocFromElement);
+    await page.type(editable, 'Return');
+    await page.waitForSelector(emojiItem('smile'), 1000);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -37,20 +39,19 @@ BrowserTestCase(
   'emoji-3.ts: should select emoji on return',
   { skip: ['safari', 'ie', 'firefox', 'edge'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, ':');
-    await browser.type(editable, 'wink');
-    await browser.waitForSelector(typeahead);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page' });
+    await page.type(editable, ':');
+    await page.type(editable, 'wink');
+    await page.waitForSelector(typeahead);
 
     // The typeahead may re-order our results.
     // Grab the currently selected emoji, to reference in render.
-    await highlightEmojiInTypeahead(browser, 'wink');
+    await highlightEmojiInTypeahead(page, 'wink');
 
-    await browser.type(editable, 'Return');
-    await browser.waitForSelector(emojiItem('wink'));
-    const doc = await browser.$eval(editable, getDocFromElement);
+    await page.type(editable, 'Return');
+    await page.waitForSelector(emojiItem('wink'), 1000);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -59,13 +60,12 @@ BrowserTestCase(
   'emoji-3.ts: should render emoji inside codeblock',
   { skip: ['safari', 'ie', 'firefox', 'edge'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '```');
-    await browser.waitForSelector('pre');
-    await browser.type(editable, ':smile:');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page', allowCodeBlocks: true });
+    await page.type(editable, '```');
+    await page.waitForSelector('pre', 1000);
+    await page.type(editable, ':smile:');
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -75,12 +75,12 @@ BrowserTestCase(
   'emoji-3.ts: should render emoji inside action',
   { skip: ['safari', 'ie', 'firefox', 'edge'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.type(editable, '[] ');
-    await insertEmoji(browser, 'smile');
-    await browser.waitForSelector(emojiItem('smile'));
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page' });
+    await page.type(editable, '[] ');
+    await insertEmoji(page, 'smile');
+    await page.waitForSelector(emojiItem('smile'), 1000);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -89,11 +89,10 @@ BrowserTestCase(
   'emoji-3.ts: should not show typeahead with text: ',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, 'text: ');
-    expect(await browser.isExisting(typeahead)).toBe(false);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page' });
+    await page.type(editable, 'text: ');
+    expect(await page.isExisting(typeahead)).toBe(false);
   },
 );
 
@@ -101,10 +100,9 @@ BrowserTestCase(
   'emoji-3.ts: ":<space>" does not show the picker',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, ': ');
-    expect(await browser.isExisting(typeahead)).toBe(false);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page' });
+    await page.type(editable, ': ');
+    expect(await page.isExisting(typeahead)).toBe(false);
   },
 );

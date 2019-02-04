@@ -63,6 +63,7 @@ export default class Editor extends React.Component<
       popupsBoundariesElement,
       popupsScrollableElement,
       disabled,
+      dispatchAnalyticsEvent,
     } = this.props;
     const maxContentSizeReached =
       maxContentSize && maxContentSize.maxContentSizeReached;
@@ -87,6 +88,7 @@ export default class Editor extends React.Component<
               popupsScrollableElement={popupsScrollableElement}
               containerElement={this.containerElement}
               disabled={!!disabled}
+              dispatchAnalyticsEvent={dispatchAnalyticsEvent}
             />
             {editorDOMElement}
           </ContentArea>
