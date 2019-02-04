@@ -201,7 +201,7 @@ pipelines:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            - yarn test:webdriver
+            - HEADLESS=true yarn test:webdriver select
           caches:
             - node
             
