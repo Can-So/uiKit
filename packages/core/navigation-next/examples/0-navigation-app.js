@@ -29,12 +29,14 @@ export default class App extends Component<
     isDebugEnabled: boolean,
     isFlyoutAvailable: boolean,
     isAlternateFlyoutBehaviourEnabled: boolean,
+    isFullWitdhFlyoutEnabled: boolean,
   },
 > {
   state = {
     isDebugEnabled: true,
     isFlyoutAvailable: true,
-    isAlternateFlyoutBehaviourEnabled: false,
+    isAlternateFlyoutBehaviourEnabled: true,
+    isFullWitdhFlyoutEnabled: false,
   };
 
   onDebugToggle = () => {
@@ -48,12 +50,18 @@ export default class App extends Component<
       isAlternateFlyoutBehaviourEnabled: !state.isAlternateFlyoutBehaviourEnabled,
     }));
   };
+  onFullWidthFlyoutToggle = () => {
+    this.setState(state => ({
+      isFullWitdhFlyoutEnabled: !state.isFullWitdhFlyoutEnabled,
+    }));
+  };
 
   render() {
     const {
       isDebugEnabled,
       isFlyoutAvailable,
       isAlternateFlyoutBehaviourEnabled,
+      isFullWitdhFlyoutEnabled,
     } = this.state;
 
     return (
@@ -65,6 +73,7 @@ export default class App extends Component<
             experimental_alternateFlyoutBehaviour={
               isAlternateFlyoutBehaviourEnabled
             }
+            experimental_fullWidthFlyout={isFullWitdhFlyoutEnabled}
             globalNavigation={DefaultGlobalNavigation}
           >
             <div style={{ padding: 40 }}>
@@ -90,6 +99,11 @@ export default class App extends Component<
               <ToggleStateless
                 isChecked={isAlternateFlyoutBehaviourEnabled}
                 onChange={this.onAlternateBehaviourToggle}
+              />
+              <Label label="Toggle full width flyout (experimental)" />
+              <ToggleStateless
+                isChecked={isFullWitdhFlyoutEnabled}
+                onChange={this.onFullWidthFlyoutToggle}
               />
               <Label label="Toggle debug logger" />
               <ToggleStateless

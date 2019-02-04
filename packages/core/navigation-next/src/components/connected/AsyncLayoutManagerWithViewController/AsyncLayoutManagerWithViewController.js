@@ -27,6 +27,7 @@ class AsyncLayoutManagerWithViewControllerBase extends Component<
   static defaultProps = {
     experimental_flyoutOnHover: false,
     experimental_alternateFlyoutBehaviour: false,
+    experimental_fullWidthFlyout: false,
   };
 
   state = {
@@ -147,6 +148,7 @@ class AsyncLayoutManagerWithViewControllerBase extends Component<
       children,
       experimental_flyoutOnHover,
       experimental_alternateFlyoutBehaviour,
+      experimental_fullWidthFlyout,
       firstSkeletonToRender,
       onExpandStart,
       onExpandEnd,
@@ -180,6 +182,7 @@ class AsyncLayoutManagerWithViewControllerBase extends Component<
           experimental_alternateFlyoutBehaviour={
             experimental_alternateFlyoutBehaviour
           }
+          experimental_fullWidthFlyout={experimental_fullWidthFlyout}
           productNavigation={this.renderProductNavigation}
           onExpandStart={onExpandStart}
           onExpandEnd={onExpandEnd}

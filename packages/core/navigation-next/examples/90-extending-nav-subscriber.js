@@ -363,6 +363,7 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
         experimental_alternateFlyoutBehaviour={
           isAlternateFlyoutBehaviourEnabled
         }
+        experimental_fullWidthFlyout={false}
       >
         <CollapseStatusListener
           onResizeEnd={this.onResizeEnd}
