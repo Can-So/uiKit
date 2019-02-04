@@ -26,7 +26,7 @@ export type AvatarItemOptionProps = {
   secondaryText: React.ReactNode;
 };
 
-export const AvatarItemOption = props => (
+export const AvatarItemOption = (props: AvatarItemOptionProps) => (
   <AvatarItem
     backgroundColor="transparent"
     component={AvatarComponent}
