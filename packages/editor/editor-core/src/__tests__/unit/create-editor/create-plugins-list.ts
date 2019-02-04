@@ -1,4 +1,5 @@
 jest.mock('../../../plugins', () => ({
+  analyticsPlugin: jest.fn(),
   mediaPlugin: jest.fn(),
   tablesPlugin: jest.fn(),
   insertBlockPlugin: jest.fn(),

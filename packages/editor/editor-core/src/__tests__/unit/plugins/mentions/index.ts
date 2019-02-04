@@ -11,6 +11,7 @@ import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types'
 describe('mentionTypeahead', () => {
   const createEditor = createEditorFactory();
   const sessionIdRegex = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
+  const expectedActionSubject = 'mentionTypeahead';
 
   type TestDependencies = {
     editorView: EditorView;
@@ -113,7 +114,13 @@ describe('mentionTypeahead', () => {
   const analyticsMocks = () => {
     const event = { fire: jest.fn().mockName('event.fire') };
     const createAnalyticsEvent = jest
-      .fn(() => event)
+      .fn(payload =>
+        // We're only interested in recording events for 'mentionTypeahead'
+        // ignoring all others
+        payload.actionSubject === expectedActionSubject
+          ? event
+          : { fire: jest.fn() },
+      )
       .mockName('createAnalyticsEvent');
 
     return {
@@ -132,7 +139,7 @@ describe('mentionTypeahead', () => {
         expect(createAnalyticsEvent).toHaveBeenCalledWith(
           expect.objectContaining({
             action: 'cancelled',
-            actionSubject: 'mentionTypeahead',
+            actionSubject: expectedActionSubject,
             eventType: 'ui',
             attributes: expect.objectContaining({
               packageName: '@atlaskit/editor-core',
@@ -168,7 +175,7 @@ describe('mentionTypeahead', () => {
           expect(createAnalyticsEvent).toHaveBeenCalledWith(
             expect.objectContaining({
               action: expectedActionName,
-              actionSubject: 'mentionTypeahead',
+              actionSubject: expectedActionSubject,
               eventType: 'ui',
               attributes: expect.objectContaining({
                 packageName: '@atlaskit/editor-core',
@@ -196,7 +203,7 @@ describe('mentionTypeahead', () => {
         expect(createAnalyticsEvent).toHaveBeenCalledWith(
           expect.objectContaining({
             action: 'rendered',
-            actionSubject: 'mentionTypeahead',
+            actionSubject: expectedActionSubject,
             eventType: 'operational',
             attributes: expect.objectContaining({
               packageName: '@atlaskit/editor-core',
@@ -220,7 +227,7 @@ describe('mentionTypeahead', () => {
         expect(createAnalyticsEvent).toHaveBeenCalledWith(
           expect.objectContaining({
             action: 'rendered',
-            actionSubject: 'mentionTypeahead',
+            actionSubject: expectedActionSubject,
             eventType: 'operational',
             attributes: expect.objectContaining({
               packageName: '@atlaskit/editor-core',
