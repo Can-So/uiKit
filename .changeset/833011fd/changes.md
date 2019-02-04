@@ -1,0 +1,1 @@
+- ED-6156: limit breakout width to 1800px
