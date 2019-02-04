@@ -316,4 +316,68 @@ describe('Renderer - React/Nodes/Table', () => {
       });
     });
   });
+
+  describe('when renderWidth is 10% lower than table width', () => {
+    it('should scale down columns widths by 10%', () => {
+      const columnWidths = [200, 200, 280];
+
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={false}
+          columnWidths={columnWidths}
+          renderWidth={612}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+
+      expect(table.find('col')).to.have.lengthOf(3);
+      table.find('col').forEach((col, index) => {
+        const width = columnWidths[index] - columnWidths[index] * 0.1;
+        expect(col.prop('style')!.width).to.equal(`${width}px`);
+      });
+    });
+  });
+
+  describe('when renderWidth is 20% lower than table width', () => {
+    it('should scale down columns widths by 15% and then overflow', () => {
+      const columnWidths = [200, 200, 280];
+
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={false}
+          columnWidths={columnWidths}
+          renderWidth={578}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+
+      expect(table.find('col')).to.have.lengthOf(3);
+      table.find('col').forEach((col, index) => {
+        const width = columnWidths[index] - columnWidths[index] * 0.15;
+        expect(col.prop('style')!.width).to.equal(`${width}px`);
+      });
+    });
+  });
 });
