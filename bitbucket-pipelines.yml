@@ -85,25 +85,27 @@ pipelines:
               - node build/ci-scripts/run.if.package.changed.js @atlaskit/adf-schema -- yarn build:adf-schema:checkuptodate
             caches:
               - node
-        - step:
-            name: Browser Unit Testing
-            script:
-              - source ./build-setup.sh
-              - bolt install --pure-lockfile
-              - echo "Run browser unit tests using Karma + Browserstack"
-              - node build/ci-scripts/run.tool.if.changed.js browserstack  -- yarn test:browser:browserstack
-            caches:
-              - node
-        - step:
-            name: Browser Integration Testing
-            script:
-              - source ./build-setup.sh
-              - bolt install --pure-lockfile
-              - echo "Run browser integration tests using Webdriver + Browserstack"
-              # If we have changed any packages with webdriver tests, we wait until browserstack has free resources, then run our tests
-              - LOCAL_IDENTIFIER=$(date +%s) BS_RETRY=5 BS_BUILD_ALLOWED=3 node build/ci-scripts/run.tool.if.changed.js webdriver -- node build/ci-scripts/wait.for.browserstack.resources.js && yarn test:webdriver:browserstack:changed
-            caches:
-              - node
+        # https://hello.atlassian.net/servicedesk/customer/portal/2/ADM-208362
+        # - step:
+        #     name: Browser Unit Testing
+        #     script:
+        #       - source ./build-setup.sh
+        #       - bolt install --pure-lockfile
+        #       - echo "Run browser unit tests using Karma + Browserstack"
+        #       - node build/ci-scripts/run.tool.if.changed.js browserstack  -- yarn test:browser:browserstack
+        #     caches:
+        #       - node
+        # https://hello.atlassian.net/servicedesk/customer/portal/2/ADM-208362
+        # - step:
+        #     name: Browser Integration Testing
+        #     script:
+        #       - source ./build-setup.sh
+        #       - bolt install --pure-lockfile
+        #       - echo "Run browser integration tests using Webdriver + Browserstack"
+        #       # If we have changed any packages with webdriver tests, we wait until browserstack has free resources, then run our tests
+        #       - LOCAL_IDENTIFIER=$(date +%s) BS_RETRY=5 BS_BUILD_ALLOWED=3 node build/ci-scripts/run.tool.if.changed.js webdriver -- node build/ci-scripts/wait.for.browserstack.resources.js && yarn test:webdriver:browserstack:changed
+        #     caches:
+        #       - node
         - step:
             name: Visual Regression Tests
             image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
@@ -111,8 +113,13 @@ pipelines:
               - source ./build-setup.sh
               - git lfs pull
               - bolt install --pure-lockfile
-              - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr:changed --passWithNoTests
-              - TEST_ONLY_PATTERN='packages/editor' yarn run test:vr:changed --passWithNoTests
+              - yarn run test:vr:changed
+            after-script:
+              # Extract all the diff images and store them into a folder for download
+              - mkdir ./imageSnapshotFailures && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
+            # If a failure occurs, you can download the image snapshot of the differences.
+            artifacts: 
+              - imageSnapshotFailures
             caches:
               - node
         - step:
@@ -187,27 +194,29 @@ pipelines:
             - node ./scripts/uploadBundleAnalyticsEvent.js
           caches:
             - node
-
+    # https://hello.atlassian.net/servicedesk/customer/portal/2/ADM-208362
     # This will run with the webdriver tests
-    build-webdriver:
-      - step:
-          script:
-            - source ./build-setup.sh
-            - bolt install --pure-lockfile
-            - yarn test:webdriver:browserstack
-          caches:
-            - node
+    # build-webdriver:
+    #   - step:
+    #       script:
+    #         - source ./build-setup.sh
+    #         - bolt install --pure-lockfile
+    #         - yarn test:webdriver:browserstack
+    #       caches:
+    #         - node
+            
     # This will run with the visual regression tool
     build-visual-regression:
       - step:
           image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
           script:
             - source ./build-setup.sh
+            - git lfs pull
             - bolt install --pure-lockfile
-            # Will work for all pkgs other than editor
-            - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr 
-      # This will run essentially the branch builds, but without any optimizations and should be manually
-      # run in any potentially risky builds
+            - yarn run test:vr 
+            
+    # This will run essentially the branch builds, but without any optimizations and should be manually
+    # run in any potentially risky builds
     run-full-suite:
       - step:
           script:
@@ -224,7 +233,6 @@ pipelines:
             - yarn build
 
     # We deliberately don't use the cache here as well
-
     run-bundle-analysis:
       - step:
           script:
@@ -299,13 +307,14 @@ pipelines:
                 - bolt install --pure-lockfile
                 - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
                 - STEPS="4" STEP_IDX="3" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
-          - step:
-              name: Running Browser Integration tests
-              script:
-                - source ./build-setup.sh
-                - git merge master --no-edit
-                - bolt install --pure-lockfile
-                - LANDKID=true yarn test:webdriver:browserstack:changed
+          # https://hello.atlassian.net/servicedesk/customer/portal/2/ADM-208362
+          # - step:
+          #     name: Running Browser Integration tests
+          #     script:
+          #       - source ./build-setup.sh
+          #       - git merge master --no-edit
+          #       - bolt install --pure-lockfile
+          #       - LANDKID=true yarn test:webdriver:browserstack:changed
       - step:
           name: Wait until no master is running
           script:

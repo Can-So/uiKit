@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.5.0
+- [minor] [be66d1da3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be66d1da3a):
+
+  - Introduce ModalSpinner component to be used in modal type component while those loading via code split
+
 ## 8.4.2
 - [patch] [af3918bc89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af3918bc89):
 

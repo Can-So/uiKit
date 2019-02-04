@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 52.0.1
+- [patch] [1d3e336534](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d3e336534):
+
+  - Show progress bar while file is uploading
+
 ## 52.0.0
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/media-test-helpers@20.1.0

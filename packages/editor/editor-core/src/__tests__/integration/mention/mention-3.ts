@@ -1,13 +1,16 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 import {
   getDocFromElement,
   insertMention,
   editable,
   typeAheadPicker,
   lozenge as mentionId,
-  gotoEditor,
+  fullpage,
 } from '../_helpers';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
 
 /*
  * Safari does not understand webdriver keyboard actions so a
@@ -21,13 +24,16 @@ BrowserTestCase(
   'mention-3.ts: user can click ToolbarMentionPicker and see mention',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector('[aria-label="Mention"]');
-    await browser.click('[aria-label="Mention"]');
-    await browser.waitForSelector(mentionId);
-    await browser.click(mentionId);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+    });
+
+    await page.waitForSelector('[aria-label="Mention"]');
+    await page.click('[aria-label="Mention"]');
+    await page.waitForSelector(mentionId);
+    await page.click(mentionId);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -36,16 +42,20 @@ BrowserTestCase(
   'mention-3.ts: should not insert on space if multiple exact nickname match',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.type(editable, '@');
-    await browser.waitForSelector(typeAheadPicker);
-    await browser.type(editable, 'gill');
-    await browser.isVisible('[data-mention-name=pgill]');
-    await browser.isVisible('[data-mention-name=jjackson]');
-    await browser.type(editable, ' some');
-    await browser.type(editable, ' text ');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+    });
+
+    await page.type(editable, '@');
+    await page.waitForSelector(typeAheadPicker);
+    await page.type(editable, 'gill');
+    await page.isVisible('[data-mention-name=pgill]');
+    await page.isVisible('[data-mention-name=jjackson]');
+    await page.type(editable, ' some');
+    await page.type(editable, ' text ');
+    const doc = await page.$eval(editable, getDocFromElement);
+    await new Promise(resolve => setTimeout(resolve, 1000));
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -54,21 +64,23 @@ BrowserTestCase(
   'mention-3.ts: inserted if space on single match',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '@');
-    await browser.waitForSelector(typeAheadPicker);
-    await browser.type(editable, 'Carolyn');
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+    });
+
+    await page.type(editable, '@');
+    await page.waitForSelector(typeAheadPicker);
+    await page.type(editable, 'Carolyn');
     // Wait until there is only one mention left in picker.
-    await browser.browser.waitUntil(async () => {
-      const mentionsInPicker = await browser.$$(
+    await page.browser.waitUntil(async () => {
+      const mentionsInPicker = await page.$$(
         `${typeAheadPicker} [data-mention-name]`,
       );
       return mentionsInPicker.value.length === 1;
     });
-    await browser.type(editable, ' text ');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    await page.type(editable, ' text ');
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -78,13 +90,15 @@ BrowserTestCase(
   // TODO: Fix unknown character on BS
   { skip: ['safari', 'ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '`this is inline code ');
-    await insertMention(browser, 'Carolyn');
-    await browser.type(editable, '`');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+    });
+
+    await page.type(editable, '`this is inline code ');
+    await insertMention(page, 'Carolyn');
+    await page.type(editable, '`');
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -94,14 +108,17 @@ BrowserTestCase(
   // TODO: Fix unknown character on BS
   { skip: ['safari', 'ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '```');
-    await browser.waitForSelector('pre');
-    await browser.type(editable, ['this is a code block ', '@Caro']);
-    await browser.type(editable, 'Return');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowCodeBlocks: true,
+    });
+
+    await page.type(editable, '```');
+    await page.waitForSelector('pre');
+    await page.type(editable, ['this is a code block ', '@Caro']);
+    await page.type(editable, 'Return');
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -110,17 +127,19 @@ BrowserTestCase(
   'mention-3.ts: users with same first name should not be selected if space',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '@');
-    await browser.waitForSelector(typeAheadPicker);
-    await browser.type(editable, 'alica');
-    await browser.isVisible('[data-mention-name=awoods]');
-    await browser.isVisible('[data-mention-name=Fatima]');
-    await browser.type(editable, ' some');
-    await browser.type(editable, ' text');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+    });
+
+    await page.type(editable, '@');
+    await page.waitForSelector(typeAheadPicker);
+    await page.type(editable, 'alica');
+    await page.isVisible('[data-mention-name=awoods]');
+    await page.isVisible('[data-mention-name=Fatima]');
+    await page.type(editable, ' some');
+    await page.type(editable, ' text');
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );

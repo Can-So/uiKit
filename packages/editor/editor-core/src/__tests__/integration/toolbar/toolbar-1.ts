@@ -1,10 +1,13 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 import { getDocFromElement, comment, fullpage, editable } from '../_helpers';
 import { messages as textFormattingMessages } from '../../../plugins/text-formatting/ui/ToolbarTextFormatting';
 import { messages as advancedTextFormattingMessages } from '../../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
 import { messages as blockTypeToolbarMessages } from '../../../plugins/block-type/ui/ToolbarBlockType';
 import { messages as blockTypeMessages } from '../../../plugins/block-type/types';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
 
 const input = 'helloworld ';
 // https://product-fabric.atlassian.net/browse/ED-4531
@@ -15,7 +18,6 @@ const input = 'helloworld ';
     } editor`,
     { skip: ['ie', 'safari', 'edge'] },
     async client => {
-      const browser = new Page(client);
       const bold = `[aria-label="${
         textFormattingMessages.bold.defaultMessage
       }"]`;
@@ -32,30 +34,30 @@ const input = 'helloworld ';
       const underline = `span=${
         advancedTextFormattingMessages.underline.defaultMessage
       }`;
+      const page = await goToEditorTestingExample(client);
+      await mountEditor(page, { appearance: editor.appearance });
 
-      await browser.goto(editor.path);
-      await browser.waitForSelector(editor.placeholder);
-      await browser.click(editor.placeholder);
-      await browser.type(editable, input);
-      await browser.click(changeFormatting);
-      await browser.click(normalText);
-      await browser.waitForSelector(bold);
-      await browser.click(bold);
-      await browser.type(editable, input);
-      await browser.waitForSelector('strong');
-      await browser.click(bold);
+      await page.click(editable);
+      await page.type(editable, input);
+      await page.click(changeFormatting);
+      await page.click(normalText);
+      await page.waitForSelector(bold);
+      await page.click(bold);
+      await page.type(editable, input);
+      await page.waitForSelector('strong');
+      await page.click(bold);
 
-      await browser.click(italic);
-      await browser.type(editable, input);
-      await browser.waitForSelector('em');
-      await browser.click(italic);
+      await page.click(italic);
+      await page.type(editable, input);
+      await page.waitForSelector('em');
+      await page.click(italic);
 
-      await browser.waitForSelector(more);
-      await browser.click(more);
-      await browser.waitForSelector(underline);
-      await browser.click(underline);
-      await browser.type(editable, input);
-      const doc = await browser.$eval(editable, getDocFromElement);
+      await page.waitForSelector(more);
+      await page.click(more);
+      await page.waitForSelector(underline);
+      await page.click(underline);
+      await page.type(editable, input);
+      const doc = await page.$eval(editable, getDocFromElement);
       expect(doc).toMatchDocSnapshot();
     },
   );

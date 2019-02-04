@@ -3,12 +3,12 @@ import {
   constrainPos,
   constrainScale,
   constrainEdges,
-} from '../../../src/constraint-util';
+} from '../../constraint-util';
 import {
   CONTAINER_SIZE,
   CONTAINER_INNER_SIZE,
   CONTAINER_PADDING,
-} from '../../../src/image-navigator';
+} from '../../image-navigator';
 
 const IMAGE_WIDTH = 400;
 const IMAGE_HEIGHT = 400;

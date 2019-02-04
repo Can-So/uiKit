@@ -1,36 +1,39 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 import {
   editable,
   getDocFromElement,
-  setupMediaMocksProviders,
   message,
   comment,
   insertMedia,
 } from '../_helpers';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
 
 [comment, message].forEach(editor => {
   BrowserTestCase(
     `insert-mediaGroup.ts: Inserts a media group on ${editor.name}`,
     { skip: ['edge', 'ie', 'safari'] },
     async client => {
-      const browser = new Page(client);
+      const page = await goToEditorTestingExample(client);
+      await mountEditor(page, {
+        appearance: editor.appearance,
+        media: {
+          allowMediaSingle: false,
+          allowMediaGroup: true,
+        },
+      });
 
-      await browser.goto(editor.path);
-      await browser.click(editor.placeholder);
-
-      // prepare media
-      await setupMediaMocksProviders(browser);
-
-      await browser.click(editable);
-      await browser.type(editable, 'some text');
+      await page.click(editable);
+      await page.type(editable, 'some text');
 
       // now we can insert media as necessary
-      await insertMedia(browser);
+      await insertMedia(page);
 
-      expect(await browser.isVisible('.wrapper')).toBe(true);
+      expect(await page.isVisible('.wrapper')).toBe(true);
 
-      const doc = await browser.$eval(editable, getDocFromElement);
+      const doc = await page.$eval(editable, getDocFromElement);
       expect(doc).toMatchDocSnapshot();
     },
   );

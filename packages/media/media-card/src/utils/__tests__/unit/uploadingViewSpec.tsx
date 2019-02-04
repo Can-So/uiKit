@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
+import { expectToEqual } from '@atlaskit/media-test-helpers';
 
 import { UploadingView } from '../../uploadingView';
 import { MediaImage, CardActionsView } from '../..';
@@ -23,7 +24,22 @@ describe('UploadingView', () => {
   });
 
   it('should render the image when dataURI is provided', () => {
-    const card = shallow(<UploadingView progress={0} dataURI="data:png" />);
-    expect(card.find(MediaImage)).toHaveLength(1);
+    const card = shallow(
+      <UploadingView
+        progress={0}
+        dataURI="data:png"
+        previewOrientation={6}
+        stretch={true}
+        crop={true}
+      />,
+    );
+    const mediaImage = card.find(MediaImage);
+    expect(mediaImage).toHaveLength(1);
+    expectToEqual(mediaImage.props(), {
+      dataURI: 'data:png',
+      previewOrientation: 6,
+      stretch: true,
+      crop: true,
+    });
   });
 });

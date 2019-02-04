@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Loader from './loadingView';
+import { ModalSpinner } from '@atlaskit/media-ui';
 import SmartMediaEditorType, {
   SmartMediaEditorProps,
 } from './smartMediaEditor';
@@ -33,7 +33,7 @@ export default class AsyncSmartMediaEditor extends React.PureComponent<
 
   render() {
     if (!this.state.SmartMediaEditor) {
-      return <Loader />;
+      return <ModalSpinner mode="dark" />;
     }
 
     return <this.state.SmartMediaEditor {...this.props} />;

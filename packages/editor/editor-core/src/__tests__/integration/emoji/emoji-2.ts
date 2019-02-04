@@ -1,24 +1,22 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import {
-  getDocFromElement,
-  editable,
-  gotoEditor,
-  insertBlockMenuItem,
-} from '../_helpers';
+import { getDocFromElement, editable } from '../_helpers';
 import { insertEmoji, emojiItem, insertEmojiBySelect } from './_emoji-helpers';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
 
 BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside blockquote',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.type(editable, '> ');
-    await browser.type(editable, 'some text ');
-    await insertEmoji(browser, 'a');
-    await browser.waitForSelector(emojiItem('a'));
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page' });
+    await page.type(editable, '> ');
+    await page.type(editable, 'some text ');
+    await insertEmoji(page, 'a');
+    await page.waitForSelector(emojiItem('a'), 100);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -27,12 +25,12 @@ BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside bulletList',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.type(editable, '* ');
-    await insertEmoji(browser, 'smile');
-    await browser.waitForSelector(emojiItem('smile'));
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page', allowLists: true });
+    await page.type(editable, '* ');
+    await insertEmoji(page, 'smile');
+    await page.waitForSelector(emojiItem('smile'), 1000);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -41,12 +39,12 @@ BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside orderedList',
   { skip: ['ie'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.type(editable, '1. ');
-    await insertEmoji(browser, 'a');
-    await browser.waitForSelector(emojiItem('a'));
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page', allowLists: true });
+    await page.type(editable, '1. ');
+    await insertEmoji(page, 'a');
+    await page.waitForSelector(emojiItem('a'), 1000);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -56,13 +54,13 @@ BrowserTestCase(
   'emoji-2.ts: should be able remove emoji on backspace',
   { skip: ['safari', 'ie', 'firefox', 'edge'] },
   async client => {
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.type(editable, 'this ');
-    await insertEmoji(browser, 'joy');
-    await browser.waitForSelector(emojiItem('joy'));
-    await browser.type(editable, ['Backspace', 'Backspace']);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page', allowLists: true });
+    await page.type(editable, 'this ');
+    await insertEmoji(page, 'joy');
+    await page.waitForSelector(emojiItem('joy'), 1000);
+    await page.type(editable, ['Backspace', 'Backspace']);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -74,14 +72,14 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const decisions = 'span[aria-label="Decision"]';
-    const browser = new Page(client);
-    await gotoEditor(browser);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page' });
     // to get steps working on edge since its is slow
-    await browser.type(editable, '<> ');
-    await browser.waitForSelector(decisions);
-    await browser.type(editable, 'this ');
-    await insertEmojiBySelect(browser, 'smile');
-    const doc = await browser.$eval(editable, getDocFromElement);
+    await page.type(editable, '<> ');
+    await page.waitForSelector(decisions, 1000);
+    await page.type(editable, 'this ');
+    await insertEmojiBySelect(page, 'smile');
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -91,14 +89,14 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const decisions = 'li span[aria-label="Decision"]';
-    const browser = new Page(client);
-    await gotoEditor(browser);
-    await browser.type(editable, 'this ');
-    await insertEmoji(browser, 'smile');
-    await insertBlockMenuItem(browser, 'Decision');
-    await browser.waitForSelector(decisions);
-    await browser.isExisting(decisions);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, { appearance: 'full-page' });
+    await page.type(editable, 'this ');
+    await insertEmoji(page, 'smile');
+    await page.click('[aria-label="Decision"]');
+    await page.waitForSelector(decisions, 1000);
+    await page.isExisting(decisions);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );

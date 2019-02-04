@@ -71,10 +71,12 @@ export default class Page {
     return this.browser.elements(selector);
   }
 
-  $eval(selector, pageFunction) {
+  $eval(selector, pageFunction, param) {
     return this.browser
       .execute(
-        `return (${pageFunction}(document.querySelector("${selector}")))`,
+        `return (${pageFunction}(document.querySelector("${selector}"), ${JSON.stringify(
+          param,
+        )}))`,
       )
       .then(obj => obj.value);
   }
@@ -97,6 +99,11 @@ export default class Page {
 
   setValue(selector, text) {
     return this.browser.setValue(selector, text);
+  }
+
+  // TODO: remove it
+  clear(selector) {
+    return this.browser.clearElement(selector);
   }
 
   click(selector) {

@@ -232,6 +232,9 @@ export default class Example extends React.Component<Props, State> {
                     mentionProvider={Promise.resolve(
                       mention.storyData.resourceProvider,
                     )}
+                    taskDecisionProvider={Promise.resolve(
+                      taskDecision.getMockTaskDecisionResource(),
+                    )}
                     collabEdit={{
                       provider: collabEditProvider('morty'),
                       inviteToEditHandler,
