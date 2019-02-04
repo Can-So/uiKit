@@ -661,6 +661,8 @@ export const tableStyles = css`
     button {
       flex-direction: column;
       padding: 0;
+      height: 100%;
+      display: flex;
     }
     span {
       pointer-events: none;
