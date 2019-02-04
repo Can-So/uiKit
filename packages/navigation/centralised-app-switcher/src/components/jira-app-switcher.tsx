@@ -29,8 +29,8 @@ const XSellItemText = styled.span`
 `;
 
 const RecentContainerImg = styled.img`
-  width: 32px;
-  height: 32px;
+  width: ${gridSize() * 4}px;
+  height: ${gridSize() * 4}px;
 `;
 
 interface JiraAppSwitcherProps {

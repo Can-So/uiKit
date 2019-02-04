@@ -97,33 +97,35 @@ export const getProductLinks = (
     'jira-software.ondemand',
     'jira-servicedesk.ondemand',
   ];
-  const productLinks: ProductLink[] = [
+  const activeProductKeys: string[] = [
     'jira-core.ondemand',
     ...majorJiraProducts,
     'jira-incident-manager.ondemand',
     'confluence.ondemand',
   ]
     .filter((productKey: string) => {
+      return productIsActive(licenseInformationData, productKey);
+    })
+    .filter((productKey: string, _: number, activeProducts: string[]) => {
       if (productKey === 'jira-incident-manager.ondemand') {
-        if (productIsActive(licenseInformationData, 'jira-core.ondemand')) {
+        if (activeProducts.indexOf('jira-core.ondemand') !== -1) {
           return false;
         }
       }
-      return productIsActive(licenseInformationData, productKey);
-    })
-    .reduce((ans: string[], productKey) => {
-      if (
-        majorJiraProducts.indexOf(productKey) !== -1 &&
-        ans.indexOf('jira-core.ondemand') === -1
-      ) {
-        ans.push('jira-core.ondemand');
-      }
-      ans.push(productKey);
-      return ans;
-    }, [])
-    .map((productKey: string) =>
+      return true;
+    });
+
+  if (
+    activeProductKeys.indexOf('jira-core.ondemand') === -1 &&
+    (activeProductKeys.indexOf('jira-software.ondemand') !== -1 ||
+      activeProductKeys.indexOf('jira-servicedesk.ondemand') !== -1)
+  ) {
+    activeProductKeys.unshift('jira-core.ondemand');
+  }
+  const productLinks: ProductLink[] = activeProductKeys.map(
+    (productKey: string) =>
       getProductLink(productKey, licenseInformationData.hostname),
-    );
+  );
 
   return [
     ...productLinks,
