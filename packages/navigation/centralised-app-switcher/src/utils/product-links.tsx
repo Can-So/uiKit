@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { colors } from '@atlaskit/theme';
 import DiscoverFilledIcon from '@atlaskit/icon/glyph/discover-filled';
-import MarketplaceIcon from '@atlaskit/icon/glyph/marketplace';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import ConfluenceIcon from '@atlaskit/logo/dist/esm/ConfluenceLogo/Icon';
 import JiraSoftwareIcon from '@atlaskit/logo/dist/esm/JiraSoftwareLogo/Icon';
 import JiraServiceDeskIcon from '@atlaskit/logo/dist/esm/JiraServiceDeskLogo/Icon';
 import JiraCoreIcon from '@atlaskit/logo/dist/esm/JiraCoreLogo/Icon';
-import JiraIcon from '@atlaskit/logo/dist/esm/JiraLogo/Icon';
-import StrideIcon from '@atlaskit/logo/dist/esm/StrideLogo/Icon';
 import AtlassianIcon from '@atlaskit/logo/dist/esm/AtlassianLogo/Icon';
-import JiraOpsIcon from './assets/jira-ops-logo';
 import PeopleIcon from './assets/people';
 import { LicenseInformationDataStructure } from '../providers/types';
 
@@ -44,71 +40,41 @@ const PRODUCT_DATA_MAP: {
   [productKey: string]: {
     label: string;
     icon: React.ReactType;
+    url: string;
   };
 } = {
   'confluence.ondemand': {
     label: 'Confluence',
     icon: getLogoIcon(ConfluenceIcon),
+    url: 'wiki',
   },
   'jira-core.ondemand': {
     label: 'Jira Core',
     icon: getLogoIcon(JiraCoreIcon),
+    url: 'secure/BrowseProjects.jspa?selectedProjectType=business',
   },
   'jira-software.ondemand': {
     label: 'Jira Software',
     icon: getLogoIcon(JiraSoftwareIcon),
+    url: 'secure/BrowseProjects.jspa?selectedProjectType=software',
   },
   'jira-servicedesk.ondemand': {
     label: 'Jira Service Desk',
     icon: getLogoIcon(JiraServiceDeskIcon),
+    url: 'secure/BrowseProjects.jspa?selectedProjectType=service_desk',
   },
   'jira-incident-manager.ondemand': {
-    label: 'Jira Ops',
-    icon: getLogoIcon(JiraOpsIcon),
+    label: 'Jira Core',
+    icon: getLogoIcon(JiraCoreIcon),
+    url: 'secure/BrowseProjects.jspa?selectedProjectType=business',
   },
-  'hipchat.cloud': {
-    label: 'Stride',
-    icon: getLogoIcon(StrideIcon),
-  },
-};
-
-const getProductUrl = (productKey: string, hostname: string) => {
-  switch (productKey) {
-    case 'hipchat.cloud':
-      return 'https://app.stride.com/';
-    case 'confluence.ondemand':
-      return `${hostname}/wiki`;
-    case 'jira-core.ondemand':
-    case 'jira-software.ondemand':
-    case 'jira-servicedesk.ondemand':
-    case 'jira-incident-manager.ondemand':
-      return `${hostname}/secure`;
-  }
-  return hostname;
 };
 
 const getProductLink = (productKey: string, hostname: string): ProductLink => ({
   key: productKey,
-  link: getProductUrl(productKey, hostname),
+  link: `${hostname}/${PRODUCT_DATA_MAP[productKey].url}`,
   ...PRODUCT_DATA_MAP[productKey],
 });
-
-const hasAnyJiraProduct = (
-  licenseInformationData: LicenseInformationDataStructure,
-) => {
-  const jiraProductKeys = [
-    'jira-software.ondemand',
-    'jira-core.ondemand',
-    'jira-servicedesk.ondemand',
-    'jira-incident-manager.ondemand',
-  ];
-  for (const jiraProductKey of jiraProductKeys) {
-    if (licenseInformationData.products.hasOwnProperty(jiraProductKey)) {
-      return true;
-    }
-  }
-  return false;
-};
 
 export interface ProductLink {
   key: string;
@@ -117,56 +83,47 @@ export interface ProductLink {
   link: string;
 }
 
-const getJiraLink = (
-  licenseInformationData: LicenseInformationDataStructure,
-): ProductLink => {
-  const majorJiraProducts = [
-    'jira-software.ondemand',
-    'jira-servicedesk.ondemand',
-    'jira-incident-manager.ondemand',
-  ].filter(jiraProductKey => {
-    return licenseInformationData.products.hasOwnProperty(jiraProductKey);
-  });
-
-  if (majorJiraProducts.length > 1) {
-    return {
-      key: 'jira',
-      label: 'Jira',
-      icon: getLogoIcon(JiraIcon),
-      link: `${licenseInformationData.hostname}/secure`,
-    };
-  } else if (majorJiraProducts.length === 1) {
-    const productKey = majorJiraProducts[0];
-    return getProductLink(productKey, licenseInformationData.hostname);
-  }
-  return getProductLink('jira-core.ondemand', licenseInformationData.hostname);
-};
+const productIsActive = (
+  { products }: LicenseInformationDataStructure,
+  productKey: string,
+): boolean =>
+  products.hasOwnProperty(productKey) &&
+  products[productKey].state === ProductActivationStatus.ACTIVE;
 
 export const getProductLinks = (
   licenseInformationData: LicenseInformationDataStructure,
-): Array<ProductLink> => {
-  const productLinks: Array<ProductLink> = [];
-  if (hasAnyJiraProduct(licenseInformationData)) {
-    productLinks.push(getJiraLink(licenseInformationData));
-  }
-  if (
-    licenseInformationData.products.hasOwnProperty('confluence.ondemand') &&
-    licenseInformationData.products['confluence.ondemand'].state ===
-      ProductActivationStatus.ACTIVE
-  ) {
-    productLinks.push(
-      getProductLink('confluence.ondemand', licenseInformationData.hostname),
+): ProductLink[] => {
+  const majorJiraProducts = [
+    'jira-software.ondemand',
+    'jira-servicedesk.ondemand',
+  ];
+  const productLinks: ProductLink[] = [
+    'jira-core.ondemand',
+    ...majorJiraProducts,
+    'jira-incident-manager.ondemand',
+    'confluence.ondemand',
+  ]
+    .filter((productKey: string) => {
+      if (productKey === 'jira-incident-manager.ondemand') {
+        if (productIsActive(licenseInformationData, 'jira-core.ondemand')) {
+          return false;
+        }
+      }
+      return productIsActive(licenseInformationData, productKey);
+    })
+    .reduce((ans: string[], productKey) => {
+      if (
+        majorJiraProducts.indexOf(productKey) !== -1 &&
+        ans.indexOf('jira-core.ondemand') === -1
+      ) {
+        ans.push('jira-core.ondemand');
+      }
+      ans.push(productKey);
+      return ans;
+    }, [])
+    .map((productKey: string) =>
+      getProductLink(productKey, licenseInformationData.hostname),
     );
-  }
-  if (
-    licenseInformationData.products.hasOwnProperty('hipchat.cloud') &&
-    licenseInformationData.products['hipchat.cloud'].state ===
-      ProductActivationStatus.ACTIVE
-  ) {
-    productLinks.push(
-      getProductLink('hipchat.cloud', licenseInformationData.hostname),
-    );
-  }
 
   return [
     ...productLinks,
@@ -177,19 +134,13 @@ export const getProductLinks = (
 export const getAdministrationLinks = (
   hostname: string,
   cloudId: string,
-): Array<ProductLink> => {
+): ProductLink[] => {
   return [
     {
       key: 'administration',
       label: 'Administration',
       icon: SettingsIcon,
-      link: `${hostname}/admin`,
-    },
-    {
-      key: 'marketplace',
-      label: 'Marketplace',
-      icon: MarketplaceIcon,
-      link: `${hostname}/admin`,
+      link: `${hostname}/admin/s/${cloudId}`,
     },
     {
       key: 'discover-applications',
@@ -203,23 +154,13 @@ export const getAdministrationLinks = (
 export const getXSellLink = (
   licenseInformationData: LicenseInformationDataStructure,
 ): ProductLink | null => {
-  if (
-    !licenseInformationData.products.hasOwnProperty('confluence.ondemand') ||
-    licenseInformationData.products['confluence.ondemand'].state ===
-      ProductActivationStatus.DEACTIVATED
-  ) {
+  if (!productIsActive(licenseInformationData, 'confluence.ondemand')) {
     return getProductLink(
       'confluence.ondemand',
       licenseInformationData.hostname,
     );
   }
-  if (
-    !licenseInformationData.products.hasOwnProperty(
-      'jira-servicedesk.ondemand',
-    ) ||
-    licenseInformationData.products['jira-servicedesk.ondemand'].state ===
-      ProductActivationStatus.DEACTIVATED
-  ) {
+  if (!productIsActive(licenseInformationData, 'jira-servicedesk.ondemand')) {
     return getProductLink(
       'jira-servicedesk.ondemand',
       licenseInformationData.hostname,

@@ -47,6 +47,7 @@ const itemTheme = {
 type AppSwitcherItemProps = Props & {
   children: JSX.Element[] | string;
   key?: string;
+  onClick?: () => void;
 };
 export default ({ isAdmin, isCustom, icon, ...rest }: AppSwitcherItemProps) => (
   <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
