@@ -78,6 +78,6 @@ export default class TextAreaElement extends React.Component<Props, State> {
         />
       );
     }
-    return <textarea style={{ height: '100%' }} {...props} />;
+    return <textarea style={{ height: '100%' }} {...rest} />;
   }
 }
