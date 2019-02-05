@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 52.0.2
+- [patch] [0e164e542a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e164e542a):
+
+  - MS-1465: Dont fetch file preview if we already have a local one
+
 ## 52.0.1
 - [patch] [1d3e336534](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d3e336534):
 
