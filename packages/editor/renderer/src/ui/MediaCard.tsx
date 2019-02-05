@@ -41,6 +41,7 @@ export interface MediaCardProps {
   occurrenceKey?: string;
   imageStatus?: ImageStatus;
   disableOverlay?: boolean;
+  useInlinePlayer?: boolean;
 }
 
 export interface State {
@@ -105,7 +106,12 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       resizeMode,
       rendererAppearance,
       disableOverlay,
+      useInlinePlayer,
     } = this.props;
+    const isMobile = rendererAppearance === 'mobile';
+    const shouldPlayInline =
+      useInlinePlayer !== undefined ? useInlinePlayer : true;
+    // TODO: test for this
 
     if (type === 'external') {
       return this.renderExternal();
@@ -136,9 +142,9 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
           eventHandlers && eventHandlers.media && eventHandlers.media.onClick
         }
         resizeMode={resizeMode}
-        isLazy={rendererAppearance === 'mobile' ? false : true}
+        isLazy={!isMobile}
         disableOverlay={disableOverlay}
-        useInlinePlayer={rendererAppearance === 'mobile' ? false : true}
+        useInlinePlayer={isMobile ? false : shouldPlayInline}
       />
     );
   }
