@@ -35,7 +35,10 @@ export default class ConfluenceAppSwitcherExample extends Component {
             isOpen={this.state.isDrawerOpen}
             onClose={this.onClose}
           >
-            <ConfluenceAppSwitcher cloudId="some-cloud-id" />
+            <ConfluenceAppSwitcher
+              cloudId="some-cloud-id"
+              triggerXFlow={() => null}
+            />
           </AkDrawer>,
         ]}
         globalPrimaryIcon={<AtlassianIcon size="large" label="Atlassian" />}

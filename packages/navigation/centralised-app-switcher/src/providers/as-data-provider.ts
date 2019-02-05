@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
 
-interface ChildrenProps<DataStructure> {
+export interface ChildrenProps<DataStructure> {
   data: null | DataStructure;
   isLoading: boolean;
   error: any;

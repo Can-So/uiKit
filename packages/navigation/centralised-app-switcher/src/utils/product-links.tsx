@@ -150,9 +150,11 @@ export const getAdministrationLinks = (
   ];
 };
 
+export type XSellProductLink = ProductLink | null;
+
 export const getXSellLink = (
   licenseInformationData: LicenseInformationDataStructure,
-): ProductLink | null => {
+): XSellProductLink => {
   if (!productIsActive(licenseInformationData, 'confluence.ondemand')) {
     return getProductLink(
       'confluence.ondemand',
