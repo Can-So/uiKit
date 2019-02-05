@@ -242,7 +242,6 @@ describe('CardView', () => {
         width: 156,
         height: 125,
       });
-      expect(props.mediaItemType).toEqual('file');
     });
 
     it('should pass "disableOverlay" prop to <FileCard /> when mediaItemType is "file"', () => {

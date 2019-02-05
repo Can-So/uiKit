@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import FileIcon from '@atlaskit/icon/glyph/file';
-import LinkIcon from '@atlaskit/icon/glyph/link';
 
 import { CardLoading } from '../..';
 import { getDimensionsWithDefault } from '../../cardLoading';
@@ -18,9 +17,9 @@ describe('CardLoading', () => {
     const largeLoadingCard = shallow(<CardLoading iconSize="large" />);
     const defaultLoadingSize = shallow(<CardLoading />);
 
-    expect(smallLoadingCard.find(LinkIcon).props().size).toBe('small');
+    expect(smallLoadingCard.find(FileIcon).props().size).toBe('small');
     expect(largeLoadingCard.find(FileIcon).props().size).toBe('large');
-    expect(defaultLoadingSize.find(LinkIcon).props().size).toBe('medium');
+    expect(defaultLoadingSize.find(FileIcon).props().size).toBe('medium');
   });
 
   describe('getDimensionsWithDefault()', () => {
