@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
 import InlineDialog from '@atlaskit/inline-dialog';
 import { LoadOptions } from '@atlaskit/user-picker';
 import { ShareButton } from './ShareButton';
@@ -45,6 +46,11 @@ type Props = {
     capabilities: InvitationsCapabilitiesResponse,
   ) => boolean;
 };
+
+// 448px is the max-width of a inline dialog
+const InlineDialogFormWrapper = styled.div`
+  width: 448px;
+`;
 
 export const defaultShareContentState: ShareContentState = {
   users: [],
@@ -236,16 +242,20 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
       <div>
         <InlineDialog
           content={
-            <ShareForm
-              copyLink={copyLink}
-              loadOptions={loadUserOptions}
-              isSharing={isSharing}
-              onCommentChange={this.handleChangeShareComment}
-              onUsersChange={this.handleChangeShareUsers}
-              onShareClick={this.handleSubmitShare}
-              shareError={shareError}
-              shouldShowCapabilitiesInfoMessage={!isStateValidWithCapabilities}
-            />
+            <InlineDialogFormWrapper>
+              <ShareForm
+                copyLink={copyLink}
+                loadOptions={loadUserOptions}
+                isSharing={isSharing}
+                onCommentChange={this.handleChangeShareComment}
+                onUsersChange={this.handleChangeShareUsers}
+                onShareClick={this.handleSubmitShare}
+                shareError={shareError}
+                shouldShowCapabilitiesInfoMessage={
+                  !isStateValidWithCapabilities
+                }
+              />
+            </InlineDialogFormWrapper>
           }
           isOpen={isDialogOpen}
           onClose={this.handleCloseDialog}
