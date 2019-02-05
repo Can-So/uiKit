@@ -1,0 +1,1 @@
+- remove Link support from media-card
