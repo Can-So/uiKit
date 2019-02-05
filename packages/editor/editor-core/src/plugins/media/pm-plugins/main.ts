@@ -138,7 +138,6 @@ export class MediaPluginState {
     }
 
     // TODO disable (not destroy!) pickers until mediaProvider is resolved
-    const Picker = PickerFacade;
 
     try {
       let resolvedMediaProvider: MediaProvider = (this.mediaProvider = await mediaProvider);
@@ -192,7 +191,7 @@ export class MediaPluginState {
         await this.initPickers(
           this.mediaProvider.uploadParams,
           uploadContext,
-          Picker,
+          PickerFacade,
           this.reactContext,
         );
       } else {

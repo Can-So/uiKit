@@ -165,7 +165,7 @@ export default class Example extends React.Component<{}, State> {
           <Button
             appearance="primary"
             id="show"
-            onClick={() => (popup ? popup.show() : {})}
+            onClick={() => (popup ? popup.show() : null)}
           >
             Show
           </Button>

@@ -142,7 +142,7 @@ export async function MediaPicker<K extends keyof MediaPickerComponents>(
       const {
         PopupImpl,
       } = await import(/* webpackChunkName:"@atlaskit-internal_media-picker-popup" */ './components/popup');
-      return new PopupImpl(context, pickerConfig as any);
+      return new PopupImpl(context, pickerConfig as PopupConfig);
     default:
       throw new Error(`The component ${componentName} does not exist`);
   }

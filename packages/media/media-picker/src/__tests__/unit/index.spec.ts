@@ -40,10 +40,6 @@ describe('MediaPicker', () => {
       expect(binary).toBeInstanceOf(BinaryUploaderImpl);
     });
 
-    // it('should be a class constructor given no options', async () => {
-    //   expect(await MediaPicker('binary')).toEqual(BinaryUploaderImpl);
-    // });
-
     it('should be able to register listeners to generic upload events', async () => {
       const binary = await MediaPicker('binary', context, config);
       binary.on('upload-status-update', () => {});

@@ -59,7 +59,7 @@ export default class Example extends Component<Props, State> {
     const { events, popup } = this.state;
     return (
       <div>
-        <Button id="show" onClick={() => (popup ? popup.show() : {})}>
+        <Button id="show" onClick={() => (popup ? popup.show() : null)}>
           Show
         </Button>
         <div>
