@@ -24,6 +24,7 @@ import {
 } from '../../../../ui/styles';
 import * as commands from '../../commands/text-formatting';
 import { clearFormatting } from '../../commands/clear-formatting';
+import { INPUT_METHOD } from '../../../analytics';
 
 export interface Props {
   isDisabled?: boolean;
@@ -277,22 +278,30 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
 
   private onItemActivated = ({ item }) => {
     analyticsService.trackEvent(`atlassian.editor.format.${item.value}.button`);
+
     const { state, dispatch } = this.props.editorView;
     switch (item.value) {
       case 'underline':
-        commands.toggleUnderline()(state, dispatch);
+        commands.toggleUnderlineWithAnalytics({
+          inputMethod: INPUT_METHOD.TOOLBAR,
+        })(state, dispatch);
         break;
       case 'code':
-        commands.toggleCode()(state, dispatch);
+        commands.toggleCodeWithAnalytics({ inputMethod: INPUT_METHOD.TOOLBAR })(
+          state,
+          dispatch,
+        );
         break;
       case 'strike':
-        commands.toggleStrike()(state, dispatch);
+        commands.toggleStrikeWithAnalytics({
+          inputMethod: INPUT_METHOD.TOOLBAR,
+        })(state, dispatch);
         break;
       case 'subscript':
-        commands.toggleSubscript()(state, dispatch);
+        commands.toggleSubscriptWithAnalytics()(state, dispatch);
         break;
       case 'superscript':
-        commands.toggleSuperscript()(state, dispatch);
+        commands.toggleSuperscriptWithAnalytics()(state, dispatch);
         break;
       case 'clearFormatting':
         clearFormatting()(state, dispatch);

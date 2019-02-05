@@ -2,7 +2,7 @@ import { toggleMark } from 'prosemirror-commands';
 import { Plugin, PluginKey, EditorState } from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
 import { markActive, anyMarkActive, deepEqual } from '../utils';
-import { createInlineCodeFromTextInput } from '../commands/text-formatting';
+import { createInlineCodeFromTextInputWithAnalytics } from '../commands/text-formatting';
 import { EditorView } from 'prosemirror-view';
 import * as keymaps from '../../../keymaps';
 import * as commands from '../commands/text-formatting';
@@ -125,7 +125,10 @@ export const plugin = (dispatch: Dispatch) =>
         text: string,
       ) {
         const { state, dispatch } = view;
-        return createInlineCodeFromTextInput(from, to, text)(state, dispatch);
+        return createInlineCodeFromTextInputWithAnalytics(from, to, text)(
+          state,
+          dispatch,
+        );
       },
     },
   });

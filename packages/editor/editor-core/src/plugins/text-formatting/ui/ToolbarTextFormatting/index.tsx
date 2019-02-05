@@ -9,7 +9,11 @@ import { toggleBold, toggleItalic, tooltip } from '../../../../keymaps';
 import { TextFormattingState } from '../../pm-plugins/main';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import { ButtonGroup } from '../../../../ui/styles';
-import { toggleStrong, toggleEm } from '../../commands/text-formatting';
+import {
+  toggleStrongWithAnalytics,
+  toggleEmWithAnalytics,
+} from '../../commands/text-formatting';
+import { INPUT_METHOD } from '../../../analytics';
 
 export const messages = defineMessages({
   bold: {
@@ -84,7 +88,10 @@ class ToolbarTextFormatting extends PureComponent<Props & InjectedIntlProps> {
       const { strongDisabled } = this.props.textFormattingState;
       if (!strongDisabled) {
         const { state, dispatch } = this.props.editorView;
-        return toggleStrong()(state, dispatch);
+        return toggleStrongWithAnalytics({ inputMethod: INPUT_METHOD.TOOLBAR })(
+          state,
+          dispatch,
+        );
       }
       return false;
     },
@@ -96,7 +103,10 @@ class ToolbarTextFormatting extends PureComponent<Props & InjectedIntlProps> {
       const { emDisabled } = this.props.textFormattingState;
       if (!emDisabled) {
         const { state, dispatch } = this.props.editorView;
-        return toggleEm()(state, dispatch);
+        return toggleEmWithAnalytics({ inputMethod: INPUT_METHOD.TOOLBAR })(
+          state,
+          dispatch,
+        );
       }
       return false;
     },

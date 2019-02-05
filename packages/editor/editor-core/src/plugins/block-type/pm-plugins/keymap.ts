@@ -9,9 +9,10 @@ import * as commands from '../../../commands';
 import { trackAndInvoke } from '../../../analytics';
 import * as blockTypes from '../types';
 import {
-  insertBlockType,
   cleanUpAtTheStartOfDocument,
+  insertBlockTypesWithAnalytics,
 } from '../../block-type/commands';
+import { INPUT_METHOD } from '../../analytics';
 
 const analyticsEventName = (blockTypeName: string, eventSource: string) =>
   `atlassian.editor.format.${blockTypeName}.${eventSource}`;
@@ -84,10 +85,19 @@ export default function keymapPlugin(schema: Schema): Plugin {
         blockType.title.defaultMessage,
       );
       if (shortcut) {
-        const eventName = analyticsEventName(blockType.name, 'keyboard');
+        const eventName = analyticsEventName(
+          blockType.name,
+          INPUT_METHOD.KEYBOARD,
+        );
         keymaps.bindKeymapWithCommand(
           shortcut,
-          trackAndInvoke(eventName, insertBlockType(blockType.name)),
+          trackAndInvoke(
+            eventName,
+            insertBlockTypesWithAnalytics(
+              blockType.name,
+              INPUT_METHOD.KEYBOARD,
+            ),
+          ),
           list,
         );
       }

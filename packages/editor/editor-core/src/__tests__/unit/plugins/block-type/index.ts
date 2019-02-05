@@ -24,18 +24,35 @@ import listPlugin from '../../../../plugins/lists';
 import {
   setBlockType,
   insertBlockType,
+  insertBlockTypesWithAnalytics,
 } from '../../../../plugins/block-type/commands';
 import { HEADING_1 } from '../../../../plugins/block-type/types';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import {
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+} from '../../../../plugins/analytics';
 
 describe('block-type', () => {
   const createEditor = createEditorFactory<BlockTypeState>();
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
-  const editor = (doc: any) =>
-    createEditor({
+  const editor = (doc: any) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorPlugins: [codeBlockPlugin(), panelPlugin, listPlugin],
+      editorProps: {
+        allowAnalyticsGASV3: true,
+      },
       pluginKey: blockTypePluginKey,
+      createAnalyticsEvent,
     });
+  };
 
   it('should be able to change to normal', () => {
     const { editorView } = editor(doc(h1('te{<>}xt')));
@@ -57,22 +74,42 @@ describe('block-type', () => {
     });
   });
 
-  it('should be able to change to block quote', () => {
-    const { editorView } = editor(doc(p('te{<>}xt')));
-    const { state, dispatch } = editorView;
+  describe('block quote', () => {
+    it('should create analytics GAS v3 event', () => {
+      const inputMethod = INPUT_METHOD.TOOLBAR;
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        eventType: EVENT_TYPE.TRACK,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_BLOCK_QUOTE,
+        attributes: {
+          inputMethod,
+        },
+      };
+      const { editorView } = editor(doc(p('te{<>}xt')));
+      const { state, dispatch } = editorView;
 
-    insertBlockType('blockquote')(state, dispatch);
-    expect(editorView.state.doc).toEqualDocument(doc(blockquote(p('text'))));
-  });
+      insertBlockTypesWithAnalytics('blockquote', inputMethod)(state, dispatch);
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
 
-  describe('when rendering a block quote', () => {
-    it('should not be selectable', () => {
-      const { editorView } = editor(doc(blockquote(p('{<>}text'))));
-      const node = editorView.state.doc.nodeAt(0);
+    it('should be able to change to block quote', () => {
+      const { editorView } = editor(doc(p('te{<>}xt')));
+      const { state, dispatch } = editorView;
 
-      if (node) {
-        expect(node.type.spec.selectable).toBe(false);
-      }
+      insertBlockType('blockquote')(state, dispatch);
+      expect(editorView.state.doc).toEqualDocument(doc(blockquote(p('text'))));
+    });
+
+    describe('when rendering a block quote', () => {
+      it('should not be selectable', () => {
+        const { editorView } = editor(doc(blockquote(p('{<>}text'))));
+        const node = editorView.state.doc.nodeAt(0);
+
+        if (node) {
+          expect(node.type.spec.selectable).toBe(false);
+        }
+      });
     });
   });
 
