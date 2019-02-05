@@ -1,0 +1,1 @@
+- Button is no longer a peer dependency of this module
