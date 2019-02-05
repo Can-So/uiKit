@@ -6,8 +6,6 @@
  */
 
 const glob = require('glob');
-const path = require('path');
-const fs = require('fs-extra');
 const pageSelector = '#examples';
 
 async function takeScreenShot(page /*:any*/, url /*:string*/) {

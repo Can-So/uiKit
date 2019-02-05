@@ -1,5 +1,15 @@
 # @atlaskit/adf-utils
 
+## 5.6.1
+- [patch] [14fe1381ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14fe1381ba):
+
+  - ED-6118: ensure media dimensions are always integers, preventing invalid ADF
+
+## 5.6.0
+- [minor] [be706e55f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be706e55f6):
+
+  - ED-6154 Adds `array` validation support
+
 ## 5.5.0
 - [minor] [a5b5a5098e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5b5a5098e):
 

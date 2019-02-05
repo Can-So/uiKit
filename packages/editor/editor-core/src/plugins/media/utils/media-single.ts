@@ -115,8 +115,8 @@ export const createMediaSingleNode = (schema: Schema, collection: string) => (
     id,
     type: 'file',
     collection,
-    width: width / scaleFactor,
-    height: height / scaleFactor,
+    width: Math.round(width / scaleFactor),
+    height: Math.round(height / scaleFactor),
     __key: id,
   });
 

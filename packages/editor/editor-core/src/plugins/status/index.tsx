@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { status } from '@atlaskit/adf-schema';
-import LabelIcon from '@atlaskit/icon/glyph/label';
+import StatusIcon from '@atlaskit/icon/glyph/status';
 import { findDomRefAtPos } from 'prosemirror-utils';
 import { EditorPlugin } from '../../types';
 import createStatusPlugin, { StatusState, pluginKey } from './plugin';
@@ -81,7 +81,7 @@ const createQuickInsertMenuItem = () => ({
   title: 'Status',
   priority: 700,
   keywords: ['lozenge'],
-  icon: () => <LabelIcon label="Status" />,
+  icon: () => <StatusIcon label="Status" />,
   action: createStatus(),
 });
 

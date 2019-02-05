@@ -1,0 +1,39 @@
+{
+  "name": "@atlaskit/updater-cli",
+  "version": "1.0.0",
+  "description": "Updater CLI for Atlaskit components.",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "bin": {
+    "akup": "./bin/akup.js"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "author": "Atlassian Pty Ltd",
+  "maintainers": [
+    "Stanislav S"
+  ],
+  "atlaskit": {
+    "internal": true
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "meow": "^5.0.0",
+    "node-fetch": "^2.2.0",
+    "ora": "^3.0.0",
+    "semver": "^5.4.1",
+    "terminal-link": "^1.2.0",
+    "yarn-deduplicate": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/meow": "^5.0.0",
+    "@types/node-fetch": "^2.1.4",
+    "@types/ora": "^1.3.4",
+    "@types/semver": "^5.5.0",
+    "ts-node": "^6.1.1"
+  },
+  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+}

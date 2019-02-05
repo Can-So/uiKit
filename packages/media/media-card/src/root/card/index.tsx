@@ -153,23 +153,23 @@ export class Card extends Component<CardProps, CardState> {
       .getFileState(resolvedId, { collectionName, occurrenceKey })
       .subscribe({
         next: async fileState => {
-          const {
-            dataURI: currentDataURI,
-            metadata: currentMetadata,
-          } = this.state;
+          let currentDataURI = this.state.dataURI;
+          const { metadata: currentMetadata } = this.state;
           const metadata = extendMetadata(
             fileState,
             currentMetadata as FileDetails,
           );
-          let dataURI: string | undefined;
 
           if (!currentDataURI) {
             const {
               src,
               orientation: previewOrientation,
             } = await getDataURIFromFileState(fileState);
-            dataURI = src;
-            this.notifyStateChange({ dataURI, previewOrientation });
+            currentDataURI = src;
+            this.notifyStateChange({
+              dataURI: currentDataURI,
+              previewOrientation,
+            });
           }
 
           switch (fileState.status) {
@@ -182,7 +182,7 @@ export class Card extends Component<CardProps, CardState> {
               });
               break;
             case 'processing':
-              if (dataURI) {
+              if (currentDataURI) {
                 this.notifyStateChange({
                   progress: 1,
                   status: 'complete',
@@ -197,7 +197,7 @@ export class Card extends Component<CardProps, CardState> {
               break;
             case 'processed':
               if (
-                !dataURI &&
+                !currentDataURI &&
                 metadata.mediaType &&
                 isPreviewableType(metadata.mediaType)
               ) {

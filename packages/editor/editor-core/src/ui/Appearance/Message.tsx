@@ -102,6 +102,7 @@ export default class Editor extends React.Component<
       popupsMountPoint,
       popupsBoundariesElement,
       popupsScrollableElement,
+      dispatchAnalyticsEvent,
     } = this.props;
     const maxContentSizeReached =
       maxContentSize && maxContentSize.maxContentSizeReached;
@@ -131,6 +132,7 @@ export default class Editor extends React.Component<
               popupsBoundariesElement={popupsBoundariesElement}
               popupsScrollableElement={popupsScrollableElement}
               containerElement={this.containerElement}
+              dispatchAnalyticsEvent={dispatchAnalyticsEvent}
             />
             {editorDOMElement}
           </ContentArea>
@@ -149,6 +151,7 @@ export default class Editor extends React.Component<
                 popupsBoundariesElement={popupsBoundariesElement}
                 popupsScrollableElement={popupsScrollableElement}
                 containerElement={this.containerElement}
+                dispatchAnalyticsEvent={dispatchAnalyticsEvent}
               />
               {customSecondaryToolbarComponents}
               <AddonToolbar

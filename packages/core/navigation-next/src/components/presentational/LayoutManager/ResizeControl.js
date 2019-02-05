@@ -82,7 +82,6 @@ type ButtonProps = {
   hasHighlight: boolean,
   innerRef: Ref<'button'>,
   isVisible: boolean,
-  onMouseOver: ?(SyntheticMouseEvent<>) => void,
   hitAreaSize: 'small' | 'large',
 };
 const Button = ({
@@ -90,7 +89,6 @@ const Button = ({
   hasHighlight,
   innerRef,
   isVisible,
-  onMouseOver,
   hitAreaSize,
   ...props
 }: ButtonProps) => (
@@ -137,7 +135,6 @@ const Button = ({
         position: 'absolute',
         ...(hitAreaSize === 'small' ? smallHitArea : largeHitArea),
       }}
-      onMouseOver={onMouseOver}
     />
     {children}
   </button>
@@ -454,7 +451,6 @@ class ResizeControl extends PureComponent<Props, State> {
       <Button
         onClick={this.onResizerChevronClick}
         hitAreaSize={onMouseOverButtonBuffer ? 'large' : 'small'}
-        onMouseOver={!flyoutIsOpen ? onMouseOverButtonBuffer : null}
         // maintain styles when user is dragging
         isVisible={isCollapsed || mouseIsDown || mouseIsOverNavigation}
         hasHighlight={mouseIsDown || mouseIsOverGrabArea}
@@ -481,20 +477,22 @@ class ResizeControl extends PureComponent<Props, State> {
                   onMouseDown={this.handleResizeStart}
                 />
               )}
-              {collapseToggleTooltipContent ? (
-                <Tooltip
-                  content={makeTooltipNode(
-                    collapseToggleTooltipContent(isCollapsed),
-                  )}
-                  delay={600}
-                  hideTooltipOnClick
-                  position="right"
-                >
-                  {button}
-                </Tooltip>
-              ) : (
-                button
-              )}
+              <div onMouseOver={!flyoutIsOpen ? onMouseOverButtonBuffer : null}>
+                {collapseToggleTooltipContent ? (
+                  <Tooltip
+                    content={makeTooltipNode(
+                      collapseToggleTooltipContent(isCollapsed),
+                    )}
+                    delay={600}
+                    hideTooltipOnClick
+                    position="right"
+                  >
+                    {button}
+                  </Tooltip>
+                ) : (
+                  button
+                )}
+              </div>
             </Fragment>
           )}
         </Outer>

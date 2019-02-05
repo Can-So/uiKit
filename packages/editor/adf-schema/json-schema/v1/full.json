@@ -306,10 +306,10 @@
                   "type": "string"
                 },
                 "height": {
-                  "type": "number"
+                  "type": "integer"
                 },
                 "width": {
-                  "type": "number"
+                  "type": "integer"
                 },
                 "occurrenceKey": {
                   "type": "string",
@@ -335,10 +335,10 @@
                   "type": "string"
                 },
                 "width": {
-                  "type": "number"
+                  "type": "integer"
                 },
                 "height": {
-                  "type": "number"
+                  "type": "integer"
                 }
               },
               "required": [

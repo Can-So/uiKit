@@ -5,6 +5,7 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import { EditorAppearance, UIComponentFactory } from '../../types';
 import { EventDispatcher } from '../../event-dispatcher';
 import EditorActions from '../../actions';
+import { AnalyticsEventPayload } from '../../plugins/analytics';
 
 const PluginsComponentsWrapper = styled.div`
   display: flex;
@@ -22,6 +23,7 @@ export interface Props {
   popupsScrollableElement?: HTMLElement;
   containerElement: HTMLElement | undefined;
   disabled: boolean;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 }
 
 export default class PluginSlot extends React.Component<Props, any> {
@@ -65,6 +67,7 @@ export default class PluginSlot extends React.Component<Props, any> {
       popupsScrollableElement,
       containerElement,
       disabled,
+      dispatchAnalyticsEvent,
     } = this.props;
 
     if (!items || !editorView) {
@@ -80,6 +83,7 @@ export default class PluginSlot extends React.Component<Props, any> {
             editorActions: editorActions as EditorActions,
             eventDispatcher: eventDispatcher as EventDispatcher,
             providerFactory,
+            dispatchAnalyticsEvent,
             appearance,
             popupsMountPoint,
             popupsBoundariesElement,

@@ -70,8 +70,12 @@ export class MultiValueContainer extends React.PureComponent<Props, State> {
 
   private renderChildren = () => {
     const {
-      selectProps: { addMoreMessage },
+      selectProps: { addMoreMessage, isDisabled },
     } = this.props;
+    // Do not render "Add more..." message if picker is disabled
+    if (isDisabled) {
+      return this.props.children;
+    }
     if (addMoreMessage === undefined) {
       return (
         <FormattedMessage {...messages.addMore}>

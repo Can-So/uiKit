@@ -46,7 +46,7 @@ const twoColumnLayout = {
   ],
 };
 
-describe('Snapshot Test: Layouts', () => {
+describe.skip('Snapshot Test: Layouts', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
