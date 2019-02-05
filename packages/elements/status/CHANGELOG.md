@@ -1,5 +1,10 @@
 # @atlaskit/status
 
+## 0.3.3
+- [patch] [9696b18dec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9696b18dec):
+
+  - disabled automatic correction and spelling in the StatusPicker texfield (safari bug)
+
 ## 0.3.2
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

@@ -1,1 +1,0 @@
-- disabled automatic correction and spelling in the StatusPicker texfield (safari bug)
