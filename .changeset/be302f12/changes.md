@@ -1,0 +1,1 @@
+- [ED-6165] Fix table cell options chevron overflow. 
