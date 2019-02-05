@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { DropdownItem } from '@atlaskit/dropdown-menu';
 import Avatar, { withPseudoState, getProps } from '@atlaskit/avatar';
-import { getBackgroundColor } from '../styled/AvatarGroup';
 
 type Props = {
   avatar: {
@@ -17,7 +16,6 @@ type Props = {
 class AvatarGroupItem extends Component<Props> {
   render() {
     const { avatar, onAvatarClick } = this.props;
-    const borderColor = getBackgroundColor(this.props);
     const enhancedProps = getProps(this);
     return (
       <DropdownItem
@@ -26,7 +24,7 @@ class AvatarGroupItem extends Component<Props> {
         elemBefore={
           <Avatar
             {...avatar}
-            borderColor={borderColor}
+            borderColor="transparent"
             enableTooltip={false}
             size="small"
           />

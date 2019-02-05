@@ -87,7 +87,7 @@ export class ConfluenceCardClient extends Client {
 const cardClient = new ConfluenceCardClient();
 const cardProvider = new ConfluenceCardProvider();
 
-export default function Example() {
+export function Example(doc) {
   return (
     // We must wrap the <Editor> with a provider, passing cardClient via prop
     <SmartCardProvider client={cardClient}>
@@ -109,7 +109,7 @@ export default function Example() {
           </p>
         </SectionMessage>
         <FullPageExample
-          defaultValue={exampleDocument}
+          defaultValue={doc}
           UNSAFE_cards={{
             // This is how we pass in the provider for smart cards
             provider: Promise.resolve(cardProvider),
@@ -429,3 +429,5 @@ const exampleDocument = {
     },
   ],
 };
+
+export default () => Example(exampleDocument);

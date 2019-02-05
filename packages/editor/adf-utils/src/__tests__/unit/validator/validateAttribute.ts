@@ -61,6 +61,47 @@ describe('validateAttrs', () => {
     });
   });
 
+  describe('integer', () => {
+    const spec = { type: 'integer' } as any;
+
+    it('should pass for integer', () => {
+      expect(validateAttrs(spec, 7)).toBeTruthy();
+    });
+
+    it('should not pass for floats', () => {
+      expect(validateAttrs(spec, 7.3)).toBeFalsy();
+    });
+
+    it('should check optional', () => {
+      expect(validateAttrs(spec, undefined)).toBeFalsy();
+      expect(
+        validateAttrs({ ...spec, optional: true }, undefined),
+      ).toBeTruthy();
+    });
+
+    it('should check minimum', () => {
+      expect(validateAttrs({ ...spec, minimum: 10 }, 7)).toBeFalsy();
+      expect(validateAttrs({ ...spec, minimum: 7 }, 7)).toBeTruthy();
+      expect(validateAttrs({ ...spec, minimum: 5 }, 7)).toBeTruthy();
+    });
+
+    it('should check maximum', () => {
+      expect(validateAttrs({ ...spec, maximum: 5 }, 7)).toBeFalsy();
+      expect(validateAttrs({ ...spec, maximum: 7 }, 7)).toBeTruthy();
+      expect(validateAttrs({ ...spec, maximum: 10 }, 7)).toBeTruthy();
+    });
+
+    it('should fail for non-number', () => {
+      expect(validateAttrs(spec, null)).toBeFalsy();
+      expect(validateAttrs(spec, undefined)).toBeFalsy();
+      expect(validateAttrs(spec, '7')).toBeFalsy();
+      expect(validateAttrs(spec, true)).toBeFalsy();
+      expect(validateAttrs(spec, false)).toBeFalsy();
+      expect(validateAttrs(spec, [5])).toBeFalsy();
+      expect(validateAttrs(spec, () => {})).toBeFalsy();
+    });
+  });
+
   describe('string', () => {
     const spec = { type: 'string' } as any;
 

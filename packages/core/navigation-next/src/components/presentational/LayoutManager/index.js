@@ -21,6 +21,7 @@ export default class ConnectedLayoutManager extends Component<ConnectedLayoutMan
     collapseToggleTooltipContent: defaultTooltipContent,
     experimental_flyoutOnHover: false,
     experimental_alternateFlyoutBehaviour: false,
+    experimental_fullWidthFlyout: false,
   };
 
   render() {

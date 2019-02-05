@@ -11,6 +11,7 @@ export interface Entity {
 
 type AttributesSpec =
   | { type: 'number'; optional?: boolean; minimum: number; maximum: number }
+  | { type: 'integer'; optional?: boolean; minimum: number; maximum: number }
   | { type: 'boolean'; optional?: boolean }
   | { type: 'string'; optional?: boolean; minLength?: number; pattern?: RegExp }
   | { type: 'enum'; values: Array<string>; optional?: boolean }
@@ -40,6 +41,9 @@ const isDefined = (x: any) => x != null;
 
 const isNumber = (x: any): x is number =>
   typeof x === 'number' && !isNaN(x) && isFinite(x);
+
+const isInteger = (x: any): x is number =>
+  typeof x === 'number' && isFinite(x) && Math.floor(x) === x;
 
 const isBoolean = (x: any): x is boolean =>
   x === true || x === false || toString.call(x) === '[object Boolean]';
@@ -207,6 +211,12 @@ export function validateAttrs(spec: AttributesSpec, value: any): boolean {
     case 'number':
       return (
         isNumber(value) &&
+        (isDefined(spec.minimum) ? spec.minimum <= value : true) &&
+        (isDefined(spec.maximum) ? spec.maximum >= value : true)
+      );
+    case 'integer':
+      return (
+        isInteger(value) &&
         (isDefined(spec.minimum) ? spec.minimum <= value : true) &&
         (isDefined(spec.maximum) ? spec.maximum >= value : true)
       );

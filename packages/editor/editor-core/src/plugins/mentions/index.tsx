@@ -149,11 +149,16 @@ const mentionsPlugin = (
         },
         selectItem(state, item, insert, { mode }) {
           const pluginState = getMentionPluginState(state);
+          const { provider } = pluginState;
           const { id, name, nickname, accessLevel, userType } = item.mention;
           const renderName = nickname ? nickname : name;
           const typeAheadPluginState = typeAheadPluginKey.getState(
             state,
           ) as TypeAheadPluginState;
+
+          if (provider) {
+            provider.recordMentionSelection(item.mention);
+          }
 
           const pickerElapsedTime = typeAheadPluginState.queryStarted
             ? Date.now() - typeAheadPluginState.queryStarted

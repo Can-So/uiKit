@@ -91,7 +91,7 @@ pipelines:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
               - echo "Run browser unit tests using Karma + Browserstack"
-              - node build/ci-scripts/run.tool.if.changed.js browserstack  -- yarn test:browser:browserstack
+              - yarn test:browser:browserstack
             caches:
               - node
         - step:
@@ -192,7 +192,7 @@ pipelines:
             - node ./scripts/uploadBundleAnalyticsEvent.js
           caches:
             - node
-
+   
     # This will run with the webdriver tests
     build-webdriver:
       - step:

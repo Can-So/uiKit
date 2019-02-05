@@ -24,6 +24,7 @@ import SearchIcon from '@atlaskit/icon/glyph/search';
 import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
 import { ToggleStateless } from '@atlaskit/toggle';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import InlineDialog from '@atlaskit/inline-dialog';
 
 import {
   ContainerHeader,
@@ -132,64 +133,11 @@ const ProductNavigation = () => (
   </div>
 );
 
-const ContainerNavigation = () => (
-  <div data-webdriver-test-key="container-navigation">
-    <HeaderSection>
-      {({ css }) => (
-        <div
-          data-webdriver-test-key="container-header"
-          css={{
-            ...css,
-            paddingBottom: gridSize * 2.5,
-          }}
-        >
-          <ContainerHeader
-            before={itemState => (
-              <ItemAvatar
-                itemState={itemState}
-                appearance="square"
-                size="large"
-              />
-            )}
-            text="My software project"
-            subText="Software project"
-          />
-        </div>
-      )}
-    </HeaderSection>
-    <MenuSection>
-      {({ className }) => (
-        <div className={className}>
-          <Item
-            before={BacklogIcon}
-            text="Backlog"
-            isSelected
-            testKey="container-item-backlog"
-          />
-          <Item
-            before={BoardIcon}
-            text="Active sprints"
-            testKey="container-item-sprints"
-          />
-          <Item
-            before={GraphLineIcon}
-            text="Reports"
-            testKey="container-item-reports"
-          />
-          <Separator />
-          <GroupHeading>Shortcuts</GroupHeading>
-          <Item before={ShortcutIcon} text="Project space" />
-          <Item before={ShortcutIcon} text="Project repo" />
-        </div>
-      )}
-    </MenuSection>
-  </div>
-);
-
-type State = { shouldDisplayContainerNav: boolean };
+type State = { shouldDisplayContainerNav: boolean, dialogOpen: boolean };
 export default class Example extends Component<{}, State> {
   state = {
     shouldDisplayContainerNav: true,
+    dialogOpen: false,
   };
 
   toggleContainerNav = () => {
@@ -197,6 +145,76 @@ export default class Example extends Component<{}, State> {
       shouldDisplayContainerNav: !state.shouldDisplayContainerNav,
     }));
   };
+  ContainerNavigation = () => (
+    <div data-webdriver-test-key="container-navigation">
+      <HeaderSection>
+        {({ css }) => (
+          <div
+            data-webdriver-test-key="container-header"
+            css={{
+              ...css,
+              paddingBottom: gridSize * 2.5,
+            }}
+          >
+            <ContainerHeader
+              before={itemState => (
+                <ItemAvatar
+                  itemState={itemState}
+                  appearance="square"
+                  size="large"
+                />
+              )}
+              text="My software project"
+              subText="Software project"
+            />
+          </div>
+        )}
+      </HeaderSection>
+      <MenuSection>
+        {({ className }) => (
+          <div className={className}>
+            <Item
+              before={BacklogIcon}
+              text="Backlog"
+              isSelected
+              testKey="container-item-backlog"
+            />
+            <Item
+              before={BoardIcon}
+              text="Active sprints"
+              testKey="container-item-sprints"
+            />
+            <Item
+              before={GraphLineIcon}
+              text="Reports"
+              testKey="container-item-reports"
+            />
+            <Separator />
+            <GroupHeading>Shortcuts</GroupHeading>
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <InlineDialog
+              onClose={() => {
+                this.setState({ dialogOpen: false });
+              }}
+              content={<div>Renders correctly without getting chopped off</div>}
+              isOpen={this.state.dialogOpen}
+              placement="right"
+            >
+              <Item
+                onClick={() => {
+                  this.setState({ dialogOpen: true });
+                }}
+                before={GraphLineIcon}
+                text="Item with InlineDialog"
+                testKey="container-item-click"
+              />
+            </InlineDialog>
+          </div>
+        )}
+      </MenuSection>
+    </div>
+  );
 
   render() {
     const { shouldDisplayContainerNav } = this.state;
@@ -206,7 +224,7 @@ export default class Example extends Component<{}, State> {
           globalNavigation={GlobalNavigation}
           productNavigation={ProductNavigation}
           containerNavigation={
-            shouldDisplayContainerNav ? ContainerNavigation : null
+            shouldDisplayContainerNav ? this.ContainerNavigation : null
           }
         >
           <div

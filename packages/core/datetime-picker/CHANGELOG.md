@@ -1,5 +1,15 @@
 # @atlaskit/datetime-picker
 
+## 6.4.2
+- [patch] [0cd7f505b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cd7f505b3):
+
+  - Iso date parsing on IE11 and Edge is now consistent with other browsers
+
+## 6.4.1
+- [patch] [348d3aed19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/348d3aed19):
+
+  - Datepicker will now reset the focused date on the calendar every time it is opened
+
 ## 6.4.0
 - [minor] [52827feffb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52827feffb):
 

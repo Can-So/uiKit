@@ -6,6 +6,7 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import { EditorAppearance, ToolbarUIComponentFactory } from '../../types';
 import { EventDispatcher } from '../../event-dispatcher';
 import EditorActions from '../../actions';
+import { AnalyticsEventPayload } from '../../plugins/analytics';
 
 const ToolbarComponentsWrapper = styled.div`
   display: flex;
@@ -49,6 +50,7 @@ export interface ToolbarProps {
   popupsScrollableElement?: HTMLElement;
   disabled: boolean;
   width?: number;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 }
 
 export interface ToolbarInnerProps extends ToolbarProps {
@@ -84,6 +86,7 @@ export class ToolbarInner extends React.Component<ToolbarInnerProps> {
       toolbarSize,
       disabled,
       isToolbarReducedSpacing,
+      dispatchAnalyticsEvent,
     } = this.props;
 
     if (!items || !items.length) {
@@ -107,6 +110,7 @@ export class ToolbarInner extends React.Component<ToolbarInnerProps> {
             toolbarSize,
             isToolbarReducedSpacing,
             containerElement: undefined,
+            dispatchAnalyticsEvent,
           });
           return element && React.cloneElement(element, props);
         })}

@@ -1,3 +1,9 @@
+jest.mock('react-lazily-render', () => {
+  return {
+    default: (data: any) => data.content,
+  };
+});
+
 import * as React from 'react';
 import { CardWithUrlContent } from '../../renderCardWithUrl';
 import { mount } from 'enzyme';

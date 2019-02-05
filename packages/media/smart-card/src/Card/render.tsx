@@ -1,5 +1,4 @@
 import * as React from 'react';
-import LazyRender from 'react-lazily-render';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { CardProps, CardWithData, CardWithUrl } from './types';
 import { CardWithUrlContent as CardWithUrlContentType } from './renderCardWithUrl';
@@ -15,7 +14,7 @@ export class CardWithURLRenderer extends React.Component<
 > {
   static CardContent: typeof CardWithUrlContentType | null = null;
 
-  static moduleImporter(target: any) {
+  static moduleImporter(target: React.Component) {
     import(/* webpackChunkName:"@atlaskit-internal-smartcard-urlcardcontent" */ './renderCardWithUrl').then(
       module => {
         CardWithURLRenderer.CardContent = module.CardWithUrlContent;
@@ -44,27 +43,18 @@ export class CardWithURLRenderer extends React.Component<
       throw new Error('@atlaskit/smart-card: url property is missing.');
     }
 
-    return (
-      <LazyRender
-        offset={100}
-        component={appearance === 'inline' ? 'span' : 'div'}
-        placeholder={<CardLinkView url={url} />}
-        content={
-          CardWithURLRenderer.CardContent !== null ? (
-            <CardWithURLRenderer.CardContent
-              url={url}
-              client={client!}
-              appearance={appearance}
-              onClick={onClick}
-              isSelected={isSelected}
-              createAnalyticsEvent={createAnalyticsEvent}
-              authFn={auth}
-            />
-          ) : (
-            <CardLinkView url={url} />
-          )
-        }
+    return CardWithURLRenderer.CardContent !== null ? (
+      <CardWithURLRenderer.CardContent
+        url={url}
+        client={client!}
+        appearance={appearance}
+        onClick={onClick}
+        isSelected={isSelected}
+        createAnalyticsEvent={createAnalyticsEvent}
+        authFn={auth}
       />
+    ) : (
+      <CardLinkView key={'chunk-placeholder'} url={url} />
     );
   }
 }

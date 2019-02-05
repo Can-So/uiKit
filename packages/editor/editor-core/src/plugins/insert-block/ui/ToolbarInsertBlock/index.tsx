@@ -18,7 +18,7 @@ import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
 import LinkIcon from '@atlaskit/icon/glyph/editor/link';
 import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
 import DateIcon from '@atlaskit/icon/glyph/editor/date';
-import LabelIcon from '@atlaskit/icon/glyph/label';
+import StatusIcon from '@atlaskit/icon/glyph/status';
 import PlaceholderTextIcon from '@atlaskit/icon/glyph/media-services/text';
 import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
 import HorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rule';
@@ -560,7 +560,7 @@ class ToolbarInsertBlock extends React.PureComponent<
       items.push({
         content: labelStatus,
         value: { name: 'status' },
-        elemBefore: <LabelIcon label={labelStatus} />,
+        elemBefore: <StatusIcon label={labelStatus} />,
       });
     }
 

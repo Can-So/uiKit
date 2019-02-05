@@ -194,6 +194,7 @@ export default class Editor extends React.Component<
       popupsScrollableElement,
       disabled,
       collabEdit,
+      dispatchAnalyticsEvent,
     } = this.props;
 
     const { showKeyline } = this.state;
@@ -212,6 +213,7 @@ export default class Editor extends React.Component<
             popupsBoundariesElement={popupsBoundariesElement}
             popupsScrollableElement={popupsScrollableElement}
             disabled={!!disabled}
+            dispatchAnalyticsEvent={dispatchAnalyticsEvent}
           />
           <MainToolbarCustomComponentsSlot>
             <Avatars
@@ -249,6 +251,7 @@ export default class Editor extends React.Component<
                     popupsScrollableElement={popupsScrollableElement}
                     disabled={!!disabled}
                     containerElement={this.scrollContainer}
+                    dispatchAnalyticsEvent={dispatchAnalyticsEvent}
                   />
                 }
                 {editorDOMElement}
