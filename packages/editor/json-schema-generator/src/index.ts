@@ -151,12 +151,12 @@ export default (
     }
   }
 
-  function shouldExclude(stage: string | undefined) {
+  function shouldExclude(stage) {
     return (
       (flags.stage === undefined && stage !== undefined) ||
       (flags.stage !== undefined &&
         stage !== undefined &&
-        stage !== flags.stage)
+        stage.toString() !== flags.stage)
     );
   }
 
