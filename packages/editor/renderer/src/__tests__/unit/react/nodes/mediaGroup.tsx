@@ -89,9 +89,17 @@ describe('MediaGroup', () => {
           collection={imageFileId.collectionName}
           providers={providerFactory}
         />
+        <Media
+          id={imageFileId.id}
+          type={imageFileId.mediaItemType}
+          occurrenceKey="001"
+          collection={imageFileId.collectionName}
+          providers={providerFactory}
+        />
       </MediaGroup>,
       { attachTo: fixture },
     );
+
     expect(mediaGroup.find(FilmstripView)).toHaveLength(1);
 
     const provider = await mediaProvider;
