@@ -5,12 +5,12 @@ import {
   XSellProvider,
 } from '../providers/jira-data-providers';
 
-interface AppSwitcherProps {
+interface JiraAppSwitcherProps {
   cloudId: string;
   triggerXFlow: (productKey: string) => void;
 }
 
-export default (props: AppSwitcherProps) => (
+export default (props: JiraAppSwitcherProps) => (
   <AppSwitcher
     {...props}
     XSellProvider={XSellProvider}
