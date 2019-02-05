@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import { akColorN30A } from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
 export const ToolbarContainer: ComponentClass<HTMLAttributes<{}>> = styled.div`
   display: flex;
@@ -26,6 +26,6 @@ export const CenterButtons: ComponentClass<HTMLAttributes<{}>> = styled.div`
 
 export const VerticalLine: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 1px;
-  background: ${akColorN30A};
+  background: ${colors.N30A};
   height: 32px;
 `;

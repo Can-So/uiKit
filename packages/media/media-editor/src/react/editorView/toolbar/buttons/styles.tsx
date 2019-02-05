@@ -3,14 +3,10 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import {
-  akColorB400,
-  akColorN0,
-  akColorN500,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
-const optionsColorNormal = akColorN500;
-const optionsColorActive = akColorB400;
+const optionsColorNormal = colors.N500;
+const optionsColorActive = colors.B400;
 const colorSampleOutlineColor = 'rgba(255, 255, 255, 0.5)';
 
 export const ToolbarButton: ComponentClass<HTMLAttributes<{}>> = styled.div`
@@ -29,8 +25,8 @@ export const ToolbarButton: ComponentClass<HTMLAttributes<{}>> = styled.div`
 export const ActiveToolbarButton: ComponentClass<HTMLAttributes<{}>> = styled(
   ToolbarButton,
 )`
-  background-color: ${akColorN500};
-  color: ${akColorN0};
+  background-color: ${colors.N500};
+  color: ${colors.N0};
 `;
 
 export interface OptionsIconWrapperProps {
