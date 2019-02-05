@@ -1,0 +1,13 @@
+{
+  "releases": [
+    { "name": "@atlaskit/media-picker", "type": "major" },
+    { "name": "@atlaskit/editor-core", "type": "patch" }
+  ],
+  "dependents": [
+    {
+      "name": "@atlaskit/media-test-helpers",
+      "type": "patch",
+      "dependencies": ["@atlaskit/media-picker"]
+    }
+  ]
+}

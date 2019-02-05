@@ -23,7 +23,6 @@ import {
   DefaultMediaStateManager,
 } from './../../../src/plugins/media/pm-plugins/main';
 import extensionPlugin from '../../../src/plugins/extension';
-import pickerFacadeLoader from '../../../src/plugins/media/picker-facade-loader';
 import { name } from '../../../package.json';
 import tasksAndDecisionsPlugin from '../../../src/plugins/tasks-and-decisions';
 import mediaPlugin from '../../../src/plugins/media';
@@ -169,7 +168,6 @@ describe(name, () => {
               fileId: Promise.resolve('id'),
             });
 
-            await pickerFacadeLoader();
             const provider = await mediaProvider;
             await provider.uploadContext;
             const mediaPluginState = getMediaPluginState(editorView);
@@ -197,7 +195,6 @@ describe(name, () => {
               fileId: Promise.resolve('id'),
             });
 
-            await pickerFacadeLoader();
             const provider = await mediaProvider;
             await provider.uploadContext;
 
@@ -227,7 +224,6 @@ describe(name, () => {
               fileId: Promise.resolve('id'),
             });
 
-            await pickerFacadeLoader();
             const provider = await mediaProvider;
             await provider.uploadContext;
             const mediaPluginState = getMediaPluginState(editorView);
@@ -265,7 +261,6 @@ describe(name, () => {
               id: testTempFileId,
               fileId: Promise.resolve('id'),
             });
-            await pickerFacadeLoader();
             const provider = await mediaProvider;
             await provider.uploadContext;
             const mediaPluginState = getMediaPluginState(editorView);
@@ -300,7 +295,6 @@ describe(name, () => {
               fileId: Promise.resolve('id'),
             });
 
-            await pickerFacadeLoader();
             const provider = await mediaProvider;
             await provider.uploadContext;
             await provider.viewContext;
@@ -443,7 +437,6 @@ describe(name, () => {
           fileId: Promise.resolve('id'),
         });
 
-        await pickerFacadeLoader();
         const provider = await mediaProvider;
         await provider.uploadContext;
 

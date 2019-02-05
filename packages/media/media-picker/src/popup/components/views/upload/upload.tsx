@@ -23,7 +23,7 @@ import EditorInfoIcon from '@atlaskit/icon/glyph/error';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
 import { messages, InfiniteScroll } from '@atlaskit/media-ui';
-import { Browser } from '../../../../components/browser';
+import { Browser } from '../../../../components/types';
 import { isWebGLAvailable } from '../../../tools/webgl';
 import { Dropzone } from './dropzone';
 import { fileClick } from '../../../actions/fileClick';
