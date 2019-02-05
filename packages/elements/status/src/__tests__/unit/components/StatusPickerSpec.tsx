@@ -42,6 +42,10 @@ describe('StatusPicker', () => {
       'In progress',
     );
     expect(component.find(FieldTextStateless).prop('innerRef')).toBeDefined();
+    expect(component.find(FieldTextStateless).prop('autoComplete')).toBe('off');
+    expect(component.find(FieldTextStateless).prop('isSpellCheckEnabled')).toBe(
+      false,
+    );
   });
 
   it('should pass onColorClick handler prop to color palette', () => {
