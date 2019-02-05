@@ -9,34 +9,20 @@ import JiraCoreIcon from '@atlaskit/logo/dist/esm/JiraCoreLogo/Icon';
 import AtlassianIcon from '@atlaskit/logo/dist/esm/AtlassianLogo/Icon';
 import PeopleIcon from './assets/people';
 import { LicenseInformationDataStructure } from '../providers/types';
+import jiraOpsLogo from './assets/jira-ops-logo';
 
 enum ProductActivationStatus {
   ACTIVE = 'ACTIVE',
   DEACTIVATED = 'DEACTIVATED',
 }
 
-const getLogoIcon = (Icon: React.ReactType): React.ReactType => (
+export const getLogoIcon = (Icon: React.ReactType): React.ReactType => (
   props: any,
 ) => {
   return <Icon iconColor={colors.N0} size="small" {...props} />;
 };
 
-const getFixedProductLinks = (hostname: string) => [
-  {
-    key: 'people',
-    label: 'People',
-    icon: PeopleIcon,
-    link: `${hostname}/people`,
-  },
-  {
-    key: 'home',
-    label: 'Atlassian Home',
-    icon: getLogoIcon(AtlassianIcon),
-    link: `${hostname}/home`,
-  },
-];
-
-const PRODUCT_DATA_MAP: {
+export const PRODUCT_DATA_MAP: {
   [productKey: string]: {
     label: string;
     icon: React.ReactType;
@@ -64,13 +50,31 @@ const PRODUCT_DATA_MAP: {
     url: 'secure/BrowseProjects.jspa?selectedProjectType=service_desk',
   },
   'jira-incident-manager.ondemand': {
-    label: 'Jira Core',
-    icon: getLogoIcon(JiraCoreIcon),
-    url: 'secure/BrowseProjects.jspa?selectedProjectType=business',
+    label: 'Jira Ops',
+    icon: getLogoIcon(jiraOpsLogo),
+    url: 'secure/BrowseProjects.jspa?selectedProjectType=ops',
   },
 };
 
-const getProductLink = (productKey: string, hostname: string): ProductLink => ({
+export const getFixedProductLinks = (hostname: string) => [
+  {
+    key: 'people',
+    label: 'People',
+    icon: PeopleIcon,
+    link: `${hostname}/people`,
+  },
+  {
+    key: 'home',
+    label: 'Atlassian Home',
+    icon: getLogoIcon(AtlassianIcon),
+    link: `${hostname}/home`,
+  },
+];
+
+export const getProductLink = (
+  productKey: string,
+  hostname: string,
+): ProductLink => ({
   key: productKey,
   link: `${hostname}/${PRODUCT_DATA_MAP[productKey].url}`,
   ...PRODUCT_DATA_MAP[productKey],
@@ -83,7 +87,7 @@ export interface ProductLink {
   link: string;
 }
 
-const productIsActive = (
+export const productIsActive = (
   { products }: LicenseInformationDataStructure,
   productKey: string,
 ): boolean =>
@@ -96,29 +100,21 @@ export const getProductLinks = (
   const majorJiraProducts = [
     'jira-software.ondemand',
     'jira-servicedesk.ondemand',
+    'jira-incident-manager.ondemand',
   ];
   const activeProductKeys: string[] = [
     'jira-core.ondemand',
     ...majorJiraProducts,
-    'jira-incident-manager.ondemand',
     'confluence.ondemand',
-  ]
-    .filter((productKey: string) => {
-      return productIsActive(licenseInformationData, productKey);
-    })
-    .filter((productKey: string, _: number, activeProducts: string[]) => {
-      if (productKey === 'jira-incident-manager.ondemand') {
-        if (activeProducts.indexOf('jira-core.ondemand') !== -1) {
-          return false;
-        }
-      }
-      return true;
-    });
+  ].filter((productKey: string) => {
+    return productIsActive(licenseInformationData, productKey);
+  });
 
   if (
     activeProductKeys.indexOf('jira-core.ondemand') === -1 &&
     (activeProductKeys.indexOf('jira-software.ondemand') !== -1 ||
-      activeProductKeys.indexOf('jira-servicedesk.ondemand') !== -1)
+      activeProductKeys.indexOf('jira-servicedesk.ondemand') !== -1 ||
+      activeProductKeys.indexOf('jira-incident-manager.ondemand') !== -1)
   ) {
     activeProductKeys.unshift('jira-core.ondemand');
   }
