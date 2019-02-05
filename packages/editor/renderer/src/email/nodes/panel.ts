@@ -3,7 +3,13 @@ import { colors, gridSize, borderRadius } from '@atlaskit/theme';
 import { NodeSerializerOpts } from '../interfaces';
 import { createTag, serializeStyle } from '../util';
 
-const config = {
+type PanelType = 'info' | 'note' | 'tip' | 'success' | 'warning' | 'error';
+
+type PanelConfig = {
+  [K in PanelType]: { background: string; iconColor: string }
+};
+
+const config: PanelConfig = {
   info: {
     background: colors.B50,
     iconColor: colors.B400,
@@ -31,11 +37,12 @@ const config = {
 };
 
 export default function panel({ attrs, text }: NodeSerializerOpts) {
+  const type: PanelType = attrs.panelType;
   const css = serializeStyle({
     'border-radius': `${borderRadius()}px`,
     margin: `${gridSize() / 2}px 0`,
     padding: `${gridSize()}px`,
-    background: config[attrs.panelType] && config[attrs.panelType].background,
+    background: config[type] && config[type].background,
   });
 
   return createTag('div', { style: css }, text);

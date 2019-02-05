@@ -36,6 +36,7 @@
     "@atlaskit/theme": "^7.0.1",
     "@atlaskit/util-data-test": "^10.2.1",
     "@types/prosemirror-model": "^1.5.0",
+    "@types/puppeteer": "^1.12.1",
     "cookie": "^0.3.1",
     "debug": "^2.2.0",
     "got": "^8.3.1",

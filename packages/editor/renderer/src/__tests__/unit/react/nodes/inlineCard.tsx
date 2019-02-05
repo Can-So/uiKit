@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import InlineCard from '../../../../react/nodes/inlineCard';
 
 describe('Renderer - React/Nodes/InlineCard', () => {
@@ -18,7 +18,7 @@ describe('Renderer - React/Nodes/InlineCard', () => {
       'Today is a big day for Atlassian – we have entered into an agreement to buy Trello. (boom)',
   };
 
-  let node;
+  let node: ReactWrapper;
   afterEach(() => {
     node.unmount();
   });
