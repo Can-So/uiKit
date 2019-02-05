@@ -55,7 +55,7 @@ describe(name, () => {
         await provider.uploadContext;
         await waitForPluginStateChange(pluginState);
 
-        // Wait a tick for await MediaPicker in picker-facade
+        // wait a tick for await MediaPicker in picker-facade
         await new Promise(resolve => setTimeout(resolve, 0));
 
         pluginState.binaryPicker!.upload = sinon.spy();
