@@ -15,6 +15,7 @@ const LayoutManagerWithViewController = ({
   customComponents,
   experimental_flyoutOnHover,
   experimental_alternateFlyoutBehaviour,
+  experimental_fullWidthFlyout,
   globalNavigation,
   onExpandStart,
   onExpandEnd,
@@ -34,6 +35,7 @@ const LayoutManagerWithViewController = ({
       experimental_alternateFlyoutBehaviour={
         !!experimental_alternateFlyoutBehaviour
       }
+      experimental_fullWidthFlyout={!!experimental_fullWidthFlyout}
       globalNavigation={globalNavigation}
       containerSkeleton={() =>
         firstSkeletonToRender ? (
