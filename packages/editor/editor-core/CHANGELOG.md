@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 98.2.4
+- [patch] [65b73cc466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65b73cc466):
+
+  - Code split media-picker: make MediaPicker factory async and make editor use it
+
+## 98.2.3
+- [patch] [14fe1381ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14fe1381ba):
+
+  - ED-6118: ensure media dimensions are always integers, preventing invalid ADF
+
+## 98.2.2
+- [patch] [86dcb6f814](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86dcb6f814):
+
+  - updated native status icon in Fabric editor
+
 ## 98.2.1
 - [patch] [17107bdfb0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/17107bdfb0):
 

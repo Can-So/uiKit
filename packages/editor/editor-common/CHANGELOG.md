@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 31.0.2
+- [patch] [c82c636533](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c82c636533):
+
+  - ED-6156: limit breakout width to 1800px
+
 ## 31.0.1
 - [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
 

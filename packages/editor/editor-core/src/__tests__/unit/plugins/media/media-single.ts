@@ -299,6 +299,33 @@ describe('media-single', () => {
         ),
       );
     });
+
+    it('should create a media node with integer dimensions after scaleFactor', () => {
+      const { editorView } = editor(doc(p('text{<>}')));
+
+      insertMediaSingleNode(
+        editorView,
+        { ...createMediaState(temporaryFileId), scaleFactor: 2.2 },
+        testCollectionName,
+      );
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          p('text'),
+          mediaSingle({ layout: 'center' })(
+            media({
+              id: temporaryFileId,
+              __key: temporaryFileId,
+              type: 'file',
+              collection: testCollectionName,
+              width: 45,
+              height: 91,
+            })(),
+          ),
+          p(),
+        ),
+      );
+    });
   });
 
   it('should be able to show mediaSingle without height or width', () => {

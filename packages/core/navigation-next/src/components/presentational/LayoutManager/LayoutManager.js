@@ -73,6 +73,7 @@ export default class LayoutManager extends Component<
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
     experimental_alternateFlyoutBehaviour: false,
+    experimental_fullWidthFlyout: false,
   };
 
   static getDerivedStateFromProps(props: LayoutManagerProps, state: State) {
@@ -255,6 +256,8 @@ export default class LayoutManager extends Component<
       experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
       // eslint-disable-next-line camelcase
       experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
+      // eslint-disable-next-line camelcase
+      experimental_fullWidthFlyout: EXPERIMENTAL_FULL_WIDTH_FLYOUT,
       collapseToggleTooltipContent,
     } = this.props;
     const { flyoutIsOpen, mouseIsOverNavigation, itemIsDragging } = this.state;
@@ -264,6 +267,10 @@ export default class LayoutManager extends Component<
       isResizing,
       productNavWidth,
     } = navigationUIController.state;
+
+    const flyoutWidth = EXPERIMENTAL_FULL_WIDTH_FLYOUT
+      ? productNavWidth
+      : CONTENT_NAV_WIDTH_FLYOUT;
 
     return (
       <LayoutEventListener
@@ -276,6 +283,7 @@ export default class LayoutManager extends Component<
               isExpanded: !isCollapsed,
               flyoutOnHoverEnabled: EXPERIMENTAL_FLYOUT_ON_HOVER,
               alternateFlyoutBehaviourEnabled: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
+              fullWidthFlyoutEnabled: EXPERIMENTAL_FULL_WIDTH_FLYOUT,
             },
             componentName: 'navigation',
             packageName,
@@ -286,7 +294,7 @@ export default class LayoutManager extends Component<
             from={[CONTENT_NAV_WIDTH_COLLAPSED]}
             in={!isCollapsed || flyoutIsOpen}
             properties={['width']}
-            to={[flyoutIsOpen ? CONTENT_NAV_WIDTH_FLYOUT : productNavWidth]}
+            to={[flyoutIsOpen ? flyoutWidth : productNavWidth]}
             userIsDragging={isResizing}
             // only apply listeners to the NAV resize transition
             productNavWidth={productNavWidth}

@@ -56,7 +56,17 @@ const ProductNavigationPrimitiveBase = ({
   children,
   theme = { mode: light, context: 'product' },
 }: ProductNavigationPrimitiveBaseProps) => (
-  <div css={theme.mode.contentNav().product}>
+  <div
+    css={{
+      ...theme.mode.contentNav().product,
+      '&:not(:only-child)': {
+        // Setting z-index ensures ScrollHints stay below the container nav
+        // &:not(:only-child) sets it only when both container and product
+        // nav are rendered.
+        zIndex: -1,
+      },
+    }}
+  >
     <ScrollProvider>{children}</ScrollProvider>
   </div>
 );

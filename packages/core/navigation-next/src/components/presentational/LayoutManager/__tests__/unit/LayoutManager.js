@@ -36,6 +36,7 @@ describe('LayoutManager', () => {
       children: <div>Page content</div>,
       experimental_flyoutOnHover: false,
       experimental_alternateFlyoutBehaviour: false,
+      experimental_fullWidthFlyout: false,
       collapseToggleTooltipContent: () => ({ text: 'Expand', char: '[' }),
     };
   });
@@ -248,6 +249,7 @@ describe('LayoutManager', () => {
 
           wrapper
             .find('Button')
+            .parents('Tooltip')
             .findWhere(
               el =>
                 el.name() === 'div' &&
@@ -260,15 +262,24 @@ describe('LayoutManager', () => {
 
         it('should NOT close already expanded flyout when mousing over expand/collapse affordance', () => {
           const wrapper = mount(<LayoutManager {...defaultProps} />);
-
-          expect(wrapper.find('Button').prop('onMouseOver')).toBeInstanceOf(
-            Function,
-          );
+          expect(
+            wrapper
+              .find('Button')
+              .parents('Tooltip')
+              .closest('div')
+              .prop('onMouseOver'),
+          ).toBeInstanceOf(Function);
 
           wrapper.setState({ flyoutIsOpen: true });
           wrapper.update();
 
-          expect(wrapper.find('Button').prop('onMouseOver')).toBeNull();
+          expect(
+            wrapper
+              .find('Button')
+              .parents('Tooltip')
+              .closest('div')
+              .prop('onMouseOver'),
+          ).toBeNull();
         });
 
         it('should not open when mousing out before 200ms', () => {
@@ -536,6 +547,7 @@ describe('LayoutManager', () => {
           isExpanded: false,
           flyoutOnHoverEnabled: false,
           alternateFlyoutBehaviourEnabled: false,
+          fullWidthFlyoutEnabled: false,
         },
         componentName: 'navigation',
         packageName: '@atlaskit/navigation-next',
@@ -555,6 +567,7 @@ describe('LayoutManager', () => {
           isExpanded: true,
           flyoutOnHoverEnabled: false,
           alternateFlyoutBehaviourEnabled: false,
+          fullWidthFlyoutEnabled: false,
         },
         componentName: 'navigation',
         packageName: '@atlaskit/navigation-next',
@@ -574,6 +587,7 @@ describe('LayoutManager', () => {
           isExpanded: true,
           flyoutOnHoverEnabled: true,
           alternateFlyoutBehaviourEnabled: false,
+          fullWidthFlyoutEnabled: false,
         },
         componentName: 'navigation',
         packageName: '@atlaskit/navigation-next',
@@ -594,6 +608,7 @@ describe('LayoutManager', () => {
           isExpanded: true,
           flyoutOnHoverEnabled: true,
           alternateFlyoutBehaviourEnabled: true,
+          fullWidthFlyoutEnabled: false,
         },
         componentName: 'navigation',
         packageName: '@atlaskit/navigation-next',

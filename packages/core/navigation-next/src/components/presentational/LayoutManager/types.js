@@ -42,6 +42,15 @@ export type ExperimentalFeatureFlags = {|
     set to true as well.
   */
   experimental_alternateFlyoutBehaviour: boolean,
+
+  /**
+    NOTE: This property is experimental and may be removed in a minor release.
+
+    Expands the flyout to custom width set by the user by resizing the nav,
+    rather the default flyout width.
+    This FF has no effect if experimental_flyoutOnHover is set to false.
+  */
+  experimental_fullWidthFlyout: boolean,
 |};
 
 export type GetRefs = ({

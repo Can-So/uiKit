@@ -4,7 +4,7 @@ import Button from '@atlaskit/button';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
 import { startFileBrowser } from '../../../actions/startFileBrowser';
-import { Browser } from '../../../../components/browser';
+import { Browser } from '../../../../components/types';
 import { State } from '../../../domain';
 
 export interface LocalBrowserButtonProps {

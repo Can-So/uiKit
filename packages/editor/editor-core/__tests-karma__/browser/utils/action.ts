@@ -17,7 +17,6 @@ import {
 } from '../../../src/plugins/media/pm-plugins/main';
 import { insertFileFromDataUrl } from '../../../src/utils/action';
 import mediaPlugin from '../../../src/plugins/media';
-import pickerFacadeLoader from '../../../src/plugins/media/picker-facade-loader';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -52,10 +51,12 @@ describe(name, () => {
           .stub(pluginState, 'collectionFromProvider' as any)
           .returns(testCollectionName);
 
-        await pickerFacadeLoader();
         const provider = await mediaProvider;
         await provider.uploadContext;
         await waitForPluginStateChange(pluginState);
+
+        // wait a tick for await MediaPicker in picker-facade
+        await new Promise(resolve => setTimeout(resolve, 0));
 
         pluginState.binaryPicker!.upload = sinon.spy();
 

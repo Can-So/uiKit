@@ -1,6 +1,6 @@
 import { Dispatch, Middleware } from 'redux';
 
-import { PopupUploadEventEmitter } from '../../components/popup';
+import { PopupUploadEventEmitter } from '../../components/types';
 import { State } from '../domain';
 import { isSendUploadEventAction } from '../actions/sendUploadEvent';
 import { copyMediaFileForUpload } from '../../domain/file';

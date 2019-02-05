@@ -1,5 +1,5 @@
 jest.mock('../../../src/utils/getDataURIFromFileState');
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import { fakeContext, nextTick } from '@atlaskit/media-test-helpers';
@@ -558,13 +558,46 @@ describe('Card', () => {
   });
 
   it('should not fetch remote preview when file is processed and there is local preview', async () => {
-    const context = createContextWithGetFile();
-    setup(context);
+    const subject = new ReplaySubject<FileState>(1);
+    const baseState: FileState = {
+      id: '123',
+      mediaType: 'image',
+      status: 'processing',
+      mimeType: 'image/png',
+      name: 'file-name',
+      size: 10,
+    };
+    subject.next(baseState);
+    const context = fakeContext({
+      file: {
+        getFileState: subject,
+      },
+    });
+    const { component } = setup(context);
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
     await nextTick();
 
+    expect(component.state('dataURI')).toEqual('some-data-uri');
+    expect(context.getImage).toHaveBeenCalledTimes(0);
+
+    subject.next({
+      ...baseState,
+      status: 'processed',
+      artifacts: {} as any,
+    });
+    (getDataURIFromFileState as any).mockReturnValue({
+      src: 'fooo',
+      orientation: 6,
+    });
+
+    await nextTick();
+    await nextTick();
+
+    // We want to make sure that when transition from "processing" to "processed" we still don't call getImage if we already have preview
+    expect(component.state('dataURI')).toEqual('some-data-uri');
+    expect(component.state('status')).toEqual('complete');
     expect(context.getImage).toHaveBeenCalledTimes(0);
   });
 

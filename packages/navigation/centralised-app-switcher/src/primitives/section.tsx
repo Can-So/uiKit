@@ -15,22 +15,29 @@ const SectionTitle = styled.h1`
 type Props = {
   title: string;
   isAdmin?: boolean;
-  children: React.ReactElement<any>[] | React.ReactElement<any> | null;
+  isCustom?: boolean;
+  children: (JSX.Element | null)[] | JSX.Element | null;
 };
-export default ({ title, isAdmin = false, children }: Props) => {
-  const childrenWithIsAdmin = React.Children.map(
+export default ({
+  title,
+  isAdmin = false,
+  isCustom = false,
+  children,
+}: Props) => {
+  const childrenWithAddedProps = React.Children.map(
     children,
     child =>
       React.isValidElement(child) &&
-      React.cloneElement(child as React.ReactElement<any>, {
-        isAdmin: isAdmin,
+      React.cloneElement(child as JSX.Element, {
+        isAdmin,
+        isCustom,
       }),
   );
 
   return (
     <Section>
       <SectionTitle>{title}</SectionTitle>
-      {childrenWithIsAdmin}
+      {childrenWithAddedProps}
     </Section>
   );
 };

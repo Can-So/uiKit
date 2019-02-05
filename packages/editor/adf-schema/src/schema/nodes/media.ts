@@ -27,7 +27,13 @@ export interface MediaBaseAttributes {
    */
   id: string;
   collection: string;
+  /**
+   * @type integer
+   */
   height?: number;
+  /**
+   * @type integer
+   */
   width?: number;
   /**
    * @minLength 1
@@ -52,7 +58,13 @@ export interface MediaAttributes extends MediaBaseAttributes {
 export interface ExternalMediaAttributes {
   type: 'external';
   url: string;
+  /**
+   * @type integer
+   */
   width?: number;
+  /**
+   * @type integer
+   */
   height?: number;
 }
 

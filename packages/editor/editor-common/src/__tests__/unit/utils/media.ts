@@ -6,6 +6,7 @@ import {
   calcWideWidth,
   calcBreakoutWidth,
 } from '../../../utils/calc-breakout-width';
+import { akEditorFullWidthLayoutWidth } from '../../../styles/consts';
 
 describe('@atlaskit/editor-common media utils', () => {
   describe('#calcLegacyWidth and #calcResizedWidth', () => {
@@ -19,6 +20,13 @@ describe('@atlaskit/editor-common media utils', () => {
         );
         expect(calcResizedWidth('full-width', width, containerWidth)).toEqual(
           calcBreakoutWidth('full-width', containerWidth),
+        );
+      });
+
+      it(`should not exceed ${akEditorFullWidthLayoutWidth}px`, () => {
+        const pageWidth = 2000;
+        expect(calcBreakoutWidth('full-width', pageWidth)).toEqual(
+          `${akEditorFullWidthLayoutWidth}px`,
         );
       });
     });

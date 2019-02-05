@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 38.0.4
+- [patch] [fb61c590cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb61c590cf):
+
+  - ED-6173: stop renderer from sending useInlinePlayer to mediaGroup
+
 ## 38.0.3
 - [patch] [a1ad76375d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1ad76375d):
 

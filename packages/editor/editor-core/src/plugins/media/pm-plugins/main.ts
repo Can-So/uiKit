@@ -25,7 +25,6 @@ import { MediaPluginOptions } from '../media-plugin-options';
 import { insertMediaGroupNode } from '../utils/media-files';
 import { removeMediaNode, splitMediaGroup } from '../utils/media-common';
 import PickerFacade, { PickerFacadeConfig } from '../picker-facade';
-import pickerFacadeLoader from '../picker-facade-loader';
 import {
   MediaState,
   MediaProvider,
@@ -139,11 +138,9 @@ export class MediaPluginState {
     }
 
     // TODO disable (not destroy!) pickers until mediaProvider is resolved
-    let Picker: typeof PickerFacade;
 
     try {
       let resolvedMediaProvider: MediaProvider = (this.mediaProvider = await mediaProvider);
-      Picker = await pickerFacadeLoader();
 
       assert(
         resolvedMediaProvider && resolvedMediaProvider.viewContext,
@@ -191,10 +188,10 @@ export class MediaPluginState {
       const uploadContext = await this.mediaProvider.uploadContext;
 
       if (this.mediaProvider.uploadParams && uploadContext) {
-        this.initPickers(
+        await this.initPickers(
           this.mediaProvider.uploadParams,
           uploadContext,
-          Picker,
+          PickerFacade,
           this.reactContext,
         );
       } else {
@@ -543,7 +540,7 @@ export class MediaPluginState {
     this.customPicker = undefined;
   };
 
-  private initPickers(
+  private async initPickers(
     uploadParams: UploadParams,
     context: Context,
     Picker: typeof PickerFacade,
@@ -567,44 +564,48 @@ export class MediaPluginState {
 
       if (this.options.customMediaPicker) {
         pickers.push(
-          (this.customPicker = new Picker(
+          (this.customPicker = await new Picker(
             'customMediaPicker',
             pickerFacadeConfig,
             this.options.customMediaPicker,
-          )),
+          ).init()),
         );
       } else {
         pickers.push(
-          (this.popupPicker = new Picker(
+          (this.popupPicker = await new Picker(
             // Fallback to browser picker for unauthenticated users
             context.config.userAuthProvider ? 'popup' : 'browser',
             pickerFacadeConfig,
             defaultPickerConfig,
-          )),
+          ).init()),
         );
 
         pickers.push(
-          (this.binaryPicker = new Picker(
+          (this.binaryPicker = await new Picker(
             'binary',
             pickerFacadeConfig,
             defaultPickerConfig,
-          )),
+          ).init()),
         );
 
         pickers.push(
-          (this.clipboardPicker = new Picker(
+          (this.clipboardPicker = await new Picker(
             'clipboard',
             pickerFacadeConfig,
             defaultPickerConfig,
-          )),
+          ).init()),
         );
 
         pickers.push(
-          (this.dropzonePicker = new Picker('dropzone', pickerFacadeConfig, {
-            container: this.options.customDropzoneContainer,
-            headless: true,
-            ...defaultPickerConfig,
-          })),
+          (this.dropzonePicker = await new Picker(
+            'dropzone',
+            pickerFacadeConfig,
+            {
+              container: this.options.customDropzoneContainer,
+              headless: true,
+              ...defaultPickerConfig,
+            },
+          ).init()),
         );
 
         this.dropzonePicker.onDrag(this.handleDrag);

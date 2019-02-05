@@ -28,11 +28,11 @@ class BrowserWrapper extends Component<{}, BrowserWrapperState> {
     collectionName: defaultMediaPickerCollectionName,
   };
 
-  componentWillMount() {
-    this.createBrowse();
+  async componentWillMount() {
+    await this.createBrowse();
   }
 
-  createBrowse() {
+  async createBrowse() {
     const context = ContextFactory.create({
       authProvider: mediaPickerAuthProvider(),
     });
@@ -47,7 +47,7 @@ class BrowserWrapper extends Component<{}, BrowserWrapperState> {
     if (this.state.fileBrowser) {
       this.state.fileBrowser.teardown();
     }
-    const fileBrowser = MediaPicker('browser', context, browseConfig);
+    const fileBrowser = await MediaPicker('browser', context, browseConfig);
 
     this.setState({
       fileBrowser,
