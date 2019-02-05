@@ -1,0 +1,1 @@
+- Iso date parsing on IE11 and Edge is now consistent with other browsers
