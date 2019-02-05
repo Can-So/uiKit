@@ -39,7 +39,6 @@
     "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/theme": "^7.0.2",
     "@atlaskit/tooltip": "^12.1.15",
-    "@atlaskit/util-shared-styles": "^2.10.3",
     "@types/bytes": "^2.4.33",
     "babel-runtime": "^6.26.0",
     "blueimp-load-image": "^2.19.0",
