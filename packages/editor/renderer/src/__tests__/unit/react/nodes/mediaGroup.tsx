@@ -137,4 +137,17 @@ describe('MediaGroup', () => {
 
     mediaGroup.unmount();
   });
+
+  it.only('should send useInlinePlayer: false to the Media', () => {
+    const mediaGroup = mount(
+      <MediaGroup>
+        <Media
+          id={imageFileId.id}
+          type={imageFileId.mediaItemType}
+          collection={imageFileId.collectionName}
+        />
+      </MediaGroup>,
+    );
+    expect(mediaGroup.find(Media).prop('useInlinePlayer')).toBe(false);
+  });
 });

@@ -1,0 +1,1 @@
+- ED-6173: stop renderer from sending useInlinePlayer to mediaGroup

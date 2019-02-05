@@ -111,7 +111,6 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
     const isMobile = rendererAppearance === 'mobile';
     const shouldPlayInline =
       useInlinePlayer !== undefined ? useInlinePlayer : true;
-    // TODO: test for this
 
     if (type === 'external') {
       return this.renderExternal();
