@@ -59,8 +59,12 @@ const ProductNavigationPrimitiveBase = ({
   <div
     css={{
       ...theme.mode.contentNav().product,
-      // Setting a negative z-index to ensure it stays below the container nav
-      zIndex: -1,
+      '&:not(:only-child)': {
+        // Setting z-index ensures ScrollHints stay below the container nav
+        // &:not(:only-child) sets it only when both container and product
+        // nav are rendered.
+        zIndex: -1,
+      },
     }}
   >
     <ScrollProvider>{children}</ScrollProvider>
