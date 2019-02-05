@@ -1,5 +1,10 @@
 # @atlaskit/feedback-collector
 
+## 2.0.4
+- [patch] [2a8536a220](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2a8536a220):
+
+  - Button is no longer a peer dependency of this module
+
 ## 2.0.3
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

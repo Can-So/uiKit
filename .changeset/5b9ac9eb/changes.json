@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@atlaskit/feedback-collector", "type": "patch" }],
-  "dependents": []
-}
