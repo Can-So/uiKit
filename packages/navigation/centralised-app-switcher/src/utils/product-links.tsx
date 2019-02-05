@@ -130,21 +130,22 @@ export const getProductLinks = (
 };
 
 export const getAdministrationLinks = (
-  hostname: string,
   cloudId: string,
+  isAdmin: boolean,
 ): ProductLink[] => {
+  const urlPrefix = isAdmin ? `admin/s/${cloudId}` : 'trusted-admin';
   return [
     {
       key: 'administration',
       label: 'Administration',
       icon: SettingsIcon,
-      link: `${hostname}/admin/s/${cloudId}`,
+      link: `/${urlPrefix}`,
     },
     {
       key: 'discover-applications',
       label: 'Discover Applications',
       icon: DiscoverFilledIcon,
-      link: `${hostname}/admin/s/${cloudId}/billing/addapplication`,
+      link: `/${urlPrefix}/billing/addapplication`,
     },
   ];
 };

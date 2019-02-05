@@ -38,147 +38,149 @@ interface JiraAppSwitcherProps {
   triggerXFlow: (productKey: string) => void;
 }
 
-export default ({ cloudId, triggerXFlow }: JiraAppSwitcherProps) => {
-  return (
-    <RecentContainersProvider cloudId={cloudId}>
-      {({
-        isLoading: isLoadingRecentContainers,
-        data: recentContainersData,
-      }) => (
-        <CustomLinksProvider>
-          {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
-            <LicenseInformationProvider cloudId={cloudId}>
-              {({
-                isLoading: isLoadingLicenseInformation,
-                data: licenseInformationData,
-              }) => (
-                <UserPermissionProvider
-                  cloudId={cloudId}
-                  permissionId={Permissions.MANAGE}
-                >
-                  {({
-                    isLoading: isLoadingAdminPermission,
-                    data: adminPermissionData,
-                  }) => (
-                    <AppSwitcherWrapper>
-                      {!isLoadingAdminPermission &&
-                        adminPermissionData &&
-                        adminPermissionData.permitted &&
-                        licenseInformationData && (
-                          <Section title="Administration" isAdmin>
-                            {getAdministrationLinks(
-                              licenseInformationData.hostname,
-                              cloudId,
-                            ).map(linkData => {
-                              const { label, icon, key, link } = linkData;
-                              return (
-                                <AppSwitcherItem
-                                  key={key}
-                                  icon={icon}
-                                  href={link}
-                                >{`${label}`}</AppSwitcherItem>
-                              );
-                            })}
-                          </Section>
+export default ({ cloudId, triggerXFlow }: JiraAppSwitcherProps) => (
+  <RecentContainersProvider cloudId={cloudId}>
+    {({ isLoading: isLoadingRecentContainers, data: recentContainersData }) => (
+      <CustomLinksProvider>
+        {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
+          <LicenseInformationProvider cloudId={cloudId}>
+            {({
+              isLoading: isLoadingLicenseInformation,
+              data: licenseInformationData,
+            }) => (
+              <UserPermissionProvider
+                cloudId={cloudId}
+                permissionId={Permissions.MANAGE}
+              >
+                {({
+                  isLoading: isLoadingAdminPermission,
+                  data: managePermissionData,
+                }) => (
+                  <UserPermissionProvider
+                    cloudId={cloudId}
+                    permissionId={Permissions.ADD_PRODUCTS}
+                  >
+                    {({
+                      isLoading: isLoadingAddProductsPermission,
+                      data: addProductsPermissionData,
+                    }) => (
+                      <AppSwitcherWrapper>
+                        {isLoadingRecentContainers && isLoadingCustomLinks && (
+                          <Skeleton />
                         )}
-                      {isLoadingLicenseInformation ||
-                      isLoadingAdminPermission ? (
-                        <Skeleton />
-                      ) : (
-                        <Section title="Products">
-                          {licenseInformationData &&
-                            adminPermissionData && [
-                              ...getProductLinks(licenseInformationData).map(
-                                productData => {
-                                  const {
-                                    label,
-                                    icon,
-                                    key,
-                                    link,
-                                  } = productData;
-                                  return (
+                        {!isLoadingAdminPermission &&
+                          licenseInformationData &&
+                          managePermissionData &&
+                          addProductsPermissionData &&
+                          (managePermissionData.permitted ||
+                            addProductsPermissionData.permitted) && (
+                            <Section title="Administration" isAdmin>
+                              {getAdministrationLinks(
+                                cloudId,
+                                managePermissionData.permitted,
+                              ).map(linkData => {
+                                const { label, icon, key, link } = linkData;
+                                return (
+                                  <AppSwitcherItem
+                                    key={key}
+                                    icon={icon}
+                                    href={link}
+                                  >{`${label}`}</AppSwitcherItem>
+                                );
+                              })}
+                            </Section>
+                          )}
+                        {isLoadingLicenseInformation ||
+                        isLoadingAddProductsPermission ? (
+                          <Skeleton />
+                        ) : (
+                          <Section title="Products">
+                            {licenseInformationData &&
+                              addProductsPermissionData && [
+                                ...getProductLinks(licenseInformationData).map(
+                                  ({ label, icon, key, link }) => (
                                     <AppSwitcherItem
                                       key={key}
                                       icon={icon}
                                       href={link}
                                     >{`${label}`}</AppSwitcherItem>
-                                  );
-                                },
-                              ),
-                              ((
-                                xSellProductLink: ProductLink | null,
-                              ): React.ReactElement<any> | null =>
-                                xSellProductLink && (
-                                  <AppSwitcherItem
-                                    key={xSellProductLink.key}
-                                    icon={xSellProductLink.icon}
-                                    onClick={() =>
-                                      triggerXFlow(xSellProductLink.key)
-                                    }
-                                  >
-                                    <XSellItemText>
-                                      {xSellProductLink.label}
-                                    </XSellItemText>
-                                    <Lozenge appearance="inprogress" isBold>
-                                      {adminPermissionData.permitted
-                                        ? 'Try'
-                                        : 'Request'}
-                                    </Lozenge>
+                                  ),
+                                ),
+                                ((
+                                  xSellProductLink: ProductLink | null,
+                                ): React.ReactElement<any> | null =>
+                                  xSellProductLink && (
+                                    <AppSwitcherItem
+                                      key={xSellProductLink.key}
+                                      icon={xSellProductLink.icon}
+                                      onClick={() =>
+                                        triggerXFlow(xSellProductLink.key)
+                                      }
+                                    >
+                                      <XSellItemText>
+                                        {xSellProductLink.label}
+                                      </XSellItemText>
+                                      <Lozenge appearance="inprogress" isBold>
+                                        {addProductsPermissionData.permitted
+                                          ? 'Try'
+                                          : 'Request'}
+                                      </Lozenge>
+                                    </AppSwitcherItem>
+                                  ))(getXSellLink(licenseInformationData)),
+                              ]}
+                          </Section>
+                        )}
+                        {isLoadingCustomLinks ? (
+                          <Skeleton />
+                        ) : (
+                          <Section title="More" isCustom>
+                            {customLinksData &&
+                              customLinksData[0].map(
+                                ({ label, link }: CustomLink) => (
+                                  <AppSwitcherItem key={label} href={link}>
+                                    {label}
                                   </AppSwitcherItem>
-                                ))(getXSellLink(licenseInformationData)),
-                            ]}
-                        </Section>
-                      )}
-                      {isLoadingCustomLinks ? (
-                        <Skeleton />
-                      ) : (
-                        <Section title="More" isCustom>
-                          {customLinksData &&
-                            customLinksData[0].map(
-                              ({ label, link }: CustomLink) => (
-                                <AppSwitcherItem key={label} href={link}>
-                                  {label}
-                                </AppSwitcherItem>
-                              ),
-                            )}
-                        </Section>
-                      )}
-                      {isLoadingRecentContainers ? (
-                        <Skeleton />
-                      ) : (
-                        <Section title="Recent Containers">
-                          {recentContainersData &&
-                            recentContainersData.data.map(
-                              ({
-                                objectId,
-                                name,
-                                url,
-                                iconUrl,
-                              }: RecentContainer) => (
-                                <AppSwitcherItem
-                                  key={objectId}
-                                  icon={() => (
-                                    <RecentContainerImg src={iconUrl} />
-                                  )}
-                                  href={url}
-                                >
-                                  {name}
-                                </AppSwitcherItem>
-                              ),
-                            )}
-                        </Section>
-                      )}
-                      {customLinksData && (
-                        <ManageButton href={customLinksData[1]} />
-                      )}
-                    </AppSwitcherWrapper>
-                  )}
-                </UserPermissionProvider>
-              )}
-            </LicenseInformationProvider>
-          )}
-        </CustomLinksProvider>
-      )}
-    </RecentContainersProvider>
-  );
-};
+                                ),
+                              )}
+                          </Section>
+                        )}
+                        {isLoadingRecentContainers ? (
+                          <Skeleton />
+                        ) : (
+                          <Section title="Recent Containers">
+                            {recentContainersData &&
+                              recentContainersData.data.map(
+                                ({
+                                  objectId,
+                                  name,
+                                  url,
+                                  iconUrl,
+                                }: RecentContainer) => (
+                                  <AppSwitcherItem
+                                    key={objectId}
+                                    icon={() => (
+                                      <RecentContainerImg src={iconUrl} />
+                                    )}
+                                    href={url}
+                                  >
+                                    {name}
+                                  </AppSwitcherItem>
+                                ),
+                              )}
+                          </Section>
+                        )}
+                        {customLinksData && (
+                          <ManageButton href={customLinksData[1]} />
+                        )}
+                      </AppSwitcherWrapper>
+                    )}
+                  </UserPermissionProvider>
+                )}
+              </UserPermissionProvider>
+            )}
+          </LicenseInformationProvider>
+        )}
+      </CustomLinksProvider>
+    )}
+  </RecentContainersProvider>
+);

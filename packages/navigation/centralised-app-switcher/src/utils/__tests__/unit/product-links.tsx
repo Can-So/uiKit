@@ -127,13 +127,25 @@ describe('utils product-links', () => {
     });
   });
 
-  it('getAdministrationLinks should assemble admin links with cloudId', () => {
-    const result = getAdministrationLinks(HOSTNAME, CLOUD_ID);
-    const expectedResult = [
-      `my-hostname.com/admin/s/some-cloud-id`,
-      `my-hostname.com/admin/s/some-cloud-id/billing/addapplication`,
-    ];
-    expect(result.map(({ link }) => link)).toMatchObject(expectedResult);
+  describe('getAdministrationLinks', () => {
+    it('should assemble admin links for site admins', () => {
+      const isAdmin = true;
+      const result = getAdministrationLinks(CLOUD_ID, isAdmin);
+      const expectedResult = [
+        `/admin/s/some-cloud-id`,
+        `/admin/s/some-cloud-id/billing/addapplication`,
+      ];
+      expect(result.map(({ link }) => link)).toMatchObject(expectedResult);
+    });
+    it('should assemble admin links for site trusted users', () => {
+      const isAdmin = false;
+      const result = getAdministrationLinks(CLOUD_ID, isAdmin);
+      const expectedResult = [
+        `/trusted-admin`,
+        `/trusted-admin/billing/addapplication`,
+      ];
+      expect(result.map(({ link }) => link)).toMatchObject(expectedResult);
+    });
   });
 
   describe('getXSellLink', () => {
