@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass, LiHTMLAttributes } from 'react';
-import { akColorN500, akColorB400 } from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
 export interface WrapperProps {
   isActive: boolean;
@@ -13,7 +13,7 @@ export const Wrapper: ComponentClass<
   LiHTMLAttributes<{}> & WrapperProps
 > = styled.li`
   color: ${({ isActive }: WrapperProps) =>
-    isActive ? akColorB400 : akColorN500};
+    isActive ? colors.B400 : colors.N500};
   padding: 6px 25px;
   list-style-type: none;
   opacity: 1;
