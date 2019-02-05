@@ -220,27 +220,6 @@ export class MediaPluginState {
     }
   }
 
-  updateUploadStateDebounce: number | null = null;
-  updateUploadState(): void {
-    if (!this.waitForMediaUpload) {
-      return;
-    }
-
-    if (this.updateUploadStateDebounce) {
-      clearTimeout(this.updateUploadStateDebounce);
-    }
-
-    this.updateUploadStateDebounce = window.setTimeout(() => {
-      this.updateUploadStateDebounce = null;
-      this.allUploadsFinished = false;
-      this.notifyPluginStateSubscribers();
-      this.waitForPendingTasks().then(() => {
-        this.allUploadsFinished = true;
-        this.notifyPluginStateSubscribers();
-      });
-    }, 0);
-  }
-
   updateLayout(layout: MediaSingleLayout): void {
     this.layout = layout;
     this.notifyPluginStateSubscribers();
@@ -274,6 +253,8 @@ export class MediaPluginState {
     if (collection === undefined) {
       return;
     }
+
+    this.allUploadsFinished = false;
 
     const imageAttachments = mediaStates.filter(media =>
       isImage(media.fileMimeType),
@@ -315,6 +296,11 @@ export class MediaPluginState {
           stateManager.on(state.id, onStateChange);
         }).then(() => promise);
       }, this.pendingTask);
+
+    this.pendingTask.then(() => {
+      this.allUploadsFinished = true;
+      this.notifyPluginStateSubscribers();
+    });
 
     const { view } = this;
     if (!view.hasFocus()) {
@@ -853,7 +839,6 @@ export const createPlugin = (
 
       return {
         update: () => {
-          pluginState.updateUploadState();
           pluginState.updateElement();
         },
       };
