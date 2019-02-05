@@ -22,7 +22,7 @@ const sizerStyle: React.CSSProperties = {
 };
 
 type Props = {
-  children: (width: Number) => Node;
+  children?: (width: Number) => JSX.Element;
   onResize?: (width: Number) => void;
   /** Optional styles to be applied to the containing element */
   containerStyle?: React.CSSProperties;
@@ -90,20 +90,6 @@ export default class WidthDetector extends Component<Props, State> {
     }
     this.container = ref;
   };
-  // handleInnerRef = (ref?: HTMLDivElement) => {
-  //   if (!ref) {
-  //     return;
-  //   }
-  //   this.innerRef = ref;
-  // };
-
-  // handleContainerRef = (ref?: HTMLDivElement) => {
-  //   if (!ref) {
-  //     return;
-  //   }
-  //   this.container = ref;
-  //   this.handleResize();
-  // };
 
   handleObjectRef = (ref?: ResizeObject) => {
     if (!ref) {
@@ -127,26 +113,16 @@ export default class WidthDetector extends Component<Props, State> {
 
   renderChildren = () => {
     const { width } = this.state;
-    if (width == null) {
+    if (width === null || width === undefined) {
       return null;
     }
     return this.props.children(width);
   };
 
   render() {
-    let sizerEl: null;
+    let sizerEl;
     let { width } = this.state;
-    // if InterSectionObserver / ResizeObserver
-    // use <div>
-    // sizerEl = <div
-    //   className="ak-width-detector-sizer"
-    //   ref={this.handleInnerRef}
-    //   style={sizerStyle}
-    //   aria-hidden
-    // />;
-
-    // else
-    // use object
+    // @TODO: Add alternative method using IntersectionObserver or ResizeObserver
     sizerEl = (
       <object
         type="text/html"
@@ -170,34 +146,5 @@ export default class WidthDetector extends Component<Props, State> {
         </div>
       </Fragment>
     );
-    //   {this.renderChildren()}
-    // </div>
   }
 }
-
-// type Props = {
-//   /** Function that accepts an number parameter for the width */
-//   children: (Number) => Node,
-//   /** Optional styles object to be applied to the containing element */
-//   containerStyle?: Object,
-//   /** Called when the component is resized. */
-//   onResize?: (Number) => void,
-// };
-
-// type State = {
-//   containerWidth?: Number,
-// };
-
-// export default class WidthDetector extends Component<Props, State> {
-//   props: Props;
-//   state: State;
-//   container?: HTMLDivElement;
-//   // resizeObjectDocument?: Window;
-//   // resizeObject?: HTMLElement;
-
-//   render() {
-//     return (
-//       <p>Hello from width detector</p>
-//     );
-//   }
-// }

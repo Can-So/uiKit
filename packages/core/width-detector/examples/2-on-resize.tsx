@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import SizeDetector from '../src';
+import WidthDetector from '../src';
 
 const ResultBox = styled.div`
   align-items: center;
@@ -13,36 +13,27 @@ const ResultBox = styled.div`
   white-space: nowrap;
 `;
 
-/* eslint-disable react/no-unused-prop-types */
-type SizeMetrics = {
-  width: number,
-  height: number,
-};
-/* eslint-enable */
+export default class Example extends Component {
+  state = {
+    width: Number,
+  };
 
-export default class Example extends Component<*, *> {
-  state = {};
-
-  onResize = ({ width, height }: SizeMetrics) => {
+  onResize = (width: Number) => {
+    console.log('[onResize] width:', width);
     this.setState({
       width,
-      height,
     });
   };
 
-  displayResults = () => (
-    <ResultBox>
-      {this.state.width} x {this.state.height}
-    </ResultBox>
-  );
+  displayResults = () => <ResultBox>{this.state.width}</ResultBox>;
 
   render() {
     return (
       <div>
         <div style={{ height: 100 }}>
-          <SizeDetector onResize={this.onResize}>
+          <WidthDetector onResize={this.onResize}>
             {this.displayResults}
-          </SizeDetector>
+          </WidthDetector>
         </div>
       </div>
     );

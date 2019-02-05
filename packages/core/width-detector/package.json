@@ -1,7 +1,7 @@
 {
   "name": "@atlaskit/width-detector",
   "version": "0.1.0",
-  "description": "WidthDetector Component",
+  "description": "Wrapper for components that need to respond to width changes",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
   "module": "dist/es2015/index.js",
@@ -13,7 +13,7 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "John V",
+    "John VDL",
     "Peter G",
     "Vito BZ"
   ],
@@ -24,7 +24,6 @@
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/type-helpers": "^2.0.0",
-    "eqio": "^0.1.3",
     "raf-schd": "^2.1.0",
     "tslib": "^1.8.0"
   },
