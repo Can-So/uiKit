@@ -1,6 +1,5 @@
 import Button from '@atlaskit/button';
 import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
-import Spinner from '@atlaskit/spinner';
 import Tooltip from '@atlaskit/tooltip';
 import ErrorIcon from '@atlaskit/icon/glyph/error';
 import { mount, shallow } from 'enzyme';
@@ -51,6 +50,7 @@ describe('ShareForm', () => {
     expect(button.props()).toMatchObject({
       appearance: 'primary',
       type: 'submit',
+      isLoading: false,
     });
     const copyLinkButton = footer.find(CopyLinkButton);
     expect(copyLinkButton.length).toBe(1);
@@ -62,9 +62,6 @@ describe('ShareForm', () => {
 
     const helperMessage = form.find(HelperMessage);
     expect(helperMessage).toHaveLength(0);
-
-    const spinner = form.find(Spinner);
-    expect(spinner).toHaveLength(0);
   });
 
   it('should override submit button label', () => {
@@ -88,7 +85,7 @@ describe('ShareForm', () => {
   });
 
   describe('isSharing prop', () => {
-    it('should replace the Send button with a Spinner', () => {
+    it('should set isLoading prop to true to the Send button', () => {
       const mockLink = 'link';
       const loadOptions = jest.fn();
       const wrapper = shallow(
@@ -100,8 +97,7 @@ describe('ShareForm', () => {
         'form',
       );
       const footer = form.find(FormFooter);
-      expect(footer.find(Button)).toHaveLength(0);
-      expect(footer.find(Spinner)).toHaveLength(1);
+      expect(footer.find(Button).prop('isLoading')).toBeTruthy();
     });
   });
 
