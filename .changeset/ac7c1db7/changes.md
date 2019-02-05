@@ -1,0 +1,1 @@
+- Change border color of avatar in avatar group dropdown menu to transparent so that it does not overlap with focus ring
