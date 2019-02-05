@@ -1,4 +1,5 @@
 import { getExampleUrl } from '@atlaskit/visual-regression/helper';
+import { Page } from 'puppeteer';
 
 export const DEFAULT_WIDTH = 800;
 export const DEFAULT_HEIGHT = 600;
@@ -6,7 +7,7 @@ export const DEFAULT_HEIGHT = 600;
 const adfInputSelector = '#adf-input';
 const importAdfBtnSelector = '#import-adf';
 
-export const loadFullPageEditorWithAdf = async (page, adf: Object) => {
+export const loadFullPageEditorWithAdf = async (page: Page, adf: any) => {
   const url = getExampleUrl(
     'editor',
     'editor-core',
@@ -16,8 +17,10 @@ export const loadFullPageEditorWithAdf = async (page, adf: Object) => {
   await page.goto(url);
 
   await page.evaluate(
-    (adfInputSelector, adf) => {
-      document.querySelector(adfInputSelector).value = JSON.stringify(adf);
+    (adfInputSelector: string, adf: object) => {
+      (document as any).querySelector(adfInputSelector).value = JSON.stringify(
+        adf,
+      );
     },
     adfInputSelector,
     adf,
@@ -26,7 +29,7 @@ export const loadFullPageEditorWithAdf = async (page, adf: Object) => {
 };
 
 export const snapshot = async (
-  page,
+  page: Page,
   tolerance?: number,
   selector = '.akEditor',
 ) => {
