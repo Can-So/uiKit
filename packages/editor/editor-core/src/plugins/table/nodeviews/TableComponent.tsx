@@ -111,7 +111,8 @@ class TableComponent extends React.Component<ComponentProps> {
     updateRightShadow(this.wrapper, this.table, this.rightShadow);
 
     if (this.props.node.attrs.__autoSize) {
-      this.handleAutoSize();
+      // Wait for next tick to handle auto sizing, gives the browser time to do layout calc etc.
+      this.handleAutoSizeDebounced();
     } else if (this.props.allowColumnResizing && this.table) {
       this.handleTableResizing(prevProps);
     }
@@ -279,6 +280,8 @@ class TableComponent extends React.Component<ComponentProps> {
       autoSizeTable(node, this.table, getPos())(state, dispatch);
     }
   };
+
+  private handleAutoSizeDebounced = rafSchedule(this.handleAutoSize);
 }
 
 export const updateRightShadow = (

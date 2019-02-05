@@ -6,6 +6,7 @@ import { TableLayout } from '@atlaskit/adf-schema';
 import {
   tableCellMinWidth,
   akEditorTableNumberColumnWidth,
+  akEditorDefaultLayoutWidth,
 } from '@atlaskit/editor-common';
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
@@ -254,7 +255,7 @@ function scale(
   if (hasTableBeenResized(node)) {
     const resizer = Resizer.fromDOM(tableElem, {
       minWidth: tableCellMinWidth,
-      maxSize: tableElem.offsetWidth,
+      maxSize: Math.max(tableElem.offsetWidth, akEditorDefaultLayoutWidth),
       node,
     });
 
