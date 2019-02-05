@@ -87,7 +87,7 @@ export function isEmptyNode(node?: Node): boolean {
 }
 
 /**
- * Checks if a node looks like an empty document
+ * Checks if a node looks like an empty document.
  */
 export function isEmptyDocument(node: Node): boolean {
   const nodeChild = node.content.firstChild;
