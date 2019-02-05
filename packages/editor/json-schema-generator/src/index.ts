@@ -74,10 +74,16 @@ export default (
           JSON.stringify(jsonSchema, null, 2) + '\n',
         );
       } else {
-        prettier.resolveConfig(process.cwd()).then(options => {
+        prettier.resolveConfig(process.cwd()).then(resolvedConfig => {
+          const options = {
+            parser: 'babylon',
+            ...resolvedConfig,
+          };
+
           const exports = [
             '// DO NOT MODIFY THIS FILE, USE `yarn generate:spec`',
           ];
+
           jsonSchema.definitions.forEach((def, name) => {
             const fileName = getPmName(name);
             exports.push(

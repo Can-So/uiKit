@@ -1,0 +1,1 @@
+- ED-6118: ensure media dimensions are always integers, preventing invalid ADF
