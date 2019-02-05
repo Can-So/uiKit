@@ -138,7 +138,7 @@ describe('MediaGroup', () => {
     mediaGroup.unmount();
   });
 
-  it.only('should send useInlinePlayer: false to the Media', () => {
+  it('should send useInlinePlayer: false to the Media', () => {
     const mediaGroup = mount(
       <MediaGroup>
         <Media
