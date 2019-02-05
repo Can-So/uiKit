@@ -6,8 +6,12 @@ interface ChildrenProps<DataStructure> {
   error: any;
 }
 
+interface ChildrenCallback<DataStructure> {
+  (props: ChildrenProps<DataStructure>): ReactNode | string;
+}
+
 export interface DataProviderProps<DataStructure> {
-  children: (props: ChildrenProps<DataStructure>) => ReactNode | string;
+  children?: ChildrenCallback<DataStructure>;
 }
 
 export interface MapPropsToPromiseSignature<T, DataStructure> {
@@ -52,8 +56,7 @@ export default function<
     render() {
       const { isLoading, data, error } = this.state;
       const { children } = this.props;
-
-      return children({
+      return (children as ChildrenCallback<DataStructure>)({
         data,
         isLoading,
         error,
