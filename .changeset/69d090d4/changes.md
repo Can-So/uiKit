@@ -1,0 +1,1 @@
+- MS-1465: Dont fetch file preview if we already have a local one
