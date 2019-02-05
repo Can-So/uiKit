@@ -25,6 +25,7 @@ type Props = {
   data: Option;
   innerProps: any;
   removeProps: { onClick: Function };
+  selectProps: { isDisabled: boolean };
 };
 
 export class MultiValue extends React.Component<Props> {
@@ -78,6 +79,7 @@ export class MultiValue extends React.Component<Props> {
       innerProps,
       removeProps: { onClick: onRemove },
       isFocused,
+      selectProps: { isDisabled },
     } = this.props;
 
     return (
@@ -95,7 +97,7 @@ export class MultiValue extends React.Component<Props> {
                   name={label}
                 />
               }
-              removeButtonText={data.fixed ? undefined : remove}
+              removeButtonText={data.fixed || isDisabled ? undefined : remove}
               onAfterRemoveAction={onRemove}
               color={isFocused ? 'blueLight' : undefined}
             />
