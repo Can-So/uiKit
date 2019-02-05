@@ -1,5 +1,10 @@
 # @atlaskit/avatar-group
 
+## 2.1.11
+- [patch] [ed05c5c5d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed05c5c5d9):
+
+  - Change border color of avatar in avatar group dropdown menu to transparent so that it does not overlap with focus ring
+
 ## 2.1.10
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1
