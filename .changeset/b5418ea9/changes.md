@@ -1,1 +1,0 @@
-- updated native status icon in Fabric editor

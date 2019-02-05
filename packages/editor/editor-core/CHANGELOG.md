@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.2.2
+- [patch] [86dcb6f814](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86dcb6f814):
+
+  - updated native status icon in Fabric editor
+
 ## 98.2.1
 - [patch] [17107bdfb0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/17107bdfb0):
 
