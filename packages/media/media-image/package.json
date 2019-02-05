@@ -18,7 +18,6 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/util-shared-styles": "^2.10.3",
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
