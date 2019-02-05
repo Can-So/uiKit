@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 33.0.0
+- [major] [65b73cc466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65b73cc466):
+
+  - Code split media-picker: make MediaPicker factory async and make editor use it
+
 ## 32.0.1
 - [patch] [6ead14f4eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ead14f4eb):
 
