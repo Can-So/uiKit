@@ -48,7 +48,7 @@ const tooltipMessageByType = type => {
   return type === 'row' ? tableMessages.insertRow : tableMessages.insertColumn;
 };
 
-const shortcutMessageByType = (type, index) => {
+const shortcutMessageByType = type => {
   return type === 'row'
     ? keymaps.tooltip(keymaps.addRowAfter)
     : keymaps.tooltip(keymaps.addColumnAfter);
@@ -56,9 +56,7 @@ const shortcutMessageByType = (type, index) => {
 
 const shortcutTooltip = (message, shortcut) => (
   <span>
-    <span>{message}</span>
-    <br />
-    <small>{shortcut}</small>
+    {message} <small>{shortcut}</small>
   </span>
 );
 
@@ -82,7 +80,7 @@ const InsertButton = ({
       <Tooltip
         content={shortcutTooltip(
           formatMessage(tooltipMessageByType(type)),
-          shortcutMessageByType(type, index),
+          shortcutMessageByType(type),
         )}
         position="top"
       >
