@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as deepcopy from 'deepcopy';
 import {
   ImageResizeMode,
-  MediaItemDetails,
   MediaItemType,
   FileDetails,
 } from '@atlaskit/media-core';
@@ -74,7 +73,7 @@ const dimensions: Array<CardDimensions> = [
 
 export const createCardsOfDifferentSize = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
   dataURI?: string,
 ) => {
   const cards = dimensions.map(dim => {
@@ -157,7 +156,7 @@ export const createFileCardsWithDifferentMediaTypes = (
 
 export const createMenuActionCards = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
 ) => {
   return [
     {
@@ -236,7 +235,7 @@ export const createFileCardsWithDifferentDataURIs = (
 
 export const createSelectableCards = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
   mediaItemType: MediaItemType,
 ) => {
   const dataURI = mediaItemType === 'file' ? wideImage : undefined;
@@ -314,7 +313,7 @@ export const createSelectableCards = (
 
 export const createSelectableCardsWithMenu = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
   mediaItemType: MediaItemType,
 ) => {
   const dataURI = mediaItemType === 'file' ? wideImage : undefined;
@@ -419,7 +418,7 @@ export const createMissingMetadataFileCards = (appearance: CardAppearance) => {
 
 export const createApiCards = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
 ) => {
   // API methods
   const apiCards = [

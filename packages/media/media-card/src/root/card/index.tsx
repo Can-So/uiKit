@@ -137,15 +137,6 @@ export class Card extends Component<CardProps, CardState> {
       return;
     }
 
-    if (identifier.mediaItemType !== 'file') {
-      this.notifyStateChange({
-        error: new Error('Links are no longer supported in <Card />'),
-        status: 'error',
-      });
-
-      return;
-    }
-
     const { id, collectionName, occurrenceKey } = identifier;
     const resolvedId = await id;
     this.unsubscribe();

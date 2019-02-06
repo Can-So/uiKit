@@ -1,10 +1,6 @@
 import { MediaType } from '@atlaskit/media-store';
 export type MediaItemType = 'file' | 'external-image';
 
-export type MediaItem = FileItem;
-
-export type MediaItemDetails = FileDetails;
-
 export interface FileItem {
   type: 'file';
   details: FileDetails;

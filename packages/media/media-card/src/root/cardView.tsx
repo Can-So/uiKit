@@ -2,7 +2,7 @@ import * as React from 'react';
 import { MouseEvent } from 'react';
 import {
   MediaItemType,
-  MediaItemDetails,
+  FileDetails,
   ImageResizeMode,
 } from '@atlaskit/media-core';
 import {
@@ -35,7 +35,7 @@ import { WithCardViewAnalyticsContext } from './withCardViewAnalyticsContext';
 export interface CardViewOwnProps extends SharedCardProps {
   readonly status: CardStatus;
   readonly mediaItemType?: MediaItemType;
-  readonly metadata?: MediaItemDetails;
+  readonly metadata?: FileDetails;
   readonly resizeMode?: ImageResizeMode;
 
   readonly onRetry?: () => void;
