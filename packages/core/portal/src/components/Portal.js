@@ -102,11 +102,9 @@ class Portal extends React.Component<Props, State> {
   }
   render() {
     const { container, portalIsMounted } = this.state;
-    return container
-      ? portalIsMounted
-        ? ReactDOM.createPortal(this.props.children, container)
-        : null
-      : this.props.children;
+    return container && portalIsMounted
+      ? ReactDOM.createPortal(this.props.children, container)
+      : null;
   }
 }
 
