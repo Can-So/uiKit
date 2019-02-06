@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import { akColorN0 } from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 import { absolute, size } from '@atlaskit/media-ui';
 
 const bodyHeight = 26;
@@ -19,7 +19,7 @@ export const Overlay: ComponentClass<HTMLAttributes<{}>> = styled.div`
 export const Title: ComponentClass<HTMLAttributes<{}>> = styled.div`
   ${absolute()} width: 100%;
   padding: 8px;
-  color: ${akColorN0};
+  color: ${colors.N0};
   font-size: 12px;
   line-height: 18px;
   word-wrap: break-word;
@@ -31,7 +31,7 @@ export const Body: ComponentClass<HTMLAttributes<{}>> = styled.div`
   bottom: 0;
   width: 100%;
   padding: 8px;
-  color: ${akColorN0};
+  color: ${colors.N0};
 `;
 
 export const ProgressWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`

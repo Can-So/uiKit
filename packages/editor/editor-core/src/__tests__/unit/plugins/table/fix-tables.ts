@@ -82,4 +82,42 @@ describe('fix tables', () => {
       expect(global['fetch']).toHaveBeenCalled();
     });
   });
+
+  describe('removeExtraneousColumnWidths', () => {
+    it('removes unneccesary column widths', () => {
+      const { editorView } = editor(
+        doc(
+          table()(
+            tr(
+              th({ colwidth: [100, 100] })(p('{<>}1')),
+              th({ colwidth: [100, 100] })(p('2')),
+              th({ colwidth: [480] })(p('3')),
+            ),
+            tr(
+              td({ colwidth: [100, 100] })(p('4')),
+              td({ colwidth: [100, 100] })(p('5')),
+              td({ colwidth: [480] })(p('6')),
+            ),
+          ),
+        ),
+      );
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          table()(
+            tr(
+              th({ colwidth: [100] })(p('1')),
+              th({ colwidth: [100] })(p('2')),
+              th({ colwidth: [480] })(p('3')),
+            ),
+            tr(
+              td({ colwidth: [100] })(p('4')),
+              td({ colwidth: [100] })(p('5')),
+              td({ colwidth: [480] })(p('6')),
+            ),
+          ),
+        ),
+      );
+    });
+  });
 });

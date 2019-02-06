@@ -405,7 +405,7 @@ describe('JSONTransformer:', () => {
       });
       [[0], [200], [100, 200], [100, 0]].forEach(colwidth => {
         describe(`when colwidth=${JSON.stringify(colwidth)}`, () => {
-          it(`should preserve colwidth attributes as an array of widths`, () => {
+          it(`should preserve valid colwidth attributes as an array of widths`, () => {
             const { editorView } = editor(
               doc(table()(tr(schemaBuilder({ colwidth })(p('foo'))))),
             );
@@ -426,7 +426,7 @@ describe('JSONTransformer:', () => {
                         {
                           type: nodeName,
                           attrs: {
-                            colwidth,
+                            colwidth: colwidth.slice(0, 1),
                           },
                           content: [
                             {

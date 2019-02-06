@@ -6,22 +6,14 @@ import {
   CanvasHTMLAttributes,
   TextareaHTMLAttributes,
 } from 'react';
-import {
-  akColorN40,
-  akColorN50A,
-  akColorN90,
-  akColorN200,
-  akColorN600A,
-  akColorN700A,
-} from '@atlaskit/util-shared-styles';
+import { layers, colors } from '@atlaskit/theme';
 import { ButtonProps } from './toolbarButtons';
-import { layers } from '@atlaskit/theme';
 
 export interface LineWidthFrontCircleProps {
   width: number;
 }
 
-export const blanketColor = akColorN700A;
+export const blanketColor = colors.N700A;
 const overlayZindex = layers.modal() + 10;
 
 export const MediaEditorContainer: ComponentClass<
@@ -95,7 +87,7 @@ HiddenTextHelperDiv.displayName = 'HiddenTextHelperDiv';
 export const ToolbarContainer: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 32px;
   height: 392px;
-  background-color: ${akColorN600A};
+  background-color: ${colors.N600A};
   border-radius: 4px;
   padding: 8px;
 `;
@@ -108,11 +100,11 @@ export const ToolbarButton: ComponentClass<
   width: 32px;
   height: 32px;
   background-color: ${(props: ButtonProps) =>
-    props.selected ? akColorN90 : 'transparent'};
+    props.selected ? colors.N90 : 'transparent'};
   border-radius: 4px;
 
   &:hover {
-    background-color: ${akColorN90};
+    background-color: ${colors.N90};
   }
 `;
 ToolbarButton.displayName = 'ToolbarButton';
@@ -124,7 +116,7 @@ export const ColorSquare: ComponentClass<HTMLAttributes<{}>> = styled.div`
   background-color: ${props => props.color || 'transparent'};
   border-radius: 4px;
   border-width: 2px;
-  border-color: ${akColorN50A};
+  border-color: ${colors.N50A};
   border-style: solid;
 `;
 ColorSquare.displayName = 'ColorSquare';
@@ -136,7 +128,7 @@ export const LineWidthBackCircle: ComponentClass<
   width: 20px;
   height: 20px;
   margin: 6px;
-  background-color: ${akColorN200};
+  background-color: ${colors.N200};
   border-radius: 10px;
 `;
 LineWidthBackCircle.displayName = 'LineWidthBackCircle';
@@ -148,7 +140,7 @@ export const LineWidthFrontCircle: ComponentClass<
     props.width ? `${props.width}px` : '0'};
   height: ${(props: LineWidthFrontCircleProps) =>
     props.width ? `${props.width}px` : '0'};
-  background-color: ${akColorN40};
+  background-color: ${colors.N40};
   border-radius: 50%;
   margin: ${(props: LineWidthFrontCircleProps) =>
     props.width ? `${10 - props.width / 2}px` : '0'};
@@ -159,7 +151,7 @@ export const ToolIcon: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 20px;
   height: 20px;
   margin: 4px;
-  color: ${akColorN40};
+  color: ${colors.N40};
 `;
 ToolIcon.displayName = 'ToolIcon';
 

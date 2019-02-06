@@ -7,22 +7,16 @@ import { MediaType } from '@atlaskit/media-core';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { HTMLAttributes, VideoHTMLAttributes, AudioHTMLAttributes, ImgHTMLAttributes, ComponentClass, ClassAttributes } from 'react';
-import {
-  akColorY200,
-  akColorP200,
-  akColorB300,
-  akBorderRadius,
-} from '@atlaskit/util-shared-styles';
-import { colors, layers } from '@atlaskit/theme';
+import { colors, layers, borderRadius } from '@atlaskit/theme';
 import { ellipsis } from '@atlaskit/media-ui';
 
 const overlayZindex = layers.modal() + 10;
 
 export const mediaTypeIconColors = {
-  image: akColorY200,
-  audio: akColorP200,
+  image: colors.Y200,
+  audio: colors.P200,
   video: '#ff7143',
-  doc: akColorB300,
+  doc: colors.B300,
   unknown: '#3dc7dc',
 };
 
@@ -308,7 +302,7 @@ export const CustomAudioPlayerWrapper = styled.div`
 
 export const AudioPlayer = styled.div`
   background-color: ${blanketColor};
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
   align-items: center;
   justify-content: center;
   width: 400px;

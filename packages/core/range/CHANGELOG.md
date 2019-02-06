@@ -1,5 +1,10 @@
 # @atlaskit/range
 
+## 0.1.3
+- [patch] [aab267bb3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aab267bb3a):
+
+  - Added test to make sure the props are passed down to hidden input
+
 ## 0.1.2
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/checkbox@5.0.9

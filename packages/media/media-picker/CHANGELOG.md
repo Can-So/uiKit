@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 33.0.1
+- [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
+
+  - MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme
+
 ## 33.0.0
 - [major] [65b73cc466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65b73cc466):
 

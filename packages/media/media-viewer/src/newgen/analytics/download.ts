@@ -1,9 +1,9 @@
 import { GasPayload } from '@atlaskit/analytics-gas-types';
 import {
-  context,
+  packageAttributes,
   fileStateToFileGasPayload,
   FileGasPayload,
-  PackageContext,
+  PackageAttributes,
 } from './index';
 import { FileState, FileStatus } from '@atlaskit/media-core';
 import { MediaViewerError } from '../error';
@@ -20,25 +20,25 @@ const getBasePayload = (actionSubjectId: string): GasPayload => ({
   actionSubjectId,
 });
 
-const getBaseAttributes = (state: FileState) => ({
-  ...fileStateToFileGasPayload(state),
-  fileProcessingStatus: state.status,
-  ...context,
+const getBaseAttributes = (fileState: FileState) => ({
+  ...fileStateToFileGasPayload(fileState),
+  fileProcessingStatus: fileState.status,
+  ...packageAttributes,
 });
 
 const downloadEvent = (
-  state: FileState,
+  fileState: FileState,
   actionSubjectId: string,
   failReason?: string,
 ) => {
   const basePayload = getBasePayload(actionSubjectId);
   const baseAttributes = failReason
     ? {
-        ...getBaseAttributes(state),
+        ...getBaseAttributes(fileState),
         failReason,
       }
-    : getBaseAttributes(state);
-  switch (state.status) {
+    : getBaseAttributes(fileState);
+  switch (fileState.status) {
     case 'processed':
     case 'uploading':
     case 'processing':
@@ -47,7 +47,7 @@ const downloadEvent = (
         ...basePayload,
         attributes: {
           ...baseAttributes,
-          fileSupported: state.mediaType !== 'unknown',
+          fileSupported: fileState.mediaType !== 'unknown',
         },
       };
     case 'error':
@@ -61,7 +61,7 @@ const downloadEvent = (
 };
 
 export interface DownloadGasPayload extends GasPayload {
-  attributes: DownloadAttributes & PackageContext;
+  attributes: DownloadAttributes & PackageAttributes;
 }
 
 export function downloadErrorButtonEvent(

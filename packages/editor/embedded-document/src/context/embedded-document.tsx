@@ -3,6 +3,7 @@ import { Component, ReactElement } from 'react';
 import styled from 'styled-components';
 import { Actions, Context, Mode, State } from './context';
 import { getProvider, Provider, ProviderProps } from '../provider';
+import { Document } from '../model';
 
 export const akEditorFullPageMaxWidth = 680;
 const GUTTER_PADDING = 32;
@@ -159,7 +160,7 @@ export default class EmbeddedDocument extends Component<Props, State> {
     }
   };
 
-  private setDocumentState = doc => {
+  private setDocumentState = (doc: Document | null) => {
     if (doc) {
       this.setState({
         isLoading: false,
@@ -168,7 +169,7 @@ export default class EmbeddedDocument extends Component<Props, State> {
     } else {
       this.setState({
         isLoading: false,
-        hasError: true,
+        mode: 'edit',
       });
     }
   };

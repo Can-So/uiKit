@@ -3,11 +3,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import {
-  akColorN0,
-  akColorN30,
-  akColorN500,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
 export interface AreaProps {
   isActive: boolean;
@@ -21,7 +17,7 @@ export const MainArea: ComponentClass<
   height: 18px;
   border-radius: 15px;
   background-color: ${(props: AreaProps) =>
-    props.isActive ? akColorN500 : akColorN30};
+    props.isActive ? colors.N500 : colors.N30};
 `;
 
 export const FrontArea: ComponentClass<
@@ -29,5 +25,5 @@ export const FrontArea: ComponentClass<
 > = styled.div`
   box-sizing: border-box;
   background-color: ${(props: AreaProps) =>
-    props.isActive ? akColorN0 : akColorN500};
+    props.isActive ? colors.N0 : colors.N500};
 `;

@@ -3,6 +3,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import Avatar from '@atlaskit/avatar';
+import { DropdownItem } from '@atlaskit/dropdown-menu';
 import AvatarGroup from '../../AvatarGroup';
 import MoreIndicator from '../../MoreIndicator';
 
@@ -16,6 +17,7 @@ const generateData = avatarCount => {
       size: 'medium',
       appearance: 'circle',
       enableTooltip: true,
+      href: '#',
     });
   }
   return data;
@@ -94,6 +96,34 @@ describe('AvatarGroup', () => {
       expect(wrapper.find(MoreIndicator).props()).toEqual(
         expect.objectContaining(showMoreButtonProps),
       );
+    });
+
+    it('should not pass down the href prop to Avatar', () => {
+      const wrapper = mount(
+        <AvatarGroup
+          appearance="stack"
+          data={generateData(5)}
+          maxCount={maxCount}
+        />,
+      );
+      const moreIndicator = wrapper.find(MoreIndicator);
+      moreIndicator.simulate('click');
+
+      // href is not passed to Avatar in DropdownItem
+      expect(
+        wrapper
+          .find(Avatar)
+          .at(4)
+          .prop('href'),
+      ).toBeUndefined();
+
+      // href is passed to DropdownItem
+      expect(
+        wrapper
+          .find(DropdownItem)
+          .at(1)
+          .prop('href'),
+      ).not.toBeUndefined();
     });
   });
 });

@@ -1,5 +1,10 @@
 # @atlaskit/textfield
 
+## 0.1.6
+- [patch] [3d8322bd71](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3d8322bd71):
+
+  - Trival refactor: update a variable name
+
 ## 0.1.5
 - [patch] [2e5dd50](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e5dd50):
 
