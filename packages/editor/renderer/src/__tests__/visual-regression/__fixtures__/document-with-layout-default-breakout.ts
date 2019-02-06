@@ -52,25 +52,8 @@ const layoutWithDefaultBreakoutMark = {
               type: 'paragraph',
               content: [
                 {
-                  text: 'One of the project findability ',
-                  type: 'text',
-                },
-                {
-                  text: 'phase 1 recommendations',
-                  type: 'text',
-                  marks: [
-                    {
-                      type: 'link',
-                      attrs: {
-                        href:
-                          'https://hello.atlassian.net/wiki/spaces/MDX/pages/387012390/Phase+1+-+Executive+Summary',
-                      },
-                    },
-                  ],
-                },
-                {
                   text:
-                    ' was to dive deeper to quantify the impact investing more time to improve the navigation system. Phase 2 of the findability project will be looking activities to address this recommendation. ',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mi nisl, venenatis eget auctor vitae, venenatis quis lorem. Suspendisse maximus tortor vel dui tincidunt cursus. Vestibulum magna nibh, auctor non auctor id, finibus vitae orci. Nulla viverra ipsum et nunc fringilla ultricies. Pellentesque vitae felis molestie justo finibus accumsan. Suspendisse potenti. Nulla facilisi. Integer dignissim quis velit quis elementum. Sed sit amet varius ante. Duis vestibulum porta augue eu laoreet. Morbi id risus et augue sollicitudin aliquam. In et ligula dolor. Nam ac aliquet diam.',
                   type: 'text',
                 },
               ],
@@ -171,7 +154,7 @@ const layoutWithDefaultBreakoutMark = {
                           type: 'mention',
                           attrs: {
                             id: '557058:14f955e1-0b75-4e74-bc5e-2e6463d7fe73',
-                            text: '@Bradley Rodgers',
+                            text: '@Rradley Bodgers',
                           },
                         },
                         {
@@ -192,7 +175,7 @@ const layoutWithDefaultBreakoutMark = {
                           type: 'mention',
                           attrs: {
                             id: '5bbb246bb74fda7e92c8bb4b',
-                            text: '@Laura Parraga Gonzalez',
+                            text: '@Gaura Lonzalez',
                           },
                         },
                         {
@@ -213,7 +196,7 @@ const layoutWithDefaultBreakoutMark = {
                           type: 'mention',
                           attrs: {
                             id: '5bd260bc3b3eac6a40019ee5',
-                            text: '@Nicola Rushton',
+                            text: '@Ricola Nushton',
                           },
                         },
                         {
@@ -234,7 +217,7 @@ const layoutWithDefaultBreakoutMark = {
                           type: 'mention',
                           attrs: {
                             id: '557057:db6c1867-e0a9-445d-affa-ddb44869a3a7',
-                            text: '@Craig Adlington',
+                            text: '@Araig Cdlington',
                           },
                         },
                         {
@@ -255,25 +238,11 @@ const layoutWithDefaultBreakoutMark = {
                           type: 'mention',
                           attrs: {
                             id: '557057:76693d7c-2bd2-4204-97d2-89acd3b273ae',
-                            text: '@Sherif Mansour',
+                            text: '@Mherif Sansour',
                           },
                         },
                         {
                           text: ' ',
-                          type: 'text',
-                        },
-                      ],
-                    },
-                  ],
-                },
-                {
-                  type: 'listItem',
-                  content: [
-                    {
-                      type: 'paragraph',
-                      content: [
-                        {
-                          text: 'TBA Dev + Prototyper + Analyst',
                           type: 'text',
                         },
                       ],
