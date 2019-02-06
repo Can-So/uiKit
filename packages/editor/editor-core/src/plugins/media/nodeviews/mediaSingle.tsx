@@ -66,7 +66,7 @@ export default class MediaSingleNode extends Component<
   }
 
   async componentDidMount() {
-    const updatedDimensions = await this.imageDimensionsMissing();
+    const updatedDimensions = await this.getRemoteDimensions();
 
     if (updatedDimensions) {
       this.mediaPluginState.updateMediaNodeAttrs(
@@ -80,18 +80,21 @@ export default class MediaSingleNode extends Component<
     }
   }
 
-  async imageDimensionsMissing() {
+  async getRemoteDimensions() {
     const mediaProvider = await this.props.mediaProvider;
     if (!mediaProvider || !this.props.node.firstChild) {
       return false;
     }
-    const viewContext = await mediaProvider.viewContext;
     const { id, collection, height, width } = this.props.node.firstChild.attrs;
+    if (height && width) {
+      return;
+    }
+    const viewContext = await mediaProvider.viewContext;
     const state = await viewContext.getImageMetadata(id, {
       collection,
     });
 
-    if (!state || !state.original || (height && width)) {
+    if (!state || !state.original) {
       return false;
     }
 
