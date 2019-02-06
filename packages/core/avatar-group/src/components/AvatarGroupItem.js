@@ -16,6 +16,7 @@ type Props = {
 class AvatarGroupItem extends Component<Props> {
   render() {
     const { avatar, onAvatarClick } = this.props;
+    const { href, ...rest } = avatar;
     const enhancedProps = getProps(this);
     return (
       <DropdownItem
@@ -23,13 +24,13 @@ class AvatarGroupItem extends Component<Props> {
         {...enhancedProps}
         elemBefore={
           <Avatar
-            {...avatar}
+            {...rest}
             borderColor="transparent"
             enableTooltip={false}
             size="small"
           />
         }
-        href={avatar.href}
+        href={href}
         onClick={(event: KeyboardEvent | MouseEvent) => {
           if (typeof onAvatarClick === 'function') {
             onAvatarClick({ event, item: avatar });
