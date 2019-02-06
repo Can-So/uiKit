@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppSwitcher from './app-switcher';
 import {
   CustomLinksProvider,
-  XSellProvider,
+  SuggestedProductProvider,
 } from '../providers/confluence-data-providers';
 
 interface ConfluenceAppSwitcherProps {
@@ -13,7 +13,7 @@ interface ConfluenceAppSwitcherProps {
 export default (props: ConfluenceAppSwitcherProps) => (
   <AppSwitcher
     {...props}
-    XSellProvider={XSellProvider}
+    SuggestedProductProvider={SuggestedProductProvider}
     CustomLinksProvider={CustomLinksProvider}
   />
 );

@@ -3,9 +3,11 @@ import asDataProvider, { DataProviderProps } from './as-data-provider';
 import { WithCloudId, RecentContainer } from '../types';
 import { LicenseInformationDataStructure } from './types';
 
-interface CloudIdDataProvider<T> extends DataProviderProps<T>, WithCloudId {}
+export interface CloudIdDataProvider<T>
+  extends DataProviderProps<T>,
+    WithCloudId {}
 
-interface RecentContainersDataStructure {
+export interface RecentContainersDataStructure {
   data: Array<RecentContainer>;
 }
 
@@ -25,7 +27,7 @@ export const LicenseInformationProvider = asDataProvider<
   fetchJson(`/gateway/api/xflow/${cloudId}/license-information`),
 );
 
-interface UserPermissionDataStructure {
+export interface UserPermissionDataStructure {
   permitted: boolean;
 }
 

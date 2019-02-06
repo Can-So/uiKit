@@ -8,7 +8,7 @@ import {
   PRODUCT_DATA_MAP,
   productIsActive,
   getAdministrationLinks,
-  getXSellLink,
+  getSuggestedProductLink,
 } from '../../product-links';
 import { mount } from 'enzyme';
 
@@ -153,7 +153,7 @@ describe('utils product-links', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-software.ondemand',
       ]);
-      const result = getXSellLink(licenseInformation);
+      const result = getSuggestedProductLink(licenseInformation);
       expect(result).not.toBe(null);
       expect(result && result.key).toBe('confluence.ondemand');
     });
@@ -162,7 +162,7 @@ describe('utils product-links', () => {
         'jira-software.ondemand',
         'confluence.ondemand',
       ]);
-      const result = getXSellLink(licenseInformation);
+      const result = getSuggestedProductLink(licenseInformation);
       expect(result).not.toBe(null);
       expect(result && result.key).toBe('jira-servicedesk.ondemand');
     });
@@ -171,7 +171,7 @@ describe('utils product-links', () => {
         'jira-servicedesk.ondemand',
         'confluence.ondemand',
       ]);
-      const result = getXSellLink(licenseInformation);
+      const result = getSuggestedProductLink(licenseInformation);
       expect(result && result.key).toBe(null);
     });
   });

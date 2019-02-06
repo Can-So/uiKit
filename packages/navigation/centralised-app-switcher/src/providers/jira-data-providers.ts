@@ -1,6 +1,9 @@
 import { fetchJson } from '../utils/fetch';
 import asDataProvider, { DataProviderProps } from './as-data-provider';
-import { getXSellLink, XSellProductLink } from '../utils/product-links';
+import {
+  getSuggestedProductLink,
+  SuggestedProductLink,
+} from '../utils/product-links';
 import {
   CustomLinksProviderDataStructure,
   LicenseInformationDataStructure,
@@ -20,12 +23,13 @@ interface LicenseInformationDataProvider<T> extends DataProviderProps<T> {
   licenseInformation: LicenseInformationDataStructure;
 }
 
-export const XSellProvider = asDataProvider<
-  LicenseInformationDataProvider<XSellProductLink>,
-  XSellProductLink
+export const SuggestedProductProvider = asDataProvider<
+  LicenseInformationDataProvider<SuggestedProductLink>,
+  SuggestedProductLink
 >(
   ({
     licenseInformation,
-  }: LicenseInformationDataProvider<XSellProductLink>): XSellProductLink =>
-    getXSellLink(licenseInformation),
+  }: LicenseInformationDataProvider<
+    SuggestedProductLink
+  >): SuggestedProductLink => getSuggestedProductLink(licenseInformation),
 );

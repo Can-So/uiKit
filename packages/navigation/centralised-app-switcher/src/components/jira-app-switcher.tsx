@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppSwitcher from './app-switcher';
 import {
   CustomLinksProvider,
-  XSellProvider,
+  SuggestedProductProvider,
 } from '../providers/jira-data-providers';
 
 interface JiraAppSwitcherProps {
@@ -13,7 +13,7 @@ interface JiraAppSwitcherProps {
 export default (props: JiraAppSwitcherProps) => (
   <AppSwitcher
     {...props}
-    XSellProvider={XSellProvider}
+    SuggestedProductProvider={SuggestedProductProvider}
     CustomLinksProvider={CustomLinksProvider}
   />
 );
