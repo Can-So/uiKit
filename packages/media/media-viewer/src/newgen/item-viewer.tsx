@@ -19,7 +19,6 @@ import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import {
   ViewerLoadPayload,
-  mediaViewerModalEvent,
   mediaFileCommencedEvent,
   mediaFileLoadSucceededEvent,
   mediaFileLoadFailedEvent,
@@ -71,7 +70,6 @@ export class ItemViewerBase extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.fireAnalytics(mediaViewerModalEvent(this.props.identifier.id));
     this.init(this.props);
   }
 

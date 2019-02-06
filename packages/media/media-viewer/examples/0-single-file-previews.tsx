@@ -27,7 +27,7 @@ const context = createStorybookContext();
 
 const handleEvent = (analyticsEvent: UIAnalyticsEventInterface) => {
   const { payload } = analyticsEvent;
-  console.log(payload);
+  console.log('EVENT:', payload);
 };
 
 export type State = {

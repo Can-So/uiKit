@@ -16,6 +16,7 @@ import {
   Context,
   ProcessedFileState,
 } from '@atlaskit/media-core';
+import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import {
   ItemViewer,
   ItemViewerBase,
@@ -32,7 +33,6 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../../../package.json';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 const identifier = {
   id: 'some-id',
@@ -341,27 +341,6 @@ describe('<ItemViewer />', () => {
       packageName,
       packageVersion,
     };
-    it('should trigger the screen event when the preview commences', () => {
-      const context = makeFakeContext(
-        Observable.of({
-          id: identifier.id,
-          mediaType: 'unknown',
-          status: 'processed',
-        }),
-      );
-      const { createAnalyticsEventSpy } = mountBaseComponent(
-        context,
-        identifier,
-      );
-      expect(createAnalyticsEventSpy).toHaveBeenCalledWith({
-        attributes: {
-          fileId: 'some-id',
-          ...analyticsBaseAttributes,
-        },
-        eventType: 'screen',
-        name: 'mediaViewerModal',
-      });
-    });
 
     it('should trigger analytics when the preview commences', () => {
       const context = makeFakeContext(
@@ -395,7 +374,7 @@ describe('<ItemViewer />', () => {
         context,
         identifier,
       );
-      expect(createAnalyticsEventSpy).toHaveBeenCalledTimes(3);
+      expect(createAnalyticsEventSpy).toHaveBeenCalledTimes(2);
       expect(createAnalyticsEventSpy).toHaveBeenCalledWith({
         action: 'commenced',
         actionSubject: 'mediaFile',

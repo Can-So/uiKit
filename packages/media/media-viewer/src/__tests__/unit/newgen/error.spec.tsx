@@ -69,6 +69,9 @@ describe('Error Message', () => {
         <Button />
       </ErrorMessage>,
     );
-    expect(mediaPreviewFailedEventSpy).toHaveBeenCalledWith('', 'unsupported');
+    expect(mediaPreviewFailedEventSpy).toHaveBeenCalledWith(
+      'unsupported',
+      undefined,
+    );
   });
 });

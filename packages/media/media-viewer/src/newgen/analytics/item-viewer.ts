@@ -1,7 +1,4 @@
-import {
-  GasPayload,
-  GasScreenEventPayload,
-} from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@atlaskit/analytics-gas-types';
 import { ProcessedFileState, FileState } from '@atlaskit/media-core';
 import { packageAttributes, fileStateToFileGasPayload } from './index';
 
@@ -12,17 +9,6 @@ export type ViewerLoadPayload = {
 
 export type AnalyticViewerProps = {
   onLoad: (payload: ViewerLoadPayload) => void;
-};
-
-export const mediaViewerModalEvent = (id: string): GasScreenEventPayload => {
-  return {
-    eventType: 'screen',
-    name: 'mediaViewerModal',
-    attributes: {
-      fileId: id,
-      ...packageAttributes,
-    },
-  };
 };
 
 export const mediaFileCommencedEvent = (id: string): GasPayload => {
@@ -79,8 +65,8 @@ export const mediaFileLoadFailedEvent = (
 };
 
 export const mediaPreviewFailedEvent = (
-  id: string,
   failReason: string,
+  id?: string,
   file?: FileState,
 ): GasPayload => {
   const fileAttributes = file
