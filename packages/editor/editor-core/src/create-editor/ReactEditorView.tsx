@@ -86,8 +86,8 @@ export default class ReactEditorView<T = {}> extends React.Component<
 
     this.editorState = this.createEditorState({ props, replaceDoc: true });
 
-    const { createAnalyticsEvent } = props;
-    if (createAnalyticsEvent) {
+    const { createAnalyticsEvent, allowAnalyticsGASV3 } = props;
+    if (allowAnalyticsGASV3 && createAnalyticsEvent) {
       this.analyticsEventHandler = fireAnalyticsEvent(createAnalyticsEvent);
       this.eventDispatcher.on(analyticsEventKey, this.analyticsEventHandler);
     }
@@ -127,7 +127,10 @@ export default class ReactEditorView<T = {}> extends React.Component<
       } as DirectEditorProps);
     }
 
-    if (nextProps.createAnalyticsEvent !== this.props.createAnalyticsEvent) {
+    if (
+      this.props.allowAnalyticsGASV3 &&
+      nextProps.createAnalyticsEvent !== this.props.createAnalyticsEvent
+    ) {
       this.eventDispatcher.off(analyticsEventKey, this.analyticsEventHandler);
 
       this.analyticsEventHandler = fireAnalyticsEvent(

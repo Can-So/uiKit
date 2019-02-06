@@ -150,6 +150,7 @@ describe(name, () => {
           onEditorCreated={() => {}}
           onEditorDestroyed={() => {}}
           createAnalyticsEvent={jest.fn()}
+          allowAnalyticsGASV3
         />,
       );
 
@@ -174,6 +175,7 @@ describe(name, () => {
           onEditorCreated={() => {}}
           onEditorDestroyed={() => {}}
           createAnalyticsEvent={jest.fn()}
+          allowAnalyticsGASV3
         />,
       );
 
@@ -448,6 +450,7 @@ describe(name, () => {
           onEditorCreated={() => {}}
           onEditorDestroyed={() => {}}
           createAnalyticsEvent={jest.fn()}
+          allowAnalyticsGASV3
         />,
       );
       const { eventDispatcher } = wrapper.instance() as ReactEditorView;
