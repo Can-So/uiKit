@@ -60,8 +60,13 @@ export function getDefaultPluginsList(
   props: EditorProps,
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
 ): EditorPlugin[] {
-  return [
-    analyticsPlugin(createAnalyticsEvent),
+  let defaultPluginList: EditorPlugin[] = [];
+
+  if (props.allowAnalyticsGASV3) {
+    analyticsPlugin(createAnalyticsEvent);
+  }
+
+  return defaultPluginList.concat([
     pastePlugin,
     basePlugin,
     blockTypePlugin,
@@ -73,7 +78,7 @@ export function getDefaultPluginsList(
     typeAheadPlugin,
     unsupportedContentPlugin,
     editorDisabledPlugin,
-  ];
+  ]);
 }
 
 /**

@@ -465,36 +465,55 @@ describe(name, () => {
       mockAnalytics.mockRestore();
     });
 
-    it('should dispatch analytics event', () => {
-      jest
-        .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
-        .mockReturnValue(() => null);
-      let dispatch;
-      const wrapper = mount(
-        <ReactEditorView
-          editorProps={{}}
-          providerFactory={ProviderFactory.create({})}
-          portalProviderAPI={portalProviderAPI}
-          onEditorCreated={() => {}}
-          onEditorDestroyed={() => {}}
-          createAnalyticsEvent={jest.fn()}
-          render={({
-            editor,
-            config,
-            eventDispatcher,
-            dispatchAnalyticsEvent,
-          }) => {
-            dispatch = dispatchAnalyticsEvent;
-            return <p>Component</p>;
-          }}
-        />,
-      );
-      const { eventDispatcher } = wrapper.instance() as ReactEditorView;
-      jest.spyOn(eventDispatcher, 'emit');
+    describe('dispatch analytics event', () => {
+      function setupDispatchAnalytcsTest(allowAnalyticsGASV3: boolean) {
+        jest
+          .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
+          .mockReturnValue(() => null);
+        let dispatch;
+        const wrapper = mount(
+          <ReactEditorView
+            editorProps={{}}
+            providerFactory={ProviderFactory.create({})}
+            portalProviderAPI={portalProviderAPI}
+            onEditorCreated={() => {}}
+            onEditorDestroyed={() => {}}
+            createAnalyticsEvent={jest.fn()}
+            allowAnalyticsGASV3={allowAnalyticsGASV3}
+            render={({
+              editor,
+              config,
+              eventDispatcher,
+              dispatchAnalyticsEvent,
+            }) => {
+              dispatch = dispatchAnalyticsEvent;
+              return <p>Component</p>;
+            }}
+          />,
+        );
+        const { eventDispatcher } = wrapper.instance() as ReactEditorView;
+        jest.spyOn(eventDispatcher, 'emit');
 
-      dispatch(payload);
-      expect(eventDispatcher.emit).toHaveBeenCalledWith(analyticsEventKey, {
-        payload,
+        return {
+          dispatch,
+          eventDispatcher,
+        };
+      }
+
+      it('should call event dispatcher if it is allowed to call analytcs', () => {
+        const { dispatch, eventDispatcher } = setupDispatchAnalytcsTest(true);
+
+        dispatch(payload);
+        expect(eventDispatcher.emit).toHaveBeenCalledWith(analyticsEventKey, {
+          payload,
+        });
+      });
+
+      it('should NOT call event dispatcher if it is NOT allowed to call analytcs', () => {
+        const { dispatch, eventDispatcher } = setupDispatchAnalytcsTest(false);
+
+        dispatch(payload);
+        expect(eventDispatcher.emit).not.toHaveBeenCalled();
       });
     });
   });

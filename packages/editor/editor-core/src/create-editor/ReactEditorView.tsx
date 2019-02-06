@@ -35,6 +35,7 @@ export interface EditorViewProps {
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature;
   providerFactory: ProviderFactory;
   portalProviderAPI: PortalProviderAPI;
+  allowAnalyticsGASV3?: boolean;
   render?: (
     props: {
       editor: JSX.Element;
@@ -302,7 +303,7 @@ export default class ReactEditorView<T = {}> extends React.Component<
   };
 
   dispatchAnalyticsEvent = (payload: AnalyticsEventPayload): void => {
-    if (this.eventDispatcher) {
+    if (this.props.allowAnalyticsGASV3 && this.eventDispatcher) {
       const dispatch: AnalyticsDispatch = createDispatch(this.eventDispatcher);
       dispatch(analyticsEventKey, {
         payload,
