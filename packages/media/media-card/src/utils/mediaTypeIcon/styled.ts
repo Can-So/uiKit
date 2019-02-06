@@ -3,17 +3,13 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import {
-  akColorY200,
-  akColorP200,
-  akColorB300,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
-const colors: any = {
-  image: akColorY200,
-  audio: akColorP200,
+const typeToColorMap: any = {
+  image: colors.Y200,
+  audio: colors.P200,
   video: '#ff7143',
-  doc: akColorB300,
+  doc: colors.B300,
   unknown: '#3dc7dc',
 };
 
@@ -25,5 +21,6 @@ export const IconWrapper: ComponentClass<
   HTMLAttributes<{}> & IconWrapperProps
 > = styled.div`
   display: inline-flex;
-  color: ${({ type }: IconWrapperProps) => colors[type] || colors.unknown};
+  color: ${({ type }: IconWrapperProps) =>
+    typeToColorMap[type] || typeToColorMap.unknown};
 `;

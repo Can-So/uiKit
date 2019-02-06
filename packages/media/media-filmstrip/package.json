@@ -22,7 +22,7 @@
   "dependencies": {
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/media-card": "^52.0.0",
-    "@atlaskit/util-shared-styles": "^2.10.3",
+    "@atlaskit/theme": "^7.0.4",
     "debounce": "^1.0.0",
     "tslib": "^1.8.0"
   },

@@ -32,7 +32,6 @@
     "@atlaskit/media-ui": "^8.3.0",
     "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/theme": "^7.0.2",
-    "@atlaskit/util-shared-styles": "^2.10.3",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.5",
     "deep-equal": "^1.0.1",

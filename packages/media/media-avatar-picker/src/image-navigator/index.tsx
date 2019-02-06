@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import { akGridSizeUnitless } from '@atlaskit/util-shared-styles';
+import { gridSize } from '@atlaskit/theme';
 import Button from '@atlaskit/button';
 import ScaleLargeIcon from '@atlaskit/icon/glyph/media-services/scale-large';
 import ScaleSmallIcon from '@atlaskit/icon/glyph/media-services/scale-small';
@@ -37,8 +37,8 @@ import {
 import { dataURItoFile, fileSizeMb } from '../util';
 import { ERROR, MAX_SIZE_MB, ACCEPT } from '../avatar-picker-dialog';
 
-export const CONTAINER_SIZE = akGridSizeUnitless * 32;
-export const CONTAINER_INNER_SIZE = akGridSizeUnitless * 25;
+export const CONTAINER_SIZE = gridSize() * 32;
+export const CONTAINER_INNER_SIZE = gridSize() * 25;
 export const CONTAINER_PADDING = (CONTAINER_SIZE - CONTAINER_INNER_SIZE) / 2;
 
 // Large images (a side > CONTAINER_SIZE) will have a scale between 0 - 1.0

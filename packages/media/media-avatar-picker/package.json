@@ -27,7 +27,7 @@
     "@atlaskit/media-ui": "^8.5.0",
     "@atlaskit/modal-dialog": "^7.2.1",
     "@atlaskit/spinner": "^9.0.13",
-    "@atlaskit/util-shared-styles": "^2.10.3",
+    "@atlaskit/theme": "^7.0.4",
     "exenv": "^1.2.2",
     "tslib": "^1.8.0"
   },

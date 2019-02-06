@@ -30,7 +30,6 @@
     "@atlaskit/media-ui": "^8.2.6",
     "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/theme": "^7.0.2",
-    "@atlaskit/util-shared-styles": "^2.10.3",
     "deep-equal": "^1.0.1",
     "exenv": "^1.2.2",
     "pdfjs-dist": "^2.0.489",

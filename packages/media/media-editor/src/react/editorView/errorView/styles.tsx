@@ -3,17 +3,13 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import {
-  akColorN0,
-  akColorN70,
-  akColorN900,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 import Button from '@atlaskit/button';
 
 export const ErrorPopup: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 290px;
   padding: 16px;
-  background-color: ${akColorN0};
+  background-color: ${colors.N0};
   border-radius: 4px;
   display: flex;
   justify-content: center;
@@ -26,7 +22,7 @@ export const ErrorIconWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
 `;
 
 export const ErrorMessage: ComponentClass<HTMLAttributes<{}>> = styled.div`
-  color: ${akColorN900};
+  color: ${colors.N900};
   margin-top: 16px;
   margin-bottom: 4px;
   width: 256px;
@@ -35,7 +31,7 @@ export const ErrorMessage: ComponentClass<HTMLAttributes<{}>> = styled.div`
 `;
 
 export const ErrorHint: ComponentClass<HTMLAttributes<{}>> = styled.div`
-  color: ${akColorN70};
+  color: ${colors.N70};
   margin-top: 4px;
   margin-bottom: 20px;
   width: 256px;

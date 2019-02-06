@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 
 import styled, { keyframes } from 'styled-components';
-import { akBorderRadius } from '@atlaskit/util-shared-styles';
+import { borderRadius, colors, gridSize } from '@atlaskit/theme';
 import { checkeredBg } from './images';
 
 import {
@@ -10,7 +10,6 @@ import {
   InputHTMLAttributes,
   ImgHTMLAttributes,
 } from 'react';
-import { akGridSizeUnitless, akColorN200 } from '@atlaskit/util-shared-styles';
 import { AVATAR_DIALOG_WIDTH } from '../avatar-picker-dialog/layout-const';
 
 const spin = keyframes`
@@ -25,11 +24,11 @@ export const ImageBg: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 256px;
   height: 256px;
   background: url('${checkeredBg}');
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
 `;
 
 export const Container: ComponentClass<HTMLAttributes<{}>> = styled.div`
-  width: ${akGridSizeUnitless * 32}px;
+  width: ${gridSize() * 32}px;
   box-sizing: border-box;
   *,
   *::before,
@@ -44,7 +43,7 @@ export const SliderContainer: ComponentClass<HTMLAttributes<{}>> = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: row;
-  margin-top: ${akGridSizeUnitless}px;
+  margin-top: ${gridSize()}px;
 
   input {
     box-sizing: content-box;
@@ -126,10 +125,10 @@ export const DragZoneText: ComponentClass<
   HTMLAttributes<{}> & DragZoneTextProps
 > = styled.div`
   text-align: center;
-  color: ${akColorN200};
+  color: ${colors.N200};
   ${(props: DragZoneTextProps) =>
     props.isFullSize
-      ? `width: ${AVATAR_DIALOG_WIDTH - akGridSizeUnitless * 8}px`
+      ? `width: ${AVATAR_DIALOG_WIDTH - gridSize() * 8}px`
       : 'width: auto'};
 `;
 

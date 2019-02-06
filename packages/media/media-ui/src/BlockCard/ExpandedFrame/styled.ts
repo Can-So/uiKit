@@ -2,14 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { HTMLAttributes, ComponentClass, AnchorHTMLAttributes } from 'react';
 
-import {
-  akColorN20,
-  akColorN30,
-  akColorB50,
-  akColorN300,
-  akColorB100,
-  akFontFamily,
-} from '@atlaskit/util-shared-styles';
+import { colors, fontFamily } from '@atlaskit/theme';
 import { borderRadius, size, ellipsis } from '../../mixins';
 
 const wrapperPadding = 8;
@@ -46,10 +39,10 @@ function interactive({ isInteractive }: WrapperProps) {
     return `
       cursor: pointer;
       &:hover {
-        background-color: ${akColorN30};
+        background-color: ${colors.N30};
       }
       &:active {
-        background-color: ${akColorB50};
+        background-color: ${colors.B50};
       }
     `;
   } else {
@@ -61,7 +54,7 @@ function selected({ isSelected }: WrapperProps) {
   return isSelected
     ? `&::after {
         cursor: pointer;
-        box-shadow: 0 0 0 2px ${akColorB100};
+        box-shadow: 0 0 0 2px ${colors.B100};
         content: '';
         outline: none;
         position: absolute;
@@ -76,11 +69,11 @@ const wrapperStyles = css`
   ${borderRadius} ${minWidth} ${maxWidth} ${interactive} display: inline-flex;
   flex-direction: column;
   box-sizing: border-box;
-  font-family: ${akFontFamily};
+  font-family: ${fontFamily()};
   padding: 0 ${wrapperPadding}px ${wrapperPadding}px ${wrapperPadding}px;
   width: 100%;
   user-select: none;
-  background-color: ${akColorN20};
+  background-color: ${colors.N20};
   line-height: initial;
   transition: background 0.3s;
   position: relative;
@@ -109,7 +102,7 @@ export const Header: ComponentClass<HTMLAttributes<{}>> = styled.div`
   height: 32px;
   display: flex;
   align-items: center;
-  color: ${akColorN300};
+  color: ${colors.N300};
 `;
 
 export interface PlaceholderProps {
@@ -122,7 +115,7 @@ export const IconWrapper: ComponentClass<
   ${borderRadius} ${size(16)} ${({ isPlaceholder }: PlaceholderProps) => {
   if (isPlaceholder) {
     return `
-      background-color: ${akColorN30};
+      background-color: ${colors.N30};
     `;
   } else {
     return '';
@@ -139,12 +132,12 @@ export const TextWrapper: ComponentClass<
         ${borderRadius}
         width: 125px;
         height: 12px;
-        background-color: ${akColorN30};
+        background-color: ${colors.N30};
       `;
     } else {
       return '';
     }
-  }} color: ${akColorN300};
+  }} color: ${colors.N300};
   font-size: 12px;
   line-height: 16px;
   ${ellipsis('none')};
