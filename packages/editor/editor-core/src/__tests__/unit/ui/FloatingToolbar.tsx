@@ -17,8 +17,8 @@ const items: Array<FloatingToolbarItem<Command>> = [
   {
     type: 'custom',
     Component: DummyComponent,
-    onSubmit: () => {},
-    onBlur: () => {},
+    onSubmit: () => () => true,
+    onBlur: () => () => true,
     providerFactory: {} as any,
   },
 ];
