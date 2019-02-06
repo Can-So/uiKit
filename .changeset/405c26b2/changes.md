@@ -1,1 +1,0 @@
-- MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme

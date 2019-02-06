@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 52.0.3
+- [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
+
+  - MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme
+
 ## 52.0.2
 - [patch] [0e164e542a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e164e542a):
 
