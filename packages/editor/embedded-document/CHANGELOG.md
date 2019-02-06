@@ -1,5 +1,15 @@
 # @atlaskit/embedded-document
 
+## 0.1.1
+- [patch] [248e9f4db1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/248e9f4db1):
+
+  - Make sure component goes into create-mode when document does not exist
+
+## 0.1.0
+- [minor] [406952f08d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/406952f08d):
+
+  - Allow passing through editor props
+
 ## 0.0.19
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/editor-core@98.0.0

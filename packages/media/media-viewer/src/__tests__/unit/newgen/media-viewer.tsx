@@ -1,3 +1,12 @@
+const mediaViewerModule = require.requireActual(
+  '../../../newgen/analytics/media-viewer',
+);
+const mediaViewerModalEventSpy = jest.fn();
+jest.mock('../../../newgen/analytics/media-viewer', () => ({
+  ...mediaViewerModule,
+  mediaViewerModalEvent: mediaViewerModalEventSpy,
+}));
+
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { Subject } from 'rxjs/Subject';
@@ -86,5 +95,12 @@ describe('<MediaViewer />', () => {
       .find(Button)
       .simulate('click');
     expect(onClose).toHaveBeenCalled();
+  });
+
+  describe('Analytics', () => {
+    it('should trigger the screen event when the component loads', () => {
+      createFixture([identifier], identifier);
+      expect(mediaViewerModalEventSpy).toHaveBeenCalled();
+    });
   });
 });

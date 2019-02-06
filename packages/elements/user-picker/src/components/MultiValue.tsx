@@ -6,6 +6,8 @@ import { AddOptionAvatar } from './AddOptionAvatar';
 import { messages } from './i18n';
 import { SizeableAvatar } from './SizeableAvatar';
 import { getAvatarUrl, isEmail } from './utils';
+import styled from 'styled-components';
+import { colors } from '@atlaskit/theme';
 
 export const scrollToValue = (
   valueContainer: HTMLDivElement,
@@ -20,6 +22,14 @@ export const scrollToValue = (
     valueContainer.scrollIntoView(false);
   }
 };
+
+const TagContainer = styled.div`
+  button {
+    &:focus {
+      box-shadow: 0 0 0 2px ${colors.B100};
+    }
+  }
+`;
 
 type Props = {
   isFocused?: boolean;
@@ -110,15 +120,17 @@ export class MultiValue extends React.Component<Props> {
       <div ref={this.containerRef}>
         <FormattedMessage {...messages.remove}>
           {remove => (
-            <Tag
-              {...innerProps}
-              appearance="rounded"
-              text={label}
-              elemBefore={this.getElemBefore()}
-              removeButtonText={data.fixed || isDisabled ? undefined : remove}
-              onAfterRemoveAction={onRemove}
-              color={isFocused ? 'blueLight' : undefined}
-            />
+            <TagContainer>
+              <Tag
+                {...innerProps}
+                appearance="rounded"
+                text={label}
+                elemBefore={this.getElemBefore()}
+                removeButtonText={data.fixed || isDisabled ? undefined : remove}
+                onAfterRemoveAction={onRemove}
+                color={isFocused ? 'blueLight' : undefined}
+              />
+            </TagContainer>
           )}
         </FormattedMessage>
       </div>

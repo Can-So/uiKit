@@ -1,5 +1,10 @@
 # @atlaskit/avatar-group
 
+## 2.1.12
+- [patch] [3a9b559382](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a9b559382):
+
+  - Stopping href from being passed down to Avatar in DropdownMenu rendered in AvatarGroup
+
 ## 2.1.11
 - [patch] [ed05c5c5d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed05c5c5d9):
 

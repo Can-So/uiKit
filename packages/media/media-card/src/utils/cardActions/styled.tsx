@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import { akColorN500 } from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 import { borderRadius, size, center } from '@atlaskit/media-ui';
 import { Root } from '../../styles';
 
@@ -16,7 +16,7 @@ export const Wrapper: ComponentClass<HTMLAttributes<{}>> = styled(Root)`
 export const CardActionButton: ComponentClass<
   HTMLAttributes<HTMLDivElement>
 > = styled.div`
-  ${center} ${borderRadius} ${size(26)} color: ${akColorN500};
+  ${center} ${borderRadius} ${size(26)} color: ${colors.N500};
 
   &:hover {
     cursor: pointer;

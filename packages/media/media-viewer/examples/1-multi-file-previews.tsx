@@ -28,8 +28,8 @@ import { I18NWrapper } from '@atlaskit/media-test-helpers';
 const context = createStorybookContext();
 
 const handleEvent = (analyticsEvent: UIAnalyticsEventInterface) => {
-  const { payload, context } = analyticsEvent;
-  console.log('Received event:', { payload, context });
+  const { payload } = analyticsEvent;
+  console.log('EVENT:', payload);
 };
 
 export type State = {
@@ -80,6 +80,35 @@ export default class Example extends React.Component<{}, State> {
             videoIdentifier,
             videoHorizontalFileItem,
             wideImageIdentifier,
+            audioItem,
+            audioItemNoCover,
+            docIdentifier,
+            largePdfIdentifier,
+            imageIdentifier2,
+            unsupportedIdentifier,
+          ],
+        },
+        identifier: imageIdentifier,
+      },
+    });
+  };
+
+  private openErrorList = () => {
+    const invalidItem: MediaViewerItem = {
+      type: 'file',
+      id: 'invalid-id',
+      occurrenceKey: 'invalid-key',
+    };
+
+    this.setState({
+      selected: {
+        dataSource: {
+          list: [
+            imageIdentifier,
+            invalidItem,
+            wideImageIdentifier,
+            videoIdentifier,
+            videoHorizontalFileItem,
             audioItem,
             audioItemNoCover,
             docIdentifier,
@@ -190,6 +219,9 @@ export default class Example extends React.Component<{}, State> {
                 <Button onClick={this.openInvalidCollection}>
                   Invalid collection name
                 </Button>
+              </li>
+              <li>
+                <Button onClick={this.openErrorList}>Error list</Button>
               </li>
             </ButtonList>
           </Group>

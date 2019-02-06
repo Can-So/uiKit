@@ -9,19 +9,8 @@ import DocumentIcon from '@atlaskit/icon/glyph/media-services/document';
 import PDFDocumentIcon from '@atlaskit/icon/glyph/media-services/pdf';
 import ZipDocumentIcon from '@atlaskit/icon/glyph/media-services/zip';
 import UnknownIcon from '@atlaskit/icon/glyph/media-services/unknown';
-import {
-  akColorY200,
-  akColorY400,
-  akColorG300,
-  akColorR300,
-  akColorR400,
-  akColorP200,
-  akColorB75,
-  akColorB200,
-  akColorN200,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 import styled from 'styled-components';
-import { akColorN70 } from '@atlaskit/util-shared-styles';
 
 interface IconWrapperProps {
   color: string;
@@ -97,61 +86,61 @@ function isArchive(mimeType: string) {
 export const mapMimeTypeToIcon = (mimeType: string): JSX.Element => {
   if (isFolder(mimeType)) {
     return (
-      <IconWrapper color={akColorB75}>
+      <IconWrapper color={colors.B75}>
         <FolderFilledIcon label="folder" />
       </IconWrapper>
     );
   } else if (isImage(mimeType)) {
     return (
-      <IconWrapper color={akColorY200}>
+      <IconWrapper color={colors.Y200}>
         <ImageIcon label="image" />
       </IconWrapper>
     );
   } else if (isVideo(mimeType)) {
     return (
-      <IconWrapper color={akColorR300}>
+      <IconWrapper color={colors.R300}>
         <VideoIcon label="video" />
       </IconWrapper>
     );
   } else if (isAudio(mimeType)) {
     return (
-      <IconWrapper color={akColorP200}>
+      <IconWrapper color={colors.P200}>
         <AudioIcon label="audio" />
       </IconWrapper>
     );
   } else if (isSpreadsheet(mimeType)) {
     return (
-      <IconWrapper color={akColorG300}>
+      <IconWrapper color={colors.G300}>
         <SpreadSheetIcon label="spreadsheet" />
       </IconWrapper>
     );
   } else if (isPresentation(mimeType)) {
     return (
-      <IconWrapper color={akColorY400}>
+      <IconWrapper color={colors.Y400}>
         <PresentationIcon label="presentation" />
       </IconWrapper>
     );
   } else if (isDocument(mimeType)) {
     return (
-      <IconWrapper color={akColorB200}>
+      <IconWrapper color={colors.B200}>
         <DocumentIcon label="document" />
       </IconWrapper>
     );
   } else if (isPDF(mimeType)) {
     return (
-      <IconWrapper color={akColorR400}>
+      <IconWrapper color={colors.R400}>
         <PDFDocumentIcon label="pdf document" />
       </IconWrapper>
     );
   } else if (isArchive(mimeType)) {
     return (
-      <IconWrapper color={akColorN200}>
+      <IconWrapper color={colors.N200}>
         <ZipDocumentIcon label="zip" />
       </IconWrapper>
     );
   } else {
     return (
-      <IconWrapper color={akColorN70}>
+      <IconWrapper color={colors.N70}>
         <UnknownIcon label="unknown" />
       </IconWrapper>
     );

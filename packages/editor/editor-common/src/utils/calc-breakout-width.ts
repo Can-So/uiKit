@@ -18,7 +18,7 @@ export const calcBreakoutWidth = (
     case 'wide':
       return calcWideWidth(containerWidth);
     default:
-      return 'inherit';
+      return '100%';
   }
 };
 

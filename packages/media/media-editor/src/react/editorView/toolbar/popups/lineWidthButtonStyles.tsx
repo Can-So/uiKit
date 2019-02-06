@@ -3,11 +3,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import {
-  akColorN0,
-  akColorN30A,
-  akColorN500,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
 export const Container: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 32px;
@@ -24,7 +20,7 @@ export const HoverArea: ComponentClass<HTMLAttributes<{}>> = styled.div`
   padding: 1px;
   border: 2px solid transparent;
   &:hover {
-    border: 2px solid ${akColorN30A};
+    border: 2px solid ${colors.N30A};
   }
 `;
 export interface AreaProps {
@@ -38,7 +34,7 @@ export const MainArea: ComponentClass<
   height: 24px;
   border-radius: 15px;
   background-color: ${(props: AreaProps) =>
-    props.isSelected ? akColorN500 : akColorN30A};
+    props.isSelected ? colors.N500 : colors.N30A};
 `;
 
 export const FrontArea: ComponentClass<
@@ -46,5 +42,5 @@ export const FrontArea: ComponentClass<
 > = styled.div`
   box-sizing: border-box;
   background-color: ${(props: AreaProps) =>
-    props.isSelected ? akColorN0 : akColorN500};
+    props.isSelected ? colors.N0 : colors.N500};
 `;

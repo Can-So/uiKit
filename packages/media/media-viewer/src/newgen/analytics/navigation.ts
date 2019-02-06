@@ -1,5 +1,5 @@
 import { GasPayload } from '@atlaskit/analytics-gas-types';
-import { context, PackageContext } from './index';
+import { packageAttributes, PackageAttributes } from './index';
 import { NavigationDirection, NavigationSource } from '../navigation';
 import { Identifier } from '../domain';
 
@@ -33,7 +33,7 @@ export interface NavigationAttributes {
 }
 
 export interface NavigationGasPayload extends GasPayload {
-  attributes: NavigationAttributes & PackageContext;
+  attributes: NavigationAttributes & PackageAttributes;
 }
 
 export function createNavigationEvent(
@@ -47,7 +47,7 @@ export function createNavigationEvent(
     actionSubject: 'file',
     actionSubjectId: actionFromDirection(direction),
     attributes: {
-      ...context,
+      ...packageAttributes,
       ...fileDetailsFromIdentifier(newItem),
       input: inputFromSource(source),
     },

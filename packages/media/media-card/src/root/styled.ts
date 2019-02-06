@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { akBorderRadius } from '@atlaskit/util-shared-styles';
+import { borderRadius } from '@atlaskit/theme';
 import { HTMLAttributes, ComponentClass } from 'react';
 import { CardDimensions, CardAppearance } from '../';
 import { getCSSUnitValue } from '../utils/getCSSUnitValue';
@@ -35,7 +35,7 @@ export const Wrapper: ComponentClass<
 
 export const InlinePlayerWrapper = styled.div`
   overflow: hidden;
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
   position: relative;
 
   max-width: 100%;

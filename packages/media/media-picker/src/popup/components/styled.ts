@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import { akColorN30, akFontFamily } from '@atlaskit/util-shared-styles';
+import { colors, fontFamily } from '@atlaskit/theme';
 
 export const MediaPickerPopupWrapper: ComponentClass<
   HTMLAttributes<{}>
@@ -9,7 +9,7 @@ export const MediaPickerPopupWrapper: ComponentClass<
   display: flex;
   cursor: default;
   user-select: none;
-  font-family: ${akFontFamily};
+  font-family: ${fontFamily()};
   border-radius: 3px;
   position: relative;
 
@@ -20,7 +20,7 @@ export const MediaPickerPopupWrapper: ComponentClass<
 export const SidebarWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 235px;
   min-width: 235px;
-  background-color: ${akColorN30};
+  background-color: ${colors.N30};
 `;
 
 export const ViewWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
