@@ -39,14 +39,16 @@ export default ({
 }: AppSwitcherProps) => (
   <Composer
     components={[
-      <RecentContainersProvider cloudId={cloudId} />,
-      <CustomLinksProvider />,
-      <LicenseInformationProvider cloudId={cloudId} />,
+      <RecentContainersProvider key="recentContainers" cloudId={cloudId} />,
+      <CustomLinksProvider key="customLinks" />,
+      <LicenseInformationProvider key="licenseInformation" cloudId={cloudId} />,
       <UserPermissionProvider
+        key="managePermission"
         cloudId={cloudId}
         permissionId={Permissions.MANAGE}
       />,
       <UserPermissionProvider
+        key="addProductsPermission"
         cloudId={cloudId}
         permissionId={Permissions.ADD_PRODUCTS}
       />,
