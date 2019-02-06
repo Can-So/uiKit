@@ -29,7 +29,6 @@ export type MediaCollectionItem = {
   readonly id: string;
   readonly insertedAt: number;
   readonly occurrenceKey: string;
-  readonly type: 'file';
   readonly details: MediaCollectionItemDetails;
 };
 

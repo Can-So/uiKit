@@ -20,7 +20,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '12',
-    type: 'file',
   };
   const secondItem: MediaCollectionItem = {
     id: '2',
@@ -34,7 +33,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '123',
-    type: 'file',
   };
   const newItem: MediaCollectionItem = {
     id: '0',
@@ -48,7 +46,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '1234',
-    type: 'file',
   };
   const contents: MediaCollectionItem[] = [firstItem, secondItem];
   const getCollectionItems = jest.fn().mockResolvedValue({
@@ -275,7 +272,6 @@ describe('CollectionFetcher', () => {
             id: 'some-id',
             insertedAt: 42,
             occurrenceKey: '',
-            type: 'file',
             details: {} as MediaCollectionItemDetails,
           },
         ],

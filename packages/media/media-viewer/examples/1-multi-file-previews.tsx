@@ -54,7 +54,7 @@ export default class Example extends React.Component<{}, State> {
             this.setState({
               firstCollectionItem: {
                 id: firstItem.id,
-                type: firstItem.type,
+                type: 'file',
                 occurrenceKey: firstItem.occurrenceKey,
               },
             });
