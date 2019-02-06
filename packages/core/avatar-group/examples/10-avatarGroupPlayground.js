@@ -147,6 +147,7 @@ export default class AvatarGroupExample extends Component<*, State> {
               key: i,
               appearance: 'circle',
               enableTooltip: true,
+              href: '#',
               name: `Grid Avatar ${i + 1}`,
               src: avatarUrl,
               size: avatarSize,
@@ -175,6 +176,7 @@ export default class AvatarGroupExample extends Component<*, State> {
           onAvatarClick={console.log}
           data={stackSourceURLs.map(i => ({
             key: i,
+            href: '#',
             name: `Stack Avatar ${i + 1}`,
             src: avatarUrl,
             size: avatarSize,
@@ -197,6 +199,7 @@ export default class AvatarGroupExample extends Component<*, State> {
             maxCount={mode === 'grid' ? avatarCount : 0}
             data={stackSourceURLs.map(i => ({
               key: i,
+              href: '#',
               name: `Stack Avatar ${i + 1}`,
               src: avatarUrl,
               size: avatarSize,
@@ -223,12 +226,13 @@ export default class AvatarGroupExample extends Component<*, State> {
             appearance="stack"
             maxCount={5}
             data={stackSourceURLs.map(i => ({
-              key: i,
-              name: `Stack Avatar ${i + 1}`,
-              src: avatarUrl,
-              size: avatarSize,
               appearance: 'circle',
               enableTooltip: true,
+              href: '#',
+              key: i,
+              name: `Stack Avatar ${i + 1}`,
+              size: avatarSize,
+              src: avatarUrl,
               tabIndex: -1,
             }))}
             size={avatarSize}
@@ -254,6 +258,7 @@ export default class AvatarGroupExample extends Component<*, State> {
                 boundariesElement="scrollParent"
                 onAvatarClick={console.log}
                 data={stackSourceURLs.slice(0, 6).map(i => ({
+                  href: '#',
                   key: i,
                   name: `Stack Avatar ${i + 1}`,
                   src: avatarUrl,
@@ -275,6 +280,7 @@ export default class AvatarGroupExample extends Component<*, State> {
           />
           <AvatarGroup
             data={stackSourceURLs.map(i => ({
+              href: '#',
               key: i,
               name: `Stack Avatar ${i + 1}`,
               src: avatarUrl,
