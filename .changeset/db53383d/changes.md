@@ -1,1 +1,0 @@
-- Make sure component goes into create-mode when document does not exist
