@@ -1,0 +1,1 @@
+- ED-5846: Refactoring new hyperlink toolbar and adding typeahead to the new floating toolbar

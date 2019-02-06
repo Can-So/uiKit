@@ -32,8 +32,8 @@ export type FloatingToolbarButton<T> = {
 
 export type FloatingToolbarInput<T> = {
   type: 'input';
-  onSubmit: (...args: any[]) => any;
-  onBlur: (...args: any[]) => any;
+  onSubmit: (...args: any[]) => T;
+  onBlur: (...args: any[]) => T;
   defaultValue?: string;
   placeholder?: string;
   hidden?: boolean;
@@ -41,8 +41,8 @@ export type FloatingToolbarInput<T> = {
 
 export type FloatingToolbarCustom<T> = {
   type: 'custom';
-  onSubmit: (...args: any[]) => any;
-  onBlur: (...args: any[]) => any;
+  onSubmit: (...args: any[]) => T;
+  onBlur: (...args: any[]) => T;
   Component: React.ComponentClass<any>;
   providerFactory: ProviderFactory;
   hidden?: boolean;
@@ -82,7 +82,6 @@ export type FloatingToolbarItem<T> =
 
 export interface FloatingToolbarConfig {
   title: string;
-
   /**
    * Override the DOM reference used to apply as the target for the
    * floating toolbar, if the config matches.
@@ -97,6 +96,8 @@ export interface FloatingToolbarConfig {
   items: Array<FloatingToolbarItem<Command>>;
   align?: AlignType;
   className?: string;
+  height?: number;
+  width?: number;
 }
 
 export type FloatingToolbarHandler = (

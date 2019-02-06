@@ -30,10 +30,6 @@ export function getVerticalPlacement(
   fitHeight?: number,
   alignY?: string,
 ): string {
-  if (alignY) {
-    return alignY;
-  }
-
   if (!fitHeight) {
     return 'bottom';
   }
@@ -72,12 +68,8 @@ export function getHorizontalPlacement(
   fitWidth?: number,
   alignX?: string,
 ): string {
-  if (alignX) {
-    return alignX;
-  }
-
   if (!fitWidth) {
-    return 'left';
+    return alignX || 'left';
   }
 
   if (isTextNode(target)) {
@@ -94,11 +86,11 @@ export function getHorizontalPlacement(
   } = boundariesElement.getBoundingClientRect();
   const spaceLeft = targetLeft - boundariesLeft + targetWidth;
   const spaceRight = boundariesLeft + boundariesWidth - targetLeft;
-
-  if (spaceRight >= fitWidth || spaceRight >= spaceLeft) {
+  if (alignX && spaceLeft > fitWidth && spaceRight > fitWidth) {
+    return alignX;
+  } else if (spaceRight >= fitWidth || (spaceRight >= spaceLeft && !alignX)) {
     return 'left';
   }
-
   return 'right';
 }
 

@@ -23,6 +23,14 @@ export default class TextField extends Component<Props, State> {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.text !== nextProps.defaultValue) {
+      this.setState({
+        text: nextProps.defaultValue,
+      });
+    }
+  }
+
   handleChange = e => {
     this.setState({ text: e.target.value });
   };

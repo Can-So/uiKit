@@ -73,7 +73,7 @@ export const getToolbarConfig: FloatingToolbarHandler = (
 ) => {
   const linkState: HyperlinkState | undefined = stateKey.getState(state);
 
-  if (linkState && linkState.activeLinkMark && linkState.activeLinkMark) {
+  if (linkState && linkState.activeLinkMark) {
     const { activeLinkMark } = linkState;
 
     const hyperLinkToolbar = {
@@ -98,6 +98,8 @@ export const getToolbarConfig: FloatingToolbarHandler = (
 
         return {
           ...hyperLinkToolbar,
+          height: 32,
+          width: 250,
           items: [
             ...getToolbarToShow(link, text, pos),
             {
@@ -127,6 +129,8 @@ export const getToolbarConfig: FloatingToolbarHandler = (
         const { from, to } = activeLinkMark;
         return {
           ...hyperLinkToolbar,
+          height: 360,
+          width: 420,
           items: [
             {
               type: 'custom',

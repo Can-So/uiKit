@@ -31,6 +31,10 @@ const editorButtonTheme = {
 
 const Button = styled(UiButton)`
   padding: 0 2px;
+
+  &[href] {
+    padding: 0 2px;
+  }
 `;
 
 export type ButtonAppearance = 'subtle' | 'danger';
