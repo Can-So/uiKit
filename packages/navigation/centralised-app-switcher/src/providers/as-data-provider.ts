@@ -1,27 +1,26 @@
 import { Component, ReactNode } from 'react';
 
-export interface ChildrenProps<DataStructure> {
-  data: null | DataStructure;
+export interface ChildrenProps<D> {
+  data: null | D;
   isLoading: boolean;
   error: any;
 }
 
-interface ChildrenCallback<DataStructure> {
-  (props: ChildrenProps<DataStructure>): ReactNode | string;
+interface ChildrenCallback<D> {
+  (props: ChildrenProps<D>): ReactNode;
 }
 
-export interface DataProviderProps<DataStructure> {
-  children?: ChildrenCallback<DataStructure>;
+export interface DataProviderProps<D> {
+  children?: ChildrenCallback<D>;
 }
 
-export interface MapPropsToPromiseSignature<T, DataStructure> {
-  (props: T): Promise<DataStructure> | DataStructure;
+export interface MapPropsToPromiseSignature<T, D> {
+  (props: T): Promise<D> | D;
 }
 
-export default function<
-  T extends DataProviderProps<DataStructure>,
-  DataStructure
->(mapPropsToPromise: MapPropsToPromiseSignature<T, DataStructure>) {
+export default function<T extends DataProviderProps<D>, D>(
+  mapPropsToPromise: MapPropsToPromiseSignature<T, D>,
+) {
   return class extends Component<T> {
     state = {
       isLoading: true,
@@ -33,7 +32,7 @@ export default function<
       const dataSource = mapPropsToPromise(this.props);
       if (dataSource instanceof Promise) {
         dataSource
-          .then((result: DataStructure) => {
+          .then((result: D) => {
             this.setState({
               data: result,
               isLoading: false,
@@ -56,7 +55,7 @@ export default function<
     render() {
       const { isLoading, data, error } = this.state;
       const { children } = this.props;
-      return (children as ChildrenCallback<DataStructure>)({
+      return (children as ChildrenCallback<D>)({
         data,
         isLoading,
         error,
