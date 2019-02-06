@@ -5,8 +5,12 @@ import {
 } from '@atlaskit/util-service-support';
 
 export interface InvitationsCapabilitiesProvider {
-  getCapabilities: () => Promise<InvitationsCapabilitiesResponse>;
+  getCapabilities: InvitationsCapabilitiesRequest;
 }
+
+export type InvitationsCapabilitiesRequest = () => Promise<
+  InvitationsCapabilitiesResponse
+>;
 
 export type InvitationsCapabilitiesResponse = {
   directInvite: DirectInviteCapabilities;

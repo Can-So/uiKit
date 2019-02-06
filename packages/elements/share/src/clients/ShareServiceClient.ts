@@ -6,13 +6,15 @@ import {
 import { Content, Comment, MetaData, User } from '../types';
 
 export interface ShareClient {
-  share: (
-    content: Content,
-    recipients: User[],
-    metadata: MetaData,
-    comment?: Comment,
-  ) => Promise<ShareResponse>;
+  share: ShareRequest;
 }
+
+export type ShareRequest = (
+  content: Content,
+  recipients: User[],
+  metadata: MetaData,
+  comment?: Comment,
+) => Promise<ShareResponse>;
 
 export type ShareResponse = {
   shareRequestId: string;

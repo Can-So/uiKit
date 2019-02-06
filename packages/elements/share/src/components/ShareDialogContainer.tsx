@@ -3,6 +3,7 @@ import memoizeOne from 'memoize-one';
 import { LoadOptions } from '@atlaskit/user-picker';
 import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 import {
+  Client,
   Content,
   InvitationsCapabilitiesResponse,
   InvitationsCapabilitiesProvider,
@@ -17,6 +18,7 @@ import { InvitationsCapabilitiesResource } from '../api/InvitationsCapabilitiesR
 import { ShareServiceClient } from '../clients/ShareServiceClient';
 
 type Props = {
+  client?: Client;
   cloudId: string;
   formatCopyLink?: Function;
   loadUserOptions: LoadOptions;
@@ -49,8 +51,7 @@ const memoizedFormatCopyLink: string = memoizeOne(
  * to ShareDialogTrigger component
  */
 export class ShareDialogContainer extends React.Component<Props, State> {
-  private invitationsCapabilitiesResource: InvitationsCapabilitiesProvider;
-  private shareServiceClient: ShareClient;
+  private client: Client;
 
   static defaultProps = {
     shareLink: window && window.location!.href,
@@ -59,10 +60,19 @@ export class ShareDialogContainer extends React.Component<Props, State> {
 
   constructor(props) {
     super(props);
-    this.invitationsCapabilitiesResource = new InvitationsCapabilitiesResource(
-      props.cloudId,
-    );
-    this.shareServiceClient = new ShareServiceClient();
+
+    if (props.client) {
+      this.client = props.client;
+    } else {
+      const defaultInvitationsCapabilitiesResource: InvitationsCapabilitiesProvider = new InvitationsCapabilitiesResource(
+        props.cloudId,
+      );
+      const defaultShareSericeClient: ShareClient = new ShareServiceClient();
+      this.client = {
+        getCapabilities: defaultInvitationsCapabilitiesResource.getCapabilities,
+        share: defaultShareSericeClient.share,
+      };
+    }
 
     this.state = {
       capabilities: undefined,
@@ -100,7 +110,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
   }
 
   fetchCapabilities = () => {
-    this.invitationsCapabilitiesResource
+    this.client
       .getCapabilities()
       .then((capabilities: InvitationsCapabilitiesResponse) => {
         // Send analytics event
@@ -142,7 +152,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       },
     };
 
-    return this.shareServiceClient
+    return this.client
       .share(content, users, metaData, comment)
       .then((response: ShareResponse) => {
         // send analytic event

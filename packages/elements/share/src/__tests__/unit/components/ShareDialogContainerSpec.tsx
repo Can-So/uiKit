@@ -3,11 +3,16 @@ import { shallow } from 'enzyme';
 import { utils } from '@atlaskit/util-service-support';
 import { ShareDialogContainer } from '../../../components/ShareDialogContainer';
 import { ShareDialogWithTrigger } from '../../../components/ShareDialogWithTrigger';
+import * as InvitationsCapabilitiesExports from '../../../api/InvitationsCapabilitiesResource';
+import * as ShareServiceExports from '../../../clients/ShareServiceClient';
+import { Client } from '../../../types';
 
 let wrapper;
 let mockOriginTracing;
 let mockOriginTracingFactory;
 let mockRequestService;
+let mockInvitationCapabilitiesResource;
+let mockShareServiceClient;
 const mockCloudId = 'cloudId';
 const mockProductId = 'productId';
 const mockShareAri = 'ari';
@@ -36,6 +41,12 @@ const mockCapabilities = {
     permittedResources: [],
   },
 };
+const mockGetCapabilities = jest.fn().mockResolvedValue(mockCapabilities);
+const mockShare = jest.fn().mockResolvedValue({});
+const mockClient = {
+  getCapabilities: mockGetCapabilities,
+  share: mockShare,
+};
 
 beforeEach(() => {
   mockOriginTracing = {
@@ -46,8 +57,19 @@ beforeEach(() => {
   mockRequestService = jest
     .spyOn(utils, 'requestService')
     .mockResolvedValue(mockCapabilities);
+  mockInvitationCapabilitiesResource = jest
+    .spyOn(InvitationsCapabilitiesExports, 'InvitationsCapabilitiesResource')
+    .mockImplementation(() => ({
+      getCapabilities: mockGetCapabilities,
+    }));
+  mockShareServiceClient = jest
+    .spyOn(ShareServiceExports, 'ShareServiceClient')
+    .mockImplementation(() => ({
+      share: mockShare,
+    }));
   wrapper = shallow(
     <ShareDialogContainer
+      client={mockClient}
       cloudId={mockCloudId}
       loadUserOptions={mockLoadUserOptions}
       originTracingFactory={mockOriginTracingFactory}
@@ -63,12 +85,14 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  wrapper = null;
   mockRequestService.mockRestore();
+  mockInvitationCapabilitiesResource.mockRestore();
+  mockShareServiceClient.mockRestore();
 });
 
 describe('ShareDialogContainer', () => {
   it('should render', () => {
-    expect(wrapper.state().capabilities).toEqual(mockCapabilities);
     const shareDialogWithTrigger = wrapper.find(ShareDialogWithTrigger);
     expect(shareDialogWithTrigger).toHaveLength(1);
     expect(mockFormatCopyLink).toHaveBeenCalled();
@@ -89,6 +113,8 @@ describe('ShareDialogContainer', () => {
       wrapper.state().capabilities,
     );
     expect(mockOriginTracingFactory).toHaveBeenCalledTimes(3);
+    expect(mockClient.getCapabilities).toHaveBeenCalledTimes(1);
+    expect(wrapper.state().capabilities).toEqual(mockCapabilities);
   });
 
   it('should call props.originTracingFactory if shareLink prop is updated', () => {
@@ -96,6 +122,28 @@ describe('ShareDialogContainer', () => {
     wrapper.setProps({ shareLink: 'new-share-link' });
     expect(wrapper.state().prevShareLink).toEqual('new-share-link');
     expect(mockOriginTracingFactory).toHaveBeenCalledTimes(3);
+  });
+
+  it('should have default this.client if props.client is not given', () => {
+    const newWrapper = shallow<ShareDialogContainer>(
+      <ShareDialogContainer
+        cloudId={mockCloudId}
+        loadUserOptions={mockLoadUserOptions}
+        originTracingFactory={mockOriginTracingFactory}
+        productId={mockProductId}
+        shareAri={mockShareAri}
+        shareLink={mockShareLink}
+        shareTitle={mockShareTitle}
+        formatCopyLink={mockFormatCopyLink}
+        shouldShowCommentField={mockShouldShowCommentField}
+        shouldCloseOnEscapePress={mockShouldCloseOnEscapePress}
+      />,
+    );
+
+    // @ts-ignore: accessing private variable for testing purpose
+    const client: Client = newWrapper.instance().client;
+    expect(client.getCapabilities).toEqual(mockGetCapabilities);
+    expect(client.share).toEqual(mockShare);
   });
 
   describe('handleCopyLink', () => {
@@ -119,11 +167,9 @@ describe('ShareDialogContainer', () => {
   });
 
   describe('handleSubmitShare', () => {
-    it('should call share function from the shareServiceClient', () => {
-      wrapper.instance().shareServiceClient.share = jest
-        .fn()
-        .mockResolvedValue({});
-      const mockShare = wrapper.instance().shareServiceClient.share;
+    it('should call share function from this.client', () => {
+      wrapper.instance().client.share = jest.fn().mockResolvedValue({});
+      const mockShare = wrapper.instance().client.share;
       wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
@@ -156,7 +202,7 @@ describe('ShareDialogContainer', () => {
       mockOriginTracingFactory.mockReset();
 
       const mockShareResponse = {};
-      wrapper.instance().shareServiceClient.share = jest
+      wrapper.instance().client.share = jest
         .fn()
         .mockResolvedValue(mockShareResponse);
       wrapper.instance().forceUpdate();
@@ -172,9 +218,7 @@ describe('ShareDialogContainer', () => {
     });
 
     it('should return a Promise Rejection if share is failed', async () => {
-      wrapper.instance().shareServiceClient.share = jest
-        .fn()
-        .mockRejectedValue('error');
+      wrapper.instance().client.share = jest.fn().mockRejectedValue('error');
       wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
