@@ -1,14 +1,14 @@
 import { colors } from '@atlaskit/theme';
 import * as React from 'react';
 import { User } from '../types';
+import { AvatarItemOption, TextWrapper } from './AvatarItemOption';
 import { HighlightText } from './HighlightText';
+import { SizeableAvatar } from './SizeableAvatar';
 import { hasValue } from './utils';
-import { CommonOption } from './CommonOption';
-import { OptionTextWrapper } from './OptionTextWrapper';
 
 export type UserOptionProps = {
   user: User;
-  status: string;
+  status?: string;
   isSelected: boolean;
 };
 
@@ -19,57 +19,62 @@ export class UserOption extends React.PureComponent<UserOptionProps> {
     } = this.props;
 
     const result = [
-      <OptionTextWrapper
+      <TextWrapper
         key="name"
         color={this.props.isSelected ? colors.N0 : colors.N800}
       >
         <HighlightText highlights={highlight && highlight.name}>
           {name}
         </HighlightText>
-      </OptionTextWrapper>,
+      </TextWrapper>,
     ];
     if (hasValue(publicName) && name.trim() !== publicName.trim()) {
       result.push(
         <React.Fragment key="publicName">
           {' '}
-          <OptionTextWrapper
-            color={this.props.isSelected ? colors.N50 : colors.N200}
-          >
+          <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
             (
             <HighlightText highlights={highlight && highlight.publicName}>
               {publicName}
             </HighlightText>
             )
-          </OptionTextWrapper>
+          </TextWrapper>
         </React.Fragment>,
       );
     }
     return result;
   };
 
-  renderByline = () =>
+  renderSecondaryText = () =>
     this.props.user.byline ? (
-      <OptionTextWrapper
-        color={this.props.isSelected ? colors.N50 : colors.N200}
-      >
+      <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
         {this.props.user.byline}
-      </OptionTextWrapper>
+      </TextWrapper>
     ) : (
       undefined
     );
 
-  render() {
+  private renderAvatar = () => {
     const {
-      user: { name, avatarUrl },
+      user: { avatarUrl, name },
       status,
     } = this.props;
     return (
-      <CommonOption
-        name={name}
-        avatarUrl={avatarUrl}
+      <SizeableAvatar
+        appearance="big"
+        src={avatarUrl}
         presence={status}
-        byline={this.renderByline()}
+        name={name}
+      />
+    );
+  };
+
+  render() {
+    return (
+      <AvatarItemOption
+        avatar={this.renderAvatar()}
         primaryText={this.getPrimaryText()}
+        secondaryText={this.renderSecondaryText()}
       />
     );
   }

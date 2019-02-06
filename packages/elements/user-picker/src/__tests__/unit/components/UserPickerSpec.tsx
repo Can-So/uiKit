@@ -2,11 +2,16 @@ jest.mock('../../../components/styles', () => ({
   getStyles: jest.fn(),
 }));
 
+jest.mock('../../../components/creatable', () => ({
+  getCreatableProps: jest.fn(),
+}));
+
 import { AnalyticsListener } from '@atlaskit/analytics-next';
-import Select from '@atlaskit/select';
+import Select, { CreatableSelect } from '@atlaskit/select';
 import { mount, ReactWrapper, shallow } from 'enzyme';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
+import { getCreatableProps } from '../../../components/creatable';
 import { getStyles } from '../../../components/styles';
 import { UserPicker } from '../../../components/UserPicker';
 import {
@@ -15,11 +20,11 @@ import {
 } from '../../../components/utils';
 import {
   Option,
-  User,
   OptionData,
+  Team,
+  User,
   UserPickerProps,
   UserType,
-  Team,
 } from '../../../types';
 
 describe('UserPicker', () => {
@@ -42,6 +47,10 @@ describe('UserPicker', () => {
   ];
 
   const userOptions: Option[] = optionToSelectableOptions(options);
+
+  afterEach(() => {
+    (getCreatableProps as jest.Mock).mockClear();
+  });
 
   it('should render Select', () => {
     const component = shallowUserPicker({ options });
@@ -857,6 +866,16 @@ describe('UserPicker', () => {
           );
         });
       });
+    });
+  });
+
+  describe('allowEmail', () => {
+    it('should use CreatableSelect', () => {
+      const component = shallowUserPicker({ allowEmail: true });
+      const select = component.find(CreatableSelect);
+      expect(select).toHaveLength(1);
+      expect(getCreatableProps).toHaveBeenCalledTimes(1);
+      expect(getCreatableProps).toHaveBeenCalledWith(true);
     });
   });
 });
