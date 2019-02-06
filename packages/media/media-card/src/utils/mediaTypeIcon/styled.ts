@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { HTMLAttributes, ComponentClass } from 'react';
 import { colors } from '@atlaskit/theme';
 
-const color: any = {
+const typeToColorMap: any = {
   image: colors.Y200,
   audio: colors.P200,
   video: '#ff7143',
@@ -21,5 +21,6 @@ export const IconWrapper: ComponentClass<
   HTMLAttributes<{}> & IconWrapperProps
 > = styled.div`
   display: inline-flex;
-  color: ${({ type }: IconWrapperProps) => color[type] || color.unknown};
+  color: ${({ type }: IconWrapperProps) =>
+    typeToColorMap[type] || typeToColorMap.unknown};
 `;
