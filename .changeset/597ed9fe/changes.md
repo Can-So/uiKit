@@ -1,1 +1,0 @@
-- Added test to make sure the props are passed down to hidden input
