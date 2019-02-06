@@ -19,14 +19,6 @@
     "id": "node_modules.main",
     "name": "node_modules [main]",
     "stats": {
-      "size": 31241,
-      "gzipSize": 7417
-    }
-  },
-  {
-    "id": "node_modules.async",
-    "name": "node_modules [async]",
-    "stats": {
       "size": 133560,
       "gzipSize": 37106
     }
