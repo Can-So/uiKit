@@ -88,7 +88,7 @@ const mentionsPlugin = (
             typeAheadState: TypeAheadPluginState;
             mentionState: MentionPluginState;
           }) =>
-            !mentionState.provider ? null : (
+            !mentionState.mentionProvider ? null : (
               <ToolbarMention
                 editorView={editorView}
                 isDisabled={disabled || !typeAheadState.isAllowed}
@@ -130,8 +130,12 @@ const mentionsPlugin = (
           const mentions =
             !prevActive && queryChanged ? [] : pluginState.mentions || [];
 
-          if (queryChanged && pluginState.provider) {
-            pluginState.provider.filter(query || '');
+          const mentionContext = {
+            ...pluginState.contextIdentifierProvider,
+            sessionId,
+          };
+          if (queryChanged && pluginState.mentionProvider) {
+            pluginState.mentionProvider.filter(query || '', mentionContext);
           }
 
           return mentions.map(mention => ({
@@ -149,15 +153,22 @@ const mentionsPlugin = (
         },
         selectItem(state, item, insert, { mode }) {
           const pluginState = getMentionPluginState(state);
-          const { provider } = pluginState;
+          const { mentionProvider } = pluginState;
           const { id, name, nickname, accessLevel, userType } = item.mention;
           const renderName = nickname ? nickname : name;
           const typeAheadPluginState = typeAheadPluginKey.getState(
             state,
           ) as TypeAheadPluginState;
 
-          if (provider) {
-            provider.recordMentionSelection(item.mention);
+          const mentionContext = {
+            ...pluginState.contextIdentifierProvider,
+            sessionId,
+          };
+          if (mentionProvider) {
+            mentionProvider.recordMentionSelection(
+              item.mention,
+              mentionContext,
+            );
           }
 
           const pickerElapsedTime = typeAheadPluginState.queryStarted
@@ -173,7 +184,7 @@ const mentionsPlugin = (
               mentionee: id,
               duration: pickerElapsedTime,
               queryLength: (typeAheadPluginState.query || '').length,
-              ...(pluginState.contextIdentifier as any),
+              ...(pluginState.contextIdentifierProvider as any),
             },
           );
 
@@ -288,8 +299,8 @@ export function getMentionPluginState(state) {
 }
 
 export type MentionPluginState = {
-  provider?: MentionProvider;
-  contextIdentifier?: ContextIdentifierProvider;
+  mentionProvider?: MentionProvider;
+  contextIdentifierProvider?: ContextIdentifierProvider;
   mentions?: Array<MentionDescription>;
 };
 
@@ -320,7 +331,7 @@ function mentionPluginFactory(
           case ACTIONS.SET_PROVIDER:
             newPluginState = {
               ...pluginState,
-              provider: params.provider,
+              mentionProvider: params.provider,
             };
             dispatch(mentionPluginKey, newPluginState);
             return newPluginState;
@@ -336,7 +347,7 @@ function mentionPluginFactory(
           case ACTIONS.SET_CONTEXT:
             newPluginState = {
               ...pluginState,
-              contextIdentifier: params.context,
+              contextIdentifierProvider: params.context,
             };
             dispatch(mentionPluginKey, newPluginState);
             return newPluginState;

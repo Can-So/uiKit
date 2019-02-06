@@ -12,6 +12,11 @@ describe('mentionTypeahead', () => {
   const createEditor = createEditorFactory();
   const sessionIdRegex = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
   const expectedActionSubject = 'mentionTypeahead';
+  const contextIdentifiers = {
+    containerId: 'container-id',
+    objectId: 'object-id',
+    childObjectId: 'child-object-id',
+  };
 
   type TestDependencies = {
     editorView: EditorView;
@@ -68,11 +73,13 @@ describe('mentionTypeahead', () => {
    */
   const editor = async (options?) => {
     const mentionProvider = Promise.resolve(new MockMentionResource({}));
+    const contextIdentifierProvider = Promise.resolve(contextIdentifiers);
     const { editorView, sel } = createEditor({
       doc: doc(p('{<>}')),
-      editorProps: { mentionProvider },
+      editorProps: { mentionProvider, contextIdentifierProvider },
       providerFactory: ProviderFactory.create({
         mentionProvider,
+        contextIdentifierProvider,
       }),
       ...options,
     });
@@ -80,8 +87,9 @@ describe('mentionTypeahead', () => {
     return {
       editorView,
       sel,
-      // Ensures the mention provider is resolved before inserting in the editor
+      // Ensures providers are resolved before using the editor
       mentionProvider: await mentionProvider,
+      contextIdentifierProvider: await contextIdentifierProvider,
     };
   };
 
@@ -212,7 +220,7 @@ describe('mentionTypeahead', () => {
               queryLength: 0,
               spaceInQuery: false,
               userIds: expect.any(Array),
-              sessionId: expect.any(String),
+              sessionId: expect.stringMatching(sessionIdRegex),
             }),
           }),
         );
@@ -236,7 +244,7 @@ describe('mentionTypeahead', () => {
               queryLength: 3,
               spaceInQuery: false,
               userIds: expect.any(Array),
-              sessionId: expect.any(String),
+              sessionId: expect.stringMatching(sessionIdRegex),
             }),
           }),
         );
@@ -247,6 +255,40 @@ describe('mentionTypeahead', () => {
   });
 
   describe('mentionProvider', () => {
+    describe('when entering a query', () => {
+      it(
+        'should filter results',
+        withMentionQuery('', ({ mentionProvider, editorView, sel }) => {
+          const filterSpy = jest.spyOn(mentionProvider, 'filter');
+
+          insertText(editorView, 'all', sel);
+
+          expect(filterSpy).toHaveBeenCalledTimes(3);
+          expect(filterSpy).toHaveBeenCalledWith(
+            'a',
+            expect.objectContaining({
+              sessionId: expect.stringMatching(sessionIdRegex),
+              ...contextIdentifiers,
+            }),
+          );
+          expect(filterSpy).toHaveBeenCalledWith(
+            'al',
+            expect.objectContaining({
+              sessionId: expect.stringMatching(sessionIdRegex),
+              ...contextIdentifiers,
+            }),
+          );
+          expect(filterSpy).toHaveBeenLastCalledWith(
+            'all',
+            expect.objectContaining({
+              sessionId: expect.stringMatching(sessionIdRegex),
+              ...contextIdentifiers,
+            }),
+          );
+        }),
+      );
+    });
+
     describe('when selecting a user', () => {
       it(
         'should record the selection',
@@ -262,6 +304,10 @@ describe('mentionTypeahead', () => {
           expect(recordMentionSelectionSpy).toHaveBeenCalledWith(
             expect.objectContaining({
               id: 'here',
+            }),
+            expect.objectContaining({
+              sessionId: expect.stringMatching(sessionIdRegex),
+              ...contextIdentifiers,
             }),
           );
         }),
