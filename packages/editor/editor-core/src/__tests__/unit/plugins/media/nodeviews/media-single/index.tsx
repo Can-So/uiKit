@@ -212,7 +212,7 @@ describe('nodeviews/mediaSingle', () => {
         />,
       );
 
-      (wrapper.instance() as MediaSingle).imageDimensionsMissing = () =>
+      (wrapper.instance() as MediaSingle).getRemoteDimensions = () =>
         Promise.resolve({
           id: 'foo',
           height: 100,
