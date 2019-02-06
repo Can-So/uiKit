@@ -1,5 +1,10 @@
 # @atlaskit/media-viewer
 
+## 35.1.2
+- [patch] [05d5d28e5d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05d5d28e5d):
+
+  - cleanup MVNG analytics as part of MS-1184
+
 ## 35.1.1
 - [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
 
