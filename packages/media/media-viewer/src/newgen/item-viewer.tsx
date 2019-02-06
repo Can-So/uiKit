@@ -19,10 +19,9 @@ import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import {
   ViewerLoadPayload,
-  itemViewerErrorEvent,
-  itemViewerCommencedEvent,
-  itemViewerLoadedEvent,
-  mediaViewerModalScreenEvent,
+  mediaFileCommencedEvent,
+  mediaFileLoadSucceededEvent,
+  mediaFileLoadFailedEvent,
 } from './analytics/item-viewer';
 import { channel } from './analytics/index';
 import {
@@ -81,10 +80,10 @@ export class ItemViewerBase extends React.Component<Props, State> {
     item.whenSuccessful(file => {
       if (file.status === 'processed') {
         if (payload.status === 'success') {
-          this.fireAnalytics(itemViewerLoadedEvent(file));
+          this.fireAnalytics(mediaFileLoadSucceededEvent(file));
         } else if (payload.status === 'error') {
           this.fireAnalytics(
-            itemViewerErrorEvent(
+            mediaFileLoadFailedEvent(
               id,
               payload.errorMessage || 'Viewer error',
               file,
@@ -193,8 +192,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
 
   private init(props: Props) {
     const { context, identifier } = props;
-    this.fireAnalytics(itemViewerCommencedEvent(identifier.id));
-    this.fireAnalytics(mediaViewerModalScreenEvent(identifier.id));
+    this.fireAnalytics(mediaFileCommencedEvent(identifier.id));
     this.subscription = context.file
       .getFileState(identifier.id, {
         collectionName: identifier.collectionName,
@@ -210,7 +208,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
             item: Outcome.failed(createError('metadataFailed', err)),
           });
           this.fireAnalytics(
-            itemViewerErrorEvent(identifier.id, 'Metadata fetching failed'),
+            mediaFileLoadFailedEvent(identifier.id, 'Metadata fetching failed'),
           );
         },
       });
