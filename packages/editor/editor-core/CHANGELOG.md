@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.3.0
+- [minor] [0f3f9f0992](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f3f9f0992):
+
+  - Fix context identifiers not being passed to mention provider's calls. MentionProvider interface was updated to include the optional contextIdentifier parameter in filter and recordMentionSelection methods.
+
 ## 98.2.6
 - [patch] [3305886b5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3305886b5a):
 

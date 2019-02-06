@@ -1,7 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/editor-core", "type": "minor" },
-    { "name": "@atlaskit/mention", "type": "minor" }
-  ],
-  "dependents": []
-}
