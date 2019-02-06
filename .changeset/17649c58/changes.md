@@ -1,1 +1,0 @@
-- FS-3528 override tag focus colour to blue
