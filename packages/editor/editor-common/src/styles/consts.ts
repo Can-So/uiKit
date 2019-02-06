@@ -22,6 +22,8 @@ const {
   R300,
   R50,
   R75,
+  DN50,
+  DN70,
 } = colors;
 
 export const akEditorCodeFontFamily = codeFontFamily();
@@ -54,7 +56,9 @@ export const akEditorFloatingOverlapPanelZIndex =
 export const akEditorMentionSelected = N100;
 export const akEditorTableToolbarSize = 11;
 export const akEditorTableBorder = N50;
+export const akEditorTableBorderDark = DN70;
 export const akEditorTableToolbar = N20;
+export const akEditorTableToolbarDark = DN50;
 export const akEditorTableFloatingControls = N20;
 export const akEditorTableCellSelected = B75;
 export const akEditorTableToolbarSelected = B100;
