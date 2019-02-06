@@ -246,7 +246,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
       └──────────┘
 
       This looks familiar, and you might want to try what we did before and apply 75% not 100%.
-      Unfortunately this will make it even worth. If you do calculation you will find out that
+      Unfortunately this will make it even worse. If you do calculation you will find out that
       final result will be 75x56 image in 100x200 container. For this and one more specific
       variables state we need to use original imgRatio for percent size. In this case it's 1.333, so
       134%
