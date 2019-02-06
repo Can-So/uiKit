@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.2.6
+- [patch] [3305886b5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3305886b5a):
+
+  - ED-6167: Handle extraneous column widths
+
 ## 98.2.5
 - [patch] [b11848ebf8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b11848ebf8):
 
