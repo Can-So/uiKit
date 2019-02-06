@@ -141,7 +141,7 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
       theme,
       forwardedRef,
       defaultValue,
-      ...props
+      ...rest
     } = this.props;
 
     const { isFocused } = this.state;
@@ -166,7 +166,6 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
                   {...tokens}
                 >
                   <TextareaElement
-                    {...props}
                     forwardedRef={forwardedRef}
                     resize={resize}
                     disabled={isDisabled}
@@ -174,6 +173,7 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
                     required={isRequired}
                     onFocus={this.handleOnFocus}
                     onBlur={this.handleOnBlur}
+                    {...rest}
                   />
                 </TextAreaWrapper>
               )}

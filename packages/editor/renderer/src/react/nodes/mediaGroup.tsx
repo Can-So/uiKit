@@ -58,6 +58,7 @@ export default class MediaGroup extends PureComponent<
     return React.cloneElement(child, {
       resizeMode: 'stretchy-fit',
       cardDimensions: defaultImageCardDimensions,
+      useInlinePlayer: false,
     } as MediaProps);
   }
 
@@ -72,6 +73,7 @@ export default class MediaGroup extends PureComponent<
     surroundingItems: Identifier[],
   ) {
     return React.cloneElement(child, {
+      useInlinePlayer: false,
       eventHandlers: {
         ...child.props.eventHandlers,
         media: {

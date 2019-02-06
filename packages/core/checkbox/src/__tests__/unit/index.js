@@ -84,6 +84,12 @@ describe(name, () => {
       cb.setProps({ isIndeterminate: true });
       expect(element.indeterminate).toBe(true);
     });
+    it('should pass all the extra props passed down to hidden checkbox', () => {
+      const cb = mountCheckbox({
+        'data-foo': 'checkbox-bar',
+      });
+      expect(cb.find('input').prop('data-foo')).toBe('checkbox-bar');
+    });
   });
   describe('<Checkbox defaultChecked/>', () => {
     it('should render defaultChecked', () => {

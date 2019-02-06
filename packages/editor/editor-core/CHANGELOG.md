@@ -1,5 +1,15 @@
 # @atlaskit/editor-core
 
+## 98.2.5
+- [patch] [b11848ebf8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b11848ebf8):
+
+  - [ED-6165] Fix table cell options chevron overflow.
+
+## 98.2.4
+- [patch] [65b73cc466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65b73cc466):
+
+  - Code split media-picker: make MediaPicker factory async and make editor use it
+
 ## 98.2.3
 - [patch] [14fe1381ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14fe1381ba):
 

@@ -1,5 +1,10 @@
 # @atlaskit/radio
 
+## 0.4.7
+- [patch] [942e0aec04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/942e0aec04):
+
+  - Added test to make sure props are passed hidden input
+
 ## 0.4.6
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

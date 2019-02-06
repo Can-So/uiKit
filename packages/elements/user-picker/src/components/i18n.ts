@@ -37,4 +37,9 @@ export const messages = defineMessages({
     description:
       'Number of members in a team exceeds 50 and whether it includes the current user',
   },
+  addEmail: {
+    id: 'fabric.elements.user-picker.email.add',
+    defaultMessage: 'Add user',
+    description: 'Byline for email option.',
+  },
 });

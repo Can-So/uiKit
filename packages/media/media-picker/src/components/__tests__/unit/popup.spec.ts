@@ -1,7 +1,8 @@
 jest.mock('react-dom');
 import { ContextFactory } from '@atlaskit/media-core';
 import { render } from 'react-dom';
-import { Popup, PopupConfig } from '../../popup';
+import { PopupConfig } from '../../types';
+import { PopupImpl } from '../../popup';
 import { UploadParams } from '../../..';
 
 describe('MediaPickerPopup', () => {
@@ -31,7 +32,7 @@ describe('MediaPickerPopup', () => {
 
   describe('constructor', () => {
     it('sets uploadParams to the default when none are supplied', () => {
-      const mediaPicker = new Popup(context, popupConfig);
+      const mediaPicker = new PopupImpl(context, popupConfig);
 
       const expectedUploadParams: UploadParams = {
         collection: '',
@@ -45,7 +46,7 @@ describe('MediaPickerPopup', () => {
       const newUploadParams: UploadParams = {
         collection: 'hello-world',
       };
-      const mediaPicker = new Popup(context, {
+      const mediaPicker = new PopupImpl(context, {
         ...popupConfig,
         uploadParams: newUploadParams,
       });
@@ -63,7 +64,7 @@ describe('MediaPickerPopup', () => {
       const collection = 'some-collection-name';
       const newUploadParams: UploadParams = { collection };
 
-      const mediaPicker = new Popup(context, popupConfig);
+      const mediaPicker = new PopupImpl(context, popupConfig);
       mediaPicker.setUploadParams(newUploadParams);
 
       expect(
@@ -74,7 +75,7 @@ describe('MediaPickerPopup', () => {
 
   describe('hide', () => {
     it('fires a closed event when the popup is hidden', () => {
-      const mediaPicker = new Popup(context, popupConfig);
+      const mediaPicker = new PopupImpl(context, popupConfig);
       const emitSpy = jest.fn();
 
       mediaPicker.emit = emitSpy;
@@ -87,7 +88,7 @@ describe('MediaPickerPopup', () => {
 
   describe('render', () => {
     it('should render <App /> with the right properties', () => {
-      const mediaPicker = new Popup(context, popupConfig) as any;
+      const mediaPicker = new PopupImpl(context, popupConfig) as any;
 
       expect((render as jest.Mock).mock.calls[0][0].props).toEqual({
         proxyReactContext: undefined,
