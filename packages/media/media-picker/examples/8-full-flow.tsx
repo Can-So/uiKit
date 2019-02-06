@@ -105,71 +105,15 @@ export default class Example extends React.Component<{}, State> {
 
       return (
         <div key={key} style={{ display: 'inline-block', margin: '10px' }}>
-          <table>
-            <thead>
-              <tr>
-                <th>Resize Mode</th>
-                <th>Landscapy parent</th>
-                <th>Portraity parent</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Fit</th>
-                <td>
-                  <Card
-                    resizeMode="fit"
-                    context={context}
-                    identifier={identifier}
-                    dimensions={{
-                      width: 200,
-                      height: 100,
-                    }}
-                    onClick={this.onCardClick(identifier.occurrenceKey)}
-                  />
-                </td>
-                <td>
-                  <Card
-                    resizeMode="fit"
-                    context={context}
-                    identifier={identifier}
-                    dimensions={{
-                      width: 100,
-                      height: 200,
-                    }}
-                    onClick={this.onCardClick(identifier.occurrenceKey)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Cover</th>
-                <td>
-                  <Card
-                    resizeMode="crop"
-                    context={context}
-                    identifier={identifier}
-                    dimensions={{
-                      width: 200,
-                      height: 100,
-                    }}
-                    onClick={this.onCardClick(identifier.occurrenceKey)}
-                  />
-                </td>
-                <td>
-                  <Card
-                    resizeMode="crop"
-                    context={context}
-                    identifier={identifier}
-                    dimensions={{
-                      width: 100,
-                      height: 200,
-                    }}
-                    onClick={this.onCardClick(identifier.occurrenceKey)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <Card
+            context={context}
+            identifier={identifier}
+            dimensions={{
+              width: 200,
+              height: 200,
+            }}
+            onClick={this.onCardClick(identifier.occurrenceKey)}
+          />
         </div>
       );
     });
