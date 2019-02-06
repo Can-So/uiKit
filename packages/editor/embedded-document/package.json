@@ -19,6 +19,7 @@
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/button": "^10.0.4",
+    "@atlaskit/editor-common": "^31.0.2",
     "@atlaskit/editor-core": "^98.0.0",
     "@atlaskit/renderer": "^38.0.0",
     "@atlaskit/theme": "^7.0.0",
