@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@atlaskit/avatar-group", "type": "patch" }],
+  "dependents": []
+}

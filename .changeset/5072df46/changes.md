@@ -1,0 +1,1 @@
+- Stopping href from being passed down to Avatar in DropdownMenu rendered in AvatarGroup
