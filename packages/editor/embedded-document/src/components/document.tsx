@@ -79,7 +79,7 @@ export default class Document extends Component<Props> {
       default:
         const { body = emptyDoc } = doc || {};
 
-        let dataProviders: ProviderFactory | undefined = undefined;
+        let dataProviders: ProviderFactory | undefined;
 
         if (editorProps) {
           const { mentionProvider, emojiProvider, mediaProvider } = editorProps;
