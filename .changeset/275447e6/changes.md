@@ -1,1 +1,0 @@
-- FS-3357 add email to the user picker
