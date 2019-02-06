@@ -148,6 +148,13 @@ describe('TextArea input focus', () => {
   });
 });
 
+describe('props', () => {
+  it('should pass all the extra props passed down to hidden input', () => {
+    const wrapper = mount(<TextArea data-foo="text-area-bar" />);
+    expect(wrapper.find('textarea').prop('data-foo')).toBe('text-area-bar');
+  });
+});
+
 describe('TextAreaWithAnalytics', () => {
   beforeEach(() => {
     jest.spyOn(global.console, 'warn');

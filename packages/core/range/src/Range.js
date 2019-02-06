@@ -97,7 +97,6 @@ export default class Slider extends Component<Props, State> {
         <Theme.Consumer>
           {computedTheme => (
             <Input
-              {...rest}
               {...computedTheme}
               type="range"
               value={value}
@@ -107,6 +106,7 @@ export default class Slider extends Component<Props, State> {
               innerRef={r => {
                 this.range = r;
               }}
+              {...rest}
             />
           )}
         </Theme.Consumer>

@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/range", "type": "patch" },
+    { "name": "@atlaskit/textarea", "type": "patch" }
+  ],
+  "dependents": []
+}
