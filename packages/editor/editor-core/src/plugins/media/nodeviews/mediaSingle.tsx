@@ -65,6 +65,43 @@ export default class MediaSingleNode extends Component<
     }
   }
 
+  async componentDidMount() {
+    const updatedDimensions = await this.imageDimensionsMissing();
+
+    if (updatedDimensions) {
+      this.mediaPluginState.updateMediaNodeAttrs(
+        updatedDimensions.id,
+        {
+          height: updatedDimensions.height,
+          width: updatedDimensions.width,
+        },
+        true,
+      );
+    }
+  }
+
+  async imageDimensionsMissing() {
+    const mediaProvider = await this.props.mediaProvider;
+    if (!mediaProvider || !this.props.node.firstChild) {
+      return false;
+    }
+    const viewContext = await mediaProvider.viewContext;
+    const { id, collection, height, width } = this.props.node.firstChild.attrs;
+    const state = await viewContext.getImageMetadata(id, {
+      collection,
+    });
+
+    if (!state || !state.original || (height && width)) {
+      return false;
+    }
+
+    return {
+      id,
+      height: state.original.height,
+      width: state.original.width,
+    };
+  }
+
   private onExternalImageLoaded = ({ width, height }) => {
     this.setState(
       {
