@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.4.0
+- [minor] [1bc4b69b08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1bc4b69b08):
+
+  - ED-6171 Adding feature flag for Analytics GAS V3
+
 ## 98.3.0
 - [minor] [0f3f9f0992](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f3f9f0992):
 
