@@ -1,7 +1,10 @@
 import { GraphqlResponse, SearchResult } from '../src/api/PeopleSearchClient';
 import { RecentItemsResponse } from '../src/api/RecentSearchClient';
 import { QuickNavResult } from '../src/api/ConfluenceClient';
-import { CrossProductSearchResponse } from '../src/api/CrossProductSearchClient';
+import {
+  CrossProductSearchResponse,
+  CrossProductExperimentResponse,
+} from '../src/api/CrossProductSearchClient';
 import {
   Scope,
   ConfluenceItem,
@@ -397,6 +400,47 @@ export function makeCrossProductSearchData(
       ],
     };
   };
+}
+
+export function makeCrossProductExperimentData(): (
+  scopeNames: string[],
+) => CrossProductExperimentResponse {
+  const abTest = {
+    experimentId: 'experiment-1',
+    controlId: 'control-id',
+    abTestId: 'abtest-id',
+  };
+
+  const allScopes = [
+    {
+      id: Scope.ConfluencePageBlog,
+      abTest,
+    },
+    {
+      id: Scope.ConfluencePageBlogAttachment,
+      abTest,
+    },
+    {
+      id: Scope.JiraIssue,
+      abTest,
+    },
+    {
+      id: Scope.JiraBoardProjectFilter,
+      abTest,
+    },
+    {
+      id: Scope.ConfluenceSpace,
+      abTest,
+    },
+    {
+      id: Scope.People,
+      abTest,
+    },
+  ];
+
+  return (scopeNames: string[]) => ({
+    scopes: allScopes.filter(scope => scopeNames.includes(scope.id)),
+  });
 }
 
 export function makePeopleSearchData(
