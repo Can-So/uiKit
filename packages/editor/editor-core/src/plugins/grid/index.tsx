@@ -19,6 +19,8 @@ import { EventDispatcher, createDispatch } from '../../event-dispatcher';
 export const stateKey = new PluginKey('gridPlugin');
 export const GRID_SIZE = 12;
 
+export type Highlights = Array<'wide' | 'full-width' | number>;
+
 export const createDisplayGrid = (eventDispatcher: EventDispatcher) => {
   const dispatch = createDispatch(eventDispatcher);
   return (
@@ -41,7 +43,7 @@ type Side = 'left' | 'right';
 const sides: Side[] = ['left', 'right'];
 
 const overflowHighlight = (
-  highlights: number[],
+  highlights: Highlights,
   side: Side,
   start: number,
   size?: number,
@@ -50,8 +52,12 @@ const overflowHighlight = (
     return false;
   }
 
-  const minHighlight = highlights.reduce((prev, cur) => Math.min(prev, cur));
-  const maxHighlight = highlights.reduce((prev, cur) => Math.max(prev, cur));
+  const minHighlight = highlights.reduce((prev, cur) =>
+    Math.min(prev as any, cur as any),
+  );
+  const maxHighlight = highlights.reduce((prev, cur) =>
+    Math.max(prev as any, cur as any),
+  );
 
   if (side === 'left') {
     return (
@@ -69,10 +75,10 @@ const overflowHighlight = (
 };
 
 const gutterGridLines = (
-  appearance,
-  editorMaxWidth,
-  editorWidth,
-  highlights,
+  appearance: EditorAppearance,
+  editorMaxWidth: number,
+  editorWidth: number,
+  highlights: Highlights,
 ): JSX.Element[] => {
   const gridLines: JSX.Element[] = [];
   if (appearance !== 'full-page') {
@@ -112,7 +118,7 @@ const gutterGridLines = (
   return gridLines;
 };
 
-const lineLengthGridLines = highlights => {
+const lineLengthGridLines = (highlights: Highlights) => {
   const gridLines: JSX.Element[] = [];
   const gridSpacing = 100 / GRID_SIZE;
 

@@ -7,7 +7,7 @@ import {
   createEditorFactory,
   mountWithIntl,
 } from '@atlaskit/editor-test-helpers';
-import { analyticsService } from '../../../../../analytics';
+import { analyticsService, AnalyticsHandler } from '../../../../../analytics';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import {
   TextFormattingState,
@@ -56,8 +56,8 @@ describe('ToolbarTextFormatting', () => {
   });
 
   describe('analytics', () => {
-    let trackEvent;
-    let toolbarOption;
+    let trackEvent: AnalyticsHandler;
+    let toolbarOption: ReactWrapper;
 
     function clickItalicButton(wrapper: ReactWrapper): void {
       wrapper

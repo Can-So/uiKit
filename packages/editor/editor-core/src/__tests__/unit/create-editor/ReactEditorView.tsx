@@ -384,7 +384,7 @@ describe(name, () => {
     });
 
     it('should call destroy() on plugin states when it gets unmounted', () => {
-      let spies;
+      let spies: Array<jest.SpyInstance> = [];
       const mediaProvider = storyMediaProviderFactory({
         includeUserAuthProvider: true,
       });
@@ -457,7 +457,11 @@ describe(name, () => {
         );
 
         // Force a re-mount of the editor-view by changing the React tree
-        wrapper.setProps({ render: ({ editor }) => <div>{editor}</div> });
+        wrapper.setProps({
+          render: ({ editor }: { editor: React.ReactChild }) => (
+            <div>{editor}</div>
+          ),
+        });
 
         expect(handleEditorDestroyed).toHaveBeenCalledTimes(1);
         expect(handleEditorDestroyed).toHaveBeenCalledWith({
@@ -475,7 +479,7 @@ describe(name, () => {
       });
 
       it('should call destroy on the old EditorView', () => {
-        let editorViewDestroy;
+        let editorViewDestroy: jest.SpyInstance | undefined;
         const wrapper = mountWithIntl(
           <ReactEditorView
             editorProps={{}}
@@ -492,7 +496,11 @@ describe(name, () => {
         );
 
         // Force a re-mount of the editor-view by changing the React tree
-        wrapper.setProps({ render: ({ editor }) => <div>{editor}</div> });
+        wrapper.setProps({
+          render: ({ editor }: { editor: React.ReactChild }) => (
+            <div>{editor}</div>
+          ),
+        });
 
         expect(editorViewDestroy).toHaveBeenCalled();
       });
@@ -515,14 +523,18 @@ describe(name, () => {
         );
 
         // Force a re-mount of the editor-view by changing the React tree
-        wrapper.setProps({ render: ({ editor }) => <div>{editor}</div> });
+        wrapper.setProps({
+          render: ({ editor }: { editor: React.ReactChild }) => (
+            <div>{editor}</div>
+          ),
+        });
 
         expect(newEditorView).toBeInstanceOf(EditorView);
         expect(oldEditorView).not.toBe(newEditorView);
       });
 
       it('should not re-create the event dispatcher', () => {
-        let oldEventDispatcher;
+        let oldEventDispatcher: EventDispatcher | undefined;
         let eventDispatcherDestroySpy;
         const wrapper = mountWithIntl(
           <ReactEditorView
@@ -544,7 +556,11 @@ describe(name, () => {
         );
 
         // Force a re-mount of the editor-view by changing the React tree
-        wrapper.setProps({ render: ({ editor }) => <div>{editor}</div> });
+        wrapper.setProps({
+          render: ({ editor }: { editor: React.ReactChild }) => (
+            <div>{editor}</div>
+          ),
+        });
 
         expect(oldEventDispatcher).toBe(
           (wrapper.instance() as ReactEditorView).eventDispatcher,

@@ -62,8 +62,8 @@ describe('TableView', () => {
     const handleRefMock = sinon
       // @ts-ignore
       .stub(TableView.prototype, '_handleRef')
-      .callsFake(ref => {
-        window.setTimeout(ref => handleRefInnerMock.call(this, ref), 0);
+      .callsFake((ref: HTMLElement) => {
+        window.setTimeout(() => handleRefInnerMock.call(this, ref), 0);
       });
 
     // create the NodeView

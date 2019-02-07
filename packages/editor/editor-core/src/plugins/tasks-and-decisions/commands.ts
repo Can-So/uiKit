@@ -28,6 +28,7 @@ import {
   AnalyticsEventPayload,
   addAnalytics,
   INPUT_METHOD,
+  USER_CONTEXT,
 } from '../analytics';
 import {
   ContextData,
@@ -42,7 +43,9 @@ const getContextData = (
   contextProvider: ContextIdentifierProvider = {} as ContextIdentifierProvider,
 ): ContextData => {
   const { objectId, containerId } = contextProvider;
-  const userContext = objectId ? 'edit' : 'new';
+  const userContext: USER_CONTEXT = objectId
+    ? USER_CONTEXT.EDIT
+    : USER_CONTEXT.NEW;
 
   return {
     objectId,
@@ -62,7 +65,7 @@ const generateAnalyticsPayload = (
 ): AnalyticsEventPayload => {
   let containerId;
   let objectId;
-  let userContext;
+  let userContext: USER_CONTEXT | undefined;
   if (contextData) {
     ({ containerId, objectId, userContext } = contextData);
   }
@@ -113,7 +116,19 @@ export const insertTaskDecision = (
 ): boolean => {
   const { state } = view;
   const { schema } = state;
-  const addAndCreateList = ({ tr, list, item, listLocalId, itemLocalId }) =>
+  const addAndCreateList = ({
+    tr,
+    list,
+    item,
+    listLocalId,
+    itemLocalId,
+  }: {
+    tr: Transaction;
+    list: any;
+    item: any;
+    listLocalId?: string;
+    itemLocalId?: string;
+  }) =>
     createListAtSelection(
       tr,
       list,
@@ -123,7 +138,17 @@ export const insertTaskDecision = (
       listLocalId,
       itemLocalId,
     );
-  const addToList = ({ state, tr, item, itemLocalId }) => {
+  const addToList = ({
+    state,
+    tr,
+    item,
+    itemLocalId,
+  }: {
+    state: EditorState;
+    tr: Transaction;
+    item: any;
+    itemLocalId: string;
+  }) => {
     const { $to } = state.selection;
     const pos = $to.end($to.depth);
     return tr
@@ -200,8 +225,8 @@ export const insertTaskDecisionWithAnalytics = (
           inputMethod,
           itemLocalId,
           listLocalId,
-          itemIdx,
-          listSize,
+          itemIdx || 0,
+          listSize || 0,
         ),
       );
     }

@@ -127,7 +127,7 @@ type InsertActionDecisionAEP = InsertAEP<
     objectAri?: string;
     localId: string;
     listLocalId: string;
-    userContext: USER_CONTEXT.EDIT | USER_CONTEXT.NEW;
+    userContext?: USER_CONTEXT.EDIT | USER_CONTEXT.NEW;
     position: number;
     listSize: number;
   }

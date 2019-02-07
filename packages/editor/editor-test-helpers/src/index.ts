@@ -1,3 +1,4 @@
+export { Refs } from './schema-builder';
 export * from './base64fileconverter';
 export { default as sendKeyToPm } from './send-key-to-pm';
 export { default as chaiPlugin } from './chai';

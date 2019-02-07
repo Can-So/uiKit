@@ -19,11 +19,12 @@ import {
   TextFormattingState,
 } from '../text-formatting/pm-plugins/main';
 import { compose } from '../../utils';
+import { CommandDispatch, Command } from '../../types';
 
 export function handlePasteIntoTaskAndDecision(
   slice: Slice,
-): (state: EditorState, dispatch) => boolean {
-  return (state: EditorState, dispatch: (tr: Transaction) => void): boolean => {
+): (state: EditorState, dispatch: CommandDispatch) => boolean {
+  return (state: EditorState, dispatch: CommandDispatch): boolean => {
     const {
       schema,
       tr: { selection },
@@ -218,27 +219,26 @@ export function handlePastePreservingMarks(
   };
 }
 
-export function handleMacroAutoConvert(
-  text: string,
-  slice: Slice,
-): (state: EditorState, dispatch, view: EditorView) => boolean {
-  return (state: EditorState, dispatch, view: EditorView) => {
+export function handleMacroAutoConvert(text: string, slice: Slice): Command {
+  return (state, dispatch, view) => {
     const macro = runMacroAutoConvert(state, text);
     if (macro) {
       const selection = state.tr.selection;
       const tr = state.tr.replaceSelection(slice);
       const before = tr.mapping.map(selection.from, -1);
 
-      // insert the text or linkified/md-converted clipboard data
-      dispatch(tr);
+      if (dispatch && view) {
+        // insert the text or linkified/md-converted clipboard data
+        dispatch(tr);
 
-      // replace the text with the macro as a separate transaction
-      // so the autoconversion generates 2 undo steps
-      dispatch(
-        closeHistory(view.state.tr)
-          .replaceRangeWith(before, before + slice.size, macro)
-          .scrollIntoView(),
-      );
+        // replace the text with the macro as a separate transaction
+        // so the autoconversion generates 2 undo steps
+        dispatch(
+          closeHistory(view.state.tr)
+            .replaceRangeWith(before, before + slice.size, macro)
+            .scrollIntoView(),
+        );
+      }
     }
     return !!macro;
   };

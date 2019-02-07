@@ -28,7 +28,7 @@ export const FILE_WIDTH = 156;
 
 export type Appearance = 'small' | 'image' | 'horizontal' | 'square';
 
-export interface MediaNodeProps extends ReactNodeProps {
+export interface MediaNodeProps extends ReactNodeProps, ImageLoaderProps {
   getPos: ProsemirrorGetPosHandler;
   view: EditorView;
   node: PMNode;
@@ -64,19 +64,19 @@ export interface MediaNodeState {
   viewContext?: Context;
 }
 
-class MediaNode extends Component<
-  MediaNodeProps & ImageLoaderProps,
-  MediaNodeState
-> {
+class MediaNode extends Component<MediaNodeProps, MediaNodeState> {
   private pluginState: MediaPluginState;
 
-  constructor(props) {
+  constructor(props: MediaNodeProps) {
     super(props);
     const { view } = this.props;
     this.pluginState = mediaStateKey.getState(view.state);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(
+    nextProps: MediaNodeProps & ImageLoaderProps,
+    nextState: MediaNodeState,
+  ) {
     if (
       this.props.selected !== nextProps.selected ||
       this.props.viewContext !== nextProps.viewContext ||

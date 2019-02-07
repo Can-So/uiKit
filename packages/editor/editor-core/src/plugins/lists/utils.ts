@@ -1,7 +1,8 @@
 import { findWrapping } from 'prosemirror-transform';
-import { Schema, ResolvedPos } from 'prosemirror-model';
+import { Schema, ResolvedPos, NodeType } from 'prosemirror-model';
+import { EditorState } from 'prosemirror-state';
 
-export const isWrappingPossible = (nodeType, state) => {
+export const isWrappingPossible = (nodeType: NodeType, state: EditorState) => {
   const { $from, $to } = state.selection;
   const range = $from.blockRange($to);
   if (!range) {

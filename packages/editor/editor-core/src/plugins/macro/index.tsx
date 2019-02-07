@@ -4,6 +4,7 @@ import { MacroProvider } from './types';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { setMacroProvider } from './actions';
 import { Dispatch } from '../../event-dispatcher';
+import { PMPluginFactoryParams } from '../../types';
 
 export * from './types';
 export * from './actions';
@@ -53,7 +54,7 @@ export default {
     return [
       {
         name: 'macro',
-        plugin: ({ dispatch, providerFactory }) =>
+        plugin: ({ dispatch, providerFactory }: PMPluginFactoryParams) =>
           createPlugin(dispatch, providerFactory),
       },
     ];

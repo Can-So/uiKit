@@ -98,7 +98,7 @@ function getBulletListInputRules(schema: Schema): InputRule[] {
 
   asteriskRule.handler = trackAndInvoke(
     'atlassian.editor.format.list.bullet.autoformatting',
-    asteriskRule.handler,
+    asteriskRule.handler as any,
   );
 
   const leafNodeAsteriskRule = defaultCreateInputRule(
@@ -149,7 +149,7 @@ function getOrderedListInputRules(schema: Schema): InputRule[] {
   );
   numberOneRule.handler = trackAndInvoke(
     'atlassian.editor.format.list.numbered.autoformatting',
-    numberOneRule.handler,
+    numberOneRule.handler as any,
   );
 
   const leafNodeNumberOneRule = defaultCreateInputRule(

@@ -35,15 +35,16 @@ import {
   listsPlugin,
 } from '../../../../plugins';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { AnalyticsHandler } from '../../../../analytics';
 
 describe('table keymap', () => {
   const createEditor = createEditorFactory<TablePluginState>();
 
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
-  let trackEvent;
-  let editorView;
+  let trackEvent: AnalyticsHandler;
+  let editorView: EditorView;
 
-  const editor = (doc: any, trackEvent = () => {}) => {
+  const editor = (doc: any, trackEvent: AnalyticsHandler = () => {}) => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
     return createEditor({
       doc,
@@ -57,7 +58,10 @@ describe('table keymap', () => {
     });
   };
 
-  const editorWithPlugins = (doc: any, trackEvent = () => {}) =>
+  const editorWithPlugins = (
+    doc: any,
+    trackEvent: AnalyticsHandler = () => {},
+  ) =>
     createEditor({
       doc,
       editorPlugins: [
@@ -285,7 +289,7 @@ describe('table keymap', () => {
           return;
         }
 
-        if (!pmNodeBuilder[nodeName]) {
+        if (!(pmNodeBuilder as Record<string, any>)[nodeName]) {
           return;
         }
 
@@ -293,7 +297,7 @@ describe('table keymap', () => {
           const { editorView, refs } = editorWithPlugins(
             doc(
               table()(tr(tdEmpty, td({})(p('hello{nextPos}')))),
-              pmNodeBuilder[nodeName],
+              (pmNodeBuilder as Record<string, any>)[nodeName],
             ),
           );
           const { nextPos } = refs;

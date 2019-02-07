@@ -92,13 +92,17 @@ describe('Media PickerFacade', () => {
   pickerTypes.forEach(pickerType => {
     describe(`Picker: ${pickerType}`, () => {
       let facade: PickerFacade;
-      let spies = specificSpies[pickerType];
+      let spies = (specificSpies as Record<PickerType, any>)[pickerType];
 
       beforeEach(async () => {
         Object.keys(spies).forEach(k => spies[k].mockClear());
 
-        function MockPopup(this: any) {
-          Object.keys(spies).forEach(k => (this[k] = spies[k]));
+        class MockPopup {
+          constructor() {
+            (Object.keys(spies) as Array<keyof typeof spies>).forEach(
+              k => ((this as any)[k] = spies[k]),
+            );
+          }
         }
 
         const MediaPickerMock = jest

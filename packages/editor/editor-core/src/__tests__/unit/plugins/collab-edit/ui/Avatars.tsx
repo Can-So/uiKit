@@ -1,5 +1,6 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
+import { EditorView } from 'prosemirror-view';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { doc, p, createEditorFactory } from '@atlaskit/editor-test-helpers';
 
@@ -28,7 +29,7 @@ describe('collab-edit | Avatars', () => {
       providerFactory,
     });
 
-  const setPresence = editorView => {
+  const setPresence = (editorView: EditorView) => {
     editorView.dispatch(
       editorView.state.tr.setMeta('presence', {
         left: [],

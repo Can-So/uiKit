@@ -1,7 +1,13 @@
 import * as React from 'react';
-import { ExtensionHandlers } from '@atlaskit/editor-common';
+import { ExtensionHandlers, ExtensionParams } from '@atlaskit/editor-common';
 
-const FakeExtension = ({ colour, children }) => {
+const FakeExtension = ({
+  colour,
+  children,
+}: {
+  colour: string;
+  children: React.ReactChild;
+}) => {
   return (
     <div
       style={{
@@ -16,11 +22,11 @@ const FakeExtension = ({ colour, children }) => {
   );
 };
 
-const InlineExtension = ({ node }) => {
-  return <FakeExtension colour="green">{node.content}</FakeExtension>;
+const InlineExtension = ({ node }: { node: ExtensionParams<any> }) => {
+  return <FakeExtension colour="green">{node.content as string}</FakeExtension>;
 };
 
-const BlockExtension = ({ node }) => {
+const BlockExtension = ({ node }: { node: ExtensionParams<any> }) => {
   return (
     <FakeExtension colour="black">
       <div style={{ minWidth: 200 }}>{node.content}</div>

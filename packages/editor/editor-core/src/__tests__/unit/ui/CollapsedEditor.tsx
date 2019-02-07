@@ -61,7 +61,7 @@ describe(name, () => {
 
     it('should allow setting a ref on the editor component', () => {
       let editorRef = {};
-      const setRef = ref => {
+      const setRef = (ref: Editor) => {
         editorRef = ref;
       };
       mount(

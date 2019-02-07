@@ -61,7 +61,7 @@ const quickInsertPlugin: EditorPlugin = {
         const defaultSearch = () => find(query, defaultItems);
 
         if (quickInsertState.provider) {
-          return quickInsertState.provider
+          return (quickInsertState.provider as Promise<Array<QuickInsertItem>>)
             .then(items =>
               find(
                 query,
@@ -89,7 +89,7 @@ const quickInsertPlugin: EditorPlugin = {
 
 export default quickInsertPlugin;
 
-const itemsCache = {};
+const itemsCache: Record<string, Array<QuickInsertItem>> = {};
 const processItems = (items: Array<QuickInsertHandler>, intl: InjectedIntl) => {
   if (!itemsCache[intl.locale]) {
     itemsCache[intl.locale] = items.reduce(
@@ -113,7 +113,9 @@ const processItems = (items: Array<QuickInsertHandler>, intl: InjectedIntl) => {
 
 export const pluginKey = new PluginKey('quickInsertPluginKey');
 
-export const setProvider = (provider): Command => (state, dispatch) => {
+export const setProvider = (
+  provider: Promise<Array<QuickInsertItem>>,
+): Command => (state, dispatch) => {
   if (dispatch) {
     dispatch(state.tr.setMeta(pluginKey, provider));
   }

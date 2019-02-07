@@ -46,7 +46,7 @@ function createReplacementRule(
 }
 
 function createReplacementRules(
-  replMap,
+  replMap: any,
   trackingEventName?: string,
 ): Array<InputRule> {
   const rules: Array<InputRule> = [];
@@ -62,7 +62,7 @@ function createReplacementRules(
 // We don't agressively upgrade single quotes to smart quotes because
 // they may clash with an emoji. Only do that when we have a matching
 // single quote, or a contraction.
-function createSingleQuotesRules(trackingEventName): Array<InputRule> {
+function createSingleQuotesRules(trackingEventName: string): Array<InputRule> {
   return [
     // wrapped text
     createInputRule(

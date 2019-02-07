@@ -33,6 +33,13 @@ export const messages = defineMessages({
   },
 });
 
+export type DropdownItem = {
+  content: ReactElement<any>;
+  key: string;
+  value: BlockType;
+  isActive: boolean;
+};
+
 export interface Props {
   isDisabled?: boolean;
   isSmall?: boolean;
@@ -41,7 +48,7 @@ export interface Props {
   popupsMountPoint?: HTMLElement;
   popupsBoundariesElement?: HTMLElement;
   popupsScrollableElement?: HTMLElement;
-  setBlockType: (string) => void;
+  setBlockType: (type: string) => void;
 }
 
 export interface State {
@@ -187,17 +194,12 @@ class ToolbarBlockType extends React.PureComponent<
         });
         return acc;
       },
-      [] as Array<{
-        content: ReactElement<any>;
-        key: string;
-        value: BlockType;
-        isActive: boolean;
-      }>,
+      [] as Array<DropdownItem>,
     );
     return [{ items }];
   };
 
-  private handleSelectBlockType = ({ item }) => {
+  private handleSelectBlockType = ({ item }: { item: DropdownItem }) => {
     const blockType = item.value;
     this.props.setBlockType(blockType.name);
     this.setState({ active: false });

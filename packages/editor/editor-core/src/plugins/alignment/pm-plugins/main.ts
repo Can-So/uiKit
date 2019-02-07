@@ -7,7 +7,7 @@ export type AlignmentState = 'start' | 'end' | 'center';
 
 export type AlignmentPluginState = {
   align: AlignmentState;
-  isEnabled: boolean;
+  isEnabled?: boolean;
 };
 
 export type ActionHandlerParams = {
@@ -32,7 +32,10 @@ export function createInitialPluginState(
 
 export const pluginKey = new PluginKey('alignmentPlugin');
 
-export function createPlugin(dispatch: Dispatch, pluginConfig): Plugin {
+export function createPlugin(
+  dispatch: Dispatch,
+  pluginConfig: AlignmentPluginState,
+): Plugin {
   return new Plugin({
     key: pluginKey,
     state: {

@@ -125,7 +125,9 @@ export function mergeCells(tr: Transaction): Transaction {
       table.pos + table.node.nodeSize,
       removeEmptyColumns(newTable),
     )
-    .setSelection(Selection.near(tr.doc.resolve(mergedCellPos + table.start)));
+    .setSelection(
+      Selection.near(tr.doc.resolve((mergedCellPos || 0) + table.start)),
+    );
 }
 
 export function canMergeCells(tr: Transaction): boolean {
@@ -249,7 +251,7 @@ export function removeEmptyColumns(table: PMNode): PMNode {
   }
   const rows: PMNode[] = [];
   for (let rowIndex = 0; rowIndex < map.height; rowIndex++) {
-    const cellsByCols = {};
+    const cellsByCols: Record<string, PMNode> = {};
     Object.keys(minColSpans)
       .map(Number)
       .forEach(colIndex => {

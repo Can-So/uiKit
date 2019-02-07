@@ -31,7 +31,7 @@ function clickToolbarOption(toolbarOption: ReactWrapper, title: string) {
 
 describe('ToolbarLists', () => {
   const createEditor = createEditorFactory<ListsPluginState>();
-  let toolBarListsWrapper;
+  let toolBarListsWrapper: ReactWrapper;
   let createAnalyticsEvent: jest.MockInstance<UIAnalyticsEventInterface>;
   let analyticsHandler: AnalyticsHandler;
 

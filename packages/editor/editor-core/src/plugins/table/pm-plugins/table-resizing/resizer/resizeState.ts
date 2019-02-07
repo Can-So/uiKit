@@ -93,7 +93,11 @@ export function getCandidates(
     : candidates.slice(destIdx + 1);
 }
 
-export function stackSpace(state, destIdx, amount) {
+export function stackSpace(
+  state: ResizeState,
+  destIdx: number,
+  amount: number,
+) {
   const candidates = getCandidates(state, destIdx, amount);
 
   while (candidates.length && amount) {

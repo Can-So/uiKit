@@ -7,8 +7,14 @@ import PluginSlot from '../PluginSlot';
 import WithPluginState from '../WithPluginState';
 import ContentStyles from '../ContentStyles';
 import { EditorAppearanceComponentProps, EditorAppearance } from '../../types';
-import { pluginKey as maxContentSizePluginKey } from '../../plugins/max-content-size';
-import { stateKey as mediaPluginKey } from '../../plugins/media/pm-plugins/main';
+import {
+  pluginKey as maxContentSizePluginKey,
+  MaxContentSizePluginState,
+} from '../../plugins/max-content-size';
+import {
+  stateKey as mediaPluginKey,
+  MediaPluginState,
+} from '../../plugins/media/pm-plugins/main';
 import { ClickAreaBlock } from '../Addon';
 import { tableCommentEditorStyles } from '../../plugins/table/ui/styles';
 import WithFlash from '../WithFlash';
@@ -147,7 +153,13 @@ export default class Editor extends React.Component<
     }
   };
 
-  private renderChrome = ({ maxContentSize, mediaState }) => {
+  private renderChrome = ({
+    maxContentSize,
+    mediaState,
+  }: {
+    maxContentSize: MaxContentSizePluginState;
+    mediaState: MediaPluginState;
+  }) => {
     const {
       editorDOMElement,
       editorView,

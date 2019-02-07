@@ -487,7 +487,7 @@ export const moveCursorBackward: Command = (state, dispatch) => {
 
   // find the node before the cursor
   let before;
-  let cut;
+  let cut: number | undefined;
   if (!isIsolating($cursor.parent)) {
     for (let i = $cursor.depth - 1; !before && i >= 0; i--) {
       if ($cursor.index(i) > 0) {
@@ -524,7 +524,7 @@ export const moveCursorBackward: Command = (state, dispatch) => {
   }
 
   const { tr } = state;
-  const lastCellPos = cut - 4;
+  const lastCellPos = (cut || 0) - 4;
   // need to move cursor inside the table to be able to calculate table's offset
   tr.setSelection(new TextSelection(state.doc.resolve(lastCellPos)));
   const { $from } = tr.selection;
@@ -544,7 +544,7 @@ export const emptyMultipleCells = (targetCellPosition?: number): Command => (
   state,
   dispatch,
 ) => {
-  let cursorPos;
+  let cursorPos: number | undefined;
   let { tr } = state;
 
   if (isCellSelection(tr.selection)) {
@@ -559,7 +559,7 @@ export const emptyMultipleCells = (targetCellPosition?: number): Command => (
     tr = emptyCell(cell, state.schema)(tr);
     cursorPos = cell.pos;
   }
-  if (tr.docChanged) {
+  if (tr.docChanged && cursorPos) {
     const $pos = tr.doc.resolve(tr.mapping.map(cursorPos));
     const textSelection = Selection.findFrom($pos, 1, true);
     if (textSelection) {
@@ -578,7 +578,7 @@ export const setMultipleCellAttrs = (
   attrs: Object,
   targetCellPosition?: number,
 ): Command => (state, dispatch) => {
-  let cursorPos;
+  let cursorPos: number | undefined;
   let { tr } = state;
 
   if (isCellSelection(tr.selection)) {
@@ -593,8 +593,9 @@ export const setMultipleCellAttrs = (
     tr = setCellAttrs(cell, attrs)(tr);
     cursorPos = cell.pos;
   }
-  if (tr.docChanged) {
-    const $pos = tr.doc.resolve(tr.mapping.map(cursorPos));
+
+  if (tr.docChanged && cursorPos !== undefined) {
+    const $pos = tr.doc.resolve(tr.mapping.map(cursorPos!));
 
     if (dispatch) {
       dispatch(tr.setSelection(Selection.near($pos)));
@@ -632,7 +633,7 @@ export const setEditorFocus = (editorHasFocus: boolean): Command => (
   return true;
 };
 
-export const setTableRef = (tableRef?: HTMLElement): Command => (
+export const setTableRef = (tableRef?: HTMLElement | null): Command => (
   state,
   dispatch,
 ) => {

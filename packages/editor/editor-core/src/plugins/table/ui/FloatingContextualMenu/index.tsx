@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { EditorView } from 'prosemirror-view';
-import { Transaction } from 'prosemirror-state';
+import { Transaction, EditorState } from 'prosemirror-state';
 import { TableMap } from 'prosemirror-tables';
 import {
   findDomRefAtPos,
@@ -24,7 +24,7 @@ const MenuWrapper = styled.div`
 `;
 
 // offset of the contextual menu dropdown
-const calculateOffset = (targetCellRef, state) => {
+const calculateOffset = (targetCellRef: HTMLElement, state: EditorState) => {
   const { tableRef } = pluginKey.getState(state);
   let top = -contextualMenuTriggerSize;
 
@@ -92,7 +92,10 @@ const FloatingContextualMenu = ({
       <MenuWrapper>
         <ContextualMenu
           editorView={editorView}
-          offset={calculateOffset(targetCellRef, editorView.state)}
+          offset={calculateOffset(
+            targetCellRef as HTMLElement,
+            editorView.state,
+          )}
           isOpen={isOpen}
           targetCellPosition={targetCellPosition}
           allowMergeCells={pluginConfig!.allowMergeCells}

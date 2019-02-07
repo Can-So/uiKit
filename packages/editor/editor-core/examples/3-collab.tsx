@@ -25,8 +25,9 @@ import { EmojiProvider } from '@atlaskit/emoji';
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { TitleInput } from '../example-helpers/PageElements';
+import { EditorActions } from '../src';
 
-export const Content: any = styled.div`
+export const Content = styled.div`
   padding: 0 20px;
   height: 100vh;
   background: #fff;
@@ -52,11 +53,12 @@ export const Column = styled.div`
   flex: 1 1 0;
 `;
 
-const analyticsHandler = (actionName, props) => console.log(actionName, props);
+const analyticsHandler = (actionName: string, props?: {}) =>
+  console.log(actionName, props);
 const inviteToEditHandler = (event: Event) =>
   console.log('invite to edit clicked');
 
-const SaveAndCancelButtons = props => (
+const SaveAndCancelButtons = (props: { editorActions: EditorActions }) => (
   <ButtonGroup>
     <Button
       appearance="primary"
@@ -84,7 +86,7 @@ class DropzoneEditorWrapper extends React.Component<
 > {
   dropzoneContainer: HTMLElement | null = null;
 
-  handleRef = node => {
+  handleRef = (node: HTMLElement) => {
     this.dropzoneContainer = node;
     this.forceUpdate();
   };

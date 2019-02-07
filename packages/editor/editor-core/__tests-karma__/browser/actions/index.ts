@@ -71,8 +71,8 @@ describe(name, () => {
 
     describe('with waitForMediaUpload === true', () => {
       const createEditor = createEditorFactory();
-      let editorActions;
-      let editorView;
+      let editorActions: EditorActions;
+      let editorView: EditorView;
 
       beforeEach(() => {
         const editor = createEditor({
@@ -421,14 +421,14 @@ describe(name, () => {
     describe('#replaceSelection', () => {
       const createEditor = createEditorFactory();
       const newDoc = doc(p('some new {<>}content'));
-      let editorActions;
-      let editorView;
+      let editorActions: EditorActions;
+      let editorView: EditorView;
 
       it('should accept JSON version of a prosemirror node', () => {
         const editor = createEditor({ doc: newDoc });
         editorView = editor.editorView;
         editorActions = new EditorActions();
-        editorActions._privateRegisterEditor(editorView);
+        editorActions._privateRegisterEditor(editorView, new EventDispatcher());
 
         editorActions.replaceSelection(
           blockquote(p('text'))(defaultSchema).toJSON(),
@@ -442,7 +442,7 @@ describe(name, () => {
         const editor = createEditor({ doc: newDoc });
         editorView = editor.editorView;
         editorActions = new EditorActions();
-        editorActions._privateRegisterEditor(editorView);
+        editorActions._privateRegisterEditor(editorView, new EventDispatcher());
 
         editorActions.replaceSelection(
           JSON.stringify(blockquote(p('text'))(defaultSchema).toJSON()),

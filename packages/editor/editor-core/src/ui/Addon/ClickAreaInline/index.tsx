@@ -13,7 +13,7 @@ export interface Props {
 }
 
 export default class ClickAreaInline extends React.Component<Props> {
-  private handleClick = event => {
+  private handleClick = (event: React.MouseEvent<any>) => {
     const { editorView } = this.props;
     if (editorView) {
       if (createParagraphAtEnd()(editorView.state, editorView.dispatch)) {

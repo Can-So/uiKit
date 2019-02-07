@@ -1,5 +1,5 @@
-import { Fragment, Slice } from 'prosemirror-model';
-import { Step, StepResult } from 'prosemirror-transform';
+import { Fragment, Slice, Node as PMNode, Schema } from 'prosemirror-model';
+import { Step, StepResult, Mappable } from 'prosemirror-transform';
 
 /**
  * For more context on what this is about:
@@ -9,13 +9,13 @@ export class SetAttrsStep extends Step {
   pos: number;
   attrs: object;
 
-  constructor(pos, attrs) {
+  constructor(pos: number, attrs: object) {
     super();
     this.pos = pos;
     this.attrs = attrs;
   }
 
-  apply(doc) {
+  apply(doc: PMNode) {
     let target = doc.nodeAt(this.pos);
     if (!target) {
       return StepResult.fail('No node at given position');
@@ -31,12 +31,12 @@ export class SetAttrsStep extends Step {
     return StepResult.fromReplace(doc, this.pos, this.pos + 1, slice);
   }
 
-  invert(doc) {
+  invert(doc: PMNode) {
     let target = doc.nodeAt(this.pos);
-    return new SetAttrsStep(this.pos, target ? target.attrs : null);
+    return new SetAttrsStep(this.pos, target ? target.attrs : {});
   }
 
-  map(mapping) {
+  map(mapping: Mappable) {
     let result = mapping.mapResult(this.pos, 1);
     return result.deleted ? null : new SetAttrsStep(result.pos, this.attrs);
   }
@@ -45,7 +45,7 @@ export class SetAttrsStep extends Step {
     return { stepType: 'setAttrs', pos: this.pos, attrs: this.attrs };
   }
 
-  static fromJSON(schema, json) {
+  static fromJSON(_schema: Schema, json: { pos?: number; attrs: object }) {
     if (
       typeof json.pos !== 'number' ||
       (json.attrs !== null && typeof json.attrs !== 'object')

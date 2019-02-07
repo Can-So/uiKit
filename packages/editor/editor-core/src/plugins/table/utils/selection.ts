@@ -10,12 +10,13 @@ import {
 
 export const isSelectionUpdated = (
   oldSelection: Selection,
-  newSelection: Selection,
+  newSelection?: Selection,
 ) =>
-  isCellSelection(oldSelection) !== isCellSelection(newSelection) ||
-  (isCellSelection(oldSelection) &&
-    isCellSelection(newSelection) &&
-    oldSelection.ranges !== newSelection.ranges);
+  !!(!newSelection && oldSelection) ||
+  (isCellSelection(oldSelection) !== isCellSelection(newSelection!) ||
+    (isCellSelection(oldSelection) &&
+      isCellSelection(newSelection!) &&
+      oldSelection.ranges !== newSelection!.ranges));
 
 const isRectangularCellSelection = (
   selection: Selection,

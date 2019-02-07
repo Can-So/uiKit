@@ -12,7 +12,7 @@ import {
 // behaviour is OS specific:
 // windows moves to next paragraph up
 // osx moves to top of document
-const moveUp = (page, selector) => {
+const moveUp = (page: any, selector: string) => {
   let keys;
   if (page.browser.desiredCapabilities.os === 'Windows') {
     keys = ['Control', 'ArrowUp'];

@@ -8,7 +8,7 @@ export interface Props {
   children?: any;
   isExpanded?: boolean;
 
-  onFocus?: (e) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onExpand?: () => void;
 }
 
@@ -18,7 +18,7 @@ export default class CollapsedEditor extends React.Component<Props, State> {
   editorComponent?: Editor;
   shouldTriggerExpandEvent?: boolean;
 
-  componentWillReceiveProps(nextProps, nextState) {
+  componentWillReceiveProps(nextProps: Props) {
     if (!this.props.isExpanded && nextProps.isExpanded) {
       this.shouldTriggerExpandEvent = true;
     }
@@ -56,7 +56,7 @@ export default class CollapsedEditor extends React.Component<Props, State> {
     }
 
     return React.cloneElement(child, {
-      ref: editorComponent =>
+      ref: (editorComponent: Editor) =>
         this.handleEditorRef(editorComponent, (child as any).ref),
     });
   }

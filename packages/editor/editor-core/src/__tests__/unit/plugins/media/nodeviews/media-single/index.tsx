@@ -8,7 +8,11 @@ import {
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
 import { defaultSchema, MediaAttributes } from '@atlaskit/adf-schema';
-import { stateKey as mediaStateKey } from '../../../../../../plugins/media/pm-plugins/main';
+import {
+  stateKey as mediaStateKey,
+  MediaPluginState,
+  MediaState,
+} from '../../../../../../plugins/media/pm-plugins/main';
 import MediaSingle, {
   ReactMediaSingleNode,
 } from '../../../../../../plugins/media/nodeviews/mediaSingle';
@@ -26,7 +30,7 @@ const getFreshMediaProvider = () =>
   });
 
 describe('nodeviews/mediaSingle', () => {
-  let pluginState;
+  let pluginState: MediaPluginState;
   const mediaNodeAttrs = {
     id: 'foo',
     type: 'file',
@@ -45,7 +49,7 @@ describe('nodeviews/mediaSingle', () => {
   const eventDispatcher = {} as EventDispatcher;
   const getPos = jest.fn();
   const portalProviderAPI: PortalProviderAPI = {
-    render(component) {
+    render(component: () => React.ReactChild | null) {
       component();
     },
     remove() {},
@@ -55,10 +59,10 @@ describe('nodeviews/mediaSingle', () => {
   beforeEach(() => {
     const mediaProvider = getFreshMediaProvider();
     const providerFactory = ProviderFactory.create({ mediaProvider });
-    pluginState = {
+    pluginState = ({
       getMediaNodeStateStatus: (id: string) => 'ready',
       getMediaNodeState: (id: string) => {
-        return { state: 'ready' };
+        return ({ state: 'ready' } as any) as MediaState;
       },
       options: {
         allowResizing: false,
@@ -67,7 +71,7 @@ describe('nodeviews/mediaSingle', () => {
       handleMediaNodeMount: () => {},
       updateElement: jest.fn(),
       updateMediaNodeAttrs: jest.fn(),
-    };
+    } as any) as MediaPluginState;
 
     getDimensions = wrapper => (): Promise<any> => {
       if (wrapper.props().node.firstChild.attrs.type === 'external') {

@@ -14,13 +14,15 @@ import quickInsertProviderFactory from '../example-helpers/quick-insert-provider
 import { DevTools } from '../example-helpers/DevTools';
 import { Wrapper, Content } from './5-full-page';
 import withSentry from '../example-helpers/withSentry';
+import { EditorActions } from '../src';
 
 // tslint:disable-next-line:no-console
-const analyticsHandler = (actionName, props) => console.log(actionName, props);
+const analyticsHandler = (actionName: string, props?: {}) =>
+  console.log(actionName, props);
 // tslint:disable-next-line:no-console
 const SAVE_ACTION = () => console.log('Save');
 
-const SaveAndCancelButtons = props => (
+const SaveAndCancelButtons = (props: { editorActions: EditorActions }) => (
   <ButtonGroup>
     <Button
       className="loadExampleDocument"
@@ -73,7 +75,7 @@ class ExampleEditorFullPage extends React.Component<Props> {
               onChange,
               disabled,
               enabledFeatures,
-            }) => (
+            }: any) => (
               <Editor
                 defaultValue={this.props.defaultValue}
                 appearance="full-page"
@@ -150,7 +152,7 @@ class ExampleEditorFullPage extends React.Component<Props> {
 
 export const ExampleEditor = withSentry(ExampleEditorFullPage);
 
-function Example(defaultValue) {
+function Example(defaultValue: string | object) {
   return (
     <EditorContext>
       <div style={{ height: '100%' }}>

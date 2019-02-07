@@ -260,19 +260,24 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
   };
 
   private addRecordToItems = (
-    items,
-    content,
-    value,
-    tooltip?,
+    items: Array<any>,
+    content: string,
+    value: string,
+    tooltip?: string,
     isDisabled?: boolean,
   ) => {
     let active = false;
     let disabled = false;
     if (this.props.textFormattingState) {
-      active = this.props.textFormattingState![`${value}Active`] || false;
+      active =
+        this.props.textFormattingState![
+          `${value}Active` as keyof TextFormattingState
+        ] || false;
       disabled =
         isDisabled ||
-        this.props.textFormattingState![`${value}Disabled`] ||
+        this.props.textFormattingState![
+          `${value}Disabled` as keyof TextFormattingState
+        ] ||
         false;
     }
     items.push({
@@ -285,7 +290,7 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
     });
   };
 
-  private onItemActivated = ({ item }) => {
+  private onItemActivated = ({ item }: { item: any }) => {
     analyticsService.trackEvent(`atlassian.editor.format.${item.value}.button`);
 
     const { state, dispatch } = this.props.editorView;

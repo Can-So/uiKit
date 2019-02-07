@@ -11,7 +11,7 @@ import {
 } from '../../__helpers/page-objects/_table';
 
 describe('Table with block looks correct for fullpage:', () => {
-  let page;
+  let page: any;
 
   beforeAll(async () => {
     // @ts-ignore
@@ -41,7 +41,7 @@ describe('Table with block looks correct for fullpage:', () => {
 });
 
 describe('Table with block looks correct for comment:', () => {
-  let page;
+  let page: any;
 
   beforeAll(async () => {
     // @ts-ignore

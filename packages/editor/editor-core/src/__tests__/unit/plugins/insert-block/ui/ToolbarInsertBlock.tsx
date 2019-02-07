@@ -41,6 +41,9 @@ import {
   INPUT_METHOD,
 } from '../../../../../plugins/analytics';
 import tablesPlugin from '../../../../../plugins/table';
+import { AnalyticsHandler } from '../../../../../analytics';
+import { ReactWrapper } from 'enzyme';
+import { EditorView } from 'prosemirror-view';
 
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
@@ -51,15 +54,15 @@ const mediaProvider: Promise<MediaProvider> = Promise.resolve({
 
 const providerFactory = ProviderFactory.create({ mediaProvider });
 
-const clickToolbarButton = (title, toolbarOption) => {
+const clickToolbarButton = (title: string, toolbarOption: ReactWrapper) => {
   const toolbarButton = toolbarOption
     .find(ToolbarButton)
-    .filterWhere(n => n.prop('title').indexOf(title) > -1)
+    .filterWhere(n => n.prop('title')!.indexOf(title) > -1)
     .find(Button);
   toolbarButton.simulate('click');
 };
 
-const clickInsertMenuOption = (title, toolbarOption) => {
+const clickInsertMenuOption = (title: string, toolbarOption: ReactWrapper) => {
   toolbarOption.find('button').simulate('click');
   const insertMenuOption = toolbarOption
     .find(Item)
@@ -82,12 +85,12 @@ const menus = [
 
 describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
   const createEditor = createEditorFactory();
-  let trackEvent;
-  let editorView;
-  let editorActions;
-  let toolbarOption;
+  let trackEvent: jest.SpyInstance<AnalyticsHandler>;
+  let editorView: EditorView;
+  let editorActions: EditorActions;
+  let toolbarOption: ReactWrapper;
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
-  let dispatchAnalyticsSpy;
+  let dispatchAnalyticsSpy: jest.Mock;
 
   const editor = (doc: any, editorPlugins?: any[]) => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
@@ -95,7 +98,7 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
       doc,
       pluginKey: blockTypePluginKey,
       editorProps: {
-        analyticsHandler: trackEvent,
+        analyticsHandler: trackEvent as any,
         allowCodeBlocks: true,
         allowLayouts: true,
         allowLists: true,
@@ -662,14 +665,14 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
         {
           content: 'Custom A',
           value: { name: 'custom-a' },
-          onClick: editorActions => {
+          onClick: (editorActions: EditorActions) => {
             editorActions.appendText('adding custom-a');
           },
         },
         {
           content: 'Custom B',
           value: { name: 'custom-b' },
-          onClick: editorActions => {
+          onClick: (editorActions: EditorActions) => {
             editorActions.appendText('adding custom-b');
           },
         },

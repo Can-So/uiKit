@@ -17,7 +17,7 @@ export interface Props {
   node: PmNode;
   macroProvider?: MacroProvider;
   handleContentDOMRef: (node: HTMLElement | null) => void;
-  onSelectExtension: (hasBody) => void;
+  onSelectExtension: (hasBody: boolean) => void;
   children?: React.ReactNode;
   view: EditorView;
 }

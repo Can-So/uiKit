@@ -5,7 +5,7 @@ import WithHelpTrigger from '../WithHelpTrigger';
 
 const ToolbarHelp = () => (
   <WithHelpTrigger
-    render={showHelp => (
+    render={(showHelp: () => void) => (
       <ToolbarButton
         onClick={showHelp}
         title="Open help dialog"

@@ -77,7 +77,7 @@ export const removeBlockMarks = (
 export const sanitizeSelectionMarks = (
   state: EditorState,
 ): Transaction | undefined => {
-  let tr;
+  let tr: Transaction | undefined;
   const { $from, $to } = state.tr.selection;
   const nodeType = $from.node().type;
   state.doc.nodesBetween($from.pos, $to.pos, (node, pos) => {

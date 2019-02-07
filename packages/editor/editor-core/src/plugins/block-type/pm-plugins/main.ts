@@ -18,6 +18,7 @@ import {
   HEADINGS_BY_LEVEL,
 } from '../types';
 import { areBlockTypesDisabled } from '../../../utils';
+import { EditorAppearance } from '../../../types';
 
 export type BlockTypeState = {
   currentBlockType: BlockType;
@@ -28,7 +29,8 @@ export type BlockTypeState = {
 
 const blockTypeForNode = (node: Node, schema: Schema): BlockType => {
   if (node.type === schema.nodes.heading) {
-    const maybeNode = HEADINGS_BY_LEVEL[node.attrs['level']];
+    const maybeNode =
+      HEADINGS_BY_LEVEL[node.attrs['level'] as keyof typeof HEADINGS_BY_LEVEL];
     if (maybeNode) {
       return maybeNode;
     }
@@ -69,7 +71,7 @@ const detectBlockType = (
   if (!state.selection) {
     return NORMAL_TEXT;
   }
-  let blockType;
+  let blockType: BlockType | undefined;
   const { $from, $to } = state.selection;
   state.doc.nodesBetween($from.pos, $to.pos, (node, pos) => {
     const nodeBlockType = availableBlockTypes.filter(
@@ -89,7 +91,7 @@ const detectBlockType = (
 export const pluginKey = new PluginKey('blockTypePlugin');
 export const createPlugin = (
   dispatch: (eventName: string | PluginKey, data: any) => void,
-  appearance?,
+  appearance?: EditorAppearance,
 ) => {
   return new Plugin({
     appendTransaction(
