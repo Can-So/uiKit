@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { borderRadius } from '@atlaskit/theme';
+import { borderRadius } from '@atlaskit/media-ui';
 import { HTMLAttributes, ComponentClass } from 'react';
 import { MediaItemType } from '@atlaskit/media-core';
 import { CardDimensions, CardAppearance } from '../';
 import { getCSSUnitValue } from '../utils/getCSSUnitValue';
 import { getCSSBoundaries } from '../utils/cardDimensions';
 import { BreakpointSizeValue, breakpointStyles } from '../utils/breakpoint';
+import { getSelectedBorderStyle } from '../styles/getSelectedBorderStyle';
 
 export interface WrapperProps {
   mediaItemType: MediaItemType;
@@ -52,11 +53,13 @@ export const Wrapper: ComponentClass<
 
 export const InlinePlayerWrapper = styled.div`
   overflow: hidden;
-  border-radius: ${borderRadius()};
+  ${borderRadius};
   position: relative;
 
   max-width: 100%;
   max-height: 100%;
+
+  ${getSelectedBorderStyle}
 
   video {
     width: 100%;

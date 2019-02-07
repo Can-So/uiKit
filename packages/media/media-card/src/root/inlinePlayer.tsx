@@ -12,6 +12,7 @@ export interface InlinePlayerProps {
   identifier: FileIdentifier;
   context: Context;
   dimensions: CardDimensions;
+  selected?: boolean;
   onError?: (error: Error) => void;
   onClick?: () => void;
 }
@@ -111,7 +112,7 @@ export class InlinePlayer extends Component<
   };
 
   render() {
-    const { onClick, dimensions } = this.props;
+    const { onClick, dimensions, selected } = this.props;
     const { fileSrc } = this.state;
 
     if (!fileSrc) {
@@ -119,7 +120,11 @@ export class InlinePlayer extends Component<
     }
 
     return (
-      <InlinePlayerWrapper style={this.getStyle()} onClick={onClick}>
+      <InlinePlayerWrapper
+        style={this.getStyle()}
+        selected={selected}
+        onClick={onClick}
+      >
         <CustomMediaPlayer
           type="video"
           src={fileSrc}
