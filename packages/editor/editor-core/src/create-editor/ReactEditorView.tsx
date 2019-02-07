@@ -35,6 +35,7 @@ export interface EditorViewProps {
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature;
   providerFactory: ProviderFactory;
   portalProviderAPI: PortalProviderAPI;
+  allowAnalyticsGASV3?: boolean;
   render?: (
     props: {
       editor: JSX.Element;
@@ -85,10 +86,9 @@ export default class ReactEditorView<T = {}> extends React.Component<
 
     this.editorState = this.createEditorState({ props, replaceDoc: true });
 
-    const { createAnalyticsEvent } = props;
-    if (createAnalyticsEvent) {
-      this.analyticsEventHandler = fireAnalyticsEvent(createAnalyticsEvent);
-      this.eventDispatcher.on(analyticsEventKey, this.analyticsEventHandler);
+    const { createAnalyticsEvent, allowAnalyticsGASV3 } = props;
+    if (allowAnalyticsGASV3) {
+      this.activateAnalytics(createAnalyticsEvent);
     }
 
     this.eventDispatcher.emit(analyticsEventKey, {
@@ -126,12 +126,41 @@ export default class ReactEditorView<T = {}> extends React.Component<
       } as DirectEditorProps);
     }
 
-    if (nextProps.createAnalyticsEvent !== this.props.createAnalyticsEvent) {
-      this.eventDispatcher.off(analyticsEventKey, this.analyticsEventHandler);
+    // Activate or deactivate analytics if change property
+    if (this.props.allowAnalyticsGASV3 !== nextProps.allowAnalyticsGASV3) {
+      if (nextProps.allowAnalyticsGASV3) {
+        this.activateAnalytics(nextProps.createAnalyticsEvent);
+      } else {
+        this.deactivateAnalytics();
+      }
+    } else {
+      // Allow analytics is the same, check if we receive a new create analytics prop
+      if (
+        this.props.allowAnalyticsGASV3 &&
+        nextProps.createAnalyticsEvent !== this.props.createAnalyticsEvent
+      ) {
+        this.deactivateAnalytics(); // Deactivate the old one
+        this.activateAnalytics(nextProps.createAnalyticsEvent); // Activate the new one
+      }
+    }
+  }
 
-      this.analyticsEventHandler = fireAnalyticsEvent(
-        nextProps.createAnalyticsEvent,
-      );
+  /**
+   * Deactivate analytics event handler, if exist any.
+   */
+  deactivateAnalytics() {
+    if (this.analyticsEventHandler) {
+      this.eventDispatcher.off(analyticsEventKey, this.analyticsEventHandler);
+    }
+  }
+
+  /**
+   * Create analytics event handler, if createAnalyticsEvent exist
+   * @param createAnalyticsEvent
+   */
+  activateAnalytics(createAnalyticsEvent?: CreateUIAnalyticsEventSignature) {
+    if (createAnalyticsEvent) {
+      this.analyticsEventHandler = fireAnalyticsEvent(createAnalyticsEvent);
       this.eventDispatcher.on(analyticsEventKey, this.analyticsEventHandler);
     }
   }
@@ -302,7 +331,7 @@ export default class ReactEditorView<T = {}> extends React.Component<
   };
 
   dispatchAnalyticsEvent = (payload: AnalyticsEventPayload): void => {
-    if (this.eventDispatcher) {
+    if (this.props.allowAnalyticsGASV3 && this.eventDispatcher) {
       const dispatch: AnalyticsDispatch = createDispatch(this.eventDispatcher);
       dispatch(analyticsEventKey, {
         payload,
