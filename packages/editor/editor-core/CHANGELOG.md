@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.4.2
+- [patch] [2487368a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2487368a7e):
+
+  - ED-6170: repair the table by removing invisible columns
+
 ## 98.4.1
 - [patch] [47970c78b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/47970c78b1):
 
