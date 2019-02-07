@@ -1,0 +1,1 @@
+- FS-3577 show selected options by default

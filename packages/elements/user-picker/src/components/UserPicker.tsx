@@ -396,6 +396,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         isLoading={count > 0 || isLoading}
         onInputChange={this.handleInputChange}
         menuPlacement="auto"
+        hideSelectedOptions={false}
         placeholder={
           placeholder || <FormattedMessage {...messages.placeholder} />
         }
