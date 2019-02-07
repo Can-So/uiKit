@@ -745,20 +745,6 @@ export class MediaPluginState {
     }
   }
 
-  isLayoutSupported(): boolean {
-    const { selection, schema } = this.view.state;
-    if (
-      selection instanceof NodeSelection &&
-      selection.node.type === schema.nodes.mediaSingle
-    ) {
-      return (
-        !hasParentNodeOfType(schema.nodes.bodiedExtension)(selection) &&
-        !hasParentNodeOfType(schema.nodes.layoutSection)(selection)
-      );
-    }
-    return false;
-  }
-
   /**
    * Since we replace nodes with public id when node is finalized
    * stateManager contains no information for public ids
