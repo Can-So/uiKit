@@ -469,7 +469,7 @@ describe(name, () => {
     });
 
     describe('dispatch analytics event', () => {
-      function setupDispatchAnalytcsTest(allowAnalyticsGASV3: boolean) {
+      function setupDispatchAnalyticsTest(allowAnalyticsGASV3: boolean) {
         jest
           .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
           .mockReturnValue(() => null);
@@ -503,8 +503,8 @@ describe(name, () => {
         };
       }
 
-      it('should call event dispatcher if it is allowed to call analytcs', () => {
-        const { dispatch, eventDispatcher } = setupDispatchAnalytcsTest(true);
+      it('should call event dispatcher if it is allowed to call analytics', () => {
+        const { dispatch, eventDispatcher } = setupDispatchAnalyticsTest(true);
 
         dispatch(payload);
         expect(eventDispatcher.emit).toHaveBeenCalledWith(analyticsEventKey, {
@@ -512,8 +512,8 @@ describe(name, () => {
         });
       });
 
-      it('should NOT call event dispatcher if it is NOT allowed to call analytcs', () => {
-        const { dispatch, eventDispatcher } = setupDispatchAnalytcsTest(false);
+      it('should NOT call event dispatcher if it is NOT allowed to call analytics', () => {
+        const { dispatch, eventDispatcher } = setupDispatchAnalyticsTest(false);
 
         dispatch(payload);
         expect(eventDispatcher.emit).not.toHaveBeenCalled();
