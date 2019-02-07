@@ -13,6 +13,7 @@ import Select, { SelectOption } from './Select';
 import Separator from './Separator';
 import Input from './Input';
 import { ProviderFactory } from '@atlaskit/editor-common';
+import { EditorView } from 'prosemirror-view';
 
 const akGridSize = gridSize();
 
@@ -25,6 +26,7 @@ export interface Props {
   providerFactory?: ProviderFactory;
   className?: string;
   focusEditor?: () => void;
+  editorView?: EditorView;
 }
 
 const ToolbarContainer = styled.div`
@@ -51,8 +53,8 @@ export default class Toolbar extends Component<Props> {
       popupsMountPoint,
       popupsBoundariesElement,
       popupsScrollableElement,
-      focusEditor,
       className,
+      editorView,
     } = this.props;
     if (!items.length) {
       return null;
@@ -103,21 +105,9 @@ export default class Toolbar extends Component<Props> {
                     />
                   );
 
-                case 'custom':
-                  const { Component } = item;
-                  return (
-                    <Component
-                      key={idx}
-                      onSubmit={(href, text) => {
-                        dispatchCommand(item.onSubmit(href, text));
-                        if (focusEditor) {
-                          focusEditor();
-                        }
-                      }}
-                      providerFactory={item.providerFactory}
-                      onBlur={value => dispatchCommand(item.onBlur(value))}
-                    />
-                  );
+                case 'custom': {
+                  return item.render(editorView, idx);
+                }
 
                 case 'dropdown':
                   const DropdownIcon = item.icon;

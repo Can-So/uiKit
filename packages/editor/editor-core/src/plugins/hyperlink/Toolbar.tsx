@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { defineMessages } from 'react-intl';
 import {
   FloatingToolbarHandler,
@@ -6,7 +7,6 @@ import {
 } from '../floating-toolbar/types';
 import OpenIcon from '@atlaskit/icon/glyph/editor/open';
 import UnlinkIcon from '@atlaskit/icon/glyph/editor/unlink';
-
 import { stateKey, HyperlinkState } from './pm-plugins/main';
 import {
   removeLink,
@@ -18,6 +18,7 @@ import {
 import { normalizeUrl } from './utils';
 import RecentList from './ui/RecentSearch';
 import { Command } from '../../types';
+import { EditorView } from 'prosemirror-view';
 
 export const messages = defineMessages({
   openLink: {
@@ -134,10 +135,32 @@ export const getToolbarConfig: FloatingToolbarHandler = (
           items: [
             {
               type: 'custom',
-              onSubmit: (href, text) => insertLink(from, to, href, text),
-              Component: RecentList,
-              providerFactory: providerFactory,
-              onBlur: () => hideLinkToolbar(),
+              render: (
+                view?: EditorView,
+                idx?: number,
+              ):
+                | React.ComponentClass
+                | React.SFC
+                | React.ReactElement<any>
+                | null => {
+                if (!view) {
+                  return null;
+                }
+                return (
+                  <RecentList
+                    key={idx}
+                    providerFactory={providerFactory}
+                    onSubmit={(href, text) => {
+                      insertLink(from, to, href, text)(
+                        view.state,
+                        view.dispatch,
+                      );
+                      view.focus();
+                    }}
+                    onBlur={() => hideLinkToolbar()(view.state, view.dispatch)}
+                  />
+                );
+              },
             },
           ],
         };

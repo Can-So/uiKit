@@ -8,7 +8,7 @@ export interface Props {
   defaultValue?: string;
   placeholder?: string;
   onBlur?: (text: string) => void;
-  onSubmit?: (text) => void;
+  onSubmit?: (text: string) => void;
 }
 
 export interface State {

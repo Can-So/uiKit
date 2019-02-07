@@ -132,6 +132,7 @@ const floatingToolbarPlugin: EditorPlugin = {
                     dispatchCommand={fn =>
                       fn && fn(editorView.state, editorView.dispatch)
                     }
+                    editorView={editorView}
                     className={className}
                     focusEditor={() => editorView.focus()}
                     providerFactory={providerFactory}

@@ -41,10 +41,11 @@ export type FloatingToolbarInput<T> = {
 
 export type FloatingToolbarCustom<T> = {
   type: 'custom';
-  onSubmit: (...args: any[]) => T;
-  onBlur: (...args: any[]) => T;
-  Component: React.ComponentClass<any>;
-  providerFactory: ProviderFactory;
+  // No superset of all these types yet
+  render: (
+    view?: EditorView,
+    idx?: number,
+  ) => React.ComponentClass | React.SFC | React.ReactElement<any> | null;
   hidden?: boolean;
 };
 

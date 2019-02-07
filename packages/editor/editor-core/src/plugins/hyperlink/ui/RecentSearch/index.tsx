@@ -4,8 +4,8 @@ import { ProviderFactory, WithProviders } from '@atlaskit/editor-common';
 
 export interface Props {
   providerFactory: ProviderFactory;
-  onBlur?: (text: string) => void;
-  onSubmit?: (href: string, text?: string) => void;
+  onBlur?: (text: string) => any;
+  onSubmit?: (href: string, text?: string) => any;
 }
 
 export default class HyperlinkAddToolbar extends React.PureComponent<

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { KeyboardEvent, PureComponent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ActivityProvider, ActivityItem } from '@atlaskit/activity';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { analyticsService } from '../../../../analytics';
@@ -13,6 +13,10 @@ const Container = styled.div`
   flex-direction: column;
   overflow: auto;
 
+  ${({ provider }: { provider: boolean }) =>
+    css`
+      width: ${provider ? '420x' : '360'}px;
+    `};
   line-height: 2;
 
   input {
@@ -25,6 +29,11 @@ export const messages = defineMessages({
     id: 'fabric.editor.hyperlinkToolbarPlaceholder',
     defaultMessage: 'Paste link or search recently viewed',
     description: 'Paste link or search recently viewed',
+  },
+  linkPlaceholder: {
+    id: 'fabric.editor.linkPlaceholder',
+    defaultMessage: 'Paste link',
+    description: 'Create a new link by pasting a URL.',
   },
 });
 
@@ -60,8 +69,10 @@ class RecentSearch extends PureComponent<Props & InjectedIntlProps, State> {
   }
 
   async componentDidMount() {
-    const activityProvider = await this.resolveProvider();
-    this.loadRecentItems(activityProvider);
+    if (this.props.provider) {
+      const activityProvider = await this.resolveProvider();
+      this.loadRecentItems(activityProvider);
+    }
   }
 
   private async loadRecentItems(activityProvider: ActivityProvider) {
@@ -95,10 +106,13 @@ class RecentSearch extends PureComponent<Props & InjectedIntlProps, State> {
     const { items, isLoading, selectedIndex } = this.state;
     const {
       intl: { formatMessage },
+      provider,
     } = this.props;
-    const placeholder = formatMessage(messages.placeholder);
+    const placeholder = formatMessage(
+      provider ? messages.placeholder : messages.linkPlaceholder,
+    );
     return (
-      <Container>
+      <Container provider={!!provider}>
         <PanelTextInput
           placeholder={placeholder}
           autoFocus={true}

@@ -7,19 +7,16 @@ import Toolbar from '../../../plugins/floating-toolbar/ui/Toolbar';
 import { FloatingToolbarItem } from '../../../plugins/floating-toolbar/types';
 import { Command } from '../../../types';
 
-class DummyComponent extends React.Component {
-  render() {
-    return <div className="dummy-compo" />;
-  }
-}
+const DummyContainer = (
+  <div className="dummy-container" key={1}>
+    Hello
+  </div>
+);
 
 const items: Array<FloatingToolbarItem<Command>> = [
   {
     type: 'custom',
-    Component: DummyComponent,
-    onSubmit: () => () => true,
-    onBlur: () => () => true,
-    providerFactory: {} as any,
+    render: (view, idx) => DummyContainer,
   },
 ];
 
@@ -56,6 +53,6 @@ describe('Renders custom UI on toolbar', () => {
   it('should render a custom react component', () => {
     const wrapper = mount(<Toolbar items={items} dispatchCommand={() => {}} />);
     expect(wrapper.length).toBe(1);
-    expect(wrapper.find(DummyComponent).length).toEqual(1);
+    expect(wrapper.find('.dummy-container').length).toEqual(1);
   });
 });
