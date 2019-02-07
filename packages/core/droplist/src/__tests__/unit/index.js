@@ -146,7 +146,7 @@ describe(`${name} - core`, () => {
       expect(onOpenSpy).toHaveBeenCalledWith({ isOpen: false, event });
     });
 
-    it('should set isOpen property to false when Esc key pressed', () => {
+    it('should set isOpen property to false when Esc key pressed (emulating IE/Edge)', () => {
       const onOpenSpy = jest.fn();
       mount(
         <Droplist trigger="text" isOpen onOpenChange={onOpenSpy}>
