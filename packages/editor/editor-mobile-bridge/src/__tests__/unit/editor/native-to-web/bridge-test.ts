@@ -4,6 +4,10 @@ const mockEditorCore = {
   outdentList: jest.fn(() => () => {}),
   toggleOrderedList: jest.fn(() => () => {}),
   toggleBulletList: jest.fn(() => () => {}),
+  insertLink: jest.fn(() => () => {}),
+  isTextAtPos: jest.fn(pos => () => pos === 2),
+  setLinkHref: jest.fn(() => () => {}),
+  setLinkText: jest.fn(() => () => {}),
 };
 jest.mock('@atlaskit/editor-core', () => mockEditorCore);
 
@@ -13,6 +17,10 @@ import {
   outdentList,
   toggleOrderedList,
   toggleBulletList,
+  insertLink,
+  isTextAtPos,
+  setLinkHref,
+  setLinkText,
 } from '@atlaskit/editor-core';
 
 afterEach(() => {
@@ -20,6 +28,10 @@ afterEach(() => {
   (outdentList as jest.Mock<{}>).mockClear();
   (toggleOrderedList as jest.Mock<{}>).mockClear();
   (toggleBulletList as jest.Mock<{}>).mockClear();
+  (insertLink as jest.Mock<{}>).mockClear();
+  (isTextAtPos as jest.Mock<{}>).mockClear();
+  (setLinkHref as jest.Mock<{}>).mockClear();
+  (setLinkText as jest.Mock<{}>).mockClear();
 });
 
 describe('lists should work', () => {
@@ -100,5 +112,54 @@ describe('lists should work', () => {
     bridge.listBridgeState = undefined;
     bridge.onOutdentList();
     expect(outdentList).not.toBeCalled();
+  });
+});
+
+describe('links should work', () => {
+  let bridge: any = new WebBridgeImpl();
+  beforeEach(() => {
+    bridge.editorView = {};
+  });
+
+  it('should call insertLink when not on text node', () => {
+    bridge.editorView = {
+      state: {
+        selection: {
+          from: 1, // mock won't resolve pos as text node
+          to: 3,
+        },
+      },
+    };
+
+    bridge.onLinkUpdate('text', 'url');
+    expect(insertLink).toBeCalledWith(1, 3, 'url', 'text');
+  });
+
+  it('should call setLinkHref/setLinkText when on on text node', () => {
+    bridge.editorView = {
+      state: {
+        selection: {
+          from: 2, // mock will resolve pos as text node
+        },
+      },
+    };
+
+    bridge.onLinkUpdate('text', 'url');
+    expect(setLinkHref).toBeCalledWith(2, 'url');
+    expect(setLinkText).toBeCalledWith(2, 'text');
+  });
+
+  it('should call setLinkHref when providing url only', () => {
+    bridge.editorView = {
+      state: {
+        selection: {
+          from: 2, // mock will resolve pos as text node
+        },
+      },
+    };
+
+    bridge.onLinkUpdate('', 'url');
+    expect(setLinkHref).toBeCalledWith(2, 'url');
+    expect(setLinkText).not.toBeCalled();
   });
 });

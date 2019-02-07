@@ -41,12 +41,17 @@ export interface TypeAheadBridge {
   typeAheadQuery(query: string, trigger: string);
 }
 
+export interface LinkBridge {
+  currentSelection(text: string, url: string);
+}
+
 export default interface NativeBridge
   extends MentionBridge,
     TextFormattingBridge,
     PromiseBridge,
     ListBridge,
-    StatusBridge {
+    StatusBridge,
+    LinkBridge {
   call<T extends EditorPluginBridges>(
     bridge: T,
     event: keyof Exclude<EditorBridges[T], undefined>,

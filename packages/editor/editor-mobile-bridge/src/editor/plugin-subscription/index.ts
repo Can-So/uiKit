@@ -14,12 +14,16 @@ import {
   TextColorPluginState,
   typeAheadPluginKey,
   TypeAheadPluginState,
+  hyperlinkStateKey,
+  HyperlinkState,
+  HyperlinkInsertStatus,
 } from '@atlaskit/editor-core';
 
 import { valueOf as valueOfListState } from '../web-to-native/listState';
 import { valueOf as valueOfMarkState } from '../web-to-native/markState';
 import WebBridgeImpl from '../native-to-web';
 import { toNativeBridge, EditorPluginBridges } from '../web-to-native';
+import { hasValue } from '../../utils';
 
 interface BridgePluginListener<T> {
   bridge: EditorPluginBridges;
@@ -143,6 +147,46 @@ const configs: Array<BridgePluginListener<any>> = [
         query,
         trigger,
       });
+    },
+  }),
+  createListenerConfig<HyperlinkState>({
+    bridge: 'linkBridge',
+    pluginKey: hyperlinkStateKey,
+    updater: state => {
+      const { activeText, activeLinkMark, canInsertLink } = state;
+
+      if (!canInsertLink && !activeLinkMark) {
+        return;
+      }
+
+      if (
+        activeLinkMark &&
+        activeLinkMark.type === HyperlinkInsertStatus.EDIT_LINK_TOOLBAR
+      ) {
+        const linkType = activeLinkMark.node.type.schema.marks.link;
+        const linkText = activeLinkMark.node.textContent;
+        const url =
+          activeLinkMark.node.marks
+            .filter(mark => mark.type === linkType)
+            .map(link => link.attrs.href)
+            .pop() || '';
+
+        if (hasValue(url)) {
+          toNativeBridge.call('linkBridge', 'currentSelection', {
+            text: linkText || activeText || '',
+            url,
+          });
+        }
+        return;
+      }
+
+      if (hasValue(activeText)) {
+        toNativeBridge.call('linkBridge', 'currentSelection', {
+          text: activeText,
+          url: '',
+        });
+        return;
+      }
     },
   }),
 ];

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`links.ts links.ts: currentSelection when cursor is on link 1`] = `
+Array [
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+]
+`;
+
+exports[`links.ts links.ts: currentSelection when no selection 1`] = `Array []`;

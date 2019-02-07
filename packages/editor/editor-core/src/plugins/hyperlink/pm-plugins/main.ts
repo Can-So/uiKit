@@ -1,5 +1,12 @@
 import { Node } from 'prosemirror-model';
-import { EditorState, Plugin, PluginKey, Transaction } from 'prosemirror-state';
+import { Schema } from 'prosemirror-model';
+import {
+  EditorState,
+  Plugin,
+  PluginKey,
+  Selection,
+  Transaction,
+} from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
 import { getCursor } from '../../../utils';
 
@@ -47,10 +54,21 @@ export const canLinkBeCreatedInRange = (from: number, to: number) => (
 };
 
 const isSelectionInsideLink = (state: EditorState | Transaction): boolean => {
+  const linkMark = state.doc.type.schema.marks.link;
+
   const $cursor = getCursor(state.selection);
-  return $cursor
-    ? !!state.doc.type.schema.marks.link.isInSet($cursor.marks())
-    : false;
+  if ($cursor) {
+    return !!linkMark.isInSet($cursor.marks());
+  }
+
+  const { ranges } = state.selection;
+
+  if (Array.isArray(ranges) && ranges.length === 1) {
+    const { $from } = ranges[0];
+    return !!$from.nodeAfter && !!linkMark.isInSet($from.nodeAfter.marks);
+  }
+
+  return false;
 };
 
 const isSelectionAroundLink = (state: EditorState | Transaction): boolean => {
@@ -151,10 +169,21 @@ const toState = (
 
 const getActiveLinkMark = (state: EditorState | Transaction) => {
   if (isSelectionInsideLink(state)) {
-    const $cursor = getCursor(state.selection)!;
-    const pos = $cursor.pos - $cursor.textOffset;
-    const node = state.doc.nodeAt(pos);
-    return node && node.isText ? { node, pos } : undefined;
+    const $cursor = getCursor(state.selection);
+    if ($cursor) {
+      const pos = $cursor.pos - $cursor.textOffset;
+      const node = state.doc.nodeAt(pos);
+      return node && node.isText ? { node, pos } : undefined;
+    }
+
+    const { ranges } = state.selection;
+    if (Array.isArray(ranges) && ranges.length === 1) {
+      const { $from } = ranges[0];
+
+      const pos = $from.pos - $from.textOffset;
+      const node = state.doc.nodeAt(pos);
+      return node && node.isText ? { node, pos } : undefined;
+    }
   }
   if (isSelectionAroundLink(state)) {
     const { $from } = state.selection;
@@ -165,7 +194,28 @@ const getActiveLinkMark = (state: EditorState | Transaction) => {
   return undefined;
 };
 
+const getActiveText = (
+  schema: Schema,
+  selection: Selection,
+): string | undefined => {
+  const currentSlice = selection.content();
+
+  if (currentSlice.size === 0) {
+    return;
+  }
+
+  if (
+    currentSlice.content.childCount === 1 &&
+    [schema.nodes.paragraph, schema.nodes.text].indexOf(
+      currentSlice.content.firstChild!.type,
+    ) !== -1
+  ) {
+    return currentSlice.content.firstChild!.textContent;
+  }
+};
+
 export interface HyperlinkState {
+  activeText?: string;
   activeLinkMark?: LinkToolbarState;
   canInsertLink: boolean;
 }
@@ -181,6 +231,7 @@ export const plugin = (dispatch: Dispatch) =>
           state.selection.to,
         )(state);
         return {
+          activeText: getActiveText(state.schema, state.selection),
           canInsertLink,
           activeLinkMark: toState(
             undefined,
@@ -200,6 +251,7 @@ export const plugin = (dispatch: Dispatch) =>
 
         if (tr.docChanged) {
           state = {
+            activeText: state.activeText,
             canInsertLink: canLinkBeCreatedInRange(
               newState.selection.from,
               newState.selection.to,
@@ -210,6 +262,7 @@ export const plugin = (dispatch: Dispatch) =>
 
         if (action) {
           state = {
+            activeText: state.activeText,
             canInsertLink: state.canInsertLink,
             activeLinkMark: toState(state.activeLinkMark, action, newState),
           };
@@ -217,6 +270,7 @@ export const plugin = (dispatch: Dispatch) =>
 
         if (tr.selectionSet) {
           state = {
+            activeText: getActiveText(newState.schema, newState.selection),
             canInsertLink: canLinkBeCreatedInRange(
               newState.selection.from,
               newState.selection.to,

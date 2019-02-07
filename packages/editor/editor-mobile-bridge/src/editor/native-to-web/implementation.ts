@@ -26,6 +26,10 @@ import {
   changeColor,
   TypeAheadItem,
   selectItem as selectTypeAheadItem,
+  insertLink,
+  isTextAtPos,
+  setLinkHref,
+  setLinkText,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -34,6 +38,7 @@ import { Color as StatusColor } from '@atlaskit/status';
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
 import { ProseMirrorDOMChange } from '../../types';
+import { hasValue } from '../../utils';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';
 
 export default class WebBridgeImpl extends WebBridge
@@ -206,6 +211,27 @@ export default class WebBridgeImpl extends WebBridge
   onOutdentList() {
     if (this.listBridgeState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
+    }
+  }
+
+  onLinkUpdate(text: string, url: string) {
+    if (!this.editorView) {
+      return;
+    }
+
+    const { state, dispatch } = this.editorView;
+    const pos = state.selection.from;
+
+    if (!isTextAtPos(pos)(state)) {
+      const { from, to } = state.selection;
+      insertLink(from, to, url, text)(state, dispatch);
+      return;
+    }
+
+    setLinkHref(pos, url)(state, dispatch);
+
+    if (hasValue(text) && hasValue(url)) {
+      setLinkText(pos, text)(this.editorView.state, dispatch);
     }
   }
 

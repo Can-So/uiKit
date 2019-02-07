@@ -25,7 +25,7 @@ describe('hyperlink commands', () => {
     createEditor({ doc, editorProps: { allowCodeBlocks: true } });
 
   describe('#setLinkHref', () => {
-    it('should not set the link href when pos is not inside a link node', () => {
+    it('should not set the link href when pos is not inside existing text node', () => {
       const { editorView: view, sel } = editor(doc(p('{<>}')));
       expect(
         setLinkHref(sel, 'https://google.com')(view.state, view.dispatch),
