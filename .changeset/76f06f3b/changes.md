@@ -1,0 +1,1 @@
+- onChange will only be fired when a complete datetime is supplied by the user
