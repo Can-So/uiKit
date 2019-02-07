@@ -1,0 +1,1 @@
+- Close droplist on 'Esc' key down to be compatible with IE and Edge

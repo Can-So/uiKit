@@ -124,12 +124,41 @@ describe(`${name} - core`, () => {
       );
 
       const event = new KeyboardEvent('keydown', {
-        keyCode: 27,
         key: 'Escape',
       });
       document.dispatchEvent(event);
 
       expect(onOpenSpy).not.toHaveBeenCalled();
+    });
+
+    it('should set isOpen property to false when Escape key pressed', () => {
+      const onOpenSpy = jest.fn();
+      mount(
+        <Droplist trigger="text" isOpen onOpenChange={onOpenSpy}>
+          {itemsList}
+        </Droplist>,
+      );
+
+      const event = new KeyboardEvent('keydown', {
+        key: 'Escape',
+      });
+      document.dispatchEvent(event);
+      expect(onOpenSpy).toHaveBeenCalledWith({ isOpen: false, event });
+    });
+
+    it('should set isOpen property to false when Esc key pressed (emulating IE/Edge)', () => {
+      const onOpenSpy = jest.fn();
+      mount(
+        <Droplist trigger="text" isOpen onOpenChange={onOpenSpy}>
+          {itemsList}
+        </Droplist>,
+      );
+
+      const event = new KeyboardEvent('keydown', {
+        key: 'Esc',
+      });
+      document.dispatchEvent(event);
+      expect(onOpenSpy).toHaveBeenCalledWith({ isOpen: false, event });
     });
   });
 
