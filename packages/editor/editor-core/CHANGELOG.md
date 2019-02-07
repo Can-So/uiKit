@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.4.1
+- [patch] [47970c78b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/47970c78b1):
+
+  - ED-5976 Maintain text alignment when hit return
+
 ## 98.4.0
 - [minor] [1bc4b69b08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1bc4b69b08):
 
