@@ -1,1 +1,1 @@
-- Enabling handling focus in onboarding by rendering component in onboarding only after portal in onboarding is attached to DOM.
+- Enable auto focus by rendering components only after the portal has been attached to DOM.
