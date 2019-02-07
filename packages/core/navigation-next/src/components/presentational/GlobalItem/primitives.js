@@ -87,7 +87,7 @@ class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> 
       target,
       component: CustomComponent,
     } = this.props;
-    const globalID = `${id}GlobalItem`;
+    const globalID = id && `${id}GlobalItem`;
 
     let itemBase;
 
@@ -96,7 +96,6 @@ class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> 
         <CustomComponent
           {...this.getGlobalItemExternalProps()}
           className={css({ '&&': styles.itemBase })}
-          id={globalID}
         >
           {this.renderIconAndBadge(styles.badgeWrapper)}
         </CustomComponent>
