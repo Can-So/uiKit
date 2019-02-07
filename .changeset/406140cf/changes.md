@@ -1,0 +1,1 @@
+- FS-3458 call loadOptions if open prop is controlled

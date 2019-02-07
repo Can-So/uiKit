@@ -380,6 +380,29 @@ describe('UserPicker', () => {
     });
   });
 
+  describe('props.open is true', () => {
+    it('should call loadOptions', () => {
+      const loadOptions = jest.fn(() => []);
+      shallowUserPicker({
+        open: true,
+        loadOptions,
+      });
+
+      expect(loadOptions).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call loadOptions with props.search is passed in', () => {
+      const loadOptions = jest.fn(() => []);
+      shallowUserPicker({
+        open: true,
+        loadOptions,
+        search: 'test',
+      });
+
+      expect(loadOptions).toHaveBeenCalledWith('test');
+    });
+  });
+
   describe('inputValue', () => {
     it('should set inputValue to empty string by default', () => {
       const component = shallowUserPicker({ value: options[0] });
@@ -827,6 +850,25 @@ describe('UserPicker', () => {
 
         return Promise.resolve().then(() => {
           expect(onEvent).not.toHaveBeenCalled();
+        });
+      });
+
+      it('should not fire searched if there are no options', () => {
+        component.setProps({
+          open: true,
+        });
+        component.update();
+
+        return Promise.resolve().then(() => {
+          // Focused event
+          expect(onEvent).toHaveBeenCalledTimes(1);
+          expect(onEvent).not.toHaveBeenCalledWith(
+            expect.objectContaining({
+              payload: expect.objectContaining({
+                action: 'searched',
+              }),
+            }),
+          );
         });
       });
 

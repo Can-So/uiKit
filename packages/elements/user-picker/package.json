@@ -4,7 +4,7 @@
   "config": {
     "access": "public"
   },
-  "description": "Fabric component for positioning and scrolling a dropdown",
+  "description": "Fabric component for display a dropdown to select a user from",
   "main": "dist/es5/index.js",
   "module": "dist/es2015/index.js",
   "types": "dist/es5/index.d.ts",
