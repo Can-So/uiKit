@@ -133,7 +133,7 @@ describe(`${name} - core`, () => {
 
     it('should set isOpen property to false when Escape key pressed', () => {
       const onOpenSpy = jest.fn();
-      const wrapper = mount(
+      mount(
         <Droplist trigger="text" isOpen onOpenChange={onOpenSpy}>
           {itemsList}
         </Droplist>,
@@ -148,7 +148,7 @@ describe(`${name} - core`, () => {
 
     it('should set isOpen property to false when Esc key pressed', () => {
       const onOpenSpy = jest.fn();
-      const wrapper = mount(
+      mount(
         <Droplist trigger="text" isOpen onOpenChange={onOpenSpy}>
           {itemsList}
         </Droplist>,

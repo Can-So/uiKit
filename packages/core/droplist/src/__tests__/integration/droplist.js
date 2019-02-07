@@ -7,16 +7,13 @@ import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 /* Url to test the example */
 const urlDrawer = getExampleUrl('core', 'droplist', 'basic-example');
 
-console.log(process.env.BROWSERSTACK_USERNAME, process.env.BROWSERSTACK_KEY);
-
 /* Css selectors used for the test */
 const droplistButton = 'button[type="button"]';
 const droplist = 'div[data-role="droplistContent"]';
 
 BrowserTestCase(
-  'Droplist should close when Esc key is pressed in IE and Edge',
-  // { skip: ['safari', 'firefox', 'chrome'] }, // the issue was only occurring in IE and Edge
-  {},
+  'Droplist should close when Escape key is pressed in IE and Edge',
+  { skip: ['safari', 'firefox', 'chrome'] }, // the issue was only occurring in IE and Edge - AK-4523
   async client => {
     const droplistTest = new Page(client);
     await droplistTest.goto(urlDrawer);
@@ -24,9 +21,9 @@ BrowserTestCase(
     await droplistTest.click(droplistButton);
     await droplistTest.waitFor(droplist, 1000);
 
-    await droplistTest.type(droplist, ['Esc']);
-    // expect droplist to be closed
-    // expect(droplist).tobeClosed
+    expect(await droplistTest.isVisible(droplist)).toBe(true);
+    await droplistTest.keys(['Escape']);
+    expect(await droplistTest.isVisible(droplist)).toBe(false);
 
     await droplistTest.checkConsoleErrors();
   },
