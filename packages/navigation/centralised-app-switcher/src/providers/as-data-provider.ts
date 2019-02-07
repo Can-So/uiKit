@@ -1,7 +1,7 @@
 import { Component, ReactNode } from 'react';
 
 export interface ChildrenProps<D> {
-  data: null | D;
+  data: D | null;
   isLoading: boolean;
   error: any;
 }
@@ -14,14 +14,8 @@ export interface DataProviderProps<D> {
   children?: ChildrenCallback<D>;
 }
 
-export interface MapPropsToPromiseSignature<T, D> {
-  (props: T): Promise<D> | D;
-}
-
-export default function<T extends DataProviderProps<D>, D>(
-  mapPropsToPromise: MapPropsToPromiseSignature<T, D>,
-) {
-  return class extends Component<T> {
+export default function<D, P>(mapPropsToPromise: (props: P) => Promise<D> | D) {
+  return class extends Component<P & DataProviderProps<D>> {
     state = {
       isLoading: true,
       data: null,

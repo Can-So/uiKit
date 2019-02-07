@@ -56,27 +56,24 @@ export const PRODUCT_DATA_MAP: {
   },
 };
 
-export const getFixedProductLinks = (hostname: string) => [
+export const getFixedProductLinks = () => [
   {
     key: 'people',
     label: 'People',
     icon: PeopleIcon,
-    link: `${hostname}/people`,
+    link: `/people`,
   },
   {
     key: 'home',
     label: 'Atlassian Home',
     icon: getLogoIcon(AtlassianIcon),
-    link: `${hostname}/home`,
+    link: `/home`,
   },
 ];
 
-export const getProductLink = (
-  productKey: string,
-  hostname: string,
-): ProductLink => ({
+export const getProductLink = (productKey: string): ProductLink => ({
   key: productKey,
-  link: `${hostname}/${PRODUCT_DATA_MAP[productKey].url}`,
+  link: `/${PRODUCT_DATA_MAP[productKey].url}`,
   ...PRODUCT_DATA_MAP[productKey],
 });
 
@@ -119,14 +116,10 @@ export const getProductLinks = (
     activeProductKeys.unshift('jira-core.ondemand');
   }
   const productLinks: ProductLink[] = activeProductKeys.map(
-    (productKey: string) =>
-      getProductLink(productKey, licenseInformationData.hostname),
+    (productKey: string) => getProductLink(productKey),
   );
 
-  return [
-    ...productLinks,
-    ...getFixedProductLinks(licenseInformationData.hostname),
-  ];
+  return [...productLinks, ...getFixedProductLinks()];
 };
 
 export const getAdministrationLinks = (
@@ -153,19 +146,16 @@ export const getAdministrationLinks = (
 export type SuggestedProductLink = ProductLink | null;
 
 export const getSuggestedProductLink = (
-  licenseInformationData: LicenseInformationDataStructure,
+  licenseInformationData: LicenseInformationDataStructure | null,
 ): SuggestedProductLink => {
+  if (!licenseInformationData) {
+    return null;
+  }
   if (!productIsActive(licenseInformationData, 'confluence.ondemand')) {
-    return getProductLink(
-      'confluence.ondemand',
-      licenseInformationData.hostname,
-    );
+    return getProductLink('confluence.ondemand');
   }
   if (!productIsActive(licenseInformationData, 'jira-servicedesk.ondemand')) {
-    return getProductLink(
-      'jira-servicedesk.ondemand',
-      licenseInformationData.hostname,
-    );
+    return getProductLink('jira-servicedesk.ondemand');
   }
   return null;
 };

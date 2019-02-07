@@ -11,20 +11,18 @@ export interface RecentContainersDataStructure {
   data: Array<RecentContainer>;
 }
 
-export const RecentContainersProvider = asDataProvider<
-  CloudIdDataProvider<RecentContainersDataStructure>,
-  RecentContainersDataStructure
->(({ cloudId }) =>
-  fetchJson(
-    `/gateway/api/activity/api/client/recent/containers?cloudId=${cloudId}`,
-  ),
+export const RecentContainersProvider = asDataProvider(
+  ({ cloudId }: WithCloudId) =>
+    fetchJson<RecentContainersDataStructure>(
+      `/gateway/api/activity/api/client/recent/containers?cloudId=${cloudId}`,
+    ),
 );
 
-export const LicenseInformationProvider = asDataProvider<
-  CloudIdDataProvider<LicenseInformationDataStructure>,
-  LicenseInformationDataStructure
->(({ cloudId }) =>
-  fetchJson(`/gateway/api/xflow/${cloudId}/license-information`),
+export const LicenseInformationProvider = asDataProvider(
+  ({ cloudId }: WithCloudId) =>
+    fetchJson<LicenseInformationDataStructure>(
+      `/gateway/api/xflow/${cloudId}/license-information`,
+    ),
 );
 
 export interface UserPermissionDataStructure {
@@ -37,17 +35,18 @@ export enum Permissions {
   ADD_PRODUCTS = 'add-products',
 }
 
-interface PermissionDataProvider
-  extends CloudIdDataProvider<UserPermissionDataStructure> {
-  permissionId: Permissions;
-}
-
-export const UserPermissionProvider = asDataProvider<
-  PermissionDataProvider,
-  UserPermissionDataStructure
->(({ cloudId, permissionId }) =>
-  postJson(`/gateway/api/permissions/permitted`, {
+export const UserPermissionProvider = asDataProvider(
+  ({
+    cloudId,
     permissionId,
-    resourceId: `ari:cloud:platform::site/${cloudId}`,
-  }),
+  }: WithCloudId & {
+    permissionId: Permissions;
+  }) =>
+    postJson<UserPermissionDataStructure>(
+      `/gateway/api/permissions/permitted`,
+      {
+        permissionId,
+        resourceId: `ari:cloud:platform::site/${cloudId}`,
+      },
+    ),
 );

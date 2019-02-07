@@ -1,19 +1,10 @@
 import { fetchJson } from '../utils/fetch';
-import asDataProvider, { DataProviderProps } from './as-data-provider';
-import { CustomLinksProviderDataStructure } from './types';
-import { SuggestedProductLink } from '../utils/product-links';
+import asDataProvider from './as-data-provider';
+import { CustomLink } from '../types';
 
-export const CustomLinksProvider = asDataProvider<
-  DataProviderProps<CustomLinksProviderDataStructure>,
-  CustomLinksProviderDataStructure
->(() =>
+export const CustomLinksProvider = asDataProvider(() =>
   Promise.all([
-    fetchJson(`/wiki/rest/menu/latest/appswitcher`),
+    fetchJson<Array<CustomLink>>(`/wiki/rest/menu/latest/appswitcher`),
     '/wiki/plugins/servlet/customize-application-navigator',
   ]),
 );
-
-export const SuggestedProductProvider = asDataProvider<
-  DataProviderProps<SuggestedProductLink>,
-  SuggestedProductLink
->(() => null);
