@@ -65,7 +65,7 @@ const client: Client = {
     content: Content,
     users: User[],
     metaData: MetaData,
-    comment: Comment,
+    comment?: Comment,
   ) => {
     return new Promise(resolve => {
       setTimeout(
