@@ -1,1 +1,1 @@
-- Portal now returns null until DOM is available and portal div is mounted.
+- Components inside Portal render after portal container element is attached to the DOM
