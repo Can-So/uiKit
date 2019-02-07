@@ -1,1 +1,1 @@
-- Update model-dialog with portal so that components in model-dialog are rendered after portal is attached to DOM.
+- Enabling handling focus in model-dialog by rendering component in model-dialog only after portal in model-dialog is attached to DOM.
