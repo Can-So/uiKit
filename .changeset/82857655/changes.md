@@ -1,0 +1,1 @@
+- ED-5976 Maintain text alignment when hit return
