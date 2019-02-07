@@ -1,0 +1,1 @@
+- Portal now returns null until DOM is available and portal div is mounted.
