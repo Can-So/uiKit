@@ -1,0 +1,1 @@
+- ED-6048: fixed bullet point not showing up until text inserted
