@@ -102,7 +102,7 @@ class NotificationIndicator extends Component<Props, State> {
     this.refresh('timer');
   };
 
-  private handleAnalytics = countUpdateProperties => {
+  private handleAnalytics = (countUpdateProperties: ValueUpdatedParams) => {
     const { newCount, oldCount, source } = countUpdateProperties;
 
     // Only fire an 'activating' analytics event if the notification indicator is 'activating' for the first time
@@ -134,7 +134,7 @@ class NotificationIndicator extends Component<Props, State> {
     }
   };
 
-  private refresh = async source => {
+  private refresh = async (source: string) => {
     // Provider should be available by this point, if not, we exit.
     if (!this.notificationLogProvider) {
       return;
