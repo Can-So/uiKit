@@ -11,6 +11,13 @@ const alignRightButton = 'span[aria-label="Align right"]';
 const headingButton = 'button[aria-label="Font style"]';
 const headingh1 = 'div[role="group"] h1';
 
+const alignRight = async page => {
+  await page.waitFor(alignButton);
+  await page.click(alignButton);
+  await page.waitForSelector(alignRightButton);
+  await page.click(alignRightButton);
+};
+
 BrowserTestCase(
   'alignment: should be able to add alignment to paragraphs',
   { skip: [] },
@@ -23,10 +30,7 @@ BrowserTestCase(
     });
 
     await page.type(editable, 'hello');
-    await page.waitFor(alignButton);
-    await page.click(alignButton);
-    await page.waitForSelector(alignRightButton);
-    await page.click(alignRightButton);
+    await alignRight(page);
     expect(await page.$eval(editable, getDocFromElement)).toMatchDocSnapshot();
   },
 );
@@ -47,10 +51,7 @@ BrowserTestCase(
     await page.click(headingButton);
     await page.waitFor(headingh1);
     await page.click(headingh1);
-    await page.waitFor(alignButton);
-    await page.click(alignButton);
-    await page.waitForSelector(alignRightButton);
-    await page.click(alignRightButton);
+    await alignRight(page);
     expect(await page.$eval(editable, getDocFromElement)).toMatchDocSnapshot();
   },
 );
@@ -85,5 +86,26 @@ BrowserTestCase(
     });
     const isEnabled = await page.isEnabled(alignButton);
     expect(isEnabled).toBe(false);
+  },
+);
+
+BrowserTestCase(
+  'alignment: should maintain alignment when hit return',
+  { skip: [] },
+  async client => {
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: 'full-page',
+      allowTextAlignment: true,
+    });
+    await alignRight(page);
+    await page.type(editable, [
+      'this is right',
+      'Enter',
+      'this is still right',
+    ]);
+
+    const doc = await page.$eval(editable, getDocFromElement);
+    expect(doc).toMatchDocSnapshot();
   },
 );

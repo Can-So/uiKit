@@ -4,6 +4,7 @@ export default {
     'inlineCursorTargetPlugin',
     'focusHandlerPlugin',
     'submitEditor',
+    'newlinePreserveMarksPlugin',
     'imageUpload',
     'imageUploadInputRule',
     'paste',
