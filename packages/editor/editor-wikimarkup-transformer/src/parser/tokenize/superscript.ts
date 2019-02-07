@@ -30,12 +30,12 @@ export function superscript(
   };
 
   const rawContentProcessor = (raw: string, length: number): Token => {
-    const content = parseString(
-      raw,
+    const content = parseString({
       schema,
-      ignoreTokenTypes,
       tokenErrCallback,
-    );
+      ignoreTokens: ignoreTokenTypes,
+      input: raw,
+    });
     const decoratedContent = content.map(contentDecorator);
 
     return {

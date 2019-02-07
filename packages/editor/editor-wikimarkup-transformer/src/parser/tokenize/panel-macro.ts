@@ -37,7 +37,12 @@ const rawContentProcessor = (
     panelType: getPanelType(parsedAttrs),
   };
 
-  const parsedContent = parseString(rawContent, schema, [], tokenErrCallback);
+  const parsedContent = parseString({
+    schema,
+    tokenErrCallback,
+    ignoreTokens: [],
+    input: rawContent,
+  });
 
   const normalizedContent = normalizePMNodes(parsedContent, schema);
   let contentBuffer: PMNode[] = parsedAttrs.title

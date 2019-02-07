@@ -16,12 +16,17 @@ const processState = {
   ESCAPE: 3,
 };
 
-export function parseString(
-  input: string,
-  schema: Schema,
-  ignoreTokens: TokenType[] = [],
-  tokenErrCallback?: TokenErrCallback,
-): PMNode[] {
+export function parseString({
+  input,
+  schema,
+  ignoreTokens = [],
+  tokenErrCallback,
+}: {
+  input: string;
+  schema: Schema;
+  ignoreTokens: TokenType[];
+  tokenErrCallback?: TokenErrCallback;
+}): PMNode[] {
   let index = 0;
   let state = processState.NEWLINE;
   let buffer = '';

@@ -27,7 +27,7 @@ export function list(
    * The following token types will be ignored in parsing
    * the content of a listItem
    */
-  const ignoreTokenTypes = [TokenType.QUADRUPLE_DASH_SYMBOL, TokenType.LIST];
+  const ignoreTokens = [TokenType.QUADRUPLE_DASH_SYMBOL, TokenType.LIST];
 
   let index = position;
   let state = processState.NEW_LINE;
@@ -78,12 +78,12 @@ export function list(
              */
             if (buffer.length > 0) {
               /** Wrap up previous list item and clear buffer */
-              const content = parseString(
-                buffer,
+              const content = parseString({
+                ignoreTokens,
                 schema,
-                ignoreTokenTypes,
                 tokenErrCallback,
-              );
+                input: buffer,
+              });
               const normalizedContent = normalizePMNodes(content, schema);
               contentBuffer.push(...normalizedContent);
               builder.add([
@@ -161,12 +161,12 @@ export function list(
              * Wrapup what is already in the string buffer and save it to
              * contentBuffer
              */
-            const content = parseString(
-              buffer,
+            const content = parseString({
+              ignoreTokens,
               schema,
-              ignoreTokenTypes,
               tokenErrCallback,
-            );
+              input: buffer,
+            });
             const normalizedContent = normalizePMNodes(content, schema);
             contentBuffer.push(...sanitize(normalizedContent, schema));
             buffer = '';
@@ -187,12 +187,12 @@ export function list(
 
         if (buffer.length > 0) {
           /** Wrap up previous list item and clear buffer */
-          const content = parseString(
-            buffer,
+          const content = parseString({
+            ignoreTokens,
             schema,
-            ignoreTokenTypes,
             tokenErrCallback,
-          );
+            input: buffer,
+          });
           const normalizedContent = normalizePMNodes(content, schema);
           contentBuffer.push(...normalizedContent);
         }
@@ -213,12 +213,12 @@ export function list(
 
   if (buffer.length > 0) {
     /** Wrap up what's left in the buffer */
-    const content = parseString(
-      buffer,
+    const content = parseString({
+      ignoreTokens,
       schema,
-      ignoreTokenTypes,
       tokenErrCallback,
-    );
+      input: buffer,
+    });
     const normalizedContent = normalizePMNodes(content, schema);
     contentBuffer.push(...normalizedContent);
   }

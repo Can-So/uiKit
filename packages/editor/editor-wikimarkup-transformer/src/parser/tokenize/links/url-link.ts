@@ -19,19 +19,19 @@ export function urlLinkResolver(
     return;
   }
 
-  const ignoreTokenTypes = [
+  const ignoreTokens = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
     TokenType.LINK_TEXT,
   ];
 
-  const rawContent = parseString(
-    textRepresentation.replace(/^mailto:/, ''),
+  const rawContent = parseString({
+    ignoreTokens,
     schema,
-    ignoreTokenTypes,
     tokenErrCallback,
-  );
+    input: textRepresentation.replace(/^mailto:/, ''),
+  });
 
   const decoratedContent = rawContent.map(n => {
     const mark = schema.marks.link.create({

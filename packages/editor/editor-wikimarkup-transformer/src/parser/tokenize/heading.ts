@@ -15,7 +15,7 @@ export function heading(
    * The following token types will be ignored in parsing
    * the content of a strong mark
    */
-  const ignoreTokenTypes = [
+  const ignoreTokens = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
@@ -28,12 +28,12 @@ export function heading(
   }
 
   const level = parseInt(match[1], 10);
-  const content = parseString(
-    match[2],
+  const content = parseString({
+    input: match[2],
     schema,
-    ignoreTokenTypes,
+    ignoreTokens,
     tokenErrCallback,
-  );
+  });
 
   try {
     const headingNode = schema.nodes.heading.createChecked(

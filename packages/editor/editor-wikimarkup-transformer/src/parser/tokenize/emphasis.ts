@@ -14,7 +14,7 @@ export function emphasis(
    * The following token types will be ignored in parsing
    * the content of a  mark
    */
-  const ignoreTokenTypes = [
+  const ignoreTokens = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
@@ -30,12 +30,12 @@ export function emphasis(
   };
 
   const rawContentProcessor = (raw: string, length: number): Token => {
-    const content = parseString(
-      raw,
+    const content = parseString({
+      ignoreTokens,
       schema,
-      ignoreTokenTypes,
       tokenErrCallback,
-    );
+      input: raw,
+    });
     const decoratedContent = content.map(contentDecorator);
 
     return {

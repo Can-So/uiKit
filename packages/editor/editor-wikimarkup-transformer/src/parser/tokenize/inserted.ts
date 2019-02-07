@@ -14,7 +14,7 @@ export function inserted(
    * The following token types will be ignored in parsing
    * the content
    */
-  const ignoreTokenTypes = [
+  const ignoreTokens = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
@@ -30,12 +30,12 @@ export function inserted(
   };
 
   const rawContentProcessor = (raw: string, length: number): Token => {
-    const content = parseString(
-      raw,
+    const content = parseString({
+      ignoreTokens,
       schema,
-      ignoreTokenTypes,
       tokenErrCallback,
-    );
+      input: raw,
+    });
     const decoratedContent = content.map(contentDecorator);
 
     return {

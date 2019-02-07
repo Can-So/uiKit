@@ -286,12 +286,12 @@ function bufferToCells(
   tokenErrCallback?: TokenErrCallback,
 ) {
   if (buffer.length) {
-    const contentNode = parseString(
-      buffer,
+    const contentNode = parseString({
       schema,
-      ignoreTokenTypes,
       tokenErrCallback,
-    );
+      ignoreTokens: ignoreTokenTypes,
+      input: buffer,
+    });
     cellsBuffer.push({
       style,
       content: normalizePMNodes(contentNode, schema),

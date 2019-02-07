@@ -34,7 +34,12 @@ export const rawContentProcessor = (
       length,
     };
   }
-  const parsedContent = parseString(rawContent, schema, [], tokenErrCallback);
+  const parsedContent = parseString({
+    schema,
+    tokenErrCallback,
+    ignoreTokens: [],
+    input: rawContent,
+  });
   const normalizedContent = normalizePMNodes(parsedContent, schema);
 
   return {

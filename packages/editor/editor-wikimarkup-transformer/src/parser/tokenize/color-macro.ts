@@ -27,19 +27,19 @@ const rawContentProcessor = (
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token => {
-  const ignoreTokenTypes = [
+  const ignoreTokens = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
   ];
 
   const parsedAttrs = parseAttrs(rawAttrs);
-  const content = parseString(
-    rawContent,
+  const content = parseString({
+    ignoreTokens,
     schema,
-    ignoreTokenTypes,
     tokenErrCallback,
-  );
+    input: rawContent,
+  });
   const decoratedContent = content.map(n => {
     const mark = schema.marks.textColor.create({
       color: getEditorColor(parsedAttrs) || '#000000',
