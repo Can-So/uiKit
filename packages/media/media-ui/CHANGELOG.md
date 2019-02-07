@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 9.0.0
+- [major] [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+
+  - Breaking change. ModalSpinner props has changed. now it's blankedColor: string and invertSpinnerColor: boolean
+
 ## 8.5.1
 - [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
 

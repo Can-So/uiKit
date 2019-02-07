@@ -1,33 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, MediaItemType } from '@atlaskit/media-core';
 import { MediaViewer as MediaViewerNextGen } from '../newgen/media-viewer';
-import { ItemSource, MediaViewerFeatureFlags } from '../newgen/domain';
-
-export interface MediaViewerItem {
-  id: string;
-  occurrenceKey: string;
-  type: MediaItemType;
-}
-
-export interface MediaViewerDataSource {
-  list?: Array<MediaViewerItem>;
-  collectionName?: string;
-}
-
-export interface MediaViewerProps {
-  readonly context: Context;
-
-  readonly selectedItem: MediaViewerItem;
-  readonly dataSource: MediaViewerDataSource;
-
-  readonly collectionName: string;
-  readonly pageSize?: number;
-
-  readonly onClose?: () => void;
-
-  readonly featureFlags?: MediaViewerFeatureFlags;
-}
+import { ItemSource } from '../newgen/domain';
+import { MediaViewerProps } from './types';
 
 export interface MediaViewerState {}
 

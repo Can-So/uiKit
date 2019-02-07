@@ -21,19 +21,23 @@ export default class AsyncAvatarPickerDialog extends React.PureComponent<
     AvatarPickerDialog: AsyncAvatarPickerDialog.AvatarPickerDialog,
   };
 
-  componentWillMount() {
+  async componentWillMount() {
     if (!this.state.AvatarPickerDialog) {
-      import(/* webpackChunkName:"@atlaskit-internal_smart-avatar-picker" */
-      '.').then(module => {
-        AsyncAvatarPickerDialog.AvatarPickerDialog = module.AvatarPickerDialog;
-        this.setState({ AvatarPickerDialog: module.AvatarPickerDialog });
-      });
+      const module = await import(/* webpackChunkName:"@atlaskit-internal_media-avatar-picker" */
+      '.');
+      AsyncAvatarPickerDialog.AvatarPickerDialog = module.AvatarPickerDialog;
+      this.setState({ AvatarPickerDialog: module.AvatarPickerDialog });
     }
   }
 
   render() {
     if (!this.state.AvatarPickerDialog) {
-      return <ModalSpinner mode="light" />;
+      return (
+        <ModalSpinner
+          blankedColor="rgba(255, 255, 255, 0.53)"
+          invertSpinnerColor={false}
+        />
+      );
     }
 
     return <this.state.AvatarPickerDialog {...this.props} />;
