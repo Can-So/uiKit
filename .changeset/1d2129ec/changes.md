@@ -1,0 +1,1 @@
+- Update model-dialog with portal so that components in model-dialog are rendered after portal is attached to DOM.
