@@ -1,3 +1,4 @@
+import { mergeCells } from 'prosemirror-tables';
 import {
   doc,
   p,
@@ -6,6 +7,7 @@ import {
   tr,
   td,
   th,
+  tdEmpty,
 } from '@atlaskit/editor-test-helpers';
 import {
   TablePluginState,
@@ -115,6 +117,35 @@ describe('fix tables', () => {
               td({ colwidth: [100] })(p('5')),
               td({ colwidth: [480] })(p('6')),
             ),
+          ),
+        ),
+      );
+    });
+  });
+
+  describe('when minimum colspan of a column is > 1', () => {
+    it('should decrement colspans', () => {
+      const { editorView } = editor(
+        doc(
+          table({})(
+            tr(td({ colspan: 3 })(p('')), tdEmpty, tdEmpty),
+            tr(
+              td({})(p('{<cell}')),
+              tdEmpty,
+              tdEmpty,
+              td({})(p('{cell>}')),
+              tdEmpty,
+            ),
+          ),
+        ),
+      );
+      mergeCells(editorView.state, editorView.dispatch);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          table({})(
+            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(td({ colspan: 2 })(p('')), tdEmpty),
           ),
         ),
       );

@@ -76,29 +76,6 @@ describe('table plugin: utils', () => {
           });
         });
       });
-      describe('when merged column does not have cells', () => {
-        it('should return an array of columns widths where widths of merged columns === undefined', () => {
-          // column 2 doesn't have any cells here
-          const { editorView } = editor(
-            doc(
-              p('text'),
-              table()(
-                tr(td({ colspan: 2 })(p('a1')), td({})(p('a3'))),
-                tr(td({ colspan: 2 })(p('b1')), td({})(p('b3'))),
-              ),
-            ),
-          );
-          const columnsWidths = getColumnsWidths(editorView);
-          columnsWidths.forEach((width, index) => {
-            if (index === 1) {
-              expect(typeof width).toEqual('undefined');
-            } else {
-              expect(typeof width).toEqual('number');
-              expect(width > 0).toBe(true);
-            }
-          });
-        });
-      });
     });
   });
 
@@ -578,40 +555,6 @@ describe('table plugin: utils', () => {
             editorView.state.selection,
           )!;
           expect(indexes).toEqual([0, 1, 2]);
-          expect(left > 0).toBe(true);
-        });
-      });
-      describe('columnsWidths = [100, ,150, ,200]', () => {
-        it('should return indexes = [0, 2]', () => {
-          const { editorView } = editor(
-            doc(
-              p('text'),
-              table()(
-                tr(
-                  td({ colspan: 2 })(p('{<cell}a1')),
-                  td({ colspan: 2 })(p('')),
-                  tdEmpty,
-                ),
-                tr(
-                  td({ colspan: 2 })(p('')),
-                  td({ colspan: 2 })(p('')),
-                  tdEmpty,
-                ),
-                tr(
-                  td({ colspan: 2 })(p('')),
-                  td({ colspan: 2 })(p('{cell>}c3')),
-                  tdEmpty,
-                ),
-              ),
-            ),
-          );
-
-          const columnsWidths = [100, , 150, , 200];
-          const { indexes, left } = getColumnDeleteButtonParams(
-            columnsWidths,
-            editorView.state.selection,
-          )!;
-          expect(indexes).toEqual([0, 2]);
           expect(left > 0).toBe(true);
         });
       });

@@ -1,0 +1,1 @@
+- ED-6170: repair the table by removing invisible columns

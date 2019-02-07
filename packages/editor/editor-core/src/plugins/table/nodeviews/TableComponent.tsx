@@ -2,6 +2,8 @@ import * as React from 'react';
 import rafSchedule from 'raf-schd';
 import { Node as PmNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
+import { TableMap } from 'prosemirror-tables';
+
 import {
   browser,
   calcTableWidth,
@@ -238,11 +240,11 @@ class TableComponent extends React.Component<ComponentProps> {
     const prevAttrs = prevProps.node.attrs;
     const currentAttrs = node.attrs;
 
-    const prevColCount = prevProps.node.firstChild!.childCount;
-    const currentColCount = node.firstChild!.childCount;
+    const prevMap = TableMap.get(prevProps.node);
+    const currentMap = TableMap.get(node);
 
     if (
-      prevColCount !== currentColCount ||
+      prevMap.width !== currentMap.width ||
       prevAttrs.layout !== currentAttrs.layout ||
       prevAttrs.isNumberColumnEnabled !== currentAttrs.isNumberColumnEnabled ||
       prevAttrs.__autoSize !== currentAttrs.__autoSize ||
