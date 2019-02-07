@@ -1,1 +1,0 @@
-- Add IDs to all global nav items
