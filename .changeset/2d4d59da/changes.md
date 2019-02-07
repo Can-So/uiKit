@@ -1,1 +1,0 @@
-- Breaking change. ModalSpinner props has changed. now it's blankedColor: string and invertSpinnerColor: boolean
