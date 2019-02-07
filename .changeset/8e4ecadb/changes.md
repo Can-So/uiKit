@@ -1,0 +1,1 @@
+- FS-3573 show user avatar on focus
