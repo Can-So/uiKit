@@ -63,7 +63,7 @@ export function getDefaultPluginsList(
   let defaultPluginList: EditorPlugin[] = [];
 
   if (props.allowAnalyticsGASV3) {
-    analyticsPlugin(createAnalyticsEvent);
+    defaultPluginList.push(analyticsPlugin(createAnalyticsEvent));
   }
 
   return defaultPluginList.concat([
