@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import * as React from 'react';
 import rafSchedule from 'raf-schd';
 
 const containerDivStyle: React.CSSProperties = {
@@ -39,7 +39,7 @@ type ResizeObject = HTMLElement & {
   contentDocument: HTMLDocument;
 };
 
-export default class WidthDetector extends Component<Props, State> {
+export default class WidthDetector extends React.Component<Props, State> {
   props: Props;
   state: State = {};
   container?: HTMLDivElement;
@@ -135,7 +135,7 @@ export default class WidthDetector extends Component<Props, State> {
     );
 
     return (
-      <Fragment>
+      <React.Fragment>
         <div
           className="ak-width-detector-container"
           style={{ ...containerDivStyle, ...this.props.containerStyle }}
@@ -144,7 +144,7 @@ export default class WidthDetector extends Component<Props, State> {
           {this.props.children(this.state.width)}
           {sizerEl}
         </div>
-      </Fragment>
+      </React.Fragment>
     );
   }
 }
