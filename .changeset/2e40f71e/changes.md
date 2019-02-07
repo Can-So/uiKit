@@ -1,0 +1,1 @@
+- Enabling handling focus in onboarding by rendering component in onboarding only after portal in onboarding is attached to DOM.
