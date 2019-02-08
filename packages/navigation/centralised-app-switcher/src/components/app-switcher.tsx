@@ -147,16 +147,18 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
         {isLoadingRecentContainers ? (
           <Skeleton />
         ) : (
-          <Section title="Recent Containers">
-            {recentContainersData &&
-              recentContainersData.data.map(
+          recentContainersData &&
+          recentContainersData.data.length && (
+            <Section title="Recent Containers">
+              {recentContainersData.data.map(
                 ({ objectId, name, url, iconUrl }: RecentContainer) => (
                   <AppSwitcherItem key={objectId} iconUrl={iconUrl} href={url}>
                     {name}
                   </AppSwitcherItem>
                 ),
               )}
-          </Section>
+            </Section>
+          )
         )}
         {customLinksData && <ManageButton href={customLinksData[1]} />}
       </AppSwitcherWrapper>
