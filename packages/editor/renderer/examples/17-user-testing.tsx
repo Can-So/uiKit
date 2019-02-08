@@ -27,7 +27,7 @@ export default class ExampleRenderer extends React.Component {
     return (
       <Sidebar showSidebar={true}>
         {additionalProps => (
-          <>
+          <React.Fragment>
             <div
               style={{
                 display: 'flex',
@@ -54,7 +54,7 @@ export default class ExampleRenderer extends React.Component {
                   : undefined
               }
             />
-          </>
+          </React.Fragment>
         )}
       </Sidebar>
     );

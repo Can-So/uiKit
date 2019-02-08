@@ -144,7 +144,7 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                     onSave={SAVE_ACTION}
                     onCancel={CANCEL_ACTION}
                     primaryToolbarComponents={
-                      <>
+                      <React.Fragment>
                         <ToolbarFeedback
                           product={'bitbucket'}
                           packageVersion={version}
@@ -153,7 +153,7 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                           labels={['atlaskit-comment']}
                         />
                         <ToolbarHelp key="toolbar-help" />
-                      </>
+                      </React.Fragment>
                     }
                     allowExtension={true}
                     insertMenuItems={customInsertMenuItems}

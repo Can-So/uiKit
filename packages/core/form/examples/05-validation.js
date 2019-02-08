@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { Fragment } from 'react';
 import Button from '@atlaskit/button';
 import TextField from '@atlaskit/textfield';
 import Form, {
@@ -44,7 +44,7 @@ export default () => (
             validate={validate}
           >
             {({ fieldProps, error, meta: { valid } }) => (
-              <>
+              <Fragment>
                 <TextField {...fieldProps} />
                 {!error && !valid && (
                   <HelperMessage>
@@ -66,7 +66,7 @@ export default () => (
                     This username is taken by somebody, try something else
                   </ErrorMessage>
                 )}
-              </>
+              </Fragment>
             )}
           </Field>
           <FormFooter>

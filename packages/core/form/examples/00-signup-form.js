@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { Fragment } from 'react';
 import TextField from '@atlaskit/textfield';
 import Button, { ButtonGroup } from '@atlaskit/button';
 import { Checkbox } from '@atlaskit/checkbox';
@@ -33,7 +33,7 @@ export default () => (
         <form {...formProps}>
           <Field name="username" label="User name" isRequired defaultValue="">
             {({ fieldProps, error }) => (
-              <>
+              <Fragment>
                 <TextField autoComplete="off" {...fieldProps} />
                 {!error && (
                   <HelperMessage>
@@ -45,7 +45,7 @@ export default () => (
                     This user name is already in use, try another one.
                   </ErrorMessage>
                 )}
-              </>
+              </Fragment>
             )}
           </Field>
           <Field
@@ -56,7 +56,7 @@ export default () => (
             validate={value => (value.length < 8 ? 'TOO_SHORT' : undefined)}
           >
             {({ fieldProps, error, meta }) => (
-              <>
+              <Fragment>
                 <TextField type="password" {...fieldProps} />
                 {!error && !meta.valid && (
                   <HelperMessage>
@@ -70,7 +70,7 @@ export default () => (
                   </ErrorMessage>
                 )}
                 {meta.valid && <ValidMessage>Awesome password!</ValidMessage>}
-              </>
+              </Fragment>
             )}
           </Field>
           <CheckboxField name="remember" label="Remember me" defaultIsChecked>
