@@ -83,6 +83,7 @@ export const PositionerAbsolute = styled.div`
   width: ${dialogWidth};
   z-index: ${layers.modal};
   pointer-events: none;
+
   @media (min-width: 320px) and (max-width: 480px) {
     height: 100%;
     left: 0;
@@ -115,6 +116,7 @@ export const Dialog = styled.div`
   ${flexMaxHeightIEFix};
   outline: 0;
   pointer-events: auto;
+  
   @media (min-width: 320px) and (max-width: 480px) {
     height: 100%;
   }
