@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.4.4
+- [patch] [18dffaa5fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/18dffaa5fd):
+
+  - ED-6192: Bail out of column resizing if the table has changed via other means (e.g. collab)
+
 ## 98.4.3
 - [patch] [66a5bd2f70](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/66a5bd2f70):
 
