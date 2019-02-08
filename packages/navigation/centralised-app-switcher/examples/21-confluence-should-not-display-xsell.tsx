@@ -52,7 +52,7 @@ export default class ConfluenceAppSwitcherExample extends Component {
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
           <ConfluenceAppSwitcher
             cloudId="some-cloud-id"
-            triggerXFlow={() => null}
+            triggerXFlow={this.onTriggerXFlow}
           />
         </Drawer>
         <Button type="button" onClick={this.openDrawer}>
