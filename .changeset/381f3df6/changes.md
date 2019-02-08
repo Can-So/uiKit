@@ -1,1 +1,0 @@
-- ED-6177 Deleting a range of rows/columns deletes only a subset of selected rows/columns
