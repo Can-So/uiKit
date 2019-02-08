@@ -8,7 +8,7 @@ import {
   PRODUCT_DATA_MAP,
   productIsActive,
   getAdministrationLinks,
-  getXSellLink,
+  getSuggestedProductLink,
 } from '../../product-links';
 import { mount } from 'enzyme';
 
@@ -51,17 +51,17 @@ describe('utils product-links', () => {
   });
 
   it('getFixedProductLinks should append hostname to link', () => {
-    const expectedLinks = ['my-hostname.com/people', 'my-hostname.com/home'];
-    const fixedLinks = getFixedProductLinks(HOSTNAME);
+    const expectedLinks = ['/people', '/home'];
+    const fixedLinks = getFixedProductLinks();
     expect(fixedLinks.map(({ link }) => link)).toMatchObject(expectedLinks);
   });
 
   it('getProductLink should append hostname to link', () => {
     const productKey = 'confluence.ondemand';
-    const productLink = getProductLink(productKey, HOSTNAME);
+    const productLink = getProductLink(productKey);
     const expectedLink = {
       key: 'confluence.ondemand',
-      link: 'my-hostname.com/wiki',
+      link: '/wiki',
       ...PRODUCT_DATA_MAP['confluence.ondemand'],
     };
     expect(productLink).toMatchObject(expectedLink);
@@ -153,7 +153,7 @@ describe('utils product-links', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-software.ondemand',
       ]);
-      const result = getXSellLink(licenseInformation);
+      const result = getSuggestedProductLink(licenseInformation);
       expect(result).not.toBe(null);
       expect(result && result.key).toBe('confluence.ondemand');
     });
@@ -162,7 +162,7 @@ describe('utils product-links', () => {
         'jira-software.ondemand',
         'confluence.ondemand',
       ]);
-      const result = getXSellLink(licenseInformation);
+      const result = getSuggestedProductLink(licenseInformation);
       expect(result).not.toBe(null);
       expect(result && result.key).toBe('jira-servicedesk.ondemand');
     });
@@ -171,7 +171,7 @@ describe('utils product-links', () => {
         'jira-servicedesk.ondemand',
         'confluence.ondemand',
       ]);
-      const result = getXSellLink(licenseInformation);
+      const result = getSuggestedProductLink(licenseInformation);
       expect(result && result.key).toBe(null);
     });
   });

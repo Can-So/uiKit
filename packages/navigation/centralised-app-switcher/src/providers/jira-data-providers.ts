@@ -1,13 +1,10 @@
 import { fetchJson } from '../utils/fetch';
-import asDataProvider, { DataProviderProps } from './as-data-provider';
-import { CustomLinksProviderDataStructure } from './types';
+import asDataProvider from './as-data-provider';
+import { CustomLink } from '../types';
 
-export const CustomLinksProvider = asDataProvider<
-  DataProviderProps<CustomLinksProviderDataStructure>,
-  CustomLinksProviderDataStructure
->(() =>
+export const CustomLinksProvider = asDataProvider(() =>
   Promise.all([
-    fetchJson(`/rest/menu/latest/appswitcher`),
+    fetchJson<Array<CustomLink>>(`/rest/menu/latest/appswitcher`),
     '/plugins/servlet/customize-application-navigator',
   ]),
 );

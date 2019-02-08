@@ -1,7 +1,7 @@
-export const fetchJson = (url: string) =>
+export const fetchJson = <T>(url: string): Promise<T> =>
   fetch(url).then(response => response.json());
 
-export const postJson = (url: string, data: any) =>
+export const postJson = <T>(url: string, data: any): Promise<T> =>
   fetch(url, {
     method: 'POST',
     credentials: 'include',

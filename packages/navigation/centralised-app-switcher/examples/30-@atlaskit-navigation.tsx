@@ -26,6 +26,10 @@ export default class ConfluenceAppSwitcherExample extends Component {
     });
   };
 
+  onTriggerXFlow = (productKey: string) => {
+    console.log(`Triggering xflow for => ${productKey}`);
+  };
+
   render() {
     return (
       <Navigation
@@ -35,7 +39,10 @@ export default class ConfluenceAppSwitcherExample extends Component {
             isOpen={this.state.isDrawerOpen}
             onClose={this.onClose}
           >
-            <ConfluenceAppSwitcher cloudId="some-cloud-id" />
+            <ConfluenceAppSwitcher
+              cloudId="some-cloud-id"
+              triggerXFlow={this.onTriggerXFlow}
+            />
           </AkDrawer>,
         ]}
         globalPrimaryIcon={<AtlassianIcon size="large" label="Atlassian" />}
