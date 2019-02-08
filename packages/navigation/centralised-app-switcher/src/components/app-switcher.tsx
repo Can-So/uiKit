@@ -34,6 +34,7 @@ interface AppSwitcherProps {
   licenseInformation: ChildrenProps<LicenseInformationDataStructure>;
   managePermission: ChildrenProps<UserPermissionDataStructure>;
   addProductsPermission: ChildrenProps<UserPermissionDataStructure>;
+  isXFlowEnabled: ChildrenProps<boolean>;
 }
 
 export default class AppSwitcher extends React.Component<AppSwitcherProps> {
@@ -65,6 +66,10 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
         isLoading: isLoadingAddProductsPermission,
         data: addProductsPermissionData,
       },
+      isXFlowEnabled: {
+        isLoading: isLoadingIsXFlowEnabled,
+        data: isXFlowEnabledData,
+      },
     } = this.props;
 
     const isLoadingAdministrativeSectionData =
@@ -78,6 +83,9 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
       isLoadingLicenseInformation || isLoadingAddProductsPermission;
     const shouldRenderProductsSection =
       licenseInformationData && addProductsPermissionData;
+
+    const shouldRenderXSellLink =
+      suggestedProductLink && !isLoadingIsXFlowEnabled && isXFlowEnabledData;
 
     return (
       <AppSwitcherWrapper>
@@ -110,20 +118,20 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
                     </AppSwitcherItem>
                   ),
                 ),
-                suggestedProductLink && (
+                shouldRenderXSellLink ? (
                   <AppSwitcherItem
-                    key={suggestedProductLink.key}
-                    icon={suggestedProductLink.icon}
+                    key={suggestedProductLink!.key}
+                    icon={suggestedProductLink!.icon}
                     onClick={this.triggerXFlow}
                   >
                     <SuggestedProductItemText>
-                      {suggestedProductLink.label}
+                      {suggestedProductLink!.label}
                     </SuggestedProductItemText>
                     <Lozenge appearance="inprogress" isBold>
                       {addProductsPermissionData!.permitted ? 'Try' : 'Request'}
                     </Lozenge>
                   </AppSwitcherItem>
-                ),
+                ) : null,
               ]}
             </Section>
           )

@@ -10,6 +10,7 @@ import {
   UserPermissionProvider,
   RecentContainersDataStructure,
   UserPermissionDataStructure,
+  XFlowSettingsProvider,
 } from './instance-data-providers';
 
 interface CommonDataProviderProps {
@@ -20,6 +21,7 @@ interface CommonDataProviderProps {
       licenseInformation: ChildrenProps<LicenseInformationDataStructure>;
       managePermission: ChildrenProps<UserPermissionDataStructure>;
       addProductsPermission: ChildrenProps<UserPermissionDataStructure>;
+      isXFlowEnabled: ChildrenProps<boolean>;
     },
   ) => React.ReactElement<any>;
 }
@@ -38,14 +40,19 @@ export default ({ cloudId, children }: CommonDataProviderProps) => (
                 cloudId={cloudId}
                 permissionId={Permissions.ADD_PRODUCTS}
               >
-                {addProductsPermission =>
-                  children({
-                    recentContainers,
-                    licenseInformation,
-                    managePermission,
-                    addProductsPermission,
-                  })
-                }
+                {addProductsPermission => (
+                  <XFlowSettingsProvider cloudId={cloudId}>
+                    {isXFlowEnabled =>
+                      children({
+                        recentContainers,
+                        licenseInformation,
+                        managePermission,
+                        addProductsPermission,
+                        isXFlowEnabled,
+                      })
+                    }
+                  </XFlowSettingsProvider>
+                )}
               </UserPermissionProvider>
             )}
           </UserPermissionProvider>

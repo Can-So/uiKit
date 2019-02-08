@@ -50,3 +50,17 @@ export const UserPermissionProvider = asDataProvider(
       },
     ),
 );
+
+export interface XFlowSettings {
+  [s: string]: any;
+}
+
+export const XFlowSettingsProvider = asDataProvider(
+  ({ cloudId }: WithCloudId) =>
+    fetchJson<XFlowSettings>(`/gateway/api/site/${cloudId}/setting/xflow`).then(
+      (xFlowSettings): boolean =>
+        xFlowSettings.hasOwnProperty('product-suggestions-enabled')
+          ? xFlowSettings['product-suggestions-enabled']
+          : true,
+    ),
+);
