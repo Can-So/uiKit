@@ -1,5 +1,4 @@
-import { Schema } from 'prosemirror-model';
-import { Token } from './';
+import { Token, TokenParser } from './';
 
 /**
  * Jira is using the following regex to match force line break
@@ -8,11 +7,7 @@ import { Token } from './';
 
 const FORCE_LINE_BREAK_REGEX = /^\\{2}(?!\S*\\)/;
 
-export function forceLineBreak(
-  input: string,
-  position: number,
-  schema: Schema,
-): Token {
+export const forceLineBreak: TokenParser = ({ input, position, schema }) => {
   if (position > 0) {
     const charBefore = input.charAt(position - 1);
     if (charBefore === '\\') {
@@ -31,7 +26,7 @@ export function forceLineBreak(
   }
 
   return fallback(input, position);
-}
+};
 
 function fallback(input, position): Token {
   return {

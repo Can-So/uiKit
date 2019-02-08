@@ -1,15 +1,15 @@
-import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenType, TokenErrCallback } from './';
+import { Node as PMNode } from 'prosemirror-model';
+import { Token, TokenType, TokenParser } from './';
 import { hasAnyOfMarks } from '../utils/text';
 import { commonFormatter } from './common-formatter';
 import { parseString } from '../text';
 
-export function superscript(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const superscript: TokenParser = ({
+  input,
+  position,
+  schema,
+  tokenErrCallback,
+}) => {
   /**
    * The following token types will be ignored in parsing
    * the content of a  mark
@@ -19,7 +19,7 @@ export function superscript(
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
   ];
-  /** Adding subsup mark to all text */
+  // Adding subsup mark to all text
   const contentDecorator = (n: PMNode) => {
     const mark = schema.marks.subsup.create({ type: 'sup' });
     // We don't want to mix `code` mark with others
@@ -50,4 +50,4 @@ export function superscript(
     closing: '^',
     rawContentProcessor,
   });
-}
+};

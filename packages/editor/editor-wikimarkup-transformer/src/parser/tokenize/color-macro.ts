@@ -1,24 +1,24 @@
 import { Schema } from 'prosemirror-model';
-import { Token, TokenType, TokenErrCallback } from '.';
+import { Token, TokenType, TokenErrCallback, TokenParser } from '.';
 import { commonMacro } from './common-macro';
 import { parseAttrs } from '../utils/attrs';
 import { parseString } from '../text';
 import { getEditorColor } from '../color';
 import { hasAnyOfMarks } from '../utils/text';
 
-export function colorMacro(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const colorMacro: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   return commonMacro(input.substring(position), schema, {
     keyword: 'color',
     paired: true,
+    tokenErrCallback: context.tokenErrCallback,
     rawContentProcessor,
-    tokenErrCallback,
   });
-}
+};
 
 const rawContentProcessor = (
   rawAttrs: string,

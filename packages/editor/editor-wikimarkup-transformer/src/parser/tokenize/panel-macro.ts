@@ -1,5 +1,5 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback } from '.';
+import { Token, TokenErrCallback, TokenParser } from '.';
 import { commonMacro } from './common-macro';
 import { parseString } from '../text';
 import { parseAttrs } from '../utils/attrs';
@@ -9,19 +9,19 @@ import { title } from '../utils/title';
 
 const allowedNodeType = ['paragraph', 'heading', 'orderedList', 'bulletList'];
 
-export function panelMacro(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const panelMacro: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   return commonMacro(input.substring(position), schema, {
     keyword: 'panel',
     paired: true,
+    tokenErrCallback: context.tokenErrCallback,
     rawContentProcessor,
-    tokenErrCallback,
   });
-}
+};
 
 const rawContentProcessor = (
   rawAttrs: string,

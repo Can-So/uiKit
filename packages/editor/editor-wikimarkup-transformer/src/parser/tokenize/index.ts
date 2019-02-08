@@ -75,13 +75,26 @@ export interface PMNodeToken {
   readonly length: number;
 }
 
+export interface Context {
+  tokenErrCallback?: TokenErrCallback;
+}
+
 export type Token = TextToken | PMNodeToken;
+
 export type TokenErrCallback = (err: Error, tokenType: string) => void;
+
 export type TokenParser = (
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  {
+    input,
+    position,
+    schema,
+    context,
+  }: {
+    input: string;
+    position: number;
+    schema: Schema;
+    context: Context;
+  },
 ) => Token;
 
 const tokenToTokenParserMapping: {
@@ -123,15 +136,17 @@ export function parseToken(
   type: TokenType,
   position: number,
   schema: Schema,
-  errCallback?: TokenErrCallback,
+  tokenErrCallback?: TokenErrCallback,
 ): Token {
   const tokenParser = tokenToTokenParserMapping[type];
   if (tokenParser) {
     try {
-      return tokenParser(input, position, schema, errCallback);
+      const context: Context = { tokenErrCallback };
+
+      return tokenParser({ input, position, schema, context });
     } catch (err) {
-      if (errCallback) {
-        errCallback(err, type);
+      if (tokenErrCallback) {
+        tokenErrCallback(err, type);
       }
       return fallback(input, position);
     }

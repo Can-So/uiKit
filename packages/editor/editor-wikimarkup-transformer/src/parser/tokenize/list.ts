@@ -3,7 +3,7 @@ import { getType as getListType, ListBuilder } from '../builder/list-builder';
 import { parseString } from '../text';
 import { normalizePMNodes } from '../utils/normalize';
 import { parseMacroKeyword } from './keyword';
-import { Token, TokenType, TokenErrCallback, parseToken } from './';
+import { Token, TokenType, parseToken, TokenParser } from './';
 import { parseNewlineOnly } from './whitespace';
 
 const LIST_ITEM_REGEXP = /^ *([*\-#]+) /;
@@ -17,12 +17,7 @@ const processState = {
   MACRO: 3,
 };
 
-export function list(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const list: TokenParser = ({ input, position, schema, context }) => {
   /**
    * The following token types will be ignored in parsing
    * the content of a listItem
@@ -66,9 +61,7 @@ export function list(
           }
 
           if (!builder) {
-            /**
-             * It happens because this is the first item of the list
-             */
+            // It happens because this is the first item of the list
             builder = new ListBuilder(schema, symbols);
             lastListSymbols = symbols;
           } else {
@@ -77,11 +70,11 @@ export function list(
              * and now there is a new list item
              */
             if (buffer.length > 0) {
-              /** Wrap up previous list item and clear buffer */
+              // Wrap up previous list item and clear buffer
               const content = parseString({
                 ignoreTokens,
                 schema,
-                tokenErrCallback,
+                tokenErrCallback: context.tokenErrCallback,
                 input: buffer,
               });
               const normalizedContent = normalizePMNodes(content, schema);
@@ -96,10 +89,10 @@ export function list(
               contentBuffer = [];
             }
 
-            /** We finished last list item here, going to the new one */
+            // We finished last list item here, going to the new one
             lastListSymbols = symbols;
             const type = getListType(symbols);
-            /** If it's top level and doesn't match, create a new list */
+            // If it's top level and doesn't match, create a new list
             if (type !== builder.type && symbols.length === 1) {
               output.push(...builder.buildPMNode());
               builder = new ListBuilder(schema, symbols);
@@ -109,9 +102,7 @@ export function list(
           index += listMatch[0].length;
         }
 
-        /**
-         * If we encounter an empty line, we should end the list
-         */
+        // If we encounter an empty line, we should end the list
         const emptyLineMatch = substring.match(EMPTY_LINE_REGEXP);
         if (emptyLineMatch) {
           state = processState.END;
@@ -149,11 +140,9 @@ export function list(
         if (token.type === 'text') {
           buffer += token.text;
         } else {
-          /**
-           * We found a macro in the list...
-           */
+          // We found a macro in the list...
           if (!builder) {
-            /** Something is really wrong here */
+            // Something is really wrong here
             return fallback(input, position);
           }
           if (buffer.length > 0) {
@@ -164,7 +153,7 @@ export function list(
             const content = parseString({
               ignoreTokens,
               schema,
-              tokenErrCallback,
+              tokenErrCallback: context.tokenErrCallback,
               input: buffer,
             });
             const normalizedContent = normalizePMNodes(content, schema);
@@ -181,16 +170,16 @@ export function list(
       }
       case processState.END: {
         if (!builder) {
-          /** Something is really wrong here */
+          // Something is really wrong here
           return fallback(input, position);
         }
 
         if (buffer.length > 0) {
-          /** Wrap up previous list item and clear buffer */
+          // Wrap up previous list item and clear buffer
           const content = parseString({
             ignoreTokens,
             schema,
-            tokenErrCallback,
+            tokenErrCallback: context.tokenErrCallback,
             input: buffer,
           });
           const normalizedContent = normalizePMNodes(content, schema);
@@ -212,11 +201,11 @@ export function list(
   }
 
   if (buffer.length > 0) {
-    /** Wrap up what's left in the buffer */
+    // Wrap up what's left in the buffer
     const content = parseString({
       ignoreTokens,
       schema,
-      tokenErrCallback,
+      tokenErrCallback: context.tokenErrCallback,
       input: buffer,
     });
     const normalizedContent = normalizePMNodes(content, schema);
@@ -235,7 +224,7 @@ export function list(
     nodes: output,
     length: index - position,
   };
-}
+};
 
 function sanitize(nodes: PMNode[], schema: Schema) {
   return nodes.reduce((result: PMNode[], curr: PMNode) => {

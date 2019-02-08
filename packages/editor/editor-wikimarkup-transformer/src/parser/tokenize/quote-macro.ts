@@ -1,23 +1,23 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback } from '.';
+import { Token, TokenErrCallback, TokenParser } from '.';
 import { commonMacro } from './common-macro';
 import { hasAnyOfMarks } from '../utils/text';
 import { normalizePMNodes } from '../utils/normalize';
 import { parseString } from '../text';
 
-export function quoteMacro(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const quoteMacro: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   return commonMacro(input.substring(position), schema, {
     keyword: 'quote',
     paired: true,
     rawContentProcessor,
-    tokenErrCallback,
+    tokenErrCallback: context.tokenErrCallback,
   });
-}
+};
 
 export const rawContentProcessor = (
   rawAttrs: string,

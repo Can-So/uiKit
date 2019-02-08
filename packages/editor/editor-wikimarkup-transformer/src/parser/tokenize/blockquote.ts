@@ -1,16 +1,15 @@
-import { Schema } from 'prosemirror-model';
 import { rawContentProcessor } from './quote-macro';
-import { Token, TokenErrCallback } from './';
+import { Token, TokenParser } from './';
 
-// bq. sadfsdf
+// bq. foobarbaz
 const BLOCKQUOTE_REGEXP = /^bq\.(.*)/;
 
-export function blockquote(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const blockquote: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   const match = input.substring(position).match(BLOCKQUOTE_REGEXP);
 
   if (!match) {
@@ -23,9 +22,9 @@ export function blockquote(
     rawContent,
     match[0].length,
     schema,
-    tokenErrCallback,
+    context.tokenErrCallback,
   );
-}
+};
 
 function fallback(input: string, position: number): Token {
   return {
