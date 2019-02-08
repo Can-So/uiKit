@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 9.0.1
+- [patch] [9aa8faebd4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9aa8faebd4):
+
+  - Added strict typing for i18n messages
+
 ## 9.0.0
 - [major] [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
 
