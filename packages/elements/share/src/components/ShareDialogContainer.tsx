@@ -41,7 +41,7 @@ type State = {
 };
 
 const memoizedFormatCopyLink: string = memoizeOne(
-  (origin, link): { origin: OriginTracing; link: string } => {
+  (origin: OriginTracing, link: string): string => {
     return origin.addToUrl(link);
   },
 );
