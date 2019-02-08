@@ -1,6 +1,6 @@
 export { ShareDialogContainer } from './components/ShareDialogContainer';
-export { ShareServiceClient } from './clients/shareServiceClient';
+export { ShareServiceClient } from './clients/ShareServiceClient';
 export {
   InvitationsCapabilitiesResource,
-} from './api/invitationsCapabilitiesResource';
+} from './api/InvitationsCapabilitiesResource';
 export * from './types';
