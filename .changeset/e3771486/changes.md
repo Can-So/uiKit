@@ -1,1 +1,0 @@
-- added inline extractors for Bitbucket and Github.
