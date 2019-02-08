@@ -5,14 +5,14 @@ import { Client, RemoteResourceAuthConfig, ResolveResponse } from '../..';
 import { ObjectState, GetNowTimeFn, DefinedState } from '../../types';
 import { v4 } from 'uuid';
 import { resolvedEvent, unresolvedEvent } from '../../../analytics';
+import env from '../../../environments';
 
 const getNow = (nows: number[]): GetNowTimeFn => () =>
   nows.shift() || new Date().getTime();
 
 const waitFor = (n: number = 1) => new Promise(res => setTimeout(res, n));
 
-const RESOLVE_URL =
-  'https://api-private.stg.atlassian.com/object-resolver/resolve';
+const RESOLVE_URL = 'https://api-private.atlassian.com/object-resolver/resolve';
 
 const OBJECT_URL = 'http://example.com/foobar';
 
@@ -133,6 +133,24 @@ function onNthState(
 
 describe('Client', () => {
   afterEach(() => fetchMock.restore());
+
+  describe('environments', () => {
+    it('should make a call to prod server if not other env is specified', async () => {
+      expect(new Client().env.resolverURL).toEqual(env.prod.resolverURL);
+    });
+
+    it('should make a call to prod server if not other env is specified', () => {
+      expect(new Client(undefined, 'dev').env.resolverURL).toEqual(
+        env.dev.resolverURL,
+      );
+    });
+
+    it('should make a call to prod server if not other env is specified', () => {
+      expect(new Client(undefined, 'staging').env.resolverURL).toEqual(
+        env.staging.resolverURL,
+      );
+    });
+  });
 
   it('should call update function two times', async () => {
     mockResolvedFetchCall();

@@ -220,6 +220,8 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
                     createAnalyticsEvent(
                       connectSucceededEvent(url, state),
                     ).fire(ANALYTICS_CHANNEL);
+                  } else {
+                    console.log('no createAnalyticsEvent');
                   }
                   reload();
                 },
@@ -239,6 +241,8 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
                             state,
                           ),
                     ).fire(ANALYTICS_CHANNEL);
+                  } else {
+                    console.log('no createAnalyticsEvent');
                   }
                   reload();
                 },
