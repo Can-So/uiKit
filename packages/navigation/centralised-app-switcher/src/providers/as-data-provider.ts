@@ -6,19 +6,17 @@ export interface ChildrenProps<D> {
   error: any;
 }
 
-interface ChildrenCallback<D> {
-  (props: ChildrenProps<D>): ReactNode;
-}
-
 interface PropsToPromiseMapper<P, D> {
   (props: P): Promise<D> | D;
 }
 
 export interface DataProviderProps<D> {
-  children: ChildrenCallback<D>;
+  children: (props: ChildrenProps<D>) => ReactNode;
 }
 
-export default function<D, P>(mapPropsToPromise: PropsToPromiseMapper<P, D>) {
+export default function<P, D>(
+  mapPropsToPromise: PropsToPromiseMapper<Readonly<P>, D>,
+) {
   return class extends Component<P & DataProviderProps<D>> {
     state = {
       isLoading: true,
@@ -27,12 +25,7 @@ export default function<D, P>(mapPropsToPromise: PropsToPromiseMapper<P, D>) {
     };
 
     componentDidMount() {
-      /**
-       *  We deliberately trick TypeScript to think this.props is of type P here,
-       *  otherwise, although P is subset of "P & DataProviderProps<D>",
-       *  it would complain that it is incompatible with mapPropsToPromise arguments type.
-       */
-      const dataSource = mapPropsToPromise((this.props as unknown) as P);
+      const dataSource = mapPropsToPromise(this.props);
       if (dataSource instanceof Promise) {
         dataSource
           .then((result: D) => {
