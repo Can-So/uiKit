@@ -1,0 +1,1 @@
+- ED-6172: Apply table layout based on total width for autoSize tables.

@@ -4,7 +4,7 @@ import {
   DEFAULT_WIDTH,
   DEFAULT_HEIGHT,
 } from '../_utils';
-import * as adf from './adf/numbered-table.adf.json';
+import * as adf from './__fixtures__/numbered-table.adf.json';
 
 describe.skip('Snapshot Test: numbered table', () => {
   let page;

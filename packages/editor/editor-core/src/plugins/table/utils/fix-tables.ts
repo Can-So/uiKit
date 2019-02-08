@@ -2,8 +2,16 @@ import { Transaction } from 'prosemirror-state';
 import { getCellsInColumn } from 'prosemirror-utils';
 import { Node as PMNode } from 'prosemirror-model';
 import { TableMap } from 'prosemirror-tables';
+import { TableLayout } from '@atlaskit/adf-schema';
+import {
+  akEditorWideLayoutWidth,
+  akEditorDefaultLayoutWidth,
+  tableCellMinWidth,
+} from '@atlaskit/editor-common';
+
+import { contentWidth } from '../pm-plugins/table-resizing/resizer/contentWidth';
+import { calculateColWidth } from '../pm-plugins/table-resizing/resizer/utils';
 import { sendLogs } from '../../../utils/sendLogs';
-import { parseDOMColumnWidths } from '../utils';
 
 const fireAnalytics = (properties = {}) =>
   sendLogs({
@@ -222,28 +230,78 @@ export const fixAutoSizedTable = (
 ) => {
   const colWidths = parseDOMColumnWidths(table);
 
-  node.forEach((rowNode, rowOffset, i) => {
-    rowNode.forEach((colNode, colOffset, j) => {
-      const pos = rowOffset + colOffset + basePos + 2;
-
-      tr.setNodeMarkup(pos, undefined, {
-        ...colNode.attrs,
-        colwidth: colWidths.width(j, colNode.attrs.colspan).map(Math.round),
-      });
-    });
+  tr = replaceCells(tr, node, basePos, (cell, _rowIndex, colIndex) => {
+    const newColWidths = colWidths.slice(
+      colIndex,
+      colIndex + cell.attrs.colspan,
+    );
+    return cell.type.createChecked(
+      {
+        ...cell.attrs,
+        colwidth: newColWidths.length ? newColWidths : null,
+      },
+      cell.content,
+      cell.marks,
+    );
   });
 
   // clear autosizing on the table node
   return tr
     .setNodeMarkup(basePos, undefined, {
       ...node.attrs,
+      layout: getLayoutBasedOnWidth(colWidths),
       __autoSize: false,
     })
     .setMeta('addToHistory', false);
 };
 
+const getLayoutBasedOnWidth = (columnWidths: Array<number>): TableLayout => {
+  const totalWidth = columnWidths.reduce((acc, current) => acc + current, 0);
+
+  if (totalWidth > akEditorWideLayoutWidth) {
+    return 'full-width';
+  } else if (
+    totalWidth > akEditorDefaultLayoutWidth &&
+    totalWidth < akEditorWideLayoutWidth
+  ) {
+    return 'wide';
+  } else {
+    return 'default';
+  }
+};
+
+function parseDOMColumnWidths(node: HTMLElement): Array<number> {
+  const row = node.querySelector('tr');
+
+  if (!row) {
+    return [];
+  }
+
+  let cols: Array<number> = [];
+
+  for (let col = 0; col < row.childElementCount; col++) {
+    const currentCol = row.children[col];
+    const colspan = Number(currentCol.getAttribute('colspan') || 1);
+    for (let span = 0; span < colspan; span++) {
+      const colIdx = col + span;
+      const colWidth = calculateColWidth(node, colIdx, col => {
+        return contentWidth(col as HTMLElement, node).width;
+      });
+
+      cols[colIdx] = Math.max(colWidth, tableCellMinWidth);
+    }
+  }
+
+  return cols;
+}
+
 // TODO: move to prosemirror-utils
-const replaceCells = (tr, table, tablePos, modifyCell) => {
+const replaceCells = (
+  tr: Transaction,
+  table: PMNode,
+  tablePos: number,
+  modifyCell: (cell: PMNode, rowIndex: number, colIndex: number) => PMNode,
+) => {
   const rows: PMNode[] = [];
   let modifiedCells = 0;
   for (let rowIndex = 0; rowIndex < table.childCount; rowIndex++) {
