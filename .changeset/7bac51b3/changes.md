@@ -1,1 +1,0 @@
-- add selected state to InlinePlayer in media-card
