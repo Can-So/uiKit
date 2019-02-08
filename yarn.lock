@@ -1306,7 +1306,6 @@
 "@types/linkify-it@^2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/linkify-it/-/linkify-it-2.0.4.tgz#80a7f9aec4c9283e8333debda5a88511d4a529a7"
-  integrity sha512-9o5piu3tP6DwqT+Cyf7S3BitsTc6Cl0pCPKUhIE5hzQbtueiBXdtBipTLLvaGfT11/8XHRmsagu4YfBesTaiCA==
 
 "@types/lodash.chunk@^4.2.3":
   version "4.2.3"
@@ -4421,7 +4420,6 @@ cloneable-readable@^1.0.0:
 closest-file-data@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/closest-file-data/-/closest-file-data-0.1.4.tgz#975f87c132f299d24a0375b9f63ca3fb88f72b3a"
-  integrity sha1-l1+HwTLymdJKA3W59jyj+4j3Kzo=
 
 cmd-shim@^2.0.2:
   version "2.0.2"
@@ -5239,7 +5237,6 @@ date-fns@*, date-fns@^1.27.2, date-fns@^1.29.0:
 date-fns@^1.30.1:
   version "1.30.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
-  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -7007,7 +7004,6 @@ fs-access@^1.0.0:
 fs-extra@6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
-  integrity sha512-GnyIkKhhzXZUWFCaJzvyDLEEgDkPfb4/TPvJCJVuS8MWZgoSsErf++QpiAlDnKFcqhRlm+tIOcencCjyJE6ZCA==
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
@@ -10950,7 +10946,6 @@ neo-async@^2.5.0:
 netlify-cli@^2.6.4:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/netlify-cli/-/netlify-cli-2.6.4.tgz#c7c40ae1dc703d522056e9b2e9845bf6458a4f02"
-  integrity sha512-QMALsm5vYU8PWHSv38fDh/17ajcqREe9nrgHorvywcZwYFudsdejL35GDluXMZm0zS9dc34MX/cXnVvSSu9daA==
   dependencies:
     "@iarna/toml" "^2.0.0"
     "@oclif/command" "^1"
@@ -10994,7 +10989,6 @@ netlify-cli@^2.6.4:
 netlify@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/netlify/-/netlify-2.2.4.tgz#7d96c4bf20727e790eff058f92f4d5655f2e958a"
-  integrity sha512-TRlLuQ2PY4o2l5Ig4i6rqISj+YF6uatv4cKJcheevzl7bqXu/RU7Mb3Jy3VfFEymhPYXkszTLBF+JoekGA9O+A==
   dependencies:
     "@netlify/open-api" "^0.5.0"
     archiver "^3.0.0"
@@ -12756,9 +12750,9 @@ prosemirror-transform@^1.0.0, prosemirror-transform@^1.1.0, prosemirror-transfor
   dependencies:
     prosemirror-model "^1.0.0"
 
-prosemirror-utils@^0.7.5:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/prosemirror-utils/-/prosemirror-utils-0.7.5.tgz#11b477647b672ec8f10679ab298a5823dad6457a"
+prosemirror-utils@0.7.6:
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/prosemirror-utils/-/prosemirror-utils-0.7.6.tgz#c462ddfbf2452e56e4b25d1f02b34caccddb0f33"
 
 prosemirror-view@^1.0.0, prosemirror-view@^1.7.0:
   version "1.7.0"
@@ -15820,7 +15814,6 @@ tryit@^1.0.1:
 ts-jest@23.1.4:
   version "23.1.4"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-23.1.4.tgz#66ac1d8d3fbf8f9a98432b11aa377aa850664b2b"
-  integrity sha512-9rCSxbWfoZxxeXnSoEIzRNr9hDIQ8iEJAWmSRsWhDHDT8OeuGfURhJQUE8jtJlkyEygs6rngH8RYtHz9cfjmEA==
   dependencies:
     closest-file-data "^0.1.4"
     fs-extra "6.0.1"
@@ -17263,7 +17256,6 @@ yargs@~3.10.0:
 yarn-deduplicate@^1.0.5:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/yarn-deduplicate/-/yarn-deduplicate-1.1.0.tgz#bdfdcc5a2473556c0232996424dfe039293f2f44"
-  integrity sha512-YTZzmzzUgDK7IllsKxgnTQ7zAGbTVnj3bnH3nxoqZ2dE0IY7NpaFpFYXR+BuBeDtxIgMhwJJvH1LTWm3k3fWpg==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     commander "^2.10.0"

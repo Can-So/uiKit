@@ -1,0 +1,1 @@
+- Bumps prosemirror-utils to 0.7.6
