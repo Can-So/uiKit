@@ -54,6 +54,7 @@
     "@types/memoize-one": "^3.0.1",
     "@types/uuid": "^3.4.4",
     "enzyme": "^3.7.0",
+    "enzyme-react-intl": "^2.0.3",
     "react-intl": "^2.6.0"
   },
   "repository": {

@@ -8,7 +8,8 @@ jest.mock('../../../components/creatable', () => ({
 
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import Select, { CreatableSelect } from '@atlaskit/select';
-import { mount, ReactWrapper, shallow } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getCreatableProps } from '../../../components/creatable';
@@ -29,7 +30,7 @@ import {
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
-    shallow(<UserPicker {...props} />)
+    shallowWithIntl(<UserPicker {...props} />)
       .dive()
       .dive();
 
@@ -610,7 +611,7 @@ describe('UserPicker', () => {
     );
 
     beforeEach(() => {
-      component = mount(<AnalyticsTestComponent />);
+      component = mountWithIntl(<AnalyticsTestComponent />);
     });
 
     afterEach(() => {
