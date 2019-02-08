@@ -1,5 +1,5 @@
 import { ContentLink } from './link-parser';
-import { Token, TokenErrCallback, Context } from '../index';
+import { Token, Context } from '../index';
 import { Node as PMNode, Schema } from 'prosemirror-model';
 import { mentionLinkResolver } from './mention-link';
 import { attachmentLinkResolver } from './attachment-link';

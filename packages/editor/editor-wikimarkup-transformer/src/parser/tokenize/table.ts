@@ -5,7 +5,7 @@ import { parseString } from '../text';
 import { normalizePMNodes } from '../utils/normalize';
 import { linkFormat } from './links/link-format';
 import { media } from './media';
-import { TokenType, TokenErrCallback, TokenParser, Context } from './';
+import { TokenType, TokenParser, Context } from './';
 import { parseNewlineOnly } from './whitespace';
 import { parseMacroKeyword } from './keyword';
 import { parseToken } from './';
