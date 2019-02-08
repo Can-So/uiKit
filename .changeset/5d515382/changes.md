@@ -1,0 +1,1 @@
+- suppress enter and tab keys events in the status node to prevent bugs
