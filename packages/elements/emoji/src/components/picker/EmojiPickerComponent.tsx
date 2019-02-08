@@ -440,11 +440,11 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
   private onUploadEmoji = (upload: EmojiUpload) => {
     const { emojiProvider } = this.props;
     this.fireAnalytics('upload.start');
-    const errorSetter = message =>
+    const errorSetter = (message?: FormattedMessage.MessageDescriptor) =>
       this.setState({
         uploadErrorMessage: message,
       });
-    const onSuccess = emojiDescription => {
+    const onSuccess = (emojiDescription: EmojiDescription) => {
       this.setState({
         activeCategory: customCategory,
         selectedEmoji: emojiDescription,
