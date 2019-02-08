@@ -1,1 +1,0 @@
-- Components inside Portal render after portal container element is attached to the DOM
