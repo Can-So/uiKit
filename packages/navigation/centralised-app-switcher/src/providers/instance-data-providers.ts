@@ -48,7 +48,7 @@ export const UserPermissionProvider = asDataProvider(
         permissionId,
         resourceId: `ari:cloud:platform::site/${cloudId}`,
       },
-    ),
+    ).then((permission): boolean => permission.permitted),
 );
 
 export interface XFlowSettings {

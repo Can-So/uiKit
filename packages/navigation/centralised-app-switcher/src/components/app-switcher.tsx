@@ -20,10 +20,7 @@ import {
   CustomLinksProviderDataStructure,
   LicenseInformationDataStructure,
 } from '../providers/types';
-import {
-  RecentContainersDataStructure,
-  UserPermissionDataStructure,
-} from '../providers/instance-data-providers';
+import { RecentContainersDataStructure } from '../providers/instance-data-providers';
 
 interface AppSwitcherProps {
   cloudId: string;
@@ -32,8 +29,8 @@ interface AppSwitcherProps {
   suggestedProductLink: SuggestedProductLink;
   recentContainers: ChildrenProps<RecentContainersDataStructure>;
   licenseInformation: ChildrenProps<LicenseInformationDataStructure>;
-  managePermission: ChildrenProps<UserPermissionDataStructure>;
-  addProductsPermission: ChildrenProps<UserPermissionDataStructure>;
+  managePermission: ChildrenProps<boolean>;
+  addProductsPermission: ChildrenProps<boolean>;
   isXFlowEnabled: ChildrenProps<boolean>;
 }
 
@@ -75,14 +72,14 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
     const isLoadingAdministrativeSectionData =
       isLoadingManagePermission && isLoadingAddProductsPermission;
     const shouldRenderAdministrativeSection =
-      managePermissionData &&
-      addProductsPermissionData &&
-      (managePermissionData.permitted || addProductsPermissionData.permitted);
+      !isLoadingManagePermission &&
+      !isLoadingAddProductsPermission &&
+      (managePermissionData || addProductsPermissionData);
 
     const isLoadingProductsSectionData =
       isLoadingLicenseInformation || isLoadingAddProductsPermission;
     const shouldRenderProductsSection =
-      licenseInformationData && addProductsPermissionData;
+      licenseInformationData && !isLoadingAddProductsPermission;
 
     const shouldRenderXSellLink =
       suggestedProductLink && !isLoadingIsXFlowEnabled && isXFlowEnabledData;
@@ -94,14 +91,13 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
         ) : (
           shouldRenderAdministrativeSection && (
             <Section title="Administration" isAdmin>
-              {getAdministrationLinks(
-                cloudId,
-                managePermissionData!.permitted,
-              ).map(({ label, icon, key, link }) => (
-                <AppSwitcherItem key={key} icon={icon} href={link}>
-                  {label}
-                </AppSwitcherItem>
-              ))}
+              {getAdministrationLinks(cloudId, managePermissionData!).map(
+                ({ label, icon, key, link }) => (
+                  <AppSwitcherItem key={key} icon={icon} href={link}>
+                    {label}
+                  </AppSwitcherItem>
+                ),
+              )}
             </Section>
           )
         )}
@@ -128,7 +124,7 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
                       {suggestedProductLink!.label}
                     </SuggestedProductItemText>
                     <Lozenge appearance="inprogress" isBold>
-                      {addProductsPermissionData!.permitted ? 'Try' : 'Request'}
+                      {addProductsPermissionData! ? 'Try' : 'Request'}
                     </Lozenge>
                   </AppSwitcherItem>
                 ) : null,

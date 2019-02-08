@@ -9,7 +9,6 @@ import {
   RecentContainersProvider,
   UserPermissionProvider,
   RecentContainersDataStructure,
-  UserPermissionDataStructure,
   XFlowSettingsProvider,
 } from './instance-data-providers';
 
@@ -19,8 +18,8 @@ interface CommonDataProviderProps {
     props: {
       recentContainers: ChildrenProps<RecentContainersDataStructure>;
       licenseInformation: ChildrenProps<LicenseInformationDataStructure>;
-      managePermission: ChildrenProps<UserPermissionDataStructure>;
-      addProductsPermission: ChildrenProps<UserPermissionDataStructure>;
+      managePermission: ChildrenProps<boolean>;
+      addProductsPermission: ChildrenProps<boolean>;
       isXFlowEnabled: ChildrenProps<boolean>;
     },
   ) => React.ReactElement<any>;
