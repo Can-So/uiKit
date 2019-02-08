@@ -3,12 +3,12 @@ import AppSwitcher from './app-switcher';
 import { CustomLinksProvider } from '../providers/confluence-data-providers';
 import CommonDataProvider from '../providers/common-data-provider';
 
-interface JiraAppSwitcherProps {
+interface ConfluenceAppSwitcherProps {
   cloudId: string;
   triggerXFlow: (productKey: string) => void;
 }
 
-export default (props: JiraAppSwitcherProps) => (
+export default (props: ConfluenceAppSwitcherProps) => (
   <CustomLinksProvider>
     {customLinks => (
       <CommonDataProvider cloudId={props.cloudId}>
