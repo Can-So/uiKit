@@ -28,7 +28,7 @@ export const emphasis: TokenParser = ({ input, position, schema, context }) => {
     const content = parseString({
       ignoreTokens,
       schema,
-      tokenErrCallback: context.tokenErrCallback,
+      context,
       input: raw,
     });
     const decoratedContent = content.map(contentDecorator);
@@ -43,6 +43,7 @@ export const emphasis: TokenParser = ({ input, position, schema, context }) => {
   return commonFormatter(input, position, schema, {
     opening: '_',
     closing: '_',
+    context,
     rawContentProcessor,
   });
 };

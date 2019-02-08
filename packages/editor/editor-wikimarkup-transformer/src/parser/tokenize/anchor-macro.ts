@@ -1,5 +1,5 @@
 import { Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback, TokenParser } from '.';
+import { Token, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 
 export const anchorMacro: TokenParser = ({
@@ -11,7 +11,7 @@ export const anchorMacro: TokenParser = ({
   return commonMacro(input.substring(position), schema, {
     keyword: 'anchor',
     paired: false,
-    tokenErrCallback: context.tokenErrCallback,
+    context,
     rawContentProcessor,
   });
 };
@@ -21,7 +21,7 @@ const rawContentProcessor = (
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   return {
     type: 'text',

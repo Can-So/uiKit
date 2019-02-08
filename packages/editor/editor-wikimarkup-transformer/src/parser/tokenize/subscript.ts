@@ -32,7 +32,7 @@ export const subscript: TokenParser = ({
   const rawContentProcessor = (raw: string, length: number): Token => {
     const content = parseString({
       schema,
-      tokenErrCallback: context.tokenErrCallback,
+      context,
       ignoreTokens: ignoreTokenTypes,
       input: raw,
     });
@@ -48,6 +48,7 @@ export const subscript: TokenParser = ({
   return commonFormatter(input, position, schema, {
     opening: '~',
     closing: '~',
+    context,
     rawContentProcessor,
   });
 };

@@ -31,7 +31,7 @@ export const strong: TokenParser = ({ input, position, schema, context }) => {
   const rawContentProcessor = (raw: string, length: number): Token => {
     const content = parseString({
       schema,
-      tokenErrCallback: context.tokenErrCallback,
+      context,
       ignoreTokens: ignoreTokenTypes,
       input: raw,
     });
@@ -47,6 +47,7 @@ export const strong: TokenParser = ({ input, position, schema, context }) => {
   return commonFormatter(input, position, schema, {
     opening: '*',
     closing: '*',
+    context,
     rawContentProcessor,
   });
 };

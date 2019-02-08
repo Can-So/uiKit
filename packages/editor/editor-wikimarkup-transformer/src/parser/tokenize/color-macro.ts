@@ -1,5 +1,5 @@
 import { Schema } from 'prosemirror-model';
-import { Token, TokenType, TokenErrCallback, TokenParser } from '.';
+import { Token, TokenType, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 import { parseAttrs } from '../utils/attrs';
 import { parseString } from '../text';
@@ -15,7 +15,7 @@ export const colorMacro: TokenParser = ({
   return commonMacro(input.substring(position), schema, {
     keyword: 'color',
     paired: true,
-    tokenErrCallback: context.tokenErrCallback,
+    context,
     rawContentProcessor,
   });
 };
@@ -25,7 +25,7 @@ const rawContentProcessor = (
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   const ignoreTokens = [
     TokenType.DOUBLE_DASH_SYMBOL,
@@ -37,7 +37,7 @@ const rawContentProcessor = (
   const content = parseString({
     ignoreTokens,
     schema,
-    tokenErrCallback,
+    context,
     input: rawContent,
   });
   const decoratedContent = content.map(n => {

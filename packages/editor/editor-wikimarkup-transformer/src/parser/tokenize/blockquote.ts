@@ -17,13 +17,7 @@ export const blockquote: TokenParser = ({
   }
 
   const [, rawContent] = match;
-  return rawContentProcessor(
-    '',
-    rawContent,
-    match[0].length,
-    schema,
-    context.tokenErrCallback,
-  );
+  return rawContentProcessor('', rawContent, match[0].length, schema, context);
 };
 
 function fallback(input: string, position: number): Token {

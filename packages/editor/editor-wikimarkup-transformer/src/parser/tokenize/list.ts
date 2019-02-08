@@ -74,7 +74,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
               const content = parseString({
                 ignoreTokens,
                 schema,
-                tokenErrCallback: context.tokenErrCallback,
+                context,
                 input: buffer,
               });
               const normalizedContent = normalizePMNodes(content, schema);
@@ -153,7 +153,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
             const content = parseString({
               ignoreTokens,
               schema,
-              tokenErrCallback: context.tokenErrCallback,
+              context,
               input: buffer,
             });
             const normalizedContent = normalizePMNodes(content, schema);
@@ -179,7 +179,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
           const content = parseString({
             ignoreTokens,
             schema,
-            tokenErrCallback: context.tokenErrCallback,
+            context,
             input: buffer,
           });
           const normalizedContent = normalizePMNodes(content, schema);
@@ -205,7 +205,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
     const content = parseString({
       ignoreTokens,
       schema,
-      tokenErrCallback: context.tokenErrCallback,
+      context,
       input: buffer,
     });
     const normalizedContent = normalizePMNodes(content, schema);

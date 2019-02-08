@@ -19,7 +19,7 @@ export const linkFormat: TokenParser = ({
 
   const content = parseContentLink(match[1]);
 
-  return resolveLink(content, schema, context.tokenErrCallback);
+  return resolveLink(content, schema, context);
 };
 
 function fallback(): Token {

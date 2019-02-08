@@ -8,7 +8,7 @@ export const superscript: TokenParser = ({
   input,
   position,
   schema,
-  tokenErrCallback,
+  context,
 }) => {
   /**
    * The following token types will be ignored in parsing
@@ -32,7 +32,7 @@ export const superscript: TokenParser = ({
   const rawContentProcessor = (raw: string, length: number): Token => {
     const content = parseString({
       schema,
-      tokenErrCallback,
+      context,
       ignoreTokens: ignoreTokenTypes,
       input: raw,
     });
@@ -48,6 +48,7 @@ export const superscript: TokenParser = ({
   return commonFormatter(input, position, schema, {
     opening: '^',
     closing: '^',
+    context,
     rawContentProcessor,
   });
 };

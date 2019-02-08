@@ -7,7 +7,7 @@ export const monospace: TokenParser = ({
   input,
   position,
   schema,
-  tokenErrCallback,
+  context,
 }) => {
   /**
    * The following token types will be ignored in parsing
@@ -32,7 +32,7 @@ export const monospace: TokenParser = ({
     const content = parseString({
       ignoreTokens,
       schema,
-      tokenErrCallback,
+      context,
       input: raw,
     });
     const decoratedContent = content.map(contentDecorator);
@@ -47,6 +47,7 @@ export const monospace: TokenParser = ({
   return commonFormatter(input, position, schema, {
     opening: '{{',
     closing: '}}',
+    context,
     rawContentProcessor,
   });
 };

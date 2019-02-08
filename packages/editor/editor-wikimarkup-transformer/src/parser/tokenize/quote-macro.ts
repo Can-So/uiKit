@@ -1,5 +1,5 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback, TokenParser } from '.';
+import { Token, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 import { hasAnyOfMarks } from '../utils/text';
 import { normalizePMNodes } from '../utils/normalize';
@@ -15,7 +15,7 @@ export const quoteMacro: TokenParser = ({
     keyword: 'quote',
     paired: true,
     rawContentProcessor,
-    tokenErrCallback: context.tokenErrCallback,
+    context,
   });
 };
 
@@ -24,7 +24,7 @@ export const rawContentProcessor = (
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   if (!rawContent.length) {
     const emptyQuote = emptyBlockquote(schema);
@@ -36,7 +36,7 @@ export const rawContentProcessor = (
   }
   const parsedContent = parseString({
     schema,
-    tokenErrCallback,
+    context,
     ignoreTokens: [],
     input: rawContent,
   });

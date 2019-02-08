@@ -5,7 +5,7 @@ import { parseString } from '../text';
 import { normalizePMNodes } from '../utils/normalize';
 import { linkFormat } from './links/link-format';
 import { media } from './media';
-import { TokenType, TokenErrCallback, TokenParser } from './';
+import { TokenType, TokenErrCallback, TokenParser, Context } from './';
 import { parseNewlineOnly } from './whitespace';
 import { parseMacroKeyword } from './keyword';
 import { parseToken } from './';
@@ -85,7 +85,7 @@ export const table: TokenParser = ({ input, position, schema, context }) => {
             cellsBuffer,
             schema,
             ignoreTokenTypes,
-            context.tokenErrCallback,
+            context,
           );
           currentState = processState.END_TABLE;
           continue;
@@ -122,7 +122,7 @@ export const table: TokenParser = ({ input, position, schema, context }) => {
               cellsBuffer,
               schema,
               ignoreTokenTypes,
-              context.tokenErrCallback,
+              context,
             );
             buffer = '';
 
@@ -170,7 +170,7 @@ export const table: TokenParser = ({ input, position, schema, context }) => {
           cellsBuffer,
           schema,
           ignoreTokenTypes,
-          context.tokenErrCallback,
+          context,
         );
         buffer = '';
         if (builder) {
@@ -247,7 +247,7 @@ export const table: TokenParser = ({ input, position, schema, context }) => {
     cellsBuffer,
     schema,
     ignoreTokenTypes,
-    context.tokenErrCallback,
+    context,
   );
 
   if (builder) {
@@ -270,12 +270,12 @@ function bufferToCells(
   cellsBuffer: AddCellArgs[],
   schema: Schema,
   ignoreTokenTypes: TokenType[],
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ) {
   if (buffer.length) {
     const contentNode = parseString({
       schema,
-      tokenErrCallback,
+      context,
       ignoreTokens: ignoreTokenTypes,
       input: buffer,
     });

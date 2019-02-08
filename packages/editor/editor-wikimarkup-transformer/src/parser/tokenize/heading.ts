@@ -25,7 +25,7 @@ export const heading: TokenParser = ({ input, position, schema, context }) => {
   const content = parseString({
     schema,
     ignoreTokens,
-    tokenErrCallback: context.tokenErrCallback,
+    context,
     input: match[2],
   });
 

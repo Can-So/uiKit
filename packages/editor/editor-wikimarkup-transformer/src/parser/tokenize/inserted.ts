@@ -28,7 +28,7 @@ export const inserted: TokenParser = ({ input, position, schema, context }) => {
     const content = parseString({
       ignoreTokens,
       schema,
-      tokenErrCallback: context.tokenErrCallback,
+      context,
       input: raw,
     });
     const decoratedContent = content.map(contentDecorator);
@@ -43,6 +43,7 @@ export const inserted: TokenParser = ({ input, position, schema, context }) => {
   return commonFormatter(input, position, schema, {
     opening: '+',
     closing: '+',
+    context,
     rawContentProcessor,
   });
 };

@@ -1,5 +1,5 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback, TokenParser } from '.';
+import { Token, TokenErrCallback, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 import { parseAttrs } from '../utils/attrs';
 import { title } from '../utils/title';
@@ -84,7 +84,7 @@ export const codeMacro: TokenParser = ({
   return commonMacro(input.substring(position), schema, {
     keyword: 'code',
     paired: true,
-    tokenErrCallback: context.tokenErrCallback,
+    context,
     rawContentProcessor,
   });
 };
@@ -94,7 +94,7 @@ const rawContentProcessor = (
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   const output: PMNode[] = [];
   const { codeBlock } = schema.nodes;
