@@ -1,0 +1,1 @@
+- ED-6192: Bail out of column resizing if the table has changed via other means (e.g. collab)

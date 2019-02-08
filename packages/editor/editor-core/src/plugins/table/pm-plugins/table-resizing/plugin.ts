@@ -240,6 +240,7 @@ function handleMouseDown(view, event, cellMinWidth) {
 
   let cell = view.state.doc.nodeAt(activeHandle);
   let $cell = view.state.doc.resolve(activeHandle);
+  let $originalTable = $cell.node(-1);
   let dom = view.domAtPos($cell.start(-1)).node;
   while (dom.nodeName !== 'TABLE') {
     dom = dom.parentNode;
@@ -268,10 +269,21 @@ function handleMouseDown(view, event, cellMinWidth) {
     window.removeEventListener('mousemove', move);
 
     const { activeHandle, dragging } = pluginKey.getState(view.state);
+    // activeHandle could be remapped via a collab change.
+    // Fetch a fresh reference of the table.
+    const $cell = view.state.doc.resolve(activeHandle);
+    const $table = $cell.node(-1);
 
     if (dragging) {
       const { startX } = dragging;
-      updateColumnWidth(view, activeHandle, clientX - startX, resizer);
+
+      // If the table has changed (via collab for example) don't apply column widths
+      // For example, if a table col is deleted we won't be able to reliably remap the new widths
+      // There may be a more elegant solution to this, to avoid a jarring experience.
+      if ($table.eq($originalTable)) {
+        updateColumnWidth(view, activeHandle, clientX - startX, resizer);
+      }
+
       view.dispatch(view.state.tr.setMeta(pluginKey, { setDragging: null }));
     }
   }
