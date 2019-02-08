@@ -58,4 +58,10 @@ export const messages = defineMessages({
     defaultMessage: 'Your Admin will be asked to approve the user invite',
     description: 'Default text for capabilities info',
   },
+  shareFailureMessage: {
+    id: 'fabric.elements.share.failure.message',
+    defaultMessage: 'Unable to share',
+    description:
+      'Default text for share failure message displayed in the tooltip',
+  },
 });

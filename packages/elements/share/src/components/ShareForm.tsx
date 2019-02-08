@@ -65,7 +65,12 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
           {props.shareError ? (
             <>
               <CenterAlignedIconWrapper>
-                <Tooltip content={props.shareError.message} position="top">
+                <Tooltip
+                  content={
+                    <FormattedMessage {...messages.shareFailureMessage} />
+                  }
+                  position="top"
+                >
                   <ErrorIcon label="errorIcon" primaryColor={colors.R400} />
                 </Tooltip>
               </CenterAlignedIconWrapper>

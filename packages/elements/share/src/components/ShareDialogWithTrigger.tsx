@@ -218,14 +218,14 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
         this.setState({ isSharing: false });
       })
       .catch((err: Error) => {
-        this.handleShareFailure(err);
-        this.setState({ isSharing: false });
+        this.setState({
+          isSharing: false,
+          shareError: {
+            message: err.message,
+          },
+        });
+        // send analytic event about the err
       });
-  };
-
-  handleShareFailure = (err: Error) => {
-    // TBC: FS-3429 replace send button with retry button
-    // will need a prop to pass through the error message to the ShareForm
   };
 
   render() {

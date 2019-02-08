@@ -127,7 +127,9 @@ describe('ShareForm', () => {
 
       const tooltip = form.find(Tooltip);
       expect(tooltip).toHaveLength(1);
-      expect(tooltip.prop('content')).toEqual(mockShareError.message);
+      expect(tooltip.prop('content')).toEqual(
+        <FormattedMessage {...messages.shareFailureMessage} />,
+      );
 
       const errorIcon = tooltip.find(ErrorIcon);
       expect(errorIcon).toHaveLength(1);

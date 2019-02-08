@@ -355,9 +355,10 @@ describe('ShareDialogWithTrigger', () => {
     });
 
     it('should only call this.handleCloseDialog if onShareSubmit resolves a value', async () => {
+      const mockErrorMessage = 'rejected';
       const mockOnSubmit = jest
         .fn()
-        .mockRejectedValueOnce(new Error('rejected'))
+        .mockRejectedValueOnce(new Error(mockErrorMessage))
         .mockResolvedValue({});
       const mockSubmitEvent = createMockEvent('submit', {
         target: document.createElement('form'),
@@ -377,6 +378,8 @@ describe('ShareDialogWithTrigger', () => {
 
       await wrapper.instance().handleSubmitShare(mockSubmitEvent);
       expect(spiedHandleCloseDialog).not.toHaveBeenCalled();
+      expect(wrapper.state().shareError).toEqual({ message: mockErrorMessage });
+      expect(wrapper.state().isSharing).toBeFalsy();
 
       await wrapper.instance().handleSubmitShare(mockSubmitEvent);
       expect(spiedHandleCloseDialog).toHaveBeenCalledTimes(1);
