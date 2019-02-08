@@ -1,0 +1,1 @@
+- Enable striter types for emoji package
