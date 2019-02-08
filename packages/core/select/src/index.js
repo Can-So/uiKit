@@ -1,6 +1,8 @@
 // @flow
 export { components, createFilter, mergeStyles } from 'react-select';
 
+export { CheckboxOption, RadioOption } from './components';
+
 export { default } from './Select';
 export { default as AsyncSelect } from './AsyncSelect';
 export { default as CheckboxSelect } from './CheckboxSelect';
