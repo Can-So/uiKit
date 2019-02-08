@@ -1,0 +1,1 @@
+- ED-6027 update ADF when image dimensions are missing 
