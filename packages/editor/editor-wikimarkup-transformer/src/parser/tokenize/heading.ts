@@ -9,7 +9,7 @@ export const heading: TokenParser = ({ input, position, schema, context }) => {
    * The following token types will be ignored in parsing
    * the content of a strong mark
    */
-  const ignoreTokens = [
+  const ignoreTokenTypes = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
@@ -24,7 +24,7 @@ export const heading: TokenParser = ({ input, position, schema, context }) => {
   const level = parseInt(match[1], 10);
   const content = parseString({
     schema,
-    ignoreTokens,
+    ignoreTokenTypes,
     context,
     input: match[2],
   });

@@ -19,7 +19,7 @@ export default class AbstractTree {
     // TODO: Receive the context as parameter instead of tokenErrCallBack
     const content = parseString({
       context: { tokenErrCallback },
-      ignoreTokens: [],
+      ignoreTokenTypes: [],
       input: this.wikiMarkup,
       schema: this.schema,
     });

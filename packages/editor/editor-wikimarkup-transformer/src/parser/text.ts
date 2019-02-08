@@ -19,12 +19,12 @@ const processState = {
 export function parseString({
   input,
   schema,
-  ignoreTokens = [],
+  ignoreTokenTypes = [],
   context,
 }: {
   input: string;
   schema: Schema;
-  ignoreTokens: TokenType[];
+  ignoreTokenTypes: TokenType[];
   context: Context;
 }): PMNode[] {
   let index = 0;
@@ -54,7 +54,7 @@ export function parseString({
           parseMacroKeyword(substring) ||
           parseOtherKeyword(substring);
 
-        if (match && ignoreTokens.indexOf(match.type) === -1) {
+        if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
           tokenType = match.type;
           state = processState.TOKEN;
           continue;
@@ -84,7 +84,7 @@ export function parseString({
           match = parseMacroKeyword(substring) || parseOtherKeyword(substring);
         }
 
-        if (match && ignoreTokens.indexOf(match.type) === -1) {
+        if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
           tokenType = match.type;
           state = processState.TOKEN;
           continue;

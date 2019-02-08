@@ -276,7 +276,7 @@ function bufferToCells(
     const contentNode = parseString({
       schema,
       context,
-      ignoreTokens: ignoreTokenTypes,
+      ignoreTokenTypes: ignoreTokenTypes,
       input: buffer,
     });
     cellsBuffer.push({

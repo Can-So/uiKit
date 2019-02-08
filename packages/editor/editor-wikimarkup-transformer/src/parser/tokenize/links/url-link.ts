@@ -19,7 +19,7 @@ export function urlLinkResolver(
     return;
   }
 
-  const ignoreTokens = [
+  const ignoreTokenTypes = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
@@ -27,7 +27,7 @@ export function urlLinkResolver(
   ];
 
   const rawContent = parseString({
-    ignoreTokens,
+    ignoreTokenTypes,
     schema,
     context,
     input: textRepresentation.replace(/^mailto:/, ''),

@@ -22,7 +22,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
    * The following token types will be ignored in parsing
    * the content of a listItem
    */
-  const ignoreTokens = [TokenType.QUADRUPLE_DASH_SYMBOL, TokenType.LIST];
+  const ignoreTokenTypes = [TokenType.QUADRUPLE_DASH_SYMBOL, TokenType.LIST];
 
   let index = position;
   let state = processState.NEW_LINE;
@@ -72,7 +72,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
             if (buffer.length > 0) {
               // Wrap up previous list item and clear buffer
               const content = parseString({
-                ignoreTokens,
+                ignoreTokenTypes,
                 schema,
                 context,
                 input: buffer,
@@ -151,7 +151,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
              * contentBuffer
              */
             const content = parseString({
-              ignoreTokens,
+              ignoreTokenTypes,
               schema,
               context,
               input: buffer,
@@ -177,7 +177,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
         if (buffer.length > 0) {
           // Wrap up previous list item and clear buffer
           const content = parseString({
-            ignoreTokens,
+            ignoreTokenTypes,
             schema,
             context,
             input: buffer,
@@ -203,7 +203,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
   if (buffer.length > 0) {
     // Wrap up what's left in the buffer
     const content = parseString({
-      ignoreTokens,
+      ignoreTokenTypes,
       schema,
       context,
       input: buffer,

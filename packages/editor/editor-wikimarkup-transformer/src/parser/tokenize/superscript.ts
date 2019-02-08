@@ -33,7 +33,7 @@ export const superscript: TokenParser = ({
     const content = parseString({
       schema,
       context,
-      ignoreTokens: ignoreTokenTypes,
+      ignoreTokenTypes: ignoreTokenTypes,
       input: raw,
     });
     const decoratedContent = content.map(contentDecorator);

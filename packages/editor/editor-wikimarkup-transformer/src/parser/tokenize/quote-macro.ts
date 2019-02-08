@@ -37,7 +37,7 @@ export const rawContentProcessor = (
   const parsedContent = parseString({
     schema,
     context,
-    ignoreTokens: [],
+    ignoreTokenTypes: [],
     input: rawContent,
   });
   const normalizedContent = normalizePMNodes(parsedContent, schema);

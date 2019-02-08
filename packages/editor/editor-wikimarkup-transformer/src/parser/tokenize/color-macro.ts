@@ -27,7 +27,7 @@ const rawContentProcessor = (
   schema: Schema,
   context: Context,
 ): Token => {
-  const ignoreTokens = [
+  const ignoreTokenTypes = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
@@ -35,7 +35,7 @@ const rawContentProcessor = (
 
   const parsedAttrs = parseAttrs(rawAttrs);
   const content = parseString({
-    ignoreTokens,
+    ignoreTokenTypes,
     schema,
     context,
     input: rawContent,

@@ -10,7 +10,7 @@ export const citation: TokenParser = ({ input, position, schema, context }) => {
    * The following token types will be ignored in parsing
    * the content
    */
-  const ignoreTokens = [
+  const ignoreTokenTypes = [
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
@@ -30,7 +30,7 @@ export const citation: TokenParser = ({ input, position, schema, context }) => {
 
   const rawContentProcessor = (raw: string, length: number): Token => {
     const content = parseString({
-      ignoreTokens,
+      ignoreTokenTypes,
       schema,
       context,
       input: raw,

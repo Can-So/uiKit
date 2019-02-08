@@ -40,7 +40,7 @@ const rawContentProcessor = (
   const parsedContent = parseString({
     schema,
     context,
-    ignoreTokens: [],
+    ignoreTokenTypes: [],
     input: rawContent,
   });
 

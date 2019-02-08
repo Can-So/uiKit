@@ -32,7 +32,7 @@ export const strong: TokenParser = ({ input, position, schema, context }) => {
     const content = parseString({
       schema,
       context,
-      ignoreTokens: ignoreTokenTypes,
+      ignoreTokenTypes: ignoreTokenTypes,
       input: raw,
     });
     const decoratedContent = content.map(contentDecorator);
