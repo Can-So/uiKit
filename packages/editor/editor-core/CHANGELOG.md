@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.4.3
+- [patch] [66a5bd2f70](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/66a5bd2f70):
+
+  - ED-6027 update ADF when image dimensions are missing
+
 ## 98.4.2
 - [patch] [2487368a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2487368a7e):
 
