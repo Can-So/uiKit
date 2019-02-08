@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius } from '@atlaskit/media-ui';
+import { borderRadius } from '@atlaskit/theme';
 import { HTMLAttributes, ComponentClass } from 'react';
 import { MediaItemType } from '@atlaskit/media-core';
 import { CardDimensions, CardAppearance } from '../';
@@ -53,7 +53,7 @@ export const Wrapper: ComponentClass<
 
 export const InlinePlayerWrapper = styled.div`
   overflow: hidden;
-  ${borderRadius};
+  border-radius: ${borderRadius()};
   position: relative;
 
   max-width: 100%;
