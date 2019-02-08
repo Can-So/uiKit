@@ -67,33 +67,43 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
       },
     } = this.props;
 
+    const isLoadingAdministrativeSectionData =
+      isLoadingManagePermission && isLoadingAddProductsPermission;
+    const shouldRenderAdministrativeSection =
+      managePermissionData &&
+      addProductsPermissionData &&
+      (managePermissionData.permitted || addProductsPermissionData.permitted);
+
+    const isLoadingProductsSectionData =
+      isLoadingLicenseInformation || isLoadingAddProductsPermission;
+    const shouldRenderProductsSection =
+      licenseInformationData && addProductsPermissionData;
+
     return (
       <AppSwitcherWrapper>
-        {isLoadingRecentContainers && isLoadingCustomLinks && <Skeleton />}
-        {!isLoadingManagePermission &&
-          licenseInformationData &&
-          managePermissionData &&
-          addProductsPermissionData &&
-          (managePermissionData.permitted ||
-            addProductsPermissionData.permitted) && (
+        {isLoadingAdministrativeSectionData ? (
+          <Skeleton />
+        ) : (
+          shouldRenderAdministrativeSection && (
             <Section title="Administration" isAdmin>
               {getAdministrationLinks(
                 cloudId,
-                managePermissionData.permitted,
+                managePermissionData!.permitted,
               ).map(({ label, icon, key, link }) => (
                 <AppSwitcherItem key={key} icon={icon} href={link}>
                   {label}
                 </AppSwitcherItem>
               ))}
             </Section>
-          )}
-        {isLoadingLicenseInformation || isLoadingAddProductsPermission ? (
+          )
+        )}
+        {isLoadingProductsSectionData ? (
           <Skeleton />
         ) : (
-          <Section title="Products">
-            {licenseInformationData &&
-              addProductsPermissionData && [
-                ...getProductLinks(licenseInformationData).map(
+          shouldRenderProductsSection && (
+            <Section title="Products">
+              {[
+                ...getProductLinks(licenseInformationData!).map(
                   ({ label, icon, key, link }) => (
                     <AppSwitcherItem key={key} icon={icon} href={link}>
                       {label}
@@ -110,12 +120,13 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
                       {suggestedProductLink.label}
                     </SuggestedProductItemText>
                     <Lozenge appearance="inprogress" isBold>
-                      {addProductsPermissionData.permitted ? 'Try' : 'Request'}
+                      {addProductsPermissionData!.permitted ? 'Try' : 'Request'}
                     </Lozenge>
                   </AppSwitcherItem>
                 ),
               ]}
-          </Section>
+            </Section>
+          )
         )}
         {isLoadingCustomLinks ? (
           <Skeleton />
