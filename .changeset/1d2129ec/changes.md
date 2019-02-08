@@ -1,0 +1,1 @@
+- Enabling handling focus in model-dialog by rendering component in model-dialog only after portal in model-dialog is attached to DOM.

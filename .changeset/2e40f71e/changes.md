@@ -1,0 +1,1 @@
+- Enable auto focus by rendering components only after the portal has been attached to DOM.
