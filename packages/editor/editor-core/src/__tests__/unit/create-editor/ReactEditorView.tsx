@@ -473,14 +473,13 @@ describe(name, () => {
       mockAnalytics.mockRestore();
     });
 
-<<<<<<< HEAD
     describe('dispatch analytics event', () => {
       function setupDispatchAnalyticsTest(allowAnalyticsGASV3: boolean) {
         jest
           .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
           .mockReturnValue(() => null);
         let dispatch;
-        const wrapper = mount(
+        const wrapper = mountWithIntl(
           <ReactEditorView
             editorProps={{}}
             providerFactory={ProviderFactory.create({})}
@@ -520,34 +519,6 @@ describe(name, () => {
 
       it('should NOT call event dispatcher if it is NOT allowed to call analytics', () => {
         const { dispatch, eventDispatcher } = setupDispatchAnalyticsTest(false);
-=======
-    it('should dispatch analytics event', () => {
-      jest
-        .spyOn(AnalyticsPlugin, 'fireAnalyticsEvent')
-        .mockReturnValue(() => null);
-      let dispatch;
-      const wrapper = mountWithIntl(
-        <ReactEditorView
-          editorProps={{}}
-          providerFactory={ProviderFactory.create({})}
-          portalProviderAPI={portalProviderAPI}
-          onEditorCreated={() => {}}
-          onEditorDestroyed={() => {}}
-          createAnalyticsEvent={jest.fn()}
-          render={({
-            editor,
-            config,
-            eventDispatcher,
-            dispatchAnalyticsEvent,
-          }) => {
-            dispatch = dispatchAnalyticsEvent;
-            return <p>Component</p>;
-          }}
-        />,
-      );
-      const { eventDispatcher } = wrapper.instance() as ReactEditorView;
-      jest.spyOn(eventDispatcher, 'emit');
->>>>>>> fixing build and lint checks
 
         dispatch(payload);
         expect(eventDispatcher.emit).not.toHaveBeenCalled();
