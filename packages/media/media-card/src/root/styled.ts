@@ -6,6 +6,7 @@ import { CardDimensions, CardAppearance } from '../';
 import { getCSSUnitValue } from '../utils/getCSSUnitValue';
 import { getCSSBoundaries } from '../utils/cardDimensions';
 import { BreakpointSizeValue, breakpointStyles } from '../utils/breakpoint';
+import { getSelectedBorderStyle } from '../styles/getSelectedBorderStyle';
 
 export interface WrapperProps {
   mediaItemType: MediaItemType;
@@ -57,6 +58,8 @@ export const InlinePlayerWrapper = styled.div`
 
   max-width: 100%;
   max-height: 100%;
+
+  ${getSelectedBorderStyle}
 
   video {
     width: 100%;
