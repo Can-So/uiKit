@@ -50,7 +50,6 @@ const wrappingIcons: IconMap = [
 ];
 
 const breakoutIcons: IconMap = [
-  { value: 'separator' },
   { value: 'wide', icon: WideIcon },
   { value: 'full-width', icon: FullWidthIcon },
 ];
@@ -69,24 +68,31 @@ const remove: Command = (state, dispatch) => {
   if (dispatch) {
     dispatch(removeSelectedNode(state.tr));
   }
-  // analyticsService.trackEvent('atlassian.editor.format.card.delete.button');
   return true;
 };
 
-const mapIconsToToolbarItem = (icons, selectedNode, intl, pluginState) =>
+const makeAlign = (layout: MediaSingleLayout) => {
+  return (state, dispatch) => {
+    const pluginState: MediaPluginState | undefined = stateKey.getState(state);
+    if (!pluginState) {
+      return false;
+    }
+
+    return pluginState.align(layout);
+  };
+};
+
+const mapIconsToToolbarItem = (icons, layout: MediaSingleLayout, intl) =>
   icons.map(
-    (layout): FloatingToolbarItem<Command> => {
-      const { value } = layout;
+    (toolbarItem): FloatingToolbarItem<Command> => {
+      const { value } = toolbarItem;
 
       return {
         type: 'button',
-        icon: layout.icon,
+        icon: toolbarItem.icon,
         title: intl.formatMessage(layoutToMessages[value]),
-        selected: selectedNode.attrs.layout === value,
-        onClick: () => {
-          pluginState.align(value as MediaSingleLayout);
-          return true;
-        },
+        selected: layout === value,
+        onClick: makeAlign(value),
       };
     },
   );
@@ -98,7 +104,6 @@ const isLayoutSupported = (selection: NodeSelection, schema: Schema) =>
 const buildLayoutButtons = (
   state: EditorState,
   intl: InjectedIntl,
-  pluginState: MediaPluginState,
   allowResizing?: boolean,
 ) => {
   const { selection } = state;
@@ -108,22 +113,24 @@ const buildLayoutButtons = (
     !(selection instanceof NodeSelection) ||
     !selection.node ||
     !mediaSingle ||
-    !pluginState ||
     !isLayoutSupported(selection, state.schema)
   ) {
     return [];
   }
 
+  const { layout } = selection.node.attrs;
+
   let toolbarItems = [
-    ...mapIconsToToolbarItem(alignmentIcons, selection.node, intl, pluginState),
+    ...mapIconsToToolbarItem(alignmentIcons, layout, intl),
     { type: 'separator' },
-    ...mapIconsToToolbarItem(wrappingIcons, selection.node, intl, pluginState),
+    ...mapIconsToToolbarItem(wrappingIcons, layout, intl),
   ];
 
   if (!allowResizing) {
-    toolbarItems = toolbarItems.concat(
-      mapIconsToToolbarItem(breakoutIcons, selection.node, intl, pluginState),
-    );
+    toolbarItems = toolbarItems.concat([
+      { type: 'separator' },
+      ...mapIconsToToolbarItem(breakoutIcons, layout, intl),
+    ]);
   }
 
   return toolbarItems;
@@ -144,8 +151,8 @@ export const floatingToolbar = (
 
   let layoutButtons: FloatingToolbarItem<Command>[] = [];
   if (appearance === 'full-page') {
-    layoutButtons = buildLayoutButtons(state, intl, pluginState, allowResizing);
-    if (layoutButtons) {
+    layoutButtons = buildLayoutButtons(state, intl, allowResizing);
+    if (layoutButtons.length) {
       layoutButtons.push({ type: 'separator' });
     }
   }
