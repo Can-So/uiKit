@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.4.5
+- [patch] [c61aaebd2d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c61aaebd2d):
+
+  - ED-6172: Apply table layout based on total width for autoSize tables.
+
 ## 98.4.4
 - [patch] [18dffaa5fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/18dffaa5fd):
 
