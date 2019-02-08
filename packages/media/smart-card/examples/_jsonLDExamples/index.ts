@@ -2,6 +2,16 @@ export {
   BitbucketRepository,
   GithubRepository,
 } from './atlassian.sourceCodeRepository';
+export {
+  BitbucketPullRequest,
+  GithubPullRequest,
+} from './atlassian.sourceCodePullRequest';
+export {
+  BitbucketSourceCodeReference,
+  GithubSourceCodeReference,
+} from './atlassian.sourceCodeReference';
+export { BitbucketFile, GithubFile } from './atlassian.digitalDocument';
+
 export { AsanaTask, GitHubIssue } from './atlassian.task';
 
 // All Confluence mocks - mapped to different objects in

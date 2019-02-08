@@ -18,8 +18,8 @@ export function extractInlineViewPropsFromObject(
         : json.generator.icon;
   }
 
-  if (json.url) {
-    props.link = String(json.url);
+  if (json.url || json['@url']) {
+    props.link = String(json.url || json['@url']);
   }
 
   return props;
