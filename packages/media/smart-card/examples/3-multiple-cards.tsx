@@ -6,7 +6,7 @@ import Textarea from '@atlaskit/textarea';
 
 mockMultipleCards();
 
-const theClient = new Client({ cacheLifespan: 10 * 1000 });
+const theClient = new Client({ cacheLifespan: 10 * 1000 }, 'staging');
 
 type State = {
   urls: string;
@@ -95,7 +95,6 @@ dropbox.com/file/a`,
               </p>
               <Textarea
                 isMonospaced
-                autoFocus
                 minimumRows={10}
                 resize="none"
                 value={this.state.urls}

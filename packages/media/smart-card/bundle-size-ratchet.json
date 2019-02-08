@@ -3,93 +3,88 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 11685,
-      "gzipSize": 3996
+      "size": 11780,
+      "gzipSize": 4036
     }
   },
   {
     "id": "src.async",
     "name": "async",
     "stats": {
-      "size": 19394,
-      "gzipSize": 4643
-    },
-    "new": true
+      "size": 19839,
+      "gzipSize": 4837
+    }
   },
   {
     "id": "node_modules.main",
     "name": "node_modules [main]",
     "stats": {
-      "size": 37135,
-      "gzipSize": 8877
+      "size": 31241,
+      "gzipSize": 7417
     }
   },
   {
     "id": "node_modules.async",
     "name": "node_modules [async]",
     "stats": {
-      "size": 136392,
-      "gzipSize": 38758
-    },
-    "new": true
+      "size": 133560,
+      "gzipSize": 37106
+    }
   },
   {
     "id": "atlaskit.core.main",
     "name": "main",
     "stats": {
       "size": 8011,
-      "gzipSize": 1928
+      "gzipSize": 1926
     }
   },
   {
     "id": "atlaskit.core.async",
     "name": "async",
     "stats": {
-      "size": 235427,
-      "gzipSize": 49990
-    },
-    "new": true
+      "size": 235555,
+      "gzipSize": 50011
+    }
   },
   {
     "id": "atlaskit.media.main",
     "name": "main",
     "stats": {
       "size": 658,
-      "gzipSize": 411
+      "gzipSize": 410
     }
   },
   {
     "id": "atlaskit.media.async",
     "name": "async",
     "stats": {
-      "size": 41721,
-      "gzipSize": 8914
-    },
-    "new": true
+      "size": 41776,
+      "gzipSize": 8899
+    }
   },
   {
     "id": "atlaskit.teamwork-ecosystem.main",
     "name": "main",
     "stats": {
       "size": 623,
-      "gzipSize": 366
+      "gzipSize": 365
     }
   },
   {
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 57494,
-      "gzipSize": 14511
+      "size": 51668,
+      "gzipSize": 13117
     }
   },
   {
     "id": "combined.async",
     "name": "async",
     "stats": {
-      "size": 430442,
-      "gzipSize": 104084
-    },
-    "new": true
+      "size": 428239,
+      "gzipSize": 102885
+    }
   }
 ]

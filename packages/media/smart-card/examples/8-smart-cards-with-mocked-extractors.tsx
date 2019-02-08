@@ -118,11 +118,11 @@ class Example extends React.Component {
               </div>
               <h3>Jira Examples (inline)</h3>
               <br />
-              {JiraTasks.map(task => (
+              {JiraTasks.map((task, i) => (
                 <div>
                   Maybe checkout the {task.taskType.name} at{' '}
                   <Card
-                    key={task['@id']}
+                    key={String(i) + task['@id']}
                     url={task.url}
                     appearance="inline"
                     data={task}
