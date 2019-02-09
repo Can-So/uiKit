@@ -1,12 +1,30 @@
-import { initFullPageEditorWithAdf, snapshot, deviceViewPorts } from './_utils';
-import * as adf from './__fixtures__/code-block-adf.json';
+import { initEditor, snapshot, insertBlockMenuItem } from './_utils';
+import { messages } from '../../plugins/block-type/types';
+import commonMessages from '../../messages';
+
+const wideBreakoutButtonQuery = `div[aria-label="CodeBlock floating controls"] [aria-label="${
+  commonMessages.layoutWide.defaultMessage
+}"]`;
+const fullWidthBreakoutButtonQuery = `div[aria-label="CodeBlock floating controls"] [aria-label="${
+  commonMessages.layoutFullWidth.defaultMessage
+}"]`;
 
 describe('Snapshot Test: Breakout', () => {
-  it('looks correct', async () => {
+  let page;
+  beforeAll(async () => {
     // @ts-ignore
-    const page = global.page;
-    await page.setViewport(deviceViewPorts.MDPI);
-    await initFullPageEditorWithAdf(page, adf);
-    await snapshot(page, undefined);
+    page = global.page;
+    await initEditor(page, 'full-page');
+  });
+
+  it('should correctly render code block with wide breakout mode', async () => {
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    await page.waitForSelector(wideBreakoutButtonQuery);
+    await page.click(wideBreakoutButtonQuery);
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    await page.waitForSelector(wideBreakoutButtonQuery);
+    await page.click(fullWidthBreakoutButtonQuery);
+    await snapshot(page);
   });
 });
