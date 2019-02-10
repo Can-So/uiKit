@@ -1,10 +1,7 @@
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import { waitUntil } from '@atlaskit/util-common-test';
 import { MockEmojiResource } from '@atlaskit/util-data-test';
-import { ReactWrapper } from 'enzyme';
-import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { EmojiProvider } from '../../../..';
 import EmojiRepository from '../../../../api/EmojiRepository';
 import Emoji from '../../../../components/common/Emoji';
 import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';
@@ -19,7 +16,6 @@ import {
   customTitle,
   userCustomTitle,
 } from '../../../../constants';
-import { EmojiDescription } from '../../../../types';
 import * as ImageUtil from '../../../../util/image';
 import {
   createPngFile,
@@ -33,9 +29,10 @@ import {
 } from '../../_test-data';
 import * as commonHelper from '../common/_common-test-helpers';
 import * as helper from './_emoji-picker-test-helpers';
+import { ReactWrapper } from 'enzyme';
 
 describe('<UploadingEmojiPicker />', () => {
-  let firePrivateAnalyticsEvent: jest.Mock;
+  let firePrivateAnalyticsEvent: jest.SpyInstance;
 
   const safeFindCustomEmojiButton = async (component: ReactWrapper) => {
     await waitUntil(() => commonHelper.customEmojiButtonVisible(component));
@@ -49,15 +46,12 @@ describe('<UploadingEmojiPicker />', () => {
     const uploadPreviewEmoji = uploadPreview.find(Emoji);
     // Should show two emoji in EmojiUploadPrevew
     expect(uploadPreviewEmoji).toHaveLength(2);
-    const emoji: EmojiDescription = uploadPreviewEmoji.at(0).prop('emoji');
+    let emoji = uploadPreviewEmoji.at(0).prop('emoji');
     expect(emoji.shortName).toEqual(':cheese_burger:');
-    expect(emoji.representation).toBeDefined();
-    expect(emoji.representation).toMatchObject({
-      imagePath: pngDataURL,
-    });
+    expect((emoji.representation as any).imagePath).toEqual(pngDataURL);
   };
 
-  const typeEmojiName = component => {
+  const typeEmojiName = (component: ReactWrapper) => {
     const nameInput = helper.findEmojiNameInput(component);
     nameInput.simulate('focus');
     nameInput.simulate('change', {
@@ -76,7 +70,7 @@ describe('<UploadingEmojiPicker />', () => {
 
   describe('upload', () => {
     let consoleError: jest.SpyInstance;
-    let emojiProviderPromise: Promise<any>;
+    let emojiProvider: Promise<any>;
 
     beforeEach(() => {
       consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -105,13 +99,11 @@ describe('<UploadingEmojiPicker />', () => {
       consoleError.mockRestore();
     });
 
-    const navigateToUploadPreview = async (
-      providerPromise: Promise<EmojiProvider>,
-    ) => {
+    const navigateToUploadPreview = async (providerPromise: Promise<any>) => {
       const component = await helper.setupPicker({
         emojiProvider: providerPromise,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
 
       await providerPromise;
@@ -179,7 +171,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
       const provider = await emojiProvider;
       await helper.showCategory(customCategory, component, customTitle);
@@ -271,7 +263,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
       await emojiProvider;
       await helper.showCategory(customCategory, component, customTitle);
@@ -307,7 +299,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
       await emojiProvider;
       await helper.showCategory(customCategory, component, customTitle);
@@ -424,7 +416,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
       const provider = await emojiProvider;
       await helper.showCategory(customCategory, component, customTitle);
@@ -491,7 +483,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
 
       const provider = await emojiProvider;
@@ -617,8 +609,8 @@ describe('<UploadingEmojiPicker />', () => {
 
   describe('delete', () => {
     let getUserProvider;
-    let emojiProvider;
-    let component;
+    let emojiProvider: Promise<any>;
+    let component: ReactWrapper;
     beforeEach(async () => {
       // Initialise repository with clone of siteEmojis
       const repository = new EmojiRepository(

@@ -47,6 +47,7 @@ describe('<CategorySelector />', () => {
     orderedCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
+      // tslint:disable-next-line
       expect(isMessagesKey(categoryKey)).to.be.true;
       if (isMessagesKey(categoryKey)) {
         expect(button.prop('title'), `Button #${i}`).to.equal(
@@ -65,6 +66,7 @@ describe('<CategorySelector />', () => {
     defaultCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
+      // tslint:disable-next-line
       expect(isMessagesKey(categoryKey)).to.be.true;
       if (isMessagesKey(categoryKey)) {
         expect(button.prop('title'), `Button #${i}`).to.equal(
@@ -103,6 +105,7 @@ describe('<CategorySelector />', () => {
     defaultCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
+      // tslint:disable-next-line
       expect(isMessagesKey(categoryKey)).to.be.true;
       if (isMessagesKey(categoryKey)) {
         expect(button.prop('title'), `Button #${i}`).to.equal(
