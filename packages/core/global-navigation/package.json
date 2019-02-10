@@ -41,6 +41,7 @@
     "@atlaskit/app-switcher": "^8.0.1",
     "@atlaskit/button": "^10.1.2",
     "@atlaskit/docs": "^6.0.1",
+    "@atlaskit/field-base": "^11.0.15",
     "@atlaskit/field-radio-group": "^4.0.15",
     "@atlaskit/logo": "^9.2.6",
     "@atlaskit/modal-dialog": "^7.2.1",

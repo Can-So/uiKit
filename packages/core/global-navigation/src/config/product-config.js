@@ -146,8 +146,14 @@ function notificationConfigFactory(
   isNotificationInbuilt,
   openDrawer,
 ) {
+  const notificationOnClickHandler = () => {
+    if (onNotificationClick) onNotificationClick();
+    openDrawer();
+  };
   return isNotificationInbuilt
-    ? configFactory(openDrawer, notificationTooltip, { badgeCount })
+    ? configFactory(notificationOnClickHandler, notificationTooltip, {
+        badgeCount,
+      })
     : configFactory(
         onNotificationClick || (notificationDrawerContents && openDrawer),
         notificationTooltip,

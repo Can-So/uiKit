@@ -220,6 +220,7 @@ export default class GlobalNavigation extends Component<
     }
 
     if (drawerName === 'notification' && this.isNotificationInbuilt) {
+      console.log('open called');
       this.onCountUpdated({ newCount: 0 });
     }
 
@@ -242,6 +243,7 @@ export default class GlobalNavigation extends Component<
     event: SyntheticMouseEvent<*> | SyntheticKeyboardEvent<*>,
     analyticsEvent: UIAnalyticsEvent,
   ) => {
+    console.log('close called');
     const capitalisedDrawerName = this.getCapitalisedDrawerName(drawerName);
     let onCloseCallback = noop;
 

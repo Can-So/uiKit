@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import fetchMock from 'fetch-mock';
 import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
 import Button from '@atlaskit/button';
+import { Label } from '@atlaskit/field-base';
+import { ToggleStateless } from '@atlaskit/toggle';
 import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 
@@ -15,6 +17,7 @@ const cloudId = 'DUMMY-158c8204-ff3b-47c2-adbb-a0906ccc722b';
 const Global = ({
   resetNotificationCount,
   updateIframeUrl,
+  ...controlledNotificationProps
 }: {
   resetNotificationCount: () => void,
   updateIframeUrl: () => void,
@@ -29,14 +32,23 @@ const Global = ({
     }}
     onNotificationDrawerOpen={updateIframeUrl}
     cloudId={cloudId}
+    {...controlledNotificationProps}
   />
 );
 
 export default class GlobalNavigationWithNotificationIntegration extends Component<
   {},
-  { count: number },
+  {
+    count: number,
+    isNotificationControlled: boolean,
+    isNotificationDrawerOpen: boolean,
+  },
 > {
-  state = { count: 5 };
+  state = {
+    count: 5,
+    isNotificationControlled: false,
+    isNotificationDrawerOpen: false,
+  };
 
   componentDidMount() {
     const { count } = this.state;
@@ -79,6 +91,19 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
     });
   };
 
+  onControlledNotificationToggle = () => {
+    this.setState(state => ({
+      isNotificationControlled: !state.isNotificationControlled,
+    }));
+  };
+  openNotificationDrawer = () => {
+    this.updateIframeUrl();
+    this.setState({ isNotificationDrawerOpen: true, count: 0 });
+  };
+  closeNotificationDrawer = () => {
+    this.setState({ isNotificationDrawerOpen: false });
+  };
+
   randomiseNotificationCount = () => {
     this.setState({
       count: Math.floor(1 + Math.random() * 18), // To ensure equal probability of count above and below 9
@@ -86,6 +111,15 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
   };
 
   render() {
+    const { isNotificationControlled, isNotificationDrawerOpen } = this.state;
+    const controlledNotificationProps = isNotificationControlled
+      ? {
+          isNotificationDrawerOpen,
+          onNotificationClick: this.openNotificationDrawer,
+          onNotificationDrawerClose: this.closeNotificationDrawer,
+        }
+      : {};
+
     return (
       <NavigationProvider>
         <LayoutManager
@@ -105,6 +139,7 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
               <Global
                 updateIframeUrl={this.updateIframeUrl}
                 resetNotificationCount={this.resetNotificationCount}
+                {...controlledNotificationProps}
               />
             </AnalyticsListener>
           )}
@@ -122,6 +157,11 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
                 Reset Notification Count
               </Button>
             </p>
+            <Label label="Toggle Contolled Notification" />
+            <ToggleStateless
+              isChecked={isNotificationControlled}
+              onChange={this.onControlledNotificationToggle}
+            />
           </div>
         </LayoutManager>
       </NavigationProvider>
