@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { ExampleEditor as FullPageEditor } from './5-full-page';
 import EditorContext from '../src/ui/EditorContext';
-import { DevTools } from '../example-helpers/DevTools';
 import WithEditorActions from '../src/ui/WithEditorActions';
 import { EditorActions } from '../src';
 
@@ -15,17 +14,14 @@ export const Textarea: any = styled.textarea`
   height: 250px;
 `;
 
-export interface State {
-  inputValue?: string;
-}
-
-export default class Example extends React.Component<any, State> {
+export default class Example extends React.Component {
   private inputRef?: HTMLTextAreaElement;
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {};
+  // }
+  state = { inputValue: '' };
 
   render() {
     return (
