@@ -78,7 +78,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       capabilities: undefined,
       copyLinkOrigin: null,
       prevShareLink: null,
-      shareActionCount: 1,
+      shareActionCount: 0,
       shareToAtlassianAccuntHoldersOrigin: null,
       shareToNewUsersOrigin: null,
     };
@@ -90,15 +90,12 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     // memorization is recommended on React doc, but here the Origin Tracing does not reply on shareLink
     // in getDerivedStateFormProps it makes shareLink as determinant of renewal to stand out better
     // ***
-    if (
-      prevState.prevShareLink !== nextProps.shareLink &&
-      nextProps.originTracingFactory
-    ) {
+    if (prevState.prevShareLink !== nextProps.shareLink) {
       return {
-        copyLinkOrigin: nextProps.originTracingFactory!(),
+        copyLinkOrigin: nextProps.originTracingFactory(),
         prevShareLink: nextProps.shareLink,
-        shareToAtlassianAccuntHoldersOrigin: nextProps.originTracingFactory!(),
-        shareToNewUsersOrigin: nextProps.originTracingFactory!(),
+        shareToAtlassianAccuntHoldersOrigin: nextProps.originTracingFactory(),
+        shareToNewUsersOrigin: nextProps.originTracingFactory(),
       };
     }
 
@@ -155,19 +152,20 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     return this.client
       .share(content, users, metaData, comment)
       .then((response: ShareResponse) => {
-        // send analytic event
+        const newShareCount = this.state.shareActionCount + 1;
+        // TODO: send analytic event
 
         // renew Origin Tracing Ids per share action succeeded
         this.setState({
-          shareActionCount: this.state.shareActionCount + 1,
-          shareToAtlassianAccuntHoldersOrigin: originTracingFactory!(),
-          shareToNewUsersOrigin: originTracingFactory!(),
+          shareActionCount: newShareCount,
+          shareToAtlassianAccuntHoldersOrigin: originTracingFactory(),
+          shareToNewUsersOrigin: originTracingFactory(),
         });
 
         return response;
       })
       .catch((err: Error) => {
-        // send analytic event
+        // TODO: send analytic event
         return Promise.reject(err);
       });
   };
@@ -178,7 +176,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       hasGeneratedId: true,
     });
 
-    // Send analytics event
+    // TODO: send analytic event
   };
 
   render() {
