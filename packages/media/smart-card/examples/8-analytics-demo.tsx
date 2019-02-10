@@ -48,6 +48,7 @@ class Example extends React.Component {
         <Grid>
           <GridColumn>
             <AnalyticsListener
+              channel="media"
               onEvent={(evt: any) => this.setState({ c1Event: evt.payload })}
             >
               <h4>Resolved response</h4>
@@ -67,6 +68,7 @@ class Example extends React.Component {
 
           <GridColumn>
             <AnalyticsListener
+              channel="media"
               onEvent={(evt: any) => this.setState({ c2Event: evt.payload })}
             >
               <h4>Unauth response</h4>

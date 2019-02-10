@@ -1,4 +1,5 @@
 import { CardAppearance } from '../Card';
+import Environments from '../environments';
 
 export interface CardProvider {
   resolve(url: string, appearance: CardAppearance): Promise<any>;
@@ -8,8 +9,7 @@ export type ORSCheckResponse = {
   isSupported: boolean;
 };
 
-const ORS_CHECK_URL =
-  'https://api-private.stg.atlassian.com/object-resolver/check';
+const ORS_CHECK_URL = Environments.prod.resolverURL;
 
 export class EditorCardProvider implements CardProvider {
   async resolve(url: string, appearance: CardAppearance): Promise<any> {

@@ -1,5 +1,10 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.20
+- [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
+
+  - Bumps prosemirror-utils to 0.7.6
+
 ## 6.3.19
 - [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
 

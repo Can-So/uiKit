@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.4.6
+- [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
+
+  - ED-6177 Deleting a range of rows/columns deletes only a subset of selected rows/columns
+
 ## 98.4.5
 - [patch] [c61aaebd2d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c61aaebd2d):
 

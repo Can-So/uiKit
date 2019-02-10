@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
 import Button, { ButtonGroup } from '@atlaskit/button';
-import { Provider, Card } from '../src';
+import { Provider, Card, Client } from '../src';
 import urlsJSON from './example-urls.json';
 import styled from 'styled-components';
 import * as lorem from 'lorem-ipsum';
@@ -153,11 +153,20 @@ class Example extends React.Component<{}, ExampleState> {
             {this.renderTitle(mode, example)}
             <Grid>
               <GridColumn medium={6}>
-                <Card url={example.url} appearance="block" />
+                <Card
+                  url={example.url}
+                  client={new Client(undefined, 'staging')}
+                  appearance="block"
+                />
               </GridColumn>
               <GridColumn medium={6}>
                 <LoremText>
-                  {loremText()} <Card url={example.url} appearance="inline" />{' '}
+                  {loremText()}
+                  <Card
+                    client={new Client(undefined, 'staging')}
+                    url={example.url}
+                    appearance="inline"
+                  />{' '}
                   {loremText()}
                 </LoremText>
               </GridColumn>
