@@ -11,22 +11,18 @@ export const Textarea: any = styled.textarea`
   font-family: monospace;
   padding: 10px;
   width: 100%;
-  height: 250px;
+  height: 25px;
 `;
 
 export default class Example extends React.Component {
   private inputRef?: HTMLTextAreaElement;
-
-  // constructor() {
-  //   super();
-  //   this.state = {};
-  // }
   state = { inputValue: '' };
 
   render() {
     return (
       <EditorContext>
         <div>
+          <FullPageEditor />
           <Textarea
             id="adf-input"
             className="adf-input"
@@ -54,7 +50,6 @@ export default class Example extends React.Component {
               </>
             )}
           />
-          <FullPageEditor />
         </div>
       </EditorContext>
     );
