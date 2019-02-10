@@ -18,6 +18,7 @@ describe('Snapshot Test: Breakout', () => {
   });
 
   it('should correctly render code block with wide breakout mode', async () => {
+    await page.setViewport({ width: 1280, height: 600 });
     await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
     await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
     await page.waitForSelector(wideBreakoutButtonQuery);
