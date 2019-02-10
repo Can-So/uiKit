@@ -130,6 +130,7 @@ async function copyFile({
                 mimeType,
                 name,
                 size,
+                representations,
               } = processedDestinationFile;
               subject.next({
                 ...currentState,
@@ -139,6 +140,7 @@ async function copyFile({
                 mimeType,
                 name,
                 size,
+                representations,
               });
             }, 0);
           },
