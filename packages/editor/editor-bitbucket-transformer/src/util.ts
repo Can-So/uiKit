@@ -59,30 +59,49 @@ export function transformHtml(
 
   // Convert mention containers, i.e.:
   //   <a href="/abodera/" rel="nofollow" title="@abodera" class="mention mention-me">Artur Bodera</a>
-  Array.from(el.querySelectorAll<HTMLLinkElement>('a.mention')).forEach(
-    (a: HTMLLinkElement) => {
+  Array.from(
+    el.querySelectorAll<HTMLLinkElement>('a.mention, a.ap-mention'),
+  ).forEach((a: HTMLLinkElement) => {
+    const span = document.createElement('span');
+    span.setAttribute('class', 'editor-entity-mention');
+    span.setAttribute('contenteditable', 'false');
+
+    const title = a.getAttribute('title') || '';
+    if (title) {
+      const usernameMatch = title.match(/^@(.*?)$/);
+      if (usernameMatch) {
+        const username = usernameMatch[1];
+        span.setAttribute('data-mention-id', username);
+      }
+    }
+
+    const text = a.textContent || '';
+    if (text.indexOf('@') === 0) {
+      span.textContent = a.textContent;
+    } else {
+      span.textContent = `@${a.textContent}`;
+    }
+
+    a.parentNode!.insertBefore(span, a);
+    a.parentNode!.removeChild(a);
+  });
+
+  // Convert mention containers, i.e.:
+  //   <span class="ap-mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</span>
+  Array.from(el.querySelectorAll<HTMLSpanElement>('span.ap-mention')).forEach(
+    (s: HTMLSpanElement) => {
       const span = document.createElement('span');
       span.setAttribute('class', 'editor-entity-mention');
       span.setAttribute('contenteditable', 'false');
 
-      const title = a.getAttribute('title') || '';
-      if (title) {
-        const usernameMatch = title.match(/^@(.*?)$/);
-        if (usernameMatch) {
-          const username = usernameMatch[1];
-          span.setAttribute('data-mention-id', username);
-        }
-      }
+      const atlassianId = s.getAttribute('data-atlassian-id') || '';
+      span.setAttribute('data-mention-id', `{${atlassianId}}`);
 
-      const text = a.textContent || '';
-      if (text.indexOf('@') === 0) {
-        span.textContent = a.textContent;
-      } else {
-        span.textContent = `@${a.textContent}`;
-      }
+      const text = s.textContent || '';
+      span.textContent = text.indexOf('@') === 0 ? text : `@${text}`;
 
-      a.parentNode!.insertBefore(span, a);
-      a.parentNode!.removeChild(a);
+      s.parentNode!.insertBefore(span, s);
+      s.parentNode!.removeChild(s);
     },
   );
 
