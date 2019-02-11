@@ -120,7 +120,6 @@ describe('Media PickerFacade', () => {
       fileMimeType: 'test/file',
       dimensions: undefined,
       scaleFactor: undefined,
-      status: 'preview',
     },
   ];
 

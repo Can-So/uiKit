@@ -361,12 +361,10 @@ describe('Media plugin', () => {
 
         pluginState.stateManager.updateState(id1, {
           ...lala[0],
-          status: 'preview',
         });
 
         pluginState.stateManager.updateState(id2, {
           ...bar[0],
-          status: 'preview',
         });
 
         expect(editorView.state.doc).toEqualDocument(
@@ -823,7 +821,6 @@ describe('Media plugin', () => {
     pluginState.insertFiles([
       {
         id: temporaryFileId,
-        status: 'preview',
         fileName: 'foo.png',
         fileSize: 1234,
         fileMimeType: 'pdf',
