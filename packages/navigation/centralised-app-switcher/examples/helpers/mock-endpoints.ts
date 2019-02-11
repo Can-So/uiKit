@@ -5,6 +5,7 @@ interface MockData {
   CUSTOM_LINKS_DATA: any;
   LICENSE_INFORMATION_DATA: any;
   USER_PERMISSION_DATA: any;
+  XFLOW_SETTINGS: any;
 }
 
 const ORIGINAL_MOCK_DATA: MockData = {
@@ -66,6 +67,7 @@ const ORIGINAL_MOCK_DATA: MockData = {
   USER_PERMISSION_DATA: {
     permitted: true,
   },
+  XFLOW_SETTINGS: {},
 };
 
 interface DataTransformer {
@@ -85,6 +87,7 @@ export const mockEndpoints = (
     CUSTOM_LINKS_DATA,
     LICENSE_INFORMATION_DATA,
     USER_PERMISSION_DATA,
+    XFLOW_SETTINGS,
   } = mockData;
   fetchMock.get(
     '/gateway/api/activity/api/client/recent/containers?cloudId=some-cloud-id',
@@ -105,5 +108,10 @@ export const mockEndpoints = (
     '/gateway/api/permissions/permitted',
     new Promise(res => setTimeout(() => res(USER_PERMISSION_DATA), 500)),
     { method: 'POST', overwriteRoutes: true },
+  );
+  fetchMock.get(
+    '/gateway/api/site/some-cloud-id/setting/xflow',
+    new Promise(res => setTimeout(() => res(XFLOW_SETTINGS), 2000)),
+    { method: 'GET', overwriteRoutes: true },
   );
 };
