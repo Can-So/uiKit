@@ -28,17 +28,18 @@ export const getStyles = memoizeOne((width: string | number) => ({
     '&:hover .fabric-user-picker__clear-indicator': { opacity: 1 },
     ':hover': {
       ...css[':hover'],
-      borderColor: state.isFocused
-        ? css[':hover'].borderColor
-        : state.selectProps.subtle
-        ? state.selectProps.hoveringClearIndicator
-          ? colors.R50
-          : colors.N30
-        : colors.N40,
+      borderColor:
+        state.isFocused && css[':hover']
+          ? css[':hover'].borderColor
+          : state.selectProps.subtle
+          ? state.selectProps.hoveringClearIndicator
+            ? colors.R50
+            : colors.N30
+          : colors.N40,
       backgroundColor:
         state.selectProps.subtle && state.selectProps.hoveringClearIndicator
           ? colors.R50
-          : state.isFocused
+          : state.isFocused && css[':hover']
           ? css[':hover'].backgroundColor
           : colors.N30,
     },

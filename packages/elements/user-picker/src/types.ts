@@ -64,6 +64,11 @@ export type UserPickerProps = {
   isValidEmail?: EmailValidator;
 };
 
+export type PopupUserPickerProps = UserPickerProps & {
+  /** Whether to use the modal version of the single picker */
+  target?: Element;
+};
+
 export type UserPickerState = {
   options: OptionData[];
   value?: AtlaskitSelectValue;
