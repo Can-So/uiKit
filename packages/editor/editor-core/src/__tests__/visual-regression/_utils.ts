@@ -25,15 +25,15 @@ const adfInputSelector = '#adf-input';
 const importAdfBtnSelector = '#import-adf';
 
 export const dynamicTextViewportSizes = [
-  { width: 1440, height: 3000 },
-  { width: 1120, height: 3000 },
-  { width: 1000, height: 3000 },
-  { width: 800, height: 3000 },
+  { width: 1440, height: 900 },
+  { width: 1280, height: 950 },
+  { width: 768, height: 1024 },
+  { width: 1024, height: 1366 },
 ];
 
 export const viewportSizes = [
   ...dynamicTextViewportSizes,
-  { width: 400, height: 3000 },
+  { width: 400, height: 900 },
 ];
 
 export const resetViewport = async page => {
