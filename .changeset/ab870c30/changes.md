@@ -1,1 +1,0 @@
-- [ED-6159] Changes tooltip for the add contextual button on tables

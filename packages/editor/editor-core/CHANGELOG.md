@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.5.0
+- [minor] [5a6071d7f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6071d7f5):
+
+  - [ED-6159] Changes tooltip for the add contextual button on tables
+
 ## 98.4.6
 - [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
 
