@@ -5,7 +5,7 @@ describe('Snapshot Test: Breakout', () => {
   it('looks correct', async () => {
     // @ts-ignore
     const page = global.page;
-    await page.setViewport(deviceViewPorts.MDPI);
+    await page.setViewport(deviceViewPorts.LaptopMDPI);
     await initFullPageEditorWithAdf(page, adf);
     await snapshot(page);
   });

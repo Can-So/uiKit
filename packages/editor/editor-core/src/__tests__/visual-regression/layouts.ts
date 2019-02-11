@@ -11,7 +11,7 @@ describe('Snapshot Test: Layouts', () => {
 
   describe('2 columns', () => {
     it('should correctly render layout on MDPI', async () => {
-      await page.setViewport(deviceViewPorts.MDPI);
+      await page.setViewport(deviceViewPorts.LaptopMDPI);
       await initFullPageEditorWithAdf(page, col2);
       await snapshot(page);
     });
@@ -31,7 +31,7 @@ describe('Snapshot Test: Layouts', () => {
 
   describe('3 columns', () => {
     it('should correctly render layout', async () => {
-      await page.setViewport(deviceViewPorts.MDPI);
+      await page.setViewport(deviceViewPorts.LaptopMDPI);
       await initFullPageEditorWithAdf(page, col3);
       await snapshot(page);
     });

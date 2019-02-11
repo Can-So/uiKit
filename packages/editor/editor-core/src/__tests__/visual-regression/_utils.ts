@@ -92,11 +92,7 @@ export const deviceViewPorts = {
 };
 
 export const initFullPageEditorWithAdf = async (page, adf: Object) => {
-  const url = getExampleUrl(
-    'editor',
-    'editor-core',
-    'full-page-with-adf-import',
-  );
+  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
   await page.goto(url);
 
   await page.evaluate(

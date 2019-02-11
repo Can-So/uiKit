@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { ExampleEditor as FullPageEditor } from './5-full-page';
 import EditorContext from '../src/ui/EditorContext';
-import { DevTools } from '../example-helpers/DevTools';
 import WithEditorActions from '../src/ui/WithEditorActions';
 import { EditorActions } from '../src';
 
@@ -11,27 +10,18 @@ export const Textarea: any = styled.textarea`
   border: 1px solid lightgray;
   font-family: monospace;
   padding: 10px;
-  width: 100%;
-  height: 250px;
+  height: 25px;
 `;
 
-export interface State {
-  inputValue?: string;
-}
-
-export default class Example extends React.Component<any, State> {
+export default class Example extends React.Component {
   private inputRef?: HTMLTextAreaElement;
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = { inputValue: '' };
 
   render() {
     return (
       <EditorContext>
-        <div style={{ height: '100%' }}>
-          <DevTools />
+        <div style={{ height: '100%', width: '100%' }}>
+          <FullPageEditor />
           <Textarea
             id="adf-input"
             className="adf-input"
@@ -56,7 +46,6 @@ export default class Example extends React.Component<any, State> {
                 >
                   Export ADF
                 </button>
-                <FullPageEditor />
               </>
             )}
           />
