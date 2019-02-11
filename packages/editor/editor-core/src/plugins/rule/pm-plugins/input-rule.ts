@@ -6,8 +6,26 @@ import {
   createInputRule,
   leafNodeReplacementCharacter,
 } from '../../../utils/input-rules';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+} from '../../analytics';
 
-export const createHorizontalRule = (state: EditorState, start, end) => {
+export const createHorizontalRule = (
+  state: EditorState,
+  start,
+  end,
+  inputMethod:
+    | INPUT_METHOD.QUICK_INSERT
+    | INPUT_METHOD.TOOLBAR
+    | INPUT_METHOD.INSERT_MENU
+    | INPUT_METHOD.FORMATTING
+    | INPUT_METHOD.SHORTCUT,
+) => {
   if (!state.selection.empty) {
     return null;
   }
@@ -22,18 +40,27 @@ export const createHorizontalRule = (state: EditorState, start, end) => {
     end = end + 1;
   }
 
-  return state.tr.replaceWith(
+  const tr = state.tr.replaceWith(
     start,
     end,
     Fragment.from(state.schema.nodes.rule.createChecked()),
   );
+
+  return addAnalytics(tr, {
+    action: ACTION.INSERTED,
+    actionSubject: ACTION_SUBJECT.DOCUMENT,
+    actionSubjectId: ACTION_SUBJECT_ID.DIVIDER,
+    attributes: { inputMethod },
+    eventType: EVENT_TYPE.TRACK,
+  });
 };
 
 const createHorizontalRuleAutoformat = (state, start, end) => {
   analyticsService.trackEvent(
     `atlassian.editor.format.horizontalrule.autoformatting`,
   );
-  return createHorizontalRule(state, start, end);
+
+  return createHorizontalRule(state, start, end, INPUT_METHOD.FORMATTING);
 };
 
 export function inputRulePlugin(schema: Schema): Plugin | undefined {

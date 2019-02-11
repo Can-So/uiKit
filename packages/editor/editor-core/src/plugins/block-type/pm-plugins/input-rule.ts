@@ -22,6 +22,7 @@ import { insertBlock } from '../commands/insert-block';
 import { safeInsert } from 'prosemirror-utils';
 import {
   ruleWithAnalytics,
+  addAnalytics,
   INPUT_METHOD,
   ACTION,
   ACTION_SUBJECT,
@@ -180,12 +181,17 @@ function getCodeBlockRules(schema: Schema): InputRuleWithHandler[] {
         analyticsService.trackEvent(
           `atlassian.editor.format.codeblock.autoformatting`,
         );
-        return (
-          transformToCodeBlockAction(state, attributes)
-            // remove markdown decorator ```
-            .delete(newStart, end)
-            .scrollIntoView()
-        );
+        const tr = transformToCodeBlockAction(state, attributes)
+          // remove markdown decorator ```
+          .delete(newStart, end)
+          .scrollIntoView();
+        return addAnalytics(tr, {
+          action: ACTION.INSERTED,
+          actionSubject: ACTION_SUBJECT.DOCUMENT,
+          actionSubjectId: ACTION_SUBJECT_ID.CODE_BLOCK,
+          attributes: { inputMethod: INPUT_METHOD.FORMATTING },
+          eventType: EVENT_TYPE.TRACK,
+        });
       }
       let { tr } = state;
       tr = tr.delete(newStart, end);
