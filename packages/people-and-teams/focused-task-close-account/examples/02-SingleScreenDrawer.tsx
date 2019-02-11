@@ -32,7 +32,7 @@ export default class SingleScreenDrawerExample extends React.Component {
   render() {
     return (
       <IntlProvider locale="en">
-        <>
+        <React.Fragment>
           <span>
             <Button onClick={this.openDrawer}>Open drawer</Button>
           </span>
@@ -45,7 +45,7 @@ export default class SingleScreenDrawerExample extends React.Component {
               learnMoreLink={'https://hello.atlassian.net'}
             />
           )}
-        </>
+        </React.Fragment>
       </IntlProvider>
     );
   }

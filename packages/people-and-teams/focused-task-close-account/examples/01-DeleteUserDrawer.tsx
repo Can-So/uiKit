@@ -38,7 +38,7 @@ export default class DeleteUserDrawerExample extends React.Component {
 
   closeDrawer = () => this.setState({ isOpen: false });
 
-  handleDeactivateUser = () => <></>;
+  handleDeactivateUser = () => <React.Fragment />;
 
   toggleIsCurrentUser = event =>
     this.setState({ isCurrentUser: event.target.checked });
@@ -63,7 +63,7 @@ export default class DeleteUserDrawerExample extends React.Component {
   render() {
     return (
       <IntlProvider locale="en">
-        <>
+        <React.Fragment>
           <Controls>
             <Button onClick={this.openDrawer}>Open drawer</Button>
             <Checkbox
@@ -103,7 +103,7 @@ export default class DeleteUserDrawerExample extends React.Component {
               learnMoreLink={'https://hello.atlassian.net'}
             />
           )}
-        </>
+        </React.Fragment>
       </IntlProvider>
     );
   }

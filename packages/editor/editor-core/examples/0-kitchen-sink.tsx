@@ -335,14 +335,14 @@ export default class FullPageRendererExample extends React.Component<
                       onDocumentChanged={this.onDocumentChanged}
                       onDocumentValidated={this.onDocumentValidated}
                       primaryToolbarComponents={
-                        <>
+                        <React.Fragment>
                           <LanguagePicker
                             languages={languages}
                             locale={locale}
                             onChange={this.loadLocale}
                           />
                           <SaveAndCancelButtons editorActions={actions} />
-                        </>
+                        </React.Fragment>
                       }
                     />
                   </IntlProvider>

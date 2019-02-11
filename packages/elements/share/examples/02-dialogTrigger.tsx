@@ -3,7 +3,7 @@ import Button from '@atlaskit/button';
 import { ShareDialogWithTrigger } from '../src/components/ShareDialogWithTrigger';
 
 export default () => (
-  <>
+  <React.Fragment>
     <h4>Default share button</h4>
     <ShareDialogWithTrigger copyLink="copyLink" />
     <h4>Default share button with text</h4>
@@ -12,5 +12,5 @@ export default () => (
     <ShareDialogWithTrigger copyLink="copyLink">
       {openDialog => <Button onClick={openDialog}>Custom Button</Button>}
     </ShareDialogWithTrigger>
-  </>
+  </React.Fragment>
 );
