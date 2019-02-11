@@ -97,9 +97,11 @@ const mapIconsToToolbarItem = (icons, layout: MediaSingleLayout, intl) =>
     },
   );
 
-const isLayoutSupported = (selection: NodeSelection, schema: Schema) =>
-  !hasParentNodeOfType(schema.nodes.bodiedExtension)(selection) &&
-  !hasParentNodeOfType(schema.nodes.layoutSection)(selection);
+const shouldHideToolbar = (selection: NodeSelection, { nodes }: Schema) =>
+  hasParentNodeOfType(nodes.bodiedExtension)(selection) ||
+  hasParentNodeOfType(nodes.layoutSection)(selection) ||
+  hasParentNodeOfType(nodes.listItem)(selection) ||
+  hasParentNodeOfType(nodes.table)(selection);
 
 const buildLayoutButtons = (
   state: EditorState,
@@ -113,7 +115,7 @@ const buildLayoutButtons = (
     !(selection instanceof NodeSelection) ||
     !selection.node ||
     !mediaSingle ||
-    !isLayoutSupported(selection, state.schema)
+    shouldHideToolbar(selection, state.schema)
   ) {
     return [];
   }

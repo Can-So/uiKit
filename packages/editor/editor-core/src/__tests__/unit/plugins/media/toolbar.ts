@@ -10,6 +10,11 @@ import {
   bodiedExtension,
   layoutSection,
   layoutColumn,
+  ul,
+  li,
+  table,
+  tr,
+  td,
 } from '@atlaskit/editor-test-helpers';
 
 import commonMessages from '../../../../messages';
@@ -31,6 +36,8 @@ describe('media', () => {
         media: { allowMediaSingle: true },
         allowExtension: true,
         allowLayouts: true,
+        allowLists: true,
+        allowTables: true,
       },
     });
 
@@ -134,6 +141,34 @@ describe('media', () => {
             layoutColumn({ width: 50 })(temporaryMediaSingle),
           ),
         ),
+      );
+
+      const toolbar = floatingToolbar(
+        editorView.state,
+        intl,
+        true,
+        'full-page',
+      );
+      expect(toolbar).toBeDefined();
+      expect(toolbar!.items.length).toEqual(1);
+    });
+
+    it('should not render any layout buttons when inside a list item', () => {
+      const { editorView } = editor(doc(ul(li(temporaryMediaSingle))));
+
+      const toolbar = floatingToolbar(
+        editorView.state,
+        intl,
+        true,
+        'full-page',
+      );
+      expect(toolbar).toBeDefined();
+      expect(toolbar!.items.length).toEqual(1);
+    });
+
+    it('should not render any layout buttons when inside a table', () => {
+      const { editorView } = editor(
+        doc(table()(tr(td()(temporaryMediaSingle)))),
       );
 
       const toolbar = floatingToolbar(
