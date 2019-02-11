@@ -62,7 +62,7 @@ export default class PickerFacade {
     }
 
     picker.on('upload-preview-update', this.handleUploadPreviewUpdate);
-    picker.on('upload-processing', this.handleUploadEnd);
+    picker.on('upload-processing', this.handleReady);
     picker.on('upload-error', this.handleUploadError);
     picker.on('collection', this.handleCollection);
 
@@ -220,7 +220,6 @@ export default class PickerFacade {
       fileName: file.name,
       fileSize: file.size,
       fileMimeType: file.type,
-      status: 'preview',
       dimensions,
       scaleFactor,
     });
@@ -228,7 +227,7 @@ export default class PickerFacade {
     this.onStartListeners.forEach(cb => cb.call(cb, [states]));
   };
 
-  private handleUploadEnd = (event: UploadEndEventPayload) => {
+  private handleReady = (event: UploadEndEventPayload) => {
     const { file } = event;
     this.stateManager.updateState(file.id, {
       status: 'ready',
