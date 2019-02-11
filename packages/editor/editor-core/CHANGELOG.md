@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.7.0
+- [minor] [44a42d5eb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44a42d5eb3):
+
+  - ED-5846: Refactoring new hyperlink toolbar and adding typeahead to the new floating toolbar
+
 ## 98.6.0
 - [minor] [fa435d11f7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa435d11f7):
 
