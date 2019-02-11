@@ -84,8 +84,8 @@ export const initEditor = async (page, appearance: string) => {
 };
 
 export const deviceViewPorts = {
-  HiDPI: { width: 1440, height: 900 },
-  MDPI: { width: 1280, height: 800 },
+  LaptopHiDPI: { width: 1440, height: 900 },
+  LaptopMDPI: { width: 1280, height: 800 },
   iPadPro: { width: 1024, height: 1366 },
   iPad: { width: 768, height: 1024 },
   iPhonePlus: { width: 414, height: 736 },
