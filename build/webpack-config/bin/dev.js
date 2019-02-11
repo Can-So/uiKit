@@ -29,7 +29,6 @@ const minimatch = require('minimatch');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const historyApiFallback = require('connect-history-api-fallback');
-const flattenDeep = require('lodash.flattendeep');
 const createConfig = require('../config');
 const utils = require('../config/utils');
 const { print, devServerBanner, errorMsg } = require('../banner');
@@ -39,33 +38,33 @@ const PORT = +process.env.ATLASKIT_DEV_PORT || 9000;
 const stats = require('../config/statsOptions');
 
 async function runDevServer() {
-  const workspacesGlobRaw = process.argv.slice(2);
+  const workspaceGlobs = process.argv
+    .slice(2)
+    .filter(arg => !arg.startsWith('--')) // in case we ever pass other flags to this script
+    .map(arg => arg.replace(/["']/g, '')); // remove all quotes (users add them to prevent early glob expansion)
   const report = !!process.argv.find(arg => arg.startsWith('--report'));
-  const workspacesGlob = workspacesGlobRaw.map(workspace => {
-    return workspace.startsWith('--')
-      ? ''
-      : workspace.replace(/^['"](.+)['"]$/, '$1'); // Unwrap string from quotes
-  });
+
   const mode = 'development';
   const websiteEnv = 'local';
   const projectRoot = (await bolt.getProject({ cwd: process.cwd() })).dir;
   const workspaces = await bolt.getWorkspaces();
-  const filteredWorkspaces = workspacesGlob.map(workspaceGlob => {
-    return workspaceGlob
-      ? workspaces.filter(ws =>
-          minimatch(ws.dir, workspaceGlob, { matchBase: true }),
-        )
-      : workspaces;
-  });
+
+  const filteredWorkspaces = workspaceGlobs.length
+    ? workspaces.filter(ws =>
+        workspaceGlobs.some(glob =>
+          minimatch(ws.dir, glob, { matchBase: true }),
+        ),
+      )
+    : workspaces; // if no globs were passed, we'll use all workspaces
 
   const globs =
-    workspacesGlob.length > 0
-      ? utils.createWorkspacesGlob(flattenDeep(filteredWorkspaces), projectRoot)
+    workspaceGlobs.length > 0
+      ? utils.createWorkspacesGlob(filteredWorkspaces, projectRoot)
       : utils.createDefaultGlob();
 
   if (!globs.length) {
     console.info(
-      `${workspacesGlobRaw.toString()}: Nothing to run or pattern does not match!`,
+      `${workspaceGlobs.toString()}: Nothing to run or pattern does not match!`,
     );
     process.exit(0);
   }
@@ -73,10 +72,10 @@ async function runDevServer() {
   print(
     devServerBanner({
       workspaces: filteredWorkspaces,
-      workspacesGlob: workspacesGlob.toString(),
+      workspacesGlob: workspaceGlobs.toString(),
       port: PORT,
       host: HOST,
-      isAll: !workspacesGlob.length,
+      isAll: !(workspaceGlobs.length > 0),
     }),
   );
 
