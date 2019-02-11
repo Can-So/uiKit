@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import AtlassianIcon from '@atlaskit/icon/glyph/atlassian';
 import Navigation, { AkGlobalItem } from '@atlaskit/navigation';
 import Tooltip from '@atlaskit/tooltip';
-import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
+import SwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
 import { colors } from '@atlaskit/theme';
 import AkDrawer from '@atlaskit/drawer';
-import ConfluenceAppSwitcher from '../src/components/confluence-app-switcher';
+import ConfluenceSwitcher from '../src/components/confluence-switcher';
 import { mockEndpoints } from './helpers/mock-endpoints';
 
-export default class ConfluenceAppSwitcherExample extends Component {
+export default class ConfluenceSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -35,11 +35,11 @@ export default class ConfluenceAppSwitcherExample extends Component {
       <Navigation
         drawers={[
           <AkDrawer
-            key="app-switcher"
+            key="switcher"
             isOpen={this.state.isDrawerOpen}
             onClose={this.onClose}
           >
-            <ConfluenceAppSwitcher
+            <ConfluenceSwitcher
               cloudId="some-cloud-id"
               triggerXFlow={this.onTriggerXFlow}
             />
@@ -48,12 +48,9 @@ export default class ConfluenceAppSwitcherExample extends Component {
         globalPrimaryIcon={<AtlassianIcon size="large" label="Atlassian" />}
         globalPrimaryItemHref="/"
         globalSecondaryActions={[
-          <AkGlobalItem
-            key="app-switcher-global-item"
-            onClick={this.openDrawer}
-          >
+          <AkGlobalItem key="switcher-global-item" onClick={this.openDrawer}>
             <Tooltip content="Switch apps" position="right">
-              <AppSwitcherIcon
+              <SwitcherIcon
                 label="Switch apps"
                 size="medium"
                 primaryColor={colors.N0}

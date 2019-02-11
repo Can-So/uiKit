@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
-  AppSwitcherWrapper,
-  AppSwitcherItem,
+  SwitcherWrapper,
+  SwitcherItem,
   Section,
   ManageButton,
   Skeleton,
@@ -22,7 +22,7 @@ import {
 } from '../providers/types';
 import { RecentContainersDataStructure } from '../providers/instance-data-providers';
 
-interface AppSwitcherProps {
+interface SwitcherProps {
   cloudId: string;
   triggerXFlow: (productKey: string) => void;
   customLinks: ChildrenProps<CustomLinksProviderDataStructure>;
@@ -34,7 +34,7 @@ interface AppSwitcherProps {
   isXFlowEnabled: ChildrenProps<boolean>;
 }
 
-export default class AppSwitcher extends React.Component<AppSwitcherProps> {
+export default class Switcher extends React.Component<SwitcherProps> {
   triggerXFlow = () => {
     const { triggerXFlow, suggestedProductLink } = this.props;
     if (suggestedProductLink) {
@@ -85,7 +85,7 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
       suggestedProductLink && !isLoadingIsXFlowEnabled && isXFlowEnabledData;
 
     return (
-      <AppSwitcherWrapper>
+      <SwitcherWrapper>
         {isLoadingAdministrativeSectionData ? (
           <Skeleton />
         ) : (
@@ -93,9 +93,9 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
             <Section title="Administration" isAdmin>
               {getAdministrationLinks(cloudId, managePermissionData!).map(
                 ({ label, icon, key, link }) => (
-                  <AppSwitcherItem key={key} icon={icon} href={link}>
+                  <SwitcherItem key={key} icon={icon} href={link}>
                     {label}
-                  </AppSwitcherItem>
+                  </SwitcherItem>
                 ),
               )}
             </Section>
@@ -109,13 +109,13 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
               {[
                 ...getProductLinks(licenseInformationData!).map(
                   ({ label, icon, key, link }) => (
-                    <AppSwitcherItem key={key} icon={icon} href={link}>
+                    <SwitcherItem key={key} icon={icon} href={link}>
                       {label}
-                    </AppSwitcherItem>
+                    </SwitcherItem>
                   ),
                 ),
                 shouldRenderXSellLink ? (
-                  <AppSwitcherItem
+                  <SwitcherItem
                     key={suggestedProductLink!.key}
                     icon={suggestedProductLink!.icon}
                     onClick={this.triggerXFlow}
@@ -126,7 +126,7 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
                     <Lozenge appearance="inprogress" isBold>
                       {addProductsPermissionData ? 'Try' : 'Request'}
                     </Lozenge>
-                  </AppSwitcherItem>
+                  </SwitcherItem>
                 ) : null,
               ]}
             </Section>
@@ -138,9 +138,9 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
           <Section title="More" isCustom>
             {customLinksData &&
               customLinksData[0].map(({ label, link }: CustomLink) => (
-                <AppSwitcherItem key={label} href={link}>
+                <SwitcherItem key={label} href={link}>
                   {label}
-                </AppSwitcherItem>
+                </SwitcherItem>
               ))}
           </Section>
         )}
@@ -152,16 +152,16 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
             <Section title="Recent Containers">
               {recentContainersData.data.map(
                 ({ objectId, name, url, iconUrl }: RecentContainer) => (
-                  <AppSwitcherItem key={objectId} iconUrl={iconUrl} href={url}>
+                  <SwitcherItem key={objectId} iconUrl={iconUrl} href={url}>
                     {name}
-                  </AppSwitcherItem>
+                  </SwitcherItem>
                 ),
               )}
             </Section>
           )
         )}
         {customLinksData && <ManageButton href={customLinksData[1]} />}
-      </AppSwitcherWrapper>
+      </SwitcherWrapper>
     );
   }
 }

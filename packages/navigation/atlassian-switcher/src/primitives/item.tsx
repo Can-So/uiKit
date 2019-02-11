@@ -56,7 +56,7 @@ const itemTheme = {
   },
 };
 
-type AppSwitcherItemProps = Props & {
+type SwitcherItemProps = Props & {
   children: JSX.Element[] | string;
   key?: string;
   onClick?: () => void;
@@ -67,7 +67,7 @@ export default ({
   icon,
   iconUrl,
   ...rest
-}: AppSwitcherItemProps) => (
+}: SwitcherItemProps) => (
   <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
     <Item
       elemBefore={
