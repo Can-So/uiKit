@@ -562,6 +562,9 @@ describe('Card', () => {
       mimeType: 'image/png',
       name: 'file-name',
       size: 10,
+      representations: {
+        image: {},
+      },
     };
     subject.next(baseState);
     const context = fakeContext({

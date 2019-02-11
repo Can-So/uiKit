@@ -108,6 +108,7 @@ describe('Smart Media Editor', () => {
       name: 'some-name',
       size: 42,
       artifacts: {},
+      representations: {},
     });
     await fileIdPromise;
     await imageUrlPromise;
@@ -222,6 +223,7 @@ describe('Smart Media Editor', () => {
         mimeType: 'image/gif',
         name: 'some-name',
         size: 42,
+        representations: {},
       });
       await new Promise(resolve => setTimeout(resolve, 0));
       resultingFileStateObservable.next({
@@ -231,6 +233,7 @@ describe('Smart Media Editor', () => {
         mimeType: 'image/gif',
         name: 'some-name',
         size: 42,
+        representations: {},
       });
       expect(onFinish).toHaveBeenCalledTimes(1);
     });

@@ -39,6 +39,7 @@ describe('MediaStore', () => {
       processingStatus: 'pending',
       size: 231392,
       artifacts: {},
+      representations: {},
     };
     let authProvider: jest.Mock<AuthProvider>;
     let mediaStore: MediaStore;
@@ -652,6 +653,7 @@ describe('MediaStore', () => {
                   name: 'file-1',
                   processingStatus: 'succeeded',
                   size: 1,
+                  representations: {},
                 },
               },
             ],
