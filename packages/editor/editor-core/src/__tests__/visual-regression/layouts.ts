@@ -1,9 +1,4 @@
-import {
-  initFullPageEditorWithAdf,
-  snapshot,
-  deviceViewPorts,
-  clearEditor,
-} from './_utils';
+import { initFullPageEditorWithAdf, snapshot, deviceViewPorts } from './_utils';
 import * as col2 from './__fixtures__/column2-adf.json';
 import * as col3 from './__fixtures__/column3-adf.json';
 
