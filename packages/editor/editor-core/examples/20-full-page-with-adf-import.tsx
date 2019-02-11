@@ -10,7 +10,6 @@ export const Textarea: any = styled.textarea`
   border: 1px solid lightgray;
   font-family: monospace;
   padding: 10px;
-  width: 100%;
   height: 25px;
 `;
 
@@ -21,7 +20,7 @@ export default class Example extends React.Component {
   render() {
     return (
       <EditorContext>
-        <div>
+        <div style={{ height: '100%', width: '100%' }}>
           <FullPageEditor />
           <Textarea
             id="adf-input"
