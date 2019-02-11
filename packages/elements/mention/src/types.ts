@@ -67,7 +67,9 @@ enum UserType {
 }
 
 export function isRestricted(accessLevel?: string): boolean {
-  return accessLevel !== UserAccessLevel[UserAccessLevel.CONTAINER];
+  return (
+    !!accessLevel && accessLevel !== UserAccessLevel[UserAccessLevel.CONTAINER]
+  );
 }
 
 export function isSpecialMention(mention: MentionDescription): boolean {
