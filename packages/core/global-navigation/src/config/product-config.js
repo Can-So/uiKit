@@ -147,7 +147,9 @@ function notificationConfigFactory(
   openDrawer,
 ) {
   const notificationOnClickHandler = () => {
-    if (onNotificationClick) onNotificationClick();
+    if (onNotificationClick) {
+      onNotificationClick();
+    }
     openDrawer();
   };
   return isNotificationInbuilt
