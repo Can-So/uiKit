@@ -1,0 +1,6 @@
+{
+  "releases": [
+    { "name": "@atlaskit/outbound-auth-flow-client", "type": "patch" }
+  ],
+  "dependents": []
+}
