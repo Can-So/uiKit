@@ -45,6 +45,8 @@ export default class MediaGroup extends PureComponent<
           content = this.renderSingleFile(card);
           break;
         case 'link':
+          content = null;
+          break;
         default:
           content = this.renderSingleLink(card);
       }

@@ -6,6 +6,7 @@ import {
   Card,
   CardView,
   CardOnClickCallback,
+  Identifier,
 } from '@atlaskit/media-card';
 import { Context, ImageResizeMode } from '@atlaskit/media-core';
 import { MediaType } from '@atlaskit/adf-schema';
@@ -116,7 +117,11 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       return this.renderExternal();
     }
 
-    if (!context) {
+    if (type === 'link') {
+      return null;
+    }
+
+    if (!context || !id) {
       return (
         <CardView
           status="loading"
@@ -126,7 +131,7 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       );
     }
 
-    const identifier: any = {
+    const identifier: Identifier = {
       id,
       mediaItemType: type,
       collectionName: collection,
