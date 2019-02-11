@@ -110,13 +110,13 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     this.client
       .getCapabilities()
       .then((capabilities: InvitationsCapabilitiesResponse) => {
-        // Send analytics event
+        // TODO: Send analytics event
         this.setState({
           capabilities,
         });
       })
       .catch(err => {
-        // Send analytics event
+        // TODO: Send analytics event
       });
   };
 
