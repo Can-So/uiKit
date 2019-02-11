@@ -14,7 +14,6 @@ const cloudId = 'DUMMY-158c8204-ff3b-47c2-adbb-a0906ccc722b';
 
 type GlobalProps = {
   resetNotificationCount: () => void,
-  updateIframeUrl: () => void,
 };
 type GlobalState = {
   isNotificationDrawerOpen: boolean,
