@@ -1,17 +1,21 @@
-import * as React from 'react';
-import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
-import InlineDialog from '@atlaskit/inline-dialog';
 import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
+import InlineDialog from '@atlaskit/inline-dialog';
+import { mount } from 'enzyme';
+import * as React from 'react';
 import {
   CopyLinkButton,
-  NoPaddingButton,
-  MessageContainer,
   HiddenInput,
+  MessageContainer,
+  NoPaddingButton,
 } from '../../../components/CopyLinkButton';
 
 describe('CopyLinkButton', () => {
-  let originalExecCommand: any;
+  let originalExecCommand: (
+    commandId: string,
+    showUI?: boolean,
+    value?: string,
+  ) => boolean;
   let mockLink = 'link';
   const spiedExecCommand = jest.fn();
 
@@ -53,7 +57,7 @@ describe('CopyLinkButton', () => {
     it('should render the copied to clip board message, and dismiss the message when click outside the Inline Dialog', () => {
       const eventMap: { click: Function } = { click: () => {} };
       window.addEventListener = jest.fn(
-        (event, cb) => ((eventMap as any)[event] = cb),
+        (event: 'click', cb: Function) => (eventMap[event] = cb),
       );
 
       const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);

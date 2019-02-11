@@ -1,9 +1,9 @@
 import { utils } from '@atlaskit/util-service-support';
 import {
+  DEFAULT_SHARE_PATH,
+  DEFAULT_SHARE_SERVICE_URL,
   ShareClient,
   ShareServiceClient,
-  DEFAULT_SHARE_SERVICE_URL,
-  DEFAULT_SHARE_PATH,
 } from '../../../clients/ShareServiceClient';
 
 describe('ShareServiceClientImpl', () => {
