@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { EditorView } from 'prosemirror-view';
 import { mention, emoji, taskDecision } from '@atlaskit/util-data-test';
 import { EmojiProvider } from '@atlaskit/emoji';
 import {
@@ -11,9 +12,14 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';
-import { Editor, EditorProps } from './../src';
+import { Editor, EditorProps, EventDispatcher } from './../src';
 import ClipboardHelper from './1-clipboard-helper';
 import mediaMockServer from '../example-helpers/media-mock';
+
+interface EditorInstance {
+  view: EditorView;
+  eventDispatcher: EventDispatcher;
+}
 
 export const providers: any = {
   emojiProvider: emoji.storyData.getEmojiResource({
@@ -41,6 +47,17 @@ export const cardProviderPromise = Promise.resolve(cardProvider);
 function createEditorWindowBindings(win: Window) {
   if ((win as Window & { __mountEditor?: () => void }).__mountEditor) {
     return;
+  }
+
+  class EditorWithState extends Editor {
+    onEditorCreated(instance: EditorInstance) {
+      super.onEditorCreated(instance);
+      window['__editorView'] = instance.view;
+    }
+    onEditorDestroyed(instance: EditorInstance) {
+      super.onEditorDestroyed(instance);
+      window['__editorView'] = undefined;
+    }
   }
 
   window['__mountEditor'] = (props: EditorProps = {}) => {
@@ -73,7 +90,7 @@ function createEditorWindowBindings(win: Window) {
 
     ReactDOM.unmountComponentAtNode(target);
     ReactDOM.render(
-      <Editor
+      <EditorWithState
         insertMenuItems={customInsertMenuItems}
         {...providers}
         {...props}

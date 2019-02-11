@@ -91,6 +91,7 @@ export const calculateColWidth = (
 
   let maxColWidth = 0;
   let colSpanWidth = 0;
+  let previousRowSpan = 1;
   for (let i = 0; i < table.childElementCount; i++) {
     const row = table.children[i] as HTMLElement;
     if (row.tagName.toUpperCase() !== 'TR') {
@@ -105,8 +106,18 @@ export const calculateColWidth = (
       continue;
     }
 
+    // If the previous row had a rowpsan larger than 1
+    // we want to skip the remaining cells in that span
+    // to avoid calculating widths from other columns
+    // since no cell would exist for specified colIdx/rowIdx combo.
+    if (previousRowSpan > 1) {
+      previousRowSpan--;
+      continue;
+    }
+
     const colComputedStyle = getComputedStyle(col);
     const colspan = Number(col.getAttribute('colspan') || 1);
+    previousRowSpan = Number(col.getAttribute('rowspan') || 1);
 
     if (colspan > 1) {
       colSpanWidth = calculateColWidthCb(col, colComputedStyle, colspan);
