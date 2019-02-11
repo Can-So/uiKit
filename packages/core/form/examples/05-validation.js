@@ -10,7 +10,7 @@ import Form, {
   ValidMessage,
 } from '../src';
 
-export default class extends Component<void> {
+export default class extends Component<{}> {
   textValue = '';
 
   getUser = (value: string) =>
