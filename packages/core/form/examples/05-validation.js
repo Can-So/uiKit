@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import TextField from '@atlaskit/textfield';
 import Form, {
@@ -10,11 +10,11 @@ import Form, {
   ValidMessage,
 } from '../src';
 
-export default class extends React.Component {
+export default class extends Component<void> {
   textValue = '';
 
-  getUser = value =>
-    new Promise(resolve => {
+  getUser = (value: string) =>
+    new Promise<any>(resolve => {
       setTimeout(() => {
         if (value === this.textValue) {
           resolve(['jill', 'joe', 'jillian', 'jack'].find(v => v === value));
@@ -22,7 +22,7 @@ export default class extends React.Component {
       }, 1000);
     });
 
-  validate = value => {
+  validate = (value: string) => {
     this.textValue = value;
     if (value.length < 3) {
       return 'TOO_SHORT';
