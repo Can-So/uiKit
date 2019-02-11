@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 import { mountEditor } from './utils';
 import { toNativeBridge } from '../../../src/editor/web-to-native';
 import mobileEditor from '../../../src/editor/mobile-editor-element';
+import { browser } from '@atlaskit/editor-common';
 
 declare var bridge;
 
@@ -91,12 +92,18 @@ describe('insert media', () => {
     ],
   };
   it('should dispatch media picker events', async () => {
+    if (browser.ie) {
+      this.skip();
+    }
     sendSampleMediaEvents();
     const content = bridge.getContent();
     expect(JSON.parse(content)).to.be.deep.equal(contentWithMedia);
   });
 
   it('should update content on native side', async () => {
+    if (browser.ie) {
+      this.skip();
+    }
     const mock = sinon.mock(toNativeBridge);
     mock
       .expects('updateText')
