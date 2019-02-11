@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 98.6.0
+- [minor] [fa435d11f7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa435d11f7):
+
+  - ED-6155 Fire analytics v3 events for general editor UI events
+
+## 98.5.1
+- [patch] [4bead4dd64](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4bead4dd64):
+
+  - Fix cursor bug between Panel and Status when moved with arrowkeys
+
+## 98.5.0
+- [minor] [5a6071d7f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6071d7f5):
+
+  - [ED-6159] Changes tooltip for the add contextual button on tables
+
 ## 98.4.6
 - [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
 

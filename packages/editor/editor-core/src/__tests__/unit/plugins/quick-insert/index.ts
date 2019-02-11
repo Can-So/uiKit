@@ -8,13 +8,16 @@ import {
   sleep,
   sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { pluginKey as quickInsertPluginKey } from '../../../../plugins/quick-insert';
 
 describe('Quick Insert', () => {
   const createEditor = createEditorFactory();
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
-  const editor = (doc: any, providerFactory?: any) =>
-    createEditor({
+  const editor = (doc: any, providerFactory?: any) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
       pluginKey: quickInsertPluginKey,
       providerFactory,
@@ -22,8 +25,11 @@ describe('Quick Insert', () => {
         quickInsert: true,
         allowPanel: true,
         allowCodeBlocks: true,
+        allowAnalyticsGASV3: true,
       },
+      createAnalyticsEvent,
     });
+  };
 
   it('should be able to select a quick insert items using type ahead', async () => {
     const { editorView, sel } = editor(doc(p('{<>}')));
@@ -70,5 +76,18 @@ describe('Quick Insert', () => {
     expect(editorView.state.doc).toEqualDocument(
       doc(panel({ panelType: 'info' })(p())),
     );
+  });
+
+  it('should trigger quick insert invoked analytics event when menu opened', async () => {
+    const { editorView, sel } = editor(doc(p('{<>}')));
+    insertText(editorView, '/', sel);
+
+    expect(createAnalyticsEvent).toHaveBeenCalledWith({
+      action: 'invoked',
+      actionSubject: 'typeAhead',
+      actionSubjectId: 'quickInsertTypeAhead',
+      attributes: { inputMethod: 'keyboard' },
+      eventType: 'ui',
+    });
   });
 });

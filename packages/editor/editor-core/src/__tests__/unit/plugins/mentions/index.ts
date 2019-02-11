@@ -1,4 +1,8 @@
-import { createEditorFactory, insertText } from '@atlaskit/editor-test-helpers';
+import {
+  createEditorFactory,
+  insertText,
+  sendKeyToPm,
+} from '@atlaskit/editor-test-helpers';
 import { doc, p } from '@atlaskit/editor-test-helpers';
 import { MockMentionResource } from '@atlaskit/util-data-test';
 import { selectCurrentItem } from '../../../../plugins/type-ahead/commands/select-item';
@@ -76,7 +80,11 @@ describe('mentionTypeahead', () => {
     const contextIdentifierProvider = Promise.resolve(contextIdentifiers);
     const { editorView, sel } = createEditor({
       doc: doc(p('{<>}')),
-      editorProps: { mentionProvider, contextIdentifierProvider },
+      editorProps: {
+        mentionProvider,
+        contextIdentifierProvider,
+        allowAnalyticsGASV3: true,
+      },
       providerFactory: ProviderFactory.create({
         mentionProvider,
         contextIdentifierProvider,
@@ -137,7 +145,7 @@ describe('mentionTypeahead', () => {
     };
   };
 
-  describe('analytics', () => {
+  describe('fabric-elements analytics', () => {
     it(
       'should fire typeahead cancelled event',
       withMentionQuery('all', ({ editorView, event, createAnalyticsEvent }) => {
@@ -252,6 +260,45 @@ describe('mentionTypeahead', () => {
         expect(event.fire).toHaveBeenCalledWith('fabric-elements');
       }),
     );
+  });
+
+  describe('editor analytics', () => {
+    let createAnalyticsEvent;
+    let editorView;
+    let sel;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      ({ createAnalyticsEvent } = analyticsMocks());
+      ({ editorView, sel } = await editor({
+        createAnalyticsEvent,
+      }));
+    });
+
+    it('should trigger mention typeahead invoked event when invoked via quick insert', async () => {
+      insertText(editorView, '/Mention', sel);
+      sendKeyToPm(editorView, 'Enter');
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'invoked',
+        actionSubject: 'typeAhead',
+        actionSubjectId: 'mentionTypeAhead',
+        attributes: { inputMethod: 'quickInsert' },
+        eventType: 'ui',
+      });
+    });
+
+    it('should trigger mention typeahead invoked event when user types "@" symbol', async () => {
+      insertText(editorView, '@', sel);
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'invoked',
+        actionSubject: 'typeAhead',
+        actionSubjectId: 'mentionTypeAhead',
+        attributes: { inputMethod: 'keyboard' },
+        eventType: 'ui',
+      });
+    });
   });
 
   describe('mentionProvider', () => {

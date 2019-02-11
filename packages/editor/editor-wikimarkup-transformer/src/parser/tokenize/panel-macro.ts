@@ -1,5 +1,5 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback } from '.';
+import { Token, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 import { parseString } from '../text';
 import { parseAttrs } from '../utils/attrs';
@@ -9,26 +9,26 @@ import { title } from '../utils/title';
 
 const allowedNodeType = ['paragraph', 'heading', 'orderedList', 'bulletList'];
 
-export function panelMacro(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const panelMacro: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   return commonMacro(input.substring(position), schema, {
     keyword: 'panel',
     paired: true,
+    context,
     rawContentProcessor,
-    tokenErrCallback,
   });
-}
+};
 
 const rawContentProcessor = (
   rawAttrs: string,
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   const output: PMNode[] = [];
   const parsedAttrs = parseAttrs(rawAttrs);
@@ -37,7 +37,12 @@ const rawContentProcessor = (
     panelType: getPanelType(parsedAttrs),
   };
 
-  const parsedContent = parseString(rawContent, schema, [], tokenErrCallback);
+  const parsedContent = parseString({
+    schema,
+    context,
+    ignoreTokenTypes: [],
+    input: rawContent,
+  });
 
   const normalizedContent = normalizePMNodes(parsedContent, schema);
   let contentBuffer: PMNode[] = parsedAttrs.title

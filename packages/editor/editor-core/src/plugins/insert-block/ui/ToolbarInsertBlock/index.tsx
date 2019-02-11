@@ -61,6 +61,14 @@ import { Command } from '../../../../types';
 import { showLinkToolbar } from '../../../hyperlink/commands';
 import { insertMentionQuery } from '../../../mentions/commands/insert-mention-query';
 import { updateStatus } from '../../../status/actions';
+import {
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+} from '../../../analytics';
 
 export const messages = defineMessages({
   action: {
@@ -183,6 +191,7 @@ export interface Props {
     node?: PMNode,
     isEditing?: boolean,
   ) => (state, dispatch) => void;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 }
 
 export interface State {
@@ -238,8 +247,23 @@ class ToolbarInsertBlock extends React.PureComponent<
   };
 
   private toggleEmojiPicker = () => {
-    const emojiPickerOpen = !this.state.emojiPickerOpen;
-    this.setState({ emojiPickerOpen });
+    this.setState(
+      prevState => ({ emojiPickerOpen: !prevState.emojiPickerOpen }),
+      () => {
+        if (this.state.emojiPickerOpen) {
+          const { dispatchAnalyticsEvent } = this.props;
+          if (dispatchAnalyticsEvent) {
+            dispatchAnalyticsEvent({
+              action: ACTION.OPENED,
+              actionSubject: ACTION_SUBJECT.PICKER,
+              actionSubjectId: ACTION_SUBJECT_ID.PICKER_EMOJI,
+              attributes: { inputMethod: INPUT_METHOD.TOOLBAR },
+              eventType: EVENT_TYPE.UI,
+            });
+          }
+        }
+      },
+    );
   };
 
   private renderPopup() {
@@ -584,7 +608,10 @@ class ToolbarInsertBlock extends React.PureComponent<
     'atlassian.editor.format.hyperlink.button',
     (): boolean => {
       const { editorView } = this.props;
-      showLinkToolbar()(editorView.state, editorView.dispatch);
+      showLinkToolbar(INPUT_METHOD.TOOLBAR)(
+        editorView.state,
+        editorView.dispatch,
+      );
       return true;
     },
   );
@@ -647,8 +674,19 @@ class ToolbarInsertBlock extends React.PureComponent<
   private openMediaPicker = withAnalytics(
     'atlassian.editor.format.media.button',
     (): boolean => {
-      const { onShowMediaPicker } = this.props;
-      onShowMediaPicker!();
+      const { onShowMediaPicker, dispatchAnalyticsEvent } = this.props;
+      if (onShowMediaPicker) {
+        onShowMediaPicker();
+        if (dispatchAnalyticsEvent) {
+          dispatchAnalyticsEvent({
+            action: ACTION.OPENED,
+            actionSubject: ACTION_SUBJECT.PICKER,
+            actionSubjectId: ACTION_SUBJECT_ID.PICKER_CLOUD,
+            attributes: { inputMethod: INPUT_METHOD.TOOLBAR },
+            eventType: EVENT_TYPE.UI,
+          });
+        }
+      }
       return true;
     },
   );

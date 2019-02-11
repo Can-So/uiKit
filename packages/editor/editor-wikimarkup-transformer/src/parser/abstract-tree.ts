@@ -16,12 +16,13 @@ export default class AbstractTree {
    * Convert reduced macros tree into prosemirror model tree
    */
   getProseMirrorModel(tokenErrCallback?: TokenErrCallback): PMNode {
-    const content = parseString(
-      this.wikiMarkup,
-      this.schema,
-      [],
-      tokenErrCallback,
-    );
+    // TODO: Receive the context as parameter instead of tokenErrCallBack
+    const content = parseString({
+      context: { tokenErrCallback },
+      ignoreTokenTypes: [],
+      input: this.wikiMarkup,
+      schema: this.schema,
+    });
 
     return this.schema.nodes.doc.createChecked(
       {},

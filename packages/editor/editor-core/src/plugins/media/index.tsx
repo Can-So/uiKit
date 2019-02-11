@@ -24,6 +24,14 @@ import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,
 } from '../editor-disabled';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+} from '../analytics';
 
 export {
   MediaState,
@@ -205,7 +213,14 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
         action(insert, state) {
           const pluginState = pluginKey.getState(state);
           pluginState.showMediaPicker();
-          return insert('');
+          const tr = insert('');
+          return addAnalytics(tr, {
+            action: ACTION.OPENED,
+            actionSubject: ACTION_SUBJECT.PICKER,
+            actionSubjectId: ACTION_SUBJECT_ID.PICKER_CLOUD,
+            attributes: { inputMethod: INPUT_METHOD.QUICK_INSERT },
+            eventType: EVENT_TYPE.UI,
+          });
         },
       },
     ],

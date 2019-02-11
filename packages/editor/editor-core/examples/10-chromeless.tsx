@@ -63,6 +63,7 @@ export default function Example() {
             <Editor
               appearance="chromeless"
               analyticsHandler={analyticsHandler}
+              allowAnalyticsGASV3={true}
               disabled={disabled}
               shouldFocus={true}
               allowCodeBlocks={true}

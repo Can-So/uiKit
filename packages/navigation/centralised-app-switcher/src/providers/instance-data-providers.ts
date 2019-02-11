@@ -48,5 +48,19 @@ export const UserPermissionProvider = asDataProvider(
         permissionId,
         resourceId: `ari:cloud:platform::site/${cloudId}`,
       },
+    ).then((permission): boolean => permission.permitted),
+);
+
+export interface XFlowSettings {
+  [s: string]: any;
+}
+
+export const XFlowSettingsProvider = asDataProvider(
+  ({ cloudId }: WithCloudId) =>
+    fetchJson<XFlowSettings>(`/gateway/api/site/${cloudId}/setting/xflow`).then(
+      (xFlowSettings): boolean =>
+        xFlowSettings.hasOwnProperty('product-suggestions-enabled')
+          ? xFlowSettings['product-suggestions-enabled']
+          : true,
     ),
 );

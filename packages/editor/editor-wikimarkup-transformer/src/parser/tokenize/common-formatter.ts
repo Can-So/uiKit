@@ -1,5 +1,5 @@
 import { Schema } from 'prosemirror-model';
-import { Token, TokenType } from './';
+import { Token, TokenType, Context } from './';
 import { linkFormat } from './links/link-format';
 import { parseNewlineOnly } from './whitespace';
 import { parseMacroKeyword } from './keyword';
@@ -7,11 +7,12 @@ import { parseToken } from '.';
 import { escapeHandler } from '../utils/escape';
 
 export interface FormatterOption {
-  /** The opening symbol */
+  context: Context;
+  // The opening symbol
   opening: string;
-  /** The closing symbol */
+  // The closing symbol
   closing: string;
-  /** This function will be called with the rawContent */
+  // This function will be called with the rawContent
   rawContentProcessor: (raw: string, length: number) => Token;
 }
 
@@ -158,7 +159,13 @@ export function commonFormatter(
          * -awesome [link|https://www.atlass-ian.com] nice
          * to be a strike through because of the '-' in link
          */
-        const token = linkFormat(input, index, schema);
+        // TODO: If necessary, delegates the context
+        const token = linkFormat({
+          input,
+          schema,
+          position: index,
+          context: {},
+        });
         if (token.type === 'text') {
           buffer += token.text;
           index += token.length;

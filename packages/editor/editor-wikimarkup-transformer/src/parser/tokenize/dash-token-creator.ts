@@ -1,9 +1,9 @@
-import { TextToken, Token } from './';
+import { TextToken, TokenParser } from './';
 
 export const createDashTokenParser = (
   token: TextToken,
   fallback: TextToken,
-) => (input: string, position: number): Token => {
+): TokenParser => ({ input, position }) => {
   /**
    * From Jira https://stash.atlassian.com/projects/JIRACLOUD/repos/jira/browse/jira-components/jira-renderer/src/main/java/com/atlassian/renderer/v2/components/phrase/DashRendererComponent.java
    *  public static final Replacer EN_DASH = new Replacer(Pattern.compile("(^|\\s)--(\\s|$)"), "$1&#8211;$2", "--");

@@ -1,16 +1,6 @@
-import { Schema } from 'prosemirror-model';
-import { Token } from './';
+import { TokenParser } from './';
 
-export interface EmojiMapItem {
-  markup: string[];
-  adf: {
-    id: string;
-    shortName: string;
-    text: string;
-  };
-}
-
-export function emoji(input: string, position: number, schema: Schema): Token {
+export const emoji: TokenParser = ({ input, position, schema }) => {
   const substring = input.substring(position);
   // Look for a emoji
   for (const emo of EMOJIS) {
@@ -28,6 +18,15 @@ export function emoji(input: string, position: number, schema: Schema): Token {
     type: 'text',
     text: substring.substr(0, 1),
     length: 1,
+  };
+};
+
+export interface EmojiMapItem {
+  markup: string[];
+  adf: {
+    id: string;
+    shortName: string;
+    text: string;
   };
 }
 
