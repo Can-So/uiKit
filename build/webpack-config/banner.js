@@ -1,6 +1,6 @@
 // @flow
-
 const chalk = require('chalk');
+const flattenDeep = require('lodash.flattendeep');
 
 function print(msg /*: Array<String>*/) {
   console.log(msg.join('\n'));
@@ -20,7 +20,10 @@ function devServerBanner(
   } /*: { workspaces: Array<{ name: string, dir: string }>, workspacesGlob: string, isAll: boolean, port: number, host: string } */,
 ) {
   const msg /*: Array<any> */ = [''];
-  const wsNamePadLength = workspaces.reduce(
+  // This change was introduced after running webpack with more than one package.
+  // The returned array of objects can be multi-dimensional.
+  const flattenWorkspaces = flattenDeep(workspaces);
+  const wsNamePadLength = flattenWorkspaces.reduce(
     (acc, ws) => (ws.name.length > acc ? ws.name.length : acc),
     0,
   );
@@ -40,7 +43,7 @@ function devServerBanner(
         )} pattern:`,
       ),
       '',
-      ...workspaces.map(
+      ...flattenWorkspaces.map(
         ws =>
           `– ${ws.name.padEnd(wsNamePadLength, ' ')}   ${chalk.dim(
             `[http://${host}:${port}/packages${ws.dir.split('packages')[1]}]`,

@@ -29,6 +29,7 @@ const minimatch = require('minimatch');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const historyApiFallback = require('connect-history-api-fallback');
+const flattenDeep = require('lodash.flattendeep');
 const createConfig = require('../config');
 const utils = require('../config/utils');
 const { print, devServerBanner, errorMsg } = require('../banner');
@@ -38,44 +39,44 @@ const PORT = +process.env.ATLASKIT_DEV_PORT || 9000;
 const stats = require('../config/statsOptions');
 
 async function runDevServer() {
-  const [workspacesGlobRaw = ''] = process.argv.slice(2);
+  const workspacesGlobRaw = process.argv.slice(2);
   const report = !!process.argv.find(arg => arg.startsWith('--report'));
-  const workspacesGlob = workspacesGlobRaw.startsWith('--')
-    ? ''
-    : workspacesGlobRaw.replace(/^['"](.+)['"]$/, '$1'); // Unwrap string from quotes
+  const workspacesGlob = workspacesGlobRaw.map(workspace => {
+    return workspace.startsWith('--')
+      ? ''
+      : workspace.replace(/^['"](.+)['"]$/, '$1'); // Unwrap string from quotes
+  });
   const mode = 'development';
   const websiteEnv = 'local';
   const projectRoot = (await bolt.getProject({ cwd: process.cwd() })).dir;
   const workspaces = await bolt.getWorkspaces();
+  const filteredWorkspaces = workspacesGlob.map(workspaceGlob => {
+    return workspaceGlob
+      ? workspaces.filter(ws =>
+          minimatch(ws.dir, workspaceGlob, { matchBase: true }),
+        )
+      : workspaces;
+  });
 
-  const filteredWorkspaces = workspacesGlob
-    ? workspaces.filter(ws =>
-        minimatch(ws.dir, workspacesGlob, { matchBase: true }),
-      )
-    : workspaces;
-
-  const globs = workspacesGlob
-    ? utils.createWorkspacesGlob(filteredWorkspaces, projectRoot)
-    : utils.createDefaultGlob();
+  const globs =
+    workspacesGlob.length > 0
+      ? utils.createWorkspacesGlob(flattenDeep(filteredWorkspaces), projectRoot)
+      : utils.createDefaultGlob();
 
   if (!globs.length) {
-    print(
-      errorMsg({
-        title: 'Nothing to run',
-        msg: `Pattern "${workspacesGlob}" doesn't match anything.`,
-      }),
+    console.info(
+      `${workspacesGlobRaw.toString()}: Nothing to run or pattern does not match!`,
     );
-
-    process.exit(2);
+    process.exit(0);
   }
 
   print(
     devServerBanner({
-      workspacesGlob,
       workspaces: filteredWorkspaces,
+      workspacesGlob: workspacesGlob.toString(),
       port: PORT,
       host: HOST,
-      isAll: !workspacesGlob,
+      isAll: workspacesGlob.length > 0 ? false : true,
     }),
   );
 
