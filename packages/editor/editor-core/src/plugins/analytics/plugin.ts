@@ -1,6 +1,6 @@
 import { Plugin, PluginKey, Transaction } from 'prosemirror-state';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import { EditorPlugin } from '../../types';
+import { EditorPlugin, Command } from '../../types';
 import { AnalyticsEventPayload } from './types';
 import { fireAnalyticsEvent } from './utils';
 
@@ -14,6 +14,19 @@ export function addAnalytics(
   const analyticsMeta = tr.getMeta(analyticsPluginKey) || [];
   analyticsMeta.push({ payload, channel });
   return tr.setMeta(analyticsPluginKey, analyticsMeta);
+}
+
+export function withAnalytics(
+  payload: AnalyticsEventPayload,
+  channel?: string,
+) {
+  return (command: Command): Command => (state, dispatch) =>
+    command(state, tr => {
+      if (dispatch) {
+        dispatch(addAnalytics(tr, payload, channel));
+      }
+      return true;
+    });
 }
 
 function createPlugin(createAnalyticsEvent?: CreateUIAnalyticsEventSignature) {

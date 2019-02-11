@@ -1,21 +1,21 @@
 import { Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback } from './';
+import { Token, Context } from './';
 
+// TODO: Create a type for rawContentProcessor which will be shared among parsers
 export interface MacroOption {
-  /** The macro keyword */
+  // The macro keyword
   keyword: string;
-  /** If the macro needs a paired closing part */
+  // If the macro needs a paired closing part
   paired: boolean;
-  /** This function will be called with the rawAttrs and rawContent */
+  // This function will be called with the rawAttrs and rawContent
+  context: Context;
   rawContentProcessor: (
     rawAttrs: string,
     rawContent: string,
     length: number,
     schema: Schema,
-    tokenErrCallback?: TokenErrCallback,
+    context: Context,
   ) => Token;
-  /** Token Error Callback */
-  tokenErrCallback?: TokenErrCallback;
 }
 
 export function commonMacro(
@@ -47,7 +47,7 @@ export function commonMacro(
       '',
       openingLength,
       schema,
-      opt.tokenErrCallback,
+      opt.context,
     );
   }
 
@@ -75,7 +75,7 @@ export function commonMacro(
     rawContent,
     length,
     schema,
-    opt.tokenErrCallback,
+    opt.context,
   );
 }
 

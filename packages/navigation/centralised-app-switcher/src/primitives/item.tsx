@@ -61,11 +61,22 @@ type AppSwitcherItemProps = Props & {
   key?: string;
   onClick?: () => void;
 };
-export default ({ isAdmin, isCustom, icon, ...rest }: AppSwitcherItemProps) => (
+export default ({
+  isAdmin,
+  isCustom,
+  icon,
+  iconUrl,
+  ...rest
+}: AppSwitcherItemProps) => (
   <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
     <Item
       elemBefore={
-        <IconWithBackground isAdmin={isAdmin} isCustom={isCustom} icon={icon} />
+        <IconWithBackground
+          isAdmin={isAdmin}
+          isCustom={isCustom}
+          icon={icon}
+          iconUrl={iconUrl}
+        />
       }
       {...rest}
     />

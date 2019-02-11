@@ -120,6 +120,7 @@ export function createPlugin(
                   typeAhead,
                   state,
                   pluginState,
+                  tr,
                 })
               : selectCurrentActionHandler({ dispatch, pluginState, tr });
 
@@ -133,6 +134,7 @@ export function createPlugin(
               typeAhead,
               state,
               pluginState,
+              tr,
             });
         }
       },
@@ -270,12 +272,14 @@ export function defaultActionHandler({
   typeAhead,
   pluginState,
   state,
+  tr,
 }: {
   dispatch: Dispatch;
   reactContext: () => { [key: string]: any };
   typeAhead: Array<TypeAheadHandler>;
   pluginState: PluginState;
   state: EditorState;
+  tr: Transaction;
 }): PluginState {
   const { typeAheadQuery } = state.schema.marks;
   const { doc, selection } = state;
@@ -332,10 +336,17 @@ export function defaultActionHandler({
 
   try {
     const { intl } = reactContext();
-    typeAheadItems = typeAheadHandler.getItems(query, state, intl, {
-      prevActive: pluginState.prevActiveState,
-      queryChanged: query !== pluginState.query,
-    });
+    typeAheadItems = typeAheadHandler.getItems(
+      query,
+      state,
+      intl,
+      {
+        prevActive: pluginState.prevActiveState,
+        queryChanged: query !== pluginState.query,
+      },
+      tr,
+      dispatch,
+    );
 
     if (pluginState.itemsLoader) {
       pluginState.itemsLoader.cancel();
