@@ -1,0 +1,1 @@
+- ED-6206: fixed media card issue on mobile editor
