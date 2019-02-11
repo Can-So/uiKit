@@ -29,7 +29,12 @@ export function getVerticalPlacement(
   boundariesElement: HTMLElement,
   fitHeight?: number,
   alignY?: string,
+  forcePlacement?: boolean,
 ): string {
+  if (forcePlacement && alignY) {
+    return alignY;
+  }
+
   if (!fitHeight) {
     return 'bottom';
   }
@@ -67,7 +72,12 @@ export function getHorizontalPlacement(
   boundariesElement: HTMLElement,
   fitWidth?: number,
   alignX?: string,
+  forcePlacement?: boolean,
 ): string {
+  if (forcePlacement && alignX) {
+    return alignX;
+  }
+
   if (!fitWidth) {
     return alignX || 'left';
   }
@@ -101,10 +111,23 @@ export function calculatePlacement(
   fitHeight?: number,
   alignX?: string,
   alignY?: string,
+  forcePlacement?: boolean,
 ): [string, string] {
   return [
-    getVerticalPlacement(target, boundariesElement, fitHeight, alignY),
-    getHorizontalPlacement(target, boundariesElement, fitWidth, alignX),
+    getVerticalPlacement(
+      target,
+      boundariesElement,
+      fitHeight,
+      alignY,
+      forcePlacement,
+    ),
+    getHorizontalPlacement(
+      target,
+      boundariesElement,
+      fitWidth,
+      alignX,
+      forcePlacement,
+    ),
   ];
 }
 

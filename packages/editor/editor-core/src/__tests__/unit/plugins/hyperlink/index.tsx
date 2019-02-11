@@ -7,7 +7,6 @@ import {
   sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import hyperlinkEditorPlugin from '../../../../plugins/hyperlink';
 import quickInsertPlugin from '../../../../plugins/quick-insert';
 
 describe('hyperlink', () => {

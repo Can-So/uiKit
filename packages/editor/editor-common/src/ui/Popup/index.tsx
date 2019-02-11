@@ -25,6 +25,7 @@ export interface Props {
   scrollableElement?: HTMLElement;
   stick?: boolean;
   ariaLabel?: string;
+  forcePlacement?: boolean;
 }
 
 export interface State {
@@ -63,6 +64,7 @@ export default class Popup extends React.Component<Props, State> {
       alignX,
       alignY,
       stick,
+      forcePlacement,
     } = props;
     const { popup } = state;
 
@@ -77,6 +79,7 @@ export default class Popup extends React.Component<Props, State> {
       fitHeight,
       alignX,
       alignY,
+      forcePlacement,
     );
     if (onPlacementChanged && this.placement.join('') !== placement.join('')) {
       onPlacementChanged(placement);

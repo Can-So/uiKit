@@ -15,7 +15,6 @@ import {
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
 } from '../analytics';
-import { getToolbarConfig } from './toolbar';
 import { getToolbarConfig } from './Toolbar';
 
 const hyperlinkPlugin: EditorPlugin = {

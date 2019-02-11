@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { calculatePosition } from '../../../../ui/Popup/utils';
+import {
+  calculatePosition,
+  getVerticalPlacement,
+  getHorizontalPlacement,
+} from '../../../../ui/Popup/utils';
 
 describe('@atlaskit/editor-common popup utils', () => {
   let offset;
@@ -69,6 +73,18 @@ describe('@atlaskit/editor-common popup utils', () => {
       bottom: -22,
       left: 34,
     });
+  });
+
+  it('should force position when forcePlacement Y is sent', () => {
+    const calc = getVerticalPlacement(target, popup, 32, 'bottom-left', true);
+
+    expect(calc).toEqual('bottom-left');
+  });
+
+  it('should force position when forcePlacement X is sent', () => {
+    const calc = getHorizontalPlacement(target, popup, 32, 'top-right', true);
+
+    expect(calc).toEqual('top-right');
   });
 
   it('should calculatePosition for bottom and left placement', () => {
