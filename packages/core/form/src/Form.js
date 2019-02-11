@@ -80,7 +80,7 @@ class Form extends React.Component<Props, State> {
 
   componentDidMount() {
     this.unsubscribe = this.form.subscribe(
-      ({ submitting, dirty, values }) => {
+      ({ submitting, dirty }) => {
         this.setState({ submitting, dirty });
       },
       {
@@ -88,7 +88,6 @@ class Form extends React.Component<Props, State> {
         submitting: true,
       },
     );
-    this.form.getFieldState;
   }
 
   componenWillUnmount() {
