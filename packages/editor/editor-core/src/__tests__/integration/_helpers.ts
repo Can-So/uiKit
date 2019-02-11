@@ -255,14 +255,6 @@ export const changeSelectedNodeLayout = async (page, layoutName) => {
   await page.click(buttonSelector);
 };
 
-/**
- * When using quick insert, `insertTitle` should match exactly to the typeahead wording.
- * We need to filter down the typeahead, as we select the first result.
- * Edge appears to have a problem with await browser.browser.waitUntil().
- * The statement at the bottom of the async function returns `firstInsertText && firstInsertText.startsWith(firstTitleWord)`
- * Even when this is true the waitUntil doesn’t return.
- */
-
 export const quickInsert = async (browser, insertTitle) => {
   await browser.type(editable, `/${insertTitle.split(' ')[0]}`);
   await browser.waitForSelector('div[aria-label="Popup"]');
@@ -286,4 +278,44 @@ export const forEach = async (
 export const insertMenuItem = async (browser, title) => {
   await browser.waitForSelector(`button span[aria-label="${title}"]`);
   await browser.click(`button span[aria-label="${title}"]`);
+};
+
+export const currentSelectedEmoji = '.emoji-typeahead-selected';
+export const typeahead = '.ak-emoji-typeahead';
+
+export const insertEmoji = async (browser, query: string) => {
+  await browser.type(editable, ':');
+  await browser.waitForSelector(typeahead);
+  await browser.type(editable, query);
+  await browser.type(editable, ':');
+};
+
+export const insertEmojiBySelect = async (browser, select: string) => {
+  await browser.type(editable, ':');
+  await browser.waitForSelector(typeahead);
+  await browser.type(editable, [select]);
+  await browser.isVisible(`span=:${select}:`);
+  await browser.click(`span=:${select}:`);
+};
+
+export const currentSelectedEmojiShortName = async browser => {
+  return await browser.$(currentSelectedEmoji).getProperty('data-emoji-id');
+};
+
+export const highlightEmojiInTypeahead = async (
+  browser,
+  emojiShortName,
+  depth = 5,
+) => {
+  for (let i = 0; i < depth; i++) {
+    let selectedEmojiShortName = await currentSelectedEmojiShortName(browser);
+    if (selectedEmojiShortName === `:${emojiShortName}:`) {
+      break;
+    }
+    await browser.type(editable, 'ArrowDown');
+  }
+};
+
+export const emojiItem = (emojiShortName: string): string => {
+  return `span[data-emoji-short-name=":${emojiShortName}:"]`;
 };

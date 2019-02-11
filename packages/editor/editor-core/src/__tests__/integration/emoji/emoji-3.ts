@@ -1,15 +1,16 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import { getDocFromElement, editable } from '../_helpers';
-import {
-  insertEmoji,
-  emojiItem,
-  typeahead,
-  highlightEmojiInTypeahead,
-} from './_emoji-helpers';
 import {
   mountEditor,
   goToEditorTestingExample,
 } from '../../__helpers/testing-example-helpers';
+import {
+  getDocFromElement,
+  editable,
+  insertEmoji,
+  emojiItem,
+  typeahead,
+  highlightEmojiInTypeahead,
+} from '../_helpers';
 
 // safari failure on browserstack
 BrowserTestCase(

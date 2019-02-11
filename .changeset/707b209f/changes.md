@@ -1,0 +1,1 @@
+- Fix cursor bug between Panel and Status when moved with arrowkeys
