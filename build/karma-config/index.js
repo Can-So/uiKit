@@ -140,11 +140,13 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
         browser: 'chrome',
         os: 'OS X',
         os_version: 'El Capitan',
+        browser_version: '72',
       },
       firefox_latest_windows: {
         browser: 'firefox',
         os: 'WINDOWS',
         os_version: '10',
+        browser_version: '64',
       },
       safari_latest: {
         browser: 'Safari',
