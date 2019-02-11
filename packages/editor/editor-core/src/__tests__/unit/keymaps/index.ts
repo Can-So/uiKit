@@ -47,7 +47,7 @@ describe('keymaps', () => {
       describe('findShortcutByDescription', () => {
         describe('shortcut is found', () => {
           it('returns matched shortcut', () => {
-            expect(keymaps.findShortcutByDescription('Block quote')).toEqual(
+            expect(keymaps.findShortcutByDescription('Quote')).toEqual(
               'Cmd-Alt-9',
             );
           });
