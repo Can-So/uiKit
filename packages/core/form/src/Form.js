@@ -1,7 +1,9 @@
 // @flow
-import { createForm, FieldState, FieldSubscription } from 'final-form';
+import { createForm } from 'final-form';
 import createDecorator from 'final-form-focus';
-import React, { createContext, Node, Ref } from 'react';
+import React, { createContext } from 'react';
+import type { FieldState, FieldSubscription } from 'final-form';
+import type { Node, Ref } from 'react';
 
 export const FormContext = createContext();
 export const IsDisabledContext = createContext(false);
