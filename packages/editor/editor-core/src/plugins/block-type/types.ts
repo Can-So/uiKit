@@ -61,7 +61,7 @@ export const messages = defineMessages<
   codeblock: {
     id: 'fabric.editor.codeblock',
     defaultMessage: 'Code snippet',
-    description: 'Insert a block of code (code snippet)',
+    description: 'Insert a snippet/segment of code (code block)',
   },
   panel: {
     id: 'fabric.editor.panel',

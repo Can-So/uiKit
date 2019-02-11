@@ -1,0 +1,2 @@
+- ED-6009 Rename "Code Block" to "Code snippet" in the insert menu
+- ED-6010 Rename "Block Quote" to "Quote" in the insert menu
