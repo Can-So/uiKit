@@ -26,6 +26,11 @@ import ToolbarInsertBlock, {
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import EditorActions from '../../../../../actions';
 import { MediaProvider } from '../../../../../plugins/media';
+import {
+  stateKey as hyperlinkPluginKey,
+  LinkAction,
+} from '../../../../../plugins/hyperlink/pm-plugins/main';
+import { analyticsPluginKey } from '../../../../../plugins/analytics';
 
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
@@ -153,6 +158,35 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     toolbarOption.unmount();
   });
 
+  it('should trigger emoji picker opened analytics event when emoji picker opened', () => {
+    const { editorView } = editor(doc(p()));
+    const dispatchAnalyticsSpy = jest.fn();
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        emojiDisabled={false}
+        emojiProvider={emojiProvider}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+        dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+    const emojiButton = toolbarOption
+      .find(Item)
+      .filterWhere(n => n.text().indexOf(messages.emoji.defaultMessage) > -1);
+    emojiButton.simulate('click');
+
+    expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+      action: 'opened',
+      actionSubject: 'picker',
+      actionSubjectId: 'emojiPicker',
+      attributes: { inputMethod: 'toolbar' },
+      eventType: 'ui',
+    });
+    toolbarOption.unmount();
+  });
+
   it('should have emoji picker component when emojiPickerOpen is true', () => {
     const { editorView } = editor(doc(p()));
     const toolbarOption = mountWithIntl(
@@ -209,6 +243,92 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
       'atlassian.editor.format.media.button',
     );
     toolbarOption.unmount();
+  });
+
+  it('should trigger cloud picker opened analytics event when media option clicked', () => {
+    const { editorView } = editor(doc(p()));
+    const dispatchAnalyticsSpy = jest.fn();
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        mediaSupported={true}
+        mediaUploadsEnabled={true}
+        onShowMediaPicker={jest.fn()}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+        dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+    const mediaButton = toolbarOption
+      .find(Item)
+      .filterWhere(
+        n => n.text().indexOf(messages.filesAndImages.defaultMessage) > -1,
+      );
+    mediaButton.simulate('click');
+
+    expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+      action: 'opened',
+      actionSubject: 'picker',
+      actionSubjectId: 'cloudPicker',
+      attributes: { inputMethod: 'toolbar' },
+      eventType: 'ui',
+    });
+    toolbarOption.unmount();
+  });
+
+  it('should insert link when link option is clicked', () => {
+    const { editorView } = editor(doc(p('text')));
+    const dispatchSpy = jest.spyOn(editorView, 'dispatch');
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        linkSupported={true}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+    const linkButton = toolbarOption
+      .find(Item)
+      .filterWhere(n => n.text().indexOf(messages.link.defaultMessage) > -1);
+    linkButton.simulate('click');
+
+    const linkMeta = dispatchSpy.mock.calls[0][0].getMeta(hyperlinkPluginKey);
+    expect(linkMeta).toEqual(LinkAction.SHOW_INSERT_TOOLBAR);
+    toolbarOption.unmount();
+    dispatchSpy.mockRestore();
+  });
+
+  it('should trigger link typeahead invoked analytics event when link option clicked', () => {
+    const { editorView } = editor(doc(p('text')));
+    const dispatchSpy = jest.spyOn(editorView, 'dispatch');
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        linkSupported={true}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+    const linkButton = toolbarOption
+      .find(Item)
+      .filterWhere(n => n.text().indexOf(messages.link.defaultMessage) > -1);
+    linkButton.simulate('click');
+
+    const analyticsMeta = dispatchSpy.mock.calls[0][0].getMeta(
+      analyticsPluginKey,
+    );
+    expect(analyticsMeta[0].payload).toEqual(
+      expect.objectContaining({
+        action: 'invoked',
+        actionSubjectId: 'linkTypeAhead',
+        attributes: expect.objectContaining({ inputMethod: 'toolbar' }),
+      }),
+    );
+    toolbarOption.unmount();
+    dispatchSpy.mockRestore();
   });
 
   it('should trigger insertBlockType when Panel option is clicked', () => {

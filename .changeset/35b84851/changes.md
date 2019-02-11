@@ -1,0 +1,1 @@
+- ED-6155 Fire analytics v3 events for general editor UI events

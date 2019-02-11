@@ -8,6 +8,14 @@ import {
 import { EditorState, Selection } from 'prosemirror-state';
 import { filter } from '../../utils/commands';
 import { Mark, Node } from 'prosemirror-model';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+} from '../analytics';
 
 const isLinkAtPos = (pos: number) => (state: EditorState): boolean => {
   const text = state.doc.nodeAt(pos);
@@ -95,10 +103,23 @@ export function removeLink(pos: number): Command {
   return setLinkHref(pos, '');
 }
 
-export function showLinkToolbar(): Command {
+export function showLinkToolbar(
+  inputMethod:
+    | INPUT_METHOD.TOOLBAR
+    | INPUT_METHOD.QUICK_INSERT
+    | INPUT_METHOD.SHORTCUT = INPUT_METHOD.TOOLBAR,
+): Command {
   return function(state, dispatch) {
     if (dispatch) {
-      dispatch(state.tr.setMeta(stateKey, LinkAction.SHOW_INSERT_TOOLBAR));
+      let tr = state.tr.setMeta(stateKey, LinkAction.SHOW_INSERT_TOOLBAR);
+      tr = addAnalytics(tr, {
+        action: ACTION.INVOKED,
+        actionSubject: ACTION_SUBJECT.TYPEAHEAD,
+        actionSubjectId: ACTION_SUBJECT_ID.TYPEAHEAD_LINK,
+        attributes: { inputMethod },
+        eventType: EVENT_TYPE.UI,
+      });
+      dispatch(tr);
     }
     return true;
   };

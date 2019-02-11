@@ -93,6 +93,7 @@ export class ExampleEditor extends React.Component<Props> {
                 defaultValue={this.props.defaultValue}
                 appearance="full-page"
                 analyticsHandler={analyticsHandler}
+                allowAnalyticsGASV3={true}
                 quickInsert={{
                   provider: Promise.resolve(quickInsertProvider),
                 }}

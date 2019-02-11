@@ -5,8 +5,19 @@ import { analyticsService } from '../../analytics';
 import { EditorPlugin } from '../../types';
 import * as keymaps from '../../keymaps';
 import { stateKey as mediaPluginKey } from '../../plugins/media/pm-plugins/main';
+import {
+  analyticsEventKey,
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+} from '../../plugins/analytics';
+import { Dispatch } from '../../event-dispatcher';
 
 export function createPlugin(
+  eventDispatch: Dispatch,
   onSave?: (editorView: EditorView) => void,
 ): Plugin | undefined {
   if (!onSave) {
@@ -29,6 +40,7 @@ export function createPlugin(
         return true;
       }
 
+      eventDispatch(analyticsEventKey, analyticsPayload(state));
       analyticsService.trackEvent('atlassian.editor.stop.submit');
       onSave(editorView);
       return true;
@@ -36,12 +48,28 @@ export function createPlugin(
   });
 }
 
+const analyticsPayload = (
+  state: EditorState,
+): { payload: AnalyticsEventPayload } => ({
+  payload: {
+    action: ACTION.STOPPED,
+    actionSubject: ACTION_SUBJECT.EDITOR,
+    actionSubjectId: ACTION_SUBJECT_ID.SAVE,
+    attributes: {
+      inputMethod: INPUT_METHOD.SHORTCUT,
+      documentSize: state.doc.nodeSize,
+      // TODO add individual node counts - tables, headings, lists, mediaSingles, mediaGroups, mediaCards, panels, extensions, decisions, action, codeBlocks
+    },
+    eventType: EVENT_TYPE.UI,
+  },
+});
+
 const submitEditorPlugin: EditorPlugin = {
   pmPlugins() {
     return [
       {
         name: 'submitEditor',
-        plugin: ({ props }) => createPlugin(props.onSave),
+        plugin: ({ props, dispatch }) => createPlugin(dispatch, props.onSave),
       },
     ];
   },
