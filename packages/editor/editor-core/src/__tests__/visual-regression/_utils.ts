@@ -25,10 +25,10 @@ const adfInputSelector = '#adf-input';
 const importAdfBtnSelector = '#import-adf';
 
 export const dynamicTextViewportSizes = [
-  { width: 1440, height: 900 },
-  { width: 1280, height: 950 },
-  { width: 768, height: 1024 },
-  { width: 1024, height: 1366 },
+  { width: 1440, height: 4000 },
+  { width: 1280, height: 4000 },
+  { width: 768, height: 4000 },
+  { width: 1024, height: 4000 },
 ];
 
 export const viewportSizes = [
@@ -53,6 +53,14 @@ export const selectByTextAndClick = async ({ page, tagName, text }) => {
   } else {
     throw new Error(`Target element is not found: ${text}`);
   }
+};
+
+export const vrEditor = async page => {
+  const editor = '.ProseMirror';
+  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
+  await page.goto(url);
+  await page.waitForSelector(editor);
+  await page.click(editor);
 };
 
 export const initEditor = async (page, appearance: string) => {
