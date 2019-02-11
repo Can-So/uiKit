@@ -1,1 +1,0 @@
-- Fix output module target for @atlaskit/outbound-auth-flow-client
