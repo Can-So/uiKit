@@ -12,7 +12,7 @@ export default {
   'fabric.editor.heading4': 'Heading 4',
   'fabric.editor.heading5': 'Heading 5',
   'fabric.editor.heading6': 'Heading 6',
-  'fabric.editor.blockquote': 'Block quote',
+  'fabric.editor.blockquote': 'Quote',
   'fabric.editor.codeblock': 'Code block',
   'fabric.editor.panel': 'Panel',
   'fabric.editor.other': 'Others…',
