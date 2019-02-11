@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import AppSwitcher from './helpers';
+import Switcher from './helpers';
 
-export default class AppSwitcherExample extends Component {
+export default class SwitcherExample extends Component {
   state = {
     isDrawerOpen: true,
   };
@@ -23,7 +23,7 @@ export default class AppSwitcherExample extends Component {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <AppSwitcher />
+          <Switcher />
         </Drawer>
         <Button type="button" onClick={this.openDrawer}>
           Open drawer

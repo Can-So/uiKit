@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import ConfluenceAppSwitcher from '../src/components/confluence-app-switcher';
+import JiraSwitcher from '../src/components/jira-switcher';
 import { mockEndpoints } from './helpers/mock-endpoints';
 
-export default class ConfluenceAppSwitcherExample extends Component {
+export default class JiraSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -14,7 +14,7 @@ export default class ConfluenceAppSwitcherExample extends Component {
   }
 
   openDrawer = () => {
-    mockEndpoints('confluence', originalMockData => {
+    mockEndpoints('jira', originalMockData => {
       return {
         ...originalMockData,
         LICENSE_INFORMATION_DATA: {
@@ -23,11 +23,14 @@ export default class ConfluenceAppSwitcherExample extends Component {
           maintenanceEndDate: '2017-04-24',
           maintenanceStartDate: '2017-04-17',
           products: {
-            'confluence.ondemand': {
+            'jira-software.ondemand': {
               billingPeriod: 'ANNUAL',
               state: 'ACTIVE',
             },
           },
+        },
+        XFLOW_SETTINGS: {
+          'product-suggestions-enabled': false,
         },
       };
     });
@@ -50,7 +53,7 @@ export default class ConfluenceAppSwitcherExample extends Component {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <ConfluenceAppSwitcher
+          <JiraSwitcher
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />

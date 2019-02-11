@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import ConfluenceAppSwitcher from '../src/components/confluence-app-switcher';
+import ConfluenceSwitcher from '../src/components/confluence-switcher';
 import { mockEndpoints } from './helpers/mock-endpoints';
 
-export default class ConfluenceAppSwitcherExample extends Component {
+export default class ConfluenceSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -34,7 +34,7 @@ export default class ConfluenceAppSwitcherExample extends Component {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <ConfluenceAppSwitcher
+          <ConfluenceSwitcher
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />

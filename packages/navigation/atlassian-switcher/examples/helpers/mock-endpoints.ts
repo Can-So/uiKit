@@ -14,7 +14,7 @@ const ORIGINAL_MOCK_DATA: MockData = {
       {
         objectId: 'some-id',
         type: 'jira-project',
-        name: 'Jira App Switcher',
+        name: 'Jira Switcher',
         url: 'https://some-random-instance.atlassian.net/projects/CEN',
         iconUrl:
           'https://some-random-instance.atlassian.net/secure/secure/projectavatar?size=medium&avatarId=10324',

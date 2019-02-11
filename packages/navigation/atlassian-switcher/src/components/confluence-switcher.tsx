@@ -1,19 +1,19 @@
 import * as React from 'react';
-import AppSwitcher from './app-switcher';
+import Switcher from './switcher';
 import { CustomLinksProvider } from '../providers/confluence-data-providers';
 import CommonDataProvider from '../providers/common-data-provider';
 
-interface ConfluenceAppSwitcherProps {
+interface ConfluenceSwitcherProps {
   cloudId: string;
   triggerXFlow: (productKey: string) => void;
 }
 
-export default (props: ConfluenceAppSwitcherProps) => (
+export default (props: ConfluenceSwitcherProps) => (
   <CustomLinksProvider>
     {customLinks => (
       <CommonDataProvider cloudId={props.cloudId}>
         {({ licenseInformation, ...dataProps }) => (
-          <AppSwitcher
+          <Switcher
             {...props}
             {...dataProps}
             licenseInformation={licenseInformation}

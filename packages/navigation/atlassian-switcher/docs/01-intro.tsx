@@ -18,7 +18,7 @@ ${(
   <Warning>
     <p>
       <strong>
-        Note: @atlaskit/app-switcher is currently a developer preview.
+        Note: @atlaskit/atlassian-switcher is currently a developer preview.
       </strong>
     </p>
     <p>

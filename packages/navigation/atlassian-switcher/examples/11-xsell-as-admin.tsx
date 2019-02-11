@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import JiraAppSwitcher from '../src/components/jira-app-switcher';
+import JiraSwitcher from '../src/components/jira-switcher';
 import { mockEndpoints } from './helpers/mock-endpoints';
 
-export default class JiraAppSwitcherExample extends Component {
+export default class JiraSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -29,9 +29,6 @@ export default class JiraAppSwitcherExample extends Component {
             },
           },
         },
-        XFLOW_SETTINGS: {
-          'product-suggestions-enabled': false,
-        },
       };
     });
     this.setState({
@@ -53,7 +50,7 @@ export default class JiraAppSwitcherExample extends Component {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <JiraAppSwitcher
+          <JiraSwitcher
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />
