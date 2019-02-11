@@ -52,6 +52,7 @@ export const processingError: ProcessingFailedState = {
   mediaType: 'image',
   mimeType: 'jpg',
   artifacts: {},
+  representations: {},
 };
 
 const commonFileProperties = {

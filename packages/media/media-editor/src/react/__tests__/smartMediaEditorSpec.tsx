@@ -248,6 +248,7 @@ describe('Smart Media Editor', () => {
         name: 'some-name',
         size: 42,
         artifacts: [],
+        representations: {},
       });
       component.update();
       expect(component.find(EditorView)).toHaveLength(0);
@@ -278,6 +279,7 @@ describe('Smart Media Editor', () => {
         name: 'some-name',
         size: 42,
         artifacts: [],
+        representations: {},
       });
       component.update();
       const errorViewProps = component.find<ErrorViewProps>(ErrorView).props();

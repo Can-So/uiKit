@@ -15,6 +15,7 @@ describe('isErrorFileState()', () => {
     artifacts: {},
     mediaType: 'image',
     mimeType: 'some-mime-type',
+    representations: {},
   };
 
   const errorState: ErrorFileState = {
@@ -30,46 +31,69 @@ describe('isErrorFileState()', () => {
 });
 
 describe('isImageRepresentationReady()', () => {
-  const processingWithImage: ProcessingFileState = {
-    status: 'processing',
-    id: 'some-id',
-    name: 'some-name',
-    size: 42,
-    mediaType: 'image',
-    mimeType: 'some-mime-type',
-    representations: {
-      image: {},
-    },
-  };
-
-  const processedWithNoImage: ProcessedFileState = {
-    status: 'processed',
-    id: 'some-id',
-    name: 'some-name',
-    size: 42,
-    mediaType: 'image',
-    mimeType: 'some-mime-type',
-    artifacts: {},
-    representations: {},
-  };
-
-  const processedWithImage = {
-    ...processedWithNoImage,
-    representations: {
-      image: {},
-    },
-  };
-
   it('should return false when representations has no image', () => {
+    const processedWithNoImage: ProcessedFileState = {
+      status: 'processed',
+      id: 'some-id',
+      name: 'some-name',
+      size: 42,
+      mediaType: 'image',
+      mimeType: 'some-mime-type',
+      artifacts: {},
+      representations: {},
+    };
+
     expect(isImageRepresentationReady(processedWithNoImage)).toBe(false);
   });
 
   it('should return true when status is processed and representations has image', () => {
+    const processedWithImage: ProcessedFileState = {
+      status: 'processed',
+      id: 'some-id',
+      name: 'some-name',
+      size: 42,
+      mediaType: 'image',
+      mimeType: 'some-mime-type',
+      artifacts: {},
+      representations: {
+        image: {},
+      },
+    };
+
     expect(isImageRepresentationReady(processedWithImage)).toBe(true);
   });
 
   it('should return true when status is processing and representations has image', () => {
+    const processingWithImage: ProcessingFileState = {
+      status: 'processing',
+      id: 'some-id',
+      name: 'some-name',
+      size: 42,
+      mediaType: 'image',
+      mimeType: 'some-mime-type',
+      representations: {
+        image: {},
+      },
+    };
+
     expect(isImageRepresentationReady(processingWithImage)).toBe(true);
+  });
+
+  it('should return true when status is failed-processing and representations has image', () => {
+    const processingFailedWithImage: ProcessingFailedState = {
+      status: 'failed-processing',
+      id: 'some-id',
+      name: 'some-name',
+      size: 42,
+      artifacts: {},
+      mediaType: 'image',
+      mimeType: 'some-mime-type',
+      representations: {
+        image: {},
+      },
+    };
+
+    expect(isImageRepresentationReady(processingFailedWithImage)).toBe(true);
   });
 
   it('should return false for state without representations', () => {
