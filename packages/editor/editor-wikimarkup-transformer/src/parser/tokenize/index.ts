@@ -76,7 +76,7 @@ export interface PMNodeToken {
 }
 
 export interface Context {
-  tokenErrCallback?: TokenErrCallback;
+  readonly tokenErrCallback?: TokenErrCallback;
 }
 
 export type Token = TextToken | PMNodeToken;
