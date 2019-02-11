@@ -1,11 +1,7 @@
 // @flow
-import React, { createContext, type Node, type Ref } from 'react';
-import {
-  createForm,
-  type FieldState,
-  type FieldSubscription,
-} from 'final-form';
+import { createForm, FieldState, FieldSubscription } from 'final-form';
 import createDecorator from 'final-form-focus';
+import React, { createContext, Node, Ref } from 'react';
 
 export const FormContext = createContext();
 export const IsDisabledContext = createContext(false);
@@ -78,9 +74,13 @@ class Form extends React.Component<Props, State> {
     submitting: false,
   };
 
+  getState = () => {
+    return this.form.getState().values;
+  };
+
   componentDidMount() {
     this.unsubscribe = this.form.subscribe(
-      ({ submitting, dirty }) => {
+      ({ submitting, dirty, values }) => {
         this.setState({ submitting, dirty });
       },
       {
@@ -88,6 +88,7 @@ class Form extends React.Component<Props, State> {
         submitting: true,
       },
     );
+    this.form.getFieldState;
   }
 
   componenWillUnmount() {
@@ -136,6 +137,7 @@ class Form extends React.Component<Props, State> {
             dirty,
             submitting,
             disabled: isDisabled,
+            getState: this.getState,
           })}
         </IsDisabledContext.Provider>
       </FormContext.Provider>
