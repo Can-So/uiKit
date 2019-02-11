@@ -1,10 +1,9 @@
-import { Schema } from 'prosemirror-model';
 import { createRuleNode } from '../nodes/rule';
-import { Token } from './';
+import { TokenParser } from './';
 
 const RULER_REGEX = /^-{4,5}(\s|$)/;
 
-export function ruler(input: string, position: number, schema: Schema): Token {
+export const ruler: TokenParser = ({ input, position, schema }) => {
   const match = input.substring(position).match(RULER_REGEX);
 
   if (match) {
@@ -20,4 +19,4 @@ export function ruler(input: string, position: number, schema: Schema): Token {
     text: input.substring(position, 1),
     length: 1,
   };
-}
+};

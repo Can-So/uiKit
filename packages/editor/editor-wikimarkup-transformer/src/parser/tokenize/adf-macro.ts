@@ -1,27 +1,22 @@
 import { Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback } from '.';
+import { Token, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 
-export function adfMacro(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const adfMacro: TokenParser = ({ input, position, schema, context }) => {
   return commonMacro(input.substring(position), schema, {
     keyword: 'adf',
     paired: true,
+    context,
     rawContentProcessor,
-    tokenErrCallback,
   });
-}
+};
 
 const rawContentProcessor = (
   rawAttrs: string,
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   const json = JSON.parse(rawContent);
   const node = schema.nodeFromJSON(json);
