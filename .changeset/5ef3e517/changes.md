@@ -1,0 +1,1 @@
+- FS-3417 expose getState function in Form component
