@@ -269,6 +269,15 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
     this.fireEvent(focusEvent);
   };
 
+  componentDidMount() {
+    const { open, search } = this.props;
+    // load options when the picker open
+    if (open) {
+      this.startSession();
+      this.executeLoadOptions(search);
+    }
+  }
+
   componentDidUpdate(_: UserPickerProps, prevState: UserPickerState) {
     const { menuIsOpen, options } = this.state;
     // load options when the picker open
@@ -285,7 +294,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
     if (
       menuIsOpen &&
       ((!prevState.menuIsOpen && options.length > 0) ||
-        options !== prevState.options)
+        options.length !== prevState.options.length)
     ) {
       this.fireEvent(searchedEvent);
     }
@@ -387,6 +396,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         isLoading={count > 0 || isLoading}
         onInputChange={this.handleInputChange}
         menuPlacement="auto"
+        hideSelectedOptions={false}
         placeholder={
           placeholder || <FormattedMessage {...messages.placeholder} />
         }

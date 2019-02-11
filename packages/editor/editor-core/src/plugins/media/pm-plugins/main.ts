@@ -517,7 +517,7 @@ export class MediaPluginState {
         }
 
         const { node } = nodeWithPos;
-        if (node.attrs.__key === id) {
+        if (node.attrs.id === id) {
           return nodeWithPos;
         }
 
@@ -637,7 +637,7 @@ export class MediaPluginState {
     };
   }
 
-  private updateMediaNodeAttrs = (
+  updateMediaNodeAttrs = (
     id: string,
     attrs: object,
     isMediaSingle: boolean,

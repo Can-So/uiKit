@@ -22,7 +22,7 @@ const customDataFetch = (n: number, url: string): Promise<ResolveResponse> =>
 
 class CustomClient extends Client {
   constructor(config: ClientConfig, private responseDelay: number) {
-    super(config);
+    super(config, 'staging');
   }
   fetchData(url: string): Promise<ResolveResponse> {
     return customDataFetch(this.responseDelay, url);

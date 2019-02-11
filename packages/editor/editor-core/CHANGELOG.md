@@ -1,5 +1,60 @@
 # @atlaskit/editor-core
 
+## 98.7.0
+- [minor] [44a42d5eb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44a42d5eb3):
+
+  - ED-5846: Refactoring new hyperlink toolbar and adding typeahead to the new floating toolbar
+
+## 98.6.0
+- [minor] [fa435d11f7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa435d11f7):
+
+  - ED-6155 Fire analytics v3 events for general editor UI events
+
+## 98.5.1
+- [patch] [4bead4dd64](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4bead4dd64):
+
+  - Fix cursor bug between Panel and Status when moved with arrowkeys
+
+## 98.5.0
+- [minor] [5a6071d7f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6071d7f5):
+
+  - [ED-6159] Changes tooltip for the add contextual button on tables
+
+## 98.4.6
+- [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
+
+  - ED-6177 Deleting a range of rows/columns deletes only a subset of selected rows/columns
+
+## 98.4.5
+- [patch] [c61aaebd2d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c61aaebd2d):
+
+  - ED-6172: Apply table layout based on total width for autoSize tables.
+
+## 98.4.4
+- [patch] [18dffaa5fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/18dffaa5fd):
+
+  - ED-6192: Bail out of column resizing if the table has changed via other means (e.g. collab)
+
+## 98.4.3
+- [patch] [66a5bd2f70](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/66a5bd2f70):
+
+  - ED-6027 update ADF when image dimensions are missing
+
+## 98.4.2
+- [patch] [2487368a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2487368a7e):
+
+  - ED-6170: repair the table by removing invisible columns
+
+## 98.4.1
+- [patch] [47970c78b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/47970c78b1):
+
+  - ED-5976 Maintain text alignment when hit return
+
+## 98.4.0
+- [minor] [1bc4b69b08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1bc4b69b08):
+
+  - ED-6171 Adding feature flag for Analytics GAS V3
+
 ## 98.3.0
 - [minor] [0f3f9f0992](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f3f9f0992):
 

@@ -8,7 +8,8 @@ jest.mock('../../../components/creatable', () => ({
 
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import Select, { CreatableSelect } from '@atlaskit/select';
-import { mount, ReactWrapper, shallow } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getCreatableProps } from '../../../components/creatable';
@@ -29,7 +30,7 @@ import {
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
-    shallow(<UserPicker {...props} />)
+    shallowWithIntl(<UserPicker {...props} />)
       .dive()
       .dive();
 
@@ -380,6 +381,29 @@ describe('UserPicker', () => {
     });
   });
 
+  describe('props.open is true', () => {
+    it('should call loadOptions', () => {
+      const loadOptions = jest.fn(() => []);
+      shallowUserPicker({
+        open: true,
+        loadOptions,
+      });
+
+      expect(loadOptions).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call loadOptions with props.search is passed in', () => {
+      const loadOptions = jest.fn(() => []);
+      shallowUserPicker({
+        open: true,
+        loadOptions,
+        search: 'test',
+      });
+
+      expect(loadOptions).toHaveBeenCalledWith('test');
+    });
+  });
+
   describe('inputValue', () => {
     it('should set inputValue to empty string by default', () => {
       const component = shallowUserPicker({ value: options[0] });
@@ -587,7 +611,7 @@ describe('UserPicker', () => {
     );
 
     beforeEach(() => {
-      component = mount(<AnalyticsTestComponent />);
+      component = mountWithIntl(<AnalyticsTestComponent />);
     });
 
     afterEach(() => {
@@ -827,6 +851,25 @@ describe('UserPicker', () => {
 
         return Promise.resolve().then(() => {
           expect(onEvent).not.toHaveBeenCalled();
+        });
+      });
+
+      it('should not fire searched if there are no options', () => {
+        component.setProps({
+          open: true,
+        });
+        component.update();
+
+        return Promise.resolve().then(() => {
+          // Focused event
+          expect(onEvent).toHaveBeenCalledTimes(1);
+          expect(onEvent).not.toHaveBeenCalledWith(
+            expect.objectContaining({
+              payload: expect.objectContaining({
+                action: 'searched',
+              }),
+            }),
+          );
         });
       });
 

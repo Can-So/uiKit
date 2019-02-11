@@ -1,5 +1,5 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback } from '.';
+import { Token, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 import { parseAttrs } from '../utils/attrs';
 import { title } from '../utils/title';
@@ -75,26 +75,26 @@ const SUPPORTED_CODEBOCK_LANGUAGES = [
   'xquery',
 ];
 
-export function codeMacro(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const codeMacro: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   return commonMacro(input.substring(position), schema, {
     keyword: 'code',
     paired: true,
+    context,
     rawContentProcessor,
-    tokenErrCallback,
   });
-}
+};
 
 const rawContentProcessor = (
   rawAttrs: string,
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   const output: PMNode[] = [];
   const { codeBlock } = schema.nodes;

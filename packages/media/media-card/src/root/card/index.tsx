@@ -325,7 +325,8 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   renderInlinePlayer = () => {
-    const { identifier, context, dimensions } = this.props;
+    const { identifier, context, dimensions, selected } = this.props;
+
     return (
       <InlinePlayer
         context={context}
@@ -333,6 +334,7 @@ export class Card extends Component<CardProps, CardState> {
         identifier={identifier as FileIdentifier}
         onError={this.onInlinePlayerError}
         onClick={this.onInlinePlayerClick}
+        selected={selected}
       />
     );
   };

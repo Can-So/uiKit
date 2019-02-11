@@ -1,6 +1,7 @@
 import { DecorationSet, Decoration } from 'prosemirror-view';
 import { ResolvedPos, Node } from 'prosemirror-model';
 import { PluginKey, Plugin, EditorState, Transaction } from 'prosemirror-state';
+import { ZWSP } from '../../../utils';
 
 export const inlineCursorTargetStateKey = new PluginKey(
   'inlineCursorTargetPlugin',
@@ -11,8 +12,6 @@ export const SPECIAL_NODES = ['mention', 'emoji'];
 export const isSpecial = (node: Node | null | undefined) => {
   return node && SPECIAL_NODES.indexOf(node.type.name) !== -1;
 };
-
-const ZWSP = '\u200b';
 
 export const findSpecialNodeAfter = ($pos: ResolvedPos, tr: Transaction) => {
   if (isSpecial($pos.nodeAfter)) {

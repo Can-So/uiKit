@@ -6,7 +6,7 @@ import { ContentType } from '../src/model/Result';
 export default class extends React.Component {
   render() {
     return (
-      <>
+      <React.Fragment>
         <ObjectResultComponent
           key="issue-key"
           resultId="issue-id"
@@ -34,7 +34,7 @@ export default class extends React.Component {
           containerName="Project"
           avatar={getDefaultAvatar(ContentType.JiraFilter)}
         />
-      </>
+      </React.Fragment>
     );
   }
 }

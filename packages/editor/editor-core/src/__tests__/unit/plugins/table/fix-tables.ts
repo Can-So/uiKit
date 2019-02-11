@@ -1,3 +1,5 @@
+import createStub from 'raf-stub';
+import { mergeCells } from 'prosemirror-tables';
 import {
   doc,
   p,
@@ -6,6 +8,7 @@ import {
   tr,
   td,
   th,
+  tdEmpty,
 } from '@atlaskit/editor-test-helpers';
 import {
   TablePluginState,
@@ -37,6 +40,19 @@ describe('fix tables', () => {
   };
 
   describe('autoSize table', () => {
+    let waitForAnimationFrame;
+    beforeEach(() => {
+      let stub = createStub();
+      waitForAnimationFrame = stub.flush;
+      jest.spyOn(window, 'requestAnimationFrame').mockImplementation(stub.add);
+    });
+
+    afterEach(() => {
+      ((window.requestAnimationFrame as any) as jest.SpyInstance<
+        any
+      >).mockClear();
+    });
+
     it('applies colwidths to cells and sets autosize to false', () => {
       const { editorView } = editor(
         doc(
@@ -48,23 +64,25 @@ describe('fix tables', () => {
         ),
       );
 
+      waitForAnimationFrame();
+
       expect(editorView.state.doc).toEqualDocument(
         doc(
           table({ __autoSize: false })(
             tr(
-              th({ colwidth: [] })(p('1')),
-              th({ colwidth: [] })(p('2')),
-              th({ colwidth: [] })(p('3')),
+              th({ colwidth: [48] })(p('1')),
+              th({ colwidth: [48] })(p('2')),
+              th({ colwidth: [48] })(p('3')),
             ),
             tr(
-              td({ colwidth: [] })(p('4')),
-              td({ colwidth: [] })(p('5')),
-              td({ colwidth: [] })(p('6')),
+              td({ colwidth: [48] })(p('4')),
+              td({ colwidth: [48] })(p('5')),
+              td({ colwidth: [48] })(p('6')),
             ),
             tr(
-              td({ colwidth: [] })(p('7')),
-              td({ colwidth: [] })(p('8')),
-              td({ colwidth: [] })(p('9')),
+              td({ colwidth: [48] })(p('7')),
+              td({ colwidth: [48] })(p('8')),
+              td({ colwidth: [48] })(p('9')),
             ),
           ),
         ),
@@ -115,6 +133,35 @@ describe('fix tables', () => {
               td({ colwidth: [100] })(p('5')),
               td({ colwidth: [480] })(p('6')),
             ),
+          ),
+        ),
+      );
+    });
+  });
+
+  describe('when minimum colspan of a column is > 1', () => {
+    it('should decrement colspans', () => {
+      const { editorView } = editor(
+        doc(
+          table({})(
+            tr(td({ colspan: 3 })(p('')), tdEmpty, tdEmpty),
+            tr(
+              td({})(p('{<cell}')),
+              tdEmpty,
+              tdEmpty,
+              td({})(p('{cell>}')),
+              tdEmpty,
+            ),
+          ),
+        ),
+      );
+      mergeCells(editorView.state, editorView.dispatch);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          table({})(
+            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(td({ colspan: 2 })(p('')), tdEmpty),
           ),
         ),
       );

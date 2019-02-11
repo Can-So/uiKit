@@ -11,7 +11,7 @@ export default function keymapPlugin(): Plugin {
     keymaps.moveLeft.common!,
     (state, dispatch, view) => {
       const endOfTextblock = view ? view.endOfTextblock.bind(view) : undefined;
-      return arrow(Direction.LEFT, endOfTextblock)(state, dispatch);
+      return arrow(Direction.LEFT, endOfTextblock)(state, dispatch, view);
     },
     map,
   );

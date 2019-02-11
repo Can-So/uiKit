@@ -2,9 +2,9 @@ import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import { MediaSingleProps } from '@atlaskit/editor-common';
 import { EditorAppearance } from '../../../../types';
 import { GridType } from '../../../grid/types';
-import { MediaProvider } from '../../types';
 import { EditorView } from 'prosemirror-view';
 import { EditorState } from 'prosemirror-state';
+import { Context } from '@atlaskit/media-core';
 
 export type EnabledHandles = { left?: boolean; right?: boolean };
 
@@ -23,5 +23,5 @@ export type Props = MediaSingleProps & {
   containerWidth: number;
   appearance: EditorAppearance;
   selected: boolean;
-  mediaProvider?: Promise<MediaProvider>;
+  viewContext?: Context;
 };

@@ -11,11 +11,11 @@ function measureText(
   text: string | null,
   font: string | null,
 ) {
-  if (canvas.hasOwnProperty('getContext') === false) {
+  const ctx = canvas.getContext('2d');
+
+  if (!ctx) {
     return 0;
   }
-
-  const ctx = canvas.getContext('2d')!;
 
   if (font) {
     ctx.font = font;

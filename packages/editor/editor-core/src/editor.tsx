@@ -302,6 +302,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
                         providerFactory={this.providerFactory}
                         onEditorCreated={this.onEditorCreated}
                         onEditorDestroyed={this.onEditorDestroyed}
+                        allowAnalyticsGASV3={this.props.allowAnalyticsGASV3}
                         disabled={this.props.disabled}
                         render={({
                           editor,

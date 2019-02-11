@@ -16,16 +16,14 @@ test('Modal dialog server side rendering', async () => {
 });
 
 test('Modal dialog should render content in ssr', () => {
-  const Content = jest.fn(() => 'Hello');
-  const modalString = ReactDOMServer.renderToString(
-    <Modal
-      heading="Look at this"
-      actions={[{ text: 'Close', onClick: () => {} }]}
-    >
-      <Content />
-    </Modal>,
-  );
-  expect(Content).toHaveBeenCalled();
-  expect(modalString).toContain('Close');
-  expect(modalString).toContain('Look at this');
+  expect(() =>
+    ReactDOMServer.renderToString(
+      <Modal
+        heading="Look at this"
+        actions={[{ text: 'Close', onClick: () => {} }]}
+      >
+        <div>Model Content</div>
+      </Modal>,
+    ),
+  ).not.toThrowError();
 });

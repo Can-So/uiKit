@@ -38,6 +38,17 @@ import {
   buildTypeAheadCancelPayload,
   buildTypeAheadRenderedPayload,
 } from './analytics';
+import {
+  addAnalytics,
+  analyticsPluginKey,
+  analyticsEventKey,
+  AnalyticsDispatch,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+} from '../analytics';
 
 const mentionsPlugin = (
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
@@ -110,7 +121,14 @@ const mentionsPlugin = (
               trigger: '@',
             });
             const mentionText = state.schema.text('@', [mark]);
-            return insert(mentionText);
+            const tr = insert(mentionText);
+            return addAnalytics(tr, {
+              action: ACTION.INVOKED,
+              actionSubject: ACTION_SUBJECT.TYPEAHEAD,
+              actionSubjectId: ACTION_SUBJECT_ID.TYPEAHEAD_MENTION,
+              attributes: { inputMethod: INPUT_METHOD.QUICK_INSERT },
+              eventType: EVENT_TYPE.UI,
+            });
           },
         },
       ],
@@ -119,11 +137,29 @@ const mentionsPlugin = (
         // Custom regex must have a capture group around trigger
         // so it's possible to use it without needing to scan through all triggers again
         customRegex: '\\(?(@)',
-        getItems(query, state, intl, { prevActive, queryChanged }) {
+        getItems(
+          query,
+          state,
+          intl,
+          { prevActive, queryChanged },
+          tr,
+          dispatch,
+        ) {
           if (!prevActive && queryChanged) {
             analyticsService.trackEvent(
               'atlassian.fabric.mention.picker.trigger.shortcut',
             );
+            if (!tr.getMeta(analyticsPluginKey)) {
+              (dispatch as AnalyticsDispatch)(analyticsEventKey, {
+                payload: {
+                  action: ACTION.INVOKED,
+                  actionSubject: ACTION_SUBJECT.TYPEAHEAD,
+                  actionSubjectId: ACTION_SUBJECT_ID.TYPEAHEAD_MENTION,
+                  attributes: { inputMethod: INPUT_METHOD.KEYBOARD },
+                  eventType: EVENT_TYPE.UI,
+                },
+              });
+            }
           }
 
           const pluginState = getMentionPluginState(state);

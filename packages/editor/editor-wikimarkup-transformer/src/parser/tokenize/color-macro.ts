@@ -1,31 +1,31 @@
 import { Schema } from 'prosemirror-model';
-import { Token, TokenType, TokenErrCallback } from '.';
+import { Token, TokenType, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 import { parseAttrs } from '../utils/attrs';
 import { parseString } from '../text';
 import { getEditorColor } from '../color';
 import { hasAnyOfMarks } from '../utils/text';
 
-export function colorMacro(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const colorMacro: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   return commonMacro(input.substring(position), schema, {
     keyword: 'color',
     paired: true,
+    context,
     rawContentProcessor,
-    tokenErrCallback,
   });
-}
+};
 
 const rawContentProcessor = (
   rawAttrs: string,
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   const ignoreTokenTypes = [
     TokenType.DOUBLE_DASH_SYMBOL,
@@ -34,12 +34,12 @@ const rawContentProcessor = (
   ];
 
   const parsedAttrs = parseAttrs(rawAttrs);
-  const content = parseString(
-    rawContent,
-    schema,
+  const content = parseString({
     ignoreTokenTypes,
-    tokenErrCallback,
-  );
+    schema,
+    context,
+    input: rawContent,
+  });
   const decoratedContent = content.map(n => {
     const mark = schema.marks.textColor.create({
       color: getEditorColor(parsedAttrs) || '#000000',

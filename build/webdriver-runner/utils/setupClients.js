@@ -19,7 +19,7 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       os_version: '10',
       browserName: 'chrome',
       browser_version: '71.0',
-      resolution: '1440x900',
+      resolution: '1920x1200',
     },
     firefox: {
       os: 'Windows',
@@ -71,6 +71,7 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
         'browserstack.debug': true,
         'browserstack.idleTimeout': 300,
         'browserstack.localIdentifier': commit,
+        resolution: launchers[launchKey].resolution,
       },
       host: 'hub.browserstack.com',
       port: 80,

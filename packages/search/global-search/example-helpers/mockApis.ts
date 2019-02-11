@@ -9,6 +9,7 @@ import {
   makeConfluenceRecentPagesData,
   makeConfluenceRecentSpacesData,
   makeQuickNavSearchData,
+  makeCrossProductExperimentData,
 } from './mockData';
 import { jiraRecentResponseWithAttributes } from './jiraRecentResponseDataWithAttributes';
 import {
@@ -83,6 +84,19 @@ function mockCrossProductSearchApi(delayMs: number, queryMockSearch) {
   );
 }
 
+function mockCrossProductExperimentApi(delayMs: number, queryMockExperiments) {
+  fetchMock.post(
+    new RegExp('/experiment/v1'),
+    (request: Request, options: Options) => {
+      const body = JSON.parse(options.body);
+      const scopes = body.scopes;
+      const results = queryMockExperiments(scopes);
+
+      return delay(delayMs, results);
+    },
+  );
+}
+
 function mockQuickNavApi(delayMs: number, queryMockQuickNav) {
   fetchMock.mock(new RegExp('/quicknav/1'), (request: Request) => {
     const query = request.split('query=')[1];
@@ -130,12 +144,17 @@ export function setupMocks(config: MocksConfig = DEFAULT_MOCKS_CONFIG) {
   const confluenceRecentPagesResponse = makeConfluenceRecentPagesData();
   const confluenceRecentSpacesResponse = makeConfluenceRecentSpacesData();
   const queryMockSearch = makeCrossProductSearchData();
+  const queryMockExperiments = makeCrossProductExperimentData();
   const queryMockQuickNav = makeQuickNavSearchData();
   const queryPeopleSearch = makePeopleSearchData();
 
   mockAnalyticsApi();
   mockRecentApi(recentResponse);
   mockCrossProductSearchApi(config.crossProductSearchDelay, queryMockSearch);
+  mockCrossProductExperimentApi(
+    config.crossProductSearchDelay,
+    queryMockExperiments,
+  );
   mockPeopleApi(config.peopleSearchDelay, queryPeopleSearch);
   mockConfluenceRecentApi({
     confluenceRecentPagesResponse,

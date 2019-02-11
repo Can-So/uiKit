@@ -81,6 +81,7 @@ export const calculateColWidth = (
   calculateColWidthCb: (
     col: HTMLElement,
     colComputedStyle: CSSStyleDeclaration,
+    colSpan: number,
   ) => number = defaultCalculateColWidthCb,
 ) => {
   const tbody = table.querySelector('tbody') as HTMLElement;
@@ -105,15 +106,15 @@ export const calculateColWidth = (
     }
 
     const colComputedStyle = getComputedStyle(col);
-    const colspan = Number(col.getAttribute('colspan'));
+    const colspan = Number(col.getAttribute('colspan') || 1);
 
     if (colspan > 1) {
-      colSpanWidth = unitToNumber(colComputedStyle.width);
+      colSpanWidth = calculateColWidthCb(col, colComputedStyle, colspan);
       continue;
     }
 
     if (colComputedStyle) {
-      const colWidth = calculateColWidthCb(col, colComputedStyle);
+      const colWidth = calculateColWidthCb(col, colComputedStyle, colspan);
       maxColWidth = Math.max(colWidth, maxColWidth);
     }
   }
@@ -123,7 +124,7 @@ export const calculateColWidth = (
 
 export const unitToNumber = (unit: string | null) => {
   if (unit) {
-    return Number(unit.slice(0, unit.length - 2));
+    return parseFloat(unit);
   }
   return 0;
 };

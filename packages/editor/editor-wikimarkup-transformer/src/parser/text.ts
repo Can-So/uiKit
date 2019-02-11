@@ -5,7 +5,7 @@ import {
   parseLeadingKeyword,
   parseMacroKeyword,
 } from './tokenize/keyword';
-import { parseToken, TokenType, TokenErrCallback } from './tokenize';
+import { parseToken, TokenType, Context } from './tokenize';
 import { parseWhitespaceOnly } from './tokenize/whitespace';
 import { escapeHandler } from './utils/escape';
 
@@ -16,12 +16,17 @@ const processState = {
   ESCAPE: 3,
 };
 
-export function parseString(
-  input: string,
-  schema: Schema,
-  ignoreTokens: TokenType[] = [],
-  tokenErrCallback?: TokenErrCallback,
-): PMNode[] {
+export function parseString({
+  input,
+  schema,
+  ignoreTokenTypes = [],
+  context,
+}: {
+  input: string;
+  schema: Schema;
+  ignoreTokenTypes: TokenType[];
+  context: Context;
+}): PMNode[] {
   let index = 0;
   let state = processState.NEWLINE;
   let buffer = '';
@@ -49,7 +54,7 @@ export function parseString(
           parseMacroKeyword(substring) ||
           parseOtherKeyword(substring);
 
-        if (match && ignoreTokens.indexOf(match.type) === -1) {
+        if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
           tokenType = match.type;
           state = processState.TOKEN;
           continue;
@@ -79,7 +84,7 @@ export function parseString(
           match = parseMacroKeyword(substring) || parseOtherKeyword(substring);
         }
 
-        if (match && ignoreTokens.indexOf(match.type) === -1) {
+        if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
           tokenType = match.type;
           state = processState.TOKEN;
           continue;
@@ -100,7 +105,7 @@ export function parseString(
           tokenType,
           index,
           schema,
-          tokenErrCallback,
+          context.tokenErrCallback,
         );
         if (token.type === 'text') {
           buffer += token.text;

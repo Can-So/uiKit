@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 6.1.20
+- [patch] [957778f085](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/957778f085):
+
+  - Expose CheckboxOption and RadioOption from select package
+
 ## 6.1.19
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

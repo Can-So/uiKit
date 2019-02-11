@@ -17,7 +17,7 @@ const client = new ReactionServiceClient(
 export default () => (
   <ReactionsExampleWrapper client={client}>
     {store => (
-      <>
+      <React.Fragment>
         <p>First Comment</p>
         <ConnectedReactionsView
           store={store}
@@ -61,7 +61,7 @@ export default () => (
             allowAllEmojis
           />
         </div>
-      </>
+      </React.Fragment>
     )}
   </ReactionsExampleWrapper>
 );

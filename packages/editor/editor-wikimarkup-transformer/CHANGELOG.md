@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.10.3
+- [patch] [279b08b325](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/279b08b325):
+
+  - Refactor internal TokenParser interface to receive an object and add immutable shared Context internally
+
 ## 2.10.2
 - [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
 

@@ -129,6 +129,10 @@ const ContentStyles: ComponentClass<
     text-align: center;
   }
 
+  .hyperlink-floating-toolbar {
+    padding: 0;
+  }
+
 `;
 
 export default ContentStyles;

@@ -34,22 +34,30 @@ export default class ColumnState {
     let minColWidth = minWidth;
     const width = calculateColWidth(table, colIdx);
 
-    const wrapWidth = calculateColWidth(table, colIdx, (col, computedStyle) => {
-      const borderWidth = computedStyle
-        .borderWidth!.split(' ')
-        .reduce((acc, current) => (acc += unitToNumber(current)), 0);
+    const wrapWidth = calculateColWidth(
+      table,
+      colIdx,
+      (col, computedStyle, colspan) => {
+        if (colspan && colspan > 1) {
+          return unitToNumber(computedStyle.width);
+        }
 
-      const { width, minWidth } = contentWidth(col, col);
+        const borderWidth = computedStyle
+          .borderWidth!.split(' ')
+          .reduce((acc, current) => (acc += unitToNumber(current)), 0);
 
-      // Override the min width, if their is content that can't collapse
-      // Past a certain width.
-      minColWidth = Math.max(
-        addContainerLeftRightPadding(minWidth, computedStyle),
-        minColWidth,
-      );
+        const { width, minWidth } = contentWidth(col, col);
 
-      return addContainerLeftRightPadding(width + borderWidth, computedStyle);
-    });
+        // Override the min width, if their is content that can't collapse
+        // Past a certain width.
+        minColWidth = Math.max(
+          addContainerLeftRightPadding(minWidth, computedStyle),
+          minColWidth,
+        );
+
+        return addContainerLeftRightPadding(width + borderWidth, computedStyle);
+      },
+    );
 
     return new ColumnState(width, wrapWidth, minColWidth);
   }

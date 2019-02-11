@@ -1,11 +1,16 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import { getDocFromElement, editable, LONG_WAIT_FOR } from '../_helpers';
-
-import { insertEmoji, emojiItem, typeahead } from './_emoji-helpers';
 import {
   mountEditor,
   goToEditorTestingExample,
 } from '../../__helpers/testing-example-helpers';
+import {
+  getDocFromElement,
+  editable,
+  LONG_WAIT_FOR,
+  insertEmoji,
+  emojiItem,
+  typeahead,
+} from '../_helpers';
 
 BrowserTestCase(
   'emoji-1.ts:should be able to see emoji if typed the name in full',

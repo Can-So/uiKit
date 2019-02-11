@@ -11,6 +11,14 @@ import keymap from './pm-plugins/keymap';
 import { inputRulePlugin as asciiInputRulePlugin } from './pm-plugins/ascii-input-rules';
 import ToolbarEmojiPicker from './ui/ToolbarEmojiPicker';
 import EmojiTypeAhead from './ui/EmojiTypeAhead';
+import {
+  addAnalytics,
+  EVENT_TYPE,
+  INPUT_METHOD,
+  ACTION_SUBJECT,
+  ACTION,
+  ACTION_SUBJECT_ID,
+} from '../analytics';
 
 const emojiPlugin: EditorPlugin = {
   nodes() {
@@ -114,7 +122,14 @@ const emojiPlugin: EditorPlugin = {
         action(insert, state) {
           const mark = state.schema.mark('emojiQuery');
           const emojiText = state.schema.text(':', [mark]);
-          return insert(emojiText);
+          const tr = insert(emojiText);
+          return addAnalytics(tr, {
+            action: ACTION.INVOKED,
+            actionSubject: ACTION_SUBJECT.TYPEAHEAD,
+            actionSubjectId: ACTION_SUBJECT_ID.TYPEAHEAD_EMOJI,
+            attributes: { inputMethod: INPUT_METHOD.QUICK_INSERT },
+            eventType: EVENT_TYPE.UI,
+          });
         },
       },
     ],

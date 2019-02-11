@@ -19,6 +19,7 @@ import { EventDispatcher } from '../../../event-dispatcher';
 import { MediaProvider } from '../types';
 import { EditorAppearance } from '../../../types';
 import { browser } from '@atlaskit/editor-common';
+import { Context } from '@atlaskit/media-core';
 
 const DEFAULT_WIDTH = 250;
 const DEFAULT_HEIGHT = 200;
@@ -38,6 +39,7 @@ export interface MediaSingleNodeProps {
 export interface MediaSingleNodeState {
   width?: number;
   height?: number;
+  viewContext?: Context;
 }
 
 export default class MediaSingleNode extends Component<
@@ -49,6 +51,7 @@ export default class MediaSingleNode extends Component<
   state = {
     height: undefined,
     width: undefined,
+    viewContext: undefined,
   };
 
   constructor(props) {
@@ -63,6 +66,52 @@ export default class MediaSingleNode extends Component<
     if (this.props.selected()) {
       this.mediaPluginState.updateLayout(layout);
     }
+  }
+
+  async componentDidMount() {
+    const mediaProvider = await this.props.mediaProvider;
+    if (mediaProvider) {
+      const viewContext = await mediaProvider.viewContext;
+      this.setState({
+        viewContext,
+      });
+    }
+    const updatedDimensions = await this.getRemoteDimensions();
+    if (updatedDimensions) {
+      this.mediaPluginState.updateMediaNodeAttrs(
+        updatedDimensions.id,
+        {
+          height: updatedDimensions.height,
+          width: updatedDimensions.width,
+        },
+        true,
+      );
+    }
+  }
+
+  async getRemoteDimensions() {
+    const mediaProvider = await this.props.mediaProvider;
+    if (!mediaProvider || !this.props.node.firstChild) {
+      return false;
+    }
+    const { id, collection, height, width } = this.props.node.firstChild.attrs;
+    if (height && width) {
+      return;
+    }
+    const viewContext = await mediaProvider.viewContext;
+    const state = await viewContext.getImageMetadata(id, {
+      collection,
+    });
+
+    if (!state || !state.original) {
+      return false;
+    }
+
+    return {
+      id,
+      height: state.original.height,
+      width: state.original.width,
+    };
   }
 
   private onExternalImageLoaded = ({ width, height }) => {
@@ -166,7 +215,7 @@ export default class MediaSingleNode extends Component<
         view={this.props.view}
         getPos={this.props.getPos}
         cardDimensions={cardDimensions}
-        mediaProvider={this.props.mediaProvider}
+        viewContext={this.state.viewContext}
         selected={selected()}
         onClick={this.selectMediaSingle}
         onExternalImageLoaded={this.onExternalImageLoaded}
@@ -182,7 +231,7 @@ export default class MediaSingleNode extends Component<
         updateSize={this.updateSize}
         displayGrid={createDisplayGrid(this.props.eventDispatcher)}
         gridSize={12}
-        mediaProvider={this.props.mediaProvider}
+        viewContext={this.state.viewContext}
         state={this.props.view.state}
         appearance={this.mediaPluginState.options.appearance}
         selected={this.props.selected()}

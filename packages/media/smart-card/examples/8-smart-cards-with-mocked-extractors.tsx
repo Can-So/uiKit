@@ -9,6 +9,12 @@ import {
   ConfluenceBlogPost,
   ConfluenceSpace,
   ConfluenceTemplate,
+  BitbucketPullRequest,
+  BitbucketSourceCodeReference,
+  BitbucketFile,
+  GithubPullRequest,
+  GithubSourceCodeReference,
+  GithubFile,
 } from './_jsonLDExamples';
 import { IntlProvider } from 'react-intl';
 import { JiraTasks } from './_jsonLDExamples/atlassian.task';
@@ -112,17 +118,85 @@ class Example extends React.Component {
               </div>
               <h3>Jira Examples (inline)</h3>
               <br />
-              {JiraTasks.map(task => (
+              {JiraTasks.map((task, i) => (
                 <div>
                   Maybe checkout the {task.taskType.name} at{' '}
                   <Card
-                    key={task['@id']}
+                    key={String(i) + task['@id']}
                     url={task.url}
                     appearance="inline"
                     data={task}
                   />
                 </div>
               ))}
+              <h3>Bitbucket Examples (inline)</h3>
+              <br />
+              <div>
+                The repository you're after is probably
+                <Card
+                  url="https://bitbucket.org/some/repo"
+                  appearance="inline"
+                  data={BitbucketRepository}
+                />
+              </div>
+              <div>
+                The pull request you're after is probably
+                <Card
+                  url="https://bitbucket.org/some/pr"
+                  appearance="inline"
+                  data={BitbucketPullRequest}
+                />
+              </div>
+              <div>
+                The branch you're after is probably
+                <Card
+                  url="https://bitbucket.org/some/branch"
+                  appearance="inline"
+                  data={BitbucketSourceCodeReference}
+                />
+              </div>
+              <div>
+                The file you're after is probably
+                <Card
+                  url="https://bitbucket.org/some/file"
+                  appearance="inline"
+                  data={BitbucketFile}
+                />
+              </div>
+              <h3>Github Examples (inline)</h3>
+              <br />
+              <div>
+                The repository you're after is probably
+                <Card
+                  url="https://github.com/some/repo"
+                  appearance="inline"
+                  data={GithubRepository}
+                />
+              </div>
+              <div>
+                The pull request you're after is probably
+                <Card
+                  url="https://github.com/some/pr"
+                  appearance="inline"
+                  data={GithubPullRequest}
+                />
+              </div>
+              <div>
+                The branch you're after is probably
+                <Card
+                  url="https://github.com/some/branch"
+                  appearance="inline"
+                  data={GithubSourceCodeReference}
+                />
+              </div>
+              <div>
+                The file you're after is probably
+                <Card
+                  url="https://github.com/some/file"
+                  appearance="inline"
+                  data={GithubFile}
+                />
+              </div>
             </GridColumn>
           </Grid>
         </Page>

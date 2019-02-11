@@ -25,6 +25,7 @@ import {
   randomId,
   sleep,
   insertText,
+  sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -39,7 +40,9 @@ import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
+import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -70,13 +73,16 @@ describe('Media plugin', () => {
   const mediaProvider = getFreshMediaProvider();
   const temporaryFileId = `temporary:${randomId()}`;
   const providerFactory = ProviderFactory.create({ mediaProvider });
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
   const editor = (
     doc: any,
     editorProps = {},
     dropzoneContainer: HTMLElement = document.body,
-  ) =>
-    createEditor({
+    extraPlugins: any[] = [],
+  ) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
       editorPlugins: [
         listPlugin,
@@ -88,11 +94,17 @@ describe('Media plugin', () => {
         codeBlockPlugin(),
         rulePlugin,
         tablePlugin(),
+        ...extraPlugins,
       ],
-      editorProps: editorProps,
+      editorProps: {
+        ...editorProps,
+        allowAnalyticsGASV3: true,
+      },
       providerFactory,
       pluginKey: mediaPluginKey,
+      createAnalyticsEvent,
     });
+  };
 
   const getNodePos = (
     pluginState: MediaPluginState,
@@ -1597,6 +1609,26 @@ describe('Media plugin', () => {
           p(''),
         ),
       );
+    });
+  });
+
+  it('should trigger cloud picker opened analytics event when opened via quick insert', async () => {
+    const { editorView, sel, pluginState } = editor(
+      doc(p('{<>}')),
+      {},
+      undefined,
+      [quickInsertPlugin],
+    );
+    await waitForMediaPickerReady(pluginState);
+    insertText(editorView, '/Files', sel);
+    sendKeyToPm(editorView, 'Enter');
+
+    expect(createAnalyticsEvent).toHaveBeenCalledWith({
+      action: 'opened',
+      actionSubject: 'picker',
+      actionSubjectId: 'cloudPicker',
+      attributes: { inputMethod: 'quickInsert' },
+      eventType: 'ui',
     });
   });
 });

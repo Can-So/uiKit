@@ -1,5 +1,9 @@
 # @atlaskit/flag
 
+## 9.1.10
+- Updated dependencies [27cacd44ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27cacd44ab):
+  - @atlaskit/portal@0.1.0
+
 ## 9.1.9
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

@@ -120,6 +120,7 @@ function transformDoc(fn) {
 }
 
 const hasLocalId = type =>
+  type === 'status' ||
   type === 'taskItem' ||
   type === 'taskList' ||
   type === 'decisionItem' ||

@@ -117,7 +117,7 @@ pipelines:
               - mkdir ./imageSnapshotFailures && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
             # If a failure occurs, you can download the image snapshot of the differences.
             artifacts: 
-              - imageSnapshotFailures
+              - imageSnapshotFailures/**
             caches:
               - node
         - step:
@@ -213,7 +213,15 @@ pipelines:
             - source ./build-setup.sh
             - git lfs pull
             - bolt install --pure-lockfile
-            - yarn run test:vr 
+            - yarn run test:vr
+          after-script:
+              # Extract all the diff images and store them into a folder for download.
+              - mkdir ./imageSnapshotFailures && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
+          # If a failure occurs, you can download the image snapshot of the differences.
+          artifacts: 
+            - imageSnapshotFailures/**
+          caches:
+            - node 
             
     # This will run essentially the branch builds, but without any optimizations and should be manually.
     # This build should be run in any potentially risky builds.

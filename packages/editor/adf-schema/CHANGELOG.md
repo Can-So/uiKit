@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.5.1
+- [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
+
+  - Bumps prosemirror-utils to 0.7.6
+
 ## 1.5.0
 - [minor] [14fe1381ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14fe1381ba):
 
