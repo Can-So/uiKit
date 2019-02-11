@@ -10,6 +10,15 @@ import {
   QuickInsertHandler,
 } from './types';
 import { find } from './search';
+import {
+  analyticsEventKey,
+  AnalyticsDispatch,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+} from '../analytics';
 
 const quickInsertPlugin: EditorPlugin = {
   name: 'quickInsert',
@@ -27,9 +36,26 @@ const quickInsertPlugin: EditorPlugin = {
   pluginsOptions: {
     typeAhead: {
       trigger: '/',
-      getItems: (query, state, intl) => {
+      getItems: (
+        query,
+        state,
+        intl,
+        { prevActive, queryChanged },
+        tr,
+        dispatch,
+      ) => {
         analyticsService.trackEvent('atlassian.editor.quickinsert.query');
-
+        if (!prevActive && queryChanged) {
+          (dispatch as AnalyticsDispatch)(analyticsEventKey, {
+            payload: {
+              action: ACTION.INVOKED,
+              actionSubject: ACTION_SUBJECT.TYPEAHEAD,
+              actionSubjectId: ACTION_SUBJECT_ID.TYPEAHEAD_QUICK_INSERT,
+              attributes: { inputMethod: INPUT_METHOD.KEYBOARD },
+              eventType: EVENT_TYPE.UI,
+            },
+          });
+        }
         const quickInsertState = pluginKey.getState(state);
         const defaultItems = processItems(quickInsertState.items, intl);
         const defaultSearch = () => find(query, defaultItems);

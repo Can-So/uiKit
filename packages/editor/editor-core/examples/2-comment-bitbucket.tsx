@@ -106,6 +106,7 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
                   <Editor
                     appearance="comment"
                     analyticsHandler={analyticsHandler}
+                    allowAnalyticsGASV3={true}
                     allowCodeBlocks={true}
                     allowLists={true}
                     allowTables={{

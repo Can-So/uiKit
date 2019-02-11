@@ -120,6 +120,7 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                     appearance="comment"
                     placeholder="What do you want to say?"
                     analyticsHandler={analyticsHandler}
+                    allowAnalyticsGASV3={true}
                     shouldFocus={true}
                     quickInsert={true}
                     allowCodeBlocks={true}

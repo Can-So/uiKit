@@ -50,7 +50,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
     editorView,
     appearance,
     editorActions,
-    eventDispatcher,
+    dispatchAnalyticsEvent,
     providerFactory,
     popupsMountPoint,
     popupsBoundariesElement,
@@ -137,6 +137,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               popupsScrollableElement={popupsScrollableElement}
               insertMenuItems={options.insertMenuItems}
               editorActions={editorActions}
+              dispatchAnalyticsEvent={dispatchAnalyticsEvent}
             />
           )}
         />
