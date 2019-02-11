@@ -22,6 +22,16 @@ Below is a list of useful commands while working on the atlaskit repository. The
     ```
 
     starts the button package.
+  
+- `yarn start [packages]`
+
+    Starts the atlaskit website with the documentation for only the named packages. It uses the folder name, for example:
+
+    ```sh
+    yarn start button toggle tabs
+    ```
+
+    starts the button, toggle and tabs packages.
 
 - `yarn start:[section]`
 
