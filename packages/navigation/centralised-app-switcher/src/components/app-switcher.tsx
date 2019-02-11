@@ -124,7 +124,7 @@ export default class AppSwitcher extends React.Component<AppSwitcherProps> {
                       {suggestedProductLink!.label}
                     </SuggestedProductItemText>
                     <Lozenge appearance="inprogress" isBold>
-                      {addProductsPermissionData! ? 'Try' : 'Request'}
+                      {addProductsPermissionData ? 'Try' : 'Request'}
                     </Lozenge>
                   </AppSwitcherItem>
                 ) : null,
