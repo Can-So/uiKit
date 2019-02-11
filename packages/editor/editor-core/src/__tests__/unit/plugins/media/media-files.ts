@@ -744,7 +744,6 @@ describe('media-files', () => {
         mediaGroup(
           media({
             id: temporaryFileId,
-            __key: temporaryFileId,
             type: 'file',
             collection: testCollectionName,
           })(),

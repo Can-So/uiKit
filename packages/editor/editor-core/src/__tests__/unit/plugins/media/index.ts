@@ -1162,7 +1162,6 @@ describe('Media plugin', () => {
           mediaGroup(
             media({
               id: pdfFile.id,
-              __key: pdfFile.id,
               type: 'file',
               __fileMimeType: pdfFile.fileMimeType,
               __fileName: pdfFile.fileName,
@@ -1188,7 +1187,6 @@ describe('Media plugin', () => {
           mediaGroup(
             media({
               id: pdfFile.id,
-              __key: pdfFile.id,
               type: 'file',
               __fileMimeType: pdfFile.fileMimeType,
               __fileName: pdfFile.fileName,
@@ -1207,7 +1205,6 @@ describe('Media plugin', () => {
         mediaGroup(
           media({
             id: pdfFile.id,
-            __key: pdfFile.id,
             type: 'file',
             __fileMimeType: pdfFile.fileMimeType,
             __fileName: pdfFile.fileName,
@@ -1228,7 +1225,7 @@ describe('Media plugin', () => {
           mediaGroup(
             media({
               id: pdfFile.id,
-              __key: pdfFile.id,
+
               type: 'file',
               __fileMimeType: pdfFile.fileMimeType,
               __fileName: pdfFile.fileName,
@@ -1237,7 +1234,7 @@ describe('Media plugin', () => {
             })(),
             media({
               id: pdfFile.id,
-              __key: pdfFile.id,
+
               type: 'file',
               __fileMimeType: pdfFile.fileMimeType,
               __fileName: pdfFile.fileName,

@@ -20,7 +20,7 @@ import {
 import { ErrorReporter } from '@atlaskit/editor-common';
 
 import analyticsService from '../../../analytics/service';
-import { isImage } from '../../../utils';
+import { isImage, SetAttrsStep } from '../../../utils';
 import { Dispatch } from '../../../event-dispatcher';
 import { ProsemirrorGetPosHandler } from '../../../nodeviews';
 import { EditorAppearance } from '../../../types/editor-props';
@@ -668,7 +668,6 @@ export class MediaPluginState {
     };
   }
 
-<<<<<<< HEAD
   updateMediaNodeAttrs = (
     id: string,
     attrs: object,
@@ -694,8 +693,6 @@ export class MediaPluginState {
     );
   };
 
-=======
->>>>>>> Add actual upfront id and change end to upload-processing
   private collectionFromProvider(): string | undefined {
     return (
       this.mediaProvider &&
