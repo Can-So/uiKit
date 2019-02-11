@@ -14,11 +14,7 @@ import TableFloatingControls from '../ui/TableFloatingControls';
 import ColumnControls from '../ui/TableFloatingControls/ColumnControls';
 
 import { getPluginState } from '../pm-plugins/main';
-import {
-  ResizeState,
-  scaleTable,
-  setColumnWidths,
-} from '../pm-plugins/table-resizing';
+import { ResizeState, scaleTable } from '../pm-plugins/table-resizing';
 
 import { TablePluginState, TableCssClassName as ClassName } from '../types';
 import * as classnames from 'classnames';
@@ -29,6 +25,8 @@ import {
   containsHeaderRow,
   checkIfHeaderColumnEnabled,
   checkIfHeaderRowEnabled,
+  tablesHaveDifferentColumnWidths,
+  insertColgroupFromNode as recreateResizeColsByNode,
 } from '../utils';
 import { autoSizeTable } from '../actions';
 import { WidthPluginState } from '../../width';
@@ -57,7 +55,6 @@ class TableComponent extends React.Component<ComponentProps> {
   private wrapper: HTMLDivElement | null;
   private table: HTMLTableElement | null;
   private rightShadow: HTMLDivElement | null;
-  private columnControls: React.Component | null;
 
   constructor(props) {
     super(props);
@@ -81,12 +78,15 @@ class TableComponent extends React.Component<ComponentProps> {
     }
 
     if (allowColumnResizing) {
-      const { node, containerWidth } = this.props;
+      const { view, node, containerWidth, getPos } = this.props;
 
-      setColumnWidths(
+      this.scaleTableDebounced(
+        view,
         this.table,
         node,
+        getPos(),
         containerWidth.width,
+        node.attrs.layout,
         node.attrs.layout,
       );
 
@@ -114,6 +114,11 @@ class TableComponent extends React.Component<ComponentProps> {
       // Wait for next tick to handle auto sizing, gives the browser time to do layout calc etc.
       this.handleAutoSizeDebounced();
     } else if (this.props.allowColumnResizing && this.table) {
+      // If col widths have changed (e.g. via collab), re-draw colgroup.
+      if (tablesHaveDifferentColumnWidths(this.props.node, prevProps.node)) {
+        recreateResizeColsByNode(this.table, this.props.node);
+      }
+
       this.handleTableResizing(prevProps);
     }
   }
@@ -178,7 +183,6 @@ class TableComponent extends React.Component<ComponentProps> {
         <ColumnControls
           editorView={view}
           tableRef={tableRef}
-          ref={elem => (this.columnControls = elem)}
           hoveredColumns={hoveredColumns}
           isInDanger={isInDanger}
           isResizing={isResizing}
@@ -233,9 +237,7 @@ class TableComponent extends React.Component<ComponentProps> {
     this.setState({ scroll: this.wrapper.scrollLeft });
   };
 
-  private handleScrollDebounced = rafSchedule(this.handleScroll);
-
-  private handleTableResizing(prevProps) {
+  private handleTableResizing = prevProps => {
     const { view, node, getPos, containerWidth } = this.props;
 
     const prevAttrs = prevProps.node.attrs;
@@ -251,18 +253,16 @@ class TableComponent extends React.Component<ComponentProps> {
       prevAttrs.__autoSize !== currentAttrs.__autoSize ||
       prevProps.containerWidth !== containerWidth
     ) {
-      scaleTable(
+      this.scaleTableDebounced(
         view,
         this.table,
         node,
         getPos(),
         containerWidth.width,
         currentAttrs.layout,
+        prevAttrs.layout,
+        prevAttrs.__autoSize,
       );
-
-      if (this.columnControls) {
-        this.columnControls.forceUpdate();
-      }
 
       this.setState(() => ({
         tableContainerWidth: calcTableWidth(
@@ -271,7 +271,7 @@ class TableComponent extends React.Component<ComponentProps> {
         ),
       }));
     }
-  }
+  };
 
   private handleAutoSize = () => {
     if (this.table) {
@@ -281,6 +281,8 @@ class TableComponent extends React.Component<ComponentProps> {
     }
   };
 
+  private scaleTableDebounced = rafSchedule(scaleTable);
+  private handleScrollDebounced = rafSchedule(this.handleScroll);
   private handleAutoSizeDebounced = rafSchedule(this.handleAutoSize);
 }
 

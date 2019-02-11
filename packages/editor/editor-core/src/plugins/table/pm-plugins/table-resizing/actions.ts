@@ -11,13 +11,17 @@ import {
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
 
-import Resizer, { recreateResizeColsByNode } from './resizer/resizer';
+import Resizer from './resizer/resizer';
 import ResizeState from './resizer/resizeState';
 
 import { getPluginState } from '../main';
 import { updateRightShadow } from '../../nodeviews/TableComponent';
 
-import { hasTableBeenResized } from '../../utils';
+import {
+  hasTableBeenResized,
+  insertColgroupFromNode as recreateResizeColsByNode,
+} from '../../utils';
+
 import { getLayoutSize } from './utils';
 
 export function updateColumnWidth(view, cell, movedWidth, resizer) {
@@ -172,8 +176,17 @@ export function scaleTable(
   pos: number,
   containerWidth: number | undefined,
   currentLayout: TableLayout,
+  previousLayout?: TableLayout,
+  wasAutoSized?: boolean,
 ) {
-  const state = setColumnWidths(tableElem, node, containerWidth, currentLayout);
+  const state = setColumnWidths(
+    tableElem,
+    node,
+    containerWidth,
+    currentLayout,
+    previousLayout,
+    wasAutoSized,
+  );
 
   if (state) {
     const tr = applyColumnWidths(view, state, node, pos + 1);
@@ -196,13 +209,19 @@ export function setColumnWidths(
   node: PMNode,
   containerWidth: number | undefined,
   currentLayout: TableLayout,
+  previousLayout?: TableLayout,
+  wasAutoSized?: boolean,
 ): ResizeState | undefined {
   if (!tableElem) {
     return;
   }
+  let previousMaxSize;
+  if (previousLayout) {
+    previousMaxSize = getLayoutSize(previousLayout, containerWidth);
+  }
 
   const maxSize = getLayoutSize(currentLayout, containerWidth);
-  return scale(tableElem, node, maxSize);
+  return scale(tableElem, node, maxSize, previousMaxSize, wasAutoSized);
 }
 
 /**
@@ -246,6 +265,8 @@ function scale(
   tableElem: HTMLTableElement,
   node: PMNode,
   maxSize: number,
+  previousMaxSize?: number,
+  wasAutoSized?: boolean,
 ): ResizeState | undefined {
   if (node.attrs.isNumberColumnEnabled) {
     maxSize -= akEditorTableNumberColumnWidth;
@@ -258,6 +279,13 @@ function scale(
       maxSize: Math.max(tableElem.offsetWidth, akEditorDefaultLayoutWidth),
       node,
     });
+
+    const totalWidth = resizer.currentState.totalWidth;
+    // Table was overflow, lets scale up the new 'maxSize' to keep our overflow in tact.
+    if (!wasAutoSized && previousMaxSize && totalWidth > previousMaxSize) {
+      const overflowScale = totalWidth / previousMaxSize;
+      maxSize = maxSize * overflowScale;
+    }
 
     return resizer.scale(maxSize);
   } else {

@@ -198,9 +198,9 @@ function handleMouseMove(view, event, handleWidth, lastColumnResizable) {
     if (target) {
       let { left, right } = target.getBoundingClientRect();
       if (event.clientX - left <= handleWidth) {
-        cell = edgeCell(view, event, 'left');
+        cell = edgeCell(view, event, 'left', handleWidth);
       } else if (right - event.clientX <= handleWidth) {
-        cell = edgeCell(view, event, 'right');
+        cell = edgeCell(view, event, 'right', handleWidth);
       }
     }
 

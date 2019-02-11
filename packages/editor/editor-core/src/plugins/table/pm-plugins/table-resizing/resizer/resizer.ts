@@ -2,23 +2,7 @@ import { Node as PMNode } from 'prosemirror-model';
 import ResizeState from './resizeState';
 import ColumnState from './columnState';
 
-import { renderColgroupFromNode } from '../../../utils';
-
-export function recreateResizeColsByNode(
-  tableElem: HTMLTableElement,
-  node: PMNode,
-): HTMLCollection {
-  let colgroup = tableElem.querySelector('colgroup') as HTMLElement;
-  if (colgroup) {
-    tableElem.removeChild(colgroup);
-  }
-
-  colgroup = renderColgroupFromNode(node) as HTMLElement;
-  tableElem.insertBefore(colgroup, tableElem.firstChild);
-
-  return colgroup.children;
-}
-
+import { insertColgroupFromNode } from '../../../utils';
 export interface ResizerConfig {
   minWidth: number;
   maxSize: number;
@@ -46,7 +30,7 @@ export default class Resizer {
    */
   static fromDOM(tableElem: HTMLTableElement, config: ResizerConfig): Resizer {
     const { maxSize, minWidth, node } = config;
-    const colgroupChildren = recreateResizeColsByNode(tableElem, node);
+    const colgroupChildren = insertColgroupFromNode(tableElem, node);
 
     return new Resizer(
       tableElem,
