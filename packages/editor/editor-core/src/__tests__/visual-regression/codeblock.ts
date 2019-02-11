@@ -7,6 +7,6 @@ describe('Snapshot Test: Breakout', () => {
     const page = global.page;
     await page.setViewport(deviceViewPorts.MDPI);
     await initFullPageEditorWithAdf(page, adf);
-    await snapshot(page, undefined, '.none');
+    await snapshot(page);
   });
 });
