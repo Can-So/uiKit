@@ -52,7 +52,7 @@ export default class ResourcedMention extends React.PureComponent<
             isHighlighted: provider.shouldHighlightMention({ id }),
           });
         })
-        .catch(e => {
+        .catch(() => {
           this.setState({
             isHighlighted: false,
           });
