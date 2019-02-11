@@ -108,7 +108,7 @@ export default class MediaGroup extends PureComponent<
       this.mapMediaPropsToIdentifier(
         (child as React.ReactElement<MediaProps>).props,
       ),
-    );
+    ).filter(identifier => !!identifier);
 
     return (
       <FilmstripView
@@ -121,7 +121,12 @@ export default class MediaGroup extends PureComponent<
           const child = rawChild as React.ReactElement<MediaProps>;
           switch (child.props.type) {
             case 'file':
-              return this.cloneFileCard(child, surroundingItems);
+              return this.cloneFileCard(
+                child,
+                surroundingItems as Identifier[],
+              );
+            case 'link':
+              return null;
             default:
               return React.cloneElement(child);
           }
@@ -135,7 +140,7 @@ export default class MediaGroup extends PureComponent<
     type,
     occurrenceKey,
     collection,
-  }: MediaProps): Identifier {
+  }: MediaProps): Identifier | undefined {
     switch (type) {
       case 'file':
         return {
@@ -144,6 +149,8 @@ export default class MediaGroup extends PureComponent<
           occurrenceKey,
           collectionName: collection,
         };
+      case 'link':
+        return undefined;
       case 'external':
         return {
           id: id!,

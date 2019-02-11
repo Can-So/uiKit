@@ -1,7 +1,7 @@
 import { NodeSpec, Node as PMNode } from 'prosemirror-model';
 import { N30 } from '../../utils/colors';
 
-export type MediaType = 'file' | 'external';
+export type MediaType = 'file' | 'link' | 'external';
 export type DisplayType = 'file' | 'thumbnail';
 
 export type DefaultAttributes<T> = {

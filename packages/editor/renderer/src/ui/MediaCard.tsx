@@ -120,13 +120,13 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       return (
         <CardView
           status="loading"
-          mediaItemType={type}
+          mediaItemType="file"
           dimensions={cardDimensions}
         />
       );
     }
 
-    let identifier: any = {
+    const identifier: any = {
       id,
       mediaItemType: type,
       collectionName: collection,
