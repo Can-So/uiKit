@@ -76,7 +76,7 @@ async function runDevServer() {
       workspacesGlob: workspacesGlob.toString(),
       port: PORT,
       host: HOST,
-      isAll: workspacesGlob.length > 0 ? false : true,
+      isAll: !workspacesGlob.length,
     }),
   );
 
