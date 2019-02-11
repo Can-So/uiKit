@@ -116,24 +116,24 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
             placeholderTextState,
             layoutState,
           }: {
-            typeAheadState: TypeAheadPluginState;
-            mentionState: MentionPluginState;
-            blockTypeState: BlockTypeState;
-            mediaState: MediaPluginState;
-            tablesState: TablePluginState;
-            macroState: MacroState;
-            hyperlinkState: HyperlinkState;
-            emojiState: EmojiState;
-            dateState: DateState;
-            imageUpload: ImageUploadPluginState;
-            placeholderTextState: PlaceholderPluginState;
-            layoutState: LayoutState;
+            typeAheadState: TypeAheadPluginState | undefined;
+            mentionState: MentionPluginState | undefined;
+            blockTypeState: BlockTypeState | undefined;
+            mediaState: MediaPluginState | undefined;
+            tablesState: TablePluginState | undefined;
+            macroState: MacroState | undefined;
+            hyperlinkState: HyperlinkState | undefined;
+            emojiState: EmojiState | undefined;
+            dateState: DateState | undefined;
+            imageUpload: ImageUploadPluginState | undefined;
+            placeholderTextState: PlaceholderPluginState | undefined;
+            layoutState: LayoutState | undefined;
           }) => (
             <ToolbarInsertBlock
               buttons={buttons}
               isReducedSpacing={isToolbarReducedSpacing}
               isDisabled={disabled}
-              isTypeAheadAllowed={typeAheadState.isAllowed}
+              isTypeAheadAllowed={typeAheadState && typeAheadState.isAllowed}
               editorView={editorView}
               tableSupported={!!tablesState}
               actionSupported={!!editorView.state.schema.nodes.taskItem}
@@ -154,7 +154,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               imageUploadEnabled={imageUpload && imageUpload.enabled}
               handleImageUpload={startImageUpload}
               availableWrapperBlockTypes={
-                blockTypeState.availableWrapperBlockTypes
+                blockTypeState && blockTypeState.availableWrapperBlockTypes
               }
               linkSupported={!!hyperlinkState}
               linkDisabled={

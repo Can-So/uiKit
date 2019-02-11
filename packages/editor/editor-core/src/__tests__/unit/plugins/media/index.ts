@@ -124,14 +124,11 @@ describe('Media plugin', () => {
     return mediaNodeWithPos!.getPos();
   };
 
-  const waitForMediaPickerReady = (pluginState: MediaPluginState) =>
-    new Promise(resolve => pluginState.subscribe(resolve));
-
   const waitForAllPickersInitialised = async (
     pluginState: MediaPluginState,
   ) => {
     while (pluginState.pickers.length < 4) {
-      await waitForMediaPickerReady(pluginState);
+      await new Promise(resolve => resolve());
     }
   };
 
@@ -141,7 +138,6 @@ describe('Media plugin', () => {
 
   it('should invoke binary picker when calling insertFileFromDataUrl', async () => {
     const { pluginState } = editor(doc(p('{<>}')));
-    await waitForMediaPickerReady(pluginState);
     const provider = await mediaProvider;
     await provider.uploadContext;
 
@@ -165,7 +161,7 @@ describe('Media plugin', () => {
       const { editorView, pluginState } = editor(doc(p('')), {
         appearance: 'message',
       });
-      await waitForMediaPickerReady(pluginState);
+      await mediaProvider;
 
       pluginState.insertFiles([
         {
@@ -208,7 +204,7 @@ describe('Media plugin', () => {
     describe('when all of the files are images', () => {
       it('inserts single medias', async () => {
         const { editorView, pluginState } = editor(doc(p('')));
-        await waitForMediaPickerReady(pluginState);
+        await mediaProvider;
 
         const foo = [
           {
@@ -397,7 +393,7 @@ describe('Media plugin', () => {
     describe('when it is a mix of pdf and image', () => {
       it('inserts pdf as a media group and images as single', async () => {
         const { editorView, pluginState } = editor(doc(p('')));
-        await waitForMediaPickerReady(pluginState);
+        await mediaProvider;
         const id1 = `${randomId()}`;
         const id2 = `${randomId()}`;
         const lala = [
@@ -473,7 +469,7 @@ describe('Media plugin', () => {
     describe('when all media are non-images', () => {
       it('should insert as media group', async () => {
         const { editorView, pluginState } = editor(doc(p('')));
-        await waitForMediaPickerReady(pluginState);
+        await mediaProvider;
 
         pluginState.insertFiles([
           { id: 'foo', fileMimeType: 'pdf', fileId: Promise.resolve('id1') },
@@ -976,7 +972,7 @@ describe('Media plugin', () => {
 
   it('should focus the editor after files are added to the document', async () => {
     const { editorView, pluginState } = editor(doc(p('')));
-    await waitForMediaPickerReady(pluginState);
+    await mediaProvider;
 
     const spy = jest.spyOn(editorView, 'focus');
 
@@ -1294,15 +1290,6 @@ describe('Media plugin', () => {
 
         expect(pluginState.element).not.toBeUndefined();
       });
-
-      it('notified subscriber', () => {
-        const subscriber = jest.fn();
-        pluginState.subscribe(subscriber);
-
-        setNodeSelection(editorView, 3);
-
-        expect(subscriber).toHaveBeenCalledTimes(2);
-      });
     });
 
     describe('when cursor move to a mediaSingle node', () => {
@@ -1322,15 +1309,6 @@ describe('Media plugin', () => {
         setNodeSelection(editorView, 0);
 
         expect(pluginState.element).not.toBeUndefined();
-      });
-
-      it('notified subscriber', () => {
-        const subscriber = jest.fn();
-        pluginState.subscribe(subscriber);
-
-        setNodeSelection(editorView, 0);
-
-        expect(subscriber).toHaveBeenCalledTimes(2);
       });
     });
 
@@ -1361,60 +1339,6 @@ describe('Media plugin', () => {
 
         expect(pluginState.element).toBeUndefined();
       });
-
-      it('notified subscriber', () => {
-        const subscriber = jest.fn();
-        pluginState.subscribe(subscriber);
-        const { nextPos } = refs;
-
-        setTextSelection(editorView, nextPos);
-
-        expect(subscriber).toHaveBeenCalledTimes(2);
-      });
-    });
-
-    describe('when element has not been changed', () => {
-      it('does not notified subscriber', () => {
-        const { pluginState, editorView, refs } = editor(
-          doc(
-            mediaSingle({ layout: 'wrap-left' })(temporaryMedia),
-            p('{<>}hello{nextPos}'),
-          ),
-        );
-
-        const subscriber = jest.fn();
-        pluginState.subscribe(subscriber);
-        const { nextPos } = refs;
-
-        setTextSelection(editorView, nextPos);
-
-        expect(subscriber).toHaveBeenCalledTimes(1);
-      });
-    });
-  });
-
-  describe('updateLayout', () => {
-    it('updates the plugin layout', () => {
-      const { pluginState } = editor(
-        doc(mediaSingle({ layout: 'wrap-left' })(temporaryMedia)),
-      );
-
-      pluginState.updateLayout('center');
-
-      expect(pluginState.layout).toBe('center');
-    });
-
-    it('notifies subscriber', () => {
-      const { pluginState } = editor(
-        doc(mediaSingle({ layout: 'center' })(temporaryMedia)),
-      );
-
-      const subscriber = jest.fn();
-      pluginState.subscribe(subscriber);
-
-      pluginState.updateLayout('wrap-right');
-
-      expect(subscriber).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -1422,7 +1346,7 @@ describe('Media plugin', () => {
     it('should insert media group after orderer list', async () => {
       const listDoc = doc(ol(li(p('text'))));
       const { pluginState, editorView } = editor(listDoc);
-      await waitForMediaPickerReady(pluginState);
+      await mediaProvider;
 
       pluginState.insertFiles([pdfFile]);
 
@@ -1448,7 +1372,7 @@ describe('Media plugin', () => {
     it('should insert media group after unorderer list', async () => {
       const listDoc = doc(ul(li(p('text'))));
       const { pluginState, editorView } = editor(listDoc);
-      await waitForMediaPickerReady(pluginState);
+      await mediaProvider;
 
       pluginState.insertFiles([pdfFile]);
 
@@ -1488,7 +1412,7 @@ describe('Media plugin', () => {
         p(''),
       );
       const { pluginState, editorView } = editor(listDoc);
-      await waitForMediaPickerReady(pluginState);
+      await mediaProvider;
 
       pluginState.insertFiles([pdfFile]);
 
@@ -1528,7 +1452,7 @@ describe('Media plugin', () => {
       undefined,
       [quickInsertPlugin],
     );
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
     insertText(editorView, '/Files', sel);
     sendKeyToPm(editorView, 'Enter');
 

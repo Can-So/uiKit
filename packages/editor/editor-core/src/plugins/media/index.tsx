@@ -127,10 +127,11 @@ const mediaPlugin = (
     );
   },
 
-  secondaryToolbarComponent({ editorView, disabled }) {
+  secondaryToolbarComponent({ editorView, eventDispatcher, disabled }) {
     return (
       <ToolbarMedia
         editorView={editorView}
+        eventDispatcher={eventDispatcher}
         pluginKey={pluginKey}
         isDisabled={disabled}
         isReducedSpacing={true}

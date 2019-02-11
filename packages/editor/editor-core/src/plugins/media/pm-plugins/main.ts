@@ -40,15 +40,12 @@ export { MediaState, MediaProvider, MediaStateStatus, MediaStateManager };
 
 const MEDIA_RESOLVED_STATES = ['ready', 'error', 'cancelled'];
 
-export type PluginStateChangeSubscriber = (state: MediaPluginState) => any;
-
 export interface MediaNodeWithPosHandler {
   node: PMNode;
   getPos: ProsemirrorGetPosHandler;
 }
 
 export class MediaPluginState {
-  public allowsMedia: boolean = false;
   public allowsUploads: boolean = false;
   public mediaContext: Context;
   public stateManager: MediaStateManager;
@@ -63,7 +60,6 @@ export class MediaPluginState {
   private pendingTask = Promise.resolve<MediaState | null>(null);
   public options: MediaPluginOptions;
   private view: EditorView;
-  private pluginStateChangeSubscribers: PluginStateChangeSubscriber[] = [];
   private useDefaultStateManager = true;
   private destroyed = false;
   public mediaProvider: MediaProvider;
@@ -112,27 +108,18 @@ export class MediaPluginState {
     this.errorReporter = options.errorReporter || new ErrorReporter();
   }
 
-  subscribe(cb: PluginStateChangeSubscriber) {
-    this.pluginStateChangeSubscribers.push(cb);
-    cb(this);
-  }
-
-  unsubscribe(cb: PluginStateChangeSubscriber) {
-    const { pluginStateChangeSubscribers } = this;
-    const pos = pluginStateChangeSubscribers.indexOf(cb);
-
-    if (pos > -1) {
-      pluginStateChangeSubscribers.splice(pos, 1);
-    }
-  }
-
   setMediaProvider = async (mediaProvider?: Promise<MediaProvider>) => {
     if (!mediaProvider) {
       this.destroyPickers();
 
       this.allowsUploads = false;
-      this.allowsMedia = false;
-      this.notifyPluginStateSubscribers();
+      if (!this.destroyed) {
+        this.view.dispatch(
+          this.view.state.tr.setMeta(stateKey, {
+            allowsUploads: this.allowsUploads,
+          }),
+        );
+      }
 
       return;
     }
@@ -155,13 +142,17 @@ export class MediaPluginState {
       this.destroyPickers();
 
       this.allowsUploads = false;
-      this.allowsMedia = false;
-      this.notifyPluginStateSubscribers();
+      if (!this.destroyed) {
+        this.view.dispatch(
+          this.view.state.tr.setMeta(stateKey, {
+            allowsUploads: this.allowsUploads,
+          }),
+        );
+      }
 
       return;
     }
 
-    this.allowsMedia = true;
     this.mediaContext = await this.mediaProvider.viewContext;
 
     // release all listeners for default state manager
@@ -200,8 +191,6 @@ export class MediaPluginState {
     } else {
       this.destroyPickers();
     }
-
-    this.notifyPluginStateSubscribers();
   };
 
   getMediaOptions = () => this.options;
@@ -216,13 +205,7 @@ export class MediaPluginState {
     }
     if (this.element !== newElement) {
       this.element = newElement;
-      this.notifyPluginStateSubscribers();
     }
-  }
-
-  updateLayout(layout: MediaSingleLayout): void {
-    this.layout = layout;
-    this.notifyPluginStateSubscribers();
   }
 
   private getDomElement(domAtPos: EditorView['domAtPos']) {
@@ -299,7 +282,6 @@ export class MediaPluginState {
 
     this.pendingTask.then(() => {
       this.allUploadsFinished = true;
-      this.notifyPluginStateSubscribers();
     });
 
     const { view } = this;
@@ -689,10 +671,6 @@ export class MediaPluginState {
     }
   };
 
-  private notifyPluginStateSubscribers = () => {
-    this.pluginStateChangeSubscribers.forEach(cb => cb.call(cb, this));
-  };
-
   removeNodeById = (state: MediaState) => {
     const { id } = state;
     const mediaNodeWithPos = isImage(state.fileMimeType)
@@ -796,19 +774,16 @@ export const createPlugin = (
         );
       },
       apply(tr, pluginState: MediaPluginState, oldState, newState) {
-        const { parent } = newState.selection.$from;
-
-        // Update Layout
-        const { mediaSingle } = oldState.schema.nodes;
-        if (parent.type === mediaSingle) {
-          pluginState.layout = parent.attrs.layout;
-        }
-
         const meta = tr.getMeta(stateKey);
         if (meta && dispatch) {
           const { showMediaPicker } = pluginState;
           const { allowsUploads } = meta;
-          dispatch(stateKey, { allowsUploads, showMediaPicker });
+
+          dispatch(stateKey, {
+            ...pluginState,
+            allowsUploads,
+            showMediaPicker,
+          });
         }
 
         // NOTE: We're not calling passing new state to the Editor, because we depend on the view.state reference
