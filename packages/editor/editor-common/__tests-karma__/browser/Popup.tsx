@@ -73,12 +73,12 @@ describe('Popup', () => {
       });
 
       describe('with alignY', () => {
-        it('should return "top" if "alignY" equals "top"', () => {
+        it('should return "bottopm" if "alignY" equals "bottom"', () => {
           const boundary: any = {};
           const target: any = {};
           expect(
-            getVerticalPlacement(target, boundary, undefined, 'top'),
-          ).to.eq('top');
+            getVerticalPlacement(target, boundary, undefined, 'bottom'),
+          ).to.eq('bottom');
         });
       });
 

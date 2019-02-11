@@ -7,7 +7,6 @@ import {
   sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import hyperlinkEditorPlugin from '../../../../plugins/hyperlink';
 import quickInsertPlugin from '../../../../plugins/quick-insert';
 
 describe('hyperlink', () => {
@@ -23,11 +22,6 @@ describe('hyperlink', () => {
       createAnalyticsEvent,
     });
   };
-
-  it('should not show toolbar in message editor', () => {
-    const props = { appearance: 'message' } as any;
-    expect(hyperlinkEditorPlugin.contentComponent!(props)).toBe(null);
-  });
 
   describe('link mark behaviour', () => {
     it('should not change the link text when typing text before a link', () => {
