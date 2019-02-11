@@ -1,27 +1,43 @@
 import * as React from 'react';
 import { EditorPlugin } from '../../types';
 import { WithProviders } from '@atlaskit/editor-common';
-import { pluginKey as blockTypeStateKey } from '../block-type/pm-plugins/main';
-import { stateKey as mediaStateKey } from '../media/pm-plugins/main';
-import { stateKey as hyperlinkPluginKey } from '../hyperlink/pm-plugins/main';
-import { mentionPluginKey } from '../mentions';
+import {
+  pluginKey as blockTypeStateKey,
+  BlockTypeState,
+} from '../block-type/pm-plugins/main';
+import {
+  stateKey as mediaStateKey,
+  MediaPluginState,
+} from '../media/pm-plugins/main';
+import {
+  stateKey as hyperlinkPluginKey,
+  HyperlinkState,
+} from '../hyperlink/pm-plugins/main';
+import { mentionPluginKey, MentionPluginState } from '../mentions';
 import { pluginKey as tablesStateKey } from '../table/pm-plugins/main';
 import { stateKey as imageUploadStateKey } from '../image-upload/pm-plugins/main';
-import { pluginKey as placeholderTextStateKey } from '../placeholder-text';
+import {
+  pluginKey as placeholderTextStateKey,
+  PluginState as PlaceholderPluginState,
+} from '../placeholder-text';
 import { pluginKey as layoutStateKey } from '../layout';
 import {
   pluginKey as macroStateKey,
   MacroState,
   insertMacroFromMacroBrowser,
 } from '../macro';
-import { pluginKey as dateStateKey } from '../date/plugin';
-import { emojiPluginKey } from '../emoji/pm-plugins/main';
+import { pluginKey as dateStateKey, DateState } from '../date/plugin';
+import { emojiPluginKey, EmojiState } from '../emoji/pm-plugins/main';
 import WithPluginState from '../../ui/WithPluginState';
 import { ToolbarSize } from '../../ui/Toolbar';
 import ToolbarInsertBlock from './ui/ToolbarInsertBlock';
 import { insertBlockTypesWithAnalytics } from '../block-type/commands';
 import { startImageUpload } from '../image-upload/pm-plugins/commands';
 import { pluginKey as typeAheadPluginKey } from '../type-ahead/pm-plugins/main';
+import { TypeAheadPluginState } from '../type-ahead';
+import { TablePluginState } from '../table/types';
+import { ImageUploadPluginState } from '../image-upload/types';
+import { LayoutState } from '../layout/pm-plugins/main';
 import { INPUT_METHOD } from '../analytics';
 
 const toolbarSizeToButtons = toolbarSize => {
@@ -99,6 +115,19 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
             imageUpload,
             placeholderTextState,
             layoutState,
+          }: {
+            typeAheadState: TypeAheadPluginState;
+            mentionState: MentionPluginState;
+            blockTypeState: BlockTypeState;
+            mediaState: MediaPluginState;
+            tablesState: TablePluginState;
+            macroState: MacroState;
+            hyperlinkState: HyperlinkState;
+            emojiState: EmojiState;
+            dateState: DateState;
+            imageUpload: ImageUploadPluginState;
+            placeholderTextState: PlaceholderPluginState;
+            layoutState: LayoutState;
           }) => (
             <ToolbarInsertBlock
               buttons={buttons}
@@ -111,7 +140,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               mentionsSupported={
                 !!(mentionState && mentionState.mentionProvider)
               }
-              mentionsEnabled={mentionState}
+              mentionsEnabled={!!mentionState}
               decisionSupported={!!editorView.state.schema.nodes.decisionItem}
               dateEnabled={!!dateState}
               placeholderTextEnabled={
@@ -131,7 +160,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               linkDisabled={
                 !hyperlinkState ||
                 !hyperlinkState.canInsertLink ||
-                hyperlinkState.activeLinkMark
+                !!hyperlinkState.activeLinkMark
               }
               emojiDisabled={!emojiState || !emojiState.enabled}
               insertEmoji={emojiState && emojiState.insertEmoji}
