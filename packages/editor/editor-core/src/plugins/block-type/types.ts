@@ -55,12 +55,12 @@ export const messages = defineMessages<
   },
   blockquote: {
     id: 'fabric.editor.blockquote',
-    defaultMessage: 'Block quote',
+    defaultMessage: 'Quote',
     description: 'Quote some text',
   },
   codeblock: {
     id: 'fabric.editor.codeblock',
-    defaultMessage: 'Code block',
+    defaultMessage: 'Code snippet',
     description: 'Insert a block of code (code snippet)',
   },
   panel: {
