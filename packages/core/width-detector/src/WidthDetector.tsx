@@ -89,6 +89,7 @@ export default class WidthDetector extends React.Component<Props, State> {
       return;
     }
     this.container = ref;
+    this.handleResize();
   };
 
   handleObjectRef = (ref?: ResizeObject) => {
@@ -135,16 +136,14 @@ export default class WidthDetector extends React.Component<Props, State> {
     );
 
     return (
-      <React.Fragment>
-        <div
-          className="ak-width-detector-container"
-          style={{ ...containerDivStyle, ...this.props.containerStyle }}
-          ref={this.handleContainerRef}
-        >
-          {this.props.children(this.state.width)}
-          {sizerEl}
-        </div>
-      </React.Fragment>
+      <div
+        className="ak-width-detector-container"
+        style={{ ...containerDivStyle, ...this.props.containerStyle }}
+        ref={this.handleContainerRef}
+      >
+        {this.renderChildren()}
+        {sizerEl}
+      </div>
     );
   }
 }

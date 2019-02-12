@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import WidthDetector from '../src';
-import debounce from 'lodash.debounce';
+import * as debounce from 'lodash.debounce';
 
 const ResultBox = styled.div`
   align-items: center;
@@ -23,7 +23,7 @@ const ResultNumber = styled.div`
   border-radius: 3px;
 `;
 
-export default class Example extends Component {
+export default class Example extends React.Component {
   state = {
     width: 0,
     bgColor: '#fff',
