@@ -3,7 +3,7 @@ import * as React from 'react';
 import { User } from '../../types';
 
 export const renderProp = (
-  wrapper: ShallowWrapper,
+  wrapper: ShallowWrapper<any>,
   renderProp: string,
   ...args: any[]
 ) => {

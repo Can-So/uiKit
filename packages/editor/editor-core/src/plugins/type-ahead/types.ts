@@ -3,6 +3,7 @@ import { InjectedIntl } from 'react-intl';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { Node } from 'prosemirror-model';
 import { SelectItemMode } from './commands/select-item';
+import { Dispatch } from '../../event-dispatcher';
 
 export type TypeAheadItem = {
   title: string;
@@ -21,6 +22,8 @@ export type TypeAheadHandler = {
       prevActive: boolean;
       queryChanged: boolean;
     },
+    tr: Transaction,
+    dipatch: Dispatch,
   ) => Array<TypeAheadItem> | Promise<Array<TypeAheadItem>>;
   selectItem: (
     state: EditorState,

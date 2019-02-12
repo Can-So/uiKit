@@ -75,6 +75,10 @@ describe(name, () => {
       describe('value prop', () => {
         expectPropReflectedToInput('value', 'value', 'value-val');
       });
+
+      describe('passing all the extra props passed down to hidden radio input', () => {
+        expectPropReflectedToInput('data-foo', 'data-foo', 'radio-bar');
+      });
     });
   });
 });

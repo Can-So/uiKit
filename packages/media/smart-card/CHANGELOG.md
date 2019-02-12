@@ -1,5 +1,19 @@
 # @atlaskit/smart-card
 
+## 9.9.0
+- [minor] [7f70e97f98](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f70e97f98):
+
+  - Added environments to client
+
+## 9.8.0
+- [minor] [1594f351d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1594f351d9):
+
+  - added inline extractors for Bitbucket and Github.
+
+## 9.7.1
+- Updated dependencies [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+  - @atlaskit/media-ui@9.0.0
+
 ## 9.7.0
 - [minor] [1c62bcce7d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c62bcce7d):
 

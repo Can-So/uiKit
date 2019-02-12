@@ -38,6 +38,17 @@ import {
   buildTypeAheadCancelPayload,
   buildTypeAheadRenderedPayload,
 } from './analytics';
+import {
+  addAnalytics,
+  analyticsPluginKey,
+  analyticsEventKey,
+  AnalyticsDispatch,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+} from '../analytics';
 
 const mentionsPlugin = (
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
@@ -88,7 +99,7 @@ const mentionsPlugin = (
             typeAheadState: TypeAheadPluginState;
             mentionState: MentionPluginState;
           }) =>
-            !mentionState.provider ? null : (
+            !mentionState.mentionProvider ? null : (
               <ToolbarMention
                 editorView={editorView}
                 isDisabled={disabled || !typeAheadState.isAllowed}
@@ -110,7 +121,14 @@ const mentionsPlugin = (
               trigger: '@',
             });
             const mentionText = state.schema.text('@', [mark]);
-            return insert(mentionText);
+            const tr = insert(mentionText);
+            return addAnalytics(tr, {
+              action: ACTION.INVOKED,
+              actionSubject: ACTION_SUBJECT.TYPEAHEAD,
+              actionSubjectId: ACTION_SUBJECT_ID.TYPEAHEAD_MENTION,
+              attributes: { inputMethod: INPUT_METHOD.QUICK_INSERT },
+              eventType: EVENT_TYPE.UI,
+            });
           },
         },
       ],
@@ -119,19 +137,41 @@ const mentionsPlugin = (
         // Custom regex must have a capture group around trigger
         // so it's possible to use it without needing to scan through all triggers again
         customRegex: '\\(?(@)',
-        getItems(query, state, intl, { prevActive, queryChanged }) {
+        getItems(
+          query,
+          state,
+          intl,
+          { prevActive, queryChanged },
+          tr,
+          dispatch,
+        ) {
           if (!prevActive && queryChanged) {
             analyticsService.trackEvent(
               'atlassian.fabric.mention.picker.trigger.shortcut',
             );
+            if (!tr.getMeta(analyticsPluginKey)) {
+              (dispatch as AnalyticsDispatch)(analyticsEventKey, {
+                payload: {
+                  action: ACTION.INVOKED,
+                  actionSubject: ACTION_SUBJECT.TYPEAHEAD,
+                  actionSubjectId: ACTION_SUBJECT_ID.TYPEAHEAD_MENTION,
+                  attributes: { inputMethod: INPUT_METHOD.KEYBOARD },
+                  eventType: EVENT_TYPE.UI,
+                },
+              });
+            }
           }
 
           const pluginState = getMentionPluginState(state);
           const mentions =
             !prevActive && queryChanged ? [] : pluginState.mentions || [];
 
-          if (queryChanged && pluginState.provider) {
-            pluginState.provider.filter(query || '');
+          const mentionContext = {
+            ...pluginState.contextIdentifierProvider,
+            sessionId,
+          };
+          if (queryChanged && pluginState.mentionProvider) {
+            pluginState.mentionProvider.filter(query || '', mentionContext);
           }
 
           return mentions.map(mention => ({
@@ -149,15 +189,22 @@ const mentionsPlugin = (
         },
         selectItem(state, item, insert, { mode }) {
           const pluginState = getMentionPluginState(state);
-          const { provider } = pluginState;
+          const { mentionProvider } = pluginState;
           const { id, name, nickname, accessLevel, userType } = item.mention;
           const renderName = nickname ? nickname : name;
           const typeAheadPluginState = typeAheadPluginKey.getState(
             state,
           ) as TypeAheadPluginState;
 
-          if (provider) {
-            provider.recordMentionSelection(item.mention);
+          const mentionContext = {
+            ...pluginState.contextIdentifierProvider,
+            sessionId,
+          };
+          if (mentionProvider) {
+            mentionProvider.recordMentionSelection(
+              item.mention,
+              mentionContext,
+            );
           }
 
           const pickerElapsedTime = typeAheadPluginState.queryStarted
@@ -173,7 +220,7 @@ const mentionsPlugin = (
               mentionee: id,
               duration: pickerElapsedTime,
               queryLength: (typeAheadPluginState.query || '').length,
-              ...(pluginState.contextIdentifier as any),
+              ...(pluginState.contextIdentifierProvider as any),
             },
           );
 
@@ -288,8 +335,8 @@ export function getMentionPluginState(state) {
 }
 
 export type MentionPluginState = {
-  provider?: MentionProvider;
-  contextIdentifier?: ContextIdentifierProvider;
+  mentionProvider?: MentionProvider;
+  contextIdentifierProvider?: ContextIdentifierProvider;
   mentions?: Array<MentionDescription>;
 };
 
@@ -320,7 +367,7 @@ function mentionPluginFactory(
           case ACTIONS.SET_PROVIDER:
             newPluginState = {
               ...pluginState,
-              provider: params.provider,
+              mentionProvider: params.provider,
             };
             dispatch(mentionPluginKey, newPluginState);
             return newPluginState;
@@ -336,7 +383,7 @@ function mentionPluginFactory(
           case ACTIONS.SET_CONTEXT:
             newPluginState = {
               ...pluginState,
-              contextIdentifier: params.context,
+              contextIdentifierProvider: params.context,
             };
             dispatch(mentionPluginKey, newPluginState);
             return newPluginState;

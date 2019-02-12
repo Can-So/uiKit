@@ -25,6 +25,7 @@ import {
   randomId,
   sleep,
   insertText,
+  sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -39,8 +40,9 @@ import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
-import pickerFacadeLoader from '../../../../plugins/media/picker-facade-loader';
+import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -71,13 +73,16 @@ describe('Media plugin', () => {
   const mediaProvider = getFreshMediaProvider();
   const temporaryFileId = `temporary:${randomId()}`;
   const providerFactory = ProviderFactory.create({ mediaProvider });
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
   const editor = (
     doc: any,
     editorProps = {},
     dropzoneContainer: HTMLElement = document.body,
-  ) =>
-    createEditor({
+    extraPlugins: any[] = [],
+  ) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
       editorPlugins: [
         listPlugin,
@@ -89,11 +94,17 @@ describe('Media plugin', () => {
         codeBlockPlugin(),
         rulePlugin,
         tablePlugin(),
+        ...extraPlugins,
       ],
-      editorProps: editorProps,
+      editorProps: {
+        ...editorProps,
+        allowAnalyticsGASV3: true,
+      },
       providerFactory,
       pluginKey: mediaPluginKey,
+      createAnalyticsEvent,
     });
+  };
 
   const getNodePos = (
     pluginState: MediaPluginState,
@@ -112,11 +123,16 @@ describe('Media plugin', () => {
     return mediaNodeWithPos!.getPos();
   };
 
-  const waitForMediaPickerReady = async (pluginState: MediaPluginState) =>
-    Promise.all([
-      new Promise(resolve => pluginState.subscribe(resolve)),
-      pickerFacadeLoader(),
-    ]);
+  const waitForMediaPickerReady = (pluginState: MediaPluginState) =>
+    new Promise(resolve => pluginState.subscribe(resolve));
+
+  const waitForAllPickersInitialised = async (
+    pluginState: MediaPluginState,
+  ) => {
+    while (pluginState.pickers.length < 4) {
+      await waitForMediaPickerReady(pluginState);
+    }
+  };
 
   afterAll(() => {
     providerFactory.destroy();
@@ -133,7 +149,8 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
 
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
+
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     pluginState.binaryPicker!.upload = jest.fn();
@@ -625,15 +642,10 @@ describe('Media plugin', () => {
     const { pluginState } = editor(doc(h1('text{<>}')));
     expect(pluginState.pickers.length).toBe(0);
 
-    const mediaProvider1 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider1);
-    const mediaProvider2 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider2);
+    await getFreshMediaProvider();
+    await getFreshMediaProvider();
 
-    const resolvedMediaProvider1 = await mediaProvider1;
-    const resolvedMediaProvider2 = await mediaProvider2;
-    await resolvedMediaProvider1.uploadContext;
-    await resolvedMediaProvider2.uploadContext;
+    await waitForAllPickersInitialised(pluginState);
 
     expect(pluginState.pickers.length).toBe(4);
   });
@@ -642,17 +654,17 @@ describe('Media plugin', () => {
     const { pluginState } = editor(doc(h1('text{<>}')));
     expect(pluginState.pickers.length).toBe(0);
 
-    const mediaProvider1 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider1);
-    const resolvedMediaProvider1 = await mediaProvider1;
-    await resolvedMediaProvider1.uploadContext;
+    await getFreshMediaProvider();
+
+    await waitForAllPickersInitialised(pluginState);
+
     const pickersAfterMediaProvider1 = pluginState.pickers;
     expect(pickersAfterMediaProvider1.length).toBe(4);
 
-    const mediaProvider2 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider2);
-    const resolvedMediaProvider2 = await mediaProvider2;
-    await resolvedMediaProvider2.uploadContext;
+    await getFreshMediaProvider();
+
+    await waitForAllPickersInitialised(pluginState);
+
     const pickersAfterMediaProvider2 = pluginState.pickers;
 
     expect(pickersAfterMediaProvider1).toHaveLength(
@@ -700,7 +712,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -743,7 +755,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -781,7 +793,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -817,7 +829,8 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
+
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -1596,6 +1609,26 @@ describe('Media plugin', () => {
           p(''),
         ),
       );
+    });
+  });
+
+  it('should trigger cloud picker opened analytics event when opened via quick insert', async () => {
+    const { editorView, sel, pluginState } = editor(
+      doc(p('{<>}')),
+      {},
+      undefined,
+      [quickInsertPlugin],
+    );
+    await waitForMediaPickerReady(pluginState);
+    insertText(editorView, '/Files', sel);
+    sendKeyToPm(editorView, 'Enter');
+
+    expect(createAnalyticsEvent).toHaveBeenCalledWith({
+      action: 'opened',
+      actionSubject: 'picker',
+      actionSubjectId: 'cloudPicker',
+      attributes: { inputMethod: 'quickInsert' },
+      eventType: 'ui',
     });
   });
 });

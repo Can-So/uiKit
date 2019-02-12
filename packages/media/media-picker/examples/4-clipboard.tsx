@@ -66,11 +66,11 @@ class ClipboardWrapper extends Component<{}, ClipboardWrapperState> {
     this.setState({ isWindowFocused: false });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     window.addEventListener('focus', this.onFocus);
     window.addEventListener('blur', this.onBlur);
 
-    this.createClipboard();
+    await this.createClipboard();
     this.fetchLastItems();
   }
 
@@ -79,7 +79,7 @@ class ClipboardWrapper extends Component<{}, ClipboardWrapperState> {
     window.removeEventListener('blur', this.onBlur);
   }
 
-  createClipboard() {
+  async createClipboard() {
     const { isConnectedToUsersCollection, isActive } = this.state;
     const context = ContextFactory.create({
       authProvider: defaultMediaPickerAuthProvider,
@@ -87,7 +87,7 @@ class ClipboardWrapper extends Component<{}, ClipboardWrapperState> {
         ? userAuthProvider
         : undefined,
     });
-    const clipboard = MediaPicker('clipboard', context, {
+    const clipboard = await MediaPicker('clipboard', context, {
       uploadParams: {
         collection: defaultMediaPickerCollectionName,
       },

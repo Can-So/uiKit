@@ -15,6 +15,7 @@ import { emojiPluginKey } from '../../../../plugins/emoji/pm-plugins/main';
 import emojiPlugin from '../../../../plugins/emoji';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import mentionsPlugin from '../../../../plugins/mentions';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
@@ -22,14 +23,19 @@ describe('emojis - input rules', () => {
   const createEditor = createEditorFactory();
 
   const providerFactory = ProviderFactory.create({ emojiProvider });
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
-  const editor = (doc: any) =>
-    createEditor({
+  const editor = (doc: any) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
+      editorProps: { allowAnalyticsGASV3: true },
       editorPlugins: [emojiPlugin, codeBlockPlugin(), mentionsPlugin()],
       providerFactory,
       pluginKey: emojiPluginKey,
+      createAnalyticsEvent,
     });
+  };
 
   const assert = (what: string, expected: boolean, docContents?: any) => {
     const { editorView, pluginState, sel, refs } = editor(
@@ -96,5 +102,19 @@ describe('emojis - input rules', () => {
 
   it('should replace a ":" when preceded by an opening round bracket', () => {
     assert('(:', true);
+  });
+
+  it('should trigger emoji typeahead invoked analytics event when replace ":"', async () => {
+    const { editorView, sel, pluginState } = editor(doc(p('{<>}')));
+    (pluginState as any).emojiProvider = true;
+    insertText(editorView, ':', sel);
+
+    expect(createAnalyticsEvent).toHaveBeenCalledWith({
+      action: 'invoked',
+      actionSubject: 'typeAhead',
+      actionSubjectId: 'emojiTypeAhead',
+      attributes: { inputMethod: 'keyboard' },
+      eventType: 'ui',
+    });
   });
 });

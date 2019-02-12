@@ -80,7 +80,14 @@ class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> 
   };
 
   renderChildren = (styles: GlobalItemStyles) => {
-    const { href, onClick, target, component: CustomComponent } = this.props;
+    const {
+      href,
+      onClick,
+      id,
+      target,
+      component: CustomComponent,
+    } = this.props;
+    const globalID = id && `${id}GlobalItem`;
 
     let itemBase;
 
@@ -97,6 +104,7 @@ class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> 
       itemBase = (
         <a
           href={href}
+          id={globalID}
           onClick={onClick}
           target={target}
           className={css({ '&&': styles.itemBase })}
@@ -106,13 +114,17 @@ class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> 
       );
     } else if (onClick) {
       itemBase = (
-        <button onClick={onClick} className={css({ '&&': styles.itemBase })}>
+        <button
+          id={globalID}
+          onClick={onClick}
+          className={css({ '&&': styles.itemBase })}
+        >
           {this.renderIconAndBadge(styles.badgeWrapper)}
         </button>
       );
     } else {
       itemBase = (
-        <span className={css({ '&&': styles.itemBase })}>
+        <span id={globalID} className={css({ '&&': styles.itemBase })}>
           {this.renderIconAndBadge(styles.badgeWrapper)}
         </span>
       );

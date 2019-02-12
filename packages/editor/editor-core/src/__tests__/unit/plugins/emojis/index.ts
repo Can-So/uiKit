@@ -16,10 +16,13 @@ import {
   code,
   createEvent,
   spyOnReturnValue,
+  insertText,
 } from '@atlaskit/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { emojiPluginKey } from '../../../../plugins/emoji/pm-plugins/main';
 import emojiPlugin from '../../../../plugins/emoji';
 import listPlugin from '../../../../plugins/lists';
+import quickInsertPlugin from '../../../../plugins/quick-insert';
 
 const { testData } = emojiData;
 
@@ -44,13 +47,19 @@ describe('emojis', () => {
 
   const event = createEvent('event');
   const providerFactory = ProviderFactory.create({ emojiProvider });
-  const editor = (doc: any) =>
-    createEditor({
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+
+  const editor = (doc: any, extraPlugins: any[] = []) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
-      editorPlugins: [emojiPlugin, listPlugin],
+      editorProps: { allowAnalyticsGASV3: true },
+      editorPlugins: [emojiPlugin, listPlugin, ...extraPlugins],
       providerFactory,
       pluginKey: emojiPluginKey,
+      createAnalyticsEvent,
     });
+  };
 
   const forceUpdate = (editorView: any) => {
     editorView.updateState(editorView.state);
@@ -433,6 +442,22 @@ describe('emojis', () => {
         const { plugin, pluginState, editorView } = editor(doc(p('te{<>}xt')));
         plugin.props.handleDOMEvents!.blur(editorView, event);
         expect(pluginState.focused).toEqual(false);
+      });
+    });
+  });
+
+  describe('quick insert', () => {
+    it('should trigger emoji typeahead invoked analytics event', async () => {
+      const { editorView, sel } = editor(doc(p('{<>}')), [quickInsertPlugin]);
+      insertText(editorView, '/Emoji', sel);
+      sendKeyToPm(editorView, 'Enter');
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'invoked',
+        actionSubject: 'typeAhead',
+        actionSubjectId: 'emojiTypeAhead',
+        attributes: { inputMethod: 'quickInsert' },
+        eventType: 'ui',
       });
     });
   });

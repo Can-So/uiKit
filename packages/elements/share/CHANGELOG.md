@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.7
+- [patch] [8e0ea83f02](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e0ea83f02):
+
+  - Added ShareDialogContainer component
+
 ## 0.1.6
 - [patch] [1d284d2437](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d284d2437):
 

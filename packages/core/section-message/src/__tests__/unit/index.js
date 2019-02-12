@@ -57,13 +57,38 @@ describe('SectionMessage', () => {
     const title = wrapper.find(Title);
     expect(title.length).toBe(1);
   });
-  it('should render actions beneath the section message', () => {
-    const Aye = { text: 'aye' };
-    const Bee = { text: 'bee' };
-    const wrapper = shallow(
-      <SectionMessage actions={[Aye, Bee]}>boo</SectionMessage>,
-    );
-    expect(wrapper.find(Action).length).toBe(2);
+  describe('actions', () => {
+    it('should render beneath the section message', () => {
+      const Aye = { text: 'aye' };
+      const Bee = { text: 'bee' };
+      const wrapper = shallow(
+        <SectionMessage actions={[Aye, Bee]}>boo</SectionMessage>,
+      );
+
+      expect(wrapper.find(Action).length).toBe(2);
+    });
+
+    it('should use text as key by default', () => {
+      const Aye = { text: 'aye' };
+      const action = shallow(
+        <SectionMessage actions={[Aye]}>boo</SectionMessage>,
+      )
+        .find(Action)
+        .at(0);
+
+      expect(action.key()).toBe('aye');
+    });
+
+    it('should use the key provided', () => {
+      const Aye = { text: 'aye', key: 'ayeKey' };
+      const action = shallow(
+        <SectionMessage actions={[Aye]}>boo</SectionMessage>,
+      )
+        .find(Action)
+        .at(0);
+
+      expect(action.key()).toBe('ayeKey');
+    });
   });
   it('should render a link button when passed a link', () => {
     const wrapper = shallow(

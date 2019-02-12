@@ -20,7 +20,7 @@ const submitButton = (
 
 export default function Example() {
   return (
-    <>
+    <React.Fragment>
       <h1>See code</h1>
       <IntlProvider locale="en">
         <FocusedTaskCloseAccount
@@ -38,6 +38,6 @@ export default function Example() {
           learnMoreLink={''}
         />
       </IntlProvider>
-    </>
+    </React.Fragment>
   );
 }

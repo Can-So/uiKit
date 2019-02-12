@@ -1,14 +1,14 @@
-import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenType, TokenErrCallback } from './';
+import { Node as PMNode } from 'prosemirror-model';
+import { Token, TokenType, TokenParser } from './';
 import { commonFormatter } from './common-formatter';
 import { parseString } from '../text';
 
-export function monospace(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const monospace: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   /**
    * The following token types will be ignored in parsing
    * the content
@@ -18,7 +18,7 @@ export function monospace(
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
   ];
-  /** Add code mark to each text */
+  // Add code mark to each text
   const contentDecorator = (n: PMNode) => {
     const mark = schema.marks.code.create();
     // We don't want to mix `code` mark with others
@@ -29,12 +29,12 @@ export function monospace(
   };
 
   const rawContentProcessor = (raw: string, length: number): Token => {
-    const content = parseString(
-      raw,
-      schema,
+    const content = parseString({
       ignoreTokenTypes,
-      tokenErrCallback,
-    );
+      schema,
+      context,
+      input: raw,
+    });
     const decoratedContent = content.map(contentDecorator);
 
     return {
@@ -47,6 +47,7 @@ export function monospace(
   return commonFormatter(input, position, schema, {
     opening: '{{',
     closing: '}}',
+    context,
     rawContentProcessor,
   });
-}
+};

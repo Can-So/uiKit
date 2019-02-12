@@ -1,1 +1,0 @@
-- run prettier with bablyon as default parser; removes a bunch of warnings

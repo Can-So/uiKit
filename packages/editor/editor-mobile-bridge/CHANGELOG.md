@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.7.11
+- [patch] [7ad6037cca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ad6037cca):
+
+  - ED-6048: fixed bullet point not showing up until text inserted
+
 ## 6.7.10
 - [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
 

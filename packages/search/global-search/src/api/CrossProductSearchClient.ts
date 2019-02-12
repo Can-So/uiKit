@@ -32,6 +32,10 @@ export interface CrossProductSearchResponse {
   scopes: ScopeResult[];
 }
 
+export interface CrossProductExperimentResponse {
+  scopes: Experiment[];
+}
+
 export type SearchItem = ConfluenceItem | JiraItem | PersonItem;
 
 export interface ABTest {
@@ -45,6 +49,12 @@ export interface ScopeResult {
   error?: string;
   results: SearchItem[];
   abTest?: ABTest; // in case of an error abTest will be undefined
+}
+
+export interface Experiment {
+  id: Scope;
+  error?: string;
+  abTest?: ABTest;
 }
 
 export interface CrossProductSearchClient {
@@ -86,33 +96,7 @@ export default class CrossProductSearchClientImpl
     scopes: Scope[],
     resultLimit?: Number,
   ): Promise<CrossProductSearchResults> {
-    const response = await this.makeRequest(
-      query.trim(),
-      scopes,
-      searchSession,
-      resultLimit,
-    );
-    return this.parseResponse(response, searchSession.sessionId);
-  }
-
-  public async getAbTestData(
-    scope: Scope,
-    searchSession: SearchSession,
-  ): Promise<ABTest | undefined> {
-    const response = await this.makeRequest('', [scope], searchSession);
-    const parsedResponse = this.parseResponse(
-      response,
-      searchSession.sessionId,
-    );
-    return Promise.resolve(parsedResponse.abTest);
-  }
-
-  private async makeRequest(
-    query: string,
-    scopes: Scope[],
-    searchSession: SearchSession,
-    resultLimit?: Number,
-  ): Promise<CrossProductSearchResponse> {
+    const path = 'quicksearch/v1';
     const body = {
       query: query,
       cloudId: this.cloudId,
@@ -121,8 +105,42 @@ export default class CrossProductSearchClientImpl
       searchSession,
     };
 
+    const response = await this.makeRequest<CrossProductSearchResponse>(
+      path,
+      body,
+    );
+    return this.parseResponse(response, searchSession.sessionId);
+  }
+
+  public async getAbTestData(
+    scope: Scope,
+    searchSession: SearchSession,
+  ): Promise<ABTest | undefined> {
+    const path = 'experiment/v1';
+    const body = {
+      cloudId: this.cloudId,
+      scopes: [scope],
+    };
+
+    const response = await this.makeRequest<CrossProductExperimentResponse>(
+      path,
+      body,
+    );
+
+    const scopeWithAbTest: Experiment | undefined = response.scopes.find(
+      s => s.id === scope,
+    );
+
+    if (scopeWithAbTest) {
+      return Promise.resolve(scopeWithAbTest.abTest);
+    }
+
+    return Promise.resolve(undefined);
+  }
+
+  private async makeRequest<T>(path: string, body: object): Promise<T> {
     const options: RequestServiceOptions = {
-      path: 'quicksearch/v1',
+      path,
       requestInit: {
         method: 'POST',
         headers: {
@@ -132,10 +150,7 @@ export default class CrossProductSearchClientImpl
       },
     };
 
-    return utils.requestService<CrossProductSearchResponse>(
-      this.serviceConfig,
-      options,
-    );
+    return utils.requestService<T>(this.serviceConfig, options);
   }
 
   /**

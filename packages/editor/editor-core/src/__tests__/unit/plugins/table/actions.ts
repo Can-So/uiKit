@@ -347,13 +347,16 @@ describe('table plugin: actions', () => {
       );
       const { state, dispatch } = editorView;
       selectColumn(0)(state, dispatch);
-      setMultipleCellAttrs({ colspan: 2 }, 0)(editorView.state, dispatch);
+      setMultipleCellAttrs({ background: 'purple' }, 0)(
+        editorView.state,
+        dispatch,
+      );
       expect(editorView.state.doc).toEqualDocument(
         doc(
           p('text'),
           table()(
-            tr(td({ colspan: 2 })(p('c1')), td()(p('c2'))),
-            tr(td({ colspan: 2 })(p('c3')), td()(p('c4'))),
+            tr(td({ background: 'purple' })(p('c1')), td()(p('c2'))),
+            tr(td({ background: 'purple' })(p('c3')), td()(p('c4'))),
           ),
         ),
       );

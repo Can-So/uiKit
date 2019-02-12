@@ -9,6 +9,7 @@ import { HyperlinkState, stateKey } from '../pm-plugins/main';
 import { showLinkToolbar, hideLinkToolbar } from '../commands';
 import { queueCards } from '../../card/pm-plugins/actions';
 import { Command } from '../../../types';
+import { INPUT_METHOD } from '../../analytics';
 
 export function createKeymapPlugin(
   schema: Schema,
@@ -21,7 +22,7 @@ export function createKeymapPlugin(
       keymaps.addLink.common!,
       trackAndInvoke(
         'atlassian.editor.format.hyperlink.keyboard',
-        showLinkToolbar(),
+        showLinkToolbar(INPUT_METHOD.SHORTCUT),
       ),
       list,
     );

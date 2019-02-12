@@ -23,7 +23,7 @@ describe.skip('Snapshot Test: Media', () => {
         it(`should correctly render ${size.width}`, async () => {
           await page.setViewport(size);
           await page.waitFor(100);
-          await snapshot(page, '.ak-renderer-document');
+          await snapshot(page, undefined, '.ak-renderer-document');
         });
       });
     });

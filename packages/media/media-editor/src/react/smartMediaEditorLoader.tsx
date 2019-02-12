@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { ModalSpinner } from '@atlaskit/media-ui';
+import { colors } from '@atlaskit/theme';
 import SmartMediaEditorType, {
   SmartMediaEditorProps,
 } from './smartMediaEditor';
@@ -21,19 +22,20 @@ export default class AsyncSmartMediaEditor extends React.PureComponent<
     SmartMediaEditor: AsyncSmartMediaEditor.SmartMediaEditor,
   };
 
-  componentWillMount() {
+  async componentWillMount() {
     if (!this.state.SmartMediaEditor) {
-      import(/* webpackChunkName:"@atlaskit-internal_smart-media-editor" */
-      './smartMediaEditor').then(module => {
-        AsyncSmartMediaEditor.SmartMediaEditor = module.default;
-        this.setState({ SmartMediaEditor: module.default });
-      });
+      const module = await import(/* webpackChunkName:"@atlaskit-internal_smart-media-editor" */
+      './smartMediaEditor');
+      AsyncSmartMediaEditor.SmartMediaEditor = module.default;
+      this.setState({ SmartMediaEditor: module.default });
     }
   }
 
   render() {
     if (!this.state.SmartMediaEditor) {
-      return <ModalSpinner mode="dark" />;
+      return (
+        <ModalSpinner blankedColor={colors.N700A} invertSpinnerColor={true} />
+      );
     }
 
     return <this.state.SmartMediaEditor {...this.props} />;

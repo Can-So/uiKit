@@ -80,7 +80,10 @@ export default function createEditorFactoryForTests<T = any>() {
   } => {
     let portalProviderAPI;
     const plugins = editorPlugins
-      ? [...getDefaultPluginsList(editorProps), ...editorPlugins]
+      ? [
+          ...getDefaultPluginsList(editorProps, createAnalyticsEvent),
+          ...editorPlugins,
+        ]
       : undefined;
     place = document.body.appendChild(document.createElement('div'));
 
@@ -94,6 +97,7 @@ export default function createEditorFactoryForTests<T = any>() {
                 <TestReactEditorView
                   editorProps={editorProps}
                   createAnalyticsEvent={createAnalyticsEvent}
+                  allowAnalyticsGASV3={editorProps.allowAnalyticsGASV3}
                   portalProviderAPI={portalProvider}
                   providerFactory={
                     providerFactory ? providerFactory : new ProviderFactory()

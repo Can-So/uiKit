@@ -1,5 +1,10 @@
 # @atlaskit/checkbox
 
+## 5.0.14
+- [patch] [c0ad531a70](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c0ad531a70):
+
+  - Added test to make use props are passed down to hidden input
+
 ## 5.0.13
 - [patch] [3ae465b6f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ae465b6f0):
 

@@ -53,6 +53,10 @@ export type UserPickerProps = {
   clearValueLabel?: string;
   /** Whether the menu should use a portal, and where it should attach. */
   menuPortalTarget?: HTMLElement;
+  /** Whether the user is allowed to enter emails as a value. */
+  allowEmail?: boolean;
+  /** Email option label */
+  emailLabel?: string;
 };
 
 export type UserPickerState = {
@@ -84,7 +88,7 @@ export interface TeamHighlight {
 export interface OptionData {
   id: string;
   name: string;
-  type?: 'user' | 'team';
+  type?: 'user' | 'team' | 'email';
   fixed?: boolean;
 }
 
@@ -110,6 +114,11 @@ export interface Team extends OptionData {
 }
 
 export type Value = OptionData | OptionData[] | null | undefined;
+export const EmailType = 'email';
+
+export interface Email extends OptionData {
+  type: 'email';
+}
 
 export type ActionTypes =
   | 'select-option'

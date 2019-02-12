@@ -157,6 +157,7 @@ export class ExampleEditor extends React.Component<
             <Editor
               appearance="full-page"
               analyticsHandler={analyticsHandler}
+              allowAnalyticsGASV3={true}
               quickInsert={{ provider: Promise.resolve(quickInsertProvider) }}
               allowCodeBlocks={{ enableKeybindingsForIDE: true }}
               allowLists={true}

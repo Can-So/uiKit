@@ -58,6 +58,10 @@ const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 describe('JSONTransformer:', () => {
   const createEditor = createEditorFactory();
 
+  beforeAll(() => {
+    global['fetch'] = () => Promise.resolve();
+  });
+
   describe('encode', () => {
     const editor = (doc: any) =>
       createEditor({
@@ -362,7 +366,15 @@ describe('JSONTransformer:', () => {
     ].forEach(({ nodeName, schemaBuilder }) => {
       it(`should strip unused optional attrs from ${nodeName} node`, () => {
         const { editorView } = editor(
-          doc(table()(tr(schemaBuilder({ colspan: 2 })(p('foo'))))),
+          doc(
+            table()(
+              tr(schemaBuilder({ colspan: 2 })(p('a1'))),
+              tr(
+                schemaBuilder({ colspan: 1 })(p('b1')),
+                schemaBuilder({ colspan: 1 })(p('b2')),
+              ),
+            ),
+          ),
         );
 
         expect(toJSON(editorView.state.doc)).toEqual({
@@ -390,7 +402,42 @@ describe('JSONTransformer:', () => {
                           content: [
                             {
                               type: 'text',
-                              text: 'foo',
+                              text: 'a1',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'tableRow',
+                  content: [
+                    {
+                      type: nodeName,
+                      attrs: {},
+                      content: [
+                        {
+                          type: 'paragraph',
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'b1',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: nodeName,
+                      attrs: {},
+                      content: [
+                        {
+                          type: 'paragraph',
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'b2',
                             },
                           ],
                         },
@@ -405,7 +452,7 @@ describe('JSONTransformer:', () => {
       });
       [[0], [200], [100, 200], [100, 0]].forEach(colwidth => {
         describe(`when colwidth=${JSON.stringify(colwidth)}`, () => {
-          it(`should preserve colwidth attributes as an array of widths`, () => {
+          it(`should preserve valid colwidth attributes as an array of widths`, () => {
             const { editorView } = editor(
               doc(table()(tr(schemaBuilder({ colwidth })(p('foo'))))),
             );
@@ -426,7 +473,7 @@ describe('JSONTransformer:', () => {
                         {
                           type: nodeName,
                           attrs: {
-                            colwidth,
+                            colwidth: colwidth.slice(0, 1),
                           },
                           content: [
                             {

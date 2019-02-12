@@ -1,9 +1,11 @@
-import { shallow } from 'enzyme';
+import Tag from '@atlaskit/tag';
+import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { AddOptionAvatar } from '../../../components/AddOptionAvatar';
 import { MultiValue, scrollToValue } from '../../../components/MultiValue';
 import { SizeableAvatar } from '../../../components/SizeableAvatar';
-import { User } from '../../../types';
+import { Email, EmailType, User } from '../../../types';
 import { renderProp } from '../_testUtils';
 
 const mockHtmlElement = (rect: Partial<DOMRect>): HTMLDivElement =>
@@ -25,7 +27,21 @@ describe('MultiValue', () => {
   const onClick = jest.fn();
   const shallowMultiValue = (
     { components, ...props }: any = { components: {} },
-  ) => shallow(<MultiValue data={data} removeProps={{ onClick }} {...props} />);
+  ) =>
+    shallow(
+      <MultiValue
+        data={data}
+        removeProps={{ onClick }}
+        selectProps={{ isDisabled: false }}
+        {...props}
+      />,
+    );
+  const renderTag = (component: ShallowWrapper) =>
+    renderProp(
+      component.find(FormattedMessage as React.ComponentClass<any>),
+      'children',
+      'remove',
+    ).find(Tag);
 
   afterEach(() => {
     onClick.mockClear();
@@ -33,11 +49,8 @@ describe('MultiValue', () => {
 
   it('should render Tag', () => {
     const component = shallowMultiValue();
-    const tag = renderProp(
-      component.find(FormattedMessage as React.ComponentClass<any>),
-      'children',
-      'remove',
-    );
+    const tag = renderTag(component);
+    expect(tag).toHaveLength(1);
     expect(tag.props()).toMatchObject({
       appearance: 'rounded',
       text: 'Jace Beleren',
@@ -54,11 +67,7 @@ describe('MultiValue', () => {
 
   it('should use blueLight color when focused', () => {
     const component = shallowMultiValue({ isFocused: true });
-    const tag = renderProp(
-      component.find(FormattedMessage as React.ComponentClass<any>),
-      'children',
-      'remove',
-    );
+    const tag = renderTag(component);
     expect(tag.props()).toMatchObject({
       appearance: 'rounded',
       text: 'Jace Beleren',
@@ -76,11 +85,7 @@ describe('MultiValue', () => {
 
   it('should call onClick onAfterRemoveAction', () => {
     const component = shallowMultiValue();
-    const tag = renderProp(
-      component.find(FormattedMessage as React.ComponentClass<any>),
-      'children',
-      'remove',
-    );
+    const tag = renderTag(component);
     tag.simulate('afterRemoveAction');
     expect(onClick).toHaveBeenCalledTimes(1);
   });
@@ -89,11 +94,15 @@ describe('MultiValue', () => {
     const component = shallowMultiValue({
       data: { ...data, data: { ...data.data, fixed: true } },
     });
-    const tag = renderProp(
-      component.find(FormattedMessage as React.ComponentClass<any>),
-      'children',
-      'remove',
-    );
+    const tag = renderTag(component);
+    expect(tag.prop('removeButtonText')).toBeUndefined();
+  });
+
+  it('should not render remove button is picker is disabled', () => {
+    const component = shallowMultiValue({
+      selectProps: { isDisabled: true },
+    });
+    const tag = renderTag(component);
     expect(tag.prop('removeButtonText')).toBeUndefined();
   });
 
@@ -166,6 +175,30 @@ describe('MultiValue', () => {
           instance.shouldComponentUpdate &&
           instance.shouldComponentUpdate(nextProps, {}, {}),
       ).toEqual(shouldUpdate);
+    });
+  });
+
+  describe('Email', () => {
+    const email: Email = {
+      type: EmailType,
+      id: 'test@test.com',
+      name: 'test@test.com',
+    };
+
+    it('should render AddOptionAvatar for email data', () => {
+      const component = shallowMultiValue({
+        data: { data: email, label: email.name },
+        innerProps: {},
+        selectProps: {
+          emailLabel: 'invite',
+        },
+      });
+
+      const tag = renderTag(component);
+      expect(tag.props()).toMatchObject({
+        elemBefore: <AddOptionAvatar size="small" label="invite" />,
+        text: 'test@test.com',
+      });
     });
   });
 });

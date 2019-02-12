@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.15.1
+- [patch] [b21df8f941](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b21df8f941):
+
+  - Support new experiment api
+
 ## 5.15.0
 - [minor] [a6a76aa7cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6a76aa7cd):
 

@@ -15,6 +15,7 @@ const AppSwitcherComponent = props => (
   <GlobalItem
     {...props}
     icon={AppSwitcherIcon}
+    id="test"
     onClick={() => console.log('AppSwitcher clicked')}
   />
 );

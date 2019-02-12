@@ -2,11 +2,14 @@ import { colors } from '@atlaskit/theme';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import {
+  AvatarItemOption,
+  TextWrapper,
+} from '../../../components/AvatarItemOption';
 import { HighlightText } from '../../../components/HighlightText';
+import { SizeableAvatar } from '../../../components/SizeableAvatar';
 import { TeamOption, TeamOptionProps } from '../../../components/TeamOption';
 import { Team } from '../../../types';
-import { CommonOption } from '../../../components/CommonOption';
-import { OptionTextWrapper } from '../../../components/OptionTextWrapper';
 
 describe('Team Option', () => {
   const basicTeam: Team = {
@@ -31,18 +34,23 @@ describe('Team Option', () => {
       {},
       buildTeam({ memberCount: 49, includesYou: true }),
     );
-    const commonOption = component.find(CommonOption);
+    const avatarOptionProps = component.find(AvatarItemOption);
 
-    expect(commonOption.props()).toMatchObject({
-      name: 'Team-1',
-      avatarUrl: 'https://avatars.atlassian.com/team-1.png',
+    expect(avatarOptionProps.props()).toMatchObject({
+      avatar: (
+        <SizeableAvatar
+          appearance="big"
+          src="https://avatars.atlassian.com/team-1.png"
+          name="Team-1"
+        />
+      ),
       primaryText: [
-        <OptionTextWrapper key="name" color={colors.N800}>
+        <TextWrapper key="name" color={colors.N800}>
           <HighlightText>Team-1</HighlightText>
-        </OptionTextWrapper>,
+        </TextWrapper>,
       ],
-      byline: (
-        <OptionTextWrapper color={colors.N200}>
+      secondaryText: (
+        <TextWrapper color={colors.N200}>
           <FormattedMessage
             defaultMessage="{count} {count, plural, one {member} other {members}}{includes, select, true {, including you} other {}}"
             description="Number of members in the team and whether it includes the current user"
@@ -52,7 +60,7 @@ describe('Team Option', () => {
               includes: true,
             }}
           />
-        </OptionTextWrapper>
+        </TextWrapper>
       ),
     });
   });
@@ -62,18 +70,23 @@ describe('Team Option', () => {
       {},
       buildTeam({ memberCount: 51, includesYou: true }),
     );
-    const commonOption = component.find(CommonOption);
+    const avatarOptionProps = component.find(AvatarItemOption);
 
-    expect(commonOption.props()).toMatchObject({
-      name: 'Team-1',
-      avatarUrl: 'https://avatars.atlassian.com/team-1.png',
+    expect(avatarOptionProps.props()).toMatchObject({
+      avatar: (
+        <SizeableAvatar
+          appearance="big"
+          src="https://avatars.atlassian.com/team-1.png"
+          name="Team-1"
+        />
+      ),
       primaryText: [
-        <OptionTextWrapper key="name" color={colors.N800}>
+        <TextWrapper key="name" color={colors.N800}>
           <HighlightText>Team-1</HighlightText>
-        </OptionTextWrapper>,
+        </TextWrapper>,
       ],
-      byline: (
-        <OptionTextWrapper color={colors.N200}>
+      secondaryText: (
+        <TextWrapper color={colors.N200}>
           <FormattedMessage
             defaultMessage="50+ members{includes, select, true {, including you} other {}}"
             description="Number of members in a team exceeds 50 and whether it includes the current user"
@@ -83,7 +96,7 @@ describe('Team Option', () => {
               includes: true,
             }}
           />
-        </OptionTextWrapper>
+        </TextWrapper>
       ),
     });
   });
@@ -93,18 +106,23 @@ describe('Team Option', () => {
       {},
       buildTeam({ memberCount: 49, includesYou: false }),
     );
-    const commonOption = component.find(CommonOption);
+    const avatarOptionProps = component.find(AvatarItemOption);
 
-    expect(commonOption.props()).toMatchObject({
-      name: 'Team-1',
-      avatarUrl: 'https://avatars.atlassian.com/team-1.png',
+    expect(avatarOptionProps.props()).toMatchObject({
+      avatar: (
+        <SizeableAvatar
+          appearance="big"
+          src="https://avatars.atlassian.com/team-1.png"
+          name="Team-1"
+        />
+      ),
       primaryText: [
-        <OptionTextWrapper key="name" color={colors.N800}>
+        <TextWrapper key="name" color={colors.N800}>
           <HighlightText>Team-1</HighlightText>
-        </OptionTextWrapper>,
+        </TextWrapper>,
       ],
-      byline: (
-        <OptionTextWrapper color={colors.N200}>
+      secondaryText: (
+        <TextWrapper color={colors.N200}>
           <FormattedMessage
             defaultMessage="{count} {count, plural, one {member} other {members}}{includes, select, true {, including you} other {}}"
             description="Number of members in the team and whether it includes the current user"
@@ -114,7 +132,7 @@ describe('Team Option', () => {
               includes: false,
             }}
           />
-        </OptionTextWrapper>
+        </TextWrapper>
       ),
     });
   });
@@ -124,18 +142,23 @@ describe('Team Option', () => {
       { isSelected: true },
       buildTeam({ memberCount: 49, includesYou: true }),
     );
-    const commonOption = component.find(CommonOption);
+    const avatarOptionProps = component.find(AvatarItemOption);
 
-    expect(commonOption.props()).toMatchObject({
-      name: 'Team-1',
-      avatarUrl: 'https://avatars.atlassian.com/team-1.png',
+    expect(avatarOptionProps.props()).toMatchObject({
+      avatar: (
+        <SizeableAvatar
+          appearance="big"
+          src="https://avatars.atlassian.com/team-1.png"
+          name="Team-1"
+        />
+      ),
       primaryText: [
-        <OptionTextWrapper key="name" color={colors.N0}>
+        <TextWrapper key="name" color={colors.N0}>
           <HighlightText>Team-1</HighlightText>
-        </OptionTextWrapper>,
+        </TextWrapper>,
       ],
-      byline: (
-        <OptionTextWrapper color={colors.N50}>
+      secondaryText: (
+        <TextWrapper color={colors.N50}>
           <FormattedMessage
             defaultMessage="{count} {count, plural, one {member} other {members}}{includes, select, true {, including you} other {}}"
             description="Number of members in the team and whether it includes the current user"
@@ -145,7 +168,7 @@ describe('Team Option', () => {
               includes: true,
             }}
           />
-        </OptionTextWrapper>
+        </TextWrapper>
       ),
     });
   });
@@ -155,17 +178,22 @@ describe('Team Option', () => {
       { isSelected: true },
       buildTeam({ includesYou: true }),
     );
-    const commonOption = component.find(CommonOption);
+    const avatarOptionProps = component.find(AvatarItemOption);
 
-    expect(commonOption.props()).toMatchObject({
-      name: 'Team-1',
-      avatarUrl: 'https://avatars.atlassian.com/team-1.png',
+    expect(avatarOptionProps.props()).toMatchObject({
+      avatar: (
+        <SizeableAvatar
+          appearance="big"
+          src="https://avatars.atlassian.com/team-1.png"
+          name="Team-1"
+        />
+      ),
       primaryText: [
-        <OptionTextWrapper key="name" color={colors.N0}>
+        <TextWrapper key="name" color={colors.N0}>
           <HighlightText>Team-1</HighlightText>
-        </OptionTextWrapper>,
+        </TextWrapper>,
       ],
-      byline: undefined,
+      secondaryText: undefined,
     });
   });
 
@@ -174,18 +202,23 @@ describe('Team Option', () => {
       { isSelected: true },
       buildTeam({ memberCount: 48 }),
     );
-    const commonOption = component.find(CommonOption);
+    const avatarOptionProps = component.find(AvatarItemOption);
 
-    expect(commonOption.props()).toMatchObject({
-      name: 'Team-1',
-      avatarUrl: 'https://avatars.atlassian.com/team-1.png',
+    expect(avatarOptionProps.props()).toMatchObject({
+      avatar: (
+        <SizeableAvatar
+          appearance="big"
+          src="https://avatars.atlassian.com/team-1.png"
+          name="Team-1"
+        />
+      ),
       primaryText: [
-        <OptionTextWrapper key="name" color={colors.N0}>
+        <TextWrapper key="name" color={colors.N0}>
           <HighlightText>Team-1</HighlightText>
-        </OptionTextWrapper>,
+        </TextWrapper>,
       ],
-      byline: (
-        <OptionTextWrapper color={colors.N50}>
+      secondaryText: (
+        <TextWrapper color={colors.N50}>
           <FormattedMessage
             defaultMessage="{count} {count, plural, one {member} other {members}}{includes, select, true {, including you} other {}}"
             description="Number of members in the team and whether it includes the current user"
@@ -195,7 +228,7 @@ describe('Team Option', () => {
               includes: undefined,
             }}
           />
-        </OptionTextWrapper>
+        </TextWrapper>
       ),
     });
   });

@@ -1,13 +1,14 @@
-import { Schema } from 'prosemirror-model';
 import getMediaSingleNodeView from '../nodes/mediaSingle';
-import { Token } from './';
+import { Token, TokenParser } from './';
 import { parseAttrs } from '../utils/attrs';
 import { commonFormatter } from './common-formatter';
 
-export function media(input: string, position: number, schema: Schema): Token {
+export const media: TokenParser = ({ input, position, schema, context }) => {
   const rawContentProcessor = (raw: string, length: number): Token => {
-    // !image.gif|align=right, vspace=4|ignore-this!
-    // If it splits into more than 2 items, we ignore the rest
+    /**
+     * !image.gif|align=right, vspace=4|ignore-this!
+     * If it splits into more than 2 items, we ignore the rest
+     */
     const [rawContent, rawAttrs = ''] = raw.split('|');
 
     const node = getMediaSingleNodeView(
@@ -26,6 +27,7 @@ export function media(input: string, position: number, schema: Schema): Token {
   return commonFormatter(input, position, schema, {
     opening: '!',
     closing: '!',
+    context,
     rawContentProcessor,
   });
-}
+};

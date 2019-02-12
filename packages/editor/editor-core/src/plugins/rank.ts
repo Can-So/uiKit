@@ -4,6 +4,7 @@ export default {
     'inlineCursorTargetPlugin',
     'focusHandlerPlugin',
     'submitEditor',
+    'newlinePreserveMarksPlugin',
     'imageUpload',
     'imageUploadInputRule',
     'paste',
@@ -84,6 +85,7 @@ export default {
     'maxContentSize',
     'multilineContent',
     'grid',
+    'analytics',
   ],
   nodes: [
     'doc',

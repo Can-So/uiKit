@@ -1,48 +1,10 @@
-import { ActivityResource, ActivityItem } from '@atlaskit/activity';
-import { mount, ReactWrapper } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import RecentSearch from '../../../../../../plugins/hyperlink/ui/RecentSearch';
+import RecentSearch from '../../../../../../plugins/hyperlink/ui/RecentSearch/LinkAddToolbar';
 import RecentItem from '../../../../../../plugins/hyperlink/ui/RecentSearch/RecentItem';
+import { MockActivityResource } from '../../utils';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 
-/**
- * Provides sample data for this suite of tests.
- */
-class MockActivityResource extends ActivityResource {
-  constructor() {
-    super('', '');
-  }
-
-  getRecentItems(): Promise<ActivityItem[]> {
-    return Promise.resolve([
-      {
-        objectId: 'recent1',
-        name: 'recent item 1',
-        container: 'container 1',
-        iconUrl:
-          'https://wac-cdn.atlassian.com/assets/img/favicons/atlassian/favicon.png',
-        url: 'recent1-url.com',
-      },
-      {
-        objectId: 'recent2',
-        name: 'recent item 2',
-        container: 'container 2',
-        iconUrl:
-          'https://wac-cdn.atlassian.com/assets/img/favicons/atlassian/favicon.png',
-        url: 'recent2-url.com',
-      },
-      {
-        objectId: 'recent3',
-        name: 'recent item 3',
-        container: 'container 3',
-        iconUrl:
-          'https://wac-cdn.atlassian.com/assets/img/favicons/atlassian/favicon.png',
-        url: 'recent3-url.com',
-      },
-    ]);
-  }
-}
-
-const activityProvider = Promise.resolve(new MockActivityResource());
 const timeout = () => new Promise(resolve => window.setTimeout(resolve, 1));
 
 function pressDownArrowInputField(recentSearch: ReactWrapper<any, any>) {
@@ -55,12 +17,8 @@ function pressReturnInputField(recentSearch: ReactWrapper<any, any>) {
 
 describe('@atlaskit/editor-core/ui/RecentSearch', () => {
   it('should render a list of recent activity items', async () => {
-    const wrapper = mount(
-      <RecentSearch
-        activityProvider={activityProvider}
-        target={document.body}
-        placeholder=""
-      />,
+    const wrapper = mountWithIntl(
+      <RecentSearch provider={Promise.resolve(new MockActivityResource())} />,
     );
     await timeout();
     wrapper.update();
@@ -70,12 +28,8 @@ describe('@atlaskit/editor-core/ui/RecentSearch', () => {
   });
 
   it('should filter recent activity items by input text', async () => {
-    const wrapper = mount(
-      <RecentSearch
-        activityProvider={activityProvider}
-        target={document.body}
-        placeholder=""
-      />,
+    const wrapper = mountWithIntl(
+      <RecentSearch provider={Promise.resolve(new MockActivityResource())} />,
     );
     await timeout();
     wrapper.update();
@@ -96,12 +50,10 @@ describe('@atlaskit/editor-core/ui/RecentSearch', () => {
 
   it('should submit with selected activity item when clicked', async () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(
+    const wrapper = mountWithIntl(
       <RecentSearch
-        activityProvider={activityProvider}
-        target={document.body}
-        placeholder=""
         onSubmit={onSubmit}
+        provider={Promise.resolve(new MockActivityResource())}
       />,
     );
     await timeout();
@@ -119,12 +71,10 @@ describe('@atlaskit/editor-core/ui/RecentSearch', () => {
 
   it('should submit with selected activity item when enter is pressed', async () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(
+    const wrapper = mountWithIntl(
       <RecentSearch
-        activityProvider={activityProvider}
-        target={document.body}
-        placeholder=""
         onSubmit={onSubmit}
+        provider={Promise.resolve(new MockActivityResource())}
       />,
     );
     await timeout();
@@ -141,12 +91,10 @@ describe('@atlaskit/editor-core/ui/RecentSearch', () => {
 
   it('should submit with selected activity item when navigated to via keyboard and enter pressed', async () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(
+    const wrapper = mountWithIntl(
       <RecentSearch
-        activityProvider={activityProvider}
-        target={document.body}
-        placeholder=""
         onSubmit={onSubmit}
+        provider={Promise.resolve(new MockActivityResource())}
       />,
     );
     await timeout();
@@ -163,11 +111,9 @@ describe('@atlaskit/editor-core/ui/RecentSearch', () => {
 
   it('should submit arbitrary link', async () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(
+    const wrapper = mountWithIntl(
       <RecentSearch
-        activityProvider={activityProvider}
-        target={document.body}
-        placeholder=""
+        provider={Promise.resolve(new MockActivityResource())}
         onSubmit={onSubmit}
       />,
     );

@@ -71,6 +71,7 @@ class LayoutButton extends React.Component<Props & InjectedIntlProps, any> {
         mountTo={mountPoint}
         boundariesElement={boundariesElement}
         scrollableElement={scrollableElement}
+        forcePlacement={true}
       >
         <div
           className={classnames(ClassName.LAYOUT_BUTTON, {

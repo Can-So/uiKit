@@ -1,5 +1,15 @@
 # @atlaskit/adf-schema
 
+## 1.5.1
+- [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
+
+  - Bumps prosemirror-utils to 0.7.6
+
+## 1.5.0
+- [minor] [14fe1381ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14fe1381ba):
+
+  - ED-6118: ensure media dimensions are always integers, preventing invalid ADF
+
 ## 1.4.6
 - [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
 

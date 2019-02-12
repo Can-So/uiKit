@@ -5,7 +5,7 @@ import Page, { Grid, GridColumn } from '@atlaskit/page';
 import Form, { Field, FormHeader } from '@atlaskit/form';
 import Textfield from '@atlaskit/textfield';
 import Button from '@atlaskit/button';
-import { Provider, Card } from '../src';
+import { Provider, Card, Client } from '../src';
 import { CardAppearance } from '../src/Card/types';
 import { Checkbox } from '@atlaskit/checkbox';
 import { RadioGroup } from '@atlaskit/radio';
@@ -62,7 +62,14 @@ class Example extends React.Component<{}, ExampleState> {
 
   renderCard(url: string, isSelected: boolean, appearance: any) {
     if (url) {
-      return <Card isSelected={isSelected} appearance={appearance} url={url} />;
+      return (
+        <Card
+          isSelected={isSelected}
+          appearance={appearance}
+          url={url}
+          client={new Client(undefined, 'staging')}
+        />
+      );
     }
     return null;
   }

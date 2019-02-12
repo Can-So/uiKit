@@ -8,6 +8,14 @@ import { analyticsService } from '../../analytics';
 import WithPluginState from '../../ui/WithPluginState';
 import { HelpDialogLoader } from './ui/HelpDialogLoader';
 import { pluginKey as quickInsertPluginKey } from '../quick-insert';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+} from '../../plugins/analytics';
 
 export const pluginKey = new PluginKey('helpDialogPlugin');
 
@@ -91,6 +99,13 @@ const keymapPlugin = (schema: Schema): Plugin => {
       const isVisible = tr.getMeta(pluginKey);
       if (!isVisible) {
         analyticsService.trackEvent('atlassian.editor.help.keyboard');
+        tr = addAnalytics(tr, {
+          action: ACTION.CLICKED,
+          actionSubject: ACTION_SUBJECT.BUTTON,
+          actionSubjectId: ACTION_SUBJECT_ID.BUTTON_HELP,
+          attributes: { inputMethod: INPUT_METHOD.SHORTCUT },
+          eventType: EVENT_TYPE.UI,
+        });
         openHelpCommand(tr, dispatch);
       }
       return true;
