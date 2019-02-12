@@ -271,19 +271,13 @@ bolt start:editor # start the website only for packages under packages/editor
 # etc
 ```
 
-If you need even more fine grained control you might even like to set up an alias like this in your `.bashrc` or equivalent.
+If you need to start more than one packages, you can do:
 
 ```sh
-function atlastart() {
-    yarn run projector ./projector.js start --packages "$1"
-}
+bolt start button toggle tabs
 ```
 
-Now you can start the website with the specific packages you want rather than entire directories at a time
-
-```sh
-atlastart flag,tooltip
-```
+It will start button, toggle and tabs packages on your local server.
 
 ## Testing your code
 ### Running tests
