@@ -1,26 +1,26 @@
-import * as React from 'react';
-import memoizeOne from 'memoize-one';
 import { LoadOptions } from '@atlaskit/user-picker';
-import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
+import memoizeOne from 'memoize-one';
+import * as React from 'react';
+import { InvitationsCapabilitiesResource } from '../api/InvitationsCapabilitiesResource';
+import { ShareServiceClient } from '../clients/ShareServiceClient';
 import {
   Client,
   Content,
-  InvitationsCapabilitiesResponse,
   InvitationsCapabilitiesProvider,
+  InvitationsCapabilitiesResponse,
   MetaData,
   OriginTracing,
   OriginTracingFactory,
   ShareClient,
-  ShareResponse,
   ShareContentState,
+  ShareResponse,
 } from '../types';
-import { InvitationsCapabilitiesResource } from '../api/InvitationsCapabilitiesResource';
-import { ShareServiceClient } from '../clients/ShareServiceClient';
+import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 
 type Props = {
   client?: Client;
   cloudId: string;
-  formatCopyLink?: Function;
+  formatCopyLink: (origin: OriginTracing, link: string) => string;
   loadUserOptions: LoadOptions;
   originTracingFactory: OriginTracingFactory;
   productId: string;
@@ -40,10 +40,11 @@ type State = {
   shareToNewUsersOrigin: OriginTracing | null;
 };
 
-const memoizedFormatCopyLink: string = memoizeOne(
-  (origin: OriginTracing, link: string): string => {
-    return origin.addToUrl(link);
-  },
+const memoizedFormatCopyLink: (
+  origin: OriginTracing,
+  link: string,
+) => string = memoizeOne(
+  (origin: OriginTracing, link: string): string => origin.addToUrl(link),
 );
 
 /**
@@ -187,7 +188,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       shouldShowCommentField,
       shouldCloseOnEscapePress,
     } = this.props;
-    const copyLink = formatCopyLink!(this.state.copyLinkOrigin, shareLink);
+    const copyLink = formatCopyLink(this.state.copyLinkOrigin!, shareLink);
     return (
       <ShareDialogWithTrigger
         capabilities={this.state.capabilities}
