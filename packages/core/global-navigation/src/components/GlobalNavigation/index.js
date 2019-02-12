@@ -143,10 +143,6 @@ export default class GlobalNavigation extends Component<
     );
   }
 
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
-  }
-
   onCountUpdating = (
     param: { visibilityChangesSinceTimer: number } = {
       visibilityChangesSinceTimer: 0,
@@ -225,7 +221,6 @@ export default class GlobalNavigation extends Component<
 
     if (drawerName === 'notification' && this.isNotificationInbuilt) {
       this.onCountUpdated({ newCount: 0 });
-      console.log('countUpdated');
     }
 
     // Update the state only if it's a controlled drawer.
