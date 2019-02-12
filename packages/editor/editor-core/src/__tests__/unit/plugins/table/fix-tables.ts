@@ -1,5 +1,4 @@
 import createStub from 'raf-stub';
-import { mergeCells } from 'prosemirror-tables';
 import {
   doc,
   p,
@@ -143,24 +142,19 @@ describe('fix tables', () => {
     it('should decrement colspans', () => {
       const { editorView } = editor(
         doc(
+          table({})(tr(td({})(p('{<>}')), tdEmpty)),
           table({})(
             tr(td({ colspan: 3 })(p('')), tdEmpty, tdEmpty),
-            tr(
-              td({})(p('{<cell}')),
-              tdEmpty,
-              tdEmpty,
-              td({})(p('{cell>}')),
-              tdEmpty,
-            ),
+            tr(td({ colspan: 4 })(p('')), tdEmpty),
           ),
         ),
       );
-      mergeCells(editorView.state, editorView.dispatch);
 
       expect(editorView.state.doc).toEqualDocument(
         doc(
+          table({})(tr(tdEmpty, tdEmpty)),
           table({})(
-            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(td({})(p('')), tdEmpty, tdEmpty),
             tr(td({ colspan: 2 })(p('')), tdEmpty),
           ),
         ),
