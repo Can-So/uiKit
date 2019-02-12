@@ -139,6 +139,7 @@ export class CardViewBase extends React.Component<
   render() {
     const { onClick, onMouseEnter } = this;
     const { dimensions, appearance, mediaItemType } = this.props;
+    const shouldUsePointerCursor = mediaItemType === 'file';
     const isFileLikeIdentifier =
       mediaItemType === 'file' || mediaItemType === 'external-image';
     const wrapperDimensions = dimensions
@@ -156,6 +157,7 @@ export class CardViewBase extends React.Component<
 
     return (
       <Wrapper
+        shouldUsePointerCursor={shouldUsePointerCursor}
         mediaItemType={mediaItemType}
         breakpointSize={breakpointSize(this.width)}
         appearance={appearance}

@@ -10,6 +10,7 @@ import { getSelectedBorderStyle } from '../styles/getSelectedBorderStyle';
 
 export interface WrapperProps {
   mediaItemType: MediaItemType;
+  shouldUsePointerCursor?: boolean;
   dimensions?: CardDimensions;
   appearance?: CardAppearance;
   breakpointSize?: BreakpointSizeValue;
@@ -33,6 +34,7 @@ export const Wrapper: ComponentClass<
     dimensions,
     mediaItemType,
     breakpointSize = 'medium',
+    shouldUsePointerCursor,
   }: WrapperProps) => {
     // Links are responsive and omit passed dimensions, instead they use max and min dimensions
     // they don't apply breakpoints either
@@ -47,9 +49,12 @@ export const Wrapper: ComponentClass<
       ${breakpointStyles({ breakpointSize })}
       ${getWrapperHeight(dimensions)}
       ${getWrapperWidth(dimensions)}
+      cursor: ${shouldUsePointerCursor ? 'pointer' : 'default'};
     `;
   }};
 `;
+
+Wrapper.displayName = 'CardViewWrapper';
 
 export const InlinePlayerWrapper = styled.div`
   overflow: hidden;
