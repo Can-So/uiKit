@@ -1,0 +1,1 @@
+- Dont user pointer cursor for external images in Cards
