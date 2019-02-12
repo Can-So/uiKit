@@ -7,8 +7,7 @@ import { NotificationIndicator } from '@atlaskit/notification-indicator';
 import { NotificationLogClient } from '@atlaskit/notification-log-client';
 import { GlobalNav } from '@atlaskit/navigation-next';
 import Drawer from '@atlaskit/drawer';
-import { JiraSwitcher } from '@atlaskit/atlassian-switcher';
-import fetchMock from 'fetch-mock';
+import AtlassianSwitcher from '@atlaskit/atlassian-switcher';
 import {
   name as packageName,
   version as packageVersion,
@@ -346,13 +345,21 @@ export default class GlobalNavigation extends Component<
     };
   };
 
+  renderAtlassianSwitcherDrawerContents = () => {
+    const { product, cloudId, triggerXFlow } = this.props;
+    return (
+      <AtlassianSwitcher
+        product={product}
+        cloudId={cloudId}
+        triggerXFlow={triggerXFlow}
+      />
+    );
+  };
+
   getDrawerContents = drawerName => {
-    const { cloudId, triggerXFlow } = this.props;
     switch (drawerName) {
       case 'atlassianSwitcher':
-        return () => (
-          <JiraSwitcher cloudId={cloudId} triggerXFlow={triggerXFlow} />
-        );
+        return this.renderAtlassianSwitcherDrawerContents;
       case 'notification':
         if (this.isNotificationInbuilt) {
           return this.renderNotificationDrawerContents;

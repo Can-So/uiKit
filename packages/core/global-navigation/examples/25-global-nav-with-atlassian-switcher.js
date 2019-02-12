@@ -187,6 +187,7 @@ const mockEndpoints = () => {
 // TODO: make onClicks targets show up on page instead of console.logs
 const getGlobalNavigation = enableAtlassianSwitcher => () => (
   <GlobalNavigation
+    product="jira"
     cloudId="some-cloud-id"
     productIcon={EmojiAtlassianIcon}
     appSwitcherComponent={AppSwitcherComponent}
@@ -221,7 +222,7 @@ export default class extends Component {
           containerNavigation={() => null}
         >
           <div css={{ padding: '32px 40px' }}>
-            Using Centralised App Switcher:
+            Using Atlassian Switcher:
             <ToggleStateless
               isChecked={enableAtlassianSwitcher}
               onChange={this.toggleAppSwitcher}
