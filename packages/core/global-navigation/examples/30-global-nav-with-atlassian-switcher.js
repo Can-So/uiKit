@@ -11,6 +11,7 @@ import {
 import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
 import { ToggleStateless } from '@atlaskit/toggle';
 import fetchMock from 'fetch-mock';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 import GlobalNavigation from '../src';
 
@@ -130,7 +131,7 @@ const ORIGINAL_MOCK_DATA = {
     maintenanceEndDate: '2017-04-24',
     maintenanceStartDate: '2017-04-17',
     products: {
-      'confluence.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
+      // 'confluence.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
       'hipchat.cloud': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
       'jira-core.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
       'jira-incident-manager.ondemand': {
@@ -186,14 +187,30 @@ const mockEndpoints = () => {
 
 // TODO: make onClicks targets show up on page instead of console.logs
 const getGlobalNavigation = enableAtlassianSwitcher => () => (
-  <GlobalNavigation
-    product="jira"
-    cloudId="some-cloud-id"
-    productIcon={EmojiAtlassianIcon}
-    appSwitcherComponent={AppSwitcherComponent}
-    appSwitcherTooltip="Switch to ..."
-    enableAtlassianSwitcher={enableAtlassianSwitcher}
-  />
+  <AnalyticsListener
+    channel="navigation"
+    onEvent={analyticsEvent => {
+      const { payload, context } = analyticsEvent;
+      const eventId = `${payload.actionSubject ||
+        payload.name} ${payload.action || payload.eventType}`;
+      console.log(`Received event [${eventId}]: `, {
+        payload,
+        context,
+      });
+    }}
+  >
+    <GlobalNavigation
+      product="jira"
+      cloudId="some-cloud-id"
+      productIcon={EmojiAtlassianIcon}
+      appSwitcherComponent={AppSwitcherComponent}
+      appSwitcherTooltip="Switch to ..."
+      enableAtlassianSwitcher={enableAtlassianSwitcher}
+      triggerXFlow={(...props) => {
+        console.log('TRIGGERING XFLOW', props);
+      }}
+    />
+  </AnalyticsListener>
 );
 
 export default class extends Component {

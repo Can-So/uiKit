@@ -16,8 +16,10 @@ export default ({
   switch (product) {
     case 'jira':
       Switcher = JiraSwitcher;
+      break;
     case 'confluence':
       Switcher = ConfluenceSwitcher;
+      break;
     default:
       Switcher = JiraSwitcher;
   }

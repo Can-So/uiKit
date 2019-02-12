@@ -69,6 +69,10 @@ export default class GlobalNavigation extends Component<
   };
   isNotificationInbuilt = false;
 
+  static defaultProps = {
+    atlassianSwitcherDrawerWidth: 'narrow',
+  };
+
   constructor(props: GlobalNavigationProps) {
     super(props);
 
@@ -345,13 +349,23 @@ export default class GlobalNavigation extends Component<
     };
   };
 
+  triggerXFlow = (...props) => {
+    const { triggerXFlow } = this.props;
+    this.setState(
+      {
+        isAtlassianSwitcherDrawerOpen: false,
+      },
+      () => triggerXFlow(...props),
+    );
+  };
+
   renderAtlassianSwitcherDrawerContents = () => {
-    const { product, cloudId, triggerXFlow } = this.props;
+    const { product, cloudId } = this.props;
     return (
       <AtlassianSwitcher
         product={product}
         cloudId={cloudId}
-        triggerXFlow={triggerXFlow}
+        triggerXFlow={this.triggerXFlow}
       />
     );
   };
