@@ -1,11 +1,54 @@
-import { name } from '../../../../package.json';
-
-import { JSONDocNode } from '../../../utils/index';
-import { removeQueryMarksFromJSON } from '../../../utils/mark';
+import { name } from '../../../../../package.json';
+import { JSONDocNode } from '../../../../utils/index';
+import { sanitizeNode } from '../../../../utils/filter/node-filter';
 
 describe(name, () => {
-  describe('Utils -> Mark', () => {
-    describe('removeQueryMarksFromJSON()', () => {
+  describe('Utils -> filter -> node-filter', () => {
+    describe('sanitizeNode()', () => {
+      it('should filter out empty status from json document', () => {
+        const jsonDoc = {
+          version: 1,
+          type: 'doc',
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'status',
+                  attrs: {
+                    text: '',
+                    color: 'neutral',
+                    localId: 'aec51b7e-48e2-4686-8902-d312401ce281',
+                  },
+                },
+                {
+                  type: 'text',
+                  text: ' Boo',
+                },
+              ],
+            },
+          ],
+        } as JSONDocNode;
+
+        const sanitizedJSON = sanitizeNode(jsonDoc);
+
+        expect(sanitizedJSON).toEqual({
+          version: 1,
+          type: 'doc',
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: ' Boo',
+                },
+              ],
+            },
+          ],
+        });
+      });
+
       it('should filter out emojiQuery marks from json document', () => {
         const jsonDoc = {
           version: 1,
@@ -28,7 +71,7 @@ describe(name, () => {
           ],
         } as JSONDocNode;
 
-        const sanitizedJSON = removeQueryMarksFromJSON(jsonDoc);
+        const sanitizedJSON = sanitizeNode(jsonDoc);
 
         expect(sanitizedJSON).toEqual({
           version: 1,
@@ -70,7 +113,7 @@ describe(name, () => {
           ],
         } as JSONDocNode;
 
-        const sanitizedJSON = removeQueryMarksFromJSON(jsonDoc);
+        const sanitizedJSON = sanitizeNode(jsonDoc);
 
         expect(sanitizedJSON).toEqual({
           version: 1,
@@ -138,7 +181,7 @@ describe(name, () => {
           ],
         } as JSONDocNode;
 
-        const sanitizedJSON = removeQueryMarksFromJSON(jsonDoc);
+        const sanitizedJSON = sanitizeNode(jsonDoc);
         expect(sanitizedJSON).toEqual(jsonDoc);
       });
     });
