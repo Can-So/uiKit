@@ -4,9 +4,16 @@ import ConfluenceSwitcher from './confluence-switcher';
 
 interface AtlassianSwitcherProps {
   product: string;
+  cloudId: string;
+  triggerXFlow: Function;
 }
 
-export default ({ product, ...props }: AtlassianSwitcherProps) => {
+export default ({
+  product,
+  cloudId,
+  triggerXFlow,
+  ...props
+}: AtlassianSwitcherProps) => {
   let Switcher: React.ReactType;
   switch (product) {
     case 'jira':
@@ -16,7 +23,12 @@ export default ({ product, ...props }: AtlassianSwitcherProps) => {
       Switcher = ConfluenceSwitcher;
       break;
     default:
-      Switcher = JiraSwitcher;
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn(
+          `Product key ${product} provided to Atlassian Switcher doesn't have a corresponding product specific implementation.`,
+        );
+      }
+      return null;
   }
-  return <Switcher {...props} />;
+  return <Switcher cloudId={cloudId} triggerXFlow={triggerXFlow} {...props} />;
 };
