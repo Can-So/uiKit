@@ -31,30 +31,24 @@ describe('isErrorFileState()', () => {
 });
 
 describe('isImageRepresentationReady()', () => {
-  it('should return false when representations has no image', () => {
-    const processedWithNoImage: ProcessedFileState = {
-      status: 'processed',
-      id: 'some-id',
-      name: 'some-name',
-      size: 42,
-      mediaType: 'image',
-      mimeType: 'some-mime-type',
-      artifacts: {},
-      representations: {},
-    };
+  const processedWithNoImage: ProcessedFileState = {
+    status: 'processed',
+    id: 'some-id',
+    name: 'some-name',
+    size: 42,
+    mediaType: 'image',
+    mimeType: 'some-mime-type',
+    artifacts: {},
+    representations: {},
+  };
 
+  it('should return false when representations has no image', () => {
     expect(isImageRepresentationReady(processedWithNoImage)).toBe(false);
   });
 
   it('should return true when status is processed and representations has image', () => {
     const processedWithImage: ProcessedFileState = {
-      status: 'processed',
-      id: 'some-id',
-      name: 'some-name',
-      size: 42,
-      mediaType: 'image',
-      mimeType: 'some-mime-type',
-      artifacts: {},
+      ...processedWithNoImage,
       representations: {
         image: {},
       },
