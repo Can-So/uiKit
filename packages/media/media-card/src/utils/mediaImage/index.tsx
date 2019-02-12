@@ -46,6 +46,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
   // and if it does recalculate the image height and width
 
   componentDidMount() {
+    console.log('Mounting mediaImage!');
     const parent = ReactDOM.findDOMNode(this)!.parentElement;
     if (!parent) {
       return;
@@ -300,11 +301,13 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
 
     /*
       We do not want to show image until we finish deciding on sizing strategy.
-      Though if it is a "fit" strategy we can display it right away, since it doesn't depend
-      on isImageMoreLandscapyThanContainer nor it will change when isStretchingAllowed changes
-      it's value after imgRatio and parentRatio get defined.
+      Though if it is a "fit" strategy (and image hasn't been rotated) we can display it right away,
+      since it doesn't depend on isImageMoreLandscapyThanContainer nor it will change when isStretchingAllowed
+      changes it's value after imgRatio and parentRatio get defined.
+      The reason for exclude isImageRotated is that we need to calculate percentSize variable
+      and we can do that only when image is loaded (and we have image size)
      */
-    const showImage = isImageLoaded || isFitStrategy;
+    const showImage = isImageLoaded || (isFitStrategy && !isImageRotated);
 
     const style: CSSProperties = {
       transform: 'translate(-50%, -50%)',
@@ -402,7 +405,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
 
       style.transform += ` ${transform}`;
     }
-
+    // console.log({style: JSON.stringify(style)});
     return (
       <ImageComponent
         draggable={false}
