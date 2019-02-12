@@ -1,0 +1,1 @@
+- ED-6046: fix selecting wrapped image with list next to it
