@@ -180,6 +180,23 @@ describe('CollectionFetcher', () => {
         },
       });
     });
+
+    it('should call error callback if call to /items fails', done => {
+      const { collectionFetcher } = setup();
+
+      collectionFetcher.mediaStore.getCollectionItems = jest
+        .fn()
+        .mockReturnValue(Promise.reject());
+
+      collectionFetcher.getItems('recents').subscribe({
+        error() {
+          expect(
+            collectionFetcher.mediaStore.getCollectionItems,
+          ).toHaveBeenCalledTimes(1);
+          done();
+        },
+      });
+    });
   });
 
   describe('loadNextPage()', () => {
