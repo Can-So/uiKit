@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@atlaskit/onboarding", "type": "minor" }],
-  "dependents": []
-}
