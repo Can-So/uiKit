@@ -34,10 +34,10 @@ export default ({
       }),
   );
 
-  return (
+  return childrenWithAddedProps.length ? (
     <Section>
       <SectionTitle>{title}</SectionTitle>
       {childrenWithAddedProps}
     </Section>
-  );
+  ) : null;
 };
