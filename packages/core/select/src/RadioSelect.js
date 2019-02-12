@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Select from './Select';
-import { RadioOption } from './components';
+import { RadioOption } from './components/input-options';
 
 const RadioSelect = ({ components, ...props }: any) => (
   <Select
