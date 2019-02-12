@@ -1,5 +1,5 @@
 // @flow
-import React, { type ComponentType, type ElementType, type Node } from 'react';
+import React, { type ComponentType, type Node } from 'react';
 import SpotlightInner from './SpotlightInner';
 import { SpotlightConsumer } from './SpotlightManager';
 import type { ActionsType } from '../types';
@@ -28,9 +28,9 @@ export type Props = {
   /** The width of the dialog in pixels. Min 160 - Max 600 */
   dialogWidth: number,
   /** Optional element rendered below the body */
-  footer?: ElementType,
+  footer?: ComponentType<any>,
   /** Optional element rendered above the body */
-  header?: ElementType,
+  header?: ComponentType<any>,
   /** Heading text rendered above the body */
   heading?: string,
   /** Path to the the your image */
