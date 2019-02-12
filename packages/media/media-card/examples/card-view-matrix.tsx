@@ -1,3 +1,4 @@
+/* tslint:disable:no-console */
 import * as React from 'react';
 import { atlassianLogoUrl, tallImage } from '@atlaskit/media-test-helpers';
 import { Checkbox } from '@atlaskit/checkbox';
