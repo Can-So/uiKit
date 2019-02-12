@@ -77,3 +77,37 @@ export const isLayoutSupported = (state: EditorState): boolean => {
         permittedLayouts.indexOf('full-page') > -1))
   );
 };
+
+export const tablesHaveDifferentColumnWidths = (
+  currentTable: PmNode,
+  previousTable: PmNode,
+): boolean => {
+  let currentTableWidths: Array<number> = [];
+  let previousTableWidths: Array<number> = [];
+
+  if (!currentTable.content.firstChild || !previousTable.content.firstChild) {
+    return false;
+  }
+
+  currentTable.content.firstChild.content.forEach(cell => {
+    if (Array.isArray(cell.attrs.colwidth)) {
+      const colspan = cell.attrs.colspan || 1;
+      currentTableWidths.push(...cell.attrs.colwidth.slice(0, colspan));
+    }
+  });
+
+  previousTable.content.firstChild.content.forEach(cell => {
+    if (Array.isArray(cell.attrs.colwidth)) {
+      const colspan = cell.attrs.colspan || 1;
+      previousTableWidths.push(...cell.attrs.colwidth.slice(0, colspan));
+    }
+  });
+
+  const sameWidths = currentTableWidths.every(
+    (value: number, index: number) => {
+      return value === previousTableWidths[index];
+    },
+  );
+
+  return sameWidths === false;
+};

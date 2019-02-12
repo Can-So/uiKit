@@ -198,9 +198,9 @@ function handleMouseMove(view, event, handleWidth, lastColumnResizable) {
     if (target) {
       let { left, right } = target.getBoundingClientRect();
       if (event.clientX - left <= handleWidth) {
-        cell = edgeCell(view, event, 'left');
+        cell = edgeCell(view, event, 'left', handleWidth);
       } else if (right - event.clientX <= handleWidth) {
-        cell = edgeCell(view, event, 'right');
+        cell = edgeCell(view, event, 'right', handleWidth);
       }
     }
 
@@ -273,6 +273,12 @@ function handleMouseDown(view, event, cellMinWidth) {
     // Fetch a fresh reference of the table.
     const $cell = view.state.doc.resolve(activeHandle);
     const $table = $cell.node(-1);
+
+    // If we let go in the same place we started, dont need to do anything.
+    if (dragging && clientX === dragging.startX) {
+      view.dispatch(view.state.tr.setMeta(pluginKey, { setDragging: null }));
+      return;
+    }
 
     if (dragging) {
       const { startX } = dragging;

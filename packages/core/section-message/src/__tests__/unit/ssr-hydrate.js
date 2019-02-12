@@ -24,6 +24,7 @@ const App = () => (
     actions={[
       {
         href: 'https://en.wikipedia.org/wiki/Mary_Shelley',
+        key: 'mary',
         text: 'Mary',
       },
     ]}

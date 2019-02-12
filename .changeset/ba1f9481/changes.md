@@ -1,0 +1,1 @@
+- ED-6214: Fix resizing when rowspan exists in non last column

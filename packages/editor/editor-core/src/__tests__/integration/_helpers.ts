@@ -2,6 +2,7 @@ import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
 import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
 import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
 import { EditorAppearance } from '../../types';
+import { pluginKey as tableResizingPluginKey } from '../../plugins/table/pm-plugins/table-resizing';
 
 /**
  * This function will in browser context. Make sure you call `toJSON` otherwise you will get:
@@ -318,4 +319,53 @@ export const highlightEmojiInTypeahead = async (
 
 export const emojiItem = (emojiShortName: string): string => {
   return `span[data-emoji-short-name=":${emojiShortName}:"]`;
+};
+
+interface ResizeOptions {
+  cellHandlePos: number;
+  // TODO could make this an array, to simulate dragging back and forth.
+  resizeWidth: number;
+}
+
+export const resizeColumn = async (page: any, resizeOptions: ResizeOptions) => {
+  await page.browser.execute(
+    (tableResizingPluginKey, resizeWidth, cellHandlePos) => {
+      const view = (window as any).__editorView;
+
+      if (!view) {
+        return;
+      }
+
+      view.dispatch(
+        view.state.tr.setMeta(tableResizingPluginKey, {
+          setHandle: cellHandlePos,
+        }),
+      );
+
+      const cellCoords = view.coordsAtPos(cellHandlePos);
+
+      view.dom.dispatchEvent(
+        new MouseEvent('mousedown', { clientX: cellCoords.left }),
+      );
+
+      // Visually resize table
+      for (
+        let i = Math.min(0, resizeWidth);
+        i < Math.max(0, resizeWidth);
+        i++
+      ) {
+        window.dispatchEvent(
+          new MouseEvent('mousemove', { clientX: cellCoords.left + i }),
+        );
+      }
+
+      // Trigger table resizing finish handlers
+      window.dispatchEvent(
+        new MouseEvent('mouseup', { clientX: cellCoords.left + resizeWidth }),
+      );
+    },
+    tableResizingPluginKey,
+    resizeOptions.resizeWidth,
+    resizeOptions.cellHandlePos,
+  );
 };

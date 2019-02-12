@@ -13,11 +13,11 @@ import {
   mountEditor,
 } from '../../__helpers/testing-example-helpers';
 
-async function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function loadAndRetrieveDocument(page, document) {
+async function loadAndRetrieveDocument(
+  page,
+  document,
+  expectedLayout = 'default',
+) {
   await page.browser.windowHandleMaximize();
 
   await mountEditor(page, {
@@ -29,7 +29,7 @@ async function loadAndRetrieveDocument(page, document) {
     },
   });
 
-  await sleep(1000);
+  await page.waitForSelector(`table[data-layout="${expectedLayout}"]`);
 
   const doc = await page.$eval(editable, getDocFromElement);
   return doc;
@@ -50,7 +50,11 @@ BrowserTestCase(
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
-    const doc = await loadAndRetrieveDocument(page, autoSizeToWideLayout);
+    const doc = await loadAndRetrieveDocument(
+      page,
+      autoSizeToWideLayout,
+      'wide',
+    );
     expect(doc).toMatchDocSnapshot();
   },
 );
@@ -60,7 +64,11 @@ BrowserTestCase(
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
-    const doc = await loadAndRetrieveDocument(page, autoSizeToFullWidthLayout);
+    const doc = await loadAndRetrieveDocument(
+      page,
+      autoSizeToFullWidthLayout,
+      'full-width',
+    );
     expect(doc).toMatchDocSnapshot();
   },
 );
