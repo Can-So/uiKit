@@ -75,6 +75,9 @@ export function transformHtml(
       }
     }
 
+    const bitbucketUuid = a.getAttribute('data-bitbucket-uuid') || '';
+    span.setAttribute('data-bitbucket-uuid', bitbucketUuid);
+
     const text = a.textContent || '';
     if (text.indexOf('@') === 0) {
       span.textContent = a.textContent;

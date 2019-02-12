@@ -551,7 +551,7 @@ describe('BitbucketTransformer: parser', () => {
           parse(
             '<p>' +
               'foo ' +
-              `<a href="/abodera/" rel="nofollow" title="@abodera" class="${mentionClass} mention-me">Artur Bodera</a>` +
+              `<a href="/abodera/" rel="nofollow" title="@abodera" class="${mentionClass} mention-me" data-bitbucket-uuid="7a069b6a-11b7-4ae3-b847-e5583e976d43">Artur Bodera</a>` +
               ' bar' +
               '</p>',
           ),
@@ -559,7 +559,15 @@ describe('BitbucketTransformer: parser', () => {
           doc(
             p(
               'foo ',
-              mention({ text: '@Artur Bodera', id: 'abodera' })(),
+              mention({
+                text: '@Artur Bodera',
+                id: 'abodera',
+                // The data-bitbucket-uuid attribute is set in utils.js, but isn't actually available
+                'data-bitbucket-uuid': '7a069b6a-11b7-4ae3-b847-e5583e976d43',
+                // data-doesnt-exist is never set, but this test still passes, which shows that the
+                // data-bitbucket-uuid test line cannot be trusted.
+                'data-doesnt-exist': '1234-5678',
+              })(),
               ' bar',
             ),
           ),
