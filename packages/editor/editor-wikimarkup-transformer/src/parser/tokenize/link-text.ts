@@ -1,15 +1,10 @@
 import { isSafeUrl } from '@atlaskit/adf-schema';
-import { Schema } from 'prosemirror-model';
-import { Token } from './';
+import { Token, TokenParser } from './';
 
 // https://www.atlassian.com
 export const LINK_TEXT_REGEXP = /^(https?:\/\/|irc:\/\/|mailto:)([\w.?\/\\#-=@]+)/;
 
-export function linkText(
-  input: string,
-  position: number,
-  schema: Schema,
-): Token {
+export const linkText: TokenParser = ({ input, position, schema }) => {
   const match = input.substring(position).match(LINK_TEXT_REGEXP);
 
   if (!match) {
@@ -34,7 +29,7 @@ export function linkText(
     nodes: [textNode],
     length: match[0].length,
   };
-}
+};
 
 function unescape(url: string) {
   let result = '';

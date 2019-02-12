@@ -5,6 +5,14 @@ import { ErrorMessageWrapper, ErrorImage } from './styled';
 import { FileState } from '@atlaskit/media-core';
 import { messages as i18nMessages } from '@atlaskit/media-ui';
 import { cannotViewFile, errorLoadingFile } from './error-images';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { mediaPreviewFailedEvent } from './analytics/item-viewer';
+import {
+  GasPayload,
+  GasScreenEventPayload,
+} from '@atlaskit/analytics-gas-types';
+import { channel } from '../newgen/analytics';
 
 type MessagesType<Key extends string> = { [k in Key]: ReactNode };
 
@@ -110,9 +118,25 @@ export const createError = (
 };
 
 export class ErrorMessage extends React.Component<
-  Props & InjectedIntlProps,
+  Props & InjectedIntlProps & WithAnalyticsEventProps,
   {}
 > {
+  private fireAnalytics = (payload: GasPayload | GasScreenEventPayload) => {
+    const { createAnalyticsEvent } = this.props;
+    if (createAnalyticsEvent) {
+      const ev = createAnalyticsEvent(payload);
+      ev.fire(channel);
+    }
+  };
+
+  componentDidMount() {
+    const {
+      error: { errorName: failReason, file },
+    } = this.props;
+    const fileId = file ? file.id : undefined;
+    this.fireAnalytics(mediaPreviewFailedEvent(failReason, fileId));
+  }
+
   render() {
     const {
       intl: { formatMessage },
@@ -131,4 +155,4 @@ export class ErrorMessage extends React.Component<
   }
 }
 
-export default injectIntl(ErrorMessage);
+export default withAnalyticsEvents()(injectIntl(ErrorMessage));

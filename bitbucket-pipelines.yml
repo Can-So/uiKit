@@ -12,24 +12,24 @@ pipelines:
     master:
       - step:
           script:
-            # Note: in master, this script will rebase you onto latest origin/master
+            # Note: in master, this script will rebase you onto latest origin/master.
             - source ./build-setup.sh
             - bolt install --pure-lockfile
             - (cd build/ci-scripts && yarn stop-if-older-build)
             - yarn build
             - node build/ci-scripts/run.if.package.changed.js @atlaskit/editor-mobile-bridge -- yarn build:editor-mobile-bridge
-            # Bump all packages and their dependents using saved changesets
+            # Bump all packages and their dependents using saved changesets.
             - node ./build/releases/bin/build-releases.js version
             # We push the bumped packages to master now as it's much better to fail whilst BB is
             # ahead of npm, than the other way round.
             - git push
             # We run the build:pkg script again, because the versions in our package.jsons may have changed
             # after the bump. We've kept it running in both places, just to limit the scope of this change
-            # so that we don't break anything that was working previously
+            # so that we don't break anything that was working previously.
             - yarn build:pkg
-            # Release all unreleased packages
+            # Release all unreleased packages.
             - node ./build/releases/bin/build-releases.js publish --public
-            - git push --tags # push only the tags
+            - git push --tags # Push only the tags.
             - (cd build/ci-scripts && yarn restart-stopped-build)
           caches:
             - node
@@ -55,12 +55,12 @@ pipelines:
               - node build/ci-scripts/run.tool.if.changed.js stylelint -- yarn lint:stylelint
               - node build/ci-scripts/run.tool.if.changed.js flow -- yarn typecheck:flow
               - node build/ci-scripts/run.tool.if.changed.js typescript -- yarn typecheck:typescript
-              # Get the commit that we diverged from master at
+              # Get the commit that we diverged from master at.
               - export DIVERGED_AT=$(git merge-base master HEAD)
-              # Get a comma separated list of changed files
+              # Get a comma separated list of changed files.
               - export CHANGED_FILES=$(git diff --name-only $DIVERGED_AT -- 'packages' 'build' 'website' | grep -E 'js$|ts$|tsx$' | tr '\n' ',')
-              # The below runs prettier over all changed files and fails if anyone of them don't match prettier's rules
-              # We add fileMock.js to the list of files so that we never pass an empty list to prettier
+              # The below runs prettier over all changed files and fails if anyone of them don't match prettier's rules.
+              # We add fileMock.js to the list of files so that we never pass an empty list to prettier.
               - yarn prettier --no-editorconfig "{$CHANGED_FILES,fileMock.js}" --list-different
             caches:
               - node
@@ -79,9 +79,9 @@ pipelines:
               - bolt install --pure-lockfile
               # Run the non-editor tests, --passWithNoTests has been added in case of no tests found to avoid failure in CI.
               - TEST_ONLY_PATTERN='!packages/editor' yarn run test:changed --passWithNoTests
-              # Run the editor tests (runInBand is required or it fails in CI)
+              # Run the editor tests (runInBand is required or it fails in CI).
               - TEST_ONLY_PATTERN='packages/editor' yarn run test:changed --runInBand --passWithNoTests
-              # This script acts like a unit test to check changes to @atlaskit/adf-schema
+              # This script acts like a unit test to check changes to @atlaskit/adf-schema.
               - node build/ci-scripts/run.if.package.changed.js @atlaskit/adf-schema -- yarn build:adf-schema:checkuptodate
             caches:
               - node
@@ -91,7 +91,7 @@ pipelines:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
               - echo "Run browser unit tests using Karma + Browserstack"
-              - yarn test:browser:browserstack
+              - node build/ci-scripts/run.tool.if.changed.js karma -- yarn test:browser:browserstack
             caches:
               - node
         - step:
@@ -113,11 +113,11 @@ pipelines:
               - bolt install --pure-lockfile
               - yarn run test:vr:changed
             after-script:
-              # Extract all the diff images and store them into a folder for download
+              # Extract all the diff images and store them into a folder for download.
               - mkdir ./imageSnapshotFailures && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
             # If a failure occurs, you can download the image snapshot of the differences.
             artifacts: 
-              - imageSnapshotFailures
+              - imageSnapshotFailures/**
             caches:
               - node
         - step:
@@ -126,11 +126,11 @@ pipelines:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
               - cd website
-              # This next line just makes it so we can skip website builds by having a branch name that starts with "skip-website/"
+              # This next line just makes it so we can skip website builds by having a branch name that starts with "skip-website/".
               - if [[ "$BITBUCKET_BRANCH" == skip-website/* ]]; then echo "Skipping website build" && mkdir dist && echo "Build skipped" > dist/index.html; else WEBSITE_ENV=staging yarn build:no-minimize; fi
               - yarn build:copy
-              - set -o pipefail # make sure we fail if the deployment fails
-              # we pipe the output to stdout AND deploy-log.txt so that we can read the live url
+              - set -o pipefail # Make sure we fail if the deployment fails.
+              # We pipe the output to stdout AND deploy-log.txt so that we can read the live url
               - yarn deploy:staging | tee deploy-log.txt
               - cat deploy-log.txt | grep "URL:" | sed "s/Live Draft Url..//gi" > netlify-link.txt
               - echo "Uploading netlify build link to s3 so that we can fetch at the end..."
@@ -140,14 +140,15 @@ pipelines:
     - step:
         name: Sending Website Build Url
         script:
-          - (cd build/utils && yarn install) # needed for npm-run when updating status
+          - (cd build/utils && yarn install) # Needed for npm-run when updating status.
           - cd build/ci-scripts
           - yarn install
           - node download.build.artefact.for.commit.js netlify-link.txt
           - node update.build.status.with.netlify.link.js
 
-  custom: # Pipelines that can be scheduled or triggered manually
-    # This should only be called by a scheduled build
+  # Pipelines that can be scheduled or triggered manually.
+  custom: 
+    # This should only be called by a scheduled build to deploy production website from latest master.
     build-website-production:
       - step:
           script:
@@ -160,7 +161,7 @@ pipelines:
           caches:
             - node
 
-    # This can be called for skip-website branches to perform website build
+    # This can be called to deploy staging website from any branches.
     build-website-staging:
       - step:
           name: Building website
@@ -178,7 +179,8 @@ pipelines:
           caches:
             - node
 
-    # This should only be called by a scheduled or manual build for master
+    # This should only be called by a scheduled or manual build from master.
+    # It builds the website and send the data to redash.
     send-website-build-analytics:
       - step:
           script:
@@ -186,14 +188,14 @@ pipelines:
             - bolt install --pure-lockfile
             - cd website
             - yarn build:report
-            # We could optionally upload these to s3 if we wanted, leaving this here as an example
+            # We could optionally upload these to s3 if we wanted, leaving this here as an example:
             # - node ../build/ci-scripts/upload.build.artefact.for.commit.js dist/report.html
             # - node ../build/ci-scripts/upload.build.artefact.for.commit.js dist/stats.json
             - node ./scripts/uploadBundleAnalyticsEvent.js
           caches:
             - node
    
-    # This will run with the webdriver tests
+    # This will run the full suite of the webdriver tests on Browserstack.
     build-webdriver:
       - step:
           script:
@@ -203,7 +205,7 @@ pipelines:
           caches:
             - node
             
-    # This will run with the visual regression tool
+    # This will run the full suite of the visual regression tests using Docker.
     build-visual-regression:
       - step:
           image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
@@ -211,10 +213,18 @@ pipelines:
             - source ./build-setup.sh
             - git lfs pull
             - bolt install --pure-lockfile
-            - yarn run test:vr 
+            - yarn run test:vr
+          after-script:
+              # Extract all the diff images and store them into a folder for download.
+              - mkdir ./imageSnapshotFailures && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
+          # If a failure occurs, you can download the image snapshot of the differences.
+          artifacts: 
+            - imageSnapshotFailures/**
+          caches:
+            - node 
             
-    # This will run essentially the branch builds, but without any optimizations and should be manually
-    # run in any potentially risky builds
+    # This will run essentially the branch builds, but without any optimizations and should be manually.
+    # This build should be run in any potentially risky builds.
     run-full-suite:
       - step:
           script:
@@ -230,7 +240,7 @@ pipelines:
             # don't worry about deploying, this build will always be run alongside a branch build
             - yarn build
 
-    # We deliberately don't use the cache here as well
+    # This will build all the packages and run bundle-analysis.
     run-bundle-analysis:
       - step:
           script:
@@ -240,7 +250,7 @@ pipelines:
             - yarn build:bundle-analysis
           caches:
             - node
-
+    # This build is used as our `merge` build when managing concurrent PR to master.
     landkid:
       - parallel:
           - step:
@@ -272,7 +282,7 @@ pipelines:
                 - echo "Read the very last error message, it will tell you exactly what is wrong (ignore all the first warnings you'll see)"
                 - node ./build/releases/bin/build-releases.js version
           # Rest of the steps are jest tests. We no longer use the $BITBUCKET_PARALLEL_STEP_COUNT and $BITBUCKET_PARALLEL_STEP
-          # variables as they mean the jest steps need to be in their own parallel block, so we just hardcode them here
+          # variables as they mean the jest steps need to be in their own parallel block, so we just hardcode them here.
           - step:
               name: Running Jest 1 of 4 chunks
               script:
@@ -320,8 +330,8 @@ pipelines:
             - yarn --ignore-engines
             - node ./wait.until.no.master.build.running.js
     # This build should only be run on the master branch, once per day.
-    # It manually clears the cache and runs a very quick install node_modules
-    # We split into two steps so that one can clear the cache so that the second one starts with no cache
+    # It manually clears the cache and runs a very quick install node_modules.
+    # We split into two steps so that one can clear the cache so that the second one starts with no cache.
     # (Which causes it to upload when it's finished).
     reseed-pipelines-cache:
       - step:
@@ -336,12 +346,13 @@ pipelines:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            # we re-clear the cache here in case any other builds have managed to start and finish in between us starting
-            # (our build will only upload a cache if there is none when the build finishes)
+            # We re-clear the cache here in case any other builds have managed to start and finish in between us starting.
+            # (our build will only upload a cache if there is none when the build finishes).
             - node build/ci-scripts/clear.pipelines.node.cache.js
           caches:
             - node
 
+    # This build allow to deploy branch dists to easily tests new version of components into consumers / products code base.
     deploy-branch-build-dists:
       - step:
           name: Deploy branch build dists
@@ -350,7 +361,7 @@ pipelines:
             - bolt install --pure-lockfile
             - yarn build
             - export CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js)
-            # Change into a glob pattern (removing brackets, spaces and quotes)
+            # Change into a glob pattern (removing brackets, spaces and quotes).
             - export CHANGED_PACKAGES_GLOB=$(echo "$CHANGED_PACKAGES" | sed 's/[][" ]//g')
             # We add in the exta brances and a trailing comma in case we only have one package
             - bolt ws exec --only-fs="{$CHANGED_PACKAGES_GLOB,}" -- npm pack

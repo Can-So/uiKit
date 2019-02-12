@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.2.1
+- [patch] [967c9ed460](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/967c9ed460):
+
+  - Add IDs to all global nav items
+
 ## 4.2.0
 - [minor] [092845e62c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/092845e62c):
 

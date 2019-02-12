@@ -1,5 +1,20 @@
 # @atlaskit/media-image
 
+## 52.0.5
+- [patch] [c415876da9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c415876da9):
+
+  - add selected state to InlinePlayer in media-card
+
+## 52.0.4
+- Updated dependencies [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+  - @atlaskit/media-test-helpers@20.1.2
+  - @atlaskit/media-ui@9.0.0
+
+## 52.0.3
+- [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
+
+  - MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme
+
 ## 52.0.2
 - [patch] [0e164e542a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e164e542a):
 

@@ -1,11 +1,9 @@
 /* tslint:disable:variable-name */
-
 import styled from 'styled-components';
-
-import { ComponentClass } from 'react';
-import { Root, cardShadow } from '../../styles';
 import { absolute, borderRadius, size } from '@atlaskit/media-ui';
 import { colors, themed } from '@atlaskit/theme';
+import { Root, cardShadow } from '../../styles';
+import { getSelectedBorderStyle } from '../../styles/getSelectedBorderStyle';
 
 export interface WrapperProps {
   disableOverlay?: boolean;
@@ -25,13 +23,6 @@ const getCursorAttribute = () => {
   return 'cursor: pointer;';
 };
 
-const getBorderAttribute = (props: WrapperProps) => {
-  const { selected, selectable } = props;
-  return `border: 2px solid ${
-    selected && selectable ? colors.B200 : 'transparent'
-  };`;
-};
-
 const getBackgroundColor = (props: WrapperProps) => {
   const { mediaType } = props;
   return `background: ${
@@ -41,7 +32,7 @@ const getBackgroundColor = (props: WrapperProps) => {
   };`;
 };
 
-export const Wrapper: ComponentClass<WrapperProps> = styled(Root)`
+export const Wrapper = styled(Root)`
   ${getShadowAttribute}
   ${getCursorAttribute}
   ${borderRadius}
@@ -50,20 +41,7 @@ export const Wrapper: ComponentClass<WrapperProps> = styled(Root)`
   line-height: normal;
   position: relative;
 
-  /*
-   * Used to display the blue border around a selected card without
-   * shrinking the image OR growing the card size
-   */
-  &::after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    box-sizing: border-box;
-    pointer-events: none;
-    ${borderRadius} ${getBorderAttribute};
-  }
+  ${getSelectedBorderStyle}
 
   ${size()} .wrapper {
     ${borderRadius};

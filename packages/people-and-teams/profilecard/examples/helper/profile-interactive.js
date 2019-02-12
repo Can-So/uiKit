@@ -294,7 +294,7 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               }
               disabledAccountMessage={
                 this.state.hasDisabledAccountMessage ? (
-                  <>
+                  <React.Fragment>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -304,7 +304,7 @@ export default class ProfilecardInteractive extends Component<Props, State> {
                       Ut enim ad minim veniam, quis nostrud exercitation ullamco
                       laboris nisi ut aliquip ex ea commodo.
                     </p>
-                  </>
+                  </React.Fragment>
                 ) : (
                   undefined
                 )

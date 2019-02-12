@@ -1,29 +1,29 @@
 import { Schema, Node as PMNode } from 'prosemirror-model';
-import { Token, TokenErrCallback } from '.';
+import { Token, TokenParser, Context } from '.';
 import { commonMacro } from './common-macro';
 import { parseAttrs } from '../utils/attrs';
 import { title } from '../utils/title';
 
-export function noformatMacro(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const noformatMacro: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   return commonMacro(input.substring(position), schema, {
     keyword: 'noformat',
     paired: true,
+    context,
     rawContentProcessor,
-    tokenErrCallback,
   });
-}
+};
 
 const rawContentProcessor = (
   rawAttrs: string,
   rawContent: string,
   length: number,
   schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
+  context: Context,
 ): Token => {
   const output: PMNode[] = [];
   const { codeBlock } = schema.nodes;

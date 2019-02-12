@@ -1,5 +1,15 @@
 # @atlaskit/section-message
 
+## 1.2.0
+- [minor] [3a7e838663](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7e838663):
+
+  - Actions now require a key prop and action text now accepts React Nodes
+
+## 1.1.0
+- [minor] [dfd4cbc475](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfd4cbc475):
+
+  - Actions will now accept a key prop
+
 ## 1.0.17
 - [patch] [b8091afbdd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8091afbdd):
 

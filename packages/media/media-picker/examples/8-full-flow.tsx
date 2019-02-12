@@ -160,7 +160,7 @@ export default class Example extends React.Component<{}, State> {
     const { popup } = this.state;
 
     return (
-      <>
+      <React.Fragment>
         <OptionsWrapper>
           <Button
             appearance="primary"
@@ -179,7 +179,7 @@ export default class Example extends React.Component<{}, State> {
         </OptionsWrapper>
         <div>{this.renderCards()}</div>
         {this.renderMediaViewer()}
-      </>
+      </React.Fragment>
     );
   }
 }

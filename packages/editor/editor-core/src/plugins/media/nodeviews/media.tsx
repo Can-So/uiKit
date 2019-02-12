@@ -42,6 +42,7 @@ export interface MediaNodeProps extends ReactNodeProps {
   ) => void;
   editorAppearance: EditorAppearance;
   mediaProvider?: Promise<MediaProvider>;
+  viewContext?: Context;
 }
 
 export interface Props extends Partial<MediaBaseAttributes> {
@@ -57,6 +58,7 @@ export interface Props extends Partial<MediaBaseAttributes> {
   context: Context;
   disableOverlay?: boolean;
   mediaProvider?: Promise<MediaProvider>;
+  viewContext?: Context;
 }
 
 export interface MediaNodeState {
@@ -68,12 +70,6 @@ class MediaNode extends Component<
   MediaNodeState
 > {
   private pluginState: MediaPluginState;
-  private mediaProvider: MediaProvider;
-  private hasBeenMounted: boolean = false;
-
-  state: MediaNodeState = {
-    viewContext: undefined,
-  };
 
   constructor(props) {
     super(props);
@@ -84,7 +80,7 @@ class MediaNode extends Component<
   shouldComponentUpdate(nextProps, nextState) {
     if (
       this.props.selected !== nextProps.selected ||
-      this.state.viewContext !== nextState.viewContext ||
+      this.props.viewContext !== nextProps.viewContext ||
       this.props.node.attrs.id !== nextProps.node.attrs.id ||
       this.props.node.attrs.collection !== nextProps.node.attrs.collection ||
       this.props.cardDimensions !== nextProps.cardDimensions
@@ -95,34 +91,17 @@ class MediaNode extends Component<
   }
 
   componentDidMount() {
-    this.hasBeenMounted = true;
     this.handleNewNode(this.props);
-    this.updateMediaContext();
   }
 
   componentWillUnmount() {
     const { node } = this.props;
     this.pluginState.handleMediaNodeUnmount(node);
-    this.hasBeenMounted = false;
-  }
-
-  componentWillReceiveProps(props) {
-    this.updateMediaContext();
   }
 
   componentDidUpdate() {
     this.pluginState.updateElement();
   }
-
-  private updateMediaContext = async () => {
-    if (this.props.mediaProvider) {
-      this.mediaProvider = await this.props.mediaProvider;
-      const viewContext = await this.mediaProvider.viewContext;
-      if (viewContext && this.hasBeenMounted) {
-        this.setState({ viewContext });
-      }
-    }
-  };
 
   render() {
     const {
@@ -133,7 +112,7 @@ class MediaNode extends Component<
       editorAppearance,
     } = this.props;
     const { id, type, collection, url, __key } = node.attrs;
-    const { viewContext } = this.state;
+    const { viewContext } = this.props;
     /**
      * On mobile we don't receive a collectionName until the `upload-end` event.
      * We don't want to render a proper card until we have a valid collection.

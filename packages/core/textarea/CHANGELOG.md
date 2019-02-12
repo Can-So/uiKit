@@ -1,5 +1,10 @@
 # @atlaskit/textarea
 
+## 0.2.4
+- [patch] [aab267bb3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aab267bb3a):
+
+  - Added test to make sure the props are passed down to hidden input
+
 ## 0.2.3
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

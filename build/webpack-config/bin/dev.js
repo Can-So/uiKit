@@ -38,44 +38,44 @@ const PORT = +process.env.ATLASKIT_DEV_PORT || 9000;
 const stats = require('../config/statsOptions');
 
 async function runDevServer() {
-  const [workspacesGlobRaw = ''] = process.argv.slice(2);
+  const workspaceGlobs = process.argv
+    .slice(2)
+    .filter(arg => !arg.startsWith('--')) // in case we ever pass other flags to this script
+    .map(arg => arg.replace(/["']/g, '')); // remove all quotes (users add them to prevent early glob expansion)
   const report = !!process.argv.find(arg => arg.startsWith('--report'));
-  const workspacesGlob = workspacesGlobRaw.startsWith('--')
-    ? ''
-    : workspacesGlobRaw.replace(/^['"](.+)['"]$/, '$1'); // Unwrap string from quotes
+
   const mode = 'development';
   const websiteEnv = 'local';
   const projectRoot = (await bolt.getProject({ cwd: process.cwd() })).dir;
   const workspaces = await bolt.getWorkspaces();
 
-  const filteredWorkspaces = workspacesGlob
+  const filteredWorkspaces = workspaceGlobs.length
     ? workspaces.filter(ws =>
-        minimatch(ws.dir, workspacesGlob, { matchBase: true }),
+        workspaceGlobs.some(glob =>
+          minimatch(ws.dir, glob, { matchBase: true }),
+        ),
       )
-    : workspaces;
+    : workspaces; // if no globs were passed, we'll use all workspaces
 
-  const globs = workspacesGlob
-    ? utils.createWorkspacesGlob(filteredWorkspaces, projectRoot)
-    : utils.createDefaultGlob();
+  const globs =
+    workspaceGlobs.length > 0
+      ? utils.createWorkspacesGlob(filteredWorkspaces, projectRoot)
+      : utils.createDefaultGlob();
 
   if (!globs.length) {
-    print(
-      errorMsg({
-        title: 'Nothing to run',
-        msg: `Pattern "${workspacesGlob}" doesn't match anything.`,
-      }),
+    console.info(
+      `${workspaceGlobs.toString()}: Nothing to run or pattern does not match!`,
     );
-
-    process.exit(2);
+    process.exit(0);
   }
 
   print(
     devServerBanner({
-      workspacesGlob,
       workspaces: filteredWorkspaces,
+      workspacesGlob: workspaceGlobs.toString(),
       port: PORT,
       host: HOST,
-      isAll: !workspacesGlob,
+      isAll: !(workspaceGlobs.length > 0),
     }),
   );
 

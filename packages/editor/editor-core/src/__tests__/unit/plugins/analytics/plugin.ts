@@ -8,17 +8,22 @@ import analyticsPlugin, {
   addAnalytics,
   analyticsPluginKey,
   AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
 } from '../../../../plugins/analytics';
 import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
 
 describe('analytics', () => {
   const createEditor = createEditorFactory();
   const payload: AnalyticsEventPayload = {
-    action: 'clicked',
-    actionSubject: 'button',
-    actionSubjectId: 'helpButton',
-    attributes: { inputMethod: 'toolbar' },
-    eventType: 'ui',
+    action: ACTION.CLICKED,
+    actionSubject: ACTION_SUBJECT.BUTTON,
+    actionSubjectId: ACTION_SUBJECT_ID.BUTTON_HELP,
+    attributes: { inputMethod: INPUT_METHOD.TOOLBAR },
+    eventType: EVENT_TYPE.UI,
   };
 
   const mockCreateAnalyticsEvent = jest.fn();
@@ -63,14 +68,14 @@ describe('analytics', () => {
 
     it('handles firing multiple analytics events for one transaction', () => {
       const secondPayload: AnalyticsEventPayload = {
-        action: 'stopped',
-        actionSubject: 'editor',
-        actionSubjectId: 'save',
+        action: ACTION.STOPPED,
+        actionSubject: ACTION_SUBJECT.EDITOR,
+        actionSubjectId: ACTION_SUBJECT_ID.SAVE,
         attributes: {
-          inputMethod: 'shortcut',
+          inputMethod: INPUT_METHOD.SHORTCUT,
           documentSize: state.doc.nodeSize,
         },
-        eventType: 'ui',
+        eventType: EVENT_TYPE.UI,
       };
       tr = addAnalytics(tr, payload);
       tr = addAnalytics(tr, secondPayload);

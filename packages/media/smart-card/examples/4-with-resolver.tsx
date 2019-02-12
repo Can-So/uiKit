@@ -20,11 +20,11 @@ class CustomClient extends Client {
   }
 }
 
-const clientWithResolver = new CustomClient();
+const clientWithResolver = new CustomClient(undefined, 'staging');
 
 export default () => (
   <Page>
-    <Provider>
+    <Provider client={new Client(undefined, 'staging')}>
       <Grid>
         <GridColumn>
           <p>
@@ -52,7 +52,7 @@ export default () => (
           <br />
           <Card url="public-happy" appearance="block" />
           <br />
-          <Card url="private-happy" appearance="block" />
+          {/* <Card url="private-happy" appearance="block" /> */}
         </GridColumn>
       </Grid>
     </Provider>

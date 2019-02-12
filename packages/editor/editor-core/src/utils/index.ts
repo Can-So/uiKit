@@ -38,6 +38,8 @@ export { JSONDocNode, JSONNode };
 
 export { filterContentByType } from './filter';
 
+export const ZWSP = '\u200b';
+
 function validateNode(node: Node): boolean {
   return false;
 }

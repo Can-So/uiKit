@@ -1,4 +1,8 @@
-import { createEditorFactory, insertText } from '@atlaskit/editor-test-helpers';
+import {
+  createEditorFactory,
+  insertText,
+  sendKeyToPm,
+} from '@atlaskit/editor-test-helpers';
 import { doc, p } from '@atlaskit/editor-test-helpers';
 import { MockMentionResource } from '@atlaskit/util-data-test';
 import { selectCurrentItem } from '../../../../plugins/type-ahead/commands/select-item';
@@ -12,6 +16,11 @@ describe('mentionTypeahead', () => {
   const createEditor = createEditorFactory();
   const sessionIdRegex = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
   const expectedActionSubject = 'mentionTypeahead';
+  const contextIdentifiers = {
+    containerId: 'container-id',
+    objectId: 'object-id',
+    childObjectId: 'child-object-id',
+  };
 
   type TestDependencies = {
     editorView: EditorView;
@@ -68,11 +77,17 @@ describe('mentionTypeahead', () => {
    */
   const editor = async (options?) => {
     const mentionProvider = Promise.resolve(new MockMentionResource({}));
+    const contextIdentifierProvider = Promise.resolve(contextIdentifiers);
     const { editorView, sel } = createEditor({
       doc: doc(p('{<>}')),
-      editorProps: { mentionProvider },
+      editorProps: {
+        mentionProvider,
+        contextIdentifierProvider,
+        allowAnalyticsGASV3: true,
+      },
       providerFactory: ProviderFactory.create({
         mentionProvider,
+        contextIdentifierProvider,
       }),
       ...options,
     });
@@ -80,8 +95,9 @@ describe('mentionTypeahead', () => {
     return {
       editorView,
       sel,
-      // Ensures the mention provider is resolved before inserting in the editor
+      // Ensures providers are resolved before using the editor
       mentionProvider: await mentionProvider,
+      contextIdentifierProvider: await contextIdentifierProvider,
     };
   };
 
@@ -129,7 +145,7 @@ describe('mentionTypeahead', () => {
     };
   };
 
-  describe('analytics', () => {
+  describe('fabric-elements analytics', () => {
     it(
       'should fire typeahead cancelled event',
       withMentionQuery('all', ({ editorView, event, createAnalyticsEvent }) => {
@@ -212,7 +228,7 @@ describe('mentionTypeahead', () => {
               queryLength: 0,
               spaceInQuery: false,
               userIds: expect.any(Array),
-              sessionId: expect.any(String),
+              sessionId: expect.stringMatching(sessionIdRegex),
             }),
           }),
         );
@@ -236,7 +252,7 @@ describe('mentionTypeahead', () => {
               queryLength: 3,
               spaceInQuery: false,
               userIds: expect.any(Array),
-              sessionId: expect.any(String),
+              sessionId: expect.stringMatching(sessionIdRegex),
             }),
           }),
         );
@@ -246,7 +262,80 @@ describe('mentionTypeahead', () => {
     );
   });
 
+  describe('editor analytics', () => {
+    let createAnalyticsEvent;
+    let editorView;
+    let sel;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      ({ createAnalyticsEvent } = analyticsMocks());
+      ({ editorView, sel } = await editor({
+        createAnalyticsEvent,
+      }));
+    });
+
+    it('should trigger mention typeahead invoked event when invoked via quick insert', async () => {
+      insertText(editorView, '/Mention', sel);
+      sendKeyToPm(editorView, 'Enter');
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'invoked',
+        actionSubject: 'typeAhead',
+        actionSubjectId: 'mentionTypeAhead',
+        attributes: { inputMethod: 'quickInsert' },
+        eventType: 'ui',
+      });
+    });
+
+    it('should trigger mention typeahead invoked event when user types "@" symbol', async () => {
+      insertText(editorView, '@', sel);
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'invoked',
+        actionSubject: 'typeAhead',
+        actionSubjectId: 'mentionTypeAhead',
+        attributes: { inputMethod: 'keyboard' },
+        eventType: 'ui',
+      });
+    });
+  });
+
   describe('mentionProvider', () => {
+    describe('when entering a query', () => {
+      it(
+        'should filter results',
+        withMentionQuery('', ({ mentionProvider, editorView, sel }) => {
+          const filterSpy = jest.spyOn(mentionProvider, 'filter');
+
+          insertText(editorView, 'all', sel);
+
+          expect(filterSpy).toHaveBeenCalledTimes(3);
+          expect(filterSpy).toHaveBeenCalledWith(
+            'a',
+            expect.objectContaining({
+              sessionId: expect.stringMatching(sessionIdRegex),
+              ...contextIdentifiers,
+            }),
+          );
+          expect(filterSpy).toHaveBeenCalledWith(
+            'al',
+            expect.objectContaining({
+              sessionId: expect.stringMatching(sessionIdRegex),
+              ...contextIdentifiers,
+            }),
+          );
+          expect(filterSpy).toHaveBeenLastCalledWith(
+            'all',
+            expect.objectContaining({
+              sessionId: expect.stringMatching(sessionIdRegex),
+              ...contextIdentifiers,
+            }),
+          );
+        }),
+      );
+    });
+
     describe('when selecting a user', () => {
       it(
         'should record the selection',
@@ -262,6 +351,10 @@ describe('mentionTypeahead', () => {
           expect(recordMentionSelectionSpy).toHaveBeenCalledWith(
             expect.objectContaining({
               id: 'here',
+            }),
+            expect.objectContaining({
+              sessionId: expect.stringMatching(sessionIdRegex),
+              ...contextIdentifiers,
             }),
           );
         }),

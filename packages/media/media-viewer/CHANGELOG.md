@@ -1,5 +1,24 @@
 # @atlaskit/media-viewer
 
+## 35.2.0
+- [minor] [fde1cf51e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fde1cf51e0):
+
+  - Code split component
+- Updated dependencies [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+  - @atlaskit/media-card@52.0.4
+  - @atlaskit/media-test-helpers@20.1.2
+  - @atlaskit/media-ui@9.0.0
+
+## 35.1.2
+- [patch] [05d5d28e5d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05d5d28e5d):
+
+  - cleanup MVNG analytics as part of MS-1184
+
+## 35.1.1
+- [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
+
+  - MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme
+
 ## 35.1.0
 - [minor] [a74d635f1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a74d635f1c):
 

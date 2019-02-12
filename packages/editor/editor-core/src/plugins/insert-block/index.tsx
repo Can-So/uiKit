@@ -50,7 +50,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
     editorView,
     appearance,
     editorActions,
-    eventDispatcher,
+    dispatchAnalyticsEvent,
     providerFactory,
     popupsMountPoint,
     popupsBoundariesElement,
@@ -99,7 +99,9 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               editorView={editorView}
               tableSupported={!!tablesState}
               actionSupported={!!editorView.state.schema.nodes.taskItem}
-              mentionsSupported={!!(mentionState && mentionState.provider)}
+              mentionsSupported={
+                !!(mentionState && mentionState.mentionProvider)
+              }
               mentionsEnabled={mentionState}
               decisionSupported={!!editorView.state.schema.nodes.decisionItem}
               dateEnabled={!!dateState}
@@ -135,6 +137,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               popupsScrollableElement={popupsScrollableElement}
               insertMenuItems={options.insertMenuItems}
               editorActions={editorActions}
+              dispatchAnalyticsEvent={dispatchAnalyticsEvent}
             />
           )}
         />

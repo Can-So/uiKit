@@ -7,9 +7,13 @@ import { Command } from '../../types';
 import { ButtonAppearance } from './ui/Button';
 import { DropdownOptions, RenderOptionsPropsT } from './ui/Dropdown';
 import { SelectOptions, SelectOption } from './ui/Select';
+import { ProviderFactory } from '@atlaskit/editor-common';
+import React from 'react';
 
 export type Icon = React.ComponentType<{ label: string }>;
 export type RenderOptionsProps = RenderOptionsPropsT<Command>;
+
+export type AlignType = 'left' | 'center' | 'right';
 
 export type FloatingToolbarButton<T> = {
   type: 'button';
@@ -22,6 +26,27 @@ export type FloatingToolbarButton<T> = {
   disabled?: boolean;
   hidden?: boolean;
   appearance?: ButtonAppearance;
+  href?: string;
+  target?: string;
+};
+
+export type FloatingToolbarInput<T> = {
+  type: 'input';
+  onSubmit: (...args: any[]) => T;
+  onBlur: (...args: any[]) => T;
+  defaultValue?: string;
+  placeholder?: string;
+  hidden?: boolean;
+};
+
+export type FloatingToolbarCustom<T> = {
+  type: 'custom';
+  // No superset of all these types yet
+  render: (
+    view?: EditorView,
+    idx?: number,
+  ) => React.ComponentClass | React.SFC | React.ReactElement<any> | null;
+  hidden?: boolean;
 };
 
 export type FloatingToolbarSelect<T> = {
@@ -52,11 +77,12 @@ export type FloatingToolbarItem<T> =
   | FloatingToolbarButton<T>
   | FloatingToolbarDropdown<T>
   | FloatingToolbarSelect<T>
+  | FloatingToolbarInput<T>
+  | FloatingToolbarCustom<T>
   | FloatingToolbarSeparator;
 
 export interface FloatingToolbarConfig {
   title: string;
-
   /**
    * Override the DOM reference used to apply as the target for the
    * floating toolbar, if the config matches.
@@ -69,9 +95,14 @@ export interface FloatingToolbarConfig {
   visible?: boolean;
   nodeType: NodeType | NodeType[];
   items: Array<FloatingToolbarItem<Command>>;
+  align?: AlignType;
+  className?: string;
+  height?: number;
+  width?: number;
 }
 
 export type FloatingToolbarHandler = (
   state: EditorState,
   intl: InjectedIntl,
+  providerFactory: ProviderFactory,
 ) => FloatingToolbarConfig | undefined;

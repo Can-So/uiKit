@@ -1,5 +1,10 @@
 # @atlaskit/droplist
 
+## 7.0.19
+- [patch] [08d8be9370](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/08d8be9370):
+
+  - Close droplist on 'Esc' key down to be compatible with IE and Edge
+
 ## 7.0.18
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

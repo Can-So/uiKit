@@ -1,11 +1,9 @@
 import * as React from 'react';
 
-import { layers, colors } from '@atlaskit/theme';
+import { layers } from '@atlaskit/theme';
 import Spinner from '@atlaskit/spinner';
 import styled from 'styled-components';
 
-export const darkBlanketColor = colors.N700A;
-export const lightBlanketColor = 'rgba(255, 255, 255, 0.53)';
 const overlayZindex = layers.modal() + 10;
 
 export const Blanket = styled.div`
@@ -27,24 +25,24 @@ export const SpinnerWrapper = styled.div`
 SpinnerWrapper.displayName = 'SpinnerWrapper';
 
 interface Props {
-  mode: 'dark' | 'light' | 'none';
+  blankedColor?: string;
+  invertSpinnerColor?: boolean;
 }
 
-const getBackgroundColor = (mode: Props['mode']) => {
-  switch (mode) {
-    case 'dark':
-      return darkBlanketColor;
-    case 'light':
-      return lightBlanketColor;
-    default:
-      return 'none';
-  }
+const defaultProps: Props = {
+  blankedColor: 'none',
+  invertSpinnerColor: false,
 };
 
-export default ({ mode }: Props) => (
-  <Blanket style={{ backgroundColor: getBackgroundColor(mode) }}>
+export default ({ blankedColor, invertSpinnerColor }: Props) => (
+  <Blanket
+    style={{ backgroundColor: blankedColor || defaultProps.blankedColor }}
+  >
     <SpinnerWrapper>
-      <Spinner size="large" invertColor={mode !== 'light'} />
+      <Spinner
+        size="large"
+        invertColor={invertSpinnerColor || defaultProps.invertSpinnerColor}
+      />
     </SpinnerWrapper>
   </Blanket>
 );

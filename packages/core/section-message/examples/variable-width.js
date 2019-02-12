@@ -28,10 +28,12 @@ class Example extends Component<*, *> {
             title="The Modern Prometheus"
             actions={[
               {
+                key: 'mary',
                 href: 'https://en.wikipedia.org/wiki/Mary_Shelley',
                 text: 'Mary',
               },
               {
+                key: 'villa',
                 href: 'https://en.wikipedia.org/wiki/Villa_Diodati',
                 text: 'Villa Diodatti',
               },

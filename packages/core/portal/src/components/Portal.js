@@ -13,6 +13,7 @@ type Props = {
 
 type State = {
   container: ?HTMLElement,
+  portalIsMounted: boolean,
 };
 
 const createContainer = (zIndex: number) => {
@@ -53,6 +54,7 @@ class Portal extends React.Component<Props, State> {
 
   state = {
     container: canUseDOM ? createContainer(this.props.zIndex) : undefined,
+    portalIsMounted: false,
   };
 
   componentDidUpdate(prevProps: Props, prevState: State) {
@@ -80,6 +82,10 @@ class Portal extends React.Component<Props, State> {
       // eslint-disable-next-line react/no-did-mount-set-state
       this.setState({ container: newContainer });
     }
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({
+      portalIsMounted: true,
+    });
   }
   componentWillUnmount() {
     const { container } = this.state;
@@ -95,10 +101,10 @@ class Portal extends React.Component<Props, State> {
     }
   }
   render() {
-    const { container } = this.state;
-    return container
+    const { container, portalIsMounted } = this.state;
+    return container && portalIsMounted
       ? ReactDOM.createPortal(this.props.children, container)
-      : this.props.children;
+      : null;
   }
 }
 

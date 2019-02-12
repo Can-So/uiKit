@@ -92,3 +92,27 @@ test('should clean up elements after unmount', () => {
   const portal = document.querySelector('.atlaskit-portal');
   expect(portal).toBeNull();
 });
+
+test('portal mounts children only when it is attached to DOM', () => {
+  let DOMElement = null;
+  class ChildComponent extends React.Component<{}> {
+    componentDidMount() {
+      DOMElement = document.querySelector('body');
+    }
+    render() {
+      return <div>Hello World!!</div>;
+    }
+  }
+
+  const Wrapper = ({ renderPortal }: { renderPortal: boolean }) => (
+    <App>
+      {renderPortal && (
+        <Portal zIndex={500}>
+          <ChildComponent />
+        </Portal>
+      )}
+    </App>
+  );
+  wrapper = mount(<Wrapper renderPortal />);
+  expect(DOMElement).not.toBeNull();
+});

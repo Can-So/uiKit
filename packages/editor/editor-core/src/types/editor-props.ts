@@ -82,7 +82,7 @@ export interface EditorProps {
   primaryToolbarComponents?: ReactComponents;
   secondaryToolbarComponents?: ReactComponents;
   addonToolbarComponents?: ReactComponents;
-
+  allowAnalyticsGASV3?: boolean;
   // Configure allowed blocks in the editor, currently only supports `heading`, `blockquote`, `hardBreak` and `codeBlock`.
   allowBlockType?: { exclude?: Array<AllowedBlockTypes> };
 

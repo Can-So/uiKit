@@ -41,7 +41,7 @@ export default class Example extends React.Component<any, State> {
           />
           <WithEditorActions
             render={actions => (
-              <>
+              <React.Fragment>
                 <button
                   id="import-adf"
                   className="import-adf"
@@ -57,7 +57,7 @@ export default class Example extends React.Component<any, State> {
                   Export ADF
                 </button>
                 <FullPageEditor />
-              </>
+              </React.Fragment>
             )}
           />
         </div>

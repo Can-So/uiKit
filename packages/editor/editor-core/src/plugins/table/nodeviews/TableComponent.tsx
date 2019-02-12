@@ -2,6 +2,8 @@ import * as React from 'react';
 import rafSchedule from 'raf-schd';
 import { Node as PmNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
+import { TableMap } from 'prosemirror-tables';
+
 import {
   browser,
   calcTableWidth,
@@ -109,7 +111,8 @@ class TableComponent extends React.Component<ComponentProps> {
     updateRightShadow(this.wrapper, this.table, this.rightShadow);
 
     if (this.props.node.attrs.__autoSize) {
-      this.handleAutoSize();
+      // Wait for next tick to handle auto sizing, gives the browser time to do layout calc etc.
+      this.handleAutoSizeDebounced();
     } else if (this.props.allowColumnResizing && this.table) {
       this.handleTableResizing(prevProps);
     }
@@ -238,11 +241,11 @@ class TableComponent extends React.Component<ComponentProps> {
     const prevAttrs = prevProps.node.attrs;
     const currentAttrs = node.attrs;
 
-    const prevColCount = prevProps.node.firstChild!.childCount;
-    const currentColCount = node.firstChild!.childCount;
+    const prevMap = TableMap.get(prevProps.node);
+    const currentMap = TableMap.get(node);
 
     if (
-      prevColCount !== currentColCount ||
+      prevMap.width !== currentMap.width ||
       prevAttrs.layout !== currentAttrs.layout ||
       prevAttrs.isNumberColumnEnabled !== currentAttrs.isNumberColumnEnabled ||
       prevAttrs.__autoSize !== currentAttrs.__autoSize ||
@@ -277,6 +280,8 @@ class TableComponent extends React.Component<ComponentProps> {
       autoSizeTable(node, this.table, getPos())(state, dispatch);
     }
   };
+
+  private handleAutoSizeDebounced = rafSchedule(this.handleAutoSize);
 }
 
 export const updateRightShadow = (

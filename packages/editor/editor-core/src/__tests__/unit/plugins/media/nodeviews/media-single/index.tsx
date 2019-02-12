@@ -27,7 +27,6 @@ const getFreshMediaProvider = () =>
   storyMediaProviderFactory({
     collectionName: testCollectionName,
     stateManager,
-
     includeUserAuthProvider: true,
   });
 
@@ -72,6 +71,7 @@ describe('nodeviews/mediaSingle', () => {
       },
       handleMediaNodeMount: () => {},
       updateElement: jest.fn(),
+      updateMediaNodeAttrs: jest.fn(),
     };
 
     pluginState.stateManager = stateManager;
@@ -185,6 +185,49 @@ describe('nodeviews/mediaSingle', () => {
 
       nodeView.ignoreMutation();
       expect(renderMock).toBeCalled();
+    });
+  });
+
+  describe('when dimensions are missing on images', () => {
+    it('asks media APIs for dimensions when not in ADF and updates it', async () => {
+      const mediaNodeAttrs = {
+        id: 'foo',
+        type: 'file',
+        collection: 'collection',
+      };
+
+      const mediaNode = media(mediaNodeAttrs as MediaAttributes)();
+      const mediaSingleNodeWithoutDimensions = mediaSingle()(mediaNode);
+
+      const wrapper = mount(
+        <MediaSingle
+          view={view}
+          eventDispatcher={eventDispatcher}
+          node={mediaSingleNodeWithoutDimensions(defaultSchema)}
+          lineLength={680}
+          getPos={getPos}
+          width={123}
+          selected={() => 1}
+          editorAppearance="full-page"
+        />,
+      );
+
+      (wrapper.instance() as MediaSingle).getRemoteDimensions = () =>
+        Promise.resolve({
+          id: 'foo',
+          height: 100,
+          width: 100,
+        });
+
+      await (wrapper.instance() as MediaSingle).componentDidMount();
+      expect(pluginState.updateMediaNodeAttrs).toHaveBeenCalledWith(
+        'foo',
+        {
+          height: 100,
+          width: 100,
+        },
+        true,
+      );
     });
   });
   afterEach(() => {

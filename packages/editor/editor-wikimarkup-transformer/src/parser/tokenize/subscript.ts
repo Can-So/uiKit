@@ -1,15 +1,15 @@
-import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenType, TokenErrCallback } from './';
+import { Node as PMNode } from 'prosemirror-model';
+import { Token, TokenType, TokenParser } from './';
 import { hasAnyOfMarks } from '../utils/text';
 import { commonFormatter } from './common-formatter';
 import { parseString } from '../text';
 
-export function subscript(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const subscript: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   /**
    * The following token types will be ignored in parsing
    * the content of a  mark
@@ -19,7 +19,7 @@ export function subscript(
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
   ];
-  /** Adding subsup mark to all text */
+  // Adding subsup mark to all text
   const contentDecorator = (n: PMNode) => {
     const mark = schema.marks.subsup.create({ type: 'sub' });
     // We don't want to mix `code` mark with others
@@ -30,12 +30,12 @@ export function subscript(
   };
 
   const rawContentProcessor = (raw: string, length: number): Token => {
-    const content = parseString(
-      raw,
+    const content = parseString({
       schema,
-      ignoreTokenTypes,
-      tokenErrCallback,
-    );
+      context,
+      ignoreTokenTypes: ignoreTokenTypes,
+      input: raw,
+    });
     const decoratedContent = content.map(contentDecorator);
 
     return {
@@ -48,6 +48,7 @@ export function subscript(
   return commonFormatter(input, position, schema, {
     opening: '~',
     closing: '~',
+    context,
     rawContentProcessor,
   });
-}
+};

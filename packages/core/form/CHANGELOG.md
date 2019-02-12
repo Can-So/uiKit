@@ -1,5 +1,10 @@
 # @atlaskit/form
 
+## 5.1.4
+- [patch] [0c0f20c9cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c0f20c9cf):
+
+  - Fix typo in Field.js
+
 ## 5.1.3
 - [patch] [a360a3d2b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a360a3d2b6):
 

@@ -1,12 +1,7 @@
-import { Schema } from 'prosemirror-model';
-import { Token } from './';
+import { TokenParser } from './';
 import { parseNewlineOnly } from './whitespace';
 
-export function hardbreak(
-  input: string,
-  position: number,
-  schema: Schema,
-): Token {
+export const hardbreak: TokenParser = ({ input, position, schema }) => {
   // Look for normal hardbreak \r, \n, \r\n
   const length = parseNewlineOnly(input.substring(position));
 
@@ -24,4 +19,4 @@ export function hardbreak(
     nodes: [schema.nodes.hardBreak.createChecked()],
     length,
   };
-}
+};

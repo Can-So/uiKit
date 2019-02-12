@@ -1,5 +1,15 @@
 # @atlaskit/editor-common
 
+## 31.0.4
+- [patch] [44a42d5eb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44a42d5eb3):
+
+  - ED-5846: Refactoring new hyperlink toolbar and adding typeahead to the new floating toolbar
+
+## 31.0.3
+- [patch] [50fb94a34f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/50fb94a34f):
+
+  - ED-6174: Breakout marks should be 100% of parent container
+
 ## 31.0.2
 - [patch] [c82c636533](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c82c636533):
 

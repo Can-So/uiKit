@@ -57,13 +57,21 @@ export default class ResizableMediaSingle extends React.Component<
   }
 
   async componentDidMount() {
+    this.checkVideoFile(this.props.viewContext);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.viewContext !== nextProps.viewContext) {
+      this.checkVideoFile(nextProps.viewContext);
+    }
+  }
+
+  async checkVideoFile(viewContext) {
     const $pos = this.$pos;
-    if (!$pos || !this.props.mediaProvider) {
+    if (!$pos || !viewContext) {
       return;
     }
-    const mediaProvider = await this.props.mediaProvider;
     const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
-    const viewContext = await mediaProvider.viewContext;
     const state = await viewContext.file.getCurrentState(
       getMediaNode!.attrs.id,
     );

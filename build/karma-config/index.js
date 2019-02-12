@@ -129,7 +129,7 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
         os_version: '8.1',
         browser_version: '11',
       },
-      // Browserstack longer supports emulators or simulators adn our plan does not allow us to test on real devices.
+      // Browserstack no longer supports emulators or simulators and our plan does not allow us to test on real devices.
       // iphone: {
       //   os: 'ios',
       //   os_version: '11.0',
@@ -140,11 +140,13 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
         browser: 'chrome',
         os: 'OS X',
         os_version: 'El Capitan',
+        browser_version: '72',
       },
       firefox_latest_windows: {
         browser: 'firefox',
         os: 'WINDOWS',
         os_version: '10',
+        browser_version: '64',
       },
       safari_latest: {
         browser: 'Safari',

@@ -1,5 +1,18 @@
 # @atlaskit/media-picker
 
+## 33.0.2
+- Updated dependencies [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+  - @atlaskit/media-card@52.0.4
+  - @atlaskit/media-editor@27.0.3
+  - @atlaskit/media-test-helpers@20.1.2
+  - @atlaskit/media-viewer@35.2.0
+  - @atlaskit/media-ui@9.0.0
+
+## 33.0.1
+- [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
+
+  - MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme
+
 ## 33.0.0
 - [major] [65b73cc466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65b73cc466):
 

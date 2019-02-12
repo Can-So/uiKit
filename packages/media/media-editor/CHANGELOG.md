@@ -1,5 +1,19 @@
 # @atlaskit/media-editor
 
+## 27.0.3
+- [patch] [87a9c70162](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/87a9c70162):
+
+  - Update use of ModalSpinner component
+- Updated dependencies [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+  - @atlaskit/media-card@52.0.4
+  - @atlaskit/media-test-helpers@20.1.2
+  - @atlaskit/media-ui@9.0.0
+
+## 27.0.2
+- [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
+
+  - MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme
+
 ## 27.0.1
 - [patch] [9df2a5bd88](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9df2a5bd88):
 

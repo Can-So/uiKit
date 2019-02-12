@@ -69,8 +69,11 @@ export type MentionContextIdentifier = {
 
 export interface MentionProvider
   extends ResourceProvider<MentionDescription[]> {
-  filter(query?: string): void;
-  recordMentionSelection(mention: MentionDescription): void;
+  filter(query?: string, contextIdentifier?: MentionContextIdentifier): void;
+  recordMentionSelection(
+    mention: MentionDescription,
+    contextIdentifier?: MentionContextIdentifier,
+  ): void;
   shouldHighlightMention(mention: MentionDescription): boolean;
   isFiltering(query: string): boolean;
 }

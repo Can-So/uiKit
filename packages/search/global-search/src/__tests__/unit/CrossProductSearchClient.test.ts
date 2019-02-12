@@ -3,6 +3,7 @@ import CrossProductSearchClient, {
   SearchSession,
   ScopeResult,
   ABTest,
+  CrossProductExperimentResponse,
 } from '../../api/CrossProductSearchClient';
 import { Scope, ConfluenceItem, PersonItem } from '../../api/types';
 import 'whatwg-fetch';
@@ -22,13 +23,17 @@ import {
   generateRandomJiraProject,
 } from '../../../example-helpers/mockJira';
 
-function apiWillReturn(state: CrossProductSearchResponse) {
-  const opts = {
-    method: 'post',
-    name: 'xpsearch',
-  };
+const DEFAULT_XPSEARCH_OPTS = {
+  method: 'post',
+  name: 'xpsearch',
+};
 
-  fetchMock.mock('localhost/quicksearch/v1', state, opts);
+function apiWillReturn(state: CrossProductSearchResponse) {
+  fetchMock.mock('localhost/quicksearch/v1', state, DEFAULT_XPSEARCH_OPTS);
+}
+
+function experimentApiWillReturn(state: CrossProductExperimentResponse) {
+  fetchMock.mock('localhost/experiment/v1', state, DEFAULT_XPSEARCH_OPTS);
 }
 
 const abTest: ABTest = {
@@ -342,11 +347,10 @@ describe('CrossProductSearchClient', () => {
         controlId: 'controlId',
       };
 
-      apiWillReturn({
+      experimentApiWillReturn({
         scopes: [
           {
             id: 'confluence.page,blogpost' as Scope,
-            results: [],
             abTest,
           },
         ],
@@ -359,12 +363,12 @@ describe('CrossProductSearchClient', () => {
       expect(result).toEqual(abTest);
     });
 
-    it('should not fail when there is no ab test data', async () => {
-      apiWillReturn({
+    it('should not fail if getting experiments fails', async () => {
+      experimentApiWillReturn({
         scopes: [
           {
             id: 'confluence.page,blogpost' as Scope,
-            results: [],
+            error: 'did not work',
           },
         ],
       });

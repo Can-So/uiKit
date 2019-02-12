@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import {
-  akColorY200,
-  akColorP200,
-  akColorB300,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 import { IconWrapper } from '../../styled';
 
 describe('CardGenericViewSmall', () => {
@@ -12,12 +8,12 @@ describe('CardGenericViewSmall', () => {
     describe('IconWrapper', () => {
       it('should render the correct color when type="image"', () => {
         const element = shallow(<IconWrapper type="image" />);
-        expect(element).toHaveStyleRule('color', akColorY200);
+        expect(element).toHaveStyleRule('color', colors.Y200);
       });
 
       it('should render the correct color when type="audio"', () => {
         const element = shallow(<IconWrapper type="audio" />);
-        expect(element).toHaveStyleRule('color', akColorP200);
+        expect(element).toHaveStyleRule('color', colors.P200);
       });
 
       it('should render the correct color when type="video"', () => {
@@ -27,7 +23,7 @@ describe('CardGenericViewSmall', () => {
 
       it('should render the correct color when type="doc"', () => {
         const element = shallow(<IconWrapper type="doc" />);
-        expect(element).toHaveStyleRule('color', akColorB300);
+        expect(element).toHaveStyleRule('color', colors.B300);
       });
 
       it('should render the correct color when type="unknown"', () => {

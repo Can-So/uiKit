@@ -1,3 +1,12 @@
+const itemViewerModule = require.requireActual(
+  '../../../newgen/analytics/item-viewer',
+);
+const mediaPreviewFailedEventSpy = jest.fn();
+jest.mock('../../../newgen/analytics/item-viewer', () => ({
+  ...itemViewerModule,
+  mediaPreviewFailedEvent: mediaPreviewFailedEventSpy,
+}));
+
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { ErrorMessage, createError } from '../../../newgen/error';
@@ -52,5 +61,17 @@ describe('Error Message', () => {
       </ErrorMessage>,
     );
     expect(el.find(Button)).toHaveLength(1);
+  });
+
+  it('should trigger analytics when displayed', () => {
+    mount(
+      <ErrorMessage intl={fakeIntl} error={createError('unsupported')}>
+        <Button />
+      </ErrorMessage>,
+    );
+    expect(mediaPreviewFailedEventSpy).toHaveBeenCalledWith(
+      'unsupported',
+      undefined,
+    );
   });
 });

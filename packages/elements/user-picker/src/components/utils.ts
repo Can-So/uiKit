@@ -2,6 +2,8 @@ import memoizeOne from 'memoize-one';
 import { ReactChild, ReactElement } from 'react';
 import {
   AtlaskitSelectValue,
+  Email,
+  EmailType,
   Option,
   OptionData,
   Promisable,
@@ -20,6 +22,9 @@ export const isSingle = (option: Value): option is OptionData =>
 
 export const isTeam = (option: OptionData): option is Team =>
   option.type === TeamType;
+
+export const isEmail = (option: OptionData): option is Email =>
+  option.type === EmailType;
 
 export const optionToSelectableOption = (option: OptionData): Option => ({
   label: option.name,

@@ -313,7 +313,7 @@ export default class ResizeState {
   }
 
   scale(newWidth: number): ResizeState {
-    const scaleFactor = newWidth / this.maxSize;
+    const scaleFactor = newWidth / this.totalWidth;
 
     let newState = new ResizeState(
       this.cols.map(col => {

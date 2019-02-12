@@ -1,9 +1,9 @@
 import { GasPayload } from '@atlaskit/analytics-gas-types';
-import { context, PackageContext } from './index';
+import { packageAttributes, PackageAttributes } from './index';
 
 export type ZoomType = 'zoomOut' | 'zoomIn';
 export interface ZoomControlsGasPayload extends GasPayload {
-  attributes: PackageContext & {
+  attributes: PackageAttributes & {
     zoomScale: number;
   };
 }
@@ -19,7 +19,7 @@ export function createZoomEvent(
     actionSubjectId: zoomType,
     attributes: {
       zoomScale,
-      ...context,
+      ...packageAttributes,
     },
   };
 }

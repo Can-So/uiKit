@@ -1,17 +1,16 @@
-import { Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback } from '../index';
+import { Token, TokenParser } from '../index';
 import { resolveLink } from './link-resolver';
 import { parseContentLink } from './link-parser';
 
 // [http://www.example.com] and [Example|http://www.example.com]
 const LINK_FORMAT_REGEXP = /^\[([^\[\]\n]+)]/;
 
-export function linkFormat(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const linkFormat: TokenParser = ({
+  input,
+  position,
+  schema,
+  context,
+}) => {
   const match = input.substring(position).match(LINK_FORMAT_REGEXP);
 
   if (!match) {
@@ -20,8 +19,8 @@ export function linkFormat(
 
   const content = parseContentLink(match[1]);
 
-  return resolveLink(content, schema, tokenErrCallback);
-}
+  return resolveLink(content, schema, context);
+};
 
 function fallback(): Token {
   return {
