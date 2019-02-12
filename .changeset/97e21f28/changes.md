@@ -1,0 +1,1 @@
+- Spotlight footer and header props will now only accept React components
