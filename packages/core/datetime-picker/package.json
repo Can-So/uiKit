@@ -50,6 +50,7 @@
     "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "^3.7.0",
+    "enzyme-to-json": "^3.3.0",
     "moment": "^2.22.2",
     "react-dom": "^16.4.2",
     "react-lorem-component": "^0.12.2",
