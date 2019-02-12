@@ -170,6 +170,8 @@ export default function generateProductConfig(
     createTooltip,
     createDrawerContents,
 
+    enableAtlassianSwitcher,
+
     searchTooltip,
     onSearchClick,
     searchDrawerContents,
@@ -220,6 +222,10 @@ export default function generateProductConfig(
       onSettingsClick || (settingsDrawerContents && openDrawer('settings')),
       settingsTooltip,
     ),
+    atlassianSwitcher: enableAtlassianSwitcher
+      ? configFactory(openDrawer('atlassianSwitcher'))
+      : null,
+
     notification: notificationConfigFactory(
       notificationTooltip,
       notificationCount,
@@ -235,12 +241,13 @@ export default function generateProductConfig(
       loginHref,
       profileIconUrl,
     ),
-    appSwitcher: appSwitcherComponent
-      ? {
-          itemComponent: appSwitcherComponent,
-          label: appSwitcherTooltip,
-          tooltip: appSwitcherTooltip,
-        }
-      : null,
+    appSwitcher:
+      appSwitcherComponent && !enableAtlassianSwitcher
+        ? {
+            itemComponent: appSwitcherComponent,
+            label: appSwitcherTooltip,
+            tooltip: appSwitcherTooltip,
+          }
+        : null,
   };
 }

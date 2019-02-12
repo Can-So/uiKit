@@ -7,6 +7,8 @@ import { NotificationIndicator } from '@atlaskit/notification-indicator';
 import { NotificationLogClient } from '@atlaskit/notification-log-client';
 import { GlobalNav } from '@atlaskit/navigation-next';
 import Drawer from '@atlaskit/drawer';
+import { JiraSwitcher } from '@atlaskit/atlassian-switcher';
+import fetchMock from 'fetch-mock';
 import {
   name as packageName,
   version as packageVersion,
@@ -32,6 +34,7 @@ type GlobalNavigationState = {
   isNotificationDrawerOpen: boolean,
   isStarredDrawerOpen: boolean,
   isSettingsDrawerOpen: boolean,
+  isAtlassianSwitcherDrawerOpen: boolean,
   notificationCount: number,
 };
 
@@ -61,6 +64,9 @@ export default class GlobalNavigation extends Component<
     create: {
       isControlled: false,
     },
+    atlassianSwitcher: {
+      isControlled: false,
+    },
   };
   isNotificationInbuilt = false;
 
@@ -73,6 +79,7 @@ export default class GlobalNavigation extends Component<
       isNotificationDrawerOpen: false,
       isStarredDrawerOpen: false,
       isSettingsDrawerOpen: false,
+      isAtlassianSwitcherDrawerOpen: false,
       notificationCount: 0,
     };
 
@@ -339,9 +346,27 @@ export default class GlobalNavigation extends Component<
     };
   };
 
+  getDrawerContents = drawerName => {
+    const { cloudId, triggerXFlow } = this.props;
+    switch (drawerName) {
+      case 'atlassianSwitcher':
+        return () => (
+          <JiraSwitcher cloudId={cloudId} triggerXFlow={triggerXFlow} />
+        );
+      case 'notification':
+        if (this.isNotificationInbuilt) {
+          return this.renderNotificationDrawerContents;
+        }
+        break;
+      default:
+    }
+    return this.props[`${drawerName}DrawerContents`];
+  };
+
   render() {
     // TODO: Look into memoizing this to avoid memory bloat
     const { primaryItems, secondaryItems } = this.constructNavItems();
+    const { enableAtlassianSwitcher } = this.props;
 
     return (
       <NavigationAnalyticsContext
@@ -358,6 +383,12 @@ export default class GlobalNavigation extends Component<
             secondaryItems={secondaryItems}
           />
           {Object.keys(this.drawers).map(drawerName => {
+            if (
+              drawerName === 'atlassianSwitcher' &&
+              !enableAtlassianSwitcher
+            ) {
+              return null;
+            }
             const capitalisedDrawerName = this.getCapitalisedDrawerName(
               drawerName,
             );
@@ -365,10 +396,7 @@ export default class GlobalNavigation extends Component<
               `should${capitalisedDrawerName}UnmountOnExit`
             ];
 
-            const DrawerContents =
-              drawerName === 'notification' && this.isNotificationInbuilt
-                ? this.renderNotificationDrawerContents
-                : this.props[`${drawerName}DrawerContents`];
+            const DrawerContents = this.getDrawerContents(drawerName);
 
             if (!DrawerContents) {
               return null;
