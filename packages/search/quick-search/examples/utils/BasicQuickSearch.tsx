@@ -28,7 +28,7 @@ const data: DataShape[] = [
   },
 ];
 
-const availableResultTypes: { [key: string]: React.ComponentClass<any> }  = {
+const availableResultTypes: { [key: string]: React.ComponentClass<any> } = {
   person: PersonResult,
   object: ObjectResult,
   container: ContainerResult,
