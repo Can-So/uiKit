@@ -42,3 +42,6 @@ secrets.json
 
 # this is created only in deploy-branch-build-dists builds in CI
 dists/
+
+# allow using .envrc to automate local environment, exclude from CVS
+.envrc
