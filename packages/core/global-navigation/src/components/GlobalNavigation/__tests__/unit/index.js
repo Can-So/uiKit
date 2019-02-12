@@ -765,7 +765,7 @@ describe('GlobalNavigation', () => {
       expect(wrapper.find(NotificationIndicator).exists()).toBeTruthy();
     });
 
-    describe.only('Controlled inbuilt notification', () => {
+    describe('Controlled inbuilt notification', () => {
       it('should be controllable', () => {
         const wrapper = mount(
           <GlobalNavigation
