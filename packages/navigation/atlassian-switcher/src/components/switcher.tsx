@@ -139,7 +139,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
             ),
           )}
         </Section>
-        Î{customLinksData && <ManageButton href={customLinksData[1]} />}
+        {customLinksData && <ManageButton href={customLinksData[1]} />}
       </SwitcherWrapper>
     );
   }
