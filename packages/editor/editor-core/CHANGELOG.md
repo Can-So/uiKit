@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.8.0
+- [minor] [cde3ff657f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cde3ff657f):
+
+  - ED-6134 Add analytics GAS V3 for text formatting, headers and blockQuotes
+
 ## 98.7.2
 - [patch] [6981b6d25a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6981b6d25a):
 

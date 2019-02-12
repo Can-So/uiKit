@@ -1,1 +1,0 @@
-- ED-6134 Add analytics GAS V3 for text formatting, headers and blockQuotes
