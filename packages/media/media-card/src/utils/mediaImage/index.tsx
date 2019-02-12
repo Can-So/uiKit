@@ -46,7 +46,6 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
   // and if it does recalculate the image height and width
 
   componentDidMount() {
-    console.log('Mounting mediaImage!');
     const parent = ReactDOM.findDOMNode(this)!.parentElement;
     if (!parent) {
       return;
@@ -405,7 +404,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
 
       style.transform += ` ${transform}`;
     }
-    // console.log({style: JSON.stringify(style)});
+
     return (
       <ImageComponent
         draggable={false}
