@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.7.2
+- [patch] [6981b6d25a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6981b6d25a):
+
+  - ED-6214: Fix resizing when rowspan exists in non last column
+
 ## 98.7.1
 - [patch] [a22478c227](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22478c227):
 
