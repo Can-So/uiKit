@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.9.0
+- [minor] [59ae46e1cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59ae46e1cf):
+
+  - ED-5061: migrate media toolbar to new internal architecture
+
 ## 98.8.2
 - [patch] [19a823bf2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/19a823bf2a):
 

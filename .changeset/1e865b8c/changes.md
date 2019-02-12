@@ -1,1 +1,0 @@
-- ED-5061: migrate media toolbar to new internal architecture
