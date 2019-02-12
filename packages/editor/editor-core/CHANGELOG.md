@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.7.1
+- [patch] [a22478c227](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22478c227):
+
+  - ED-6133: Re-draw resized columns in collab, cater for overflow tables when resizing
+
 ## 98.7.0
 - [minor] [44a42d5eb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44a42d5eb3):
 

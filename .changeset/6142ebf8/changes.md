@@ -1,1 +1,0 @@
-- ED-6133: Re-draw resized columns in collab, cater for overflow tables when resizing
