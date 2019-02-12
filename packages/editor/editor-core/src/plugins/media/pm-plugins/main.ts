@@ -34,7 +34,7 @@ import {
 import DefaultMediaStateManager from '../default-state-manager';
 import { insertMediaSingleNode } from '../utils/media-single';
 
-import { hasParentNodeOfType, findDomRefAtPos } from 'prosemirror-utils';
+import { findDomRefAtPos } from 'prosemirror-utils';
 export { DefaultMediaStateManager };
 export { MediaState, MediaProvider, MediaStateStatus, MediaStateManager };
 
@@ -743,20 +743,6 @@ export class MediaPluginState {
     ) {
       return selection.node;
     }
-  }
-
-  isLayoutSupported(): boolean {
-    const { selection, schema } = this.view.state;
-    if (
-      selection instanceof NodeSelection &&
-      selection.node.type === schema.nodes.mediaSingle
-    ) {
-      return (
-        !hasParentNodeOfType(schema.nodes.bodiedExtension)(selection) &&
-        !hasParentNodeOfType(schema.nodes.layoutSection)(selection)
-      );
-    }
-    return false;
   }
 
   /**

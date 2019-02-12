@@ -1,29 +1,23 @@
 import * as React from 'react';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
-import { EditorPlugin } from '../../types';
+import { EditorPlugin, EditorAppearance } from '../../types';
 import {
   stateKey as pluginKey,
   createPlugin,
   MediaState,
   MediaStateManager,
   DefaultMediaStateManager,
-  MediaPluginState,
 } from './pm-plugins/main';
 import keymapMediaSinglePlugin from './pm-plugins/keymap-media-single';
 import keymapPlugin from './pm-plugins/keymap';
 import ToolbarMedia from './ui/ToolbarMedia';
-import MediaSingleEdit from './ui/MediaSingleEdit';
 import { ReactMediaGroupNode } from './nodeviews/mediaGroup';
 import { ReactMediaSingleNode } from './nodeviews/mediaSingle';
 import { CustomMediaPicker, MediaProvider } from './types';
-import WithPluginState from '../../ui/WithPluginState';
-import { akEditorFullPageMaxWidth } from '@atlaskit/editor-common';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
-import {
-  pluginKey as editorDisabledPluginKey,
-  EditorDisabledPluginState,
-} from '../editor-disabled';
+import { floatingToolbar } from './toolbar';
+
 import {
   addAnalytics,
   ACTION,
@@ -54,7 +48,10 @@ export interface MediaSingleOptions {
   disableLayout?: boolean;
 }
 
-const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
+const mediaPlugin = (
+  options?: MediaOptions,
+  appearance?: EditorAppearance,
+): EditorPlugin => ({
   nodes() {
     return [
       { name: 'mediaGroup', node: mediaGroup },
@@ -130,66 +127,6 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
     );
   },
 
-  contentComponent({ editorView, appearance }) {
-    if (!options) {
-      return null;
-    }
-
-    const { allowMediaSingle } = options;
-    let disableLayout: boolean | undefined;
-    if (typeof allowMediaSingle === 'object') {
-      disableLayout = allowMediaSingle.disableLayout;
-    }
-
-    if (
-      (typeof allowMediaSingle === 'boolean' && allowMediaSingle === false) ||
-      (typeof disableLayout === 'boolean' && disableLayout === true)
-    ) {
-      return null;
-    }
-
-    return (
-      <WithPluginState
-        editorView={editorView}
-        plugins={{
-          mediaState: pluginKey,
-          disabled: editorDisabledPluginKey,
-        }}
-        render={({
-          mediaState,
-          disabled,
-        }: {
-          mediaState: MediaPluginState;
-          disabled: EditorDisabledPluginState;
-        }) => {
-          const { element: target, layout } = mediaState;
-          const node = mediaState.selectedMediaContainerNode();
-          const isFullPage = appearance === 'full-page';
-          const allowBreakout = !!(
-            node &&
-            node.type === mediaSingle &&
-            node.firstChild!.attrs &&
-            node.firstChild!.attrs.width > akEditorFullPageMaxWidth &&
-            isFullPage
-          );
-          const allowLayout = isFullPage && !!mediaState.isLayoutSupported();
-          const { allowResizing } = mediaState.getMediaOptions();
-          return (
-            <MediaSingleEdit
-              pluginState={mediaState}
-              allowBreakout={allowBreakout}
-              allowLayout={allowLayout}
-              layout={layout}
-              target={target}
-              allowResizing={allowResizing}
-              editorDisabled={disabled.editorDisabled}
-            />
-          );
-        }}
-      />
-    );
-  },
-
   secondaryToolbarComponent({ editorView, disabled }) {
     return (
       <ToolbarMedia
@@ -224,6 +161,14 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
         },
       },
     ],
+
+    floatingToolbar: (state, intl) =>
+      floatingToolbar(
+        state,
+        intl,
+        options && options.allowResizing,
+        appearance,
+      ),
   },
 });
 
