@@ -1,5 +1,10 @@
 # @atlaskit/user-picker
 
+## 1.0.18
+- [patch] [0809a67d7b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0809a67d7b):
+
+  - FS-3591 hide selected users from multi picker
+
 ## 1.0.17
 - [patch] [67f0d11134](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67f0d11134):
 
