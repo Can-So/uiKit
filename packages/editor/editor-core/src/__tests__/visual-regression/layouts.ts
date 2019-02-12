@@ -1,84 +1,48 @@
-import {
-  initEditor,
-  snapshot,
-  insertBlockMenuItem,
-  clearEditor,
-} from './_utils';
-import { messages } from '../../plugins/insert-block/ui/ToolbarInsertBlock/index';
-import { messages as toolbarMessages } from '../../plugins/layout/toolbar';
+import { initFullPageEditorWithAdf, snapshot, deviceViewPorts } from './_utils';
+import * as col2 from './__fixtures__/column2-adf.json';
+import * as col3 from './__fixtures__/column3-adf.json';
 
-const firstColumn = '[data-layout-section] [data-layout-column]:nth-child(1)';
-const secondColumn = '[data-layout-section] [data-layout-column]:nth-child(2)';
-const thirdColumn = '[data-layout-section] [data-layout-column]:nth-child(3)';
-
-const threeColumnsLayout = `div[aria-label="Columns floating controls"] [aria-label="${
-  toolbarMessages.threeColumns.defaultMessage
-}"]`;
-
-describe.skip('Snapshot Test: Layouts', () => {
+describe('Snapshot Test: Layouts', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initEditor(page, 'full-page');
-  });
-
-  beforeEach(async () => {
-    await clearEditor(page);
   });
 
   describe('2 columns', () => {
-    it('should correctly render layout', async () => {
-      await page.setViewport({ width: 1100, height: 500 });
-      await insertBlockMenuItem(page, messages.columns.defaultMessage);
-      await page.waitForSelector(firstColumn);
-      await page.click(firstColumn);
-      await page.keyboard.type('Column 1');
-      await page.click(secondColumn);
-      await page.keyboard.type('Column 2');
+    it('should correctly render layout on MDPI', async () => {
+      await page.setViewport(deviceViewPorts.LaptopMDPI);
+      await initFullPageEditorWithAdf(page, col2);
       await snapshot(page);
     });
 
-    it('should stack layout on smaller screen sizes', async () => {
-      await page.setViewport({ width: 600, height: 500 });
-      await insertBlockMenuItem(page, messages.columns.defaultMessage);
-      await page.waitForSelector(firstColumn);
-      await page.click(firstColumn);
-      await page.keyboard.type('Column 1');
-      await page.click(secondColumn);
-      await page.keyboard.type('Column 2');
+    it('should stack layout on smaller ipad', async () => {
+      await page.setViewport(deviceViewPorts.iPad);
+      await initFullPageEditorWithAdf(page, col2);
+      await page.click('[data-layout-section="true"]');
+      await snapshot(page);
+    });
+
+    it('should stack layout on smaller iPhone', async () => {
+      await page.setViewport(deviceViewPorts.iPhonePlus);
+      await initFullPageEditorWithAdf(page, col2);
+      await page.click('[data-layout-section="true"]');
       await snapshot(page);
     });
   });
 
   describe('3 columns', () => {
     it('should correctly render layout', async () => {
-      await page.setViewport({ width: 1100, height: 500 });
-      await insertBlockMenuItem(page, messages.columns.defaultMessage);
-      await page.waitForSelector(threeColumnsLayout);
-      await page.click(threeColumnsLayout);
-      await page.waitForSelector(firstColumn);
-      await page.click(firstColumn);
-      await page.keyboard.type('Column 1');
-      await page.click(secondColumn);
-      await page.keyboard.type('Column 2');
-      await page.click(thirdColumn);
-      await page.keyboard.type('Column 3');
+      await page.setViewport(deviceViewPorts.LaptopMDPI);
+      await initFullPageEditorWithAdf(page, col3);
+      await page.click('[data-layout-section="true"]');
       await snapshot(page);
     });
 
     it('should stack layout on smaller screen sizes', async () => {
-      await page.setViewport({ width: 600, height: 500 });
-      await insertBlockMenuItem(page, messages.columns.defaultMessage);
-      await page.waitForSelector(threeColumnsLayout);
-      await page.click(threeColumnsLayout);
-      await page.waitForSelector(firstColumn);
-      await page.click(firstColumn);
-      await page.keyboard.type('Column 1');
-      await page.click(secondColumn);
-      await page.keyboard.type('Column 2');
-      await page.click(thirdColumn);
-      await page.keyboard.type('Column 3');
+      await page.setViewport(deviceViewPorts.iPhonePlus);
+      await initFullPageEditorWithAdf(page, col3);
+      await page.click('[data-layout-section="true"]');
       await snapshot(page);
     });
   });
