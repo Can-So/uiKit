@@ -1,0 +1,1 @@
+- ED-6133: Fix scaling up going into overflow
