@@ -533,4 +533,13 @@ describe('CardView', () => {
     expect(actualReturnedEvent.payload.action).toEqual('clicked');
     expect(actualReturnedEvent.context).toEqual(actualFiredEvent.context);
   });
+
+  it('should not use pointer cursor for external images', () => {
+    const card = shallowCardViewBaseElement({
+      dataURI: 'a',
+      mediaItemType: 'external-image',
+    });
+
+    expect(card.find(Wrapper).prop('shouldUsePointerCursor')).toBeFalsy();
+  });
 });
