@@ -27,13 +27,7 @@ export interface MediaBaseAttributes {
    */
   id: string;
   collection: string;
-  /**
-   * @type integer
-   */
   height?: number;
-  /**
-   * @type integer
-   */
   width?: number;
   /**
    * @minLength 1

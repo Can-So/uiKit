@@ -466,10 +466,10 @@
                   "type": "string"
                 },
                 "height": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "width": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "occurrenceKey": {
                   "type": "string",

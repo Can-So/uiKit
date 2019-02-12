@@ -1,0 +1,1 @@
+- Revert type change to width/height attributes for media node
