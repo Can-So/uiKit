@@ -3,7 +3,7 @@ import { Transformer } from '@atlaskit/editor-common';
 import { Node as PMNode, Schema } from 'prosemirror-model';
 import { encode } from './encoder';
 import AbstractTree from './parser/abstract-tree';
-import { TokenErrCallback } from './parser/tokenize';
+import { Context } from './parser/tokenize';
 
 export class WikiMarkupTransformer implements Transformer<string> {
   private schema: Schema;
@@ -16,9 +16,10 @@ export class WikiMarkupTransformer implements Transformer<string> {
     return encode(node);
   }
 
-  parse(wikiMarkup: string, tokenErrCallback?: TokenErrCallback): PMNode {
+  parse(wikiMarkup: string, context?: Context): PMNode {
     const tree = new AbstractTree(this.schema, wikiMarkup);
-    return tree.getProseMirrorModel(tokenErrCallback);
+
+    return tree.getProseMirrorModel(context ? context : {});
   }
 }
 

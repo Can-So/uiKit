@@ -76,6 +76,9 @@ export interface PMNodeToken {
 }
 
 export interface Context {
+  readonly inlineCardConversion?: {
+    [key: string]: string;
+  };
   readonly tokenErrCallback?: TokenErrCallback;
 }
 
