@@ -4,6 +4,7 @@ import { Plugin } from 'prosemirror-state';
 import * as keymaps from '../../../keymaps';
 import { trackAndInvoke } from '../../../analytics';
 import * as commands from '../commands/text-formatting';
+import { INPUT_METHOD } from '../../analytics';
 
 export default function keymapPlugin(schema: Schema): Plugin {
   const list = {};
@@ -12,7 +13,12 @@ export default function keymapPlugin(schema: Schema): Plugin {
     const eventName = analyticsEventName(schema.marks.strong);
     keymaps.bindKeymapWithCommand(
       keymaps.toggleBold.common!,
-      trackAndInvoke(eventName, commands.toggleStrong()),
+      trackAndInvoke(
+        eventName,
+        commands.toggleStrongWithAnalytics({
+          inputMethod: INPUT_METHOD.SHORTCUT,
+        }),
+      ),
       list,
     );
   }
@@ -21,7 +27,10 @@ export default function keymapPlugin(schema: Schema): Plugin {
     const eventName = analyticsEventName(schema.marks.em);
     keymaps.bindKeymapWithCommand(
       keymaps.toggleItalic.common!,
-      trackAndInvoke(eventName, commands.toggleEm()),
+      trackAndInvoke(
+        eventName,
+        commands.toggleEmWithAnalytics({ inputMethod: INPUT_METHOD.SHORTCUT }),
+      ),
       list,
     );
   }
@@ -30,7 +39,12 @@ export default function keymapPlugin(schema: Schema): Plugin {
     const eventName = analyticsEventName(schema.marks.code);
     keymaps.bindKeymapWithCommand(
       keymaps.toggleCode.common!,
-      trackAndInvoke(eventName, commands.toggleCode()),
+      trackAndInvoke(
+        eventName,
+        commands.toggleCodeWithAnalytics({
+          inputMethod: INPUT_METHOD.SHORTCUT,
+        }),
+      ),
       list,
     );
   }
@@ -39,7 +53,12 @@ export default function keymapPlugin(schema: Schema): Plugin {
     const eventName = analyticsEventName(schema.marks.strike);
     keymaps.bindKeymapWithCommand(
       keymaps.toggleStrikethrough.common!,
-      trackAndInvoke(eventName, commands.toggleStrike()),
+      trackAndInvoke(
+        eventName,
+        commands.toggleStrikeWithAnalytics({
+          inputMethod: INPUT_METHOD.SHORTCUT,
+        }),
+      ),
       list,
     );
   }
@@ -48,7 +67,12 @@ export default function keymapPlugin(schema: Schema): Plugin {
     const eventName = analyticsEventName(schema.marks.underline);
     keymaps.bindKeymapWithCommand(
       keymaps.toggleUnderline.common!,
-      trackAndInvoke(eventName, commands.toggleUnderline()),
+      trackAndInvoke(
+        eventName,
+        commands.toggleUnderlineWithAnalytics({
+          inputMethod: INPUT_METHOD.SHORTCUT,
+        }),
+      ),
       list,
     );
   }

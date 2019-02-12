@@ -17,18 +17,41 @@ import { analyticsService } from '../../../../analytics';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import panelPlugin from '../../../../plugins/panel';
 import listPlugin from '../../../../plugins/lists';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import {
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+} from '../../../../plugins/analytics';
+import { HeadingLevels } from '../../../../plugins/block-type/types';
 
 describe('inputrules', () => {
   const createEditor = createEditorFactory();
-
-  const editor = (doc: any) =>
-    createEditor({
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  const editor = (doc: any) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorPlugins: [listPlugin, codeBlockPlugin(), panelPlugin],
       editorProps: {
         analyticsHandler: trackEvent,
+        allowAnalyticsGASV3: true,
       },
+      createAnalyticsEvent,
     });
+  };
+
+  function insertAutoformatRule(format: string) {
+    const setup = editor(doc(p('{<>}')));
+    const { editorView, sel } = setup;
+
+    insertText(editorView, `${format} `, sel);
+    return setup;
+  }
+
   let trackEvent;
   beforeEach(() => {
     trackEvent = jest.fn();
@@ -36,6 +59,46 @@ describe('inputrules', () => {
   });
 
   describe('heading rule', () => {
+    describe('Analytics', () => {
+      function createHeadingPayload(
+        newHeadingLevel: HeadingLevels,
+        inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.FORMATTING,
+      ): AnalyticsEventPayload {
+        return {
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          eventType: EVENT_TYPE.TRACK,
+          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_HEADING,
+          attributes: {
+            inputMethod,
+            newHeadingLevel,
+          },
+        };
+      }
+
+      type AutoFormatCase = {
+        autoformatRule: string;
+        headingLevel: HeadingLevels;
+      };
+      const autoFormatCases: AutoFormatCase[] = [
+        { autoformatRule: '#', headingLevel: 1 },
+        { autoformatRule: '##', headingLevel: 2 },
+        { autoformatRule: '###', headingLevel: 3 },
+        { autoformatRule: '####', headingLevel: 4 },
+        { autoformatRule: '#####', headingLevel: 5 },
+        { autoformatRule: '######', headingLevel: 6 },
+      ];
+
+      autoFormatCases.forEach(({ autoformatRule, headingLevel }) => {
+        it(`should call Analytics GAS v3 with heading level ${headingLevel} for autoformatting '${autoformatRule}'`, () => {
+          insertAutoformatRule(autoformatRule);
+
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(
+            createHeadingPayload(headingLevel, INPUT_METHOD.FORMATTING),
+          );
+        });
+      });
+    });
     it('should convert "# " to heading 1', () => {
       const { editorView, sel } = editor(doc(p('{<>}')));
 
@@ -99,6 +162,25 @@ describe('inputrules', () => {
   });
 
   describe('blockquote rule', () => {
+    describe('Analytics', () => {
+      it(`should call analytics v3 with blockquote for autoformatting '>'`, () => {
+        const greatherThanRule = '>';
+        const expectedPayload: AnalyticsEventPayload = {
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          eventType: EVENT_TYPE.TRACK,
+          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_BLOCK_QUOTE,
+          attributes: {
+            inputMethod: INPUT_METHOD.FORMATTING,
+          },
+        };
+
+        insertAutoformatRule(greatherThanRule);
+
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      });
+    });
+
     it('should convert "> " to a blockquote', () => {
       const { editorView, sel } = editor(doc(p('{<>}')));
 
