@@ -5,10 +5,6 @@ import {
 } from './_utils';
 import * as dynamicTextExample from './__fixtures__/dynamic-text-adf.json';
 
-const loadExampleDocument = async browser => {
-  await browser.click('.loadExampleDocument');
-};
-
 describe('Snapshot Test: Dynamic Text Sizing', () => {
   let page;
   beforeAll(async () => {

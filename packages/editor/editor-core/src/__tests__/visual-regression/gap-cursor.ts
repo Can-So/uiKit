@@ -3,17 +3,6 @@ import * as gapcursor from './__fixtures__/gap-cursor-adf.json';
 // import { setTableLayout } from './table/_table-utils';
 // import commonMessages from '../../messages';
 
-const nodeLabel = node => {
-  switch (node) {
-    case 'code':
-      return 'code block';
-    case 'bodied':
-      return 'bodied extension';
-    default:
-      return node;
-  }
-};
-
 describe('Snapshot Test: Gap cursor', () => {
   let page;
 
