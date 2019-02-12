@@ -203,7 +203,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     }
   };
 
-  handleSubmitShare = (event: React.SyntheticEvent) => {
+  handleSubmitShare = (event: React.SyntheticEvent): Promise<void> => {
     const shareContentState: ShareContentState = {
       users: this.state.users,
       comment: this.state.comment,
@@ -211,9 +211,9 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
 
     this.setState({ isSharing: true });
 
-    this.props
+    return this.props
       .onShareSubmit(shareContentState)
-      .then(res => {
+      .then(() => {
         this.handleCloseDialog({ isOpen: false, event });
         this.setState({ isSharing: false });
       })

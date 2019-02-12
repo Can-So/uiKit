@@ -377,6 +377,7 @@ describe('ShareDialogWithTrigger', () => {
       wrapper.instance().forceUpdate();
 
       await wrapper.instance().handleSubmitShare(mockSubmitEvent);
+
       expect(spiedHandleCloseDialog).not.toHaveBeenCalled();
       expect(wrapper.state().shareError).toEqual({ message: mockErrorMessage });
       expect(wrapper.state().isSharing).toBeFalsy();
