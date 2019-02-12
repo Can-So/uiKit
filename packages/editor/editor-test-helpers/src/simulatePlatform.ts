@@ -17,10 +17,7 @@ export default function simulatePlatform(platform: Platforms) {
       editorCommon.browser = {
         mac: true,
       };
-      spyNavigator.mockReturnValue({
-        ...window.navigator,
-        platform: 'MacIntel',
-      });
+      spyNavigator.mockReturnValue('MacIntel');
       return;
     }
 
@@ -29,10 +26,7 @@ export default function simulatePlatform(platform: Platforms) {
       mac: false,
     };
 
-    spyNavigator.mockReturnValue({
-      ...window.navigator,
-      platform: 'other',
-    });
+    spyNavigator.mockReturnValue('Other');
   });
 
   afterAll(() => {
