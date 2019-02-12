@@ -1,4 +1,4 @@
-# @atlaskit/media-image
+# @atlaskit/media-card
 
 ## 52.0.5
 - [patch] [c415876da9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c415876da9):
