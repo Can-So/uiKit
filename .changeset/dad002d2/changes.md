@@ -1,0 +1,1 @@
+- FS-3591 hide selected users from multi picker

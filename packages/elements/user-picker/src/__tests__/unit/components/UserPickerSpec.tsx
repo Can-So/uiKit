@@ -93,6 +93,13 @@ describe('UserPicker', () => {
     expect(onChange).toHaveBeenCalledWith(options[0], 'select-option');
   });
 
+  it('should not hide selected users by default', () => {
+    const component = shallowUserPicker();
+
+    const select = component.find(Select);
+    expect(select.prop('hideSelectedOptions')).toBeFalsy();
+  });
+
   it('should trigger props.onSelection if onChange with select-option action', () => {
     const onSelection = jest.fn();
     const component = shallowUserPicker({ onSelection });
@@ -177,6 +184,13 @@ describe('UserPicker', () => {
         [options[0], options[1]],
         'select-option',
       );
+    });
+
+    it('should hide selected users', () => {
+      const component = shallowUserPicker({ isMulti: true });
+
+      const select = component.find(Select);
+      expect(select.prop('hideSelectedOptions')).toBeTruthy();
     });
   });
 
