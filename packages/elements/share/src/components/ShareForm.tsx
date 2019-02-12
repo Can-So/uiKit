@@ -1,6 +1,9 @@
 import Button from '@atlaskit/button';
 import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
 import { LoadOptions } from '@atlaskit/user-picker';
+import ErrorIcon from '@atlaskit/icon/glyph/error';
+import { colors } from '@atlaskit/theme';
+import Tooltip from '@atlaskit/tooltip';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
@@ -9,25 +12,17 @@ import { CommentField } from './CommentField';
 import { ShareHeader } from './ShareHeader';
 import { UserPickerField } from './UserPickerField';
 import { CopyLinkButton } from './CopyLinkButton';
+import { ShareError, User } from '../types';
 
 const LeftAlignmentContainer = styled.div`
   margin-right: auto;
 `;
 
-type ShareError = {
-  message: string;
-} | null;
-
-type User = UserWithId | UserWithEmail;
-
-type UserWithId = {
-  type: 'user' | 'group' | 'team';
-  id: string;
-};
-
-type UserWithEmail = {
-  email: string;
-};
+const CenterAlignedIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+`;
 
 export type Props = {
   capabilitiesInfoMessage?: React.ReactNode;
@@ -67,11 +62,35 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
               link={props.copyLink}
             />
           </LeftAlignmentContainer>
-          <Button appearance="primary" type="submit">
-            {props.submitButtonLabel || (
-              <FormattedMessage {...messages.formSend} />
-            )}
-          </Button>
+          {props.shareError ? (
+            <>
+              <CenterAlignedIconWrapper>
+                <Tooltip
+                  content={
+                    <FormattedMessage {...messages.shareFailureMessage} />
+                  }
+                  position="top"
+                >
+                  <ErrorIcon label="errorIcon" primaryColor={colors.R400} />
+                </Tooltip>
+              </CenterAlignedIconWrapper>
+              <Button appearance="warning" type="submit">
+                <strong>
+                  <FormattedMessage {...messages.formRetry} />
+                </strong>
+              </Button>
+            </>
+          ) : (
+            <Button
+              appearance="primary"
+              type="submit"
+              isLoading={props.isSharing}
+            >
+              {props.submitButtonLabel || (
+                <FormattedMessage {...messages.formSend} />
+              )}
+            </Button>
+          )}
         </FormFooter>
       </form>
     )}
@@ -79,6 +98,7 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
 );
 
 ShareForm.defaultProps = {
+  isSharing: false,
   onShareClick: () => {},
   shouldShowCapabilitiesInfoMessage: false,
 };

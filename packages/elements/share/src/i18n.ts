@@ -11,6 +11,11 @@ export const messages = defineMessages({
     defaultMessage: 'Send',
     description: 'Label for Share form submit button.',
   },
+  formRetry: {
+    id: 'fabric.elements.share.form.retry',
+    defaultMessage: 'Retry',
+    description: 'Label for Share from retry button.',
+  },
   commentPlaceholder: {
     id: 'fabric.elements.share.form.comment.placeholder',
     defaultMessage: 'Add a message',
@@ -52,5 +57,11 @@ export const messages = defineMessages({
     id: 'fabric.elements.share.form.capabilities.info.message',
     defaultMessage: 'Your Admin will be asked to approve the user invite',
     description: 'Default text for capabilities info',
+  },
+  shareFailureMessage: {
+    id: 'fabric.elements.share.failure.message',
+    defaultMessage: 'Unable to share',
+    description:
+      'Default text for share failure message displayed in the tooltip',
   },
 });
