@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.8.1
+- [patch] [0a304a48f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a304a48f6):
+
+  - ED-6218: fix repair table logic
+
 ## 98.8.0
 - [minor] [cde3ff657f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cde3ff657f):
 

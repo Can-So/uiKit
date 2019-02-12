@@ -1,1 +1,0 @@
-- ED-6218: fix repair table logic
