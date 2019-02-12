@@ -20,7 +20,7 @@
     "@atlaskit/drawer": "^2.7.1",
     "@atlaskit/dropdown-menu": "^6.1.26",
     "@atlaskit/icon": "^16.0.0",
-    "@atlaskit/navigation-next": "^4.1.2",
+    "@atlaskit/navigation-next": "^4.2.1",
     "@atlaskit/notification-indicator": "^4.1.2",
     "@atlaskit/notification-log-client": "^3.1.1",
     "@atlaskit/spinner": "^9.0.13",
