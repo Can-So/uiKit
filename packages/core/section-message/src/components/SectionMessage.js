@@ -14,10 +14,10 @@ import {
 } from './styled';
 
 type ActionType = {
-  text: string,
+  text: Node,
   onClick?: () => void,
   href?: string,
-  key?: string,
+  key: string,
 };
 
 type Props = {
@@ -66,7 +66,7 @@ export default class SectionMessage extends Component<Props, *> {
     const { href, key, onClick, text } = action;
 
     return (
-      <Action key={key || text}>
+      <Action key={key}>
         {onClick || href ? (
           <Button
             appearance="link"
