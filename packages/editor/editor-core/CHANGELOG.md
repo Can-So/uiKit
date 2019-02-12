@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.8.2
+- [patch] [19a823bf2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/19a823bf2a):
+
+  - delete empty status node when user selects another node
+
 ## 98.8.1
 - [patch] [0a304a48f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a304a48f6):
 
