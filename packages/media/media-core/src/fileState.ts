@@ -103,7 +103,7 @@ export const isImageRepresentationReady = (fileState: FileState): boolean => {
   }
 };
 
-const apiProcessingStatusToFileStatus = (
+export const apiProcessingStatusToFileStatus = (
   fileStatus?: MediaFileProcessingStatus,
 ): FileStatus => {
   switch (fileStatus) {
@@ -131,41 +131,33 @@ export const mapMediaFileToFileState = (
     mimeType,
     representations,
   } = mediaFile.data;
-  const status = apiProcessingStatusToFileStatus(processingStatus);
+  const baseState = {
+    id,
+    name,
+    size,
+    mediaType,
+    mimeType,
+    artifacts,
+    representations,
+  };
 
   switch (processingStatus) {
     case 'pending':
     case undefined:
       return {
-        id,
-        status,
-        name,
-        size,
-        mediaType,
-        mimeType,
-        representations,
-      } as ProcessingFileState;
+        ...baseState,
+        status: 'processing',
+      };
     case 'succeeded':
       return {
-        id,
-        status,
-        name,
-        size,
-        artifacts,
-        mediaType,
-        mimeType,
-        representations,
-      } as ProcessedFileState;
+        ...baseState,
+        status: 'processed',
+      };
     case 'failed':
       return {
-        id,
-        status,
-        name,
-        size,
-        artifacts,
-        mediaType,
-        mimeType,
-      } as ProcessingFailedState;
+        ...baseState,
+        status: 'failed-processing',
+      };
   }
 };
 
