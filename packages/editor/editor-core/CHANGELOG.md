@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.9.1
+- [patch] [ebb0a98051](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebb0a98051):
+
+  - remove empty status before publishing document
+
 ## 98.9.0
 - [minor] [59ae46e1cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59ae46e1cf):
 

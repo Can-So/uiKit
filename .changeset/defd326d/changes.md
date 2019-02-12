@@ -1,1 +1,0 @@
-- remove empty status before publishing document
