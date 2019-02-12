@@ -13,7 +13,7 @@ const LineWrapper = styled.div`
 `;
 
 const IconSkeleton = styled.div`
-  background-color: ${colors.N10};
+  background-color: ${colors.N20};
   display: inline-block;
   width: 32px;
   height: 32px;
@@ -22,7 +22,7 @@ const IconSkeleton = styled.div`
 `;
 
 const LineSkeleton = styled.div`
-  background-color: ${colors.N10};
+  background-color: ${colors.N20};
   display: inline-block;
   width: 98px;
   height: 10px;

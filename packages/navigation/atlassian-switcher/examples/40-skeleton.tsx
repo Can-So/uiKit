@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AkDrawer from '@atlaskit/drawer';
-import AkButton from '@atlaskit/button';
+import Drawer from '@atlaskit/drawer';
+import Button from '@atlaskit/button';
 import Skeleton from '../src/primitives/skeleton';
 
 export default class SkeletonExample extends Component {
@@ -27,12 +27,12 @@ export default class SkeletonExample extends Component {
   render() {
     return (
       <div style={{ padding: '2rem' }}>
-        <AkDrawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
+        <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
           <Skeleton />
-        </AkDrawer>
-        <AkButton type="button" onClick={this.openDrawer}>
+        </Drawer>
+        <Button type="button" onClick={this.openDrawer}>
           Open drawer
-        </AkButton>
+        </Button>
       </div>
     );
   }

@@ -75,12 +75,15 @@ export default class Switcher extends React.Component<SwitcherProps> {
     const shouldRenderXSellLink =
       suggestedProductLink && !isLoadingIsXFlowEnabled && isXFlowEnabledData;
 
-    return isLoadingCustomLinks ||
+    const isLoading =
+      isLoadingCustomLinks ||
       isLoadingRecentContainers ||
       isLoadingLicenseInformation ||
       isLoadingManagePermission ||
       isLoadingAddProductsPermission ||
-      isLoadingIsXFlowEnabled ? (
+      isLoadingIsXFlowEnabled;
+
+    return isLoading ? (
       <Skeleton />
     ) : (
       <SwitcherWrapper>
