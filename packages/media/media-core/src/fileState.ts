@@ -92,7 +92,7 @@ export const isErrorFileState = (
 ): fileState is ErrorFileState =>
   (fileState as ErrorFileState).status === 'error';
 
-export const isImageRepresentationReady = (fileState: FileState): Boolean => {
+export const isImageRepresentationReady = (fileState: FileState): boolean => {
   switch (fileState.status) {
     case 'processing':
     case 'processed':
