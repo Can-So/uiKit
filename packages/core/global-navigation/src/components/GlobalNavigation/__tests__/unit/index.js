@@ -764,6 +764,13 @@ describe('GlobalNavigation', () => {
 
       expect(wrapper.find(NotificationIndicator).exists()).toBeTruthy();
     });
+
+    describe('Controlled inbuilt notification', () => {
+      it('should be controllable');
+      it('should reset notification count');
+      it('should wanr you if you pass a close callback');
+      it('should openComplete and closeComplete callbacks');
+    });
   });
 
   describe('AppSwitcher', () => {

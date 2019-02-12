@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import fetchMock from 'fetch-mock';
 import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
 import Button from '@atlaskit/button';
+import Tag from '@atlaskit/tag';
 import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 
@@ -26,7 +27,7 @@ class Global extends Component<GlobalProps, GlobalState> {
   }
 
   handleKeyboardShortcut = e => {
-    if (e.key === 'n' || !this.state.isNotificationDrawerOpen) {
+    if (e.key === 'n' && !this.state.isNotificationDrawerOpen) {
       this.openNotificationDrawer();
     }
     return null;
@@ -48,7 +49,7 @@ class Global extends Component<GlobalProps, GlobalState> {
 
   openNotificationDrawer = () => {
     this.setState({ isNotificationDrawerOpen: true }, () =>
-      setTimeout(this.props.updateIframeUrl, 350),
+      setTimeout(this.updateIframeUrl, 350),
     );
   };
   closeNotificationDrawer = () => {
@@ -147,6 +148,10 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
               <Button onClick={this.resetNotificationCount}>
                 Reset Notification Count
               </Button>
+            </p>
+            <p>
+              Type <Tag text="n" />
+              to open the notification drawer
             </p>
           </div>
         </LayoutManager>
