@@ -4,7 +4,7 @@ import {
   ProcessingFailedState,
   ProcessedFileState,
   ProcessingFileState,
-} from '../../../index';
+} from '../../index';
 
 describe('isErrorFileState()', () => {
   const processingFailedState: ProcessingFailedState = {
