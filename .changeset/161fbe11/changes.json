@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/embedded-document", "type": "minor" },
+    { "name": "@atlaskit/renderer", "type": "patch" }
+  ],
+  "dependents": []
+}

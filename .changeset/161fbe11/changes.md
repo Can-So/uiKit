@@ -1,0 +1,1 @@
+- Allow passing through renderer props
