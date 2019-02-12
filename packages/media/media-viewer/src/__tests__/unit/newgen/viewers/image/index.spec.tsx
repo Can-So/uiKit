@@ -27,7 +27,7 @@ const imageItem: ProcessedFileState = {
   },
 };
 
-function createFixture(response: Promise<Blob>) {
+function createFixture(response: Promise<Blob>, item = imageItem) {
   const context = fakeContext();
   (context.getImage as jest.Mock).mockReturnValue(response);
   const onClose = jest.fn();
@@ -35,7 +35,7 @@ function createFixture(response: Promise<Blob>) {
   const el = mountWithIntlContext<ImageViewerProps, BaseState<Content>>(
     <ImageViewer
       context={context}
-      item={imageItem}
+      item={item}
       collectionName={collectionName}
       onClose={onClose}
       onLoad={onLoaded}
@@ -106,6 +106,19 @@ describe('ImageViewer', () => {
       expect.objectContaining({ collection: 'some-collection' }),
       expect.anything(),
     );
+  });
+
+  it('should not call context.getImage when image representation is not present', async () => {
+    const response = Promise.resolve(new Blob());
+    const { el, context } = createFixture(response, {
+      ...imageItem,
+      representations: {},
+    });
+
+    await response;
+    el.update();
+
+    expect(context.getImage).not.toHaveBeenCalled();
   });
 
   it('MSW-700: clicking on background of ImageViewer does not close it', async () => {
