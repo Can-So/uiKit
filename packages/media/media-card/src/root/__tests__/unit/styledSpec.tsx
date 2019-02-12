@@ -68,6 +68,18 @@ describe('Root Wrapper', () => {
       expect(large).toMatchSnapshot();
       expect(xlarge).toMatchSnapshot();
     });
+
+    it('should render right cursor', () => {
+      const withCursor = shallow(
+        <Wrapper mediaItemType="file" shouldUsePointerCursor />,
+      );
+      const withoutCursor = shallow(
+        <Wrapper mediaItemType="file" shouldUsePointerCursor />,
+      );
+
+      expect(withCursor).toMatchSnapshot();
+      expect(withoutCursor).toMatchSnapshot();
+    });
   });
 
   describe('Link', () => {
