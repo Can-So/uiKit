@@ -274,6 +274,12 @@ function handleMouseDown(view, event, cellMinWidth) {
     const $cell = view.state.doc.resolve(activeHandle);
     const $table = $cell.node(-1);
 
+    // If we let go in the same place we started, dont need to do anything.
+    if (dragging && clientX === dragging.startX) {
+      view.dispatch(view.state.tr.setMeta(pluginKey, { setDragging: null }));
+      return;
+    }
+
     if (dragging) {
       const { startX } = dragging;
 
