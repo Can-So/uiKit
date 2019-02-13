@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.9.4
+- [patch] [e04c61dc55](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e04c61dc55):
+
+  - ED-6183 fix image wrapping, revert createDOMRef chang
+
 ## 98.9.3
 - [patch] [8788a98286](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8788a98286):
 
