@@ -1,1 +1,1 @@
-- Updating package.json
+- Attempting to fix flow issue where atlassian-switcher is not recognized
