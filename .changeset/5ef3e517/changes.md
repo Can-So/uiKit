@@ -1,1 +1,1 @@
-- FS-3417 expose getState function in Form component
+- Form now provides a `getValues` function to it's child render function. The `getValues` function returns an object containing the current value of all fields.
