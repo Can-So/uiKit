@@ -1,1 +1,0 @@
-- TEAMS-242 : Change user picker placeholder

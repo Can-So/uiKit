@@ -1,5 +1,10 @@
 # @atlaskit/user-picker
 
+## 1.0.19
+- [patch] [1050084e29](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1050084e29):
+
+  - TEAMS-242 : Change user picker placeholder
+
 ## 1.0.18
 - [patch] [0809a67d7b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0809a67d7b):
 
