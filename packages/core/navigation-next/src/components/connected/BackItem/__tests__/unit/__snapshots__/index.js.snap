@@ -9,7 +9,7 @@ exports[`BackItem should provide a default before prop if one is not provided 1`
 
 exports[`BackItem should render a ConnectedItem 1`] = `
 .emotion-0 {
-  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 <div
