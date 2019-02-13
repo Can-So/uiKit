@@ -6,7 +6,7 @@ import { borderRadius as akBorderRadius } from '@atlaskit/theme';
 export interface WrapperProps {
   isSelected?: boolean;
   isInteractive?: boolean;
-  isJustLink?: boolean;
+  withoutBackground?: boolean;
 }
 
 const selected = `
@@ -40,8 +40,8 @@ const isInteractive = ({ isInteractive }: WrapperProps) => {
   }
 };
 
-const withBackground = ({ isJustLink }: WrapperProps) => {
-  return !isJustLink ? `background-color: ${colors.N30A};` : ``;
+const background = ({ withoutBackground }: WrapperProps) => {
+  return withoutBackground ? `` : `background-color: ${colors.N30A};`;
 };
 
 const isSelected = ({ isSelected }: WrapperProps) => {
@@ -60,7 +60,7 @@ export const Wrapper: ComponentClass<
   padding: 2px;
   border-radius: ${akBorderRadius()}px;
   user-select: none;
-  ${withBackground};
+  ${background};
   ${isInteractive}
   ${isSelected};
 `;

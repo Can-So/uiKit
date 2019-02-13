@@ -4,7 +4,7 @@ import { Frame, FrameViewProps } from '../InlineCard/Frame';
 export class CardLinkView extends React.PureComponent<FrameViewProps> {
   render() {
     return (
-      <Frame isJustLink={true} {...this.props}>
+      <Frame withoutBackground={true} {...this.props}>
         {this.props.link}
       </Frame>
     );
