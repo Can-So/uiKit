@@ -1,10 +1,5 @@
 // @flow
-import React, {
-  PureComponent,
-  cloneElement,
-  type ElementRef,
-  type HTMLElement,
-} from 'react';
+import React, { PureComponent, cloneElement, type ElementRef } from 'react';
 import NodeResolver from 'react-node-resolver';
 import shallowEqualObjects from 'shallow-equal/objects';
 import { components, PopupSelect, mergeStyles } from '@atlaskit/select';
