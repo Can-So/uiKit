@@ -68,6 +68,7 @@ import {
   INPUT_METHOD,
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
+  PANEL_TYPE,
 } from '../../../analytics';
 
 export const messages = defineMessages({
@@ -382,7 +383,7 @@ class ToolbarInsertBlock extends React.PureComponent<
             iconBefore={btn.elemBefore}
             selected={btn.isActive}
             title={btn.content + (btn.shortcut ? ' ' + btn.shortcut : '')}
-            onClick={() => this.onItemActivated({ item: btn })}
+            onClick={() => this.insertToolbarMenuItem(btn)}
           />
         ))}
         <Wrapper>
@@ -391,7 +392,7 @@ class ToolbarInsertBlock extends React.PureComponent<
             (!isDisabled ? (
               <DropdownMenu
                 items={[{ items: dropdownItems }]}
-                onItemActivated={this.onItemActivated}
+                onItemActivated={this.insertInsertMenuItem}
                 onOpenChange={this.onOpenChange}
                 mountTo={popupsMountPoint}
                 boundariesElement={popupsBoundariesElement}
@@ -717,12 +718,13 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private insertHorizontalRule = withAnalytics(
     'atlassian.editor.format.horizontalrule.button',
-    (): boolean => {
+    (inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU): boolean => {
       const { editorView } = this.props;
       const tr = createHorizontalRule(
         editorView.state,
         editorView.state.selection.from,
         editorView.state.selection.to,
+        inputMethod,
       );
 
       if (tr) {
@@ -734,6 +736,46 @@ class ToolbarInsertBlock extends React.PureComponent<
     },
   );
 
+  private insertBlockTypeWithAnalytics = (
+    itemName: string,
+    inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU,
+  ) => {
+    const {
+      editorView,
+      onInsertBlockType,
+      dispatchAnalyticsEvent,
+    } = this.props;
+    const { state, dispatch } = editorView;
+
+    let actionSubjectId;
+    let additionalAttrs = {};
+    switch (itemName) {
+      case 'panel':
+        actionSubjectId = ACTION_SUBJECT_ID.PANEL;
+        additionalAttrs = { panelType: PANEL_TYPE.INFO }; // only info panels can be inserted from toolbar
+        break;
+      case 'codeblock':
+        actionSubjectId = ACTION_SUBJECT_ID.CODE_BLOCK;
+        break;
+    }
+
+    analytics.trackEvent(`atlassian.editor.format.${itemName}.button`);
+    if (dispatchAnalyticsEvent && actionSubjectId) {
+      dispatchAnalyticsEvent({
+        action: ACTION.INSERTED,
+        actionSubject: ACTION_SUBJECT.DOCUMENT,
+        actionSubjectId,
+        attributes: {
+          inputMethod,
+          ...additionalAttrs,
+        },
+        eventType: EVENT_TYPE.TRACK,
+      });
+    }
+
+    onInsertBlockType!(itemName)(state, dispatch);
+  };
+
   private handleSelectedEmoji = withAnalytics(
     'atlassian.editor.emoji.button',
     (emojiId: EmojiId): boolean => {
@@ -743,11 +785,16 @@ class ToolbarInsertBlock extends React.PureComponent<
     },
   );
 
-  private onItemActivated = ({ item }): void => {
+  private onItemActivated = ({
+    item,
+    inputMethod,
+  }: {
+    item;
+    inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU;
+  }): void => {
     const {
       editorView,
       editorActions,
-      onInsertBlockType,
       onInsertMacroFromMacroBrowser,
       macroProvider,
       handleImageUpload,
@@ -778,11 +825,7 @@ class ToolbarInsertBlock extends React.PureComponent<
       case 'codeblock':
       case 'blockquote':
       case 'panel':
-        analytics.trackEvent(
-          `atlassian.editor.format.${item.value.name}.button`,
-        );
-        const { state, dispatch } = editorView;
-        onInsertBlockType!(item.value.name)(state, dispatch);
+        this.insertBlockTypeWithAnalytics(item.value.name, inputMethod);
         break;
       case 'action':
         this.insertAction();
@@ -791,7 +834,7 @@ class ToolbarInsertBlock extends React.PureComponent<
         this.insertDecision();
         break;
       case 'horizontalrule':
-        this.insertHorizontalRule();
+        this.insertHorizontalRule(inputMethod);
         break;
       case 'macro':
         analytics.trackEvent(
@@ -825,6 +868,18 @@ class ToolbarInsertBlock extends React.PureComponent<
       editorView.focus();
     }
   };
+
+  private insertToolbarMenuItem = btn =>
+    this.onItemActivated({
+      item: btn,
+      inputMethod: INPUT_METHOD.TOOLBAR,
+    });
+
+  private insertInsertMenuItem = ({ item }) =>
+    this.onItemActivated({
+      item,
+      inputMethod: INPUT_METHOD.INSERT_MENU,
+    });
 }
 
 export default injectIntl(ToolbarInsertBlock);

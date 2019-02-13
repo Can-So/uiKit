@@ -13,11 +13,11 @@ import {
   hardBreak,
   a as link,
 } from '@atlaskit/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { analyticsService } from '../../../../analytics';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import panelPlugin from '../../../../plugins/panel';
 import listPlugin from '../../../../plugins/lists';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import {
   AnalyticsEventPayload,
   ACTION,
@@ -30,7 +30,10 @@ import { HeadingLevels } from '../../../../plugins/block-type/types';
 
 describe('inputrules', () => {
   const createEditor = createEditorFactory();
+
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  let trackEvent;
+
   const editor = (doc: any) => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
     return createEditor({
@@ -52,7 +55,6 @@ describe('inputrules', () => {
     return setup;
   }
 
-  let trackEvent;
   beforeEach(() => {
     trackEvent = jest.fn();
     analyticsService.trackEvent = trackEvent;
@@ -257,65 +259,104 @@ describe('inputrules', () => {
   });
 
   describe('codeblock rule', () => {
-    describe('when node is convertable to code block', () => {
-      describe('when three backticks are entered followed by space', () => {
-        it('should convert "```" to a code block', () => {
-          const { editorView, sel } = editor(
-            doc(p('{<>}hello', br(), 'world')),
-          );
+    const analyticsV2Event = 'atlassian.editor.format.codeblock.autoformatting';
+    const analyticsV3Payload = {
+      action: 'inserted',
+      actionSubject: 'document',
+      actionSubjectId: 'codeBlock',
+      attributes: { inputMethod: 'autoformatting' },
+      eventType: 'track',
+    };
+    let editorView;
+    let sel;
 
-          insertText(editorView, '```', sel);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(code_block()('hello\nworld')),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.codeblock.autoformatting',
-          );
-        });
+    describe('typing "```" after text', () => {
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('{<>}hello', br(), 'world'))));
+        insertText(editorView, '```', sel);
+      });
 
-        it('should convert "```" after shift+enter to a code block', () => {
-          const { editorView, sel } = editor(
-            doc(p('test', hardBreak(), '{<>}')),
-          );
+      it('should convert "```" to a code block', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(code_block()('hello\nworld')),
+        );
+      });
 
-          insertText(editorView, '```', sel);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('test'), code_block()()),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.codeblock.autoformatting',
-          );
-        });
+      it('should fire analytics event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(analyticsV2Event);
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(analyticsV3Payload);
+      });
+    });
 
-        it('should convert "```" in middle of paragraph to a code block', () => {
-          const { editorView, sel } = editor(doc(p('code ``{<>}block!')));
-          insertText(editorView, '`', sel);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('code '), code_block()('block!')),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.codeblock.autoformatting',
-          );
-        });
+    describe('typing "```" after shift+enter', () => {
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('test', hardBreak(), '{<>}'))));
+        insertText(editorView, '```', sel);
+      });
 
-        it('should convert "```" at the end of a paragraph to a code block without preceeding content', () => {
-          const { editorView, sel } = editor(doc(p('code ``{<>}')));
-          insertText(editorView, '`', sel);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('code '), code_block()()),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.codeblock.autoformatting',
-          );
-        });
+      it('should convert "```" to a code block', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p('test'), code_block()()),
+        );
+      });
 
-        it('should convert "```" to a code block without first character', () => {
-          const { editorView, sel } = editor(doc(p(' ``{<>}')));
-          insertText(editorView, '`', sel);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p(' '), code_block()()),
-          );
-        });
+      it('should fire analytics event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(analyticsV2Event);
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(analyticsV3Payload);
+      });
+    });
+
+    describe('typing "```" in middle of paragraph', () => {
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('code ``{<>}block!'))));
+        insertText(editorView, '`', sel);
+      });
+
+      it('should convert "```" to a code block', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p('code '), code_block()('block!')),
+        );
+      });
+
+      it('should fire analytics event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(analyticsV2Event);
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(analyticsV3Payload);
+      });
+    });
+
+    describe('typing "```" at end of paragraph', () => {
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('code ``{<>}'))));
+        insertText(editorView, '`', sel);
+      });
+
+      it('should convert "```" to a code block without preceeding content', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p('code '), code_block()()),
+        );
+      });
+
+      it('should fire analytics event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(analyticsV2Event);
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(analyticsV3Payload);
+      });
+    });
+
+    describe('typing "```" after space', () => {
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p(' ``{<>}'))));
+        insertText(editorView, '`', sel);
+      });
+
+      it('should convert "```" to a code block without first character', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p(' '), code_block()()),
+        );
+      });
+
+      it('should fire analytics event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(analyticsV2Event);
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(analyticsV3Payload);
       });
     });
   });

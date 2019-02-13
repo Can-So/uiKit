@@ -3,6 +3,7 @@ import { EVENT_TYPE } from './enums';
 import { UIEventPayload } from './ui-events';
 import { FormatEventPayload } from './format-events';
 import { SubstituteEventPayload } from './substitute-events';
+import { InsertEventPayload } from './insert-events';
 
 type AEP<Action, ActionSubject, ActionSubjectID, Attributes, EventType> = {
   action: Action;
@@ -31,7 +32,8 @@ export type TrackAEP<Action, ActionSubject, ActionSubjectID, Attributes> = AEP<
 export type AnalyticsEventPayload =
   | UIEventPayload
   | FormatEventPayload
-  | SubstituteEventPayload;
+  | SubstituteEventPayload
+  | InsertEventPayload;
 
 export type AnalyticsDispatch = Dispatch<{
   payload: AnalyticsEventPayload;

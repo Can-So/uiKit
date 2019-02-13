@@ -9,12 +9,16 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import rulePlugin from '../../../../plugins/rule';
 import extensionPlugin from '../../../../plugins/extension';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 describe('rule', () => {
   const createEditor = createEditorFactory();
 
-  const editor = (doc: any, trackEvent = () => {}) =>
-    createEditor({
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+
+  const editor = (doc: any, trackEvent = () => {}) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorPlugins: [rulePlugin, extensionPlugin],
       editorProps: {
@@ -22,8 +26,11 @@ describe('rule', () => {
         allowExtension: {
           allowBreakout: true,
         },
+        allowAnalyticsGASV3: true,
       },
+      createAnalyticsEvent,
     });
+  };
 
   describe('keymap', () => {
     describe('when hits Shift-Ctrl--', () => {
@@ -42,6 +49,18 @@ describe('rule', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(bodiedExtension(extensionAttrs)(p('{<>}'), hr(), p('text'))),
         );
+      });
+
+      it('should fire analytics event when create rule', () => {
+        const { editorView } = editor(doc(p('{<>}')));
+        sendKeyToPm(editorView, 'Shift-Ctrl--');
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'inserted',
+          actionSubject: 'document',
+          actionSubjectId: 'divider',
+          attributes: { inputMethod: 'shortcut' },
+          eventType: 'track',
+        });
       });
     });
   });

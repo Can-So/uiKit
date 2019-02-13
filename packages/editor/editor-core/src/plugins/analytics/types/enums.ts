@@ -15,13 +15,23 @@ export const enum ACTION {
 }
 
 export const enum INPUT_METHOD {
+  ASCII = 'ascii',
+  AUTO = 'auto',
+  AUTO_DETECT = 'autoDetect',
+  CLIPBOARD = 'clipboard',
+  DRAG_AND_DROP = 'dragAndDrop',
+  EXTERNAL = 'external',
   FORMATTING = 'autoformatting',
   FLOATING_TB = 'floatingToolbar',
   KEYBOARD = 'keyboard',
   INSERT_MENU = 'insertMenu',
+  MANUAL = 'manual',
+  PICKER = 'picker',
+  PICKER_CLOUD = 'cloudPicker',
   QUICK_INSERT = 'quickInsert',
   SHORTCUT = 'shortcut',
   TOOLBAR = 'toolbar',
+  TYPEAHEAD = 'typeAhead',
 }
 
 export const enum ACTION_SUBJECT {
@@ -34,11 +44,14 @@ export const enum ACTION_SUBJECT {
 }
 
 export const enum ACTION_SUBJECT_ID {
+  ACTION = 'action',
   BUTTON_HELP = 'helpButton',
   BUTTON_FEEDBACK = 'feedbackButton',
   CANCEL = 'cancel',
   CODE_BLOCK = 'codeBlock',
+  DECISION = 'decision',
   DIVIDER = 'divider',
+  EMOJI = 'emoji',
   FORMAT_BLOCK_QUOTE = 'blockQuote',
   FORMAT_CODE = 'code',
   FORMAT_COLOR = 'color',
@@ -53,13 +66,20 @@ export const enum ACTION_SUBJECT_ID {
   FORMAT_SUB = 'subscript',
   FORMAT_SUPER = 'superscript',
   FORMAT_UNDERLINE = 'underline',
+  LINK = 'link',
+  LINK_PREVIEW = 'linkPreview',
+  MEDIA = 'media',
+  MENTION = 'mention',
   PICKER_CLOUD = 'cloudPicker',
   PICKER_EMOJI = 'emojiPicker',
   PRODUCT_NAME = 'productName',
   PANEL = 'panel',
   PUNC = 'punctuation',
   SAVE = 'save',
+  SECTION = 'section',
+  STATUS = 'status',
   SYMBOL = 'symbol',
+  TABLE = 'table',
   TYPEAHEAD_EMOJI = 'emojiTypeAhead',
   TYPEAHEAD_LINK = 'linkTypeAhead',
   TYPEAHEAD_MENTION = 'mentionTypeAhead',
