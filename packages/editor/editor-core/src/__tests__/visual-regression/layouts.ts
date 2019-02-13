@@ -15,21 +15,21 @@ describe('Snapshot Test: Layouts', () => {
     it('should correctly render layout on MDPI', async () => {
       await page.setViewport(deviceViewPorts.LaptopMDPI);
       await initFullPageEditorWithAdf(page, col2);
-      await snapshot(page);
+      await snapshot(page, 0.02);
     });
 
     it('should stack layout on smaller ipad', async () => {
       await page.setViewport(deviceViewPorts.iPad);
       await initFullPageEditorWithAdf(page, col2);
       await page.click(pageObject.layoutDataSection);
-      await snapshot(page);
+      await snapshot(page, 0.02);
     });
 
     it('should stack layout on smaller iPhone', async () => {
       await page.setViewport(deviceViewPorts.iPhonePlus);
       await initFullPageEditorWithAdf(page, col2);
       await page.click(pageObject.layoutDataSection);
-      await snapshot(page);
+      await snapshot(page, 0.02);
     });
   });
 
@@ -38,14 +38,14 @@ describe('Snapshot Test: Layouts', () => {
       await page.setViewport(deviceViewPorts.LaptopMDPI);
       await initFullPageEditorWithAdf(page, col3);
       await page.click(pageObject.layoutDataSection);
-      await snapshot(page);
+      await snapshot(page, 0.02);
     });
 
     it('should stack layout on smaller screen sizes', async () => {
       await page.setViewport(deviceViewPorts.iPhonePlus);
       await initFullPageEditorWithAdf(page, col3);
       await page.click(pageObject.layoutDataSection);
-      await snapshot(page);
+      await snapshot(page, 0.02);
     });
   });
 });
