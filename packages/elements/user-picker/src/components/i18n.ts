@@ -3,8 +3,9 @@ import { defineMessages } from 'react-intl';
 export const messages = defineMessages({
   placeholder: {
     id: 'fabric.elements.user-picker.placeholder',
-    defaultMessage: 'Find a person...',
-    description: 'Placeholder description for empty user select field.',
+    defaultMessage: 'Enter people or teams...',
+    description:
+      'Placeholder description for empty user/team/email select field.',
   },
   addMore: {
     id: 'fabric.elements.user-picker.placeholder.add-more',

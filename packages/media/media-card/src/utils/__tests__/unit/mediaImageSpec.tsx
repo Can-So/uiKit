@@ -84,6 +84,10 @@ describe('MediaImage', () => {
     return component.find(ImageComponent);
   };
 
+  beforeEach(() => {
+    asMock(isRotated).mockReset();
+  });
+
   afterAll(() => {
     Element.prototype.getBoundingClientRect = originalGetBoundingClientRect;
   });
@@ -143,6 +147,7 @@ describe('MediaImage', () => {
         });
       });
     });
+
     describe('when image is bigger than container', () => {
       it('should have right style for cover strategy', () => {
         const component = setup({
@@ -167,7 +172,48 @@ describe('MediaImage', () => {
         });
       });
     });
+
+    describe('when image is rotated', () => {
+      it('should choose appropriate width when cover strategy chosen', () => {
+        asMock(isRotated).mockReturnValue(true);
+
+        const component = mount<MediaImageProps, MediaImageState>(
+          <MediaImage
+            dataURI="data:image/png;base64,"
+            stretch={true}
+            crop={true}
+            previewOrientation={6}
+          />,
+        );
+
+        mockImageTag(component, [1000, 750], [100, 75], true);
+        expectToEqual(
+          component.find(ImageComponent).prop('style').width,
+          '134%',
+        );
+      });
+
+      it('should choose appropriate height when fit strategy chosen', () => {
+        asMock(isRotated).mockReturnValue(true);
+
+        const component = mount<MediaImageProps, MediaImageState>(
+          <MediaImage
+            dataURI="data:image/png;base64,"
+            stretch={true}
+            crop={false}
+            previewOrientation={6}
+          />,
+        );
+
+        mockImageTag(component, [1000, 750], [100, 75], true);
+        expectToEqual(
+          component.find(ImageComponent).prop('style').height,
+          '75%',
+        );
+      });
+    });
   });
+
   describe('when image is more portraity than container', () => {
     describe('when image is smaller than container', () => {
       it('should have right style for cover strategy', () => {
@@ -218,7 +264,8 @@ describe('MediaImage', () => {
         });
       });
     });
-    describe('image orientation', () => {
+
+    describe('when image is rotated', () => {
       it('should do nothing if orientation is 1', () => {
         const component = setup({
           isCoverStrategy: false,
@@ -253,6 +300,25 @@ describe('MediaImage', () => {
           height: '75%',
           transform: 'translate(-50%, -50%) rotate(90deg)',
         });
+      });
+
+      it('should choose appropriate width when cover strategy chosen', () => {
+        asMock(isRotated).mockReturnValue(true);
+
+        const component = mount<MediaImageProps, MediaImageState>(
+          <MediaImage
+            dataURI="data:image/png;base64,"
+            stretch={true}
+            crop={true}
+            previewOrientation={6}
+          />,
+        );
+
+        mockImageTag(component, [1000, 750], [75, 100], true);
+        expectToEqual(
+          component.find(ImageComponent).prop('style').width,
+          '134%',
+        );
       });
     });
   });
