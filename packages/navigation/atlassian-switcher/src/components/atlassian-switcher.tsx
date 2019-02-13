@@ -24,6 +24,7 @@ export default ({
       break;
     default:
       if (process.env.NODE_ENV !== 'production') {
+        // tslint:disable-next-line:no-console
         console.warn(
           `Product key ${product} provided to Atlassian Switcher doesn't have a corresponding product specific implementation.`,
         );
