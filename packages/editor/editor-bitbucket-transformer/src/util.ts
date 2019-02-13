@@ -66,17 +66,20 @@ export function transformHtml(
     span.setAttribute('class', 'editor-entity-mention');
     span.setAttribute('contenteditable', 'false');
 
-    const title = a.getAttribute('title') || '';
-    if (title) {
-      const usernameMatch = title.match(/^@(.*?)$/);
-      if (usernameMatch) {
-        const username = usernameMatch[1];
-        span.setAttribute('data-mention-id', username);
+    const bitbucketUuid = a.getAttribute('data-bitbucket-uuid') || '';
+    if (bitbucketUuid) {
+      // UUID is wrapped in curlies so that it get serialized as @{uuid-1234} instead of @uuid-1234
+      span.setAttribute('data-mention-id', `{${bitbucketUuid}}`);
+    } else {
+      const title = a.getAttribute('title') || '';
+      if (title) {
+        const usernameMatch = title.match(/^@(.*?)$/);
+        if (usernameMatch) {
+          const username = usernameMatch[1];
+          span.setAttribute('data-mention-id', username);
+        }
       }
     }
-
-    const bitbucketUuid = a.getAttribute('data-bitbucket-uuid') || '';
-    span.setAttribute('data-bitbucket-uuid', bitbucketUuid);
 
     const text = a.textContent || '';
     if (text.indexOf('@') === 0) {
