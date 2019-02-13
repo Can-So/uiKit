@@ -76,7 +76,7 @@ class Form extends React.Component<Props, State> {
     submitting: false,
   };
 
-  getState = () => {
+  getValues = () => {
     return this.form.getState().values;
   };
 
@@ -138,7 +138,7 @@ class Form extends React.Component<Props, State> {
             dirty,
             submitting,
             disabled: isDisabled,
-            getState: this.getState,
+            getValues: this.getValues,
           })}
         </IsDisabledContext.Provider>
       </FormContext.Provider>

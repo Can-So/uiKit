@@ -23,5 +23,5 @@ export type FormChildrenArgs<T> = {
     React.FormHTMLAttributes<HTMLFormElement>,
     HTMLFormElement
   >;
-  getState: () => T;
+  getValues: () => T;
 };

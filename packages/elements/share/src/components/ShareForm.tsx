@@ -52,9 +52,9 @@ export type InternalFormProps = FormChildrenArgs<ShareData> & Props;
 
 class InternalForm extends React.PureComponent<InternalFormProps> {
   componentWillUnmount() {
-    const { onDismiss, getState } = this.props;
+    const { onDismiss, getValues } = this.props;
     if (onDismiss) {
-      onDismiss(getState());
+      onDismiss(getValues());
     }
   }
 
@@ -119,8 +119,8 @@ class InternalForm extends React.PureComponent<InternalFormProps> {
 
 export const ShareForm: React.StatelessComponent<Props> = props => (
   <Form onSubmit={props.onShareClick}>
-    {({ formProps, getState }: FormChildrenArgs<ShareData>) => (
-      <InternalForm {...props} formProps={formProps} getState={getState} />
+    {({ formProps, getValues }: FormChildrenArgs<ShareData>) => (
+      <InternalForm {...props} formProps={formProps} getValues={getValues} />
     )}
   </Form>
 );
