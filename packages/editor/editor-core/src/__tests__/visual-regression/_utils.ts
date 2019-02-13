@@ -32,6 +32,8 @@ export const escapeStr = (str: string) => {
   return `concat('${str.replace(/'/g, `', "'", '`)}', '')`;
 };
 
+export const viewportSizes = [{ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT }];
+
 export const selectByTextAndClick = async ({ page, tagName, text }) => {
   const target = await page.$x(
     `//${tagName}[contains(text(), ${escapeStr(text)})]`,
