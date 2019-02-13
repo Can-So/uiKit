@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.9.5
+- [patch] [026d4424c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/026d4424c2):
+
+  - ED-6226 Fix row delete button displacement after many rows in a table
+
 ## 98.9.4
 - [patch] [e04c61dc55](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e04c61dc55):
 

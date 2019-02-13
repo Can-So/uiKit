@@ -1,1 +1,0 @@
-- ED-6226 Fix row delete button displacement after many rows in a table
