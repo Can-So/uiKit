@@ -7,7 +7,7 @@ import { colors, themed, gridSize } from '@atlaskit/theme';
 import type { CommonProps, fn, InnerProps } from './types';
 
 const getPrimitiveStyles = props => {
-  const { getStyles, isFocused } = props;
+  const { cx, className, getStyles, isDisabled, isFocused, isSelected } = props;
 
   const styles = {
     alignItems: 'center',
@@ -23,8 +23,16 @@ const getPrimitiveStyles = props => {
     },
   };
 
+  const augmentedStyles = { ...getStyles('option', props), ...styles };
+  const bemClasses = {
+    option: true,
+    'option--is-disabled': isDisabled,
+    'option--is-focused': isFocused,
+    'option--is-selected': isSelected,
+  };
+
   // maintain react-select API
-  return { ...getStyles('option', props), ...styles };
+  return [augmentedStyles, cx(null, bemClasses, className)];
 };
 
 // maintains function shape
@@ -115,8 +123,10 @@ class ControlOption extends Component<OptionProps, OptionState> {
       onMouseLeave: this.onMouseLeave,
     };
 
+    const [styles, classes] = getPrimitiveStyles({ getStyles, ...rest });
+
     return (
-      <div css={getPrimitiveStyles({ getStyles, ...rest })} {...props}>
+      <div css={styles} className={classes} {...props}>
         <div css={iconWrapperCSS()}>
           <Icon
             primaryColor={getPrimaryColor({ ...this.props, ...this.state })}
