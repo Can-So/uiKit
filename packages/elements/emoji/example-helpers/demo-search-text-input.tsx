@@ -2,13 +2,13 @@ import * as React from 'react';
 import {
   FocusEventHandler,
   FormEventHandler,
-  PureComponent,
+  KeyboardEvent,
   MouseEvent,
+  PureComponent,
 } from 'react';
-
 import * as uuid from 'uuid/v1';
 
-function noModifiers(event: MouseEvent<any>): boolean {
+function noModifiers(event: MouseEvent<any> | KeyboardEvent<any>): boolean {
   return !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
 }
 
@@ -30,7 +30,7 @@ export interface Props {
 }
 
 class SearchTextInput extends PureComponent<Props, {}> {
-  handleKeyDown = event => {
+  handleKeyDown = (event: React.KeyboardEvent) => {
     if (noModifiers(event)) {
       let notify: Callback | undefined;
       switch (event.keyCode) {
@@ -54,13 +54,13 @@ class SearchTextInput extends PureComponent<Props, {}> {
     }
   };
 
-  inputRefUpdate = ref => {
+  inputRefUpdate = (ref: HTMLInputElement | null) => {
     if (this.props.inputRef) {
       this.props.inputRef(ref);
     }
   };
 
-  private handleRef = ref => {
+  private handleRef = (ref: HTMLInputElement | null) => {
     this.inputRefUpdate(ref);
   };
 

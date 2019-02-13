@@ -167,7 +167,7 @@ class MockOnProviderChange
 
   waitForResults(num: number): Promise<EmojiSearchResult> {
     return new Promise<EmojiSearchResult>(resolve => {
-      const minCountResolver = response => {
+      const minCountResolver = (response: EmojiSearchResult) => {
         if (this.resultCalls.length >= num) {
           resolve(response);
         } else {
@@ -336,7 +336,7 @@ describe('EmojiResource', () => {
         providers: [provider1, provider2],
       };
 
-      let resolveProvider1;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -409,7 +409,7 @@ describe('EmojiResource', () => {
     });
 
     it('single provider slow', () => {
-      let resolveProvider1;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
 
       fetchMock.mock({
         matcher: `begin:${provider1.url}`,
@@ -552,7 +552,7 @@ describe('EmojiResource', () => {
 
   describe('#findByEmojiId', () => {
     it('Before loaded, promise eventually resolved; one provider', () => {
-      let resolveProvider1;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
 
       fetchMock.mock({
         matcher: `begin:${provider1.url}`,
@@ -569,12 +569,12 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(grinEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
+      resolveProvider1!(providerServiceData1);
       return done;
     });
 
     it('one provider, no id', () => {
-      let resolveProvider1;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
 
       fetchMock.mock({
         matcher: `begin:${provider1.url}`,
@@ -591,12 +591,12 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(grinEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
+      resolveProvider1!(providerServiceData1);
       return done;
     });
 
     it('one provider, unknown id, shortName fallback', () => {
-      let resolveProvider1;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
 
       fetchMock.mock({
         matcher: `begin:${provider1.url}`,
@@ -613,13 +613,13 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(grinEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
+      resolveProvider1!(providerServiceData1);
       return done;
     });
 
     it('Two providers, found first', () => {
-      let resolveProvider1;
-      let resolveProvider2;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -645,14 +645,14 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(grinEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
-      resolveProvider2(providerServiceData2);
+      resolveProvider1!(providerServiceData1);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
     it('Two providers, found second', () => {
-      let resolveProvider1;
-      let resolveProvider2;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -681,14 +681,14 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(evilburnsEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
-      resolveProvider2(providerServiceData2);
+      resolveProvider1!(providerServiceData1);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
     it('Two providers, not found', () => {
-      let resolveProvider1;
-      let resolveProvider2;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -714,8 +714,8 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         expect(emoji).to.equal(undefined);
       });
-      resolveProvider1(providerServiceData1);
-      resolveProvider2(providerServiceData2);
+      resolveProvider1!(providerServiceData1);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
@@ -747,7 +747,7 @@ describe('EmojiResource', () => {
     });
 
     it('Two providers, not found in failing provider', () => {
-      let resolveProvider2;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -773,12 +773,12 @@ describe('EmojiResource', () => {
           undefined,
         );
       });
-      resolveProvider2(providerServiceData2);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
     it('Two providers, ingore in failing provider', () => {
-      let resolveProvider2;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -805,7 +805,7 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(evilburnsEmoji, emoji);
       });
-      resolveProvider2(providerServiceData2);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
@@ -1020,7 +1020,7 @@ describe('EmojiResource', () => {
 
   describe('#findById', () => {
     it('unknown id', () => {
-      let resolveProvider1;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
 
       fetchMock.mock({
         matcher: `begin:${provider1.url}`,
@@ -1035,12 +1035,12 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         expect(emoji).to.equal(undefined);
       });
-      resolveProvider1(providerServiceData1);
+      resolveProvider1!(providerServiceData1);
       return done;
     });
 
     it('valid emoji id', () => {
-      let resolveProvider1;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
 
       fetchMock.mock({
         matcher: `begin:${provider1.url}`,
@@ -1055,14 +1055,14 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(grinEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
+      resolveProvider1!(providerServiceData1);
       return done;
     });
   });
 
   describe('#findByShortName', () => {
     it('Before loaded, promise eventually resolved; one provider', () => {
-      let resolveProvider1;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
 
       fetchMock.mock({
         matcher: `begin:${provider1.url}`,
@@ -1076,13 +1076,13 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(grinEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
+      resolveProvider1!(providerServiceData1);
       return done;
     });
 
     it('Two providers, found first', () => {
-      let resolveProvider1;
-      let resolveProvider2;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -1106,14 +1106,14 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(grinEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
-      resolveProvider2(providerServiceData2);
+      resolveProvider1!(providerServiceData1);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
     it('Two providers, found second', () => {
-      let resolveProvider1;
-      let resolveProvider2;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -1139,14 +1139,14 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(evilburnsEmoji, emoji);
       });
-      resolveProvider1(providerServiceData1);
-      resolveProvider2(providerServiceData2);
+      resolveProvider1!(providerServiceData1);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
     it('Two providers, duplicate shortName - use from second provider. 1, then 2 resolved.', () => {
-      let resolveProvider1;
-      let resolveProvider2;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -1174,8 +1174,8 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(p2grin, emoji);
       });
-      resolveProvider1(providerServiceData1);
-      resolveProvider2({
+      resolveProvider1!(providerServiceData1);
+      resolveProvider2!({
         emojis: [...providerServiceData2.emojis, p2grin],
         meta: providerServiceData2.meta,
       });
@@ -1183,8 +1183,8 @@ describe('EmojiResource', () => {
     });
 
     it('Two providers, duplicate shortName - use from second provider. 2, then 1 resolved.', () => {
-      let resolveProvider1;
-      let resolveProvider2;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -1212,17 +1212,17 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(p2grin, emoji);
       });
-      resolveProvider2({
+      resolveProvider2!({
         emojis: [...providerServiceData2.emojis, p2grin],
         meta: providerServiceData2.meta,
       });
-      resolveProvider1(providerServiceData1);
+      resolveProvider1!(providerServiceData1);
       return done;
     });
 
     it('Two providers, not found', () => {
-      let resolveProvider1;
-      let resolveProvider2;
+      let resolveProvider1: (value?: any | PromiseLike<any>) => void;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -1246,8 +1246,8 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         expect(emoji).to.equal(undefined);
       });
-      resolveProvider1(providerServiceData1);
-      resolveProvider2(providerServiceData2);
+      resolveProvider1!(providerServiceData1);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
@@ -1276,7 +1276,7 @@ describe('EmojiResource', () => {
     });
 
     it('Two providers, not found in failing provider', () => {
-      let resolveProvider2;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -1300,12 +1300,12 @@ describe('EmojiResource', () => {
           undefined,
         );
       });
-      resolveProvider2(providerServiceData2);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
 
     it('Two providers, ignore in failing provider', () => {
-      let resolveProvider2;
+      let resolveProvider2: (value?: any | PromiseLike<any>) => void;
 
       fetchMock
         .mock({
@@ -1329,7 +1329,7 @@ describe('EmojiResource', () => {
       const done = emojiPromise.then(emoji => {
         checkEmoji(evilburnsEmoji, emoji);
       });
-      resolveProvider2(providerServiceData2);
+      resolveProvider2!(providerServiceData2);
       return done;
     });
   });

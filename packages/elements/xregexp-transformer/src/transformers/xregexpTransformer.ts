@@ -22,7 +22,7 @@ export default function xregexpTransformer<
           .slice(1, -1);
         const f = flags.getText().slice(1, -1);
 
-        const xregexp = new XRegExp(p, f);
+        const xregexp = XRegExp(p, f);
         const newPattern = ts.createStringLiteral(xregexp.source);
         return ts.updateNew(node, node.expression, undefined, [
           newPattern,

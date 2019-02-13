@@ -1,13 +1,11 @@
+import AkButton from '@atlaskit/button';
+import AddIcon from '@atlaskit/icon/glyph/add';
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import * as classNames from 'classnames';
-
-import AddIcon from '@atlaskit/icon/glyph/add';
-import AkButton from '@atlaskit/button';
-import * as styles from './styles';
-import EmojiButton from '../../components/common/EmojiButton';
+import { FormattedMessage } from 'react-intl';
 import CachingEmoji from '../../components/common/CachingEmoji';
-import ToneSelector from './ToneSelector';
+import EmojiButton from '../../components/common/EmojiButton';
 import {
   EmojiDescription,
   EmojiDescriptionWithVariations,
@@ -15,7 +13,8 @@ import {
   ToneSelection,
 } from '../../types';
 import { messages } from '../i18n';
-import { FormattedMessage } from 'react-intl';
+import * as styles from './styles';
+import ToneSelector from './ToneSelector';
 
 export interface Props {
   emoji?: EmojiDescription;
@@ -41,7 +40,7 @@ export default class EmojiPreview extends PureComponent<Props, State> {
     });
   };
 
-  onToneSelected = toneValue => {
+  onToneSelected = (toneValue: number) => {
     this.setState({
       selectingTone: false,
     });

@@ -1,12 +1,11 @@
+import { SecurityOptions } from '@atlaskit/util-service-support';
+import { expect } from 'chai';
 import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
-import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { SecurityOptions } from '@atlaskit/util-service-support';
-
-import { EmojiLoaderConfig } from '../../../api/EmojiUtils';
 import EmojiLoader from '../../../api/EmojiLoader';
+import { EmojiLoaderConfig } from '../../../api/EmojiUtils';
 
 const p1Url = 'https://p1/';
 
@@ -18,7 +17,8 @@ const header = (code: string | number): SecurityOptions => ({
   },
 });
 
-const getSecurityHeader = call => call[1].headers.get(defaultSecurityHeader);
+const getSecurityHeader = (call: any) =>
+  call[1].headers.get(defaultSecurityHeader);
 
 const defaultSecurityCode = '10804';
 const defaultAltScaleParam = 'altScale=XHDPI';
@@ -30,9 +30,9 @@ const provider1: EmojiLoaderConfig = {
 
 const providerData1 = [{ id: 'a' }, { id: 'b' }, { id: 'c' }];
 
-const fetchResponse = data => ({ emojis: data });
+const fetchResponse = (data: any[]) => ({ emojis: data });
 
-function checkOrder(expected, actual) {
+function checkOrder(expected: any[], actual: any[]) {
   expect(actual.length, `${actual.length} emojis`).to.equal(expected.length);
   expected.forEach((emoji, idx) => {
     expect(emoji.id, `emoji #${idx}`).to.equal(actual[idx].id);

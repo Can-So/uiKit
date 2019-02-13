@@ -37,7 +37,7 @@ const sampleEmoji = {
 
 export function setupUploader(
   props?: Props,
-  config?,
+  config?: any,
 ): Promise<ReactWrapper<any, any>> {
   const uploaderProps: Props = {
     ...props,
@@ -56,17 +56,17 @@ export function setupUploader(
 }
 
 describe('<EmojiUploader />', () => {
-  const uploadPreviewShown = component => {
+  const uploadPreviewShown = (component: ReactWrapper) => {
     const uploadPreview = helper.findUploadPreview(component);
     expect(uploadPreview).toHaveLength(1);
     const uploadPreviewEmoji = uploadPreview.find(Emoji);
     expect(uploadPreviewEmoji).toHaveLength(2);
     let emoji = uploadPreviewEmoji.at(0).prop('emoji');
     expect(emoji.shortName).toEqual(sampleEmoji.shortName);
-    expect(emoji.representation.imagePath).toEqual(pngDataURL);
+    expect((emoji.representation as any).imagePath).toEqual(pngDataURL);
   };
 
-  const typeEmojiName = async component => {
+  const typeEmojiName = async (component: ReactWrapper) => {
     await waitUntil(
       () => component.update() && component.find(AkFieldBase).length > 0,
     );
@@ -101,8 +101,8 @@ describe('<EmojiUploader />', () => {
   });
 
   describe('upload', () => {
-    let emojiProvider;
-    let component;
+    let emojiProvider: Promise<any>;
+    let component: ReactWrapper;
 
     beforeEach(async () => {
       jest

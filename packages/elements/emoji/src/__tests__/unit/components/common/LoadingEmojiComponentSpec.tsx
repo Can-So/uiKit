@@ -1,16 +1,14 @@
-import { mount } from 'enzyme';
+import { waitUntil } from '@atlaskit/util-common-test';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import { Component } from 'react';
-
-import { waitUntil } from '@atlaskit/util-common-test';
-
 import { EmojiProvider } from '../../../../api/EmojiResource';
 import LoadingEmojiComponent, {
   Props,
   State as LoadingState,
 } from '../../../../components/common/LoadingEmojiComponent';
 
-const hasLoaded = component =>
+const hasLoaded = (component: ReactWrapper) =>
   component.update() &&
   (component.instance() as TestLoadingComponent).hasLoaded;
 const asyncLoadMock = jest.fn();
@@ -26,7 +24,10 @@ class TestLoadingComponent extends LoadingEmojiComponent<
   LoadingState & State
 > {
   public hasLoaded: boolean = false;
-  renderLoaded(_provider, _asyncComponent) {
+  renderLoaded(
+    _provider: EmojiProvider,
+    _asyncComponent: React.ComponentClass<any>,
+  ) {
     this.hasLoaded = true;
     return <div />;
   }

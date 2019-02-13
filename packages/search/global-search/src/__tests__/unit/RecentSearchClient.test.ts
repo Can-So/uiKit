@@ -19,11 +19,7 @@ function apiWillReturn(state: RecentItem[]) {
     name: 'recent',
   };
 
-  fetchMock.get(
-    'localhost/api/client/recent?cloudId=123',
-    response,
-    opts as fetchMock.MockOptionsMethodGet,
-  );
+  fetchMock.get('localhost/api/client/recent?cloudId=123', response, opts);
 }
 
 describe('RecentSearchClient', () => {
