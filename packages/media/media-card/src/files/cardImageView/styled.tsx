@@ -18,11 +18,6 @@ const getShadowAttribute = (props: WrapperProps) => {
   return disableOverlay ? '' : cardShadow;
 };
 
-const getCursorAttribute = () => {
-  // TODO MSW-661: Figure out pointer logic for image card component
-  return 'cursor: pointer;';
-};
-
 const getBackgroundColor = (props: WrapperProps) => {
   const { mediaType } = props;
   return `background: ${
@@ -34,7 +29,6 @@ const getBackgroundColor = (props: WrapperProps) => {
 
 export const Wrapper = styled(Root)`
   ${getShadowAttribute}
-  ${getCursorAttribute}
   ${borderRadius}
   background: ${themed({ light: '#FFF', dark: colors.DN50 })};
 

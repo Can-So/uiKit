@@ -6,6 +6,7 @@ import {
   Card,
   CardView,
   CardOnClickCallback,
+  ExternalImageIdentifier,
 } from '@atlaskit/media-card';
 import { Context, ImageResizeMode } from '@atlaskit/media-core';
 import { MediaType } from '@atlaskit/adf-schema';
@@ -67,7 +68,20 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
     });
   }
 
+  private renderLoadingCard = () => {
+    const { cardDimensions } = this.props;
+
+    return (
+      <CardView
+        status="loading"
+        mediaItemType="file"
+        dimensions={cardDimensions}
+      />
+    );
+  };
+
   private renderExternal() {
+    const { context } = this.state;
     const {
       cardDimensions,
       resizeMode,
@@ -77,17 +91,21 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       disableOverlay,
     } = this.props;
 
+    if (imageStatus === 'loading' || !url) {
+      return this.renderLoadingCard();
+    }
+
+    const identifier: ExternalImageIdentifier = {
+      dataURI: url,
+      name: url,
+      mediaItemType: 'external-image',
+    };
+
     return (
-      <CardView
-        status={imageStatus || 'loading'}
-        dataURI={url}
+      <Card
+        context={context as any} // context is not really used when the type is external and we want to render the component asap
+        identifier={identifier}
         dimensions={cardDimensions}
-        metadata={
-          {
-            mediaType: 'image',
-            name: url,
-          } as any
-        }
         appearance={appearance}
         resizeMode={resizeMode}
         disableOverlay={disableOverlay}
@@ -117,13 +135,7 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
     }
 
     if (!context) {
-      return (
-        <CardView
-          status="loading"
-          mediaItemType={type}
-          dimensions={cardDimensions}
-        />
-      );
+      return this.renderLoadingCard();
     }
 
     let identifier: any = {
