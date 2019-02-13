@@ -1,1 +1,0 @@
-- [FS-3589] Fix re-rendering on status element after apply decoration
