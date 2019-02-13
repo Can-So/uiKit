@@ -64,7 +64,7 @@ export default class PickerFacade {
     picker.on('upload-preview-update', this.handleUploadPreviewUpdate);
     picker.on('upload-processing', this.handleReady);
     picker.on('upload-error', this.handleUploadError);
-    picker.on('collection', this.handleCollection);
+    picker.on('mobile-upload-end', this.handleMobileUploadEnd);
 
     if (isDropzone(picker)) {
       picker.on('drag-enter', this.handleDragEnter);
@@ -251,15 +251,17 @@ export default class PickerFacade {
     });
   };
 
-  private handleCollection = (
+  private handleMobileUploadEnd = (
     event: UploadEndEventPayload & {
       file: { readonly collectionName?: string };
     },
   ) => {
     const { file } = event;
+
     this.stateManager.updateState(file.id, {
       status: 'preview',
       collection: file.collectionName,
+      id: file.publicId,
     });
   };
 

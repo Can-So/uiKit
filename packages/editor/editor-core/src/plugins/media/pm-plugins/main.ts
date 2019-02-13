@@ -712,6 +712,22 @@ export class MediaPluginState {
         }
         break;
 
+      case 'mobile-upload-end':
+        const isMediaSingle =
+          isImage(state.fileMimeType) &&
+          !!this.view.state.schema.nodes.mediaSingle;
+        let attrs: { id?: string; collection?: string } = {
+          id: state.publicId || state.id,
+        };
+
+        if (typeof state.collection === 'string') {
+          attrs.collection = state.collection;
+        }
+
+        this.updateMediaNodeAttrs(state.id, attrs, isMediaSingle);
+        delete this.mediaGroupNodes[state.id];
+        break;
+
       case 'ready':
         delete this.mediaGroupNodes[state.id];
         this.stateManager.off(state.id, this.handleMediaState);

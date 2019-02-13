@@ -6,7 +6,8 @@ export type MediaStateStatus =
   | 'ready'
   | 'cancelled'
   | 'preview'
-  | 'error';
+  | 'error'
+  | 'mobile-upload-end';
 
 export interface MediaState {
   id: string;
