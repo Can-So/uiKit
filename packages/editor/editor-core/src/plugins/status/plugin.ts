@@ -172,6 +172,7 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
             delayedNodeRendering,
             {
               side: 1,
+              key: '#status-zero-width-char-decoration',
             },
           );
 
