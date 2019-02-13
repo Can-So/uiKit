@@ -22,7 +22,7 @@ const sizerStyle: React.CSSProperties = {
 };
 
 type Props = {
-  children?: (width: Number) => JSX.Element;
+  children: (width: Number) => JSX.Element;
   onResize?: (width: Number) => void;
   /** Optional styles to be applied to the containing element */
   containerStyle?: React.CSSProperties;
@@ -34,7 +34,7 @@ type State = {
 
 // add a definition for a data field to the resize object
 // since HTMLElements do not have this.
-type ResizeObject = HTMLElement & {
+type ResizeObject = HTMLObjectElement & {
   data: String;
   contentDocument: HTMLDocument;
 };
@@ -42,8 +42,8 @@ type ResizeObject = HTMLElement & {
 export default class WidthDetector extends React.Component<Props, State> {
   props: Props;
   state: State = {};
-  container?: HTMLDivElement;
-  resizeObjectDocument?: Window;
+  container: HTMLDivElement;
+  resizeObjectDocument: Window;
   resizeObject?: ResizeObject;
 
   static defaultProps = {
@@ -84,7 +84,7 @@ export default class WidthDetector extends React.Component<Props, State> {
     }
   }
 
-  handleContainerRef = (ref?: HTMLDivElement) => {
+  handleContainerRef = (ref: HTMLDivElement) => {
     if (!ref) {
       return;
     }
@@ -92,7 +92,7 @@ export default class WidthDetector extends React.Component<Props, State> {
     this.handleResize();
   };
 
-  handleObjectRef = (ref?: ResizeObject) => {
+  handleObjectRef = (ref: ResizeObject) => {
     if (!ref) {
       return;
     }
@@ -104,7 +104,8 @@ export default class WidthDetector extends React.Component<Props, State> {
       return;
     }
 
-    this.resizeObjectDocument = this.resizeObject.contentDocument.defaultView;
+    this.resizeObjectDocument = this.resizeObject.contentDocument
+      .defaultView as Window;
     this.resizeObjectDocument.addEventListener('resize', this.handleResize);
 
     // Calculate width first time, after object has loaded.
@@ -121,10 +122,8 @@ export default class WidthDetector extends React.Component<Props, State> {
   };
 
   render() {
-    let sizerEl;
-    let { width } = this.state;
     // @TODO: Add alternative method using IntersectionObserver or ResizeObserver
-    sizerEl = (
+    const sizerEl = (
       <object
         type="text/html"
         style={sizerStyle}

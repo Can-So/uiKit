@@ -4,6 +4,9 @@ import { mount } from 'enzyme';
 import WidthDetector from '../..';
 import { name } from '../../../package.json';
 
+// requestAnimationFrame is stubbed with `raf-stub`
+const requestAnimationFrame = window.requestAnimationFrame as any;
+
 describe(name, () => {
   const createChildWithSpy = spy => args => spy(args);
 
@@ -52,10 +55,10 @@ describe(name, () => {
     );
     requestAnimationFrame.step();
     expect(spy).toHaveBeenCalledTimes(1);
-    wrapper.instance().handleResize();
+    (wrapper.instance() as WidthDetector).handleResize();
     requestAnimationFrame.step();
     expect(spy).toHaveBeenCalledTimes(2);
-    wrapper.instance().handleResize();
+    (wrapper.instance() as WidthDetector).handleResize();
     requestAnimationFrame.step();
     expect(spy).toHaveBeenCalledTimes(3);
   });
