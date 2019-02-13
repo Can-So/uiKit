@@ -69,12 +69,12 @@ describe('Root Wrapper', () => {
       expect(xlarge).toMatchSnapshot();
     });
 
-    it('should render right cursor', () => {
+    it('should render right cursor when shouldUsePointerCursor is passed', () => {
       const withCursor = shallow(
         <Wrapper mediaItemType="file" shouldUsePointerCursor />,
       );
       const withoutCursor = shallow(
-        <Wrapper mediaItemType="file" shouldUsePointerCursor />,
+        <Wrapper mediaItemType="file" shouldUsePointerCursor={false} />,
       );
 
       expect(withCursor).toMatchSnapshot();

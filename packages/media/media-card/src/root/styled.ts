@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { borderRadius } from '@atlaskit/theme';
-import { HTMLAttributes, ComponentClass } from 'react';
 import { MediaItemType } from '@atlaskit/media-core';
 import { CardDimensions, CardAppearance } from '../';
 import { getCSSUnitValue } from '../utils/getCSSUnitValue';
@@ -26,9 +25,7 @@ const getWrapperWidth = (dimensions?: CardDimensions) =>
     ? `width: ${getCSSUnitValue(dimensions.width)}; max-width: 100%;`
     : '';
 
-export const Wrapper: ComponentClass<
-  HTMLAttributes<{}> & WrapperProps
-> = styled.div`
+export const Wrapper = styled.div`
   ${({
     appearance,
     dimensions,

@@ -13,7 +13,10 @@ import { FileDetails, LinkDetails, Resource } from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import {
+  mountWithIntlContext,
+  expectToEqual,
+} from '@atlaskit/media-test-helpers';
 import {
   CardView,
   CardViewBase,
@@ -540,6 +543,6 @@ describe('CardView', () => {
       mediaItemType: 'external-image',
     });
 
-    expect(card.find(Wrapper).prop('shouldUsePointerCursor')).toBeFalsy();
+    expectToEqual(card.find(Wrapper).props().shouldUsePointerCursor, false);
   });
 });

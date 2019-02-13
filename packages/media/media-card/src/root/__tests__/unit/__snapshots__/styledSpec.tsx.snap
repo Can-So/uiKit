@@ -239,7 +239,7 @@ exports[`Root Wrapper File should render properly with passed dimensions 2`] = `
 />
 `;
 
-exports[`Root Wrapper File should render right cursor 1`] = `
+exports[`Root Wrapper File should render right cursor when shouldUsePointerCursor is passed 1`] = `
 .c0 {
   cursor: pointer;
 }
@@ -258,9 +258,9 @@ exports[`Root Wrapper File should render right cursor 1`] = `
 />
 `;
 
-exports[`Root Wrapper File should render right cursor 2`] = `
+exports[`Root Wrapper File should render right cursor when shouldUsePointerCursor is passed 2`] = `
 .c0 {
-  cursor: pointer;
+  cursor: default;
 }
 
 .c0 .title {
