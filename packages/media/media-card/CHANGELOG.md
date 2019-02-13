@@ -1,5 +1,10 @@
 # @atlaskit/media-card
 
+## 52.0.7
+- [patch] [ab6ba14cd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6ba14cd3):
+
+  - Fix a bug where droping image with EXIF orientation >= 5 end up screwing up proportions for some of the cases
+
 ## 52.0.6
 - [patch] [05c5bf7a93](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05c5bf7a93):
 
