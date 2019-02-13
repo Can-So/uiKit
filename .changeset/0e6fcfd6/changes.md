@@ -1,0 +1,1 @@
+- popup select "target" is now a function that must resolve to a node
