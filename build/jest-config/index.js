@@ -13,6 +13,9 @@ const cli = meow({
       type: 'boolean',
       alias: 'u',
     },
+    watch: {
+      type: 'boolean',
+    },
     runInBand: {
       type: 'boolean',
     },
@@ -26,7 +29,7 @@ async function main(testPaths) {
   const status = await jest.runCLI(
     {
       _: cli.input,
-      watch: !!process.env.WATCH,
+      watch: cli.flags.watch || !!process.env.WATCH,
       updateSnapshot: cli.flags.updateSnapshot,
       passWithNoTests: cli.flags.passWithNoTests,
       runInBand: cli.flags.runInBand,

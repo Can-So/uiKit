@@ -11,6 +11,7 @@ import {
 import pick from 'lodash.pick';
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { parse, format, isValid } from 'date-fns';
 
 import {
   name as packageName,
@@ -20,7 +21,6 @@ import {
 import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';
 import {
-  parseDateIntoStateValues,
   defaultTimes,
   defaultDateFormat,
   defaultTimeFormat,
@@ -62,7 +62,7 @@ type Props = {
   datePickerProps: {},
   timePickerProps: {},
   /** Function to parse passed in dateTimePicker value into the requisite sub values date, time and zone. **/
-  parseValue: (
+  parseValue?: (
     dateTimeValue: string,
     date: string,
     time: string,
@@ -169,7 +169,6 @@ class DateTimePicker extends Component<Props, State> {
     hideIcon: false,
     datePickerProps: {},
     timePickerProps: {},
-    parseValue: parseDateIntoStateValues,
     datePickerSelectProps: {},
     timePickerSelectProps: {},
     times: defaultTimes,
@@ -197,7 +196,7 @@ class DateTimePicker extends Component<Props, State> {
 
     return {
       ...mappedState,
-      ...this.props.parseValue(
+      ...this.parseValue(
         mappedState.value,
         mappedState.dateValue,
         mappedState.timeValue,
@@ -206,18 +205,44 @@ class DateTimePicker extends Component<Props, State> {
     };
   };
 
+  parseValue(
+    value: string,
+    dateValue: string,
+    timeValue: string,
+    zoneValue: string,
+  ) {
+    if (this.props.parseValue) {
+      return this.props.parseValue(value, dateValue, timeValue, zoneValue);
+    }
+
+    const parsed = parse(value);
+    const valid = isValid(parsed);
+
+    return valid
+      ? {
+          dateValue: format(parsed, 'YYYY-MM-DD'),
+          timeValue: format(parsed, 'HH:mm'),
+          zoneValue: format(parsed, 'ZZ'),
+        }
+      : {
+          dateValue,
+          timeValue,
+          zoneValue,
+        };
+  }
+
   onBlur = () => {
     this.setState({ isFocused: false });
     this.props.onBlur();
   };
 
-  onDateChange = (dateValue: string) => {
-    this.onValueChange({ ...this.getState(), dateValue });
-  };
-
   onFocus = () => {
     this.setState({ isFocused: true });
     this.props.onFocus();
+  };
+
+  onDateChange = (dateValue: string) => {
+    this.onValueChange({ ...this.getState(), dateValue });
   };
 
   onTimeChange = (timeValue: string) => {
@@ -235,8 +260,9 @@ class DateTimePicker extends Component<Props, State> {
   }) {
     this.setState({ dateValue, timeValue, zoneValue });
 
-    if (dateValue || timeValue) {
+    if (dateValue && timeValue) {
       const value = formatDateTimeZoneIntoIso(dateValue, timeValue, zoneValue);
+
       this.setState({ value });
       this.props.onChange(value);
     }

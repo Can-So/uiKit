@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 3.0.0
+- [major] [be24d8040f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be24d8040f):
+
+  - Change parse function to accept context parameter
+
 ## 2.10.3
 - [patch] [279b08b325](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/279b08b325):
 

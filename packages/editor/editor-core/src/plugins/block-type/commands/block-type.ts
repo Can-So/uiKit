@@ -8,8 +8,22 @@ import {
   PANEL,
   HEADINGS_BY_NAME,
   NORMAL_TEXT,
+  HeadingLevels,
 } from '../types';
 import { removeBlockMarks } from '../../../utils/mark';
+import {
+  withAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+} from '../../analytics';
+
+type InputMethod =
+  | INPUT_METHOD.TOOLBAR
+  | INPUT_METHOD.SHORTCUT
+  | INPUT_METHOD.FORMATTING;
 
 export function setBlockType(name: string): Command {
   return (state, dispatch) => {
@@ -20,7 +34,32 @@ export function setBlockType(name: string): Command {
 
     const headingBlockType = HEADINGS_BY_NAME[name];
     if (headingBlockType && nodes.heading && headingBlockType.level) {
-      return setHeading(headingBlockType.level)(state, dispatch);
+      return setHeading(headingBlockType.level as HeadingLevels)(
+        state,
+        dispatch,
+      );
+    }
+
+    return false;
+  };
+}
+
+export function setBlockTypeWithAnalytics(
+  name: string,
+  inputMethod: InputMethod,
+): Command {
+  return (state, dispatch) => {
+    const { nodes } = state.schema;
+    if (name === NORMAL_TEXT.name && nodes.paragraph) {
+      return setNormalTextWithAnalytics(inputMethod)(state, dispatch);
+    }
+
+    const headingBlockType = HEADINGS_BY_NAME[name];
+    if (headingBlockType && nodes.heading && headingBlockType.level) {
+      return setHeadingWithAnalytics(
+        headingBlockType.level as HeadingLevels,
+        inputMethod,
+      )(state, dispatch);
     }
 
     return false;
@@ -41,6 +80,18 @@ export function setNormalText(): Command {
   };
 }
 
+export function setNormalTextWithAnalytics(inputMethod: InputMethod): Command {
+  return withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_HEADING,
+    attributes: {
+      inputMethod,
+      newHeadingLevel: 0,
+    },
+  })(setNormalText());
+}
 export function setHeading(level: number): Command {
   return function(state, dispatch) {
     const {
@@ -56,6 +107,21 @@ export function setHeading(level: number): Command {
     return true;
   };
 }
+
+export const setHeadingWithAnalytics = (
+  newHeadingLevel: HeadingLevels,
+  inputMethod: InputMethod,
+) =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_HEADING,
+    attributes: {
+      inputMethod,
+      newHeadingLevel,
+    },
+  })(setHeading(newHeadingLevel));
 
 export function insertBlockType(name: string): Command {
   return function(state, dispatch) {
@@ -78,9 +144,32 @@ export function insertBlockType(name: string): Command {
         }
         break;
     }
+
     return false;
   };
 }
+export const insertBlockTypesWithAnalytics = (
+  name: string,
+  inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.KEYBOARD,
+) => {
+  switch (name) {
+    case BLOCK_QUOTE.name:
+      return withAnalytics({
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        eventType: EVENT_TYPE.TRACK,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_BLOCK_QUOTE,
+        attributes: {
+          inputMethod,
+        },
+      })(insertBlockType(name));
+    // Dont add analytics to other blocks
+    case CODE_BLOCK.name:
+    case PANEL.name:
+    default:
+      return insertBlockType(name);
+  }
+};
 
 /**
  * Function will add wrapping node.

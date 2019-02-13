@@ -1,4 +1,4 @@
-import { initEditor, clearEditor, snapshot } from './_utils';
+import { vrEditor, clearEditor, snapshot } from './_utils';
 import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
 import { messages as blockTypeMessages } from '../../plugins/block-type/ui/ToolbarBlockType';
 
@@ -26,41 +26,43 @@ const mentionButton = `span[aria-label="${
 const mentionQuery = 'span[data-type-ahead-query]';
 
 // TODO - add ADF before loading stuff
-describe.skip('Snapshot Test: z-indexes', () => {
-  ['full-page', 'comment'].forEach(appearance => {
-    let page;
+describe('Snapshot Test: z-indexes', () => {
+  let page;
 
-    describe(`${appearance}`, () => {
-      beforeAll(async () => {
-        // @ts-ignore
-        page = global.page;
-        await initEditor(page, appearance);
-      });
+  beforeAll(async () => {
+    // @ts-ignore
+    page = global.page;
+    await vrEditor(page);
+  });
 
-      beforeEach(async () => {
-        await clearEditor(page);
-      });
+  beforeEach(async () => {
+    await clearEditor(page);
+  });
 
-      // TODO enable after fixing selectors on tables
-      it.skip('should always position table trash icon below dropdowns from main menu', async () => {
-        await insertTable(page);
-        await page.waitForSelector(removeTablePopup);
-        await page.click(blockFormattingDropdown);
-        await page.waitForSelector(dropList);
-        await page.click(insertBlockDropdown);
-        await page.waitForSelector(dropList);
-        await snapshot(page);
-      });
+  // TODO enable after fixing selectors on tables
+  it.skip('should always position table trash icon below dropdowns from main menu', async () => {
+    await insertTable(page);
+    await page.waitForSelector(removeTablePopup);
+    await page.click(blockFormattingDropdown);
+    await page.waitForSelector(dropList);
+    await page.click(insertBlockDropdown);
+    await page.waitForSelector(dropList);
+    await snapshot(page);
+  });
 
-      it('should always position table trash icon below emoji picker', async () => {
-        await insertTable(page);
-        await page.waitForSelector(removeTablePopup);
-        await page.click(emojiButton);
-        await page.waitForSelector(emojiPicker);
-        await page.click(mentionButton);
-        await page.waitForSelector(mentionQuery);
-        await snapshot(page);
-      });
-    });
+  it('should always position table trash icon below emoji picker', async () => {
+    await insertTable(page);
+    await page.waitForSelector(removeTablePopup);
+    await page.click(emojiButton);
+    await page.waitForSelector(emojiPicker);
+    await snapshot(page);
+  });
+
+  it('should always position table trash icon below mention picker', async () => {
+    await insertTable(page);
+    await page.waitForSelector(removeTablePopup);
+    await page.click(mentionButton);
+    await page.waitForSelector(mentionQuery);
+    await snapshot(page);
   });
 });

@@ -1,5 +1,10 @@
 # @atlaskit/onboarding
 
+## 6.2.0
+- [minor] [eb81a2de65](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/eb81a2de65):
+
+  - Spotlight footer and header props will now only accept React components
+
 ## 6.1.17
 - [patch] [d669123bbd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d669123bbd):
 

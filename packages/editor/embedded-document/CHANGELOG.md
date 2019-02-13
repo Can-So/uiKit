@@ -1,5 +1,10 @@
 # @atlaskit/embedded-document
 
+## 0.2.0
+- [minor] [6ebe368d95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ebe368d95):
+
+  - Allow passing through renderer props
+
 ## 0.1.1
 - [patch] [248e9f4db1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/248e9f4db1):
 

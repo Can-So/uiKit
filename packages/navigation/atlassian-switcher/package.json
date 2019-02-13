@@ -1,7 +1,7 @@
 {
   "name": "@atlaskit/atlassian-switcher",
   "private": true,
-  "version": "1.0.1",
+  "version": "0.0.1",
   "main": "dist/es5/index.js",
   "module": "dist/es2015/index.js",
   "license": "MIT",

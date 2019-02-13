@@ -1,5 +1,10 @@
 # @atlaskit/media-core
 
+## 27.0.1
+- [patch] [a9dc1278c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9dc1278c4):
+
+  - add error handling in CollectionFetcher for getItems call
+
 ## 27.0.0
 - [major] [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
 
