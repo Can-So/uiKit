@@ -1,5 +1,10 @@
 # @atlaskit/datetime-picker
 
+## 6.5.0
+- [minor] [a48dddb43c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a48dddb43c):
+
+  - onChange will only be fired when a complete datetime is supplied by the user
+
 ## 6.4.2
 - [patch] [0cd7f505b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cd7f505b3):
 

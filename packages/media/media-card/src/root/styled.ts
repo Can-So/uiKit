@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { borderRadius } from '@atlaskit/theme';
-import { HTMLAttributes, ComponentClass } from 'react';
 import { MediaItemType } from '@atlaskit/media-core';
 import { CardDimensions, CardAppearance } from '../';
 import { getCSSUnitValue } from '../utils/getCSSUnitValue';
@@ -10,6 +9,7 @@ import { getSelectedBorderStyle } from '../styles/getSelectedBorderStyle';
 
 export interface WrapperProps {
   mediaItemType: MediaItemType;
+  shouldUsePointerCursor?: boolean;
   dimensions?: CardDimensions;
   appearance?: CardAppearance;
   breakpointSize?: BreakpointSizeValue;
@@ -25,14 +25,13 @@ const getWrapperWidth = (dimensions?: CardDimensions) =>
     ? `width: ${getCSSUnitValue(dimensions.width)}; max-width: 100%;`
     : '';
 
-export const Wrapper: ComponentClass<
-  HTMLAttributes<{}> & WrapperProps
-> = styled.div`
+export const Wrapper = styled.div`
   ${({
     appearance,
     dimensions,
     mediaItemType,
     breakpointSize = 'medium',
+    shouldUsePointerCursor,
   }: WrapperProps) => {
     // Links are responsive and omit passed dimensions, instead they use max and min dimensions
     // they don't apply breakpoints either
@@ -47,9 +46,12 @@ export const Wrapper: ComponentClass<
       ${breakpointStyles({ breakpointSize })}
       ${getWrapperHeight(dimensions)}
       ${getWrapperWidth(dimensions)}
+      cursor: ${shouldUsePointerCursor ? 'pointer' : 'default'};
     `;
   }};
 `;
+
+Wrapper.displayName = 'CardViewWrapper';
 
 export const InlinePlayerWrapper = styled.div`
   overflow: hidden;

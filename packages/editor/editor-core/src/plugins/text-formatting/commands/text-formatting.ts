@@ -6,6 +6,14 @@ import { markActive } from '../utils';
 import { transformToCodeAction } from './transform-to-code';
 import { analyticsService } from '../../../analytics';
 import { Command } from '../../../types';
+import {
+  withAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+} from '../../analytics';
 
 export const moveRight = (): Command => {
   return (state, dispatch) => {
@@ -142,6 +150,12 @@ export const moveLeft = (
   };
 };
 
+type InputMethodToolbar = INPUT_METHOD.TOOLBAR;
+type InputMethodBasic =
+  | InputMethodToolbar
+  | INPUT_METHOD.SHORTCUT
+  | INPUT_METHOD.FORMATTING;
+
 export const toggleEm = (): Command => {
   return (state, dispatch) => {
     const { em } = state.schema.marks;
@@ -151,6 +165,21 @@ export const toggleEm = (): Command => {
     return false;
   };
 };
+
+export const toggleEmWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_ITALIC,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleEm());
 
 export const toggleStrike = (): Command => {
   return (state, dispatch) => {
@@ -162,6 +191,21 @@ export const toggleStrike = (): Command => {
   };
 };
 
+export const toggleStrikeWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRIKE,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleStrike());
+
 export const toggleStrong = (): Command => {
   return (state, dispatch) => {
     const { strong } = state.schema.marks;
@@ -172,6 +216,21 @@ export const toggleStrong = (): Command => {
   };
 };
 
+export const toggleStrongWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRONG,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleStrong());
+
 export const toggleUnderline = (): Command => {
   return (state, dispatch) => {
     const { underline } = state.schema.marks;
@@ -181,6 +240,21 @@ export const toggleUnderline = (): Command => {
     return false;
   };
 };
+
+export const toggleUnderlineWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_UNDERLINE,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleUnderline());
 
 export const toggleSuperscript = (): Command => {
   return (state, dispatch) => {
@@ -196,6 +270,17 @@ export const toggleSuperscript = (): Command => {
   };
 };
 
+export const toggleSuperscriptWithAnalytics = (): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_SUPER,
+    attributes: {
+      inputMethod: INPUT_METHOD.TOOLBAR,
+    },
+  })(toggleSuperscript());
+
 export const toggleSubscript = (): Command => {
   return (state, dispatch) => {
     const { subsup } = state.schema.marks;
@@ -208,6 +293,17 @@ export const toggleSubscript = (): Command => {
     return false;
   };
 };
+
+export const toggleSubscriptWithAnalytics = (): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_SUB,
+    attributes: {
+      inputMethod: INPUT_METHOD.TOOLBAR,
+    },
+  })(toggleSuperscript());
 
 export const toggleCode = (): Command => {
   return (state, dispatch) => {
@@ -226,7 +322,22 @@ export const toggleCode = (): Command => {
   };
 };
 
-export const createInlineCodeFromTextInput = (
+export const toggleCodeWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleCode());
+
+const createInlineCodeFromTextInput = (
   from: number,
   to: number,
   text: string,
@@ -262,4 +373,20 @@ export const createInlineCodeFromTextInput = (
     }
     return false;
   };
+};
+
+export const createInlineCodeFromTextInputWithAnalytics = (
+  from: number,
+  to: number,
+  text: string,
+): Command => {
+  return withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+    attributes: {
+      inputMethod: INPUT_METHOD.FORMATTING,
+    },
+  })(createInlineCodeFromTextInput(from, to, text));
 };

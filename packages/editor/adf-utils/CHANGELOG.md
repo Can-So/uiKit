@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.6.3
+- [patch] [e83a441140](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a441140):
+
+  - Revert type change to width/height attributes for media node
+
 ## 5.6.2
 - [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
 

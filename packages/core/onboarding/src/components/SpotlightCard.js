@@ -1,7 +1,7 @@
 // @flow
 
 import { colors, type ThemeProp } from '@atlaskit/theme';
-import React, { type Node, type ElementType } from 'react';
+import React, { type Node, type ComponentType } from 'react';
 import { ThemeProvider } from 'styled-components';
 import Card, { type CardTokens } from './Card';
 import { getSpotlightTheme } from './theme';
@@ -16,8 +16,8 @@ type Props = {
   children?: Node,
   /** The container elements rendered by the component */
   components?: {
-    Header?: ElementType,
-    Footer?: ElementType,
+    Header?: ComponentType<any>,
+    Footer?: ComponentType<any>,
   },
   /** The heading to be rendered above the body */
   heading?: Node,

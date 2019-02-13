@@ -222,3 +222,5 @@ export interface BlockType {
   tagName?: string;
   level?: number;
 }
+
+export type HeadingLevels = 0 | 1 | 2 | 3 | 4 | 5 | 6;

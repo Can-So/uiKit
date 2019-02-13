@@ -5,6 +5,7 @@ export { default as createEvent } from './create-event';
 export { default as dispatchPasteEvent } from './dispatch-paste-event';
 export { default as createEditorFactory } from './create-editor';
 export { default as fixtures } from './fixtures';
+export { default as simulatePlatform, Platforms } from './simulatePlatform';
 export { default as patchEditorViewForJSDOM } from './jsdom-fixtures';
 export * from './transactions';
 export {

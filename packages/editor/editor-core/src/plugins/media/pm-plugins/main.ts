@@ -34,7 +34,7 @@ import {
 import DefaultMediaStateManager from '../default-state-manager';
 import { insertMediaSingleNode } from '../utils/media-single';
 
-import { hasParentNodeOfType, findDomRefAtPos } from 'prosemirror-utils';
+import { findDomRefAtPos } from 'prosemirror-utils';
 export { DefaultMediaStateManager };
 export { MediaState, MediaProvider, MediaStateStatus, MediaStateManager };
 
@@ -220,27 +220,6 @@ export class MediaPluginState {
     }
   }
 
-  updateUploadStateDebounce: number | null = null;
-  updateUploadState(): void {
-    if (!this.waitForMediaUpload) {
-      return;
-    }
-
-    if (this.updateUploadStateDebounce) {
-      clearTimeout(this.updateUploadStateDebounce);
-    }
-
-    this.updateUploadStateDebounce = window.setTimeout(() => {
-      this.updateUploadStateDebounce = null;
-      this.allUploadsFinished = false;
-      this.notifyPluginStateSubscribers();
-      this.waitForPendingTasks().then(() => {
-        this.allUploadsFinished = true;
-        this.notifyPluginStateSubscribers();
-      });
-    }, 0);
-  }
-
   updateLayout(layout: MediaSingleLayout): void {
     this.layout = layout;
     this.notifyPluginStateSubscribers();
@@ -274,6 +253,8 @@ export class MediaPluginState {
     if (collection === undefined) {
       return;
     }
+
+    this.allUploadsFinished = false;
 
     const imageAttachments = mediaStates.filter(media =>
       isImage(media.fileMimeType),
@@ -315,6 +296,11 @@ export class MediaPluginState {
           stateManager.on(state.id, onStateChange);
         }).then(() => promise);
       }, this.pendingTask);
+
+    this.pendingTask.then(() => {
+      this.allUploadsFinished = true;
+      this.notifyPluginStateSubscribers();
+    });
 
     const { view } = this;
     if (!view.hasFocus()) {
@@ -745,20 +731,6 @@ export class MediaPluginState {
     }
   }
 
-  isLayoutSupported(): boolean {
-    const { selection, schema } = this.view.state;
-    if (
-      selection instanceof NodeSelection &&
-      selection.node.type === schema.nodes.mediaSingle
-    ) {
-      return (
-        !hasParentNodeOfType(schema.nodes.bodiedExtension)(selection) &&
-        !hasParentNodeOfType(schema.nodes.layoutSection)(selection)
-      );
-    }
-    return false;
-  }
-
   /**
    * Since we replace nodes with public id when node is finalized
    * stateManager contains no information for public ids
@@ -853,7 +825,6 @@ export const createPlugin = (
 
       return {
         update: () => {
-          pluginState.updateUploadState();
           pluginState.updateElement();
         },
       };
