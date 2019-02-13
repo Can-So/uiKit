@@ -24,18 +24,6 @@ export const DEFAULT_HEIGHT = 600;
 const adfInputSelector = '#adf-input';
 const importAdfBtnSelector = '#import-adf';
 
-export const dynamicTextViewportSizes = [
-  { width: 1440, height: 4000 },
-  { width: 1280, height: 4000 },
-  { width: 768, height: 4000 },
-  { width: 1024, height: 4000 },
-];
-
-export const viewportSizes = [
-  ...dynamicTextViewportSizes,
-  { width: 400, height: 900 },
-];
-
 export const resetViewport = async page => {
   await page.setViewport({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
 };
