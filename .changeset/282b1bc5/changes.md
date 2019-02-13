@@ -1,1 +1,0 @@
-- add error handling in CollectionFetcher for getItems call
