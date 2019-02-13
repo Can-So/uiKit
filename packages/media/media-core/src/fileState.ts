@@ -44,6 +44,7 @@ export interface ProcessingFileState {
   occurrenceKey?: string;
   name: string;
   size: number;
+  artifacts?: MediaFileArtifacts;
   mediaType: MediaType;
   mimeType: string;
   preview?: FilePreview | Promise<FilePreview>;
