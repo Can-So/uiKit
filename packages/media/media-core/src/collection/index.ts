@@ -113,7 +113,8 @@ export class CollectionFetcher {
         collection.items = items.data.contents;
         collection.nextInclusiveStartKey = nextInclusiveStartKey;
         subject.next(collection.items);
-      });
+      })
+      .catch(error => subject.error(error));
 
     return subject;
   }
