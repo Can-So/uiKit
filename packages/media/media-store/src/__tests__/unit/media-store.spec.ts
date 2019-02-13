@@ -777,10 +777,7 @@ describe('MediaStore', () => {
 
       it('should throw if artifact cant be found', async () => {
         const artifacts = {
-          'audio.mp3': {
-            processingStatus: 'pending',
-            url: '/sd-video',
-          },
+          'audio.mp3': {},
         } as MediaFileArtifacts;
 
         await expect(
