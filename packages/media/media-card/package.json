@@ -51,6 +51,7 @@
   "devDependencies": {
     "@atlaskit/build-utils": "^2.1.0",
     "@atlaskit/button": "^10.1.2",
+    "@atlaskit/checkbox": "^5.0.13",
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/field-radio-group": "^4.0.15",
     "@atlaskit/field-range": "^5.0.14",

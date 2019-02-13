@@ -1,0 +1,1 @@
+- Fix a bug where droping image with EXIF orientation >= 5 end up screwing up proportions for some of the cases
