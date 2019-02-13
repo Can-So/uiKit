@@ -40,10 +40,9 @@ type ResizeObject = HTMLObjectElement & {
 };
 
 export default class WidthDetector extends React.Component<Props, State> {
-  props: Props;
   state: State = {};
-  container: HTMLDivElement;
-  resizeObjectDocument: Window;
+  container?: HTMLDivElement;
+  resizeObjectDocument?: Window;
   resizeObject?: ResizeObject;
 
   static defaultProps = {
