@@ -112,14 +112,6 @@ export default class WidthDetector extends React.Component<Props, State> {
     this.handleResize();
   };
 
-  renderChildren = () => {
-    const { width } = this.state;
-    if (width === null || width === undefined) {
-      return null;
-    }
-    return this.props.children(width);
-  };
-
   render() {
     // @TODO: Add alternative method using IntersectionObserver or ResizeObserver
     const sizerEl = (
@@ -139,7 +131,7 @@ export default class WidthDetector extends React.Component<Props, State> {
         style={{ ...containerDivStyle, ...this.props.containerStyle }}
         ref={this.handleContainerRef}
       >
-        {this.renderChildren()}
+        {this.props.children(this.state.width)}
         {sizerEl}
       </div>
     );

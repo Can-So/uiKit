@@ -22,16 +22,16 @@ describe(name, () => {
     const spy = jest.fn();
     mount(<WidthDetector>{createChildWithSpy(spy)}</WidthDetector>);
     requestAnimationFrame.step();
-    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith(0);
   });
 
   it('should use requestAnimationFrame to queue resize measurements', () => {
     const spy = jest.fn();
     mount(<WidthDetector>{createChildWithSpy(spy)}</WidthDetector>);
-    expect(spy).not.toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
     requestAnimationFrame.step();
-    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 
   it('should call cancelAnimationFrame when unmounted', () => {
@@ -40,10 +40,10 @@ describe(name, () => {
       <WidthDetector>{createChildWithSpy(spy)}</WidthDetector>,
     );
     // initial frame is queued
-    expect(spy).not.toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
     wrapper.unmount();
     requestAnimationFrame.flush();
-    expect(spy).not.toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 
   // // NOTE: enzyme doesn't fully mock object.contentDocument, so we cannot simulate
@@ -54,13 +54,13 @@ describe(name, () => {
       <WidthDetector>{createChildWithSpy(spy)}</WidthDetector>,
     );
     requestAnimationFrame.step();
-    expect(spy).toHaveBeenCalledTimes(1);
-    (wrapper.instance() as WidthDetector).handleResize();
-    requestAnimationFrame.step();
     expect(spy).toHaveBeenCalledTimes(2);
     (wrapper.instance() as WidthDetector).handleResize();
     requestAnimationFrame.step();
     expect(spy).toHaveBeenCalledTimes(3);
+    (wrapper.instance() as WidthDetector).handleResize();
+    requestAnimationFrame.step();
+    expect(spy).toHaveBeenCalledTimes(4);
   });
 
   // // NOTE: Enzyme does not seem to support offsetWidth/offsetHeight on elements, so we cannot
