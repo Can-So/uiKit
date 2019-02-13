@@ -1,1 +1,0 @@
-- Adopting API changes in Icon for examples
