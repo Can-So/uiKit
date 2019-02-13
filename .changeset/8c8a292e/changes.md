@@ -1,0 +1,1 @@
+- ED-6098: simplify internal state changes for completed media uploads
