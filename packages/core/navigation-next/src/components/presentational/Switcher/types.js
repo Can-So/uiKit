@@ -1,5 +1,6 @@
 // @flow
 import { type ComponentType, type Element } from 'react';
+import { type PopupSelectTargetFnType } from '@atlaskit/select';
 
 type ComponentsType = { [key: string]: ComponentType<any> };
 
@@ -31,7 +32,7 @@ export type SwitcherBaseProps = {
   /* The options presented in the select menu */
   options: Array<Object>,
   /* The target element, which invokes the select menu */
-  target: Element<*>,
+  target: PopupSelectTargetFnType,
   /* A react-select Style object, which overrides the default components styles. */
   styles?: SelectStyles,
 };

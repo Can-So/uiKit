@@ -35,6 +35,10 @@ const canUseDOM = () =>
 // Types
 // ==============================
 
+export type PopupSelectTargetFnType = ({
+  ref: ElementRef,
+  isOpen: boolean,
+}) => ElementType<*>;
 type PopperChildren = { children: PopperChildrenProps => Node };
 type PopperPropsNoChildren = $Diff<PopperProps, PopperChildren>;
 type Props = {
@@ -51,7 +55,7 @@ type Props = {
   popperProps?: PopperPropsNoChildren,
   searchThreshold: number,
   styles: Object,
-  target: ({ ref: ElementRef, isOpen: boolean }) => ElementType<*>,
+  target: PopupSelectTargetFnType,
 };
 type State = {
   isOpen: boolean,

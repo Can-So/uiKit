@@ -1,5 +1,10 @@
 // @flow
-import React, { PureComponent, cloneElement, type ElementRef } from 'react';
+import React, {
+  PureComponent,
+  cloneElement,
+  type ElementRef,
+  type HTMLElement,
+} from 'react';
 import NodeResolver from 'react-node-resolver';
 import shallowEqualObjects from 'shallow-equal/objects';
 import { components, PopupSelect, mergeStyles } from '@atlaskit/select';
@@ -122,7 +127,6 @@ const isEmpty = obj => Object.keys(obj).length === 0;
 
 class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
   state = {
-    isOpen: false,
     mergedComponents: defaultComponents,
   };
   selectRef = React.createRef();
@@ -154,8 +158,12 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
       this.setTargetWidth();
     }
   }
-  getTargetRef = (ref: ElementRef<*>) => {
-    this.targetRef = ref;
+  resolveTargetRef = (popupRef: ElementRef<*>) => (ref: HTMLElement) => {
+    // avoid thrashing fn calls
+    if (!this.targetRef && popupRef && ref) {
+      this.targetRef = ref;
+      popupRef(ref);
+    }
   };
   setTargetWidth = () => {
     // best efforts if target ref fails
@@ -164,12 +172,6 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
     this.targetWidth = this.targetRef
       ? this.targetRef.clientWidth
       : defaultWidth;
-  };
-  handleOpen = () => {
-    this.setState({ isOpen: true });
-  };
-  handleClose = () => {
-    this.setState({ isOpen: false });
   };
   getFooter = () => {
     const { closeMenuOnCreate, create, footer } = this.props;
@@ -191,7 +193,7 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
   };
   render() {
     const { create, options, target, ...props } = this.props;
-    const { isOpen, mergedComponents } = this.state;
+    const { mergedComponents } = this.state;
 
     return (
       <PopupSelect
@@ -200,16 +202,14 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
         isOptionSelected={isOptionSelected}
         footer={this.getFooter()}
         getOptionValue={getOptionValue}
-        onOpen={this.handleOpen}
-        onClose={this.handleClose}
         options={options}
         maxMenuWidth={this.targetWidth}
         minMenuWidth={this.targetWidth}
-        target={
-          <NodeResolver innerRef={this.getTargetRef}>
+        target={({ ref, isOpen }) => (
+          <NodeResolver innerRef={this.resolveTargetRef(ref)}>
             {cloneElement(target, { isSelected: isOpen })}
           </NodeResolver>
-        }
+        )}
         {...props}
         styles={createStyles(this.props.styles)}
         components={mergedComponents}
