@@ -213,7 +213,11 @@ const getGlobalNavigation = enableAtlassianSwitcher => () => (
   </AnalyticsListener>
 );
 
-export default class extends Component {
+type State = {
+  enableAtlassianSwitcher: boolean,
+};
+
+export default class extends Component<{}, State> {
   state = {
     enableAtlassianSwitcher: true,
   };

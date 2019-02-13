@@ -349,14 +349,14 @@ export default class GlobalNavigation extends Component<
     };
   };
 
-  triggerXFlow = (...props) => {
+  triggerXFlow = (...props: any) => {
     const { triggerXFlow } = this.props;
-    this.setState(
-      {
-        isAtlassianSwitcherDrawerOpen: false,
-      },
-      () => triggerXFlow(...props),
-    );
+    this.setState({
+      isAtlassianSwitcherDrawerOpen: false,
+    });
+    if (triggerXFlow) {
+      triggerXFlow(...props);
+    }
   };
 
   renderAtlassianSwitcherDrawerContents = () => {
@@ -370,7 +370,7 @@ export default class GlobalNavigation extends Component<
     );
   };
 
-  getDrawerContents = drawerName => {
+  getDrawerContents = (drawerName: DrawerName) => {
     switch (drawerName) {
       case 'atlassianSwitcher':
         return this.renderAtlassianSwitcherDrawerContents;
