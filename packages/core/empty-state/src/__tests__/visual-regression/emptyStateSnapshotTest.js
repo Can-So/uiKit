@@ -13,7 +13,13 @@ describe('Snapshot Test', () => {
       global.__BASEURL__,
     );
     const image = await takeScreenShot(global.page, url);
+    // Allow two percent tolerance for comparision
     //$FlowFixMe
-    expect(image).toMatchProdImageSnapshot();
+    expect(image)
+      .expect(image)
+      .toMatchProdImageSnapshot({
+        failureThreshold: `0.02`,
+        failureThresholdType: 'percent',
+      });
   });
 });

@@ -23,7 +23,7 @@ describe('Snapshot Test: z-indexes', () => {
     await page.waitForSelector(pageObject.dropList);
     await page.click(pageObject.insertBlockDropdown);
     await page.waitForSelector(pageObject.dropList);
-    await snapshot(page, 0.05);
+    await snapshot(page, 0.02);
   });
 
   it('should always position table trash icon below emoji picker', async () => {
@@ -31,7 +31,7 @@ describe('Snapshot Test: z-indexes', () => {
     await page.waitForSelector(pageObject.removeTablePopup);
     await page.click(pageObject.emojiButton);
     await page.waitForSelector(pageObject.emojiPicker);
-    await snapshot(page, 0.05);
+    await snapshot(page, 0.02);
   });
 
   it('should always position table trash icon below mention picker', async () => {
@@ -39,6 +39,6 @@ describe('Snapshot Test: z-indexes', () => {
     await page.waitForSelector(pageObject.removeTablePopup);
     await page.click(pageObject.mentionButton);
     await page.waitForSelector(pageObject.mentionQuery);
-    await snapshot(page, 0.05);
+    await snapshot(page, 0.02);
   });
 });
