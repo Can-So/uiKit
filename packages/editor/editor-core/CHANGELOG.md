@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.9.2
+- [patch] [c81737b526](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c81737b526):
+
+  - ED-6098: simplify internal state changes for completed media uploads
+
 ## 98.9.1
 - [patch] [ebb0a98051](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebb0a98051):
 
