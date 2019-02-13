@@ -194,7 +194,6 @@ export default class PopupSelect extends PureComponent<Props, State> {
     if (typeof window === 'undefined') return;
     window.removeEventListener('keydown', this.handleKeyDown);
   };
-  callCount = 0;
 
   // Refs
   // ==============================
