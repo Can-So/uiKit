@@ -28,6 +28,7 @@ import {
   ACTION_SUBJECT,
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
+  AnalyticsEventPayload,
 } from '../../analytics';
 import { HeadingLevels } from '../types';
 
@@ -169,6 +170,14 @@ function getBlockQuoteRules(schema: Schema): InputRuleWithHandler[] {
  * @returns {InputRuleWithHandler[]}
  */
 function getCodeBlockRules(schema: Schema): InputRuleWithHandler[] {
+  const analyticsPayload: AnalyticsEventPayload = {
+    action: ACTION.INSERTED,
+    actionSubject: ACTION_SUBJECT.DOCUMENT,
+    actionSubjectId: ACTION_SUBJECT_ID.CODE_BLOCK,
+    attributes: { inputMethod: INPUT_METHOD.FORMATTING },
+    eventType: EVENT_TYPE.TRACK,
+  };
+
   const threeTildeRule = createInputRule(
     /((^`{3,})|(\s`{3,}))(\S*)$/,
     (state, match, start, end) => {
@@ -185,13 +194,7 @@ function getCodeBlockRules(schema: Schema): InputRuleWithHandler[] {
           // remove markdown decorator ```
           .delete(newStart, end)
           .scrollIntoView();
-        return addAnalytics(tr, {
-          action: ACTION.INSERTED,
-          actionSubject: ACTION_SUBJECT.DOCUMENT,
-          actionSubjectId: ACTION_SUBJECT_ID.CODE_BLOCK,
-          attributes: { inputMethod: INPUT_METHOD.FORMATTING },
-          eventType: EVENT_TYPE.TRACK,
-        });
+        return addAnalytics(tr, analyticsPayload);
       }
       let { tr } = state;
       tr = tr.delete(newStart, end);
@@ -208,7 +211,7 @@ function getCodeBlockRules(schema: Schema): InputRuleWithHandler[] {
       if (match[4]) {
         attributes.language = match[4];
       }
-      return insertBlock(
+      let tr = insertBlock(
         state,
         schema.nodes.codeBlock,
         'codeblock',
@@ -216,6 +219,10 @@ function getCodeBlockRules(schema: Schema): InputRuleWithHandler[] {
         end,
         attributes,
       );
+      if (tr) {
+        tr = addAnalytics(tr, analyticsPayload);
+      }
+      return tr;
     },
     true,
   );

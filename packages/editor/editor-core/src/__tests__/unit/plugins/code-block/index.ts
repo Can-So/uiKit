@@ -183,7 +183,7 @@ describe('code-block', () => {
       });
 
       describe('quick insert', () => {
-        it('should fire analytics event when code block inserted', async () => {
+        it('should fire analytics event when code block inserted', () => {
           const { editorView, sel } = editor(doc(p('{<>}')));
           insertText(editorView, `/code`, sel);
           sendKeyToPm(editorView, 'Enter');

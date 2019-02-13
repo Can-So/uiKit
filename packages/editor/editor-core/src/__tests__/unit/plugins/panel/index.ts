@@ -208,7 +208,7 @@ describe('@atlaskit/editor-core ui/PanelPlugin', () => {
 
   describe('quick insert', () => {
     ['info', 'success', 'error', 'warning', 'note'].forEach(panelType => {
-      it(`should fire analytics event when ${panelType} panel inserted`, async () => {
+      it(`should fire analytics event when ${panelType} panel inserted`, () => {
         const { editorView, sel } = editor(doc(p('{<>}')));
         insertText(editorView, `/${panelType}`, sel);
         sendKeyToPm(editorView, 'Enter');
