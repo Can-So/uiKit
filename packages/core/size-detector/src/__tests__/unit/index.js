@@ -15,7 +15,7 @@ describe(name, () => {
     requestAnimationFrame.reset();
   });
 
-  it('should pass width and height to child function', () => {
+  it.only('should pass width and height to child function', () => {
     const spy = jest.fn();
     mount(<SizeDetector>{createChildWithSpy(spy)}</SizeDetector>);
     requestAnimationFrame.step();
