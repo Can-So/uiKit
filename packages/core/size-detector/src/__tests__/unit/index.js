@@ -4,6 +4,12 @@ import { mount } from 'enzyme';
 import SizeDetector from '../..';
 import { name } from '../../../package.json';
 
+jest.mock('exenv', () => ({
+  get canUseDOM() {
+    return true;
+  },
+}));
+
 describe(name, () => {
   const createChildWithSpy = spy => args => spy(args);
 
@@ -15,7 +21,7 @@ describe(name, () => {
     requestAnimationFrame.reset();
   });
 
-  it.only('should pass width and height to child function', () => {
+  it('should pass width and height to child function', () => {
     const spy = jest.fn();
     mount(<SizeDetector>{createChildWithSpy(spy)}</SizeDetector>);
     requestAnimationFrame.step();

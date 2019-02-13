@@ -45,8 +45,8 @@ const ResultBox = styled.div`
 `;
 
 type SizeMetrics = {
-  width: number,
-  height: number,
+  width: ?number,
+  height: ?number,
 };
 
 const displayResults = ({ width, height }: SizeMetrics) => (
