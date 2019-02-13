@@ -11,6 +11,7 @@
   ],
   "compilerOptions": {
     "baseUrl": "./",
+    "noImplicitAny": true,
     "paths": {
       "@atlaskit/analytics-next": ["node_modules/@atlaskit/analytics-next-types"],
       "@atlaskit/dropdown-menu": ["typings/@atlaskit/dropdown-menu"],

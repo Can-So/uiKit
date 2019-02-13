@@ -258,7 +258,7 @@ export class FilmstripView extends React.Component<
     const { windowElement, bufferElement } = this;
     let bufferWidth = 0;
     let windowWidth = 0;
-    let childOffsets: Array<{ left: number; right: number }> = [];
+    let childOffsets: ChildOffset[] = [];
 
     if (windowElement && bufferElement) {
       bufferWidth = bufferElement.getBoundingClientRect().width;
@@ -341,7 +341,7 @@ export class FilmstripView extends React.Component<
     this.handleSizeChange();
   };
 
-  handleLeftClick = (event: any) => {
+  handleLeftClick = (event: MouseEvent<HTMLDivElement>) => {
     // Stop the click event from bubling up and being handled by other components
     // See https://product-fabric.atlassian.net/browse/MSW-165
     event.stopPropagation();
@@ -358,7 +358,7 @@ export class FilmstripView extends React.Component<
     }
   };
 
-  handleRightClick = (event: any) => {
+  handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     // Stop the click event from bubling up and being handled by other components
     // See https://product-fabric.atlassian.net/browse/MSW-165
     event.stopPropagation();
