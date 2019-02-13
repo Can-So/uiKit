@@ -1,5 +1,10 @@
 # @atlaskit/media-card
 
+## 52.0.6
+- [patch] [05c5bf7a93](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05c5bf7a93):
+
+  - Dont user pointer cursor for external images in Cards
+
 ## 52.0.5
 - [patch] [c415876da9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c415876da9):
 
