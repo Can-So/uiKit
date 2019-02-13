@@ -7,7 +7,7 @@ const Div = styled.div`
 `;
 
 export default class extends React.Component {
-  private textareaElement: HTMLTextAreaElement;
+  private textareaElement: HTMLTextAreaElement | undefined;
 
   private focus = () => {
     if (this.textareaElement) {
