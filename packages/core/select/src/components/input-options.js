@@ -9,7 +9,7 @@ import type { CommonProps, fn, InnerProps } from './types';
 const getPrimitiveStyles = props => {
   const { getStyles, isFocused } = props;
 
-  const controlSpecificStyles = {
+  const styles = {
     alignItems: 'center',
     backgroundColor: isFocused ? colors.N30 : 'transparent',
     color: 'inherit',
@@ -24,7 +24,7 @@ const getPrimitiveStyles = props => {
   };
 
   // maintain react-select API
-  return { ...getStyles('option', props), ...controlSpecificStyles };
+  return { ...getStyles('option', props), ...styles };
 };
 
 // maintains function shape
