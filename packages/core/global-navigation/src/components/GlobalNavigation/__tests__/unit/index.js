@@ -764,6 +764,44 @@ describe('GlobalNavigation', () => {
 
       expect(wrapper.find(NotificationIndicator).exists()).toBeTruthy();
     });
+
+    describe('Controlled inbuilt notification', () => {
+      it('should be controllable', () => {
+        const wrapper = mount(
+          <GlobalNavigation
+            fabricNotificationLogUrl={fabricNotificationLogUrl}
+            cloudId={cloudId}
+            onNotificationClick={() => {}}
+          />,
+        );
+        expect(wrapper.find('NotificationDrawer').exists()).toBeFalsy();
+        wrapper.setProps({ isNotificationDrawerOpen: true });
+        wrapper.update();
+        expect(wrapper.find('NotificationDrawer').exists()).toBeTruthy();
+      });
+
+      it('should reset notification count', () => {
+        const wrapper = mount(
+          <GlobalNavigation
+            product="jira"
+            locale="en"
+            fabricNotificationLogUrl={fabricNotificationLogUrl}
+            onNotificationClick={() => {}}
+            cloudId={cloudId}
+          />,
+        );
+        wrapper.setState({
+          notificationCount: 5,
+        });
+        const spy = jest.spyOn(wrapper.instance(), 'onCountUpdated');
+
+        expect(wrapper.find(ItemComponent).prop('badgeCount')).toBe(5);
+        const icon = wrapper.find(NotificationIcon);
+        icon.simulate('click');
+
+        expect(spy).toHaveBeenCalledWith({ newCount: 0 });
+      });
+    });
   });
 
   describe('AppSwitcher', () => {

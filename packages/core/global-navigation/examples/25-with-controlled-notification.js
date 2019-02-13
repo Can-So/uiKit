@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import fetchMock from 'fetch-mock';
 import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
 import Button from '@atlaskit/button';
+import Tag from '@atlaskit/tag';
 import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 
@@ -12,26 +13,68 @@ import GlobalNavigation from '../src';
 const fabricNotificationLogUrl = '/gateway/api/notification-log/';
 const cloudId = 'DUMMY-158c8204-ff3b-47c2-adbb-a0906ccc722b';
 
-const Global = ({
-  resetNotificationCount,
-  updateIframeUrl,
-}: {
+type GlobalProps = {
   resetNotificationCount: () => void,
-  updateIframeUrl: () => void,
-}) => (
-  <GlobalNavigation
-    productIcon={EmojiAtlassianIcon}
-    productHref="#"
-    fabricNotificationLogUrl={fabricNotificationLogUrl}
-    onNotificationDrawerClose={() => {
-      // setTimeout is required to let the drawer close animation end in the example.
-      setTimeout(resetNotificationCount, 350);
-    }}
-    onNotificationDrawerOpen={updateIframeUrl}
-    cloudId={cloudId}
-  />
-);
+};
+type GlobalState = {
+  isNotificationDrawerOpen: boolean,
+};
+class Global extends Component<GlobalProps, GlobalState> {
+  state = { isNotificationDrawerOpen: false };
 
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyboardShortcut);
+  }
+
+  handleKeyboardShortcut = e => {
+    if (e.key === 'n' && !this.state.isNotificationDrawerOpen) {
+      this.openNotificationDrawer();
+    }
+    return null;
+  };
+
+  updateIframeUrl = () => {
+    // Flow doesn't know how to deal with querySelector
+    // Therefore casting the return value to HTMLIFrameElement
+    const iFrame = ((document.querySelector(
+      'iFrame[title="Notifications"]',
+    ): any): HTMLIFrameElement);
+
+    if (iFrame) {
+      // Notification URL is unreachable from the examples.
+      // Hence setting it to root
+      iFrame.src = '/';
+    }
+  };
+
+  openNotificationDrawer = () => {
+    this.setState({ isNotificationDrawerOpen: true }, () =>
+      setTimeout(this.updateIframeUrl, 350),
+    );
+  };
+  closeNotificationDrawer = () => {
+    this.setState({ isNotificationDrawerOpen: false }, () =>
+      setTimeout(this.props.resetNotificationCount, 350),
+    );
+  };
+
+  render() {
+    return (
+      <GlobalNavigation
+        productIcon={EmojiAtlassianIcon}
+        productHref="#"
+        fabricNotificationLogUrl={fabricNotificationLogUrl}
+        cloudId={cloudId}
+        isNotificationDrawerOpen={this.state.isNotificationDrawerOpen}
+        onNotificationDrawerClose={this.closeNotificationDrawer}
+        onNotificationClick={this.openNotificationDrawer}
+      />
+    );
+  }
+}
+
+// Need two components because both have state
+// eslint-disable-next-line react/no-multi-comp
 export default class GlobalNavigationWithNotificationIntegration extends Component<
   {},
   { count: number },
@@ -57,21 +100,8 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
 
   componentWillUnmount() {
     fetchMock.restore();
+    window.onkeydown = null;
   }
-
-  updateIframeUrl = () => {
-    // Flow doesn't know how to deal with querySelector
-    // Therefore casting the return value to HTMLIFrameElement
-    const iFrame = ((document.querySelector(
-      'iFrame[title="Notifications"]',
-    ): any): HTMLIFrameElement);
-
-    if (iFrame) {
-      // Notification URL is unreachable from the examples.
-      // Hence setting it to root
-      iFrame.src = '/';
-    }
-  };
 
   resetNotificationCount = () => {
     this.setState({
@@ -102,10 +132,7 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
                 });
               }}
             >
-              <Global
-                updateIframeUrl={this.updateIframeUrl}
-                resetNotificationCount={this.resetNotificationCount}
-              />
+              <Global resetNotificationCount={this.resetNotificationCount} />
             </AnalyticsListener>
           )}
           productNavigation={() => null}
@@ -121,6 +148,10 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
               <Button onClick={this.resetNotificationCount}>
                 Reset Notification Count
               </Button>
+            </p>
+            <p>
+              Type <Tag text="n" />
+              to open the notification drawer
             </p>
           </div>
         </LayoutManager>
