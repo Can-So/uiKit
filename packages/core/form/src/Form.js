@@ -20,6 +20,7 @@ type Props = {
     disabled: boolean,
     dirty: boolean,
     submitting: boolean,
+    getValues: Object => void,
   }) => Node,
   /* Called when the form is submitted without errors */
   onSubmit: Object => any,
