@@ -1,0 +1,1 @@
+- Fixed the call to the /check endpoint
