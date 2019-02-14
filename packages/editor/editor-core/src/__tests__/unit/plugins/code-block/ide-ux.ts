@@ -5,21 +5,50 @@ import {
   code_block,
   sendKeyToPm,
   insertText,
+  createAnalyticsEventMock,
 } from '@atlaskit/editor-test-helpers';
 import { AllSelection } from 'prosemirror-state';
+import {
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+  INDENT_DIR,
+  INDENT_TYPE,
+} from '../../../../plugins/analytics';
+import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+
+const createIndentationAttributes = (
+  previousIndentationLevel: number,
+  newIndentLevel: number,
+) =>
+  expect.objectContaining({
+    attributes: expect.objectContaining({
+      newIndentLevel,
+      previousIndentationLevel,
+    }),
+  });
 
 describe('IDE UX plugin', () => {
   const createEditor = createEditorFactory();
-
+  let createAnalyticsEvent: jest.MockInstance<UIAnalyticsEventInterface>;
   let trackEvent = jest.fn();
-  const editor = doc =>
-    createEditor({
+
+  const editor = doc => {
+    createAnalyticsEvent = createAnalyticsEventMock();
+    return createEditor({
       doc,
       editorProps: {
         allowCodeBlocks: { enableKeybindingsForIDE: true },
         analyticsHandler: trackEvent,
+        allowAnalyticsGASV3: true,
       },
+      createAnalyticsEvent: createAnalyticsEvent as any,
     });
+  };
+
   describe('Select-All', () => {
     describe('when cursor inside code-block', () => {
       it('should select all text inside code-block when Cmd+A pressed', () => {
@@ -74,6 +103,29 @@ describe('IDE UX plugin', () => {
   describe('Indentation', () => {
     describe('Mod-] pressed', () => {
       describe('when cursor on line', () => {
+        it('should create Analytics GAS v3 event', () => {
+          const expectedPayload: AnalyticsEventPayload = {
+            action: ACTION.FORMATTED,
+            actionSubject: ACTION_SUBJECT.TEXT,
+            actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+            eventType: EVENT_TYPE.TRACK,
+            attributes: {
+              inputMethod: INPUT_METHOD.KEYBOARD,
+              direction: INDENT_DIR.INDENT,
+              previousIndentationLevel: 0,
+              newIndentLevel: 1,
+              indentType: INDENT_TYPE.CODE_BLOCK,
+            },
+          };
+          const { editorView } = editor(
+            doc(code_block()('top\n{<>}start\nbottom')),
+          );
+
+          sendKeyToPm(editorView, 'Mod-]');
+
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+        });
+
         it('should not expand selection to include added indent', () => {
           const { editorView } = editor(
             doc(code_block()('top\n{<>}start\nbottom')),
@@ -128,6 +180,30 @@ describe('IDE UX plugin', () => {
       });
 
       describe('when selection is across multiple lines', () => {
+        it('should create multiple Analytics GAS v3 event', () => {
+          const firstExpectedIndentation = createIndentationAttributes(0, 1);
+          const secondsExpectedIndentation = createIndentationAttributes(2, 3);
+          const thirdExpectedIndentation = createIndentationAttributes(1, 2);
+
+          const { editorView } = editor(
+            doc(code_block()('t{<}op\n    start\n  bot{>}tom')),
+          );
+
+          createAnalyticsEvent.mockClear();
+          sendKeyToPm(editorView, 'Mod-]');
+
+          expect(createAnalyticsEvent).toHaveBeenCalledTimes(3);
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(
+            firstExpectedIndentation,
+          );
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(
+            secondsExpectedIndentation,
+          );
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(
+            thirdExpectedIndentation,
+          );
+        });
+
         it('should expand selection to include added indent', () => {
           const { editorView } = editor(
             doc(code_block()('\n{<}top\nstart\nbott{>}om\n')),
@@ -217,6 +293,29 @@ describe('IDE UX plugin', () => {
     describe('Mod-[ pressed', () => {
       describe('when cursor on line', () => {
         describe('and line starts with spaces', () => {
+          it('should create Analytics GAS v3 event', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.KEYBOARD,
+                direction: INDENT_DIR.OUTDENT,
+                previousIndentationLevel: 1,
+                newIndentLevel: 0,
+                indentType: INDENT_TYPE.CODE_BLOCK,
+              },
+            };
+            const { editorView } = editor(
+              doc(code_block()('top\n  {<>}start\nbottom')),
+            );
+
+            sendKeyToPm(editorView, 'Mod-[');
+
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+          });
+
           it('should unindent by 2 spaces', () => {
             const { editorView } = editor(
               doc(code_block()('top\n{<>}  start\nbottom')),
@@ -271,6 +370,26 @@ describe('IDE UX plugin', () => {
         });
       });
       describe('when selection is across multiple lines', () => {
+        it('should create multiple Analytics GAS v3 event', () => {
+          const firstExpectedIndentation = createIndentationAttributes(2, 1);
+          const secondsExpectedIndentation = createIndentationAttributes(1, 0);
+
+          const { editorView } = editor(
+            doc(code_block()('t{<}op\n    start\n  bot{>}tom')),
+          );
+
+          createAnalyticsEvent.mockClear();
+          sendKeyToPm(editorView, 'Mod-[');
+
+          expect(createAnalyticsEvent).toHaveBeenCalledTimes(2);
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(
+            firstExpectedIndentation,
+          );
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(
+            secondsExpectedIndentation,
+          );
+        });
+
         describe('and line starts with spaces', () => {
           it('should unindent only selected lines by two spaces', () => {
             const { editorView } = editor(
