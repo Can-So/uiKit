@@ -1,5 +1,10 @@
 # @atlaskit/atlassian-switcher
 
+## 0.0.3
+- [patch] [b56ca0131d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b56ca0131d):
+
+  - Attempting to fix flow issue where atlassian-switcher is not recognized
+
 ## 0.0.2
 - [patch] [235f937d66](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/235f937d66):
 
