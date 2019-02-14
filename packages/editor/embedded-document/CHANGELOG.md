@@ -1,5 +1,10 @@
 # @atlaskit/embedded-document
 
+## 0.2.1
+- [patch] [aa4daed8c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aa4daed8c6):
+
+  - Editor and Renderer props should be optional
+
 ## 0.2.0
 - [minor] [6ebe368d95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ebe368d95):
 
