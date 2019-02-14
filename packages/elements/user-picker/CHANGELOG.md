@@ -1,5 +1,9 @@
 # @atlaskit/user-picker
 
+## 1.0.20
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/select@7.0.0
+
 ## 1.0.19
 - [patch] [1050084e29](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1050084e29):
 

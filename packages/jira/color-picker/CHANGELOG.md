@@ -1,5 +1,10 @@
 # @atlaskit/color-picker
 
+## 0.2.4
+- [patch] [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+
+  - popup select "target" is now a function that must resolve to a node
+
 ## 0.2.3
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

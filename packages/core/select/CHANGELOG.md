@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 7.0.0
+- [major] [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+
+  - popup select "target" is now a function that must resolve to a node
+
 ## 6.1.20
 - [patch] [957778f085](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/957778f085):
 

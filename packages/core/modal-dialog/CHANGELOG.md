@@ -1,5 +1,10 @@
 # @atlaskit/modal-dialog
 
+## 7.2.3
+- [patch] [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+
+  - popup select "target" is now a function that must resolve to a node
+
 ## 7.2.2
 - [patch] [a7670c1488](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a7670c1488):
 

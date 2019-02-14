@@ -1,5 +1,13 @@
 # @atlaskit/editor-core
 
+## 98.10.3
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/logo@9.2.7
+  - @atlaskit/media-picker@33.0.3
+  - @atlaskit/media-test-helpers@20.1.3
+  - @atlaskit/modal-dialog@7.2.3
+  - @atlaskit/select@7.0.0
+
 ## 98.10.2
 - [patch] [45e3fffa9e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/45e3fffa9e):
 
