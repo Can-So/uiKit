@@ -1,0 +1,8 @@
+{
+  "releases": [
+    { "name": "@atlaskit/media-filmstrip", "type": "minor" },
+    { "name": "@atlaskit/media-picker", "type": "minor" },
+    { "name": "@atlaskit/media-viewer", "type": "minor" }
+  ],
+  "dependents": []
+}

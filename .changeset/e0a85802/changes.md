@@ -1,0 +1,1 @@
+- ED-6259 Enable stricter types for media packages
