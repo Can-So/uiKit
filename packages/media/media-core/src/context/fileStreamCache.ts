@@ -2,6 +2,18 @@ import { FileState } from '../fileState';
 import { LRUCache } from 'lru-fast';
 import { Observable } from 'rxjs/Observable';
 
+// can't just use observable.toPromise() because it only resolves when the observable completes, which never happens with ReplaySubject
+const observableToPromise = <T>(observable: Observable<T>): Promise<T> => {
+  return new Promise<T>(resolve => {
+    const subscription = observable.subscribe({
+      next: fileState => {
+        resolve(fileState);
+        setTimeout(() => subscription.unsubscribe(), 0);
+      },
+    });
+  });
+};
+
 export class FileStreamCache {
   private readonly fileStreams: LRUCache<string, Observable<FileState>>;
   private readonly stateDeferreds: Map<
@@ -37,7 +49,7 @@ export class FileStreamCache {
     const state = this.get(id);
 
     if (state) {
-      return state.toPromise();
+      return observableToPromise(state);
     }
     const deferred = this.stateDeferreds.get(id);
     if (deferred) {
