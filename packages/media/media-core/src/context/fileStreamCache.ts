@@ -35,7 +35,7 @@ export class FileStreamCache {
     const deferred = this.stateDeferreds.get(id);
 
     if (deferred) {
-      fileStream.toPromise().then(state => {
+      observableToPromise(fileStream).then(state => {
         deferred.resolve(state);
       });
     }
