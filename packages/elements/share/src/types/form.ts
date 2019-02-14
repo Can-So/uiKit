@@ -1,6 +1,7 @@
 import { SyntheticEvent } from 'react';
 
-/* @atlaskit/form types. Should be removed when they migrate to TS */
+// @atlaskit/form types
+// TODO remove this when Form is migrated to TypeScript.
 interface OnChange<T> {
   (value: T): void;
   (event: SyntheticEvent): void;
