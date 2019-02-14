@@ -17,6 +17,16 @@ exports.default = void 0;
  * Add synonyms in icon/icons/synonyms.js.
  */
 var _default = {
+  'priority-blocker': {
+    keywords: [
+      'priority-blocker',
+      'priorityblocker',
+      'priority',
+      'icon-priority',
+    ],
+    componentName: 'PriorityBlockerIcon',
+    package: '@atlaskit/icon-priority/glyph/priority-blocker',
+  },
   'priority-critical': {
     keywords: [
       'priority-critical',
@@ -86,16 +96,6 @@ var _default = {
     ],
     componentName: 'PriorityTrivialIcon',
     package: '@atlaskit/icon-priority/glyph/priority-trivial',
-  },
-  'priotity-blocker': {
-    keywords: [
-      'priotity-blocker',
-      'priotityblocker',
-      'priority',
-      'icon-priority',
-    ],
-    componentName: 'PriotityBlockerIcon',
-    package: '@atlaskit/icon-priority/glyph/priotity-blocker',
   },
 };
 exports.default = _default;
