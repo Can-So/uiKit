@@ -5,6 +5,7 @@ export function issueLinkResolver(
   link: ContentLink,
   schema: Schema,
 ): PMNode[] | undefined {
+  // TODO: check if the link content is inside context
   if (link.linkBody === 'smart-link') {
     return [
       schema.nodes.inlineCard.createChecked({

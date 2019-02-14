@@ -1,5 +1,6 @@
 import { TokenType } from './';
 import { EMOJIS } from './emoji';
+import { ISSUE_KEY_REGEX } from './issue-key';
 
 const macroKeywordTokenMap = [
   {
@@ -145,6 +146,17 @@ export function parseLeadingKeyword(input: string) {
         type: keyword.type,
       };
     }
+  }
+
+  return null;
+}
+
+export function parseIssueKeyword(input: string) {
+  // TODO: create dynamic regex from context issues (performance)
+  if (ISSUE_KEY_REGEX.test(input)) {
+    return {
+      type: TokenType.ISSUE_KEY,
+    };
   }
 
   return null;

@@ -134,7 +134,8 @@ export function commonFormatter(
           state = processState.BUFFER;
           break;
         }
-        const token = parseToken(input, match.type, index, schema);
+        // TODO: Empty context
+        const token = parseToken(input, match.type, index, schema, {});
         if (token.type === 'text') {
           buffer += token.text;
           index += token.length;
