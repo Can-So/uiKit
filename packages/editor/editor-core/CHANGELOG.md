@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.11.1
+- [patch] [ea423a619f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea423a619f):
+
+  - Fixed the call to the /check endpoint
+
 ## 98.11.0
 - [minor] [448b9946cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/448b9946cc):
 
