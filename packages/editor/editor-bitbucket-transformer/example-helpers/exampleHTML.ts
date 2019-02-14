@@ -7,17 +7,11 @@ const html = `<p>Regular,
 
 <hr>
 
-<a href="/abodera/" rel="nofollow" title="@abodera" class="mention" data-bitbucket-uuid="7a069b6a-11b7-4ae3-b847-e5583e976d43">Artur Bodera</a>
-
-<p>Legacy mentions</p>
-<ul>
-  <li><a href="/abodera/" rel="nofollow" title="@abodera" class="mention" data-bitbucket-uuid="7a069b6a-11b7-4ae3-b847-e5583e976d43">Artur Bodera</a></li>
-  <li><a href="/abodera/" rel="nofollow" title="@abodera" class="ap-mention" data-bitbucket-uuid="7a069b6a-11b7-4ae3-b847-e5583e976d43">Artur Bodera</a></li>
-</ul>
-
 <p>Atlassian ID mentions</p>
 <ul>
-  <li><span class="ap-mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</span></ll>
+  <li><a href="/scott" class="mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</a></li>
+  <li><a href="/scott" class="ap-mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</a></li>
+  <li><span class="ap-mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</span></li>
 </ul>
 
 <hr>

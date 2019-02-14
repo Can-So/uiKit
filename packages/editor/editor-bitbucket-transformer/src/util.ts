@@ -66,10 +66,10 @@ export function transformHtml(
     span.setAttribute('class', 'editor-entity-mention');
     span.setAttribute('contenteditable', 'false');
 
-    const bitbucketUuid = a.getAttribute('data-bitbucket-uuid') || '';
-    if (bitbucketUuid) {
-      // UUID is wrapped in curlies so that it get serialized as @{uuid-1234} instead of @uuid-1234
-      span.setAttribute('data-mention-id', `{${bitbucketUuid}}`);
+    const atlassianId = a.getAttribute('data-atlassian-id') || '';
+    if (atlassianId) {
+      // Atlassian ID is wrapped in curlies so that it get serialized as @{aid-id} instead of @aid-id
+      span.setAttribute('data-mention-id', `{${atlassianId}}`);
     } else {
       const title = a.getAttribute('title') || '';
       if (title) {

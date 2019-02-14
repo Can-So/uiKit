@@ -571,12 +571,12 @@ describe('BitbucketTransformer: parser', () => {
     });
 
     ['mention', 'ap-mention'].forEach(mentionClass => {
-      it(`should prefer UUID over username if present, for ${mentionClass}`, () => {
+      it(`should prefer Atlassian ID over username if present, for ${mentionClass}`, () => {
         expect(
           parse(
             '<p>' +
               'foo ' +
-              `<a href="/abodera/" rel="nofollow" title="@abodera" class="${mentionClass} mention-me" data-bitbucket-uuid="7a069b6a-11b7-4ae3-b847-e5583e976d43">Artur Bodera</a>` +
+              `<a href="/abodera/" rel="nofollow" title="@abodera" class="${mentionClass} mention-me" data-atlassian-id="5c09bf77ec71bd223bbe866f">Artur Bodera</a>` +
               ' bar' +
               '</p>',
           ),
@@ -586,7 +586,7 @@ describe('BitbucketTransformer: parser', () => {
               'foo ',
               mention({
                 text: '@Artur Bodera',
-                id: '{7a069b6a-11b7-4ae3-b847-e5583e976d43}',
+                id: '{5c09bf77ec71bd223bbe866f}',
               })(),
               ' bar',
             ),
