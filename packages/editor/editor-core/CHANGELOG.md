@@ -1,5 +1,11 @@
 # @atlaskit/editor-core
 
+## 98.10.5
+- [patch] [36986d383b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36986d383b):
+
+  - ED-6010 Rename "Block Quote" to "Quote", and "Code Block" to "Code snippet" in the insert menu
+  - Update i18n translations
+
 ## 98.10.4
 - [patch] [cf7fd7d3be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf7fd7d3be):
 
