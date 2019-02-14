@@ -301,20 +301,18 @@ class Tooltip extends Component<Props, State> {
                   onExited={() => this.setState({ renderTooltip: false })}
                   in={isVisible}
                 >
-                  {getAnimationStyles => {
-                    return (
-                      <TooltipContainer
-                        innerRef={ref}
-                        style={{
-                          ...getAnimationStyles(placement),
-                          ...style,
-                        }}
-                        truncate={truncate}
-                      >
-                        {content}
-                      </TooltipContainer>
-                    );
-                  }}
+                  {getAnimationStyles => (
+                    <TooltipContainer
+                      innerRef={ref}
+                      style={{
+                        ...getAnimationStyles(placement),
+                        ...style,
+                      }}
+                      truncate={truncate}
+                    >
+                      {content}
+                    </TooltipContainer>
+                  )}
                 </Animation>
               )}
             </Popper>
