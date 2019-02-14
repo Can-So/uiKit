@@ -1,13 +1,13 @@
-export interface EntityMark {
+export interface ADFEntityMark {
   type: string;
   attrs?: { [name: string]: any };
 }
 
-export interface Entity {
+export interface ADFEntity {
   type: string;
   attrs?: { [name: string]: any };
-  content?: Array<Entity>;
-  marks?: Array<EntityMark>;
+  content?: Array<ADFEntity>;
+  marks?: Array<ADFEntityMark>;
   text?: string;
   [key: string]: any;
 }

@@ -1,5 +1,5 @@
 import * as specs from './specs';
-import { Entity } from '../types';
+import { ADFEntity } from '../types';
 
 export type Content = Array<string | [string, object] | Array<string>>;
 
@@ -250,7 +250,7 @@ const getUnsupportedOptions = (spec?: ValidatorSpec) => {
 };
 
 const invalidChildContent = (
-  child: Entity,
+  child: ADFEntity,
   errorCallback?: ErrorCallback,
   parentSpec?: ValidatorSpec,
 ) => {
@@ -291,7 +291,7 @@ export interface ValidationError {
 }
 
 export type ErrorCallback = (
-  entity: Entity,
+  entity: ADFEntity,
   /**
    * I couldn't find any way to do index based typing for enum using TS 2.6.
    * We can change it to 'MISSING_PROPERTY' | 'REDUNDANT_PROPERTIES' | ...
@@ -302,7 +302,7 @@ export type ErrorCallback = (
     allowUnsupportedBlock?: boolean;
     allowUnsupportedInline?: boolean;
   },
-) => Entity | undefined;
+) => ADFEntity | undefined;
 
 // `loose` - ignore and filter extra props or attributes
 export type ValidationMode = 'strict' | 'loose';
@@ -315,7 +315,7 @@ export interface ValidationOptions {
 
 export interface Output {
   valid: boolean;
-  entity?: Entity;
+  entity?: ADFEntity;
 }
 
 export function validator(
@@ -327,13 +327,13 @@ export function validator(
   const { mode = 'strict', allowPrivateAttributes = false } = options || {};
 
   const validate = (
-    entity: Entity,
+    entity: ADFEntity,
     errorCallback?: ErrorCallback,
     allowed?: Content,
     parentSpec?: ValidatorSpec,
   ): Output => {
     const { type } = entity;
-    let newEntity: Entity = { ...entity };
+    let newEntity: ADFEntity = { ...entity };
 
     const err = (
       code: VALIDATION_ERRORS,
@@ -482,7 +482,7 @@ export function validator(
 
           // Extra Props
           // Filter out private and required properties
-          const props = (Object.keys(entity) as Array<keyof Entity>).filter(
+          const props = (Object.keys(entity) as Array<keyof ADFEntity>).filter(
             k =>
               !(
                 (validator.props as any)[k] &&
@@ -610,7 +610,7 @@ export function validator(
                     return invalidChildContent(child, errorCallback, validator);
                   }
                 })
-                .filter(Boolean) as Array<Entity>;
+                .filter(Boolean) as Array<ADFEntity>;
             } else if (!validator.props.content.optional) {
               return err(
                 VALIDATION_ERRORS.MISSING_PROPERTY,
@@ -638,7 +638,7 @@ export function validator(
                   mark =>
                     validate(mark, errorCallback, marksSet, validator).entity,
                 )
-                .filter(Boolean) as Entity[];
+                .filter(Boolean) as ADFEntity[];
               if (newMarks.length) {
                 newEntity.marks = newMarks;
               } else {

@@ -1,11 +1,11 @@
-import { Entity } from '../types';
+import { ADFEntity } from '../types';
 import { traverse } from './traverse';
 
 export function filter(
-  adf: Entity,
-  callback: (node: Entity) => boolean,
-): Array<Entity> {
-  const result: Array<Entity> = [];
+  adf: ADFEntity,
+  callback: (node: ADFEntity) => boolean,
+): Array<ADFEntity> {
+  const result: Array<ADFEntity> = [];
 
   traverse(adf, {
     any: node => {

@@ -1,9 +1,9 @@
-import { Entity } from '../types';
+import { ADFEntity } from '../types';
 import { traverse } from './traverse';
 
 export function map<T = any>(
-  adf: Entity,
-  callback: (node: Entity) => T,
+  adf: ADFEntity,
+  callback: (node: ADFEntity) => T,
 ): Array<T> {
   const result: Array<T> = [];
 
