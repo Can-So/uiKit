@@ -28,14 +28,18 @@ export interface SelectComponentProps {
 }
 
 export const MenuList = (props: SelectComponentProps) => {
-  const { cols } = props.selectProps;
+  const {
+    cx,
+    selectProps: { cols },
+    ...rest
+  } = props;
 
   return (
     <ColorPaletteContainer
       style={{
         maxWidth: cols ? cols * (COLOR_CARD_SIZE + 2) + gridSize() : undefined,
       }}
-      {...props}
+      {...rest}
     />
   );
 };
