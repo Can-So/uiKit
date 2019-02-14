@@ -459,12 +459,13 @@ export function validator(
               const attrOption = attrOptions[i];
               invalidAttrs = Object.keys(attrOption.props).reduce<
                 Array<string>
-              >((attrs, k) => {
-                const entityAttrs = entity.attrs ? entity.attrs[k] : null;
-                return validateAttrs(attrOption.props[k], entityAttrs)
-                  ? attrs
-                  : attrs.concat(k);
-              }, []);
+              >(
+                (attrs, k) =>
+                  validateAttrs(attrOption.props[k], entity.attrs![k])
+                    ? attrs
+                    : attrs.concat(k),
+                [],
+              );
               if (!invalidAttrs.length) {
                 validatorAttrs = attrOption;
                 break;
