@@ -18,8 +18,6 @@ exports[`Switcher should render correctly 1`] = `
   maxMenuWidth={0}
   minMenuWidth={0}
   navWidth={240}
-  onClose={[Function]}
-  onOpen={[Function]}
   options={
     Array [
       Object {
@@ -45,14 +43,6 @@ exports[`Switcher should render correctly 1`] = `
       "option": [Function],
     }
   }
-  target={
-    <NodeResolver
-      innerRef={[Function]}
-    >
-      <Target
-        isSelected={false}
-      />
-    </NodeResolver>
-  }
+  target={[Function]}
 />
 `;
