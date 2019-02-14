@@ -9,6 +9,11 @@ import * as ReactDOMServer from 'react-dom/server';
 describe('server side rendering', () => {
   let oldWindow;
 
+  /* TypeStyle expects window.setTimeout, which is not available in node mode.
+   * Define window as global to get this moving (this is expected to be available
+   * in known usages of SSR). This is probably coming via getExamplesFor, via emoji.
+   * Look at removing in FS-891.
+   */
   beforeAll(() => {
     oldWindow = (global as any).window;
     (global as any).window = global;

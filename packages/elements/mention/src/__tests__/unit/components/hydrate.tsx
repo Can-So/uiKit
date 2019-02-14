@@ -6,22 +6,8 @@ import * as ReactDOMServer from 'react-dom/server';
 import * as exenv from 'exenv';
 
 describe('SSR', () => {
-  let oldWindow;
   let oldCanUseDOM;
   let consoleErrorSpy: jest.SpyInstance;
-
-  beforeAll(() => {
-    oldWindow = (global as any).window;
-    (global as any).window = global;
-  });
-
-  afterAll(() => {
-    if (oldWindow) {
-      (global as any).window = oldWindow;
-    } else {
-      delete (global as any).window;
-    }
-  });
 
   beforeEach(() => {
     oldCanUseDOM = exenv.canUseDOM;
