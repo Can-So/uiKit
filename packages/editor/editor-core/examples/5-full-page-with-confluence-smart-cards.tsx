@@ -84,8 +84,8 @@ export class ConfluenceCardClient extends Client {
   }
 }
 
-const cardClient = new ConfluenceCardClient();
-const cardProvider = new ConfluenceCardProvider();
+const cardClient = new ConfluenceCardClient(undefined, 'staging');
+const cardProvider = new ConfluenceCardProvider('staging');
 
 export function Example(doc) {
   return (

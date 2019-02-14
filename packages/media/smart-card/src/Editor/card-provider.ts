@@ -9,12 +9,15 @@ export type ORSCheckResponse = {
   isSupported: boolean;
 };
 
-const ORS_CHECK_URL = Environments.prod.resolverURL;
+export type EnvironmentsKeys = keyof typeof Environments;
 
 export class EditorCardProvider implements CardProvider {
+  constructor(private envKey: EnvironmentsKeys = 'prod') {}
+
   async resolve(url: string, appearance: CardAppearance): Promise<any> {
     try {
-      const result: ORSCheckResponse = await (await fetch(ORS_CHECK_URL, {
+      const constructedUrl = `${Environments[this.envKey].resolverURL}/check`;
+      const result: ORSCheckResponse = await (await fetch(constructedUrl, {
         method: 'POST',
         credentials: 'include',
         headers: {
