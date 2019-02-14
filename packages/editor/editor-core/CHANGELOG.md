@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.11.0
+- [minor] [448b9946cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/448b9946cc):
+
+  - ED-6195 Add Analytics GAS V3 for identation
+
 ## 98.10.5
 - [patch] [36986d383b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36986d383b):
 
