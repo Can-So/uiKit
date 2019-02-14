@@ -12,6 +12,7 @@ const EmptyComponent = () => null;
 
 export interface SelectComponentProps {
   // select props
+  cx: () => string;
   data: Color;
   options: Color[];
   setValue: (option: Color) => void;
