@@ -18,8 +18,8 @@ export interface Props extends BaseProps {
   hasError?: boolean;
 
   mode: Mode;
-  editorProps?: EditorProps;
-  rendererProps?: RendererProps;
+  editorProps?: Partial<EditorProps>;
+  rendererProps?: Partial<RendererProps>;
 }
 
 const emptyDoc = '{ "type": "doc", "version": 1, "content": [] }';

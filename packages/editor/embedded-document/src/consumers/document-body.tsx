@@ -7,8 +7,8 @@ import { Consumer } from './consumer';
 import { default as Document } from '../components/document';
 
 export interface Props {
-  editorProps?: EditorProps;
-  rendererProps?: RendererProps;
+  editorProps?: Partial<EditorProps>;
+  rendererProps?: Partial<RendererProps>;
 }
 
 export default class DocumentBody extends PureComponent<Props> {
