@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.core.json",
+  "extends": "../../../tsconfig.base.json",
   "include": [
     "./src/**/*.ts",
     "./src/**/*.tsx",
@@ -12,7 +12,7 @@
   ],
   "compilerOptions": {
     "baseUrl": "./",
-    "strictPropertyInitialization": false,
+    "noImplicitAny": true,
     "paths": {
       "@atlaskit/analytics-next": [
         "node_modules/@atlaskit/analytics-next-types"

@@ -1,8 +1,6 @@
 import { AnalyticsListener } from '@atlaskit/analytics';
-import {
-  AnalyticsListener as AnalyticsListenerNext,
-  UIAnalyticsEventInterface,
-} from '@atlaskit/analytics-next';
+import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
+import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 // @ts-ignore
 import { AtlaskitThemeProvider } from '@atlaskit/theme';
 import * as React from 'react';
