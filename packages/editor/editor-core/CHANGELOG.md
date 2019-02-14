@@ -1,5 +1,29 @@
 # @atlaskit/editor-core
 
+## 98.10.5
+- [patch] [36986d383b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36986d383b):
+
+  - ED-6010 Rename "Block Quote" to "Quote", and "Code Block" to "Code snippet" in the insert menu
+  - Update i18n translations
+
+## 98.10.4
+- [patch] [cf7fd7d3be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf7fd7d3be):
+
+  - Render external images in editor
+
+## 98.10.3
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/logo@9.2.7
+  - @atlaskit/media-picker@33.0.3
+  - @atlaskit/media-test-helpers@20.1.3
+  - @atlaskit/modal-dialog@7.2.3
+  - @atlaskit/select@7.0.0
+
+## 98.10.2
+- [patch] [45e3fffa9e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/45e3fffa9e):
+
+  - suppress enter and tab keys events in the status node to prevent bugs
+
 ## 98.10.1
 - [patch] [4cc0b47f6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4cc0b47f6a):
 

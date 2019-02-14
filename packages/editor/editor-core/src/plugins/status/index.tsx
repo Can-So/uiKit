@@ -7,6 +7,7 @@ import createStatusPlugin, { StatusState, pluginKey } from './plugin';
 import WithPluginState from '../../ui/WithPluginState';
 import StatusPicker from './ui/statusPicker';
 import { commitStatusPicker, updateStatus, createStatus } from './actions';
+import { keymapPlugin } from './keymap';
 
 const baseStatusPlugin = (): EditorPlugin => ({
   nodes() {
@@ -19,6 +20,7 @@ const baseStatusPlugin = (): EditorPlugin => ({
         name: 'status',
         plugin: createStatusPlugin,
       },
+      { name: 'statusKeymap', plugin: keymapPlugin },
     ];
   },
 

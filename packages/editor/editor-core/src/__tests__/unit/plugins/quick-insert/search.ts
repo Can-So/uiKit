@@ -6,9 +6,9 @@ describe('Quick Insert Search', () => {
   const items = [
     { priority: 1, title: 'Table' },
     { priority: 9, title: 'Panel' },
-    { priority: 8, title: 'Code block' },
+    { priority: 8, title: 'Code snippet' },
     { priority: 7, title: 'Date' },
-    { priority: 6, title: 'Block quote' },
+    { priority: 6, title: 'Quote' },
     { priority: 2, title: 'Files and Images' },
     { priority: 3, title: 'Horizontal rule' },
     { priority: 4, title: 'Action' },
@@ -50,9 +50,9 @@ describe('Quick Insert Search', () => {
       'Horizontal rule',
       'Action',
       'Decision',
-      'Block quote',
+      'Quote',
       'Date',
-      'Code block',
+      'Code snippet',
       'Panel',
     ]);
   });
@@ -62,7 +62,7 @@ describe('Quick Insert Search', () => {
       find('code', [...items, { priority: 9, title: 'Code inline' }]).map(
         getTitles,
       ),
-    ).toEqual(['Code block', 'Code inline']);
+    ).toEqual(['Code snippet', 'Code inline']);
   });
 
   it('should not match string when character repeats more times than in original string', () => {
@@ -75,13 +75,12 @@ describe('Quick Insert Search', () => {
         ...items,
         { priority: 9, title: 'Block extensions' },
       ]).map(getTitles),
-    ).toEqual(['Block quote', 'Block extensions']);
+    ).toEqual(['Block extensions']);
 
     expect(
-      find('block q', [
-        ...items,
-        { priority: 9, title: 'Block extensions' },
-      ]).map(getTitles),
-    ).toEqual(['Block quote']);
+      find('qu', [...items, { priority: 9, title: 'Block extensions' }]).map(
+        getTitles,
+      ),
+    ).toEqual(['Quote']);
   });
 });

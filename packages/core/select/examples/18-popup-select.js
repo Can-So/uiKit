@@ -20,16 +20,21 @@ const defaults = { options, placeholder: 'Choose a City', onChange };
 const PopupSelectExample = () => (
   <Fragment>
     <div css={{ display: 'flex', justifyContent: 'space-between' }}>
-      <PopupSelect {...defaults} target={<button>Target</button>} />
       <PopupSelect
         {...defaults}
-        target={<button>W/O Search</button>}
+        target={({ ref }) => <button ref={ref}>Target</button>}
+      />
+      <PopupSelect
+        {...defaults}
+        target={({ ref }) => <button ref={ref}>W/O Search</button>}
         popperProps={{ placement: 'bottom', positionFixed: true }}
         searchThreshold={10}
       />
       <PopupSelect
         {...defaults}
-        target={<button>Placement: &ldquo;right-start&rdquo; (flip)</button>}
+        target={({ ref }) => (
+          <button ref={ref}>Placement: &ldquo;right-start&rdquo; (flip)</button>
+        )}
         popperProps={{ placement: 'right-start' }}
       />
     </div>
@@ -47,17 +52,20 @@ const PopupSelectExample = () => (
       >
         <h3>Scroll Container</h3>
         <div style={{ height: 100 }} />
-        <PopupSelect {...defaults} target={<button>Target</button>} />
+        <PopupSelect
+          {...defaults}
+          target={({ ref }) => <button ref={ref}>Target</button>}
+        />
         <div style={{ height: 1000 }} />
       </div>
       <div style={{ margin: '1em' }}>
         <PopupSelect
           {...defaults}
-          target={
-            <button>
+          target={({ ref }) => (
+            <button ref={ref}>
               <AppSwitcherIcon />
             </button>
-          }
+          )}
         />
       </div>
     </div>

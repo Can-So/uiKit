@@ -120,7 +120,6 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
             return newState;
           }
         }
-
         return state;
       },
     },

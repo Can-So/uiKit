@@ -5,7 +5,7 @@ export const mayGetStatusNodeAt = (selection: Selection): StatusType | null => {
   if (selection && selection instanceof NodeSelection) {
     const nodeSelection = selection as NodeSelection;
     if (nodeSelection.node.type.name === 'status') {
-      return selection.node.attrs as StatusType;
+      return (selection.node.attrs as StatusType) || null;
     }
   }
   return null;

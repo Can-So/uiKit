@@ -24,18 +24,6 @@ export const DEFAULT_HEIGHT = 600;
 const adfInputSelector = '#adf-input';
 const importAdfBtnSelector = '#import-adf';
 
-export const dynamicTextViewportSizes = [
-  { width: 1440, height: 4000 },
-  { width: 1280, height: 4000 },
-  { width: 768, height: 4000 },
-  { width: 1024, height: 4000 },
-];
-
-export const viewportSizes = [
-  ...dynamicTextViewportSizes,
-  { width: 400, height: 900 },
-];
-
 export const resetViewport = async page => {
   await page.setViewport({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
 };
@@ -43,6 +31,8 @@ export const resetViewport = async page => {
 export const escapeStr = (str: string) => {
   return `concat('${str.replace(/'/g, `', "'", '`)}', '')`;
 };
+
+export const viewportSizes = [{ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT }];
 
 export const selectByTextAndClick = async ({ page, tagName, text }) => {
   const target = await page.$x(
@@ -177,7 +167,7 @@ export const insertMenuTests = [
   // Insert menu items
   // -----------------
   {
-    name: 'Block quote',
+    name: 'Quote',
     // click selector (dropdown menu or toolbar icon)
     clickSelector: insertMenuSelector,
     // menu item selector - when given, it should match item inner text
@@ -190,7 +180,7 @@ export const insertMenuTests = [
     appearance: ['full-page', 'comment'],
   },
   {
-    name: 'Code block',
+    name: 'Code snippet',
     menuItemText: blockTypeMessages.codeblock.defaultMessage,
     clickSelector: insertMenuSelector,
     nodeSelector: 'div.code-block code',

@@ -1,7 +1,6 @@
 import { initFullPageEditorWithAdf, snapshot } from './_utils';
 import * as gapcursor from './__fixtures__/gap-cursor-adf.json';
-// import { setTableLayout } from './table/_table-utils';
-// import commonMessages from '../../messages';
+import * as pageObject from './_pageObjects';
 
 describe('Snapshot Test: Gap cursor', () => {
   let page;
@@ -13,32 +12,32 @@ describe('Snapshot Test: Gap cursor', () => {
   });
 
   it('should render gap cursor for code when ArrowRight', async () => {
-    await page.click('.code-content');
-    await page.keyboard.down('ArrowRight');
-    await page.waitForSelector('.ProseMirror-gapcursor');
+    await page.click(pageObject.codeContent);
+    await page.keyboard.down(pageObject.arrowRight);
+    await page.waitForSelector(pageObject.gapCursor);
     await snapshot(page);
   });
 
   it(' should render gap cursor on panel when ArrowLeft', async () => {
-    await page.click('.ak-editor-panel__content');
-    await page.keyboard.down('ArrowLeft');
-    await page.waitForSelector('.ProseMirror-gapcursor');
+    await page.click(pageObject.panelContent);
+    await page.keyboard.down(pageObject.arrowLeft);
+    await page.waitForSelector(pageObject.gapCursor);
     await snapshot(page);
   });
 
   it(' should render gap cursor on table on ArrowUp', async () => {
-    await page.click('.ak-editor-panel__content');
-    await page.keyboard.down('ArrowLeft');
-    await page.keyboard.down('ArrowUp');
-    await page.waitForSelector('.ProseMirror-gapcursor');
+    await page.click(pageObject.panelContent);
+    await page.keyboard.down(pageObject.arrowLeft);
+    await page.keyboard.down(pageObject.arrowUp);
+    await page.waitForSelector(pageObject.gapCursor);
     await snapshot(page);
   });
 
   it(' should render gap cursor on table on ArrowDown', async () => {
-    await page.click('.code-content');
-    await page.keyboard.down('ArrowRight');
-    await page.keyboard.down('ArrowDown');
-    await page.waitForSelector('.ProseMirror-gapcursor');
+    await page.click(pageObject.codeContent);
+    await page.keyboard.down(pageObject.arrowRight);
+    await page.keyboard.down(pageObject.arrowDown);
+    await page.waitForSelector(pageObject.gapCursor);
     await snapshot(page);
   });
 

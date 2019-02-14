@@ -1,5 +1,10 @@
 # @atlaskit/page-header
 
+## 6.1.2
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/breadcrumbs@6.0.15
+  - @atlaskit/select@7.0.0
+
 ## 6.1.1
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/breadcrumbs@6.0.14
