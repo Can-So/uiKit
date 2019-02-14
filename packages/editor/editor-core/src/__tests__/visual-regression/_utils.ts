@@ -167,7 +167,7 @@ export const insertMenuTests = [
   // Insert menu items
   // -----------------
   {
-    name: 'Block quote',
+    name: 'Quote',
     // click selector (dropdown menu or toolbar icon)
     clickSelector: insertMenuSelector,
     // menu item selector - when given, it should match item inner text
@@ -180,7 +180,7 @@ export const insertMenuTests = [
     appearance: ['full-page', 'comment'],
   },
   {
-    name: 'Code block',
+    name: 'Code snippet',
     menuItemText: blockTypeMessages.codeblock.defaultMessage,
     clickSelector: insertMenuSelector,
     nodeSelector: 'div.code-block code',

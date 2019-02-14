@@ -1,0 +1,2 @@
+- ED-6010 Rename "Block Quote" to "Quote", and "Code Block" to "Code snippet" in the insert menu
+- Update i18n translations

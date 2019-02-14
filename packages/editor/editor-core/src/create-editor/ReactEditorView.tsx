@@ -73,7 +73,7 @@ export default class ReactEditorView<T = {}> extends React.Component<
   config: EditorConfig;
   editorState: EditorState;
   analyticsEventHandler: (
-    { payload, channel }: { payload: AnalyticsEventPayload; channel?: string },
+    payloadChannel: { payload: AnalyticsEventPayload; channel?: string },
   ) => void;
 
   static contextTypes = {
