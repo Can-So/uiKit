@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 98.10.1
+- [patch] [4cc0b47f6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4cc0b47f6a):
+
+  - ED-6233: Use minCellWith over wrapWidth to determine free space in a column
+
+## 98.10.0
+- [minor] [e6daf79012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6daf79012):
+
+  - ED-6135 Fire analytics v3 events when insert panel, code block or horizontal rule
+
+## 98.9.5
+- [patch] [026d4424c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/026d4424c2):
+
+  - ED-6226 Fix row delete button displacement after many rows in a table
+
 ## 98.9.4
 - [patch] [e04c61dc55](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e04c61dc55):
 

@@ -10,18 +10,25 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import rulePlugin from '../../../../plugins/rule';
 import codeBlockPlugin from '../../../../plugins/code-block';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 describe('inputrules', () => {
   const createEditor = createEditorFactory();
 
-  const editor = (doc: any, trackEvent = () => {}) =>
-    createEditor({
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+
+  const editor = (doc: any, trackEvent = () => {}) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
       editorPlugins: [rulePlugin, codeBlockPlugin()],
       editorProps: {
         analyticsHandler: trackEvent,
+        allowAnalyticsGASV3: true,
       },
+      createAnalyticsEvent,
     });
+  };
 
   describe('rule', () => {
     it('should not convert "***" in the middle of a line to a horizontal rule', () => {
@@ -152,6 +159,30 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.horizontalrule.autoformatting',
       );
+    });
+
+    it('should fire analytics event when convert "---" to rule', () => {
+      const { editorView, sel } = editor(doc(p('{<>}')));
+      insertText(editorView, '---', sel);
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'divider',
+        attributes: { inputMethod: 'autoformatting' },
+        eventType: 'track',
+      });
+    });
+
+    it('should fire analytics event when convert "***" to rule', () => {
+      const { editorView, sel } = editor(doc(p('{<>}')));
+      insertText(editorView, '***', sel);
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'divider',
+        attributes: { inputMethod: 'autoformatting' },
+        eventType: 'track',
+      });
     });
   });
 });

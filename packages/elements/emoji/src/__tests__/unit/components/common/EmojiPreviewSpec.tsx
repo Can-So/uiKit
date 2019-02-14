@@ -1,16 +1,16 @@
 import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
-import * as React from 'react';
-import { expect } from 'chai';
-
 import { waitUntil } from '@atlaskit/util-common-test';
-import * as styles from '../../../../components/common/styles';
-import EmojiPreview from '../../../../components/common/EmojiPreview';
-import ToneSelector from '../../../../components/common/ToneSelector';
+import { expect } from 'chai';
+import { ReactWrapper } from 'enzyme';
+import * as React from 'react';
+import CachingEmoji from '../../../../components/common/CachingEmoji';
 import Emoji from '../../../../components/common/Emoji';
 import EmojiButton from '../../../../components/common/EmojiButton';
-import CachingEmoji from '../../../../components/common/CachingEmoji';
+import EmojiPreview from '../../../../components/common/EmojiPreview';
+import * as styles from '../../../../components/common/styles';
+import ToneSelector from '../../../../components/common/ToneSelector';
 import { EmojiDescriptionWithVariations } from '../../../../types';
-import { imageEmoji, generateSkinVariation } from '../../_test-data';
+import { generateSkinVariation, imageEmoji } from '../../_test-data';
 import * as helper from './_common-test-helpers';
 
 const baseEmoji = imageEmoji;
@@ -164,12 +164,14 @@ describe('<EmojiPreview />', () => {
   });
 
   describe('Add custom emoji', () => {
-    const safeFindStartEmojiUpload = async component => {
+    const safeFindStartEmojiUpload = async (component: ReactWrapper) => {
       await waitUntil(() => helper.customEmojiButtonVisible(component));
       return helper.findCustomEmojiButton(component);
     };
 
-    const waitUntilPreviewSectionIsVisible = async component => {
+    const waitUntilPreviewSectionIsVisible = async (
+      component: ReactWrapper,
+    ) => {
       await waitUntil(() => helper.findEmojiPreviewSection(component).exists());
       return helper.findEmojiPreviewSection(component);
     };
@@ -190,7 +192,7 @@ describe('<EmojiPreview />', () => {
     });
 
     describe('Upload supported', () => {
-      let component;
+      let component: ReactWrapper;
 
       beforeEach(() => {
         component = mountWithIntl(
@@ -210,7 +212,7 @@ describe('<EmojiPreview />', () => {
         ).to.not.equal(undefined);
       };
 
-      const performToneButtonClick = component => {
+      const performToneButtonClick = (component: ReactWrapper) => {
         const instance = component.instance() as EmojiPreview;
         instance.onToneButtonClick();
         component.update();

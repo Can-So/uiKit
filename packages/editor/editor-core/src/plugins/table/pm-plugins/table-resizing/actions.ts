@@ -6,7 +6,6 @@ import { TableLayout } from '@atlaskit/adf-schema';
 import {
   tableCellMinWidth,
   akEditorTableNumberColumnWidth,
-  akEditorDefaultLayoutWidth,
 } from '@atlaskit/editor-common';
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
@@ -276,7 +275,7 @@ function scale(
   if (hasTableBeenResized(node)) {
     const resizer = Resizer.fromDOM(tableElem, {
       minWidth: tableCellMinWidth,
-      maxSize: Math.max(tableElem.offsetWidth, akEditorDefaultLayoutWidth),
+      maxSize,
       node,
     });
 
@@ -284,7 +283,7 @@ function scale(
     // Table was overflow, lets scale up the new 'maxSize' to keep our overflow in tact.
     if (!wasAutoSized && previousMaxSize && totalWidth > previousMaxSize) {
       const overflowScale = totalWidth / previousMaxSize;
-      maxSize = maxSize * overflowScale;
+      maxSize = Math.floor(maxSize * overflowScale);
     }
 
     return resizer.scale(maxSize);

@@ -1,5 +1,10 @@
 # @atlaskit/emoji
 
+## 54.1.0
+- [minor] [cf6799312a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf6799312a):
+
+  - Enable striter types for emoji package
+
 ## 54.0.0
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/editor-test-helpers@6.3.17

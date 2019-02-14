@@ -16,7 +16,6 @@ import {
   customTitle,
   userCustomTitle,
 } from '../../../../constants';
-import {} from '../../../../types';
 import * as ImageUtil from '../../../../util/image';
 import {
   createPngFile,
@@ -30,16 +29,17 @@ import {
 } from '../../_test-data';
 import * as commonHelper from '../common/_common-test-helpers';
 import * as helper from './_emoji-picker-test-helpers';
+import { ReactWrapper } from 'enzyme';
 
 describe('<UploadingEmojiPicker />', () => {
-  let firePrivateAnalyticsEvent;
+  let firePrivateAnalyticsEvent: jest.SpyInstance;
 
-  const safeFindCustomEmojiButton = async component => {
+  const safeFindCustomEmojiButton = async (component: ReactWrapper) => {
     await waitUntil(() => commonHelper.customEmojiButtonVisible(component));
     return commonHelper.findCustomEmojiButton(component);
   };
 
-  const uploadPreviewShown = component => {
+  const uploadPreviewShown = (component: ReactWrapper) => {
     const uploadPreview = helper.findUploadPreview(component);
     expect(uploadPreview).toHaveLength(1);
 
@@ -48,10 +48,10 @@ describe('<UploadingEmojiPicker />', () => {
     expect(uploadPreviewEmoji).toHaveLength(2);
     let emoji = uploadPreviewEmoji.at(0).prop('emoji');
     expect(emoji.shortName).toEqual(':cheese_burger:');
-    expect(emoji.representation.imagePath).toEqual(pngDataURL);
+    expect((emoji.representation as any).imagePath).toEqual(pngDataURL);
   };
 
-  const typeEmojiName = component => {
+  const typeEmojiName = (component: ReactWrapper) => {
     const nameInput = helper.findEmojiNameInput(component);
     nameInput.simulate('focus');
     nameInput.simulate('change', {
@@ -69,8 +69,8 @@ describe('<UploadingEmojiPicker />', () => {
   });
 
   describe('upload', () => {
-    let consoleError;
-    let emojiProvider;
+    let consoleError: jest.SpyInstance;
+    let emojiProvider: Promise<any>;
 
     beforeEach(() => {
       consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -99,11 +99,11 @@ describe('<UploadingEmojiPicker />', () => {
       consoleError.mockRestore();
     });
 
-    const navigateToUploadPreview = async providerPromise => {
+    const navigateToUploadPreview = async (providerPromise: Promise<any>) => {
       const component = await helper.setupPicker({
         emojiProvider: providerPromise,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
 
       await providerPromise;
@@ -171,7 +171,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
       const provider = await emojiProvider;
       await helper.showCategory(customCategory, component, customTitle);
@@ -263,7 +263,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
       await emojiProvider;
       await helper.showCategory(customCategory, component, customTitle);
@@ -299,7 +299,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
       await emojiProvider;
       await helper.showCategory(customCategory, component, customTitle);
@@ -416,7 +416,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
       const provider = await emojiProvider;
       await helper.showCategory(customCategory, component, customTitle);
@@ -483,7 +483,7 @@ describe('<UploadingEmojiPicker />', () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as any,
       });
 
       const provider = await emojiProvider;
@@ -609,8 +609,8 @@ describe('<UploadingEmojiPicker />', () => {
 
   describe('delete', () => {
     let getUserProvider;
-    let emojiProvider;
-    let component;
+    let emojiProvider: Promise<any>;
+    let component: ReactWrapper;
     beforeEach(async () => {
       // Initialise repository with clone of siteEmojis
       const repository = new EmojiRepository(
@@ -625,10 +625,10 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     // Click delete button on user emoji in picker
-    const openDeletePrompt = component =>
+    const openDeletePrompt = (component: ReactWrapper) =>
       component.find(CrossCircleIcon).simulate('click');
     // Click 'Remove' in delete preview
-    const clickRemove = component =>
+    const clickRemove = (component: ReactWrapper) =>
       component
         .find(EmojiDeletePreview)
         .find('button')

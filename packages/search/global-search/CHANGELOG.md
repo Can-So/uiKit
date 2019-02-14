@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.15.2
+- [patch] [cfb2fa498f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfb2fa498f):
+
+  - Add measurements for experiment api latency
+
 ## 5.15.1
 - [patch] [b21df8f941](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b21df8f941):
 

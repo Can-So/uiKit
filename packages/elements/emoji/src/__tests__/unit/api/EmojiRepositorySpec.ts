@@ -1,25 +1,23 @@
 import { expect } from 'chai';
 import * as pWaitFor from 'p-wait-for';
-
-import { customCategory, customType } from '../../../constants';
-import { EmojiDescription, SearchSort } from '../../../types';
-import { containsEmojiId, toEmojiId } from '../../../type-helpers';
 import EmojiRepository, {
   getEmojiVariation,
 } from '../../../api/EmojiRepository';
-
+import { customCategory, customType } from '../../../constants';
+import { containsEmojiId, toEmojiId } from '../../../type-helpers';
+import { EmojiDescription, SearchSort } from '../../../types';
 import {
   emojis as allEmojis,
   newEmojiRepository,
   openMouthEmoji,
   searchableEmojis,
-  standardEmojis,
   smileyEmoji,
-  thumbsupEmoji,
+  standardEmojis,
   thumbsdownEmoji,
+  thumbsupEmoji,
 } from '../_test-data';
 
-function checkOrder(expected, actual) {
+function checkOrder(expected: any[], actual: any[]) {
   expect(actual.length, `${actual.length} emojis`).to.equal(expected.length);
   expected.forEach((emoji, idx) => {
     expect(emoji.id, `emoji #${idx}`).to.equal(actual[idx].id);
@@ -292,7 +290,7 @@ export const siteEmojiGreek3 = {
 };
 
 describe('EmojiRepository', () => {
-  let emojiRepository;
+  let emojiRepository: EmojiRepository;
 
   beforeEach(() => {
     // emojiRepository has state that can influence search results so make it fresh for each test.
@@ -643,7 +641,7 @@ describe('EmojiRepository', () => {
   });
 
   describe('#delete', () => {
-    let copyEmojis;
+    let copyEmojis: EmojiDescription[];
     beforeEach(() => {
       // Deep copy emoji list
       copyEmojis = JSON.parse(JSON.stringify(allEmojis));
@@ -688,7 +686,7 @@ describe('EmojiRepository', () => {
     it('should not be able to find by ascii for an emoji that has been deleted', () => {
       const repository = new EmojiRepository(copyEmojis);
       repository.delete(smileyEmoji);
-      smileyEmoji.ascii!.forEach(a =>
+      smileyEmoji.ascii!.forEach((a: string) =>
         expect(repository.findByAsciiRepresentation(a), 'No smileys').to.equal(
           undefined,
         ),

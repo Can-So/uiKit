@@ -1,12 +1,11 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';
-
-import * as styles from './styles';
-import { EmojiDescription, OnEmojiEvent } from '../../types';
 import { toEmojiId } from '../../type-helpers';
-import EmojiPreview from '../common/EmojiPreview';
+import { EmojiDescription, OnEmojiEvent } from '../../types';
 import { leftClick } from '../../util/mouse';
+import EmojiPreview from '../common/EmojiPreview';
+import * as styles from './styles';
 
 export interface Props {
   onMouseMove: OnEmojiEvent;
@@ -17,7 +16,7 @@ export interface Props {
 
 export default class EmojiTypeAheadItem extends PureComponent<Props, {}> {
   // internal, used for callbacks
-  onEmojiSelected = event => {
+  onEmojiSelected: React.MouseEventHandler<HTMLDivElement> = event => {
     const { emoji, onSelection } = this.props;
     if (leftClick(event) && onSelection) {
       event.preventDefault();
@@ -25,7 +24,7 @@ export default class EmojiTypeAheadItem extends PureComponent<Props, {}> {
     }
   };
 
-  onEmojiMenuItemMouseMove = event => {
+  onEmojiMenuItemMouseMove: React.MouseEventHandler<HTMLDivElement> = event => {
     const { emoji, onMouseMove } = this.props;
     if (onMouseMove) {
       onMouseMove(toEmojiId(emoji), emoji, event);

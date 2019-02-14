@@ -46,6 +46,7 @@ export function firePreQueryShownEvent(
   elapsedMs: number,
   searchSessionId: string,
   createAnalyticsEvent: CreateAnalyticsEventFn,
+  experimentRequestDurationMs?: number,
 ) {
   fireGasEvent(
     createAnalyticsEvent,
@@ -55,6 +56,7 @@ export function firePreQueryShownEvent(
     'ui',
     {
       preQueryRequestDurationMs: elapsedMs,
+      experimentRequestDurationMs,
       searchSessionId: searchSessionId,
       ...eventAttributes,
     },

@@ -61,7 +61,7 @@ describe('ResizeState', () => {
 
     it('should keep minimum widths', () => {
       const state = new ResizeState(
-        [new ColumnState(20, 0, 15), new ColumnState(5, 0, 5)],
+        [new ColumnState(20, 15), new ColumnState(5, 5)],
         0,
       );
       const res = moveSpaceFrom(state, 0, 1, 10);

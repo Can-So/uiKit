@@ -15,10 +15,13 @@ import {
   td,
   ol,
   li,
+  insertText,
 } from '@atlaskit/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import panelPlugin from '../../../../plugins/panel';
 import listPlugin from '../../../../plugins/lists';
 import tablesPlugin from '../../../../plugins/table';
+import quickInsertPlugin from '../../../../plugins/quick-insert';
 import {
   removePanel,
   changePanelType,
@@ -28,12 +31,23 @@ describe('@atlaskit/editor-core ui/PanelPlugin', () => {
   const createEditor = createEditorFactory<PanelState>();
 
   const event = createEvent('event');
-  const editor = (doc: any) =>
-    createEditor({
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+
+  const editor = (doc: any) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
-      editorPlugins: [panelPlugin, listPlugin, tablesPlugin()],
+      editorPlugins: [
+        panelPlugin,
+        listPlugin,
+        tablesPlugin(),
+        quickInsertPlugin,
+      ],
+      editorProps: { allowAnalyticsGASV3: true },
       pluginKey: panelPluginKey,
+      createAnalyticsEvent,
     });
+  };
 
   describe('API', () => {
     it('should call subscribers when panel is clicked', () => {
@@ -52,9 +66,8 @@ describe('@atlaskit/editor-core ui/PanelPlugin', () => {
       expect(pluginState.element).not.toBe(undefined);
       expect(pluginState.activePanelType).not.toBe(undefined);
       changePanelType('note')(editorView.state, editorView.dispatch);
-      window.setTimeout(() => {
-        expect(pluginState.activePanelType).toEqual('note');
-      }, 0);
+      const newPluginState = panelPluginKey.getState(editorView!.state);
+      expect(newPluginState.activePanelType).toEqual('note');
     });
 
     it('should be able to change panel type using function changeType for panel with multiple blocks', () => {
@@ -144,10 +157,8 @@ describe('@atlaskit/editor-core ui/PanelPlugin', () => {
       );
       expect(pluginState.activePanelType).toEqual('info');
       changePanelType('note')(editorView.state, editorView.dispatch);
-      // Wait till the dispatch cycle finishes and the state updates
-      window.setTimeout(() => {
-        expect(pluginState.activePanelType).toEqual('note');
-      }, 0);
+      const newPluginState = panelPluginKey.getState(editorView!.state);
+      expect(newPluginState.activePanelType).toEqual('note');
     });
   });
 
@@ -191,6 +202,27 @@ describe('@atlaskit/editor-core ui/PanelPlugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(panel()(p('text')), p()),
         );
+      });
+    });
+  });
+
+  describe('quick insert', () => {
+    ['info', 'success', 'error', 'warning', 'note'].forEach(panelType => {
+      it(`should fire analytics event when ${panelType} panel inserted`, () => {
+        const { editorView, sel } = editor(doc(p('{<>}')));
+        insertText(editorView, `/${panelType}`, sel);
+        sendKeyToPm(editorView, 'Enter');
+
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'inserted',
+          actionSubject: 'document',
+          actionSubjectId: 'panel',
+          attributes: {
+            inputMethod: 'quickInsert',
+            panelType,
+          },
+          eventType: 'track',
+        });
       });
     });
   });

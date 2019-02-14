@@ -1,16 +1,15 @@
+import Spinner from '@atlaskit/spinner';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { MouseEvent, PureComponent } from 'react';
-import Spinner from '@atlaskit/spinner';
-
-import * as styles from './styles';
 import { emojiTypeAheadMaxHeight } from '../../shared-styles';
-import EmojiItem from './EmojiTypeAheadItem';
-import Scrollable from '../common/Scrollable';
+import { toEmojiId } from '../../type-helpers';
 import { EmojiDescription, EmojiId, OnEmojiEvent } from '../../types';
 import debug from '../../util/logger';
-import { mouseLocation, actualMouseMove, Position } from '../../util/mouse';
-import { toEmojiId } from '../../type-helpers';
+import { actualMouseMove, mouseLocation, Position } from '../../util/mouse';
+import Scrollable from '../common/Scrollable';
+import EmojiItem from './EmojiTypeAheadItem';
+import * as styles from './styles';
 
 function wrapIndex(emojis: EmojiDescription[], index: number): number {
   const len = emojis.length;
@@ -53,14 +52,14 @@ interface ItemReferences {
 
 export default class EmojiTypeAheadList extends PureComponent<Props, State> {
   private lastMousePosition: Position;
-  private scrollable: Scrollable;
+  private scrollable: Scrollable | null;
   private items: ItemReferences;
 
   static defaultProps = {
     onEmojiSelected: () => {},
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -261,7 +260,7 @@ export default class EmojiTypeAheadList extends PureComponent<Props, State> {
     );
   }
 
-  private handleScrollableRef = ref => {
+  private handleScrollableRef = (ref: Scrollable | null) => {
     this.scrollable = ref;
   };
 }
