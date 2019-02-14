@@ -283,40 +283,42 @@ class Tooltip extends Component<Props, State> {
           </NodeResolver>
         </TargetContainer>
         {renderTooltip && this.targetRef && this.fakeMouseElement ? (
-          <Popper
-            referenceElement={
-              // https://github.com/FezVrasta/react-popper#usage-without-a-reference-htmlelement
-              // We are using a popper technique to pass in a faked element when we use mouse.
-              // This is fine.
-              // $FlowFixMe
-              position === 'mouse' ? this.fakeMouseElement : this.targetRef
-            }
-            placement={position === 'mouse' ? mousePosition : position}
-          >
-            {({ ref, style, placement }) => (
-              <Animation
-                immediatelyShow={immediatelyShow}
-                immediatelyHide={immediatelyHide}
-                onExited={() => this.setState({ renderTooltip: false })}
-                in={isVisible}
-              >
-                {getAnimationStyles => (
-                  <Portal zIndex={layers.tooltip()}>
-                    <TooltipContainer
-                      innerRef={ref}
-                      style={{
-                        ...getAnimationStyles(placement),
-                        ...style,
-                      }}
-                      truncate={truncate}
-                    >
-                      {content}
-                    </TooltipContainer>
-                  </Portal>
-                )}
-              </Animation>
-            )}
-          </Popper>
+          <Portal zIndex={layers.tooltip()}>
+            <Popper
+              referenceElement={
+                // https://github.com/FezVrasta/react-popper#usage-without-a-reference-htmlelement
+                // We are using a popper technique to pass in a faked element when we use mouse.
+                // This is fine.
+                // $FlowFixMe
+                position === 'mouse' ? this.fakeMouseElement : this.targetRef
+              }
+              placement={position === 'mouse' ? mousePosition : position}
+            >
+              {({ ref, style, placement }) => (
+                <Animation
+                  immediatelyShow={immediatelyShow}
+                  immediatelyHide={immediatelyHide}
+                  onExited={() => this.setState({ renderTooltip: false })}
+                  in={isVisible}
+                >
+                  {getAnimationStyles => {
+                    return (
+                      <TooltipContainer
+                        innerRef={ref}
+                        style={{
+                          ...getAnimationStyles(placement),
+                          ...style,
+                        }}
+                        truncate={truncate}
+                      >
+                        {content}
+                      </TooltipContainer>
+                    );
+                  }}
+                </Animation>
+              )}
+            </Popper>
+          </Portal>
         ) : null}
       </Fragment>
     );
