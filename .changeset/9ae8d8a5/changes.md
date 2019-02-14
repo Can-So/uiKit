@@ -1,0 +1,1 @@
+- ED-6061: support image annotations in editor
