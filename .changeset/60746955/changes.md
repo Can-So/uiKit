@@ -1,0 +1,1 @@
+- ED-6243: Dont use breakpoint width calculations for tables in renderer
