@@ -1,13 +1,7 @@
 import * as specs from './specs';
+import { Entity } from '../types';
 
 export type Content = Array<string | [string, object] | Array<string>>;
-
-export interface Entity {
-  type: string;
-  content?: Array<Entity>;
-  marks?: Array<Entity>;
-  [key: string]: any;
-}
 
 type AttributesSpec =
   | { type: 'number'; optional?: boolean; minimum: number; maximum: number }
@@ -465,13 +459,12 @@ export function validator(
               const attrOption = attrOptions[i];
               invalidAttrs = Object.keys(attrOption.props).reduce<
                 Array<string>
-              >(
-                (attrs, k) =>
-                  validateAttrs(attrOption.props[k], entity.attrs[k])
-                    ? attrs
-                    : attrs.concat(k),
-                [],
-              );
+              >((attrs, k) => {
+                const entityAttrs = entity.attrs ? entity.attrs[k] : null;
+                return validateAttrs(attrOption.props[k], entityAttrs)
+                  ? attrs
+                  : attrs.concat(k);
+              }, []);
               if (!invalidAttrs.length) {
                 validatorAttrs = attrOption;
                 break;
@@ -525,7 +518,7 @@ export function validator(
                 attrs
                   .filter(a => !!validatorAttrs.props![a])
                   .reduce(
-                    (acc, p) => copy(entity.attrs, acc, p),
+                    (acc, p) => copy(entity.attrs || {}, acc, p),
                     newEntity.attrs,
                   );
               } else {

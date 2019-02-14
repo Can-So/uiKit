@@ -43,7 +43,7 @@ export default md`
                         kind: 'generic',
                         value: {
                           kind: 'id',
-                          name: 'ADFNode',
+                          name: 'Entity',
                         },
                       },
                       parameters: [
@@ -54,7 +54,7 @@ export default md`
                             kind: 'generic',
                             value: {
                               kind: 'id',
-                              name: 'ADFNode',
+                              name: 'Entity',
                             },
                           },
                         },
@@ -77,7 +77,7 @@ export default md`
                                     kind: 'generic',
                                     value: {
                                       kind: 'id',
-                                      name: 'ADFNode | false | undefined',
+                                      name: 'Entity | false | undefined',
                                     },
                                   },
                                   parameters: [
@@ -88,7 +88,7 @@ export default md`
                                         kind: 'generic',
                                         value: {
                                           kind: 'id',
-                                          name: 'ADFNode',
+                                          name: 'Entity',
                                         },
                                       },
                                     },
@@ -193,7 +193,7 @@ export default md`
                             kind: 'generic',
                             value: {
                               kind: 'id',
-                              name: 'ADFNode',
+                              name: 'Entity',
                             },
                           },
                         },
@@ -217,7 +217,7 @@ export default md`
                                   kind: 'generic',
                                   value: {
                                     kind: 'id',
-                                    name: 'ADFNode',
+                                    name: 'Entity',
                                   },
                                 },
                               },
@@ -284,7 +284,7 @@ export default md`
                         kind: 'generic',
                         value: {
                           kind: 'id',
-                          name: 'Array<ADFNode>',
+                          name: 'Array<Entity>',
                         },
                       },
                       parameters: [
@@ -295,7 +295,7 @@ export default md`
                             kind: 'generic',
                             value: {
                               kind: 'id',
-                              name: 'ADFNode',
+                              name: 'Entity',
                             },
                           },
                         },
@@ -319,7 +319,7 @@ export default md`
                                   kind: 'generic',
                                   value: {
                                     kind: 'id',
-                                    name: 'ADFNode',
+                                    name: 'Entity',
                                   },
                                 },
                               },
@@ -401,7 +401,7 @@ export default md`
                             kind: 'generic',
                             value: {
                               kind: 'id',
-                              name: 'ADFNode',
+                              name: 'Entity',
                             },
                           },
                         },
@@ -436,7 +436,7 @@ export default md`
                                   kind: 'generic',
                                   value: {
                                     kind: 'id',
-                                    name: 'ADFNode',
+                                    name: 'Entity',
                                   },
                                 },
                               },
