@@ -30,7 +30,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-var PriotityBlockerIcon = function PriotityBlockerIcon(props) {
+var PriorityBlockerIcon = function PriorityBlockerIcon(props) {
   return _react.default.createElement(
     _Icon.default,
     _extends(
@@ -43,6 +43,6 @@ var PriotityBlockerIcon = function PriotityBlockerIcon(props) {
   );
 };
 
-PriotityBlockerIcon.displayName = 'PriotityBlockerIcon';
-var _default = PriotityBlockerIcon;
+PriorityBlockerIcon.displayName = 'PriorityBlockerIcon';
+var _default = PriorityBlockerIcon;
 exports.default = _default;
