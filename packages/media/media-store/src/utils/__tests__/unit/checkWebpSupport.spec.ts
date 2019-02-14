@@ -21,7 +21,7 @@ describe('checkWebpSupport util', () => {
 
   describe('without caching', () => {
     it('should return true if height is 2', () => {
-      const { checkWebpSupport } = require('../..');
+      const { checkWebpSupport } = require('../../checkWebpSupport');
       const result = checkWebpSupport();
       expect(imageObjects).toHaveLength(1);
       imageObjects[0].height = 2;
@@ -30,7 +30,7 @@ describe('checkWebpSupport util', () => {
     });
 
     it('should return false if height is not 2', () => {
-      const { checkWebpSupport } = require('../..');
+      const { checkWebpSupport } = require('../../checkWebpSupport');
       const result = checkWebpSupport();
       expect(imageObjects).toHaveLength(1);
       imageObjects[0].height = 1;
@@ -41,13 +41,13 @@ describe('checkWebpSupport util', () => {
 
   describe('with caching', () => {
     it('should use cache when called second time', () => {
-      let { checkWebpSupport } = require('../..');
+      let { checkWebpSupport } = require('../../checkWebpSupport');
       checkWebpSupport();
       expect(imageObjects).toHaveLength(1);
       imageObjects[0].height = 2;
       imageObjects[0].onload();
 
-      checkWebpSupport = require('../..').checkWebpSupport;
+      checkWebpSupport = require('../../checkWebpSupport').checkWebpSupport;
       const result = checkWebpSupport();
       expect(imageObjects).toHaveLength(1);
       return expect(result).resolves.toBe(true);
@@ -55,7 +55,7 @@ describe('checkWebpSupport util', () => {
   });
 
   it('should return even if onerror is called', () => {
-    const { checkWebpSupport } = require('../..');
+    const { checkWebpSupport } = require('../../checkWebpSupport');
     const result = checkWebpSupport();
     expect(imageObjects).toHaveLength(1);
     imageObjects[0].height = 1;
