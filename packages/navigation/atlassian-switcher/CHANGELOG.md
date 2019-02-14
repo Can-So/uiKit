@@ -1,5 +1,10 @@
 # @atlaskit/atlassian-switcher
 
+## 0.0.4
+- [patch] [95d9a94bd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95d9a94bd0):
+
+  - Adding root index for atlassian-switcher
+
 ## 0.0.3
 - [patch] [b56ca0131d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b56ca0131d):
 

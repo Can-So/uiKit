@@ -1,1 +1,0 @@
-- Adding root index for atlassian-switcher
