@@ -1,1 +1,0 @@
-- ED-6233: Use minCellWith over wrapWidth to determine free space in a column

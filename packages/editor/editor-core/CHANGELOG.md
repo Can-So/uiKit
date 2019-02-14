@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.10.1
+- [patch] [4cc0b47f6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4cc0b47f6a):
+
+  - ED-6233: Use minCellWith over wrapWidth to determine free space in a column
+
 ## 98.10.0
 - [minor] [e6daf79012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6daf79012):
 
