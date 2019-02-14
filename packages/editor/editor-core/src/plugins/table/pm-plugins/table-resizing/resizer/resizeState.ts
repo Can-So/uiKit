@@ -248,10 +248,10 @@ export default class ResizeState {
     let newState = res.state;
 
     if (remaining < 0) {
-      const res = stackSpace(newState, colIdx, remaining);
+      const stackResult = stackSpace(newState, colIdx, remaining);
 
-      remaining += res.remaining;
-      newState = res.state;
+      remaining += stackResult.remaining;
+      newState = stackResult.state;
     }
 
     canRedistribute =

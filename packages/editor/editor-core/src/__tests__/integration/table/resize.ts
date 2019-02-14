@@ -6,7 +6,10 @@ import {
   fullpage,
   resizeColumn,
 } from '../_helpers';
-import { tableWithRowSpan } from './__fixtures__/resize-documents';
+import {
+  tableWithRowSpan,
+  twoColFullWidthTableWithContent,
+} from './__fixtures__/resize-documents';
 
 import {
   goToEditorTestingExample,
@@ -28,6 +31,27 @@ BrowserTestCase(
     });
 
     await resizeColumn(page, { cellHandlePos: 2, resizeWidth: 50 });
+
+    const doc = await page.$eval(editable, getDocFromElement);
+    expect(doc).toMatchDocSnapshot();
+  },
+);
+
+BrowserTestCase(
+  'Can resize normally on a full width table with content',
+  { skip: ['ie', 'edge', 'firefox', 'safari'] },
+  async client => {
+    const page = await goToEditorTestingExample(client);
+
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      defaultValue: JSON.stringify(twoColFullWidthTableWithContent),
+      allowTables: {
+        advanced: true,
+      },
+    });
+
+    await resizeColumn(page, { cellHandlePos: 2, resizeWidth: -100 });
 
     const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
