@@ -1,0 +1,1 @@
+- ED-6256: render media items with occurenceKey; ignore link cards
