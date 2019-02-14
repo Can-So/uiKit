@@ -24,6 +24,45 @@ import createPlugin, {
   SelectionChange,
 } from '../../../../plugins/status/plugin';
 
+export const setSelectionAndPickerAt = (pos: number) => (
+  editorView: EditorView,
+): EditorState => {
+  setStatusPickerAt(pos)(editorView.state, editorView.dispatch);
+  editorView.dispatch(setNodeSelectionNearPos(editorView.state.tr, pos));
+  return editorView.state;
+};
+
+export const validateSelection = (pos: number, text: string, color: string) => (
+  state: EditorState,
+) => {
+  let statusState = pluginKey.getState(state);
+
+  expect(state.tr.selection).toBeInstanceOf(NodeSelection);
+  expect(state.tr.selection.to).toBe(pos + 1);
+  expect(statusState).toMatchObject({
+    isNew: false,
+    showStatusPickerAt: pos, // status node start position
+    selectedStatus: expect.objectContaining({
+      text,
+      color,
+      localId: expect.stringMatching(StatusLocalIdRegex),
+    }),
+  });
+};
+
+export const getStatusesInDocument = (
+  state: EditorState,
+  expectedLength: number,
+): NodeWithPos[] => {
+  const nodesFound = findChildrenByType(
+    state.tr.doc,
+    state.schema.nodes.status,
+    true,
+  );
+  expect(nodesFound.length).toBe(expectedLength);
+  return nodesFound;
+};
+
 describe('status plugin: plugin', () => {
   const createEditor = createEditorFactory();
 
@@ -137,45 +176,6 @@ describe('status plugin: plugin', () => {
   });
 
   describe('Edge cases', () => {
-    const setSelectionAndPickerAt = (pos: number) => (
-      editorView: EditorView,
-    ): EditorState => {
-      setStatusPickerAt(pos)(editorView.state, editorView.dispatch);
-      editorView.dispatch(setNodeSelectionNearPos(editorView.state.tr, pos));
-      return editorView.state;
-    };
-
-    const getStatusesInDocument = (
-      state: EditorState,
-      expectedLength: number,
-    ): NodeWithPos[] => {
-      const nodesFound = findChildrenByType(
-        state.tr.doc,
-        state.schema.nodes.status,
-        true,
-      );
-      expect(nodesFound.length).toBe(expectedLength);
-      return nodesFound;
-    };
-
-    const validateSelection = (pos: number, text: string, color: string) => (
-      state: EditorState,
-    ) => {
-      let statusState = pluginKey.getState(state);
-
-      expect(state.tr.selection).toBeInstanceOf(NodeSelection);
-      expect(state.tr.selection.to).toBe(pos + 1);
-      expect(statusState).toMatchObject({
-        isNew: false,
-        showStatusPickerAt: pos, // status node start position
-        selectedStatus: expect.objectContaining({
-          text,
-          color,
-          localId: expect.stringMatching(StatusLocalIdRegex),
-        }),
-      });
-    };
-
     it('StatusPicker should be dismissed if cursor is outside the Status node selection', () => {
       const { editorView } = editorFactory(doc(p('Status: {<>}')));
       // insert new Status at {<>}
