@@ -1,0 +1,1 @@
+- Update the export name for blocker icon to priority-blocker from priotity-blocker
