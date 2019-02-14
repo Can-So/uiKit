@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.10.4
+- [patch] [cf7fd7d3be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf7fd7d3be):
+
+  - Render external images in editor
+
 ## 98.10.3
 - Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
   - @atlaskit/logo@9.2.7

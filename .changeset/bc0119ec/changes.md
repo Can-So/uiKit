@@ -1,1 +1,0 @@
-- Render external images in editor
