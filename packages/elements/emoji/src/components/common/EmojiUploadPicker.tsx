@@ -99,15 +99,20 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
             >
               <FormattedMessage {...messages.emojiPlaceholder}>
                 {message => (
-                  <input
-                    placeholder={message as string}
-                    maxLength={maxNameLength}
-                    onChange={onNameChange}
-                    onKeyDown={this.onKeyDown}
-                    value={name}
-                    ref="name"
-                    autoFocus={true}
-                  />
+                  <FormattedMessage {...messages.emojiNameAriaLabel}>
+                    {ariaLabel => (
+                      <input
+                        placeholder={message as string}
+                        aria-label={ariaLabel as string}
+                        maxLength={maxNameLength}
+                        onChange={onNameChange}
+                        onKeyDown={this.onKeyDown}
+                        value={name}
+                        ref="name"
+                        autoFocus={true}
+                      />
+                    )}
+                  </FormattedMessage>
                 )}
               </FormattedMessage>
             </AkFieldBase>
@@ -115,12 +120,17 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
           <span className={styles.uploadChooseFileBrowse}>
             <FormattedMessage {...messages.emojiChooseFileTitle}>
               {message => (
-                <FileChooser
-                  label={message as string}
-                  onChange={onChooseFile}
-                  accept="image/png,image/jpeg,image/gif"
-                  isDisabled={disableChooser}
-                />
+                <FormattedMessage {...messages.emojiChooseFileAriaLabel}>
+                  {ariaLabel => (
+                    <FileChooser
+                      label={message as string}
+                      onChange={onChooseFile}
+                      accept="image/png,image/jpeg,image/gif"
+                      ariaLabel={ariaLabel as string}
+                      isDisabled={disableChooser}
+                    />
+                  )}
+                </FormattedMessage>
               )}
             </FormattedMessage>
           </span>
