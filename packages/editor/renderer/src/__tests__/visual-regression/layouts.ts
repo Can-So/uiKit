@@ -86,10 +86,8 @@ describe('Snapshot Test: Breakout Layouts', () => {
       appearance: 'full-page',
     });
     await page.waitFor(100);
+
     // @ts-ignore
-    expect(image).toMatchProdImageSnapshot({
-      failureThreshold: `0.02`,
-      failureThresholdType: 'percent',
-    });
+    await snapshot(page, '0.02');
   });
 });
