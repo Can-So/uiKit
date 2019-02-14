@@ -1,1 +1,0 @@
-- ED-6135 Fire analytics v3 events when insert panel, code block or horizontal rule

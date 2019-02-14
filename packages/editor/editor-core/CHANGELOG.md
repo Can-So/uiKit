@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.10.0
+- [minor] [e6daf79012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6daf79012):
+
+  - ED-6135 Fire analytics v3 events when insert panel, code block or horizontal rule
+
 ## 98.9.5
 - [patch] [026d4424c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/026d4424c2):
 
