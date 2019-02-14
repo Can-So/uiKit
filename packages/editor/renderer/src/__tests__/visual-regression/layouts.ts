@@ -86,6 +86,8 @@ describe('Snapshot Test: Breakout Layouts', () => {
       appearance: 'full-page',
     });
     await page.waitFor(100);
-    await snapshot(page);
+
+    // @ts-ignore
+    await snapshot(page, '0.02');
   });
 });
