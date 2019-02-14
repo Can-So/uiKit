@@ -1,0 +1,1 @@
+- Editor and Renderer props should be optional

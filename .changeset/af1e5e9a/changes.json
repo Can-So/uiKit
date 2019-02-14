@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@atlaskit/embedded-document", "type": "patch" }],
+  "dependents": []
+}
