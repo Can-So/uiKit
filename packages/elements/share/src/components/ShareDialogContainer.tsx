@@ -16,7 +16,7 @@ import {
   ShareResponse,
 } from '../types';
 import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
-import { optionData2Users } from './utils';
+import { optionDataToUsers } from './utils';
 
 export type Props = {
   client?: Client;
@@ -158,7 +158,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     };
 
     return this.client
-      .share(content, optionData2Users(users), metaData, comment)
+      .share(content, optionDataToUsers(users), metaData, comment)
       .then((response: ShareResponse) => {
         const newShareCount = this.state.shareActionCount + 1;
         // TODO: send analytic event

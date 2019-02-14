@@ -57,7 +57,7 @@ export const showInviteWarning = (
   return false;
 };
 
-export const optionData2Users = (optionDataArray: OptionData[]): User[] =>
+export const optionDataToUsers = (optionDataArray: OptionData[]): User[] =>
   optionDataArray.map((optionData: OptionData) => {
     switch (optionData.type) {
       case 'email':
