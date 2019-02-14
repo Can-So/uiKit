@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.10.2
+- [patch] [45e3fffa9e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/45e3fffa9e):
+
+  - suppress enter and tab keys events in the status node to prevent bugs
+
 ## 98.10.1
 - [patch] [4cc0b47f6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4cc0b47f6a):
 
