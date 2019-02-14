@@ -115,11 +115,11 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
 
     return (
       <PopupSelect
-        target={
-          <ColorCardWrapper>
+        target={({ ref }) => (
+          <ColorCardWrapper innerRef={ref}>
             <Trigger {...value} label={fullLabel} expanded={isOpen} />
           </ColorCardWrapper>
-        }
+        )}
         popperProps={popperProps}
         maxMenuWidth="auto"
         minMenuWidth="auto"
