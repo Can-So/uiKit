@@ -63,6 +63,15 @@ describe('Renderer bridge', () => {
     expect(spy.args[0][0]).to.equal(href);
   });
 
+  it('Android bridge is called correctly on Renderer setContent completed', () => {
+    let spy = sinon.spy();
+    mockAndroidBridgeHandler('renderBridge', 'onContentRendered')(spy);
+
+    rendererBridge.setContent(JSON.stringify(originalContent));
+
+    expect(spy.calledOnce).to.equal(true);
+  });
+
   it('iOS bridge is called correctly on link click', () => {
     let href = 'https://product-fabric.atlassian.net/browse/FAB-1522';
     let spy = sinon.spy();

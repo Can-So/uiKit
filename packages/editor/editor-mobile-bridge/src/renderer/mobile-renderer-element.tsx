@@ -88,6 +88,17 @@ export default class MobileRenderer extends React.Component<
 
       return (
         <ReactRenderer
+          onComplete={() => {
+            if (
+              window &&
+              window.navigator.userAgent.match(/Android/) &&
+              window.requestAnimationFrame
+            ) {
+              window.requestAnimationFrame(() => {
+                toNativeBridge.call('renderBridge', 'onContentRendered');
+              });
+            }
+          }}
           dataProviders={this.providerFactory}
           appearance="mobile"
           document={this.state.document}
