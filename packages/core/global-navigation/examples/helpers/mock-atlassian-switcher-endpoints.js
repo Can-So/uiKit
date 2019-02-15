@@ -100,7 +100,7 @@ export const mockEndpoints = () => {
   );
 };
 
-export const mockJestEndpoints = cloudId => {
+export const mockJestEndpoints = (cloudId: string) => {
   const {
     RECENT_CONTAINERS_DATA,
     CUSTOM_LINKS_DATA,
