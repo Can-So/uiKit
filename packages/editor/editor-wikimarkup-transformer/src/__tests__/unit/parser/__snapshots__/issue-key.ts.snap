@@ -49,11 +49,16 @@ Object {
           "type": "text",
         },
         Object {
-          "attrs": Object {
-            "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
-          },
-          "type": "inlineCard",
+          "marks": Array [
+            Object {
+              "attrs": Object {
+                "color": "#ff0000",
+              },
+              "type": "textColor",
+            },
+          ],
+          "text": "ABC-10",
+          "type": "text",
         },
         Object {
           "text": " is not a smart card",
