@@ -22,6 +22,7 @@ import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
 import ItemComponent from '../../../ItemComponent';
 import { mockJestEndpoints } from '../../../../../examples/helpers/mock-atlassian-switcher-endpoints';
+import { hasUndefined } from 'fast-json-patch/lib/helpers';
 
 const DrawerContents = () => <div>drawer</div>;
 const EmojiAtlassianIcon = () => <button>EmojiAtlassianIcon</button>;
@@ -880,42 +881,72 @@ describe('GlobalNavigation', () => {
 
     const AppSwitcher = () => <div />;
     AppSwitcher.displayName = 'AppSwitcher';
-    const defaultWrapper = mount(
-      <GlobalNavigation
-        product={'jira'}
-        productIcon={EmojiAtlassianIcon}
-        productHref="#"
-        cloudId={cloudId}
-        onProductClick={noop}
-        onCreateClick={noop}
-        onSearchClick={noop}
-        onStarredClick={noop}
-        onNotificationClick={noop}
-        onSettingsClick={noop}
-        appSwitcherComponent={AppSwitcher}
-        appSwitcherTooltip="appSwitcher tooltip"
-        enableAtlassianSwitcher
-        loginHref="#login"
-        helpItems={() => <div>items</div>}
-        triggerXFlow={triggerXFlowStub}
-      />,
-    );
+    const getDefaultWrapper = (propsToOverride: any = {}) =>
+      mount(
+        <GlobalNavigation
+          product={'jira'}
+          productIcon={EmojiAtlassianIcon}
+          productHref="#"
+          cloudId={cloudId}
+          onProductClick={noop}
+          onCreateClick={noop}
+          onSearchClick={noop}
+          onStarredClick={noop}
+          onNotificationClick={noop}
+          onSettingsClick={noop}
+          appSwitcherComponent={AppSwitcher}
+          appSwitcherTooltip="appSwitcher tooltip"
+          enableAtlassianSwitcher
+          loginHref="#login"
+          helpItems={() => <div>items</div>}
+          triggerXFlow={triggerXFlowStub}
+          {...propsToOverride}
+        />,
+      );
+    let globalNavWrapper = getDefaultWrapper();
+
+    it('should not render Atlassian Switcher if product is missing', () => {
+      globalNavWrapper = getDefaultWrapper({
+        product: undefined,
+      });
+      globalNavWrapper.find(AppSwitcherIcon).simulate('click');
+      expect(globalNavWrapper.children().find(AtlassianSwitcher)).toHaveLength(
+        0,
+      );
+      expect(globalNavWrapper.children().find(AppSwitcher)).toHaveLength(1);
+    });
+
+    it('should not render Atlassian Switcher if cloudId is missing', () => {
+      globalNavWrapper = getDefaultWrapper({
+        cloudId: undefined,
+      });
+      globalNavWrapper.find(AppSwitcherIcon).simulate('click');
+      expect(globalNavWrapper.children().find(AtlassianSwitcher)).toHaveLength(
+        0,
+      );
+      expect(globalNavWrapper.children().find(AppSwitcher)).toHaveLength(1);
+    });
 
     it('should not render AppSwitcher when enableAtlassianSwitcher is present', () => {
-      expect(defaultWrapper.children().find(AppSwitcher)).toHaveLength(0);
+      globalNavWrapper = getDefaultWrapper();
+      globalNavWrapper.find(AppSwitcherIcon).simulate('click');
+      expect(globalNavWrapper.children().find(AtlassianSwitcher)).toHaveLength(
+        1,
+      );
+      expect(globalNavWrapper.children().find(AppSwitcher)).toHaveLength(0);
     });
 
     it('should open a Drawer with the product specific switcher', () => {
-      const AtlassianSwitcherIcon = defaultWrapper.find(AppSwitcherIcon);
+      const AtlassianSwitcherIcon = globalNavWrapper.find(AppSwitcherIcon);
       AtlassianSwitcherIcon.simulate('click');
-      expect(defaultWrapper.find('DrawerPrimitive')).toHaveLength(1);
-      expect(defaultWrapper.find(AtlassianSwitcher)).toHaveLength(1);
-      expect(defaultWrapper.find(JiraSwitcher)).toHaveLength(1);
-      expect(defaultWrapper.find(ConfluenceSwitcher)).toHaveLength(0);
+      expect(globalNavWrapper.find(JiraSwitcher)).toHaveLength(1);
+      expect(globalNavWrapper.find(ConfluenceSwitcher)).toHaveLength(0);
     });
 
     it('should pass the triggerXFlow callback', () => {
-      defaultWrapper.find('Switcher').prop('triggerXFlow')();
+      globalNavWrapper = getDefaultWrapper();
+      globalNavWrapper.find(AppSwitcherIcon).simulate('click');
+      globalNavWrapper.find(AtlassianSwitcher).prop('triggerXFlow')();
       expect(triggerXFlowStub).toHaveBeenCalled();
     });
   });

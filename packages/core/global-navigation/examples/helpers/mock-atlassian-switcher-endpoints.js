@@ -131,17 +131,8 @@ export const mockJestEndpoints = (cloudId: string) => {
         break;
     }
 
-    return new Promise(accept =>
-      setTimeout(
-        () =>
-          accept({
-            json: () =>
-              new Promise(innerAccept =>
-                setTimeout(() => innerAccept(response), 100 * Math.random()),
-              ),
-          }),
-        100 * Math.random(),
-      ),
-    );
+    return Promise.resolve({
+      json: () => Promise.resolve(response),
+    });
   };
 };

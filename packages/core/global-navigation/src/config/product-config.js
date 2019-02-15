@@ -169,6 +169,9 @@ export default function generateProductConfig(
   isNotificationInbuilt: boolean,
 ): ProductConfigShape {
   const {
+    product,
+    cloudId,
+
     onProductClick,
     productTooltip,
     productIcon,
@@ -250,7 +253,7 @@ export default function generateProductConfig(
       profileIconUrl,
     ),
     appSwitcher:
-      appSwitcherComponent && !enableAtlassianSwitcher
+      appSwitcherComponent && !(enableAtlassianSwitcher && cloudId && product)
         ? {
             itemComponent: appSwitcherComponent,
             label: appSwitcherTooltip,

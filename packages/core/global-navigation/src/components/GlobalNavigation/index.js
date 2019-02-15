@@ -68,9 +68,16 @@ export default class GlobalNavigation extends Component<
     },
   };
   isNotificationInbuilt = false;
+  shouldRenderAtlassianSwitcher = false;
 
   static defaultProps = {
+    enableAtlassianSwitcher: false,
     atlassianSwitcherDrawerWidth: 'narrow',
+    createDrawerWidth: 'wide',
+    searchDrawerWidth: 'wide',
+    notificationDrawerWidth: 'wide',
+    starredDrawerWidth: 'wide',
+    settingsDrawerWidth: 'wide',
   };
 
   constructor(props: GlobalNavigationProps) {
@@ -108,14 +115,18 @@ export default class GlobalNavigation extends Component<
 
     const {
       cloudId,
+      enableAtlassianSwitcher,
       fabricNotificationLogUrl,
       notificationDrawerContents,
+      product,
     } = this.props;
     this.isNotificationInbuilt = !!(
       !notificationDrawerContents &&
       cloudId &&
       fabricNotificationLogUrl
     );
+    this.shouldRenderAtlassianSwitcher =
+      enableAtlassianSwitcher && cloudId && product;
   }
 
   componentDidUpdate(prevProps: GlobalNavigationProps) {
@@ -143,14 +154,18 @@ export default class GlobalNavigation extends Component<
 
     const {
       cloudId,
+      enableAtlassianSwitcher,
       fabricNotificationLogUrl,
       notificationDrawerContents,
+      product,
     } = this.props;
     this.isNotificationInbuilt = !!(
       !notificationDrawerContents &&
       cloudId &&
       fabricNotificationLogUrl
     );
+    this.shouldRenderAtlassianSwitcher =
+      enableAtlassianSwitcher && cloudId && product;
   }
 
   onCountUpdating = (
@@ -349,13 +364,13 @@ export default class GlobalNavigation extends Component<
     };
   };
 
-  triggerXFlow = (...props: any) => {
+  triggerXFlow = (...triggerXFlowProps: any) => {
     const { triggerXFlow } = this.props;
     this.setState({
       isAtlassianSwitcherDrawerOpen: false,
     });
     if (triggerXFlow) {
-      triggerXFlow(...props);
+      triggerXFlow(...triggerXFlowProps);
     }
   };
 
@@ -373,21 +388,21 @@ export default class GlobalNavigation extends Component<
   getDrawerContents = (drawerName: DrawerName) => {
     switch (drawerName) {
       case 'atlassianSwitcher':
-        return this.renderAtlassianSwitcherDrawerContents;
+        return this.shouldRenderAtlassianSwitcher
+          ? this.renderAtlassianSwitcherDrawerContents
+          : null;
       case 'notification':
-        if (this.isNotificationInbuilt) {
-          return this.renderNotificationDrawerContents;
-        }
-        break;
+        return this.isNotificationInbuilt
+          ? this.renderNotificationDrawerContents
+          : this.props.notificationDrawerContents;
       default:
+        return this.props[`${drawerName}DrawerContents`];
     }
-    return this.props[`${drawerName}DrawerContents`];
   };
 
   render() {
     // TODO: Look into memoizing this to avoid memory bloat
     const { primaryItems, secondaryItems } = this.constructNavItems();
-    const { enableAtlassianSwitcher } = this.props;
 
     return (
       <NavigationAnalyticsContext
@@ -404,12 +419,6 @@ export default class GlobalNavigation extends Component<
             secondaryItems={secondaryItems}
           />
           {Object.keys(this.drawers).map(drawerName => {
-            if (
-              drawerName === 'atlassianSwitcher' &&
-              !enableAtlassianSwitcher
-            ) {
-              return null;
-            }
             const capitalisedDrawerName = this.getCapitalisedDrawerName(
               drawerName,
             );
@@ -423,7 +432,6 @@ export default class GlobalNavigation extends Component<
               return null;
             }
 
-            const width = this.props[`${drawerName}DrawerWidth`] || 'wide';
             const onCloseComplete = this.props[
               `on${capitalisedDrawerName}CloseComplete`
             ];
@@ -435,7 +443,7 @@ export default class GlobalNavigation extends Component<
                 onClose={this.closeDrawer(drawerName)}
                 onCloseComplete={onCloseComplete}
                 shouldUnmountOnExit={shouldUnmountOnExit}
-                width={width}
+                width={this.props[`${drawerName}DrawerWidth`]}
               >
                 <ScreenTracker
                   name={analyticsIdMap[drawerName]}
