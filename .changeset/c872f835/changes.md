@@ -1,0 +1,1 @@
+- ED-6264 Fix examples page not been loaded when code is compiled
