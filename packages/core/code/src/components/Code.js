@@ -1,13 +1,15 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-
-import { withTheme, ThemeProvider } from 'styled-components';
 import {
   normalizeLanguage,
   type SupportedLanguages,
-} from './supportedLanguages';
-import { type Theme, type ThemeProps, applyTheme } from './themes/themeBuilder';
+} from '../supportedLanguages';
+import {
+  type Theme,
+  type ThemeProps,
+  applyTheme,
+} from '../themes/themeBuilder';
 
 type CodeProps = {
   /** The style object to apply to code */
@@ -28,7 +30,7 @@ type CodeProps = {
   theme?: Theme | ThemeProps,
 };
 
-export class Code extends PureComponent<CodeProps, {}> {
+export default class Code extends PureComponent<CodeProps, {}> {
   static defaultProps = {
     theme: {},
     showLineNumbers: false,
@@ -52,14 +54,4 @@ export class Code extends PureComponent<CodeProps, {}> {
 
     return <SyntaxHighlighter {...props}>{this.props.text}</SyntaxHighlighter>;
   }
-}
-
-const CodeWithTheme = withTheme(Code);
-const emptyTheme = {};
-export default function(props: {}) {
-  return (
-    <ThemeProvider theme={emptyTheme}>
-      <CodeWithTheme {...props} />
-    </ThemeProvider>
-  );
 }
