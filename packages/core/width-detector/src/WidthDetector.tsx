@@ -22,7 +22,7 @@ const sizerStyle: React.CSSProperties = {
 };
 
 type Props = {
-  children: (width: Number) => JSX.Element;
+  children: (width?: Number) => JSX.Element;
   onResize?: (width: Number) => void;
   /** Optional styles to be applied to the containing element */
   containerStyle?: React.CSSProperties;

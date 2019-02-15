@@ -29,7 +29,7 @@ export default function Example() {
       <p style={{ padding: 10 }}>Inside a parent with set height2</p>
       <div style={containerDivStyle}>
         <WidthDetector>
-          {(width: Number) => {
+          {(width?: Number) => {
             n++;
             return (
               <>
