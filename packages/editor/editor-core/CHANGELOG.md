@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.12.0
+- [minor] [4d8d759bf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d8d759bf9):
+
+  -  [ED-6255] Migrate ADFNode type to ADFEntity
+
 ## 98.11.1
 - [patch] [ea423a619f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea423a619f):
 

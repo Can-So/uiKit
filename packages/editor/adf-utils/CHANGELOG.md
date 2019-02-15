@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.7.0
+- [minor] [4d8d759bf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d8d759bf9):
+
+  -  [ED-6255] Migrate ADFNode type to ADFEntity
+
 ## 5.6.3
 - [patch] [e83a441140](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a441140):
 
