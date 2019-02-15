@@ -8,12 +8,21 @@ import { getToolbarConfig } from './toolbar';
 import keymap from './pm-plugins/keymaps';
 import ideUX from './pm-plugins/ide-ux';
 import { messages } from '../block-type/types';
+import { EditorPlugin } from '../../types';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+} from '../analytics';
 
 export interface CodeBlockOptions {
   enableKeybindingsForIDE?: boolean;
 }
 
-const codeBlockPlugin = (options: CodeBlockOptions = {}) => ({
+const codeBlockPlugin = (options: CodeBlockOptions = {}): EditorPlugin => ({
   nodes() {
     return [{ name: 'codeBlock', node: codeBlock }];
   },
@@ -41,7 +50,14 @@ const codeBlockPlugin = (options: CodeBlockOptions = {}) => ({
         ),
         action(insert, state) {
           const schema = state.schema;
-          return insert(schema.nodes.codeBlock.createChecked());
+          const tr = insert(schema.nodes.codeBlock.createChecked());
+          return addAnalytics(tr, {
+            action: ACTION.INSERTED,
+            actionSubject: ACTION_SUBJECT.DOCUMENT,
+            actionSubjectId: ACTION_SUBJECT_ID.CODE_BLOCK,
+            attributes: { inputMethod: INPUT_METHOD.QUICK_INSERT },
+            eventType: EVENT_TYPE.TRACK,
+          });
         },
       },
     ],

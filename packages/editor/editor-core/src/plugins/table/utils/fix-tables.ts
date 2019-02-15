@@ -103,16 +103,20 @@ const removeEmptyColumns = (
   const map = TableMap.get(table);
   const colsMinColspan: number[] = [];
   for (let colIndex = 0; colIndex < map.width; colIndex++) {
-    const cells = getCellsInColumn(colIndex)(tr.selection);
-    if (cells) {
-      cells.forEach(cell => {
-        if (
-          !colsMinColspan[colIndex] ||
-          colsMinColspan[colIndex] > cell.node.attrs.colspan
-        ) {
-          colsMinColspan[colIndex] = cell.node.attrs.colspan;
-        }
-      });
+    const cellsPositions = map.cellsInRect({
+      left: colIndex,
+      right: colIndex + 1,
+      top: 0,
+      bottom: map.height,
+    });
+    const colspans = cellsPositions.map(cellPos => {
+      const cell = tr.doc.nodeAt(cellPos + tablePos + 1);
+      if (cell) {
+        return cell.attrs.colspan;
+      }
+    });
+    if (colspans.length) {
+      colsMinColspan[colIndex] = Math.min(...colspans);
     }
   }
 
@@ -203,9 +207,11 @@ export const removeExtraneousColumnWidths = (node, basePos, tr) => {
 export const fixTables = (tr: Transaction): Transaction => {
   tr.doc.descendants((node, pos) => {
     if (node.type.name === 'table') {
-      tr = removeEmptyRows(node, pos, tr);
-      tr = removeEmptyColumns(node, pos, tr);
-      tr = removeExtraneousColumnWidths(node, pos, tr);
+      // in the unlikely event of having to fix multiple tables at the same time
+      const tablePos = tr.mapping.map(pos);
+      tr = removeEmptyRows(node, tablePos, tr);
+      tr = removeEmptyColumns(node, tablePos, tr);
+      tr = removeExtraneousColumnWidths(node, tablePos, tr);
     }
   });
   return tr;

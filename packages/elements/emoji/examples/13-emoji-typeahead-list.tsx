@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-
+import { getEmojis, onSelection } from '../example-helpers';
 import EmojiTypeAheadList from '../src/components/typeahead/EmojiTypeAheadList';
 import { EmojiDescription } from '../src/types';
-import { onSelection, getEmojis } from '../example-helpers';
 
 function randomEmojis(): EmojiDescription[] {
   return getEmojis()
@@ -18,9 +17,9 @@ export interface State {
 }
 
 export default class RefreshableEmojiList extends PureComponent<Props, State> {
-  private emojiList: EmojiTypeAheadList;
+  private emojiList: EmojiTypeAheadList | null = null;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       emojis: randomEmojis(),
@@ -45,7 +44,7 @@ export default class RefreshableEmojiList extends PureComponent<Props, State> {
     }
   };
 
-  private handleEmojiTypeAheadListRef = ref => {
+  private handleEmojiTypeAheadListRef = (ref: EmojiTypeAheadList | null) => {
     this.emojiList = ref;
   };
 

@@ -1,25 +1,24 @@
-import * as sinon from 'sinon';
-import { expect } from 'chai';
-
 import { waitUntil } from '@atlaskit/util-common-test';
-import { EmojiDescriptionWithVariations } from '../../../../types';
-import { isPromise } from '../../../../type-helpers';
+import { expect } from 'chai';
+import * as sinon from 'sinon';
 import MediaEmojiCache, {
   BrowserCacheStrategy,
   EmojiCacheStrategy,
   MemoryCacheStrategy,
 } from '../../../../api/media/MediaEmojiCache';
+import MediaImageLoader from '../../../../api/media/MediaImageLoader';
 import TokenManager from '../../../../api/media/TokenManager';
-
+import { frequentCategory } from '../../../../constants';
+import { isPromise } from '../../../../type-helpers';
+import { EmojiDescriptionWithVariations } from '../../../../types';
 import {
   createTokenManager,
   imageEmoji,
+  loadedAltMediaEmoji,
   loadedMediaEmoji,
   mediaEmoji,
   mediaEmojiImagePath,
-  loadedAltMediaEmoji,
 } from '../../_test-data';
-import { frequentCategory } from '../../../../constants';
 
 const restoreStub = (stub: any) => {
   if (stub.restore) {
@@ -27,8 +26,11 @@ const restoreStub = (stub: any) => {
   }
 };
 
-class MockMediaImageLoader {
+class MockMediaImageLoader extends MediaImageLoader {
   reject: boolean;
+  constructor() {
+    super(createTokenManager());
+  }
 
   loadMediaImage(url: string): Promise<string> {
     if (this.reject) {
@@ -265,13 +267,13 @@ describe('BrowserCacheStrategy', () => {
     class MockImage {
       src: string;
       listeners: Map<string, Function> = new Map();
-      addEventListener(type, callback) {
+      addEventListener(type: string, callback: Function) {
         this.listeners.set(type, callback);
       }
     }
-    let imageConstructorStub;
-    let mockImage;
-    let mockMediaImageLoader;
+    let imageConstructorStub: sinon.SinonStub;
+    let mockImage: MockImage;
+    let mockMediaImageLoader: MediaImageLoader;
 
     beforeEach(() => {
       mockImage = new MockImage();
@@ -294,7 +296,7 @@ describe('BrowserCacheStrategy', () => {
         expect(mockImage.src, 'Image src url').to.equal('cheese');
       });
       return waitUntil(() => !!mockImage.listeners.get('load')).then(() => {
-        mockImage.listeners.get('load')();
+        mockImage.listeners.get('load')!();
         return promise;
       });
     });
@@ -308,7 +310,7 @@ describe('BrowserCacheStrategy', () => {
         expect(mockImage.src, 'Image src url').to.equal('cheese');
       });
       return waitUntil(() => !!mockImage.listeners.get('error')).then(() => {
-        mockImage.listeners.get('error')();
+        mockImage.listeners.get('error')!();
         return promise;
       });
     });
@@ -330,7 +332,7 @@ describe('BrowserCacheStrategy', () => {
   });
 
   describe('#loadEmoji', () => {
-    let mockMediaImageLoader;
+    let mockMediaImageLoader: MockMediaImageLoader;
     let browserCacheStrategy: BrowserCacheStrategy;
 
     beforeEach(() => {
@@ -396,7 +398,7 @@ describe('BrowserCacheStrategy', () => {
 
 describe('MemoryCacheStrategy', () => {
   describe('#loadEmoji', () => {
-    let mockMediaImageLoader;
+    let mockMediaImageLoader: MockMediaImageLoader;
     let memoryCacheStrategy: MemoryCacheStrategy;
 
     beforeEach(() => {

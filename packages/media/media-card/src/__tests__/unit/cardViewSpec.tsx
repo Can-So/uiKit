@@ -13,7 +13,10 @@ import { FileDetails } from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import {
+  mountWithIntlContext,
+  expectToEqual,
+} from '@atlaskit/media-test-helpers';
 import {
   CardView,
   CardViewBase,
@@ -371,5 +374,14 @@ describe('CardView', () => {
     expect(actualReturnedEvent.hasFired).toEqual(false);
     expect(actualReturnedEvent.payload.action).toEqual('clicked');
     expect(actualReturnedEvent.context).toEqual(actualFiredEvent.context);
+  });
+
+  it('should not use pointer cursor for external images', () => {
+    const card = shallowCardViewBaseElement({
+      dataURI: 'a',
+      mediaItemType: 'external-image',
+    });
+
+    expectToEqual(card.find(Wrapper).props().shouldUsePointerCursor, false);
   });
 });

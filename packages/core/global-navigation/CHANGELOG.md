@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.6.0
+- [minor] [8c149b1613](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c149b1613):
+
+  - Add the ability to contolr the notification drawer
+
 ## 5.5.3
 - [patch] [4c9a6d2187](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c9a6d2187):
 

@@ -6,7 +6,7 @@ import {
   EditorProps,
   WithEditorActions,
 } from '@atlaskit/editor-core';
-import { ReactRenderer } from '@atlaskit/renderer';
+import { ReactRenderer, RendererProps } from '@atlaskit/renderer';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { Props as BaseProps } from '../context/embedded-document';
 import { Mode } from '../context/context';
@@ -18,7 +18,8 @@ export interface Props extends BaseProps {
   hasError?: boolean;
 
   mode: Mode;
-  editorProps?: EditorProps;
+  editorProps?: Partial<EditorProps>;
+  rendererProps?: Partial<RendererProps>;
 }
 
 const emptyDoc = '{ "type": "doc", "version": 1, "content": [] }';
@@ -61,7 +62,14 @@ export default class Document extends Component<Props> {
   }
 
   render() {
-    const { doc, isLoading, hasError, mode, editorProps } = this.props;
+    const {
+      doc,
+      isLoading,
+      hasError,
+      mode,
+      editorProps,
+      rendererProps,
+    } = this.props;
 
     if (hasError) {
       return <div>Something went wrong 😔</div>;
@@ -95,6 +103,7 @@ export default class Document extends Component<Props> {
           <ReactRenderer
             dataProviders={dataProviders}
             document={JSON.parse(body)}
+            {...rendererProps}
           />
         );
     }

@@ -1,5 +1,13 @@
 # @atlaskit/website
 
+## 4.1.40
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/inline-dialog@9.0.15
+  - @atlaskit/logo@9.2.7
+  - @atlaskit/media-test-helpers@20.1.3
+  - @atlaskit/modal-dialog@7.2.3
+  - @atlaskit/select@7.0.0
+
 ## 4.1.39
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/media-card@52.0.0

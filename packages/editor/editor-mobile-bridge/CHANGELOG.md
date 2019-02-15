@@ -1,5 +1,16 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.7.13
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/form@5.1.5
+  - @atlaskit/editor-core@98.10.3
+  - @atlaskit/select@7.0.0
+
+## 6.7.12
+- [patch] [334d2db5df](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/334d2db5df):
+
+  - ED-6206: fixed media card issue on mobile editor
+
 ## 6.7.11
 - [patch] [7ad6037cca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ad6037cca):
 

@@ -1,66 +1,44 @@
-import { initEditor, clearEditor, snapshot } from './_utils';
-import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
-import { messages as blockTypeMessages } from '../../plugins/block-type/ui/ToolbarBlockType';
-
-const table = `span[aria-label="${insertBlockMessages.table.defaultMessage}"]`;
-
-const insertTable = async page => {
-  await page.click(table);
-  await page.waitForSelector('table td p');
-};
-
-const blockFormattingDropdown = `span[aria-label="${blockTypeMessages}"]`;
-const removeTablePopup = '.pm-table-column-controls__button-wrap';
-const dropList = 'div[data-role="droplistContent"]';
-const insertBlockDropdown = `span[aria-label="${
-  insertBlockMessages.insertMenu.defaultMessage
-}"]`;
-// const popupPresent = 'div[data-editor-popup="true"]';
-const emojiButton = `span[aria-label="${
-  insertBlockMessages.emoji.defaultMessage
-}"]`;
-const emojiPicker = 'div[data-emoji-picker-container="true"]';
-const mentionButton = `span[aria-label="${
-  insertBlockMessages.mention.defaultMessage
-}"]`;
-const mentionQuery = 'span[data-type-ahead-query]';
+import { vrEditor, clearEditor, snapshot } from './_utils';
+import * as pageObject from './_pageObjects';
 
 // TODO - add ADF before loading stuff
-describe.skip('Snapshot Test: z-indexes', () => {
-  ['full-page', 'comment'].forEach(appearance => {
-    let page;
+describe('Snapshot Test: z-indexes', () => {
+  let page;
 
-    describe(`${appearance}`, () => {
-      beforeAll(async () => {
-        // @ts-ignore
-        page = global.page;
-        await initEditor(page, appearance);
-      });
+  beforeAll(async () => {
+    // @ts-ignore
+    page = global.page;
+    await vrEditor(page);
+  });
 
-      beforeEach(async () => {
-        await clearEditor(page);
-      });
+  beforeEach(async () => {
+    await clearEditor(page);
+  });
 
-      // TODO enable after fixing selectors on tables
-      it.skip('should always position table trash icon below dropdowns from main menu', async () => {
-        await insertTable(page);
-        await page.waitForSelector(removeTablePopup);
-        await page.click(blockFormattingDropdown);
-        await page.waitForSelector(dropList);
-        await page.click(insertBlockDropdown);
-        await page.waitForSelector(dropList);
-        await snapshot(page);
-      });
+  // TODO enable after fixing selectors on tables
+  it.skip('should always position table trash icon below dropdowns from main menu', async () => {
+    await pageObject.insertTable(page);
+    await page.waitForSelector(pageObject.removeTablePopup);
+    await page.click(pageObject.blockFormattingDropdown);
+    await page.waitForSelector(pageObject.dropList);
+    await page.click(pageObject.insertBlockDropdown);
+    await page.waitForSelector(pageObject.dropList);
+    await snapshot(page, 0.05);
+  });
 
-      it('should always position table trash icon below emoji picker', async () => {
-        await insertTable(page);
-        await page.waitForSelector(removeTablePopup);
-        await page.click(emojiButton);
-        await page.waitForSelector(emojiPicker);
-        await page.click(mentionButton);
-        await page.waitForSelector(mentionQuery);
-        await snapshot(page);
-      });
-    });
+  it('should always position table trash icon below emoji picker', async () => {
+    await pageObject.insertTable(page);
+    await page.waitForSelector(pageObject.removeTablePopup);
+    await page.click(pageObject.emojiButton);
+    await page.waitForSelector(pageObject.emojiPicker);
+    await snapshot(page, 0.05);
+  });
+
+  it('should always position table trash icon below mention picker', async () => {
+    await pageObject.insertTable(page);
+    await page.waitForSelector(pageObject.removeTablePopup);
+    await page.click(pageObject.mentionButton);
+    await page.waitForSelector(pageObject.mentionQuery);
+    await snapshot(page, 0.05);
   });
 });

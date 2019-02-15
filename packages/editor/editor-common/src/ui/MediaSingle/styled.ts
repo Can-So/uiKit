@@ -140,6 +140,7 @@ const Wrapper: React.ComponentClass<
 > = styled.div`
   ${MediaSingleDimensionHelper};
   position: relative;
+  z-index: 1;
 
   &::after {
     content: '';

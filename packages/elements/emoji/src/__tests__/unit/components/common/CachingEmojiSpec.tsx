@@ -1,19 +1,17 @@
-import { mount } from 'enzyme';
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import { expect } from 'chai';
-import * as sinon from 'sinon';
-
 import { waitUntil } from '@atlaskit/util-common-test';
-
+import { expect } from 'chai';
+import { mount, MountRendererProps } from 'enzyme';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import * as sinon from 'sinon';
 import EmojiResource from '../../../../api/EmojiResource';
-import Emoji from '../../../../components/common/Emoji';
-import EmojiPlaceholder from '../../../../components/common/EmojiPlaceholder';
 import CachingEmoji, {
   CachingMediaEmoji,
 } from '../../../../components/common/CachingEmoji';
-import { imageEmoji, loadedMediaEmoji, mediaEmoji } from '../../_test-data';
+import Emoji from '../../../../components/common/Emoji';
+import EmojiPlaceholder from '../../../../components/common/EmojiPlaceholder';
 import { hasSelector } from '../../_emoji-selectors';
+import { imageEmoji, loadedMediaEmoji, mediaEmoji } from '../../_test-data';
 
 describe('<CachingEmoji />', () => {
   describe('Non-media emoji', () => {
@@ -28,8 +26,8 @@ describe('<CachingEmoji />', () => {
   });
 
   describe('Media emoji', () => {
-    let contextOptions;
-    let emojiProviderStub;
+    let contextOptions: MountRendererProps;
+    let emojiProviderStub: any;
 
     beforeEach(() => {
       emojiProviderStub = sinon.createStubInstance(EmojiResource);

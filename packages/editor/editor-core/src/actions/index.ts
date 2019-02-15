@@ -7,9 +7,9 @@ import {
   getEditorValueWithMedia,
   insertFileFromDataUrl as insertFileFromUrl,
   toJSON,
-  removeQueryMarksFromJSON,
   processRawValue,
 } from '../utils';
+import { sanitizeNode } from '../utils/filter/node-filter';
 import { EventDispatcher } from '../event-dispatcher';
 import { safeInsert } from 'prosemirror-utils';
 
@@ -141,7 +141,7 @@ export default class EditorActions implements EditorActionsOptions {
     }
 
     return compose(
-      removeQueryMarksFromJSON,
+      sanitizeNode,
       toJSON,
     )(doc);
   }

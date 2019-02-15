@@ -1,5 +1,99 @@
 # @atlaskit/editor-core
 
+## 98.11.1
+- [patch] [ea423a619f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea423a619f):
+
+  - Fixed the call to the /check endpoint
+
+## 98.11.0
+- [minor] [448b9946cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/448b9946cc):
+
+  - ED-6195 Add Analytics GAS V3 for identation
+
+## 98.10.5
+- [patch] [36986d383b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36986d383b):
+
+  - ED-6010 Rename "Block Quote" to "Quote", and "Code Block" to "Code snippet" in the insert menu
+  - Update i18n translations
+
+## 98.10.4
+- [patch] [cf7fd7d3be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf7fd7d3be):
+
+  - Render external images in editor
+
+## 98.10.3
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/logo@9.2.7
+  - @atlaskit/media-picker@33.0.3
+  - @atlaskit/media-test-helpers@20.1.3
+  - @atlaskit/modal-dialog@7.2.3
+  - @atlaskit/select@7.0.0
+
+## 98.10.2
+- [patch] [45e3fffa9e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/45e3fffa9e):
+
+  - suppress enter and tab keys events in the status node to prevent bugs
+
+## 98.10.1
+- [patch] [4cc0b47f6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4cc0b47f6a):
+
+  - ED-6233: Use minCellWith over wrapWidth to determine free space in a column
+
+## 98.10.0
+- [minor] [e6daf79012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6daf79012):
+
+  - ED-6135 Fire analytics v3 events when insert panel, code block or horizontal rule
+
+## 98.9.5
+- [patch] [026d4424c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/026d4424c2):
+
+  - ED-6226 Fix row delete button displacement after many rows in a table
+
+## 98.9.4
+- [patch] [e04c61dc55](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e04c61dc55):
+
+  - ED-6183 fix image wrapping, revert createDOMRef chang
+
+## 98.9.3
+- [patch] [8788a98286](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8788a98286):
+
+  - [FS-3589] Fix re-rendering on status element after apply decoration
+
+## 98.9.2
+- [patch] [c81737b526](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c81737b526):
+
+  - ED-6098: simplify internal state changes for completed media uploads
+
+## 98.9.1
+- [patch] [ebb0a98051](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebb0a98051):
+
+  - remove empty status before publishing document
+
+## 98.9.0
+- [minor] [59ae46e1cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59ae46e1cf):
+
+  - ED-5061: migrate media toolbar to new internal architecture
+
+## 98.8.2
+- [patch] [19a823bf2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/19a823bf2a):
+
+  - delete empty status node when user selects another node
+
+## 98.8.1
+- [patch] [0a304a48f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a304a48f6):
+
+  - ED-6218: fix repair table logic
+
+## 98.8.0
+- [minor] [cde3ff657f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cde3ff657f):
+
+  - ED-6134 Add analytics GAS V3 for text formatting, headers and blockQuotes
+
+## 98.7.2
+- [patch] [6981b6d25a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6981b6d25a):
+
+  - ED-6214: Fix resizing when rowspan exists in non last column
+
 ## 98.7.1
 - [patch] [a22478c227](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22478c227):
 

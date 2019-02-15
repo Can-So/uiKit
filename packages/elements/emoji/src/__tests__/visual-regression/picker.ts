@@ -4,7 +4,7 @@ import {
 } from '@atlaskit/visual-regression/helper';
 
 describe('Snapshot Test', () => {
-  let page;
+  let page: any;
   const url = getExampleUrl(
     'elements',
     'emoji',

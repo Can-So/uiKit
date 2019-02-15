@@ -8,7 +8,9 @@ import {
   td,
   sendKeyToPm,
   createEvent,
+  insertText,
 } from '@atlaskit/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 import { pluginKey as codeBlockPluginKey } from '../../../../plugins/code-block/pm-plugins/main';
 import tablesPlugin from '../../../../plugins/table';
@@ -19,17 +21,27 @@ import {
 } from '../../../../plugins/code-block/actions';
 import { setTextSelection } from '../../../../utils';
 import codeBlockPlugin from '../../../../plugins/code-block';
+import quickInsertPlugin from '../../../../plugins/quick-insert';
 
 describe('code-block', () => {
   const createEditor = createEditorFactory();
 
   const event = createEvent('event');
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+
   const editor = (doc: any) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
     return createEditor({
       doc,
-      editorPlugins: [codeBlockPlugin(), listPlugin, tablesPlugin()],
-      editorProps: { allowCodeBlocks: true },
+      editorPlugins: [
+        codeBlockPlugin(),
+        listPlugin,
+        tablesPlugin(),
+        quickInsertPlugin,
+      ],
+      editorProps: { allowCodeBlocks: true, allowAnalyticsGASV3: true },
       pluginKey: codeBlockPluginKey,
+      createAnalyticsEvent,
     });
   };
 
@@ -103,15 +115,13 @@ describe('code-block', () => {
 
     describe('language picker', () => {
       describe('when selecting new language', () => {
-        it('language in state should update', () => {
-          const { pluginState, editorView } = editor(
-            doc(code_block()('text{<>}')),
-          );
+        it('language should update', () => {
+          const { editorView } = editor(doc(code_block()('text{<>}')));
           const language = 'someLanguage';
           changeLanguage(language)(editorView.state, editorView.dispatch);
-          window.setTimeout(() => {
-            expect(pluginState.language).toEqual(language);
-          }, 0);
+          expect(editorView.state.doc).toEqualDocument(
+            doc(code_block({ language: 'someLanguage' })('text')),
+          );
         });
       });
     });
@@ -168,6 +178,22 @@ describe('code-block', () => {
             element: undefined,
             language: undefined,
             toolbarVisible: false,
+          });
+        });
+      });
+
+      describe('quick insert', () => {
+        it('should fire analytics event when code block inserted', () => {
+          const { editorView, sel } = editor(doc(p('{<>}')));
+          insertText(editorView, `/code`, sel);
+          sendKeyToPm(editorView, 'Enter');
+
+          expect(createAnalyticsEvent).toHaveBeenCalledWith({
+            action: 'inserted',
+            actionSubject: 'document',
+            actionSubjectId: 'codeBlock',
+            attributes: { inputMethod: 'quickInsert' },
+            eventType: 'track',
           });
         });
       });

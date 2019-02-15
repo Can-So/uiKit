@@ -63,7 +63,7 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
     // Flow doesn't know how to deal with querySelector
     // Therefore casting the return value to HTMLIFrameElement
     const iFrame = ((document.querySelector(
-      'iFrame[title="Notifications"',
+      'iFrame[title="Notifications"]',
     ): any): HTMLIFrameElement);
 
     if (iFrame) {

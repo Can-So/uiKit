@@ -1,11 +1,22 @@
 import { DecorationSet, Decoration } from 'prosemirror-view';
-import { EditorState, Plugin, PluginKey, Selection } from 'prosemirror-state';
+import {
+  EditorState,
+  Plugin,
+  PluginKey,
+  Selection,
+  Transaction,
+} from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Color as ColorType } from '@atlaskit/status';
 import StatusNodeView from './nodeviews/status';
 import { ReactNodeView } from '../../nodeviews';
 import { PMPluginFactory } from '../../types';
 import { ZWSP } from '../../utils';
+import {
+  mayGetStatusNodeAt,
+  isEmptyStatus,
+  setSelectionNearPos,
+} from './utils';
 
 export const pluginKey = new PluginKey('statusPlugin');
 
@@ -109,9 +120,34 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
             return newState;
           }
         }
-
         return state;
       },
+    },
+    appendTransaction: (
+      transactions: Transaction[],
+      oldEditorState: EditorState,
+      newEditorState: EditorState,
+    ) => {
+      let changed = false;
+      let tr = newEditorState.tr;
+
+      // user leaves the StatusPicker with empty text and selects a new node
+      if (transactions.find(tr => tr.selectionSet)) {
+        let oldStatus = mayGetStatusNodeAt(oldEditorState.selection);
+        let newStatus = mayGetStatusNodeAt(newEditorState.selection);
+        if (
+          oldStatus &&
+          ((newStatus && oldStatus.localId !== newStatus.localId) || !newStatus)
+        ) {
+          if (isEmptyStatus(oldStatus)) {
+            const pos = oldEditorState.selection.from;
+            tr.delete(tr.mapping.map(pos), tr.mapping.map(pos + 1));
+            setSelectionNearPos(tr, pos); // without forcing the selection the selection border in status react component gets lost
+            changed = true;
+          }
+        }
+      }
+      return changed ? tr : undefined;
     },
     key: pluginKey,
     props: {
@@ -135,6 +171,7 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
             delayedNodeRendering,
             {
               side: 1,
+              key: '#status-zero-width-char-decoration',
             },
           );
 

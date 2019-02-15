@@ -115,7 +115,7 @@ export default function createPluginsList(
   }
 
   if (props.media || props.mediaProvider) {
-    plugins.push(mediaPlugin(props.media));
+    plugins.push(mediaPlugin(props.media, props.appearance));
   }
 
   if (props.allowCodeBlocks) {

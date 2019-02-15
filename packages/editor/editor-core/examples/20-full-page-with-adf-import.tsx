@@ -1,6 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { ExampleEditor as FullPageEditor } from './5-full-page';
+import {
+  ExampleEditor as FullPageEditor,
+  LOCALSTORAGE_defaultDocKey,
+} from './5-full-page';
 import EditorContext from '../src/ui/EditorContext';
 import { DevTools } from '../example-helpers/DevTools';
 import WithEditorActions from '../src/ui/WithEditorActions';
@@ -56,6 +59,13 @@ export default class Example extends React.Component<any, State> {
                 >
                   Export ADF
                 </button>
+                <button
+                  id="save-adf"
+                  className="save-adf"
+                  onClick={() => this.handleDefault()}
+                >
+                  Save ADF as default
+                </button>
                 <FullPageEditor />
               </React.Fragment>
             )}
@@ -86,5 +96,12 @@ export default class Example extends React.Component<any, State> {
     actions.getValue().then(value => {
       this.setState({ inputValue: JSON.stringify(value, null, 2) });
     });
+  };
+
+  private handleDefault = () => {
+    localStorage.setItem(
+      LOCALSTORAGE_defaultDocKey,
+      this.state.inputValue || '{}',
+    );
   };
 }

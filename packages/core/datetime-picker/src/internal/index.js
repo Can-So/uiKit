@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { format, isValid, parse } from 'date-fns';
 
 export const ClearIndicator = null;
 
@@ -39,27 +38,10 @@ export const DropdownIndicator = ({
 }: { selectProps: { dropdownIndicatorIcon?: any } } = {}) =>
   Icon ? <Icon /> : null;
 
-export function parseDateIntoStateValues(
-  value: string,
-  dateValue: string,
-  timeValue: string,
-  zoneValue: string,
-) {
-  const parsed = parse(value);
-  const valid = isValid(parsed);
-  return {
-    dateValue: valid ? format(parsed, 'YYYY-MM-DD') : dateValue,
-    timeValue: valid ? format(parsed, 'HH:mm') : timeValue,
-    zoneValue: valid ? format(parsed, 'ZZ') : zoneValue,
-  };
-}
-
 export function formatDateTimeZoneIntoIso(
   date: string,
   time: string,
   zone: string,
 ): string {
-  // If no 'date' then return an empty string otherwise
-  //  Firefox defaults to the beginning of epoch time.
-  return date ? `${date}T${time}${zone}` : '';
+  return `${date}T${time}${zone}`;
 }

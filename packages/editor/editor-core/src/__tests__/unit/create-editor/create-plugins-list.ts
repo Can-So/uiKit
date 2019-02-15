@@ -59,9 +59,9 @@ describe('createPluginsList', () => {
       provider: Promise.resolve() as any,
       allowMediaSingle: true,
     };
-    createPluginsList({ media });
+    createPluginsList({ media, appearance: 'full-page' });
     expect(mediaPlugin).toHaveBeenCalledTimes(1);
-    expect(mediaPlugin).toHaveBeenCalledWith(media);
+    expect(mediaPlugin).toHaveBeenCalledWith(media, 'full-page');
   });
 
   it('should add placeholderText plugin if allowTemplatePlaceholders prop is provided', () => {

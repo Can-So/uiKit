@@ -24,18 +24,6 @@ export const DEFAULT_HEIGHT = 600;
 const adfInputSelector = '#adf-input';
 const importAdfBtnSelector = '#import-adf';
 
-export const dynamicTextViewportSizes = [
-  { width: 1440, height: 3000 },
-  { width: 1120, height: 3000 },
-  { width: 1000, height: 3000 },
-  { width: 800, height: 3000 },
-];
-
-export const viewportSizes = [
-  ...dynamicTextViewportSizes,
-  { width: 400, height: 3000 },
-];
-
 export const resetViewport = async page => {
   await page.setViewport({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
 };
@@ -43,6 +31,8 @@ export const resetViewport = async page => {
 export const escapeStr = (str: string) => {
   return `concat('${str.replace(/'/g, `', "'", '`)}', '')`;
 };
+
+export const viewportSizes = [{ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT }];
 
 export const selectByTextAndClick = async ({ page, tagName, text }) => {
   const target = await page.$x(
@@ -53,6 +43,14 @@ export const selectByTextAndClick = async ({ page, tagName, text }) => {
   } else {
     throw new Error(`Target element is not found: ${text}`);
   }
+};
+
+export const vrEditor = async page => {
+  const editor = '.ProseMirror';
+  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
+  await page.goto(url);
+  await page.waitForSelector(editor);
+  await page.click(editor);
 };
 
 export const initEditor = async (page, appearance: string) => {
@@ -83,12 +81,16 @@ export const initEditor = async (page, appearance: string) => {
   });
 };
 
+export const deviceViewPorts = {
+  LaptopHiDPI: { width: 1440, height: 900 },
+  LaptopMDPI: { width: 1280, height: 800 },
+  iPadPro: { width: 1024, height: 1366 },
+  iPad: { width: 768, height: 1024 },
+  iPhonePlus: { width: 414, height: 736 },
+};
+
 export const initFullPageEditorWithAdf = async (page, adf: Object) => {
-  const url = getExampleUrl(
-    'editor',
-    'editor-core',
-    'full-page-with-adf-import',
-  );
+  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
   await page.goto(url);
 
   await page.evaluate(
@@ -165,7 +167,7 @@ export const insertMenuTests = [
   // Insert menu items
   // -----------------
   {
-    name: 'Block quote',
+    name: 'Quote',
     // click selector (dropdown menu or toolbar icon)
     clickSelector: insertMenuSelector,
     // menu item selector - when given, it should match item inner text
@@ -178,7 +180,7 @@ export const insertMenuTests = [
     appearance: ['full-page', 'comment'],
   },
   {
-    name: 'Code block',
+    name: 'Code snippet',
     menuItemText: blockTypeMessages.codeblock.defaultMessage,
     clickSelector: insertMenuSelector,
     nodeSelector: 'div.code-block code',

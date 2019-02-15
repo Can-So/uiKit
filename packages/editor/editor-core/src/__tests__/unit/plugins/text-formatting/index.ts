@@ -20,21 +20,35 @@ import {
 } from '../../../../plugins/text-formatting/pm-plugins/main';
 import * as commands from '../../../../plugins/text-formatting/commands/text-formatting';
 import { anyMarkActive } from '../../../../plugins/text-formatting/utils';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import {
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  EVENT_TYPE,
+  INPUT_METHOD,
+  ACTION_SUBJECT_ID,
+} from '../../../../plugins/analytics';
 
 describe('text-formatting', () => {
   const createEditor = createEditorFactory<TextFormattingState>();
 
   let trackEvent;
-  const editor = (doc: any) =>
-    createEditor({
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  const editor = (doc: any) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
       editorProps: {
         analyticsHandler: trackEvent,
         allowCodeBlocks: true,
+        allowAnalyticsGASV3: true,
         mentionProvider: new Promise(() => {}),
       },
+      createAnalyticsEvent: createAnalyticsEvent,
       pluginKey: textFormattingPluginKey,
     });
+  };
 
   describe('plugin', () => {
     it('should disable smart autocompletion if option given', () => {
@@ -61,6 +75,15 @@ describe('text-formatting', () => {
       describe('when on a mac', () => {
         describe('when hits Cmd-B', () => {
           it('toggles bold mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRONG,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Cmd-b');
@@ -71,11 +94,21 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.strong.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
 
         describe('when hits Cmd-I', () => {
           it('toggles italic mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_ITALIC,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Cmd-i');
@@ -84,11 +117,21 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.em.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
 
         describe('when hits Cmd-U', () => {
           it('toggles underline mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_UNDERLINE,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Cmd-u');
@@ -99,6 +142,7 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.underline.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
 
@@ -108,6 +152,15 @@ describe('text-formatting', () => {
          */
         describe('when hits Shift-Cmd-S', () => {
           it('toggles strikethrough mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRIKE,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Shift-Cmd-S');
@@ -118,11 +171,21 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.strike.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
 
         describe('when hits Shift-Cmd-M', () => {
           it('toggles code mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(
               doc(
                 p(
@@ -141,6 +204,7 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.code.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
       });
@@ -148,6 +212,15 @@ describe('text-formatting', () => {
       describe('when not on a mac', () => {
         describe('when hits Ctrl-B', () => {
           it('toggles bold mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRONG,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Ctrl-b');
@@ -158,11 +231,21 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.strong.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
 
-        describe('when hits Ctrl-B', () => {
+        describe('when hits Ctrl-I', () => {
           it('toggles italic mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_ITALIC,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Ctrl-i');
@@ -171,11 +254,21 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.em.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
 
-        describe('when hits Ctrl-B', () => {
+        describe('when hits Ctrl-U', () => {
           it('toggles underline mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_UNDERLINE,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Ctrl-u');
@@ -186,6 +279,7 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.underline.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
 
@@ -195,6 +289,15 @@ describe('text-formatting', () => {
          */
         describe('when hits Shift-Ctrl-S', () => {
           it('toggles strikethrough mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRIKE,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Shift-Ctrl-S');
@@ -205,11 +308,21 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.strike.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
 
         describe('when hits Shift-Ctrl-M', () => {
           it('toggles code mark', () => {
+            const expectedPayload: AnalyticsEventPayload = {
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.SHORTCUT,
+              },
+            };
             const { editorView } = editor(doc(p('{<}text{>}')));
 
             sendKeyToPm(editorView, 'Shift-Ctrl-M');
@@ -218,23 +331,56 @@ describe('text-formatting', () => {
             expect(trackEvent).toHaveBeenCalledWith(
               'atlassian.editor.format.code.keyboard',
             );
+            expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
           });
         });
       });
     }
     describe('code rule', () => {
       it('should convert when "``" is entered followed by a character in it', () => {
+        const expectedPayload: AnalyticsEventPayload = {
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+          eventType: EVENT_TYPE.TRACK,
+          attributes: {
+            inputMethod: INPUT_METHOD.FORMATTING,
+          },
+        };
         const { editorView, sel } = editor(doc(p('`{<>}`')));
         insertText(editorView, 'c', sel);
         expect(editorView.state.doc).toEqualDocument(doc(p(code('c'))));
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.code.autoformatting',
         );
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
       });
     });
   });
 
   describe('code', () => {
+    it('should dispatch analytics event', () => {
+      const inputMethod = INPUT_METHOD.TOOLBAR;
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod,
+        },
+      };
+
+      const { editorView } = editor(doc(p('{<}t{>}ext')));
+
+      commands.toggleCodeWithAnalytics({ inputMethod })(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should be able to toggle code on a character', () => {
       const { editorView } = editor(doc(p('{<}t{>}ext')));
       expect(commands.toggleCode()(editorView.state, editorView.dispatch));
@@ -283,6 +429,28 @@ describe('text-formatting', () => {
   });
 
   describe('em', () => {
+    it('should dispatch analytics event', () => {
+      const inputMethod = INPUT_METHOD.TOOLBAR;
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_ITALIC,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod,
+        },
+      };
+
+      const { editorView } = editor(doc(p('{<}t{>}ext')));
+
+      commands.toggleEmWithAnalytics({ inputMethod })(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should be able to toggle em on a character', () => {
       const { editorView } = editor(doc(p('{<}t{>}ext')));
       expect(commands.toggleEm()(editorView.state, editorView.dispatch));
@@ -313,6 +481,28 @@ describe('text-formatting', () => {
   });
 
   describe('strong', () => {
+    it('should dispatch analytics event', () => {
+      const inputMethod = INPUT_METHOD.TOOLBAR;
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRONG,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod,
+        },
+      };
+
+      const { editorView } = editor(doc(p('{<}t{>}ext')));
+
+      commands.toggleStrongWithAnalytics({ inputMethod })(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should be able to toggle strong on a character', () => {
       const { editorView } = editor(doc(p('{<}t{>}ext')));
       expect(commands.toggleStrong()(editorView.state, editorView.dispatch));
@@ -343,6 +533,27 @@ describe('text-formatting', () => {
   });
 
   describe('underline', () => {
+    it('should dispatch analytics event', () => {
+      const inputMethod = INPUT_METHOD.TOOLBAR;
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_UNDERLINE,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod,
+        },
+      };
+      const { editorView } = editor(doc(p('{<}t{>}ext')));
+
+      commands.toggleUnderlineWithAnalytics({ inputMethod })(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should be able to toggle underline on a character', () => {
       const { editorView } = editor(doc(p('{<}t{>}ext')));
       expect(commands.toggleUnderline()(editorView.state, editorView.dispatch));
@@ -375,6 +586,27 @@ describe('text-formatting', () => {
   });
 
   describe('strike', () => {
+    it('should dispatch analytics event', () => {
+      const inputMethod = INPUT_METHOD.TOOLBAR;
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRIKE,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod,
+        },
+      };
+      const { editorView } = editor(doc(p('{<}t{>}ext')));
+
+      commands.toggleStrikeWithAnalytics({ inputMethod })(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should be able to toggle strike on a character', () => {
       const { editorView } = editor(doc(p('{<}t{>}ext')));
       expect(commands.toggleStrike()(editorView.state, editorView.dispatch));
@@ -405,6 +637,26 @@ describe('text-formatting', () => {
   });
 
   describe('subscript', () => {
+    it('should dispatch analytics event', () => {
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_SUB,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod: INPUT_METHOD.TOOLBAR,
+        },
+      };
+      const { editorView } = editor(doc(p('{<}t{>}ext')));
+
+      commands.toggleSubscriptWithAnalytics()(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should be able to toggle subscript on a character', () => {
       const { editorView } = editor(doc(p('{<}t{>}ext')));
       expect(commands.toggleSubscript()(editorView.state, editorView.dispatch));
@@ -455,6 +707,26 @@ describe('text-formatting', () => {
   });
 
   describe('superscript', () => {
+    it('should dispatch analytics event', () => {
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_SUPER,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod: INPUT_METHOD.TOOLBAR,
+        },
+      };
+      const { editorView } = editor(doc(p('{<}t{>}ext')));
+
+      commands.toggleSuperscriptWithAnalytics()(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should be able to toggle superscript on a character', () => {
       const { editorView } = editor(doc(p('{<}t{>}ext')));
       commands.toggleSuperscript()(editorView.state, editorView.dispatch);
@@ -512,6 +784,27 @@ describe('text-formatting', () => {
   });
 
   describe('code', () => {
+    it('should dispatch analytics event', () => {
+      const inputMethod = INPUT_METHOD.TOOLBAR;
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod,
+        },
+      };
+      const { editorView } = editor(doc(p('{<}t{>}ext')));
+
+      commands.toggleCodeWithAnalytics({ inputMethod })(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     describe('when the cursor is right after the code mark', () => {
       it('should not be able to delete character with "Backspace" without entering into mark editing mode', () => {
         const { editorView, pluginState } = editor(doc(p(code('hell{<}o{>}'))));

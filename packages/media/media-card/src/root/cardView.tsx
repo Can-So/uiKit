@@ -133,13 +133,15 @@ export class CardViewBase extends React.Component<
 
   render() {
     const { onClick, onMouseEnter } = this;
-    const { dimensions, appearance } = this.props;
+    const { dimensions, appearance, mediaItemType } = this.props;
+    const shouldUsePointerCursor = mediaItemType === 'file';
     const wrapperDimensions = dimensions
       ? dimensions
       : getDefaultCardDimensions(appearance);
 
     return (
       <Wrapper
+        shouldUsePointerCursor={shouldUsePointerCursor}
         breakpointSize={breakpointSize(this.width)}
         appearance={appearance}
         dimensions={wrapperDimensions}

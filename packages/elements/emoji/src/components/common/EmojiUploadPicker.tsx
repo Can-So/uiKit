@@ -70,7 +70,7 @@ interface ChooseEmojiFileProps {
 }
 
 class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
-  private onKeyDown = event => {
+  private onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = event => {
     if (event.key === 'Escape') {
       this.props.onUploadCancelled();
     }
@@ -193,7 +193,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
     }
 
     if (filename && name && previewImage) {
-      const notifyUpload = size => {
+      const notifyUpload = (size: { width: number; height: number }) => {
         const { width, height } = size;
         this.setState({
           uploadStatus: UploadStatus.Uploading,
@@ -232,7 +232,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
     this.cancelChooseFile();
   };
 
-  private onFileLoad = (file: File) => (f): Promise<any> => {
+  private onFileLoad = (file: File) => (f: any): Promise<any> => {
     return ImageUtil.parseImage(f.target.result)
       .then(() => {
         const state = {

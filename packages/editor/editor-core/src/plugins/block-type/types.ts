@@ -55,13 +55,13 @@ export const messages = defineMessages<
   },
   blockquote: {
     id: 'fabric.editor.blockquote',
-    defaultMessage: 'Block quote',
+    defaultMessage: 'Quote',
     description: 'Quote some text',
   },
   codeblock: {
     id: 'fabric.editor.codeblock',
-    defaultMessage: 'Code block',
-    description: 'Insert a block of code (code snippet)',
+    defaultMessage: 'Code snippet',
+    description: 'Insert a snippet/segment of code (code block)',
   },
   panel: {
     id: 'fabric.editor.panel',
@@ -222,3 +222,5 @@ export interface BlockType {
   tagName?: string;
   level?: number;
 }
+
+export type HeadingLevels = 0 | 1 | 2 | 3 | 4 | 5 | 6;

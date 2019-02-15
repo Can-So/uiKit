@@ -11,7 +11,7 @@ export async function renderDocument(page, doc) {
   await page.keyboard.type(JSON.stringify(doc));
 }
 
-export async function snapshot(page) {
+export async function snapshot(page, tolerance?: number) {
   const renderer = await page.$('#RendererOutput');
 
   // Try to take a screenshot of only the renderer.
@@ -23,6 +23,13 @@ export async function snapshot(page) {
     image = await page.screenshot();
   }
 
+  if (tolerance) {
+    // @ts-ignore
+    expect(image).toMatchProdImageSnapshot({
+      failureThreshold: `${tolerance}`,
+      failureThresholdType: 'percent',
+    });
+  }
   // @ts-ignore
   expect(image).toMatchProdImageSnapshot();
 }

@@ -51,7 +51,7 @@ export class MockMentionResourceWithInfoHints extends AbstractMentionResource {
     const randomTime = (this.config.maxWait || 0) - minWait;
     const waitTime = Math.random() * randomTime + minWait;
     window.setTimeout(() => {
-      let mentions = [];
+      let mentions: Array<any> = [];
       if (query === 'error') {
         notifyErrors('mock-error');
         return;

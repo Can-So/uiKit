@@ -1,5 +1,15 @@
 # @atlaskit/renderer
 
+## 38.0.6
+- [patch] [05c5bf7a93](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05c5bf7a93):
+
+  - Dont user pointer cursor for external images in Cards
+
+## 38.0.5
+- [patch] [6ebe368d95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ebe368d95):
+
+  - Allow passing through renderer props
+
 ## 38.0.4
 - [patch] [fb61c590cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb61c590cf):
 

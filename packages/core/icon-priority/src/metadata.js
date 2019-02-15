@@ -11,6 +11,16 @@
  */
 
 export default {
+  'priority-blocker': {
+    keywords: [
+      'priority-blocker',
+      'priorityblocker',
+      'priority',
+      'icon-priority',
+    ],
+    componentName: 'PriorityBlockerIcon',
+    package: '@atlaskit/icon-priority/glyph/priority-blocker',
+  },
   'priority-critical': {
     keywords: [
       'priority-critical',
@@ -80,15 +90,5 @@ export default {
     ],
     componentName: 'PriorityTrivialIcon',
     package: '@atlaskit/icon-priority/glyph/priority-trivial',
-  },
-  'priotity-blocker': {
-    keywords: [
-      'priotity-blocker',
-      'priotityblocker',
-      'priority',
-      'icon-priority',
-    ],
-    componentName: 'PriotityBlockerIcon',
-    package: '@atlaskit/icon-priority/glyph/priotity-blocker',
   },
 };

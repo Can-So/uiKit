@@ -1,17 +1,6 @@
-import { initEditor, clearEditor, snapshot } from './_utils';
-// import { setTableLayout } from './table/_table-utils';
-// import commonMessages from '../../messages';
-
-const nodeLabel = node => {
-  switch (node) {
-    case 'code':
-      return 'code block';
-    case 'bodied':
-      return 'bodied extension';
-    default:
-      return node;
-  }
-};
+import { initFullPageEditorWithAdf, snapshot } from './_utils';
+import * as gapcursor from './__fixtures__/gap-cursor-adf.json';
+import * as pageObject from './_pageObjects';
 
 describe('Snapshot Test: Gap cursor', () => {
   let page;
@@ -19,38 +8,37 @@ describe('Snapshot Test: Gap cursor', () => {
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initEditor(page, 'full-page');
+    await initFullPageEditorWithAdf(page, gapcursor);
   });
 
-  beforeEach(async () => {
-    await clearEditor(page);
+  it('should render gap cursor for code when ArrowRight', async () => {
+    await page.click(pageObject.codeContent);
+    await page.keyboard.down(pageObject.arrowRight);
+    await page.waitForSelector(pageObject.gapCursor);
+    await snapshot(page);
   });
 
-  ['table', 'code', 'panel'].forEach(node => {
-    [
-      { key: 'ArrowLeft', side: 'Left' },
-      { key: 'ArrowUp', side: 'Left' },
-      { key: 'ArrowRight', side: 'Right' },
-    ].forEach(({ key, side }) => {
-      it(`should render gap cursor for node ${nodeLabel(
-        node,
-      )} on ${side} side when hitting ${key}`, async () => {
-        await page.type('.ProseMirror p', `/${node}`);
-        await page.waitFor('div[aria-label="Popup"] span[role="button"]');
-        await page.click('div[aria-label="Popup"] span[role="button"]');
-        if (node === 'table' && side === 'Right') {
-          await page.keyboard.down(`ArrowDown`);
-          await page.keyboard.down(`ArrowDown`);
-          await page.keyboard.down(`ArrowDown`);
-        }
-        if (node === 'columns' && side === 'Right') {
-          await page.keyboard.down(`ArrowRight`);
-        }
-        await page.keyboard.down(key);
-        await page.waitForSelector('.ProseMirror-gapcursor');
-        await snapshot(page);
-      });
-    });
+  it(' should render gap cursor on panel when ArrowLeft', async () => {
+    await page.click(pageObject.panelContent);
+    await page.keyboard.down(pageObject.arrowLeft);
+    await page.waitForSelector(pageObject.gapCursor);
+    await snapshot(page);
+  });
+
+  it(' should render gap cursor on table on ArrowUp', async () => {
+    await page.click(pageObject.panelContent);
+    await page.keyboard.down(pageObject.arrowLeft);
+    await page.keyboard.down(pageObject.arrowUp);
+    await page.waitForSelector(pageObject.gapCursor);
+    await snapshot(page);
+  });
+
+  it(' should render gap cursor on table on ArrowDown', async () => {
+    await page.click(pageObject.codeContent);
+    await page.keyboard.down(pageObject.arrowRight);
+    await page.keyboard.down(pageObject.arrowDown);
+    await page.waitForSelector(pageObject.gapCursor);
+    await snapshot(page);
   });
 
   // TODO - redo this test

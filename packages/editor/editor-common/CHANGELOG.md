@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 31.0.5
+- [patch] [aa164f77b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aa164f77b8):
+
+  - ED-6046: fix selecting wrapped image with list next to it
+
 ## 31.0.4
 - [patch] [44a42d5eb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44a42d5eb3):
 

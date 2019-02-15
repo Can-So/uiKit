@@ -1,13 +1,10 @@
-import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
-import 'whatwg-fetch';
-import * as fetchMock from 'fetch-mock/src/client';
-import { expect } from 'chai';
-
 import { waitUntil } from '@atlaskit/util-common-test';
-
+import { expect } from 'chai';
+import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
+import * as fetchMock from 'fetch-mock/src/client';
+import 'whatwg-fetch';
 import MediaImageLoader from '../../../../api/media/MediaImageLoader';
 import TokenManager from '../../../../api/media/TokenManager';
-
 import {
   blobResponse,
   createTokenManager,
@@ -91,7 +88,7 @@ describe.skip('MediaImageLoader', () => {
       const mediaImageLoader = createMediaImageLoader();
       const mediaImage2 = `${mediaBaseUrl}/image2.png`;
       const blob = new Blob();
-      let resolve1;
+      let resolve1: (value: any | PromiseLike<any>) => void;
       fetchMock
         .mock({
           matcher: `begin:${mediaEmojiImagePath}`,
@@ -164,7 +161,7 @@ describe.skip('MediaImageLoader', () => {
           );
         })
         .then(() => p[0])
-        .then(dataURL0 => {
+        .then((dataURL0: string) => {
           expect(isDataURL(dataURL0), 'Is DataURL').to.equal(true);
           expect(dataURL0.indexOf('data:')).to.equal(0);
 
@@ -184,7 +181,7 @@ describe.skip('MediaImageLoader', () => {
           resolvers[2](blobResponse(blob));
           return Promise.all(p);
         })
-        .then(dataURLs => {
+        .then((dataURLs: string[]) => {
           dataURLs.forEach(dataURL => {
             expect(isDataURL(dataURL), 'Is DataURL').to.equal(true);
           });

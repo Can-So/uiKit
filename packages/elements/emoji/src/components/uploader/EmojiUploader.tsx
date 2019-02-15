@@ -34,7 +34,7 @@ export class EmojiUploaderInternal extends LoadingEmojiComponent<
     asyncLoadedComponent: EmojiUploaderInternal.AsyncLoadedComponent,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props, {});
   }
 

@@ -235,7 +235,9 @@ export class MockEmojiResource extends MockNonUploadingEmojiResource
     return this.uploads;
   }
 
-  prepareForUpload() {}
+  prepareForUpload() {
+    return Promise.resolve();
+  }
 
   // Make public for testing
   notifyNotReady() {

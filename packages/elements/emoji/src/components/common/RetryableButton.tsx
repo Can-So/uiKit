@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Component } from 'react';
 import AkButton from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
-import { messages } from '../i18n';
+import * as React from 'react';
+import { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { messages } from '../i18n';
 import * as styles from './styles';
 
 export interface Props {
@@ -17,7 +17,7 @@ export interface Props {
 }
 
 export default class RetryableButton extends Component<Props, {}> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
   }
 

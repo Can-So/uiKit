@@ -6,9 +6,9 @@ import ResourcedEmojiControl, {
 } from '../example-helpers/demo-resource-control';
 import { EmojiProvider, OnEmojiProviderChange } from '../src/api/EmojiResource';
 import ResourcedEmoji from '../src/components/common/ResourcedEmoji';
-import { toEmojiId } from '../src/type-helpers';
-import { EmojiSearchResult, EmojiDescription } from '../src/types';
 import { customCategory } from '../src/constants';
+import { toEmojiId } from '../src/type-helpers';
+import { EmojiDescription, EmojiSearchResult } from '../src/types';
 
 const customFilter = (emoji: EmojiDescription) =>
   emoji.category === customCategory;
@@ -27,7 +27,7 @@ class ResourcedFilteredEmojiList extends PureComponent<
   FilteredProps,
   FilteredState
 > {
-  constructor(props) {
+  constructor(props: FilteredProps) {
     super(props);
     this.state = {
       unfilteredEmojis: [],
@@ -35,7 +35,7 @@ class ResourcedFilteredEmojiList extends PureComponent<
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: FilteredProps) {
     if (this.props.emojiProvider !== nextProps.emojiProvider) {
       if (this.props.emojiProvider) {
         this.props.emojiProvider.then(provider => {
@@ -43,7 +43,7 @@ class ResourcedFilteredEmojiList extends PureComponent<
         });
       }
       if (nextProps.emojiProvider) {
-        nextProps.emojiProvider.then(provider => {
+        nextProps.emojiProvider.then((provider: EmojiProvider) => {
           provider.subscribe(this.onProviderChange);
           provider.filter('');
         });

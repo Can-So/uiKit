@@ -19,9 +19,10 @@ import { emojiPluginKey } from '../emoji/pm-plugins/main';
 import WithPluginState from '../../ui/WithPluginState';
 import { ToolbarSize } from '../../ui/Toolbar';
 import ToolbarInsertBlock from './ui/ToolbarInsertBlock';
-import { insertBlockType } from '../block-type/commands';
+import { insertBlockTypesWithAnalytics } from '../block-type/commands';
 import { startImageUpload } from '../image-upload/pm-plugins/commands';
 import { pluginKey as typeAheadPluginKey } from '../type-ahead/pm-plugins/main';
+import { INPUT_METHOD } from '../analytics';
 
 const toolbarSizeToButtons = toolbarSize => {
   switch (toolbarSize) {
@@ -43,6 +44,14 @@ export interface InsertBlockOptions {
   insertMenuItems?: any;
   horizontalRuleEnabled?: boolean;
   nativeStatusSupported?: boolean;
+}
+
+/**
+ * Wrapper over insertBlockTypeWithAnalytics to autobind toolbar input method
+ * @param name Block name
+ */
+function handleInsertBlockType(name) {
+  return insertBlockTypesWithAnalytics(name, INPUT_METHOD.TOOLBAR);
 }
 
 const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
@@ -129,7 +138,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               emojiProvider={providers.emojiProvider}
               nativeStatusSupported={options.nativeStatusSupported}
               horizontalRuleEnabled={options.horizontalRuleEnabled}
-              onInsertBlockType={insertBlockType}
+              onInsertBlockType={handleInsertBlockType}
               onInsertMacroFromMacroBrowser={insertMacroFromMacroBrowser}
               macroProvider={macroState.macroProvider}
               popupsMountPoint={popupsMountPoint}

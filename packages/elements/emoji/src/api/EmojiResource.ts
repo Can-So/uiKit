@@ -5,8 +5,9 @@ import {
   ServiceConfig,
   utils as serviceUtils,
 } from '@atlaskit/util-service-support';
-
+import { CategoryId } from '../components/picker/categories';
 import { selectedToneStorageKey } from '../constants';
+import { isMediaEmoji, isPromise, toEmojiId } from '../type-helpers';
 import {
   EmojiDescription,
   EmojiId,
@@ -14,17 +15,15 @@ import {
   EmojiSearchResult,
   EmojiUpload,
   OptionalEmojiDescription,
+  OptionalUser,
   SearchOptions,
   ToneSelection,
   User,
-  OptionalUser,
 } from '../types';
-import { isMediaEmoji, isPromise, toEmojiId } from '../type-helpers';
 import debug from '../util/logger';
 import EmojiLoader from './EmojiLoader';
 import EmojiRepository from './EmojiRepository';
 import SiteEmojiResource from './media/SiteEmojiResource';
-import { CategoryId } from '../components/picker/categories';
 
 export interface EmojiResourceConfig {
   /**
@@ -175,7 +174,7 @@ export interface EmojiProvider
    * Used by Tone Selector to indicate to the provider that the user
    * has selected a skin tone preference that should be remembered
    */
-  setSelectedTone(tone: ToneSelection);
+  setSelectedTone(tone: ToneSelection): void;
 
   /**
    * Returns a list of all the non-standard categories with emojis in the EmojiRepository
@@ -209,7 +208,7 @@ export interface UploadingEmojiProvider extends EmojiProvider {
   /**
    * Allows the preloading of data (e.g. authentication tokens) to speed the uploading of emoji.
    */
-  prepareForUpload();
+  prepareForUpload(): Promise<void>;
 }
 
 /**
@@ -633,7 +632,7 @@ export default class UploadingEmojiResource extends EmojiResource
     });
   }
 
-  prepareForUpload() {
+  prepareForUpload(): Promise<void> {
     if (this.siteEmojiResource) {
       this.siteEmojiResource.prepareForUpload();
     }

@@ -1,5 +1,17 @@
 # @atlaskit/navigation-next
 
+## 4.2.3
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/inline-dialog@9.0.15
+  - @atlaskit/logo@9.2.7
+  - @atlaskit/modal-dialog@7.2.3
+  - @atlaskit/select@7.0.0
+
+## 4.2.2
+- [patch] [313f5283c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/313f5283c5):
+
+  - Make the spacing after BackItem be defined using margin
+
 ## 4.2.1
 - [patch] [967c9ed460](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/967c9ed460):
 

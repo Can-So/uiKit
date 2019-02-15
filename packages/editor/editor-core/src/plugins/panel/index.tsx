@@ -13,6 +13,37 @@ import { getToolbarConfig } from './toolbar';
 
 import keymap from './pm-plugins/keymaps';
 import { EditorState } from 'prosemirror-state';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  PANEL_TYPE,
+} from '../analytics';
+import { QuickInsertActionInsert } from '../quick-insert/types';
+
+const insertPanelTypeWithAnalytics = (
+  panelType: PANEL_TYPE,
+  state: EditorState,
+  insert: QuickInsertActionInsert,
+) => {
+  const tr = insert(insertPanelType(panelType, state));
+  if (tr) {
+    addAnalytics(tr, {
+      action: ACTION.INSERTED,
+      actionSubject: ACTION_SUBJECT.DOCUMENT,
+      actionSubjectId: ACTION_SUBJECT_ID.PANEL,
+      attributes: {
+        inputMethod: INPUT_METHOD.QUICK_INSERT,
+        panelType,
+      },
+      eventType: EVENT_TYPE.TRACK,
+    });
+  }
+  return tr;
+};
 
 const insertPanelType = (panelType: PanelType, state: EditorState) =>
   state.schema.nodes.panel.createChecked(
@@ -43,7 +74,7 @@ const panelPlugin: EditorPlugin = {
         priority: 900,
         icon: () => <InfoIcon label={formatMessage(messages.panel)} />,
         action(insert, state) {
-          return insert(insertPanelType('info', state));
+          return insertPanelTypeWithAnalytics(PANEL_TYPE.INFO, state, insert);
         },
       },
       {
@@ -54,7 +85,7 @@ const panelPlugin: EditorPlugin = {
           <EditorNoteIcon label={formatMessage(messages.notePanel)} />
         ),
         action(insert, state) {
-          return insert(insertPanelType('note', state));
+          return insertPanelTypeWithAnalytics(PANEL_TYPE.NOTE, state, insert);
         },
       },
       {
@@ -65,7 +96,11 @@ const panelPlugin: EditorPlugin = {
           <EditorSuccessIcon label={formatMessage(messages.successPanel)} />
         ),
         action(insert, state) {
-          return insert(insertPanelType('success', state));
+          return insertPanelTypeWithAnalytics(
+            PANEL_TYPE.SUCCESS,
+            state,
+            insert,
+          );
         },
       },
       {
@@ -76,7 +111,11 @@ const panelPlugin: EditorPlugin = {
           <EditorWarningIcon label={formatMessage(messages.warningPanel)} />
         ),
         action(insert, state) {
-          return insert(insertPanelType('warning', state));
+          return insertPanelTypeWithAnalytics(
+            PANEL_TYPE.WARNING,
+            state,
+            insert,
+          );
         },
       },
       {
@@ -87,7 +126,7 @@ const panelPlugin: EditorPlugin = {
           <EditorErrorIcon label={formatMessage(messages.errorPanel)} />
         ),
         action(insert, state) {
-          return insert(insertPanelType('error', state));
+          return insertPanelTypeWithAnalytics(PANEL_TYPE.ERROR, state, insert);
         },
       },
     ],

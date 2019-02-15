@@ -69,7 +69,7 @@ type FormatHeadingAEP = FormatAEP<
       | INPUT_METHOD.TOOLBAR
       | INPUT_METHOD.SHORTCUT
       | INPUT_METHOD.FORMATTING;
-    newHeadlineLevel: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    newHeadingLevel: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   }
 >;
 

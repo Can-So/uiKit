@@ -51,7 +51,10 @@ type Props = {
   popperProps?: PopperPropsNoChildren,
   searchThreshold: number,
   styles: Object,
-  target: ElementType<*>,
+  target: ({
+    ref: ElementRef<*>,
+    isOpen: boolean,
+  }) => ElementType<*>,
 };
 type State = {
   isOpen: boolean,
@@ -199,8 +202,11 @@ export default class PopupSelect extends PureComponent<Props, State> {
   // ==============================
 
   resolveTargetRef = (popperRef: ElementRef<*>) => (ref: HTMLElement) => {
-    this.targetRef = ref;
-    popperRef(ref);
+    // avoid thrashing fn calls
+    if (!this.targetRef && popperRef && ref) {
+      this.targetRef = ref;
+      popperRef(ref);
+    }
   };
   resolveMenuRef = (popperRef: ElementRef<*>) => (ref: HTMLElement) => {
     this.menuRef = ref;
@@ -303,14 +309,12 @@ export default class PopupSelect extends PureComponent<Props, State> {
 
   render() {
     const { target } = this.props;
+    const { isOpen } = this.state;
+
     return (
       <Manager>
         <Reference>
-          {({ ref }) => (
-            <NodeResolver innerRef={this.resolveTargetRef(ref)}>
-              {target}
-            </NodeResolver>
-          )}
+          {({ ref }) => target({ ref: this.resolveTargetRef(ref), isOpen })}
         </Reference>
         {this.renderSelect()}
       </Manager>

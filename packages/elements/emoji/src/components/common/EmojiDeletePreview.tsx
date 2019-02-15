@@ -26,7 +26,7 @@ export interface State {
 }
 
 export default class EmojiDeletePreview extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       loading: false,
@@ -34,7 +34,7 @@ export default class EmojiDeletePreview extends Component<Props, State> {
     };
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillUpdate(nextProps: Props) {
     if (nextProps.emoji.id !== this.props.emoji.id) {
       this.setState({ error: false });
     }
