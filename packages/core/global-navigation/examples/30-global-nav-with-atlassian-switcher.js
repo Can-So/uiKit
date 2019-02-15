@@ -86,7 +86,6 @@ const AppSwitcherComponent = itemProps => (
   />
 );
 
-// TODO: make onClicks targets show up on page instead of console.logs
 const getGlobalNavigation = enableAtlassianSwitcher => () => (
   <AnalyticsListener
     channel="navigation"
