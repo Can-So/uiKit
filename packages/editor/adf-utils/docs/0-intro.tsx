@@ -43,7 +43,7 @@ export default md`
                         kind: 'generic',
                         value: {
                           kind: 'id',
-                          name: 'ADFNode',
+                          name: 'ADFEntity',
                         },
                       },
                       parameters: [
@@ -54,7 +54,7 @@ export default md`
                             kind: 'generic',
                             value: {
                               kind: 'id',
-                              name: 'ADFNode',
+                              name: 'ADFEntity',
                             },
                           },
                         },
@@ -77,7 +77,7 @@ export default md`
                                     kind: 'generic',
                                     value: {
                                       kind: 'id',
-                                      name: 'ADFNode | false | undefined',
+                                      name: 'ADFEntity | false | undefined',
                                     },
                                   },
                                   parameters: [
@@ -88,7 +88,7 @@ export default md`
                                         kind: 'generic',
                                         value: {
                                           kind: 'id',
-                                          name: 'ADFNode',
+                                          name: 'ADFEntity',
                                         },
                                       },
                                     },
@@ -193,7 +193,7 @@ export default md`
                             kind: 'generic',
                             value: {
                               kind: 'id',
-                              name: 'ADFNode',
+                              name: 'ADFEntity',
                             },
                           },
                         },
@@ -217,7 +217,7 @@ export default md`
                                   kind: 'generic',
                                   value: {
                                     kind: 'id',
-                                    name: 'ADFNode',
+                                    name: 'ADFEntity',
                                   },
                                 },
                               },
@@ -284,7 +284,7 @@ export default md`
                         kind: 'generic',
                         value: {
                           kind: 'id',
-                          name: 'Array<ADFNode>',
+                          name: 'Array<ADFEntity>',
                         },
                       },
                       parameters: [
@@ -295,7 +295,7 @@ export default md`
                             kind: 'generic',
                             value: {
                               kind: 'id',
-                              name: 'ADFNode',
+                              name: 'ADFEntity',
                             },
                           },
                         },
@@ -319,7 +319,7 @@ export default md`
                                   kind: 'generic',
                                   value: {
                                     kind: 'id',
-                                    name: 'ADFNode',
+                                    name: 'ADFEntity',
                                   },
                                 },
                               },
@@ -401,7 +401,7 @@ export default md`
                             kind: 'generic',
                             value: {
                               kind: 'id',
-                              name: 'ADFNode',
+                              name: 'ADFEntity',
                             },
                           },
                         },
@@ -436,7 +436,7 @@ export default md`
                                   kind: 'generic',
                                   value: {
                                     kind: 'id',
-                                    name: 'ADFNode',
+                                    name: 'ADFEntity',
                                   },
                                 },
                               },
