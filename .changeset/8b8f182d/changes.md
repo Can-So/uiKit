@@ -1,0 +1,1 @@
+- Updated react-select to 2.4.0, includes updates to BEM modifiers in options, for more information see the react-select release notes https://github.com/JedWatson/react-select/releases/tag/v2.4.0
