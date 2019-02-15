@@ -48,7 +48,6 @@ export interface MediaCardProps {
 
 export interface State {
   context?: Context;
-  // externalStatus: CardStatus;
 }
 
 export class MediaCardInternal extends Component<MediaCardProps, State> {
@@ -140,15 +139,6 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
     }
 
     if (!context || !id) {
-      return (
-        <CardView
-          status="loading"
-          mediaItemType="file"
-          dimensions={cardDimensions}
-        />
-      );
-    }
-    if (!context) {
       return this.renderLoadingCard();
     }
 
