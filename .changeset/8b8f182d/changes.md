@@ -1,2 +1,3 @@
 - Updated react-select to 2.4.0, includes updates to BEM modifiers in options, for more information see the react-select release notes https://github.com/JedWatson/react-select/releases/tag/v2.4.0
-- Added makeAnimated invocation back to createSelect, as multi select in modal bug has been resolved. 
+- Added makeAnimated invocation back to createSelect, as multi select in modal bug has been resolved.
+- Export makeAsyncSelect and makeCreatableSelect function from src
