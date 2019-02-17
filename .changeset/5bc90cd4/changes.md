@@ -1,1 +1,0 @@
-- Update the size detector to call children with null height and width if rendered on server
