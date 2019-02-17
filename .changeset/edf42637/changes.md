@@ -1,1 +1,2 @@
 - Size-detector now calls children with null on inital load.
+- As a consumer please do null check for width and height passed in size argument of render function.
