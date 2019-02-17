@@ -22,7 +22,6 @@ import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
 import ItemComponent from '../../../ItemComponent';
 import { mockJestEndpoints } from '../../../../../examples/helpers/mock-atlassian-switcher-endpoints';
-import { hasUndefined } from 'fast-json-patch/lib/helpers';
 
 const DrawerContents = () => <div>drawer</div>;
 const EmojiAtlassianIcon = () => <button>EmojiAtlassianIcon</button>;
