@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component, type Node } from 'react';
-import { canUseDOM } from 'exenv';
 import rafSchedule from 'raf-schd';
 
 // Need to make outer div full height in case consumer wants to align
@@ -118,12 +117,6 @@ export default class SizeDetector extends Component<Props, State> {
 
   renderChildren = () => {
     const { sizeMetrics } = this.state;
-    if (!canUseDOM) {
-      return this.props.children({ height: null, width: null });
-    }
-    if (sizeMetrics.width === null && sizeMetrics.height === null) {
-      return null;
-    }
     return this.props.children(sizeMetrics);
   };
 
