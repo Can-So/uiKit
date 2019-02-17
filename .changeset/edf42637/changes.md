@@ -1,0 +1,1 @@
+- Size-detector now calls children with null on inital load.
