@@ -21,7 +21,6 @@ import {
 import { insertBlock } from '../commands/insert-block';
 import { safeInsert } from 'prosemirror-utils';
 import {
-  ruleWithAnalytics,
   addAnalytics,
   INPUT_METHOD,
   ACTION,
@@ -29,7 +28,9 @@ import {
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
   AnalyticsEventPayload,
+  ruleWithAnalytics,
 } from '../../analytics';
+
 import { HeadingLevels } from '../types';
 
 const MAX_HEADING_LEVEL = 6;
