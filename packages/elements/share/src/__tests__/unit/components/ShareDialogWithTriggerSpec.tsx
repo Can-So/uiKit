@@ -3,8 +3,7 @@ import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { ShareButton } from '../../../components/ShareButton';
 import { defaultShareContentState, Props, ShareDialogWithTrigger, State } from '../../../components/ShareDialogWithTrigger';
-import { ShareForm } from '../../../components/ShareForm';
-import { createMockEvent } from '../_testUtils';
+import { ShareData, ShareForm } from '../../../components/ShareForm';
 
 let wrapper: ShallowWrapper<Props, State, ShareDialogWithTrigger>;
 let mockOnShareSubmit: jest.Mock;
@@ -166,23 +165,25 @@ describe('ShareDialogWithTrigger', () => {
   });
 
   describe('handleShareSubmit', () => {
-    // TODO never ends
-    it.skip('should call onSubmit props with an object of users and comment as an argument', () => {
+    it('should call onSubmit props with an object of users and comment as an argument', () => {
       const mockOnSubmit = jest.fn().mockResolvedValue({});
-      const mockState = {
-        isDialogOpen: true,
-        isSharing: false,
-        users: [{ type: 'user' as 'user', id: 'id' }, { email: 'email' }],
+      const values: ShareData = {
+        users: [
+          { type: 'user', id: 'id', name: 'name' },
+          { type: 'email', id: 'email', name: 'email' },
+        ],
         comment: {
-          format: 'plain_text' as 'plain_text',
+          format: 'plain_text',
           value: 'comment',
         },
+      };
+
+      const mockState: State = {
+        isDialogOpen: true,
+        isSharing: false,
         ignoreIntermediateState: false,
         defaultValue: defaultShareContentState,
       };
-      const mockSubmitEvent = createMockEvent('submit', {
-        target: document.createElement('form'),
-      });
       wrapper = shallow<ShareDialogWithTrigger>(
         <ShareDialogWithTrigger
           copyLink="copyLink"
@@ -191,12 +192,12 @@ describe('ShareDialogWithTrigger', () => {
         />,
       );
       wrapper.setState(mockState);
-      wrapper.find(ShareForm).simulate('shareClick', mockSubmitEvent);
+
+      shallow(wrapper.find(InlineDialog).prop('content') as any)
+        .find(ShareForm)
+        .simulate('shareClick', values);
       expect(mockOnSubmit).toHaveBeenCalledTimes(1);
-      expect(mockOnSubmit.mock.calls[0][0]).toEqual({
-        users: mockState.users,
-        comment: mockState.comment,
-      });
+      expect(mockOnSubmit).toHaveBeenCalledWith(values);
     });
 
     it('should close inline dialog when onSubmit resolves a value', () => {
