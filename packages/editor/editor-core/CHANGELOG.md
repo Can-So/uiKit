@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.12.1
+- [patch] [a3161a7927](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3161a7927):
+
+  - ED-6264 Fix examples page not been loaded when code is compiled
+
 ## 98.12.0
 - [minor] [4d8d759bf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d8d759bf9):
 
