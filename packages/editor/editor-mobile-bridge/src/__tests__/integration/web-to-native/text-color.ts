@@ -1,16 +1,10 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import {
-  callNativeBridge,
-  editor,
-  editable,
-  skipBrowsers as skip,
-  getBridgeOutput,
-} from '../_utils';
+import { callNativeBridge, editor, editable, getBridgeOutput } from '../_utils';
 
 BrowserTestCase(
   `text-color.ts: Can change text color`,
-  { skip: skip.concat('safari') },
+  { skip: ['safari', 'firefox'] },
   async client => {
     const browser = new Page(client);
     await browser.goto(editor.path);

@@ -86,7 +86,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'breakout: should be able to delete last character inside a "wide" codeBlock preserving the node',
-  { skip: [] },
+  { skip: ['firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
 

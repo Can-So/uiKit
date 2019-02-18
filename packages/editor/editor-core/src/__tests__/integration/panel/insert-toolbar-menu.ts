@@ -14,7 +14,7 @@ import {
 
 BrowserTestCase(
   'insert-toolbar-menu.ts: Insert panel via toolbar menu',
-  { skip: ['ie'] },
+  { skip: ['ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {

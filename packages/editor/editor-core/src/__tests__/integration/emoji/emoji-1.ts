@@ -28,7 +28,7 @@ BrowserTestCase(
 // ie complains it cannot either type :) or types :0
 BrowserTestCase(
   'emoji-1.ts: should convert :) to emoji',
-  { skip: ['ie'] },
+  { skip: ['ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });
@@ -45,7 +45,7 @@ BrowserTestCase(
 // IE now keying in CAPs on browserstack
 BrowserTestCase(
   'user should not be able to see emoji inside inline code',
-  { skip: ['ie'] },
+  { skip: ['ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });

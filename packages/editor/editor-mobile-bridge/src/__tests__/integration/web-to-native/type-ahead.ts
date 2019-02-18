@@ -1,16 +1,10 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import {
-  editor,
-  editable,
-  skipBrowsers as skip,
-  getBridgeOutput,
-  navigateOrClear,
-} from '../_utils';
+import { editor, editable, getBridgeOutput, navigateOrClear } from '../_utils';
 
 BrowserTestCase(
   `type-ahead.ts: Sends correct typing events`,
-  { skip: skip.concat('safari') },
+  { skip: ['safari', 'firefox'] },
   async client => {
     const browser = new Page(client);
     await browser.goto(editor.path);

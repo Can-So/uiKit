@@ -25,7 +25,7 @@ const dateTimeValues = `${dateTimePicker} > div > div > div`;
 
 BrowserTestCase(
   'When the user enters a partial date and hits enter, the value should be selected from the calendar',
-  {},
+  { skip: ['firefox'] },
   async client => {
     const dateTimePickerTest = new Page(client);
 
@@ -44,7 +44,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When the user enters an invalid date and hits enter, the value should be selected from the calendar',
-  {},
+  { skip: ['firefox'] },
   async client => {
     const dateTimePickerTest = new Page(client);
 
@@ -66,7 +66,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When DatePicker is focused & backspace pressed, the input should be cleared',
-  {},
+  { skip: ['firefox'] },
   async client => {
     const dateTimePickerTest = new Page(client);
 
@@ -99,7 +99,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When choosing another day in a Datetime picker focused, the date should be updated to the new value',
-  {},
+  { skip: ['firefox'] },
   async client => {
     const dateTimePickerTest = new Page(client);
 
@@ -132,7 +132,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When entering a new time in Timepicker Editable, the time should be updated to the new value',
-  { skip: ['ie'] }, // IE has an issue AK-5570, AK-5492
+  { skip: ['ie', 'firefox'] }, // IE has an issue AK-5570, AK-5492
   async client => {
     const timePicker = new Page(client);
 
@@ -159,7 +159,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'Invalid times in TimePicker should be cleared',
-  { skip: ['ie'] }, // IE has an issue AK-5570, AK-5492
+  { skip: ['ie', 'firefox'] }, // IE has an issue AK-5570, AK-5492
   async client => {
     const timePicker = new Page(client);
 
@@ -216,7 +216,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When a user types a year into the date input in DatetimePicker and subsequently hits enter, the value is correctly updated',
-  { skip: ['safari', 'ie'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
+  { skip: ['safari', 'ie', 'firefox'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
   async client => {
     const dateTimePickerTest = new Page(client);
 

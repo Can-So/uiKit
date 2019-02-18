@@ -16,7 +16,7 @@ const input = 'helloworld ';
     `toolbar-1.ts: should be able to select normal text, bold, italics, underline style for ${
       editor.name
     } editor`,
-    { skip: ['ie', 'safari', 'edge'] },
+    { skip: ['ie', 'safari', 'edge', 'firefox'] },
     async client => {
       const bold = `[aria-label="${
         textFormattingMessages.bold.defaultMessage
