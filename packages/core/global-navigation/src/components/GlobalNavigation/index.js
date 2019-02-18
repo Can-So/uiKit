@@ -72,7 +72,6 @@ export default class GlobalNavigation extends Component<
 
   static defaultProps = {
     enableAtlassianSwitcher: false,
-    atlassianSwitcherDrawerWidth: 'narrow',
     createDrawerWidth: 'wide',
     searchDrawerWidth: 'wide',
     notificationDrawerWidth: 'wide',
@@ -443,7 +442,11 @@ export default class GlobalNavigation extends Component<
                 onClose={this.closeDrawer(drawerName)}
                 onCloseComplete={onCloseComplete}
                 shouldUnmountOnExit={shouldUnmountOnExit}
-                width={this.props[`${drawerName}DrawerWidth`]}
+                width={
+                  drawerName === 'atlassianSwitcher'
+                    ? 'narrow'
+                    : this.props[`${drawerName}DrawerWidth`]
+                }
               >
                 <ScreenTracker
                   name={analyticsIdMap[drawerName]}

@@ -908,25 +908,27 @@ describe('GlobalNavigation', () => {
       globalNavWrapper = getDefaultWrapper({
         product: undefined,
       });
-      globalNavWrapper.find(AppSwitcherIcon).simulate('click');
-      expect(globalNavWrapper.children().find(AtlassianSwitcher)).toHaveLength(
-        0,
-      );
-      expect(globalNavWrapper.children().find(AppSwitcher)).toHaveLength(1);
+      expect(globalNavWrapper.find(AppSwitcher)).toHaveLength(1);
+      expect(globalNavWrapper.find(AtlassianSwitcher)).toHaveLength(0);
     });
 
     it('should not render Atlassian Switcher if cloudId is missing', () => {
       globalNavWrapper = getDefaultWrapper({
         cloudId: undefined,
       });
-      globalNavWrapper.find(AppSwitcherIcon).simulate('click');
-      expect(globalNavWrapper.children().find(AtlassianSwitcher)).toHaveLength(
-        0,
-      );
-      expect(globalNavWrapper.children().find(AppSwitcher)).toHaveLength(1);
+      expect(globalNavWrapper.find(AppSwitcher)).toHaveLength(1);
+      expect(globalNavWrapper.find(AtlassianSwitcher)).toHaveLength(0);
     });
 
-    it('should not render AppSwitcher when enableAtlassianSwitcher is present', () => {
+    it('should render AppSwitcher when enableAtlassianSwitcher is false', () => {
+      globalNavWrapper = getDefaultWrapper({
+        enableAtlassianSwitcher: false,
+      });
+      expect(globalNavWrapper.find(AppSwitcher)).toHaveLength(1);
+      expect(globalNavWrapper.find(AtlassianSwitcher)).toHaveLength(0);
+    });
+
+    it('should not render AppSwitcher when enableAtlassianSwitcher is truthy', () => {
       globalNavWrapper = getDefaultWrapper();
       globalNavWrapper.find(AppSwitcherIcon).simulate('click');
       expect(globalNavWrapper.children().find(AtlassianSwitcher)).toHaveLength(
@@ -936,6 +938,7 @@ describe('GlobalNavigation', () => {
     });
 
     it('should open a Drawer with the product specific switcher', () => {
+      globalNavWrapper = getDefaultWrapper();
       const AtlassianSwitcherIcon = globalNavWrapper.find(AppSwitcherIcon);
       AtlassianSwitcherIcon.simulate('click');
       expect(globalNavWrapper.find(JiraSwitcher)).toHaveLength(1);

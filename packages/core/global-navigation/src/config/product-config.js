@@ -212,6 +212,9 @@ export default function generateProductConfig(
     profileIconUrl,
   } = props;
 
+  const shouldRenderAtlassianSwitcher =
+    enableAtlassianSwitcher && cloudId && product;
+
   return {
     product: configFactory(onProductClick, productTooltip, {
       icon: productIcon,
@@ -233,7 +236,7 @@ export default function generateProductConfig(
       onSettingsClick || (settingsDrawerContents && openDrawer('settings')),
       settingsTooltip,
     ),
-    atlassianSwitcher: enableAtlassianSwitcher
+    atlassianSwitcher: shouldRenderAtlassianSwitcher
       ? configFactory(openDrawer('atlassianSwitcher'))
       : null,
 
@@ -253,7 +256,7 @@ export default function generateProductConfig(
       profileIconUrl,
     ),
     appSwitcher:
-      appSwitcherComponent && !(enableAtlassianSwitcher && cloudId && product)
+      appSwitcherComponent && !shouldRenderAtlassianSwitcher
         ? {
             itemComponent: appSwitcherComponent,
             label: appSwitcherTooltip,
