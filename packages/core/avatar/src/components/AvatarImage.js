@@ -2,6 +2,7 @@
 
 import GlobalTheme from '@atlaskit/theme';
 import React, { PureComponent } from 'react';
+import { canUseDOM } from 'exenv';
 import { Slot, ShapeGroup, Svg } from '../styled/AvatarImage';
 import type { AppearanceType, SizeType } from '../types';
 
@@ -78,7 +79,7 @@ export const clearCache = () => {
 export default class AvatarImage extends PureComponent<Props, State> {
   state: State = {
     hasError: false,
-    // if provided a scr - we need to load it
+    // if provided a src - we need to load it
     isLoading: Boolean(this.props.src),
   };
   isComponentMounted: boolean;
@@ -93,6 +94,7 @@ export default class AvatarImage extends PureComponent<Props, State> {
       this.setState({ isLoading: true });
     }
   }
+
   componentDidUpdate(prevProps: Props) {
     if (this.props.src && this.props.src !== prevProps.src) {
       this.loadImage();
@@ -129,7 +131,8 @@ export default class AvatarImage extends PureComponent<Props, State> {
     const { alt, src, appearance, size } = this.props;
     const { hasError, isLoading } = this.state;
     const showDefault = !isLoading && (!src || hasError);
-    const imageUrl: ?string = src && (!isLoading || cache[src]) ? src : null;
+    const imageUrl: ?string =
+      src && (!isLoading || cache[src] || !canUseDOM) ? src : null;
     return showDefault ? (
       <DefaultImage
         appearance={appearance}
