@@ -1,15 +1,23 @@
 import { ContentLink } from './link-parser';
 import { Schema, Node as PMNode } from 'prosemirror-model';
+import { Context } from '..';
 
 export function issueLinkResolver(
   link: ContentLink,
   schema: Schema,
+  context: Context,
 ): PMNode[] | undefined {
-  // TODO: check if the link content is inside context
-  if (link.linkBody === 'smart-link') {
+  const { originalLinkText } = link;
+
+  if (
+    context.inlineCardConversion &&
+    context.inlineCardConversion[originalLinkText]
+  ) {
+    const url = context.inlineCardConversion[originalLinkText];
+
     return [
       schema.nodes.inlineCard.createChecked({
-        url: `${link.notLinkBody}`,
+        url: `${url}`,
       }),
     ];
   }

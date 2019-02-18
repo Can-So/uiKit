@@ -599,7 +599,7 @@ Object {
     Object {
       "content": Array [
         Object {
-          "text": "this [",
+          "text": "this ",
           "type": "text",
         },
         Object {
@@ -610,7 +610,7 @@ Object {
           "type": "inlineCard",
         },
         Object {
-          "text": "] is a smart card",
+          "text": " is a smart card",
           "type": "text",
         },
       ],
