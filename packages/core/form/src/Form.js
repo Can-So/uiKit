@@ -20,7 +20,7 @@ type Props = {
     disabled: boolean,
     dirty: boolean,
     submitting: boolean,
-    getValues: () => any,
+    getValues: () => ?Object,
   }) => Node,
   /* Called when the form is submitted without errors */
   onSubmit: Object => any,
@@ -77,7 +77,7 @@ class Form extends React.Component<Props, State> {
     submitting: false,
   };
 
-  getValues = () => {
+  getValues = (): ?Object => {
     return this.form.getState().values;
   };
 
