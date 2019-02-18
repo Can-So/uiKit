@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 31.1.0
+- [minor] [be86cbebc3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be86cbebc3):
+
+  - enable noImplicitAny for task-decision, and related changes
+
 ## 31.0.5
 - [patch] [aa164f77b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aa164f77b8):
 
