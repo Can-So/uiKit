@@ -88,7 +88,7 @@ BrowserTestCase(
     expect(isEnabled).toBe(false);
   },
 );
-// TODO: https://product-fabric.atlassian.net/browse/ED-6288
+// TODO:https://product-fabric.atlassian.net/browse/ED-6288
 // BrowserTestCase(
 //   'alignment: should maintain alignment when hit return',
 //   { skip: ['firefox'] },
