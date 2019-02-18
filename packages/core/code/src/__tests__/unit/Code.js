@@ -1,7 +1,7 @@
 // @flow
 import { mount, shallow } from 'enzyme';
 import React from 'react';
-import ThemedCode from '../../ThemesCode';
+import ThemedCode from '../../ThemedCode';
 import Code from '../../components/Code';
 
 const jsCode = `const map = new Map({ key: 'value' })`;
