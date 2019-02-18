@@ -47,7 +47,6 @@ export const selectByTextAndClick = async ({ page, tagName, text }) => {
   }
 };
 
-
 // TODO: remove this gotoExample step
 export const initEditor = async (page, appearance: string) => {
   const editor = '.ProseMirror';
@@ -86,6 +85,7 @@ export const deviceViewPorts = {
 };
 
 export const enableAllEditorProps = {
+  appearance: 'full-page',
   allowPanel: true,
   allowLists: true,
   allowTextColor: true,
@@ -484,4 +484,3 @@ export const getBoundingRect = async (page, selector) => {
     return { left: x, top: y, width, height, id: element.id };
   }, selector);
 };
-

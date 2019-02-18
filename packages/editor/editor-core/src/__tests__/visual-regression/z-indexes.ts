@@ -5,26 +5,25 @@ import * as pageObject from './_pageObjects';
 describe('Snapshot Test: z-indexes', () => {
   let page;
   const noData = {
-    "version": 1,
-    "type": "doc",
-    "content": [
+    version: 1,
+    type: 'doc',
+    content: [
       {
-        "type": "paragraph",
-        "content": [
+        type: 'paragraph',
+        content: [
           {
-            "type": "text",
-            "text": "too many full page editor "
-          }
-        ]
-      }
-    ]
+            type: 'text',
+            text: 'too many full page editor ',
+          },
+        ],
+      },
+    ],
   };
-
 
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initFullPageEditorWithAdf(page,noData);
+    await initFullPageEditorWithAdf(page, noData);
   });
 
   beforeEach(async () => {

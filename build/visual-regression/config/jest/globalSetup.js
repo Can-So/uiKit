@@ -18,14 +18,14 @@ async function globalSetup() {
     // launch and run puppeteer if inside of CI
     console.log('puppeteer:', puppeteer.executablePath());
     const puppeteerOptions = {
+      slowMo: 100,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
       ],
     };
-    if (process.env.WATCH == 'true'){
-      puppeteerOptions.slowMo = 100;
+    if (process.env.WATCH == 'true') {
       puppeteerOptions.headless = false;
     }
     const browser = await puppeteer.launch(puppeteerOptions);
