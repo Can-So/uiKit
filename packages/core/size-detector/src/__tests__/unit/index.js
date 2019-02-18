@@ -77,7 +77,7 @@ describe(name, () => {
     const markup = <div id="foo123">Foo</div>;
     const markupString = ReactDOMServer.renderToStaticMarkup(markup);
     const html = ReactDOMServer.renderToString(
-      <SizeDetector>{width => markup}</SizeDetector>,
+      <SizeDetector>{() => markup}</SizeDetector>,
     );
     expect(html).toContain(markupString);
   });
