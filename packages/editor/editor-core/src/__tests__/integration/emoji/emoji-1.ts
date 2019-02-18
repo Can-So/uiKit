@@ -14,7 +14,7 @@ import {
 
 BrowserTestCase(
   'emoji-1.ts:should be able to see emoji if typed the name in full',
-  { skip: ['safari', 'ie'] },
+  { skip: ['safari', 'ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });

@@ -25,7 +25,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   `type-ahead.ts: Space sends dismiss type-ahead event.`,
-  { skip },
+  { skip: ['firefox'] },
   async client => {
     const browser = new Page(client);
     await navigateOrClear(browser, editor.path);
