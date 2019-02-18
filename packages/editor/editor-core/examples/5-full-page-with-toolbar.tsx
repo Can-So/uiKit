@@ -1,8 +1,5 @@
-import styled from 'styled-components';
-
 import * as React from 'react';
 import Button, { ButtonGroup } from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
 
 import Editor from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
@@ -16,19 +13,6 @@ import { exampleDocument } from '../example-helpers/example-document';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';
 import { DevTools } from '../example-helpers/DevTools';
 import { Wrapper, Content } from './5-full-page';
-
-export const TitleInput: any = styled.input`
-  border: none;
-  outline: none;
-  font-size: 2.07142857em !important;
-  margin: 0 0 21px;
-  padding: 0;
-
-  &::placeholder {
-    color: ${colors.N90};
-  }
-`;
-TitleInput.displayName = 'TitleInput';
 
 // tslint:disable-next-line:no-console
 const analyticsHandler = (actionName, props) => console.log(actionName, props);
