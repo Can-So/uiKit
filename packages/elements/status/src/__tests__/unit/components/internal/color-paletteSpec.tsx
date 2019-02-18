@@ -38,7 +38,8 @@ describe('ColorPalette', () => {
     const component = shallowWithIntl(<ColorPalette onClick={jest.fn()} />);
 
     expect(
-      component.findWhere(n => n.is(Color) && n.prop('isSelected')).length,
+      component.findWhere((n: any) => n.is(Color) && n.prop('isSelected'))
+        .length,
     ).toBe(0);
   });
 });
