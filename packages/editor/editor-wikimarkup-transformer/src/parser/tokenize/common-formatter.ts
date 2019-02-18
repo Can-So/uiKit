@@ -159,8 +159,10 @@ export function commonFormatter(
          * We should "fly over" the link format and we dont want
          * -awesome [link|https://www.atlass-ian.com] nice
          * to be a strike through because of the '-' in link
+         *
+         * Also, is not a problem send an empty context because we're only
+         * checking if it has a nested macro inside.
          */
-        // TODO: If necessary, delegates the context
         const token = linkFormat({
           input,
           schema,

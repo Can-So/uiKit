@@ -54,7 +54,7 @@ export function parseString({
           parseLeadingKeyword(substring) ||
           parseMacroKeyword(substring) ||
           parseOtherKeyword(substring) ||
-          parseIssueKeyword(substring);
+          parseIssueKeyword(substring, context.issueKeyRegex);
 
         if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
           tokenType = match.type;
@@ -86,7 +86,7 @@ export function parseString({
           match =
             parseMacroKeyword(substring) ||
             parseOtherKeyword(substring) ||
-            parseIssueKeyword(substring);
+            parseIssueKeyword(substring, context.issueKeyRegex);
         }
 
         if (match && ignoreTokenTypes.indexOf(match.type) === -1) {

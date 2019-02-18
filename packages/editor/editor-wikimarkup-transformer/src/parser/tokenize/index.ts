@@ -77,10 +77,13 @@ export interface PMNodeToken {
   readonly length: number;
 }
 
+export interface InlineCardConversion {
+  [key: string]: string;
+}
+
 export interface Context {
-  readonly inlineCardConversion?: {
-    [key: string]: string;
-  };
+  readonly inlineCardConversion?: InlineCardConversion;
+  readonly issueKeyRegex?: RegExp | undefined;
   readonly tokenErrCallback?: TokenErrCallback;
 }
 

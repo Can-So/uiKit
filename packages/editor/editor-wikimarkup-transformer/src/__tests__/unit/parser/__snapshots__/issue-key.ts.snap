@@ -22,6 +22,23 @@ Object {
 }
 `;
 
+exports[`JIRA wiki markup - Issue key (smart card) should not parse issues if context is not provided 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "text": "this ABC-10 is not a smart card",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Issue key (smart card) should not parse issues inside a code macro 1`] = `
 Object {
   "content": Array [

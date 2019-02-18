@@ -1,10 +1,13 @@
 import { Schema, Node as PMNode } from 'prosemirror-model';
-import { Token, TokenParser, Context } from './';
-
-export const ISSUE_KEY_REGEX = /^[A-Z][A-Z]+-[0-9]+/;
+import { Token, TokenParser, Context, InlineCardConversion } from './';
 
 export const issueKey: TokenParser = ({ input, position, schema, context }) => {
-  const match = input.substring(position).match(ISSUE_KEY_REGEX);
+  // This scenario happens when context is empty
+  if (!context.issueKeyRegex) {
+    return fallback(input, position);
+  }
+
+  const match = input.substring(position).match(context.issueKeyRegex);
 
   if (!match) {
     return fallback(input, position);
@@ -15,14 +18,8 @@ export const issueKey: TokenParser = ({ input, position, schema, context }) => {
     match[0],
   );
 
-  /* This scenario happens when consumers (Jira) doesn't provide to us all the
-   * issues inside a markup.
-   */
+  // This scenario happens when context doesn't has all the issues inside a markup
   if (!issue) {
-    /* TODO: Instead of call the fallback we can throw an error (IssueNotFound)
-     * which will be handled by the tokenErrCallback in the parseToken function.
-     * This can help us to debug why some issues are not being renderd properly.
-     */
     return fallback(input, position);
   }
 
@@ -50,3 +47,15 @@ const getIssue = (
 const buildInlineCard = (schema: Schema, url: string): PMNode[] => [
   schema.nodes.inlineCard.createChecked({ url }),
 ];
+
+export const buildIssueKeyRegex = (
+  inlineCardConversion?: InlineCardConversion,
+): RegExp | undefined => {
+  if (!inlineCardConversion) {
+    return undefined;
+  }
+
+  const pattern: string = Object.keys(inlineCardConversion).join('|');
+
+  return new RegExp(`^(${pattern})`, 'g');
+};

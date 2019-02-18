@@ -64,9 +64,16 @@ describe('JIRA wiki markup - Issue key (smart card)', () => {
   };
 
   for (const [testCaseDescription, markup] of testCases) {
-    fit(testCaseDescription, () => {
+    it(testCaseDescription, () => {
       const transformer = new WikiMarkupTransformer();
       expect(transformer.parse(markup, context)).toMatchSnapshot();
     });
   }
+
+  it('should not parse issues if context is not provided', () => {
+    const markup = 'this ABC-10 is not a smart card';
+    const transformer = new WikiMarkupTransformer();
+
+    expect(transformer.parse(markup)).toMatchSnapshot();
+  });
 });
