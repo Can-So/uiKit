@@ -1,0 +1,1 @@
+- Allow items in Page Header actions to wrap on small screens.
