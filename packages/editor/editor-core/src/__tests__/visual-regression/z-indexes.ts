@@ -1,4 +1,4 @@
-import { vrEditor, clearEditor, snapshot } from './_utils';
+import {clearEditor, snapshot, initFullPageEditorWithAdf } from './_utils';
 import * as pageObject from './_pageObjects';
 
 // TODO - add ADF before loading stuff
@@ -8,7 +8,7 @@ describe('Snapshot Test: z-indexes', () => {
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await vrEditor(page);
+    await initFullPageEditorWithAdf(page);
   });
 
   beforeEach(async () => {
