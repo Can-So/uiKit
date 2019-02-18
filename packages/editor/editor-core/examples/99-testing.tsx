@@ -105,6 +105,7 @@ export default function EditorExampleForTests() {
   return (
     <React.Fragment>
       <div id="editor-container" style={{ width: '100%', height: '100%' }} />
+      <ClipboardHelper />
     </React.Fragment>
   );
 }
