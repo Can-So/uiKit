@@ -1,7 +1,7 @@
 {
   "include": ["./src/**.ts"],
   "compilerOptions": {
-    "baseUrl": "./",    
+    "baseUrl": "./",
     "outDir": "./dist",
     "plugins": [
       { "transform": "./src/transformers/xregexpTransformer.ts" }
@@ -13,8 +13,8 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "noUnusedLocals": true,
     "sourceMap": false,
     "strictNullChecks": true,
@@ -31,11 +31,11 @@
       "es2015.promise"
     ],
     "types": ["jest"],
-    "typeRoots": ["../../../typings", "./node_modules/@types"],    
+    "typeRoots": ["../../../typings", "./node_modules/@types"],
   },
   "files": [
     "../../../typings/jest-in-case.d.ts",
     "../../../typings/jest.frameworkSetup.d.ts",
-  ],  
+  ],
   "exclude": ["transformers/**/*"]
 }
