@@ -2,7 +2,6 @@ import { TableMap } from 'prosemirror-tables';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
-import { TableLayout } from '@atlaskit/adf-schema';
 import {
   tableCellMinWidth,
   akEditorTableNumberColumnWidth,
@@ -18,10 +17,11 @@ import { updateRightShadow } from '../../nodeviews/TableComponent';
 
 import {
   hasTableBeenResized,
+  getTableWidth,
   insertColgroupFromNode as recreateResizeColsByNode,
 } from '../../utils';
 
-import { getLayoutSize } from './utils';
+import { getLayoutSize, tableLayoutToSize } from './utils';
 
 export function updateColumnWidth(view, cell, movedWidth, resizer) {
   let $cell = view.state.doc.resolve(cell);
@@ -172,20 +172,16 @@ export function scaleTable(
   view: EditorView,
   tableElem: HTMLTableElement | null,
   node: PMNode,
+  prevNode: PMNode,
   pos: number,
   containerWidth: number | undefined,
-  currentLayout: TableLayout,
-  previousLayout?: TableLayout,
-  wasAutoSized?: boolean,
+  initialScale?: boolean,
 ) {
-  const state = setColumnWidths(
-    tableElem,
-    node,
-    containerWidth,
-    currentLayout,
-    previousLayout,
-    wasAutoSized,
-  );
+  if (!tableElem) {
+    return;
+  }
+
+  const state = scale(tableElem, node, prevNode, containerWidth, initialScale);
 
   if (state) {
     const tr = applyColumnWidths(view, state, node, pos + 1);
@@ -197,30 +193,53 @@ export function scaleTable(
 }
 
 /**
- * Hydate a table with column widths.
+ * Base function to trigger the actual scale on a table node.
+ * Will only resize/scale if a table has been previously resized.
  * @param tableElem
  * @param node
- * @param containerWidth
- * @param currentLayout
+ * @param maxSize
  */
-export function setColumnWidths(
-  tableElem: HTMLTableElement | null,
+function scale(
+  tableElem: HTMLTableElement,
   node: PMNode,
+  prevNode: PMNode,
   containerWidth: number | undefined,
-  currentLayout: TableLayout,
-  previousLayout?: TableLayout,
-  wasAutoSized?: boolean,
+  initialScale?: boolean,
 ): ResizeState | undefined {
-  if (!tableElem) {
+  // If a table has not been resized yet, columns should be auto.
+  if (hasTableBeenResized(node) === false) {
+    // If its not a re-sized table, we still want to re-create cols
+    // To force reflow of columns upon delete.
+    recreateResizeColsByNode(tableElem, node);
     return;
   }
-  let previousMaxSize;
-  if (previousLayout) {
-    previousMaxSize = getLayoutSize(previousLayout, containerWidth);
+
+  const maxSize = getLayoutSize(node.attrs.layout, containerWidth);
+  const resizer = Resizer.fromDOM(tableElem, {
+    minWidth: tableCellMinWidth,
+    maxSize,
+    node,
+  });
+
+  let newWidth = maxSize;
+  let prevTableWidth = getTableWidth(prevNode);
+  let previousMaxSize = tableLayoutToSize[prevNode.attrs.layout];
+
+  if (!initialScale) {
+    previousMaxSize = getLayoutSize(prevNode.attrs.layout, containerWidth);
   }
 
-  const maxSize = getLayoutSize(currentLayout, containerWidth);
-  return scale(tableElem, node, maxSize, previousMaxSize, wasAutoSized);
+  // Determine if table was overflow
+  if (prevTableWidth > previousMaxSize) {
+    const overflowScale = prevTableWidth / previousMaxSize;
+    newWidth = Math.floor(newWidth * overflowScale);
+  }
+
+  if (node.attrs.isNumberColumnEnabled) {
+    newWidth -= akEditorTableNumberColumnWidth;
+  }
+
+  return resizer.scale(newWidth);
 }
 
 /**
@@ -251,45 +270,4 @@ export function resizeColumnTo(
   resizer.apply(newState);
 
   return newState;
-}
-
-/**
- * Base function to trigger the actual scale on a table node.
- * Will only resize/scale if a table has been previously resized.
- * @param tableElem
- * @param node
- * @param maxSize
- */
-function scale(
-  tableElem: HTMLTableElement,
-  node: PMNode,
-  maxSize: number,
-  previousMaxSize?: number,
-  wasAutoSized?: boolean,
-): ResizeState | undefined {
-  if (node.attrs.isNumberColumnEnabled) {
-    maxSize -= akEditorTableNumberColumnWidth;
-  }
-
-  // If a table has not been resized yet, columns should be auto.
-  if (hasTableBeenResized(node)) {
-    const resizer = Resizer.fromDOM(tableElem, {
-      minWidth: tableCellMinWidth,
-      maxSize,
-      node,
-    });
-
-    const totalWidth = resizer.currentState.totalWidth;
-    // Table was overflow, lets scale up the new 'maxSize' to keep our overflow in tact.
-    if (!wasAutoSized && previousMaxSize && totalWidth > previousMaxSize) {
-      const overflowScale = totalWidth / previousMaxSize;
-      maxSize = Math.floor(maxSize * overflowScale);
-    }
-
-    return resizer.scale(maxSize);
-  } else {
-    // If its not a re-sized table, we still want to re-create cols
-    // To force reflow of columns upon delete.
-    recreateResizeColsByNode(tableElem, node);
-  }
 }

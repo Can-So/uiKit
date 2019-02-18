@@ -11,6 +11,7 @@ import {
 
 import { contentWidth } from '../pm-plugins/table-resizing/resizer/contentWidth';
 import { calculateColWidth } from '../pm-plugins/table-resizing/resizer/utils';
+import { getLayoutSize } from '../pm-plugins/table-resizing/utils';
 import { sendLogs } from '../../../utils/sendLogs';
 
 const fireAnalytics = (properties = {}) =>
@@ -235,9 +236,25 @@ export const fixAutoSizedTable = (
   basePos: number,
 ) => {
   const colWidths = parseDOMColumnWidths(table);
+  const totalContentWidth = colWidths.reduce(
+    (acc, current) => acc + current,
+    0,
+  );
+  const tableLayout = getLayoutBasedOnWidth(totalContentWidth);
+  const maxLayoutSize = getLayoutSize(tableLayout);
+
+  // Content width will generally not meet the constraints of the layout
+  // whether it be below or above, so we scale our columns widths
+  // to meet these requirements
+  let scale = 1;
+  if (totalContentWidth !== maxLayoutSize) {
+    scale = maxLayoutSize / totalContentWidth;
+  }
+
+  const scaledColumnWidths = colWidths.map(width => Math.floor(width * scale));
 
   tr = replaceCells(tr, node, basePos, (cell, _rowIndex, colIndex) => {
-    const newColWidths = colWidths.slice(
+    const newColWidths = scaledColumnWidths.slice(
       colIndex,
       colIndex + cell.attrs.colspan,
     );
@@ -255,15 +272,13 @@ export const fixAutoSizedTable = (
   return tr
     .setNodeMarkup(basePos, undefined, {
       ...node.attrs,
-      layout: getLayoutBasedOnWidth(colWidths),
+      layout: tableLayout,
       __autoSize: false,
     })
     .setMeta('addToHistory', false);
 };
 
-const getLayoutBasedOnWidth = (columnWidths: Array<number>): TableLayout => {
-  const totalWidth = columnWidths.reduce((acc, current) => acc + current, 0);
-
+const getLayoutBasedOnWidth = (totalWidth: number): TableLayout => {
   if (totalWidth > akEditorWideLayoutWidth) {
     return 'full-width';
   } else if (
