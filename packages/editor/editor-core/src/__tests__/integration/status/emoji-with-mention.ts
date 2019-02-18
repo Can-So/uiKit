@@ -13,7 +13,7 @@ import {
 
 BrowserTestCase(
   'emoji.ts: Insert an emoji, then a mention, move to right before the emoji and try to add text between both',
-  { skip: ['ie'] },
+  { skip: ['ie', 'firefox'] },
   async client => {
     const browser = new Page(client);
 

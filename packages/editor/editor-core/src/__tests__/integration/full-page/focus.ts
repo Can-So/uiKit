@@ -33,7 +33,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'focus.ts: Should focus editor when hit tab key',
-  { skip: ['ie', 'edge', 'safari'] },
+  { skip: ['ie', 'edge', 'safari', 'firefox'] },
   async client => {
     const browser = new Page(client);
     await browser.goto(fullPageEditor);
