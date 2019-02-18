@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, FileDetails, isPreviewableType } from '@atlaskit/media-core';
+import {
+  Context,
+  FileDetails,
+  isPreviewableType,
+  MediaItemType,
+} from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
@@ -56,7 +61,6 @@ export class Card extends Component<CardProps, CardState> {
     isCardVisible: !this.props.isLazy,
     previewOrientation: 1,
     isPlayingFile: false,
-    isMediaViewerVisible: false,
   };
 
   componentDidMount() {
@@ -306,8 +310,16 @@ export class Card extends Component<CardProps, CardState> {
     return actions;
   }
 
-  onClick = (result: CardEvent, analyticsEvent?: UIAnalyticsEventInterface) => {
-    const { onClick, useInlinePlayer, shouldOpenMediaViewer } = this.props;
+  onClick = async (
+    result: CardEvent,
+    analyticsEvent?: UIAnalyticsEventInterface,
+  ) => {
+    const {
+      identifier,
+      onClick,
+      useInlinePlayer,
+      shouldOpenMediaViewer,
+    } = this.props;
     const { mediaItemDetails } = result;
 
     this.onClickPayload = {
@@ -328,9 +340,14 @@ export class Card extends Component<CardProps, CardState> {
       this.setState({
         isPlayingFile: true,
       });
-    } else if (shouldOpenMediaViewer) {
+    } else if (shouldOpenMediaViewer && identifier.mediaItemType === 'file') {
+      const mediaViewerSelectedItem: MediaViewerItem = {
+        id: await identifier.id,
+        occurrenceKey: '',
+        type: 'file',
+      };
       this.setState({
-        isMediaViewerVisible: true,
+        mediaViewerSelectedItem,
       });
     }
   };
@@ -365,25 +382,40 @@ export class Card extends Component<CardProps, CardState> {
 
   onMediaViewerClose = () => {
     this.setState({
-      isMediaViewerVisible: false,
+      mediaViewerSelectedItem: undefined,
     });
   };
 
+  getMediaViewerList = (): MediaViewerItem[] => {
+    const { surroundingItems = [] } = this.props;
+    const { mediaViewerSelectedItem } = this.state;
+    if (!mediaViewerSelectedItem) {
+      return [];
+    }
+
+    const list: MediaViewerItem[] = surroundingItems.map(id => ({
+      id,
+      occurrenceKey: '',
+      type: 'file' as MediaItemType,
+    }));
+
+    return surroundingItems.indexOf(mediaViewerSelectedItem.id) > -1
+      ? list
+      : [mediaViewerSelectedItem, ...list];
+  };
+
   renderMediaViewer = () => {
+    const { mediaViewerSelectedItem } = this.state;
     const { context, identifier } = this.props;
-    if (identifier.mediaItemType !== 'file') {
+    if (!mediaViewerSelectedItem || identifier.mediaItemType !== 'file') {
       return;
     }
 
-    const { id, collectionName = '' } = identifier;
-    const selectedItem: MediaViewerItem = {
-      id, // TODO: support async id
-      occurrenceKey: '', // TODO: do we need to provide this if the source it's not a collection?
-      type: 'file',
-    };
+    const { collectionName = '' } = identifier;
+    const list = this.getMediaViewerList();
     const dataSource: MediaViewerDataSource = {
       collectionName,
-      list: [selectedItem], // TODO: pass surrounding items
+      list,
     };
 
     return (
@@ -391,7 +423,7 @@ export class Card extends Component<CardProps, CardState> {
         collectionName={collectionName}
         dataSource={dataSource}
         context={context}
-        selectedItem={selectedItem}
+        selectedItem={mediaViewerSelectedItem}
         onClose={this.onMediaViewerClose}
       />
     );
@@ -447,7 +479,7 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   render() {
-    const { isPlayingFile, isMediaViewerVisible } = this.state;
+    const { isPlayingFile, mediaViewerSelectedItem } = this.state;
     const content = isPlayingFile
       ? this.renderInlinePlayer()
       : this.renderCard();
@@ -459,7 +491,7 @@ export class Card extends Component<CardProps, CardState> {
       <IntlProvider locale="en">
         <div>
           {content}
-          {isMediaViewerVisible && this.renderMediaViewer()}
+          {mediaViewerSelectedItem && this.renderMediaViewer()}
         </div>
       </IntlProvider>
     );
