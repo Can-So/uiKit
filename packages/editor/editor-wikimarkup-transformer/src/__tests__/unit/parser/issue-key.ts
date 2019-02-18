@@ -34,8 +34,8 @@ describe('JIRA wiki markup - Issue key (smart card)', () => {
     ['should parse issue inside a list item', '- this ABC-10 is a smart card'],
     ['should parse issue inside a table cell', '|foo|ABC-10|'],
     [
-      'should parse issue inside a bold',
-      '*this [ABC-10] is an important smart card*',
+      'should not parse issue inside a bold',
+      '*this ABC-10 is an important smart card*',
     ],
     [
       'should not parse issues not present in the context',
