@@ -27,7 +27,9 @@ describe('ShareButton', () => {
       let buttonProps = wrapper.find(Button).props();
 
       Object.keys(propsToBeProxied).forEach(propKey => {
-        expect(buttonProps[propKey]).toEqual(propsToBeProxied[propKey]);
+        expect((buttonProps as any)[propKey]).toEqual(
+          (propsToBeProxied as any)[propKey],
+        );
       });
 
       const newPropsToBeProxied = {
@@ -39,7 +41,9 @@ describe('ShareButton', () => {
       buttonProps = wrapper.find(Button).props();
 
       Object.keys(newPropsToBeProxied).forEach(propKey => {
-        expect(buttonProps[propKey]).toEqual(newPropsToBeProxied[propKey]);
+        expect((buttonProps as any)[propKey]).toEqual(
+          (newPropsToBeProxied as any)[propKey],
+        );
       });
     });
   });

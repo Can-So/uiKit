@@ -7,7 +7,7 @@ import {
 } from '../../../clients/ShareServiceClient';
 
 describe('ShareServiceClientImpl', () => {
-  let requestSpy;
+  let requestSpy: jest.SpyInstance;
   let shareServiceClient: ShareClient;
   let mockContent = {
     link: 'link',

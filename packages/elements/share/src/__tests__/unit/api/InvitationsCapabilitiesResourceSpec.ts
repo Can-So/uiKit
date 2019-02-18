@@ -9,7 +9,7 @@ import {
 const mockCloudId = 'mockCloudId';
 
 describe('InvitationsCapabilitiesResource', () => {
-  let requestSpy;
+  let requestSpy: jest.SpyInstance;
   let invitationsCapabilitiesResource: InvitationsCapabilitiesProvider;
 
   beforeEach(() => {

@@ -17,7 +17,7 @@ import {
 } from '../types';
 import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 
-type Props = {
+export type Props = {
   client?: Client;
   cloudId: string;
   formatCopyLink: (origin: OriginTracing, link: string) => string;
@@ -31,7 +31,7 @@ type Props = {
   shouldCloseOnEscapePress?: boolean;
 };
 
-type State = {
+export type State = {
   capabilities: InvitationsCapabilitiesResponse | undefined;
   copyLinkOrigin: OriginTracing | null;
   prevShareLink: string | null;
@@ -59,7 +59,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     formatCopyLink: memoizedFormatCopyLink,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     if (props.client) {

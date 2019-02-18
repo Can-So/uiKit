@@ -2,7 +2,14 @@ import * as React from 'react';
 import { userPickerData } from '@atlaskit/util-data-test';
 import { OptionData } from '@atlaskit/user-picker';
 import { ShareDialogContainer } from '../src';
-import { Client, Content, User, MetaData, Comment } from '../src/types';
+import {
+  Client,
+  Content,
+  User,
+  MetaData,
+  Comment,
+  OriginTracing,
+} from '../src/types';
 
 type UserData = {
   avatarUrl?: string;
@@ -16,10 +23,10 @@ type UserData = {
   type?: string;
 };
 
-const mockOriginTracing = {
+const mockOriginTracing: OriginTracing = {
   id: 'id',
   addToUrl: l => `${l}&atlOrigin=mockAtlOrigin`,
-  toAnalyticsAttributes: ({ hasGeneratedId }) => ({
+  toAnalyticsAttributes: () => ({
     originIdGenerated: 'id',
     originProduct: 'product',
   }),
@@ -41,8 +48,8 @@ const loadUserOptions = (searchText?: string): OptionData[] => {
 
       return propertyToMatch.some((property: string) => {
         return (
-          user[property] &&
-          user[property].toLowerCase().contains(searchTextInLowerCase)
+          (user as any)[property] &&
+          (user as any)[property].toLowerCase().contains(searchTextInLowerCase)
         );
       });
     });
