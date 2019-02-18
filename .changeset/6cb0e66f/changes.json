@@ -1,0 +1,9 @@
+{
+  "releases": [
+    { "name": "@atlaskit/util-data-test", "type": "minor" },
+    { "name": "@atlaskit/task-decision", "type": "minor" },
+    { "name": "@atlaskit/editor-core", "type": "minor" },
+    { "name": "@atlaskit/editor-common", "type": "minor" }
+  ],
+  "dependents": []
+}

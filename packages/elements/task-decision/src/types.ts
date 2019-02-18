@@ -9,7 +9,7 @@ export type DecisionType = 'DECISION';
 export type TaskType = 'TASK';
 
 export interface ContentRef {
-  (ref: HTMLElement | undefined): void;
+  (ref: HTMLElement | null): void;
 }
 
 export interface ObjectKey {
@@ -166,7 +166,7 @@ export interface RecentUpdatesListener {
   /**
    * An id that can be used to unsubscribe
    */
-  id(id: RecentUpdatesId);
+  id(id: RecentUpdatesId): void;
 
   /**
    * Indicates there are recent updates, and the listener should refresh
@@ -176,7 +176,7 @@ export interface RecentUpdatesListener {
    *
    * @param updateContext Recent update context
    */
-  recentUpdates(updateContext: RecentUpdateContext);
+  recentUpdates(updateContext: RecentUpdateContext): void;
 }
 
 export interface TaskDecisionResourceConfig extends ServiceConfig {
@@ -198,8 +198,8 @@ export interface TaskDecisionProvider {
     recentUpdatesListener?: RecentUpdatesListener,
   ): Promise<ItemResponse>;
 
-  unsubscribeRecentUpdates(id: RecentUpdatesId);
-  notifyRecentUpdates(updateContext: RecentUpdateContext);
+  unsubscribeRecentUpdates(id: RecentUpdatesId): void;
+  notifyRecentUpdates(updateContext: RecentUpdateContext): void;
 
   // Tasks
   toggleTask(objectKey: ObjectKey, state: TaskState): Promise<TaskState>;

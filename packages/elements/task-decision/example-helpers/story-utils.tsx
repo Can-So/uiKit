@@ -75,7 +75,7 @@ export const Item: React.ComponentClass<React.HTMLAttributes<{}>> = styled.div`
   margin: 10px;
 `;
 
-export const dumpRef = (ref?: HTMLElement) => {
+export const dumpRef = (ref: HTMLElement | null) => {
   // tslint:disable-next-line:no-console
   console.log('Content HTML', ref && ref.outerHTML);
 };
@@ -86,10 +86,10 @@ export const action = (action: string) => () => {
 };
 
 export const analyticsWebClientMock = {
-  sendUIEvent: event => {
+  sendUIEvent: (event: any) => {
     console.log('sendUIEvent: ', event);
   },
-  sendOperationalEvent: event => {
+  sendOperationalEvent: (event: any) => {
     console.log('sendOperationalEvent: ', event);
   },
   sendTrackEvent: (event: any) => {
