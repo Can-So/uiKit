@@ -3,7 +3,6 @@ import React from 'react';
 import { components } from 'react-select';
 import SelectClearIcon from '@atlaskit/icon/glyph/select-clear';
 
-export { CheckboxOption, RadioOption } from './input-options';
 export {
   ClearIndicator,
   DropdownIndicator,
