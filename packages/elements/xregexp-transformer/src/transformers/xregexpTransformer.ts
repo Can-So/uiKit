@@ -1,5 +1,5 @@
-import ts from 'typescript';
-import XRegExp from 'xregexp';
+import * as ts from 'typescript';
+import * as XRegExp from 'xregexp';
 
 const getArrayElement = (args: any, index: number): any | undefined =>
   args && args.length > index ? args[index] : undefined;
