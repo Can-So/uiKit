@@ -14,7 +14,7 @@ import { selectors } from './_utils';
 
 BrowserTestCase(
   'insert-link.ts: Insert link in panel by typing Markdown',
-  { skip: ['edge', 'ie'] },
+  { skip: ['edge', 'ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {

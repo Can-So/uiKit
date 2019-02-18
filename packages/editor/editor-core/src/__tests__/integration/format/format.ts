@@ -9,7 +9,7 @@ const editorSelector = '.ProseMirror';
 
 BrowserTestCase(
   'format.ts: user should be able to create link using markdown',
-  { skip: ['edge', 'ie'] },
+  { skip: ['edge', 'ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });
@@ -23,7 +23,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'format.ts: user should be able to format bold and italics with markdown',
-  { skip: ['edge', 'ie'] },
+  { skip: ['edge', 'ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });
@@ -40,7 +40,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'format.ts: user should be able to write inline code',
-  { skip: ['edge', 'ie'] },
+  { skip: ['edge', 'ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });

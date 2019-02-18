@@ -15,7 +15,7 @@ import { selectors } from './_utils';
 
 BrowserTestCase(
   'inside-table.ts: Insert panel into table, add text, change panel type',
-  { skip: ['edge', 'ie'] },
+  { skip: ['edge', 'ie', 'firefox'] },
   async client => {
     const insertTableMenu = `[aria-label="${
       insertBlockMessages.table.defaultMessage
