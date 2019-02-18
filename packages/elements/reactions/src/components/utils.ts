@@ -1,6 +1,6 @@
 import { EmojiId } from '@atlaskit/emoji';
 
-export const isLeftClick = event =>
+export const isLeftClick = (event: React.MouseEvent<HTMLElement>) =>
   event.button === 0 &&
   !event.altKey &&
   !event.ctrlKey &&

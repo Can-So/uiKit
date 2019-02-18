@@ -13,7 +13,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
-import { ReactionSummary } from '../types';
+import { ReactionSummary, ReactionSource } from '../types';
 
 export type PreviousState = 'new' | 'existingNotReacted' | 'existingReacted';
 
@@ -85,7 +85,7 @@ export const createPickerMoreClickedEvent = (startTime?: number) =>
   });
 
 export const createReactionSelectionEvent = (
-  source: 'quickSelector' | 'emojiPicker',
+  source: ReactionSource,
   emojiId: string,
   reaction?: ReactionSummary,
   startTime?: number,

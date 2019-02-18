@@ -1,0 +1,1 @@
+- Enable noImplicitAny for reactions, fix type issues.

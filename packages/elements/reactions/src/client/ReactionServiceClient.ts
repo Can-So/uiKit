@@ -18,7 +18,7 @@ export class ReactionServiceClient implements ReactionClient {
   }
 
   private getHeaders(hasBody: boolean = true) {
-    const headers = {};
+    const headers: { [key: string]: string } = {};
     headers['Accept'] = 'application/json';
     if (hasBody) {
       headers['Content-Type'] = 'application/json';

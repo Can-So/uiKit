@@ -3,8 +3,10 @@ import { EmojiProvider } from '@atlaskit/emoji';
 import * as React from 'react';
 import { Reactions } from '../components/Reactions';
 import {
+  Actions,
   ReactionConsumer,
   ReactionStoreProp,
+  ReactionStoreState,
 } from '../reaction-store/ReactionConsumer';
 import { ReactionStatus } from '../types/ReactionStatus';
 
@@ -18,7 +20,7 @@ export type Props = {
 };
 
 export default class ReactionsContainer extends React.PureComponent<Props> {
-  private renderChild = props => {
+  private renderChild = (props: any) => {
     const { containerAri, ari } = this.props;
     return (
       <FabricElementsAnalyticsContext data={{ containerAri, ari }}>
@@ -31,7 +33,7 @@ export default class ReactionsContainer extends React.PureComponent<Props> {
     );
   };
 
-  private stateMapper = state => {
+  private stateMapper = (state: ReactionStoreState) => {
     const { containerAri, ari } = this.props;
     const reactionsState = state.reactions[`${containerAri}|${ari}`];
     if (!reactionsState) {
@@ -49,7 +51,7 @@ export default class ReactionsContainer extends React.PureComponent<Props> {
     }
   };
 
-  private actionsMapper = actions => ({
+  private actionsMapper = (actions: Actions) => ({
     loadReaction: () => {
       actions.getReactions(this.props.containerAri, this.props.ari);
     },
@@ -63,7 +65,7 @@ export default class ReactionsContainer extends React.PureComponent<Props> {
         emojiId,
       );
     },
-    onSelection: emojiId => {
+    onSelection: (emojiId: string) => {
       actions.addReaction(this.props.containerAri, this.props.ari, emojiId);
     },
   });

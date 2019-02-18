@@ -12,6 +12,7 @@ import { ReactionPicker } from '../../../components/ReactionPicker';
 import { Props, Reactions } from '../../../components/Reactions';
 import { Trigger } from '../../../components/Trigger';
 import { ReactionStatus } from '../../../types/ReactionStatus';
+import { ReactWrapper } from 'enzyme';
 
 const { getEmojiResourcePromise } = emoji.testData;
 
@@ -78,8 +79,6 @@ describe('@atlaskit/reactions/reactions', () => {
 
   describe('with analytics', () => {
     const onEvent = jest.fn();
-    let component;
-
     const TestComponent = (props: Partial<Props>) => (
       <AnalyticsListener channel="fabric-elements" onEvent={onEvent}>
         <Reactions
@@ -96,6 +95,8 @@ describe('@atlaskit/reactions/reactions', () => {
         />
       </AnalyticsListener>
     );
+
+    let component: ReactWrapper<Props>;
 
     beforeEach(() => {
       component = mountWithIntl(<TestComponent />);
@@ -148,7 +149,11 @@ describe('@atlaskit/reactions/reactions', () => {
       });
 
       it('should trigger cancelled for ReactionPicker', () => {
-        component.find(ReactionPicker).prop('onCancel')();
+        const onCancel = component.find(ReactionPicker).prop('onCancel');
+        expect(onCancel).toBeDefined();
+        if (onCancel) {
+          onCancel();
+        }
 
         expect(onEvent).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -251,7 +256,11 @@ describe('@atlaskit/reactions/reactions', () => {
       });
 
       it('should trigger clicked from emojiPicker', () => {
-        component.find(ReactionPicker).prop('onMore')();
+        const onMore = component.find(ReactionPicker).prop('onMore');
+        expect(onMore).toBeDefined();
+        if (onMore) {
+          onMore();
+        }
 
         expect(onEvent).toHaveBeenCalledWith(
           expect.objectContaining({
