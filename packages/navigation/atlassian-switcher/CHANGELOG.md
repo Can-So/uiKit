@@ -1,5 +1,10 @@
 # @atlaskit/atlassian-switcher
 
+## 0.0.5
+- [patch] [9184dbf08b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9184dbf08b):
+
+  - Fixing package.json issue with atlassian-switcher
+
 ## 0.0.4
 - [patch] [95d9a94bd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95d9a94bd0):
 

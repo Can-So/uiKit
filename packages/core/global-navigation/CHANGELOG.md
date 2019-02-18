@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.7.1
+- [patch] [9184dbf08b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9184dbf08b):
+
+  - Fixing package.json issue with atlassian-switcher
+
 ## 5.7.0
 - [minor] [308109b557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/308109b557):
 
