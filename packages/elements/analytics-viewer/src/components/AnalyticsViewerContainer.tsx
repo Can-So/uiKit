@@ -1,7 +1,5 @@
-import {
-  AnalyticsListener,
-  UIAnalyticsEventInterface,
-} from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 import * as React from 'react';
 import styled from 'styled-components';
 import { AnalyticsViewer, EventsArray } from './AnalyticsViewer';
@@ -44,7 +42,7 @@ export class AnalyticsViewerContainer extends React.Component<Props, State> {
     };
   }
 
-  handleOnEvent = (event: UIAnalyticsEventInterface, channel?: string) => {
+  handleOnEvent = (event: UIAnalyticsEvent, channel?: string) => {
     this.setState(state => ({
       events: [{ event, channel }, ...state.events],
     }));
