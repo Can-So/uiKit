@@ -215,6 +215,12 @@ export default function generateProductConfig(
   const shouldRenderAtlassianSwitcher =
     enableAtlassianSwitcher && cloudId && product;
 
+  if (enableAtlassianSwitcher && !shouldRenderAtlassianSwitcher) {
+    console.warn(
+      'When using the enableAtlassianSwitcher prop, be sure to send the cloudId and product props. Falling back to the legacy app-switcher',
+    );
+  }
+
   return {
     product: configFactory(onProductClick, productTooltip, {
       icon: productIcon,
