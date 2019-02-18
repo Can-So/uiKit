@@ -88,24 +88,24 @@ BrowserTestCase(
     expect(isEnabled).toBe(false);
   },
 );
+// TODO: https://product-fabric.atlassian.net/browse/ED-6288
+// BrowserTestCase(
+//   'alignment: should maintain alignment when hit return',
+//   { skip: ['firefox'] },
+//   async client => {
+//     const page = await goToEditorTestingExample(client);
+//     await mountEditor(page, {
+//       appearance: 'full-page',
+//       allowTextAlignment: true,
+//     });
+//     await alignRight(page);
+//     await page.type(editable, [
+//       'this is right',
+//       'Enter',
+//       'this is still right',
+//     ]);
 
-BrowserTestCase(
-  'alignment: should maintain alignment when hit return',
-  { skip: ['firefox'] },
-  async client => {
-    const page = await goToEditorTestingExample(client);
-    await mountEditor(page, {
-      appearance: 'full-page',
-      allowTextAlignment: true,
-    });
-    await alignRight(page);
-    await page.type(editable, [
-      'this is right',
-      'Enter',
-      'this is still right',
-    ]);
-
-    const doc = await page.$eval(editable, getDocFromElement);
-    expect(doc).toMatchDocSnapshot();
-  },
-);
+//     const doc = await page.$eval(editable, getDocFromElement);
+//     expect(doc).toMatchDocSnapshot();
+//   },
+// );
