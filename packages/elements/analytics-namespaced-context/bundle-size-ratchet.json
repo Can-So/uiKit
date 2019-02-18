@@ -27,8 +27,8 @@
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 13419,
-      "gzipSize": 3438
+      "size": 14000,
+      "gzipSize": 4000
     }
   }
 ]
