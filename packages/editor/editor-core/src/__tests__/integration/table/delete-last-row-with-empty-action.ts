@@ -14,7 +14,7 @@ import {
 
 BrowserTestCase(
   'delete-last-row.ts: Delete last table row with empty action',
-  { skip: ['ie', 'edge'] },
+  { skip: ['ie', 'edge', 'firefox'] },
   async client => {
     const FIRST_CELL_FROM_LAST_ROW =
       'table > tbody > tr:last-child > td:first-child';

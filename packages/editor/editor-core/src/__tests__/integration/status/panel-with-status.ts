@@ -10,7 +10,7 @@ import {
 
 BrowserTestCase(
   'status.ts: Insert status into panel, move cursor to right before status, and add text',
-  { skip: ['ie'] },
+  { skip: ['ie', 'firefox'] },
   async client => {
     const browser = new Page(client);
 
@@ -39,7 +39,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'status.ts: Insert status into panel, move cursor to right before panel, move right, and add text',
-  { skip: ['ie'] },
+  { skip: ['ie', 'firefox'] },
   async client => {
     const browser = new Page(client);
 

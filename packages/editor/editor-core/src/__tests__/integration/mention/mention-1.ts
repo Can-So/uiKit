@@ -21,7 +21,7 @@ import {
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside blockquote',
-  { skip: ['safari', 'ie'] },
+  { skip: ['safari', 'ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -42,7 +42,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside bulletList',
-  { skip: ['safari', 'ie'] },
+  { skip: ['safari', 'ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -62,7 +62,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside orderedList',
-  { skip: ['safari', 'ie'] },
+  { skip: ['safari', 'ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -82,7 +82,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside decision',
-  { skip: ['ie', 'safari'] },
+  { skip: ['ie', 'safari', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -99,7 +99,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside action',
-  { skip: ['ie', 'safari'] },
+  { skip: ['ie', 'safari', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -116,7 +116,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can navigate picker using keyboard',
-  { skip: ['ie', 'safari'] },
+  { skip: ['ie', 'safari', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {

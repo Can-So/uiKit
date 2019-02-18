@@ -16,7 +16,7 @@ const clear = `span=${messages.clearFormatting.defaultMessage}`;
     `toolbar-3.ts: should be able to select Clear Formatting on toolbar for ${
       editor.name
     } editor`,
-    { skip: ['ie', 'safari'] },
+    { skip: ['ie', 'safari', 'firefox'] },
     async client => {
       const page = await goToEditorTestingExample(client);
       await mountEditor(page, { appearance: editor.appearance });
