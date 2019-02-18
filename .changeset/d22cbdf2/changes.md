@@ -1,1 +1,0 @@
-- Update types for @atlaskit/mention
