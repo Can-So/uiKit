@@ -1,0 +1,1 @@
+- Fixing package.json issue with atlassian-switcher
