@@ -1,0 +1,8 @@
+{
+  "releases": [
+    { "name": "@atlaskit/analytics-listeners", "type": "minor" },
+    { "name": "@atlaskit/analytics-namespaced-context", "type": "minor" },
+    { "name": "@atlaskit/analytics-viewer", "type": "patch" }
+  ],
+  "dependents": []
+}
