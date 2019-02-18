@@ -6,11 +6,12 @@ import {
   editable,
   getDocFromElement,
   navigateOrClear,
+  skipBrowsers as skip,
 } from '../_utils';
 
 BrowserTestCase(
   `type-ahead.ts: Replaces typeahead mark on insert`,
-  { skip: ['firefox'] },
+  { skip },
   async client => {
     const browser = new Page(client);
 

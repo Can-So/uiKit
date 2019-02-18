@@ -1,10 +1,16 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import { editor, editable, getBridgeOutput, navigateOrClear } from '../_utils';
+import {
+  editor,
+  editable,
+  getBridgeOutput,
+  navigateOrClear,
+  skipBrowsers as skip,
+} from '../_utils';
 
 BrowserTestCase(
   `type-ahead.ts: Sends correct typing events`,
-  { skip: ['safari', 'firefox'] },
+  { skip: skip.concat('safari') },
   async client => {
     const browser = new Page(client);
     await browser.goto(editor.path);
@@ -25,7 +31,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   `type-ahead.ts: Space sends dismiss type-ahead event.`,
-  { skip: ['firefox'] },
+  { skip },
   async client => {
     const browser = new Page(client);
     await navigateOrClear(browser, editor.path);

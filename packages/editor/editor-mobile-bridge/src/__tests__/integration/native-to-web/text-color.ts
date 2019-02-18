@@ -5,11 +5,12 @@ import {
   editor,
   editable,
   getDocFromElement,
+  skipBrowsers as skip,
 } from '../_utils';
 
 BrowserTestCase(
   `text-color.ts: Can change text color`,
-  { skip: ['firefox'] },
+  { skip },
   async client => {
     const browser = new Page(client);
 
