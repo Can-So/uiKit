@@ -7,6 +7,11 @@ import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import { Subscription } from 'rxjs/Subscription';
 import { IntlProvider } from 'react-intl';
 import {
+  MediaViewer,
+  MediaViewerItem,
+  MediaViewerDataSource,
+} from '@atlaskit/media-viewer';
+import {
   CardAnalyticsContext,
   CardAction,
   CardDimensions,
@@ -51,6 +56,7 @@ export class Card extends Component<CardProps, CardState> {
     isCardVisible: !this.props.isLazy,
     previewOrientation: 1,
     isPlayingFile: false,
+    isMediaViewerVisible: false,
   };
 
   componentDidMount() {
@@ -301,7 +307,7 @@ export class Card extends Component<CardProps, CardState> {
   }
 
   onClick = (result: CardEvent, analyticsEvent?: UIAnalyticsEventInterface) => {
-    const { onClick, useInlinePlayer } = this.props;
+    const { onClick, useInlinePlayer, shouldOpenMediaViewer } = this.props;
     const { mediaItemDetails } = result;
 
     this.onClickPayload = {
@@ -313,13 +319,19 @@ export class Card extends Component<CardProps, CardState> {
       onClick(result, analyticsEvent);
     }
 
-    if (useInlinePlayer && mediaItemDetails) {
-      const { mediaType } = mediaItemDetails as FileDetails;
-      if (mediaType === 'video') {
-        this.setState({
-          isPlayingFile: true,
-        });
-      }
+    if (!mediaItemDetails) {
+      return;
+    }
+
+    const { mediaType } = mediaItemDetails as FileDetails;
+    if (useInlinePlayer && mediaType === 'video') {
+      this.setState({
+        isPlayingFile: true,
+      });
+    } else if (shouldOpenMediaViewer) {
+      this.setState({
+        isMediaViewerVisible: true,
+      });
     }
   };
 
@@ -347,6 +359,40 @@ export class Card extends Component<CardProps, CardState> {
         onError={this.onInlinePlayerError}
         onClick={this.onInlinePlayerClick}
         selected={selected}
+      />
+    );
+  };
+
+  onMediaViewerClose = () => {
+    this.setState({
+      isMediaViewerVisible: false,
+    });
+  };
+
+  renderMediaViewer = () => {
+    const { context, identifier } = this.props;
+    if (identifier.mediaItemType !== 'file') {
+      return;
+    }
+
+    const { id, collectionName = '' } = identifier;
+    const selectedItem: MediaViewerItem = {
+      id, // TODO: support async id
+      occurrenceKey: '', // TODO: do we need to provide this if the source it's not a collection?
+      type: 'file',
+    };
+    const dataSource: MediaViewerDataSource = {
+      collectionName,
+      list: [selectedItem], // TODO: pass surrounding items
+    };
+
+    return (
+      <MediaViewer
+        collectionName={collectionName}
+        dataSource={dataSource}
+        context={context}
+        selectedItem={selectedItem}
+        onClose={this.onMediaViewerClose}
       />
     );
   };
@@ -401,15 +447,21 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   render() {
-    const { isPlayingFile } = this.state;
+    const { isPlayingFile, isMediaViewerVisible } = this.state;
     const content = isPlayingFile
       ? this.renderInlinePlayer()
       : this.renderCard();
 
+    // TODO: use Fragment for wrapper
     return this.context.intl ? (
       content
     ) : (
-      <IntlProvider locale="en">{content}</IntlProvider>
+      <IntlProvider locale="en">
+        <div>
+          {content}
+          {isMediaViewerVisible && this.renderMediaViewer()}
+        </div>
+      </IntlProvider>
     );
   }
 
