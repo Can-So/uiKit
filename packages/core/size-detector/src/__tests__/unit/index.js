@@ -72,13 +72,13 @@ describe(name, () => {
   // reliably simulate detection of width/height changes for now. Suggestions welcome!
   // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should call the child function with updated width and height on resize', () => {});
+});
 
-  it('should render children immediately for SSR', async () => {
-    const markup = <div id="foo123">Foo</div>;
-    const markupString = ReactDOMServer.renderToStaticMarkup(markup);
-    const html = ReactDOMServer.renderToString(
-      <SizeDetector>{() => markup}</SizeDetector>,
-    );
-    expect(html).toContain(markupString);
-  });
+it('SizeDetector should render children immediately for SSR', async () => {
+  const markup = <div id="foo123">Foo</div>;
+  const markupString = ReactDOMServer.renderToStaticMarkup(markup);
+  const html = ReactDOMServer.renderToString(
+    <SizeDetector>{() => markup}</SizeDetector>,
+  );
+  expect(html).toContain(markupString);
 });
