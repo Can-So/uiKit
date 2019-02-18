@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.13.3
+- [patch] [0a13188647](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a13188647):
+
+  - ED-6133: Fix scaling up going into overflow
+
 ## 98.13.2
 - [patch] [cebfee91b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cebfee91b3):
 
