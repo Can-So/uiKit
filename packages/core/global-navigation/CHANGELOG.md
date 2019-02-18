@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.7.0
+- [minor] [308109b557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/308109b557):
+
+  - Adding Atlassian Switcher integration
+
 ## 5.6.0
 - [minor] [8c149b1613](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c149b1613):
 
