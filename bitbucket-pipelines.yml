@@ -233,7 +233,7 @@ pipelines:
             - yarn build
             - yarn lint
             - yarn typecheck
-            - yarn test
+            - yarn test:CI
             - yarn test:browser:browserstack
             - yarn test:webdriver:browserstack
             - yarn test:vr
