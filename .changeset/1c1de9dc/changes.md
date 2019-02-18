@@ -1,0 +1,1 @@
+- Fix bug breaking mobile UX, and causing menu to not be openable on touch
