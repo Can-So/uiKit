@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.13.1
+- [patch] [7316e316bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7316e316bc):
+
+  - ED-6209: remove internal legacy event subscription model from media plugin
+
 ## 98.13.0
 - [minor] [be86cbebc3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be86cbebc3):
 
