@@ -15,7 +15,7 @@ import ResourcedItemList from '../../../components/ResourcedItemList';
 import DecisionItem from '../../../components/DecisionItem';
 import ResourcedTaskItem from '../../../components/ResourcedTaskItem';
 import TaskItem from '../../../components/TaskItem';
-import { asMock } from '../mock';
+import { asMock } from '../_mock';
 
 import {
   buildDecision,

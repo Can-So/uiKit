@@ -11,7 +11,7 @@ import { getParticipants } from '../_test-data';
 import { Placeholder } from '../../../styled/Placeholder';
 import Item from '../../../components/Item';
 import { TaskDecisionProvider } from '../../../types';
-import { asMock } from '../mock';
+import { asMock } from '../_mock';
 
 describe('<ResourcedTaskItem/>', () => {
   let provider: TaskDecisionProvider;
