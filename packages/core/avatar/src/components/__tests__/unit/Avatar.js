@@ -1,5 +1,6 @@
 // @flow
 import React, { type Node } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { shallow, mount, render } from 'enzyme';
 import Tooltip from '@atlaskit/tooltip';
 import Avatar from '../../Avatar';
@@ -153,6 +154,43 @@ describe('Avatar', () => {
 
       expect(presence.exists()).toBe(true);
       expect(presence.find('.my-icon')).toHaveLength(1);
+    });
+  });
+
+  describe('SSR works as expected', () => {
+    const avatar = {
+      src: 'IMAGES/FOO.BMP',
+    };
+
+    it('should directly render the image src for SSR', () => {
+      const actualMarkup = ReactDOMServer.renderToString(
+        <Avatar {...avatar} />,
+      );
+      expect(actualMarkup).toContain(avatar.src);
+    });
+
+    it('should hydrate from SSR', () => {
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+
+      const avatarMarkup = ReactDOMServer.renderToString(
+        <Avatar {...avatar} />,
+      );
+      container.innerHTML = avatarMarkup;
+
+      const hydratedWrapper = mount(<Avatar {...avatar} />, {
+        hydrateIn: container,
+      });
+      const hydratedAvatar = hydratedWrapper.find(Avatar);
+      const avatarImage = hydratedWrapper.find('AvatarImage').instance();
+      const loadImageSpy = jest.spyOn(avatarImage, 'loadImage');
+      expect(hydratedAvatar.props().src).toBe(avatar.src);
+
+      // when the source is updated, expect the load method to be called
+      hydratedWrapper.setProps({ src: 'FOO/IMAGE.BMP' });
+      expect(loadImageSpy).toHaveBeenCalledTimes(1);
+
+      hydratedWrapper.detach();
     });
   });
 });

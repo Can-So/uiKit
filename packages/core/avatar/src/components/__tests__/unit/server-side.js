@@ -14,11 +14,3 @@ test('Avatar server side rendering', async () => {
     expect(() => ReactDOMServer.renderToString(<Example />)).not.toThrowError();
   });
 });
-
-test('Avatar server side render directly renders image src', () => {
-  const avatar = {
-    src: 'IMAGES/FOO.BMP',
-  };
-  const actualMarkup = ReactDOMServer.renderToString(<Avatar {...avatar} />);
-  expect(actualMarkup).toContain(avatar.src);
-});
