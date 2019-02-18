@@ -10,17 +10,15 @@ import {
 import {
   stateKey as mediaPluginKey,
   MediaPluginState,
-  DefaultMediaStateManager,
+  MediaState,
 } from '../../../../plugins/media/pm-plugins/main';
 import mediaPlugin from '../../../../plugins/media';
 
-const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 const getFreshMediaProvider = () =>
   storyMediaProviderFactory({
     collectionName: testCollectionName,
-    stateManager,
     includeUserAuthProvider: true,
     includeUploadContext: true,
   });
@@ -60,12 +58,13 @@ describe('Media plugin', async () => {
       await provider.uploadContext;
       await provider.viewContext;
 
-      pluginState.insertFiles([
+      pluginState.insertFile(
         {
           id: 'foo',
           fileMimeType: 'image/jpeg',
         },
-      ]);
+        () => {},
+      );
       jest.runOnlyPendingTimers();
       expect(pluginState.allUploadsFinished).toBe(false);
     });
@@ -76,22 +75,26 @@ describe('Media plugin', async () => {
       await provider.uploadContext;
       await provider.viewContext;
 
-      pluginState.insertFiles([
+      const evts: Array<(state: MediaState) => void> = [];
+      pluginState.insertFile(
         {
           id: 'foo',
           fileMimeType: 'image/jpeg',
           status: 'preview',
         },
-      ]);
+        evt => evts.push(evt),
+      );
       jest.runOnlyPendingTimers();
-      pluginState.stateManager.updateState('foo', {
-        id: 'foo',
-        fileName: 'foo.jpg',
-        fileSize: 100,
-        fileMimeType: 'image/jpeg',
-        status: 'ready',
-        dimensions: { height: 100, width: 100 },
-      });
+      evts.forEach(cb =>
+        cb({
+          id: 'foo',
+          fileName: 'foo.jpg',
+          fileSize: 100,
+          fileMimeType: 'image/jpeg',
+          status: 'ready',
+          dimensions: { height: 100, width: 100 },
+        }),
+      );
       jest.runOnlyPendingTimers();
       await pluginState.waitForPendingTasks();
       expect(pluginState.allUploadsFinished).toBe(true);
@@ -103,45 +106,53 @@ describe('Media plugin', async () => {
       await provider.uploadContext;
       await provider.viewContext;
 
-      pluginState.insertFiles([
+      const fooEvents: Array<(state: MediaState) => void> = [];
+      const barEvents: Array<(state: MediaState) => void> = [];
+      pluginState.insertFile(
         {
           id: 'foo',
           fileMimeType: 'image/jpeg',
           status: 'preview',
         },
-      ]);
-      pluginState.insertFiles([
+        evt => fooEvents.push(evt),
+      );
+      pluginState.insertFile(
         {
           id: 'bar',
           fileMimeType: 'image/jpeg',
           status: 'preview',
         },
-      ]);
+        evt => barEvents.push(evt),
+      );
 
       expect(pluginState.allUploadsFinished).toBe(false);
       jest.runOnlyPendingTimers();
       expect(pluginState.allUploadsFinished).toBe(false);
 
-      pluginState.stateManager.updateState('foo', {
-        id: 'foo',
-        fileName: 'foo.jpg',
-        fileSize: 100,
-        fileMimeType: 'image/jpeg',
-        status: 'ready',
-        dimensions: { height: 100, width: 100 },
-      });
+      fooEvents.forEach(cb =>
+        cb({
+          id: 'foo',
+          fileName: 'foo.jpg',
+          fileSize: 100,
+          fileMimeType: 'image/jpeg',
+          status: 'ready',
+          dimensions: { height: 100, width: 100 },
+        }),
+      );
 
       jest.runOnlyPendingTimers();
       expect(pluginState.allUploadsFinished).toBe(false);
 
-      pluginState.stateManager.updateState('bar', {
-        id: 'bar',
-        fileName: 'bar.jpg',
-        fileSize: 100,
-        fileMimeType: 'image/jpeg',
-        status: 'ready',
-        dimensions: { height: 100, width: 100 },
-      });
+      barEvents.forEach(cb =>
+        cb({
+          id: 'bar',
+          fileName: 'bar.jpg',
+          fileSize: 100,
+          fileMimeType: 'image/jpeg',
+          status: 'ready',
+          dimensions: { height: 100, width: 100 },
+        }),
+      );
 
       jest.runOnlyPendingTimers();
       expect(pluginState.allUploadsFinished).toBe(false);
