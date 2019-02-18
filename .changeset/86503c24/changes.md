@@ -1,1 +1,0 @@
-- ED-6231 Fixes RangeError when deleting last column in full-width mode

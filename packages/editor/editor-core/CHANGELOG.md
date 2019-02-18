@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.13.2
+- [patch] [cebfee91b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cebfee91b3):
+
+  - ED-6231 Fixes RangeError when deleting last column in full-width mode
+
 ## 98.13.1
 - [patch] [7316e316bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7316e316bc):
 
