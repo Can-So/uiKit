@@ -1,1 +1,0 @@
-- Encapsulate checkbox/radio option styles inside the primitive
