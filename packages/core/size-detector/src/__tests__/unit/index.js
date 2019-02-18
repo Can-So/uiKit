@@ -1,15 +1,9 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import exenv from 'exenv';
+import ReactDOMServer from 'react-dom/server';
 import SizeDetector from '../..';
 import { name } from '../../../package.json';
-
-jest.mock('exenv', () => ({
-  get canUseDOM() {
-    return true;
-  },
-}));
 
 describe(name, () => {
   const createChildWithSpy = spy => args => spy(args);
@@ -22,77 +16,73 @@ describe(name, () => {
     requestAnimationFrame.reset();
   });
 
-  describe('when DOM is available', () => {
-    it('should pass width and height to child function', () => {
-      const spy = jest.fn();
-      mount(<SizeDetector>{createChildWithSpy(spy)}</SizeDetector>);
-      requestAnimationFrame.step();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith({ height: 0, width: 0 });
-    });
-
-    it('should use requestAnimationFrame to queue resize measurements', () => {
-      const spy = jest.fn();
-      mount(<SizeDetector>{createChildWithSpy(spy)}</SizeDetector>);
-      expect(spy).not.toHaveBeenCalled();
-      requestAnimationFrame.step();
-      expect(spy).toHaveBeenCalled();
-    });
-
-    it('should call cancelAnimationFrame when unmounted', () => {
-      const spy = jest.fn();
-      const wrapper = mount(
-        <SizeDetector>{createChildWithSpy(spy)}</SizeDetector>,
-      );
-      // initial frame is queued
-      expect(spy).not.toHaveBeenCalled();
-      wrapper.unmount();
-      requestAnimationFrame.flush();
-      expect(spy).not.toHaveBeenCalled();
-    });
-
-    // NOTE: enzyme doesn't fully mock object.contentDocument, so we cannot simulate
-    // a resize event in the normal way. Triggering the called function is the alternative.
-    it('should pass updated size measurements to the child function on resize after an animationFrame', () => {
-      const spy = jest.fn();
-      const wrapper = mount(
-        <SizeDetector>{createChildWithSpy(spy)}</SizeDetector>,
-      );
-      requestAnimationFrame.step();
-      expect(spy).toHaveBeenCalledTimes(1);
-      wrapper.instance().handleResize();
-      requestAnimationFrame.step();
-      expect(spy).toHaveBeenCalledTimes(2);
-      wrapper.instance().handleResize();
-      requestAnimationFrame.step();
-      expect(spy).toHaveBeenCalledTimes(3);
-    });
-
-    // NOTE: Enzyme does not seem to support offsetWidth/offsetHeight on elements, so we cannot
-    // reliably simulate detection of width/height changes for now. Suggestions welcome!
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip('should call the child function with updated width and height on resize', () => {});
+  it('should call the children with null values at first and update with actual value as soon as object is loaded', () => {
+    const spy = jest.fn();
+    mount(<SizeDetector>{createChildWithSpy(spy)}</SizeDetector>);
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith({ height: null, width: null });
+    // clear calls from the mock and object is loaded here to stepping over RAF
+    spy.mockClear();
+    requestAnimationFrame.step();
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toBeCalledWith({ height: 0, width: 0 });
   });
 
-  describe('when DOM not available', () => {
-    const canUseDOM = jest.spyOn(exenv, 'canUseDOM', 'get');
+  it('should use requestAnimationFrame to queue the subsequent resize measurements', () => {
+    const spy = jest.fn();
+    mount(<SizeDetector>{createChildWithSpy(spy)}</SizeDetector>);
+    expect(spy).toHaveBeenCalledTimes(1);
+    requestAnimationFrame.step();
+    expect(spy).toHaveBeenCalledTimes(2);
+  });
 
-    beforeEach(() => {
-      canUseDOM.mockReturnValue(false);
-    });
+  it('should call cancelAnimationFrame when unmounted', () => {
+    const spy = jest.fn();
+    const wrapper = mount(
+      <SizeDetector>{createChildWithSpy(spy)}</SizeDetector>,
+    );
+    // initial call is done with adding it to RAF queue and the call after object onload is queued
+    expect(spy).toHaveBeenCalledWith({ height: null, width: null });
+    spy.mockClear();
+    wrapper.unmount();
+    requestAnimationFrame.flush();
+    // frame is queue after object element load is not called
+    expect(spy).not.toHaveBeenCalled();
+  });
 
-    afterEach(() => {
-      canUseDOM.mockReturnValue(true);
-    });
+  // NOTE: enzyme doesn't fully mock object.contentDocument, so we cannot simulate
+  // a resize event in the normal way. Triggering the called function is the alternative.
+  it('should pass updated size measurements to the child function on resize after an animationFrame', () => {
+    const spy = jest.fn();
+    const wrapper = mount(
+      <SizeDetector>{createChildWithSpy(spy)}</SizeDetector>,
+    );
+    expect(spy).toHaveBeenCalledTimes(1);
+    requestAnimationFrame.step();
+    expect(spy).toHaveBeenCalledTimes(2);
+    wrapper.instance().handleResize();
+    requestAnimationFrame.step();
+    expect(spy).toHaveBeenCalledTimes(3);
+    wrapper.instance().handleResize();
+    requestAnimationFrame.step();
+    expect(spy).toHaveBeenCalledTimes(4);
+  });
 
-    afterAll(() => {
-      canUseDOM.mockRestore();
-    });
+  // NOTE: Enzyme does not seem to support offsetWidth/offsetHeight on elements, so we cannot
+  // reliably simulate detection of width/height changes for now. Suggestions welcome!
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.skip('should call the child function with updated width and height on resize', () => {});
 
-    it('should call children with null height and width', () => {
-      const spy = jest.fn();
-      mount(<SizeDetector>{createChildWithSpy(spy)}</SizeDetector>);
-      expect(spy).toHaveBeenCalledWith({ height: null, width: null });
-    });
+  it('should render children immediately for SSR', async () => {
+    const markup = width => (
+      <div id="foo123" style={{ dummyStyle: width }}>
+        Foo
+      </div>
+    );
+    const markupString = ReactDOMServer.renderToStaticMarkup(markup);
+    const html = ReactDOMServer.renderToString(
+      <SizeDetector>{width => markup(width)}</SizeDetector>,
+    );
+    expect(html).toContain(markupString);
   });
 });
