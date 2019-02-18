@@ -119,7 +119,10 @@ function runTestsWithRetry() {
       if (code === 0 && process.env.CI) {
         await reporting.reportFailure(results, 'atlaskit.qa.vr_test.flakiness');
       } else if (code !== 0 && process.env.CI) {
-        await reporting.reportFailure(results, 'atlaskit.qa.vr_test.testfailure');
+        await reporting.reportFailure(
+          results,
+          'atlaskit.qa.vr_test.testfailure',
+        );
       }
     } catch (err) {
       console.error(err.toString());
