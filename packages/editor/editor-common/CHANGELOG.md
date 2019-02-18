@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 31.1.1
+- Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+  - @atlaskit/media-core@27.0.2
+  - @atlaskit/media-card@53.0.0
+
 ## 31.1.0
 - [minor] [be86cbebc3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be86cbebc3):
 
