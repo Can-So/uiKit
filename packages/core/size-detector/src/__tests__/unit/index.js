@@ -74,14 +74,10 @@ describe(name, () => {
   it.skip('should call the child function with updated width and height on resize', () => {});
 
   it('should render children immediately for SSR', async () => {
-    const markup = width => (
-      <div id="foo123" style={{ dummyStyle: width }}>
-        Foo
-      </div>
-    );
+    const markup = <div id="foo123">Foo</div>;
     const markupString = ReactDOMServer.renderToStaticMarkup(markup);
     const html = ReactDOMServer.renderToString(
-      <SizeDetector>{width => markup(width)}</SizeDetector>,
+      <SizeDetector>{width => markup}</SizeDetector>,
     );
     expect(html).toContain(markupString);
   });
