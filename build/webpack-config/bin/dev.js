@@ -33,8 +33,9 @@ const createConfig = require('../config');
 const utils = require('../config/utils');
 const { print, devServerBanner, errorMsg } = require('../banner');
 
-const HOST = 'localhost';
+const HOST = process.env.VISUAL_REGRESSION ? '0.0.0.0':'localhost';
 const PORT = +process.env.ATLASKIT_DEV_PORT || 9000;
+const disableHostCheck = process.env.VISUAL_REGRESSION ? true: false;
 const stats = require('../config/statsOptions');
 
 async function runDevServer() {
@@ -101,7 +102,8 @@ async function runDevServer() {
     compress: true,
 
     historyApiFallback: true,
-
+    disableHostCheck : disableHostCheck,
+    
     overlay: true,
     stats,
   });

@@ -4,11 +4,21 @@ import * as pageObject from './_pageObjects';
 // TODO - add ADF before loading stuff
 describe('Snapshot Test: z-indexes', () => {
   let page;
+  const noData= {
+    "version": 1,
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": []
+      }
+    ]
+  }
 
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initFullPageEditorWithAdf(page);
+    await initFullPageEditorWithAdf(page, noData);
   });
 
   beforeEach(async () => {
