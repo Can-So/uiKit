@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 7.1.1
+- [patch] [896bf5bef9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/896bf5bef9):
+
+  - Fix bug breaking mobile UX, and causing menu to not be openable on touch
+
 ## 7.1.0
 - [minor] [571ec20522](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/571ec20522):
 
