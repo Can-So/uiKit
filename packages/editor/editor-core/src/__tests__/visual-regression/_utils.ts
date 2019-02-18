@@ -343,7 +343,7 @@ export const toolBarItemsTests = [
     }"]`,
     nodeSelector: 'ol[data-task-list-local-id] div',
     content: 'text',
-    appearance: ['full-page', 'message'],
+    appearance: ['full-page'],
   },
   {
     name: 'Decision',
@@ -352,7 +352,7 @@ export const toolBarItemsTests = [
     }"]`,
     nodeSelector: 'ol[data-decision-list-local-id] div',
     content: 'text',
-    appearance: ['message'],
+    appearance: ['comment'],
   },
   {
     name: 'Ordered list',
@@ -457,7 +457,7 @@ const dropdowns = [
       insertBlockMessages.mention.defaultMessage
     }"]`,
     nodeSelector: 'span[data-type-ahead-query]',
-    appearance: ['full-page', 'comment', 'message'],
+    appearance: ['full-page', 'comment'],
   },
   {
     name: 'Hyperlink Recent Search',

@@ -73,11 +73,6 @@ const appearanceOptions = [
     description:
       'should be used for things like comments where you have a field input but require a toolbar & save/cancel buttons',
   },
-  {
-    label: 'Message',
-    value: 'message',
-    description: 'used for Stride; has now been deprecated.',
-  },
   // {
   //   label: 'Inline comment',
   //   value: 'inline-comment',
