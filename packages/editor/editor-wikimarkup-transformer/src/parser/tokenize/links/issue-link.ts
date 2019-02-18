@@ -21,4 +21,13 @@ export function issueLinkResolver(
       }),
     ];
   }
+
+  // Keep retro compatibility for ADF Wiki roundtrip
+  if (link.linkBody === 'smart-link') {
+    return [
+      schema.nodes.inlineCard.createChecked({
+        url: `${link.notLinkBody}`,
+      }),
+    ];
+  }
 }
