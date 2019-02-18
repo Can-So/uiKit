@@ -53,7 +53,7 @@ export class MockMentionResourceWithInfoHints extends AbstractMentionResource {
     window.setTimeout(() => {
       let mentions: Array<any> = [];
       if (query === 'error') {
-        notifyErrors('mock-error');
+        notifyErrors(new Error('mock-error'));
         return;
       } else if (query && query.length >= 3) {
         mentions = search.search(query);
