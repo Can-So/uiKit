@@ -14,7 +14,7 @@ import {
 
 BrowserTestCase(
   `quick-insert.ts: Extension: Quick Insert`,
-  { skip: ['edge', 'ie', 'safari'] },
+  { skip: ['edge', 'ie', 'safari', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
