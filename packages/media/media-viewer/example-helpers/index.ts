@@ -13,7 +13,6 @@ import {
   videoLargeFileId,
   videoProcessingFailedId,
   wideImageFileId,
-  genericLinkId,
   errorFileId,
   videoSquareFileId,
 } from '@atlaskit/media-test-helpers';
@@ -150,11 +149,5 @@ export const unsupportedItem: MediaViewerItem = {
 export const errorItem: MediaViewerItem = {
   type: 'file',
   id: errorFileId.id,
-  occurrenceKey: 'testOccurrenceKey',
-};
-
-export const linkItem: MediaViewerItem = {
-  type: 'link',
-  id: genericLinkId.id,
   occurrenceKey: 'testOccurrenceKey',
 };

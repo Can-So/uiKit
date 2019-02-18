@@ -2,16 +2,8 @@ import * as deepEqual from 'deep-equal';
 import {
   FileIdentifier,
   Identifier,
-  UrlPreviewIdentifier,
   ExternalImageIdentifier,
 } from '../root/domain';
-
-export const isUrlPreviewIdentifier = (
-  identifier: Identifier,
-): identifier is UrlPreviewIdentifier => {
-  const preview = identifier as UrlPreviewIdentifier;
-  return preview && preview.url !== undefined;
-};
 
 export const isFileIdentifier = (
   identifier: Identifier,
@@ -25,7 +17,6 @@ export const isExternalImageIdentifier = (
   return identifier.mediaItemType === 'external-image';
 };
 
-// TODO: unit test
 export const isDifferentIdentifier = (
   a: Identifier,
   b: Identifier,
