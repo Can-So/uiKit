@@ -59,6 +59,7 @@
       "./typings/png-chunks-extract.d.ts",
       "./typings/static-assets.d.ts",
       "./typings/utf8-string-bytes.d.ts",
+      "./typings/url-search-params.d.ts",
       "./typings/yarn-deduplicate.d.ts"
     ]
   }
