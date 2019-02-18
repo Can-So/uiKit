@@ -107,7 +107,7 @@ function runTestsWithRetry() {
 
       code = getExitCode(results);
       // Only retry and report results in CI.
-      if (code !== 0 && process.env.CI) {
+      if (code !== 0 && process.env.CI && !process.env.WATCH) {
         results = await rerunFailedTests(results);
         code = getExitCode(results);
       }
@@ -117,9 +117,9 @@ function runTestsWithRetry() {
        * log the previously failed tests to indicate flakiness
        */
       if (code === 0 && process.env.CI) {
-        reporting.reportFailure(results, 'atlaskit.qa.vr_test.flakiness');
+        await reporting.reportFailure(results, 'atlaskit.qa.vr_test.flakiness');
       } else if (code !== 0 && process.env.CI) {
-        reporting.reportFailure(results, 'atlaskit.qa.vr_test.testfailure');
+        await reporting.reportFailure(results, 'atlaskit.qa.vr_test.testfailure');
       }
     } catch (err) {
       console.error(err.toString());

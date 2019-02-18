@@ -1,6 +1,4 @@
 import { getExampleUrl } from '@atlaskit/visual-regression/helper';
-// import { colorPalette } from '@atlaskit/editor-common';
-
 import { insertMedia as integrationInsertMedia } from '../integration/_helpers';
 import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
 import { messages as blockTypeMessages } from '../../plugins/block-type/types';
@@ -21,8 +19,12 @@ export {
 export const DEFAULT_WIDTH = 800;
 export const DEFAULT_HEIGHT = 600;
 
-const adfInputSelector = '#adf-input';
-const importAdfBtnSelector = '#import-adf';
+export const dynamicTextViewportSizes = [
+  { width: 1440, height: 4000 },
+  { width: 1280, height: 4000 },
+  { width: 768, height: 4000 },
+  { width: 1024, height: 4000 },
+];
 
 export const resetViewport = async page => {
   await page.setViewport({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
@@ -45,14 +47,8 @@ export const selectByTextAndClick = async ({ page, tagName, text }) => {
   }
 };
 
-export const vrEditor = async page => {
-  const editor = '.ProseMirror';
-  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
-  await page.goto(url);
-  await page.waitForSelector(editor);
-  await page.click(editor);
-};
 
+// TODO: remove this gotoExample step
 export const initEditor = async (page, appearance: string) => {
   const editor = '.ProseMirror';
   const url = getExampleUrl(
@@ -89,18 +85,61 @@ export const deviceViewPorts = {
   iPhonePlus: { width: 414, height: 736 },
 };
 
-export const initFullPageEditorWithAdf = async (page, adf: Object) => {
-  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
-  await page.goto(url);
+export const enableAllEditorProps = {
+  allowPanel: true,
+  allowLists: true,
+  allowTextColor: true,
+  allowTextAlignment: true,
+  quickInsert: true,
+  allowCodeBlocks: { enableKeybindingsForIDE: true },
+  allowTables: {
+    advanced: true,
+  },
+  allowBreakout: true,
+  allowJiraIssue: true,
+  allowUnsupportedContent: true,
+  allowExtension: {
+    allowBreakout: true,
+  },
+  allowRule: true,
+  allowDate: true,
+  allowLayouts: {
+    allowBreakout: true,
+  },
+  allowIndentation: true,
+  allowTemplatePlaceholders: { allowInserting: true },
+  allowStatus: true,
+  media: true, // add true here since the testing example would handle providers
+  placeholder:
+    'Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule.',
+  shouldFocus: false,
+};
 
-  await page.evaluate(
-    (adfInputSelector, adf) => {
-      document.querySelector(adfInputSelector).value = JSON.stringify(adf);
-    },
-    adfInputSelector,
-    adf,
-  );
-  await page.click(importAdfBtnSelector);
+async function mountEditor(page: any, props) {
+  await page.evaluate(props => {
+    (window as any).__mountEditor(props);
+  }, props);
+  await page.waitForSelector('.ProseMirror', 500);
+}
+
+export const initFullPageEditorWithAdf = async (page, adf: Object) => {
+  const url = getExampleUrl('editor', 'editor-core', 'testing');
+  await page.goto(url);
+  await mountEditor(page, {
+    appearance: 'full-page',
+    defaultValue: JSON.stringify(adf),
+    ...enableAllEditorProps,
+  });
+};
+
+export const initCommentEditorWithAdf = async (page, adf: Object) => {
+  const url = getExampleUrl('editor', 'editor-core', 'testing');
+  await page.goto(url);
+  await mountEditor(page, {
+    appearance: 'comment',
+    defaultValue: JSON.stringify(adf),
+    ...enableAllEditorProps,
+  });
 };
 
 export const clearEditor = async page => {
@@ -445,3 +484,4 @@ export const getBoundingRect = async (page, selector) => {
     return { left: x, top: y, width, height, id: element.id };
   }, selector);
 };
+
