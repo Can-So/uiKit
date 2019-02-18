@@ -1,0 +1,1 @@
+- ED-6209: remove internal legacy event subscription model from media plugin
