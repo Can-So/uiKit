@@ -1,0 +1,1 @@
+- Adding Atlassian Switcher integration
