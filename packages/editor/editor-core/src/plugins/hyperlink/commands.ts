@@ -31,22 +31,26 @@ export function isLinkAtPos(pos: number): Predicate {
   };
 }
 
-export function setLinkHref(pos: number, href: string): Command {
+export function setLinkHref(href: string, pos: number, to?: number): Command {
   return filter(isTextAtPos(pos), (state, dispatch) => {
     const $pos = state.doc.resolve(pos);
     const node = state.doc.nodeAt(pos) as Node;
     const linkMark = state.schema.marks.link;
     const mark = linkMark.isInSet(node.marks) as Mark | undefined;
     const url = normalizeUrl(href);
-    const tr = state.tr.removeMark(
-      pos - $pos.parentOffset,
-      pos - $pos.parentOffset + node.nodeSize,
-      state.schema.marks.link,
-    );
+    if (mark && mark.attrs.href === url) {
+      return false;
+    }
+
+    const rightBound =
+      to && pos !== to ? to : pos - $pos.textOffset + node.nodeSize;
+
+    const tr = state.tr.removeMark(pos, rightBound, linkMark);
+
     if (href.trim()) {
       tr.addMark(
-        pos - $pos.parentOffset,
-        pos - $pos.parentOffset + node.nodeSize,
+        pos,
+        rightBound,
         linkMark.create({
           ...((mark && mark.attrs) || {}),
           href: url,
@@ -62,23 +66,18 @@ export function setLinkHref(pos: number, href: string): Command {
   });
 }
 
-export function setLinkText(pos: number, text: string): Command {
+export function setLinkText(text: string, pos: number, to?: number): Command {
   return filter(isLinkAtPos(pos), (state, dispatch) => {
     const $pos = state.doc.resolve(pos);
     const node = state.doc.nodeAt(pos) as Node;
     const mark = state.schema.marks.link.isInSet(node.marks) as Mark;
-    if (node && text && text !== node.text) {
+    if (node && text.length > 0 && text !== node.text) {
+      const rightBound =
+        to && pos !== to ? to : pos - $pos.textOffset + node.nodeSize;
       const tr = state.tr;
-      tr.insertText(
-        text,
-        pos - $pos.parentOffset,
-        pos - $pos.parentOffset + node.nodeSize,
-      );
-      tr.addMark(
-        pos - $pos.parentOffset,
-        pos - $pos.parentOffset + text.length,
-        mark,
-      );
+
+      tr.insertText(text, pos, rightBound);
+      tr.addMark(pos, pos + text.length, mark);
       tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR);
 
       if (dispatch) {
@@ -124,7 +123,7 @@ export function insertLink(
 }
 
 export function removeLink(pos: number): Command {
-  return setLinkHref(pos, '');
+  return setLinkHref('', pos);
 }
 
 export function showLinkToolbar(

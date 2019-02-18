@@ -154,10 +154,7 @@ const configs: Array<BridgePluginListener<any>> = [
     pluginKey: hyperlinkStateKey,
     updater: state => {
       const { activeText, activeLinkMark, canInsertLink } = state;
-
-      if (!canInsertLink && !activeLinkMark) {
-        return;
-      }
+      const message = { text: '', url: '' };
 
       if (
         activeLinkMark &&
@@ -165,28 +162,20 @@ const configs: Array<BridgePluginListener<any>> = [
       ) {
         const linkType = activeLinkMark.node.type.schema.marks.link;
         const linkText = activeLinkMark.node.textContent;
-        const url =
+
+        message.text = linkText || '';
+        message.url =
           activeLinkMark.node.marks
             .filter(mark => mark.type === linkType)
             .map(link => link.attrs.href)
             .pop() || '';
-
-        if (hasValue(url)) {
-          toNativeBridge.call('linkBridge', 'currentSelection', {
-            text: linkText || activeText || '',
-            url,
-          });
-        }
-        return;
       }
 
-      if (hasValue(activeText)) {
-        toNativeBridge.call('linkBridge', 'currentSelection', {
-          text: activeText,
-          url: '',
-        });
-        return;
+      if (canInsertLink && message.text.length === 0 && hasValue(activeText)) {
+        message.text = activeText!;
       }
+
+      toNativeBridge.call('linkBridge', 'currentSelection', message);
     },
   }),
 ];

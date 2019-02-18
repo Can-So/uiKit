@@ -2,6 +2,7 @@ import {
   MentionPluginState,
   TextFormattingState,
   EditorActions,
+  Command,
   CustomMediaPicker,
   BlockTypeState,
   ListsState,
@@ -220,19 +221,24 @@ export default class WebBridgeImpl extends WebBridge
     }
 
     const { state, dispatch } = this.editorView;
-    const pos = state.selection.from;
+    const { from, to } = state.selection;
 
-    if (!isTextAtPos(pos)(state)) {
-      const { from, to } = state.selection;
+    if (!isTextAtPos(from)(state)) {
       insertLink(from, to, url, text)(state, dispatch);
       return;
     }
 
-    setLinkHref(pos, url)(state, dispatch);
-
-    if (hasValue(text) && hasValue(url)) {
-      setLinkText(pos, text)(this.editorView.state, dispatch);
-    }
+    [setLinkHref(url, from, to)]
+      .reduce(
+        (cmds, setLinkHrefCmd) =>
+          // if adding link => set link then set link text
+          // if removing link => execute this reversed
+          hasValue(url)
+            ? [setLinkHrefCmd, setLinkText(text, from, to), ...cmds]
+            : [setLinkText(text, from, to), setLinkHrefCmd, ...cmds],
+        [] as Command[],
+      )
+      .forEach(cmd => cmd(this.editorView!.state, dispatch));
   }
 
   insertBlockType(type) {

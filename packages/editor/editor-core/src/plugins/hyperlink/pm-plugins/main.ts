@@ -8,7 +8,6 @@ import {
   Transaction,
 } from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
-import { getCursor } from '../../../utils';
 
 export enum LinkAction {
   SHOW_INSERT_TOOLBAR = 'SHOW_INSERT_TOOLBAR',
@@ -53,33 +52,19 @@ export const canLinkBeCreatedInRange = (from: number, to: number) => (
   return false;
 };
 
-const isSelectionInsideLink = (state: EditorState | Transaction): boolean => {
-  const linkMark = state.doc.type.schema.marks.link;
+const isSelectionInsideLink = (state: EditorState | Transaction) =>
+  !!state.doc.type.schema.marks.link.isInSet(state.selection.$from.marks());
 
-  const $cursor = getCursor(state.selection);
-  if ($cursor) {
-    return !!linkMark.isInSet($cursor.marks());
-  }
-
-  const { ranges } = state.selection;
-
-  if (Array.isArray(ranges) && ranges.length === 1) {
-    const { $from } = ranges[0];
-    return !!$from.nodeAfter && !!linkMark.isInSet($from.nodeAfter.marks);
-  }
-
-  return false;
-};
-
-const isSelectionAroundLink = (state: EditorState | Transaction): boolean => {
+const isSelectionAroundLink = (state: EditorState | Transaction) => {
   const { $from, $to } = state.selection;
   const node = $from.nodeAfter;
-  if (node && $from.textOffset === 0 && $to.pos - $from.pos === node.nodeSize) {
-    if (state.doc.type.schema.marks.link.isInSet(node.marks)) {
-      return true;
-    }
-  }
-  return false;
+
+  return (
+    !!node &&
+    $from.textOffset === 0 &&
+    $to.pos - $from.pos === node.nodeSize &&
+    !!state.doc.type.schema.marks.link.isInSet(node.marks)
+  );
 };
 
 const mapTransactionToState = (
@@ -167,30 +152,19 @@ const toState = (
   }
 };
 
-const getActiveLinkMark = (state: EditorState | Transaction) => {
-  if (isSelectionInsideLink(state)) {
-    const $cursor = getCursor(state.selection);
-    if ($cursor) {
-      const pos = $cursor.pos - $cursor.textOffset;
-      const node = state.doc.nodeAt(pos);
-      return node && node.isText ? { node, pos } : undefined;
-    }
+const getActiveLinkMark = (
+  state: EditorState | Transaction,
+): { node: Node; pos: number } | undefined => {
+  const {
+    selection: { $from },
+  } = state;
 
-    const { ranges } = state.selection;
-    if (Array.isArray(ranges) && ranges.length === 1) {
-      const { $from } = ranges[0];
-
-      const pos = $from.pos - $from.textOffset;
-      const node = state.doc.nodeAt(pos);
-      return node && node.isText ? { node, pos } : undefined;
-    }
-  }
-  if (isSelectionAroundLink(state)) {
-    const { $from } = state.selection;
+  if (isSelectionInsideLink(state) || isSelectionAroundLink(state)) {
     const pos = $from.pos - $from.textOffset;
     const node = state.doc.nodeAt(pos);
     return node && node.isText ? { node, pos } : undefined;
   }
+
   return undefined;
 };
 

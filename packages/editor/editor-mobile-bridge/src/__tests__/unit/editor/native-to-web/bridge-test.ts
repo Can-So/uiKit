@@ -1,3 +1,4 @@
+const mockCalls = [] as string[];
 const mockEditorCore = {
   ...jest.genMockFromModule('@atlaskit/editor-core'),
   indentList: jest.fn(() => () => {}),
@@ -6,8 +7,8 @@ const mockEditorCore = {
   toggleBulletList: jest.fn(() => () => {}),
   insertLink: jest.fn(() => () => {}),
   isTextAtPos: jest.fn(pos => () => pos === 2),
-  setLinkHref: jest.fn(() => () => {}),
-  setLinkText: jest.fn(() => () => {}),
+  setLinkHref: jest.fn(() => () => mockCalls.push('setLinkHref')),
+  setLinkText: jest.fn(() => () => mockCalls.push('setLinkText')),
 };
 jest.mock('@atlaskit/editor-core', () => mockEditorCore);
 
@@ -37,6 +38,7 @@ afterEach(() => {
 describe('lists should work', () => {
   let bridge: any = new WebBridgeImpl();
   beforeEach(() => {
+    mockCalls.length = 0;
     bridge.editorView = {};
     bridge.listBridgeState = {};
   });
@@ -118,6 +120,7 @@ describe('lists should work', () => {
 describe('links should work', () => {
   let bridge: any = new WebBridgeImpl();
   beforeEach(() => {
+    mockCalls.length = 0;
     bridge.editorView = {};
   });
 
@@ -132,10 +135,10 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('text', 'url');
-    expect(insertLink).toBeCalledWith(1, 3, 'url', 'text');
+    expect(insertLink).toHaveBeenCalledWith(1, 3, 'url', 'text');
   });
 
-  it('should call setLinkHref/setLinkText when on on text node', () => {
+  it('should call setLinkHref then setLinkText when on text node', () => {
     bridge.editorView = {
       state: {
         selection: {
@@ -145,11 +148,32 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('text', 'url');
-    expect(setLinkHref).toBeCalledWith(2, 'url');
-    expect(setLinkText).toBeCalledWith(2, 'text');
+    expect(setLinkHref).toHaveBeenCalledWith('url', 2, undefined);
+    expect(setLinkText).toHaveBeenCalledWith('text', 2, undefined);
+    expect(mockCalls).toEqual(
+      expect.arrayContaining(['setLinkHref', 'setLinkText']),
+    );
   });
 
-  it('should call setLinkHref when providing url only', () => {
+  it('should call setLinkHref then setLinkText when on selected text node', () => {
+    bridge.editorView = {
+      state: {
+        selection: {
+          from: 2, // mock will resolve pos as text node
+          to: 4,
+        },
+      },
+    };
+
+    bridge.onLinkUpdate('text', 'url');
+    expect(setLinkHref).toHaveBeenCalledWith('url', 2, 4);
+    expect(setLinkText).toHaveBeenCalledWith('text', 2, 4);
+    expect(mockCalls).toEqual(
+      expect.arrayContaining(['setLinkHref', 'setLinkText']),
+    );
+  });
+
+  it('should call setLinkHref then setLinkText when providing url only', () => {
     bridge.editorView = {
       state: {
         selection: {
@@ -159,7 +183,57 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('', 'url');
-    expect(setLinkHref).toBeCalledWith(2, 'url');
-    expect(setLinkText).not.toBeCalled();
+    expect(setLinkHref).toHaveBeenCalledWith('url', 2, undefined);
+    expect(setLinkText).toHaveBeenCalledWith('', 2, undefined);
+  });
+
+  it('should call setLinkHref then setLinkText when providing url only + selection', () => {
+    bridge.editorView = {
+      state: {
+        selection: {
+          from: 2, // mock will resolve pos as text node
+          to: 4,
+        },
+      },
+    };
+
+    bridge.onLinkUpdate('', 'url');
+    expect(setLinkHref).toHaveBeenCalledWith('url', 2, 4);
+    expect(setLinkText).toHaveBeenCalledWith('', 2, 4);
+  });
+
+  it('should call setLinkText then setLinkHref when providing no url', () => {
+    bridge.editorView = {
+      state: {
+        selection: {
+          from: 2, // mock will resolve pos as text node
+        },
+      },
+    };
+
+    bridge.onLinkUpdate('text', '');
+    expect(setLinkHref).toHaveBeenCalledWith('', 2, undefined);
+    expect(setLinkText).toHaveBeenCalledWith('text', 2, undefined);
+    expect(mockCalls).toEqual(
+      expect.arrayContaining(['setLinkText', 'setLinkHref']),
+    );
+  });
+
+  it('should call setLinkText then setLinkHref when providing no url + selection', () => {
+    bridge.editorView = {
+      state: {
+        selection: {
+          from: 2, // mock will resolve pos as text node
+          to: 4,
+        },
+      },
+    };
+
+    bridge.onLinkUpdate('text', '');
+    expect(setLinkHref).toHaveBeenCalledWith('', 2, 4);
+    expect(setLinkText).toHaveBeenCalledWith('text', 2, 4);
+    expect(mockCalls).toEqual(
+      expect.arrayContaining(['setLinkText', 'setLinkHref']),
+    );
   });
 });

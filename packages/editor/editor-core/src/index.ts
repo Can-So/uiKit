@@ -92,7 +92,7 @@ export {
 export { setTextSelection } from './utils';
 export { ReactEditorView } from './create-editor';
 export { getDefaultPluginsList } from './create-editor/create-plugins-list';
-export { EditorPlugin, EditorProps, EditorInstance } from './types';
+export { Command, EditorPlugin, EditorProps, EditorInstance } from './types';
 export { default as EditorActions } from './actions';
 export { MacroProvider, MacroAttributes, ExtensionType } from './plugins/macro';
 export { CardProvider } from './plugins/card';
