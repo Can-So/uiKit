@@ -1,6 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/editor-bitbucket-transformer", "type": "patch" }
-  ],
-  "dependents": []
-}

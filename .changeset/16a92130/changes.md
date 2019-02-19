@@ -1,1 +1,0 @@
-- support new Bitbucket mentions format
