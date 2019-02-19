@@ -101,10 +101,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     }
   };
 
-  private handleCloseDialog = (_: {
-    isOpen: boolean;
-    event: any;
-  }) => {
+  private handleCloseDialog = (_: { isOpen: boolean; event: any }) => {
     // TODO: send analytics
     this.setState({
       isDialogOpen: false,
