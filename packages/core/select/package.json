@@ -14,10 +14,8 @@
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
-    "Charles L",
-    "Mike G",
-    "Joss M",
-    "Jed W"
+    "Ajay M",
+    "Charles L"
   ],
   "atlaskit": {
     "name": "Select",

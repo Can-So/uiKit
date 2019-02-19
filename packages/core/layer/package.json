@@ -12,9 +12,8 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Trey S",
-    "Alex R",
-    "Peter G"
+    "Sean C",
+    "Ajay M"
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {

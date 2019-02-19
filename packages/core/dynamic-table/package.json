@@ -13,9 +13,8 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Trey S",
-    "Alex R",
-    "Peter G"
+    "Sean C",
+    "Ajay M"
   ],
   "atlaskit": {
     "name": "Dynamic Table",

@@ -12,7 +12,8 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Ben Conolly"
+    "Sean C",
+    "Ajay M"
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
