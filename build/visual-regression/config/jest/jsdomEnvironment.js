@@ -39,10 +39,16 @@ class PuppeteerEnvironment extends JSDOMEnvironment {
 
     if (!wsEndpoint) throw new Error('wsEndpoint not found');
 
-    this.global.browser = await puppeteer.connect({
+    const options = {
       browserWSEndpoint: wsEndpoint,
       ignoreHTTPSErrors: true,
-    });
+    };
+
+    if (process.env.DEBUG) {
+      options.slowMo = 100;
+    }
+
+    this.global.browser = await puppeteer.connect(options);
   }
 }
 
