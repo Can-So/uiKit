@@ -14,7 +14,7 @@ BrowserTestCase(
   {
     skip: ['ie', 'safari'],
   },
-  async client => {
+  async (client: any) => {
     let browser = new Page(client);
 
     // copy stuff to clipboard

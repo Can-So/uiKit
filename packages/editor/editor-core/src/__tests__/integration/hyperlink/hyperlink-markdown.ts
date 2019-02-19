@@ -8,7 +8,7 @@ import { getDocFromElement, comment, fullpage, editable } from '../_helpers';
     {
       skip: ['ie', 'edge', 'safari'],
     },
-    async client => {
+    async (client: any) => {
       let browser = new Page(client);
       await browser.goto(editor.path);
       await browser.waitForSelector(editor.placeholder);

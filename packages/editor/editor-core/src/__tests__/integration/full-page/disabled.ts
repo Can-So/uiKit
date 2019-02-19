@@ -20,7 +20,7 @@ async function assertThrowsAsync(fn, regExp) {
 BrowserTestCase(
   "disabled.ts: Shouldn't be able to click in the disabled editor",
   { skip: ['edge', 'ie', 'firefox', 'safari'] },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
     await browser.goto(fullpageDisabled.path);
     await browser.waitForSelector(fullpageDisabled.placeholder);
@@ -35,7 +35,7 @@ BrowserTestCase(
 BrowserTestCase(
   "disabled.ts: Shouldn't be able to click in a panel",
   { skip: ['edge', 'ie', 'firefox', 'safari'] },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
     await browser.goto(fullpageDisabled.path);
     await browser.waitForSelector(fullpageDisabled.placeholder);
@@ -50,7 +50,7 @@ BrowserTestCase(
 BrowserTestCase(
   "disabled.ts: Shouldn't be able to click in a table",
   { skip: ['edge', 'ie', 'firefox', 'safari'] },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
     await browser.goto(fullpageDisabled.path);
     await browser.waitForSelector(fullpageDisabled.placeholder);

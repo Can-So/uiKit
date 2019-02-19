@@ -141,7 +141,7 @@ const mentionsPlugin = (
         getItems(
           query,
           state,
-          intl,
+          _intl,
           { prevActive, queryChanged },
           tr,
           dispatch,
@@ -469,6 +469,7 @@ function mentionPluginFactory(
             );
             break;
         }
+        return;
       };
 
       providerFactory.subscribe('mentionProvider', providerHandler);
