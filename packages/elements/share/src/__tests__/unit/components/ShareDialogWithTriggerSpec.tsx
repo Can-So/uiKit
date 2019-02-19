@@ -2,7 +2,12 @@ import InlineDialog from '@atlaskit/inline-dialog';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { ShareButton } from '../../../components/ShareButton';
-import { defaultShareContentState, Props, ShareDialogWithTrigger, State } from '../../../components/ShareDialogWithTrigger';
+import {
+  defaultShareContentState,
+  Props,
+  ShareDialogWithTrigger,
+  State,
+} from '../../../components/ShareDialogWithTrigger';
 import { ShareData, ShareForm } from '../../../components/ShareForm';
 
 let wrapper: ShallowWrapper<Props, State, ShareDialogWithTrigger>;

@@ -7,7 +7,11 @@ import { ErrorMessage, Field, HelperMessage } from '@atlaskit/form';
 import UserPicker, { OptionData } from '@atlaskit/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Props, REQUIRED, UserPickerField } from '../../../components/UserPickerField';
+import {
+  Props,
+  REQUIRED,
+  UserPickerField,
+} from '../../../components/UserPickerField';
 import { showInviteWarning } from '../../../components/utils';
 import { messages } from '../../../i18n';
 import { InvitationsCapabilitiesResponse } from '../../../types';

@@ -8,7 +8,12 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { messages } from '../i18n';
-import { Comment, DialogContentState, FormChildrenArgs, InvitationsCapabilitiesResponse } from '../types';
+import {
+  Comment,
+  DialogContentState,
+  FormChildrenArgs,
+  InvitationsCapabilitiesResponse,
+} from '../types';
 import { CommentField } from './CommentField';
 import { CopyLinkButton } from './CopyLinkButton';
 import { ShareHeader } from './ShareHeader';

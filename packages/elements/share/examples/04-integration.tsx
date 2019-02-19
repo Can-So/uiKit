@@ -2,7 +2,15 @@ import { OptionData } from '@atlaskit/user-picker';
 import { userPickerData } from '@atlaskit/util-data-test';
 import * as React from 'react';
 import { ShareDialogContainer } from '../src';
-import { Client, Comment, Content, KeysOfType, MetaData, OriginTracing, User } from '../src/types';
+import {
+  Client,
+  Comment,
+  Content,
+  KeysOfType,
+  MetaData,
+  OriginTracing,
+  User,
+} from '../src/types';
 
 type UserData = {
   avatarUrl?: string;

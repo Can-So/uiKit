@@ -4,7 +4,11 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import * as InvitationsCapabilitiesExports from '../../../api/InvitationsCapabilitiesResource';
 import * as ShareServiceExports from '../../../clients/ShareServiceClient';
-import { Props, ShareDialogContainer, State } from '../../../components/ShareDialogContainer';
+import {
+  Props,
+  ShareDialogContainer,
+  State,
+} from '../../../components/ShareDialogContainer';
 import { ShareDialogWithTrigger } from '../../../components/ShareDialogWithTrigger';
 import { Client, OriginTracing } from '../../../types';
 
