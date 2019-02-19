@@ -207,7 +207,8 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         : 0;
 
       const renderTime: number = renderStartTime
-        ? performanceNow() - renderStartTime : 0;
+        ? performanceNow() - renderStartTime
+        : 0;
 
       const resultsArray: Result[][] = resultMapToArray(
         getDisplayedResults(recentItems),
