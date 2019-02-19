@@ -159,6 +159,11 @@ export type GlobalNavigationProps = {
   /** The text to display in the tooltip for the app switcher item. */
   appSwitcherTooltip?: string,
 
+  /** The boolean that controls whether to display the Atlassian Switcher. */
+  enableAtlassianSwitcher?: boolean,
+  /** A callback used to trigger the product implementation of XFlow */
+  triggerXFlow?: ?() => void,
+
   /** The text to display in the tooltip for the help item. */
   helpTooltip?: string,
   /** A component to render into the help menu dropdown. */
@@ -195,6 +200,7 @@ export type DrawerName =
   | 'notification'
   | 'starred'
   | 'create'
-  | 'settings';
+  | 'settings'
+  | 'atlassianSwitcher';
 
 export type { DrawerWidth };

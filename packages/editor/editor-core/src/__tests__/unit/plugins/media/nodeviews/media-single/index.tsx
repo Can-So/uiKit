@@ -79,33 +79,6 @@ describe('nodeviews/mediaSingle', () => {
     jest.spyOn(mediaStateKey, 'getState').mockImplementation(() => pluginState);
   });
 
-  it('notifies plugin if node layout is updated', () => {
-    const mediaSingleNode = mediaSingle({ layout: 'wrap-right' })(mediaNode);
-    const updatedMediaSingleNode = mediaSingle({ layout: 'center' })(mediaNode)(
-      defaultSchema,
-    );
-
-    const updateLayoutSpy = jest.fn();
-    pluginState.updateLayout = updateLayoutSpy;
-
-    const wrapper = mount(
-      <MediaSingle
-        view={view}
-        eventDispatcher={eventDispatcher}
-        node={mediaSingleNode(defaultSchema)}
-        lineLength={680}
-        getPos={getPos}
-        width={123}
-        selected={() => 1}
-        editorAppearance="full-page"
-      />,
-    );
-
-    wrapper.setProps({ node: updatedMediaSingleNode });
-
-    expect(updateLayoutSpy).toHaveBeenCalledWith('center');
-  });
-
   it('sets "onExternalImageLoaded" for external images', () => {
     const mediaSingleNode = mediaSingle()(externalMediaNode);
     const wrapper = mount(

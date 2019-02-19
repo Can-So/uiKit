@@ -1,11 +1,10 @@
 import * as React from 'react';
-
 import MentionResource, {
   MentionResourceConfig,
 } from '../src/api/MentionResource';
 
 // FIXME FAB-1732 - extract or replace with third-party implementation
-const toJavascriptString = obj => {
+const toJavascriptString = (obj: object | string | any[]) => {
   if (typeof obj === 'object') {
     if (Array.isArray(obj)) {
       let arrString = '[\n';
@@ -16,7 +15,7 @@ const toJavascriptString = obj => {
       return arrString;
     }
     let objString = '{\n';
-    Object.keys(obj).forEach(key => {
+    (Object.keys(obj) as (keyof typeof obj)[]).forEach(key => {
       objString += `  ${key}: ${toJavascriptString(obj[key])},\n`;
     });
     objString += '}';
@@ -24,7 +23,6 @@ const toJavascriptString = obj => {
   } else if (typeof obj === 'string') {
     return `'${obj}'`;
   }
-  return obj && obj.toString();
 };
 
 export interface Props {
@@ -40,24 +38,26 @@ export default class ConfigurableMentionPicker extends React.Component<
   Props,
   State
 > {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       resourceProvider: new MentionResource(props.config),
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     this.refreshMentions(nextProps.config);
   }
 
-  refreshMentions(config) {
+  refreshMentions(config: MentionResourceConfig) {
     this.setState({
       resourceProvider: new MentionResource(config),
     });
   }
 
-  mentionConfigChange = event => {
+  mentionConfigChange: React.ChangeEventHandler<
+    HTMLTextAreaElement
+  > = event => {
     // tslint:disable:next-line no-eval
     const config = eval(`( () => (${event.target.value}) )()`);
     this.refreshMentions(config);

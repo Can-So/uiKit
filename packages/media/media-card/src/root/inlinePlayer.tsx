@@ -116,7 +116,7 @@ export class InlinePlayer extends Component<
     const { fileSrc } = this.state;
 
     if (!fileSrc) {
-      return <CardLoading mediaItemType="file" dimensions={dimensions} />;
+      return <CardLoading dimensions={dimensions} />;
     }
 
     return (

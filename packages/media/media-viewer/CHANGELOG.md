@@ -1,5 +1,12 @@
 # @atlaskit/media-viewer
 
+## 35.2.1
+- Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+  - @atlaskit/media-core@27.0.2
+  - @atlaskit/media-store@9.1.6
+  - @atlaskit/media-test-helpers@20.1.4
+  - @atlaskit/media-card@53.0.0
+
 ## 35.2.0
 - [minor] [fde1cf51e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fde1cf51e0):
 

@@ -4,8 +4,8 @@ import {
   callNativeBridge,
   editor,
   editable,
-  skipBrowsers as skip,
   getBridgeOutput,
+  skipBrowsers as skip,
 } from '../_utils';
 
 BrowserTestCase(

@@ -5,8 +5,8 @@ import {
   editor,
   editable,
   getDocFromElement,
-  skipBrowsers as skip,
   navigateOrClear,
+  skipBrowsers as skip,
 } from '../_utils';
 
 BrowserTestCase(

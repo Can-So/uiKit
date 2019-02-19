@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {
   Context,
   ContextConfig,
-  MediaItem,
+  FileItem,
   Auth,
   FileState,
 } from '@atlaskit/media-core';
@@ -40,9 +40,9 @@ export class Stubs {
     return jest.fn(() => Stubs.mediaViewer(overrides || {}));
   }
 
-  static mediaItemProvider(subject?: Subject<MediaItem>) {
+  static mediaItemProvider(subject?: Subject<FileItem>) {
     return {
-      observable: jest.fn(() => subject || new Subject<MediaItem>()),
+      observable: jest.fn(() => subject || new Subject<FileItem>()),
     };
   }
 

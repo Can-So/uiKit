@@ -25,14 +25,14 @@ interface State {
 class TaskStateManager extends PureComponent<Props, State> {
   private taskStates = new Map<string, boolean>();
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       tick: 0,
     };
   }
 
-  private onChangeListener = (taskId, done) => {
+  private onChangeListener = (taskId: string, done: boolean) => {
     action('onChange')();
     this.taskStates.set(taskId, done);
     this.setState({ tick: this.state.tick + 1 });

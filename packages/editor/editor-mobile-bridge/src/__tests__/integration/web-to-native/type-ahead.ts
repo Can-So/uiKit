@@ -3,9 +3,9 @@ import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 import {
   editor,
   editable,
-  skipBrowsers as skip,
   getBridgeOutput,
   navigateOrClear,
+  skipBrowsers as skip,
 } from '../_utils';
 
 BrowserTestCase(

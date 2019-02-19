@@ -18,7 +18,7 @@ import {
 // Cannot paste rich text in IE/Edge
 BrowserTestCase(
   'task-decision-1.ts: can paste rich text into a decision',
-  { skip: ['ie', 'safari', 'edge'] },
+  { skip: ['ie', 'safari', 'edge', 'firefox'] },
   async client => {
     const browser = new Page(client);
     await browser.goto(clipboardHelper);
@@ -41,7 +41,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'task-decision-1.ts: can paste plain text into a decision',
-  { skip: ['ie', 'safari'] },
+  { skip: ['ie', 'safari', 'firefox'] },
   async client => {
     const browser = new Page(client);
     await browser.goto(clipboardHelper);
@@ -65,7 +65,7 @@ BrowserTestCase(
 // IE is generally flaky
 BrowserTestCase(
   'task-decision-1.ts: can type into decision',
-  { skip: ['ie', 'safari', 'edge'] },
+  { skip: ['ie', 'safari', 'edge', 'firefox'] },
   async client => {
     const browser = new Page(client);
     await gotoEditor(browser);

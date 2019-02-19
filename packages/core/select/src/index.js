@@ -7,7 +7,7 @@ export {
   makeCreatableSelect,
 } from 'react-select';
 
-export { CheckboxOption, RadioOption } from './components';
+export { CheckboxOption, RadioOption } from './components/input-options';
 
 export { default } from './Select';
 export { default as AsyncSelect } from './AsyncSelect';

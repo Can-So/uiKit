@@ -37,7 +37,6 @@ export function createCollectionItem({
     id: id || uuid.v4(),
     insertedAt: getPastDate().valueOf(),
     occurrenceKey: occurrenceKey || uuid.v4(),
-    type: 'file',
     details: {
       name: name || getFakeFileName(extension),
       size: blob.size,

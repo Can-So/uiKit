@@ -5,13 +5,13 @@ import { analyticsService } from '../../../analytics';
 import { transformToCodeAction } from '../commands/transform-to-code';
 import { InputRuleHandler, createInputRule } from '../../../utils/input-rules';
 import {
-  ruleWithAnalytics,
   ACTION,
   ACTION_SUBJECT,
   ACTION_SUBJECT_ID,
   EVENT_TYPE,
   INPUT_METHOD,
 } from '../../analytics';
+import { ruleWithAnalytics } from '../../analytics/utils';
 
 const validCombos = {
   '**': ['_', '~~'],

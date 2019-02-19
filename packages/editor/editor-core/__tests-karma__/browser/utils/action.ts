@@ -29,9 +29,6 @@ const mediaProvider = getFreshMediaProvider();
 const providerFactory = new ProviderFactory();
 providerFactory.setProvider('mediaProvider', mediaProvider);
 
-const waitForPluginStateChange = async (pluginState: MediaPluginState) =>
-  new Promise(resolve => pluginState.subscribe(resolve));
-
 describe(name, () => {
   const createEditor = createEditorFactory<MediaPluginState>();
 
@@ -53,7 +50,6 @@ describe(name, () => {
 
         const provider = await mediaProvider;
         await provider.uploadContext;
-        await waitForPluginStateChange(pluginState);
 
         // wait a tick for await MediaPicker in picker-facade
         await new Promise(resolve => setTimeout(resolve, 0));

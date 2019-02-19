@@ -9,8 +9,6 @@ import Button from '@atlaskit/button';
 import { Card } from '@atlaskit/media-card';
 import {
   createStorybookContext,
-  genericUrlPreviewId,
-  genericLinkId,
   genericFileId,
 } from '@atlaskit/media-test-helpers';
 import { FilmstripView } from '../src/filmstripView';
@@ -52,20 +50,6 @@ const context = createStorybookContext() as any;
 const exampleActions = [{ label: 'View', handler: () => console.log('View') }];
 
 const cards = [
-  <Card
-    key="card1"
-    appearance="horizontal"
-    context={context}
-    identifier={genericUrlPreviewId}
-    actions={exampleActions}
-  />,
-  <Card
-    key="card2"
-    appearance="horizontal"
-    context={context}
-    identifier={genericLinkId}
-    actions={exampleActions}
-  />,
   <Card
     key="card3"
     context={context}

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/renderer",
-  "version": "38.0.6",
+  "version": "38.0.7",
   "description": "Renderer component",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -21,11 +21,11 @@
     "@atlaskit/adf-schema": "^1.4.6",
     "@atlaskit/analytics-namespaced-context": "^2.1.5",
     "@atlaskit/code": "^8.2.2",
-    "@atlaskit/editor-common": "^31.0.1",
+    "@atlaskit/editor-common": "^31.1.1",
     "@atlaskit/editor-json-transformer": "^4.1.9",
     "@atlaskit/icon": "^16.0.0",
-    "@atlaskit/media-card": "^52.0.6",
-    "@atlaskit/media-filmstrip": "^26.0.0",
+    "@atlaskit/media-card": "^53.0.0",
+    "@atlaskit/media-filmstrip": "^26.1.2",
     "@atlaskit/mention": "^16.0.1",
     "@atlaskit/smart-card": "^9.4.1",
     "@atlaskit/status": "^0.3.2",
@@ -36,7 +36,7 @@
     "react-loadable": "^5.1.0"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^27.0.0",
+    "@atlaskit/media-core": "^27.0.2",
     "react": "^16.4.0",
     "styled-components": "^3.2.6"
   },
@@ -46,8 +46,8 @@
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/editor-test-helpers": "^6.3.19",
     "@atlaskit/field-range": "^5.0.14",
-    "@atlaskit/media-core": "^27.0.0",
-    "@atlaskit/media-test-helpers": "^20.1.0",
+    "@atlaskit/media-core": "^27.0.2",
+    "@atlaskit/media-test-helpers": "^20.1.4",
     "@atlaskit/navigation-next": "^4.1.2",
     "@atlaskit/profilecard": "^6.1.5",
     "@atlaskit/size-detector": "^5.0.9",

@@ -13,7 +13,7 @@ import {
   createReactionSelectionEvent,
   createReactionsRenderedEvent,
 } from '../analytics';
-import { OnEmoji, OnReaction } from '../types';
+import { OnEmoji, OnReaction, ReactionSource } from '../types';
 import { ReactionStatus } from '../types/ReactionStatus';
 import { ReactionSummary } from '../types/ReactionSummary';
 import { messages } from './i18n';
@@ -47,7 +47,7 @@ export interface Props {
   onReactionClick: OnEmoji;
   onReactionHover?: OnReaction;
   allowAllEmojis?: boolean;
-  flash: {
+  flash?: {
     [emojiId: string]: boolean;
   };
   boundariesElement?: string;
@@ -68,7 +68,7 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
   private openTime: number | undefined;
   private renderTime: number | undefined;
 
-  constructor(props) {
+  constructor(props: Props & WithAnalyticsEventProps) {
     super(props);
     if (props.status !== ReactionStatus.ready) {
       this.renderTime = Date.now();
@@ -145,7 +145,7 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
     );
   };
 
-  private handleOnSelection = (emojiId, source) => {
+  private handleOnSelection = (emojiId: string, source: ReactionSource) => {
     createAndFireSafe(
       this.props.createAnalyticsEvent,
       createReactionSelectionEvent,

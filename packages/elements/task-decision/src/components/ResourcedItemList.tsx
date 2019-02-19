@@ -112,7 +112,7 @@ export default class ResourcedItemList extends PureComponent<Props, State> {
     this.unsubscribeRecentUpdates();
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (
       this.props.initialQuery !== nextProps.initialQuery ||
       this.props.taskDecisionProvider !== nextProps.taskDecisionProvider
@@ -306,7 +306,7 @@ export default class ResourcedItemList extends PureComponent<Props, State> {
   private groupItemsByDate(items: Item[]): ItemsByDate[] {
     const groupByField =
       this.props.initialQuery.sortCriteria || defaultSortCriteria;
-    let lastDate;
+    let lastDate: Date | undefined;
     return items.reduce<ItemsByDate[]>((groups, item) => {
       const currentDate = getStartOfDate(item[groupByField]);
       if (isSameDate(lastDate, currentDate)) {

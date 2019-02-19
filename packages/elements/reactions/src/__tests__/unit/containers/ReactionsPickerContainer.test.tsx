@@ -1,6 +1,6 @@
 import { EmojiProvider } from '@atlaskit/emoji';
 import { emoji } from '@atlaskit/util-data-test';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import ReactionPickerContainer from '../../../containers/ReactionsPickerContainer';
 import { ReactionConsumer } from '../../../reaction-store/ReactionConsumer';
@@ -18,8 +18,8 @@ describe('ReactionPickerContainer', () => {
     getDetailedReaction: jest.fn(),
   };
 
-  let container;
-  let actionsMapper;
+  let container: ShallowWrapper<ReactionPickerContainer>;
+  let actionsMapper: any;
 
   const store = {
     getReactions: jest.fn(),
@@ -46,7 +46,7 @@ describe('ReactionPickerContainer', () => {
   });
 
   describe('actions', () => {
-    let mappedActions;
+    let mappedActions: any;
     beforeAll(() => {
       mappedActions = actionsMapper(actions);
     });

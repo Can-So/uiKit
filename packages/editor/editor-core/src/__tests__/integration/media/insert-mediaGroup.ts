@@ -14,7 +14,7 @@ import {
 [comment, message].forEach(editor => {
   BrowserTestCase(
     `insert-mediaGroup.ts: Inserts a media group on ${editor.name}`,
-    { skip: ['edge', 'ie', 'safari'] },
+    { skip: ['edge', 'ie', 'safari', 'firefox'] },
     async client => {
       const page = await goToEditorTestingExample(client);
       await mountEditor(page, {
