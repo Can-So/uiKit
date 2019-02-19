@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.13.5
+- [patch] [bc340694d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bc340694d2):
+
+  - ED-6247: fix resizing with merged cells
+
 ## 98.13.4
 - Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
   - @atlaskit/editor-common@31.1.1

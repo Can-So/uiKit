@@ -1,1 +1,0 @@
-- ED-6247: fix resizing with merged cells
