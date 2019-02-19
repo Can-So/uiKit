@@ -46,6 +46,7 @@
     "./typings/lodash.last.d.ts",
     "./typings/lodash.matches.d.ts",
     "./typings/lodash.merge.d.ts",
+    "./typings/lodash.sample.d.ts",
     "./typings/node.d.ts",
     "./typings/package.json.d.ts",
     "./typings/pdfjs-dist.d.ts",
