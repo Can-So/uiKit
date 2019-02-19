@@ -75,13 +75,8 @@ const fixColumnWidth = (
 
   // If the tables total width (including no zero widths col or cols without width) is less than the current layout
   // We scale up the columns to meet the minimum of the table layout.
-  if (zeroWidthColumnsCount === 0) {
-    if (scaleDownPercent) {
-      return Math.floor((1 - scaleDownPercent) * columnWidth);
-    }
-    if (tableWidth < layoutWidth) {
-      return Math.floor(columnWidth * (layoutWidth / tableWidth));
-    }
+  if (zeroWidthColumnsCount === 0 && scaleDownPercent) {
+    return Math.floor((1 - scaleDownPercent) * columnWidth);
   }
 
   return Math.max(
