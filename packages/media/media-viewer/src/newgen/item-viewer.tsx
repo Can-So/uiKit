@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, FileState, Identifier } from '@atlaskit/media-core';
+import { Context, FileState, FileIdentifier } from '@atlaskit/media-core';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
 import { Outcome, MediaViewerFeatureFlags } from './domain';
@@ -31,7 +31,7 @@ import {
 import { AudioViewer } from './viewers/audio';
 
 export type Props = Readonly<{
-  identifier: Identifier;
+  identifier: FileIdentifier;
   context: Context;
   featureFlags?: MediaViewerFeatureFlags;
   showControls?: () => void;
@@ -77,14 +77,14 @@ export class ItemViewerBase extends React.Component<Props, State> {
     const { id } = this.props.identifier;
     const { item } = this.state;
     // the item.whenFailed case is handled in the "init" method
-    item.whenSuccessful(file => {
+    item.whenSuccessful(async file => {
       if (file.status === 'processed') {
         if (payload.status === 'success') {
           this.fireAnalytics(mediaFileLoadSucceededEvent(file));
         } else if (payload.status === 'error') {
           this.fireAnalytics(
             mediaFileLoadFailedEvent(
-              id,
+              await id,
               payload.errorMessage || 'Viewer error',
               file,
             ),
@@ -190,11 +190,12 @@ export class ItemViewerBase extends React.Component<Props, State> {
     );
   }
 
-  private init(props: Props) {
+  private async init(props: Props) {
     const { context, identifier } = props;
-    this.fireAnalytics(mediaFileCommencedEvent(identifier.id));
+    const id = await identifier.id;
+    this.fireAnalytics(mediaFileCommencedEvent(id));
     this.subscription = context.file
-      .getFileState(identifier.id, {
+      .getFileState(id, {
         collectionName: identifier.collectionName,
       })
       .subscribe({
@@ -208,7 +209,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
             item: Outcome.failed(createError('metadataFailed', err)),
           });
           this.fireAnalytics(
-            mediaFileLoadFailedEvent(identifier.id, 'Metadata fetching failed'),
+            mediaFileLoadFailedEvent(id, 'Metadata fetching failed'),
           );
         },
       });

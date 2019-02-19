@@ -42,7 +42,7 @@ export default class Example extends React.Component<{}, State> {
     this.setState({ selectedItem });
   };
 
-  createItem = (item: Identifier, title: string) => {
+  createItem = (item: FileIdentifier, title: string) => {
     const identifier: FileIdentifier = {
       id: item.id,
       mediaItemType: 'file',

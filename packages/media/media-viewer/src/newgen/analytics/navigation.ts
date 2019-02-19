@@ -1,5 +1,5 @@
 import { GasPayload } from '@atlaskit/analytics-gas-types';
-import { Identifier } from '@atlaskit/media-core';
+import { Identifier, isFileIdentifier } from '@atlaskit/media-core';
 import { packageAttributes, PackageAttributes } from './index';
 import { NavigationDirection, NavigationSource } from '../navigation';
 
@@ -23,7 +23,11 @@ function inputFromSource(source: NavigationSource): string {
 
 function fileDetailsFromIdentifier(identifier: Identifier) {
   return {
-    fileId: identifier.id,
+    fileId: isFileIdentifier(identifier)
+      ? typeof identifier.id === 'string'
+        ? identifier.id
+        : ''
+      : '',
   };
 }
 

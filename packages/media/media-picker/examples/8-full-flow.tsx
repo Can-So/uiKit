@@ -134,12 +134,14 @@ export default class Example extends React.Component<{}, State> {
     if (!selectedItem) {
       return null;
     }
-    const list: Identifier[] = events.map(event => {
-      return {
+    const list: FileIdentifier[] = events.map(event => {
+      const identifier: FileIdentifier = {
         id: event.id,
         occurrenceKey: event.occurrenceKey || '',
         mediaItemType: 'file',
       };
+
+      return identifier;
     });
     const dataSource =
       dataSourceType === 'collection'

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Identifier } from '@atlaskit/media-core';
+import { FileIdentifier } from '@atlaskit/media-core';
 import { Navigation, NavigationBase } from '../../../newgen/navigation';
 import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
@@ -11,31 +11,31 @@ import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
  * TODO: JEST-23 Fix these tests
  */
 describe('Navigation', () => {
-  const identifier: Identifier = {
+  const identifier: FileIdentifier = {
     id: 'some-id',
     occurrenceKey: 'some-custom-occurrence-key',
     mediaItemType: 'file',
   };
 
-  const identifier2: Identifier = {
+  const identifier2: FileIdentifier = {
     id: 'some-id-2',
     occurrenceKey: 'some-custom-occurrence-key',
     mediaItemType: 'file',
   };
 
-  const identifier2Duplicated: Identifier = {
+  const identifier2Duplicated: FileIdentifier = {
     id: 'some-id-2',
     occurrenceKey: 'some-other-occurrence-key',
     mediaItemType: 'file',
   };
 
-  const identifier3: Identifier = {
+  const identifier3: FileIdentifier = {
     id: 'some-id-3',
     occurrenceKey: 'some-custom-occurrence-key',
     mediaItemType: 'file',
   };
 
-  const nonFoundIdentifier: Identifier = {
+  const nonFoundIdentifier: FileIdentifier = {
     id: 'some-other-id',
     occurrenceKey: 'some-custom-occurrence-key',
     mediaItemType: 'file',

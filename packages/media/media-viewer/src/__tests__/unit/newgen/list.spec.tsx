@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Identifier } from '@atlaskit/media-core';
+import { Identifier, FileIdentifier } from '@atlaskit/media-core';
 import { Observable } from 'rxjs';
 import { List, Props, State } from '../../../newgen/list';
 import { ErrorMessage } from '../../../newgen/error';
@@ -9,7 +9,7 @@ import Button from '@atlaskit/button';
 import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 function createFixture(props: Partial<Props>) {
-  const items: Identifier[] = [];
+  const items: FileIdentifier[] = [];
   const selectedItem: Identifier = {
     id: '',
     occurrenceKey: '',
@@ -60,7 +60,7 @@ describe('<List />', () => {
   });
 
   it('should show an error if selected item is not found in the list', () => {
-    const list: Identifier[] = [
+    const list: FileIdentifier[] = [
       {
         id: 'some-id',
         occurrenceKey: 'some-custom-occurrence-key',

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs';
-import { Context, Identifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@atlaskit/media-core';
 import {
   mountWithIntlContext,
   fakeContext,
@@ -16,13 +16,13 @@ import { List } from '../../../newgen/list';
 
 const collectionName = 'my-collection';
 
-const identifier: Identifier = {
+const identifier: any = {
   id: 'some-id',
   occurrenceKey: 'some-custom-occurrence-key',
   mediaItemType: 'file',
 };
 
-const identifier2: Identifier = {
+const identifier2: any = {
   id: 'some-id-2',
   occurrenceKey: 'some-custom-occurrence-key-2',
   mediaItemType: 'file',
@@ -59,7 +59,7 @@ const mediaCollectionItems: MediaCollectionItem[] = [
 
 function createFixture(
   context: Context,
-  identifier: Identifier,
+  identifier: FileIdentifier,
   onClose?: () => {},
 ) {
   const el = mountWithIntlContext<Props, State>(
@@ -151,11 +151,11 @@ describe('<Collection />', () => {
     const el = createFixture(context, identifier);
     subject.next(mediaCollectionItems);
     el.update();
-    const listProps = el.find(List).props();
+    const listProps: any = el.find(List).props();
     expect(listProps.defaultSelectedItem.collectionName).toEqual(
       collectionName,
     );
-    listProps.items.forEach((item: Identifier) => {
+    listProps.items.forEach((item: any) => {
       expect(item.collectionName).toEqual(collectionName);
     });
   });

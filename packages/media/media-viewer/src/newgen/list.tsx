@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, Identifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@atlaskit/media-core';
 import { ItemViewer } from './item-viewer';
 import { MediaViewerFeatureFlags } from './domain';
 import { HeaderWrapper, hideControlsClassName, ListWrapper } from './styled';
@@ -10,16 +10,16 @@ import Header from './header';
 
 export type Props = Readonly<{
   onClose?: () => void;
-  onNavigationChange?: (selectedItem: Identifier) => void;
+  onNavigationChange?: (selectedItem: FileIdentifier) => void;
   showControls?: () => void;
   featureFlags?: MediaViewerFeatureFlags;
-  defaultSelectedItem: Identifier;
-  items: Identifier[];
+  defaultSelectedItem: FileIdentifier;
+  items: FileIdentifier[];
   context: Context;
 }>;
 
 export type State = {
-  selectedItem: Identifier;
+  selectedItem: FileIdentifier;
   previewCount: number;
 };
 
@@ -34,7 +34,7 @@ export class List extends React.Component<Props, State> {
     return this.renderContent(items);
   }
 
-  renderContent(items: Identifier[]) {
+  renderContent(items: FileIdentifier[]) {
     const { context, onClose, featureFlags, showControls } = this.props;
     const { selectedItem } = this.state;
     if (getSelectedIndex(items, selectedItem) < 0) {
@@ -67,7 +67,7 @@ export class List extends React.Component<Props, State> {
     }
   }
 
-  onNavigationChange = (selectedItem: Identifier) => {
+  onNavigationChange = (selectedItem: FileIdentifier) => {
     const { onNavigationChange, showControls } = this.props;
     if (onNavigationChange) {
       onNavigationChange(selectedItem);

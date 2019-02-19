@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Context, Identifier } from '@atlaskit/media-core';
+import {
+  Context,
+  Identifier,
+  isFileIdentifier,
+  FileIdentifier,
+} from '@atlaskit/media-core';
 import { IntlProvider, intlShape } from 'react-intl';
 import { ThemeProvider } from 'styled-components';
 import { Shortcut, theme } from '@atlaskit/media-ui';
@@ -70,11 +75,14 @@ class MediaViewerComponent extends React.Component<Props, {}> {
       itemSource,
       featureFlags,
     } = this.props;
+    const defaultSelectedItem =
+      selectedItem && isFileIdentifier(selectedItem) ? selectedItem : undefined;
+
     if (itemSource.kind === 'COLLECTION') {
       return (
         <Collection
           pageSize={itemSource.pageSize}
-          defaultSelectedItem={selectedItem}
+          defaultSelectedItem={defaultSelectedItem}
           collectionName={itemSource.collectionName}
           context={context}
           onClose={onClose}
@@ -82,10 +90,15 @@ class MediaViewerComponent extends React.Component<Props, {}> {
         />
       );
     } else if (itemSource.kind === 'ARRAY') {
+      const items = itemSource.items.filter(item =>
+        isFileIdentifier(item),
+      ) as FileIdentifier[];
+      const firstItem = items[0] as FileIdentifier;
+
       return (
         <List
-          defaultSelectedItem={selectedItem || itemSource.items[0]}
-          items={itemSource.items}
+          defaultSelectedItem={defaultSelectedItem || firstItem}
+          items={items}
           context={context}
           onClose={onClose}
           featureFlags={featureFlags}

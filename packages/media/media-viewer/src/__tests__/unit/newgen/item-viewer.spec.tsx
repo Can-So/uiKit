@@ -11,7 +11,12 @@ import { ReactWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
 import Spinner from '@atlaskit/spinner';
 import Button from '@atlaskit/button';
-import { Context, ProcessedFileState, Identifier } from '@atlaskit/media-core';
+import {
+  Context,
+  ProcessedFileState,
+  Identifier,
+  FileIdentifier,
+} from '@atlaskit/media-core';
 import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import {
   ItemViewer,
@@ -29,7 +34,7 @@ import {
   version as packageVersion,
 } from '../../../../package.json';
 
-const identifier: Identifier = {
+const identifier: any = {
   id: 'some-id',
   occurrenceKey: 'some-custom-occurrence-key',
   mediaItemType: 'file',
@@ -51,7 +56,7 @@ function mountComponent(context: Context, identifier: Identifier) {
   return { el, instance };
 }
 
-function mountBaseComponent(context: Context, identifier: Identifier) {
+function mountBaseComponent(context: Context, identifier: FileIdentifier) {
   const createAnalyticsEventSpy = jest.fn();
   createAnalyticsEventSpy.mockReturnValue({ fire: jest.fn() });
   const el: ReactWrapper<
@@ -314,7 +319,7 @@ describe('<ItemViewer />', () => {
       const { el, instance } = mountBaseComponent(context, identifier);
       expect(instance.state.item.status).toEqual('SUCCESSFUL');
 
-      const identifier2: Identifier = {
+      const identifier2 = {
         ...identifier,
         id: 'some-other-id',
       };

@@ -6,7 +6,7 @@ import {
   MediaType,
   ProcessedFileState,
   ProcessingFileState,
-  Identifier,
+  FileIdentifier,
 } from '@atlaskit/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
@@ -32,7 +32,7 @@ import {
 } from './download';
 
 export type Props = {
-  readonly identifier: Identifier;
+  readonly identifier: FileIdentifier;
   readonly context: Context;
   readonly onClose?: () => void;
 };
@@ -66,10 +66,10 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
   }
 
   private init(props: Props) {
-    this.setState(initialState, () => {
+    this.setState(initialState, async () => {
       const { context, identifier } = props;
       this.subscription = context.file
-        .getFileState(identifier.id, {
+        .getFileState(await identifier.id, {
           collectionName: identifier.collectionName,
         })
         .subscribe({

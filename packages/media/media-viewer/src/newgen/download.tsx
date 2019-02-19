@@ -5,7 +5,7 @@ import {
   Context,
   FileState,
   isErrorFileState,
-  Identifier,
+  FileIdentifier,
 } from '@atlaskit/media-core';
 import { DownloadButtonWrapper } from './styled';
 import Button from '@atlaskit/button';
@@ -68,7 +68,7 @@ export const ErrorViewDownloadButton = (
 
 export type ToolbarDownloadButtonProps = {
   state: FileState;
-  identifier: Identifier;
+  identifier: FileIdentifier;
   context: Context;
 };
 

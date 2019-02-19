@@ -1,4 +1,8 @@
-import { Context, isClientBasedAuth, Identifier } from '@atlaskit/media-core';
+import {
+  Context,
+  isClientBasedAuth,
+  FileIdentifier,
+} from '@atlaskit/media-core';
 import { stringify } from 'query-string';
 import { MediaCollectionItem } from '@atlaskit/media-store';
 
@@ -58,7 +62,7 @@ function buildUrl(host: string, url: string, query: Object) {
 export const toIdentifier = (
   item: MediaCollectionItem,
   collectionName: string,
-): Identifier => {
+): FileIdentifier => {
   return {
     id: item.id,
     mediaItemType: 'file',
@@ -68,8 +72,8 @@ export const toIdentifier = (
 };
 
 export const getSelectedIndex = (
-  items: Identifier[],
-  selectedItem: Identifier,
+  items: FileIdentifier[],
+  selectedItem: FileIdentifier,
 ) => {
   return items.findIndex(
     item =>
