@@ -1,1 +1,0 @@
-- enable noImplicitAny for share. fix related issues

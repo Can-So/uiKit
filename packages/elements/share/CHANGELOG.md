@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.8
+- [patch] [d1fbdc3a35](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d1fbdc3a35):
+
+  - enable noImplicitAny for share. fix related issues
+
 ## 0.1.7
 - [patch] [8e0ea83f02](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e0ea83f02):
 
