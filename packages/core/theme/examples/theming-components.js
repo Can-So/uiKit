@@ -79,7 +79,7 @@ class Button extends Component<Props, State> {
 export default () => (
   <Fragment>
     <Button>Default</Button>
-    <Theme.Provider values={contextButtonTheme}>
+    <Theme.Provider value={contextButtonTheme}>
       <Button>Context</Button>
       <Button theme={propButtonTheme}>Custom</Button>
     </Theme.Provider>

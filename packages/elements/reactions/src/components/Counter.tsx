@@ -66,7 +66,7 @@ export class Counter extends React.PureComponent<Props, State> {
     className: undefined,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       previous: undefined,

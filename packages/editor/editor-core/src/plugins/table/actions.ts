@@ -10,6 +10,7 @@ import {
   TableMap,
   CellSelection,
 } from 'prosemirror-tables';
+import { EditorView } from 'prosemirror-view';
 import { Node as PMNode, Slice, Schema } from 'prosemirror-model';
 import {
   findTable,
@@ -951,14 +952,11 @@ export const handleShiftSelection = (event: MouseEvent): Command => (
 };
 
 export const autoSizeTable = (
+  view: EditorView,
   node: PMNode,
   table: HTMLTableElement,
   basePos: number,
-): Command => (state, dispatch) => {
-  if (dispatch) {
-    dispatch(fixAutoSizedTable(state.tr, node, table, basePos));
-    return true;
-  }
-
-  return false;
+) => {
+  view.dispatch(fixAutoSizedTable(view, node, table, basePos));
+  return true;
 };

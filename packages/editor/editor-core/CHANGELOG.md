@@ -1,5 +1,40 @@
 # @atlaskit/editor-core
 
+## 98.13.5
+- [patch] [bc340694d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bc340694d2):
+
+  - ED-6247: fix resizing with merged cells
+
+## 98.13.4
+- Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+  - @atlaskit/editor-common@31.1.1
+  - @atlaskit/renderer@38.0.7
+  - @atlaskit/media-core@27.0.2
+  - @atlaskit/media-filmstrip@26.1.2
+  - @atlaskit/media-picker@33.0.4
+  - @atlaskit/media-test-helpers@20.1.4
+  - @atlaskit/media-card@53.0.0
+
+## 98.13.3
+- [patch] [0a13188647](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a13188647):
+
+  - ED-6133: Fix scaling up going into overflow
+
+## 98.13.2
+- [patch] [cebfee91b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cebfee91b3):
+
+  - ED-6231 Fixes RangeError when deleting last column in full-width mode
+
+## 98.13.1
+- [patch] [7316e316bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7316e316bc):
+
+  - ED-6209: remove internal legacy event subscription model from media plugin
+
+## 98.13.0
+- [minor] [be86cbebc3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be86cbebc3):
+
+  - enable noImplicitAny for task-decision, and related changes
+
 ## 98.12.1
 - [patch] [a3161a7927](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3161a7927):
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Checkbox } from '@atlaskit/checkbox';
-import Button from '../src';
+import Button, { ButtonAppearances } from '../src';
 
-const appearances = [
+const appearances: ButtonAppearances[] = [
   'default',
   'primary',
   'link',
@@ -13,18 +13,17 @@ const appearances = [
   'help',
 ];
 
-const Table = props => <div style={{ display: 'table' }} {...props} />;
-const Row = props => <div style={{ display: 'table-row' }} {...props} />;
-const Cell = props => (
+const Table = (props: React.HTMLProps<HTMLDivElement>) => (
+  <div style={{ display: 'table' }} {...props} />
+);
+const Row = (props: React.HTMLProps<HTMLDivElement>) => (
+  <div style={{ display: 'table-row' }} {...props} />
+);
+const Cell = (props: React.HTMLProps<HTMLDivElement>) => (
   <div style={{ display: 'table-cell', padding: 4 }} {...props} />
 );
-const Btn = props => (
-  <Cell>
-    <Button {...props} />
-  </Cell>
-);
 
-function capitalize(str) {
+function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
@@ -43,23 +42,39 @@ export default class ButtonAppearance extends React.Component<{}, State> {
         <Checkbox
           value="showLoading"
           label="Show Loading State"
-          onChange={({ target }) =>
-            this.setState({ showLoadingState: target.checked })
+          onChange={({ target }: React.SyntheticEvent<HTMLInputElement>) =>
+            this.setState({
+              showLoadingState: (target as HTMLInputElement).checked,
+            })
           }
           name="show-loading"
         />
         <Table>
           {appearances.map(a => (
             <Row key={a}>
-              <Btn isLoading={showLoadingState} appearance={a}>
-                {capitalize(a)}
-              </Btn>
-              <Btn isLoading={showLoadingState} appearance={a} isDisabled>
-                Disabled
-              </Btn>
-              <Btn isLoading={showLoadingState} appearance={a} isSelected>
-                Selected
-              </Btn>
+              <Cell>
+                <Button isLoading={showLoadingState} appearance={a}>
+                  {capitalize(a)}
+                </Button>
+              </Cell>
+              <Cell>
+                <Button
+                  isLoading={showLoadingState}
+                  appearance={a}
+                  isDisabled={true}
+                >
+                  Disabled
+                </Button>
+              </Cell>
+              <Cell>
+                <Button
+                  isLoading={showLoadingState}
+                  appearance={a}
+                  isSelected={true}
+                >
+                  Selected
+                </Button>
+              </Cell>
             </Row>
           ))}
         </Table>

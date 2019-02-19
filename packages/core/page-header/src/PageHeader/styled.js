@@ -43,6 +43,7 @@ export const TitleContainer = styled.div`
 export const ActionsWrapper = styled.div`
   flex: 1 0 auto;
   margin-bottom: ${gridSize()}px;
+  max-width: 100%;
   padding-left: ${gridSize() * 4}px;
   text-align: right;
   white-space: nowrap;

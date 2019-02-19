@@ -4,7 +4,7 @@ import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
 import { fullpage } from '../_helpers';
 
 const fullPageEditor = getExampleUrl('editor', 'editor-core', 'full-page');
-const titleSelector = '.ak-editor-content-area input';
+const titleSelector = '.ak-editor-content-area textarea';
 
 BrowserTestCase(
   'focus.ts: Should focus title initially',

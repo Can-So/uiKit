@@ -34,7 +34,6 @@ const mediaCollectionItems: MediaCollectionItem[] = [
     id: identifier.id,
     occurrenceKey: identifier.occurrenceKey,
     insertedAt: 1,
-    type: 'file',
     details: {
       artifacts: {},
       mediaType: 'image',
@@ -45,7 +44,6 @@ const mediaCollectionItems: MediaCollectionItem[] = [
     },
   },
   {
-    type: 'file',
     id: identifier2.id,
     occurrenceKey: identifier2.occurrenceKey,
     insertedAt: 1,

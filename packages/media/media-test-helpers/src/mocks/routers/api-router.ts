@@ -322,13 +322,12 @@ export function createApiRouter(): Router<DatabaseSchema> {
       collectionName: sourceFile.collection,
     });
 
-    const { details, type, blob } = sourceRecord.data;
+    const { details, blob } = sourceRecord.data;
 
     const record = database.push('collectionItem', {
       id: replaceFileId,
       insertedAt: Date.now(),
       occurrenceKey,
-      type,
       details,
       blob,
       collectionName: destinationCollection,

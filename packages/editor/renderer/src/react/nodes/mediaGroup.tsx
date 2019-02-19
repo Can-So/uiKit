@@ -4,7 +4,6 @@ import {
   CardEvent,
   defaultImageCardDimensions,
   Identifier,
-  LinkIdentifier,
 } from '@atlaskit/media-card';
 import { FilmstripView } from '@atlaskit/media-filmstrip';
 import { EventHandlers, CardSurroundings } from '@atlaskit/editor-common';
@@ -46,6 +45,8 @@ export default class MediaGroup extends PureComponent<
           content = this.renderSingleFile(card);
           break;
         case 'link':
+          content = null;
+          break;
         default:
           content = this.renderSingleLink(card);
       }
@@ -109,7 +110,7 @@ export default class MediaGroup extends PureComponent<
       this.mapMediaPropsToIdentifier(
         (child as React.ReactElement<MediaProps>).props,
       ),
-    );
+    ).filter(identifier => !!identifier);
 
     return (
       <FilmstripView
@@ -122,8 +123,12 @@ export default class MediaGroup extends PureComponent<
           const child = rawChild as React.ReactElement<MediaProps>;
           switch (child.props.type) {
             case 'file':
-              return this.cloneFileCard(child, surroundingItems);
+              return this.cloneFileCard(
+                child,
+                surroundingItems as Identifier[],
+              );
             case 'link':
+              return null;
             default:
               return React.cloneElement(child);
           }
@@ -137,7 +142,7 @@ export default class MediaGroup extends PureComponent<
     type,
     occurrenceKey,
     collection,
-  }: MediaProps): Identifier {
+  }: MediaProps): Identifier | undefined {
     switch (type) {
       case 'file':
         return {
@@ -147,12 +152,7 @@ export default class MediaGroup extends PureComponent<
           collectionName: collection,
         };
       case 'link':
-        return {
-          id: id!,
-          mediaItemType: type,
-          occurrenceKey,
-          collectionName: collection,
-        } as LinkIdentifier;
+        return undefined;
       case 'external':
         return {
           id: id!,

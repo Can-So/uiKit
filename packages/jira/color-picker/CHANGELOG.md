@@ -1,5 +1,10 @@
 # @atlaskit/color-picker
 
+## 0.2.5
+- [patch] [f5482d0018](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5482d0018):
+
+  - taking advantage of the new target function for PopupSelect
+
 ## 0.2.4
 - [patch] [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
 

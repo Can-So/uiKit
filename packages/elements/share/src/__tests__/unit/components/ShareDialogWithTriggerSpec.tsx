@@ -1,16 +1,17 @@
-import * as React from 'react';
-import { mount, shallow } from 'enzyme';
 import InlineDialog from '@atlaskit/inline-dialog';
-import { createMockEvent } from '../_testUtils';
+import { mount, shallow, ShallowWrapper } from 'enzyme';
+import * as React from 'react';
 import { ShareButton } from '../../../components/ShareButton';
-import { ShareForm } from '../../../components/ShareForm';
 import {
-  ShareDialogWithTrigger,
   defaultShareContentState,
+  Props,
+  ShareDialogWithTrigger,
+  State,
 } from '../../../components/ShareDialogWithTrigger';
+import { ShareData, ShareForm } from '../../../components/ShareForm';
 
-let wrapper;
-let mockOnShareSubmit;
+let wrapper: ShallowWrapper<Props, State, ShareDialogWithTrigger>;
+let mockOnShareSubmit: jest.Mock;
 const mockLoadOptions = () => [];
 
 beforeEach(() => {
@@ -50,7 +51,7 @@ describe('ShareDialogWithTrigger', () => {
         isDialogOpen,
       );
 
-      wrapper.setState({ isDialogOpen: !isDialogOpen });
+      (wrapper as any).setState({ isDialogOpen: !isDialogOpen });
 
       expect(wrapper.find(InlineDialog).prop('isOpen')).toEqual(!isDialogOpen);
       expect(wrapper.find(ShareButton).prop('isSelected')).toEqual(
@@ -59,7 +60,7 @@ describe('ShareDialogWithTrigger', () => {
     });
 
     it('should render ShareForm if isDialogOpen is true', () => {
-      wrapper = mount<ShareDialogWithTrigger>(
+      const wrapper = mount<ShareDialogWithTrigger>(
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
@@ -68,79 +69,6 @@ describe('ShareDialogWithTrigger', () => {
       );
       wrapper.setState({ isDialogOpen: true });
       expect(wrapper.find(ShareForm).length).toBe(1);
-    });
-  });
-
-  describe('isStateValidWithCapabilities', () => {
-    it('should be updated only if isDialogOpen state is true, capabilities and validateStateWithCapabilities props are given', () => {
-      const mockCapabilities = {
-        directInvite: {
-          mode: 'ANYONE' as 'ANYONE',
-          permittedResources: ['mockAri'],
-        },
-        invitePendingApproval: {
-          mode: 'ANYONE' as 'ANYONE',
-          permittedResources: ['mockAri'],
-        },
-      };
-      const mockIsStateValidWithCapabilities = false;
-      const spiedValidateStateWithCapabilities = jest.fn(
-        () => mockIsStateValidWithCapabilities,
-      );
-      wrapper = shallow<ShareDialogWithTrigger>(
-        <ShareDialogWithTrigger
-          copyLink="copyLink"
-          capabilities={mockCapabilities}
-          loadUserOptions={mockLoadOptions}
-          onShareSubmit={mockOnShareSubmit}
-          validateStateWithCapabilities={spiedValidateStateWithCapabilities}
-        />,
-      );
-      expect(spiedValidateStateWithCapabilities).not.toHaveBeenCalled();
-
-      wrapper = shallow<ShareDialogWithTrigger>(
-        <ShareDialogWithTrigger
-          copyLink="copyLink"
-          loadUserOptions={mockLoadOptions}
-          onShareSubmit={mockOnShareSubmit}
-          validateStateWithCapabilities={spiedValidateStateWithCapabilities}
-        />,
-      );
-      wrapper.setState({ isDialogOpen: true });
-      expect(spiedValidateStateWithCapabilities).not.toHaveBeenCalled();
-
-      const latestStateSnapshot = wrapper.state();
-      wrapper.setProps({ capabilities: mockCapabilities });
-      expect(spiedValidateStateWithCapabilities).toHaveBeenCalledTimes(1);
-      expect(spiedValidateStateWithCapabilities.mock.calls[0][0]).toEqual(
-        latestStateSnapshot,
-      );
-      expect(spiedValidateStateWithCapabilities.mock.calls[0][1]).toEqual(
-        mockCapabilities,
-      );
-
-      expect(wrapper.state().isStateValidWithCapabilities).toEqual(
-        mockIsStateValidWithCapabilities,
-      );
-    });
-
-    it('should be passed into ShareForm as shouldShowCapabilitiesInfoMessage props', () => {
-      wrapper = mount<ShareDialogWithTrigger>(
-        <ShareDialogWithTrigger
-          copyLink="copyLink"
-          loadUserOptions={mockLoadOptions}
-          onShareSubmit={mockOnShareSubmit}
-        />,
-      );
-      wrapper.setState({
-        isDialogOpen: true,
-        isStateValidWithCapabilities: !wrapper.state()
-          .isStateValidWithCapabilities,
-      });
-      let shareFormProps = wrapper.find(ShareForm).props();
-      expect(shareFormProps.shouldShowCapabilitiesInfoMessage).toEqual(
-        !wrapper.state().isStateValidWithCapabilities,
-      );
     });
   });
 
@@ -162,13 +90,13 @@ describe('ShareDialogWithTrigger', () => {
       );
       const wrapperState = wrapper.state();
       expect(spiedRenderer).toHaveBeenCalledTimes(1);
-      expect(spiedRenderer.mock.calls[0][0]).toBe(
-        wrapper.instance().handleOpenDialog,
+      expect(spiedRenderer).toHaveBeenCalledWith(
+        expect.objectContaining({
+          onClick: expect.any(Function),
+          loading: wrapperState.isSharing,
+          error: wrapperState.shareError,
+        }),
       );
-      expect(spiedRenderer.mock.calls[0][1]).toMatchObject({
-        loading: wrapperState.isSharing,
-        error: wrapperState.shareError,
-      });
     });
   });
 
@@ -196,45 +124,14 @@ describe('ShareDialogWithTrigger', () => {
   describe('handleOpenDialog', () => {
     it('should set the isDialogOpen state to true', () => {
       expect(wrapper.state().isDialogOpen).toEqual(false);
-      // @ts-ignore
-      wrapper.instance().handleOpenDialog();
+      wrapper.find(ShareButton).simulate('click');
       expect(wrapper.state().isDialogOpen).toEqual(true);
     });
 
     it.skip('should send an analytic event', () => {});
-
-    it('should be triggered when ShareButton is clicked', () => {
-      const instance = wrapper.instance();
-      const spiedHandleOpenDialog = jest.spyOn(instance, 'handleOpenDialog');
-      instance.forceUpdate();
-      wrapper.find(ShareButton).simulate('click');
-      expect(spiedHandleOpenDialog).toHaveBeenCalledTimes(1);
-    });
   });
 
   describe('handleCloseDialog', () => {
-    const eventMap: { click: Function | null; keydown: Function | null } = {
-      click: null,
-      keydown: null,
-    };
-
-    beforeAll(() => {
-      // prepare for the addEventListener mock
-      window.addEventListener = jest.fn((event, cb) => (eventMap[event] = cb));
-      document.addEventListener = jest.fn(
-        (event, cb) => (eventMap[event] = cb),
-      );
-    });
-
-    afterAll(() => {
-      // clear the mock
-      // TODO: how to extend to addEventListener type with { mockClear: Function }?
-      // @ts-ignore
-      window.addEventListener.mockClear();
-      // @ts-ignore
-      document.addEventListener.mockClear();
-    });
-
     it('should set the isDialogOpen state to false', () => {
       wrapper = shallow<ShareDialogWithTrigger>(
         <ShareDialogWithTrigger
@@ -246,98 +143,52 @@ describe('ShareDialogWithTrigger', () => {
       wrapper.setState({ isDialogOpen: true });
       expect(wrapper.state().isDialogOpen).toEqual(true);
       wrapper
-        .instance()
-        .handleCloseDialog({ isOpen: false, event: { type: 'click' } });
+        .find(InlineDialog)
+        .simulate('close', { isOpen: false, event: { type: 'submit' } });
       expect(wrapper.state().isDialogOpen).toEqual(false);
     });
 
     it.skip('should send an analytic event', () => {});
 
     it('should be trigger when the InlineDialog is closed', () => {
-      // mount the component, and display the InlineDialog
-      wrapper = mount<ShareDialogWithTrigger>(
-        <ShareDialogWithTrigger
-          copyLink="copyLink"
-          loadUserOptions={mockLoadOptions}
-          onShareSubmit={mockOnShareSubmit}
-        />,
-      );
-      wrapper.setState({ isDialogOpen: true });
-      const instance = wrapper.instance();
-      const spiedHandleCloseDialog = jest.spyOn(instance, 'handleCloseDialog');
-      instance.forceUpdate();
-
-      // simulate the event from the stub
-      const clickEventOutsideComponent = {
-        target: document.createElement('div'),
-        type: 'click',
-      };
-      eventMap.click!(clickEventOutsideComponent);
-
-      // check if the spied function is called
-      expect(spiedHandleCloseDialog).toHaveBeenCalledTimes(1);
-
-      spiedHandleCloseDialog.mockReset();
-
-      wrapper.setState({ isDialogOpen: true });
-
-      const spiedStopImmediatePropagation = jest.fn();
       const escapeKeyDownEvent = {
         target: document,
         type: 'keydown',
         key: 'Escape',
-        stopImmediatePropagation: spiedStopImmediatePropagation,
       };
 
-      eventMap.keydown!(escapeKeyDownEvent);
-      expect(spiedHandleCloseDialog).toHaveBeenCalledTimes(1);
-      expect(spiedStopImmediatePropagation).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('handleChangeShareUsers', () => {
-    it('should update the users state with the first parameter', () => {
-      const mockUsers = [
-        { type: 'user' as 'user', id: 'id' },
-        { type: 'user' as 'user', email: 'email' },
-      ];
-      wrapper.instance().handleChangeShareUsers(mockUsers);
-      expect(wrapper.state().users).toEqual(mockUsers);
-    });
-
-    it('should call onUsersChange prop if it is given', () => {
-      const spiedOnUsersChange = jest.fn();
-      wrapper = shallow<ShareDialogWithTrigger>(
-        <ShareDialogWithTrigger
-          copyLink="copyLink"
-          loadUserOptions={mockLoadOptions}
-          onShareSubmit={mockOnShareSubmit}
-          onUsersChange={spiedOnUsersChange}
-        />,
+      const wrapper = shallow<ShareDialogWithTrigger>(
+        <ShareDialogWithTrigger copyLink="copyLink" />,
       );
-      wrapper.instance().handleChangeShareUsers([]);
-      expect(spiedOnUsersChange).toHaveBeenCalledTimes(1);
+      wrapper.setState({ isDialogOpen: true });
+      expect(wrapper.state().isDialogOpen).toEqual(true);
+      wrapper
+        .find(InlineDialog)
+        .simulate('close', { isOpen: false, event: escapeKeyDownEvent });
+      expect(wrapper.state().isDialogOpen).toEqual(false);
     });
   });
 
-  describe('handleSubmitShare', () => {
-    it('should call onShareSubmit props with an object of users and comment as an argument', () => {
+  describe('handleShareSubmit', () => {
+    it('should call onSubmit props with an object of users and comment as an argument', () => {
       const mockOnSubmit = jest.fn().mockResolvedValue({});
-      const mockState = {
-        isDialogOpen: true,
+      const values: ShareData = {
         users: [
-          { type: 'user' as 'user', id: 'id' },
-          { type: 'user' as 'user', email: 'email' },
+          { type: 'user', id: 'id', name: 'name' },
+          { type: 'email', id: 'email', name: 'email' },
         ],
         comment: {
-          format: 'plain_text' as 'plain_text',
+          format: 'plain_text',
           value: 'comment',
         },
-        isStateValidWithCapabilities: true,
       };
-      const mockSubmitEvent = createMockEvent('submit', {
-        target: document.createElement('form'),
-      });
+
+      const mockState: State = {
+        isDialogOpen: true,
+        isSharing: false,
+        ignoreIntermediateState: false,
+        defaultValue: defaultShareContentState,
+      };
       wrapper = shallow<ShareDialogWithTrigger>(
         <ShareDialogWithTrigger
           copyLink="copyLink"
@@ -346,102 +197,35 @@ describe('ShareDialogWithTrigger', () => {
         />,
       );
       wrapper.setState(mockState);
-      wrapper.instance().handleSubmitShare(mockSubmitEvent);
+
+      shallow(wrapper.find(InlineDialog).prop('content') as any)
+        .find(ShareForm)
+        .simulate('shareClick', values);
       expect(mockOnSubmit).toHaveBeenCalledTimes(1);
-      expect(mockOnSubmit.mock.calls[0][0]).toEqual({
-        users: mockState.users,
-        comment: mockState.comment,
-      });
+      expect(mockOnSubmit).toHaveBeenCalledWith(values);
     });
 
-    it('should only call this.handleCloseDialog if onShareSubmit resolves a value', async () => {
-      const mockErrorMessage = 'rejected';
-      const mockOnSubmit = jest
-        .fn()
-        .mockRejectedValueOnce(new Error(mockErrorMessage))
-        .mockResolvedValue({});
-      const mockSubmitEvent = createMockEvent('submit', {
-        target: document.createElement('form'),
-      });
-      wrapper = shallow<ShareDialogWithTrigger>(
+    it('should close inline dialog when onSubmit resolves a value', () => {
+      const mockOnSubmit = jest.fn().mockReturnValue(Promise.resolve());
+      const wrapper = shallow<ShareDialogWithTrigger>(
         <ShareDialogWithTrigger
           copyLink="copyLink"
           onShareSubmit={mockOnSubmit}
-          loadUserOptions={mockLoadOptions}
         />,
       );
-      const spiedHandleCloseDialog = jest.spyOn(
-        wrapper.instance(),
-        'handleCloseDialog',
-      );
-      wrapper.instance().forceUpdate();
 
-      await wrapper.instance().handleSubmitShare(mockSubmitEvent);
+      const Content: React.StatelessComponent<{}> = () =>
+        wrapper.find(InlineDialog).prop('content');
+      const content = shallow(<Content />);
 
-      expect(spiedHandleCloseDialog).not.toHaveBeenCalled();
-      expect(wrapper.state().shareError).toEqual({ message: mockErrorMessage });
-      expect(wrapper.state().isSharing).toBeFalsy();
+      expect(content.find(ShareForm)).toHaveLength(1);
+      const shareData = {};
+      content.find(ShareForm).simulate('shareClick', shareData);
 
-      await wrapper.instance().handleSubmitShare(mockSubmitEvent);
-      expect(spiedHandleCloseDialog).toHaveBeenCalledTimes(1);
-      expect(spiedHandleCloseDialog.mock.calls[0][0].isOpen).toBe(false);
-      expect(spiedHandleCloseDialog.mock.calls[0][0].event).toEqual(
-        mockSubmitEvent,
-      );
-    });
+      expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+      expect(mockOnSubmit).toHaveBeenCalledWith(shareData);
 
-    it('should call clearShareContentState if there is an ESC key pressed down or a form submission', async () => {
-      const mockOnSubmit = jest.fn().mockResolvedValue({});
-      const mockSubmitEvent = createMockEvent('submit', {
-        target: document.createElement('form'),
-      });
-      const mockEscKeyDownEvent = createMockEvent('keydown', {
-        key: 'Escape',
-      });
-      wrapper = shallow<ShareDialogWithTrigger>(
-        <ShareDialogWithTrigger
-          copyLink="copyLink"
-          onShareSubmit={mockOnSubmit}
-          loadUserOptions={mockLoadOptions}
-        />,
-      );
-      const spiedClearShareContentState = jest.spyOn(
-        wrapper.instance(),
-        'clearShareContentState',
-      );
-
-      await wrapper.instance().handleSubmitShare(mockSubmitEvent);
-      expect(spiedClearShareContentState).toHaveBeenCalledTimes(1);
-
-      await wrapper.instance().handleSubmitShare(mockEscKeyDownEvent);
-      expect(spiedClearShareContentState).toHaveBeenCalledTimes(2);
-    });
-  });
-
-  describe('clearShareContentState', () => {
-    it('should set the defaultShareContentState', () => {
-      const newInitState = {
-        isDialogOpen: true,
-        users: [
-          { type: 'user' as 'user', id: 'id' },
-          { type: 'user' as 'user', email: 'email' },
-        ],
-        comment: {
-          format: 'plain_text' as 'plain_text',
-          value: 'comment',
-        },
-        isStateValidWithCapabilities: true,
-      };
-      wrapper.setState(newInitState);
-      wrapper.instance().clearShareContentState();
-
-      const state = wrapper.state();
-      expect(state.isDialogOpen).toEqual(newInitState.isDialogOpen);
-      expect(state.users).toEqual(defaultShareContentState.users);
-      expect(state.comment).toEqual(defaultShareContentState.comment);
-      expect(state.isStateValidWithCapabilities).toEqual(
-        newInitState.isStateValidWithCapabilities,
-      );
+      expect(wrapper.state('isDialogOpen')).toBeFalsy();
     });
   });
 });

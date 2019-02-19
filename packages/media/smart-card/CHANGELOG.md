@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.11.0
+- [minor] [41147bbc4c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/41147bbc4c):
+
+  - Fix for links in editor
+
 ## 9.10.0
 - [minor] [ea423a619f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea423a619f):
 

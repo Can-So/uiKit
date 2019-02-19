@@ -1,19 +1,21 @@
 // tslint:disable-next-line no-implicit-dependencies
-import * as React from 'react';
-import { mount } from 'enzyme';
 import {
   DEFAULT_SOURCE,
-  UI_EVENT_TYPE,
   GasPayload,
+  UI_EVENT_TYPE,
 } from '@atlaskit/analytics-gas-types';
-import MediaAnalyticsListener from '../../../media/MediaAnalyticsListener';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
-import { AnalyticsWebClient, FabricChannel } from '../../../types';
+import { mount } from 'enzyme';
+import * as React from 'react';
 import { createButtonWithAnalytics } from '../../../../examples/helpers';
+import Logger from '../../../helpers/logger';
+import MediaAnalyticsListener from '../../../media/MediaAnalyticsListener';
+import { AnalyticsWebClient, FabricChannel } from '../../../types';
+import { createLoggerMock } from '../../_testUtils';
 
 describe('MediaAnalyticsListener', () => {
   let analyticsWebClientMock: AnalyticsWebClient;
-  let loggerMock;
+  let loggerMock: Logger;
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -22,12 +24,7 @@ describe('MediaAnalyticsListener', () => {
       sendTrackEvent: jest.fn(),
       sendScreenEvent: jest.fn(),
     };
-    loggerMock = {
-      debug: jest.fn(),
-      info: jest.fn(),
-      warn: jest.fn(),
-      error: jest.fn(),
-    };
+    loggerMock = createLoggerMock();
   });
 
   const fireAndVerify = (eventPayload: GasPayload, expectedEvent: any) => {

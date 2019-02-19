@@ -149,6 +149,11 @@ export const setGapCursorAtPos = (
   position: number,
   side: Side = Side.LEFT,
 ): Command => (state, dispatch) => {
+  // @see ED-6231
+  if (position > state.doc.content.size) {
+    return false;
+  }
+
   const $pos = state.doc.resolve(position);
 
   if (GapCursorSelection.valid($pos)) {

@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import * as React from 'react';
 import Button, { ButtonGroup } from '@atlaskit/button';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { borderRadius } from '@atlaskit/theme';
 
 import Editor from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
@@ -24,19 +24,7 @@ import { collabEditProvider } from '../example-helpers/mock-collab-provider';
 import { EmojiProvider } from '@atlaskit/emoji';
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
-
-export const TitleInput: any = styled.input`
-  border: none;
-  outline: none;
-  font-size: 2.07142857em;
-  margin: 0 0 21px;
-  padding: 0;
-
-  &::placeholder {
-    color: ${colors.N80};
-  }
-`;
-TitleInput.displayName = 'TitleInput';
+import { TitleInput } from '../example-helpers/PageElements';
 
 export const Content: any = styled.div`
   padding: 0 20px;
@@ -177,10 +165,7 @@ export default class Example extends React.Component<Props, State> {
                     shouldFocus={false}
                     quickInsert={true}
                     contentComponents={
-                      <TitleInput
-                        placeholder="Give this page a title..."
-                        innerRef={ref => ref && ref.focus()}
-                      />
+                      <TitleInput innerRef={ref => ref && ref.focus()} />
                     }
                     primaryToolbarComponents={
                       <WithEditorActions
@@ -245,10 +230,7 @@ export default class Example extends React.Component<Props, State> {
                     shouldFocus={false}
                     quickInsert={true}
                     contentComponents={
-                      <TitleInput
-                        placeholder="Give this page a title..."
-                        innerRef={ref => ref && ref.focus()}
-                      />
+                      <TitleInput innerRef={ref => ref && ref.focus()} />
                     }
                     primaryToolbarComponents={
                       <WithEditorActions

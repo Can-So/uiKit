@@ -1,5 +1,15 @@
 # @atlaskit/util-data-test
 
+## 10.2.0
+- [minor] [1d19234fbd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d19234fbd):
+
+  - Enable noImplicitAny and resolve issues for elements util packages
+
+## 10.1.0
+- [minor] [be86cbebc3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be86cbebc3):
+
+  - enable noImplicitAny for task-decision, and related changes
+
 ## 10.0.36
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/emoji@54.0.0

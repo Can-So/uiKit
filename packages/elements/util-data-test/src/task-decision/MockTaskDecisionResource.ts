@@ -138,7 +138,7 @@ export class MockTaskDecisionResource implements TaskDecisionProvider {
       };
     }
     const newResult: R = {
-      [itemKey]: result[itemKey].map(item => {
+      [itemKey]: (result as any)[itemKey].map((item: any) => {
         const itemDate = this.getNextDate();
         return {
           ...item,

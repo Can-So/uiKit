@@ -1,5 +1,10 @@
 # @atlaskit/reactions
 
+## 15.4.0
+- [minor] [68ef17af8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68ef17af8b):
+
+  - Enable noImplicitAny for reactions, fix type issues.
+
 ## 15.3.4
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/editor-test-helpers@6.3.17

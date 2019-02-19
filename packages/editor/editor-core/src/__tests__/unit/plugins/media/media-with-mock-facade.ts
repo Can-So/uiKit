@@ -48,8 +48,11 @@ const getFreshMediaProvider = () =>
     includeUserAuthProvider: true,
   });
 
-const waitForPluginStateChange = async (pluginState: MediaPluginState) =>
-  new Promise(resolve => pluginState.subscribe(resolve));
+const waitForAllPickersInitialised = async (pluginState: MediaPluginState) => {
+  while (pluginState.pickers.length < 4) {
+    await new Promise(resolve => resolve());
+  }
+};
 
 describe('Media with mock facade', () => {
   const createEditor = createEditorFactory<MediaPluginState>();
@@ -77,8 +80,7 @@ describe('Media with mock facade', () => {
 
   it('should add an onClose event listener in popupPicker', async () => {
     const { pluginState } = editor(doc(p('{<>}')));
-
-    await waitForPluginStateChange(pluginState);
+    await waitForAllPickersInitialised(pluginState);
 
     const provider = await mediaProvider;
     await provider.uploadContext;
@@ -94,7 +96,7 @@ describe('Media with mock facade', () => {
   it('should cleanup properly on destroy', async () => {
     removeOnCloseListener.mockClear();
     const { pluginState } = editor(doc(p('{<>}')));
-    await waitForPluginStateChange(pluginState);
+    await waitForAllPickersInitialised(pluginState);
 
     const provider = await mediaProvider;
     await provider.uploadContext;
@@ -108,7 +110,7 @@ describe('Media with mock facade', () => {
     spies.popup.show.mockClear();
     spies.dropzone.deactivate.mockClear();
     const { pluginState } = editor(doc(p('{<>}')));
-    await waitForPluginStateChange(pluginState);
+    await waitForAllPickersInitialised(pluginState);
 
     const provider = await mediaProvider;
     await provider.uploadContext;
@@ -124,7 +126,7 @@ describe('Media with mock facade', () => {
     spies.popup.show.mockClear();
     spies.dropzone.activate.mockClear();
     const { pluginState } = editor(doc(p('{<>}')));
-    await waitForPluginStateChange(pluginState);
+    await waitForAllPickersInitialised(pluginState);
 
     const provider = await mediaProvider;
     await provider.uploadContext;

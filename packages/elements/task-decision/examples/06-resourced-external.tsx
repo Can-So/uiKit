@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 
-import { TaskDecisionProvider } from '../src/types';
+import { TaskDecisionProvider, RenderDocument } from '../src/types';
 import ResourcedItemList from '../src/components/ResourcedItemList';
 import TaskDecisionResource from '../src/api/TaskDecisionResource';
 import {
@@ -9,7 +9,7 @@ import {
   SidebarContainer,
 } from '../example-helpers/story-utils';
 
-let tdConfig;
+let tdConfig: any;
 try {
   // tslint:disable-next-line import/no-unresolved, no-var-requires
   tdConfig = require('../local-config')['default'];
@@ -25,7 +25,7 @@ interface NotifyChangesProps {
 }
 
 class NotifyChanges extends PureComponent<NotifyChangesProps, {}> {
-  private renderDocument;
+  private renderDocument: RenderDocument | undefined;
 
   componentWillMount() {
     const { taskDecisionProvider } = this.props;

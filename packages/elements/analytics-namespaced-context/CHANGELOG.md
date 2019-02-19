@@ -1,5 +1,10 @@
 # @atlaskit/analytics-namespaced-context
 
+## 2.2.0
+- [minor] [8c65a38bfc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c65a38bfc):
+
+  - enable noImplicitAny for elements analytics packages. Fix related issues.
+
 ## 2.1.5
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

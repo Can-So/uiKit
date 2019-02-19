@@ -325,11 +325,12 @@ interface ResizeOptions {
   cellHandlePos: number;
   // TODO could make this an array, to simulate dragging back and forth.
   resizeWidth: number;
+  startX?: number;
 }
 
 export const resizeColumn = async (page: any, resizeOptions: ResizeOptions) => {
   await page.browser.execute(
-    (tableResizingPluginKey, resizeWidth, cellHandlePos) => {
+    (tableResizingPluginKey, resizeWidth, cellHandlePos, startX) => {
       const view = (window as any).__editorView;
 
       if (!view) {
@@ -342,11 +343,7 @@ export const resizeColumn = async (page: any, resizeOptions: ResizeOptions) => {
         }),
       );
 
-      const cellCoords = view.coordsAtPos(cellHandlePos);
-
-      view.dom.dispatchEvent(
-        new MouseEvent('mousedown', { clientX: cellCoords.left }),
-      );
+      view.dom.dispatchEvent(new MouseEvent('mousedown', { clientX: startX }));
 
       // Visually resize table
       for (
@@ -355,17 +352,18 @@ export const resizeColumn = async (page: any, resizeOptions: ResizeOptions) => {
         i++
       ) {
         window.dispatchEvent(
-          new MouseEvent('mousemove', { clientX: cellCoords.left + i }),
+          new MouseEvent('mousemove', { clientX: startX + i }),
         );
       }
 
       // Trigger table resizing finish handlers
       window.dispatchEvent(
-        new MouseEvent('mouseup', { clientX: cellCoords.left + resizeWidth }),
+        new MouseEvent('mouseup', { clientX: startX + resizeWidth }),
       );
     },
     tableResizingPluginKey,
     resizeOptions.resizeWidth,
     resizeOptions.cellHandlePos,
+    resizeOptions.startX || 600,
   );
 };

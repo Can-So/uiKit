@@ -11,7 +11,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { Subject } from 'rxjs/Subject';
 import Button from '@atlaskit/button';
-import { MediaItem, MediaItemType } from '@atlaskit/media-core';
+import { FileItem, MediaItemType } from '@atlaskit/media-core';
 import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
 import { createContext } from '../_stubs';
 import { Content } from '../../../newgen/content';
@@ -22,7 +22,7 @@ import Header from '../../../newgen/header';
 import { ItemSource, Identifier } from '../../../newgen/domain';
 
 function createFixture(items: Identifier[], identifier: Identifier) {
-  const subject = new Subject<MediaItem>();
+  const subject = new Subject<FileItem>();
   const context = createContext();
   const onClose = jest.fn();
   const itemSource: ItemSource = {

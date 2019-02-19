@@ -23,7 +23,6 @@ import { getDataURIFromFileState } from '../../utils/getDataURIFromFileState';
 import { extendMetadata } from '../../utils/metadata';
 import {
   isFileIdentifier,
-  isUrlPreviewIdentifier,
   isExternalImageIdentifier,
   isDifferentIdentifier,
 } from '../../utils/identifier';
@@ -133,15 +132,6 @@ export class Card extends Component<CardProps, CardState> {
           name: name || dataURI,
           mediaType: 'image',
         },
-      });
-
-      return;
-    }
-
-    if (identifier.mediaItemType !== 'file') {
-      this.notifyStateChange({
-        error: new Error('Links are no longer supported in <Card />'),
-        status: 'error',
       });
 
       return;
@@ -272,9 +262,7 @@ export class Card extends Component<CardProps, CardState> {
 
   get analyticsContext(): CardAnalyticsContext {
     const { identifier } = this.props;
-    const id = isUrlPreviewIdentifier(identifier)
-      ? identifier.url
-      : isExternalImageIdentifier(identifier)
+    const id = isExternalImageIdentifier(identifier)
       ? 'external-image'
       : identifier.id;
 

@@ -88,7 +88,7 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
     return (
       <div className="wrapper">
         <div className="img-wrapper">
-          <CardLoading mediaItemType="file" />
+          <CardLoading />
         </div>
       </div>
     );

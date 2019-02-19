@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react';
 import {
-  MediaItemDetails,
+  FileDetails,
   MediaType,
   FileProcessingStatus,
   Context,
@@ -24,8 +24,6 @@ export {
 export * from './root/domain';
 
 export * from './actions';
-export { isUrlPreviewIdentifier } from './utils/identifier';
-// TODO: don't expose this directly https://jira.atlassian.com/browse/FIL-4396
 
 export type CardStatus =
   | 'uploading'
@@ -46,12 +44,12 @@ export interface CardDimensions {
 
 export interface CardEvent {
   event: MouseEvent<HTMLElement>;
-  mediaItemDetails?: MediaItemDetails;
+  mediaItemDetails?: FileDetails;
 }
 
 export interface OnSelectChangeFuncResult {
   selected: boolean;
-  mediaItemDetails?: MediaItemDetails;
+  mediaItemDetails?: FileDetails;
 }
 
 export interface OnSelectChangeFunc {
@@ -60,7 +58,7 @@ export interface OnSelectChangeFunc {
 
 export interface OnLoadingChangeState {
   readonly type: CardStatus;
-  readonly payload?: Error | MediaItemDetails;
+  readonly payload?: Error | FileDetails;
 }
 
 export interface OnLoadingChangeFunc {
@@ -141,7 +139,7 @@ export interface CardState {
   isCardVisible: boolean;
   previewOrientation: number;
   readonly isPlayingFile: boolean;
-  metadata?: MediaItemDetails;
+  metadata?: FileDetails;
   dataURI?: string;
   progress?: number;
   readonly error?: Error;

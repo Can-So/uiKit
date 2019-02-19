@@ -2,10 +2,8 @@ import * as React from 'react';
 import * as deepcopy from 'deepcopy';
 import {
   ImageResizeMode,
-  MediaItemDetails,
   MediaItemType,
   FileDetails,
-  UrlPreview,
 } from '@atlaskit/media-core';
 import {
   wideTransparentImage,
@@ -19,11 +17,9 @@ import {
 } from '@atlaskit/media-test-helpers';
 import {
   StoryList,
-  genericLinkDetails,
   genericFileDetails,
   imageFileDetails,
   wideImage,
-  genericUrlPreview,
 } from '@atlaskit/media-test-helpers';
 import { CardView, CardAppearance, CardDimensions } from '../src';
 import {
@@ -77,7 +73,7 @@ const dimensions: Array<CardDimensions> = [
 
 export const createCardsOfDifferentSize = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
   dataURI?: string,
 ) => {
   const cards = dimensions.map(dim => {
@@ -160,7 +156,7 @@ export const createFileCardsWithDifferentMediaTypes = (
 
 export const createMenuActionCards = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
 ) => {
   return [
     {
@@ -239,7 +235,7 @@ export const createFileCardsWithDifferentDataURIs = (
 
 export const createSelectableCards = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
   mediaItemType: MediaItemType,
 ) => {
   const dataURI = mediaItemType === 'file' ? wideImage : undefined;
@@ -317,7 +313,7 @@ export const createSelectableCards = (
 
 export const createSelectableCardsWithMenu = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
   mediaItemType: MediaItemType,
 ) => {
   const dataURI = mediaItemType === 'file' ? wideImage : undefined;
@@ -420,99 +416,9 @@ export const createMissingMetadataFileCards = (appearance: CardAppearance) => {
   ];
 };
 
-export const createMissingMetadataLinkCards = (appearance: CardAppearance) => {
-  const minimumDetails: UrlPreview = {
-    type: 'link',
-    url: 'some-url',
-    title: 'Some url title',
-  };
-
-  const missingDescriptionPreview: UrlPreview = deepcopy(genericUrlPreview);
-  delete missingDescriptionPreview.description;
-
-  const missingSitePreview: UrlPreview = deepcopy(genericUrlPreview);
-  delete missingSitePreview.site;
-
-  const missingResourcesPreview: UrlPreview = deepcopy(genericUrlPreview);
-  delete missingResourcesPreview.resources;
-
-  const missingThumbnailPreview: UrlPreview = deepcopy(genericUrlPreview);
-  if (missingThumbnailPreview.resources) {
-    delete missingThumbnailPreview.resources.thumbnail;
-  }
-
-  const missingIconPreview: UrlPreview = deepcopy(genericUrlPreview);
-  if (missingIconPreview.resources) {
-    delete missingIconPreview.resources.icon;
-  }
-
-  return [
-    {
-      title: 'No details',
-      content: (
-        <CardView
-          appearance={appearance}
-          status="complete"
-          metadata={minimumDetails}
-        />
-      ),
-    },
-    {
-      title: 'Missing description',
-      content: (
-        <CardView
-          appearance={appearance}
-          status="complete"
-          metadata={missingDescriptionPreview}
-        />
-      ),
-    },
-    {
-      title: 'Missing site',
-      content: (
-        <CardView
-          appearance={appearance}
-          status="complete"
-          metadata={missingSitePreview}
-        />
-      ),
-    },
-    {
-      title: 'Missing resources',
-      content: (
-        <CardView
-          appearance={appearance}
-          status="complete"
-          metadata={missingResourcesPreview}
-        />
-      ),
-    },
-    {
-      title: 'Missing thumbnail',
-      content: (
-        <CardView
-          appearance={appearance}
-          status="complete"
-          metadata={missingThumbnailPreview}
-        />
-      ),
-    },
-    {
-      title: 'Missing icon',
-      content: (
-        <CardView
-          appearance={appearance}
-          status="complete"
-          metadata={missingIconPreview}
-        />
-      ),
-    },
-  ];
-};
-
 export const createApiCards = (
   appearance: CardAppearance,
-  metadata: MediaItemDetails,
+  metadata: FileDetails,
 ) => {
   // API methods
   const apiCards = [
@@ -820,58 +726,27 @@ export const createErrorAndLoadingCards = (
 export const generateStoriesForLinksWithAppearance = (
   appearance: CardAppearance,
 ) => {
-  const linkCard = [
-    {
-      title: `Link card "${appearance}"`,
-      content: (
-        <CardView
-          appearance={appearance}
-          status="complete"
-          metadata={genericLinkDetails}
-        />
-      ),
-    },
-  ];
-
-  // loading and error
-  const linkLoadingAndErrorCards = createErrorAndLoadingCards(
-    appearance,
-    'link',
-  );
-
   // menu actions
   const linkMenuActionsCards = createMenuActionCards(
     appearance,
-    genericLinkDetails,
+    imageFileDetails,
   );
 
   // api methods
-  const apiCards = createApiCards(appearance, genericLinkDetails);
-
-  // missing metadata
-  const linkMissingMetadataCards = createMissingMetadataLinkCards(appearance);
+  const apiCards = createApiCards(appearance, imageFileDetails);
 
   return (
     <div>
-      <h3>Links</h3>
-      <StoryList>{linkCard}</StoryList>
-
       <h3>Sizes</h3>
       <StoryList>
-        {createCardsOfDifferentSize(appearance, genericLinkDetails)}
+        {createCardsOfDifferentSize(appearance, imageFileDetails)}
       </StoryList>
-
-      <h4>Loading and error states</h4>
-      <StoryList>{linkLoadingAndErrorCards}</StoryList>
 
       <h4>Menu actions</h4>
       <StoryList>{linkMenuActionsCards}</StoryList>
 
       <h4>API methods</h4>
       <StoryList>{apiCards}</StoryList>
-
-      <h4>Missing metadata</h4>
-      <StoryList>{linkMissingMetadataCards}</StoryList>
     </div>
   );
 };

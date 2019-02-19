@@ -1,5 +1,10 @@
 # @atlaskit/media-card
 
+## 53.0.0
+- [major] [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+
+  - remove Link support from media-card
+
 ## 52.0.7
 - [patch] [ab6ba14cd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6ba14cd3):
 

@@ -62,7 +62,7 @@ export const toIdentifier = (
 ): Identifier => {
   return {
     id: item.id,
-    type: item.type,
+    type: 'file',
     occurrenceKey: item.occurrenceKey,
     collectionName,
   };

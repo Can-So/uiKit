@@ -1,5 +1,10 @@
 # @atlaskit/status
 
+## 0.3.4
+- [patch] [109cf449d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/109cf449d6):
+
+  - enable noImplicitAny for status. fix related issues
+
 ## 0.3.3
 - [patch] [9696b18dec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9696b18dec):
 

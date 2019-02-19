@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 7.1.2
+- [patch] [bcdb413cb4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bcdb413cb4):
+
+  - Encapsulate checkbox/radio option styles inside the primitive
+
 ## 7.1.1
 - [patch] [896bf5bef9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/896bf5bef9):
 

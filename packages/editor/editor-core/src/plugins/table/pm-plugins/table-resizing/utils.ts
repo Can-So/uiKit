@@ -4,12 +4,13 @@ import {
   calcTableWidth,
   akEditorWideLayoutWidth,
   akEditorDefaultLayoutWidth,
+  akEditorFullWidthLayoutWidth,
 } from '@atlaskit/editor-common';
 
-const tableLayoutToSize = {
+export const tableLayoutToSize = {
   default: akEditorDefaultLayoutWidth,
   wide: akEditorWideLayoutWidth,
-  'full-width': undefined,
+  'full-width': akEditorFullWidthLayoutWidth,
 };
 
 /**
@@ -23,7 +24,7 @@ export function getLayoutSize(
 ) {
   const calculatedTableWidth = calcTableWidth(tableLayout, containerWidth);
   return calculatedTableWidth.endsWith('px')
-    ? Number(calculatedTableWidth.slice(0, calculatedTableWidth.length - 2))
+    ? parseInt(calculatedTableWidth, 10)
     : tableLayoutToSize[tableLayout] || containerWidth;
 }
 

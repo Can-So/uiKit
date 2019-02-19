@@ -1,4 +1,5 @@
 import { Node as PMNode } from 'prosemirror-model';
+import { EditorView } from 'prosemirror-view';
 import ResizeState from './resizeState';
 import ColumnState from './columnState';
 
@@ -7,6 +8,7 @@ export interface ResizerConfig {
   minWidth: number;
   maxSize: number;
   node: PMNode;
+  start: number;
 }
 
 export default class Resizer {
@@ -28,8 +30,13 @@ export default class Resizer {
   /**
    * Create resizer from given DOM element
    */
-  static fromDOM(tableElem: HTMLTableElement, config: ResizerConfig): Resizer {
-    const { maxSize, minWidth, node } = config;
+  static fromDOM(
+    view: EditorView,
+    tableElem: HTMLTableElement,
+    config: ResizerConfig,
+  ): Resizer {
+    const { maxSize, minWidth, node, start } = config;
+    const domAtPos = view.domAtPos.bind(view);
     const colgroupChildren = insertColgroupFromNode(tableElem, node);
 
     return new Resizer(
@@ -39,7 +46,7 @@ export default class Resizer {
       // update state from DOM
       new ResizeState(
         Array.from(colgroupChildren).map((col, i) => {
-          return ColumnState.fromDOM(tableElem, i, minWidth);
+          return ColumnState.fromDOM(domAtPos, node, start, i, minWidth);
         }),
         maxSize,
       ),

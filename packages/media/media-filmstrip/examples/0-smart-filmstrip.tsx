@@ -13,7 +13,7 @@ import { CardEvent, FileIdentifier, CardAction } from '@atlaskit/media-card';
 import EditorCloseIcon from '@atlaskit/icon/glyph/editor/close';
 import { Filmstrip, FilmstripItem } from '../src';
 import { ExampleWrapper, FilmstripWrapper } from '../example-helpers/styled';
-import { MediaItem, UploadableFile, Context } from '@atlaskit/media-core';
+import { FileItem, UploadableFile, Context } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 
 export interface ExampleState {
@@ -60,7 +60,7 @@ class Example extends Component<{}, ExampleState> {
     return -1;
   };
 
-  onClose = (item?: MediaItem) => {
+  onClose = (item?: FileItem) => {
     if (!item) {
       return;
     }
