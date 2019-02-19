@@ -1,16 +1,20 @@
 import Button from '@atlaskit/button';
 import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
-import Tooltip from '@atlaskit/tooltip';
 import ErrorIcon from '@atlaskit/icon/glyph/error';
-import { mount, shallow } from 'enzyme';
+import Tooltip from '@atlaskit/tooltip';
+import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { CommentField } from '../../../components/CommentField';
+import { CopyLinkButton } from '../../../components/CopyLinkButton';
 import { ShareForm } from '../../../components/ShareForm';
 import { ShareHeader } from '../../../components/ShareHeader';
 import { UserPickerField } from '../../../components/UserPickerField';
-import { CopyLinkButton } from '../../../components/CopyLinkButton';
 import { messages } from '../../../i18n';
+import {
+  DialogContentState,
+  InvitationsCapabilitiesResponse,
+} from '../../../types';
 import { renderProp } from '../_testUtils';
 
 describe('ShareForm', () => {
@@ -18,12 +22,17 @@ describe('ShareForm', () => {
     const mockLink = 'link';
     const loadOptions = jest.fn();
     const onShareClick = jest.fn();
+    const capabilities: InvitationsCapabilitiesResponse = {
+      directInvite: { mode: 'NONE', permittedResources: [] },
+      invitePendingApproval: { mode: 'NONE', permittedResources: [] },
+    };
     const component = shallow(
       <ShareForm
         copyLink={mockLink}
         loadOptions={loadOptions}
         onShareClick={onShareClick}
         title="some title"
+        capabilities={capabilities}
       />,
     );
 
@@ -32,7 +41,9 @@ describe('ShareForm', () => {
     expect(akForm.prop('onSubmit')).toBe(onShareClick);
 
     const formProps = {};
-    const form = renderProp(akForm, 'children', { formProps }).find('form');
+    const form = renderProp(akForm, 'children', { formProps })
+      .dive()
+      .find('form');
     expect(form).toHaveLength(1);
     expect(form.find(ShareHeader).prop('title')).toEqual('some title');
 
@@ -40,7 +51,10 @@ describe('ShareForm', () => {
     expect(formSection).toHaveLength(1);
     const userPickerField = formSection.find(UserPickerField);
     expect(userPickerField).toHaveLength(1);
-    expect(userPickerField.prop('loadOptions')).toBe(loadOptions);
+    expect(userPickerField.props()).toMatchObject({
+      loadOptions,
+      capabilities,
+    });
     expect(formSection.find(CommentField)).toHaveLength(1);
 
     const footer = form.find(FormFooter);
@@ -77,7 +91,9 @@ describe('ShareForm', () => {
 
     const akForm = component.find<any>(Form);
     const formProps = {};
-    const form = renderProp(akForm, 'children', { formProps }).find('form');
+    const form = renderProp(akForm, 'children', { formProps })
+      .dive()
+      .find('form');
 
     const footer = form.find(FormFooter);
     const button = footer.find(Button);
@@ -93,9 +109,9 @@ describe('ShareForm', () => {
       );
 
       const akForm = wrapper.find<any>(Form);
-      const form = renderProp(akForm, 'children', { formProps: {} }).find(
-        'form',
-      );
+      const form = renderProp(akForm, 'children', { formProps: {} })
+        .dive()
+        .find('form');
       const footer = form.find(FormFooter);
       expect(footer.find(Button).prop('isLoading')).toBeTruthy();
     });
@@ -113,9 +129,9 @@ describe('ShareForm', () => {
       );
 
       const akForm = wrapper.find<any>(Form);
-      const form = renderProp(akForm, 'children', { formProps: {} }).find(
-        'form',
-      );
+      const form = renderProp(akForm, 'children', { formProps: {} })
+        .dive()
+        .find('form');
       const footer = form.find(FormFooter);
       const button = footer.find(Button);
       expect(button).toHaveLength(1);
@@ -136,38 +152,33 @@ describe('ShareForm', () => {
     });
   });
 
-  describe('shouldShowCapabilitiesInfoMessage prop', () => {
-    it('should only rendered HelperMessage if shouldShowCapabilitiesInfoMessage prop is true', () => {
-      const loadOptions = jest.fn();
-      const onShareClick = jest.fn();
-      const wrapper = mount(
-        <ShareForm
-          copyLink="link"
-          loadOptions={loadOptions}
-          onShareClick={onShareClick}
-          title="some title"
-          shouldShowCapabilitiesInfoMessage
-        />,
-      );
-      expect(wrapper.find(HelperMessage)).toHaveLength(1);
-    });
+  it('should set defaultValue', () => {
+    const mockLink = 'link';
+    const loadOptions = jest.fn();
+    const defaultValue: DialogContentState = {
+      users: [],
+      comment: {
+        format: 'plain_text',
+        value: 'some comment',
+      },
+    };
+    const component = shallow(
+      <ShareForm
+        copyLink={mockLink}
+        loadOptions={loadOptions}
+        title="some title"
+        defaultValue={defaultValue}
+      />,
+    );
+    const formProps = {};
+    const akForm = component.find<any>(Form);
+    const form = renderProp(akForm, 'children', { formProps }).dive();
 
-    it('should allow capabilitiesInfoMessage to replace default helper message if provided', () => {
-      const mockMessage = 'mock message';
-      const loadOptions = jest.fn();
-      const onShareClick = jest.fn();
-      const wrapper = mount(
-        <ShareForm
-          capabilitiesInfoMessage={mockMessage}
-          copyLink="link"
-          loadOptions={loadOptions}
-          onShareClick={onShareClick}
-          title="some title"
-          shouldShowCapabilitiesInfoMessage
-        />,
-      );
-      expect(wrapper.find(HelperMessage)).toHaveLength(1);
-      expect(wrapper.find(HelperMessage).text()).toEqual(mockMessage);
-    });
+    expect(form.find(UserPickerField).prop('defaultValue')).toBe(
+      defaultValue.users,
+    );
+    expect(form.find(CommentField).prop('defaultValue')).toBe(
+      defaultValue.comment,
+    );
   });
 });
