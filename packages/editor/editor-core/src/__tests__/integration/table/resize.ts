@@ -8,6 +8,7 @@ import {
 } from '../_helpers';
 import {
   tableWithRowSpan,
+  tableWithRowSpanAndColSpan,
   twoColFullWidthTableWithContent,
 } from './__fixtures__/resize-documents';
 
@@ -31,6 +32,27 @@ BrowserTestCase(
     });
 
     await resizeColumn(page, { cellHandlePos: 2, resizeWidth: 50 });
+
+    const doc = await page.$eval(editable, getDocFromElement);
+    expect(doc).toMatchDocSnapshot();
+  },
+);
+
+BrowserTestCase(
+  'Can resize normally with a rowspan and colspan',
+  { skip: ['ie'] },
+  async client => {
+    const page = await goToEditorTestingExample(client);
+
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      defaultValue: JSON.stringify(tableWithRowSpanAndColSpan),
+      allowTables: {
+        advanced: true,
+      },
+    });
+
+    await resizeColumn(page, { cellHandlePos: 22, resizeWidth: -50 });
 
     const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
