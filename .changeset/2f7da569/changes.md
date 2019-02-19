@@ -1,0 +1,1 @@
+- ED-4998 Fix highlighting and disabling of hamburger menu items in different contexts
