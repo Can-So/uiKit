@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
-import { AnalyticsListener, UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import {
   SwitcherView,
   SwitcherItem,
@@ -20,31 +21,67 @@ export class Switcher extends Component {
           ) : (
             <SwitcherView>
               <Section id="first-section" isAdmin title="First Section">
-                <SwitcherItem icon={SettingsIcon} href="/">
+                <SwitcherItem
+                  id="first-item"
+                  type="link"
+                  icon={SettingsIcon}
+                  href="/"
+                >
                   {`${data && data.data} First Item`}
                 </SwitcherItem>
-                <SwitcherItem>{`${data &&
+                <SwitcherItem id="first-item" type="link">{`${data &&
                   data.data} Second Item`}</SwitcherItem>
-                <SwitcherItem>{`${data && data.data} Third Item`}</SwitcherItem>
+                <SwitcherItem id="second-item" type="link">{`${data &&
+                  data.data} Third Item`}</SwitcherItem>
               </Section>
               <Section id="second-section" title="Second Section">
-                <SwitcherItem>First Item</SwitcherItem>
-                <SwitcherItem>Second Item</SwitcherItem>
-                <SwitcherItem>Third Item</SwitcherItem>
+                <SwitcherItem id="first-item" type="link">
+                  First Item
+                </SwitcherItem>
+                <SwitcherItem id="second-item" type="link">
+                  Second Item
+                </SwitcherItem>
+                <SwitcherItem id="third-item" type="link">
+                  Third Item
+                </SwitcherItem>
               </Section>
               <Section id="third-section" title="Third Section">
-                <SwitcherItem>First Item</SwitcherItem>
-                <SwitcherItem>Second Item</SwitcherItem>
-                <SwitcherItem>Third Item</SwitcherItem>
-                <SwitcherItem>First Item</SwitcherItem>
-                <SwitcherItem>Second Item</SwitcherItem>
-                <SwitcherItem>Third Item</SwitcherItem>
-                <SwitcherItem>First Item</SwitcherItem>
-                <SwitcherItem>Second Item</SwitcherItem>
-                <SwitcherItem>Third Item</SwitcherItem>
-                <SwitcherItem>First Item</SwitcherItem>
-                <SwitcherItem>Second Item</SwitcherItem>
-                <SwitcherItem>Third Item</SwitcherItem>
+                <SwitcherItem id="first-item" type="link">
+                  First Item
+                </SwitcherItem>
+                <SwitcherItem id="second-item" type="link">
+                  Second Item
+                </SwitcherItem>
+                <SwitcherItem id="third-item" type="link">
+                  Third Item
+                </SwitcherItem>
+                <SwitcherItem id="first-item" type="link">
+                  First Item
+                </SwitcherItem>
+                <SwitcherItem id="second-item" type="link">
+                  Second Item
+                </SwitcherItem>
+                <SwitcherItem id="third-item" type="link">
+                  Third Item
+                </SwitcherItem>
+                <SwitcherItem id="first-item" type="link">
+                  First Item
+                </SwitcherItem>
+                <SwitcherItem id="second-item" type="link">
+                  Second Item
+                </SwitcherItem>
+                <SwitcherItem id="third-item" type="link">
+                  Third Item
+                </SwitcherItem>
+                <SwitcherItem id="first-item" type="link">
+                  First Item
+                </SwitcherItem>
+                <SwitcherItem id="second-item" type="link">
+                  Second Item
+                </SwitcherItem>
+                <SwitcherItem id="third-item" type="link">
+                  Third Item
+                </SwitcherItem>
               </Section>
               <ManageButton href="/some-href" />
             </SwitcherView>
@@ -55,7 +92,7 @@ export class Switcher extends Component {
   }
 }
 
-const onAnalyticsEvent = (event: UIAnalyticsEvent, channel) => {
+const onAnalyticsEvent = (event: UIAnalyticsEventInterface, channel) => {
   // tslint:disable-next-line:no-console
   console.log(
     `AnalyticsEvent(${channel})\n\tpayload=%o\n\tcontext=%o`,

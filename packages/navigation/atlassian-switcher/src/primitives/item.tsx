@@ -3,10 +3,12 @@ import styled, { ThemeProvider } from 'styled-components';
 import Item, { itemThemeNamespace } from '@atlaskit/item';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { gridSize, colors, elevation } from '@atlaskit/theme';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import {
-  withAnalyticsEvents,
-} from '@atlaskit/analytics-next';
-import { analyticsAttributes, createAndFireNavigationEvent, withAnalyticsContextData } from '../utils/analytics';
+  analyticsAttributes,
+  createAndFireNavigationEvent,
+  withAnalyticsContextData,
+} from '../utils/analytics';
 
 const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
   display: flex;
@@ -68,33 +70,29 @@ const itemTheme = {
 
 type SwitcherItemProps = Props & {
   id: string;
-  type: 'product' | 'try' | 'administration' | 'recentContainer' | 'customLink';
+  type: string;
   children: React.ReactNode;
   onClick?: () => void;
 };
 class SwitcherItem extends React.Component<SwitcherItemProps> {
   render() {
-    const {
-      isAdmin,
-      isCustom,
-      icon,
-      iconUrl,
-      ...rest
-    } = this.props;
+    const { isAdmin, isCustom, icon, iconUrl, ...rest } = this.props;
 
-    return <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
-      <Item
-        elemBefore={
-          <IconWithBackground
-            isAdmin={isAdmin}
-            isCustom={isCustom}
-            icon={icon}
-            iconUrl={iconUrl}
-          />
-        }
-        {...rest}
-      />
-    </ThemeProvider>
+    return (
+      <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
+        <Item
+          elemBefore={
+            <IconWithBackground
+              isAdmin={isAdmin}
+              isCustom={isCustom}
+              icon={icon}
+              iconUrl={iconUrl}
+            />
+          }
+          {...rest}
+        />
+      </ThemeProvider>
+    );
   }
 }
 
@@ -110,14 +108,16 @@ type SwitcherItemAnalyticsContext = {
   attributes: {
     itemId?: string;
     itemType?: string;
-  }
+  };
 };
 const SwitcherItemWithContext = withAnalyticsContextData<
   SwitcherItemProps,
   SwitcherItemAnalyticsContext
->(props => analyticsAttributes({
-  itemId: props.id,
-  itemType: props.type,
-}))(SwitcherItemWithEvents);
+>(props =>
+  analyticsAttributes({
+    itemId: props.id,
+    itemType: props.type,
+  }),
+)(SwitcherItemWithEvents);
 
 export default SwitcherItemWithContext;

@@ -1,12 +1,18 @@
 import * as React from 'react';
-import { NavigationAnalyticsContext, NAVIGATION_CONTEXT } from '@atlaskit/analytics-namespaced-context';
+import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 import { createAndFireEvent } from '@atlaskit/analytics-next';
 
 type PropsToContextMapper<P, C> = (props: P) => C;
 
-export const createAndFireNavigationEvent = createAndFireEvent(NAVIGATION_CONTEXT);
+const NAVIGATION_CHANNEL = 'navigation';
 
-export const analyticsAttributes = <T extends object>(attributes: T) => ({ attributes });
+export const createAndFireNavigationEvent = createAndFireEvent(
+  NAVIGATION_CHANNEL,
+);
+
+export const analyticsAttributes = <T extends object>(attributes: T) => ({
+  attributes,
+});
 
 export const withAnalyticsContextData = function<P, C>(
   mapPropsToContext: PropsToContextMapper<P, C>,
@@ -22,6 +28,4 @@ export const withAnalyticsContextData = function<P, C>(
   };
 };
 
-export {
-  NavigationAnalyticsContext,
-};
+export { NavigationAnalyticsContext };
