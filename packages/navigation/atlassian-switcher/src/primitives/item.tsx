@@ -5,9 +5,8 @@ import WorldIcon from '@atlaskit/icon/glyph/world';
 import { gridSize, colors, elevation } from '@atlaskit/theme';
 import {
   withAnalyticsEvents,
-  createAndFireEvent,
 } from '@atlaskit/analytics-next';
-import { withAnalyticsContextData } from '../utils/analytics';
+import { analyticsAttributes, createAndFireNavigationEvent, withAnalyticsContextData } from '../utils/analytics';
 
 const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
   display: flex;
@@ -73,31 +72,34 @@ type SwitcherItemProps = Props & {
   children: React.ReactNode;
   onClick?: () => void;
 };
+class SwitcherItem extends React.Component<SwitcherItemProps> {
+  render() {
+    const {
+      isAdmin,
+      isCustom,
+      icon,
+      iconUrl,
+      ...rest
+    } = this.props;
 
-const SwitcherItem = ({
-  isAdmin,
-  isCustom,
-  icon,
-  iconUrl,
-  ...rest
-}: SwitcherItemProps) => (
-  <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
-    <Item
-      elemBefore={
-        <IconWithBackground
-          isAdmin={isAdmin}
-          isCustom={isCustom}
-          icon={icon}
-          iconUrl={iconUrl}
-        />
-      }
-      {...rest}
-    />
-  </ThemeProvider>
-);
+    return <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
+      <Item
+        elemBefore={
+          <IconWithBackground
+            isAdmin={isAdmin}
+            isCustom={isCustom}
+            icon={icon}
+            iconUrl={iconUrl}
+          />
+        }
+        {...rest}
+      />
+    </ThemeProvider>
+  }
+}
 
 const SwitcherItemWithEvents = withAnalyticsEvents({
-  onClick: createAndFireEvent('atlaskit')({
+  onClick: createAndFireNavigationEvent({
     eventType: 'ui',
     action: 'clicked',
     actionSubject: 'atlassianSwitcherItem',
@@ -105,13 +107,15 @@ const SwitcherItemWithEvents = withAnalyticsEvents({
 })(SwitcherItem);
 
 type SwitcherItemAnalyticsContext = {
-  itemId?: string;
-  itemType?: string;
+  attributes: {
+    itemId?: string;
+    itemType?: string;
+  }
 };
 const SwitcherItemWithContext = withAnalyticsContextData<
   SwitcherItemProps,
   SwitcherItemAnalyticsContext
->(props => ({
+>(props => analyticsAttributes({
   itemId: props.id,
   itemType: props.type,
 }))(SwitcherItemWithEvents);

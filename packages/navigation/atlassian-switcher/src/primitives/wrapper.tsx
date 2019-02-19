@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { gridSize, colors } from '@atlaskit/theme';
 import { ManageButton } from './';
 import {
-  createAndFireEvent,
   withAnalyticsEvents,
 } from '@atlaskit/analytics-next';
+import { createAndFireNavigationEvent } from '../utils/analytics';
 
 const Wrapper = styled.div`
   height: calc(100vh - 3 * ${gridSize()}px);
@@ -57,7 +57,7 @@ class SwitcherView extends React.Component<SwitcherViewProps> {
 }
 
 export default withAnalyticsEvents({
-  onViewed: createAndFireEvent('atlaskit')({
+  onViewed: createAndFireNavigationEvent({
     eventType: 'screen',
     action: 'viewed',
     actionSubject: 'atlassianSwitcher',

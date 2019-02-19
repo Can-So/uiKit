@@ -21,7 +21,7 @@ import {
   LicenseInformationDataStructure,
 } from '../providers/types';
 import { RecentContainersDataStructure } from '../providers/instance-data-providers';
-import { AnalyticsContext } from '../utils/analytics';
+import { analyticsAttributes, NavigationAnalyticsContext } from '../utils/analytics';
 
 interface SwitcherProps {
   cloudId: string;
@@ -35,7 +35,7 @@ interface SwitcherProps {
   isXFlowEnabled: ChildrenProps<boolean>;
 }
 
-const getAnalyticsContext = (links: any, extraLinks: number) => ({
+const getAnalyticsContext = (links: any, extraLinks: number) => analyticsAttributes({
   itemsCount:
     links.admin.length +
     links.products.length +
@@ -44,7 +44,7 @@ const getAnalyticsContext = (links: any, extraLinks: number) => ({
     extraLinks,
 });
 
-const getExtraItemAnalyticsContext = (index: number) => ({
+const getExtraItemAnalyticsContext = (index: number) => analyticsAttributes({
   groupItemIndex: index,
 });
 
@@ -114,14 +114,14 @@ export default class Switcher extends React.Component<SwitcherProps> {
     return isLoading ? (
       <Skeleton />
     ) : (
-      <AnalyticsContext
+      <NavigationAnalyticsContext
         data={getAnalyticsContext(links, Number(shouldRenderXSellLink))}
       >
         <SwitcherView>
           {shouldRenderAdministrativeSection && (
             <Section id="administration" title="Administration" isAdmin>
               {links.admin.map(({ label, icon, key, link }, idx) => (
-                <AnalyticsContext
+                <NavigationAnalyticsContext
                   key={key}
                   data={getExtraItemAnalyticsContext(idx)}
                 >
@@ -133,23 +133,23 @@ export default class Switcher extends React.Component<SwitcherProps> {
                   >
                     {label}
                   </SwitcherItem>
-                </AnalyticsContext>
+                </NavigationAnalyticsContext>
               ))}
             </Section>
           )}
           <Section id="products" title="Products">
             {links.products.map(({ label, icon, key, link }, idx) => (
-              <AnalyticsContext
+              <NavigationAnalyticsContext
                 key={key}
                 data={getExtraItemAnalyticsContext(idx)}
               >
                 <SwitcherItem type="product" id={key} icon={icon} href={link}>
                   {label}
                 </SwitcherItem>
-              </AnalyticsContext>
+              </NavigationAnalyticsContext>
             ))}
             {shouldRenderXSellLink && (
-              <AnalyticsContext
+              <NavigationAnalyticsContext
                 data={getExtraItemAnalyticsContext(links.products.length)}
               >
                 <SwitcherItem
@@ -165,20 +165,20 @@ export default class Switcher extends React.Component<SwitcherProps> {
                     {addProductsPermissionData ? 'Try' : 'Request'}
                   </Lozenge>
                 </SwitcherItem>
-              </AnalyticsContext>
+              </NavigationAnalyticsContext>
             )}
           </Section>
           <Section id="customLinks" title="More" isCustom>
             {links.custom.map(({ label, link }: CustomLink, idx) => (
               // todo: id in SwitcherItem should be consumed from custom link resolver
-              <AnalyticsContext
+              <NavigationAnalyticsContext
                 key={idx + '.' + label}
                 data={getExtraItemAnalyticsContext(idx)}
               >
                 <SwitcherItem type="customLink" id={label} href={link}>
                   {label}
                 </SwitcherItem>
-              </AnalyticsContext>
+              </NavigationAnalyticsContext>
             ))}
           </Section>
           <Section id="recent" title="Recent Containers">
@@ -187,7 +187,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
                 { objectId, name, url, iconUrl, type }: RecentContainer,
                 idx,
               ) => (
-                <AnalyticsContext
+                <NavigationAnalyticsContext
                   key={objectId}
                   data={getExtraItemAnalyticsContext(idx)}
                 >
@@ -199,13 +199,13 @@ export default class Switcher extends React.Component<SwitcherProps> {
                   >
                     {name}
                   </SwitcherItem>
-                </AnalyticsContext>
+                </NavigationAnalyticsContext>
               ),
             )}
           </Section>
           {customLinksData && <ManageButton href={customLinksData[1]} />}
         </SwitcherView>
-      </AnalyticsContext>
+      </NavigationAnalyticsContext>
     );
   }
 }
