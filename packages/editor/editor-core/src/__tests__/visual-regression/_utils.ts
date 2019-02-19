@@ -122,7 +122,7 @@ async function mountEditor(page: any, props) {
 }
 
 export const initFullPageEditorWithAdf = async (page, adf: Object) => {
-  const url = getExampleUrl('editor', 'editor-core', 'testing');
+  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
   await page.goto(url);
   await mountEditor(page, {
     appearance: 'full-page',
@@ -134,7 +134,7 @@ export const initFullPageEditorWithAdf = async (page, adf: Object) => {
 };
 
 export const initCommentEditorWithAdf = async (page, adf: Object) => {
-  const url = getExampleUrl('editor', 'editor-core', 'testing');
+  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
   await page.goto(url);
   await mountEditor(page, {
     appearance: 'comment',

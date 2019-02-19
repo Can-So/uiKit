@@ -111,14 +111,12 @@ function createEditorWindowBindings(win: Window) {
   };
 }
 
-export default function EditorExampleForTests() {
+export default function EditorExampleForTests({ clipboard = true }) {
   createEditorWindowBindings(window);
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div id="editor-container" style={{ flex: '1 1 100%' }} />
-      <div style={{ overflow: 'hidden', height: '5px', flex: '0 0 5px'}}>
-        <ClipboardHelper />
-      </div>
-    </div>
+    <React.Fragment>
+      <div id="editor-container" style={{ height: '100%', width: '100%' }} />
+      {clipboard && <ClipboardHelper />}
+    </React.Fragment>
   );
 }
