@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
-import { Context, FileState, isErrorFileState } from '@atlaskit/media-core';
+import {
+  Context,
+  FileState,
+  isErrorFileState,
+  Identifier,
+} from '@atlaskit/media-core';
 import { DownloadButtonWrapper } from './styled';
 import Button from '@atlaskit/button';
 import { withAnalyticsEvents } from '@atlaskit/analytics-next';
@@ -10,7 +15,6 @@ import {
   downloadErrorButtonEvent,
 } from './analytics/download';
 import { channel } from './analytics';
-import { Identifier } from './domain';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { MediaViewerError } from './error';

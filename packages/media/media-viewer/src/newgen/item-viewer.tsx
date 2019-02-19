@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Context, FileState } from '@atlaskit/media-core';
+import { Context, FileState, Identifier } from '@atlaskit/media-core';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
-import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
+import { Outcome, MediaViewerFeatureFlags } from './domain';
 import { ImageViewer } from './viewers/image';
 import { VideoViewer } from './viewers/video';
 import { DocViewer } from './viewers/doc';

@@ -6,10 +6,13 @@ import {
   Card,
   CardView,
   CardOnClickCallback,
+} from '@atlaskit/media-card';
+import {
+  Context,
+  ImageResizeMode,
   Identifier,
   ExternalImageIdentifier,
-} from '@atlaskit/media-card';
-import { Context, ImageResizeMode } from '@atlaskit/media-core';
+} from '@atlaskit/media-core';
 import { MediaType } from '@atlaskit/adf-schema';
 import {
   withImageLoader,

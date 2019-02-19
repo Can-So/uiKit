@@ -1,14 +1,13 @@
 /* tslint:disable:no-console */
 
 import * as React from 'react';
-import { Context, FileItem } from '@atlaskit/media-core';
+import { Context, FileItem, Identifier } from '@atlaskit/media-core';
 import { createStorybookContext } from '@atlaskit/media-test-helpers';
 import CrossIcon from '@atlaskit/icon/glyph/cross';
 import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
 import { SelectableCard } from './selectableCard';
 import {
   Card,
-  Identifier,
   CardAppearance,
   CardEvent,
   OnSelectChangeFuncResult,

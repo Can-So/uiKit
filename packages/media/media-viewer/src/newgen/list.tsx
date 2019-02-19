@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Context } from '@atlaskit/media-core';
+import { Context, Identifier } from '@atlaskit/media-core';
 import { ItemViewer } from './item-viewer';
-import { Identifier, MediaViewerFeatureFlags } from './domain';
+import { MediaViewerFeatureFlags } from './domain';
 import { HeaderWrapper, hideControlsClassName, ListWrapper } from './styled';
 import { getSelectedIndex } from './utils';
 import ErrorMessage, { createError } from './error';

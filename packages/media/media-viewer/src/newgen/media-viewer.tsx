@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context } from '@atlaskit/media-core';
+import { Context, Identifier } from '@atlaskit/media-core';
 import { IntlProvider, intlShape } from 'react-intl';
 import { ThemeProvider } from 'styled-components';
 import { Shortcut, theme } from '@atlaskit/media-ui';
@@ -11,7 +11,7 @@ import {
   GasPayload,
   GasScreenEventPayload,
 } from '@atlaskit/analytics-gas-types';
-import { Identifier, ItemSource, MediaViewerFeatureFlags } from './domain';
+import { ItemSource, MediaViewerFeatureFlags } from './domain';
 import { List } from './list';
 import { Collection } from './collection';
 import { Content } from './content';

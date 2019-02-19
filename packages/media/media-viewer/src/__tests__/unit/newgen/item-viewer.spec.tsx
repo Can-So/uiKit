@@ -11,11 +11,7 @@ import { ReactWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
 import Spinner from '@atlaskit/spinner';
 import Button from '@atlaskit/button';
-import {
-  MediaItemType,
-  Context,
-  ProcessedFileState,
-} from '@atlaskit/media-core';
+import { Context, ProcessedFileState, Identifier } from '@atlaskit/media-core';
 import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import {
   ItemViewer,
@@ -28,16 +24,15 @@ import { ImageViewer } from '../../../newgen/viewers/image';
 import { VideoViewer } from '../../../newgen/viewers/video';
 import { AudioViewer } from '../../../newgen/viewers/audio';
 import { DocViewer } from '../../../newgen/viewers/doc';
-import { Identifier } from '../../../newgen/domain';
 import {
   name as packageName,
   version as packageVersion,
 } from '../../../../package.json';
 
-const identifier = {
+const identifier: Identifier = {
   id: 'some-id',
   occurrenceKey: 'some-custom-occurrence-key',
-  type: 'file' as MediaItemType,
+  mediaItemType: 'file',
   collectionName: 'some-collection',
 };
 
@@ -319,7 +314,7 @@ describe('<ItemViewer />', () => {
       const { el, instance } = mountBaseComponent(context, identifier);
       expect(instance.state.item.status).toEqual('SUCCESSFUL');
 
-      const identifier2 = {
+      const identifier2: Identifier = {
         ...identifier,
         id: 'some-other-id',
       };

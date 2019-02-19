@@ -16,138 +16,116 @@ import {
   errorFileId,
   videoSquareFileId,
 } from '@atlaskit/media-test-helpers';
-import { MediaViewerItem } from '../src';
+import { Identifier } from '@atlaskit/media-core';
 
 export { defaultCollectionName } from '@atlaskit/media-test-helpers';
 
-export const imageIdentifier: MediaViewerItem = {
-  type: 'file',
-  id: imageFileId.id,
+export const imageIdentifier: Identifier = {
+  ...imageFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const wideImageIdentifier: MediaViewerItem = {
-  type: 'file',
-  id: wideImageFileId.id,
+export const wideImageIdentifier: Identifier = {
+  ...wideImageFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const docIdentifier: MediaViewerItem = {
-  type: 'file',
-  id: docFileId.id,
+export const docIdentifier: Identifier = {
+  ...docFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const largePdfIdentifier: MediaViewerItem = {
-  type: 'file',
-  id: largePdfFileId.id,
+export const largePdfIdentifier: Identifier = {
+  ...largePdfFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const imageIdentifier2: MediaViewerItem = {
-  type: 'file',
-  id: imageFileId.id,
+export const imageIdentifier2: Identifier = {
+  ...imageFileId,
   occurrenceKey: 'other-ocurrence-key',
 };
 
-export const videoIdentifier: MediaViewerItem = {
-  type: 'file',
-  id: videoFileId.id,
+export const videoIdentifier: Identifier = {
+  ...videoFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const unsupportedIdentifier: MediaViewerItem = {
-  type: 'file',
-  id: unknownFileId.id,
+export const unsupportedIdentifier: Identifier = {
+  ...unknownFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const imageItem: MediaViewerItem = {
-  type: 'file',
-  id: imageFileId.id,
+export const imageItem: Identifier = {
+  ...imageFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const smallImageItem: MediaViewerItem = {
-  type: 'file',
-  id: smallImageFileId.id,
+export const smallImageItem: Identifier = {
+  ...smallImageFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const largeImageItem: MediaViewerItem = {
-  type: 'file',
-  id: largeImageFileId.id,
+export const largeImageItem: Identifier = {
+  ...largeImageFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const wideImageItem: MediaViewerItem = {
-  type: 'file',
-  id: wideImageFileId.id,
+export const wideImageItem: Identifier = {
+  ...wideImageFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const docItem: MediaViewerItem = {
-  type: 'file',
-  id: docFileId.id,
+export const docItem: Identifier = {
+  ...docFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const videoItem: MediaViewerItem = {
-  type: 'file',
-  id: videoFileId.id,
+export const videoItem: Identifier = {
+  ...videoFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const videoHorizontalFileItem: MediaViewerItem = {
-  type: 'file',
-  id: videoHorizontalFileId.id,
+export const videoHorizontalFileItem: Identifier = {
+  ...videoHorizontalFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const videoLargeFileItem: MediaViewerItem = {
-  type: 'file',
-  id: videoLargeFileId.id,
+export const videoLargeFileItem: Identifier = {
+  ...videoLargeFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const videoProcessingFailedItem: MediaViewerItem = {
-  type: 'file',
-  id: videoProcessingFailedId.id,
+export const videoProcessingFailedItem: Identifier = {
+  ...videoProcessingFailedId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const videoSquareFileIdItem: MediaViewerItem = {
-  type: 'file',
-  id: videoSquareFileId.id,
+export const videoSquareFileIdItem: Identifier = {
+  ...videoSquareFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const audioItem: MediaViewerItem = {
-  type: 'file',
-  id: audioFileId.id,
+export const audioItem: Identifier = {
+  ...audioFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const audioItemNoCover: MediaViewerItem = {
-  type: 'file',
-  id: audioNoCoverFileId.id,
+export const audioItemNoCover: Identifier = {
+  ...audioNoCoverFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const archiveItem: MediaViewerItem = {
-  type: 'file',
-  id: archiveFileId.id,
+export const archiveItem: Identifier = {
+  ...archiveFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const unsupportedItem: MediaViewerItem = {
-  type: 'file',
-  id: unknownFileId.id,
+export const unsupportedItem: Identifier = {
+  ...unknownFileId,
   occurrenceKey: 'testOccurrenceKey',
 };
 
-export const errorItem: MediaViewerItem = {
-  type: 'file',
-  id: errorFileId.id,
+export const errorItem: Identifier = {
+  ...errorFileId,
   occurrenceKey: 'testOccurrenceKey',
 };

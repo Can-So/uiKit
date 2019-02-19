@@ -3,9 +3,9 @@ import {
   defaultCollectionName,
   createUploadContext,
 } from '@atlaskit/media-test-helpers';
-import { Card, FileIdentifier, CardEvent } from '@atlaskit/media-card';
-import { MediaViewer, MediaViewerItem } from '@atlaskit/media-viewer';
-import { FileDetails, MediaItemType } from '@atlaskit/media-core';
+import { Card, CardEvent } from '@atlaskit/media-card';
+import { MediaViewer } from '@atlaskit/media-viewer';
+import { FileDetails, FileIdentifier, Identifier } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
 import { SelectWrapper, OptionsWrapper } from '../example-helpers/styled';
@@ -30,7 +30,7 @@ export type TenantFileRecord = {
 export type DataSourceType = 'collection' | 'list';
 export interface State {
   events: Array<TenantFileRecord>;
-  selectedItem?: MediaViewerItem;
+  selectedItem?: Identifier;
   dataSourceType: DataSourceType;
   popup?: Popup;
 }
@@ -86,7 +86,7 @@ export default class Example extends React.Component<{}, State> {
         selectedItem: {
           id: (event.mediaItemDetails as FileDetails).id,
           occurrenceKey,
-          type: 'file',
+          mediaItemType: 'file',
         },
       });
     }
@@ -134,11 +134,11 @@ export default class Example extends React.Component<{}, State> {
     if (!selectedItem) {
       return null;
     }
-    const list: MediaViewerItem[] = events.map(event => {
+    const list: Identifier[] = events.map(event => {
       return {
         id: event.id,
         occurrenceKey: event.occurrenceKey || '',
-        type: 'file' as MediaItemType,
+        mediaItemType: 'file',
       };
     });
     const dataSource =

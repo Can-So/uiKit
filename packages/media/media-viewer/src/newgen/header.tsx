@@ -6,12 +6,13 @@ import {
   MediaType,
   ProcessedFileState,
   ProcessingFileState,
+  Identifier,
 } from '@atlaskit/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
 import { messages, toHumanReadableMediaSize } from '@atlaskit/media-ui';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { Outcome, Identifier } from './domain';
+import { Outcome } from './domain';
 import {
   Header as HeaderWrapper,
   LeftHeader,

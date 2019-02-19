@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Identifier } from './domain';
+import { Identifier } from '@atlaskit/media-core';
 import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { colors } from '@atlaskit/theme';

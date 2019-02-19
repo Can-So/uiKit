@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Context } from '@atlaskit/media-core';
-import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
+import { Context, Identifier } from '@atlaskit/media-core';
+import { Outcome, MediaViewerFeatureFlags } from './domain';
 import ErrorMessage, { createError, MediaViewerError } from './error';
 import { List } from './list';
 import { Subscription } from 'rxjs/Subscription';

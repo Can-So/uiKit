@@ -1,6 +1,5 @@
-import { Context, isClientBasedAuth } from '@atlaskit/media-core';
+import { Context, isClientBasedAuth, Identifier } from '@atlaskit/media-core';
 import { stringify } from 'query-string';
-import { Identifier } from '../domain';
 import { MediaCollectionItem } from '@atlaskit/media-store';
 
 // We want to remove constructAuthTokenUrl and use mediaStore instead
@@ -62,7 +61,7 @@ export const toIdentifier = (
 ): Identifier => {
   return {
     id: item.id,
-    type: 'file',
+    mediaItemType: 'file',
     occurrenceKey: item.occurrenceKey,
     collectionName,
   };
