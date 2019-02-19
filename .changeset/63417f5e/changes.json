@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/field-text", "type": "minor" },
+    { "name": "@atlaskit/status", "type": "patch" }
+  ],
+  "dependents": []
+}
