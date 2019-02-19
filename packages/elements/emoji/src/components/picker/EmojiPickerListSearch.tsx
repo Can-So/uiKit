@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { PureComponent } from 'react';
 import AkFieldBase from '@atlaskit/field-base';
 import SearchIcon from '@atlaskit/icon/glyph/search';
-
-import * as styles from './styles';
+import * as React from 'react';
+import { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Styles } from '../../types';
+import { messages } from '../i18n';
+import * as styles from './styles';
 
 export interface Props {
   style?: Styles;
@@ -12,10 +13,12 @@ export interface Props {
   onChange: any;
 }
 
+type SelectionDirectionType = 'backward' | 'forward' | 'none' | undefined;
+
 interface InputSelection {
   selectionStart: number;
   selectionEnd: number;
-  selectionDirection?: string;
+  selectionDirection?: SelectionDirectionType;
 }
 
 export default class EmojiPickerListSearch extends PureComponent<Props> {
@@ -23,10 +26,10 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
     style: {},
   };
 
-  private inputRef: any;
+  private inputRef: HTMLInputElement | null;
   private inputSelection?: InputSelection;
 
-  private onBlur = e => {
+  private onBlur: React.FocusEventHandler<HTMLInputElement> = () => {
     const activeElement = document.activeElement;
     // Input lost focus to emoji picker container (happens in IE11 when updating search results)
     // See FS-2111
@@ -38,7 +41,7 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
     }
   };
 
-  private onChange = e => {
+  private onChange = (e: React.SyntheticEvent) => {
     this.saveInputSelection();
     this.props.onChange(e);
   };
@@ -51,11 +54,11 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
         selectionEnd,
         selectionDirection,
       } = this.inputRef;
-      if (selectionStart !== undefined) {
+      if (selectionStart && selectionEnd && selectionDirection) {
         this.inputSelection = {
           selectionStart,
           selectionEnd,
-          selectionDirection,
+          selectionDirection: selectionDirection as SelectionDirectionType,
         };
       }
     }
@@ -87,7 +90,7 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
     }
   };
 
-  private handleInputRef = input => {
+  private handleInputRef = (input: HTMLInputElement | null) => {
     if (input) {
       // Defer focus so it give some time to position the popup before
       // setting the focus to search input.
@@ -102,29 +105,32 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
 
     return (
       <div className={styles.pickerSearch} style={style}>
-        <AkFieldBase
-          appearance="standard"
-          label="Search"
-          isCompact={true}
-          isLabelHidden={true}
-          isFitContainerWidthEnabled={true}
-        >
-          <span className={styles.searchIcon}>
-            <SearchIcon label="Search" />
-          </span>
-          <input
-            className={styles.input}
-            autoComplete="off"
-            disabled={false}
-            name="search"
-            placeholder="Search..."
-            required={false}
-            onChange={this.onChange}
-            value={query || ''}
-            ref={this.handleInputRef}
-            onBlur={this.onBlur}
-          />
-        </AkFieldBase>
+        <FormattedMessage {...messages.searchLabel}>
+          {searchLabel => (
+            <AkFieldBase
+              appearance="standard"
+              isCompact={true}
+              isLabelHidden={true}
+              isFitContainerWidthEnabled={true}
+            >
+              <span className={styles.searchIcon}>
+                <SearchIcon label={searchLabel as string} />
+              </span>
+              <input
+                className={styles.input}
+                autoComplete="off"
+                disabled={false}
+                name="search"
+                placeholder={`${searchLabel as string}...`}
+                required={false}
+                onChange={this.onChange}
+                value={query || ''}
+                ref={this.handleInputRef}
+                onBlur={this.onBlur}
+              />
+            </AkFieldBase>
+          )}
+        </FormattedMessage>
       </div>
     );
   }

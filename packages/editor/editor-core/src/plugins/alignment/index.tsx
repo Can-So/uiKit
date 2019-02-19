@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { alignment } from '@atlaskit/editor-common';
+import { alignment } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
 import { pluginKey, createPlugin, AlignmentState } from './pm-plugins/main';
@@ -47,7 +47,7 @@ const alignmentPlugin: EditorPlugin = {
               changeAlignment={(align: AlignmentState) =>
                 changeAlignment(align)(editorView.state, editorView.dispatch)
               }
-              disabled={!align.isEnabled}
+              disabled={disabled || !align.isEnabled}
               popupsMountPoint={popupsMountPoint}
               popupsBoundariesElement={popupsBoundariesElement}
               popupsScrollableElement={popupsScrollableElement}

@@ -24,7 +24,7 @@ export type File = {
 export type Directory = {
   type: 'dir';
   id: string;
-  children: Array<File | Directory>;
+  children: Array<any>;
 };
 
 export type Func = () => void;

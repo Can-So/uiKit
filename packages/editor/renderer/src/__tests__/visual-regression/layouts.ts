@@ -1,4 +1,5 @@
 import { goToRendererTestingExample, mountRenderer, snapshot } from './_utils';
+import { layoutWithDefaultBreakoutMark } from './__fixtures__/document-with-layout-default-breakout';
 
 const twoColumnLayout = {
   version: 1,
@@ -46,7 +47,7 @@ const twoColumnLayout = {
   ],
 };
 
-describe('Snapshot Test: Layouts', () => {
+describe.skip('Snapshot Test: Layouts', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
@@ -66,5 +67,27 @@ describe('Snapshot Test: Layouts', () => {
       });
       await snapshot(page);
     });
+  });
+});
+
+describe('Snapshot Test: Breakout Layouts', () => {
+  let page;
+  beforeAll(async () => {
+    // @ts-ignore
+    page = global.page;
+    await goToRendererTestingExample(page);
+  });
+
+  it(`should correctly render two column layout with a default breakout mark`, async () => {
+    await page.setViewport({ width: 1120, height: 500 });
+    await page.waitFor(100);
+    mountRenderer(page, {
+      document: layoutWithDefaultBreakoutMark,
+      appearance: 'full-page',
+    });
+    await page.waitFor(100);
+
+    // @ts-ignore
+    await snapshot(page, '0.02');
   });
 });

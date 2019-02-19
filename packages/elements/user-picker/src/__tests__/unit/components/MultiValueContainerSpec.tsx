@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -19,34 +19,65 @@ describe('MultiValueContainer', () => {
     value: [1],
     options: [1, 2, 3],
     isLoading: false,
+    isDisabled: false,
   };
 
-  const shallowValueContainer = props =>
+  const findInput = (component: ShallowWrapper<any>) =>
+    (component.find(FormattedMessage as React.ComponentClass<any>).exists()
+      ? renderProp(
+          component.find(FormattedMessage as React.ComponentClass<any>),
+          'children',
+          'add more people...',
+        )
+      : component
+    ).find('input');
+
+  const shallowValueContainer = (props: any) =>
     shallow(<MultiValueContainer selectProps={selectProps} {...props} />);
 
   test.each([
-    ['add more people...', selectProps.value, false],
-    [undefined, selectProps.options, false],
-    [undefined, [], false],
-    [undefined, [], true],
+    ['add more people...', selectProps.value, false, false],
+    ['Enter more...', selectProps.value, false, true],
+    [undefined, selectProps.options, false, false],
+    [undefined, [], false, false],
+    [undefined, [], true, false],
   ])(
     'should set placeholder to "%s" when (value: %p, loading: %s)',
-    (placeholder, value, isLoading) => {
+    (placeholder, value, isLoading, override) => {
       const component = shallowValueContainer({
         children: [
           <div key="placeholder">Placeholder</div>,
           <input key="input" type="text" />,
         ],
-        selectProps: { ...selectProps, value, isLoading },
+        selectProps: {
+          ...selectProps,
+          value,
+          isLoading,
+          addMoreMessage: override ? placeholder : undefined,
+        },
       });
-      const children = renderProp(
-        component.find(FormattedMessage as React.ComponentClass<any>),
-        'children',
-        'add more people...',
-      );
-      expect(children.find('input').prop('placeholder')).toEqual(placeholder);
+
+      const input = findInput(component);
+
+      expect(input.prop('placeholder')).toEqual(placeholder);
     },
   );
+
+  it('should not display add more placeholder if disabled', () => {
+    const component = shallowValueContainer({
+      children: [
+        <div key="placeholder">Placeholder</div>,
+        <input key="input" type="text" />,
+      ],
+      selectProps: {
+        ...selectProps,
+        isDisabled: true,
+      },
+    });
+    const input = findInput(component);
+
+    expect(input.prop('placeholder')).toBeUndefined();
+  });
 
   it('should scroll to bottom when adding new items', () => {
     const component = shallowValueContainer({
@@ -68,7 +99,7 @@ describe('MultiValueContainer', () => {
     expect(scrollIntoView).toHaveBeenCalledTimes(1);
   });
 
-  it('should not scroll when removing and item', () => {
+  it('should not scroll when removing an item', () => {
     const component = shallowValueContainer({
       children: 'some text',
       getValue: jest.fn(() => [1]),

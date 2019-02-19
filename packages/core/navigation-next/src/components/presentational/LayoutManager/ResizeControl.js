@@ -15,7 +15,7 @@ import {
 import { colors } from '@atlaskit/theme';
 import ChevronLeft from '@atlaskit/icon/glyph/chevron-left';
 import ChevronRight from '@atlaskit/icon/glyph/chevron-right';
-import MenuIcon from '@atlaskit/icon/glyph/menu';
+import MenuExpandIcon from '@atlaskit/icon/glyph/menu-expand';
 import Tooltip from '@atlaskit/tooltip';
 
 import { navigationExpandedCollapsed } from '../../../common/analytics';
@@ -65,17 +65,31 @@ export const GrabArea = ({ showHandle, isBold, ...props }: *) => (
     />
   </div>
 );
+const largeHitArea = {
+  left: -8,
+  right: -12,
+  bottom: -8,
+  top: -8,
+};
+const smallHitArea = {
+  left: -4,
+  right: -4,
+  bottom: -4,
+  top: -4,
+};
 type ButtonProps = {
   children: Node,
   hasHighlight: boolean,
   innerRef: Ref<'button'>,
   isVisible: boolean,
+  hitAreaSize: 'small' | 'large',
 };
 const Button = ({
   children,
   hasHighlight,
   innerRef,
   isVisible,
+  hitAreaSize,
   ...props
 }: ButtonProps) => (
   <button
@@ -117,7 +131,10 @@ const Button = ({
   >
     <div
       // increase hit-area
-      css={{ position: 'absolute', left: -4, right: -4, bottom: -4, top: -4 }}
+      css={{
+        position: 'absolute',
+        ...(hitAreaSize === 'small' ? smallHitArea : largeHitArea),
+      }}
     />
     {children}
   </button>
@@ -182,6 +199,7 @@ type Props = {
     ref: ElementRef<*>,
     property: 'padding-left' | 'width',
   }>,
+  onMouseOverButtonBuffer: ?(e: SyntheticMouseEvent<>) => void,
   navigation: Object,
 };
 type State = {
@@ -419,18 +437,20 @@ class ResizeControl extends PureComponent<Props, State> {
       isDisabled: isResizeDisabled,
       isGrabAreaDisabled,
       mouseIsOverNavigation,
+      onMouseOverButtonBuffer,
       navigation,
     } = this.props;
     const { isCollapsed } = navigation.state;
 
     // the button shouldn't "flip" until the drag is complete
     let ButtonIcon = ChevronLeft;
-    if (isCollapsed || (didDragOpen && isDragging)) ButtonIcon = MenuIcon;
+    if (isCollapsed || (didDragOpen && isDragging)) ButtonIcon = MenuExpandIcon;
     if (isCollapsed && flyoutIsOpen) ButtonIcon = ChevronRight;
 
     const button = (
       <Button
         onClick={this.onResizerChevronClick}
+        hitAreaSize={onMouseOverButtonBuffer ? 'large' : 'small'}
         // maintain styles when user is dragging
         isVisible={isCollapsed || mouseIsDown || mouseIsOverNavigation}
         hasHighlight={mouseIsDown || mouseIsOverGrabArea}
@@ -457,20 +477,22 @@ class ResizeControl extends PureComponent<Props, State> {
                   onMouseDown={this.handleResizeStart}
                 />
               )}
-              {collapseToggleTooltipContent ? (
-                <Tooltip
-                  content={makeTooltipNode(
-                    collapseToggleTooltipContent(isCollapsed),
-                  )}
-                  delay={600}
-                  hideTooltipOnClick
-                  position="right"
-                >
-                  {button}
-                </Tooltip>
-              ) : (
-                button
-              )}
+              <div onMouseOver={!flyoutIsOpen ? onMouseOverButtonBuffer : null}>
+                {collapseToggleTooltipContent ? (
+                  <Tooltip
+                    content={makeTooltipNode(
+                      collapseToggleTooltipContent(isCollapsed),
+                    )}
+                    delay={600}
+                    hideTooltipOnClick
+                    position="right"
+                  >
+                    {button}
+                  </Tooltip>
+                ) : (
+                  button
+                )}
+              </div>
             </Fragment>
           )}
         </Outer>

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Subscription } from 'rxjs/Subscription';
-import { isError } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 import AkSpinner from '@atlaskit/spinner';
 import { createStorybookContext } from '@atlaskit/media-test-helpers';
@@ -29,8 +28,8 @@ import { I18NWrapper } from '@atlaskit/media-test-helpers';
 const context = createStorybookContext();
 
 const handleEvent = (analyticsEvent: UIAnalyticsEventInterface) => {
-  const { payload, context } = analyticsEvent;
-  console.log('Received event:', { payload, context });
+  const { payload } = analyticsEvent;
+  console.log('EVENT:', payload);
 };
 
 export type State = {
@@ -46,26 +45,21 @@ export default class Example extends React.Component<{}, State> {
   private subscription?: Subscription;
 
   componentDidMount() {
-    this.subscription = context
-      .getMediaCollectionProvider(defaultCollectionName, 1)
-      .observable()
+    this.subscription = context.collection
+      .getItems(defaultCollectionName, { limit: 1 })
       .subscribe({
-        next: (collection: any) => {
-          if (!isError(collection)) {
-            const firstItem = collection.items[0];
-            if (firstItem) {
-              this.setState({
-                firstCollectionItem: {
-                  id: firstItem.details.id,
-                  type: firstItem.type,
-                  occurrenceKey: firstItem.details.occurrenceKey,
-                },
-              });
-            } else {
-              console.error('No items found in the collection');
-            }
+        next: items => {
+          const firstItem = items[0];
+          if (firstItem) {
+            this.setState({
+              firstCollectionItem: {
+                id: firstItem.id,
+                type: 'file',
+                occurrenceKey: firstItem.occurrenceKey,
+              },
+            });
           } else {
-            console.error(collection);
+            console.error('No items found in the collection');
           }
         },
       });
@@ -86,6 +80,35 @@ export default class Example extends React.Component<{}, State> {
             videoIdentifier,
             videoHorizontalFileItem,
             wideImageIdentifier,
+            audioItem,
+            audioItemNoCover,
+            docIdentifier,
+            largePdfIdentifier,
+            imageIdentifier2,
+            unsupportedIdentifier,
+          ],
+        },
+        identifier: imageIdentifier,
+      },
+    });
+  };
+
+  private openErrorList = () => {
+    const invalidItem: MediaViewerItem = {
+      type: 'file',
+      id: 'invalid-id',
+      occurrenceKey: 'invalid-key',
+    };
+
+    this.setState({
+      selected: {
+        dataSource: {
+          list: [
+            imageIdentifier,
+            invalidItem,
+            wideImageIdentifier,
+            videoIdentifier,
+            videoHorizontalFileItem,
             audioItem,
             audioItemNoCover,
             docIdentifier,
@@ -196,6 +219,9 @@ export default class Example extends React.Component<{}, State> {
                 <Button onClick={this.openInvalidCollection}>
                   Invalid collection name
                 </Button>
+              </li>
+              <li>
+                <Button onClick={this.openErrorList}>Error list</Button>
               </li>
             </ButtonList>
           </Group>

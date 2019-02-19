@@ -6,7 +6,7 @@ import {
   doc,
   p,
   randomId,
-  createEditor,
+  createEditorFactory,
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
 
@@ -17,7 +17,6 @@ import {
 } from '../../../src/plugins/media/pm-plugins/main';
 import { insertFileFromDataUrl } from '../../../src/utils/action';
 import mediaPlugin from '../../../src/plugins/media';
-import pickerFacadeLoader from '../../../src/plugins/media/picker-facade-loader';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -30,18 +29,17 @@ const mediaProvider = getFreshMediaProvider();
 const providerFactory = new ProviderFactory();
 providerFactory.setProvider('mediaProvider', mediaProvider);
 
-const editor = (doc: any, uploadErrorHandler?: () => void) =>
-  createEditor<MediaPluginState>({
-    doc,
-    editorPlugins: [mediaPlugin()],
-    pluginKey: stateKey,
-    providerFactory,
-  });
-
-const waitForPluginStateChange = async (pluginState: MediaPluginState) =>
-  new Promise(resolve => pluginState.subscribe(resolve));
-
 describe(name, () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
+
+  const editor = (doc: any, uploadErrorHandler?: () => void) =>
+    createEditor({
+      doc,
+      editorPlugins: [mediaPlugin()],
+      pluginKey: stateKey,
+      providerFactory,
+    });
+
   describe('Utils -> Action', () => {
     describe('#insertFileFromDataUrl', () => {
       it('should invoke binary picker when calling insertFileFromDataUrl', async () => {
@@ -50,10 +48,11 @@ describe(name, () => {
           .stub(pluginState, 'collectionFromProvider' as any)
           .returns(testCollectionName);
 
-        await pickerFacadeLoader();
         const provider = await mediaProvider;
         await provider.uploadContext;
-        await waitForPluginStateChange(pluginState);
+
+        // wait a tick for await MediaPicker in picker-facade
+        await new Promise(resolve => setTimeout(resolve, 0));
 
         pluginState.binaryPicker!.upload = sinon.spy();
 
@@ -69,7 +68,6 @@ describe(name, () => {
         );
         collectionFromProvider.restore();
         pluginState.destroy();
-        editorView.destroy();
       });
     });
   });

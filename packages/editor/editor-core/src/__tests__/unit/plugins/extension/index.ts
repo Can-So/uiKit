@@ -1,8 +1,9 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p as paragraph,
   bodiedExtension,
+  extension,
   inlineExtension,
   macroProvider,
   MockMacroProvider,
@@ -11,7 +12,10 @@ import {
   bodiedExtensionData,
   sleep,
   h5,
+  media,
+  mediaSingle,
   underline,
+  randomId,
 } from '@atlaskit/editor-test-helpers';
 import { NodeSelection } from 'prosemirror-state';
 import {
@@ -22,18 +26,26 @@ import {
 import { pluginKey } from '../../../../plugins/extension/plugin';
 import extensionPlugin from '../../../../plugins/extension';
 import { findParentNodeOfType } from 'prosemirror-utils';
+import { setNodeSelection } from '../../../../utils';
+import { mediaPlugin } from '../../../../plugins';
 
 const macroProviderPromise = Promise.resolve(macroProvider);
 
+const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
+const temporaryFileId = `temporary:${randomId()}`;
+
 describe('extension', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,
-      editorPlugins: [extensionPlugin],
+      editorPlugins: [extensionPlugin, mediaPlugin({ allowMediaSingle: true })],
       editorProps: {
         allowExtension: {
           allowBreakout: true,
         },
+        media: { allowMediaSingle: true },
       },
     });
   };
@@ -195,7 +207,7 @@ describe('extension', () => {
     });
 
     describe('removeExtension', () => {
-      it('should set "element" prop in plugin state to null and remove the node', () => {
+      it('should set "element" prop in plugin state to null and remove the node, if it is an bodied extension', () => {
         const { editorView } = editor(
           doc(bodiedExtension(extensionAttrs)(paragraph('te{<>}xt'))),
         );
@@ -208,6 +220,46 @@ describe('extension', () => {
         expect(pluginState.element).toEqual(null);
         expect(editorView.state.doc).toEqualDocument(doc(paragraph('')));
       });
+
+      it('should set "element" prop in plugin state to null and remove the node, if it is an extension', () => {
+        const { editorView } = editor(doc(extension(extensionAttrs)()));
+
+        expect(removeExtension()(editorView.state, editorView.dispatch)).toBe(
+          true,
+        );
+
+        const pluginState = pluginKey.getState(editorView.state);
+        expect(pluginState.element).toEqual(null);
+        expect(editorView.state.doc).toEqualDocument(doc(paragraph('')));
+      });
+    });
+
+    it('should remove the extension node even if other nodes like media is selected', () => {
+      const { editorView } = editor(
+        doc(
+          bodiedExtension(extensionAttrs)(
+            mediaSingle({ layout: 'center' })(
+              media({
+                id: temporaryFileId,
+                __key: temporaryFileId,
+                type: 'file',
+                collection: testCollectionName,
+                __fileMimeType: 'image/png',
+              })(),
+            ),
+          ),
+        ),
+      );
+
+      setNodeSelection(editorView, 2);
+
+      expect(removeExtension()(editorView.state, editorView.dispatch)).toBe(
+        true,
+      );
+
+      const pluginState = pluginKey.getState(editorView.state);
+      expect(pluginState.element).toEqual(null);
+      expect(editorView.state.doc).toEqualDocument(doc(paragraph('')));
     });
   });
 
@@ -243,7 +295,6 @@ describe('extension', () => {
       )!;
       expect(node).toBeDefined();
       expect(node!.attrs.layout).toBe('full-width');
-      editorView.destroy();
     });
 
     it('respects the layout attribute', () => {
@@ -264,8 +315,6 @@ describe('extension', () => {
       expect(getExtensionElement.getAttribute('data-layout')).toBe(
         'full-width',
       );
-
-      editorView.destroy();
     });
 
     it('sets the data-layout attribute on the extension DOM element', () => {
@@ -288,8 +337,6 @@ describe('extension', () => {
       expect(getExtensionElement.getAttribute('data-layout')).toBe(
         'full-width',
       );
-
-      editorView.destroy();
     });
 
     it('sets layout attributes uniquely on extension elements', () => {
@@ -327,7 +374,6 @@ describe('extension', () => {
       expect(getSecondExtensionElement.getAttribute('data-layout')).toBe(
         'full-width',
       );
-      editorView.destroy();
     });
   });
 });

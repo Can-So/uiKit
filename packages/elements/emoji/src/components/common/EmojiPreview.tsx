@@ -1,19 +1,20 @@
+import AkButton from '@atlaskit/button';
+import AddIcon from '@atlaskit/icon/glyph/add';
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import * as classNames from 'classnames';
-
-import AddIcon from '@atlaskit/icon/glyph/add';
-import AkButton from '@atlaskit/button';
-import * as styles from './styles';
-import EmojiButton from '../../components/common/EmojiButton';
+import { FormattedMessage } from 'react-intl';
 import CachingEmoji from '../../components/common/CachingEmoji';
-import ToneSelector from './ToneSelector';
+import EmojiButton from '../../components/common/EmojiButton';
 import {
   EmojiDescription,
   EmojiDescriptionWithVariations,
   OnToneSelected,
   ToneSelection,
 } from '../../types';
+import { messages } from '../i18n';
+import * as styles from './styles';
+import ToneSelector from './ToneSelector';
 
 export interface Props {
   emoji?: EmojiDescription;
@@ -39,7 +40,7 @@ export default class EmojiPreview extends PureComponent<Props, State> {
     });
   };
 
-  onToneSelected = toneValue => {
+  onToneSelected = (toneValue: number) => {
     this.setState({
       selectingTone: false,
     });
@@ -120,6 +121,7 @@ export default class EmojiPreview extends PureComponent<Props, State> {
     );
   }
 
+  // note: emoji-picker-add-emoji className is used by pollinator synthetic checks
   renderAddOwnEmoji() {
     const { onOpenUpload, uploadEnabled } = this.props;
     const { selectingTone } = this.state;
@@ -129,14 +131,20 @@ export default class EmojiPreview extends PureComponent<Props, State> {
     }
     return (
       <div className={styles.AddCustomEmoji}>
-        <AkButton
-          onClick={onOpenUpload}
-          iconBefore={<AddIcon label="add custom emoji" size="small" />}
-          appearance="subtle"
-          className="emoji-picker-add-emoji"
-        >
-          Add your own emoji
-        </AkButton>
+        <FormattedMessage {...messages.addCustomEmojiLabel}>
+          {label => (
+            <AkButton
+              onClick={onOpenUpload}
+              iconBefore={<AddIcon label={label as string} size="small" />}
+              appearance="subtle"
+              className={
+                styles.addCustomEmojiButton + ' emoji-picker-add-emoji'
+              }
+            >
+              {label as string}
+            </AkButton>
+          )}
+        </FormattedMessage>
       </div>
     );
   }

@@ -3,14 +3,16 @@ import { EditorState, Transaction } from 'prosemirror-state';
 import { Node } from 'prosemirror-model';
 import { TypeAheadItem } from '../type-ahead/types';
 
+export type QuickInsertActionInsert = (
+  node?: Node | Object | string,
+  opts?: { selectInlineNode?: boolean },
+) => Transaction;
+
 export type QuickInsertItem = TypeAheadItem & {
   keywords?: Array<string>;
   priority?: number;
   action: (
-    insert: (
-      node?: Node | Object | string,
-      opts?: { selectInlineNode?: boolean },
-    ) => Transaction,
+    insert: QuickInsertActionInsert,
     state: EditorState,
   ) => Transaction | false;
 };

@@ -1,24 +1,19 @@
+import { EditorView } from '@atlaskit/media-editor';
 import { deselectItem } from '../../../actions/deselectItem';
 import * as React from 'react';
-import { Component, ComponentClass } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { BinaryUploader } from '../../../../components/binary';
+import { BinaryUploader } from '../../../../components/types';
 import { State, EditorData, EditorError, FileReference } from '../../../domain';
 import ErrorView from './errorView/errorView';
 import { SpinnerView } from './spinnerView/spinnerView';
-import { MainContainer } from './styles';
 import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
-import { editorShowImage } from '../../../actions/editorShowImage';
-import { EditorViewOwnProps } from './editorView/editorView';
-import editorViewLoader from './editorViewLoader';
+import { CenterView } from './styles';
+
 export interface MainEditorViewStateProps {
   readonly editorData?: EditorData;
-}
-
-export interface MainEditorViewState {
-  EditorViewComponent?: ComponentClass<EditorViewOwnProps>;
 }
 
 export interface MainEditorViewOwnProps {
@@ -28,10 +23,6 @@ export interface MainEditorViewOwnProps {
 export interface MainEditorViewDispatchProps {
   readonly onCloseEditor: (selection: Selection) => void;
   readonly onShowEditorError: (error: EditorError) => void;
-  readonly onShowEditorImage: (
-    imageUrl: string,
-    originalFile?: FileReference,
-  ) => void;
   readonly onDeselectFile: (fileId: string) => void;
 }
 
@@ -39,60 +30,31 @@ export type MainEditorViewProps = MainEditorViewStateProps &
   MainEditorViewOwnProps &
   MainEditorViewDispatchProps;
 
-export class MainEditorView extends Component<
-  MainEditorViewProps,
-  MainEditorViewState
-> {
-  static EditorViewComponent: ComponentClass<EditorViewOwnProps>;
-
-  state: MainEditorViewState = {
-    EditorViewComponent: MainEditorView.EditorViewComponent,
-  };
-
-  componentDidMount() {
-    this.loadEditorView(this.props);
-  }
-
-  componentWillReceiveProps(newProps: MainEditorViewProps) {
-    this.loadEditorView(newProps);
-  }
-
-  private loadEditorView = async (props: MainEditorViewProps) => {
-    const { editorData } = props;
-    if (!editorData) {
-      return;
-    }
-
-    const EditorViewComponent = await editorViewLoader();
-
-    MainEditorView.EditorViewComponent = EditorViewComponent;
-    this.setState({
-      EditorViewComponent,
-    });
-  };
-
+export class MainEditorView extends Component<MainEditorViewProps> {
   render(): JSX.Element | null {
     const { editorData } = this.props;
     if (editorData) {
-      return <MainContainer>{this.renderContent(editorData)}</MainContainer>;
+      return this.renderContent(editorData);
     } else {
       return null;
     }
   }
 
   private renderContent = (editorData: EditorData): JSX.Element => {
-    const { EditorViewComponent } = this.state;
     const { imageUrl, originalFile, error } = editorData;
 
     if (error) {
       return this.renderError(error);
-    } else if (imageUrl && originalFile && EditorViewComponent) {
+    } else if (imageUrl && originalFile) {
       return (
-        <EditorViewComponent
-          onSave={this.onEditorSave(originalFile)}
-          onCancel={this.onCancel}
-          onError={this.onEditorError}
-        />
+        <CenterView>
+          <EditorView
+            imageUrl={imageUrl}
+            onSave={this.onEditorSave(originalFile)}
+            onCancel={this.onCancel}
+            onError={this.onEditorError}
+          />
+        </CenterView>
       );
     } else {
       return <SpinnerView onCancel={this.onCancel} />;
@@ -139,8 +101,6 @@ export default connect<
 >(
   ({ editorData }) => ({ editorData }),
   dispatch => ({
-    onShowEditorImage: (imageUrl, originalFile) =>
-      dispatch(editorShowImage(imageUrl, originalFile)),
     onShowEditorError: ({ message, retryHandler }) =>
       dispatch(editorShowError(message, retryHandler)),
     onCloseEditor: (selection: Selection) => dispatch(editorClose(selection)),

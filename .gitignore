@@ -10,8 +10,9 @@ coverage/
 junit.xml
 test-reports/
 browserstack.err
-**/__image_snapshots__/
+**/__image_snapshots__/__diff_output__/
 .measure-output/
+imageSnapshotFailures/
 
 # created by build-stats tool
 .data/
@@ -41,3 +42,6 @@ secrets.json
 
 # this is created only in deploy-branch-build-dists builds in CI
 dists/
+
+# allow using .envrc to automate local environment, exclude from CVS
+.envrc

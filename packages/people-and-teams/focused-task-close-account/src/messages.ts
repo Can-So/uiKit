@@ -1,9 +1,6 @@
-/**
- * Once copy is finalised, these message objects should be wrapped in a call to react-intl::defineMessages()
- * This makes them visible to the i18n pipeline where they'll receive translations from Transifex.
- */
+import { defineMessages, Messages as ReactIntlMessages } from 'react-intl';
 
-export const commonMessages = {
+export const commonMessages: ReactIntlMessages = defineMessages({
   deactivateAccount: {
     id: 'focused-task-close-account.deactivate-account',
     defaultMessage: 'Deactivate account',
@@ -45,14 +42,21 @@ export const commonMessages = {
     description:
       'Text for a button for a user to go back to the previous step of a process',
   },
-};
+});
 
-export const overviewMessages = {
-  heading: {
-    id: 'focused-task-close-account.delete-account.overview.heading',
-    defaultMessage: 'Delete account',
+export const overviewMessages: ReactIntlMessages = defineMessages({
+  headingSelf: {
+    id: 'focused-task-close-account.delete-account.overview.heading.self',
+    defaultMessage: 'Delete your account',
     description:
       "Heading for the screen that explains what happens when a user's account is deleted",
+  },
+
+  headingAdmin: {
+    id: 'focused-task-close-account.delete-account.overview.heading.admin',
+    defaultMessage: 'Delete account',
+    description:
+      "Heading for the screen that explains what happens when an admin deletes a user's account",
   },
 
   firstLineSelf: {
@@ -78,6 +82,15 @@ export const overviewMessages = {
       'A warning message shown to users when they try to delete their account.',
   },
 
+  warningSectionBodyDeactivated: {
+    id:
+      'focused-task-close-account.delete-account.overview.warning-section.deactivated.body',
+    defaultMessage:
+      'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    description:
+      'A warning message shown to deactivated users when they try to delete their account.',
+  },
+
   paragraphAboutToDeleteAdmin: {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin',
@@ -97,7 +110,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin',
     defaultMessage:
-      '{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to: ',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to: ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -105,7 +118,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self',
     defaultMessage:
-      "You'll <b>immediately lose access</b> to all Atlassian services, including sites and products. You currently have access to:",
+      "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access.',
   },
@@ -114,8 +127,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites',
     defaultMessage:
-      '{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. Currently, they don’t have access to any, except <a href="https://confluence.atlassian.com/display/Cloud/Organization+administration">services</a> ' +
-      'like Community and Marketplace. ',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace. ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -123,7 +135,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites',
     defaultMessage:
-      "You'll <b>immediately lose access</b> to all Atlassian services, including sites and products.",
+      "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access.',
   },
@@ -132,7 +144,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote',
     defaultMessage:
-      'Other Atlassian services, such as Atlassian Community and Marketplace. ',
+      'Other Atlassian account services, such as Atlassian Community and Marketplace. ',
     description:
       "A paragraph explaining that upon deletion the user may also lose access to services that weren't listed prior.",
   },
@@ -141,7 +153,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.content-created.admin',
     defaultMessage:
-      "The content they've created will remain in Atlassian services.",
+      "The content they've created will remain in Atlassian account services.",
     description:
       "A paragraph explaining that although the user's details will be deleted, content they have created will remain.",
   },
@@ -149,7 +161,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.content-created.self',
     defaultMessage:
-      "The content you've created will remain in Atlassian services.",
+      "The content you've created will remain in Atlassian account services.",
     description:
       "A paragraph explaining that although the user's details will be deleted, content they have created will remain.",
   },
@@ -175,7 +187,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin',
     defaultMessage:
-      "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian services within 30 days, " +
+      "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, " +
       'except in a few cases where required for legitimate business or legal purposes. ',
     description:
       "A paragraph explaining what parts of the user's personal data will be deleted",
@@ -184,7 +196,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self',
     defaultMessage:
-      "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian services within 30 days, " +
+      "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, " +
       'except in a few cases where required for legitimate business or legal purposes. ',
     description:
       "A paragraph explaining what parts of the user's personal data will be deleted",
@@ -333,22 +345,158 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self',
     defaultMessage:
-      'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+      'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
     description:
       'Text elaborating on the note about apps storing personal data',
   },
-};
+});
 
-export const contentPreviewMessages = {
+export const deactivateUserOverviewMessages: ReactIntlMessages = defineMessages(
+  {
+    headingSelf: {
+      id: 'focused-task-close-account.deactivate-account.overview.heading.self',
+      defaultMessage: 'Deactivate account',
+      description:
+        "Heading for the screen that explains what happens when a user's account is deactivated",
+    },
+
+    headingAdmin: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.heading.admin',
+      defaultMessage: 'Deactivate account',
+      description:
+        "Heading for the screen that explains what happens when an admin deactivates a user's account",
+    },
+
+    firstLineSelf: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.first.line.self',
+      defaultMessage: "You're about to deactivate the user account of:",
+      description:
+        'First line for the screen when the user is about to deactivate self',
+    },
+
+    firstLineAdmin: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.first.line.admin',
+      defaultMessage: "You're about to deactivate the user account of:",
+      description:
+        'First line for the screen when the admin is about to deactivate another user',
+    },
+
+    lastLineSelf: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.last.line.self',
+      defaultMessage: 'You can reactivate the account at any time.',
+      description:
+        'First line for the screen when the user is about to deactivate self',
+    },
+
+    lastLineAdmin: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.last.line.admin',
+      defaultMessage: 'You can reactivate the account at any time.',
+      description:
+        'First line for the screen when the admin is about to deactivate another user',
+    },
+
+    paragraphAboutToDeactivateAdmin: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin',
+      defaultMessage: 'When you deactivate the account:',
+      description:
+        'A paragraph explaining that the admin is about to deactivate another user',
+    },
+    paragraphAboutToDeactivateSelf: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self',
+      defaultMessage: 'When you deactivate the account:',
+      description:
+        'A paragraph explaining that user is about to deactivate their own account',
+    },
+
+    paragraphLoseAccessAdmin: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin',
+      defaultMessage:
+        '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to: ',
+      description:
+        'A paragraph explaining that upon deactivation the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deactivated can currently access. {fullName} is filled in by the web app.',
+    },
+    paragraphLoseAccessSelf: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self',
+      defaultMessage:
+        "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+      description:
+        'A paragraph explaining that upon deactivation the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deactivated can currently access.',
+    },
+
+    paragraphLoseAccessAdminNoSites: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites',
+      defaultMessage:
+        '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace. ',
+      description:
+        'A paragraph explaining that upon deactivation the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deactivated can currently access. {fullName} is filled in by the web app.',
+    },
+    paragraphLoseAccessSelfNoSites: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites',
+      defaultMessage:
+        "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+      description:
+        'A paragraph explaining that upon deactivation the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deactivated can currently access.',
+    },
+    paragraphLoseAccessFootnote: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote',
+      defaultMessage:
+        'Other Atlassian account services, such as Atlassian Community and Marketplace. ',
+      description:
+        "A paragraph explaining that upon deletion the user may also lose access to services that weren't listed prior.",
+    },
+    paragraphPersonalDataAdmin: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin',
+      defaultMessage:
+        "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+      description:
+        "A paragraph explaining what will happen to the user's personal data",
+    },
+    paragraphPersonalDataSelf: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self',
+      defaultMessage:
+        "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+      description:
+        "A paragraph explaining what will happen to the user's personal data",
+    },
+    paragraphBillingAdmin: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin',
+      defaultMessage: "We'll no longer bill you for them.",
+      description: 'A paragraph explaining the billing for the products',
+    },
+    paragraphBillingSelf: {
+      id:
+        'focused-task-close-account.deactivate-account.overview.paragraph.billing.self',
+      defaultMessage: "We'll no longer bill you for them.",
+      description: 'A paragraph explaining the billing for the products',
+    },
+  },
+);
+
+export const contentPreviewMessages: ReactIntlMessages = defineMessages({
   heading: {
     id: 'focused-task-close-account.delete-account.content-preview.heading',
     defaultMessage: 'How users will see this account',
     description:
       'Heading for the screen that explains what other users will see when viewing the deleted/deactivated user',
   },
-};
+});
 
-export const dropDownListMessages = {
+export const dropDownListMessages: ReactIntlMessages = defineMessages({
   expandButton: {
     id: 'focused-task-close-account.delete-account.drop-down-expand-button',
     defaultMessage: '{num} more',
@@ -361,4 +509,4 @@ export const dropDownListMessages = {
     defaultMessage: 'Show less',
     description: 'Button text displaying text on collapse',
   },
-};
+});

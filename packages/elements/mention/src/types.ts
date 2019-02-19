@@ -26,7 +26,6 @@ export interface MentionDescription {
   lozenge?: string;
   presence?: Presence;
   accessLevel?: string;
-  weight?: number;
   inContext?: boolean;
   userType?: string;
 }
@@ -67,9 +66,9 @@ enum UserType {
   SYSTEM,
 }
 
-export function isRestricted(accessLevel) {
+export function isRestricted(accessLevel?: string): boolean {
   return (
-    accessLevel && accessLevel !== UserAccessLevel[UserAccessLevel.CONTAINER]
+    !!accessLevel && accessLevel !== UserAccessLevel[UserAccessLevel.CONTAINER]
   );
 }
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, FileDetails } from '@atlaskit/media-core';
+import { Context, FileDetails, isPreviewableType } from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
@@ -14,16 +14,15 @@ import {
   CardState,
   CardEvent,
 } from '../..';
-import { Identifier, isPreviewableType, FileIdentifier } from '../domain';
+import { Identifier, FileIdentifier } from '../domain';
 import { CardView } from '../cardView';
 import { LazyContent } from '../../utils/lazyContent';
 import { getBaseAnalyticsContext } from '../../utils/analyticsUtils';
 import { getDataURIDimension } from '../../utils/getDataURIDimension';
 import { getDataURIFromFileState } from '../../utils/getDataURIFromFileState';
-import { getLinkMetadata, extendMetadata } from '../../utils/metadata';
+import { extendMetadata } from '../../utils/metadata';
 import {
   isFileIdentifier,
-  isUrlPreviewIdentifier,
   isExternalImageIdentifier,
   isDifferentIdentifier,
 } from '../../utils/identifier';
@@ -33,6 +32,10 @@ import { InlinePlayer } from '../inlinePlayer';
 
 export class Card extends Component<CardProps, CardState> {
   private hasBeenMounted: boolean = false;
+  private onClickPayload?: {
+    result: CardEvent;
+    analyticsEvent?: UIAnalyticsEventInterface;
+  };
 
   subscription?: Subscription;
   static defaultProps: Partial<CardProps> = {
@@ -88,9 +91,9 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   componentWillUnmount() {
+    this.hasBeenMounted = false;
     this.unsubscribe();
     this.releaseDataURI();
-    this.hasBeenMounted = false;
   }
 
   releaseDataURI = () => {
@@ -134,53 +137,35 @@ export class Card extends Component<CardProps, CardState> {
       return;
     }
 
-    if (identifier.mediaItemType !== 'file') {
-      try {
-        const metadata = await getLinkMetadata(identifier, context);
-        this.notifyStateChange({
-          status: 'complete',
-          metadata,
-        });
-      } catch (error) {
-        this.notifyStateChange({
-          error,
-          status: 'error',
-        });
-      }
-
-      return;
-    }
-
-    const { id, collectionName } = identifier;
+    const { id, collectionName, occurrenceKey } = identifier;
     const resolvedId = await id;
     this.unsubscribe();
     this.subscription = context.file
-      .getFileState(resolvedId, { collectionName })
+      .getFileState(resolvedId, { collectionName, occurrenceKey })
       .subscribe({
-        next: async state => {
-          const {
-            dataURI: currentDataURI,
-            metadata: currentMetadata,
-          } = this.state;
+        next: async fileState => {
+          let currentDataURI = this.state.dataURI;
+          const { metadata: currentMetadata } = this.state;
           const metadata = extendMetadata(
-            state,
+            fileState,
             currentMetadata as FileDetails,
           );
-          let dataURI: string | undefined;
 
           if (!currentDataURI) {
             const {
-              src: dataURI,
+              src,
               orientation: previewOrientation,
-            } = await getDataURIFromFileState(state);
-
-            this.notifyStateChange({ dataURI, previewOrientation });
+            } = await getDataURIFromFileState(fileState);
+            currentDataURI = src;
+            this.notifyStateChange({
+              dataURI: currentDataURI,
+              previewOrientation,
+            });
           }
 
-          switch (state.status) {
+          switch (fileState.status) {
             case 'uploading':
-              const { progress } = state;
-
+              const { progress } = fileState;
               this.notifyStateChange({
                 status: 'uploading',
                 progress,
@@ -188,7 +173,7 @@ export class Card extends Component<CardProps, CardState> {
               });
               break;
             case 'processing':
-              if (dataURI) {
+              if (currentDataURI) {
                 this.notifyStateChange({
                   progress: 1,
                   status: 'complete',
@@ -202,7 +187,11 @@ export class Card extends Component<CardProps, CardState> {
               }
               break;
             case 'processed':
-              if (metadata.mediaType && isPreviewableType(metadata.mediaType)) {
+              if (
+                !currentDataURI &&
+                metadata.mediaType &&
+                isPreviewableType(metadata.mediaType)
+              ) {
                 const { appearance, dimensions, resizeMode } = this.props;
                 const options = {
                   appearance,
@@ -212,13 +201,14 @@ export class Card extends Component<CardProps, CardState> {
                 const width = getDataURIDimension('width', options);
                 const height = getDataURIDimension('height', options);
                 try {
-                  const allowAnimated = appearance !== 'small';
+                  const mode =
+                    resizeMode === 'stretchy-fit' ? 'full-fit' : resizeMode;
                   const blob = await context.getImage(resolvedId, {
                     collection: collectionName,
-                    mode: resizeMode,
+                    mode,
                     height,
                     width,
-                    allowAnimated,
+                    allowAnimated: true,
                   });
                   const dataURI = URL.createObjectURL(blob);
                   this.releaseDataURI();
@@ -245,7 +235,12 @@ export class Card extends Component<CardProps, CardState> {
   }
 
   notifyStateChange = (state: Partial<CardState>) => {
-    this.setState(state as any, this.onLoadingChangeCallback);
+    if (this.hasBeenMounted) {
+      this.setState(
+        state as Pick<CardState, keyof CardState>,
+        this.onLoadingChangeCallback,
+      );
+    }
   };
 
   unsubscribe = () => {
@@ -253,7 +248,9 @@ export class Card extends Component<CardProps, CardState> {
       this.subscription.unsubscribe();
     }
 
-    this.setState({ dataURI: undefined });
+    if (this.hasBeenMounted) {
+      this.setState({ dataURI: undefined });
+    }
   };
 
   // This method is called when card fails and user press 'Retry'
@@ -265,9 +262,7 @@ export class Card extends Component<CardProps, CardState> {
 
   get analyticsContext(): CardAnalyticsContext {
     const { identifier } = this.props;
-    const id = isUrlPreviewIdentifier(identifier)
-      ? identifier.url
-      : isExternalImageIdentifier(identifier)
+    const id = isExternalImageIdentifier(identifier)
       ? 'external-image'
       : identifier.id;
 
@@ -296,6 +291,12 @@ export class Card extends Component<CardProps, CardState> {
   onClick = (result: CardEvent, analyticsEvent?: UIAnalyticsEventInterface) => {
     const { onClick, useInlinePlayer } = this.props;
     const { mediaItemDetails } = result;
+
+    this.onClickPayload = {
+      result,
+      analyticsEvent,
+    };
+
     if (onClick) {
       onClick(result, analyticsEvent);
     }
@@ -316,14 +317,24 @@ export class Card extends Component<CardProps, CardState> {
     });
   };
 
+  onInlinePlayerClick = () => {
+    const { onClick } = this.props;
+    if (onClick && this.onClickPayload) {
+      onClick(this.onClickPayload.result, this.onClickPayload.analyticsEvent);
+    }
+  };
+
   renderInlinePlayer = () => {
-    const { identifier, context, dimensions } = this.props;
+    const { identifier, context, dimensions, selected } = this.props;
+
     return (
       <InlinePlayer
         context={context}
         dimensions={dimensions}
         identifier={identifier as FileIdentifier}
         onError={this.onInlinePlayerError}
+        onClick={this.onInlinePlayerClick}
+        selected={selected}
       />
     );
   };

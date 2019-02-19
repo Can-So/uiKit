@@ -1,13 +1,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass, LiHTMLAttributes } from 'react';
-import {
-  akColorB200,
-  akColorB400,
-  akColorN30,
-  akColorN90,
-  akColorN900,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
 export const FolderViewerWrapper: ComponentClass<
   HTMLAttributes<{}>
@@ -53,6 +47,7 @@ export const FolderViewerRow: ComponentClass<
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 
   width: 100%;
   height: 48px;
@@ -64,14 +59,15 @@ export const FolderViewerRow: ComponentClass<
 
   ${({ isSelected }: SelectableProps) =>
     isSelected
-      ? `background-color: ${akColorB200};`
+      ? `background-color: ${colors.B200};`
       : 'background-color: white;'} &:hover {
     ${({ isSelected }: SelectableProps) =>
       isSelected
-        ? `background-color: ${akColorB200};`
-        : `background-color: ${akColorN30};`};
+        ? `background-color: ${colors.B200};`
+        : `background-color: ${colors.N30};`};
   }
 `;
+FolderViewerRow.displayName = 'FolderViewerRow';
 
 export const FileMetadataGroup: ComponentClass<HTMLAttributes<{}>> = styled.div`
   display: flex;
@@ -96,17 +92,17 @@ export const FileName: ComponentClass<
   text-overflow: ellipsis;
 
   ${({ isSelected }: SelectableProps) =>
-    isSelected ? 'color: white;' : `color: ${akColorN900}`};
+    isSelected ? 'color: white;' : `color: ${colors.N900}`};
 `;
 
 export const FileCreateDate: ComponentClass<HTMLAttributes<{}>> = styled.div`
-  color: ${akColorN90};
+  color: ${colors.N90};
   text-align: right;
   padding: 0 10px 0 10px;
 `;
 
 export const FileSize: ComponentClass<HTMLAttributes<{}>> = styled.div`
-  color: ${akColorN90};
+  color: ${colors.N90};
   min-width: 70px;
   text-align: right;
   padding: 0 0 0 10px;
@@ -115,7 +111,7 @@ export const FileSize: ComponentClass<HTMLAttributes<{}>> = styled.div`
 export const SelectedFileIconWrapper: ComponentClass<
   HTMLAttributes<{}>
 > = styled.div`
-  color: ${akColorB400} !important;
+  color: ${colors.B400} !important;
   right: 23px;
   top: 12px;
 `;

@@ -1,4 +1,5 @@
 import { SyntheticEvent } from 'react';
+import { messages } from './components/i18n';
 import { CategoryId } from './components/picker/categories';
 
 export type CategoryId = CategoryId;
@@ -167,7 +168,7 @@ export interface EmojiResponse {
 
 export interface CategoryDescription {
   id: string;
-  name: string;
+  name: keyof typeof messages;
   icon: any;
   order: number;
 }
@@ -188,7 +189,7 @@ export interface OnCategory {
   (categoryId: CategoryId | null): void;
 }
 
-export const enum SearchSort {
+export enum SearchSort {
   // no sort - just the default ordering of emoji
   None,
   // a sort taking into account a number of factors including, usage, closeness of match to the query, etc
@@ -224,3 +225,5 @@ export interface User {
 }
 
 export type OptionalUser = User | undefined;
+
+export type Message = React.ReactNode;

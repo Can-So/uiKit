@@ -48,13 +48,25 @@ import {
   alignment,
   editorDisabledPlugin,
   indentationPlugin,
+  annotationPlugin,
+  compositionPlugin,
+  analyticsPlugin,
 } from '../plugins';
 
 /**
  * Returns list of plugins that are absolutely necessary for editor to work
  */
-export function getDefaultPluginsList(props: EditorProps): EditorPlugin[] {
-  return [
+export function getDefaultPluginsList(
+  props: EditorProps,
+  createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
+): EditorPlugin[] {
+  let defaultPluginList: EditorPlugin[] = [];
+
+  if (props.allowAnalyticsGASV3) {
+    defaultPluginList.push(analyticsPlugin(createAnalyticsEvent));
+  }
+
+  return defaultPluginList.concat([
     pastePlugin,
     basePlugin,
     blockTypePlugin,
@@ -66,7 +78,7 @@ export function getDefaultPluginsList(props: EditorProps): EditorPlugin[] {
     typeAheadPlugin,
     unsupportedContentPlugin,
     editorDisabledPlugin,
-  ];
+  ]);
 }
 
 /**
@@ -76,7 +88,7 @@ export default function createPluginsList(
   props: EditorProps,
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
 ): EditorPlugin[] {
-  const plugins = getDefaultPluginsList(props);
+  const plugins = getDefaultPluginsList(props, createAnalyticsEvent);
 
   if (props.allowBreakout && props.appearance === 'full-page') {
     plugins.push(breakoutPlugin);
@@ -103,7 +115,7 @@ export default function createPluginsList(
   }
 
   if (props.media || props.mediaProvider) {
-    plugins.push(mediaPlugin(props.media));
+    plugins.push(mediaPlugin(props.media, props.appearance));
   }
 
   if (props.allowCodeBlocks) {
@@ -218,6 +230,10 @@ export default function createPluginsList(
     }),
   );
 
+  if (props.allowConfluenceInlineComment) {
+    plugins.push(annotationPlugin);
+  }
+
   plugins.push(gapCursorPlugin);
   plugins.push(gridPlugin);
   plugins.push(submitEditorPlugin);
@@ -226,6 +242,10 @@ export default function createPluginsList(
 
   if (props.appearance !== 'mobile') {
     plugins.push(quickInsertPlugin);
+  }
+
+  if (props.appearance === 'mobile') {
+    plugins.push(compositionPlugin);
   }
 
   if (props.appearance === 'message') {

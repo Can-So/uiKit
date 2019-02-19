@@ -1,47 +1,41 @@
-export type ADFNode = {
-  type: string;
-  attrs?: { [name: string]: any };
-  content?: Array<ADFNode>;
-  marks?: Array<ADFMark>;
-  text?: string;
-};
-
-export type ADFMark = {
-  type: string;
-  attrs: { [name: string]: any };
-};
+import { ADFEntity } from '../types';
 
 export type visitor = (
-  node: ADFNode,
-  parent: ADFNodeParent,
-) => ADFNode | false | undefined | void;
+  node: ADFEntity,
+  parent: EntityParent,
+  index: number,
+) => ADFEntity | false | undefined | void;
 
-export type ADFNodeParent = { node?: ADFNode; parent?: ADFNodeParent };
+export type EntityParent = { node?: ADFEntity; parent?: EntityParent };
 
-export function validateVisitors(visitors: { [type: string]: visitor }) {
+export function validateVisitors(_visitors: { [type: string]: visitor }) {
   return true;
 }
 
-export function traverse(adf: ADFNode, visitors: { [type: string]: visitor }) {
+export function traverse(
+  adf: ADFEntity,
+  visitors: { [type: string]: visitor },
+) {
   if (!validateVisitors(visitors)) {
     throw new Error(
       `Visitors are not valid: "${Object.keys(visitors).join(', ')}"`,
     );
   }
 
-  return traverseNode(adf, { node: undefined }, visitors);
+  return traverseNode(adf, { node: undefined }, visitors, 0);
 }
 
 function traverseNode(
-  adfNode: ADFNode,
-  parent: ADFNodeParent,
+  adfNode: ADFEntity,
+  parent: EntityParent,
   visitors: { [type: string]: visitor },
-): ADFNode | false {
+  index: number,
+): ADFEntity | false {
   const visitor = visitors[adfNode.type] || visitors['any'];
 
   let newNode = { ...adfNode };
   if (visitor) {
-    const processedNode = visitor({ ...newNode }, parent);
+    const processedNode = visitor({ ...newNode }, parent, index);
 
     if (processedNode === false) {
       return false;
@@ -51,17 +45,21 @@ function traverseNode(
   }
 
   if (newNode.content) {
-    newNode.content = newNode.content.reduce<Array<ADFNode>>((acc, node) => {
-      const processedNode = traverseNode(
-        node,
-        { node: newNode, parent },
-        visitors,
-      );
-      if (processedNode !== false) {
-        acc.push(processedNode);
-      }
-      return acc;
-    }, []);
+    newNode.content = newNode.content.reduce<Array<ADFEntity>>(
+      (acc, node, idx) => {
+        const processedNode = traverseNode(
+          node,
+          { node: newNode, parent },
+          visitors,
+          idx,
+        );
+        if (processedNode !== false) {
+          acc.push(processedNode);
+        }
+        return acc;
+      },
+      [],
+    );
   }
 
   return newNode;

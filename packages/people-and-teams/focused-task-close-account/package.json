@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/focused-task-close-account",
-  "version": "0.3.4",
+  "version": "0.8.1",
   "description": "This package contains all of the UI components needed to assemble the focused tasks for deactivating and deleting users' accounts in accordance with the GDPR \"Right to be forgotten\".",
   "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
@@ -10,19 +10,25 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource focused-task-close-account . --type ts",
+    "i18n:pull": "i18n-tools pull --resource focused-task-close-account . --type ts"
+  },
   "dependencies": {
-    "@atlaskit/avatar": "^14.1.7",
-    "@atlaskit/button": "^10.1.1",
-    "@atlaskit/drawer": "^2.6.1",
-    "@atlaskit/icon": "^15.0.2",
-    "@atlaskit/inline-dialog": "^9.0.13",
-    "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/avatar": "^14.1.8",
+    "@atlaskit/button": "^10.1.2",
+    "@atlaskit/drawer": "^2.7.1",
+    "@atlaskit/icon": "^16.0.0",
+    "@atlaskit/inline-dialog": "^9.0.14",
+    "@atlaskit/section-message": "^1.0.16",
     "@atlaskit/theme": "^7.0.1",
     "enzyme": "^3.7.0"
   },
   "devDependencies": {
-    "@atlaskit/checkbox": "^5.0.9",
-    "@atlaskit/docs": "^6.0.0"
+    "@atlaskit/checkbox": "^5.0.11",
+    "@atlaskit/docs": "^6.0.1",
+    "@atlaskit/i18n-tools": "^0.4.0",
+    "react-intl": "^2.6.0"
   },
   "author": "Atlassian Pty. Ltd",
   "maintainers": [

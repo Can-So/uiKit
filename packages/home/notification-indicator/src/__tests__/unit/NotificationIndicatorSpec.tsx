@@ -8,7 +8,7 @@ import {
   NotificationCountResponse,
 } from '@atlaskit/notification-log-client';
 
-import { NotificationIndicator } from '../..';
+import NotificationIndicator from '../../NotificationIndicator';
 
 class MockNotificationLogClient extends NotificationLogClient {
   private response?: Promise<NotificationCountResponse>;
@@ -93,6 +93,19 @@ describe('NotificationIndicator', () => {
     expect(badge.prop('value')).toEqual(5);
     expect(badge.prop('max')).toEqual(10);
     expect(badge.prop('appearance')).toEqual('primary');
+  });
+
+  it('Should render data-test-selector="NotificationIndicator"', async () => {
+    const wrapper = await renderNotificationIndicator(returnCount(5), {
+      max: 10,
+      appearance: 'primary',
+    });
+    wrapper.update();
+    const dataTestSelector = wrapper.childAt(0);
+
+    expect(dataTestSelector.prop('data-test-selector')).toEqual(
+      'NotificationIndicator',
+    );
   });
 
   it('Should not render indicator when there are no new notifications', async () => {

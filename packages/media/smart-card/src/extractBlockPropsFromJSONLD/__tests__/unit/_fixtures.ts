@@ -18,7 +18,7 @@ export const atlassianTask = {
   },
   '@id': 'https://app.asana.com/0/759475196256783/759474743020981',
   '@type': ['Object', 'atlassian:Task'],
-  '@url': 'https://app.asana.com/0/759475196256783/759474743020981',
+  url: 'https://app.asana.com/0/759475196256783/759474743020981',
   assigned: '2018-07-27T11:15:06.815Z',
   assignedBy: {
     '@type': 'Person',

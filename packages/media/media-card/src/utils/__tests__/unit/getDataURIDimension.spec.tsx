@@ -23,25 +23,6 @@ describe('getDataURIDimension()', () => {
     };
   };
 
-  it('should return right dimensions for small appearance', () => {
-    const { component } = setup();
-    const width = getDataURIDimension('width', {
-      appearance: 'small',
-      component,
-      dimensions: {
-        width: 1,
-        height: 1,
-      },
-    });
-    const height = getDataURIDimension('height', {
-      appearance: 'small',
-      component,
-    });
-
-    expect(width).toEqual(32);
-    expect(height).toEqual(32);
-  });
-
   it('should use passed dimensions', () => {
     const { component } = setup();
     const dimensions = {

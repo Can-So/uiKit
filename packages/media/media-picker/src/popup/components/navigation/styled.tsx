@@ -2,11 +2,7 @@ import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
 import Button from '@atlaskit/button';
-import {
-  akColorN900,
-  akColorN500,
-  akColorN0,
-} from '@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
 export const FolderViewerNavigation: ComponentClass<
   HTMLAttributes<{}>
@@ -18,9 +14,10 @@ export const FolderViewerNavigation: ComponentClass<
   min-height: 60px;
   padding: 15px 13px;
   border-radius: 3px;
-
-  background-color: ${akColorN0};
+  box-sizing: border-box;
+  background-color: ${colors.N0};
 `;
+FolderViewerNavigation.displayName = 'FolderViewerNavigation';
 
 export const ControlsWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div``;
 
@@ -54,7 +51,7 @@ export const BreadCrumbLinkLabel: ComponentClass<
 export const BreadCrumbLinkSeparator: ComponentClass<
   HTMLAttributes<{}> & BreadCrumbLinkLabelProps
 > = styled.span`
-  color: ${akColorN500};
+  color: ${colors.N500};
   display: ${(props: BreadCrumbLinkLabelProps) =>
     props.isLast ? 'none' : 'inline'};
   margin: 0 4px;
@@ -65,7 +62,7 @@ export const BreadCrumbLink: ComponentClass<
   HTMLAttributes<{}> & BreadCrumbLinkLabelProps
 > = styled.span`
   color: ${(props: BreadCrumbLinkLabelProps) =>
-    props.isLast ? akColorN900 : akColorN500};
+    props.isLast ? colors.N900 : colors.N500};
   cursor: ${(props: BreadCrumbLinkLabelProps) =>
     props.isLast ? 'default' : 'pointer'};
   font-size: ${(props: BreadCrumbLinkLabelProps) =>

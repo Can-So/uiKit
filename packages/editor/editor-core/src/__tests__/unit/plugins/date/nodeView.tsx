@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   taskList,
   taskItem,
@@ -10,9 +10,11 @@ import { insertDate } from '../../../../plugins/date/actions';
 import datePlugin from '../../../../plugins/date';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import DateNodeView from '../../../../plugins/date/nodeviews/date';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 
 describe('date plugin', () => {
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     uuid.setStatic('local-decision');
   });
@@ -46,7 +48,7 @@ describe('date plugin', () => {
       const dateNode = mount(
         <DateNodeView
           view={view}
-          node={view.state.selection.$from.nodeBefore!}
+          node={view.state.doc.nodeAt(view.state.selection.$from.pos)!}
         />,
       );
       expect(
@@ -73,7 +75,7 @@ describe('date plugin', () => {
       const dateNode = mount(
         <DateNodeView
           view={view}
-          node={view.state.selection.$from.nodeBefore!}
+          node={view.state.doc.nodeAt(view.state.selection.$from.pos)!}
         />,
       );
       expect(dateNode.find(n => n.prop('color') === 'red').length).toEqual(0);

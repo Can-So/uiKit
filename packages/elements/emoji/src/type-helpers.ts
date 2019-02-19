@@ -1,42 +1,59 @@
+import { messages } from './components/i18n';
+import { CategoryId } from './components/picker/categories';
+import { customCategory, dataURLPrefix } from './constants';
 import {
   EmojiDescription,
   EmojiDescriptionWithVariations,
-  EmojiVariationDescription,
   EmojiId,
+  EmojiImageRepresentation,
+  EmojiRepresentation,
+  EmojiServiceRepresentation,
+  EmojiVariationDescription,
   ImageRepresentation,
   MediaApiRepresentation,
   OptionalEmojiDescription,
   SpriteRepresentation,
   SpriteServiceRepresentation,
-  EmojiRepresentation,
 } from './types';
-import { customCategory, dataURLPrefix } from './constants';
-import { CategoryId } from './components/picker/categories';
 
 export const isSpriteServiceRepresentation = (
-  rep,
+  rep: EmojiServiceRepresentation,
 ): rep is SpriteServiceRepresentation =>
   !!(rep && (<SpriteServiceRepresentation>rep).spriteRef);
-export const isSpriteRepresentation = (rep): rep is SpriteRepresentation =>
-  !!(rep && (<SpriteRepresentation>rep).sprite);
-export const isImageRepresentation = (rep): rep is ImageRepresentation =>
+export const isSpriteRepresentation = (
+  rep: EmojiRepresentation,
+): rep is SpriteRepresentation => !!(rep && (<SpriteRepresentation>rep).sprite);
+export const isImageRepresentation = (
+  rep:
+    | EmojiRepresentation
+    | EmojiServiceRepresentation
+    | EmojiImageRepresentation,
+): rep is ImageRepresentation =>
   !!(rep && (<ImageRepresentation>rep).imagePath);
-export const isMediaRepresentation = (rep): rep is MediaApiRepresentation =>
+export const isMediaRepresentation = (
+  rep: EmojiRepresentation | EmojiImageRepresentation,
+): rep is MediaApiRepresentation =>
   !!(rep && (<MediaApiRepresentation>rep).mediaPath);
-export const isPromise = (p): p is Promise<any> =>
-  !!(p && (<Promise<any>>p).then);
+export const isPromise = <T>(p: any): p is Promise<T> =>
+  !!(p && (<Promise<T>>p).then);
+export const isEmojiDescription = (
+  possibleEmojiDescription: any,
+): possibleEmojiDescription is EmojiDescription =>
+  possibleEmojiDescription &&
+  possibleEmojiDescription.shortName &&
+  possibleEmojiDescription.type;
 
 export const isMediaEmoji = (emoji: EmojiDescription) =>
   isMediaRepresentation(emoji.representation);
 
-export const hasDataURLImage = rep =>
+export const hasDataURLImage = (rep: EmojiRepresentation) =>
   isImageRepresentation(rep) && rep.imagePath.indexOf(dataURLPrefix) === 0;
 
 export const isLoadedMediaEmoji = (emoji: EmojiDescription) =>
   emoji.category === customCategory && hasDataURLImage(emoji.representation);
 
 export const isEmojiDescriptionWithVariations = (
-  emoji,
+  emoji: OptionalEmojiDescription,
 ): emoji is EmojiDescriptionWithVariations =>
   !!(emoji && (<EmojiDescriptionWithVariations>emoji).skinVariations);
 
@@ -45,6 +62,9 @@ export const isEmojiVariationDescription = (
 ): object is EmojiVariationDescription => {
   return 'baseId' in object;
 };
+
+export const isMessagesKey = (key: string): key is keyof typeof messages =>
+  key in messages;
 
 export const toEmojiId = (emoji: EmojiDescription): EmojiId => ({
   shortName: emoji.shortName,

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LazyRender from 'react-lazily-render';
 import {
   CardLinkView,
   BlockCardResolvingView,
@@ -10,14 +11,21 @@ import {
   InlineCardResolvingView,
   InlineCardErroredView,
   InlineCardForbiddenView,
+  InlineCardUnauthorizedView,
 } from '@atlaskit/media-ui';
-import { auth } from '@atlaskit/outbound-auth-flow-client';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { ObjectState, Client } from '../Client';
 import { extractBlockPropsFromJSONLD } from '../extractBlockPropsFromJSONLD';
 import { extractInlinePropsFromJSONLD } from '../extractInlinePropsFromJSONLD';
 import { DefinedState } from '../Client/types';
 import { CardAppearance } from './types';
 import { WithObject } from '../WithObject';
+import {
+  connectFailedEvent,
+  connectSucceededEvent,
+  trackAppAccountConnected,
+  ANALYTICS_CHANNEL,
+} from '../analytics';
 
 const getCollapsedIcon = (state: DefinedState): string | undefined => {
   const { data } = state;
@@ -29,14 +37,14 @@ const getCollapsedIcon = (state: DefinedState): string | undefined => {
 const renderBlockCard = (
   url: string,
   state: ObjectState,
-  handleAuthorise: () => void,
+  handleAuthorise: (() => void) | undefined,
   handleErrorRetry: () => void,
   handleFrameClick: () => void,
   isSelected?: boolean,
 ) => {
   switch (state.status) {
     case 'pending':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView link={url} isSelected={isSelected} />;
 
     case 'resolving':
       return (
@@ -102,13 +110,13 @@ const renderBlockCard = (
 const renderInlineCard = (
   url: string,
   state: ObjectState,
-  handleAuthorise: () => void,
+  handleAuthorise: (() => void) | undefined,
   handleFrameClick: () => void,
   isSelected?: boolean,
 ): React.ReactNode => {
   switch (state.status) {
     case 'pending':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView link={url} isSelected={isSelected} />;
 
     case 'resolving':
       return (
@@ -130,7 +138,8 @@ const renderInlineCard = (
 
     case 'unauthorized':
       return (
-        <InlineCardForbiddenView
+        <InlineCardUnauthorizedView
+          icon={getCollapsedIcon(state)}
           url={url}
           isSelected={isSelected}
           onClick={handleFrameClick}
@@ -159,53 +168,110 @@ const renderInlineCard = (
       );
 
     case 'errored':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView link={url} isSelected={isSelected} />;
   }
 };
 
-export interface CardWithUrlContentProps {
+export type CardWithUrlContentProps = {
   client: Client;
   url: string;
   appearance: CardAppearance;
   onClick?: () => void;
   isSelected?: boolean;
-}
+  authFn: (startUrl: string) => Promise<void>;
+} & WithAnalyticsEventProps;
 
 export function CardWithUrlContent(props: CardWithUrlContentProps) {
-  const { url, isSelected, onClick, client, appearance } = props;
+  const {
+    url,
+    isSelected,
+    onClick,
+    client,
+    appearance,
+    createAnalyticsEvent,
+    authFn,
+  } = props;
   return (
-    <WithObject
-      client={client}
-      url={url}
-      isSelected={isSelected}
-      appearance={appearance}
-    >
-      {({ state, reload }) => {
-        const handleAuthorise = () => {
-          // TODO: figure out how to support multiple services
-          const service = (state as DefinedState).services[0];
-          auth(service.startAuthUrl).then(() => reload(), () => reload());
-        };
+    <LazyRender
+      offset={100}
+      component={appearance === 'inline' ? 'span' : 'div'}
+      placeholder={
+        <CardLinkView
+          isSelected={isSelected}
+          key={'lazy-render-placeholder'}
+          link={url}
+        />
+      }
+      content={
+        <WithObject
+          client={client}
+          url={url}
+          isSelected={isSelected}
+          appearance={appearance}
+          createAnalyticsEvent={createAnalyticsEvent}
+        >
+          {({ state, reload }) => {
+            // TODO: support multiple auth services
+            const firstAuthService =
+              (state as DefinedState).services &&
+              (state as DefinedState).services[0];
 
-        if (appearance === 'inline') {
-          return renderInlineCard(
-            url,
-            state,
-            handleAuthorise,
-            () => (onClick ? onClick() : window.open(url)),
-            isSelected,
-          );
-        }
+            const handleAuthorise = () => {
+              authFn(firstAuthService.startAuthUrl).then(
+                () => {
+                  if (createAnalyticsEvent) {
+                    createAnalyticsEvent(
+                      trackAppAccountConnected((state as any).definitionId),
+                    ).fire(ANALYTICS_CHANNEL);
+                    createAnalyticsEvent(
+                      connectSucceededEvent(url, state),
+                    ).fire(ANALYTICS_CHANNEL);
+                  }
+                  reload();
+                },
+                (err: Error) => {
+                  if (createAnalyticsEvent) {
+                    createAnalyticsEvent(
+                      // Yes, dirty, but we had a ticket for that
+                      err.message === 'The auth window was closed'
+                        ? connectFailedEvent(
+                            'auth.window.was.closed',
+                            url,
+                            state,
+                          )
+                        : connectFailedEvent(
+                            'potential.sensitive.data',
+                            url,
+                            state,
+                          ),
+                    ).fire(ANALYTICS_CHANNEL);
+                  }
+                  reload();
+                },
+              );
+            };
 
-        return renderBlockCard(
-          url,
-          state,
-          handleAuthorise,
-          reload,
-          () => (onClick ? onClick() : window.open(url)),
-          isSelected,
-        );
-      }}
-    </WithObject>
+            if (appearance === 'inline') {
+              return renderInlineCard(
+                url,
+                state,
+                firstAuthService ? handleAuthorise : undefined,
+                () => (onClick ? onClick() : window.open(url)),
+                isSelected,
+              );
+            }
+
+            return renderBlockCard(
+              url,
+              state,
+              firstAuthService ? handleAuthorise : undefined,
+              reload,
+              () => (onClick ? onClick() : window.open(url)),
+              isSelected,
+            );
+          }}
+        </WithObject>
+      }
+    />
   );
 }

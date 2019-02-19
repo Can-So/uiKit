@@ -1,12 +1,9 @@
 import { Dispatch, Middleware } from 'redux';
 
-import { PopupUploadEventEmitter } from '../../components/popup';
+import { PopupUploadEventEmitter } from '../../components/types';
 import { State } from '../domain';
 import { isSendUploadEventAction } from '../actions/sendUploadEvent';
-import {
-  copyMediaFileForUpload,
-  copyPublicMediaFileForUpload,
-} from '../../domain/file';
+import { copyMediaFileForUpload } from '../../domain/file';
 import { handleError } from '../../util/handleError';
 
 export default function(eventEmitter: PopupUploadEventEmitter): Middleware {
@@ -27,12 +24,12 @@ export default function(eventEmitter: PopupUploadEventEmitter): Middleware {
           break;
         }
         case 'upload-processing': {
-          const file = copyPublicMediaFileForUpload(event.data.file, uploadId);
+          const file = copyMediaFileForUpload(event.data.file, uploadId);
           eventEmitter.emitUploadProcessing(file);
           break;
         }
         case 'upload-end': {
-          const file = copyPublicMediaFileForUpload(event.data.file, uploadId);
+          const file = copyMediaFileForUpload(event.data.file, uploadId);
           eventEmitter.emitUploadEnd(file, event.data.public);
           break;
         }

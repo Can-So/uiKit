@@ -1,5 +1,15 @@
 # @atlaskit/json-schema-generator
 
+## 1.2.3
+- [patch] [9f43a40e1e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f43a40e1e):
+
+  - run prettier with bablyon as default parser; removes a bunch of warnings
+
+## 1.2.2
+- [patch] [d5eec5a831](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5eec5a831):
+
+  - Fix ts-node config because it can not resolve type package as the name doesn't match
+
 ## 1.2.1
 - [patch] [11d4b85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/11d4b85):
 

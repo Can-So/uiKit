@@ -2,7 +2,7 @@ import { pluginKey } from '../../../../plugins/card/pm-plugins/main';
 import cardPlugin from '../../../../plugins/card';
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   cardProvider,
 } from '@atlaskit/editor-test-helpers';
@@ -10,6 +10,8 @@ import reduce from '../../../../plugins/card/pm-plugins/reducers';
 import { CardPluginState } from '../../../../plugins/card/types';
 
 describe('card', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

@@ -24,9 +24,9 @@ import {
   ClearIndicator,
   defaultTimes,
   DropdownIndicator,
-  parseTime,
   defaultTimeFormat,
 } from '../internal';
+import parseTime from '../internal/parseTime';
 import FixedLayer from '../internal/FixedLayer';
 
 type Option = {
@@ -66,7 +66,7 @@ type Props = {
   onChange: string => void,
   /** Called when the field is focused. */
   onFocus: () => void,
-  parseInputValue: (time: string, timeFormat: string) => Date | typeof NaN,
+  parseInputValue: (time: string, timeFormat: string) => string | Date,
   /** Props to apply to the select. */
   selectProps: Object,
   /* This prop affects the height of the select control. Compact is gridSize() * 4, default is gridSize * 5  */
@@ -177,10 +177,11 @@ class TimePicker extends Component<Props, State> {
 
   /** Only allow custom times if timeIsEditable prop is true  */
   onCreateOption = (inputValue: any): void => {
-    const { parseInputValue, timeFormat } = this.props;
-    const value =
-      format(parseInputValue(inputValue, timeFormat), 'HH:mm') || '';
     if (this.props.timeIsEditable) {
+      const { parseInputValue, timeFormat } = this.props;
+      // TODO parseInputValue doesn't accept `timeFormat` as an function arg yet...
+      const value =
+        format(parseInputValue(inputValue, timeFormat), 'HH:mma') || '';
       this.setState({ value });
       this.props.onChange(value);
     } else {

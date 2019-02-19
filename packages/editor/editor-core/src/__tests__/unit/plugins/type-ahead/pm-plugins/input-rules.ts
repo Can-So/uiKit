@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   typeAheadQuery,
@@ -9,6 +9,8 @@ import {
 import { createTypeAheadPlugin } from './_create-type-ahead-plugin';
 
 describe('typeAhead input rules', () => {
+  const createEditor = createEditorFactory();
+
   it('should convert trigger to a typeAheadQuery', () => {
     const plugin = createTypeAheadPlugin();
     const { editorView, sel } = createEditor({

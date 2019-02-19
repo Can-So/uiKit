@@ -3,16 +3,16 @@ import {
   MediaPickerComponent,
   MediaPickerComponents,
   ComponentConfigs,
-  Popup,
-  Browser,
-  Dropzone,
-  Clipboard,
-  BinaryUploader,
   UploadPreviewUpdateEventPayload,
   UploadEndEventPayload,
   UploadParams,
   UploadErrorEventPayload,
   ImagePreview,
+  isDropzone,
+  isClipboard,
+  isPopup,
+  isBinaryUploader,
+  isBrowser,
 } from '@atlaskit/media-picker';
 import { Context } from '@atlaskit/media-core';
 
@@ -40,21 +40,24 @@ export default class PickerFacade {
 
   constructor(
     pickerType: PickerType,
-    config: PickerFacadeConfig,
-    pickerConfig?: ExtendedComponentConfigs[PickerType],
+    readonly config: PickerFacadeConfig,
+    readonly pickerConfig?: ExtendedComponentConfigs[PickerType],
+    readonly mediaPickerFactoryClass = MediaPicker,
   ) {
     this.pickerType = pickerType;
     this.errorReporter = config.errorReporter;
     this.stateManager = config.stateManager;
+  }
 
+  async init(): Promise<PickerFacade> {
     let picker;
-    if (pickerType === 'customMediaPicker') {
-      picker = this.picker = pickerConfig as CustomMediaPicker;
+    if (this.pickerType === 'customMediaPicker') {
+      picker = this.picker = this.pickerConfig as CustomMediaPicker;
     } else {
-      picker = this.picker = MediaPicker(
-        pickerType,
-        config.context,
-        pickerConfig as any,
+      picker = this.picker = await this.mediaPickerFactoryClass(
+        this.pickerType,
+        this.config.context,
+        this.pickerConfig as any,
       );
     }
 
@@ -63,14 +66,16 @@ export default class PickerFacade {
     picker.on('upload-error', this.handleUploadError);
     picker.on('collection', this.handleCollection);
 
-    if (picker instanceof Dropzone) {
+    if (isDropzone(picker)) {
       picker.on('drag-enter', this.handleDragEnter);
       picker.on('drag-leave', this.handleDragLeave);
     }
 
-    if (picker instanceof Dropzone || picker instanceof Clipboard) {
+    if (isDropzone(picker) || isClipboard(picker)) {
       picker.activate();
     }
+
+    return this;
   }
 
   get type() {
@@ -88,20 +93,20 @@ export default class PickerFacade {
     (picker as any).removeAllListeners('upload-end');
     (picker as any).removeAllListeners('upload-error');
 
-    if (picker instanceof Dropzone) {
-      picker.removeAllListeners('drag-enter');
-      picker.removeAllListeners('drag-leave');
+    if (isDropzone(picker)) {
+      (picker as any).removeAllListeners('drag-enter');
+      (picker as any).removeAllListeners('drag-leave');
     }
 
     this.onStartListeners = [];
     this.onDragListeners = [];
 
     try {
-      if (picker instanceof Dropzone || picker instanceof Clipboard) {
+      if (isDropzone(picker) || isClipboard(picker)) {
         picker.deactivate();
       }
 
-      if (picker instanceof Popup || picker instanceof Browser) {
+      if (isPopup(picker) || isBrowser(picker)) {
         picker.teardown();
       }
     } catch (ex) {
@@ -115,7 +120,7 @@ export default class PickerFacade {
 
   onClose(cb): () => void {
     const { picker } = this;
-    if (picker instanceof Popup) {
+    if (isPopup(picker)) {
       picker.on('closed', cb);
 
       return () => picker.off('closed', cb);
@@ -126,38 +131,38 @@ export default class PickerFacade {
 
   activate() {
     const { picker } = this;
-    if (picker instanceof Dropzone || picker instanceof Clipboard) {
+    if (isDropzone(picker) || isClipboard(picker)) {
       picker.activate();
     }
   }
 
   deactivate() {
     const { picker } = this;
-    if (picker instanceof Dropzone || picker instanceof Clipboard) {
+    if (isDropzone(picker) || isClipboard(picker)) {
       picker.deactivate();
     }
   }
 
   show(): void {
-    if (this.picker instanceof Popup) {
+    if (isPopup(this.picker)) {
       try {
         this.picker.show();
       } catch (ex) {
         this.errorReporter.captureException(ex);
       }
-    } else if (this.picker instanceof Browser) {
+    } else if (isBrowser(this.picker)) {
       this.picker.browse();
     }
   }
 
   hide(): void {
-    if (this.picker instanceof Popup) {
+    if (isPopup(this.picker)) {
       this.picker.hide();
     }
   }
 
   cancel(id: string): void {
-    if (this.picker instanceof Popup) {
+    if (isPopup(this.picker)) {
       const state = this.stateManager.getState(id);
 
       if (!state || state.status === 'cancelled') {
@@ -186,7 +191,7 @@ export default class PickerFacade {
   }
 
   upload(url: string, fileName: string): void {
-    if (this.picker instanceof BinaryUploader) {
+    if (isBinaryUploader(this.picker)) {
       this.picker.upload(url, fileName);
     }
   }
@@ -197,17 +202,6 @@ export default class PickerFacade {
 
   onDrag(cb: (state: 'enter' | 'leave') => any) {
     this.onDragListeners.push(cb);
-  }
-
-  resolvePublicId(file) {
-    if (file.upfrontId) {
-      file.upfrontId.then(data => {
-        this.stateManager.updateState(file.id, {
-          publicId: data,
-          status: 'preview',
-        });
-      });
-    }
   }
 
   private handleUploadPreviewUpdate = (
@@ -226,12 +220,11 @@ export default class PickerFacade {
       fileName: file.name,
       fileSize: file.size,
       fileMimeType: file.type,
-      fileId: file.upfrontId,
+      fileId: Promise.resolve(file.id),
       dimensions,
+      publicId: file.id,
       scaleFactor,
     });
-
-    this.resolvePublicId(file);
 
     this.onStartListeners.forEach(cb => cb.call(cb, [states]));
   };

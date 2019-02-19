@@ -10,6 +10,7 @@ import {
   TableMap,
   CellSelection,
 } from 'prosemirror-tables';
+import { EditorView } from 'prosemirror-view';
 import { Node as PMNode, Slice, Schema } from 'prosemirror-model';
 import {
   findTable,
@@ -42,6 +43,7 @@ import {
   isHeaderRowSelected,
   isIsolating,
   createControlsHoverDecoration,
+  fixAutoSizedTable,
 } from './utils';
 import { Command } from '../../types';
 import { analyticsService } from '../../analytics';
@@ -580,8 +582,10 @@ export const moveCursorBackward: Command = (state, dispatch) => {
     return false;
   }
 
-  // ensure we're just at a top level paragraph
-  // otherwise, perform regular backspace behaviour
+  /*
+    ensure we're just at a top level paragraph
+    otherwise, perform regular backspace behaviour
+   */
   const grandparent = $cursor.node($cursor.depth - 1);
   const { listItem } = state.schema.nodes;
 
@@ -945,4 +949,14 @@ export const handleShiftSelection = (event: MouseEvent): Command => (
   }
 
   return false;
+};
+
+export const autoSizeTable = (
+  view: EditorView,
+  node: PMNode,
+  table: HTMLTableElement,
+  basePos: number,
+) => {
+  view.dispatch(fixAutoSizedTable(view, node, table, basePos));
+  return true;
 };

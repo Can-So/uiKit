@@ -1037,20 +1037,10 @@ var _default = {
     componentName: 'IssuesIcon',
     package: '@atlaskit/icon/glyph/issues'
   },
-  'jira/blocker': {
-    keywords: ['jira/blocker', 'jirablocker', 'priority', 'issue', 'icon', 'core'],
-    componentName: 'JiraBlockerIcon',
-    package: '@atlaskit/icon/glyph/jira/blocker'
-  },
   'jira/capture': {
     keywords: ['jira/capture', 'jiracapture', 'icon', 'core'],
     componentName: 'JiraCaptureIcon',
     package: '@atlaskit/icon/glyph/jira/capture'
-  },
-  'jira/critical': {
-    keywords: ['jira/critical', 'jiracritical', 'priority', 'issue', 'icon', 'core'],
-    componentName: 'JiraCriticalIcon',
-    package: '@atlaskit/icon/glyph/jira/critical'
   },
   'jira/failed-build-status': {
     keywords: ['jira/failed-build-status', 'jirafailedbuildstatus', 'icon', 'core'],
@@ -1062,30 +1052,10 @@ var _default = {
     componentName: 'JiraLabsIcon',
     package: '@atlaskit/icon/glyph/jira/labs'
   },
-  'jira/major': {
-    keywords: ['jira/major', 'jiramajor', 'priority', 'issue', 'icon', 'core'],
-    componentName: 'JiraMajorIcon',
-    package: '@atlaskit/icon/glyph/jira/major'
-  },
-  'jira/medium': {
-    keywords: ['jira/medium', 'jiramedium', 'priority', 'issue', 'icon', 'core'],
-    componentName: 'JiraMediumIcon',
-    package: '@atlaskit/icon/glyph/jira/medium'
-  },
-  'jira/minor': {
-    keywords: ['jira/minor', 'jiraminor', 'priority', 'issue', 'icon', 'core'],
-    componentName: 'JiraMinorIcon',
-    package: '@atlaskit/icon/glyph/jira/minor'
-  },
   'jira/test-session': {
     keywords: ['jira/test-session', 'jiratestsession', 'icon', 'core'],
     componentName: 'JiraTestSessionIcon',
     package: '@atlaskit/icon/glyph/jira/test-session'
-  },
-  'jira/trivial': {
-    keywords: ['jira/trivial', 'jiratrivial', 'priority', 'issue', 'icon', 'core'],
-    componentName: 'JiraTrivialIcon',
-    package: '@atlaskit/icon/glyph/jira/trivial'
   },
   label: {
     keywords: ['label', 'icon', 'core'],
@@ -1566,6 +1536,11 @@ var _default = {
     keywords: ['star', 'icon', 'core'],
     componentName: 'StarIcon',
     package: '@atlaskit/icon/glyph/star'
+  },
+  status: {
+    keywords: ['status', 'icon', 'core'],
+    componentName: 'StatusIcon',
+    package: '@atlaskit/icon/glyph/status'
   },
   subtask: {
     keywords: ['subtask', 'issue', 'task', 'icon', 'core'],

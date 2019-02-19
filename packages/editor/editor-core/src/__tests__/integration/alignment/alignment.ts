@@ -1,56 +1,57 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import {
-  getDocFromElement,
-  fullpage,
-  editable,
-  insertBlockMenuItem,
-} from '../_helpers';
+import { getDocFromElement, editable } from '../_helpers';
 import { messages } from '../../../plugins/block-type/types';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
 
 const alignButton = 'button[aria-label="Text alignment"]';
-const alignCenterButton = 'span[aria-label="Align center"]';
+const alignRightButton = 'span[aria-label="Align right"]';
 const headingButton = 'button[aria-label="Font style"]';
 const headingh1 = 'div[role="group"] h1';
 
+const alignRight = async page => {
+  await page.waitFor(alignButton);
+  await page.click(alignButton);
+  await page.waitForSelector(alignRightButton);
+  await page.click(alignRightButton);
+};
+
 BrowserTestCase(
   'alignment: should be able to add alignment to paragraphs',
-  { skip: [] },
+  { skip: ['firefox'] },
   async client => {
-    const page = new Page(client);
-    await page.goto(fullpage.path);
-    await page.waitForSelector(fullpage.placeholder);
-    await page.click(fullpage.placeholder);
-    await page.waitForSelector(editable);
+    const page = await goToEditorTestingExample(client);
+
+    await mountEditor(page, {
+      appearance: 'full-page',
+      allowTextAlignment: true,
+    });
 
     await page.type(editable, 'hello');
-    await page.waitFor(alignButton);
-    await page.click(alignButton);
-    await page.waitForSelector(alignCenterButton);
-    await page.click(alignCenterButton);
+    await alignRight(page);
     expect(await page.$eval(editable, getDocFromElement)).toMatchDocSnapshot();
   },
 );
 
 BrowserTestCase(
   'alignment: should be able to add alignment to headings',
-  { skip: [] },
+  { skip: ['firefox'] },
   async client => {
-    const page = new Page(client);
-    await page.goto(fullpage.path);
-    await page.waitForSelector(fullpage.placeholder);
-    await page.click(fullpage.placeholder);
-    await page.waitForSelector(editable);
+    const page = await goToEditorTestingExample(client);
+
+    await mountEditor(page, {
+      appearance: 'full-page',
+      allowTextAlignment: true,
+    });
 
     await page.type(editable, 'hello');
     await page.waitFor(headingButton);
     await page.click(headingButton);
     await page.waitFor(headingh1);
     await page.click(headingh1);
-    await page.waitFor(alignButton);
-    await page.click(alignButton);
-    await page.waitForSelector(alignCenterButton);
-    await page.click(alignCenterButton);
+    await alignRight(page);
     expect(await page.$eval(editable, getDocFromElement)).toMatchDocSnapshot();
   },
 );
@@ -59,14 +60,52 @@ BrowserTestCase(
   'alignment: disabled when inside special nodes',
   { skip: [] },
   async client => {
-    const page = new Page(client);
-    await page.goto(fullpage.path);
-    await page.waitForSelector(fullpage.placeholder);
-    await page.click(fullpage.placeholder);
-    await page.waitForSelector(editable);
-    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: 'full-page',
+      allowTextAlignment: true,
+      allowCodeBlocks: true,
+    });
+
+    await page.click(`[aria-label="${messages.codeblock.defaultMessage}"]`);
     await page.waitFor(alignButton);
     const isEnabled = await page.isEnabled(alignButton);
     expect(isEnabled).toBe(false);
   },
 );
+
+BrowserTestCase(
+  'alignment: disabled when editor is disabled',
+  { skip: [] },
+  async client => {
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: 'full-page',
+      allowTextAlignment: true,
+      disabled: true,
+    });
+    const isEnabled = await page.isEnabled(alignButton);
+    expect(isEnabled).toBe(false);
+  },
+);
+// TODO:https://product-fabric.atlassian.net/browse/ED-6288
+// BrowserTestCase(
+//   'alignment: should maintain alignment when hit return',
+//   { skip: ['firefox'] },
+//   async client => {
+//     const page = await goToEditorTestingExample(client);
+//     await mountEditor(page, {
+//       appearance: 'full-page',
+//       allowTextAlignment: true,
+//     });
+//     await alignRight(page);
+//     await page.type(editable, [
+//       'this is right',
+//       'Enter',
+//       'this is still right',
+//     ]);
+
+//     const doc = await page.$eval(editable, getDocFromElement);
+//     expect(doc).toMatchDocSnapshot();
+//   },
+// );

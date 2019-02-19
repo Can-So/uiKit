@@ -19,10 +19,13 @@ import {
 } from './types';
 import { Store } from './store';
 import { StateWatch } from './stateWatcher';
+import { F1 } from './utils';
+import { resolvedEvent, unresolvedEvent } from '../analytics';
+import { GasPayload } from '@atlaskit/analytics-gas-types';
+import Environments from '../environments';
 
 // TODO: add some form of caching so that urls not currently loaded will still be fast
 
-const SERVICE_URL = 'https://api-private.stg.atlassian.com/object-resolver';
 const DEFAULT_CACHE_LIFESPAN = 15 * 1000;
 const DEFAULT_LOADING_STATE_DELAY = 1200;
 
@@ -129,6 +132,12 @@ export type ClientConfig = {
   loadingStateDelay?: number;
 };
 
+export type ClientEnvironment = {
+  resolverURL: string;
+};
+
+export type EnvironmentsKeys = keyof typeof Environments;
+
 export interface Client {
   fetchData(url: string): Promise<ResolveResponse>;
 }
@@ -137,8 +146,13 @@ export class Client implements Client {
   cacheLifespan: number;
   store: Store<ObjectState>;
   loadingStateDelay: number;
+  env: ClientEnvironment;
 
-  constructor(config?: ClientConfig) {
+  constructor(config?: ClientConfig, envKey: EnvironmentsKeys = 'prod') {
+    this.env = Environments[envKey]
+      ? Environments[envKey]
+      : Environments['prod'];
+
     this.cacheLifespan =
       (config && config.cacheLifespan) || DEFAULT_CACHE_LIFESPAN;
     this.store = new Store<ObjectState>(
@@ -149,7 +163,7 @@ export class Client implements Client {
   }
 
   fetchData(objectUrl: string): Promise<ResolveResponse> {
-    return fetch$<ResolveResponse>('post', `${SERVICE_URL}/resolve`, {
+    return fetch$<ResolveResponse>('post', `${this.env.resolverURL}/resolve`, {
       resourceUrl: encodeURI(objectUrl),
     }).toPromise();
   }
@@ -193,7 +207,11 @@ export class Client implements Client {
     return this;
   }
 
-  resolve(url: string, cb?: () => void) {
+  resolve(
+    url: string,
+    handleAnalyticsCallback?: F1<GasPayload, void>,
+    cb?: () => void,
+  ): void {
     if (!this.store.exists(url)) {
       throw new Error('Please, register a smart card before calling get()');
     }
@@ -209,6 +227,14 @@ export class Client implements Client {
       );
 
       merge(resolving$, data$).subscribe(state => {
+        if (handleAnalyticsCallback) {
+          if (state.status === 'resolved') {
+            handleAnalyticsCallback(resolvedEvent(url));
+          } else {
+            handleAnalyticsCallback(unresolvedEvent(url, state));
+          }
+        }
+
         this.store.set(url, state, this.cacheLifespan);
 
         if (cb) {
@@ -218,7 +244,11 @@ export class Client implements Client {
     }
   }
 
-  reload(urlToReload: string, definitionIdFromCard?: string) {
+  reload(
+    urlToReload: string,
+    handleAnalyticsCallback?: F1<GasPayload, void>,
+    definitionIdFromCard?: string,
+  ): void {
     this.store.get(urlToReload)!.invalidate();
 
     this.resolve(urlToReload, () => {
@@ -226,7 +256,7 @@ export class Client implements Client {
         .filter(otherUrl => otherUrl !== urlToReload)
         .forEach(otherUrl => {
           this.store.get(otherUrl)!.invalidate();
-          this.resolve(otherUrl);
+          this.resolve(otherUrl, handleAnalyticsCallback);
         });
     });
   }

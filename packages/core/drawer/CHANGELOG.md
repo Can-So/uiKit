@@ -1,5 +1,20 @@
 # @atlaskit/drawer
 
+## 2.7.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/item@8.0.15
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/quick-search@5.2.5
+  - @atlaskit/icon@16.0.0
+
+## 2.7.0
+- [minor] [9cfee26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9cfee26):
+
+  - Add data-test-selector to various components to help open and close the Notification Drawer programmatically. This would support test automation
+
 ## 2.6.1
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

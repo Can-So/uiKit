@@ -2,6 +2,7 @@ import { Plugin, PluginKey } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
 import { TableMap } from 'prosemirror-tables';
 import { findParentNodeOfType, hasParentNodeOfType } from 'prosemirror-utils';
+import * as classnames from 'classnames';
 
 import {
   updateControls,
@@ -106,10 +107,14 @@ export function createPlugin(
     }),
     props: {
       attributes(state) {
-        let pluginState = pluginKey.getState(state);
-        return pluginState.activeHandle > -1
-          ? { class: `${ClassName.RESIZING} resize-cursor` }
-          : { class: ClassName.RESIZING };
+        const pluginState = pluginKey.getState(state);
+
+        return {
+          class: classnames(ClassName.RESIZING_PLUGIN, {
+            [ClassName.RESIZE_CURSOR]: pluginState.activeHandle > -1,
+            [ClassName.IS_RESIZING]: !!pluginState.dragging,
+          }),
+        };
       },
 
       handleDOMEvents: {
@@ -193,9 +198,9 @@ function handleMouseMove(view, event, handleWidth, lastColumnResizable) {
     if (target) {
       let { left, right } = target.getBoundingClientRect();
       if (event.clientX - left <= handleWidth) {
-        cell = edgeCell(view, event, 'left');
+        cell = edgeCell(view, event, 'left', handleWidth);
       } else if (right - event.clientX <= handleWidth) {
-        cell = edgeCell(view, event, 'right');
+        cell = edgeCell(view, event, 'right', handleWidth);
       }
     }
 
@@ -235,16 +240,19 @@ function handleMouseDown(view, event, cellMinWidth) {
 
   let cell = view.state.doc.nodeAt(activeHandle);
   let $cell = view.state.doc.resolve(activeHandle);
-  let dom = view.domAtPos($cell.start(-1)).node;
+  let $originalTable = $cell.node(-1);
+  let start = $cell.start(-1);
+  let dom = view.domAtPos(start).node;
   while (dom.nodeName !== 'TABLE') {
     dom = dom.parentNode;
   }
 
   const containerWidth = widthPluginKey.getState(view.state).width;
-  const resizer = Resizer.fromDOM(dom, {
+  const resizer = Resizer.fromDOM(view, dom, {
     minWidth: cellMinWidth,
     maxSize: getLayoutSize(dom.getAttribute('data-layout'), containerWidth),
     node: $cell.node(-1),
+    start,
   });
 
   resizer.apply(resizer.currentState);
@@ -263,10 +271,27 @@ function handleMouseDown(view, event, cellMinWidth) {
     window.removeEventListener('mousemove', move);
 
     const { activeHandle, dragging } = pluginKey.getState(view.state);
+    // activeHandle could be remapped via a collab change.
+    // Fetch a fresh reference of the table.
+    const $cell = view.state.doc.resolve(activeHandle);
+    const $table = $cell.node(-1);
+
+    // If we let go in the same place we started, dont need to do anything.
+    if (dragging && clientX === dragging.startX) {
+      view.dispatch(view.state.tr.setMeta(pluginKey, { setDragging: null }));
+      return;
+    }
 
     if (dragging) {
       const { startX } = dragging;
-      updateColumnWidth(view, activeHandle, clientX - startX, resizer);
+
+      // If the table has changed (via collab for example) don't apply column widths
+      // For example, if a table col is deleted we won't be able to reliably remap the new widths
+      // There may be a more elegant solution to this, to avoid a jarring experience.
+      if ($table.eq($originalTable)) {
+        updateColumnWidth(view, activeHandle, clientX - startX, resizer);
+      }
+
       view.dispatch(view.state.tr.setMeta(pluginKey, { setDragging: null }));
     }
   }

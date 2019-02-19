@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, FileState, ProcessedFileState } from '@atlaskit/media-core';
+import { Context, FileState } from '@atlaskit/media-core';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
 import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
@@ -19,10 +19,9 @@ import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import {
   ViewerLoadPayload,
-  itemViewerErrorEvent,
-  itemViewerCommencedEvent,
-  itemViewerLoadedEvent,
-  mediaViewerModalScreenEvent,
+  mediaFileCommencedEvent,
+  mediaFileLoadSucceededEvent,
+  mediaFileLoadFailedEvent,
 } from './analytics/item-viewer';
 import { channel } from './analytics/index';
 import {
@@ -81,10 +80,10 @@ export class ItemViewerBase extends React.Component<Props, State> {
     item.whenSuccessful(file => {
       if (file.status === 'processed') {
         if (payload.status === 'success') {
-          this.fireAnalytics(itemViewerLoadedEvent(file));
+          this.fireAnalytics(mediaFileLoadSucceededEvent(file));
         } else if (payload.status === 'error') {
           this.fireAnalytics(
-            itemViewerErrorEvent(
+            mediaFileLoadFailedEvent(
               id,
               payload.errorMessage || 'Viewer error',
               file,
@@ -95,7 +94,11 @@ export class ItemViewerBase extends React.Component<Props, State> {
     });
   };
 
-  private renderProcessedFile(item: ProcessedFileState) {
+  private renderFileState(item: FileState) {
+    if (item.status === 'error') {
+      return this.renderError('previewFailed', item);
+    }
+
     const {
       context,
       identifier,
@@ -112,6 +115,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
       onClose,
       previewCount,
     };
+
     switch (item.mediaType) {
       case 'image':
         return <ImageViewer onLoad={this.onViewerLoaded} {...viewerProps} />;
@@ -159,12 +163,13 @@ export class ItemViewerBase extends React.Component<Props, State> {
       successful: item => {
         switch (item.status) {
           case 'processed':
-            return this.renderProcessedFile(item);
+          case 'uploading':
+          case 'processing':
+            return this.renderFileState(item);
           case 'failed-processing':
           case 'error':
             return this.renderError('previewFailed', item);
-          case 'uploading':
-          case 'processing':
+          default:
             return <Spinner />;
         }
       },
@@ -187,8 +192,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
 
   private init(props: Props) {
     const { context, identifier } = props;
-    this.fireAnalytics(itemViewerCommencedEvent(identifier.id));
-    this.fireAnalytics(mediaViewerModalScreenEvent(identifier.id));
+    this.fireAnalytics(mediaFileCommencedEvent(identifier.id));
     this.subscription = context.file
       .getFileState(identifier.id, {
         collectionName: identifier.collectionName,
@@ -204,15 +208,16 @@ export class ItemViewerBase extends React.Component<Props, State> {
             item: Outcome.failed(createError('metadataFailed', err)),
           });
           this.fireAnalytics(
-            itemViewerErrorEvent(identifier.id, 'Metadata fetching failed'),
+            mediaFileLoadFailedEvent(identifier.id, 'Metadata fetching failed'),
           );
         },
       });
   }
 
   private fireAnalytics = (payload: GasPayload | GasScreenEventPayload) => {
-    if (this.props.createAnalyticsEvent) {
-      const ev = this.props.createAnalyticsEvent(payload);
+    const { createAnalyticsEvent } = this.props;
+    if (createAnalyticsEvent) {
+      const ev = createAnalyticsEvent(payload);
       ev.fire(channel);
     }
   };

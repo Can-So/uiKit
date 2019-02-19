@@ -104,9 +104,15 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
     singleRun: !watch,
     concurrency: 20,
     reporters: ['mocha'],
-    browsers: [watch ? 'Chrome' : 'ChromeHeadless'],
+    browsers: [watch ? 'Chrome' : 'ChromeHeadlessNoSandbox'],
     mochaReporter: {
       showDiff: true,
+    },
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox'],
+      },
     },
     client: {
       mocha: {
@@ -123,21 +129,24 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
         os_version: '8.1',
         browser_version: '11',
       },
-      iphone: {
-        os: 'ios',
-        os_version: '11.0',
-        device: 'iPhone 8',
-        real_mobile: false,
-      },
+      // Browserstack no longer supports emulators or simulators and our plan does not allow us to test on real devices.
+      // iphone: {
+      //   os: 'ios',
+      //   os_version: '11.0',
+      //   device: 'iPhone 8',
+      //   real_mobile: false,
+      // },
       chrome_latest_osx: {
         browser: 'chrome',
         os: 'OS X',
         os_version: 'El Capitan',
+        browser_version: '72',
       },
       firefox_latest_windows: {
         browser: 'firefox',
         os: 'WINDOWS',
         os_version: '10',
+        browser_version: '64',
       },
       safari_latest: {
         browser: 'Safari',

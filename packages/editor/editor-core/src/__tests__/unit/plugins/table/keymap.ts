@@ -8,7 +8,7 @@ import {
 } from 'prosemirror-utils';
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   sendKeyToPm,
   table,
   thCursor,
@@ -36,8 +36,10 @@ import {
 } from '../../../../plugins';
 
 describe('table keymap', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any, trackEvent = () => {}) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       editorProps: {
@@ -47,7 +49,7 @@ describe('table keymap', () => {
     });
 
   const editorWithPlugins = (doc: any, trackEvent = () => {}) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [
         tablesPlugin(),
@@ -88,7 +90,6 @@ describe('table keymap', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.table.next_cell.keyboard',
         );
-        editorView.destroy();
       });
     });
 
@@ -109,7 +110,6 @@ describe('table keymap', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.table.next_cell.keyboard',
         );
-        editorView.destroy();
       });
     });
 
@@ -126,7 +126,6 @@ describe('table keymap', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.table.next_cell.keyboard',
         );
-        editorView.destroy();
       });
     });
 
@@ -148,7 +147,6 @@ describe('table keymap', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.table.next_cell.keyboard',
         );
-        editorView.destroy();
       });
     });
 
@@ -172,7 +170,6 @@ describe('table keymap', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.table.next_cell.keyboard',
         );
-        editorView.destroy();
       });
     });
   });
@@ -191,7 +188,6 @@ describe('table keymap', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.table.previous_cell.keyboard',
         );
-        editorView.destroy();
       });
     });
 
@@ -213,7 +209,6 @@ describe('table keymap', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.table.previous_cell.keyboard',
         );
-        editorView.destroy();
       });
     });
 
@@ -237,7 +232,6 @@ describe('table keymap', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.table.previous_cell.keyboard',
         );
-        editorView.destroy();
       });
     });
 
@@ -251,7 +245,6 @@ describe('table keymap', () => {
         const { editorView } = editor(doc(p('{<>}')));
         sendKeyToPm(editorView, 'Shift-Alt-T');
         expect(editorView.state.doc).toEqualDocument(doc(tableNode));
-        editorView.destroy();
       });
     });
   });
@@ -270,7 +263,6 @@ describe('table keymap', () => {
 
         sendKeyToPm(editorView, 'Backspace');
         expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-        editorView.destroy();
       });
 
       const backspace = (view: EditorView) => {
@@ -338,7 +330,6 @@ describe('table keymap', () => {
 
           sendKeyToPm(editorView, 'Backspace');
           expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-          editorView.destroy();
         });
       });
     });
@@ -370,7 +361,6 @@ describe('table keymap', () => {
           'atlassian.editor.format.table.delete_content.keyboard',
         );
         expect(editorView.state.selection.$from.pos).toEqual(12);
-        editorView.destroy();
       });
     });
 
@@ -410,7 +400,6 @@ describe('table keymap', () => {
           expect(editorView.state.selection.$from.pos).toEqual(
             [8, 19, 30][index],
           );
-          editorView.destroy();
         });
       });
 
@@ -451,7 +440,6 @@ describe('table keymap', () => {
           expect(editorView.state.selection.$from.pos).toEqual(
             [18, 23, 28][index],
           );
-          editorView.destroy();
         });
       });
     });
@@ -472,7 +460,6 @@ describe('table keymap', () => {
         expect(editorView.state.selection.$to.pos).toEqual(
           editorView.state.doc.content.size,
         );
-        editorView.destroy();
       });
     });
 
@@ -490,7 +477,6 @@ describe('table keymap', () => {
         expect(editorView.state.selection.$to.pos).toEqual(
           editorView.state.doc.content.size,
         );
-        editorView.destroy();
       });
     });
   });
@@ -506,8 +492,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(tdEmpty, tdEmpty), tr(tdCursor, td()(p('text'))))),
       );
-
-      editorView.destroy();
     });
 
     it('should not add row before when cursor in table header', () => {
@@ -518,8 +502,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(thCursor, thEmpty))),
       );
-
-      editorView.destroy();
     });
 
     it('should not add row before when selected table header', () => {
@@ -531,8 +513,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(thEmpty, thEmpty))),
       );
-
-      editorView.destroy();
     });
 
     it('should add row after any table row', () => {
@@ -543,8 +523,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(tdCursor, tdEmpty), tr(tdEmpty, tdEmpty))),
       );
-
-      editorView.destroy();
     });
 
     it('should add row after table header', () => {
@@ -555,8 +533,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(thCursor, thEmpty), tr(tdEmpty, tdEmpty))),
       );
-
-      editorView.destroy();
     });
 
     it('should add column before any table column', () => {
@@ -567,8 +543,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(tdEmpty, tdCursor, tdEmpty))),
       );
-
-      editorView.destroy();
     });
 
     it('should not add column before when cursor in table header', () => {
@@ -579,8 +553,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(thCursor, thEmpty))),
       );
-
-      editorView.destroy();
     });
 
     it('should not add column before when selected table header', () => {
@@ -592,8 +564,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(thEmpty, thEmpty))),
       );
-
-      editorView.destroy();
     });
 
     it('should add column after any table column', () => {
@@ -604,8 +574,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(tdCursor, tdEmpty, tdEmpty))),
       );
-
-      editorView.destroy();
     });
 
     it('should add column after table header', () => {
@@ -616,8 +584,6 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(thCursor, thEmpty, thEmpty))),
       );
-
-      editorView.destroy();
     });
   });
 });

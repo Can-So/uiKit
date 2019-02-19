@@ -1,5 +1,15 @@
 # @atlaskit/docs
 
+## 6.0.2
+- [patch] [050e08173f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/050e08173f):
+
+  - Add missing import for codesandboxer
+
+## 6.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/button@10.1.2
+  - @atlaskit/icon@16.0.0
+
 ## 6.0.0
 - [major] [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
 

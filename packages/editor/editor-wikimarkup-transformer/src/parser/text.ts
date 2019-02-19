@@ -5,34 +5,9 @@ import {
   parseLeadingKeyword,
   parseMacroKeyword,
 } from './tokenize/keyword';
-import { parseToken, TokenType, TokenErrCallback } from './tokenize';
+import { parseToken, TokenType, Context } from './tokenize';
 import { parseWhitespaceOnly } from './tokenize/whitespace';
-
-/**
- * In Jira, following characters are escaped
- * private static final Pattern ESCAPING_PATTERN = Pattern.compile("(^|(?<!\\\\))\\\\([\\-\\#\\*\\_\\+\\?\\^\\~\\|\\%\\{\\}\\[\\]\\(\\)\\!\\@])");
- * https://stash.atlassian.com/projects/JIRACLOUD/repos/jira/browse/jira-components/jira-renderer/src/main/java/com/atlassian/renderer/v2/components/BackslashEscapeRendererComponent.java
- */
-const escapedChar = [
-  '-',
-  '#',
-  '*',
-  '_',
-  '+',
-  '?',
-  '^',
-  '~',
-  '|',
-  '%',
-  '{',
-  '}',
-  '[',
-  ']',
-  '(',
-  ')',
-  '!',
-  '@',
-];
+import { escapeHandler } from './utils/escape';
 
 const processState = {
   NEWLINE: 0,
@@ -41,12 +16,17 @@ const processState = {
   ESCAPE: 3,
 };
 
-export function parseString(
-  input: string,
-  schema: Schema,
-  ignoreTokens: TokenType[] = [],
-  tokenErrCallback?: TokenErrCallback,
-): PMNode[] {
+export function parseString({
+  input,
+  schema,
+  ignoreTokenTypes = [],
+  context,
+}: {
+  input: string;
+  schema: Schema;
+  ignoreTokenTypes: TokenType[];
+  context: Context;
+}): PMNode[] {
   let index = 0;
   let state = processState.NEWLINE;
   let buffer = '';
@@ -74,7 +54,7 @@ export function parseString(
           parseMacroKeyword(substring) ||
           parseOtherKeyword(substring);
 
-        if (match && ignoreTokens.indexOf(match.type) === -1) {
+        if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
           tokenType = match.type;
           state = processState.TOKEN;
           continue;
@@ -104,7 +84,7 @@ export function parseString(
           match = parseMacroKeyword(substring) || parseOtherKeyword(substring);
         }
 
-        if (match && ignoreTokens.indexOf(match.type) === -1) {
+        if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
           tokenType = match.type;
           state = processState.TOKEN;
           continue;
@@ -125,7 +105,7 @@ export function parseString(
           tokenType,
           index,
           schema,
-          tokenErrCallback,
+          context.tokenErrCallback,
         );
         if (token.type === 'text') {
           buffer += token.text;
@@ -144,19 +124,10 @@ export function parseString(
       }
 
       case processState.ESCAPE: {
-        const prevChar = input.charAt(index - 1);
-        const nextChar = input.charAt(index + 1);
-        /**
-         * Ported from Jira:
-         * If previous char is also a backslash, then this is not a valid escape
-         */
-        if (escapedChar.indexOf(nextChar) === -1 || prevChar === '\\') {
-          // Insert \ in buffer mode
-          buffer += char;
-        }
-        buffer += nextChar;
+        const token = escapeHandler(input, index);
+        buffer += token.text;
+        index += token.length;
         state = processState.BUFFER;
-        index += 2;
         continue;
       }
       default:

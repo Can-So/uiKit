@@ -28,7 +28,7 @@ const cli = meow(
         alias: 'o',
       },
       stage: {
-        type: 'number',
+        type: 'string',
       },
     },
   },

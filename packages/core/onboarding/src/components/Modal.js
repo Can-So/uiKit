@@ -68,8 +68,10 @@ export default class OnboardingModal extends Component<Props> {
     return (
       <Modal
         autoFocus
-        footer={this.footerComponent(this.props)}
-        header={this.headerComponent(this.props)}
+        components={{
+          Header: this.headerComponent(this.props),
+          Footer: this.footerComponent(this.props),
+        }}
         onClose={noop}
         scrollBehavior="outside"
         shouldCloseOnOverlayClick={false}

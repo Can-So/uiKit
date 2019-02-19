@@ -1,5 +1,58 @@
 # @atlaskit/navigation-next
 
+## 4.2.3
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/inline-dialog@9.0.15
+  - @atlaskit/logo@9.2.7
+  - @atlaskit/modal-dialog@7.2.3
+  - @atlaskit/select@7.0.0
+
+## 4.2.2
+- [patch] [313f5283c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/313f5283c5):
+
+  - Make the spacing after BackItem be defined using margin
+
+## 4.2.1
+- [patch] [967c9ed460](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/967c9ed460):
+
+  - Add IDs to all global nav items
+
+## 4.2.0
+- [minor] [092845e62c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/092845e62c):
+
+  * Fixes missing tooltip whenexperimental_alternateHoverBehaviouris set to true | [NAV-230](https://product-fabric.atlassian.net/browse/NAV-230)
+  * Fixes stacking order issue which causes some elements like InlineDialog to be chopped off when placed in the container Nav | [AK-5818](https://ecosystem.atlassian.net/browse/AK-5818)
+  * Add new FF to allow expand fly out to full width | [AK-5820](https://ecosystem.atlassian.net/servicedesk/customer/portal/24/AK-5820)
+
+## 4.1.2
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/drawer@2.7.1
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/field-base@11.0.14
+  - @atlaskit/global-navigation@5.5.2
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/onboarding@6.1.16
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/select@6.1.19
+  - @atlaskit/toggle@5.0.15
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/icon@16.0.0
+
+## 4.1.1
+- [patch] [81b12c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/81b12c5):
+
+  - Fixes GlobalNavigationSkeleton throwing TypeError when rendered in products with no globalNav theme
+
+## 4.1.0
+- [minor] [86aaacd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86aaacd):
+
+  - [Update flyout hover activation zone](https://product-fabric.atlassian.net/browse/NAV-197)
+  	- It is controlled by a new FF prop called `experimental_alternateFlyoutBehaviour` which defaults to false. ::NOTE:: For this feature to be enabled, it’s is necessary to have the FF  `experimental_flyoutOnHover` to be set to true.
+  - Update expand affordance icon
+
 ## 4.0.10
 - [patch] [3a33b6b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a33b6b):
 

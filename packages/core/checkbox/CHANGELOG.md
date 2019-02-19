@@ -1,5 +1,32 @@
 # @atlaskit/checkbox
 
+## 5.0.14
+- [patch] [c0ad531a70](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c0ad531a70):
+
+  - Added test to make use props are passed down to hidden input
+
+## 5.0.13
+- [patch] [3ae465b6f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ae465b6f0):
+
+  - fix for checkbox logging error on mount
+
+## 5.0.12
+- [patch] [b0153ee6c9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b0153ee6c9):
+
+  - Enabled the isRequired validation on checkbox and added the asterisk after the checkbox label to signify the required field
+
+## 5.0.11
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/icon@16.0.0
+
+## 5.0.10
+- [patch] [fad28be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fad28be):
+
+  - Fixing invalid type for checkbox id prop
+
 ## 5.0.9
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

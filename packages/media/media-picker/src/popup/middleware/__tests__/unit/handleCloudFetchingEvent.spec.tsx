@@ -1,5 +1,5 @@
 import { handleCloudFetchingEvent } from '../../handleCloudFetchingEvent';
-import { mockStore } from '../../../mocks';
+import { mockStore } from '@atlaskit/media-test-helpers';
 import {
   HANDLE_CLOUD_FETCHING_EVENT,
   HandleCloudFetchingEventAction,
@@ -95,6 +95,7 @@ describe('handleCloudFetchingEvent', () => {
       type: FINALIZE_UPLOAD,
       uploadId,
       file: uploadedFile,
+      replaceFileId: file.id,
       source: {
         id: fileId,
         collection: RECENTS_COLLECTION,

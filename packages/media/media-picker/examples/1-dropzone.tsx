@@ -64,7 +64,7 @@ class DropzoneWrapper extends Component<{}, DropzoneWrapperState> {
       });
   }
 
-  createDropzone() {
+  async createDropzone() {
     const { isConnectedToUsersCollection } = this.state;
     const dropzoneContext = isConnectedToUsersCollection
       ? context
@@ -73,7 +73,7 @@ class DropzoneWrapper extends Component<{}, DropzoneWrapperState> {
     if (this.state.dropzone) {
       this.state.dropzone.deactivate();
     }
-    const dropzone = MediaPicker('dropzone', dropzoneContext, {
+    const dropzone = await MediaPicker('dropzone', dropzoneContext, {
       container: this.dropzoneContainer,
       uploadParams: {
         collection: defaultMediaPickerCollectionName,
@@ -87,10 +87,10 @@ class DropzoneWrapper extends Component<{}, DropzoneWrapperState> {
     });
   }
 
-  saveDropzoneContainer = (element: HTMLDivElement) => {
+  saveDropzoneContainer = async (element: HTMLDivElement) => {
     this.dropzoneContainer = element;
 
-    this.createDropzone();
+    await this.createDropzone();
     this.fetchLastItems();
   };
 

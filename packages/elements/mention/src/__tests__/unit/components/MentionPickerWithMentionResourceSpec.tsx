@@ -1,15 +1,13 @@
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { ReactWrapper } from 'enzyme';
 import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
-
 import * as React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
-
-import * as UtilAnalytics from '../../../util/analytics';
-
-import { MentionsResult } from '../../../types';
-import { MentionPicker, Props, State } from '../../../components/MentionPicker';
 import MentionResource from '../../../api/MentionResource';
+import { MentionPicker, Props, State } from '../../../components/MentionPicker';
+import { MentionsResult } from '../../../types';
+import * as UtilAnalytics from '../../../util/analytics';
 import { resultC } from '../_mention-search-results';
 
 const mentionResource = new MentionResource({
@@ -17,7 +15,7 @@ const mentionResource = new MentionResource({
 });
 
 function setupPicker(props?: Props): ReactWrapper<Props, State> {
-  return mount(
+  return mountWithIntl(
     <MentionPicker
       resourceProvider={mentionResource}
       query=""
@@ -34,8 +32,8 @@ describe('MentionPicker', () => {
     mentions: resultC,
     query,
   };
-  let fireAnalyticsMock;
-  let fireAnalyticsReturn;
+  let fireAnalyticsMock: jest.SpyInstance;
+  let fireAnalyticsReturn: jest.Mock;
 
   beforeEach(() => {
     fireAnalyticsMock = jest.spyOn(
@@ -61,7 +59,7 @@ describe('MentionPicker', () => {
   });
 
   it('should fire analytics when new mention data is fetched', () => {
-    mentionResource.notify(Date.now(), mentionsResult, query, true);
+    mentionResource.notify(Date.now(), mentionsResult, query);
 
     return new Promise(resolve => window.setTimeout(resolve)).then(() => {
       expect(fireAnalyticsMock).toHaveBeenCalled();
@@ -86,14 +84,6 @@ describe('MentionPicker', () => {
         ],
         query,
       );
-    });
-  });
-
-  it('should not fire analytics when mention data is from local search', () => {
-    mentionResource.notify(Date.now(), mentionsResult, query, false);
-
-    return new Promise(resolve => window.setTimeout(resolve)).then(() => {
-      expect(fireAnalyticsMock).not.toHaveBeenCalled();
     });
   });
 });

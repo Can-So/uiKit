@@ -105,7 +105,6 @@ function ExampleNavigation({
   exampleId,
   groupId,
   packageId,
-  groups,
   onPackageSelected,
   loadingSandbox,
   onExampleSelected,
@@ -294,8 +293,8 @@ export default class ExamplesModal extends React.Component<Props, State> {
     router: PropTypes.object.isRequired,
   };
 
-  onPackageSelected = (selected: { item: { value: string } }) => {
-    const [groupId, packageId] = selected.item.value.split('/');
+  onPackageSelected = (selected: { value: string }) => {
+    const [groupId, packageId] = selected.value.split('/');
     this.updateSelected(groupId, packageId);
   };
 
@@ -333,7 +332,6 @@ export default class ExamplesModal extends React.Component<Props, State> {
   render() {
     const {
       hasChanged,
-      groups,
       examples,
       packageId,
       groupId,
@@ -363,23 +361,25 @@ export default class ExamplesModal extends React.Component<Props, State> {
     return (
       <Modal
         autoFocus={false}
-        body={ModalBody}
-        header={({ showKeyline }) => (
-          <ModalHeaderComp
-            afterDeployError={null}
-            showKeyline={showKeyline}
-            packageId={packageId}
-            example={example}
-            examples={examples}
-            exampleId={exampleId}
-            groupId={groupId}
-            pkgJSON={pkgJSON}
-            displayCode={displayCode}
-            loaderUrl={loaderUrl}
-            onCodeToggle={this.onCodeToggle}
-            close={this.close}
-          />
-        )}
+        components={{
+          Header: ({ showKeyline }) => (
+            <ModalHeaderComp
+              afterDeployError={null}
+              showKeyline={showKeyline}
+              packageId={packageId}
+              example={example}
+              examples={examples}
+              exampleId={exampleId}
+              groupId={groupId}
+              pkgJSON={pkgJSON}
+              displayCode={displayCode}
+              loaderUrl={loaderUrl}
+              onCodeToggle={this.onCodeToggle}
+              close={this.close}
+            />
+          ),
+          Body: ModalBody,
+        }}
         height="100%"
         onClose={this.close}
         width={1180}
@@ -397,7 +397,6 @@ export default class ExamplesModal extends React.Component<Props, State> {
             groupId={groupId}
             packageId={packageId}
             exampleId={exampleId}
-            groups={groups}
             examples={examples}
             onPackageSelected={this.onPackageSelected}
             onExampleSelected={this.onExampleSelected}

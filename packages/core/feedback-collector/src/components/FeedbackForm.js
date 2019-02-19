@@ -2,7 +2,7 @@
 
 import React, { Fragment, Component } from 'react';
 import { Checkbox } from '@atlaskit/checkbox';
-import { FieldTextAreaStateless } from '@atlaskit/field-text-area';
+import TextArea from '@atlaskit/textarea';
 import Form, { Field } from '@atlaskit/form';
 import Modal from '@atlaskit/modal-dialog';
 import Select from '@atlaskit/select';
@@ -91,51 +91,74 @@ export default class FeedbackForm extends Component<Props, FormFields> {
         heading="Share your thoughts"
         onClose={this.props.onClose}
       >
-        <Form name="feedback-collector">
-          <Select
-            onChange={this.onSelectChange}
-            menuPortalTarget={document.body}
-            styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-            defaultValue={defaultSelectValue}
-            options={selectOptions}
-          />
+        <Form
+          name="feedback-collector"
+          onSubmit={() => {
+            /* TODO: this is a NOOP until Modal can take a container prop */
+          }}
+        >
+          {({ formProps }) => (
+            <form {...formProps}>
+              <Select
+                onChange={this.onSelectChange}
+                menuPortalTarget={document.body}
+                styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                defaultValue={defaultSelectValue}
+                options={selectOptions}
+              />
 
-          {this.isTypeSelected() ? (
-            <Fragment>
-              <Field label={fieldLabel[this.state.type]} isRequired>
-                <FieldTextAreaStateless
-                  name="description"
-                  shouldFitContainer
-                  minimumRows={6}
-                  onChange={e => this.setState({ description: e.target.value })}
-                  value={this.state.description}
-                />
-              </Field>
+              {this.isTypeSelected() ? (
+                <Fragment>
+                  <Field
+                    label={fieldLabel[this.state.type]}
+                    isRequired
+                    name="description"
+                  >
+                    {({ fieldProps }) => (
+                      <TextArea
+                        {...fieldProps}
+                        name="foo"
+                        minimumRows={6}
+                        onChange={e =>
+                          this.setState({ description: e.target.value })
+                        }
+                        value={this.state.description}
+                      />
+                    )}
+                  </Field>
 
-              <Field>
-                <Checkbox
-                  name="can-be-contacted"
-                  label="Atlassian can contact me about this feedback"
-                  onChange={event =>
-                    this.setState({ canBeContacted: event.target.checked })
-                  }
-                />
-              </Field>
+                  <Field name="can-be-contacted">
+                    {({ fieldProps }) => (
+                      <Checkbox
+                        {...fieldProps}
+                        label="Atlassian can contact me about this feedback"
+                        onChange={event =>
+                          this.setState({
+                            canBeContacted: event.target.checked,
+                          })
+                        }
+                      />
+                    )}
+                  </Field>
 
-              <Field>
-                <Checkbox
-                  name="enroll-in-research-group"
-                  label="I'd like to participate in product research"
-                  onChange={event =>
-                    this.setState({
-                      enrollInResearchGroup: event.target.checked,
-                    })
-                  }
-                />
-              </Field>
-            </Fragment>
-          ) : (
-            <Fragment />
+                  <Field name="enroll-in-research-group">
+                    {({ fieldProps }) => (
+                      <Checkbox
+                        {...fieldProps}
+                        label="I'd like to participate in product research"
+                        onChange={event =>
+                          this.setState({
+                            enrollInResearchGroup: event.target.checked,
+                          })
+                        }
+                      />
+                    )}
+                  </Field>
+                </Fragment>
+              ) : (
+                <Fragment />
+              )}
+            </form>
           )}
         </Form>
       </Modal>

@@ -15,16 +15,18 @@ import {
   TaskDecisionProvider,
   MockEmojiProvider,
 } from '../providers';
+import { ProseMirrorDOMChange } from '../types';
 
 export const bridge: WebBridgeImpl = ((window as any).bridge = new WebBridgeImpl());
 
 class EditorWithState extends Editor {
   onEditorCreated(instance: {
-    view: EditorView;
+    view: EditorView & ProseMirrorDOMChange;
     eventDispatcher: any;
     transformer?: any;
   }) {
     super.onEditorCreated(instance);
+
     const { eventDispatcher, view } = instance;
     bridge.editorView = view;
     bridge.editorActions._privateRegisterEditor(view, eventDispatcher);
@@ -54,7 +56,7 @@ export default function mobileEditor(props) {
   return (
     <EditorWithState
       appearance="mobile"
-      mentionProvider={MentionProvider}
+      mentionProvider={Promise.resolve(MentionProvider)}
       emojiProvider={Promise.resolve(MockEmojiProvider)}
       media={{
         customMediaPicker: new MobilePicker(),
@@ -75,6 +77,9 @@ export default function mobileEditor(props) {
       allowDate={true}
       allowRule={true}
       allowStatus={true}
+      allowLayouts={{
+        allowBreakout: true,
+      }}
       taskDecisionProvider={Promise.resolve(TaskDecisionProvider())}
     />
   );

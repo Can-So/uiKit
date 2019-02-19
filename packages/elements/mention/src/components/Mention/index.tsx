@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MentionStyle } from './styles';
-import Tooltip from '@atlaskit/tooltip';
+import { NoAccessTooltip } from '../NoAccessTooltip';
 import { isRestricted, MentionType, MentionEventHandler } from '../../types';
 import { fireAnalyticsMentionEvent, fireAnalytics } from '../../util/analytics';
 
@@ -112,12 +112,7 @@ export class MentionInternal extends React.PureComponent<Props, {}> {
         spellCheck={false}
       >
         {mentionType === MentionType.RESTRICTED ? (
-          <Tooltip
-            content={`${props.text} won't be notified as they have no access`}
-            position="right"
-          >
-            {mentionComponent}
-          </Tooltip>
+          <NoAccessTooltip name={text}>{mentionComponent}</NoAccessTooltip>
         ) : (
           mentionComponent
         )}

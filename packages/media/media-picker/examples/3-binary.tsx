@@ -12,11 +12,11 @@ class BinaryWrapper extends Component<{}> {
   binary?: BinaryUploader;
   dropzoneContainer?: HTMLDivElement;
 
-  componentDidMount() {
-    this.createBinary();
+  async componentDidMount() {
+    await this.createBinary();
   }
 
-  createBinary() {
+  async createBinary() {
     const context = ContextFactory.create({
       authProvider: defaultMediaPickerAuthProvider,
     });
@@ -25,7 +25,7 @@ class BinaryWrapper extends Component<{}> {
         collection: defaultMediaPickerCollectionName,
       },
     };
-    const binary = MediaPicker('binary', context, config);
+    const binary = await MediaPicker('binary', context, config);
 
     this.binary = binary;
 

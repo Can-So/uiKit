@@ -2,10 +2,7 @@ import * as React from 'react';
 import { MouseEvent } from 'react';
 import {
   MediaItemType,
-  MediaItemDetails,
-  LinkDetails,
   FileDetails,
-  UrlPreview,
   ImageResizeMode,
 } from '@atlaskit/media-core';
 import {
@@ -22,9 +19,7 @@ import {
   CardDimensionValue,
   CardOnClickCallback,
 } from '../index';
-import { LinkCard } from '../links';
 import { FileCard } from '../files';
-import { isLinkDetails } from '../utils/isLinkDetails';
 import { breakpointSize } from '../utils/breakpoint';
 import {
   defaultImageCardDimensions,
@@ -40,7 +35,7 @@ import { WithCardViewAnalyticsContext } from './withCardViewAnalyticsContext';
 export interface CardViewOwnProps extends SharedCardProps {
   readonly status: CardStatus;
   readonly mediaItemType?: MediaItemType;
-  readonly metadata?: MediaItemDetails;
+  readonly metadata?: FileDetails;
   readonly resizeMode?: ImageResizeMode;
 
   readonly onRetry?: () => void;
@@ -139,62 +134,24 @@ export class CardViewBase extends React.Component<
   render() {
     const { onClick, onMouseEnter } = this;
     const { dimensions, appearance, mediaItemType } = this.props;
-    const isFileLikeIdentifier =
-      mediaItemType === 'file' || mediaItemType === 'external-image';
+    const shouldUsePointerCursor = mediaItemType === 'file';
     const wrapperDimensions = dimensions
       ? dimensions
-      : isFileLikeIdentifier
-      ? getDefaultCardDimensions(appearance)
-      : undefined;
-    let card;
-
-    if (mediaItemType === 'link') {
-      card = this.renderLink();
-    } else if (isFileLikeIdentifier) {
-      card = this.renderFile();
-    }
+      : getDefaultCardDimensions(appearance);
 
     return (
       <Wrapper
-        mediaItemType={mediaItemType}
+        shouldUsePointerCursor={shouldUsePointerCursor}
         breakpointSize={breakpointSize(this.width)}
         appearance={appearance}
         dimensions={wrapperDimensions}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
       >
-        {card}
+        {this.renderFile()}
       </Wrapper>
     );
   }
-
-  private renderLink = () => {
-    const {
-      status,
-      metadata,
-      resizeMode,
-      onRetry,
-      appearance,
-      dimensions,
-      actions,
-      selectable,
-      selected,
-    } = this.props;
-
-    return (
-      <LinkCard
-        status={status}
-        details={metadata as LinkDetails | UrlPreview}
-        resizeMode={resizeMode}
-        onRetry={onRetry}
-        appearance={appearance}
-        dimensions={dimensions}
-        actions={actions}
-        selectable={selectable}
-        selected={selected}
-      />
-    );
-  };
 
   private renderFile = () => {
     const {
@@ -217,7 +174,7 @@ export class CardViewBase extends React.Component<
     return (
       <FileCard
         status={status}
-        details={metadata as FileDetails}
+        details={metadata}
         dataURI={dataURI}
         progress={progress}
         onRetry={onRetry}
@@ -269,12 +226,7 @@ export class CardView extends React.Component<CardViewOwnProps, CardViewState> {
   };
 
   private get mediaItemType(): MediaItemType {
-    const { mediaItemType, metadata } = this.props;
-    if (mediaItemType) {
-      return mediaItemType;
-    }
-
-    return isLinkDetails(metadata) ? 'link' : 'file';
+    return 'file';
   }
 
   render() {

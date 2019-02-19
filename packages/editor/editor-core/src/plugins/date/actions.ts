@@ -4,8 +4,10 @@ import {
   NodeSelection,
   Selection,
 } from 'prosemirror-state';
+import { todayTimestampInUTC } from '@atlaskit/editor-common';
 import { pluginKey } from './plugin';
 import { DateType } from './index';
+import { Command } from '../../types';
 
 export const insertDate = (date?: DateType) => (
   state: EditorState,
@@ -16,12 +18,7 @@ export const insertDate = (date?: DateType) => (
   if (date) {
     timestamp = Date.UTC(date.year, date.month - 1, date.day).toString();
   } else {
-    const currentDate = new Date();
-    timestamp = Date.UTC(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      currentDate.getDate(),
-    ).toString();
+    timestamp = todayTimestampInUTC();
   }
 
   const tr = state.tr;
@@ -29,7 +26,12 @@ export const insertDate = (date?: DateType) => (
 
   if (!showDatePickerAt) {
     const dateNode = schema.nodes.date.createChecked({ timestamp });
-    dispatch(tr.replaceSelectionWith(dateNode).scrollIntoView());
+    dispatch(
+      tr
+        .replaceSelectionWith(dateNode)
+        .setSelection(NodeSelection.create(tr.doc, state.selection.$from.pos))
+        .scrollIntoView(),
+    );
     return true;
   }
 
@@ -71,19 +73,12 @@ export const closeDatePicker = () => (state, dispatch) => {
   );
 };
 
-export const openDatePicker = (
-  domAtPos: (pos: number) => { node: Node; offset: number },
-) => (state: EditorState, dispatch: (tr: Transaction) => void): boolean => {
+export const openDatePicker = (): Command => (state, dispatch) => {
   const { $from } = state.selection;
-  const start =
-    $from.parent.childAfter($from.parentOffset).offset +
-    $from.start($from.depth);
-  const parent = domAtPos(start).node;
-  if (parent && parent.childNodes.length) {
-    const index = $from.index($from.depth);
-    const element = parent.childNodes[index - 1] as HTMLElement;
-    if (element) {
-      const showDatePickerAt = $from.pos - 1;
+  const node = state.doc.nodeAt($from.pos);
+  if (node && node.type.name === state.schema.nodes.date.name) {
+    const showDatePickerAt = $from.pos;
+    if (dispatch) {
       dispatch(
         state.tr
           .setMeta(pluginKey, { showDatePickerAt })

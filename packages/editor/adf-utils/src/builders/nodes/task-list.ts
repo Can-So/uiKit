@@ -1,7 +1,4 @@
-import {
-  TaskListDefinition,
-  TaskItemDefinition,
-} from '@atlaskit/editor-common';
+import { TaskListDefinition, TaskItemDefinition } from '@atlaskit/adf-schema';
 
 export const taskList = (attrs: TaskListDefinition['attrs']) => (
   ...content: Array<TaskItemDefinition>

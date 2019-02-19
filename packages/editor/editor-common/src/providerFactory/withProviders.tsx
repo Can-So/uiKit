@@ -1,9 +1,6 @@
 import { PureComponent } from 'react';
 import ProviderFactory from './';
-
-export interface Providers {
-  [key: string]: Promise<any>;
-}
+import { Providers } from '../types';
 
 export interface Props {
   providerFactory: ProviderFactory;

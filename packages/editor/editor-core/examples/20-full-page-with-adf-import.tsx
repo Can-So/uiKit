@@ -1,6 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { ExampleEditor as FullPageEditor } from './5-full-page';
+import {
+  ExampleEditor as FullPageEditor,
+  LOCALSTORAGE_defaultDocKey,
+} from './5-full-page';
 import EditorContext from '../src/ui/EditorContext';
 import { DevTools } from '../example-helpers/DevTools';
 import WithEditorActions from '../src/ui/WithEditorActions';
@@ -34,27 +37,37 @@ export default class Example extends React.Component<any, State> {
           <DevTools />
           <Textarea
             id="adf-input"
+            className="adf-input"
             innerRef={this.handleRef}
             value={this.state.inputValue}
             onChange={this.handleInputChange}
           />
           <WithEditorActions
             render={actions => (
-              <>
+              <React.Fragment>
                 <button
                   id="import-adf"
+                  className="import-adf"
                   onClick={() => this.handleImport(actions)}
                 >
                   Import ADF
                 </button>
                 <button
                   id="export-adf"
+                  className="export-adf"
                   onClick={() => this.handleExport(actions)}
                 >
                   Export ADF
                 </button>
+                <button
+                  id="save-adf"
+                  className="save-adf"
+                  onClick={() => this.handleDefault()}
+                >
+                  Save ADF as default
+                </button>
                 <FullPageEditor />
-              </>
+              </React.Fragment>
             )}
           />
         </div>
@@ -83,5 +96,12 @@ export default class Example extends React.Component<any, State> {
     actions.getValue().then(value => {
       this.setState({ inputValue: JSON.stringify(value, null, 2) });
     });
+  };
+
+  private handleDefault = () => {
+    localStorage.setItem(
+      LOCALSTORAGE_defaultDocKey,
+      this.state.inputValue || '{}',
+    );
   };
 }

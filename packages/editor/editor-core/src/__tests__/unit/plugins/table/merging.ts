@@ -1,8 +1,8 @@
-import { mergeCells, CellSelection } from 'prosemirror-tables';
+import { mergeCells } from 'prosemirror-tables';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   td,
@@ -12,39 +12,22 @@ import { TablePluginState } from '../../../../plugins/table/types';
 import tablesPlugin from '../../../../plugins/table';
 import panelPlugin from '../../../../plugins/panel';
 import { pluginKey } from '../../../../plugins/table/pm-plugins/main';
-import { Command } from '../../../../types/';
 
 describe('table merging logic', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin(), panelPlugin],
       pluginKey,
     });
 
-  const setCellSelection = (anchor: number, head: number): Command => (
-    state,
-    dispatch,
-  ) => {
-    if (dispatch) {
-      dispatch(
-        state.tr.setSelection(new CellSelection(
-          state.doc.resolve(anchor - 2),
-          state.doc.resolve(head - 2),
-        ) as any),
-      );
-    }
-    return true;
-  };
-
   describe('#mergeCells', () => {
     describe('when two rows gets merged column by column', () => {
       describe('when last non-merged cell gets merged from the end of the row', () => {
         it('should delete an empty row that gets created as a result', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
@@ -52,13 +35,12 @@ describe('table merging logic', () => {
                 tr(
                   td({ rowspan: 2 })(p('b1')),
                   td({ rowspan: 2 })(p('b2')),
-                  td({})(p('{anchor}b3')),
+                  td({})(p('{<cell}b3')),
                 ),
-                tr(td({})(p('{head}c3'))),
+                tr(td({})(p('{cell>}c3'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
           mergeCells(editorView.state, editorView.dispatch);
           expect(editorView.state.doc).toEqualDocument(
             doc(
@@ -73,24 +55,20 @@ describe('table merging logic', () => {
       });
       describe('when last non-merged cell gets merged from the start of the row', () => {
         it('should delete an empty row that gets created as a result', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
                 tr(tdEmpty, tdEmpty, tdEmpty),
                 tr(
-                  td({})(p('{anchor}b1')),
+                  td({})(p('{<cell}b1')),
                   td({ rowspan: 2 })(p('b2')),
                   td({ rowspan: 2 })(p('b3')),
                 ),
-                tr(td({})(p('{head}c1'))),
+                tr(td({})(p('{cell>}c1'))),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
           mergeCells(editorView.state, editorView.dispatch);
           expect(editorView.state.doc).toEqualDocument(
             doc(
@@ -105,23 +83,49 @@ describe('table merging logic', () => {
       });
     });
 
-    describe('when rows from the first columns get merged', () => {
-      describe('and table has merged rows in the next column', () => {
-        it('should delete an empty row and decrement rowspan of the next column', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+    describe('when more than two rows gets merged', () => {
+      describe('when last non-merged cell gets merged from the end of the row', () => {
+        it('should delete an empty row that gets created as a result', () => {
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({})(p('{anchor}a1')), td({ rowspan: 3 })(p('a2'))),
-                tr(td({})(p('{head}'))),
+                tr(td({ rowspan: 4 })(p('a1')), td({})(p('{<cell}a2'))),
+                tr(tdEmpty),
+                tr(td({})(p('{cell>}c2'))),
+                tr(tdEmpty),
+                tr(tdEmpty, tdEmpty),
+              ),
+            ),
+          );
+          mergeCells(editorView.state, editorView.dispatch);
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              p('text'),
+              table()(
+                tr(td({ rowspan: 2 })(p('a1')), td({})(p('a2'), p('c2'))),
+                tr(tdEmpty),
+                tr(tdEmpty, tdEmpty),
+              ),
+            ),
+          );
+        });
+      });
+    });
+
+    describe('when rows from the first columns get merged', () => {
+      describe('and table has merged rows in the next column', () => {
+        it('should delete an empty row and decrement rowspan of the next column', () => {
+          const { editorView } = editor(
+            doc(
+              p('text'),
+              table()(
+                tr(td({})(p('{<cell}a1')), td({ rowspan: 3 })(p('a2'))),
+                tr(td({})(p('{cell>}'))),
                 tr(tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
           mergeCells(editorView.state, editorView.dispatch);
           expect(editorView.state.doc).toEqualDocument(
             doc(
@@ -139,20 +143,16 @@ describe('table merging logic', () => {
     describe('when rows from the last columns get merged', () => {
       describe('and table has merged rows in the previous column', () => {
         it('should delete an empty row and decrement rowspan of the previous column', () => {
-          const {
-            editorView,
-            refs: { anchor, head },
-          } = editor(
+          const { editorView } = editor(
             doc(
               p('text'),
               table()(
-                tr(td({ rowspan: 3 })(p('a1')), td({})(p('{anchor}a2'))),
-                tr(td({})(p('{head}'))),
+                tr(td({ rowspan: 3 })(p('a1')), td({})(p('{<cell}a2'))),
+                tr(td({})(p('{cell>}'))),
                 tr(tdEmpty),
               ),
             ),
           );
-          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
           mergeCells(editorView.state, editorView.dispatch);
           expect(editorView.state.doc).toEqualDocument(
             doc(

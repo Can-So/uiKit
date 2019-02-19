@@ -107,6 +107,7 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
               contextIdentifierProvider,
               onChange,
               disabled,
+              enabledFeatures,
             }) => (
               <div style={{ padding: '20px' }}>
                 <CollapsedEditor
@@ -119,6 +120,7 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                     appearance="comment"
                     placeholder="What do you want to say?"
                     analyticsHandler={analyticsHandler}
+                    allowAnalyticsGASV3={true}
                     shouldFocus={true}
                     quickInsert={true}
                     allowCodeBlocks={true}
@@ -133,14 +135,17 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                     emojiProvider={emojiProvider}
                     media={{
                       provider: mediaProvider,
+                      allowMediaSingle: enabledFeatures.imageResizing,
+                      allowResizing: enabledFeatures.imageResizing,
                     }}
+                    allowDynamicTextSizing={enabledFeatures.dynamicTextSizing}
                     taskDecisionProvider={taskDecisionProvider}
                     contextIdentifierProvider={contextIdentifierProvider}
                     onChange={onChange}
                     onSave={SAVE_ACTION}
                     onCancel={CANCEL_ACTION}
                     primaryToolbarComponents={
-                      <>
+                      <React.Fragment>
                         <ToolbarFeedback
                           product={'bitbucket'}
                           packageVersion={version}
@@ -149,7 +154,7 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                           labels={['atlaskit-comment']}
                         />
                         <ToolbarHelp key="toolbar-help" />
-                      </>
+                      </React.Fragment>
                     }
                     allowExtension={true}
                     insertMenuItems={customInsertMenuItems}

@@ -1,5 +1,20 @@
 # @atlaskit/field-text
 
+## 7.1.0
+- [minor] [109cf449d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/109cf449d6):
+
+  - enable noImplicitAny for status. fix related issues
+
+## 7.0.20
+- [patch] [9b4a39c56a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b4a39c56a):
+
+  - Weakened FieldText & FieldTextArea autoComplete prop TypeScript definition to allow for more options than just 'on' or 'off'
+
+## 7.0.19
+- [patch] [1c8779d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c8779d):
+
+  - Changes to isLabelHidden behavour. Previously when isLabelHidden was true, a label with display none would be rendered. Now when isLabelHidden is true, no label element is rendered.
+
 ## 7.0.18
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

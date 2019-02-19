@@ -5,6 +5,9 @@ import {
   acNameToEmoji,
   acShortcutToEmoji,
   tableBackgroundColorNames,
+  NameToEmoji,
+} from '@atlaskit/adf-schema';
+import {
   akEditorFullPageMaxWidth,
   akEditorTableNumberColumnWidth,
 } from '@atlaskit/editor-common';
@@ -238,7 +241,7 @@ function converter(
           const acName = node.getAttribute('ac:name');
           const acShortcut = node.getAttribute('ac:shortcut');
           if (acName) {
-            emoji = acNameToEmoji(acName);
+            emoji = acNameToEmoji(acName as NameToEmoji);
           }
           if (acShortcut) {
             emoji = acShortcutToEmoji(acShortcut);

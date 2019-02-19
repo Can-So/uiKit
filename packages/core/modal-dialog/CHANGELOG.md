@@ -1,5 +1,44 @@
 # @atlaskit/modal-dialog
 
+## 7.2.3
+- [patch] [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+
+  - popup select "target" is now a function that must resolve to a node
+
+## 7.2.2
+- [patch] [a7670c1488](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a7670c1488):
+
+  - Enabling handling focus in model-dialog by rendering component in model-dialog only after portal in model-dialog is attached to DOM.
+- Updated dependencies [27cacd44ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27cacd44ab):
+  - @atlaskit/portal@0.1.0
+
+## 7.2.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/checkbox@5.0.11
+  - @atlaskit/field-radio-group@4.0.15
+  - @atlaskit/form@5.1.2
+  - @atlaskit/inline-dialog@9.0.14
+  - @atlaskit/portal@0.0.18
+  - @atlaskit/select@6.1.19
+  - @atlaskit/icon@16.0.0
+
+## 7.2.0
+- [minor] [07c4cd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07c4cd1):
+
+  - **Feature**: `components` prop now has an optional `container` entry that is wrapped around the header, body and footer. This provides compatibility for forms with fields in the body, and submit buttons in the footer
+  - **API changes:**
+    - The `header`, `body` and `footer` props have been deprecated; such custom components should be passed within the `components` prop instead.
+    - Custom `Body` components passed in using the new method must contain a `ref` element; this can be done using forwardRef, as seen in the `custom` example.
+  - **Documentation:** Examples have been updated to demonstrate the new container prop, as well as utilise the new composition method for custom header/body/footers.
+
+## 7.1.2
+- [patch] [2686f21](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2686f21):
+
+  - Removed example demonstrating deprecated reference behaviour
+
 ## 7.1.1
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

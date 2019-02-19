@@ -7,15 +7,18 @@ import {
   randomId,
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
-import { defaultSchema, MediaAttributes } from '@atlaskit/editor-common';
+import { defaultSchema, MediaAttributes } from '@atlaskit/adf-schema';
 import {
   stateKey as mediaStateKey,
   DefaultMediaStateManager,
 } from '../../../../../../plugins/media/pm-plugins/main';
-import MediaSingle from '../../../../../../plugins/media/nodeviews/mediaSingle';
+import MediaSingle, {
+  ReactMediaSingleNode,
+} from '../../../../../../plugins/media/nodeviews/mediaSingle';
 import Media from '../../../../../../plugins/media/nodeviews/media';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { EventDispatcher } from '../../../../../../event-dispatcher';
+import { PortalProviderAPI } from '../../../../../../ui/PortalProvider';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -24,7 +27,6 @@ const getFreshMediaProvider = () =>
   storyMediaProviderFactory({
     collectionName: testCollectionName,
     stateManager,
-
     includeUserAuthProvider: true,
   });
 
@@ -48,6 +50,12 @@ describe('nodeviews/mediaSingle', () => {
   const view = {} as EditorView;
   const eventDispatcher = {} as EventDispatcher;
   const getPos = jest.fn();
+  const portalProviderAPI: PortalProviderAPI = {
+    render(component) {
+      component();
+    },
+    remove() {},
+  } as any;
 
   beforeEach(() => {
     const mediaProvider = getFreshMediaProvider();
@@ -63,38 +71,12 @@ describe('nodeviews/mediaSingle', () => {
       },
       handleMediaNodeMount: () => {},
       updateElement: jest.fn(),
+      updateMediaNodeAttrs: jest.fn(),
     };
 
     pluginState.stateManager = stateManager;
 
     jest.spyOn(mediaStateKey, 'getState').mockImplementation(() => pluginState);
-  });
-
-  it('notifies plugin if node layout is updated', () => {
-    const mediaSingleNode = mediaSingle({ layout: 'wrap-right' })(mediaNode);
-    const updatedMediaSingleNode = mediaSingle({ layout: 'center' })(mediaNode)(
-      defaultSchema,
-    );
-
-    const updateLayoutSpy = jest.fn();
-    pluginState.updateLayout = updateLayoutSpy;
-
-    const wrapper = mount(
-      <MediaSingle
-        view={view}
-        eventDispatcher={eventDispatcher}
-        node={mediaSingleNode(defaultSchema)}
-        lineLength={680}
-        getPos={getPos}
-        width={123}
-        selected={() => 1}
-        editorAppearance="full-page"
-      />,
-    );
-
-    wrapper.setProps({ node: updatedMediaSingleNode });
-
-    expect(updateLayoutSpy).toHaveBeenCalledWith('center');
   });
 
   it('sets "onExternalImageLoaded" for external images', () => {
@@ -141,6 +123,86 @@ describe('nodeviews/mediaSingle', () => {
     );
   });
 
+  describe('re-rendering based on offsetLeft', () => {
+    const node = mediaSingle()(mediaNode)(defaultSchema);
+
+    it('does not call render if the parent has not offsetLeft changed', () => {
+      const nodeView = ReactMediaSingleNode(
+        portalProviderAPI,
+        eventDispatcher,
+        'full-page',
+      )(node, view, getPos);
+
+      const renderMock = jest.fn();
+      nodeView.render = renderMock;
+
+      nodeView.ignoreMutation();
+      expect(renderMock).not.toBeCalled();
+    });
+
+    it('re-renders if the parent offsetLeft changes', () => {
+      const nodeView = ReactMediaSingleNode(
+        portalProviderAPI,
+        eventDispatcher,
+        'full-page',
+      )(node, view, getPos);
+
+      const renderMock = jest.fn();
+      nodeView.render = renderMock;
+
+      Object.defineProperties(nodeView.dom!, {
+        offsetLeft: {
+          get: () => 20,
+        },
+      });
+
+      nodeView.ignoreMutation();
+      expect(renderMock).toBeCalled();
+    });
+  });
+
+  describe('when dimensions are missing on images', () => {
+    it('asks media APIs for dimensions when not in ADF and updates it', async () => {
+      const mediaNodeAttrs = {
+        id: 'foo',
+        type: 'file',
+        collection: 'collection',
+      };
+
+      const mediaNode = media(mediaNodeAttrs as MediaAttributes)();
+      const mediaSingleNodeWithoutDimensions = mediaSingle()(mediaNode);
+
+      const wrapper = mount(
+        <MediaSingle
+          view={view}
+          eventDispatcher={eventDispatcher}
+          node={mediaSingleNodeWithoutDimensions(defaultSchema)}
+          lineLength={680}
+          getPos={getPos}
+          width={123}
+          selected={() => 1}
+          editorAppearance="full-page"
+        />,
+      );
+
+      (wrapper.instance() as MediaSingle).getRemoteDimensions = () =>
+        Promise.resolve({
+          id: 'foo',
+          height: 100,
+          width: 100,
+        });
+
+      await (wrapper.instance() as MediaSingle).componentDidMount();
+      expect(pluginState.updateMediaNodeAttrs).toHaveBeenCalledWith(
+        'foo',
+        {
+          height: 100,
+          width: 100,
+        },
+        true,
+      );
+    });
+  });
   afterEach(() => {
     jest.resetAllMocks();
   });

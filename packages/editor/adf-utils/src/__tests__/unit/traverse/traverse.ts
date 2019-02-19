@@ -20,6 +20,7 @@ describe('Traverse', () => {
         },
       },
       expect.objectContaining({}),
+      expect.any(Number),
     );
   });
 

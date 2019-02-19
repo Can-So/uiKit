@@ -6,7 +6,7 @@ import {
   p,
   panel,
   strike,
-  createEditor,
+  createEditorFactory,
   code,
   em,
   mountWithIntl,
@@ -19,17 +19,31 @@ import ToolbarAdvancedTextFormatting, {
 } from '../../../../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import panelPlugin from '../../../../../plugins/panel';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import {
+  ACTION,
+  ACTION_SUBJECT,
+  EVENT_TYPE,
+  INPUT_METHOD,
+  ACTION_SUBJECT_ID,
+} from '../../../../../plugins/analytics';
 
 describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
-  const editor = (doc: any, trackEvent = () => {}) =>
-    createEditor({
+  const createEditor = createEditorFactory();
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  const editor = (doc: any, trackEvent = () => {}) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorPlugins: [panelPlugin],
       pluginKey: pluginKey,
       editorProps: {
         analyticsHandler: trackEvent,
+        allowAnalyticsGASV3: true,
       },
+      createAnalyticsEvent,
     });
+  };
 
   it('should render disabled ToolbarButton if both pluginStateTextFormatting and pluginStateClearFormatting are undefined', () => {
     const { editorView } = editor(doc(p('text')));
@@ -289,6 +303,19 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
     toolbarOption.unmount();
   });
 
+  /**
+   * Helper to simulate a click in toolbar option
+   * @param type Type of the button in the toolbar
+   */
+  function clickToolbarOption(type: string, toolbarOption) {
+    toolbarOption.find('button').simulate('click');
+
+    toolbarOption
+      .find(Item)
+      .filterWhere(n => n.text().indexOf(messages[type].defaultMessage) > -1)
+      .simulate('click');
+  }
+
   describe('analytics', () => {
     let trackEvent;
     let toolbarOption;
@@ -305,7 +332,6 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
           editorView={editorView}
         />,
       );
-      toolbarOption.find('button').simulate('click');
     });
 
     afterEach(() => {
@@ -317,17 +343,54 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
         it(`should trigger analyticsService.trackEvent when ${
           messages[type].defaultMessage
         } is clicked`, () => {
-          toolbarOption
-            .find(Item)
-            .filterWhere(
-              n => n.text().indexOf(messages[type].defaultMessage) > -1,
-            )
-            .simulate('click');
+          clickToolbarOption(type, toolbarOption);
           expect(trackEvent).toHaveBeenCalledWith(
             `atlassian.editor.format.${type}.button`,
           );
         });
       },
     );
+  });
+
+  describe('analytics v3', () => {
+    let toolbarOption;
+    beforeEach(() => {
+      const { editorView, pluginState } = editor(doc(p('text')));
+
+      toolbarOption = mountWithIntl(
+        <ToolbarAdvancedTextFormatting
+          textFormattingState={pluginState}
+          clearFormattingState={{ formattingIsPresent: true }}
+          editorView={editorView}
+        />,
+      );
+    });
+
+    afterEach(() => {
+      toolbarOption.unmount();
+    });
+
+    [
+      ACTION_SUBJECT_ID.FORMAT_UNDERLINE,
+      ACTION_SUBJECT_ID.FORMAT_STRIKE,
+      ACTION_SUBJECT_ID.FORMAT_CODE,
+      ACTION_SUBJECT_ID.FORMAT_SUB,
+      ACTION_SUBJECT_ID.FORMAT_SUPER,
+    ].forEach((type: ACTION_SUBJECT_ID) => {
+      it(`should dispatch analytics toolbar event for ${type}`, async () => {
+        const expectedPayload = {
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          actionSubjectId: type,
+          eventType: EVENT_TYPE.TRACK,
+          attributes: {
+            inputMethod: INPUT_METHOD.TOOLBAR,
+          },
+        };
+
+        clickToolbarOption(type, toolbarOption);
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      });
+    });
   });
 });

@@ -6,7 +6,7 @@ import Lozenge from '@atlaskit/lozenge';
 
 import Client, { PubSubClientConfig, SpecialEventType } from '../src';
 
-let clientConfig;
+let clientConfig: { serviceConfig: PubSubClientConfig };
 try {
   // tslint:disable-next-line import/no-unresolved, no-var-requires
   clientConfig = require('../local-config')['default'];
@@ -24,10 +24,10 @@ interface State {
 }
 
 class PubSubEventComponent extends Component<{}, State> {
-  private client: Client;
+  private client!: Client;
   private serviceConfig: PubSubClientConfig;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.serviceConfig = clientConfig.serviceConfig;
     this.state = {
@@ -56,16 +56,16 @@ class PubSubEventComponent extends Component<{}, State> {
     this.client.networkDown();
   };
 
-  onChannelChange = e => {
+  onChannelChange = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({
-      channelInput: e.target.value,
+      channelInput: e.currentTarget.value,
     });
   };
 
-  onUrlChange = e => {
-    const newUrl = e.target.value;
+  onUrlChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const newUrl = e.currentTarget.value;
     this.setState({
-      url: e.target.value,
+      url: e.currentTarget.value,
     });
 
     this.client.leave([this.state.channelInput]).then(_ => {
@@ -73,9 +73,9 @@ class PubSubEventComponent extends Component<{}, State> {
     });
   };
 
-  onEventTypeChange = e => {
+  onEventTypeChange = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({
-      eventType: e.target.value,
+      eventType: e.currentTarget.value,
     });
   };
 
@@ -87,7 +87,7 @@ class PubSubEventComponent extends Component<{}, State> {
     this.client.off(this.state.eventType, this.onEvent);
   };
 
-  onEvent = (event, payload) => {
+  onEvent = (event: any, _: any) => {
     this.setState(({ events }) => {
       return {
         events: [...events, event],
@@ -95,13 +95,13 @@ class PubSubEventComponent extends Component<{}, State> {
     });
   };
 
-  updateStatus = status => {
+  updateStatus = (status: string) => {
     this.setState({
       status,
     });
   };
 
-  private initClient = url => {
+  private initClient = (url: string) => {
     this.setState({
       status: 'NOT CONNECTED',
     });

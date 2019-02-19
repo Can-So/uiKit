@@ -6,7 +6,7 @@ import {
   strong,
   insertText,
   doc,
-  createEditor,
+  createEditorFactory,
   a as link,
   p,
   h1,
@@ -25,6 +25,15 @@ import {
 } from '../../../../plugins/text-formatting/pm-plugins/input-rule';
 import { EditorView } from 'prosemirror-view';
 import { ProviderFactory } from '@atlaskit/editor-common';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import {
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+} from '../../../../plugins/analytics';
 
 const autoFormatPatterns = [
   {
@@ -46,21 +55,28 @@ const autoFormatPatterns = [
 ];
 
 describe('text-formatting input rules', () => {
+  const createEditor = createEditorFactory();
+
   let trackEvent;
-  const editor = (doc: any, disableCode = false) =>
-    createEditor({
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  const editor = (doc: any, disableCode = false) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
       editorProps: {
         analyticsHandler: trackEvent,
         allowCodeBlocks: true,
+        allowAnalyticsGASV3: true,
         textFormatting: { disableCode },
         emojiProvider: new Promise(() => {}),
         mentionProvider: new Promise(() => {}),
       },
+      createAnalyticsEvent,
       providerFactory: ProviderFactory.create({
         emojiProvider: new Promise(() => {}),
       }),
     });
+  };
 
   beforeEach(() => {
     trackEvent = jest.fn();
@@ -292,6 +308,26 @@ describe('text-formatting input rules', () => {
   });
 
   describe('strong rule', () => {
+    it('should call analytics events', () => {
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRONG,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod: INPUT_METHOD.FORMATTING,
+        },
+      };
+      const { editorView, sel } = editor(doc(p('hello {<>} there')));
+
+      insertText(editorView, '**text**', sel);
+
+      expect(trackEvent).toHaveBeenCalledWith(
+        'atlassian.editor.format.strong.autoformatting',
+      );
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should convert text to strong for link also', () => {
       const { editorView, sel } = editor(
         doc(
@@ -307,9 +343,6 @@ describe('text-formatting input rules', () => {
 
       expect(editorView.state.doc).toEqualDocument(
         doc(p(strong(link({ href: 'http://www.atlassian.com' })('Atlassian')))),
-      );
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.strong.autoformatting',
       );
     });
 
@@ -349,6 +382,26 @@ describe('text-formatting input rules', () => {
   });
 
   describe('em rule', () => {
+    it('should call analytics events', () => {
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_ITALIC,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod: INPUT_METHOD.FORMATTING,
+        },
+      };
+      const { editorView, sel } = editor(doc(p('hello {<>} there')));
+
+      insertText(editorView, '*text*', sel);
+
+      expect(trackEvent).toHaveBeenCalledWith(
+        'atlassian.editor.format.em.autoformatting',
+      );
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should keep current marks when converting from markdown', () => {
       const { editorView, sel } = editor(doc(p(strong('This is bold {<>}'))));
 
@@ -396,6 +449,26 @@ describe('text-formatting input rules', () => {
   });
 
   describe('strike rule', () => {
+    it('should call analytics events', () => {
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRIKE,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod: INPUT_METHOD.FORMATTING,
+        },
+      };
+      const { editorView, sel } = editor(doc(p('hello {<>} there')));
+
+      insertText(editorView, '~~text~~', sel);
+
+      expect(trackEvent).toHaveBeenCalledWith(
+        'atlassian.editor.format.strike.autoformatting',
+      );
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should not apply strike to ~~ prefixed words when later ~~ pair found', () => {
       const { editorView, sel } = editor(
         doc(p('using ~~prefixed words along with ~~strike{<>}')),
@@ -410,6 +483,26 @@ describe('text-formatting input rules', () => {
   });
 
   describe('code rule', () => {
+    it('should call analytics events', () => {
+      const expectedPayload: AnalyticsEventPayload = {
+        action: ACTION.FORMATTED,
+        actionSubject: ACTION_SUBJECT.TEXT,
+        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+        eventType: EVENT_TYPE.TRACK,
+        attributes: {
+          inputMethod: INPUT_METHOD.FORMATTING,
+        },
+      };
+      const { editorView, sel } = editor(doc(p('hello {<>} there')));
+
+      insertText(editorView, '`text`', sel);
+
+      expect(trackEvent).toHaveBeenCalledWith(
+        'atlassian.editor.format.code.autoformatting',
+      );
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+    });
+
     it('should convert mention to plain text', () => {
       const mentionNode = mention({ id: '1234', text: '@helga' })();
       const { editorView, sel } = editor(

@@ -18,7 +18,7 @@ import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
 import LinkIcon from '@atlaskit/icon/glyph/editor/link';
 import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
 import DateIcon from '@atlaskit/icon/glyph/editor/date';
-import LabelIcon from '@atlaskit/icon/glyph/label';
+import StatusIcon from '@atlaskit/icon/glyph/status';
 import PlaceholderTextIcon from '@atlaskit/icon/glyph/media-services/text';
 import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
 import HorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rule';
@@ -61,22 +61,21 @@ import { Command } from '../../../../types';
 import { showLinkToolbar } from '../../../hyperlink/commands';
 import { insertMentionQuery } from '../../../mentions/commands/insert-mention-query';
 import { updateStatus } from '../../../status/actions';
+import {
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  INPUT_METHOD,
+  EVENT_TYPE,
+  ACTION_SUBJECT_ID,
+  PANEL_TYPE,
+} from '../../../analytics';
 
 export const messages = defineMessages({
   action: {
     id: 'fabric.editor.action',
     defaultMessage: 'Action item',
     description: 'Also known as a “task”, “to do item”, or a checklist',
-  },
-  bulletList: {
-    id: 'fabric.editor.bulletList',
-    defaultMessage: 'Bullet list',
-    description: 'Also known as a “unordered list”',
-  },
-  orderedList: {
-    id: 'fabric.editor.orderedList',
-    defaultMessage: 'Ordered list',
-    description: 'Also known as a “numbered list”',
   },
   link: {
     id: 'fabric.editor.link',
@@ -193,6 +192,7 @@ export interface Props {
     node?: PMNode,
     isEditing?: boolean,
   ) => (state, dispatch) => void;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 }
 
 export interface State {
@@ -248,8 +248,23 @@ class ToolbarInsertBlock extends React.PureComponent<
   };
 
   private toggleEmojiPicker = () => {
-    const emojiPickerOpen = !this.state.emojiPickerOpen;
-    this.setState({ emojiPickerOpen });
+    this.setState(
+      prevState => ({ emojiPickerOpen: !prevState.emojiPickerOpen }),
+      () => {
+        if (this.state.emojiPickerOpen) {
+          const { dispatchAnalyticsEvent } = this.props;
+          if (dispatchAnalyticsEvent) {
+            dispatchAnalyticsEvent({
+              action: ACTION.OPENED,
+              actionSubject: ACTION_SUBJECT.PICKER,
+              actionSubjectId: ACTION_SUBJECT_ID.PICKER_EMOJI,
+              attributes: { inputMethod: INPUT_METHOD.TOOLBAR },
+              eventType: EVENT_TYPE.UI,
+            });
+          }
+        }
+      },
+    );
   };
 
   private renderPopup() {
@@ -368,7 +383,7 @@ class ToolbarInsertBlock extends React.PureComponent<
             iconBefore={btn.elemBefore}
             selected={btn.isActive}
             title={btn.content + (btn.shortcut ? ' ' + btn.shortcut : '')}
-            onClick={() => this.onItemActivated({ item: btn })}
+            onClick={() => this.insertToolbarMenuItem(btn)}
           />
         ))}
         <Wrapper>
@@ -377,7 +392,7 @@ class ToolbarInsertBlock extends React.PureComponent<
             (!isDisabled ? (
               <DropdownMenu
                 items={[{ items: dropdownItems }]}
-                onItemActivated={this.onItemActivated}
+                onItemActivated={this.insertInsertMenuItem}
                 onOpenChange={this.onOpenChange}
                 mountTo={popupsMountPoint}
                 boundariesElement={popupsBoundariesElement}
@@ -570,7 +585,7 @@ class ToolbarInsertBlock extends React.PureComponent<
       items.push({
         content: labelStatus,
         value: { name: 'status' },
-        elemBefore: <LabelIcon label={labelStatus} />,
+        elemBefore: <StatusIcon label={labelStatus} />,
       });
     }
 
@@ -594,7 +609,10 @@ class ToolbarInsertBlock extends React.PureComponent<
     'atlassian.editor.format.hyperlink.button',
     (): boolean => {
       const { editorView } = this.props;
-      showLinkToolbar()(editorView.state, editorView.dispatch);
+      showLinkToolbar(INPUT_METHOD.TOOLBAR)(
+        editorView.state,
+        editorView.dispatch,
+      );
       return true;
     },
   );
@@ -622,10 +640,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     (): boolean => {
       const { editorView } = this.props;
       insertDate()(editorView.state, editorView.dispatch);
-      openDatePicker(editorView.domAtPos.bind(editorView))(
-        editorView.state,
-        editorView.dispatch,
-      );
+      openDatePicker()(editorView.state, editorView.dispatch);
       return true;
     },
   );
@@ -652,7 +667,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     'atlassian.editor.format.status.button',
     (): boolean => {
       const { editorView } = this.props;
-      updateStatus(undefined, true)(editorView);
+      updateStatus()(editorView);
       return true;
     },
   );
@@ -660,8 +675,19 @@ class ToolbarInsertBlock extends React.PureComponent<
   private openMediaPicker = withAnalytics(
     'atlassian.editor.format.media.button',
     (): boolean => {
-      const { onShowMediaPicker } = this.props;
-      onShowMediaPicker!();
+      const { onShowMediaPicker, dispatchAnalyticsEvent } = this.props;
+      if (onShowMediaPicker) {
+        onShowMediaPicker();
+        if (dispatchAnalyticsEvent) {
+          dispatchAnalyticsEvent({
+            action: ACTION.OPENED,
+            actionSubject: ACTION_SUBJECT.PICKER,
+            actionSubjectId: ACTION_SUBJECT_ID.PICKER_CLOUD,
+            attributes: { inputMethod: INPUT_METHOD.TOOLBAR },
+            eventType: EVENT_TYPE.UI,
+          });
+        }
+      }
       return true;
     },
   );
@@ -692,12 +718,13 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private insertHorizontalRule = withAnalytics(
     'atlassian.editor.format.horizontalrule.button',
-    (): boolean => {
+    (inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU): boolean => {
       const { editorView } = this.props;
       const tr = createHorizontalRule(
         editorView.state,
         editorView.state.selection.from,
         editorView.state.selection.to,
+        inputMethod,
       );
 
       if (tr) {
@@ -709,6 +736,46 @@ class ToolbarInsertBlock extends React.PureComponent<
     },
   );
 
+  private insertBlockTypeWithAnalytics = (
+    itemName: string,
+    inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU,
+  ) => {
+    const {
+      editorView,
+      onInsertBlockType,
+      dispatchAnalyticsEvent,
+    } = this.props;
+    const { state, dispatch } = editorView;
+
+    let actionSubjectId;
+    let additionalAttrs = {};
+    switch (itemName) {
+      case 'panel':
+        actionSubjectId = ACTION_SUBJECT_ID.PANEL;
+        additionalAttrs = { panelType: PANEL_TYPE.INFO }; // only info panels can be inserted from toolbar
+        break;
+      case 'codeblock':
+        actionSubjectId = ACTION_SUBJECT_ID.CODE_BLOCK;
+        break;
+    }
+
+    analytics.trackEvent(`atlassian.editor.format.${itemName}.button`);
+    if (dispatchAnalyticsEvent && actionSubjectId) {
+      dispatchAnalyticsEvent({
+        action: ACTION.INSERTED,
+        actionSubject: ACTION_SUBJECT.DOCUMENT,
+        actionSubjectId,
+        attributes: {
+          inputMethod,
+          ...additionalAttrs,
+        },
+        eventType: EVENT_TYPE.TRACK,
+      });
+    }
+
+    onInsertBlockType!(itemName)(state, dispatch);
+  };
+
   private handleSelectedEmoji = withAnalytics(
     'atlassian.editor.emoji.button',
     (emojiId: EmojiId): boolean => {
@@ -718,11 +785,16 @@ class ToolbarInsertBlock extends React.PureComponent<
     },
   );
 
-  private onItemActivated = ({ item }): void => {
+  private onItemActivated = ({
+    item,
+    inputMethod,
+  }: {
+    item;
+    inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU;
+  }): void => {
     const {
       editorView,
       editorActions,
-      onInsertBlockType,
       onInsertMacroFromMacroBrowser,
       macroProvider,
       handleImageUpload,
@@ -753,11 +825,7 @@ class ToolbarInsertBlock extends React.PureComponent<
       case 'codeblock':
       case 'blockquote':
       case 'panel':
-        analytics.trackEvent(
-          `atlassian.editor.format.${item.value.name}.button`,
-        );
-        const { state, dispatch } = editorView;
-        onInsertBlockType!(item.value.name)(state, dispatch);
+        this.insertBlockTypeWithAnalytics(item.value.name, inputMethod);
         break;
       case 'action':
         this.insertAction();
@@ -766,7 +834,7 @@ class ToolbarInsertBlock extends React.PureComponent<
         this.insertDecision();
         break;
       case 'horizontalrule':
-        this.insertHorizontalRule();
+        this.insertHorizontalRule(inputMethod);
         break;
       case 'macro':
         analytics.trackEvent(
@@ -800,6 +868,18 @@ class ToolbarInsertBlock extends React.PureComponent<
       editorView.focus();
     }
   };
+
+  private insertToolbarMenuItem = btn =>
+    this.onItemActivated({
+      item: btn,
+      inputMethod: INPUT_METHOD.TOOLBAR,
+    });
+
+  private insertInsertMenuItem = ({ item }) =>
+    this.onItemActivated({
+      item,
+      inputMethod: INPUT_METHOD.INSERT_MENU,
+    });
 }
 
 export default injectIntl(ToolbarInsertBlock);

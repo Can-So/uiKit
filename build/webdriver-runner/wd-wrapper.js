@@ -1,9 +1,9 @@
+const assert = require('assert').strict;
+
 /*
  * wrapper on top of webdriver-io apis to give a feel of puppeeteer api
  */
 
-//TODO :move this to a new npm-pkg
-const webdriverio = require('webdriverio');
 const WAIT_TIMEOUT = 5000;
 
 const TODO = () => {
@@ -73,10 +73,12 @@ export default class Page {
     return this.browser.elements(selector);
   }
 
-  $eval(selector, pageFunction) {
+  $eval(selector, pageFunction, param) {
     return this.browser
       .execute(
-        `return (${pageFunction}(document.querySelector("${selector}")))`,
+        `return (${pageFunction}(document.querySelector("${selector}"), ${JSON.stringify(
+          param,
+        )}))`,
       )
       .then(obj => obj.value);
   }
@@ -87,12 +89,23 @@ export default class Page {
     });
   }
 
-  type(selector, text) {
-    return this.browser.addValue(selector, text);
+  async type(selector, text) {
+    if (Array.isArray(text)) {
+      for (let t of text) {
+        await this.browser.addValue(selector, t);
+      }
+    } else {
+      await this.browser.addValue(selector, text);
+    }
   }
 
   setValue(selector, text) {
     return this.browser.setValue(selector, text);
+  }
+
+  // TODO: remove it
+  clear(selector) {
+    return this.browser.clearElement(selector);
   }
 
   click(selector) {
@@ -128,21 +141,19 @@ export default class Page {
   close() {
     return this.browser.close();
   }
-  checkConsoleErrors() {
+
+  async checkConsoleErrors() {
     // Console errors can only be checked in Chrome
-    if (
-      this.browser.desiredCapabilities.browserName === 'chrome' &&
-      this.browser.log('browser').value
-    ) {
-      this.browser.logs('browser').value.forEach(val => {
-        assert.notEqual(
-          val.level,
-          'SEVERE',
-          `Those console errors :${val.message} are displayed`,
-        );
-      });
+    if (this.isBrowser('chrome')) {
+      const logs = await this.browser.log('browser');
+      if (logs.value) {
+        logs.value.forEach(val => {
+          assert.notStrictEqual(val.level, 'SEVERE', `Error : ${val.message}`);
+        });
+      }
     }
   }
+
   backspace(selector) {
     this.browser.execute(selector => {
       return document
@@ -161,6 +172,14 @@ export default class Page {
     // replace with await page.evaluate(() => document.querySelector('p').textContent)
     // for puppteer
     return this.browser.getText(selector);
+  }
+
+  getBrowserName() {
+    return this.browser.desiredCapabilities.browserName;
+  }
+
+  isBrowser(browserName) {
+    return this.getBrowserName() === browserName;
   }
 
   getCssProperty(selector, cssProperty) {
@@ -197,7 +216,7 @@ export default class Page {
     let keys;
     if (this.browser.desiredCapabilities.os === 'Windows') {
       keys = ['Control', 'v'];
-    } else if (this.browser.desiredCapabilities.browserName === 'chrome') {
+    } else if (this.isBrowser('chrome')) {
       // Workaround for https://bugs.chromium.org/p/chromedriver/issues/detail?id=30
       keys = ['Shift', 'Insert'];
     } else {
@@ -206,9 +225,29 @@ export default class Page {
     return this.browser.addValue(selector, keys);
   }
 
+  copy(selector) {
+    let keys;
+    if (this.browser.desiredCapabilities.os === 'Windows') {
+      keys = ['Control', 'c'];
+    } else if (this.isBrowser('chrome')) {
+      // Workaround for https://bugs.chromium.org/p/chromedriver/issues/detail?id=30
+      keys = ['Control', 'Insert'];
+    } else {
+      keys = ['Command', 'c'];
+    }
+    return this.browser.addValue(selector, keys);
+  }
+
   // Wait
   waitForSelector(selector, options = {}) {
     return this.browser.waitForExist(selector, options.timeout || WAIT_TIMEOUT);
+  }
+
+  waitForVisible(selector, options = {}) {
+    return this.browser.waitForVisible(
+      selector,
+      options.timeout || WAIT_TIMEOUT,
+    );
   }
 
   waitFor(selector, ms, reverse) {
@@ -226,6 +265,48 @@ export default class Page {
 
   chooseFile(selector, localPath) {
     return this.browser.chooseFile(selector, localPath);
+  }
+
+  mockDate(timestamp, timezoneOffset) {
+    return this.browser.execute(
+      (t, tz) => {
+        const _Date = Date;
+        const realDate = params => new _Date(params);
+        const mockedDate = new _Date(t);
+
+        if (tz) {
+          const localDateOffset = new _Date().getTimezoneOffset() / 60;
+          const dateWithTimezoneOffset = new _Date(
+            t + (tz + localDateOffset) * 3600000,
+          );
+          const localDateMethods = [
+            'getFullYear',
+            'getYear',
+            'getMonth',
+            'getDate',
+            'getDay',
+            'getHours',
+            'getMinutes',
+          ];
+          localDateMethods.forEach(dateMethod => {
+            mockedDate[dateMethod] = () => dateWithTimezoneOffset[dateMethod]();
+          });
+        }
+
+        Date = function(...params) {
+          if (params.length > 0) {
+            return realDate(...params);
+          }
+          return mockedDate;
+        };
+        Object.getOwnPropertyNames(_Date).forEach(property => {
+          Date[property] = _Date[property];
+        });
+        Date.now = () => t;
+      },
+      timestamp,
+      timezoneOffset,
+    );
   }
 }
 //TODO: Maybe wrapping all functions?

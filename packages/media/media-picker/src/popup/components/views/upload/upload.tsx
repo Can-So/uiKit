@@ -11,7 +11,7 @@ import {
 } from '@atlaskit/media-card';
 import {
   Context,
-  MediaItem,
+  FileItem,
   FileDetails,
   getMediaTypeFromMimeType,
 } from '@atlaskit/media-core';
@@ -23,7 +23,7 @@ import EditorInfoIcon from '@atlaskit/icon/glyph/error';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
 import { messages, InfiniteScroll } from '@atlaskit/media-ui';
-import { Browser } from '../../../../components/browser';
+import { Browser } from '../../../../components/types';
 import { isWebGLAvailable } from '../../../tools/webgl';
 import { Dropzone } from './dropzone';
 import { fileClick } from '../../../actions/fileClick';
@@ -39,6 +39,7 @@ import {
   SelectedItem,
   ServiceFile,
   State,
+  ServiceName,
 } from '../../../domain';
 import { menuDelete, menuEdit } from '../editor/phrases';
 import {
@@ -87,7 +88,10 @@ export interface UploadViewStateProps {
 }
 
 export interface UploadViewDispatchProps {
-  readonly onFileClick: (serviceFile: ServiceFile, serviceName: string) => void;
+  readonly onFileClick: (
+    serviceFile: ServiceFile,
+    serviceName: ServiceName,
+  ) => void;
   readonly onEditorShowImage: (file: FileReference, dataUri: string) => void;
   readonly onEditRemoteImage: (
     file: FileReference,
@@ -348,7 +352,7 @@ export class StatelessUploadView extends Component<
       ]; // TODO [MS-1017]: allow file annotation for uploading files
 
       const identifier: FileIdentifier = {
-        id: upfrontId,
+        id: userUpfrontId,
         mediaItemType: 'file',
       };
 
@@ -407,7 +411,7 @@ export class StatelessUploadView extends Component<
       }
     };
 
-    const editHandler: CardEventHandler = (mediaItem?: MediaItem) => {
+    const editHandler: CardEventHandler = (mediaItem?: FileItem) => {
       if (mediaItem && mediaItem.type === 'file') {
         const { id, name } = mediaItem.details;
 

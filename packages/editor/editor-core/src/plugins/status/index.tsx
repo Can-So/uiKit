@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { status } from '@atlaskit/editor-common';
-import LabelIcon from '@atlaskit/icon/glyph/label';
+import { status } from '@atlaskit/adf-schema';
+import StatusIcon from '@atlaskit/icon/glyph/status';
 import { findDomRefAtPos } from 'prosemirror-utils';
 import { EditorPlugin } from '../../types';
 import createStatusPlugin, { StatusState, pluginKey } from './plugin';
 import WithPluginState from '../../ui/WithPluginState';
 import StatusPicker from './ui/statusPicker';
 import { commitStatusPicker, updateStatus, createStatus } from './actions';
+import { keymapPlugin } from './keymap';
 
 const baseStatusPlugin = (): EditorPlugin => ({
   nodes() {
@@ -19,6 +20,7 @@ const baseStatusPlugin = (): EditorPlugin => ({
         name: 'status',
         plugin: createStatusPlugin,
       },
+      { name: 'statusKeymap', plugin: keymapPlugin },
     ];
   },
 
@@ -52,7 +54,7 @@ const baseStatusPlugin = (): EditorPlugin => ({
 
           return (
             <StatusPicker
-              autoFocus={statusState.autoFocus}
+              isNew={statusState.isNew}
               target={target}
               defaultText={text}
               defaultColor={color}
@@ -81,7 +83,7 @@ const createQuickInsertMenuItem = () => ({
   title: 'Status',
   priority: 700,
   keywords: ['lozenge'],
-  icon: () => <LabelIcon label="Status" />,
+  icon: () => <StatusIcon label="Status" />,
   action: createStatus(),
 });
 

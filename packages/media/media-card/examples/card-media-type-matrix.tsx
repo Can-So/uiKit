@@ -2,11 +2,6 @@ import * as React from 'react';
 import {
   Matrix,
   createStorybookContext,
-  videoUrlPreviewId,
-  audioUrlPreviewId,
-  imageUrlPreviewId,
-  docUrlPreviewId,
-  unknownUrlPreviewId,
   videoFileId,
   audioFileId,
   imageFileId,
@@ -17,15 +12,6 @@ import {
 import { Card } from '../src';
 
 const context = createStorybookContext();
-// link cards
-const videoLinkCard = <Card context={context} identifier={videoUrlPreviewId} />;
-const imageLinkCard = <Card context={context} identifier={imageUrlPreviewId} />;
-const audioLinkCard = <Card context={context} identifier={audioUrlPreviewId} />;
-const docLinkCard = <Card context={context} identifier={docUrlPreviewId} />;
-const unknownLinkCard = (
-  <Card context={context} identifier={unknownUrlPreviewId} />
-);
-
 // file cards
 const videoFileCard = <Card context={context} identifier={videoFileId} />;
 const imageFileCard = <Card context={context} identifier={imageFileId} />;
@@ -50,17 +36,11 @@ export default () => (
           <td>
             <div>{videoFileCard}</div>
           </td>
-          <td>
-            <div>{videoLinkCard}</div>
-          </td>
         </tr>
         <tr>
           <td>image</td>
           <td>
             <div>{imageFileCard}</div>
-          </td>
-          <td>
-            <div>{imageLinkCard}</div>
           </td>
         </tr>
         <tr>
@@ -68,26 +48,17 @@ export default () => (
           <td>
             <div>{audioFileCard}</div>
           </td>
-          <td>
-            <div>{audioLinkCard}</div>
-          </td>
         </tr>
         <tr>
           <td>doc</td>
           <td>
             <div>{docFileCard}</div>
           </td>
-          <td>
-            <div>{docLinkCard}</div>
-          </td>
         </tr>
         <tr>
           <td>unknown</td>
           <td>
             <div>{unknownFileCard}</div>
-          </td>
-          <td>
-            <div>{unknownLinkCard}</div>
           </td>
         </tr>
       </tbody>

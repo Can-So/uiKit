@@ -3,9 +3,9 @@ import * as React from 'react';
 import { User } from '../../types';
 
 export const renderProp = (
-  wrapper: ShallowWrapper,
+  wrapper: ShallowWrapper<any>,
   renderProp: string,
-  ...args
+  ...args: any[]
 ) => {
   const prop = wrapper.prop(renderProp);
   if (prop && typeof prop === 'function') {

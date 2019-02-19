@@ -2,20 +2,23 @@ import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { EmojiProvider } from '@atlaskit/emoji';
 import Tooltip from '@atlaskit/tooltip';
 import { emoji } from '@atlaskit/util-data-test';
-import { mount, shallow } from 'enzyme';
+import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { reaction } from '../../../client/MockReactionsClient';
+import { messages } from '../../../components/i18n';
 import { Reaction } from '../../../components/Reaction';
 import { ReactionPicker } from '../../../components/ReactionPicker';
 import { Props, Reactions } from '../../../components/Reactions';
 import { Trigger } from '../../../components/Trigger';
 import { ReactionStatus } from '../../../types/ReactionStatus';
+import { ReactWrapper } from 'enzyme';
 
 const { getEmojiResourcePromise } = emoji.testData;
 
 describe('@atlaskit/reactions/reactions', () => {
   const renderReactions = (extraProps: Partial<Props> = {}) =>
-    shallow(
+    shallowWithIntl(
       <Reactions
         emojiProvider={getEmojiResourcePromise() as Promise<EmojiProvider>}
         reactions={[
@@ -40,12 +43,15 @@ describe('@atlaskit/reactions/reactions', () => {
       .find(Reaction)
       .first()
       .simulate('click');
+
     expect(onReactionClick).toHaveBeenCalled();
   });
 
   it('should show loading tooltip and disable picker', () => {
     const reactions = renderReactions({ status: ReactionStatus.loading });
-    expect(reactions.find(Tooltip).prop('content')).toEqual('Loading...');
+    expect(reactions.find(Tooltip).prop('content')).toEqual(
+      <FormattedMessage {...messages.loadingReactions} />,
+    );
 
     expect(reactions.find(ReactionPicker).prop('disabled')).toBeTruthy();
   });
@@ -73,8 +79,6 @@ describe('@atlaskit/reactions/reactions', () => {
 
   describe('with analytics', () => {
     const onEvent = jest.fn();
-    let component;
-
     const TestComponent = (props: Partial<Props>) => (
       <AnalyticsListener channel="fabric-elements" onEvent={onEvent}>
         <Reactions
@@ -92,8 +96,10 @@ describe('@atlaskit/reactions/reactions', () => {
       </AnalyticsListener>
     );
 
+    let component: ReactWrapper<Props>;
+
     beforeEach(() => {
-      component = mount(<TestComponent />);
+      component = mountWithIntl(<TestComponent />);
       component.setProps({ status: ReactionStatus.ready });
     });
 
@@ -143,7 +149,11 @@ describe('@atlaskit/reactions/reactions', () => {
       });
 
       it('should trigger cancelled for ReactionPicker', () => {
-        component.find(ReactionPicker).prop('onCancel')();
+        const onCancel = component.find(ReactionPicker).prop('onCancel');
+        expect(onCancel).toBeDefined();
+        if (onCancel) {
+          onCancel();
+        }
 
         expect(onEvent).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -246,7 +256,11 @@ describe('@atlaskit/reactions/reactions', () => {
       });
 
       it('should trigger clicked from emojiPicker', () => {
-        component.find(ReactionPicker).prop('onMore')();
+        const onMore = component.find(ReactionPicker).prop('onMore');
+        expect(onMore).toBeDefined();
+        if (onMore) {
+          onMore();
+        }
 
         expect(onEvent).toHaveBeenCalledWith(
           expect.objectContaining({

@@ -20,8 +20,12 @@ import {
   updateStatus,
   commitStatusPicker,
   insertBlockType,
+  setBlockType,
   createTable,
   insertTaskDecision,
+  changeColor,
+  TypeAheadItem,
+  selectItem as selectTypeAheadItem,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -29,8 +33,8 @@ import { Color as StatusColor } from '@atlaskit/status';
 
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
+import { ProseMirrorDOMChange } from '../../types';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';
-import { setBlockType } from '../../../../editor-core/src/plugins/block-type/commands';
 
 export default class WebBridgeImpl extends WebBridge
   implements NativeToWebBridge {
@@ -39,7 +43,7 @@ export default class WebBridgeImpl extends WebBridge
   blockFormatBridgeState: BlockTypeState | null = null;
   listBridgeState: ListsState | null = null;
   mentionsPluginState: MentionPluginState | null = null;
-  editorView: EditorView | null = null;
+  editorView: EditorView & ProseMirrorDOMChange | null = null;
   transformer: JSONTransformer = new JSONTransformer();
   editorActions: EditorActions = new EditorActions();
   mediaPicker: CustomMediaPicker | undefined;
@@ -112,13 +116,24 @@ export default class WebBridgeImpl extends WebBridge
   }
 
   getContent(): string {
-    return this.editorView
-      ? JSON.stringify(this.transformer.encode(this.editorView.state.doc))
-      : '';
+    if (!this.editorView) {
+      return '';
+    }
+
+    // Flush DOM to apply current in flight composition.
+    this.flushDOM();
+
+    return JSON.stringify(this.transformer.encode(this.editorView.state.doc));
   }
 
   setTextFormattingStateAndSubscribe(state: TextFormattingState) {
     this.textFormatBridgeState = state;
+  }
+
+  setTextColor(color: string) {
+    if (this.editorView) {
+      changeColor(color)(this.editorView.state, this.editorView.dispatch);
+    }
   }
 
   onMediaPicked(eventName: string, mediaPayload: string) {
@@ -199,24 +214,17 @@ export default class WebBridgeImpl extends WebBridge
       return;
     }
 
+    const { state, dispatch } = this.editorView;
+
     switch (type) {
       case 'blockquote':
-        insertBlockType('blockquote')(
-          this.editorView.state,
-          this.editorView.dispatch,
-        );
+        insertBlockType('blockquote')(state, dispatch);
         return;
       case 'codeblock':
-        insertBlockType('codeblock')(
-          this.editorView.state,
-          this.editorView.dispatch,
-        );
+        insertBlockType('codeblock')(state, dispatch);
         return;
       case 'panel':
-        insertBlockType('panel')(
-          this.editorView.state,
-          this.editorView.dispatch,
-        );
+        insertBlockType('panel')(state, dispatch);
         return;
       case 'action':
         insertTaskDecision(this.editorView, 'taskList');
@@ -225,7 +233,7 @@ export default class WebBridgeImpl extends WebBridge
         insertTaskDecision(this.editorView, 'decisionList');
         return;
       case 'table':
-        createTable(this.editorView.state, this.editorView.dispatch);
+        createTable(state, dispatch);
         return;
 
       default:
@@ -233,6 +241,76 @@ export default class WebBridgeImpl extends WebBridge
         console.error(`${type} cannot be inserted as it's not supported`);
         return;
     }
+  }
+
+  insertTypeAheadItem(type: 'mention' | 'emoji', payload: string) {
+    if (!this.editorView) {
+      return;
+    }
+
+    this.flushDOM();
+
+    const { state, dispatch } = this.editorView;
+    const item: TypeAheadItem = JSON.parse(payload);
+
+    selectTypeAheadItem(
+      {
+        selectItem: (state, item, insert) => {
+          if (type === 'mention') {
+            const { id, name, nickname, accessLevel, userType } = item;
+            const renderName = nickname ? nickname : name;
+            const mention = state.schema.nodes.mention.createChecked({
+              text: `@${renderName}`,
+              id,
+              accessLevel,
+              userType: userType === 'DEFAULT' ? null : userType,
+            });
+            return insert(mention);
+          }
+
+          return false;
+        },
+        // Needed for interface.
+        trigger: '',
+        getItems: () => [],
+      },
+      item,
+    )(state, dispatch);
+  }
+
+  setFocus(force: boolean) {
+    if (!this.editorView) {
+      return false;
+    }
+    if (this.editorView.hasFocus() && force) {
+      /**
+       * Forcefully remove focus (we re-focus below), as in some scenarios native views make webview cursors invisble.
+       */
+      (this.editorView.dom as HTMLElement).blur();
+    }
+
+    this.editorView.focus();
+    return true;
+  }
+
+  flushDOM() {
+    if (!this.editorView) {
+      return false;
+    }
+
+    /**
+     * NOTE: `inDOMChange` is a private API, it's used as a workaround to forcefully apply current composition
+     * when integrators request the content. It doesn't break the users current composing so they may continue
+     * to compose the current item.
+     * @see ED-5924
+     */
+    const domChange = this.editorView.inDOMChange;
+    if (domChange && domChange.composing) {
+      domChange.finish(true);
+      return true;
+    }
+
+    return false;
   }
 
   getRootElement(): HTMLElement | null {

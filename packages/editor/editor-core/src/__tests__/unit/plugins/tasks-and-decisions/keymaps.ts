@@ -1,6 +1,6 @@
 import {
   compareSelection,
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   decisionList,
@@ -15,12 +15,14 @@ import {
   tdEmpty,
   tr,
 } from '@atlaskit/editor-test-helpers';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import mentionsPlugin from '../../../../plugins/mentions';
 import tablesPlugin from '../../../../plugins/table';
 
 describe('tasks and decisions - keymaps', () => {
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     uuid.setStatic('local-uuid');
   });

@@ -3,7 +3,7 @@ import { selectRow, selectColumn, selectTable } from 'prosemirror-utils';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   thEmpty,
   table,
   tr,
@@ -52,6 +52,8 @@ import listPlugin from '../../../../plugins/lists';
 import { TextSelection } from 'prosemirror-state';
 
 describe('table plugin', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any, trackEvent = () => {}) => {
     const tableOptions = {
       allowNumberColumn: true,
@@ -59,7 +61,7 @@ describe('table plugin', () => {
       allowHeaderColumn: true,
       permittedLayouts: 'all',
     } as PluginConfig;
-    return createEditor<TablePluginState>({
+    return createEditor({
       doc,
       editorPlugins: [
         listPlugin,
@@ -93,7 +95,6 @@ describe('table plugin', () => {
           tr(tdEmpty, tdEmpty, tdEmpty),
         );
         expect(editorView.state.doc).toEqualDocument(doc(tableNode));
-        editorView.destroy();
       });
     });
 
@@ -113,7 +114,6 @@ describe('table plugin', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
   });
@@ -138,7 +138,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.column.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(10);
-          editorView.destroy();
         });
       });
 
@@ -160,7 +159,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.column.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(16);
-          editorView.destroy();
         });
       });
 
@@ -182,7 +180,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.column.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(22);
-          editorView.destroy();
         });
       });
     });
@@ -215,7 +212,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.row.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(10);
-          editorView.destroy();
         });
       });
 
@@ -244,7 +240,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.row.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(20);
-          editorView.destroy();
         });
       });
     });
@@ -275,7 +270,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.row.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(30);
-          editorView.destroy();
         });
       });
     });
@@ -308,8 +302,6 @@ describe('table plugin', () => {
           expect(trackEvent).toHaveBeenLastCalledWith(
             'atlassian.editor.format.table.row.button',
           );
-
-          editorView.destroy();
         });
       });
 
@@ -341,8 +333,6 @@ describe('table plugin', () => {
         expect(trackEvent).toHaveBeenLastCalledWith(
           'atlassian.editor.format.table.row.button',
         );
-
-        editorView.destroy();
       });
 
       it('copies the structure from a tableHeader', () => {
@@ -377,8 +367,6 @@ describe('table plugin', () => {
         expect(trackEvent).toHaveBeenLastCalledWith(
           'atlassian.editor.format.table.row.button',
         );
-
-        editorView.destroy();
       });
     });
   });
@@ -403,7 +391,6 @@ describe('table plugin', () => {
             expect(anchor).toEqual(column);
             expect(head).toEqual(column);
             expect(selection.isColSelection()).toEqual(true);
-            editorView.destroy();
           });
         });
       });
@@ -427,7 +414,6 @@ describe('table plugin', () => {
             expect(anchor).toEqual(row);
             expect(head).toEqual(row);
             expect(selection.isRowSelection()).toEqual(true);
-            editorView.destroy();
           });
         });
       });
@@ -444,7 +430,6 @@ describe('table plugin', () => {
       const selection = (editorView.state.selection as any) as CellSelection;
       expect(selection.isRowSelection()).toEqual(true);
       expect(selection.isColSelection()).toEqual(true);
-      editorView.destroy();
     });
   });
 
@@ -471,7 +456,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.delete_column.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-          editorView.destroy();
         });
       });
 
@@ -495,13 +479,12 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.delete_column.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-          editorView.destroy();
         });
       });
 
       describe('when the header row is selected', () => {
         const editorTableHeader = (doc: any) =>
-          createEditor<TablePluginState>({
+          createEditor({
             doc,
             editorPlugins: [tablesPlugin({ isHeaderRowRequired: true })],
             editorProps: {
@@ -522,7 +505,6 @@ describe('table plugin', () => {
           expect(editorView.state.doc).toEqualDocument(
             doc(table()(tr(th({})(p())), tr(tdEmpty))),
           );
-          editorView.destroy();
         });
 
         it('it should move cursor to the first cell of the new header row', () => {
@@ -541,7 +523,6 @@ describe('table plugin', () => {
           deleteSelectedRows(editorView.state, editorView.dispatch);
           expect(editorView.state.selection.$from.pos).toEqual(nextPos);
           expect(editorView.state.selection.$to.pos).toEqual(nextPos);
-          editorView.destroy();
         });
       });
 
@@ -565,7 +546,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.delete_column.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-          editorView.destroy();
         });
       });
     });
@@ -591,7 +571,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.delete_row.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-          editorView.destroy();
         });
       });
 
@@ -615,7 +594,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.delete_row.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-          editorView.destroy();
         });
       });
 
@@ -639,7 +617,6 @@ describe('table plugin', () => {
             'atlassian.editor.format.table.delete_row.button',
           );
           expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-          editorView.destroy();
         });
       });
     });
@@ -656,7 +633,6 @@ describe('table plugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(p('text'), table()(tr(thEmpty, thEmpty), tr(tdEmpty, tdEmpty))),
         );
-        editorView.destroy();
       });
 
       describe('when header column is enabled', () => {
@@ -671,7 +647,6 @@ describe('table plugin', () => {
           expect(editorView.state.doc).toEqualDocument(
             doc(p('text'), table()(tr(thEmpty, thEmpty), tr(thEmpty, tdEmpty))),
           );
-          editorView.destroy();
         });
       });
     });
@@ -685,7 +660,6 @@ describe('table plugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(p('text'), table()(tr(tdEmpty, tdEmpty), tr(tdEmpty, tdEmpty))),
         );
-        editorView.destroy();
       });
 
       describe('when header column is enabled', () => {
@@ -700,7 +674,6 @@ describe('table plugin', () => {
           expect(editorView.state.doc).toEqualDocument(
             doc(p('text'), table()(tr(thEmpty, tdEmpty), tr(thEmpty, tdEmpty))),
           );
-          editorView.destroy();
         });
       });
     });
@@ -717,7 +690,6 @@ describe('table plugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(p('text'), table()(tr(thEmpty, tdEmpty), tr(thEmpty, tdEmpty))),
         );
-        editorView.destroy();
       });
 
       describe('when header row is enabled', () => {
@@ -729,7 +701,6 @@ describe('table plugin', () => {
           expect(editorView.state.doc).toEqualDocument(
             doc(p('text'), table()(tr(thEmpty, thEmpty), tr(thEmpty, tdEmpty))),
           );
-          editorView.destroy();
         });
       });
     });
@@ -743,7 +714,6 @@ describe('table plugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(p('text'), table()(tr(tdEmpty, tdEmpty), tr(tdEmpty, tdEmpty))),
         );
-        editorView.destroy();
       });
 
       describe('when header row is enabled', () => {
@@ -755,7 +725,6 @@ describe('table plugin', () => {
           expect(editorView.state.doc).toEqualDocument(
             doc(p('text'), table()(tr(thEmpty, thEmpty), tr(tdEmpty, tdEmpty))),
           );
-          editorView.destroy();
         });
       });
     });
@@ -810,7 +779,6 @@ describe('table plugin', () => {
           ),
         ),
       );
-      editorView.destroy();
     });
 
     it('should add a paragraph above when arrow up is pressed', () => {
@@ -861,7 +829,6 @@ describe('table plugin', () => {
           ),
         ),
       );
-      editorView.destroy();
     });
 
     it('should not add a paragraph, if there already is a paragraph below when arrow down is pressed', () => {
@@ -893,7 +860,6 @@ describe('table plugin', () => {
       sendKeyToPm(editorView, 'ArrowDown');
 
       expect(editorView.state.doc).toEqualDocument(docWithTable);
-      editorView.destroy();
     });
 
     it('should not add a paragraph, if there already is a paragraph above when arrow up is pressed', () => {
@@ -925,7 +891,6 @@ describe('table plugin', () => {
       sendKeyToPm(editorView, 'ArrowUp');
 
       expect(editorView.state.doc).toEqualDocument(docWithTable);
-      editorView.destroy();
     });
   });
 
@@ -994,7 +959,6 @@ describe('table plugin', () => {
         doc(table()(tr(tdCursor, tdEmpty, tdEmpty))),
       );
       expect(checkIfNumberColumnEnabled(editorView.state)).toBe(false);
-      editorView.destroy();
     });
   });
 
@@ -1004,7 +968,6 @@ describe('table plugin', () => {
         doc(table()(tr(tdCursor, tdEmpty, tdEmpty))),
       );
       expect(checkIfHeaderColumnEnabled(editorView.state)).toBe(false);
-      editorView.destroy();
     });
   });
 
@@ -1014,7 +977,6 @@ describe('table plugin', () => {
         doc(table()(tr(tdCursor, tdEmpty, tdEmpty))),
       );
       expect(checkIfHeaderRowEnabled(editorView.state)).toBe(false);
-      editorView.destroy();
     });
   });
 
@@ -1024,7 +986,6 @@ describe('table plugin', () => {
         doc(table()(tr(tdCursor, tdEmpty, tdEmpty))),
       );
       expect(checkIfHeaderRowEnabled(editorView.state)).toBe(false);
-      editorView.destroy();
     });
   });
 

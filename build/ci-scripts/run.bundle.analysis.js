@@ -1,13 +1,10 @@
 const boltWebpackAnalyzer = require('bolt-webpack-analyzer');
 const chalk = require('chalk');
-const { Document } = require('adf-builder');
 const axios = require('axios');
 
 const analysisServerEndpoint = process.env.ANALYSIS_SERVER_ENDPOINT;
-const strideEndpoint = process.env.STRIDE_ENDPOINT;
-const strideAccessToken = process.env.BUNDLE_ANALYSIS_STRIDE_TOKEN;
 
-async function main() {
+(async () => {
   try {
     let results = await boltWebpackAnalyzer({
       cwd: process.cwd(),
@@ -31,28 +28,9 @@ async function main() {
       JSON.stringify(results),
       config,
     );
-
-    let doc = new Document();
-    doc
-      .paragraph()
-      .text('New atlaskit bundle analysis report is out! ')
-      .link(
-        `${analysisServerEndpoint}/bundle-analysis-report/${res.data.id}`,
-        `${analysisServerEndpoint}/bundle-analysis-report/${res.data.id}`,
-      );
-
-    config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + strideAccessToken,
-      },
-    };
-
-    await axios.post(strideEndpoint, JSON.stringify(doc), config);
+    // TODO: Either build a new app / webhook for Slack or post the data in Redash
   } catch (err) {
     console.error(chalk.red(err));
     process.exit(1);
   }
-}
-
-main();
+})();

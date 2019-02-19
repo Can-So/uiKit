@@ -131,7 +131,7 @@ export default class ExtensionComponent extends Component<Props, State> {
 
   private handleExtension = (node: PMNode) => {
     const { extensionHandlers, editorView } = this.props;
-    const { extensionType, extensionKey, parameters } = node.attrs;
+    const { extensionType, extensionKey, parameters, text } = node.attrs;
     const isBodiedExtension = node.type.name === 'bodiedExtension';
 
     if (
@@ -151,7 +151,7 @@ export default class ExtensionComponent extends Component<Props, State> {
         extensionType,
         extensionKey,
         parameters,
-        content: node.content,
+        content: text,
       },
       editorView.state.doc,
     );

@@ -1,7 +1,7 @@
 import { NodeSelection } from 'prosemirror-state';
 import {
   compareSelection,
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   blockquote,
@@ -14,7 +14,7 @@ import {
   br,
   panel,
 } from '@atlaskit/editor-test-helpers';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import {
   TaskDecisionListType,
   insertTaskDecision,
@@ -24,6 +24,8 @@ import mediaPlugin from '../../../../plugins/media';
 import panelPlugin from '../../../../plugins/panel';
 
 describe('tasks and decisions - commands', () => {
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     uuid.setStatic('local-uuid');
   });

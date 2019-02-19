@@ -10,6 +10,10 @@ import {
   ListsState,
   statusPluginKey,
   StatusState,
+  textColorPluginKey,
+  TextColorPluginState,
+  typeAheadPluginKey,
+  TypeAheadPluginState,
 } from '@atlaskit/editor-core';
 
 import { valueOf as valueOfListState } from '../web-to-native/listState';
@@ -20,7 +24,19 @@ import { toNativeBridge, EditorPluginBridges } from '../web-to-native';
 interface BridgePluginListener<T> {
   bridge: EditorPluginBridges;
   pluginKey: PluginKey;
-  updater: (state: T) => void;
+  updater: (state: T, initialPass?: boolean) => void;
+  sendInitialState?: boolean;
+}
+
+interface SerialisedTextColor {
+  color: string | null;
+  disabled?: boolean | undefined;
+  borderColorPalette?: {
+    [color: string]: string; // Hex
+  };
+  palette?: {
+    [color: string]: string; // Hex
+  };
 }
 
 const createListenerConfig = <T>(config: BridgePluginListener<T>) => config;
@@ -30,15 +46,16 @@ const configs: Array<BridgePluginListener<any>> = [
     bridge: 'statusBridge',
     pluginKey: statusPluginKey,
     updater: state => {
-      const { selectedStatus: status, showStatusPickerAt } = state;
+      const { selectedStatus: status, showStatusPickerAt, isNew } = state;
       if (status) {
         toNativeBridge.call('statusBridge', 'showStatusPicker', {
           text: status.text,
           color: status.color,
           uuid: status.localId,
+          isNew,
         });
       } else if (!showStatusPickerAt) {
-        toNativeBridge.call('statusBridge', 'dismissStatusPicker');
+        toNativeBridge.call('statusBridge', 'dismissStatusPicker', { isNew });
       }
     },
   }),
@@ -82,6 +99,52 @@ const configs: Array<BridgePluginListener<any>> = [
       });
     },
   }),
+  createListenerConfig<TextColorPluginState>({
+    bridge: 'textFormatBridge',
+    pluginKey: textColorPluginKey,
+    updater: (state, initialPass) => {
+      let color = state.color || null;
+      let serialisedState: SerialisedTextColor = {
+        color,
+        disabled: state.disabled,
+      };
+
+      if (initialPass) {
+        let palette = Object.create(null);
+        for (let [k, v] of state.palette) {
+          palette[v] = k;
+        }
+
+        serialisedState = {
+          ...state,
+          color,
+          palette,
+        };
+      }
+
+      toNativeBridge.call('textFormatBridge', 'updateTextColor', {
+        states: JSON.stringify(serialisedState),
+      });
+    },
+    sendInitialState: true,
+  }),
+  createListenerConfig<TypeAheadPluginState>({
+    bridge: 'typeAheadBridge',
+    pluginKey: typeAheadPluginKey,
+    updater: state => {
+      const { active, query, trigger } = state;
+
+      if (active === false) {
+        toNativeBridge.call('typeAheadBridge', 'dismissTypeAhead');
+        return;
+      }
+
+      toNativeBridge.call('typeAheadBridge', 'typeAheadQuery', {
+        query,
+        trigger,
+      });
+    },
+  }),
 ];
 
 export const initPluginListeners = (
@@ -92,7 +155,13 @@ export const initPluginListeners = (
   configs.forEach(config => {
     const { updater, pluginKey } = config;
     const state = pluginKey.getState(view.state);
-    bridge[`${config.bridge}State`] = state;
+    bridge[`${config.bridge}State`] = {
+      ...bridge[`${config.bridge}State`],
+      ...state,
+    };
+    if (config.sendInitialState && state) {
+      updater(state, true);
+    }
     eventDispatcher.on((pluginKey as any).key, state => updater(state));
   });
 };

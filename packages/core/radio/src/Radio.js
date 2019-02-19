@@ -94,13 +94,12 @@ class Radio extends Component<RadioProps, State> {
       onChange,
       onInvalid,
       value,
-      ...props
+      ...rest
     } = this.props;
     const { isFocused, isHovered, isActive } = this.state;
 
     return (
       <Label
-        {...props}
         isDisabled={isDisabled}
         onMouseDown={this.onMouseDown}
         onMouseEnter={this.onMouseEnter}
@@ -120,6 +119,7 @@ class Radio extends Component<RadioProps, State> {
             required={isRequired}
             type="radio"
             value={value}
+            {...rest}
           />
           <RadioIcon
             isActive={isActive}

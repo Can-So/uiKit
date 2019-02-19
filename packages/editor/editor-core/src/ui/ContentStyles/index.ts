@@ -62,11 +62,13 @@ const ContentStyles: ComponentClass<
     outline: 2px solid #8cf;
   }
 
-  .ProseMirror img {
-    max-width: 100%;
+  .inlineCardView-content-wrap {
+    display: inline-block;
+    max-width: calc(100% - 20px);
+    vertical-align: top;
+    word-break: break-all;
   }
 
-  .inlineCardView-content-wrap,
   .blockCardView-content-wrap {
     display: inline-block;
   }
@@ -111,7 +113,7 @@ const ContentStyles: ComponentClass<
   }
 
   /** Needed to override any cleared floats, e.g. image wrapping */
-  div.fabric-editor-block-mark[class^='align'] {
+  div.fabric-editor-block-mark[class^='fabric-editor-align'] {
     clear: none !important;
   }
 
@@ -125,6 +127,10 @@ const ContentStyles: ComponentClass<
 
   .fabric-editor-align-center {
     text-align: center;
+  }
+
+  .hyperlink-floating-toolbar {
+    padding: 0;
   }
 
 `;

@@ -1,20 +1,19 @@
 import {
   Fragment,
-  Slice,
   Node as PMNode,
   NodeType,
   MarkType,
   Schema,
 } from 'prosemirror-model';
-import { EditorState, NodeSelection, TextSelection } from 'prosemirror-state';
 import {
-  canMoveDown,
-  canMoveUp,
-  atTheEndOfDoc,
-  atTheBeginningOfBlock,
-  isTableCell,
-} from '../utils';
+  EditorState,
+  NodeSelection,
+  TextSelection,
+  Transaction,
+} from 'prosemirror-state';
+import { canMoveDown, canMoveUp } from '../utils';
 import { Command } from '../types';
+import { EditorView } from 'prosemirror-view';
 
 export function preventDefault(): Command {
   return function(state, dispatch) {
@@ -62,33 +61,6 @@ export function insertRule(): Command {
       return true;
     }
     return false;
-  };
-}
-
-export function shouldAppendParagraphAfterBlockNode(state: EditorState) {
-  return atTheEndOfDoc(state) && atTheBeginningOfBlock(state);
-}
-
-export function insertNodesEndWithNewParagraph(nodes: PMNode[]): Command {
-  return function(state, dispatch) {
-    const { tr, schema } = state;
-    const { paragraph } = schema.nodes;
-    const { head } = state.selection;
-
-    if (shouldAppendParagraphAfterBlockNode(state)) {
-      nodes.push(paragraph.create());
-    }
-
-    /** If table cell, the default is to move to the next cell, override to select paragraph */
-    tr.replaceSelection(new Slice(Fragment.from(nodes), 0, 0));
-    if (isTableCell(state)) {
-      tr.setSelection(TextSelection.create(state.doc, head, head));
-    }
-
-    if (dispatch) {
-      dispatch(tr);
-    }
-    return true;
   };
 }
 
@@ -224,6 +196,36 @@ export function createParagraphAtEnd(): Command {
   };
 }
 
+export interface Command {
+  (
+    state: EditorState,
+    dispatch: (tr: Transaction) => void,
+    view?: EditorView,
+  ): boolean;
+}
+
+export const changeImageAlignment = (align): Command => (state, dispatch) => {
+  const { from, to } = state.selection;
+
+  const tr = state.tr;
+
+  state.doc.nodesBetween(from, to, (node, pos, parent) => {
+    if (node.type === state.schema.nodes.mediaSingle) {
+      tr.setNodeMarkup(pos, undefined, {
+        ...node.attrs,
+        layout: align === 'center' ? 'center' : `align-${align}`,
+      });
+    }
+  });
+
+  if (tr.docChanged && dispatch) {
+    dispatch(tr.scrollIntoView());
+    return true;
+  }
+
+  return false;
+};
+
 /**
  * Toggles block mark based on the return type of `getAttrs`.
  * This is similar to ProseMirror's `getAttrs` from `AttributeSpec`
@@ -233,7 +235,7 @@ export function createParagraphAtEnd(): Command {
  */
 export const toggleBlockMark = <T = object>(
   markType: MarkType,
-  getAttrs: ((prevAttrs?: T) => T | undefined | false),
+  getAttrs: ((prevAttrs?: T, node?: PMNode) => T | undefined | false),
   allowedBlocks?:
     | Array<NodeType>
     | ((schema: Schema, node: PMNode, parent: PMNode) => boolean),
@@ -256,9 +258,9 @@ export const toggleBlockMark = <T = object>(
       parent.type.allowsMarkType(markType)
     ) {
       const oldMarks = node.marks.filter(mark => mark.type === markType);
-      const newAttrs = getAttrs(
-        oldMarks.length ? (oldMarks[0].attrs as T) : undefined,
-      );
+
+      const prevAttrs = oldMarks.length ? (oldMarks[0].attrs as T) : undefined;
+      const newAttrs = getAttrs(prevAttrs, node);
 
       if (newAttrs !== undefined) {
         tr.setNodeMarkup(

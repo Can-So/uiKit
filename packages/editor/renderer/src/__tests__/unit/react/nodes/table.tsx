@@ -1,16 +1,26 @@
 import * as React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { expect } from 'chai';
-import { akEditorTableNumberColumnWidth } from '@atlaskit/editor-common';
+import {
+  akEditorTableNumberColumnWidth,
+  akEditorDefaultLayoutWidth,
+  akEditorTableLegacyCellMinWidth as tableCellMinWidth,
+} from '@atlaskit/editor-common';
 import Table from '../../../../react/nodes/table';
 import TableCell from '../../../../react/nodes/tableCell';
 import TableHeader from '../../../../react/nodes/tableHeader';
 import TableRow from '../../../../react/nodes/tableRow';
 
 describe('Renderer - React/Nodes/Table', () => {
+  const renderWidth = akEditorDefaultLayoutWidth;
+
   it('should render table DOM with all attributes', () => {
     const table = mount(
-      <Table layout="full-width" isNumberColumnEnabled={true}>
+      <Table
+        layout="full-width"
+        isNumberColumnEnabled={true}
+        renderWidth={renderWidth}
+      >
         <TableRow>
           <TableCell />
         </TableRow>
@@ -29,6 +39,7 @@ describe('Renderer - React/Nodes/Table', () => {
         layout="default"
         isNumberColumnEnabled={true}
         columnWidths={columnWidths}
+        renderWidth={renderWidth}
       >
         <TableRow>
           <TableCell />
@@ -43,8 +54,12 @@ describe('Renderer - React/Nodes/Table', () => {
   });
 
   it('should render children', () => {
-    const table = shallow(
-      <Table layout="default" isNumberColumnEnabled={true}>
+    const table = mount(
+      <Table
+        layout="default"
+        isNumberColumnEnabled={true}
+        renderWidth={renderWidth}
+      >
         <TableRow>
           <TableCell />
           <TableCell />
@@ -62,7 +77,11 @@ describe('Renderer - React/Nodes/Table', () => {
     describe('When header row is enabled', () => {
       it('should start numbers from the second row', () => {
         const table = mount(
-          <Table layout="default" isNumberColumnEnabled={true}>
+          <Table
+            layout="default"
+            isNumberColumnEnabled={true}
+            renderWidth={renderWidth}
+          >
             <TableRow>
               <TableHeader />
               <TableHeader />
@@ -91,7 +110,11 @@ describe('Renderer - React/Nodes/Table', () => {
     describe('When header row is disabled', () => {
       it('should start numbers from the first row', () => {
         const table = mount(
-          <Table layout="default" isNumberColumnEnabled={true}>
+          <Table
+            layout="default"
+            isNumberColumnEnabled={true}
+            renderWidth={renderWidth}
+          >
             <TableRow>
               <TableCell />
               <TableCell />
@@ -118,12 +141,13 @@ describe('Renderer - React/Nodes/Table', () => {
       });
     });
     it('should add an extra <col> node for number column', () => {
-      const columnWidths = [111, 222];
+      const columnWidths = [300, 380];
       const table = mount(
         <Table
           layout="default"
           isNumberColumnEnabled={true}
           columnWidths={columnWidths}
+          renderWidth={renderWidth}
         >
           <TableRow>
             <TableCell />
@@ -153,12 +177,13 @@ describe('Renderer - React/Nodes/Table', () => {
 
   describe('When number column is disabled', () => {
     it('should not add an extra <col> node for number column', () => {
-      const columnWidths = [111, 222];
+      const columnWidths = [300, 380];
       const table = mount(
         <Table
           layout="default"
           isNumberColumnEnabled={false}
           columnWidths={columnWidths}
+          renderWidth={renderWidth}
         >
           <TableRow>
             <TableCell />
@@ -178,23 +203,99 @@ describe('Renderer - React/Nodes/Table', () => {
     });
   });
 
-  describe('When a columns does not have width', () => {
-    it('should not collapse to a width smaller than defined min width', () => {
-      const columnWidths = [500, 500, 0];
-      const cellMinWidth = 128;
-      const wrapperWidth = 680;
+  describe('When multiple columns do not have width', () => {
+    describe('when renderWidth is smaller than table minimum allowed width', () => {
+      it('should add minWidth to zero width columns', () => {
+        const columnWidths = [220, 220, 0, 0];
 
-      const mock = jest.spyOn(window, 'getComputedStyle' as any);
-      mock.mockImplementation(() => ({
-        width: wrapperWidth,
-        'min-width': cellMinWidth,
-      }));
+        const table = mount(
+          <Table
+            layout="default"
+            isNumberColumnEnabled={true}
+            columnWidths={columnWidths}
+            renderWidth={renderWidth}
+          >
+            <TableRow>
+              <TableCell />
+              <TableCell />
+              <TableCell />
+              <TableCell />
+            </TableRow>
+            <TableRow>
+              <TableCell />
+              <TableCell />
+              <TableCell />
+              <TableCell />
+            </TableRow>
+          </Table>,
+        );
+        table.setProps({ isNumberColumnEnabled: false });
+
+        expect(table.find('col')).to.have.lengthOf(4);
+
+        table.find('col').forEach((col, index) => {
+          if (index < 2) {
+            expect(col.prop('style')!.width).to.equal(
+              `${columnWidths[index]}px`,
+            );
+          } else {
+            expect(col.prop('style')!.width).to.equal(`${tableCellMinWidth}px`);
+          }
+        });
+      });
+    });
+    describe('when renderWidth is greater than table minimum allowed width', () => {
+      it('should not add minWidth to zero width columns', () => {
+        const columnWidths = [200, 200, 0, 0];
+
+        const table = mount(
+          <Table
+            layout="default"
+            isNumberColumnEnabled={true}
+            columnWidths={columnWidths}
+            renderWidth={renderWidth}
+          >
+            <TableRow>
+              <TableCell />
+              <TableCell />
+              <TableCell />
+              <TableCell />
+            </TableRow>
+            <TableRow>
+              <TableCell />
+              <TableCell />
+              <TableCell />
+              <TableCell />
+            </TableRow>
+          </Table>,
+        );
+        table.setProps({ isNumberColumnEnabled: false });
+
+        expect(table.find('col')).to.have.lengthOf(4);
+
+        table.find('col').forEach((col, index) => {
+          if (index < 2) {
+            expect(col.prop('style')!.width).to.equal(
+              `${columnWidths[index]}px`,
+            );
+          } else {
+            expect(typeof col.prop('style')!.width).to.equal('undefined');
+          }
+        });
+      });
+    });
+  });
+
+  describe('TinyMCE migrated table', () => {
+    it('should scale columnWidths if total size is less than layout', () => {
+      const columnWidths = [100, 100, 100];
 
       const table = mount(
         <Table
           layout="default"
-          isNumberColumnEnabled={true}
+          isNumberColumnEnabled={false}
           columnWidths={columnWidths}
+          renderWidth={renderWidth}
         >
           <TableRow>
             <TableCell />
@@ -208,19 +309,75 @@ describe('Renderer - React/Nodes/Table', () => {
           </TableRow>
         </Table>,
       );
-      table.setProps({ isNumberColumnEnabled: false });
 
       expect(table.find('col')).to.have.lengthOf(3);
-
-      table.find('col').forEach((col, index) => {
-        if (index < 2) {
-          expect(col.prop('style')!.width).to.equal(`${columnWidths[index]}px`);
-        } else {
-          expect(col.prop('style')!.width).to.equal(`${cellMinWidth}px`);
-        }
+      table.find('col').forEach(col => {
+        expect(col.prop('style')!.width).to.equal(`226.67px`);
       });
+    });
+  });
 
-      mock.mockRestore();
+  describe('when renderWidth is 10% lower than table width', () => {
+    it('should scale down columns widths by 10%', () => {
+      const columnWidths = [200, 200, 280];
+
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={false}
+          columnWidths={columnWidths}
+          renderWidth={612}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+
+      expect(table.find('col')).to.have.lengthOf(3);
+      table.find('col').forEach((col, index) => {
+        const width = columnWidths[index] - columnWidths[index] * 0.1;
+        expect(col.prop('style')!.width).to.equal(`${width}px`);
+      });
+    });
+  });
+
+  describe('when renderWidth is 20% lower than table width', () => {
+    it('should scale down columns widths by 15% and then overflow', () => {
+      const columnWidths = [200, 200, 280];
+
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={false}
+          columnWidths={columnWidths}
+          renderWidth={578}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+
+      expect(table.find('col')).to.have.lengthOf(3);
+      table.find('col').forEach((col, index) => {
+        const width = columnWidths[index] - columnWidths[index] * 0.15;
+        expect(col.prop('style')!.width).to.equal(`${width}px`);
+      });
     });
   });
 });

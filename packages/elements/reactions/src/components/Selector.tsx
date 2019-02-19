@@ -55,7 +55,7 @@ export const revealStyle = style({
   animation: `${revealAnimation} 150ms ease-in-out forwards`,
 });
 
-const revealDelay = index => ({ animationDelay: `${index * 50}ms` });
+const revealDelay = (index: number) => ({ animationDelay: `${index * 50}ms` });
 
 export const defaultReactions: EmojiId[] = [
   { id: '1f44d', shortName: ':thumbsup:' },
@@ -87,7 +87,7 @@ export interface State {
 export class Selector extends PureComponent<Props, State> {
   private timeouts: Array<number>;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.timeouts = [];
 
@@ -116,7 +116,7 @@ export class Selector extends PureComponent<Props, State> {
     });
   };
 
-  private renderEmoji = (emojiId, index) => {
+  private renderEmoji = (emojiId: EmojiId, index: number) => {
     const { emojiProvider } = this.props;
     const key = emojiId.id || emojiId.shortName;
 

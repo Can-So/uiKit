@@ -1,7 +1,7 @@
 import {
   doc,
   insertText,
-  createEditor,
+  createEditorFactory,
   p,
   sleep,
 } from '@atlaskit/editor-test-helpers';
@@ -16,6 +16,8 @@ interface InputEvent extends UIEvent, Event {
 }
 
 describe('placeholder', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent = () => {}) =>
     createEditor({
       doc,
@@ -25,6 +27,9 @@ describe('placeholder', () => {
         analyticsHandler: trackEvent,
       },
     });
+
+  const placeholderHtml =
+    '<p><span class="placeholder-decoration ProseMirror-widget"><span>potato</span></span><br></p>';
 
   const androidComposeStart = function(view: EditorView, data: string) {
     view.dom.dispatchEvent(
@@ -141,16 +146,12 @@ describe('placeholder', () => {
 
   it('renders a placeholder on a blank document', () => {
     const { editorView } = editor(doc(p()));
-    expect(editorView.dom.innerHTML).toEqual(
-      '<p><span class="placeholder-decoration ProseMirror-widget" data-text="potato"></span><br></p>',
-    );
+    expect(editorView.dom.innerHTML).toEqual(placeholderHtml);
   });
 
   it('disappears when content is added to document', () => {
     const { editorView } = editor(doc(p()));
-    expect(editorView.dom.innerHTML).toEqual(
-      '<p><span class="placeholder-decoration ProseMirror-widget" data-text="potato"></span><br></p>',
-    );
+    expect(editorView.dom.innerHTML).toEqual(placeholderHtml);
 
     insertText(editorView, 'a', 0);
     expect(editorView.dom.innerHTML).toEqual('<p>a</p><p><br></p>');
@@ -159,9 +160,7 @@ describe('placeholder', () => {
   describe('on mobile', () => {
     it('disappears when a compositionstart event occurs', () => {
       const { editorView } = editor(doc(p()));
-      expect(editorView.dom.innerHTML).toEqual(
-        '<p><span class="placeholder-decoration ProseMirror-widget" data-text="potato"></span><br></p>',
-      );
+      expect(editorView.dom.innerHTML).toEqual(placeholderHtml);
 
       editorView.dom.dispatchEvent(
         new KeyboardEvent('compositionstart', { key: 'a' }),
@@ -180,9 +179,7 @@ describe('placeholder', () => {
 
     it('stays hidden and keeps content after a full composition completes', async () => {
       const { editorView } = editor(doc(p()));
-      expect(editorView.dom.innerHTML).toEqual(
-        '<p><span class="placeholder-decoration ProseMirror-widget" data-text="potato"></span><br></p>',
-      );
+      expect(editorView.dom.innerHTML).toEqual(placeholderHtml);
 
       androidComposeStart(editorView, 'a');
       expect(editorView.dom.innerHTML).toEqual('<p><br></p>');
@@ -203,9 +200,7 @@ describe('placeholder', () => {
 
     it('reappears after text is backspaced', async () => {
       const { editorView } = editor(doc(p()));
-      expect(editorView.dom.innerHTML).toEqual(
-        '<p><span class="placeholder-decoration ProseMirror-widget" data-text="potato"></span><br></p>',
-      );
+      expect(editorView.dom.innerHTML).toEqual(placeholderHtml);
 
       androidComposeStart(editorView, 'a');
       expect(editorView.dom.innerHTML).toEqual('<p><br></p>');
@@ -225,9 +220,7 @@ describe('placeholder', () => {
       // ProseMirror does DOM sync after compositionend after 50ms
       await sleep(50);
 
-      expect(editorView.dom.innerHTML).toEqual(
-        '<p><span class="placeholder-decoration ProseMirror-widget" data-text="potato"></span><br></p>',
-      );
+      expect(editorView.dom.innerHTML).toEqual(placeholderHtml);
       expect(editorView.state.doc).toEqualDocument(doc(p()));
     });
   });

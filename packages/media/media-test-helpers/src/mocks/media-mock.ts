@@ -1,5 +1,5 @@
 import { Server } from 'kakapo';
-
+import * as exenv from 'exenv';
 import { createApiRouter, createMediaPlaygroundRouter } from './routers';
 import {
   createDatabase,
@@ -17,6 +17,10 @@ export class MediaMock {
   }
 
   enable() {
+    if (!exenv.canUseDOM) {
+      return;
+    }
+
     this.server.use(createDatabase());
     this.server.use(createMediaPlaygroundRouter());
     this.server.use(createApiRouter());

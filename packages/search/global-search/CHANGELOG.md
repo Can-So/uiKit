@@ -1,5 +1,48 @@
 # @atlaskit/global-search
 
+## 5.15.2
+- [patch] [cfb2fa498f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfb2fa498f):
+
+  - Add measurements for experiment api latency
+
+## 5.15.1
+- [patch] [b21df8f941](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b21df8f941):
+
+  - Support new experiment api
+
+## 5.15.0
+- [minor] [a6a76aa7cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6a76aa7cd):
+
+  - Adds ability to send search terms for jira quick search
+
+## 5.14.1
+- [patch] [f9e27f2b99](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9e27f2b99):
+
+  - Modified CPUS response objects to match API correctly
+
+## 5.14.0
+- [minor] [df2b5b7235](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df2b5b7235):
+
+  - Disable people search on the pre-query screen temporarily for performance reasons.
+
+## 5.13.7
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/drawer@2.7.1
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/flag@9.1.9
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/navigation@33.3.9
+  - @atlaskit/quick-search@5.2.5
+  - @atlaskit/icon@16.0.0
+
+## 5.13.6
+- [patch] [d6bd32b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d6bd32b):
+
+  - Updated global-search translations
+
 ## 5.13.5
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics@4.0.7

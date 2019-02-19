@@ -64,7 +64,7 @@ curl -s "https://api.bitbucket.org/2.0/repositories/atlassian-marketplace/market
 
 Now put this value into the `atlassian-connect.json` field for "conditions". This prevents your addon from accidentally showing in other repos that might not be expecting it.
 
-> Technically, you can just remove this field to get things working locally. It's reccomended to not do that, because if you push to production and accidentally forget to put it back in, you'll display the addon for ALL repos it's owned by, where as pushing with the wrong uuid will simply cause it to not show for anyone.
+> Technically, you can just remove this field to get things working locally. It's recommended to not do that, because if you push to production and accidentally forget to put it back in, you'll display the addon for ALL repos it's owned by, where as pushing with the wrong uuid will simply cause it to not show for anyone.
 
 Now you're ready to install!
 

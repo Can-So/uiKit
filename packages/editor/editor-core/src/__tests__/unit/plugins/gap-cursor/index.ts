@@ -1,28 +1,13 @@
 import { TextSelection } from 'prosemirror-state';
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   blockquote,
-  code_block,
-  panel,
   table,
   tr,
   td,
   tdCursor,
-  tdEmpty,
-  decisionList,
-  decisionItem,
-  taskList,
-  taskItem,
-  bodiedExtension,
-  hr,
-  extension,
-  mediaSingle,
-  media,
-  mediaGroup,
-  randomId,
-  bodiedExtensionData,
   sendKeyToPm,
   h1,
 } from '@atlaskit/editor-test-helpers';
@@ -42,9 +27,11 @@ import tablesPlugin from '../../../../plugins/table';
 import extensionPlugin from '../../../../plugins/extension';
 import mediaPlugin from '../../../../plugins/media';
 
-const extensionAttrs = bodiedExtensionData[0].attrs;
+import { blockNodes, leafBlockNodes } from './_utils';
 
 describe('gap-cursor', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent?: () => {}) =>
     createEditor({
       doc,
@@ -64,73 +51,22 @@ describe('gap-cursor', () => {
       pluginKey,
     });
 
-  const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
-  const temporaryFileId = `temporary:${randomId()}`;
-
-  const cursorIfSelected = (selected?: boolean) => (selected ? '{<>}' : '');
-
-  const blockNodes = {
-    code_block: (opts: { id?: string; selected?: boolean } = {}) =>
-      code_block({ language: 'java', uniqueId: opts.id })(
-        cursorIfSelected(opts.selected),
-      ),
-    panel: (opts: { id?: string; selected?: boolean } = {}) =>
-      panel({ localId: opts.id })(p(cursorIfSelected(opts.selected))),
-    table: (opts: { selected?: boolean } = {}) =>
-      table()(tr(opts.selected ? tdCursor : tdEmpty)),
-    decisionList: (opts: { id?: string; selected?: boolean } = {}) =>
-      decisionList({ localId: opts.id })(
-        decisionItem({ localId: opts.id })(cursorIfSelected(opts.selected)),
-      ),
-    taskList: (opts: { id?: string; selected?: boolean } = {}) =>
-      taskList({ localId: opts.id })(
-        taskItem({ localId: opts.id })(cursorIfSelected(opts.selected)),
-      ),
-    bodiedExtension: (opts: { selected?: boolean } = {}) =>
-      bodiedExtension(extensionAttrs)(p(cursorIfSelected(opts.selected))),
-  };
-
-  const leafBlockNodes = {
-    hr: hr(),
-    extension: extension(extensionAttrs)(),
-    mediaSingle: mediaSingle({ layout: 'center' })(
-      media({
-        id: temporaryFileId,
-        __key: temporaryFileId,
-        type: 'file',
-        collection: testCollectionName,
-        width: 100,
-        height: 200,
-      })(),
-    ),
-    mediaGroup: mediaGroup(
-      media({
-        id: temporaryFileId,
-        type: 'link',
-        collection: testCollectionName,
-      })(),
-    ),
-  };
-
   describe('when block nodes do not allow gap cursor', () => {
     describe('on specific nodes', () => {
       it('should not create a GapCursor selection for paragraph', () => {
         const { editorView } = editor(doc(p('{<>}')));
         sendKeyToPm(editorView, 'ArrowLeft');
         expect(editorView.state.selection instanceof TextSelection).toBe(true);
-        editorView.destroy();
       });
       it('should not create a GapCursor selection for heading', () => {
         const { editorView } = editor(doc(h1('{<>}')));
         sendKeyToPm(editorView, 'ArrowLeft');
         expect(editorView.state.selection instanceof TextSelection).toBe(true);
-        editorView.destroy();
       });
       it('should not create a GapCursor selection for blockquote', () => {
         const { editorView } = editor(doc(blockquote(p('{<>}'))));
         sendKeyToPm(editorView, 'ArrowLeft');
         expect(editorView.state.selection instanceof TextSelection).toBe(true);
-        editorView.destroy();
       });
     });
 
@@ -148,7 +84,6 @@ describe('gap-cursor', () => {
             expect(editorView.state.selection instanceof TextSelection).toBe(
               true,
             );
-            editorView.destroy();
           }),
         ),
       ));
@@ -167,7 +102,6 @@ describe('gap-cursor', () => {
             expect(editorView.state.selection instanceof TextSelection).toBe(
               true,
             );
-            editorView.destroy();
           }),
         ),
       ));
@@ -191,7 +125,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(expectedSide);
-                editorView.destroy();
               });
             });
           });
@@ -217,7 +150,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(expectedSide);
-                editorView.destroy();
               });
             });
           });
@@ -239,7 +171,6 @@ describe('gap-cursor', () => {
                 expect(
                   editorView.state.selection instanceof TextSelection,
                 ).toBe(true);
-                editorView.destroy();
               });
             });
           });
@@ -256,7 +187,6 @@ describe('gap-cursor', () => {
                 expect(
                   editorView.state.selection instanceof TextSelection,
                 ).toBe(true);
-                editorView.destroy();
               });
             });
           });
@@ -278,7 +208,6 @@ describe('gap-cursor', () => {
                 expect(
                   editorView.state.selection instanceof TextSelection,
                 ).toBe(true);
-                editorView.destroy();
               });
             });
           });
@@ -295,7 +224,6 @@ describe('gap-cursor', () => {
                 expect(
                   editorView.state.selection instanceof TextSelection,
                 ).toBe(true);
-                editorView.destroy();
               });
             });
           });
@@ -317,7 +245,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(Side.LEFT);
-                editorView.destroy();
               }),
             ),
           ))),
@@ -341,7 +268,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(Side.RIGHT);
-                editorView.destroy();
               });
             });
           }
@@ -360,7 +286,6 @@ describe('gap-cursor', () => {
               expect(
                 (editorView.state.selection as GapCursorSelection).side,
               ).toEqual(Side.RIGHT);
-              editorView.destroy();
             });
           });
         });
@@ -389,7 +314,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(Side.LEFT);
-                editorView.destroy();
               });
             });
           }
@@ -414,7 +338,6 @@ describe('gap-cursor', () => {
               expect(
                 (editorView.state.selection as GapCursorSelection).side,
               ).toEqual(Side.LEFT);
-              editorView.destroy();
             });
           });
         });
@@ -441,7 +364,6 @@ describe('gap-cursor', () => {
       expect((editorView.state.selection as GapCursorSelection).side).toEqual(
         Side.RIGHT,
       );
-      editorView.destroy();
     });
   });
 });

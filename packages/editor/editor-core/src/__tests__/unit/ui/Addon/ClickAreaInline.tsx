@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { createEditor, doc, p } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
 import { ClickAreaInline } from '../../../../ui/Addon';
 
-const editor = (doc: any) =>
-  createEditor({
-    doc,
-  });
-
 describe('ClickAreaInline', () => {
+  const createEditor = createEditorFactory();
+  const editor = (doc: any) =>
+    createEditor({
+      doc,
+    });
+
   it('should create empty terminal empty paragraph when clicked', () => {
     const { editorView } = editor(doc(p('Hello world')));
     const clickArea = mount(<ClickAreaInline editorView={editorView} />);

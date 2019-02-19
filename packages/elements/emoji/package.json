@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/emoji",
-  "version": "47.0.8",
+  "version": "54.1.0",
   "config": {
     "access": "public"
   },
@@ -16,14 +16,15 @@
   ],
   "dependencies": {
     "@atlaskit/analytics": "^4.0.7",
-    "@atlaskit/button": "^10.1.1",
-    "@atlaskit/field-base": "^11.0.13",
-    "@atlaskit/icon": "^15.0.2",
+    "@atlaskit/button": "^10.1.2",
+    "@atlaskit/field-base": "^11.0.14",
+    "@atlaskit/icon": "^16.0.0",
     "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/theme": "^7.0.1",
-    "@atlaskit/tooltip": "^12.1.13",
+    "@atlaskit/tooltip": "^12.1.15",
     "@atlaskit/util-common": "^1.5.2",
     "@atlaskit/util-service-support": "^3.0.5",
+    "@types/js-search": "^1.4.0",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.5",
     "js-search": "^1.3.7",
@@ -33,13 +34,13 @@
     "tslib": "^1.8.0",
     "typestyle": "^1.3.8",
     "url": "^0.11.0",
-    "uuid": "^3.1.0",
-    "xregexp": "^3.2.0"
+    "uuid": "^3.1.0"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^24.5.2",
+    "@atlaskit/media-core": "^27.0.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
+    "react-intl": "^2.6.0",
     "rxjs": "^5.5.0"
   },
   "author": "Atlassian Pty Ltd",
@@ -53,14 +54,17 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/docs": "^6.0.1",
+    "@atlaskit/editor-test-helpers": "^6.3.17",
+    "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/layer": "^5.0.10",
-    "@atlaskit/media-core": "^24.5.2",
-    "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/media-core": "^27.0.0",
+    "@atlaskit/section-message": "^1.0.16",
     "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^10.0.25",
+    "@atlaskit/util-data-test": "^10.0.36",
     "@atlaskit/visual-regression": "^0.0.1",
     "@types/chai": "^4.0.4",
+    "@types/react-virtualized": "^9.18.12",
     "canvas-prebuilt": "^2.0.0-alpha.14",
     "chai": "^4.1.2",
     "enzyme": "^3.7.0",
@@ -70,6 +74,7 @@
     "p-wait-for": "^1.0.0",
     "react": "^16.4.0",
     "react-addons-perf": "^15.3.2",
+    "react-intl": "^2.6.0",
     "rxjs": "^5.5.0",
     "sinon": "^2.2.0",
     "whatwg-fetch": "^2.0.3"
@@ -77,6 +82,10 @@
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+  },
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource emoji . --type ts",
+    "i18n:pull": "i18n-tools pull --resource emoji . --type ts"
   },
   "keywords": [
     "fabric",

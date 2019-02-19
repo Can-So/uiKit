@@ -4,7 +4,7 @@ import {
   code,
   p,
   strong,
-  createEditor,
+  createEditorFactory,
   panel,
   blockquote,
   h1,
@@ -26,6 +26,7 @@ import {
   areBlockTypesDisabled,
   isEmptyNode,
   dedupe,
+  compose,
 } from '../../../utils';
 import mediaPlugin from '../../../plugins/media';
 import codeBlockPlugin from '../../../plugins/code-block';
@@ -35,6 +36,8 @@ import mentionsPlugin from '../../../plugins/mentions';
 import tasksAndDecisionsPlugin from '../../../plugins/tasks-and-decisions';
 
 describe('@atlaskit/editore-core/utils', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,
@@ -420,6 +423,20 @@ describe('@atlaskit/editore-core/utils', () => {
       ];
 
       expect(dedupe(l, item => item.item)).toEqual(deduped);
+    });
+  });
+
+  describe('#compose', () => {
+    it('should compose functions right to left', () => {
+      const f1 = (a: string) => `#${a}`;
+      const f2 = (b: string) => `!${b}`;
+
+      expect(
+        compose(
+          f1,
+          f2,
+        )('test'),
+      ).toEqual('#!test');
     });
   });
 });

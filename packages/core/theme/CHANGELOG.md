@@ -1,5 +1,25 @@
 # @atlaskit/theme
 
+## 7.0.5
+- [patch] [b46504d2e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b46504d2e4):
+
+  - Fixed example docs
+
+## 7.0.4
+- [patch] [1a98f74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a98f74):
+
+  - Added the missing unit to box-shadow for focus ring styles
+
+## 7.0.3
+- [patch] [899fac7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/899fac7):
+
+  - added the focus ring and no focus ring styles
+
+## 7.0.2
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
 ## 7.0.1
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/button@10.1.1

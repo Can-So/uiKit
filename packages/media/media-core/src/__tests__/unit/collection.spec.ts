@@ -20,7 +20,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '12',
-    type: 'file',
   };
   const secondItem: MediaCollectionItem = {
     id: '2',
@@ -34,7 +33,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '123',
-    type: 'file',
   };
   const newItem: MediaCollectionItem = {
     id: '0',
@@ -48,7 +46,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '1234',
-    type: 'file',
   };
   const contents: MediaCollectionItem[] = [firstItem, secondItem];
   const getCollectionItems = jest.fn().mockResolvedValue({
@@ -126,8 +123,8 @@ describe('CollectionFetcher', () => {
       collectionFetcher.getItems('recents').subscribe({
         next() {
           expect(fileStreamsCache.size).toEqual(2);
-          expect(fileStreamsCache.has('1-recents')).toBeTruthy();
-          expect(fileStreamsCache.has('2-recents')).toBeTruthy();
+          expect(fileStreamsCache.has('1')).toBeTruthy();
+          expect(fileStreamsCache.has('2')).toBeTruthy();
           done();
         },
       });
@@ -176,6 +173,23 @@ describe('CollectionFetcher', () => {
           expect(collectionCache.recents.nextInclusiveStartKey).toEqual(
             'first-key',
           );
+          done();
+        },
+      });
+    });
+
+    it('should call error callback if call to /items fails', done => {
+      const { collectionFetcher } = setup();
+
+      collectionFetcher.mediaStore.getCollectionItems = jest
+        .fn()
+        .mockReturnValue(Promise.reject());
+
+      collectionFetcher.getItems('recents').subscribe({
+        error() {
+          expect(
+            collectionFetcher.mediaStore.getCollectionItems,
+          ).toHaveBeenCalledTimes(1);
           done();
         },
       });
@@ -275,7 +289,6 @@ describe('CollectionFetcher', () => {
             id: 'some-id',
             insertedAt: 42,
             occurrenceKey: '',
-            type: 'file',
             details: {} as MediaCollectionItemDetails,
           },
         ],
@@ -308,7 +321,7 @@ describe('CollectionFetcher', () => {
         'some-occurrence-key',
       );
       expect(collectionCache['some-collection-name'].items).toHaveLength(0);
-      expect(removeSpy).toHaveBeenCalledWith('some-id-some-collection-name');
+      expect(removeSpy).toHaveBeenCalledWith('some-id');
     });
 
     it('should propagate the change in cached observable', async () => {

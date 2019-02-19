@@ -1,8 +1,12 @@
-import { mockPopupUploadEventEmitter, mockStore } from '../../../mocks';
+import {
+  mockPopupUploadEventEmitter,
+  mockStore,
+} from '@atlaskit/media-test-helpers';
 import sendUploadEventMiddleware from '../../sendUploadEvent';
 import { sendUploadEvent } from '../../../actions/sendUploadEvent';
 import { MediaError } from '../../../../domain/error';
 import { SCALE_FACTOR_DEFAULT } from '../../../../util/getPreviewFromImage';
+import { MediaFile } from '../../../../domain/file';
 // avoid polluting test logs with error message in console
 // please ensure you fix it if you expect console.error to be thrown
 // tslint:disable-next-line:no-console
@@ -11,17 +15,15 @@ let consoleError = console.error;
 describe('sendUploadEvent middleware', () => {
   const uploadId = 'some-upload-id';
   const upfrontId = Promise.resolve('1');
-  const file = {
+  const userUpfrontId = Promise.resolve('');
+  const file: MediaFile = {
     id: 'some-file-id',
     name: 'some-file-name',
     size: 12345,
     creationDate: Date.now(),
     type: 'image/jpg',
     upfrontId,
-  };
-  const publicFile = {
-    ...file,
-    publicId: 'some-file-public-id',
+    userUpfrontId,
   };
   const setup = () => ({
     eventEmitter: mockPopupUploadEventEmitter(),
@@ -122,7 +124,7 @@ describe('sendUploadEvent middleware', () => {
         event: {
           name: 'upload-processing',
           data: {
-            file: publicFile,
+            file,
           },
         },
         uploadId,
@@ -130,7 +132,7 @@ describe('sendUploadEvent middleware', () => {
     );
 
     expect(eventEmitter.emitUploadProcessing).toBeCalledWith({
-      ...publicFile,
+      ...file,
       id: uploadId,
     });
   });
@@ -138,7 +140,7 @@ describe('sendUploadEvent middleware', () => {
   it('should emit upload end event', () => {
     const { eventEmitter, store, next } = setup();
     const mediaApiData = {
-      id: publicFile.publicId,
+      id: file.id,
     };
 
     sendUploadEventMiddleware(eventEmitter)(store)(next)(
@@ -146,7 +148,7 @@ describe('sendUploadEvent middleware', () => {
         event: {
           name: 'upload-end',
           data: {
-            file: publicFile,
+            file,
             public: mediaApiData,
           },
         },
@@ -156,7 +158,7 @@ describe('sendUploadEvent middleware', () => {
 
     expect(eventEmitter.emitUploadEnd).toBeCalledWith(
       {
-        ...publicFile,
+        ...file,
         id: uploadId,
       },
       mediaApiData,

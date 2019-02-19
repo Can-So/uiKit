@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { defaultSchema, ProviderFactory } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { ProviderFactory } from '@atlaskit/editor-common';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { WikiMarkupTransformer } from '../src';
 import { ReactRenderer } from '@atlaskit/renderer';
@@ -14,6 +15,7 @@ import {
   taskDecision,
 } from '@atlaskit/util-data-test';
 import { AkProfileClient, modifyResponse } from '@atlaskit/profilecard';
+import { TokenErrCallback, Context } from '../src/parser/tokenize';
 
 const Container = styled.div`
   display: grid;
@@ -94,9 +96,11 @@ const wikiTransformer = new WikiMarkupTransformer(defaultSchema);
 const adfTransformer = new JSONTransformer();
 
 function getADF(wiki: string) {
-  const pmNode = wikiTransformer.parse(wiki, (err, type) =>
-    console.log(err, type),
-  );
+  const tokenErrCallback: TokenErrCallback = (err, type) =>
+    console.log(err, type);
+  const context: Context = { tokenErrCallback };
+  const pmNode = wikiTransformer.parse(wiki, context);
+
   return adfTransformer.encode(pmNode);
 }
 

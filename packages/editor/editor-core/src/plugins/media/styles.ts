@@ -12,14 +12,10 @@ export const mediaStyles = css`
       transform: translateX(-50%);
     }
 
-    .media-single.is-loading {
-      min-height: 20px;
-    }
-
-    & [layout='wrap-left'] + [layout='wrap-right'],
-    & [layout='wrap-right'] + [layout='wrap-left'] {
+    & [layout^='wrap-'] + [layout^='wrap-'] {
       clear: none;
       & + p,
+      & + div[class^='fabric-editor-align'],
       & + ul,
       & + ol,
       & + h1,
@@ -28,9 +24,9 @@ export const mediaStyles = css`
       & + h4,
       & + h5,
       & + h6 {
-        clear: both;
+        clear: both !important;
       }
-      & > div {
+      & .media-single {
         margin-left: 0;
         margin-right: 0;
       }

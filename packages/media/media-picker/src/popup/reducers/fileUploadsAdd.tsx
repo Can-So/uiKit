@@ -46,17 +46,18 @@ export default function fileUploadsAdd(state: State, action: Action): State {
     );
 
     const newSelectedItems: SelectedItem[] = files.map(
-      ({ id, name, type, size, upfrontId, occurrenceKey }) => ({
-        date: 0,
-        id,
-        upfrontId,
-        occurrenceKey,
-        mimeType: type,
-        name,
-        parentId: '',
-        size,
-        serviceName: 'upload',
-      }),
+      ({ id, name, type, size, upfrontId, occurrenceKey }) =>
+        ({
+          date: 0,
+          id,
+          upfrontId,
+          occurrenceKey,
+          mimeType: type,
+          name,
+          parentId: '',
+          size,
+          serviceName: 'upload',
+        } as SelectedItem),
     );
 
     return {

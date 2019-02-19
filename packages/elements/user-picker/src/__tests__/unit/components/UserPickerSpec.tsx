@@ -2,19 +2,35 @@ jest.mock('../../../components/styles', () => ({
   getStyles: jest.fn(),
 }));
 
+jest.mock('../../../components/creatable', () => ({
+  getCreatableProps: jest.fn(),
+}));
+
 import { AnalyticsListener } from '@atlaskit/analytics-next';
-import Select from '@atlaskit/select';
-import { mount, shallow } from 'enzyme';
+import Select, { CreatableSelect } from '@atlaskit/select';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
+import { getCreatableProps } from '../../../components/creatable';
 import { getStyles } from '../../../components/styles';
 import { UserPicker } from '../../../components/UserPicker';
-import { usersToOptions, userToOption } from '../../../components/utils';
-import { User, UserOption, UserPickerProps } from '../../../types';
+import {
+  optionToSelectableOption,
+  optionToSelectableOptions,
+} from '../../../components/utils';
+import {
+  Option,
+  OptionData,
+  Team,
+  User,
+  UserPickerProps,
+  UserType,
+} from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
-    shallow(<UserPicker {...props} />)
+    shallowWithIntl(<UserPicker {...props} />)
       .dive()
       .dive();
 
@@ -31,7 +47,11 @@ describe('UserPicker', () => {
     },
   ];
 
-  const userOptions: UserOption[] = usersToOptions(options);
+  const userOptions: Option[] = optionToSelectableOptions(options);
+
+  afterEach(() => {
+    (getCreatableProps as jest.Mock).mockClear();
+  });
 
   it('should render Select', () => {
     const component = shallowUserPicker({ options });
@@ -45,12 +65,6 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ isDisabled: true });
     const select = component.find(Select);
     expect(select.prop('isDisabled')).toEqual(true);
-  });
-
-  it('should set width', () => {
-    shallowUserPicker({ width: 500 });
-
-    expect(getStyles).toHaveBeenCalledWith(500);
   });
 
   it('should set custom placeholder', () => {
@@ -79,6 +93,13 @@ describe('UserPicker', () => {
     expect(onChange).toHaveBeenCalledWith(options[0], 'select-option');
   });
 
+  it('should not hide selected users by default', () => {
+    const component = shallowUserPicker();
+
+    const select = component.find(Select);
+    expect(select.prop('hideSelectedOptions')).toBeFalsy();
+  });
+
   it('should trigger props.onSelection if onChange with select-option action', () => {
     const onSelection = jest.fn();
     const component = shallowUserPicker({ onSelection });
@@ -87,6 +108,16 @@ describe('UserPicker', () => {
     select.simulate('change', userOptions[0], { action: 'select-option' });
 
     expect(onSelection).toHaveBeenCalledWith(options[0]);
+  });
+
+  it('should trigger props.onClear if onChange with clear action', () => {
+    const onClear = jest.fn();
+    const component = shallowUserPicker({ onClear });
+
+    const select = component.find(Select);
+    select.simulate('change', userOptions[0], { action: 'clear' });
+
+    expect(onClear).toHaveBeenCalled();
   });
 
   it('should call onFocus handler', () => {
@@ -103,6 +134,35 @@ describe('UserPicker', () => {
 
     component.simulate('blur');
     expect(onBlur).toHaveBeenCalled();
+  });
+
+  describe('getStyles/appearance', () => {
+    it('should set width', () => {
+      shallowUserPicker({ width: 500 });
+
+      expect(getStyles).toHaveBeenCalledWith(500);
+    });
+
+    it('should infer normal appearance if single picker', () => {
+      const component = shallowUserPicker();
+
+      expect(component.find(Select).prop('appearance')).toEqual('normal');
+    });
+
+    it('should infer compact appearance if multi picker', () => {
+      const component = shallowUserPicker({ isMulti: true });
+
+      expect(component.find(Select).prop('appearance')).toEqual('compact');
+    });
+
+    it('should pass in appearance that comes from props', () => {
+      const component = shallowUserPicker({
+        isMulti: true,
+        appearance: 'normal',
+      });
+
+      expect(component.find(Select).prop('appearance')).toEqual('normal');
+    });
   });
 
   describe('Multiple users select', () => {
@@ -124,6 +184,13 @@ describe('UserPicker', () => {
         [options[0], options[1]],
         'select-option',
       );
+    });
+
+    it('should hide selected users', () => {
+      const component = shallowUserPicker({ isMulti: true });
+
+      const select = component.find(Select);
+      expect(select.prop('hideSelectedOptions')).toBeTruthy();
     });
   });
 
@@ -216,6 +283,14 @@ describe('UserPicker', () => {
         expect(onInputChange).toHaveBeenCalled();
       });
 
+      it('should call props.onInputChange with controlled search', () => {
+        const onInputChange = jest.fn();
+        const component = shallowUserPicker({ onInputChange, search: 'text' });
+        const select = component.find(Select);
+        select.simulate('inputChange', 'some text', { action: 'input-change' });
+        expect(onInputChange).toHaveBeenCalled();
+      });
+
       it('should debounce input change events', () => {
         const usersPromise = new Promise<User[]>(resolve =>
           window.setTimeout(() => resolve(options), 500),
@@ -236,7 +311,7 @@ describe('UserPicker', () => {
       });
 
       expect(component.find(Select).prop('value')).toEqual([
-        { label: 'Jace Beleren', user: options[0], value: 'abc-123' },
+        { label: 'Jace Beleren', data: options[0], value: 'abc-123' },
       ]);
     });
 
@@ -249,7 +324,10 @@ describe('UserPicker', () => {
       });
 
       const select = component.find(Select);
-      const fixedOption = userToOption({ ...options[0], fixed: true });
+      const fixedOption = optionToSelectableOption({
+        ...options[0],
+        fixed: true,
+      });
       expect(select.prop('value')).toEqual([fixedOption]);
 
       select.simulate('change', [], {
@@ -271,10 +349,10 @@ describe('UserPicker', () => {
         onChange,
       });
 
-      const fixedOption = userToOption(fixedUser);
+      const fixedOption = optionToSelectableOption(fixedUser);
       expect(component.find(Select).prop('value')).toEqual([fixedOption]);
 
-      const removableOption = userToOption(options[1]);
+      const removableOption = optionToSelectableOption(options[1]);
       component
         .find(Select)
         .simulate('change', [fixedOption, removableOption], {
@@ -314,6 +392,29 @@ describe('UserPicker', () => {
         fixedOption,
         removableOption,
       ]);
+    });
+  });
+
+  describe('props.open is true', () => {
+    it('should call loadOptions', () => {
+      const loadOptions = jest.fn(() => []);
+      shallowUserPicker({
+        open: true,
+        loadOptions,
+      });
+
+      expect(loadOptions).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call loadOptions with props.search is passed in', () => {
+      const loadOptions = jest.fn(() => []);
+      shallowUserPicker({
+        open: true,
+        loadOptions,
+        search: 'test',
+      });
+
+      expect(loadOptions).toHaveBeenCalledWith('test');
     });
   });
 
@@ -455,9 +556,67 @@ describe('UserPicker', () => {
     expect(preventDefault).toHaveBeenCalledTimes(0);
   });
 
+  describe('teams', () => {
+    const teamOptions: Team[] = [
+      {
+        id: 'team-123',
+        name: 'The A team',
+        type: 'team',
+        memberCount: 1,
+      },
+      {
+        id: 'team-abc',
+        name: 'The B team',
+        type: 'team',
+        includesYou: true,
+      },
+    ];
+
+    const selectableTeamOptions: Option[] = optionToSelectableOptions(
+      teamOptions,
+    );
+
+    const mixedOptions: OptionData[] = (options as OptionData[]).concat(
+      teamOptions,
+    );
+    const selectableMixedOptions: Option[] = optionToSelectableOptions(
+      mixedOptions,
+    );
+
+    it('should render select with only teams', () => {
+      const component = shallowUserPicker({ options: teamOptions });
+      const select = component.find(Select);
+      expect(select.prop('options')).toEqual(selectableTeamOptions);
+    });
+
+    it('should render select with both teams and users', () => {
+      const component = shallowUserPicker({ options: mixedOptions });
+      const select = component.find(Select);
+      expect(select.prop('options')).toEqual(selectableMixedOptions);
+    });
+
+    it('should be able to multi-select a mix of users and teams', () => {
+      const onChange = jest.fn();
+      const component = shallowUserPicker({
+        options: mixedOptions,
+        isMulti: true,
+        onChange,
+      });
+
+      component.find(Select).simulate('change', selectableMixedOptions, {
+        action: 'select-option',
+      });
+
+      expect(onChange).toHaveBeenCalledWith(
+        [mixedOptions[0], mixedOptions[1], mixedOptions[2], mixedOptions[3]],
+        'select-option',
+      );
+    });
+  });
+
   describe('analytics', () => {
     const onEvent = jest.fn();
-    let component;
+    let component: ReactWrapper;
 
     const AnalyticsTestComponent = (props: Partial<UserPickerProps>) => (
       <AnalyticsListener channel="fabric-elements" onEvent={onEvent}>
@@ -466,7 +625,7 @@ describe('UserPicker', () => {
     );
 
     beforeEach(() => {
-      component = mount(<AnalyticsTestComponent />);
+      component = mountWithIntl(<AnalyticsTestComponent />);
     });
 
     afterEach(() => {
@@ -484,7 +643,7 @@ describe('UserPicker', () => {
             actionSubject: 'userPicker',
             eventType: 'ui',
             attributes: {
-              duration: expect.any(Number),
+              sessionDuration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
@@ -509,9 +668,12 @@ describe('UserPicker', () => {
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 38 });
       input.simulate('keyDown', { keyCode: 13 });
-      component.find(Select).prop('onChange')(userToOption(options[0]), {
-        action: 'select-option',
-      });
+      component.find<any>(Select).prop('onChange')(
+        optionToSelectableOption(options[0]),
+        {
+          action: 'select-option',
+        },
+      );
       expect(onEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           payload: expect.objectContaining({
@@ -519,7 +681,7 @@ describe('UserPicker', () => {
             actionSubject: 'userPicker',
             eventType: 'ui',
             attributes: {
-              duration: expect.any(Number),
+              sessionDuration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
@@ -529,7 +691,7 @@ describe('UserPicker', () => {
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              result: { id: 'abc-123' },
+              result: { id: 'abc-123', type: UserType },
             },
           }),
         }),
@@ -545,9 +707,12 @@ describe('UserPicker', () => {
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 38 });
-      component.find(Select).prop('onChange')(userToOption(options[0]), {
-        action: 'select-option',
-      });
+      component.find<any>(Select).prop('onChange')(
+        optionToSelectableOption(options[0]),
+        {
+          action: 'select-option',
+        },
+      );
       expect(onEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           payload: expect.objectContaining({
@@ -555,7 +720,7 @@ describe('UserPicker', () => {
             actionSubject: 'userPicker',
             eventType: 'ui',
             attributes: {
-              duration: expect.any(Number),
+              sessionDuration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
@@ -565,7 +730,7 @@ describe('UserPicker', () => {
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              result: { id: 'abc-123' },
+              result: { id: 'abc-123', type: UserType },
             },
           }),
         }),
@@ -576,9 +741,12 @@ describe('UserPicker', () => {
     it('should trigger cleared event', () => {
       const input = component.find('input');
       input.simulate('focus');
-      component.find(Select).prop('onChange')(userToOption(options[0]), {
-        action: 'clear',
-      });
+      component.find<any>(Select).prop('onChange')(
+        optionToSelectableOption(options[0]),
+        {
+          action: 'clear',
+        },
+      );
       expect(onEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           payload: expect.objectContaining({
@@ -603,9 +771,9 @@ describe('UserPicker', () => {
       component.setProps({ isMulti: true });
       const input = component.find('input');
       input.simulate('focus');
-      component.find(Select).prop('onChange')([], {
+      component.find<any>(Select).prop('onChange')([], {
         action: 'remove-value',
-        removedValue: userToOption(options[0]),
+        removedValue: optionToSelectableOption(options[0]),
       });
       expect(onEvent).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -618,7 +786,7 @@ describe('UserPicker', () => {
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               pickerOpen: true,
-              value: { id: options[0].id },
+              value: { id: options[0].id, type: UserType },
             },
           }),
         }),
@@ -673,9 +841,13 @@ describe('UserPicker', () => {
                   packageVersion: expect.any(String),
                   packageName: '@atlaskit/user-picker',
                   sessionId: expect.any(String),
-                  duration: expect.any(Number),
+                  sessionDuration: expect.any(Number),
+                  durationSinceInputChange: expect.any(Number),
                   queryLength: 0,
-                  results: [{ id: 'abc-123' }, { id: '123-abc' }],
+                  results: [
+                    { id: 'abc-123', type: UserType },
+                    { id: '123-abc', type: UserType },
+                  ],
                   pickerType: 'single',
                 }),
               }),
@@ -693,6 +865,25 @@ describe('UserPicker', () => {
 
         return Promise.resolve().then(() => {
           expect(onEvent).not.toHaveBeenCalled();
+        });
+      });
+
+      it('should not fire searched if there are no options', () => {
+        component.setProps({
+          open: true,
+        });
+        component.update();
+
+        return Promise.resolve().then(() => {
+          // Focused event
+          expect(onEvent).toHaveBeenCalledTimes(1);
+          expect(onEvent).not.toHaveBeenCalledWith(
+            expect.objectContaining({
+              payload: expect.objectContaining({
+                action: 'searched',
+              }),
+            }),
+          );
         });
       });
 
@@ -720,9 +911,10 @@ describe('UserPicker', () => {
                   packageVersion: expect.any(String),
                   packageName: '@atlaskit/user-picker',
                   sessionId: expect.any(String),
-                  duration: expect.any(Number),
+                  sessionDuration: expect.any(Number),
+                  durationSinceInputChange: expect.any(Number),
                   queryLength: 0,
-                  results: [{ id: 'abc-123' }],
+                  results: [{ id: 'abc-123', type: UserType }],
                   pickerType: 'single',
                 }),
               }),
@@ -731,6 +923,16 @@ describe('UserPicker', () => {
           );
         });
       });
+    });
+  });
+
+  describe('allowEmail', () => {
+    it('should use CreatableSelect', () => {
+      const component = shallowUserPicker({ allowEmail: true });
+      const select = component.find(CreatableSelect);
+      expect(select).toHaveLength(1);
+      expect(getCreatableProps).toHaveBeenCalledTimes(1);
+      expect(getCreatableProps).toHaveBeenCalledWith(true);
     });
   });
 });

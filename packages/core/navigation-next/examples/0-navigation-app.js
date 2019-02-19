@@ -28,11 +28,15 @@ export default class App extends Component<
   {
     isDebugEnabled: boolean,
     isFlyoutAvailable: boolean,
+    isAlternateFlyoutBehaviourEnabled: boolean,
+    isFullWitdhFlyoutEnabled: boolean,
   },
 > {
   state = {
     isDebugEnabled: true,
     isFlyoutAvailable: true,
+    isAlternateFlyoutBehaviourEnabled: true,
+    isFullWitdhFlyoutEnabled: false,
   };
 
   onDebugToggle = () => {
@@ -41,9 +45,24 @@ export default class App extends Component<
   onFlyoutToggle = () => {
     this.setState(state => ({ isFlyoutAvailable: !state.isFlyoutAvailable }));
   };
+  onAlternateBehaviourToggle = () => {
+    this.setState(state => ({
+      isAlternateFlyoutBehaviourEnabled: !state.isAlternateFlyoutBehaviourEnabled,
+    }));
+  };
+  onFullWidthFlyoutToggle = () => {
+    this.setState(state => ({
+      isFullWitdhFlyoutEnabled: !state.isFullWitdhFlyoutEnabled,
+    }));
+  };
 
   render() {
-    const { isDebugEnabled, isFlyoutAvailable } = this.state;
+    const {
+      isDebugEnabled,
+      isFlyoutAvailable,
+      isAlternateFlyoutBehaviourEnabled,
+      isFullWitdhFlyoutEnabled,
+    } = this.state;
 
     return (
       <HashRouter>
@@ -51,6 +70,10 @@ export default class App extends Component<
           <LayoutManagerWithViewController
             customComponents={{ LinkItem, ProjectSwitcher }}
             experimental_flyoutOnHover={isFlyoutAvailable}
+            experimental_alternateFlyoutBehaviour={
+              isAlternateFlyoutBehaviourEnabled
+            }
+            experimental_fullWidthFlyout={isFullWitdhFlyoutEnabled}
             globalNavigation={DefaultGlobalNavigation}
           >
             <div style={{ padding: 40 }}>
@@ -71,6 +94,16 @@ export default class App extends Component<
               <ToggleStateless
                 isChecked={isFlyoutAvailable}
                 onChange={this.onFlyoutToggle}
+              />
+              <Label label="Toggle alternate hover behaviour (experimental)" />
+              <ToggleStateless
+                isChecked={isAlternateFlyoutBehaviourEnabled}
+                onChange={this.onAlternateBehaviourToggle}
+              />
+              <Label label="Toggle full width flyout (experimental)" />
+              <ToggleStateless
+                isChecked={isFullWitdhFlyoutEnabled}
+                onChange={this.onFullWidthFlyoutToggle}
               />
               <Label label="Toggle debug logger" />
               <ToggleStateless

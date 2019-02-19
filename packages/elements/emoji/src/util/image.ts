@@ -37,7 +37,7 @@ export const hasFileExceededSize = (file: File): boolean => {
  * We know that creating a new image in memory and checking its height,
  * later on we cache this value forever.
  */
-let isWebpSupported;
+let isWebpSupported: boolean | undefined;
 
 export const checkWebpSupport = (): Promise<boolean> => {
   if (isWebpSupported !== undefined) {

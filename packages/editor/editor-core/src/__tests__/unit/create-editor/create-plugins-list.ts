@@ -1,4 +1,5 @@
 jest.mock('../../../plugins', () => ({
+  analyticsPlugin: jest.fn(),
   mediaPlugin: jest.fn(),
   tablesPlugin: jest.fn(),
   insertBlockPlugin: jest.fn(),
@@ -9,6 +10,7 @@ jest.mock('../../../plugins', () => ({
 }));
 
 import {
+  analyticsPlugin,
   tablesPlugin,
   mediaPlugin,
   helpDialogPlugin,
@@ -24,6 +26,7 @@ import createPluginsList from '../../../create-editor/create-plugins-list';
 
 describe('createPluginsList', () => {
   beforeEach(() => {
+    (analyticsPlugin as any).mockReset();
     (insertBlockPlugin as any).mockReset();
     (placeholderTextPlugin as any).mockReset();
     (statusPlugin as any).mockReset();
@@ -56,9 +59,9 @@ describe('createPluginsList', () => {
       provider: Promise.resolve() as any,
       allowMediaSingle: true,
     };
-    createPluginsList({ media });
+    createPluginsList({ media, appearance: 'full-page' });
     expect(mediaPlugin).toHaveBeenCalledTimes(1);
-    expect(mediaPlugin).toHaveBeenCalledWith(media);
+    expect(mediaPlugin).toHaveBeenCalledWith(media, 'full-page');
   });
 
   it('should add placeholderText plugin if allowTemplatePlaceholders prop is provided', () => {
@@ -119,6 +122,19 @@ describe('createPluginsList', () => {
     expect(insertBlockPlugin).toBeCalledWith(
       expect.objectContaining({ nativeStatusSupported: true }),
     );
+  });
+
+  it('should add analyticsPlugin if allowAnalyticsGASV3 prop is provided', () => {
+    const createAnalyticsEvent = jest.fn();
+    createPluginsList({ allowAnalyticsGASV3: true }, createAnalyticsEvent);
+    expect(analyticsPlugin).toHaveBeenCalledTimes(1);
+    expect(analyticsPlugin).toHaveBeenCalledWith(createAnalyticsEvent);
+  });
+
+  it('should no add analyticsPlugin if allowAnalyticsGASV3 prop is false', () => {
+    const createAnalyticsEvent = jest.fn();
+    createPluginsList({ allowAnalyticsGASV3: false }, createAnalyticsEvent);
+    expect(analyticsPlugin).not.toHaveBeenCalled();
   });
 
   it('should always add insertBlockPlugin to the editor with insertMenuItems', () => {

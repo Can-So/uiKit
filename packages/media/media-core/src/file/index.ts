@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { publishReplay } from 'rxjs/operators/publishReplay';
+import * as uuid from 'uuid/v4';
 import * as Dataloader from 'dataloader';
 import {
   MediaStore,
@@ -11,6 +12,9 @@ import {
   MediaCollectionItemFullDetails,
   FileItem,
   MediaFileArtifacts,
+  TouchFileDescriptor,
+  TouchedFiles,
+  UploadableFileUpfrontIds,
 } from '@atlaskit/media-store';
 import * as isValidId from 'uuid-validate';
 import {
@@ -19,11 +23,15 @@ import {
   GetFileOptions,
   mapMediaItemToFileState,
 } from '../fileState';
-import { fileStreamsCache, FileStreamCache } from '../context/fileStreamCache';
+import { fileStreamsCache } from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
+import { convertBase64ToBlob } from '../utils/convertBase64ToBlob';
 
 const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
+const makeCacheKey = (id: string, collection?: string) =>
+  collection ? `${id}-${collection}` : id;
+
 export type DataloaderMap = { [id: string]: DataloaderResult };
 export const getItemsFromKeys = (
   dataloaderKeys: DataloaderKey[],
@@ -32,7 +40,7 @@ export const getItemsFromKeys = (
   const itemsByKey: DataloaderMap = fileItems.reduce(
     (prev: DataloaderMap, nextFileItem) => {
       const { id, collection } = nextFileItem;
-      const key = FileStreamCache.createKey(id, { collectionName: collection });
+      const key = makeCacheKey(id, collection);
 
       prev[key] = nextFileItem.details;
 
@@ -43,7 +51,7 @@ export const getItemsFromKeys = (
 
   return dataloaderKeys.map(dataloaderKey => {
     const { id, collection } = dataloaderKey;
-    const key = FileStreamCache.createKey(id, { collectionName: collection });
+    const key = makeCacheKey(id, collection);
 
     return itemsByKey[key];
   });
@@ -53,9 +61,36 @@ interface DataloaderKey {
   id: string;
   collection?: string;
 }
+
 type DataloaderResult = MediaCollectionItemFullDetails | undefined;
-export class FileFetcher {
+
+export interface FileFetcher {
+  getFileState(id: string, options?: GetFileOptions): Observable<FileState>;
+  getArtifactURL(
+    artifacts: MediaFileArtifacts,
+    artifactName: keyof MediaFileArtifacts,
+    collectionName?: string,
+  ): Promise<string>;
+  touchFiles(
+    descriptors: TouchFileDescriptor[],
+    collection?: string,
+  ): Promise<TouchedFiles>;
+  upload(
+    file: UploadableFile,
+    controller?: UploadController,
+    uploadableFileUpfrontIds?: UploadableFileUpfrontIds,
+  ): Observable<FileState>;
+  downloadBinary(
+    id: string,
+    name?: string,
+    collectionName?: string,
+  ): Promise<void>;
+  getCurrentState(id: string): Promise<FileState>;
+}
+
+export class FileFetcherImpl implements FileFetcher {
   private readonly dataloader: Dataloader<DataloaderKey, DataloaderResult>;
+
   constructor(private readonly mediaStore: MediaStore) {
     this.dataloader = new Dataloader<DataloaderKey, DataloaderResult>(
       this.batchLoadingFunc,
@@ -66,7 +101,7 @@ export class FileFetcher {
   }
 
   // Returns an array of the same length as the keys filled with file items
-  batchLoadingFunc = async (keys: DataloaderKey[]) => {
+  private batchLoadingFunc = async (keys: DataloaderKey[]) => {
     const nonCollectionName = '__media-single-file-collection__';
     const fileIdsByCollection = keys.reduce(
       (prev, next) => {
@@ -101,16 +136,17 @@ export class FileFetcher {
     return getItemsFromKeys(keys, items);
   };
 
-  getFileState(id: string, options?: GetFileOptions): Observable<FileState> {
+  public getFileState(
+    id: string,
+    options?: GetFileOptions,
+  ): Observable<FileState> {
     if (!isValidId(id)) {
       return Observable.create((observer: Observer<FileState>) => {
         observer.error(`${id} is not a valid file id`);
       });
     }
 
-    const key = FileStreamCache.createKey(id, options);
-
-    return fileStreamsCache.getOrInsert(key, () => {
+    return fileStreamsCache.getOrInsert(id, () => {
       const collection = options && options.collectionName;
       const fileStream$ = publishReplay<FileState>(1)(
         this.createDownloadFileStream(id, collection),
@@ -122,7 +158,11 @@ export class FileFetcher {
     });
   }
 
-  getArtifactURL(
+  getCurrentState(id: string): Promise<FileState> {
+    return fileStreamsCache.getCurrentState(id);
+  }
+
+  public getArtifactURL(
     artifacts: MediaFileArtifacts,
     artifactName: keyof MediaFileArtifacts,
     collectionName?: string,
@@ -170,91 +210,133 @@ export class FileFetcher {
     });
   };
 
-  upload(
+  public touchFiles(
+    descriptors: TouchFileDescriptor[],
+    collection?: string,
+  ): Promise<TouchedFiles> {
+    return this.mediaStore
+      .touchFiles({ descriptors }, { collection })
+      .then(({ data }) => data);
+  }
+
+  private generateUploadableFileUpfrontIds(
+    collection?: string,
+  ): UploadableFileUpfrontIds {
+    const id = uuid();
+    const occurrenceKey = uuid();
+    const touchFileDescriptor: TouchFileDescriptor = {
+      fileId: id,
+      occurrenceKey,
+      collection,
+    };
+
+    const deferredUploadId = this.touchFiles(
+      [touchFileDescriptor],
+      collection,
+    ).then(touchedFiles => touchedFiles.created[0].uploadId);
+
+    return {
+      id,
+      occurrenceKey,
+      deferredUploadId,
+    };
+  }
+
+  public upload(
     file: UploadableFile,
     controller?: UploadController,
+    uploadableFileUpfrontIds?: UploadableFileUpfrontIds,
   ): Observable<FileState> {
-    let fileId: string;
+    if (typeof file.content === 'string') {
+      file.content = convertBase64ToBlob(file.content);
+    }
+
+    const {
+      content,
+      name = '', // name property is not available in base64 image
+      collection,
+    } = file;
+
+    if (!uploadableFileUpfrontIds) {
+      uploadableFileUpfrontIds = this.generateUploadableFileUpfrontIds(
+        collection,
+      );
+    }
+
+    const id = uploadableFileUpfrontIds.id;
+    const occurrenceKey = uploadableFileUpfrontIds.occurrenceKey;
+
     let mimeType = '';
-    let preview: FilePreview;
+    let size = 0;
+    let preview: FilePreview | undefined;
     // TODO [MSW-796]: get file size for base64
-    const size = file.content instanceof Blob ? file.content.size : 0;
     const mediaType = getMediaTypeFromUploadableFile(file);
-    const collectionName = file.collection;
-    const name = file.name || ''; // name property is not available in base64 image
     const subject = new ReplaySubject<FileState>(1);
 
-    if (file.content instanceof Blob) {
-      mimeType = file.content.type;
+    if (content instanceof Blob) {
+      size = content.size;
+      mimeType = content.type;
       preview = {
-        blob: file.content,
+        value: content,
       };
     }
-    const { deferredFileId: onUploadFinish, cancel } = uploadFile(
+
+    const stateBase = {
+      name,
+      size,
+      mediaType,
+      mimeType,
+      id,
+      occurrenceKey,
+      preview,
+    };
+
+    const onProgress = (progress: number) => {
+      subject.next({
+        status: 'uploading',
+        ...stateBase,
+        progress,
+      });
+    };
+
+    const onUploadFinish = (error?: any) => {
+      if (error) {
+        return subject.error(error);
+      }
+
+      subject.next({
+        status: 'processing',
+        ...stateBase,
+      });
+      subject.complete();
+    };
+
+    const { cancel } = uploadFile(
       file,
       this.mediaStore,
+      uploadableFileUpfrontIds,
       {
-        onProgress: progress => {
-          if (fileId) {
-            subject.next({
-              progress,
-              name,
-              size,
-              mediaType,
-              mimeType,
-              id: fileId,
-              status: 'uploading',
-              preview,
-            });
-          }
-        },
-        onId: (id, occurrenceKey) => {
-          fileId = id;
-          const key = FileStreamCache.createKey(fileId, { collectionName });
-          fileStreamsCache.set(key, subject);
-          if (file.content instanceof Blob) {
-            subject.next({
-              name,
-              size,
-              mediaType,
-              mimeType,
-              id: fileId,
-              occurrenceKey,
-              progress: 0,
-              status: 'uploading',
-              preview,
-            });
-          }
-        },
+        onUploadFinish,
+        onProgress,
       },
     );
+
+    fileStreamsCache.set(id, subject);
+
+    // We should report progress asynchronously, since this is what consumer expects
+    // (otherwise in newUploadService file-converting event will be emitted before files-added)
+    setTimeout(() => {
+      onProgress(0);
+    }, 0);
 
     if (controller) {
       controller.setAbort(cancel);
     }
 
-    onUploadFinish
-      .then(() => {
-        subject.next({
-          id: fileId,
-          name,
-          size,
-          mediaType,
-          mimeType,
-          status: 'processing',
-          preview,
-        });
-        subject.complete();
-      })
-      .catch(error => {
-        // we can't use .catch(subject.error) due that will change the Subscriber context
-        subject.error(error);
-      });
-
     return subject;
   }
 
-  async downloadBinary(
+  public async downloadBinary(
     id: string,
     name: string = 'download',
     collectionName?: string,

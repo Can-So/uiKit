@@ -1,8 +1,8 @@
 import {
-  akEditorFullPageMaxWidth,
   akEditorBreakoutPadding,
   akEditorDefaultLayoutWidth,
   breakoutWideScaleRatio,
+  akEditorFullWidthLayoutWidth,
 } from '../styles';
 import { getBreakpoint, mapBreakpointToLayoutMaxWidth } from '../ui';
 
@@ -14,13 +14,11 @@ export const calcBreakoutWidth = (
 
   switch (layout) {
     case 'full-width':
-      return effectiveFullWidth <= akEditorFullPageMaxWidth
-        ? '100%'
-        : `${effectiveFullWidth}px`;
+      return `${Math.min(effectiveFullWidth, akEditorFullWidthLayoutWidth)}px`;
     case 'wide':
       return calcWideWidth(containerWidth);
     default:
-      return 'inherit';
+      return '100%';
   }
 };
 

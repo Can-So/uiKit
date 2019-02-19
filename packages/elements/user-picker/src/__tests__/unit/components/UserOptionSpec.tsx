@@ -1,16 +1,15 @@
-import { AvatarItem } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import {
+  AvatarItemOption,
+  TextWrapper,
+} from '../../../components/AvatarItemOption';
 import { HighlightText } from '../../../components/HighlightText';
 import { SizeableAvatar } from '../../../components/SizeableAvatar';
-import {
-  TextWrapper,
-  UserOption,
-  UserOptionProps,
-} from '../../../components/UserOption';
+import { UserOption, UserOptionProps } from '../../../components/UserOption';
 
-describe('Option', () => {
+describe('User Option', () => {
   const user = {
     id: 'abc-123',
     name: 'Jace Beleren',
@@ -19,7 +18,7 @@ describe('Option', () => {
     byline: 'Teammate',
   };
   const shallowOption = (props: Partial<UserOptionProps> = {}) =>
-    shallow(
+    shallow<UserOption>(
       <UserOption
         user={user}
         status="approved"
@@ -30,9 +29,8 @@ describe('Option', () => {
 
   it('should render UserOption component', () => {
     const component = shallowOption();
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.props()).toMatchObject({
-      backgroundColor: 'transparent',
+    const avatarItemOption = component.find(AvatarItemOption);
+    expect(avatarItemOption.props()).toMatchObject({
       avatar: (
         <SizeableAvatar
           appearance="big"
@@ -58,9 +56,8 @@ describe('Option', () => {
 
   it('should render Option in selected state', () => {
     const component = shallowOption({ isSelected: true });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.props()).toMatchObject({
-      backgroundColor: 'transparent',
+    const avatarItemOption = component.find(AvatarItemOption);
+    expect(avatarItemOption.props()).toMatchObject({
       avatar: (
         <SizeableAvatar
           appearance="big"
@@ -80,6 +77,7 @@ describe('Option', () => {
           </TextWrapper>
         </React.Fragment>,
       ],
+      secondaryText: <TextWrapper color={colors.N50}>Teammate</TextWrapper>,
     });
   });
 
@@ -92,8 +90,8 @@ describe('Option', () => {
       },
     };
     const component = shallowOption({ user: userWithHighlight });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.props()).toMatchObject({
+    const avatarItemOption = component.find(AvatarItemOption);
+    expect(avatarItemOption.props()).toMatchObject({
       primaryText: [
         <TextWrapper key="name" color={colors.N800}>
           <HighlightText highlights={[{ start: 0, end: 2 }]}>
@@ -111,6 +109,7 @@ describe('Option', () => {
           </TextWrapper>
         </React.Fragment>,
       ],
+      secondaryText: <TextWrapper color={colors.N200}>Teammate</TextWrapper>,
     });
   });
 
@@ -124,8 +123,8 @@ describe('Option', () => {
       },
     };
     const component = shallowOption({ user: userWithoutName });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.prop('primaryText')).toEqual([
+    const avatarItemOption = component.find(AvatarItemOption);
+    expect(avatarItemOption.prop('primaryText')).toEqual([
       <TextWrapper key="name" color={colors.N800}>
         <HighlightText highlights={[{ start: 2, end: 4 }]}>
           jbeleren
@@ -140,8 +139,8 @@ describe('Option', () => {
       publicName: user.name,
     };
     const component = shallowOption({ user: userWithSamePublicName });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.prop('primaryText')).toEqual([
+    const avatarItemOption = component.find(AvatarItemOption);
+    expect(avatarItemOption.prop('primaryText')).toEqual([
       <TextWrapper key="name" color={colors.N800}>
         <HighlightText>Jace Beleren</HighlightText>
       </TextWrapper>,
@@ -154,8 +153,8 @@ describe('Option', () => {
       publicName: `  ${user.name}  `,
     };
     const component = shallowOption({ user: userWithSamePublicName });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.prop('primaryText')).toEqual([
+    const avatarItemOption = component.find(AvatarItemOption);
+    expect(avatarItemOption.prop('primaryText')).toEqual([
       <TextWrapper key="name" color={colors.N800}>
         <HighlightText>Jace Beleren</HighlightText>
       </TextWrapper>,

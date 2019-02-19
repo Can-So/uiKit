@@ -31,6 +31,10 @@ const editorButtonTheme = {
 
 const Button = styled(UiButton)`
   padding: 0 2px;
+
+  &[href] {
+    padding: 0 2px;
+  }
 `;
 
 export type ButtonAppearance = 'subtle' | 'danger';
@@ -44,6 +48,8 @@ export interface Props {
   selected?: boolean;
   disabled?: boolean;
   appearance?: ButtonAppearance;
+  href?: string;
+  target?: string;
 }
 
 export default ({
@@ -54,6 +60,8 @@ export default ({
   onMouseLeave,
   selected,
   disabled,
+  href,
+  target,
   appearance = 'subtle',
 }: Props) => {
   return (
@@ -63,6 +71,8 @@ export default ({
           <Button
             ariaLabel={title}
             spacing="compact"
+            href={href}
+            target={target}
             appearance={appearance}
             ariaHaspopup={true}
             iconBefore={icon}

@@ -1,5 +1,26 @@
 # @atlaskit/radio
 
+## 0.4.7
+- [patch] [942e0aec04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/942e0aec04):
+
+  - Added test to make sure props are passed hidden input
+
+## 0.4.6
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/checkbox@5.0.11
+  - @atlaskit/form@5.1.2
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/icon@16.0.0
+
+## 0.4.5
+- [patch] [a048a85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a048a85):
+
+  - Updated to be compatible with new Forms API
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/form@5.0.0
+
 ## 0.4.4
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

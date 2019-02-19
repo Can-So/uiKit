@@ -31,16 +31,20 @@ export default class DeleteUserDrawerExample extends React.Component {
   state = {
     isCurrentUser: false,
     isOpen: false,
+    isUserDeactivated: false,
   };
 
   openDrawer = () => this.setState({ isOpen: true });
 
   closeDrawer = () => this.setState({ isOpen: false });
 
-  handleDeactivateUser = () => <></>;
+  handleDeactivateUser = () => <React.Fragment />;
 
   toggleIsCurrentUser = event =>
     this.setState({ isCurrentUser: event.target.checked });
+
+  toggleIsUserDeactivated = event =>
+    this.setState({ isUserDeactivated: event.target.checked });
 
   renderDeleteUserOverviewScreen = () => (
     <DeleteUserOverviewScreen
@@ -48,6 +52,7 @@ export default class DeleteUserDrawerExample extends React.Component {
       isCurrentUser={this.state.isCurrentUser}
       user={catherineHirons}
       deactivateUserHandler={this.handleDeactivateUser}
+      isUserDeactivated={this.state.isUserDeactivated}
     />
   );
 
@@ -58,7 +63,7 @@ export default class DeleteUserDrawerExample extends React.Component {
   render() {
     return (
       <IntlProvider locale="en">
-        <>
+        <React.Fragment>
           <Controls>
             <Button onClick={this.openDrawer}>Open drawer</Button>
             <Checkbox
@@ -73,6 +78,18 @@ export default class DeleteUserDrawerExample extends React.Component {
               onChange={this.toggleIsCurrentUser}
               name="toggle-is-current-user"
             />
+            <Checkbox
+              label={
+                <StatefulInlineDialog
+                  placement="right"
+                  content="Toggles between active and deactivated user."
+                >
+                  Is user deactivated
+                </StatefulInlineDialog>
+              }
+              onChange={this.toggleIsUserDeactivated}
+              name="toggle-is-user-deactivated"
+            />
           </Controls>
           {this.state.isOpen && (
             <FocusedTaskCloseAccount
@@ -86,7 +103,7 @@ export default class DeleteUserDrawerExample extends React.Component {
               learnMoreLink={'https://hello.atlassian.net'}
             />
           )}
-        </>
+        </React.Fragment>
       </IntlProvider>
     );
   }

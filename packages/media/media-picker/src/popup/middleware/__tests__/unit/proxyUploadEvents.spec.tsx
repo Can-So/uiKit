@@ -1,5 +1,5 @@
 import { UploadProcessingEvent } from '../../../../domain/uploadEvent';
-import { mockStore } from '../../../mocks';
+import { mockStore } from '@atlaskit/media-test-helpers';
 import { proxyUploadEvents } from '../../proxyUploadEvents';
 import { FINALIZE_UPLOAD } from '../../../actions/finalizeUpload';
 import { RECENTS_COLLECTION } from '../../../config';
@@ -14,7 +14,6 @@ describe('proxyUploadEvents middleware', () => {
     'third-id': { proxy: [firstUploadId, secondUploadId] },
   };
   const state = { uploads, client };
-  const publicId = 'some-public-id';
   const upfrontId = Promise.resolve('1');
   const file = {
     id: 'third-id',
@@ -50,10 +49,7 @@ describe('proxyUploadEvents middleware', () => {
     const originalEvent: UploadProcessingEvent = {
       name: 'upload-processing',
       data: {
-        file: {
-          ...file,
-          publicId,
-        },
+        file,
       },
     };
     const action = {
@@ -61,7 +57,7 @@ describe('proxyUploadEvents middleware', () => {
       file,
       originalEvent,
     };
-    const source = { id: publicId, collection: RECENTS_COLLECTION };
+    const source = { id: file.id, collection: RECENTS_COLLECTION };
 
     proxyUploadEvents(store)(next)(action);
 
@@ -73,14 +69,14 @@ describe('proxyUploadEvents middleware', () => {
       uploadId: firstUploadId,
       file: originalEvent.data.file,
       source,
-      replaceFileId: upfrontId,
+      replaceFileId: firstUploadId,
     });
     expect(calls[1][0]).toEqual({
       type: FINALIZE_UPLOAD,
       uploadId: secondUploadId,
       file: originalEvent.data.file,
       source,
-      replaceFileId: upfrontId,
+      replaceFileId: secondUploadId,
     });
   });
 });

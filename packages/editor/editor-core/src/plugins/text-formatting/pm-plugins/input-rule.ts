@@ -4,6 +4,14 @@ import { Plugin } from 'prosemirror-state';
 import { analyticsService } from '../../../analytics';
 import { transformToCodeAction } from '../commands/transform-to-code';
 import { InputRuleHandler, createInputRule } from '../../../utils/input-rules';
+import {
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+} from '../../analytics';
+import { ruleWithAnalytics } from '../../analytics/utils';
 
 const validCombos = {
   '**': ['_', '~~'],
@@ -123,9 +131,10 @@ function addCodeMark(
     }
     analyticsService.trackEvent('atlassian.editor.format.code.autoformatting');
     const regexStart = end - match[2].length + 1;
-    return transformToCodeAction(regexStart, end, state.tr)
+    const tr = transformToCodeAction(regexStart, end, state.tr)
       .delete(regexStart, regexStart + specialChar.length)
       .removeStoredMark(markType);
+    return tr;
   };
 }
 
@@ -136,59 +145,145 @@ export const italicRegex2 = /(\S*[^\s\*]*)(\*([^\s\*][^\*]*[^\s\*]|[^\s\*])\*)$/
 export const strikeRegex = /(\S*)(\~\~([^\s\~](\~(?!\~)|[^\~])*[^\s\~]|[^\s\~])\~\~)$/;
 export const codeRegex = /(\S*)(`[^\s][^`]*`)$/;
 
+/**
+ * Create input rules for strong mark
+ *
+ * @param {Schema} schema
+ * @returns {InputRule[]}
+ */
+function getStrongInputRules(schema: Schema): InputRule[] {
+  const ruleWithStrongAnalytics = ruleWithAnalytics(() => ({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRONG,
+    eventType: EVENT_TYPE.TRACK,
+    attributes: {
+      inputMethod: INPUT_METHOD.FORMATTING,
+    },
+  }));
+  // **string** or __strong__ should bold the text
+
+  const markLength = 2;
+  const doubleUnderscoreRule = createInputRule(
+    strongRegex1,
+    addMark(schema.marks.strong, schema, markLength, '__'),
+  );
+
+  const doubleAsterixRule = createInputRule(
+    strongRegex2,
+    addMark(schema.marks.strong, schema, markLength, '**'),
+  );
+
+  return [
+    ruleWithStrongAnalytics(doubleUnderscoreRule),
+    ruleWithStrongAnalytics(doubleAsterixRule),
+  ];
+}
+
+/**
+ * Create input rules for em mark
+ *
+ * @param {Schema} schema
+ * @returns {InputRule[]}
+ */
+function getItalicInputRules(schema: Schema): InputRule[] {
+  const ruleWithItalicAnalytics = ruleWithAnalytics(() => ({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_ITALIC,
+    eventType: EVENT_TYPE.TRACK,
+    attributes: {
+      inputMethod: INPUT_METHOD.FORMATTING,
+    },
+  }));
+
+  // *string* or _string_ should italic the text
+  const markLength = 1;
+
+  const underscoreRule = createInputRule(
+    italicRegex1,
+    addMark(schema.marks.em, schema, markLength, '_'),
+  );
+
+  const asterixRule = createInputRule(
+    italicRegex2,
+    addMark(schema.marks.em, schema, markLength, '*'),
+  );
+
+  return [
+    ruleWithItalicAnalytics(underscoreRule),
+    ruleWithItalicAnalytics(asterixRule),
+  ];
+}
+
+/**
+ * Create input rules for strike mark
+ *
+ * @param {Schema} schema
+ * @returns {InputRule[]}
+ */
+function getStrikeInputRules(schema: Schema): InputRule[] {
+  const ruleWithStrikeAnalytics = ruleWithAnalytics(() => ({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRIKE,
+    eventType: EVENT_TYPE.TRACK,
+    attributes: {
+      inputMethod: INPUT_METHOD.FORMATTING,
+    },
+  }));
+
+  const markLength = 2;
+  const doubleTildeRule = createInputRule(
+    strikeRegex,
+    addMark(schema.marks.strike, schema, markLength, '~~'),
+  );
+
+  return [ruleWithStrikeAnalytics(doubleTildeRule)];
+}
+
+/**
+ * Create input rules for code mark
+ *
+ * @param {Schema} schema
+ * @returns {InputRule[]}
+ */
+function getCodeInputRules(schema: Schema): InputRule[] {
+  const ruleWithCodeAnalytics = ruleWithAnalytics(() => ({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+    eventType: EVENT_TYPE.TRACK,
+    attributes: {
+      inputMethod: INPUT_METHOD.FORMATTING,
+    },
+  }));
+
+  const backTickRule = createInputRule(
+    codeRegex,
+    addCodeMark(schema.marks.code, schema, '`'),
+  );
+
+  return [ruleWithCodeAnalytics(backTickRule)];
+}
+
 export function inputRulePlugin(schema: Schema): Plugin | undefined {
   const rules: Array<InputRule> = [];
 
   if (schema.marks.strong) {
-    // **string** or __strong__ should bold the text
-    const markLength = 2;
-    rules.push(
-      createInputRule(
-        strongRegex1,
-        addMark(schema.marks.strong, schema, markLength, '__'),
-      ),
-    );
-    rules.push(
-      createInputRule(
-        strongRegex2,
-        addMark(schema.marks.strong, schema, markLength, '**'),
-      ),
-    );
+    rules.push(...getStrongInputRules(schema));
   }
 
   if (schema.marks.em) {
-    // *string* or _string_ should italic the text
-    const markLength = 1;
-    rules.push(
-      createInputRule(
-        italicRegex1,
-        addMark(schema.marks.em, schema, markLength, '_'),
-      ),
-    );
-    rules.push(
-      createInputRule(
-        italicRegex2,
-        addMark(schema.marks.em, schema, markLength, '*'),
-      ),
-    );
+    rules.push(...getItalicInputRules(schema));
   }
 
   if (schema.marks.strike) {
-    // ~~string~~ should strikethrough the text
-    const markLength = 2;
-    rules.push(
-      createInputRule(
-        strikeRegex,
-        addMark(schema.marks.strike, schema, markLength, '~~'),
-      ),
-    );
+    rules.push(...getStrikeInputRules(schema));
   }
 
   if (schema.marks.code) {
-    // `string` should monospace the text
-    rules.push(
-      createInputRule(codeRegex, addCodeMark(schema.marks.code, schema, '`')),
-    );
+    rules.push(...getCodeInputRules(schema));
   }
 
   if (rules.length !== 0) {

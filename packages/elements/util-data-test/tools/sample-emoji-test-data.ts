@@ -35,7 +35,7 @@ const reservedEmojis = new Map([
   ['ATLASSIAN', [':boom:', ':evilburns:']],
 ]);
 
-function isReservedEmoji(category, shortName) {
+function isReservedEmoji(category: string, shortName: string) {
   const emojis = reservedEmojis.get(category);
   return emojis && emojis.indexOf(shortName) !== -1;
 }
@@ -51,7 +51,7 @@ function initCountByCategory() {
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
-process.stdin.on('data', chunk => {
+process.stdin.on('data', (chunk: string) => {
   inputChunks.push(chunk);
 });
 
@@ -63,21 +63,23 @@ process.stdin.on('end', () => {
   const meta = parsedData.meta;
   const countByCategory = initCountByCategory();
 
-  const filteredEmojis = emojis.filter(emoji => {
-    const category = emoji.category;
-    const shortName = emoji.shortName;
-    const count = countByCategory.get(category) || 0;
+  const filteredEmojis = emojis.filter(
+    (emoji: { category: string; shortName: string }) => {
+      const category = emoji.category;
+      const shortName = emoji.shortName;
+      const count = countByCategory.get(category) || 0;
 
-    if (isReservedEmoji(category, shortName)) {
-      return true;
-    }
+      if (isReservedEmoji(category, shortName)) {
+        return true;
+      }
 
-    if (count < 10) {
-      countByCategory.set(category, count + 1);
-      return true;
-    }
-    return false;
-  });
+      if (count < 10) {
+        countByCategory.set(category, count + 1);
+        return true;
+      }
+      return false;
+    },
+  );
 
   const outputJSON = JSON.stringify({ emojis: filteredEmojis, meta }, null, 2);
   process.stdout.write(outputJSON);

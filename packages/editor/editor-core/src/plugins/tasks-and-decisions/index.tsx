@@ -8,7 +8,7 @@ import {
   taskItem,
   taskList,
   uuid,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import { messages as insertBlockMessages } from '../insert-block/ui/ToolbarInsertBlock';
 import { createPlugin } from './pm-plugins/main';
@@ -36,8 +36,13 @@ const tasksAndDecisionsPlugin: EditorPlugin = {
     return [
       {
         name: 'tasksAndDecisions',
-        plugin: ({ schema, props, portalProviderAPI, providerFactory }) => {
-          return createPlugin(portalProviderAPI, providerFactory);
+        plugin: ({ portalProviderAPI, providerFactory, dispatch, props }) => {
+          return createPlugin(
+            portalProviderAPI,
+            providerFactory,
+            dispatch,
+            props.appearance,
+          );
         },
       },
       {

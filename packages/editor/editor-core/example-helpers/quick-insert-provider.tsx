@@ -15,6 +15,7 @@ const items: Array<QuickInsertItem> = [
         attrs: {
           extensionType: 'com.atlassian.confluence.macro.core',
           extensionKey: 'inline-eh',
+          text: 'Inline extension demo',
           parameters: {
             macroParams: {},
             macroMetadata: {
@@ -39,6 +40,7 @@ const items: Array<QuickInsertItem> = [
         attrs: {
           extensionType: 'com.atlassian.confluence.macro.core',
           extensionKey: 'block-eh',
+          text: 'Block extension demo',
           parameters: {
             macroParams: {},
             macroMetadata: {

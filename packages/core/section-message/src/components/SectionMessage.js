@@ -13,10 +13,12 @@ import {
   IconWrapper,
 } from './styled';
 
-// There is a bug in eslint react with flow types being spread in function.
-// See https://github.com/yannickcr/eslint-plugin-react/issues/1764 for context
-// eslint-disable-next-line react/no-unused-prop-types
-type ActionType = { text: string, onClick?: () => void, href?: string };
+type ActionType = {
+  text: Node,
+  onClick?: () => void,
+  href?: string,
+  key: string,
+};
 
 type Props = {
   /* The appearance styling to use for the section message. */
@@ -60,15 +62,12 @@ export default class SectionMessage extends Component<Props, *> {
     appearance: 'info',
   };
 
-  renderAction = ({
-    text,
-    onClick,
-    href,
-    linkComponent,
-  }: ActionType & { linkComponent?: ElementType }) => {
-    if (onClick || href) {
-      return (
-        <Action key={text}>
+  renderAction = (action: ActionType, linkComponent?: ElementType) => {
+    const { href, key, onClick, text } = action;
+
+    return (
+      <Action key={key}>
+        {onClick || href ? (
           <Button
             appearance="link"
             spacing="none"
@@ -78,10 +77,11 @@ export default class SectionMessage extends Component<Props, *> {
           >
             {text}
           </Button>
-        </Action>
-      );
-    }
-    return <Action key={text}>{text}</Action>;
+        ) : (
+          text
+        )}
+      </Action>
+    );
   };
 
   render() {
@@ -108,11 +108,9 @@ export default class SectionMessage extends Component<Props, *> {
         <div>
           {title ? <Title>{title}</Title> : null}
           {children ? <Description>{children}</Description> : null}
-          {actions && actions.length > 0 ? (
+          {actions && actions.length ? (
             <Actions>
-              {actions.map(action =>
-                this.renderAction({ ...action, linkComponent }),
-              )}
+              {actions.map(action => this.renderAction(action, linkComponent))}
             </Actions>
           ) : null}
         </div>

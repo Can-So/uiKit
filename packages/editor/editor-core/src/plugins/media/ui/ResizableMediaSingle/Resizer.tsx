@@ -1,54 +1,52 @@
 import * as React from 'react';
+import { RefObject } from 'react';
 import * as classnames from 'classnames';
-import {
-  MediaSingleLayout,
-  calcColumnsFromPx,
-  akEditorWideLayoutWidth,
-} from '@atlaskit/editor-common';
-import { Props, EnabledHandles } from './types';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { Props as ResizableMediaSingleProps, EnabledHandles } from './types';
 
 import Resizable from 're-resizable';
 import { ResizableDirection, NumberSize } from 're-resizable';
 
 import { gridTypeForLayout } from '../../../grid';
 
-export const handleSides = ['left', 'right'];
+import { snapTo, handleSides } from './utils';
 
-const snapTo = (target: number, points: number[]): number =>
-  points.reduce((point, closest) => {
-    return Math.abs(closest - target) < Math.abs(point - target)
-      ? closest
-      : point;
-  });
+type ResizerProps = ResizableMediaSingleProps & {
+  selected: boolean;
+  enable: EnabledHandles;
+  calcNewSize: (
+    newWidth: number,
+    stop: boolean,
+  ) => { layout: MediaSingleLayout; width: number | null };
+  snapPoints: number[];
+  scaleFactor?: number;
+  highlights: (width: number, snapPoints: number[]) => number[] | string[];
+};
 
+type ResizerState = {
+  isResizing: boolean;
+};
 export default class Resizer extends React.Component<
-  Props & {
-    selected: boolean;
-    enable: EnabledHandles;
-    calcNewSize: (
-      newWidth: number,
-      stop: boolean,
-    ) => { layout: MediaSingleLayout; width: number | null };
-    snapPoints: number[];
-    scaleFactor?: number;
-    getColumnLeft: () => number;
-    isInlineLike: boolean;
-  },
-  {
-    isResizing: boolean;
-  }
+  ResizerProps,
+  ResizerState
 > {
-  resizable: Resizable;
+  resizable: RefObject<Resizable>;
   state = {
     isResizing: false,
   };
+  constructor(props: ResizerProps) {
+    super(props);
+    this.resizable = React.createRef();
+  }
 
-  handleResizeStart = () => {
+  handleResizeStart = event => {
+    // prevent creating a drag event on Firefox
+    event.preventDefault();
     this.setState({ isResizing: true }, () => {
       this.props.displayGrid(
         true,
         gridTypeForLayout(this.props.layout),
-        this.highlights(this.props.width),
+        this.props.highlights(this.props.width, this.props.snapPoints),
       );
     });
   };
@@ -59,12 +57,13 @@ export default class Resizer extends React.Component<
     elementRef: HTMLDivElement,
     delta: NumberSize,
   ) => {
-    if (!this.resizable || !this.resizable.state.original) {
+    const resizable = this.resizable.current;
+    if (!resizable || !resizable.state.original) {
       return;
     }
 
     const newWidth = Math.max(
-      this.resizable.state.original.width +
+      resizable.state.original.width +
         delta.width * (this.props.scaleFactor || 1),
       this.props.snapPoints[0],
     );
@@ -77,40 +76,9 @@ export default class Resizer extends React.Component<
     this.props.displayGrid(
       true,
       gridTypeForLayout(newSize.layout),
-      this.highlights(newWidth),
+      this.props.highlights(newWidth, this.props.snapPoints),
     );
-    this.resizable.updateSize({ width: newWidth, height: 'auto' });
-  };
-
-  highlights = newWidth => {
-    const snapWidth = snapTo(newWidth, this.props.snapPoints);
-
-    if (snapWidth > akEditorWideLayoutWidth) {
-      return ['full-width'];
-    }
-
-    const columns = calcColumnsFromPx(
-      snapWidth,
-      this.props.lineLength,
-      this.props.gridSize,
-    );
-    const columnWidth = Math.round(columns);
-
-    const highlight: number[] = [];
-    if (this.props.layout === 'wrap-left') {
-      highlight.push(0);
-      highlight.push(columnWidth);
-    } else if (this.props.layout === 'wrap-right') {
-      highlight.push(this.props.gridSize);
-      highlight.push(this.props.gridSize - columnWidth);
-    } else if (this.props.isInlineLike) {
-      highlight.push(this.props.getColumnLeft() + Math.ceil(columns));
-    } else {
-      highlight.push(Math.floor((this.props.gridSize - columnWidth) / 2));
-      highlight.push(Math.ceil((this.props.gridSize + columnWidth) / 2));
-    }
-
-    return highlight;
+    resizable.updateSize({ width: newWidth, height: 'auto' });
   };
 
   handleResizeStop = (
@@ -119,16 +87,13 @@ export default class Resizer extends React.Component<
     refToElement,
     delta: { width: number; height: number },
   ) => {
-    if (!this.resizable) {
-      return;
-    }
-
-    if (!this.resizable.state.original) {
+    const resizable = this.resizable.current;
+    if (!resizable || !resizable.state.original) {
       return;
     }
 
     const newWidth = Math.max(
-      this.resizable.state.original.width + delta.width,
+      resizable.state.original.width + delta.width,
       this.props.snapPoints[0],
     );
 
@@ -139,17 +104,13 @@ export default class Resizer extends React.Component<
     this.props.displayGrid(
       true,
       gridTypeForLayout(newSize.layout),
-      this.highlights(newWidth),
+      this.props.highlights(newWidth, this.props.snapPoints),
     );
 
     this.setState({ isResizing: false }, () => {
       this.props.updateSize(newSize.width, newSize.layout);
       this.props.displayGrid(false, gridTypeForLayout(this.props.layout));
     });
-  };
-
-  setResizableRef = ref => {
-    this.resizable = ref;
   };
 
   render() {
@@ -168,18 +129,18 @@ export default class Resizer extends React.Component<
     // the div. For now, we just apply the same styles using CSS
     return (
       <Resizable
-        ref={this.setResizableRef}
+        ref={this.resizable}
         onResize={this.handleResize}
         size={{
-          width: this.props.width || 0,
+          width: this.props.width,
         }}
         className={classnames(
           'media-single',
-          this.props.layout,
+          `image-${this.props.layout}`,
           this.props.className,
           {
-            'is-loading': this.props.isLoading,
             'is-resizing': this.state.isResizing,
+            'not-resized': !this.props.pctWidth,
             'mediaSingle-selected': this.props.selected,
             'media-wrapped':
               this.props.layout === 'wrap-left' ||

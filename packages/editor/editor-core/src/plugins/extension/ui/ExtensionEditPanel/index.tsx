@@ -45,7 +45,7 @@ export default function ExtensionEditPanel(this: any, props: Props) {
       target={element}
       offset={[0, 8]}
       alignX="right"
-      stickToBottom={stickToolbarToBottom}
+      stick={stickToolbarToBottom}
       ariaLabel="Extension options"
     >
       <Toolbar>

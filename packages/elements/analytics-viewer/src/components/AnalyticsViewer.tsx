@@ -20,9 +20,11 @@ const AnalyticsViewerWrapper = styled.ul`
   }
 `;
 
-const renderEventViewer = (event, index, events) => (
-  <EventViewer key={events.length - index} {...event} />
-);
+const renderEventViewer = (
+  event: Event,
+  index: number,
+  events: EventsArray,
+) => <EventViewer key={events.length - index} {...event} />;
 
 export const AnalyticsViewer = ({ events, className }: Props) => (
   <AnalyticsViewerWrapper className={className}>

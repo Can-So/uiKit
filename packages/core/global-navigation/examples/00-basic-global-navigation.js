@@ -15,6 +15,7 @@ const AppSwitcherComponent = props => (
   <GlobalItem
     {...props}
     icon={AppSwitcherIcon}
+    id="test"
     onClick={() => console.log('AppSwitcher clicked')}
   />
 );
@@ -27,11 +28,12 @@ const Global = () => (
     onProductClick={() => console.log('product clicked')}
     onCreateClick={() => console.log('create clicked')}
     onSearchClick={() => console.log('search clicked')}
-    onStarredClick={() => console.log('your work clicked')}
+    onStarredClick={() => console.log('starred clicked')}
     onNotificationClick={() => console.log('notification clicked')}
     appSwitcherComponent={AppSwitcherComponent}
     appSwitcherTooltip="Switch to ..."
     helpItems={() => <div />}
+    onSettingsClick={() => console.log('settings clicked')}
     loginHref="#login"
   />
 );

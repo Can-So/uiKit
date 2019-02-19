@@ -7,9 +7,9 @@ import { ProsemirrorGetPosHandler, ReactNodeProps } from '../../../nodeviews';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
+  MediaProvider,
 } from '../pm-plugins/main';
 import { Context, ImageResizeMode } from '@atlaskit/media-core';
-import { MediaProvider } from '../pm-plugins/main';
 import {
   Card,
   CardDimensions,
@@ -18,13 +18,8 @@ import {
   CardOnClickCallback,
   Identifier,
 } from '@atlaskit/media-card';
-
-import {
-  MediaType,
-  MediaBaseAttributes,
-  withImageLoader,
-  ImageStatus,
-} from '@atlaskit/editor-common';
+import { MediaType, MediaBaseAttributes } from '@atlaskit/adf-schema';
+import { withImageLoader, ImageStatus } from '@atlaskit/editor-common';
 
 import { EditorAppearance } from '../../../types';
 
@@ -41,17 +36,17 @@ export interface MediaNodeProps extends ReactNodeProps {
   providerFactory?: ProviderFactory;
   cardDimensions: CardDimensions;
   isMediaSingle?: boolean;
-  mediaProvider?: Promise<MediaProvider>;
   onClick?: CardOnClickCallback;
   onExternalImageLoaded?: (
     dimensions: { width: number; height: number },
   ) => void;
   editorAppearance: EditorAppearance;
+  mediaProvider?: Promise<MediaProvider>;
+  viewContext?: Context;
 }
 
 export interface Props extends Partial<MediaBaseAttributes> {
   type: MediaType;
-  mediaProvider?: Promise<MediaProvider>;
   cardDimensions?: CardDimensions;
   onClick?: CardOnClickCallback;
   onDelete?: CardEventHandler;
@@ -62,6 +57,8 @@ export interface Props extends Partial<MediaBaseAttributes> {
   imageStatus?: ImageStatus;
   context: Context;
   disableOverlay?: boolean;
+  mediaProvider?: Promise<MediaProvider>;
+  viewContext?: Context;
 }
 
 export interface MediaNodeState {
@@ -73,24 +70,17 @@ class MediaNode extends Component<
   MediaNodeState
 > {
   private pluginState: MediaPluginState;
-  private mediaProvider;
-  private hasBeenMounted: boolean = false;
-
-  state = {
-    viewContext: undefined,
-  };
 
   constructor(props) {
     super(props);
     const { view } = this.props;
     this.pluginState = mediaStateKey.getState(view.state);
-    this.mediaProvider = props.mediaProvider;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (
       this.props.selected !== nextProps.selected ||
-      this.state.viewContext !== nextState.viewContext ||
+      this.props.viewContext !== nextProps.viewContext ||
       this.props.node.attrs.id !== nextProps.node.attrs.id ||
       this.props.node.attrs.collection !== nextProps.node.attrs.collection ||
       this.props.cardDimensions !== nextProps.cardDimensions
@@ -101,30 +91,17 @@ class MediaNode extends Component<
   }
 
   componentDidMount() {
-    this.hasBeenMounted = true;
     this.handleNewNode(this.props);
-    this.updateMediaContext();
   }
 
   componentWillUnmount() {
     const { node } = this.props;
     this.pluginState.handleMediaNodeUnmount(node);
-    this.hasBeenMounted = false;
   }
 
   componentDidUpdate() {
     this.pluginState.updateElement();
   }
-
-  private updateMediaContext = async () => {
-    const mediaProvider = await this.mediaProvider;
-    if (mediaProvider) {
-      const viewContext = await mediaProvider.viewContext;
-      if (viewContext && this.hasBeenMounted) {
-        this.setState({ viewContext });
-      }
-    }
-  };
 
   render() {
     const {
@@ -135,8 +112,16 @@ class MediaNode extends Component<
       editorAppearance,
     } = this.props;
     const { id, type, collection, url, __key } = node.attrs;
+    const { viewContext } = this.props;
+    /**
+     * On mobile we don't receive a collectionName until the `upload-end` event.
+     * We don't want to render a proper card until we have a valid collection.
+     * Render loading until we do.
+     */
+    const isMobile = editorAppearance === 'mobile';
+    let isMobileReady = isMobile ? typeof collection === 'string' : true;
 
-    if (!this.state.viewContext) {
+    if (type !== 'external' && (!viewContext || !isMobileReady)) {
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
 
@@ -159,16 +144,16 @@ class MediaNode extends Component<
 
     return (
       <Card
-        context={this.state.viewContext!}
-        resizeMode="full-fit"
+        context={viewContext as any}
+        resizeMode="stretchy-fit"
         dimensions={cardDimensions}
         identifier={identifier}
         selectable={true}
         selected={selected}
         disableOverlay={true}
         onClick={onClick}
-        useInlinePlayer={false}
-        isLazy={editorAppearance !== 'mobile'}
+        useInlinePlayer={!isMobile}
+        isLazy={!isMobile}
       />
     );
   }

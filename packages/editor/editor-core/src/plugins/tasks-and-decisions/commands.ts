@@ -1,4 +1,4 @@
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import { Node as PMNode, ResolvedPos, Schema } from 'prosemirror-model';
 import {
   EditorState,

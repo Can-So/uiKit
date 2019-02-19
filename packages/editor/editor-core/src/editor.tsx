@@ -9,6 +9,8 @@ import {
   BaseTheme,
   WidthProvider,
 } from '@atlaskit/editor-common';
+import { Context as CardContext } from '@atlaskit/smart-card';
+
 import { getUiComponent } from './create-editor';
 import EditorActions from './actions';
 import { EditorProps } from './types/editor-props';
@@ -18,7 +20,6 @@ import EditorContext from './ui/EditorContext';
 import { WithCreateAnalyticsEvent } from './ui/WithCreateAnalyticsEvent';
 import { PortalProvider, PortalRenderer } from './ui/PortalProvider';
 import { nextMajorVersion } from './version';
-import { Context as CardContext } from '@atlaskit/smart-card';
 import { createContextAdapter } from './nodeviews';
 
 export * from './types';
@@ -32,6 +33,7 @@ type Context = {
 const ContextAdapter = createContextAdapter({
   card: CardContext,
 });
+
 export default class Editor extends React.Component<EditorProps, {}> {
   static defaultProps: EditorProps = {
     appearance: 'message',
@@ -300,8 +302,15 @@ export default class Editor extends React.Component<EditorProps, {}> {
                         providerFactory={this.providerFactory}
                         onEditorCreated={this.onEditorCreated}
                         onEditorDestroyed={this.onEditorDestroyed}
+                        allowAnalyticsGASV3={this.props.allowAnalyticsGASV3}
                         disabled={this.props.disabled}
-                        render={({ editor, view, eventDispatcher, config }) => (
+                        render={({
+                          editor,
+                          view,
+                          eventDispatcher,
+                          config,
+                          dispatchAnalyticsEvent,
+                        }) => (
                           <BaseTheme
                             dynamicTextSizing={
                               this.props.allowDynamicTextSizing
@@ -314,6 +323,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
                               editorView={view}
                               providerFactory={this.providerFactory}
                               eventDispatcher={eventDispatcher}
+                              dispatchAnalyticsEvent={dispatchAnalyticsEvent}
                               maxHeight={this.props.maxHeight}
                               onSave={
                                 this.props.onSave ? this.handleSave : undefined

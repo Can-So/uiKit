@@ -1,22 +1,34 @@
+import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
+import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
+import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
+import { EditorAppearance } from '../../types';
+import { pluginKey as tableResizingPluginKey } from '../../plugins/table/pm-plugins/table-resizing';
+
 /**
  * This function will in browser context. Make sure you call `toJSON` otherwise you will get:
  * unknown error: Maximum call stack size exceeded
  * And, don't get too fancy with it ;)
  */
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
-import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
-
 export const getDocFromElement = el => el.pmViewDesc.node.toJSON();
 export const editable = '.ProseMirror';
 export const LONG_WAIT_FOR = 5000;
 export const typeAheadPicker = '.fabric-editor-typeahead';
 export const lozenge = '[data-mention-id="0"]';
+export const linkToolbar =
+  '[placeholder="Paste link or search recently viewed"]';
 
 export const insertMention = async (browser, query: string) => {
   await browser.type(editable, '@');
   await browser.waitForSelector(typeAheadPicker);
   await browser.type(editable, query);
   await browser.type(editable, 'Return');
+};
+
+export const gotoEditor = async browser => {
+  await browser.goto(fullpage.path);
+  await browser.waitForSelector(fullpage.placeholder);
+  await browser.click(fullpage.placeholder);
+  await browser.waitForSelector(editable);
 };
 
 export const insertMentionUsingClick = async (browser, mentionId: string) => {
@@ -26,26 +38,44 @@ export const insertMentionUsingClick = async (browser, mentionId: string) => {
   await browser.click(`div[data-mention-id="${mentionId}"`);
 };
 
-export const comment = {
+interface EditorHelper {
+  name: string;
+  appearance: EditorAppearance;
+  path: string;
+  placeholder: string;
+}
+
+export const comment: EditorHelper = {
   name: 'comment',
+  appearance: 'comment',
   path: getExampleUrl('editor', 'editor-core', 'comment'),
   placeholder: '[placeholder="What do you want to say?"]',
 };
 
-export const fullpage = {
+export const fullpage: EditorHelper = {
   name: 'fullpage',
+  appearance: 'full-page',
   path: getExampleUrl('editor', 'editor-core', 'full-page-with-toolbar'),
   placeholder: '.ProseMirror',
 };
 
-export const fullpageDisabled = {
+export const fullpageDisabled: EditorHelper = {
   name: 'fullpage-disabled',
+  appearance: 'full-page',
   path: getExampleUrl('editor', 'editor-core', 'full-page-with-content'),
   placeholder: '.ProseMirror',
 };
 
-export const message = {
+export const fullpageWithImport: EditorHelper = {
+  name: 'fullpage-with-import',
+  appearance: 'full-page',
+  path: getExampleUrl('editor', 'editor-core', 'full-page-with-adf-import'),
+  placeholder: '.ProseMirror',
+};
+
+export const message: EditorHelper = {
   name: 'message',
+  appearance: 'message',
   path: getExampleUrl('editor', 'editor-core', 'message'),
   placeholder: '.ProseMirror',
 };
@@ -58,10 +88,10 @@ export const clipboardHelper = getExampleUrl(
   'clipboard-helper',
 );
 
-export const clipboardInput = '#input';
+export const clipboardInput = 'textarea';
 
-export const copyAsPlaintextButton = '#copy-as-plaintext';
-export const copyAsHTMLButton = '#copy-as-html';
+export const copyAsPlaintextButton = '.copy-as-plaintext';
+export const copyAsHTMLButton = '.copy-as-html';
 
 export const mediaInsertDelay = 1000;
 
@@ -76,6 +106,39 @@ export const setupMediaMocksProviders = async browser => {
   await browser.click('.mediaProvider-resolved-no-auth-provider');
 
   // reload the editor so that media provider changes take effect
+  await rerenderEditor(browser);
+};
+
+/**
+ * Toggles a given feature on a page with a toolbar.
+ */
+export const toggleFeature = async (browser, name: keyof ToolbarFeatures) => {
+  const selector = `.toggleFeature-${name}`;
+  await browser.waitForSelector(selector);
+  await browser.click(selector);
+};
+
+/**
+ * Enables or disables a given feature on a page with a toolbar.
+ */
+export const setFeature = async (
+  browser,
+  name: keyof ToolbarFeatures,
+  enable: boolean,
+) => {
+  const enableSelector = `.disableFeature-${name}`;
+  const isEnabled = get$$Length(await browser.$$(enableSelector));
+
+  // toggle it if it requires enabling
+  if ((enable && !isEnabled) || (!enable && isEnabled)) {
+    await toggleFeature(browser, name);
+  }
+};
+
+/**
+ * Re-renders the current editor on a page with a toolbar.
+ */
+export const rerenderEditor = async browser => {
   await browser.click('.reloadEditorButton');
 };
 
@@ -156,18 +219,33 @@ const get$$Length = result => {
   }
 };
 
+/**
+ * Insert a block using the menu item
+ * @param browser Webdriver browser
+ * @param menuTitle Search pattern (placeholder or aria-label)
+ * @param tagName Tag to look
+ * @param mainToolbar Flag to look the menu in the main toolbar instead of insert menu
+ */
 export const insertBlockMenuItem = async (
   browser,
-  menuTitle,
+  menuTitle: string,
   tagName = 'span',
+  mainToolbar = false,
 ) => {
-  const openInsertBlockMenuSelector = `[aria-label="${
-    insertBlockMessages.insertMenu.defaultMessage
-  }"]`;
+  let menuSelector: string;
+  if (mainToolbar) {
+    menuSelector = `[aria-label="${menuTitle}"]`;
+  } else {
+    // Open insert menu and try to look the menu there
+    const openInsertBlockMenuSelector = `[aria-label="${
+      insertBlockMessages.insertMenu.defaultMessage
+    }"]`;
 
-  await browser.click(openInsertBlockMenuSelector);
+    await browser.click(openInsertBlockMenuSelector);
 
-  const menuSelector = `${tagName}=${menuTitle}`;
+    menuSelector = `${tagName}=${menuTitle}`;
+  }
+
   await browser.waitForSelector(menuSelector);
   await browser.click(menuSelector);
 };
@@ -178,55 +256,114 @@ export const changeSelectedNodeLayout = async (page, layoutName) => {
   await page.click(buttonSelector);
 };
 
-/**
- * When using quick insert, `insertTitle` should match exactly to the typeahead wording.
- * We need to filter down the typeahead, as we select the first result.
- * Edge appears to have a problem with await browser.browser.waitUntil().
- * The statement at the bottom of the async function returns `firstInsertText && firstInsertText.startsWith(firstTitleWord)`
- * Even when this is true the waitUntil doesn’t return.
- */
-
 export const quickInsert = async (browser, insertTitle) => {
-  const firstTitleWord = insertTitle.split(' ')[0];
+  await browser.type(editable, `/${insertTitle.split(' ')[0]}`);
+  await browser.waitForSelector('div[aria-label="Popup"]');
+  await browser.waitForSelector(
+    `[aria-label="Popup"] [role="button"][aria-describedby="${insertTitle}"]`,
+  );
 
-  // Quick insert doesnt work in FF, as `keys` isn't supported.
-  if (browser.browser.desiredCapabilities.browserName === 'firefox') {
-    await quickInsertActiveElement(browser, firstTitleWord);
-  } else {
-    await browser.keys('/');
-    await browser.waitFor('div[aria-label="Popup"]');
-    await browser.keys(firstTitleWord);
-  }
-
-  await browser.browser.waitUntil(async () => {
-    let firstInsertText = await browser.browser.getText(
-      '[aria-label="Popup"] [role="button"]',
-    );
-    if (Array.isArray(firstInsertText)) {
-      firstInsertText = firstInsertText[0];
-    }
-
-    return firstInsertText && firstInsertText.startsWith(firstTitleWord);
-  }, LONG_WAIT_FOR);
-
-  await browser.click('[aria-label="Popup"] [role="button"]');
+  await browser.click(`[aria-label="Popup"] [role="button"]`);
 };
 
-/**
- * Firefox has deprecated `keys`, this is a workaround to type in Firefox.
- * @see https://stackoverflow.com/a/44712416
- */
-const quickInsertActiveElement = async (browser, insertTitle) => {
-  const result = await browser.browser.elementActive();
-  // Newer versions of the webdriver like Gecko/IEDriver return the element as "element-6066-11e4-a52e-4f735466cecf"
-  // (which is documented in the W3C specs) instead of "ELEMENT".
-  const activeElement =
-    result.value &&
-    (result.value.ELEMENT ||
-      result.value['element-6066-11e4-a52e-4f735466cecf']);
-  if (activeElement) {
-    await browser.browser.elementIdValue(activeElement, '/');
-    await browser.waitFor('div[aria-label="Popup"]');
-    await browser.browser.elementIdValue(activeElement, insertTitle);
+export const forEach = async (
+  array: Array<any>,
+  cb: (item: any, index: number) => Promise<void>,
+) => {
+  let idx = 0;
+  for (let item of array) {
+    await cb(item, idx++);
   }
+};
+
+export const insertMenuItem = async (browser, title) => {
+  await browser.waitForSelector(`button span[aria-label="${title}"]`);
+  await browser.click(`button span[aria-label="${title}"]`);
+};
+
+export const currentSelectedEmoji = '.emoji-typeahead-selected';
+export const typeahead = '.ak-emoji-typeahead';
+
+export const insertEmoji = async (browser, query: string) => {
+  await browser.type(editable, ':');
+  await browser.waitForSelector(typeahead);
+  await browser.type(editable, query);
+  await browser.type(editable, ':');
+};
+
+export const insertEmojiBySelect = async (browser, select: string) => {
+  await browser.type(editable, ':');
+  await browser.waitForSelector(typeahead);
+  await browser.type(editable, [select]);
+  await browser.isVisible(`span=:${select}:`);
+  await browser.click(`span=:${select}:`);
+};
+
+export const currentSelectedEmojiShortName = async browser => {
+  return await browser.$(currentSelectedEmoji).getProperty('data-emoji-id');
+};
+
+export const highlightEmojiInTypeahead = async (
+  browser,
+  emojiShortName,
+  depth = 5,
+) => {
+  for (let i = 0; i < depth; i++) {
+    let selectedEmojiShortName = await currentSelectedEmojiShortName(browser);
+    if (selectedEmojiShortName === `:${emojiShortName}:`) {
+      break;
+    }
+    await browser.type(editable, 'ArrowDown');
+  }
+};
+
+export const emojiItem = (emojiShortName: string): string => {
+  return `span[data-emoji-short-name=":${emojiShortName}:"]`;
+};
+
+interface ResizeOptions {
+  cellHandlePos: number;
+  // TODO could make this an array, to simulate dragging back and forth.
+  resizeWidth: number;
+  startX?: number;
+}
+
+export const resizeColumn = async (page: any, resizeOptions: ResizeOptions) => {
+  await page.browser.execute(
+    (tableResizingPluginKey, resizeWidth, cellHandlePos, startX) => {
+      const view = (window as any).__editorView;
+
+      if (!view) {
+        return;
+      }
+
+      view.dispatch(
+        view.state.tr.setMeta(tableResizingPluginKey, {
+          setHandle: cellHandlePos,
+        }),
+      );
+
+      view.dom.dispatchEvent(new MouseEvent('mousedown', { clientX: startX }));
+
+      // Visually resize table
+      for (
+        let i = Math.min(0, resizeWidth);
+        i < Math.max(0, resizeWidth);
+        i++
+      ) {
+        window.dispatchEvent(
+          new MouseEvent('mousemove', { clientX: startX + i }),
+        );
+      }
+
+      // Trigger table resizing finish handlers
+      window.dispatchEvent(
+        new MouseEvent('mouseup', { clientX: startX + resizeWidth }),
+      );
+    },
+    tableResizingPluginKey,
+    resizeOptions.resizeWidth,
+    resizeOptions.cellHandlePos,
+    resizeOptions.startX || 600,
+  );
 };

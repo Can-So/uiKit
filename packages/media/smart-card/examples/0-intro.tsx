@@ -2,10 +2,10 @@ import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 
 import Page, { Grid, GridColumn } from '@atlaskit/page';
-import { Field } from '@atlaskit/form';
-import { FieldTextStateless } from '@atlaskit/field-text';
+import Form, { Field, FormHeader } from '@atlaskit/form';
+import Textfield from '@atlaskit/textfield';
 import Button from '@atlaskit/button';
-import { Provider, Card } from '../src';
+import { Provider, Card, Client } from '../src';
 import { CardAppearance } from '../src/Card/types';
 import { Checkbox } from '@atlaskit/checkbox';
 import { RadioGroup } from '@atlaskit/radio';
@@ -62,63 +62,80 @@ class Example extends React.Component<{}, ExampleState> {
 
   renderCard(url: string, isSelected: boolean, appearance: any) {
     if (url) {
-      return <Card isSelected={isSelected} appearance={appearance} url={url} />;
+      return (
+        <Card
+          isSelected={isSelected}
+          appearance={appearance}
+          url={url}
+          client={new Client(undefined, 'staging')}
+        />
+      );
     }
     return null;
   }
 
   render() {
     const { appearance, url, isSelected } = this.state;
+
     return (
       <IntlProvider locale="en">
         <Provider>
           <Page>
             <Grid>
-              <GridColumn medium={8}>
-                <Field label="URL">
-                  <FieldTextStateless
-                    autoFocus={true}
-                    shouldFitContainer={true}
-                    value={url}
-                    onChange={this.handleUrlChange}
-                  />
-                </Field>
+              <GridColumn medium={12} key={url}>
+                <div
+                  style={{
+                    margin: '20px 0',
+                    minHeight: 150,
+                    borderBottom: '1px solid #eee',
+                  }}
+                >
+                  {this.renderCard(url, isSelected, appearance)}
+                </div>
               </GridColumn>
-              <GridColumn medium={2}>
-                <Field label="Appearance">
-                  <RadioGroup
-                    options={[
-                      { label: 'Block', value: 'block' },
-                      { label: 'Inline', value: 'inline' },
-                    ]}
-                    value={appearance}
-                    label="Pick a "
-                    onChange={this.handleAppearanceChange}
-                  />
-                </Field>
+              <GridColumn medium={6}>
+                <Form onSubmit={() => {}}>
+                  {() => (
+                    <form>
+                      <FormHeader title="Card options" />
+                      <Field name="url" label="Url">
+                        {() => (
+                          <Textfield
+                            onChange={this.handleUrlChange}
+                            value={url}
+                            autoFocus
+                          />
+                        )}
+                      </Field>
+                      <Field name="appearance" label="Appearance">
+                        {() => (
+                          <RadioGroup
+                            options={[
+                              { label: 'Block', value: 'block' },
+                              { label: 'Inline', value: 'inline' },
+                            ]}
+                            value={appearance}
+                            onChange={this.handleAppearanceChange}
+                          />
+                        )}
+                      </Field>
+                      <Field name="selected" label="Selection">
+                        {() => (
+                          <Checkbox
+                            isChecked={isSelected}
+                            onChange={this.handleIsSelected}
+                            label="is selected"
+                            value={true}
+                            name="isSelected"
+                          />
+                        )}
+                      </Field>
+                    </form>
+                  )}
+                </Form>
               </GridColumn>
-              <GridColumn medium={2}>
-                <Field label="Selection">
-                  <Checkbox
-                    isChecked={isSelected}
-                    onChange={this.handleIsSelected}
-                    label="is selected"
-                    value={true}
-                    name="isSelected"
-                  />
-                </Field>
-              </GridColumn>
-            </Grid>
-            <Grid>
-              <GridColumn key={url}>
-                <br />
-                {this.renderCard(url, isSelected, appearance)}
-              </GridColumn>
-            </Grid>
-            <Grid>
-              <GridColumn>
-                <br />
-                <h3>Example urls:</h3>
+              <GridColumn medium={6}>
+                <h2>Example urls</h2>
                 {urlsJSON.map((example: any, i: number) => (
                   <p key={i}>
                     <Button

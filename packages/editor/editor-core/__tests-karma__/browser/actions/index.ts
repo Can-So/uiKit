@@ -1,7 +1,7 @@
 import * as chai from 'chai';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { createEditor, chaiPlugin } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, chaiPlugin } from '@atlaskit/editor-test-helpers';
 import {
   doc,
   p,
@@ -14,11 +14,8 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import {
-  Transformer,
-  ProviderFactory,
-  defaultSchema,
-} from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { Transformer, ProviderFactory } from '@atlaskit/editor-common';
 
 import {
   MediaPluginState,
@@ -26,7 +23,6 @@ import {
   DefaultMediaStateManager,
 } from './../../../src/plugins/media/pm-plugins/main';
 import extensionPlugin from '../../../src/plugins/extension';
-import pickerFacadeLoader from '../../../src/plugins/media/picker-facade-loader';
 import { name } from '../../../package.json';
 import tasksAndDecisionsPlugin from '../../../src/plugins/tasks-and-decisions';
 import mediaPlugin from '../../../src/plugins/media';
@@ -45,8 +41,6 @@ const dummyTransformer: Transformer<string> = {
 
 describe(name, () => {
   describe('EditorActions', () => {
-    let editorActions: EditorActions;
-    let editorView: EditorView;
     const testTempFileId = `temporary:${randomId()}`;
     const testTempFileId2 = `temporary:${randomId()}`;
     const testPubFileId = `${randomId()}`;
@@ -57,381 +51,421 @@ describe(name, () => {
       stateManager,
       includeUserAuthProvider: true,
     });
-    let mediaPluginState: MediaPluginState;
     let providerFactory: ProviderFactory;
 
-    beforeEach(() => {
-      providerFactory = new ProviderFactory();
-      const editor = createEditor({
-        editorPlugins: [tasksAndDecisionsPlugin, mediaPlugin()],
-        editorProps: {
-          mediaProvider,
-          waitForMediaUpload: true,
-          uploadErrorHandler: () => {},
-        },
-        providerFactory,
-      });
-      providerFactory.setProvider('mediaProvider', mediaProvider);
-      editorActions = new EditorActions();
-      editorActions._privateRegisterEditor(
-        editor.editorView,
-        new EventDispatcher(),
-      );
-      editorView = editor.editorView;
-
-      mediaPluginState = mediaPluginStateKey.getState(editorView.state) as any;
-
+    const getMediaPluginState = (editorView: EditorView): MediaPluginState => {
+      const mediaPluginState = mediaPluginStateKey.getState(
+        editorView.state,
+      ) as any;
       sinon
         .stub(mediaPluginState, 'collectionFromProvider' as any)
         .returns(testCollectionName);
+      return mediaPluginState;
+    };
+
+    beforeEach(() => {
+      providerFactory = new ProviderFactory();
+      providerFactory.setProvider('mediaProvider', mediaProvider);
     });
 
     afterEach(() => {
-      editorView.destroy();
       providerFactory.destroy();
     });
 
-    describe('#focus', () => {
-      describe('when focus has already been set', () => {
-        beforeEach(() => {
-          editorActions.focus();
-        });
-
-        it('should not set focus', () => {
-          expect(editorActions.focus()).to.equal(false);
-          expect(editorView.hasFocus()).to.equal(true);
-        });
-
-        it('should not scroll editor focus into view', () => {
-          const dispatchSpy = sinon.spy(editorView, 'dispatch');
-          editorActions.focus();
-          expect(dispatchSpy.called).to.equal(false);
-        });
-      });
-
-      describe('when focus has not been set', () => {
-        it('should set focus', () => {
-          expect(editorActions.focus()).to.equal(true);
-          expect(editorView.hasFocus()).to.equal(true);
-        });
-
-        it('should scroll editor focus into view', () => {
-          const dispatchSpy = sinon.spy(editorView, 'dispatch');
-          editorActions.focus();
-          const [tr] = dispatchSpy.firstCall.args;
-          expect(tr.scrolledIntoView).to.equal(true);
-        });
-      });
-    });
-
-    describe('#blur', () => {
-      it(`should not blur editor if it doesn't have focus`, () => {
-        expect(editorActions.blur()).to.equal(false);
-        expect(editorView.hasFocus()).to.equal(false);
-      });
-
-      it('should blur editor if it has focus', () => {
-        editorActions.focus();
-        expect(editorActions.blur()).to.equal(true);
-        expect(editorView.hasFocus()).to.equal(false);
-      });
-    });
-
-    describe('#clear', () => {
-      it('should remove all content from an editor', () => {
-        const tr = editorView.state.tr;
-        tr.insertText('some text', 1);
-        editorView.dispatch(tr);
-        expect(editorView.state.doc.nodeSize).to.be.gt(4);
-        expect(editorActions.clear()).to.equal(true);
-        expect(editorView.state.doc.nodeSize).to.equal(4);
-      });
-    });
-
-    describe('#getValue', () => {
-      it('should return current editor value', async () => {
-        const result = doc(p('some text'))(defaultSchema);
-        const tr = editorView.state.tr;
-        tr.insertText('some text', 1);
-        editorView.dispatch(tr);
-
-        const val = await editorActions.getValue();
-        expect(val).to.not.equal(undefined);
-        expect(val).to.deep.equal(toJSON(result));
-      });
-
-      describe('with waitForMediaUpload === true', () => {
-        it('should not resolve when all media operations are pending', async () => {
-          stateManager.updateState(testTempFileId, {
-            id: testTempFileId,
-            fileId: Promise.resolve('id'),
-          });
-
-          await pickerFacadeLoader();
-          const provider = await mediaProvider;
-          await provider.uploadContext;
-
-          mediaPluginState.insertFiles([
-            { id: testTempFileId, fileId: Promise.resolve('id') },
-          ]);
-
-          let resolved: any;
-
-          editorActions
-            .getValue()
-            .then(potentialValue => (resolved = potentialValue));
-
-          return new Promise(resolve => {
-            window.setTimeout(() => {
-              expect(resolved).to.equal(undefined);
-              resolve();
-            }, 50);
-          });
-        });
-
-        it('should reject after timeout is reached', async () => {
-          stateManager.updateState(testTempFileId, {
-            id: testTempFileId,
-            fileId: Promise.resolve('id'),
-          });
-
-          await pickerFacadeLoader();
-          const provider = await mediaProvider;
-          await provider.uploadContext;
-
-          mediaPluginState.insertFiles([
-            { id: testTempFileId, fileId: Promise.resolve('id') },
-          ]);
-
-          // Note: getValue() public API doesn't yet support timeout, but the
-          //       plugin state does and we want to have coverage of that.
-          return mediaPluginState
-            .waitForPendingTasks(1)
-            .then(() => {
-              throw new Error('The promise should not resolve successfully');
-            })
-            .catch(() => {});
-        });
-
-        it('should not resolve when some media operations are pending', async () => {
-          stateManager.updateState(testTempFileId, {
-            id: testTempFileId,
-            fileId: Promise.resolve('id'),
-          });
-
-          stateManager.updateState(testTempFileId2, {
-            id: testTempFileId2,
-            fileId: Promise.resolve('id'),
-          });
-
-          await pickerFacadeLoader();
-          const provider = await mediaProvider;
-          await provider.uploadContext;
-
-          mediaPluginState.insertFiles([
-            { id: testTempFileId, fileId: Promise.resolve('id') },
-          ]);
-
-          let resolved: any;
-
-          editorActions
-            .getValue()
-            .then(potentialValue => (resolved = potentialValue));
-
-          mediaPluginState.insertFiles([
-            { id: testTempFileId2, fileId: Promise.resolve('id') },
-          ]);
-
-          stateManager.updateState(testTempFileId, {
-            status: 'ready',
-            id: testTempFileId,
-            publicId: testPubFileId,
-          });
-
-          return new Promise(resolve => {
-            window.setTimeout(() => {
-              expect(resolved).to.equal(undefined);
-              resolve();
-            }, 50);
-          });
-        });
-
-        it('should resolve after media have resolved', async () => {
-          stateManager.updateState(testTempFileId, {
-            id: testTempFileId,
-            fileId: Promise.resolve('id'),
-          });
-          await pickerFacadeLoader();
-          const provider = await mediaProvider;
-          await provider.uploadContext;
-
-          mediaPluginState.insertFiles([
-            { id: testTempFileId, fileId: Promise.resolve('id') },
-          ]);
-
-          // To simulate async behavior, trigger ready on next tick
-          window.setTimeout(() => {
-            stateManager.updateState(testTempFileId, {
-              status: 'ready',
-              id: testTempFileId,
-              publicId: testTempFileId,
-            });
-          }, 0);
-
-          const value = (await editorActions.getValue()) as any;
-
-          expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(2);
-          expect(value.content[0].type).to.be.eq('mediaGroup');
-          expect(value.content[0].content[0].type).to.be.eq('media');
-          expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
-        });
-
-        it('should resolve after processing status', async () => {
-          stateManager.updateState(testTempFileId, {
-            id: testTempFileId,
-            fileId: Promise.resolve('id'),
-          });
-
-          await pickerFacadeLoader();
-          const provider = await mediaProvider;
-          await provider.uploadContext;
-          await provider.viewContext;
-
-          mediaPluginState.insertFiles([
-            { id: testTempFileId, fileId: Promise.resolve('id') },
-          ]);
-
-          // To simulate async behavior, trigger ready on next tick
-          window.setTimeout(() => {
-            stateManager.updateState(testTempFileId, {
-              status: 'ready',
-              id: testTempFileId,
-              publicId: testTempFileId,
-            });
-          }, 0);
-
-          const value = (await editorActions.getValue()) as any;
-
-          expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(2);
-          expect(value.content[0].type).to.be.eq('mediaGroup');
-          expect(value.content[0].content[0].type).to.be.eq('media');
-          expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
-        });
-      });
-
-      describe('with waitForMediaUpload === false', () => {
-        it('should resolve even when media operations are pending', async () => {
-          const editor = createEditor({
-            editorPlugins: [mediaPlugin()],
-            editorProps: {
-              mediaProvider,
-              waitForMediaUpload: false,
-            },
-            providerFactory,
-          });
-          providerFactory.setProvider('mediaProvider', mediaProvider);
-          editorActions = new EditorActions();
-          editorActions._privateRegisterEditor(
-            editor.editorView,
-            new EventDispatcher(),
-          );
-          editorView = editor.editorView;
-          mediaPluginState = mediaPluginStateKey.getState(
-            editorView.state,
-          ) as any;
-
-          sinon
-            .stub(mediaPluginState, 'collectionFromProvider' as any)
-            .returns(testCollectionName);
-
-          stateManager.updateState(testTempFileId, {
-            id: testTempFileId,
-            fileId: Promise.resolve('id'),
-          });
-
-          await pickerFacadeLoader();
-          const provider = await mediaProvider;
-          await provider.uploadContext;
-
-          mediaPluginState.insertFiles([
-            { id: testTempFileId, fileId: Promise.resolve('id') },
-          ]);
-
-          const value = (await editorActions.getValue()) as any;
-
-          expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(2);
-          expect(value.content[0].type).to.be.eq('mediaGroup');
-          expect(value.content[0].content[0].type).to.be.eq('media');
-          expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
-        });
-      });
-    });
-
-    describe('#replaceDocument', () => {
-      const newDoc = doc(p('some new content'))(defaultSchema);
-      beforeEach(() => {
-        const tr = editorView.state.tr;
-        tr.insertText('some text', 1);
-        editorView.dispatch(tr);
-      });
-
-      it('should update the document using the transformer when a transformer is set', () => {
-        editorActions._privateRegisterEditor(
-          editorView,
-          new EventDispatcher(),
-          dummyTransformer,
-        );
-
-        const wasSuccessful = editorActions.replaceDocument('Hello World!');
-        expect(wasSuccessful).to.equal(true);
-        const actual = editorView.state.doc;
-        const expected = doc(blockquote(p('Hello World!')));
-        expect(actual).to.deep.equal(expected);
-      });
-
-      it('should accept JSON version of a prosemirror node', async () => {
-        editorActions.replaceDocument(newDoc.toJSON());
-        const val = await editorActions.getValue();
-        expect(val).to.deep.equal(toJSON(newDoc));
-      });
-
-      it('should accept stringified JSON version of a prosemirror node', async () => {
-        editorActions.replaceDocument(JSON.stringify(newDoc.toJSON()));
-        const val = await editorActions.getValue();
-        expect(val).to.deep.equal(toJSON(newDoc));
-      });
-
-      it('should accept atlassian document format', async () => {
-        const atlassianDoc = jsonTransformer.encode(newDoc);
-        editorActions.replaceDocument(atlassianDoc);
-        const val = await editorActions.getValue();
-        expect(val).to.deep.equal(toJSON(newDoc));
-      });
-
-      it('should accept atlassian document format from a string', async () => {
-        const atlassianDoc = jsonTransformer.encode(newDoc);
-        editorActions.replaceDocument(JSON.stringify(atlassianDoc));
-        const val = await editorActions.getValue();
-        expect(val).to.deep.equal(toJSON(newDoc));
-      });
-    });
-
-    describe('#replaceSelection', () => {
-      const newDoc = doc(p('some new {<>}content'));
+    describe('with waitForMediaUpload === true', () => {
+      const createEditor = createEditorFactory();
       let editorActions;
       let editorView;
 
       beforeEach(() => {
+        const editor = createEditor({
+          editorPlugins: [tasksAndDecisionsPlugin, mediaPlugin()],
+          editorProps: {
+            mediaProvider,
+            waitForMediaUpload: true,
+            uploadErrorHandler: () => {},
+          },
+          providerFactory,
+        });
+        editorView = editor.editorView;
+        editorActions = new EditorActions();
+        editorActions._privateRegisterEditor(editorView, new EventDispatcher());
+      });
+
+      describe('#focus', () => {
+        describe('when focus has already been set', () => {
+          beforeEach(() => {
+            editorActions.focus();
+          });
+
+          it('should not set focus', () => {
+            expect(editorActions.focus()).to.equal(false);
+            expect(editorView.hasFocus()).to.equal(true);
+          });
+
+          it('should not scroll editor focus into view', () => {
+            const dispatchSpy = sinon.spy(editorView, 'dispatch');
+            editorActions.focus();
+            expect(dispatchSpy.called).to.equal(false);
+          });
+        });
+
+        describe('when focus has not been set', () => {
+          it('should set focus', () => {
+            expect(editorActions.focus()).to.equal(true);
+            expect(editorView.hasFocus()).to.equal(true);
+          });
+
+          it('should scroll editor focus into view', () => {
+            const dispatchSpy = sinon.spy(editorView, 'dispatch');
+            editorActions.focus();
+            const [tr] = dispatchSpy.firstCall.args;
+            expect(tr.scrolledIntoView).to.equal(true);
+          });
+        });
+      });
+
+      describe('#blur', () => {
+        it(`should not blur editor if it doesn't have focus`, () => {
+          expect(editorActions.blur()).to.equal(false);
+          expect(editorView.hasFocus()).to.equal(false);
+        });
+
+        it('should blur editor if it has focus', () => {
+          editorActions.focus();
+          expect(editorActions.blur()).to.equal(true);
+          expect(editorView.hasFocus()).to.equal(false);
+        });
+      });
+
+      describe('#clear', () => {
+        it('should remove all content from an editor', () => {
+          const tr = editorView.state.tr;
+          tr.insertText('some text', 1);
+          editorView.dispatch(tr);
+          expect(editorView.state.doc.nodeSize).to.be.gt(4);
+          expect(editorActions.clear()).to.equal(true);
+          expect(editorView.state.doc.nodeSize).to.equal(4);
+        });
+      });
+
+      describe('#getValue', function() {
+        it('should return current editor value', async () => {
+          const result = doc(p('some text'))(defaultSchema);
+          const tr = editorView.state.tr;
+          tr.insertText('some text', 1);
+          editorView.dispatch(tr);
+
+          const val = await editorActions.getValue();
+          expect(val).to.not.equal(undefined);
+          expect(val).to.deep.equal(toJSON(result));
+        });
+
+        describe('with waitForMediaUpload === true', () => {
+          it('should not resolve when all media operations are pending', async () => {
+            stateManager.updateState(testTempFileId, {
+              id: testTempFileId,
+              fileId: Promise.resolve('id'),
+            });
+
+            const provider = await mediaProvider;
+            await provider.uploadContext;
+            const mediaPluginState = getMediaPluginState(editorView);
+            mediaPluginState.insertFiles([
+              { id: testTempFileId, fileId: Promise.resolve('id') },
+            ]);
+
+            let resolved: any;
+
+            editorActions
+              .getValue()
+              .then(potentialValue => (resolved = potentialValue));
+
+            return new Promise(resolve => {
+              window.setTimeout(() => {
+                expect(resolved).to.equal(undefined);
+                resolve();
+              }, 50);
+            });
+          });
+
+          it('should reject after timeout is reached', async () => {
+            stateManager.updateState(testTempFileId, {
+              id: testTempFileId,
+              fileId: Promise.resolve('id'),
+            });
+
+            const provider = await mediaProvider;
+            await provider.uploadContext;
+
+            const mediaPluginState = getMediaPluginState(editorView);
+            mediaPluginState.insertFiles([
+              { id: testTempFileId, fileId: Promise.resolve('id') },
+            ]);
+
+            // Note: getValue() public API doesn't yet support timeout, but the
+            //       plugin state does and we want to have coverage of that.
+            return mediaPluginState
+              .waitForPendingTasks(1)
+              .then(() => {
+                throw new Error('The promise should not resolve successfully');
+              })
+              .catch(() => {});
+          });
+
+          it('should not resolve when some media operations are pending', async () => {
+            stateManager.updateState(testTempFileId, {
+              id: testTempFileId,
+              fileId: Promise.resolve('id'),
+            });
+
+            stateManager.updateState(testTempFileId2, {
+              id: testTempFileId2,
+              fileId: Promise.resolve('id'),
+            });
+
+            const provider = await mediaProvider;
+            await provider.uploadContext;
+            const mediaPluginState = getMediaPluginState(editorView);
+
+            mediaPluginState.insertFiles([
+              { id: testTempFileId, fileId: Promise.resolve('id') },
+            ]);
+
+            let resolved: any;
+
+            editorActions
+              .getValue()
+              .then(potentialValue => (resolved = potentialValue));
+
+            mediaPluginState.insertFiles([
+              { id: testTempFileId2, fileId: Promise.resolve('id') },
+            ]);
+
+            stateManager.updateState(testTempFileId, {
+              status: 'ready',
+              id: testTempFileId,
+              publicId: testPubFileId,
+            });
+
+            return new Promise(resolve => {
+              window.setTimeout(() => {
+                expect(resolved).to.equal(undefined);
+                resolve();
+              }, 50);
+            });
+          });
+
+          it('should resolve after media have resolved', async () => {
+            stateManager.updateState(testTempFileId, {
+              id: testTempFileId,
+              fileId: Promise.resolve('id'),
+            });
+            const provider = await mediaProvider;
+            await provider.uploadContext;
+            const mediaPluginState = getMediaPluginState(editorView);
+
+            mediaPluginState.insertFiles([
+              { id: testTempFileId, fileId: Promise.resolve('id') },
+            ]);
+
+            // To simulate async behavior, trigger ready on next tick
+            window.setTimeout(() => {
+              stateManager.updateState(testTempFileId, {
+                status: 'ready',
+                id: testTempFileId,
+                publicId: testTempFileId,
+              });
+            }, 0);
+
+            const value = (await editorActions.getValue()) as any;
+
+            expect(value).to.be.an('object');
+            expect(value.content).to.be.of.length(2);
+            expect(value.content[0].type).to.be.eq('mediaGroup');
+            expect(value.content[0].content[0].type).to.be.eq('media');
+            expect(value.content[0].content[0].attrs.id).to.be.eq(
+              testTempFileId,
+            );
+          });
+
+          it('should resolve after processing status', async () => {
+            stateManager.updateState(testTempFileId, {
+              id: testTempFileId,
+              fileId: Promise.resolve('id'),
+            });
+
+            const provider = await mediaProvider;
+            await provider.uploadContext;
+            await provider.viewContext;
+            const mediaPluginState = getMediaPluginState(editorView);
+
+            mediaPluginState.insertFiles([
+              { id: testTempFileId, fileId: Promise.resolve('id') },
+            ]);
+
+            // To simulate async behavior, trigger ready on next tick
+            window.setTimeout(() => {
+              stateManager.updateState(testTempFileId, {
+                status: 'ready',
+                id: testTempFileId,
+                publicId: testTempFileId,
+              });
+            }, 0);
+
+            const value = (await editorActions.getValue()) as any;
+
+            expect(value).to.be.an('object');
+            expect(value.content).to.be.of.length(2);
+            expect(value.content[0].type).to.be.eq('mediaGroup');
+            expect(value.content[0].content[0].type).to.be.eq('media');
+            expect(value.content[0].content[0].attrs.id).to.be.eq(
+              testTempFileId,
+            );
+          });
+        });
+      });
+
+      describe('#replaceDocument', () => {
+        const newDoc = doc(p('some new content'))(defaultSchema);
+        beforeEach(() => {
+          const tr = editorView.state.tr;
+          tr.insertText('some text', 1);
+          editorView.dispatch(tr);
+        });
+
+        it('should update the document using the transformer when a transformer is set', () => {
+          editorActions._privateRegisterEditor(
+            editorView,
+            new EventDispatcher(),
+            dummyTransformer,
+          );
+
+          const wasSuccessful = editorActions.replaceDocument('Hello World!');
+          expect(wasSuccessful).to.equal(true);
+          const actual = editorView.state.doc;
+          const expected = doc(blockquote(p('Hello World!')));
+          expect(actual).to.deep.equal(expected);
+        });
+
+        it('should accept JSON version of a prosemirror node', async () => {
+          editorActions.replaceDocument(newDoc.toJSON());
+          const val = await editorActions.getValue();
+          expect(val).to.deep.equal(toJSON(newDoc));
+        });
+
+        it('should accept stringified JSON version of a prosemirror node', async () => {
+          editorActions.replaceDocument(JSON.stringify(newDoc.toJSON()));
+          const val = await editorActions.getValue();
+          expect(val).to.deep.equal(toJSON(newDoc));
+        });
+
+        it('should accept atlassian document format', async () => {
+          const atlassianDoc = jsonTransformer.encode(newDoc);
+          editorActions.replaceDocument(atlassianDoc);
+          const val = await editorActions.getValue();
+          expect(val).to.deep.equal(toJSON(newDoc));
+        });
+
+        it('should accept atlassian document format from a string', async () => {
+          const atlassianDoc = jsonTransformer.encode(newDoc);
+          editorActions.replaceDocument(JSON.stringify(atlassianDoc));
+          const val = await editorActions.getValue();
+          expect(val).to.deep.equal(toJSON(newDoc));
+        });
+      });
+
+      describe('#appendText', () => {
+        it('should append text to a document', async () => {
+          const newDoc = doc(p('some text'))(defaultSchema).toJSON();
+          const expected = doc(p('some text appended'))(defaultSchema);
+          editorActions.replaceDocument(newDoc);
+          editorActions.appendText(' appended');
+          const val = await editorActions.getValue();
+          expect(val).to.deep.equal(toJSON(expected));
+        });
+
+        it('should append text to a complex document', async () => {
+          const newDoc = doc(
+            p('some text'),
+            blockquote(p('some quote')),
+            p(''),
+          )(defaultSchema);
+          const expected = doc(
+            p('some text'),
+            blockquote(p('some quote')),
+            p(' appended'),
+          )(defaultSchema);
+          editorActions.replaceDocument(newDoc.toJSON());
+          editorActions.appendText(' appended');
+          const val = await editorActions.getValue();
+          expect(val).to.deep.equal(toJSON(expected));
+        });
+
+        it(`should return false if the last node of a document isn't a paragraph`, async () => {
+          const newDoc = doc(
+            p('some text'),
+            blockquote(p('some quote')),
+            decisionList({})(decisionItem({})()),
+          )(defaultSchema);
+          editorActions.replaceDocument(newDoc.toJSON());
+          expect(editorActions.appendText(' appended')).to.equal(false);
+        });
+      });
+    });
+
+    describe('with waitForMediaUpload === false', () => {
+      const createEditor = createEditorFactory();
+
+      it('should resolve even when media operations are pending', async () => {
+        const { editorView } = createEditor({
+          editorPlugins: [mediaPlugin()],
+          editorProps: {
+            mediaProvider,
+            waitForMediaUpload: false,
+          },
+          providerFactory,
+        });
+        const editorActions = new EditorActions();
+        editorActions._privateRegisterEditor(editorView, new EventDispatcher());
+        editorActions.focus();
+
+        const mediaPluginState = getMediaPluginState(editorView);
+
+        stateManager.updateState(testTempFileId, {
+          id: testTempFileId,
+          fileId: Promise.resolve('id'),
+        });
+
+        const provider = await mediaProvider;
+        await provider.uploadContext;
+
+        mediaPluginState.insertFiles([
+          { id: testTempFileId, fileId: Promise.resolve('id') },
+        ]);
+
+        const value = (await editorActions.getValue()) as any;
+
+        expect(value).to.be.an('object');
+        expect(value.content).to.be.of.length(2);
+        expect(value.content[0].type).to.be.eq('mediaGroup');
+        expect(value.content[0].content[0].type).to.be.eq('media');
+        expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
+      });
+    });
+
+    describe('#replaceSelection', () => {
+      const createEditor = createEditorFactory();
+      const newDoc = doc(p('some new {<>}content'));
+      let editorActions;
+      let editorView;
+
+      it('should accept JSON version of a prosemirror node', () => {
         const editor = createEditor({ doc: newDoc });
         editorView = editor.editorView;
         editorActions = new EditorActions();
         editorActions._privateRegisterEditor(editorView);
-      });
 
-      it('should accept JSON version of a prosemirror node', () => {
         editorActions.replaceSelection(
           blockquote(p('text'))(defaultSchema).toJSON(),
         );
@@ -441,6 +475,11 @@ describe(name, () => {
       });
 
       it('should accept stringified JSON version of a prosemirror node', () => {
+        const editor = createEditor({ doc: newDoc });
+        editorView = editor.editorView;
+        editorActions = new EditorActions();
+        editorActions._privateRegisterEditor(editorView);
+
         editorActions.replaceSelection(
           JSON.stringify(blockquote(p('text'))(defaultSchema).toJSON()),
         );
@@ -481,42 +520,6 @@ describe(name, () => {
             bodiedExtension(attrs)(p('hello')),
           ),
         );
-      });
-    });
-
-    describe('#appendText', () => {
-      it('should append text to a document', async () => {
-        const newDoc = doc(p('some text'))(defaultSchema).toJSON();
-        const expected = doc(p('some text appended'))(defaultSchema);
-        editorActions.replaceDocument(newDoc);
-        editorActions.appendText(' appended');
-        const val = await editorActions.getValue();
-        expect(val).to.deep.equal(toJSON(expected));
-      });
-
-      it('should append text to a complex document', async () => {
-        const newDoc = doc(p('some text'), blockquote(p('some quote')), p(''))(
-          defaultSchema,
-        );
-        const expected = doc(
-          p('some text'),
-          blockquote(p('some quote')),
-          p(' appended'),
-        )(defaultSchema);
-        editorActions.replaceDocument(newDoc.toJSON());
-        editorActions.appendText(' appended');
-        const val = await editorActions.getValue();
-        expect(val).to.deep.equal(toJSON(expected));
-      });
-
-      it(`should return false if the last node of a document isn't a paragraph`, async () => {
-        const newDoc = doc(
-          p('some text'),
-          blockquote(p('some quote')),
-          decisionList({})(decisionItem({})()),
-        )(defaultSchema);
-        editorActions.replaceDocument(newDoc.toJSON());
-        expect(editorActions.appendText(' appended')).to.equal(false);
       });
     });
   });

@@ -1,6 +1,6 @@
-import { EmojiDescription } from '../../types';
-import { isEmojiVariationDescription } from '../../type-helpers';
 import { MAX_ORDINAL } from '../../constants';
+import { isEmojiVariationDescription } from '../../type-helpers';
+import { EmojiDescription } from '../../types';
 
 /**
  * Create the default sort comparator to be used for the user queries against emoji
@@ -238,35 +238,45 @@ export class UsageFrequencyComparator implements EmojiComparator {
   }
 }
 
+type KeysOfType<T, TProp> = {
+  [P in keyof T]: T[P] extends (TProp | undefined) ? P : never
+}[keyof T];
+
 /**
  * A comparator that will sort higher an emoji which matches the query string earliest in the indicated
  * property.
  */
 export class QueryStringPositionMatchComparator implements EmojiComparator {
-  private propertyName: string;
+  private readonly propertyName: KeysOfType<EmojiDescription, string>;
   private query: string;
 
   /**
    * @param query the query to match
    * @param propertyToCompare the property of EmojiDescription to check for query within
    */
-  constructor(query: string, propertyToCompare: string) {
+  constructor(
+    query: string,
+    propertyToCompare: KeysOfType<EmojiDescription, string>,
+  ) {
     this.query = query;
+    if (!propertyToCompare) {
+      throw new Error('propertyToCompare is required');
+    }
     this.propertyName = propertyToCompare;
   }
 
+  private getScore(emoji: EmojiDescription) {
+    // It is fine to do override the null check here because we are checking
+    // it on the constructor.
+    const propertyValue: string | undefined = emoji[this.propertyName!];
+    const score = propertyValue
+      ? propertyValue.indexOf(this.query)
+      : MAX_ORDINAL;
+    return score === -1 ? MAX_ORDINAL : score;
+  }
+
   compare(e1: EmojiDescription, e2: EmojiDescription) {
-    let i1 = e1[this.propertyName]
-      ? e1[this.propertyName].indexOf(this.query)
-      : MAX_ORDINAL;
-    let i2 = e2[this.propertyName]
-      ? e2[this.propertyName].indexOf(this.query)
-      : MAX_ORDINAL;
-
-    i1 = i1 === -1 ? MAX_ORDINAL : i1;
-    i2 = i2 === -1 ? MAX_ORDINAL : i2;
-
-    return i1 - i2;
+    return this.getScore(e1) - this.getScore(e2);
   }
 }
 

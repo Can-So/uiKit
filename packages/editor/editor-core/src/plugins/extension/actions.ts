@@ -71,7 +71,11 @@ export const removeExtension = (): Command => (state, dispatch) => {
   const pluginState = pluginKey.getState(state);
   let tr = state.tr.setMeta(pluginKey, { ...pluginState, element: null });
 
-  if (selection instanceof NodeSelection) {
+  if (
+    selection instanceof NodeSelection &&
+    (selection.node.type === schema.nodes.inlineExtension ||
+      selection.node.type === schema.nodes.extension)
+  ) {
     tr = removeSelectedNode(tr);
   } else {
     tr = removeParentNodeOfType(schema.nodes.bodiedExtension)(tr);

@@ -10,6 +10,7 @@ export const Wrapper: React.ComponentClass<
   & > div {
     ${MediaSingleDimensionHelper};
     position: relative;
+    z-index: 1;
 
     > div {
       position: absolute;

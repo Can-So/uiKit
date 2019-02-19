@@ -32,10 +32,13 @@ import { GapCursorSelection, Side } from '../plugins/gap-cursor/selection';
 export * from './document';
 export * from './action';
 export * from './step';
+export * from './mark';
 
 export { JSONDocNode, JSONNode };
 
 export { filterContentByType } from './filter';
+
+export const ZWSP = '\u200b';
 
 function validateNode(node: Node): boolean {
   return false;
@@ -75,7 +78,10 @@ function closest(
 }
 
 export const isImage = (fileType?: string): boolean => {
-  return !!fileType && fileType.indexOf('image/') > -1;
+  return (
+    !!fileType &&
+    (fileType.indexOf('image/') > -1 || fileType.indexOf('video/') > -1)
+  );
 };
 
 export function canMoveUp(state: EditorState): boolean {
@@ -266,10 +272,18 @@ export function canJoinDown(
   doc: any,
   nodeType: NodeType,
 ): boolean {
+  return checkNodeDown(selection, doc, node => node.type === nodeType);
+}
+
+export function checkNodeDown(
+  selection: Selection,
+  doc: Node,
+  filter: (node: Node) => boolean,
+): boolean {
   const res = doc.resolve(
     selection.$to.after(findAncestorPosition(doc, selection.$to).depth),
   );
-  return res.nodeAfter && res.nodeAfter.type === nodeType;
+  return res.nodeAfter ? filter(res.nodeAfter) : false;
 }
 
 export const setNodeSelection = (view: EditorView, pos: number) => {
@@ -709,7 +723,7 @@ export const isEmptyNode = (schema: Schema) => {
   return innerIsEmptyNode;
 };
 
-export const isTableCell = (state: EditorState) => {
+export const insideTableCell = (state: EditorState) => {
   const { tableCell, tableHeader } = state.schema.nodes;
   return hasParentNodeOfType([tableCell, tableHeader])(state.selection);
 };
@@ -765,3 +779,34 @@ export function dedupe<T>(
 export const isTextSelection = (
   selection: Selection,
 ): selection is TextSelection => selection instanceof TextSelection;
+
+/** Helper type for single arg function */
+type Func<A, B> = (a: A) => B;
+
+/**
+ * Compose 1 to n functions.
+ * @param func first function
+ * @param funcs additional functions
+ */
+export function compose<
+  F1 extends Func<any, any>,
+  FN extends Array<Func<any, any>>,
+  R extends FN extends []
+    ? F1
+    : FN extends [Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : FN extends [any, Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : FN extends [any, any, Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : FN extends [any, any, any, Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : FN extends [any, any, any, any, Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : Func<any, ReturnType<F1>> // Doubtful we'd ever want to pipe this many functions, but in the off chance someone does, we can still infer the return type
+>(func: F1, ...funcs: FN): R {
+  const allFuncs = [func, ...funcs];
+  return function composed(raw: any) {
+    return allFuncs.reduceRight((memo, func) => func(memo), raw);
+  } as R;
+}

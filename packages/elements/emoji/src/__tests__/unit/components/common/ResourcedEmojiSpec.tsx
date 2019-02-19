@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import { expect } from 'chai';
 import { waitUntil } from '@atlaskit/util-common-test';
@@ -16,11 +16,13 @@ import {
   getEmojiResourcePromise,
 } from '../../_test-data';
 
-const findEmoji = component => component.update() && component.find(Emoji);
-const emojiVisible = component => findEmoji(component).length === 1;
-const emojiVisibleById = (component, id) =>
+const findEmoji = (component: ReactWrapper) =>
+  component.update() && component.find(Emoji);
+const emojiVisible = (component: ReactWrapper) =>
+  findEmoji(component).length === 1;
+const emojiVisibleById = (component: ReactWrapper, id: string) =>
   emojiVisible(component) && findEmoji(component).prop('emoji').id === id;
-const emojiPlaceHolderVisible = component =>
+const emojiPlaceHolderVisible = (component: ReactWrapper) =>
   component.update() && component.find(EmojiPlaceholder).length === 1;
 
 describe('<ResourcedEmoji />', () => {
@@ -141,7 +143,7 @@ describe('<ResourcedEmoji />', () => {
   });
 
   it('unknown emoji', () => {
-    let resolver;
+    let resolver: (value?: any | PromiseLike<any>) => void;
     // @ts-ignore Unused var never read, should this be deleted?
     let resolverResult;
     const config = {
@@ -170,8 +172,8 @@ describe('<ResourcedEmoji />', () => {
   });
 
   it('placeholder while loading emoji', () => {
-    let resolver;
-    let resolverResult;
+    let resolver: (value?: any | PromiseLike<any>) => void;
+    let resolverResult: EmojiDescription;
     const config = {
       promiseBuilder: (result: EmojiDescription) => {
         resolverResult = result;

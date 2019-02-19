@@ -27,7 +27,7 @@ import {
   mockState,
   getComponentClassWithStore,
   mockIsWebGLNotAvailable,
-} from '../../../../../mocks';
+} from '@atlaskit/media-test-helpers';
 
 mockIsWebGLNotAvailable(); // mock WebGL fail check before StatelessUploadView is imported
 import { isWebGLAvailable } from '../../../../../tools/webgl';
@@ -46,7 +46,7 @@ import { Dropzone } from '../../dropzone';
 
 import { SpinnerWrapper, Wrapper } from '../../styled';
 import { LocalBrowserButton } from '../../../../views/upload/uploadButton';
-import { Browser } from '../../../../../../components/browser';
+import { BrowserImpl } from '../../../../../../components/browser';
 import { menuDelete } from '../../../editor/phrases';
 import { LocalUploadFileMetadata } from '../../../../../domain/local-upload';
 
@@ -66,7 +66,7 @@ const createConnectedComponent = (
     <IntlProvider locale="en">
       <Provider store={store}>
         <ConnectedUploadViewWithStore
-          mpBrowser={new Browser(context) as any}
+          mpBrowser={new BrowserImpl(context) as any}
           context={context}
           recentsCollection="some-collection-name"
         />
@@ -161,7 +161,6 @@ describe('<StatelessUploadView />', () => {
 
   it('should render cards and dropzone when there are recent items', () => {
     const createRecentItem = (occurrenceKey: string): MediaCollectionItem => ({
-      type: 'file',
       id: 'some-file-id',
       insertedAt: 0,
       occurrenceKey: `some-occurrence-key${occurrenceKey}`,
@@ -192,7 +191,7 @@ describe('<StatelessUploadView />', () => {
               id: 'id1',
               mimeType: 'image/jpeg',
               name: 'some-file-name',
-              upfrontId,
+              userUpfrontId: upfrontId,
             },
           },
         } as LocalUpload,
@@ -343,7 +342,6 @@ describe('<StatelessUploadView />', () => {
           false,
           [
             {
-              type: 'file',
               id: 'some-id',
               insertedAt: 0,
               occurrenceKey: 'some-occurrence-key',

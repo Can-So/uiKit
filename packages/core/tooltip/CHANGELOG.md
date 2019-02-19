@@ -1,5 +1,26 @@
 # @atlaskit/tooltip
 
+## 12.1.17
+- [patch] [c4edb3ab4d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4edb3ab4d):
+
+  - Move tooltip to render popper in portal to maintain ref that Popper needs to initially position the tooltip
+
+## 12.1.16
+- Updated dependencies [27cacd44ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27cacd44ab):
+  - @atlaskit/portal@0.1.0
+
+## 12.1.15
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/portal@0.0.18
+  - @atlaskit/icon@16.0.0
+
+## 12.1.14
+- [patch] [8f179c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8f179c4):
+
+  - Remove scroll listener in componentWillMount in Tooltip to fix potential memory leak from 'close' tooltip not properly unmounting when hiding Examples modal via the X button
+
 ## 12.1.13
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

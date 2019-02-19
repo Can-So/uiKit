@@ -1,5 +1,187 @@
 # @atlaskit/media-picker
 
+## 33.0.4
+- Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+  - @atlaskit/media-core@27.0.2
+  - @atlaskit/media-editor@27.0.4
+  - @atlaskit/media-store@9.1.6
+  - @atlaskit/media-test-helpers@20.1.4
+  - @atlaskit/media-viewer@35.2.1
+  - @atlaskit/media-card@53.0.0
+
+## 33.0.3
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/media-test-helpers@20.1.3
+  - @atlaskit/modal-dialog@7.2.3
+  - @atlaskit/select@7.0.0
+
+## 33.0.2
+- Updated dependencies [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+  - @atlaskit/media-card@52.0.4
+  - @atlaskit/media-editor@27.0.3
+  - @atlaskit/media-test-helpers@20.1.2
+  - @atlaskit/media-viewer@35.2.0
+  - @atlaskit/media-ui@9.0.0
+
+## 33.0.1
+- [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
+
+  - MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme
+
+## 33.0.0
+- [major] [65b73cc466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65b73cc466):
+
+  - Code split media-picker: make MediaPicker factory async and make editor use it
+
+## 32.0.1
+- [patch] [6ead14f4eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ead14f4eb):
+
+  - Move Async module loading of EditorView into media-editor component.
+- Updated dependencies [79e21779d4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/79e21779d4):
+  - @atlaskit/media-editor@27.0.0
+
+## 32.0.0
+- [minor] [4e82fedc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e82fedc90):
+
+  - Expose real id upfront for remote files in MediaPicker
+- [major] [9d881f1eb8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d881f1eb8):
+
+  - Use real id upfront for remote files + remove PublicMediaFile interface + now integrators can just use file.id from public events
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/media-card@52.0.0
+  - @atlaskit/media-editor@26.0.0
+  - @atlaskit/media-test-helpers@20.1.0
+  - @atlaskit/media-viewer@35.0.0
+  - @atlaskit/media-store@9.1.5
+  - @atlaskit/media-core@27.0.0
+
+## 31.0.2
+- [patch] [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+
+  - Fetch cloud accounts only on cloud folder opening
+
+## 31.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/flag@9.1.9
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/select@6.1.19
+  - @atlaskit/toggle@5.0.15
+  - @atlaskit/media-card@51.0.1
+  - @atlaskit/media-editor@25.0.1
+  - @atlaskit/media-test-helpers@19.1.1
+  - @atlaskit/media-ui@8.2.5
+  - @atlaskit/media-viewer@34.0.1
+  - @atlaskit/icon@16.0.0
+
+## 31.0.0
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/media-card@51.0.0
+  - @atlaskit/media-editor@25.0.0
+  - @atlaskit/media-viewer@34.0.0
+  - @atlaskit/media-store@9.1.3
+  - @atlaskit/media-test-helpers@19.1.0
+  - @atlaskit/media-core@26.2.0
+
+## 30.0.0
+- [patch] [6da174b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6da174b):
+
+  - Implementation of MediaEditor is partially moved to media-editor
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+- Updated dependencies [f9796df](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9796df):
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-editor@24.0.0
+  - @atlaskit/media-viewer@33.0.0
+  - @atlaskit/media-store@9.1.2
+  - @atlaskit/media-test-helpers@19.0.0
+  - @atlaskit/media-core@26.1.0
+  - @atlaskit/media-ui@8.2.4
+
+## 29.0.3
+- [patch] [e6516fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6516fb):
+
+  - Move media mocks into right location to prevent them to be included in dist
+
+## 29.0.2
+- [patch] [a55e4e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a55e4e6):
+
+  - Remove Axios dependency from media-picker
+
+## 29.0.1
+- [patch] [c91adfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c91adfe):
+
+  - remove customVideoPlayer featureFlag prop and enable by default
+
+## 29.0.0
+- [patch] [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+
+  - Remove redundant fileStreamCache createKey() method and replace the cache key with id everywhere
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/media-editor@23.0.0
+  - @atlaskit/media-test-helpers@18.9.1
+  - @atlaskit/media-viewer@31.0.0
+  - @atlaskit/media-store@9.1.1
+  - @atlaskit/media-core@26.0.0
+
+## 28.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/media-card@48.0.0
+  - @atlaskit/media-editor@22.0.0
+  - @atlaskit/media-core@25.0.0
+  - @atlaskit/media-store@9.1.0
+  - @atlaskit/media-test-helpers@18.9.0
+
+## 27.0.5
+- [patch] [8314694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8314694):
+
+  - Support uploading + processing files in MediaViewer
+
+## 27.0.4
+- [patch] [442821a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/442821a):
+
+  - Fix the issue with being unable to save image inserted into the editor: pass collection to tenant auth for file polling
+
+## 27.0.3
+- [patch] [b677631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b677631):
+
+  - Add new example and ensure occurrenceKey is set for all copy/withToken calls
+
+## 27.0.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-core@24.7.2
+  - @atlaskit/media-store@9.0.2
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 27.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 27.0.0
+- [major] [6cb6696](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb6696):
+
+  - All file ids returned in any of the triggered events (including syncronouse one like uploads-start) are real file IDs and not a temp. one;
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+- Updated dependencies [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+  - @atlaskit/media-card@46.0.0
+  - @atlaskit/media-editor@21.0.0
+  - @atlaskit/media-store@9.0.0
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-core@24.7.0
+
+## 26.0.0
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/media-card@45.0.0
+  - @atlaskit/media-editor@20.0.0
+  - @atlaskit/media-store@8.5.1
+  - @atlaskit/media-test-helpers@18.6.2
+  - @atlaskit/media-core@24.6.0
+
 ## 25.0.8
 - [patch] [ff8b31d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ff8b31d):
 

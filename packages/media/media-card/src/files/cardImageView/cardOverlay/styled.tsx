@@ -18,15 +18,6 @@ import {
   antialiased,
 } from '../../../styles';
 import { borderRadius, size, ellipsis, absolute } from '@atlaskit/media-ui';
-import {
-  akColorN70,
-  akColorB200,
-  akColorN0,
-  akColorN800,
-  akColorN900,
-  akColorB400,
-  akColorB300,
-} from '@atlaskit/util-shared-styles';
 import { colors, themed } from '@atlaskit/theme';
 
 export interface OverlayProps {
@@ -83,7 +74,7 @@ export const Overlay: ComponentClass<
   }} &:not(.persistent):hover, &.active {
     .top-row {
       .title {
-        color: ${akColorB400};
+        color: ${colors.B400};
       }
     }
 
@@ -93,11 +84,11 @@ export const Overlay: ComponentClass<
       }
     }
   }
-  
+
   &.noHover:hover {
    .top-row {
      .title {
-        color: ${akColorN800};
+        color: ${colors.N800};
      }
    }
   }
@@ -108,22 +99,22 @@ export const Overlay: ComponentClass<
 
   &:not(.persistent) {
     &:not(.error, .noHover):hover {
-      background-color: ${rgba(akColorN900, 0.06)};
+      background-color: ${rgba(colors.N900, 0.06)};
     }
 
     &.selectable {
       &.selected {
-        background-color: ${akColorB200};
+        background-color: ${colors.B200};
 
         &:hover {
-          /* TODO FIL-3884 add new overlay with rgba(akColorN900, 0.16) */
+          /* TODO FIL-3884 add new overlay with rgba(colors.N900, 0.16) */
         }
 
         .title,
         .bottom-row,
         .file-size,
         .more-btn {
-          color: ${akColorN0};
+          color: ${colors.N0};
         }
       }
     }
@@ -159,7 +150,7 @@ export const Overlay: ComponentClass<
       }
 
       .more-btn {
-        color: ${akColorN0};
+        color: ${colors.N0};
         display: none;
 
         &:hover {
@@ -178,7 +169,7 @@ export const Overlay: ComponentClass<
 
     &:hover,
     &.active {
-      background-color: ${rgba(akColorN900, 0.5)};
+      background-color: ${rgba(colors.N900, 0.5)};
 
       .title {
         opacity: 1;
@@ -191,7 +182,7 @@ export const Overlay: ComponentClass<
       }
 
       .more-btn {
-        ${centerX} color: ${akColorN0};
+        ${centerX} color: ${colors.N0};
       }
 
       .delete-btn {
@@ -214,8 +205,8 @@ export const Overlay: ComponentClass<
 
       &.selected {
         .tickbox {
-          background-color: ${akColorB200} !important;
-          border-color: ${akColorB200} !important;
+          background-color: ${colors.B200} !important;
+          border-color: ${colors.B200} !important;
           color: white;
         }
       }
@@ -230,7 +221,7 @@ export const Overlay: ComponentClass<
     &.active {
       .top-row {
         .title {
-          color: ${akColorN800};
+          color: ${colors.N800};
         }
       }
     }
@@ -265,7 +256,7 @@ export const ErrorMessage: ComponentClass<HTMLAttributes<{}>> = styled.div`
   ${antialiased} display: inline-block;
   vertical-align: middle;
   font-weight: bold;
-  color: ${akColorN70};
+  color: ${colors.N70};
   font-size: 12px;
   line-height: 15px;
   overflow: hidden;
@@ -278,13 +269,13 @@ export const Retry: ComponentClass<HTMLAttributes<{}>> = styled.div`
   ${antialiased} box-sizing: border-box;
   margin-left: 5px;
   font-weight: bold;
-  color: ${akColorB400};
+  color: ${colors.B400};
   font-size: 12px;
 
   &:hover {
     cursor: pointer;
     text-decoration: underline;
-    color: ${akColorB300};
+    color: ${colors.B300};
   }
 `;
 

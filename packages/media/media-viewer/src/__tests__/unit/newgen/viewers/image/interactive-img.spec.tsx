@@ -10,20 +10,23 @@ import { Rectangle, Camera, Vector2 } from '@atlaskit/media-ui';
 import {
   InteractiveImg,
   zoomLevelAfterResize,
+  Props,
+  State,
 } from '../../../../../newgen/viewers/image/interactive-img';
 import { ZoomControls } from '../../../../../newgen/zoomControls';
 import { ImageWrapper, Img } from '../../../../../newgen/styled';
 import { ZoomLevel } from '../../../../../newgen/domain/zoomLevel';
 import { Outcome } from '../../../../../newgen/domain';
 
-function createFixture() {
+function createFixture(props?: Partial<Props>) {
   const onClose = jest.fn();
-  const el = mountWithIntlContext(
+  const el = mountWithIntlContext<Props, State>(
     <InteractiveImg
       onLoad={jest.fn()}
       onError={jest.fn()}
       src={''}
       onClose={onClose}
+      {...props}
     />,
   );
   const viewport = new Rectangle(400, 300);
@@ -56,14 +59,13 @@ describe('InteractiveImg', () => {
   it('it allows zooming', async () => {
     const { el } = createFixture();
     expect(el.find(ZoomControls)).toHaveLength(1);
-
-    expect(el.state('zoomLevel').value).toEqual(1);
+    expect(el.state().zoomLevel.value).toEqual(1);
 
     clickZoomOut(el);
-    expect(el.state('zoomLevel').value).toBeLessThan(1);
+    expect(el.state().zoomLevel.value).toBeLessThan(1);
 
     clickZoomIn(el);
-    expect(el.state('zoomLevel').value).toEqual(1);
+    expect(el.state().zoomLevel.value).toEqual(1);
   });
 
   it('sets the correct width and height on the Img element', () => {
@@ -116,8 +118,19 @@ describe('InteractiveImg', () => {
       zoomLevel: actualZoomLevel,
       camera: { data: actualCamera },
     } = el.state();
-    expect(actualCamera.viewport).toEqual(newViewport);
+    expect(actualCamera).not.toBeUndefined();
+    expect(actualCamera!.viewport).toEqual(newViewport);
     expect(actualZoomLevel.value).toEqual(expectedZoomLevel.value);
+  });
+
+  it('rotates image when orientation is provided', () => {
+    const { el } = createFixture({ orientation: 2 });
+
+    expect(el.find(Img).prop('style')).toEqual(
+      expect.objectContaining({
+        transform: 'rotateY(180deg)',
+      }),
+    );
   });
 
   describe('drag and drop', () => {
@@ -200,6 +213,14 @@ describe('InteractiveImg', () => {
       el.setState({ zoomLevel });
       expect(el.find(Img).prop('isDragging')).toEqual(false);
     });
+  });
+
+  it('only applies image-rendering css props when zoom level greater than 1 (zoomed in)', () => {
+    const { el } = createFixture();
+
+    expect(el.find(Img)).not.toHaveStyleRule('image-rendering', 'pixelated');
+    clickZoomIn(el);
+    expect(el.find(Img)).toHaveStyleRule('image-rendering', 'pixelated');
   });
 });
 

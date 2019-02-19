@@ -1,21 +1,31 @@
+import { waitUntil } from '@atlaskit/util-common-test';
+import {
+  OnProviderChange,
+  SecurityOptions,
+  ServiceConfig,
+} from '@atlaskit/util-service-support';
+import { expect } from 'chai';
 import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
-import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { SecurityOptions, ServiceConfig } from '@atlaskit/util-service-support';
-
-import { waitUntil } from '@atlaskit/util-common-test';
-
-import { selectedToneStorageKey } from '../../../constants';
-import SiteEmojiResource from '../../../api/media/SiteEmojiResource';
 import EmojiResource, {
   EmojiProvider,
   EmojiResourceConfig,
   supportsUploadFeature,
   UploadingEmojiProvider,
 } from '../../../api/EmojiResource';
-
+import SiteEmojiResource from '../../../api/media/SiteEmojiResource';
+import { selectedToneStorageKey } from '../../../constants';
+import {
+  EmojiDescription,
+  EmojiId,
+  EmojiResponse,
+  EmojiSearchResult,
+  EmojiUpload,
+  SearchOptions,
+  ToneSelection,
+} from '../../../types';
 import {
   evilburnsEmoji,
   grinEmoji,
@@ -24,7 +34,6 @@ import {
   siteUrl,
   standardServiceEmojis,
 } from '../_test-data';
-
 import { alwaysPromise } from '../_test-util';
 
 // used to access window.localStorage in tests below
@@ -87,7 +96,10 @@ describe('UploadingEmojiResource', () => {
       this.mockSiteEmojiResource = mockSiteEmojiResource;
     }
 
-    protected initSiteEmojiResource(emojiResponse, provider) {
+    protected initSiteEmojiResource(
+      emojiResponse: EmojiResponse,
+      provider: ServiceConfig,
+    ) {
       this.siteEmojiResource = this.mockSiteEmojiResource;
       return Promise.resolve();
     }
@@ -322,20 +334,13 @@ describe('UploadingEmojiResource', () => {
 });
 
 describe('#toneSelectionStorage', () => {
-  let getItemSpy: jest.SpyInstance<any>;
-  let setItemSpy: jest.SpyInstance<any>;
-
-  beforeEach(() => {
-    // https://github.com/facebook/jest/issues/6798#issuecomment-412871616
-    getItemSpy = jest.spyOn(Storage.prototype, 'getItem');
-    setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
-  });
-
   it('retrieves previously stored tone selection upon construction', () => {
     // tslint:disable-next-line:no-unused-expression
     new EmojiResource(defaultApiConfig);
 
-    global.expect(getItemSpy).toHaveBeenCalledWith(selectedToneStorageKey);
+    global
+      .expect(localStorage.getItem)
+      .toHaveBeenCalledWith(selectedToneStorageKey);
   });
 
   it('calling setSelectedTone calls setItem in localStorage', () => {
@@ -344,7 +349,7 @@ describe('#toneSelectionStorage', () => {
     resource.setSelectedTone(tone);
 
     global
-      .expect(setItemSpy)
+      .expect(localStorage.setItem)
       .toHaveBeenCalledWith(selectedToneStorageKey, '' + tone);
   });
 });
@@ -353,27 +358,32 @@ describe('helpers', () => {
   class TestEmojiProvider implements EmojiProvider {
     getAsciiMap = () =>
       Promise.resolve(new Map([[grinEmoji.ascii![0], grinEmoji]]));
-    findByShortName = shortName => Promise.resolve(evilburnsEmoji);
-    findByEmojiId = emojiId => Promise.resolve(evilburnsEmoji);
-    findById = emojiIdStr => Promise.resolve(evilburnsEmoji);
-    findInCategory = categoryId => Promise.resolve([]);
+    findByShortName = (shortName: string) => Promise.resolve(evilburnsEmoji);
+    findByEmojiId = (emojiId: EmojiId) => Promise.resolve(evilburnsEmoji);
+    findById = (emojiIdStr: string) => Promise.resolve(evilburnsEmoji);
+    findInCategory = (categoryId: string) => Promise.resolve([]);
     getSelectedTone = () => -1;
-    setSelectedTone = tone => {};
-    deleteSiteEmoji = emoji => Promise.resolve(false);
+    setSelectedTone = (tone: ToneSelection) => {};
+    deleteSiteEmoji = (emoji: EmojiDescription) => Promise.resolve(false);
     getCurrentUser = () => undefined;
-    filter = (query, options) => {};
-    subscribe = onChange => {};
-    unsubscribe = onChange => {};
+    filter = (query?: string, options?: SearchOptions) => {};
+    subscribe = (
+      onChange: OnProviderChange<EmojiSearchResult, any, void>,
+    ) => {};
+    unsubscribe = (
+      onChange: OnProviderChange<EmojiSearchResult, any, void>,
+    ) => {};
     loadMediaEmoji = () => undefined;
     optimisticMediaRendering = () => false;
-    getFrequentlyUsed = (options?) => Promise.resolve([]);
+    getFrequentlyUsed = (options?: SearchOptions) => Promise.resolve([]);
   }
 
   class TestUploadingEmojiProvider extends TestEmojiProvider
     implements UploadingEmojiProvider {
     isUploadSupported = () => Promise.resolve(true);
-    uploadCustomEmoji = upload => Promise.resolve(evilburnsEmoji);
-    prepareForUpload = () => {};
+    uploadCustomEmoji = (upload: EmojiUpload) =>
+      Promise.resolve(evilburnsEmoji);
+    prepareForUpload = () => Promise.resolve();
   }
 
   it('supportsUploadFeature for UploadingEmojiProvider is true', () => {

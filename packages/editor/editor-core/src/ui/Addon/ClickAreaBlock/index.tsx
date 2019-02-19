@@ -34,6 +34,7 @@ export default class ClickAreaBlock extends React.Component<Props> {
     const contentArea = event.currentTarget.querySelector(
       '.ak-editor-content-area',
     );
+    const editorFocused = view!.hasFocus();
 
     // @see https://product-fabric.atlassian.net/browse/ED-4287
     // click event gets triggered twice on a checkbox (on <label> first and then on <input>)
@@ -45,16 +46,21 @@ export default class ClickAreaBlock extends React.Component<Props> {
       event.target,
       '[data-editor-popup]',
     );
+    // Fixes issue when using a textarea for editor title in full page editor doesn't let user focus it.
+    const isTextAreaClicked = event.target.nodeName === 'TEXTAREA';
     if (
-      (!contentArea || !insideContentArea(event.target.parentNode)) &&
+      (!contentArea ||
+        !insideContentArea(event.target.parentNode) ||
+        editorFocused === false) &&
       !isInputClicked &&
+      !isTextAreaClicked &&
       !isPopupClicked &&
       view
     ) {
       const { dispatch, dom } = view;
       const bottomAreaClicked =
         event.clientY > dom.getBoundingClientRect().bottom;
-      const isParagrpahAppended = bottomAreaClicked
+      const isParagraphAppended = bottomAreaClicked
         ? createParagraphAtEnd()(view.state, dispatch)
         : false;
       const isGapCursorSet = setCursorForTopLevelBlocks(
@@ -63,7 +69,7 @@ export default class ClickAreaBlock extends React.Component<Props> {
         view.posAtCoords.bind(view),
       )(view.state, dispatch);
 
-      if (isParagrpahAppended || isGapCursorSet) {
+      if (isParagraphAppended || isGapCursorSet) {
         view.focus();
         event.stopPropagation();
       }

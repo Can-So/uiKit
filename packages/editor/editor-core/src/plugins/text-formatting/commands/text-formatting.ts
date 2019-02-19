@@ -1,11 +1,19 @@
 import { TextSelection, Selection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { toggleMark } from 'prosemirror-commands';
-import { removeIgnoredNodesLeft, hasCode } from '../utils';
+import { hasCode } from '../utils';
 import { markActive } from '../utils';
 import { transformToCodeAction } from './transform-to-code';
 import { analyticsService } from '../../../analytics';
 import { Command } from '../../../types';
+import {
+  withAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+} from '../../analytics';
 
 export const moveRight = (): Command => {
   return (state, dispatch) => {
@@ -93,11 +101,6 @@ export const moveLeft = (
         Array.isArray(storedMarks) &&
         !storedMarks.length;
 
-      // removing ignored nodes (cursor wrapper) to make sure cursor isn't stuck
-      if (view.cursorWrapper && !atLeftEdge && !atRightEdge) {
-        removeIgnoredNodesLeft(view);
-      }
-
       // at the right edge: remove code mark and move the cursor to the left
       if (!insideCode && atRightEdge) {
         const tr = state.tr.setSelection(
@@ -147,16 +150,11 @@ export const moveLeft = (
   };
 };
 
-// removing ignored nodes (cursor wrapper) when pressing Backspace to make sure cursor isn't stuck
-export const removeIgnoredNodes = (view: EditorView): Command => {
-  return state => {
-    const { empty, $cursor } = state.selection as TextSelection;
-    if (empty && $cursor && $cursor.nodeBefore) {
-      removeIgnoredNodesLeft(view);
-    }
-    return false;
-  };
-};
+type InputMethodToolbar = INPUT_METHOD.TOOLBAR;
+type InputMethodBasic =
+  | InputMethodToolbar
+  | INPUT_METHOD.SHORTCUT
+  | INPUT_METHOD.FORMATTING;
 
 export const toggleEm = (): Command => {
   return (state, dispatch) => {
@@ -168,6 +166,21 @@ export const toggleEm = (): Command => {
   };
 };
 
+export const toggleEmWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_ITALIC,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleEm());
+
 export const toggleStrike = (): Command => {
   return (state, dispatch) => {
     const { strike } = state.schema.marks;
@@ -177,6 +190,21 @@ export const toggleStrike = (): Command => {
     return false;
   };
 };
+
+export const toggleStrikeWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRIKE,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleStrike());
 
 export const toggleStrong = (): Command => {
   return (state, dispatch) => {
@@ -188,6 +216,21 @@ export const toggleStrong = (): Command => {
   };
 };
 
+export const toggleStrongWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRONG,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleStrong());
+
 export const toggleUnderline = (): Command => {
   return (state, dispatch) => {
     const { underline } = state.schema.marks;
@@ -197,6 +240,21 @@ export const toggleUnderline = (): Command => {
     return false;
   };
 };
+
+export const toggleUnderlineWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_UNDERLINE,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleUnderline());
 
 export const toggleSuperscript = (): Command => {
   return (state, dispatch) => {
@@ -212,6 +270,17 @@ export const toggleSuperscript = (): Command => {
   };
 };
 
+export const toggleSuperscriptWithAnalytics = (): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_SUPER,
+    attributes: {
+      inputMethod: INPUT_METHOD.TOOLBAR,
+    },
+  })(toggleSuperscript());
+
 export const toggleSubscript = (): Command => {
   return (state, dispatch) => {
     const { subsup } = state.schema.marks;
@@ -224,6 +293,17 @@ export const toggleSubscript = (): Command => {
     return false;
   };
 };
+
+export const toggleSubscriptWithAnalytics = (): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_SUB,
+    attributes: {
+      inputMethod: INPUT_METHOD.TOOLBAR,
+    },
+  })(toggleSuperscript());
 
 export const toggleCode = (): Command => {
   return (state, dispatch) => {
@@ -242,7 +322,22 @@ export const toggleCode = (): Command => {
   };
 };
 
-export const createInlineCodeFromTextInput = (
+export const toggleCodeWithAnalytics = ({
+  inputMethod,
+}: {
+  inputMethod: InputMethodBasic;
+}): Command =>
+  withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+    attributes: {
+      inputMethod,
+    },
+  })(toggleCode());
+
+const createInlineCodeFromTextInput = (
   from: number,
   to: number,
   text: string,
@@ -278,4 +373,20 @@ export const createInlineCodeFromTextInput = (
     }
     return false;
   };
+};
+
+export const createInlineCodeFromTextInputWithAnalytics = (
+  from: number,
+  to: number,
+  text: string,
+): Command => {
+  return withAnalytics({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    eventType: EVENT_TYPE.TRACK,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
+    attributes: {
+      inputMethod: INPUT_METHOD.FORMATTING,
+    },
+  })(createInlineCodeFromTextInput(from, to, text));
 };

@@ -1,38 +1,40 @@
 import { waitUntil } from '@atlaskit/util-common-test';
-
-import {
-  getEmojiResourcePromise,
-  mediaEmoji,
-  standardEmojis,
-} from '../../_test-data';
-import { Props } from '../../../../components/picker/EmojiPicker';
 import { mockNonUploadingEmojiResourceFactory } from '@atlaskit/util-data-test';
-
+import { ReactWrapper } from 'enzyme';
+import { FireAnalyticsEvent } from '../../../../../../../core/analytics/src';
+import EmojiRepository from '../../../../api/EmojiRepository';
+import Emoji, {
+  Props as EmojiProps,
+} from '../../../../components/common/Emoji';
+import EmojiButton from '../../../../components/common/EmojiButton';
 import EmojiPlaceholder from '../../../../components/common/EmojiPlaceholder';
+import { messages } from '../../../../components/i18n';
+import { CategoryDescriptionMap } from '../../../../components/picker/categories';
 import CategorySelector, {
   sortCategories,
 } from '../../../../components/picker/CategorySelector';
-import { CategoryDescriptionMap } from '../../../../components/picker/categories';
-import Emoji from '../../../../components/common/Emoji';
-import EmojiButton from '../../../../components/common/EmojiButton';
+import { Props } from '../../../../components/picker/EmojiPicker';
 import EmojiPickerFooter from '../../../../components/picker/EmojiPickerFooter';
 import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
-import EmojiRepository from '../../../../api/EmojiRepository';
-import { EmojiDescription, OptionalEmojiDescription } from '../../../../types';
 import {
+  analyticsEmojiPrefix,
   customCategory,
   customTitle,
   defaultCategories,
   frequentCategory,
   selectedToneStorageKey,
-  analyticsEmojiPrefix,
 } from '../../../../constants';
+import { isMessagesKey } from '../../../../type-helpers';
+import { EmojiDescription, OptionalEmojiDescription } from '../../../../types';
+import {
+  getEmojiResourcePromise,
+  mediaEmoji,
+  standardEmojis,
+} from '../../_test-data';
 import * as helper from './_emoji-picker-test-helpers';
 
-declare var global: any;
-
 describe('<EmojiPicker />', () => {
-  let firePrivateAnalyticsEvent;
+  let firePrivateAnalyticsEvent: jest.Mock;
 
   const getUpdatedList = (component: any) =>
     component.update().find(EmojiPickerList);
@@ -44,7 +46,7 @@ describe('<EmojiPicker />', () => {
   describe('analytics for component lifecycle', () => {
     it('should fire analytics in componentWillMount/componentWillUnmount', async () => {
       const component = await helper.setupPicker({
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as FireAnalyticsEvent,
       } as Props);
       component.unmount();
       expect(firePrivateAnalyticsEvent).toHaveBeenCalledWith(
@@ -89,9 +91,13 @@ describe('<EmojiPicker />', () => {
 
       for (let i = 0; i < buttons.length; i++) {
         const button = buttons.at(i);
-        const expectedTitle =
-          CategoryDescriptionMap[expectedCategories[i]].name;
-        expect(button.prop('title')).toEqual(expectedTitle);
+        const messageKey = CategoryDescriptionMap[expectedCategories[i]].name;
+        expect(isMessagesKey(messageKey)).toBeTruthy();
+        if (isMessagesKey(messageKey)) {
+          expect(button.prop('title')).toEqual(
+            messages[messageKey].defaultMessage,
+          );
+        }
       }
     });
 
@@ -109,7 +115,7 @@ describe('<EmojiPicker />', () => {
 
     it('media emoji should render placeholder while loading', async () => {
       const mockConfig = {
-        promiseBuilder: (result, context) => {
+        promiseBuilder: (result: any, context: string) => {
           if (context === 'loadMediaEmoji') {
             // unresolved promise
             return new Promise(() => {});
@@ -156,7 +162,7 @@ describe('<EmojiPicker />', () => {
   describe('category', () => {
     it('selecting category should show that category', async () => {
       const component = await helper.setupPicker({
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as FireAnalyticsEvent,
       } as Props);
       // Update list until provider resolved and emojis comes in
       await waitUntil(() =>
@@ -255,14 +261,16 @@ describe('<EmojiPicker />', () => {
       // get Emoji with a particular property
       const displayedEmoji = list.find(Emoji);
 
-      displayedEmoji.forEach((node, index) => {
-        const props = node.props();
-        if (index < 8) {
-          expect(props.emoji.category).toEqual(frequentCategory);
-        } else {
-          expect(props.emoji.category).not.toEqual(frequentCategory);
-        }
-      });
+      displayedEmoji.forEach(
+        (node: ReactWrapper<EmojiProps>, index: number) => {
+          const props = node.props();
+          if (index < 8) {
+            expect(props.emoji.category).toEqual(frequentCategory);
+          } else {
+            expect(props.emoji.category).not.toEqual(frequentCategory);
+          }
+        },
+      );
     });
 
     it('adds non-standard categories to the selector dynamically based on whether they are populated with emojis', async () => {
@@ -281,7 +289,7 @@ describe('<EmojiPicker />', () => {
       let selection: OptionalEmojiDescription;
       const clickOffset = 10;
       const component = await helper.setupPicker({
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as FireAnalyticsEvent,
         onSelection: (emojiId, emoji) => {
           selection = emoji;
         },
@@ -461,13 +469,6 @@ describe('<EmojiPicker />', () => {
   });
 
   describe('with localStorage available', () => {
-    let setItemSpy: jest.SpyInstance<any>;
-
-    beforeEach(() => {
-      // https://github.com/facebook/jest/issues/6798#issuecomment-412871616
-      setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
-    });
-
     it('should use localStorage to remember tone selection between sessions', async () => {
       const findToneEmojiInNewPicker = async () => {
         const component = await helper.setupPicker();
@@ -486,10 +487,10 @@ describe('<EmojiPicker />', () => {
       const provider = await getEmojiResourcePromise();
       provider.setSelectedTone(parseInt(tone, 10));
 
-      await waitUntil(() => !!setItemSpy.mock.calls.length);
-      global
-        .expect(setItemSpy)
-        .toHaveBeenCalledWith(selectedToneStorageKey, tone);
+      expect(localStorage.setItem).toHaveBeenCalledWith(
+        selectedToneStorageKey,
+        tone,
+      );
 
       // First picker should have tone set by default
       const handEmoji1 = await findToneEmojiInNewPicker();

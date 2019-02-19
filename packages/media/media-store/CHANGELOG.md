@@ -1,5 +1,74 @@
 # @atlaskit/media-store
 
+## 9.1.6
+- Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+  - @atlaskit/media-test-helpers@20.1.4
+  - @atlaskit/media-card@53.0.0
+
+## 9.1.5
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/media-card@52.0.0
+  - @atlaskit/media-test-helpers@20.1.0
+
+## 9.1.4
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/media-card@51.0.2
+  - @atlaskit/media-test-helpers@20.0.0
+
+## 9.1.3
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/media-card@51.0.0
+  - @atlaskit/media-test-helpers@19.1.0
+
+## 9.1.2
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-test-helpers@19.0.0
+
+## 9.1.1
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/media-test-helpers@18.9.1
+
+## 9.1.0
+- [minor] [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+
+  - Remove deprecated methods from media-core
+  - Use context.collection methods in MediaViewer
+  - Remove link support from media-card
+  - Remove legacy services + providers from media-core
+  - Remove link related methods from media-core
+  - Remove axios dependency
+  - Make context.getImage cancelable
+
+## 9.0.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 9.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 9.0.0
+- [minor] [46cacba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46cacba):
+
+  - Add touchEndpoint() method that calls /upload/createWithFiles and creates uploads & files with given ids
+- [major] [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+
+  - Add touchFiles function to store; Add mandatory upfrontIds object to `uploadFile` function - now it's responsibility of consumer to create file and give promise of upload id that will be used as part of upload; `uploadFile` function's callback object: `onId` callback is removed and replaced with `onUploadFinish` that can be called with an error object as an argument in case of an error; `deferredFileId` value is removed from `uploadFile` return object.
+
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/media-card@46.0.0
+  - @atlaskit/media-test-helpers@18.7.0
+
+## 8.5.1
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/media-card@45.0.0
+  - @atlaskit/media-test-helpers@18.6.2
+
 ## 8.5.0
 - [minor] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
 

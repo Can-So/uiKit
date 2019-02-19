@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { RendererContext } from '..';
 import { renderNodes, Serializer } from '../..';
+import { ExtensionLayout } from '@atlaskit/adf-schema';
 import {
   ADNode,
   ExtensionHandlers,
-  ExtensionLayout,
   WidthConsumer,
 } from '@atlaskit/editor-common';
 import { calcBreakoutWidth } from '@atlaskit/editor-common';

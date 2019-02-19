@@ -7,10 +7,12 @@ import {
   addFakeTextCursor,
   drawFakeTextCursor,
 } from '../../../../plugins/fake-text-cursor/cursor';
-import { createEditor } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory } from '@atlaskit/editor-test-helpers';
 
 describe('@atlaskit/editor-core/editor/ui/fake-text-cursor', () => {
   let editorView: EditorView;
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     const editor = createEditor({ editorPlugins: [fakeTextCursor] });
     editorView = editor.editorView;

@@ -1,5 +1,127 @@
 # @atlaskit/smart-card
 
+## 9.11.0
+- [minor] [41147bbc4c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/41147bbc4c):
+
+  - Fix for links in editor
+
+## 9.10.0
+- [minor] [ea423a619f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea423a619f):
+
+  - Fixed the call to the /check endpoint
+
+## 9.9.0
+- [minor] [7f70e97f98](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f70e97f98):
+
+  - Added environments to client
+
+## 9.8.0
+- [minor] [1594f351d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1594f351d9):
+
+  - added inline extractors for Bitbucket and Github.
+
+## 9.7.1
+- Updated dependencies [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+  - @atlaskit/media-ui@9.0.0
+
+## 9.7.0
+- [minor] [1c62bcce7d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c62bcce7d):
+
+  - Fix a problem with smart cards not appearing sometimes when lazy rendered and lazy loaded after code-split.
+
+## 9.6.8
+- [patch] [af3918bc89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af3918bc89):
+
+  - The url part of the unauthorized link is now grey
+
+## 9.6.7
+- [patch] [abce6949c0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abce6949c0):
+
+  - fix icon sizing and url key.
+
+## 9.6.6
+- [patch] [5ae645d661](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae645d661):
+
+  - Fixing analytics in smart-cards
+
+## 9.6.5
+- [patch] [2035bef8fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2035bef8fb):
+
+  - Fix inline extractor priority preventing @type arrays in some cases.
+
+## 9.6.4
+- [patch] [56c5a4b41f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56c5a4b41f):
+
+  - Fix "try again" should not be showing when there are no auth methods
+
+## 9.6.3
+- [patch] [63e6f7d420](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63e6f7d420):
+
+  - Fix missing attributes for link view
+
+## 9.6.2
+- [patch] [cbc601aed3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbc601aed3):
+
+  - Added missing type of events for Confluence
+
+## 9.6.1
+- [patch] [bef9abc8de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef9abc8de):
+
+  - added background colour to inline card views, fixed icon alignment.
+
+## 9.6.0
+- [minor] [27b12fdfc6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27b12fdfc6):
+
+  - added support for rendering of icons in Jira links
+
+## 9.5.0
+- [minor] [d664fc3d49](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d664fc3d49):
+
+  - added support for rendering of icons with Confluence links
+
+## 9.4.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/checkbox@5.0.11
+  - @atlaskit/form@5.1.2
+  - @atlaskit/inline-message@7.0.11
+  - @atlaskit/radio@0.4.6
+  - @atlaskit/media-ui@8.2.5
+  - @atlaskit/icon@16.0.0
+
+## 9.4.0
+- [minor] [8ff07c1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ff07c1):
+
+  - Analytics, first attempt, validate the idea
+- [minor] [7777442](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7777442):
+
+  - More analytics for smart links
+- [minor] [7302ea6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7302ea6):
+
+  - Analytics for smart cards
+
+## 9.3.0
+- [minor] [150626e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/150626e):
+
+  - add support for source code repository urls (currently Bitbucket and Github) in smart-cards.
+
+## 9.2.2
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/radio@0.4.5
+  - @atlaskit/textfield@0.1.5
+  - @atlaskit/form@5.0.0
+
+## 9.2.1
+- [patch] [9c50550](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c50550):
+
+  - Do not show connect button if there are no auth methods.
+
+## 9.2.0
+- [minor] [95f98cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95f98cc):
+
+  - User can click on a smart card to open a new window/tab
+
 ## 9.1.0
 - [minor] [1175616](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1175616):
 

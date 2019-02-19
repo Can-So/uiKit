@@ -1,27 +1,44 @@
 import * as React from 'react';
 import { EditorPlugin } from '../../types';
 import { WithProviders } from '@atlaskit/editor-common';
-import { pluginKey as blockTypeStateKey } from '../block-type/pm-plugins/main';
-import { stateKey as mediaStateKey } from '../media/pm-plugins/main';
-import { stateKey as hyperlinkPluginKey } from '../hyperlink/pm-plugins/main';
-import { mentionPluginKey } from '../mentions';
+import {
+  pluginKey as blockTypeStateKey,
+  BlockTypeState,
+} from '../block-type/pm-plugins/main';
+import {
+  stateKey as mediaStateKey,
+  MediaPluginState,
+} from '../media/pm-plugins/main';
+import {
+  stateKey as hyperlinkPluginKey,
+  HyperlinkState,
+} from '../hyperlink/pm-plugins/main';
+import { mentionPluginKey, MentionPluginState } from '../mentions';
 import { pluginKey as tablesStateKey } from '../table/pm-plugins/main';
 import { stateKey as imageUploadStateKey } from '../image-upload/pm-plugins/main';
-import { pluginKey as placeholderTextStateKey } from '../placeholder-text';
+import {
+  pluginKey as placeholderTextStateKey,
+  PluginState as PlaceholderPluginState,
+} from '../placeholder-text';
 import { pluginKey as layoutStateKey } from '../layout';
 import {
   pluginKey as macroStateKey,
   MacroState,
   insertMacroFromMacroBrowser,
 } from '../macro';
-import { pluginKey as dateStateKey } from '../date/plugin';
-import { emojiPluginKey } from '../emoji/pm-plugins/main';
+import { pluginKey as dateStateKey, DateState } from '../date/plugin';
+import { emojiPluginKey, EmojiState } from '../emoji/pm-plugins/main';
 import WithPluginState from '../../ui/WithPluginState';
 import { ToolbarSize } from '../../ui/Toolbar';
 import ToolbarInsertBlock from './ui/ToolbarInsertBlock';
-import { insertBlockType } from '../block-type/commands';
+import { insertBlockTypesWithAnalytics } from '../block-type/commands';
 import { startImageUpload } from '../image-upload/pm-plugins/commands';
 import { pluginKey as typeAheadPluginKey } from '../type-ahead/pm-plugins/main';
+import { TypeAheadPluginState } from '../type-ahead';
+import { TablePluginState } from '../table/types';
+import { ImageUploadPluginState } from '../image-upload/types';
+import { LayoutState } from '../layout/pm-plugins/main';
+import { INPUT_METHOD } from '../analytics';
 
 const toolbarSizeToButtons = toolbarSize => {
   switch (toolbarSize) {
@@ -45,12 +62,20 @@ export interface InsertBlockOptions {
   nativeStatusSupported?: boolean;
 }
 
+/**
+ * Wrapper over insertBlockTypeWithAnalytics to autobind toolbar input method
+ * @param name Block name
+ */
+function handleInsertBlockType(name) {
+  return insertBlockTypesWithAnalytics(name, INPUT_METHOD.TOOLBAR);
+}
+
 const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
   primaryToolbarComponent({
     editorView,
     appearance,
     editorActions,
-    eventDispatcher,
+    dispatchAnalyticsEvent,
     providerFactory,
     popupsMountPoint,
     popupsBoundariesElement,
@@ -90,17 +115,32 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
             imageUpload,
             placeholderTextState,
             layoutState,
+          }: {
+            typeAheadState: TypeAheadPluginState | undefined;
+            mentionState: MentionPluginState | undefined;
+            blockTypeState: BlockTypeState | undefined;
+            mediaState: MediaPluginState | undefined;
+            tablesState: TablePluginState | undefined;
+            macroState: MacroState | undefined;
+            hyperlinkState: HyperlinkState | undefined;
+            emojiState: EmojiState | undefined;
+            dateState: DateState | undefined;
+            imageUpload: ImageUploadPluginState | undefined;
+            placeholderTextState: PlaceholderPluginState | undefined;
+            layoutState: LayoutState | undefined;
           }) => (
             <ToolbarInsertBlock
               buttons={buttons}
               isReducedSpacing={isToolbarReducedSpacing}
               isDisabled={disabled}
-              isTypeAheadAllowed={typeAheadState.isAllowed}
+              isTypeAheadAllowed={typeAheadState && typeAheadState.isAllowed}
               editorView={editorView}
               tableSupported={!!tablesState}
               actionSupported={!!editorView.state.schema.nodes.taskItem}
-              mentionsSupported={!!(mentionState && mentionState.provider)}
-              mentionsEnabled={mentionState}
+              mentionsSupported={
+                !!(mentionState && mentionState.mentionProvider)
+              }
+              mentionsEnabled={!!mentionState}
               decisionSupported={!!editorView.state.schema.nodes.decisionItem}
               dateEnabled={!!dateState}
               placeholderTextEnabled={
@@ -114,20 +154,20 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               imageUploadEnabled={imageUpload && imageUpload.enabled}
               handleImageUpload={startImageUpload}
               availableWrapperBlockTypes={
-                blockTypeState.availableWrapperBlockTypes
+                blockTypeState && blockTypeState.availableWrapperBlockTypes
               }
               linkSupported={!!hyperlinkState}
               linkDisabled={
                 !hyperlinkState ||
                 !hyperlinkState.canInsertLink ||
-                hyperlinkState.activeLinkMark
+                !!hyperlinkState.activeLinkMark
               }
               emojiDisabled={!emojiState || !emojiState.enabled}
               insertEmoji={emojiState && emojiState.insertEmoji}
               emojiProvider={providers.emojiProvider}
               nativeStatusSupported={options.nativeStatusSupported}
               horizontalRuleEnabled={options.horizontalRuleEnabled}
-              onInsertBlockType={insertBlockType}
+              onInsertBlockType={handleInsertBlockType}
               onInsertMacroFromMacroBrowser={insertMacroFromMacroBrowser}
               macroProvider={macroState.macroProvider}
               popupsMountPoint={popupsMountPoint}
@@ -135,6 +175,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               popupsScrollableElement={popupsScrollableElement}
               insertMenuItems={options.insertMenuItems}
               editorActions={editorActions}
+              dispatchAnalyticsEvent={dispatchAnalyticsEvent}
             />
           )}
         />

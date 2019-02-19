@@ -43,6 +43,5 @@ export type SwitcherProps = {
 };
 
 export type SwitcherState = {
-  isOpen: boolean,
   mergedComponents: ComponentsType,
 };

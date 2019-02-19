@@ -1,7 +1,10 @@
-import * as React from 'react';
-import { Component } from 'react';
 import AkButton from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
+import * as React from 'react';
+import { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '../i18n';
+import * as styles from './styles';
 
 export interface Props {
   className: string;
@@ -14,8 +17,35 @@ export interface Props {
 }
 
 export default class RetryableButton extends Component<Props, {}> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
+  }
+
+  renderLoading() {
+    return (
+      <span className={styles.buttonSpinner}>
+        <Spinner invertColor={false} />
+      </span>
+    );
+  }
+
+  renderRetry() {
+    const { loading, retryClassName, onSubmit } = this.props;
+    return loading ? (
+      this.renderLoading()
+    ) : (
+      <FormattedMessage {...messages.retryLabel}>
+        {retryLabel => (
+          <AkButton
+            className={retryClassName}
+            appearance="warning"
+            onClick={onSubmit}
+          >
+            {retryLabel}
+          </AkButton>
+        )}
+      </FormattedMessage>
+    );
   }
 
   render() {
@@ -23,26 +53,21 @@ export default class RetryableButton extends Component<Props, {}> {
       loading,
       error,
       className,
-      retryClassName,
       appearance,
       onSubmit,
       label,
     } = this.props;
     return error ? (
-      <AkButton
-        className={retryClassName}
-        appearance="warning"
-        onClick={onSubmit}
-      >
-        {loading ? <Spinner invertColor={false} /> : 'Retry'}
-      </AkButton>
+      this.renderRetry()
+    ) : loading ? (
+      this.renderLoading()
     ) : (
       <AkButton
         className={className}
         appearance={appearance as any}
         onClick={onSubmit}
       >
-        {loading ? <Spinner invertColor={true} /> : label}
+        {label}
       </AkButton>
     );
   }

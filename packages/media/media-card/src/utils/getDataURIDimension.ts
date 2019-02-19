@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { isRetina } from './isRetina';
 import { CardDimensions, CardAppearance } from '..';
 import { ElementDimension, getElementDimension } from './getElementDimension';
-import { getCardMinHeight, defaultImageCardDimensions } from './cardDimensions';
+import { defaultImageCardDimensions } from './cardDimensions';
 import { isValidPercentageUnit } from './isValidPercentageUnit';
 import { containsPixelUnit } from './containsPixelUnit';
 
@@ -17,13 +17,8 @@ export const getDataURIDimension = (
   options: getDataURIDimensionOptions,
 ): number => {
   const retinaFactor = isRetina() ? 2 : 1;
-  const isSmall = options.appearance === 'small';
   const dimensionValue =
     (options.dimensions && options.dimensions[dimension]) || '';
-
-  if (isSmall) {
-    return getCardMinHeight('small') * retinaFactor;
-  }
 
   if (isValidPercentageUnit(dimensionValue)) {
     return getElementDimension(options.component, dimension) * retinaFactor;

@@ -6,14 +6,17 @@ import {
   setupMediaMocksProviders,
 } from '../_utils';
 
-const mediaSingleLayouts = {
+export const mediaSingleLayouts = {
   center: 'Center',
   'wrap-left': 'Wrap left',
   'wrap-right': 'Wrap right',
   wide: 'Wide',
   'full-width': 'Full width',
+  'align-start': 'Align left',
+  'align-end': 'Align right',
 };
 
+// add some comment
 describe('Snapshot Test: Media', () => {
   let page;
   beforeAll(async () => {
@@ -42,7 +45,7 @@ describe('Snapshot Test: Media', () => {
         await page.waitForSelector(layoutButton);
         await page.click(layoutButton);
 
-        await page.waitForSelector(`.media-single.${layout}`);
+        await page.waitForSelector(`.media-single.image-${layout}`);
 
         await snapshot(page);
       }
@@ -73,7 +76,7 @@ describe('Snapshot Test: Media', () => {
         await page.waitForSelector(layoutButton);
         await page.click(layoutButton);
 
-        await page.waitForSelector(`.media-single.${layout}`);
+        await page.waitForSelector(`.media-single.image-${layout}`);
 
         await snapshot(page);
       }

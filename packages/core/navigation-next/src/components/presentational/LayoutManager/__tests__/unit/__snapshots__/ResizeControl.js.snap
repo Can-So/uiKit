@@ -7,38 +7,43 @@ exports[`ResizeControlBase should not render GrabArea when \`isGrabAreaDisabled\
       direction="to left"
       isBold={false}
     />
-    <WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
-      content={
-        <div
-          className="css-jeedki"
-        >
-          <span>
-            
-          </span>
-          <div
-            className="css-1cgkjdn"
-          >
-            
-          </div>
-        </div>
-      }
-      delay={600}
-      hideTooltipOnClick={true}
-      position="right"
+    <div
+      onMouseOver={[Function]}
     >
-      <Button
-        hasHighlight={false}
-        innerRef={
-          Object {
-            "current": null,
-          }
+      <WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
+        content={
+          <div
+            className="css-jeedki"
+          >
+            <span>
+              
+            </span>
+            <div
+              className="css-1cgkjdn"
+            >
+              
+            </div>
+          </div>
         }
-        isVisible={false}
-        onClick={[Function]}
+        delay={600}
+        hideTooltipOnClick={true}
+        position="right"
       >
-        <ChevronLeftIcon />
-      </Button>
-    </WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
+        <Button
+          hasHighlight={false}
+          hitAreaSize="large"
+          innerRef={
+            Object {
+              "current": null,
+            }
+          }
+          isVisible={false}
+          onClick={[Function]}
+        >
+          <ChevronLeftIcon />
+        </Button>
+      </WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
+    </div>
   </Outer>
   <LifeCycleProvider
     attributes={Object {}}
@@ -67,38 +72,43 @@ exports[`ResizeControlBase should render correctly 1`] = `
       onMouseLeave={[Function]}
       showHandle={false}
     />
-    <WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
-      content={
-        <div
-          className="css-jeedki"
-        >
-          <span>
-            
-          </span>
-          <div
-            className="css-1cgkjdn"
-          >
-            
-          </div>
-        </div>
-      }
-      delay={600}
-      hideTooltipOnClick={true}
-      position="right"
+    <div
+      onMouseOver={[Function]}
     >
-      <Button
-        hasHighlight={false}
-        innerRef={
-          Object {
-            "current": null,
-          }
+      <WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
+        content={
+          <div
+            className="css-jeedki"
+          >
+            <span>
+              
+            </span>
+            <div
+              className="css-1cgkjdn"
+            >
+              
+            </div>
+          </div>
         }
-        isVisible={false}
-        onClick={[Function]}
+        delay={600}
+        hideTooltipOnClick={true}
+        position="right"
       >
-        <ChevronLeftIcon />
-      </Button>
-    </WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
+        <Button
+          hasHighlight={false}
+          hitAreaSize="large"
+          innerRef={
+            Object {
+              "current": null,
+            }
+          }
+          isVisible={false}
+          onClick={[Function]}
+        >
+          <ChevronLeftIcon />
+        </Button>
+      </WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
+    </div>
   </Outer>
   <LifeCycleProvider
     attributes={Object {}}

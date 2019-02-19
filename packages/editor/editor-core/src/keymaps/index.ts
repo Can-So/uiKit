@@ -25,7 +25,7 @@ export const toggleHeading4 = makeKeymap('Heading 4', '', 'Cmd-Alt-4');
 export const toggleHeading5 = makeKeymap('Heading 5', '', 'Cmd-Alt-5');
 export const toggleOrderedList = makeKeymap('Numbered list', '', 'Cmd-Shift-7');
 export const toggleBulletList = makeKeymap('Bullet list', '', 'Cmd-Shift-8');
-export const toggleBlockQuote = makeKeymap('Block quote', '', 'Cmd-Alt-9');
+export const toggleBlockQuote = makeKeymap('Quote', '', 'Cmd-Alt-9');
 export const insertNewLine = makeKeyMapWithCommon(
   'Insert new line',
   'Shift-Enter',
@@ -84,6 +84,14 @@ export const copy = makeKeyMapWithCommon('Copy', 'Mod-c');
 export const paste = makeKeyMapWithCommon('Paste', 'Mod-v');
 export const altPaste = makeKeyMapWithCommon('Paste', 'Mod-Shift-v');
 
+const arrowKeysMap = {
+  // for reference: https://wincent.com/wiki/Unicode_representations_of_modifier_keys
+  ARROWLEFT: '\u2190',
+  ARROWRIGHT: '\u2192',
+  ARROWUP: '\u2191',
+  ARROWDOWN: '\u2193',
+};
+
 export function tooltip(
   keymap: Keymap | undefined,
   description?: string,
@@ -91,16 +99,18 @@ export function tooltip(
   if (keymap) {
     let shortcut: string;
     if (browser.mac) {
+      // for reference: https://wincent.com/wiki/Unicode_representations_of_modifier_keys
       shortcut = keymap.mac
-        .replace(/Cmd/i, '⌘')
-        .replace(/Shift/i, '⇧')
-        .replace(/Ctrl/i, '^')
-        .replace(/Alt/i, '⌥');
+        .replace(/Cmd/i, '\u2318')
+        .replace(/Shift/i, '\u21E7')
+        .replace(/Ctrl/i, '\u2303')
+        .replace(/Alt/i, '\u2325');
     } else {
       shortcut = keymap.windows;
     }
     const keys = shortcut.split('-');
-    keys[keys.length - 1] = keys[keys.length - 1].toUpperCase();
+    const lastKey = keys[keys.length - 1].toUpperCase();
+    keys[keys.length - 1] = arrowKeysMap[lastKey] || lastKey;
     shortcut = keys.join(browser.mac ? '' : '+');
     return description ? `${description} ${shortcut}` : shortcut;
   }

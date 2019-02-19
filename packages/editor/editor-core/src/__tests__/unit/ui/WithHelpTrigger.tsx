@@ -3,6 +3,8 @@ import { mount } from 'enzyme';
 import * as React from 'react';
 import WithHelpTrigger from '../../../ui/WithHelpTrigger';
 import EditorContext from '../../../ui/EditorContext';
+import * as EventDispatcher from '../../../event-dispatcher';
+import { analyticsEventKey } from '../../../plugins/analytics';
 
 describe(name, () => {
   describe('WithHelpTrigger', () => {
@@ -27,6 +29,37 @@ describe(name, () => {
       );
       expect(stub).toHaveBeenCalled();
       wrapper.unmount();
+    });
+
+    describe('open help', () => {
+      it('should trigger help clicked analytics event', () => {
+        let mockDispatch;
+        const mockCreateDispatch = jest
+          .spyOn(EventDispatcher, 'createDispatch')
+          .mockReturnValue((mockDispatch = jest.fn()));
+
+        mount(
+          <EditorContext>
+            <WithHelpTrigger
+              render={openHelp => {
+                openHelp();
+                return null;
+              }}
+            />
+          </EditorContext>,
+        );
+
+        expect(mockDispatch).toHaveBeenCalledWith(analyticsEventKey, {
+          payload: {
+            action: 'clicked',
+            actionSubject: 'button',
+            actionSubjectId: 'helpButton',
+            attributes: { inputMethod: 'toolbar' },
+            eventType: 'ui',
+          },
+        });
+        mockCreateDispatch.mockRestore();
+      });
     });
   });
 });

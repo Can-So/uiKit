@@ -1,4 +1,4 @@
-import { LinkAttributes } from '@atlaskit/editor-common';
+import { LinkAttributes } from '@atlaskit/adf-schema';
 import { MarkEncoder } from '..';
 
 export const link: MarkEncoder = (

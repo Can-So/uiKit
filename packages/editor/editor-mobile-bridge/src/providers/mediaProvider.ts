@@ -12,14 +12,7 @@ function getToken(context) {
 function createMediaProvider() {
   const createMediaContext = Promise.resolve(
     ContextFactory.create({
-      authProvider: context => {
-        // This will prevent empty collections from being used.
-        if (!context || context.collectionName === null) {
-          return Promise.reject();
-        }
-
-        return getToken(context);
-      },
+      authProvider: context => getToken(context),
     }),
   );
 

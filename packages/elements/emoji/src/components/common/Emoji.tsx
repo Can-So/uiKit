@@ -1,12 +1,12 @@
+import Button from '@atlaskit/button';
+import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
+import { colors } from '@atlaskit/theme';
+import Tooltip from '@atlaskit/tooltip';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { MouseEvent, SyntheticEvent } from 'react';
-import Tooltip from '@atlaskit/tooltip';
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-import Button from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
-
-import * as styles from './styles';
+import { shouldUseAltRepresentation } from '../../api/EmojiUtils';
+import { deleteEmojiLabel } from '../../constants';
 import {
   isImageRepresentation,
   isMediaRepresentation,
@@ -18,9 +18,8 @@ import {
   OnEmojiEvent,
   SpriteRepresentation,
 } from '../../types';
-import { deleteEmojiLabel } from '../../constants';
 import { leftClick } from '../../util/mouse';
-import { shouldUseAltRepresentation } from '../../api/EmojiUtils';
+import * as styles from './styles';
 
 export interface Props {
   /**
@@ -105,7 +104,7 @@ const handleMouseMove = (props: Props, event: MouseEvent<any>) => {
   }
 };
 
-const handleDelete = (props: Props, event) => {
+const handleDelete = (props: Props, event: SyntheticEvent) => {
   const { emoji, onDelete } = props;
   if (onDelete) {
     onDelete(toEmojiId(emoji), emoji, event);
@@ -252,7 +251,7 @@ const renderAsImage = (props: Props) => {
               size="small"
             />
           }
-          onClick={event => handleDelete(props, event)}
+          onClick={(event: SyntheticEvent) => handleDelete(props, event)}
           appearance="subtle-link"
           spacing="none"
         />
@@ -269,7 +268,7 @@ const renderAsImage = (props: Props) => {
     };
   }
 
-  const onError = event => {
+  const onError = (event: SyntheticEvent<HTMLImageElement>) => {
     handleImageError(props, event);
   };
 

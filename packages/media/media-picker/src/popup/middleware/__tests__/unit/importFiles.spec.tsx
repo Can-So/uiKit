@@ -1,15 +1,15 @@
-import * as uuid from 'uuid';
-
 import {
   mockStore,
   mockWsConnectionHolder,
   mockPopupUploadEventEmitter,
-} from '../../../mocks';
+} from '@atlaskit/media-test-helpers';
 
 import {
   importFilesMiddleware,
   isRemoteService,
   importFiles,
+  touchSelectedFiles,
+  SelectedUploadFile,
 } from '../../importFiles';
 import { LocalUpload, LocalUploads } from '../../../domain';
 import { RECENTS_COLLECTION } from '../../../config';
@@ -37,8 +37,11 @@ import {
   SendUploadEventActionPayload,
 } from '../../../actions/sendUploadEvent';
 import { SCALE_FACTOR_DEFAULT } from '../../../../util/getPreviewFromImage';
+import { fileStreamsCache, FileState } from '@atlaskit/media-core';
+import { ReplaySubject, Observable } from 'rxjs';
 
 describe('importFiles middleware', () => {
+  const expectUUID = expect.stringMatching(/[a-f0-9\-]+/);
   const todayDate = Date.now();
   interface SetupOptions {
     withSelectedItems: boolean;
@@ -53,6 +56,7 @@ describe('importFiles middleware', () => {
     mimeType: 'image/jpg',
     size: 42 + index,
     upfrontId,
+    occurrenceKey: `occurrence-key-${index}`,
   });
 
   const getSendUploadEventPayloads = (
@@ -83,7 +87,14 @@ describe('importFiles middleware', () => {
       // Each LocalUpload will have a list of events with one of them being uploads-start,
       // and each of those events will contain all UploadFiles.
       for (let i = 1; i <= total; i++) {
-        const { id, name, mimeType: type, size, upfrontId } = makeFileData(i);
+        const {
+          id,
+          name,
+          mimeType: type,
+          size,
+          upfrontId,
+          occurrenceKey,
+        } = makeFileData(i);
         files.push({
           id,
           name,
@@ -91,6 +102,7 @@ describe('importFiles middleware', () => {
           size,
           upfrontId,
           creationDate: todayDate,
+          occurrenceKey,
         });
       }
 
@@ -120,10 +132,7 @@ describe('importFiles middleware', () => {
       const uploadEndEvent: UploadEndEvent = {
         name: 'upload-end',
         data: {
-          file: {
-            ...file,
-            publicId: `some-public-id-${index}`,
-          },
+          file,
           public: {
             id: `some-public-id-${index}`,
           },
@@ -160,6 +169,11 @@ describe('importFiles middleware', () => {
       withSelectedItems
         ? {
             uploads: localUploads,
+            config: {
+              uploadParams: {
+                collection: 'tenant-collection',
+              },
+            },
             selectedItems: [
               {
                 serviceName: 'upload',
@@ -206,15 +220,6 @@ describe('importFiles middleware', () => {
     };
   };
 
-  beforeEach(() => {
-    jest
-      .spyOn(uuid, 'v4')
-      .mockReturnValueOnce('uuid1')
-      .mockReturnValueOnce('uuid2')
-      .mockReturnValueOnce('uuid3')
-      .mockReturnValueOnce('uuid4');
-  });
-
   afterEach(() => {
     jest.resetAllMocks();
   });
@@ -248,36 +253,40 @@ describe('importFiles middleware', () => {
       return importFiles(eventEmitter, store, mockWsProvider).then(() => {
         expect(eventEmitter.emitUploadsStart).toBeCalledWith([
           {
-            id: 'uuid1',
+            id: expectUUID,
             name: 'picture1.jpg',
             type: 'image/jpg',
             size: 43,
             creationDate: todayDate,
             upfrontId,
+            occurrenceKey: 'occurrence-key-1',
           },
           {
-            id: 'uuid2',
+            id: expectUUID,
             name: 'picture3.jpg',
             type: 'image/jpg',
             size: 45,
             creationDate: todayDate,
             upfrontId,
+            occurrenceKey: 'occurrence-key-3',
           },
           {
-            id: 'uuid3',
+            id: expectUUID,
             name: 'picture4.jpg',
             type: 'image/jpg',
             size: 46,
             creationDate: todayDate,
             upfrontId,
+            occurrenceKey: 'occurrence-key-4',
           },
           {
-            id: 'uuid4',
+            id: expectUUID,
             name: 'picture5.jpg',
             type: 'image/jpg',
             size: 47,
             creationDate: expect.any(Number),
             upfrontId,
+            occurrenceKey: 'occurrence-key-5',
           },
         ]);
       });
@@ -299,7 +308,7 @@ describe('importFiles middleware', () => {
         return importFiles(eventEmitter, store, mockWsProvider).then(() => {
           expect(store.dispatch).toBeCalledWith(
             getPreview(
-              'uuid3',
+              expectUUID,
               {
                 id: 'some-selected-item-id-4',
                 name: 'picture4.jpg',
@@ -307,6 +316,7 @@ describe('importFiles middleware', () => {
                 size: 46,
                 creationDate: todayDate,
                 upfrontId,
+                occurrenceKey: 'occurrence-key-4',
               },
               RECENTS_COLLECTION,
             ),
@@ -354,12 +364,14 @@ describe('importFiles middleware', () => {
                 size: 46,
                 creationDate: todayDate,
                 upfrontId,
+                occurrenceKey: 'occurrence-key-4',
               },
-              'uuid3',
+              expectUUID,
               {
                 id: 'some-selected-item-id-4',
                 collection: RECENTS_COLLECTION,
               },
+              expect.anything(),
             ),
           );
         });
@@ -419,10 +431,10 @@ describe('importFiles middleware', () => {
           ) as SetEventProxyAction[];
           expect(setEventProxyCalls).toHaveLength(2);
           expect(setEventProxyCalls[0]).toEqual(
-            setEventProxy('some-selected-item-id-1', 'uuid1'),
+            setEventProxy('some-selected-item-id-1', expectUUID),
           );
           expect(setEventProxyCalls[1]).toEqual(
-            setEventProxy('some-selected-item-id-3', 'uuid2'),
+            setEventProxy('some-selected-item-id-3', expectUUID),
           );
           done();
         });
@@ -454,9 +466,48 @@ describe('importFiles middleware', () => {
               fileId: 'some-selected-item-id-5',
               fileName: 'picture5.jpg',
               collection: RECENTS_COLLECTION,
-              jobId: 'uuid4',
+              jobId: expectUUID,
             },
           });
+          done();
+        });
+      });
+
+      it('should touch all files to import', done => {
+        const { eventEmitter, mockWsProvider, store, nextDispatch } = setup();
+
+        importFilesMiddleware(eventEmitter, mockWsProvider)(store)(
+          nextDispatch,
+        )(action);
+
+        window.setTimeout(() => {
+          const { tenantContext } = store.getState();
+          expect(tenantContext.file.touchFiles).toBeCalledTimes(1);
+          expect(tenantContext.file.touchFiles).toBeCalledWith(
+            [
+              {
+                collection: 'tenant-collection',
+                fileId: expectUUID,
+                occurrenceKey: 'occurrence-key-1',
+              },
+              {
+                collection: 'tenant-collection',
+                fileId: expectUUID,
+                occurrenceKey: 'occurrence-key-3',
+              },
+              {
+                collection: 'tenant-collection',
+                fileId: expectUUID,
+                occurrenceKey: 'occurrence-key-4',
+              },
+              {
+                collection: 'tenant-collection',
+                fileId: expectUUID,
+                occurrenceKey: 'occurrence-key-5',
+              },
+            ],
+            'tenant-collection',
+          );
           done();
         });
       });
@@ -473,7 +524,129 @@ describe('importFiles middleware', () => {
     });
 
     it('should return false for service name other than "dropbox" or "google"', () => {
-      expect(isRemoteService('some-service')).toEqual(false);
+      expect(isRemoteService('recent_files')).toEqual(false);
+    });
+  });
+
+  describe('touchSelectedFiles()', () => {
+    const file: MediaFile = {
+      id: 'id-1',
+      creationDate: 1,
+      name: '',
+      size: 1,
+      type: 'image/png',
+      upfrontId: Promise.resolve(''),
+    };
+    it('should add file preview for Giphy files', done => {
+      const selectedFiles: SelectedUploadFile[] = [
+        {
+          file,
+          serviceName: 'giphy',
+          touchFileDescriptor: {
+            fileId: 'id-1',
+          },
+        },
+      ];
+      const store = mockStore({
+        giphy: {
+          imageCardModels: [
+            {
+              dataURI: 'giphy-preview-1',
+              dimensions: { height: 1, width: 1 },
+              metadata: {
+                id: 'id-1',
+              },
+            },
+            {
+              dataURI: 'giphy-preview-2',
+              dimensions: { height: 1, width: 1 },
+              metadata: {
+                id: 'id-2',
+              },
+            },
+          ],
+        },
+      });
+      touchSelectedFiles(selectedFiles, store);
+      const observable = fileStreamsCache.get('id-1');
+
+      observable!.subscribe({
+        next(state) {
+          if (state.status !== 'error') {
+            expect(state.preview).toEqual({
+              value: 'giphy-preview-1',
+            });
+            done();
+          }
+        },
+      });
+    });
+
+    it('should add file preview for local uploads', done => {
+      const subject = new ReplaySubject<Partial<FileState>>(1);
+      subject.next({
+        id: 'id-1',
+        status: 'processing',
+        preview: {
+          value: 'some-local-preview',
+        },
+      });
+      fileStreamsCache.set('id-1', subject as Observable<FileState>);
+      const selectedFiles: SelectedUploadFile[] = [
+        {
+          file,
+          serviceName: 'upload',
+          touchFileDescriptor: {
+            fileId: 'id-1',
+          },
+        },
+      ];
+      const store = mockStore();
+      touchSelectedFiles(selectedFiles, store);
+      const observable = fileStreamsCache.get('id-1');
+
+      observable!.subscribe({
+        async next(state) {
+          if (state.status !== 'error') {
+            expect(await state.preview).toEqual({
+              value: 'some-local-preview',
+            });
+            done();
+          }
+        },
+      });
+    });
+
+    it('should fetch remote preview for recent files if image is previewable', done => {
+      const selectedFiles: SelectedUploadFile[] = [
+        {
+          file,
+          serviceName: 'recent_files',
+          touchFileDescriptor: {
+            fileId: 'id-1',
+          },
+        },
+      ];
+      const store = mockStore();
+      touchSelectedFiles(selectedFiles, store);
+      const observable = fileStreamsCache.get('id-1');
+
+      observable!.subscribe({
+        async next(state) {
+          if (state.status !== 'error') {
+            await state.preview;
+            const { userContext } = store.getState();
+            expect(userContext.getImage).toBeCalledTimes(1);
+            expect(userContext.getImage).toBeCalledWith('id-1', {
+              collection: RECENTS_COLLECTION,
+              width: 1920,
+              height: 1080,
+              mode: 'fit',
+            });
+            done();
+          }
+        },
+      });
     });
   });
 });

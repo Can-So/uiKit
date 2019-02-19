@@ -1,5 +1,41 @@
 # @atlaskit/focused-task-close-account
 
+## 0.8.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/checkbox@5.0.11
+  - @atlaskit/drawer@2.7.1
+  - @atlaskit/inline-dialog@9.0.14
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/icon@16.0.0
+
+## 0.8.0
+- [minor] [d89857a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d89857a):
+
+  - Deactivation flow added which is a single screen flow in the focused task component
+
+## 0.7.0
+- [minor] [91f6abc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/91f6abc):
+
+  - Bug fix in the basic drawer assembly example
+
+## 0.6.0
+- [minor] [52c6b63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52c6b63):
+
+  - i18n support added for focused task component
+
+## 0.5.0
+- [minor] [49bd44d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49bd44d):
+
+  - Section message updated when the user is alreaady deactivated
+
+## 0.4.0
+- [minor] [81299f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/81299f6):
+
+  - Copy changes along with addition on new prop, isUserDeactivated
+
 ## 0.3.4
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/avatar@14.1.7

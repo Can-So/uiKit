@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
-import { Shortcut } from '../../shortcut';
+import { Shortcut } from '../..';
 
-/**
- * Skipped two tests in here that are failing due something with emitting key events
- * TODO: JEST-23 Fix these tests
- */
 describe('Shortcut', () => {
   const originalEventListener = document.addEventListener;
 
@@ -29,18 +24,18 @@ describe('Shortcut', () => {
     el.unmount();
   });
 
-  it.skip('should execute handler', done => {
+  it('should execute handler', done => {
     mount(
       <div>
         <Shortcut keyCode={37} handler={done} />
       </div>,
     );
 
-    const e = new KeyboardEventWithKeyCode('keydown', {
+    const e = new KeyboardEvent('keydown', {
       bubbles: true,
       cancelable: true,
       keyCode: 37,
-    });
+    } as any);
     document.dispatchEvent(e);
   });
 });

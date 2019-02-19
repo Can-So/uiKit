@@ -1,7 +1,7 @@
 import { goToRendererTestingExample, snapshot, mountRenderer } from './_utils';
 import * as document from '../../../examples/helper/overflow.adf.json';
 
-describe('Snapshot Test: Overflow shadows', () => {
+describe.skip('Snapshot Test: Overflow shadows', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore

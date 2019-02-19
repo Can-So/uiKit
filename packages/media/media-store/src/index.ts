@@ -7,6 +7,8 @@ export * from './models/artifacts';
 export {
   uploadFile,
   UploadableFile,
+  UploadableFileUpfrontIds,
   UploadFileCallbacks,
   UploadFileResult,
 } from './uploader';
+export * from './utils/request';

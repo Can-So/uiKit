@@ -9,18 +9,19 @@ jest.mock('../../../src/utils/shouldDisplayImageThumbnail', () => ({
 import * as React from 'react';
 
 import { shallow, mount } from 'enzyme';
-import { FileDetails, LinkDetails, Resource } from '@atlaskit/media-core';
+import { FileDetails } from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
-import { Retry } from '../../../src/utils/cardGenericViewSmall/styled';
+import {
+  mountWithIntlContext,
+  expectToEqual,
+} from '@atlaskit/media-test-helpers';
 import {
   CardView,
   CardViewBase,
   CardViewOwnProps,
 } from '../../../src/root/cardView';
-import { LinkCard } from '../../../src/links';
 import { FileCard } from '../../../src/files';
 import { Wrapper } from '../../../src/root/styled';
 import { breakpointSize } from '../../../src/utils/breakpoint';
@@ -38,12 +39,6 @@ describe('CardView', () => {
     processingStatus: 'pending',
     mediaType: 'image',
   };
-  const link: LinkDetails = {
-    id: 'abcd',
-    type: 'wha',
-    url: 'https://example.com/some-path',
-    title: 'foobar',
-  };
 
   let createAnalyticsEventMock: any;
   beforeEach(() => {
@@ -57,7 +52,7 @@ describe('CardView', () => {
   ) =>
     shallow(
       <CardViewBase
-        mediaItemType={props.metadata === link ? 'link' : 'file'}
+        mediaItemType={'file'}
         createAnalyticsEvent={createAnalyticsEventMock}
         status="loading"
         {...props}
@@ -66,28 +61,9 @@ describe('CardView', () => {
     );
 
   it('should render FileCard when no metadata is passed', () => {
-    const element = mount(<CardView status="loading" appearance="small" />);
+    const element = mount(<CardView status="loading" />);
     const fileCard = element.find(FileCard);
     expect(fileCard).toHaveLength(1);
-  });
-
-  it('should render LinkCard with details', () => {
-    const element = shallowCardViewBaseElement({ metadata: link });
-
-    const linkCard = element.find(LinkCard);
-    expect(linkCard).toHaveLength(1);
-    expect(linkCard.props().details).toBe(link);
-  });
-
-  it('should render LinkCard with other props', () => {
-    const element = shallowCardViewBaseElement({
-      metadata: link,
-      appearance: 'small',
-    });
-
-    const linkCard = element.find(LinkCard);
-    expect(linkCard).toHaveLength(1);
-    expect(linkCard.prop('appearance')).toBe('small');
   });
 
   it('should render FileCard with details', () => {
@@ -101,32 +77,12 @@ describe('CardView', () => {
   it('should render FileCard with other props', () => {
     const element = shallowCardViewBaseElement({
       metadata: file,
-      appearance: 'small',
+      appearance: 'image',
     });
 
     const fileCard = element.find(FileCard);
     expect(fileCard).toHaveLength(1);
-    expect(fileCard.prop('appearance')).toBe('small');
-  });
-
-  it('should render LinkCard and NOT use details to determine which card to render when mediaItemType is "link"', () => {
-    const element = shallowCardViewBaseElement({
-      metadata: file,
-      mediaItemType: 'link',
-    });
-
-    const linkCard = element.find(LinkCard);
-    expect(linkCard).toHaveLength(1);
-  });
-
-  it('should render FileCard and NOT use details to determine which card to render when mediaItemType is "file"', () => {
-    const element = shallowCardViewBaseElement({
-      metadata: link,
-      mediaItemType: 'file',
-    });
-
-    const linkCard = element.find(FileCard);
-    expect(linkCard).toHaveLength(1);
+    expect(fileCard.prop('appearance')).toEqual('image');
   });
 
   it('should fire onClick and onMouseEnter events when file details are passed in', () => {
@@ -151,53 +107,6 @@ describe('CardView', () => {
     expect(hoverHandler).toHaveBeenCalledTimes(1);
     const hoverHandlerArg = hoverHandler.mock.calls[0][0];
     expect(hoverHandlerArg.mediaItemDetails).toEqual(file);
-  });
-
-  it('should fire onClick and onMouseEnter events when link details are passed in', () => {
-    const clickHandler = jest.fn();
-    const hoverHandler = jest.fn();
-    const card = mount(
-      <CardView
-        status="loading"
-        metadata={link}
-        onClick={clickHandler}
-        onMouseEnter={hoverHandler}
-      />,
-    );
-
-    card.simulate('click');
-    card.simulate('mouseEnter');
-
-    expect(clickHandler).toHaveBeenCalledTimes(1);
-    const clickHandlerArg = clickHandler.mock.calls[0][0];
-    expect(clickHandlerArg.mediaItemDetails).toEqual(link);
-
-    expect(hoverHandler).toHaveBeenCalledTimes(1);
-    const hoverHandlerArg = hoverHandler.mock.calls[0][0];
-    expect(hoverHandlerArg.mediaItemDetails).toEqual(link);
-  });
-
-  it('should render retry element for small cards when an error occurs', () => {
-    const onRetryHandler = jest.fn();
-    const linkCard = mountWithIntlContext(
-      <CardView
-        status="error"
-        appearance="small"
-        metadata={link}
-        onRetry={onRetryHandler}
-      />,
-    );
-    const fileCard = mountWithIntlContext(
-      <CardView
-        status="error"
-        appearance="small"
-        metadata={file}
-        onRetry={onRetryHandler}
-      />,
-    );
-
-    expect(linkCard.find(Retry)).toHaveLength(1);
-    expect(fileCard.find(Retry)).toHaveLength(1);
   });
 
   it('should NOT fire onSelectChange when card is NOT selectable', () => {
@@ -235,6 +144,14 @@ describe('CardView', () => {
     expect(card.find('MediaImage').prop('crop')).toBe(true);
   });
 
+  it('should render a non-stretched image by default', () => {
+    const card = mount(
+      <CardView status="complete" dataURI="a" metadata={file} />,
+    );
+
+    expect(card.find('MediaImage').prop('stretch')).toBe(false);
+  });
+
   it('should render not render a cropped image if we specify a different resizeMode', () => {
     const card = mount(
       <CardView
@@ -246,6 +163,19 @@ describe('CardView', () => {
     );
 
     expect(card.find('MediaImage').prop('crop')).toBe(false);
+  });
+
+  it('should render a stretched image if we specify stretchy-fit resizeMode', () => {
+    const card = mount(
+      <CardView
+        status="complete"
+        dataURI="a"
+        metadata={file}
+        resizeMode="stretchy-fit"
+      />,
+    );
+
+    expect(card.find('MediaImage').prop('stretch')).toBe(true);
   });
 
   describe('Dimensions', () => {
@@ -281,11 +211,10 @@ describe('CardView', () => {
       const element = shallowCardViewBaseElement({
         status: 'loading',
         metadata: file,
-        appearance: 'small',
       });
       expect(element.find(Wrapper).props().dimensions).toEqual({
-        width: '100%',
-        height: 42,
+        width: 156,
+        height: 125,
       });
     });
 
@@ -294,7 +223,6 @@ describe('CardView', () => {
         {
           status: 'loading',
           metadata: file,
-          appearance: 'small',
           dimensions: { width: '70%', height: 100 },
         },
         { disableLifecycleMethods: true },
@@ -317,16 +245,6 @@ describe('CardView', () => {
         width: 156,
         height: 125,
       });
-      expect(props.mediaItemType).toEqual('file');
-    });
-
-    it('should not use default dimensions for link cards', () => {
-      const linkCard = shallowCardViewBaseElement({
-        status: 'loading',
-        metadata: link,
-      });
-
-      expect(linkCard.find(Wrapper).props().dimensions).toEqual(undefined);
     });
 
     it('should pass "disableOverlay" prop to <FileCard /> when mediaItemType is "file"', () => {
@@ -344,87 +262,6 @@ describe('CardView', () => {
     });
   });
 
-  it('should fire "clicked" analytics event when loading link card clicked', () => {
-    const clickHandler = jest.fn();
-    const analyticsEventHandler = jest.fn();
-    const card = mount(
-      <AnalyticsListener channel="media" onEvent={analyticsEventHandler}>
-        <CardView status="loading" metadata={link} onClick={clickHandler} />
-      </AnalyticsListener>,
-    );
-
-    card.simulate('click');
-
-    expect(analyticsEventHandler).toHaveBeenCalledTimes(1);
-    const actualEvent: Partial<UIAnalyticsEventInterface> =
-      analyticsEventHandler.mock.calls[0][0];
-    expect(actualEvent.payload).toEqual({ action: 'clicked' });
-    expect(actualEvent.context && actualEvent.context.length).toEqual(1);
-    const actualContext =
-      actualEvent.context &&
-      (actualEvent.context[0] as CardViewAnalyticsContext);
-    expect(actualContext).not.toBeUndefined();
-    if (actualContext) {
-      expect(actualContext.linkAttributes).toEqual({
-        linkDomain: 'example.com',
-      });
-      expect(actualContext.viewAttributes).toEqual({
-        viewPreview: false,
-        viewSize: 'auto',
-        viewActionmenu: false,
-      });
-      expect(actualContext.loadStatus).toEqual('loading_metadata');
-      expect(actualContext.componentName).toEqual('CardView');
-      expect(actualContext.actionSubject).toEqual('MediaCard');
-      expect(actualContext.packageVersion).toEqual(
-        require('../../../package.json').version,
-      );
-      expect(actualContext.type).toEqual('link');
-      expect(actualContext.actionSubjectId).toEqual(
-        'https://example.com/some-path',
-      );
-    }
-  });
-
-  it('should fire "clicked" analytics event when loading link card with preview clicked', () => {
-    const clickHandler = jest.fn();
-    const analyticsEventHandler = jest.fn();
-    const previewResource: Resource = {
-      url: 'http://resource.url',
-    };
-    const metadata: LinkDetails = {
-      ...link,
-      resources: {
-        thumbnail: previewResource,
-        image: previewResource,
-      },
-    };
-    const card = mount(
-      <AnalyticsListener channel="media" onEvent={analyticsEventHandler}>
-        <CardView status="loading" metadata={metadata} onClick={clickHandler} />
-      </AnalyticsListener>,
-    );
-
-    card.simulate('click');
-
-    expect(analyticsEventHandler).toHaveBeenCalledTimes(1);
-    const actualEvent: Partial<UIAnalyticsEventInterface> =
-      analyticsEventHandler.mock.calls[0][0];
-    expect(actualEvent.payload).toEqual({ action: 'clicked' });
-    expect(actualEvent.context && actualEvent.context.length).toEqual(1);
-    const actualContext =
-      actualEvent.context &&
-      (actualEvent.context[0] as CardViewAnalyticsContext);
-    expect(actualContext).not.toBeUndefined();
-    if (actualContext) {
-      expect(actualContext.viewAttributes).toEqual({
-        viewPreview: true,
-        viewSize: 'auto',
-        viewActionmenu: false,
-      });
-    }
-  });
-
   it('should fire "clicked" analytics event when loading file card clicked', () => {
     const clickHandler = jest.fn();
     const analyticsEventHandler = jest.fn();
@@ -436,7 +273,6 @@ describe('CardView', () => {
       <AnalyticsListener channel="media" onEvent={analyticsEventHandler}>
         <CardView
           status="processing"
-          appearance="small"
           actions={[cardAction]}
           metadata={{ ...file }}
           onClick={clickHandler}
@@ -464,7 +300,7 @@ describe('CardView', () => {
       });
       expect(actualContext.viewAttributes).toEqual({
         viewPreview: true,
-        viewSize: 'small',
+        viewSize: 'auto',
         viewActionmenu: true,
       });
       expect(actualContext.loadStatus).toEqual('loading_metadata');
@@ -522,7 +358,7 @@ describe('CardView', () => {
     const analyticsEventHandler = jest.fn();
     const card = mount(
       <AnalyticsListener channel="media" onEvent={analyticsEventHandler}>
-        <CardView status="loading" metadata={link} onClick={clickHandler} />
+        <CardView status="loading" metadata={file} onClick={clickHandler} />
       </AnalyticsListener>,
     );
 
@@ -538,5 +374,14 @@ describe('CardView', () => {
     expect(actualReturnedEvent.hasFired).toEqual(false);
     expect(actualReturnedEvent.payload.action).toEqual('clicked');
     expect(actualReturnedEvent.context).toEqual(actualFiredEvent.context);
+  });
+
+  it('should not use pointer cursor for external images', () => {
+    const card = shallowCardViewBaseElement({
+      dataURI: 'a',
+      mediaItemType: 'external-image',
+    });
+
+    expectToEqual(card.find(Wrapper).props().shouldUsePointerCursor, false);
   });
 });

@@ -1,14 +1,21 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import { waitUntil } from '@atlaskit/util-common-test';
 import Button from '@atlaskit/button';
 
-import { Item, Query } from '../../../types';
+import {
+  Item,
+  Query,
+  TaskDecisionProvider,
+  RenderDocument,
+  ItemResponse,
+} from '../../../types';
 import { getFormattedDate } from '../../../util/date';
 import ResourcedItemList from '../../../components/ResourcedItemList';
 import DecisionItem from '../../../components/DecisionItem';
 import ResourcedTaskItem from '../../../components/ResourcedTaskItem';
 import TaskItem from '../../../components/TaskItem';
+import { asMock } from '../_mock';
 
 import {
   buildDecision,
@@ -27,26 +34,31 @@ const query: Query = {
 const countType = (items: Item[], type: string) =>
   items.filter(item => item.type === type).length;
 
-const decisionItemsRendered = (component, count) =>
+const decisionItemsRendered = (component: ReactWrapper<any>, count: number) =>
   component.update() && component.find(DecisionItem).length === count;
 
 describe('<ResourcedItemList/>', () => {
   const defaultResponse = getItemsResponse();
-  let provider;
-  let renderer;
+  let provider: TaskDecisionProvider;
+  let renderer: jest.Mock<RenderDocument>;
 
   beforeEach(() => {
     provider = {
       getItems: jest.fn(),
       subscribe: jest.fn(),
       unsubscribe: jest.fn(),
+      toggleTask: jest.fn(),
+      getDecisions: jest.fn(),
+      getTasks: jest.fn(),
+      unsubscribeRecentUpdates: jest.fn(),
+      notifyRecentUpdates: jest.fn(),
     };
     (renderer = jest.fn()), renderer.mockImplementation(() => <div />);
   });
 
   describe('ungrouped', () => {
     it('should render both types of items', () => {
-      provider.getItems.mockImplementation(() =>
+      asMock(provider.getItems).mockImplementation(() =>
         Promise.resolve(defaultResponse),
       );
       const component = mount(
@@ -103,8 +115,13 @@ describe('<ResourcedItemList/>', () => {
 
   describe('group by', () => {
     const performDateTest = (testQuery: Query, dateField: string) => {
-      const response = getItemsResponse({ groupByDateSize: 4, dateField });
-      provider.getItems.mockImplementation(() => Promise.resolve(response));
+      const response: ItemResponse = getItemsResponse({
+        groupByDateSize: 4,
+        dateField,
+      });
+      asMock(provider.getItems).mockImplementation(() =>
+        Promise.resolve(response),
+      );
       const component = mount(
         <ResourcedItemList
           initialQuery={testQuery}
@@ -158,7 +175,7 @@ describe('<ResourcedItemList/>', () => {
             .find('div')
             .first()
             .text(),
-        ).toBe(getFormattedDate(response.items[8][dateField]));
+        ).toBe(getFormattedDate((response.items[8] as any)[dateField]));
         expect(dateGroup3.find(ResourcedTaskItem).length).toBe(2);
       });
     };
@@ -216,10 +233,12 @@ describe('<ResourcedItemList/>', () => {
       });
       const recentUpdatesResponse = buildItemResponse([d2, t1update, d1]);
 
-      const renderer = doc => doc.content[0].content[0].text;
+      const renderer = (doc: any) => doc.content[0].content[0].text;
 
-      provider.getItems.mockReturnValueOnce(Promise.resolve(initialResponse));
-      provider.getItems.mockReturnValueOnce(
+      asMock(provider.getItems).mockReturnValueOnce(
+        Promise.resolve(initialResponse),
+      );
+      asMock(provider.getItems).mockReturnValueOnce(
         Promise.resolve(recentUpdatesResponse),
       );
       const component = mount(
@@ -233,7 +252,8 @@ describe('<ResourcedItemList/>', () => {
         .then(() => {
           expect(component.find(DecisionItem).length).toBe(1);
           expect(component.find(ResourcedTaskItem).length).toBe(1);
-          const recentUpdatesListener = provider.getItems.mock.calls[0][1];
+          const recentUpdatesListener = asMock(provider.getItems).mock
+            .calls[0][1];
           expect(recentUpdatesListener).toBeDefined();
           const recentUpdatesCallback = recentUpdatesListener.recentUpdates;
           expect(recentUpdatesCallback).toBeDefined();
@@ -291,10 +311,10 @@ describe('<ResourcedItemList/>', () => {
       });
       const recentUpdatesResponse = buildItemResponse([d2, t1update, d1]);
 
-      const renderer = doc => doc.content[0].content[0].text;
+      const renderer = (doc: any) => doc.content[0].content[0].text;
 
       let currentResponse = initialResponse;
-      provider.getItems.mockImplementation(() => {
+      asMock(provider.getItems).mockImplementation(() => {
         return Promise.resolve(currentResponse);
       });
       const component = mount(
@@ -309,7 +329,8 @@ describe('<ResourcedItemList/>', () => {
           expect(component.find(DecisionItem).length).toBe(1);
           expect(component.find(ResourcedTaskItem).length).toBe(1);
 
-          const recentUpdatesListener = provider.getItems.mock.calls[0][1];
+          const recentUpdatesListener = asMock(provider.getItems).mock
+            .calls[0][1];
           expect(recentUpdatesListener).toBeDefined();
           const recentUpdatesCallback = recentUpdatesListener.recentUpdates;
           expect(recentUpdatesCallback).toBeDefined();
@@ -320,15 +341,19 @@ describe('<ResourcedItemList/>', () => {
           });
 
           // Wait for second call to getItems due to recentUpdate
-          return waitUntil(() => provider.getItems.mock.calls.length > 1);
+          return waitUntil(
+            () => asMock(provider.getItems).mock.calls.length > 1,
+          );
         })
         .then(() => {
           // notifyRecent items on TaskDecisionResource
-          const numGetItemsCalled = provider.getItems.mock.calls.length;
+          const numGetItemsCalled = asMock(provider.getItems).mock.calls.length;
           currentResponse = recentUpdatesResponse;
 
           return waitUntil(
-            () => provider.getItems.mock.calls.length === numGetItemsCalled + 1,
+            () =>
+              asMock(provider.getItems).mock.calls.length ===
+              numGetItemsCalled + 1,
           );
         })
         .then(() => {
@@ -346,7 +371,7 @@ describe('<ResourcedItemList/>', () => {
 
   describe('empty state', () => {
     it('should render empty state component if no results', () => {
-      provider.getItems.mockImplementation(() =>
+      asMock(provider.getItems).mockImplementation(() =>
         Promise.resolve({ items: [] }),
       );
       const emptyComponent = <div className="empty-component" />;
@@ -367,7 +392,7 @@ describe('<ResourcedItemList/>', () => {
     });
 
     it('should render no content in component if no results and no emptyState', () => {
-      provider.getItems.mockImplementation(() =>
+      asMock(provider.getItems).mockImplementation(() =>
         Promise.resolve({ items: [] }),
       );
       const component = mount(
@@ -387,7 +412,9 @@ describe('<ResourcedItemList/>', () => {
 
   describe('error state', () => {
     it('should render error state component on error', () => {
-      provider.getItems.mockImplementation(() => Promise.reject('bad times'));
+      asMock(provider.getItems).mockImplementation(() =>
+        Promise.reject('bad times'),
+      );
       const errorComponent = <div className="error-component" />;
       const component = mount(
         <ResourcedItemList
@@ -406,7 +433,9 @@ describe('<ResourcedItemList/>', () => {
     });
 
     it('should render no content in component if no results and error', () => {
-      provider.getItems.mockImplementation(() => Promise.reject('bad times'));
+      asMock(provider.getItems).mockImplementation(() =>
+        Promise.reject('bad times'),
+      );
       const component = mount(
         <ResourcedItemList
           initialQuery={query}
@@ -424,7 +453,7 @@ describe('<ResourcedItemList/>', () => {
 
   describe('prop changes', () => {
     it('initialQuery should clear items immediately, while waiting for new results', () => {
-      provider.getItems.mockImplementation(() =>
+      asMock(provider.getItems).mockImplementation(() =>
         Promise.resolve(defaultResponse),
       );
       const component = mount(
@@ -434,13 +463,13 @@ describe('<ResourcedItemList/>', () => {
           renderDocument={renderer}
         />,
       );
-      let resolver;
+      let resolver: (response: ItemResponse) => void;
       return waitUntil(() => component.state<Item[]>('items').length > 0)
         .then(() => {
           const getItemsPromise = new Promise(resolve => {
             resolver = resolve;
           });
-          provider.getItems.mockImplementation(() => getItemsPromise);
+          asMock(provider.getItems).mockImplementation(() => getItemsPromise);
           component.setProps({
             initialQuery: { ...query },
           });
@@ -462,7 +491,7 @@ describe('<ResourcedItemList/>', () => {
   describe('participants', () => {
     const participantResponse = getItemsResponseWithParticipants();
     it('participants propogate to items', () => {
-      provider.getItems.mockImplementation(() =>
+      asMock(provider.getItems).mockImplementation(() =>
         Promise.resolve(participantResponse),
       );
       const component = mount(
@@ -496,7 +525,7 @@ describe('<ResourcedItemList/>', () => {
   describe('attribution', () => {
     const attributionResponse = getItemsResponseWithParticipants();
     it('creator propogate to items', () => {
-      provider.getItems.mockImplementation(() =>
+      asMock(provider.getItems).mockImplementation(() =>
         Promise.resolve(attributionResponse),
       );
       const component = mount(
@@ -527,7 +556,7 @@ describe('<ResourcedItemList/>', () => {
     });
 
     it('lastUpdater propogate to items', () => {
-      provider.getItems.mockImplementation(() =>
+      asMock(provider.getItems).mockImplementation(() =>
         Promise.resolve(attributionResponse),
       );
       const component = mount(

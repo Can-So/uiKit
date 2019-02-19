@@ -1,3 +1,5 @@
+import { toNativeBridge } from './editor/web-to-native';
+
 /**
  * Send an event to which ever bridge it can find.
  * @param bridgeName
@@ -29,5 +31,17 @@ export const sendToBridge = (bridgeName, eventName, props = {}) => {
     if (bridge && bridge.hasOwnProperty(eventName)) {
       bridge[eventName as any](...args);
     }
+  }
+
+  const logs = (window as any).logBridge;
+  if (logs) {
+    const logName = `${bridgeName}:${eventName}`;
+    logs[logName] = logs[logName] || [];
+    logs[logName] = logs[logName].concat(props);
+  }
+
+  const log = (toNativeBridge as any).log;
+  if (log) {
+    log(bridgeName, eventName, props);
   }
 };

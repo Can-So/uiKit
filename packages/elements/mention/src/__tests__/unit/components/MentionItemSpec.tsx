@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
-
-import { MentionDescription } from '../../../types';
-import { Props, State } from '../../../components/MentionList';
+import { ReactWrapper } from 'enzyme';
+import * as React from 'react';
 import MentionItem from '../../../components/MentionItem';
+import { Props, State } from '../../../components/MentionList';
+import { MentionDescription } from '../../../types';
 
 const mentionWithNickname = {
   id: '0',
@@ -24,10 +24,10 @@ const mentionWithoutNickname = {
 function setupMentionItem(
   mention: MentionDescription,
   props?: Props,
-): ShallowWrapper<Props, State> {
-  return shallow(
+): ReactWrapper<Props, State> {
+  return mountWithIntl(
     <MentionItem mention={mention} onSelection={props && props.onSelection} />,
-  ) as ShallowWrapper<Props, State>;
+  );
 }
 
 describe('MentionItem', () => {

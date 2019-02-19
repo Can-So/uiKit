@@ -1,4 +1,135 @@
-# @atlaskit/media-image
+# @atlaskit/media-card
+
+## 53.0.0
+- [major] [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+
+  - remove Link support from media-card
+
+## 52.0.7
+- [patch] [ab6ba14cd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6ba14cd3):
+
+  - Fix a bug where droping image with EXIF orientation >= 5 end up screwing up proportions for some of the cases
+
+## 52.0.6
+- [patch] [05c5bf7a93](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05c5bf7a93):
+
+  - Dont user pointer cursor for external images in Cards
+
+## 52.0.5
+- [patch] [c415876da9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c415876da9):
+
+  - add selected state to InlinePlayer in media-card
+
+## 52.0.4
+- Updated dependencies [d5bce1ea15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5bce1ea15):
+  - @atlaskit/media-test-helpers@20.1.2
+  - @atlaskit/media-ui@9.0.0
+
+## 52.0.3
+- [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
+
+  - MS-357 replaced @atlaskit/util-shared-styles from media components by @atlaskit/theme
+
+## 52.0.2
+- [patch] [0e164e542a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e164e542a):
+
+  - MS-1465: Dont fetch file preview if we already have a local one
+
+## 52.0.1
+- [patch] [1d3e336534](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d3e336534):
+
+  - Show progress bar while file is uploading
+
+## 52.0.0
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/media-test-helpers@20.1.0
+  - @atlaskit/media-store@9.1.5
+  - @atlaskit/media-core@27.0.0
+
+## 51.0.3
+- [patch] [a3f8e527aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3f8e527aa):
+
+  - Take into account if image is on it's side according to orientation tag when deciding how to crop/fit and image
+
+## 51.0.2
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/media-core@26.2.1
+  - @atlaskit/media-store@9.1.4
+  - @atlaskit/media-ui@8.2.6
+  - @atlaskit/media-test-helpers@20.0.0
+
+## 51.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/field-radio-group@4.0.15
+  - @atlaskit/toggle@5.0.15
+  - @atlaskit/media-test-helpers@19.1.1
+  - @atlaskit/media-ui@8.2.5
+  - @atlaskit/field-range@5.0.14
+  - @atlaskit/icon@16.0.0
+
+## 51.0.0
+- [patch] [b1627a5837](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1627a5837):
+
+  - Enable inline video player in Editor and Renderer
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/media-store@9.1.3
+  - @atlaskit/media-test-helpers@19.1.0
+  - @atlaskit/media-core@26.2.0
+
+## 50.0.0
+- [patch] [5b1e270](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b1e270):
+
+  - Minor bug fixes
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/media-test-helpers@19.0.0
+  - @atlaskit/media-core@26.1.0
+  - @atlaskit/media-ui@8.2.4
+
+## 49.0.0
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/media-test-helpers@18.9.1
+  - @atlaskit/media-core@26.0.0
+
+## 48.0.0
+- [minor] [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+
+  - Remove deprecated methods from media-core
+  - Use context.collection methods in MediaViewer
+  - Remove link support from media-card
+  - Remove legacy services + providers from media-core
+  - Remove link related methods from media-core
+  - Remove axios dependency
+  - Make context.getImage cancelable
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/media-core@25.0.0
+  - @atlaskit/media-test-helpers@18.9.0
+
+## 47.0.0
+- [major] [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+
+  - remove "small" appearance from media-card
+
+## 46.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 46.0.0
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-core@24.7.0
+
+## 45.0.0
+- [minor] [b5ab1a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5ab1a5):
+
+  - Add stretch as a prop for CardContent and MediaImage; Convert new stretchy-fit resizeMode to stretch=true;
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/media-test-helpers@18.6.2
+  - @atlaskit/media-core@24.6.0
 
 ## 44.2.0
 - [minor] [34369e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34369e4):

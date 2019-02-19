@@ -21,3 +21,5 @@ export const createStatusAnalyticsAndFire = (
     createAnalyticsEvent(statusPayload).fire(FABRIC_CHANNEL);
   }
 };
+
+export const analyticsState = isNew => (isNew ? 'new' : 'update');

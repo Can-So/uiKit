@@ -1,5 +1,22 @@
 # @atlaskit/icon
 
+## 16.0.2
+- Updated dependencies [a2653f4453](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2653f4453):
+  - @atlaskit/icon-priority@2.0.0
+
+## 16.0.1
+- [patch] [6b5daa8080](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6b5daa8080):
+
+  - Added the new Status icon
+
+## 16.0.0
+- [major] [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+
+  - Moved the priority icons to its own package.
+  - Check the [Upgrade Guide](https://atlaskit.atlassian.com/packages/core/icon/docs/upgrade-guide) for more information.
+- Updated dependencies [d0333acfba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d0333acfba):
+  - @atlaskit/icon-priority@1.0.0
+
 ## 15.0.3
 - [patch] [1d1f6d1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d1f6d1):
 
@@ -36,7 +53,7 @@
 ## 15.0.0
 - [major] [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
 
-  - Remove onClick props as icon is only a presentational placeholder. Please wrap icon into a Button or a Link component.
+  - Removed onClick prop as icon is only a presentational placeholder. Please wrap your icon in a Button or a Link component and add onClick to that instead.
 
 ## 14.6.1
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
@@ -114,6 +131,18 @@ d):
 
 ## 14.0.0
 - [major] Remove product logo icons from icons, recommend using @atlaskit/logo instead [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - The following logo exports have been removed:
+    - AtlassianIcon
+    - BitbucketIcon
+    - ConfluenceIcon
+    - HipchatIcon
+    - JiraCoreIcon
+    - JiraServiceDeskIcon
+    - JiraSoftwareIcon
+    - JiraIcon
+    - StatuspageIcon
+    - StrideIcon
+  - Check the [Upgrade Guide](https://atlaskit.atlassian.com/packages/core/icon/docs/upgrade-guide) for more information.
 - [patch] Updated dependencies [709b239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/709b239)
   - @atlaskit/icon-file-type@1.0.0
   - @atlaskit/icon-object@1.0.0

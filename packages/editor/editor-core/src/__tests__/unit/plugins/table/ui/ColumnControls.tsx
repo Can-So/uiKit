@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {
-  selectTable,
-  getCellsInColumn,
-  getSelectionRect,
-} from 'prosemirror-utils';
-import { Node } from 'prosemirror-model';
-import { CellSelection } from 'prosemirror-tables';
+import { selectTable, getSelectionRect } from 'prosemirror-utils';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   tdEmpty,
@@ -17,6 +11,7 @@ import {
   td,
   thEmpty,
   mountWithIntl,
+  selectColumns,
 } from '@atlaskit/editor-test-helpers';
 
 import { pluginKey } from '../../../../../plugins/table/pm-plugins/main';
@@ -31,26 +26,13 @@ import { setTextSelection } from '../../../../../index';
 const ColumnControlsButtonWrap = `.${ClassName.COLUMN_CONTROLS_BUTTON_WRAP}`;
 const DeleteColumnButton = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP}`;
 const InsertColumnButton = `.${ClassName.CONTROLS_INSERT_BUTTON_WRAP}`;
-
-const selectColumns = columnIdxs => tr => {
-  const cells: { pos: number; start: number; node: Node }[] = columnIdxs.reduce(
-    (acc, colIdx) => {
-      const colCells = getCellsInColumn(colIdx)(tr.selection);
-      return colCells ? acc.concat(colCells) : acc;
-    },
-    [],
-  );
-
-  if (cells) {
-    const $anchor = tr.doc.resolve(cells[0].pos);
-    const $head = tr.doc.resolve(cells[cells.length - 1].pos);
-    return tr.setSelection(new CellSelection($anchor, $head));
-  }
-};
+const InsertColumnButtonInner = `.${ClassName.CONTROLS_INSERT_BUTTON_INNER}`;
 
 describe('ColumnControls', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       pluginKey,
@@ -75,7 +57,6 @@ describe('ColumnControls', () => {
           column,
         );
         floatingControls.unmount();
-        editorView.destroy();
       });
     });
   });
@@ -251,7 +232,7 @@ describe('ColumnControls', () => {
     floatingControls.unmount();
   });
 
-  describe('hides an add button when delete button overlaps it', () => {
+  describe('hides add button when delete button overlaps it', () => {
     it('hides one when two columns are selected', () => {
       const { editorView } = editor(
         doc(
@@ -268,7 +249,7 @@ describe('ColumnControls', () => {
 
       expect(floatingControls.find(InsertColumnButton).length).toBe(3);
 
-      editorView.dispatch(selectColumns([0, 1])(editorView.state.tr));
+      selectColumns([0, 1])(editorView.state, editorView.dispatch);
 
       // set numberOfColumns prop to trick shouldComponentUpdate and force re-render
       floatingControls.setProps({ numberOfColumns: 3 });
@@ -302,12 +283,63 @@ describe('ColumnControls', () => {
         />,
       );
 
-      editorView.dispatch(selectColumns([0, 1])(editorView.state.tr));
+      selectColumns([0, 1])(editorView.state, editorView.dispatch);
 
       // set numberOfColumns prop to trick shouldComponentUpdate and force re-render
       floatingControls.setProps({ numberOfColumns: 3 });
 
       expect(floatingControls.find(DeleteColumnButton).length).toBe(1);
+
+      floatingControls.unmount();
+    });
+  });
+
+  describe('hides add button when isResizing prop is truthy', () => {
+    it('unaffected add button when isRsizing is falsy', () => {
+      const { editorView } = editor(
+        doc(
+          table()(
+            tr(thEmpty, thEmpty, thEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+          ),
+        ),
+      );
+
+      const floatingControls = mountWithIntl(
+        <ColumnControls
+          tableRef={document.querySelector('table')!}
+          editorView={editorView}
+          insertColumnButtonIndex={1}
+        />,
+      );
+
+      expect(floatingControls.find(InsertColumnButtonInner).length).toBe(1);
+
+      floatingControls.unmount();
+    });
+
+    it('hides add button when isRsizing is truthy', () => {
+      const { editorView } = editor(
+        doc(
+          table()(
+            tr(thEmpty, thEmpty, thEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+          ),
+        ),
+      );
+
+      const floatingControls = mountWithIntl(
+        <ColumnControls
+          tableRef={document.querySelector('table')!}
+          editorView={editorView}
+          insertColumnButtonIndex={1}
+          isResizing={true}
+        />,
+      );
+
+      expect(floatingControls.find(InsertColumnButtonInner).length).toBe(0);
 
       floatingControls.unmount();
     });
@@ -332,7 +364,7 @@ describe('ColumnControls', () => {
         ),
       );
 
-      editorView.dispatch(selectColumns([0])(editorView.state.tr));
+      selectColumns([0])(editorView.state, editorView.dispatch);
       const target = document.querySelectorAll(
         `.${ClassName.COLUMN_CONTROLS} .${ClassName.CONTROLS_BUTTON}`,
       )[2];
@@ -353,7 +385,7 @@ describe('ColumnControls', () => {
         ),
       );
 
-      editorView.dispatch(selectColumns([2])(editorView.state.tr));
+      selectColumns([2])(editorView.state, editorView.dispatch);
       const target = document.querySelectorAll(
         `.${ClassName.COLUMN_CONTROLS} .${ClassName.CONTROLS_BUTTON}`,
       )[0];

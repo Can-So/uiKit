@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { PropertyViewer } from './PropertyViewer';
 
 export type Event = {
-  channel: string;
+  channel?: string;
   event: UIAnalyticsEventInterface;
 };
 
@@ -24,7 +24,7 @@ export class EventViewer extends React.PureComponent<
   Event,
   { showMore: boolean }
 > {
-  constructor(props) {
+  constructor(props: Event) {
     super(props);
     this.state = {
       showMore: false,

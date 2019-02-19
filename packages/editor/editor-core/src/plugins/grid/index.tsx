@@ -4,9 +4,9 @@ import { withTheme } from 'styled-components';
 
 import { PluginKey } from 'prosemirror-state';
 import { EditorPlugin, EditorAppearance } from '../../types';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
   akEditorFullPageMaxWidth,
-  MediaSingleLayout,
   akEditorBreakoutPadding,
   breakoutWideScaleRatio,
 } from '@atlaskit/editor-common';
@@ -138,7 +138,7 @@ const lineLengthGridLines = highlights => {
 type Props = {
   theme: any;
   appearance: EditorAppearance;
-  containerElement?: HTMLElement;
+  containerElement: HTMLElement;
   editorWidth: number;
 
   visible: boolean;
@@ -173,9 +173,7 @@ class Grid extends React.Component<Props> {
             !visible ? 'hidden' : '',
           )}
           style={{
-            height: containerElement
-              ? `${containerElement.scrollHeight}px`
-              : undefined,
+            height: `${containerElement.scrollHeight}px`,
           }}
         >
           {gridLines}
@@ -188,7 +186,7 @@ class Grid extends React.Component<Props> {
 const ThemedGrid = withTheme(Grid);
 
 const gridPlugin: EditorPlugin = {
-  contentComponent: ({ editorView, appearance, containerElement }) => {
+  contentComponent: ({ editorView, appearance }) => {
     return (
       <WithPluginState
         plugins={{
@@ -210,7 +208,7 @@ const gridPlugin: EditorPlugin = {
             <ThemedGrid
               appearance={appearance}
               editorWidth={widthState.width}
-              containerElement={containerElement}
+              containerElement={editorView.dom as HTMLElement}
               {...grid}
             />
           );

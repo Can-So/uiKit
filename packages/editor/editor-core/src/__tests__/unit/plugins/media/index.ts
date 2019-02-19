@@ -6,11 +6,14 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import {
   doc,
   h1,
-  createEditor,
+  createEditorFactory,
   mediaGroup,
   mediaSingle,
   media,
   p,
+  ol,
+  ul,
+  li,
   hr,
   table,
   tr,
@@ -22,6 +25,7 @@ import {
   randomId,
   sleep,
   insertText,
+  sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -32,11 +36,14 @@ import {
 import { setNodeSelection, setTextSelection } from '../../../../utils';
 import { AnalyticsHandler, analyticsService } from '../../../../analytics';
 import mediaPlugin from '../../../../plugins/media';
+import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
-import pickerFacadeLoader from '../../../../plugins/media/picker-facade-loader';
+import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { temporaryMedia, temporaryMediaGroup } from './_utils';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -48,23 +55,38 @@ const getFreshMediaProvider = () =>
     includeUserAuthProvider: true,
   });
 
+const pdfFile = {
+  id: `${randomId()}`,
+  fileName: 'lala.pdf',
+  fileSize: 200,
+  fileMimeType: 'pdf',
+  dimensions: { width: 200, height: 200 },
+  fileId: Promise.resolve('pdf'),
+};
+
 /**
  * Currently skipping these three failing tests
  * TODO: JEST-23 Fix these tests
  */
 describe('Media plugin', () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
+
   const mediaProvider = getFreshMediaProvider();
   const temporaryFileId = `temporary:${randomId()}`;
   const providerFactory = ProviderFactory.create({ mediaProvider });
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
   const editor = (
     doc: any,
     editorProps = {},
     dropzoneContainer: HTMLElement = document.body,
-  ) =>
-    createEditor<MediaPluginState>({
+    extraPlugins: any[] = [],
+  ) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    return createEditor({
       doc,
       editorPlugins: [
+        listPlugin,
         mediaPlugin({
           provider: mediaProvider,
           allowMediaSingle: true,
@@ -73,11 +95,17 @@ describe('Media plugin', () => {
         codeBlockPlugin(),
         rulePlugin,
         tablePlugin(),
+        ...extraPlugins,
       ],
-      editorProps: editorProps,
+      editorProps: {
+        ...editorProps,
+        allowAnalyticsGASV3: true,
+      },
       providerFactory,
       pluginKey: mediaPluginKey,
+      createAnalyticsEvent,
     });
+  };
 
   const getNodePos = (
     pluginState: MediaPluginState,
@@ -96,11 +124,13 @@ describe('Media plugin', () => {
     return mediaNodeWithPos!.getPos();
   };
 
-  const waitForMediaPickerReady = async (pluginState: MediaPluginState) =>
-    Promise.all([
-      new Promise(resolve => pluginState.subscribe(resolve)),
-      pickerFacadeLoader(),
-    ]);
+  const waitForAllPickersInitialised = async (
+    pluginState: MediaPluginState,
+  ) => {
+    while (pluginState.pickers.length < 4) {
+      await new Promise(resolve => resolve());
+    }
+  };
 
   afterAll(() => {
     providerFactory.destroy();
@@ -108,16 +138,11 @@ describe('Media plugin', () => {
 
   it('should invoke binary picker when calling insertFileFromDataUrl', async () => {
     const { pluginState } = editor(doc(p('{<>}')));
-    const collectionFromProvider = jest.spyOn(
-      pluginState,
-      'collectionFromProvider' as any,
-    );
-    collectionFromProvider.mockImplementation(() => testCollectionName);
-    await waitForMediaPickerReady(pluginState);
     const provider = await mediaProvider;
     await provider.uploadContext;
 
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
+
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     pluginState.binaryPicker!.upload = jest.fn();
@@ -128,7 +153,6 @@ describe('Media plugin', () => {
     );
 
     expect(pluginState.binaryPicker!.upload as any).toHaveBeenCalledTimes(1);
-    collectionFromProvider.mockRestore();
     pluginState.destroy();
   });
 
@@ -137,7 +161,7 @@ describe('Media plugin', () => {
       const { editorView, pluginState } = editor(doc(p('')), {
         appearance: 'message',
       });
-      await waitForMediaPickerReady(pluginState);
+      await mediaProvider;
 
       pluginState.insertFiles([
         {
@@ -180,7 +204,7 @@ describe('Media plugin', () => {
     describe('when all of the files are images', () => {
       it('inserts single medias', async () => {
         const { editorView, pluginState } = editor(doc(p('')));
-        await waitForMediaPickerReady(pluginState);
+        await mediaProvider;
 
         const foo = [
           {
@@ -313,6 +337,7 @@ describe('Media plugin', () => {
                         __fileMimeType: 'image/png',
                       })(),
                     ),
+                    p(),
                   ),
                   tdEmpty,
                   tdEmpty,
@@ -353,6 +378,7 @@ describe('Media plugin', () => {
                         __fileMimeType: 'image/png',
                       })(),
                     ),
+                    p(),
                   ),
                   tdEmpty,
                   tdEmpty,
@@ -367,7 +393,7 @@ describe('Media plugin', () => {
     describe('when it is a mix of pdf and image', () => {
       it('inserts pdf as a media group and images as single', async () => {
         const { editorView, pluginState } = editor(doc(p('')));
-        await waitForMediaPickerReady(pluginState);
+        await mediaProvider;
         const id1 = `${randomId()}`;
         const id2 = `${randomId()}`;
         const lala = [
@@ -443,7 +469,7 @@ describe('Media plugin', () => {
     describe('when all media are non-images', () => {
       it('should insert as media group', async () => {
         const { editorView, pluginState } = editor(doc(p('')));
-        await waitForMediaPickerReady(pluginState);
+        await mediaProvider;
 
         pluginState.insertFiles([
           { id: 'foo', fileMimeType: 'pdf', fileId: Promise.resolve('id1') },
@@ -536,7 +562,7 @@ describe('Media plugin', () => {
         p(),
       ),
     );
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -599,7 +625,7 @@ describe('Media plugin', () => {
 
     expect(editorView.state.doc).toEqualDocument(doc(p(), p()));
     collectionFromProvider.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -607,15 +633,10 @@ describe('Media plugin', () => {
     const { pluginState } = editor(doc(h1('text{<>}')));
     expect(pluginState.pickers.length).toBe(0);
 
-    const mediaProvider1 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider1);
-    const mediaProvider2 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider2);
+    await getFreshMediaProvider();
+    await getFreshMediaProvider();
 
-    const resolvedMediaProvider1 = await mediaProvider1;
-    const resolvedMediaProvider2 = await mediaProvider2;
-    await resolvedMediaProvider1.uploadContext;
-    await resolvedMediaProvider2.uploadContext;
+    await waitForAllPickersInitialised(pluginState);
 
     expect(pluginState.pickers.length).toBe(4);
   });
@@ -624,17 +645,17 @@ describe('Media plugin', () => {
     const { pluginState } = editor(doc(h1('text{<>}')));
     expect(pluginState.pickers.length).toBe(0);
 
-    const mediaProvider1 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider1);
-    const resolvedMediaProvider1 = await mediaProvider1;
-    await resolvedMediaProvider1.uploadContext;
+    await getFreshMediaProvider();
+
+    await waitForAllPickersInitialised(pluginState);
+
     const pickersAfterMediaProvider1 = pluginState.pickers;
     expect(pickersAfterMediaProvider1.length).toBe(4);
 
-    const mediaProvider2 = getFreshMediaProvider();
-    await pluginState.setMediaProvider(mediaProvider2);
-    const resolvedMediaProvider2 = await mediaProvider2;
-    await resolvedMediaProvider2.uploadContext;
+    await getFreshMediaProvider();
+
+    await waitForAllPickersInitialised(pluginState);
+
     const pickersAfterMediaProvider2 = pluginState.pickers;
 
     expect(pickersAfterMediaProvider1).toHaveLength(
@@ -682,7 +703,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -725,7 +746,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -763,7 +784,7 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -799,7 +820,8 @@ describe('Media plugin', () => {
     const provider = await mediaProvider;
     await provider.uploadContext;
     await provider.viewContext;
-    await waitForMediaPickerReady(pluginState);
+    await waitForAllPickersInitialised(pluginState);
+
     expect(typeof pluginState.binaryPicker!).toBe('object');
 
     const testFileData = {
@@ -862,117 +884,87 @@ describe('Media plugin', () => {
           ),
         ),
       );
-      editorView.destroy();
+
       pluginState.destroy();
     });
   });
 
-  describe('removeSelectedMediaNode', () => {
-    describe('when selection is a media node', () => {
+  describe('removeSelectedMediaContainer', () => {
+    describe('when selection is a mediaSingle node', () => {
       it('removes node', () => {
-        const deletingMediaNode = media({
-          id: 'media',
-          type: 'file',
-          collection: testCollectionName,
-        });
         const { editorView, pluginState } = editor(
-          doc(mediaGroup(deletingMediaNode())),
+          doc(mediaSingle()(temporaryMedia)),
         );
-        setNodeSelection(editorView, 1);
+        setNodeSelection(editorView, 0);
 
-        pluginState.removeSelectedMediaNode();
+        pluginState.removeSelectedMediaContainer();
 
         expect(editorView.state.doc).toEqualDocument(doc(p()));
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
       it('returns true', () => {
-        const deletingMediaNode = media({
-          id: 'media',
-          type: 'file',
-          collection: testCollectionName,
-        });
         const { editorView, pluginState } = editor(
-          doc(mediaGroup(deletingMediaNode())),
+          doc(mediaSingle()(temporaryMedia)),
         );
-        setNodeSelection(editorView, 1);
+        setNodeSelection(editorView, 0);
 
-        expect(pluginState.removeSelectedMediaNode()).toBe(true);
-        editorView.destroy();
+        expect(pluginState.removeSelectedMediaContainer()).toBe(true);
+
         pluginState.destroy();
       });
     });
 
     describe('when selection is a non media node', () => {
       it('does not remove media node', () => {
-        const deletingMediaNode = media({
-          id: 'media',
-          type: 'file',
-          collection: testCollectionName,
-        });
         const { editorView, pluginState } = editor(
-          doc(hr(), mediaGroup(deletingMediaNode())),
+          doc(hr(), mediaGroup(temporaryMedia)),
         );
-        setNodeSelection(editorView, 1);
+        setNodeSelection(editorView, 0);
 
-        pluginState.removeSelectedMediaNode();
+        pluginState.removeSelectedMediaContainer();
 
         expect(editorView.state.doc).toEqualDocument(
-          doc(hr(), mediaGroup(deletingMediaNode())),
+          doc(hr(), mediaGroup(temporaryMedia)),
         );
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
       it('returns false', () => {
-        const deletingMediaNode = media({
-          id: 'media',
-          type: 'file',
-          collection: testCollectionName,
-        });
         const { editorView, pluginState } = editor(
-          doc(hr(), mediaGroup(deletingMediaNode())),
+          doc(hr(), mediaGroup(temporaryMedia)),
         );
-        setNodeSelection(editorView, 1);
+        setNodeSelection(editorView, 0);
 
-        expect(pluginState.removeSelectedMediaNode()).toBe(false);
-        editorView.destroy();
+        expect(pluginState.removeSelectedMediaContainer()).toBe(false);
+
         pluginState.destroy();
       });
     });
 
     describe('when selection is text', () => {
       it('does not remove media node', () => {
-        const deletingMediaNode = media({
-          id: 'media',
-          type: 'file',
-          collection: testCollectionName,
-        });
         const { editorView, pluginState } = editor(
-          doc(p('hello{<>}'), mediaGroup(deletingMediaNode())),
+          doc(p('hello{<>}'), mediaGroup(temporaryMedia)),
         );
 
-        pluginState.removeSelectedMediaNode();
+        pluginState.removeSelectedMediaContainer();
 
         expect(editorView.state.doc).toEqualDocument(
-          doc(p('hello'), mediaGroup(deletingMediaNode())),
+          doc(p('hello'), mediaGroup(temporaryMedia)),
         );
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
       it('returns false', () => {
-        const deletingMediaNode = media({
-          id: 'media',
-          type: 'file',
-          collection: testCollectionName,
-        });
         const { pluginState } = editor(
-          doc(p('hello{<>}'), mediaGroup(deletingMediaNode())),
+          doc(p('hello{<>}'), mediaGroup(temporaryMedia)),
         );
 
-        expect(pluginState.removeSelectedMediaNode()).toBe(false);
+        expect(pluginState.removeSelectedMediaContainer()).toBe(false);
         pluginState.destroy();
       });
     });
@@ -980,7 +972,7 @@ describe('Media plugin', () => {
 
   it('should focus the editor after files are added to the document', async () => {
     const { editorView, pluginState } = editor(doc(p('')));
-    await waitForMediaPickerReady(pluginState);
+    await mediaProvider;
 
     const spy = jest.spyOn(editorView, 'focus');
 
@@ -1008,7 +1000,7 @@ describe('Media plugin', () => {
       ),
     );
     spy.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -1048,7 +1040,7 @@ describe('Media plugin', () => {
       ),
     );
     collectionFromProvider.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -1087,7 +1079,7 @@ describe('Media plugin', () => {
           p(),
         ),
       );
-      editorView.destroy();
+
       pluginState.destroy();
     });
 
@@ -1126,82 +1118,8 @@ describe('Media plugin', () => {
             ),
           ),
         );
-        editorView.destroy();
+
         pluginState.destroy();
-      });
-    });
-  });
-
-  describe('align', () => {
-    describe('when there is only one image in the media group', () => {
-      describe('when selection is a media node', () => {
-        it('changes media group to mediaSingle with layout', () => {
-          const { editorView, pluginState } = editor(
-            doc(
-              mediaGroup(
-                media({
-                  id: 'media',
-                  type: 'file',
-                  collection: testCollectionName,
-                })(),
-              ),
-              p('hello'),
-            ),
-          );
-
-          setNodeSelection(editorView, 1);
-
-          pluginState.align('wrap-left');
-
-          expect(editorView.state.doc).toEqualDocument(
-            doc(
-              mediaSingle({ layout: 'wrap-left' })(
-                media({
-                  id: 'media',
-                  type: 'file',
-                  collection: testCollectionName,
-                })(),
-              ),
-              p('hello'),
-            ),
-          );
-          editorView.destroy();
-          pluginState.destroy();
-        });
-      });
-
-      describe('when selection is not a media node', () => {
-        it('does nothing', () => {
-          const { editorView, pluginState } = editor(
-            doc(
-              mediaGroup(
-                media({
-                  id: 'media',
-                  type: 'file',
-                  collection: testCollectionName,
-                })(),
-              ),
-              p('hel{<>}lo'),
-            ),
-          );
-
-          pluginState.align('wide');
-
-          expect(editorView.state.doc).toEqualDocument(
-            doc(
-              mediaGroup(
-                media({
-                  id: 'media',
-                  type: 'file',
-                  collection: testCollectionName,
-                })(),
-              ),
-              p('hello'),
-            ),
-          );
-          editorView.destroy();
-          pluginState.destroy();
-        });
       });
     });
   });
@@ -1292,7 +1210,7 @@ describe('Media plugin', () => {
   });
 
   describe('element', () => {
-    describe('when cursor is on a media node of a single image', () => {
+    describe('when mediaSingle node is selected', () => {
       it('returns dom', () => {
         const { editorView, pluginState } = editor(
           doc(
@@ -1307,7 +1225,7 @@ describe('Media plugin', () => {
             ),
           ),
         );
-        setNodeSelection(editorView, 1);
+        setNodeSelection(editorView, 0);
 
         expect(pluginState.element).not.toBeUndefined();
         expect(pluginState.element!.className).toBe('wrapper');
@@ -1316,17 +1234,7 @@ describe('Media plugin', () => {
 
     describe('when cursor is on one of the media nodes inside media group', () => {
       it('returns dom', () => {
-        const { editorView, pluginState } = editor(
-          doc(
-            mediaGroup(
-              media({
-                id: 'media',
-                type: 'file',
-                collection: testCollectionName,
-              })(),
-            ),
-          ),
-        );
+        const { editorView, pluginState } = editor(doc(temporaryMediaGroup));
         setNodeSelection(editorView, 1);
 
         expect(pluginState.element).toBeUndefined();
@@ -1336,23 +1244,14 @@ describe('Media plugin', () => {
     describe('when cursor is not on a media node', () => {
       it('returns undefined', () => {
         const { pluginState } = editor(
-          doc(
-            mediaSingle({ layout: 'wrap-left' })(
-              media({
-                id: 'media',
-                type: 'file',
-                collection: testCollectionName,
-              })(),
-            ),
-            p('{<>}'),
-          ),
+          doc(mediaSingle({ layout: 'wrap-left' })(temporaryMedia), p('{<>}')),
         );
 
         expect(pluginState.element).toBeUndefined();
       });
     });
 
-    describe('when cursor move from a media node to another media node', () => {
+    describe('when cursor move from a mediaSingle node to another mediaSingle node', () => {
       let pluginState;
       let editorView;
 
@@ -1383,41 +1282,23 @@ describe('Media plugin', () => {
         pluginState = createdEditor.pluginState;
         editorView = createdEditor.editorView;
 
-        setNodeSelection(editorView, 1);
+        setNodeSelection(editorView, 0);
       });
 
       it('returns dom', () => {
-        setNodeSelection(editorView, 4);
+        setNodeSelection(editorView, 3);
 
         expect(pluginState.element).not.toBeUndefined();
       });
-
-      it('notified subscriber', () => {
-        const subscriber = jest.fn();
-        pluginState.subscribe(subscriber);
-
-        setNodeSelection(editorView, 4);
-
-        expect(subscriber).toHaveBeenCalledTimes(2);
-      });
     });
 
-    describe('when cursor move to a media node', () => {
+    describe('when cursor move to a mediaSingle node', () => {
       let pluginState;
       let editorView;
 
       beforeEach(() => {
         const createdEditor = editor(
-          doc(
-            mediaSingle({ layout: 'wrap-left' })(
-              media({
-                id: 'media',
-                type: 'file',
-                collection: testCollectionName,
-              })(),
-            ),
-            p('{<>}'),
-          ),
+          doc(mediaSingle({ layout: 'wrap-left' })(temporaryMedia), p('{<>}')),
         );
 
         pluginState = createdEditor.pluginState;
@@ -1425,22 +1306,13 @@ describe('Media plugin', () => {
       });
 
       it('returns dom', () => {
-        setNodeSelection(editorView, 1);
+        setNodeSelection(editorView, 0);
 
         expect(pluginState.element).not.toBeUndefined();
       });
-
-      it('notified subscriber', () => {
-        const subscriber = jest.fn();
-        pluginState.subscribe(subscriber);
-
-        setNodeSelection(editorView, 1);
-
-        expect(subscriber).toHaveBeenCalledTimes(2);
-      });
     });
 
-    describe('when cursor move away from a media node', () => {
+    describe('when cursor move away from a mediaSingle node', () => {
       let pluginState;
       let editorView;
       let refs;
@@ -1448,13 +1320,7 @@ describe('Media plugin', () => {
       beforeEach(() => {
         const createdEditor = editor(
           doc(
-            mediaSingle({ layout: 'wrap-left' })(
-              media({
-                id: 'media',
-                type: 'file',
-                collection: testCollectionName,
-              })(),
-            ),
+            mediaSingle({ layout: 'wrap-left' })(temporaryMedia),
             p('{nextPos}'),
           ),
         );
@@ -1463,7 +1329,7 @@ describe('Media plugin', () => {
         editorView = createdEditor.editorView;
         refs = createdEditor.refs;
 
-        setNodeSelection(editorView, 1);
+        setNodeSelection(editorView, 0);
       });
 
       it('returns undefined', () => {
@@ -1473,82 +1339,129 @@ describe('Media plugin', () => {
 
         expect(pluginState.element).toBeUndefined();
       });
-
-      it('notified subscriber', () => {
-        const subscriber = jest.fn();
-        pluginState.subscribe(subscriber);
-        const { nextPos } = refs;
-
-        setTextSelection(editorView, nextPos);
-
-        expect(subscriber).toHaveBeenCalledTimes(2);
-      });
-    });
-
-    describe('when element has not been changed', () => {
-      it('does not notified subscriber', () => {
-        const { pluginState, editorView, refs } = editor(
-          doc(
-            mediaSingle({ layout: 'wrap-left' })(
-              media({
-                id: 'media',
-                type: 'file',
-                collection: testCollectionName,
-              })(),
-            ),
-            p('{<>}hello{nextPos}'),
-          ),
-        );
-
-        const subscriber = jest.fn();
-        pluginState.subscribe(subscriber);
-        const { nextPos } = refs;
-
-        setTextSelection(editorView, nextPos);
-
-        expect(subscriber).toHaveBeenCalledTimes(1);
-      });
     });
   });
 
-  describe('updateLayout', () => {
-    it('updates the plugin layout', () => {
-      const { pluginState } = editor(
+  describe('when inserting into a list', () => {
+    it('should insert media group after orderer list', async () => {
+      const listDoc = doc(ol(li(p('text'))));
+      const { pluginState, editorView } = editor(listDoc);
+      await mediaProvider;
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
         doc(
-          mediaSingle({ layout: 'wrap-left' })(
+          ol(li(p('text'))),
+          mediaGroup(
             media({
-              id: 'media',
+              id: pdfFile.id,
+              __key: pdfFile.id,
               type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
               collection: testCollectionName,
             })(),
           ),
+          p(''),
         ),
       );
-
-      pluginState.updateLayout('center');
-
-      expect(pluginState.layout).toBe('center');
     });
 
-    it('notifies subscriber', () => {
-      const { pluginState } = editor(
+    it('should insert media group after unorderer list', async () => {
+      const listDoc = doc(ul(li(p('text'))));
+      const { pluginState, editorView } = editor(listDoc);
+      await mediaProvider;
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
         doc(
-          mediaSingle({ layout: 'center' })(
+          ul(li(p('text'))),
+          mediaGroup(
             media({
-              id: 'media',
+              id: pdfFile.id,
+              __key: pdfFile.id,
               type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
               collection: testCollectionName,
             })(),
           ),
+          p(''),
         ),
       );
+    });
 
-      const subscriber = jest.fn();
-      pluginState.subscribe(subscriber);
+    it('should insert media in the media group that already exist', async () => {
+      const listDoc = doc(
+        ul(li(p('te{<>}xt'))),
+        mediaGroup(
+          media({
+            id: pdfFile.id,
+            __key: pdfFile.id,
+            type: 'file',
+            __fileMimeType: pdfFile.fileMimeType,
+            __fileName: pdfFile.fileName,
+            __fileSize: pdfFile.fileSize,
+            collection: testCollectionName,
+          })(),
+        ),
+        p(''),
+      );
+      const { pluginState, editorView } = editor(listDoc);
+      await mediaProvider;
 
-      pluginState.updateLayout('wrap-right');
+      pluginState.insertFiles([pdfFile]);
 
-      expect(subscriber).toHaveBeenCalledTimes(2);
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ul(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
+    });
+  });
+
+  it('should trigger cloud picker opened analytics event when opened via quick insert', async () => {
+    const { editorView, sel, pluginState } = editor(
+      doc(p('{<>}')),
+      {},
+      undefined,
+      [quickInsertPlugin],
+    );
+    await waitForAllPickersInitialised(pluginState);
+    insertText(editorView, '/Files', sel);
+    sendKeyToPm(editorView, 'Enter');
+
+    expect(createAnalyticsEvent).toHaveBeenCalledWith({
+      action: 'opened',
+      actionSubject: 'picker',
+      actionSubjectId: 'cloudPicker',
+      attributes: { inputMethod: 'quickInsert' },
+      eventType: 'ui',
     });
   });
 });

@@ -64,7 +64,7 @@ export const getRowDeleteButtonParams = (
   for (let i = 0; i < rect.top; i++) {
     const rowHeight = rowsHeights[i];
     if (rowHeight) {
-      offset += rowHeight - 2;
+      offset += rowHeight - 1;
     }
   }
   // these are the selected rows widths
@@ -72,7 +72,7 @@ export const getRowDeleteButtonParams = (
   for (let i = rect.top; i < rect.bottom; i++) {
     const rowHeight = rowsHeights[i];
     if (rowHeight) {
-      height += rowHeight - 2;
+      height += rowHeight - 1;
       indexes.push(i);
     }
   }
@@ -107,9 +107,13 @@ export const getRowClassNames = (
   selection: Selection,
   hoveredRows: number[] = [],
   isInDanger?: boolean,
+  isResizing?: boolean,
 ): string => {
   const classNames: string[] = [];
-  if (isRowSelected(index)(selection) || hoveredRows.indexOf(index) > -1) {
+  if (
+    isRowSelected(index)(selection) ||
+    (hoveredRows.indexOf(index) > -1 && !isResizing)
+  ) {
     classNames.push('active');
     if (isInDanger) {
       classNames.push('danger');

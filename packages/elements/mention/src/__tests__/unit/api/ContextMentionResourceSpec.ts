@@ -1,7 +1,8 @@
 import ContextMentionResource from '../../../api/ContextMentionResource';
+import { MentionProvider } from '../../../api/MentionResource';
 
 describe('ContextMentionResource', () => {
-  let mentionProviderMock;
+  let mentionProviderMock: MentionProvider;
   let resourceWithContainerIdAndFriends: ContextMentionResource;
 
   const CONTEXT_IDENTIFIER = {

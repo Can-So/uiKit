@@ -9,8 +9,9 @@ import {
   startPositionOfParent,
   setNodeSelection,
   setTextSelection,
-  isTableCell,
+  insideTableCell,
   isInListItem,
+  findFarthestParentNode,
 } from '../../../utils';
 import { MediaState } from '../types';
 import {
@@ -21,16 +22,84 @@ import {
   isInsidePotentialEmptyParagraph,
   copyOptionalAttrsFromMediaState,
 } from './media-common';
-import { safeInsert } from 'prosemirror-utils';
-
-/** These nodes don't allow non images to exist inside them */
-const nonImagesBannedNodes = ['listItem'];
+import {
+  safeInsert,
+  hasParentNode,
+  ContentNodeWithPos,
+} from 'prosemirror-utils';
 
 export interface Range {
   start: number;
   end: number;
 }
 
+/**
+ * Check if current editor selections is a media group or not.
+ * @param state Editor state
+ */
+function isSelectionMediaGroup(state: EditorState): boolean {
+  const { schema } = state;
+  const selectionParent = state.selection.$anchor.node();
+
+  return selectionParent && selectionParent.type === schema.nodes.mediaGroup;
+}
+
+/**
+ * Check if grand parent accepts media group
+ * @param state Editor state
+ * @param mediaNodes Media nodes to be inserted
+ */
+function grandParentAcceptMediaGroup(
+  state: EditorState,
+  mediaNodes: PMNode[],
+): boolean {
+  const grandParent = state.selection.$from.node(-1);
+
+  return (
+    grandParent &&
+    grandParent.type.validContent(
+      Fragment.from(
+        state.schema.nodes.mediaGroup.createChecked({}, mediaNodes),
+      ),
+    )
+  );
+}
+
+/**
+ * Insert a paragraph after if reach the end of doc
+ * and there is no media group in the front or selection is a non media block node
+ * @param node Node at insertion point
+ * @param state Editor state
+ */
+function shouldAppendParagraph(
+  state: EditorState,
+  node?: PMNode | null,
+): boolean {
+  const {
+    schema: {
+      nodes: { media },
+    },
+  } = state;
+
+  const wasMediaNode = node && node.type === media;
+
+  return (
+    (insideTableCell(state) ||
+      isInListItem(state) ||
+      (atTheEndOfDoc(state) &&
+        (!posOfPrecedingMediaGroup(state) ||
+          isSelectionNonMediaBlockNode(state)))) &&
+    !wasMediaNode
+  );
+}
+
+/**
+ * Insert a media into an existing media group
+ * or create a new media group to insert the new media.
+ * @param view Editor view
+ * @param mediaStates Media files to be added to the editor
+ * @param collection Collection for the media to be added
+ */
 export const insertMediaGroupNode = (
   view: EditorView,
   mediaStates: MediaState[],
@@ -40,6 +109,7 @@ export const insertMediaGroupNode = (
   const { tr, schema } = state;
   const { media, paragraph } = schema.nodes;
 
+  // Do nothing if no media found
   if (!collection || !media || !mediaStates.length) {
     return;
   }
@@ -48,33 +118,19 @@ export const insertMediaGroupNode = (
   const mediaInsertPos = findMediaInsertPos(state);
   const resolvedInsertPos = tr.doc.resolve(mediaInsertPos);
   const parent = resolvedInsertPos.parent;
-  const grandParent = state.selection.$from.node(-1);
-  const selectionParent = state.selection.$anchor.node();
+  const nodeAtInsertionPoint = tr.doc.nodeAt(mediaInsertPos);
 
   const shouldSplit =
-    selectionParent &&
-    selectionParent.type !== schema.nodes.mediaGroup &&
-    grandParent &&
-    grandParent.type.validContent(
-      Fragment.from(
-        state.schema.nodes.mediaGroup.createChecked({}, mediaNodes),
-      ),
-    );
-
-  // insert a paragraph after if reach the end of doc
-  // and there is no media group in the front or selection is a non media block node
-  const shouldAppendParagraph =
-    isTableCell(state) ||
-    isInListItem(state) ||
-    (atTheEndOfDoc(state) &&
-      (!posOfPrecedingMediaGroup(state) ||
-        isSelectionNonMediaBlockNode(state)));
+    !isSelectionMediaGroup(state) &&
+    grandParentAcceptMediaGroup(state, mediaNodes);
+  const withParagraph = shouldAppendParagraph(state, nodeAtInsertionPoint);
 
   if (shouldSplit) {
-    const content: PMNode[] = shouldAppendParagraph
+    const content: PMNode[] = withParagraph
       ? mediaNodes.concat(paragraph.create())
       : mediaNodes;
 
+    // delete the selection or empty paragraph
     // delete the selection or empty paragraph
     const deleteRange = findDeleteRange(state);
     if (!deleteRange) {
@@ -101,7 +157,7 @@ export const insertMediaGroupNode = (
       : [schema.nodes.mediaGroup.createChecked({}, mediaNodes)];
 
   // Don't append new paragraph when adding media to a existing mediaGroup
-  if (shouldAppendParagraph && parent.type !== schema.nodes.mediaGroup) {
+  if (withParagraph && parent.type !== schema.nodes.mediaGroup) {
     content.push(paragraph.create());
   }
 
@@ -128,8 +184,70 @@ const createMediaFileNodes = (
   return nodes;
 };
 
+/**
+ * Find root list node if exist from current selection
+ * @param state Editor state
+ */
+const findRootListNode = (state: EditorState): ContentNodeWithPos | null => {
+  const {
+    schema: {
+      nodes: { bulletList, orderedList },
+    },
+  } = state;
+
+  return findFarthestParentNode(
+    (node: PMNode) => node.type === bulletList || node.type === orderedList,
+  )(state.selection);
+};
+
+/**
+ * Return position of media to be inserted, if it is inside a list
+ * @param content Content to be inserted
+ * @param state Editor State
+ */
+export const getPosInList = (state: EditorState): number | undefined => {
+  const {
+    schema: {
+      nodes: { mediaGroup, listItem },
+    },
+  } = state;
+
+  // 1. Check if I am inside a list.
+  if (hasParentNode(node => node.type === listItem)(state.selection)) {
+    // 2. Get end position of root list
+    const rootListNode = findRootListNode(state);
+
+    if (rootListNode) {
+      const pos = rootListNode.pos + rootListNode.node.nodeSize;
+      // 3. Fint the first location inside the media group
+      const nextNode = state.doc.nodeAt(pos);
+      if (nextNode && nextNode.type === mediaGroup) {
+        return pos + 1;
+      }
+
+      return pos;
+    }
+  }
+};
+
+/**
+ * Find insertion point,
+ * If it is in a List it will return position to the next block,
+ * If there are any media group close it will return this position
+ * Otherwise, It will return the respective block given selection.
+ * @param content Content to be inserted
+ * @param state Editor state
+ */
 const findMediaInsertPos = (state: EditorState): number => {
   const { $from, $to } = state.selection;
+
+  // Check if selection is inside a list.
+  const posInList = getPosInList(state);
+
+  if (posInList) {
+    // If I have a position in lists, I should return, otherwise I am not inside a list
+    return posInList;
+  }
 
   const nearbyMediaGroupPos = posOfMediaGroupNearby(state);
 
@@ -194,8 +312,4 @@ const setSelectionAfterMediaInsertion = (
   } else {
     setTextSelection(view, endOfMediaGroup + 1);
   }
-};
-
-export const isNonImagesBanned = (node?: PMNode) => {
-  return node && nonImagesBannedNodes.indexOf(node.type.name) > -1;
 };

@@ -10,7 +10,7 @@ export interface CalculatePositionParams {
   target?: HTMLElement;
   popup?: HTMLElement;
   offset: number[];
-  stickToBottom?: boolean;
+  stick?: boolean;
 }
 
 export function isBody(elem: HTMLElement | Element): boolean {
@@ -29,8 +29,9 @@ export function getVerticalPlacement(
   boundariesElement: HTMLElement,
   fitHeight?: number,
   alignY?: string,
+  forcePlacement?: boolean,
 ): string {
-  if (alignY) {
+  if (forcePlacement && alignY) {
     return alignY;
   }
 
@@ -71,13 +72,14 @@ export function getHorizontalPlacement(
   boundariesElement: HTMLElement,
   fitWidth?: number,
   alignX?: string,
+  forcePlacement?: boolean,
 ): string {
-  if (alignX) {
+  if (forcePlacement && alignX) {
     return alignX;
   }
 
   if (!fitWidth) {
-    return 'left';
+    return alignX || 'left';
   }
 
   if (isTextNode(target)) {
@@ -94,11 +96,11 @@ export function getHorizontalPlacement(
   } = boundariesElement.getBoundingClientRect();
   const spaceLeft = targetLeft - boundariesLeft + targetWidth;
   const spaceRight = boundariesLeft + boundariesWidth - targetLeft;
-
-  if (spaceRight >= fitWidth || spaceRight >= spaceLeft) {
+  if (alignX && spaceLeft > fitWidth && spaceRight > fitWidth) {
+    return alignX;
+  } else if (spaceRight >= fitWidth || (spaceRight >= spaceLeft && !alignX)) {
     return 'left';
   }
-
   return 'right';
 }
 
@@ -109,12 +111,177 @@ export function calculatePlacement(
   fitHeight?: number,
   alignX?: string,
   alignY?: string,
+  forcePlacement?: boolean,
 ): [string, string] {
   return [
-    getVerticalPlacement(target, boundariesElement, fitHeight, alignY),
-    getHorizontalPlacement(target, boundariesElement, fitWidth, alignX),
+    getVerticalPlacement(
+      target,
+      boundariesElement,
+      fitHeight,
+      alignY,
+      forcePlacement,
+    ),
+    getHorizontalPlacement(
+      target,
+      boundariesElement,
+      fitWidth,
+      alignX,
+      forcePlacement,
+    ),
   ];
 }
+
+const calculateHorizontalPlacement = ({
+  placement,
+  targetLeft,
+  targetRight,
+  targetWidth,
+
+  isPopupParentBody,
+  popupOffsetParentLeft,
+  popupOffsetParentRight,
+  popupOffsetParentScrollLeft,
+
+  popupClientWidth,
+  offset,
+}): Position => {
+  const position = {} as Position;
+
+  if (placement === 'left') {
+    position.left = Math.ceil(
+      targetLeft -
+        popupOffsetParentLeft +
+        (isPopupParentBody ? 0 : popupOffsetParentScrollLeft) +
+        offset[0],
+    );
+  } else if (placement === 'center') {
+    position.left = Math.ceil(
+      targetLeft -
+        popupOffsetParentLeft +
+        (isPopupParentBody ? 0 : popupOffsetParentScrollLeft) +
+        offset[0] +
+        targetWidth / 2 -
+        popupClientWidth / 2,
+    );
+  } else {
+    position.right = Math.ceil(
+      popupOffsetParentRight -
+        targetRight -
+        (isPopupParentBody ? 0 : popupOffsetParentScrollLeft) +
+        offset[0],
+    );
+  }
+
+  return position;
+};
+
+const calculateVerticalStickBottom = ({
+  target,
+  targetTop,
+  targetHeight,
+
+  popup,
+  offset,
+  position,
+}): Position => {
+  const scrollParent = findOverflowScrollParent(target);
+  const newPos = { ...position };
+
+  if (scrollParent) {
+    let topOffsetTop = targetTop - scrollParent.getBoundingClientRect().top;
+    let targetEnd = targetHeight + topOffsetTop;
+    if (
+      scrollParent.clientHeight - targetEnd <=
+        popup.clientHeight + offset[1] * 2 &&
+      topOffsetTop < scrollParent.clientHeight
+    ) {
+      const scroll = targetEnd - scrollParent.clientHeight + offset[1] * 2;
+      let top = newPos.top || 0;
+      top = top - (scroll + popup.clientHeight);
+
+      newPos.top = top;
+    }
+  }
+
+  return newPos;
+};
+
+const calculateVerticalStickTop = ({
+  target,
+  targetTop,
+  targetHeight,
+  popupOffsetParentHeight,
+  popupOffsetParent,
+
+  popup,
+  offset,
+  position,
+}): Position => {
+  const scrollParent = findOverflowScrollParent(target);
+  const newPos = { ...position };
+
+  if (scrollParent) {
+    const { top: scrollParentTop } = scrollParent.getBoundingClientRect();
+    const topBoundary = targetTop - scrollParentTop;
+    const scrollParentScrollTop = scrollParent.scrollTop;
+    if (topBoundary < 0) {
+      if (
+        targetTop +
+          (scrollParentScrollTop - scrollParentTop) +
+          targetHeight +
+          offset[1] <
+        scrollParentScrollTop
+      ) {
+        newPos.bottom =
+          popupOffsetParentHeight -
+          (topBoundary + popupOffsetParent.scrollTop + targetHeight);
+      } else {
+        newPos.bottom += topBoundary;
+      }
+    }
+  }
+
+  return newPos;
+};
+
+const calculateVerticalPlacement = ({
+  placement,
+  targetTop,
+  targetHeight,
+
+  isPopupParentBody,
+
+  popupOffsetParentHeight,
+  popupOffsetParentTop,
+  popupOffsetParentScrollTop,
+
+  borderBottomWidth,
+  offset,
+}): Position => {
+  const position = {} as Position;
+
+  if (placement === 'top') {
+    position.bottom = Math.ceil(
+      popupOffsetParentHeight -
+        (targetTop - popupOffsetParentTop) -
+        (isPopupParentBody ? 0 : popupOffsetParentScrollTop) -
+        borderBottomWidth +
+        offset[1],
+    );
+  } else {
+    let top = Math.ceil(
+      targetTop -
+        popupOffsetParentTop +
+        targetHeight +
+        (isPopupParentBody ? 0 : popupOffsetParentScrollTop) -
+        borderBottomWidth +
+        offset[1],
+    );
+    position.top = top;
+  }
+
+  return position;
+};
 
 /**
  * Calculates relative coordinates for placing popup along with the target.
@@ -125,9 +292,9 @@ export function calculatePosition({
   target,
   popup,
   offset,
-  stickToBottom,
+  stick,
 }: CalculatePositionParams): Position {
-  const position: Position = {};
+  let position: Position = {};
 
   if (!target || !popup || !popup.offsetParent) {
     return position;
@@ -160,65 +327,60 @@ export function calculatePosition({
     width: targetWidth,
   } = target.getBoundingClientRect();
 
-  if (verticalPlacement === 'top') {
-    position.bottom = Math.ceil(
-      popupOffsetParentHeight -
-        (targetTop - popupOffsetParentTop) -
-        (isBody(popupOffsetParent) ? 0 : popupOffsetParent.scrollTop) -
-        borderBottomWidth +
-        offset[1],
-    );
-  } else {
-    let top = Math.ceil(
-      targetTop -
-        popupOffsetParentTop +
-        targetHeight +
-        (isBody(popupOffsetParent) ? 0 : popupOffsetParent.scrollTop) -
-        borderBottomWidth +
-        offset[1],
-    );
-    if (stickToBottom) {
-      const scrollParent = findOverflowScrollParent(target);
-      if (scrollParent) {
-        let topOffsetTop = targetTop - scrollParent.getBoundingClientRect().top;
-        let targetEnd = targetHeight + topOffsetTop;
-        if (
-          scrollParent.clientHeight - targetEnd <=
-            popup.clientHeight + offset[1] * 2 &&
-          topOffsetTop < scrollParent.clientHeight
-        ) {
-          const scroll = targetEnd - scrollParent.clientHeight + offset[1] * 2;
-          top -= scroll + popup.clientHeight;
-        }
-      }
-    }
-    position.top = top;
+  const isPopupParentBody = isBody(popupOffsetParent);
+
+  const verticalPosition = calculateVerticalPlacement({
+    placement: verticalPlacement,
+    targetTop,
+    isPopupParentBody,
+    popupOffsetParentHeight,
+    popupOffsetParentTop,
+    popupOffsetParentScrollTop: popupOffsetParent.scrollTop || 0,
+    targetHeight,
+    borderBottomWidth,
+    offset,
+  });
+
+  position = { ...position, ...verticalPosition };
+
+  if (verticalPlacement !== 'top' && stick) {
+    position = calculateVerticalStickBottom({
+      target,
+      targetTop,
+      targetHeight,
+      popup,
+      offset,
+      position,
+    });
   }
 
-  if (horizontalPlacement === 'left') {
-    position.left = Math.ceil(
-      targetLeft -
-        popupOffsetParentLeft +
-        (isBody(popupOffsetParent) ? 0 : popupOffsetParent.scrollLeft) +
-        offset[0],
-    );
-  } else if (horizontalPlacement === 'center') {
-    position.left = Math.ceil(
-      targetLeft -
-        popupOffsetParentLeft +
-        (isBody(popupOffsetParent) ? 0 : popupOffsetParent.scrollLeft) +
-        offset[0] +
-        targetWidth / 2 -
-        popup.clientWidth / 2,
-    );
-  } else {
-    position.right = Math.ceil(
-      popupOffsetParentRight -
-        targetRight -
-        (isBody(popupOffsetParent) ? 0 : popupOffsetParent.scrollLeft) +
-        offset[0],
-    );
+  if (verticalPlacement === 'top' && stick) {
+    position = calculateVerticalStickTop({
+      target,
+      targetTop,
+      targetHeight,
+      popupOffsetParentHeight,
+      popupOffsetParent,
+      popup,
+      offset,
+      position,
+    });
   }
+
+  const horizontalPosition = calculateHorizontalPlacement({
+    placement: horizontalPlacement,
+    targetLeft,
+    targetRight,
+    targetWidth,
+    isPopupParentBody,
+    popupOffsetParentLeft,
+    popupOffsetParentRight,
+    popupOffsetParentScrollLeft: popupOffsetParent.scrollLeft || 0,
+    popupClientWidth: popup.clientWidth || 0,
+    offset,
+  });
+
+  position = { ...position, ...horizontalPosition };
 
   return position;
 }

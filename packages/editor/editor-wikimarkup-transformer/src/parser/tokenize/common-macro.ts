@@ -1,21 +1,21 @@
 import { Schema } from 'prosemirror-model';
-import { Token, TokenErrCallback } from './';
+import { Token, Context } from './';
 
+// TODO: Create a type for rawContentProcessor which will be shared among parsers
 export interface MacroOption {
-  /** The opening symbol regex */
-  opening: RegExp;
-  /** The closing symbol regex, can be optional */
-  closing?: RegExp;
-  /** This function will be called with the rawAttrs and rawContent */
+  // The macro keyword
+  keyword: string;
+  // If the macro needs a paired closing part
+  paired: boolean;
+  // This function will be called with the rawAttrs and rawContent
+  context: Context;
   rawContentProcessor: (
     rawAttrs: string,
     rawContent: string,
     length: number,
     schema: Schema,
-    tokenErrCallback?: TokenErrCallback,
+    context: Context,
   ) => Token;
-  /** Token Error Callback */
-  tokenErrCallback?: TokenErrCallback;
 }
 
 export function commonMacro(
@@ -23,16 +23,21 @@ export function commonMacro(
   schema: Schema,
   opt: MacroOption,
 ): Token {
-  const matchOpening = input.match(opt.opening);
+  /**
+   * Forging the opening regex, the result would look something like
+   * /^\{(quote)(?::([^\{\n\}]*))?\}/i
+   */
+  const opening = new RegExp(`^\{(${opt.keyword})(?::([^\{\n\}]*))?\}`, 'i');
+  const matchOpening = input.match(opening);
 
   if (!matchOpening) {
     return fallback(input);
   }
 
-  const [, rawAttrs] = matchOpening;
+  const [, name, rawAttrs] = matchOpening;
   const openingLength = matchOpening[0].length;
 
-  if (!opt.closing) {
+  if (!opt.paired) {
     /**
      * Some macros do not have a closing symbol, for example
      * {anchor:here} {loremipsum}
@@ -42,11 +47,16 @@ export function commonMacro(
       '',
       openingLength,
       schema,
-      opt.tokenErrCallback,
+      opt.context,
     );
   }
 
-  const matchClosing = opt.closing.exec(input.substring(openingLength));
+  /**
+   * Forging the closing regex, the result would look something like
+   * /\{quote\}/
+   */
+  const closing = new RegExp(`\{${name}\}`);
+  const matchClosing = closing.exec(input.substring(openingLength));
 
   let rawContent = '';
   if (matchClosing) {
@@ -65,7 +75,7 @@ export function commonMacro(
     rawContent,
     length,
     schema,
-    opt.tokenErrCallback,
+    opt.context,
   );
 }
 

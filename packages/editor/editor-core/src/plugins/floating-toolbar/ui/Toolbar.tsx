@@ -11,6 +11,9 @@ import Button from './Button';
 import Dropdown from './Dropdown';
 import Select, { SelectOption } from './Select';
 import Separator from './Separator';
+import Input from './Input';
+import { ProviderFactory } from '@atlaskit/editor-common';
+import { EditorView } from 'prosemirror-view';
 
 const akGridSize = gridSize();
 
@@ -20,6 +23,10 @@ export interface Props {
   popupsMountPoint?: HTMLElement;
   popupsBoundariesElement?: HTMLElement;
   popupsScrollableElement?: HTMLElement;
+  providerFactory?: ProviderFactory;
+  className?: string;
+  focusEditor?: () => void;
+  editorView?: EditorView;
 }
 
 const ToolbarContainer = styled.div`
@@ -46,6 +53,8 @@ export default class Toolbar extends Component<Props> {
       popupsMountPoint,
       popupsBoundariesElement,
       popupsScrollableElement,
+      className,
+      editorView,
     } = this.props;
     if (!items.length) {
       return null;
@@ -58,6 +67,7 @@ export default class Toolbar extends Component<Props> {
       <ToolbarContainer
         aria-label="Floating Toolbar"
         hasCompactLeftPadding={firstElementIsSelect}
+        className={className}
       >
         <ButtonGroup>
           {items
@@ -70,8 +80,10 @@ export default class Toolbar extends Component<Props> {
                     <Button
                       key={idx}
                       title={item.title}
+                      href={item.href}
                       icon={<ButtonIcon label={item.title} />}
                       appearance={item.appearance}
+                      target={item.target}
                       onClick={() => dispatchCommand(item.onClick)}
                       onMouseEnter={() => dispatchCommand(item.onMouseEnter)}
                       onMouseLeave={() => dispatchCommand(item.onMouseLeave)}
@@ -79,6 +91,23 @@ export default class Toolbar extends Component<Props> {
                       disabled={item.disabled}
                     />
                   );
+
+                case 'input':
+                  return (
+                    <Input
+                      key={idx}
+                      mountPoint={popupsMountPoint}
+                      boundariesElement={popupsBoundariesElement}
+                      defaultValue={item.defaultValue}
+                      placeholder={item.placeholder}
+                      onSubmit={value => dispatchCommand(item.onSubmit(value))}
+                      onBlur={value => dispatchCommand(item.onBlur(value))}
+                    />
+                  );
+
+                case 'custom': {
+                  return item.render(editorView, idx);
+                }
 
                 case 'dropdown':
                   const DropdownIcon = item.icon;

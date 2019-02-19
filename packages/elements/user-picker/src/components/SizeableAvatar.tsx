@@ -3,15 +3,15 @@ import * as React from 'react';
 import { getAvatarSize } from './utils';
 
 export class Props {
-  appearance: 'compact' | 'normal' | 'big';
+  appearance!: string;
   src?: string;
   name?: string;
   presence?: string;
 }
 
-export class SizeableAvatar extends React.PureComponent<Props, {}> {
+export class SizeableAvatar extends React.PureComponent<Props> {
   render() {
-    const { appearance, src, name, presence } = this.props;
+    const { src, name, presence, appearance } = this.props;
 
     return (
       <Avatar

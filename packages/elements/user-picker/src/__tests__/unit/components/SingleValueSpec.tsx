@@ -7,7 +7,8 @@ import { SizeableAvatar } from '../../../components/SizeableAvatar';
 describe('SingleValue', () => {
   const data = {
     label: 'Jace Beleren',
-    user: {
+    value: 'abc-123',
+    data: {
       id: 'abc-123',
       name: 'Jace Beleren',
       publicName: 'jbeleren',
@@ -38,7 +39,7 @@ describe('SingleValue', () => {
     });
   });
 
-  it('should render Avatar as xsmall when the appearance is compact', () => {
+  it('should render SizeableAvatar when the appearance is compact', () => {
     const component = shallowSingleValue({
       selectProps: {
         appearance: 'compact',

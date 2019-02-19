@@ -1,5 +1,62 @@
 # @atlaskit/datetime-picker
 
+## 6.5.1
+- Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+  - @atlaskit/modal-dialog@7.2.3
+  - @atlaskit/select@7.0.0
+
+## 6.5.0
+- [minor] [a48dddb43c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a48dddb43c):
+
+  - onChange will only be fired when a complete datetime is supplied by the user
+
+## 6.4.2
+- [patch] [0cd7f505b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cd7f505b3):
+
+  - Iso date parsing on IE11 and Edge is now consistent with other browsers
+
+## 6.4.1
+- [patch] [348d3aed19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/348d3aed19):
+
+  - Datepicker will now reset the focused date on the calendar every time it is opened
+
+## 6.4.0
+- [minor] [52827feffb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52827feffb):
+
+  - onChange is now called only when the user selects or clears a value. The date passed to onChange will always be a valid date
+
+## 6.3.25
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/calendar@7.0.17
+  - @atlaskit/field-base@11.0.14
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/select@6.1.19
+  - @atlaskit/field-range@5.0.14
+  - @atlaskit/icon@16.0.0
+
+## 6.3.24
+- [patch] [55e0a3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55e0a3a):
+
+  - Fixes keyboard entry bug
+- [patch] [075dfa2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/075dfa2):
+
+  - Allowing control of input value in datetime-picker
+
+## 6.3.23
+- [patch] [4c4bdc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c4bdc5):
+
+  - AK-5672 - Refactor parseTime by separating logic and concerns into smaller, testable functions. Fixes meridiem issues.
+- [patch] [58a40bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58a40bf):
+
+  - Factoring in meridiem for 24hr time in editable
+
+## 6.3.22
+- [patch] [5c548ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c548ea):
+
+  - Removing extraneous wrapping span around icons which was causing an accessibility error
+
 ## 6.3.21
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

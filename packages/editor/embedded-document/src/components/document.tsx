@@ -3,9 +3,11 @@ import { Component } from 'react';
 import {
   Editor,
   EditorContext,
+  EditorProps,
   WithEditorActions,
 } from '@atlaskit/editor-core';
-import { ReactRenderer } from '@atlaskit/renderer';
+import { ReactRenderer, RendererProps } from '@atlaskit/renderer';
+import { ProviderFactory } from '@atlaskit/editor-common';
 import { Props as BaseProps } from '../context/embedded-document';
 import { Mode } from '../context/context';
 import { Document as DocumentModel } from '../model';
@@ -16,6 +18,8 @@ export interface Props extends BaseProps {
   hasError?: boolean;
 
   mode: Mode;
+  editorProps?: Partial<EditorProps>;
+  rendererProps?: Partial<RendererProps>;
 }
 
 const emptyDoc = '{ "type": "doc", "version": 1, "content": [] }';
@@ -40,7 +44,7 @@ export default class Document extends Component<Props> {
   }
 
   private renderEditor() {
-    const { doc } = this.props;
+    const { doc, editorProps } = this.props;
     const { body = emptyDoc } = doc || {};
 
     return (
@@ -51,13 +55,21 @@ export default class Document extends Component<Props> {
           defaultValue={body}
           primaryToolbarComponents={this.renderToolbar()}
           contentComponents={this.renderTitle()}
+          {...editorProps}
         />
       </EditorContext>
     );
   }
 
   render() {
-    const { doc, isLoading, hasError, mode } = this.props;
+    const {
+      doc,
+      isLoading,
+      hasError,
+      mode,
+      editorProps,
+      rendererProps,
+    } = this.props;
 
     if (hasError) {
       return <div>Something went wrong 😔</div>;
@@ -74,7 +86,26 @@ export default class Document extends Component<Props> {
 
       default:
         const { body = emptyDoc } = doc || {};
-        return <ReactRenderer document={JSON.parse(body)} />;
+
+        let dataProviders: ProviderFactory | undefined;
+
+        if (editorProps) {
+          const { mentionProvider, emojiProvider, mediaProvider } = editorProps;
+
+          dataProviders = ProviderFactory.create({
+            mentionProvider: mentionProvider!,
+            emojiProvider: emojiProvider!,
+            mediaProvider: mediaProvider!,
+          });
+        }
+
+        return (
+          <ReactRenderer
+            dataProviders={dataProviders}
+            document={JSON.parse(body)}
+            {...rendererProps}
+          />
+        );
     }
   }
 }

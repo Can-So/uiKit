@@ -1,18 +1,22 @@
 import * as uuid from 'uuid';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import {
+  UploadableFileUpfrontIds,
+  uploadFile,
+  UploadFileCallbacks,
+  MediaStore,
+  MediaStoreResponse,
+  TouchedFiles,
+} from '@atlaskit/media-store';
 import {
   AuthProvider,
-  MediaItem,
-  MediaItemProvider,
+  ProcessingFileState,
   UploadableFile,
   UploadController,
   UploadingFileState,
 } from '../../../src';
 import { ContextFactory } from '../../../src/context/context';
 import { fileStreamsCache } from '../../../src/context/fileStreamCache';
-
-import { uploadFile } from '@atlaskit/media-store';
 
 const getOrInsertSpy = jest.spyOn(fileStreamsCache, 'getOrInsert');
 const authProvider: AuthProvider = () =>
@@ -32,196 +36,25 @@ const createContext = () => {
 const uploadFileMock: jest.Mock<any> = uploadFile as any;
 
 describe('Context', () => {
-  const deferredFileId = Promise.resolve('file-id-1');
-
   beforeEach(() => {
     uploadFileMock.mockReset();
   });
 
-  describe('.getMediaItemProvider()', () => {
-    it('should return different mediaItemProviders for different fileIds', () => {
-      const fileId = 'some-id';
-      const fileId2 = 'some-other-id';
-      const context = createContext();
-      const mediaItemProvider = context.getMediaItemProvider(fileId, 'file');
-      expect(mediaItemProvider).not.toBe(
-        context.getMediaItemProvider(fileId2, 'file'),
-      );
-    });
-
-    it('should return media item when a link media item is passed in', done => {
-      let actualMediaItem: MediaItem;
-      const expectedMediaItem: MediaItem = {
-        type: 'link',
-        details: {
-          id: 'abcd',
-          type: 'link',
-          url: 'http://google.com.au',
-          title: 'Google!!!',
-        },
-      };
-
-      const context = createContext();
-      const provider = context.getMediaItemProvider(
-        'some-id',
-        'link',
-        undefined,
-        expectedMediaItem,
-      );
-
-      provider.observable().subscribe({
-        next(mediaItem) {
-          actualMediaItem = mediaItem;
-        },
-        complete() {
-          expect(actualMediaItem).toBe(expectedMediaItem);
-          done();
-        },
-        error(error) {
-          done(error || new Error('Uknown error.'));
-        },
-      });
-    });
-
-    it('should return media item when a file media item is passed in and the media item processingStatus is not pending', done => {
-      let actualMediaItem: MediaItem;
-      const expectedMediaItem: MediaItem = {
-        type: 'file',
-        details: {
-          id: 'abcd',
-        },
-      };
-
-      const context = createContext();
-      const provider = context.getMediaItemProvider(
-        'some-id',
-        'link',
-        undefined,
-        expectedMediaItem,
-      );
-
-      provider.observable().subscribe({
-        next(mediaItem) {
-          actualMediaItem = mediaItem;
-        },
-        complete() {
-          expect(actualMediaItem).toBe(expectedMediaItem);
-          done();
-        },
-        error(error) {
-          done(error || new Error('Uknown error.'));
-        },
-      });
-    });
-
-    it('should return media item and then fetch media item when a file media item is passed in and the processingStatus is pending', done => {
-      let actualMediaItems: Array<MediaItem> = [];
-      const firstExpectedMediaItem: MediaItem = {
-        type: 'file',
-        details: {
-          id: 'abcd',
-          processingStatus: 'pending',
-        },
-      };
-      const secondExpectedMediaItem: MediaItem = {
-        type: 'file',
-        details: {
-          id: 'abcd',
-          processingStatus: 'succeeded',
-        },
-      };
-
-      const fromPool = jest
-        .spyOn(MediaItemProvider, 'fromPool')
-        .mockImplementation(() => ({
-          observable() {
-            return of(secondExpectedMediaItem);
-          },
-        }));
-
-      const context = createContext();
-      const provider = context.getMediaItemProvider(
-        'some-id',
-        'link',
-        undefined,
-        firstExpectedMediaItem,
-      );
-
-      provider.observable().subscribe({
-        next(mediaItem) {
-          actualMediaItems.push(mediaItem);
-        },
-        complete() {
-          expect(fromPool).toHaveBeenCalledTimes(1);
-          expect(actualMediaItems).toHaveLength(2);
-          expect(actualMediaItems[0]).toBe(firstExpectedMediaItem);
-          expect(actualMediaItems[1]).toBe(secondExpectedMediaItem);
-          done();
-        },
-        error(error) {
-          done(error || new Error('Uknown error.'));
-        },
-      });
-    });
-
-    it('should fetch media item when no media item is passed in', done => {
-      let actualMediaItems: Array<MediaItem> = [];
-      const firstExpectedMediaItem: MediaItem = {
-        type: 'file',
-        details: {
-          id: 'abcd',
-          processingStatus: 'succeeded',
-        },
-      };
-
-      const fromPool = jest
-        .spyOn(MediaItemProvider, 'fromPool')
-        .mockImplementation(() => ({
-          observable() {
-            return of(firstExpectedMediaItem);
-          },
-        }));
-
-      fromPool.mockClear();
-
-      const context = createContext();
-      const provider = context.getMediaItemProvider(
-        'some-id',
-        'link',
-        undefined,
-      );
-
-      provider.observable().subscribe({
-        next(mediaItem) {
-          actualMediaItems.push(mediaItem);
-        },
-        complete() {
-          expect(fromPool).toHaveBeenCalledTimes(1);
-          expect(actualMediaItems).toHaveLength(1);
-          expect(actualMediaItems[0]).toBe(firstExpectedMediaItem);
-          done();
-        },
-        error(error) {
-          done(error || new Error('Uknown error.'));
-        },
-      });
-    });
-  });
-
-  describe('local preview', () => {
-    it('should get the local preview after being asigned', () => {
-      const context = createContext();
-
-      expect(context.getLocalPreview('123')).toBeUndefined();
-      context.setLocalPreview('123', 'some-preview');
-      expect(context.getLocalPreview('123')).toEqual('some-preview');
-      context.removeLocalPreview('123');
-      expect(context.getLocalPreview('123')).toBeUndefined();
-    });
-  });
-
   describe('.file.getFileState()', () => {
-    const id = uuid.v4();
+    let id: string;
+    let occurrenceKey: string;
+    let uploadableFileUpfrontIds: UploadableFileUpfrontIds;
+    const controller = new UploadController();
+
+    beforeEach(() => {
+      id = uuid.v4();
+      occurrenceKey = uuid.v4();
+      uploadableFileUpfrontIds = {
+        id,
+        occurrenceKey,
+        deferredUploadId: Promise.resolve(uuid.v4()),
+      };
+    });
 
     it('should fetch the file if it doesnt exist locally', done => {
       const context = createContext();
@@ -261,6 +94,9 @@ describe('Context', () => {
             size: 1,
             artifacts: undefined,
           });
+        },
+        complete() {
+          expect.assertions(3);
           done();
         },
       });
@@ -268,13 +104,8 @@ describe('Context', () => {
 
     it('should poll for changes and return the latest file state', done => {
       const context = createContext();
-      let getFileCalledTimes = 0;
-      const getItems = jest.fn().mockImplementation(() => {
-        getFileCalledTimes++;
-        const processingStatus =
-          getFileCalledTimes === 2 ? 'succeeded' : 'pending';
-
-        return Promise.resolve({
+      const getFilePromiseWithProcessingStatus = (processingStatus: string) =>
+        Promise.resolve({
           data: {
             items: [
               {
@@ -288,7 +119,10 @@ describe('Context', () => {
             ],
           },
         });
-      });
+      const getItems = jest
+        .fn()
+        .mockReturnValueOnce(getFilePromiseWithProcessingStatus('pending'))
+        .mockReturnValueOnce(getFilePromiseWithProcessingStatus('succeeded'));
       const fakeStore = {
         getItems,
       };
@@ -317,35 +151,30 @@ describe('Context', () => {
         occurrenceKey: 'some-occurrenceKey',
       });
 
-      expect(getOrInsertSpy).toHaveBeenLastCalledWith(
-        `${id}-my-collection-some-occurrenceKey`,
-        expect.anything(),
-      );
+      expect(getOrInsertSpy).toHaveBeenLastCalledWith(id, expect.anything());
     });
 
-    it('should return local file state while file is still uploading', () => {
+    it('should return local file state while file is still uploading', done => {
       const context = createContext();
-      const deferredFileId = new Promise(_ => {
-        // we don't want to resolve this to simulate the file is uploading
-      });
       const getFile = jest.fn();
       const content = new Blob();
       const file = {
         content,
       };
-      (context as any).mediaStore = { getFile };
-      uploadFileMock.mockImplementation((_, __, callbacks) => {
-        callbacks.onId(id);
-        return { deferredFileId };
-      });
+      (context as any).mediaStore = {
+        getFile,
+      };
+      uploadFileMock.mockReturnValue(jest.fn());
 
-      return new Promise(resolve => {
-        context.file.upload(file).subscribe({
+      const subscription = context.file
+        .upload(file, controller, uploadableFileUpfrontIds)
+        .subscribe({
           next(state) {
             const fileId = state.id;
+            const occurrenceKey = state.occurrenceKey;
             context.file.getFileState(fileId).subscribe({
               next(state) {
-                expect(state).toEqual({
+                const expectedState: UploadingFileState = {
                   id: fileId,
                   status: 'uploading',
                   progress: 0,
@@ -354,24 +183,26 @@ describe('Context', () => {
                   mimeType: '',
                   size: 0,
                   preview: {
-                    blob: content,
+                    value: content,
                   },
-                });
+                  occurrenceKey,
+                };
+                expect(state).toEqual(expectedState);
                 expect(getFile).not.toBeCalled();
-                resolve();
+                subscription.unsubscribe();
+                done();
               },
             });
           },
         });
-      });
     });
 
-    it('should return file state regardless of the state', () => {
+    it('should return file state regardless of the state', done => {
       const context = createContext();
       const getFile = jest.fn().mockReturnValue({
         data: {
           processingStatus: 'succeeded',
-          id: 'file-id-1',
+          id,
           name: 'file-one',
           size: 1,
           mediaType: 'image',
@@ -380,52 +211,141 @@ describe('Context', () => {
       });
       const next = jest.fn();
       const file = {
-        content: 'some-base-64',
+        content: 'data:image/gif;base64,R0lGODlhAQABAAAAACw=',
       };
       (context as any).mediaStore = { getFile };
-      uploadFileMock.mockImplementation((_, __, callbacks) => {
-        callbacks.onProgress(0.1);
-        callbacks.onId('file-id');
-        return { deferredFileId };
+      uploadFileMock.mockImplementation((_, __, ___, callbacks) => {
+        callbacks.onUploadFinish();
+        return {};
       });
 
-      return new Promise(resolve => {
-        context.file.upload(file).subscribe({
+      context.file
+        .upload(file, controller, uploadableFileUpfrontIds)
+        .subscribe({
           next,
           complete() {
             expect(next).toHaveBeenCalledTimes(1);
-            expect(next.mock.calls[0][0]).toEqual({
-              id: 'file-id',
+            const expectedState: ProcessingFileState = {
+              id,
               status: 'processing',
-              mediaType: 'unknown',
-              mimeType: '',
+              mediaType: 'image',
+              mimeType: 'image/jpeg',
               name: '',
-              size: 0,
-            });
-            resolve();
+              size: 14,
+              occurrenceKey,
+            };
+            expect(next.mock.calls[0][0]).toEqual(
+              expect.objectContaining(expectedState),
+            );
+            done();
           },
         });
-      });
     });
   });
 
   describe('.file.upload()', () => {
-    it('should call media-store uploadFile with given arguments', done => {
+    let id;
+    let occurrenceKey;
+    let uploadableFileUpfrontIds: UploadableFileUpfrontIds;
+    let promissedUploadId: string;
+    let controller: UploadController;
+
+    beforeEach(() => {
+      id = uuid.v4();
+      occurrenceKey = uuid.v4();
+      promissedUploadId = uuid.v4();
+      uploadableFileUpfrontIds = {
+        id,
+        occurrenceKey,
+        deferredUploadId: Promise.resolve(promissedUploadId),
+      };
+      controller = new UploadController();
+    });
+
+    it('should call media-store uploadFile with given arguments', () => {
       const context = createContext();
       const file: UploadableFile = {} as any;
-      uploadFileMock.mockImplementation((_, __, callbacks) => {
+      uploadFileMock.mockImplementation((_, __, ___, callbacks) => {
         callbacks.onProgress(0.1);
-        return { deferredFileId };
+        return {};
       });
-      const fakeStore = {};
+      const touchFiles = jest.fn();
+      const fakeStore: Partial<MediaStore> = {
+        touchFiles,
+      };
       (context as any).mediaStore = fakeStore;
       (context.file as any).mediaStore = fakeStore;
+      touchFiles.mockReturnValue(new Promise(() => {}));
 
-      context.file.upload(file).subscribe({
+      const subscription = context.file.upload(file).subscribe({
         next() {
           expect(uploadFile).toHaveBeenCalled();
           expect(uploadFileMock.mock.calls[0][0]).toBe(file);
           expect(uploadFileMock.mock.calls[0][1]).toEqual(fakeStore);
+          expect(uploadFileMock.mock.calls[0][2]).toEqual({
+            id: expect.any(String),
+            occurrenceKey: expect.any(String),
+            deferredUploadId: expect.any(Promise),
+          });
+        },
+      });
+      subscription.unsubscribe();
+      expect.assertions(4);
+    });
+
+    it('should generate file id and get deferred uploadId', done => {
+      const context = createContext();
+      const file: UploadableFile = {
+        collection: 'some-collection',
+        name: 'some-name',
+        mimeType: 'some-mime-type',
+        content: {} as any,
+      };
+      uploadFileMock.mockImplementation((_, __, ___, callbacks) => {
+        callbacks.onProgress(0.1);
+        return {};
+      });
+      const touchFiles = jest.fn();
+      const fakeStore: Partial<MediaStore> = {
+        touchFiles,
+      };
+      (context as any).mediaStore = fakeStore;
+      (context.file as any).mediaStore = fakeStore;
+      const touchFilesResult: Promise<
+        MediaStoreResponse<TouchedFiles>
+      > = Promise.resolve({
+        data: {
+          created: [
+            {
+              fileId: 'some-file-id',
+              uploadId: 'some-upload-id',
+            },
+          ],
+        },
+      });
+      touchFiles.mockReturnValue(touchFilesResult);
+
+      const subcription = context.file.upload(file).subscribe({
+        async next() {
+          expect(touchFiles).toHaveBeenCalledWith(
+            {
+              descriptors: [
+                {
+                  fileId: expect.any(String),
+                  occurrenceKey: expect.any(String),
+                  collection: 'some-collection',
+                },
+              ],
+            },
+            {
+              collection: 'some-collection',
+            },
+          );
+          const uploadableFileUpfrontIds = uploadFileMock.mock
+            .calls[0][2] as UploadableFileUpfrontIds;
+          const actualUploadId = await uploadableFileUpfrontIds.deferredUploadId;
+          expect(actualUploadId).toEqual('some-upload-id');
+          subcription.unsubscribe();
           done();
         },
       });
@@ -453,34 +373,32 @@ describe('Context', () => {
       const cancelMock = jest.fn();
       (context as any).mediaStore = { getFile };
       (context as any).createDownloadFileStream = createDownloadFileStream;
-      uploadFileMock.mockImplementation((_, __, callbacks) => {
-        callbacks.onProgress(0.1);
-        let uploadFileReject: any;
-        const deferredFileId = new Promise((_, reject) => {
-          uploadFileReject = reject;
-        });
-        return {
-          deferredFileId,
-          cancel() {
-            cancelMock();
-            uploadFileReject();
-          },
-        };
-      });
-      const controller = new UploadController();
+      uploadFileMock.mockImplementation(
+        (_, __, ___, callbacks: UploadFileCallbacks) => {
+          callbacks.onProgress(0.1);
+          return {
+            cancel() {
+              cancelMock();
+              callbacks.onUploadFinish('some-error');
+            },
+          };
+        },
+      );
 
       return new Promise(resolve => {
-        context.file.upload(file, controller).subscribe({
-          error() {
-            expect(cancelMock).toHaveBeenCalledTimes(1);
-            resolve();
-          },
-        });
+        context.file
+          .upload(file, controller, uploadableFileUpfrontIds)
+          .subscribe({
+            error() {
+              expect(cancelMock).toHaveBeenCalledTimes(1);
+              resolve();
+            },
+          });
         controller.abort();
       });
     });
 
-    it('should emit file preview when file is a Blob', () => {
+    it('should emit file preview when file is a Blob', done => {
       const context = createContext();
       const getFile = jest.fn().mockReturnValue({
         data: {
@@ -495,29 +413,32 @@ describe('Context', () => {
         name: 'file-name.png',
       };
 
-      uploadFileMock.mockImplementation((_, __, callbacks) => {
-        callbacks.onId('1');
-        return { deferredFileId };
+      uploadFileMock.mockImplementation(() => {
+        return {};
       });
 
       (context as any).mediaStore = { getFile };
 
-      return new Promise(resolve => {
-        context.file.upload(file).subscribe({
-          next(state) {
+      const subscription = context.file
+        .upload(file, controller, uploadableFileUpfrontIds)
+        .subscribe({
+          async next(state) {
             expect(state as UploadingFileState).toEqual(
               expect.objectContaining({
                 name: 'file-name.png',
                 mediaType: 'image',
               }),
             );
-            expect((state as any).preview.blob).toBeInstanceOf(Blob);
-            resolve();
+            expect(
+              (await (state as UploadingFileState).preview!).value,
+            ).toBeInstanceOf(Blob);
+            subscription.unsubscribe();
+            done();
           },
         });
-      });
     });
-    it('should pass right mimeType when file is a Blob', () => {
+
+    it('should pass right mimeType when file is a Blob', done => {
       const context = createContext();
       const getFile = jest.fn().mockReturnValue({
         data: {
@@ -527,21 +448,21 @@ describe('Context', () => {
       const file = {
         content: new File([], '', { type: 'image/png' }),
       };
-      uploadFileMock.mockImplementation((_, __, callbacks) => {
-        callbacks.onId('1');
-        return { deferredFileId };
+      uploadFileMock.mockImplementation(() => {
+        return {};
       });
 
       (context as any).mediaStore = { getFile };
 
-      return new Promise(resolve => {
-        context.file.upload(file).subscribe({
+      const subscription = context.file
+        .upload(file, controller, uploadableFileUpfrontIds)
+        .subscribe({
           next(state) {
             expect((state as UploadingFileState).mimeType).toEqual('image/png');
-            resolve();
+            subscription.unsubscribe();
+            done();
           },
         });
-      });
     });
   });
 });

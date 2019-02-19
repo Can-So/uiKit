@@ -3,6 +3,7 @@ import CrossProductSearchClient, {
   SearchSession,
   ScopeResult,
   ABTest,
+  CrossProductExperimentResponse,
 } from '../../api/CrossProductSearchClient';
 import { Scope, ConfluenceItem, PersonItem } from '../../api/types';
 import 'whatwg-fetch';
@@ -22,13 +23,17 @@ import {
   generateRandomJiraProject,
 } from '../../../example-helpers/mockJira';
 
-function apiWillReturn(state: CrossProductSearchResponse) {
-  const opts = {
-    method: 'post',
-    name: 'xpsearch',
-  };
+const DEFAULT_XPSEARCH_OPTS = {
+  method: 'post',
+  name: 'xpsearch',
+};
 
-  fetchMock.mock('localhost/quicksearch/v1', state, opts);
+function apiWillReturn(state: CrossProductSearchResponse) {
+  fetchMock.mock('localhost/quicksearch/v1', state, DEFAULT_XPSEARCH_OPTS);
+}
+
+function experimentApiWillReturn(state: CrossProductExperimentResponse) {
+  fetchMock.mock('localhost/experiment/v1', state, DEFAULT_XPSEARCH_OPTS);
 }
 
 const abTest: ABTest = {
@@ -219,11 +224,11 @@ describe('CrossProductSearchClient', () => {
             id: 'cpus.user' as Scope,
             results: [
               {
-                userId: 'userId',
-                displayName: 'displayName',
-                nickName: 'nickName',
-                title: 'title',
-                primaryPhoto: 'primaryPhoto',
+                account_id: 'account_id',
+                name: 'name',
+                nickname: 'nickname',
+                job_title: 'job_title',
+                picture: 'picture',
               } as PersonItem,
             ],
           },
@@ -238,26 +243,26 @@ describe('CrossProductSearchClient', () => {
       expect(result.results.get(Scope.People)).toHaveLength(1);
 
       const item = result.results.get(Scope.People)![0] as PersonResult;
-      expect(item.resultId).toEqual('people-userId');
-      expect(item.name).toEqual('displayName');
-      expect(item.href).toEqual('/people/userId');
+      expect(item.resultId).toEqual('people-account_id');
+      expect(item.name).toEqual('name');
+      expect(item.href).toEqual('/people/account_id');
       expect(item.analyticsType).toEqual(AnalyticsType.ResultPerson);
       expect(item.resultType).toEqual(ResultType.PersonResult);
-      expect(item.avatarUrl).toEqual('primaryPhoto');
-      expect(item.mentionName).toEqual('nickName');
-      expect(item.presenceMessage).toEqual('title');
+      expect(item.avatarUrl).toEqual('picture');
+      expect(item.mentionName).toEqual('nickname');
+      expect(item.presenceMessage).toEqual('job_title');
     });
 
-    it('should have fall back for optional properties like title and nickName', async () => {
+    it('should have fall back for optional properties like title and nickname', async () => {
       apiWillReturn({
         scopes: [
           {
             id: 'cpus.user' as Scope,
             results: [
               {
-                userId: 'userId',
-                displayName: 'displayName',
-                primaryPhoto: 'primaryPhoto',
+                account_id: 'account_id',
+                name: 'name',
+                picture: 'picture',
               } as PersonItem,
             ],
           },
@@ -271,7 +276,7 @@ describe('CrossProductSearchClient', () => {
       );
 
       const item = result.results.get(Scope.People)![0] as PersonResult;
-      expect(item.mentionName).toEqual('displayName');
+      expect(item.mentionName).toEqual('name');
       expect(item.presenceMessage).toEqual('');
     });
   });
@@ -342,11 +347,10 @@ describe('CrossProductSearchClient', () => {
         controlId: 'controlId',
       };
 
-      apiWillReturn({
+      experimentApiWillReturn({
         scopes: [
           {
             id: 'confluence.page,blogpost' as Scope,
-            results: [],
             abTest,
           },
         ],
@@ -359,12 +363,12 @@ describe('CrossProductSearchClient', () => {
       expect(result).toEqual(abTest);
     });
 
-    it('should not fail when there is no ab test data', async () => {
-      apiWillReturn({
+    it('should not fail if getting experiments fails', async () => {
+      experimentApiWillReturn({
         scopes: [
           {
             id: 'confluence.page,blogpost' as Scope,
-            results: [],
+            error: 'did not work',
           },
         ],
       });

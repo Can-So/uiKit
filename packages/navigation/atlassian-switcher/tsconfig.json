@@ -1,0 +1,11 @@
+{
+  "extends": "../../../tsconfig.core.json",
+  "moduleResolution": "node",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

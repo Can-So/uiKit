@@ -18,7 +18,7 @@ export default {
   'global_search.no_results_title':
     'Pealkirjades ja inimeste seas otsitavat ei leitud',
   'global_search.no_results_body':
-    'Proovi otsida muu nimega. Lehekülje sisu saad otsida ka täpsema otsinguga või saad inimesi otsida altpoolt.',
+    'Proovi uuesti muu nimega või otsi meie täpsema otsinguga.',
   'global_search.people.recent_people_heading':
     'Hiljuti töötas koos kasutajatega',
   'global_search.people.people_heading': 'Inimesed',
@@ -32,12 +32,12 @@ export default {
   'global_search.jira.recent_people_heading':
     'Hiljuti töötas koos kasutajatega',
   'global_search.jira.recent_containers':
-    'Hiljutised tahvlid, filtrid ja projektid',
+    'Hiljutised tahvlid, projektid ja filtrid',
   'global_search.jira.search_result_issues_heading': 'Probleemid',
   'global_search.jira.search_result_containers_heading':
-    'Tahvlid, filtrid ja projektid',
+    'Tahvlid, projektid ja filtrid',
   'global_search.jira.search_result_people_heading': 'Inimesed',
-  'global_search.jira.advanced_search': 'Otsi täpsemalt',
+  'global_search.jira.advanced_search': 'Täpsemalt otsiti',
   'global_search.jira.advanced_search_issues': 'probleeme',
   'global_search.jira.advanced_search_projects': 'projekte',
   'global_search.jira.advanced_search_boards': 'tahvleid',
@@ -45,9 +45,15 @@ export default {
   'global_search.jira.advanced_search_people': 'inimesi',
   'global_search.jira.advanced_issue_search': 'Otsi täpsemalt probleeme',
   'global_search.jira.no_results_title':
-    'Probleemi kokkuvõtetes, nimedes ja inimestes otsitavat ei leitud',
+    'Me ei leidnud midagi, mis vastaks sinu otsingule',
   'global_search.jira.no_results_body':
-    'Proovi otsida muu nimega. Saad otsida probleemi kõiki tekstivälju või muid elemente täpsemalt.',
+    'Proovi uuesti muu nimega või otsi meie täpsema otsinguga.',
   'global_search.jira.no_recent_activity_body':
     'Või otsida meie täpsema otsinguga.',
+  'global_search.jira.project_type.business_project': 'Äriprojekt',
+  'global_search.jira.project_type.software_project': 'Tarkvaraprojekt',
+  'global_search.jira.project_type.service_desk_project': 'Teenusleti projekt',
+  'global_search.jira.project_type.ops_project': 'Ops projekt',
+  'global_search.jira.result_type.board': 'Tahvel',
+  'global_search.jira.result_type.filter': 'Filter',
 };

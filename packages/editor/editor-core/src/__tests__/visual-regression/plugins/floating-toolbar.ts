@@ -8,7 +8,7 @@ import {
   snapshot,
 } from '../_utils';
 
-describe('Snapshot Test: Floating toolbar', () => {
+describe.skip('Snapshot Test: Floating toolbar', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
@@ -74,7 +74,7 @@ describe('Snapshot Test: Floating toolbar', () => {
   });
 });
 
-describe('Floating toolbar: Toolbar resolution', () => {
+describe.skip('Floating toolbar: Toolbar resolution', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore

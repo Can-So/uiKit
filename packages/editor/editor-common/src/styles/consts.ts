@@ -67,10 +67,12 @@ export const akEditorTableCellBackgroundOpacity = 0.5;
 export const akEditorFullPageMaxWidth = 680;
 export const akEditorDefaultLayoutWidth = 680;
 export const akEditorWideLayoutWidth = 960;
+export const akEditorFullWidthLayoutWidth = 1800;
 export const akEditorTableNumberColumnWidth = 42;
 export const akEditorBreakoutPadding = 96;
 export const akEditorMobileBreakoutPoint = 720;
 export const akEditorTableCellMinWidth = 48;
+export const akEditorTableLegacyCellMinWidth = 128;
 export const gridMediumMaxWidth = 1024;
 export const breakoutWideScaleRatio = 1.33;
 
@@ -81,4 +83,4 @@ export const relativeSize = (multiplier: number) => ({ theme }) =>
   editorFontSize({ theme }) * multiplier;
 
 // @see typography spreadsheet: https://docs.google.com/spreadsheets/d/1iYusRGCT4PoPfvxbJ8NrgjtfFgXLm5lpDWXzjua1W2E/edit#gid=93913128
-export const blockNodesVerticalMargin = '1.142em';
+export const blockNodesVerticalMargin = 1.143;

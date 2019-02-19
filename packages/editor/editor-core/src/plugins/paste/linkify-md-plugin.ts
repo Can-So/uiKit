@@ -1,5 +1,5 @@
 import * as LinkifyIt from 'linkify-it';
-import { linkifyMatch } from '../hyperlink/utils';
+import { linkifyMatch, LinkifyMatch } from '../hyperlink/utils';
 
 // modified version of the original Linkify plugin
 // https://github.com/markdown-it/markdown-it/blob/master/lib/rules_core/linkify.js
@@ -62,9 +62,9 @@ const linkify = state => {
 
       if (currentToken.type === 'text' && linkify.test(currentToken.content)) {
         const text = currentToken.content;
-        let links = linkifyMatch(text);
+        let links: LinkifyMatch[] | null = linkifyMatch(text);
         if (!links.length) {
-          links = linkify.match(text);
+          links = linkify.match(text) || [];
         }
 
         // Now split string to nodes

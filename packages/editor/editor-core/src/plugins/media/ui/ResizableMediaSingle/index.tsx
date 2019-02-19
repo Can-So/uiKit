@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
-
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
   akEditorWideLayoutWidth,
   calcPxFromColumns,
   calcPctFromPx,
   calcPxFromPct,
-  MediaSingleLayout,
   akEditorBreakoutPadding,
   calcColumnsFromPx,
   breakoutWideScaleRatio,
@@ -14,12 +13,73 @@ import {
 
 import { Wrapper } from './styled';
 import { Props, EnabledHandles } from './types';
-import Resizer, { handleSides } from './Resizer';
+import Resizer from './Resizer';
+import {
+  snapTo,
+  handleSides,
+  imageAlignmentMap,
+  alignmentLayouts,
+} from './utils';
 
-export default class ResizableMediaSingle extends React.Component<Props> {
+type State = {
+  offsetLeft: number;
+  isVideoFile: boolean;
+};
+
+export default class ResizableMediaSingle extends React.Component<
+  Props,
+  State
+> {
+  state = {
+    offsetLeft: this.calcOffsetLeft(),
+
+    // We default to true until we resolve the file type
+    isVideoFile: true,
+  };
+
+  componentDidUpdate() {
+    const offsetLeft = this.calcOffsetLeft();
+    if (offsetLeft !== this.state.offsetLeft && offsetLeft >= 0) {
+      this.setState({ offsetLeft });
+    }
+
+    return true;
+  }
+
   get wrappedLayout() {
     const { layout } = this.props;
-    return layout === 'wrap-left' || layout === 'wrap-right';
+    return (
+      layout === 'wrap-left' ||
+      layout === 'wrap-right' ||
+      layout === 'align-start' ||
+      layout === 'align-end'
+    );
+  }
+
+  async componentDidMount() {
+    this.checkVideoFile(this.props.viewContext);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.viewContext !== nextProps.viewContext) {
+      this.checkVideoFile(nextProps.viewContext);
+    }
+  }
+
+  async checkVideoFile(viewContext) {
+    const $pos = this.$pos;
+    if (!$pos || !viewContext) {
+      return;
+    }
+    const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
+    const state = await viewContext.file.getCurrentState(
+      getMediaNode!.attrs.id,
+    );
+    if (state && state.status !== 'error' && state.mediaType === 'image') {
+      this.setState({
+        isVideoFile: false,
+      });
+    }
   }
 
   calcNewSize = (newWidth: number, stop: boolean) => {
@@ -53,11 +113,12 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
   get $pos() {
     const pos = this.props.getPos();
-    if (typeof pos !== 'number') {
+    if (Number.isNaN(pos as any) || typeof pos !== 'number') {
       return null;
     }
 
-    return this.props.state.doc.resolve(pos);
+    // need to pass view because we may not get updated props in time
+    return this.props.view.state.doc.resolve(pos);
   }
 
   /**
@@ -72,9 +133,10 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
   calcOffsetLeft() {
     let offsetLeft = 0;
+
     if (this.wrapper && this.insideInlineLike) {
       let currentNode: HTMLElement | null = this.wrapper;
-      const pm = document.querySelector('.ProseMirror')! as HTMLElement;
+      const pm = this.props.view.dom as HTMLElement;
 
       while (
         currentNode &&
@@ -92,22 +154,20 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     return offsetLeft;
   }
 
-  calcColumnLeft = () => {
-    const offsetLeft = this.calcOffsetLeft();
+  calcColumnLeftOffset = () => {
+    const { offsetLeft } = this.state;
     return this.insideInlineLike
-      ? Math.floor(
-          calcColumnsFromPx(
-            offsetLeft,
-            this.props.lineLength,
-            this.props.gridSize,
-          ),
+      ? calcColumnsFromPx(
+          offsetLeft,
+          this.props.lineLength,
+          this.props.gridSize,
         )
       : 0;
   };
 
   wrapper: HTMLElement | null;
-  get snapPoints() {
-    const offsetLeft = this.calcOffsetLeft();
+  calcSnapPoints() {
+    const { offsetLeft } = this.state;
 
     const { containerWidth, lineLength, appearance } = this.props;
     const snapTargets: number[] = [];
@@ -116,7 +176,6 @@ export default class ResizableMediaSingle extends React.Component<Props> {
         calcPxFromColumns(i, lineLength, this.gridWidth) - offsetLeft,
       );
     }
-
     // full width
     snapTargets.push(lineLength - offsetLeft);
 
@@ -125,12 +184,18 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       lineLength,
       this.props.gridSize,
     );
-    const snapPoints = snapTargets.filter(width => width >= minimumWidth);
 
+    let snapPoints = snapTargets.filter(width => width >= minimumWidth);
     const $pos = this.$pos;
     if (!$pos) {
       return snapPoints;
     }
+
+    const { isVideoFile } = this.state;
+
+    snapPoints = isVideoFile
+      ? snapPoints.filter(width => width > 320)
+      : snapPoints;
 
     const isTopLevel = $pos.parent.type.name === 'doc';
     if (isTopLevel && appearance === 'full-page') {
@@ -150,9 +215,37 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       return false;
     }
 
-    const { table, listItem } = this.props.state.schema.nodes;
+    const { table, listItem } = this.props.view.state.schema.nodes;
     return !!findParentNodeOfTypeClosestToPos($pos, [table, listItem]);
   }
+
+  highlights = (newWidth: number, snapPoints: number[]) => {
+    const snapWidth = snapTo(newWidth, snapPoints);
+
+    if (snapWidth > akEditorWideLayoutWidth) {
+      return ['full-width'];
+    }
+
+    const { layout, lineLength, gridSize } = this.props;
+    const columns = calcColumnsFromPx(snapWidth, lineLength, gridSize);
+    const columnWidth = Math.round(columns);
+    const highlight: number[] = [];
+
+    if (layout === 'wrap-left' || layout === 'align-start') {
+      highlight.push(0, columnWidth);
+    } else if (layout === 'wrap-right' || layout === 'align-end') {
+      highlight.push(gridSize, gridSize - columnWidth);
+    } else if (this.insideInlineLike) {
+      highlight.push(Math.round(columns + this.calcColumnLeftOffset()));
+    } else {
+      highlight.push(
+        Math.floor((gridSize - columnWidth) / 2),
+        Math.ceil((gridSize + columnWidth) / 2),
+      );
+    }
+
+    return highlight;
+  };
 
   render() {
     const {
@@ -174,6 +267,10 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       pxWidth = Math.ceil(
         calcPxFromPct(pctWidth / 100, lineLength || containerWidth),
       );
+    } else if (layout === 'center') {
+      pxWidth = Math.min(origWidth, lineLength);
+    } else if (alignmentLayouts.indexOf(layout) !== -1) {
+      pxWidth = Math.min(origWidth / 2, lineLength);
     }
 
     // scale, keeping aspect ratio
@@ -186,6 +283,9 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       enable[side] =
         ['full-width', 'wide', 'center']
           .concat(`wrap-${oppositeSide}` as MediaSingleLayout)
+          .concat(`align-${
+            imageAlignmentMap[oppositeSide]
+          }` as MediaSingleLayout)
           .indexOf(layout) > -1;
 
       if (side === 'left' && this.insideInlineLike) {
@@ -208,10 +308,9 @@ export default class ResizableMediaSingle extends React.Component<Props> {
           selected={this.props.selected}
           enable={enable}
           calcNewSize={this.calcNewSize}
-          snapPoints={this.snapPoints}
+          snapPoints={this.calcSnapPoints()}
           scaleFactor={!this.wrappedLayout && !this.insideInlineLike ? 2 : 1}
-          isInlineLike={this.insideInlineLike}
-          getColumnLeft={this.calcColumnLeft}
+          highlights={this.highlights}
         >
           {this.props.children}
         </Resizer>

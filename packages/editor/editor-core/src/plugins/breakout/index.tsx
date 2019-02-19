@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Plugin } from 'prosemirror-state';
-import { breakout, calcBreakoutWidth } from '@atlaskit/editor-common';
+import { breakout } from '@atlaskit/adf-schema';
+import { calcBreakoutWidth } from '@atlaskit/editor-common';
 import { EditorPlugin } from '../../types';
 import { ReactNodeView } from '../../nodeviews';
 import WithPluginState from '../../ui/WithPluginState';
@@ -17,7 +18,10 @@ export const Wrapper = styled.div`
 
 class BreakoutView extends ReactNodeView {
   getContentDOM() {
-    return { dom: document.createElement('div') };
+    const dom = document.createElement('div');
+    // MutationObserver bug with nodeviews @see ED-6062
+    dom.className = 'fabric-editor-breakout-mark-dom';
+    return { dom };
   }
 
   render(props, forwardRef) {

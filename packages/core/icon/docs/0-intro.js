@@ -10,13 +10,14 @@ export default md`
     <SectionMessage appearance="warning">
       <p>
         <strong>
-          Version 14 removes a large number of icons from the icons package
+          Version 16 and Version 14 removes a large number of icons from the
+          icons package
         </strong>
       </p>
       <p>
         Please see our{' '}
         <a href="/packages/core/icon/docs/upgrade-guide">upgrade guide</a> for
-        this version bump for more information.
+        these version bump for more information.
       </p>
     </SectionMessage>
   )}

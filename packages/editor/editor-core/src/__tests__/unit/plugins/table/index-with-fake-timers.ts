@@ -1,5 +1,5 @@
 import * as sinon from 'sinon';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   doc,
   p,
@@ -7,7 +7,7 @@ import {
   tr,
   tdEmpty,
   tdCursor,
-  createEditor,
+  createEditorFactory,
 } from '@atlaskit/editor-test-helpers';
 import tablesPlugin from '../../../../plugins/table';
 import codeBlockPlugin from '../../../../plugins/code-block';
@@ -21,6 +21,8 @@ import {
 } from '../../../../plugins/table/types';
 
 describe('TableView', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any, trackEvent = () => {}) => {
     const tableOptions = {
       allowNumberColumn: true,
@@ -28,7 +30,7 @@ describe('TableView', () => {
       allowHeaderColumn: true,
       permittedLayouts: 'all',
     } as PluginConfig;
-    return createEditor<TablePluginState>({
+    return createEditor({
       doc,
       editorPlugins: [
         listPlugin,

@@ -16,7 +16,9 @@ import {
 import FabricElementsListener, {
   ELEMENTS_TAG,
 } from '../../../fabric/FabricElementsListener';
+import Logger from '../../../helpers/logger';
 import { AnalyticsWebClient, FabricChannel } from '../../../types';
+import { createLoggerMock } from '../../_testUtils';
 
 const DummyCompWithAttributesWithAnalytics = createComponentWithAttributesWithAnalytics(
   FabricChannel.elements,
@@ -30,7 +32,7 @@ const DummyTaggedElementsComp = createTaggedComponentWithAnalytics(
 
 describe('<FabricElementsListener />', () => {
   let analyticsWebClientMock: AnalyticsWebClient;
-  let loggerMock;
+  let loggerMock: Logger;
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -39,12 +41,7 @@ describe('<FabricElementsListener />', () => {
       sendTrackEvent: jest.fn(),
       sendScreenEvent: jest.fn(),
     };
-    loggerMock = {
-      debug: jest.fn(),
-      info: jest.fn(),
-      warn: jest.fn(),
-      error: jest.fn(),
-    };
+    loggerMock = createLoggerMock();
   });
 
   const fireAndVerifySentEvent = (

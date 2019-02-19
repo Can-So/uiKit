@@ -4,14 +4,15 @@ import * as fetchMock from 'fetch-mock';
 import { Client, RemoteResourceAuthConfig, ResolveResponse } from '../..';
 import { ObjectState, GetNowTimeFn, DefinedState } from '../../types';
 import { v4 } from 'uuid';
+import { resolvedEvent, unresolvedEvent } from '../../../analytics';
+import env from '../../../environments';
 
 const getNow = (nows: number[]): GetNowTimeFn => () =>
   nows.shift() || new Date().getTime();
 
 const waitFor = (n: number = 1) => new Promise(res => setTimeout(res, n));
 
-const RESOLVE_URL =
-  'https://api-private.stg.atlassian.com/object-resolver/resolve';
+const RESOLVE_URL = 'https://api-private.atlassian.com/object-resolver/resolve';
 
 const OBJECT_URL = 'http://example.com/foobar';
 
@@ -132,6 +133,24 @@ function onNthState(
 
 describe('Client', () => {
   afterEach(() => fetchMock.restore());
+
+  describe('environments', () => {
+    it('should make a call to prod server if not other env is specified', async () => {
+      expect(new Client().env.resolverURL).toEqual(env.prod.resolverURL);
+    });
+
+    it('should make a call to prod server if not other env is specified', () => {
+      expect(new Client(undefined, 'dev').env.resolverURL).toEqual(
+        env.dev.resolverURL,
+      );
+    });
+
+    it('should make a call to prod server if not other env is specified', () => {
+      expect(new Client(undefined, 'staging').env.resolverURL).toEqual(
+        env.staging.resolverURL,
+      );
+    });
+  });
 
   it('should call update function two times', async () => {
     mockResolvedFetchCall();
@@ -535,5 +554,44 @@ describe('Client', () => {
     await waitFor(4);
 
     expect(updateFn).toBeCalledWith([null, true]);
+  });
+
+  describe('Analytics', () => {
+    it('should accept a callback to handle an analytics event', done => {
+      mockResolvedFetchCall();
+      const client = new Client();
+      const mockedHandler = jest.fn().mockImplementation(() => {
+        expect(mockedHandler).toBeCalledTimes(1);
+        done();
+      });
+      client.register('some.url');
+      client.resolve('some.url', mockedHandler);
+    });
+
+    it('should fire a resolved event when a url gets resolved', done => {
+      mockResolvedFetchCall();
+      const client = new Client();
+      const expectedEvent = resolvedEvent('some.url');
+      const mockedHandler = jest.fn().mockImplementation(() => {
+        expect(mockedHandler).toBeCalledWith(expectedEvent);
+        done();
+      });
+      client.register('some.url');
+      client.resolve('some.url', mockedHandler);
+    });
+
+    it('should fire an unresolved analytics event otherwise', done => {
+      mockNotFoundFetchCall();
+      const client = new Client();
+      const expectedEvent = unresolvedEvent('some.url', {
+        status: 'not-found',
+      });
+      const mockedHandler = jest.fn().mockImplementation(() => {
+        expect(mockedHandler).toBeCalledWith(expectedEvent);
+        done();
+      });
+      client.register('some.url');
+      client.resolve('some.url', mockedHandler);
+    });
   });
 });

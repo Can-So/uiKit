@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import * as sinon from 'sinon';
-import { imageFileId, youtubeLinkId } from '@atlaskit/media-test-helpers';
+import { imageFileId, genericFileId } from '@atlaskit/media-test-helpers';
 import { storyMediaProviderFactory } from '@atlaskit/editor-test-helpers';
-import { Card, CardEvent } from '@atlaskit/media-card';
+import {
+  Card,
+  CardEvent,
+  defaultImageCardDimensions,
+} from '@atlaskit/media-card';
 import { FilmstripView } from '@atlaskit/media-filmstrip';
 import { ProviderFactory, EventHandlers } from '@atlaskit/editor-common';
 import Media from '../../../../react/nodes/media';
@@ -23,6 +27,21 @@ describe('MediaGroup', () => {
 
   afterEach(() => {
     document.body.removeChild(fixture);
+  });
+
+  it('should render media card with the right dimention if is a file', () => {
+    const mediaGroup = shallow(
+      <MediaGroup>
+        <Media
+          id={genericFileId.id}
+          type={genericFileId.mediaItemType}
+          collection={genericFileId.collectionName}
+        />
+      </MediaGroup>,
+    );
+    expect(mediaGroup.find(Media).prop('cardDimensions')).toEqual(
+      defaultImageCardDimensions,
+    );
   });
 
   it('should not render a FilmstripView component if it has only one media node', () => {
@@ -71,14 +90,16 @@ describe('MediaGroup', () => {
           providers={providerFactory}
         />
         <Media
-          id={youtubeLinkId.id}
-          type={youtubeLinkId.mediaItemType}
-          collection={youtubeLinkId.collectionName}
+          id={imageFileId.id}
+          type={imageFileId.mediaItemType}
+          occurrenceKey="001"
+          collection={imageFileId.collectionName}
           providers={providerFactory}
         />
       </MediaGroup>,
       { attachTo: fixture },
     );
+
     expect(mediaGroup.find(FilmstripView)).toHaveLength(1);
 
     const provider = await mediaProvider;
@@ -105,13 +126,19 @@ describe('MediaGroup', () => {
     expect(surroundingItems[0].collectionName).toBe(imageFileId.collectionName);
     expect(surroundingItems[0].occurrenceKey).toBe('001');
 
-    expect(surroundingItems[1].id).toBe(youtubeLinkId.id);
-    expect(surroundingItems[1].mediaItemType).toBe(youtubeLinkId.mediaItemType);
-    expect(surroundingItems[1].collectionName).toBe(
-      youtubeLinkId.collectionName,
-    );
-    expect(surroundingItems[1].occurrenceKey).toBeUndefined();
-
     mediaGroup.unmount();
+  });
+
+  it('should send useInlinePlayer: false to the Media', () => {
+    const mediaGroup = mount(
+      <MediaGroup>
+        <Media
+          id={imageFileId.id}
+          type={imageFileId.mediaItemType}
+          collection={imageFileId.collectionName}
+        />
+      </MediaGroup>,
+    );
+    expect(mediaGroup.find(Media).prop('useInlinePlayer')).toBe(false);
   });
 });

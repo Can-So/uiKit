@@ -6,12 +6,11 @@ import * as React from 'react';
 import { Component } from 'react';
 import Button from '@atlaskit/button';
 import {
-  userAuthProvider,
   defaultMediaPickerCollectionName,
   createUploadContext,
 } from '@atlaskit/media-test-helpers';
 import { Card } from '@atlaskit/media-card';
-import { MediaPicker } from '../src';
+import { MediaPicker, Popup } from '../src';
 import {
   PopupContainer,
   PopupHeader,
@@ -25,25 +24,11 @@ import {
 } from '../src/domain/uploadEvent';
 
 const context = createUploadContext();
-const popup = MediaPicker('popup', context, {
-  container: document.body,
-  uploadParams: {
-    collection: defaultMediaPickerCollectionName,
-  },
-});
-
-popup.on('upload-preview-update', (event: UploadPreviewUpdateEventPayload) => {
-  const { file, preview } = event;
-
-  console.log('upload-preview-update file', file);
-  console.log('upload-preview-update preview', preview);
-});
-
-popup.show();
 
 export interface PopupWrapperState {
   files: Promise<string>[];
   uploadingFiles: Promise<string>[];
+  popup?: Popup;
 }
 
 class PopupWrapper extends Component<{}, PopupWrapperState> {
@@ -52,17 +37,34 @@ class PopupWrapper extends Component<{}, PopupWrapperState> {
     uploadingFiles: [],
   };
 
-  componentDidMount() {
-    this.createPopup();
+  async componentDidMount() {
+    const popup = await MediaPicker('popup', context, {
+      uploadParams: {
+        collection: defaultMediaPickerCollectionName,
+      },
+    });
+
+    popup.on(
+      'upload-preview-update',
+      (event: UploadPreviewUpdateEventPayload) => {
+        const { file, preview } = event;
+
+        console.log('upload-preview-update file', file);
+        console.log('upload-preview-update preview', preview);
+      },
+    );
+
+    popup.show();
+
+    popup.on('uploads-start', this.onUploadsStart);
+    popup.on('upload-end', this.onUploadEnd);
+
+    this.setState({ popup });
   }
 
   componentWillUnmount() {
-    popup.removeAllListeners();
-  }
-
-  private createPopup() {
-    popup.on('uploads-start', this.onUploadsStart);
-    popup.on('upload-end', this.onUploadEnd);
+    const { popup } = this.state;
+    if (popup) popup.removeAllListeners();
   }
 
   onUploadsStart = (data: UploadsStartEventPayload) => {
@@ -89,10 +91,9 @@ class PopupWrapper extends Component<{}, PopupWrapperState> {
   };
 
   onShow = () => {
-    // Populate cache in userAuthProvider.
-    userAuthProvider();
+    const { popup } = this.state;
     // Synchronously with next command tenantAuthProvider will be requested.
-    popup.show().catch(console.error);
+    if (popup) popup.show().catch(console.error);
   };
 
   renderCards = () => {

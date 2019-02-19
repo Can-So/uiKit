@@ -1,9 +1,6 @@
-import {
-  GasPayload,
-  GasScreenEventPayload,
-} from '@atlaskit/analytics-gas-types';
-import { ProcessedFileState } from '@atlaskit/media-core';
-import { context, fileStateToFileGasPayload } from './index';
+import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { ProcessedFileState, FileState } from '@atlaskit/media-core';
+import { packageAttributes, fileStateToFileGasPayload } from './index';
 
 export type ViewerLoadPayload = {
   status: 'success' | 'error';
@@ -14,13 +11,36 @@ export type AnalyticViewerProps = {
   onLoad: (payload: ViewerLoadPayload) => void;
 };
 
-const loadedEventPayload: GasPayload = {
-  action: 'loaded',
-  actionSubject: 'mediaFile',
-  eventType: 'operational',
+export const mediaFileCommencedEvent = (id: string): GasPayload => {
+  return {
+    eventType: 'operational',
+    action: 'commenced',
+    actionSubject: 'mediaFile',
+    actionSubjectId: id,
+    attributes: {
+      fileId: id,
+      ...packageAttributes,
+    },
+  };
 };
 
-export const itemViewerErrorEvent = (
+export const mediaFileLoadSucceededEvent = (
+  file: ProcessedFileState,
+): GasPayload => {
+  return {
+    eventType: 'operational',
+    actionSubject: 'mediaFile',
+    action: 'loadSucceeded',
+    actionSubjectId: file.id,
+    attributes: {
+      status: 'success',
+      ...fileStateToFileGasPayload(file),
+      ...packageAttributes,
+    },
+  };
+};
+
+export const mediaFileLoadFailedEvent = (
   id: string,
   failReason: string,
   file?: ProcessedFileState,
@@ -31,51 +51,39 @@ export const itemViewerErrorEvent = (
         fileId: id,
       };
   return {
-    ...loadedEventPayload,
+    eventType: 'operational',
+    actionSubject: 'mediaFile',
+    action: 'loadFailed',
     actionSubjectId: id,
     attributes: {
       status: 'fail',
       ...fileAttributes,
       failReason,
-      ...context,
+      ...packageAttributes,
     },
   };
 };
 
-export const itemViewerLoadedEvent = (file: ProcessedFileState): GasPayload => {
+export const mediaPreviewFailedEvent = (
+  failReason: string,
+  id?: string,
+  file?: FileState,
+): GasPayload => {
+  const fileAttributes = file
+    ? fileStateToFileGasPayload(file)
+    : {
+        fileId: id,
+      };
   return {
-    ...loadedEventPayload,
-    actionSubjectId: file.id,
-    attributes: {
-      status: 'success',
-      ...fileStateToFileGasPayload(file),
-      ...context,
-    },
-  };
-};
-
-export const itemViewerCommencedEvent = (id: string): GasPayload => {
-  return {
-    action: 'commenced',
-    actionSubject: 'mediaFile',
-    actionSubjectId: id,
     eventType: 'operational',
+    actionSubject: 'mediaFile',
+    action: 'previewFailed',
+    actionSubjectId: id,
     attributes: {
-      fileId: id,
-      ...context,
-    },
-  };
-};
-
-export const mediaViewerModalScreenEvent = (
-  id: string,
-): GasScreenEventPayload => {
-  return {
-    eventType: 'screen',
-    name: 'mediaViewerModal',
-    attributes: {
-      fileId: id,
-      ...context,
+      status: 'fail',
+      ...fileAttributes,
+      failReason,
+      ...packageAttributes,
     },
   };
 };

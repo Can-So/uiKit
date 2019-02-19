@@ -1,12 +1,14 @@
+import * as classnames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import * as classnames from 'classnames';
-
+import { FormattedMessage } from 'react-intl';
+import { isMessagesKey } from '../../type-helpers';
+import { messages } from '../i18n';
 import * as styles from './styles';
 
 export interface Props {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
   className?: string;
 }
 
@@ -18,8 +20,14 @@ export default class EmojiPickerCategoryHeading extends PureComponent<
     const { id, title, className } = this.props;
 
     return (
-      <div id={id} data-category-id={title} className={classnames(className)}>
-        <div className={styles.emojiCategoryTitle}>{title}</div>
+      <div id={id} data-category-id={id} className={classnames(className)}>
+        <div className={styles.emojiCategoryTitle}>
+          {isMessagesKey(title) ? (
+            <FormattedMessage {...messages[title]} />
+          ) : (
+            title
+          )}
+        </div>
       </div>
     );
   }

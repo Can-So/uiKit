@@ -12,7 +12,7 @@ import { intlShape } from 'react-intl';
 
 const mediaContext = ContextFactory.create({
   authProvider: defaultMediaPickerAuthProvider,
-  userAuthProvider: userAuthProvider,
+  userAuthProvider,
 });
 
 interface ExampleChildrenProps {}
@@ -26,19 +26,19 @@ class ExampleChildren extends Component<ExampleChildrenProps, {}> {
     intl: intlShape,
   };
 
-  componentDidMount() {
-    this.createMediaPicker(this.context);
+  async componentDidMount() {
+    await this.createMediaPicker(this.context);
     this.showMediaPicker();
   }
 
-  componentWillReceiveProps(_: ExampleChildrenProps, nextContext: any) {
+  async componentWillReceiveProps(_: ExampleChildrenProps, nextContext: any) {
     if (this.context.intl !== nextContext.intl) {
-      this.createMediaPicker(nextContext);
+      await this.createMediaPicker(nextContext);
     }
   }
 
-  createMediaPicker(reactContext: any) {
-    this.popup = MediaPicker('popup', mediaContext, {
+  async createMediaPicker(reactContext: any) {
+    this.popup = await MediaPicker('popup', mediaContext, {
       container: document.body,
       uploadParams: {
         collection: defaultCollectionName,

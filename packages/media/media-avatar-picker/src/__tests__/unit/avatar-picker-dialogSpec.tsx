@@ -2,19 +2,19 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import ModalDialog from '@atlaskit/modal-dialog';
 import Button from '@atlaskit/button';
-import { Avatar } from '../../../src/avatar-list';
-import { ImageNavigator, CONTAINER_SIZE } from '../../../src/image-navigator';
-import { PredefinedAvatarList } from '../../../src/predefined-avatar-list';
+import { smallImage, mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { Avatar } from '../../avatar-list';
+import { ImageNavigator, CONTAINER_SIZE } from '../../image-navigator';
+import { PredefinedAvatarList } from '../../predefined-avatar-list';
+import { AvatarPickerDialog } from '../../avatar-picker-dialog';
+import { DEFAULT_VISIBLE_PREDEFINED_AVATARS } from '../../avatar-picker-dialog/layout-const';
+import { dataURItoFile, fileToDataURI } from '../../util';
+import { PredefinedAvatarView } from '../../predefined-avatar-view';
 import {
-  AvatarPickerDialog,
+  Mode,
   AvatarPickerDialogProps,
   AvatarPickerDialogState,
-} from '../../../src/avatar-picker-dialog';
-import { DEFAULT_VISIBLE_PREDEFINED_AVATARS } from '../../../src/avatar-picker-dialog/layout-const';
-import { dataURItoFile, fileToDataURI } from '../../../src/util';
-import { smallImage, mountWithIntlContext } from '@atlaskit/media-test-helpers';
-import { PredefinedAvatarView } from '../../../src/predefined-avatar-view';
-import { Mode } from '../../../src';
+} from '../../avatar-picker-dialog/types';
 
 describe('Avatar Picker Dialog', () => {
   const renderWithProps = (props: Partial<AvatarPickerDialogProps>) => {
@@ -49,7 +49,9 @@ describe('Avatar Picker Dialog', () => {
 
   const renderSaveButton = (props: Partial<AvatarPickerDialogProps> = {}) => {
     const component = renderWithProps(props);
-    const { footer } = component.find(ModalDialog).props() as { footer: any };
+    const {
+      components: { Footer: footer },
+    } = component.find(ModalDialog).props() as { components: { Footer: any } };
 
     return shallow(footer())
       .find(Button)
@@ -64,9 +66,9 @@ describe('Avatar Picker Dialog', () => {
       imageSource: smallImage,
     });
 
-    const { footer } = component.find(ModalDialog).props() as {
-      footer: any;
-    };
+    const {
+      components: { Footer: footer },
+    } = component.find(ModalDialog).props() as { components: { Footer: any } };
 
     // click on the save button
     shallow(footer())
@@ -93,9 +95,9 @@ describe('Avatar Picker Dialog', () => {
     const croppedImgDataURI = 'data:image/meme;based64:w0w';
     component.instance()['exportCroppedImage'] = () => croppedImgDataURI;
 
-    const { footer } = component.find(ModalDialog).props() as {
-      footer: any;
-    };
+    const {
+      components: { Footer: footer },
+    } = component.find(ModalDialog).props() as { components: { Footer: any } };
 
     // click on the save button
     shallow(footer())
@@ -115,7 +117,9 @@ describe('Avatar Picker Dialog', () => {
     const { onAvatarSelected } = component.find(PredefinedAvatarList).props();
     onAvatarSelected(selectedAvatar);
 
-    const { footer } = component.find(ModalDialog).props() as { footer: any };
+    const {
+      components: { Footer: footer },
+    } = component.find(ModalDialog).props() as { components: { Footer: any } };
     // click on the save button
     shallow(footer())
       .find(Button)
@@ -199,7 +203,9 @@ describe('Avatar Picker Dialog', () => {
     const selectedAvatar: Avatar = { dataURI: 'http://an.avatar.com/123' };
     const avatars = [selectedAvatar];
     const component = renderWithProps({ avatars });
-    const { header } = component.find(ModalDialog).props() as { header: any };
+    const {
+      components: { Header: header },
+    } = component.find(ModalDialog).props() as { components: { Header: any } };
     const title = shallow(header()) as any;
 
     expect(title.props().children.props.defaultMessage).toBe(
@@ -214,7 +220,9 @@ describe('Avatar Picker Dialog', () => {
       avatars,
       title: 'test-title',
     });
-    const { header } = component.find(ModalDialog).props() as { header: any };
+    const {
+      components: { Header: header },
+    } = component.find(ModalDialog).props() as { components: { Header: any } };
     const title = shallow(header());
     expect(title.text()).toBe('test-title');
   });
@@ -223,7 +231,9 @@ describe('Avatar Picker Dialog', () => {
     const selectedAvatar: Avatar = { dataURI: 'http://an.avatar.com/123' };
     const avatars = [selectedAvatar];
     const component = renderWithProps({ avatars });
-    const { footer } = component.find(ModalDialog).props() as { footer: any };
+    const {
+      components: { Footer: footer },
+    } = component.find(ModalDialog).props() as { components: { Footer: any } };
     const footerComponent = shallow(footer());
     expect(
       (footerComponent
@@ -240,7 +250,9 @@ describe('Avatar Picker Dialog', () => {
       avatars,
       primaryButtonText: 'test-primary-text',
     });
-    const { footer } = component.find(ModalDialog).props() as { footer: any };
+    const {
+      components: { Footer: footer },
+    } = component.find(ModalDialog).props() as { components: { Footer: any } };
     const footerComponent = shallow(footer());
     expect(
       (footerComponent
@@ -258,9 +270,9 @@ describe('Avatar Picker Dialog', () => {
       onImagePicked,
     });
 
-    const { footer } = component.find(ModalDialog).props() as {
-      footer: any;
-    };
+    const {
+      components: { Footer: footer },
+    } = component.find(ModalDialog).props() as { components: { Footer: any } };
 
     shallow(footer())
       .find(Button)

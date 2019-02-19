@@ -1,22 +1,15 @@
 jest.mock('../../../src/utils/getDataURIFromFileState');
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import { fakeContext, nextTick } from '@atlaskit/media-test-helpers';
-import {
-  Context,
-  FileState,
-  UrlPreview,
-  FileDetails,
-} from '@atlaskit/media-core';
+import { Context, FileState, FileDetails } from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import {
   CardAction,
   CardProps,
-  UrlPreviewIdentifier,
   FileIdentifier,
-  LinkIdentifier,
   CardDimensions,
 } from '../../../src';
 
@@ -25,39 +18,27 @@ import { CardView } from '../../../src/root/cardView';
 import { Card } from '../../../src/root/card';
 
 import { LazyContent } from '../../../src/utils/lazyContent';
-import { getDataURIFromFileState } from '../../../src/utils/getDataURIFromFileState';
+import {
+  getDataURIFromFileState,
+  FilePreview,
+} from '../../../src/utils/getDataURIFromFileState';
 import { ExternalImageIdentifier } from '../../root';
 import { InlinePlayer } from '../../../src/root/inlinePlayer';
 
 describe('Card', () => {
-  const urlIdentifier: UrlPreviewIdentifier = {
-    mediaItemType: 'link',
-    url: 'some-url',
-  };
-  const linkIdentifier: LinkIdentifier = {
-    id: 'some-random-id',
-    mediaItemType: 'link',
-    collectionName: 'some-collection-name',
-  };
   const fileIdentifier: FileIdentifier = {
     id: 'some-random-id',
     mediaItemType: 'file',
     collectionName: 'some-collection-name',
-  };
-  const linkUrlPreview: UrlPreview = {
-    type: 'link',
-    url: 'some-url',
-    title: 'some-title',
+    occurrenceKey: 'some-occurrence-key',
   };
   const setup = (
     context: Context = fakeContext(),
     props?: Partial<CardProps>,
+    filePreview: FilePreview = { src: 'some-data-uri', orientation: 6 },
   ) => {
     (getDataURIFromFileState as any).mockReset();
-    (getDataURIFromFileState as any).mockReturnValue({
-      src: 'some-data-uri',
-      orientation: 6,
-    });
+    (getDataURIFromFileState as any).mockReturnValue(filePreview);
     const component = shallow(
       <Card
         context={context}
@@ -86,71 +67,7 @@ describe('Card', () => {
         }),
       },
     });
-
-  it('should render card with UrlPreviewProvider when passed a UrlPreviewIdentifier', () => {
-    const dummyUrl = 'http://some.url.com';
-    const mediaItemType = 'link';
-    const identifier: UrlPreviewIdentifier = {
-      url: dummyUrl,
-      mediaItemType,
-    };
-    const dummyProvider = { observable: 'dummy provider ftw!' };
-    const context = fakeContext({
-      getUrlPreviewProvider: dummyProvider,
-    }) as any;
-    const { component } = setup(context, { identifier });
-
-    expect(context.getUrlPreviewProvider).toHaveBeenCalledTimes(1);
-    expect(context.getUrlPreviewProvider).toBeCalledWith(dummyUrl);
-    expect(component.find(CardView)).toHaveLength(1);
-    expect(component.find(CardView).prop('mediaItemType')).toEqual('link');
-  });
-
-  it('should render a CardView with the right metadata when using a LinkIdentifier', async () => {
-    const context = fakeContext({
-      getMediaItemProvider: {
-        observable: () =>
-          Observable.of({
-            details: linkUrlPreview,
-          }),
-      },
-    });
-    const { component } = setup(context, { identifier: linkIdentifier });
-
-    // we need to wait for 2 promises: fetch metadata + fetch preview
-    await nextTick();
-    await nextTick();
-    component.update();
-
-    expect(component.find(CardView)).toHaveLength(1);
-    expect(component.find(CardView).prop('status')).toEqual('complete');
-    expect(component.find(CardView).prop('metadata')).toEqual({
-      type: 'link',
-      title: 'some-title',
-      url: 'some-url',
-    });
-  });
-
-  it('should render a CardView with the right metadata when using a UrlPreviewIdentifier', async () => {
-    const context = fakeContext({
-      getUrlPreviewProvider: {
-        observable: () => Observable.of(linkUrlPreview),
-      },
-    });
-    const { component } = setup(context, { identifier: urlIdentifier });
-    // we need to wait for 2 promises: fetch metadata + fetch preview
-    await nextTick();
-    await nextTick();
-    component.update();
-
-    expect(component.find(CardView)).toHaveLength(1);
-    expect(component.find(CardView).prop('status')).toEqual('complete');
-    expect(component.find(CardView).prop('metadata')).toEqual({
-      type: 'link',
-      title: 'some-title',
-      url: 'some-url',
-    });
-  });
+  const emptyPreview: FilePreview = { src: undefined };
 
   it('should use the new context to create the subscription when context prop changes', async () => {
     const firstContext = fakeContext({});
@@ -158,35 +75,13 @@ describe('Card', () => {
     const { component } = setup(firstContext);
     component.setProps({ context: secondContext, fileIdentifier });
 
-    const { id, collectionName } = fileIdentifier;
+    const { id, collectionName, occurrenceKey } = fileIdentifier;
     await nextTick();
     expect(secondContext.file.getFileState).toHaveBeenCalledTimes(1);
     expect(secondContext.file.getFileState).toBeCalledWith(id, {
       collectionName,
+      occurrenceKey,
     });
-    expect(component.find(CardView)).toHaveLength(1);
-  });
-
-  it('should create a new subscription when the identifier changes', async () => {
-    const firstIdentifier: FileIdentifier = fileIdentifier;
-    const secondIdentifier: LinkIdentifier = linkIdentifier;
-    const dummyProvider = { observable: 'dummy provider ftw!' };
-    const context = fakeContext({
-      getMediaItemProvider: dummyProvider,
-    }) as Context;
-    const { component } = setup(context, { identifier: firstIdentifier });
-    component.setProps({ context, identifier: secondIdentifier });
-
-    const { id, mediaItemType, collectionName } = secondIdentifier;
-    await nextTick();
-    expect(context.file.getFileState).toHaveBeenCalledTimes(1);
-    expect(context.getMediaItemProvider).toHaveBeenCalledTimes(1);
-    expect(context.getMediaItemProvider).toBeCalledWith(
-      id,
-      mediaItemType,
-      collectionName,
-    );
-
     expect(component.find(CardView)).toHaveLength(1);
   });
 
@@ -200,10 +95,14 @@ describe('Card', () => {
       width: 1000,
     };
     const context = createContextWithGetFile();
-    const { component } = setup(context, {
-      identifier: fileIdentifier,
-      dimensions: initialDimensions,
-    });
+    const { component } = setup(
+      context,
+      {
+        identifier: fileIdentifier,
+        dimensions: initialDimensions,
+      },
+      emptyPreview,
+    );
     component.setProps({ context, dimensions: newDimensions });
 
     await nextTick();
@@ -227,10 +126,14 @@ describe('Card', () => {
       height: 2000,
     };
     const context = createContextWithGetFile();
-    const { component } = setup(context, {
-      identifier: fileIdentifier,
-      dimensions: initialDimensions,
-    });
+    const { component } = setup(
+      context,
+      {
+        identifier: fileIdentifier,
+        dimensions: initialDimensions,
+      },
+      emptyPreview,
+    );
     component.setProps({ context, dimensions: newDimensions });
 
     await nextTick();
@@ -253,11 +156,17 @@ describe('Card', () => {
       ...initialDimensions,
       width: 10,
     };
-    const context = createContextWithGetFile();
-    const { component } = setup(context, {
-      identifier: fileIdentifier,
-      dimensions: initialDimensions,
+    const context = createContextWithGetFile({
+      preview: undefined,
     });
+    const { component } = setup(
+      context,
+      {
+        identifier: fileIdentifier,
+        dimensions: initialDimensions,
+      },
+      emptyPreview,
+    );
     component.setProps({ context, dimensions: newDimensions });
 
     await nextTick();
@@ -274,10 +183,14 @@ describe('Card', () => {
       height: 20,
     };
     const context = createContextWithGetFile();
-    const { component } = setup(context, {
-      identifier: fileIdentifier,
-      dimensions: initialDimensions,
-    });
+    const { component } = setup(
+      context,
+      {
+        identifier: fileIdentifier,
+        dimensions: initialDimensions,
+      },
+      emptyPreview,
+    );
     component.setProps({ context, dimensions: newDimensions });
 
     await nextTick();
@@ -353,12 +266,10 @@ describe('Card', () => {
       <Card
         context={context}
         identifier={fileIdentifier}
-        appearance="small"
         dimensions={{ width: 100, height: 50 }}
       />,
     );
 
-    expect(card.find(CardView).props().appearance).toBe('small');
     expect(card.find(CardView).props().dimensions).toEqual({
       width: 100,
       height: 50,
@@ -371,27 +282,15 @@ describe('Card', () => {
       <Card
         context={context}
         identifier={fileIdentifier}
-        appearance="small"
         dimensions={{ width: 100, height: 50 }}
       />,
     );
-    const linkCard = shallow(
-      <Card context={context} identifier={linkIdentifier} />,
-    );
     const filePlaceholder = fileCard.find(CardView);
-    const linkPlaceholder = linkCard.find(CardView);
-    const {
-      status,
-      appearance,
-      mediaItemType,
-      dimensions,
-    } = filePlaceholder.props();
+    const { status, mediaItemType, dimensions } = filePlaceholder.props();
 
     expect(status).toBe('loading');
-    expect(appearance).toBe('small');
     expect(mediaItemType).toBe('file');
     expect(dimensions).toEqual({ width: 100, height: 50 });
-    expect(linkPlaceholder.prop('mediaItemType')).toBe('link');
   });
 
   it('should use "crop" as default resizeMode', () => {
@@ -473,6 +372,7 @@ describe('Card', () => {
     expect(context.file.getFileState).toHaveBeenCalledTimes(1);
     expect(context.file.getFileState).toBeCalledWith('some-random-id', {
       collectionName: 'some-collection-name',
+      occurrenceKey: 'some-occurrence-key',
     });
   });
 
@@ -481,12 +381,14 @@ describe('Card', () => {
       id: Promise.resolve('file-id'),
       mediaItemType: 'file',
       collectionName: 'collection',
+      occurrenceKey: 'some-occurrence-key',
     };
     const { context } = setup(undefined, { identifier });
     await nextTick();
     expect(context.file.getFileState).toHaveBeenCalledTimes(1);
     expect(context.file.getFileState).toBeCalledWith('file-id', {
       collectionName: 'collection',
+      occurrenceKey: 'some-occurrence-key',
     });
   });
 
@@ -557,8 +459,10 @@ describe('Card', () => {
 
   it('should set right state when file is processed', async () => {
     const context = createContextWithGetFile();
-
-    const { component } = setup(context);
+    const { component } = setup(context, undefined, {
+      src: undefined,
+      orientation: 6,
+    });
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
@@ -624,9 +528,9 @@ describe('Card', () => {
     expect(component.find(CardView).prop('status')).toEqual('error');
   });
 
-  it('should fetch remote preview when file is processed', async () => {
+  it('should fetch remote preview when file is processed and there is no local preview', async () => {
     const context = createContextWithGetFile();
-    setup(context);
+    setup(context, undefined, emptyPreview);
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
@@ -642,30 +546,81 @@ describe('Card', () => {
     });
   });
 
-  it('should use allowAnimated=false for small cards', async () => {
-    const context = createContextWithGetFile();
-    setup(context, {
-      appearance: 'small',
+  it('should not fetch remote preview when file is processed and there is local preview', async () => {
+    const subject = new ReplaySubject<FileState>(1);
+    const baseState: FileState = {
+      id: '123',
+      mediaType: 'image',
+      status: 'processing',
+      mimeType: 'image/png',
+      name: 'file-name',
+      size: 10,
+    };
+    subject.next(baseState);
+    const context = fakeContext({
+      file: {
+        getFileState: subject,
+      },
     });
+    const { component } = setup(context);
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
     await nextTick();
 
-    expect(context.getImage).toBeCalledWith('some-random-id', {
-      collection: 'some-collection-name',
-      height: 32,
-      width: 32,
-      allowAnimated: false,
-      mode: 'crop',
+    expect(component.state('dataURI')).toEqual('some-data-uri');
+    expect(context.getImage).toHaveBeenCalledTimes(0);
+
+    subject.next({
+      ...baseState,
+      status: 'processed',
+      artifacts: {} as any,
     });
+    (getDataURIFromFileState as any).mockReturnValue({
+      src: 'fooo',
+      orientation: 6,
+    });
+
+    await nextTick();
+    await nextTick();
+
+    // We want to make sure that when transition from "processing" to "processed" we still don't call getImage if we already have preview
+    expect(component.state('dataURI')).toEqual('some-data-uri');
+    expect(component.state('status')).toEqual('complete');
+    expect(context.getImage).toHaveBeenCalledTimes(0);
   });
 
   it('should pass resize mode down to getImage call', async () => {
     const context = createContextWithGetFile();
-    setup(context, {
-      resizeMode: 'full-fit',
-    });
+    setup(
+      context,
+      {
+        resizeMode: 'full-fit',
+      },
+      emptyPreview,
+    );
+
+    // we need to wait for 2 promises: fetch metadata + fetch preview
+    await nextTick();
+    await nextTick();
+
+    expect(context.getImage).toBeCalledWith(
+      'some-random-id',
+      expect.objectContaining({
+        mode: 'full-fit',
+      }),
+    );
+  });
+
+  it('should change mode from stretchy-fit to full-fit while passing down to getImage call', async () => {
+    const context = createContextWithGetFile();
+    setup(
+      context,
+      {
+        resizeMode: 'stretchy-fit',
+      },
+      emptyPreview,
+    );
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
@@ -681,14 +636,17 @@ describe('Card', () => {
 
   it('should render CardView with expected props', async () => {
     const context = createContextWithGetFile();
-
-    const { component } = setup(context, {
-      dimensions: { width: 10, height: 20 },
-      selectable: true,
-      selected: true,
-      resizeMode: 'fit',
-      disableOverlay: true,
-    });
+    const { component } = setup(
+      context,
+      {
+        dimensions: { width: 10, height: 20 },
+        selectable: true,
+        selected: true,
+        resizeMode: 'fit',
+        disableOverlay: true,
+      },
+      emptyPreview,
+    );
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();

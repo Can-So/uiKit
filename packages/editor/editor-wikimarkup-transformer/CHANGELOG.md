@@ -1,5 +1,145 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 3.0.0
+- [major] [be24d8040f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be24d8040f):
+
+  - Change parse function to accept context parameter
+
+## 2.10.3
+- [patch] [279b08b325](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/279b08b325):
+
+  - Refactor internal TokenParser interface to receive an object and add immutable shared Context internally
+
+## 2.10.2
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
+## 2.10.1
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-common@31.0.0
+  - @atlaskit/editor-core@98.0.0
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/renderer@38.0.0
+  - @atlaskit/editor-json-transformer@4.1.8
+  - @atlaskit/util-data-test@10.0.36
+
+## 2.10.0
+- [minor] [f56a86f8ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f56a86f8ff):
+
+  - Adds in smart card conversion
+
+## 2.9.11
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-common@30.0.0
+  - @atlaskit/editor-core@97.0.0
+  - @atlaskit/renderer@37.0.0
+  - @atlaskit/editor-json-transformer@4.1.7
+  - @atlaskit/editor-test-helpers@6.3.12
+  - @atlaskit/util-data-test@10.0.34
+
+## 2.9.10
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/editor-common@29.0.0
+  - @atlaskit/editor-core@96.0.0
+  - @atlaskit/renderer@36.0.0
+  - @atlaskit/editor-json-transformer@4.1.6
+  - @atlaskit/editor-test-helpers@6.3.11
+  - @atlaskit/util-data-test@10.0.33
+
+## 2.9.9
+- Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+  - @atlaskit/editor-json-transformer@4.1.5
+  - @atlaskit/editor-test-helpers@6.3.8
+  - @atlaskit/editor-common@28.0.2
+  - @atlaskit/renderer@35.0.1
+  - @atlaskit/util-data-test@10.0.32
+  - @atlaskit/editor-core@95.0.0
+
+## 2.9.8
+- [patch] [74bf476](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74bf476):
+
+  - support codeblock in list
+
+## 2.9.7
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-common@28.0.0
+  - @atlaskit/editor-core@94.0.0
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/renderer@35.0.0
+  - @atlaskit/editor-json-transformer@4.1.4
+  - @atlaskit/util-data-test@10.0.31
+
+## 2.9.6
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-common@27.0.0
+  - @atlaskit/editor-core@93.0.0
+  - @atlaskit/editor-test-helpers@6.3.6
+  - @atlaskit/renderer@34.0.0
+  - @atlaskit/editor-json-transformer@4.1.3
+  - @atlaskit/util-data-test@10.0.30
+
+## 2.9.5
+- Updated dependencies [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+  - @atlaskit/editor-json-transformer@4.1.2
+  - @atlaskit/editor-test-helpers@6.3.5
+  - @atlaskit/renderer@33.0.4
+  - @atlaskit/editor-common@26.0.0
+  - @atlaskit/editor-core@92.0.19
+
+## 2.9.4
+- [patch] [aca2425](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aca2425):
+
+  - Escaping in common formatter
+
+## 2.9.3
+- [patch] [df74239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df74239):
+
+  - Parse mailto text
+
+## 2.9.2
+- [patch] [1d9228c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d9228c):
+
+  - trim escape in link href
+
+## 2.9.1
+- [patch] [75046da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75046da):
+
+  - macros keyword can be case insensitive
+
+## 2.9.0
+- [minor] [a4b49b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b49b2):
+
+  - Parse macros inside table cells
+
+## 2.8.2
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/editor-json-transformer@4.1.1
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/util-data-test@10.0.28
+
+## 2.8.1
+- [patch] [0a28c41](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a28c41):
+
+  - bq. doesn't need a following space
+
+## 2.8.0
+- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 2.7.6
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/editor-json-transformer@4.0.25
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/util-data-test@10.0.26
+
 ## 2.7.5
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/theme@7.0.1

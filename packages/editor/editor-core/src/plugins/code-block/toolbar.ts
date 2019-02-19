@@ -4,7 +4,8 @@ import {
   createLanguageList,
   DEFAULT_LANGUAGES,
   getLanguageIdentifier,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
+import { findParentNodeOfType } from 'prosemirror-utils';
 
 import {
   FloatingToolbarHandler,
@@ -37,17 +38,26 @@ export const getToolbarConfig: FloatingToolbarHandler = (
     codeBlockState.toolbarVisible &&
     codeBlockState.element
   ) {
-    const { language } = codeBlockState;
+    const parent = findParentNodeOfType(state.schema.nodes.codeBlock)(
+      state.selection,
+    );
+
+    const language =
+      parent && parent.node.attrs ? parent.node.attrs.language : undefined;
+
+    const options = createLanguageList(DEFAULT_LANGUAGES).map(lang => ({
+      label: lang.name,
+      value: getLanguageIdentifier(lang),
+    }));
 
     const languageSelect: FloatingToolbarSelect<Command> = {
       type: 'select',
       onChange: option => changeLanguage(option.value),
-      defaultValue: language,
+      defaultValue: language
+        ? options.find(option => option.value === language)
+        : undefined,
       placeholder: formatMessage(messages.selectLanguage),
-      options: createLanguageList(DEFAULT_LANGUAGES).map(lang => ({
-        label: lang.name,
-        value: getLanguageIdentifier(lang),
-      })),
+      options,
     };
 
     const breakoutToolbar = createBreakoutToolbarItems(state, {

@@ -18,6 +18,19 @@ describe(name, () => {
         {...overridingProps}
       />,
     );
+  describe('console errors', () => {
+    beforeEach(async () => {
+      jest.spyOn(global.console, 'error');
+    });
+
+    afterEach(() => {
+      global.console.error.mockRestore();
+    });
+    it('should not log console error on mount', () => {
+      mountCheckbox({});
+      expect(global.console.error).not.toHaveBeenCalled();
+    });
+  });
   describe('<Checkbox />', () => {
     describe('<Checkbox /> stateless: should not use state isChecked property when passing it as props', () => {
       it('keeps isChecked as false when passing it as prop and calling onChange', () => {
@@ -70,6 +83,12 @@ describe(name, () => {
 
       cb.setProps({ isIndeterminate: true });
       expect(element.indeterminate).toBe(true);
+    });
+    it('should pass all the extra props passed down to hidden checkbox', () => {
+      const cb = mountCheckbox({
+        'data-foo': 'checkbox-bar',
+      });
+      expect(cb.find('input').prop('data-foo')).toBe('checkbox-bar');
     });
   });
   describe('<Checkbox defaultChecked/>', () => {

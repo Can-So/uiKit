@@ -1,13 +1,7 @@
-jest.mock('@atlaskit/media-picker');
-
 import {
-  MediaPicker,
-  Popup,
-  Browser,
-  Dropzone,
-  Clipboard,
-  BinaryUploader,
   UploadPreviewUpdateEventPayload,
+  MediaPickerComponents,
+  MediaPickerComponent,
 } from '@atlaskit/media-picker';
 import { ContextFactory } from '@atlaskit/media-core';
 import {
@@ -49,16 +43,55 @@ describe('Media PickerFacade', () => {
   const testFileId = randomId();
 
   // Spies
-  const spies = {
+  const commonSpies: { [S in keyof MediaPickerComponent]: jest.Mock } = {
+    addListener: jest.fn(),
+    cancel: jest.fn(),
+    emit: jest.fn(),
+    emitUploadEnd: jest.fn(),
+    emitUploadError: jest.fn(),
+    emitUploadPreviewUpdate: jest.fn(),
+    emitUploadProcessing: jest.fn(),
+    emitUploadProgress: jest.fn(),
+    emitUploadsStart: jest.fn(),
+    off: jest.fn(),
     on: jest.fn(),
+    onAny: jest.fn(),
+    once: jest.fn(),
     removeAllListeners: jest.fn(),
-    teardown: jest.fn(),
-    show: jest.fn(),
-    hide: jest.fn(),
-    deactivate: jest.fn(),
-    upload: jest.fn(),
-    activate: jest.fn(),
-    browse: jest.fn(),
+    removeListener: jest.fn(),
+    setUploadParams: jest.fn(),
+  };
+  const specificSpies: {
+    [K in keyof MediaPickerComponents]: {
+      [S in Partial<keyof MediaPickerComponents[K]>]: jest.Mock
+    }
+  } = {
+    browser: {
+      ...commonSpies,
+      teardown: jest.fn(),
+      browse: jest.fn(),
+    },
+    binary: {
+      ...commonSpies,
+      upload: jest.fn(),
+    },
+    clipboard: {
+      ...commonSpies,
+      activate: jest.fn(),
+      deactivate: jest.fn(),
+    },
+    dropzone: {
+      ...commonSpies,
+      activate: jest.fn(),
+      deactivate: jest.fn(),
+    },
+    popup: {
+      ...commonSpies,
+      show: jest.fn(),
+      teardown: jest.fn(),
+      hide: jest.fn(),
+      emitClosed: jest.fn(),
+    },
   };
 
   const previewPayload: UploadPreviewUpdateEventPayload = {
@@ -87,18 +120,19 @@ describe('Media PickerFacade', () => {
       fileId: Promise.resolve('publicid'),
       fileMimeType: 'test/file',
       dimensions: undefined,
+      publicId: testFileId,
     },
   ];
 
   // Helpers
   function triggerStart(payload?: Partial<MediaState>) {
-    const [eventName, cb] = spies.on.mock.calls[0];
+    const [eventName, cb] = commonSpies.on.mock.calls[0];
     cb(previewPayload);
     expect(eventName).toBe('upload-preview-update');
   }
 
   function triggerEnd(payload?: Partial<MediaState>) {
-    const [eventName, cb] = spies.on.mock.calls[1];
+    const [eventName, cb] = commonSpies.on.mock.calls[1];
     cb(endPayload);
     expect(eventName).toBe('upload-end');
   }
@@ -111,32 +145,22 @@ describe('Media PickerFacade', () => {
     'browser',
   ];
 
-  const pickerConstructors = {
-    popup: Popup,
-    binary: BinaryUploader,
-    clipboard: Clipboard,
-    dropzone: Dropzone,
-    browser: Browser,
-  };
-
   pickerTypes.forEach(pickerType => {
     describe(`Picker: ${pickerType}`, () => {
       let stateManager: MediaStateManager;
       let facade: PickerFacade;
+      let spies = specificSpies[pickerType];
 
-      beforeEach(() => {
+      beforeEach(async () => {
         Object.keys(spies).forEach(k => spies[k].mockClear());
 
         function MockPopup(this: any) {
           Object.keys(spies).forEach(k => (this[k] = spies[k]));
         }
 
-        (MediaPicker as any).mockImplementation((...args) => {
-          MockPopup.prototype = new (pickerConstructors[pickerType] as any)(
-            ...args,
-          );
-          return new MockPopup();
-        });
+        const MediaPickerMock = jest
+          .fn()
+          .mockReturnValue(Promise.resolve(new MockPopup()));
 
         stateManager = new DefaultMediaStateManager();
         facade = new PickerFacade(
@@ -145,7 +169,9 @@ describe('Media PickerFacade', () => {
           {
             uploadParams: { collection: '' },
           },
+          MediaPickerMock,
         );
+        await facade.init();
       });
 
       afterEach(() => {
@@ -156,7 +182,7 @@ describe('Media PickerFacade', () => {
       it(`listens to picker events`, () => {
         const fn = jasmine.any(Function);
         expect(spies.on).toHaveBeenCalledTimes(
-          pickerType === 'dropzone' ? 6 : 4,
+          pickerType === 'dropzone' || pickerType === 'clipboard' ? 6 : 4,
         );
         expect(spies.on).toHaveBeenCalledWith('upload-preview-update', fn);
         expect(spies.on).toHaveBeenCalledWith('upload-end', fn);
@@ -170,7 +196,7 @@ describe('Media PickerFacade', () => {
       it('removes listeners on destruction', () => {
         facade.destroy();
         expect(spies.removeAllListeners).toHaveBeenCalledTimes(
-          pickerType === 'dropzone' ? 5 : 3,
+          pickerType === 'dropzone' || pickerType === 'clipboard' ? 5 : 3,
         );
         expect(spies.removeAllListeners).toHaveBeenCalledWith(
           'upload-preview-update',
@@ -215,10 +241,6 @@ describe('Media PickerFacade', () => {
         it(`should call picker's activate() during initialization`, () => {
           expect(spies.activate).toHaveBeenCalledTimes(1);
         });
-      } else {
-        it(`shouldn't call picker's activate() during initialization`, () => {
-          expect(spies.activate).toHaveBeenCalledTimes(0);
-        });
       }
 
       if (pickerType === 'popup' || pickerType === 'browser') {
@@ -230,12 +252,6 @@ describe('Media PickerFacade', () => {
         it(`should call picker's deactivate() on destruction`, () => {
           facade.destroy();
           expect(spies.deactivate).toHaveBeenCalledTimes(1);
-        });
-      } else {
-        it(`shouldn't call picker's teardown() or deactivate() on destruction`, () => {
-          facade.destroy();
-          expect(spies.teardown).toHaveBeenCalledTimes(0);
-          expect(spies.deactivate).toHaveBeenCalledTimes(0);
         });
       }
 
@@ -249,22 +265,12 @@ describe('Media PickerFacade', () => {
           facade.show();
           expect(spies.browse).toHaveBeenCalledTimes(1);
         });
-      } else {
-        it(`shouldn't call picker's show() on destruction`, () => {
-          facade.show();
-          expect(spies.show).toHaveBeenCalledTimes(0);
-        });
       }
 
       if (pickerType === 'popup') {
         it(`should call picker's hide() on destruction`, () => {
           facade.hide();
           expect(spies.hide).toHaveBeenCalledTimes(1);
-        });
-      } else {
-        it(`shouldn't call picker's hide() on destruction`, () => {
-          facade.hide();
-          expect(spies.hide).toHaveBeenCalledTimes(0);
         });
       }
 
@@ -277,12 +283,6 @@ describe('Media PickerFacade', () => {
           expect(spies.on).toHaveBeenCalledTimes(1);
           expect(spies.on).toHaveBeenCalledWith('closed', closeCb);
         });
-      } else {
-        it(`should not call picker on close when onClose is called`, () => {
-          spies.on.mockClear();
-          facade.onClose(() => {});
-          expect(spies.on).toHaveBeenCalledTimes(0);
-        });
       }
 
       if (pickerType === 'dropzone' || pickerType === 'clipboard') {
@@ -291,12 +291,6 @@ describe('Media PickerFacade', () => {
           facade.activate();
           expect(spies.activate).toHaveBeenCalledTimes(1);
         });
-      } else {
-        it(`should not call picker.activate when activate is called`, () => {
-          spies.activate.mockClear();
-          facade.activate();
-          expect(spies.activate).toHaveBeenCalledTimes(0);
-        });
       }
 
       if (pickerType === 'dropzone' || pickerType === 'clipboard') {
@@ -304,12 +298,6 @@ describe('Media PickerFacade', () => {
           spies.deactivate.mockClear();
           facade.deactivate();
           expect(spies.deactivate).toHaveBeenCalledTimes(1);
-        });
-      } else {
-        it(`should not call picker.deactivate when deactivate is called`, () => {
-          spies.deactivate.mockClear();
-          facade.deactivate();
-          expect(spies.deactivate).toHaveBeenCalledTimes(0);
         });
       }
 

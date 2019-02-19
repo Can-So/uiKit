@@ -1,53 +1,19 @@
-import { AvatarItem } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import * as React from 'react';
-import styled from 'styled-components';
 import { User } from '../types';
+import { AvatarItemOption, TextWrapper } from './AvatarItemOption';
 import { HighlightText } from './HighlightText';
 import { SizeableAvatar } from './SizeableAvatar';
 import { hasValue } from './utils';
 
-const AvatarComponent = styled.div`
-  &,
-  &:hover,
-  &:active,
-  &:focus {
-    padding: 0;
-    margin: 0;
-    border: none;
-  }
-`;
-
-export const TextWrapper = styled.span`
-  color: ${({ color }) => color};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-`;
-
 export type UserOptionProps = {
   user: User;
-  status: string;
+  status?: string;
   isSelected: boolean;
 };
 
 export class UserOption extends React.PureComponent<UserOptionProps> {
-  private renderAvatar = () => {
-    const {
-      user: { avatarUrl, name },
-      status,
-    } = this.props;
-    return (
-      <SizeableAvatar
-        appearance="big"
-        src={avatarUrl}
-        presence={status}
-        name={name}
-      />
-    );
-  };
-
-  private getPrimaryText = () => {
+  getPrimaryText = () => {
     const {
       user: { name, publicName, highlight },
     } = this.props;
@@ -79,7 +45,7 @@ export class UserOption extends React.PureComponent<UserOptionProps> {
     return result;
   };
 
-  private renderByline = () =>
+  renderSecondaryText = () =>
     this.props.user.byline ? (
       <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
         {this.props.user.byline}
@@ -88,14 +54,27 @@ export class UserOption extends React.PureComponent<UserOptionProps> {
       undefined
     );
 
+  private renderAvatar = () => {
+    const {
+      user: { avatarUrl, name },
+      status,
+    } = this.props;
+    return (
+      <SizeableAvatar
+        appearance="big"
+        src={avatarUrl}
+        presence={status}
+        name={name}
+      />
+    );
+  };
+
   render() {
     return (
-      <AvatarItem
-        backgroundColor="transparent"
+      <AvatarItemOption
         avatar={this.renderAvatar()}
-        component={AvatarComponent}
         primaryText={this.getPrimaryText()}
-        secondaryText={this.renderByline()}
+        secondaryText={this.renderSecondaryText()}
       />
     );
   }

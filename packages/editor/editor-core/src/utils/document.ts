@@ -1,12 +1,13 @@
 import { Node, Schema } from 'prosemirror-model';
-import { Transaction } from 'prosemirror-state';
+import { Transaction, Selection } from 'prosemirror-state';
 import {
   validator,
-  Entity,
+  ADFEntity,
   VALIDATION_ERRORS,
   ValidationError,
 } from '@atlaskit/adf-utils';
 import { analyticsService } from '../analytics';
+import { ContentNodeWithPos } from 'prosemirror-utils';
 
 const FALSE_POSITIVE_MARKS = ['code', 'alignment', 'indentation'];
 
@@ -103,7 +104,7 @@ export function isEmptyDocument(node: Node): boolean {
 }
 
 function wrapWithUnsupported(
-  originalValue: Entity,
+  originalValue: ADFEntity,
   type: 'block' | 'inline' = 'block',
 ) {
   return {
@@ -113,7 +114,7 @@ function wrapWithUnsupported(
 }
 
 function fireAnalyticsEvent(
-  entity: Entity,
+  entity: ADFEntity,
   error: ValidationError,
   type: 'block' | 'inline' | 'mark' = 'block',
 ) {
@@ -161,7 +162,7 @@ export function processRawValue(
     const nodes = Object.keys(schema.nodes);
     const marks = Object.keys(schema.marks);
     const validate = validator(nodes, marks, { allowPrivateAttributes: true });
-    const emptyDoc: Entity = { type: 'doc', content: [] };
+    const emptyDoc: ADFEntity = { type: 'doc', content: [] };
 
     // ProseMirror always require a child under doc
     if (node.type === 'doc') {
@@ -178,7 +179,7 @@ export function processRawValue(
     }
 
     const { entity = emptyDoc } = validate(
-      node as Entity,
+      node as ADFEntity,
       (entity, error, options) => {
         // Remove any invalid marks
         if (marks.indexOf(entity.type) > -1) {
@@ -255,4 +256,29 @@ export const getStepRange = (
   }
 
   return null;
+};
+
+/**
+ * Find the farthest node given a condition
+ * @param predicate Function to check the node
+ */
+export const findFarthestParentNode = (predicate: (node: Node) => boolean) => (
+  selection: Selection,
+): ContentNodeWithPos | null => {
+  const { $from } = selection;
+
+  let candidate: ContentNodeWithPos | null = null;
+
+  for (let i = $from.depth; i > 0; i--) {
+    const node = $from.node(i);
+    if (predicate(node)) {
+      candidate = {
+        pos: i > 0 ? $from.before(i) : 0,
+        start: $from.start(i),
+        depth: i,
+        node,
+      };
+    }
+  }
+  return candidate;
 };

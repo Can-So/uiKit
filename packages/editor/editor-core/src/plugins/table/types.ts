@@ -1,7 +1,8 @@
 import { Node as PmNode } from 'prosemirror-model';
 import { Transaction } from 'prosemirror-state';
 import { DecorationSet } from 'prosemirror-view';
-import { TableLayout, TableSharedCssClassName } from '@atlaskit/editor-common';
+import { TableLayout } from '@atlaskit/adf-schema';
+import { TableSharedCssClassName } from '@atlaskit/editor-common';
 
 export type PermittedLayoutsDescriptor = TableLayout[] | 'all';
 export type Cell = { pos: number; start: number; node: PmNode };
@@ -94,11 +95,13 @@ export const TableCssClassName = {
   NUMBERED_COLUMN_BUTTON: `${clPrefix}numbered-column__button`,
 
   HOVERED_CELL: `${clPrefix}hovered-cell`,
-  HOVERED_TABLE: `${clPrefix}hovered-table`,
-  RESIZING: `${clPrefix}resizing`,
   WITH_CONTROLS: `${clPrefix}with-controls`,
+  RESIZING_PLUGIN: `${clPrefix}resizing-plugin`,
+  RESIZE_CURSOR: `${clPrefix}resize-cursor`,
+  IS_RESIZING: `${clPrefix}is-resizing`,
 
   CONTEXTUAL_SUBMENU: `${clPrefix}contextual-submenu`,
+  CONTEXTUAL_MENU_BUTTON_WRAP: `${clPrefix}contextual-menu-button-wrap`,
   CONTEXTUAL_MENU_BUTTON: `${clPrefix}contextual-menu-button`,
   CONTEXTUAL_MENU_ICON: `${clPrefix}contextual-submenu-icon`,
 

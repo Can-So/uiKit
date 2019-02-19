@@ -1,4 +1,4 @@
-//@flow
+// @flow
 'use strict';
 /*
  * util module to build webpack-dev-server for running integration test.
@@ -35,7 +35,7 @@ const {
 } = require('@atlaskit/webpack-config/banner');
 const utils = require('@atlaskit/webpack-config/config/utils');
 
-const HOST = 'localhost';
+const HOST = '0.0.0.0';
 const PORT = 9000;
 const WEBPACK_BUILD_TIMEOUT = 10000;
 const CHANGED_PACKAGES = process.env.CHANGED_PACKAGES;
@@ -150,7 +150,7 @@ async function startDevServer() {
     quiet: true,
     noInfo: false,
     overlay: false,
-    hot: false,
+    disableHostCheck: true,
 
     // disable hot reload for tests - they don't need it for running
     hot: false,
@@ -163,7 +163,7 @@ async function startDevServer() {
   return new Promise((resolve, reject) => {
     let hasValidDepGraph = true;
 
-    compiler.plugin('invalid', fileName => {
+    compiler.hooks.invalid.tap('invalid', fileName => {
       hasValidDepGraph = false;
       console.log(
         'Something has changed and Webpack needs to invalidate dependencies graph',
@@ -171,7 +171,7 @@ async function startDevServer() {
       );
     });
 
-    compiler.plugin('done', () => {
+    compiler.hooks.done.tap('done', () => {
       hasValidDepGraph = true;
       setTimeout(() => {
         if (hasValidDepGraph) {

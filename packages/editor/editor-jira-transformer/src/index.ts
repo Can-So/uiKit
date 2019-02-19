@@ -13,8 +13,8 @@ import {
   isSchemaWithBlockQuotes,
   isSchemaWithMedia,
   isSchemaWithTables,
-  Transformer,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
+import { Transformer } from '@atlaskit/editor-common';
 
 export type CustomEncoder = (userId: string) => string;
 
@@ -259,7 +259,7 @@ export class JIRATransformer implements Transformer<string> {
         code,
         em,
         link,
-        mentionQuery,
+        typeAheadQuery,
         strike,
         strong,
         subsup,
@@ -310,7 +310,7 @@ export class JIRATransformer implements Transformer<string> {
             fontElem.setAttribute('color', mark.attrs['color']);
             elem = elem.appendChild(fontElem);
             break;
-          case mentionQuery:
+          case typeAheadQuery:
             break;
           default:
             throw new Error(`Unable to encode mark '${mark.type.name}'`);
@@ -356,6 +356,7 @@ export class JIRATransformer implements Transformer<string> {
   private encodeListItem(node: PMNode) {
     const elem = this.doc.createElement('li');
     if (node.content.childCount) {
+      let hasBlocks = false;
       node.content.forEach(childNode => {
         if (
           childNode.type === this.schema.nodes.bulletList ||
@@ -378,9 +379,14 @@ export class JIRATransformer implements Transformer<string> {
           }
 
           elem.appendChild(list);
-        } else {
+        } else if (childNode.type.name === 'paragraph' && !hasBlocks) {
           // Strip the paragraph node from the list item.
           elem.appendChild(this.encodeFragment((childNode as PMNode).content));
+        } else {
+          if (childNode.isBlock) {
+            hasBlocks = true;
+          }
+          elem.appendChild(this.encodeNode(childNode));
         }
       });
     }

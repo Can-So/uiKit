@@ -37,6 +37,10 @@ describe('JIRA wiki markup - Links', () => {
       'An IRC address: irc://atlassian.com/confluence',
     ],
     [
+      'should convert mailto address text',
+      'An IRC address: mailto:example@email.com',
+    ],
+    [
       'should ignore invalid protocal',
       'An invalid URL: invalid://nowhere.com/hello',
     ],
@@ -75,6 +79,14 @@ describe('JIRA wiki markup - Links', () => {
     [
       '[EX-500] should jump over the link if it is invalid',
       'This \\\\[waves hands around\\\\]. Be',
+    ],
+    [
+      '[CS-676] should trim escape in href',
+      'This is a link https://extranet.atlassian.com/display/JPLAT/AtlasKit\\+components\\+needed\\+for\\+Bento',
+    ],
+    [
+      '[CS-691] should be able to parse issue-link',
+      'This is an issue link [smart-link|https://product-fabric.atlassian.net/browse/EX-522]',
     ],
   ];
 

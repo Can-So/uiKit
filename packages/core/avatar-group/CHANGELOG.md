@@ -1,5 +1,27 @@
 # @atlaskit/avatar-group
 
+## 2.1.12
+- [patch] [3a9b559382](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a9b559382):
+
+  - Stopping href from being passed down to Avatar in DropdownMenu rendered in AvatarGroup
+
+## 2.1.11
+- [patch] [ed05c5c5d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed05c5c5d9):
+
+  - Change border color of avatar in avatar group dropdown menu to transparent so that it does not overlap with focus ring
+
+## 2.1.10
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/field-base@11.0.14
+  - @atlaskit/item@8.0.15
+  - @atlaskit/toggle@5.0.15
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/icon@16.0.0
+
 ## 2.1.9
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/avatar@14.1.7

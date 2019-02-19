@@ -20,8 +20,13 @@ import {
   InlineCardResolvingView,
   CardLinkView,
   InlineCardErroredView,
+  InlineCardUnauthorizedView,
+  InlineCardForbiddenView,
 } from '@atlaskit/media-ui';
 import { ClientConfig } from '../../../Client';
+import Button from '@atlaskit/button';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { resolvedEvent } from '../../../analytics';
 
 function createClient(
   consequentStates?: ObjectState[],
@@ -46,9 +51,54 @@ describe('Card', () => {
   // tslint:disable-next-line:no-console
   console.error = jest.fn();
 
+  describe('analytics', () => {
+    it('should fire the resolved analytics event when the url was resolved', done => {
+      class CustomClient extends Client {
+        fetchData() {
+          return Promise.resolve({
+            meta: {
+              visibility: 'public',
+              access: 'granted',
+              auth: [],
+              definitionId: 'd1',
+            },
+            data: {},
+          } as ResolveResponse);
+        }
+      }
+      const customClient = new CustomClient();
+      const url = 'some.url';
+      const expectedPayload = resolvedEvent(url);
+      const logger = jest.fn().mockImplementation(arg => {
+        expect(arg.payload).toEqual(expectedPayload);
+        done();
+      });
+      mount(
+        <AnalyticsListener onEvent={logger} channel="media">
+          <Card appearance="inline" client={customClient} url={url} />
+        </AnalyticsListener>,
+      );
+    });
+  });
+
   describe('Client.config.loadingStateDelay', () => {
     it('should render the link placeholder for the initial state', () => {
-      const client = createClient();
+      class CustomClient extends Client {
+        fetchData() {
+          return new Promise<ResolveResponse>(resolve =>
+            setTimeout(resolve, 1, {
+              meta: {
+                visibility: 'public',
+                access: 'granted',
+                auth: [],
+                definitionId: 'd1',
+              },
+              data: {},
+            } as ResolveResponse),
+          );
+        }
+      }
+      const client = new CustomClient();
       const url = 'https://www.atlassian.com/';
       const wrapper = mount(
         <Card appearance="block" client={client} url={url} />,
@@ -207,19 +257,160 @@ describe('Card', () => {
     expect(wrapper.find(BlockCardForbiddenView).exists()).toBeTruthy();
   });
 
-  // LB: Should we skip
-  it('should render the unauthorized view when unauthorized', async () => {
-    const client = createClient([{ status: 'unauthorized' } as ObjectState]);
-    const wrapper = mount(
-      <Card
-        appearance="block"
-        client={client}
-        url="https://www.atlassian.com/"
-      />,
-    );
+  describe('when unauthorized and there is at least 1 auth methods available', async () => {
+    it('should render the unauthorized view in block card with connect button', async () => {
+      const client = createClient([
+        {
+          status: 'unauthorized',
+          definitionId: 'test',
+          services: [{ startAuthUrl: 'http://foo' }],
+        } as ObjectState,
+      ]);
+      const wrapper = mount(
+        <Card
+          appearance="block"
+          client={client}
+          url="https://www.atlassian.com/"
+        />,
+      );
 
-    wrapper.update();
-    expect(wrapper.find(BlockCardUnauthorisedView).exists()).toBeTruthy();
+      wrapper.update();
+      expect(wrapper.find(BlockCardUnauthorisedView).exists()).toBeTruthy();
+      const authButton = wrapper.find(BlockCardUnauthorisedView).find(Button);
+      expect(authButton.exists()).toBeTruthy();
+      expect(authButton.text()).toMatch(/connect/i);
+    });
+
+    it('should render the unauthorized view in inline card with connect button', async () => {
+      const client = createClient([
+        {
+          status: 'unauthorized',
+          definitionId: 'test',
+          services: [{ startAuthUrl: 'http://foo' }],
+        } as ObjectState,
+      ]);
+      const wrapper = mount(
+        <Card
+          appearance="inline"
+          client={client}
+          url="https://www.atlassian.com/"
+        />,
+      );
+
+      wrapper.update();
+      expect(wrapper.find(InlineCardUnauthorizedView).exists()).toBeTruthy();
+      const authButton = wrapper.find(InlineCardUnauthorizedView).find(Button);
+      expect(authButton.exists()).toBeTruthy();
+      expect(authButton.text()).toMatch(/connect your account/i);
+    });
+  });
+
+  describe('when unauthorized and there are no auth methods available', async () => {
+    it('should not render the auth prompt in block card ', async () => {
+      const client = createClient([
+        {
+          status: 'unauthorized',
+          definitionId: 'test',
+          services: [],
+        } as ObjectState,
+      ]);
+      const wrapper = mount(
+        <Card
+          appearance="block"
+          client={client}
+          url="https://www.atlassian.com/"
+        />,
+      );
+
+      wrapper.update();
+      expect(wrapper.find(BlockCardUnauthorisedView).exists()).toBeTruthy();
+      expect(
+        wrapper
+          .find(BlockCardUnauthorisedView)
+          .find(Button)
+          .exists(),
+      ).toBeFalsy();
+    });
+
+    it('should not render the auth prompt in inline card ', async () => {
+      const client = createClient([
+        {
+          status: 'unauthorized',
+          definitionId: 'test',
+          services: [],
+        } as ObjectState,
+      ]);
+      const wrapper = mount(
+        <Card
+          appearance="inline"
+          client={client}
+          url="https://www.atlassian.com/"
+        />,
+      );
+
+      wrapper.update();
+      expect(wrapper.find(InlineCardUnauthorizedView).exists()).toBeTruthy();
+      expect(
+        wrapper
+          .find(InlineCardUnauthorizedView)
+          .find(Button)
+          .exists(),
+      ).toBeFalsy();
+    });
+  });
+
+  describe('when forbidden and there are no auth methods available', async () => {
+    it('should not render the auth prompt in block card ', async () => {
+      const client = createClient([
+        {
+          status: 'forbidden',
+          definitionId: 'test',
+          services: [],
+        } as ObjectState,
+      ]);
+      const wrapper = mount(
+        <Card
+          appearance="block"
+          client={client}
+          url="https://www.atlassian.com/"
+        />,
+      );
+
+      wrapper.update();
+      expect(wrapper.find(BlockCardForbiddenView).exists()).toBeTruthy();
+      expect(
+        wrapper
+          .find(BlockCardForbiddenView)
+          .find(Button)
+          .exists(),
+      ).toBeFalsy();
+    });
+
+    it('should not render the auth prompt in inline card ', async () => {
+      const client = createClient([
+        {
+          status: 'forbidden',
+          definitionId: 'test',
+          services: [],
+        } as ObjectState,
+      ]);
+      const wrapper = mount(
+        <Card
+          appearance="inline"
+          client={client}
+          url="https://www.atlassian.com/"
+        />,
+      );
+
+      wrapper.update();
+      expect(wrapper.find(InlineCardForbiddenView).exists()).toBeTruthy();
+      expect(
+        wrapper
+          .find(InlineCardForbiddenView)
+          .find(Button)
+          .exists(),
+      ).toBeFalsy();
+    });
   });
 
   it('should render the resolved view when resolved', async () => {

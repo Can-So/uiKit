@@ -1,7 +1,7 @@
 import { ProviderFactory } from '@atlaskit/editor-common';
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   storyMediaProviderFactory,
   randomId,
@@ -26,6 +26,7 @@ const getFreshMediaProvider = () =>
   });
 
 describe('Media plugin', async () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
   const mediaProvider = getFreshMediaProvider();
   const providerFactory = ProviderFactory.create({ mediaProvider });
 
@@ -34,7 +35,7 @@ describe('Media plugin', async () => {
     editorProps = {},
     dropzoneContainer: HTMLElement = document.body,
   ) =>
-    createEditor<MediaPluginState>({
+    createEditor({
       doc,
       editorPlugins: [mediaPlugin({ provider: mediaProvider })],
       editorProps: editorProps,
@@ -70,7 +71,7 @@ describe('Media plugin', async () => {
       expect(pluginState.allUploadsFinished).toBe(false);
     });
 
-    it('should change upload state to finished once uploads have been finished', async () => {
+    it('should change upload state to finished once an upload finishes', async () => {
       const { pluginState } = editor(doc(p('')));
       const provider = await mediaProvider;
       await provider.uploadContext;
@@ -94,6 +95,61 @@ describe('Media plugin', async () => {
         dimensions: { height: 100, width: 100 },
       });
       jest.runOnlyPendingTimers();
+      await pluginState.waitForPendingTasks();
+      expect(pluginState.allUploadsFinished).toBe(true);
+    });
+
+    it('should change upload state to finished once multiple uploads have finished', async () => {
+      const { pluginState } = editor(doc(p('')));
+      const provider = await mediaProvider;
+      await provider.uploadContext;
+      await provider.viewContext;
+
+      pluginState.insertFiles([
+        {
+          id: 'foo',
+          fileMimeType: 'image/jpeg',
+          fileId: Promise.resolve('id'),
+          status: 'preview',
+        },
+      ]);
+      pluginState.insertFiles([
+        {
+          id: 'bar',
+          fileMimeType: 'image/jpeg',
+          fileId: Promise.resolve('id2'),
+          status: 'preview',
+        },
+      ]);
+
+      expect(pluginState.allUploadsFinished).toBe(false);
+      jest.runOnlyPendingTimers();
+      expect(pluginState.allUploadsFinished).toBe(false);
+
+      pluginState.stateManager.updateState('foo', {
+        id: 'foo',
+        fileName: 'foo.jpg',
+        fileSize: 100,
+        fileMimeType: 'image/jpeg',
+        status: 'ready',
+        dimensions: { height: 100, width: 100 },
+      });
+
+      jest.runOnlyPendingTimers();
+      expect(pluginState.allUploadsFinished).toBe(false);
+
+      pluginState.stateManager.updateState('bar', {
+        id: 'bar',
+        fileName: 'bar.jpg',
+        fileSize: 100,
+        fileMimeType: 'image/jpeg',
+        status: 'ready',
+        dimensions: { height: 100, width: 100 },
+      });
+
+      jest.runOnlyPendingTimers();
+      expect(pluginState.allUploadsFinished).toBe(false);
+
       await pluginState.waitForPendingTasks();
       expect(pluginState.allUploadsFinished).toBe(true);
     });

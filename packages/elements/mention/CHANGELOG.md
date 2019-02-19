@@ -1,5 +1,43 @@
 # @atlaskit/mention
 
+## 16.2.0
+- [minor] [ef368572dc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef368572dc):
+
+  - Update types for @atlaskit/mention
+
+## 16.1.0
+- [minor] [0f3f9f0992](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f3f9f0992):
+
+  - Fix context identifiers not being passed to mention provider's calls. MentionProvider interface was updated to include the optional contextIdentifier parameter in filter and recordMentionSelection methods.
+
+## 16.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/icon@16.0.0
+
+## 16.0.0
+- [major] [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+
+  - Removed client-side indexed cache of mention results. Also removed method 'getUsersInContext' from MentionResourceConfig, 'remoteSearch' from MentionStats and 'weight' from MentionDescription. If you used to use them, simply remove any references to them.
+
+## 15.3.0
+- [minor] [c238c00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c238c00):
+
+  - added i18n support to mentions
+- [minor] [3b1de17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b1de17):
+
+  - added i18n translated files
+
+## 15.2.2
+- [patch] [0f19693](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f19693):
+
+  - added tests for xregexp transformer, updated README and simplified code
+- [patch] [b789b3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b789b3a):
+
+  - removed xregexp library dependency from emoji and mention components, added xregexp-transformer package to compile xregexp expressions to unicode charsets
+
 ## 15.2.1
 - [patch] [cae5adb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cae5adb):
 

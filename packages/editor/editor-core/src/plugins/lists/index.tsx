@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { orderedList, bulletList, listItem } from '@atlaskit/editor-common';
+import { orderedList, bulletList, listItem } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import { ToolbarSize } from '../../ui/Toolbar';
 import ToolbarLists from './ui/ToolbarLists';
@@ -10,7 +10,7 @@ import WithPluginState from '../../ui/WithPluginState';
 
 import EditorBulletListIcon from '@atlaskit/icon/glyph/editor/bullet-list';
 import EditorNumberedListIcon from '@atlaskit/icon/glyph/editor/number-list';
-import { messages } from '../insert-block/ui/ToolbarInsertBlock';
+import { messages } from '../lists/messages';
 
 const listPlugin: EditorPlugin = {
   nodes() {
@@ -35,11 +35,11 @@ const listPlugin: EditorPlugin = {
   pluginsOptions: {
     quickInsert: ({ formatMessage }) => [
       {
-        title: formatMessage(messages.bulletList),
+        title: formatMessage(messages.unorderedList),
         keywords: ['ul', 'unordered list'],
         priority: 1100,
         icon: () => (
-          <EditorBulletListIcon label={formatMessage(messages.bulletList)} />
+          <EditorBulletListIcon label={formatMessage(messages.unorderedList)} />
         ),
         action(insert, state) {
           return insert(

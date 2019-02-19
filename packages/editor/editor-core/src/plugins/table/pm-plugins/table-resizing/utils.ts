@@ -1,15 +1,16 @@
 import { cellAround, TableMap } from 'prosemirror-tables';
+import { TableLayout } from '@atlaskit/adf-schema';
 import {
   calcTableWidth,
-  TableLayout,
   akEditorWideLayoutWidth,
   akEditorDefaultLayoutWidth,
+  akEditorFullWidthLayoutWidth,
 } from '@atlaskit/editor-common';
 
-const tableLayoutToSize = {
+export const tableLayoutToSize = {
   default: akEditorDefaultLayoutWidth,
   wide: akEditorWideLayoutWidth,
-  'full-width': undefined,
+  'full-width': akEditorFullWidthLayoutWidth,
 };
 
 /**
@@ -23,7 +24,7 @@ export function getLayoutSize(
 ) {
   const calculatedTableWidth = calcTableWidth(tableLayout, containerWidth);
   return calculatedTableWidth.endsWith('px')
-    ? Number(calculatedTableWidth.slice(0, calculatedTableWidth.length - 2))
+    ? parseInt(calculatedTableWidth, 10)
     : tableLayoutToSize[tableLayout] || containerWidth;
 }
 
@@ -41,13 +42,18 @@ export function pointsAtCell($pos) {
  * @param event
  * @param side
  */
-export function edgeCell(view, event, side) {
-  const buffer = side === 'right' ? -5 : 5; // Fixes finicky bug where posAtCoords could return wrong pos.
-  let { pos } = view.posAtCoords({
+export function edgeCell(view, event, side, handleWidth) {
+  const buffer = side === 'right' ? -handleWidth : handleWidth; // Fixes finicky bug where posAtCoords could return wrong pos.
+  let posResult = view.posAtCoords({
     left: event.clientX + buffer,
     top: event.clientY,
   });
-  let $cell = cellAround(view.state.doc.resolve(pos));
+
+  if (!posResult || !posResult.pos) {
+    return -1;
+  }
+
+  let $cell = cellAround(view.state.doc.resolve(posResult.pos));
   if (!$cell) {
     return -1;
   }

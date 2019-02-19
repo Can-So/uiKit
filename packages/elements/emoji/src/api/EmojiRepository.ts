@@ -1,39 +1,23 @@
 import { ITokenizer, Search, UnorderedSearchIndex } from 'js-search';
-
-import * as XRegExp from 'xregexp/src/xregexp'; // Not using 'xregexp' directly to only include what we use
-import * as XRegExpUnicodeBase from 'xregexp/src/addons/unicode-base';
-import * as XRegExpUnicodeScripts from 'xregexp/src/addons/unicode-scripts';
-import * as XRegExpUnicodeCategories from 'xregexp/src/addons/unicode-categories';
-
+import { CategoryId } from '../components/picker/categories';
 import { defaultCategories, frequentCategory } from '../constants';
+import {
+  getCategoryId,
+  isEmojiDescriptionWithVariations,
+} from '../type-helpers';
 import {
   EmojiDescription,
   EmojiSearchResult,
   OptionalEmojiDescription,
-  SearchSort,
   SearchOptions,
+  SearchSort,
 } from '../types';
-import {
-  isEmojiDescriptionWithVariations,
-  getCategoryId,
-} from '../type-helpers';
+import { tokenizerRegex } from './EmojiRepositoryRegex';
 import {
   createSearchEmojiComparator,
   createUsageOnlyEmojiComparator,
 } from './internal/Comparators';
 import { UsageFrequencyTracker } from './internal/UsageFrequencyTracker';
-import { CategoryId } from '../components/picker/categories';
-
-XRegExpUnicodeBase(XRegExp);
-XRegExpUnicodeScripts(XRegExp);
-XRegExpUnicodeCategories(XRegExp);
-
-// \p{Han} => each chinese character is a separate token
-// \p{L}+[\p{Mn}|']*\p{L} => consecutive letters, including non spacing mark and apostrophe are a single token
-const tokenizerRegex = XRegExp.cache(
-  "\\p{Han}|[\\p{L}|\\p{N}]+[\\p{Mn}|']*\\p{L}*",
-  'gi',
-);
 
 type Token = {
   token: string;
@@ -42,11 +26,11 @@ type Token = {
 
 // FS-1097 - duplicated in mentions - extract at some point into a shared library
 class Tokenizer implements ITokenizer {
-  public static tokenize(text): string[] {
+  public tokenize(text: string): string[] {
     return this.tokenizeAsTokens(text).map(token => token.token);
   }
 
-  public static tokenizeAsTokens(text): Token[] {
+  public tokenizeAsTokens(text: string): Token[] {
     let match;
     let tokens: Token[] = [];
     tokenizerRegex.lastIndex = 0;
@@ -203,7 +187,7 @@ export default class EmojiRepository {
 
     const { nameQuery, asciiQuery } = splitQuery(query);
     if (nameQuery) {
-      filteredEmoji = this.fullSearch.search(nameQuery);
+      filteredEmoji = this.fullSearch.search(nameQuery) as EmojiDescription[];
 
       if (asciiQuery) {
         filteredEmoji = this.withAsciiMatch(asciiQuery, filteredEmoji);
@@ -405,7 +389,7 @@ export default class EmojiRepository {
 
   private initSearchIndex(): void {
     this.fullSearch = new Search('id');
-    this.fullSearch.tokenizer = Tokenizer;
+    this.fullSearch.tokenizer = new Tokenizer();
     this.fullSearch.searchIndex = new UnorderedSearchIndex();
     this.fullSearch.addIndex('name');
     this.fullSearch.addIndex('shortName');

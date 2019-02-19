@@ -2,11 +2,11 @@ import { Slice, Fragment } from 'prosemirror-model';
 import { TextSelection } from 'prosemirror-state';
 import { CellSelection } from 'prosemirror-tables';
 import { isColumnSelected, isRowSelected } from 'prosemirror-utils';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   td,
@@ -39,8 +39,10 @@ import {
 } from '../../../../plugins/table/pm-plugins/main';
 
 describe('table plugin: actions', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin(), panelPlugin],
       pluginKey,
@@ -230,7 +232,6 @@ describe('table plugin: actions', () => {
           const cell = cells[i] as HTMLElement;
           expect(cell.getAttribute('colspan')).not.toEqual('2');
         }
-        editorView.destroy();
       });
     });
   });
@@ -268,7 +269,6 @@ describe('table plugin: actions', () => {
           const cell = cells[i] as HTMLElement;
           expect(cell.getAttribute('rowspan')).not.toEqual('2');
         }
-        editorView.destroy();
       });
     });
   });
@@ -347,13 +347,16 @@ describe('table plugin: actions', () => {
       );
       const { state, dispatch } = editorView;
       selectColumn(0)(state, dispatch);
-      setMultipleCellAttrs({ colspan: 2 }, 0)(editorView.state, dispatch);
+      setMultipleCellAttrs({ background: 'purple' }, 0)(
+        editorView.state,
+        dispatch,
+      );
       expect(editorView.state.doc).toEqualDocument(
         doc(
           p('text'),
           table()(
-            tr(td({ colspan: 2 })(p('c1')), td()(p('c2'))),
-            tr(td({ colspan: 2 })(p('c3')), td()(p('c4'))),
+            tr(td({ background: 'purple' })(p('c1')), td()(p('c2'))),
+            tr(td({ background: 'purple' })(p('c3')), td()(p('c4'))),
           ),
         ),
       );
@@ -491,7 +494,6 @@ describe('table plugin: actions', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -531,7 +533,6 @@ describe('table plugin: actions', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
   });

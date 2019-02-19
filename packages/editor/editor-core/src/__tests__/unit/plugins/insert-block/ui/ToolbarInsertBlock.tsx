@@ -5,7 +5,7 @@ import { emoji as emojiData } from '@atlaskit/util-data-test';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   code_block,
   decisionList,
   decisionItem,
@@ -15,10 +15,15 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { taskDecision } from '@atlaskit/util-data-test';
 import { ProviderFactory } from '@atlaskit/editor-common';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
+import Button from '@atlaskit/button';
 
 import { pluginKey as blockTypePluginKey } from '../../../../../plugins/block-type/pm-plugins/main';
-import { messages as blockTypeMessages } from '../../../../../plugins/block-type/types';
+import {
+  messages as blockTypeMessages,
+  CODE_BLOCK,
+  PANEL,
+} from '../../../../../plugins/block-type/types';
 import DropdownMenu from '../../../../../ui/DropdownMenu';
 import ToolbarInsertBlock, {
   messages,
@@ -26,6 +31,15 @@ import ToolbarInsertBlock, {
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import EditorActions from '../../../../../actions';
 import { MediaProvider } from '../../../../../plugins/media';
+import {
+  stateKey as hyperlinkPluginKey,
+  LinkAction,
+} from '../../../../../plugins/hyperlink/pm-plugins/main';
+import {
+  analyticsPluginKey,
+  INPUT_METHOD,
+} from '../../../../../plugins/analytics';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
@@ -36,12 +50,44 @@ const mediaProvider: Promise<MediaProvider> = Promise.resolve({
 
 const providerFactory = ProviderFactory.create({ mediaProvider });
 
+const clickToolbarButton = (title, toolbarOption) => {
+  const toolbarButton = toolbarOption
+    .find(ToolbarButton)
+    .filterWhere(n => n.prop('title').indexOf(title) > -1)
+    .find(Button);
+  toolbarButton.simulate('click');
+};
+
+const clickInsertMenuOption = (title, toolbarOption) => {
+  toolbarOption.find('button').simulate('click');
+  const insertMenuOption = toolbarOption
+    .find(Item)
+    .filterWhere(n => n.text().indexOf(title) > -1);
+  insertMenuOption.simulate('click');
+};
+
+const menus = [
+  {
+    name: INPUT_METHOD.TOOLBAR,
+    numButtons: 1,
+    clickButton: clickToolbarButton,
+  },
+  {
+    name: INPUT_METHOD.INSERT_MENU,
+    numButtons: 0,
+    clickButton: clickInsertMenuOption,
+  },
+];
+
 describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
+  const createEditor = createEditorFactory();
   let trackEvent;
   let editorActions;
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
-  const editor = (doc: any) =>
-    createEditor({
+  const editor = (doc: any) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       pluginKey: blockTypePluginKey,
       editorProps: {
@@ -50,12 +96,16 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
         allowLayouts: true,
         allowLists: true,
         allowPanel: true,
+        allowRule: true,
+        allowAnalyticsGASV3: true,
         taskDecisionProvider: Promise.resolve(
           taskDecision.getMockTaskDecisionResource(),
         ),
       },
       providerFactory,
+      createAnalyticsEvent,
     });
+  };
 
   beforeEach(() => {
     trackEvent = jest.fn();
@@ -152,6 +202,35 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     toolbarOption.unmount();
   });
 
+  it('should trigger emoji picker opened analytics event when emoji picker opened', () => {
+    const { editorView } = editor(doc(p()));
+    const dispatchAnalyticsSpy = jest.fn();
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        emojiDisabled={false}
+        emojiProvider={emojiProvider}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+        dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+    const emojiButton = toolbarOption
+      .find(Item)
+      .filterWhere(n => n.text().indexOf(messages.emoji.defaultMessage) > -1);
+    emojiButton.simulate('click');
+
+    expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+      action: 'opened',
+      actionSubject: 'picker',
+      actionSubjectId: 'emojiPicker',
+      attributes: { inputMethod: 'toolbar' },
+      eventType: 'ui',
+    });
+    toolbarOption.unmount();
+  });
+
   it('should have emoji picker component when emojiPickerOpen is true', () => {
     const { editorView } = editor(doc(p()));
     const toolbarOption = mountWithIntl(
@@ -210,6 +289,123 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     toolbarOption.unmount();
   });
 
+  it('should trigger cloud picker opened analytics event when media option clicked', () => {
+    const { editorView } = editor(doc(p()));
+    const dispatchAnalyticsSpy = jest.fn();
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        mediaSupported={true}
+        mediaUploadsEnabled={true}
+        onShowMediaPicker={jest.fn()}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+        dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+    const mediaButton = toolbarOption
+      .find(Item)
+      .filterWhere(
+        n => n.text().indexOf(messages.filesAndImages.defaultMessage) > -1,
+      );
+    mediaButton.simulate('click');
+
+    expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+      action: 'opened',
+      actionSubject: 'picker',
+      actionSubjectId: 'cloudPicker',
+      attributes: { inputMethod: 'toolbar' },
+      eventType: 'ui',
+    });
+    toolbarOption.unmount();
+  });
+
+  it('should insert link when link option is clicked', () => {
+    const { editorView } = editor(doc(p('text')));
+    const dispatchSpy = jest.spyOn(editorView, 'dispatch');
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        linkSupported={true}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+    const linkButton = toolbarOption
+      .find(Item)
+      .filterWhere(n => n.text().indexOf(messages.link.defaultMessage) > -1);
+    linkButton.simulate('click');
+
+    const linkMeta = dispatchSpy.mock.calls[0][0].getMeta(hyperlinkPluginKey);
+    expect(linkMeta).toEqual(LinkAction.SHOW_INSERT_TOOLBAR);
+    toolbarOption.unmount();
+    dispatchSpy.mockRestore();
+  });
+
+  it('should trigger link typeahead invoked analytics event when link option clicked', () => {
+    const { editorView } = editor(doc(p('text')));
+    const dispatchSpy = jest.spyOn(editorView, 'dispatch');
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        linkSupported={true}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+    const linkButton = toolbarOption
+      .find(Item)
+      .filterWhere(n => n.text().indexOf(messages.link.defaultMessage) > -1);
+    linkButton.simulate('click');
+
+    const analyticsMeta = dispatchSpy.mock.calls[0][0].getMeta(
+      analyticsPluginKey,
+    );
+    expect(analyticsMeta[0].payload).toEqual(
+      expect.objectContaining({
+        action: 'invoked',
+        actionSubjectId: 'linkTypeAhead',
+        attributes: expect.objectContaining({ inputMethod: 'toolbar' }),
+      }),
+    );
+    toolbarOption.unmount();
+    dispatchSpy.mockRestore();
+  });
+
+  menus.forEach(menu => {
+    it(`should fire analytics event when rule option clicked in ${
+      menu.name
+    }`, () => {
+      const { editorView } = editor(doc(p('text')));
+      const dispatchSpy = jest.spyOn(editorView, 'dispatch');
+      const toolbarOption = mountWithIntl(
+        <ToolbarInsertBlock
+          horizontalRuleEnabled={true}
+          editorView={editorView}
+          buttons={menu.numButtons}
+          isReducedSpacing={false}
+        />,
+      );
+      menu.clickButton(messages.horizontalRule.defaultMessage, toolbarOption);
+
+      const tr = dispatchSpy.mock.calls[0][0];
+      const analyticsMeta = tr.getMeta(analyticsPluginKey)[0];
+      expect(analyticsMeta).toMatchObject({
+        payload: {
+          action: 'inserted',
+          actionSubject: 'document',
+          actionSubjectId: 'divider',
+          attributes: { inputMethod: menu.name },
+          eventType: 'track',
+        },
+      });
+      toolbarOption.unmount();
+    });
+  });
+
   it('should trigger insertBlockType when Panel option is clicked', () => {
     const { editorView, pluginState: pluginStateBlockType } = editor(
       doc(p('text')),
@@ -246,6 +442,34 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     toolbarOption.unmount();
   });
 
+  menus.forEach(menu => {
+    it(`should fire analytics event when panel option is clicked in ${
+      menu.name
+    }`, () => {
+      const { editorView } = editor(doc(p('text')));
+      const dispatchAnalyticsSpy = jest.fn();
+      const toolbarOption = mountWithIntl(
+        <ToolbarInsertBlock
+          availableWrapperBlockTypes={[PANEL]}
+          onInsertBlockType={jest.fn(() => () => true)}
+          editorView={editorView}
+          buttons={menu.numButtons}
+          isReducedSpacing={false}
+          dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+        />,
+      );
+      menu.clickButton(blockTypeMessages.panel.defaultMessage, toolbarOption);
+
+      expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'panel',
+        attributes: { inputMethod: menu.name, panelType: 'info' },
+        eventType: 'track',
+      });
+    });
+  });
+
   it('should trigger insertBlockType when code block option is clicked', () => {
     const { editorView, pluginState: pluginStateBlockType } = editor(
       doc(p('text')),
@@ -280,6 +504,37 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
       'atlassian.editor.format.codeblock.button',
     );
     toolbarOption.unmount();
+  });
+
+  menus.forEach(menu => {
+    it(`should fire analytics event when code block option clicked in ${
+      menu.name
+    }`, () => {
+      const { editorView } = editor(doc(p('text')));
+      const dispatchAnalyticsSpy = jest.fn();
+      const toolbarOption = mountWithIntl(
+        <ToolbarInsertBlock
+          availableWrapperBlockTypes={[CODE_BLOCK]}
+          onInsertBlockType={jest.fn(() => () => true)}
+          editorView={editorView}
+          buttons={menu.numButtons}
+          isReducedSpacing={false}
+          dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+        />,
+      );
+      menu.clickButton(
+        blockTypeMessages.codeblock.defaultMessage,
+        toolbarOption,
+      );
+
+      expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'codeBlock',
+        attributes: { inputMethod: menu.name },
+        eventType: 'track',
+      });
+    });
   });
 
   it('should trigger insertBlockType when blockquote option is clicked', () => {

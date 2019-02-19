@@ -3,16 +3,14 @@
 import React from 'react';
 
 import Select from './Select';
-import { CheckboxOption } from './components';
-import { inputOptionStyles } from './components/input-options';
+import { CheckboxOption } from './components/input-options';
 
-const CheckboxSelect = (props: any) => (
+const CheckboxSelect = ({ components, ...props }: any) => (
   <Select
     closeMenuOnSelect={false}
     hideSelectedOptions={false}
     isMulti
-    components={{ Option: CheckboxOption }}
-    styles={{ option: inputOptionStyles }}
+    components={{ ...components, Option: CheckboxOption }}
     {...props}
   />
 );

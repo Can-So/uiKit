@@ -1,11 +1,14 @@
+import { ObjectKey } from '@atlaskit/task-decision';
+
 // Copy of helper functions from @atlaskit/task-decision
 // NOTE: if this is changed in the original package, this must also be modified
-export const objectKeyToString = objectKey => {
+export const objectKeyToString = (objectKey: ObjectKey) => {
   const { containerAri, objectAri, localId } = objectKey;
   return `${containerAri}:${objectAri}:${localId}`;
 };
 
-export const toggleTaskState = state => (state === 'DONE' ? 'TODO' : 'DONE');
+export const toggleTaskState = (state: string) =>
+  state === 'DONE' ? 'TODO' : 'DONE';
 
 export const findIndex = (
   array: any[],

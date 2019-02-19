@@ -1,7 +1,7 @@
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   alignment as alignmentMark,
 } from '@atlaskit/editor-test-helpers';
 import {
@@ -15,8 +15,10 @@ import tablesPlugin from '../../../../plugins/table';
 import { removeBlockMarks } from '../../../../utils/mark';
 
 describe('alignment utils', () => {
+  const createEditor = createEditorFactory<AlignmentPluginState>();
+
   const editor = (doc: any) =>
-    createEditor<AlignmentPluginState>({
+    createEditor({
       doc,
       pluginKey: alignmentPluginKey,
       editorPlugins: [
@@ -41,6 +43,5 @@ describe('alignment utils', () => {
       dispatch(tr);
       expect(editorView.state.doc).toEqualDocument(doc(p('hello')));
     }
-    editorView.destroy();
   });
 });

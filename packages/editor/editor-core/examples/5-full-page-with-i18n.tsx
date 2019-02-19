@@ -24,14 +24,14 @@ export default class ExampleEditor extends React.Component<Props, State> {
           primaryToolbarComponents: (
             <WithEditorActions
               render={actions => (
-                <>
+                <React.Fragment>
                   <LanguagePicker
                     languages={languages}
                     locale={locale}
                     onChange={this.loadLocale}
                   />
                   <SaveAndCancelButtons editorActions={actions} />
-                </>
+                </React.Fragment>
               )}
             />
           ),

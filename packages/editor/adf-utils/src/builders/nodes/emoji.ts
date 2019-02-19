@@ -1,4 +1,4 @@
-import { EmojiDefinition, EmojiAttributes } from '@atlaskit/editor-common';
+import { EmojiDefinition, EmojiAttributes } from '@atlaskit/adf-schema';
 
 export const emoji = (attrs: EmojiAttributes): EmojiDefinition => ({
   type: 'emoji',

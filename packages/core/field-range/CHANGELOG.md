@@ -1,5 +1,26 @@
 # @atlaskit/field-range
 
+## 5.0.17
+- Updated dependencies [3a7e838663](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7e838663):
+  - @atlaskit/section-message@1.2.0
+
+## 5.0.16
+- Updated dependencies [dfd4cbc475](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfd4cbc475):
+  - @atlaskit/section-message@1.1.0
+
+## 5.0.15
+- Updated dependencies [b8091afbdd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8091afbdd):
+  - @atlaskit/section-message@1.0.17
+
+## 5.0.14
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/section-message@1.0.16
+
+## 5.0.13
+- Updated dependencies [6d08da6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d08da6):
+  - @atlaskit/section-message@1.0.15
+
 ## 5.0.12
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/section-message@1.0.14

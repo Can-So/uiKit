@@ -5,6 +5,7 @@ import { toMatchSnapshot } from 'jest-snapshot';
 import { configureToMatchImageSnapshot } from 'jest-image-snapshot';
 import * as emotion from 'emotion';
 import { createSerializer } from 'jest-emotion';
+import 'jest-localstorage-mock';
 
 let consoleError;
 let consoleWarn;
@@ -103,12 +104,6 @@ if (typeof window !== 'undefined' && !('cancelAnimationFrame' in window)) {
   };
 }
 
-function isNodeOrFragment(thing) {
-  // Using a simple `instanceof` check is intentionally avoided here to make
-  // this code agnostic to a specific instance of a Schema.
-  return thing && typeof thing.eq === 'function';
-}
-
 function transformDoc(fn) {
   return doc => {
     const walk = fn => node => {
@@ -125,6 +120,7 @@ function transformDoc(fn) {
 }
 
 const hasLocalId = type =>
+  type === 'status' ||
   type === 'taskItem' ||
   type === 'taskList' ||
   type === 'decisionItem' ||
@@ -136,7 +132,7 @@ const removeIdsFromDoc = transformDoc(node => {
    * @see https://regex101.com/r/FrYUen/1
    */
   if (node.type === 'media') {
-    return {
+    const replacedNode = {
       ...node,
       attrs: {
         ...node.attrs,
@@ -145,14 +141,18 @@ const removeIdsFromDoc = transformDoc(node => {
           '$11234-5678-abcd-efgh$3',
         ),
 
-        __key: node.attrs.__key.replace(
-          /(temporary:)?([a-z0-9\-]+)(:.*)?$/,
-          '$11234-5678-abcd-efgh$3',
-        ),
-
         __fileName: 'example.png',
       },
     };
+
+    if (node.attrs.__key) {
+      replacedNode.attrs.__key = node.attrs.__key.replace(
+        /(temporary:)?([a-z0-9\-]+)(:.*)?$/,
+        '$11234-5678-abcd-efgh$3',
+      );
+    }
+
+    return replacedNode;
   }
   if (hasLocalId(node.type)) {
     return {
@@ -327,33 +327,23 @@ expect.addSnapshotSerializer(createSerializer(emotion));
 
 // set up for visual regression
 if (process.env.VISUAL_REGRESSION) {
-  const puppeteer = require('puppeteer');
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
   beforeAll(async () => {
-    // show browser when watch is enabled
-    const isWatch = process.env.WATCH === 'true';
-    let headless = true;
-    if (isWatch) {
-      headless = false;
-    }
-    global.browser = await puppeteer.launch({
-      // run test in headless mode
-      headless: headless,
-      slowMo: 100,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
     global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
   afterAll(async () => {
-    await global.browser.close();
+    await global.page.close();
+    await global.browser.disconnect();
   });
 
-  // TODO tweak failureThreshold to provide best results
-  // TODO: A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
+  // A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
+  const customConfig = { threshold: 0.3 };
   const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
-    customDiffConfig: { threshold: 0.3 },
+    customDiffConfig: customConfig,
+    failureThreshold: '3800',
+    failureThresholdType: 'pixel',
     noColors: true,
   });
 

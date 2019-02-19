@@ -15,6 +15,17 @@ describe('keymaps', () => {
         it('returns tooltip', () => {
           expect(keymaps.tooltip(keymap)).toEqual('A keymap (⌘-⇧-⌥-K)');
         });
+
+        it('returns tooltip with unicode arrow', () => {
+          const keymap = {
+            description: 'A keymap',
+            windows: 'Ctrl-Shift-Alt-ArrowUp',
+            mac: 'Cmd-Shift-Alt-ArrowUp',
+            common: 'Mod-Shift-Alt-ArrowUp',
+          };
+
+          expect(keymaps.tooltip(keymap)).toEqual('A keymap s(⌘-⇧-⌥-K)');
+        });
       });
 
       describe('findKeymapByDescription', () => {
@@ -36,7 +47,7 @@ describe('keymaps', () => {
       describe('findShortcutByDescription', () => {
         describe('shortcut is found', () => {
           it('returns matched shortcut', () => {
-            expect(keymaps.findShortcutByDescription('Block quote')).toEqual(
+            expect(keymaps.findShortcutByDescription('Quote')).toEqual(
               'Cmd-Alt-9',
             );
           });
@@ -54,6 +65,17 @@ describe('keymaps', () => {
       describe('tooltip', () => {
         it('returns tooltip', () => {
           expect(keymaps.tooltip(keymap)).toEqual('Ctrl+Shift+Alt+K');
+        });
+
+        it('returns tooltip with unicode arrow', () => {
+          const keymap = {
+            description: 'A keymap',
+            windows: 'Ctrl-Shift-Alt-ArrowUp',
+            mac: 'Cmd-Shift-Alt-ArrowUp',
+            common: 'Mod-Shift-Alt-ArrowUp',
+          };
+
+          expect(keymaps.tooltip(keymap)).toEqual('Ctrl+Shift+Alt+↑');
         });
       });
 

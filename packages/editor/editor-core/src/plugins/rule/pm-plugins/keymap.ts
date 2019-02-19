@@ -4,6 +4,23 @@ import { Plugin } from 'prosemirror-state';
 import * as keymaps from '../../../keymaps';
 import * as commands from '../../../commands';
 import { trackAndInvoke } from '../../../analytics';
+import {
+  withAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+} from '../../analytics';
+
+const insertRuleWithAnalytics = () =>
+  withAnalytics({
+    action: ACTION.INSERTED,
+    actionSubject: ACTION_SUBJECT.DOCUMENT,
+    actionSubjectId: ACTION_SUBJECT_ID.DIVIDER,
+    attributes: { inputMethod: INPUT_METHOD.SHORTCUT },
+    eventType: EVENT_TYPE.TRACK,
+  })(commands.insertRule());
 
 export function keymapPlugin(schema: Schema): Plugin {
   const list = {};
@@ -12,7 +29,7 @@ export function keymapPlugin(schema: Schema): Plugin {
     keymaps.insertRule.common!,
     trackAndInvoke(
       'atlassian.editor.format.horizontalrule.keyboard',
-      commands.insertRule(),
+      insertRuleWithAnalytics(),
     ),
     list,
   );

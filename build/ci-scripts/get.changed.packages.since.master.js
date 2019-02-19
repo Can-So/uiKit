@@ -12,9 +12,19 @@ const packages = require('../utils/packages');
   const cwd = process.cwd();
   const allPackages = await bolt.getWorkspaces({ cwd });
   const changedPackages = await packages.getChangedPackagesSinceMaster();
-  const changedPackagesRelativePaths = changedPackages.map(
+  let changedPackagesRelativePaths = changedPackages.map(
     pkg => pkg.relativeDir,
   );
-
-  console.log(JSON.stringify(changedPackagesRelativePaths));
+  if (process.argv[3] && process.argv[3].includes('--only')) {
+    const includedPattern = process.argv[3].split('=')[1];
+    // We need to include only the component 'packages' for example
+    changedPackagesRelativePaths = changedPackagesRelativePaths.filter(pkg =>
+      pkg.includes(includedPattern),
+    );
+  }
+  if (process.argv.includes('--spaceDelimited')) {
+    console.log(changedPackagesRelativePaths.join(' '));
+  } else {
+    console.log(JSON.stringify(changedPackagesRelativePaths));
+  }
 })();

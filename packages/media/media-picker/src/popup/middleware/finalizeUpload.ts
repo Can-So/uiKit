@@ -4,6 +4,8 @@ import {
   MediaStoreCopyFileWithTokenBody,
   MediaStoreCopyFileWithTokenParams,
 } from '@atlaskit/media-store';
+import { fileStreamsCache, FileState } from '@atlaskit/media-core';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Fetcher } from '../tools/fetcher/fetcher';
 import {
   FinalizeUploadAction,
@@ -29,13 +31,7 @@ export default function(fetcher: Fetcher): Middleware {
 export function finalizeUpload(
   fetcher: Fetcher,
   store: Store<State>,
-  {
-    file,
-    uploadId,
-    source,
-    replaceFileId,
-    occurrenceKey,
-  }: FinalizeUploadAction,
+  { file, uploadId, source, replaceFileId }: FinalizeUploadAction,
 ): Promise<SendUploadEventAction> {
   const { userContext } = store.getState();
   return userContext.config
@@ -46,7 +42,6 @@ export function finalizeUpload(
         ...source,
         owner,
       };
-
       const copyFileParams: CopyFileParams = {
         store,
         fetcher,
@@ -54,7 +49,6 @@ export function finalizeUpload(
         uploadId,
         sourceFile,
         replaceFileId,
-        occurrenceKey,
       };
 
       return copyFile(copyFileParams);
@@ -67,8 +61,7 @@ type CopyFileParams = {
   file: MediaFile;
   uploadId: string;
   sourceFile: SourceFile;
-  replaceFileId?: Promise<string>;
-  occurrenceKey?: string;
+  replaceFileId?: Promise<string> | string;
 };
 
 async function copyFile({
@@ -78,7 +71,6 @@ async function copyFile({
   uploadId,
   sourceFile,
   replaceFileId,
-  occurrenceKey,
 }: CopyFileParams): Promise<SendUploadEventAction> {
   const { deferredIdUpfronts, tenantContext, config } = store.getState();
   const collection = config.uploadParams && config.uploadParams.collection;
@@ -92,7 +84,7 @@ async function copyFile({
   const params: MediaStoreCopyFileWithTokenParams = {
     collection,
     replaceFileId: replaceFileId ? await replaceFileId : undefined,
-    occurrenceKey,
+    occurrenceKey: file.occurrenceKey,
   };
 
   return mediaStore
@@ -110,29 +102,54 @@ async function copyFile({
           event: {
             name: 'upload-processing',
             data: {
-              file: {
-                ...file,
-                publicId,
-              },
+              file,
             },
           },
           uploadId,
         }),
       );
-      const auth = await tenantContext.config.authProvider();
+      const auth = await tenantContext.config.authProvider({
+        collectionName: collection,
+      });
       // TODO [MS-725]: replace by context.getFile
       return fetcher.pollFile(auth, publicId, collection);
     })
     .then(processedDestinationFile => {
+      const subject = fileStreamsCache.get(
+        processedDestinationFile.id,
+      ) as ReplaySubject<FileState>;
+      // We need to cast to ReplaySubject and check for "next" method since the current
+      if (subject && subject.next) {
+        const subscription = subject.subscribe({
+          next(currentState) {
+            setTimeout(() => subscription.unsubscribe(), 0);
+            setTimeout(() => {
+              const {
+                artifacts,
+                mediaType,
+                mimeType,
+                name,
+                size,
+              } = processedDestinationFile;
+              subject.next({
+                ...currentState,
+                status: 'processed',
+                artifacts,
+                mediaType,
+                mimeType,
+                name,
+                size,
+              });
+            }, 0);
+          },
+        });
+      }
       return store.dispatch(
         sendUploadEvent({
           event: {
             name: 'upload-end',
             data: {
-              file: {
-                ...file,
-                publicId: processedDestinationFile.id,
-              },
+              file,
               public: processedDestinationFile,
             },
           },

@@ -2,7 +2,7 @@ import * as React from 'react';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { ComponentClass, Consumer, Provider } from 'react';
-import { Fragment, Mark, Node, Schema } from 'prosemirror-model';
+import { Fragment, Mark, MarkType, Node, Schema } from 'prosemirror-model';
 
 import { Serializer } from '../';
 import { getText } from '../utils';
@@ -18,14 +18,13 @@ import {
 } from './nodes';
 
 import { toReact as markToReact } from './marks';
-
+import { calcTableColumnWidths } from '@atlaskit/adf-schema';
 import {
   ProviderFactory,
   getMarksByOrder,
   isSameMark,
   EventHandlers,
   ExtensionHandlers,
-  calcTableColumnWidths,
 } from '@atlaskit/editor-common';
 import { bigEmojiHeight } from '../utils';
 
@@ -45,6 +44,35 @@ export interface ConstructorParams {
   appearance?: RendererAppearance;
   disableHeadingIDs?: boolean;
   allowDynamicTextSizing?: boolean;
+}
+
+type MarkWithContent = Partial<Mark<any>> & {
+  content: Array<MarkWithContent | Node<any>>;
+};
+
+function mergeMarks(marksAndNodes: Array<MarkWithContent | Node>) {
+  return marksAndNodes.reduce(
+    (acc, markOrNode) => {
+      const prev = (acc.length && acc[acc.length - 1]) || null;
+
+      if (
+        markOrNode.type instanceof MarkType &&
+        prev &&
+        prev.type instanceof MarkType &&
+        Array.isArray(prev.content) &&
+        isSameMark(prev as Mark, markOrNode as Mark)
+      ) {
+        prev.content = mergeMarks(
+          prev.content.concat((markOrNode as MarkWithContent).content),
+        );
+      } else {
+        acc.push(markOrNode);
+      }
+
+      return acc;
+    },
+    [] as Array<MarkWithContent | Node>,
+  );
 }
 
 export default class ReactSerializer implements Serializer<JSX.Element> {
@@ -299,44 +327,27 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
   }
 
   static buildMarkStructure(content: Node[]) {
-    let currentMarkNode: any;
-    return content.reduce(
-      (acc, node, index) => {
+    return mergeMarks(
+      content.map(node => {
         const nodeMarks = this.getMarks(node);
-
         if (nodeMarks.length === 0) {
-          currentMarkNode = node;
-          acc.push(currentMarkNode);
-        } else {
-          nodeMarks.forEach((mark, markIndex) => {
-            const isSameAsPrevious = isSameMark(mark, currentMarkNode as Mark);
-            const previousIsInMarks =
-              markIndex > 0 &&
-              nodeMarks.some(m => isSameMark(m, currentMarkNode));
-
-            if (!isSameAsPrevious) {
-              let newMarkNode: any = {
-                ...mark,
-                content: [],
-              };
-
-              if (previousIsInMarks) {
-                currentMarkNode.content!.push(newMarkNode);
-                currentMarkNode = newMarkNode;
-              } else {
-                acc.push(newMarkNode);
-                currentMarkNode = newMarkNode;
-              }
-            }
-          });
-
-          currentMarkNode.content!.push(node);
+          return node;
         }
 
-        return acc;
-      },
-      [] as Mark[],
-    );
+        return nodeMarks.reverse().reduce(
+          (acc, mark) => {
+            const { eq } = mark;
+
+            return {
+              ...mark,
+              eq,
+              content: [acc],
+            };
+          },
+          node as any,
+        );
+      }),
+    ) as Mark[];
   }
 
   static fromSchema(

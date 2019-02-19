@@ -5,6 +5,7 @@ import {
   FileState,
   MediaType,
   ProcessedFileState,
+  ProcessingFileState,
 } from '@atlaskit/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
@@ -23,7 +24,6 @@ import {
   hideControlsClassName,
 } from './styled';
 import { MediaTypeIcon } from './media-type-icon';
-import { FeedbackButton } from './feedback-button';
 import { MediaViewerError, createError } from './error';
 import {
   ToolbarDownloadButton,
@@ -106,10 +106,7 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
     return (
       <HeaderWrapper className={hideControlsClassName}>
         <LeftHeader>{this.renderMetadata()}</LeftHeader>
-        <RightHeader>
-          <FeedbackButton />
-          {this.renderDownload()}
-        </RightHeader>
+        <RightHeader>{this.renderDownload()}</RightHeader>
       </HeaderWrapper>
     );
   }
@@ -124,7 +121,7 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
   }
 
   private renderMetadataLayout(item: FileState) {
-    if (item.status === 'processed') {
+    if (item.status === 'processed' || item.status === 'processing') {
       return (
         <MetadataWrapper>
           <MetadataIconWrapper>
@@ -146,7 +143,7 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
     }
   }
 
-  private renderSize = (item: ProcessedFileState) => {
+  private renderSize = (item: ProcessedFileState | ProcessingFileState) => {
     if (item.size) {
       return this.renderSeparator() + toHumanReadableMediaSize(item.size);
     } else {

@@ -9,8 +9,8 @@ import {
   isSchemaWithSubSupMark,
   isSchemaWithTextColor,
   isSchemaWithTables,
-  normalizeHexColor,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
+import { normalizeHexColor } from '@atlaskit/editor-common';
 
 import {
   Fragment,
@@ -141,7 +141,7 @@ export function convert(
         if (node.className === 'user-hover' && isSchemaWithMentions(schema)) {
           return schema.nodes.mention!.createChecked({
             id: node.getAttribute('rel'),
-            text: node.innerText,
+            text: node.textContent,
           });
         }
 
@@ -326,7 +326,7 @@ export function convert(
                 ? 'plain'
                 : pre.className.split('-')[1];
 
-            const textContent = pre.innerText.replace(/\r\n/g, '\n');
+            const textContent = (pre.textContent || '').replace(/\r\n/g, '\n');
             return schema.nodes.codeBlock!.createChecked(
               { language },
               textContent ? schema.text(textContent) : undefined,

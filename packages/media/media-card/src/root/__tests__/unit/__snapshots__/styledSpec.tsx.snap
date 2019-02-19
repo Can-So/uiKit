@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Root Wrapper File should apply breakpoint rules bassed on breakpointSize 1`] = `
+.c0 {
+  cursor: default;
+}
+
 .c0 .title {
   font-size: 12px;
 }
@@ -16,6 +20,10 @@ exports[`Root Wrapper File should apply breakpoint rules bassed on breakpointSiz
 `;
 
 exports[`Root Wrapper File should apply breakpoint rules bassed on breakpointSize 2`] = `
+.c0 {
+  cursor: default;
+}
+
 .c0 .title {
   font-size: 14px;
 }
@@ -31,6 +39,10 @@ exports[`Root Wrapper File should apply breakpoint rules bassed on breakpointSiz
 `;
 
 exports[`Root Wrapper File should apply breakpoint rules bassed on breakpointSize 3`] = `
+.c0 {
+  cursor: default;
+}
+
 .c0 .overlay {
   padding: 24px;
 }
@@ -56,6 +68,7 @@ exports[`Root Wrapper File should apply breakpoint rules bassed on breakpointSiz
 exports[`Root Wrapper File should apply breakpoint rules bassed on breakpointSize 4`] = `
 .c0 {
   border-radius: 2px;
+  cursor: default;
 }
 
 .c0 .title {
@@ -86,6 +99,10 @@ exports[`Root Wrapper File should apply breakpoint rules bassed on breakpointSiz
 `;
 
 exports[`Root Wrapper File should render properly with default properties 1`] = `
+.c0 {
+  cursor: default;
+}
+
 .c0 .title {
   font-size: 14px;
 }
@@ -101,6 +118,10 @@ exports[`Root Wrapper File should render properly with default properties 1`] = 
 `;
 
 exports[`Root Wrapper File should render properly with different appeareances 1`] = `
+.c0 {
+  cursor: default;
+}
+
 .c0 .title {
   font-size: 14px;
 }
@@ -117,9 +138,16 @@ exports[`Root Wrapper File should render properly with different appeareances 1`
 
 exports[`Root Wrapper File should render properly with different appeareances 2`] = `
 .c0 {
-  display: inline-block;
-  min-width: 200px;
-  height: 42px;
+  cursor: default;
+}
+
+.c0 .title {
+  font-size: 14px;
+}
+
+.c0 .file-type-icon span {
+  width: 16px !important;
+  height: 16px !important;
 }
 
 <div
@@ -128,6 +156,10 @@ exports[`Root Wrapper File should render properly with different appeareances 2`
 `;
 
 exports[`Root Wrapper File should render properly with different appeareances 3`] = `
+.c0 {
+  cursor: default;
+}
+
 .c0 .title {
   font-size: 14px;
 }
@@ -143,21 +175,10 @@ exports[`Root Wrapper File should render properly with different appeareances 3`
 `;
 
 exports[`Root Wrapper File should render properly with different appeareances 4`] = `
-.c0 .title {
-  font-size: 14px;
+.c0 {
+  cursor: default;
 }
 
-.c0 .file-type-icon span {
-  width: 16px !important;
-  height: 16px !important;
-}
-
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper File should render properly with different appeareances 5`] = `
 .c0 .title {
   font-size: 14px;
 }
@@ -178,6 +199,7 @@ exports[`Root Wrapper File should render properly with passed dimensions 1`] = `
   max-height: 100%;
   width: 400px;
   max-width: 100%;
+  cursor: default;
 }
 
 .c0 .title {
@@ -196,24 +218,11 @@ exports[`Root Wrapper File should render properly with passed dimensions 1`] = `
 
 exports[`Root Wrapper File should render properly with passed dimensions 2`] = `
 .c0 {
-  display: inline-block;
-  min-width: 200px;
-  width: 400px;
-  max-width: 100%;
-  height: 42px;
-}
-
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper File should render properly with passed dimensions 3`] = `
-.c0 {
   height: 300px;
   max-height: 100%;
   width: 400px;
   max-width: 100%;
+  cursor: default;
 }
 
 .c0 .title {
@@ -230,11 +239,18 @@ exports[`Root Wrapper File should render properly with passed dimensions 3`] = `
 />
 `;
 
-exports[`Root Wrapper Link should render properly with default properties 1`] = `
+exports[`Root Wrapper File should render right cursor when shouldUsePointerCursor is passed 1`] = `
 .c0 {
-  min-width: 200px;
-  max-width: 400px;
-  position: relative;
+  cursor: pointer;
+}
+
+.c0 .title {
+  font-size: 14px;
+}
+
+.c0 .file-type-icon span {
+  width: 16px !important;
+  height: 16px !important;
 }
 
 <div
@@ -242,98 +258,18 @@ exports[`Root Wrapper Link should render properly with default properties 1`] = 
 />
 `;
 
-exports[`Root Wrapper Link should render properly with different appeareances 1`] = `
+exports[`Root Wrapper File should render right cursor when shouldUsePointerCursor is passed 2`] = `
 .c0 {
-  min-width: 200px;
-  max-width: 400px;
-  position: relative;
+  cursor: default;
 }
 
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper Link should render properly with different appeareances 2`] = `
-.c0 {
-  display: inline-block;
-  min-width: 200px;
-  height: 42px;
+.c0 .title {
+  font-size: 14px;
 }
 
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper Link should render properly with different appeareances 3`] = `
-.c0 {
-  min-width: 144px;
-  max-width: 480px;
-  position: relative;
-}
-
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper Link should render properly with different appeareances 4`] = `
-.c0 {
-  min-width: 272px;
-  max-width: 400px;
-  position: relative;
-}
-
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper Link should render properly with different appeareances 5`] = `
-.c0 {
-  min-width: 400px;
-  max-width: 400px;
-  height: 125px;
-  position: relative;
-}
-
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper Link should render properly with passed dimensions 1`] = `
-.c0 {
-  min-width: 200px;
-  max-width: 400px;
-  position: relative;
-}
-
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper Link should render properly with passed dimensions 2`] = `
-.c0 {
-  display: inline-block;
-  min-width: 200px;
-  width: 400px;
-  max-width: 100%;
-  height: 42px;
-}
-
-<div
-  className="c0"
-/>
-`;
-
-exports[`Root Wrapper Link should render properly with passed dimensions 3`] = `
-.c0 {
-  min-width: 200px;
-  max-width: 400px;
-  position: relative;
+.c0 .file-type-icon span {
+  width: 16px !important;
+  height: 16px !important;
 }
 
 <div

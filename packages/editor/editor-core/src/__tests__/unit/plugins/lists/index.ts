@@ -1,7 +1,7 @@
 import { browser } from '@atlaskit/editor-common';
 import { pluginKey } from '../../../../plugins/lists/pm-plugins/main';
 import {
-  createEditor,
+  createEditorFactory,
   sendKeyToPm,
   doc,
   h1,
@@ -22,20 +22,38 @@ import {
 } from '../../../../plugins/lists/commands';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import { GapCursorSelection } from '../../../../plugins/gap-cursor';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import {
+  AnalyticsEventPayload,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  INDENT_DIR,
+  INDENT_TYPE,
+  ACTION,
+  ACTION_SUBJECT,
+  EVENT_TYPE,
+} from '../../../../plugins/analytics';
 
 describe('lists', () => {
-  const editor = (doc: any, trackEvent?: () => {}) =>
-    createEditor({
+  const createEditor = createEditorFactory();
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+
+  const editor = (doc: any, trackEvent?: () => {}) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorProps: {
         analyticsHandler: trackEvent,
         allowCodeBlocks: true,
+        allowAnalyticsGASV3: true,
         allowPanel: true,
         allowLists: true,
         media: { allowMediaSingle: true },
       },
+      createAnalyticsEvent,
       pluginKey,
     });
+  };
 
   const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
   const temporaryFileId = `temporary:${randomId()}`;
@@ -65,6 +83,32 @@ describe('lists', () => {
         sendKeyToPm(editorView, 'Tab');
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.list.indent.keyboard',
+        );
+      });
+
+      it('should call indent analytics V3 event', () => {
+        const expectedPayload: AnalyticsEventPayload = {
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          eventType: EVENT_TYPE.TRACK,
+          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+          attributes: {
+            inputMethod: INPUT_METHOD.KEYBOARD,
+            previousIndentationLevel: 1,
+            newIndentLevel: 2,
+            direction: INDENT_DIR.INDENT,
+            indentType: INDENT_TYPE.LIST,
+          },
+        };
+        const { editorView } = editor(
+          doc(ol(li(p('text')), li(p('text{<>}')))),
+          trackEvent,
+        );
+
+        sendKeyToPm(editorView, 'Tab');
+
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(
+          expect.objectContaining(expectedPayload),
         );
       });
     });
@@ -370,6 +414,29 @@ describe('lists', () => {
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.list.outdent.keyboard',
         );
+      });
+      it('should call outdent analytics V3 event', () => {
+        const expectedPayload: AnalyticsEventPayload = {
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          eventType: EVENT_TYPE.TRACK,
+          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+          attributes: {
+            inputMethod: INPUT_METHOD.KEYBOARD,
+            previousIndentationLevel: 2,
+            newIndentLevel: 1,
+            direction: INDENT_DIR.OUTDENT,
+            indentType: INDENT_TYPE.LIST,
+          },
+        };
+        const { editorView } = editor(
+          doc(ol(li(p('One'), ul(li(p('Two{<>}')))))),
+          trackEvent,
+        );
+
+        sendKeyToPm(editorView, 'Shift-Tab');
+
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
       });
     });
 
@@ -911,6 +978,82 @@ describe('lists', () => {
         expect(editorView.state.selection.$from.depth).toEqual(5);
       });
 
+      it("shouldn't increase the depth of list item when Tab key press when at 6 levels indentation", () => {
+        const { editorView } = editor(
+          doc(
+            ol(
+              li(
+                p('first'),
+                ol(
+                  li(
+                    p('second'),
+                    ol(
+                      li(
+                        p('third'),
+                        ol(
+                          li(
+                            p('fourth'),
+                            ol(
+                              li(
+                                p('fifth'),
+                                ol(li(p('sixth'), p('maybe seventh{<>}'))),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        expect(editorView.state.selection.$from.depth).toEqual(13);
+
+        sendKeyToPm(editorView, 'Tab');
+
+        expect(editorView.state.selection.$from.depth).toEqual(13);
+      });
+
+      it("shouldn't increase the depth of list item when Tab key press when a child list at 6 levels indentation", () => {
+        const { editorView } = editor(
+          doc(
+            ol(
+              li(
+                p('first'),
+                ol(
+                  li(
+                    p('second'),
+                    ol(
+                      li(
+                        p('third'),
+                        ol(
+                          li(
+                            p('fourth'),
+                            ol(
+                              li(p('fifth')),
+                              li(p('{<}fifth{>}'), ol(li(p('sixth')))),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        expect(editorView.state.selection.$from.depth).toEqual(11);
+
+        sendKeyToPm(editorView, 'Tab');
+
+        expect(editorView.state.selection.$from.depth).toEqual(11);
+      });
+
       it('should nest the list item when Tab key press', () => {
         const { editorView } = editor(
           doc(ol(li(p('text')), li(p('te{<>}xt')), li(p('text')))),
@@ -1208,7 +1351,6 @@ describe('lists', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
 
       it('should not add non images inside lists', () => {

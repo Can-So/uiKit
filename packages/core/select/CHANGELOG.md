@@ -1,5 +1,69 @@
 # @atlaskit/select
 
+## 7.1.2
+- [patch] [bcdb413cb4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bcdb413cb4):
+
+  - Encapsulate checkbox/radio option styles inside the primitive
+
+## 7.1.1
+- [patch] [896bf5bef9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/896bf5bef9):
+
+  - Fix bug breaking mobile UX, and causing menu to not be openable on touch
+
+## 7.1.0
+- [minor] [571ec20522](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/571ec20522):
+
+  - Updated react-select to 2.4.0, includes updates to BEM modifiers in options, for more information see the react-select release notes https://github.com/JedWatson/react-select/releases/tag/v2.4.0
+  - Added makeAnimated invocation back to createSelect, as multi select in modal bug has been resolved.
+  - Export makeAsyncSelect and makeCreatableSelect function from src
+
+## 7.0.0
+- [major] [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
+
+  - popup select "target" is now a function that must resolve to a node
+
+## 6.1.20
+- [patch] [957778f085](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/957778f085):
+
+  - Expose CheckboxOption and RadioOption from select package
+
+## 6.1.19
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/checkbox@5.0.11
+  - @atlaskit/form@5.1.2
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/icon@16.0.0
+
+## 6.1.18
+- [patch] [6148c6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6148c6c):
+
+  - AK-5693 apply styles to loading indicator
+
+## 6.1.17
+- [patch] [e9ccac7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9ccac7):
+
+  - pin react-select at 2.1.x to avoid SSR issues in 2.2.0
+
+## 6.1.16
+- [patch] [b9b1900](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9b1900):
+
+  - Use @atlaskit/select instead of @atlaskit/single-select on the Fullscreen examples on website
+
+## 6.1.15
+- [patch] [6195ac3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6195ac3):
+
+  - remove animated functionality to temporarily resolve blocking issue with portal
+
+## 6.1.14
+- [patch] [a048a85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a048a85):
+
+  - Updated to be compatible with new Forms API
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/form@5.0.0
+
 ## 6.1.13
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

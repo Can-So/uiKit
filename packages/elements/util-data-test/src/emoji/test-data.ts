@@ -8,6 +8,7 @@ import { customCategory, customType } from './utils';
 import {
   mockNonUploadingEmojiResourceFactory,
   mockEmojiResourceFactory,
+  MockEmojiResourceConfig,
 } from './MockEmojiResource';
 
 export const spriteEmoji = {
@@ -172,7 +173,7 @@ export const siteServiceEmojis = () => ({
   },
 });
 
-export const filterToSearchable = emojis => {
+export const filterToSearchable = (emojis: EmojiDescription[]) => {
   return emojis.filter(emoji => emoji.searchable);
 };
 
@@ -228,11 +229,14 @@ export const congoFlagEmoji = defaultEmojiRepository.findByShortName(
   ':flag_cg:',
 );
 
-export const getNonUploadingEmojiResourcePromise = (config?) =>
-  mockNonUploadingEmojiResourceFactory(newEmojiRepository(), config);
+export const getNonUploadingEmojiResourcePromise = (
+  config?: MockEmojiResourceConfig,
+) => mockNonUploadingEmojiResourceFactory(newEmojiRepository(), config);
 
-export const getEmojiResourcePromise = (config?) =>
+export const getEmojiResourcePromise = (config?: MockEmojiResourceConfig) =>
   mockEmojiResourceFactory(newEmojiRepository(), config);
 
-export const getEmojiResourcePromiseFromRepository = (repo, config?) =>
-  mockEmojiResourceFactory(repo, config);
+export const getEmojiResourcePromiseFromRepository = (
+  repo: EmojiRepository,
+  config?: MockEmojiResourceConfig,
+) => mockEmojiResourceFactory(repo, config);

@@ -18,6 +18,16 @@ export const timestampToUTCDate = (timestamp: string | number): Date => {
   return { day, month, year };
 };
 
+export const todayTimestampInUTC = (): string => {
+  const today = new Date();
+  const todayInUTC = Date.UTC(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+  return todayInUTC.toString();
+};
+
 const addLeadingZero = val => {
   if (val < 10) {
     return `0${val}`;

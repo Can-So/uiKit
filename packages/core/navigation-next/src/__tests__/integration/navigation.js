@@ -16,7 +16,8 @@ const exampleURL = getExampleUrl(
 const getByKey = key => `[data-webdriver-test-key="${key}"]`;
 
 BrowserTestCase(
-  'navigation.js: 🌏 Global navigation should render without errors',
+  '🌏 Global navigation should render without errors',
+  {},
   async client => {
     const page = new Page(client);
     const globalNav = getByKey('global-navigation');
@@ -32,7 +33,8 @@ BrowserTestCase(
   },
 );
 BrowserTestCase(
-  'navigation.js: 📦 Product navigation should render without errors',
+  '📦 Product navigation should render without errors',
+  {},
   async client => {
     const page = new Page(client);
     await page.goto(exampleURL);
@@ -47,7 +49,8 @@ BrowserTestCase(
   },
 );
 BrowserTestCase(
-  'navigation.js: 🎁 Container navigation should render without errors',
+  '🎁 Container navigation should render without errors',
+  {},
   async client => {
     const page = new Page(client);
     await page.goto(exampleURL);

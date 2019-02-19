@@ -25,7 +25,7 @@ We're planning to prevent you from doing this, but for now, simply create a new 
 
 ## The changeset command is asking me about "bump types" of packages I didn't touch... Is it broken?
 
-No. The changeset command will ask you about the bump types of all packages you are releasing and also all of their dependents. In general if you are presented with a "none" option, this *should* be safe to select as it measn the change you are making to a package will not cause it to leave a dependents semver range.
+No. The changeset command will ask you about the bump types of all packages you are releasing and also all of their dependents. In general if you are presented with a "none" option, this *should* be safe to select as it means the change you are making to a package will not cause it to leave a dependent's semver range.
 
 > i.e. if `pkg-a` depends on `pkg-b@^1.1.3` and you are releasing `pkg-b@1.2.0`, then hypothetically, it should be safe to not bump `pkg-a`'s dependency. The exception to this would be when you then want to *consume* a change in `pkg-b` that came in at a certain version. At this point, you'd want to update `pkg-a` to depend on the correct range.
 
@@ -39,19 +39,11 @@ There are times when it might ask you about the same package twice. This can hap
 
 No (most likely). Unfortunately the default behaviour of rebasing is to remove empty commits, which changeset commits *can* be.
 
-One solution is to not make empty changeset commits (**reccomended**) or to use the `--keep-empty` flag when rebasing.
+One solution is to not make empty changeset commits (**recommended**) or to use the `--keep-empty` flag when rebasing.
 
 ```
 git rebase -i --keep-empty origin/master
 ```
-
-### I'm getting a failure in CI during the `build` step that has nothing to do with my changes. Is this normal?
-
-Yes (sort of). It's a known issue that we believe is caused by a race condition between some of the `TypeScript` components.
-
-We are tracking the issue [here](https://ecosystem.atlassian.net/browse/AK-3974) and will likely be solving it with [this](https://github.com/thejameskyle/graph-sequencer) (currently WIP).
-
-In the meantime, simply rerunning should solve the issue (eventually...).
 
 ## Master has gone red suddenly and is complaining about not depending on the latest version of an internal package. What gives?
 

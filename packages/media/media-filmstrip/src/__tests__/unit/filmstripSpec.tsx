@@ -21,12 +21,6 @@ describe('<Filmstrip />', () => {
           mediaItemType: 'file',
         },
       },
-      {
-        identifier: {
-          url: 'some-url',
-          mediaItemType: 'link',
-        },
-      },
     ];
     const component = shallow(
       <Filmstrip context={context} items={items} {...props} />,
@@ -42,7 +36,7 @@ describe('<Filmstrip />', () => {
     const { component } = setup();
 
     expect(component.find(FilmstripView)).toHaveLength(1);
-    expect(component.find(FilmstripView).find(Card)).toHaveLength(3);
+    expect(component.find(FilmstripView).find(Card)).toHaveLength(2);
   });
 
   it('should use right React key for Cards', () => {
@@ -62,13 +56,6 @@ describe('<Filmstrip />', () => {
         .at(1)
         .key(),
     ).toEqual('id-2');
-    expect(
-      component
-        .find(FilmstripView)
-        .find(Card)
-        .at(2)
-        .key(),
-    ).toEqual('some-url');
   });
 
   it('should pass properties down to Cards', () => {
@@ -99,5 +86,12 @@ describe('<Filmstrip />', () => {
         },
       }),
     );
+  });
+
+  it('should render loading cards if context is missing', () => {
+    const { component } = setup({
+      context: undefined,
+    });
+    expect(component.find('CardView[status="loading"]')).toHaveLength(2);
   });
 });

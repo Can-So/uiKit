@@ -1,25 +1,26 @@
-import * as React from 'react';
 import Avatar from '@atlaskit/avatar';
-import Lozenge from '@atlaskit/lozenge';
 import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
-import Tooltip from '@atlaskit/tooltip';
+import Lozenge from '@atlaskit/lozenge';
 import { colors } from '@atlaskit/theme';
+import * as React from 'react';
 import {
   HighlightDetail,
+  isRestricted,
   MentionDescription,
   OnMentionEvent,
   Presence,
-  isRestricted,
 } from '../../types';
+import { NoAccessLabel } from '../../util/i18n';
 import { leftClick } from '../../util/mouse';
+import { NoAccessTooltip } from '../NoAccessTooltip';
 import {
+  AccessSectionStyle,
   AvatarStyle,
   FullNameStyle,
   InfoSectionStyle,
   MentionItemStyle,
-  NicknameStyle,
   NameSectionStyle,
-  AccessSectionStyle,
+  NicknameStyle,
   RowStyle,
   TimeStyle,
 } from './styles';
@@ -88,14 +89,14 @@ function renderHighlight(
   );
 }
 
-function renderLozenge(lozenge) {
+function renderLozenge(lozenge?: string) {
   if (lozenge) {
     return <Lozenge>{lozenge}</Lozenge>;
   }
   return null;
 }
 
-function renderTime(time) {
+function renderTime(time?: string) {
   if (time) {
     return <TimeStyle>{time}</TimeStyle>;
   }
@@ -170,14 +171,15 @@ export default class MentionItem extends React.PureComponent<Props, {}> {
             {renderTime(time)}
           </InfoSectionStyle>
           {restricted ? (
-            <Tooltip
-              content={`${name} won't be notified as they have no access`}
-              position="right"
-            >
+            <NoAccessTooltip name={name!}>
               <AccessSectionStyle>
-                <LockCircleIcon label="No access" />
+                <NoAccessLabel>
+                  {text => (
+                    <LockCircleIcon label={text as string} />
+                  ) /* safe to cast to string given there is no value binding */}
+                </NoAccessLabel>
               </AccessSectionStyle>
-            </Tooltip>
+            </NoAccessTooltip>
           ) : null}
         </RowStyle>
       </MentionItemStyle>

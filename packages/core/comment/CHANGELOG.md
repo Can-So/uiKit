@@ -1,5 +1,50 @@
 # @atlaskit/comment
 
+## 6.0.40
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-core@98.0.0
+
+## 6.0.39
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/editor-core@97.0.1
+  - @atlaskit/icon@16.0.0
+
+## 6.0.38
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-core@97.0.0
+
+## 6.0.37
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/editor-core@96.0.0
+
+## 6.0.36
+- [patch] [19783cb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/19783cb):
+
+  - Fixed @atlaskit/visual-regression being incorrectly listed as a dependency.
+
+## 6.0.35
+- Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+  - @atlaskit/editor-core@95.0.0
+
+## 6.0.34
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-core@94.0.0
+
+## 6.0.33
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-core@93.0.0
+
+## 6.0.32
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-core@92.0.0
+
+## 6.0.31
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-core@91.0.0
+
 ## 6.0.30
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

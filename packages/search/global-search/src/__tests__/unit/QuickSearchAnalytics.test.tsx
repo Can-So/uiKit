@@ -35,6 +35,13 @@ const spyOnComponentDidUpdate = () => {
   return spy;
 };
 
+const findAnalyticsEvent = (eventSpy, actionSubject) => {
+  const [event] = eventSpy.mock.calls.find(
+    ([event]) => event.payload.actionSubject === actionSubject,
+  );
+  return event;
+};
+
 const CONFLUENCE_RECENT_ITEMS = [
   {
     id: 'confluence-object-result',
@@ -139,7 +146,8 @@ const getRecentItems = product =>
 
       it('should trigger globalSearchDrawer', async () => {
         expect(onEventSpy).toBeCalled();
-        const event = onEventSpy.mock.calls[1][0];
+        const event = findAnalyticsEvent(onEventSpy, 'globalSearchDrawer');
+
         validateEvent(
           event,
           getGlobalSearchDrawerEvent({
@@ -160,7 +168,8 @@ const getRecentItems = product =>
 
       it('should trigger experiment exposure event', () => {
         expect(onEventSpy).toBeCalled();
-        const event = onEventSpy.mock.calls[0][0];
+        const event = findAnalyticsEvent(onEventSpy, 'quickSearchExperiment');
+
         validateEvent(
           event,
           getExperimentExposureEvent({

@@ -32,6 +32,25 @@ export type ExperimentalFeatureFlags = {|
     mouse over the nav area whilst in a collapsed state.
   */
   experimental_flyoutOnHover: boolean,
+  /**
+    NOTE: This property is experimental and may be removed in a minor release.
+
+    FF to control the flyout activation area according to
+    https://product-fabric.atlassian.net/browse/NAV-197
+    This FF works in tandem with the other FF -> experimental_flyoutOnHover.
+    Setting this prop to true will have no effect unless the other is
+    set to true as well.
+  */
+  experimental_alternateFlyoutBehaviour: boolean,
+
+  /**
+    NOTE: This property is experimental and may be removed in a minor release.
+
+    Expands the flyout to custom width set by the user by resizing the nav,
+    rather the default flyout width.
+    This FF has no effect if experimental_flyoutOnHover is set to false.
+  */
+  experimental_fullWidthFlyout: boolean,
 |};
 
 export type GetRefs = ({

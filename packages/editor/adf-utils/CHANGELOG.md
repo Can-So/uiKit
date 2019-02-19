@@ -1,5 +1,54 @@
 # @atlaskit/adf-utils
 
+## 5.7.0
+- [minor] [4d8d759bf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d8d759bf9):
+
+  -  [ED-6255] Migrate ADFNode type to ADFEntity
+
+## 5.6.3
+- [patch] [e83a441140](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a441140):
+
+  - Revert type change to width/height attributes for media node
+
+## 5.6.2
+- [patch] [09696170ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09696170ec):
+
+  - Bumps prosemirror-utils to 0.7.6
+
+## 5.6.1
+- [patch] [14fe1381ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14fe1381ba):
+
+  - ED-6118: ensure media dimensions are always integers, preventing invalid ADF
+
+## 5.6.0
+- [minor] [be706e55f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be706e55f6):
+
+  - ED-6154 Adds `array` validation support
+
+## 5.5.0
+- [minor] [a5b5a5098e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5b5a5098e):
+
+  - Adds index to visitor
+
+## 5.4.2
+- [patch] [76ed7f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76ed7f0):
+
+  - Update Specs
+
+## 5.4.1
+- [patch] [57cffcb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/57cffcb):
+
+  - Need tslib
+
+## 5.4.0
+- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 5.3.4
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+
 ## 5.3.3
 - [patch] [34df084](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34df084):
 

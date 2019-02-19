@@ -1,16 +1,11 @@
-import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Token, TokenType, TokenErrCallback } from './';
+import { Node as PMNode } from 'prosemirror-model';
+import { Token, TokenType, TokenParser } from './';
 import { hasAnyOfMarks } from '../utils/text';
 import { commonFormatter } from './common-formatter';
 import { parseString } from '../text';
 import { EM_DASH } from '../../char';
 
-export function citation(
-  input: string,
-  position: number,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): Token {
+export const citation: TokenParser = ({ input, position, schema, context }) => {
   /**
    * The following token types will be ignored in parsing
    * the content
@@ -20,7 +15,7 @@ export function citation(
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
   ];
-  /** Add code mark to each text */
+  // Add code mark to each text
   const contentDecorator = (n: PMNode, index: number) => {
     const mark = schema.marks.em.create();
     // We don't want to mix `code` mark with others
@@ -34,12 +29,12 @@ export function citation(
   };
 
   const rawContentProcessor = (raw: string, length: number): Token => {
-    const content = parseString(
-      raw,
-      schema,
+    const content = parseString({
       ignoreTokenTypes,
-      tokenErrCallback,
-    );
+      schema,
+      context,
+      input: raw,
+    });
     const decoratedContent = content.map(contentDecorator);
 
     return {
@@ -52,6 +47,7 @@ export function citation(
   return commonFormatter(input, position, schema, {
     opening: '??',
     closing: '??',
+    context,
     rawContentProcessor,
   });
-}
+};

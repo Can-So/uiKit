@@ -1,5 +1,4 @@
 export default [
-  'table',
   'paragraph_with_no_marks',
   'paragraph_with_alignment',
   'paragraph_with_indentation',
@@ -17,6 +16,7 @@ export default [
   'applicationCard',
   'decisionList',
   'taskList',
+  'table',
   'extension',
   'bodiedExtension',
   'blockCard',

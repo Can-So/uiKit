@@ -1,8 +1,10 @@
 export default {
   plugins: [
+    'compositionPlugin',
     'inlineCursorTargetPlugin',
     'focusHandlerPlugin',
     'submitEditor',
+    'newlinePreserveMarksPlugin',
     'imageUpload',
     'imageUploadInputRule',
     'paste',
@@ -52,6 +54,7 @@ export default {
     'tableColResizing',
     'blockTypeKeyMap',
     'tableEditing',
+    'filterStepsPlugin',
     'pmCollab',
     'collab',
     'ruleInputRule',
@@ -82,6 +85,7 @@ export default {
     'maxContentSize',
     'multilineContent',
     'grid',
+    'analytics',
   ],
   nodes: [
     'doc',
@@ -143,5 +147,6 @@ export default {
     'alignment',
     'breakout',
     'indentation',
+    'annotation',
   ],
 };

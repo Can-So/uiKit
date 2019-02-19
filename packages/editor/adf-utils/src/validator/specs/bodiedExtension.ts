@@ -9,7 +9,7 @@ export default {
         text: { type: 'string', optional: true },
         layout: {
           type: 'enum',
-          values: ['default', 'full-width', 'wide'],
+          values: ['wide', 'full-width', 'default'],
           optional: true,
         },
       },

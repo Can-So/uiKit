@@ -15,9 +15,6 @@ const baseStyles = {
   position: 'absolute',
   top: 0,
   width: '100%',
-  // Reset stacking context so scroll hints from the product nav don't sit above
-  // container nav
-  zIndex: 0,
 };
 
 export default ({ product }: ModeColors) => () => ({

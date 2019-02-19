@@ -2,8 +2,8 @@ import { code, Example, md, Props } from '@atlaskit/docs';
 import * as React from 'react';
 
 export default md`
-  This is the platform field for selecting users.
-  This package provides two different modes of selection: single and multi user picker.
+  This is the platform field for selecting users. On top of that you can also select [Teams](https://developer.atlassian.com/platform/teams/overview/what-are-teams/).
+  This package provides two different modes of selection: single and multi user/team picker.
 
   ## Usage
 
@@ -41,7 +41,10 @@ export default md`
   ${(
     <Props
       heading="User Picker Props"
-      props={require('!!extract-react-types-loader!../src/index')}
+      props={require('!!extract-react-types-loader!../src/components/UserPicker')}
+      overrides={{
+        createAnalyticsEvent: () => null,
+      }}
     />
   )}
 `;

@@ -1,18 +1,19 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   a,
   insertText,
 } from '@atlaskit/editor-test-helpers';
 
-const editor = (doc, appearance?) =>
-  createEditor({
-    doc,
-    editorProps: { appearance: appearance || 'message' },
-  });
-
 describe('hyperlink - sync-text-and-url', () => {
+  const createEditor = createEditorFactory();
+  const editor = (doc, appearance?) =>
+    createEditor({
+      doc,
+      editorProps: { appearance: appearance || 'message' },
+    });
+
   describe('when href and display text are the same', () => {
     it('should update url when text is added inside link', () => {
       const { editorView, sel } = editor(

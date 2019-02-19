@@ -1,5 +1,96 @@
 # @atlaskit/emoji
 
+## 54.1.0
+- [minor] [cf6799312a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf6799312a):
+
+  - Enable striter types for emoji package
+
+## 54.0.0
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/util-data-test@10.0.36
+  - @atlaskit/media-core@27.0.0
+
+## 53.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/field-base@11.0.14
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/editor-test-helpers@6.3.13
+  - @atlaskit/icon@16.0.0
+
+## 53.0.0
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-test-helpers@6.3.12
+  - @atlaskit/util-data-test@10.0.34
+  - @atlaskit/media-core@26.2.0
+
+## 52.0.0
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/editor-test-helpers@6.3.11
+  - @atlaskit/util-data-test@10.0.33
+  - @atlaskit/media-core@26.1.0
+
+## 51.2.0
+- [minor] [6ef7a45](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ef7a45):
+
+  - FS-1230 New standalone emoji upload component added
+
+## 51.1.0
+- [minor] [e60d7aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e60d7aa):
+
+  - updated i18n translations
+
+## 51.0.0
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/util-data-test@10.0.31
+  - @atlaskit/media-core@26.0.0
+
+## 50.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/util-data-test@10.0.30
+  - @atlaskit/media-core@25.0.0
+
+## 49.1.0
+- [patch] [53cb129](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53cb129):
+
+  - show emoji preview error in a tooltip, render spinner outside button, css changes
+- [minor] [514790b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/514790b):
+
+  - added i18n support to emoji
+- [patch] [686de31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/686de31):
+
+  - added maxWidth to other buttons
+
+## 49.0.0
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/util-data-test@10.0.28
+  - @atlaskit/media-core@24.7.0
+
+## 48.0.2
+- [patch] [0f19693](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f19693):
+
+  - added tests for xregexp transformer, updated README and simplified code
+- [patch] [b789b3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b789b3a):
+
+  - removed xregexp library dependency from emoji and mention components, added xregexp-transformer package to compile xregexp expressions to unicode charsets
+
+## 48.0.1
+- [patch] [015fcd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/015fcd0):
+
+  - Adjusted unit tests to test for the bug noticed in FS-3259. Added multiple atlassian-ftfy emoji to test this, so updated a unit test to confirm that there are 14 Atlassian emoji, and also added an additional unit test to confirm that FS-3259 was corrected.
+- [patch] [18203e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/18203e6):
+
+  - FS-3259 Fixed bug that caused an emoji to be automatically inserted for a query including a closing colon even if there are multiple (an odd number specifically) emoji with an exact shortName match.
+
+## 48.0.0
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/util-data-test@10.0.26
+  - @atlaskit/media-core@24.6.0
+
 ## 47.0.8
 - [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
 

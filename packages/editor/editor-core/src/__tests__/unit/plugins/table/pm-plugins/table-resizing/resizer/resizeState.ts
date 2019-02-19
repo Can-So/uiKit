@@ -61,7 +61,7 @@ describe('ResizeState', () => {
 
     it('should keep minimum widths', () => {
       const state = new ResizeState(
-        [new ColumnState(20, 0, 15), new ColumnState(5, 0, 5)],
+        [new ColumnState(20, 15), new ColumnState(5, 5)],
         0,
       );
       const res = moveSpaceFrom(state, 0, 1, 10);
@@ -123,7 +123,7 @@ describe('ResizeState', () => {
           0,
         );
 
-        expect(state.totalWidth).toEqual(61);
+        expect(state.totalWidth).toEqual(60);
       });
     });
 
@@ -195,26 +195,6 @@ describe('ResizeState', () => {
         const newState = state.resize(0, 0);
         expect(growSpy).not.toHaveBeenCalled();
         expect(shrinkSpy).not.toHaveBeenCalled();
-        expect(newState).not.toBe(state);
-      });
-    });
-
-    describe('#scaleColToMinWidth()', () => {
-      beforeEach(() => jest.clearAllMocks());
-
-      it('should call #resize() when cells', () => {
-        const resizeSpy = jest.spyOn(ResizeState.prototype, 'resize');
-        const state = new ResizeState([new ColumnState(10, 0)], 0);
-        const newState = state.scaleColToMinWidth(0);
-        expect(resizeSpy).toHaveBeenCalled();
-        expect(newState).not.toBe(state);
-      });
-
-      it('should return new state when no cell', () => {
-        const resizeSpy = jest.spyOn(ResizeState.prototype, 'resize');
-        const state = new ResizeState([], 0);
-        const newState = state.scaleColToMinWidth(0);
-        expect(resizeSpy).not.toHaveBeenCalled();
         expect(newState).not.toBe(state);
       });
     });

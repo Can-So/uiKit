@@ -3,7 +3,7 @@
 import React, { Component, type Node } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
-
+import exenv from 'exenv';
 import type { ThemeModes, ThemeProps } from '../types';
 import * as colors from '../colors';
 
@@ -89,7 +89,7 @@ export default class AtlaskitThemeProvider extends Component<
     return { hasAtlaskitThemeProvider: true };
   }
   componentWillMount() {
-    if (!this.context.hasAtlaskitThemeProvider) {
+    if (!this.context.hasAtlaskitThemeProvider && exenv.canUseDOM) {
       const css = getStylesheetResetCSS(this.state);
       this.stylesheet = document.createElement('style');
       this.stylesheet.type = 'text/css';

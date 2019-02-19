@@ -17,6 +17,7 @@ import {
   videoProcessingFailedItem,
   wideImageItem,
   defaultCollectionName,
+  videoSquareFileIdItem,
 } from '../example-helpers';
 import { MediaViewer, MediaViewerItem } from '../src';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
@@ -25,8 +26,8 @@ import { I18NWrapper } from '@atlaskit/media-test-helpers';
 const context = createStorybookContext();
 
 const handleEvent = (analyticsEvent: UIAnalyticsEventInterface) => {
-  const { payload, context } = analyticsEvent;
-  console.log('Received event:', { payload, context });
+  const { payload } = analyticsEvent;
+  console.log('EVENT:', payload);
 };
 
 export type State = {
@@ -81,6 +82,7 @@ export default class Example extends React.Component<{}, State> {
               <li>{this.createItem(videoHorizontalFileItem, 'Horizontal')}</li>
               <li>{this.createItem(videoLargeFileItem, 'Large')}</li>
               <li>{this.createItem(videoItem, 'Normal')}</li>
+              <li>{this.createItem(videoSquareFileIdItem, 'Square + SD')}</li>
             </ButtonList>
           </Group>
           <Group>
@@ -106,7 +108,6 @@ export default class Example extends React.Component<{}, State> {
           {this.state.selectedItem && (
             <AnalyticsListener channel="media" onEvent={handleEvent}>
               <MediaViewer
-                featureFlags={{ customVideoPlayer: true }}
                 context={context}
                 selectedItem={this.state.selectedItem}
                 dataSource={{ list: [this.state.selectedItem] }}

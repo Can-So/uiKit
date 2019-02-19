@@ -16,7 +16,7 @@ export default {
     'Sau utilizează <a href={url}>căutare avansată</a> (`shift + enter`) pentru a restrânge rezultatele.',
   'global_search.no_results_title': 'Niciun rezultat în titluri și persoane',
   'global_search.no_results_body':
-    'Încercați să utilizați un alt termen. Puteți căuta conținut de pagini, precum și cu căutarea avansată, sau puteți căuta persoane, mai jos.',
+    'Încercați din nou cu un termen diferit sau rafinați rezultatele cu căutarea avansată.',
   'global_search.people.recent_people_heading':
     'Elemente cu care s-a lucrat recent',
   'global_search.people.people_heading': 'Persoane',
@@ -29,12 +29,12 @@ export default {
   'global_search.jira.recent_issues_heading': 'Probleme recente',
   'global_search.jira.recent_people_heading':
     'Elemente cu care s-a lucrat recent',
-  'global_search.jira.recent_containers': 'Panouri, filtre și proiecte recente',
+  'global_search.jira.recent_containers': 'Panouri, proiecte și filtre recente',
   'global_search.jira.search_result_issues_heading': 'Probleme',
   'global_search.jira.search_result_containers_heading':
-    'Panouri, filtre și proiecte',
+    'Panouri, proiecte și filtre',
   'global_search.jira.search_result_people_heading': 'Persoane',
-  'global_search.jira.advanced_search': 'Accesați căutarea avansată pentru',
+  'global_search.jira.advanced_search': 'Căutare avansată pentru',
   'global_search.jira.advanced_search_issues': 'probleme',
   'global_search.jira.advanced_search_projects': 'proiecte',
   'global_search.jira.advanced_search_boards': 'panouri',
@@ -43,9 +43,16 @@ export default {
   'global_search.jira.advanced_issue_search':
     'Căutare avansată pentru probleme',
   'global_search.jira.no_results_title':
-    'Niciun rezultat în rezumatele privind problemele, numele și persoanele',
+    'Nu am găsit rezultate care să corespundă căutării',
   'global_search.jira.no_results_body':
-    'Încercați să căutați cu un termen diferit. Puteți căuta în toate câmpurile text în probleme, precum și cu funcția de căutare avansată, sau puteți căuta alte elemente într-un mod mai specific.',
+    'Încercați din nou cu un termen diferit sau rafinați rezultatele cu căutarea avansată.',
   'global_search.jira.no_recent_activity_body':
     'Sau rafinați-vă rezultatele cu căutarea noastră avansată.',
+  'global_search.jira.project_type.business_project': 'Proiect de afaceri',
+  'global_search.jira.project_type.software_project': 'Proiect software',
+  'global_search.jira.project_type.service_desk_project':
+    'Proiect birou de asistență',
+  'global_search.jira.project_type.ops_project': 'Proiect operațiuni',
+  'global_search.jira.result_type.board': 'Panou',
+  'global_search.jira.result_type.filter': 'Filtru',
 };

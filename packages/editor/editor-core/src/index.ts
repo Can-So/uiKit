@@ -36,6 +36,8 @@ export {
   TextFormattingState,
   pluginKey as textFormattingStateKey,
 } from './plugins/text-formatting/pm-plugins/main';
+export { textColorPluginKey, TextColorPluginState } from './plugins/text-color';
+export { changeColor } from './plugins/text-color/commands/change-color';
 export { blockPluginStateKey, BlockTypeState } from './plugins';
 export {
   ListsPluginState as ListsState,
@@ -56,7 +58,7 @@ export {
   toggleEm,
   toggleStrong,
 } from './plugins/text-formatting/commands/text-formatting';
-export { insertBlockType } from './plugins/block-type/commands';
+export { insertBlockType, setBlockType } from './plugins/block-type/commands';
 export { createTable } from './plugins/table/actions';
 export { insertTaskDecision } from './plugins/tasks-and-decisions/commands';
 export { EventDispatcher } from './event-dispatcher';
@@ -70,6 +72,9 @@ export {
   setStatusPickerAt,
   updateStatus,
 } from './plugins/status/actions';
+export { typeAheadPluginKey, TypeAheadPluginState } from './plugins/type-ahead';
+export { TypeAheadItem } from './plugins/type-ahead/types';
+export { selectItem } from './plugins/type-ahead/commands/select-item';
 
 // Used in editor-test-helpers
 export { setTextSelection } from './utils';

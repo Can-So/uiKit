@@ -1,12 +1,16 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import * as classNames from 'classnames';
-
-import * as styles from './styles';
-import { CategoryDescription, OnCategory } from '../../types';
+import { FormattedMessage } from 'react-intl';
 import { defaultCategories } from '../../constants';
-
-import { CategoryDescriptionMap, CategoryId } from './categories';
+import { CategoryDescription, OnCategory } from '../../types';
+import { messages } from '../i18n';
+import {
+  CategoryDescriptionMap,
+  CategoryGroupKey,
+  CategoryId,
+} from './categories';
+import * as styles from './styles';
 
 export interface Props {
   dynamicCategories?: CategoryId[];
@@ -23,7 +27,7 @@ export type CategoryMap = {
   [id: string]: CategoryDescription;
 };
 
-export const sortCategories = (c1, c2) =>
+export const sortCategories = (c1: CategoryGroupKey, c2: CategoryGroupKey) =>
   CategoryDescriptionMap[c1].order - CategoryDescriptionMap[c2].order;
 
 const addNewCategories = (
@@ -91,7 +95,7 @@ export default class CategorySelector extends PureComponent<Props, State> {
               categoryClasses.push(styles.active);
             }
 
-            const onClick = e => {
+            const onClick = (e: React.SyntheticEvent) => {
               e.preventDefault();
               // ignore if disabled
               if (!disableCategories) {
@@ -104,16 +108,20 @@ export default class CategorySelector extends PureComponent<Props, State> {
 
             // tslint:disable-next-line:variable-name
             const Icon = category.icon;
-
             return (
-              <li key={category.name}>
-                <button
-                  className={classNames(categoryClasses)}
-                  onClick={onClick}
-                  title={category.name}
-                >
-                  <Icon label={category.name} />
-                </button>
+              <li key={category.id}>
+                <FormattedMessage {...messages[category.name]}>
+                  {categoryName => (
+                    <button
+                      data-category-id={category.id}
+                      className={classNames(categoryClasses)}
+                      onClick={onClick}
+                      title={categoryName as string}
+                    >
+                      <Icon label={categoryName} />
+                    </button>
+                  )}
+                </FormattedMessage>
               </li>
             );
           })}

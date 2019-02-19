@@ -3,6 +3,7 @@ import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { EmojiProvider } from '@atlaskit/emoji';
 import Tooltip from '@atlaskit/tooltip';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { style } from 'typestyle';
 import {
   createAndFireSafe,
@@ -12,9 +13,10 @@ import {
   createReactionSelectionEvent,
   createReactionsRenderedEvent,
 } from '../analytics';
-import { OnEmoji, OnReaction } from '../types';
+import { OnEmoji, OnReaction, ReactionSource } from '../types';
 import { ReactionStatus } from '../types/ReactionStatus';
 import { ReactionSummary } from '../types/ReactionSummary';
+import { messages } from './i18n';
 import { Reaction } from './Reaction';
 import { ReactionPicker } from './ReactionPicker';
 
@@ -45,7 +47,7 @@ export interface Props {
   onReactionClick: OnEmoji;
   onReactionHover?: OnReaction;
   allowAllEmojis?: boolean;
-  flash: {
+  flash?: {
     [emojiId: string]: boolean;
   };
   boundariesElement?: string;
@@ -66,7 +68,7 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
   private openTime: number | undefined;
   private renderTime: number | undefined;
 
-  constructor(props) {
+  constructor(props: Props & WithAnalyticsEventProps) {
     super(props);
     if (props.status !== ReactionStatus.ready) {
       this.renderTime = Date.now();
@@ -93,14 +95,19 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
   private isDisabled = (): boolean =>
     this.props.status !== ReactionStatus.ready;
 
-  private getTooltip = (): string | undefined => {
+  private getTooltip = (): React.ReactNode | undefined => {
     const { status, errorMessage } = this.props;
+
     switch (status) {
       case ReactionStatus.error:
-        return errorMessage ? errorMessage : 'Sorry... something went wrong';
+        return errorMessage ? (
+          errorMessage
+        ) : (
+          <FormattedMessage {...messages.unexpectedError} />
+        );
       case ReactionStatus.loading:
       case ReactionStatus.notLoaded:
-        return 'Loading...';
+        return <FormattedMessage {...messages.loadingReactions} />;
       default:
         return undefined;
     }
@@ -138,7 +145,7 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
     );
   };
 
-  private handleOnSelection = (emojiId, source) => {
+  private handleOnSelection = (emojiId: string, source: ReactionSource) => {
     createAndFireSafe(
       this.props.createAnalyticsEvent,
       createReactionSelectionEvent,
