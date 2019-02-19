@@ -28,21 +28,21 @@ const cli = meow({
     },
     debug: {
       type: 'boolean',
-      alias: 'debug'
+      alias: 'debug',
     },
     watch: {
       type: 'boolean',
-      alias: 'watch'
+      alias: 'watch',
     },
   },
 });
 
-if( cli.flags.debug){
+if (cli.flags.debug) {
   process.env.DEBUG = 'true';
   process.env.CI = 'true';
 }
 
-if (cli.flags.debug || cli.flags.watch){
+if (cli.flags.debug || cli.flags.watch) {
   startServer = false;
 }
 
@@ -159,7 +159,7 @@ async function main() {
   await isReachable('http://localhost:9000');
   const code = await runTestsWithRetry();
   console.log(`Exiting tests with exit code: ${+code}`);
-  startServer ? await webpack.stopDevServer(): console.log('test completed');
+  startServer ? await webpack.stopDevServer() : console.log('test completed');
   process.exit(code);
 }
 

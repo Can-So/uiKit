@@ -32,10 +32,15 @@ const historyApiFallback = require('connect-history-api-fallback');
 const createConfig = require('../config');
 const utils = require('../config/utils');
 const { print, devServerBanner, errorMsg } = require('../banner');
+let HOST = 'localhost';
+let disableHostCheck = false;
 
-const HOST = process.env.VISUAL_REGRESSION ? '0.0.0.0' : 'localhost';
+if (process.env.VISUAL_REGRESSION) {
+  HOST = '0.0.0.0';
+  disableHostCheck = true;
+}
+
 const PORT = +process.env.ATLASKIT_DEV_PORT || 9000;
-const disableHostCheck = process.env.VISUAL_REGRESSION ? true : false;
 const stats = require('../config/statsOptions');
 
 async function runDevServer() {

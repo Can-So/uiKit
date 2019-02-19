@@ -14,7 +14,6 @@ const docker = require('../../docker-helper');
  */
 async function globalSetup() {
   if (process.env.CI) {
-
     // If it is in CI start puppeteer and stored websocket endpoint
     // launch and run puppeteer if inside of CI
     console.log('puppeteer:', puppeteer.executablePath());
