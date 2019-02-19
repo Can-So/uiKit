@@ -112,6 +112,7 @@ export const enableAllEditorProps = {
   placeholder:
     'Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule.',
   shouldFocus: false,
+  UNSAFE_cards: true
 };
 
 async function mountEditor(page: any, props) {
@@ -134,7 +135,7 @@ export const initFullPageEditorWithAdf = async (page, adf: Object) => {
 };
 
 export const initCommentEditorWithAdf = async (page, adf: Object) => {
-  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
+  const url = getExampleUrl('editor', 'editor-core', 'testing');
   await page.goto(url);
   await mountEditor(page, {
     appearance: 'comment',
