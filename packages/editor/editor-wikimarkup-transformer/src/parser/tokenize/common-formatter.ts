@@ -134,7 +134,10 @@ export function commonFormatter(
           state = processState.BUFFER;
           break;
         }
-        // TODO: Empty context
+        /**
+         * Is not a problem send an empty context because we're only checking
+         * if it has a nested macro inside.
+         */
         const token = parseToken(input, match.type, index, schema, {});
         if (token.type === 'text') {
           buffer += token.text;
