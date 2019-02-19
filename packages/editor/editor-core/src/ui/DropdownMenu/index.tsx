@@ -139,6 +139,8 @@ export default class DropdownMenuWrapper extends PureComponent<Props, State> {
       zIndex,
     } = this.props;
 
+    console.log(items);
+
     return (
       <Popup
         target={isOpen ? target : undefined}

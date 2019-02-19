@@ -271,8 +271,11 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
       content,
       elemAfter: <Shortcut>{tooltip}</Shortcut>,
       value,
-      isActive: this.state[`${value}Active`],
-      isDisabled: isDisabled || this.state[`${value}Disabled`],
+      isActive: this.props.textFormattingState![`${value}Active`] || false,
+      isDisabled:
+        isDisabled ||
+        this.props.textFormattingState![`${value}Disabled`] ||
+        false,
     });
   };
 
