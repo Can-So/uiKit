@@ -1,7 +1,7 @@
 import { initFullPageEditorWithAdf, initCommentEditorWithAdf, snapshot, deviceViewPorts } from './_utils';
 import * as panel from './__fixtures__/panel-adf.json';
 
-describe('Snapshot Test: Panel overflow', () => {
+describe('Panel overflow:', () => {
   let page;
   beforeAll(() => {
     // @ts-ignore
