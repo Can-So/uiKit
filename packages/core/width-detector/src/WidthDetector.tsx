@@ -70,6 +70,9 @@ export default class WidthDetector extends React.Component<Props, State> {
     if (this.resizeObject) {
       this.resizeObject.data = 'about:blank';
     }
+    // Calculate width first time, after object has loaded.
+    // Prevents it from getting in a weird state where width is always 0.
+    this.handleResize();
   }
 
   componentWillUnmount() {
@@ -88,7 +91,6 @@ export default class WidthDetector extends React.Component<Props, State> {
       return;
     }
     this.container = ref;
-    this.handleResize();
   };
 
   handleObjectRef = (ref: ResizeObject) => {
@@ -106,10 +108,6 @@ export default class WidthDetector extends React.Component<Props, State> {
     this.resizeObjectDocument = this.resizeObject.contentDocument
       .defaultView as Window;
     this.resizeObjectDocument.addEventListener('resize', this.handleResize);
-
-    // Calculate width first time, after object has loaded.
-    // Prevents it from getting in a weird state where width is always 0.
-    this.handleResize();
   };
 
   render() {

@@ -8,7 +8,7 @@ import { name } from '../../../package.json';
 const requestAnimationFrame = window.requestAnimationFrame as any;
 
 describe(name, () => {
-  const createChildWithSpy = spy => args => spy(args);
+  const createChildWithSpy = (spy: Function) => (args: any) => spy(args);
 
   beforeAll(() => {
     requestAnimationFrame.reset();
