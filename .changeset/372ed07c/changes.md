@@ -1,1 +1,0 @@
-- FS-3417 add email warning, save intermediate state if click outside
