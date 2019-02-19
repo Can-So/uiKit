@@ -14,7 +14,8 @@ import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';
 import { Editor, EditorProps, EventDispatcher } from './../src';
 import ClipboardHelper from './1-clipboard-helper';
-import { TitleInput, SaveAndCancelButtons } from './5-full-page';
+import { SaveAndCancelButtons } from './5-full-page';
+import { TitleInput } from '../example-helpers/PageElements';
 import mediaMockServer from '../example-helpers/media-mock';
 
 interface EditorInstance {

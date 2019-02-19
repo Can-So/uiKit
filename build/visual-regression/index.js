@@ -127,7 +127,7 @@ function runTestsWithRetry() {
 
       code = getExitCode(results);
       // Only retry and report results in CI.
-      if (code !== 0 && process.env.CI && !process.env.WATCH) {
+      if (code !== 0 && process.env.CI && !process.env.DEBUG) {
         results = await rerunFailedTests(results);
         code = getExitCode(results);
       }
