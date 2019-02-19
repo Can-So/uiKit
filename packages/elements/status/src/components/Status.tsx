@@ -39,11 +39,11 @@ export type Props = OwnProps & WithAnalyticsEventProps;
 class StatusInternal extends PureComponent<Props, any> {
   private hoverStartTime: number = 0;
 
-  private handleMouseEnter = (e: React.MouseEvent<HTMLSpanElement>) => {
+  private handleMouseEnter = (_e: React.MouseEvent<HTMLSpanElement>) => {
     this.hoverStartTime = Date.now();
   };
 
-  private handleMouseLeave = (e: React.MouseEvent<HTMLSpanElement>) => {
+  private handleMouseLeave = (_e: React.MouseEvent<HTMLSpanElement>) => {
     const { onHover } = this.props;
     const delay = Date.now() - this.hoverStartTime;
 
