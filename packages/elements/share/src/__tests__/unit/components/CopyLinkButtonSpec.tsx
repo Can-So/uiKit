@@ -11,7 +11,7 @@ import {
 } from '../../../components/CopyLinkButton';
 
 describe('CopyLinkButton', () => {
-  let originalExecCommand;
+  let originalExecCommand: any;
   let mockLink = 'link';
   const spiedExecCommand = jest.fn();
 
@@ -52,7 +52,9 @@ describe('CopyLinkButton', () => {
   describe('shouldShowCopiedMessage state', () => {
     it('should render the copied to clip board message, and dismiss the message when click outside the Inline Dialog', () => {
       const eventMap: { click: Function } = { click: () => {} };
-      window.addEventListener = jest.fn((event, cb) => (eventMap[event] = cb));
+      window.addEventListener = jest.fn(
+        (event, cb) => ((eventMap as any)[event] = cb),
+      );
 
       const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);
       wrapper.setState({

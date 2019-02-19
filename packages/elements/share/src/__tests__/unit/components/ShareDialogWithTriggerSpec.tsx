@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount, shallow, ShallowWrapper, ReactWrapper } from 'enzyme';
 import InlineDialog from '@atlaskit/inline-dialog';
 import { createMockEvent } from '../_testUtils';
 import { ShareButton } from '../../../components/ShareButton';
 import { ShareForm } from '../../../components/ShareForm';
 import {
+  Props,
   ShareDialogWithTrigger,
+  State,
   defaultShareContentState,
 } from '../../../components/ShareDialogWithTrigger';
 
-let wrapper;
-let mockOnShareSubmit;
+let wrapper:
+  | ShallowWrapper<Props, State, ShareDialogWithTrigger>
+  | ReactWrapper<Props, State, ShareDialogWithTrigger>;
+let mockOnShareSubmit: any;
 const mockLoadOptions = () => [];
 
 beforeEach(() => {
@@ -50,7 +54,7 @@ describe('ShareDialogWithTrigger', () => {
         isDialogOpen,
       );
 
-      wrapper.setState({ isDialogOpen: !isDialogOpen });
+      (wrapper as any).setState({ isDialogOpen: !isDialogOpen });
 
       expect(wrapper.find(InlineDialog).prop('isOpen')).toEqual(!isDialogOpen);
       expect(wrapper.find(ShareButton).prop('isSelected')).toEqual(
@@ -220,9 +224,11 @@ describe('ShareDialogWithTrigger', () => {
 
     beforeAll(() => {
       // prepare for the addEventListener mock
-      window.addEventListener = jest.fn((event, cb) => (eventMap[event] = cb));
+      window.addEventListener = jest.fn(
+        (event, cb) => ((eventMap as any)[event] = cb),
+      );
       document.addEventListener = jest.fn(
-        (event, cb) => (eventMap[event] = cb),
+        (event, cb) => ((eventMap as any)[event] = cb),
       );
     });
 
@@ -432,7 +438,7 @@ describe('ShareDialogWithTrigger', () => {
         },
         isStateValidWithCapabilities: true,
       };
-      wrapper.setState(newInitState);
+      (wrapper as any).setState(newInitState);
       wrapper.instance().clearShareContentState();
 
       const state = wrapper.state();

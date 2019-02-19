@@ -6,7 +6,7 @@ import { messages } from '../i18n';
 
 export const CommentField: React.StatelessComponent<{}> = () => (
   <Field name="comment">
-    {({ fieldProps }) => (
+    {({ fieldProps }: any) => (
       <FormattedMessage {...messages.commentPlaceholder}>
         {placeholder => (
           <FieldTextArea

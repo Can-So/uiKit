@@ -41,7 +41,7 @@ export type Props = {
 
 export const ShareForm: React.StatelessComponent<Props> = props => (
   <Form onSubmit={props.onShareClick}>
-    {({ formProps }) => (
+    {({ formProps }: any) => (
       <form {...formProps}>
         <ShareHeader title={props.title} />
         <FormSection>

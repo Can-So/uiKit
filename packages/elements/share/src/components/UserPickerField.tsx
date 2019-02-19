@@ -14,7 +14,7 @@ export type Props = {
 
 export const UserPickerField: React.StatelessComponent<Props> = props => (
   <Field name="users" validate={validate}>
-    {({ fieldProps, error, meta: { valid } }) => (
+    {({ fieldProps, error, meta: { valid } }: any) => (
       <>
         <FormattedMessage {...messages.userPickerAddMoreMessage}>
           {addMore => (

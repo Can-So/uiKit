@@ -1,18 +1,22 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import { utils } from '@atlaskit/util-service-support';
-import { ShareDialogContainer } from '../../../components/ShareDialogContainer';
+import {
+  ShareDialogContainer,
+  Props,
+  State,
+} from '../../../components/ShareDialogContainer';
 import { ShareDialogWithTrigger } from '../../../components/ShareDialogWithTrigger';
 import * as InvitationsCapabilitiesExports from '../../../api/InvitationsCapabilitiesResource';
 import * as ShareServiceExports from '../../../clients/ShareServiceClient';
 import { Client } from '../../../types';
 
-let wrapper;
-let mockOriginTracing;
-let mockOriginTracingFactory;
-let mockRequestService;
-let mockInvitationCapabilitiesResource;
-let mockShareServiceClient;
+let wrapper: ShallowWrapper<Props, State, ShareDialogContainer>;
+let mockOriginTracing: any;
+let mockOriginTracingFactory: any;
+let mockRequestService: any;
+let mockInvitationCapabilitiesResource: any;
+let mockShareServiceClient: any;
 const mockCloudId = 'cloudId';
 const mockProductId = 'productId';
 const mockShareAri = 'ari';
@@ -85,7 +89,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  wrapper = null;
+  (wrapper as any) = null;
   mockRequestService.mockRestore();
   mockInvitationCapabilitiesResource.mockRestore();
   mockShareServiceClient.mockRestore();
@@ -152,7 +156,7 @@ describe('ShareDialogContainer', () => {
       const spiedToAnalyticsAttributes = jest
         .fn()
         .mockReturnValue(mockAttributes);
-      wrapper.instance().state.copyLinkOrigin = {
+      (wrapper.instance().state as any).copyLinkOrigin = {
         toAnalyticsAttributes: spiedToAnalyticsAttributes,
       };
       wrapper.instance().forceUpdate();
@@ -168,14 +172,16 @@ describe('ShareDialogContainer', () => {
 
   describe('handleSubmitShare', () => {
     it('should call share function from this.client', () => {
-      wrapper.instance().client.share = jest.fn().mockResolvedValue({});
-      const mockShare = wrapper.instance().client.share;
+      (wrapper.instance() as any).client.share = jest
+        .fn()
+        .mockResolvedValue({});
+      const mockShare = (wrapper.instance() as any).client.share;
       wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
         comment: mockComment,
       };
-      wrapper.instance().handleSubmitShare(mockDialogContentState);
+      wrapper.instance().handleSubmitShare(mockDialogContentState as any);
       expect(mockShare).toHaveBeenCalledTimes(1);
       expect(mockShare.mock.calls[0][0]).toEqual({
         ari: mockShareAri,
@@ -202,7 +208,7 @@ describe('ShareDialogContainer', () => {
       mockOriginTracingFactory.mockReset();
 
       const mockShareResponse = {};
-      wrapper.instance().client.share = jest
+      (wrapper.instance() as any).client.share = jest
         .fn()
         .mockResolvedValue(mockShareResponse);
       wrapper.instance().forceUpdate();
@@ -212,20 +218,24 @@ describe('ShareDialogContainer', () => {
       };
       const result = await wrapper
         .instance()
-        .handleSubmitShare(mockDialogContentState);
+        .handleSubmitShare(mockDialogContentState as any);
       expect(mockOriginTracingFactory).toHaveBeenCalledTimes(2);
       expect(result).toEqual(mockShareResponse);
     });
 
     it('should return a Promise Rejection if share is failed', async () => {
-      wrapper.instance().client.share = jest.fn().mockRejectedValue('error');
+      (wrapper.instance() as any).client.share = jest
+        .fn()
+        .mockRejectedValue('error');
       wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
         comment: mockComment,
       };
       try {
-        await wrapper.instance().handleSubmitShare(mockDialogContentState);
+        await wrapper
+          .instance()
+          .handleSubmitShare(mockDialogContentState as any);
       } catch (err) {
         expect(err).toEqual('error');
       }

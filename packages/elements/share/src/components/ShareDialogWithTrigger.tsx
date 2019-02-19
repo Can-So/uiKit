@@ -26,9 +26,9 @@ type DialogState = {
   shareError: ShareError;
 };
 
-type State = DialogState & ShareContentState;
+export type State = DialogState & ShareContentState;
 
-type Props = {
+export type Props = {
   buttonStyle?: 'default' | 'withText';
   capabilities?: InvitationsCapabilitiesResponse;
   children?: RenderChildren;
