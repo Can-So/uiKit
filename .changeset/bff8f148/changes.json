@@ -1,8 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/util-data-test", "type": "minor" },
-    { "name": "@atlaskit/util-service-support", "type": "minor" },
-    { "name": "@atlaskit/xregexp-transformer", "type": "minor" }
-  ],
-  "dependents": []
-}

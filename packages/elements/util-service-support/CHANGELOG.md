@@ -1,5 +1,10 @@
 # @atlaskit/util-service-support
 
+## 3.1.0
+- [minor] [1d19234fbd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d19234fbd):
+
+  - Enable noImplicitAny and resolve issues for elements util packages
+
 ## 3.0.5
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/docs@6.0.0
