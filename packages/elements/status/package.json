@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/status",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "config": {
     "access": "public"
   },
@@ -30,7 +30,7 @@
     "@atlaskit/analytics-next": "^3.1.2",
     "@atlaskit/analytics-next-types": "^3.1.2",
     "@atlaskit/editor-test-helpers": "^6.3.9",
-    "@atlaskit/field-text": "^7.0.18",
+    "@atlaskit/field-text": "^7.1.0",
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/lozenge": "^6.2.4",
     "@atlaskit/theme": "^7.0.1",
