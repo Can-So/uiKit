@@ -9,5 +9,8 @@
     "./docs/**/*.tsx",
     "./examples/**/*.ts",
     "./examples/**/*.tsx"
-  ]
+  ],
+  "compilerOptions": {
+    "noImplicitAny": true
+  }
 }

@@ -1,5 +1,11 @@
 # @atlaskit/media-filmstrip
 
+## 26.1.2
+- Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+  - @atlaskit/media-core@27.0.2
+  - @atlaskit/media-test-helpers@20.1.4
+  - @atlaskit/media-card@53.0.0
+
 ## 26.1.1
 - [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
 

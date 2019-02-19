@@ -158,7 +158,7 @@ describe('PresenceCache', () => {
     const limitedCache = new DefaultPresenceCache(-1, 5);
     limitedCache.update(testPresenceMap);
     limitedCache.update(extraPresences);
-    validPresenceData['data'].PresenceBulk.forEach(response => {
+    validPresenceData.data.PresenceBulk.forEach(response => {
       expect(limitedCache.contains(response.userId)).toBe(false);
     });
   });

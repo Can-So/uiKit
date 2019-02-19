@@ -1,4 +1,4 @@
-import { MediaItem } from '@atlaskit/media-core';
+import { FileItem } from '@atlaskit/media-core';
 import { ReactNode } from 'react';
 
 export interface CardAction {
@@ -7,4 +7,4 @@ export interface CardAction {
   icon?: ReactNode;
 }
 
-export type CardEventHandler = (item?: MediaItem, event?: Event) => void;
+export type CardEventHandler = (item?: FileItem, event?: Event) => void;

@@ -1,4 +1,3 @@
-import { getCSSUnitValue } from './getCSSUnitValue';
 import { CardAppearance, CardDimensions } from '..';
 
 // Default dimensions
@@ -108,22 +107,6 @@ export const getCardMaxWidth = (appearance?: CardAppearance) => {
   }
 
   return maxSquareCardDimensions.width;
-};
-
-export const getCSSBoundaries = (appearance?: CardAppearance) => {
-  const width = `
-    min-width: ${getCSSUnitValue(getCardMinWidth(appearance))};
-    max-width: ${getCSSUnitValue(getCardMaxWidth(appearance))};
-  `;
-  let height = '';
-
-  if (appearance === 'horizontal') {
-    height = `
-      height: ${getCSSUnitValue(defaultHorizontalCardDimensions.height || '')};
-    `;
-  }
-
-  return width + height;
 };
 
 export const getDefaultCardDimensions = (

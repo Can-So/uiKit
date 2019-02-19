@@ -1,3 +1,5 @@
+const assert = require('assert').strict;
+
 /*
  * wrapper on top of webdriver-io apis to give a feel of puppeeteer api
  */
@@ -139,18 +141,19 @@ export default class Page {
   close() {
     return this.browser.close();
   }
-  checkConsoleErrors() {
+
+  async checkConsoleErrors() {
     // Console errors can only be checked in Chrome
-    if (this.isBrowser('chrome') && this.browser.log('browser').value) {
-      this.browser.logs('browser').value.forEach(val => {
-        assert.notEqual(
-          val.level,
-          'SEVERE',
-          `Those console errors :${val.message} are displayed`,
-        );
-      });
+    if (this.isBrowser('chrome')) {
+      const logs = await this.browser.log('browser');
+      if (logs.value) {
+        logs.value.forEach(val => {
+          assert.notStrictEqual(val.level, 'SEVERE', `Error : ${val.message}`);
+        });
+      }
     }
   }
+
   backspace(selector) {
     this.browser.execute(selector => {
       return document

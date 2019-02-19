@@ -28,12 +28,13 @@ export const sortByRelevance: ReactionSummarySortFunction = (
 export const sortByPreviousPosition = (
   reactions: ReactionSummary[],
 ): ReactionSummarySortFunction => {
-  const indexes: { [emojiId: string]: number } = reactions.reduce(
+  type Indexes = { [emojiId: string]: number };
+  const indexes: Indexes = reactions.reduce(
     (map, reaction, index) => {
       map[reaction.emojiId] = index;
       return map;
     },
-    {},
+    {} as Indexes,
   );
 
   const getPosition = ({ emojiId }: ReactionSummary) =>
@@ -52,13 +53,13 @@ export const readyState = (
 export const byEmojiId = (emojiId: string) => (reaction: ReactionSummary) =>
   reaction.emojiId === emojiId;
 
-export const addOne = reaction => ({
+export const addOne = (reaction: ReactionSummary): ReactionSummary => ({
   ...reaction,
   count: reaction.count + 1,
   reacted: true,
 });
 
-export const removeOne = reaction => ({
+export const removeOne = (reaction: ReactionSummary): ReactionSummary => ({
   ...reaction,
   count: reaction.count - 1,
   reacted: false,
@@ -67,16 +68,16 @@ export const removeOne = reaction => ({
 export const updateByEmojiId = (
   emojiId: string,
   updater: Updater<ReactionSummary> | ReactionSummary,
-) => reaction =>
+) => (reaction: ReactionSummary) =>
   reaction.emojiId === emojiId
     ? updater instanceof Function
       ? updater(reaction)
       : updater
     : reaction;
 
-export const getReactionsSortFunction = reactions =>
+export const getReactionsSortFunction = (reactions?: ReactionSummary[]) =>
   reactions && reactions.length
     ? sortByPreviousPosition(reactions)
     : sortByRelevance;
 
-export const flattenAris = (a, b) => a.concat(b);
+export const flattenAris = (a: string[], b: string[]): string[] => a.concat(b);

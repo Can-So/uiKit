@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { mountWithIntl } from 'enzyme-react-intl';
-import Tooltip from '@atlaskit/tooltip';
 import { AnalyticsListener } from '@atlaskit/analytics';
 import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
-import { MentionStyle } from '../../../components/Mention/styles';
-import { MentionType } from '../../../types';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import Tooltip from '@atlaskit/tooltip';
+import * as React from 'react';
 import Mention, { ANALYTICS_HOVER_DELAY } from '../../../components/Mention';
-import { ELEMENTS_CHANNEL } from '../../../constants';
 import ResourcedMention from '../../../components/Mention/ResourcedMention';
+import { MentionStyle } from '../../../components/Mention/styles';
+import { ELEMENTS_CHANNEL } from '../../../constants';
+import { MentionType } from '../../../types';
 import {
   mockMentionData as mentionData,
   mockMentionProvider as mentionProvider,
 } from '../_test-helpers';
 
-const createPayload = (actionSubject, action) => ({
+const createPayload = (actionSubject: string, action: string) => ({
   payload: {
     action,
     actionSubject,

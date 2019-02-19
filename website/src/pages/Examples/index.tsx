@@ -78,7 +78,7 @@ function PackageSelector(props) {
         onChange={(value, { action }) =>
           action === 'select-option' && props.onSelected(value)
         }
-        defaultValue={selectedPackageItem}
+        value={selectedPackageItem}
       />
     </Control>
   );
@@ -125,7 +125,7 @@ function ExampleSelector(props) {
         onChange={(value, { action }) =>
           action === 'select-option' && props.onSelected(value)
         }
-        defaultValue={selectedExampleItem}
+        value={selectedExampleItem}
       />
     </Control>
   );

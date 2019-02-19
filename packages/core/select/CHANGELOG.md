@@ -1,5 +1,17 @@
 # @atlaskit/select
 
+## 7.1.1
+- [patch] [896bf5bef9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/896bf5bef9):
+
+  - Fix bug breaking mobile UX, and causing menu to not be openable on touch
+
+## 7.1.0
+- [minor] [571ec20522](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/571ec20522):
+
+  - Updated react-select to 2.4.0, includes updates to BEM modifiers in options, for more information see the react-select release notes https://github.com/JedWatson/react-select/releases/tag/v2.4.0
+  - Added makeAnimated invocation back to createSelect, as multi select in modal bug has been resolved.
+  - Export makeAsyncSelect and makeCreatableSelect function from src
+
 ## 7.0.0
 - [major] [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
 

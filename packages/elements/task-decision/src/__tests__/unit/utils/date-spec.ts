@@ -22,7 +22,7 @@ const months = [
 ];
 
 describe('util/date', () => {
-  let clock;
+  let clock: sinon.SinonFakeTimers;
   beforeEach(function() {
     clock = sinon.useFakeTimers(new Date(1985, 9, 24, 13, 0).valueOf());
   });

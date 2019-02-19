@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`auto-size.ts: Doesnt scale past default 1`] = `
+exports[`Doesnt scale past default 1`] = `
 Object {
   "content": Array [
     Object {
@@ -17,7 +17,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  287,
+                  286,
                 ],
                 "rowspan": 1,
               },
@@ -82,7 +82,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  287,
+                  286,
                 ],
                 "rowspan": 1,
               },
@@ -149,7 +149,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  287,
+                  286,
                 ],
                 "rowspan": 1,
               },
@@ -203,7 +203,7 @@ Object {
 }
 `;
 
-exports[`auto-size.ts: Scales to full-width 1`] = `
+exports[`Scales to full-width 1`] = `
 Object {
   "content": Array [
     Object {
@@ -398,7 +398,7 @@ Object {
 }
 `;
 
-exports[`auto-size.ts: Scales to wide 1`] = `
+exports[`Scales to wide 1`] = `
 Object {
   "content": Array [
     Object {
@@ -415,7 +415,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  462,
+                  438,
                 ],
                 "rowspan": 1,
               },
@@ -437,7 +437,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  87,
+                  83,
                 ],
                 "rowspan": 1,
               },
@@ -453,7 +453,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  461,
+                  438,
                 ],
                 "rowspan": 1,
               },
@@ -480,7 +480,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  462,
+                  438,
                 ],
                 "rowspan": 1,
               },
@@ -496,7 +496,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  87,
+                  83,
                 ],
                 "rowspan": 1,
               },
@@ -526,7 +526,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  461,
+                  438,
                 ],
                 "rowspan": 1,
               },
@@ -547,7 +547,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  462,
+                  438,
                 ],
                 "rowspan": 1,
               },
@@ -563,7 +563,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  87,
+                  83,
                 ],
                 "rowspan": 1,
               },
@@ -579,7 +579,7 @@ Object {
                 "background": null,
                 "colspan": 1,
                 "colwidth": Array [
-                  461,
+                  438,
                 ],
                 "rowspan": 1,
               },

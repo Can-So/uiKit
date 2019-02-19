@@ -9,12 +9,12 @@ import { auth } from '@atlaskit/outbound-auth-flow-client';
 export const isCardWithData = (props: CardProps): props is CardWithData =>
   !!(props as CardWithData).data;
 
-export class CardWithURLRenderer extends React.Component<
+export class CardWithURLRenderer extends React.PureComponent<
   CardWithUrl & WithAnalyticsEventProps
 > {
   static CardContent: typeof CardWithUrlContentType | null = null;
 
-  static moduleImporter(target: React.Component) {
+  static moduleImporter(target: CardWithURLRenderer) {
     import(/* webpackChunkName:"@atlaskit-internal-smartcard-urlcardcontent" */ './renderCardWithUrl').then(
       module => {
         CardWithURLRenderer.CardContent = module.CardWithUrlContent;
@@ -54,17 +54,17 @@ export class CardWithURLRenderer extends React.Component<
         authFn={auth}
       />
     ) : (
-      <CardLinkView key={'chunk-placeholder'} url={url} />
+      <CardLinkView key={'chunk-placeholder'} link={url} />
     );
   }
 }
 
-export class CardWithDataRenderer extends React.Component<
+export class CardWithDataRenderer extends React.PureComponent<
   CardWithData & WithAnalyticsEventProps
 > {
   static CardContent: typeof CardWithDataContentType | null = null;
 
-  static moduleImporter(target: any) {
+  static moduleImporter(target: CardWithDataRenderer) {
     import(/* webpackChunkName:"@atlaskit-internal-smartcard-datacardcontent" */ './renderCardWithData').then(
       module => {
         CardWithDataRenderer.CardContent = module.CardWithDataContent;
@@ -96,6 +96,6 @@ export class CardWithDataRenderer extends React.Component<
         />
       );
     }
-    return null;
+    return <div card-with-data />;
   }
 }

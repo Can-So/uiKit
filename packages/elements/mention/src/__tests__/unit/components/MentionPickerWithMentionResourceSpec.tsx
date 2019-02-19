@@ -1,16 +1,13 @@
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { ReactWrapper } from 'enzyme';
 import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
-
 import * as React from 'react';
-import { ReactWrapper } from 'enzyme';
-import { mountWithIntl } from 'enzyme-react-intl';
-
-import * as UtilAnalytics from '../../../util/analytics';
-
-import { MentionsResult } from '../../../types';
-import { MentionPicker, Props, State } from '../../../components/MentionPicker';
 import MentionResource from '../../../api/MentionResource';
+import { MentionPicker, Props, State } from '../../../components/MentionPicker';
+import { MentionsResult } from '../../../types';
+import * as UtilAnalytics from '../../../util/analytics';
 import { resultC } from '../_mention-search-results';
 
 const mentionResource = new MentionResource({
@@ -35,8 +32,8 @@ describe('MentionPicker', () => {
     mentions: resultC,
     query,
   };
-  let fireAnalyticsMock;
-  let fireAnalyticsReturn;
+  let fireAnalyticsMock: jest.SpyInstance;
+  let fireAnalyticsReturn: jest.Mock;
 
   beforeEach(() => {
     fireAnalyticsMock = jest.spyOn(

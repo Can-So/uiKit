@@ -88,7 +88,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'emoji-3.ts: should not show typeahead with text: ',
-  { skip: ['ie'] },
+  { skip: ['ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });
@@ -99,7 +99,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'emoji-3.ts: ":<space>" does not show the picker',
-  { skip: ['ie'] },
+  { skip: ['ie', 'firefox'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });

@@ -1,31 +1,40 @@
 import * as React from 'react';
-import Btn from '../src';
+import Button from '../src';
 
-const Table = props => <div style={{ display: 'table' }} {...props} />;
-const Row = props => <div style={{ display: 'table-row' }} {...props} />;
-const Cell = props => (
-  <div style={{ display: 'table-cell', padding: 4 }} {...props} />
+const Table = (props: React.HTMLProps<HTMLDivElement>) => (
+  <div style={{ display: 'table' }} {...props} />
 );
-const Button = props => (
-  <Cell>
-    <Btn {...props} />
-  </Cell>
+const Row = (props: React.HTMLProps<HTMLDivElement>) => (
+  <div style={{ display: 'table-row' }} {...props} />
+);
+const Cell = (props: React.HTMLProps<HTMLDivElement>) => (
+  <div style={{ display: 'table-cell', padding: 4 }} {...props} />
 );
 
 const ButtonSpacing = () => (
   <Table>
     <Row>
-      <Button>Default</Button>
-      <Button spacing="compact">Compact</Button>
+      <Cell>
+        <Button>Default</Button>
+      </Cell>
+      <Cell>
+        <Button spacing="compact">Compact</Button>
+      </Cell>
     </Row>
     <Row>
-      <Button appearance="link">Default</Button>
-      <Button appearance="link" spacing="compact">
-        Compact
-      </Button>
-      <Button appearance="link" spacing="none">
-        None
-      </Button>
+      <Cell>
+        <Button appearance="link">Default</Button>
+      </Cell>
+      <Cell>
+        <Button appearance="link" spacing="compact">
+          Compact
+        </Button>
+      </Cell>
+      <Cell>
+        <Button appearance="link" spacing="none">
+          None
+        </Button>
+      </Cell>
     </Row>
   </Table>
 );
