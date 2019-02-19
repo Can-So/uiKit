@@ -198,12 +198,16 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     recentItems,
     requestStartTime?: number,
     experimentRequestDurationMs?: number,
+    renderStartTime?: number,
   ) => {
     const { createAnalyticsEvent, getDisplayedResults } = this.props;
     if (createAnalyticsEvent && getDisplayedResults) {
       const elapsedMs: number = requestStartTime
         ? performanceNow() - requestStartTime
         : 0;
+
+      const renderTime: number = renderStartTime
+        ? performanceNow() - renderStartTime : 0;
 
       const resultsArray: Result[][] = resultMapToArray(
         getDisplayedResults(recentItems),
@@ -215,6 +219,7 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       firePreQueryShownEvent(
         eventAttributes,
         elapsedMs,
+        renderTime,
         searchSessionId,
         createAnalyticsEvent,
         experimentRequestDurationMs,
@@ -305,6 +310,7 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       const { results } = await this.props.getRecentItems(
         this.state.searchSessionId,
       );
+      const renderStartTime = performanceNow();
       this.setState(
         {
           recentItems: results,
@@ -317,6 +323,7 @@ export class QuickSearchContainer extends React.Component<Props, State> {
             this.state.recentItems || {},
             startTime,
             experimentRequestDurationMs,
+            renderStartTime,
           );
         },
       );
