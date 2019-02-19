@@ -85,7 +85,6 @@ export const deviceViewPorts = {
 };
 
 export const enableAllEditorProps = {
-  appearance: 'full-page',
   allowPanel: true,
   allowLists: true,
   allowTextColor: true,
@@ -128,6 +127,8 @@ export const initFullPageEditorWithAdf = async (page, adf: Object) => {
   await mountEditor(page, {
     appearance: 'full-page',
     defaultValue: JSON.stringify(adf),
+    primaryToolbarComponents: true,
+    contentComponents: true,
     ...enableAllEditorProps,
   });
 };

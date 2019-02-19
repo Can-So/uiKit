@@ -9,6 +9,7 @@ const webpack = require('../../build/webdriver-runner/utils/webpack');
 const reporting = require('./reporting');
 
 const LONG_RUNNING_TESTS_THRESHOLD_SECS = 10;
+let startServer = true;
 
 /*
  * function main() to
@@ -25,8 +26,25 @@ const cli = meow({
       type: 'boolean',
       alias: 'u',
     },
+    debug: {
+      type: 'boolean',
+      alias: 'debug'
+    },
+    watch: {
+      type: 'boolean',
+      alias: 'watch'
+    },
   },
 });
+
+if( cli.flags.debug){
+  process.env.DEBUG = 'true';
+  process.env.CI = 'true';
+}
+
+if (cli.flags.debug || cli.flags.watch){
+  startServer = false;
+}
 
 function getExitCode(result /*: any */) {
   return !result || result.success ? 0 : 1;
@@ -38,6 +56,8 @@ async function runJest(testPaths) {
       _: testPaths || cli.input,
       passWithNoTests: true,
       updateSnapshot: cli.flags.updateSnapshot,
+      debug: cli.flags.debug,
+      watch: cli.flags.watch,
     },
     [process.cwd()],
   );
@@ -135,11 +155,11 @@ function runTestsWithRetry() {
 }
 
 async function main() {
-  await webpack.startDevServer();
+  startServer ? await webpack.startDevServer() : console.log('start server');
   await isReachable('http://localhost:9000');
   const code = await runTestsWithRetry();
   console.log(`Exiting tests with exit code: ${+code}`);
-  await webpack.stopDevServer();
+  startServer ? await webpack.stopDevServer(): console.log('test completed');
   process.exit(code);
 }
 

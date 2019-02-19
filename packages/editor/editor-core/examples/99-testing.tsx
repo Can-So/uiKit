@@ -14,6 +14,7 @@ import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';
 import { Editor, EditorProps, EventDispatcher } from './../src';
 import ClipboardHelper from './1-clipboard-helper';
+import { TitleInput, SaveAndCancelButtons } from './5-full-page';
 import mediaMockServer from '../example-helpers/media-mock';
 
 interface EditorInstance {
@@ -88,6 +89,16 @@ function createEditorWindowBindings(win: Window) {
       mediaMockServer.disable();
     }
 
+    if (props && props.primaryToolbarComponents) {
+      props.primaryToolbarComponents = <SaveAndCancelButtons />;
+    }
+
+    if (props && props.contentComponents) {
+      props.contentComponents = (
+        <TitleInput placeholder="Give this page a title..." />
+      );
+    }
+
     ReactDOM.unmountComponentAtNode(target);
     ReactDOM.render(
       <EditorWithState
@@ -103,9 +114,11 @@ function createEditorWindowBindings(win: Window) {
 export default function EditorExampleForTests() {
   createEditorWindowBindings(window);
   return (
-    <React.Fragment>
-      <div id="editor-container" style={{ width: '100%', height: '100%' }} />
-      <ClipboardHelper />
-    </React.Fragment>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <div id="editor-container" style={{ flex: '1 1 100%' }} />
+      <div style={{ overflow: 'hidden', height: '5px', flex: '0 0 5px'}}>
+        <ClipboardHelper />
+      </div>
+    </div>
   );
 }
