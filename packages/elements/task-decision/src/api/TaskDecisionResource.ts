@@ -124,7 +124,7 @@ export class RecentUpdates {
     }
   }
 
-  onPubSubEvent = (event: string, payload: ServiceItem) => {
+  onPubSubEvent = (_event: string, payload: ServiceItem) => {
     const { containerAri } = payload;
     this.notify({ containerAri });
   };
@@ -317,7 +317,7 @@ export class ItemStateManager {
     });
   }
 
-  onTaskUpdatedEvent = (event: string, payload: ServiceTask) => {
+  onTaskUpdatedEvent = (_event: string, payload: ServiceTask) => {
     const { containerAri, objectAri, localId } = payload;
     const objectKey = { containerAri, objectAri, localId };
 
