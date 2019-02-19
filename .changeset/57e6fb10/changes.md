@@ -1,0 +1,1 @@
+- ED-6257: Handle applying header column with a rowspan

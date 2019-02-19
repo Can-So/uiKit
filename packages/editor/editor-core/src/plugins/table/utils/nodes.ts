@@ -12,14 +12,27 @@ export const containsHeaderColumn = (
   state: EditorState,
   table: PmNode,
 ): boolean => {
-  const { tableHeader } = state.schema.nodes;
-  let contains = true;
-  table.content.forEach(row => {
-    if (row.firstChild && row.firstChild.type !== tableHeader) {
-      contains = false;
-    }
+  const map = TableMap.get(table);
+  // Get cell positions for first column.
+  const cellPositions = map.cellsInRect({
+    left: 0,
+    top: 0,
+    right: 1,
+    bottom: map.height,
   });
-  return contains;
+
+  for (let i = 0; i < cellPositions.length; i++) {
+    try {
+      const cell = table.nodeAt(cellPositions[i]);
+      if (cell && cell.type !== state.schema.nodes.tableHeader) {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 export const containsHeaderRow = (
