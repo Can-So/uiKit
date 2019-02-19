@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  SwitcherWrapper,
+  SwitcherView,
   SwitcherItem,
   Section,
   ManageButton,
@@ -21,6 +21,7 @@ import {
   LicenseInformationDataStructure,
 } from '../providers/types';
 import { RecentContainersDataStructure } from '../providers/instance-data-providers';
+import { AnalyticsContext } from '../utils/analytics';
 
 interface SwitcherProps {
   cloudId: string;
@@ -33,6 +34,19 @@ interface SwitcherProps {
   addProductsPermission: ChildrenProps<boolean>;
   isXFlowEnabled: ChildrenProps<boolean>;
 }
+
+const getAnalyticsContext = (links: any, extraLinks: number) => ({
+  itemsCount:
+    links.admin.length +
+    links.products.length +
+    links.custom.length +
+    links.recent.length +
+    extraLinks,
+});
+
+const getExtraItemAnalyticsContext = (index: number) => ({
+  groupItemIndex: index,
+});
 
 export default class Switcher extends React.Component<SwitcherProps> {
   triggerXFlow = () => {
@@ -83,64 +97,115 @@ export default class Switcher extends React.Component<SwitcherProps> {
       isLoadingAddProductsPermission ||
       isLoadingIsXFlowEnabled;
 
+    const links = isLoading
+      ? {
+          admin: [],
+          products: [],
+          custom: [],
+          recent: [],
+        }
+      : {
+          admin: getAdministrationLinks(cloudId, managePermissionData!),
+          products: getProductLinks(licenseInformationData!),
+          custom: customLinksData![0],
+          recent: recentContainersData!.data,
+        };
+
     return isLoading ? (
       <Skeleton />
     ) : (
-      <SwitcherWrapper>
-        {shouldRenderAdministrativeSection && (
-          <Section title="Administration" isAdmin>
-            {getAdministrationLinks(cloudId, managePermissionData!).map(
-              ({ label, icon, key, link }) => (
-                <SwitcherItem key={key} icon={icon} href={link}>
+      <AnalyticsContext
+        data={getAnalyticsContext(links, Number(shouldRenderXSellLink))}
+      >
+        <SwitcherView>
+          {shouldRenderAdministrativeSection && (
+            <Section id="administration" title="Administration" isAdmin>
+              {links.admin.map(({ label, icon, key, link }, idx) => (
+                <AnalyticsContext
+                  key={key}
+                  data={getExtraItemAnalyticsContext(idx)}
+                >
+                  <SwitcherItem
+                    type="administration"
+                    id={key}
+                    icon={icon}
+                    href={link}
+                  >
+                    {label}
+                  </SwitcherItem>
+                </AnalyticsContext>
+              ))}
+            </Section>
+          )}
+          <Section id="products" title="Products">
+            {links.products.map(({ label, icon, key, link }, idx) => (
+              <AnalyticsContext
+                key={key}
+                data={getExtraItemAnalyticsContext(idx)}
+              >
+                <SwitcherItem type="product" id={key} icon={icon} href={link}>
                   {label}
                 </SwitcherItem>
+              </AnalyticsContext>
+            ))}
+            {shouldRenderXSellLink && (
+              <AnalyticsContext
+                data={getExtraItemAnalyticsContext(links.products.length)}
+              >
+                <SwitcherItem
+                  type="try"
+                  id={suggestedProductLink!.key}
+                  icon={suggestedProductLink!.icon}
+                  onClick={this.triggerXFlow}
+                >
+                  <SuggestedProductItemText>
+                    {suggestedProductLink!.label}
+                  </SuggestedProductItemText>
+                  <Lozenge appearance="inprogress" isBold>
+                    {addProductsPermissionData ? 'Try' : 'Request'}
+                  </Lozenge>
+                </SwitcherItem>
+              </AnalyticsContext>
+            )}
+          </Section>
+          <Section id="customLinks" title="More" isCustom>
+            {links.custom.map(({ label, link }: CustomLink, idx) => (
+              // todo: id in SwitcherItem should be consumed from custom link resolver
+              <AnalyticsContext
+                key={idx + '.' + label}
+                data={getExtraItemAnalyticsContext(idx)}
+              >
+                <SwitcherItem type="customLink" id={label} href={link}>
+                  {label}
+                </SwitcherItem>
+              </AnalyticsContext>
+            ))}
+          </Section>
+          <Section id="recent" title="Recent Containers">
+            {links.recent.map(
+              (
+                { objectId, name, url, iconUrl, type }: RecentContainer,
+                idx,
+              ) => (
+                <AnalyticsContext
+                  key={objectId}
+                  data={getExtraItemAnalyticsContext(idx)}
+                >
+                  <SwitcherItem
+                    type="recentContainer"
+                    id={type}
+                    iconUrl={iconUrl}
+                    href={url}
+                  >
+                    {name}
+                  </SwitcherItem>
+                </AnalyticsContext>
               ),
             )}
           </Section>
-        )}
-        <Section title="Products">
-          {[
-            ...getProductLinks(licenseInformationData!).map(
-              ({ label, icon, key, link }) => (
-                <SwitcherItem key={key} icon={icon} href={link}>
-                  {label}
-                </SwitcherItem>
-              ),
-            ),
-            shouldRenderXSellLink ? (
-              <SwitcherItem
-                key={suggestedProductLink!.key}
-                icon={suggestedProductLink!.icon}
-                onClick={this.triggerXFlow}
-              >
-                <SuggestedProductItemText>
-                  {suggestedProductLink!.label}
-                </SuggestedProductItemText>
-                <Lozenge appearance="inprogress" isBold>
-                  {addProductsPermissionData ? 'Try' : 'Request'}
-                </Lozenge>
-              </SwitcherItem>
-            ) : null,
-          ]}
-        </Section>
-        <Section title="More" isCustom>
-          {customLinksData![0].map(({ label, link }: CustomLink) => (
-            <SwitcherItem key={label} href={link}>
-              {label}
-            </SwitcherItem>
-          ))}
-        </Section>
-        <Section title="Recent Containers">
-          {recentContainersData!.data.map(
-            ({ objectId, name, url, iconUrl }: RecentContainer) => (
-              <SwitcherItem key={objectId} iconUrl={iconUrl} href={url}>
-                {name}
-              </SwitcherItem>
-            ),
-          )}
-        </Section>
-        {customLinksData && <ManageButton href={customLinksData[1]} />}
-      </SwitcherWrapper>
+          {customLinksData && <ManageButton href={customLinksData[1]} />}
+        </SwitcherView>
+      </AnalyticsContext>
     );
   }
 }

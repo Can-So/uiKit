@@ -19,6 +19,8 @@
     "Harsha Ivaturi"
   ],
   "dependencies": {
+    "@atlaskit/analytics-next": "^3.2.1",
+    "@atlaskit/analytics-next-types": "^3.2.0",
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/item": "^8.0.14",

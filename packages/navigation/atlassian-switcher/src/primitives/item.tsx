@@ -3,6 +3,11 @@ import styled, { ThemeProvider } from 'styled-components';
 import Item, { itemThemeNamespace } from '@atlaskit/item';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { gridSize, colors, elevation } from '@atlaskit/theme';
+import {
+  withAnalyticsEvents,
+  createAndFireEvent,
+} from '@atlaskit/analytics-next';
+import { withAnalyticsContextData } from '../utils/analytics';
 
 const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
   display: flex;
@@ -30,12 +35,18 @@ type Props = {
   href?: string;
 };
 
+type IconWithBackgroundProps = {
+  isAdmin?: boolean;
+  isCustom?: boolean;
+  iconUrl?: string;
+  icon?: React.ReactType;
+};
 const IconWithBackground = ({
   isAdmin = false,
   isCustom = false,
   iconUrl,
   icon: Icon = WorldIcon,
-}: Props) => (
+}: IconWithBackgroundProps) => (
   <Background isAdmin={isAdmin} isCustom={isCustom}>
     {iconUrl ? (
       <ImgIcon src={iconUrl} />
@@ -57,11 +68,13 @@ const itemTheme = {
 };
 
 type SwitcherItemProps = Props & {
-  children: JSX.Element[] | string;
-  key?: string;
+  id: string;
+  type: 'product' | 'try' | 'administration' | 'recentContainer' | 'customLink';
+  children: React.ReactNode;
   onClick?: () => void;
 };
-export default ({
+
+const SwitcherItem = ({
   isAdmin,
   isCustom,
   icon,
@@ -82,3 +95,25 @@ export default ({
     />
   </ThemeProvider>
 );
+
+const SwitcherItemWithEvents = withAnalyticsEvents({
+  onClick: createAndFireEvent('atlaskit')({
+    eventType: 'ui',
+    action: 'clicked',
+    actionSubject: 'atlassianSwitcherItem',
+  }),
+})(SwitcherItem);
+
+type SwitcherItemAnalyticsContext = {
+  itemId?: string;
+  itemType?: string;
+};
+const SwitcherItemWithContext = withAnalyticsContextData<
+  SwitcherItemProps,
+  SwitcherItemAnalyticsContext
+>(props => ({
+  itemId: props.id,
+  itemType: props.type,
+}))(SwitcherItemWithEvents);
+
+export default SwitcherItemWithContext;

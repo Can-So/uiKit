@@ -2,6 +2,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { gridSize, colors } from '@atlaskit/theme';
 import { ManageButton } from './';
+import {
+  createAndFireEvent,
+  withAnalyticsEvents,
+} from '@atlaskit/analytics-next';
 
 const Wrapper = styled.div`
   height: calc(100vh - 3 * ${gridSize()}px);
@@ -24,18 +28,38 @@ const Footer = styled.footer`
   background-color: ${colors.N0};
 `;
 
-export default ({ children }: { children: React.ReactNode }) => {
-  const manageButton = React.Children.toArray(children).filter(
-    child => React.isValidElement(child) && child.type === ManageButton,
-  );
-  const items = React.Children.toArray(children).filter(
-    child => React.isValidElement(child) && child.type !== ManageButton,
-  );
+type SwitcherViewProps = { children: React.ReactNode; onViewed?: () => void };
 
-  return (
-    <Wrapper>
-      <Body>{items}</Body>
-      {manageButton.length ? <Footer>{manageButton}</Footer> : null}
-    </Wrapper>
-  );
-};
+class SwitcherView extends React.Component<SwitcherViewProps> {
+  componentDidMount() {
+    if (this.props.onViewed) {
+      this.props.onViewed();
+    }
+  }
+
+  render() {
+    const { children } = this.props;
+
+    const manageButton = React.Children.toArray(children).filter(
+      child => React.isValidElement(child) && child.type === ManageButton,
+    );
+    const items = React.Children.toArray(children).filter(
+      child => React.isValidElement(child) && child.type !== ManageButton,
+    );
+
+    return (
+      <Wrapper>
+        <Body>{items}</Body>
+        {manageButton.length ? <Footer>{manageButton}</Footer> : null}
+      </Wrapper>
+    );
+  }
+}
+
+export default withAnalyticsEvents({
+  onViewed: createAndFireEvent('atlaskit')({
+    eventType: 'screen',
+    action: 'viewed',
+    actionSubject: 'atlassianSwitcher',
+  }),
+})(SwitcherView);
