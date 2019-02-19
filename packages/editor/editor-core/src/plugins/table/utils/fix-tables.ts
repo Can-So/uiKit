@@ -1,6 +1,7 @@
 import { Transaction } from 'prosemirror-state';
 import { getCellsInColumn } from 'prosemirror-utils';
 import { Node as PMNode } from 'prosemirror-model';
+import { EditorView } from 'prosemirror-view';
 import { TableMap } from 'prosemirror-tables';
 import { TableLayout } from '@atlaskit/adf-schema';
 import {
@@ -10,7 +11,10 @@ import {
 } from '@atlaskit/editor-common';
 
 import { contentWidth } from '../pm-plugins/table-resizing/resizer/contentWidth';
-import { calculateColWidth } from '../pm-plugins/table-resizing/resizer/utils';
+import {
+  calculateColWidth,
+  getCellsRefsInColumn,
+} from '../pm-plugins/table-resizing/resizer/utils';
 import { getLayoutSize } from '../pm-plugins/table-resizing/utils';
 import { sendLogs } from '../../../utils/sendLogs';
 
@@ -230,12 +234,20 @@ export const fixTables = (tr: Transaction): Transaction => {
 // We use this when migrating TinyMCE tables for Confluence, for example:
 // https://pug.jira-dev.com/wiki/spaces/AEC/pages/3362882215/How+do+we+map+TinyMCE+tables+to+Fabric+tables
 export const fixAutoSizedTable = (
-  tr: Transaction,
-  node: PMNode,
-  table: HTMLTableElement,
-  basePos: number,
+  view: EditorView,
+  tableNode: PMNode,
+  tableRef: HTMLTableElement,
+  tablePos: number,
 ) => {
-  const colWidths = parseDOMColumnWidths(table);
+  let { tr } = view.state;
+  const domAtPos = view.domAtPos.bind(view);
+  const tableStart = tablePos + 1;
+  const colWidths = parseDOMColumnWidths(
+    domAtPos,
+    tableNode,
+    tableStart,
+    tableRef,
+  );
   const totalContentWidth = colWidths.reduce(
     (acc, current) => acc + current,
     0,
@@ -253,7 +265,7 @@ export const fixAutoSizedTable = (
 
   const scaledColumnWidths = colWidths.map(width => Math.floor(width * scale));
 
-  tr = replaceCells(tr, node, basePos, (cell, _rowIndex, colIndex) => {
+  tr = replaceCells(tr, tableNode, tablePos, (cell, _rowIndex, colIndex) => {
     const newColWidths = scaledColumnWidths.slice(
       colIndex,
       colIndex + cell.attrs.colspan,
@@ -270,8 +282,8 @@ export const fixAutoSizedTable = (
 
   // clear autosizing on the table node
   return tr
-    .setNodeMarkup(basePos, undefined, {
-      ...node.attrs,
+    .setNodeMarkup(tablePos, undefined, {
+      ...tableNode.attrs,
       layout: tableLayout,
       __autoSize: false,
     })
@@ -291,8 +303,13 @@ const getLayoutBasedOnWidth = (totalWidth: number): TableLayout => {
   }
 };
 
-function parseDOMColumnWidths(node: HTMLElement): Array<number> {
-  const row = node.querySelector('tr');
+function parseDOMColumnWidths(
+  domAtPos: (pos: number) => { node: Node; offset: number },
+  tableNode: PMNode,
+  tableStart: number,
+  tableRef: HTMLTableElement,
+): Array<number> {
+  const row = tableRef.querySelector('tr');
 
   if (!row) {
     return [];
@@ -305,8 +322,14 @@ function parseDOMColumnWidths(node: HTMLElement): Array<number> {
     const colspan = Number(currentCol.getAttribute('colspan') || 1);
     for (let span = 0; span < colspan; span++) {
       const colIdx = col + span;
-      const colWidth = calculateColWidth(node, colIdx, col => {
-        return contentWidth(col as HTMLElement, node).width;
+      const cells = getCellsRefsInColumn(
+        colIdx,
+        tableNode,
+        tableStart,
+        domAtPos,
+      );
+      const colWidth = calculateColWidth(cells, col => {
+        return contentWidth(col as HTMLElement, tableRef).width;
       });
 
       cols[colIdx] = Math.max(colWidth, tableCellMinWidth);

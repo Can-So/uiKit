@@ -1,4 +1,4 @@
-const tableWithRowSpan = {
+export const tableWithRowSpan = {
   version: 1,
   type: 'doc',
   content: [
@@ -123,7 +123,7 @@ const tableWithRowSpan = {
   ],
 };
 
-const twoColFullWidthTableWithContent = {
+export const twoColFullWidthTableWithContent = {
   version: 1,
   type: 'doc',
   content: [
@@ -335,4 +335,130 @@ const twoColFullWidthTableWithContent = {
   ],
 };
 
-export { tableWithRowSpan, twoColFullWidthTableWithContent };
+export const tableWithRowSpanAndColSpan = {
+  version: 1,
+  type: 'doc',
+  content: [
+    {
+      type: 'table',
+      attrs: {
+        isNumberColumnEnabled: false,
+        layout: 'default',
+      },
+      content: [
+        {
+          type: 'tableRow',
+          content: [
+            {
+              type: 'tableHeader',
+              attrs: {
+                colwidth: [79],
+              },
+              content: [
+                {
+                  type: 'paragraph',
+                  content: [],
+                },
+              ],
+            },
+            {
+              type: 'tableHeader',
+              attrs: {
+                colspan: 2,
+                colwidth: [472, 128],
+              },
+              content: [
+                {
+                  type: 'paragraph',
+                  content: [],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableRow',
+          content: [
+            {
+              type: 'tableCell',
+              attrs: {
+                colspan: 3,
+                colwidth: [79, 472, 128],
+              },
+              content: [
+                {
+                  type: 'paragraph',
+                  content: [],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableRow',
+          content: [
+            {
+              type: 'tableCell',
+              attrs: {
+                rowspan: 2,
+                colwidth: [79],
+              },
+              content: [
+                {
+                  type: 'paragraph',
+                  content: [],
+                },
+              ],
+            },
+            {
+              type: 'tableCell',
+              attrs: {
+                colwidth: [472],
+              },
+              content: [
+                {
+                  type: 'paragraph',
+                  content: [],
+                },
+              ],
+            },
+            {
+              type: 'tableCell',
+              attrs: {
+                rowspan: 2,
+                colwidth: [128],
+              },
+              content: [
+                {
+                  type: 'paragraph',
+                  content: [],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableRow',
+          content: [
+            {
+              type: 'tableCell',
+              attrs: {
+                colwidth: [472],
+              },
+              content: [
+                {
+                  type: 'paragraph',
+                  content: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: [],
+    },
+  ],
+};
