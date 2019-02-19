@@ -472,7 +472,6 @@ export class Card extends Component<CardProps, CardState> {
       ? this.renderInlinePlayer()
       : this.renderCard();
 
-    // TODO: use Fragment for wrapper
     return this.context.intl ? (
       content
     ) : (
