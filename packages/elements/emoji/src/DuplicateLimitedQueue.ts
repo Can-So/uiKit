@@ -23,14 +23,14 @@ export default class DuplicateLimitedQueue<T> {
   private maximumSize: number;
   private perItemSize: number;
 
-  private items: Array<T>;
-  private itemCountMap: Map<T, number>;
+  private items!: Array<T>;
+  private itemCountMap!: Map<T, number>;
 
   /**
    * An array derived from items and itemCountMap which holds each item once and is ordered by
    * how often an item is duplicated in the items array.
    */
-  private itemsOrderedByFrequency: Array<T>;
+  private itemsOrderedByFrequency!: Array<T>;
 
   /**
    * Construct a new DuplicateLimitedQueue.

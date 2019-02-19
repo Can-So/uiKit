@@ -20,7 +20,6 @@ import { selectedToneStorageKey } from '../../../constants';
 import {
   EmojiDescription,
   EmojiId,
-  EmojiResponse,
   EmojiSearchResult,
   EmojiUpload,
   SearchOptions,
@@ -96,10 +95,7 @@ describe('UploadingEmojiResource', () => {
       this.mockSiteEmojiResource = mockSiteEmojiResource;
     }
 
-    protected initSiteEmojiResource(
-      emojiResponse: EmojiResponse,
-      provider: ServiceConfig,
-    ) {
+    protected initSiteEmojiResource() {
       this.siteEmojiResource = this.mockSiteEmojiResource;
       return Promise.resolve();
     }
@@ -177,10 +173,10 @@ describe('UploadingEmojiResource', () => {
       const emojiResource = new TestUploadingEmojiResource();
       return emojiResource
         .uploadCustomEmoji(upload)
-        .then(emoji => {
+        .then(() => {
           expect(true, 'Promise should have been rejected').to.equal(false);
         })
-        .catch(error => {
+        .catch(() => {
           expect(true, 'Promise should be rejected').to.equal(true);
         });
     });
@@ -217,10 +213,10 @@ describe('UploadingEmojiResource', () => {
       const emojiResource = new TestUploadingEmojiResource(siteEmojiResource);
       return emojiResource
         .uploadCustomEmoji(upload)
-        .then(emoji => {
+        .then(() => {
           expect(true, 'Promise should have been rejected').to.equal(false);
         })
-        .catch(error => {
+        .catch(() => {
           expect(
             uploadEmojiStub.calledWith(upload),
             'upload called on siteEmojiResource',
@@ -260,7 +256,7 @@ describe('UploadingEmojiResource', () => {
       ) as any;
       const emojiResource = new TestUploadingEmojiResource(siteEmojiResource);
       const deleteStub = siteEmojiResource.deleteEmoji;
-      deleteStub.returns(new Promise(resolve => {}));
+      deleteStub.returns(new Promise(() => {}));
       emojiResource.deleteSiteEmoji(mediaEmoji);
       return waitUntil(() => deleteStub.called).then(() => {
         expect(
@@ -358,30 +354,30 @@ describe('helpers', () => {
   class TestEmojiProvider implements EmojiProvider {
     getAsciiMap = () =>
       Promise.resolve(new Map([[grinEmoji.ascii![0], grinEmoji]]));
-    findByShortName = (shortName: string) => Promise.resolve(evilburnsEmoji);
-    findByEmojiId = (emojiId: EmojiId) => Promise.resolve(evilburnsEmoji);
-    findById = (emojiIdStr: string) => Promise.resolve(evilburnsEmoji);
-    findInCategory = (categoryId: string) => Promise.resolve([]);
+    findByShortName = (_shortName: string) => Promise.resolve(evilburnsEmoji);
+    findByEmojiId = (_emojiId: EmojiId) => Promise.resolve(evilburnsEmoji);
+    findById = (_emojiIdStr: string) => Promise.resolve(evilburnsEmoji);
+    findInCategory = (_categoryId: string) => Promise.resolve([]);
     getSelectedTone = () => -1;
-    setSelectedTone = (tone: ToneSelection) => {};
-    deleteSiteEmoji = (emoji: EmojiDescription) => Promise.resolve(false);
+    setSelectedTone = (_tone: ToneSelection) => {};
+    deleteSiteEmoji = (_emoji: EmojiDescription) => Promise.resolve(false);
     getCurrentUser = () => undefined;
-    filter = (query?: string, options?: SearchOptions) => {};
+    filter = (_query?: string, _options?: SearchOptions) => {};
     subscribe = (
-      onChange: OnProviderChange<EmojiSearchResult, any, void>,
+      _onChange: OnProviderChange<EmojiSearchResult, any, void>,
     ) => {};
     unsubscribe = (
-      onChange: OnProviderChange<EmojiSearchResult, any, void>,
+      _onChange: OnProviderChange<EmojiSearchResult, any, void>,
     ) => {};
     loadMediaEmoji = () => undefined;
     optimisticMediaRendering = () => false;
-    getFrequentlyUsed = (options?: SearchOptions) => Promise.resolve([]);
+    getFrequentlyUsed = (_options?: SearchOptions) => Promise.resolve([]);
   }
 
   class TestUploadingEmojiProvider extends TestEmojiProvider
     implements UploadingEmojiProvider {
     isUploadSupported = () => Promise.resolve(true);
-    uploadCustomEmoji = (upload: EmojiUpload) =>
+    uploadCustomEmoji = (_upload: EmojiUpload) =>
       Promise.resolve(evilburnsEmoji);
     prepareForUpload = () => Promise.resolve();
   }

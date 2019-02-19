@@ -193,7 +193,7 @@ describe('EmojiLoader', () => {
       const resource = new EmojiLoader(provider401);
       return resource
         .loadEmoji()
-        .then(emojiResponse => {
+        .then(() => {
           expect(true, 'Emojis should not have loaded').to.equal(false);
         })
         .catch(err => {

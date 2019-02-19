@@ -133,7 +133,7 @@ export const categoryVisible = (
 export const showCategory = (
   category: CategoryGroupKey,
   component: ReactWrapper,
-  categoryTitle?: string,
+  _categoryTitle?: string,
 ): Promise<any> => {
   const categoryButton = getCategoryButton(category, component);
   expect(categoryButton).toHaveLength(1);
@@ -232,7 +232,10 @@ export const finishDelete = (component: ReactWrapper) =>
 export const errorMessageVisible = (component: ReactWrapper) =>
   component.update() && component.find(EmojiErrorMessage).length === 1;
 
-export const tooltipErrorMessageMatches = async (component, message) => {
+export const tooltipErrorMessageMatches = async (
+  component: ReactWrapper<any>,
+  message: any,
+) => {
   component
     .find(EmojiErrorMessage)
     .find(ErrorIcon)
@@ -250,7 +253,7 @@ export const tooltipErrorMessageMatches = async (component, message) => {
   ).toMatchObject(message);
 };
 
-export const chooseFile = (component, file) => {
+export const chooseFile = (component: ReactWrapper, file: any) => {
   const fileChooser = component.find(FileChooser);
   const fileOnChange = fileChooser.prop('onChange');
   expect(fileOnChange).toBeDefined();
