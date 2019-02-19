@@ -6,6 +6,10 @@ import { messages as textFormattingMessages } from '../../plugins/text-formattin
 import { messages as advancedTextFormattingMessages } from '../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
 import { messages as listsMessages } from '../../plugins/lists/messages';
 import { messages as textColorMessages } from '../../plugins/text-color/ui/ToolbarTextColor';
+import app, {
+  App,
+} from '../../../../../media/media-picker/src/popup/components/app';
+import { PopupUploadEventEmitter } from '../../../../../media/media-picker/src/components/types';
 
 export {
   setupMediaMocksProviders,
@@ -84,36 +88,55 @@ export const deviceViewPorts = {
   iPhonePlus: { width: 414, height: 736 },
 };
 
-export const enableAllEditorProps = {
-  allowPanel: true,
-  allowLists: true,
-  allowTextColor: true,
-  allowTextAlignment: true,
-  quickInsert: true,
-  allowCodeBlocks: { enableKeybindingsForIDE: true },
-  allowTables: {
-    advanced: true,
-  },
-  allowBreakout: true,
-  allowJiraIssue: true,
-  allowUnsupportedContent: true,
-  allowExtension: {
+function getEditorProps(appearance: Appearance) {
+  const enableAllEditorProps = {
+    allowPanel: true,
+    allowLists: true,
+    allowTextColor: true,
+    allowTextAlignment: true,
+    quickInsert: true,
+    allowCodeBlocks: { enableKeybindingsForIDE: true },
+    allowTables: {
+      advanced: true,
+    },
     allowBreakout: true,
-  },
-  allowRule: true,
-  allowDate: true,
-  allowLayouts: {
-    allowBreakout: true,
-  },
-  allowIndentation: true,
-  allowTemplatePlaceholders: { allowInserting: true },
-  allowStatus: true,
-  media: true, // add true here since the testing example would handle providers
-  placeholder:
-    'Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule.',
-  shouldFocus: false,
-  UNSAFE_cards: true,
-};
+    allowJiraIssue: true,
+    allowUnsupportedContent: true,
+    allowExtension: {
+      allowBreakout: true,
+    },
+    allowRule: true,
+    allowDate: true,
+    allowLayouts: {
+      allowBreakout: true,
+    },
+    allowIndentation: true,
+    allowTemplatePlaceholders: { allowInserting: true },
+    allowStatus: true,
+    media: true, // add true here since the testing example would handle providers
+    placeholder:
+      'Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule.',
+    shouldFocus: false,
+    UNSAFE_cards: true,
+  };
+
+  if (appearance === Appearance.fullPage) {
+    return {
+      ...enableAllEditorProps,
+      primaryToolbarComponents: true,
+      contentComponents: true,
+    };
+  }
+
+  if (appearance === Appearance.comment) {
+    return {
+      ...enableAllEditorProps,
+      primaryToolbarComponents: true,
+    };
+  }
+
+  return enableAllEditorProps;
+}
 
 async function mountEditor(page: any, props) {
   await page.evaluate(props => {
@@ -122,25 +145,38 @@ async function mountEditor(page: any, props) {
   await page.waitForSelector('.ProseMirror', 500);
 }
 
-export const initFullPageEditorWithAdf = async (page, adf: Object) => {
+export enum Appearance {
+  fullPage = 'full-page',
+  comment = 'comment',
+}
+
+export const initEditorWithAdf = async (
+  page,
+  options: {
+    adf: Object;
+    appearance: Appearance;
+  },
+) => {
   const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
   await page.goto(url);
   await mountEditor(page, {
-    appearance: 'full-page',
-    defaultValue: JSON.stringify(adf),
-    primaryToolbarComponents: true,
-    contentComponents: true,
-    ...enableAllEditorProps,
+    appearance: options.appearance,
+    defaultValue: JSON.stringify(options.adf),
+    ...getEditorProps(options.appearance),
+  });
+};
+
+export const initFullPageEditorWithAdf = async (page, adf: Object) => {
+  await initEditorWithAdf(page, {
+    adf,
+    appearance: Appearance.fullPage,
   });
 };
 
 export const initCommentEditorWithAdf = async (page, adf: Object) => {
-  const url = getExampleUrl('editor', 'editor-core', 'testing');
-  await page.goto(url);
-  await mountEditor(page, {
-    appearance: 'comment',
-    defaultValue: JSON.stringify(adf),
-    ...enableAllEditorProps,
+  await initEditorWithAdf(page, {
+    adf,
+    appearance: Appearance.comment,
   });
 };
 
