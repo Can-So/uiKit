@@ -1,0 +1,1 @@
+- ED-6246 Improves types and adds more metadata to errors
