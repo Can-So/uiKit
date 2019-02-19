@@ -68,8 +68,10 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
   private init(props: Props) {
     this.setState(initialState, async () => {
       const { context, identifier } = props;
+      const id =
+        typeof identifier.id === 'string' ? identifier.id : await identifier.id;
       this.subscription = context.file
-        .getFileState(await identifier.id, {
+        .getFileState(id, {
           collectionName: identifier.collectionName,
         })
         .subscribe({
