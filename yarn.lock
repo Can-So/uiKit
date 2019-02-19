@@ -9380,9 +9380,10 @@ json-pointer@^0.6.0:
   dependencies:
     foreach "^2.0.4"
 
-json-schema-diff-validator@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/json-schema-diff-validator/-/json-schema-diff-validator-0.2.0.tgz#bcb5cca374c4679f0e83a7b695f898eb406bda9a"
+json-schema-diff-validator@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/json-schema-diff-validator/-/json-schema-diff-validator-0.3.0.tgz#540f7ea483f738605f80190fadd4324d8da116f5"
+  integrity sha512-H6dkVI5agNfjg4X8nPEpHsqSLNfFv6x9HimtK2UQWUhbbErKSpBIS9nEytqmqnpkcvAWl+dFOf7tKvVFWeUi4A==
   dependencies:
     fast-json-patch "^2.0.5"
     json-pointer "^0.6.0"
