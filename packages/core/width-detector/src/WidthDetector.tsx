@@ -122,14 +122,15 @@ export default class WidthDetector extends React.Component<Props, State> {
         tabIndex={-1}
       />
     );
-
+    // pluck non-DOM props off the props so we can safely spread remaining items
+    const { containerStyle, onResize, children, ...props } = this.props;
     return (
       <div
-        className="ak-width-detector-container"
-        style={{ ...containerDivStyle, ...this.props.containerStyle }}
+        {...props}
+        style={{ ...containerDivStyle, ...containerStyle }}
         ref={this.handleContainerRef}
       >
-        {this.props.children(this.state.width)}
+        {children(this.state.width)}
         {sizerEl}
       </div>
     );
