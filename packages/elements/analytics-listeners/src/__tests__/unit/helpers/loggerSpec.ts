@@ -3,11 +3,30 @@ import Logger, { LOG_LEVEL } from '../../../helpers/logger';
 
 declare const global: any;
 
-const logTypeMap = {
+type MethodsInLogger = {
+  error: boolean;
+  warn: boolean;
+  info: boolean;
+  debug: boolean;
+};
+
+type GlobalConsoleType = {
+  error: Function;
+  warn: Function;
+  info: Function;
+  log: Function;
+};
+
+const logTypeMap: { [P in keyof MethodsInLogger]: keyof GlobalConsoleType } = {
   error: 'error',
   warn: 'warn',
   info: 'info',
   debug: 'log',
+};
+
+type CaseArgs = {
+  level: keyof typeof LOG_LEVEL;
+  methods: MethodsInLogger;
 };
 
 describe('Logger', () => {
@@ -18,26 +37,29 @@ describe('Logger', () => {
 
   cases(
     'should not log any level beneath current logging level',
-    ({ level, methods }) => {
+    ({ level, methods }: CaseArgs) => {
       const originalConsole = global.console;
       global.console = {
         error: jest.fn(),
         warn: jest.fn(),
         info: jest.fn(),
         log: jest.fn(),
-      };
+      } as GlobalConsoleType;
 
       let logger = new Logger({ logLevel: LOG_LEVEL[level] });
 
-      Object.keys(methods).forEach(method => {
-        jest.resetAllMocks();
-        const shouldBeCalled = methods[method];
-        logger[method]('test');
-        const consoleMethod = logTypeMap[method];
-        expect(global.console[consoleMethod]).toHaveBeenCalledTimes(
-          shouldBeCalled ? 1 : 0,
-        );
-      });
+      (Object.keys(methods) as (keyof MethodsInLogger)[]).forEach(
+        (method: keyof MethodsInLogger) => {
+          jest.resetAllMocks();
+
+          const shouldBeCalled = methods[method];
+          logger[method]('test');
+          const consoleMethod = logTypeMap[method];
+          expect(global.console[consoleMethod]).toHaveBeenCalledTimes(
+            shouldBeCalled ? 1 : 0,
+          );
+        },
+      );
 
       global.console = originalConsole;
     },

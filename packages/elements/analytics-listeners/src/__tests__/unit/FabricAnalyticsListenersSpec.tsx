@@ -1,19 +1,19 @@
-import * as React from 'react';
 import { mount, shallow } from 'enzyme';
-import FabricAnalyticsListeners from '../../FabricAnalyticsListeners';
-import FabricElementsListener from '../../fabric/FabricElementsListener';
-import AtlaskitListener from '../../atlaskit/AtlaskitListener';
+import * as React from 'react';
 import {
   createComponentWithAnalytics,
-  IncorrectEventType,
   DummyAtlaskitComponent,
-  DummyNavigationComponent,
   DummyElementsComponent,
   DummyMediaComponent,
+  DummyNavigationComponent,
+  IncorrectEventType,
 } from '../../../examples/helpers';
-import { AnalyticsWebClient, FabricChannel } from '../../types';
+import AtlaskitListener from '../../atlaskit/AtlaskitListener';
+import FabricElementsListener from '../../fabric/FabricElementsListener';
+import FabricAnalyticsListeners from '../../FabricAnalyticsListeners';
 import { LOG_LEVEL } from '../../helpers/logger';
 import NavigationListener from '../../navigation/NavigationListener';
+import { AnalyticsWebClient, FabricChannel } from '../../types';
 
 declare const global: any;
 
@@ -33,8 +33,8 @@ const AtlaskitIncorrectEventType = IncorrectEventType(FabricChannel.atlaskit);
 
 describe('<FabricAnalyticsListeners />', () => {
   let analyticsWebClientMock: AnalyticsWebClient;
-  let originalConsoleError;
-  let originalConsoleWarn;
+  let originalConsoleError: Function;
+  let originalConsoleWarn: Function;
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -74,7 +74,7 @@ describe('<FabricAnalyticsListeners />', () => {
     });
 
     it('should accept and handle a promise-like client', done => {
-      const promiseLikeClient = {
+      const promiseLikeClient: Promise<AnalyticsWebClient> = {
         then: jest.fn(() => promiseLikeClient),
         catch: jest.fn(() => done()),
       };

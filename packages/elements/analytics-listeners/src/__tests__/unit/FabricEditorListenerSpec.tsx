@@ -1,15 +1,17 @@
-import * as React from 'react';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { mount } from 'enzyme';
-import FabricEditorListener, {
-  EDITOR_TAG,
-} from '../../fabric/FabricEditorListener';
+import * as React from 'react';
 import {
   createComponentWithAnalytics,
   createTaggedComponentWithAnalytics,
   OwnProps,
 } from '../../../examples/helpers';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import FabricEditorListener, {
+  EDITOR_TAG,
+} from '../../fabric/FabricEditorListener';
+import Logger from '../../helpers/logger';
 import { AnalyticsWebClient, FabricChannel } from '../../types';
+import { createLoggerMock } from '../_testUtils';
 
 const DummyEditorComponent = createComponentWithAnalytics(FabricChannel.editor);
 const DummyTaggedEditorComponent = createTaggedComponentWithAnalytics(
@@ -19,7 +21,7 @@ const DummyTaggedEditorComponent = createTaggedComponentWithAnalytics(
 
 describe('<FabricEditorsListener />', () => {
   let analyticsWebClientMock: AnalyticsWebClient;
-  let loggerMock;
+  let loggerMock: Logger;
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -28,12 +30,7 @@ describe('<FabricEditorsListener />', () => {
       sendTrackEvent: jest.fn(),
       sendScreenEvent: jest.fn(),
     };
-    loggerMock = {
-      debug: jest.fn(),
-      info: jest.fn(),
-      warn: jest.fn(),
-      error: jest.fn(),
-    };
+    loggerMock = createLoggerMock();
   });
 
   const fireAndVerifySentEvent = (
