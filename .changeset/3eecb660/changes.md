@@ -1,0 +1,1 @@
+- ED-6320: inserting links via CMD+K can also insert smart links
