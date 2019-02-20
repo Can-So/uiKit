@@ -135,7 +135,7 @@ BrowserTestCase(
 // AK-5892
 // BrowserTestCase(
 //   'When entering a new time in Timepicker Editable, the time should be updated to the new value',
-//   { skip: ['ie', 'firefox'] }, // IE has an issue AK-5570, AK-5492
+//   { skip: ['ie'] }, // IE has an issue AK-5570, AK-5492
 //   async client => {
 //     const timePicker = new Page(client);
 
@@ -162,7 +162,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'Invalid times in TimePicker should be cleared',
-  { skip: ['ie', 'firefox'] }, // IE has an issue AK-5570, AK-5492
+  { skip: ['ie'] }, // IE has an issue AK-5570, AK-5492
   async client => {
     const timePicker = new Page(client);
 
@@ -189,7 +189,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When DateTimePicker is focused & backspace pressed, the date value should be cleared but the time value should not be affected',
-  { skip: ['safari', 'ie', 'firefox'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
+  { skip: ['safari', 'ie'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
   async client => {
     const dateTimePickerTest = new Page(client);
 
@@ -219,7 +219,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When a user types a year into the date input in DatetimePicker and subsequently hits enter, the value is correctly updated',
-  { skip: ['safari', 'ie', 'firefox'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
+  { skip: ['safari', 'ie'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
   async client => {
     const dateTimePickerTest = new Page(client);
 

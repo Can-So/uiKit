@@ -27,6 +27,8 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       browserName: 'firefox',
       browser_version: '64.0',
       resolution: '1440x900',
+      'browserstack.geckodriver': '0.22.0',
+      'browserstack.use_w3c': 'true',
     },
     ie: {
       os: 'Windows',
