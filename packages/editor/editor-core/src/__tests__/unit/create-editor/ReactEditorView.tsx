@@ -29,6 +29,7 @@ import {
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
 } from '../../../plugins/analytics';
+import { analyticsService } from '../../../analytics';
 
 const portalProviderAPI: any = {
   render() {},
@@ -213,6 +214,72 @@ describe(name, () => {
 
         expect(renderSpy).toHaveBeenCalledTimes(0);
         wrapper.unmount();
+      });
+    });
+
+    describe('when an invalid transaction is dispatched', () => {
+      let wrapper;
+      let editor;
+      let tr;
+
+      /** dispatches an invalid transaction which adds a code block with a date node child */
+      const dispatchInvalidTransaction = () => {
+        const { date, codeBlock } = editor.view.state.schema.nodes;
+        tr = editor.view.state.tr.replaceRangeWith(
+          1,
+          1,
+          codeBlock.create({}, date.create()),
+        );
+        editor.view.dispatch(tr);
+      };
+
+      beforeEach(() => {
+        wrapper = mountWithIntl(
+          <ReactEditorView
+            editorProps={{
+              allowCodeBlocks: true,
+              allowDate: true,
+            }}
+            providerFactory={ProviderFactory.create({})}
+            portalProviderAPI={portalProviderAPI}
+            onEditorCreated={() => {}}
+            onEditorDestroyed={() => {}}
+          />,
+        );
+        editor = wrapper.instance() as ReactEditorView;
+      });
+
+      it('should not throw error', () => {
+        expect(() => dispatchInvalidTransaction()).not.toThrowError();
+      });
+
+      it('sends V2 analytics event', () => {
+        jest.spyOn(analyticsService, 'trackEvent');
+        dispatchInvalidTransaction();
+
+        expect(analyticsService.trackEvent).toHaveBeenCalledWith(
+          'atlaskit.fabric.editor.invalidtransaction',
+        );
+      });
+
+      it('sends V3 analytics event', () => {
+        const { eventDispatcher } = wrapper.instance() as ReactEditorView;
+        jest.spyOn(eventDispatcher, 'emit');
+
+        dispatchInvalidTransaction();
+        expect(eventDispatcher.emit).toHaveBeenCalledWith(analyticsEventKey, {
+          payload: {
+            action: 'dispatchedInvalidTransaction',
+            actionSubject: 'editor',
+            eventType: 'operational',
+          },
+        });
+      });
+
+      it('does not apply the transaction', () => {
+        const originalState = editor.editorState;
+        dispatchInvalidTransaction();
+        expect(editor.editorState).toEqual(originalState);
       });
     });
 

@@ -2,12 +2,14 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { EditorState, Transaction, Selection } from 'prosemirror-state';
 import { EditorView, DirectEditorProps } from 'prosemirror-view';
+import { Node as PMNode } from 'prosemirror-model';
 import { intlShape } from 'react-intl';
-
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
+
 import { EventDispatcher, createDispatch } from '../event-dispatcher';
 import { processRawValue } from '../utils';
+import { findChangedNodesFromTransaction, validateNodes } from '../utils/nodes';
 import createPluginList from './create-plugins-list';
 import {
   analyticsEventKey,
@@ -21,7 +23,7 @@ import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,
 } from '../plugins/editor-disabled';
-
+import { analyticsService } from '../analytics';
 import {
   processPluginsList,
   createSchema,
@@ -286,12 +288,27 @@ export default class ReactEditorView<T = {}> extends React.Component<
             return;
           }
 
-          const editorState = this.view.state.apply(transaction);
-          this.view.updateState(editorState);
-          if (this.props.editorProps.onChange && transaction.docChanged) {
-            this.props.editorProps.onChange(this.view);
+          const nodes: PMNode[] = findChangedNodesFromTransaction(transaction);
+          if (validateNodes(nodes)) {
+            // go ahead and update the state now we know the transaction is good
+            const editorState = this.view.state.apply(transaction);
+            this.view.updateState(editorState);
+            if (this.props.editorProps.onChange && transaction.docChanged) {
+              this.props.editorProps.onChange(this.view);
+            }
+            this.editorState = editorState;
+          } else {
+            analyticsService.trackEvent(
+              'atlaskit.fabric.editor.invalidtransaction',
+            );
+            this.eventDispatcher.emit(analyticsEventKey, {
+              payload: {
+                action: 'dispatchedInvalidTransaction',
+                actionSubject: 'editor',
+                eventType: 'operational',
+              },
+            });
           }
-          this.editorState = editorState;
         },
         // Disables the contentEditable attribute of the editor if the editor is disabled
         editable: state => !this.props.editorProps.disabled,
