@@ -37,7 +37,6 @@ export interface UploadService {
     event: E,
     listener: UploadServiceEventListener<E>,
   ): void;
-  // addFiles(files: File[]): void;
 }
 
 export enum LocalFileSource {
