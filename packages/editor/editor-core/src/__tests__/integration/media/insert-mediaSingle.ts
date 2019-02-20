@@ -12,7 +12,7 @@ import {
 
 BrowserTestCase(
   'insert-mediaSingle.ts: Inserts a media single on fullpage',
-  { skip: ['edge', 'ie', 'safari', 'firefox'] },
+  { skip: ['edge', 'ie', 'safari'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {

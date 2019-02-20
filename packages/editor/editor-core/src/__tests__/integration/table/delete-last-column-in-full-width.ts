@@ -16,7 +16,7 @@ import {
 BrowserTestCase(
   'Delete last table column in full-width mode',
   // Only Chrome has logging support in BrowserStack now
-  { skip: ['ie', 'edge', 'safari', 'firefox'] },
+  { skip: ['ie', 'edge', 'safari'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {

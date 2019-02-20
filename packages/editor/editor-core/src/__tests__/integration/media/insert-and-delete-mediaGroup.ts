@@ -10,7 +10,7 @@ import {
     `insert-and-delete-mediaGroup.ts: Inserts and deletes media group on ${
       editor.name
     }`,
-    { skip: ['edge', 'ie', 'safari', 'firefox'] },
+    { skip: ['edge', 'ie', 'safari'] },
     async client => {
       const page = await goToEditorTestingExample(client);
       await mountEditor(page, {
