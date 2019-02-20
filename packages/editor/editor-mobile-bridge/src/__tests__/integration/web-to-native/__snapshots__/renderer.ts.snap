@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderer.ts renderer.ts: call onContentRendered() on native bridge. 1`] = `
+Array [
+  Object {},
+]
+`;
