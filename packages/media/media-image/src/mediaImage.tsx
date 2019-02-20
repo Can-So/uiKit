@@ -40,12 +40,10 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
   private get style() {
     const { width, height } = this.props;
 
-    return width && height
-      ? {
-          width: `${width}px`,
-          height: `${height}px`,
-        }
-      : {};
+    return {
+      ...(width && { width: `${width}px` }),
+      ...(height && { height: `${height}px` }),
+    };
   }
 
   render() {
