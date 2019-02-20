@@ -6,11 +6,6 @@ import { messages as textFormattingMessages } from '../../plugins/text-formattin
 import { messages as advancedTextFormattingMessages } from '../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
 import { messages as listsMessages } from '../../plugins/lists/messages';
 import { messages as textColorMessages } from '../../plugins/text-color/ui/ToolbarTextColor';
-import app, {
-  App,
-} from '../../../../../media/media-picker/src/popup/components/app';
-import { PopupUploadEventEmitter } from '../../../../../media/media-picker/src/components/types';
-
 export {
   setupMediaMocksProviders,
   editable,
@@ -80,12 +75,22 @@ export const initEditor = async (page, appearance: string) => {
   });
 };
 
+export enum Device {
+  Default = 'Default',
+  LaptopHiDPI = 'LaptopHiDPI',
+  LaptopMDPI = 'LaptopMDPI',
+  iPadPro = 'iPadPro',
+  iPad = 'iPad',
+  iPhonePlus = 'iPhonePlus',
+}
+
 export const deviceViewPorts = {
-  LaptopHiDPI: { width: 1440, height: 900 },
-  LaptopMDPI: { width: 1280, height: 800 },
-  iPadPro: { width: 1024, height: 1366 },
-  iPad: { width: 768, height: 1024 },
-  iPhonePlus: { width: 414, height: 736 },
+  [Device.Default]: { width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT },
+  [Device.LaptopHiDPI]: { width: 1440, height: 900 },
+  [Device.LaptopMDPI]: { width: 1280, height: 800 },
+  [Device.iPadPro]: { width: 1024, height: 1366 },
+  [Device.iPad]: { width: 768, height: 1024 },
+  [Device.iPhonePlus]: { width: 414, height: 736 },
 };
 
 function getEditorProps(appearance: Appearance) {
@@ -131,7 +136,10 @@ function getEditorProps(appearance: Appearance) {
   if (appearance === Appearance.comment) {
     return {
       ...enableAllEditorProps,
-      primaryToolbarComponents: true,
+      media: {
+        allowMediaSingle: false,
+        allowMediaGroup: true,
+      },
     };
   }
 
@@ -150,19 +158,33 @@ export enum Appearance {
   comment = 'comment',
 }
 
+type InitEditorWithADFOptions = {
+  appearance: Appearance;
+  adf?: Object;
+  device?: Device;
+};
+
 export const initEditorWithAdf = async (
   page,
-  options: {
-    adf: Object;
-    appearance: Appearance;
-  },
+  { appearance, adf = {}, device = Device.Default }: InitEditorWithADFOptions,
 ) => {
   const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
-  await page.goto(url);
+
+  const currentUrl = page.url();
+
+  if (currentUrl !== url) {
+    // We don't have to load the already existing page
+    await page.goto(url);
+  }
+
+  // Set the viewport to the right one
+  await page.setViewport(deviceViewPorts[device]);
+
+  //Mount the editor with the right attributes
   await mountEditor(page, {
-    appearance: options.appearance,
-    defaultValue: JSON.stringify(options.adf),
-    ...getEditorProps(options.appearance),
+    appearance: appearance,
+    defaultValue: JSON.stringify(adf),
+    ...getEditorProps(appearance),
   });
 };
 
