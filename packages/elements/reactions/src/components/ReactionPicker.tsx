@@ -96,7 +96,7 @@ export class ReactionPicker extends PureComponent<Props, State> {
     }
   };
 
-  private close(emojiId?: string) {
+  private close(_emojiId?: string) {
     this.setState({
       isOpen: false,
       showFullPicker: false,

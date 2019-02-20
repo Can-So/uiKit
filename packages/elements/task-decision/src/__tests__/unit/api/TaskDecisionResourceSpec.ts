@@ -504,7 +504,7 @@ describe('TaskDecisionResource', () => {
           matcher: 'end:tasks',
           method: 'PUT',
           name: 'set-task',
-          response: (url: any, options: any) => {
+          response: (_url: any, options: any) => {
             const body = JSON.parse(options.body);
             const { localId } = body;
 

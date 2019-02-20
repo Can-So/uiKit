@@ -3,13 +3,22 @@ export {
   InvitationsCapabilitiesRequest,
   InvitationsCapabilitiesResponse,
 } from '../api/InvitationsCapabilitiesResource';
-export * from './OriginTracing';
 export {
   ShareClient,
-  ShareResponse,
   ShareRequest,
+  ShareResponse,
 } from '../clients/ShareServiceClient';
-export { Content, Comment, MetaData } from './ShareEntities';
-export { ShareContentState, ShareError } from './ShareContentState';
-export { User } from './User';
 export { Client } from './Client';
+export * from './form';
+export * from './OriginTracing';
+export {
+  DialogContentState,
+  ShareContentState,
+  ShareError,
+} from './ShareContentState';
+export { Comment, Content, MetaData } from './ShareEntities';
+export { User } from './User';
+
+export type KeysOfType<T, TProp> = {
+  [P in keyof T]: T[P] extends TProp ? P : never
+}[keyof T];

@@ -91,7 +91,7 @@ export default class ResourcedItemList extends PureComponent<Props, State> {
     appearance: 'card',
   };
 
-  private mounted: boolean;
+  private mounted: boolean = false;
   private recentUpdatesId: string | undefined;
 
   constructor(props: Props) {
@@ -199,7 +199,7 @@ export default class ResourcedItemList extends PureComponent<Props, State> {
             onUpdate(combinedItems, items);
           }
         })
-        .catch(err => {
+        .catch(() => {
           if (!this.mounted) {
             return;
           }

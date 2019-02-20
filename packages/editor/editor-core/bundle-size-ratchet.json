@@ -3,88 +3,88 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 578472,
-      "gzipSize": 151004
+      "size": 594853,
+      "gzipSize": 156393
     }
   },
   {
     "id": "src.async",
     "name": "async",
     "stats": {
-      "size": 20545,
-      "gzipSize": 5331
+      "size": 21743,
+      "gzipSize": 5627
     }
   },
   {
     "id": "node_modules.main",
     "name": "node_modules [main]",
     "stats": {
-      "size": 706635,
-      "gzipSize": 205151
+      "size": 692741,
+      "gzipSize": 200907
     }
   },
   {
     "id": "node_modules.async",
     "name": "node_modules [async]",
     "stats": {
-      "size": 247222,
-      "gzipSize": 68883
+      "size": 255772,
+      "gzipSize": 71175
     }
   },
   {
     "id": "atlaskit.core.main",
     "name": "main",
     "stats": {
-      "size": 432325,
-      "gzipSize": 92825
+      "size": 427581,
+      "gzipSize": 92472
     }
   },
   {
     "id": "atlaskit.core.async",
     "name": "async",
     "stats": {
-      "size": 190274,
-      "gzipSize": 39724
+      "size": 198583,
+      "gzipSize": 41267
     }
   },
   {
     "id": "atlaskit.editor.main",
     "name": "main",
     "stats": {
-      "size": 119696,
-      "gzipSize": 29242
+      "size": 119936,
+      "gzipSize": 29062
     }
   },
   {
     "id": "atlaskit.elements.main",
     "name": "main",
     "stats": {
-      "size": 141155,
-      "gzipSize": 38367
+      "size": 141430,
+      "gzipSize": 38508
     }
   },
   {
     "id": "atlaskit.elements.async",
     "name": "async",
     "stats": {
-      "size": 36682,
-      "gzipSize": 10115
+      "size": 36787,
+      "gzipSize": 10112
     }
   },
   {
     "id": "atlaskit.media.main",
     "name": "main",
     "stats": {
-      "size": 237054,
-      "gzipSize": 54042
+      "size": 198810,
+      "gzipSize": 46510
     }
   },
   {
     "id": "atlaskit.media.async",
     "name": "async",
     "stats": {
-      "size": 765541,
-      "gzipSize": 190819
+      "size": 795685,
+      "gzipSize": 196465
     }
   },
   {
@@ -92,23 +92,23 @@
     "name": "main",
     "stats": {
       "size": 624,
-      "gzipSize": 366
+      "gzipSize": 367
     }
   },
   {
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 2208516,
-      "gzipSize": 584812
+      "size": 2168139,
+      "gzipSize": 576665
     }
   },
   {
     "id": "combined.async",
     "name": "async",
     "stats": {
-      "size": 1258529,
-      "gzipSize": 316665
+      "size": 1306675,
+      "gzipSize": 326658
     }
   }
 ]

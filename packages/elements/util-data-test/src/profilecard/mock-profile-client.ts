@@ -8,7 +8,7 @@ export default function getMockProfileClient(
 ): any {
   return class MockProfileClient extends BaseProfileClient {
     // eslint-disable-next-line class-methods-use-this
-    makeRequest(cloudId: string, userId: string) {
+    makeRequest(_cloudId: string, userId: string) {
       const timeout = random(1500) + 500;
       const matchError = userId.match(/^error:([0-9a-zA-Z\-]+)$/);
       const error = matchError && matchError[1];

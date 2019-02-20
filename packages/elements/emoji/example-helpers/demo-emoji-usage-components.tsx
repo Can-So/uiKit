@@ -4,11 +4,7 @@ import { PureComponent } from 'react';
 import { EmojiProvider } from '../src/api/EmojiResource';
 import ResourcedEmoji from '../src/components/common/ResourcedEmoji';
 import { localStoragePrefix } from '../src/constants';
-import {
-  EmojiDescription,
-  EmojiId,
-  OptionalEmojiDescription,
-} from '../src/types';
+import { EmojiDescription } from '../src/types';
 
 export interface EmojiUsageProps {
   emojiProvider: EmojiProvider;
@@ -137,7 +133,7 @@ export abstract class UsageShowAndClearComponent extends PureComponent<
     this.refreshFrequentlyUsedList();
   }
 
-  onSelection = (emojiId: EmojiId, emoji: OptionalEmojiDescription): void => {
+  onSelection = (): void => {
     // give the tracker a chance to write to the queue and local storage before updating state
     window.setTimeout(() => {
       this.refreshFrequentlyUsedList();

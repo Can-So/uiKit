@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { ExampleWrapper } from '../example-helpers/ExampleWrapper';
 import { OptionData, Value } from '../src';
 import { UserPicker } from '../src/components/UserPicker';
-import { isUser, isTeam } from '../src/components/utils';
+import { isTeam, isUser } from '../src/components/utils';
 
 type State = {
   value: OptionData[];
@@ -66,7 +66,7 @@ export default class Example extends React.PureComponent<Props, State> {
   private handleOnChange = (user: Value) => {
     this.setState(
       ({ value }) => {
-        if (!Array.isArray(user) && isUser(user)) {
+        if (!Array.isArray(user) && user && isUser(user)) {
           if (value.indexOf(user) === -1) {
             return {
               value: [...value, user],

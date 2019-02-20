@@ -26,7 +26,7 @@ export interface State {
 }
 
 export default class EmojiUploadComponent extends PureComponent<Props, State> {
-  private ref: EmojiUploadPicker | null;
+  private ref?: EmojiUploadPicker | null;
 
   constructor(props: Props) {
     super(props);

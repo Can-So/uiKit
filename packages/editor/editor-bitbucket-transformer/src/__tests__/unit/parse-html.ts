@@ -545,21 +545,74 @@ describe('BitbucketTransformer: parser', () => {
   });
 
   describe('mentions', () => {
-    it('should be parsed preserving display name and user id', () => {
+    ['mention', 'ap-mention'].forEach(mentionClass => {
+      it(`should be parsed preserving display name and user id for ${mentionClass}`, () => {
+        expect(
+          parse(
+            '<p>' +
+              'foo ' +
+              `<a href="/abodera/" rel="nofollow" title="@abodera" class="${mentionClass} mention-me">Artur Bodera</a>` +
+              ' bar' +
+              '</p>',
+          ),
+        ).toEqualDocument(
+          doc(
+            p(
+              'foo ',
+              mention({
+                text: '@Artur Bodera',
+                id: 'abodera',
+              })(),
+              ' bar',
+            ),
+          ),
+        );
+      });
+    });
+
+    ['mention', 'ap-mention'].forEach(mentionClass => {
+      it(`should prefer Atlassian ID over username if present, for ${mentionClass}`, () => {
+        expect(
+          parse(
+            '<p>' +
+              'foo ' +
+              `<a href="/abodera/" rel="nofollow" title="@abodera" class="${mentionClass} mention-me" data-atlassian-id="5c09bf77ec71bd223bbe866f">Artur Bodera</a>` +
+              ' bar' +
+              '</p>',
+          ),
+        ).toEqualDocument(
+          doc(
+            p(
+              'foo ',
+              mention({
+                text: '@Artur Bodera',
+                id: '{5c09bf77ec71bd223bbe866f}',
+              })(),
+              ' bar',
+            ),
+          ),
+        );
+      });
+    });
+
+    it('should keep Bitbucket mention span tags', () => {
       expect(
         parse(
           '<p>' +
-            'foo ' +
-            '<a href="/abodera/" rel="nofollow" title="@abodera" class="mention mention-me">Artur Bodera</a>' +
-            ' bar' +
+            'hi ' +
+            '<span class="ap-mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</span>' +
+            ' test' +
             '</p>',
         ),
       ).toEqualDocument(
         doc(
           p(
-            'foo ',
-            mention({ text: '@Artur Bodera', id: 'abodera' })(),
-            ' bar',
+            'hi ',
+            mention({
+              text: '@Scott Demo',
+              id: '{5c09bf77ec71bd223bbe866f}',
+            })(),
+            ' test',
           ),
         ),
       );

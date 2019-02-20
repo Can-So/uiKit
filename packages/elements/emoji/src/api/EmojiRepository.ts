@@ -144,15 +144,15 @@ const findEmojiIndex = (
 
 export default class EmojiRepository {
   private emojis: EmojiDescription[];
-  private fullSearch: Search;
-  private shortNameMap: EmojiByKey;
-  private idMap: EmojiByKey;
-  private asciiMap: Map<string, EmojiDescription>;
-  private dynamicCategoryList: CategoryId[];
+  private fullSearch!: Search;
+  private shortNameMap!: EmojiByKey;
+  private idMap!: EmojiByKey;
+  private asciiMap!: Map<string, EmojiDescription>;
+  private dynamicCategoryList!: CategoryId[];
   private static readonly defaultEmojiWeight: number = 1000000;
 
   // protected to allow subclasses to access (for testing and storybooks).
-  protected usageTracker: UsageFrequencyTracker;
+  protected usageTracker!: UsageFrequencyTracker;
 
   constructor(
     emojis: EmojiDescription[],

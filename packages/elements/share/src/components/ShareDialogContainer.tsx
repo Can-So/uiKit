@@ -6,16 +6,17 @@ import { ShareServiceClient } from '../clients/ShareServiceClient';
 import {
   Client,
   Content,
+  DialogContentState,
   InvitationsCapabilitiesProvider,
   InvitationsCapabilitiesResponse,
   MetaData,
   OriginTracing,
   OriginTracingFactory,
   ShareClient,
-  ShareContentState,
   ShareResponse,
 } from '../types';
 import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
+import { optionDataToUsers } from './utils';
 
 export type Props = {
   client?: Client;
@@ -36,7 +37,7 @@ export type State = {
   copyLinkOrigin: OriginTracing | null;
   prevShareLink: string | null;
   shareActionCount: number;
-  shareToAtlassianAccuntHoldersOrigin: OriginTracing | null;
+  shareToAtlassianAccountHoldersOrigin: OriginTracing | null;
   shareToNewUsersOrigin: OriginTracing | null;
 };
 
@@ -80,22 +81,28 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       copyLinkOrigin: null,
       prevShareLink: null,
       shareActionCount: 0,
-      shareToAtlassianAccuntHoldersOrigin: null,
+      shareToAtlassianAccountHoldersOrigin: null,
       shareToNewUsersOrigin: null,
     };
   }
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+  static getDerivedStateFromProps(
+    nextProps: Props,
+    prevState: State,
+  ): Partial<State> | null {
     // Whenever there is change in share link, new origins should be created
     // ***
     // memorization is recommended on React doc, but here the Origin Tracing does not reply on shareLink
     // in getDerivedStateFormProps it makes shareLink as determinant of renewal to stand out better
     // ***
-    if (prevState.prevShareLink !== nextProps.shareLink) {
+    if (
+      prevState.prevShareLink ||
+      prevState.prevShareLink !== nextProps.shareLink
+    ) {
       return {
         copyLinkOrigin: nextProps.originTracingFactory(),
         prevShareLink: nextProps.shareLink,
-        shareToAtlassianAccuntHoldersOrigin: nextProps.originTracingFactory(),
+        shareToAtlassianAccountHoldersOrigin: nextProps.originTracingFactory(),
         shareToNewUsersOrigin: nextProps.originTracingFactory(),
       };
     }
@@ -116,7 +123,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
           capabilities,
         });
       })
-      .catch(err => {
+      .catch(() => {
         // TODO: Send analytics event
       });
   };
@@ -124,7 +131,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
   handleSubmitShare = ({
     users,
     comment,
-  }: ShareContentState): Promise<ShareResponse> => {
+  }: DialogContentState): Promise<ShareResponse> => {
     const {
       originTracingFactory,
       productId,
@@ -142,7 +149,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       productId,
       tracking: {
         toAtlassianAccountHolders: {
-          atlOriginId: this.state.shareToAtlassianAccuntHoldersOrigin!.id,
+          atlOriginId: this.state.shareToAtlassianAccountHoldersOrigin!.id,
         },
         toNewUsers: {
           atlOriginId: this.state.shareToNewUsersOrigin!.id,
@@ -151,7 +158,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     };
 
     return this.client
-      .share(content, users, metaData, comment)
+      .share(content, optionDataToUsers(users), metaData, comment)
       .then((response: ShareResponse) => {
         const newShareCount = this.state.shareActionCount + 1;
         // TODO: send analytic event
@@ -159,7 +166,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
         // renew Origin Tracing Ids per share action succeeded
         this.setState({
           shareActionCount: newShareCount,
-          shareToAtlassianAccuntHoldersOrigin: originTracingFactory(),
+          shareToAtlassianAccountHoldersOrigin: originTracingFactory(),
           shareToNewUsersOrigin: originTracingFactory(),
         });
 

@@ -20,9 +20,8 @@ const toJavascriptString = (obj: object | string | any[]) => {
     });
     objString += '}';
     return objString;
-  } else if (typeof obj === 'string') {
-    return `'${obj}'`;
   }
+  return `${obj}`;
 };
 
 export interface Props {

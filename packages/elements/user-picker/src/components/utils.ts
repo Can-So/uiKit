@@ -14,11 +14,8 @@ import {
   Value,
 } from '../types';
 
-export const isUser = (option: Value): option is User =>
-  isSingle(option) && (option.type === undefined || option.type === UserType);
-
-export const isSingle = (option: Value): option is OptionData =>
-  !Array.isArray(option);
+export const isUser = (option: OptionData): option is User =>
+  option.type === undefined || option.type === UserType;
 
 export const isTeam = (option: OptionData): option is Team =>
   option.type === TeamType;

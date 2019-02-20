@@ -41,8 +41,11 @@ export function updateColumnWidth(view, cell, movedWidth, resizer) {
 export function applyColumnWidths(view, state, table, start) {
   let tr = view.state.tr;
   let map = TableMap.get(table);
+
   for (let i = 0; i < state.cols.length; i++) {
     const width = state.cols[i].width;
+    // we need to recalculate table node to pick up attributes from the previous loop iteration
+    table = tr.doc.nodeAt(start - 1);
 
     for (let row = 0; row < map.height; row++) {
       let mapIndex = row * map.width + i;
@@ -86,7 +89,7 @@ export function handleBreakoutContent(
     cellStyle,
   );
 
-  const state = resizeColumnTo(elem, colIdx, amount, node);
+  const state = resizeColumnTo(view, start, elem, colIdx, amount, node);
   updateControls(view.state);
   const tr = applyColumnWidths(view, state, node, start);
 
@@ -181,10 +184,19 @@ export function scaleTable(
     return;
   }
 
-  const state = scale(tableElem, node, prevNode, containerWidth, initialScale);
+  const start = pos + 1;
+  const state = scale(
+    view,
+    tableElem,
+    node,
+    start,
+    prevNode,
+    containerWidth,
+    initialScale,
+  );
 
   if (state) {
-    const tr = applyColumnWidths(view, state, node, pos + 1);
+    const tr = applyColumnWidths(view, state, node, start);
 
     if (tr.docChanged) {
       view.dispatch(tr);
@@ -200,8 +212,10 @@ export function scaleTable(
  * @param maxSize
  */
 function scale(
+  view: EditorView,
   tableElem: HTMLTableElement,
   node: PMNode,
+  start: number,
   prevNode: PMNode,
   containerWidth: number | undefined,
   initialScale?: boolean,
@@ -215,10 +229,11 @@ function scale(
   }
 
   const maxSize = getLayoutSize(node.attrs.layout, containerWidth);
-  const resizer = Resizer.fromDOM(tableElem, {
+  const resizer = Resizer.fromDOM(view, tableElem, {
     minWidth: tableCellMinWidth,
     maxSize,
     node,
+    start,
   });
 
   let newWidth = maxSize;
@@ -251,6 +266,8 @@ function scale(
  * @param node
  */
 export function resizeColumnTo(
+  view: EditorView,
+  start: number,
   elem: HTMLElement,
   colIdx: number,
   amount: number,
@@ -260,10 +277,11 @@ export function resizeColumnTo(
     elem = elem.parentNode as HTMLElement;
   }
 
-  const resizer = Resizer.fromDOM(elem as HTMLTableElement, {
+  const resizer = Resizer.fromDOM(view, elem as HTMLTableElement, {
     minWidth: tableCellMinWidth,
     maxSize: elem.offsetWidth,
     node: node,
+    start,
   });
 
   const newState = resizer.resize(colIdx, amount);

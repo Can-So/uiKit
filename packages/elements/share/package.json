@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/share",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "config": {
     "access": "private"
   },
@@ -28,12 +28,12 @@
   "dependencies": {
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/field-text-area": "^4.0.15",
-    "@atlaskit/form": "^5.1.0",
+    "@atlaskit/form": "^5.1.6",
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/inline-dialog": "^9.0.13",
     "@atlaskit/theme": "^7.0.3",
     "@atlaskit/tooltip": "^12.1.15",
-    "@atlaskit/user-picker": "^1.0.6",
+    "@atlaskit/user-picker": "^1.0.21",
     "@atlaskit/util-service-support": "^3.0.5",
     "memoize-one": "^3.0.1",
     "styled-components": "^3.2.6"
