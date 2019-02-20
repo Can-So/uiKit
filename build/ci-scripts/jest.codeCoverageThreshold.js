@@ -38,10 +38,10 @@ module.exports = {
     lines: 89,
   },
   'packages/media/media-picker/src': {
-    statements: 87,
-    branches: 73,
-    functions: 79,
-    lines: 87,
+    statements: 86,
+    branches: 72,
+    functions: 78,
+    lines: 86,
   },
   'packages/media/media-store/src': {
     statements: 91,
