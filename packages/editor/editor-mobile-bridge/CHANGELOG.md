@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.8.0
+- [minor] [e609e6d78c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e609e6d78c):
+
+  - FM-1464: Add callback to ReactRenderer.onComplete to notify native renderBridge
+
 ## 6.7.13
 - Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
   - @atlaskit/form@5.1.5

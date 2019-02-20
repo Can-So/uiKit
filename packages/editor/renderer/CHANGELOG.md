@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 38.0.8
+- [patch] [e609e6d78c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e609e6d78c):
+
+  - FM-1464: Add callback to ReactRenderer.onComplete to notify native renderBridge
+
 ## 38.0.7
 - Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
   - @atlaskit/editor-common@31.1.1
