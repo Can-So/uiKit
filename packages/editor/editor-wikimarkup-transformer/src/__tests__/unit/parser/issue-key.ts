@@ -6,15 +6,7 @@ describe('JIRA wiki markup - Issue key (smart card)', () => {
     ['should parse issue inside a paragraph', 'this ABC-10 is a smart card'],
     [
       'should parse more than one issue inside a paragraph',
-      'these ABC-10 and ABC-20 are smart cards',
-    ],
-    [
-      'should parse issue inside single quotes',
-      `this 'ABC-10' is a smart card`,
-    ],
-    [
-      'should parse issue inside double quotes',
-      'this "ABC-10" is a smart card',
+      'ABC-10 and ABC-20 are smart cards',
     ],
     ['should parse issue inside brackets', 'this [ABC-10] is a smart card'],
     ['should parse issue inside a h1', 'h1. smart card in the title ABC-10'],
@@ -33,6 +25,9 @@ describe('JIRA wiki markup - Issue key (smart card)', () => {
     ],
     ['should parse issue inside a list item', '- this ABC-10 is a smart card'],
     ['should parse issue inside a table cell', '|foo|ABC-10|'],
+    ['should not parse issue key mixed in a text', 'YXZABC-10'],
+    ['should not parse issue inside single quotes', `'ABC-10'`],
+    ['should not parse issue inside double quotes', '"ABC-10"'],
     [
       'should not parse issue inside a bold',
       '*this ABC-10 is an important smart card*',

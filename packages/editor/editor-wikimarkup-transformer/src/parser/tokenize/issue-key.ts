@@ -1,5 +1,6 @@
 import { Schema, Node as PMNode } from 'prosemirror-model';
 import { Token, TokenParser, Context, InlineCardConversion } from './';
+import { isNotBlank } from '../utils/text';
 
 interface Issue {
   key: string;
@@ -22,6 +23,15 @@ export const issueKey: TokenParser = ({ input, position, schema, context }) => {
 
   // This scenario happens when context doesn't has all the issues inside a markup
   if (!issue) {
+    return fallback(input, position);
+  }
+
+  const charBefore = input.charAt(position - 1);
+  const charAfter = input.charAt(position + issue.key.length);
+  if (
+    (isNotBlank(charBefore) && isNotSpace(charBefore)) ||
+    (isNotBlank(charAfter) && isNotSpace(charAfter))
+  ) {
     return fallback(input, position);
   }
 
@@ -48,6 +58,8 @@ const buildInlineCard = (schema: Schema, issue: Issue): PMNode[] => [
     url: `${issue.url}#icft=${issue.key}`,
   }),
 ];
+
+const isNotSpace = (char: string): boolean => !/\s/.test(char);
 
 export const buildIssueKeyRegex = (
   inlineCardConversion?: InlineCardConversion,
