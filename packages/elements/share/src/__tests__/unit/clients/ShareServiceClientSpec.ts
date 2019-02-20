@@ -20,14 +20,7 @@ describe('ShareServiceClientImpl', () => {
   ];
   let mockMetaData = {
     productId: 'confluence',
-    tracking: {
-      toAtlassianAccountHolders: {
-        atlOriginId: 'atlOrigin1',
-      },
-      toNewUsers: {
-        atlOriginId: 'atlOrigin2',
-      },
-    },
+    atlOriginId: 'atlOriginId',
   };
   let mockComment = {
     format: 'plain_text' as 'plain_text',
