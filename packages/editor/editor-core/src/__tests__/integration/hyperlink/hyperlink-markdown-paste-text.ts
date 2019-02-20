@@ -16,7 +16,7 @@ import {
       editor.name
     } editor`,
     {
-      skip: ['ie', 'edge', 'safari', 'firefox'],
+      skip: ['ie', 'edge', 'safari'],
     },
     async client => {
       const sample = new Page(client);

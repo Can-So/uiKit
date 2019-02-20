@@ -13,7 +13,7 @@ import {
 
 BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside blockquote',
-  { skip: ['ie', 'firefox'] },
+  { skip: ['ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });
@@ -28,7 +28,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside bulletList',
-  { skip: ['ie', 'firefox'] },
+  { skip: ['ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowLists: true });
@@ -42,7 +42,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside orderedList',
-  { skip: ['ie', 'firefox'] },
+  { skip: ['ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowLists: true });
@@ -57,7 +57,7 @@ BrowserTestCase(
 // ie keying in ; instead of : - browserstack issue
 BrowserTestCase(
   'emoji-2.ts: should be able remove emoji on backspace',
-  { skip: ['safari', 'ie', 'firefox', 'edge'] },
+  { skip: ['safari', 'ie', 'edge'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowLists: true });
@@ -74,7 +74,7 @@ BrowserTestCase(
 // IE has a bug opening picker inside task/decisions
 BrowserTestCase(
   'emoji-2.ts: should be able to select emoji by clicking inside decisions',
-  { skip: ['safari', 'ie', 'firefox'] },
+  { skip: ['safari', 'ie'] },
   async client => {
     const decisions = 'span[aria-label="Decision"]';
     const page = await goToEditorTestingExample(client);
@@ -91,7 +91,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'emoji-2.ts: should be able to change text with emoji into decisions',
-  { skip: ['ie', 'firefox'] },
+  { skip: ['ie'] },
   async client => {
     const decisions = 'li span[aria-label="Decision"]';
     const page = await goToEditorTestingExample(client);
