@@ -1,6 +1,4 @@
 import fileListUpdate from '../../fileListUpdate';
-import { expect } from 'chai';
-
 import { FILE_LIST_UPDATE } from '../../../actions';
 import { State, View } from '../../../domain';
 
@@ -29,8 +27,8 @@ describe('fileListUpdate() reducer', () => {
     };
 
     const newState = fileListUpdate(state, action);
-    expect(newState.view.items).to.be.deep.equal(items);
-    expect(newState.view.isLoading).to.be.equal(false);
+    expect(newState.view.items).toEqual(items);
+    expect(newState.view.isLoading).toBeFalsy();
   });
 
   it('does nothing if results came for the wrong folder', () => {
@@ -44,8 +42,8 @@ describe('fileListUpdate() reducer', () => {
     };
 
     const newState = fileListUpdate(state, action);
-    expect(newState.view.items).to.be.equal(undefined);
-    expect(newState.view.isLoading).to.be.equal(true);
+    expect(newState.view.items).toBeUndefined();
+    expect(newState.view.isLoading).toBeTruthy();
   });
 
   it('does nothing if results came for the wrong accountId', () => {
@@ -60,8 +58,8 @@ describe('fileListUpdate() reducer', () => {
 
     const newState = fileListUpdate(state, action);
 
-    expect(newState.view.items).to.be.equal(undefined);
-    expect(newState.view.isLoading).to.be.equal(true);
+    expect(newState.view.items).toBeUndefined();
+    expect(newState.view.isLoading).toBeTruthy();
   });
 
   it('does nothing if action have different type', () => {
@@ -77,7 +75,7 @@ describe('fileListUpdate() reducer', () => {
     };
 
     const newState = fileListUpdate(state, action);
-    expect(newState.view.items).to.be.equal(undefined);
-    expect(newState.view.isLoading).to.be.equal(true);
+    expect(newState.view.items).toBeUndefined();
+    expect(newState.view.isLoading).toBeTruthy();
   });
 });
