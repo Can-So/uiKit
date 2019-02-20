@@ -1,1 +1,0 @@
-- [ED-5910] Keep width & height on media node as number
