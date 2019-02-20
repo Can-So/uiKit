@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.13.6
+- [patch] [f500b2c81e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f500b2c81e):
+
+  - ED-6252 Change table floating toolbar to say 'Table options' instead of icon
+
 ## 98.13.5
 - [patch] [bc340694d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bc340694d2):
 
