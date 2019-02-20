@@ -14,7 +14,7 @@ import { selectors } from './_utils';
 BrowserTestCase(
   'quick-insert.ts: Insert panel via quick insert',
   { skip: ['edge', 'ie'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,

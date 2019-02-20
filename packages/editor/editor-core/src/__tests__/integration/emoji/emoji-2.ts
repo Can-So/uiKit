@@ -14,7 +14,7 @@ import {
 BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside blockquote',
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });
     await page.type(editable, '> ');
@@ -29,7 +29,7 @@ BrowserTestCase(
 BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside bulletList',
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowLists: true });
     await page.type(editable, '* ');
@@ -43,7 +43,7 @@ BrowserTestCase(
 BrowserTestCase(
   'emoji-2.ts: should be able to use emoji inside orderedList',
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowLists: true });
     await page.type(editable, '1. ');
@@ -58,7 +58,7 @@ BrowserTestCase(
 BrowserTestCase(
   'emoji-2.ts: should be able remove emoji on backspace',
   { skip: ['safari', 'ie', 'edge'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowLists: true });
     await page.type(editable, 'this ');
@@ -75,7 +75,7 @@ BrowserTestCase(
 BrowserTestCase(
   'emoji-2.ts: should be able to select emoji by clicking inside decisions',
   { skip: ['safari', 'ie'] },
-  async client => {
+  async (client: any) => {
     const decisions = 'span[aria-label="Decision"]';
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });
@@ -92,7 +92,7 @@ BrowserTestCase(
 BrowserTestCase(
   'emoji-2.ts: should be able to change text with emoji into decisions',
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const decisions = 'li span[aria-label="Decision"]';
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page' });
