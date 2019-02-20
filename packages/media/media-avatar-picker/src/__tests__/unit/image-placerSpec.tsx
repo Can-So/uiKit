@@ -8,9 +8,12 @@ import {
   mockLoadImageError,
   unMockLoadImage,
 } from '@atlaskit/media-test-helpers';
-jest.mock('../../image-placer/util', () => ({
+
+const mockImagePlacerUtil = {
   getCanvas: mockCanvas,
-}));
+};
+
+jest.mock('../../image-placer/util', () => mockImagePlacerUtil);
 
 import {
   ImagePlacer,
