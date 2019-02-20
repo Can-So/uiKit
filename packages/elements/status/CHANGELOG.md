@@ -1,5 +1,10 @@
 # @atlaskit/status
 
+## 0.3.5
+- [patch] [1856738865](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1856738865):
+
+  - Update status picker example to be interactive
+
 ## 0.3.4
 - [patch] [109cf449d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/109cf449d6):
 

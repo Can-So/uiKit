@@ -1,1 +1,0 @@
-- Update status picker example to be interactive
