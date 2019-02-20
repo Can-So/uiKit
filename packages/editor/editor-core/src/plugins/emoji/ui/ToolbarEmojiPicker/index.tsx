@@ -44,8 +44,8 @@ export interface State {
 const isDetachedElement = (el: HTMLElement) => !document.body.contains(el);
 
 export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
-  private pickerRef: ReactInstance;
-  private buttonRef: ToolbarButton | null;
+  private pickerRef?: ReactInstance;
+  private buttonRef?: ToolbarButton | null;
   private pluginState?: EmojiState;
 
   state: State = {
@@ -152,6 +152,9 @@ export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
   };
 
   private handleClickOutside = (e: MouseEvent) => {
+    if (!this.pickerRef) {
+      return;
+    }
     const picker = ReactDOM.findDOMNode(this.pickerRef);
     // Ignore click events for detached elements.
     // Workaround for FS-1322 - where two onClicks fire - one when the upload button is

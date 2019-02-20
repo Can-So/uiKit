@@ -25,10 +25,11 @@ export function inputRulePlugin(
       rules: [asciiEmojiRule],
     });
   }
+  return;
 }
 
 function initMatcher(providerFactory: ProviderFactory) {
-  const handleProvider = (name: string, provider?: Promise<EmojiProvider>) => {
+  const handleProvider = (_name: string, provider?: Promise<EmojiProvider>) => {
     if (!provider) {
       return;
     }

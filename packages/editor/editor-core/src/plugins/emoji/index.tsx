@@ -54,7 +54,6 @@ const emojiPlugin: EditorPlugin = {
     providerFactory,
     popupsMountPoint,
     popupsBoundariesElement,
-    popupsScrollableElement,
   }) {
     const renderNode = (providers: Providers) => {
       return (
@@ -79,9 +78,7 @@ const emojiPlugin: EditorPlugin = {
 
   secondaryToolbarComponent({
     editorView,
-    eventDispatcher,
     providerFactory,
-    appearance,
     popupsMountPoint,
     popupsBoundariesElement,
     popupsScrollableElement,

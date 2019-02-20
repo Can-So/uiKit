@@ -22,7 +22,7 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
     const regex = new RegExp(`(^|[\\s\(${leafNodeReplacementCharacter}]):$`);
     const emojiQueryRule = createInputRule(
       regex,
-      (state, match, start, end) => {
+      (state, _match, _start, _end) => {
         const emojisState = emojiPluginKey.getState(state) as EmojiState;
 
         if (!emojisState.emojiProvider) {
@@ -54,6 +54,7 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
   if (rules.length !== 0) {
     return inputRules({ rules });
   }
+  return;
 }
 
 export default inputRulePlugin;
