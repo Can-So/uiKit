@@ -6,17 +6,18 @@ import {
   defaultCollectionName,
 } from '@atlaskit/media-test-helpers';
 import { imageItem } from '../example-helpers';
-import { MediaViewer, MediaViewerItem } from '../src/index';
+import { MediaViewer } from '..';
+import { Identifier } from '@atlaskit/media-core';
 
 const context = createStorybookContext();
 
 export type State = {
-  selectedItem?: MediaViewerItem;
+  selectedItem?: Identifier;
 };
 
 export default class Example extends React.Component<{}, State> {
   state: State = { selectedItem: undefined };
-  setItem = (selectedItem: MediaViewerItem) => () => {
+  setItem = (selectedItem: Identifier) => () => {
     this.setState({ selectedItem });
   };
 

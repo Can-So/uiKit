@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Component } from 'react';
 import {
-  Identifier,
   Card,
   CardAction,
   CardOnClickCallback,
@@ -12,7 +11,7 @@ import {
   defaultImageCardDimensions,
   CardView,
 } from '@atlaskit/media-card';
-import { Context } from '@atlaskit/media-core';
+import { Context, Identifier } from '@atlaskit/media-core';
 import { FilmstripView } from './filmstripView';
 import { generateIdentifierKey } from './utils/generateIdentifierKey';
 

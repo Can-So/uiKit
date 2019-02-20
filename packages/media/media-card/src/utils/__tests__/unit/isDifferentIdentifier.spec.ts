@@ -1,5 +1,8 @@
-import { isDifferentIdentifier } from '../../identifier';
-import { FileIdentifier, ExternalImageIdentifier } from '../../../root';
+import {
+  FileIdentifier,
+  ExternalImageIdentifier,
+  isDifferentIdentifier,
+} from '@atlaskit/media-core';
 
 describe('isDifferentIdentifier()', () => {
   describe('file identifier', () => {

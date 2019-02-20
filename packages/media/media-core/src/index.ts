@@ -24,3 +24,4 @@ export * from './fileState';
 export * from './utils/getMediaTypeFromMimeType';
 export * from './context/fileStreamCache';
 export type ImageResizeMode = 'crop' | 'fit' | 'full-fit' | 'stretchy-fit';
+export * from './identifier';

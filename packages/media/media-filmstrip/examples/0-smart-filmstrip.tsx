@@ -9,11 +9,16 @@ import {
   externalImageIdentifier,
   defaultCollectionName,
 } from '@atlaskit/media-test-helpers';
-import { CardEvent, FileIdentifier, CardAction } from '@atlaskit/media-card';
+import { CardEvent, CardAction } from '@atlaskit/media-card';
 import EditorCloseIcon from '@atlaskit/icon/glyph/editor/close';
 import { Filmstrip, FilmstripItem } from '../src';
 import { ExampleWrapper, FilmstripWrapper } from '../example-helpers/styled';
-import { FileItem, UploadableFile, Context } from '@atlaskit/media-core';
+import {
+  FileItem,
+  UploadableFile,
+  Context,
+  FileIdentifier,
+} from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 
 export interface ExampleState {

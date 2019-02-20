@@ -1,0 +1,10 @@
+{
+  "releases": [{ "name": "@atlaskit/media-viewer", "type": "major" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/media-picker",
+      "type": "patch",
+      "dependencies": ["@atlaskit/media-viewer"]
+    }
+  ]
+}

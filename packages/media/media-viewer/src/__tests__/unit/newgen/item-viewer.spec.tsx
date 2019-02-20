@@ -12,9 +12,10 @@ import { Observable } from 'rxjs';
 import Spinner from '@atlaskit/spinner';
 import Button from '@atlaskit/button';
 import {
-  MediaItemType,
   Context,
   ProcessedFileState,
+  Identifier,
+  FileIdentifier,
 } from '@atlaskit/media-core';
 import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import {
@@ -28,16 +29,15 @@ import { ImageViewer } from '../../../newgen/viewers/image';
 import { VideoViewer } from '../../../newgen/viewers/video';
 import { AudioViewer } from '../../../newgen/viewers/audio';
 import { DocViewer } from '../../../newgen/viewers/doc';
-import { Identifier } from '../../../newgen/domain';
 import {
   name as packageName,
   version as packageVersion,
 } from '../../../../package.json';
 
-const identifier = {
+const identifier: any = {
   id: 'some-id',
   occurrenceKey: 'some-custom-occurrence-key',
-  type: 'file' as MediaItemType,
+  mediaItemType: 'file',
   collectionName: 'some-collection',
 };
 
@@ -56,7 +56,7 @@ function mountComponent(context: Context, identifier: Identifier) {
   return { el, instance };
 }
 
-function mountBaseComponent(context: Context, identifier: Identifier) {
+function mountBaseComponent(context: Context, identifier: FileIdentifier) {
   const createAnalyticsEventSpy = jest.fn();
   createAnalyticsEventSpy.mockReturnValue({ fire: jest.fn() });
   const el: ReactWrapper<

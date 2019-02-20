@@ -7,12 +7,12 @@ import {
   CardEvent,
   CardAction,
   CardEventHandler,
-  FileIdentifier,
 } from '@atlaskit/media-card';
 import {
   Context,
   FileItem,
   FileDetails,
+  FileIdentifier,
   getMediaTypeFromMimeType,
 } from '@atlaskit/media-core';
 import Spinner from '@atlaskit/spinner';

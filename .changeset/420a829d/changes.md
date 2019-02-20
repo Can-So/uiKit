@@ -1,0 +1,1 @@
+- Require Identifier type from media-core instead of media-card

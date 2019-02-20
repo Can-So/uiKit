@@ -3,15 +3,16 @@ import { Observable, ReplaySubject } from 'rxjs';
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import { fakeContext, nextTick } from '@atlaskit/media-test-helpers';
-import { Context, FileState, FileDetails } from '@atlaskit/media-core';
+import {
+  Context,
+  FileState,
+  FileDetails,
+  FileIdentifier,
+  ExternalImageIdentifier,
+} from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
-import {
-  CardAction,
-  CardProps,
-  FileIdentifier,
-  CardDimensions,
-} from '../../../src';
+import { CardAction, CardProps, CardDimensions } from '../../../src';
 
 import { CardView } from '../../../src/root/cardView';
 
@@ -22,7 +23,6 @@ import {
   getDataURIFromFileState,
   FilePreview,
 } from '../../../src/utils/getDataURIFromFileState';
-import { ExternalImageIdentifier } from '../../root';
 import { InlinePlayer } from '../../../src/root/inlinePlayer';
 
 describe('Card', () => {
