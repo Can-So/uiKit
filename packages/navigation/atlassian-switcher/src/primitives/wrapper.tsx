@@ -2,9 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { gridSize, colors } from '@atlaskit/theme';
 import { ManageButton } from './';
-import {
-  withAnalyticsEvents,
-} from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { createAndFireNavigationEvent } from '../utils/analytics';
 
 const Wrapper = styled.div`

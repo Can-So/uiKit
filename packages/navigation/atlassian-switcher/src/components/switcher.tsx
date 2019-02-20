@@ -21,7 +21,10 @@ import {
   LicenseInformationDataStructure,
 } from '../providers/types';
 import { RecentContainersDataStructure } from '../providers/instance-data-providers';
-import { analyticsAttributes, NavigationAnalyticsContext } from '../utils/analytics';
+import {
+  analyticsAttributes,
+  NavigationAnalyticsContext,
+} from '../utils/analytics';
 
 interface SwitcherProps {
   cloudId: string;
@@ -35,18 +38,20 @@ interface SwitcherProps {
   isXFlowEnabled: ChildrenProps<boolean>;
 }
 
-const getAnalyticsContext = (links: any, extraLinks: number) => analyticsAttributes({
-  itemsCount:
-    links.admin.length +
-    links.products.length +
-    links.custom.length +
-    links.recent.length +
-    extraLinks,
-});
+const getAnalyticsContext = (links: any, extraLinks: number) =>
+  analyticsAttributes({
+    itemsCount:
+      links.admin.length +
+      links.products.length +
+      links.custom.length +
+      links.recent.length +
+      extraLinks,
+  });
 
-const getExtraItemAnalyticsContext = (index: number) => analyticsAttributes({
-  groupItemIndex: index,
-});
+const getExtraItemAnalyticsContext = (index: number) =>
+  analyticsAttributes({
+    groupItemIndex: index,
+  });
 
 export default class Switcher extends React.Component<SwitcherProps> {
   triggerXFlow = () => {

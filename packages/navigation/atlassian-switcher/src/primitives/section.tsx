@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { gridSize, typography } from '@atlaskit/theme';
 import styled from 'styled-components';
-import { analyticsAttributes, withAnalyticsContextData } from '../utils/analytics';
+import {
+  analyticsAttributes,
+  withAnalyticsContextData,
+} from '../utils/analytics';
 
 const SectionContainer = styled.section`
   padding: ${gridSize()}px 0;
@@ -25,7 +28,7 @@ type SectionAnalyticsContext = {
   attributes: {
     group: string;
     groupItemsCount: number;
-  }
+  };
 };
 
 const Section = (props: SectionProps) => {
@@ -50,8 +53,9 @@ const Section = (props: SectionProps) => {
 };
 
 export default withAnalyticsContextData<SectionProps, SectionAnalyticsContext>(
-  props => analyticsAttributes({
-    group: props.id,
-    groupItemsCount: React.Children.count(props.children),
-  }),
+  props =>
+    analyticsAttributes({
+      group: props.id,
+      groupItemsCount: React.Children.count(props.children),
+    }),
 )(Section);
