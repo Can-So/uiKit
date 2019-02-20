@@ -12,6 +12,7 @@ import {
   MetaData,
   OriginTracing,
   OriginTracingFactory,
+  ShareButtonStyle,
   ShareClient,
   ShareResponse,
 } from '../types';
@@ -19,6 +20,7 @@ import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 import { optionDataToUsers } from './utils';
 
 export type Props = {
+  buttonStyle?: ShareButtonStyle;
   client?: Client;
   cloudId: string;
   formatCopyLink: (origin: OriginTracing, link: string) => string;
@@ -189,6 +191,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
 
   render() {
     const {
+      buttonStyle,
       formatCopyLink,
       loadUserOptions,
       shareLink,
@@ -198,6 +201,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     const copyLink = formatCopyLink(this.state.copyLinkOrigin!, shareLink);
     return (
       <ShareDialogWithTrigger
+        buttonStyle={buttonStyle}
         capabilities={this.state.capabilities}
         copyLink={copyLink}
         loadUserOptions={loadUserOptions}

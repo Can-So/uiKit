@@ -9,6 +9,7 @@ import {
   KeysOfType,
   MetaData,
   OriginTracing,
+  ShareButtonStyle,
   User,
 } from '../src/types';
 
@@ -95,6 +96,7 @@ const client: Client = {
 
 export default () => (
   <ShareDialogContainer
+    buttonStyle={ShareButtonStyle.IconWithText}
     client={client}
     cloudId="12345-12345-12345-12345"
     loadUserOptions={loadUserOptions}
