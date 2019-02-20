@@ -5,6 +5,7 @@ import {
   a,
   code_block,
   code,
+  EditorTestCardProvider,
 } from '@atlaskit/editor-test-helpers';
 import {
   setLinkHref,
@@ -18,11 +19,21 @@ import {
   stateKey as hyperlinkStateKey,
   LinkAction,
 } from '../../../../plugins/hyperlink/pm-plugins/main';
+import { pluginKey as cardPluginKey } from '../../../../plugins/card/pm-plugins/main';
 
 describe('hyperlink commands', () => {
   const createEditor = createEditorFactory();
+  const cardProvider = new EditorTestCardProvider();
   const editor = doc =>
-    createEditor({ doc, editorProps: { allowCodeBlocks: true } });
+    createEditor({
+      doc,
+      editorProps: {
+        allowCodeBlocks: true,
+        UNSAFE_cards: {
+          provider: Promise.resolve(cardProvider),
+        },
+      },
+    });
 
   describe('#setLinkHref', () => {
     it('should not set the link href when pos is not inside a link node', () => {
@@ -157,6 +168,26 @@ describe('hyperlink commands', () => {
       expect(view.state.doc).toEqualDocument(
         doc(p(a({ href: 'mailto:scott@google.com' })('scott@google.com'))),
       );
+    });
+    it('should attempt to queue the url with the card plugin', () => {
+      const { editorView: view, sel } = editor(doc(p('{<>}')));
+
+      expect(
+        insertLink(sel, sel, 'http://www.atlassian.com/')(
+          view.state,
+          view.dispatch,
+        ),
+      ).toBe(true);
+      expect(cardPluginKey.getState(view.state)).toEqual({
+        requests: [
+          {
+            url: 'http://www.atlassian.com/',
+            pos: 1,
+            appearance: 'inline',
+          },
+        ],
+        provider: null, // cardProvider would have been set yet
+      });
     });
   });
   describe('#removeLink', () => {

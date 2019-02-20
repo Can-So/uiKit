@@ -16,6 +16,7 @@ import {
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
 } from '../analytics';
+import { queueCardsFromChangedTr } from '../card/pm-plugins/doc';
 
 const isLinkAtPos = (pos: number) => (state: EditorState): boolean => {
   const text = state.doc.nodeAt(pos);
@@ -91,6 +92,8 @@ export function insertLink(
         tr.addMark(from, to, link.create({ href: normalizeUrl(href) }));
         tr.setSelection(Selection.near(tr.doc.resolve(to)));
       }
+
+      queueCardsFromChangedTr(state, tr);
 
       if (dispatch) {
         tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR);
