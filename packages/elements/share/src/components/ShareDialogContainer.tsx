@@ -123,7 +123,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
           capabilities,
         });
       })
-      .catch(err => {
+      .catch(() => {
         // TODO: Send analytics event
       });
   };

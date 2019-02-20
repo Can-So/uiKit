@@ -21,7 +21,7 @@ class PresetResultComparator implements EmojiComparator {
     this.result = result;
   }
 
-  compare(e1: EmojiDescription, e2: EmojiDescription): number {
+  compare(_e1: EmojiDescription, _e2: EmojiDescription): number {
     return this.result;
   }
 }

@@ -87,7 +87,7 @@ class ReactionWithoutAnalytics extends PureComponent<
 
   static displayName = 'Reaction';
 
-  private mounted: boolean;
+  private mounted: boolean = false;
   private hoverStart: number | undefined;
 
   constructor(props: Props & WithAnalyticsEventProps) {

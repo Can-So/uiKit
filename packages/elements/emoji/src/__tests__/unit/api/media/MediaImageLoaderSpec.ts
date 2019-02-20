@@ -76,7 +76,7 @@ describe.skip('MediaImageLoader', () => {
       return Promise.all([
         mediaImageLoader.loadMediaImage(mediaEmojiImagePath),
         mediaImageLoader.loadMediaImage(mediaEmojiImagePath),
-      ]).then(values => {
+      ]).then(() => {
         expect(
           fetchMock.calls('media-emoji').length,
           'multiple calls for the same url',
@@ -252,7 +252,7 @@ describe.skip('MediaImageLoader', () => {
       mediaImageLoader
         .loadMediaImage(mediaEmojiImagePath)
         .then(() => done.fail('Promise should be rejected.'))
-        .catch(err => {
+        .catch(() => {
           expect(
             fetchMock.calls('media-emoji').length,
             'Called twice',

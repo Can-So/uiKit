@@ -26,7 +26,7 @@ const listenerHandlerNext = (e: UIAnalyticsEventInterface) => {
 };
 
 const handler = (
-  mentionId: string,
+  _mentionId: string,
   text: string,
   event?: any,
   analytics?: any,

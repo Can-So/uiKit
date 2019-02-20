@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StatusPicker } from '../src';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import frLocaleData from 'react-intl/locale-data/fr';
+import * as frLocaleData from 'react-intl/locale-data/fr';
 import fr from '../src/i18n/fr';
 
 addLocaleData(frLocaleData);

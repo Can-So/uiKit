@@ -57,8 +57,8 @@ export interface Items {
 
 export default class MentionList extends React.PureComponent<Props, State> {
   private lastMousePosition: Position | undefined;
-  private scrollable: Scrollable | null;
-  private items: Items;
+  private scrollable?: Scrollable | null;
+  private items!: Items;
 
   constructor(props: Props) {
     super(props);

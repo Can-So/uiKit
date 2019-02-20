@@ -19,7 +19,7 @@ class EmojiTypeAheadTextInput extends Component<
   TypeaheadProps,
   TypeaheadState
 > {
-  private emojiTypeAheadRef: EmojiTypeAhead | null;
+  private emojiTypeAheadRef?: EmojiTypeAhead | null;
 
   static defaultProps = {
     onSelection: () => {},

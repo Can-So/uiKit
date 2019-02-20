@@ -158,7 +158,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps: Props) {
     const prevEmojiProvider = prevProps.emojiProvider;
     const currentEmojiProvider = this.props.emojiProvider;
 
@@ -175,7 +175,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     }
   }
 
-  onEmojiActive = (emojiId: EmojiId, emoji?: EmojiDescription) => {
+  onEmojiActive = (_emojiId: EmojiId, emoji?: EmojiDescription) => {
     if (this.state.selectedEmoji !== emoji) {
       this.setState({
         selectedEmoji: emoji,
@@ -460,7 +460,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     uploadEmoji(upload, emojiProvider, errorSetter, onSuccess, onFailure);
   };
 
-  private onTriggerDelete = (emojiId: EmojiId, emoji?: EmojiDescription) => {
+  private onTriggerDelete = (_emojiId: EmojiId, emoji?: EmojiDescription) => {
     this.setState({ emojiToDelete: emoji });
   };
 

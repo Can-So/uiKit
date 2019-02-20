@@ -14,7 +14,7 @@ export interface Props {
  * Simple implementation of popup while waiting for ak-inline-dialog
  */
 export default class Popup extends React.PureComponent<Props, {}> {
-  private popup: HTMLElement;
+  private popup?: HTMLElement | null;
 
   static defaultProps = {
     relativePosition: 'auto',
@@ -36,8 +36,10 @@ export default class Popup extends React.PureComponent<Props, {}> {
   }
 
   componentWillUnmount() {
-    ReactDOM.unmountComponentAtNode(this.popup);
-    document.body.removeChild(this.popup);
+    if (this.popup) {
+      ReactDOM.unmountComponentAtNode(this.popup);
+      document.body.removeChild(this.popup);
+    }
   }
 
   _applyBelowPosition() {
@@ -47,9 +49,11 @@ export default class Popup extends React.PureComponent<Props, {}> {
       const box = targetNode.getBoundingClientRect();
       const top = box.bottom + (this.props.offsetY || 0);
       const left = box.left + (this.props.offsetX || 0);
-      this.popup.style.top = `${top}px`;
-      this.popup.style.bottom = '';
-      this.popup.style.left = `${left}px`;
+      if (this.popup) {
+        this.popup.style.top = `${top}px`;
+        this.popup.style.bottom = '';
+        this.popup.style.left = `${left}px`;
+      }
     }
   }
 
@@ -60,9 +64,11 @@ export default class Popup extends React.PureComponent<Props, {}> {
       const box = targetNode.getBoundingClientRect();
       const bottom = window.innerHeight - box.top + (this.props.offsetY || 0);
       const left = box.left + (this.props.offsetX || 0);
-      this.popup.style.top = '';
-      this.popup.style.bottom = `${bottom}px`;
-      this.popup.style.left = `${left}px`;
+      if (this.popup) {
+        this.popup.style.top = '';
+        this.popup.style.bottom = `${bottom}px`;
+        this.popup.style.left = `${left}px`;
+      }
     }
   }
 
@@ -84,13 +90,15 @@ export default class Popup extends React.PureComponent<Props, {}> {
         }
       }
     }
-    if (this.props.zIndex) {
+    if (this.props.zIndex && this.popup) {
       this.popup.style.zIndex = `${this.props.zIndex}`;
     }
   }
 
   _renderContent() {
-    ReactDOM.render(this.props.children, this.popup);
+    if (this.popup) {
+      ReactDOM.render(this.props.children, this.popup);
+    }
   }
 
   render() {
