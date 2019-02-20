@@ -3,8 +3,8 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 594853,
-      "gzipSize": 156393
+      "size": 594866,
+      "gzipSize": 156415
     }
   },
   {
@@ -20,7 +20,7 @@
     "name": "node_modules [main]",
     "stats": {
       "size": 692741,
-      "gzipSize": 200907
+      "gzipSize": 200909
     }
   },
   {
@@ -36,7 +36,7 @@
     "name": "main",
     "stats": {
       "size": 427581,
-      "gzipSize": 92472
+      "gzipSize": 92477
     }
   },
   {
@@ -44,7 +44,7 @@
     "name": "async",
     "stats": {
       "size": 198583,
-      "gzipSize": 41267
+      "gzipSize": 41269
     }
   },
   {
@@ -60,7 +60,7 @@
     "name": "main",
     "stats": {
       "size": 141430,
-      "gzipSize": 38508
+      "gzipSize": 38504
     }
   },
   {
@@ -68,7 +68,7 @@
     "name": "async",
     "stats": {
       "size": 36787,
-      "gzipSize": 10112
+      "gzipSize": 10110
     }
   },
   {
@@ -99,8 +99,8 @@
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 2168139,
-      "gzipSize": 576665
+      "size": 2168152,
+      "gzipSize": 576565
     }
   },
   {
@@ -108,7 +108,7 @@
     "name": "async",
     "stats": {
       "size": 1306675,
-      "gzipSize": 326658
+      "gzipSize": 326657
     }
   }
 ]
