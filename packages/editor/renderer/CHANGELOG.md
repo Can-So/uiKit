@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 39.0.1
+- [patch] [ca17040178](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca17040178):
+
+  - ED-6243: Dont use breakpoint width calculations for tables in renderer
+
 ## 39.0.0
 - [patch] [5b5ae91921](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b5ae91921):
 
