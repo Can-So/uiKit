@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { editorShowImage, EDITOR_SHOW_IMAGE } from '../../editorShowImage';
 
 describe('editorShowImage action creator', () => {
@@ -11,7 +9,7 @@ describe('editorShowImage action creator', () => {
 
   it('should create action with both imageUrl and originalFile if all parameters specified', () => {
     const action = editorShowImage(imageUrl, originalFile);
-    expect(action).to.be.deep.equal({
+    expect(action).toEqual({
       type: EDITOR_SHOW_IMAGE,
       imageUrl,
       originalFile,

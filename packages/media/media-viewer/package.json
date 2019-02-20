@@ -53,11 +53,9 @@
     "@atlaskit/modal-dialog": "^7.2.1",
     "@types/enzyme": "^3.1.15",
     "@types/query-string": "^4.3.1",
-    "@types/sinon-chai": "^2.7.27",
     "enzyme": "^3.7.0",
     "jsverify": "^0.8.3",
     "react-dom": "^16.4.2",
-    "react-intl": "^2.6.0",
-    "sinon-chai": "^2.9.0"
+    "react-intl": "^2.6.0"
   }
 }

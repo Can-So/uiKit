@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { editorShowLoading } from '../../editorShowLoading';
 
 describe('editorShowLoading action creator', () => {
@@ -10,7 +8,7 @@ describe('editorShowLoading action creator', () => {
 
   it('should create action with type and file', () => {
     const action = editorShowLoading(originalFile);
-    expect(action).to.deep.equal({
+    expect(action).toEqual({
       type: 'EDITOR_SHOW_LOADING',
       originalFile,
     });

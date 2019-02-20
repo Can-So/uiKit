@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import editorShowImage from '../../editorShowImage';
 import { EDITOR_SHOW_IMAGE } from '../../../actions/editorShowImage';
 
@@ -23,7 +21,7 @@ describe('editorShowImage() reducer', () => {
     const newState = editorShowImage(oldState, {
       type: 'SOME_OTHER_TYPE',
     } as any);
-    expect(newState).to.deep.equal(stateBase);
+    expect(newState).toEqual(stateBase);
   });
 
   it('sets imageUrl and originalFile', () => {
@@ -35,7 +33,7 @@ describe('editorShowImage() reducer', () => {
       originalFile: newOriginalFile,
     });
 
-    expect(newState).to.deep.equal({
+    expect(newState).toEqual({
       ...stateBase,
       editorData: {
         imageUrl: newImageUrl,
@@ -58,7 +56,7 @@ describe('editorShowImage() reducer', () => {
       originalFile: newOriginalFile,
     });
 
-    expect(newState).to.deep.equal({
+    expect(newState).toEqual({
       ...stateBase,
       editorData: {
         imageUrl: newImageUrl,
@@ -80,7 +78,7 @@ describe('editorShowImage() reducer', () => {
       imageUrl: newImageUrl,
     });
 
-    expect(newState).to.deep.equal({
+    expect(newState).toEqual({
       ...stateBase,
       editorData: {
         imageUrl: newImageUrl,

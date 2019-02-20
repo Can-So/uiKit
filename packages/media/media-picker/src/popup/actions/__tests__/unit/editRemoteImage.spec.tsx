@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { editRemoteImage, EDIT_REMOTE_IMAGE } from '../../editRemoteImage';
 
 describe('editRemoteImage action creator', () => {
@@ -14,7 +12,7 @@ describe('editRemoteImage action creator', () => {
 
   it('should create action with item and collection name', () => {
     const action = editRemoteImage(mediaItem, collectionName);
-    expect(action).to.deep.equal({
+    expect(action).toEqual({
       type: EDIT_REMOTE_IMAGE,
       item: mediaItem,
       collectionName,
