@@ -1,5 +1,17 @@
 # @atlaskit/editor-common
 
+## 32.0.0
+- [patch] [5b5ae91921](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b5ae91921):
+
+  - Require Identifier type from media-core instead of media-card
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+- Updated dependencies [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):
+  - @atlaskit/emoji@55.0.0
+  - @atlaskit/media-card@54.0.0
+  - @atlaskit/editor-json-transformer@4.1.10
+  - @atlaskit/editor-test-helpers@6.3.22
+  - @atlaskit/media-core@27.1.0
+
 ## 31.1.1
 - Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
   - @atlaskit/media-core@27.0.2

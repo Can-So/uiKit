@@ -1,1 +1,0 @@
-- Use Identifier from media-core instead of media-card

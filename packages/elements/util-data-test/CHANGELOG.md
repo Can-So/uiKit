@@ -1,5 +1,10 @@
 # @atlaskit/util-data-test
 
+## 10.2.1
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+  - @atlaskit/emoji@55.0.0
+  - @atlaskit/task-decision@11.2.1
+
 ## 10.2.0
 - [minor] [1d19234fbd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d19234fbd):
 

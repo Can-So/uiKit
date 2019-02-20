@@ -1,1 +1,0 @@
-- Remove custom MediaViewerItem + Identifier types and use the one from media-core as part of public api
