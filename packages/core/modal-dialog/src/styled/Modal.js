@@ -90,6 +90,7 @@ export const PositionerRelative = styled.div`
   max-width: ${dialogWidth};
   z-index: ${layers.modal};
   pointer-events: none;
+
   @media (min-width: 320px) and (max-width: 480px) {
     margin-top: 50%;
     margin-left: 10px;
