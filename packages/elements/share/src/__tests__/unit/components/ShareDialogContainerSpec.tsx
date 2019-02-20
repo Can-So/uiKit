@@ -130,7 +130,11 @@ describe('ShareDialogContainer', () => {
   });
 
   it('should have default this.client if props.client is not given', () => {
-    const newWrapper = shallow<ShareDialogContainer>(
+    const newWrapper: ShallowWrapper<
+      Props,
+      State,
+      ShareDialogContainer
+    > = shallow<ShareDialogContainer>(
       <ShareDialogContainer
         cloudId={mockCloudId}
         loadUserOptions={mockLoadUserOptions}
