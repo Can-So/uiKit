@@ -1,0 +1,1 @@
+- Initial version of the WidthDetector component, modeled on the SizeDetector component.
