@@ -188,10 +188,15 @@ export const initEditorWithAdf = async (
   });
 };
 
-export const initFullPageEditorWithAdf = async (page, adf: Object) => {
+export const initFullPageEditorWithAdf = async (
+  page,
+  adf: Object,
+  device?: Device,
+) => {
   await initEditorWithAdf(page, {
     adf,
     appearance: Appearance.fullPage,
+    device,
   });
 };
 
