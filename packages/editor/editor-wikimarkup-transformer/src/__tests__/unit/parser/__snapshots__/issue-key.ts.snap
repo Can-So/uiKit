@@ -225,7 +225,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -252,7 +252,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -279,7 +279,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -306,7 +306,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -333,7 +333,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -360,7 +360,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -388,7 +388,7 @@ Object {
                 Object {
                   "attrs": Object {
                     "data": null,
-                    "url": "https://instance.atlassian.net/browse/ABC-10",
+                    "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
                   },
                   "type": "inlineCard",
                 },
@@ -432,7 +432,7 @@ Object {
             Object {
               "attrs": Object {
                 "data": null,
-                "url": "https://instance.atlassian.net/browse/ABC-10",
+                "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
               },
               "type": "inlineCard",
             },
@@ -468,7 +468,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -503,7 +503,7 @@ Object {
             Object {
               "attrs": Object {
                 "data": null,
-                "url": "https://instance.atlassian.net/browse/ABC-10",
+                "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
               },
               "type": "inlineCard",
             },
@@ -572,7 +572,7 @@ Object {
                     Object {
                       "attrs": Object {
                         "data": null,
-                        "url": "https://instance.atlassian.net/browse/ABC-10",
+                        "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
                       },
                       "type": "inlineCard",
                     },
@@ -633,7 +633,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -661,7 +661,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -689,7 +689,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-10",
+            "url": "https://instance.atlassian.net/browse/ABC-10#icft=ABC-10",
           },
           "type": "inlineCard",
         },
@@ -700,7 +700,7 @@ Object {
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://instance.atlassian.net/browse/ABC-20",
+            "url": "https://instance.atlassian.net/browse/ABC-20#icft=ABC-20",
           },
           "type": "inlineCard",
         },
