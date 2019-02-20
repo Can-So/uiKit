@@ -5,7 +5,7 @@ import { closeDatePicker, openDatePicker } from './actions';
 import * as keymaps from '../../keymaps';
 import { pluginKey, DateState } from './plugin';
 
-export function keymapPlugin(schema: Schema): Plugin {
+export function keymapPlugin(_schema: Schema): Plugin {
   const list = {};
 
   keymaps.bindKeymapWithCommand(
