@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@atlaskit/width-detector", "type": "minor" }],
-  "dependents": []
-}
