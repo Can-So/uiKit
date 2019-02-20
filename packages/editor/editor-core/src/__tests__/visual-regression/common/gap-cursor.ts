@@ -1,8 +1,8 @@
-import { initFullPageEditorWithAdf, snapshot } from './_utils';
-import * as gapcursor from './__fixtures__/gap-cursor-adf.json';
-import * as pageObject from './_pageObjects';
+import { initFullPageEditorWithAdf, snapshot } from '../_utils';
+import * as gapcursor from '../__fixtures__/gap-cursor-adf.json';
+import * as pageObject from '../_pageObjects';
 
-describe('Snapshot Test: Gap cursor', () => {
+describe('Gap cursor', () => {
   let page;
 
   beforeAll(async () => {

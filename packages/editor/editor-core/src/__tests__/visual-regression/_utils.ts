@@ -30,22 +30,7 @@ export const resetViewport = async page => {
   await page.setViewport({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
 };
 
-export const escapeStr = (str: string) => {
-  return `concat('${str.replace(/'/g, `', "'", '`)}', '')`;
-};
-
 export const viewportSizes = [{ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT }];
-
-export const selectByTextAndClick = async ({ page, tagName, text }) => {
-  const target = await page.$x(
-    `//${tagName}[contains(text(), ${escapeStr(text)})]`,
-  );
-  if (target.length > 0) {
-    await target[0].click();
-  } else {
-    throw new Error(`Target element is not found: ${text}`);
-  }
-};
 
 // TODO: remove this gotoExample step
 export const initEditor = async (page, appearance: string) => {
@@ -140,6 +125,7 @@ export const initCommentEditorWithAdf = async (page, adf: Object) => {
   await mountEditor(page, {
     appearance: 'comment',
     defaultValue: JSON.stringify(adf),
+    primaryToolbarComponents: true,
     ...enableAllEditorProps,
   });
 };
@@ -163,13 +149,6 @@ export const insertBlockMenuItem = async (
   await page.click(openInsertBlockMenuSelector);
   // Do we need to wait for something here?
   await selectByTextAndClick({ page, text: menuTitle, tagName });
-};
-
-export const insertTable = async page => {
-  await page.click(
-    `span[aria-label="${insertBlockMessages.table.defaultMessage}"]`,
-  );
-  await page.waitForSelector('table td p');
 };
 
 type CellSelectorOpts = {

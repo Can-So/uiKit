@@ -1,7 +1,11 @@
-import { initFullPageEditorWithAdf, snapshot, deviceViewPorts } from './_utils';
-import * as adf from './__fixtures__/code-block-adf.json';
+import {
+  initFullPageEditorWithAdf,
+  snapshot,
+  deviceViewPorts,
+} from '../_utilss';
+import * as adf from '../__fixtures__/code-block-adf.json';
 
-describe('Snapshot Test: Breakout', () => {
+describe('Code breakout:', () => {
   it('looks correct', async () => {
     // @ts-ignore
     const page = global.page;

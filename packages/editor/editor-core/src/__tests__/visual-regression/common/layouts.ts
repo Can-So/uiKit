@@ -1,9 +1,13 @@
-import { initFullPageEditorWithAdf, snapshot, deviceViewPorts } from './_utils';
-import * as pageObject from './_pageObjects';
-import * as col2 from './__fixtures__/column2-adf.json';
-import * as col3 from './__fixtures__/column3-adf.json';
+import {
+  initFullPageEditorWithAdf,
+  snapshot,
+  deviceViewPorts,
+} from '../_utils';
+import * as pageObject from '../_pageObjects';
+import * as col2 from '../__fixtures__/column2-adf.json';
+import * as col3 from '../__fixtures__/column3-adf.json';
 
-describe('Snapshot Test: Layouts', () => {
+describe('Layouts:', () => {
   let page;
 
   beforeAll(async () => {

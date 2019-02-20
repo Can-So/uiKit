@@ -17,6 +17,7 @@ import ClipboardHelper from './1-clipboard-helper';
 import { SaveAndCancelButtons } from './5-full-page';
 import { TitleInput } from '../example-helpers/PageElements';
 import mediaMockServer from '../example-helpers/media-mock';
+import ToolbarFeedback from '../src/ui/ToolbarFeedback';
 
 interface EditorInstance {
   view: EditorView;

@@ -1,7 +1,7 @@
-import { initFullPageEditorWithAdf, snapshot } from './_utils';
-import * as dynamicTextExample from './__fixtures__/dynamic-text-adf.json';
+import { initFullPageEditorWithAdf, snapshot } from '../_utils';
+import * as dynamicTextExample from '../__fixtures__/dynamic-text-adf.json';
 
-describe('Snapshot Test: Dynamic Text Sizing', () => {
+describe('Dynamic Text Sizing:', () => {
   let page;
   // move this to the test since its used only here
   const dynamicTextViewportSizes = [

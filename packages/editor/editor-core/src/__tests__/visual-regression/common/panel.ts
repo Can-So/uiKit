@@ -1,12 +1,17 @@
-import { initFullPageEditorWithAdf, initCommentEditorWithAdf, snapshot, deviceViewPorts } from './_utils';
-import * as panel from './__fixtures__/panel-adf.json';
+import {
+  initFullPageEditorWithAdf,
+  initCommentEditorWithAdf,
+  snapshot,
+  deviceViewPorts,
+} from '../_utils';
+import * as panel from '../__fixtures__/panel-adf.json';
 
 describe('Panel overflow:', () => {
   let page;
   beforeAll(() => {
     // @ts-ignore
     page = global.page;
-  })
+  });
   it('looks correct for laptopMDPI', async () => {
     await page.setViewport(deviceViewPorts.LaptopMDPI);
     await initFullPageEditorWithAdf(page, panel);
@@ -30,5 +35,4 @@ describe('Panel overflow:', () => {
     await initCommentEditorWithAdf(page, panel);
     await snapshot(page);
   });
-
 });

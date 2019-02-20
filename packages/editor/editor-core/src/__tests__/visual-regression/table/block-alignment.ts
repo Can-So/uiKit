@@ -1,56 +1,31 @@
 import {
-  initEditor,
-  clearEditor,
-  getSelectorForTableCell,
-  insertTable,
   snapshot,
-  insertMedia,
-  setupMediaMocksProviders,
+  initFullPageEditorWithAdf,
+  deviceViewPorts,
 } from '../_utils';
+import * as adf from './__fixtures__/table-with-blocks.adf.json';
 
-import { setTableLayout, insertColumn, focusTable } from './_table-utils';
-
-describe.skip('Snapshot Test: table block alignment', () => {
+describe('Table with block:', () => {
   let page;
 
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initEditor(page, 'full-page-with-toolbar');
   });
 
-  beforeEach(async () => {
-    await page.setViewport({ width: 1280, height: 960 });
-    await clearEditor(page);
-    await setupMediaMocksProviders(page);
-    await insertTable(page);
-    await insertColumn(page);
-    await setTableLayout(page, 'wide');
-    await focusTable(page);
+  it('default layout ', async () => {
+    // @ts-ignore
+    const page = global.page;
+    await page.setViewport(deviceViewPorts.LaptopMDPI);
+    await initFullPageEditorWithAdf(page, adf);
+    await snapshot(page);
   });
 
-  test('Block elements should align at the top of the cell', async () => {
-    // Setup block elements in table.
-    const content = ['[] ', '<> ', '``` ', '/panel '];
-    for (let i = 1; i < 2; i++) {
-      const selector = `${getSelectorForTableCell({ row: 2, cell: i })} p`;
-      await page.click(selector);
-      await page.type(selector, content[i - 1], { delay: 100 });
-    }
-
-    // Text to align to
-    await page.click(getSelectorForTableCell({ row: 3, cell: 1 }));
-    await page.type(
-      getSelectorForTableCell({ row: 3, cell: 1 }),
-      'Alignment text, to align block elems to.',
-      { delay: 100 },
-    );
-
-    // Image
-    await page.click(getSelectorForTableCell({ row: 3, cell: 2 }));
-    await insertMedia(page);
-    await page.waitForSelector('.img-wrapper');
-
+  it('default layout ', async () => {
+    // @ts-ignore
+    const page = global.page;
+    await page.setViewport(deviceViewPorts.LaptopMDPI);
+    await initFullPageEditorWithAdf(page, adf);
     await snapshot(page);
   });
 });

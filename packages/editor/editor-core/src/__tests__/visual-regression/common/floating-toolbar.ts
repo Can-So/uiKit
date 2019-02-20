@@ -2,16 +2,15 @@ import {
   getSelectorForTableCell,
   initFullPageEditorWithAdf,
   snapshot,
-} from './_utils';
-import * as table from './__fixtures__/toolbar-adf.json';
-
+} from '../_utils';
+import * as table from '../__fixtures__/toolbar-adf.json';
 
 describe('Floating toolbars:', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initFullPageEditorWithAdf(page, table)
+    await initFullPageEditorWithAdf(page, table);
   });
 
   afterEach(async () => {
@@ -25,7 +24,7 @@ describe('Floating toolbars:', () => {
     });
 
     it('should render the block extension toolbar inside table', async () => {
-      const endCellSelector = getSelectorForTableCell({ row: 2, cell: 3 }); 
+      const endCellSelector = getSelectorForTableCell({ row: 2, cell: 3 });
       await page.click(`${endCellSelector} .extensionView-content-wrap`);
     });
 
