@@ -1,6 +1,4 @@
-import { expect } from 'chai';
 import * as sinon from 'sinon';
-
 import {
   Gateway,
   UsageFrequencyTracker,
@@ -21,7 +19,7 @@ class TestUsageFrequencyTracker extends UsageFrequencyTracker {
 describe('UsageFrequencyTracker', () => {
   describe('Gateway', () => {
     it('should not accept a maximum of less than 1', () => {
-      expect(() => new Gateway(0)).to.throw(RangeError);
+      expect(() => new Gateway(0)).toThrow(RangeError);
     });
 
     it('should allow work when none in-flight', done => {
@@ -30,7 +28,7 @@ describe('UsageFrequencyTracker', () => {
         gateway.submit(() => {
           done();
         }),
-      ).to.equal(true);
+      ).toEqual(true);
     });
 
     it('should prevent work when too much in flight', done => {
@@ -48,18 +46,18 @@ describe('UsageFrequencyTracker', () => {
         gateway.submit(() => {
           doneCollector();
         }),
-      ).to.equal(true);
+      ).toEqual(true);
       expect(
         gateway.submit(() => {
           doneCollector();
         }),
-      ).to.equal(true);
+      ).toEqual(true);
 
       expect(
         gateway.submit(() => {
           doneCollector();
         }),
-      ).to.equal(false);
+      ).toEqual(false);
     });
 
     it('should allow more work once in-flight work completes', done => {
@@ -75,18 +73,18 @@ describe('UsageFrequencyTracker', () => {
         gateway.submit(() => {
           completeCollector();
         }),
-      ).to.equal(true);
+      ).toEqual(true);
       expect(
         gateway.submit(() => {
           completeCollector();
         }),
-      ).to.equal(true);
+      ).toEqual(true);
 
       expect(
         gateway.submit(() => {
           completeCollector();
         }),
-      ).to.equal(false);
+      ).toEqual(false);
 
       // now delay, and periodically check if the queued work has had a chance to complete before asserting
       // that more can be queued.
@@ -97,7 +95,7 @@ describe('UsageFrequencyTracker', () => {
             gateway.submit(() => {
               completeCollector();
             }),
-          ).to.equal(true);
+          ).toEqual(true);
           done();
         }
       }, 50);
@@ -138,7 +136,7 @@ describe('UsageFrequencyTracker', () => {
       const tracker = new TestUsageFrequencyTracker(mockQueue);
 
       tracker.recordUsage(grinEmoji);
-      expect(mockEnqueue.called).to.equal(false);
+      expect(mockEnqueue.called).toEqual(false);
 
       // now delay, and periodically check if the work has completed.
       waitForEnqueue(done);
@@ -150,14 +148,14 @@ describe('UsageFrequencyTracker', () => {
       tracker.recordUsage(skinToneEmoji);
 
       waitForEnqueue(done, () => {
-        expect(mockEnqueue.calledWith(grinEmoji.id)).to.equal(true);
+        expect(mockEnqueue.calledWith(grinEmoji.id)).toEqual(true);
       });
     });
 
     it('should clear the queue', () => {
       const tracker = new TestUsageFrequencyTracker(mockQueue);
       tracker.clear();
-      expect(mockClear.calledOnce).to.equal(true);
+      expect(mockClear.calledOnce).toEqual(true);
     });
   });
 });

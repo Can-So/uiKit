@@ -1,9 +1,8 @@
+import * as sinon from 'sinon';
 import { waitUntil } from '@atlaskit/util-common-test';
-import { expect } from 'chai';
 import { mount, MountRendererProps } from 'enzyme';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import * as sinon from 'sinon';
 import EmojiResource from '../../../../api/EmojiResource';
 import CachingEmoji, {
   CachingMediaEmoji,
@@ -17,11 +16,8 @@ describe('<CachingEmoji />', () => {
   describe('Non-media emoji', () => {
     it('CachingMediaEmoji not used, just an Emoji rendered', () => {
       const component = mount(<CachingEmoji emoji={imageEmoji} />);
-      expect(
-        component.find(CachingMediaEmoji).length,
-        'No CachingMediaEmoji',
-      ).to.equal(0);
-      expect(component.find(Emoji).length, 'Emoji found').to.equal(1);
+      expect(component.find(CachingMediaEmoji).length).toEqual(0);
+      expect(component.find(Emoji).length).toEqual(1);
     });
   });
 
@@ -45,15 +41,9 @@ describe('<CachingEmoji />', () => {
 
     it('Nothing rendered if missing context', () => {
       const component = mount(<CachingEmoji emoji={mediaEmoji} />);
-      expect(
-        component.find(CachingMediaEmoji).length,
-        'No CachingMediaEmoji',
-      ).to.equal(1);
-      expect(component.find(Emoji).length, 'No Emoji').to.equal(0);
-      expect(
-        component.find(EmojiPlaceholder).length,
-        'EmojiPlaceholder',
-      ).to.equal(1);
+      expect(component.find(CachingMediaEmoji).length).toEqual(1);
+      expect(component.find(Emoji).length).toEqual(0);
+      expect(component.find(EmojiPlaceholder).length).toEqual(1);
     });
 
     it('Renders direct url if optimistic rendering true', () => {
@@ -62,17 +52,12 @@ describe('<CachingEmoji />', () => {
         <CachingEmoji emoji={mediaEmoji} />,
         contextOptions,
       );
-      expect(
-        component.find(CachingMediaEmoji).length,
-        'CachingMediaEmoji',
-      ).to.equal(1);
+      expect(component.find(CachingMediaEmoji).length).toEqual(1);
       return waitUntil(() => hasSelector(component, Emoji)).then(() => {
         const emoji = component.find(Emoji);
-        expect(emoji.length, 'Emoji').to.equal(1);
+        expect(emoji.length).toEqual(1);
         const emojiDescription = emoji.prop('emoji');
-        expect(emojiDescription, 'Exact mediaEmoji returned').to.deep.equal(
-          mediaEmoji,
-        );
+        expect(emojiDescription).toEqual(mediaEmoji);
       });
     });
 
@@ -85,17 +70,12 @@ describe('<CachingEmoji />', () => {
         <CachingEmoji emoji={mediaEmoji} />,
         contextOptions,
       );
-      expect(
-        component.find(CachingMediaEmoji).length,
-        'CachingMediaEmoji',
-      ).to.equal(1);
+      expect(component.find(CachingMediaEmoji).length).toEqual(1);
       return waitUntil(() => hasSelector(component, Emoji)).then(() => {
         const emoji = component.find(Emoji);
-        expect(emoji.length, 'Emoji').to.equal(1);
+        expect(emoji.length).toEqual(1);
         const emojiDescription = emoji.prop('emoji');
-        expect(emojiDescription, 'Exact mediaEmoji returned').to.deep.equal(
-          loadedMediaEmoji,
-        );
+        expect(emojiDescription).toEqual(loadedMediaEmoji);
       });
     });
 
@@ -106,17 +86,12 @@ describe('<CachingEmoji />', () => {
         <CachingEmoji emoji={mediaEmoji} />,
         contextOptions,
       );
-      expect(
-        component.find(CachingMediaEmoji).length,
-        'CachingMediaEmoji',
-      ).to.equal(1);
+      expect(component.find(CachingMediaEmoji).length).toEqual(1);
       return waitUntil(() => hasSelector(component, Emoji)).then(() => {
         const emoji = component.find(Emoji);
-        expect(emoji.length, 'Emoji').to.equal(1);
+        expect(emoji.length).toEqual(1);
         const emojiDescription = emoji.prop('emoji');
-        expect(emojiDescription, 'Exact mediaEmoji returned').to.deep.equal(
-          loadedMediaEmoji,
-        );
+        expect(emojiDescription).toEqual(loadedMediaEmoji);
       });
     });
   });

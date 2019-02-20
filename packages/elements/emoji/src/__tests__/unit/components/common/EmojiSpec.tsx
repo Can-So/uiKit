@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import { expect } from 'chai';
 import Tooltip from '@atlaskit/tooltip';
 import Button from '@atlaskit/button';
 import * as styles from '../../../../components/common/styles';
@@ -13,7 +12,7 @@ describe('<Emoji />', () => {
       const wrapper = shallow(<Emoji emoji={spriteEmoji} />);
 
       const sprite = wrapper.find(`.${styles.emojiSprite}`);
-      expect((sprite.prop('style') || {}).backgroundImage).to.equal(
+      expect((sprite.prop('style') || {}).backgroundImage).toEqual(
         'url(https://path-to-spritesheet.png)',
       );
     });
@@ -22,7 +21,7 @@ describe('<Emoji />', () => {
       const wrapper = shallow(<Emoji emoji={spriteEmoji} />);
 
       const sprite = wrapper.find(`.${styles.emojiSprite}`);
-      expect((sprite.prop('style') || {}).backgroundPosition).to.equal(
+      expect((sprite.prop('style') || {}).backgroundPosition).toEqual(
         '20% 20%',
       );
     });
@@ -32,7 +31,7 @@ describe('<Emoji />', () => {
 
       const sprite = wrapper.find(`.${styles.emojiSprite}`);
       const size = ((sprite.prop('style') || {}) as any).backgroundSize;
-      expect(size).to.equal('600% 600%');
+      expect(size).toEqual('600% 600%');
     });
 
     it('should be selected', () => {
@@ -40,21 +39,21 @@ describe('<Emoji />', () => {
 
       expect(
         wrapper.find(`.${styles.emojiContainer}`).hasClass(styles.selected),
-      ).to.equal(true);
+      ).toEqual(true);
     });
 
     it('should be wrapped in a tooltip if showTooltip is set to true', () => {
       const wrapper = shallow(<Emoji emoji={spriteEmoji} showTooltip={true} />);
 
       const tooltip = wrapper.find(Tooltip);
-      expect(tooltip).to.have.length(1);
+      expect(tooltip).toHaveLength(1);
     });
 
     it('should not be wrapped in a tooltip if showTooltip is not set', () => {
       const wrapper = shallow(<Emoji emoji={spriteEmoji} />);
 
       const tooltip = wrapper.find(Tooltip);
-      expect(tooltip).to.have.length(0);
+      expect(tooltip).toHaveLength(0);
     });
   });
 
@@ -63,45 +62,45 @@ describe('<Emoji />', () => {
       const wrapper = shallow(<Emoji emoji={imageEmoji} />);
 
       const image = wrapper.find(`.${styles.emoji} img`);
-      expect(image.prop('src') || {}).to.equal('https://path-to-image.png');
+      expect(image.prop('src') || {}).toEqual('https://path-to-image.png');
     });
 
     it('should use altRepresentation image if fitToHeight is larger than representation height', () => {
       const wrapper = shallow(<Emoji emoji={imageEmoji} fitToHeight={26} />);
 
       const image = wrapper.find(`.${styles.emoji} img`);
-      expect(image.prop('src') || {}).to.equal('https://alt-path-to-image.png');
+      expect(image.prop('src') || {}).toEqual('https://alt-path-to-image.png');
     });
 
     it('should be selected', () => {
       const wrapper = shallow(<Emoji emoji={imageEmoji} selected={true} />);
 
       const image = wrapper.find(`.${styles.emoji}`);
-      expect(image.hasClass(styles.selected)).to.equal(true);
+      expect(image.hasClass(styles.selected)).toEqual(true);
     });
 
     it('should be wrapped in a tooltip if showTooltip is set to true', () => {
       const wrapper = shallow(<Emoji emoji={imageEmoji} showTooltip={true} />);
 
       const tooltip = wrapper.find(Tooltip);
-      expect(tooltip).to.have.length(1);
+      expect(tooltip).toHaveLength(1);
     });
 
     it('should not be wrapped in a tooltip if showTooltip is not set', () => {
       const wrapper = shallow(<Emoji emoji={imageEmoji} />);
 
       const tooltip = wrapper.find(Tooltip);
-      expect(tooltip).to.have.length(0);
+      expect(tooltip).toHaveLength(0);
     });
 
     it('should show delete button is showDelete is passed in', () => {
       const wrapper = shallow(<Emoji emoji={imageEmoji} showDelete={true} />);
-      expect(wrapper.find(Button)).to.have.length(1);
+      expect(wrapper.find(Button)).toHaveLength(1);
     });
 
     it('should not show delete button if showDelete is not passed in', () => {
       const wrapper = shallow(<Emoji emoji={imageEmoji} />);
-      expect(wrapper.find(Button)).to.have.length(0);
+      expect(wrapper.find(Button)).toHaveLength(0);
     });
   });
 });
