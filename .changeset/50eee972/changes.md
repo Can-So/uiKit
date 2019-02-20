@@ -1,0 +1,1 @@
+- ED-6252 Change table floating toolbar to say 'Table options' instead of icon
