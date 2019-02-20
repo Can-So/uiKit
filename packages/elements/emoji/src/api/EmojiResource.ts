@@ -244,7 +244,7 @@ export class EmojiResource
   implements EmojiProvider {
   protected recordConfig?: ServiceConfig;
   protected emojiRepository?: EmojiRepository;
-  protected lastQuery: LastQuery;
+  protected lastQuery?: LastQuery;
   protected activeLoaders: number = 0;
   protected retries: Map<Retry<any>, ResolveReject<any>> = new Map();
   protected siteEmojiResource?: SiteEmojiResource;
@@ -380,7 +380,7 @@ export class EmojiResource
   }
 
   protected notifyResult(result: EmojiSearchResult): void {
-    if (result.query === this.lastQuery.query) {
+    if (this.lastQuery && result.query === this.lastQuery.query) {
       super.notifyResult(result);
     }
   }

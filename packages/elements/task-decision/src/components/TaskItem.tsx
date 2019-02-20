@@ -48,7 +48,7 @@ export class TaskItem extends PureComponent<
     }
   }
 
-  handleOnChange = (evt: React.SyntheticEvent<HTMLInputElement>) => {
+  handleOnChange = (_evt: React.SyntheticEvent<HTMLInputElement>) => {
     const { onChange, taskId, isDone, createAnalyticsEvent } = this.props;
     const newIsDone = !isDone;
     if (onChange) {

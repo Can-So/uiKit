@@ -1,11 +1,9 @@
 // @flow
-import React, { createContext, type Node, type Ref } from 'react';
-import {
-  createForm,
-  type FieldState,
-  type FieldSubscription,
-} from 'final-form';
+import { createForm } from 'final-form';
 import createDecorator from 'final-form-focus';
+import React, { createContext } from 'react';
+import type { FieldState, FieldSubscription } from 'final-form';
+import type { Node, Ref } from 'react';
 
 export const FormContext = createContext();
 export const IsDisabledContext = createContext(false);
@@ -22,6 +20,7 @@ type Props = {
     disabled: boolean,
     dirty: boolean,
     submitting: boolean,
+    getValues: () => ?Object,
   }) => Node,
   /* Called when the form is submitted without errors */
   onSubmit: Object => any,
@@ -76,6 +75,10 @@ class Form extends React.Component<Props, State> {
   state = {
     dirty: false,
     submitting: false,
+  };
+
+  getValues = (): ?Object => {
+    return this.form.getState().values;
   };
 
   componentDidMount() {
@@ -136,6 +139,7 @@ class Form extends React.Component<Props, State> {
             dirty,
             submitting,
             disabled: isDisabled,
+            getValues: this.getValues,
           })}
         </IsDisabledContext.Provider>
       </FormContext.Provider>

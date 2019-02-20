@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.15.3
+- [patch] [13fb3ea95c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/13fb3ea95c):
+
+  - add rendering time to analytics
+
 ## 5.15.2
 - [patch] [cfb2fa498f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfb2fa498f):
 

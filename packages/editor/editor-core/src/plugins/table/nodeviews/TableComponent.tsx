@@ -272,8 +272,7 @@ class TableComponent extends React.Component<ComponentProps, TableState> {
   private handleAutoSize = () => {
     if (this.table) {
       const { view, node, getPos } = this.props;
-      const { state, dispatch } = view;
-      autoSizeTable(node, this.table, getPos())(state, dispatch);
+      autoSizeTable(view, node, this.table, getPos());
     }
   };
 

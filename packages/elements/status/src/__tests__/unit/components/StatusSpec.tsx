@@ -1,12 +1,16 @@
-import * as React from 'react';
-import { Status } from '../../../components/Status';
-import Lozenge from '@atlaskit/lozenge';
 import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
-import { ANALYTICS_HOVER_DELAY } from '../../../components/constants';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import Lozenge from '@atlaskit/lozenge';
+import * as React from 'react';
 import { ELEMENTS_CHANNEL } from '../../../components/analytics';
-import { mountWithIntl } from 'enzyme-react-intl';
+import { ANALYTICS_HOVER_DELAY } from '../../../components/constants';
+import { Color, Status } from '../../../components/Status';
 
-const createPayload = (actionSubject, action, localId) => ({
+const createPayload = (
+  actionSubject: string,
+  action: string,
+  localId: string,
+) => ({
   payload: {
     action,
     actionSubject,
@@ -32,7 +36,7 @@ describe('Status', () => {
   });
 
   it('should map colors to lozenge appearances', () => {
-    const colorToLozengeAppearanceMap = {
+    const colorToLozengeAppearanceMap: { [key in Color]: string } = {
       neutral: 'default',
       purple: 'new',
       blue: 'inprogress',
@@ -41,16 +45,17 @@ describe('Status', () => {
       green: 'success',
     };
 
-    function checkColorMapping(color, appearance) {
+    function checkColorMapping(color: Color, appearance: string) {
       const component = mountWithIntl(
         <Status text="In progress" color={color} />,
       );
       expect(component.find(Lozenge).prop('appearance')).toBe(appearance);
     }
 
-    for (let color in colorToLozengeAppearanceMap) {
-      checkColorMapping(color, colorToLozengeAppearanceMap[color]);
-    }
+    const colors = Object.keys(colorToLozengeAppearanceMap) as Color[];
+    colors.forEach(color =>
+      checkColorMapping(color, colorToLozengeAppearanceMap[color]),
+    );
   });
 
   it('should use default color if color is unknown', () => {
@@ -81,9 +86,9 @@ describe('Status', () => {
   });
 
   describe('Status onHover', () => {
-    let realDateNow;
-    let dateNowStub;
-    let analyticsNextHandler;
+    let realDateNow: () => number;
+    let dateNowStub: jest.Mock;
+    let analyticsNextHandler: jest.Mock;
 
     beforeEach(() => {
       realDateNow = Date.now;

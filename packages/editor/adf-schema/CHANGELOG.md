@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.5.3
+- [patch] [775da616c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/775da616c6):
+
+  - [ED-5910] Keep width & height on media node as number
+
 ## 1.5.2
 - [patch] [e83a441140](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a441140):
 

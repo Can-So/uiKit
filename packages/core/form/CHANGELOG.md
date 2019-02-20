@@ -1,5 +1,10 @@
 # @atlaskit/form
 
+## 5.1.6
+- [patch] [887c85ffdc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/887c85ffdc):
+
+  - Form now provides a `getValues` function to it's child render function. The `getValues` function returns an object containing the current value of all fields.
+
 ## 5.1.5
 - Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
   - @atlaskit/datetime-picker@6.5.1

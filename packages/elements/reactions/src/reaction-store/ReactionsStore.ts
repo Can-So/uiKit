@@ -229,6 +229,7 @@ export class MemoryReactionsStore implements ReactionsStore {
             ) as ((reaction: ReactionSummary) => ReactionSummary)),
           );
         }
+        return;
       });
     };
   }

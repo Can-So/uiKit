@@ -1,9 +1,9 @@
 import { utils } from '@atlaskit/util-service-support';
 import {
-  InvitationsCapabilitiesResource,
-  InvitationsCapabilitiesProvider,
-  DEFAULT_INVITATIONS_CAPABILITIES_PATH,
   DEFAULT_ID_PUBLIC_FACADE_URL,
+  DEFAULT_INVITATIONS_CAPABILITIES_PATH,
+  InvitationsCapabilitiesProvider,
+  InvitationsCapabilitiesResource,
 } from '../../../api/InvitationsCapabilitiesResource';
 
 const mockCloudId = 'mockCloudId';

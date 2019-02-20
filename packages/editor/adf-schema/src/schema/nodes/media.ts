@@ -102,6 +102,14 @@ export const media: NodeSpec = {
           attrs.__fileSize = +attrs.__fileSize;
         }
 
+        if (typeof attrs.width !== 'undefined' && !isNaN(attrs.width)) {
+          attrs.width = Number(attrs.width);
+        }
+
+        if (typeof attrs.height !== 'undefined' && !isNaN(attrs.height)) {
+          attrs.height = Number(attrs.height);
+        }
+
         return attrs;
       },
     },
@@ -187,6 +195,10 @@ export const toJSON = (node: PMNode) => ({
         optionalAttributes.indexOf(key) > -1 &&
         (node.attrs[key] === null || node.attrs[key] === '')
       ) {
+        return obj;
+      }
+      if (['width', 'height'].indexOf(key) !== -1) {
+        obj[key] = Number(node.attrs[key]);
         return obj;
       }
       obj[key] = node.attrs[key];

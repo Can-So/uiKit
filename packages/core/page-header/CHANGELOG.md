@@ -1,5 +1,10 @@
 # @atlaskit/page-header
 
+## 6.1.3
+- [patch] [4b0fb4e85f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b0fb4e85f):
+
+  - Allow items in Page Header actions to wrap on small screens.
+
 ## 6.1.2
 - Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
   - @atlaskit/breadcrumbs@6.0.15

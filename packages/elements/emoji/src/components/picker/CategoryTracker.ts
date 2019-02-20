@@ -8,8 +8,8 @@ import { CategoryId } from './categories';
  * scrollTop, and virtual rows.
  */
 export default class CategoryTracker {
-  private categoryToRow: Map<CategoryId, number>;
-  private rowToCategory: Map<number, CategoryId>;
+  private categoryToRow!: Map<CategoryId, number>;
+  private rowToCategory!: Map<number, CategoryId>;
 
   constructor() {
     this.reset();

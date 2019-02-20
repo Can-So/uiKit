@@ -11,7 +11,7 @@ export default class DemoResourcedMentionList extends React.Component<
   {},
   State
 > {
-  private resourcedMentionListRef: ResourcedMentionList | null;
+  private resourcedMentionListRef?: ResourcedMentionList | null;
 
   constructor(props: {}) {
     super(props);

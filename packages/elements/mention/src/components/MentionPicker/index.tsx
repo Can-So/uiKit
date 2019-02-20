@@ -55,7 +55,7 @@ export class MentionPicker extends React.PureComponent<
   State
 > {
   private subscriberKey: string;
-  private mentionListRef: ResourcedMentionList | null;
+  private mentionListRef?: ResourcedMentionList | null;
 
   static defaultProps = {
     onSelection: () => {},

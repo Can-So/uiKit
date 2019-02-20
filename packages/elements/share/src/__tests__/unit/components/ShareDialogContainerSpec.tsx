@@ -1,22 +1,23 @@
-import * as React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { OptionData } from '@atlaskit/user-picker';
 import { utils } from '@atlaskit/util-service-support';
+import { shallow, ShallowWrapper } from 'enzyme';
+import * as React from 'react';
+import * as InvitationsCapabilitiesExports from '../../../api/InvitationsCapabilitiesResource';
+import * as ShareServiceExports from '../../../clients/ShareServiceClient';
 import {
-  ShareDialogContainer,
   Props,
+  ShareDialogContainer,
   State,
 } from '../../../components/ShareDialogContainer';
 import { ShareDialogWithTrigger } from '../../../components/ShareDialogWithTrigger';
-import * as InvitationsCapabilitiesExports from '../../../api/InvitationsCapabilitiesResource';
-import * as ShareServiceExports from '../../../clients/ShareServiceClient';
-import { Client } from '../../../types';
+import { Client, OriginTracing } from '../../../types';
 
 let wrapper: ShallowWrapper<Props, State, ShareDialogContainer>;
-let mockOriginTracing: any;
-let mockOriginTracingFactory: any;
-let mockRequestService: any;
-let mockInvitationCapabilitiesResource: any;
-let mockShareServiceClient: any;
+let mockOriginTracing: OriginTracing;
+let mockOriginTracingFactory: jest.Mock;
+let mockRequestService: jest.Mock;
+let mockInvitationCapabilitiesResource: jest.Mock;
+let mockShareServiceClient: jest.Mock;
 const mockCloudId = 'cloudId';
 const mockProductId = 'productId';
 const mockShareAri = 'ari';
@@ -26,9 +27,9 @@ const mockCopyLink = 'copy-link';
 const mockFormatCopyLink = jest.fn().mockReturnValue(mockCopyLink);
 const mockShouldShowCommentField = true;
 const mockShouldCloseOnEscapePress = true;
-const mockUsers = [
-  { type: 'user', id: 'id' },
-  { type: 'user', email: 'mock@email.com' },
+const mockUsers: OptionData[] = [
+  { type: 'user', id: 'id', name: 'User 1' },
+  { type: 'email', id: 'mock@email.com', name: 'mock@email.com' },
 ];
 const mockComment = {
   format: 'plain_text' as 'plain_text',
@@ -54,8 +55,9 @@ const mockClient = {
 
 beforeEach(() => {
   mockOriginTracing = {
+    id: 'id',
     addToUrl: jest.fn(),
-    toAnalyticsEvent: jest.fn(),
+    toAnalyticsAttributes: jest.fn(),
   };
   mockOriginTracingFactory = jest.fn().mockReturnValue(mockOriginTracing);
   mockRequestService = jest
@@ -89,7 +91,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  (wrapper as any) = null;
   mockRequestService.mockRestore();
   mockInvitationCapabilitiesResource.mockRestore();
   mockShareServiceClient.mockRestore();
@@ -152,66 +153,56 @@ describe('ShareDialogContainer', () => {
 
   describe('handleCopyLink', () => {
     it('should send analytics', () => {
-      const mockAttributes = {};
-      const spiedToAnalyticsAttributes = jest
-        .fn()
-        .mockReturnValue(mockAttributes);
-      (wrapper.instance().state as any).copyLinkOrigin = {
-        toAnalyticsAttributes: spiedToAnalyticsAttributes,
-      };
+      wrapper.setState({
+        copyLinkOrigin: mockOriginTracing,
+      });
       wrapper.instance().forceUpdate();
       wrapper.instance().handleCopyLink();
-      expect(spiedToAnalyticsAttributes).toHaveBeenCalledTimes(1);
-      expect(spiedToAnalyticsAttributes.mock.calls[0][0]).toEqual({
+      expect(mockOriginTracing.toAnalyticsAttributes).toHaveBeenCalledTimes(1);
+      expect(mockOriginTracing.toAnalyticsAttributes).toHaveBeenCalledWith({
         hasGeneratedId: true,
       });
-
       // TODO: complete when analytic is sent
     });
   });
 
   describe('handleSubmitShare', () => {
     it('should call share function from this.client', () => {
-      (wrapper.instance() as any).client.share = jest
-        .fn()
-        .mockResolvedValue({});
-      const mockShare = (wrapper.instance() as any).client.share;
-      wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
         comment: mockComment,
       };
-      wrapper.instance().handleSubmitShare(mockDialogContentState as any);
+      wrapper.instance().handleSubmitShare(mockDialogContentState);
+      wrapper.instance().forceUpdate();
       expect(mockShare).toHaveBeenCalledTimes(1);
-      expect(mockShare.mock.calls[0][0]).toEqual({
-        ari: mockShareAri,
-        link: mockShareLink,
-        title: mockShareTitle,
-      });
-      expect(mockShare.mock.calls[0][1]).toEqual(mockUsers);
-      expect(mockShare.mock.calls[0][2]).toEqual({
-        productId: mockProductId,
-        tracking: {
-          toAtlassianAccountHolders: {
-            atlOriginId: wrapper.state().shareToAtlassianAccuntHoldersOrigin!
-              .id,
-          },
-          toNewUsers: {
-            atlOriginId: wrapper.state().shareToNewUsersOrigin!.id,
+      expect(mockShare).toHaveBeenCalledWith(
+        {
+          ari: mockShareAri,
+          link: mockShareLink,
+          title: mockShareTitle,
+        },
+        [{ type: 'user', id: 'id' }, { type: 'user', email: 'mock@email.com' }],
+        {
+          productId: mockProductId,
+          tracking: {
+            toAtlassianAccountHolders: {
+              atlOriginId: wrapper.state().shareToAtlassianAccountHoldersOrigin!
+                .id,
+            },
+            toNewUsers: {
+              atlOriginId: wrapper.state().shareToNewUsersOrigin!.id,
+            },
           },
         },
-      });
-      expect(mockShare.mock.calls[0][3]).toEqual(mockComment);
+        mockComment,
+      );
     });
 
     it('should update shareActionCount and Origin Ids from the state if share is successful', async () => {
       mockOriginTracingFactory.mockReset();
 
       const mockShareResponse = {};
-      (wrapper.instance() as any).client.share = jest
-        .fn()
-        .mockResolvedValue(mockShareResponse);
-      wrapper.instance().forceUpdate();
+      mockShare.mockResolvedValueOnce(mockShareResponse);
       const mockDialogContentState = {
         users: mockUsers,
         comment: mockComment,
@@ -224,9 +215,7 @@ describe('ShareDialogContainer', () => {
     });
 
     it('should return a Promise Rejection if share is failed', async () => {
-      (wrapper.instance() as any).client.share = jest
-        .fn()
-        .mockRejectedValue('error');
+      mockShare.mockRejectedValueOnce('error');
       wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
