@@ -1,0 +1,1 @@
+- add rendering time to analytics
