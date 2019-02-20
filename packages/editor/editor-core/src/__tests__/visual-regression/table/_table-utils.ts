@@ -1,13 +1,9 @@
-import {
-  selectByTextAndClick,
-  getSelectorForTableCell,
-  getBoundingRect,
-} from '../_utils';
+import { clickOnElementWithText, getBoundingRect } from '../_pageObjects';
 
-import { messages as insertBlockMessages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
 import { messages as ToolbarMessages } from '../../../plugins/table/toolbar';
 import commonMessages from '../../../messages';
+import { messages as contextualMenuMessages } from '../../../plugins/table/ui/FloatingContextualMenu/ContextualMenu';
 
 type ResizeColumnOpts = {
   colIdx: number;
@@ -24,6 +20,32 @@ const clickFirstCell = async page => {
   await page.click(ClassName.TOP_LEFT_CELL);
 };
 
+type CellSelectorOpts = {
+  row: number;
+  cell?: number;
+  cellType?: 'td' | 'th';
+};
+
+export const getSelectorForTableCell = ({
+  row,
+  cell,
+  cellType = 'td',
+}: CellSelectorOpts) => {
+  const rowSelector = `table tr:nth-child(${row})`;
+  if (!cell) {
+    return rowSelector;
+  }
+
+  return `${rowSelector} > ${cellType}:nth-child(${cell})`;
+};
+
+export const headerRowOptionSelector =
+  'div[data-role="droplistContent"] span[role="button"]:nth-of-type(1)';
+export const headerColumnOptionSelector =
+  'div[data-role="droplistContent"] span[role="button"]:nth-of-type(2)';
+export const numberedColumnOptionSelector =
+  'div[data-role="droplistContent"] span[role="button"]:nth-of-type(3)';
+
 export const getSelectorForTableControl = (type, atIndex?: number) => {
   let selector = `.pm-table-${type}-controls__button-wrap`;
   if (atIndex) {
@@ -33,11 +55,12 @@ export const getSelectorForTableControl = (type, atIndex?: number) => {
   return selector;
 };
 
-export const clickInContextMenu = async (page, title) => {
-  const contextMenuTriggerSelector = `.${ClassName.CONTEXTUAL_MENU_BUTTON}`;
-  await page.waitForSelector(contextMenuTriggerSelector);
-  await page.click(contextMenuTriggerSelector);
-  await selectByTextAndClick({ page, tagName: 'span', text: title });
+export const clickTableOptions = async page => {
+  const tableOptions = `span[aria-label="${
+    ToolbarMessages.tableOptions.defaultMessage
+  }"]`;
+  await page.waitForSelector(tableOptions);
+  await page.click(tableOptions);
 };
 
 export const selectTableDisplayOption = async (page, optionSelector) => {
@@ -54,34 +77,19 @@ export const setTableLayout = async (page, layout) => {
     'full-width': commonMessages.layoutFullWidth.defaultMessage,
   };
   const getButtonSelector = layout =>
-    `div[aria-label="${layoutSelector[layout]}"] .${
-      ClassName.LAYOUT_BUTTON
-    } button`;
+    `div[aria-label="${layoutSelector[layout]}"]`;
 
   if (layout === 'wide') {
+    await page.waitForSelector(getButtonSelector('wide'));
     await page.click(getButtonSelector(layout));
   } else if (layout === 'full-width') {
+    await page.waitForSelector(getButtonSelector('wide'));
     await page.click(getButtonSelector('wide'));
     await page.waitForSelector(`.ProseMirror table[data-layout="wide"]`);
     await page.click(getButtonSelector(layout));
   }
 
   await page.waitForSelector(`.ProseMirror table[data-layout="${layout}"]`);
-};
-
-export const insertTable = async page => {
-  await page.click(
-    `span[aria-label="${insertBlockMessages.table.defaultMessage}"]`,
-  );
-  await page.waitForSelector('table td p');
-};
-
-export const insertRow = async (page, atIndex = 1) => {
-  await insertRowOrColumn(page, 'row', atIndex);
-};
-
-export const insertColumn = async (page, atIndex = 1) => {
-  await insertRowOrColumn(page, 'column', atIndex);
 };
 
 export const insertRowOrColumn = async (page, type, atIndex: number) => {
@@ -156,4 +164,26 @@ export const getInsertClass = type => {
   }
 
   return ClassName.CONTROLS_INSERT_COLUMN;
+};
+
+export const clickOnCellOptions = async page => {
+  const contextMenuTriggerSelector = `.${ClassName.CONTEXTUAL_MENU_BUTTON}`;
+  await page.waitForSelector(contextMenuTriggerSelector);
+  await page.click(contextMenuTriggerSelector);
+};
+
+export const clickOnCellOption = async (page, option) => {
+  const contextMenuTriggerSelector = `.${ClassName.CONTEXTUAL_MENU_BUTTON}`;
+  await page.waitForSelector(contextMenuTriggerSelector);
+  await page.click(contextMenuTriggerSelector);
+  await clickOnElementWithText({ page, elementTag: 'span', text: option });
+};
+
+export const clickOnSpanWithText = async page => {
+  const linkHandlers = await page.$x("//span[contains(text(), 'Merge Cells')]");
+  if (linkHandlers.length > 0) {
+    await linkHandlers[0].click();
+  } else {
+    throw new Error('Link not found');
+  }
 };

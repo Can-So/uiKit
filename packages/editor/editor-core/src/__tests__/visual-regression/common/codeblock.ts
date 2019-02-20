@@ -2,7 +2,7 @@ import {
   initFullPageEditorWithAdf,
   snapshot,
   deviceViewPorts,
-} from '../_utilss';
+} from '../_utils';
 import * as adf from '../__fixtures__/code-block-adf.json';
 
 describe('Code breakout:', () => {

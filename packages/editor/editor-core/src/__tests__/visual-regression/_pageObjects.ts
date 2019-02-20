@@ -1,9 +1,9 @@
 import { messages as blockTypeMessages } from '../../plugins/block-type/ui/ToolbarBlockType';
+import { insertMedia as integrationInsertMedia } from '../integration/_helpers';
 
 // Drop down
 export const blockFormattingDropdown = `span[aria-label="${blockTypeMessages}"]`;
 export const dropList = 'div[data-role="droplistContent"]';
-
 export const insertBlockDropdown = `[aria-label="Insert"]`;
 export const tableButton = `[aria-label="Table"]`;
 export const italicButton = `[aria-label="Italic"]`;
@@ -22,6 +22,7 @@ export const mentionButton = `[aria-label="Mention"]`;
 export const emojiButton = `[aria-label="Emoji"]`;
 export const removeTableButton = '[aria-label="Remove"]';
 
+// table basics
 export const tableTd = 'table td p';
 export const tableTh = 'table th p';
 
@@ -53,9 +54,37 @@ const replaceInputStr = (str: string) => {
 };
 
 export const clickOnElementWithText = async ({ page, elementTag, text }) => {
+  await page.waitForXPath(
+    `//${elementTag}[contains(text(), ${replaceInputStr(text)})]`,
+    5000,
+  );
   const target = await page.$x(
     `//${elementTag}[contains(text(), ${replaceInputStr(text)})]`,
   );
   expect(target.length).toBeGreaterThan(0);
   await target[0].click();
+};
+
+export const getBoundingRect = async (page, selector) => {
+  return await page.evaluate(selector => {
+    const element = document.querySelector(selector);
+    const { x, y, width, height } = element.getBoundingClientRect();
+    return { left: x, top: y, width, height, id: element.id };
+  }, selector);
+};
+
+export const insertMedia = async (page, filenames = ['one.svg']) => {
+  // We need to wrap this as the xpath selector used in integration tests
+  // isnt valid in puppeteer
+  await integrationInsertMedia(page, filenames, 'div[aria-label="%s"]');
+};
+
+// Execute the click using page.evaluate
+// There appears to be a bug in Puppeteer which causes the
+// "Node is either not visible or not an HTMLElement" error.
+// https://product-fabric.atlassian.net/browse/ED-5688
+export const evaluateClick = (page, selector) => {
+  return page.evaluate(selector => {
+    document.querySelector(selector).click();
+  }, selector);
 };

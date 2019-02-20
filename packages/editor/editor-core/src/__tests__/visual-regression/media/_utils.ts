@@ -1,4 +1,5 @@
-import { getBoundingRect, snapshot } from '../_utils';
+import { snapshot } from '../_utils';
+import { getBoundingRect } from '../_pageObjects';
 
 export const layoutAvailable = (mode, width) => {
   if (mode === 'wide') {

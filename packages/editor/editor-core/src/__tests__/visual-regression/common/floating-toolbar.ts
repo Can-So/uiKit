@@ -1,8 +1,5 @@
-import {
-  getSelectorForTableCell,
-  initFullPageEditorWithAdf,
-  snapshot,
-} from '../_utils';
+import { initFullPageEditorWithAdf, snapshot } from '../_utils';
+import { getSelectorForTableCell } from '../table/_table-utils';
 import * as table from '../__fixtures__/toolbar-adf.json';
 
 describe('Floating toolbars:', () => {
