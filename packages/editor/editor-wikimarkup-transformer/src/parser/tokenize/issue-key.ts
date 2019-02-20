@@ -2,7 +2,7 @@ import { Schema, Node as PMNode } from 'prosemirror-model';
 import { Token, TokenParser, Context, InlineCardConversion } from './';
 import { isNotBlank } from '../utils/text';
 
-interface Issue {
+export interface Issue {
   key: string;
   url: string;
 }
@@ -48,16 +48,21 @@ const fallback = (input: string, position: number): Token => ({
   length: 1,
 });
 
-const getIssue = (context: Context, key: string): Issue | null =>
+export const getIssue = (context: Context, key: string): Issue | null =>
   context.inlineCardConversion && context.inlineCardConversion[key]
     ? { key, url: context.inlineCardConversion[key] }
     : null;
 
-const buildInlineCard = (schema: Schema, issue: Issue): PMNode[] => [
-  schema.nodes.inlineCard.createChecked({
-    url: `${issue.url}#icft=${issue.key}`,
-  }),
-];
+export const buildInlineCard = (schema: Schema, issue: Issue): PMNode[] => {
+  return [
+    schema.nodes.inlineCard.createChecked({
+      url: withInlineCardFromTextStamp(issue),
+    }),
+  ];
+};
+
+const withInlineCardFromTextStamp = (issue: Issue): string =>
+  /#icft=/g.test(issue.url) ? issue.url : `${issue.url}#icft=${issue.key}`;
 
 const isNotSpace = (char: string): boolean => !/\s/.test(char);
 

@@ -1,6 +1,7 @@
 import { ContentLink } from './link-parser';
 import { Schema, Node as PMNode } from 'prosemirror-model';
 import { Context } from '..';
+import { Issue, buildInlineCard, getIssue } from '../issue-key';
 
 export function issueLinkResolver(
   link: ContentLink,
@@ -8,26 +9,11 @@ export function issueLinkResolver(
   context: Context,
 ): PMNode[] | undefined {
   const { originalLinkText } = link;
+  const issue: Issue | null = getIssue(context, originalLinkText);
 
-  if (
-    context.inlineCardConversion &&
-    context.inlineCardConversion[originalLinkText]
-  ) {
-    const url = context.inlineCardConversion[originalLinkText];
-
-    return [
-      schema.nodes.inlineCard.createChecked({
-        url: `${url}`,
-      }),
-    ];
+  if (issue) {
+    return buildInlineCard(schema, issue);
   }
 
-  // Keep retro compatibility for ADF Wiki roundtrip
-  if (link.linkBody === 'smart-link') {
-    return [
-      schema.nodes.inlineCard.createChecked({
-        url: `${link.notLinkBody}`,
-      }),
-    ];
-  }
+  return undefined;
 }

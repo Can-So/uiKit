@@ -246,11 +246,17 @@ Object {
           "type": "text",
         },
         Object {
-          "attrs": Object {
-            "data": null,
-            "url": "https://product-fabric.atlassian.net/browse/EX-522",
-          },
-          "type": "inlineCard",
+          "marks": Array [
+            Object {
+              "attrs": Object {
+                "__confluenceMetadata": null,
+                "href": "https://product-fabric.atlassian.net/browse/EX-522",
+              },
+              "type": "link",
+            },
+          ],
+          "text": "smart-link",
+          "type": "text",
         },
       ],
       "type": "paragraph",
