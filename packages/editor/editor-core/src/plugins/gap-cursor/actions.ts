@@ -171,9 +171,10 @@ export const setGapCursorAtPos = (
 const captureCursorCoords = (
   event: MouseEvent,
   editorRef: HTMLElement,
-  posAtCoords: (
-    coords: { left: number; top: number },
-  ) => { pos: number; inside: number } | null | void,
+  posAtCoords: (coords: {
+    left: number;
+    top: number;
+  }) => { pos: number; inside: number } | null | void,
   state: EditorState,
 ): { position: number; side: Side } | null => {
   const rect = editorRef.getBoundingClientRect();
@@ -214,9 +215,10 @@ const captureCursorCoords = (
 export const setCursorForTopLevelBlocks = (
   event: MouseEvent,
   editorRef: HTMLElement,
-  posAtCoords: (
-    coords: { left: number; top: number },
-  ) => { pos: number; inside: number } | null | void,
+  posAtCoords: (coords: {
+    left: number;
+    top: number;
+  }) => { pos: number; inside: number } | null | void,
 ): Command => (state, dispatch) => {
   // plugin is disabled
   if (!pluginKey.get(state)) {

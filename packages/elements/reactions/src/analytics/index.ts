@@ -23,7 +23,7 @@ export const createAndFireEventInElementsChannel: CreateAndFireEventFunction = c
 
 export const createAndFireSafe = <
   U extends any[],
-  T extends ((...args: U) => AnalyticsEventPayload)
+  T extends (...args: U) => AnalyticsEventPayload
 >(
   createAnalyticsEvent: CreateUIAnalyticsEventSignature | void,
   creator: T,
