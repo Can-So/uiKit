@@ -1,6 +1,5 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import { expect } from 'chai';
 import { waitUntil } from '@atlaskit/util-common-test';
 import Tooltip from '@atlaskit/tooltip';
 
@@ -35,9 +34,7 @@ describe('<ResourcedEmoji />', () => {
     );
 
     return waitUntil(() => emojiVisible(component)).then(() => {
-      expect(findEmoji(component).prop('emoji').id, 'Emoji rendered').to.equal(
-        grinEmoji.id,
-      );
+      expect(findEmoji(component).prop('emoji').id).toEqual(grinEmoji.id);
     });
   });
 
@@ -55,19 +52,19 @@ describe('<ResourcedEmoji />', () => {
           .find('span[data-emoji-id]')
           .getDOMNode()
           .attributes.getNamedItem('data-emoji-id')!.value,
-      ).to.equal(grinEmoji.id);
+      ).toEqual(grinEmoji.id);
       expect(
         component
           .find('span[data-emoji-id]')
           .getDOMNode()
           .attributes.getNamedItem('data-emoji-short-name')!.value,
-      ).to.equal('shouldnotbeused');
+      ).toEqual('shouldnotbeused');
       expect(
         component
           .find('span[data-emoji-id]')
           .getDOMNode()
           .attributes.getNamedItem('data-emoji-text')!.value,
-      ).to.equal('shouldnotbeused');
+      ).toEqual('shouldnotbeused');
     });
   });
 
@@ -81,7 +78,7 @@ describe('<ResourcedEmoji />', () => {
 
     return waitUntil(() => emojiVisible(component)).then(() => {
       const tooltip = component.find(Tooltip);
-      expect(tooltip).to.have.length(0);
+      expect(tooltip).toHaveLength(0);
     });
   });
 
@@ -96,7 +93,7 @@ describe('<ResourcedEmoji />', () => {
 
     return waitUntil(() => emojiVisible(component)).then(() => {
       const tooltip = component.find(Tooltip);
-      expect(tooltip).to.have.length(1);
+      expect(tooltip).toHaveLength(1);
     });
   });
 
@@ -109,9 +106,7 @@ describe('<ResourcedEmoji />', () => {
     );
 
     return waitUntil(() => emojiVisible(component)).then(() => {
-      expect(findEmoji(component).prop('emoji').id, 'Emoji rendered').to.equal(
-        grinEmoji.id,
-      );
+      expect(findEmoji(component).prop('emoji').id).toEqual(grinEmoji.id);
     });
   });
 
@@ -124,9 +119,7 @@ describe('<ResourcedEmoji />', () => {
     );
 
     return waitUntil(() => emojiVisible(component)).then(() => {
-      expect(findEmoji(component).prop('emoji').id, 'Emoji rendered').to.equal(
-        grinEmoji.id,
-      );
+      expect(findEmoji(component).prop('emoji').id).toEqual(grinEmoji.id);
       component.setProps({
         emojiId: { shortName: evilburnsEmoji.shortName },
       });
@@ -134,10 +127,9 @@ describe('<ResourcedEmoji />', () => {
       return waitUntil(() =>
         emojiVisibleById(component, evilburnsEmoji.id),
       ).then(() => {
-        expect(
-          findEmoji(component).prop('emoji').id,
-          'Emoji rendered',
-        ).to.equal(evilburnsEmoji.id);
+        expect(findEmoji(component).prop('emoji').id).toEqual(
+          evilburnsEmoji.id,
+        );
       });
     });
   });
@@ -166,7 +158,7 @@ describe('<ResourcedEmoji />', () => {
     return waitUntil(() => !!resolver).then(() => {
       resolver();
       return waitUntil(() => emojiPlaceHolderVisible(component)).then(() => {
-        expect(true, 'EmojiPlaceholder found').to.equal(true);
+        expect(true).toEqual(true);
       });
     });
   });
@@ -195,10 +187,7 @@ describe('<ResourcedEmoji />', () => {
       return waitUntil(() => emojiPlaceHolderVisible(component)).then(() => {
         resolver(resolverResult);
         return waitUntil(() => emojiVisible(component)).then(() => {
-          expect(
-            findEmoji(component).prop('emoji').id,
-            'Emoji rendered',
-          ).to.equal(grinEmoji.id);
+          expect(findEmoji(component).prop('emoji').id).toEqual(grinEmoji.id);
         });
       });
     });
@@ -229,7 +218,7 @@ describe('<ResourcedEmoji />', () => {
 
     return waitUntil(() => emojiPlaceHolderVisible(component)).then(() => {
       const tooltip = component.find(Tooltip);
-      expect(tooltip).to.have.length(1);
+      expect(tooltip).toHaveLength(1);
     });
   });
 });

@@ -1,7 +1,6 @@
 import * as sinon from 'sinon';
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { expect } from 'chai';
 
 import * as styles from '../../../../components/common/styles';
 import EmojiButton from '../../../../components/common/EmojiButton';
@@ -18,7 +17,7 @@ describe('<EmojiButton />', () => {
       wrapper
         .find(`.${styles.emojiButton}`)
         .simulate('mousedown', { button: 0 });
-      expect(onClickSpy.called).to.equal(true);
+      expect(onClickSpy.called).toEqual(true);
     });
   });
 
@@ -32,7 +31,7 @@ describe('<EmojiButton />', () => {
       wrapper
         .find(`.${styles.emojiButton}`)
         .simulate('mousedown', { button: 0 });
-      expect(onClickSpy.called).to.equal(true);
+      expect(onClickSpy.called).toEqual(true);
     });
   });
 });
