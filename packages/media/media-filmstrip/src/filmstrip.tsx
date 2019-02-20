@@ -48,6 +48,7 @@ export class Filmstrip extends Component<FilmstripProps, FilmstripState> {
 
   private renderCards() {
     const { items, context } = this.props;
+
     const cards = items.map(item => {
       const key = generateIdentifierKey(item.identifier);
 

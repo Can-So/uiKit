@@ -2,9 +2,11 @@ import {
   setViewerPayload,
   ImageViewer as ImageViewerMock,
 } from '../../mocks/_image-viewer';
-jest.mock('../../../newgen/viewers/image', () => ({
+
+const mockImageViewer = {
   ImageViewer: ImageViewerMock,
-}));
+};
+jest.mock('../../../newgen/viewers/image', () => mockImageViewer);
 
 import * as React from 'react';
 import { ReactWrapper } from 'enzyme';

@@ -2,10 +2,11 @@ const mediaViewerModule = require.requireActual(
   '../../../newgen/analytics/media-viewer',
 );
 const mediaViewerModalEventSpy = jest.fn();
-jest.mock('../../../newgen/analytics/media-viewer', () => ({
+const mockMediaViewer = {
   ...mediaViewerModule,
   mediaViewerModalEvent: mediaViewerModalEventSpy,
-}));
+};
+jest.mock('../../../newgen/analytics/media-viewer', () => mockMediaViewer);
 
 import * as React from 'react';
 import { mount } from 'enzyme';
