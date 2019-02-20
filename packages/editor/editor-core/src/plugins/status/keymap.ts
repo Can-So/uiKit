@@ -13,7 +13,7 @@ export function keymapPlugin(): Plugin {
 }
 
 // consume event to prevent status node problems with positioning and selection
-const consumeKeyEvent: Command = (state, dispatch) =>
+const consumeKeyEvent: Command = (state, _dispatch) =>
   !!mayGetStatusNodeAt(state.tr.selection);
 
 export default keymapPlugin;

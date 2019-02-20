@@ -184,7 +184,7 @@ export const splitListAtSelection = (
 
   const beforeItems: PMNode[] = [];
   const afterItems: PMNode[] = [];
-  parentList.node.content.forEach((item, offset, index) => {
+  parentList.node.content.forEach((item, offset, _index) => {
     if (offset < resolvedItemPos.parentOffset) {
       beforeItems.push(item);
     } else if (offset > resolvedItemPos.parentOffset) {

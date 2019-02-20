@@ -47,8 +47,8 @@ const PickerContainer = styled.div`
 `;
 
 export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
-  private startTime: number;
-  private inputMethod: InputMethod;
+  private startTime!: number;
+  private inputMethod?: InputMethod;
   private createStatusAnalyticsAndFireFunc: Function;
 
   static defaultProps = {
@@ -114,7 +114,7 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
   componentDidUpdate(
     prevProps: Readonly<Props>,
     prevState: Readonly<State>,
-    snapshot?: any,
+    _snapshot?: any,
   ): void {
     const element = this.props.target;
 

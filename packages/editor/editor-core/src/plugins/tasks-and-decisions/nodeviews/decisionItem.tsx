@@ -31,7 +31,7 @@ class Decision extends ReactNodeView {
     return { dom: document.createElement('div') };
   }
 
-  render(props: ReactComponentProps, forwardRef: any) {
+  render(_props: ReactComponentProps, forwardRef: any) {
     return (
       <WithPluginState
         plugins={{
@@ -70,7 +70,7 @@ class Decision extends ReactNodeView {
     return super.update(
       node,
       decorations,
-      (currentNode, newNode) => !this.isContentEmpty(),
+      (_currentNode, _newNode) => !this.isContentEmpty(),
     );
   }
 }
