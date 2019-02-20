@@ -21,15 +21,12 @@ function inputFromSource(source: NavigationSource): string {
   }
 }
 
-function fileDetailsFromIdentifier(identifier: Identifier) {
-  return {
-    fileId: isFileIdentifier(identifier)
-      ? typeof identifier.id === 'string'
-        ? identifier.id
-        : ''
+const fileDetailsFromIdentifier = (identifier: Identifier) => ({
+  fileId:
+    isFileIdentifier(identifier) && typeof identifier.id === 'string'
+      ? identifier.id
       : '',
-  };
-}
+});
 
 export interface NavigationAttributes {
   fileId: string;
