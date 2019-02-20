@@ -180,7 +180,7 @@ export const initEditorWithAdf = async (
   // Set the viewport to the right one
   await page.setViewport(deviceViewPorts[device]);
 
-  //Mount the editor with the right attributes
+  // Mount the editor with the right attributes
   await mountEditor(page, {
     appearance: appearance,
     defaultValue: JSON.stringify(adf),

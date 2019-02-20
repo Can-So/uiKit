@@ -1,4 +1,4 @@
-import { Page } from 'puppeteer';
+import { Page } from './_types';
 const selectors = {
   editor: '.ProseMirror',
 };
