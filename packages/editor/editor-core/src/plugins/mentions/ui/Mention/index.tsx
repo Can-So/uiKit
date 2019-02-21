@@ -38,7 +38,7 @@ export default class Mention extends PureComponent<MentionProps, {}> {
       mentionProvider?: Promise<MentionProvider>;
     };
 
-    const actionHandlers: any = {};
+    const actionHandlers: Record<string, any> = {};
     ['onClick', 'onMouseEnter', 'onMouseLeave'].forEach(handler => {
       actionHandlers[handler] =
         (eventHandlers && (eventHandlers as any)[handler]) || (() => {});

@@ -1,10 +1,9 @@
 import { keymap } from 'prosemirror-keymap';
-import { Schema } from 'prosemirror-model';
 import { Plugin } from 'prosemirror-state';
 import * as keymaps from '../../../keymaps';
 import { EmojiState, emojiPluginKey } from './main';
 
-export function keymapPlugin(_schema: Schema): Plugin {
+export function keymapPlugin(): Plugin {
   const list = {};
 
   keymaps.bindKeymapWithCommand(
