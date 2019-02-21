@@ -31,6 +31,7 @@ import {
   createPMPlugins,
   initAnalytics,
 } from './create-editor';
+import { analyticsPluginKey } from '../plugins/analytics/plugin';
 
 export interface EditorViewProps {
   editorProps: EditorProps;
@@ -306,6 +307,11 @@ export default class ReactEditorView<T = {}> extends React.Component<
                 action: 'dispatchedInvalidTransaction',
                 actionSubject: 'editor',
                 eventType: 'operational',
+                attributes: {
+                  analyticsEventPayloads: transaction.getMeta(
+                    analyticsPluginKey,
+                  ),
+                },
               },
             });
           }

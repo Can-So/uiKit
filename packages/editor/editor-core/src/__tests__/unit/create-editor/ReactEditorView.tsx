@@ -28,6 +28,7 @@ import {
   INPUT_METHOD,
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
+  addAnalytics,
 } from '../../../plugins/analytics';
 import { analyticsService } from '../../../analytics';
 
@@ -220,17 +221,17 @@ describe(name, () => {
     describe('when an invalid transaction is dispatched', () => {
       let wrapper;
       let editor;
-      let tr;
+      let invalidTr;
 
       /** dispatches an invalid transaction which adds a code block with a date node child */
-      const dispatchInvalidTransaction = () => {
+      const dispatchInvalidTransaction = (tr = editor.view.state.tr) => {
         const { date, codeBlock } = editor.view.state.schema.nodes;
-        tr = editor.view.state.tr.replaceRangeWith(
+        invalidTr = tr.replaceRangeWith(
           1,
           1,
           codeBlock.create({}, date.create()),
         );
-        editor.view.dispatch(tr);
+        editor.view.dispatch(invalidTr);
       };
 
       beforeEach(() => {
@@ -262,16 +263,35 @@ describe(name, () => {
         );
       });
 
-      it('sends V3 analytics event', () => {
+      it('sends V3 analytics event with info on failed transaction', () => {
         const { eventDispatcher } = wrapper.instance() as ReactEditorView;
         jest.spyOn(eventDispatcher, 'emit');
 
-        dispatchInvalidTransaction();
+        const analyticsEventPayload: AnalyticsEventPayload = {
+          action: ACTION.CLICKED,
+          actionSubject: ACTION_SUBJECT.BUTTON,
+          actionSubjectId: ACTION_SUBJECT_ID.BUTTON_HELP,
+          attributes: { inputMethod: INPUT_METHOD.SHORTCUT },
+          eventType: EVENT_TYPE.UI,
+        };
+
+        dispatchInvalidTransaction(
+          // add v3 analytics meta to transaction as we want to check this info is sent on
+          addAnalytics(editor.view.state.tr, analyticsEventPayload),
+        );
         expect(eventDispatcher.emit).toHaveBeenCalledWith(analyticsEventKey, {
           payload: {
             action: 'dispatchedInvalidTransaction',
             actionSubject: 'editor',
             eventType: 'operational',
+            attributes: {
+              analyticsEventPayloads: [
+                {
+                  channel: undefined,
+                  payload: analyticsEventPayload,
+                },
+              ],
+            },
           },
         });
       });
