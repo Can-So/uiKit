@@ -41,20 +41,23 @@ interface SwitcherProps {
   isXFlowEnabled: ChildrenProps<boolean>;
 }
 
-const getAnalyticsContext = (links: any, extraLinks: number) =>
-  analyticsAttributes({
+const getAnalyticsContext = (links: any, extraLinks: number) => ({
+  source: 'atlassianSwitcher',
+  ...analyticsAttributes({
     itemsCount:
       links.admin.length +
       links.products.length +
       links.custom.length +
       links.recent.length +
       extraLinks,
-  });
+  }),
+});
 
-const getExtraItemAnalyticsContext = (index: number) =>
-  analyticsAttributes({
+const getExtraItemAnalyticsContext = (index: number) => ({
+  ...analyticsAttributes({
     groupItemIndex: index,
-  });
+  }),
+});
 
 export default class Switcher extends React.Component<SwitcherProps> {
   mountedAt?: number;
