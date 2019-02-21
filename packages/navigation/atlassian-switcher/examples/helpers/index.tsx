@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+
 import {
   SwitcherView,
   SwitcherItem,

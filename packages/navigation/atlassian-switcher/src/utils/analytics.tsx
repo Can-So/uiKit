@@ -1,10 +1,19 @@
 import * as React from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
-import { createAndFireEvent } from '@atlaskit/analytics-next';
+import {
+  createAndFireEvent,
+  withAnalyticsEvents,
+} from '@atlaskit/analytics-next';
+import {
+  UI_EVENT_TYPE,
+  OPERATIONAL_EVENT_TYPE,
+} from '@atlaskit/analytics-gas-types';
 
 type PropsToContextMapper<P, C> = (props: P) => C;
 
-const NAVIGATION_CHANNEL = 'navigation';
+export const NAVIGATION_CHANNEL = 'navigation';
+export const SWITCHER_SUBJECT = 'atlassianSwitcher';
+export const SWITCHER_ITEM_SUBJECT = 'atlassianSwitcherItem';
 
 export const createAndFireNavigationEvent = createAndFireEvent(
   NAVIGATION_CHANNEL,
@@ -28,4 +37,36 @@ export const withAnalyticsContextData = function<P, C>(
   };
 };
 
-export { NavigationAnalyticsContext };
+type RenderTrackerProps = {
+  subject: string;
+  data?: object;
+  onRender?: any;
+};
+
+export const RenderTracker = withAnalyticsEvents({
+  onRender: (createAnalyticsEvent, props: RenderTrackerProps) => {
+    return createAnalyticsEvent({
+      eventType: OPERATIONAL_EVENT_TYPE,
+      action: 'rendered',
+      actionSubject: props.subject,
+      attributes: props.data,
+    }).fire(NAVIGATION_CHANNEL);
+  },
+})(
+  class extends React.Component<RenderTrackerProps> {
+    componentDidMount() {
+      this.props.onRender();
+    }
+
+    render() {
+      return null;
+    }
+  },
+);
+
+export {
+  withAnalyticsEvents,
+  NavigationAnalyticsContext,
+  OPERATIONAL_EVENT_TYPE,
+  UI_EVENT_TYPE,
+};

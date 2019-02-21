@@ -24,7 +24,10 @@ import { RecentContainersDataStructure } from '../providers/instance-data-provid
 import {
   analyticsAttributes,
   NavigationAnalyticsContext,
+  SWITCHER_SUBJECT,
+  RenderTracker,
 } from '../utils/analytics';
+import now from '../utils/performance-now';
 
 interface SwitcherProps {
   cloudId: string;
@@ -54,6 +57,16 @@ const getExtraItemAnalyticsContext = (index: number) =>
   });
 
 export default class Switcher extends React.Component<SwitcherProps> {
+  mountedAt?: number;
+
+  componentDidMount() {
+    this.mountedAt = now();
+  }
+
+  timeSinceMounted() {
+    return Math.round(now() - this.mountedAt!);
+  }
+
   triggerXFlow = () => {
     const { triggerXFlow, suggestedProductLink } = this.props;
     if (suggestedProductLink) {
@@ -123,6 +136,11 @@ export default class Switcher extends React.Component<SwitcherProps> {
         data={getAnalyticsContext(links, Number(shouldRenderXSellLink))}
       >
         <SwitcherView>
+          <RenderTracker
+            subject={SWITCHER_SUBJECT}
+            data={{ duration: this.timeSinceMounted() }}
+          />
+
           {shouldRenderAdministrativeSection && (
             <Section id="administration" title="Administration" isAdmin>
               {links.admin.map(({ label, icon, key, link }, idx) => (

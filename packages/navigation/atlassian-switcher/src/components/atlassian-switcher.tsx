@@ -8,7 +8,7 @@ interface AtlassianSwitcherProps {
   triggerXFlow: Function;
 }
 
-export default ({
+const AtlassianSwitcher = ({
   product,
   cloudId,
   triggerXFlow,
@@ -33,3 +33,5 @@ export default ({
   }
   return <Switcher cloudId={cloudId} triggerXFlow={triggerXFlow} {...props} />;
 };
+
+export default AtlassianSwitcher;

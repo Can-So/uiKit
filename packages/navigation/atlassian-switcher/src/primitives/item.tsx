@@ -3,11 +3,13 @@ import styled, { ThemeProvider } from 'styled-components';
 import Item, { itemThemeNamespace } from '@atlaskit/item';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { gridSize, colors, elevation } from '@atlaskit/theme';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import {
   analyticsAttributes,
   createAndFireNavigationEvent,
   withAnalyticsContextData,
+  withAnalyticsEvents,
+  UI_EVENT_TYPE,
+  SWITCHER_ITEM_SUBJECT,
 } from '../utils/analytics';
 
 const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
@@ -98,9 +100,9 @@ class SwitcherItem extends React.Component<SwitcherItemProps> {
 
 const SwitcherItemWithEvents = withAnalyticsEvents({
   onClick: createAndFireNavigationEvent({
-    eventType: 'ui',
+    eventType: UI_EVENT_TYPE,
     action: 'clicked',
-    actionSubject: 'atlassianSwitcherItem',
+    actionSubject: SWITCHER_ITEM_SUBJECT,
   }),
 })(SwitcherItem);
 
