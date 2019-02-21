@@ -30,7 +30,6 @@
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/editor-core": "^100.0.0",
     "@atlaskit/editor-test-helpers": "^7.0.0",
-    "@atlaskit/util-data-test": "^10.2.1",
-    "chai-as-promised": "^6.0.0"
+    "@atlaskit/util-data-test": "^10.2.1"
   }
 }
