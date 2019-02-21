@@ -88,6 +88,6 @@ describe('Snapshot Test: Breakout Layouts', () => {
     await page.waitFor(100);
 
     // @ts-ignore
-    await snapshot(page, '0.02');
+    await snapshot(page, '0.04');
   });
 });
