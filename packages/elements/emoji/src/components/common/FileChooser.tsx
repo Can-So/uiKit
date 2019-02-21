@@ -5,6 +5,7 @@ import AkButton from '@atlaskit/button';
 
 export interface Props {
   label: string;
+  ariaLabel?: string;
   onChange?: ChangeEventHandler<any>;
   accept?: string;
   isDisabled?: boolean;
@@ -19,10 +20,14 @@ export default class FileChooser extends PureComponent<Props, {}> {
   };
 
   render() {
-    const { accept, isDisabled, label, onChange } = this.props;
+    const { accept, ariaLabel, isDisabled, label, onChange } = this.props;
     return (
       <span>
-        <AkButton onClick={this.onChooseFile} isDisabled={isDisabled}>
+        <AkButton
+          onClick={this.onChooseFile}
+          isDisabled={isDisabled}
+          ariaLabel={ariaLabel || label}
+        >
           {label}
         </AkButton>
         <input
