@@ -12,7 +12,7 @@ import {
   pressKeyup,
   KeyboardKeys,
 } from '../../__helpers/page-objects/_keyboard';
-import * as adf from '../__fixtures__/noData-adf.json';
+import * as adf from '../common/__fixtures__/noData-adf.json';
 
 describe('Table context menu:', () => {
   let page;
