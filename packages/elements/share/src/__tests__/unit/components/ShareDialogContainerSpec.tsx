@@ -23,6 +23,7 @@ const mockProductId = 'productId';
 const mockShareAri = 'ari';
 const mockShareLink = 'share-link';
 const mockShareTitle = 'Share Title';
+const mockButtonStyle = 'icon-with-text' as 'icon-with-text';
 const mockCopyLink = 'copy-link';
 const mockFormatCopyLink = jest.fn().mockReturnValue(mockCopyLink);
 const mockShouldShowCommentField = true;
@@ -75,6 +76,7 @@ beforeEach(() => {
     }));
   wrapper = shallow(
     <ShareDialogContainer
+      buttonStyle={mockButtonStyle}
       client={mockClient}
       cloudId={mockCloudId}
       loadUserOptions={mockLoadUserOptions}
@@ -101,6 +103,7 @@ describe('ShareDialogContainer', () => {
     const shareDialogWithTrigger = wrapper.find(ShareDialogWithTrigger);
     expect(shareDialogWithTrigger).toHaveLength(1);
     expect(mockFormatCopyLink).toHaveBeenCalled();
+    expect(shareDialogWithTrigger.prop('buttonStyle')).toEqual(mockButtonStyle);
     expect(shareDialogWithTrigger.prop('copyLink')).toEqual(mockCopyLink);
     expect(shareDialogWithTrigger.prop('loadUserOptions')).toEqual(
       mockLoadUserOptions,
@@ -117,7 +120,7 @@ describe('ShareDialogContainer', () => {
     expect(shareDialogWithTrigger.prop('capabilities')).toEqual(
       wrapper.state().capabilities,
     );
-    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(3);
+    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(2);
     expect(mockClient.getCapabilities).toHaveBeenCalledTimes(1);
     expect(wrapper.state().capabilities).toEqual(mockCapabilities);
   });
@@ -126,11 +129,15 @@ describe('ShareDialogContainer', () => {
     mockOriginTracingFactory.mockReset();
     wrapper.setProps({ shareLink: 'new-share-link' });
     expect(wrapper.state().prevShareLink).toEqual('new-share-link');
-    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(3);
+    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(2);
   });
 
   it('should have default this.client if props.client is not given', () => {
-    const newWrapper = shallow<ShareDialogContainer>(
+    const newWrapper: ShallowWrapper<
+      Props,
+      State,
+      ShareDialogContainer
+    > = shallow<ShareDialogContainer>(
       <ShareDialogContainer
         cloudId={mockCloudId}
         loadUserOptions={mockLoadUserOptions}
@@ -184,15 +191,7 @@ describe('ShareDialogContainer', () => {
         [{ type: 'user', id: 'id' }, { type: 'user', email: 'mock@email.com' }],
         {
           productId: mockProductId,
-          tracking: {
-            toAtlassianAccountHolders: {
-              atlOriginId: wrapper.state().shareToAtlassianAccountHoldersOrigin!
-                .id,
-            },
-            toNewUsers: {
-              atlOriginId: wrapper.state().shareToNewUsersOrigin!.id,
-            },
-          },
+          atlOriginId: wrapper.state().shareOrigin!.id,
         },
         mockComment,
       );
@@ -210,7 +209,7 @@ describe('ShareDialogContainer', () => {
       const result = await wrapper
         .instance()
         .handleSubmitShare(mockDialogContentState as any);
-      expect(mockOriginTracingFactory).toHaveBeenCalledTimes(2);
+      expect(mockOriginTracingFactory).toHaveBeenCalledTimes(1);
       expect(result).toEqual(mockShareResponse);
     });
 

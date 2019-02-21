@@ -1,7 +1,8 @@
 // @flow
 import { mount } from 'enzyme';
 import * as React from 'react';
-import ThemedCodeBlock, { CodeBlock } from '../../CodeBlock';
+import ThemedCodeBlock from '../../ThemedCodeBlock';
+import CodeBlock from '../../components/CodeBlock';
 
 const code = `
   const a = 'foo';

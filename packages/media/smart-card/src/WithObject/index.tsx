@@ -145,6 +145,7 @@ export function WithObject(props: WithObjectProps) {
             />
           );
         }
+
         return (
           <InnerWithObject
             client={client}

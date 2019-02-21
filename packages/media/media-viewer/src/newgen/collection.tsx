@@ -137,6 +137,7 @@ export class Collection extends React.Component<Props, State> {
     items: MediaCollectionItem[],
   ) {
     const lastItem = items[items.length - 1];
+
     const isLastItem =
       selectedItem.id === lastItem.id &&
       selectedItem.occurrenceKey === lastItem.occurrenceKey;

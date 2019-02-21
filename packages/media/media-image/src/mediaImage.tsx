@@ -20,11 +20,15 @@ export interface MediaImageState {}
 
 export class MediaImage extends Component<MediaImageProps, MediaImageState> {
   private get imgSrc(): string {
-    const { id, mediaApiConfig, collectionName } = this.props;
-    const { clientId, token, baseUrl } = mediaApiConfig;
-    const endpoint = `file/${id}/image`;
+    const {
+      id,
+      mediaApiConfig: { clientId, token, baseUrl },
+      collectionName,
+    } = this.props;
 
-    return `${baseUrl}/${endpoint}?collection=${collectionName}&client=${clientId}&token=${token}`;
+    return `${baseUrl}/file/${id}/image?client=${clientId}&token=${token}${
+      collectionName ? `&collection=${collectionName}` : ''
+    }`;
   }
 
   private get hasAuth(): boolean {
@@ -37,8 +41,8 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
     const { width, height } = this.props;
 
     return {
-      width: `${width}px`,
-      height: `${height}px`,
+      ...(width && { width: `${width}px` }),
+      ...(height && { height: `${height}px` }),
     };
   }
 

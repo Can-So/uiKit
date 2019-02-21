@@ -74,7 +74,7 @@ export class MockProvider extends AbstractConversationResource {
   }
 
   /**
-   * Retrieve the IDs (and meta-data) for all conversations associated with the container ID.
+   * Retrieve the IDs (and meta-data) for all conversations associated with the object ID.
    */
   async getConversations(): Promise<Conversation[]> {
     const { dispatch } = this;
@@ -87,18 +87,20 @@ export class MockProvider extends AbstractConversationResource {
   }
 
   /**
-   * Creates a new Conversation and associates it with the containerId provided.
+   * Creates a new Conversation and associates it with the objectId provided.
    */
   async create(
     localId: string,
-    containerId: string,
     value: any,
     meta: any,
+    objectId: string,
+    containerId?: string,
   ): Promise<Conversation> {
     const conversationId = <string>uuid.generate();
 
     const result = {
       conversationId,
+      objectId,
       containerId,
       localId,
       comments: [this.createComment(conversationId, conversationId, value)],

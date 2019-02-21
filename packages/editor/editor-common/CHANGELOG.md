@@ -1,5 +1,18 @@
 # @atlaskit/editor-common
 
+## 32.0.2
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/editor-json-transformer@4.1.11
+  - @atlaskit/adf-schema@1.5.4
+  - @atlaskit/emoji@55.0.1
+  - @atlaskit/mention@16.2.1
+  - @atlaskit/editor-test-helpers@7.0.0
+
+## 32.0.1
+- [patch] [ca17040178](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca17040178):
+
+  - ED-6243: Dont use breakpoint width calculations for tables in renderer
+
 ## 32.0.0
 - [patch] [5b5ae91921](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b5ae91921):
 

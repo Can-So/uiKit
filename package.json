@@ -267,6 +267,7 @@
     "@types/chalk": "^2.2.0",
     "@types/date-fns": "^2.6.0",
     "@types/dateformat": "^1.0.1",
+    "@types/debounce": "^1.2.0",
     "@types/eventemitter2": "^4.1.0",
     "@types/exenv": "^1.2.0",
     "@types/filesize": "^3.2.15",

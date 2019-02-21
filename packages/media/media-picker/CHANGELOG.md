@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 34.1.0
+- [minor] [f1b46bcb42](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1b46bcb42):
+
+  - ED-6259 Enable stricter types for media packages
+
 ## 34.0.0
 - [patch] [2e676676ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e676676ba):
 

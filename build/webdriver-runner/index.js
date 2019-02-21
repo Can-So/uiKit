@@ -45,6 +45,13 @@ async function runJest(testPaths) {
       _: testPaths || cli.input,
       maxWorkers,
       watch: !!process.env.WATCH,
+      watchPathIgnorePatterns: [
+        '\\/node_modules\\/',
+        '.+\\/__tests__\\/(?!integration)',
+        '.+\\/__tests-karma__\\/',
+        '.+\\/__snapshots__\\/',
+        '.+\\/__image_snapshots__\\/',
+      ],
       passWithNoTests: true,
       updateSnapshot: cli.flags.updateSnapshot,
     },

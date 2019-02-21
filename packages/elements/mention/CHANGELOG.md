@@ -1,5 +1,9 @@
 # @atlaskit/mention
 
+## 16.2.1
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/editor-test-helpers@7.0.0
+
 ## 16.2.0
 - [minor] [ef368572dc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef368572dc):
 

@@ -12,6 +12,7 @@ import {
   MetaData,
   OriginTracing,
   OriginTracingFactory,
+  ShareButtonStyle,
   ShareClient,
   ShareResponse,
 } from '../types';
@@ -19,6 +20,7 @@ import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 import { optionDataToUsers } from './utils';
 
 export type Props = {
+  buttonStyle?: ShareButtonStyle;
   client?: Client;
   cloudId: string;
   formatCopyLink: (origin: OriginTracing, link: string) => string;
@@ -37,8 +39,7 @@ export type State = {
   copyLinkOrigin: OriginTracing | null;
   prevShareLink: string | null;
   shareActionCount: number;
-  shareToAtlassianAccountHoldersOrigin: OriginTracing | null;
-  shareToNewUsersOrigin: OriginTracing | null;
+  shareOrigin: OriginTracing | null;
 };
 
 const memoizedFormatCopyLink: (
@@ -81,8 +82,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       copyLinkOrigin: null,
       prevShareLink: null,
       shareActionCount: 0,
-      shareToAtlassianAccountHoldersOrigin: null,
-      shareToNewUsersOrigin: null,
+      shareOrigin: null,
     };
   }
 
@@ -102,8 +102,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       return {
         copyLinkOrigin: nextProps.originTracingFactory(),
         prevShareLink: nextProps.shareLink,
-        shareToAtlassianAccountHoldersOrigin: nextProps.originTracingFactory(),
-        shareToNewUsersOrigin: nextProps.originTracingFactory(),
+        shareOrigin: nextProps.originTracingFactory(),
       };
     }
 
@@ -147,14 +146,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     };
     const metaData: MetaData = {
       productId,
-      tracking: {
-        toAtlassianAccountHolders: {
-          atlOriginId: this.state.shareToAtlassianAccountHoldersOrigin!.id,
-        },
-        toNewUsers: {
-          atlOriginId: this.state.shareToNewUsersOrigin!.id,
-        },
-      },
+      atlOriginId: this.state.shareOrigin!.id,
     };
 
     return this.client
@@ -163,11 +155,10 @@ export class ShareDialogContainer extends React.Component<Props, State> {
         const newShareCount = this.state.shareActionCount + 1;
         // TODO: send analytic event
 
-        // renew Origin Tracing Ids per share action succeeded
+        // renew Origin Tracing Id per share action succeeded
         this.setState({
           shareActionCount: newShareCount,
-          shareToAtlassianAccountHoldersOrigin: originTracingFactory(),
-          shareToNewUsersOrigin: originTracingFactory(),
+          shareOrigin: originTracingFactory(),
         });
 
         return response;
@@ -189,6 +180,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
 
   render() {
     const {
+      buttonStyle,
       formatCopyLink,
       loadUserOptions,
       shareLink,
@@ -198,6 +190,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     const copyLink = formatCopyLink(this.state.copyLinkOrigin!, shareLink);
     return (
       <ShareDialogWithTrigger
+        buttonStyle={buttonStyle}
         capabilities={this.state.capabilities}
         copyLink={copyLink}
         loadUserOptions={loadUserOptions}

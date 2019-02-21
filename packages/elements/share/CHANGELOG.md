@@ -1,5 +1,14 @@
 # @atlaskit/share
 
+## 0.1.11
+- [patch] [7e809344eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e809344eb):
+
+  - Modified share web component to send a single atlOriginId
+
+## 0.1.10
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/editor-test-helpers@7.0.0
+
 ## 0.1.9
 - [patch] [7569356ab3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7569356ab3):
 

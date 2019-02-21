@@ -142,6 +142,7 @@ describe('Renderer - React/Nodes/Table', () => {
     });
     it('should add an extra <col> node for number column', () => {
       const columnWidths = [300, 380];
+      const resultingColumnWidths = [282, 357];
       const table = mount(
         <Table
           layout="default"
@@ -168,7 +169,7 @@ describe('Renderer - React/Nodes/Table', () => {
           );
         } else {
           expect(col.prop('style')!.width).to.equal(
-            `${columnWidths[index - 1]}px`,
+            `${resultingColumnWidths[index - 1]}px`,
           );
         }
       });
@@ -198,7 +199,9 @@ describe('Renderer - React/Nodes/Table', () => {
       expect(table.find('col')).to.have.lengthOf(2);
 
       table.find('col').forEach((col, index) => {
-        expect(col.prop('style')!.width).to.equal(`${columnWidths[index]}px`);
+        expect(col.prop('style')!.width).to.equal(
+          `${columnWidths[index] - 1}px`,
+        );
       });
     });
   });
@@ -236,7 +239,7 @@ describe('Renderer - React/Nodes/Table', () => {
         table.find('col').forEach((col, index) => {
           if (index < 2) {
             expect(col.prop('style')!.width).to.equal(
-              `${columnWidths[index]}px`,
+              `${columnWidths[index] - 1}px`,
             );
           } else {
             expect(col.prop('style')!.width).to.equal(`${tableCellMinWidth}px`);
@@ -276,7 +279,7 @@ describe('Renderer - React/Nodes/Table', () => {
         table.find('col').forEach((col, index) => {
           if (index < 2) {
             expect(col.prop('style')!.width).to.equal(
-              `${columnWidths[index]}px`,
+              `${columnWidths[index] - 1}px`,
             );
           } else {
             expect(typeof col.prop('style')!.width).to.equal('undefined');
@@ -312,7 +315,7 @@ describe('Renderer - React/Nodes/Table', () => {
 
       expect(table.find('col')).to.have.lengthOf(3);
       table.find('col').forEach(col => {
-        expect(col.prop('style')!.width).to.equal(`226.67px`);
+        expect(col.prop('style')!.width).to.equal(`226px`);
       });
     });
   });

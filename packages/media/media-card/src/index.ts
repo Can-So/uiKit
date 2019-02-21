@@ -106,7 +106,6 @@ export interface BaseAnalyticsContext {
   packageVersion: string; // string — in a format like '3.2.1'
   packageName: string;
   componentName: string;
-
   actionSubject: string; // ex. MediaCard
   actionSubjectId: string | null; // file/link id
 }

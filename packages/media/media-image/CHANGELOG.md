@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 7.0.10
+- [patch] [f84de3bf0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f84de3bf0b):
+
+  - Adding collection as optional parameter
+
 ## 7.0.9
 - [patch] [ef469cbb0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef469cbb0b):
 

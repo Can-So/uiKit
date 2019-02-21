@@ -21,7 +21,7 @@ export interface ExampleState {
 }
 
 export default class Example extends Component<ExampleProps, ExampleState> {
-  constructor(props) {
+  constructor(props: ExampleProps) {
     super(props);
 
     this.state = {
@@ -50,31 +50,31 @@ export default class Example extends Component<ExampleProps, ExampleState> {
     );
   }
 
-  onIdChange = e => {
+  onIdChange = (e: any) => {
     this.setState({
       imageId: e.target.value,
     });
   };
 
-  onCollectionChange = e => {
+  onCollectionChange = (e: any) => {
     this.setState({
       collectionName: e.target.value,
     });
   };
 
-  onTokenChange = e => {
+  onTokenChange = (e: any) => {
     this.setState({
       token: e.target.value,
     });
   };
 
-  onClientIdChange = e => {
+  onClientIdChange = (e: any) => {
     this.setState({
       clientId: e.target.value,
     });
   };
 
-  onBaseUrlChange = e => {
+  onBaseUrlChange = (e: any) => {
     this.setState({
       baseUrl: e.target.value,
     });

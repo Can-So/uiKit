@@ -36,7 +36,7 @@ export default class ExistingConversation extends React.Component<
     return (
       <Conversation
         id={conversationId}
-        containerId="ari:cloud:platform::conversation/demo"
+        objectId="ari:cloud:platform::conversation/demo"
         provider={provider}
         dataProviders={getDataProviderFactory()}
       />

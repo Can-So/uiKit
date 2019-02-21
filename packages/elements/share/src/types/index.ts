@@ -11,6 +11,7 @@ export {
 export { Client } from './Client';
 export * from './form';
 export * from './OriginTracing';
+export * from './ShareButton';
 export {
   DialogContentState,
   ShareContentState,

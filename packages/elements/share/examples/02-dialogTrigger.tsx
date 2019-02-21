@@ -15,7 +15,7 @@ export default () => (
     />
     <h4>Default share button with text</h4>
     <ShareDialogWithTrigger
-      buttonStyle="withText"
+      buttonStyle="icon-with-text"
       copyLink="copyLink"
       loadUserOptions={loadUserOptions}
       onShareSubmit={onShareSubmit}
