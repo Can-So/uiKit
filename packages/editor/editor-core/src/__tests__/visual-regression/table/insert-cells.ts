@@ -19,6 +19,7 @@ describe('Snapshot Test: table insert/delete', () => {
     await insertTable(page);
   });
 
+  // adding tolerance since tool tips can show from time to time
   it(`should be able insert after first row`, async () => {
     await page.hover(tableSelectors.firstRowControl);
     await page.waitForSelector(tableSelectors.hoverdCell);

@@ -20,7 +20,7 @@ export const tableSelectors = {
   }:nth-child(3) button`,
   rowControlSelector: ClassName.ROW_CONTROLS_BUTTON_WRAP,
   columnControlSelector: ClassName.COLUMN_CONTROLS_BUTTON_WRAP,
-  deleteRowColumnSelector: `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP} .${
+  deleteButtonSelector: `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP} .${
     ClassName.CONTROLS_DELETE_BUTTON
   }`,
   rowControls: ClassName.ROW_CONTROLS_WRAPPER,
@@ -107,15 +107,21 @@ export const setTableLayout = async (page, layout) => {
 };
 
 export const insertRow = async (page, atIndex: number) => {
-  const buttonWrapSelector = ClassName.ROW_CONTROLS_BUTTON_WRAP;
-  const insertSelector = ClassName.CONTROLS_INSERT_ROW;
-  await insertRowOrColumn(page, buttonWrapSelector, insertSelector, atIndex);
+  await insertRowOrColumn(
+    page,
+    tableSelectors.rowControlSelector,
+    tableSelectors.insertRowButton,
+    atIndex,
+  );
 };
 
 export const insertColumn = async (page, atIndex: number) => {
-  const buttonWrapSelector = ClassName.COLUMN_CONTROLS_BUTTON_WRAP;
-  const insertSelector = ClassName.CONTROLS_INSERT_COLUMN;
-  await insertRowOrColumn(page, buttonWrapSelector, insertSelector, atIndex);
+  await insertRowOrColumn(
+    page,
+    tableSelectors.columnControlSelector,
+    tableSelectors.insertColumnButton,
+    atIndex,
+  );
 };
 
 export const insertRowOrColumn = async (
@@ -125,46 +131,30 @@ export const insertRowOrColumn = async (
   atIndex: number,
 ) => {
   await clickFirstCell(page);
-  const buttonSelector = `.${buttonWrapSelector}:nth-child(${atIndex}) .${insertSelector}`;
+  const buttonSelector = `.${buttonWrapSelector}:nth-child(${atIndex}) ${insertSelector}`;
   await page.hover(buttonSelector);
   await page.waitForSelector(buttonSelector);
   await page.click(buttonSelector);
 };
 
 export const deleteRow = async (page, atIndex) => {
-  const typeWrapperSelector = ClassName.ROW_CONTROLS_WRAPPER;
-  await deleteRowOrColumn(page, typeWrapperSelector, atIndex);
+  await deleteRowOrColumn(page, tableSelectors.rowControls, atIndex);
 };
 
 export const deleteColumn = async (page, atIndex) => {
-  const typeWrapperSelector = ClassName.COLUMN_CONTROLS_WRAPPER;
-  await deleteRowOrColumn(page, typeWrapperSelector, atIndex);
+  await deleteRowOrColumn(page, tableSelectors.columnControls, atIndex);
 };
 
 export const deleteRowOrColumn = async (page, typeWrapperSelector, atIndex) => {
   const controlSelector = `.${typeWrapperSelector} .${
     ClassName.CONTROLS_BUTTON
   }:nth-child(${atIndex})`;
-  const deleteButtonSelector = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP} .${
-    ClassName.CONTROLS_DELETE_BUTTON
-  }`;
+
   await clickFirstCell(page);
   await page.click(controlSelector);
-  await page.hover(deleteButtonSelector);
-  await page.waitForSelector(deleteButtonSelector);
-  await page.click(deleteButtonSelector);
-};
-
-export const deleteTableCell = async (page, typeWrapperSelector, atIndex) => {
-  const controlSelector = `.${typeWrapperSelector} ${
-    ClassName.CONTROLS_BUTTON
-  }:nth-child(${atIndex})`;
-
-  await page.waitForSelector(controlSelector);
-  await page.click(controlSelector);
-  await page.hover(tableSelectors.deleteRowColumnSelector);
-  await page.waitForSelector(tableSelectors.deleteRowColumnSelector);
-  await page.click(tableSelectors.deleteRowColumnSelector);
+  await page.hover(tableSelectors.deleteButtonSelector);
+  await page.waitForSelector(tableSelectors.deleteButtonSelector);
+  await page.click(tableSelectors.deleteButtonSelector);
 };
 
 type CellSelectorOpts = {
