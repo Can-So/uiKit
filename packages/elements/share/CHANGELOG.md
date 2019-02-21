@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.12
+- [patch] [376926523b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/376926523b):
+
+  - Explosed buttonStyle prop to ShareDialogContainer
+
 ## 0.1.11
 - [patch] [7e809344eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e809344eb):
 
