@@ -6,20 +6,11 @@ import {
 import { selectors } from '../../__helpers/page-objects/_editor';
 import { tableSelectors } from '../../__helpers/page-objects/_table';
 import { insertTable } from '../../__helpers/page-objects/_table';
+import * as adf from './__fixtures__/noData-adf.json';
 
 // TODO - add ADF before loading stuff
 describe('z-indexes:', () => {
   let page;
-  const noData = {
-    version: 1,
-    type: 'doc',
-    content: [
-      {
-        type: 'paragraph',
-        content: [],
-      },
-    ],
-  };
 
   beforeAll(async () => {
     // @ts-ignore
@@ -28,7 +19,7 @@ describe('z-indexes:', () => {
 
   // TODO enable after fixing selectors on tables
   it('should always position table trash icon below dropdowns from main menu', async () => {
-    await initFullPageEditorWithAdf(page, noData, Device.LaptopMDPI);
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
     await insertTable(page);
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.insertBlock);
@@ -37,7 +28,7 @@ describe('z-indexes:', () => {
   });
 
   it('should always position table trash icon below emoji picker', async () => {
-    await initFullPageEditorWithAdf(page, noData, Device.LaptopMDPI);
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
     await insertTable(page);
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.emoji);
@@ -46,7 +37,7 @@ describe('z-indexes:', () => {
   });
 
   it('should always position table trash icon below mention picker', async () => {
-    await initFullPageEditorWithAdf(page, noData, Device.LaptopMDPI);
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
     await insertTable(page);
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.mention);

@@ -1,5 +1,5 @@
 import { initFullPageEditorWithAdf, snapshot, Device } from '../_utils';
-import * as gapcursor from '../__fixtures__/gap-cursor-adf.json';
+import * as gapcursor from './__fixtures__/gap-cursor-adf.json';
 import { selectors } from '../../__helpers/page-objects/_editor';
 import { pressKey, KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
 

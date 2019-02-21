@@ -1,7 +1,7 @@
 import { initFullPageEditorWithAdf, snapshot, Device } from '../_utils';
 import { selectors } from '../../__helpers/page-objects/_editor';
-import * as col2 from '../__fixtures__/column2-adf.json';
-import * as col3 from '../__fixtures__/column3-adf.json';
+import * as col2 from './__fixtures__/column2-adf.json';
+import * as col3 from './__fixtures__/column3-adf.json';
 
 describe('Layouts:', () => {
   let page;

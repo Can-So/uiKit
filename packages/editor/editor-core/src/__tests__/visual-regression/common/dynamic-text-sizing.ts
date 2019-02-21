@@ -1,5 +1,5 @@
 import { initFullPageEditorWithAdf, snapshot } from '../_utils';
-import * as dynamicTextExample from '../__fixtures__/dynamic-text-adf.json';
+import * as dynamicTextExample from './__fixtures__/dynamic-text-adf.json';
 
 describe('Dynamic Text Sizing:', () => {
   let page;

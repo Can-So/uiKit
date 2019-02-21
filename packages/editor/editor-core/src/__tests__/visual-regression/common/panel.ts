@@ -4,7 +4,7 @@ import {
   snapshot,
   Device,
 } from '../_utils';
-import * as panel from '../__fixtures__/panel-adf.json';
+import * as panel from './__fixtures__/panel-adf.json';
 
 describe('Panel overflow:', () => {
   let page;
