@@ -19,12 +19,12 @@ describe('Panel overflow:', () => {
 
   it('looks correct for ipad', async () => {
     await initFullPageEditorWithAdf(page, panel, Device.iPad);
-    await snapshot(page, 0.02);
+    await snapshot(page, 0.04);
   });
 
   it('looks correct for iphone', async () => {
     await initFullPageEditorWithAdf(page, panel, Device.iPhonePlus);
-    await snapshot(page, 0.02);
+    await snapshot(page, 0.04);
   });
 
   it('looks correct for LaptopMDPI in comment mode', async () => {
