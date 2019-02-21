@@ -15,10 +15,29 @@ export const Wrapper: any = styled.div`
 
 Wrapper.displayName = 'Wrapper';
 
+// @ts-ignore
+window.logBridge = window.logBridge || [];
+
+const initialDocument = JSON.stringify({
+  version: 1,
+  type: 'doc',
+  content: [
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'This is the mobile renderer',
+        },
+      ],
+    },
+  ],
+});
+
 export default function Example() {
   return (
     <Wrapper>
-      <Renderer />
+      <Renderer document={initialDocument} />
     </Wrapper>
   );
 }

@@ -82,7 +82,7 @@ export default class ResourcedEmojiControl extends PureComponent<Props, State> {
 
   refreshEmoji(emojiConfig: EmojiResourceConfig) {
     this.setState({
-      emojiProvider: Promise.resolve(new EmojiResource(this.props.emojiConfig)),
+      emojiProvider: Promise.resolve(new EmojiResource(emojiConfig)),
     });
   }
 

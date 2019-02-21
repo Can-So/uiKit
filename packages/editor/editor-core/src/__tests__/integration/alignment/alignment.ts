@@ -20,7 +20,7 @@ const alignRight = async page => {
 
 BrowserTestCase(
   'alignment: should be able to add alignment to paragraphs',
-  { skip: ['firefox'] },
+  { skip: [] },
   async client => {
     const page = await goToEditorTestingExample(client);
 
@@ -37,7 +37,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'alignment: should be able to add alignment to headings',
-  { skip: ['firefox'] },
+  { skip: [] },
   async client => {
     const page = await goToEditorTestingExample(client);
 
@@ -91,7 +91,7 @@ BrowserTestCase(
 // TODO:https://product-fabric.atlassian.net/browse/ED-6288
 // BrowserTestCase(
 //   'alignment: should maintain alignment when hit return',
-//   { skip: ['firefox'] },
+//   { skip: [] },
 //   async client => {
 //     const page = await goToEditorTestingExample(client);
 //     await mountEditor(page, {

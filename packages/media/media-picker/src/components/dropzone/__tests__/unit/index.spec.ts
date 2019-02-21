@@ -1,4 +1,3 @@
-import * as sinon from 'sinon';
 import { EventEmitter2 } from 'eventemitter2';
 import { defaultBaseUrl } from '@atlaskit/media-test-helpers';
 import { ContextFactory } from '@atlaskit/media-core';
@@ -18,6 +17,7 @@ const context = ContextFactory.create({
 interface FakeUploadService extends EventEmitter2 {
   addDropzone?: () => void;
   removeDropzone?: () => void;
+  addFiles?: () => void;
 }
 /**
  * Skipped 1 tests, looks like an actual failure, it's emiting an event thats never supposed to be
@@ -160,19 +160,20 @@ describe('Dropzone', () => {
 
   describe('MediaPickerDropzone emitted events', () => {
     let dropzone: Dropzone;
-    let uploadServiceStub: sinon.SinonStub | undefined;
+    let uploadServiceStub: jest.Mock;
     let someFakeUploadService: FakeUploadService;
 
     const stubUploadService = (fakeUploadService: FakeUploadService) => {
-      uploadServiceStub = sinon
-        .stub(uploadService, 'NewUploadServiceImpl')
-        .returns(fakeUploadService);
+      uploadServiceStub = jest
+        .spyOn(uploadService, 'NewUploadServiceImpl')
+        .mockImplementation(() => fakeUploadService);
     };
 
     beforeEach(async () => {
       someFakeUploadService = new EventEmitter2();
       someFakeUploadService.addDropzone = () => {};
       someFakeUploadService.removeDropzone = () => {};
+      someFakeUploadService.addFiles = () => {};
       stubUploadService(someFakeUploadService);
 
       dropzone = await MediaPicker('dropzone', context, config);
@@ -180,11 +181,7 @@ describe('Dropzone', () => {
 
     afterEach(() => {
       dropzone.deactivate();
-
-      if (uploadServiceStub) {
-        uploadServiceStub.restore();
-        uploadServiceStub = undefined;
-      }
+      uploadServiceStub.mockReset();
     });
 
     it('should emit drag-enter for drag over with type "Files" and contain files length', async done => {
@@ -234,22 +231,22 @@ describe('Dropzone', () => {
 
       container.dispatchEvent(createDragLeaveEvent());
     });
-  });
 
-  it('should upload files when files are dropped', async () => {
-    const dropzone = await MediaPicker('dropzone', context, config);
-    await dropzone.activate();
+    it('should upload files when files are dropped', async () => {
+      const dropzone = await MediaPicker('dropzone', context, config);
+      const spy = jest.spyOn(dropzone['uploadService'], 'addFiles');
+      await dropzone.activate();
 
-    const spy = jest.spyOn(dropzone['uploadService'], 'addFiles');
-    const event = new Event('drop') as any;
-    const files = [new File([], '')];
-    event.dataTransfer = {
-      types: [],
-      files,
-    };
-    (dropzone as any)['onFileDropped'](event);
+      const event = new Event('drop') as any;
+      const files = [new File([], '')];
+      event.dataTransfer = {
+        types: [],
+        files,
+      };
+      (dropzone as any)['onFileDropped'](event);
 
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toBeCalledWith(files);
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toBeCalledWith(files);
+    });
   });
 });

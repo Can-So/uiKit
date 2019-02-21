@@ -4,7 +4,7 @@ import {
   deviceViewPorts,
   initCommentEditorWithAdf,
 } from '../_utils';
-import { getSelectorForTableCell } from './_table-utils';
+import { getSelectorForTableCell } from '../../__helpers/page-objects/_table';
 import * as adf from './__fixtures__/numbered-table.adf.json';
 
 describe('Snapshot Test: numbered table', () => {

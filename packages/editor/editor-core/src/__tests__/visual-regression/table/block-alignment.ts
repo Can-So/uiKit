@@ -1,12 +1,16 @@
 import {
+  Device,
   snapshot,
   initFullPageEditorWithAdf,
-  deviceViewPorts,
+  initCommentEditorWithAdf,
 } from '../_utils';
 import * as adf from './__fixtures__/table-with-blocks.adf.json';
-import { setTableLayout, getSelectorForTableCell } from './_table-utils';
+import {
+  setTableLayout,
+  getSelectorForTableCell,
+} from '../../__helpers/page-objects/_table';
 
-describe('Table with block looks correct for:', () => {
+describe('Table with block looks correct for fullpage:', () => {
   let page;
 
   beforeAll(async () => {
@@ -15,25 +19,37 @@ describe('Table with block looks correct for:', () => {
   });
 
   it('default layout ', async () => {
-    await page.setViewport(deviceViewPorts.LaptopMDPI);
-    await initFullPageEditorWithAdf(page, adf);
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
     await page.click(getSelectorForTableCell({ row: 4, cell: 1 }));
     await snapshot(page);
   });
 
   it('wide layout ', async () => {
-    await page.setViewport(deviceViewPorts.LaptopMDPI);
-    await initFullPageEditorWithAdf(page, adf);
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
     await page.click(getSelectorForTableCell({ row: 4, cell: 1 }));
     await setTableLayout(page, 'wide');
     await snapshot(page);
   });
 
   it('full-width layout ', async () => {
-    await page.setViewport(deviceViewPorts.LaptopHiDPI);
-    await initFullPageEditorWithAdf(page, adf);
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI);
     await page.click(getSelectorForTableCell({ row: 4, cell: 1 }));
     await setTableLayout(page, 'full-width');
+    await snapshot(page);
+  });
+});
+
+describe('Table with block looks correct for comment:', () => {
+  let page;
+
+  beforeAll(async () => {
+    // @ts-ignore
+    page = global.page;
+  });
+
+  it('default layout ', async () => {
+    await initCommentEditorWithAdf(page, adf, Device.LaptopMDPI);
+    await page.click(getSelectorForTableCell({ row: 4, cell: 1 }));
     await snapshot(page);
   });
 });

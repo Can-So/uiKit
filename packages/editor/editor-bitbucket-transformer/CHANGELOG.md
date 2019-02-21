@@ -1,5 +1,17 @@
 # @atlaskit/editor-bitbucket-transformer
 
+## 4.1.11
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+  - @atlaskit/editor-common@32.0.0
+  - @atlaskit/editor-core@99.0.0
+  - @atlaskit/editor-test-helpers@6.3.22
+  - @atlaskit/util-data-test@10.2.1
+
+## 4.1.10
+- [patch] [0a601f9b7a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a601f9b7a):
+
+  - support new Bitbucket mentions format
+
 ## 4.1.9
 - [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
 

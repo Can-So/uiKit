@@ -1,16 +1,17 @@
-import {
-  snapshot,
-  initFullPageEditorWithAdf,
-  deviceViewPorts,
-} from '../_utils';
+import { Device, initFullPageEditorWithAdf, snapshot } from '../_utils';
 
 import {
-  clickOnCellOption,
+  clickCellOptions,
   getSelectorForTableCell,
-  clickOnCellOptions,
-} from './_table-utils';
-import { TableCssClassName as ClassName } from '../../../plugins/table/types';
-import { insertTable } from '../_pageObjects';
+  insertTable,
+  selectCellOption,
+  tableSelectors,
+} from '../../__helpers/page-objects/_table';
+import {
+  pressKey,
+  pressKeyup,
+  KeyboardKeys,
+} from '../../__helpers/page-objects/_keyboard';
 import * as adf from '../__fixtures__/noData-adf.json';
 
 describe('Table context menu:', () => {
@@ -24,30 +25,29 @@ describe('Table context menu:', () => {
 
   const tableAction = async () => {
     await page.click(firstCellSelector);
-    await page.keyboard.down('Shift');
+    await pressKey(page, KeyboardKeys.shift);
     await page.click(lastCellSelector);
-    await page.keyboard.up('Shift');
-    await page.waitForSelector(
-      `.ProseMirror table .${ClassName.SELECTED_CELL}`,
-    );
-    await clickOnCellOptions(page);
+    await pressKeyup(page, KeyboardKeys.shift);
+    await page.waitForSelector(tableSelectors.selectedCell);
+    await clickCellOptions(page);
     await snapshot(page);
-    await clickOnCellOption(page, 'Merge cells');
+    await selectCellOption(page, tableSelectors.mergeCellsText);
     await snapshot(page);
+    await page.waitForSelector(firstCellSelector);
     await page.click(firstCellSelector);
-    await clickOnCellOptions(page);
+    await clickCellOptions(page);
     await snapshot(page);
-    await clickOnCellOption(page, 'Split cell');
+    await selectCellOption(page, tableSelectors.splitCellText);
     await snapshot(page);
   };
+
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
   });
 
   beforeEach(async () => {
-    await page.setViewport(deviceViewPorts.LaptopHiDPI);
-    await initFullPageEditorWithAdf(page, adf);
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI);
     await insertTable(page);
   });
 

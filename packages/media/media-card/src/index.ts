@@ -4,12 +4,12 @@ import {
   MediaType,
   FileProcessingStatus,
   Context,
+  Identifier,
   ImageResizeMode,
 } from '@atlaskit/media-core';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 
 import { CardAction } from './actions';
-import { Identifier } from './root/domain';
 
 // the only components we expose to consumers is Card and CardView
 export { default as Card } from './root/card/cardLoader';
@@ -20,8 +20,6 @@ export {
   CardViewState,
   CardViewOwnProps as CardViewProps,
 } from './root/cardView';
-
-export * from './root/domain';
 
 export * from './actions';
 

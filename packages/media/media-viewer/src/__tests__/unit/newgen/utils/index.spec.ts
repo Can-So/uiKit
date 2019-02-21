@@ -1,9 +1,9 @@
+import { Identifier } from '@atlaskit/media-core';
 import {
   constructAuthTokenUrl,
   getSelectedIndex,
 } from '../../../../newgen/utils';
 import { createContext } from '../../_stubs';
-import { Identifier } from '../../../../newgen/domain';
 
 const token = 'some-token';
 const baseUrl = 'some-base-url';
@@ -62,12 +62,12 @@ describe('utils', () => {
       const identifier: Identifier = {
         id: 'some-id',
         occurrenceKey: 'some-custom-occurrence-key',
-        type: 'file',
+        mediaItemType: 'file',
       };
       const identifier2: Identifier = {
         id: 'some-id-2',
         occurrenceKey: 'some-custom-occurrence-key',
-        type: 'file',
+        mediaItemType: 'file',
       };
 
       const items = [identifier, identifier2];
@@ -78,17 +78,17 @@ describe('utils', () => {
       const identifier: Identifier = {
         id: 'some-id',
         occurrenceKey: 'some-custom-occurrence-key',
-        type: 'file',
+        mediaItemType: 'file',
       };
       const identifier2: Identifier = {
         id: 'some-id-2',
         occurrenceKey: 'some-custom-occurrence-key',
-        type: 'file',
+        mediaItemType: 'file',
       };
       const notFoundIdentifier: Identifier = {
         id: 'some-id-not-found',
         occurrenceKey: 'some-custom-occurrence-key',
-        type: 'file',
+        mediaItemType: 'file',
       };
 
       const items = [identifier, identifier2];

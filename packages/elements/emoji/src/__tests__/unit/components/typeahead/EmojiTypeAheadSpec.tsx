@@ -128,7 +128,7 @@ describe('EmojiTypeAhead', () => {
   it('should choose current selection when chooseCurrentSelection called', () => {
     let choseEmoji: OptionalEmojiDescription;
     return setupTypeAhead({
-      onSelection: (emojiId, emoji) => {
+      onSelection: (_emojiId, emoji) => {
         choseEmoji = emoji;
       },
     } as Props).then(component =>
@@ -155,7 +155,7 @@ describe('EmojiTypeAhead', () => {
     let choseEmoji: OptionalEmojiDescription;
 
     return setupTypeAhead({
-      onSelection: (emojiId, emoji) => {
+      onSelection: (_emojiId, emoji) => {
         choseEmoji = emoji;
       },
     } as Props).then(component =>
@@ -204,7 +204,7 @@ describe('EmojiTypeAhead', () => {
     const emojiResourcePromise = getEmojiResourcePromise();
     return setupTypeAhead({
       emojiProvider: emojiResourcePromise,
-      onSelection: (emojiId, emoji) => {
+      onSelection: (_emojiId, emoji) => {
         choseEmoji = emoji;
       },
     }).then(component =>

@@ -101,13 +101,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     }
   };
 
-  private handleCloseDialog = ({
-    isOpen,
-    event,
-  }: {
-    isOpen: boolean;
-    event: any;
-  }) => {
+  private handleCloseDialog = (_: { isOpen: boolean; event: any }) => {
     // TODO: send analytics
     this.setState({
       isDialogOpen: false,
@@ -144,7 +138,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     );
   };
 
-  handleShareFailure = (err: Error) => {
+  handleShareFailure = (_err: Error) => {
     // TBC: FS-3429 replace send button with retry button
     // will need a prop to pass through the error message to the ShareForm
   };

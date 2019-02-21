@@ -1,6 +1,15 @@
 import { getExampleUrl } from '@atlaskit/visual-regression/helper';
 
-export const DEFAULT_WIDTH = 0;
+export {
+  setupMediaMocksProviders,
+  editable,
+  changeSelectedNodeLayout,
+  rerenderEditor,
+  setFeature,
+  toggleFeature,
+} from '../integration/_helpers';
+
+export const DEFAULT_WIDTH = 800;
 export const DEFAULT_HEIGHT = 600;
 
 export const dynamicTextViewportSizes = [
@@ -9,14 +18,6 @@ export const dynamicTextViewportSizes = [
   { width: 768, height: 4000 },
   { width: 1024, height: 4000 },
 ];
-
-export const deviceViewPorts = {
-  LaptopHiDPI: { width: 1440, height: 900 },
-  LaptopMDPI: { width: 1280, height: 800 },
-  iPadPro: { width: 1024, height: 1366 },
-  iPad: { width: 768, height: 1024 },
-  iPhonePlus: { width: 414, height: 736 },
-};
 
 // TODO: remove this gotoExample step
 export const initEditor = async (page, appearance: string) => {
@@ -47,36 +48,76 @@ export const initEditor = async (page, appearance: string) => {
   });
 };
 
-export const enableAllEditorProps = {
-  allowPanel: true,
-  allowLists: true,
-  allowTextColor: true,
-  allowTextAlignment: true,
-  quickInsert: true,
-  allowCodeBlocks: { enableKeybindingsForIDE: true },
-  allowTables: {
-    advanced: true,
-  },
-  allowBreakout: true,
-  allowJiraIssue: true,
-  allowUnsupportedContent: true,
-  allowExtension: {
-    allowBreakout: true,
-  },
-  allowRule: true,
-  allowDate: true,
-  allowLayouts: {
-    allowBreakout: true,
-  },
-  allowIndentation: true,
-  allowTemplatePlaceholders: { allowInserting: true },
-  allowStatus: true,
-  media: true, // add true here since the testing example would handle providers
-  placeholder:
-    'Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule.',
-  shouldFocus: false,
-  UNSAFE_cards: true,
+export enum Device {
+  Default = 'Default',
+  LaptopHiDPI = 'LaptopHiDPI',
+  LaptopMDPI = 'LaptopMDPI',
+  iPadPro = 'iPadPro',
+  iPad = 'iPad',
+  iPhonePlus = 'iPhonePlus',
+}
+
+export const deviceViewPorts = {
+  [Device.Default]: { width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT },
+  [Device.LaptopHiDPI]: { width: 1440, height: 900 },
+  [Device.LaptopMDPI]: { width: 1280, height: 800 },
+  [Device.iPadPro]: { width: 1024, height: 1366 },
+  [Device.iPad]: { width: 768, height: 1024 },
+  [Device.iPhonePlus]: { width: 414, height: 736 },
 };
+
+function getEditorProps(appearance: Appearance) {
+  const enableAllEditorProps = {
+    allowPanel: true,
+    allowLists: true,
+    allowTextColor: true,
+    allowTextAlignment: true,
+    quickInsert: true,
+    allowCodeBlocks: { enableKeybindingsForIDE: true },
+    allowTables: {
+      advanced: true,
+    },
+    allowBreakout: true,
+    allowJiraIssue: true,
+    allowUnsupportedContent: true,
+    allowExtension: {
+      allowBreakout: true,
+    },
+    allowRule: true,
+    allowDate: true,
+    allowLayouts: {
+      allowBreakout: true,
+    },
+    allowIndentation: true,
+    allowTemplatePlaceholders: { allowInserting: true },
+    allowStatus: true,
+    media: true, // add true here since the testing example would handle providers
+    placeholder:
+      'Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule.',
+    shouldFocus: false,
+    UNSAFE_cards: true,
+  };
+
+  if (appearance === Appearance.fullPage) {
+    return {
+      ...enableAllEditorProps,
+      primaryToolbarComponents: true,
+      contentComponents: true,
+    };
+  }
+
+  if (appearance === Appearance.comment) {
+    return {
+      ...enableAllEditorProps,
+      media: {
+        allowMediaSingle: false,
+        allowMediaGroup: true,
+      },
+    };
+  }
+
+  return enableAllEditorProps;
+}
 
 export async function mountEditor(page: any, props) {
   await page.evaluate(props => {
@@ -85,26 +126,62 @@ export async function mountEditor(page: any, props) {
   await page.waitForSelector('.ProseMirror', 500);
 }
 
-export const initFullPageEditorWithAdf = async (page, adf: Object) => {
+export enum Appearance {
+  fullPage = 'full-page',
+  comment = 'comment',
+}
+
+type InitEditorWithADFOptions = {
+  appearance: Appearance;
+  adf?: Object;
+  device?: Device;
+};
+
+export const initEditorWithAdf = async (
+  page,
+  { appearance, adf = {}, device = Device.Default }: InitEditorWithADFOptions,
+) => {
   const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
-  await page.goto(url);
+
+  const currentUrl = page.url();
+
+  if (currentUrl !== url) {
+    // We don't have to load the already existing page
+    await page.goto(url);
+  }
+
+  // Set the viewport to the right one
+  await page.setViewport(deviceViewPorts[device]);
+
+  // Mount the editor with the right attributes
   await mountEditor(page, {
-    appearance: 'full-page',
+    appearance: appearance,
     defaultValue: JSON.stringify(adf),
-    primaryToolbarComponents: true,
-    contentComponents: true,
-    ...enableAllEditorProps,
+    ...getEditorProps(appearance),
   });
 };
 
-export const initCommentEditorWithAdf = async (page, adf: Object) => {
-  const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
-  await page.goto(url);
-  await mountEditor(page, {
-    appearance: 'comment',
-    defaultValue: JSON.stringify(adf),
-    primaryToolbarComponents: true,
-    ...enableAllEditorProps,
+export const initFullPageEditorWithAdf = async (
+  page,
+  adf: Object,
+  device?: Device,
+) => {
+  await initEditorWithAdf(page, {
+    adf,
+    appearance: Appearance.fullPage,
+    device,
+  });
+};
+
+export const initCommentEditorWithAdf = async (
+  page,
+  adf: Object,
+  device?: Device,
+) => {
+  await initEditorWithAdf(page, {
+    adf,
+    appearance: Appearance.comment,
+    device,
   });
 };
 

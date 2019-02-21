@@ -93,12 +93,12 @@ export default class EmojiPickerVirtualList extends PureComponent<
     onSearch: () => {},
   };
 
-  private allEmojiGroups: EmojiGroup[];
+  private allEmojiGroups!: EmojiGroup[];
   private activeCategoryId: CategoryId | undefined | null;
   private virtualItems: VirtualItem<any>[] = [];
   private categoryTracker: CategoryTracker = new CategoryTracker();
 
-  context: EmojiContext;
+  context!: EmojiContext;
 
   constructor(props: Props) {
     super(props);
@@ -194,7 +194,7 @@ export default class EmojiPickerVirtualList extends PureComponent<
     return items;
   };
 
-  private buildVirtualItems = (props: Props, state: State): void => {
+  private buildVirtualItems = (props: Props, _state: State): void => {
     const { emojis, loading, query } = props;
 
     let items: Items.VirtualItem<any>[] = [];

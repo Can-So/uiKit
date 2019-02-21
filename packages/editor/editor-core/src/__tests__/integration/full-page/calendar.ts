@@ -50,7 +50,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'calendar.ts: clicking on another date should open its date picker',
-  { skip: ['edge', 'ie', 'safari', 'firefox'] },
+  { skip: ['edge', 'ie', 'safari'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowDate: true });

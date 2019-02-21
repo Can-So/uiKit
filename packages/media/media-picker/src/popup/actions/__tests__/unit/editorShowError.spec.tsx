@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { editorShowError, EDITOR_SHOW_ERROR } from '../../editorShowError';
 
 describe('editorShowError action creator', () => {
@@ -8,7 +6,7 @@ describe('editorShowError action creator', () => {
 
   it('should create error data with message and handler if both are passed', () => {
     const action = (editorShowError as any)(message, retryHandler);
-    expect(action).to.deep.equal({
+    expect(action).toEqual({
       type: EDITOR_SHOW_ERROR,
       error: { message, retryHandler },
     });

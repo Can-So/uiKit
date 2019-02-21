@@ -44,9 +44,10 @@ export default class EmojiDeletePreview extends Component<Props, State> {
     const { emoji, onDeleteEmoji, onCloseDelete } = this.props;
     if (!this.state.loading) {
       this.setState({ loading: true });
-      return onDeleteEmoji(emoji).then(success => {
+      onDeleteEmoji(emoji).then(success => {
         if (success) {
-          return onCloseDelete();
+          onCloseDelete();
+          return;
         }
         this.setState({
           loading: false,

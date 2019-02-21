@@ -76,10 +76,10 @@ const client: Client = {
       },
     }),
   share: (
-    content: Content,
-    users: User[],
-    metaData: MetaData,
-    comment?: Comment,
+    _content: Content,
+    _users: User[],
+    _metaData: MetaData,
+    _comment?: Comment,
   ) => {
     return new Promise(resolve => {
       setTimeout(

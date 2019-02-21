@@ -22,7 +22,7 @@ import {
 // add the button click on the right toolbar
 BrowserTestCase(
   'mention-3.ts: user can click ToolbarMentionPicker and see mention',
-  { skip: ['ie', 'firefox'] },
+  { skip: ['ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -40,7 +40,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-3.ts: should not insert on space if multiple exact nickname match',
-  { skip: ['ie', 'firefox'] },
+  { skip: ['ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -62,7 +62,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-3.ts: inserted if space on single match',
-  { skip: ['ie', 'firefox'] },
+  { skip: ['ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -88,7 +88,7 @@ BrowserTestCase(
 BrowserTestCase(
   'mention-3.ts: user should not see mention inside inline code',
   // TODO: Fix unknown character on BS
-  { skip: ['safari', 'ie', 'firefox'] },
+  { skip: ['safari', 'ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -106,7 +106,7 @@ BrowserTestCase(
 BrowserTestCase(
   'mention-3.ts: user should not see mention inside a code block',
   // TODO: Fix unknown character on BS
-  { skip: ['safari', 'ie', 'firefox'] },
+  { skip: ['safari', 'ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
@@ -125,7 +125,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-3.ts: users with same first name should not be selected if space',
-  { skip: ['ie', 'firefox'] },
+  { skip: ['ie'] },
   async client => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {

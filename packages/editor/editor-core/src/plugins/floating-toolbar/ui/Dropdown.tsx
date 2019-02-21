@@ -52,7 +52,7 @@ const CompositeIcon = ({ icon }) => (
 
 export interface Props {
   title: string;
-  icon: ReactElement<any>;
+  icon?: ReactElement<any>;
   hideExpandIcon?: boolean;
   options: DropdownOptions<Function>;
   dispatchCommand: (command: Function) => void;
@@ -81,7 +81,32 @@ export default class Dropdown extends Component<Props, State> {
       hideExpandIcon,
     } = this.props;
 
-    const TriggerIcon = hideExpandIcon ? icon : <CompositeIcon icon={icon} />;
+    let trigger;
+    if (icon) {
+      const TriggerIcon = hideExpandIcon ? icon : <CompositeIcon icon={icon} />;
+      trigger = (
+        <Button
+          title={title}
+          icon={TriggerIcon}
+          onClick={this.toggleOpen}
+          selected={isOpen}
+        />
+      );
+    } else {
+      trigger = (
+        <Button
+          iconAfter={
+            <DropdownExpandContainer>
+              <ExpandIcon label="Expand dropdown menu" />
+            </DropdownExpandContainer>
+          }
+          onClick={this.toggleOpen}
+          selected={isOpen}
+        >
+          {title}
+        </Button>
+      );
+    }
 
     /**
      * We want to change direction of our dropdowns a bit early,
@@ -105,14 +130,7 @@ export default class Dropdown extends Component<Props, State> {
         handleEscapeKeydown={this.hide}
         fitWidth={fitWidth + fitTolerance}
         fitHeight={fitHeight + fitTolerance}
-        trigger={
-          <Button
-            title={title}
-            icon={TriggerIcon}
-            onClick={this.toggleOpen}
-            selected={isOpen}
-          />
-        }
+        trigger={trigger}
       >
         {Array.isArray(options)
           ? this.renderArrayOptions(options)

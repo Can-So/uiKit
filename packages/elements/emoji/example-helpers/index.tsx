@@ -13,7 +13,7 @@ export const onOpen: OnLifecycle = () => debug('picker opened');
 
 export const onClose: OnLifecycle = () => debug('picker closed');
 
-export const onSelection: OnEmojiEvent = (emojiId, emoji, event?) =>
+export const onSelection: OnEmojiEvent = (emojiId, emoji) =>
   debug('emoji selected', emojiId, emoji);
 
 export const onToneSelected: OnToneSelected = (variation: number) =>
