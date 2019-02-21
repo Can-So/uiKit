@@ -1,1 +1,0 @@
-- Modified share web component to send a single atlOriginId
