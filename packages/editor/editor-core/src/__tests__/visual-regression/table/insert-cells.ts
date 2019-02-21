@@ -22,30 +22,30 @@ describe('Snapshot Test: table insert/delete', () => {
   it(`should be able insert after first row`, async () => {
     await page.hover(tableSelectors.firstRowControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 
   it(`should be able insert after last row`, async () => {
     await page.hover(tableSelectors.lastRowControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 
   it(`should be able insert after first column`, async () => {
     await page.hover(tableSelectors.firstColumnControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 
   // TODO: move this to integration tests in future
   it(`should be able to insert row`, async () => {
     await insertRow(page, 1);
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 
   // TODO: move this to integration tests in future
   it(`should be able to insert column`, async () => {
     await insertColumn(page, 1);
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 });

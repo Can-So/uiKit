@@ -30,15 +30,15 @@ describe('Table context menu:', () => {
     await pressKeyup(page, KeyboardKeys.shift);
     await page.waitForSelector(tableSelectors.selectedCell);
     await clickCellOptions(page);
-    await snapshot(page);
+    await snapshot(page, 0.04);
     await selectCellOption(page, tableSelectors.mergeCellsText);
-    await snapshot(page);
+    await snapshot(page, 0.04);
     await page.waitForSelector(firstCellSelector);
     await page.click(firstCellSelector);
     await clickCellOptions(page);
-    await snapshot(page);
+    await snapshot(page, 0.04);
     await selectCellOption(page, tableSelectors.splitCellText);
-    await snapshot(page);
+    await snapshot(page, 0.04);
   };
 
   beforeAll(async () => {
