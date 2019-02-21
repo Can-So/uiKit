@@ -104,7 +104,6 @@ describe('MediaGroup', () => {
 
     const provider = await mediaProvider;
     await provider.viewContext;
-    await provider.linkCreateContext;
     await provider.uploadContext;
     mediaGroup.update();
 

@@ -1,0 +1,166 @@
+{
+  "releases": [
+    { "name": "@atlaskit/editor-core", "type": "major" },
+    { "name": "@atlaskit/editor-test-helpers", "type": "major" }
+  ],
+  "dependents": [
+    {
+      "name": "@atlaskit/comment",
+      "type": "patch",
+      "dependencies": ["@atlaskit/editor-core"]
+    },
+    {
+      "name": "@atlaskit/conversation",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/comment",
+        "@atlaskit/editor-common",
+        "@atlaskit/renderer",
+        "@atlaskit/reactions",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-bitbucket-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/adf-schema",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-confluence-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/adf-schema",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-jira-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/adf-schema",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-json-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/adf-schema",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-markdown-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/adf-schema",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-mobile-bridge",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/editor-common",
+        "@atlaskit/renderer",
+        "@atlaskit/emoji",
+        "@atlaskit/mention",
+        "@atlaskit/status",
+        "@atlaskit/editor-core",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-wikimarkup-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/adf-schema",
+        "@atlaskit/editor-common",
+        "@atlaskit/renderer",
+        "@atlaskit/editor-core",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/embedded-document",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-common",
+        "@atlaskit/renderer",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/adf-schema",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-common",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/adf-schema",
+        "@atlaskit/emoji",
+        "@atlaskit/mention",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/renderer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/adf-schema",
+        "@atlaskit/editor-common",
+        "@atlaskit/mention",
+        "@atlaskit/status",
+        "@atlaskit/editor-test-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/emoji",
+      "type": "patch",
+      "dependencies": ["@atlaskit/editor-test-helpers"]
+    },
+    {
+      "name": "@atlaskit/mention",
+      "type": "patch",
+      "dependencies": ["@atlaskit/editor-test-helpers"]
+    },
+    {
+      "name": "@atlaskit/reactions",
+      "type": "patch",
+      "dependencies": ["@atlaskit/emoji", "@atlaskit/editor-test-helpers"]
+    },
+    {
+      "name": "@atlaskit/share",
+      "type": "patch",
+      "dependencies": ["@atlaskit/editor-test-helpers"]
+    },
+    {
+      "name": "@atlaskit/status",
+      "type": "patch",
+      "dependencies": ["@atlaskit/editor-test-helpers"]
+    }
+  ]
+}
