@@ -61,11 +61,6 @@ export interface MediaProvider {
   uploadContext?: Promise<Context>;
 
   /**
-   * (optional) Used for creation of new Media links.
-   */
-  linkCreateContext?: Promise<Context>;
-
-  /**
    * (optional) For any additional feature to be enabled
    */
   featureFlags?: FeatureFlags;
