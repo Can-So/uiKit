@@ -14,8 +14,8 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Jed W",
-    "Jared C"
+    "Harsha Ivaturi",
+    "Ajay M"
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
