@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 100.1.0
+- [minor] [5dc1e046b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dc1e046b2):
+
+  - Apply stricture typings to elements related editor code
+
 ## 100.0.0
 - [major] [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
 
