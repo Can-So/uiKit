@@ -15,6 +15,6 @@ describe('Snapshot Test: Overflow shadows', () => {
       appearance: 'full-page',
       document,
     });
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 });
