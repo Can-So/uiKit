@@ -1,0 +1,1 @@
+- Firing events according to minimum event spec
