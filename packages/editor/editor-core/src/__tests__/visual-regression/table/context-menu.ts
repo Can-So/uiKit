@@ -23,7 +23,7 @@ describe('Table context menu:', () => {
   });
   let lastCellSelector = getSelectorForTableCell({ row: 3, cell: 1 });
 
-  const tableAction = async () => {
+  const tableMergeAndSplitCells = async () => {
     await page.click(firstCellSelector);
     await pressKey(page, KeyboardKeys.shift);
     await page.click(lastCellSelector);
@@ -52,18 +52,18 @@ describe('Table context menu:', () => {
   });
 
   it(`should merge and split cell for row`, async () => {
-    await tableAction();
+    await tableMergeAndSplitCells();
   });
 
   it(`should merge and split cell for column`, async () => {
     firstCellSelector = getSelectorForTableCell({ row: 2, cell: 1 });
     lastCellSelector = getSelectorForTableCell({ row: 2, cell: 3 });
-    await tableAction();
+    await tableMergeAndSplitCells();
   });
 
   it(`should merge and split cell for row+col`, async () => {
     firstCellSelector = getSelectorForTableCell({ row: 2, cell: 1 });
     lastCellSelector = getSelectorForTableCell({ row: 3, cell: 2 });
-    await tableAction();
+    await tableMergeAndSplitCells();
   });
 });

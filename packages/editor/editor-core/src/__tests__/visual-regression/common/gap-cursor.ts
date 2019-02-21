@@ -1,4 +1,4 @@
-import { initFullPageEditorWithAdf, snapshot } from '../_utils';
+import { initFullPageEditorWithAdf, snapshot, Device } from '../_utils';
 import * as gapcursor from '../__fixtures__/gap-cursor-adf.json';
 import { selectors } from '../../__helpers/page-objects/_editor';
 import { pressKey, KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
@@ -9,7 +9,7 @@ describe('Gap cursor:', () => {
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initFullPageEditorWithAdf(page, gapcursor);
+    await initFullPageEditorWithAdf(page, gapcursor, Device.LaptopMDPI);
   });
 
   it('should render gap cursor for code when ArrowRight', async () => {

@@ -1,4 +1,4 @@
-import { initFullPageEditorWithAdf, snapshot } from '../_utils';
+import { initFullPageEditorWithAdf, snapshot, Device } from '../_utils';
 import {
   clickToolbarMenu,
   ToolbarMenuItem,
@@ -28,7 +28,7 @@ describe('z-indexes:', () => {
 
   // TODO enable after fixing selectors on tables
   it('should always position table trash icon below dropdowns from main menu', async () => {
-    await initFullPageEditorWithAdf(page, noData);
+    await initFullPageEditorWithAdf(page, noData, Device.LaptopMDPI);
     await insertTable(page);
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.insertBlock);
@@ -37,7 +37,7 @@ describe('z-indexes:', () => {
   });
 
   it('should always position table trash icon below emoji picker', async () => {
-    await initFullPageEditorWithAdf(page, noData);
+    await initFullPageEditorWithAdf(page, noData, Device.LaptopMDPI);
     await insertTable(page);
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.emoji);
@@ -46,7 +46,7 @@ describe('z-indexes:', () => {
   });
 
   it('should always position table trash icon below mention picker', async () => {
-    await initFullPageEditorWithAdf(page, noData);
+    await initFullPageEditorWithAdf(page, noData, Device.LaptopMDPI);
     await insertTable(page);
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.mention);
