@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
-import { akTypographyMixins } from '@atlaskit/util-shared-styles';
+import { gridSize, typography } from '@atlaskit/theme';
 import { messages } from '../messages';
 import MaginfyingGlassImage from '../assets/MagnifyingGlassImage';
 
@@ -29,7 +28,7 @@ const TextWrapper = styled.div`
 `;
 
 const Title = styled.h4`
-  ${akTypographyMixins.h600 as any};
+  ${typography.h600()};
   margin-bottom: ${gridSize() * 2}px;
   margin-top: 0;
 `;
