@@ -12,7 +12,6 @@ import {
   State,
 } from '../../../components/ShareDialogWithTrigger';
 import { ShareData, ShareForm } from '../../../components/ShareForm';
-import { ShareButtonStyle } from '../../../types';
 
 let wrapper: ShallowWrapper<Props, State, ShareDialogWithTrigger>;
 let mockOnShareSubmit: jest.Mock;
@@ -77,12 +76,10 @@ describe('ShareDialogWithTrigger', () => {
   });
 
   describe('buttonStyle prop', () => {
-    it(`should render no text in the share button if the value is ${
-      ShareButtonStyle.IconOnly
-    }`, () => {
+    it('should render no text in the share button if the value is "icon-only"', () => {
       const newWrapper = shallowWithIntl<ShareDialogWithTrigger>(
         <ShareDialogWithTrigger
-          buttonStyle={ShareButtonStyle.IconOnly}
+          buttonStyle="icon-only"
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
           onShareSubmit={mockOnShareSubmit}
@@ -98,12 +95,10 @@ describe('ShareDialogWithTrigger', () => {
       ).toBeNull();
     });
 
-    it(`should render text in the share button if the value is ${
-      ShareButtonStyle.IconWithText
-    }`, () => {
+    it('should render text in the share button if the value is "icon-with-text"', () => {
       const newWrapper = shallowWithIntl<ShareDialogWithTrigger>(
         <ShareDialogWithTrigger
-          buttonStyle={ShareButtonStyle.IconWithText}
+          buttonStyle="icon-with-text"
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
           onShareSubmit={mockOnShareSubmit}

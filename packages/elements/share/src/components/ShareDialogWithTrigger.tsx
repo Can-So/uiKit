@@ -58,7 +58,7 @@ export const defaultShareContentState: DialogContentState = {
 
 export class ShareDialogWithTrigger extends React.Component<Props, State> {
   static defaultProps = {
-    buttonStyle: ShareButtonStyle.IconOnly,
+    buttonStyle: 'icon-only' as 'icon-only',
     isDisabled: false,
     shouldCloseOnEscapePress: false,
   };
@@ -186,7 +186,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
           ) : (
             <ShareButton
               text={
-                this.props.buttonStyle === ShareButtonStyle.IconWithText ? (
+                this.props.buttonStyle === 'icon-with-text' ? (
                   <FormattedMessage {...messages.shareTriggerButtonText} />
                 ) : null
               }
