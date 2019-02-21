@@ -56,7 +56,7 @@ interface FileProps {
   dataProviders?: ProviderFactory;
 }
 
-const containerId = 'container:abc:abc/1234567';
+const objectId = 'container:abc:abc/1234567';
 
 class File extends React.Component<FileProps, { addAt?: number }> {
   constructor(props) {
@@ -96,7 +96,7 @@ class File extends React.Component<FileProps, { addAt?: number }> {
             dataProviders={dataProviders}
             isExpanded={false}
             meta={{ name, lineNumber: index }}
-            containerId={containerId}
+            objectId={objectId}
           />
         </ConvoWrapper>
       );
@@ -111,7 +111,7 @@ class File extends React.Component<FileProps, { addAt?: number }> {
             dataProviders={dataProviders}
             isExpanded={true}
             meta={{ name, lineNumber: index }}
-            containerId={containerId}
+            objectId={objectId}
           />
         </ConvoWrapper>
       );
@@ -173,7 +173,7 @@ export class Demo extends React.Component<
     const { provider } = this.props;
     // First get a list of all conversations for this page
     try {
-      const conversations = await provider.getConversations(containerId);
+      const conversations = await provider.getConversations(objectId);
       this.setState({ conversations });
       this.unsubscribe = provider.subscribe(this.handleDispatch);
     } catch (err) {
@@ -238,7 +238,7 @@ export class Demo extends React.Component<
           provider={provider}
           dataProviders={dataProviders}
           id={conversation.conversationId}
-          containerId={containerId}
+          objectId={objectId}
         />
       </div>
     ));
@@ -324,7 +324,7 @@ export class Demo extends React.Component<
           <Conversation
             provider={provider}
             dataProviders={dataProviders}
-            containerId={containerId}
+            objectId={objectId}
           />
         ) : null}
         <File

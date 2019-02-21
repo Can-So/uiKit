@@ -29,13 +29,17 @@ export interface ConversationResourceConfig {
 
 export interface ResourceProvider {
   store: Store<State | undefined>;
-  getConversations(containerId: string): Promise<Conversation[]>;
+  getConversations(
+    objectId: string,
+    containerId?: string,
+  ): Promise<Conversation[]>;
   subscribe(handler: Handler): Unsubscribe;
   create(
     localId: string,
-    containerId: string,
     value: any,
     meta: any,
+    objectId: string,
+    containerId?: string,
   ): Promise<Conversation>;
   addComment(
     conversationId: string,
@@ -62,8 +66,9 @@ export interface ResourceProvider {
     value: any,
     conversationId: string,
     commentId: string | undefined,
-    containerId: string,
     meta: any,
+    objectId: string,
+    containerId?: string,
   );
 }
 
@@ -105,7 +110,10 @@ export class AbstractConversationResource implements ResourceProvider {
   /**
    * Retrieve the IDs (and meta-data) for all conversations associated with the container ID.
    */
-  getConversations(containerId: string): Promise<Conversation[]> {
+  getConversations(
+    objectId: string,
+    containerId?: string,
+  ): Promise<Conversation[]> {
     return Promise.reject('Not implemented');
   }
 
@@ -125,9 +133,10 @@ export class AbstractConversationResource implements ResourceProvider {
    */
   create(
     localId: string,
-    containerId: string,
     value: any,
     meta: any,
+    objectId: string,
+    containerId?: string,
   ): Promise<Conversation> {
     return Promise.reject('Not implemented');
   }
@@ -187,8 +196,9 @@ export class AbstractConversationResource implements ResourceProvider {
     value: any,
     conversationId: string,
     commentId: string | undefined,
-    containerId: string,
     meta: any,
+    objectId: string,
+    containerId?: string,
   ) {
     // Nothing to see here..
   }
@@ -237,12 +247,13 @@ export class ConversationResource extends AbstractConversationResource {
   /**
    * Retrieve the IDs (and meta-data) for all conversations associated with the container ID.
    */
-  async getConversations(containerId: string) {
+  async getConversations(objectId: string, containerId?: string) {
     const { dispatch } = this;
     dispatch({ type: FETCH_CONVERSATIONS_REQUEST });
 
+    const containerIdQuery = containerId ? `&containerId=${containerId}` : '';
     const { values } = await this.makeRequest<{ values: Conversation[] }>(
-      `/conversation?containerId=${containerId}&expand=comments.document.adf`,
+      `/conversation?objectId=${objectId}${containerIdQuery}&expand=comments.document.adf`,
       {
         method: 'GET',
       },
@@ -258,17 +269,19 @@ export class ConversationResource extends AbstractConversationResource {
    */
   async create(
     localId: string,
-    containerId: string,
     value: any,
     meta: any,
+    objectId: string,
+    containerId?: string,
   ): Promise<Conversation> {
     const { dispatch } = this;
     const isMain = !meta || Object.keys(meta).length === 0;
     const tempConversation = this.createConversation(
       localId,
-      containerId,
       value,
       meta,
+      objectId,
+      containerId,
       isMain,
     );
     let result: Conversation;
@@ -288,6 +301,7 @@ export class ConversationResource extends AbstractConversationResource {
         {
           method: 'POST',
           body: JSON.stringify({
+            objectId,
             containerId,
             meta,
             comment: {
@@ -486,17 +500,19 @@ export class ConversationResource extends AbstractConversationResource {
    */
   private createConversation(
     localId: string,
-    containerId: string,
     value: any,
     meta: any,
+    objectId: string,
+    containerId?: string,
     isMain?: boolean,
   ): Conversation {
     return {
       localId,
-      containerId,
+      objectId,
       meta,
       conversationId: localId,
       comments: [this.createComment(localId, localId, value)],
+      containerId,
       isMain,
     };
   }
