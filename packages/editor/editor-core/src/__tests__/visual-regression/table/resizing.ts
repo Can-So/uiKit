@@ -60,7 +60,7 @@ describe('Snapshot Test: table resizing', () => {
         }
       }, ClassName);
 
-      await snapshot(page);
+      await snapshot(page, 0.01);
     });
   });
 });
