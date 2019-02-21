@@ -29,6 +29,7 @@ import {
   selectColumn,
   selectRow,
   handleCut,
+  toggleHeaderColumn,
 } from '../../../../plugins/table/actions';
 import { TablePluginState } from '../../../../plugins/table/types';
 import tablesPlugin from '../../../../plugins/table';
@@ -534,6 +535,34 @@ describe('table plugin: actions', () => {
           ),
         );
       });
+    });
+  });
+
+  describe('#toggleHeaderColumn', () => {
+    it('should convert all cells including rowspans to table headers', () => {
+      const { editorView } = editor(
+        doc(
+          table()(
+            tr(td()(p('c1')), td()(p('c2'))),
+            tr(td({ rowspan: 2 })(p('c3')), td()(p('c4'))),
+            tr(td()(p('c6'))),
+            tr(td()(p('c7')), td()(p('c8'))),
+          ),
+        ),
+      );
+      const { state, dispatch } = editorView;
+      toggleHeaderColumn(state, dispatch);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          table()(
+            tr(th()(p('c1')), td()(p('c2'))),
+            tr(th({ rowspan: 2 })(p('c3')), td()(p('c4'))),
+            tr(td()(p('c6'))),
+            tr(th()(p('c7')), td()(p('c8'))),
+          ),
+        ),
+      );
     });
   });
 });
