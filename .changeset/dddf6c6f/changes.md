@@ -1,1 +1,0 @@
-- Added aria labels to Emoji upload component
