@@ -1,5 +1,12 @@
 # @atlaskit/editor-json-transformer
 
+## 4.1.11
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/adf-schema@1.5.4
+  - @atlaskit/editor-common@32.0.2
+  - @atlaskit/editor-core@100.0.0
+  - @atlaskit/editor-test-helpers@7.0.0
+
 ## 4.1.10
 - Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
   - @atlaskit/editor-common@32.0.0

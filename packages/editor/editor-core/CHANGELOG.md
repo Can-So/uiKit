@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 100.0.0
+- [major] [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+
+  - Remove linkCreateContext from MediaProvider
+
 ## 99.0.1
 - [patch] [7f93e282b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f93e282b8):
 

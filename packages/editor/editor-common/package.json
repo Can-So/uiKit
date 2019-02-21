@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-common",
-  "version": "32.0.1",
+  "version": "32.0.2",
   "description": "A package that contains common classes and components for editor and renderer",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -22,11 +22,11 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/adf-schema": "^1.4.6",
-    "@atlaskit/emoji": "^55.0.0",
+    "@atlaskit/adf-schema": "^1.5.4",
+    "@atlaskit/emoji": "^55.0.1",
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/media-card": "^54.0.0",
-    "@atlaskit/mention": "^16.0.1",
+    "@atlaskit/mention": "^16.2.1",
     "@atlaskit/profilecard": "^6.1.5",
     "@atlaskit/size-detector": "^5.0.7",
     "@atlaskit/theme": "^7.0.0",
@@ -47,8 +47,8 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/editor-json-transformer": "^4.1.10",
-    "@atlaskit/editor-test-helpers": "^6.3.22",
+    "@atlaskit/editor-json-transformer": "^4.1.11",
+    "@atlaskit/editor-test-helpers": "^7.0.0",
     "@atlaskit/media-core": "^27.1.0",
     "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.0",
