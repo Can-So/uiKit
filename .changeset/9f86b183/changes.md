@@ -1,1 +1,0 @@
-- Updated maintainers to Harsha and Ajay
