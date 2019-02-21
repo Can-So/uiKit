@@ -1,5 +1,10 @@
 import { uuid } from '@atlaskit/adf-schema';
-import { Node as PMNode, ResolvedPos, Schema } from 'prosemirror-model';
+import {
+  Node as PMNode,
+  ResolvedPos,
+  Schema,
+  NodeType,
+} from 'prosemirror-model';
 import {
   EditorState,
   Selection,
@@ -20,7 +25,7 @@ export type TaskDecisionListType = 'taskList' | 'decisionList';
 const getListTypes = (
   listType: TaskDecisionListType,
   schema: Schema,
-): { list; item } => {
+): { list: NodeType; item: NodeType } => {
   const { decisionList, decisionItem, taskList, taskItem } = schema.nodes;
   if (listType === 'taskList') {
     return {
@@ -179,7 +184,7 @@ export const splitListAtSelection = (
 
   const beforeItems: PMNode[] = [];
   const afterItems: PMNode[] = [];
-  parentList.node.content.forEach((item, offset, index) => {
+  parentList.node.content.forEach((item, offset, _index) => {
     if (offset < resolvedItemPos.parentOffset) {
       beforeItems.push(item);
     } else if (offset > resolvedItemPos.parentOffset) {

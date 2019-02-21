@@ -17,7 +17,7 @@ import { changeInDepth } from '../commands';
 
 const createListRule = (
   regex: RegExp,
-  name: string,
+  _name: string,
   list: NodeType,
   item: NodeType,
   schema: Schema,
@@ -29,7 +29,7 @@ const createListRule = (
     regex,
     (
       state: EditorState,
-      match: Object | undefined,
+      _match: Object | undefined,
       start: number,
       end: number,
     ) => {

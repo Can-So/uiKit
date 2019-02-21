@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import { EmojiProvider } from '@atlaskit/emoji';
 import EditorEmojiTypeAhead from '../../../../../plugins/emoji/ui/EmojiTypeAhead';
-import { analyticsService } from '../../../../../analytics';
+import { analyticsService, AnalyticsHandler } from '../../../../../analytics';
 
 describe('EmojiTypeAhead', () => {
   const emojiProvider = Promise.resolve({} as EmojiProvider);
 
-  const validateAnalytics = (currentData, expectedData) => {
+  const validateAnalytics = (currentData: any, expectedData: any) => {
     expect(currentData.event).toBe(expectedData.event);
 
     // does not validate duration cos it is time based
@@ -35,9 +35,9 @@ describe('EmojiTypeAhead', () => {
       selectPrevious: selectPreviousMock,
     } as any;
 
-    let trackEvent;
-    let component;
-    let componentInstance;
+    let trackEvent: jest.SpyInstance<AnalyticsHandler>;
+    let component: ShallowWrapper<EditorEmojiTypeAhead>;
+    let componentInstance: EditorEmojiTypeAhead;
 
     pluginKey.getState.mockReturnValue({
       query: ':ok',
@@ -91,7 +91,7 @@ describe('EmojiTypeAhead', () => {
     });
 
     it('should fire analytics in handleSelectPrevious', () => {
-      componentInstance.handleSelectPrevious();
+      (componentInstance as any).handleSelectPrevious();
       expect(selectPreviousMock).toHaveBeenCalled();
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.fabric.emoji.typeahead.keyup',
@@ -100,7 +100,7 @@ describe('EmojiTypeAhead', () => {
     });
 
     it('should fire analytics in handleSelectNext', () => {
-      componentInstance.handleSelectNext();
+      (componentInstance as any).handleSelectNext();
       expect(selectNextMock).toHaveBeenCalled();
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.fabric.emoji.typeahead.keydown',
@@ -111,7 +111,7 @@ describe('EmojiTypeAhead', () => {
     it('should fire analytics in handleSpaceSelectCurrent', () => {
       componentInstance.handleOnOpen(); // set openTime
 
-      componentInstance.handleSpaceSelectCurrent(
+      (componentInstance as any).handleSpaceSelectCurrent(
         {
           id: 'emojiId',
           type: 'emojiType',
@@ -144,7 +144,7 @@ describe('EmojiTypeAhead', () => {
     it('should fire analytics in handleSelectedEmoji', () => {
       componentInstance.handleOnOpen(); // set openTime
 
-      componentInstance.handleSelectedEmoji('emojiId', {
+      (componentInstance as any).handleSelectedEmoji('emojiId', {
         id: 'emojiId',
         type: 'emojiType',
       });

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import {
   createEditorFactory,
   doc,
@@ -78,7 +78,9 @@ describe('date plugin', () => {
           node={view.state.doc.nodeAt(view.state.selection.$from.pos)!}
         />,
       );
-      expect(dateNode.find(n => n.prop('color') === 'red').length).toEqual(0);
+      expect(
+        dateNode.find((n: ReactWrapper) => n.prop('color') === 'red').length,
+      ).toEqual(0);
     });
   });
 });

@@ -40,7 +40,7 @@ export default class EmojiTypeAhead extends PureComponent<Props, State> {
   private lastKeyTyped?: string;
 
   state: State = {};
-  typeAhead?: AkEmojiTypeAhead;
+  typeAhead?: AkEmojiTypeAhead | null;
 
   componentWillMount() {
     this.setPluginState(this.props);
@@ -91,7 +91,7 @@ export default class EmojiTypeAhead extends PureComponent<Props, State> {
     this.setState({ anchorElement, query, queryActive, focused });
   };
 
-  handleEmojiTypeAheadRef = ref => {
+  handleEmojiTypeAheadRef = (ref: AkEmojiTypeAhead | null) => {
     this.typeAhead = ref;
   };
 

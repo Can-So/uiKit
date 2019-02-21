@@ -108,7 +108,7 @@ export function createPlugin(
      *
      * Note: we currently do not handle the edge case where two nodes may have the same localId
      */
-    appendTransaction: (transactions, oldState, newState) => {
+    appendTransaction: (transactions, _oldState, newState) => {
       const tr = newState.tr;
       let modified = false;
       if (transactions.some(transaction => transaction.docChanged)) {
@@ -142,6 +142,7 @@ export function createPlugin(
       if (modified) {
         return tr;
       }
+      return;
     },
   });
 }

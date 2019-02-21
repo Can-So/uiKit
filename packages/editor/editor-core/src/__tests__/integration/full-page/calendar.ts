@@ -15,7 +15,7 @@ const dateView = `span.dateView-content-wrap`;
 BrowserTestCase(
   'calendar.ts: user should be able to open calendar',
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowDate: true });
     await page.click(editorSelector);
@@ -32,7 +32,7 @@ BrowserTestCase(
 BrowserTestCase(
   'calendar.ts: clicking date when calendar is open should close it',
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowDate: true });
     await page.click(editorSelector);
@@ -51,7 +51,7 @@ BrowserTestCase(
 BrowserTestCase(
   'calendar.ts: clicking on another date should open its date picker',
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, { appearance: 'full-page', allowDate: true });
     await page.click(editorSelector);

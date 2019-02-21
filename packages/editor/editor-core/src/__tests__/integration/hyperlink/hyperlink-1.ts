@@ -22,7 +22,7 @@ const linkText2 = 'FAB-983';
     {
       skip: ['ie', 'edge', 'safari', 'firefox'],
     },
-    async client => {
+    async (client: any) => {
       let browser = new Page(client);
       await browser.goto(editor.path);
       await browser.waitForSelector(editor.placeholder);

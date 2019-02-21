@@ -17,7 +17,7 @@ import { TableCssClassName } from '../../../plugins/table/types';
 BrowserTestCase(
   'Remains in overflow on table scale to wide',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await page.browser.windowHandleMaximize();
 
@@ -44,7 +44,7 @@ BrowserTestCase(
 BrowserTestCase(
   'Remains in overflow on table scale to full width',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await page.browser.windowHandleMaximize();
 
@@ -73,7 +73,7 @@ BrowserTestCase(
 BrowserTestCase(
   'Maintains the wide layout size without overflow',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await page.browser.windowHandleMaximize();
 
@@ -99,7 +99,7 @@ BrowserTestCase(
 BrowserTestCase(
   'Maintains the full-width layout size without overflow',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await page.browser.windowHandleMaximize();
 
@@ -127,7 +127,7 @@ BrowserTestCase(
 BrowserTestCase(
   'Maintains the default layout size without overflow when toggling through layouts',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await page.browser.windowHandleMaximize();
 

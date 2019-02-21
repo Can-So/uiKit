@@ -5,7 +5,7 @@ import { renderer, skipBrowsers as skip, getBridgeOutput } from '../_utils';
 BrowserTestCase(
   `renderer.ts: call onContentRendered() on native bridge.`,
   { skip },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
     await browser.goto(renderer.path);
 

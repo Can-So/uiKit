@@ -12,7 +12,7 @@ import {
 BrowserTestCase(
   `type-ahead.ts: Replaces typeahead mark on insert`,
   { skip },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
 
     await navigateOrClear(browser, editor.path);
