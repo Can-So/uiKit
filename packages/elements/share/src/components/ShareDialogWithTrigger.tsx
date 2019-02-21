@@ -4,7 +4,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { messages } from '../i18n';
-import { DialogContentState, InvitationsCapabilitiesResponse } from '../types';
+import {
+  DialogContentState,
+  InvitationsCapabilitiesResponse,
+  ShareButtonStyle,
+} from '../types';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 
@@ -27,7 +31,7 @@ type ShareError = {
 };
 
 export type Props = {
-  buttonStyle?: 'default' | 'withText';
+  buttonStyle?: ShareButtonStyle;
   capabilities?: InvitationsCapabilitiesResponse;
   children?: RenderChildren;
   copyLink: string;
@@ -54,7 +58,7 @@ export const defaultShareContentState: DialogContentState = {
 
 export class ShareDialogWithTrigger extends React.Component<Props, State> {
   static defaultProps = {
-    buttonAppearance: 'default',
+    buttonStyle: 'icon-only' as 'icon-only',
     isDisabled: false,
     shouldCloseOnEscapePress: false,
   };
@@ -182,7 +186,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
           ) : (
             <ShareButton
               text={
-                this.props.buttonStyle === 'withText' ? (
+                this.props.buttonStyle === 'icon-with-text' ? (
                   <FormattedMessage {...messages.shareTriggerButtonText} />
                 ) : null
               }

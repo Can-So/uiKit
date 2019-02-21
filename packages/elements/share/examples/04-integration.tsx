@@ -95,6 +95,7 @@ const client: Client = {
 
 export default () => (
   <ShareDialogContainer
+    buttonStyle="icon-with-text"
     client={client}
     cloudId="12345-12345-12345-12345"
     loadUserOptions={loadUserOptions}

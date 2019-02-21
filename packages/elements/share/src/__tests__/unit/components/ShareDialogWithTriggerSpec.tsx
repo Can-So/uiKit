@@ -1,6 +1,9 @@
 import InlineDialog from '@atlaskit/inline-dialog';
+import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '../../../i18n';
 import { ShareButton } from '../../../components/ShareButton';
 import {
   defaultShareContentState,
@@ -60,15 +63,55 @@ describe('ShareDialogWithTrigger', () => {
     });
 
     it('should render ShareForm if isDialogOpen is true', () => {
-      const wrapper = mount<ShareDialogWithTrigger>(
+      const mountWrapper = mount<ShareDialogWithTrigger>(
         <ShareDialogWithTrigger
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
           onShareSubmit={mockOnShareSubmit}
         />,
       );
-      wrapper.setState({ isDialogOpen: true });
-      expect(wrapper.find(ShareForm).length).toBe(1);
+      mountWrapper.setState({ isDialogOpen: true });
+      expect(mountWrapper.find(ShareForm).length).toBe(1);
+    });
+  });
+
+  describe('buttonStyle prop', () => {
+    it('should render no text in the share button if the value is "icon-only"', () => {
+      const newWrapper = shallowWithIntl<ShareDialogWithTrigger>(
+        <ShareDialogWithTrigger
+          buttonStyle="icon-only"
+          copyLink="copyLink"
+          loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
+        />,
+      );
+
+      newWrapper.setState({ isDialogOpen: true });
+      expect(
+        newWrapper
+          .find(InlineDialog)
+          .find(ShareButton)
+          .prop('text'),
+      ).toBeNull();
+    });
+
+    it('should render text in the share button if the value is "icon-with-text"', () => {
+      const newWrapper = shallowWithIntl<ShareDialogWithTrigger>(
+        <ShareDialogWithTrigger
+          buttonStyle="icon-with-text"
+          copyLink="copyLink"
+          loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
+        />,
+      );
+
+      newWrapper.setState({ isDialogOpen: true });
+      expect(
+        newWrapper
+          .find(InlineDialog)
+          .find(ShareButton)
+          .prop('text'),
+      ).toEqual(<FormattedMessage {...messages.shareTriggerButtonText} />);
     });
   });
 
