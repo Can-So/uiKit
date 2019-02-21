@@ -6,8 +6,8 @@ export enum KeyboardKeys {
   arrowUp = 'ArrowUp',
   arrowDown = 'ArrowDown',
   shift = 'Shift',
-  Return = 'Return',
-  Enter = 'Enter',
+  return = 'Return',
+  enter = 'Enter',
 }
 
 export async function pressKey(page: Page, key: KeyboardKeys) {
