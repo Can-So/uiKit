@@ -40,7 +40,7 @@ const emojiPlugin: EditorPlugin = {
         name: 'emojiInputRule',
         plugin: ({ schema }) => inputRulePlugin(schema),
       },
-      { name: 'emojiKeymap', plugin: ({ schema }) => keymap(schema) },
+      { name: 'emojiKeymap', plugin: () => keymap() },
       {
         name: 'emojiAsciiInputRule',
         plugin: ({ schema, providerFactory }) =>
