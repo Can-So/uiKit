@@ -1,0 +1,1 @@
+- Apply stricture typings to elements related editor code
