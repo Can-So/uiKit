@@ -24,6 +24,9 @@ type State = {
 class Textfield extends Component<TextFieldProps, State> {
   static defaultProps = {
     appearance: 'standard',
+    isCompact: false,
+    isMonospaced: false,
+    isInvalid: false,
   };
 
   state = {
@@ -63,12 +66,16 @@ class Textfield extends Component<TextFieldProps, State> {
     const { isFocused } = this.state;
     const {
       appearance,
-      width,
-      forwardedRef,
-      theme,
       // createAnalytics passed through from analytics-next
       // we don't want to spread this onto our input
       createAnalyticsEvent, // eslint-disable-line react/prop-types
+      forwardedRef,
+      isCompact,
+      isDisabled,
+      isInvalid,
+      isMonospaced,
+      theme,
+      width,
       ...rest
     } = this.props;
 
@@ -76,18 +83,25 @@ class Textfield extends Component<TextFieldProps, State> {
       <Theme.Provider value={theme}>
         <GlobalTheme.Consumer>
           {({ mode }) => (
-            <Theme.Consumer appearance={appearance} mode={mode}>
+            <Theme.Consumer
+              appearance={appearance}
+              mode={mode}
+              width={width}
+              isDisabled={isDisabled}
+              isCompact={isCompact}
+              isMonospaced={isMonospaced}
+              isFocused={isFocused}
+              isInvalid={isInvalid}
+            >
               {tokens => (
-                <Wrapper width={width}>
-                  <Input
-                    {...rest}
-                    theme={tokens}
-                    isFocused={isFocused}
-                    forwardedRef={forwardedRef}
-                    onFocus={this.handleOnFocus}
-                    onBlur={this.handleOnBlur}
-                  />
-                </Wrapper>
+                <Input
+                  {...rest}
+                  theme={tokens}
+                  isFocused={isFocused}
+                  forwardedRef={forwardedRef}
+                  onFocus={this.handleOnFocus}
+                  onBlur={this.handleOnBlur}
+                />
               )}
             </Theme.Consumer>
           )}
