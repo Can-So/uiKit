@@ -68,7 +68,7 @@ const makeFile = (id: string): MediaFile => ({
 
 const mockSetTimeout = () => {
   const origSetTimeout = window.setTimeout;
-  window.setTimeout = jest.fn().mockImplementation((cb, ms, ...args) => {
+  window.setTimeout = jest.fn().mockImplementation((cb, _, ...args) => {
     cb(...args);
   });
   return {
@@ -97,7 +97,9 @@ const verifyEventHandling = (
   expect(wrapper.find(Dropzone).props().isActive).toEqual(dropzonesActive);
 
   if (!dropzonesActive) {
-    setTimeoutMockHandler.reset();
+    if (setTimeoutMockHandler) {
+      setTimeoutMockHandler.reset();
+    }
   }
 };
 

@@ -42,8 +42,9 @@ export class Filmstrip extends Component<FilmstripProps, FilmstripState> {
     offset: 0,
   };
 
-  private handleSize = ({ offset }) => this.setState({ offset });
-  private handleScroll = ({ animate, offset }) =>
+  private handleSize = ({ offset }: Pick<FilmstripState, 'offset'>) =>
+    this.setState({ offset });
+  private handleScroll = ({ animate, offset }: FilmstripState) =>
     this.setState({ animate, offset });
 
   private renderCards() {

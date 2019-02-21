@@ -35,6 +35,7 @@
   },
   "files": [
     "./typings/atlaskit.d.ts",
+    "./typings/blueimp-load-image.d.ts",
     "./typings/deep-equal.d.ts",
     "./typings/deepcopy.d.ts",
     "./typings/events.d.ts",
@@ -50,6 +51,7 @@
     "./typings/node.d.ts",
     "./typings/package.json.d.ts",
     "./typings/pdfjs-dist.d.ts",
+    "./typings/png-chunks-extract.d.ts",
     "./typings/postis.d.ts",
     "./typings/prosemirror-markdown.d.ts",
     "./typings/p-wait-for.d.ts",

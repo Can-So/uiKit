@@ -21,7 +21,8 @@ import { MediaViewerError } from './error';
 
 const downloadIcon = <DownloadIcon label="Download" />;
 
-export const DownloadButton = withAnalyticsEvents({
+// TODO: MS-1556
+export const DownloadButton: any = withAnalyticsEvents({
   onClick: (createEvent: CreateUIAnalyticsEventSignature, props: any) => {
     const ev = createEvent(props.analyticsPayload);
     ev.fire(channel);
