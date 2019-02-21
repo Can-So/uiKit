@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import { EmojiProvider, ResourcedEmoji } from '@atlaskit/emoji';
 import ProviderFactory from '../../../providerFactory';
 import Emoji from '../../../ui/Emoji';
@@ -18,8 +17,8 @@ describe('Emoji', () => {
     );
 
     const fallbackSpan = component.find('span');
-    expect(fallbackSpan.length).to.equal(1);
-    expect(fallbackSpan.text()).to.equal('fallback');
+    expect(fallbackSpan.length).toEqual(1);
+    expect(fallbackSpan.text()).toEqual('fallback');
     component.unmount();
   });
 
@@ -35,7 +34,7 @@ describe('Emoji', () => {
       />,
     );
 
-    expect(component.find(ResourcedEmoji)).to.have.length(1);
+    expect(component.find(ResourcedEmoji)).toHaveLength(1);
     component.unmount();
   });
 
@@ -45,8 +44,8 @@ describe('Emoji', () => {
     );
 
     const fallbackSpan = component.find('span');
-    expect(fallbackSpan.length).to.equal(1);
-    expect(fallbackSpan.text()).to.equal(':anything:');
+    expect(fallbackSpan.length).toEqual(1);
+    expect(fallbackSpan.text()).toEqual(':anything:');
     component.unmount();
   });
 
@@ -61,9 +60,9 @@ describe('Emoji', () => {
     const component = mount(<Emoji providers={providerFactory} {...emojiId} />);
 
     const resourcedEmoji = component.find(ResourcedEmoji);
-    expect(resourcedEmoji.length).to.equal(1);
-    expect(resourcedEmoji.prop('emojiId')).to.deep.equal(emojiId);
-    expect(resourcedEmoji.prop('emojiProvider')).to.equal(emojiProvider);
+    expect(resourcedEmoji.length).toEqual(1);
+    expect(resourcedEmoji.prop('emojiId')).toEqual(emojiId);
+    expect(resourcedEmoji.prop('emojiProvider')).toEqual(emojiProvider);
     component.unmount();
   });
 
@@ -80,8 +79,8 @@ describe('Emoji', () => {
     );
 
     const resourcedEmoji = component.find(ResourcedEmoji);
-    expect(resourcedEmoji.length).to.equal(1);
-    expect(resourcedEmoji.prop('fitToHeight')).to.deep.equal(32);
+    expect(resourcedEmoji.length).toEqual(1);
+    expect(resourcedEmoji.prop('fitToHeight')).toEqual(32);
     component.unmount();
   });
 });

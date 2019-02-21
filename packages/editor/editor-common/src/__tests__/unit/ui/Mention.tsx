@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import { ResourcedMention } from '@atlaskit/mention';
 import ProviderFactory from '../../../providerFactory';
 import Mention from '../../../ui/Mention';
@@ -24,8 +23,8 @@ describe('@atlaskit/editor-core/ui/Mention', () => {
     );
     const resourcedMention = mention.find(ResourcedMention);
 
-    expect(resourcedMention.prop('id')).to.equal('abcd-abcd-abcd');
-    expect(resourcedMention.prop('text')).to.equal('@Oscar Wallhult');
+    expect(resourcedMention.prop('id')).toEqual('abcd-abcd-abcd');
+    expect(resourcedMention.prop('text')).toEqual('@Oscar Wallhult');
   });
 
   it('should not render ResourcedMentionWithProfilecard if profilecardProvider is not set', () => {
@@ -40,7 +39,7 @@ describe('@atlaskit/editor-core/ui/Mention', () => {
         providers={providerFactory}
       />,
     );
-    expect(mention.find('WithProfilecardMention')).to.have.length(0);
+    expect(mention.find('WithProfilecardMention')).toHaveLength(0);
     mention.unmount();
   });
 
@@ -58,7 +57,7 @@ describe('@atlaskit/editor-core/ui/Mention', () => {
     );
     const resourcedMention = mention.find(ResourcedMention);
 
-    expect(resourcedMention.prop('mentionProvider')).to.equal(mentionProvider);
+    expect(resourcedMention.prop('mentionProvider')).toEqual(mentionProvider);
     mention.unmount();
   });
 
@@ -78,7 +77,7 @@ describe('@atlaskit/editor-core/ui/Mention', () => {
     try {
       await profilecardProvider;
     } catch (err) {
-      expect(mention.find('WithProfilecardMention')).to.have.length(0);
+      expect(mention.find('WithProfilecardMention')).toHaveLength(0);
     }
     mention.unmount();
   });
@@ -98,7 +97,7 @@ describe('@atlaskit/editor-core/ui/Mention', () => {
       );
       await profilecardProvider;
 
-      expect(mention.find('WithProfilecardMention')).to.have.length(0);
+      expect(mention.find('WithProfilecardMention')).toHaveLength(0);
       mention.unmount();
     });
   });
