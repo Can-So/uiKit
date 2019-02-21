@@ -1,0 +1,1 @@
+- Update the size of blocker and trivial icon to 20px from 18px.
