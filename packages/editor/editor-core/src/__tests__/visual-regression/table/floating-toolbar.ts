@@ -3,12 +3,12 @@ import {
   initFullPageEditorWithAdf,
   initCommentEditorWithAdf,
 } from '../_utils';
-import * as adf from '../common/__fixtures__/noData-adf.json';
+import * as adf from './__fixtures__/default-table.adf.json';
 import {
+  clickFirstCell,
   clickTableOptions,
   clickCellOptions,
   getSelectorForTableCell,
-  insertTable,
   selectCellOption,
 } from '../../__helpers/page-objects/_table';
 
@@ -18,7 +18,7 @@ describe('Table floating toolbar:fullpage', () => {
     // @ts-ignore
     page = global.page;
     await initFullPageEditorWithAdf(page, adf);
-    await insertTable(page);
+    await clickFirstCell(page);
   });
 
   it('display options', async () => {
@@ -45,7 +45,7 @@ describe('Table floating toolbar:comment', () => {
     // @ts-ignore
     page = global.page;
     await initCommentEditorWithAdf(page, adf);
-    await insertTable(page);
+    await clickFirstCell(page);
   });
 
   it('display options', async () => {

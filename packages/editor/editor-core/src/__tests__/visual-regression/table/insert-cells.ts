@@ -1,10 +1,10 @@
 import { snapshot, initFullPageEditorWithAdf, Device } from '../_utils';
-import * as adf from '../common/__fixtures__/noData-adf.json';
+import * as adf from './__fixtures__/default-table.adf.json';
 import {
   insertRow,
   insertColumn,
-  insertTable,
   tableSelectors,
+  clickFirstCell,
 } from '../../__helpers/page-objects/_table';
 
 describe('Snapshot Test: table insert/delete', () => {
@@ -16,7 +16,7 @@ describe('Snapshot Test: table insert/delete', () => {
 
   beforeEach(async () => {
     await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI);
-    await insertTable(page);
+    await clickFirstCell(page);
   });
 
   // adding tolerance since tool tips can show from time to time
