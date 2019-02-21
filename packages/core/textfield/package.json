@@ -25,8 +25,7 @@
     "emotion": "^9.1.1"
   },
   "peerDependencies": {
-    "react": "^16.4.0",
-    "styled-components": "^3.2.6"
+    "react": "^16.4.0"
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",

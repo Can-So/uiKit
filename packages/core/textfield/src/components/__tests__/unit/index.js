@@ -129,7 +129,9 @@ describe('Textfield', () => {
 
     describe('value', () => {
       test('should have value="test value"', () => {
-        const wrapper = mount(<Textfield value="test value" />).prop('value');
+        const wrapper = mount(
+          <Textfield value="test value" onChange={() => {}} />,
+        ).prop('value');
         expect(wrapper).toBe('test value');
       });
     });

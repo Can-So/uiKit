@@ -13,7 +13,6 @@ import {
 } from '../../package.json';
 
 import Input from './Input';
-import { Wrapper } from '../styled';
 import { Theme } from '../theme';
 import type { TextFieldProps } from '../types';
 
