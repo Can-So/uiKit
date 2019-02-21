@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.11.1
+- [patch] [2cb8c44165](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cb8c44165):
+
+  - Fix environments mix-up
+
 ## 9.11.0
 - [minor] [41147bbc4c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/41147bbc4c):
 

@@ -13,6 +13,12 @@ const _oldcreateNestedWatcher = DirectoryWatcher.prototype.createNestedWatcher;
 DirectoryWatcher.prototype.createNestedWatcher = function(
   dirPath /*: string */,
 ) {
+  // Any new files created under src/ will trigger a rebuild when in watch mode
+  // If we are just adding snapshots or updating tests, we can safely ignore those
+  if (dirPath.includes('__snapshots__')) return;
+  if (dirPath.includes('__image_snapshots__')) return;
+  if (dirPath.includes('__tests__') && !dirPath.includes('integration')) return;
+  if (dirPath.includes('__tests-karma__')) return;
   if (dirPath.includes('node_modules')) return;
   _oldcreateNestedWatcher.call(this, dirPath);
 };
