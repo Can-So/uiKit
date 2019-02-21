@@ -14,7 +14,7 @@ import {
 BrowserTestCase(
   'emoji.ts: Insert an emoji, then a mention, move to right before the emoji and try to add text between both',
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
 
     await browser.goto(fullpage.path);

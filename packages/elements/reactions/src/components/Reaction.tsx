@@ -87,16 +87,16 @@ class ReactionWithoutAnalytics extends PureComponent<
 
   static displayName = 'Reaction';
 
-  private mounted: boolean;
+  private mounted: boolean = false;
   private hoverStart: number | undefined;
 
-  constructor(props) {
+  constructor(props: Props & WithAnalyticsEventProps) {
     super(props);
 
     this.state = {};
   }
 
-  componentDidUpdate({ reaction: prevReaction }) {
+  componentDidUpdate({ reaction: prevReaction }: Props) {
     if (!prevReaction.users && this.props.reaction.users) {
       createAndFireSafe(
         this.props.createAnalyticsEvent,
@@ -128,7 +128,7 @@ class ReactionWithoutAnalytics extends PureComponent<
     this.mounted = false;
   }
 
-  private handleMouseDown = event => {
+  private handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (this.props.onClick && isLeftClick(event)) {
       const { reaction, createAnalyticsEvent } = this.props;
@@ -144,7 +144,7 @@ class ReactionWithoutAnalytics extends PureComponent<
     }
   };
 
-  private handleMouseOver = event => {
+  private handleMouseOver = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const { onMouseOver, reaction } = this.props;
     if (!reaction.users || !reaction.users.length) {

@@ -1,4 +1,4 @@
-import { Component, FormEvent } from 'react';
+import { Component, FormEvent, KeyboardEvent } from 'react';
 
 export interface Props {
   autoComplete?: string;
@@ -21,9 +21,9 @@ export interface Props {
   onChange?: (event: FormEvent<HTMLInputElement>) => void;
   onBlur?: (event: FormEvent<HTMLInputElement>) => void;
   onFocus?: (event: FormEvent<HTMLInputElement>) => void;
-  onKeyDown?: (event: FormEvent<HTMLInputElement>) => void;
-  onKeyPress?: (event: FormEvent<HTMLInputElement>) => void;
-  onKeyUp?: (event: FormEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyPress?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyUp?: (event: KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
   required?: boolean;
   shouldFitContainer?: boolean;

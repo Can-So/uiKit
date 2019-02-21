@@ -11,7 +11,7 @@ const editorSelector = '.ProseMirror';
 BrowserTestCase(
   'paste.ts: paste tests on message editor: plain text',
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     await copyAsPlainText(page, 'This text is plain.');
@@ -32,7 +32,7 @@ BrowserTestCase(
 BrowserTestCase(
   'paste.ts: paste tests on message editor: text formatting',
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     const testData =
@@ -53,7 +53,7 @@ BrowserTestCase(
 BrowserTestCase(
   'paste.ts: paste tests on message editor: bullet list',
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     const data =
@@ -76,7 +76,7 @@ BrowserTestCase(
 BrowserTestCase(
   'paste.ts: paste tests on message editor: ordered list',
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     const data =

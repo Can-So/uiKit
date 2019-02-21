@@ -30,11 +30,12 @@
       "es2015.promise",
       "es2016.array.include"
     ],
-    "types": ["jest", "react","react-router","history", "enzyme", "css-color-names", "jest-styled-components", "styled-components", "linkify-it"],
+    "types": ["jest", "react","react-router","history", "enzyme", "css-color-names", "jest-styled-components", "styled-components", "linkify-it", "url-search-params"],
     "typeRoots": ["./typings", "./node_modules/@types"]
   },
   "files": [
     "./typings/atlaskit.d.ts",
+    "./typings/blueimp-load-image.d.ts",
     "./typings/deep-equal.d.ts",
     "./typings/deepcopy.d.ts",
     "./typings/events.d.ts",
@@ -46,9 +47,11 @@
     "./typings/lodash.last.d.ts",
     "./typings/lodash.matches.d.ts",
     "./typings/lodash.merge.d.ts",
+    "./typings/lodash.sample.d.ts",
     "./typings/node.d.ts",
     "./typings/package.json.d.ts",
     "./typings/pdfjs-dist.d.ts",
+    "./typings/png-chunks-extract.d.ts",
     "./typings/postis.d.ts",
     "./typings/prosemirror-markdown.d.ts",
     "./typings/p-wait-for.d.ts",

@@ -4,14 +4,14 @@ import {
   callNativeBridge,
   editor,
   editable,
-  skipBrowsers as skip,
   getBridgeOutput,
+  skipBrowsers as skip,
 } from '../_utils';
 
 BrowserTestCase(
   `text-color.ts: Can change text color`,
   { skip: skip.concat('safari') },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
     await browser.goto(editor.path);
     await browser.waitForSelector(editable);

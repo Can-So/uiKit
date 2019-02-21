@@ -1,6 +1,15 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, FileDetails, isPreviewableType } from '@atlaskit/media-core';
+import {
+  Identifier,
+  FileIdentifier,
+  Context,
+  FileDetails,
+  isPreviewableType,
+  isFileIdentifier,
+  isExternalImageIdentifier,
+  isDifferentIdentifier,
+} from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
@@ -14,19 +23,12 @@ import {
   CardState,
   CardEvent,
 } from '../..';
-import { Identifier, FileIdentifier } from '../domain';
 import { CardView } from '../cardView';
 import { LazyContent } from '../../utils/lazyContent';
 import { getBaseAnalyticsContext } from '../../utils/analyticsUtils';
 import { getDataURIDimension } from '../../utils/getDataURIDimension';
 import { getDataURIFromFileState } from '../../utils/getDataURIFromFileState';
 import { extendMetadata } from '../../utils/metadata';
-import {
-  isFileIdentifier,
-  isUrlPreviewIdentifier,
-  isExternalImageIdentifier,
-  isDifferentIdentifier,
-} from '../../utils/identifier';
 import { isBigger } from '../../utils/dimensionComparer';
 import { getCardStatus } from './getCardStatus';
 import { InlinePlayer } from '../inlinePlayer';
@@ -133,15 +135,6 @@ export class Card extends Component<CardProps, CardState> {
           name: name || dataURI,
           mediaType: 'image',
         },
-      });
-
-      return;
-    }
-
-    if (identifier.mediaItemType !== 'file') {
-      this.notifyStateChange({
-        error: new Error('Links are no longer supported in <Card />'),
-        status: 'error',
       });
 
       return;
@@ -272,9 +265,7 @@ export class Card extends Component<CardProps, CardState> {
 
   get analyticsContext(): CardAnalyticsContext {
     const { identifier } = this.props;
-    const id = isUrlPreviewIdentifier(identifier)
-      ? identifier.url
-      : isExternalImageIdentifier(identifier)
+    const id = isExternalImageIdentifier(identifier)
       ? 'external-image'
       : identifier.id;
 

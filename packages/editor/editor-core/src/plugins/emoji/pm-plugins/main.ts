@@ -33,18 +33,18 @@ export class EmojiState {
 
   onSelectPrevious = (): boolean => false;
   onSelectNext = (): boolean => false;
-  onSelectCurrent = (key?: string): boolean => false;
+  onSelectCurrent = (_key?: string): boolean => false;
   onSpaceSelectCurrent = (
-    emoji: EmojiDescription,
-    key?: string,
-    query?: string,
+    _emoji: EmojiDescription,
+    _key?: string,
+    _query?: string,
   ): void => {};
   onSpaceTyped = (): void => {};
   onDismiss = (): void => {};
 
   private changeHandlers: StateChangeHandler[] = [];
   private state: EditorState;
-  private view: EditorView;
+  private view!: EditorView;
   private queryResult: EmojiDescription[] = [];
 
   constructor(state: EditorState, providerFactory: ProviderFactory) {
@@ -276,10 +276,10 @@ export function createPlugin(
 ) {
   return new Plugin({
     state: {
-      init(config, state) {
+      init(_config, state) {
         return new EmojiState(state, providerFactory);
       },
-      apply(tr, pluginState, oldState, newState) {
+      apply(_tr, pluginState, _oldState, _newState) {
         // NOTE: Don't call pluginState.update here.
         return pluginState;
       },
@@ -291,11 +291,11 @@ export function createPlugin(
         }),
       },
       handleDOMEvents: {
-        focus(view: EditorView, event) {
+        focus(view: EditorView, _event) {
           emojiPluginKey.getState(view.state).updateEditorFocused(true);
           return false;
         },
-        blur(view: EditorView, event) {
+        blur(view: EditorView, _event) {
           emojiPluginKey.getState(view.state).updateEditorFocused(false);
           return false;
         },
@@ -307,7 +307,7 @@ export function createPlugin(
       pluginState.setView(view);
 
       return {
-        update(view: EditorView, prevState: EditorState) {
+        update(view: EditorView, _prevState: EditorState) {
           pluginState.update(view.state);
         },
         destroy() {

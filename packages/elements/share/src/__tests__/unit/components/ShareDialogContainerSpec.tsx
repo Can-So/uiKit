@@ -1,30 +1,36 @@
-import * as React from 'react';
-import { shallow } from 'enzyme';
+import { OptionData } from '@atlaskit/user-picker';
 import { utils } from '@atlaskit/util-service-support';
-import { ShareDialogContainer } from '../../../components/ShareDialogContainer';
-import { ShareDialogWithTrigger } from '../../../components/ShareDialogWithTrigger';
+import { shallow, ShallowWrapper } from 'enzyme';
+import * as React from 'react';
 import * as InvitationsCapabilitiesExports from '../../../api/InvitationsCapabilitiesResource';
 import * as ShareServiceExports from '../../../clients/ShareServiceClient';
-import { Client } from '../../../types';
+import {
+  Props,
+  ShareDialogContainer,
+  State,
+} from '../../../components/ShareDialogContainer';
+import { ShareDialogWithTrigger } from '../../../components/ShareDialogWithTrigger';
+import { Client, OriginTracing } from '../../../types';
 
-let wrapper;
-let mockOriginTracing;
-let mockOriginTracingFactory;
-let mockRequestService;
-let mockInvitationCapabilitiesResource;
-let mockShareServiceClient;
+let wrapper: ShallowWrapper<Props, State, ShareDialogContainer>;
+let mockOriginTracing: OriginTracing;
+let mockOriginTracingFactory: jest.Mock;
+let mockRequestService: jest.Mock;
+let mockInvitationCapabilitiesResource: jest.Mock;
+let mockShareServiceClient: jest.Mock;
 const mockCloudId = 'cloudId';
 const mockProductId = 'productId';
 const mockShareAri = 'ari';
 const mockShareLink = 'share-link';
 const mockShareTitle = 'Share Title';
+const mockButtonStyle = 'icon-with-text' as 'icon-with-text';
 const mockCopyLink = 'copy-link';
 const mockFormatCopyLink = jest.fn().mockReturnValue(mockCopyLink);
 const mockShouldShowCommentField = true;
 const mockShouldCloseOnEscapePress = true;
-const mockUsers = [
-  { type: 'user', id: 'id' },
-  { type: 'user', email: 'mock@email.com' },
+const mockUsers: OptionData[] = [
+  { type: 'user', id: 'id', name: 'User 1' },
+  { type: 'email', id: 'mock@email.com', name: 'mock@email.com' },
 ];
 const mockComment = {
   format: 'plain_text' as 'plain_text',
@@ -50,8 +56,9 @@ const mockClient = {
 
 beforeEach(() => {
   mockOriginTracing = {
+    id: 'id',
     addToUrl: jest.fn(),
-    toAnalyticsEvent: jest.fn(),
+    toAnalyticsAttributes: jest.fn(),
   };
   mockOriginTracingFactory = jest.fn().mockReturnValue(mockOriginTracing);
   mockRequestService = jest
@@ -69,6 +76,7 @@ beforeEach(() => {
     }));
   wrapper = shallow(
     <ShareDialogContainer
+      buttonStyle={mockButtonStyle}
       client={mockClient}
       cloudId={mockCloudId}
       loadUserOptions={mockLoadUserOptions}
@@ -85,7 +93,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  wrapper = null;
   mockRequestService.mockRestore();
   mockInvitationCapabilitiesResource.mockRestore();
   mockShareServiceClient.mockRestore();
@@ -96,6 +103,7 @@ describe('ShareDialogContainer', () => {
     const shareDialogWithTrigger = wrapper.find(ShareDialogWithTrigger);
     expect(shareDialogWithTrigger).toHaveLength(1);
     expect(mockFormatCopyLink).toHaveBeenCalled();
+    expect(shareDialogWithTrigger.prop('buttonStyle')).toEqual(mockButtonStyle);
     expect(shareDialogWithTrigger.prop('copyLink')).toEqual(mockCopyLink);
     expect(shareDialogWithTrigger.prop('loadUserOptions')).toEqual(
       mockLoadUserOptions,
@@ -112,7 +120,7 @@ describe('ShareDialogContainer', () => {
     expect(shareDialogWithTrigger.prop('capabilities')).toEqual(
       wrapper.state().capabilities,
     );
-    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(3);
+    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(2);
     expect(mockClient.getCapabilities).toHaveBeenCalledTimes(1);
     expect(wrapper.state().capabilities).toEqual(mockCapabilities);
   });
@@ -121,11 +129,15 @@ describe('ShareDialogContainer', () => {
     mockOriginTracingFactory.mockReset();
     wrapper.setProps({ shareLink: 'new-share-link' });
     expect(wrapper.state().prevShareLink).toEqual('new-share-link');
-    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(3);
+    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(2);
   });
 
   it('should have default this.client if props.client is not given', () => {
-    const newWrapper = shallow<ShareDialogContainer>(
+    const newWrapper: ShallowWrapper<
+      Props,
+      State,
+      ShareDialogContainer
+    > = shallow<ShareDialogContainer>(
       <ShareDialogContainer
         cloudId={mockCloudId}
         loadUserOptions={mockLoadUserOptions}
@@ -148,84 +160,70 @@ describe('ShareDialogContainer', () => {
 
   describe('handleCopyLink', () => {
     it('should send analytics', () => {
-      const mockAttributes = {};
-      const spiedToAnalyticsAttributes = jest
-        .fn()
-        .mockReturnValue(mockAttributes);
-      wrapper.instance().state.copyLinkOrigin = {
-        toAnalyticsAttributes: spiedToAnalyticsAttributes,
-      };
+      wrapper.setState({
+        copyLinkOrigin: mockOriginTracing,
+      });
       wrapper.instance().forceUpdate();
       wrapper.instance().handleCopyLink();
-      expect(spiedToAnalyticsAttributes).toHaveBeenCalledTimes(1);
-      expect(spiedToAnalyticsAttributes.mock.calls[0][0]).toEqual({
+      expect(mockOriginTracing.toAnalyticsAttributes).toHaveBeenCalledTimes(1);
+      expect(mockOriginTracing.toAnalyticsAttributes).toHaveBeenCalledWith({
         hasGeneratedId: true,
       });
-
       // TODO: complete when analytic is sent
     });
   });
 
   describe('handleSubmitShare', () => {
     it('should call share function from this.client', () => {
-      wrapper.instance().client.share = jest.fn().mockResolvedValue({});
-      const mockShare = wrapper.instance().client.share;
-      wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
         comment: mockComment,
       };
       wrapper.instance().handleSubmitShare(mockDialogContentState);
+      wrapper.instance().forceUpdate();
       expect(mockShare).toHaveBeenCalledTimes(1);
-      expect(mockShare.mock.calls[0][0]).toEqual({
-        ari: mockShareAri,
-        link: mockShareLink,
-        title: mockShareTitle,
-      });
-      expect(mockShare.mock.calls[0][1]).toEqual(mockUsers);
-      expect(mockShare.mock.calls[0][2]).toEqual({
-        productId: mockProductId,
-        tracking: {
-          toAtlassianAccountHolders: {
-            atlOriginId: wrapper.state().shareToAtlassianAccuntHoldersOrigin!
-              .id,
-          },
-          toNewUsers: {
-            atlOriginId: wrapper.state().shareToNewUsersOrigin!.id,
-          },
+      expect(mockShare).toHaveBeenCalledWith(
+        {
+          ari: mockShareAri,
+          link: mockShareLink,
+          title: mockShareTitle,
         },
-      });
-      expect(mockShare.mock.calls[0][3]).toEqual(mockComment);
+        [{ type: 'user', id: 'id' }, { type: 'user', email: 'mock@email.com' }],
+        {
+          productId: mockProductId,
+          atlOriginId: wrapper.state().shareOrigin!.id,
+        },
+        mockComment,
+      );
     });
 
     it('should update shareActionCount and Origin Ids from the state if share is successful', async () => {
       mockOriginTracingFactory.mockReset();
 
       const mockShareResponse = {};
-      wrapper.instance().client.share = jest
-        .fn()
-        .mockResolvedValue(mockShareResponse);
-      wrapper.instance().forceUpdate();
+      mockShare.mockResolvedValueOnce(mockShareResponse);
       const mockDialogContentState = {
         users: mockUsers,
         comment: mockComment,
       };
       const result = await wrapper
         .instance()
-        .handleSubmitShare(mockDialogContentState);
-      expect(mockOriginTracingFactory).toHaveBeenCalledTimes(2);
+        .handleSubmitShare(mockDialogContentState as any);
+      expect(mockOriginTracingFactory).toHaveBeenCalledTimes(1);
       expect(result).toEqual(mockShareResponse);
     });
 
     it('should return a Promise Rejection if share is failed', async () => {
-      wrapper.instance().client.share = jest.fn().mockRejectedValue('error');
+      mockShare.mockRejectedValueOnce('error');
       wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
         comment: mockComment,
       };
       try {
-        await wrapper.instance().handleSubmitShare(mockDialogContentState);
+        await wrapper
+          .instance()
+          .handleSubmitShare(mockDialogContentState as any);
       } catch (err) {
         expect(err).toEqual('error');
       }

@@ -2,7 +2,8 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Filmstrip, FilmstripView, FilmstripProps, FilmstripItem } from '../..';
 import { fakeContext } from '@atlaskit/media-test-helpers';
-import { Card, Identifier } from '@atlaskit/media-card';
+import { Card } from '@atlaskit/media-card';
+import { Identifier } from '@atlaskit/media-core';
 
 describe('<Filmstrip />', () => {
   const firstIdenfier: Identifier = {
@@ -21,12 +22,6 @@ describe('<Filmstrip />', () => {
           mediaItemType: 'file',
         },
       },
-      {
-        identifier: {
-          url: 'some-url',
-          mediaItemType: 'link',
-        },
-      },
     ];
     const component = shallow(
       <Filmstrip context={context} items={items} {...props} />,
@@ -42,7 +37,7 @@ describe('<Filmstrip />', () => {
     const { component } = setup();
 
     expect(component.find(FilmstripView)).toHaveLength(1);
-    expect(component.find(FilmstripView).find(Card)).toHaveLength(3);
+    expect(component.find(FilmstripView).find(Card)).toHaveLength(2);
   });
 
   it('should use right React key for Cards', () => {
@@ -62,13 +57,6 @@ describe('<Filmstrip />', () => {
         .at(1)
         .key(),
     ).toEqual('id-2');
-    expect(
-      component
-        .find(FilmstripView)
-        .find(Card)
-        .at(2)
-        .key(),
-    ).toEqual('some-url');
   });
 
   it('should pass properties down to Cards', () => {
@@ -105,6 +93,6 @@ describe('<Filmstrip />', () => {
     const { component } = setup({
       context: undefined,
     });
-    expect(component.find('CardView[status="loading"]')).toHaveLength(3);
+    expect(component.find('CardView[status="loading"]')).toHaveLength(2);
   });
 });

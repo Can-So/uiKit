@@ -284,7 +284,7 @@ export class UsageClearEmojiResource extends MockNonUploadingEmojiResource {
 }
 
 export const mockNonUploadingEmojiResourceFactory = (
-  emojiRepository,
+  emojiRepository: EmojiRepository,
   config?: MockEmojiResourceConfig,
   promiseBuilder?: PromiseBuilder<any>,
 ) => {
@@ -302,7 +302,7 @@ export const mockNonUploadingEmojiResourceFactory = (
 };
 
 export const mockEmojiResourceFactory = (
-  emojiRepository,
+  emojiRepository: EmojiRepository,
   config?: MockEmojiResourceConfig,
   promiseBuilder?: PromiseBuilder<any>,
 ) => {

@@ -1,4 +1,4 @@
-import { Identifier, isUrlPreviewIdentifier } from '@atlaskit/media-card';
+import { Identifier } from '@atlaskit/media-core';
 
 let lastKey = 1;
 const identifiersMap: Map<Promise<string>, string> = new Map();
@@ -10,12 +10,6 @@ export const generateIdentifierKey = (identifier: Identifier): string => {
   switch (identifier.mediaItemType) {
     case 'external-image':
       return identifier.dataURI;
-    case 'link':
-      if (isUrlPreviewIdentifier(identifier)) {
-        return identifier.url;
-      } else {
-        return identifier.id;
-      }
     case 'file':
       if (typeof identifier.id === 'string') {
         return identifier.id;

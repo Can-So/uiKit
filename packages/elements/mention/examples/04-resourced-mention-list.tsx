@@ -1,7 +1,7 @@
 import * as React from 'react';
-import ResourcedMentionList from '../src/components/ResourcedMentionList';
-import SearchTextInput from '../example-helpers/demo-search-text-input';
 import { onSelection, resourceProvider } from '../example-helpers';
+import SearchTextInput from '../example-helpers/demo-search-text-input';
+import ResourcedMentionList from '../src/components/ResourcedMentionList';
 
 export interface State {
   query: string;
@@ -11,9 +11,9 @@ export default class DemoResourcedMentionList extends React.Component<
   {},
   State
 > {
-  private resourcedMentionListRef: ResourcedMentionList;
+  private resourcedMentionListRef?: ResourcedMentionList | null;
 
-  constructor(props) {
+  constructor(props: {}) {
     super(props);
     this.state = {
       query: '',
@@ -27,18 +27,20 @@ export default class DemoResourcedMentionList extends React.Component<
     });
   };
 
-  private handleMentionListRef = ref => {
+  private handleMentionListRef = (ref: ResourcedMentionList | null) => {
     this.resourcedMentionListRef = ref;
   };
 
   private handleInputUp = () => {
-    this.resourcedMentionListRef.selectPrevious();
+    this.resourcedMentionListRef &&
+      this.resourcedMentionListRef.selectPrevious();
   };
   private handleInputDown = () => {
-    this.resourcedMentionListRef.selectNext();
+    this.resourcedMentionListRef && this.resourcedMentionListRef.selectNext();
   };
   private handleInputEnter = () => {
-    this.resourcedMentionListRef.chooseCurrentSelection();
+    this.resourcedMentionListRef &&
+      this.resourcedMentionListRef.chooseCurrentSelection();
   };
 
   render() {

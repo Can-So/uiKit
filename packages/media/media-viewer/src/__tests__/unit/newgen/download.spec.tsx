@@ -113,7 +113,7 @@ describe('download', () => {
           state={processingFailedState}
           identifier={{
             id: 'my-id',
-            type: 'file',
+            mediaItemType: 'file',
             occurrenceKey: 'my-occurrenceKey',
             collectionName: 'some-collection-name',
           }}
@@ -138,7 +138,7 @@ describe('download', () => {
           state={processingFailedState}
           identifier={{
             id: 'my-id',
-            type: 'file',
+            mediaItemType: 'file',
             occurrenceKey: 'my-occurrenceKey',
             collectionName: 'some-collection-name',
           }}

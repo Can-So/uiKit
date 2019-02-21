@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import * as React from 'react';
 import Button, { ButtonGroup } from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
 import PubSubClient from '@atlaskit/pubsub';
 
 import Editor from './../src/editor';
@@ -38,19 +37,6 @@ const pubSubClient = new PubSubClient({
     };
   },
 });
-
-export const TitleInput: any = styled.input`
-  border: none;
-  outline: none;
-  font-size: 2.07142857em;
-  margin: 0 0 21px;
-  padding: 0;
-
-  &::placeholder {
-    color: ${colors.akColorN80};
-  }
-`;
-TitleInput.displayName = 'TitleInput';
 
 export const Content: any = styled.div`
   padding: 0 20px;

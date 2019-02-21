@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Component, SyntheticEvent } from 'react';
+import { first } from 'rxjs/operators/first';
 import {
   createUploadContext,
   genericFileId,
@@ -9,11 +10,16 @@ import {
   externalImageIdentifier,
   defaultCollectionName,
 } from '@atlaskit/media-test-helpers';
-import { CardEvent, FileIdentifier, CardAction } from '@atlaskit/media-card';
+import { CardEvent, CardAction } from '@atlaskit/media-card';
 import EditorCloseIcon from '@atlaskit/icon/glyph/editor/close';
 import { Filmstrip, FilmstripItem } from '../src';
 import { ExampleWrapper, FilmstripWrapper } from '../example-helpers/styled';
-import { MediaItem, UploadableFile, Context } from '@atlaskit/media-core';
+import {
+  FileItem,
+  UploadableFile,
+  Context,
+  FileIdentifier,
+} from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 
 export interface ExampleState {
@@ -60,7 +66,7 @@ class Example extends Component<{}, ExampleState> {
     return -1;
   };
 
-  onClose = (item?: MediaItem) => {
+  onClose = (item?: FileItem) => {
     if (!item) {
       return;
     }
@@ -159,7 +165,7 @@ class Example extends Component<{}, ExampleState> {
 
     context.file
       .upload(uplodableFile)
-      .first()
+      .pipe(first())
       .subscribe({
         next: state => {
           if (state.status === 'uploading') {

@@ -1,29 +1,29 @@
-import * as React from 'react';
 import Avatar from '@atlaskit/avatar';
-import Lozenge from '@atlaskit/lozenge';
 import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
+import Lozenge from '@atlaskit/lozenge';
 import { colors } from '@atlaskit/theme';
+import * as React from 'react';
 import {
   HighlightDetail,
+  isRestricted,
   MentionDescription,
   OnMentionEvent,
   Presence,
-  isRestricted,
 } from '../../types';
+import { NoAccessLabel } from '../../util/i18n';
 import { leftClick } from '../../util/mouse';
+import { NoAccessTooltip } from '../NoAccessTooltip';
 import {
+  AccessSectionStyle,
   AvatarStyle,
   FullNameStyle,
   InfoSectionStyle,
   MentionItemStyle,
-  NicknameStyle,
   NameSectionStyle,
-  AccessSectionStyle,
+  NicknameStyle,
   RowStyle,
   TimeStyle,
 } from './styles';
-import { NoAccessLabel } from '../../util/i18n';
-import { NoAccessTooltip } from '../NoAccessTooltip';
 
 type ReactComponentConstructor = new (props: any) => React.Component<any, any>;
 
@@ -89,14 +89,14 @@ function renderHighlight(
   );
 }
 
-function renderLozenge(lozenge) {
+function renderLozenge(lozenge?: string) {
   if (lozenge) {
     return <Lozenge>{lozenge}</Lozenge>;
   }
   return null;
 }
 
-function renderTime(time) {
+function renderTime(time?: string) {
   if (time) {
     return <TimeStyle>{time}</TimeStyle>;
   }

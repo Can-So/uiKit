@@ -127,7 +127,7 @@ describe('requestService', () => {
       securityProvider,
       refreshedSecurityProvider,
     };
-    return requestService(serviceConfig).then(response => {
+    return requestService(serviceConfig).then(() => {
       const refreshCalls = fetchMock.calls('request');
       expect(refreshCalls.length, 'Second request').to.equal(1);
       const url = refreshCalls[0][0];

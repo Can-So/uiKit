@@ -163,9 +163,6 @@ describe('FileCardImageView', () => {
       it('should render CardLoading', () => {
         const cardLoadingComponent = card.find(CardLoading);
         expect(cardLoadingComponent).toHaveLength(1);
-        expectToEqual(cardLoadingComponent.props(), {
-          mediaItemType: 'file',
-        });
       });
     });
   });

@@ -1,12 +1,10 @@
 import * as React from 'react';
-
-import MentionPicker, { Position } from '../src/components/MentionPicker';
-import { MentionDescription, OnMentionEvent } from '../src/types';
 import { MentionProvider } from '../src/api/MentionResource';
 import { PresenceProvider } from '../src/api/PresenceResource';
-
-import SearchTextInput from './demo-search-text-input';
+import MentionPicker, { Position } from '../src/components/MentionPicker';
+import { MentionDescription, OnMentionEvent } from '../src/types';
 import debug from '../src/util/logger';
+import SearchTextInput from './demo-search-text-input';
 
 const onOpen = () => debug('picker opened');
 const onClose = () => debug('picker closed');
@@ -26,7 +24,7 @@ export interface State {
 }
 
 export default class MentionTextInput extends React.Component<Props, State> {
-  private mentionPickerRef: MentionPicker;
+  private mentionPickerRef?: MentionPicker | null;
 
   constructor(props: Props) {
     super(props);
@@ -55,7 +53,7 @@ export default class MentionTextInput extends React.Component<Props, State> {
     }
   };
 
-  private updateSearch = event => {
+  private updateSearch: React.ChangeEventHandler<HTMLInputElement> = event => {
     if (this.state.active) {
       this.setState({
         query: event.target.value || '',
@@ -63,11 +61,13 @@ export default class MentionTextInput extends React.Component<Props, State> {
     }
   };
 
-  private handleInputUp = () => this.mentionPickerRef.selectPrevious();
-  private handleInputDown = () => this.mentionPickerRef.selectNext();
+  private handleInputUp = () =>
+    this.mentionPickerRef && this.mentionPickerRef.selectPrevious();
+  private handleInputDown = () =>
+    this.mentionPickerRef && this.mentionPickerRef.selectNext();
   private handleInputEnter = () =>
-    this.mentionPickerRef.chooseCurrentSelection();
-  private handleMentionPickerRef = ref => {
+    this.mentionPickerRef && this.mentionPickerRef.chooseCurrentSelection();
+  private handleMentionPickerRef = (ref: MentionPicker | null) => {
     this.mentionPickerRef = ref;
   };
 

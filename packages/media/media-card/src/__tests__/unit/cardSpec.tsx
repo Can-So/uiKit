@@ -3,16 +3,16 @@ import { Observable, ReplaySubject } from 'rxjs';
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import { fakeContext, nextTick } from '@atlaskit/media-test-helpers';
-import { Context, FileState, FileDetails } from '@atlaskit/media-core';
+import {
+  Context,
+  FileState,
+  FileDetails,
+  FileIdentifier,
+  ExternalImageIdentifier,
+} from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
-import {
-  CardAction,
-  CardProps,
-  FileIdentifier,
-  LinkIdentifier,
-  CardDimensions,
-} from '../../../src';
+import { CardAction, CardProps, CardDimensions } from '../../../src';
 
 import { CardView } from '../../../src/root/cardView';
 
@@ -23,15 +23,9 @@ import {
   getDataURIFromFileState,
   FilePreview,
 } from '../../../src/utils/getDataURIFromFileState';
-import { ExternalImageIdentifier } from '../../root';
 import { InlinePlayer } from '../../../src/root/inlinePlayer';
 
 describe('Card', () => {
-  const linkIdentifier: LinkIdentifier = {
-    id: 'some-random-id',
-    mediaItemType: 'link',
-    collectionName: 'some-collection-name',
-  };
   const fileIdentifier: FileIdentifier = {
     id: 'some-random-id',
     mediaItemType: 'file',
@@ -291,17 +285,12 @@ describe('Card', () => {
         dimensions={{ width: 100, height: 50 }}
       />,
     );
-    const linkCard = shallow(
-      <Card context={context} identifier={linkIdentifier} />,
-    );
     const filePlaceholder = fileCard.find(CardView);
-    const linkPlaceholder = linkCard.find(CardView);
     const { status, mediaItemType, dimensions } = filePlaceholder.props();
 
     expect(status).toBe('loading');
     expect(mediaItemType).toBe('file');
     expect(dimensions).toEqual({ width: 100, height: 50 });
-    expect(linkPlaceholder.prop('mediaItemType')).toBe('link');
   });
 
   it('should use "crop" as default resizeMode', () => {

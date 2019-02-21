@@ -1,10 +1,12 @@
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import { waitUntil } from '@atlaskit/util-common-test';
-import * as React from 'react';
-import { ReactWrapper } from 'enzyme';
-import { mountWithIntl } from 'enzyme-react-intl';
-import { MentionDescription } from '../../../types';
-import { HttpError } from '../../../api/MentionResource';
 import { mention, MockMentionResource } from '@atlaskit/util-data-test';
+import { ReactWrapper } from 'enzyme';
+import * as React from 'react';
+import { HttpError } from '../../../api/MentionResource';
+import MentionItem from '../../../components/MentionItem';
+import MentionList from '../../../components/MentionList';
+import MentionListError from '../../../components/MentionListError';
 import {
   MentionPicker,
   OnClose,
@@ -12,10 +14,8 @@ import {
   Props,
   State,
 } from '../../../components/MentionPicker';
-import MentionList from '../../../components/MentionList';
-import MentionListError from '../../../components/MentionListError';
-import MentionItem from '../../../components/MentionItem';
-import { isMentionItemSelected, getMentionItemById } from '../_test-helpers';
+import { MentionDescription } from '../../../types';
+import { getMentionItemById, isMentionItemSelected } from '../_test-helpers';
 
 const mentions = mention.mentionData.mentionResult;
 const MAX_NOTIFIED_ITEMS = 20;

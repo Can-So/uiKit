@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
+import MentionItem from '../MentionItem';
 import { ScrollableStyle } from './styles';
 
 export interface Props {
@@ -7,10 +8,10 @@ export interface Props {
 }
 
 export default class Scrollable extends React.PureComponent<Props, {}> {
-  private scrollableDiv: Element;
+  private scrollableDiv?: HTMLDivElement | null;
 
   // API
-  reveal = child => {
+  reveal = (child: MentionItem) => {
     if (child && this.scrollableDiv) {
       const childNode = findDOMNode(child) as Element;
       // Not using Element.scrollIntoView as it scrolls even to top/bottom of view even if
@@ -26,7 +27,7 @@ export default class Scrollable extends React.PureComponent<Props, {}> {
     }
   };
 
-  private handleRef = ref => {
+  private handleRef = (ref: HTMLDivElement | null) => {
     this.scrollableDiv = ref;
   };
 

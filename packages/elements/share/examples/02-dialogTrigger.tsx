@@ -1,9 +1,9 @@
-import * as React from 'react';
 import Button from '@atlaskit/button';
+import * as React from 'react';
 import { ShareDialogWithTrigger } from '../src/components/ShareDialogWithTrigger';
 
 const loadUserOptions = () => [];
-const onShareSubmit = shareContentState => Promise.resolve({});
+const onShareSubmit = () => Promise.resolve({});
 
 export default () => (
   <React.Fragment>
@@ -15,7 +15,7 @@ export default () => (
     />
     <h4>Default share button with text</h4>
     <ShareDialogWithTrigger
-      buttonStyle="withText"
+      buttonStyle="icon-with-text"
       copyLink="copyLink"
       loadUserOptions={loadUserOptions}
       onShareSubmit={onShareSubmit}

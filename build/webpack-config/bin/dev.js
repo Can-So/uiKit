@@ -14,9 +14,11 @@ DirectoryWatcher.prototype.setDirectory = function(
   type,
 ) {
   // Any new files created under src/ will trigger a rebuild when in watch mode
-  // If we are just adding snapshots, we can safely ignore those
+  // If we are just adding snapshots or updating tests, we can safely ignore those
   if (directoryPath.includes('__snapshots__')) return;
   if (directoryPath.includes('__image_snapshots__')) return;
+  if (directoryPath.includes('__tests__')) return;
+  if (directoryPath.includes('__tests-karma__')) return;
   if (!directoryPath.includes('node_modules')) {
     _oldSetDirectory.call(this, directoryPath, exist, initial, type);
   }
@@ -32,8 +34,14 @@ const historyApiFallback = require('connect-history-api-fallback');
 const createConfig = require('../config');
 const utils = require('../config/utils');
 const { print, devServerBanner, errorMsg } = require('../banner');
+let HOST = 'localhost';
+let disableHostCheck = false;
 
-const HOST = 'localhost';
+if (process.env.VISUAL_REGRESSION) {
+  HOST = '0.0.0.0';
+  disableHostCheck = true;
+}
+
 const PORT = +process.env.ATLASKIT_DEV_PORT || 9000;
 const stats = require('../config/statsOptions');
 
@@ -101,6 +109,7 @@ async function runDevServer() {
     compress: true,
 
     historyApiFallback: true,
+    disableHostCheck,
 
     overlay: true,
     stats,

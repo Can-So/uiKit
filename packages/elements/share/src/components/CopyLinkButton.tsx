@@ -1,11 +1,11 @@
+import Button from '@atlaskit/button';
+import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
+import LinkFilledIcon from '@atlaskit/icon/glyph/link-filled';
+import InlineDialog from '@atlaskit/inline-dialog';
+import { colors } from '@atlaskit/theme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
-import Button from '@atlaskit/button';
-import LinkFilledIcon from '@atlaskit/icon/glyph/link-filled';
-import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
-import InlineDialog from '@atlaskit/inline-dialog';
 import { messages } from '../i18n';
 
 export const MessageContainer = styled.div`
@@ -29,6 +29,7 @@ export const HiddenInput: React.ComponentType<InputProps> = React.forwardRef(
       style={{ position: 'absolute', left: '-9999px' }}
       ref={ref}
       value={props.text}
+      readOnly
     />
   ),
 );

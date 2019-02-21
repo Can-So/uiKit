@@ -1,5 +1,10 @@
 # @atlaskit/user-picker
 
+## 1.0.21
+- [patch] [b38b2098e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b38b2098e3):
+
+  - FS-3417 export utils functions
+
 ## 1.0.20
 - Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
   - @atlaskit/select@7.0.0

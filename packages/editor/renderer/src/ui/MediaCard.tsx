@@ -6,9 +6,13 @@ import {
   Card,
   CardView,
   CardOnClickCallback,
-  ExternalImageIdentifier,
 } from '@atlaskit/media-card';
-import { Context, ImageResizeMode } from '@atlaskit/media-core';
+import {
+  Context,
+  ImageResizeMode,
+  Identifier,
+  ExternalImageIdentifier,
+} from '@atlaskit/media-core';
 import { MediaType } from '@atlaskit/adf-schema';
 import {
   withImageLoader,
@@ -47,7 +51,6 @@ export interface MediaCardProps {
 
 export interface State {
   context?: Context;
-  // externalStatus: CardStatus;
 }
 
 export class MediaCardInternal extends Component<MediaCardProps, State> {
@@ -134,11 +137,15 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       return this.renderExternal();
     }
 
-    if (!context) {
+    if (type === 'link') {
+      return null;
+    }
+
+    if (!context || !id) {
       return this.renderLoadingCard();
     }
 
-    let identifier: any = {
+    const identifier: Identifier = {
       id,
       mediaItemType: type,
       collectionName: collection,

@@ -17,7 +17,7 @@ import { selectors } from './_utils';
 BrowserTestCase(
   'paste-rich-text.ts: Paste rich text into panel',
   { skip: ['ie', 'edge', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     await page.isVisible(clipboardInput);

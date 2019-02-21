@@ -47,8 +47,8 @@ const PickerContainer = styled.div`
 `;
 
 export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
-  private startTime: number;
-  private inputMethod: InputMethod;
+  private startTime!: number;
+  private inputMethod?: InputMethod;
   private createStatusAnalyticsAndFireFunc: Function;
 
   static defaultProps = {
@@ -64,7 +64,7 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
     );
   }
 
-  private fireStatusPopupOpenedAnalytics(state) {
+  private fireStatusPopupOpenedAnalytics(state: State) {
     const { color, text, localId, isNew } = state;
     this.startTime = Date.now();
 
@@ -80,7 +80,7 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
     });
   }
 
-  private fireStatusPopupClosedAnalytics(state) {
+  private fireStatusPopupClosedAnalytics(state: State) {
     const { color, text, localId, isNew } = state;
     this.createStatusAnalyticsAndFireFunc({
       action: 'closed',
@@ -114,7 +114,7 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
   componentDidUpdate(
     prevProps: Readonly<Props>,
     prevState: Readonly<State>,
-    snapshot?: any,
+    _snapshot?: any,
   ): void {
     const element = this.props.target;
 
@@ -184,7 +184,7 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
     );
   }
 
-  private onColorHover = color => {
+  private onColorHover = (color: Color) => {
     this.createStatusAnalyticsAndFireFunc({
       action: 'hovered',
       actionSubject: 'statusColorPicker',
@@ -196,7 +196,7 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
     });
   };
 
-  private onColorClick = color => {
+  private onColorClick = (color: Color) => {
     const { text, localId } = this.state;
     this.setState({ color });
 
@@ -217,7 +217,7 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
     });
   };
 
-  private onTextChanged = text => {
+  private onTextChanged = (text: string) => {
     const { color, localId } = this.state;
     this.setState({ text });
     this.props.onTextChanged(
@@ -237,7 +237,7 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
   // cancel bubbling to fix clickOutside logic:
   // popup re-renders its content before the click event bubbles up to the document
   // therefore click target element would be different from the popup content
-  private handlePopupClick = event =>
+  private handlePopupClick = (event: React.MouseEvent<HTMLElement>) =>
     event.nativeEvent.stopImmediatePropagation();
 }
 

@@ -1,5 +1,4 @@
 import { mountWithIntl } from '@atlaskit/editor-test-helpers';
-import { expect } from 'chai';
 import { ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import { messages } from '../../../../components/i18n';
@@ -20,9 +19,7 @@ describe('<CategorySelector />', () => {
   it('all standard categories visible by default', () => {
     const component = setupComponent();
     const categoryButtons = component.find('button');
-    expect(categoryButtons.length, 'Number of categories').to.be.equal(
-      defaultCategories.length,
-    );
+    expect(categoryButtons.length).toEqual(defaultCategories.length);
   });
 
   it('adds categories dynamically based on what has been passed in', () => {
@@ -30,9 +27,7 @@ describe('<CategorySelector />', () => {
       dynamicCategories: ['CUSTOM', 'FREQUENT'],
     });
     const categoryButtons = component.find('button');
-    expect(categoryButtons.length, 'Number of categories').to.be.equal(
-      defaultCategories.length + 2,
-    );
+    expect(categoryButtons.length).toEqual(defaultCategories.length + 2);
   });
 
   it('displays categories in sorted order', () => {
@@ -48,9 +43,9 @@ describe('<CategorySelector />', () => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
       // tslint:disable-next-line
-      expect(isMessagesKey(categoryKey)).to.be.true;
+      expect(isMessagesKey(categoryKey)).toBeTruthy();
       if (isMessagesKey(categoryKey)) {
-        expect(button.prop('title'), `Button #${i}`).to.equal(
+        expect(button.prop('title')).toEqual(
           messages[categoryKey].defaultMessage,
         );
       }
@@ -60,22 +55,17 @@ describe('<CategorySelector />', () => {
   it('all categories disabled if flag is set', () => {
     const component = setupComponent({ disableCategories: true });
     const categoryButtons = component.find('button');
-    expect(categoryButtons.length, 'Number of categories').to.be.equal(
-      defaultCategories.length,
-    );
+    expect(categoryButtons.length).toEqual(defaultCategories.length);
     defaultCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
       // tslint:disable-next-line
-      expect(isMessagesKey(categoryKey)).to.be.true;
+      expect(isMessagesKey(categoryKey)).toBeTruthy();
       if (isMessagesKey(categoryKey)) {
-        expect(button.prop('title'), `Button #${i}`).to.equal(
+        expect(button.prop('title')).toEqual(
           messages[categoryKey].defaultMessage,
         );
-        expect(
-          button.hasClass(styles.disable),
-          `Button #${i} is disabled`,
-        ).to.equal(true);
+        expect(button.hasClass(styles.disable)).toEqual(true);
       }
     });
   });
@@ -90,7 +80,7 @@ describe('<CategorySelector />', () => {
     });
     const categoryButtons = component.find('button');
     categoryButtons.at(defaultCategories.length + 1).simulate('click');
-    expect(selectedCategoryId, 'Category was selected').to.equal('CUSTOM');
+    expect(selectedCategoryId).toEqual('CUSTOM');
   });
 
   it('active category highlighted', () => {
@@ -99,24 +89,19 @@ describe('<CategorySelector />', () => {
       activeCategoryId,
     });
     const categoryButtons = component.find('button');
-    expect(categoryButtons.length, 'Number of categories').to.be.equal(
-      defaultCategories.length,
-    );
+    expect(categoryButtons.length).toEqual(defaultCategories.length);
     defaultCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
       // tslint:disable-next-line
-      expect(isMessagesKey(categoryKey)).to.be.true;
+      expect(isMessagesKey(categoryKey)).toBeTruthy();
       if (isMessagesKey(categoryKey)) {
-        expect(button.prop('title'), `Button #${i}`).to.equal(
+        expect(button.prop('title')).toEqual(
           messages[categoryKey].defaultMessage,
         );
       }
       const shouldBeActive = i === 3;
-      expect(
-        button.hasClass(styles.active),
-        `Button #${i} active=${shouldBeActive}`,
-      ).to.equal(shouldBeActive);
+      expect(button.hasClass(styles.active)).toEqual(shouldBeActive);
     });
   });
 });

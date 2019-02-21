@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createStorybookContext } from '@atlaskit/media-test-helpers';
-import { FileIdentifier, Card } from '@atlaskit/media-card';
+import { Card } from '@atlaskit/media-card';
+import { FileIdentifier, Identifier } from '@atlaskit/media-core';
 import { ButtonList, Container, Group } from '../example-helpers/styled';
 import {
   archiveItem,
@@ -19,7 +20,7 @@ import {
   defaultCollectionName,
   videoSquareFileIdItem,
 } from '../example-helpers';
-import { MediaViewer, MediaViewerItem } from '../src';
+import { MediaViewer } from '../src';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import { I18NWrapper } from '@atlaskit/media-test-helpers';
@@ -31,17 +32,17 @@ const handleEvent = (analyticsEvent: UIAnalyticsEventInterface) => {
 };
 
 export type State = {
-  selectedItem?: MediaViewerItem;
+  selectedItem?: Identifier;
 };
 
 export default class Example extends React.Component<{}, State> {
   state: State = { selectedItem: undefined };
 
-  setItem = (selectedItem: MediaViewerItem) => () => {
+  setItem = (selectedItem: Identifier) => () => {
     this.setState({ selectedItem });
   };
 
-  createItem = (item: MediaViewerItem, title: string) => {
+  createItem = (item: FileIdentifier, title: string) => {
     const identifier: FileIdentifier = {
       id: item.id,
       mediaItemType: 'file',

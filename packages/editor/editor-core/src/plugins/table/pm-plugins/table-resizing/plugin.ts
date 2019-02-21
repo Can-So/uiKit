@@ -241,16 +241,18 @@ function handleMouseDown(view, event, cellMinWidth) {
   let cell = view.state.doc.nodeAt(activeHandle);
   let $cell = view.state.doc.resolve(activeHandle);
   let $originalTable = $cell.node(-1);
-  let dom = view.domAtPos($cell.start(-1)).node;
+  let start = $cell.start(-1);
+  let dom = view.domAtPos(start).node;
   while (dom.nodeName !== 'TABLE') {
     dom = dom.parentNode;
   }
 
   const containerWidth = widthPluginKey.getState(view.state).width;
-  const resizer = Resizer.fromDOM(dom, {
+  const resizer = Resizer.fromDOM(view, dom, {
     minWidth: cellMinWidth,
     maxSize: getLayoutSize(dom.getAttribute('data-layout'), containerWidth),
     node: $cell.node(-1),
+    start,
   });
 
   resizer.apply(resizer.currentState);

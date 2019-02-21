@@ -15,7 +15,7 @@ import {
 BrowserTestCase(
   'table-mediaSingle.ts: Can insert media single into table',
   { skip: ['edge', 'ie', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,

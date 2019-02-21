@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { DESELECT_ITEM } from '../../../actions';
 import deselectItem from '../../deselectItem';
 
@@ -35,8 +33,8 @@ describe('deselectItem() reducer', () => {
     const oldState: any = { ...state };
     const newState = deselectItem(oldState, { type: 'UNKNOWN' });
 
-    expect(oldState).deep.equal(state);
-    expect(newState).deep.equal(state);
+    expect(oldState).toEqual(state);
+    expect(newState).toEqual(state);
   });
 
   it('should not change selectedItems if it is empty', () => {
@@ -51,8 +49,8 @@ describe('deselectItem() reducer', () => {
       id: firstId,
     });
 
-    expect(oldState).deep.equal(noSelectedItemsState);
-    expect(newState).deep.equal(noSelectedItemsState);
+    expect(oldState).toEqual(noSelectedItemsState);
+    expect(newState).toEqual(noSelectedItemsState);
   });
 
   it('should not add selectedItems if it is not defined', () => {
@@ -66,8 +64,8 @@ describe('deselectItem() reducer', () => {
       id: firstId,
     });
 
-    expect(oldState).deep.equal(noSelectedItemsState);
-    expect(newState).deep.equal(noSelectedItemsState);
+    expect(oldState).toEqual(noSelectedItemsState);
+    expect(newState).toEqual(noSelectedItemsState);
   });
 
   it('should preserve selected items if their id is not specified', () => {
@@ -77,8 +75,8 @@ describe('deselectItem() reducer', () => {
       id: anotherId,
     });
 
-    expect(oldState).deep.equal(state);
-    expect(newState).deep.equal(state);
+    expect(oldState).toEqual(state);
+    expect(newState).toEqual(state);
   });
 
   it('should remove item from selected', () => {
@@ -88,8 +86,8 @@ describe('deselectItem() reducer', () => {
       id: firstId,
     });
 
-    expect(oldState).deep.equal(state);
-    expect(newState).deep.equal({
+    expect(oldState).toEqual(state);
+    expect(newState).toEqual({
       ...stateBase,
       selectedItems: [secondItem, thirdItem],
     });

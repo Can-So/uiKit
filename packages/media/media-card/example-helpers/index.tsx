@@ -1,14 +1,13 @@
 /* tslint:disable:no-console */
 
 import * as React from 'react';
-import { Context, MediaItem } from '@atlaskit/media-core';
+import { Context, FileItem, Identifier } from '@atlaskit/media-core';
 import { createStorybookContext } from '@atlaskit/media-test-helpers';
 import CrossIcon from '@atlaskit/icon/glyph/cross';
 import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
 import { SelectableCard } from './selectableCard';
 import {
   Card,
-  Identifier,
   CardAppearance,
   CardEvent,
   OnSelectChangeFuncResult,
@@ -106,14 +105,14 @@ export const actions = [
 
 export const anotherAction: CardAction = {
   label: 'Some other action',
-  handler: (item?: MediaItem) => {
+  handler: (item?: FileItem) => {
     console.log('Some other action', item);
   },
 };
 
 export const annotateAction: CardAction = {
   label: 'Annotate',
-  handler: (item?: MediaItem) => {
+  handler: (item?: FileItem) => {
     console.log('annotate', item);
   },
 };

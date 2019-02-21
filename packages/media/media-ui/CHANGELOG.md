@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 9.1.0
+- [minor] [41147bbc4c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/41147bbc4c):
+
+  - Fix for links in editor
+
 ## 9.0.1
 - [patch] [9aa8faebd4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9aa8faebd4):
 

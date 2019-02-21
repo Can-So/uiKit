@@ -3,8 +3,8 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { MediaFileArtifacts } from '@atlaskit/media-store';
+import { FileIdentifier } from '@atlaskit/media-core';
 import { InlinePlayer, InlinePlayerProps } from '../../../root/inlinePlayer';
-import { FileIdentifier } from '../../../root/domain';
 import { CardLoading } from '../../../utils';
 import { InlinePlayerWrapper } from '../../../root/styled';
 

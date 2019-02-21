@@ -422,7 +422,6 @@ describe('MediaStore', () => {
               id: '1',
               insertedAt: 1,
               occurrenceKey: 'key-1',
-              type: 'file',
               details: {
                 size: 1,
                 artifacts: {},
@@ -435,7 +434,6 @@ describe('MediaStore', () => {
               id: '2',
               insertedAt: 1,
               occurrenceKey: 'key-2',
-              type: 'file',
               details: {
                 size: 0,
                 artifacts: {},
@@ -448,7 +446,6 @@ describe('MediaStore', () => {
               id: '3',
               insertedAt: 1,
               occurrenceKey: 'key-3',
-              type: 'file',
               details: {} as any,
             },
           ],

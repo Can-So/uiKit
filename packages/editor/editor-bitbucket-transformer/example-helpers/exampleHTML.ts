@@ -7,6 +7,15 @@ const html = `<p>Regular,
 
 <hr>
 
+<p>Atlassian ID mentions</p>
+<ul>
+  <li><a href="/scott" class="mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</a></li>
+  <li><a href="/scott" class="ap-mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</a></li>
+  <li><span class="ap-mention" data-atlassian-id="5c09bf77ec71bd223bbe866f">@Scott Demo</span></li>
+</ul>
+
+<hr>
+
 <p><a href="//atlassian.com" data-is-external-link="true">Regular link</a>,
   <a href="//atlassian.com" data-is-external-link="true"><strong>strong link</strong></a>,
   <a href="//atlassian.com" data-is-external-link="true"><em><strong>strong italic link</strong></em></a>

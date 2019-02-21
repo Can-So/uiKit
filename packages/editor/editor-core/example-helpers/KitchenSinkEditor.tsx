@@ -7,7 +7,7 @@ import {
   customInsertMenuItems,
 } from '@atlaskit/editor-test-helpers';
 
-import { validator, ErrorCallback, Entity } from '@atlaskit/adf-utils';
+import { validator, ErrorCallback, ADFEntity } from '@atlaskit/adf-utils';
 import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
 
 import Editor from './../src/editor';
@@ -167,7 +167,7 @@ export default class KitchenSinkEditor extends React.Component<Props, State> {
 
     validator(nodes, marks, {
       allowPrivateAttributes: true,
-    })(doc as Entity, errorCb);
+    })(doc as ADFEntity, errorCb);
 
     this.props.onDocumentValidated(errors);
   };

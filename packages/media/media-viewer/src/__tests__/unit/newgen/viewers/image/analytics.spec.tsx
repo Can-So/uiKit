@@ -3,9 +3,13 @@ import {
   InteractiveImg as InteractiveImgMock,
 } from '../../../../mocks/_interactive-img';
 
-jest.mock('../../../../../newgen/viewers/image/interactive-img', () => ({
+const mockInteractiveImg = {
   InteractiveImg: InteractiveImgMock,
-}));
+};
+jest.mock(
+  '../../../../../newgen/viewers/image/interactive-img',
+  () => mockInteractiveImg,
+);
 
 import * as React from 'react';
 import { ProcessedFileState } from '@atlaskit/media-core';

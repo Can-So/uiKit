@@ -41,11 +41,11 @@ export interface State {
 /**
  * Checks if an element is detached (i.e. not in the current document)
  */
-const isDetachedElement = el => !document.body.contains(el);
+const isDetachedElement = (el: HTMLElement) => !document.body.contains(el);
 
 export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
-  private pickerRef: ReactInstance;
-  private buttonRef: ReactInstance;
+  private pickerRef?: ReactInstance;
+  private buttonRef?: ToolbarButton | null;
   private pluginState?: EmojiState;
 
   state: State = {
@@ -57,7 +57,9 @@ export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.state.button = ReactDOM.findDOMNode(this.buttonRef) as HTMLElement;
+    this.state.button = this.buttonRef
+      ? (ReactDOM.findDOMNode(this.buttonRef) as HTMLElement)
+      : undefined;
     if (this.pluginState) {
       this.pluginState.subscribe(this.handlePluginStateChange);
     }
@@ -66,7 +68,7 @@ export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
     document.addEventListener('keydown', this.handleEscape);
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: Props) {
     if (!this.pluginState && props.pluginKey) {
       this.setPluginState(props);
     }
@@ -75,7 +77,9 @@ export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
   componentDidUpdate() {
     const { button } = this.state;
     if (!button || !button.getBoundingClientRect().width) {
-      this.state.button = ReactDOM.findDOMNode(this.buttonRef) as HTMLElement;
+      this.state.button = this.buttonRef
+        ? (ReactDOM.findDOMNode(this.buttonRef) as HTMLElement)
+        : undefined;
     }
   }
 
@@ -86,7 +90,7 @@ export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
     }
   }
 
-  handleEscape = e => {
+  handleEscape = (e: KeyboardEvent) => {
     // ESC key pressed
     if (this.state.isOpen && (e.which === 27 || e.keyCode === 27)) {
       this.close();
@@ -121,8 +125,8 @@ export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
     this.setState(newState);
   };
 
-  private handleButtonRef = (ref): void => {
-    this.buttonRef = ref ? ref : null;
+  private handleButtonRef = (ref: ToolbarButton | null): void => {
+    this.buttonRef = ref;
   };
 
   private onPickerRef = (ref: any) => {
@@ -147,7 +151,10 @@ export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
     });
   };
 
-  private handleClickOutside = e => {
+  private handleClickOutside = (e: MouseEvent) => {
+    if (!this.pickerRef) {
+      return;
+    }
     const picker = ReactDOM.findDOMNode(this.pickerRef);
     // Ignore click events for detached elements.
     // Workaround for FS-1322 - where two onClicks fire - one when the upload button is
@@ -155,7 +162,9 @@ export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
     // may be a side effect of a react render optimisation
     if (
       !picker ||
-      (!isDetachedElement(e.target) && !picker.contains(e.target))
+      (e.target instanceof HTMLElement &&
+        !isDetachedElement(e.target) &&
+        !picker.contains(e.target))
     ) {
       this.close();
     }

@@ -14,7 +14,7 @@ import {
     BrowserTestCase(
       `block-nodes.ts: Inserts ${node} and results in valid ADF`,
       { skip },
-      async client => {
+      async (client: any) => {
         const browser = new Page(client);
 
         await navigateOrClear(browser, editor.path);

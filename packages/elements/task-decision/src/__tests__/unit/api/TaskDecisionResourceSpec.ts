@@ -340,7 +340,7 @@ describe('TaskDecisionResource', () => {
         response: tasks,
       });
 
-      return (resource as any).itemStateManager
+      return ((resource as any).itemStateManager as ItemStateManager)
         .getTaskState(tasks)
         .then(response => {
           expect(response).toEqual(tasks);
@@ -447,8 +447,8 @@ describe('TaskDecisionResource', () => {
           response: [serviceTask(key1)],
         });
 
-      let latestState;
-      const handler = state => {
+      let latestState: string;
+      const handler = (state: string) => {
         latestState = state;
       };
       resource.subscribe(key1, handler);
@@ -479,12 +479,12 @@ describe('TaskDecisionResource', () => {
           response: [serviceTask(key1, 'TODO')],
         });
 
-      let latestState;
-      const handler = state => {
+      let latestState: string;
+      const handler = (state: string) => {
         latestState = state;
       };
       resource.subscribe(key1, handler);
-      let toggleStatePromise;
+      let toggleStatePromise: Promise<TaskState>;
       return waitUntil(() => latestState === 'TODO')
         .then(() => {
           toggleStatePromise = resource.toggleTask(key1, 'DONE');
@@ -504,7 +504,7 @@ describe('TaskDecisionResource', () => {
           matcher: 'end:tasks',
           method: 'PUT',
           name: 'set-task',
-          response: (url, options) => {
+          response: (_url: any, options: any) => {
             const body = JSON.parse(options.body);
             const { localId } = body;
 
@@ -524,12 +524,12 @@ describe('TaskDecisionResource', () => {
           response: [serviceTask(key1), serviceTask(key2, 'DONE')],
         });
 
-      let latestState1;
-      let latestState2;
-      const handler1 = state => {
+      let latestState1: string;
+      let latestState2: string;
+      const handler1 = (state: string) => {
         latestState1 = state;
       };
-      const handler2 = state => {
+      const handler2 = (state: string) => {
         latestState2 = state;
       };
       resource.subscribe(key1, handler1);

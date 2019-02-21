@@ -1,8 +1,10 @@
+import { Node as PMNode } from 'prosemirror-model';
 import { contentWidth } from './contentWidth';
 import {
   calculateColWidth,
   unitToNumber,
   addContainerLeftRightPadding,
+  getCellsRefsInColumn,
 } from './utils';
 
 export default class ColumnState {
@@ -18,19 +20,24 @@ export default class ColumnState {
   /**
    * Creates a new ResizeState based on the current
    * appearance of an element.
-   * @param {HTMLElement} table Reference to the <table> node
+   * @param {Function} domAtPos Find the DOM node that corresponds to the given position
+   * @param {PMNode} table ProseMirror node
    * @param {number} colIdx The column index
    * @param {number} minWidth Minimum width a column is permitted to be
    */
   static fromDOM(
-    table: HTMLElement,
+    domAtPos: (pos: number) => { node: Node; offset: number },
+    table: PMNode,
+    start: number,
     colIdx: number,
     minWidth: number,
   ): ColumnState {
-    const width = calculateColWidth(table, colIdx);
+    const cells = getCellsRefsInColumn(colIdx, table, start, domAtPos);
+    const width = calculateColWidth(cells);
 
-    const minColWidth =
-      calculateColWidth(table, colIdx, (col, computedStyle, colspan) => {
+    const minColWidth = calculateColWidth(
+      cells,
+      (col, computedStyle, colspan) => {
         if (colspan && colspan > 1) {
           return unitToNumber(computedStyle.width);
         }
@@ -41,11 +48,12 @@ export default class ColumnState {
         // Past a certain width.
         return Math.max(
           addContainerLeftRightPadding(minWidth, computedStyle),
-          minColWidth,
+          minColWidth || minWidth,
         );
-      }) || minWidth;
+      },
+    );
 
-    return new ColumnState(width, minColWidth);
+    return new ColumnState(width, Math.max(minWidth, minColWidth));
   }
 
   clone(newWidth?: number): ColumnState {

@@ -59,18 +59,23 @@ export const setDatePickerAt = (showDatePickerAt: number | null) => (
   return true;
 };
 
-export const closeDatePicker = () => (state, dispatch) => {
+export const closeDatePicker = (): Command => (state, dispatch) => {
   const { showDatePickerAt } = pluginKey.getState(state);
 
   if (!showDatePickerAt) {
     return false;
   }
 
-  dispatch(
-    state.tr
-      .setMeta(pluginKey, { showDatePickerAt: null })
-      .setSelection(Selection.near(state.tr.doc.resolve(showDatePickerAt + 2))),
-  );
+  if (dispatch) {
+    dispatch(
+      state.tr
+        .setMeta(pluginKey, { showDatePickerAt: null })
+        .setSelection(
+          Selection.near(state.tr.doc.resolve(showDatePickerAt + 2)),
+        ),
+    );
+  }
+  return false;
 };
 
 export const openDatePicker = (): Command => (state, dispatch) => {

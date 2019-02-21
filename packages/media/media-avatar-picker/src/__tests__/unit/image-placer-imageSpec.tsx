@@ -2,10 +2,10 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { ImageWrapper } from '../../image-placer/styled';
 
-// mock @atlaskit/media-ui::isImageRemote() ...
-const isImageRemote = jest.fn();
+// mock @atlaskit/media-ui::mockIsImageRemote() ...
+const mockIsImageRemote = jest.fn();
 jest.mock('@atlaskit/media-core', () => ({
-  isImageRemote,
+  isImageRemote: mockIsImageRemote,
 }));
 
 // ...before importing Image
@@ -45,7 +45,7 @@ const setup = (props: Partial<ImagePlacerImageProps> = {}): SetupInfo => {
 describe('Image Placer Image', () => {
   describe('Loading', () => {
     it('should call onError prop if bad url', async () => {
-      isImageRemote.mockImplementation(() => {
+      mockIsImageRemote.mockImplementation(() => {
         throw new Error();
       });
       const { onError } = setup({ src: 'some-very-bad-url' });
@@ -60,7 +60,7 @@ describe('Image Placer Image', () => {
       };
 
       beforeAll(() => {
-        isImageRemote.mockReturnValue(true);
+        mockIsImageRemote.mockReturnValue(true);
       });
 
       it('should pass image load event to props', () => {

@@ -34,15 +34,17 @@ export interface Props extends SharedProps {
   id?: string;
   localId?: string;
   conversation?: ConversationType;
-  containerId: string;
+  objectId: string;
+  containerId?: string;
   showBeforeUnloadWarning?: boolean;
 
   // Dispatch
   onCreateConversation?: (
     localId: string,
-    containerId: string,
     value: any,
     meta: any,
+    objectId: string,
+    containerId?: string,
     onSuccess?: SuccessHandler,
   ) => void;
 
@@ -81,14 +83,14 @@ export default class Conversation extends React.PureComponent<Props, State> {
     @deprecated
   */
   sendEditorAnalyticsEvent: SendAnalyticsEvent = eventData => {
-    const { createAnalyticsEvent, containerId } = this.props;
+    const { createAnalyticsEvent, objectId, containerId } = this.props;
 
     const analyticsEvent = createAnalyticsEvent({
       actionSubject: 'editor',
       action: 'clicked',
     });
 
-    fireEvent(analyticsEvent, { containerId, ...eventData });
+    fireEvent(analyticsEvent, { objectId, containerId, ...eventData });
   };
 
   private renderComments() {
@@ -105,6 +107,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
       user,
       dataProviders,
       renderEditor,
+      objectId,
       containerId,
       placeholder,
       disableScrollTo,
@@ -137,6 +140,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
         dataProviders={dataProviders}
         renderComment={props => <Comment {...props} />}
         renderEditor={renderEditor}
+        objectId={objectId}
         containerId={containerId}
         placeholder={placeholder}
         disableScrollTo={disableScrollTo}
@@ -212,6 +216,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
     retry?: boolean,
   ) => {
     const {
+      objectId,
       containerId,
       id,
       localId,
@@ -228,7 +233,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
     }
 
     if (!id && !commentLocalId && onCreateConversation) {
-      onCreateConversation(localId!, containerId, value, meta, id => {
+      onCreateConversation(localId!, value, meta, objectId, containerId, id => {
         this.sendEditorAnalyticsEvent({
           actionSubjectId: id,
           eventType: eventTypes.TRACK,
@@ -276,11 +281,26 @@ export default class Conversation extends React.PureComponent<Props, State> {
   };
 
   private handleEditorChange = (value: any, commentId?: string) => {
-    const { id, localId, containerId, onEditorChange, meta } = this.props;
+    const {
+      id,
+      localId,
+      onEditorChange,
+      meta,
+      objectId,
+      containerId,
+    } = this.props;
 
     if (onEditorChange) {
       const isLocal = !id;
-      onEditorChange(isLocal, value, localId!, commentId, containerId, meta);
+      onEditorChange(
+        isLocal,
+        value,
+        localId!,
+        commentId,
+        meta,
+        objectId,
+        containerId,
+      );
     }
   };
 

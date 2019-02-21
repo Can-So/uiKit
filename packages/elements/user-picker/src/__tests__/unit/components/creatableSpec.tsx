@@ -7,10 +7,10 @@ import { isValidEmail } from '../../../components/emailValidation';
 import { EmailType } from '../../../types';
 
 describe('getCreatableProps', () => {
-  let isValidNewOption;
-  let getNewOptionData;
-  let formatCreateLabel;
-  let isOptionDisabled;
+  let isValidNewOption: any;
+  let getNewOptionData: any;
+  let formatCreateLabel: any;
+  let isOptionDisabled: any;
   beforeAll(() => {
     const creatableProps = getCreatableProps(true);
     isValidNewOption = creatableProps.isValidNewOption;

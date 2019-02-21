@@ -161,7 +161,6 @@ describe('<StatelessUploadView />', () => {
 
   it('should render cards and dropzone when there are recent items', () => {
     const createRecentItem = (occurrenceKey: string): MediaCollectionItem => ({
-      type: 'file',
       id: 'some-file-id',
       insertedAt: 0,
       occurrenceKey: `some-occurrence-key${occurrenceKey}`,
@@ -343,7 +342,6 @@ describe('<StatelessUploadView />', () => {
           false,
           [
             {
-              type: 'file',
               id: 'some-id',
               insertedAt: 0,
               occurrenceKey: 'some-occurrence-key',

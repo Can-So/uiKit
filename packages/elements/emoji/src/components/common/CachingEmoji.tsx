@@ -45,9 +45,9 @@ export class CachingMediaEmoji extends PureComponent<CachingEmojiProps, State> {
     emoji: PropTypes.object,
   };
 
-  private mounted: boolean;
+  private mounted: boolean = false;
 
-  context: EmojiContext;
+  context!: EmojiContext;
 
   constructor(props: EmojiProps, context: EmojiContext) {
     super(props, context);
@@ -112,7 +112,7 @@ export class CachingMediaEmoji extends PureComponent<CachingEmojiProps, State> {
             });
           }
         })
-        .catch(err => {
+        .catch(() => {
           if (this.mounted) {
             this.setState({
               cachedEmoji: undefined,
@@ -128,7 +128,7 @@ export class CachingMediaEmoji extends PureComponent<CachingEmojiProps, State> {
     return undefined;
   }
 
-  private handleLoadError = (emojiId: EmojiId, emoji?: EmojiDescription) => {
+  private handleLoadError = (_emojiId: EmojiId, emoji?: EmojiDescription) => {
     const { invalidImage } = this.state;
 
     if (invalidImage || !emoji) {

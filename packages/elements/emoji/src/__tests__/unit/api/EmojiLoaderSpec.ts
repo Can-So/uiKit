@@ -1,5 +1,4 @@
 import { SecurityOptions } from '@atlaskit/util-service-support';
-import { expect } from 'chai';
 import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
@@ -33,9 +32,9 @@ const providerData1 = [{ id: 'a' }, { id: 'b' }, { id: 'c' }];
 const fetchResponse = (data: any[]) => ({ emojis: data });
 
 function checkOrder(expected: any[], actual: any[]) {
-  expect(actual.length, `${actual.length} emojis`).to.equal(expected.length);
+  expect(actual).toHaveLength(expected.length);
   expected.forEach((emoji, idx) => {
-    expect(emoji.id, `emoji #${idx}`).to.equal(actual[idx].id);
+    expect(emoji.id).toEqual(actual[idx].id);
   });
 }
 
@@ -150,22 +149,15 @@ describe('EmojiLoader', () => {
 
       const resource = new EmojiLoader(provider401);
       return resource.loadEmoji().then(emojiResponse => {
-        expect(
-          refreshedSecurityProvider.callCount,
-          'refreshedSecurityProvider called once',
-        ).to.equal(1);
+        expect(refreshedSecurityProvider.callCount).toEqual(1);
         const firstCall = fetchMock.lastCall('auth');
         // tslint:disable-next-line
-        expect(firstCall).to.not.be.undefined;
-        expect(getSecurityHeader(firstCall), 'first call').to.equal(
-          defaultSecurityCode,
-        );
+        expect(firstCall).not.toBeUndefined();
+        expect(getSecurityHeader(firstCall)).toEqual(defaultSecurityCode);
         const secondCall = fetchMock.lastCall('auth2');
         // tslint:disable-next-line
-        expect(secondCall).to.not.be.undefined;
-        expect(getSecurityHeader(secondCall), 'forced refresh call').to.equal(
-          '666',
-        );
+        expect(secondCall).not.toBeUndefined();
+        expect(getSecurityHeader(secondCall)).toEqual('666');
 
         checkOrder([...providerData1], emojiResponse.emojis);
       });
@@ -193,13 +185,11 @@ describe('EmojiLoader', () => {
       const resource = new EmojiLoader(provider401);
       return resource
         .loadEmoji()
-        .then(emojiResponse => {
-          expect(true, 'Emojis should not have loaded').to.equal(false);
+        .then(() => {
+          expect(true).toBeFalsy();
         })
         .catch(err => {
-          expect(err.code, `Expected error: '${err}' to contain 401`).to.equal(
-            401,
-          );
+          expect(err.code).toEqual(401);
         });
     });
   });

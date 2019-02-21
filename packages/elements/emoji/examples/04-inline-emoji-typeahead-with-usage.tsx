@@ -32,7 +32,7 @@ const downPage: React.CSSProperties = {
 };
 
 class EmojiTextInput extends Component<TypeaheadProps, TypeaheadState> {
-  private emojiTypeAheadRef: EmojiTypeAhead | null;
+  private emojiTypeAheadRef?: EmojiTypeAhead | null;
 
   static defaultProps = {
     onSelection: () => {},

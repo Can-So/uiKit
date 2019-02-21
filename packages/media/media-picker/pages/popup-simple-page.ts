@@ -27,7 +27,7 @@ export class PopupSimplePage {
   async getRecentUploadCards(): Promise<RecentUploadCard[]> {
     const selector = '.e2e-recent-upload-card';
     const results = await this.page.getHTML(selector);
-    return results.map(html => {
+    return results.map((html: string) => {
       const div = document.createElement('div');
       div.innerHTML = html.trim();
       const element = div.querySelector('.title .ellipsed-text');

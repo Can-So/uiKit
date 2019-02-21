@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@atlaskit/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
-import { FileIdentifier } from './domain';
 import { InlinePlayerWrapper } from './styled';
 import { CardDimensions, defaultImageCardDimensions } from '..';
 import { CardLoading } from '../utils/cardLoading';
@@ -116,7 +115,7 @@ export class InlinePlayer extends Component<
     const { fileSrc } = this.state;
 
     if (!fileSrc) {
-      return <CardLoading mediaItemType="file" dimensions={dimensions} />;
+      return <CardLoading dimensions={dimensions} />;
     }
 
     return (

@@ -132,7 +132,7 @@ export class FilmstripView extends React.Component<
     windowWidth: 0,
   };
 
-  constructor(props) {
+  constructor(props: FilmstripViewProps) {
     super(props);
     try {
       this.mutationObserver = new MutationObserver(
@@ -258,16 +258,19 @@ export class FilmstripView extends React.Component<
     const { windowElement, bufferElement } = this;
     let bufferWidth = 0;
     let windowWidth = 0;
-    let childOffsets = [];
+    let childOffsets: ChildOffset[] = [];
 
     if (windowElement && bufferElement) {
       bufferWidth = bufferElement.getBoundingClientRect().width;
       windowWidth = windowElement.getBoundingClientRect().width;
 
       // we're calculating `left` based on `width` because `rect.left` can be a negative value after resizing the window (considered scrolled??)
-      const children = Array.prototype.slice.call(bufferElement.children, 0);
+      const children: Element[] = Array.prototype.slice.call(
+        bufferElement.children,
+        0,
+      );
       let left = 0;
-      childOffsets = children.map((child, index) => {
+      childOffsets = children.map((child: Element, index: number) => {
         const width = child.getBoundingClientRect().width;
 
         const offset = {
@@ -316,12 +319,12 @@ export class FilmstripView extends React.Component<
     );
   };
 
-  handleWindowElementChange = windowElement => {
+  handleWindowElementChange = (windowElement: HTMLElement) => {
     this.windowElement = windowElement;
     this.handleSizeChange();
   };
 
-  handleBufferElementChange = bufferElement => {
+  handleBufferElementChange = (bufferElement: HTMLElement) => {
     if (!bufferElement) {
       return;
     }
@@ -338,7 +341,7 @@ export class FilmstripView extends React.Component<
     this.handleSizeChange();
   };
 
-  handleLeftClick = event => {
+  handleLeftClick = (event: MouseEvent<HTMLDivElement>) => {
     // Stop the click event from bubling up and being handled by other components
     // See https://product-fabric.atlassian.net/browse/MSW-165
     event.stopPropagation();
@@ -355,7 +358,7 @@ export class FilmstripView extends React.Component<
     }
   };
 
-  handleRightClick = event => {
+  handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     // Stop the click event from bubling up and being handled by other components
     // See https://product-fabric.atlassian.net/browse/MSW-165
     event.stopPropagation();

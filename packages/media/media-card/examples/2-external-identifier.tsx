@@ -5,7 +5,8 @@ import {
   atlassianLogoUrl,
   imageFileId,
 } from '@atlaskit/media-test-helpers';
-import { Card, CardView, ExternalImageIdentifier } from '../src';
+import { ExternalImageIdentifier } from '@atlaskit/media-core';
+import { Card, CardView } from '../src';
 import { ExternalIdentifierWrapper } from '../example-helpers/styled';
 
 const context = createStorybookContext();

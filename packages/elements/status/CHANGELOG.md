@@ -1,5 +1,19 @@
 # @atlaskit/status
 
+## 0.3.6
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/editor-test-helpers@7.0.0
+
+## 0.3.5
+- [patch] [1856738865](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1856738865):
+
+  - Update status picker example to be interactive
+
+## 0.3.4
+- [patch] [109cf449d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/109cf449d6):
+
+  - enable noImplicitAny for status. fix related issues
+
 ## 0.3.3
 - [patch] [9696b18dec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9696b18dec):
 

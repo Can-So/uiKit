@@ -1,5 +1,4 @@
 import * as React from 'react'; // eslint-disable-line
-import { expect } from 'chai';
 import Button from '@atlaskit/button';
 import { messages } from '@atlaskit/media-ui';
 import ConnectedErrorView from '../../errorView';
@@ -21,23 +20,23 @@ describe('ErrorView', () => {
     const errorView = mountWithIntlContext(
       <ConnectedErrorView message={message} onCancel={onCancel} />,
     );
-    expect(errorView.find(ErrorPopup)).to.have.length(1);
-    expect(errorView.find(ErrorIconWrapper)).to.have.length(1);
+    expect(errorView.find(ErrorPopup)).toHaveLength(1);
+    expect(errorView.find(ErrorIconWrapper)).toHaveLength(1);
 
     const mainMessage = errorView.find(ErrorMessage);
-    expect(mainMessage).to.have.length(1);
-    expect(mainMessage.first().text()).to.equal(message);
+    expect(mainMessage).toHaveLength(1);
+    expect(mainMessage.first().text()).toEqual(message);
 
     const hint = errorView.find(ErrorHint);
-    expect(hint).to.have.length(1);
+    expect(hint).toHaveLength(1);
 
-    expect(hint.first().text()).to.equal(
+    expect(hint.first().text()).toEqual(
       messages.error_hint_critical.defaultMessage,
     );
 
     const buttons = errorView.find(Button);
-    expect(buttons).to.have.length(1);
-    expect(buttons.first().text()).to.equal(messages.close.defaultMessage);
+    expect(buttons).toHaveLength(1);
+    expect(buttons.first().text()).toEqual(messages.close.defaultMessage);
   });
 
   it('should display two buttons in case of retriable error', () => {
@@ -48,22 +47,22 @@ describe('ErrorView', () => {
         onCancel={onCancel}
       />,
     );
-    expect(errorView.find(ErrorPopup)).to.have.length(1);
-    expect(errorView.find(ErrorIconWrapper)).to.have.length(1);
+    expect(errorView.find(ErrorPopup)).toHaveLength(1);
+    expect(errorView.find(ErrorIconWrapper)).toHaveLength(1);
 
     const mainMessage = errorView.find(ErrorMessage);
-    expect(mainMessage).to.have.length(1);
-    expect(mainMessage.first().text()).to.equal(message);
+    expect(mainMessage).toHaveLength(1);
+    expect(mainMessage.first().text()).toEqual(message);
 
     const hint = errorView.find(ErrorHint);
-    expect(hint).to.have.length(1);
-    expect(hint.first().text()).to.equal(
+    expect(hint).toHaveLength(1);
+    expect(hint.first().text()).toEqual(
       messages.error_hint_retry.defaultMessage,
     );
 
     const buttons = errorView.find(Button);
-    expect(buttons).to.have.length(2);
-    expect(buttons.at(0).text()).to.equal(messages.try_again.defaultMessage);
-    expect(buttons.at(1).text()).to.equal(messages.cancel.defaultMessage);
+    expect(buttons).toHaveLength(2);
+    expect(buttons.at(0).text()).toEqual(messages.try_again.defaultMessage);
+    expect(buttons.at(1).text()).toEqual(messages.cancel.defaultMessage);
   });
 });

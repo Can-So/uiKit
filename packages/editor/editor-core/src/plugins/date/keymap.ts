@@ -1,11 +1,10 @@
 import { keymap } from 'prosemirror-keymap';
-import { Schema } from 'prosemirror-model';
 import { Plugin, NodeSelection } from 'prosemirror-state';
 import { closeDatePicker, openDatePicker } from './actions';
 import * as keymaps from '../../keymaps';
 import { pluginKey, DateState } from './plugin';
 
-export function keymapPlugin(schema: Schema): Plugin {
+export function keymapPlugin(): Plugin {
   const list = {};
 
   keymaps.bindKeymapWithCommand(

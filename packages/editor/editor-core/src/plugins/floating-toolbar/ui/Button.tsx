@@ -40,8 +40,9 @@ const Button = styled(UiButton)`
 export type ButtonAppearance = 'subtle' | 'danger';
 
 export interface Props {
-  title: string;
-  icon: ReactElement<any>;
+  title?: string;
+  icon?: ReactElement<any>;
+  iconAfter?: ReactElement<any>;
   onClick: React.MouseEventHandler;
   onMouseEnter?: <T>(event: MouseEvent<T>) => void;
   onMouseLeave?: <T>(event: MouseEvent<T>) => void;
@@ -50,11 +51,13 @@ export interface Props {
   appearance?: ButtonAppearance;
   href?: string;
   target?: string;
+  children?: React.ReactNode;
 }
 
 export default ({
   title,
   icon,
+  iconAfter,
   onClick,
   onMouseEnter,
   onMouseLeave,
@@ -63,6 +66,7 @@ export default ({
   href,
   target,
   appearance = 'subtle',
+  children,
 }: Props) => {
   return (
     <Tooltip content={title} hideTooltipOnClick={true} position="top">
@@ -76,10 +80,13 @@ export default ({
             appearance={appearance}
             ariaHaspopup={true}
             iconBefore={icon}
+            iconAfter={iconAfter}
             onClick={onClick}
             isSelected={selected}
             isDisabled={disabled}
-          />
+          >
+            {children}
+          </Button>
         </div>
       </ThemeProvider>
     </Tooltip>

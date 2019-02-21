@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import DuplicateLimitedQueue from '../../DuplicateLimitedQueue';
 
 describe('DuplicateLimitedQueue', () => {
@@ -11,14 +9,14 @@ describe('DuplicateLimitedQueue', () => {
             maxDuplicates: 0,
             minUniqueItems: 2,
           }),
-      ).to.throw(RangeError);
+      ).toThrow(RangeError);
       expect(
         () =>
           new DuplicateLimitedQueue<string>({
             maxDuplicates: 3,
             minUniqueItems: 0,
           }),
-      ).to.throw(RangeError);
+      ).toThrow(RangeError);
     });
 
     it('should behave correctly when empty', () => {
@@ -28,7 +26,7 @@ describe('DuplicateLimitedQueue', () => {
       });
       const items = queue.getItemsOrderedByDuplicateCount();
       // tslint:disable-next-line
-      expect(items).to.be.empty;
+      expect(items).toHaveLength(0);
     });
 
     it('should empty on clear', () => {
@@ -37,9 +35,9 @@ describe('DuplicateLimitedQueue', () => {
         minUniqueItems: 5,
       });
       queue.enqueue('monkey trousers');
-      expect(queue.getItemsOrderedByDuplicateCount()).to.be.lengthOf(1);
+      expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(1);
       queue.clear();
-      expect(queue.getItemsOrderedByDuplicateCount()).to.be.lengthOf(0);
+      expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(0);
     });
   });
 
@@ -61,14 +59,14 @@ describe('DuplicateLimitedQueue', () => {
       itemsToAdd.slice(0, 6).map(value => queue.enqueue(value));
 
       let queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(6);
-      expect(queuedItems).to.have.members(itemsToAdd.slice(0, 6));
+      expect(queuedItems).toHaveLength(6);
+      expect(queuedItems).toEqual(itemsToAdd.slice(0, 6));
 
       // add one more item and 'Dopey' should be evicted
       queue.enqueue(itemsToAdd[6]);
       queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(6);
-      expect(queuedItems).to.have.members(itemsToAdd.slice(1, 7));
+      expect(queuedItems).toHaveLength(6);
+      expect(queuedItems).toEqual(itemsToAdd.slice(1, 7));
     });
 
     it('should respect maximum size of one', () => {
@@ -80,13 +78,13 @@ describe('DuplicateLimitedQueue', () => {
       queue.enqueue('banana');
 
       let queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(1);
-      expect(queuedItems[0]).to.equal('banana');
+      expect(queuedItems).toHaveLength(1);
+      expect(queuedItems[0]).toEqual('banana');
 
       queue.enqueue('pear');
       queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(1);
-      expect(queuedItems[0]).to.equal('pear');
+      expect(queuedItems).toHaveLength(1);
+      expect(queuedItems[0]).toEqual('pear');
     });
 
     it('should respect maximum duplicate size', () => {
@@ -99,20 +97,20 @@ describe('DuplicateLimitedQueue', () => {
       itemsToAdd.map(value => queue.enqueue(value));
 
       let queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(3);
-      expect(queuedItems).to.have.members(['a', 'b', 'c']);
+      expect(queuedItems).toHaveLength(3);
+      expect(queuedItems.sort()).toEqual(['a', 'b', 'c']);
 
       // add one more 'a'. 'b' should not be evicted.
       queue.enqueue('a');
       queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(3);
-      expect(queuedItems).to.have.members(['a', 'b', 'c']);
+      expect(queuedItems).toHaveLength(3);
+      expect(queuedItems.sort()).toEqual(['a', 'b', 'c']);
 
       // add one more 'c'. 'b' should now be evicted
       queue.enqueue('c');
       queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(2);
-      expect(queuedItems).to.have.members(['a', 'c']);
+      expect(queuedItems).toHaveLength(2);
+      expect(queuedItems.sort()).toEqual(['a', 'c']);
     });
   });
 
@@ -127,18 +125,18 @@ describe('DuplicateLimitedQueue', () => {
       itemsToAdd.map(value => queue.enqueue(value));
 
       let queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(4);
-      expect(queuedItems[0]).to.equal('a');
-      expect(queuedItems[1]).to.equal('c');
+      expect(queuedItems).toHaveLength(4);
+      expect(queuedItems[0]).toEqual('a');
+      expect(queuedItems[1]).toEqual('c');
 
       let equalFrequencyItems = ['b', 'd'];
-      expect(equalFrequencyItems.indexOf(queuedItems[2])).to.not.equal(-1);
+      expect(equalFrequencyItems.indexOf(queuedItems[2])).not.toEqual(-1);
 
       // removed the item we just matched
       equalFrequencyItems = equalFrequencyItems.filter(
         value => value !== queuedItems[2],
       );
-      expect(queuedItems[3]).to.equal(equalFrequencyItems[0]);
+      expect(queuedItems[3]).toEqual(equalFrequencyItems[0]);
     });
 
     it('should re-order when some item becomes more duplicated', () => {
@@ -151,17 +149,17 @@ describe('DuplicateLimitedQueue', () => {
       itemsToAdd.map(value => queue.enqueue(value));
 
       let queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(3);
-      expect(queuedItems[0]).to.equal('a');
+      expect(queuedItems).toHaveLength(3);
+      expect(queuedItems[0]).toEqual('a');
 
       queue.enqueue('c');
       queue.enqueue('c');
 
       queuedItems = queue.getItemsOrderedByDuplicateCount();
-      expect(queuedItems).to.have.lengthOf(3);
-      expect(queuedItems[0]).to.equal('c');
-      expect(queuedItems[1]).to.equal('a');
-      expect(queuedItems[2]).to.equal('b');
+      expect(queuedItems).toHaveLength(3);
+      expect(queuedItems[0]).toEqual('c');
+      expect(queuedItems[1]).toEqual('a');
+      expect(queuedItems[2]).toEqual('b');
     });
   });
 });

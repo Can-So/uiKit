@@ -15,7 +15,7 @@ for (let i = 0; i < 80; i++) {
 BrowserTestCase(
   'table.ts: Table floating toolbar should be visible even after table scrolls',
   { skip: ['edge', 'ie', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const insertTableMenu = `[aria-label="${
       insertBlockMessages.table.defaultMessage
     }"]`;
