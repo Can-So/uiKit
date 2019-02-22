@@ -130,6 +130,23 @@ export const focusTable = async page => {
   await page.click('table td p');
 };
 
+export const grabResizeHandle = async (
+  page,
+  { colIdx, row = 1 }: { colIdx: number; row: number },
+) => {
+  let cell = await getBoundingRect(
+    page,
+    getSelectorForTableCell({ row, cell: colIdx }),
+  );
+
+  const columnEndPosition = cell.left + cell.width;
+
+  // Move to the right edge of the cell.
+  await page.mouse.move(columnEndPosition, cell.top);
+
+  await page.mouse.down();
+};
+
 export const resizeColumn = async (
   page,
   { colIdx, amount, row = 1 }: ResizeColumnOpts,
