@@ -2,11 +2,17 @@ import * as React from 'react';
 import Textfield from '@atlaskit/textfield';
 import { nachosColors as colors } from '../../src';
 
+export type NTextFieldTheme = {
+  container?: {};
+  input?: {};
+};
+
 export type NTextFieldProps = {
   isFocused: boolean;
   isInvalid: boolean;
   isDisabled: boolean;
   name?: string;
+  theme?: any;
 };
 
 export class NachosTextField extends React.Component<NTextFieldProps> {
@@ -29,7 +35,7 @@ export class NachosTextField extends React.Component<NTextFieldProps> {
           backgroundColor: colors.N0,
         };
       }
-      // if this isn't here, default invalid styles will get overwritten by the next statement
+      // since we need to specify every state, returning an empty object here will just fallback to default ADG styles
       if (isInvalid) {
         return {};
       }
@@ -42,31 +48,36 @@ export class NachosTextField extends React.Component<NTextFieldProps> {
 
     // everything is styleable!
     // and you can add other properties not originally in the theme
-    const nachosTheme = (defaultTheme: any, props: NTextFieldProps) => ({
+    const nachosTheme = (adgTheme: any, themeProps: NTextFieldProps) => ({
       container: {
-        ...defaultTheme(props).container,
-        ...getTextFieldStyles(props),
+        ...adgTheme(themeProps).container,
+        ...getTextFieldStyles(themeProps),
         padding: '6px 10px',
         lineHeight: '20px',
-        placeholderTextColor: colors.N200,
+        ...(this.props.theme ? this.props.theme(themeProps).container : null),
       },
       input: {
-        ...defaultTheme(props).input,
+        ...adgTheme(themeProps).input,
+        '&::placeholder': colors.N200,
+
+        ...(this.props.theme ? this.props.theme(themeProps).input : null),
       },
     });
 
-    const { isInvalid, isFocused, isDisabled, ...rest } = this.props;
+    const { isInvalid, isFocused, isDisabled, theme, ...rest } = this.props;
 
     return (
       <div>
         <Textfield
-          isCompact
           name={this.props.name}
           defaultValue="Tacos are yummy!"
           isInvalid={isInvalid}
           isFocused={isFocused}
           isDisabled={isDisabled}
-          theme={(theme, props: NTextFieldProps) => nachosTheme(theme, props)}
+          theme={(adgTheme: NTextFieldTheme, props: NTextFieldProps) =>
+            nachosTheme(adgTheme, props)
+          }
+          {...rest}
         />
       </div>
     );
