@@ -1,13 +1,20 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { InjectedIntl } from 'react-intl';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { Node } from 'prosemirror-model';
 import { SelectItemMode } from './commands/select-item';
 import { Dispatch } from '../../event-dispatcher';
 
+export type TypeAheadItemRenderProps = {
+  onClick: () => void;
+  onMouseMove: () => void;
+  isSelected: boolean;
+};
+
 export type TypeAheadItem = {
   title: string;
   icon?: () => ReactElement<any>;
+  render?: (props: TypeAheadItemRenderProps) => ReactNode;
   [key: string]: any;
 };
 

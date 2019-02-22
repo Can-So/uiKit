@@ -4,6 +4,7 @@ import { MentionProvider, ResourcedMention } from '@atlaskit/mention';
 import {
   MentionEventHandlers,
   ProviderFactory,
+  Providers,
   WithProviders,
 } from '@atlaskit/editor-common';
 
@@ -18,7 +19,7 @@ export interface MentionProps {
 export default class Mention extends PureComponent<MentionProps, {}> {
   private providerFactory: ProviderFactory;
 
-  constructor(props) {
+  constructor(props: MentionProps) {
     super(props);
     this.providerFactory = props.providers || new ProviderFactory();
   }
@@ -31,16 +32,16 @@ export default class Mention extends PureComponent<MentionProps, {}> {
     }
   }
 
-  private renderWithProvider = providers => {
+  private renderWithProvider = (providers: Providers) => {
     const { accessLevel, eventHandlers, id, text } = this.props;
     const { mentionProvider } = providers as {
       mentionProvider?: Promise<MentionProvider>;
     };
 
-    const actionHandlers = {};
+    const actionHandlers: Record<string, any> = {};
     ['onClick', 'onMouseEnter', 'onMouseLeave'].forEach(handler => {
       actionHandlers[handler] =
-        (eventHandlers && eventHandlers[handler]) || (() => {});
+        (eventHandlers && (eventHandlers as any)[handler]) || (() => {});
     });
 
     return (

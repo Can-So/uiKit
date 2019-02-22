@@ -84,7 +84,7 @@ class StatusNodeView extends React.Component<Props & InjectedIntlProps, State> {
 
   private handleSelectionChange = (
     newSelection: Selection,
-    prevSelection: Selection,
+    _prevSelection: Selection,
   ) => {
     const { getPos } = this.props;
     const { from, to } = newSelection;

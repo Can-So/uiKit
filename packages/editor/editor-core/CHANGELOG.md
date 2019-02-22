@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 101.0.0
+- [major] [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+
+  - ED-5766 Remove the deprecated 'message' appearance from Editor
+
+## 100.2.0
+- [minor] [af5572cf8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af5572cf8e):
+
+  - ED-6284 Filter out invalid transactions before they are applied and send an analytics event
+
+## 100.1.0
+- [minor] [5dc1e046b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dc1e046b2):
+
+  - Apply stricture typings to elements related editor code
+
 ## 100.0.0
 - [major] [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
 

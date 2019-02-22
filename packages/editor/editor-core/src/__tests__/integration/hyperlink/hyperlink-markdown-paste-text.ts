@@ -18,7 +18,7 @@ import {
     {
       skip: ['ie', 'edge', 'safari'],
     },
-    async client => {
+    async (client: any) => {
       const sample = new Page(client);
       await sample.goto(clipboardHelper);
       await sample.isVisible(clipboardInput);

@@ -20,7 +20,7 @@ import commonMessages from '../../../messages';
   BrowserTestCase(
     `layouts.ts: Extension: ${layoutName} Layout`,
     { skip: ['edge', 'ie'] },
-    async client => {
+    async (client: any) => {
       const page = await goToEditorTestingExample(client);
       await mountEditor(page, {
         appearance: 'full-page',

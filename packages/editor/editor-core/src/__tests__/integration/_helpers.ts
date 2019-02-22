@@ -9,7 +9,7 @@ import { pluginKey as tableResizingPluginKey } from '../../plugins/table/pm-plug
  * unknown error: Maximum call stack size exceeded
  * And, don't get too fancy with it ;)
  */
-export const getDocFromElement = el => el.pmViewDesc.node.toJSON();
+export const getDocFromElement = (el: any) => el.pmViewDesc.node.toJSON();
 export const editable = '.ProseMirror';
 export const LONG_WAIT_FOR = 5000;
 export const typeAheadPicker = '.fabric-editor-typeahead';
@@ -17,21 +17,24 @@ export const lozenge = '[data-mention-id="0"]';
 export const linkToolbar =
   '[placeholder="Paste link or search recently viewed"]';
 
-export const insertMention = async (browser, query: string) => {
+export const insertMention = async (browser: any, query: string) => {
   await browser.type(editable, '@');
   await browser.waitForSelector(typeAheadPicker);
   await browser.type(editable, query);
   await browser.type(editable, 'Return');
 };
 
-export const gotoEditor = async browser => {
+export const gotoEditor = async (browser: any) => {
   await browser.goto(fullpage.path);
   await browser.waitForSelector(fullpage.placeholder);
   await browser.click(fullpage.placeholder);
   await browser.waitForSelector(editable);
 };
 
-export const insertMentionUsingClick = async (browser, mentionId: string) => {
+export const insertMentionUsingClick = async (
+  browser: any,
+  mentionId: string,
+) => {
   await browser.type(editable, '@');
   await browser.waitForSelector(typeAheadPicker);
   await browser.isVisible(`div[data-mention-id="${mentionId}"`);
@@ -73,13 +76,6 @@ export const fullpageWithImport: EditorHelper = {
   placeholder: '.ProseMirror',
 };
 
-export const message: EditorHelper = {
-  name: 'message',
-  appearance: 'message',
-  path: getExampleUrl('editor', 'editor-core', 'message'),
-  placeholder: '.ProseMirror',
-};
-
 export const editors = [comment, fullpage];
 
 export const clipboardHelper = getExampleUrl(
@@ -96,7 +92,7 @@ export const copyAsHTMLButton = '.copy-as-html';
 export const mediaInsertDelay = 1000;
 
 const mediaPickerMock = '.mediaPickerMock';
-export const setupMediaMocksProviders = async browser => {
+export const setupMediaMocksProviders = async (browser: any) => {
   // enable the media picker mock
   await browser.waitForSelector(mediaPickerMock);
   await browser.click(mediaPickerMock);
@@ -112,7 +108,10 @@ export const setupMediaMocksProviders = async browser => {
 /**
  * Toggles a given feature on a page with a toolbar.
  */
-export const toggleFeature = async (browser, name: keyof ToolbarFeatures) => {
+export const toggleFeature = async (
+  browser: any,
+  name: keyof ToolbarFeatures,
+) => {
   const selector = `.toggleFeature-${name}`;
   await browser.waitForSelector(selector);
   await browser.click(selector);
@@ -122,7 +121,7 @@ export const toggleFeature = async (browser, name: keyof ToolbarFeatures) => {
  * Enables or disables a given feature on a page with a toolbar.
  */
 export const setFeature = async (
-  browser,
+  browser: any,
   name: keyof ToolbarFeatures,
   enable: boolean,
 ) => {
@@ -138,12 +137,12 @@ export const setFeature = async (
 /**
  * Re-renders the current editor on a page with a toolbar.
  */
-export const rerenderEditor = async browser => {
+export const rerenderEditor = async (browser: any) => {
   await browser.click('.reloadEditorButton');
 };
 
 export const insertMedia = async (
-  browser,
+  browser: any,
   filenames = ['one.svg'],
   fileSelector = 'div=%s',
 ) => {
@@ -195,7 +194,7 @@ export const insertMedia = async (
       window.scrollBy(0, window.innerHeight);
     });
     await browser.waitFor(
-      (mediaCardSelector, mediaCardCount) => {
+      (mediaCardSelector: any, mediaCardCount: any) => {
         const mediaCards = document.querySelectorAll(mediaCardSelector);
         return mediaCards.length === mediaCardCount;
       },
@@ -209,7 +208,7 @@ export const insertMedia = async (
 /**
  * We use $$ in the context of selenium and puppeteer, which return different results.
  */
-const get$$Length = result => {
+const get$$Length = (result: any) => {
   if (Array.isArray(result)) {
     // Puppeteer result
     return result.length;
@@ -227,7 +226,7 @@ const get$$Length = result => {
  * @param mainToolbar Flag to look the menu in the main toolbar instead of insert menu
  */
 export const insertBlockMenuItem = async (
-  browser,
+  browser: any,
   menuTitle: string,
   tagName = 'span',
   mainToolbar = false,
@@ -250,13 +249,16 @@ export const insertBlockMenuItem = async (
   await browser.click(menuSelector);
 };
 
-export const changeSelectedNodeLayout = async (page, layoutName) => {
+export const changeSelectedNodeLayout = async (
+  page: any,
+  layoutName: string,
+) => {
   const buttonSelector = `div[aria-label="Floating Toolbar"] span[aria-label="${layoutName}"]`;
   await page.waitForSelector(buttonSelector, 3000);
   await page.click(buttonSelector);
 };
 
-export const quickInsert = async (browser, insertTitle) => {
+export const quickInsert = async (browser: any, insertTitle: string) => {
   await browser.type(editable, `/${insertTitle.split(' ')[0]}`);
   await browser.waitForSelector('div[aria-label="Popup"]');
   await browser.waitForSelector(
@@ -276,7 +278,7 @@ export const forEach = async (
   }
 };
 
-export const insertMenuItem = async (browser, title) => {
+export const insertMenuItem = async (browser: any, title: string) => {
   await browser.waitForSelector(`button span[aria-label="${title}"]`);
   await browser.click(`button span[aria-label="${title}"]`);
 };
@@ -284,14 +286,14 @@ export const insertMenuItem = async (browser, title) => {
 export const currentSelectedEmoji = '.emoji-typeahead-selected';
 export const typeahead = '.ak-emoji-typeahead';
 
-export const insertEmoji = async (browser, query: string) => {
+export const insertEmoji = async (browser: any, query: string) => {
   await browser.type(editable, ':');
   await browser.waitForSelector(typeahead);
   await browser.type(editable, query);
   await browser.type(editable, ':');
 };
 
-export const insertEmojiBySelect = async (browser, select: string) => {
+export const insertEmojiBySelect = async (browser: any, select: string) => {
   await browser.type(editable, ':');
   await browser.waitForSelector(typeahead);
   await browser.type(editable, [select]);
@@ -299,13 +301,13 @@ export const insertEmojiBySelect = async (browser, select: string) => {
   await browser.click(`span=:${select}:`);
 };
 
-export const currentSelectedEmojiShortName = async browser => {
+export const currentSelectedEmojiShortName = async (browser: any) => {
   return await browser.$(currentSelectedEmoji).getProperty('data-emoji-id');
 };
 
 export const highlightEmojiInTypeahead = async (
-  browser,
-  emojiShortName,
+  browser: any,
+  emojiShortName: string,
   depth = 5,
 ) => {
   for (let i = 0; i < depth; i++) {
@@ -330,7 +332,12 @@ interface ResizeOptions {
 
 export const resizeColumn = async (page: any, resizeOptions: ResizeOptions) => {
   await page.browser.execute(
-    (tableResizingPluginKey, resizeWidth, cellHandlePos, startX) => {
+    (
+      tableResizingPluginKey: any,
+      resizeWidth: any,
+      cellHandlePos: any,
+      startX: any,
+    ) => {
       const view = (window as any).__editorView;
 
       if (!view) {

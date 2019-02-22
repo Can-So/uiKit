@@ -16,7 +16,6 @@ import {
   hyperlinkPlugin,
   imageUploadPlugin,
   insertBlockPlugin,
-  isMultilineContentPlugin,
   jiraIssuePlugin,
   layoutPlugin,
   listsPlugin,
@@ -246,10 +245,6 @@ export default function createPluginsList(
 
   if (props.appearance === 'mobile') {
     plugins.push(compositionPlugin);
-  }
-
-  if (props.appearance === 'message') {
-    plugins.push(isMultilineContentPlugin);
   }
 
   return plugins;

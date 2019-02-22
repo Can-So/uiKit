@@ -1,5 +1,10 @@
 # @atlaskit/emoji
 
+## 55.0.2
+- [patch] [2d691c1e48](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d691c1e48):
+
+  - Added aria labels to Emoji upload component
+
 ## 55.0.1
 - Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
   - @atlaskit/editor-test-helpers@7.0.0

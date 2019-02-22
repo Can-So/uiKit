@@ -17,7 +17,7 @@ const clear = `span=${messages.clearFormatting.defaultMessage}`;
       editor.name
     } editor`,
     { skip: ['ie', 'safari'] },
-    async client => {
+    async (client: any) => {
       const page = await goToEditorTestingExample(client);
       await mountEditor(page, { appearance: editor.appearance });
 

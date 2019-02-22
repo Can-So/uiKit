@@ -14,6 +14,7 @@ import {
 import { emoji as emojiData } from '@atlaskit/util-data-test';
 import emojiPlugin from '../../../../plugins/emoji';
 import codeBlockPlugin from '../../../../plugins/code-block';
+import { EditorState } from 'prosemirror-state';
 
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 const providerFactory = ProviderFactory.create({ emojiProvider });
@@ -55,7 +56,7 @@ describe('ascii emojis - input rules', () => {
   const assert = (
     what: string,
     docContents: any,
-    expectation: (state) => void,
+    expectation: (state: EditorState) => void,
   ) => {
     const { editorView, sel } = editor(doc(docContents));
     insertText(editorView, what, sel);

@@ -1,15 +1,14 @@
 import { keymap } from 'prosemirror-keymap';
-import { Schema } from 'prosemirror-model';
 import { Plugin } from 'prosemirror-state';
 import * as keymaps from '../../../keymaps';
 import { EmojiState, emojiPluginKey } from './main';
 
-export function keymapPlugin(schema: Schema): Plugin {
+export function keymapPlugin(): Plugin {
   const list = {};
 
   keymaps.bindKeymapWithCommand(
     keymaps.moveUp.common!,
-    (state, dispatch) => {
+    (state, _dispatch) => {
       const emojisPlugin = emojiPluginKey.getState(state) as EmojiState;
       if (!emojisPlugin.queryActive) {
         return false;
@@ -22,7 +21,7 @@ export function keymapPlugin(schema: Schema): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.moveDown.common!,
-    (state, dispatch) => {
+    (state, _dispatch) => {
       const emojisPlugin = emojiPluginKey.getState(state) as EmojiState;
       if (!emojisPlugin.queryActive) {
         return false;
@@ -35,7 +34,7 @@ export function keymapPlugin(schema: Schema): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.enter.common!,
-    (state, dispatch) => {
+    (state, _dispatch) => {
       const emojisPlugin = emojiPluginKey.getState(state) as EmojiState;
       if (!emojisPlugin.queryActive) {
         return false;
@@ -48,7 +47,7 @@ export function keymapPlugin(schema: Schema): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.insertNewLine.common!,
-    (state, dispatch) => {
+    (state, _dispatch) => {
       const emojisPlugin = emojiPluginKey.getState(state) as EmojiState;
       if (!emojisPlugin.queryActive) {
         return false;
@@ -62,7 +61,7 @@ export function keymapPlugin(schema: Schema): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.tab.common!,
-    (state, dispatch) => {
+    (state, _dispatch) => {
       const emojisPlugin = emojiPluginKey.getState(state) as EmojiState;
       if (!emojisPlugin.queryActive) {
         return false;
@@ -75,7 +74,7 @@ export function keymapPlugin(schema: Schema): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.escape.common!,
-    (state, dispatch) => {
+    (state, _dispatch) => {
       const emojisPlugin = emojiPluginKey.getState(state) as EmojiState;
       if (!emojisPlugin.queryActive) {
         return false;
@@ -96,7 +95,7 @@ export function keymapPlugin(schema: Schema): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.space.common!,
-    (state, dispatch) => {
+    (state, _dispatch) => {
       const emojisPlugin = emojiPluginKey.getState(state) as EmojiState;
       if (!emojisPlugin.queryActive) {
         return false;

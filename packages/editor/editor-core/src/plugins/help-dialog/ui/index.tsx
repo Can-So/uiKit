@@ -216,8 +216,7 @@ export const formatting: ((intl: InjectedIntl) => Format[]) = ({
   {
     name: formatMessage(insertBlockMessages.link),
     type: 'link',
-    keymap: ({ appearance }) =>
-      appearance && appearance !== 'message' ? keymaps.addLink : undefined,
+    keymap: () => keymaps.addLink,
     autoFormatting: () => (
       <span>
         <CodeLg>

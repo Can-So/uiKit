@@ -40,7 +40,7 @@ async function loadAndRetrieveDocument(
 BrowserTestCase(
   'Doesnt scale past default',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     const doc = await loadAndRetrieveDocument(page, autoSizeToDefaultLayout);
     expect(doc).toMatchDocSnapshot();
@@ -50,7 +50,7 @@ BrowserTestCase(
 BrowserTestCase(
   'Scales to wide',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     const doc = await loadAndRetrieveDocument(
       page,
@@ -64,7 +64,7 @@ BrowserTestCase(
 BrowserTestCase(
   'Scales to full-width',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     const doc = await loadAndRetrieveDocument(
       page,
