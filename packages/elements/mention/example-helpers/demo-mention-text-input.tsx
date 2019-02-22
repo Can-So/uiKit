@@ -24,7 +24,7 @@ export interface State {
 }
 
 export default class MentionTextInput extends React.Component<Props, State> {
-  private mentionPickerRef: MentionPicker | null;
+  private mentionPickerRef?: MentionPicker | null;
 
   constructor(props: Props) {
     super(props);

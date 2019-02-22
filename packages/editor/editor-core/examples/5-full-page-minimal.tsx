@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import * as React from 'react';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { borderRadius } from '@atlaskit/theme';
 
 import Editor from './../src/editor';
 
@@ -15,19 +15,6 @@ export const Wrapper: any = styled.div`
   height: 500px;
 `;
 Wrapper.displayName = 'Wrapper';
-
-export const TitleInput: any = styled.input`
-  border: none;
-  outline: none;
-  font-size: 2.07142857em;
-  margin: 0 0 21px;
-  padding: 0;
-
-  &::placeholder {
-    color: ${colors.N80};
-  }
-`;
-TitleInput.displayName = 'TitleInput';
 
 export const Content: any = styled.div`
   padding: 0 20px;

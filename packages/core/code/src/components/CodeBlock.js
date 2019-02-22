@@ -1,12 +1,15 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { withTheme, ThemeProvider } from 'styled-components';
 import {
   normalizeLanguage,
   type SupportedLanguages,
-} from './supportedLanguages';
-import { type Theme, type ThemeProps, applyTheme } from './themes/themeBuilder';
-import { Code } from './Code';
+} from '../supportedLanguages';
+import {
+  type Theme,
+  type ThemeProps,
+  applyTheme,
+} from '../themes/themeBuilder';
+import Code from './Code';
 
 type CodeBlockProps = {
   /** The code to be formatted */
@@ -21,7 +24,7 @@ type CodeBlockProps = {
 
 const LANGUAGE_FALLBACK = 'text';
 
-export class CodeBlock extends PureComponent<CodeBlockProps, {}> {
+export default class CodeBlock extends PureComponent<CodeBlockProps, {}> {
   static displayName = 'CodeBlock';
 
   static defaultProps = {
@@ -62,14 +65,4 @@ export class CodeBlock extends PureComponent<CodeBlockProps, {}> {
 
     return <Code {...props} />;
   }
-}
-
-const CodeBlockWithTheme = withTheme(CodeBlock);
-const emptyTheme = {};
-export default function(props: {}) {
-  return (
-    <ThemeProvider theme={emptyTheme}>
-      <CodeBlockWithTheme {...props} />
-    </ThemeProvider>
-  );
 }

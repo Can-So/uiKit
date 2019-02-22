@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as sinon from 'sinon';
 
 import StoredDuplicateLimitedQueue, {
@@ -35,14 +34,14 @@ describe('StoredDuplicateLimitedQueue', () => {
       mockGetItem.returns(null);
       const queue = new StoredDuplicateLimitedQueue<string>(queueOptions);
       expect(mockGetItem.calledWith(`${storagePrefix}.lastUsed`));
-      expect(queue.getItemsOrderedByDuplicateCount()).to.have.lengthOf(0);
+      expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(0);
     });
 
     it('should construct an empty queue when empty array found in storage', () => {
       mockGetItem.returns(JSON.stringify([]));
       const queue = new StoredDuplicateLimitedQueue<string>(queueOptions);
       expect(mockGetItem.calledWith(`${storagePrefix}.lastUsed`));
-      expect(queue.getItemsOrderedByDuplicateCount()).to.have.lengthOf(0);
+      expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(0);
     });
 
     it('should construct an empty queue when wrong type of data found in storage', () => {
@@ -51,14 +50,14 @@ describe('StoredDuplicateLimitedQueue', () => {
       mockGetItem.returns(JSON.stringify(wrongData));
       const queue = new StoredDuplicateLimitedQueue<string>(queueOptions);
       expect(mockGetItem.calledWith(`${storagePrefix}.lastUsed`));
-      expect(queue.getItemsOrderedByDuplicateCount()).to.have.lengthOf(0);
+      expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(0);
     });
 
     it('should construct an empty queue when unparsable data found in storage', () => {
       mockGetItem.returns(' a "b:" ] c []');
       const queue = new StoredDuplicateLimitedQueue<string>(queueOptions);
       expect(mockGetItem.calledWith(`${storagePrefix}.lastUsed`));
-      expect(queue.getItemsOrderedByDuplicateCount()).to.have.lengthOf(0);
+      expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(0);
     });
   });
 
@@ -68,11 +67,11 @@ describe('StoredDuplicateLimitedQueue', () => {
       mockGetItem.returns(JSON.stringify(list));
       const queue = new StoredDuplicateLimitedQueue<string>(queueOptions);
       const orderedList = queue.getItemsOrderedByDuplicateCount();
-      expect(orderedList).to.have.lengthOf(4);
-      expect(orderedList[0]).to.equal('b');
-      expect(orderedList[1]).to.equal('d');
-      expect(orderedList[2]).to.equal('a');
-      expect(orderedList[3]).to.equal('c');
+      expect(orderedList).toHaveLength(4);
+      expect(orderedList[0]).toEqual('b');
+      expect(orderedList[1]).toEqual('d');
+      expect(orderedList[2]).toEqual('a');
+      expect(orderedList[3]).toEqual('c');
     });
 
     it('should load, reorder and discard excess data', () => {
@@ -97,8 +96,8 @@ describe('StoredDuplicateLimitedQueue', () => {
       mockGetItem.returns(JSON.stringify(list));
       const queue = new StoredDuplicateLimitedQueue<string>(queueOptions);
       const orderedList = queue.getItemsOrderedByDuplicateCount();
-      expect(orderedList).to.have.lengthOf(12);
-      expect(orderedList).to.have.members([
+      expect(orderedList).toHaveLength(12);
+      expect(orderedList.sort()).toEqual([
         'L',
         'M',
         'N',
@@ -122,11 +121,11 @@ describe('StoredDuplicateLimitedQueue', () => {
       const queue = new StoredDuplicateLimitedQueue<string>(queueOptions);
 
       queue.enqueue('c');
-      expect(mockSetItem.callCount).to.equal(1);
-      expect(mockSetItem.getCall(0).args[0]).to.equal(
+      expect(mockSetItem.callCount).toEqual(1);
+      expect(mockSetItem.getCall(0).args[0]).toEqual(
         `${storagePrefix}.lastUsed`,
       );
-      expect(mockSetItem.getCall(0).args[1]).to.equal(
+      expect(mockSetItem.getCall(0).args[1]).toEqual(
         JSON.stringify(['a', 'b', 'c']),
       );
     });
@@ -138,8 +137,8 @@ describe('StoredDuplicateLimitedQueue', () => {
       mockSetItem.throws(new Error('storage error'));
 
       queue.enqueue('c');
-      expect(queue.getItemsOrderedByDuplicateCount()).to.have.lengthOf(3);
-      expect(queue.getItemsOrderedByDuplicateCount()).to.have.members([
+      expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(3);
+      expect(queue.getItemsOrderedByDuplicateCount().sort()).toEqual([
         'a',
         'b',
         'c',
@@ -151,10 +150,10 @@ describe('StoredDuplicateLimitedQueue', () => {
     const list = ['a', 'b'];
     mockGetItem.returns(JSON.stringify(list));
     const queue = new StoredDuplicateLimitedQueue<string>(queueOptions);
-    expect(queue.getItemsOrderedByDuplicateCount()).to.be.lengthOf(2);
+    expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(2);
 
     queue.clear();
-    expect(queue.getItemsOrderedByDuplicateCount()).to.be.lengthOf(0);
-    expect(mockRemoveItem.calledOnce).to.equal(true);
+    expect(queue.getItemsOrderedByDuplicateCount()).toHaveLength(0);
+    expect(mockRemoveItem.calledOnce).toEqual(true);
   });
 });

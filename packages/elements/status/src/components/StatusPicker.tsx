@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { PureComponent, FormEvent } from 'react';
-import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
 import { FieldTextStateless } from '@atlaskit/field-text';
+import { gridSize } from '@atlaskit/theme';
+import * as React from 'react';
+import { FormEvent, PureComponent } from 'react';
+import styled from 'styled-components';
 import ColorPalette from './internal/color-palette';
 import { Color as ColorType } from './Status';
 
@@ -63,13 +63,13 @@ export class StatusPicker extends PureComponent<Props, any> {
     this.props.onTextChanged(evt.target.value);
   };
 
-  private onKeyPress = event => {
+  private onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       this.props.onEnter();
     }
   };
 
-  private handleInputRef = ref => {
+  private handleInputRef = (ref: HTMLInputElement | null) => {
     if (ref && this.props.autoFocus) {
       // Defer to prevent editor scrolling to top (See FS-3227, also ED-2992)
       setTimeout(() => {

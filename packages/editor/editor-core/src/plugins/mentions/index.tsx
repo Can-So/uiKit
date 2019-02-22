@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as uuid from 'uuid';
-import { Plugin, PluginKey, StateField } from 'prosemirror-state';
+import { EditorState, Plugin, PluginKey, StateField } from 'prosemirror-state';
 import {
   AnalyticsEventPayload,
   CreateUIAnalyticsEventSignature,
@@ -49,6 +49,7 @@ import {
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
 } from '../analytics';
+import { TypeAheadItem } from '../type-ahead/types';
 
 const mentionsPlugin = (
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
@@ -140,7 +141,7 @@ const mentionsPlugin = (
         getItems(
           query,
           state,
-          intl,
+          _intl,
           { prevActive, queryChanged },
           tr,
           dispatch,
@@ -174,18 +175,20 @@ const mentionsPlugin = (
             pluginState.mentionProvider.filter(query || '', mentionContext);
           }
 
-          return mentions.map(mention => ({
-            title: mention.id,
-            render: ({ isSelected, onClick, onMouseMove }) => (
-              <MentionItem
-                mention={mention}
-                selected={isSelected}
-                onMouseMove={onMouseMove}
-                onSelection={onClick}
-              />
-            ),
-            mention,
-          }));
+          return mentions.map(
+            (mention: MentionDescription): TypeAheadItem => ({
+              title: mention.id,
+              render: ({ isSelected, onClick, onMouseMove }) => (
+                <MentionItem
+                  mention={mention}
+                  selected={isSelected}
+                  onMouseMove={onMouseMove}
+                  onSelection={onClick}
+                />
+              ),
+              mention,
+            }),
+          );
         },
         selectItem(state, item, insert, { mode }) {
           const pluginState = getMentionPluginState(state);
@@ -286,7 +289,10 @@ export const ACTIONS = {
   SET_CONTEXT: 'SET_CONTEXT',
 };
 
-export const setProvider = (provider): Command => (state, dispatch) => {
+export const setProvider = (provider: MentionProvider | undefined): Command => (
+  state,
+  dispatch,
+) => {
   if (dispatch) {
     dispatch(
       state.tr.setMeta(mentionPluginKey, {
@@ -298,7 +304,10 @@ export const setProvider = (provider): Command => (state, dispatch) => {
   return true;
 };
 
-export const setResults = (results): Command => (state, dispatch) => {
+export const setResults = (results: MentionDescription[]): Command => (
+  state,
+  dispatch,
+) => {
   if (dispatch) {
     dispatch(
       state.tr.setMeta(mentionPluginKey, {
@@ -310,7 +319,9 @@ export const setResults = (results): Command => (state, dispatch) => {
   return true;
 };
 
-export const setContext = (context): Command => (state, dispatch) => {
+export const setContext = (
+  context: ContextIdentifierProvider | undefined,
+): Command => (state, dispatch) => {
   if (dispatch) {
     dispatch(
       state.tr.setMeta(mentionPluginKey, {
@@ -330,7 +341,7 @@ export const setContext = (context): Command => (state, dispatch) => {
 
 export const mentionPluginKey = new PluginKey('mentionPlugin');
 
-export function getMentionPluginState(state) {
+export function getMentionPluginState(state: EditorState) {
   return mentionPluginKey.getState(state) as MentionPluginState;
 }
 
@@ -458,6 +469,7 @@ function mentionPluginFactory(
             );
             break;
         }
+        return;
       };
 
       providerFactory.subscribe('mentionProvider', providerHandler);

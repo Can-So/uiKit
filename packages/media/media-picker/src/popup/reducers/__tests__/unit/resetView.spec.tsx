@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import resetView from '../../resetView';
 
 describe('resetView reducer', () => {
@@ -11,7 +10,7 @@ describe('resetView reducer', () => {
     const oldState = { ...stateBase };
     const newState = resetView(oldState, otherAction);
 
-    expect(newState).to.deep.equal(stateBase);
+    expect(newState).toEqual(stateBase);
   });
 
   it('should not change uploads if they were empty', () => {
@@ -21,7 +20,7 @@ describe('resetView reducer', () => {
 
     const newState = resetView(oldState, action);
 
-    expect(newState.uploads).to.deep.equal({});
+    expect(newState.uploads).toEqual({});
   });
 
   it('should not drop upload with progress 0', () => {
@@ -33,7 +32,7 @@ describe('resetView reducer', () => {
 
     const newState = resetView(oldState, action);
 
-    expect(newState.uploads).to.deep.equal({
+    expect(newState.uploads).toEqual({
       'some-file-id': { progress: 0 },
     });
   });
@@ -47,7 +46,7 @@ describe('resetView reducer', () => {
 
     const newState = resetView(oldState, action);
 
-    expect(newState.uploads).to.deep.equal({});
+    expect(newState.uploads).toEqual({});
   });
 
   it('should leave only uncompleted uploads', () => {
@@ -61,7 +60,7 @@ describe('resetView reducer', () => {
 
     const newState = resetView(oldState, action);
 
-    expect(newState.uploads).to.deep.equal({
+    expect(newState.uploads).toEqual({
       'second-file-id': { progress: 0.85 },
       'third-file-id': { progress: 0.15 },
     });
@@ -75,7 +74,7 @@ describe('resetView reducer', () => {
 
     const newState = resetView(oldState, action);
 
-    expect(newState.selectedItems).to.deep.equal([]);
+    expect(newState.selectedItems).toEqual([]);
   });
 
   it('should preserve the unrelated state fields', () => {
@@ -90,6 +89,6 @@ describe('resetView reducer', () => {
 
     const newState = resetView(oldState, action);
 
-    expect(newState).to.contain(stateData);
+    expect(newState).toEqual(expect.objectContaining(stateData));
   });
 });

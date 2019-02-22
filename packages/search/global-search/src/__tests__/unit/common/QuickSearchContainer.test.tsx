@@ -65,6 +65,7 @@ describe('QuickSearchContainer', () => {
         resultSectionCount: Object.keys(recentItems).length,
       }),
       expect.any(Number),
+      expect.any(Number),
       expect.any(String),
       defaultProps.createAnalyticsEvent,
       expect.any(Number),

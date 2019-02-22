@@ -2,12 +2,14 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { taskDecision, emoji } from '@atlaskit/util-data-test';
+import { Provider } from '@atlaskit/smart-card';
 import {
   storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
 } from '@atlaskit/editor-test-helpers';
 import { default as Renderer } from '../src/ui/Renderer';
 import { document as doc } from './helper/story-data';
+import Sidebar from './helper/NavigationNext';
 
 const mediaProvider = storyMediaProviderFactory();
 const emojiProvider = emoji.storyData.getEmojiResource();
@@ -39,9 +41,22 @@ function createRendererWindowBindings(win: Window) {
       return;
     }
 
+    const { showSidebar, ...reactProps } = props;
+
     ReactDOM.unmountComponentAtNode(target);
     ReactDOM.render(
-      <Renderer dataProviders={providerFactory} document={doc} {...props} />,
+      <Provider>
+        <Sidebar showSidebar={showSidebar}>
+          {additionalRendererProps => (
+            <Renderer
+              dataProviders={providerFactory}
+              document={doc}
+              {...reactProps}
+              {...additionalRendererProps}
+            />
+          )}
+        </Sidebar>
+      </Provider>,
       target,
     );
   };

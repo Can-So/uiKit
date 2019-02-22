@@ -388,7 +388,7 @@ describe('Comment', () => {
         <Comment
           {...defaultProps}
           conversationId={mockComment.conversationId}
-          containerId="ari:cloud:platform::conversation/demo"
+          objectId="ari:cloud:platform::conversation/demo"
           comment={mockComment}
           dataProviders={getDataProviderFactory()}
           user={user}
@@ -404,7 +404,7 @@ describe('Comment', () => {
         <Comment
           {...defaultProps}
           conversationId={mockComment.conversationId}
-          containerId="ari:cloud:platform::conversation/demo"
+          objectId="ari:cloud:platform::conversation/demo"
           comment={mockComment}
           dataProviders={getDataProviderFactory()}
           user={user}
@@ -420,7 +420,7 @@ describe('Comment', () => {
         <Comment
           {...defaultProps}
           conversationId={mockComment.conversationId}
-          containerId="ari:cloud:platform::conversation/demo"
+          objectId="ari:cloud:platform::conversation/demo"
           comment={mockComment}
           dataProviders={getDataProviderFactory(['mentionProvider'])}
           user={user}
@@ -432,7 +432,7 @@ describe('Comment', () => {
       comment.unmount();
     });
 
-    it('should not render reactions-component if containerId is missing', () => {
+    it('should not render reactions-component if objectId is missing', () => {
       const comment = mount(
         <Comment
           {...defaultProps}
@@ -453,7 +453,7 @@ describe('Comment', () => {
         <Comment
           {...defaultProps}
           conversationId={mockComment.conversationId}
-          containerId="ari:cloud:platform::conversation/demo"
+          objectId="ari:cloud:platform::conversation/demo"
           comment={{
             ...mockComment,
             commentAri: undefined,
@@ -473,7 +473,7 @@ describe('Comment', () => {
         <Comment
           {...defaultProps}
           conversationId={mockComment.conversationId}
-          containerId="ari:cloud:platform::conversation/demo"
+          objectId="ari:cloud:platform::conversation/demo"
           comment={mockComment}
           dataProviders={getDataProviderFactory()}
         />,

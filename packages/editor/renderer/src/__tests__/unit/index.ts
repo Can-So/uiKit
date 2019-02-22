@@ -1,7 +1,5 @@
 import * as assert from 'assert';
-import { expect } from 'chai';
 import * as sinon from 'sinon';
-
 import { renderDocument, Serializer } from '../../index';
 import { defaultSchema as schema } from '@atlaskit/adf-schema';
 import * as common from '@atlaskit/editor-common';
@@ -58,19 +56,19 @@ describe('Renderer', () => {
     it('should call getValidDocument', () => {
       const spy = sinon.spy(common, 'getValidDocument');
       renderDocument(doc, serializer, schema);
-      expect(spy.calledWith(doc)).to.equal(true);
+      expect(spy.calledWith(doc)).toEqual(true);
     });
 
     it('should call schema.nodeFromJSON', () => {
       const spy = sinon.spy(schema, 'nodeFromJSON');
       renderDocument(doc, serializer, schema);
-      expect(spy.called).to.equal(true);
+      expect(spy.called).toEqual(true);
     });
 
     it('should call serializer.serializeFragment', () => {
       const spy = sinon.spy(serializer, 'serializeFragment');
       renderDocument(doc, serializer, schema);
-      expect(spy.called).to.equal(true);
+      expect(spy.called).toEqual(true);
     });
 
     it('should return result and stat fields', () => {
@@ -95,7 +93,7 @@ describe('Renderer', () => {
       ];
 
       unexpectedContent.forEach(content => {
-        expect(renderDocument(content, serializer).result).to.equal(null);
+        expect(renderDocument(content, serializer).result).toEqual(null);
       });
     });
   });

@@ -39,7 +39,7 @@ export default class ResourcedTaskItem extends PureComponent<Props, State> {
   public static defaultProps: Partial<Props> = {
     appearance: 'inline',
   };
-  private mounted: boolean;
+  private mounted: boolean = false;
 
   constructor(props: Props) {
     super(props);

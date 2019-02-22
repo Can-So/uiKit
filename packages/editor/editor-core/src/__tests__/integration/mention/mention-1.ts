@@ -21,8 +21,8 @@ import {
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside blockquote',
-  { skip: ['safari', 'ie', 'firefox'] },
-  async client => {
+  { skip: ['safari', 'ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -42,8 +42,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside bulletList',
-  { skip: ['safari', 'ie', 'firefox'] },
-  async client => {
+  { skip: ['safari', 'ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -62,8 +62,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside orderedList',
-  { skip: ['safari', 'ie', 'firefox'] },
-  async client => {
+  { skip: ['safari', 'ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -82,8 +82,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside decision',
-  { skip: ['ie', 'safari', 'firefox'] },
-  async client => {
+  { skip: ['ie', 'safari'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -99,8 +99,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside action',
-  { skip: ['ie', 'safari', 'firefox'] },
-  async client => {
+  { skip: ['ie', 'safari'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -116,8 +116,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-1.ts: user can navigate picker using keyboard',
-  { skip: ['ie', 'safari', 'firefox'] },
-  async client => {
+  { skip: ['ie', 'safari'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,

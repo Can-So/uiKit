@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import TableCell from '../../../../react/nodes/tableCell';
 
 describe('Renderer - React/Nodes/TableCell', () => {
@@ -12,17 +11,17 @@ describe('Renderer - React/Nodes/TableCell', () => {
 
   it('should create a <td>-tag', () => {
     const tableCell = shallow(<TableCell />);
-    expect(tableCell.name()).to.equal('td');
+    expect(tableCell.name()).toEqual('td');
   });
 
   it('should render the <td> props', () => {
     const tableRow = shallow(<TableCell {...baseProps} />);
-    expect(tableRow.name()).to.equal('td');
+    expect(tableRow.name()).toEqual('td');
 
-    expect(tableRow.prop('rowSpan')).to.equal(3);
-    expect(tableRow.prop('colSpan')).to.equal(6);
+    expect(tableRow.prop('rowSpan')).toEqual(3);
+    expect(tableRow.prop('colSpan')).toEqual(6);
 
-    expect(tableRow.prop('style')).to.deep.equal({
+    expect(tableRow.prop('style')).toEqual({
       'background-color': 'rgba(255,170,187,0.5)',
     });
   });

@@ -3,19 +3,20 @@ import { Component } from 'react';
 import {
   Context,
   FileDetails,
-  isPreviewableType,
   MediaItemType,
+  Identifier,
+  FileIdentifier,
+  isPreviewableType,
+  isFileIdentifier,
+  isExternalImageIdentifier,
+  isDifferentIdentifier,
 } from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import { Subscription } from 'rxjs/Subscription';
 import { IntlProvider } from 'react-intl';
-import {
-  MediaViewer,
-  MediaViewerItem,
-  MediaViewerDataSource,
-} from '@atlaskit/media-viewer';
+import { MediaViewer, MediaViewerDataSource } from '@atlaskit/media-viewer';
 import {
   CardAnalyticsContext,
   CardAction,
@@ -24,18 +25,12 @@ import {
   CardState,
   CardEvent,
 } from '../..';
-import { Identifier, FileIdentifier } from '../domain';
 import { CardView } from '../cardView';
 import { LazyContent } from '../../utils/lazyContent';
 import { getBaseAnalyticsContext } from '../../utils/analyticsUtils';
 import { getDataURIDimension } from '../../utils/getDataURIDimension';
 import { getDataURIFromFileState } from '../../utils/getDataURIFromFileState';
 import { extendMetadata } from '../../utils/metadata';
-import {
-  isFileIdentifier,
-  isExternalImageIdentifier,
-  isDifferentIdentifier,
-} from '../../utils/identifier';
 import { isBigger } from '../../utils/dimensionComparer';
 import { getCardStatus } from './getCardStatus';
 import { InlinePlayer } from '../inlinePlayer';
@@ -329,10 +324,10 @@ export class Card extends Component<CardProps, CardState> {
         isPlayingFile: true,
       });
     } else if (shouldOpenMediaViewer && identifier.mediaItemType === 'file') {
-      const mediaViewerSelectedItem: MediaViewerItem = {
+      const mediaViewerSelectedItem: FileIdentifier = {
         id: await identifier.id,
         occurrenceKey: '',
-        type: 'file',
+        mediaItemType: 'file',
       };
       this.setState({
         mediaViewerSelectedItem,

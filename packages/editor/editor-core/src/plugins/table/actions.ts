@@ -10,6 +10,7 @@ import {
   TableMap,
   CellSelection,
 } from 'prosemirror-tables';
+import { EditorView } from 'prosemirror-view';
 import { Node as PMNode, Slice, Schema } from 'prosemirror-model';
 import {
   findTable,
@@ -202,20 +203,26 @@ export const toggleHeaderColumn: Command = (state, dispatch) => {
   }
   const { tr } = state;
   const map = TableMap.get(table.node);
+
+  const cellsPositions = map.cellsInRect({
+    left: 0,
+    // skip header row
+    top: checkIfHeaderRowEnabled(state) ? 1 : 0,
+    right: 1,
+    bottom: map.height,
+  });
+
   const { tableHeader, tableCell } = state.schema.nodes;
   const type = checkIfHeaderColumnEnabled(state) ? tableCell : tableHeader;
 
-  // skip header row
-  const startIndex = checkIfHeaderRowEnabled(state) ? 1 : 0;
-  for (let row = startIndex; row < table.node.childCount; row++) {
-    const column = 0;
-    const cell = table.node.child(row).child(column);
-    tr.setNodeMarkup(
-      table.start + map.map[column + row * map.width],
-      type,
-      cell.attrs,
-    );
-  }
+  cellsPositions.forEach(relativeCellPos => {
+    const cellPos = relativeCellPos + table.start;
+    const cell = tr.doc.nodeAt(cellPos);
+
+    if (cell) {
+      tr.setNodeMarkup(cellPos, type, cell.attrs);
+    }
+  });
 
   if (dispatch) {
     dispatch(tr);
@@ -951,14 +958,11 @@ export const handleShiftSelection = (event: MouseEvent): Command => (
 };
 
 export const autoSizeTable = (
+  view: EditorView,
   node: PMNode,
   table: HTMLTableElement,
   basePos: number,
-): Command => (state, dispatch) => {
-  if (dispatch) {
-    dispatch(fixAutoSizedTable(state.tr, node, table, basePos));
-    return true;
-  }
-
-  return false;
+) => {
+  view.dispatch(fixAutoSizedTable(view, node, table, basePos));
+  return true;
 };

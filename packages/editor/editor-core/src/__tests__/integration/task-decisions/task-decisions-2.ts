@@ -20,8 +20,8 @@ export const loadActionButton = '[aria-label="Action item"]';
 // Cannot paste rich text in IE/Edge
 BrowserTestCase(
   'task-decision-2.ts: can paste rich text into an action',
-  { skip: ['ie', 'safari', 'edge', 'firefox'] },
-  async client => {
+  { skip: ['ie', 'safari', 'edge'] },
+  async (client: any) => {
     const browser = new Page(client);
     await browser.goto(clipboardHelper);
     await browser.isVisible(clipboardInput);
@@ -43,8 +43,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'task-decision-2.ts: can paste plain text into an action',
-  { skip: ['ie', 'safari', 'firefox'] },
-  async client => {
+  { skip: ['ie', 'safari'] },
+  async (client: any) => {
     const browser = new Page(client);
     await browser.goto(clipboardHelper);
     await browser.isVisible(clipboardInput);
@@ -67,8 +67,8 @@ BrowserTestCase(
 // IE is generally flaky
 BrowserTestCase(
   'task-decision-2.ts: can type into decision',
-  { skip: ['ie', 'safari', 'edge', 'firefox'] },
-  async client => {
+  { skip: ['ie', 'safari', 'edge'] },
+  async (client: any) => {
     const browser = new Page(client);
     await gotoEditor(browser);
     await browser.click(loadActionButton);
@@ -82,8 +82,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'task-decision-2.ts: can insert mention into an action using click',
-  { skip: ['ie', 'safari', 'firefox'] },
-  async client => {
+  { skip: ['ie', 'safari'] },
+  async (client: any) => {
     const browser = new Page(client);
     await gotoEditor(browser);
     await browser.waitFor(editable);

@@ -1,5 +1,40 @@
 # @atlaskit/renderer
 
+## 39.0.2
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/editor-json-transformer@4.1.11
+  - @atlaskit/adf-schema@1.5.4
+  - @atlaskit/editor-common@32.0.2
+  - @atlaskit/mention@16.2.1
+  - @atlaskit/status@0.3.6
+  - @atlaskit/editor-test-helpers@7.0.0
+
+## 39.0.1
+- [patch] [ca17040178](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca17040178):
+
+  - ED-6243: Dont use breakpoint width calculations for tables in renderer
+
+## 39.0.0
+- [patch] [5b5ae91921](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b5ae91921):
+
+  - Require Identifier type from media-core instead of media-card
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+- Updated dependencies [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):
+  - @atlaskit/editor-common@32.0.0
+  - @atlaskit/media-card@54.0.0
+  - @atlaskit/media-filmstrip@27.0.0
+  - @atlaskit/editor-json-transformer@4.1.10
+  - @atlaskit/editor-test-helpers@6.3.22
+  - @atlaskit/task-decision@11.2.1
+  - @atlaskit/util-data-test@10.2.1
+  - @atlaskit/media-test-helpers@20.1.5
+  - @atlaskit/media-core@27.1.0
+
+## 38.0.8
+- [patch] [e609e6d78c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e609e6d78c):
+
+  - FM-1464: Add callback to ReactRenderer.onComplete to notify native renderBridge
+
 ## 38.0.7
 - Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
   - @atlaskit/editor-common@31.1.1

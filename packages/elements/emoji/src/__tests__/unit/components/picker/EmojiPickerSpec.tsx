@@ -290,7 +290,7 @@ describe('<EmojiPicker />', () => {
       const clickOffset = 10;
       const component = await helper.setupPicker({
         firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as FireAnalyticsEvent,
-        onSelection: (emojiId, emoji) => {
+        onSelection: (_emojiId, emoji) => {
           selection = emoji;
         },
       } as Props);
@@ -320,7 +320,7 @@ describe('<EmojiPicker />', () => {
       const emojiResourcePromise = getEmojiResourcePromise();
       const clickOffset = 10;
       const component = await helper.setupPicker({
-        onSelection: (emojiId, emoji) => {
+        onSelection: (_emojiId, emoji) => {
           selection = emoji;
         },
         emojiProvider: emojiResourcePromise,

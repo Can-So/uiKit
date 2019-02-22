@@ -21,7 +21,7 @@ export default abstract class LoadingEmojiComponent<
   P extends Props,
   S extends State
 > extends Component<P, S> {
-  private isUnmounted: boolean;
+  private isUnmounted: boolean = false;
 
   constructor(props: P, state: S) {
     super(props);
@@ -60,7 +60,7 @@ export default abstract class LoadingEmojiComponent<
           });
         }
       })
-      .catch(err => {
+      .catch(() => {
         if (!this.isUnmounted) {
           this.setState({
             loadedEmojiProvider: undefined,

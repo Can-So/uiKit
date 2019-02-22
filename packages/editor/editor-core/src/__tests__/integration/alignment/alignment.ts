@@ -20,8 +20,8 @@ const alignRight = async page => {
 
 BrowserTestCase(
   'alignment: should be able to add alignment to paragraphs',
-  { skip: ['firefox'] },
-  async client => {
+  { skip: [] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     await mountEditor(page, {
@@ -37,8 +37,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'alignment: should be able to add alignment to headings',
-  { skip: ['firefox'] },
-  async client => {
+  { skip: [] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     await mountEditor(page, {
@@ -59,7 +59,7 @@ BrowserTestCase(
 BrowserTestCase(
   'alignment: disabled when inside special nodes',
   { skip: [] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: 'full-page',
@@ -77,7 +77,7 @@ BrowserTestCase(
 BrowserTestCase(
   'alignment: disabled when editor is disabled',
   { skip: [] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: 'full-page',
@@ -91,8 +91,8 @@ BrowserTestCase(
 // TODO:https://product-fabric.atlassian.net/browse/ED-6288
 // BrowserTestCase(
 //   'alignment: should maintain alignment when hit return',
-//   { skip: ['firefox'] },
-//   async client => {
+//   { skip: [] },
+//   async (client: any) => {
 //     const page = await goToEditorTestingExample(client);
 //     await mountEditor(page, {
 //       appearance: 'full-page',

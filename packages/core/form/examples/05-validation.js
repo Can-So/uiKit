@@ -13,8 +13,8 @@ import Form, {
 export default class extends Component<{}> {
   textValue = '';
 
-  getUser = (value: string) =>
-    new Promise<any>(resolve => {
+  getUser = (value: string): Promise<?string> =>
+    new Promise(resolve => {
       setTimeout(() => {
         if (value === this.textValue) {
           resolve(['jill', 'joe', 'jillian', 'jack'].find(v => v === value));

@@ -1,7 +1,8 @@
+import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
+import { ShallowWrapper } from 'enzyme';
 import * as React from 'react';
-import ColorPalette from '../../../../components/internal/color-palette';
 import Color from '../../../../components/internal/color';
-import { shallowWithIntl } from 'enzyme-react-intl';
+import ColorPalette from '../../../../components/internal/color-palette';
 
 describe('ColorPalette', () => {
   it('should render 6 colors', () => {
@@ -27,7 +28,9 @@ describe('ColorPalette', () => {
     ).dive();
 
     expect(
-      component.findWhere(n => n.is(Color) && n.prop('isSelected')).length,
+      component.findWhere(
+        (n: ShallowWrapper) => n.is(Color) && n.prop('isSelected'),
+      ).length,
     ).toBe(1);
   });
 
@@ -35,7 +38,8 @@ describe('ColorPalette', () => {
     const component = shallowWithIntl(<ColorPalette onClick={jest.fn()} />);
 
     expect(
-      component.findWhere(n => n.is(Color) && n.prop('isSelected')).length,
+      component.findWhere((n: any) => n.is(Color) && n.prop('isSelected'))
+        .length,
     ).toBe(0);
   });
 });

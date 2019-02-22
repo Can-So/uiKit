@@ -2,7 +2,7 @@ import { OnProviderChange, Provider } from './types';
 
 export abstract class AbstractResource<Q, R, E, I, O>
   implements Provider<Q, R, E, I, O> {
-  private lastResult: R;
+  private lastResult: R | undefined;
   private listeners = new Set<OnProviderChange<R, E, I>>();
 
   abstract filter(query?: Q, options?: O): void;

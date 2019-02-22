@@ -9,7 +9,7 @@ import Editor from '../../../components/Editor';
 import CommentContainer from '../../../containers/Comment';
 import { AnalyticsEvent } from '../../../internal/analytics';
 
-const containerId = 'ari:cloud:platform::conversation/demo';
+const objectId = 'ari:cloud:platform::conversation/demo';
 const { comments } = mockConversation;
 const [user] = MOCK_USERS;
 
@@ -26,7 +26,7 @@ describe('Conversation', () => {
   const conversation = shallow(
     <Conversation
       {...defaultProps}
-      containerId={containerId}
+      objectId={objectId}
       conversation={mockConversation}
       comments={comments}
       user={user}
@@ -52,7 +52,7 @@ describe('Conversation', () => {
       conversationWithWarning = shallow(
         <Conversation
           {...defaultProps}
-          containerId={containerId}
+          objectId={objectId}
           conversation={mockConversation}
           comments={comments}
           user={user}
@@ -86,7 +86,7 @@ describe('Conversation', () => {
       const conversation = shallow(
         <Conversation
           {...defaultProps}
-          containerId={containerId}
+          objectId={objectId}
           meta={{ test: 'testing' }}
           user={user}
         />,
@@ -98,7 +98,7 @@ describe('Conversation', () => {
       const conversation = shallow(
         <Conversation
           {...defaultProps}
-          containerId={containerId}
+          objectId={objectId}
           meta={{ test: 'testing' }}
           isExpanded={true}
           user={user}
@@ -110,7 +110,7 @@ describe('Conversation', () => {
     describe('no user', () => {
       it('should not render if meta is not set', () => {
         const conversation = shallow(
-          <Conversation {...defaultProps} containerId={containerId} />,
+          <Conversation {...defaultProps} objectId={objectId} />,
         );
         expect(conversation.find(Editor).length).toBe(0);
       });
@@ -119,7 +119,7 @@ describe('Conversation', () => {
         const conversation = shallow(
           <Conversation
             {...defaultProps}
-            containerId={containerId}
+            objectId={objectId}
             meta={{ test: 'testing' }}
           />,
         );
@@ -130,7 +130,7 @@ describe('Conversation', () => {
         const conversation = shallow(
           <Conversation
             {...defaultProps}
-            containerId={containerId}
+            objectId={objectId}
             meta={{ test: 'testing' }}
             isExpanded={true}
           />,

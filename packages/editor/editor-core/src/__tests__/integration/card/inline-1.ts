@@ -12,9 +12,9 @@ import {
 BrowserTestCase(
   `inline-1.ts: pasting an link converts to inline card`,
   {
-    skip: ['ie', 'safari', 'firefox'],
+    skip: ['ie', 'safari'],
   },
-  async client => {
+  async (client: any) => {
     let browser = new Page(client);
 
     // copy stuff to clipboard

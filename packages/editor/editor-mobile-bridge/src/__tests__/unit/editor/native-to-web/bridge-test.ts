@@ -1,14 +1,13 @@
-jest.mock('@atlaskit/editor-core', () => {
-  return {
-    ...jest.genMockFromModule('@atlaskit/editor-core'),
-    indentList: jest.fn(() => () => {}),
-    outdentList: jest.fn(() => () => {}),
-    toggleOrderedList: jest.fn(() => () => {}),
-    toggleBulletList: jest.fn(() => () => {}),
-  };
-});
+const mockEditorCore = {
+  ...jest.genMockFromModule('@atlaskit/editor-core'),
+  indentList: jest.fn(() => () => {}),
+  outdentList: jest.fn(() => () => {}),
+  toggleOrderedList: jest.fn(() => () => {}),
+  toggleBulletList: jest.fn(() => () => {}),
+};
+jest.mock('@atlaskit/editor-core', () => mockEditorCore);
 
-import WebBridgeImpl from '../../editor/native-to-web';
+import WebBridgeImpl from '../../../../editor/native-to-web';
 import {
   indentList,
   outdentList,

@@ -1,5 +1,14 @@
 # @atlaskit/media-card
 
+## 54.0.0
+- [major] [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):
+
+  - Remove Identifier type + related utilities and use the one from media-core
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+  - @atlaskit/media-store@9.1.7
+  - @atlaskit/media-test-helpers@20.1.5
+  - @atlaskit/media-core@27.1.0
+
 ## 53.0.0
 - [major] [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
 

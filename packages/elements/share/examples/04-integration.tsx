@@ -1,8 +1,16 @@
-import * as React from 'react';
-import { userPickerData } from '@atlaskit/util-data-test';
 import { OptionData } from '@atlaskit/user-picker';
+import { userPickerData } from '@atlaskit/util-data-test';
+import * as React from 'react';
 import { ShareDialogContainer } from '../src';
-import { Client, Content, User, MetaData, Comment } from '../src/types';
+import {
+  Client,
+  Comment,
+  Content,
+  KeysOfType,
+  MetaData,
+  OriginTracing,
+  User,
+} from '../src/types';
 
 type UserData = {
   avatarUrl?: string;
@@ -16,10 +24,10 @@ type UserData = {
   type?: string;
 };
 
-const mockOriginTracing = {
+const mockOriginTracing: OriginTracing = {
   id: 'id',
-  addToUrl: l => `${l}&atlOrigin=mockAtlOrigin`,
-  toAnalyticsAttributes: ({ hasGeneratedId }) => ({
+  addToUrl: (l: string) => `${l}&atlOrigin=mockAtlOrigin`,
+  toAnalyticsAttributes: () => ({
     originIdGenerated: 'id',
     originProduct: 'product',
   }),
@@ -37,14 +45,20 @@ const loadUserOptions = (searchText?: string): OptionData[] => {
     }))
     .filter((user: UserData) => {
       const searchTextInLowerCase = searchText.toLowerCase();
-      const propertyToMatch = ['id', 'name', 'publicName'];
+      const propertyToMatch: (KeysOfType<UserData, string | undefined>)[] = [
+        'id',
+        'name',
+        'publicName',
+      ];
 
-      return propertyToMatch.some((property: string) => {
-        return (
-          user[property] &&
-          user[property].toLowerCase().contains(searchTextInLowerCase)
-        );
-      });
+      return propertyToMatch.some(
+        (property: KeysOfType<UserData, string | undefined>) => {
+          const value = property && user[property];
+          return !!(
+            value && value.toLowerCase().includes(searchTextInLowerCase)
+          );
+        },
+      );
     });
 };
 
@@ -62,10 +76,10 @@ const client: Client = {
       },
     }),
   share: (
-    content: Content,
-    users: User[],
-    metaData: MetaData,
-    comment?: Comment,
+    _content: Content,
+    _users: User[],
+    _metaData: MetaData,
+    _comment?: Comment,
   ) => {
     return new Promise(resolve => {
       setTimeout(
@@ -81,6 +95,7 @@ const client: Client = {
 
 export default () => (
   <ShareDialogContainer
+    buttonStyle="icon-with-text"
     client={client}
     cloudId="12345-12345-12345-12345"
     loadUserOptions={loadUserOptions}

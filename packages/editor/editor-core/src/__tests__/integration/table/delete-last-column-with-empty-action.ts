@@ -14,8 +14,8 @@ import {
 
 BrowserTestCase(
   'delete-last-column-with-empty-action.ts: Delete last table column with empty action',
-  { skip: ['ie', 'edge', 'firefox'] },
-  async client => {
+  { skip: ['ie', 'edge'] },
+  async (client: any) => {
     const LAST_HEADER_FROM_FIRST_ROW =
       'table > tbody > tr:first-child > th:last-child';
 

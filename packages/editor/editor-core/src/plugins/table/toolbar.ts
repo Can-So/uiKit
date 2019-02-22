@@ -1,6 +1,5 @@
 import { defineMessages } from 'react-intl';
 import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import SettingsIcon from '@atlaskit/icon/glyph/editor/settings';
 
 import commonMessages from '../../messages';
 import { Command } from '../../types';
@@ -84,7 +83,6 @@ export const getToolbarConfig: FloatingToolbarHandler = (
         {
           type: 'dropdown',
           title: formatMessage(messages.tableOptions),
-          icon: SettingsIcon,
           hidden: !(
             pluginConfig.allowHeaderRow && pluginConfig.allowHeaderColumn
           ),
@@ -109,11 +107,11 @@ export const getToolbarConfig: FloatingToolbarHandler = (
             },
             {
               title: formatMessage(messages.numberedColumn),
-              selected: checkIfNumberColumnEnabled(state),
               onClick: withAnalytics(
                 toggleNumberColumn,
                 'atlassian.editor.format.table.toggleNumberColumn.button',
               ),
+              selected: checkIfNumberColumnEnabled(state),
               hidden: !pluginConfig.allowNumberColumn,
             },
           ],

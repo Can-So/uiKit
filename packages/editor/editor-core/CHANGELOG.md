@@ -1,5 +1,51 @@
 # @atlaskit/editor-core
 
+## 100.1.0
+- [minor] [5dc1e046b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dc1e046b2):
+
+  - Apply stricture typings to elements related editor code
+
+## 100.0.0
+- [major] [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+
+  - Remove linkCreateContext from MediaProvider
+
+## 99.0.1
+- [patch] [7f93e282b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f93e282b8):
+
+  - ED-6257: Handle applying header column with a rowspan
+
+## 99.0.0
+- [patch] [5b5ae91921](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b5ae91921):
+
+  - Require Identifier type from media-core instead of media-card
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+- Updated dependencies [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):
+  - @atlaskit/editor-common@32.0.0
+  - @atlaskit/renderer@39.0.0
+  - @atlaskit/emoji@55.0.0
+  - @atlaskit/media-card@54.0.0
+  - @atlaskit/media-filmstrip@27.0.0
+  - @atlaskit/media-picker@34.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.11
+  - @atlaskit/editor-json-transformer@4.1.10
+  - @atlaskit/editor-markdown-transformer@2.1.10
+  - @atlaskit/editor-test-helpers@6.3.22
+  - @atlaskit/task-decision@11.2.1
+  - @atlaskit/util-data-test@10.2.1
+  - @atlaskit/media-test-helpers@20.1.5
+  - @atlaskit/media-core@27.1.0
+
+## 98.13.6
+- [patch] [f500b2c81e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f500b2c81e):
+
+  - ED-6252 Change table floating toolbar to say 'Table options' instead of icon
+
+## 98.13.5
+- [patch] [bc340694d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bc340694d2):
+
+  - ED-6247: fix resizing with merged cells
+
 ## 98.13.4
 - Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
   - @atlaskit/editor-common@31.1.1

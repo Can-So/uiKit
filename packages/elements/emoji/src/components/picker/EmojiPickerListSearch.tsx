@@ -26,7 +26,7 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
     style: {},
   };
 
-  private inputRef: HTMLInputElement | null;
+  private inputRef?: HTMLInputElement | null;
   private inputSelection?: InputSelection;
 
   private onBlur: React.FocusEventHandler<HTMLInputElement> = () => {

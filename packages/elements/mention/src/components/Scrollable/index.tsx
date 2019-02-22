@@ -8,7 +8,7 @@ export interface Props {
 }
 
 export default class Scrollable extends React.PureComponent<Props, {}> {
-  private scrollableDiv: HTMLDivElement | null;
+  private scrollableDiv?: HTMLDivElement | null;
 
   // API
   reveal = (child: MentionItem) => {

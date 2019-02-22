@@ -4,13 +4,12 @@ import {
   MediaType,
   FileProcessingStatus,
   Context,
+  Identifier,
   ImageResizeMode,
 } from '@atlaskit/media-core';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 
 import { CardAction } from './actions';
-import { Identifier } from './root/domain';
-import { MediaViewerItem } from '@atlaskit/media-viewer';
 
 // the only components we expose to consumers is Card and CardView
 export { default as Card } from './root/card/cardLoader';
@@ -21,8 +20,6 @@ export {
   CardViewState,
   CardViewOwnProps as CardViewProps,
 } from './root/cardView';
-
-export * from './root/domain';
 
 export * from './actions';
 
@@ -109,7 +106,6 @@ export interface BaseAnalyticsContext {
   packageVersion: string; // string — in a format like '3.2.1'
   packageName: string;
   componentName: string;
-
   actionSubject: string; // ex. MediaCard
   actionSubjectId: string | null; // file/link id
 }
@@ -142,7 +138,7 @@ export interface CardState {
   isCardVisible: boolean;
   previewOrientation: number;
   isPlayingFile: boolean;
-  mediaViewerSelectedItem?: MediaViewerItem;
+  mediaViewerSelectedItem?: Identifier;
   metadata?: FileDetails;
   dataURI?: string;
   progress?: number;

@@ -51,7 +51,7 @@ export default class ResourcedMentionList extends React.PureComponent<
   State
 > {
   private subscriberKey: string;
-  private mentionListRef: MentionList | null;
+  private mentionListRef?: MentionList | null;
 
   constructor(props: Props) {
     super(props);

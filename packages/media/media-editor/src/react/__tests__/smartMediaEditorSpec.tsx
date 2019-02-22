@@ -7,10 +7,14 @@ import {
   fakeContext,
 } from '@atlaskit/media-test-helpers';
 import * as uuid from 'uuid';
-import { FileIdentifier } from '@atlaskit/media-card';
 import { Shortcut } from '@atlaskit/media-ui';
 import Spinner from '@atlaskit/spinner';
-import { Context, FileState, UploadableFile } from '@atlaskit/media-core';
+import {
+  Context,
+  FileState,
+  UploadableFile,
+  FileIdentifier,
+} from '@atlaskit/media-core';
 import { TouchedFiles, UploadableFileUpfrontIds } from '@atlaskit/media-store';
 import {
   SmartMediaEditor,

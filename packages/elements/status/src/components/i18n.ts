@@ -1,6 +1,6 @@
-import { defineMessages } from 'react-intl';
+import { defineMessages, Messages } from 'react-intl';
 
-export const messages = defineMessages({
+export const messages: Messages = defineMessages({
   neutralColor: {
     id: 'fabric.status.color.grey',
     defaultMessage: 'Grey',

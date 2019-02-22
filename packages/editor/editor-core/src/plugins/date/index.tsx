@@ -50,9 +50,9 @@ const datePlugin: EditorPlugin = {
       },
       {
         name: 'dateKeymap',
-        plugin: ({ schema }) => {
+        plugin: () => {
           DatePicker.preload();
-          return keymap(schema);
+          return keymap();
         },
       },
     ];

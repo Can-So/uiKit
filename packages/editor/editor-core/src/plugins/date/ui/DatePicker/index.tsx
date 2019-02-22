@@ -33,6 +33,12 @@ export interface State {
   selected: Array<string>;
 }
 
+type CalendarOnChange = {
+  day: number;
+  month: number;
+  year: number;
+};
+
 export default class DatePicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -77,7 +83,7 @@ export default class DatePicker extends React.Component<Props, State> {
     );
   }
 
-  private handleChange = ({ day, month, year }) => {
+  private handleChange = ({ day, month, year }: CalendarOnChange) => {
     this.setState({
       day,
       month,

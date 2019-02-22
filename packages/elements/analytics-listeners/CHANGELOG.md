@@ -1,5 +1,10 @@
 # @atlaskit/analytics-listeners
 
+## 4.2.0
+- [minor] [8c65a38bfc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c65a38bfc):
+
+  - enable noImplicitAny for elements analytics packages. Fix related issues.
+
 ## 4.1.5
 - [patch] [a3b8046](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3b8046):
 

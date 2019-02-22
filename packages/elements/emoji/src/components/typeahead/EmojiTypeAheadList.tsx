@@ -51,9 +51,9 @@ interface ItemReferences {
 }
 
 export default class EmojiTypeAheadList extends PureComponent<Props, State> {
-  private lastMousePosition: Position;
-  private scrollable: Scrollable | null;
-  private items: ItemReferences;
+  private lastMousePosition?: Position;
+  private scrollable?: Scrollable | null;
+  private items!: ItemReferences;
 
   static defaultProps = {
     onEmojiSelected: () => {},
@@ -164,7 +164,7 @@ export default class EmojiTypeAheadList extends PureComponent<Props, State> {
 
   private selectIndexOnHover = (
     emojiId: EmojiId,
-    emoji: EmojiDescription | undefined,
+    _emoji: EmojiDescription | undefined,
     event?: React.SyntheticEvent<any>,
   ) => {
     // TODO: fix this

@@ -21,7 +21,7 @@ const centerBreakoutButtonQuery = `div[aria-label="CodeBlock floating controls"]
 BrowserTestCase(
   'breakout: should be able to switch to wide mode',
   { skip: [] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     await mountEditor(page, {
@@ -42,7 +42,7 @@ BrowserTestCase(
 BrowserTestCase(
   'breakout: should be able to switch to full-width mode',
   { skip: [] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     await mountEditor(page, {
@@ -63,7 +63,7 @@ BrowserTestCase(
 BrowserTestCase(
   'breakout: should be able to switch to center mode back',
   { skip: [] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     await mountEditor(page, {
@@ -86,8 +86,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'breakout: should be able to delete last character inside a "wide" codeBlock preserving the node',
-  { skip: ['firefox'] },
-  async client => {
+  { skip: [] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
 
     await mountEditor(page, {

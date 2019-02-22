@@ -10,6 +10,8 @@ import {
   akEditorDefaultLayoutWidth,
   akEditorFullWidthLayoutWidth,
   akEditorTableLegacyCellMinWidth,
+  tableCellBorderWidth,
+  tableCellMinWidth,
 } from '@atlaskit/editor-common';
 import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';
 import TableHeader from './tableHeader';
@@ -66,19 +68,27 @@ const fixColumnWidth = (
   layoutWidth: number,
   zeroWidthColumnsCount: number,
   scaleDownPercent: number,
-) => {
+): number => {
+  if (columnWidth === 0) {
+    return columnWidth;
+  }
+
   // If the tables total width (including no zero widths col or cols without width) is less than the current layout
   // We scale up the columns to meet the minimum of the table layout.
   if (zeroWidthColumnsCount === 0) {
     if (scaleDownPercent) {
-      return (1 - scaleDownPercent) * columnWidth;
+      return Math.floor((1 - scaleDownPercent) * columnWidth);
     }
     if (tableWidth < layoutWidth) {
-      return (columnWidth * (layoutWidth / tableWidth)).toFixed(2);
+      return Math.floor(columnWidth * (layoutWidth / tableWidth));
     }
   }
 
-  return columnWidth;
+  return Math.max(
+    // We need to take tableCellBorderWidth, to avoid unneccesary overflow.
+    columnWidth - tableCellBorderWidth,
+    zeroWidthColumnsCount ? akEditorTableLegacyCellMinWidth : tableCellMinWidth,
+  );
 };
 
 class Table extends React.Component<TableProps & OverflowShadowProps> {
@@ -123,8 +133,8 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
     const layoutWidth = getTableLayoutWidth(layout);
     const maxTableWidth = renderWidth < layoutWidth ? renderWidth : layoutWidth;
 
-    let tableWidth = 0;
-    let minTableWidth = 0;
+    let tableWidth = isNumberColumnEnabled ? akEditorTableNumberColumnWidth : 0;
+    let minTableWidth = tableWidth;
     let zeroWidthColumnsCount = 0;
 
     columnWidths.forEach(width => {

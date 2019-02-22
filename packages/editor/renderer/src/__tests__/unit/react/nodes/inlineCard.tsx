@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import InlineCard from '../../../../react/nodes/inlineCard';
 
 describe('Renderer - React/Nodes/InlineCard', () => {
@@ -26,16 +25,16 @@ describe('Renderer - React/Nodes/InlineCard', () => {
 
   it('should render a <span>-tag', () => {
     node = mount(<InlineCard url={url} />);
-    expect(node.getDOMNode()['tagName']).to.equal('A');
+    expect(node.getDOMNode()['tagName']).toEqual('A');
   });
 
   it('should render with url if prop exists', () => {
     node = mount(<InlineCard url={url} />);
-    expect(node.find(InlineCard).prop('url')).to.equal(url);
+    expect(node.find(InlineCard).prop('url')).toEqual(url);
   });
 
   it('should render with data if prop exists', () => {
     node = mount(<InlineCard data={data} />);
-    expect(node.find(InlineCard).prop('data')).to.equal(data);
+    expect(node.find(InlineCard).prop('data')).toEqual(data);
   });
 });

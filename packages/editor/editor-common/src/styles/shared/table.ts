@@ -10,12 +10,12 @@ import {
   akEditorBreakoutPadding,
 } from '../consts';
 import { PanelSharedCssClassName } from './panel';
-import { calcWideWidth } from '../../utils';
 
 export const tableMarginTop = 24;
 export const tableMarginBottom = 16;
 export const tableMarginSides = 8;
 export const tableCellMinWidth = 48;
+export const tableCellBorderWidth = 1;
 
 const clPrefix = 'pm-table-';
 
@@ -51,7 +51,7 @@ const tableSharedStyle = css`
   .${TableSharedCssClassName.TABLE_NODE_WRAPPER} > table {
     border-collapse: collapse;
     margin: ${tableMarginTop}px ${tableMarginSides}px 0;
-    border: 1px solid ${akEditorTableBorder};
+    border: ${tableCellBorderWidth}px solid ${akEditorTableBorder};
     table-layout: fixed;
     font-size: ${fontSize()}px;
     width: 100%;
@@ -119,12 +119,13 @@ export const calcTableWidth = (
         : `${akEditorFullWidthLayoutWidth}px`;
     case 'wide':
       if (containerWidth) {
-        const targetWidth =
-          containerWidth - (addControllerPadding ? akEditorBreakoutPadding : 0);
-        return calcWideWidth(containerWidth, targetWidth, `${targetWidth}px`);
-      } else {
-        return `${akEditorWideLayoutWidth}px`;
+        return `${Math.min(
+          containerWidth - (addControllerPadding ? akEditorBreakoutPadding : 0),
+          akEditorWideLayoutWidth,
+        )}px`;
       }
+
+      return `${akEditorWideLayoutWidth}px`;
     default:
       return 'inherit';
   }

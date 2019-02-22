@@ -9,7 +9,7 @@ const TEST_ONLY_PATTERN = process.env.TEST_ONLY_PATTERN || '';
  * i.e: $ node build/ci-scripts/get.code.threshold.for.changed.packages.since.master.js
  * {
  *   "coverageThreshold": {
- *     "packages/core/global-navigation":{
+ *     "packages/core/global-navigation/src":{
  *       "statements":100,
  *       "branches":100,
  *       "functions":100,

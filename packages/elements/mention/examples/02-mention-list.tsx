@@ -8,7 +8,7 @@ export interface State {
 }
 
 export default class DemoMentionList extends React.Component<any, State> {
-  private mentionListRef: MentionList | null;
+  private mentionListRef?: MentionList | null;
 
   constructor(props: any) {
     super(props);

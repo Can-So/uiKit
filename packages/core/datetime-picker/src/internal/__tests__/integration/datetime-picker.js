@@ -16,18 +16,17 @@ const timepickerDefault = 'label[for="react-select-timepicker-4--input"] + div';
 const timePickerMenu = '.timepicker-select__menu-list';
 const timeInput = 'input#react-select-timepicker-4-input';
 const timeValue = `${timepickerDefault} > div > div > div > div:first-child`;
-// const timeOption = '[role="option"]';
+const timeOption = '.timepicker-select__menu-list';
 
 const dateTime = 'label[for="react-select-datetimepicker-1--input"]';
 const dateTimePicker = `${dateTime} + div > div`;
 const dateTimePickerDateInput = 'input#react-select-datetimepicker-1-input';
 const dateTimeValues = `${dateTimePicker} > div > div > div`;
 
-// TODO: Fix Datetimepicker tests - AK-5892
-
+// TODO:  Fix Datetimepicker tests - AK-5892
 // BrowserTestCase(
 //   'When the user enters a partial date and hits enter, the value should be selected from the calendar',
-//   { skip: ['firefox'] },
+//   {},
 //   async client => {
 //     const dateTimePickerTest = new Page(client);
 
@@ -44,10 +43,9 @@ const dateTimeValues = `${dateTimePicker} > div > div > div`;
 //   },
 // );
 
-// AK-5892
 // BrowserTestCase(
 //   'When the user enters an invalid date and hits enter, the value should be selected from the calendar',
-//   { skip: ['firefox'] },
+//   {},
 //   async client => {
 //     const dateTimePickerTest = new Page(client);
 
@@ -69,7 +67,7 @@ const dateTimeValues = `${dateTimePicker} > div > div > div`;
 
 // BrowserTestCase(
 //   'When DatePicker is focused & backspace pressed, the input should be cleared',
-//   { skip: ['firefox'] },
+//   {},
 //   async client => {
 //     const dateTimePickerTest = new Page(client);
 
@@ -102,7 +100,7 @@ const dateTimeValues = `${dateTimePicker} > div > div > div`;
 
 BrowserTestCase(
   'When choosing another day in a Datetime picker focused, the date should be updated to the new value',
-  { skip: ['firefox'] },
+  {},
   async client => {
     const dateTimePickerTest = new Page(client);
 
@@ -132,37 +130,37 @@ BrowserTestCase(
     await dateTimePickerTest.checkConsoleErrors();
   },
 );
-// AK-5892
-// BrowserTestCase(
-//   'When entering a new time in Timepicker Editable, the time should be updated to the new value',
-//   { skip: ['ie', 'firefox'] }, // IE has an issue AK-5570, AK-5492
-//   async client => {
-//     const timePicker = new Page(client);
 
-//     await timePicker.goto(urlDateTimePicker);
-//     await timePicker.waitForSelector(timepickerDefault);
-//     await timePicker.click(timepickerDefault);
-//     await timePicker.waitForSelector(timePickerMenu);
+BrowserTestCase(
+  'When entering a new time in Timepicker Editable, the time should be updated to the new value',
+  { skip: ['ie'] }, // IE has an issue AK-5570, AK-5492
+  async client => {
+    const timePicker = new Page(client);
 
-//     const previousTime = await timePicker.getText(timeValue);
+    await timePicker.goto(urlDateTimePicker);
+    await timePicker.waitForSelector(timepickerDefault);
+    await timePicker.click(timepickerDefault);
+    await timePicker.waitForSelector(timePickerMenu);
 
-//     await timePicker.type(timeInput, ['12:45pm']);
-//     await timePicker.waitForSelector(timeOption);
-//     await timePicker.type(timeInput, ['Enter']);
-//     await timePicker.waitForSelector(timeValue);
+    const previousTime = await timePicker.getText(timeValue);
 
-//     const currentTime = await timePicker.getText(timeValue);
+    await timePicker.type(timeInput, ['12:45pm']);
+    await timePicker.waitForSelector(timeOption);
+    await timePicker.type(timeInput, ['Enter']);
+    await timePicker.waitForSelector(timeValue);
 
-//     expect(currentTime).not.toBe(previousTime);
-//     expect(currentTime).toEqual('12:45pm');
+    const currentTime = await timePicker.getText(timeValue);
 
-//     await timePicker.checkConsoleErrors();
-//   },
-// );
+    expect(currentTime).not.toBe(previousTime);
+    expect(currentTime).toEqual('12:45pm');
+
+    await timePicker.checkConsoleErrors();
+  },
+);
 
 BrowserTestCase(
   'Invalid times in TimePicker should be cleared',
-  { skip: ['ie', 'firefox'] }, // IE has an issue AK-5570, AK-5492
+  { skip: ['ie'] }, // IE has an issue AK-5570, AK-5492
   async client => {
     const timePicker = new Page(client);
 
@@ -189,7 +187,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When DateTimePicker is focused & backspace pressed, the date value should be cleared but the time value should not be affected',
-  { skip: ['safari', 'ie', 'firefox'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
+  { skip: ['safari', 'ie'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
   async client => {
     const dateTimePickerTest = new Page(client);
 
@@ -219,7 +217,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'When a user types a year into the date input in DatetimePicker and subsequently hits enter, the value is correctly updated',
-  { skip: ['safari', 'ie', 'firefox'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
+  { skip: ['safari', 'ie'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
   async client => {
     const dateTimePickerTest = new Page(client);
 

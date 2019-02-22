@@ -13,7 +13,7 @@ import { messages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
 BrowserTestCase(
   `insert-extension.ts: Extension: Insert Inline/Block extension`,
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const page = new Page(client);
     await page.goto(fullpage.path);
     await page.waitForSelector(fullpage.placeholder);

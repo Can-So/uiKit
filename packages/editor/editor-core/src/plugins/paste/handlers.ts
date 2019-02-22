@@ -4,7 +4,7 @@ import { taskDecisionSliceFilter } from '../../utils/filter';
 import { linkifyContent } from '../hyperlink/utils';
 import { analyticsService } from '../../analytics';
 import { Slice } from 'prosemirror-model';
-import { EditorState } from 'prosemirror-state';
+import { EditorState, Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { runMacroAutoConvert } from '../macro';
 import { closeHistory } from 'prosemirror-history';
@@ -23,7 +23,7 @@ import { compose } from '../../utils';
 export function handlePasteIntoTaskAndDecision(
   slice: Slice,
 ): (state: EditorState, dispatch) => boolean {
-  return (state: EditorState, dispatch): boolean => {
+  return (state: EditorState, dispatch: (tr: Transaction) => void): boolean => {
     const {
       schema,
       tr: { selection },
@@ -90,7 +90,11 @@ export function handlePasteIntoTaskAndDecision(
 export function handlePasteAsPlainText(
   slice: Slice,
   event: ClipboardEvent,
-): (state: EditorState, dispatch, view: EditorView) => boolean {
+): (
+  state: EditorState,
+  dispatch: (tr: Transaction) => void,
+  view: EditorView,
+) => boolean {
   return (state: EditorState, dispatch, view: EditorView): boolean => {
     // In case of SHIFT+CMD+V ("Paste and Match Style") we don't want to run the usual
     // fuzzy matching of content. ProseMirror already handles this scenario and will
@@ -120,7 +124,7 @@ export function handlePasteAsPlainText(
 
 export function handlePastePreservingMarks(
   slice: Slice,
-): (state: EditorState, dispatch) => boolean {
+): (state: EditorState, dispatch: (tr: Transaction) => void) => boolean {
   return (state: EditorState, dispatch): boolean => {
     const {
       schema,

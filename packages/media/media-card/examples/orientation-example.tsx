@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import { Card, FileIdentifier } from '../src';
+import { Card } from '../src';
 import * as uuid from 'uuid/v4';
 import {
   mediaPickerAuthProvider,
   defaultCollectionName,
 } from '@atlaskit/media-test-helpers';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory, FileIdentifier } from '@atlaskit/media-core';
 
 const context = ContextFactory.create({
   authProvider: mediaPickerAuthProvider('asap'),

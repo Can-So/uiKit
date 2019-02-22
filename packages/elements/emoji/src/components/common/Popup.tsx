@@ -24,7 +24,7 @@ export interface Props {
  * Simple implementation of popup while waiting for ak-inline-dialog
  */
 export default class Popup extends PureComponent<Props, {}> {
-  private popup: HTMLElement;
+  private popup?: HTMLElement;
   private debounced: number | null = null;
 
   static defaultProps = {
@@ -50,14 +50,16 @@ export default class Popup extends PureComponent<Props, {}> {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
-    ReactDOM.unmountComponentAtNode(this.popup);
-    document.body.removeChild(this.popup);
+    if (this.popup) {
+      ReactDOM.unmountComponentAtNode(this.popup);
+      document.body.removeChild(this.popup);
+    }
   }
 
   // Internal
   applyBelowPosition() {
     const targetNode = getTargetNode(this.props.target);
-    if (targetNode) {
+    if (targetNode && this.popup) {
       const box = targetNode.getBoundingClientRect();
       const top = box.bottom + (this.props.offsetY || 0);
       const left = box.left + (this.props.offsetX || 0);
@@ -69,7 +71,7 @@ export default class Popup extends PureComponent<Props, {}> {
 
   applyAbovePosition() {
     const targetNode = getTargetNode(this.props.target);
-    if (targetNode) {
+    if (targetNode && this.popup) {
       const box = targetNode.getBoundingClientRect();
       const bottom = window.innerHeight - box.top + (this.props.offsetY || 0);
       const left = box.left + (this.props.offsetX || 0);
@@ -96,7 +98,7 @@ export default class Popup extends PureComponent<Props, {}> {
         }
       }
     }
-    if (this.props.zIndex) {
+    if (this.props.zIndex && this.popup) {
       this.popup.style.zIndex = `${this.props.zIndex}`;
     }
   }
@@ -114,7 +116,9 @@ export default class Popup extends PureComponent<Props, {}> {
   };
 
   renderContent() {
-    ReactDOM.render(this.props.children, this.popup);
+    if (this.popup) {
+      ReactDOM.render<ReactElement<any>>(this.props.children, this.popup);
+    }
   }
 
   render() {

@@ -1,11 +1,12 @@
-import * as React from 'react';
 import Button from '@atlaskit/button';
-import FabricAnalyticsListeners from '../src/FabricAnalyticsListeners';
+import * as React from 'react';
 import {
+  createAnalyticsWebClientMock,
   createComponentWithAnalytics,
   IncorrectEventType,
 } from '../examples/helpers';
 import { LOG_LEVEL } from '../src';
+import FabricAnalyticsListeners from '../src/FabricAnalyticsListeners';
 import { FabricChannel } from '../src/types';
 
 const DummyElementsComponentWithAnalytics = createComponentWithAnalytics(
@@ -28,13 +29,6 @@ const logLevels = [
   { name: 'OFF', level: LOG_LEVEL.OFF },
 ];
 
-const analyticsWebClientMock = {
-  sendUIEvent: event => {},
-  sendOperationalEvent: event => {},
-  sendTrackEvent: (event: any) => {},
-  sendScreenEvent: (event: any) => {},
-};
-
 class Example extends React.Component {
   state = {
     loggingLevelIdx: 0,
@@ -50,7 +44,7 @@ class Example extends React.Component {
     const logLevel = logLevels[this.state.loggingLevelIdx];
     return (
       <FabricAnalyticsListeners
-        client={analyticsWebClientMock}
+        client={createAnalyticsWebClientMock()}
         logLevel={logLevel.level}
       >
         <div>

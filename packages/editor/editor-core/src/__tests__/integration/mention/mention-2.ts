@@ -22,8 +22,8 @@ import {
 // Follow up with browserstack as to why @ is keyed in as 2 on ie
 BrowserTestCase(
   'mention-2.ts: user should see picker if they type "@"',
-  { skip: ['ie', 'firefox'] },
-  async client => {
+  { skip: ['ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -37,8 +37,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-2.ts: text@ should not invoke picker',
-  { skip: ['ie', 'firefox'] },
-  async client => {
+  { skip: ['ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -51,8 +51,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-2.ts: user should be able remove mention on backspace',
-  { skip: ['safari', 'ie', 'firefox'] },
-  async client => {
+  { skip: ['safari', 'ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -70,8 +70,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-2.ts: @ <space> should not invoke picker',
-  { skip: ['ie', 'firefox'] },
-  async client => {
+  { skip: ['ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -84,8 +84,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-2.ts: user should see space after node',
-  { skip: ['safari', 'ie', 'firefox'] },
-  async client => {
+  { skip: ['safari', 'ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
@@ -100,8 +100,8 @@ BrowserTestCase(
 
 BrowserTestCase(
   'mention-2.ts: escape closes picker',
-  { skip: ['safari', 'ie', 'firefox'] },
-  async client => {
+  { skip: ['safari', 'ie'] },
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,

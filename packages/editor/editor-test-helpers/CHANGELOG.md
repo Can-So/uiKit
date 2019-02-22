@@ -1,5 +1,17 @@
 # @atlaskit/editor-test-helpers
 
+## 7.0.0
+- [major] [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+
+  - Remove linkCreateContext from MediaProvider
+
+## 6.3.22
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+  - @atlaskit/editor-common@32.0.0
+  - @atlaskit/editor-core@99.0.0
+  - @atlaskit/media-test-helpers@20.1.5
+  - @atlaskit/media-core@27.1.0
+
 ## 6.3.21
 - [patch] [fa435d11f7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa435d11f7):
 
