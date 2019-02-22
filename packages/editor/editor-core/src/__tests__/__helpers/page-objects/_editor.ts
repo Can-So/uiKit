@@ -44,3 +44,8 @@ export const evaluateClick = (page, selector) => {
     document.querySelector(selector).click();
   }, selector);
 };
+
+export async function animationFrame(page) {
+  // Give browser time to render, waitForFunction by default fires on RAF.
+  await page.waitForFunction('1 === 1');
+}

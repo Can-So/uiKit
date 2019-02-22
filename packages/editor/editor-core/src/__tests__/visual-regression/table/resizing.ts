@@ -6,6 +6,7 @@ import {
   insertTable,
 } from '../../__helpers/page-objects/_table';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
+import { animationFrame } from '../../__helpers/page-objects/_editor';
 
 describe('Snapshot Test: table resizing', () => {
   describe('Re-sizing', () => {
@@ -19,14 +20,16 @@ describe('Snapshot Test: table resizing', () => {
 
     it(`resize a column with content width`, async () => {
       await resizeColumn(page, { colIdx: 2, amount: 123, row: 2 });
+      await animationFrame(page);
       await snapshot(page);
       await resizeColumn(page, { colIdx: 2, amount: -100, row: 2 });
+      await animationFrame(page);
       await snapshot(page);
     });
 
     it(`snaps back to layout width after column removal`, async () => {
-      await snapshot(page);
       await deleteColumn(page, 1);
+      await animationFrame(page);
       await snapshot(page);
     });
 

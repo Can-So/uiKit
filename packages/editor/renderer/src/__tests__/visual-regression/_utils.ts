@@ -29,6 +29,7 @@ export async function snapshot(page, tolerance?: number) {
       failureThreshold: `${tolerance}`,
       failureThresholdType: 'percent',
     });
+    return;
   }
   // @ts-ignore
   expect(image).toMatchProdImageSnapshot();
