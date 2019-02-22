@@ -1,6 +1,7 @@
 import { name } from '../../../../../package.json';
 import { JSONDocNode } from '../../../../utils/index';
 import { sanitizeNode } from '../../../../utils/filter/node-filter';
+import { doc, p, strong, emoji, br } from '@atlaskit/adf-utils';
 
 describe(name, () => {
   describe('Utils -> filter -> node-filter', () => {
@@ -183,6 +184,16 @@ describe(name, () => {
 
         const sanitizedJSON = sanitizeNode(jsonDoc);
         expect(sanitizedJSON).toEqual(jsonDoc);
+      });
+
+      it('should remove marks from emoji', () => {
+        const adf = doc(p(strong(emoji({ shortName: 'grin' }))));
+        expect(sanitizeNode(adf)).toEqual(doc(p(emoji({ shortName: 'grin' }))));
+      });
+
+      it('should remove marks hardBreak', () => {
+        const adf = doc(p(strong(br())));
+        expect(sanitizeNode(adf)).toEqual(doc(p(br())));
       });
     });
   });
