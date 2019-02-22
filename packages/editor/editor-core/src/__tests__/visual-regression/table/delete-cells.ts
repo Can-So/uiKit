@@ -1,8 +1,8 @@
 import { snapshot, initFullPageEditorWithAdf, Device } from '../_utils';
 import * as adf from './__fixtures__/full-width-table.adf.json';
 import {
-  insertTable,
   tableSelectors,
+  clickFirstCell,
 } from '../../__helpers/page-objects/_table';
 
 describe('Delete in table:', () => {
@@ -21,11 +21,12 @@ describe('Delete in table:', () => {
 
     beforeEach(async () => {
       await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI);
-      await insertTable(page);
+      await clickFirstCell(page);
     });
 
     // TODO: write table delete in integration test
     it(`remove first row buttons in full width layout mode`, async () => {
+      await page.waitForSelector(tableSelectors.firstRowControl);
       await page.click(tableSelectors.firstRowControl);
       await page.hover(tableSelectors.removeRowButton);
       await page.waitForSelector(tableSelectors.removeDanger);
@@ -35,6 +36,7 @@ describe('Delete in table:', () => {
 
     // TODO: make it faster load with full-width-adf and doing too may things
     it(`remove first column buttons in full width layout mode`, async () => {
+      await page.waitForSelector(tableSelectors.firstRowControl);
       await page.click(tableSelectors.firstColumnControl);
       await snapshot(page);
       await page.hover(tableSelectors.removeColumnButton);
@@ -44,6 +46,7 @@ describe('Delete in table:', () => {
     });
 
     it(`remove last column buttons in full width layout mode`, async () => {
+      await page.waitForSelector(tableSelectors.firstRowControl);
       await page.click(tableSelectors.lastColumnControl);
       await page.hover(tableSelectors.removeColumnButton);
       await page.waitForSelector(tableSelectors.removeDanger);

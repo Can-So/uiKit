@@ -28,23 +28,23 @@ export const tableSelectors = {
   insertColumnButton: `.${ClassName.CONTROLS_INSERT_COLUMN}`,
   insertRowButton: `.${ClassName.CONTROLS_INSERT_ROW}`,
   cornerButton: `.${ClassName.CONTROLS_CORNER_BUTTON}`,
-  mergeCellsText: 'Merge cells',
-  splitCellText: 'Split cell',
+  mergeCellsText: `Merge cells`,
+  splitCellText: `Split cell`,
   tableOptionsText: `Table options`,
   removeRowButton: `button[title="Remove row"]`,
   removeColumnButton: `button[title="Remove column"]`,
   removeDanger: '.ProseMirror table .danger',
   removeTable: `button[aria-label="Remove"]`,
   selectedCell: `.ProseMirror table .${ClassName.SELECTED_CELL}`,
-  topLeftCell: ClassName.TOP_LEFT_CELL,
+  topLeftCell: `table > tbody > tr:nth-child(2) > td:nth-child(1)`,
   wideState: `.ProseMirror table[data-layout="wide"]`,
   fullwidthState: `.ProseMirror table[data-layout="full-width"]`,
   defaultState: `.ProseMirror table[data-layout="center"]`,
   fullwidthSelector: `div[aria-label="Full width"]`,
   wideSelector: `div[aria-label="Wide"]`,
   defaultSelector: `div[aria-label="Center"]`,
-  tableTd: 'table td p',
-  tableTh: 'table th p',
+  tableTd: 'table td',
+  tableTh: 'table th',
 };
 // insert table from menu
 export const insertTable = async page => {
@@ -132,6 +132,7 @@ export const insertRowOrColumn = async (
 ) => {
   await clickFirstCell(page);
   const buttonSelector = `.${buttonWrapSelector}:nth-child(${atIndex}) ${insertSelector}`;
+  await page.waitForSelector(buttonSelector);
   await page.hover(buttonSelector);
   await page.waitForSelector(buttonSelector);
   await page.click(buttonSelector);

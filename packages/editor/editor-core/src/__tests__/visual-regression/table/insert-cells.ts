@@ -21,18 +21,21 @@ describe('Snapshot Test: table insert/delete', () => {
 
   // adding tolerance since tool tips can show from time to time
   it(`should be able insert after first row`, async () => {
+    await page.waitForSelector(tableSelectors.firstRowControl);
     await page.hover(tableSelectors.firstRowControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
     await snapshot(page, 0.01);
   });
 
   it(`should be able insert after last row`, async () => {
+    await page.waitForSelector(tableSelectors.firstRowControl);
     await page.hover(tableSelectors.lastRowControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
     await snapshot(page, 0.01);
   });
 
   it(`should be able insert after first column`, async () => {
+    await page.waitForSelector(tableSelectors.firstRowControl);
     await page.hover(tableSelectors.firstColumnControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
     await snapshot(page, 0.01);
