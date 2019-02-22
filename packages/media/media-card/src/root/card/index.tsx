@@ -326,8 +326,8 @@ export class Card extends Component<CardProps, CardState> {
     } else if (shouldOpenMediaViewer && identifier.mediaItemType === 'file') {
       const mediaViewerSelectedItem: FileIdentifier = {
         id: await identifier.id,
-        occurrenceKey: '',
         mediaItemType: 'file',
+        collectionName: identifier.collectionName,
       };
       this.setState({
         mediaViewerSelectedItem,
@@ -369,22 +369,43 @@ export class Card extends Component<CardProps, CardState> {
     });
   };
 
-  getMediaViewerList = (): MediaViewerItem[] => {
-    const { surroundingItems = [] } = this.props;
+  // TODO: provide default value if no collectioName or list
+  getMediaViewerDataSource = (): MediaViewerDataSource => {
+    const { mediaViewerDataSource } = this.props;
     const { mediaViewerSelectedItem } = this.state;
+
     if (!mediaViewerSelectedItem) {
-      return [];
+      return {
+        list: [],
+      };
     }
 
-    const list: MediaViewerItem[] = surroundingItems.map(id => ({
-      id,
-      occurrenceKey: '',
-      type: 'file' as MediaItemType,
-    }));
+    if (!mediaViewerDataSource) {
+      return {
+        list: [mediaViewerSelectedItem],
+      };
+    }
 
-    return surroundingItems.indexOf(mediaViewerSelectedItem.id) > -1
-      ? list
-      : [mediaViewerSelectedItem, ...list];
+    // TODO: do we need this at all?
+    const { list } = mediaViewerDataSource;
+    if (
+      list &&
+      list.length &&
+      mediaViewerSelectedItem.mediaItemType === 'file'
+    ) {
+      const isSelectedItemInList = list.some(
+        item =>
+          item.mediaItemType === 'file' &&
+          item.id === mediaViewerSelectedItem.id,
+      );
+      if (!isSelectedItemInList) {
+        return {
+          list: [mediaViewerSelectedItem, ...list],
+        };
+      }
+    }
+
+    return mediaViewerDataSource;
   };
 
   renderMediaViewer = () => {
@@ -395,12 +416,8 @@ export class Card extends Component<CardProps, CardState> {
     }
 
     const { collectionName = '' } = identifier;
-    const list = this.getMediaViewerList();
-    const dataSource: MediaViewerDataSource = {
-      collectionName,
-      list,
-    };
-
+    const dataSource = this.getMediaViewerDataSource();
+    console.log(dataSource, mediaViewerSelectedItem);
     return (
       <MediaViewer
         collectionName={collectionName}

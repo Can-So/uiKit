@@ -8,14 +8,16 @@ import {
   videoFileId,
   largeImageFileId,
 } from '@atlaskit/media-test-helpers';
+import { MediaViewerDataSource } from '@atlaskit/media-viewer';
+import {
+  MediaViewerExampleWrapper,
+  MediaViewerExampleColumn,
+} from '../example-helpers/styled';
 
 const context = createStorybookContext();
-const surroundingItems = [
-  imageFileId.id,
-  gifFileId.id,
-  largeImageFileId.id,
-  videoFileId.id,
-];
+const mediaViewerDataSource: MediaViewerDataSource = {
+  list: [imageFileId, gifFileId, largeImageFileId, videoFileId],
+};
 
 interface ExampleState {
   shouldOpenMediaViewer: boolean;
@@ -30,39 +32,47 @@ class Example extends Component<{}, {}> {
     const { shouldOpenMediaViewer } = this.state;
 
     return (
-      <div>
-        <Card
-          context={context}
-          identifier={imageFileId}
-          shouldOpenMediaViewer={shouldOpenMediaViewer}
-          surroundingItems={surroundingItems}
-        />
-        <Card
-          context={context}
-          identifier={gifFileId}
-          shouldOpenMediaViewer={shouldOpenMediaViewer}
-          surroundingItems={surroundingItems}
-        />
-        <Card
-          context={context}
-          identifier={videoFileId}
-          shouldOpenMediaViewer={shouldOpenMediaViewer}
-          surroundingItems={surroundingItems}
-        />
-        <Card
-          context={context}
-          identifier={videoFileId}
-          shouldOpenMediaViewer={shouldOpenMediaViewer}
-          surroundingItems={surroundingItems}
-          useInlinePlayer={true}
-        />
-        <Card
-          context={context}
-          identifier={largeImageFileId}
-          shouldOpenMediaViewer={shouldOpenMediaViewer}
-          surroundingItems={surroundingItems}
-        />
-      </div>
+      <MediaViewerExampleWrapper>
+        <MediaViewerExampleColumn>
+          <h3>shouldOpenMediaViewer + mediaViewerDataSource</h3>
+          <Card
+            context={context}
+            identifier={imageFileId}
+            shouldOpenMediaViewer={shouldOpenMediaViewer}
+            mediaViewerDataSource={mediaViewerDataSource}
+          />
+          <Card
+            context={context}
+            identifier={gifFileId}
+            shouldOpenMediaViewer={shouldOpenMediaViewer}
+            mediaViewerDataSource={mediaViewerDataSource}
+          />
+          <Card
+            context={context}
+            identifier={videoFileId}
+            shouldOpenMediaViewer={shouldOpenMediaViewer}
+            mediaViewerDataSource={mediaViewerDataSource}
+          />
+        </MediaViewerExampleColumn>
+        <MediaViewerExampleColumn>
+          <h3>useInlinePlayer=true</h3>
+          <Card
+            context={context}
+            identifier={videoFileId}
+            shouldOpenMediaViewer={shouldOpenMediaViewer}
+            mediaViewerDataSource={mediaViewerDataSource}
+            useInlinePlayer={true}
+          />
+        </MediaViewerExampleColumn>
+        <MediaViewerExampleColumn>
+          <h3>mediaViewerDataSource=undefined</h3>
+          <Card
+            context={context}
+            identifier={largeImageFileId}
+            shouldOpenMediaViewer={shouldOpenMediaViewer}
+          />
+        </MediaViewerExampleColumn>
+      </MediaViewerExampleWrapper>
     );
   }
 }
