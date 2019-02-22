@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import BlockCard from '../../../../react/nodes/blockCard';
 
 describe('Renderer - React/Nodes/BlockCard', () => {
@@ -26,16 +25,16 @@ describe('Renderer - React/Nodes/BlockCard', () => {
 
   it('should render a <div>-tag', () => {
     node = mount(<BlockCard url={url} />);
-    expect(node.getDOMNode()['tagName']).to.equal('A');
+    expect(node.getDOMNode()['tagName']).toEqual('A');
   });
 
   it('should render with url if prop exists', () => {
     node = mount(<BlockCard url={url} />);
-    expect(node.find(BlockCard).prop('url')).to.equal(url);
+    expect(node.find(BlockCard).prop('url')).toEqual(url);
   });
 
   it('should render with data if prop exists', () => {
     node = mount(<BlockCard data={data} />);
-    expect(node.find(BlockCard).prop('data')).to.equal(data);
+    expect(node.find(BlockCard).prop('data')).toEqual(data);
   });
 });

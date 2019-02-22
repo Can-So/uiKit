@@ -130,7 +130,6 @@
     "bolt-query": "^1.1.4",
     "cache-loader": "^1.2.5",
     "chai": "^4.1.2",
-    "chai-as-promised": "^6.0.0",
     "cheerio": "^0.22.0",
     "chromedriver": "^2.43.0",
     "color": "^3.0.0",

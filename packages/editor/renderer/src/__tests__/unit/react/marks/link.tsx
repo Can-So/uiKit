@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import Link from '../../../../react/marks/link';
 
 describe('Renderer - React/Marks/Link', () => {
@@ -13,13 +12,13 @@ describe('Renderer - React/Marks/Link', () => {
 
   it('should wrap content with <a>-tag', () => {
     const mark = createLink();
-    expect(mark.find('a').length).to.equal(1);
+    expect(mark.find('a').length).toEqual(1);
     mark.unmount();
   });
 
   it('should set href to attrs.href', () => {
     const mark = createLink();
-    expect(mark.find('a').props()).to.have.property(
+    expect(mark.find('a').props()).toHaveProperty(
       'href',
       'https://www.atlassian.com',
     );
@@ -28,7 +27,7 @@ describe('Renderer - React/Marks/Link', () => {
 
   it('should set target to _blank', () => {
     const mark = createLink();
-    expect(mark.find('a').props()).to.have.property('target', '_blank');
+    expect(mark.find('a').props()).toHaveProperty('target', '_blank');
     mark.unmount();
   });
 
@@ -36,7 +35,7 @@ describe('Renderer - React/Marks/Link', () => {
     const mark = mount(
       <Link href="https://www.atlassian.com">This is a link</Link>,
     );
-    expect(mark.find('a').props()).to.have.property('target', undefined);
+    expect(mark.find('a').props()).toHaveProperty('target', undefined);
     mark.unmount();
   });
 
@@ -46,16 +45,13 @@ describe('Renderer - React/Marks/Link', () => {
         This is a link
       </Link>,
     );
-    expect(mark.find('a').props()).to.have.property('target', '_top');
+    expect(mark.find('a').props()).toHaveProperty('target', '_top');
     mark.unmount();
   });
 
   it('should set safety rel on links with target _blank', () => {
     const mark = createLink();
-    expect(mark.find('a').props()).to.have.property(
-      'rel',
-      'noreferrer noopener',
-    );
+    expect(mark.find('a').props()).toHaveProperty('rel', 'noreferrer noopener');
     mark.unmount();
   });
 
@@ -65,7 +61,7 @@ describe('Renderer - React/Marks/Link', () => {
         This is a link
       </Link>,
     );
-    expect(mark.find('a').props()).to.not.have.property('rel');
+    expect(mark.find('a').props()).not.toHaveProperty('rel');
     mark.unmount();
   });
 });
