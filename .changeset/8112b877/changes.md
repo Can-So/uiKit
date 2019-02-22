@@ -1,1 +1,0 @@
-- ED-5766 Remove the deprecated 'message' appearance from Editor

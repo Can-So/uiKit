@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.0.0
+- [major] [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+
+  - ED-5766 Remove the deprecated 'message' appearance from Editor
+
 ## 100.2.0
 - [minor] [af5572cf8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af5572cf8e):
 
