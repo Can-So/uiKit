@@ -24,9 +24,12 @@ const Footer = styled.footer`
   background-color: ${colors.N0};
 `;
 
-type SwitcherViewProps = { children: React.ReactNode; onRender?: () => void };
+type SwitcherWrapperProps = {
+  children: React.ReactNode;
+  onRender?: () => void;
+};
 
-class SwitcherView extends React.Component<SwitcherViewProps> {
+class SwitcherWrapper extends React.Component<SwitcherWrapperProps> {
   render() {
     const { children } = this.props;
 
@@ -50,4 +53,4 @@ class SwitcherView extends React.Component<SwitcherViewProps> {
   }
 }
 
-export default SwitcherView;
+export default SwitcherWrapper;

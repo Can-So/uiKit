@@ -17,7 +17,7 @@ const SectionTitle = styled.h1`
 `;
 
 type SectionProps = {
-  id: string;
+  sectionId: string;
   title: string;
   isAdmin?: boolean;
   isCustom?: boolean;
@@ -55,7 +55,7 @@ const Section = (props: SectionProps) => {
 export default withAnalyticsContextData<SectionProps, SectionAnalyticsContext>(
   props =>
     analyticsAttributes({
-      group: props.id,
+      group: props.sectionId,
       groupItemsCount: React.Children.count(props.children),
     }),
 )(Section);

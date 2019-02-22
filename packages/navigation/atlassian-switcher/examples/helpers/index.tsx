@@ -4,7 +4,7 @@ import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 
 import {
-  SwitcherView,
+  SwitcherWrapper,
   SwitcherItem,
   Section,
   ManageButton,
@@ -20,72 +20,36 @@ export class Switcher extends Component {
           isLoading ? (
             <Skeleton />
           ) : (
-            <SwitcherView>
-              <Section id="first-section" isAdmin title="First Section">
-                <SwitcherItem
-                  id="first-item"
-                  type="link"
-                  icon={SettingsIcon}
-                  href="/"
-                >
+            <SwitcherWrapper>
+              <Section sectionId="first-section" isAdmin title="First Section">
+                <SwitcherItem icon={SettingsIcon} href="/">
                   {`${data && data.data} First Item`}
                 </SwitcherItem>
-                <SwitcherItem id="first-item" type="link">{`${data &&
+                <SwitcherItem>{`${data &&
                   data.data} Second Item`}</SwitcherItem>
-                <SwitcherItem id="second-item" type="link">{`${data &&
-                  data.data} Third Item`}</SwitcherItem>
+                <SwitcherItem>{`${data && data.data} Third Item`}</SwitcherItem>
               </Section>
-              <Section id="second-section" title="Second Section">
-                <SwitcherItem id="first-item" type="link">
-                  First Item
-                </SwitcherItem>
-                <SwitcherItem id="second-item" type="link">
-                  Second Item
-                </SwitcherItem>
-                <SwitcherItem id="third-item" type="link">
-                  Third Item
-                </SwitcherItem>
+              <Section sectionId="second-section" title="Second Section">
+                <SwitcherItem>First Item</SwitcherItem>
+                <SwitcherItem>Second Item</SwitcherItem>
+                <SwitcherItem>Third Item</SwitcherItem>
               </Section>
-              <Section id="third-section" title="Third Section">
-                <SwitcherItem id="first-item" type="link">
-                  First Item
-                </SwitcherItem>
-                <SwitcherItem id="second-item" type="link">
-                  Second Item
-                </SwitcherItem>
-                <SwitcherItem id="third-item" type="link">
-                  Third Item
-                </SwitcherItem>
-                <SwitcherItem id="first-item" type="link">
-                  First Item
-                </SwitcherItem>
-                <SwitcherItem id="second-item" type="link">
-                  Second Item
-                </SwitcherItem>
-                <SwitcherItem id="third-item" type="link">
-                  Third Item
-                </SwitcherItem>
-                <SwitcherItem id="first-item" type="link">
-                  First Item
-                </SwitcherItem>
-                <SwitcherItem id="second-item" type="link">
-                  Second Item
-                </SwitcherItem>
-                <SwitcherItem id="third-item" type="link">
-                  Third Item
-                </SwitcherItem>
-                <SwitcherItem id="first-item" type="link">
-                  First Item
-                </SwitcherItem>
-                <SwitcherItem id="second-item" type="link">
-                  Second Item
-                </SwitcherItem>
-                <SwitcherItem id="third-item" type="link">
-                  Third Item
-                </SwitcherItem>
+              <Section sectionId="third-section" title="Third Section">
+                <SwitcherItem>First Item</SwitcherItem>
+                <SwitcherItem>Second Item</SwitcherItem>
+                <SwitcherItem>Third Item</SwitcherItem>
+                <SwitcherItem>First Item</SwitcherItem>
+                <SwitcherItem>Second Item</SwitcherItem>
+                <SwitcherItem>Third Item</SwitcherItem>
+                <SwitcherItem>First Item</SwitcherItem>
+                <SwitcherItem>Second Item</SwitcherItem>
+                <SwitcherItem>Third Item</SwitcherItem>
+                <SwitcherItem>First Item</SwitcherItem>
+                <SwitcherItem>Second Item</SwitcherItem>
+                <SwitcherItem>Third Item</SwitcherItem>
               </Section>
               <ManageButton href="/some-href" />
-            </SwitcherView>
+            </SwitcherWrapper>
           )
         }
       </MockProvider>

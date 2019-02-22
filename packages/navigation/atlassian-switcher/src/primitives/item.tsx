@@ -4,9 +4,7 @@ import Item, { itemThemeNamespace } from '@atlaskit/item';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { gridSize, colors, elevation } from '@atlaskit/theme';
 import {
-  analyticsAttributes,
   createAndFireNavigationEvent,
-  withAnalyticsContextData,
   withAnalyticsEvents,
   UI_EVENT_TYPE,
   SWITCHER_ITEM_SUBJECT,
@@ -19,7 +17,7 @@ const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
   width: ${4 * gridSize()}px;
   height: ${4 * gridSize()}px;
   border-radius: ${gridSize() / 2}px;
-  ${elevation.e100}
+  ${elevation.e100};
   background-color: ${({ isAdmin, isCustom }) =>
     isAdmin ? colors.DN70 : isCustom ? colors.N0 : colors.B400}
   overflow: hidden;
@@ -71,8 +69,6 @@ const itemTheme = {
 };
 
 type SwitcherItemProps = Props & {
-  id: string;
-  type: string;
   children: React.ReactNode;
   onClick?: () => void;
 };
@@ -106,20 +102,4 @@ const SwitcherItemWithEvents = withAnalyticsEvents({
   }),
 })(SwitcherItem);
 
-type SwitcherItemAnalyticsContext = {
-  attributes: {
-    itemId?: string;
-    itemType?: string;
-  };
-};
-const SwitcherItemWithContext = withAnalyticsContextData<
-  SwitcherItemProps,
-  SwitcherItemAnalyticsContext
->(props =>
-  analyticsAttributes({
-    itemId: props.id,
-    itemType: props.type,
-  }),
-)(SwitcherItemWithEvents);
-
-export default SwitcherItemWithContext;
+export default SwitcherItemWithEvents;

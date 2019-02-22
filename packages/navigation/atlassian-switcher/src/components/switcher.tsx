@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  SwitcherView,
+  SwitcherWrapper,
   SwitcherItem,
   Section,
   ManageButton,
@@ -53,9 +53,15 @@ const getAnalyticsContext = (links: any, extraLinks: number) => ({
   }),
 });
 
-const getExtraItemAnalyticsContext = (index: number) => ({
+const getItemAnalyticsContext = (
+  index: number,
+  id: string | null,
+  type: string,
+) => ({
   ...analyticsAttributes({
     groupItemIndex: index,
+    itemId: id,
+    itemType: type,
   }),
 });
 
@@ -138,49 +144,46 @@ export default class Switcher extends React.Component<SwitcherProps> {
       <NavigationAnalyticsContext
         data={getAnalyticsContext(links, Number(shouldRenderXSellLink))}
       >
-        <SwitcherView>
+        <SwitcherWrapper>
           <RenderTracker
             subject={SWITCHER_SUBJECT}
             data={{ duration: this.timeSinceMounted() }}
           />
 
           {shouldRenderAdministrativeSection && (
-            <Section id="administration" title="Administration" isAdmin>
+            <Section sectionId="administration" title="Administration" isAdmin>
               {links.admin.map(({ label, icon, key, link }, idx) => (
                 <NavigationAnalyticsContext
                   key={key}
-                  data={getExtraItemAnalyticsContext(idx)}
+                  data={getItemAnalyticsContext(idx, key, 'administration')}
                 >
-                  <SwitcherItem
-                    type="administration"
-                    id={key}
-                    icon={icon}
-                    href={link}
-                  >
+                  <SwitcherItem icon={icon} href={link}>
                     {label}
                   </SwitcherItem>
                 </NavigationAnalyticsContext>
               ))}
             </Section>
           )}
-          <Section id="products" title="Products">
+          <Section sectionId="products" title="Products">
             {links.products.map(({ label, icon, key, link }, idx) => (
               <NavigationAnalyticsContext
                 key={key}
-                data={getExtraItemAnalyticsContext(idx)}
+                data={getItemAnalyticsContext(idx, key, 'product')}
               >
-                <SwitcherItem type="product" id={key} icon={icon} href={link}>
+                <SwitcherItem icon={icon} href={link}>
                   {label}
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
             {shouldRenderXSellLink && (
               <NavigationAnalyticsContext
-                data={getExtraItemAnalyticsContext(links.products.length)}
+                data={getItemAnalyticsContext(
+                  links.products.length,
+                  suggestedProductLink!.key,
+                  'try',
+                )}
               >
                 <SwitcherItem
-                  type="try"
-                  id={suggestedProductLink!.key}
                   icon={suggestedProductLink!.icon}
                   onClick={this.triggerXFlow}
                 >
@@ -194,20 +197,18 @@ export default class Switcher extends React.Component<SwitcherProps> {
               </NavigationAnalyticsContext>
             )}
           </Section>
-          <Section id="customLinks" title="More" isCustom>
+          <Section sectionId="customLinks" title="More" isCustom>
             {links.custom.map(({ label, link }: CustomLink, idx) => (
               // todo: id in SwitcherItem should be consumed from custom link resolver
               <NavigationAnalyticsContext
                 key={idx + '.' + label}
-                data={getExtraItemAnalyticsContext(idx)}
+                data={getItemAnalyticsContext(idx, null, 'customLink')}
               >
-                <SwitcherItem type="customLink" id={label} href={link}>
-                  {label}
-                </SwitcherItem>
+                <SwitcherItem href={link}>{label}</SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
           </Section>
-          <Section id="recent" title="Recent Containers">
+          <Section sectionId="recent" title="Recent Containers">
             {links.recent.map(
               (
                 { objectId, name, url, iconUrl, type }: RecentContainer,
@@ -215,14 +216,9 @@ export default class Switcher extends React.Component<SwitcherProps> {
               ) => (
                 <NavigationAnalyticsContext
                   key={objectId}
-                  data={getExtraItemAnalyticsContext(idx)}
+                  data={getItemAnalyticsContext(idx, type, 'recent')}
                 >
-                  <SwitcherItem
-                    type="recentContainer"
-                    id={type}
-                    iconUrl={iconUrl}
-                    href={url}
-                  >
+                  <SwitcherItem iconUrl={iconUrl} href={url}>
                     {name}
                   </SwitcherItem>
                 </NavigationAnalyticsContext>
@@ -230,7 +226,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
             )}
           </Section>
           {customLinksData && <ManageButton href={customLinksData[1]} />}
-        </SwitcherView>
+        </SwitcherWrapper>
       </NavigationAnalyticsContext>
     );
   }
