@@ -307,7 +307,7 @@ describe(name, () => {
       let handleEditorCreated = jest.fn();
       let wrapper = mountWithIntl(
         <ReactEditorView
-          editorProps={{ appearance: 'message' }}
+          editorProps={{ appearance: 'comment' }}
           providerFactory={new ProviderFactory()}
           portalProviderAPI={portalProviderAPI}
           onEditorCreated={handleEditorCreated}
@@ -335,7 +335,7 @@ describe(name, () => {
       let handleEditorDestroyed = jest.fn();
       const wrapper = mountWithIntl(
         <ReactEditorView
-          editorProps={{ appearance: 'message' }}
+          editorProps={{ appearance: 'comment' }}
           providerFactory={new ProviderFactory()}
           portalProviderAPI={portalProviderAPI}
           onEditorCreated={() => {}}
@@ -424,7 +424,7 @@ describe(name, () => {
         let handleEditorDestroyed = jest.fn();
         const wrapper = mountWithIntl(
           <ReactEditorView
-            editorProps={{ appearance: 'message' }}
+            editorProps={{ appearance: 'comment' }}
             providerFactory={new ProviderFactory()}
             portalProviderAPI={portalProviderAPI}
             onEditorCreated={() => {}}

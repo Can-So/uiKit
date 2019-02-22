@@ -47,10 +47,6 @@ export type Props = {
   theme?: any;
 };
 
-const getLineHeight = ({ appearance }: Props) => {
-  return `line-height: ${appearance === 'message' ? 20 : 24}px`;
-};
-
 const tableStyles = ({ appearance }: Props) => {
   if (appearance === 'mobile') {
     return 'table-layout: auto';
@@ -84,7 +80,7 @@ export const Wrapper = styled.div < Props & HTMLAttributes < {} >> `
   ${fullPageStyles}
 
   font-size: ${editorFontSize}px;
-  ${getLineHeight};
+  line-height: 24px;
   color: ${themed({ light: colors.N800, dark: '#B8C7E0' })};
   word-wrap: break-word;
 

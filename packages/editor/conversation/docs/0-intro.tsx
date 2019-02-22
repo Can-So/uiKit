@@ -34,7 +34,7 @@ const [conversation] = await provider.getConversations();
   id={conversation.conversationId}
   objectId="ari:cloud:platform::conversation/demo"
   provider={provider}
-  renderEditor={(Editor, props) => <Editor {...props} appearance="message" saveOnEnter={true} />}
+  renderEditor={(Editor, props) => <Editor {...props} saveOnEnter={true} />}
 />;
 `;
 
@@ -348,7 +348,7 @@ export default md`
     />
   )}
 
-  The rendering of the editor can be customized by using the \`renderEditor\` prop. Here's an example using the "message"-appearance and "saveOnEnter":
+  The rendering of the editor can be customized by using the \`renderEditor\` prop. Here's an example using "saveOnEnter":
 
   ${(
     <Example

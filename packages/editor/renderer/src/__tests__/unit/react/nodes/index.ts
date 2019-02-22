@@ -2,9 +2,9 @@ import * as sinon from 'sinon';
 import { Fragment } from 'prosemirror-model';
 import {
   mergeTextNodes,
-  isEmojiDoc,
   isText,
   isTextWrapper,
+  isEmojiDoc,
 } from '../../../../react/nodes';
 import { emoji as emojiData } from '@atlaskit/util-data-test';
 
@@ -358,12 +358,6 @@ describe('Renderer - React/Nodes', () => {
       });
 
       expect(isEmojiDoc(content)).toEqual(false);
-    });
-
-    it('should return true at nested level if fitToHeight prop is set to 40', () => {
-      const content = createMockFragment({ content: [grinEmoji] });
-
-      expect(isEmojiDoc(content, { fitToHeight: 40 })).toEqual(true);
     });
 
     it('should return false at nested level if no fitToHeight prop', () => {

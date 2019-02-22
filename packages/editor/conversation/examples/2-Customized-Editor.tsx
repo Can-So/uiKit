@@ -40,7 +40,7 @@ export default class ExistingConversation extends React.Component<
         provider={provider}
         dataProviders={getDataProviderFactory()}
         renderEditor={(Editor, props) => (
-          <Editor {...props} appearance="message" saveOnEnter={true} />
+          <Editor {...props} saveOnEnter={true} />
         )}
       />
     );

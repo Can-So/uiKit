@@ -17,7 +17,6 @@ import { Wrapper } from './style';
 import { TruncatedWrapper } from './truncated-wrapper';
 
 export type RendererAppearance =
-  | 'message'
   | 'inline-comment'
   | 'comment'
   | 'full-page'

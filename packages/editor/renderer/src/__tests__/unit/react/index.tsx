@@ -3,33 +3,7 @@ import { ReactSerializer } from '../../../index';
 import { defaultSchema as schema } from '@atlaskit/adf-schema';
 import { Action } from '../../../react/marks';
 import { Heading } from '../../../react/nodes';
-import { bigEmojiHeight } from '../../../utils';
 import { Emoji } from '../../../react/nodes';
-import { RendererAppearance } from '../../../ui/Renderer';
-
-const emojiDoc = {
-  content: [
-    {
-      content: [
-        {
-          attrs: {
-            id: '1f642',
-            shortName: ':slight_smile:',
-            text: '🙂',
-          },
-          type: 'emoji',
-        },
-        {
-          text: ' ',
-          type: 'text',
-        },
-      ],
-      type: 'paragraph',
-    },
-  ],
-  type: 'doc',
-  version: 1,
-};
 
 const doc = {
   type: 'doc',
@@ -136,7 +110,6 @@ const headingDoc = {
 };
 
 const docFromSchema = schema.nodeFromJSON(doc);
-const emojiDocFromSchema = schema.nodeFromJSON(emojiDoc);
 const headingDocFromSchema = schema.nodeFromJSON(headingDoc);
 
 describe('Renderer - ReactSerializer', () => {
@@ -168,45 +141,6 @@ describe('Renderer - ReactSerializer', () => {
       expect(link.props()).toHaveProperty('href', 'https://www.atlassian.com');
       expect(strong.text()).toEqual('World!');
       reactDoc.unmount();
-    });
-
-    describe('appearance', () => {
-      const appearances: RendererAppearance[] = [
-        'message',
-        'inline-comment',
-        'comment',
-        'full-page',
-        'mobile',
-      ];
-
-      const emojiDoubleHeightIn: RendererAppearance[] = ['message'];
-
-      appearances.forEach(appearance => {
-        describe(`${appearance} appearance`, () => {
-          // Should the emoji render as double height in this appearance
-          const doubleHeight: boolean =
-            emojiDoubleHeightIn.indexOf(appearance) !== -1;
-
-          it(`emoji ${
-            doubleHeight ? 'should' : 'should not'
-          } render as double height`, () => {
-            const reactSerializer = ReactSerializer.fromSchema(schema, {
-              appearance,
-            });
-            const reactDoc = mount(reactSerializer.serializeFragment(
-              emojiDocFromSchema.content,
-            ) as any);
-
-            const emoji = reactDoc.find('EmojiItem');
-            expect(emoji.length).toEqual(1);
-            if (doubleHeight) {
-              expect(emoji.prop('fitToHeight')).toEqual(bigEmojiHeight);
-            } else {
-              expect(emoji.prop('fitToHeight')).not.toEqual(bigEmojiHeight);
-            }
-          });
-        });
-      });
     });
   });
 
