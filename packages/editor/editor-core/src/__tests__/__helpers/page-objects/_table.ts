@@ -228,3 +228,20 @@ export const resizeColumn = async (
   await page.mouse.move(columnEndPosition + amount, cell.top);
   await page.mouse.up();
 };
+
+export const grabResizeHandle = async (
+  page,
+  { colIdx, row = 1 }: { colIdx: number; row: number },
+) => {
+  let cell = await getBoundingRect(
+    page,
+    getSelectorForTableCell({ row, cell: colIdx }),
+  );
+
+  const columnEndPosition = cell.left + cell.width;
+
+  // Move to the right edge of the cell.
+  await page.mouse.move(columnEndPosition, cell.top);
+
+  await page.mouse.down();
+};

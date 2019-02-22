@@ -4,6 +4,8 @@ import {
   deleteColumn,
   resizeColumn,
   insertTable,
+  clickFirstCell,
+  grabResizeHandle,
 } from '../../__helpers/page-objects/_table';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
 import { animationFrame } from '../../__helpers/page-objects/_editor';
@@ -64,6 +66,23 @@ describe('Snapshot Test: table resizing', () => {
       }, ClassName);
 
       await snapshot(page, 0.01);
+    });
+  });
+});
+
+describe('Snapshot Test: table resize handle', () => {
+  let page;
+  beforeEach(async () => {
+    // @ts-ignore
+    page = global.page;
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
+    await insertTable(page);
+  });
+
+  describe('when table has merged cells', () => {
+    it(`should render resize handle spanning all rows`, async () => {
+      await grabResizeHandle(page, { colIdx: 2, row: 2 });
+      await snapshot(page);
     });
   });
 });
