@@ -4,7 +4,6 @@ import {
   deleteColumn,
   resizeColumn,
   insertTable,
-  clickFirstCell,
   grabResizeHandle,
 } from '../../__helpers/page-objects/_table';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
