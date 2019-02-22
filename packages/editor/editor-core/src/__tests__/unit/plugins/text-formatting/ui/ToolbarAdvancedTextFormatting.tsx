@@ -29,7 +29,6 @@ import {
   INPUT_METHOD,
   ACTION_SUBJECT_ID,
 } from '../../../../../plugins/analytics';
-import { underline } from '../../../../../../../adf-utils/src/validator/specs';
 
 describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
   const createEditor = createEditorFactory();
