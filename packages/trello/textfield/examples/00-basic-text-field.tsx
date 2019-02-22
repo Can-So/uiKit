@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NachosTextField } from '../src';
+import NachosTextField from '../src';
 
 export default function() {
   return (

@@ -1,7 +1,6 @@
-export const hello = 'hello world';
-export { nachosColors } from './colors';
+export { nachosColors } from './components/colors';
 export {
-  NachosTextField,
+  NachosTextField as default,
   NTextFieldTheme,
   NTextFieldProps,
 } from './components/NachosTextField';

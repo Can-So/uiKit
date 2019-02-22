@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NachosTextField, NTextFieldProps } from '../src';
+import NachosTextField, { NTextFieldProps } from '../src';
 import { nachosColors as colors } from '../src';
 
 export default function() {
@@ -15,6 +15,7 @@ export default function() {
       container: {
         borderColor,
         backgroundColor,
+        margin: '8px 12px',
       },
     };
   };

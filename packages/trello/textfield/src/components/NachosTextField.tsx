@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Textfield from '@atlaskit/textfield';
-import { nachosColors as colors } from '../../src';
+import { nachosColors as colors } from './colors';
 
 export type NTextFieldTheme = {
   container?: {};
@@ -8,9 +8,9 @@ export type NTextFieldTheme = {
 };
 
 export type NTextFieldProps = {
-  isFocused: boolean;
-  isInvalid: boolean;
-  isDisabled: boolean;
+  isFocused?: boolean;
+  isInvalid?: boolean;
+  isDisabled?: boolean;
   name?: string;
   theme?: any;
 };
@@ -54,13 +54,13 @@ export class NachosTextField extends React.Component<NTextFieldProps> {
         ...getTextFieldStyles(themeProps),
         padding: '6px 10px',
         lineHeight: '20px',
-        ...(this.props.theme ? this.props.theme(themeProps).container : null),
+        ...(this.props.theme && this.props.theme(themeProps).container),
       },
       input: {
         ...adgTheme(themeProps).input,
         '&::placeholder': colors.N200,
 
-        ...(this.props.theme ? this.props.theme(themeProps).input : null),
+        ...(this.props.theme && this.props.theme(themeProps).input),
       },
     });
 
