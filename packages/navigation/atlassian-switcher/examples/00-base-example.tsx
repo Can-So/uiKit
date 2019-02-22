@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import Switcher from './helpers';
+import { Switcher, withAnalyticsLogger } from './helpers';
 
-export default class SwitcherExample extends Component {
+class SwitcherExample extends Component {
   state = {
     isDrawerOpen: true,
   };
@@ -32,3 +32,5 @@ export default class SwitcherExample extends Component {
     );
   }
 }
+
+export default withAnalyticsLogger(SwitcherExample);
