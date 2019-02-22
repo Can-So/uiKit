@@ -16,18 +16,6 @@ const flattenDeep = require('lodash.flattendeep');
   const changedPackagesRelativePaths = changedPackages.map(
     pkg => pkg.relativeDir,
   );
-  if (process.argv[3] && process.argv[3].includes('--only')) {
-    const includedPattern = process.argv[3].split('=')[1];
-    // We need to include only the component 'packages' for example
-    changedPackagesRelativePaths = changedPackagesRelativePaths.filter(pkg =>
-      pkg.includes(includedPattern),
-    );
-  }
-  if (process.argv.includes('--spaceDelimited')) {
-    console.log(changedPackagesRelativePaths.join(' '));
-  } else {
-    console.log(JSON.stringify(changedPackagesRelativePaths));
-  }
   // Packages that are dependent on the changed packages.
   // If dependencies flag is passed, CHANGED_PACKAGES will return packages that are dependent on the changed packages.
   // Get dependency graph for all packages.
@@ -72,7 +60,7 @@ const flattenDeep = require('lodash.flattendeep');
           .map(pkg => path.relative(cwd, pkg)),
       ),
     );
-    // Set is used to avoid the case of multiple changed packages with the same dependent packages
+    // Set is used to avoid the case of multiple changed packages with the same dependent packages.
     const changedPackagesRelativePathsWithDependent = [
       ...new Set(
         changedPackagesRelativePaths.concat(changedPackagesWithDependent),
@@ -80,7 +68,19 @@ const flattenDeep = require('lodash.flattendeep');
     ];
     console.log(JSON.stringify(changedPackagesRelativePathsWithDependent));
   } else {
-    // This script is related to the measure the bundle size
+    // Those exceptions scripts are related to the measure of the bundle size.
+    // This check if the `--only='folderName'` flag is set when using the measure tool.
+    if (process.argv[3] && process.argv[3].includes('--only')) {
+      const includedPattern = process.argv[3].split('=')[1];
+      // For example, if we need to `only` include the component 'packages' when measuring the package bundle size.
+      changedPackagesRelativePaths = changedPackagesRelativePaths.filter(pkg =>
+        pkg.includes(includedPattern),
+      );
+    }
+    // This check is only for the way of changed packages output is displayed:
+    // '--spaceDelimited' - using the measure tool, will return the changedPackages
+    // like 'packages/core/button packages/editor/editor-core ...'.
+    // Otherwise, the standard output will be ["packages/core/button", "packages/editor/editor-core", ...].
     if (process.argv.includes('--spaceDelimited')) {
       console.log(changedPackagesRelativePaths.join(' '));
     } else {
