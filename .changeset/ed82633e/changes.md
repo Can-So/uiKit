@@ -1,1 +1,0 @@
-- ED-6284 Filter out invalid transactions before they are applied and send an analytics event

@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 100.2.0
+- [minor] [af5572cf8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af5572cf8e):
+
+  - ED-6284 Filter out invalid transactions before they are applied and send an analytics event
+
 ## 100.1.0
 - [minor] [5dc1e046b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dc1e046b2):
 
