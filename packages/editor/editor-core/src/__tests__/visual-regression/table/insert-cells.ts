@@ -35,7 +35,7 @@ describe('Snapshot Test: table insert/delete', () => {
   });
 
   it(`should be able insert after first column`, async () => {
-    await page.waitForSelector(tableSelectors.firstRowControl);
+    await page.waitForSelector(tableSelectors.firstColumnControl);
     await page.hover(tableSelectors.firstColumnControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
     await snapshot(page, 0.01);

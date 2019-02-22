@@ -17,10 +17,12 @@ describe('z-indexes:', () => {
     page = global.page;
   });
 
-  // TODO enable after fixing selectors on tables
-  it('should always position table trash icon below dropdowns from main menu', async () => {
+  beforeEach(async () => {
     await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
     await insertTable(page);
+  });
+
+  it('should always position table trash icon below dropdowns from main menu', async () => {
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.insertBlock);
     await page.waitForSelector(selectors.dropList);
@@ -28,8 +30,6 @@ describe('z-indexes:', () => {
   });
 
   it('should always position table trash icon below emoji picker', async () => {
-    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
-    await insertTable(page);
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.emoji);
     await page.waitForSelector(selectors.emojiPicker);
@@ -37,8 +37,6 @@ describe('z-indexes:', () => {
   });
 
   it('should always position table trash icon below mention picker', async () => {
-    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
-    await insertTable(page);
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.mention);
     await page.waitForSelector(selectors.mentionQuery);
