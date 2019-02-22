@@ -1,0 +1,1 @@
+- ED-5738: fix resize handles for merged cells

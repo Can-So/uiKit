@@ -1,6 +1,31 @@
-import { initEditor, snapshot } from '../_utils';
-import { resizeColumn, insertColumn, deleteColumn } from './_table-utils';
+import { initEditor, initFullPageEditorWithAdf, snapshot } from '../_utils';
+import {
+  resizeColumn,
+  insertColumn,
+  grabResizeHandle,
+  deleteColumn,
+} from './_table-utils';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
+import * as adf from './__fixtures__/merged-columns.adf.json';
+
+describe('Snapshot Test: table resize handle', () => {
+  let page;
+  beforeEach(async () => {
+    // @ts-ignore
+    page = global.page;
+    await initFullPageEditorWithAdf(page, adf);
+    await page.setViewport({ width: 1280, height: 1024 });
+    // Focus the table
+    await page.click('table tr td');
+  });
+
+  describe('when table has merged cells', () => {
+    it(`should render resize handle spanning all rows`, async () => {
+      await grabResizeHandle(page, { colIdx: 2, row: 2 });
+      await snapshot(page);
+    });
+  });
+});
 
 describe.skip('Snapshot Test: table resizing', () => {
   describe('Re-sizing', () => {
