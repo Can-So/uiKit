@@ -10,7 +10,11 @@ export default function() {
       <label htmlFor="focused">Focused</label>
       <NachosTextField name="focused" autoFocus defaultValue="Focus on me!" />
       <label htmlFor="invalid">Invalid</label>
-      <NachosTextField name="invalid" isInvalid />
+      <NachosTextField
+        name="invalid"
+        isInvalid
+        defaultValue="Tacos are disgusting!"
+      />
       <label htmlFor="disabled">Disabled</label>
       <NachosTextField
         name="disabled"

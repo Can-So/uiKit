@@ -69,8 +69,6 @@ export class NachosTextField extends React.Component<NTextFieldProps> {
     return (
       <div>
         <Textfield
-          name={this.props.name}
-          defaultValue="Tacos are yummy!"
           isInvalid={isInvalid}
           isFocused={isFocused}
           isDisabled={isDisabled}

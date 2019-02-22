@@ -5,12 +5,16 @@ import { nachosColors as colors } from '../src';
 export default function() {
   const skyBlueTheme = props => {
     let backgroundColor = colors['sky-500'];
+    let borderColor = colors['sky-400'];
+
     if (props.isInvalid) {
       backgroundColor = colors['sky-50'];
+      borderColor = colors['sky-100'];
     }
     return {
       container: {
-        backgroundColor: backgroundColor,
+        borderColor,
+        backgroundColor,
       },
     };
   };
@@ -27,7 +31,7 @@ export default function() {
       <NachosTextField
         theme={(props: NTextFieldProps) => skyBlueTheme(props)}
         name="default-value"
-        defaultValue="Tacos are yummy!"
+        defaultValue="Tacos are disgusting!"
         isInvalid
       />
     </div>
