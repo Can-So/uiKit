@@ -10,6 +10,7 @@ import {
   code,
   em,
   mountWithIntl,
+  code_block,
 } from '@atlaskit/editor-test-helpers';
 
 import { pluginKey } from '../../../../../plugins/text-formatting/pm-plugins/main';
@@ -19,6 +20,7 @@ import ToolbarAdvancedTextFormatting, {
 } from '../../../../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import panelPlugin from '../../../../../plugins/panel';
+import codeBlockPlugin from '../../../../../plugins/code-block';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import {
   ACTION,
@@ -27,6 +29,7 @@ import {
   INPUT_METHOD,
   ACTION_SUBJECT_ID,
 } from '../../../../../plugins/analytics';
+import { underline } from '../../../../../../../adf-utils/src/validator/specs';
 
 describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
   const createEditor = createEditorFactory();
@@ -35,7 +38,7 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
     return createEditor({
       doc,
-      editorPlugins: [panelPlugin],
+      editorPlugins: [panelPlugin, codeBlockPlugin()],
       pluginKey: pluginKey,
       editorProps: {
         analyticsHandler: trackEvent,
@@ -300,6 +303,38 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
     );
     const toolbarButton = toolbarOption.find(ToolbarButton);
     expect(toolbarButton.prop('selected')).toBe(true);
+    toolbarOption.unmount();
+  });
+
+  it('should only enable/activate menu options for the current code block context', () => {
+    const { editorView, pluginState } = editor(
+      doc(code_block({ language: 'js' })('Hello {<>}world')),
+    );
+    const clearFormattingState = clearFormattingPluginKey.getState(
+      editorView.state,
+    );
+    const toolbarOption = mountWithIntl(
+      <ToolbarAdvancedTextFormatting
+        textFormattingState={pluginState}
+        clearFormattingState={clearFormattingState}
+        editorView={editorView}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+
+    const clearFormattingButton = toolbarOption
+      .find(Item)
+      .filterWhere(
+        n => n.text().indexOf(messages.clearFormatting.defaultMessage) > -1,
+      );
+    const underlineButton = toolbarOption
+      .find(Item)
+      .filterWhere(
+        n => n.text().indexOf(messages.underline.defaultMessage) > -1,
+      );
+
+    expect(clearFormattingButton.prop('isDisabled')).toBe(false);
+    expect(underlineButton.prop('isDisabled')).toBe(true);
     toolbarOption.unmount();
   });
 
