@@ -13,7 +13,7 @@ const flattenDeep = require('lodash.flattendeep');
   const allPackages = await bolt.getWorkspaces({ cwd });
   // Changed packages that have been worked on since master.
   const changedPackages = await packages.getChangedPackagesSinceMaster();
-  const changedPackagesRelativePaths = changedPackages.map(
+  let changedPackagesRelativePaths = changedPackages.map(
     pkg => pkg.relativeDir,
   );
   // Packages that are dependent on the changed packages.
