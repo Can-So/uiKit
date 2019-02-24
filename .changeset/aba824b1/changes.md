@@ -1,0 +1,1 @@
+- make smart links open in same window.
