@@ -27,10 +27,6 @@ class JiraSwitcherExample extends Component {
     });
   };
 
-  onTriggerXFlow = (productKey: string) => {
-    console.log(`Triggering xflow for => ${productKey}`);
-  };
-
   render() {
     return (
       <div style={{ padding: '2rem' }}>
