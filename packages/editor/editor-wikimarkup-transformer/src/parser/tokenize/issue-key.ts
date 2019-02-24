@@ -2,6 +2,14 @@ import { Schema, Node as PMNode } from 'prosemirror-model';
 import { Token, TokenParser, Context, InlineCardConversion } from './';
 import { isNotBlank } from '../utils/text';
 
+/**
+ * Inline Card From Text (ICFT).
+ *
+ * When we convert WikiMarkup to ADF we stamp all issue keys URLs with the
+ * #icft= syntax to identify  which keys should be involved by brackets
+ * [XX-999] from the ones which should be blue links in the ADF to WikiMarkup
+ * convertion.
+ */
 export const INLINE_CARD_FROM_TEXT_STAMP = /(#icft=)([A-Z][A-Z]+-[0-9]+)/;
 
 export interface Issue {
