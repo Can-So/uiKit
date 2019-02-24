@@ -2,6 +2,8 @@ import { Schema, Node as PMNode } from 'prosemirror-model';
 import { Token, TokenParser, Context, InlineCardConversion } from './';
 import { isNotBlank } from '../utils/text';
 
+export const INLINE_CARD_FROM_TEXT_STAMP = /(#ifct=)([A-Z][A-Z]+-[0-9]+)/;
+
 export interface Issue {
   key: string;
   url: string;
@@ -62,7 +64,9 @@ export const buildInlineCard = (schema: Schema, issue: Issue): PMNode[] => {
 };
 
 const withInlineCardFromTextStamp = (issue: Issue): string =>
-  /#icft=/g.test(issue.url) ? issue.url : `${issue.url}#icft=${issue.key}`;
+  INLINE_CARD_FROM_TEXT_STAMP.test(issue.url)
+    ? issue.url
+    : `${issue.url}#icft=${issue.key}`;
 
 const isNotSpace = (char: string): boolean => !/\s/.test(char);
 
@@ -75,5 +79,5 @@ export const buildIssueKeyRegex = (
 
   const pattern: string = Object.keys(inlineCardConversion).join('|');
 
-  return new RegExp(`^(${pattern})`, 'g');
+  return new RegExp(`^(${pattern})`);
 };
