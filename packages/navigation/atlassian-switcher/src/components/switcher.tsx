@@ -117,10 +117,9 @@ export default class Switcher extends React.Component<SwitcherProps> {
       return <Skeleton />;
     }
 
+    const canAddProduct = managePermissionData || addProductsPermissionData;
     const hasAdminLinks = managePermissionData || addProductsPermissionData;
-    const isAdmin = managePermissionData;
-    const hasSuggestedLinks =
-      suggestedProductLink && !isLoadingIsXFlowEnabled && isXFlowEnabledData;
+    const hasSuggestedLinks = !!(isXFlowEnabledData && suggestedProductLink);
 
     const productLinks = getProductLinks(licenseInformationData!);
 
@@ -129,6 +128,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
       : [];
 
     const suggestedLinks = hasSuggestedLinks ? [suggestedProductLink!] : [];
+    const tryLozengeText = canAddProduct ? 'Try' : 'Request';
 
     const recentLinks = getRecentLinkItems(recentContainersData!.data);
 
@@ -169,7 +169,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
                   onClick={this.triggerXFlow}
                 >
                   {label}
-                  <TryLozenge>{isAdmin ? 'Try' : 'Request'}</TryLozenge>
+                  <TryLozenge>{tryLozengeText}</TryLozenge>
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
