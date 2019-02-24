@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.0.3
+- [patch] [7a7cd4c491](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a7cd4c491):
+
+  - make smart links open in same window.
+
 ## 101.0.2
 - [patch] [6773e958ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6773e958ab):
 
