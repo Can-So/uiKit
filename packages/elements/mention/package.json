@@ -24,7 +24,6 @@
     "@atlaskit/lozenge": "^6.2.4",
     "@atlaskit/theme": "^7.0.1",
     "@atlaskit/tooltip": "^12.1.15",
-    "@atlaskit/util-common": "^1.5.2",
     "@atlaskit/util-service-support": "^3.0.5",
     "babel-runtime": "^6.26.0",
     "tslib": "^1.8.0",

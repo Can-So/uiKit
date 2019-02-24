@@ -3,6 +3,12 @@ import styled, { ThemeProvider } from 'styled-components';
 import Item, { itemThemeNamespace } from '@atlaskit/item';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { gridSize, colors, elevation } from '@atlaskit/theme';
+import {
+  createAndFireNavigationEvent,
+  withAnalyticsEvents,
+  UI_EVENT_TYPE,
+  SWITCHER_ITEM_SUBJECT,
+} from '../utils/analytics';
 
 const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
   display: flex;
@@ -11,7 +17,7 @@ const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
   width: ${4 * gridSize()}px;
   height: ${4 * gridSize()}px;
   border-radius: ${gridSize() / 2}px;
-  ${elevation.e100}
+  ${elevation.e100};
   background-color: ${({ isAdmin, isCustom }) =>
     isAdmin ? colors.DN70 : isCustom ? colors.N0 : colors.B400}
   overflow: hidden;
@@ -30,12 +36,18 @@ type Props = {
   href?: string;
 };
 
+type IconWithBackgroundProps = {
+  isAdmin?: boolean;
+  isCustom?: boolean;
+  iconUrl?: string;
+  icon?: React.ReactType;
+};
 const IconWithBackground = ({
   isAdmin = false,
   isCustom = false,
   iconUrl,
   icon: Icon = WorldIcon,
-}: Props) => (
+}: IconWithBackgroundProps) => (
   <Background isAdmin={isAdmin} isCustom={isCustom}>
     {iconUrl ? (
       <ImgIcon src={iconUrl} />
@@ -57,28 +69,37 @@ const itemTheme = {
 };
 
 type SwitcherItemProps = Props & {
-  children: JSX.Element[] | string;
-  key?: string;
+  children: React.ReactNode;
   onClick?: () => void;
 };
-export default ({
-  isAdmin,
-  isCustom,
-  icon,
-  iconUrl,
-  ...rest
-}: SwitcherItemProps) => (
-  <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
-    <Item
-      elemBefore={
-        <IconWithBackground
-          isAdmin={isAdmin}
-          isCustom={isCustom}
-          icon={icon}
-          iconUrl={iconUrl}
+class SwitcherItem extends React.Component<SwitcherItemProps> {
+  render() {
+    const { isAdmin, isCustom, icon, iconUrl, ...rest } = this.props;
+
+    return (
+      <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
+        <Item
+          elemBefore={
+            <IconWithBackground
+              isAdmin={isAdmin}
+              isCustom={isCustom}
+              icon={icon}
+              iconUrl={iconUrl}
+            />
+          }
+          {...rest}
         />
-      }
-      {...rest}
-    />
-  </ThemeProvider>
-);
+      </ThemeProvider>
+    );
+  }
+}
+
+const SwitcherItemWithEvents = withAnalyticsEvents({
+  onClick: createAndFireNavigationEvent({
+    eventType: UI_EVENT_TYPE,
+    action: 'clicked',
+    actionSubject: SWITCHER_ITEM_SUBJECT,
+  }),
+})(SwitcherItem);
+
+export default SwitcherItemWithEvents;
