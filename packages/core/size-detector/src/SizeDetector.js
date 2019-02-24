@@ -1,7 +1,11 @@
 // @flow
 
-import React, { Component, type Node } from 'react';
+import React, { Component } from 'react';
 import rafSchedule from 'raf-schd';
+import type {
+  SizeDetectorPropType,
+  SizeDetectorSizeMetricsType,
+} from './types';
 
 // Need to make outer div full height in case consumer wants to align
 // child content vertically center. These styles can be overridden by the
@@ -27,27 +31,15 @@ const objectStyle = {
   zIndex: -1,
 };
 
-type SizeMetrics = {
-  width: ?number,
-  height: ?number,
+type SizeDetectorStateType = {
+  sizeMetrics: SizeDetectorSizeMetricsType,
 };
 
-type Props = {
-  /** Function that accepts an object parameter containing 'height' and 'width' properties */
-  children: SizeMetrics => Node,
-  /** Optional styles object to be applied to the containing element */
-  containerStyle?: Object,
-  /** Called when the component is resized. */
-  onResize?: SizeMetrics => void,
-};
-
-type State = {
-  sizeMetrics: SizeMetrics,
-};
-
-export default class SizeDetector extends Component<Props, State> {
+export default class SizeDetector extends Component<
+  SizeDetectorPropType,
+  SizeDetectorStateType,
+> {
   resizeObjectDocument: ?window;
-  resizeObject: ?HTMLElement;
 
   containerRef = React.createRef();
   objectElementRef = React.createRef();
@@ -64,8 +56,8 @@ export default class SizeDetector extends Component<Props, State> {
   };
 
   componentDidMount() {
-    if (this.resizeObjectDocument) {
-      this.resizeObjectDocument.data = 'about:blank';
+    if (this.objectElementRef.current) {
+      this.objectElementRef.current.data = 'about:blank';
     }
     this.handleResize();
   }
@@ -89,8 +81,6 @@ export default class SizeDetector extends Component<Props, State> {
     this.resizeObjectDocument = this.objectElementRef.current.contentDocument.defaultView;
     this.resizeObjectDocument.addEventListener('resize', this.handleResize);
 
-    // Calculate width first time, after object has loaded.
-    // Prevents it from getting in a weird state where width is always 0.
     this.handleResize();
   };
 
@@ -115,12 +105,9 @@ export default class SizeDetector extends Component<Props, State> {
     }
   });
 
-  renderChildren = () => {
-    const { sizeMetrics } = this.state;
-    return this.props.children(sizeMetrics);
-  };
-
   render() {
+    const { sizeMetrics } = this.state;
+    const { children } = this.props;
     return (
       <div
         style={{ ...containerDivStyle, ...this.props.containerStyle }}
@@ -135,7 +122,7 @@ export default class SizeDetector extends Component<Props, State> {
           aria-hidden
           tabIndex={-1}
         />
-        {this.renderChildren()}
+        {children(sizeMetrics)}
       </div>
     );
   }
