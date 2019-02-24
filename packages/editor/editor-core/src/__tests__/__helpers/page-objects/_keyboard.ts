@@ -5,8 +5,15 @@ export enum KeyboardKeys {
   arrowLeft = 'ArrowLeft',
   arrowUp = 'ArrowUp',
   arrowDown = 'ArrowDown',
+  shift = 'Shift',
+  return = 'Return',
+  enter = 'Enter',
 }
 
 export async function pressKey(page: Page, key: KeyboardKeys) {
   await page.keyboard.down(key);
+}
+
+export async function pressKeyup(page: Page, key: KeyboardKeys) {
+  await page.keyboard.up(key);
 }
