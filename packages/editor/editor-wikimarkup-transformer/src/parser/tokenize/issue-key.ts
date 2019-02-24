@@ -2,7 +2,7 @@ import { Schema, Node as PMNode } from 'prosemirror-model';
 import { Token, TokenParser, Context, InlineCardConversion } from './';
 import { isNotBlank } from '../utils/text';
 
-export const INLINE_CARD_FROM_TEXT_STAMP = /(#ifct=)([A-Z][A-Z]+-[0-9]+)/;
+export const INLINE_CARD_FROM_TEXT_STAMP = /(#icft=)([A-Z][A-Z]+-[0-9]+)/;
 
 export interface Issue {
   key: string;
