@@ -18,6 +18,7 @@ import type { TextFieldProps } from '../types';
 
 type State = {
   isFocused: boolean,
+  isHovered: boolean,
 };
 
 class Textfield extends Component<TextFieldProps, State> {
@@ -30,6 +31,7 @@ class Textfield extends Component<TextFieldProps, State> {
 
   state = {
     isFocused: false,
+    isHovered: false,
   };
 
   input: ?HTMLInputElement;
@@ -54,6 +56,14 @@ class Textfield extends Component<TextFieldProps, State> {
     }
   }
 
+  onMouseEnter = () => {
+    this.setState({ isHovered: true });
+  };
+
+  onMouseLeave: React.MouseEventHandler = () => {
+    this.setState({ isHovered: false });
+  };
+
   setInputRef = (input: ?HTMLInputElement) => {
     this.input = input;
     if (this.props.forwardedRef) {
@@ -62,7 +72,7 @@ class Textfield extends Component<TextFieldProps, State> {
   };
 
   render() {
-    const { isFocused } = this.state;
+    const { isFocused, isHovered } = this.state;
     const {
       appearance,
       // createAnalytics passed through from analytics-next
@@ -90,6 +100,7 @@ class Textfield extends Component<TextFieldProps, State> {
               isCompact={isCompact}
               isMonospaced={isMonospaced}
               isFocused={isFocused}
+              isHovered={isHovered}
               isInvalid={isInvalid}
             >
               {tokens => (
@@ -97,6 +108,9 @@ class Textfield extends Component<TextFieldProps, State> {
                   {...rest}
                   theme={tokens}
                   isFocused={isFocused}
+                  isHovered={isHovered}
+                  onMouseEnter={this.onMouseEnter}
+                  onMouseLeave={this.onMouseLeave}
                   forwardedRef={forwardedRef}
                   onFocus={this.handleOnFocus}
                   onBlur={this.handleOnBlur}

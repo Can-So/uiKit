@@ -10,6 +10,7 @@ export default ({
   isCompact,
   isDisabled,
   isFocused,
+  isHovered,
   isInvalid,
   isMonospaced,
   isReadOnly,
