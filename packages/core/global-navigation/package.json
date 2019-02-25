@@ -8,6 +8,10 @@
   "license": "Apache-2.0",
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
+  "maintainers": [
+    "Harsha Ivaturi",
+    "Ajay M"
+  ],
   "files": [
     "dist"
   ],

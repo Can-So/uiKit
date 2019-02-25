@@ -14,9 +14,10 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Raja B",
-    "Ben C",
-    "Ajay M"
+    "Sean C",
+    "Ajay M",
+    "Daniel D",
+    "Kang C"
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "scripts": {
