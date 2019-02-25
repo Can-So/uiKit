@@ -2,7 +2,7 @@ import InlineDialog from '@atlaskit/inline-dialog';
 import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import { messages } from '../../../i18n';
 import { ShareButton } from '../../../components/ShareButton';
 import {
@@ -106,7 +106,9 @@ describe('ShareDialogWithTrigger', () => {
 
   describe('triggerButtonStyle prop', () => {
     it('should render no text in the share button if the value is "icon-only"', () => {
-      const newWrapper = shallowWithIntl<ShareDialogWithTrigger>(
+      const newWrapper: ShallowWrapper<
+        Props & InjectedIntlProps
+      > = shallowWithIntl<Props>(
         <ShareDialogWithTrigger
           triggerButtonStyle="icon-only"
           copyLink="copyLink"
@@ -125,7 +127,9 @@ describe('ShareDialogWithTrigger', () => {
     });
 
     it('should render text in the share button if the value is "icon-with-text"', () => {
-      const newWrapper = shallowWithIntl<ShareDialogWithTrigger>(
+      const newWrapper: ShallowWrapper<
+        Props & InjectedIntlProps
+      > = shallowWithIntl<Props>(
         <ShareDialogWithTrigger
           triggerButtonStyle="icon-with-text"
           copyLink="copyLink"
