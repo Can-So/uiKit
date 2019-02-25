@@ -33,7 +33,7 @@ const shallowRender = async (props: MediaImageProps) => {
 };
 
 describe('<MediaImage />', () => {
-  let defaultProps: Partial<MediaImageProps>;
+  let defaultProps: MediaImageProps;
   const getFileState = jest.fn();
   const getImage = jest.fn();
   beforeEach(() => {
@@ -82,7 +82,7 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: Partial<MediaImageProps> = {
+    const props: MediaImageProps = {
       ...defaultProps,
       context,
     };
@@ -103,7 +103,7 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: Partial<MediaImageProps> = {
+    const props: MediaImageProps = {
       ...defaultProps,
       context,
     };
@@ -122,7 +122,7 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: Partial<MediaImageProps> = {
+    const props: MediaImageProps = {
       ...defaultProps,
       context,
     };
@@ -154,7 +154,7 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: Partial<MediaImageProps> = {
+    const props: MediaImageProps = {
       ...defaultProps,
       context,
     };
@@ -209,7 +209,7 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: Partial<MediaImageProps> = {
+    const props: MediaImageProps = {
       ...defaultProps,
       context,
     };
@@ -235,7 +235,7 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: Partial<MediaImageProps> = {
+    const props: MediaImageProps = {
       ...defaultProps,
       context,
     };
