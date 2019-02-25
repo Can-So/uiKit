@@ -340,6 +340,7 @@ export default class Comment extends React.Component<Props, State> {
       allowFeedbackAndHelpButtons,
       onEditorClose,
       onEditorOpen,
+      portal,
     } = this.props;
     const { isEditing } = this.state;
 
@@ -372,6 +373,7 @@ export default class Comment extends React.Component<Props, State> {
         document={comment.document.adf}
         dataProviders={dataProviders}
         disableHeadingIDs={true}
+        portal={portal}
       />
     );
   }
