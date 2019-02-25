@@ -11,6 +11,11 @@ export default function() {
       backgroundColor = colors['sky-50'];
       borderColor = colors['sky-100'];
     }
+
+    if (props.isHovered) {
+      backgroundColor = colors['sky-300'];
+      borderColor = colors['sky-200'];
+    }
     return {
       container: {
         borderColor,
