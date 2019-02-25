@@ -59,6 +59,7 @@
     "@atlaskit/theme": "^7.0.1",
     "@atlaskit/tooltip": "^12.1.15",
     "@atlaskit/util-service-support": "^3.0.5",
+    "@sentry/browser": "^4.6.3",
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-history": "^1.0.1",
     "@types/prosemirror-inputrules": "^1.0.2",
