@@ -5,8 +5,7 @@ import {
   clickFirstCell,
 } from '../../__helpers/page-objects/_table';
 
-// TODO: Delete in table, seems to have an issue: https://product-fabric.atlassian.net/browse/ED-6341
-describe.skip('Delete in table:', () => {
+describe('Delete in table:', () => {
   let page;
 
   const clickandSnapshot = async (page, selector) => {

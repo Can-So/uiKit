@@ -57,6 +57,7 @@ export const insertTable = async page => {
 export const clickFirstCell = async page => {
   await page.waitForSelector(tableSelectors.topLeftCell);
   await page.click(tableSelectors.topLeftCell);
+  await page.waitForSelector(tableSelectors.removeTable);
 };
 
 // table floating toolbar interactions
