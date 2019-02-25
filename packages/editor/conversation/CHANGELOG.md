@@ -1,5 +1,10 @@
 # @atlaskit/conversation
 
+## 12.1.0
+- [minor] [b9a541a266](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9a541a266):
+
+  - Add ability to pass down a portal prop to the renderer
+
 ## 12.0.2
 - [patch] [a3875fd978](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3875fd978):
 
