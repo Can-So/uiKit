@@ -384,7 +384,7 @@ export class Card extends Component<CardProps, CardState> {
       };
     }
 
-    // We want to make sure that the card identifier it's in the list
+    // we want to ensure the card identifier is in the list
     const { list } = mediaViewerDataSource;
     if (
       list &&
