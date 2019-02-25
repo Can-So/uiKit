@@ -17,6 +17,7 @@ describe('Snapshot Test', () => {
     // @ts-ignore
     page = global.page;
     await page.goto(url);
+    page.waitForSelector('div[data-emoji-picker-container="true"]');
   });
 
   it(`should render emoji picker`, async () => {

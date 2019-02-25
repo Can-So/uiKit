@@ -216,6 +216,10 @@ export const snapshot = async (
     });
   } else {
     // @ts-ignore
-    expect(image).toMatchProdImageSnapshot();
+    expect(image).toMatchProdImageSnapshot({
+      failureThreshold: `0.02`,
+      // add default threshold of 2
+      failureThresholdType: 'percent',
+    });
   }
 };

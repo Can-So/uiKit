@@ -5,12 +5,15 @@ import {
   clickFirstCell,
 } from '../../__helpers/page-objects/_table';
 
+import { animationFrame } from '../../__helpers/page-objects/_editor';
+
 describe('Delete in table:', () => {
   let page;
 
   const clickandSnapshot = async (page, selector) => {
     await page.click(selector);
     await page.waitForSelector(tableSelectors.tableTd);
+    await animationFrame(page);
     await snapshot(page);
   };
   describe(`Full page`, () => {
