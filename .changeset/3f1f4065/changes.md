@@ -1,0 +1,1 @@
+- ED-6228 Enable stricter types for quick-search package
