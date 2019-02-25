@@ -2,7 +2,6 @@ import {
   MediaItemType,
   FileDetails,
   ExternalImageIdentifier,
-  FileIdentifier,
 } from '@atlaskit/media-core';
 import {
   defaultCollectionName as collectionName,
@@ -13,7 +12,7 @@ const fileType: MediaItemType = 'file';
 
 // === FILE ===
 
-export const genericFileId: FileIdentifier = {
+export const genericFileId = {
   id: '2dfcc12d-04d7-46e7-9fdf-3715ff00ba40',
   mediaItemType: fileType,
   collectionName,

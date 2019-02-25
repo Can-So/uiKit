@@ -3,7 +3,6 @@ import { Component } from 'react';
 import {
   Context,
   FileDetails,
-  MediaItemType,
   Identifier,
   FileIdentifier,
   isPreviewableType,
@@ -313,11 +312,9 @@ export class Card extends Component<CardProps, CardState> {
     if (onClick) {
       onClick(result, analyticsEvent);
     }
-
     if (!mediaItemDetails) {
       return;
     }
-
     const { mediaType } = mediaItemDetails as FileDetails;
     if (useInlinePlayer && mediaType === 'video') {
       this.setState({
@@ -328,6 +325,7 @@ export class Card extends Component<CardProps, CardState> {
         id: await identifier.id,
         mediaItemType: 'file',
         collectionName: identifier.collectionName,
+        occurrenceKey: identifier.occurrenceKey,
       };
       this.setState({
         mediaViewerSelectedItem,
@@ -369,7 +367,7 @@ export class Card extends Component<CardProps, CardState> {
     });
   };
 
-  // TODO: provide default value if no collectioName or list
+  // returns a valid MV data source including current the card identifier
   getMediaViewerDataSource = (): MediaViewerDataSource => {
     const { mediaViewerDataSource } = this.props;
     const { mediaViewerSelectedItem } = this.state;
@@ -386,7 +384,7 @@ export class Card extends Component<CardProps, CardState> {
       };
     }
 
-    // TODO: do we need this at all?
+    // We want to make sure that the card identifier it's in the list
     const { list } = mediaViewerDataSource;
     if (
       list &&
@@ -417,7 +415,7 @@ export class Card extends Component<CardProps, CardState> {
 
     const { collectionName = '' } = identifier;
     const dataSource = this.getMediaViewerDataSource();
-    console.log(dataSource, mediaViewerSelectedItem);
+
     return (
       <MediaViewer
         collectionName={collectionName}

@@ -55,6 +55,15 @@ class Example extends Component<{}, {}> {
           />
         </MediaViewerExampleColumn>
         <MediaViewerExampleColumn>
+          <h3>shouldOpenMediaViewer + list without card identifier</h3>
+          <Card
+            context={context}
+            identifier={imageFileId}
+            shouldOpenMediaViewer={shouldOpenMediaViewer}
+            mediaViewerDataSource={{ list: [gifFileId] }}
+          />
+        </MediaViewerExampleColumn>
+        <MediaViewerExampleColumn>
           <h3>useInlinePlayer=true</h3>
           <Card
             context={context}
