@@ -859,7 +859,7 @@ describe('Card', () => {
       });
     });
 
-    it('should not open MV if useInlinePlayer=true and identifier is video type', async () => {
+    it('should not render MV if useInlinePlayer=true and identifier is video type', async () => {
       const videoIdentifier: FileIdentifier = {
         id: '1',
         mediaItemType: 'file',
