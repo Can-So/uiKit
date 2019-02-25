@@ -10,7 +10,6 @@ import {
   errorFileId,
   createStorybookContext,
 } from '@atlaskit/media-test-helpers';
-import { FileIdentifier } from '@atlaskit/media-core';
 import Spinner from '@atlaskit/spinner';
 import Select from '@atlaskit/select';
 import { MediaImage } from '../src';

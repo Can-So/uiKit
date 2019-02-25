@@ -15,7 +15,7 @@ module.exports = {
   },
   'packages/media/media-image/src': {
     statements: 100,
-    branches: 100,
+    branches: 90,
     functions: 100,
     lines: 100,
   },
