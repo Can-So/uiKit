@@ -53,6 +53,8 @@ export interface Props extends SharedProps {
     [key: string]: any;
   };
   createAnalyticsEvent: createAnalyticsEvent;
+
+  portal?: HTMLElement;
 }
 
 export interface State {
@@ -112,6 +114,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
       placeholder,
       disableScrollTo,
       allowFeedbackAndHelpButtons,
+      portal,
     } = this.props;
 
     if (!conversation) {
@@ -146,6 +149,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
         disableScrollTo={disableScrollTo}
         sendAnalyticsEvent={this.sendEditorAnalyticsEvent}
         allowFeedbackAndHelpButtons={allowFeedbackAndHelpButtons}
+        portal={portal}
       />
     ));
   }

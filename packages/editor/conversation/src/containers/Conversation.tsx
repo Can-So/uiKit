@@ -169,6 +169,8 @@ export interface ContainerProps {
   placeholder?: string;
   disableScrollTo?: boolean;
   allowFeedbackAndHelpButtons?: boolean;
+
+  portal?: HTMLElement;
 }
 
 class ConversationContainer extends React.Component<ContainerProps, any> {
