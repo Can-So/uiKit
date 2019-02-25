@@ -45,7 +45,7 @@ module.exports = {
   },
   'packages/media/media-store/src': {
     statements: 91,
-    branches: 80,
+    branches: 79,
     functions: 89,
     lines: 91,
   },

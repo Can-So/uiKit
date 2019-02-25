@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, FileIdentifier, FileState, MediaFileArtifacts } from '@atlaskit/media-core';
+import {
+  Context,
+  FileIdentifier,
+  FileState,
+  MediaFileArtifacts,
+} from '@atlaskit/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { InlinePlayerWrapper } from './styled';

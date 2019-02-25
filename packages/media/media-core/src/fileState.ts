@@ -1,5 +1,4 @@
 import {
-  MediaFileProcessingStatus,
   MediaFile,
   MediaStoreResponse,
   MediaType,
@@ -101,21 +100,6 @@ export const isImageRepresentationReady = (fileState: FileState): boolean => {
       return !!fileState.representations.image;
     default:
       return false;
-  }
-};
-
-export const apiProcessingStatusToFileStatus = (
-  fileStatus?: MediaFileProcessingStatus,
-): FileStatus => {
-  switch (fileStatus) {
-    case 'pending':
-      return 'processing';
-    case 'succeeded':
-      return 'processed';
-    case 'failed':
-      return 'failed-processing';
-    case undefined:
-      return 'processing';
   }
 };
 
