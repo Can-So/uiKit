@@ -363,7 +363,7 @@ export default class GlobalNavigation extends Component<
     };
   };
 
-  triggerXFlow = (...triggerXFlowProps: any) => {
+  triggerXFlow = (...triggerXFlowProps: [string, string]) => {
     const { triggerXFlow } = this.props;
     this.setState({
       isAtlassianSwitcherDrawerOpen: false,

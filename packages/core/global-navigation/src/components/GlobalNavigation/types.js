@@ -162,7 +162,7 @@ export type GlobalNavigationProps = {
   /** The boolean that controls whether to display the Atlassian Switcher. */
   enableAtlassianSwitcher?: boolean,
   /** A callback used to trigger the product implementation of XFlow */
-  triggerXFlow?: ?() => void,
+  triggerXFlow?: ?(productKey: string, sourceComponent: string) => void,
 
   /** The text to display in the tooltip for the help item. */
   helpTooltip?: string,

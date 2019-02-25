@@ -31,7 +31,7 @@ import now from '../utils/performance-now';
 
 interface SwitcherProps {
   cloudId: string;
-  triggerXFlow: (productKey: string) => void;
+  triggerXFlow: (productKey: string, sourceComponent: string) => void;
   customLinks: ChildrenProps<CustomLinksProviderDataStructure>;
   suggestedProductLink: SuggestedProductLink;
   recentContainers: ChildrenProps<RecentContainersDataStructure>;
@@ -79,7 +79,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
   triggerXFlow = () => {
     const { triggerXFlow, suggestedProductLink } = this.props;
     if (suggestedProductLink) {
-      triggerXFlow(suggestedProductLink.key);
+      triggerXFlow(suggestedProductLink.key, 'atlassian-switcher');
     }
   };
 

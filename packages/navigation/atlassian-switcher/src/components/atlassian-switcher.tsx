@@ -5,7 +5,7 @@ import ConfluenceSwitcher from './confluence-switcher';
 interface AtlassianSwitcherProps {
   product: string;
   cloudId: string;
-  triggerXFlow: Function;
+  triggerXFlow: (productKey: string, sourceComponent: string) => void;
 }
 
 const AtlassianSwitcher = ({

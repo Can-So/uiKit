@@ -33,8 +33,10 @@ class JiraSwitcherExample extends Component {
     });
   };
 
-  onTriggerXFlow = (productKey: string) => {
-    console.log(`Triggering xflow for => ${productKey}`);
+  onTriggerXFlow = (productKey: string, sourceComponent: string) => {
+    console.log(
+      `Triggering xflow for => ${productKey} from ${sourceComponent}`,
+    );
   };
 
   render() {
