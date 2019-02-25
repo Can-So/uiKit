@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.0.5
+- [patch] [c5683f8422](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5683f8422):
+
+  - ED-4998 Fix highlighting and disabling of meatball menu items in different contexts
+
 ## 101.0.4
 - [patch] [bd0f7a69ac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bd0f7a69ac):
 
