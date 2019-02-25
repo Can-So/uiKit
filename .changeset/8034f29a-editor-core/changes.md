@@ -1,0 +1,1 @@
+- ED-6246 Add more metadata to Unsupported Node logging
