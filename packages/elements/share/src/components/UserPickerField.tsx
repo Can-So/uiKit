@@ -7,7 +7,7 @@ import UserPicker, {
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';
-import { FieldChildrenArgs, InvitationsCapabilitiesResponse } from '../types';
+import { ConfigResponse, FieldChildrenArgs } from '../types';
 import { showInviteWarning } from './utils';
 
 export const REQUIRED = 'REQUIRED';
@@ -17,7 +17,7 @@ const validate = (value: OptionData[]) =>
 export type Props = {
   loadOptions?: LoadOptions;
   defaultValue?: OptionData[];
-  capabilities?: InvitationsCapabilitiesResponse;
+  config?: ConfigResponse;
   capabilitiesInfoMessage?: React.ReactNode;
 };
 
@@ -40,7 +40,7 @@ export const UserPickerField: React.StatelessComponent<Props> = props => (
             />
           )}
         </FormattedMessage>
-        {showInviteWarning(props.capabilities, fieldProps.value) && (
+        {showInviteWarning(props.config, fieldProps.value) && (
           <HelperMessage>
             {props.capabilitiesInfoMessage || (
               <FormattedMessage {...messages.capabilitiesInfoMessage} />

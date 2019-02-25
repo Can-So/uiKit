@@ -1,13 +1,17 @@
 import { Email, isEmail, OptionData, Value } from '@atlaskit/user-picker';
-import { InvitationsCapabilitiesResponse, User } from '../types';
-import { UserWithEmail } from '../types/User';
+import {
+  ConfigResponse,
+  ConfigResponseMode,
+  User,
+  UserWithEmail,
+} from '../types';
 
 const cannotInvite = (
-  capabilities: InvitationsCapabilitiesResponse,
+  config: ConfigResponse,
   userDomains: Set<string>,
 ): boolean => {
-  if (capabilities.directInvite.domains) {
-    const allowedDomains = capabilities.directInvite.domains;
+  const { allowedDomains } = config;
+  if (allowedDomains) {
     for (const domain of userDomains) {
       if (allowedDomains.indexOf(domain) === -1) {
         return true;
@@ -23,35 +27,37 @@ const removeDuplicates = (values: Set<string>, nextValue: string) =>
   values.add(nextValue);
 
 const checkDomains = (
-  capabilities: InvitationsCapabilitiesResponse,
+  config: ConfigResponse,
   selectedUsers: Email[],
 ): boolean => {
   const usersDomain = selectedUsers
     .map(extractDomain)
     .reduce(removeDuplicates, new Set<string>());
-  return cannotInvite(capabilities, usersDomain);
+  return cannotInvite(config, usersDomain);
 };
 
 /**
  * Decides if the warn message should be shown in the share form.
  *
- * @param capabilities capabilities meta data
+ * @param config share configuration object
  * @param selectedUsers selected users in the user picker
  */
 export const showInviteWarning = (
-  capabilities: InvitationsCapabilitiesResponse | undefined,
+  config: ConfigResponse | undefined,
   selectedUsers: Value,
 ): boolean => {
-  if (capabilities && selectedUsers) {
-    const { mode } = capabilities.directInvite;
+  if (config && selectedUsers) {
+    const mode: ConfigResponseMode = config.mode;
     const selectedEmails: Email[] = Array.isArray(selectedUsers)
       ? selectedUsers.filter(isEmail)
       : [selectedUsers].filter(isEmail);
     return (
       selectedEmails.length > 0 &&
-      (mode === 'NONE' ||
-        (mode === 'DOMAIN_RESTRICTED' &&
-          checkDomains(capabilities, selectedEmails)))
+      (mode === 'EXISTING_USERS_ONLY' ||
+        mode === 'INVITE_NEEDS_APPROVAL' ||
+        ((mode === 'ONLY_DOMAIN_BASED_INVITE' ||
+          mode === 'DOMAIN_BASED_INVITE') &&
+          checkDomains(config, selectedEmails)))
     );
   }
   return false;

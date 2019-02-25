@@ -11,10 +11,7 @@ import { ShareForm } from '../../../components/ShareForm';
 import { ShareHeader } from '../../../components/ShareHeader';
 import { UserPickerField } from '../../../components/UserPickerField';
 import { messages } from '../../../i18n';
-import {
-  DialogContentState,
-  InvitationsCapabilitiesResponse,
-} from '../../../types';
+import { ConfigResponse, DialogContentState } from '../../../types';
 import { renderProp } from '../_testUtils';
 
 describe('ShareForm', () => {
@@ -22,17 +19,14 @@ describe('ShareForm', () => {
     const mockLink = 'link';
     const loadOptions = jest.fn();
     const onShareClick = jest.fn();
-    const capabilities: InvitationsCapabilitiesResponse = {
-      directInvite: { mode: 'NONE', permittedResources: [] },
-      invitePendingApproval: { mode: 'NONE', permittedResources: [] },
-    };
+    const config: ConfigResponse = { mode: 'EXISTING_USERS_ONLY' };
     const component = shallow(
       <ShareForm
         copyLink={mockLink}
         loadOptions={loadOptions}
         onShareClick={onShareClick}
         title="some title"
-        capabilities={capabilities}
+        config={config}
       />,
     );
 
@@ -53,7 +47,7 @@ describe('ShareForm', () => {
     expect(userPickerField).toHaveLength(1);
     expect(userPickerField.props()).toMatchObject({
       loadOptions,
-      capabilities,
+      config,
     });
     expect(formSection.find(CommentField)).toHaveLength(1);
 

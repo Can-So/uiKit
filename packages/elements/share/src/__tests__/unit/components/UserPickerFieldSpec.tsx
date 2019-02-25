@@ -14,7 +14,7 @@ import {
 } from '../../../components/UserPickerField';
 import { showInviteWarning } from '../../../components/utils';
 import { messages } from '../../../i18n';
-import { InvitationsCapabilitiesResponse } from '../../../types';
+import { ConfigResponse } from '../../../types';
 import { renderProp } from '../_testUtils';
 
 describe('UserPickerField', () => {
@@ -113,16 +113,7 @@ describe('UserPickerField', () => {
   describe('invite warning', () => {
     const setUpInviteWarningTest = () => {
       const loadOptions = jest.fn();
-      const capabilities: InvitationsCapabilitiesResponse = {
-        directInvite: {
-          mode: 'NONE',
-          permittedResources: [],
-        },
-        invitePendingApproval: {
-          mode: 'NONE',
-          permittedResources: [],
-        },
-      };
+      const config: ConfigResponse = { mode: 'EXISTING_USERS_ONLY' };
       const fieldProps = {
         onChange: jest.fn(),
         value: [],
@@ -130,7 +121,7 @@ describe('UserPickerField', () => {
       const component = renderUserPicker(
         {
           loadOptions,
-          capabilities,
+          config,
         },
         {
           fieldProps,
@@ -139,20 +130,17 @@ describe('UserPickerField', () => {
       );
       return {
         loadOptions,
-        capabilities,
+        config,
         fieldProps,
         component,
       };
     };
 
     it('should call showInviteWarning function', () => {
-      const { fieldProps, capabilities } = setUpInviteWarningTest();
+      const { fieldProps, config } = setUpInviteWarningTest();
 
       expect(showInviteWarning).toHaveBeenCalledTimes(1);
-      expect(showInviteWarning).toHaveBeenCalledWith(
-        capabilities,
-        fieldProps.value,
-      );
+      expect(showInviteWarning).toHaveBeenCalledWith(config, fieldProps.value);
     });
 
     it('should not display warning message if showInviteWarning returns false', () => {
