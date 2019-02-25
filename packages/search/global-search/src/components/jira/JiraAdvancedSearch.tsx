@@ -15,12 +15,14 @@ import {
   JiraEntityTypes,
   ADVANCED_JIRA_SEARCH_RESULT_ID,
 } from '../SearchResultsUtil';
+import { CancelableMouseEvent } from './JiraQuickSearchContainer';
 
 export interface Props {
   query: string;
   showKeyboardLozenge?: boolean;
   showSearchIcon?: boolean;
   analyticsData?: object;
+  onClick?: (e: CancelableMouseEvent, entity: JiraEntityTypes) => void;
 }
 
 interface State {
@@ -68,7 +70,7 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
   renderDropdownItems = () =>
     itemI18nKeySuffix.map(item => (
       <DropdownItem
-        href={getJiraAdvancedSearchUrl(item, this.props.query)}
+        //href={getJiraAdvancedSearchUrl(item, this.props.query)}
         onClick={() => (this.selectedItem = item)}
         key={item}
       >
@@ -80,10 +82,15 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
   enrichedAnalyticsData?: object;
 
   render() {
-    const { query, showKeyboardLozenge, showSearchIcon } = this.props;
+    const { query, showKeyboardLozenge, showSearchIcon, onClick } = this.props;
 
     return (
       <AdvancedSearchResult
+        onClick={e => {
+          if (onClick) {
+            onClick(e.event, this.state.entity);
+          }
+        }}
         href={getJiraAdvancedSearchUrl(this.state.entity, query)}
         key={`search-jira-${Date.now()}`}
         resultId={ADVANCED_JIRA_SEARCH_RESULT_ID}
@@ -95,8 +102,9 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
             <span
               onClick={e => {
                 if (this.selectedItem) {
+                  const entity = this.selectedItem;
                   this.setState({
-                    entity: this.selectedItem,
+                    entity,
                   });
                   this.enrichedAnalyticsData = {
                     ...this.props.analyticsData,

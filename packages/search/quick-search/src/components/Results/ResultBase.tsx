@@ -85,7 +85,7 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
     }
 
     if (onClick) {
-      onClick({ resultId, type });
+      onClick({ resultId, type, event: e });
     }
   };
 

@@ -7,6 +7,7 @@ export type SelectedResultId = ResultId | null;
 export type ResultData = {
   resultId: ResultId;
   type: string;
+  event: MouseEvent;
 };
 
 export type CommonResultProps = {

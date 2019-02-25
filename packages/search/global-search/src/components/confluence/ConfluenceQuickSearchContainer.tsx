@@ -20,6 +20,7 @@ import {
   LinkComponent,
   ReferralContextIdentifiers,
   Logger,
+  AdvancedSearchEvent,
 } from '../GlobalQuickSearchWrapper';
 import {
   redirectToConfluenceAdvancedSearch,
@@ -51,6 +52,7 @@ export interface Props {
   useQuickNavForPeopleResults?: boolean;
   useCPUSForPeopleResults?: boolean;
   logger: Logger;
+  onAdvancedSearch?: (e: AdvancedSearchEvent) => void;
 }
 
 const LOGGER_NAME = 'AK.GlobalSearch.ConfluenceQuickSearchContainer';

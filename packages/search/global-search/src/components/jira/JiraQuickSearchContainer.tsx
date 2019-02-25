@@ -17,6 +17,7 @@ import {
   LinkComponent,
   ReferralContextIdentifiers,
   Logger,
+  AdvancedSearchEvent,
 } from '../GlobalQuickSearchWrapper';
 import QuickSearchContainer from '../common/QuickSearchContainer';
 import { messages } from '../../messages';
@@ -70,6 +71,7 @@ export interface Props {
   disableJiraPreQueryPeopleSearch?: boolean;
   logger: Logger;
   isSendSearchTermsEnabled?: boolean;
+  onAdvancedSearch?: (e: AdvancedSearchEvent) => void;
 }
 
 const contentTypeToSection = {
@@ -88,6 +90,10 @@ export interface State {
 
 const LOGGER_NAME = 'AK.GlobalSearch.JiraQuickSearchContainer';
 
+type CancelableMouseEvent = {
+  stopPropagation: () => void;
+  preventDefault: () => void;
+};
 /**
  * Container/Stateful Component that handles the data fetching and state handling when the user interacts with Search.
  */
@@ -109,6 +115,26 @@ export class JiraQuickSearchContainer extends React.Component<
     redirectToJiraAdvancedSearch(this.state.selectedAdvancedSearchType, query);
   };
 
+  onAdvancedSearch = (
+    e: CancelableMouseEvent,
+    entity: JiraEntityTypes,
+    query: String,
+  ) => {
+    if (this.props.onAdvancedSearch) {
+      let preventEventDefault = false;
+      this.props.onAdvancedSearch({
+        preventDefault: () => (preventEventDefault = true),
+        query, // query entered by the user
+        category: entity,
+      });
+
+      if (preventEventDefault) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  };
+
   getSearchResultsComponent = ({
     retrySearch,
     latestSearchQuery,
@@ -121,6 +147,7 @@ export class JiraQuickSearchContainer extends React.Component<
   }) => {
     const query = latestSearchQuery;
     const isPreQuery = !query; // it's true if the query is empty
+    const { referralContextIdentifiers } = this.props;
     return (
       <SearchResultsComponent
         query={query}
@@ -130,7 +157,7 @@ export class JiraQuickSearchContainer extends React.Component<
         keepPreQueryState={keepPreQueryState}
         searchSessionId={searchSessionId}
         {...this.screenCounters}
-        referralContextIdentifiers={this.props.referralContextIdentifiers}
+        referralContextIdentifiers={referralContextIdentifiers}
         renderNoRecentActivity={() => (
           <>
             <FormattedHTMLMessage {...messages.jira_no_recent_activity_body} />
@@ -138,6 +165,9 @@ export class JiraQuickSearchContainer extends React.Component<
               <JiraAdvancedSearch
                 query={query}
                 analyticsData={{ resultsCount: 0, wasOnNoResultsScreen: true }}
+                onClick={(mouseEvent, entity) =>
+                  this.onAdvancedSearch(mouseEvent, entity, query)
+                }
               />
             </NoResultsAdvancedSearchContainer>
           </>
@@ -149,12 +179,19 @@ export class JiraQuickSearchContainer extends React.Component<
               query={query}
               showKeyboardLozenge={!isPreQuery && !keepPreQueryState}
               showSearchIcon
+              onClick={(mouseEvent, entity) =>
+                this.onAdvancedSearch(mouseEvent, entity, query)
+              }
             />
           </StickyFooter>
         )}
         renderBeforePreQueryState={() => (
           <BeforePreQueryStateContainer>
-            <AdvancedIssueSearchLink />
+            <AdvancedIssueSearchLink
+              onClick={({ event }) =>
+                this.onAdvancedSearch(event, JiraEntityTypes.Issues, query)
+              }
+            />
           </BeforePreQueryStateContainer>
         )}
         getPreQueryGroups={() => mapRecentResultsToUIGroups(recentItems)}

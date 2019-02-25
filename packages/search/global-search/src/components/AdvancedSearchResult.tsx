@@ -24,6 +24,12 @@ export default class AdvancedSearchResult extends React.Component<Props> {
 
   render() {
     const { showKeyboardLozenge, ...baseProps } = this.props;
-    return <ResultBase {...baseProps} elemAfter={this.getElemAfter()} />;
+    return (
+      <ResultBase
+        {...baseProps}
+        elemAfter={this.getElemAfter()}
+        onClick={this.props.onClick}
+      />
+    );
   }
 }

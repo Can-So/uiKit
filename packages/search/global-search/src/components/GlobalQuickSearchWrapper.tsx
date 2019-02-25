@@ -30,6 +30,11 @@ export type ReferralContextIdentifiers = {
   currentContentId: string;
 };
 
+export type AdvancedSearchEvent = {
+  preventDefault: Function;
+  query: String; // query entered by the user
+  category: String;
+};
 export interface Props {
   /**
    * The cloudId of the site the component is embedded in.
@@ -107,6 +112,11 @@ export interface Props {
    * logger with 3 levels error, warn and info
    */
   logger?: Logger;
+
+  /**
+   * call back, to be called when advanced search is clicked
+   */
+  onAdvancedSearch?: (e: AdvancedSearchEvent) => void;
 }
 
 /**
@@ -185,6 +195,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
       useCPUSForPeopleResults,
       logger,
       disableJiraPreQueryPeopleSearch,
+      onAdvancedSearch,
     } = this.props;
 
     return (
@@ -198,6 +209,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
           useCPUSForPeopleResults={useCPUSForPeopleResults}
           disableJiraPreQueryPeopleSearch={disableJiraPreQueryPeopleSearch}
           logger={logger}
+          onAdvancedSearch={onAdvancedSearch}
         />
       </MessagesIntlProvider>
     );
