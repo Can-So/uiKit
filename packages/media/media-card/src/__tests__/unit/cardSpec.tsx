@@ -858,5 +858,27 @@ describe('Card', () => {
         list: [fileIdentifier, otherIdentifier],
       });
     });
+
+    it('should not open MV if useInlinePlayer=true and identifier is video type', async () => {
+      const videoIdentifier: FileIdentifier = {
+        id: '1',
+        mediaItemType: 'file',
+      };
+      const { component } = setup(undefined, {
+        useInlinePlayer: true,
+        shouldOpenMediaViewer: true,
+        identifier: videoIdentifier,
+      });
+      const instance = component.instance() as Card;
+
+      instance.onClick({
+        mediaItemDetails: {
+          mediaType: 'video',
+        },
+      } as any);
+      await nextTick();
+
+      expect(component.find(MediaViewer)).toHaveLength(0);
+    });
   });
 });
