@@ -24,6 +24,7 @@ export function urlLinkResolver(
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
     TokenType.LINK_TEXT,
+    TokenType.ISSUE_KEY,
   ];
 
   const rawContent = parseString({

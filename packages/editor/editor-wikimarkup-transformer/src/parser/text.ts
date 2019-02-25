@@ -4,6 +4,7 @@ import {
   parseOtherKeyword,
   parseLeadingKeyword,
   parseMacroKeyword,
+  parseIssueKeyword,
 } from './tokenize/keyword';
 import { parseToken, TokenType, Context } from './tokenize';
 import { parseWhitespaceOnly } from './tokenize/whitespace';
@@ -52,7 +53,8 @@ export function parseString({
         const match =
           parseLeadingKeyword(substring) ||
           parseMacroKeyword(substring) ||
-          parseOtherKeyword(substring);
+          parseOtherKeyword(substring) ||
+          parseIssueKeyword(substring, context.issueKeyRegex);
 
         if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
           tokenType = match.type;
@@ -81,7 +83,10 @@ export function parseString({
         if (buffer.endsWith('{')) {
           match = parseOtherKeyword(substring);
         } else {
-          match = parseMacroKeyword(substring) || parseOtherKeyword(substring);
+          match =
+            parseMacroKeyword(substring) ||
+            parseOtherKeyword(substring) ||
+            parseIssueKeyword(substring, context.issueKeyRegex);
         }
 
         if (match && ignoreTokenTypes.indexOf(match.type) === -1) {
@@ -100,13 +105,7 @@ export function parseString({
       }
 
       case processState.TOKEN: {
-        const token = parseToken(
-          input,
-          tokenType,
-          index,
-          schema,
-          context.tokenErrCallback,
-        );
+        const token = parseToken(input, tokenType, index, schema, context);
         if (token.type === 'text') {
           buffer += token.text;
         } else if (token.type === 'pmnode') {

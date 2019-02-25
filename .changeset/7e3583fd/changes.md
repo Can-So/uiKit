@@ -1,0 +1,1 @@
+- Add issue key token to convert into inline cards (Jira Smart Cards)

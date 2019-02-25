@@ -10,12 +10,18 @@ describe('ADF => WikiMarkup => ADF - Inline Card', () => {
     const node = doc(
       p(
         inlineCard({
-          url: 'https://product-fabric.atlassian.net/browse/EX-522',
+          url: 'https://product-fabric.atlassian.net/browse/EX-522#icft=EX-522',
         })(),
       ),
     )(defaultSchema);
     const wiki = transformer.encode(node);
-    const adf = transformer.parse(wiki).toJSON();
+    const context: any = {
+      inlineCardConversion: {
+        'EX-522': 'https://product-fabric.atlassian.net/browse/EX-522',
+      },
+    };
+    const adf = transformer.parse(wiki, context).toJSON();
+
     expect(adf).toEqual(node.toJSON());
   });
 });
