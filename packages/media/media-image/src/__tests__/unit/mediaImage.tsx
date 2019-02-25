@@ -33,7 +33,7 @@ const shallowRender = async (props: MediaImageProps) => {
 };
 
 describe('<MediaImage />', () => {
-  let defaultProps: MediaImageProps;
+  let defaultProps: Partial<MediaImageProps>;
   const getFileState = jest.fn();
   const getImage = jest.fn();
   beforeEach(() => {
@@ -82,11 +82,11 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: MediaImageProps = {
+    const props = {
       ...defaultProps,
       context,
     };
-    const wrapper = await shallowRender(props);
+    const wrapper = await shallowRender(props as MediaImageProps);
 
     expect(wrapper.find('div').text()).toEqual('error');
   });
@@ -103,11 +103,11 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: MediaImageProps = {
+    const props = {
       ...defaultProps,
       context,
     };
-    const wrapper = await shallowRender(props);
+    const wrapper = await shallowRender(props as MediaImageProps);
 
     expect(wrapper.find('div').text()).toEqual('error');
   });
@@ -122,17 +122,17 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: MediaImageProps = {
+    const props = {
       ...defaultProps,
       context,
     };
-    const wrapper = await shallowRender(props);
+    const wrapper = await shallowRender(props as MediaImageProps);
 
     expect(wrapper.find('div').text()).toEqual('error');
   });
 
   it('should remove subscription if the component is unmounted', async () => {
-    const wrapper = await shallowRender(defaultProps);
+    const wrapper = await shallowRender(defaultProps as MediaImageProps);
     const instance = wrapper.instance() as MediaImage;
     jest.spyOn(instance, 'unsubscribe');
 
@@ -154,17 +154,17 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: MediaImageProps = {
+    const props = {
       ...defaultProps,
       context,
     };
-    const wrapper = await shallowRender(props);
+    const wrapper = await shallowRender(props as MediaImageProps);
 
     expect(wrapper.find('div').text()).toEqual('loading');
   });
 
   it('should NOT trigger subscribe if new dimension is smaller than the current used', async () => {
-    const wrapper = await shallowRender(defaultProps);
+    const wrapper = await shallowRender(defaultProps as MediaImageProps);
     expect(getFileState).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({ apiConfig: { width: 90, heigth: 90 } });
@@ -174,7 +174,7 @@ describe('<MediaImage />', () => {
   });
 
   it('should NOT trigger subscribe if new dimension is smaller than the current used', async () => {
-    const wrapper = await shallowRender(defaultProps);
+    const wrapper = await shallowRender(defaultProps as MediaImageProps);
     expect(getFileState).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({ identifier: defaultProps.identifier });
@@ -184,7 +184,7 @@ describe('<MediaImage />', () => {
   });
 
   it('should trigger subscribe if new dimension is smaller than the current used', async () => {
-    const wrapper = await shallowRender(defaultProps);
+    const wrapper = await shallowRender(defaultProps as MediaImageProps);
     expect(getFileState).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({ apiConfig: { width: 110, heigth: 110 } });
@@ -209,11 +209,11 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: MediaImageProps = {
+    const props = {
       ...defaultProps,
       context,
     };
-    const wrapper = await shallowRender(props);
+    const wrapper = await shallowRender(props as MediaImageProps);
 
     expect(getImage).toHaveBeenCalledTimes(0);
     expect(wrapper.find('img').props().src).toEqual(img);
@@ -235,11 +235,11 @@ describe('<MediaImage />', () => {
       getImage,
     };
 
-    const props: MediaImageProps = {
+    const props = {
       ...defaultProps,
       context,
     };
-    const wrapper = await shallowRender(props);
+    const wrapper = await shallowRender(props as MediaImageProps);
 
     expect(getImage).toHaveBeenCalledTimes(1);
     expect(wrapper.find('img').props().src).toEqual(img);
