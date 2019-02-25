@@ -15,6 +15,7 @@ import {
   randomId,
   br,
   code_block,
+  underline,
 } from '@atlaskit/editor-test-helpers';
 import {
   toggleOrderedList,
@@ -676,6 +677,18 @@ describe('lists', () => {
       it('should convert selection to list when there is an empty paragraph between non empty two', () => {
         const expectedOutput = doc(ul(li(p('One')), li(p()), li(p('Three'))));
         const { editorView } = editor(doc(p('{<}One'), p(), p('Three{>}')));
+
+        toggleBulletList(editorView);
+        expect(editorView.state.doc).toEqualDocument(expectedOutput);
+      });
+
+      it('should convert selection to a list when it is a paragraph with supported marks', () => {
+        const expectedOutput = doc(
+          ul(li(p('One')), li(p(underline('Two'))), li(p('Three'))),
+        );
+        const { editorView } = editor(
+          doc(p('{<}One'), p(underline('Two')), p('Three{>}')),
+        );
 
         toggleBulletList(editorView);
         expect(editorView.state.doc).toEqualDocument(expectedOutput);

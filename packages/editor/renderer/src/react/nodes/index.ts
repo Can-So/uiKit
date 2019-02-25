@@ -97,8 +97,6 @@ const Mention = Loadable({
   loading: () => null,
 });
 
-import { bigEmojiHeight } from '../../utils';
-
 export const nodeToReact = {
   blockquote: Blockquote,
   bulletList: BulletList,
@@ -239,11 +237,6 @@ const whitespaceRegex = /^\s*$/;
  * whose content satisfies the condition for an emoji block
  */
 export const isEmojiDoc = (doc: Fragment, props: any = {}): boolean => {
-  // Previously calculated to be true so pass prop down
-  // from paragraph node to emoji node
-  if (props.fitToHeight === bigEmojiHeight) {
-    return true;
-  }
   if (doc.childCount !== 1) {
     return false;
   }

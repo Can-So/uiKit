@@ -7,8 +7,9 @@ import { colors } from '@atlaskit/theme';
 import AkDrawer from '@atlaskit/drawer';
 import ConfluenceSwitcher from '../src/components/confluence-switcher';
 import { mockEndpoints } from './helpers/mock-endpoints';
+import { withAnalyticsLogger } from './helpers';
 
-export default class ConfluenceSwitcherExample extends Component {
+class ConfluenceSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -63,3 +64,5 @@ export default class ConfluenceSwitcherExample extends Component {
     );
   }
 }
+
+export default withAnalyticsLogger(ConfluenceSwitcherExample);

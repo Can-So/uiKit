@@ -88,7 +88,7 @@ describe('card', () => {
       ) as FloatingToolbarButton<Command>;
 
       visitButton.onClick(editorView.state, editorView.dispatch);
-      expect(open).toBeCalledWith('http://www.atlassian.com/');
+      expect(open).toBeCalledWith('http://www.atlassian.com/', '_self');
     });
 
     it('opens the url directly via data on an inline card', () => {
@@ -116,7 +116,7 @@ describe('card', () => {
       ) as FloatingToolbarButton<Command>;
 
       visitButton.onClick(editorView.state, editorView.dispatch);
-      expect(open).toBeCalledWith('http://www.atlassian.com/');
+      expect(open).toBeCalledWith('http://www.atlassian.com/', '_self');
     });
 
     it('deletes an inline card', () => {

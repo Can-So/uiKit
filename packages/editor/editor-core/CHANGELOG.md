@@ -1,5 +1,35 @@
 # @atlaskit/editor-core
 
+## 101.0.4
+- [patch] [bd0f7a69ac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bd0f7a69ac):
+
+  - ED-5964: Remove marks from inline nodes that are not text
+
+## 101.0.3
+- [patch] [7a7cd4c491](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a7cd4c491):
+
+  - make smart links open in same window.
+
+## 101.0.2
+- [patch] [6773e958ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6773e958ab):
+
+  - ED-5738: fix resize handles for merged cells
+
+## 101.0.1
+- [patch] [b832f0f57c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b832f0f57c):
+
+  - ED-6320: inserting links via CMD+K can also insert smart links
+
+## 101.0.0
+- [major] [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+
+  - ED-5766 Remove the deprecated 'message' appearance from Editor
+
+## 100.2.0
+- [minor] [af5572cf8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af5572cf8e):
+
+  - ED-6284 Filter out invalid transactions before they are applied and send an analytics event
+
 ## 100.1.0
 - [minor] [5dc1e046b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dc1e046b2):
 

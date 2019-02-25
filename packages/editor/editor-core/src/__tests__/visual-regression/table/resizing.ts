@@ -1,30 +1,36 @@
-import { initEditor, snapshot } from '../_utils';
-import { resizeColumn, insertColumn, deleteColumn } from './_table-utils';
+import { snapshot, initFullPageEditorWithAdf, Device } from '../_utils';
+import * as adf from '../common/__fixtures__/noData-adf.json';
+import {
+  deleteColumn,
+  resizeColumn,
+  insertTable,
+  grabResizeHandle,
+} from '../../__helpers/page-objects/_table';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
+import { animationFrame } from '../../__helpers/page-objects/_editor';
 
-describe.skip('Snapshot Test: table resizing', () => {
+describe('Snapshot Test: table resizing', () => {
   describe('Re-sizing', () => {
     let page;
     beforeEach(async () => {
       // @ts-ignore
       page = global.page;
-      await initEditor(page, 'table-flexi-resizing');
-      await page.setViewport({ width: 1280, height: 1024 });
-      // Focus the table
-      await page.click('table tr td');
+      await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI);
+      await insertTable(page);
     });
 
     it(`resize a column with content width`, async () => {
-      await snapshot(page);
       await resizeColumn(page, { colIdx: 2, amount: 123, row: 2 });
+      await animationFrame(page);
       await snapshot(page);
       await resizeColumn(page, { colIdx: 2, amount: -100, row: 2 });
+      await animationFrame(page);
       await snapshot(page);
     });
 
     it(`snaps back to layout width after column removal`, async () => {
-      await snapshot(page);
       await deleteColumn(page, 1);
+      await animationFrame(page);
       await snapshot(page);
     });
 
@@ -58,13 +64,23 @@ describe.skip('Snapshot Test: table resizing', () => {
         }
       }, ClassName);
 
-      await snapshot(page);
+      await snapshot(page, 0.01);
     });
+  });
+});
 
-    // TODO: This test can be merged (removed?) with tests in insert-delete when flexi resizing is the default (ED-5702)
-    it('Add a column', async () => {
-      await snapshot(page);
-      await insertColumn(page, 1);
+describe('Snapshot Test: table resize handle', () => {
+  let page;
+  beforeEach(async () => {
+    // @ts-ignore
+    page = global.page;
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
+    await insertTable(page);
+  });
+
+  describe('when table has merged cells', () => {
+    it(`should render resize handle spanning all rows`, async () => {
+      await grabResizeHandle(page, { colIdx: 2, row: 2 });
       await snapshot(page);
     });
   });

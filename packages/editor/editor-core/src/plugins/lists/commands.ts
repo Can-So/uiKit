@@ -26,7 +26,7 @@ import {
   isFirstChildOfParent,
   findCutBefore,
 } from '../../utils/commands';
-import { isRangeOfType, compose } from '../../utils';
+import { isRangeOfType, compose, sanitizeSelectionMarks } from '../../utils';
 import { liftFollowingList, liftSelectionList } from './transforms';
 import { Command } from '../../types';
 import { GapCursorSelection } from '../gap-cursor';
@@ -681,6 +681,14 @@ export function toggleListCommand(
         liftListItems()(state, dispatch);
         state = view.state;
       }
+
+      // Remove any invalid marks that are not supported
+      const tr = sanitizeSelectionMarks(state);
+      if (tr) {
+        dispatch!(tr);
+        state = view.state;
+      }
+
       return wrapInList(state.schema.nodes[listType])(state, dispatch);
     }
   };

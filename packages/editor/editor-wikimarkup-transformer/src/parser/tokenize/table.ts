@@ -230,7 +230,7 @@ export const table: TokenParser = ({ input, position, schema, context }) => {
           break;
         }
 
-        const token = parseToken(input, match.type, index, schema);
+        const token = parseToken(input, match.type, index, schema, context);
         buffer += input.substr(index, token.length);
         index += token.length;
         currentState = processState.BUFFER;

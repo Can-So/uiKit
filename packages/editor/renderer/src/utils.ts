@@ -4,8 +4,6 @@ import { Transformer, ADNode, EventHandlers } from '@atlaskit/editor-common';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { Node as PMNode } from 'prosemirror-model';
 
-export const bigEmojiHeight = 40;
-
 function createEncoder<T>(parser: Transformer<T>, encoder: Transformer<any>) {
   return (value: T) => encoder.encode(parser.parse(value));
 }

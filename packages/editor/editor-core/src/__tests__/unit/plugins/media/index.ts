@@ -156,51 +156,7 @@ describe('Media plugin', () => {
     pluginState.destroy();
   });
 
-  describe('when message editor', () => {
-    it('inserts media group', async () => {
-      const { editorView, pluginState } = editor(doc(p('')), {
-        appearance: 'message',
-      });
-      await mediaProvider;
-
-      pluginState.insertFiles([
-        {
-          id: 'foo',
-          fileMimeType: 'image/jpeg',
-          fileId: Promise.resolve('id'),
-        },
-        {
-          id: 'bar',
-          fileMimeType: 'image/png',
-          fileId: Promise.resolve('id2'),
-        },
-      ]);
-
-      expect(editorView.state.doc).toEqualDocument(
-        doc(
-          mediaGroup(
-            media({
-              id: 'foo',
-              __key: 'foo',
-              type: 'file',
-              collection: testCollectionName,
-              __fileMimeType: 'image/jpeg',
-            })(),
-            media({
-              id: 'bar',
-              __key: 'bar',
-              type: 'file',
-              collection: testCollectionName,
-              __fileMimeType: 'image/png',
-            })(),
-          ),
-          p(),
-        ),
-      );
-    });
-  });
-
-  describe('when non message editor', () => {
+  describe('editor', () => {
     describe('when all of the files are images', () => {
       it('inserts single medias', async () => {
         const { editorView, pluginState } = editor(doc(p('')));

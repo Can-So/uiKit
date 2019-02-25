@@ -59,13 +59,6 @@ describe('paste plugins', () => {
       ],
     });
 
-  const messageEditor = (doc: any) =>
-    createEditor({
-      doc,
-      editorPlugins: [mediaPlugin(), codeBlockPlugin()],
-      editorProps: { appearance: 'message', allowPanel: true },
-    });
-
   describe('handlePaste', () => {
     const mediaHtml = (fileMimeType: string) => `
       <div
@@ -75,30 +68,7 @@ describe('paste plugins', () => {
       title="Attachment"
       data-file-mime-type="${fileMimeType}"></div>`;
 
-    describe('message editor', () => {
-      it('pastes', () => {
-        const { editorView } = messageEditor(doc(p('{<>}')));
-        dispatchPasteEvent(editorView, {
-          html: mediaHtml('image/jpeg'),
-        });
-        expect(editorView.state.doc).toEqualDocument(
-          doc(
-            p(),
-            mediaGroup(
-              media({
-                id: 'af9310df-fee5-459a-a968-99062ecbb756',
-                type: 'file',
-                collection: 'MediaServicesSample',
-                __fileMimeType: 'image/jpeg',
-              })(),
-            ),
-            p(),
-          ),
-        );
-      });
-    });
-
-    describe('non message editor', () => {
+    describe('editor', () => {
       describe('when message is a media image node', () => {
         it('paste as mediaSingle', () => {
           const { editorView } = editor(doc(p('{<>}')));

@@ -149,3 +149,13 @@ export function parseLeadingKeyword(input: string) {
 
   return null;
 }
+
+export function parseIssueKeyword(input: string, issueKeyRegex?: RegExp) {
+  if (issueKeyRegex && issueKeyRegex.test(input)) {
+    return {
+      type: TokenType.ISSUE_KEY,
+    };
+  }
+
+  return null;
+}
