@@ -1,1 +1,0 @@
-- Don't auto scroll editor into view on reply

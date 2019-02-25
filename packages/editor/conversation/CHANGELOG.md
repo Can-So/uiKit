@@ -1,5 +1,10 @@
 # @atlaskit/conversation
 
+## 12.0.2
+- [patch] [a3875fd978](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3875fd978):
+
+  - Don't auto scroll editor into view on reply
+
 ## 12.0.1
 - Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
   - @atlaskit/comment@6.0.43
