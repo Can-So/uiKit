@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.1.0
+- [minor] [e142e966c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e142e966c2):
+
+  - ED-6238, ED-5684 Add Analytcs GAS v3 to clear formatting and fix clear formatting on heading elements
+
 ## 101.0.6
 - [patch] [60ea09b0cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60ea09b0cc):
 
