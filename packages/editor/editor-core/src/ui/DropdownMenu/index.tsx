@@ -25,16 +25,19 @@ export interface Props {
   offset?: Array<number>;
   zIndex?: number;
   items: Array<{
-    items: Array<{
-      content: string | ReactElement<any>;
-      elemBefore?: React.ReactNode;
-      elemAfter?: React.ReactNode;
-      tooltipDescription?: string;
-      tooltipPosition?: string;
-      isActive: boolean;
-      isDisabled?: boolean;
-    }>;
+    items: MenuItem[];
   }>;
+}
+
+export interface MenuItem {
+  key?: string;
+  content: string | ReactElement<any>;
+  elemBefore?: React.ReactNode;
+  elemAfter?: React.ReactNode;
+  tooltipDescription?: string;
+  tooltipPosition?: string;
+  isActive: boolean;
+  isDisabled?: boolean;
 }
 
 export interface State {

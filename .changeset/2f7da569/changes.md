@@ -1,0 +1,1 @@
+- ED-4998 Fix highlighting and disabling of meatball menu items in different contexts
