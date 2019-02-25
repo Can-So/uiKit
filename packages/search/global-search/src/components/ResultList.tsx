@@ -102,13 +102,14 @@ export default class ResultList extends React.Component<Props> {
 
       // Make sure that key and resultId are unique across all search results
       const uniqueResultId = getUniqueResultId(result);
+      const uniqueKey = `${uniqueResultId}_${Date.now()}`; // same result might appear on two successive search
 
       switch (resultType) {
         case ResultType.ConfluenceObjectResult: {
           const confluenceResult = result as ConfluenceObjectResult;
           return (
             <ObjectResultComponent
-              key={uniqueResultId}
+              key={uniqueKey}
               resultId={uniqueResultId}
               name={confluenceResult.name}
               href={confluenceResult.href}
@@ -130,7 +131,7 @@ export default class ResultList extends React.Component<Props> {
 
           return (
             <ContainerResultComponent
-              key={uniqueResultId}
+              key={uniqueKey}
               resultId={uniqueResultId}
               name={jiraResult.name}
               href={jiraResult.href}
@@ -154,7 +155,7 @@ export default class ResultList extends React.Component<Props> {
 
           return (
             <ObjectResultComponent
-              key={uniqueResultId}
+              key={uniqueKey}
               resultId={uniqueResultId}
               name={jiraResult.name}
               href={jiraResult.href}
@@ -171,7 +172,7 @@ export default class ResultList extends React.Component<Props> {
           const containerResult = result as ContainerResult;
           return (
             <ContainerResultComponent
-              key={uniqueResultId}
+              key={uniqueKey}
               resultId={uniqueResultId}
               name={containerResult.name}
               href={containerResult.href}
@@ -187,7 +188,7 @@ export default class ResultList extends React.Component<Props> {
 
           return (
             <PersonResultComponent
-              key={uniqueResultId}
+              key={uniqueKey}
               resultId={uniqueResultId}
               name={personResult.name}
               href={personResult.href}
