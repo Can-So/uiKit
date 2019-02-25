@@ -90,6 +90,30 @@ interface LoadTimes {
   appswitcher?: number;
 }
 
+export const REQUEST_SLOW = {
+  containers: 2000,
+  xflow: 1200,
+  licenseInformation: 800,
+  permitted: 500,
+  appswitcher: 1500,
+};
+
+export const REQUEST_MEDIUM = {
+  containers: 1000,
+  xflow: 600,
+  licenseInformation: 400,
+  permitted: 250,
+  appswitcher: 750,
+};
+
+export const REQUEST_FAST = {
+  containers: 500,
+  xflow: 300,
+  licenseInformation: 200,
+  permitted: 125,
+  appswitcher: 375,
+};
+
 export const mockEndpoints = (
   product: string,
   transformer?: DataTransformer,

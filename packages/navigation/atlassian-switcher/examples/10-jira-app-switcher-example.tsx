@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
 import JiraSwitcher from '../src/components/jira-switcher';
-import { mockEndpoints } from './helpers/mock-endpoints';
+import { mockEndpoints, REQUEST_FAST } from './helpers/mock-endpoints';
 import { withAnalyticsLogger } from './helpers';
 
 class JiraSwitcherExample extends Component {
@@ -15,7 +15,7 @@ class JiraSwitcherExample extends Component {
   }
 
   openDrawer = () => {
-    mockEndpoints('jira');
+    mockEndpoints('jira', undefined, REQUEST_FAST);
     this.setState({
       isDrawerOpen: true,
     });

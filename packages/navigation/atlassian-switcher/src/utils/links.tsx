@@ -13,7 +13,7 @@ import { LicenseInformationDataStructure } from '../providers/types';
 import jiraOpsLogo from './assets/jira-ops-logo';
 import { CustomLink, RecentContainer } from '../types';
 import WorldIcon from '@atlaskit/icon/glyph/world';
-import { createIcon, createImageIcon } from './icon-themes';
+import { createIcon, createImageIcon, IconType } from './icon-themes';
 
 enum ProductActivationStatus {
   ACTIVE = 'ACTIVE',
@@ -35,7 +35,7 @@ interface StringDict {
 export type SwitcherItemType = {
   key: string;
   label: string;
-  Icon: React.ComponentType<any>;
+  Icon: IconType;
   href: string;
 };
 
@@ -116,36 +116,20 @@ export const getProductIsActive = (
   products.hasOwnProperty(productKey) &&
   products[productKey].state === ProductActivationStatus.ACTIVE;
 
-export const getProductLinks = (
+export const getLicensedProductLinks = (
   licenseInformationData: LicenseInformationDataStructure,
 ): SwitcherItemType[] => {
-  const majorJiraProducts = [
+  return [
+    ProductKey.JIRA_CORE,
     ProductKey.JIRA_SOFTWARE,
     ProductKey.JIRA_SERVICE_DESK,
     ProductKey.JIRA_OPS,
-  ];
-  const activeProductKeys: string[] = [
-    ProductKey.JIRA_CORE,
-    ...majorJiraProducts,
     ProductKey.CONFLUENCE,
-  ].filter((productKey: string) =>
-    getProductIsActive(licenseInformationData, productKey),
-  );
-
-  if (
-    activeProductKeys.indexOf(ProductKey.JIRA_CORE) === -1 &&
-    (activeProductKeys.indexOf(ProductKey.JIRA_SOFTWARE) !== -1 ||
-      activeProductKeys.indexOf(ProductKey.JIRA_SERVICE_DESK) !== -1 ||
-      activeProductKeys.indexOf(ProductKey.JIRA_OPS) !== -1)
-  ) {
-    activeProductKeys.unshift(ProductKey.JIRA_CORE);
-  }
-
-  const productLinks = activeProductKeys.map((productKey: string) =>
-    getProductLink(productKey),
-  );
-
-  return [...productLinks, ...getFixedProductLinks()];
+  ]
+    .filter((productKey: string) =>
+      getProductIsActive(licenseInformationData, productKey),
+    )
+    .map((productKey: string) => getProductLink(productKey));
 };
 
 export const getAdministrationLinks = (

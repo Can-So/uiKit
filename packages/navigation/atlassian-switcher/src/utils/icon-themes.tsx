@@ -24,13 +24,6 @@ const ImageIconBase = styled.img`
   height: ${gridSize() * 4}px;
 `;
 
-// export enum IconThemes {
-//   DEFAULT = 'default',
-//   PRODUCT = 'product',
-//   ADMIN = 'admin',
-//   CUSTOM = 'custom',
-// }
-
 interface AkIconProps {
   primaryColor?: string;
   secondaryColor?: string;
@@ -81,10 +74,12 @@ interface IconProps {
   theme: string;
 }
 
+export type IconType = ComponentType<IconProps>;
+
 export const createIcon = (
   InnerIcon: React.ComponentType<any>,
   defaultProps?: AkIconProps | AkLogoProps,
-): ComponentType<IconProps> => props => {
+): IconType => props => {
   const { backgroundColor, ...iconProps } =
     themes[props.theme] || themes.default;
 
@@ -95,9 +90,7 @@ export const createIcon = (
   );
 };
 
-export const createImageIcon = (
-  url: string,
-): ComponentType<IconProps> => props => {
+export const createImageIcon = (url: string): IconType => props => {
   const { backgroundColor } = themes[props.theme] || themes.default;
 
   return (

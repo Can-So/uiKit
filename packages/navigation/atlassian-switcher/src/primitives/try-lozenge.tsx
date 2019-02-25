@@ -17,14 +17,9 @@ interface AkLozengeProps {
   children: React.ReactNode;
 }
 
-const DEFAULT_LOZANGE_PROPS = {
-  appearance: 'inprogress',
-  isBold: true,
-};
-
-export const TryLozenge = ({ children, ...props }: AkLozengeProps) => (
+export default ({ children, ...props }: AkLozengeProps) => (
   <OuterLozengeContainer>
-    <Lozenge {...DEFAULT_LOZANGE_PROPS} {...props}>
+    <Lozenge appearance="inprogress" isBold {...props}>
       <InnerLozengeContainer>{children}</InnerLozengeContainer>
     </Lozenge>
   </OuterLozengeContainer>

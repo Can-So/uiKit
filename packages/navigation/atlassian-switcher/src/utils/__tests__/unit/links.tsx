@@ -1,7 +1,7 @@
 import {
   getFixedProductLinks,
   getProductLink,
-  getProductLinks,
+  getLicensedProductLinks,
   PRODUCT_DATA_MAP,
   getProductIsActive,
   getAdministrationLinks,
@@ -60,12 +60,12 @@ describe('utils/links', () => {
     });
   });
 
-  describe('getProductLinks', () => {
+  describe('getLicensedProductLinks', () => {
     it('should only add active products', () => {
       const licenseInformation = generateLicenseInformation([
         'confluence.ondemand',
       ]);
-      const result = getProductLinks(licenseInformation);
+      const result = getLicensedProductLinks(licenseInformation);
       expect(result.map(({ key }) => key)).toMatchObject([
         'confluence.ondemand',
         ...FIXED_PRODUCTS_KEYS,
@@ -75,7 +75,7 @@ describe('utils/links', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-software.ondemand',
       ]);
-      const result = getProductLinks(licenseInformation);
+      const result = getLicensedProductLinks(licenseInformation);
       expect(result.map(({ key }) => key)).toMatchObject([
         'jira-core.ondemand',
         'jira-software.ondemand',
@@ -86,7 +86,7 @@ describe('utils/links', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-servicedesk.ondemand',
       ]);
-      const result = getProductLinks(licenseInformation);
+      const result = getLicensedProductLinks(licenseInformation);
       expect(result.map(({ key }) => key)).toMatchObject([
         'jira-core.ondemand',
         'jira-servicedesk.ondemand',
@@ -97,7 +97,7 @@ describe('utils/links', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-incident-manager.ondemand',
       ]);
-      const result = getProductLinks(licenseInformation);
+      const result = getLicensedProductLinks(licenseInformation);
       expect(result.map(({ key }) => key)).toMatchObject([
         'jira-core.ondemand',
         'jira-incident-manager.ondemand',

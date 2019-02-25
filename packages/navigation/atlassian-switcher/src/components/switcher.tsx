@@ -7,11 +7,12 @@ import {
   Skeleton,
 } from '../primitives';
 import {
-  getProductLinks,
+  getLicensedProductLinks,
   getAdministrationLinks,
   getCustomLinkItems,
   getRecentLinkItems,
   SuggestedProductItemType,
+  getFixedProductLinks,
 } from '../utils/links';
 import { ChildrenProps } from '../providers/as-data-provider';
 
@@ -27,7 +28,7 @@ import {
   RenderTracker,
 } from '../utils/analytics';
 import now from '../utils/performance-now';
-import { TryLozenge } from '../primitives/lozenge';
+import TryLozenge from '../primitives/try-lozenge';
 
 interface SwitcherProps {
   cloudId: string;
@@ -121,7 +122,10 @@ export default class Switcher extends React.Component<SwitcherProps> {
     const hasAdminLinks = managePermissionData || addProductsPermissionData;
     const hasSuggestedLinks = !!(isXFlowEnabledData && suggestedProductLink);
 
-    const productLinks = getProductLinks(licenseInformationData!);
+    const fixedProductLinks = getFixedProductLinks();
+    const licensedProductLinks = getLicensedProductLinks(
+      licenseInformationData!,
+    );
 
     const adminLinks = hasAdminLinks
       ? getAdministrationLinks(cloudId, managePermissionData!)
@@ -129,13 +133,12 @@ export default class Switcher extends React.Component<SwitcherProps> {
 
     const suggestedLinks = hasSuggestedLinks ? [suggestedProductLink!] : [];
     const tryLozengeText = canAddProduct ? 'Try' : 'Request';
-
     const recentLinks = getRecentLinkItems(recentContainersData!.data);
-
     const customLinks = getCustomLinkItems(customLinksData![0]);
 
     const itemsCount =
-      productLinks.length +
+      fixedProductLinks.length +
+      licensedProductLinks.length +
       suggestedLinks.length +
       adminLinks.length +
       recentLinks.length +
@@ -149,7 +152,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
             data={{ duration: this.timeSinceMounted() }}
           />
           <Section sectionId="switchTo" title="Switch to">
-            {productLinks.map(({ key, label, Icon, href }, idx) => (
+            {licensedProductLinks.map(({ key, label, Icon, href }, idx) => (
               <NavigationAnalyticsContext
                 key={key}
                 data={getItemAnalyticsContext(idx, key, 'product')}
@@ -170,6 +173,16 @@ export default class Switcher extends React.Component<SwitcherProps> {
                 >
                   {label}
                   <TryLozenge>{tryLozengeText}</TryLozenge>
+                </SwitcherItem>
+              </NavigationAnalyticsContext>
+            ))}
+            {fixedProductLinks.map(({ key, label, Icon, href }, idx) => (
+              <NavigationAnalyticsContext
+                key={key}
+                data={getItemAnalyticsContext(idx, key, 'product')}
+              >
+                <SwitcherItem icon={<Icon theme="product" />} href={href}>
+                  {label}
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
