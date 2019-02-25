@@ -11,7 +11,7 @@ describe('ADF => WikiMarkup - Inline Card', () => {
       p(
         'this is an inline-card',
         inlineCard({
-          url: 'https://product-fabric.atlassian.net/browse/EX-522',
+          url: 'https://product-fabric.atlassian.net/browse/EX-522#icft=EX-522',
         })(),
       ),
     )(defaultSchema);

@@ -1,8 +1,7 @@
 import { snapshot, mountRenderer, goToRendererTestingExample } from './_utils';
 import { document } from './__fixtures__/document-without-media';
 
-// failing locally
-describe.skip('Snapshot Test: Dynamic Text Sizing', () => {
+describe('Snapshot Test: Dynamic Text Sizing', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore

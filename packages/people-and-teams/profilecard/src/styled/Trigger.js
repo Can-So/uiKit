@@ -1,14 +1,12 @@
 // @flow
 import styled, { keyframes } from 'styled-components';
-import {
-  akAnimationMixins,
-  akGridSizeUnitless,
-} from '@atlaskit/util-shared-styles';
+import { akAnimationMixins } from '@atlaskit/util-shared-styles';
+import { gridSize } from '@atlaskit/theme';
 
 const { createBold, interpolate } = akAnimationMixins;
 
 // animation constants
-const animDistance = 2 * akGridSizeUnitless;
+const animDistance = 2 * gridSize();
 const animDelay = 0.1;
 const animTime = animDelay + 1;
 

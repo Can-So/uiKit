@@ -136,7 +136,7 @@ export const list: TokenParser = ({ input, position, schema, context }) => {
           state = processState.BUFFER;
           break;
         }
-        const token = parseToken(input, match.type, index, schema);
+        const token = parseToken(input, match.type, index, schema, context);
         if (token.type === 'text') {
           buffer += token.text;
         } else {

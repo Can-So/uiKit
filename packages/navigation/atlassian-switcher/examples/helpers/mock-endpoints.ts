@@ -82,9 +82,18 @@ interface DataTransformer {
   (originalMockData: MockData): MockData;
 }
 
+interface LoadTimes {
+  containers?: number;
+  xflow?: number;
+  licenseInformation?: number;
+  permitted?: number;
+  appswitcher?: number;
+}
+
 export const mockEndpoints = (
   product: string,
   transformer?: DataTransformer,
+  loadTimes?: LoadTimes,
 ) => {
   const mockData = transformer
     ? transformer(ORIGINAL_MOCK_DATA)
@@ -99,27 +108,49 @@ export const mockEndpoints = (
   } = mockData;
   fetchMock.get(
     '/gateway/api/activity/api/client/recent/containers?cloudId=some-cloud-id',
-    new Promise(res => setTimeout(() => res(RECENT_CONTAINERS_DATA), 800)),
+    new Promise(res =>
+      setTimeout(
+        () => res(RECENT_CONTAINERS_DATA),
+        loadTimes && loadTimes.containers,
+      ),
+    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.get(
     `${product === 'confluence' ? '/wiki' : ''}/rest/menu/latest/appswitcher`,
-    new Promise(res => setTimeout(() => res(CUSTOM_LINKS_DATA), 650)),
+    new Promise(res =>
+      setTimeout(
+        () => res(CUSTOM_LINKS_DATA),
+        loadTimes && loadTimes.appswitcher,
+      ),
+    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.get(
     '/gateway/api/xflow/some-cloud-id/license-information',
-    new Promise(res => setTimeout(() => res(LICENSE_INFORMATION_DATA), 400)),
+    new Promise(res =>
+      setTimeout(
+        () => res(LICENSE_INFORMATION_DATA),
+        loadTimes && loadTimes.licenseInformation,
+      ),
+    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.post(
     '/gateway/api/permissions/permitted',
-    new Promise(res => setTimeout(() => res(USER_PERMISSION_DATA), 250)),
+    new Promise(res =>
+      setTimeout(
+        () => res(USER_PERMISSION_DATA),
+        loadTimes && loadTimes.permitted,
+      ),
+    ),
     { method: 'POST', overwriteRoutes: true },
   );
   fetchMock.get(
     '/gateway/api/site/some-cloud-id/setting/xflow',
-    new Promise(res => setTimeout(() => res(XFLOW_SETTINGS), 250)),
+    new Promise(res =>
+      setTimeout(() => res(XFLOW_SETTINGS), loadTimes && loadTimes.xflow),
+    ),
     { method: 'GET', overwriteRoutes: true },
   );
 };
