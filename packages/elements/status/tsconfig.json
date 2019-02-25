@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.base.json",
+  "extends": "../../../tsconfig.elements.json",
   "include": [
     "./src/**/*.ts",
     "./src/**/*.tsx",
@@ -15,5 +15,5 @@
         "node_modules/@atlaskit/analytics-next-types"
       ]
     }
-  }  
+  }
 }

@@ -141,7 +141,8 @@ describe('Status - NodeView', () => {
       return {
         from,
         to: actualTo,
-        eq: selection => selection.from === from && selection.to === actualTo,
+        eq: (selection: Selection) =>
+          selection.from === from && selection.to === actualTo,
       } as any;
     };
 

@@ -1,8 +1,5 @@
 {
-  "extends": "../../../tsconfig.base.json",
-  "compilerOptions": {
-    "noImplicitAny": true
-  },
+  "extends": "../../../tsconfig.elements.json",
   "include": [
     "./src/**/*.ts",
     "./src/**/*.tsx",

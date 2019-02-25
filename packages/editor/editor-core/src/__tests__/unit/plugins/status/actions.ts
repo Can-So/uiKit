@@ -12,6 +12,7 @@ import {
   setStatusPickerAt,
   updateStatus,
 } from '../../../../plugins/status/actions';
+import { EditorView } from 'prosemirror-view';
 
 describe('status plugin: actions', () => {
   const createEditor = createEditorFactory();
@@ -280,7 +281,7 @@ describe('status plugin: actions', () => {
   });
 
   describe('picker autofocus', () => {
-    const insert = editorView => node => {
+    const insert = (editorView: EditorView) => (node: any) => {
       const { tr, selection } = editorView.state;
       tr.insert(selection.from, node);
       return tr;

@@ -2,26 +2,29 @@ import { TableMap } from 'prosemirror-tables';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
-import { TableLayout } from '@atlaskit/adf-schema';
+import { findDomRefAtPos } from 'prosemirror-utils';
 import {
   tableCellMinWidth,
   akEditorTableNumberColumnWidth,
+  akEditorTableToolbarSize,
 } from '@atlaskit/editor-common';
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
 
 import Resizer from './resizer/resizer';
 import ResizeState from './resizer/resizeState';
+import { pluginKey as resizePluginKey } from './plugin';
 
 import { getPluginState } from '../main';
 import { updateRightShadow } from '../../nodeviews/TableComponent';
 
 import {
   hasTableBeenResized,
+  getTableWidth,
   insertColgroupFromNode as recreateResizeColsByNode,
 } from '../../utils';
-
-import { getLayoutSize } from './utils';
+import { closestElement } from '../../../../utils';
+import { getLayoutSize, tableLayoutToSize } from './utils';
 
 export function updateColumnWidth(view, cell, movedWidth, resizer) {
   let $cell = view.state.doc.resolve(cell);
@@ -41,8 +44,11 @@ export function updateColumnWidth(view, cell, movedWidth, resizer) {
 export function applyColumnWidths(view, state, table, start) {
   let tr = view.state.tr;
   let map = TableMap.get(table);
+
   for (let i = 0; i < state.cols.length; i++) {
     const width = state.cols[i].width;
+    // we need to recalculate table node to pick up attributes from the previous loop iteration
+    table = tr.doc.nodeAt(start - 1);
 
     for (let row = 0; row < map.height; row++) {
       let mapIndex = row * map.width + i;
@@ -86,7 +92,7 @@ export function handleBreakoutContent(
     cellStyle,
   );
 
-  const state = resizeColumnTo(elem, colIdx, amount, node);
+  const state = resizeColumnTo(view, start, elem, colIdx, amount, node);
   updateControls(view.state);
   const tr = applyColumnWidths(view, state, node, start);
 
@@ -109,6 +115,43 @@ export function resizeColumn(view, cell, width, resizer) {
 
   return newState;
 }
+
+export const updateResizeHandle = (view: EditorView) => {
+  const { state } = view;
+  const { activeHandle } = resizePluginKey.getState(state);
+  if (activeHandle === -1) {
+    return false;
+  }
+
+  const $cell = view.state.doc.resolve(activeHandle);
+  const tablePos = $cell.start(-1) - 1;
+  const tableWrapperRef = findDomRefAtPos(
+    tablePos,
+    view.domAtPos.bind(view),
+  ) as HTMLDivElement;
+
+  const resizeHandleRef = tableWrapperRef.querySelector(
+    `.${ClassName.COLUMN_RESIZE_HANDLE}`,
+  ) as HTMLDivElement;
+
+  const tableRef = tableWrapperRef.querySelector(`table`) as HTMLTableElement;
+
+  if (tableRef && resizeHandleRef) {
+    const cellRef = findDomRefAtPos(
+      activeHandle,
+      view.domAtPos.bind(view),
+    ) as HTMLTableCellElement;
+    const tableActive = closestElement(tableRef, `.${ClassName.WITH_CONTROLS}`);
+    resizeHandleRef.style.height = `${
+      tableActive
+        ? tableRef.offsetHeight + akEditorTableToolbarSize
+        : tableRef.offsetHeight
+    }px`;
+
+    resizeHandleRef.style.left = `${cellRef.offsetLeft +
+      cellRef.offsetWidth}px`;
+  }
+};
 
 /**
  * Updates the column controls on resize
@@ -172,23 +215,28 @@ export function scaleTable(
   view: EditorView,
   tableElem: HTMLTableElement | null,
   node: PMNode,
+  prevNode: PMNode,
   pos: number,
   containerWidth: number | undefined,
-  currentLayout: TableLayout,
-  previousLayout?: TableLayout,
-  wasAutoSized?: boolean,
+  initialScale?: boolean,
 ) {
-  const state = setColumnWidths(
+  if (!tableElem) {
+    return;
+  }
+
+  const start = pos + 1;
+  const state = scale(
+    view,
     tableElem,
     node,
+    start,
+    prevNode,
     containerWidth,
-    currentLayout,
-    previousLayout,
-    wasAutoSized,
+    initialScale,
   );
 
   if (state) {
-    const tr = applyColumnWidths(view, state, node, pos + 1);
+    const tr = applyColumnWidths(view, state, node, start);
 
     if (tr.docChanged) {
       view.dispatch(tr);
@@ -197,30 +245,56 @@ export function scaleTable(
 }
 
 /**
- * Hydate a table with column widths.
+ * Base function to trigger the actual scale on a table node.
+ * Will only resize/scale if a table has been previously resized.
  * @param tableElem
  * @param node
- * @param containerWidth
- * @param currentLayout
+ * @param maxSize
  */
-export function setColumnWidths(
-  tableElem: HTMLTableElement | null,
+function scale(
+  view: EditorView,
+  tableElem: HTMLTableElement,
   node: PMNode,
+  start: number,
+  prevNode: PMNode,
   containerWidth: number | undefined,
-  currentLayout: TableLayout,
-  previousLayout?: TableLayout,
-  wasAutoSized?: boolean,
+  initialScale?: boolean,
 ): ResizeState | undefined {
-  if (!tableElem) {
+  // If a table has not been resized yet, columns should be auto.
+  if (hasTableBeenResized(node) === false) {
+    // If its not a re-sized table, we still want to re-create cols
+    // To force reflow of columns upon delete.
+    recreateResizeColsByNode(tableElem, node);
     return;
   }
-  let previousMaxSize;
-  if (previousLayout) {
-    previousMaxSize = getLayoutSize(previousLayout, containerWidth);
+
+  const maxSize = getLayoutSize(node.attrs.layout, containerWidth);
+  const resizer = Resizer.fromDOM(view, tableElem, {
+    minWidth: tableCellMinWidth,
+    maxSize,
+    node,
+    start,
+  });
+
+  let newWidth = maxSize;
+  let prevTableWidth = getTableWidth(prevNode);
+  let previousMaxSize = tableLayoutToSize[prevNode.attrs.layout];
+
+  if (!initialScale) {
+    previousMaxSize = getLayoutSize(prevNode.attrs.layout, containerWidth);
   }
 
-  const maxSize = getLayoutSize(currentLayout, containerWidth);
-  return scale(tableElem, node, maxSize, previousMaxSize, wasAutoSized);
+  // Determine if table was overflow
+  if (prevTableWidth > previousMaxSize) {
+    const overflowScale = prevTableWidth / previousMaxSize;
+    newWidth = Math.floor(newWidth * overflowScale);
+  }
+
+  if (node.attrs.isNumberColumnEnabled) {
+    newWidth -= akEditorTableNumberColumnWidth;
+  }
+
+  return resizer.scale(newWidth);
 }
 
 /**
@@ -232,6 +306,8 @@ export function setColumnWidths(
  * @param node
  */
 export function resizeColumnTo(
+  view: EditorView,
+  start: number,
   elem: HTMLElement,
   colIdx: number,
   amount: number,
@@ -241,55 +317,15 @@ export function resizeColumnTo(
     elem = elem.parentNode as HTMLElement;
   }
 
-  const resizer = Resizer.fromDOM(elem as HTMLTableElement, {
+  const resizer = Resizer.fromDOM(view, elem as HTMLTableElement, {
     minWidth: tableCellMinWidth,
     maxSize: elem.offsetWidth,
     node: node,
+    start,
   });
 
   const newState = resizer.resize(colIdx, amount);
   resizer.apply(newState);
 
   return newState;
-}
-
-/**
- * Base function to trigger the actual scale on a table node.
- * Will only resize/scale if a table has been previously resized.
- * @param tableElem
- * @param node
- * @param maxSize
- */
-function scale(
-  tableElem: HTMLTableElement,
-  node: PMNode,
-  maxSize: number,
-  previousMaxSize?: number,
-  wasAutoSized?: boolean,
-): ResizeState | undefined {
-  if (node.attrs.isNumberColumnEnabled) {
-    maxSize -= akEditorTableNumberColumnWidth;
-  }
-
-  // If a table has not been resized yet, columns should be auto.
-  if (hasTableBeenResized(node)) {
-    const resizer = Resizer.fromDOM(tableElem, {
-      minWidth: tableCellMinWidth,
-      maxSize,
-      node,
-    });
-
-    const totalWidth = resizer.currentState.totalWidth;
-    // Table was overflow, lets scale up the new 'maxSize' to keep our overflow in tact.
-    if (!wasAutoSized && previousMaxSize && totalWidth > previousMaxSize) {
-      const overflowScale = totalWidth / previousMaxSize;
-      maxSize = Math.floor(maxSize * overflowScale);
-    }
-
-    return resizer.scale(maxSize);
-  } else {
-    // If its not a re-sized table, we still want to re-create cols
-    // To force reflow of columns upon delete.
-    recreateResizeColsByNode(tableElem, node);
-  }
 }

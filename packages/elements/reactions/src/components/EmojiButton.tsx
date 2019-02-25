@@ -33,7 +33,7 @@ export interface Props {
 }
 
 export class EmojiButton extends PureComponent<Props, {}> {
-  private handleMouseDown = event => {
+  private handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (this.props.onClick && isLeftClick(event)) {
       this.props.onClick(this.props.emojiId, undefined, event);

@@ -21,7 +21,7 @@ export class ReactionsExampleWrapper extends React.PureComponent<Props> {
   };
   private store: ReactionsStore;
 
-  constructor(props, context) {
+  constructor(props: Props, context: any) {
     super(props, context);
     this.store = new MemoryReactionsStore(this.props.client!); // default props is handling it
   }

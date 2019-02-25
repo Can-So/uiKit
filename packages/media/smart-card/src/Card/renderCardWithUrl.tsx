@@ -44,7 +44,7 @@ const renderBlockCard = (
 ) => {
   switch (state.status) {
     case 'pending':
-      return <CardLinkView url={url} />;
+      return <CardLinkView link={url} isSelected={isSelected} />;
 
     case 'resolving':
       return (
@@ -116,7 +116,7 @@ const renderInlineCard = (
 ): React.ReactNode => {
   switch (state.status) {
     case 'pending':
-      return <CardLinkView url={url} />;
+      return <CardLinkView link={url} isSelected={isSelected} />;
 
     case 'resolving':
       return (
@@ -168,7 +168,7 @@ const renderInlineCard = (
       );
 
     case 'errored':
-      return <CardLinkView url={url} />;
+      return <CardLinkView link={url} isSelected={isSelected} />;
   }
 };
 
@@ -195,7 +195,13 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
     <LazyRender
       offset={100}
       component={appearance === 'inline' ? 'span' : 'div'}
-      placeholder={<CardLinkView key={'lazy-render-placeholder'} url={url} />}
+      placeholder={
+        <CardLinkView
+          isSelected={isSelected}
+          key={'lazy-render-placeholder'}
+          link={url}
+        />
+      }
       content={
         <WithObject
           client={client}

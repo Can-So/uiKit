@@ -130,10 +130,11 @@ export default class Comment extends React.Component<Props, State> {
   };
 
   private onReply = (value: any, analyticsEvent: AnalyticsEvent) => {
-    const { containerId } = this.props;
+    const { objectId, containerId } = this.props;
 
     fireEvent(analyticsEvent, {
       actionSubjectId: actionSubjectIds.replyButton,
+      objectId,
       containerId,
     });
 
@@ -190,6 +191,7 @@ export default class Comment extends React.Component<Props, State> {
   private onDelete = (value: any, analyticsEvent: AnalyticsEvent) => {
     const {
       comment: { nestedDepth, commentId },
+      objectId,
       containerId,
       conversationId,
       sendAnalyticsEvent,
@@ -197,6 +199,7 @@ export default class Comment extends React.Component<Props, State> {
 
     fireEvent(analyticsEvent, {
       actionSubjectId: actionSubjectIds.deleteButton,
+      objectId,
       containerId,
     });
 
@@ -214,10 +217,11 @@ export default class Comment extends React.Component<Props, State> {
   };
 
   private onEdit = (value: any, analyticsEvent: AnalyticsEvent) => {
-    const { containerId } = this.props;
+    const { objectId, containerId } = this.props;
 
     fireEvent(analyticsEvent, {
       actionSubjectId: actionSubjectIds.editButton,
+      objectId,
       containerId,
     });
 
@@ -273,7 +277,7 @@ export default class Comment extends React.Component<Props, State> {
   };
 
   private onRequestCancel = (value: any, analyticsEvent: AnalyticsEvent) => {
-    const { comment, onCancel, containerId } = this.props;
+    const { comment, onCancel, objectId, containerId } = this.props;
 
     // Invoke optional onCancel hook
     if (onCancel) {
@@ -282,6 +286,7 @@ export default class Comment extends React.Component<Props, State> {
 
     fireEvent(analyticsEvent, {
       actionSubjectId: actionSubjectIds.cancelFailedRequestButton,
+      objectId,
       containerId,
     });
 
@@ -291,6 +296,7 @@ export default class Comment extends React.Component<Props, State> {
   private onRequestRetry = (value: any, analyticsEvent: AnalyticsEvent) => {
     const { lastDispatch } = this.state;
     const {
+      objectId,
       containerId,
       onRetry,
       comment: { localId, isPlaceholder },
@@ -302,6 +308,7 @@ export default class Comment extends React.Component<Props, State> {
 
     fireEvent(analyticsEvent, {
       actionSubjectId: actionSubjectIds.retryFailedRequestButton,
+      objectId,
       containerId,
     });
 
@@ -333,6 +340,7 @@ export default class Comment extends React.Component<Props, State> {
       allowFeedbackAndHelpButtons,
       onEditorClose,
       onEditorOpen,
+      portal,
     } = this.props;
     const { isEditing } = this.state;
 
@@ -365,6 +373,7 @@ export default class Comment extends React.Component<Props, State> {
         document={comment.document.adf}
         dataProviders={dataProviders}
         disableHeadingIDs={true}
+        portal={portal}
       />
     );
   }
@@ -384,6 +393,7 @@ export default class Comment extends React.Component<Props, State> {
       onRetry,
       onCancel,
       renderEditor,
+      objectId,
       containerId,
       disableScrollTo,
       onEditorClose,
@@ -416,6 +426,7 @@ export default class Comment extends React.Component<Props, State> {
         dataProviders={dataProviders}
         renderComment={props => <Comment {...props} />}
         renderEditor={renderEditor}
+        objectId={objectId}
         containerId={containerId}
         disableScrollTo={disableScrollTo}
         sendAnalyticsEvent={sendAnalyticsEvent}
@@ -457,7 +468,7 @@ export default class Comment extends React.Component<Props, State> {
   }
 
   private getActions() {
-    const { comment, user, dataProviders, containerId } = this.props;
+    const { comment, user, dataProviders, objectId } = this.props;
     const { isEditing } = this.state;
     const canReply = !!user && !isEditing && !comment.deleted;
 
@@ -485,7 +496,7 @@ export default class Comment extends React.Component<Props, State> {
     }
 
     if (
-      containerId &&
+      objectId &&
       commentAri &&
       dataProviders &&
       dataProviders.hasProvider('reactionsStore') &&
@@ -501,7 +512,7 @@ export default class Comment extends React.Component<Props, State> {
             <Reactions>
               <ConnectedReactionsView
                 store={reactionsStore}
-                containerAri={containerId}
+                containerAri={objectId}
                 ari={commentAri}
                 emojiProvider={emojiProvider}
               />

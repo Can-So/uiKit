@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/form",
-  "version": "5.1.5",
+  "version": "5.1.6",
   "description": "Form package provides layout & validation for form fields",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -14,8 +14,9 @@
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
-    "Charles L",
-    "Mike G"
+    "Ajay M",
+    "Daniel D",
+    "Kang C"
   ],
   "repository": "bitbucket:atlaskit/atlaskit-mk-2",
   "dependencies": {

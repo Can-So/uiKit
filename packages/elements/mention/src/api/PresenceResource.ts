@@ -1,6 +1,5 @@
-import debug from '../util/logger';
-
 import { Presence } from '../types';
+import debug from '../util/logger';
 import { AbstractResource, ResourceProvider } from './MentionResource';
 
 export interface PresenceMap {
@@ -24,6 +23,30 @@ export interface PresenceCache {
   update(presUpdate: PresenceMap): void;
 }
 
+export interface PresenceResponse {
+  data: Data;
+}
+
+export interface Data {
+  PresenceBulk: PresenceBulk[];
+}
+
+export interface PresenceBulk {
+  userId: string;
+  state: null | string;
+  type: null | string;
+  date: null | string;
+  message: null | string;
+  stateMetadata?: string;
+}
+
+type Query = {
+  query: string;
+  variables: {
+    [key: string]: any;
+  };
+};
+
 class CacheEntry {
   presence: Presence;
   expiry: number;
@@ -44,7 +67,7 @@ interface CacheEntries {
 
 export interface PresenceParser {
   mapState(state: string): string;
-  parse(response: Response): PresenceMap;
+  parse(response: PresenceResponse): PresenceMap;
 }
 
 export interface PresenceProvider extends ResourceProvider<PresenceMap> {
@@ -111,8 +134,10 @@ class PresenceResource extends AbstractPresenceResource {
       });
   }
 
-  private queryDirectoryForPresences(userIds: string[]): Promise<Response> {
-    let data = {
+  private queryDirectoryForPresences(
+    userIds: string[],
+  ): Promise<PresenceResponse> {
+    const query: Query = {
       query: `query getPresenceForMentions($organizationId: String!, $userIds: [String!], $productId: String) {
                 PresenceBulk(organizationId: $organizationId, product: $productId, userIds: $userIds) {
                   userId
@@ -126,7 +151,7 @@ class PresenceResource extends AbstractPresenceResource {
       },
     };
     if (this.config.productId) {
-      data.variables['productId'] = this.config.productId;
+      query.variables['productId'] = this.config.productId;
     }
 
     const options = {
@@ -135,7 +160,7 @@ class PresenceResource extends AbstractPresenceResource {
         'Content-Type': 'application/json',
       },
       credentials: 'include' as 'include',
-      body: JSON.stringify(data),
+      body: JSON.stringify(query),
     };
     return fetch(this.config.url, options).then(response => response.json());
   }
@@ -272,7 +297,7 @@ export class DefaultPresenceParser implements PresenceParser {
     }
   }
 
-  parse(response: Response): PresenceMap {
+  parse(response: PresenceResponse): PresenceMap {
     const presences: PresenceMap = {};
     if (
       response.hasOwnProperty('data') &&
@@ -282,7 +307,7 @@ export class DefaultPresenceParser implements PresenceParser {
       // Store map of state and time indexed by userId.  Ignore null results.
       for (const user of results) {
         if (user.userId && user.state) {
-          const state = DefaultPresenceParser.extractState(user);
+          const state = DefaultPresenceParser.extractState(user) || user.state;
           presences[user.userId] = {
             status: this.mapState(state),
           };
@@ -301,7 +326,7 @@ export class DefaultPresenceParser implements PresenceParser {
     return presences;
   }
 
-  private static extractState(presence): string {
+  private static extractState(presence: PresenceBulk): string | null {
     if (DefaultPresenceParser.isFocusState(presence)) {
       return DefaultPresenceParser.FOCUS_STATE;
     }
@@ -313,7 +338,7 @@ export class DefaultPresenceParser implements PresenceParser {
     is returned as 'busy' along with a `stateMetadata` object containing a `focus` field.
     In this case we ignore the value of the `state` field and treat the presence as a 'focus' state.
    */
-  private static isFocusState(presence): boolean {
+  private static isFocusState(presence: PresenceBulk): boolean {
     if (presence.stateMetadata) {
       try {
         const metadata = JSON.parse(presence.stateMetadata);

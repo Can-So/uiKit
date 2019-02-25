@@ -17,7 +17,7 @@ const input = 'helloworld ';
       editor.name
     } editor`,
     { skip: ['ie', 'safari', 'edge'] },
-    async client => {
+    async (client: any) => {
       const bold = `[aria-label="${
         textFormattingMessages.bold.defaultMessage
       }"]`;

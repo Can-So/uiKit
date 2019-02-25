@@ -90,10 +90,7 @@ export {
 } from './schema-builder';
 export { default as defaultSchema } from './schema';
 export * from './html-helpers';
-export {
-  storyMediaProviderFactory,
-  getLinkCreateContextMock,
-} from './media-provider';
+export { storyMediaProviderFactory } from './media-provider';
 export {
   storyContextIdentifierProviderFactory,
 } from './context-identifier-provider';

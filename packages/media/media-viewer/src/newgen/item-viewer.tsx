@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Context, FileState } from '@atlaskit/media-core';
+import { Context, FileState, FileIdentifier } from '@atlaskit/media-core';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
-import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
+import { Outcome, MediaViewerFeatureFlags } from './domain';
 import { ImageViewer } from './viewers/image';
 import { VideoViewer } from './viewers/video';
 import { DocViewer } from './viewers/doc';
@@ -31,7 +31,7 @@ import {
 import { AudioViewer } from './viewers/audio';
 
 export type Props = Readonly<{
-  identifier: Identifier;
+  identifier: FileIdentifier;
   context: Context;
   featureFlags?: MediaViewerFeatureFlags;
   showControls?: () => void;
@@ -73,15 +73,19 @@ export class ItemViewerBase extends React.Component<Props, State> {
     this.init(this.props);
   }
 
-  private onViewerLoaded = (payload: ViewerLoadPayload) => {
-    const { id } = this.props.identifier;
+  private onViewerLoaded = async (payload: ViewerLoadPayload) => {
     const { item } = this.state;
     // the item.whenFailed case is handled in the "init" method
-    item.whenSuccessful(file => {
+    item.whenSuccessful(async file => {
       if (file.status === 'processed') {
         if (payload.status === 'success') {
           this.fireAnalytics(mediaFileLoadSucceededEvent(file));
         } else if (payload.status === 'error') {
+          const { identifier } = this.props;
+          const id =
+            typeof identifier.id === 'string'
+              ? identifier.id
+              : await identifier.id;
           this.fireAnalytics(
             mediaFileLoadFailedEvent(
               id,
@@ -190,11 +194,13 @@ export class ItemViewerBase extends React.Component<Props, State> {
     );
   }
 
-  private init(props: Props) {
+  private async init(props: Props) {
     const { context, identifier } = props;
-    this.fireAnalytics(mediaFileCommencedEvent(identifier.id));
+    const id =
+      typeof identifier.id === 'string' ? identifier.id : await identifier.id;
+    this.fireAnalytics(mediaFileCommencedEvent(id));
     this.subscription = context.file
-      .getFileState(identifier.id, {
+      .getFileState(id, {
         collectionName: identifier.collectionName,
       })
       .subscribe({
@@ -208,7 +214,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
             item: Outcome.failed(createError('metadataFailed', err)),
           });
           this.fireAnalytics(
-            mediaFileLoadFailedEvent(identifier.id, 'Metadata fetching failed'),
+            mediaFileLoadFailedEvent(id, 'Metadata fetching failed'),
           );
         },
       });

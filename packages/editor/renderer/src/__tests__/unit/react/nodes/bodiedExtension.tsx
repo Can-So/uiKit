@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import BodiedExtension from '../../../../react/nodes/bodiedExtension';
 
 import { RendererContext } from '../../../../react';
@@ -93,7 +92,7 @@ describe('Renderer - React/Nodes/BodiedExtension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('This is the default content of the extension');
+    ).toEqual('This is the default content of the extension');
     extension.unmount();
   });
 
@@ -113,7 +112,7 @@ describe('Renderer - React/Nodes/BodiedExtension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('This is a react element');
+    ).toEqual('This is a react element');
     extension.unmount();
   });
 
@@ -133,7 +132,7 @@ describe('Renderer - React/Nodes/BodiedExtension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('This is a ADF node');
+    ).toEqual('This is a ADF node');
     extension.unmount();
   });
 
@@ -155,7 +154,7 @@ describe('Renderer - React/Nodes/BodiedExtension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('This is the default content of the extension');
+    ).toEqual('This is the default content of the extension');
     extension.unmount();
   });
 
@@ -189,7 +188,7 @@ describe('Renderer - React/Nodes/BodiedExtension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('This is the original content');
+    ).toEqual('This is the original content');
     extension.unmount();
   });
 
@@ -209,7 +208,7 @@ describe('Renderer - React/Nodes/BodiedExtension', () => {
       />,
     );
 
-    expect(extensionHandler.mock.calls[0][0]).to.eql({
+    expect(extensionHandler.mock.calls[0][0]).toEqual({
       type: 'bodiedExtension',
       extensionType: 'com.atlassian.fabric',
       extensionKey: 'react',

@@ -8,7 +8,7 @@ const provider = new ConversationResource({
   user: {...}
 });
 
-<Conversation containerId="ari:cloud:platform::conversation/demo" provider={provider} />
+<Conversation objectId="ari:cloud:platform::conversation/demo" provider={provider} />
 `;
 
 const existingConversationSource = `import { Conversation, ConversationResource } from '@atlaskit/conversation';
@@ -19,7 +19,7 @@ const provider = new ConversationResource({
 });
 
 const [conversation] = await provider.getConversations();
-<Conversation id={conversation.conversationId} containerId="ari:cloud:platform::conversation/demo" provider={provider} />;
+<Conversation id={conversation.conversationId} objectId="ari:cloud:platform::conversation/demo" provider={provider} />;
 `;
 
 const customEditorSource = `import { Conversation, ConversationResource } from '@atlaskit/conversation';
@@ -32,9 +32,9 @@ const provider = new ConversationResource({
 const [conversation] = await provider.getConversations();
 <Conversation
   id={conversation.conversationId}
-  containerId="ari:cloud:platform::conversation/demo"
+  objectId="ari:cloud:platform::conversation/demo"
   provider={provider}
-  renderEditor={(Editor, props) => <Editor {...props} appearance="message" saveOnEnter={true} />}
+  renderEditor={(Editor, props) => <Editor {...props} saveOnEnter={true} />}
 />;
 `;
 
@@ -54,7 +54,7 @@ const props = {
           {
             key: {
               kind: 'id',
-              name: 'containerId',
+              name: 'objectId',
             },
             kind: 'property',
             optional: false,
@@ -348,7 +348,7 @@ export default md`
     />
   )}
 
-  The rendering of the editor can be customized by using the \`renderEditor\` prop. Here's an example using the "message"-appearance and "saveOnEnter":
+  The rendering of the editor can be customized by using the \`renderEditor\` prop. Here's an example using "saveOnEnter":
 
   ${(
     <Example

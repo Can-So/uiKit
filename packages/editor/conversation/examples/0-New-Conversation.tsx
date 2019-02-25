@@ -14,7 +14,7 @@ const provider = new ConversationResource({
 export default function Example() {
   return (
     <Conversation
-      containerId="ari:cloud:platform::conversation/demo"
+      objectId="ari:cloud:platform::conversation/demo"
       provider={provider}
       dataProviders={getDataProviderFactory()}
     />

@@ -36,7 +36,7 @@ const ContextAdapter = createContextAdapter({
 
 export default class Editor extends React.Component<EditorProps, {}> {
   static defaultProps: EditorProps = {
-    appearance: 'message',
+    appearance: 'comment',
     disabled: false,
     extensionHandlers: {},
   };
@@ -145,13 +145,6 @@ export default class Editor extends React.Component<EditorProps, {}> {
         );
       }
     });
-
-    if (!props.hasOwnProperty('appearance')) {
-      // tslint:disable-next-line:no-console
-      console.warn(
-        `The default appearance is changing from "message" to "comment", to main current behaviour use <Editor appearance="message" />. [Will be changed in editor-core@${nextVersion}]`,
-      );
-    }
 
     if (
       props.hasOwnProperty('quickInsert') &&

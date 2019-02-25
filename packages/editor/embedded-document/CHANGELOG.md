@@ -1,5 +1,27 @@
 # @atlaskit/embedded-document
 
+## 0.2.4
+- Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+  - @atlaskit/editor-core@101.0.0
+  - @atlaskit/renderer@40.0.0
+
+## 0.2.3
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/editor-common@32.0.2
+  - @atlaskit/renderer@39.0.2
+  - @atlaskit/editor-core@100.0.0
+
+## 0.2.2
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+  - @atlaskit/editor-common@32.0.0
+  - @atlaskit/editor-core@99.0.0
+  - @atlaskit/renderer@39.0.0
+
+## 0.2.1
+- [patch] [aa4daed8c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aa4daed8c6):
+
+  - Editor and Renderer props should be optional
+
 ## 0.2.0
 - [minor] [6ebe368d95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ebe368d95):
 

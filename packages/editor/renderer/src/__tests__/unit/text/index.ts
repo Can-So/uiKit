@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { TextSerializer } from '../../../index';
 import { defaultSchema as schema } from '@atlaskit/adf-schema';
 
@@ -26,7 +25,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('foo\nbar');
+    expect(render(doc)).toEqual('foo\nbar');
   });
 
   it('should render multiple hardBreaks as one line', () => {
@@ -47,7 +46,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('foo\nbar');
+    expect(render(doc)).toEqual('foo\nbar');
   });
 
   it('should render unicode emoji', () => {
@@ -65,7 +64,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('🦄is a unicorn');
+    expect(render(doc)).toEqual('🦄is a unicorn');
   });
 
   it('should render colon key for emoticon emoji', () => {
@@ -98,7 +97,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('My favourite emoji are😁:evilburns:');
+    expect(render(doc)).toEqual('My favourite emoji are😁:evilburns:');
   });
 
   it('should render mention user with at-symbol', () => {
@@ -123,7 +122,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('@user is awesome');
+    expect(render(doc)).toEqual('@user is awesome');
   });
 
   it('should render media items prefixed with attachment unicode emoji', () => {
@@ -147,7 +146,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc).indexOf('📎 ')).to.equal(0);
+    expect(render(doc).indexOf('📎 ')).toEqual(0);
   });
 
   it('should render media items as NUMBER files (one file)', () => {
@@ -171,7 +170,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.contain('1 File');
+    expect(render(doc)).toContain('1 File');
   });
 
   it('should render media items as NUMBER files (multiple files)', () => {
@@ -203,7 +202,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.contain('2 Files');
+    expect(render(doc)).toContain('2 Files');
   });
 
   it('should render media items as NUMBER files + ignore media card links', () => {
@@ -243,7 +242,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.contain('2 Files');
+    expect(render(doc)).toContain('2 Files');
   });
 
   it('should render URL if it is the same as text', () => {
@@ -275,7 +274,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('https://www.atlassian.com is for TEAM');
+    expect(render(doc)).toEqual('https://www.atlassian.com is for TEAM');
   });
 
   it('should render text if URL is different from text', () => {
@@ -307,7 +306,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('Atlassian is for TEAM');
+    expect(render(doc)).toEqual('Atlassian is for TEAM');
   });
 
   it('should render blockquote text prefixed with "> "', () => {
@@ -327,7 +326,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('> some quote');
+    expect(render(doc)).toEqual('> some quote');
   });
 
   it('should render codeBlock contents as a simple text', () => {
@@ -351,7 +350,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('foobar');
+    expect(render(doc)).toEqual('foobar');
   });
 
   it('should divide block elements with a new line', () => {
@@ -370,7 +369,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('foo\nbar');
+    expect(render(doc)).toEqual('foo\nbar');
   });
 
   it('should ignore card links', () => {
@@ -402,7 +401,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('foo\nbar');
+    expect(render(doc)).toEqual('foo\nbar');
   });
 
   it('should render bullet lists', () => {
@@ -436,7 +435,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('* a\n* b');
+    expect(render(doc)).toEqual('* a\n* b');
   });
 
   it('should render ordered lists', () => {
@@ -470,7 +469,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('1. 1\n2. 2');
+    expect(render(doc)).toEqual('1. 1\n2. 2');
   });
 
   [1, 2, 3, 4, 5, 6].forEach(level => {
@@ -487,7 +486,7 @@ describe('Renderer - TextSerializer', () => {
         ],
       };
 
-      expect(render(doc)).to.equal('heading');
+      expect(render(doc)).toEqual('heading');
     });
   });
 
@@ -510,7 +509,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('foo\nbar');
+    expect(render(doc)).toEqual('foo\nbar');
   });
 
   it('should render panels', () => {
@@ -533,7 +532,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('information');
+    expect(render(doc)).toEqual('information');
   });
 
   it('should render content in the table', () => {
@@ -627,7 +626,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('|header|header|\n|cell|cell|');
+    expect(render(doc)).toEqual('|header|header|\n|cell|cell|');
   });
 
   it('should ignore empty paragraphs', () => {
@@ -650,7 +649,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('foo\nbar');
+    expect(render(doc)).toEqual('foo\nbar');
   });
 
   it('should render unsupported node with the node type', () => {
@@ -664,7 +663,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('[bodiedExtension]');
+    expect(render(doc)).toEqual('[bodiedExtension]');
   });
 
   it('should add a space between mention and text', () => {
@@ -692,7 +691,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('@this is Sparta');
+    expect(render(doc)).toEqual('@this is Sparta');
   });
 
   it('should not add a space between text nodes', () => {
@@ -716,7 +715,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('Thisis Sparta');
+    expect(render(doc)).toEqual('Thisis Sparta');
   });
 
   it('should render task', () => {
@@ -768,7 +767,7 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('[] Could you please do this @Carolyn 😉');
+    expect(render(doc)).toEqual('[] Could you please do this @Carolyn 😉');
   });
 
   it('should render decision', () => {
@@ -800,6 +799,6 @@ describe('Renderer - TextSerializer', () => {
       ],
     };
 
-    expect(render(doc)).to.equal('<> This is a decision');
+    expect(render(doc)).toEqual('<> This is a decision');
   });
 });

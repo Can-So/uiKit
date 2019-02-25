@@ -1,25 +1,25 @@
 // tslint:disable-next-line no-implicit-dependencies
-import * as React from 'react';
+import { GasPurePayload, UI_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { mount } from 'enzyme';
-import { UI_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
 import * as cases from 'jest-in-case';
-import AtlaskitListener from '../../../atlaskit/AtlaskitListener';
-import { AnalyticsListener, AnalyticsContext } from '@atlaskit/analytics-next';
-import { AnalyticsWebClient, FabricChannel } from '../../../types';
+import * as React from 'react';
 import { createButtonWithAnalytics } from '../../../../examples/helpers';
+import AtlaskitListener from '../../../atlaskit/AtlaskitListener';
+import Logger from '../../../helpers/logger';
+import { AnalyticsWebClient, FabricChannel } from '../../../types';
+import { createAnalyticsContexts, createLoggerMock } from '../../_testUtils';
 
-const createAnalyticsContexts = contexts => ({ children }) =>
-  contexts
-    .slice(0)
-    .reverse()
-    .reduce(
-      (prev, curr) => <AnalyticsContext data={curr}>{prev}</AnalyticsContext>,
-      children,
-    );
+type CaseArgs = {
+  name: string;
+  eventPayload: GasPurePayload;
+  clientPayload: GasPurePayload;
+  context: any[];
+};
 
 describe('AtlaskitListener', () => {
   let analyticsWebClientMock: AnalyticsWebClient;
-  let loggerMock;
+  let loggerMock: Logger;
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -28,12 +28,7 @@ describe('AtlaskitListener', () => {
       sendTrackEvent: jest.fn(),
       sendScreenEvent: jest.fn(),
     };
-    loggerMock = {
-      debug: jest.fn(),
-      info: jest.fn(),
-      warn: jest.fn(),
-      error: jest.fn(),
-    };
+    loggerMock = createLoggerMock();
   });
 
   it('should register an Analytics listener on the atlaskit channel', () => {
@@ -52,7 +47,10 @@ describe('AtlaskitListener', () => {
 
   cases(
     'should transform events from analyticsListener and fire UI events to the analyticsWebClient',
-    ({ eventPayload, clientPayload, context = [] }, done) => {
+    (
+      { eventPayload, clientPayload, context = [] }: CaseArgs,
+      done: Function,
+    ) => {
       const spy = jest.fn();
       const ButtonWithAnalytics = createButtonWithAnalytics(
         eventPayload,
@@ -348,7 +346,7 @@ describe('AtlaskitListener', () => {
           action: 'someAction',
           actionSubject: 'someComponent',
           actionSubjectId: 'someComponentId',
-        },
+        } as GasPurePayload,
         context: [{ component: 'navigationNext', source: 'navigation' }],
         clientPayload: {
           action: 'someAction',
@@ -363,8 +361,8 @@ describe('AtlaskitListener', () => {
           },
           source: 'navigation',
           tags: ['atlaskit'],
-        },
+        } as GasPurePayload,
       },
-    ],
+    ] as CaseArgs[],
   );
 });

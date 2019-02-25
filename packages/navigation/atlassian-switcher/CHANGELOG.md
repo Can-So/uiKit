@@ -1,5 +1,20 @@
 # @atlaskit/atlassian-switcher
 
+## 0.0.7
+- [patch] [8a70a0db9f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a70a0db9f):
+
+  - SSR compatibility fix
+
+## 0.0.6
+- [patch] [3437ac9990](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3437ac9990):
+
+  - Firing events according to minimum event spec
+
+## 0.0.5
+- [patch] [9184dbf08b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9184dbf08b):
+
+  - Fixing package.json issue with atlassian-switcher
+
 ## 0.0.4
 - [patch] [95d9a94bd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95d9a94bd0):
 

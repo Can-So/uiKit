@@ -6,7 +6,7 @@ import * as React from 'react';
 export const renderProp = <P, S>(
   wrapper: ShallowWrapper<P, S>,
   renderProp: keyof P,
-  ...args
+  ...args: any[]
 ): ShallowWrapper<any> => {
   const prop = wrapper.prop(renderProp);
   if (prop && typeof prop === 'function') {

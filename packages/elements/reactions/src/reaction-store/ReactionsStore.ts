@@ -221,13 +221,15 @@ export class MemoryReactionsStore implements ReactionsStore {
             ? reactedCallback
             : notReactedCallback;
         const updatedReaction = callback(reaction);
-        if (updatedReaction) {
+        if (updatedReaction && !(updatedReaction instanceof Function)) {
           return utils.readyState(
-            reactionsState.reactions.map(
-              utils.updateByEmojiId(emojiId, updatedReaction),
-            ),
+            reactionsState.reactions.map(utils.updateByEmojiId(
+              emojiId,
+              updatedReaction,
+            ) as ((reaction: ReactionSummary) => ReactionSummary)),
           );
         }
+        return;
       });
     };
   }

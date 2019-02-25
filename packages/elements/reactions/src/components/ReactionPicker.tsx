@@ -1,4 +1,4 @@
-import { EmojiPicker, EmojiProvider } from '@atlaskit/emoji';
+import { EmojiPicker, EmojiProvider, EmojiId } from '@atlaskit/emoji';
 import Layer from '@atlaskit/layer';
 import { borderRadius, colors } from '@atlaskit/theme';
 import * as cx from 'classnames';
@@ -8,6 +8,7 @@ import * as ReactDOM from 'react-dom';
 import { style } from 'typestyle';
 import { Selector } from './Selector';
 import { Trigger } from './Trigger';
+import { ReactionSource } from '../types';
 
 const akBorderRadius = `${borderRadius()}px`;
 const akColorN0 = colors.N0;
@@ -16,10 +17,7 @@ const akColorN60A = colors.N60A;
 
 export interface Props {
   emojiProvider: Promise<EmojiProvider>;
-  onSelection: (
-    emojiId: string,
-    source: 'quickSelector' | 'emojiPicker',
-  ) => void;
+  onSelection: (emojiId: string, source: ReactionSource) => void;
   miniMode?: boolean;
   boundariesElement?: string;
   className?: string;
@@ -66,7 +64,7 @@ export class ReactionPicker extends PureComponent<Props, State> {
     disabled: false,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -83,7 +81,7 @@ export class ReactionPicker extends PureComponent<Props, State> {
     document.removeEventListener('click', this.handleClickOutside);
   }
 
-  private handleClickOutside = e => {
+  private handleClickOutside = (e: MouseEvent) => {
     const { isOpen } = this.state;
     if (!isOpen) {
       return;
@@ -98,14 +96,14 @@ export class ReactionPicker extends PureComponent<Props, State> {
     }
   };
 
-  private close(emojiId?: string) {
+  private close(_emojiId?: string) {
     this.setState({
       isOpen: false,
       showFullPicker: false,
     });
   }
 
-  private showFullPicker = e => {
+  private showFullPicker = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     const { onMore } = this.props;
     if (onMore) {
@@ -147,8 +145,12 @@ export class ReactionPicker extends PureComponent<Props, State> {
       : this.renderSelector();
   }
 
-  private onEmojiSelected = emoji => {
+  private onEmojiSelected = (emoji: EmojiId) => {
     const { onSelection } = this.props;
+
+    if (!emoji.id) {
+      return;
+    }
 
     onSelection(
       emoji.id,
@@ -175,7 +177,7 @@ export class ReactionPicker extends PureComponent<Props, State> {
     return null;
   }
 
-  private renderTrigger(content) {
+  private renderTrigger(content: any) {
     const { miniMode } = this.props;
 
     return (

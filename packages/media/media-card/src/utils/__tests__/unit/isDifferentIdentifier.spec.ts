@@ -1,9 +1,8 @@
-import { isDifferentIdentifier } from '../../identifier';
 import {
   FileIdentifier,
-  UrlPreviewIdentifier,
   ExternalImageIdentifier,
-} from '../../../root';
+  isDifferentIdentifier,
+} from '@atlaskit/media-core';
 
 describe('isDifferentIdentifier()', () => {
   describe('file identifier', () => {
@@ -50,19 +49,6 @@ describe('isDifferentIdentifier()', () => {
   });
 
   describe('non file identifier', () => {
-    it('should work with url previews', () => {
-      const a: UrlPreviewIdentifier = {
-        url: '123',
-        mediaItemType: 'link',
-      };
-      const b: UrlPreviewIdentifier = {
-        url: '456',
-        mediaItemType: 'link',
-      };
-
-      expect(isDifferentIdentifier(a, b)).toBeTruthy();
-    });
-
     it('should work with external images', () => {
       const a: ExternalImageIdentifier = {
         dataURI: 'some-preview-1',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Identifier } from './domain';
+import { FileIdentifier } from '@atlaskit/media-core';
 import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { colors } from '@atlaskit/theme';
@@ -25,9 +25,9 @@ import {
 export type NavigationDirection = 'prev' | 'next';
 
 export type NavigationProps = Readonly<{
-  items: Identifier[];
-  selectedItem: Identifier;
-  onChange: (item: Identifier) => void;
+  items: FileIdentifier[];
+  selectedItem: FileIdentifier;
+  onChange: (item: FileIdentifier) => void;
 }> &
   WithAnalyticsEventProps;
 

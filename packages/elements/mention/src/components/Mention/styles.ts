@@ -1,28 +1,28 @@
-import styled from 'styled-components';
-import { HTMLAttributes, ComponentClass } from 'react';
 import { colors, themed } from '@atlaskit/theme';
+import { ComponentClass, HTMLAttributes } from 'react';
+import styled from 'styled-components';
 import { MentionType } from '../../types';
 
 export interface MentionStyleProps {
   mentionType: MentionType;
 }
 
-const mentionStyle = {};
-mentionStyle[MentionType.SELF] = {
-  background: themed({ light: colors.B400, dark: colors.B200 }),
-  border: 'transparent',
-  text: themed({ light: colors.N20, dark: colors.DN30 }),
-};
-mentionStyle[MentionType.RESTRICTED] = {
-  background: 'transparent',
-  border: themed({ light: colors.N500, dark: colors.DN80 }),
-  text: themed({ light: colors.N500, dark: colors.DN100 }),
-};
-
-mentionStyle[MentionType.DEFAULT] = {
-  background: themed({ light: colors.N30A, dark: colors.DN80 }),
-  border: 'transparent',
-  text: themed({ light: colors.N500, dark: colors.DN800 }),
+const mentionStyle: { [key in MentionType]: any } = {
+  [MentionType.SELF]: {
+    background: themed({ light: colors.B400, dark: colors.B200 }),
+    border: 'transparent',
+    text: themed({ light: colors.N20, dark: colors.DN30 }),
+  },
+  [MentionType.RESTRICTED]: {
+    background: 'transparent',
+    border: themed({ light: colors.N500, dark: colors.DN80 }),
+    text: themed({ light: colors.N500, dark: colors.DN100 }),
+  },
+  [MentionType.DEFAULT]: {
+    background: themed({ light: colors.N30A, dark: colors.DN80 }),
+    border: 'transparent',
+    text: themed({ light: colors.N500, dark: colors.DN800 }),
+  },
 };
 
 const getStyle = (

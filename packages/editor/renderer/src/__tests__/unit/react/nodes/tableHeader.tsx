@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import TableHeader from '../../../../react/nodes/tableHeader';
 
 describe('Renderer - React/Nodes/TableHeader', () => {
@@ -12,17 +11,17 @@ describe('Renderer - React/Nodes/TableHeader', () => {
 
   it('should create a <th>-tag', () => {
     const tableHeader = shallow(<TableHeader />);
-    expect(tableHeader.name()).to.equal('th');
+    expect(tableHeader.name()).toEqual('th');
   });
 
   it('should render the <th> props', () => {
     const tableHeader = shallow(<TableHeader {...baseProps} />);
-    expect(tableHeader.name()).to.equal('th');
+    expect(tableHeader.name()).toEqual('th');
 
-    expect(tableHeader.prop('rowSpan')).to.equal(3);
-    expect(tableHeader.prop('colSpan')).to.equal(6);
+    expect(tableHeader.prop('rowSpan')).toEqual(3);
+    expect(tableHeader.prop('colSpan')).toEqual(6);
 
-    expect(tableHeader.prop('style')).to.deep.equal({
+    expect(tableHeader.prop('style')).toEqual({
       backgroundColor: '#fab',
     });
   });

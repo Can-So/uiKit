@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { removeEventProxy } from '../../../actions/removeEventProxy';
 import removeEventProxyMiddleware from '../../removeEventProxy';
 
@@ -21,7 +19,7 @@ describe('removeEventProxy reducer', () => {
     };
 
     const newState = removeEventProxyMiddleware(defaultState, action);
-    expect(newState).to.be.deep.equal(defaultState);
+    expect(newState).toEqual(defaultState);
   });
 
   it('returns same state if uploadId is not found', () => {
@@ -31,6 +29,6 @@ describe('removeEventProxy reducer', () => {
     });
 
     const newState = removeEventProxyMiddleware({ ...defaultState }, action);
-    expect(newState).to.be.deep.equal(defaultState);
+    expect(newState).toEqual(defaultState);
   });
 });

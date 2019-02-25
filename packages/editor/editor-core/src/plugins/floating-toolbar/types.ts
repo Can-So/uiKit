@@ -67,7 +67,7 @@ export type FloatingToolbarSeparator = {
 export type FloatingToolbarDropdown<T> = {
   type: 'dropdown';
   title: string;
-  icon: Icon;
+  icon?: Icon;
   options: DropdownOptions<T>;
   hidden?: boolean;
   hideExpandIcon?: boolean;

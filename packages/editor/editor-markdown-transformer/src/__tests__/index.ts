@@ -95,4 +95,28 @@ ${CODE_FENCE}`;
       );
     });
   });
+
+  describe('Code block', () => {
+    it('should trim whitespaces around language definition', () => {
+      const CODE_FENCE = '```';
+      const md = `${CODE_FENCE}   java   
+int a = 3;
+${CODE_FENCE}`;
+
+      expect(transformer.parse(md)).toEqualDocument(
+        doc(code_block({ language: 'java' })('int a = 3;')),
+      );
+    });
+
+    it('should work without language definition', () => {
+      const CODE_FENCE = '```';
+      const md = `${CODE_FENCE}    
+int a = 3;
+${CODE_FENCE}`;
+
+      expect(transformer.parse(md)).toEqualDocument(
+        doc(code_block()('int a = 3;')),
+      );
+    });
+  });
 });

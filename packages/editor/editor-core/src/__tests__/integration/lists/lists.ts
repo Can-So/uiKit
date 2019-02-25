@@ -7,7 +7,7 @@ const PM_FOCUS_SELECTOR = '.ProseMirror-focused';
 BrowserTestCase(
   `list: shouldn't change focus on tab if the list is not indentable`,
   { skip: ['ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = new Page(client);
     await page.goto(fullpage.path);
     await page.waitForSelector(fullpage.placeholder);

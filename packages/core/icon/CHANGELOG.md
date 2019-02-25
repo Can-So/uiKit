@@ -1,5 +1,13 @@
 # @atlaskit/icon
 
+## 16.0.3
+- Updated dependencies [ecf21be58f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ecf21be58f):
+  - @atlaskit/icon-priority@3.0.0
+
+## 16.0.2
+- Updated dependencies [a2653f4453](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2653f4453):
+  - @atlaskit/icon-priority@2.0.0
+
 ## 16.0.1
 - [patch] [6b5daa8080](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6b5daa8080):
 

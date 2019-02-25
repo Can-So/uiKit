@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import Avatar from '@atlaskit/avatar';
 import ContainerResult from '../../ContainerResult';
 
 const DUMMY_AVATAR = <Avatar key="test-avatar" />;
 
 describe('Container Result', () => {
-  let resultWrapper;
+  let resultWrapper: ReactWrapper;
   beforeEach(() => {
     resultWrapper = mount(<ContainerResult resultId="testId" name="test" />);
   });

@@ -13,41 +13,44 @@ if (!process.env.BITBUCKET_BRANCH && process.env.USER) {
 }
 
 function setBrowserStackClients() /*: Array<?Object>*/ {
+  const RESOLUTION = '1920x1080';
   let launchers = {
     chrome: {
       os: 'Windows',
       os_version: '10',
       browserName: 'chrome',
       browser_version: '71.0',
-      resolution: '1920x1200',
+      resolution: RESOLUTION,
     },
     firefox: {
       os: 'Windows',
       os_version: '10',
       browserName: 'firefox',
       browser_version: '64.0',
-      resolution: '1440x900',
+      resolution: RESOLUTION,
+      'browserstack.geckodriver': '0.22.0',
+      'browserstack.use_w3c': 'true',
     },
     ie: {
       os: 'Windows',
       os_version: '10',
       browserName: 'ie',
       browser_version: '11',
-      resolution: '1440x900',
+      resolution: RESOLUTION,
     },
     safari: {
       os: 'OS X',
       os_version: 'High Sierra',
       browserName: 'Safari',
       browser_version: '11.0',
-      resolution: '1920x1080',
+      resolution: RESOLUTION,
     },
     edge: {
       os: 'Windows',
       os_version: '10',
       browserName: 'edge',
       browser_version: '17',
-      resolution: '1440x900',
+      resolution: RESOLUTION,
     },
   };
   if (process.env.LANDKID) {
@@ -95,11 +98,14 @@ function setLocalClients() /*: Array<?Object>*/ {
   let isHeadless = process.env.HEADLESS !== 'false';
   // Keep only chrome for watch mode
   if (process.env.WATCH === 'true') isHeadless === 'false';
+  const windowSize = '--window-size=1920,1080';
   const options = {
     port,
     desiredCapabilities: {
       browserName: 'chrome',
-      chromeOptions: isHeadless ? { args: ['--headless'] } : { args: [] },
+      chromeOptions: isHeadless
+        ? { args: ['--headless', windowSize] }
+        : { args: [windowSize] },
     },
   };
   const driver = webdriverio.remote(options);

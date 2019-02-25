@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/code",
-  "version": "8.2.2",
+  "version": "8.2.3",
   "config": {
     "access": "public"
   },
@@ -32,10 +32,11 @@
   },
   "author": "Atlassian Pty. Ltd",
   "maintainers": [
-    "Raja B",
-    "Ben C",
+    "Sean C",
     "Ajay M",
-    "Oscar W"
+    "Oscar W",
+    "Daniel D",
+    "Kang C"
   ],
   "atlaskit": {
     "name": "Code"

@@ -30,12 +30,10 @@ export class CardView extends React.PureComponent<
   }
 
   render() {
-    const { dimensions, mediaItemType } = this.props;
+    const { dimensions } = this.props;
 
     if (!this.state.CardView) {
-      return (
-        <CardLoading dimensions={dimensions} mediaItemType={mediaItemType} />
-      );
+      return <CardLoading dimensions={dimensions} />;
     }
 
     return <this.state.CardView {...this.props} />;

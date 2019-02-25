@@ -1,11 +1,11 @@
 import * as URL from 'url';
 import * as USP from 'url-search-params'; // IE, Safari, Mobile Chrome, Mobile Safari
 import {
+  buildCredentials,
   KeyValues,
   RequestServiceOptions,
-  ServiceConfig,
   SecurityOptions,
-  buildCredentials,
+  ServiceConfig,
 } from './types';
 
 const URLSearchParams = USP.default || USP;

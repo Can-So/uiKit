@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/tooltip",
-  "version": "12.1.16",
+  "version": "12.1.17",
   "description": "A React Component for displaying Tooltips",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -13,9 +13,10 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Raja B",
-    "Ben C",
-    "Ajay M"
+    "Sean C",
+    "Ajay M",
+    "Daniel D",
+    "Kang C"
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {

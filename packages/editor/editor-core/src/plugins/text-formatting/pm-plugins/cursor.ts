@@ -11,6 +11,11 @@ export default new Plugin({
         return false;
       }
 
+      // @see ED-6231
+      if (clickPos > view.state.doc.content.size) {
+        return false;
+      }
+
       const { code } = view.state.schema.marks;
       const $click = view.state.doc.resolve(clickPos);
 

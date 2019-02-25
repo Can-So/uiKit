@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import editorShowLoading from '../../editorShowLoading';
 import { EDITOR_SHOW_LOADING } from '../../../actions/editorShowLoading';
 
@@ -20,7 +18,7 @@ describe('editorShowLoading() reducer', () => {
   it('returns same state if action has different type', () => {
     const oldState = { ...stateBase };
     const newState = editorShowLoading(oldState, { type: 'SOME_OTHER_TYPE' });
-    expect(newState).to.deep.equal(stateBase);
+    expect(newState).toEqual(stateBase);
   });
 
   it('sets the originalFile to the state', () => {
@@ -31,7 +29,7 @@ describe('editorShowLoading() reducer', () => {
       originalFile: newOriginalFile,
     });
 
-    expect(newState).to.deep.equal({
+    expect(newState).toEqual({
       ...stateBase,
       editorData: {
         originalFile: newOriginalFile,
@@ -50,7 +48,7 @@ describe('editorShowLoading() reducer', () => {
       originalFile: newOriginalFile,
     });
 
-    expect(newState).to.deep.equal({
+    expect(newState).toEqual({
       ...stateBase,
       editorData: { originalFile: newOriginalFile },
     });

@@ -18,15 +18,15 @@ describe('<DecisionItem/>', () => {
   });
 
   it('should render callback with ref', () => {
-    let contentRef: HTMLElement | undefined;
-    const handleContentRef = ref => (contentRef = ref);
+    let contentRef: HTMLElement | null = null;
+    const handleContentRef = (ref: HTMLElement | null) => (contentRef = ref);
     const component = mount(
       <DecisionItem contentRef={handleContentRef}>
         Hello <b>world</b>
       </DecisionItem>,
     );
     expect(component.find('b').length).toBe(1);
-    expect(contentRef).not.toBe(undefined);
+    expect(contentRef).not.toBe(null);
     expect(contentRef!.textContent).toBe('Hello world');
   });
 

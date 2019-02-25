@@ -8,11 +8,15 @@ export type OriginTracingForSubSequentEvents = {
   originProduct: string;
 };
 
+export type OriginAnalyticAttributes = {
+  hasGeneratedId: boolean;
+};
+
 export type OriginTracing = {
   id: string;
   addToUrl: (link: string) => string;
   toAnalyticsAttributes: (
-    { hasGeneratedId: boolean },
+    attrs: OriginAnalyticAttributes,
   ) => OriginTracingWithIdGenerated | OriginTracingForSubSequentEvents;
 };
 

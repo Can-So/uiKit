@@ -1,5 +1,20 @@
 # @atlaskit/adf-schema
 
+## 1.5.5
+- [patch] [356de07a87](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/356de07a87):
+
+  - Revert back to number for external media
+
+## 1.5.4
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/editor-json-transformer@4.1.11
+  - @atlaskit/editor-test-helpers@7.0.0
+
+## 1.5.3
+- [patch] [775da616c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/775da616c6):
+
+  - [ED-5910] Keep width & height on media node as number
+
 ## 1.5.2
 - [patch] [e83a441140](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a441140):
 

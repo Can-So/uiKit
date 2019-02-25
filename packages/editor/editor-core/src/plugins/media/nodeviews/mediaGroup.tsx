@@ -8,8 +8,7 @@ import {
   MediaPluginState,
   stateKey as mediaStateKey,
 } from '../pm-plugins/main';
-import { FileIdentifier } from '@atlaskit/media-card';
-import { Context } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@atlaskit/media-core';
 import { setNodeSelection } from '../../../utils';
 import WithPluginState from '../../../ui/WithPluginState';
 import { stateKey as reactNodeViewStateKey } from '../../../plugins/base/pm-plugins/react-nodeview';

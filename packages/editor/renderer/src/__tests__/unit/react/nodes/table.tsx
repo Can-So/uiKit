@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import {
   akEditorTableNumberColumnWidth,
   akEditorDefaultLayoutWidth,
@@ -26,9 +25,9 @@ describe('Renderer - React/Nodes/Table', () => {
         </TableRow>
       </Table>,
     );
-    expect(table.find('table')).to.have.lengthOf(1);
-    expect(table.find('div[data-layout="full-width"]')).to.have.lengthOf(1);
-    expect(table.find('table').prop('data-number-column')).to.equal(true);
+    expect(table.find('table')).toHaveLength(1);
+    expect(table.find('div[data-layout="full-width"]')).toHaveLength(1);
+    expect(table.find('table').prop('data-number-column')).toEqual(true);
   });
 
   it('should render table props', () => {
@@ -47,10 +46,10 @@ describe('Renderer - React/Nodes/Table', () => {
       </Table>,
     );
 
-    expect(table.prop('layout')).to.equal('default');
-    expect(table.prop('isNumberColumnEnabled')).to.equal(true);
-    expect(table.prop('columnWidths')).to.equal(columnWidths);
-    expect(table.find(TableRow).prop('isNumberColumnEnabled')).to.equal(true);
+    expect(table.prop('layout')).toEqual('default');
+    expect(table.prop('isNumberColumnEnabled')).toEqual(true);
+    expect(table.prop('columnWidths')).toEqual(columnWidths);
+    expect(table.find(TableRow).prop('isNumberColumnEnabled')).toEqual(true);
   });
 
   it('should render children', () => {
@@ -67,10 +66,10 @@ describe('Renderer - React/Nodes/Table', () => {
       </Table>,
     );
 
-    expect(table.prop('layout')).to.equal('default');
-    expect(table.prop('isNumberColumnEnabled')).to.equal(true);
-    expect(table.find(TableRow)).to.have.lengthOf(1);
-    expect(table.find(TableCell)).to.have.lengthOf(2);
+    expect(table.prop('layout')).toEqual('default');
+    expect(table.prop('isNumberColumnEnabled')).toEqual(true);
+    expect(table.find(TableRow)).toHaveLength(1);
+    expect(table.find(TableCell)).toHaveLength(2);
   });
 
   describe('When number column is enabled', () => {
@@ -103,7 +102,7 @@ describe('Renderer - React/Nodes/Table', () => {
               .find('td')
               .at(0)
               .text(),
-          ).to.equal(index === 0 ? '' : `${index}`);
+          ).toEqual(index === 0 ? '' : `${index}`);
         });
       });
     });
@@ -136,12 +135,13 @@ describe('Renderer - React/Nodes/Table', () => {
               .find('td')
               .at(0)
               .text(),
-          ).to.equal(`${index + 1}`);
+          ).toEqual(`${index + 1}`);
         });
       });
     });
     it('should add an extra <col> node for number column', () => {
       const columnWidths = [300, 380];
+      const resultingColumnWidths = [282, 357];
       const table = mount(
         <Table
           layout="default"
@@ -159,16 +159,16 @@ describe('Renderer - React/Nodes/Table', () => {
           </TableRow>
         </Table>,
       );
-      expect(table.find('col')).to.have.lengthOf(3);
+      expect(table.find('col')).toHaveLength(3);
 
       table.find('col').forEach((col, index) => {
         if (index === 0) {
-          expect(col.prop('style')!.width).to.equal(
+          expect(col.prop('style')!.width).toEqual(
             akEditorTableNumberColumnWidth,
           );
         } else {
-          expect(col.prop('style')!.width).to.equal(
-            `${columnWidths[index - 1]}px`,
+          expect(col.prop('style')!.width).toEqual(
+            `${resultingColumnWidths[index - 1]}px`,
           );
         }
       });
@@ -195,10 +195,12 @@ describe('Renderer - React/Nodes/Table', () => {
           </TableRow>
         </Table>,
       );
-      expect(table.find('col')).to.have.lengthOf(2);
+      expect(table.find('col')).toHaveLength(2);
 
       table.find('col').forEach((col, index) => {
-        expect(col.prop('style')!.width).to.equal(`${columnWidths[index]}px`);
+        expect(col.prop('style')!.width).toEqual(
+          `${columnWidths[index] - 1}px`,
+        );
       });
     });
   });
@@ -231,15 +233,15 @@ describe('Renderer - React/Nodes/Table', () => {
         );
         table.setProps({ isNumberColumnEnabled: false });
 
-        expect(table.find('col')).to.have.lengthOf(4);
+        expect(table.find('col')).toHaveLength(4);
 
         table.find('col').forEach((col, index) => {
           if (index < 2) {
-            expect(col.prop('style')!.width).to.equal(
-              `${columnWidths[index]}px`,
+            expect(col.prop('style')!.width).toEqual(
+              `${columnWidths[index] - 1}px`,
             );
           } else {
-            expect(col.prop('style')!.width).to.equal(`${tableCellMinWidth}px`);
+            expect(col.prop('style')!.width).toEqual(`${tableCellMinWidth}px`);
           }
         });
       });
@@ -271,15 +273,15 @@ describe('Renderer - React/Nodes/Table', () => {
         );
         table.setProps({ isNumberColumnEnabled: false });
 
-        expect(table.find('col')).to.have.lengthOf(4);
+        expect(table.find('col')).toHaveLength(4);
 
         table.find('col').forEach((col, index) => {
           if (index < 2) {
-            expect(col.prop('style')!.width).to.equal(
-              `${columnWidths[index]}px`,
+            expect(col.prop('style')!.width).toEqual(
+              `${columnWidths[index] - 1}px`,
             );
           } else {
-            expect(typeof col.prop('style')!.width).to.equal('undefined');
+            expect(typeof col.prop('style')!.width).toEqual('undefined');
           }
         });
       });
@@ -310,9 +312,9 @@ describe('Renderer - React/Nodes/Table', () => {
         </Table>,
       );
 
-      expect(table.find('col')).to.have.lengthOf(3);
+      expect(table.find('col')).toHaveLength(3);
       table.find('col').forEach(col => {
-        expect(col.prop('style')!.width).to.equal(`226.67px`);
+        expect(col.prop('style')!.width).toEqual(`226px`);
       });
     });
   });
@@ -341,10 +343,10 @@ describe('Renderer - React/Nodes/Table', () => {
         </Table>,
       );
 
-      expect(table.find('col')).to.have.lengthOf(3);
+      expect(table.find('col')).toHaveLength(3);
       table.find('col').forEach((col, index) => {
         const width = columnWidths[index] - columnWidths[index] * 0.1;
-        expect(col.prop('style')!.width).to.equal(`${width}px`);
+        expect(col.prop('style')!.width).toEqual(`${width}px`);
       });
     });
   });
@@ -373,10 +375,10 @@ describe('Renderer - React/Nodes/Table', () => {
         </Table>,
       );
 
-      expect(table.find('col')).to.have.lengthOf(3);
+      expect(table.find('col')).toHaveLength(3);
       table.find('col').forEach((col, index) => {
         const width = columnWidths[index] - columnWidths[index] * 0.15;
-        expect(col.prop('style')!.width).to.equal(`${width}px`);
+        expect(col.prop('style')!.width).toEqual(`${width}px`);
       });
     });
   });

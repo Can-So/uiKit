@@ -1,11 +1,10 @@
-import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { Fragment } from 'prosemirror-model';
 import {
   mergeTextNodes,
-  isEmojiDoc,
   isText,
   isTextWrapper,
+  isEmojiDoc,
 } from '../../../../react/nodes';
 import { emoji as emojiData } from '@atlaskit/util-data-test';
 
@@ -71,7 +70,7 @@ describe('Renderer - React/Nodes', () => {
         },
       ];
 
-      expect(mergeTextNodes(input)).to.deep.equal([
+      expect(mergeTextNodes(input)).toEqual([
         {
           type: {
             name: 'textWrapper',
@@ -143,7 +142,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(true);
+      expect(isEmojiDoc(content)).toEqual(true);
     });
 
     it('should return true for up to three emojis', () => {
@@ -162,7 +161,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(true);
+      expect(isEmojiDoc(content)).toEqual(true);
     });
 
     it('should return false for more than three emojis', () => {
@@ -181,7 +180,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(false);
+      expect(isEmojiDoc(content)).toEqual(false);
     });
 
     it('should return false if no emojis', () => {
@@ -207,7 +206,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(false);
+      expect(isEmojiDoc(content)).toEqual(false);
     });
 
     it('should ignore surrounding whitespace when determining whether the paragraph is any emoji block', () => {
@@ -254,7 +253,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(true);
+      expect(isEmojiDoc(content)).toEqual(true);
     });
 
     it('should return false if the block contains non-whitespace text', () => {
@@ -281,7 +280,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(false);
+      expect(isEmojiDoc(content)).toEqual(false);
     });
 
     it('should return false if there is a non-text or non-emoji node', () => {
@@ -312,7 +311,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(false);
+      expect(isEmojiDoc(content)).toEqual(false);
     });
 
     it('should return false if there are multiple paragraphs in the doc', () => {
@@ -337,7 +336,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(false);
+      expect(isEmojiDoc(content)).toEqual(false);
     });
 
     it('should return false if parent block is not of type paragraph', () => {
@@ -358,13 +357,7 @@ describe('Renderer - React/Nodes', () => {
         ],
       });
 
-      expect(isEmojiDoc(content)).to.equal(false);
-    });
-
-    it('should return true at nested level if fitToHeight prop is set to 40', () => {
-      const content = createMockFragment({ content: [grinEmoji] });
-
-      expect(isEmojiDoc(content, { fitToHeight: 40 })).to.equal(true);
+      expect(isEmojiDoc(content)).toEqual(false);
     });
 
     it('should return false at nested level if no fitToHeight prop', () => {
@@ -375,19 +368,19 @@ describe('Renderer - React/Nodes', () => {
         content: [grinEmoji],
       });
 
-      expect(isEmojiDoc(content, {})).to.equal(false);
+      expect(isEmojiDoc(content, {})).toEqual(false);
     });
   });
 
   describe('isTextWrapper', () => {
     it('should return true if type equals "textWrapper"', () => {
-      expect(isTextWrapper({ type: { name: 'textWrapper' } } as any)).to.equal(
+      expect(isTextWrapper({ type: { name: 'textWrapper' } } as any)).toEqual(
         true,
       );
     });
 
     it('should return false if type does not equal "textWrapper"', () => {
-      expect(isTextWrapper({ type: { name: 'mention' } } as any)).to.equal(
+      expect(isTextWrapper({ type: { name: 'mention' } } as any)).toEqual(
         false,
       );
     });
@@ -395,11 +388,11 @@ describe('Renderer - React/Nodes', () => {
 
   describe('isText', () => {
     it('should return true if type equals "text"', () => {
-      expect(isText('text')).to.equal(true);
+      expect(isText('text')).toEqual(true);
     });
 
     it('should return false if type does not equal "text"', () => {
-      expect(isText('mention')).to.equal(false);
+      expect(isText('mention')).toEqual(false);
     });
   });
 });

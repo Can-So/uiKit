@@ -305,7 +305,7 @@ describe('@atlaskit/editor-core/ui/ToolbarEmojiPicker', () => {
       />,
     );
     const picker = toolbarEmojiPicker.instance() as ToolbarEmojiPicker;
-    picker.handleEscape({ keyCode: 27 });
+    picker.handleEscape({ keyCode: 27 } as KeyboardEvent);
     expect(toolbarEmojiPicker.find(AkEmojiPicker)).toHaveLength(0);
     toolbarEmojiPicker.unmount();
   });

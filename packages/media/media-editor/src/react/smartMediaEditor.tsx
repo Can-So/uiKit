@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
 import { Subscription } from 'rxjs/Subscription';
-import { Context, UploadableFile } from '@atlaskit/media-core';
-import { FileIdentifier } from '@atlaskit/media-card';
+import { Context, UploadableFile, FileIdentifier } from '@atlaskit/media-core';
 import { messages, Shortcut } from '@atlaskit/media-ui';
 import Spinner from '@atlaskit/spinner';
 import { intlShape, IntlProvider } from 'react-intl';

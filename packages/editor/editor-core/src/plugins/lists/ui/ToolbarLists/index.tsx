@@ -70,6 +70,7 @@ class ToolbarLists extends PureComponent<Props & InjectedIntlProps, State> {
 
     let items = [
       {
+        key: 'unorderedList',
         content: labelUnorderedList,
         value: { name: 'bullet_list' },
         isDisabled: bulletListDisabled,
@@ -77,6 +78,7 @@ class ToolbarLists extends PureComponent<Props & InjectedIntlProps, State> {
         elemAfter: <Shortcut>{tooltip(toggleBulletListKeymap)}</Shortcut>,
       },
       {
+        key: 'orderedList',
         content: labelOrderedList,
         value: { name: 'ordered_list' },
         isDisabled: orderedListDisabled,

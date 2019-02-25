@@ -17,7 +17,6 @@ export { default as helpDialogPlugin } from './help-dialog';
 export { default as hyperlinkPlugin } from './hyperlink';
 export { default as imageUploadPlugin } from './image-upload';
 export { default as insertBlockPlugin } from './insert-block';
-export { default as isMultilineContentPlugin } from './is-multiline-content';
 export { default as jiraIssuePlugin } from './jira-issue';
 export { default as layoutPlugin } from './layout';
 export { default as listsPlugin } from './lists';

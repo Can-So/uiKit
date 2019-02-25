@@ -1,11 +1,6 @@
 import { Node, Schema } from 'prosemirror-model';
 import { Transaction, Selection } from 'prosemirror-state';
-import {
-  validator,
-  Entity,
-  VALIDATION_ERRORS,
-  ValidationError,
-} from '@atlaskit/adf-utils';
+import { validator, ADFEntity, ValidationError } from '@atlaskit/adf-utils';
 import { analyticsService } from '../analytics';
 import { ContentNodeWithPos } from 'prosemirror-utils';
 
@@ -104,7 +99,7 @@ export function isEmptyDocument(node: Node): boolean {
 }
 
 function wrapWithUnsupported(
-  originalValue: Entity,
+  originalValue: ADFEntity,
   type: 'block' | 'inline' = 'block',
 ) {
   return {
@@ -114,15 +109,16 @@ function wrapWithUnsupported(
 }
 
 function fireAnalyticsEvent(
-  entity: Entity,
+  entity: ADFEntity,
   error: ValidationError,
   type: 'block' | 'inline' | 'mark' = 'block',
 ) {
-  const { code } = error;
+  const { code, meta } = error;
   analyticsService.trackEvent('atlassian.editor.unsupported', {
     name: entity.type || 'unknown',
     type,
     errorCode: code,
+    meta: meta && JSON.stringify(meta),
   });
 }
 
@@ -162,7 +158,7 @@ export function processRawValue(
     const nodes = Object.keys(schema.nodes);
     const marks = Object.keys(schema.marks);
     const validate = validator(nodes, marks, { allowPrivateAttributes: true });
-    const emptyDoc: Entity = { type: 'doc', content: [] };
+    const emptyDoc: ADFEntity = { type: 'doc', content: [] };
 
     // ProseMirror always require a child under doc
     if (node.type === 'doc') {
@@ -179,13 +175,13 @@ export function processRawValue(
     }
 
     const { entity = emptyDoc } = validate(
-      node as Entity,
+      node as ADFEntity,
       (entity, error, options) => {
         // Remove any invalid marks
         if (marks.indexOf(entity.type) > -1) {
           if (
             !(
-              error.code === VALIDATION_ERRORS.INVALID_TYPE &&
+              error.code === 'INVALID_TYPE' &&
               FALSE_POSITIVE_MARKS.indexOf(entity.type) > -1
             )
           ) {
@@ -200,7 +196,7 @@ export function processRawValue(
          * And, also empty `text` node is not valid.
          */
         if (
-          error.code === VALIDATION_ERRORS.MISSING_PROPERTY &&
+          error.code === 'MISSING_PROPERTIES' &&
           entity.type === 'paragraph'
         ) {
           return { type: 'paragraph', content: [] };
@@ -208,7 +204,7 @@ export function processRawValue(
 
         // Can't fix it by wrapping
         // TODO: We can repair missing content like `panel` without a `paragraph`.
-        if (error.code === VALIDATION_ERRORS.INVALID_CONTENT_LENGTH) {
+        if (error.code === 'INVALID_CONTENT_LENGTH') {
           return entity;
         }
 

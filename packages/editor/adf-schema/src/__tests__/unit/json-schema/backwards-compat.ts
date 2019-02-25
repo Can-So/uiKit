@@ -36,6 +36,7 @@ expect.extend({
       validateSchemaCompatibility(argument, received, {
         allowNewOneOf: true,
         allowNewEnumValue: true,
+        allowReorder: true,
       });
 
       return {

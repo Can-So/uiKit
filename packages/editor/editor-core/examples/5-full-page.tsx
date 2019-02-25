@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import * as React from 'react';
 import Button, { ButtonGroup } from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
 
 import Editor, { EditorProps } from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
@@ -22,20 +21,9 @@ import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';
 import { DevTools } from '../example-helpers/DevTools';
+import { TitleInput } from '../example-helpers/PageElements';
 import { EditorActions } from './../src';
-
-export const TitleInput: any = styled.input`
-  border: none;
-  outline: none;
-  font-size: 2.07142857em;
-  margin: 0 0 21px;
-  padding: 0;
-
-  &::placeholder {
-    color: ${colors.N90};
-  }
-`;
-TitleInput.displayName = 'TitleInput';
+import withSentry from '../example-helpers/withSentry';
 
 /**
  * +-------------------------------+
@@ -131,7 +119,7 @@ export interface ExampleProps {
   onTitleChange?: (title: string) => void;
 }
 
-export class ExampleEditor extends React.Component<
+class ExampleEditorComponent extends React.Component<
   EditorProps & ExampleProps,
   State
 > {
@@ -205,7 +193,6 @@ export class ExampleEditor extends React.Component<
                     <TitleInput
                       value={this.state.title}
                       onChange={this.handleTitleChange}
-                      placeholder="Give this page a title..."
                       // tslint:disable-next-line:jsx-no-lambda
                       innerRef={this.handleTitleRef}
                       onFocus={this.handleTitleOnFocus}
@@ -265,6 +252,8 @@ export class ExampleEditor extends React.Component<
     }
   };
 }
+
+export const ExampleEditor = withSentry(ExampleEditorComponent);
 
 export default function Example(props: EditorProps & ExampleProps) {
   return (

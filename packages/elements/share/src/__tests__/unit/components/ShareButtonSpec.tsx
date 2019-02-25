@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { mount, shallow } from 'enzyme';
 import Button from '@atlaskit/button';
 import ShareIcon from '@atlaskit/icon/glyph/share';
-import { ShareButton } from '../../../components/ShareButton';
+import { mount, shallow } from 'enzyme';
+import * as React from 'react';
+import { Props, ShareButton } from '../../../components/ShareButton';
 
 const noop = () => {};
 
@@ -16,31 +16,27 @@ describe('ShareButton', () => {
     });
 
     it('should proxy appearance, isSelected and isDisable props into Button component', () => {
-      const propsToBeProxied = {
-        apppearnce: 'primary',
+      const propsToBeProxied: Partial<Props> = {
+        appearance: 'primary',
         isSelected: false,
         isDisabled: false,
       };
       const wrapper = mount(
         <ShareButton {...propsToBeProxied} onClick={noop} />,
       );
-      let buttonProps = wrapper.find(Button).props();
+      let buttonProps: any = wrapper.find(Button).props();
 
-      Object.keys(propsToBeProxied).forEach(propKey => {
-        expect(buttonProps[propKey]).toEqual(propsToBeProxied[propKey]);
-      });
+      expect(buttonProps).toMatchObject(propsToBeProxied);
 
       const newPropsToBeProxied = {
-        apppearnce: 'warning',
+        appearance: 'warning',
         isSelected: !propsToBeProxied.isSelected,
         isDisabled: !propsToBeProxied.isDisabled,
       };
       wrapper.setProps(newPropsToBeProxied);
       buttonProps = wrapper.find(Button).props();
 
-      Object.keys(newPropsToBeProxied).forEach(propKey => {
-        expect(buttonProps[propKey]).toEqual(newPropsToBeProxied[propKey]);
-      });
+      expect(buttonProps).toMatchObject(newPropsToBeProxied);
     });
   });
 

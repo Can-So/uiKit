@@ -1,11 +1,21 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, FileDetails, isPreviewableType } from '@atlaskit/media-core';
+import {
+  Context,
+  FileDetails,
+  Identifier,
+  FileIdentifier,
+  isPreviewableType,
+  isFileIdentifier,
+  isExternalImageIdentifier,
+  isDifferentIdentifier,
+} from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import { Subscription } from 'rxjs/Subscription';
 import { IntlProvider } from 'react-intl';
+import { MediaViewer, MediaViewerDataSource } from '@atlaskit/media-viewer';
 import {
   CardAnalyticsContext,
   CardAction,
@@ -14,19 +24,12 @@ import {
   CardState,
   CardEvent,
 } from '../..';
-import { Identifier, FileIdentifier } from '../domain';
 import { CardView } from '../cardView';
 import { LazyContent } from '../../utils/lazyContent';
 import { getBaseAnalyticsContext } from '../../utils/analyticsUtils';
 import { getDataURIDimension } from '../../utils/getDataURIDimension';
 import { getDataURIFromFileState } from '../../utils/getDataURIFromFileState';
 import { extendMetadata } from '../../utils/metadata';
-import {
-  isFileIdentifier,
-  isUrlPreviewIdentifier,
-  isExternalImageIdentifier,
-  isDifferentIdentifier,
-} from '../../utils/identifier';
 import { isBigger } from '../../utils/dimensionComparer';
 import { getCardStatus } from './getCardStatus';
 import { InlinePlayer } from '../inlinePlayer';
@@ -133,15 +136,6 @@ export class Card extends Component<CardProps, CardState> {
           name: name || dataURI,
           mediaType: 'image',
         },
-      });
-
-      return;
-    }
-
-    if (identifier.mediaItemType !== 'file') {
-      this.notifyStateChange({
-        error: new Error('Links are no longer supported in <Card />'),
-        status: 'error',
       });
 
       return;
@@ -272,9 +266,7 @@ export class Card extends Component<CardProps, CardState> {
 
   get analyticsContext(): CardAnalyticsContext {
     const { identifier } = this.props;
-    const id = isUrlPreviewIdentifier(identifier)
-      ? identifier.url
-      : isExternalImageIdentifier(identifier)
+    const id = isExternalImageIdentifier(identifier)
       ? 'external-image'
       : identifier.id;
 
@@ -300,8 +292,16 @@ export class Card extends Component<CardProps, CardState> {
     return actions;
   }
 
-  onClick = (result: CardEvent, analyticsEvent?: UIAnalyticsEventInterface) => {
-    const { onClick, useInlinePlayer } = this.props;
+  onClick = async (
+    result: CardEvent,
+    analyticsEvent?: UIAnalyticsEventInterface,
+  ) => {
+    const {
+      identifier,
+      onClick,
+      useInlinePlayer,
+      shouldOpenMediaViewer,
+    } = this.props;
     const { mediaItemDetails } = result;
 
     this.onClickPayload = {
@@ -312,14 +312,24 @@ export class Card extends Component<CardProps, CardState> {
     if (onClick) {
       onClick(result, analyticsEvent);
     }
-
-    if (useInlinePlayer && mediaItemDetails) {
-      const { mediaType } = mediaItemDetails as FileDetails;
-      if (mediaType === 'video') {
-        this.setState({
-          isPlayingFile: true,
-        });
-      }
+    if (!mediaItemDetails) {
+      return;
+    }
+    const { mediaType } = mediaItemDetails as FileDetails;
+    if (useInlinePlayer && mediaType === 'video') {
+      this.setState({
+        isPlayingFile: true,
+      });
+    } else if (shouldOpenMediaViewer && identifier.mediaItemType === 'file') {
+      const mediaViewerSelectedItem: FileIdentifier = {
+        id: await identifier.id,
+        mediaItemType: 'file',
+        collectionName: identifier.collectionName,
+        occurrenceKey: identifier.occurrenceKey,
+      };
+      this.setState({
+        mediaViewerSelectedItem,
+      });
     }
   };
 
@@ -347,6 +357,72 @@ export class Card extends Component<CardProps, CardState> {
         onError={this.onInlinePlayerError}
         onClick={this.onInlinePlayerClick}
         selected={selected}
+      />
+    );
+  };
+
+  onMediaViewerClose = () => {
+    this.setState({
+      mediaViewerSelectedItem: undefined,
+    });
+  };
+
+  // returns a valid MV data source including current the card identifier
+  getMediaViewerDataSource = (): MediaViewerDataSource => {
+    const { mediaViewerDataSource } = this.props;
+    const { mediaViewerSelectedItem } = this.state;
+
+    if (!mediaViewerSelectedItem) {
+      return {
+        list: [],
+      };
+    }
+
+    if (!mediaViewerDataSource) {
+      return {
+        list: [mediaViewerSelectedItem],
+      };
+    }
+
+    // we want to ensure the card identifier is in the list
+    const { list } = mediaViewerDataSource;
+    if (
+      list &&
+      list.length &&
+      mediaViewerSelectedItem.mediaItemType === 'file'
+    ) {
+      const isSelectedItemInList = list.some(
+        item =>
+          item.mediaItemType === 'file' &&
+          item.id === mediaViewerSelectedItem.id,
+      );
+      if (!isSelectedItemInList) {
+        return {
+          list: [mediaViewerSelectedItem, ...list],
+        };
+      }
+    }
+
+    return mediaViewerDataSource;
+  };
+
+  renderMediaViewer = () => {
+    const { mediaViewerSelectedItem } = this.state;
+    const { context, identifier } = this.props;
+    if (!mediaViewerSelectedItem || identifier.mediaItemType !== 'file') {
+      return;
+    }
+
+    const { collectionName = '' } = identifier;
+    const dataSource = this.getMediaViewerDataSource();
+
+    return (
+      <MediaViewer
+        collectionName={collectionName}
+        dataSource={dataSource}
+        context={context}
+        selectedItem={mediaViewerSelectedItem}
+        onClose={this.onMediaViewerClose}
       />
     );
   };
@@ -401,7 +477,7 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   render() {
-    const { isPlayingFile } = this.state;
+    const { isPlayingFile, mediaViewerSelectedItem } = this.state;
     const content = isPlayingFile
       ? this.renderInlinePlayer()
       : this.renderCard();
@@ -409,7 +485,12 @@ export class Card extends Component<CardProps, CardState> {
     return this.context.intl ? (
       content
     ) : (
-      <IntlProvider locale="en">{content}</IntlProvider>
+      <IntlProvider locale="en">
+        <>
+          {content}
+          {mediaViewerSelectedItem ? this.renderMediaViewer() : null}
+        </>
+      </IntlProvider>
     );
   }
 

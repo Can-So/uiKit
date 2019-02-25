@@ -182,7 +182,7 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
         return null;
       },
     },
-    view: (view: EditorView) => {
+    view: (_view: EditorView) => {
       return {
         update: (view: EditorView, prevState: EditorState) => {
           const newSelection = view.state.selection;

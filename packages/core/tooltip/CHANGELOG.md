@@ -1,5 +1,10 @@
 # @atlaskit/tooltip
 
+## 12.1.17
+- [patch] [c4edb3ab4d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4edb3ab4d):
+
+  - Move tooltip to render popper in portal to maintain ref that Popper needs to initially position the tooltip
+
 ## 12.1.16
 - Updated dependencies [27cacd44ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27cacd44ab):
   - @atlaskit/portal@0.1.0

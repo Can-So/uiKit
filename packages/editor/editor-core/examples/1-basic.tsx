@@ -8,7 +8,7 @@ export default function Example() {
         The most basic editor possible. Editor you get by rendering{' '}
         {'<Editor/>'} component with no props.
       </p>
-      <Editor appearance="message" />
+      <Editor />
     </div>
   );
 }

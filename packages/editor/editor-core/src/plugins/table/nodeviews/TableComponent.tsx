@@ -43,11 +43,13 @@ export interface ComponentProps extends Props {
   width: number;
 }
 
-class TableComponent extends React.Component<ComponentProps> {
-  state: {
-    scroll: number;
-    tableContainerWidth: string;
-  } = {
+interface TableState {
+  scroll: number;
+  tableContainerWidth: string;
+}
+
+class TableComponent extends React.Component<ComponentProps, TableState> {
+  state = {
     scroll: 0,
     tableContainerWidth: 'inherit',
   };
@@ -80,22 +82,19 @@ class TableComponent extends React.Component<ComponentProps> {
     if (allowColumnResizing) {
       const { view, node, containerWidth, getPos } = this.props;
 
-      this.scaleTableDebounced(
-        view,
-        this.table,
-        node,
-        getPos(),
-        containerWidth.width,
-        node.attrs.layout,
-        node.attrs.layout,
-      );
-
-      this.setState(() => ({
-        tableContainerWidth: calcTableWidth(
-          node.attrs.layout,
+      if (node.attrs.__autoSize === false) {
+        this.scaleTableDebounced(
+          view,
+          this.table,
+          node,
+          node,
+          getPos(),
           containerWidth.width,
-        ),
-      }));
+          true,
+        );
+      }
+
+      this.updateTableContainerWidth();
     }
   }
 
@@ -119,7 +118,7 @@ class TableComponent extends React.Component<ComponentProps> {
         recreateResizeColsByNode(this.table, this.props.node);
       }
 
-      this.handleTableResizing(prevProps);
+      this.handleTableResizingDebounced(prevProps);
     }
   }
 
@@ -246,42 +245,57 @@ class TableComponent extends React.Component<ComponentProps> {
     const prevMap = TableMap.get(prevProps.node);
     const currentMap = TableMap.get(node);
 
+    // We only consider a layout change valid if it's done outside of an autoSize.
+    const layoutChanged =
+      prevAttrs.layout !== currentAttrs.layout &&
+      prevAttrs.__autoSize === currentAttrs.__autoSize;
+
     if (
+      layoutChanged ||
       prevMap.width !== currentMap.width ||
-      prevAttrs.layout !== currentAttrs.layout ||
-      prevAttrs.isNumberColumnEnabled !== currentAttrs.isNumberColumnEnabled ||
-      prevAttrs.__autoSize !== currentAttrs.__autoSize ||
-      prevProps.containerWidth !== containerWidth
+      prevProps.containerWidth !== containerWidth ||
+      prevAttrs.isNumberColumnEnabled !== currentAttrs.isNumberColumnEnabled
     ) {
-      this.scaleTableDebounced(
+      scaleTable(
         view,
         this.table,
         node,
+        prevProps.node,
         getPos(),
         containerWidth.width,
-        currentAttrs.layout,
-        prevAttrs.layout,
-        prevAttrs.__autoSize,
       );
-
-      this.setState(() => ({
-        tableContainerWidth: calcTableWidth(
-          currentAttrs.layout,
-          containerWidth.width,
-        ),
-      }));
     }
+
+    this.updateTableContainerWidth();
   };
 
   private handleAutoSize = () => {
     if (this.table) {
       const { view, node, getPos } = this.props;
-      const { state, dispatch } = view;
-      autoSizeTable(node, this.table, getPos())(state, dispatch);
+      autoSizeTable(view, node, this.table, getPos());
     }
   };
 
+  private updateTableContainerWidth = () => {
+    const { node, containerWidth } = this.props;
+    this.setState((prevState: TableState) => {
+      const tableContainerWidth = calcTableWidth(
+        node.attrs.layout,
+        containerWidth.width,
+      );
+
+      if (prevState.tableContainerWidth === tableContainerWidth) {
+        return null;
+      }
+
+      return {
+        tableContainerWidth,
+      };
+    });
+  };
+
   private scaleTableDebounced = rafSchedule(scaleTable);
+  private handleTableResizingDebounced = rafSchedule(this.handleTableResizing);
   private handleScrollDebounced = rafSchedule(this.handleScroll);
   private handleAutoSizeDebounced = rafSchedule(this.handleAutoSize);
 }

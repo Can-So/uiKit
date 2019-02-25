@@ -29,12 +29,15 @@ export async function snapshot(page, tolerance?: number) {
       failureThreshold: `${tolerance}`,
       failureThresholdType: 'percent',
     });
+    return;
   }
   // @ts-ignore
   expect(image).toMatchProdImageSnapshot();
 }
 
-export type RendererPropsOverrides = { [T in keyof Props]?: Props[T] };
+export type RendererPropsOverrides = { [T in keyof Props]?: Props[T] } & {
+  showSidebar?: boolean;
+};
 export async function mountRenderer(page, props: RendererPropsOverrides) {
   await page.$eval(
     '#renderer-container',
@@ -57,4 +60,9 @@ export async function goToRendererTestingExample(page) {
   );
 
   await page.goto(url);
+}
+
+export async function animationFrame(page) {
+  // Give browser time to render, waitForFunction by default fires on RAF.
+  await page.waitForFunction('1 === 1');
 }

@@ -1,37 +1,9 @@
 import { mount, shallow } from 'enzyme';
-import { expect } from 'chai';
-
 import { ReactSerializer } from '../../../index';
 import { defaultSchema as schema } from '@atlaskit/adf-schema';
 import { Action } from '../../../react/marks';
 import { Heading } from '../../../react/nodes';
-import { bigEmojiHeight } from '../../../utils';
 import { Emoji } from '../../../react/nodes';
-import { RendererAppearance } from '../../../ui/Renderer';
-
-const emojiDoc = {
-  content: [
-    {
-      content: [
-        {
-          attrs: {
-            id: '1f642',
-            shortName: ':slight_smile:',
-            text: '🙂',
-          },
-          type: 'emoji',
-        },
-        {
-          text: ' ',
-          type: 'text',
-        },
-      ],
-      type: 'paragraph',
-    },
-  ],
-  type: 'doc',
-  version: 1,
-};
 
 const doc = {
   type: 'doc',
@@ -138,7 +110,6 @@ const headingDoc = {
 };
 
 const docFromSchema = schema.nodeFromJSON(doc);
-const emojiDocFromSchema = schema.nodeFromJSON(emojiDoc);
 const headingDocFromSchema = schema.nodeFromJSON(headingDoc);
 
 describe('Renderer - ReactSerializer', () => {
@@ -161,57 +132,15 @@ describe('Renderer - ReactSerializer', () => {
       const link = paragraph.find('a');
       const strong = link.find('strong');
 
-      expect(root.length).to.equal(1);
-      expect(paragraph.length).to.equal(1);
-      expect(link.length).to.equal(1);
-      expect(strong.length).to.equal(1);
+      expect(root.length).toEqual(1);
+      expect(paragraph.length).toEqual(1);
+      expect(link.length).toEqual(1);
+      expect(strong.length).toEqual(1);
 
-      expect(link.text()).to.equal('Hello, World!');
-      expect(link.props()).to.have.property(
-        'href',
-        'https://www.atlassian.com',
-      );
-      expect(strong.text()).to.equal('World!');
+      expect(link.text()).toEqual('Hello, World!');
+      expect(link.props()).toHaveProperty('href', 'https://www.atlassian.com');
+      expect(strong.text()).toEqual('World!');
       reactDoc.unmount();
-    });
-
-    describe('appearance', () => {
-      const appearances: RendererAppearance[] = [
-        'message',
-        'inline-comment',
-        'comment',
-        'full-page',
-        'mobile',
-      ];
-
-      const emojiDoubleHeightIn: RendererAppearance[] = ['message'];
-
-      appearances.forEach(appearance => {
-        describe(`${appearance} appearance`, () => {
-          // Should the emoji render as double height in this appearance
-          const doubleHeight: boolean =
-            emojiDoubleHeightIn.indexOf(appearance) !== -1;
-
-          it(`emoji ${
-            doubleHeight ? 'should' : 'should not'
-          } render as double height`, () => {
-            const reactSerializer = ReactSerializer.fromSchema(schema, {
-              appearance,
-            });
-            const reactDoc = mount(reactSerializer.serializeFragment(
-              emojiDocFromSchema.content,
-            ) as any);
-
-            const emoji = reactDoc.find('EmojiItem');
-            expect(emoji.length).to.equal(1);
-            if (doubleHeight) {
-              expect(emoji.prop('fitToHeight')).to.equal(bigEmojiHeight);
-            } else {
-              expect(emoji.prop('fitToHeight')).to.not.equal(bigEmojiHeight);
-            }
-          });
-        });
-      });
     });
   });
 
@@ -225,11 +154,11 @@ describe('Renderer - ReactSerializer', () => {
       ];
 
       const output = ReactSerializer.buildMarkStructure(textNodes);
-      expect(output[0].type.name).to.equal('text');
-      expect((output[0] as any).text).to.equal('Hello ');
-      expect(output[1].type.name).to.equal('strong');
-      expect((output[1] as any).content[0].type.name).to.equal('text');
-      expect((output[1] as any).content[0].text).to.equal('World!');
+      expect(output[0].type.name).toEqual('text');
+      expect((output[0] as any).text).toEqual('Hello ');
+      expect(output[1].type.name).toEqual('strong');
+      expect((output[1] as any).content[0].type.name).toEqual('text');
+      expect((output[1] as any).content[0].text).toEqual('World!');
     });
 
     it('should not merge marks when parent mark is different', () => {
@@ -239,8 +168,8 @@ describe('Renderer - ReactSerializer', () => {
       ];
 
       const output = ReactSerializer.buildMarkStructure(textNodes);
-      expect(output[0].type.name).to.equal('em');
-      expect(output[1].type.name).to.equal('subsup');
+      expect(output[0].type.name).toEqual('em');
+      expect(output[1].type.name).toEqual('subsup');
     });
 
     it('should merge same marks when possible', () => {
@@ -257,15 +186,15 @@ describe('Renderer - ReactSerializer', () => {
       ];
 
       const output = ReactSerializer.buildMarkStructure(textNodes);
-      expect(output.length).to.equal(1);
-      expect(output[0].type.name).to.equal('link');
+      expect(output.length).toEqual(1);
+      expect(output[0].type.name).toEqual('link');
 
       const { content } = output[0] as any;
-      expect(content.length).to.equal(1);
-      expect(content[0].type.name).to.equal('em');
-      expect(content[0].content.length).to.equal(2);
-      expect(content[0].content[0].type.name).to.equal('strong');
-      expect(content[0].content[1].type.name).to.equal('text');
+      expect(content.length).toEqual(1);
+      expect(content[0].type.name).toEqual('em');
+      expect(content[0].content.length).toEqual(2);
+      expect(content[0].content[0].type.name).toEqual('strong');
+      expect(content[0].content[1].type.name).toEqual('text');
     });
 
     it('should merge mark nodes with text color', () => {
@@ -280,10 +209,10 @@ describe('Renderer - ReactSerializer', () => {
       ];
 
       const output = ReactSerializer.buildMarkStructure(textNodes);
-      expect(output.length).to.equal(2);
-      expect(output[0].type.name).to.equal('text');
-      expect(output[1].type.name).to.equal('strong');
-      expect((output[1] as any).content[0].attrs).to.deep.equal({
+      expect(output.length).toEqual(2);
+      expect(output[0].type.name).toEqual('text');
+      expect(output[1].type.name).toEqual('strong');
+      expect((output[1] as any).content[0].attrs).toEqual({
         color: '#aaeebb',
       });
     });
@@ -300,12 +229,12 @@ describe('Renderer - ReactSerializer', () => {
       ];
 
       const output = ReactSerializer.buildMarkStructure(textNodes);
-      expect(output.length).to.equal(3);
-      expect(output[0].type.name).to.equal('text');
-      expect(output[1].type.name).to.equal('link');
-      expect(output[2].type.name).to.equal('strong');
+      expect(output.length).toEqual(3);
+      expect(output[0].type.name).toEqual('text');
+      expect(output[1].type.name).toEqual('link');
+      expect(output[2].type.name).toEqual('strong');
 
-      expect((output[1] as any).content.length).to.equal(2);
+      expect((output[1] as any).content.length).toEqual(2);
     });
   });
 
@@ -319,9 +248,9 @@ describe('Renderer - ReactSerializer', () => {
 
     it('should sort marks', () => {
       const sortedMarks = ReactSerializer.getMarks(node);
-      expect(sortedMarks[0].type.name).to.equal('strong');
-      expect(sortedMarks[1].type.name).to.equal('strike');
-      expect(sortedMarks[2].type.name).to.equal('underline');
+      expect(sortedMarks[0].type.name).toEqual('strong');
+      expect(sortedMarks[1].type.name).toEqual('strike');
+      expect(sortedMarks[2].type.name).toEqual('underline');
     });
   });
 
@@ -334,7 +263,7 @@ describe('Renderer - ReactSerializer', () => {
       const reactDoc = mount(reactSerializer.serializeFragment(
         docFromSchema.content,
       ) as any);
-      expect(reactDoc.find(Action).prop('eventHandlers')).to.equal(
+      expect(reactDoc.find(Action).prop('eventHandlers')).toEqual(
         eventHandlers,
       );
       reactDoc.unmount();
@@ -348,8 +277,8 @@ describe('Renderer - ReactSerializer', () => {
       const reactDoc = mount(reactSerializer.serializeFragment(
         docFromSchema.content,
       ) as any);
-      expect(reactDoc.find(Action).prop('markKey')).to.equal('test-action-key');
-      expect(reactDoc.find(Action).key()).to.not.equal('test-action-key');
+      expect(reactDoc.find(Action).prop('markKey')).toEqual('test-action-key');
+      expect(reactDoc.find(Action).key()).not.toEqual('test-action-key');
       reactDoc.unmount();
     });
   });
@@ -362,10 +291,10 @@ describe('Renderer - ReactSerializer', () => {
       ) as any);
 
       const headings = reactDoc.find(Heading);
-      expect(headings.at(0).prop('headingId')).to.equal('Heading-1');
-      expect(headings.at(1).prop('headingId')).to.equal('Heading-2');
-      expect(headings.at(2).prop('headingId')).to.equal('Heading-1.1');
-      expect(headings.at(3).prop('headingId')).to.equal('Heading-2.1');
+      expect(headings.at(0).prop('headingId')).toEqual('Heading-1');
+      expect(headings.at(1).prop('headingId')).toEqual('Heading-2');
+      expect(headings.at(2).prop('headingId')).toEqual('Heading-1.1');
+      expect(headings.at(3).prop('headingId')).toEqual('Heading-2.1');
     });
 
     it('should not render heading ids if "disableHeadingIDs" is true', () => {
@@ -377,10 +306,10 @@ describe('Renderer - ReactSerializer', () => {
       ) as any);
 
       const headings = reactDoc.find(Heading);
-      expect(headings.at(0).prop('headingId')).to.equal(undefined);
-      expect(headings.at(1).prop('headingId')).to.equal(undefined);
-      expect(headings.at(2).prop('headingId')).to.equal(undefined);
-      expect(headings.at(3).prop('headingId')).to.equal(undefined);
+      expect(headings.at(0).prop('headingId')).toEqual(undefined);
+      expect(headings.at(1).prop('headingId')).toEqual(undefined);
+      expect(headings.at(2).prop('headingId')).toEqual(undefined);
+      expect(headings.at(3).prop('headingId')).toEqual(undefined);
     });
   });
 
@@ -473,8 +402,8 @@ describe('Renderer - ReactSerializer', () => {
         tableFromSchema.content,
       ) as any);
 
-      expect(reactDoc.find('table').prop('data-number-column')).to.equal(true);
-      expect(reactDoc.find('table[data-number-column]').length).to.equal(1);
+      expect(reactDoc.find('table').prop('data-number-column')).toEqual(true);
+      expect(reactDoc.find('table[data-number-column]').length).toEqual(1);
     });
   });
 });

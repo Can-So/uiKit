@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import editorShowError from '../../editorShowError';
 import { EDITOR_SHOW_ERROR } from '../../../actions/editorShowError';
 
@@ -20,7 +18,7 @@ describe('editorShowError() reducer', () => {
   it('returns same state if action has different type', () => {
     const oldState = { ...stateBase };
     const newState = editorShowError(oldState, { type: 'SOME_OTHER_TYPE' });
-    expect(newState).to.deep.equal(stateBase);
+    expect(newState).toEqual(stateBase);
   });
 
   it('sets the error to the state', () => {
@@ -31,7 +29,7 @@ describe('editorShowError() reducer', () => {
       error: newError,
     });
 
-    expect(newState).to.deep.equal({
+    expect(newState).toEqual({
       ...stateBase,
       editorData: { error: newError },
     });
@@ -48,7 +46,7 @@ describe('editorShowError() reducer', () => {
       error: newError,
     });
 
-    expect(newState).to.deep.equal({
+    expect(newState).toEqual({
       ...stateBase,
       editorData: { error: newError },
     });

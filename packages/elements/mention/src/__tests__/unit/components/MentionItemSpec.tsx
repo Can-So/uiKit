@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
-import { mountWithIntl } from 'enzyme-react-intl';
 import { ReactWrapper } from 'enzyme';
-import { MentionDescription } from '../../../types';
-import { Props, State } from '../../../components/MentionList';
+import * as React from 'react';
 import MentionItem from '../../../components/MentionItem';
+import { Props, State } from '../../../components/MentionList';
+import { MentionDescription } from '../../../types';
 
 const mentionWithNickname = {
   id: '0',

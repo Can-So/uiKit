@@ -149,6 +149,11 @@ export const setGapCursorAtPos = (
   position: number,
   side: Side = Side.LEFT,
 ): Command => (state, dispatch) => {
+  // @see ED-6231
+  if (position > state.doc.content.size) {
+    return false;
+  }
+
   const $pos = state.doc.resolve(position);
 
   if (GapCursorSelection.valid($pos)) {
@@ -167,7 +172,10 @@ const captureCursorCoords = (
   event: MouseEvent,
   editorRef: HTMLElement,
   posAtCoords: (
-    coords: { left: number; top: number },
+    coords: {
+      left: number;
+      top: number;
+    },
   ) => { pos: number; inside: number } | null | void,
   state: EditorState,
 ): { position: number; side: Side } | null => {
@@ -210,7 +218,10 @@ export const setCursorForTopLevelBlocks = (
   event: MouseEvent,
   editorRef: HTMLElement,
   posAtCoords: (
-    coords: { left: number; top: number },
+    coords: {
+      left: number;
+      top: number;
+    },
   ) => { pos: number; inside: number } | null | void,
 ): Command => (state, dispatch) => {
   // plugin is disabled

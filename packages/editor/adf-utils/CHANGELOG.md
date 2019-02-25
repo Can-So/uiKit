@@ -1,5 +1,15 @@
 # @atlaskit/adf-utils
 
+## 5.7.1
+- [patch] [60ea09b0cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60ea09b0cc):
+
+  - ED-6246 Improves types and adds more metadata to errors
+
+## 5.7.0
+- [minor] [4d8d759bf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d8d759bf9):
+
+  -  [ED-6255] Migrate ADFNode type to ADFEntity
+
 ## 5.6.3
 - [patch] [e83a441140](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a441140):
 

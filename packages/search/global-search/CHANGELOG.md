@@ -1,5 +1,15 @@
 # @atlaskit/global-search
 
+## 5.15.4
+- [patch] [b3e90635b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3e90635b8):
+
+  - fix global search keyboard nav
+
+## 5.15.3
+- [patch] [13fb3ea95c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/13fb3ea95c):
+
+  - add rendering time to analytics
+
 ## 5.15.2
 - [patch] [cfb2fa498f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfb2fa498f):
 
