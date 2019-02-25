@@ -488,7 +488,7 @@ export class Card extends Component<CardProps, CardState> {
       <IntlProvider locale="en">
         <>
           {content}
-          {mediaViewerSelectedItem && this.renderMediaViewer()}
+          {mediaViewerSelectedItem ? this.renderMediaViewer() : null}
         </>
       </IntlProvider>
     );
