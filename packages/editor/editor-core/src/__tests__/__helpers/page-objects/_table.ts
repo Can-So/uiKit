@@ -1,6 +1,7 @@
 import { clickElementWithText, getBoundingRect } from './_editor';
 import { clickToolbarMenu, ToolbarMenuItem } from './_toolbar';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
+import messages from '../../../messages';
 import {
   pressKey,
   pressKeyup,
@@ -40,9 +41,13 @@ export const tableSelectors = {
   wideState: `.ProseMirror table[data-layout="wide"]`,
   fullwidthState: `.ProseMirror table[data-layout="full-width"]`,
   defaultState: `.ProseMirror table[data-layout="center"]`,
-  fullwidthSelector: `div[aria-label="Full width"]`,
-  wideSelector: `div[aria-label="Wide"]`,
-  defaultSelector: `div[aria-label="Center"]`,
+  fullwidthSelector: `div[aria-label="${
+    messages.layoutFullWidth.defaultMessage
+  }"]`,
+  wideSelector: `div[aria-label="${messages.layoutWide.defaultMessage}"]`,
+  defaultSelector: `div[aria-label="${
+    messages.layoutFixedWidth.defaultMessage
+  }"]`,
   tableTd: 'table td',
   tableTh: 'table th',
 };
