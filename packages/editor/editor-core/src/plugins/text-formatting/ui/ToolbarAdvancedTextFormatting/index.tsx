@@ -23,7 +23,7 @@ import {
   Shortcut,
 } from '../../../../ui/styles';
 import * as commands from '../../commands/text-formatting';
-import { clearFormatting } from '../../commands/clear-formatting';
+import { clearFormattingWithAnalytics } from '../../commands/clear-formatting';
 import { INPUT_METHOD } from '../../../analytics';
 
 export interface Props {
@@ -313,7 +313,7 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
         commands.toggleSuperscriptWithAnalytics()(state, dispatch);
         break;
       case 'clearFormatting':
-        clearFormatting()(state, dispatch);
+        clearFormattingWithAnalytics(INPUT_METHOD.TOOLBAR)(state, dispatch);
         break;
     }
     this.setState({ isOpen: false });

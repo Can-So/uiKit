@@ -1,0 +1,1 @@
+- ED-6238, ED-5684 Add Analytcs GAS v3 to clear formatting and fix clear formatting on heading elements
