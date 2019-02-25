@@ -1,1 +1,1 @@
-- ED-4998 Fix highlighting and disabling of hamburger menu items in different contexts
+- ED-4998 Fix highlighting and disabling of meatball menu items in different contexts

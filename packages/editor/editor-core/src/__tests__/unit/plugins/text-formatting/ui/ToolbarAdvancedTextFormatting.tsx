@@ -308,11 +308,17 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
     toolbarOption.unmount();
   });
 
+  /**
+   * Helper function to get the react element (not the DOM element) of menu items within the advanced text formatting menu.
+   */
   function getMenuItem(toolbarOption: ReactWrapper, itemKey: string) {
-    let items = toolbarOption.find(DropdownMenuWrapper).prop('items')[0];
-    return items.items.filter(i => i.key === itemKey)[0];
+    return toolbarOption
+      .find(DropdownMenuWrapper)
+      .prop('items')[0]
+      .items.filter(i => i.key === itemKey)[0];
   }
-  describe.only('menu options inside code block', () => {
+
+  describe('menu options inside code block', () => {
     let toolbarOption;
 
     beforeEach(() => {
@@ -336,7 +342,7 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
       toolbarOption.unmount();
     });
 
-    it.only('should have clear formatting available for a code block', () => {
+    it('should have clear formatting available for a code block', () => {
       const clearFormattingButton = getMenuItem(
         toolbarOption,
         'clearFormatting',
@@ -344,13 +350,13 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
       expect(clearFormattingButton.isDisabled).toBe(false);
     });
 
-    it.only('should have other menu items disabled in a code block', () => {
+    it('should have other menu items disabled in a code block', () => {
       const strikeButton = getMenuItem(toolbarOption, 'strike');
       expect(strikeButton.isDisabled).toBe(true);
     });
   });
 
-  it.only('should only have selected menu options for the current selection', () => {
+  it('should only have selected menu options for the current selection', () => {
     const { editorView, pluginState } = editor(
       doc(p(strike(underline('{<}Formatted {>}text')))),
     );

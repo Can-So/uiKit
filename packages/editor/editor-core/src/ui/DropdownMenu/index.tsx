@@ -26,7 +26,6 @@ export interface Props {
   zIndex?: number;
   items: Array<{
     items: Array<{
-      key: string;
       content: string | ReactElement<any>;
       elemBefore?: React.ReactNode;
       elemAfter?: React.ReactNode;
