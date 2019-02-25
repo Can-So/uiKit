@@ -1,0 +1,1 @@
+- ED-6286: remove StateManager from media plugin and provider
