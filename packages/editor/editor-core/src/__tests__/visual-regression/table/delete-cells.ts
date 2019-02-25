@@ -5,7 +5,6 @@ import {
   clickFirstCell,
 } from '../../__helpers/page-objects/_table';
 
-// TODO: Delete in table, seems to have an issue: https://product-fabric.atlassian.net/browse/ED-6341
 describe('Delete in table:', () => {
   let page;
 
