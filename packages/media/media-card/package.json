@@ -30,6 +30,7 @@
     "@atlaskit/dropdown-menu": "^6.1.26",
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/media-ui": "^9.0.0",
+    "@atlaskit/media-viewer": "^36.1.0",
     "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/theme": "^7.0.2",
     "babel-runtime": "^6.26.0",

@@ -1,0 +1,1 @@
+- Add shouldOpenMediaViewer + mediaViewerDataSource optional props to Card api to simplify MediaViewer integration
