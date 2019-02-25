@@ -108,7 +108,16 @@ export const requestService = <T>(
     if (response.status === 204) {
       return Promise.resolve();
     } else if (response.ok) {
-      return response.json();
+      const contentType =
+        (response.headers &&
+          response.headers.get('Content-Type') &&
+          response.headers.get('Content-Type')) ||
+        '';
+      if (contentType.toLowerCase().startsWith('application/json')) {
+        return response.json();
+      } else {
+        return Promise.resolve();
+      }
     } else if (response.status === 401 && refreshedSecurityProvider) {
       // auth issue - try once
       return refreshedSecurityProvider().then(newSecOptions => {
