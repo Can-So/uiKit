@@ -20,7 +20,7 @@ export interface InlinePlayerState {
   fileSrc?: string;
 }
 
-const getPreferredVideoArtifact = (
+export const getPreferredVideoArtifact = (
   fileState: FileState,
 ): keyof MediaFileArtifacts | undefined => {
   if (fileState.status === 'processed' || fileState.status === 'processing') {
