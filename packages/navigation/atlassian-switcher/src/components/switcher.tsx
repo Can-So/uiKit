@@ -165,7 +165,11 @@ export default class Switcher extends React.Component<SwitcherProps> {
             {suggestedLinks.map(({ key, label, Icon }, idx) => (
               <NavigationAnalyticsContext
                 key={key}
-                data={getItemAnalyticsContext(idx, key, 'try')}
+                data={getItemAnalyticsContext(
+                  licensedProductLinks.length + idx,
+                  key,
+                  'try',
+                )}
               >
                 <SwitcherItem
                   icon={<Icon theme="product" />}
@@ -179,7 +183,11 @@ export default class Switcher extends React.Component<SwitcherProps> {
             {fixedProductLinks.map(({ key, label, Icon, href }, idx) => (
               <NavigationAnalyticsContext
                 key={key}
-                data={getItemAnalyticsContext(idx, key, 'product')}
+                data={getItemAnalyticsContext(
+                  suggestedLinks.length + idx,
+                  key,
+                  'product',
+                )}
               >
                 <SwitcherItem icon={<Icon theme="product" />} href={href}>
                   {label}
@@ -189,7 +197,11 @@ export default class Switcher extends React.Component<SwitcherProps> {
             {adminLinks.map(({ key, label, href, Icon }, idx) => (
               <NavigationAnalyticsContext
                 key={key}
-                data={getItemAnalyticsContext(idx, key, 'admin')}
+                data={getItemAnalyticsContext(
+                  fixedProductLinks.length + idx,
+                  key,
+                  'admin',
+                )}
               >
                 <SwitcherItem icon={<Icon theme="admin" />} href={href}>
                   {label}

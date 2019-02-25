@@ -68,40 +68,33 @@ describe('utils/links', () => {
       const result = getLicensedProductLinks(licenseInformation);
       expect(result.map(({ key }) => key)).toMatchObject([
         'confluence.ondemand',
-        ...FIXED_PRODUCTS_KEYS,
       ]);
     });
-    it('should add Jira Core for Jira Software', () => {
+    it('should not add Jira Core for Jira Software', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-software.ondemand',
       ]);
       const result = getLicensedProductLinks(licenseInformation);
       expect(result.map(({ key }) => key)).toMatchObject([
-        'jira-core.ondemand',
         'jira-software.ondemand',
-        ...FIXED_PRODUCTS_KEYS,
       ]);
     });
-    it('should add Jira Core for Jira Service Desk', () => {
+    it('should not add Jira Core for Jira Service Desk', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-servicedesk.ondemand',
       ]);
       const result = getLicensedProductLinks(licenseInformation);
       expect(result.map(({ key }) => key)).toMatchObject([
-        'jira-core.ondemand',
         'jira-servicedesk.ondemand',
-        ...FIXED_PRODUCTS_KEYS,
       ]);
     });
-    it('should add Jira Core for Jira Ops', () => {
+    it('should not add Jira Core for Jira Ops', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-incident-manager.ondemand',
       ]);
       const result = getLicensedProductLinks(licenseInformation);
       expect(result.map(({ key }) => key)).toMatchObject([
-        'jira-core.ondemand',
         'jira-incident-manager.ondemand',
-        ...FIXED_PRODUCTS_KEYS,
       ]);
     });
   });
