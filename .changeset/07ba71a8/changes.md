@@ -1,1 +1,0 @@
-- ED-5964: Remove marks from inline nodes that are not text

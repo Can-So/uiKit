@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.0.4
+- [patch] [bd0f7a69ac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bd0f7a69ac):
+
+  - ED-5964: Remove marks from inline nodes that are not text
+
 ## 101.0.3
 - [patch] [7a7cd4c491](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a7cd4c491):
 
