@@ -1,0 +1,1 @@
+- Check if the DOM is available when rendering an AvatarImage so that SSR rendered Avatars will render with the provided image.
