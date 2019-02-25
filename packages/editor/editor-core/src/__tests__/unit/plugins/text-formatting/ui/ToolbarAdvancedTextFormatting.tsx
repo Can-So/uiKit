@@ -11,14 +11,17 @@ import {
   em,
   mountWithIntl,
   code_block,
+  underline,
 } from '@atlaskit/editor-test-helpers';
 
+import { ReactWrapper } from 'enzyme';
 import { pluginKey } from '../../../../../plugins/text-formatting/pm-plugins/main';
 import { pluginKey as clearFormattingPluginKey } from '../../../../../plugins/text-formatting/pm-plugins/clear-formatting';
 import ToolbarAdvancedTextFormatting, {
   messages,
 } from '../../../../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
+import DropdownMenuWrapper from '../../../../../ui/DropdownMenu';
 import panelPlugin from '../../../../../plugins/panel';
 import codeBlockPlugin from '../../../../../plugins/code-block';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
@@ -305,35 +308,68 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
     toolbarOption.unmount();
   });
 
-  it('should only enable/activate menu options for the current code block context', () => {
+  function getMenuItem(toolbarOption: ReactWrapper, itemKey: string) {
+    let items = toolbarOption.find(DropdownMenuWrapper).prop('items')[0];
+    return items.items.filter(i => i.key === itemKey)[0];
+  }
+  describe.only('menu options inside code block', () => {
+    let toolbarOption;
+
+    beforeEach(() => {
+      const { editorView, pluginState } = editor(
+        doc(code_block({ language: 'js' })('Hello {<>}world')),
+      );
+      const clearFormattingState = clearFormattingPluginKey.getState(
+        editorView.state,
+      );
+      toolbarOption = mountWithIntl(
+        <ToolbarAdvancedTextFormatting
+          textFormattingState={pluginState}
+          clearFormattingState={clearFormattingState}
+          editorView={editorView}
+        />,
+      );
+      toolbarOption.find('button').simulate('click');
+    });
+
+    afterEach(() => {
+      toolbarOption.unmount();
+    });
+
+    it.only('should have clear formatting available for a code block', () => {
+      const clearFormattingButton = getMenuItem(
+        toolbarOption,
+        'clearFormatting',
+      );
+      expect(clearFormattingButton.isDisabled).toBe(false);
+    });
+
+    it.only('should have other menu items disabled in a code block', () => {
+      const strikeButton = getMenuItem(toolbarOption, 'strike');
+      expect(strikeButton.isDisabled).toBe(true);
+    });
+  });
+
+  it.only('should only have selected menu options for the current selection', () => {
     const { editorView, pluginState } = editor(
-      doc(code_block({ language: 'js' })('Hello {<>}world')),
-    );
-    const clearFormattingState = clearFormattingPluginKey.getState(
-      editorView.state,
+      doc(p(strike(underline('{<}Formatted {>}text')))),
     );
     const toolbarOption = mountWithIntl(
       <ToolbarAdvancedTextFormatting
         textFormattingState={pluginState}
-        clearFormattingState={clearFormattingState}
         editorView={editorView}
       />,
     );
     toolbarOption.find('button').simulate('click');
 
-    const clearFormattingButton = toolbarOption
-      .find(Item)
-      .filterWhere(
-        n => n.text().indexOf(messages.clearFormatting.defaultMessage) > -1,
-      );
-    const underlineButton = toolbarOption
-      .find(Item)
-      .filterWhere(
-        n => n.text().indexOf(messages.underline.defaultMessage) > -1,
-      );
+    const strikeButton = getMenuItem(toolbarOption, 'strike');
+    const underlineButton = getMenuItem(toolbarOption, 'underline');
+    const codeButton = getMenuItem(toolbarOption, 'code');
 
-    expect(clearFormattingButton.prop('isDisabled')).toBe(false);
-    expect(underlineButton.prop('isDisabled')).toBe(true);
+    expect(strikeButton.isActive).toBe(true);
+    expect(underlineButton.isActive).toBe(true);
+    expect(codeButton.isActive).toBe(false);
+
     toolbarOption.unmount();
   });
 
