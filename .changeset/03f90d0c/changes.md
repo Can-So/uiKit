@@ -1,0 +1,1 @@
+- ED-6371 Support passing in package name only as opposed to path from root dir
