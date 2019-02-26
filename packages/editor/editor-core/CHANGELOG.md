@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.2.0
+- [minor] [d5856900a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5856900a1):
+
+  - ED-6338: Dont allow nested nodes to be inserted with a non default layout.
+
 ## 101.1.0
 - [minor] [e142e966c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e142e966c2):
 

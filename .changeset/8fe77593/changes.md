@@ -1,1 +1,0 @@
-- ED-6338: Dont allow nested nodes to be inserted with a non default layout.
