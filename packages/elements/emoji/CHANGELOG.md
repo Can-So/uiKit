@@ -1,5 +1,25 @@
 # @atlaskit/emoji
 
+## 55.0.2
+- [patch] [2d691c1e48](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d691c1e48):
+
+  - Added aria labels to Emoji upload component
+
+## 55.0.1
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/editor-test-helpers@7.0.0
+
+## 55.0.0
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+  - @atlaskit/editor-test-helpers@6.3.22
+  - @atlaskit/util-data-test@10.2.1
+  - @atlaskit/media-core@27.1.0
+
+## 54.1.0
+- [minor] [cf6799312a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf6799312a):
+
+  - Enable striter types for emoji package
+
 ## 54.0.0
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/editor-test-helpers@6.3.17

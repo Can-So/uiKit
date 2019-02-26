@@ -15,6 +15,7 @@ import {
   taskDecision,
 } from '@atlaskit/util-data-test';
 import { AkProfileClient, modifyResponse } from '@atlaskit/profilecard';
+import { Context } from '../src/parser/tokenize';
 
 const Container = styled.div`
   display: grid;
@@ -95,9 +96,17 @@ const wikiTransformer = new WikiMarkupTransformer(defaultSchema);
 const adfTransformer = new JSONTransformer();
 
 function getADF(wiki: string) {
-  const pmNode = wikiTransformer.parse(wiki, (err, type) =>
-    console.log(err, type),
-  );
+  const context: Context = {
+    tokenErrCallback: (err, type) => console.log(err, type),
+    inlineCardConversion: {
+      'ABC-10': 'https://instance.atlassian.net/browse/ABC-10',
+      'ABC-20': 'https://instance.atlassian.net/browse/ABC-20',
+      'ABC-30': 'https://instance.atlassian.net/browse/ABC-30',
+      'ABC-40': 'https://instance.atlassian.net/browse/ABC-40',
+    },
+  };
+  const pmNode = wikiTransformer.parse(wiki, context);
+
   return adfTransformer.encode(pmNode);
 }
 

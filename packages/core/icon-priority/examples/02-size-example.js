@@ -10,7 +10,7 @@ import PriorityMinor from '../glyph/priority-minor';
 import PriorityMidium from '../glyph/priority-medium';
 import PriorityMajor from '../glyph/priority-major';
 import PriorityCritical from '../glyph/priority-critical';
-import PriorityBlocker from '../glyph/priotity-blocker';
+import PriorityBlocker from '../glyph/priority-blocker';
 
 const IconRow = styled.div`
   display: flex;

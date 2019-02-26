@@ -29,7 +29,7 @@ export function keymapPlugin(schema: Schema): Plugin | undefined {
    * eg. behaviour for backspace and enter etc. So we need to implement it.
    */
   const keymaps = {
-    Backspace: (state: EditorState, dispatch) => {
+    Backspace: (state: EditorState, dispatch: (tr: Transaction) => void) => {
       const {
         selection,
         schema: { nodes },
@@ -82,7 +82,7 @@ export function keymapPlugin(schema: Schema): Plugin | undefined {
 
       return true;
     },
-    Delete: (state: EditorState, dispatch) => {
+    Delete: (state: EditorState, dispatch: (tr: Transaction) => void) => {
       const {
         selection,
         schema: { nodes },
@@ -156,7 +156,7 @@ export function keymapPlugin(schema: Schema): Plugin | undefined {
       return true;
     },
 
-    Enter: (state: EditorState, dispatch) => {
+    Enter: (state: EditorState, dispatch: (tr: Transaction) => void) => {
       const { selection, tr } = state;
       const { $from } = selection;
       const nodeIsTaskOrDecisionItem = isInsideTaskOrDecisionItem(state);

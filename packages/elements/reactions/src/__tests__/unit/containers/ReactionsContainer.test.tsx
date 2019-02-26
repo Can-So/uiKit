@@ -1,10 +1,11 @@
 import { EmojiProvider } from '@atlaskit/emoji';
 import { emoji } from '@atlaskit/util-data-test';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import ReactionsContainer from '../../../containers/ReactionsContainer';
 import { ReactionConsumer } from '../../../reaction-store/ReactionConsumer';
 import { ReactionStatus } from '../../../types/ReactionStatus';
+import { ReactionSummary } from '../../../../src/types';
 
 const { getEmojiResourcePromise } = emoji.testData;
 
@@ -20,9 +21,9 @@ describe('ReactionsContainer', () => {
     getDetailedReaction: jest.fn(),
   };
 
-  let container;
-  let stateMapper;
-  let actionsMapper;
+  let container: ShallowWrapper<ReactionsContainer>;
+  let stateMapper: any;
+  let actionsMapper: any;
 
   const store = {
     getReactions: jest.fn(),
@@ -50,7 +51,7 @@ describe('ReactionsContainer', () => {
   });
 
   beforeEach(() =>
-    Object.keys(actions).forEach(key => actions[key].mockClear()),
+    Object.keys(actions).forEach(key => (actions as any)[key].mockClear()),
   );
 
   describe('stateMapper', () => {
@@ -62,7 +63,7 @@ describe('ReactionsContainer', () => {
     });
 
     it('should map ready state', () => {
-      const reactions = [];
+      const reactions: ReactionSummary[] = [];
       expect(stateMapper).toBeDefined();
       expect(
         stateMapper!({
@@ -92,7 +93,7 @@ describe('ReactionsContainer', () => {
   });
 
   describe('actions', () => {
-    let mappedActions;
+    let mappedActions: any;
     beforeAll(() => {
       mappedActions = actionsMapper(actions);
     });

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import {
   buildEmojiDescriptionWithAltRepresentation,
   convertMediaToImageEmoji,
@@ -15,14 +13,11 @@ const newPath = 'http://new-path/';
 
 describe('#convertMediaToImageEmoji', () => {
   it('should return original if not media emoji', () => {
-    expect(
-      convertMediaToImageEmoji(evilburnsEmoji),
-      'Returns same emoji',
-    ).to.deep.equal(evilburnsEmoji);
+    expect(convertMediaToImageEmoji(evilburnsEmoji)).toEqual(evilburnsEmoji);
   });
 
   it('should convert MediaApiRepresentation to ImageRepresentation', () => {
-    expect(convertMediaToImageEmoji(mediaEmoji)).to.deep.equal({
+    expect(convertMediaToImageEmoji(mediaEmoji)).toEqual({
       ...mediaEmoji,
       representation: convertMediaToImageRepresentation(
         mediaEmoji.representation as MediaApiRepresentation,
@@ -35,7 +30,7 @@ describe('#convertMediaToImageEmoji', () => {
 
   it('should not include altRepresentation field if mediaEmoji does not contain it', () => {
     const { altRepresentation, ...newEmoji } = mediaEmoji;
-    expect(convertMediaToImageEmoji(newEmoji)).to.deep.equal({
+    expect(convertMediaToImageEmoji(newEmoji)).toEqual({
       ...newEmoji,
       representation: convertMediaToImageRepresentation(
         mediaEmoji.representation as MediaApiRepresentation,
@@ -50,7 +45,7 @@ describe('#convertMediaToImageEmoji', () => {
       ),
       imagePath: newPath,
     };
-    expect(convertMediaToImageEmoji(mediaEmoji, newPath)).to.deep.equal({
+    expect(convertMediaToImageEmoji(mediaEmoji, newPath)).toEqual({
       ...mediaEmoji,
       representation: newRepresentation,
       altRepresentation: convertMediaToImageRepresentation(
@@ -66,7 +61,7 @@ describe('#convertMediaToImageEmoji', () => {
       ),
       imagePath: newPath,
     };
-    expect(convertMediaToImageEmoji(mediaEmoji, newPath, true)).to.deep.equal({
+    expect(convertMediaToImageEmoji(mediaEmoji, newPath, true)).toEqual({
       ...mediaEmoji,
       representation: convertMediaToImageRepresentation(
         mediaEmoji.representation as MediaApiRepresentation,
@@ -111,7 +106,7 @@ describe('#buildEmojiDescriptionWithAltRepresentation', () => {
   it('does not contain altRepresentation in the returned EmojiDescription if undefined', () => {
     expect(
       buildEmojiDescriptionWithAltRepresentation(emoji, undefined),
-    ).to.deep.equal(emoji);
+    ).toEqual(emoji);
   });
 
   it('adds altRepresentation to the EmojiDescription if is defined representation', () => {
@@ -122,6 +117,6 @@ describe('#buildEmojiDescriptionWithAltRepresentation', () => {
     };
     expect(
       buildEmojiDescriptionWithAltRepresentation(emoji, altRepresentation),
-    ).to.deep.equal({ ...emoji, altRepresentation });
+    ).toEqual({ ...emoji, altRepresentation });
   });
 });

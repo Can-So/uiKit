@@ -298,7 +298,7 @@ export const tableStyles = css`
         left: -${tableDeleteButtonSize + 2}px;
       }
     }
-    :not(.${ClassName.IS_RESIZING}) .${ClassName.COLUMN_CONTROLS}, 
+    :not(.${ClassName.IS_RESIZING}) .${ClassName.COLUMN_CONTROLS},
     :not(.${ClassName.IS_RESIZING}) .${ClassName.CORNER_CONTROLS} {
       ${ DeleteButtonHover()}
     }
@@ -491,7 +491,7 @@ export const tableStyles = css`
           color: ${N0};
         }
       }
-  
+
       /* scroll shadows */
       .${ClassName.TABLE_RIGHT_SHADOW},
       .${ClassName.TABLE_LEFT_SHADOW}::after {
@@ -571,7 +571,7 @@ export const tableStyles = css`
         pointer-events: none;
       }
     }
-    :not(.${ClassName.IS_RESIZING}) .${ClassName.TABLE_NODE_WRAPPER} > table { 
+    :not(.${ClassName.IS_RESIZING}) .${ClassName.TABLE_NODE_WRAPPER} > table {
       .${ClassName.HOVERED_CELL} {
         position: relative;
         border: 1px solid ${tableBorderSelectedColor};
@@ -608,35 +608,21 @@ export const tableStyles = css`
       overflow: ${isIE11 ? 'none' : 'auto'};
       position: relative;
     }
+    /* =============== TABLE COLUMN RESIZING ================== */
     .${ClassName.COLUMN_RESIZE_HANDLE} {
+      position: absolute;
       bottom: 0;
-      top: -1px;
-      right: -2px;
       width: 2px;
-      height: calc(100% + 2px);
+      pointer-events: none;
+      background-color: ${tableBorderSelectedColor};
+      z-index: ${akEditorUnitZIndex};
     }
   }
 
-  /* =============== TABLE COLUMN RESIZING ================== */
   .ProseMirror.${ClassName.IS_RESIZING} {
     .${ClassName.TABLE_NODE_WRAPPER} {
       overflow-x: ${isIE11 ? 'none' : 'auto'};
       ${!isIE11 ? scrollbarStyles : ''};
-    }
-    .${ClassName.COLUMN_RESIZE_HANDLE} {
-      background-color: ${tableBorderSelectedColor};
-      position: absolute;
-      bottom: 0;
-      top: -1px;
-      right: -2px;
-      width: 2px;
-      height: calc(100% + 2px);
-      pointer-events: none;
-      z-index: ${akEditorUnitZIndex};
-    }
-    .${ClassName.WITH_CONTROLS} .${ClassName.COLUMN_RESIZE_HANDLE} {
-      top: -${tableToolbarSize}px;
-      height: calc(100% + ${tableToolbarSize}px);
     }
   }
 

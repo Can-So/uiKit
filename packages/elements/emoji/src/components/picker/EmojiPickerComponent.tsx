@@ -18,6 +18,7 @@ import {
 import {
   containsEmojiId,
   isPromise /*, isEmojiIdEqual, isEmojiLoaded*/,
+  isEmojiDescription,
 } from '../../type-helpers';
 import {
   EmojiDescription,
@@ -133,9 +134,9 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     }
     if (!hideToneSelector) {
       const toneEmoji = getToneEmoji(emojiProvider);
-      if (isPromise(toneEmoji)) {
+      if (isPromise<OptionalEmojiDescriptionWithVariations>(toneEmoji)) {
         toneEmoji.then(emoji => this.setState({ toneEmoji: emoji }));
-      } else {
+      } else if (toneEmoji === undefined || isEmojiDescription(toneEmoji)) {
         this.setState({ toneEmoji });
       }
     }
@@ -157,7 +158,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps: Props) {
     const prevEmojiProvider = prevProps.emojiProvider;
     const currentEmojiProvider = this.props.emojiProvider;
 
@@ -174,7 +175,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     }
   }
 
-  onEmojiActive = (emojiId: EmojiId, emoji?: EmojiDescription) => {
+  onEmojiActive = (_emojiId: EmojiId, emoji?: EmojiDescription) => {
     if (this.state.selectedEmoji !== emoji) {
       this.setState({
         selectedEmoji: emoji,
@@ -260,7 +261,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     });
   };
 
-  private onSearch = query => {
+  private onSearch = (query: string) => {
     this.setState({
       query,
     });
@@ -439,11 +440,11 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
   private onUploadEmoji = (upload: EmojiUpload) => {
     const { emojiProvider } = this.props;
     this.fireAnalytics('upload.start');
-    const errorSetter = message =>
+    const errorSetter = (message?: FormattedMessage.MessageDescriptor) =>
       this.setState({
         uploadErrorMessage: message,
       });
-    const onSuccess = emojiDescription => {
+    const onSuccess = (emojiDescription: EmojiDescription) => {
       this.setState({
         activeCategory: customCategory,
         selectedEmoji: emojiDescription,
@@ -459,7 +460,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     uploadEmoji(upload, emojiProvider, errorSetter, onSuccess, onFailure);
   };
 
-  private onTriggerDelete = (emojiId: EmojiId, emoji?: EmojiDescription) => {
+  private onTriggerDelete = (_emojiId: EmojiId, emoji?: EmojiDescription) => {
     this.setState({ emojiToDelete: emoji });
   };
 

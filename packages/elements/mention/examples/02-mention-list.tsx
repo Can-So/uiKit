@@ -1,17 +1,16 @@
 import * as React from 'react';
-
-import { randomMentions, onSelection } from '../example-helpers';
-import { MentionDescription } from '../src/types';
+import { onSelection, randomMentions } from '../example-helpers';
 import MentionList from '../src/components/MentionList';
+import { MentionDescription } from '../src/types';
 
 export interface State {
   mentions: MentionDescription[];
 }
 
 export default class DemoMentionList extends React.Component<any, State> {
-  private mentionListRef: MentionList;
+  private mentionListRef?: MentionList | null;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       mentions: randomMentions(),
@@ -37,7 +36,7 @@ export default class DemoMentionList extends React.Component<any, State> {
     }
   };
 
-  private handleMentionListRef = ref => {
+  private handleMentionListRef = (ref: MentionList | null) => {
     this.mentionListRef = ref;
   };
 

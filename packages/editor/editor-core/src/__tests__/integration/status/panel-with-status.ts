@@ -11,7 +11,7 @@ import {
 BrowserTestCase(
   'status.ts: Insert status into panel, move cursor to right before status, and add text',
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
 
     await browser.goto(fullpage.path);
@@ -40,7 +40,7 @@ BrowserTestCase(
 BrowserTestCase(
   'status.ts: Insert status into panel, move cursor to right before panel, move right, and add text',
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
 
     await browser.goto(fullpage.path);

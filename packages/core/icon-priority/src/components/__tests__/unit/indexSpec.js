@@ -46,7 +46,7 @@ describe(name, () => {
         'priority-medium',
         'priority-minor',
         'priority-trivial',
-        'priotity-blocker',
+        'priority-blocker',
       ];
 
       const expectedPaths = expected

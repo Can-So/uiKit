@@ -10,6 +10,7 @@ export const analyticsIdMap: { [drawerName: DrawerName]: string } = {
   create: 'createDrawer',
   starred: 'starDrawer',
   settings: 'settingsDrawer',
+  atlassianSwitcher: 'atlassianSwitcherDrawer',
 };
 
 export const fireDrawerDismissedEvents = (

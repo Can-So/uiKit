@@ -1,15 +1,10 @@
+import { UsageClearEmojiResource } from '@atlaskit/util-data-test';
 import * as React from 'react';
 import { PureComponent } from 'react';
-
 import { EmojiProvider } from '../src/api/EmojiResource';
 import ResourcedEmoji from '../src/components/common/ResourcedEmoji';
-import {
-  EmojiId,
-  EmojiDescription,
-  OptionalEmojiDescription,
-} from '../src/types';
-import { UsageClearEmojiResource } from '@atlaskit/util-data-test';
 import { localStoragePrefix } from '../src/constants';
+import { EmojiDescription } from '../src/types';
 
 export interface EmojiUsageProps {
   emojiProvider: EmojiProvider;
@@ -18,7 +13,7 @@ export interface EmojiUsageProps {
 }
 
 export class EmojiUsageList extends PureComponent<EmojiUsageProps, any> {
-  constructor(props) {
+  constructor(props: EmojiUsageProps) {
     super(props);
   }
 
@@ -72,7 +67,7 @@ export class LocalStorageView extends PureComponent<
   LocalStorageViewProps,
   any
 > {
-  constructor(props) {
+  constructor(props: LocalStorageViewProps) {
     super(props);
   }
 
@@ -126,7 +121,7 @@ export abstract class UsageShowAndClearComponent extends PureComponent<
   UsagingShowingProps,
   UsageShowingState
 > {
-  constructor(props) {
+  constructor(props: UsagingShowingProps) {
     super(props);
     this.state = {
       emojiList: [],
@@ -138,7 +133,7 @@ export abstract class UsageShowAndClearComponent extends PureComponent<
     this.refreshFrequentlyUsedList();
   }
 
-  onSelection = (emojiId: EmojiId, emoji: OptionalEmojiDescription): void => {
+  onSelection = (): void => {
     // give the tracker a chance to write to the queue and local storage before updating state
     window.setTimeout(() => {
       this.refreshFrequentlyUsedList();

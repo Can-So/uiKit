@@ -9,14 +9,13 @@ import {
   stateKey as mediaStateKey,
   MediaProvider,
 } from '../pm-plugins/main';
-import { Context, ImageResizeMode } from '@atlaskit/media-core';
+import { Context, ImageResizeMode, Identifier } from '@atlaskit/media-core';
 import {
   Card,
   CardDimensions,
   CardView,
   CardEventHandler,
   CardOnClickCallback,
-  Identifier,
 } from '@atlaskit/media-card';
 import { MediaType, MediaBaseAttributes } from '@atlaskit/adf-schema';
 import { withImageLoader, ImageStatus } from '@atlaskit/editor-common';
@@ -121,7 +120,7 @@ class MediaNode extends Component<
     const isMobile = editorAppearance === 'mobile';
     let isMobileReady = isMobile ? typeof collection === 'string' : true;
 
-    if (!viewContext || !isMobileReady) {
+    if (type !== 'external' && (!viewContext || !isMobileReady)) {
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
 
@@ -144,7 +143,7 @@ class MediaNode extends Component<
 
     return (
       <Card
-        context={viewContext}
+        context={viewContext as any}
         resizeMode="stretchy-fit"
         dimensions={cardDimensions}
         identifier={identifier}

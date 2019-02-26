@@ -1,5 +1,20 @@
 # @atlaskit/smart-card
 
+## 9.11.1
+- [patch] [2cb8c44165](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cb8c44165):
+
+  - Fix environments mix-up
+
+## 9.11.0
+- [minor] [41147bbc4c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/41147bbc4c):
+
+  - Fix for links in editor
+
+## 9.10.0
+- [minor] [ea423a619f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea423a619f):
+
+  - Fixed the call to the /check endpoint
+
 ## 9.9.0
 - [minor] [7f70e97f98](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f70e97f98):
 

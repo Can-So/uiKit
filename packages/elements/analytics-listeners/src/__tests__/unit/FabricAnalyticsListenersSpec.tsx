@@ -1,19 +1,19 @@
-import * as React from 'react';
 import { mount, shallow } from 'enzyme';
-import FabricAnalyticsListeners from '../../FabricAnalyticsListeners';
-import FabricElementsListener from '../../fabric/FabricElementsListener';
-import AtlaskitListener from '../../atlaskit/AtlaskitListener';
+import * as React from 'react';
 import {
   createComponentWithAnalytics,
-  IncorrectEventType,
   DummyAtlaskitComponent,
-  DummyNavigationComponent,
   DummyElementsComponent,
   DummyMediaComponent,
+  DummyNavigationComponent,
+  IncorrectEventType,
 } from '../../../examples/helpers';
-import { AnalyticsWebClient, FabricChannel } from '../../types';
+import AtlaskitListener from '../../atlaskit/AtlaskitListener';
+import FabricElementsListener from '../../fabric/FabricElementsListener';
+import FabricAnalyticsListeners from '../../FabricAnalyticsListeners';
 import { LOG_LEVEL } from '../../helpers/logger';
 import NavigationListener from '../../navigation/NavigationListener';
+import { AnalyticsWebClient, FabricChannel } from '../../types';
 
 declare const global: any;
 
@@ -33,8 +33,7 @@ const AtlaskitIncorrectEventType = IncorrectEventType(FabricChannel.atlaskit);
 
 describe('<FabricAnalyticsListeners />', () => {
   let analyticsWebClientMock: AnalyticsWebClient;
-  let originalConsoleError;
-  let originalConsoleWarn;
+  const hasError = jest.fn();
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -43,14 +42,18 @@ describe('<FabricAnalyticsListeners />', () => {
       sendTrackEvent: jest.fn(),
       sendScreenEvent: jest.fn(),
     };
-    originalConsoleError = global.console.error;
-    originalConsoleWarn = global.console.warn;
-    global.console.hasError = jest.fn();
+    jest.spyOn(global.console, 'error');
+    jest.spyOn(global.console, 'warn');
+
+    Object.defineProperty(global.console, 'hasError', {
+      value: hasError,
+    });
   });
 
   afterEach(() => {
-    global.console.hasError = originalConsoleError;
-    global.console.warn = originalConsoleWarn;
+    global.console.warn.mockRestore();
+    global.console.error.mockRestore();
+    (Reflect as any).deleteProperty(global.console, 'hasError');
 
     analyticsWebClientMock = {
       sendUIEvent: jest.fn(),
@@ -74,7 +77,7 @@ describe('<FabricAnalyticsListeners />', () => {
     });
 
     it('should accept and handle a promise-like client', done => {
-      const promiseLikeClient = {
+      const promiseLikeClient: Promise<AnalyticsWebClient> = {
         then: jest.fn(() => promiseLikeClient),
         catch: jest.fn(() => done()),
       };

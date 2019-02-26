@@ -112,9 +112,9 @@ export class MockTaskDecisionResource implements TaskDecisionProvider {
     return this.applyConfig(query, result, 'items');
   }
 
-  unsubscribeRecentUpdates(id: RecentUpdatesId) {}
+  unsubscribeRecentUpdates(_id: RecentUpdatesId) {}
 
-  notifyRecentUpdates(updateContext?: RecentUpdateContext) {}
+  notifyRecentUpdates(_updateContext?: RecentUpdateContext) {}
 
   private getNextDate() {
     // Random 15 minute chunk earlier
@@ -138,7 +138,7 @@ export class MockTaskDecisionResource implements TaskDecisionProvider {
       };
     }
     const newResult: R = {
-      [itemKey]: result[itemKey].map(item => {
+      [itemKey]: (result as any)[itemKey].map((item: any) => {
         const itemDate = this.getNextDate();
         return {
           ...item,
@@ -162,7 +162,7 @@ export class MockTaskDecisionResource implements TaskDecisionProvider {
     return Promise.resolve(newResult);
   }
 
-  getTaskState(keys: ObjectKey[]): Promise<BaseItem<TaskState>[]> {
+  getTaskState(_keys: ObjectKey[]): Promise<BaseItem<TaskState>[]> {
     return Promise.resolve([
       {
         containerAri:

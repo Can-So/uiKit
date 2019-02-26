@@ -469,7 +469,7 @@ describe('Client', () => {
         }),
     };
 
-    const customFetchMock = jest.fn().mockImplementation(url => {
+    const customFetchMock = jest.fn().mockImplementation(() => {
       return Promise.resolve(<ResolveResponse>{
         meta: {
           visibility: 'public',

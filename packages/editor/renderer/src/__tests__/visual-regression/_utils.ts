@@ -11,7 +11,7 @@ export async function renderDocument(page, doc) {
   await page.keyboard.type(JSON.stringify(doc));
 }
 
-export async function snapshot(page) {
+export async function snapshot(page, tolerance?: number) {
   const renderer = await page.$('#RendererOutput');
 
   // Try to take a screenshot of only the renderer.
@@ -23,11 +23,21 @@ export async function snapshot(page) {
     image = await page.screenshot();
   }
 
+  if (tolerance) {
+    // @ts-ignore
+    expect(image).toMatchProdImageSnapshot({
+      failureThreshold: `${tolerance}`,
+      failureThresholdType: 'percent',
+    });
+    return;
+  }
   // @ts-ignore
   expect(image).toMatchProdImageSnapshot();
 }
 
-export type RendererPropsOverrides = { [T in keyof Props]?: Props[T] };
+export type RendererPropsOverrides = { [T in keyof Props]?: Props[T] } & {
+  showSidebar?: boolean;
+};
 export async function mountRenderer(page, props: RendererPropsOverrides) {
   await page.$eval(
     '#renderer-container',
@@ -50,4 +60,9 @@ export async function goToRendererTestingExample(page) {
   );
 
   await page.goto(url);
+}
+
+export async function animationFrame(page) {
+  // Give browser time to render, waitForFunction by default fires on RAF.
+  await page.waitForFunction('1 === 1');
 }

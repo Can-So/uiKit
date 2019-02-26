@@ -1,24 +1,23 @@
 import * as classNames from 'classnames';
-import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import * as React from 'react';
 import { PureComponent } from 'react';
-
-import * as styles from './styles';
 import { EmojiProvider, OnEmojiProviderChange } from '../../api/EmojiResource';
-import { createRecordSelectionDefault } from '../common/RecordSelectionDefault';
+import { defaultListLimit } from '../../constants';
+import { toEmojiId } from '../../type-helpers';
 import {
   EmojiDescription,
   EmojiSearchResult,
   OnEmojiEvent,
-  SearchSort,
   SearchOptions,
+  SearchSort,
   ToneSelection,
 } from '../../types';
-import EmojiList from './EmojiTypeAheadList';
-import { EmojiContext } from '../common/internal-types';
 import debug from '../../util/logger';
-import { toEmojiId } from '../../type-helpers';
-import { defaultListLimit } from '../../constants';
+import { EmojiContext } from '../common/internal-types';
+import { createRecordSelectionDefault } from '../common/RecordSelectionDefault';
+import EmojiList from './EmojiTypeAheadList';
+import * as styles from './styles';
 
 export interface OnLifecycle {
   (): void;
@@ -89,9 +88,9 @@ export default class EmojiTypeAheadComponent extends PureComponent<
     listLimit: defaultListLimit,
   };
 
-  private emojiListRef: EmojiList;
+  private emojiListRef: EmojiList | null = null;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       visible: true,
@@ -224,7 +223,7 @@ export default class EmojiTypeAheadComponent extends PureComponent<
     result: this.onSearchResult,
   };
 
-  private onEmojiListRef = ref => {
+  private onEmojiListRef = (ref: EmojiList | null) => {
     this.emojiListRef = ref;
   };
 

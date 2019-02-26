@@ -38,6 +38,7 @@ export type DefaultConfigShape = {
   },
   help: DefaultItemShape,
   settings: DefaultItemShape,
+  atlassianSwitcher: DefaultItemShape,
   profile: DefaultItemShape,
 };
 
@@ -52,6 +53,7 @@ export type ProductConfigShape = {
   },
   help: ?DropdownItem,
   settings: ?ItemShape,
+  atlassianSwitcher: ?ItemShape,
   profile: ?DropdownItem,
 };
 

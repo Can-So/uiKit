@@ -37,6 +37,7 @@ export type EventAttributes = {
 
 export type EventData = {
   actionSubjectId?: string;
+  objectId?: string;
   containerId?: string;
   nestedDepth?: number;
   eventType?: eventTypes;

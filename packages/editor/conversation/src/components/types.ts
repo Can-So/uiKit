@@ -42,8 +42,9 @@ export interface SharedProps {
     value: any,
     conversationId: string,
     commentId: string | undefined,
-    containerId: string,
     meta: any,
+    objectId: string,
+    containerId?: string,
   ) => void;
 
   // Provider
@@ -56,6 +57,7 @@ export interface SharedProps {
   // Editor
   renderEditor?: (Editor: typeof AkEditor, props: EditorProps) => JSX.Element;
 
+  objectId?: string;
   containerId?: string;
 
   isHighlighted?: boolean;
@@ -63,4 +65,6 @@ export interface SharedProps {
   disableScrollTo?: boolean;
   allowFeedbackAndHelpButtons?: boolean;
   sendAnalyticsEvent: SendAnalyticsEvent;
+
+  portal?: HTMLElement;
 }

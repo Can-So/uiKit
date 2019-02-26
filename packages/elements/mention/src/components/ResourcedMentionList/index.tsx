@@ -1,11 +1,10 @@
 import * as React from 'react';
-
-import { MentionDescription, OnMentionEvent } from '../../types';
 import { MentionProvider } from '../../api/MentionResource';
-import { PresenceProvider, PresenceMap } from '../../api/PresenceResource';
-import MentionList from '../MentionList';
-import debug from '../../util/logger';
+import { PresenceMap, PresenceProvider } from '../../api/PresenceResource';
+import { MentionDescription, OnMentionEvent } from '../../types';
 import uniqueId from '../../util/id';
+import debug from '../../util/logger';
+import MentionList from '../MentionList';
 
 function applyPresence(mentions: MentionDescription[], presences: PresenceMap) {
   const updatedMentions: MentionDescription[] = [];
@@ -52,9 +51,9 @@ export default class ResourcedMentionList extends React.PureComponent<
   State
 > {
   private subscriberKey: string;
-  private mentionListRef: MentionList;
+  private mentionListRef?: MentionList | null;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.subscriberKey = uniqueId('ak-resourced-mention-list');
     this.state = {
@@ -70,7 +69,7 @@ export default class ResourcedMentionList extends React.PureComponent<
     this.subscribePresenceProvider(this.props.presenceProvider);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     this.applyPropChanges(this.props, nextProps);
   }
 
@@ -216,7 +215,7 @@ export default class ResourcedMentionList extends React.PureComponent<
     }
   };
 
-  private handleMentionListRef = ref => {
+  private handleMentionListRef = (ref: MentionList | null) => {
     this.mentionListRef = ref;
   };
 

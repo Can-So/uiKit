@@ -6,7 +6,8 @@ import {
 } from '@atlaskit/media-test-helpers';
 import Toggle from '@atlaskit/toggle';
 import Slider from '@atlaskit/field-range';
-import { Card, Identifier, CardDimensions } from '../src';
+import { Identifier } from '@atlaskit/media-core';
+import { Card, CardDimensions } from '../src';
 import { CardDimensionsWrapper } from '../example-helpers/styled';
 import {
   EditableCardOptions,

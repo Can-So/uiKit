@@ -1,6 +1,6 @@
 // @flow
 
-import React, { type Node, type ElementType } from 'react';
+import React, { type Node, type ComponentType } from 'react';
 import styled from 'styled-components';
 import Button from '@atlaskit/button';
 import {
@@ -30,8 +30,8 @@ type Props = {
   children?: Node,
   /** The container elements rendered by the component */
   components?: {
-    Header?: ElementType,
-    Footer?: ElementType,
+    Header?: ComponentType<any>,
+    Footer?: ComponentType<any>,
   },
   /** The heading to be rendered above the body */
   heading?: Node,
@@ -94,6 +94,7 @@ const Card = ({
   innerRef,
 }: Props) => {
   const { Header = DefaultHeader, Footer = DefaultFooter } = components;
+
   return (
     <Theme.Provider value={theme}>
       <Theme.Consumer>

@@ -1,21 +1,25 @@
+import { layers } from '@atlaskit/theme';
 import * as React from 'react';
 import { Component } from 'react';
-
-import { layers } from '@atlaskit/theme';
-
-import EmojiTypeAhead from '../src/components/typeahead/EmojiTypeAhead';
-import debug from '../src/util/logger';
-
-import { onOpen, onClose } from '../example-helpers';
+import {
+  getUsageClearEmojiResource,
+  lorem,
+  onClose,
+  onOpen,
+} from '../example-helpers';
+import {
+  UsageShowAndClearComponent,
+  UsagingShowingProps,
+} from '../example-helpers/demo-emoji-usage-components';
+import SearchTextInput from '../example-helpers/demo-search-text-input';
 import {
   TypeaheadProps,
   TypeaheadState,
 } from '../example-helpers/typeahead-props';
-import SearchTextInput from '../example-helpers/demo-search-text-input';
-import { UsageShowAndClearComponent } from '../example-helpers/demo-emoji-usage-components';
-import { lorem, getUsageClearEmojiResource } from '../example-helpers';
-
 import { EmojiProvider } from '../src/api/EmojiResource';
+import EmojiTypeAhead from '../src/components/typeahead/EmojiTypeAhead';
+import { EmojiId, OptionalEmojiDescription } from '../src/types';
+import debug from '../src/util/logger';
 
 const tallPageStyle = {
   height: '1000px',
@@ -28,13 +32,13 @@ const downPage: React.CSSProperties = {
 };
 
 class EmojiTextInput extends Component<TypeaheadProps, TypeaheadState> {
-  private emojiTypeAheadRef: EmojiTypeAhead;
+  private emojiTypeAheadRef?: EmojiTypeAhead | null;
 
   static defaultProps = {
     onSelection: () => {},
   };
 
-  constructor(props) {
+  constructor(props: TypeaheadProps) {
     super(props);
     this.state = {
       active: false,
@@ -54,12 +58,12 @@ class EmojiTextInput extends Component<TypeaheadProps, TypeaheadState> {
     });
   };
 
-  handleSelection = (emojiId, emoji) => {
+  handleSelection = (emojiId: EmojiId, emoji: OptionalEmojiDescription) => {
     this.hideEmojiPopup();
     this.props.onSelection(emojiId, emoji);
   };
 
-  updateSearch = event => {
+  updateSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.state.active) {
       this.setState({
         query: event.target.value || '',
@@ -67,22 +71,27 @@ class EmojiTextInput extends Component<TypeaheadProps, TypeaheadState> {
     }
   };
 
-  private handleSearchTextInputChange = query => {
+  private handleSearchTextInputChange = (
+    query: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     this.updateSearch(query);
   };
   private handleSearchTextInputUp = () => {
-    this.emojiTypeAheadRef.selectPrevious();
+    this.emojiTypeAheadRef && this.emojiTypeAheadRef.selectPrevious();
   };
   private handleSearchTextInputDown = () => {
-    this.emojiTypeAheadRef.selectNext();
+    this.emojiTypeAheadRef && this.emojiTypeAheadRef.selectNext();
   };
   private handleSearchTextInputEnter = () => {
-    this.emojiTypeAheadRef.chooseCurrentSelection();
+    this.emojiTypeAheadRef && this.emojiTypeAheadRef.chooseCurrentSelection();
   };
-  private handleEmojiTypeAheadRef = ref => {
+  private handleEmojiTypeAheadRef = (ref: EmojiTypeAhead | null) => {
     this.emojiTypeAheadRef = ref;
   };
-  private handleEmojiTypeAheadSelection = (emojiId, emoji) => {
+  private handleEmojiTypeAheadSelection = (
+    emojiId: EmojiId,
+    emoji: OptionalEmojiDescription,
+  ) => {
     this.handleSelection(emojiId, emoji);
   };
 
@@ -142,7 +151,7 @@ class EmojiTextInput extends Component<TypeaheadProps, TypeaheadState> {
 }
 
 class UsageShowingEmojiTypeAheadTextInput extends UsageShowAndClearComponent {
-  constructor(props) {
+  constructor(props: UsagingShowingProps) {
     super(props);
   }
 

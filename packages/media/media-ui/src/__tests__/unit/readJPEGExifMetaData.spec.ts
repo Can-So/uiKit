@@ -1,4 +1,4 @@
-const parseMetaData = jest.fn((_file: any, fn: any) => {
+const mockParseMetaData = jest.fn((_file: any, fn: any) => {
   fn({
     exif: {
       getAll: () => ({
@@ -25,7 +25,7 @@ const parseMetaData = jest.fn((_file: any, fn: any) => {
 });
 
 jest.mock('blueimp-load-image', () => ({
-  parseMetaData,
+  parseMetaData: mockParseMetaData,
 }));
 
 import { readJPEGExifMetaData } from '../../imageMetaData/parseJPEG';

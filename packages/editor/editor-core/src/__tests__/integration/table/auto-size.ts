@@ -1,4 +1,5 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
+import { sleep } from '@atlaskit/editor-test-helpers';
 
 import { editable, getDocFromElement, fullpage } from '../_helpers';
 
@@ -30,15 +31,16 @@ async function loadAndRetrieveDocument(
   });
 
   await page.waitForSelector(`table[data-layout="${expectedLayout}"]`);
+  await sleep(500);
 
   const doc = await page.$eval(editable, getDocFromElement);
   return doc;
 }
 
 BrowserTestCase(
-  'auto-size.ts: Doesnt scale past default',
+  'Doesnt scale past default',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     const doc = await loadAndRetrieveDocument(page, autoSizeToDefaultLayout);
     expect(doc).toMatchDocSnapshot();
@@ -46,9 +48,9 @@ BrowserTestCase(
 );
 
 BrowserTestCase(
-  'auto-size.ts: Scales to wide',
+  'Scales to wide',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     const doc = await loadAndRetrieveDocument(
       page,
@@ -60,9 +62,9 @@ BrowserTestCase(
 );
 
 BrowserTestCase(
-  'auto-size.ts: Scales to full-width',
+  'Scales to full-width',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     const doc = await loadAndRetrieveDocument(
       page,

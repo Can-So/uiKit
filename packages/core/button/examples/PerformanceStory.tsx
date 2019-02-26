@@ -34,7 +34,7 @@ class PerfTest extends React.Component<{}, State> {
   startTest = () => {
     console.log('Starting performance test...');
     let runs = 0;
-    let startTime;
+    let startTime: number;
     const run = () => {
       if (!runs) {
         startTime = Date.now();

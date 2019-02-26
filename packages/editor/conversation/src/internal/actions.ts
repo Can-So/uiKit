@@ -91,17 +91,19 @@ export const updateUser = (
 
 export const createConversation = (
   localId: string,
-  containerId: string,
   value: any,
   meta: any,
   provider: ResourceProvider,
+  objectId: string,
+  containerId?: string,
   onSuccess?: SuccessHandler,
 ) => async () => {
   const { conversationId } = await provider.create(
     localId,
-    containerId,
     value,
     meta,
+    objectId,
+    containerId,
   );
 
   if (typeof onSuccess === 'function') {
@@ -114,16 +116,18 @@ export const saveDraft = (
   value: any,
   conversationId: string,
   commentId: string | undefined,
-  containerId: string,
   meta: any,
   provider: ResourceProvider,
+  objectId: string,
+  containerId?: string,
 ) => async () => {
   provider.saveDraft(
     isLocal,
     value,
     conversationId,
     commentId,
-    containerId,
     meta,
+    objectId,
+    containerId,
   );
 };

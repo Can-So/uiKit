@@ -68,7 +68,8 @@ const mdToPmMapping = {
   code_inline: { mark: 'code' },
   fence: {
     block: 'codeBlock',
-    attrs: (tok: any) => ({ language: tok.info || null }),
+    // we trim any whitespaces around language definition
+    attrs: (tok: any) => ({ language: (tok.info && tok.info.trim()) || null }),
   },
   media_single: {
     block: 'mediaSingle',

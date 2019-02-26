@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { gridSize, typography } from '@atlaskit/theme';
 import styled from 'styled-components';
+import {
+  analyticsAttributes,
+  withAnalyticsContextData,
+} from '../utils/analytics';
 
-const Section = styled.section`
+const SectionContainer = styled.section`
   padding: ${gridSize()}px 0;
 `;
 
@@ -12,18 +16,24 @@ const SectionTitle = styled.h1`
   margin-bottom: ${gridSize()}px;
 `;
 
-type Props = {
+type SectionProps = {
+  sectionId: string;
   title: string;
   isAdmin?: boolean;
   isCustom?: boolean;
-  children: (JSX.Element | null)[] | JSX.Element | null;
+  children?: React.ReactNode;
 };
-export default ({
-  title,
-  isAdmin = false,
-  isCustom = false,
-  children,
-}: Props) => {
+
+type SectionAnalyticsContext = {
+  attributes: {
+    group: string;
+    groupItemsCount: number;
+  };
+};
+
+const Section = (props: SectionProps) => {
+  const { title, isAdmin = false, isCustom = false, children } = props;
+
   const childrenWithAddedProps = React.Children.map(
     children,
     child =>
@@ -35,9 +45,17 @@ export default ({
   );
 
   return childrenWithAddedProps.length ? (
-    <Section>
+    <SectionContainer>
       <SectionTitle>{title}</SectionTitle>
       {childrenWithAddedProps}
-    </Section>
+    </SectionContainer>
   ) : null;
 };
+
+export default withAnalyticsContextData<SectionProps, SectionAnalyticsContext>(
+  props =>
+    analyticsAttributes({
+      group: props.sectionId,
+      groupItemsCount: React.Children.count(props.children),
+    }),
+)(Section);

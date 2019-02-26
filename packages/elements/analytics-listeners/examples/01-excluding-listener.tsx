@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
+import * as React from 'react';
 import FabricAnalyticsListeners, { FabricChannel } from '../src';
 import {
+  createAnalyticsWebClientMock,
   createComponentWithAnalytics,
   createComponentWithAttributesWithAnalytics,
 } from './helpers';
@@ -20,25 +21,10 @@ const myOnClickHandler = () => {
   console.log('Button clicked ! Yay!');
 };
 
-const analyticsWebClientMock = {
-  sendUIEvent: event => {
-    console.log('sendUIEvent: ', event);
-  },
-  sendOperationalEvent: event => {
-    console.log('sendOperationalEvent: ', event);
-  },
-  sendTrackEvent: (event: any) => {
-    console.log('sendTrackEvent: ', event);
-  },
-  sendScreenEvent: (event: any) => {
-    console.log('sendScreenEvent: ', event);
-  },
-};
-
 function Example() {
   return (
     <FabricAnalyticsListeners
-      client={analyticsWebClientMock}
+      client={createAnalyticsWebClientMock()}
       excludedChannels={[FabricChannel.atlaskit]}
     >
       <div>

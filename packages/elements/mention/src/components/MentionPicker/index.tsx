@@ -1,18 +1,20 @@
-import * as React from 'react';
-
-import { MentionPickerStyle, MentionPickerInfoStyle } from './styles';
-import { OnMentionEvent, MentionDescription } from '../../types';
-import { MentionProvider, MentionStats } from '../../api/MentionResource';
-import { PresenceProvider } from '../../api/PresenceResource';
-import ResourcedMentionList from '../ResourcedMentionList';
-import Popup from '../Popup';
-import debug from '../../util/logger';
-import uniqueId from '../../util/id';
 import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
-
+import * as React from 'react';
+import {
+  ErrorCallback,
+  InfoCallback,
+  MentionProvider,
+  MentionStats,
+} from '../../api/MentionResource';
+import { PresenceProvider } from '../../api/PresenceResource';
+import { MentionDescription, OnMentionEvent } from '../../types';
 import * as UtilAnalytics from '../../util/analytics';
+import uniqueId from '../../util/id';
+import debug from '../../util/logger';
+import Popup from '../Popup';
+import ResourcedMentionList from '../ResourcedMentionList';
+import { MentionPickerInfoStyle, MentionPickerStyle } from './styles';
 
 export interface OnOpen {
   (): void;
@@ -53,7 +55,7 @@ export class MentionPicker extends React.PureComponent<
   State
 > {
   private subscriberKey: string;
-  private mentionListRef: ResourcedMentionList;
+  private mentionListRef?: ResourcedMentionList | null;
 
   static defaultProps = {
     onSelection: () => {},
@@ -61,7 +63,7 @@ export class MentionPicker extends React.PureComponent<
     onClose: () => {},
   };
 
-  constructor(props) {
+  constructor(props: Props & WithAnalyticsEventProps) {
     super(props);
     this.subscriberKey = uniqueId('ak-mention-picker');
     this.state = {
@@ -74,7 +76,7 @@ export class MentionPicker extends React.PureComponent<
     this.subscribeResourceProvider(this.props.resourceProvider);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props & WithAnalyticsEventProps) {
     this.applyPropChanges(this.props, nextProps);
   }
 
@@ -134,7 +136,7 @@ export class MentionPicker extends React.PureComponent<
     }
   }
 
-  private subscribeResourceProvider(resourceProvider) {
+  private subscribeResourceProvider(resourceProvider?: MentionProvider) {
     if (resourceProvider) {
       resourceProvider.subscribe(
         this.subscriberKey,
@@ -145,7 +147,7 @@ export class MentionPicker extends React.PureComponent<
     }
   }
 
-  private unsubscribeResourceProvider(resourceProvider) {
+  private unsubscribeResourceProvider(resourceProvider?: MentionProvider) {
     if (resourceProvider) {
       resourceProvider.unsubscribe(this.subscriberKey);
     }
@@ -158,7 +160,10 @@ export class MentionPicker extends React.PureComponent<
    * It should be noted that the visible state of the component is not considered in
    * this function. Instead the old state and new state should be passed as parameters.
    */
-  private onFilterVisibilityChange = (oldVisibility, newVisibility) => {
+  private onFilterVisibilityChange = (
+    oldVisibility: boolean,
+    newVisibility: boolean,
+  ) => {
     if (oldVisibility !== newVisibility) {
       if (newVisibility) {
         if (this.props.onOpen) {
@@ -175,7 +180,7 @@ export class MentionPicker extends React.PureComponent<
   // internal, used for callbacks
   private filterChange = (
     mentions: MentionDescription[],
-    query: string,
+    query?: string,
     stats?: MentionStats,
   ) => {
     debug('ak-mention-picker.filterChange', mentions.length);
@@ -195,7 +200,7 @@ export class MentionPicker extends React.PureComponent<
     );
   };
 
-  private filterError = error => {
+  private filterError: ErrorCallback = error => {
     debug('ak-mention-picker.filterError', error);
     const wasVisible = this.state.visible;
     this.setState({
@@ -206,14 +211,14 @@ export class MentionPicker extends React.PureComponent<
     this.onFilterVisibilityChange(wasVisible, true);
   };
 
-  private filterInfo = info => {
+  private filterInfo: InfoCallback = info => {
     debug('ak-mention-picker.filterInfo', info);
     this.setState({
       info,
     } as State);
   };
 
-  private handleMentionListRef = ref => {
+  private handleMentionListRef = (ref: ResourcedMentionList | null) => {
     this.mentionListRef = ref;
   };
 

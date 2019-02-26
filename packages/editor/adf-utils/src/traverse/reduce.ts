@@ -1,8 +1,9 @@
-import { traverse, ADFNode } from './traverse';
+import { ADFEntity } from '../types';
+import { traverse } from './traverse';
 
 export function reduce<T = any>(
-  adf: ADFNode,
-  callback: (accunulator: T, node: ADFNode) => T,
+  adf: ADFEntity,
+  callback: (accunulator: T, node: ADFEntity) => T,
   initial: T,
 ): T {
   let result = initial;

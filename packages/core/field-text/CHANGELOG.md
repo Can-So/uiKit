@@ -1,5 +1,10 @@
 # @atlaskit/field-text
 
+## 7.1.0
+- [minor] [109cf449d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/109cf449d6):
+
+  - enable noImplicitAny for status. fix related issues
+
 ## 7.0.20
 - [patch] [9b4a39c56a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b4a39c56a):
 

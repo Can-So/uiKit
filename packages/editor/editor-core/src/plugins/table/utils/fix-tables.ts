@@ -1,6 +1,7 @@
 import { Transaction } from 'prosemirror-state';
 import { getCellsInColumn } from 'prosemirror-utils';
 import { Node as PMNode } from 'prosemirror-model';
+import { EditorView } from 'prosemirror-view';
 import { TableMap } from 'prosemirror-tables';
 import { TableLayout } from '@atlaskit/adf-schema';
 import {
@@ -10,7 +11,11 @@ import {
 } from '@atlaskit/editor-common';
 
 import { contentWidth } from '../pm-plugins/table-resizing/resizer/contentWidth';
-import { calculateColWidth } from '../pm-plugins/table-resizing/resizer/utils';
+import {
+  calculateColWidth,
+  getCellsRefsInColumn,
+} from '../pm-plugins/table-resizing/resizer/utils';
+import { getLayoutSize } from '../pm-plugins/table-resizing/utils';
 import { sendLogs } from '../../../utils/sendLogs';
 
 const fireAnalytics = (properties = {}) =>
@@ -103,16 +108,20 @@ const removeEmptyColumns = (
   const map = TableMap.get(table);
   const colsMinColspan: number[] = [];
   for (let colIndex = 0; colIndex < map.width; colIndex++) {
-    const cells = getCellsInColumn(colIndex)(tr.selection);
-    if (cells) {
-      cells.forEach(cell => {
-        if (
-          !colsMinColspan[colIndex] ||
-          colsMinColspan[colIndex] > cell.node.attrs.colspan
-        ) {
-          colsMinColspan[colIndex] = cell.node.attrs.colspan;
-        }
-      });
+    const cellsPositions = map.cellsInRect({
+      left: colIndex,
+      right: colIndex + 1,
+      top: 0,
+      bottom: map.height,
+    });
+    const colspans = cellsPositions.map(cellPos => {
+      const cell = tr.doc.nodeAt(cellPos + tablePos + 1);
+      if (cell) {
+        return cell.attrs.colspan;
+      }
+    });
+    if (colspans.length) {
+      colsMinColspan[colIndex] = Math.min(...colspans);
     }
   }
 
@@ -203,9 +212,11 @@ export const removeExtraneousColumnWidths = (node, basePos, tr) => {
 export const fixTables = (tr: Transaction): Transaction => {
   tr.doc.descendants((node, pos) => {
     if (node.type.name === 'table') {
-      tr = removeEmptyRows(node, pos, tr);
-      tr = removeEmptyColumns(node, pos, tr);
-      tr = removeExtraneousColumnWidths(node, pos, tr);
+      // in the unlikely event of having to fix multiple tables at the same time
+      const tablePos = tr.mapping.map(pos);
+      tr = removeEmptyRows(node, tablePos, tr);
+      tr = removeEmptyColumns(node, tablePos, tr);
+      tr = removeExtraneousColumnWidths(node, tablePos, tr);
     }
   });
   return tr;
@@ -223,15 +234,39 @@ export const fixTables = (tr: Transaction): Transaction => {
 // We use this when migrating TinyMCE tables for Confluence, for example:
 // https://pug.jira-dev.com/wiki/spaces/AEC/pages/3362882215/How+do+we+map+TinyMCE+tables+to+Fabric+tables
 export const fixAutoSizedTable = (
-  tr: Transaction,
-  node: PMNode,
-  table: HTMLTableElement,
-  basePos: number,
+  view: EditorView,
+  tableNode: PMNode,
+  tableRef: HTMLTableElement,
+  tablePos: number,
 ) => {
-  const colWidths = parseDOMColumnWidths(table);
+  let { tr } = view.state;
+  const domAtPos = view.domAtPos.bind(view);
+  const tableStart = tablePos + 1;
+  const colWidths = parseDOMColumnWidths(
+    domAtPos,
+    tableNode,
+    tableStart,
+    tableRef,
+  );
+  const totalContentWidth = colWidths.reduce(
+    (acc, current) => acc + current,
+    0,
+  );
+  const tableLayout = getLayoutBasedOnWidth(totalContentWidth);
+  const maxLayoutSize = getLayoutSize(tableLayout);
 
-  tr = replaceCells(tr, node, basePos, (cell, _rowIndex, colIndex) => {
-    const newColWidths = colWidths.slice(
+  // Content width will generally not meet the constraints of the layout
+  // whether it be below or above, so we scale our columns widths
+  // to meet these requirements
+  let scale = 1;
+  if (totalContentWidth !== maxLayoutSize) {
+    scale = maxLayoutSize / totalContentWidth;
+  }
+
+  const scaledColumnWidths = colWidths.map(width => Math.floor(width * scale));
+
+  tr = replaceCells(tr, tableNode, tablePos, (cell, _rowIndex, colIndex) => {
+    const newColWidths = scaledColumnWidths.slice(
       colIndex,
       colIndex + cell.attrs.colspan,
     );
@@ -247,17 +282,15 @@ export const fixAutoSizedTable = (
 
   // clear autosizing on the table node
   return tr
-    .setNodeMarkup(basePos, undefined, {
-      ...node.attrs,
-      layout: getLayoutBasedOnWidth(colWidths),
+    .setNodeMarkup(tablePos, undefined, {
+      ...tableNode.attrs,
+      layout: tableLayout,
       __autoSize: false,
     })
     .setMeta('addToHistory', false);
 };
 
-const getLayoutBasedOnWidth = (columnWidths: Array<number>): TableLayout => {
-  const totalWidth = columnWidths.reduce((acc, current) => acc + current, 0);
-
+const getLayoutBasedOnWidth = (totalWidth: number): TableLayout => {
   if (totalWidth > akEditorWideLayoutWidth) {
     return 'full-width';
   } else if (
@@ -270,8 +303,13 @@ const getLayoutBasedOnWidth = (columnWidths: Array<number>): TableLayout => {
   }
 };
 
-function parseDOMColumnWidths(node: HTMLElement): Array<number> {
-  const row = node.querySelector('tr');
+function parseDOMColumnWidths(
+  domAtPos: (pos: number) => { node: Node; offset: number },
+  tableNode: PMNode,
+  tableStart: number,
+  tableRef: HTMLTableElement,
+): Array<number> {
+  const row = tableRef.querySelector('tr');
 
   if (!row) {
     return [];
@@ -284,8 +322,14 @@ function parseDOMColumnWidths(node: HTMLElement): Array<number> {
     const colspan = Number(currentCol.getAttribute('colspan') || 1);
     for (let span = 0; span < colspan; span++) {
       const colIdx = col + span;
-      const colWidth = calculateColWidth(node, colIdx, col => {
-        return contentWidth(col as HTMLElement, node).width;
+      const cells = getCellsRefsInColumn(
+        colIdx,
+        tableNode,
+        tableStart,
+        domAtPos,
+      );
+      const colWidth = calculateColWidth(cells, col => {
+        return contentWidth(col as HTMLElement, tableRef).width;
       });
 
       cols[colIdx] = Math.max(colWidth, tableCellMinWidth);

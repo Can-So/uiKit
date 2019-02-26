@@ -1,7 +1,6 @@
 import * as React from 'react';
-
-import MentionList from '../src/components/MentionList';
 import { HttpError } from '../src/api/MentionResource';
+import MentionList from '../src/components/MentionList';
 
 const resourceError = new Error('monkey trousers');
 const error401 = new HttpError(401, 'not used');
@@ -12,7 +11,7 @@ export interface State {
 }
 
 export default class DemoMentionList extends React.Component<any, State> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       error: resourceError,

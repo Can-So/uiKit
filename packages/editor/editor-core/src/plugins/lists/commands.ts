@@ -1,4 +1,10 @@
-import { ResolvedPos, Fragment, Slice } from 'prosemirror-model';
+import {
+  ResolvedPos,
+  Fragment,
+  Slice,
+  NodeRange,
+  NodeType,
+} from 'prosemirror-model';
 import {
   EditorState,
   Transaction,
@@ -20,10 +26,20 @@ import {
   isFirstChildOfParent,
   findCutBefore,
 } from '../../utils/commands';
-import { isRangeOfType } from '../../utils';
+import { isRangeOfType, compose, sanitizeSelectionMarks } from '../../utils';
 import { liftFollowingList, liftSelectionList } from './transforms';
 import { Command } from '../../types';
 import { GapCursorSelection } from '../gap-cursor';
+import {
+  withAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+  INDENT_DIR,
+  INDENT_TYPE,
+} from '../analytics';
 
 const maxIndentation = 5;
 
@@ -305,30 +321,17 @@ function splitListItem(itemType) {
   };
 }
 
-export function outdentList(): Command {
-  return function(state, dispatch) {
-    const { listItem } = state.schema.nodes;
-    const { $from, $to } = state.selection;
-    if (isInsideListItem(state)) {
-      // if we're backspacing at the start of a list item, unindent it
-      // take the the range of nodes we might be lifting
-
-      // the predicate is for when you're backspacing a top level list item:
-      // we don't want to go up past the doc node, otherwise the range
-      // to clear will include everything
-      let range = $from.blockRange(
-        $to,
-        node => node.childCount > 0 && node.firstChild!.type === listItem,
-      );
-
-      if (!range) {
-        return false;
-      }
-
-      let tr;
-      if (
-        baseListCommand.liftListItem(listItem)(state, liftTr => (tr = liftTr))
-      ) {
+/**
+ * Merge closest bullet list blocks into one
+ *
+ * @param {NodeType} listItem
+ * @param {NodeRange} range
+ * @returns
+ */
+function mergeLists(listItem: NodeType, range: NodeRange) {
+  return (command: Command): Command => {
+    return (state, dispatch) =>
+      command(state, tr => {
         /* we now need to handle the case that we lifted a sublist out,
          * and any listItems at the current level get shifted out to
          * their own new list; e.g.:
@@ -377,43 +380,119 @@ export function outdentList(): Command {
         if (dispatch) {
           dispatch(tr.scrollIntoView());
         }
-        return true;
+      });
+  };
+}
+
+export function outdentList(): Command {
+  return function(state, dispatch) {
+    const { listItem } = state.schema.nodes;
+    const { $from, $to } = state.selection;
+    if (isInsideListItem(state)) {
+      // if we're backspacing at the start of a list item, unindent it
+      // take the the range of nodes we might be lifting
+
+      // the predicate is for when you're backspacing a top level list item:
+      // we don't want to go up past the doc node, otherwise the range
+      // to clear will include everything
+      let range = $from.blockRange(
+        $to,
+        node => node.childCount > 0 && node.firstChild!.type === listItem,
+      );
+
+      if (!range) {
+        return false;
       }
+      const initialIndentationLevel = numberNestedLists(
+        state.selection.$from,
+        state.schema.nodes,
+      );
+
+      return compose(
+        withAnalytics({
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+          eventType: EVENT_TYPE.TRACK,
+          attributes: {
+            inputMethod: INPUT_METHOD.KEYBOARD,
+            previousIndentationLevel: initialIndentationLevel,
+            newIndentLevel: initialIndentationLevel - 1,
+            direction: INDENT_DIR.OUTDENT,
+            indentType: INDENT_TYPE.LIST,
+          },
+        }), // 3. Send analytics event
+        mergeLists(listItem, range), // 2. Check if I need to merge nearest list
+        baseListCommand.liftListItem, // 1. First lift list item
+      )(listItem)(state, dispatch);
     }
+
     return false;
   };
+}
+
+/**
+ * Check if we can sink the list.
+ *
+ * @param {number} initialIndentationLevel
+ * @param {EditorState} state
+ * @returns {boolean} - true if we can sink the list
+ *                    - false if we reach the max indentation level
+ */
+function canSink(initialIndentationLevel: number, state: EditorState): boolean {
+  /*
+      - Keep going forward in document until indentation of the node is < than the initial 
+      - If indentation is EVER > max indentation, return true and don't sink the list
+      */
+  let currentIndentationLevel: number;
+  let currentPos = state.tr.selection.$to.pos;
+  do {
+    const resolvedPos = state.doc.resolve(currentPos);
+    currentIndentationLevel = numberNestedLists(
+      resolvedPos,
+      state.schema.nodes,
+    );
+    if (currentIndentationLevel > maxIndentation) {
+      // Cancel sink list.
+      // If current indentation less than the initial, it won't be
+      // larger than the max, and the loop will terminate at end of this iteration
+      return false;
+    }
+    currentPos++;
+  } while (currentIndentationLevel >= initialIndentationLevel);
+
+  return true;
 }
 
 export function indentList(): Command {
   return function(state, dispatch) {
     const { listItem } = state.schema.nodes;
     if (isInsideListItem(state)) {
+      // Record initial list indentation
       const initialIndentationLevel = numberNestedLists(
         state.selection.$from,
         state.schema.nodes,
       );
-      /*
-      - Record initial list indentation
-      - Keep going forward in document until indentation of the node is < than the initial 
-      - If indentation is EVER > max indentation, return true and don't sink the list
-      */
-      let currentIndentationLevel;
-      let currentPos = state.tr.selection.$to.pos;
-      do {
-        const resolvedPos = state.doc.resolve(currentPos);
-        currentIndentationLevel = numberNestedLists(
-          resolvedPos,
-          state.schema.nodes,
-        );
-        if (currentIndentationLevel > maxIndentation) {
-          // Cancel sink list.
-          // If current indentation less than the initial, it won't be
-          // larger than the max, and the loop will terminate at end of this iteration
-          return true;
-        }
-        currentPos++;
-      } while (currentIndentationLevel >= initialIndentationLevel);
-      baseListCommand.sinkListItem(listItem)(state, dispatch);
+
+      if (canSink(initialIndentationLevel, state)) {
+        // Analytics command wrapper should be here because we need to get indentation level
+        compose(
+          withAnalytics({
+            action: ACTION.FORMATTED,
+            actionSubject: ACTION_SUBJECT.TEXT,
+            actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+            eventType: EVENT_TYPE.TRACK,
+            attributes: {
+              inputMethod: INPUT_METHOD.KEYBOARD,
+              previousIndentationLevel: initialIndentationLevel,
+              newIndentLevel: initialIndentationLevel + 1,
+              direction: INDENT_DIR.INDENT,
+              indentType: INDENT_TYPE.LIST,
+            },
+          }),
+          baseListCommand.sinkListItem,
+        )(listItem)(state, dispatch);
+      }
       return true;
     }
     return false;
@@ -602,6 +681,14 @@ export function toggleListCommand(
         liftListItems()(state, dispatch);
         state = view.state;
       }
+
+      // Remove any invalid marks that are not supported
+      const tr = sanitizeSelectionMarks(state);
+      if (tr) {
+        dispatch!(tr);
+        state = view.state;
+      }
+
       return wrapInList(state.schema.nodes[listType])(state, dispatch);
     }
   };

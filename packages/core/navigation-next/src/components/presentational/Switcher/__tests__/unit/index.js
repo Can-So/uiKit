@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import NodeResolver from 'react-node-resolver';
 import { shallow } from 'enzyme';
 import { PopupSelect } from '@atlaskit/select';
 import {
@@ -15,7 +14,7 @@ import {
 } from '../../index';
 import Option from '../../Option';
 
-const Target = () => 'A target';
+const Target = () => <div>A target</div>;
 
 describe('Switcher', () => {
   let baseProps;
@@ -59,14 +58,12 @@ describe('Switcher', () => {
         filterOption,
         isOptionSelected,
         getOptionValue,
-        onOpen: wrapper.instance().handleOpen,
-        onClose: wrapper.instance().handleClose,
         options: wrapper.prop('options'),
         maxMenuWidth: expect.any(Number),
         minMenuWidth: expect.any(Number),
+        target: expect.any(Function),
       }),
     );
-    expect(wrapper.find(PopupSelect).prop('target').type).toEqual(NodeResolver);
   });
 
   it('should pass default components to <PopupSelect /> if components prop is missing', () => {

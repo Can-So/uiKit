@@ -26,7 +26,7 @@ export interface State {
 }
 
 export default class EmojiUploadComponent extends PureComponent<Props, State> {
-  private ref;
+  private ref?: EmojiUploadPicker | null;
 
   constructor(props: Props) {
     super(props);
@@ -39,7 +39,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
 
   private onUploadEmoji = (upload: EmojiUpload) => {
     const { emojiProvider } = this.props;
-    const errorSetter = message =>
+    const errorSetter = (message?: FormattedMessage.MessageDescriptor) =>
       this.setState({
         uploadErrorMessage: message,
       });
@@ -67,7 +67,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     }
   };
 
-  private onUploaderRef = emojiUploadPicker => {
+  private onUploaderRef = (emojiUploadPicker: EmojiUploadPicker | null) => {
     this.ref = emojiUploadPicker;
   };
 

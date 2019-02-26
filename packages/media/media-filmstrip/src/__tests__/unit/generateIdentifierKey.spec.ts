@@ -1,8 +1,4 @@
-import {
-  FileIdentifier,
-  LinkIdentifier,
-  ExternalImageIdentifier,
-} from '@atlaskit/media-card';
+import { FileIdentifier, ExternalImageIdentifier } from '@atlaskit/media-core';
 import { generateIdentifierKey } from '../../utils/generateIdentifierKey';
 
 describe('generateIdentifierKey()', () => {
@@ -30,16 +26,6 @@ describe('generateIdentifierKey()', () => {
 
     expect(firstKey).toEqual('id');
     expect(firstKey).toEqual(secondKey);
-  });
-
-  it('should work with links', () => {
-    const linkIdentifier: LinkIdentifier = {
-      mediaItemType: 'link',
-      id: 'id',
-      collectionName: 'some-collection',
-    };
-
-    expect(generateIdentifierKey(linkIdentifier)).toEqual('id');
   });
 
   it('should work with external images', () => {

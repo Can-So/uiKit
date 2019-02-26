@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
-import { Context, FileState, isErrorFileState } from '@atlaskit/media-core';
+import {
+  Context,
+  FileState,
+  isErrorFileState,
+  FileIdentifier,
+} from '@atlaskit/media-core';
 import { DownloadButtonWrapper } from './styled';
 import Button from '@atlaskit/button';
 import { withAnalyticsEvents } from '@atlaskit/analytics-next';
@@ -10,14 +15,14 @@ import {
   downloadErrorButtonEvent,
 } from './analytics/download';
 import { channel } from './analytics';
-import { Identifier } from './domain';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { MediaViewerError } from './error';
 
 const downloadIcon = <DownloadIcon label="Download" />;
 
-export const DownloadButton = withAnalyticsEvents({
+// TODO: MS-1556
+export const DownloadButton: any = withAnalyticsEvents({
   onClick: (createEvent: CreateUIAnalyticsEventSignature, props: any) => {
     const ev = createEvent(props.analyticsPayload);
     ev.fire(channel);
@@ -64,7 +69,7 @@ export const ErrorViewDownloadButton = (
 
 export type ToolbarDownloadButtonProps = {
   state: FileState;
-  identifier: Identifier;
+  identifier: FileIdentifier;
   context: Context;
 };
 

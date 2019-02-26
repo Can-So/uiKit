@@ -11,20 +11,16 @@ describe('Root Wrapper', () => {
 
   describe('File', () => {
     it('should render properly with default properties', () => {
-      const file = shallow(<Wrapper mediaItemType="file" />);
+      const file = shallow(<Wrapper />);
       expect(file).toMatchSnapshot();
     });
 
     it('should render properly with passed dimensions', () => {
       const defaultWithDimensions = shallow(
-        <Wrapper mediaItemType="file" dimensions={dimensions} />,
+        <Wrapper dimensions={dimensions} />,
       );
       const auto = shallow(
-        <Wrapper
-          mediaItemType="file"
-          appearance="auto"
-          dimensions={dimensions}
-        />,
+        <Wrapper appearance="auto" dimensions={dimensions} />,
       );
 
       expect(defaultWithDimensions).toMatchSnapshot();
@@ -32,16 +28,10 @@ describe('Root Wrapper', () => {
     });
 
     it('should render properly with different appeareances', () => {
-      const auto = shallow(<Wrapper mediaItemType="file" appearance="auto" />);
-      const image = shallow(
-        <Wrapper mediaItemType="file" appearance="image" />,
-      );
-      const square = shallow(
-        <Wrapper mediaItemType="file" appearance="square" />,
-      );
-      const horizontal = shallow(
-        <Wrapper mediaItemType="file" appearance="horizontal" />,
-      );
+      const auto = shallow(<Wrapper appearance="auto" />);
+      const image = shallow(<Wrapper appearance="image" />);
+      const square = shallow(<Wrapper appearance="square" />);
+      const horizontal = shallow(<Wrapper appearance="horizontal" />);
 
       expect(auto).toMatchSnapshot();
       expect(image).toMatchSnapshot();
@@ -50,65 +40,23 @@ describe('Root Wrapper', () => {
     });
 
     it('should apply breakpoint rules bassed on breakpointSize', () => {
-      const small = shallow(
-        <Wrapper mediaItemType="file" breakpointSize="small" />,
-      );
-      const medium = shallow(
-        <Wrapper mediaItemType="file" breakpointSize="medium" />,
-      );
-      const large = shallow(
-        <Wrapper mediaItemType="file" breakpointSize="large" />,
-      );
-      const xlarge = shallow(
-        <Wrapper mediaItemType="file" breakpointSize="xlarge" />,
-      );
+      const small = shallow(<Wrapper breakpointSize="small" />);
+      const medium = shallow(<Wrapper breakpointSize="medium" />);
+      const large = shallow(<Wrapper breakpointSize="large" />);
+      const xlarge = shallow(<Wrapper breakpointSize="xlarge" />);
 
       expect(small).toMatchSnapshot();
       expect(medium).toMatchSnapshot();
       expect(large).toMatchSnapshot();
       expect(xlarge).toMatchSnapshot();
     });
-  });
 
-  describe('Link', () => {
-    it('should render properly with default properties', () => {
-      const file = shallow(<Wrapper mediaItemType="link" />);
+    it('should render right cursor when shouldUsePointerCursor is passed', () => {
+      const withCursor = shallow(<Wrapper shouldUsePointerCursor />);
+      const withoutCursor = shallow(<Wrapper shouldUsePointerCursor={false} />);
 
-      expect(file).toMatchSnapshot();
-    });
-
-    it('should render properly with passed dimensions', () => {
-      const defaultWithDimensions = shallow(
-        <Wrapper mediaItemType="link" dimensions={dimensions} />,
-      );
-      const auto = shallow(
-        <Wrapper
-          mediaItemType="link"
-          appearance="auto"
-          dimensions={dimensions}
-        />,
-      );
-
-      expect(defaultWithDimensions).toMatchSnapshot();
-      expect(auto).toMatchSnapshot();
-    });
-
-    it('should render properly with different appeareances', () => {
-      const auto = shallow(<Wrapper mediaItemType="link" appearance="auto" />);
-      const image = shallow(
-        <Wrapper mediaItemType="link" appearance="image" />,
-      );
-      const square = shallow(
-        <Wrapper mediaItemType="link" appearance="square" />,
-      );
-      const horizontal = shallow(
-        <Wrapper mediaItemType="link" appearance="horizontal" />,
-      );
-
-      expect(auto).toMatchSnapshot();
-      expect(image).toMatchSnapshot();
-      expect(square).toMatchSnapshot();
-      expect(horizontal).toMatchSnapshot();
+      expect(withCursor).toMatchSnapshot();
+      expect(withoutCursor).toMatchSnapshot();
     });
   });
 });

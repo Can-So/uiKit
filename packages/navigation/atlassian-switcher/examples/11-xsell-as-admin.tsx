@@ -3,8 +3,9 @@ import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
 import JiraSwitcher from '../src/components/jira-switcher';
 import { mockEndpoints } from './helpers/mock-endpoints';
+import { withAnalyticsLogger } from './helpers';
 
-export default class JiraSwitcherExample extends Component {
+class JiraSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -62,3 +63,5 @@ export default class JiraSwitcherExample extends Component {
     );
   }
 }
+
+export default withAnalyticsLogger(JiraSwitcherExample);

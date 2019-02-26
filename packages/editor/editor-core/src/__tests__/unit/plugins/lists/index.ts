@@ -15,6 +15,7 @@ import {
   randomId,
   br,
   code_block,
+  underline,
 } from '@atlaskit/editor-test-helpers';
 import {
   toggleOrderedList,
@@ -22,22 +23,38 @@ import {
 } from '../../../../plugins/lists/commands';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import { GapCursorSelection } from '../../../../plugins/gap-cursor';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import {
+  AnalyticsEventPayload,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  INDENT_DIR,
+  INDENT_TYPE,
+  ACTION,
+  ACTION_SUBJECT,
+  EVENT_TYPE,
+} from '../../../../plugins/analytics';
 
 describe('lists', () => {
   const createEditor = createEditorFactory();
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
-  const editor = (doc: any, trackEvent?: () => {}) =>
-    createEditor({
+  const editor = (doc: any, trackEvent?: () => {}) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorProps: {
         analyticsHandler: trackEvent,
         allowCodeBlocks: true,
+        allowAnalyticsGASV3: true,
         allowPanel: true,
         allowLists: true,
         media: { allowMediaSingle: true },
       },
+      createAnalyticsEvent,
       pluginKey,
     });
+  };
 
   const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
   const temporaryFileId = `temporary:${randomId()}`;
@@ -67,6 +84,32 @@ describe('lists', () => {
         sendKeyToPm(editorView, 'Tab');
         expect(trackEvent).toHaveBeenCalledWith(
           'atlassian.editor.format.list.indent.keyboard',
+        );
+      });
+
+      it('should call indent analytics V3 event', () => {
+        const expectedPayload: AnalyticsEventPayload = {
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          eventType: EVENT_TYPE.TRACK,
+          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+          attributes: {
+            inputMethod: INPUT_METHOD.KEYBOARD,
+            previousIndentationLevel: 1,
+            newIndentLevel: 2,
+            direction: INDENT_DIR.INDENT,
+            indentType: INDENT_TYPE.LIST,
+          },
+        };
+        const { editorView } = editor(
+          doc(ol(li(p('text')), li(p('text{<>}')))),
+          trackEvent,
+        );
+
+        sendKeyToPm(editorView, 'Tab');
+
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(
+          expect.objectContaining(expectedPayload),
         );
       });
     });
@@ -373,6 +416,29 @@ describe('lists', () => {
           'atlassian.editor.format.list.outdent.keyboard',
         );
       });
+      it('should call outdent analytics V3 event', () => {
+        const expectedPayload: AnalyticsEventPayload = {
+          action: ACTION.FORMATTED,
+          actionSubject: ACTION_SUBJECT.TEXT,
+          eventType: EVENT_TYPE.TRACK,
+          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+          attributes: {
+            inputMethod: INPUT_METHOD.KEYBOARD,
+            previousIndentationLevel: 2,
+            newIndentLevel: 1,
+            direction: INDENT_DIR.OUTDENT,
+            indentType: INDENT_TYPE.LIST,
+          },
+        };
+        const { editorView } = editor(
+          doc(ol(li(p('One'), ul(li(p('Two{<>}')))))),
+          trackEvent,
+        );
+
+        sendKeyToPm(editorView, 'Shift-Tab');
+
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      });
     });
 
     if (browser.mac) {
@@ -611,6 +677,18 @@ describe('lists', () => {
       it('should convert selection to list when there is an empty paragraph between non empty two', () => {
         const expectedOutput = doc(ul(li(p('One')), li(p()), li(p('Three'))));
         const { editorView } = editor(doc(p('{<}One'), p(), p('Three{>}')));
+
+        toggleBulletList(editorView);
+        expect(editorView.state.doc).toEqualDocument(expectedOutput);
+      });
+
+      it('should convert selection to a list when it is a paragraph with supported marks', () => {
+        const expectedOutput = doc(
+          ul(li(p('One')), li(p(underline('Two'))), li(p('Three'))),
+        );
+        const { editorView } = editor(
+          doc(p('{<}One'), p(underline('Two')), p('Three{>}')),
+        );
 
         toggleBulletList(editorView);
         expect(editorView.state.doc).toEqualDocument(expectedOutput);

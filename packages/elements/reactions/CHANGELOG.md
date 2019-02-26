@@ -1,5 +1,21 @@
 # @atlaskit/reactions
 
+## 15.4.2
+- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
+  - @atlaskit/emoji@55.0.1
+  - @atlaskit/editor-test-helpers@7.0.0
+
+## 15.4.1
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+  - @atlaskit/emoji@55.0.0
+  - @atlaskit/editor-test-helpers@6.3.22
+  - @atlaskit/util-data-test@10.2.1
+
+## 15.4.0
+- [minor] [68ef17af8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68ef17af8b):
+
+  - Enable noImplicitAny for reactions, fix type issues.
+
 ## 15.3.4
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/editor-test-helpers@6.3.17

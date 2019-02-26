@@ -5,7 +5,11 @@ import { FormattedMessage } from 'react-intl';
 import { defaultCategories } from '../../constants';
 import { CategoryDescription, OnCategory } from '../../types';
 import { messages } from '../i18n';
-import { CategoryDescriptionMap, CategoryId } from './categories';
+import {
+  CategoryDescriptionMap,
+  CategoryGroupKey,
+  CategoryId,
+} from './categories';
 import * as styles from './styles';
 
 export interface Props {
@@ -23,7 +27,7 @@ export type CategoryMap = {
   [id: string]: CategoryDescription;
 };
 
-export const sortCategories = (c1, c2) =>
+export const sortCategories = (c1: CategoryGroupKey, c2: CategoryGroupKey) =>
   CategoryDescriptionMap[c1].order - CategoryDescriptionMap[c2].order;
 
 const addNewCategories = (
@@ -66,7 +70,7 @@ export default class CategorySelector extends PureComponent<Props, State> {
     }
   };
 
-  componentWillUpdate(nextProps: Props, nextState: State) {
+  componentWillUpdate(nextProps: Props) {
     if (this.props.dynamicCategories !== nextProps.dynamicCategories) {
       this.setState({
         categories: addNewCategories(
@@ -91,7 +95,7 @@ export default class CategorySelector extends PureComponent<Props, State> {
               categoryClasses.push(styles.active);
             }
 
-            const onClick = e => {
+            const onClick = (e: React.SyntheticEvent) => {
               e.preventDefault();
               // ignore if disabled
               if (!disableCategories) {
@@ -107,12 +111,12 @@ export default class CategorySelector extends PureComponent<Props, State> {
             return (
               <li key={category.id}>
                 <FormattedMessage {...messages[category.name]}>
-                  {(categoryName: string) => (
+                  {categoryName => (
                     <button
                       data-category-id={category.id}
                       className={classNames(categoryClasses)}
                       onClick={onClick}
-                      title={categoryName}
+                      title={categoryName as string}
                     >
                       <Icon label={categoryName} />
                     </button>

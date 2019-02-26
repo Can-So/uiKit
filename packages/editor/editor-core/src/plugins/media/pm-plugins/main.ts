@@ -34,13 +34,11 @@ import {
 import DefaultMediaStateManager from '../default-state-manager';
 import { insertMediaSingleNode } from '../utils/media-single';
 
-import { hasParentNodeOfType, findDomRefAtPos } from 'prosemirror-utils';
+import { findDomRefAtPos } from 'prosemirror-utils';
 export { DefaultMediaStateManager };
 export { MediaState, MediaProvider, MediaStateStatus, MediaStateManager };
 
 const MEDIA_RESOLVED_STATES = ['ready', 'error', 'cancelled'];
-
-export type PluginStateChangeSubscriber = (state: MediaPluginState) => any;
 
 export interface MediaNodeWithPosHandler {
   node: PMNode;
@@ -48,7 +46,6 @@ export interface MediaNodeWithPosHandler {
 }
 
 export class MediaPluginState {
-  public allowsMedia: boolean = false;
   public allowsUploads: boolean = false;
   public mediaContext: Context;
   public stateManager: MediaStateManager;
@@ -63,7 +60,6 @@ export class MediaPluginState {
   private pendingTask = Promise.resolve<MediaState | null>(null);
   public options: MediaPluginOptions;
   private view: EditorView;
-  private pluginStateChangeSubscribers: PluginStateChangeSubscriber[] = [];
   private useDefaultStateManager = true;
   private destroyed = false;
   public mediaProvider: MediaProvider;
@@ -112,27 +108,18 @@ export class MediaPluginState {
     this.errorReporter = options.errorReporter || new ErrorReporter();
   }
 
-  subscribe(cb: PluginStateChangeSubscriber) {
-    this.pluginStateChangeSubscribers.push(cb);
-    cb(this);
-  }
-
-  unsubscribe(cb: PluginStateChangeSubscriber) {
-    const { pluginStateChangeSubscribers } = this;
-    const pos = pluginStateChangeSubscribers.indexOf(cb);
-
-    if (pos > -1) {
-      pluginStateChangeSubscribers.splice(pos, 1);
-    }
-  }
-
   setMediaProvider = async (mediaProvider?: Promise<MediaProvider>) => {
     if (!mediaProvider) {
       this.destroyPickers();
 
       this.allowsUploads = false;
-      this.allowsMedia = false;
-      this.notifyPluginStateSubscribers();
+      if (!this.destroyed) {
+        this.view.dispatch(
+          this.view.state.tr.setMeta(stateKey, {
+            allowsUploads: this.allowsUploads,
+          }),
+        );
+      }
 
       return;
     }
@@ -155,13 +142,17 @@ export class MediaPluginState {
       this.destroyPickers();
 
       this.allowsUploads = false;
-      this.allowsMedia = false;
-      this.notifyPluginStateSubscribers();
+      if (!this.destroyed) {
+        this.view.dispatch(
+          this.view.state.tr.setMeta(stateKey, {
+            allowsUploads: this.allowsUploads,
+          }),
+        );
+      }
 
       return;
     }
 
-    this.allowsMedia = true;
     this.mediaContext = await this.mediaProvider.viewContext;
 
     // release all listeners for default state manager
@@ -200,8 +191,6 @@ export class MediaPluginState {
     } else {
       this.destroyPickers();
     }
-
-    this.notifyPluginStateSubscribers();
   };
 
   getMediaOptions = () => this.options;
@@ -216,34 +205,7 @@ export class MediaPluginState {
     }
     if (this.element !== newElement) {
       this.element = newElement;
-      this.notifyPluginStateSubscribers();
     }
-  }
-
-  updateUploadStateDebounce: number | null = null;
-  updateUploadState(): void {
-    if (!this.waitForMediaUpload) {
-      return;
-    }
-
-    if (this.updateUploadStateDebounce) {
-      clearTimeout(this.updateUploadStateDebounce);
-    }
-
-    this.updateUploadStateDebounce = window.setTimeout(() => {
-      this.updateUploadStateDebounce = null;
-      this.allUploadsFinished = false;
-      this.notifyPluginStateSubscribers();
-      this.waitForPendingTasks().then(() => {
-        this.allUploadsFinished = true;
-        this.notifyPluginStateSubscribers();
-      });
-    }, 0);
-  }
-
-  updateLayout(layout: MediaSingleLayout): void {
-    this.layout = layout;
-    this.notifyPluginStateSubscribers();
   }
 
   private getDomElement(domAtPos: EditorView['domAtPos']) {
@@ -275,6 +237,8 @@ export class MediaPluginState {
       return;
     }
 
+    this.allUploadsFinished = false;
+
     const imageAttachments = mediaStates.filter(media =>
       isImage(media.fileMimeType),
     );
@@ -287,7 +251,7 @@ export class MediaPluginState {
       this.stateManager.on(mediaState.id, this.handleMediaState);
     });
 
-    if (this.editorAppearance !== 'message' && mediaSingle) {
+    if (mediaSingle) {
       insertMediaGroupNode(this.view, nonImageAttachments, collection);
       imageAttachments.forEach(mediaState => {
         insertMediaSingleNode(this.view, mediaState, collection);
@@ -315,6 +279,10 @@ export class MediaPluginState {
           stateManager.on(state.id, onStateChange);
         }).then(() => promise);
       }, this.pendingTask);
+
+    this.pendingTask.then(() => {
+      this.allUploadsFinished = true;
+    });
 
     const { view } = this;
     if (!view.hasFocus()) {
@@ -703,10 +671,6 @@ export class MediaPluginState {
     }
   };
 
-  private notifyPluginStateSubscribers = () => {
-    this.pluginStateChangeSubscribers.forEach(cb => cb.call(cb, this));
-  };
-
   removeNodeById = (state: MediaState) => {
     const { id } = state;
     const mediaNodeWithPos = isImage(state.fileMimeType)
@@ -743,20 +707,6 @@ export class MediaPluginState {
     ) {
       return selection.node;
     }
-  }
-
-  isLayoutSupported(): boolean {
-    const { selection, schema } = this.view.state;
-    if (
-      selection instanceof NodeSelection &&
-      selection.node.type === schema.nodes.mediaSingle
-    ) {
-      return (
-        !hasParentNodeOfType(schema.nodes.bodiedExtension)(selection) &&
-        !hasParentNodeOfType(schema.nodes.layoutSection)(selection)
-      );
-    }
-    return false;
   }
 
   /**
@@ -824,19 +774,16 @@ export const createPlugin = (
         );
       },
       apply(tr, pluginState: MediaPluginState, oldState, newState) {
-        const { parent } = newState.selection.$from;
-
-        // Update Layout
-        const { mediaSingle } = oldState.schema.nodes;
-        if (parent.type === mediaSingle) {
-          pluginState.layout = parent.attrs.layout;
-        }
-
         const meta = tr.getMeta(stateKey);
         if (meta && dispatch) {
           const { showMediaPicker } = pluginState;
           const { allowsUploads } = meta;
-          dispatch(stateKey, { allowsUploads, showMediaPicker });
+
+          dispatch(stateKey, {
+            ...pluginState,
+            allowsUploads,
+            showMediaPicker,
+          });
         }
 
         // NOTE: We're not calling passing new state to the Editor, because we depend on the view.state reference
@@ -853,7 +800,6 @@ export const createPlugin = (
 
       return {
         update: () => {
-          pluginState.updateUploadState();
           pluginState.updateElement();
         },
       };

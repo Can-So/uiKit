@@ -1,20 +1,17 @@
-import { expect } from 'chai';
-
-import { customCategory } from '../../../constants';
-import {
-  EmojiDescription,
-  EmojiServiceResponse,
-  EmojiServiceDescription,
-  EmojiServiceDescriptionWithVariations,
-  ImageRepresentation,
-  SpriteRepresentation,
-} from '../../../types';
 import {
   denormaliseEmojiServiceResponse,
   shouldUseAltRepresentation,
 } from '../../../api/EmojiUtils';
+import { customCategory } from '../../../constants';
 import { isEmojiVariationDescription } from '../../../type-helpers';
-
+import {
+  EmojiDescription,
+  EmojiServiceDescription,
+  EmojiServiceDescriptionWithVariations,
+  EmojiServiceResponse,
+  ImageRepresentation,
+  SpriteRepresentation,
+} from '../../../types';
 import {
   defaultMediaApiToken,
   mediaEmoji,
@@ -32,9 +29,13 @@ describe('EmojiUtils', () => {
       'order',
     ];
 
-    const checkFields = (actual, expected, fields) => {
+    const checkFields = (
+      actual: { [key: string]: any } = {},
+      expected: { [key: string]: any } = {},
+      fields: string[] = [],
+    ) => {
       fields.forEach(field => {
-        expect(actual[field], field).to.equal(expected[field]);
+        expect(actual[field]).toEqual(expected[field]);
       });
     };
 
@@ -94,7 +95,7 @@ describe('EmojiUtils', () => {
         },
       });
       const emojis = emojiResponse.emojis;
-      expect(emojis.length).to.equal(1);
+      expect(emojis.length).toEqual(1);
       const e = emojis[0];
       checkFields(e, emoji, emojiFields);
       const spriteFields = ['x', 'y', 'height', 'width', 'xIndex', 'yIndex'];
@@ -106,7 +107,7 @@ describe('EmojiUtils', () => {
         spriteSheet,
         spriteSheetFields,
       );
-      expect(e.skinVariations && e.skinVariations.length).to.equal(1);
+      expect(e.skinVariations && e.skinVariations.length).toEqual(1);
       if (
         e.skinVariations &&
         emoji.skinVariations &&
@@ -118,7 +119,7 @@ describe('EmojiUtils', () => {
         checkFields(skinEmoji0Rep.sprite, spriteSheet, spriteSheetFields);
 
         if (isEmojiVariationDescription(skinEmoji0)) {
-          expect(skinEmoji0.baseId).to.equal(e.id);
+          expect(skinEmoji0.baseId).toEqual(e.id);
         } else {
           fail('The skin variation emoji did not contain a baseId');
         }
@@ -160,15 +161,16 @@ describe('EmojiUtils', () => {
         emojis: [emoji],
       });
       const emojis = emojiResponse.emojis;
-      expect(emojis.length).to.equal(1);
+      expect(emojis.length).toEqual(1);
       const e = emojis[0];
       checkFields(e, emoji, emojiFields);
+
       checkFields(e.representation, emoji.representation, [
         'imagePath',
         'height',
         'width',
       ]);
-      expect(e.skinVariations && e.skinVariations.length).to.equal(1);
+      expect(e.skinVariations && e.skinVariations.length).toEqual(1);
       checkFields(
         e.skinVariations && e.skinVariations[0],
         emoji.skinVariations[0],
@@ -200,7 +202,7 @@ describe('EmojiUtils', () => {
       const emojiResponse = denormaliseEmojiServiceResponse({
         emojis: [emoji],
       });
-      expect(emojiResponse.emojis[0].ascii).to.deep.equal([':D', ':-D', '=D']);
+      expect(emojiResponse.emojis[0].ascii).toEqual([':D', ':-D', '=D']);
     });
 
     it('denormalise includes emoji created date and creator user id when present', () => {
@@ -234,11 +236,11 @@ describe('EmojiUtils', () => {
       });
 
       const emojis = emojiResponse.emojis;
-      expect(emojis.length).to.equal(1);
+      expect(emojis.length).toEqual(1);
       const e = emojis[0];
 
-      expect(e.createdDate).to.equal(expectedDate);
-      expect(e.creatorUserId).to.equal(expectedUserId);
+      expect(e.createdDate).toEqual(expectedDate);
+      expect(e.creatorUserId).toEqual(expectedUserId);
     });
   });
 
@@ -270,12 +272,12 @@ describe('EmojiUtils', () => {
     });
 
     const emojis = emojiResponse.emojis;
-    expect(emojis.length).to.equal(1);
+    expect(emojis.length).toEqual(1);
     const e = emojis[0];
 
-    expect(e.createdDate === undefined).to.equal(true);
-    expect(e.creatorUserId === undefined).to.equal(true);
-    expect(e.name).to.equal(expectedName);
+    expect(e.createdDate === undefined).toEqual(true);
+    expect(e.creatorUserId === undefined).toEqual(true);
+    expect(e.name).toEqual(expectedName);
   });
 
   describe('#denormaliseServiceRepresentation', () => {
@@ -290,17 +292,14 @@ describe('EmojiUtils', () => {
       const serviceRepresentation = mediaServiceEmoji.representation as ImageRepresentation;
       expect(
         serviceRepresentation.imagePath.indexOf(mediaApiToken.url),
-        'Test data matches',
-      ).to.equal(0);
+      ).toEqual(0);
 
       const emojiData = denormaliseEmojiServiceResponse(emojiServiceData);
-      expect(emojiData.mediaApiToken, 'mediaApiToken copied').to.deep.equal(
-        mediaApiToken,
-      );
-      expect(emojiData.emojis.length, 'Same number of emoji').to.equal(1);
+      expect(emojiData.mediaApiToken).toEqual(mediaApiToken);
+      expect(emojiData.emojis.length).toEqual(1);
 
       const convertedEmoji = emojiData.emojis[0];
-      expect(convertedEmoji, 'Converted emoji').to.deep.equal(mediaEmoji);
+      expect(convertedEmoji).toEqual(mediaEmoji);
     });
   });
 
@@ -326,7 +325,7 @@ describe('EmojiUtils', () => {
       });
 
       const convertedEmoji = emojiResponse.emojis[0];
-      expect(convertedEmoji.altRepresentation).to.equal(undefined);
+      expect(convertedEmoji.altRepresentation).toEqual(undefined);
     });
 
     it('handles an empty altRepresentations map', () => {
@@ -351,7 +350,7 @@ describe('EmojiUtils', () => {
       });
 
       const convertedEmoji = emojiResponse.emojis[0];
-      expect(convertedEmoji.altRepresentation).to.equal(undefined);
+      expect(convertedEmoji.altRepresentation).toEqual(undefined);
     });
 
     it('uses the DPI returned by the altRepresentations map', () => {
@@ -382,7 +381,7 @@ describe('EmojiUtils', () => {
       });
 
       const convertedEmoji = emojiResponse.emojis[0];
-      expect(convertedEmoji.altRepresentation).to.deep.equal({
+      expect(convertedEmoji.altRepresentation).toEqual({
         imagePath: 'https://something/something3.png',
         height: 128,
         width: 128,
@@ -412,20 +411,20 @@ describe('EmojiUtils', () => {
     };
 
     it('is true if fitToHeight is larger than representation.height', () => {
-      expect(shouldUseAltRepresentation(emoji, 96)).to.equal(true);
+      expect(shouldUseAltRepresentation(emoji, 96)).toEqual(true);
     });
 
     it('is false if no fitToHeight param', () => {
-      expect(shouldUseAltRepresentation(emoji)).to.equal(false);
+      expect(shouldUseAltRepresentation(emoji)).toEqual(false);
     });
 
     it('is false if no altRepresentation', () => {
       const { altRepresentation, ...lowRes } = emoji;
-      expect(shouldUseAltRepresentation(lowRes, 96)).to.equal(false);
+      expect(shouldUseAltRepresentation(lowRes, 96)).toEqual(false);
     });
 
     it('is false if fitToHeight is less than representation.height', () => {
-      expect(shouldUseAltRepresentation(emoji, 48)).to.equal(false);
+      expect(shouldUseAltRepresentation(emoji, 48)).toEqual(false);
     });
   });
 });

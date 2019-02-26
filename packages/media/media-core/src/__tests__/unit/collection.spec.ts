@@ -20,7 +20,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '12',
-    type: 'file',
   };
   const secondItem: MediaCollectionItem = {
     id: '2',
@@ -34,7 +33,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '123',
-    type: 'file',
   };
   const newItem: MediaCollectionItem = {
     id: '0',
@@ -48,7 +46,6 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     },
     insertedAt: 1,
     occurrenceKey: '1234',
-    type: 'file',
   };
   const contents: MediaCollectionItem[] = [firstItem, secondItem];
   const getCollectionItems = jest.fn().mockResolvedValue({
@@ -180,6 +177,23 @@ describe('CollectionFetcher', () => {
         },
       });
     });
+
+    it('should call error callback if call to /items fails', done => {
+      const { collectionFetcher } = setup();
+
+      collectionFetcher.mediaStore.getCollectionItems = jest
+        .fn()
+        .mockReturnValue(Promise.reject());
+
+      collectionFetcher.getItems('recents').subscribe({
+        error() {
+          expect(
+            collectionFetcher.mediaStore.getCollectionItems,
+          ).toHaveBeenCalledTimes(1);
+          done();
+        },
+      });
+    });
   });
 
   describe('loadNextPage()', () => {
@@ -275,7 +289,6 @@ describe('CollectionFetcher', () => {
             id: 'some-id',
             insertedAt: 42,
             occurrenceKey: '',
-            type: 'file',
             details: {} as MediaCollectionItemDetails,
           },
         ],

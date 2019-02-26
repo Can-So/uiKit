@@ -140,7 +140,7 @@ export const mockReplyComment: Comment = {
 
 export const mockConversation: Conversation = {
   conversationId: 'mock-conversation',
-  containerId: 'ari:cloud:platform::conversation/demo',
+  objectId: 'ari:cloud:platform::conversation/demo',
   comments: [mockComment, mockReplyComment],
   meta: {},
   localId: 'local-conversation',
@@ -148,7 +148,7 @@ export const mockConversation: Conversation = {
 
 export const mockInlineConversation: Conversation = {
   conversationId: 'mock-inline-conversation',
-  containerId: 'ari:cloud:platform::conversation/demo',
+  objectId: 'ari:cloud:platform::conversation/demo',
   comments: [mockInlineComment],
   meta: { name: 'main.js', lineNumber: 3 },
 };
@@ -158,7 +158,7 @@ export const generateMockConversation = (): Conversation => {
   return {
     meta: {},
     conversationId,
-    containerId: 'ari:cloud:platform::conversation/demo',
+    objectId: 'ari:cloud:platform::conversation/demo',
     comments: Array.from({ length: 3 }).map(() => {
       const commentId = <string>uuid.generate();
 

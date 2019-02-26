@@ -18,7 +18,6 @@ import { createDisplayGrid } from '../../../plugins/grid';
 import { EventDispatcher } from '../../../event-dispatcher';
 import { MediaProvider } from '../types';
 import { EditorAppearance } from '../../../types';
-import { browser } from '@atlaskit/editor-common';
 import { Context } from '@atlaskit/media-core';
 
 const DEFAULT_WIDTH = 250;
@@ -59,13 +58,6 @@ export default class MediaSingleNode extends Component<
     this.mediaPluginState = stateKey.getState(
       this.props.view.state,
     ) as MediaPluginState;
-  }
-
-  componentDidUpdate() {
-    const { layout } = this.props.node.attrs;
-    if (this.props.selected()) {
-      this.mediaPluginState.updateLayout(layout);
-    }
   }
 
   async componentDidMount() {
@@ -285,16 +277,6 @@ class MediaSingleNodeView extends ReactNodeView {
         }}
       />
     );
-  }
-
-  createDomRef() {
-    /**
-     * ED-5379 and https://github.com/ProseMirror/prosemirror/issues/884
-     *
-     * Workaround a Chrome bug where selecting the middle nodes of sequential leaf nodes
-     * doesn't create copy events.
-     */
-    return document.createElement(browser.chrome ? 'object' : 'div');
   }
 
   ignoreMutation() {

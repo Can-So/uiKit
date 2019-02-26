@@ -1,8 +1,9 @@
-import { traverse, ADFNode } from './traverse';
+import { ADFEntity } from '../types';
+import { traverse } from './traverse';
 
 export function map<T = any>(
-  adf: ADFNode,
-  callback: (node: ADFNode) => T,
+  adf: ADFEntity,
+  callback: (node: ADFEntity) => T,
 ): Array<T> {
   const result: Array<T> = [];
 

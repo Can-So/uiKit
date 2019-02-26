@@ -1,5 +1,10 @@
 # @atlaskit/code
 
+## 8.2.3
+- [patch] [d49e9bbb13](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d49e9bbb13):
+
+  - Expose the props on website
+
 ## 8.2.2
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/theme@7.0.1

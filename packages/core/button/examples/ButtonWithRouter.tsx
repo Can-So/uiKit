@@ -1,4 +1,5 @@
 import * as React from 'react';
+// @ts-ignore
 import { Link, MemoryRouter } from 'react-router-dom';
 import Button from '../src';
 

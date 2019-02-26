@@ -1,7 +1,8 @@
 import AkButton from '@atlaskit/button';
-import { waitUntil } from '@atlaskit/util-common-test';
-import { ReactWrapper } from 'enzyme';
 import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { waitUntil } from '@atlaskit/util-common-test';
+import { MockEmojiResourceConfig } from '@atlaskit/util-data-test';
+import { ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import Emoji from '../../../../components/common/Emoji';
 import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';
@@ -34,7 +35,7 @@ export function setupPickerWithoutToneSelector(): Promise<
 
 export function setupPicker(
   props?: Props,
-  config?,
+  config?: MockEmojiResourceConfig,
 ): Promise<ReactWrapper<any, any>> {
   const pickerProps: Props = {
     ...props,
@@ -57,14 +58,17 @@ export const leftClick = {
 
 export const allEmojis = newEmojiRepository().all().emojis;
 
-export const findEmoji = list => list.find(Emoji);
+export const findEmoji = (list: ReactWrapper) => list.find(Emoji);
 /**
  * @param picker mounted EmojiPicker component
  * @param list child EmojiPickerList
  */
-export const emojisVisible = (picker, list) => hasSelector(picker, Emoji, list);
+export const emojisVisible = (
+  picker: ReactWrapper,
+  list: ReactWrapper<any, any>,
+) => hasSelector(picker, Emoji, list);
 
-const nodeIsCategory = (category: CategoryGroupKey, n) =>
+const nodeIsCategory = (category: CategoryGroupKey, n: ReactWrapper<Props>) =>
   n.is(EmojiPickerCategoryHeading) && n.prop('id') === category;
 
 export const findCategoryHeading = (
@@ -73,9 +77,9 @@ export const findCategoryHeading = (
 ) =>
   component
     .find(EmojiPickerCategoryHeading)
-    .filterWhere(n => nodeIsCategory(category, n));
+    .filterWhere((n: ReactWrapper<any, any>) => nodeIsCategory(category, n));
 
-const findAllVirtualRows = component =>
+const findAllVirtualRows = (component: ReactWrapper) =>
   component.update() &&
   component.findWhere(
     n =>
@@ -87,7 +91,7 @@ const findAllVirtualRows = component =>
 
 export const emojiRowsVisibleInCategory = (
   category: CategoryGroupKey,
-  component,
+  component: ReactWrapper,
 ) => {
   component.update();
   const rows = findAllVirtualRows(component);
@@ -114,20 +118,22 @@ export const emojiRowsVisibleInCategory = (
   });
 };
 
-const getCategoryButton = (category: CategoryGroupKey, picker) =>
+const getCategoryButton = (category: CategoryGroupKey, picker: ReactWrapper) =>
   picker
     .find(CategorySelector)
     .findWhere(
       n => n.name() === 'button' && n.prop('data-category-id') === category,
     );
 
-export const categoryVisible = (category: CategoryGroupKey, component) =>
-  findCategoryHeading(category, component).length > 0;
+export const categoryVisible = (
+  category: CategoryGroupKey,
+  component: ReactWrapper<any>,
+) => findCategoryHeading(category, component).length > 0;
 
 export const showCategory = (
   category: CategoryGroupKey,
-  component,
-  categoryTitle?: string,
+  component: ReactWrapper,
+  _categoryTitle?: string,
 ): Promise<any> => {
   const categoryButton = getCategoryButton(category, component);
   expect(categoryButton).toHaveLength(1);
@@ -144,7 +150,7 @@ export const showCategory = (
 };
 
 export const findEmojiInCategory = (
-  emojis,
+  emojis: ReactWrapper<any>,
   categoryId: CategoryGroupKey,
 ): EmojiDescription | undefined => {
   const upperCategoryId = categoryId.toLocaleUpperCase();
@@ -157,7 +163,7 @@ export const findEmojiInCategory = (
   return undefined;
 };
 
-export const findHandEmoji = (emojis): number => {
+export const findHandEmoji = (emojis: ReactWrapper<any>): number => {
   let offset = -1;
   emojis.forEach((emoji, index) => {
     if (emoji.prop('emoji').shortName.indexOf(':raised_hand:') !== -1) {
@@ -168,65 +174,68 @@ export const findHandEmoji = (emojis): number => {
   return offset;
 };
 
-export const findSearchInput = component =>
+export const findSearchInput = (component: ReactWrapper) =>
   component.update() &&
   component
     .find(EmojiPickerListSearch)
     .findWhere(component => component.name() === 'input');
 
-export const searchInputVisible = component =>
+export const searchInputVisible = (component: ReactWrapper) =>
   findSearchInput(component).length > 0;
 
-export const findEmojiNameInput = component =>
+export const findEmojiNameInput = (component: ReactWrapper) =>
   component.update() &&
   component.find(`.${commonStyles.uploadChooseFileEmojiName} input`);
 
-export const emojiNameInputVisible = (component): boolean =>
+export const emojiNameInputVisible = (component: ReactWrapper): boolean =>
   findEmojiNameInput(component).length > 0;
 
-export const emojiNameInputHasAValue = (component): boolean =>
+export const emojiNameInputHasAValue = (component: ReactWrapper): boolean =>
   emojiNameInputVisible(component) &&
-  findEmojiNameInput(component).prop('value');
+  !!findEmojiNameInput(component).prop('value');
 
 export const uploadAddRowSelector = `.${commonStyles.uploadAddRow}`;
 
-export const findAddEmojiButton = component =>
+export const findAddEmojiButton = (component: ReactWrapper) =>
   component.update() &&
   component
     .find(uploadAddRowSelector)
     .find(AkButton)
     .at(0);
 
-export const addEmojiButtonVisible = component =>
+export const addEmojiButtonVisible = (component: ReactWrapper) =>
   component.update() && findAddEmojiButton(component).length > 0;
 
-export const findCancelLink = component =>
+export const findCancelLink = (component: ReactWrapper) =>
   component.update() &&
   component
     .find(uploadAddRowSelector)
     .find(AkButton)
     .at(1);
 
-export const findUploadPreview = component =>
+export const findUploadPreview = (component: ReactWrapper) =>
   component.update() && component.find(EmojiUploadPreview);
 
-export const findEmojiWithId = (component, id) =>
+export const findEmojiWithId = (component: ReactWrapper, id: string) =>
   component.update() &&
   component
     .find(EmojiPickerList)
     .find(Emoji)
     .filterWhere(emoji => emoji.prop('emoji').id === id);
 
-export const emojiWithIdVisible = (component, id) =>
+export const emojiWithIdVisible = (component: ReactWrapper, id: string) =>
   findEmojiWithId(component, id).length > 0;
 
-export const finishDelete = component =>
+export const finishDelete = (component: ReactWrapper) =>
   component.update() && component.find(EmojiDeletePreview).length === 0;
 
-export const errorMessageVisible = component =>
+export const errorMessageVisible = (component: ReactWrapper) =>
   component.update() && component.find(EmojiErrorMessage).length === 1;
 
-export const tooltipErrorMessageMatches = async (component, message) => {
+export const tooltipErrorMessageMatches = async (
+  component: ReactWrapper<any>,
+  message: any,
+) => {
   component
     .find(EmojiErrorMessage)
     .find(ErrorIcon)
@@ -244,7 +253,7 @@ export const tooltipErrorMessageMatches = async (component, message) => {
   ).toMatchObject(message);
 };
 
-export const chooseFile = (component, file) => {
+export const chooseFile = (component: ReactWrapper, file: any) => {
   const fileChooser = component.find(FileChooser);
   const fileOnChange = fileChooser.prop('onChange');
   expect(fileOnChange).toBeDefined();

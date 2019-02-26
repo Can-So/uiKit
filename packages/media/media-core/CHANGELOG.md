@@ -1,5 +1,25 @@
 # @atlaskit/media-core
 
+## 27.1.0
+- [minor] [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+
+  - Expose Identifier type and utilities from media-core instead of media-card
+- Updated dependencies [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):
+  - @atlaskit/media-store@9.1.7
+  - @atlaskit/media-test-helpers@20.1.5
+  - @atlaskit/media-card@54.0.0
+
+## 27.0.2
+- Updated dependencies [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+  - @atlaskit/media-store@9.1.6
+  - @atlaskit/media-test-helpers@20.1.4
+  - @atlaskit/media-card@53.0.0
+
+## 27.0.1
+- [patch] [a9dc1278c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9dc1278c4):
+
+  - add error handling in CollectionFetcher for getItems call
+
 ## 27.0.0
 - [major] [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
 

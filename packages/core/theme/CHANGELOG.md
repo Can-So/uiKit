@@ -1,5 +1,10 @@
 # @atlaskit/theme
 
+## 7.0.5
+- [patch] [b46504d2e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b46504d2e4):
+
+  - Fixed example docs
+
 ## 7.0.4
 - [patch] [1a98f74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a98f74):
 

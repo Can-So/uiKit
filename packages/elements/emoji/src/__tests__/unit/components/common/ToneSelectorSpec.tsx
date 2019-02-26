@@ -1,7 +1,6 @@
 import * as sinon from 'sinon';
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 
 import ToneSelector from '../../../../components/common/ToneSelector';
 import EmojiButton from '../../../../components/common/EmojiButton';
@@ -36,7 +35,7 @@ describe('<ToneSelector />', () => {
       <ToneSelector emoji={handEmoji} onToneSelected={onToneSelectedSpy} />,
     );
 
-    expect(wrapper.find(EmojiButton)).to.have.length(6);
+    expect(wrapper.find(EmojiButton)).toHaveLength(6);
   });
 
   it('should call onToneSelected on click', () => {
@@ -55,12 +54,12 @@ describe('<ToneSelector />', () => {
       .find(EmojiButton)
       .first()
       .simulate('mousedown', { button: 0 });
-    expect(onToneSelectedSpy.calledWith(0)).to.equal(true);
+    expect(onToneSelectedSpy.calledWith(0)).toEqual(true);
     expect(
       firePrivateAnalyticsEvent.calledWith(
         `${analyticsEmojiPrefix}.skintone.select`,
         { skinTone: 0 },
       ),
-    ).to.equal(true);
+    ).toEqual(true);
   });
 });

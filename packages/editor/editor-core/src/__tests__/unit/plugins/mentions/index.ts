@@ -27,7 +27,7 @@ describe('mentionTypeahead', () => {
     sel: number;
     mentionProvider: MentionProvider;
     createAnalyticsEvent: CreateUIAnalyticsEventSignature;
-    event;
+    event: any;
   };
   type TestExecutor = (
     deps: TestDependencies,
@@ -42,7 +42,7 @@ describe('mentionTypeahead', () => {
    * @param test Test case function to be passed to Jest
    * @return Promise resolving with the return value of the test.
    */
-  const withMentionQuery = (query, test: TestExecutor) => async (
+  const withMentionQuery = (query: string, test: TestExecutor) => async (
     ...args: any[]
   ) => {
     const { event, createAnalyticsEvent } = analyticsMocks();
@@ -75,7 +75,7 @@ describe('mentionTypeahead', () => {
    * @param options List of options to add or override when creating the editor.
    * @return Object containing `editorView`, `sel` and `mentionProvider`.
    */
-  const editor = async (options?) => {
+  const editor = async (options?: any) => {
     const mentionProvider = Promise.resolve(new MockMentionResource({}));
     const contextIdentifierProvider = Promise.resolve(contextIdentifiers);
     const { editorView, sel } = createEditor({
@@ -263,9 +263,9 @@ describe('mentionTypeahead', () => {
   });
 
   describe('editor analytics', () => {
-    let createAnalyticsEvent;
-    let editorView;
-    let sel;
+    let createAnalyticsEvent: any;
+    let editorView: EditorView;
+    let sel: number;
 
     beforeEach(async () => {
       jest.clearAllMocks();

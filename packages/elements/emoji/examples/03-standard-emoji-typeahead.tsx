@@ -1,35 +1,33 @@
+import { layers } from '@atlaskit/theme';
 import * as React from 'react';
 import { Component } from 'react';
-
-import { layers } from '@atlaskit/theme';
-
-import EmojiTypeAhead from '../src/components/typeahead/EmojiTypeAhead';
-import debug from '../src/util/logger';
-
 import {
-  onOpen,
-  onClose,
-  onSelection,
-  lorem,
   getEmojiResource,
+  lorem,
+  onClose,
+  onOpen,
+  onSelection,
 } from '../example-helpers';
+import SearchTextInput from '../example-helpers/demo-search-text-input';
 import {
   TypeaheadProps,
   TypeaheadState,
 } from '../example-helpers/typeahead-props';
-import SearchTextInput from '../example-helpers/demo-search-text-input';
+import EmojiTypeAhead from '../src/components/typeahead/EmojiTypeAhead';
+import { EmojiId, OptionalEmojiDescription } from '../src/types';
+import debug from '../src/util/logger';
 
 export class EmojiTypeAheadTextInput extends Component<
   TypeaheadProps,
   TypeaheadState
 > {
-  private emojiTypeAheadRef: EmojiTypeAhead;
+  private emojiTypeAheadRef?: EmojiTypeAhead | null;
 
   static defaultProps = {
     onSelection: () => {},
   };
 
-  constructor(props) {
+  constructor(props: TypeaheadProps) {
     super(props);
     this.state = {
       active: false,
@@ -49,12 +47,12 @@ export class EmojiTypeAheadTextInput extends Component<
     });
   };
 
-  handleSelection = (emojiId, emoji) => {
+  handleSelection = (emojiId: EmojiId, emoji: OptionalEmojiDescription) => {
     this.hideEmojiPopup();
     this.props.onSelection(emojiId, emoji);
   };
 
-  updateSearch = event => {
+  updateSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.state.active) {
       this.setState({
         query: event.target.value || '',
@@ -62,22 +60,27 @@ export class EmojiTypeAheadTextInput extends Component<
     }
   };
 
-  private handleSearchTextInputChange = query => {
+  private handleSearchTextInputChange = (
+    query: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     this.updateSearch(query);
   };
   private handleSearchTextInputUp = () => {
-    this.emojiTypeAheadRef.selectPrevious();
+    this.emojiTypeAheadRef && this.emojiTypeAheadRef.selectPrevious();
   };
   private handleSearchTextInputDown = () => {
-    this.emojiTypeAheadRef.selectNext();
+    this.emojiTypeAheadRef && this.emojiTypeAheadRef.selectNext();
   };
   private handleSearchTextInputEnter = () => {
-    this.emojiTypeAheadRef.chooseCurrentSelection();
+    this.emojiTypeAheadRef && this.emojiTypeAheadRef.chooseCurrentSelection();
   };
-  private handleEmojiTypeAheadRef = ref => {
+  private handleEmojiTypeAheadRef = (ref: EmojiTypeAhead | null) => {
     this.emojiTypeAheadRef = ref;
   };
-  private handleEmojiTypeAheadSelection = (emojiId, emoji) => {
+  private handleEmojiTypeAheadSelection = (
+    emojiId: EmojiId,
+    emoji: OptionalEmojiDescription,
+  ) => {
     this.handleSelection(emojiId, emoji);
   };
 

@@ -13,10 +13,12 @@ export interface Props {
   onChange: any;
 }
 
+type SelectionDirectionType = 'backward' | 'forward' | 'none' | undefined;
+
 interface InputSelection {
   selectionStart: number;
   selectionEnd: number;
-  selectionDirection?: string;
+  selectionDirection?: SelectionDirectionType;
 }
 
 export default class EmojiPickerListSearch extends PureComponent<Props> {
@@ -24,10 +26,10 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
     style: {},
   };
 
-  private inputRef: any;
+  private inputRef?: HTMLInputElement | null;
   private inputSelection?: InputSelection;
 
-  private onBlur = e => {
+  private onBlur: React.FocusEventHandler<HTMLInputElement> = () => {
     const activeElement = document.activeElement;
     // Input lost focus to emoji picker container (happens in IE11 when updating search results)
     // See FS-2111
@@ -39,7 +41,7 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
     }
   };
 
-  private onChange = e => {
+  private onChange = (e: React.SyntheticEvent) => {
     this.saveInputSelection();
     this.props.onChange(e);
   };
@@ -52,11 +54,11 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
         selectionEnd,
         selectionDirection,
       } = this.inputRef;
-      if (selectionStart !== undefined) {
+      if (selectionStart && selectionEnd && selectionDirection) {
         this.inputSelection = {
           selectionStart,
           selectionEnd,
-          selectionDirection,
+          selectionDirection: selectionDirection as SelectionDirectionType,
         };
       }
     }
@@ -88,7 +90,7 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
     }
   };
 
-  private handleInputRef = input => {
+  private handleInputRef = (input: HTMLInputElement | null) => {
     if (input) {
       // Defer focus so it give some time to position the popup before
       // setting the focus to search input.

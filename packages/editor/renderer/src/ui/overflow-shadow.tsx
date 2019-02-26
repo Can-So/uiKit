@@ -28,7 +28,7 @@ export default function overflowShadow<P extends OverflowShadowProps>(
     Pick<P, Exclude<keyof P, keyof OverflowShadowProps>>,
     OverflowShadowState
   > {
-    overflowContainer: HTMLElement;
+    overflowContainer: HTMLElement | null;
     container: HTMLElement;
     scrollable: NodeList;
 
@@ -59,7 +59,8 @@ export default function overflowShadow<P extends OverflowShadowProps>(
       }
 
       this.setState(() => ({
-        showLeftShadow: this.overflowContainer.scrollLeft > 0,
+        showLeftShadow:
+          !!this.overflowContainer && this.overflowContainer.scrollLeft > 0,
       }));
     };
 
@@ -69,7 +70,6 @@ export default function overflowShadow<P extends OverflowShadowProps>(
         const diff = scrollableWidth - this.overflowContainer.offsetWidth;
         const showRightShadow =
           diff > 0 && diff > this.overflowContainer.scrollLeft;
-
         if (showRightShadow !== this.state.showRightShadow) {
           this.setState(() => ({
             showRightShadow,
@@ -90,12 +90,11 @@ export default function overflowShadow<P extends OverflowShadowProps>(
       return width;
     };
 
-    handleContainer = container => {
+    handleContainer = (container: HTMLElement | null) => {
       if (!container || this.container) {
         return;
       }
       this.container = container;
-
       this.overflowContainer = container.querySelector(
         options.overflowSelector,
       );

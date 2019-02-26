@@ -4,10 +4,10 @@
  * These helper functions aim to address that and wrap a valid,
  * English-locale intl context around them.
  */
+import { mount, ReactWrapper, shallow } from 'enzyme';
 import * as React from 'react';
 import { ReactElement } from 'react';
-import { IntlProvider, InjectedIntlProps, intlShape } from 'react-intl';
-import { mount, shallow } from 'enzyme';
+import { InjectedIntlProps, IntlProvider, intlShape } from 'react-intl';
 
 // Create the IntlProvider to retrieve context for wrapping around.
 const intlProvider = new IntlProvider({ locale: 'en' });
@@ -37,10 +37,10 @@ export function shallowWithIntl<P>(
   );
 }
 
-export function mountWithIntl<P>(
+export function mountWithIntl<P, S>(
   node: ReactElement<P>,
   { context = {}, childContextTypes = {}, ...additionalOptions } = {},
-) {
+): ReactWrapper<P & InjectedIntlProps, S> {
   if (typeof node.type !== 'string' && node.type.name === 'InjectIntl') {
     const unwrappedType = (node.type as any).WrappedComponent;
     (node as any) = React.createElement(unwrappedType, node.props);

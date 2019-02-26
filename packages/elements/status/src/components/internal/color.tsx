@@ -63,7 +63,7 @@ export default class Color extends PureComponent<ColorProps> {
     return (
       <ButtonWrapper>
         <FormattedMessage {...messages[`${value}Color`]}>
-          {(label: string) => (
+          {label => (
             <Button
               onClick={this.onClick}
               onMouseEnter={this.onMouseEnter}
@@ -71,14 +71,17 @@ export default class Color extends PureComponent<ColorProps> {
               onMouseDown={this.onMouseDown}
               tabIndex={tabIndex}
               className={`${isSelected ? 'selected' : ''}`}
-              title={label}
+              title={label as string}
               style={{
                 backgroundColor: backgroundColor || 'transparent',
                 border: borderStyle,
               }}
             >
               {isSelected && (
-                <EditorDoneIcon primaryColor={borderColor} label={label} />
+                <EditorDoneIcon
+                  primaryColor={borderColor}
+                  label={label as string}
+                />
               )}
             </Button>
           )}
@@ -105,11 +108,11 @@ export default class Color extends PureComponent<ColorProps> {
     this.hoverStartTime = 0;
   };
 
-  onMouseDown = e => {
+  onMouseDown: React.MouseEventHandler<HTMLButtonElement> = e => {
     e.preventDefault();
   };
 
-  onClick = e => {
+  onClick: React.MouseEventHandler<HTMLButtonElement> = e => {
     const { onClick, value } = this.props;
     e.preventDefault();
     onClick(value);

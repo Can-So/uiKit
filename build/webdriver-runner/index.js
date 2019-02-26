@@ -45,6 +45,13 @@ async function runJest(testPaths) {
       _: testPaths || cli.input,
       maxWorkers,
       watch: !!process.env.WATCH,
+      watchPathIgnorePatterns: [
+        '\\/node_modules\\/',
+        '.+\\/__tests__\\/(?!integration)',
+        '.+\\/__tests-karma__\\/',
+        '.+\\/__snapshots__\\/',
+        '.+\\/__image_snapshots__\\/',
+      ],
       passWithNoTests: true,
       updateSnapshot: cli.flags.updateSnapshot,
     },
@@ -124,13 +131,13 @@ function runTestsWithRetry() {
          * If the re-run succeeds,
          * log the previously failed tests to indicate flakiness
          */
-        if (code === 0 && process.env.CI) {
-          reporting.reportFailure(
+        if (code === 0) {
+          await reporting.reportFailure(
             results,
             'atlaskit.qa.integration_test.flakiness',
           );
-        } else if (code !== 0 && process.env.CI) {
-          reporting.reportFailure(
+        } else {
+          await reporting.reportFailure(
             results,
             'atlaskit.qa.integration_test.testfailure',
           );

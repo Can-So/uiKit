@@ -5,7 +5,12 @@ export { default as TextSerializer } from './text';
 export { default as EmailSerializer } from './email';
 
 export { default as ReactRenderer } from './ui/Renderer';
+export { Props as RendererProps } from './ui/Renderer';
 export { RendererContext } from './react';
 export { ADFEncoder } from './utils';
 
-export { renderDocument, renderNodes } from './render-document';
+export {
+  RenderOutputStat,
+  renderDocument,
+  renderNodes,
+} from './render-document';

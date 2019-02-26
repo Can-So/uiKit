@@ -1,5 +1,4 @@
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-import { expect } from 'chai';
 import { ReactWrapper } from 'enzyme';
 import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
@@ -30,14 +29,14 @@ describe('<EmojiPickerList />', () => {
     it('should contain search ', () => {
       const wrapper = mountWithIntl(<EmojiPickerList emojis={emojis} />);
 
-      expect(wrapper.find(`.${styles.pickerSearch}`)).to.have.length(1);
+      expect(wrapper.find(`.${styles.pickerSearch}`)).toHaveLength(1);
     });
 
     it('should show people category first if no frequently used', () => {
       const wrapper = mountWithIntl(<EmojiPickerList emojis={emojis} />);
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
-      expect(categoryHeadings.get(0).props.id).to.equal('PEOPLE');
+      expect(categoryHeadings.get(0).props.id).toEqual('PEOPLE');
     });
 
     it('should show frequently used category first if present', () => {
@@ -64,8 +63,8 @@ describe('<EmojiPickerList />', () => {
       );
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
-      expect(categoryHeadings.get(0).props.id).to.equal('FREQUENT');
-      expect(categoryHeadings.get(1).props.id).to.equal('PEOPLE');
+      expect(categoryHeadings.get(0).props.id).toEqual('FREQUENT');
+      expect(categoryHeadings.get(1).props.id).toEqual('PEOPLE');
     });
 
     it('should order emoji inside category', () => {
@@ -88,11 +87,11 @@ describe('<EmojiPickerList />', () => {
         never
       > = wrapper.find(CachingEmoji);
 
-      expect(cachingEmojis).to.have.lengthOf(2);
-      expect(cachingEmojis.at(0).prop('emoji').id).to.be.equal(
+      expect(cachingEmojis).toHaveLength(2);
+      expect(cachingEmojis.at(0).prop('emoji').id).toEqual(
         atlassianEmojis[1].id,
       );
-      expect(cachingEmojis.at(1).prop('emoji').id).to.be.equal(
+      expect(cachingEmojis.at(1).prop('emoji').id).toEqual(
         atlassianEmojis[0].id,
       );
     });
@@ -120,11 +119,11 @@ describe('<EmojiPickerList />', () => {
         never
       > = wrapper.find(CachingEmoji);
 
-      expect(cachingEmojis).to.have.lengthOf(2);
-      expect(cachingEmojis.at(0).prop('emoji').id).to.be.equal(
+      expect(cachingEmojis).toHaveLength(2);
+      expect(cachingEmojis.at(0).prop('emoji').id).toEqual(
         atlassianEmojis[0].id,
       );
-      expect(cachingEmojis.at(1).prop('emoji').id).to.be.equal(
+      expect(cachingEmojis.at(1).prop('emoji').id).toEqual(
         atlassianEmojis[1].id,
       );
     });
@@ -137,21 +136,21 @@ describe('<EmojiPickerList />', () => {
       );
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
-      expect(categoryHeadings.length).to.equal(2);
-      expect(categoryHeadings.get(0).props.title).to.equal(
+      expect(categoryHeadings.length).toEqual(2);
+      expect(categoryHeadings.get(0).props.title).toEqual(
         'userUploadsCustomCategory',
       );
-      expect(categoryHeadings.get(1).props.title).to.equal(
+      expect(categoryHeadings.get(1).props.title).toEqual(
         'allUploadsCustomCategory',
       );
 
       const cachedEmojis = wrapper.find(CachingEmoji);
 
       // expected 3 emojis: foo in "Your Uploads", foo/wtf in "All uploads"
-      expect(cachedEmojis.length).to.equal(3);
-      expect(cachedEmojis.get(0).props.emoji.id).to.equal('foo');
-      expect(cachedEmojis.get(1).props.emoji.id).to.equal('foo');
-      expect(cachedEmojis.get(2).props.emoji.id).to.equal('wtf');
+      expect(cachedEmojis.length).toEqual(3);
+      expect(cachedEmojis.get(0).props.emoji.id).toEqual('foo');
+      expect(cachedEmojis.get(1).props.emoji.id).toEqual('foo');
+      expect(cachedEmojis.get(2).props.emoji.id).toEqual('wtf');
     });
 
     it('should not render user custom emojis section if user has none', () => {
@@ -160,32 +159,32 @@ describe('<EmojiPickerList />', () => {
       );
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
-      expect(categoryHeadings.length).to.equal(1);
-      expect(categoryHeadings.get(0).props.title).to.equal(
+      expect(categoryHeadings.length).toEqual(1);
+      expect(categoryHeadings.get(0).props.title).toEqual(
         'allUploadsCustomCategory',
       );
 
       const cachedEmojis = wrapper.find(CachingEmoji);
 
-      expect(cachedEmojis.length).to.equal(2);
-      expect(cachedEmojis.get(0).props.emoji.id).to.equal('foo');
-      expect(cachedEmojis.get(1).props.emoji.id).to.equal('wtf');
+      expect(cachedEmojis.length).toEqual(2);
+      expect(cachedEmojis.get(0).props.emoji.id).toEqual('foo');
+      expect(cachedEmojis.get(1).props.emoji.id).toEqual('wtf');
     });
 
     it('should not render user custom emojis section if currentUser is undefined', () => {
       const wrapper = mountWithIntl(<EmojiPickerList emojis={customEmojis} />);
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
-      expect(categoryHeadings.length).to.equal(1);
-      expect(categoryHeadings.get(0).props.title).to.equal(
+      expect(categoryHeadings.length).toEqual(1);
+      expect(categoryHeadings.get(0).props.title).toEqual(
         'allUploadsCustomCategory',
       );
 
       const cachedEmojis = wrapper.find(CachingEmoji);
 
-      expect(cachedEmojis.length).to.equal(2);
-      expect(cachedEmojis.get(0).props.emoji.id).to.equal('foo');
-      expect(cachedEmojis.get(1).props.emoji.id).to.equal('wtf');
+      expect(cachedEmojis.length).toEqual(2);
+      expect(cachedEmojis.get(0).props.emoji.id).toEqual('foo');
+      expect(cachedEmojis.get(1).props.emoji.id).toEqual('wtf');
     });
 
     it('should trigger onCategoryActivated', () => {
@@ -205,8 +204,8 @@ describe('<EmojiPickerList />', () => {
 
       onRowsRendered(onRowsRenderedArgs(9, 10, 15, 20));
 
-      expect(onCategoryActivated.mock.calls).to.have.length(1);
-      expect(onCategoryActivated.mock.calls[0][0]).to.equal('ACTIVITY');
+      expect(onCategoryActivated.mock.calls).toHaveLength(1);
+      expect(onCategoryActivated.mock.calls[0][0]).toEqual('ACTIVITY');
     });
 
     it('should not break while finding category in an empty list', () => {
@@ -226,7 +225,7 @@ describe('<EmojiPickerList />', () => {
 
       onRowsRendered(onRowsRenderedArgs());
 
-      expect(onCategoryActivated.mock.calls).to.have.length(0);
+      expect(onCategoryActivated.mock.calls).toHaveLength(0);
     });
 
     it('should trigger onCategoryActivated for first category', () => {
@@ -246,8 +245,8 @@ describe('<EmojiPickerList />', () => {
       onCategoryActivated.mockReset();
       onRowsRendered(onRowsRenderedArgs(0, 0, 10, 15));
 
-      expect(onCategoryActivated.mock.calls).to.have.length(1);
-      expect(onCategoryActivated.mock.calls[0][0]).to.equal('PEOPLE');
+      expect(onCategoryActivated.mock.calls).toHaveLength(1);
+      expect(onCategoryActivated.mock.calls[0][0]).toEqual('PEOPLE');
     });
 
     it('should trigger onCategoryActivated for bottom category', () => {
@@ -266,8 +265,8 @@ describe('<EmojiPickerList />', () => {
       onCategoryActivated.mockReset();
       onRowsRendered(onRowsRenderedArgs(27, 29, 29, 29));
 
-      expect(onCategoryActivated.mock.calls).to.have.length(1);
-      expect(onCategoryActivated.mock.calls[0][0]).to.equal('CUSTOM');
+      expect(onCategoryActivated.mock.calls).toHaveLength(1);
+      expect(onCategoryActivated.mock.calls[0][0]).toEqual('CUSTOM');
     });
   });
 
@@ -278,8 +277,8 @@ describe('<EmojiPickerList />', () => {
       );
       const yourEmoji = wrapper.find(CachingEmoji).at(0);
       // expected first to be :foo: under "Your uploads"
-      expect(yourEmoji.props().emoji.id).to.equal('foo');
-      expect(yourEmoji.find(CrossCircleIcon)).to.have.length(1);
+      expect(yourEmoji.props().emoji.id).toEqual('foo');
+      expect(yourEmoji.find(CrossCircleIcon)).toHaveLength(1);
     });
 
     it('should not render delete button if not user custom emoji', () => {
@@ -288,8 +287,8 @@ describe('<EmojiPickerList />', () => {
       );
       const emoji = wrapper.find(CachingEmoji).at(0);
       // Expect first :foo: under "All uploads"
-      expect(emoji.props().emoji.id).to.equal('foo');
-      expect(emoji.find(CrossCircleIcon)).to.have.length(0);
+      expect(emoji.props().emoji.id).toEqual('foo');
+      expect(emoji.find(CrossCircleIcon)).toHaveLength(0);
     });
 
     it('should have label "delete-emoji" on delete button', () => {
@@ -303,8 +302,8 @@ describe('<EmojiPickerList />', () => {
         .at(0);
       // needs label of "delete-emoji" to prevent selection on click
       expect(
-        deleteButton.find(`[aria-label="${deleteEmojiLabel}"]`),
-      ).to.have.length.greaterThan(1);
+        deleteButton.find(`[aria-label="${deleteEmojiLabel}"]`).length,
+      ).toBeGreaterThan(1);
     });
 
     it('should call onEmojiDelete if delete button is clicked', () => {
@@ -321,7 +320,7 @@ describe('<EmojiPickerList />', () => {
         .at(0)
         .find(CrossCircleIcon);
       deleteButton.simulate('click');
-      expect(onDelete.mock.calls).to.have.length(1);
+      expect(onDelete.mock.calls).toHaveLength(1);
     });
 
     it('should not call onEmojiSelected if delete button is clicked', () => {
@@ -338,7 +337,7 @@ describe('<EmojiPickerList />', () => {
         .at(0)
         .find(CrossCircleIcon);
       deleteButton.simulate('click');
-      expect(onSelection.mock.calls).to.have.length(0);
+      expect(onSelection.mock.calls).toHaveLength(0);
     });
   });
 });

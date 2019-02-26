@@ -1,3 +1,4 @@
+import { List as VirtualList } from 'react-virtualized/dist/commonjs/List';
 import CategoryTracker from '../../../../components/picker/CategoryTracker';
 import { defaultCategories } from '../../../../constants';
 
@@ -38,15 +39,15 @@ describe('CategoryTracker', () => {
     });
 
     it('returns category if first row matches startIndex', () => {
-      expect(getTracker().findNearestCategoryAbove(10, {})).toEqual(
-        defaultCategories[5],
-      );
+      expect(
+        getTracker().findNearestCategoryAbove(10, {} as VirtualList),
+      ).toEqual(defaultCategories[5]);
     });
 
     it('returns first above category whose row matches startIndex', () => {
-      expect(getTracker().findNearestCategoryAbove(11, {})).toEqual(
-        defaultCategories[5],
-      );
+      expect(
+        getTracker().findNearestCategoryAbove(11, {} as VirtualList),
+      ).toEqual(defaultCategories[5]);
     });
   });
 });

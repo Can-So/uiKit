@@ -1,28 +1,25 @@
-import { expect } from 'chai';
 import * as pWaitFor from 'p-wait-for';
-
-import { customCategory, customType } from '../../../constants';
-import { EmojiDescription, SearchSort } from '../../../types';
-import { containsEmojiId, toEmojiId } from '../../../type-helpers';
 import EmojiRepository, {
   getEmojiVariation,
 } from '../../../api/EmojiRepository';
-
+import { customCategory, customType } from '../../../constants';
+import { containsEmojiId, toEmojiId } from '../../../type-helpers';
+import { EmojiDescription, SearchSort } from '../../../types';
 import {
   emojis as allEmojis,
   newEmojiRepository,
   openMouthEmoji,
   searchableEmojis,
-  standardEmojis,
   smileyEmoji,
-  thumbsupEmoji,
+  standardEmojis,
   thumbsdownEmoji,
+  thumbsupEmoji,
 } from '../_test-data';
 
-function checkOrder(expected, actual) {
-  expect(actual.length, `${actual.length} emojis`).to.equal(expected.length);
+function checkOrder(expected: any[], actual: any[]) {
+  expect(actual).toHaveLength(expected.length);
   expected.forEach((emoji, idx) => {
-    expect(emoji.id, `emoji #${idx}`).to.equal(actual[idx].id);
+    expect(emoji.id).toEqual(actual[idx].id);
   });
 }
 
@@ -292,7 +289,7 @@ export const siteEmojiGreek3 = {
 };
 
 describe('EmojiRepository', () => {
-  let emojiRepository;
+  let emojiRepository: EmojiRepository;
 
   beforeEach(() => {
     // emojiRepository has state that can influence search results so make it fresh for each test.
@@ -309,8 +306,8 @@ describe('EmojiRepository', () => {
         siteEmojiChinese3,
       ]);
       const emojis = repository.search(':想').emojis;
-      expect(emojis.length).to.equal(1);
-      expect(emojis[0].shortName).to.equal(':我想你:');
+      expect(emojis.length).toEqual(1);
+      expect(emojis[0].shortName).toEqual(':我想你:');
     });
 
     it('two matches expected when searching emoji with chinese characters', () => {
@@ -322,10 +319,10 @@ describe('EmojiRepository', () => {
         siteEmojiChinese3,
       ]);
       const emojis = repository.search(':字').emojis;
-      expect(emojis.length).to.equal(2);
+      expect(emojis.length).toEqual(2);
 
-      expect(emojis[0].shortName).to.equal(':我字:');
-      expect(emojis[1].shortName).to.equal(':象形字:');
+      expect(emojis[0].shortName).toEqual(':我字:');
+      expect(emojis[1].shortName).toEqual(':象形字:');
     });
 
     it('one match expected when searching emoji with greek characters', () => {
@@ -338,8 +335,8 @@ describe('EmojiRepository', () => {
         siteEmojiGreek3,
       ]);
       const emojis = repository.search(':ϪϮϼ').emojis;
-      expect(emojis.length).to.equal(1);
-      expect(emojis[0].id).to.equal('greek2');
+      expect(emojis.length).toEqual(1);
+      expect(emojis[0].id).toEqual('greek2');
     });
 
     it('two matches expected when searching emoji with greek characters', () => {
@@ -352,9 +349,9 @@ describe('EmojiRepository', () => {
         siteEmojiGreek3,
       ]);
       const emojis = repository.search(':ϪϮ').emojis;
-      expect(emojis.length).to.equal(2);
-      expect(emojis[0].id).to.equal('greek3');
-      expect(emojis[1].id).to.equal('greek2');
+      expect(emojis.length).toEqual(2);
+      expect(emojis[0].id).toEqual('greek3');
+      expect(emojis[1].id).toEqual('greek2');
     });
   });
 
@@ -373,10 +370,10 @@ describe('EmojiRepository', () => {
     it('all should not include non-searchable emoji', () => {
       const emojis = emojiRepository.all().emojis;
 
-      expect(emojis.length).to.be.greaterThan(0);
+      expect(emojis.length).toBeGreaterThan(0);
       expect(
         emojis.filter(emoji => emoji.shortName === ':police_officer:').length,
-      ).to.equal(0);
+      ).toEqual(0);
     });
 
     it('search all - colon style', () => {
@@ -397,10 +394,7 @@ describe('EmojiRepository', () => {
 
       emojis.forEach(emoji => {
         if (emoji.category !== lastCategory) {
-          expect(
-            foundCategories.has(emoji.category),
-            'New category not found before',
-          ).to.equal(false);
+          expect(foundCategories.has(emoji.category)).toEqual(false);
           lastCategory = emoji.category;
         }
       });
@@ -421,9 +415,9 @@ describe('EmojiRepository', () => {
         let heartIndex = result.indexOf(heart);
         let greenHeartIndex = result.indexOf(greenHeart);
 
-        expect(heartIndex).to.not.equal(-1);
-        expect(greenHeartIndex).to.not.equal(-1);
-        expect(heartIndex < greenHeartIndex).to.equal(true);
+        expect(heartIndex).not.toEqual(-1);
+        expect(greenHeartIndex).not.toEqual(-1);
+        expect(heartIndex < greenHeartIndex).toEqual(true);
 
         emojiRepository.used(greenHeart);
 
@@ -434,9 +428,9 @@ describe('EmojiRepository', () => {
           heartIndex = nextResult.indexOf(heart);
           greenHeartIndex = nextResult.indexOf(greenHeart);
 
-          expect(heartIndex).to.not.equal(-1);
-          expect(greenHeartIndex).to.not.equal(-1);
-          expect(greenHeartIndex < heartIndex).to.equal(true);
+          expect(heartIndex).not.toEqual(-1);
+          expect(greenHeartIndex).not.toEqual(-1);
+          expect(greenHeartIndex < heartIndex).toEqual(true);
 
           // exact matching shortname should come above usage
           const exactMatchResult: EmojiDescription[] = emojiRepository.search(
@@ -445,7 +439,7 @@ describe('EmojiRepository', () => {
           expect(
             exactMatchResult.indexOf(heart) <
               exactMatchResult.indexOf(greenHeart),
-          ).to.equal(true);
+          ).toEqual(true);
           done();
         });
       }
@@ -453,7 +447,7 @@ describe('EmojiRepository', () => {
 
     it('returns exact matches first', () => {
       const firstEmoji = emojiRepository.search(':grin').emojis[0];
-      expect(firstEmoji.shortName).to.equal(':grin:');
+      expect(firstEmoji.shortName).toEqual(':grin:');
     });
 
     it('conflicting shortName matches show in type order Site -> Atlassian -> Standard', () => {
@@ -492,56 +486,47 @@ describe('EmojiRepository', () => {
 
     it('includes ascii match at the top', () => {
       const emojis = emojiRepository.search(':O').emojis;
-      expect(emojis[0]).to.equal(openMouthEmoji);
+      expect(emojis[0]).toEqual(openMouthEmoji);
     });
 
     it('de-dupes ascii match from other matches', () => {
       const emojis = emojiRepository.search(':O').emojis;
       const openMouthEmojiCount = emojis.filter(e => e.id === openMouthEmoji.id)
         .length;
-      expect(
-        openMouthEmojiCount,
-        'emoji matching ascii representation is only returned once in the search results',
-      ).to.equal(1);
+      expect(openMouthEmojiCount).toEqual(1);
     });
 
     it('minus not indexed', () => {
       const emojis = emojiRepository.search(':congo').emojis;
-      expect(emojis.length, 'One emoji').to.equal(1);
-      expect(emojis[0].name).to.equal('Congo - Brazzaville');
+      expect(emojis.length).toEqual(1);
+      expect(emojis[0].name).toEqual('Congo - Brazzaville');
       const noEmojis = emojiRepository.search(':-').emojis;
-      expect(noEmojis.length, 'No emoji').to.equal(0);
+      expect(noEmojis.length).toEqual(0);
     });
 
     it('returns emojis whose shortName starts with a number', () => {
       const expectedEmojis = [...searchableEmojis, allNumberTest];
       const repository = new EmojiRepository(expectedEmojis);
       const emojis = repository.search(':4').emojis;
-      expect(emojis.length, 'One emoji').to.equal(1);
-      expect(emojis[0].name).to.equal('panda face');
+      expect(emojis.length).toEqual(1);
+      expect(emojis[0].name).toEqual('panda face');
     });
 
     it('should include numbers as a part of the query', () => {
       const expectedEmojis = [...searchableEmojis, atlassianTest, standardTest];
       const repository = new EmojiRepository(expectedEmojis);
       const emojis = repository.search(':test1').emojis;
-      expect(emojis.length, 'One emoji').to.equal(1);
-      expect(emojis[0].name).to.equal('BOOM');
+      expect(emojis.length).toEqual(1);
+      expect(emojis[0].name).toEqual('BOOM');
     });
 
     it('should not find a non-searchable emoji', () => {
       // ensure :police_officer: is present
       const policeEmoji = emojiRepository.findByShortName(':police_officer:');
-      expect(
-        policeEmoji === undefined,
-        'A :police_officer: emoji is expected in the repository',
-      ).to.equal(false);
+      expect(policeEmoji === undefined).toEqual(false);
 
       const emojis = emojiRepository.search(':police_officer:').emojis;
-      expect(
-        emojis.length,
-        'The :police_officer: emoji should not be returned by a search',
-      ).to.equal(0);
+      expect(emojis.length).toEqual(0);
     });
   });
 
@@ -551,32 +536,25 @@ describe('EmojiRepository', () => {
       const repository = new EmojiRepository(allEmojis);
       repository.addUnknownEmoji(siteTest);
       const searchEmojis = repository.search('').emojis;
-      expect(searchEmojis.length, 'Extra emoji in results').to.equal(
-        searchableEmojis.length + 1,
-      );
-      expect(
-        containsEmojiId(searchEmojis, siteEmojiId),
-        'Contains site emoji',
-      ).to.equal(true);
+      expect(searchEmojis.length).toEqual(searchableEmojis.length + 1);
+      expect(containsEmojiId(searchEmojis, siteEmojiId)).toEqual(true);
 
-      expect(repository.findById(siteEmojiId.id as string)).to.be.deep.equal(
+      expect(repository.findById(siteEmojiId.id as string)).toEqual(siteTest);
+      expect(repository.findByShortName(siteEmojiId.shortName)).toEqual(
         siteTest,
       );
-      expect(
-        repository.findByShortName(siteEmojiId.shortName),
-      ).to.be.deep.equal(siteTest);
     });
 
     it('add custom category when the first custom emoji is added', () => {
       const repository = new EmojiRepository(standardEmojis);
 
-      expect(repository.getDynamicCategoryList()).to.not.contain(
-        customCategory,
-      ); // no custom emojis in the repository yet
+      expect(repository.getDynamicCategoryList()).not.toContain(customCategory); // no custom emojis in the repository yet
 
       repository.addUnknownEmoji(siteTest);
 
-      expect(repository.getDynamicCategoryList()).to.contain(customCategory);
+      expect(repository.getDynamicCategoryList()).not.toContain([
+        customCategory,
+      ]);
     });
 
     it('add non-custom emoji', () => {
@@ -585,36 +563,34 @@ describe('EmojiRepository', () => {
       const numSearchable = repository.search('').emojis.length;
       repository.addUnknownEmoji(standardTest);
       const searchEmojis = repository.search('').emojis;
-      expect(searchEmojis.length, 'All emojis in results').to.equal(
-        numSearchable + 1,
-      );
-      expect(containsEmojiId(searchEmojis, toEmojiId(standardTest))).to.equal(
+      expect(searchEmojis.length).toEqual(numSearchable + 1);
+      expect(containsEmojiId(searchEmojis, toEmojiId(standardTest))).toEqual(
         true,
       );
 
-      expect(repository.findById(standardTest.id as string)).to.be.deep.equal(
+      expect(repository.findById(standardTest.id as string)).toEqual(
         standardTest,
       );
-      expect(
-        repository.findByShortName(standardTest.shortName),
-      ).to.be.deep.equal(standardTest);
+      expect(repository.findByShortName(standardTest.shortName)).toEqual(
+        standardTest,
+      );
     });
   });
 
   describe('#findByAsciiRepresentation', () => {
     it('returns the correct emoji for a matching ascii representation', () => {
       const emoji = emojiRepository.findByAsciiRepresentation(':D');
-      expect(emoji).to.be.deep.equal(smileyEmoji);
+      expect(emoji).toEqual(smileyEmoji);
     });
 
     it('returns the correct emoji for alternative ascii representation', () => {
       const emoji = emojiRepository.findByAsciiRepresentation('=D');
-      expect(emoji).to.be.deep.equal(smileyEmoji);
+      expect(emoji).toEqual(smileyEmoji);
     });
 
     it('returns undefined when there is no matching ascii representation', () => {
       const emoji = emojiRepository.findByAsciiRepresentation('not-ascii');
-      expect(emoji).to.equal(undefined);
+      expect(emoji).toEqual(undefined);
     });
   });
 
@@ -625,7 +601,7 @@ describe('EmojiRepository', () => {
         siteTest,
         atlassianTest,
       ]);
-      expect(repository.findAllMatchingShortName(':test:')).to.deep.equal([
+      expect(repository.findAllMatchingShortName(':test:')).toEqual([
         siteTest,
         atlassianTest,
       ]);
@@ -633,17 +609,17 @@ describe('EmojiRepository', () => {
 
     it('returns an empty list if no emoji shortNames match', () => {
       const repository = new EmojiRepository(allEmojis);
-      expect(repository.findAllMatchingShortName(':test:')).to.deep.equal([]);
+      expect(repository.findAllMatchingShortName(':test:')).toEqual([]);
     });
 
     it('does not partially match on shortname', () => {
       const repository = new EmojiRepository([...allEmojis, standardTest]);
-      expect(repository.findAllMatchingShortName(':test:')).to.deep.equal([]);
+      expect(repository.findAllMatchingShortName(':test:')).toEqual([]);
     });
   });
 
   describe('#delete', () => {
-    let copyEmojis;
+    let copyEmojis: EmojiDescription[];
     beforeEach(() => {
       // Deep copy emoji list
       copyEmojis = JSON.parse(JSON.stringify(allEmojis));
@@ -653,45 +629,37 @@ describe('EmojiRepository', () => {
       const repository = new EmojiRepository(copyEmojis);
       const numSmileys = repository.search(':smiley').emojis.length;
       repository.delete(smileyEmoji);
-      expect(
-        repository.search(':smiley').emojis.length,
-        'One less smiley',
-      ).to.equal(numSmileys - 1);
+      expect(repository.search(':smiley').emojis.length).toEqual(
+        numSmileys - 1,
+      );
     });
 
     it('should not be able to search by ascii for an emoji that has been deleted', () => {
       const repository = new EmojiRepository(copyEmojis);
       const numSmileys = repository.search(':D').emojis.length;
       repository.delete(smileyEmoji);
-      expect(repository.search(':D').emojis.length, 'One less smiley').to.equal(
-        numSmileys - 1,
-      );
+      expect(repository.search(':D').emojis.length).toEqual(numSmileys - 1);
     });
 
     it('should not be able to find by shortname for an emoji that has been deleted', () => {
       const repository = new EmojiRepository(copyEmojis);
       repository.delete(smileyEmoji);
-      expect(
-        repository.findByShortName(smileyEmoji.shortName),
-        'No smileys',
-      ).to.equal(undefined);
+      expect(repository.findByShortName(smileyEmoji.shortName)).toEqual(
+        undefined,
+      );
     });
 
     it('should not be able to find by id for an emoji that has been deleted', () => {
       const repository = new EmojiRepository(copyEmojis);
       repository.delete(smileyEmoji);
-      expect(repository.findById(smileyEmoji.id!), 'No smileys').to.equal(
-        undefined,
-      );
+      expect(repository.findById(smileyEmoji.id!)).toEqual(undefined);
     });
 
     it('should not be able to find by ascii for an emoji that has been deleted', () => {
       const repository = new EmojiRepository(copyEmojis);
       repository.delete(smileyEmoji);
-      smileyEmoji.ascii!.forEach(a =>
-        expect(repository.findByAsciiRepresentation(a), 'No smileys').to.equal(
-          undefined,
-        ),
+      smileyEmoji.ascii!.forEach((a: string) =>
+        expect(repository.findByAsciiRepresentation(a)).toEqual(undefined),
       );
     });
 
@@ -700,7 +668,7 @@ describe('EmojiRepository', () => {
       repository.delete(smileyEmoji);
       const peopleEmojis = repository.findInCategory('PEOPLE');
       peopleEmojis.forEach(emoji =>
-        expect(emoji.shortName).to.not.equal(smileyEmoji.shortName),
+        expect(emoji.shortName).not.toEqual(smileyEmoji.shortName),
       );
     });
   });
@@ -708,13 +676,13 @@ describe('EmojiRepository', () => {
   describe('#getDynamicCategories', () => {
     it('returns an empty list if only standard emojis', () => {
       const repository = new EmojiRepository(standardEmojis);
-      expect(repository.getDynamicCategoryList()).to.deep.equal([]);
+      expect(repository.getDynamicCategoryList()).toEqual([]);
     });
 
     it('returns all dynamic categories present in list of stored emojis', () => {
       const allCategoryEmojis = [...allEmojis, frequentTest];
       const repository = new EmojiRepository(allCategoryEmojis);
-      expect(repository.getDynamicCategoryList()).to.deep.equal([
+      expect(repository.getDynamicCategoryList()).toEqual([
         'ATLASSIAN',
         'CUSTOM',
         'FREQUENT',
@@ -735,9 +703,7 @@ describe('EmojiRepository', () => {
 
         // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
         window.setTimeout(() => {
-          expect(repository.getDynamicCategoryList()).to.deep.equal([
-            'FREQUENT',
-          ]);
+          expect(repository.getDynamicCategoryList()).toEqual(['FREQUENT']);
           done();
         });
       }
@@ -747,10 +713,10 @@ describe('EmojiRepository', () => {
   describe('getEmojiVariation', () => {
     it('should return the supplied emoji if invalid skintone provided', () => {
       let variation = getEmojiVariation(thumbsupEmoji, { skinTone: 9 });
-      expect(variation.shortName).to.equal(':thumbsup:');
+      expect(variation.shortName).toEqual(':thumbsup:');
 
       variation = getEmojiVariation(thumbsupEmoji, { skinTone: 0 });
-      expect(variation.shortName).to.equal(':thumbsup:');
+      expect(variation.shortName).toEqual(':thumbsup:');
     });
   });
 
@@ -762,8 +728,8 @@ describe('EmojiRepository', () => {
       // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
       window.setTimeout(() => {
         let emoji = emojiRepository.getFrequentlyUsed({ skinTone: 4 });
-        expect(emoji).to.have.lengthOf(1);
-        expect(emoji[0].shortName).to.equal(
+        expect(emoji).toHaveLength(1);
+        expect(emoji[0].shortName).toEqual(
           `${thumbsupEmoji.shortName}:skin-tone-5:`,
         );
         done();
@@ -780,10 +746,10 @@ describe('EmojiRepository', () => {
       await pWaitFor(() => emojiRepository.getFrequentlyUsed().length === 4);
 
       let emoji = emojiRepository.getFrequentlyUsed();
-      expect(emoji).to.have.lengthOf(4);
+      expect(emoji).toHaveLength(4);
 
       emoji = emojiRepository.getFrequentlyUsed({ limit: 2 });
-      expect(emoji).to.have.lengthOf(2);
+      expect(emoji).toHaveLength(2);
     });
 
     it('should return frequent emoji on find operations with original category', done => {
@@ -793,7 +759,7 @@ describe('EmojiRepository', () => {
       // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
       window.setTimeout(() => {
         const thumbsUp = emojiRepository.findByShortName(':thumbsup:');
-        expect(thumbsUp!.category).to.equal('PEOPLE');
+        expect(thumbsUp!.category).toEqual('PEOPLE');
 
         done();
       });

@@ -15,7 +15,7 @@ import {
 BrowserTestCase(
   'insert-toolbar-menu.ts: Insert panel via toolbar menu',
   { skip: ['ie'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,

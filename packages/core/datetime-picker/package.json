@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/datetime-picker",
-  "version": "6.4.2",
+  "version": "6.5.1",
   "description": "A React component for picking date/time values",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -14,8 +14,9 @@
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
-    "Charles L",
-    "Mike G"
+    "Ajay M",
+    "Daniel D",
+    "Kang C"
   ],
   "atlaskit": {
     "name": "Date-time picker",
@@ -28,7 +29,7 @@
     "@atlaskit/field-base": "^11.0.14",
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/popper": "^0.3.6",
-    "@atlaskit/select": "^6.1.19",
+    "@atlaskit/select": "^7.0.0",
     "@atlaskit/theme": "^7.0.1",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
@@ -46,10 +47,11 @@
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/field-range": "^5.0.14",
     "@atlaskit/field-text": "^7.0.19",
-    "@atlaskit/modal-dialog": "^7.2.1",
+    "@atlaskit/modal-dialog": "^7.2.3",
     "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "^3.7.0",
+    "enzyme-to-json": "^3.3.0",
     "moment": "^2.22.2",
     "react-dom": "^16.4.2",
     "react-lorem-component": "^0.12.2",

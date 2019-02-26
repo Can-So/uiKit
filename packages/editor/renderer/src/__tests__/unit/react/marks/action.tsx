@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import { EventHandlers } from '@atlaskit/editor-common';
 import Action from '../../../../react/marks/action';
 
@@ -20,7 +19,7 @@ describe('Renderer - React/Marks/Action', () => {
 
   it('should wrap content with <span>-tag', () => {
     const mark = createAction();
-    expect(mark.find('span').length).to.equal(1);
+    expect(mark.find('span').length).toEqual(1);
     mark.unmount();
   });
 
@@ -28,7 +27,7 @@ describe('Renderer - React/Marks/Action', () => {
     const eventHandlers: EventHandlers = {
       action: {
         onClick: actionMark => {
-          expect(actionMark).to.deep.equal({
+          expect(actionMark).toEqual({
             key: 'test-action-key',
             target: {
               key: 'test-target',
@@ -53,7 +52,7 @@ describe('Renderer - React/Marks/Action', () => {
     const mark = createAction(eventHandlers);
     expect(() => {
       mark.find('span').simulate('click');
-    }).not.to.throw();
+    }).not.toThrow();
     mark.unmount();
   });
 });

@@ -1,13 +1,13 @@
 import { utils } from '@atlaskit/util-service-support';
 import {
+  DEFAULT_SHARE_PATH,
+  DEFAULT_SHARE_SERVICE_URL,
   ShareClient,
   ShareServiceClient,
-  DEFAULT_SHARE_SERVICE_URL,
-  DEFAULT_SHARE_PATH,
 } from '../../../clients/ShareServiceClient';
 
 describe('ShareServiceClientImpl', () => {
-  let requestSpy;
+  let requestSpy: jest.SpyInstance;
   let shareServiceClient: ShareClient;
   let mockContent = {
     link: 'link',
@@ -20,14 +20,7 @@ describe('ShareServiceClientImpl', () => {
   ];
   let mockMetaData = {
     productId: 'confluence',
-    tracking: {
-      toAtlassianAccountHolders: {
-        atlOriginId: 'atlOrigin1',
-      },
-      toNewUsers: {
-        atlOriginId: 'atlOrigin2',
-      },
-    },
+    atlOriginId: 'atlOriginId',
   };
   let mockComment = {
     format: 'plain_text' as 'plain_text',

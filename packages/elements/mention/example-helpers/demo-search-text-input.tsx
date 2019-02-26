@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { ChangeEventHandler, Component, FocusEventHandler } from 'react';
-
 import * as uuid from 'uuid/v1';
 
-function noModifiers(event) {
+function noModifiers(event: React.KeyboardEvent<HTMLInputElement>) {
   return !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
 }
 
@@ -20,7 +19,7 @@ export interface Props {
   inputRef?: OnInputRef;
   label: string;
   onBlur?: FocusEventHandler<any>;
-  onChange?: ChangeEventHandler<any>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   onDown?: OnAction;
   onEnter?: OnAction;
   onEscape?: OnAction;
@@ -29,11 +28,13 @@ export interface Props {
 }
 
 class SearchTextInput extends Component<Props, {}> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
   }
 
-  private handleKeyDown = event => {
+  private handleKeyDown: React.KeyboardEventHandler<
+    HTMLInputElement
+  > = event => {
     if (noModifiers(event)) {
       let notify;
       switch (event.keyCode /* eslint default-case: 0 */) {

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/inline-dialog",
-  "version": "9.0.14",
+  "version": "9.0.15",
   "description": "An inline dialog React component for secondary content and controls that are displayed on user request",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -14,8 +14,9 @@
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
-    "Charles L",
-    "Mike G"
+    "Ajay M",
+    "Daniel D",
+    "Kang C"
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
@@ -32,10 +33,10 @@
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
     "@atlaskit/button": "^10.1.2",
-    "@atlaskit/datetime-picker": "^6.3.25",
+    "@atlaskit/datetime-picker": "^6.5.1",
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/icon": "^16.0.0",
-    "@atlaskit/select": "^6.1.19",
+    "@atlaskit/select": "^7.0.0",
     "@atlaskit/single-select": "^6.0.12",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",

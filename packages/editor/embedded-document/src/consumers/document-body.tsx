@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { EditorProps } from '@atlaskit/editor-core';
+import { RendererProps } from '@atlaskit/renderer';
 import { State } from '../context/context';
 import { Consumer } from './consumer';
 import { default as Document } from '../components/document';
 
 export interface Props {
-  editorProps?: EditorProps;
+  editorProps?: Partial<EditorProps>;
+  rendererProps?: Partial<RendererProps>;
 }
 
 export default class DocumentBody extends PureComponent<Props> {

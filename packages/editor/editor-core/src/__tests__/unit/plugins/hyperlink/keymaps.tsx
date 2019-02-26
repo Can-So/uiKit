@@ -161,7 +161,7 @@ describe('hyperlink - keymap', () => {
   });
 
   describe('Cmd-k keypress', () => {
-    it('should open floating toolbar for non-message editor', () => {
+    it('should open floating toolbar for editor', () => {
       const { editorView } = editor(doc(p('{<}text{>}')));
       sendKeyToPm(editorView, 'Mod-k');
       expect(stateKey.getState(editorView.state)).toEqual(
@@ -175,21 +175,9 @@ describe('hyperlink - keymap', () => {
       );
     });
 
-    it('should not work for message editor', () => {
-      const { editorView } = editor(doc(p('{<}text{>}')), {
-        appearance: 'message',
-      });
-      sendKeyToPm(editorView, 'Mod-k');
-      expect(stateKey.getState(editorView.state)).toEqual(
-        expect.objectContaining({
-          activeLinkMark: undefined,
-        }) as HyperlinkState,
-      );
-    });
-
     it('should not open floating toolbar if incompatible mark is selected', () => {
       const { editorView } = editor(doc(p(code('te{<>}xt'))), {
-        appearance: 'message',
+        appearance: 'comment',
       });
       sendKeyToPm(editorView, 'Mod-k');
       expect(stateKey.getState(editorView.state)).toEqual(

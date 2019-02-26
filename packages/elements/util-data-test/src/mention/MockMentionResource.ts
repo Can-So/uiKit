@@ -45,7 +45,7 @@ export class MockMentionResource extends AbstractMentionResource {
       this._notifyAllResultsListeners(mentions);
     };
 
-    const notifyErrors = error => {
+    const notifyErrors = (error: Error) => {
       this._notifyErrorListeners(error);
     };
 
@@ -55,10 +55,11 @@ export class MockMentionResource extends AbstractMentionResource {
     window.setTimeout(() => {
       let mentions;
       if (query === 'error') {
-        notifyErrors('mock-error');
+        notifyErrors(new Error('mock-error'));
         return;
       } else if (query === '401' || query === '403') {
         notifyErrors(new HttpError(parseInt(query, 10), 'get off my lawn'));
+        return;
       } else if (query) {
         mentions = search.search(query);
       } else {

@@ -83,79 +83,6 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
     let imgRatio = imgWidth / imgHeight;
     let percentSize = '100%';
 
-    const isImageRotated = isRotated(previewOrientation || 1);
-    /*
-      When photo has orientation of 90deg or 270deg (store in meta data)
-      things get very tricky. Let me go through an example to explain how we deal with that:
-
-      Image gets in as     ________    But it needs to be     ┌──────┐
-      horizontal picture  |        |   displayed as 750x1000  │      │
-      of 1000x750         |        |                          │      │
-                          |________|                          │      │
-                                                              │      │
-                                                              └──────┘
-
-      Container is much smaller, but at least has right dimensions of 75x100.
-      (There is other place where we flip width and height to get right container dimensions)
-      So, parameters are:
-        parentWidth: 75
-        parentHeight: 100
-        imgWidth: 1000
-        imgHeight: 750
-        crop: false (means we want to fit)
-        stretch: true
-        previewOrientation: 6
-
-      For algo to work properly first we need to flip the imgRation. Initial value would be
-      1000/750 = 1.33 but we want it to be 750/1000 = 0.75
-      At this point this can be achieved by 1/1.3333 = 0.75.
-
-      In this situation it's not very important what fit and stretch values are, since
-      container and image ratios are the same. This means it's not very important if resulting
-      style will be height: 100% or width: 100%. But, in this case algorithm will choose
-      height: 100%.
-
-      Now here is what going to happened.
-      FIRST, Browser will put an image with 1000x750 into the box 75x100 and apply height:100%.
-
-      ┌───┬──────┬───┐  This will scale an image according to rules of ratios:
-      │░░░│▓▓▓▓▓▓│░░░│  (img height) -> (container height /
-      │░░░│▓▓▓▓▓▓│░░░│                   scaled down img height) -- This defined by css height: 100%
-      │░░░│▓▓▓▓▓▓│░░░│  750px        -> 100px
-      └───┴──────┴───┘  (img width)  -> (scaled down img width)
-                        1000px       -> (100 x 1000) / 750 = 133.33px
-
-      And only NOW browser will apply rotate: 90deg and turn image around.
-      And we end up with this:
-
-      ┌──────────┐   Where our image has size of 100x133.3
-      │░░░░░░░░░░│   in the box of size 75x100.
-      │░┌──────┐░│
-      │░│▓▓▓▓▓▓│░│
-      │░│▓▓▓▓▓▓│░│
-      │░│▓▓▓▓▓▓│░│
-      │░└──────┘░│
-      │░░░░░░░░░░│
-      └──────────┘
-
-      To combat this we will not make height: 100% but use ratio of an image.
-      In this case imgRatio is now 0.75 (after flipping)
-      
-      New math will look like this:
-      (img height) -> (container height /
-                       scaled down img height) -- This defined by css height: 75%
-      750px        -> (0.75 x 100px) = 75px
-      (img width)  -> (scaled down img width)
-      1000px       -> (75 x 1000) / 750 = 100px
-
-      Resulting in scaled down image size: 75x100, which matched container.
-
-     */
-    if (isImageRotated) {
-      imgRatio = 1 / imgRatio;
-      percentSize = `${Math.floor(imgRatio * 100)}%`;
-    }
-
     /*
       Cover strategy means we want to full entire screen with an image. Here is an example:
 
@@ -183,6 +110,160 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
      */
     const isFitStrategy = !crop;
 
+    const isImageRotated = isRotated(previewOrientation || 1);
+
+    /*
+      When photo has orientation of 90deg or 270deg (stored in EXIF meta data)
+      things get very tricky. Let me go through an two examples to explain how we deal with that:
+
+      Example #1:
+
+      Image comes in as    ________    But it needs to be     ┌──────┐
+      horizontal picture  |        |   displayed as 750x1000  │      │
+      of 1000x750         |        |   because orientation    │      │
+                          |________|   say it must be rotated │      │
+                                       90 degrees             │      │
+                                                              └──────┘
+
+      Container is smaller, and has dimensions of 100x200.
+      So, input parameters are:
+        parentWidth: 100
+        parentHeight: 200
+        imgWidth: 1000
+        imgHeight: 750
+        crop: true (means we want to cover)
+        stretch: true
+        previewOrientation: 6
+
+      To see what true value of isImageMoreLandscapyThanContainer is we need to flip imgRatio.
+      Since initial value is 1000/750 = 1.33 we can just do 1/1.3333 = 0.75.
+
+      In this situation final values will be:
+        imgRatio: 0.75
+        parentRatio: 0.5
+        isCoverStrategy: true
+        isFitStrategy: false
+        isImageRotated: true
+        isImageMoreLandscapyThanContainer: true
+        isStretchingAllowed: true
+
+      According to this variables state css will become:
+        height: 100%;
+
+      Now here is what going to happened.
+      FIRST, Browser will put an image with 1000x750 (NB! Not yet rotated) into the box 100x200
+      and apply height: 100%.
+
+      ┌────┬──────┬────┐  This will scale an image according to rules of proportions:
+      │░░░░│▓▓▓▓▓▓│░░░░│  (https://en.wikipedia.org/wiki/Cross-multiplication#Rule_of_Three)
+      │░░░░│▓▓▓▓▓▓│░░░░│  (orig img height) -> (scaled down img height)
+      │░░░░│▓▓▓▓▓▓│░░░░│  750px             -> 200px  (is === container height, since `height: 100%`)
+      └────┴──────┴────┘  (orig img width)  -> (scaled down img width)
+              ↑           1000px            -> (200 x 1000) / 750 = 266.66px
+       266x200 image in
+       100x200 container.
+
+      And only NOW browser will apply rotate: 90deg and turn image around.
+      And we end up with this:
+
+      ┌──────────┐   Where 200x266 image
+      │░░░░░░░░░░│   in the 100x200 container.
+      │░┌──────┐░│
+      │░│▓▓▓▓▓▓│░│
+      │░│▓▓▓▓▓▓│░│
+      │░│▓▓▓▓▓▓│░│
+      │░└──────┘░│
+      │░░░░░░░░░░│
+      └──────────┘
+
+      To combat this we will not make height: 100% but use ratio of an image.
+      In this case imgRatio is now 0.75 (after flipping)
+      
+      New math will look like this:
+      (orig img height) -> (scaled down img height)
+      750px             -> (0.75 x 200px) = 150px (since `height: 75%`)
+      (orig img width)  -> (scaled down img width)
+      1000px            -> (150 x 1000) / 750 = 200px
+
+      ┌─┬──────┬─┐  Now 150x200 image
+      │░│▓▓▓▓▓▓│░│  is in 100x200 container.
+      │░│▓▓▓▓▓▓│░│
+      │░│▓▓▓▓▓▓│░│
+      │░│▓▓▓▓▓▓│░│
+      └─┴──────┴─┘
+
+      Unfortunately this is not over yet.
+
+
+
+      Example #2:
+
+      Input parameters:
+        parentWidth: 100
+        parentHeight: 200
+        imgWidth: 1000
+        imgHeight: 750
+        crop: false (means we want to fit)  <-- This is only changed parameter
+        stretch: true
+        previewOrientation: 6
+
+      Final variable values will be:
+        imgRatio: 0.75
+        parentRatio: 0.5
+        isCoverStrategy: false
+        isFitStrategy: true
+        isImageRotated: true
+        isImageMoreLandscapyThanContainer: true
+        isStretchingAllowed: true
+
+       According to this variables state css will become:
+        width: 100%;
+
+      FIRST, Browser will put an image with 1000x750 (NB! Not yet rotated) into the box 100x200
+      and apply width: 100%.
+
+      ┌────────┐  This will scale an image according to rules of proportions:
+      │░░░░░░░░│  (https://en.wikipedia.org/wiki/Cross-multiplication#Rule_of_Three)
+      ├────────┤  (orig img width)  -> (scaled down img width)
+      │▓▓▓▓▓▓▓▓│  1000px            -> 100px (is === container width, since `width: 100%`)
+      │▓▓▓▓▓▓▓▓│  (orig img height) -> (scaled down img height)
+      ├────────┤  750px             -> (750x100) / 1000 = 75px
+      │░░░░░░░░│
+      └────────┘
+          ↑
+       100x75 image in
+       100x200 container.
+
+      Now browser will turn image 90degrees and we und up with:
+      ┌──────────┐
+      │          │  75x100 image in
+      │ ┌──────┐ │  100x200 container
+      │ │▓▓▓▓▓▓│ │
+      │ │▓▓▓▓▓▓│ │
+      │ │▓▓▓▓▓▓│ │
+      │ └──────┘ │
+      │          │
+      └──────────┘
+
+      This looks familiar, and you might want to try what we did before and apply 75% not 100%.
+      Unfortunately this will make it even worse. If you do calculation you will find out that
+      final result will be 75x56 image in 100x200 container. For this and one more specific
+      variables state we need to use original imgRatio for percent size. In this case it's 1.333, so
+      134%
+
+      New math will look like this:
+      (orig img width)  -> (scaled down img width)
+      1000px            -> (100px * 1.34) = 134px (since `width: 134%`)
+      (orig img height) -> (scaled down img height)
+      750px             -> (750x134) / 1000 = 100px
+
+      So, 100x134 image in 100x200 container.
+     */
+    if (isImageRotated) {
+      imgRatio = 1 / imgRatio;
+      percentSize = `${Math.ceil(imgRatio * 100)}%`;
+    }
+
     /*
       Here is an example of when isImageMoreLandscapyThanContainer is true:
 
@@ -199,6 +280,18 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
     const isImageMoreLandscapyThanContainer = imgRatio > parentRatio;
 
     /*
+    This is two cases we need to cover as described in Example #2 above.
+     */
+    const needToFlipRatioBack =
+      isImageRotated &&
+      ((isFitStrategy && isImageMoreLandscapyThanContainer) ||
+        (isCoverStrategy && !isImageMoreLandscapyThanContainer));
+
+    if (needToFlipRatioBack) {
+      percentSize = `${Math.ceil((1 / imgRatio) * 100)}%`;
+    }
+
+    /*
       When isStretchingAllowed is false image is as big as it is, but as small as container
       (according to strategy - cover or fit).
       isStretchingAllowed is true if image is bigger then container.
@@ -207,11 +300,13 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
 
     /*
       We do not want to show image until we finish deciding on sizing strategy.
-      Though if it is a "fit" strategy we can display it right away, since it doesn't depend
-      on isImageMoreLandscapyThanContainer nor it will change when isStretchingAllowed changes
-      it's value after imgRatio and parentRatio get defined.
+      Though if it is a "fit" strategy (and image hasn't been rotated) we can display it right away,
+      since it doesn't depend on isImageMoreLandscapyThanContainer nor it will change when isStretchingAllowed
+      changes it's value after imgRatio and parentRatio get defined.
+      The reason for exclude isImageRotated is that we need to calculate percentSize variable
+      and we can do that only when image is loaded (and we have image size)
      */
-    const showImage = isImageLoaded || isFitStrategy;
+    const showImage = isImageLoaded || (isFitStrategy && !isImageRotated);
 
     const style: CSSProperties = {
       transform: 'translate(-50%, -50%)',

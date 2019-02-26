@@ -70,7 +70,7 @@ interface ChooseEmojiFileProps {
 }
 
 class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
-  private onKeyDown = event => {
+  private onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = event => {
     if (event.key === 'Escape') {
       this.props.onUploadCancelled();
     }
@@ -99,15 +99,20 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
             >
               <FormattedMessage {...messages.emojiPlaceholder}>
                 {message => (
-                  <input
-                    placeholder={message as string}
-                    maxLength={maxNameLength}
-                    onChange={onNameChange}
-                    onKeyDown={this.onKeyDown}
-                    value={name}
-                    ref="name"
-                    autoFocus={true}
-                  />
+                  <FormattedMessage {...messages.emojiNameAriaLabel}>
+                    {ariaLabel => (
+                      <input
+                        placeholder={message as string}
+                        aria-label={ariaLabel as string}
+                        maxLength={maxNameLength}
+                        onChange={onNameChange}
+                        onKeyDown={this.onKeyDown}
+                        value={name}
+                        ref="name"
+                        autoFocus={true}
+                      />
+                    )}
+                  </FormattedMessage>
                 )}
               </FormattedMessage>
             </AkFieldBase>
@@ -115,12 +120,17 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
           <span className={styles.uploadChooseFileBrowse}>
             <FormattedMessage {...messages.emojiChooseFileTitle}>
               {message => (
-                <FileChooser
-                  label={message as string}
-                  onChange={onChooseFile}
-                  accept="image/png,image/jpeg,image/gif"
-                  isDisabled={disableChooser}
-                />
+                <FormattedMessage {...messages.emojiChooseFileAriaLabel}>
+                  {ariaLabel => (
+                    <FileChooser
+                      label={message as string}
+                      onChange={onChooseFile}
+                      accept="image/png,image/jpeg,image/gif"
+                      ariaLabel={ariaLabel as string}
+                      isDisabled={disableChooser}
+                    />
+                  )}
+                </FormattedMessage>
               )}
             </FormattedMessage>
           </span>
@@ -193,7 +203,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
     }
 
     if (filename && name && previewImage) {
-      const notifyUpload = size => {
+      const notifyUpload = (size: { width: number; height: number }) => {
         const { width, height } = size;
         this.setState({
           uploadStatus: UploadStatus.Uploading,
@@ -232,7 +242,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
     this.cancelChooseFile();
   };
 
-  private onFileLoad = (file: File) => (f): Promise<any> => {
+  private onFileLoad = (file: File) => (f: any): Promise<any> => {
     return ImageUtil.parseImage(f.target.result)
       .then(() => {
         const state = {

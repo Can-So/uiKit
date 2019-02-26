@@ -12,7 +12,7 @@ import {
 BrowserTestCase(
   `bodied-insert-media.ts: Bodied Extension: Insert Media`,
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = new Page(client);
     await page.goto(fullpage.path);
 

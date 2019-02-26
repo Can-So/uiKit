@@ -12,7 +12,7 @@ import ResourcedMention from '../src/components/Mention/ResourcedMention';
 const style = {
   backgroundColor: colors.N20,
   width: '100%',
-  height: '800px',
+  padding: '20px',
 };
 
 const padding = { padding: '10px' };

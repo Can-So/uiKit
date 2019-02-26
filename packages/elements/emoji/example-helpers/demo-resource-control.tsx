@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { PureComponent, ReactElement } from 'react';
-
-import EmojiResource, {
-  EmojiResourceConfig,
+import {
+  default as EmojiResource,
+  default as UploadingEmojiResource,
   EmojiProvider,
+  EmojiResourceConfig,
 } from '../src/api/EmojiResource';
-import UploadingEmojiResource from '../src/api/EmojiResource';
 
 export function getEmojiConfig() {
   let emojiConfig;
@@ -61,7 +61,7 @@ export interface State {
 }
 
 export default class ResourcedEmojiControl extends PureComponent<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       emojiProvider:
@@ -70,7 +70,7 @@ export default class ResourcedEmojiControl extends PureComponent<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     // Make a weak attempt to reduce the duplication in EmojiResource creation when a storybook is mounted
     if (
       JSON.stringify(nextProps.emojiConfig) !==
@@ -82,11 +82,11 @@ export default class ResourcedEmojiControl extends PureComponent<Props, State> {
 
   refreshEmoji(emojiConfig: EmojiResourceConfig) {
     this.setState({
-      emojiProvider: Promise.resolve(new EmojiResource(this.props.emojiConfig)),
+      emojiProvider: Promise.resolve(new EmojiResource(emojiConfig)),
     });
   }
 
-  emojiConfigChange = event => {
+  emojiConfigChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     // tslint:disable-next-line:no-eval
     const config = eval(`( () => (${event.target.value}) )()`);
     this.refreshEmoji(config);

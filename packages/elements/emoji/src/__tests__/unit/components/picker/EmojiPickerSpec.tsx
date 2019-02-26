@@ -1,7 +1,11 @@
 import { waitUntil } from '@atlaskit/util-common-test';
 import { mockNonUploadingEmojiResourceFactory } from '@atlaskit/util-data-test';
+import { ReactWrapper } from 'enzyme';
+import { FireAnalyticsEvent } from '../../../../../../../core/analytics/src';
 import EmojiRepository from '../../../../api/EmojiRepository';
-import Emoji from '../../../../components/common/Emoji';
+import Emoji, {
+  Props as EmojiProps,
+} from '../../../../components/common/Emoji';
 import EmojiButton from '../../../../components/common/EmojiButton';
 import EmojiPlaceholder from '../../../../components/common/EmojiPlaceholder';
 import { messages } from '../../../../components/i18n';
@@ -20,6 +24,7 @@ import {
   frequentCategory,
   selectedToneStorageKey,
 } from '../../../../constants';
+import { isMessagesKey } from '../../../../type-helpers';
 import { EmojiDescription, OptionalEmojiDescription } from '../../../../types';
 import {
   getEmojiResourcePromise,
@@ -29,7 +34,7 @@ import {
 import * as helper from './_emoji-picker-test-helpers';
 
 describe('<EmojiPicker />', () => {
-  let firePrivateAnalyticsEvent;
+  let firePrivateAnalyticsEvent: jest.Mock;
 
   const getUpdatedList = (component: any) =>
     component.update().find(EmojiPickerList);
@@ -41,7 +46,7 @@ describe('<EmojiPicker />', () => {
   describe('analytics for component lifecycle', () => {
     it('should fire analytics in componentWillMount/componentWillUnmount', async () => {
       const component = await helper.setupPicker({
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as FireAnalyticsEvent,
       } as Props);
       component.unmount();
       expect(firePrivateAnalyticsEvent).toHaveBeenCalledWith(
@@ -86,10 +91,13 @@ describe('<EmojiPicker />', () => {
 
       for (let i = 0; i < buttons.length; i++) {
         const button = buttons.at(i);
-        const expectedTitle =
-          messages[CategoryDescriptionMap[expectedCategories[i]].name]
-            .defaultMessage;
-        expect(button.prop('title')).toEqual(expectedTitle);
+        const messageKey = CategoryDescriptionMap[expectedCategories[i]].name;
+        expect(isMessagesKey(messageKey)).toBeTruthy();
+        if (isMessagesKey(messageKey)) {
+          expect(button.prop('title')).toEqual(
+            messages[messageKey].defaultMessage,
+          );
+        }
       }
     });
 
@@ -107,7 +115,7 @@ describe('<EmojiPicker />', () => {
 
     it('media emoji should render placeholder while loading', async () => {
       const mockConfig = {
-        promiseBuilder: (result, context) => {
+        promiseBuilder: (result: any, context: string) => {
           if (context === 'loadMediaEmoji') {
             // unresolved promise
             return new Promise(() => {});
@@ -154,7 +162,7 @@ describe('<EmojiPicker />', () => {
   describe('category', () => {
     it('selecting category should show that category', async () => {
       const component = await helper.setupPicker({
-        firePrivateAnalyticsEvent,
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as FireAnalyticsEvent,
       } as Props);
       // Update list until provider resolved and emojis comes in
       await waitUntil(() =>
@@ -253,14 +261,16 @@ describe('<EmojiPicker />', () => {
       // get Emoji with a particular property
       const displayedEmoji = list.find(Emoji);
 
-      displayedEmoji.forEach((node, index) => {
-        const props = node.props();
-        if (index < 8) {
-          expect(props.emoji.category).toEqual(frequentCategory);
-        } else {
-          expect(props.emoji.category).not.toEqual(frequentCategory);
-        }
-      });
+      displayedEmoji.forEach(
+        (node: ReactWrapper<EmojiProps>, index: number) => {
+          const props = node.props();
+          if (index < 8) {
+            expect(props.emoji.category).toEqual(frequentCategory);
+          } else {
+            expect(props.emoji.category).not.toEqual(frequentCategory);
+          }
+        },
+      );
     });
 
     it('adds non-standard categories to the selector dynamically based on whether they are populated with emojis', async () => {
@@ -279,8 +289,8 @@ describe('<EmojiPicker />', () => {
       let selection: OptionalEmojiDescription;
       const clickOffset = 10;
       const component = await helper.setupPicker({
-        firePrivateAnalyticsEvent,
-        onSelection: (emojiId, emoji) => {
+        firePrivateAnalyticsEvent: firePrivateAnalyticsEvent as FireAnalyticsEvent,
+        onSelection: (_emojiId, emoji) => {
           selection = emoji;
         },
       } as Props);
@@ -310,7 +320,7 @@ describe('<EmojiPicker />', () => {
       const emojiResourcePromise = getEmojiResourcePromise();
       const clickOffset = 10;
       const component = await helper.setupPicker({
-        onSelection: (emojiId, emoji) => {
+        onSelection: (_emojiId, emoji) => {
           selection = emoji;
         },
         emojiProvider: emojiResourcePromise,

@@ -1,14 +1,13 @@
 // FIXME - FAB-1732 looking at making a shared component for this
 
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { MouseEventHandler, PureComponent, ReactNode, UIEvent } from 'react';
-import * as classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
-
 import * as styles from './styles';
 
 export interface OnScroll {
-  (element: HTMLElement, event: UIEvent<any>): void;
+  (element: Element, event: UIEvent<any>): void;
 }
 
 export interface Props {
@@ -20,7 +19,7 @@ export interface Props {
 }
 
 export default class Scrollable extends PureComponent<Props, {}> {
-  private scrollableDiv: HTMLElement;
+  private scrollableDiv: HTMLElement | null = null;
 
   // API
   reveal = (child: HTMLElement, forceToTop?: boolean): void => {
@@ -40,11 +39,12 @@ export default class Scrollable extends PureComponent<Props, {}> {
   };
 
   scrollToBottom = (): void => {
-    const { scrollableDiv } = this;
-    scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+    if (this.scrollableDiv) {
+      this.scrollableDiv.scrollTop = this.scrollableDiv.scrollHeight;
+    }
   };
 
-  private handleScroll = event => {
+  private handleScroll = (event: UIEvent<HTMLDivElement>) => {
     const sampleOffset = 10;
     let firstElement;
     if (this.scrollableDiv) {
@@ -54,12 +54,12 @@ export default class Scrollable extends PureComponent<Props, {}> {
         scrollableRect.top + sampleOffset,
       );
     }
-    if (this.props.onScroll) {
+    if (this.props.onScroll && firstElement) {
       this.props.onScroll(firstElement, event);
     }
   };
 
-  private handleRef = ref => {
+  private handleRef = (ref: HTMLElement | null) => {
     this.scrollableDiv = ref;
   };
 

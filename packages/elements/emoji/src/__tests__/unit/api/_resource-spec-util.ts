@@ -8,7 +8,7 @@ export class ErrorEmojiResource extends EmojiResource {
     return this.activeLoaders;
   }
 
-  initSiteEmojiResource(emojiResponse, provider): Promise<void> {
+  initSiteEmojiResource(): Promise<void> {
     throw new Error('Cannot initSiteEmojiResource');
   }
 }

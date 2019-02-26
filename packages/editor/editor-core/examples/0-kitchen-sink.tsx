@@ -27,6 +27,7 @@ import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
 import ErrorReport, { Error } from '../example-helpers/ErrorReport';
 import KitchenSinkEditor from '../example-helpers/KitchenSinkEditor';
+import withSentry from '../example-helpers/withSentry';
 
 const Container = styled.div`
   display: flex;
@@ -72,11 +73,6 @@ const appearanceOptions = [
     value: 'comment',
     description:
       'should be used for things like comments where you have a field input but require a toolbar & save/cancel buttons',
-  },
-  {
-    label: 'Message',
-    value: 'message',
-    description: 'used for Stride; has now been deprecated.',
   },
   // {
   //   label: 'Inline comment',
@@ -167,10 +163,7 @@ export type State = {
   waitingToValidate: boolean;
 };
 
-export default class FullPageRendererExample extends React.Component<
-  Props,
-  State
-> {
+class FullPageRendererExample extends React.Component<Props, State> {
   private getJSONFromStorage = (key: string, fallback: any = undefined) => {
     const localADF = (localStorage && localStorage.getItem(key)) || undefined;
 
@@ -453,3 +446,5 @@ export default class FullPageRendererExample extends React.Component<
 
   private getLocalTag = (locale: string) => locale.substring(0, 2);
 }
+
+export default withSentry(FullPageRendererExample);

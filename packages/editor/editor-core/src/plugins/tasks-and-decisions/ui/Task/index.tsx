@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { PureComponent, ReactElement } from 'react';
-import { ProviderFactory, WithProviders } from '@atlaskit/editor-common';
+import {
+  Providers,
+  ProviderFactory,
+  WithProviders,
+} from '@atlaskit/editor-common';
 import TaskItemWithProviders from './task-item-with-providers';
+import { ContentRef } from '@atlaskit/task-decision';
 
 const messages = defineMessages({
   placeholder: {
@@ -16,7 +21,7 @@ const messages = defineMessages({
 export interface TaskProps {
   taskId: string;
   isDone: boolean;
-  contentRef?: (node: HTMLElement | undefined) => void;
+  contentRef?: ContentRef;
   onChange?: (taskId: string, isChecked: boolean) => void;
   showPlaceholder?: boolean;
   children?: ReactElement<any>;
@@ -27,7 +32,7 @@ export interface TaskProps {
 export class TaskItem extends PureComponent<TaskProps & InjectedIntlProps, {}> {
   private providerFactory: ProviderFactory;
 
-  constructor(props) {
+  constructor(props: TaskProps & InjectedIntlProps) {
     super(props);
     this.providerFactory = props.providers || new ProviderFactory();
   }
@@ -40,13 +45,13 @@ export class TaskItem extends PureComponent<TaskProps & InjectedIntlProps, {}> {
     }
   }
 
-  private renderWithProvider = providerFactory => {
+  private renderWithProvider = (providers: Providers) => {
     const {
-      providers,
+      providers: _providerFactory,
       intl: { formatMessage },
       ...otherProps
     } = this.props;
-    const { taskDecisionProvider, contextIdentifierProvider } = providerFactory;
+    const { taskDecisionProvider, contextIdentifierProvider } = providers;
     const placeholder = formatMessage(messages.placeholder);
 
     return (

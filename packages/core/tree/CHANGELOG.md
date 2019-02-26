@@ -1,5 +1,10 @@
 # @atlaskit/tree
 
+## 4.1.11
+- [patch] [e3b442c128](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e3b442c128):
+
+  - Adopting API changes in Icon for examples
+
 ## 4.1.10
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

@@ -7,6 +7,7 @@ export interface RecentContainer {
   url: string;
   objectId: string;
   iconUrl: string;
+  type: string;
 }
 
 export interface CustomLink {

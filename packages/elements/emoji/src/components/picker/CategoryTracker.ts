@@ -1,5 +1,4 @@
 import { List as VirtualList } from 'react-virtualized/dist/commonjs/List';
-
 import { CategoryId } from './categories';
 
 /**
@@ -9,8 +8,8 @@ import { CategoryId } from './categories';
  * scrollTop, and virtual rows.
  */
 export default class CategoryTracker {
-  private categoryToRow: Map<CategoryId, number>;
-  private rowToCategory: Map<number, CategoryId>;
+  private categoryToRow!: Map<CategoryId, number>;
+  private rowToCategory!: Map<number, CategoryId>;
 
   constructor() {
     this.reset();
@@ -34,7 +33,7 @@ export default class CategoryTracker {
 
   findNearestCategoryAbove(
     startIndex: number,
-    list: VirtualList,
+    list?: VirtualList,
   ): CategoryId | undefined {
     const rows = Array.from(this.rowToCategory.keys()).sort((a, b) => a - b);
     if (rows.length === 0) {

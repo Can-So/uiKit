@@ -1,16 +1,15 @@
 import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
-import * as React from 'react';
-import { expect } from 'chai';
-
 import { waitUntil } from '@atlaskit/util-common-test';
-import * as styles from '../../../../components/common/styles';
-import EmojiPreview from '../../../../components/common/EmojiPreview';
-import ToneSelector from '../../../../components/common/ToneSelector';
+import { ReactWrapper } from 'enzyme';
+import * as React from 'react';
+import CachingEmoji from '../../../../components/common/CachingEmoji';
 import Emoji from '../../../../components/common/Emoji';
 import EmojiButton from '../../../../components/common/EmojiButton';
-import CachingEmoji from '../../../../components/common/CachingEmoji';
+import EmojiPreview from '../../../../components/common/EmojiPreview';
+import * as styles from '../../../../components/common/styles';
+import ToneSelector from '../../../../components/common/ToneSelector';
 import { EmojiDescriptionWithVariations } from '../../../../types';
-import { imageEmoji, generateSkinVariation } from '../../_test-data';
+import { generateSkinVariation, imageEmoji } from '../../_test-data';
 import * as helper from './_common-test-helpers';
 
 const baseEmoji = imageEmoji;
@@ -49,19 +48,13 @@ describe('<EmojiPreview />', () => {
     it('should render an emoji preview if one is selected', () => {
       const wrapper = shallowWithIntl(<EmojiPreview emoji={emoji} />);
 
-      expect(
-        wrapper.find(`.${styles.preview}`),
-        'Preview rendered',
-      ).to.have.length(1);
+      expect(wrapper.find(`.${styles.preview}`)).toHaveLength(1);
     });
 
     it('should not render the emoji preview if one is not selected', () => {
       const wrapper = shallowWithIntl(<EmojiPreview />);
 
-      expect(
-        wrapper.find(`.${styles.preview}`),
-        'Preview not rendered',
-      ).to.have.length(0);
+      expect(wrapper.find(`.${styles.preview}`)).toHaveLength(0);
     });
   });
 
@@ -72,11 +65,8 @@ describe('<EmojiPreview />', () => {
       );
 
       wrapper.find(EmojiButton).simulate('mousedown', { button: 0 });
-      expect(wrapper.state('selectingTone')).to.equal(true);
-      expect(
-        wrapper.find(ToneSelector),
-        'ToneSelector in preview',
-      ).to.have.length(1);
+      expect(wrapper.state('selectingTone')).toEqual(true);
+      expect(wrapper.find(ToneSelector)).toHaveLength(1);
     });
 
     it('button should show current selected tone if provided', () => {
@@ -84,21 +74,19 @@ describe('<EmojiPreview />', () => {
         <EmojiPreview emoji={emoji} selectedTone={1} toneEmoji={toneEmoji} />,
       );
 
-      expect(wrapper.find(Emoji), 'Emoji in preview').to.have.length(2);
+      expect(wrapper.find(Emoji)).toHaveLength(2);
       const first = wrapper.find(Emoji).first();
       const emoji1Prop = first.prop('emoji');
-      expect(emoji1Prop, 'First has emoji prop').to.not.equal(undefined);
-      expect(emoji1Prop.id, 'Emoji id').to.equal(emoji.id);
-      expect(emoji1Prop.shortName, 'Emoji shortName').to.equal(emoji.shortName);
+      expect(emoji1Prop).not.toEqual(undefined);
+      expect(emoji1Prop.id).toEqual(emoji.id);
+      expect(emoji1Prop.shortName).toEqual(emoji.shortName);
 
       const second = wrapper.find(Emoji).at(1);
       const selectedTone = toneEmoji!.skinVariations![0];
       const emoji2Prop = second.prop('emoji');
-      expect(emoji2Prop, 'Second has emoji prop').to.not.equal(undefined);
-      expect(emoji2Prop.id, 'Tone id').to.equal(selectedTone.id);
-      expect(emoji2Prop.shortName, 'Tone shortName').to.equal(
-        selectedTone.shortName,
-      );
+      expect(emoji2Prop).not.toEqual(undefined);
+      expect(emoji2Prop.id).toEqual(selectedTone.id);
+      expect(emoji2Prop.shortName).toEqual(selectedTone.shortName);
     });
 
     it('button should show default tone if selected tone is not specified', () => {
@@ -106,20 +94,15 @@ describe('<EmojiPreview />', () => {
         <EmojiPreview emoji={emoji} toneEmoji={toneEmoji} />,
       );
 
-      expect(wrapper.find(Emoji), 'Emoji in preview').to.have.length(2);
+      expect(wrapper.find(Emoji)).toHaveLength(2);
       const first = wrapper.find(Emoji).first();
       const emoji1Prop = first.prop('emoji');
-      expect(emoji1Prop.shortName, 'Emoji shortName').to.equal(emoji.shortName);
-      expect(
-        emoji1Prop.representation,
-        'Emoji skin variation',
-      ).to.have.all.keys(emoji.representation as Object);
+      expect(emoji1Prop.shortName).toEqual(emoji.shortName);
+      expect(emoji1Prop.representation).toEqual(emoji.representation as Object);
       const second = wrapper.find(Emoji).at(1);
       const emoji2Prop = second.prop('emoji');
-      expect(emoji2Prop.shortName, 'Tone shortName').to.equal(
-        toneEmoji.shortName,
-      );
-      expect(emoji2Prop.representation, 'Tone skin variation').to.have.all.keys(
+      expect(emoji2Prop.shortName).toEqual(toneEmoji.shortName);
+      expect(emoji2Prop.representation).toEqual(
         toneEmoji.representation as Object,
       );
     });
@@ -133,7 +116,7 @@ describe('<EmojiPreview />', () => {
       instance.onToneButtonClick();
       instance.onToneSelected(1);
 
-      expect(wrapper.state('selectingTone')).to.equal(false);
+      expect(wrapper.state('selectingTone')).toEqual(false);
     });
 
     it('should pass onToneSelected to tone selector', () => {
@@ -145,7 +128,7 @@ describe('<EmojiPreview />', () => {
       instance.onToneButtonClick();
       wrapper.update();
 
-      expect(wrapper.find(ToneSelector).prop('onToneSelected')).to.equal(
+      expect(wrapper.find(ToneSelector).prop('onToneSelected')).toEqual(
         instance.onToneSelected,
       );
     });
@@ -159,17 +142,19 @@ describe('<EmojiPreview />', () => {
       instance.onToneButtonClick();
 
       wrapper.simulate('mouseLeave');
-      expect(wrapper.state('selectingTone')).to.equal(false);
+      expect(wrapper.state('selectingTone')).toEqual(false);
     });
   });
 
   describe('Add custom emoji', () => {
-    const safeFindStartEmojiUpload = async component => {
+    const safeFindStartEmojiUpload = async (component: ReactWrapper) => {
       await waitUntil(() => helper.customEmojiButtonVisible(component));
       return helper.findCustomEmojiButton(component);
     };
 
-    const waitUntilPreviewSectionIsVisible = async component => {
+    const waitUntilPreviewSectionIsVisible = async (
+      component: ReactWrapper,
+    ) => {
       await waitUntil(() => helper.findEmojiPreviewSection(component).exists());
       return helper.findEmojiPreviewSection(component);
     };
@@ -190,7 +175,7 @@ describe('<EmojiPreview />', () => {
     });
 
     describe('Upload supported', () => {
-      let component;
+      let component: ReactWrapper;
 
       beforeEach(() => {
         component = mountWithIntl(
@@ -204,13 +189,10 @@ describe('<EmojiPreview />', () => {
 
       const assertCustomEmojiButtonShown = async () => {
         const addCustomEmojiButton = await safeFindStartEmojiUpload(component);
-        expect(
-          addCustomEmojiButton,
-          'Add custom emoji button defined',
-        ).to.not.equal(undefined);
+        expect(addCustomEmojiButton).not.toEqual(undefined);
       };
 
-      const performToneButtonClick = component => {
+      const performToneButtonClick = (component: ReactWrapper) => {
         const instance = component.instance() as EmojiPreview;
         instance.onToneButtonClick();
         component.update();
@@ -225,7 +207,7 @@ describe('<EmojiPreview />', () => {
 
         performToneButtonClick(component);
 
-        expect(helper.findCustomEmojiButton(component).length).to.equal(0);
+        expect(helper.findCustomEmojiButton(component).length).toEqual(0);
       });
 
       it('"Add custom emoji" button should appear after Tone is skipped', async () => {
@@ -236,7 +218,7 @@ describe('<EmojiPreview />', () => {
 
         performToneButtonClick(component);
 
-        expect(helper.findCustomEmojiButton(component).length).to.equal(0);
+        expect(helper.findCustomEmojiButton(component).length).toEqual(0);
 
         // this should cancel the Tone selection
         emojiPreviewSection.simulate('mouseleave');

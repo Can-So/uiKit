@@ -1,4 +1,33 @@
-# @atlaskit/media-image
+# @atlaskit/media-card
+
+## 54.1.0
+- [minor] [eda74c4dce](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/eda74c4dce):
+
+  - Add shouldOpenMediaViewer + mediaViewerDataSource optional props to Card api to simplify MediaViewer integration
+
+## 54.0.0
+- [major] [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):
+
+  - Remove Identifier type + related utilities and use the one from media-core
+- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
+  - @atlaskit/media-store@9.1.7
+  - @atlaskit/media-test-helpers@20.1.5
+  - @atlaskit/media-core@27.1.0
+
+## 53.0.0
+- [major] [46dfcfbeca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46dfcfbeca):
+
+  - remove Link support from media-card
+
+## 52.0.7
+- [patch] [ab6ba14cd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6ba14cd3):
+
+  - Fix a bug where droping image with EXIF orientation >= 5 end up screwing up proportions for some of the cases
+
+## 52.0.6
+- [patch] [05c5bf7a93](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05c5bf7a93):
+
+  - Dont user pointer cursor for external images in Cards
 
 ## 52.0.5
 - [patch] [c415876da9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c415876da9):

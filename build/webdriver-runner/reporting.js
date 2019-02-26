@@ -49,14 +49,13 @@ module.exports = {
           buildEventPayload(property, eventName),
         ),
       }),
-      () => {
-        console.log(
-          `Sent ${properties.length} integration test failure event${
-            properties.length > 1 ? 's' : ''
-          }`,
-        );
-      },
-    );
+    ).then(() => {
+      console.log(
+        `Sent ${properties.length} integration test failure event${
+          properties.length > 1 ? 's' : ''
+        }`,
+      );
+    });
   },
   reportLongRunningTests(results /*: any */, threshold /*: number */) {
     return sendLogs(

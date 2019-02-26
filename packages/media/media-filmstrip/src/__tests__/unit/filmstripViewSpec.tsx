@@ -1,6 +1,7 @@
 declare var global: any; // we need define an interface for the Node global object when overwriting global objects, in this case MutationObserver
+declare var window: any;
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, CommonWrapper } from 'enzyme';
 import { FilmstripView, LeftArrow, RightArrow } from '../../filmstripView';
 import {
   FilmStripListWrapper,
@@ -18,21 +19,23 @@ const CHILD_WIDTH = 5;
  * @param children
  */
 function mockSizing(
-  element,
+  element: CommonWrapper<{}, Readonly<{}>, any>,
   bufferWidth = BUFFER_WIDTH,
   windowWidth = WINDOW_WIDTH,
 ) {
   const instance = element.instance();
 
   instance.bufferElement = document.createElement('div');
-  instance.bufferElement.getBoundingClientRect = () => ({
-    width: bufferWidth,
-  });
+  instance.bufferElement.getBoundingClientRect = () =>
+    ({
+      width: bufferWidth,
+    } as DOMRect);
 
   instance.windowElement = document.createElement('div');
-  instance.windowElement.getBoundingClientRect = () => ({
-    width: windowWidth,
-  });
+  instance.windowElement.getBoundingClientRect = () =>
+    ({
+      width: windowWidth,
+    } as DOMRect);
 
   instance.childOffsets = [];
   for (let i = 0; i < bufferWidth / CHILD_WIDTH; ++i) {
@@ -58,20 +61,20 @@ describe('FilmstripView', () => {
   class MockMutationObserver {
     handler: (list: Array<{}>) => {};
 
-    constructor(handler) {
+    constructor(handler: (list: Array<{}>) => {}) {
       this.handler = handler;
     }
 
     observe = jest.fn();
     disconnect = jest.fn();
 
-    fakeTrigger(mutationList) {
+    fakeTrigger(mutationList: Array<{}>) {
       // do what a MutationObserver will do if there was an appropriate DOM change
       this.handler(mutationList);
     }
   }
 
-  let nativeMutationObserver;
+  let nativeMutationObserver: any;
 
   beforeEach(() => {
     nativeMutationObserver = window['MutationObserver'];
@@ -238,7 +241,7 @@ describe('FilmstripView', () => {
   });
 
   describe('.handleScroll()', () => {
-    const createWheelEvent = event => {
+    const createWheelEvent = (event: any) => {
       return {
         deltaX: 0,
         deltaY: 0,

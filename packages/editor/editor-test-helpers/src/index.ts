@@ -4,6 +4,9 @@ export { default as chaiPlugin } from './chai';
 export { default as createEvent } from './create-event';
 export { default as dispatchPasteEvent } from './dispatch-paste-event';
 export { default as createEditorFactory } from './create-editor';
+export {
+  default as createAnalyticsEventMock,
+} from './create-analytics-event-mock';
 export { default as fixtures } from './fixtures';
 export { default as simulatePlatform, Platforms } from './simulatePlatform';
 export { default as patchEditorViewForJSDOM } from './jsdom-fixtures';
@@ -87,10 +90,7 @@ export {
 } from './schema-builder';
 export { default as defaultSchema } from './schema';
 export * from './html-helpers';
-export {
-  storyMediaProviderFactory,
-  getLinkCreateContextMock,
-} from './media-provider';
+export { storyMediaProviderFactory } from './media-provider';
 export {
   storyContextIdentifierProviderFactory,
 } from './context-identifier-provider';

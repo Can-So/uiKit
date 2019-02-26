@@ -2,10 +2,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { colors } from '@atlaskit/theme';
-import { Entity, ValidationError } from '@atlaskit/adf-utils';
+import { ADFEntity, ValidationError } from '@atlaskit/adf-utils';
 
 export type Error = {
-  entity: Entity;
+  entity: ADFEntity;
   error: ValidationError;
 };
 

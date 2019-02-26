@@ -11,7 +11,7 @@ import {
 BrowserTestCase(
   `text-color.ts: Can change text color`,
   { skip },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
 
     await browser.goto(editor.path);

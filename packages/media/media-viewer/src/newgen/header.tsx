@@ -6,12 +6,13 @@ import {
   MediaType,
   ProcessedFileState,
   ProcessingFileState,
+  FileIdentifier,
 } from '@atlaskit/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
 import { messages, toHumanReadableMediaSize } from '@atlaskit/media-ui';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { Outcome, Identifier } from './domain';
+import { Outcome } from './domain';
 import {
   Header as HeaderWrapper,
   LeftHeader,
@@ -31,7 +32,7 @@ import {
 } from './download';
 
 export type Props = {
-  readonly identifier: Identifier;
+  readonly identifier: FileIdentifier;
   readonly context: Context;
   readonly onClose?: () => void;
 };
@@ -65,10 +66,12 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
   }
 
   private init(props: Props) {
-    this.setState(initialState, () => {
+    this.setState(initialState, async () => {
       const { context, identifier } = props;
+      const id =
+        typeof identifier.id === 'string' ? identifier.id : await identifier.id;
       this.subscription = context.file
-        .getFileState(identifier.id, {
+        .getFileState(id, {
           collectionName: identifier.collectionName,
         })
         .subscribe({

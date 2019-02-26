@@ -1,23 +1,23 @@
 import { ITokenizer, Search, UnorderedSearchIndex } from 'js-search';
+import { CategoryId } from '../components/picker/categories';
 import { defaultCategories, frequentCategory } from '../constants';
+import {
+  getCategoryId,
+  isEmojiDescriptionWithVariations,
+} from '../type-helpers';
 import {
   EmojiDescription,
   EmojiSearchResult,
   OptionalEmojiDescription,
-  SearchSort,
   SearchOptions,
+  SearchSort,
 } from '../types';
-import {
-  isEmojiDescriptionWithVariations,
-  getCategoryId,
-} from '../type-helpers';
+import { tokenizerRegex } from './EmojiRepositoryRegex';
 import {
   createSearchEmojiComparator,
   createUsageOnlyEmojiComparator,
 } from './internal/Comparators';
 import { UsageFrequencyTracker } from './internal/UsageFrequencyTracker';
-import { CategoryId } from '../components/picker/categories';
-import { tokenizerRegex } from './EmojiRepositoryRegex';
 
 type Token = {
   token: string;
@@ -26,11 +26,11 @@ type Token = {
 
 // FS-1097 - duplicated in mentions - extract at some point into a shared library
 class Tokenizer implements ITokenizer {
-  public static tokenize(text): string[] {
+  public tokenize(text: string): string[] {
     return this.tokenizeAsTokens(text).map(token => token.token);
   }
 
-  public static tokenizeAsTokens(text): Token[] {
+  public tokenizeAsTokens(text: string): Token[] {
     let match;
     let tokens: Token[] = [];
     tokenizerRegex.lastIndex = 0;
@@ -144,15 +144,15 @@ const findEmojiIndex = (
 
 export default class EmojiRepository {
   private emojis: EmojiDescription[];
-  private fullSearch: Search;
-  private shortNameMap: EmojiByKey;
-  private idMap: EmojiByKey;
-  private asciiMap: Map<string, EmojiDescription>;
-  private dynamicCategoryList: CategoryId[];
+  private fullSearch!: Search;
+  private shortNameMap!: EmojiByKey;
+  private idMap!: EmojiByKey;
+  private asciiMap!: Map<string, EmojiDescription>;
+  private dynamicCategoryList!: CategoryId[];
   private static readonly defaultEmojiWeight: number = 1000000;
 
   // protected to allow subclasses to access (for testing and storybooks).
-  protected usageTracker: UsageFrequencyTracker;
+  protected usageTracker!: UsageFrequencyTracker;
 
   constructor(
     emojis: EmojiDescription[],
@@ -187,7 +187,7 @@ export default class EmojiRepository {
 
     const { nameQuery, asciiQuery } = splitQuery(query);
     if (nameQuery) {
-      filteredEmoji = this.fullSearch.search(nameQuery);
+      filteredEmoji = this.fullSearch.search(nameQuery) as EmojiDescription[];
 
       if (asciiQuery) {
         filteredEmoji = this.withAsciiMatch(asciiQuery, filteredEmoji);
@@ -389,7 +389,7 @@ export default class EmojiRepository {
 
   private initSearchIndex(): void {
     this.fullSearch = new Search('id');
-    this.fullSearch.tokenizer = Tokenizer;
+    this.fullSearch.tokenizer = new Tokenizer();
     this.fullSearch.searchIndex = new UnorderedSearchIndex();
     this.fullSearch.addIndex('name');
     this.fullSearch.addIndex('shortName');

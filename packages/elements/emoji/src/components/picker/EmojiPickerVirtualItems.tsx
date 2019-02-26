@@ -1,20 +1,17 @@
+import Spinner from '@atlaskit/spinner';
 import * as React from 'react';
 import { ReactNode } from 'react';
-
-import Spinner from '@atlaskit/spinner';
-
-import * as styles from './styles';
-import { sizes } from './EmojiPickerSizes';
-
-import EmojiPickerListSearch, {
-  Props as SearchProps,
-} from './EmojiPickerListSearch';
-import EmojiPickerEmojiRow, {
-  Props as EmojiRowProps,
-} from './EmojiPickerEmojiRow';
 import EmojiPickerCategoryHeading, {
   Props as CategoryHeadingProps,
 } from './EmojiPickerCategoryHeading';
+import EmojiPickerEmojiRow, {
+  Props as EmojiRowProps,
+} from './EmojiPickerEmojiRow';
+import EmojiPickerListSearch, {
+  Props as SearchProps,
+} from './EmojiPickerListSearch';
+import { sizes } from './EmojiPickerSizes';
+import * as styles from './styles';
 
 export interface RenderItem {
   (context?: VirtualRenderContext): ReactNode;
@@ -51,9 +48,7 @@ export class EmojisRowItem extends AbstractItem<EmojiRowProps> {
     super(props, sizes.emojiRowHeight);
   }
 
-  renderItem = (context?: VirtualRenderContext) => (
-    <EmojiPickerEmojiRow {...this.props} />
-  );
+  renderItem = () => <EmojiPickerEmojiRow {...this.props} />;
 }
 
 export class LoadingItem extends AbstractItem<{}> {
@@ -82,12 +77,12 @@ export class CategoryHeadingItem extends AbstractItem<CategoryHeadingProps> {
  * These are the values provided by react-virtualized.
  */
 export interface VirtualRenderContext {
-  index; // Index of row
-  isScrolling; // The List is currently being scrolled
-  isVisible; // This row is visible within the List (eg it is not an overscanned row)
-  key; // Unique key within array of rendered rows
-  parent; // Reference to the parent List (instance)
-  style; // Style object to be applied to row (to position it);
+  index: number; // Index of row
+  isScrolling: boolean; // The List is currently being scrolled
+  isVisible: boolean; // This row is visible within the List (eg it is not an overscanned row)
+  key: any; // Unique key within array of rendered rows
+  parent: any; // Reference to the parent List (instance)
+  style: any; // Style object to be applied to row (to position it);
   // This must be passed through to the rendered row element.
 }
 

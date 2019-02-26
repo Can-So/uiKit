@@ -5,14 +5,14 @@ import {
   editor,
   editable,
   getDocFromElement,
-  skipBrowsers as skip,
   navigateOrClear,
+  skipBrowsers as skip,
 } from '../_utils';
 
 BrowserTestCase(
   `type-ahead.ts: Replaces typeahead mark on insert`,
   { skip },
-  async client => {
+  async (client: any) => {
     const browser = new Page(client);
 
     await navigateOrClear(browser, editor.path);

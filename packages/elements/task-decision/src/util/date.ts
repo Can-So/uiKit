@@ -27,6 +27,9 @@ export const getStartOfDate = (ts: Date): Date => {
   return startOfDay(ts);
 };
 
-export const isSameDate = (d1: Date, d2: Date): boolean => {
-  return d1 && d2 && isSameDay(d1, d2);
+export const isSameDate = (
+  d1: Date | undefined,
+  d2: Date | undefined,
+): boolean => {
+  return !!(d1 && d2 && isSameDay(d1, d2));
 };

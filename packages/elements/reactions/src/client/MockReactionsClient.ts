@@ -61,11 +61,14 @@ export class MockReactionsClient implements ReactionClient {
 
   getReactions(containerAri: string, aris: string[]): Promise<Reactions> {
     return this.delayPromise().then(() =>
-      aris.reduce((results, ari) => {
-        const reactionKey = objectReactionKey(containerAri, ari);
-        results[ari] = this.mockData[reactionKey] || [];
-        return results;
-      }, {}),
+      aris.reduce(
+        (results, ari) => {
+          const reactionKey = objectReactionKey(containerAri, ari);
+          results[ari] = this.mockData[reactionKey] || [];
+          return results;
+        },
+        {} as Reactions,
+      ),
     );
   }
 

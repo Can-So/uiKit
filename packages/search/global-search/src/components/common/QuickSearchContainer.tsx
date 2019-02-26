@@ -158,11 +158,28 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     }
   };
 
-  fireExperimentExposureEvent = async (searchSessionId: string) => {
-    const { createAnalyticsEvent, getAbTestData, logger } = this.props;
+  fetchAbTestData = async (searchSessionId: string) => {
+    const { getAbTestData } = this.props;
+    const startTime = performanceNow();
+    const abTest = await getAbTestData(searchSessionId);
+    const elapsedMs = performanceNow() - startTime;
+
+    return {
+      elapsedMs,
+      abTest,
+    };
+  };
+
+  fireExperimentExposureEvent = async (
+    searchSessionId: string,
+    abTestPromise: Promise<ABTest | undefined>,
+  ) => {
+    const { createAnalyticsEvent, logger } = this.props;
+
+    const abTest = await abTestPromise;
+
     if (createAnalyticsEvent) {
       try {
-        const abTest = await getAbTestData(searchSessionId);
         if (abTest) {
           fireExperimentExposureEvent(
             abTest,
@@ -180,11 +197,17 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     searchSessionId,
     recentItems,
     requestStartTime?: number,
+    experimentRequestDurationMs?: number,
+    renderStartTime?: number,
   ) => {
     const { createAnalyticsEvent, getDisplayedResults } = this.props;
     if (createAnalyticsEvent && getDisplayedResults) {
       const elapsedMs: number = requestStartTime
         ? performanceNow() - requestStartTime
+        : 0;
+
+      const renderTime: number = renderStartTime
+        ? performanceNow() - renderStartTime
         : 0;
 
       const resultsArray: Result[][] = resultMapToArray(
@@ -197,8 +220,10 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       firePreQueryShownEvent(
         eventAttributes,
         elapsedMs,
+        renderTime,
         searchSessionId,
         createAnalyticsEvent,
+        experimentRequestDurationMs,
       );
     }
   };
@@ -276,23 +301,32 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       });
     }
 
-    this.fireExperimentExposureEvent(this.state.searchSessionId);
+    const abTestPromise = this.fetchAbTestData(this.state.searchSessionId);
+    this.fireExperimentExposureEvent(
+      this.state.searchSessionId,
+      abTestPromise.then(({ abTest }) => abTest),
+    );
 
     try {
       const { results } = await this.props.getRecentItems(
         this.state.searchSessionId,
       );
+      const renderStartTime = performanceNow();
       this.setState(
         {
           recentItems: results,
           isLoading: false,
         },
-        () =>
+        async () => {
+          const experimentRequestDurationMs = (await abTestPromise).elapsedMs;
           this.fireShownPreQueryEvent(
             this.state.searchSessionId,
             this.state.recentItems || {},
             startTime,
-          ),
+            experimentRequestDurationMs,
+            renderStartTime,
+          );
+        },
       );
     } catch (e) {
       this.props.logger.safeError(

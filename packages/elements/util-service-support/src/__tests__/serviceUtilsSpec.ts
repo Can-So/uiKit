@@ -1,6 +1,5 @@
 import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import 'whatwg-fetch';
-import { expect } from 'chai';
 import * as fetchMock from 'fetch-mock/src/client';
 
 import { requestService } from '../serviceUtils';
@@ -49,7 +48,7 @@ describe('requestService', () => {
       url,
     };
     return requestService(serviceConfig).then(response => {
-      expect(response).to.deep.equal(defaultResponse);
+      expect(response).toEqual(defaultResponse);
     });
   });
 
@@ -74,22 +73,18 @@ describe('requestService', () => {
       },
     };
     return requestService(serviceConfig, options).then(response => {
-      expect(response).to.deep.equal(defaultResponse);
+      expect(response).toEqual(defaultResponse);
       const calls = fetchMock.calls('request');
-      expect(calls.length, 'Fetch calls').to.equal(1);
+      expect(calls.length).toEqual(1);
       const url = calls[0][0];
       const { headers, method } = calls[0][1];
       const xCheeseHeader = headers.map['x-cheese'];
-      expect(xCheeseHeader, 'Header defined').to.not.equal(undefined);
-      expect(xCheeseHeader, 'Header value').to.equal('american');
-      expect(url.indexOf(url), `url starts with ${url}`).to.equal(0);
-      expect(url.indexOf('sauce=tomato') >= 0, 'sauce query param').to.equal(
-        true,
-      );
-      expect(url.indexOf('bacon=nice') >= 0, 'sauce query param').to.equal(
-        true,
-      );
-      expect(method, 'method').to.equal('POST');
+      expect(xCheeseHeader).not.toEqual(undefined);
+      expect(xCheeseHeader).toEqual('american');
+      expect(url.indexOf(url)).toEqual(0);
+      expect(url.indexOf('sauce=tomato') >= 0).toEqual(true);
+      expect(url.indexOf('bacon=nice') >= 0).toEqual(true);
+      expect(method).toEqual('POST');
     });
   });
 
@@ -104,8 +99,8 @@ describe('requestService', () => {
     };
     return requestService(serviceConfig).catch(error => {
       const calls = fetchMock.calls('request');
-      expect(calls.length, 'Fetch calls').to.equal(1);
-      expect(error.code).to.equal(401);
+      expect(calls.length).toEqual(1);
+      expect(error.code).toEqual(401);
     });
   });
 
@@ -127,19 +122,17 @@ describe('requestService', () => {
       securityProvider,
       refreshedSecurityProvider,
     };
-    return requestService(serviceConfig).then(response => {
+    return requestService(serviceConfig).then(() => {
       const refreshCalls = fetchMock.calls('request');
-      expect(refreshCalls.length, 'Second request').to.equal(1);
+      expect(refreshCalls.length).toEqual(1);
       const url = refreshCalls[0][0];
       const { headers } = refreshCalls[0][1];
 
       const xCheeseHeader = headers.map['x-cheese'];
-      expect(xCheeseHeader, 'Header defined').to.not.equal(undefined);
-      expect(xCheeseHeader, 'Header value').to.equal('swiss');
-      expect(url.indexOf(url), `url starts with ${url}`).to.equal(0);
-      expect(url.indexOf('bacon=crispy') >= 0, 'sauce query param').to.equal(
-        true,
-      );
+      expect(xCheeseHeader).not.toEqual(undefined);
+      expect(xCheeseHeader).toEqual('swiss');
+      expect(url.indexOf(url)).toEqual(0);
+      expect(url.indexOf('bacon=crispy') >= 0).toEqual(true);
     });
   });
 
@@ -153,7 +146,7 @@ describe('requestService', () => {
       url,
     };
     return requestService(serviceConfig)
-      .then(() => expect(true).to.equal(true))
-      .catch(() => expect(false).to.equal(true)); // should not error
+      .then(() => expect(true).toEqual(true))
+      .catch(() => expect(false).toEqual(true)); // should not error
   });
 });

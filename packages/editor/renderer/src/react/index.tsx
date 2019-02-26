@@ -13,7 +13,6 @@ import {
   mergeTextNodes,
   isTextWrapper,
   TextWrapper,
-  isEmojiDoc,
   toReact,
 } from './nodes';
 
@@ -26,7 +25,6 @@ import {
   EventHandlers,
   ExtensionHandlers,
 } from '@atlaskit/editor-common';
-import { bigEmojiHeight } from '../utils';
 
 export interface RendererContext {
   objectAri?: string;
@@ -122,7 +120,6 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
       this.resetState();
     }
 
-    const emojiBlock = isEmojiDoc(fragment, props);
     const content = ReactSerializer.getChildNodes(fragment).map(
       (node, index) => {
         if (isTextWrapper(node)) {
@@ -131,9 +128,7 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
 
         let props;
 
-        if (emojiBlock && this.appearance === 'message') {
-          props = this.getEmojiBlockProps(node);
-        } else if (node.type.name === 'table') {
+        if (node.type.name === 'table') {
           props = this.getTableProps(node);
         } else if (node.type.name === 'date') {
           props = this.getDateProps(node, parentInfo);
@@ -223,13 +218,6 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
         {content}
       </MarkComponent>
     );
-  }
-
-  private getEmojiBlockProps(node: Node) {
-    return {
-      ...this.getProps(node),
-      fitToHeight: bigEmojiHeight,
-    };
   }
 
   private getTableProps(node: Node) {

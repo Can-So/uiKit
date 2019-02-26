@@ -2,6 +2,7 @@ import * as React from 'react';
 import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import { StatusPickerWithoutAnalytcs as StatusPicker } from '../../../../../plugins/status/ui/statusPicker';
 import { FABRIC_CHANNEL } from '../../../../../plugins/status/analytics';
+import { AnalyticsEventPayload } from '@atlaskit/analytics-next-types';
 
 describe('StatusPicker', () => {
   const closeStatusPicker = jest.fn();
@@ -40,11 +41,11 @@ describe('StatusPicker', () => {
     );
 
   const createPayloadPopupOpened = (
-    action,
-    localId,
-    selectedColor,
-    textLength,
-    state,
+    action: string,
+    localId: string,
+    selectedColor: string,
+    textLength: number,
+    state: string,
   ) => ({
     action,
     actionSubject: 'statusPopup',
@@ -60,11 +61,11 @@ describe('StatusPicker', () => {
   });
 
   const createPayloadPopupClosed = (
-    action,
-    localId,
-    selectedColor,
-    textLength,
-    state,
+    action: string,
+    localId: string,
+    selectedColor: string,
+    textLength: number,
+    state: string,
   ) => ({
     action,
     actionSubject: 'statusPopup',
@@ -81,7 +82,7 @@ describe('StatusPicker', () => {
     }),
   });
 
-  const assertAnalyticsPayload = payload => {
+  const assertAnalyticsPayload = (payload: AnalyticsEventPayload) => {
     expect(createAnalyticsEvent).toBeCalledWith(
       expect.objectContaining(payload),
     );

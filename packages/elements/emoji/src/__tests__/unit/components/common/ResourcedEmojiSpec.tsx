@@ -1,6 +1,5 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import { expect } from 'chai';
 import { waitUntil } from '@atlaskit/util-common-test';
 import Tooltip from '@atlaskit/tooltip';
 
@@ -16,11 +15,13 @@ import {
   getEmojiResourcePromise,
 } from '../../_test-data';
 
-const findEmoji = component => component.update() && component.find(Emoji);
-const emojiVisible = component => findEmoji(component).length === 1;
-const emojiVisibleById = (component, id) =>
+const findEmoji = (component: ReactWrapper) =>
+  component.update() && component.find(Emoji);
+const emojiVisible = (component: ReactWrapper) =>
+  findEmoji(component).length === 1;
+const emojiVisibleById = (component: ReactWrapper, id: string) =>
   emojiVisible(component) && findEmoji(component).prop('emoji').id === id;
-const emojiPlaceHolderVisible = component =>
+const emojiPlaceHolderVisible = (component: ReactWrapper) =>
   component.update() && component.find(EmojiPlaceholder).length === 1;
 
 describe('<ResourcedEmoji />', () => {
@@ -33,9 +34,7 @@ describe('<ResourcedEmoji />', () => {
     );
 
     return waitUntil(() => emojiVisible(component)).then(() => {
-      expect(findEmoji(component).prop('emoji').id, 'Emoji rendered').to.equal(
-        grinEmoji.id,
-      );
+      expect(findEmoji(component).prop('emoji').id).toEqual(grinEmoji.id);
     });
   });
 
@@ -53,19 +52,19 @@ describe('<ResourcedEmoji />', () => {
           .find('span[data-emoji-id]')
           .getDOMNode()
           .attributes.getNamedItem('data-emoji-id')!.value,
-      ).to.equal(grinEmoji.id);
+      ).toEqual(grinEmoji.id);
       expect(
         component
           .find('span[data-emoji-id]')
           .getDOMNode()
           .attributes.getNamedItem('data-emoji-short-name')!.value,
-      ).to.equal('shouldnotbeused');
+      ).toEqual('shouldnotbeused');
       expect(
         component
           .find('span[data-emoji-id]')
           .getDOMNode()
           .attributes.getNamedItem('data-emoji-text')!.value,
-      ).to.equal('shouldnotbeused');
+      ).toEqual('shouldnotbeused');
     });
   });
 
@@ -79,7 +78,7 @@ describe('<ResourcedEmoji />', () => {
 
     return waitUntil(() => emojiVisible(component)).then(() => {
       const tooltip = component.find(Tooltip);
-      expect(tooltip).to.have.length(0);
+      expect(tooltip).toHaveLength(0);
     });
   });
 
@@ -94,7 +93,7 @@ describe('<ResourcedEmoji />', () => {
 
     return waitUntil(() => emojiVisible(component)).then(() => {
       const tooltip = component.find(Tooltip);
-      expect(tooltip).to.have.length(1);
+      expect(tooltip).toHaveLength(1);
     });
   });
 
@@ -107,9 +106,7 @@ describe('<ResourcedEmoji />', () => {
     );
 
     return waitUntil(() => emojiVisible(component)).then(() => {
-      expect(findEmoji(component).prop('emoji').id, 'Emoji rendered').to.equal(
-        grinEmoji.id,
-      );
+      expect(findEmoji(component).prop('emoji').id).toEqual(grinEmoji.id);
     });
   });
 
@@ -122,9 +119,7 @@ describe('<ResourcedEmoji />', () => {
     );
 
     return waitUntil(() => emojiVisible(component)).then(() => {
-      expect(findEmoji(component).prop('emoji').id, 'Emoji rendered').to.equal(
-        grinEmoji.id,
-      );
+      expect(findEmoji(component).prop('emoji').id).toEqual(grinEmoji.id);
       component.setProps({
         emojiId: { shortName: evilburnsEmoji.shortName },
       });
@@ -132,16 +127,15 @@ describe('<ResourcedEmoji />', () => {
       return waitUntil(() =>
         emojiVisibleById(component, evilburnsEmoji.id),
       ).then(() => {
-        expect(
-          findEmoji(component).prop('emoji').id,
-          'Emoji rendered',
-        ).to.equal(evilburnsEmoji.id);
+        expect(findEmoji(component).prop('emoji').id).toEqual(
+          evilburnsEmoji.id,
+        );
       });
     });
   });
 
   it('unknown emoji', () => {
-    let resolver;
+    let resolver: (value?: any | PromiseLike<any>) => void;
     // @ts-ignore Unused var never read, should this be deleted?
     let resolverResult;
     const config = {
@@ -164,14 +158,14 @@ describe('<ResourcedEmoji />', () => {
     return waitUntil(() => !!resolver).then(() => {
       resolver();
       return waitUntil(() => emojiPlaceHolderVisible(component)).then(() => {
-        expect(true, 'EmojiPlaceholder found').to.equal(true);
+        expect(true).toEqual(true);
       });
     });
   });
 
   it('placeholder while loading emoji', () => {
-    let resolver;
-    let resolverResult;
+    let resolver: (value?: any | PromiseLike<any>) => void;
+    let resolverResult: EmojiDescription;
     const config = {
       promiseBuilder: (result: EmojiDescription) => {
         resolverResult = result;
@@ -193,10 +187,7 @@ describe('<ResourcedEmoji />', () => {
       return waitUntil(() => emojiPlaceHolderVisible(component)).then(() => {
         resolver(resolverResult);
         return waitUntil(() => emojiVisible(component)).then(() => {
-          expect(
-            findEmoji(component).prop('emoji').id,
-            'Emoji rendered',
-          ).to.equal(grinEmoji.id);
+          expect(findEmoji(component).prop('emoji').id).toEqual(grinEmoji.id);
         });
       });
     });
@@ -227,7 +218,7 @@ describe('<ResourcedEmoji />', () => {
 
     return waitUntil(() => emojiPlaceHolderVisible(component)).then(() => {
       const tooltip = component.find(Tooltip);
-      expect(tooltip).to.have.length(1);
+      expect(tooltip).toHaveLength(1);
     });
   });
 });

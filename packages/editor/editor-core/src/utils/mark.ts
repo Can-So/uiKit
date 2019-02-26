@@ -1,7 +1,5 @@
 import { Node, Mark, MarkType } from 'prosemirror-model';
 import { SelectionRange, EditorState, Transaction } from 'prosemirror-state';
-import { traverse } from '@atlaskit/adf-utils';
-import { JSONDocNode } from '@atlaskit/editor-json-transformer';
 
 export const isMarkAllowedInRange = (
   doc: Node,
@@ -73,21 +71,28 @@ export const removeBlockMarks = (
   return blockMarksExists ? tr : undefined;
 };
 
-export function removeQueryMarksFromJSON(json: JSONDocNode): JSONDocNode {
-  const sanitizedJSON = traverse(json as any, {
-    text: node => {
-      if (!node || !Array.isArray(node.marks)) {
-        return node;
+/**
+ * Removes marks from nodes in the current selection that are not supported
+ */
+export const sanitizeSelectionMarks = (
+  state: EditorState,
+): Transaction | undefined => {
+  let tr;
+  const { $from, $to } = state.tr.selection;
+  const nodeType = $from.node().type;
+  state.doc.nodesBetween($from.pos, $to.pos, (node, pos) => {
+    const nodePos = state.doc.resolve(pos);
+    node.marks.forEach(mark => {
+      if (!nodeType.allowsMarkType(mark.type)) {
+        const filteredMarks = node.marks.filter(m => m.type !== mark.type);
+        tr = (tr || state.tr).setNodeMarkup(
+          nodePos.pos,
+          undefined,
+          node.attrs,
+          filteredMarks,
+        );
       }
-
-      return {
-        ...node,
-        marks: node.marks.filter(
-          mark => ['emojiQuery', 'typeAheadQuery'].indexOf(mark.type) === -1,
-        ),
-      };
-    },
-  }) as JSONDocNode;
-
-  return sanitizedJSON;
-}
+    });
+  });
+  return tr;
+};

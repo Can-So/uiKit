@@ -146,8 +146,16 @@ function notificationConfigFactory(
   isNotificationInbuilt,
   openDrawer,
 ) {
+  const notificationOnClickHandler = () => {
+    if (onNotificationClick) {
+      onNotificationClick();
+    }
+    openDrawer();
+  };
   return isNotificationInbuilt
-    ? configFactory(openDrawer, notificationTooltip, { badgeCount })
+    ? configFactory(notificationOnClickHandler, notificationTooltip, {
+        badgeCount,
+      })
     : configFactory(
         onNotificationClick || (notificationDrawerContents && openDrawer),
         notificationTooltip,
@@ -161,6 +169,9 @@ export default function generateProductConfig(
   isNotificationInbuilt: boolean,
 ): ProductConfigShape {
   const {
+    product,
+    cloudId,
+
     onProductClick,
     productTooltip,
     productIcon,
@@ -169,6 +180,8 @@ export default function generateProductConfig(
     onCreateClick,
     createTooltip,
     createDrawerContents,
+
+    enableAtlassianSwitcher,
 
     searchTooltip,
     onSearchClick,
@@ -199,6 +212,15 @@ export default function generateProductConfig(
     profileIconUrl,
   } = props;
 
+  const shouldRenderAtlassianSwitcher =
+    enableAtlassianSwitcher && cloudId && product;
+
+  if (enableAtlassianSwitcher && !shouldRenderAtlassianSwitcher) {
+    console.warn(
+      'When using the enableAtlassianSwitcher prop, be sure to send the cloudId and product props. Falling back to the legacy app-switcher',
+    );
+  }
+
   return {
     product: configFactory(onProductClick, productTooltip, {
       icon: productIcon,
@@ -220,6 +242,10 @@ export default function generateProductConfig(
       onSettingsClick || (settingsDrawerContents && openDrawer('settings')),
       settingsTooltip,
     ),
+    atlassianSwitcher: shouldRenderAtlassianSwitcher
+      ? configFactory(openDrawer('atlassianSwitcher'))
+      : null,
+
     notification: notificationConfigFactory(
       notificationTooltip,
       notificationCount,
@@ -235,12 +261,13 @@ export default function generateProductConfig(
       loginHref,
       profileIconUrl,
     ),
-    appSwitcher: appSwitcherComponent
-      ? {
-          itemComponent: appSwitcherComponent,
-          label: appSwitcherTooltip,
-          tooltip: appSwitcherTooltip,
-        }
-      : null,
+    appSwitcher:
+      appSwitcherComponent && !shouldRenderAtlassianSwitcher
+        ? {
+            itemComponent: appSwitcherComponent,
+            label: appSwitcherTooltip,
+            tooltip: appSwitcherTooltip,
+          }
+        : null,
   };
 }

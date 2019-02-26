@@ -7,7 +7,12 @@ import {
   CardView,
   CardOnClickCallback,
 } from '@atlaskit/media-card';
-import { Context, ImageResizeMode } from '@atlaskit/media-core';
+import {
+  Context,
+  ImageResizeMode,
+  Identifier,
+  ExternalImageIdentifier,
+} from '@atlaskit/media-core';
 import { MediaType } from '@atlaskit/adf-schema';
 import {
   withImageLoader,
@@ -46,7 +51,6 @@ export interface MediaCardProps {
 
 export interface State {
   context?: Context;
-  // externalStatus: CardStatus;
 }
 
 export class MediaCardInternal extends Component<MediaCardProps, State> {
@@ -67,7 +71,20 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
     });
   }
 
+  private renderLoadingCard = () => {
+    const { cardDimensions } = this.props;
+
+    return (
+      <CardView
+        status="loading"
+        mediaItemType="file"
+        dimensions={cardDimensions}
+      />
+    );
+  };
+
   private renderExternal() {
+    const { context } = this.state;
     const {
       cardDimensions,
       resizeMode,
@@ -77,17 +94,21 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       disableOverlay,
     } = this.props;
 
+    if (imageStatus === 'loading' || !url) {
+      return this.renderLoadingCard();
+    }
+
+    const identifier: ExternalImageIdentifier = {
+      dataURI: url,
+      name: url,
+      mediaItemType: 'external-image',
+    };
+
     return (
-      <CardView
-        status={imageStatus || 'loading'}
-        dataURI={url}
+      <Card
+        context={context as any} // context is not really used when the type is external and we want to render the component asap
+        identifier={identifier}
         dimensions={cardDimensions}
-        metadata={
-          {
-            mediaType: 'image',
-            name: url,
-          } as any
-        }
         appearance={appearance}
         resizeMode={resizeMode}
         disableOverlay={disableOverlay}
@@ -116,17 +137,15 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       return this.renderExternal();
     }
 
-    if (!context) {
-      return (
-        <CardView
-          status="loading"
-          mediaItemType={type}
-          dimensions={cardDimensions}
-        />
-      );
+    if (type === 'link') {
+      return null;
     }
 
-    let identifier: any = {
+    if (!context || !id) {
+      return this.renderLoadingCard();
+    }
+
+    const identifier: Identifier = {
       id,
       mediaItemType: type,
       collectionName: collection,

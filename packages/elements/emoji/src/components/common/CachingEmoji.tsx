@@ -1,14 +1,17 @@
-import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import * as React from 'react';
 import { PureComponent } from 'react';
-
+import { shouldUseAltRepresentation } from '../../api/EmojiUtils';
+import {
+  isEmojiDescription,
+  isMediaEmoji,
+  isPromise,
+} from '../../type-helpers';
 import { EmojiDescription, EmojiId } from '../../types';
-import { isMediaEmoji, isPromise } from '../../type-helpers';
 import debug from '../../util/logger';
-import { EmojiContext } from './internal-types';
 import Emoji, { Props as EmojiProps } from './Emoji';
 import EmojiPlaceholder from './EmojiPlaceholder';
-import { shouldUseAltRepresentation } from '../../api/EmojiUtils';
+import { EmojiContext } from './internal-types';
 
 export interface State {
   cachedEmoji?: EmojiDescription;
@@ -42,9 +45,9 @@ export class CachingMediaEmoji extends PureComponent<CachingEmojiProps, State> {
     emoji: PropTypes.object,
   };
 
-  private mounted: boolean;
+  private mounted: boolean = false;
 
-  context: EmojiContext;
+  context!: EmojiContext;
 
   constructor(props: EmojiProps, context: EmojiContext) {
     super(props, context);
@@ -99,7 +102,7 @@ export class CachingMediaEmoji extends PureComponent<CachingEmojiProps, State> {
     debug('Loading image via media cache', emoji.shortName);
     const loadedEmoji = emojiProvider.loadMediaEmoji(emoji, useAlt);
 
-    if (isPromise(loadedEmoji)) {
+    if (isPromise<EmojiDescription>(loadedEmoji)) {
       loadedEmoji
         .then(cachedEmoji => {
           if (this.mounted) {
@@ -109,7 +112,7 @@ export class CachingMediaEmoji extends PureComponent<CachingEmojiProps, State> {
             });
           }
         })
-        .catch(err => {
+        .catch(() => {
           if (this.mounted) {
             this.setState({
               cachedEmoji: undefined,
@@ -119,10 +122,13 @@ export class CachingMediaEmoji extends PureComponent<CachingEmojiProps, State> {
         });
       return undefined;
     }
-    return loadedEmoji;
+    if (isEmojiDescription(loadedEmoji)) {
+      return loadedEmoji;
+    }
+    return undefined;
   }
 
-  private handleLoadError = (emojiId: EmojiId, emoji?: EmojiDescription) => {
+  private handleLoadError = (_emojiId: EmojiId, emoji?: EmojiDescription) => {
     const { invalidImage } = this.state;
 
     if (invalidImage || !emoji) {
