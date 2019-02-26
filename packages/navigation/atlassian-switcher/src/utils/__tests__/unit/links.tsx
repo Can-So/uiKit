@@ -28,8 +28,8 @@ const generateLicenseInformation = (activeProducts: string[]) => {
 };
 
 describe('utils/links', () => {
-  it('Fixed product list should have Home and People', () => {
-    const expectedProducts = ['people', 'home'];
+  it('Fixed product list should have People', () => {
+    const expectedProducts = ['people'];
     const fixedLinks = getFixedProductLinks();
     expect(fixedLinks.map(({ key }) => key)).toMatchObject(expectedProducts);
   });
