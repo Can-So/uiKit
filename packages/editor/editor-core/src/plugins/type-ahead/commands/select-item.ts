@@ -3,7 +3,10 @@ import { Fragment, Node } from 'prosemirror-model';
 import { safeInsert } from 'prosemirror-utils';
 import { analyticsService } from '../../../analytics';
 import { Command } from '../../../types';
-import { isChromeWithSelectionBug } from '../../../utils';
+import {
+  isChromeWithSelectionBug,
+  normaliseNestedLayout,
+} from '../../../utils';
 import { pluginKey, ACTIONS } from '../pm-plugins/main';
 import { TypeAheadHandler, TypeAheadItem } from '../types';
 import { findTypeAheadQuery } from '../utils/find-query-mark';
@@ -118,7 +121,7 @@ export const selectItem = (
          *
          */
       } else if (node.isBlock) {
-        tr = safeInsert(node)(tr);
+        tr = safeInsert(normaliseNestedLayout(state, node))(tr);
 
         /**
          *

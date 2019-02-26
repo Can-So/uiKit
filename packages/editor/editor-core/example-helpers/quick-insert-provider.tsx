@@ -57,6 +57,32 @@ const items: Array<QuickInsertItem> = [
     },
   },
   {
+    title: 'Full width Block extension',
+    icon: () => <DevIcon label="dev" />,
+    action(insert) {
+      return insert({
+        type: 'extension',
+        attrs: {
+          extensionType: 'com.atlassian.confluence.macro.core',
+          extensionKey: 'block-layout-eh',
+          text: 'Full width block extension demo',
+          layout: 'full-width',
+          parameters: {
+            macroParams: {},
+            macroMetadata: {
+              placeholder: [
+                {
+                  data: { url: '' },
+                  type: 'icon',
+                },
+              ],
+            },
+          },
+        },
+      });
+    },
+  },
+  {
     title: 'Lorem ipsum',
     icon: () => <DevIcon label="dev" />,
     action(insert) {
