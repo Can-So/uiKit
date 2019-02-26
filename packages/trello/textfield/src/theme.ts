@@ -1,18 +1,23 @@
-import { ThemeProps } from '@atlaskit/button';
+import { ThemeProps } from '@atlaskit/textfield';
+import {
+  TextFieldThemeProps,
+  TextFieldThemeStyles,
+  TextFieldStyleProps,
+} from './types';
 import { colors } from './colors';
 
-const textField = {
+const textField: TextFieldStyleProps = {
   backgroundColor: {
-    standard: {
-      default: colors.N10,
+    default: {
+      idle: colors.N10,
       hover: colors.N30,
       focus: colors.N0,
     },
     disabled: colors.N30,
   },
   borderColor: {
-    standard: {
-      default: colors.N40,
+    default: {
+      idle: colors.N40,
       hover: colors.N40,
       focus: colors['blue-500'],
     },
@@ -20,7 +25,7 @@ const textField = {
   },
   color: {
     default: {
-      default: colors.N800,
+      idle: colors.N800,
     },
     disabled: colors.N70,
   },
@@ -41,34 +46,36 @@ const getBackgroundColor = (
   if (isFocused) return backgroundColor[appearance].focus;
   if (isInvalid) return;
   if (!backgroundColor[appearance]) {
-    return backgroundColor.standard['default'];
+    return backgroundColor.default['idle'];
   }
-  return backgroundColor[appearance]['default'];
+  return backgroundColor[appearance]['idle'];
 };
 
 const getBorderColor = (
   borderColor,
-  { appearance, isDisabled, isFocused, isInvalid },
+  { appearance, isDisabled, isFocused, isInvalid }: TextFieldThemeProps,
 ) => {
+  if (!borderColor[appearance]) {
+    return borderColor.default['idle'];
+  }
+
   if (isDisabled) return borderColor.disabled;
   if (isFocused) return borderColor[appearance].focus;
   if (isInvalid) return;
-  if (!borderColor[appearance]) {
-    return borderColor.standard['default'];
-  }
-  return borderColor[appearance]['default'];
+
+  return borderColor[appearance]['idle'];
 };
 
 const getColor = (color, { appearance, state, isDisabled }) => {
   if (isDisabled) return color.disabled;
   if (appearance === 'default') {
     if (!color[appearance][state]) {
-      return color.default.default;
+      return color.default.idle;
     }
     return color[appearance][state];
   }
   if (!color[appearance]) {
-    return color.default.default;
+    return color.default.idle;
   }
   return color[appearance];
 };
@@ -78,7 +85,10 @@ const getCursor = (cursor, { isDisabled }) => {
   return cursor.default;
 };
 
-const getTextFieldStyles = (adgContainerStyles, props: typeof ThemeProps) => {
+const getTextFieldStyles = (
+  adgContainerStyles: TextFieldStyleProps,
+  props: TextFieldThemeProps,
+) => {
   return {
     // the "OR" statement kicks in if the `get` function doesn't return a truthy value
     // this is for the situation where you don't want to change the value
@@ -98,20 +108,17 @@ const getTextFieldStyles = (adgContainerStyles, props: typeof ThemeProps) => {
   };
 };
 
-const theme = (
-  adgTheme: Function,
-  { appearance = 'default', state = 'default', ...rest }: typeof ThemeProps,
-) => {
-  const { container: adgContainerStyles, input: adgInputStyles } = adgTheme({
-    appearance,
-    state,
-    ...rest,
-  });
+const theme = (adgTheme: Function, themeProps: TextFieldThemeProps) => {
+  const { container: adgContainerStyles, input: adgInputStyles } = adgTheme(
+    themeProps,
+  );
+
+  console.log('in theme', themeProps.appearance);
 
   return {
     container: {
       ...adgContainerStyles,
-      ...getTextFieldStyles(adgContainerStyles, { appearance, state, ...rest }),
+      ...getTextFieldStyles(adgContainerStyles, themeProps),
     },
     input: {
       ...adgInputStyles,

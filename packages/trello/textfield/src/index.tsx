@@ -1,20 +1,11 @@
 import * as React from 'react';
 import Textfield from '@atlaskit/textfield';
 import nachosTFTheme from './theme';
+import { TextFieldProps } from './types';
 
-export type TextFieldTheme = {
-  container?: {};
-  input?: {};
-};
-
-export type TextFieldProps = {
-  isFocused?: boolean;
-  isInvalid?: boolean;
-  isDisabled?: boolean;
-  theme?: any;
-};
-
-export default (textFieldProps: TextFieldProps) => {
+export default (
+  textFieldProps: TextFieldProps & React.HTMLProps<HTMLButtonElement>,
+) => {
   const nachosTheme = (adgTheme: any, themeProps: TextFieldProps) => ({
     container: {
       ...nachosTFTheme(adgTheme, themeProps).container,
@@ -25,6 +16,8 @@ export default (textFieldProps: TextFieldProps) => {
       ...(textFieldProps.theme && textFieldProps.theme(themeProps).input),
     },
   });
+
+  console.log(...textFieldProps);
 
   return <Textfield {...textFieldProps} theme={nachosTheme} />;
 };
