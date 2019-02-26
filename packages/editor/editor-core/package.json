@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-core",
-  "version": "101.2.0",
+  "version": "101.3.0",
   "description": "A package contains Atlassian editor core functionality",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@atlaskit/activity": "^1.0.1",
-    "@atlaskit/adf-schema": "^1.5.4",
+    "@atlaskit/adf-schema": "^1.6.0",
     "@atlaskit/adf-utils": "^5.7.1",
     "@atlaskit/analytics-gas-types": "^3.2.3",
     "@atlaskit/analytics-listeners": "^4.1.5",
@@ -38,7 +38,7 @@
     "@atlaskit/code": "^8.2.2",
     "@atlaskit/date": "^0.2.0",
     "@atlaskit/droplist": "^7.0.18",
-    "@atlaskit/editor-common": "^32.1.0",
+    "@atlaskit/editor-common": "^32.2.0",
     "@atlaskit/editor-json-transformer": "^4.1.12",
     "@atlaskit/editor-markdown-transformer": "^2.1.12",
     "@atlaskit/emoji": "^55.0.1",
