@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import JiraSwitcher from '../src/components/jira-switcher';
 import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
 import { withAnalyticsLogger } from './helpers';
+import AtlassianSwitcher from '../src';
 
 class JiraSwitcherExample extends Component {
   state = {
@@ -58,7 +58,8 @@ class JiraSwitcherExample extends Component {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <JiraSwitcher
+          <AtlassianSwitcher
+            product="jira"
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />

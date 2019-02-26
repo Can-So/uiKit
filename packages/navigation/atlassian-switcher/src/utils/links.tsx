@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
-import PeopleGlyph from '@atlaskit/icon/glyph/people-group';
 
 import ConfluenceIcon from '@atlaskit/logo/dist/esm/ConfluenceLogo/Icon';
 import JiraSoftwareIcon from '@atlaskit/logo/dist/esm/JiraSoftwareLogo/Icon';
@@ -10,7 +9,8 @@ import JiraServiceDeskIcon from '@atlaskit/logo/dist/esm/JiraServiceDeskLogo/Ico
 import JiraCoreIcon from '@atlaskit/logo/dist/esm/JiraCoreLogo/Icon';
 import AtlassianIcon from '@atlaskit/logo/dist/esm/AtlassianLogo/Icon';
 import { LicenseInformationDataStructure } from '../providers/types';
-import jiraOpsLogo from './assets/jira-ops-logo';
+import JiraOpsLogo from './assets/jira-ops-logo';
+import PeopleLogo from './assets/people';
 import { CustomLink, RecentContainer } from '../types';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { createIcon, createImageIcon, IconType } from './icon-themes';
@@ -80,7 +80,7 @@ export const PRODUCT_DATA_MAP: {
   },
   [ProductKey.JIRA_OPS]: {
     label: 'Jira Ops',
-    Icon: createIcon(jiraOpsLogo, { size: 'small' }),
+    Icon: createIcon(JiraOpsLogo, { size: 'small' }),
     href: '/secure/BrowseProjects.jspa?selectedProjectType=ops',
   },
 };
@@ -93,7 +93,7 @@ export const getFixedProductLinks = (): SwitcherItemType[] => [
   {
     key: 'people',
     label: 'People',
-    Icon: createIcon(PeopleGlyph),
+    Icon: createIcon(PeopleLogo, { size: 'small' }),
     href: `/people`,
   },
   {

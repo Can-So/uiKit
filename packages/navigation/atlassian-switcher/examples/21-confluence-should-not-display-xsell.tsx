@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import ConfluenceSwitcher from '../src/components/confluence-switcher';
 import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
 import { withAnalyticsLogger } from './helpers';
+import AtlassianSwitcher from '../src';
 
 class ConfluenceSwitcherExample extends Component {
   state = {
@@ -55,7 +55,8 @@ class ConfluenceSwitcherExample extends Component {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <ConfluenceSwitcher
+          <AtlassianSwitcher
+            product="confluence"
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />
