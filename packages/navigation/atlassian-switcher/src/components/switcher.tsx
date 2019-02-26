@@ -118,7 +118,6 @@ export default class Switcher extends React.Component<SwitcherProps> {
       return <Skeleton />;
     }
 
-    const canAddProduct = managePermissionData || addProductsPermissionData;
     const hasAdminLinks = managePermissionData || addProductsPermissionData;
     const hasSuggestedLinks = !!(isXFlowEnabledData && suggestedProductLink);
 
@@ -132,17 +131,22 @@ export default class Switcher extends React.Component<SwitcherProps> {
       : [];
 
     const suggestedLinks = hasSuggestedLinks ? [suggestedProductLink!] : [];
-    const tryLozengeText = canAddProduct ? 'Try' : 'Request';
     const recentLinks = getRecentLinkItems(recentContainersData!.data);
     const customLinks = getCustomLinkItems(customLinksData![0]);
 
+    /**
+     * It is essential that switchToLinks reflects the order corresponding nav items
+     * are rendered below in the 'Switch to' section.
+     */
+    const switchToLinks = [
+      ...licensedProductLinks,
+      ...suggestedLinks,
+      ...fixedProductLinks,
+      ...adminLinks,
+    ];
+
     const itemsCount =
-      fixedProductLinks.length +
-      licensedProductLinks.length +
-      suggestedLinks.length +
-      adminLinks.length +
-      recentLinks.length +
-      customLinks.length;
+      switchToLinks.length + recentLinks.length + customLinks.length;
 
     return (
       <NavigationAnalyticsContext data={getAnalyticsContext(itemsCount)}>
@@ -152,59 +156,72 @@ export default class Switcher extends React.Component<SwitcherProps> {
             data={{ duration: this.timeSinceMounted() }}
           />
           <Section sectionId="switchTo" title="Switch to">
-            {licensedProductLinks.map(({ key, label, Icon, href }, idx) => (
+            {licensedProductLinks.map(item => (
               <NavigationAnalyticsContext
-                key={key}
-                data={getItemAnalyticsContext(idx, key, 'product')}
+                key={item.key}
+                data={getItemAnalyticsContext(
+                  switchToLinks.indexOf(item),
+                  item.key,
+                  'product',
+                )}
               >
-                <SwitcherItem icon={<Icon theme="product" />} href={href}>
-                  {label}
+                <SwitcherItem
+                  icon={<item.Icon theme="product" />}
+                  href={item.href}
+                >
+                  {item.label}
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
-            {suggestedLinks.map(({ key, label, Icon }, idx) => (
+            {suggestedLinks.map(item => (
               <NavigationAnalyticsContext
-                key={key}
+                key={item.key}
                 data={getItemAnalyticsContext(
-                  licensedProductLinks.length + idx,
-                  key,
+                  switchToLinks.indexOf(item),
+                  item.key,
                   'try',
                 )}
               >
                 <SwitcherItem
-                  icon={<Icon theme="product" />}
+                  icon={<item.Icon theme="product" />}
                   onClick={this.triggerXFlow}
                 >
-                  {label}
-                  <TryLozenge>{tryLozengeText}</TryLozenge>
+                  {item.label}
+                  <TryLozenge>Try</TryLozenge>
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
-            {fixedProductLinks.map(({ key, label, Icon, href }, idx) => (
+            {fixedProductLinks.map(item => (
               <NavigationAnalyticsContext
-                key={key}
+                key={item.key}
                 data={getItemAnalyticsContext(
-                  suggestedLinks.length + idx,
-                  key,
+                  switchToLinks.indexOf(item),
+                  item.key,
                   'product',
                 )}
               >
-                <SwitcherItem icon={<Icon theme="product" />} href={href}>
-                  {label}
+                <SwitcherItem
+                  icon={<item.Icon theme="product" />}
+                  href={item.href}
+                >
+                  {item.label}
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
-            {adminLinks.map(({ key, label, href, Icon }, idx) => (
+            {adminLinks.map(item => (
               <NavigationAnalyticsContext
-                key={key}
+                key={item.key}
                 data={getItemAnalyticsContext(
-                  fixedProductLinks.length + idx,
-                  key,
+                  switchToLinks.indexOf(item),
+                  item.key,
                   'admin',
                 )}
               >
-                <SwitcherItem icon={<Icon theme="admin" />} href={href}>
-                  {label}
+                <SwitcherItem
+                  icon={<item.Icon theme="admin" />}
+                  href={item.href}
+                >
+                  {item.label}
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}

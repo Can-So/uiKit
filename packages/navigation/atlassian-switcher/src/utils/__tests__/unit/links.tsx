@@ -13,8 +13,6 @@ const CLOUD_ID = 'some-cloud-id';
 const ACTIVE_PRODUCT_STATE = {
   state: 'ACTIVE',
 };
-const FIXED_PRODUCTS_KEYS = ['people', 'home'];
-
 const generateLicenseInformation = (activeProducts: string[]) => {
   const products = activeProducts.reduce(
     (ans: { [productKey: string]: any }, next: string) => {
