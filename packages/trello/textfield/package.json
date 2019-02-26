@@ -6,7 +6,7 @@
   "main": "dist/es5/index.js",
   "module": "dist/es2015/index.js",
   "types": "dist/es5/index.d.ts",
-  "atlaskit:src": "src/index.ts",
+  "atlaskit:src": "./index.ts",
   "sideEffects": false,
   "files": [
     "dist"
@@ -21,6 +21,7 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
+    "@atlaskit/textfield": "^0.1.6",
     "@babel/runtime": "^7.0.0",
     "tslib": "^1.8.0"
   },

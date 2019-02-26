@@ -19,6 +19,7 @@ const textFieldNachosTheme: TextFieldStyleProps = {
       hover: colors.N40,
       focus: colors['blue-500'],
       disabled: colors.N30,
+      invalid: colors['red-500'],
     },
   },
   color: {
@@ -34,7 +35,7 @@ const textFieldNachosTheme: TextFieldStyleProps = {
     disabled: 'not-allowed',
   },
   placeholder: {
-    color: 'blue',
+    color: colors.N200,
   },
 };
 
@@ -57,10 +58,11 @@ export function applyPropertyStyle(
   const { isDisabled, isInvalid, isFocused, isHovered } = props;
 
   let appearanceStyle = propertyStyles[appearance]['idle'];
-  if (isDisabled) appearanceStyle = propertyStyles[appearance].disabled;
-  if (isInvalid) appearanceStyle = '';
-  if (isFocused) appearanceStyle = propertyStyles[appearance].focus;
+  // least to most important precedence
   if (isHovered) appearanceStyle = propertyStyles[appearance].hover;
+  if (isFocused) appearanceStyle = propertyStyles[appearance].focus;
+  if (isInvalid) appearanceStyle = propertyStyles[appearance].invalid;
+  if (isDisabled) appearanceStyle = propertyStyles[appearance].disabled;
 
   return appearanceStyle;
 }

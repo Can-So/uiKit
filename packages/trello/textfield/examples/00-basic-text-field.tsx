@@ -1,31 +1,28 @@
 import * as React from 'react';
-import NachosTextField from '../src';
+import TextField from '../src';
 
 export default function() {
   return (
     <div>
       <label htmlFor="default-value">Default Value</label>
-      <NachosTextField name="default-value" defaultValue="Tacos are yummy!" />
+      <TextField name="default-value" defaultValue="Tacos are yummy!" />
 
       <label htmlFor="focused">Focused</label>
-      <NachosTextField name="focused" autoFocus defaultValue="Focus on me!" />
+      <TextField name="focused" autoFocus defaultValue="Focus on me!" />
       <label htmlFor="invalid">Invalid</label>
-      <NachosTextField
+      <TextField
         name="invalid"
         isInvalid
         defaultValue="Tacos are disgusting!"
       />
       <label htmlFor="disabled">Disabled</label>
-      <NachosTextField
+      <TextField
         name="disabled"
         isDisabled
         defaultValue="can't touch this..."
       />
       <label htmlFor="placeholder">Placeholder</label>
-      <NachosTextField
-        name="placeholder"
-        placeholder="Click here to input..."
-      />
+      <TextField name="placeholder" placeholder="Click here to input..." />
     </div>
   );
 }
