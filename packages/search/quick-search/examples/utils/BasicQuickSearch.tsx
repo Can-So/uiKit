@@ -28,13 +28,13 @@ const data: DataShape[] = [
   },
 ];
 
-const availableResultTypes = {
+const availableResultTypes: { [key: string]: React.ComponentClass<any> } = {
   person: PersonResult,
   object: ObjectResult,
   container: ContainerResult,
 };
 
-const mapResultsDataToComponents = resultData => {
+const mapResultsDataToComponents = (resultData: DataShape[]) => {
   if (!resultData || !resultData.length) {
     return 'Nothin` to see here';
   }
@@ -49,7 +49,7 @@ const mapResultsDataToComponents = resultData => {
   ));
 };
 
-function contains(string, query) {
+function contains(string: string, query: string) {
   return string.toLowerCase().indexOf(query.toLowerCase()) > -1;
 }
 

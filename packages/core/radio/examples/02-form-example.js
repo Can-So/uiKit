@@ -31,9 +31,7 @@ export default class FormExample extends Component<
               <form {...formProps} name="form-example">
                 <CheckboxField name="standalone" value="single-radio">
                   {({ fieldProps }) => (
-                    <Radio {...fieldProps} label="standalone radio">
-                      Single Radio button
-                    </Radio>
+                    <Radio {...fieldProps} label="standalone radio" />
                   )}
                 </CheckboxField>
                 <Field

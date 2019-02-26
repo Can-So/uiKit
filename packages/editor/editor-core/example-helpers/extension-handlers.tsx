@@ -41,6 +41,8 @@ export const extensionHandlers: ExtensionHandlers = {
     switch (extensionKey) {
       case 'block-eh':
         return <BlockExtension {...macroProps} />;
+      case 'block-layout-eh':
+        return <BlockExtension {...macroProps} />;
       case 'bodied-eh':
         return <BodiedExtension {...macroProps} />;
       case 'inline-eh':

@@ -5,6 +5,8 @@ import {
   blockquote,
   typeAheadQuery,
   date,
+  bodiedExtension,
+  extension,
 } from '@atlaskit/editor-test-helpers';
 import {
   selectCurrentItem,
@@ -12,7 +14,7 @@ import {
   selectByIndex,
   selectItem,
 } from '../../../../../plugins/type-ahead/commands/select-item';
-import { datePlugin } from '../../../../../plugins';
+import { datePlugin, extensionPlugin } from '../../../../../plugins';
 
 const createTypeAheadPlugin = ({
   getItems,
@@ -310,6 +312,47 @@ describe('typeahead plugin -> commands -> select-item', () => {
 
       expect(editorView.state.selection.from).toEqual(3);
       expect(editorView.state.selection.to).toEqual(3);
+    });
+
+    it("should normalise a nodes layout if it's being nested.", () => {
+      const plugin = createTypeAheadPlugin();
+      const { editorView } = createEditor({
+        doc: doc(
+          bodiedExtension({
+            extensionKey: 'fake.extension',
+            extensionType: 'atlassian.com.editor',
+          })(p(typeAheadQuery({ trigger: '/' })('/query{<>}'))),
+        ),
+        editorPlugins: [plugin, extensionPlugin],
+      });
+      selectItem(
+        {
+          trigger: '/',
+          selectItem: (state, item, insert) =>
+            insert(
+              state.schema.nodes.extension.createChecked({
+                layout: 'full-width',
+              }),
+            ),
+          getItems: () => [],
+        },
+        { title: '1' },
+      )(editorView.state, editorView.dispatch);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          bodiedExtension({
+            extensionKey: 'fake.extension',
+            extensionType: 'atlassian.com.editor',
+          })(
+            extension({
+              extensionKey: '',
+              extensionType: '',
+              layout: 'default',
+            })(),
+          ),
+        ),
+      );
     });
   });
 });

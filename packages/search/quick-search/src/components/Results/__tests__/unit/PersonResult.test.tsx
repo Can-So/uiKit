@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import Avatar from '@atlaskit/avatar';
 import PersonResult from '../../PersonResult';
@@ -6,7 +6,7 @@ import PersonResult from '../../PersonResult';
 const DUMMY_AVATAR = <Avatar key="test-avatar" />;
 
 describe('Person Result', () => {
-  let personResultWrapper;
+  let personResultWrapper: ReactWrapper;
   beforeEach(() => {
     personResultWrapper = mount(
       <PersonResult resultId="testPerson" name="test" />,

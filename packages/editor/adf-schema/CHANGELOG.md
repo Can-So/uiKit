@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.6.0
+- [minor] [3672ec23ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3672ec23ef):
+
+  - [ED-5788] Add new layout Breakout button for CodeBlock and Layout
+
 ## 1.5.5
 - [patch] [356de07a87](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/356de07a87):
 
