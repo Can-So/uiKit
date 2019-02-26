@@ -7,7 +7,6 @@ import ConfluenceIcon from '@atlaskit/logo/dist/esm/ConfluenceLogo/Icon';
 import JiraSoftwareIcon from '@atlaskit/logo/dist/esm/JiraSoftwareLogo/Icon';
 import JiraServiceDeskIcon from '@atlaskit/logo/dist/esm/JiraServiceDeskLogo/Icon';
 import JiraCoreIcon from '@atlaskit/logo/dist/esm/JiraCoreLogo/Icon';
-import AtlassianIcon from '@atlaskit/logo/dist/esm/AtlassianLogo/Icon';
 import { LicenseInformationDataStructure } from '../providers/types';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
@@ -96,12 +95,6 @@ export const getFixedProductLinks = (): SwitcherItemType[] => [
     Icon: createIcon(PeopleLogo, { size: 'small' }),
     href: `/people`,
   },
-  {
-    key: 'home',
-    label: 'Atlassian Home',
-    Icon: createIcon(AtlassianIcon, { size: 'small' }),
-    href: `/home`,
-  },
 ];
 
 export const getProductLink = (productKey: string): SwitcherItemType => ({
@@ -120,9 +113,9 @@ export const getLicensedProductLinks = (
   licenseInformationData: LicenseInformationDataStructure,
 ): SwitcherItemType[] => {
   return [
-    ProductKey.JIRA_CORE,
     ProductKey.JIRA_SOFTWARE,
     ProductKey.JIRA_SERVICE_DESK,
+    ProductKey.JIRA_CORE,
     ProductKey.JIRA_OPS,
     ProductKey.CONFLUENCE,
   ]

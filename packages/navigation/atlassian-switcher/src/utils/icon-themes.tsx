@@ -13,7 +13,7 @@ const IconBase = styled.div<IconBaseProps>`
   align-items: center;
   width: ${4 * gridSize()}px;
   height: ${4 * gridSize()}px;
-  border-radius: ${gridSize() / 2}px;
+  border-radius: ${gridSize()}px;
   ${elevation.e100};
   background-color: ${({ bgColor }) => bgColor}
   overflow: hidden;
