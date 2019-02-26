@@ -77,6 +77,9 @@ export default class LayoutManager extends Component<
       globalNavigation: {
         'data-test-id': 'GlobalNavigation',
       },
+      navigation: {
+        'data-test-id': 'Navigation',
+      },
     },
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
@@ -268,6 +271,7 @@ export default class LayoutManager extends Component<
 
   renderNavigation = () => {
     const {
+      datasets,
       navigationUIController,
       // eslint-disable-next-line camelcase
       experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
@@ -288,6 +292,8 @@ export default class LayoutManager extends Component<
     const flyoutWidth = EXPERIMENTAL_FULL_WIDTH_FLYOUT
       ? productNavWidth
       : CONTENT_NAV_WIDTH_FLYOUT;
+
+    const dataset = datasets ? datasets.navigation : {};
 
     return (
       <LayoutEventListener
@@ -327,6 +333,7 @@ export default class LayoutManager extends Component<
                   : null;
               return (
                 <NavigationContainer
+                  {...dataset}
                   innerRef={this.getContainerRef}
                   onMouseEnter={this.mouseEnter}
                   onMouseOver={
