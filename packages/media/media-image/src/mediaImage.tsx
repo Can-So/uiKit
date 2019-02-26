@@ -84,6 +84,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
     const {
       context,
       identifier: { id, collectionName },
+      apiConfig,
     } = props;
     this.unsubscribe();
     this.setState({ status: 'loading' });
@@ -117,7 +118,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
           if (fileState.status === 'processed') {
             const blob = await context.getImage(fileId, {
               collection: collectionName,
-              ...this.props.apiConfig,
+              ...apiConfig,
             });
             this.setSourceFromBlob(blob);
           }
