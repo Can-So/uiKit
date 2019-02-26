@@ -732,7 +732,7 @@ function convertTaskItem(schema: Schema, node: Element) {
     });
   }
 
-  const attrs = {};
+  const attrs: { localId?: string | null; state?: string } = {};
   if (id) {
     attrs['localId'] = id.textContent;
   }

@@ -83,7 +83,7 @@ export default (
           const options = {
             parser: 'babylon',
             ...resolvedConfig,
-          };
+          } as prettier.Options;
 
           const exports = [
             '// DO NOT MODIFY THIS FILE, USE `yarn generate:spec`',

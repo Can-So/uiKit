@@ -26,10 +26,12 @@ export const LANGUAGE_MAP = {
   xml: 'xml',
 };
 
-export const supportedLanguages = Object.keys(LANGUAGE_MAP).map(
-  name => LANGUAGE_MAP[name],
-);
+export type LanguageMapKeys = keyof typeof LANGUAGE_MAP;
 
-export function mapCodeLanguage(language: string): string {
+export const supportedLanguages = (Object.keys(LANGUAGE_MAP) as Array<
+  LanguageMapKeys
+>).map(name => LANGUAGE_MAP[name]);
+
+export function mapCodeLanguage(language: LanguageMapKeys): string {
   return LANGUAGE_MAP[language] || language.toLowerCase();
 }
