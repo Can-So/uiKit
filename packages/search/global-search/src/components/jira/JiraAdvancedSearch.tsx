@@ -69,11 +69,7 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
 
   renderDropdownItems = () =>
     itemI18nKeySuffix.map(item => (
-      <DropdownItem
-        //href={getJiraAdvancedSearchUrl(item, this.props.query)}
-        onClick={() => (this.selectedItem = item)}
-        key={item}
-      >
+      <DropdownItem onClick={() => (this.selectedItem = item)} key={item}>
         {getI18nItemName(item)}
       </DropdownItem>
     ));
