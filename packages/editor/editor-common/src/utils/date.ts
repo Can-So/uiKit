@@ -28,7 +28,7 @@ export const todayTimestampInUTC = (): string => {
   return todayInUTC.toString();
 };
 
-const addLeadingZero = val => {
+const addLeadingZero = (val: number) => {
   if (val < 10) {
     return `0${val}`;
   }

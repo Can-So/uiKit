@@ -144,6 +144,19 @@ const calculateHorizontalPlacement = ({
 
   popupClientWidth,
   offset,
+}: {
+  placement: string;
+  targetLeft: number;
+  targetRight: number;
+  targetWidth: number;
+
+  isPopupParentBody: boolean;
+  popupOffsetParentLeft: number;
+  popupOffsetParentRight: number;
+  popupOffsetParentScrollLeft: number;
+
+  popupClientWidth: number;
+  offset: Array<number>;
 }): Position => {
   const position = {} as Position;
 
@@ -193,6 +206,14 @@ const calculateVerticalStickBottom = ({
   popup,
   offset,
   position,
+}: {
+  target: HTMLElement;
+  targetTop: number;
+  targetHeight: number;
+
+  popup: HTMLElement;
+  offset: Array<number>;
+  position: Position;
 }): Position => {
   const scrollParent = findOverflowScrollParent(target);
   const newPos = { ...position };
@@ -226,6 +247,16 @@ const calculateVerticalStickTop = ({
   popup,
   offset,
   position,
+}: {
+  target: HTMLElement;
+  targetTop: number;
+  targetHeight: number;
+  popupOffsetParentHeight: number;
+  popupOffsetParent: HTMLElement;
+
+  popup: HTMLElement;
+  offset: Array<number>;
+  position: Position;
 }): Position => {
   const scrollParent = findOverflowScrollParent(target);
   const newPos = { ...position };
@@ -246,7 +277,7 @@ const calculateVerticalStickTop = ({
           popupOffsetParentHeight -
           (topBoundary + popupOffsetParent.scrollTop + targetHeight);
       } else {
-        newPos.bottom += topBoundary;
+        newPos.bottom = topBoundary + (newPos.bottom || 0);
       }
     }
   }
@@ -267,6 +298,19 @@ const calculateVerticalPlacement = ({
 
   borderBottomWidth,
   offset,
+}: {
+  placement: string;
+  targetTop: number;
+  targetHeight: number;
+
+  isPopupParentBody: boolean;
+
+  popupOffsetParentHeight: number;
+  popupOffsetParentTop: number;
+  popupOffsetParentScrollTop: number;
+
+  borderBottomWidth: number;
+  offset: Array<number>;
 }): Position => {
   const position = {} as Position;
 
