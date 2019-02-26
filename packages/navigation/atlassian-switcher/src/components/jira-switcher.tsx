@@ -6,7 +6,7 @@ import { getSuggestedProductLink } from '../utils/product-links';
 
 interface JiraSwitcherProps {
   cloudId: string;
-  triggerXFlow: (productKey: string) => void;
+  triggerXFlow: (productKey: string, sourceComponent: string) => void;
 }
 
 export default (props: JiraSwitcherProps) => (
