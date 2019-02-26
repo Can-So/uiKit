@@ -1,1 +1,0 @@
-- Improved typings for editor-common

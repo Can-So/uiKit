@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 32.3.0
+- [minor] [b1ff16a33f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ff16a33f):
+
+  - Improved typings for editor-common
+
 ## 32.2.0
 - [minor] [3672ec23ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3672ec23ef):
 
