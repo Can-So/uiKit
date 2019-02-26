@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import TextColor from '../../../../react/marks/textColor';
 
 describe('Renderer - React/Marks/TextColor', () => {
@@ -9,11 +8,11 @@ describe('Renderer - React/Marks/TextColor', () => {
   );
 
   it('should wrap content with <span>-tag', () => {
-    expect(mark.is('span')).to.equal(true);
+    expect(mark.is('span')).toEqual(true);
   });
 
   it('should output correct html', () => {
-    expect(mark.html()).to.equal(
+    expect(mark.html()).toEqual(
       '<span style="color:#ff0000">This is a red text</span>',
     );
   });

@@ -3,13 +3,17 @@ import { keymap } from 'prosemirror-keymap';
 import { Plugin } from 'prosemirror-state';
 import * as keymaps from '../../../keymaps';
 import { trackAndInvoke } from '../../../analytics';
-import { clearFormatting } from '../commands/clear-formatting';
+import { clearFormattingWithAnalytics } from '../commands/clear-formatting';
+import { INPUT_METHOD } from '../../analytics';
 
 export function keymapPlugin(schema: Schema): Plugin {
   const list = {};
   keymaps.bindKeymapWithCommand(
     keymaps.clearFormatting.common!,
-    trackAndInvoke('atlassian.editor.format.clear.keyboard', clearFormatting()),
+    trackAndInvoke(
+      'atlassian.editor.format.clear.keyboard',
+      clearFormattingWithAnalytics(INPUT_METHOD.SHORTCUT),
+    ),
     list,
   );
 

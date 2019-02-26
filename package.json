@@ -130,7 +130,6 @@
     "bolt-query": "^1.1.4",
     "cache-loader": "^1.2.5",
     "chai": "^4.1.2",
-    "chai-as-promised": "^6.0.0",
     "cheerio": "^0.22.0",
     "chromedriver": "^2.43.0",
     "color": "^3.0.0",
@@ -247,7 +246,6 @@
   },
   "dependencies": {
     "@atlaskit/activity": "^1.0.1",
-    "@atlaskit/util-common": "^1.5.2",
     "@atlaskit/util-common-test": "^2.4.2",
     "@atlaskit/util-shared-styles": "^2.10.3",
     "@babel/cli": "^7.1.0",
@@ -262,6 +260,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
+    "@sentry/browser": "^4.6.3",
     "@types/bricks.js": "^1.8.0",
     "@types/bytes": "^2.4.33",
     "@types/chalk": "^2.2.0",

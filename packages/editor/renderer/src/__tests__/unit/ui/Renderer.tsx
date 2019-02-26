@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 import Renderer from '../../../ui/Renderer';
 
@@ -50,7 +49,7 @@ describe('@atlaskit/renderer/ui/Renderer', () => {
     };
 
     const renderer = mount(<Renderer document={doc} />);
-    expect(renderer.find('UnsupportedBlockNode')).to.have.length(1);
+    expect(renderer.find('UnsupportedBlockNode')).toHaveLength(1);
     renderer.unmount();
   });
 
@@ -81,7 +80,7 @@ describe('@atlaskit/renderer/ui/Renderer', () => {
 
     it('should remove stage0 marks if flag is not explicitly set to "stage0"', () => {
       const renderer = mount(<Renderer document={docWithStage0Mark} />);
-      expect(renderer.find('ConfluenceInlineComment')).to.have.length(0);
+      expect(renderer.find('ConfluenceInlineComment')).toHaveLength(0);
       renderer.unmount();
     });
 
@@ -89,7 +88,7 @@ describe('@atlaskit/renderer/ui/Renderer', () => {
       const renderer = mount(
         <Renderer document={docWithStage0Mark} adfStage="stage0" />,
       );
-      expect(renderer.find('ConfluenceInlineComment')).to.have.length(1);
+      expect(renderer.find('ConfluenceInlineComment')).toHaveLength(1);
       renderer.unmount();
     });
   });
@@ -98,10 +97,10 @@ describe('@atlaskit/renderer/ui/Renderer', () => {
     it('should truncate to 95px when truncated prop is true and maxHeight is undefined', () => {
       const renderer = mount(<Renderer truncated={true} document={validDoc} />);
 
-      expect(renderer.find('TruncatedWrapper')).to.have.length(1);
+      expect(renderer.find('TruncatedWrapper')).toHaveLength(1);
 
       const wrapper = renderer.find('TruncatedWrapper').childAt(0);
-      expect(wrapper.props().height).to.equal(95);
+      expect(wrapper.props().height).toEqual(95);
       renderer.unmount();
     });
 
@@ -109,21 +108,21 @@ describe('@atlaskit/renderer/ui/Renderer', () => {
       const renderer = mount(
         <Renderer truncated={true} maxHeight={100} document={validDoc} />,
       );
-      expect(renderer.find('TruncatedWrapper')).to.have.length(1);
-      expect(renderer.find('TruncatedWrapper').props().height).to.equal(100);
+      expect(renderer.find('TruncatedWrapper')).toHaveLength(1);
+      expect(renderer.find('TruncatedWrapper').props().height).toEqual(100);
 
       renderer.unmount();
     });
 
     it("shouldn't truncate when truncated prop is undefined and maxHeight is defined", () => {
       const renderer = mount(<Renderer maxHeight={100} document={validDoc} />);
-      expect(renderer.find('TruncatedWrapper')).to.have.length(0);
+      expect(renderer.find('TruncatedWrapper')).toHaveLength(0);
       renderer.unmount();
     });
 
     it("shouldn't truncate when truncated prop is undefined and maxHeight is undefined", () => {
       const renderer = mount(<Renderer document={validDoc} />);
-      expect(renderer.find('TruncatedWrapper')).to.have.length(0);
+      expect(renderer.find('TruncatedWrapper')).toHaveLength(0);
       renderer.unmount();
     });
   });

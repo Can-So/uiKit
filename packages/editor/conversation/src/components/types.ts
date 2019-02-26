@@ -65,4 +65,6 @@ export interface SharedProps {
   disableScrollTo?: boolean;
   allowFeedbackAndHelpButtons?: boolean;
   sendAnalyticsEvent: SendAnalyticsEvent;
+
+  portal?: HTMLElement;
 }

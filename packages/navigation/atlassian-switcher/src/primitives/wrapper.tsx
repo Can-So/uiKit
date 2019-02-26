@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { gridSize, colors } from '@atlaskit/theme';
-import { ManageButton } from './';
+import ManageButton from './manage-button';
 
 const Wrapper = styled.div`
   height: calc(100vh - 3 * ${gridSize()}px);
@@ -24,18 +24,33 @@ const Footer = styled.footer`
   background-color: ${colors.N0};
 `;
 
-export default ({ children }: { children: React.ReactNode }) => {
-  const manageButton = React.Children.toArray(children).filter(
-    child => React.isValidElement(child) && child.type === ManageButton,
-  );
-  const items = React.Children.toArray(children).filter(
-    child => React.isValidElement(child) && child.type !== ManageButton,
-  );
-
-  return (
-    <Wrapper>
-      <Body>{items}</Body>
-      {manageButton.length ? <Footer>{manageButton}</Footer> : null}
-    </Wrapper>
-  );
+type SwitcherWrapperProps = {
+  children: React.ReactNode;
+  onRender?: () => void;
 };
+
+class SwitcherWrapper extends React.Component<SwitcherWrapperProps> {
+  render() {
+    const { children } = this.props;
+
+    const manageButton = React.Children.toArray(children).filter(
+      child =>
+        React.isValidElement(child) &&
+        React.Children.only(child).type === ManageButton,
+    );
+    const items = React.Children.toArray(children).filter(
+      child =>
+        React.isValidElement(child) &&
+        React.Children.only(child).type !== ManageButton,
+    );
+
+    return (
+      <Wrapper>
+        <Body>{items}</Body>
+        {manageButton.length ? <Footer>{manageButton}</Footer> : null}
+      </Wrapper>
+    );
+  }
+}
+
+export default SwitcherWrapper;

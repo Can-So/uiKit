@@ -3,9 +3,9 @@ import {
   defaultCollectionName,
   createUploadContext,
 } from '@atlaskit/media-test-helpers';
-import { Card, CardEvent } from '@atlaskit/media-card';
-import { MediaViewer } from '@atlaskit/media-viewer';
-import { FileDetails, FileIdentifier, Identifier } from '@atlaskit/media-core';
+import { Card } from '@atlaskit/media-card';
+import { MediaViewerDataSource } from '@atlaskit/media-viewer';
+import { FileIdentifier } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
 import { SelectWrapper, OptionsWrapper } from '../example-helpers/styled';
@@ -30,7 +30,6 @@ export type TenantFileRecord = {
 export type DataSourceType = 'collection' | 'list';
 export interface State {
   events: Array<TenantFileRecord>;
-  selectedItem?: Identifier;
   dataSourceType: DataSourceType;
   popup?: Popup;
 }
@@ -80,16 +79,21 @@ export default class Example extends React.Component<{}, State> {
     );
   };
 
-  private onCardClick = (occurrenceKey: string = '') => (event: CardEvent) => {
-    if (event.mediaItemDetails) {
-      this.setState({
-        selectedItem: {
-          id: (event.mediaItemDetails as FileDetails).id,
-          occurrenceKey,
-          mediaItemType: 'file',
-        },
-      });
-    }
+  private getMediaViewerDataSource = (): MediaViewerDataSource => {
+    const { dataSourceType, events } = this.state;
+    const list: FileIdentifier[] = events.map(event => {
+      const identifier: FileIdentifier = {
+        id: event.id,
+        occurrenceKey: event.occurrenceKey || '',
+        mediaItemType: 'file',
+      };
+
+      return identifier;
+    });
+
+    return dataSourceType === 'collection'
+      ? { collectionName: defaultCollectionName }
+      : { list };
   };
 
   private renderCards = () => {
@@ -112,50 +116,18 @@ export default class Example extends React.Component<{}, State> {
               width: 200,
               height: 200,
             }}
-            onClick={this.onCardClick(identifier.occurrenceKey)}
+            shouldOpenMediaViewer={true}
+            mediaViewerDataSource={this.getMediaViewerDataSource()}
           />
         </div>
       );
     });
   };
 
-  private onCloseMediaViewer = () => {
-    this.setState({ selectedItem: undefined });
-  };
-
   private onDataSourceChange = (event: { value: DataSourceType }) => {
     this.setState({
       dataSourceType: event.value,
     });
-  };
-
-  private renderMediaViewer = () => {
-    const { dataSourceType, selectedItem, events } = this.state;
-    if (!selectedItem) {
-      return null;
-    }
-    const list: FileIdentifier[] = events.map(event => {
-      const identifier: FileIdentifier = {
-        id: event.id,
-        occurrenceKey: event.occurrenceKey || '',
-        mediaItemType: 'file',
-      };
-
-      return identifier;
-    });
-    const dataSource =
-      dataSourceType === 'collection'
-        ? { collectionName: defaultCollectionName }
-        : { list };
-    return (
-      <MediaViewer
-        context={context}
-        selectedItem={selectedItem}
-        dataSource={dataSource}
-        collectionName={defaultCollectionName}
-        onClose={this.onCloseMediaViewer}
-      />
-    );
   };
 
   render() {
@@ -180,7 +152,6 @@ export default class Example extends React.Component<{}, State> {
           </SelectWrapper>
         </OptionsWrapper>
         <div>{this.renderCards()}</div>
-        {this.renderMediaViewer()}
       </React.Fragment>
     );
   }

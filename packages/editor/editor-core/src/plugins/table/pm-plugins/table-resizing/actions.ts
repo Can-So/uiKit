@@ -2,15 +2,18 @@ import { TableMap } from 'prosemirror-tables';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
+import { findDomRefAtPos } from 'prosemirror-utils';
 import {
   tableCellMinWidth,
   akEditorTableNumberColumnWidth,
+  akEditorTableToolbarSize,
 } from '@atlaskit/editor-common';
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
 
 import Resizer from './resizer/resizer';
 import ResizeState from './resizer/resizeState';
+import { pluginKey as resizePluginKey } from './plugin';
 
 import { getPluginState } from '../main';
 import { updateRightShadow } from '../../nodeviews/TableComponent';
@@ -20,7 +23,7 @@ import {
   getTableWidth,
   insertColgroupFromNode as recreateResizeColsByNode,
 } from '../../utils';
-
+import { closestElement } from '../../../../utils';
 import { getLayoutSize, tableLayoutToSize } from './utils';
 
 export function updateColumnWidth(view, cell, movedWidth, resizer) {
@@ -112,6 +115,43 @@ export function resizeColumn(view, cell, width, resizer) {
 
   return newState;
 }
+
+export const updateResizeHandle = (view: EditorView) => {
+  const { state } = view;
+  const { activeHandle } = resizePluginKey.getState(state);
+  if (activeHandle === -1) {
+    return false;
+  }
+
+  const $cell = view.state.doc.resolve(activeHandle);
+  const tablePos = $cell.start(-1) - 1;
+  const tableWrapperRef = findDomRefAtPos(
+    tablePos,
+    view.domAtPos.bind(view),
+  ) as HTMLDivElement;
+
+  const resizeHandleRef = tableWrapperRef.querySelector(
+    `.${ClassName.COLUMN_RESIZE_HANDLE}`,
+  ) as HTMLDivElement;
+
+  const tableRef = tableWrapperRef.querySelector(`table`) as HTMLTableElement;
+
+  if (tableRef && resizeHandleRef) {
+    const cellRef = findDomRefAtPos(
+      activeHandle,
+      view.domAtPos.bind(view),
+    ) as HTMLTableCellElement;
+    const tableActive = closestElement(tableRef, `.${ClassName.WITH_CONTROLS}`);
+    resizeHandleRef.style.height = `${
+      tableActive
+        ? tableRef.offsetHeight + akEditorTableToolbarSize
+        : tableRef.offsetHeight
+    }px`;
+
+    resizeHandleRef.style.left = `${cellRef.offsetLeft +
+      cellRef.offsetWidth}px`;
+  }
+};
 
 /**
  * Updates the column controls on resize

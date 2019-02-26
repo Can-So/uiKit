@@ -239,8 +239,12 @@ export default class Page {
   }
 
   // Wait
-  waitForSelector(selector, options = {}) {
-    return this.browser.waitForExist(selector, options.timeout || WAIT_TIMEOUT);
+  waitForSelector(selector, options = {}, reverse = false) {
+    return this.browser.waitForExist(
+      selector,
+      options.timeout || WAIT_TIMEOUT,
+      reverse,
+    );
   }
 
   waitForVisible(selector, options = {}) {

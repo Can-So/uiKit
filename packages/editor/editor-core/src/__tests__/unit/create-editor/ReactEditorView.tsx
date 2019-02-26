@@ -28,7 +28,9 @@ import {
   INPUT_METHOD,
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
+  addAnalytics,
 } from '../../../plugins/analytics';
+import { analyticsService } from '../../../analytics';
 
 const portalProviderAPI: any = {
   render() {},
@@ -216,11 +218,96 @@ describe(name, () => {
       });
     });
 
+    describe('when an invalid transaction is dispatched', () => {
+      let wrapper;
+      let editor;
+      let invalidTr;
+
+      /** dispatches an invalid transaction which adds a code block with a date node child */
+      const dispatchInvalidTransaction = (tr = editor.view.state.tr) => {
+        const { date, codeBlock } = editor.view.state.schema.nodes;
+        invalidTr = tr.replaceRangeWith(
+          1,
+          1,
+          codeBlock.create({}, date.create()),
+        );
+        editor.view.dispatch(invalidTr);
+      };
+
+      beforeEach(() => {
+        wrapper = mountWithIntl(
+          <ReactEditorView
+            editorProps={{
+              allowCodeBlocks: true,
+              allowDate: true,
+            }}
+            providerFactory={ProviderFactory.create({})}
+            portalProviderAPI={portalProviderAPI}
+            onEditorCreated={() => {}}
+            onEditorDestroyed={() => {}}
+          />,
+        );
+        editor = wrapper.instance() as ReactEditorView;
+      });
+
+      it('should not throw error', () => {
+        expect(() => dispatchInvalidTransaction()).not.toThrowError();
+      });
+
+      it('sends V2 analytics event', () => {
+        jest.spyOn(analyticsService, 'trackEvent');
+        dispatchInvalidTransaction();
+
+        expect(analyticsService.trackEvent).toHaveBeenCalledWith(
+          'atlaskit.fabric.editor.invalidtransaction',
+        );
+      });
+
+      it('sends V3 analytics event with info on failed transaction', () => {
+        const { eventDispatcher } = wrapper.instance() as ReactEditorView;
+        jest.spyOn(eventDispatcher, 'emit');
+
+        const analyticsEventPayload: AnalyticsEventPayload = {
+          action: ACTION.CLICKED,
+          actionSubject: ACTION_SUBJECT.BUTTON,
+          actionSubjectId: ACTION_SUBJECT_ID.BUTTON_HELP,
+          attributes: { inputMethod: INPUT_METHOD.SHORTCUT },
+          eventType: EVENT_TYPE.UI,
+        };
+
+        dispatchInvalidTransaction(
+          // add v3 analytics meta to transaction as we want to check this info is sent on
+          addAnalytics(editor.view.state.tr, analyticsEventPayload),
+        );
+        expect(eventDispatcher.emit).toHaveBeenCalledWith(analyticsEventKey, {
+          payload: {
+            action: 'dispatchedInvalidTransaction',
+            actionSubject: 'editor',
+            eventType: 'operational',
+            attributes: {
+              analyticsEventPayloads: [
+                {
+                  channel: undefined,
+                  payload: analyticsEventPayload,
+                },
+              ],
+            },
+          },
+        });
+      });
+
+      it('does not apply the transaction', () => {
+        const originalState = editor.editorState;
+        dispatchInvalidTransaction();
+        expect(editor.editorState).toEqual(originalState);
+      });
+    });
+
     it('should call onEditorCreated once the editor is initialised', () => {
       let handleEditorCreated = jest.fn();
       let wrapper = mountWithIntl(
         <ReactEditorView
-          editorProps={{ appearance: 'message' }}
+          editorProps={{ appearance: 'comment' }}
           providerFactory={new ProviderFactory()}
           portalProviderAPI={portalProviderAPI}
           onEditorCreated={handleEditorCreated}
@@ -248,7 +335,7 @@ describe(name, () => {
       let handleEditorDestroyed = jest.fn();
       const wrapper = mountWithIntl(
         <ReactEditorView
-          editorProps={{ appearance: 'message' }}
+          editorProps={{ appearance: 'comment' }}
           providerFactory={new ProviderFactory()}
           portalProviderAPI={portalProviderAPI}
           onEditorCreated={() => {}}
@@ -337,7 +424,7 @@ describe(name, () => {
         let handleEditorDestroyed = jest.fn();
         const wrapper = mountWithIntl(
           <ReactEditorView
-            editorProps={{ appearance: 'message' }}
+            editorProps={{ appearance: 'comment' }}
             providerFactory={new ProviderFactory()}
             portalProviderAPI={portalProviderAPI}
             onEditorCreated={() => {}}

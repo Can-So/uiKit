@@ -1,0 +1,79 @@
+{
+    "version": 1,
+    "type": "doc",
+    "content": [
+      {
+        "type": "panel",
+        "attrs": {
+          "panelType": "info"
+        },
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Lorem Ipsum",
+                "marks": [
+                  {
+                    "type": "strong"
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "panel",
+        "attrs": {
+          "panelType": "success"
+        },
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "\"text\": \" is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "panel",
+        "attrs": {
+          "panelType": "error"
+        },
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "https://www.google.com/search?q=long+link+example&rlz=1C5CHFA_enAU738AU739&oq=long+link+example&aqs=chrome..69i57.6100j0j7&sourceid=chrome&ie=UTF-8",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://www.google.com/search?q=long+link+example&rlz=1C5CHFA_enAU738AU739&oq=long+link+example&aqs=chrome..69i57.6100j0j7&sourceid=chrome&ie=UTF-8"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

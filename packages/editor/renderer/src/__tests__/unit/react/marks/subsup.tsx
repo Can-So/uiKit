@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import SubSup from '../../../../react/marks/subsup';
 
 describe('Renderer - React/Marks/Subsup', () => {
@@ -8,11 +7,11 @@ describe('Renderer - React/Marks/Subsup', () => {
     const mark = shallow(<SubSup type="sub">This is sub</SubSup>);
 
     it('should wrap content with <sub>-tag', () => {
-      expect(mark.is('sub')).to.equal(true);
+      expect(mark.is('sub')).toEqual(true);
     });
 
     it('should output correct html', () => {
-      expect(mark.html()).to.equal('<sub>This is sub</sub>');
+      expect(mark.html()).toEqual('<sub>This is sub</sub>');
     });
   });
 
@@ -20,11 +19,11 @@ describe('Renderer - React/Marks/Subsup', () => {
     const mark = shallow(<SubSup type="sup">This is sup</SubSup>);
 
     it('should wrap content with <sup>-tag', () => {
-      expect(mark.is('sup')).to.equal(true);
+      expect(mark.is('sup')).toEqual(true);
     });
 
     it('should output correct html', () => {
-      expect(mark.html()).to.equal('<sup>This is sup</sup>');
+      expect(mark.html()).toEqual('<sup>This is sup</sup>');
     });
   });
 });

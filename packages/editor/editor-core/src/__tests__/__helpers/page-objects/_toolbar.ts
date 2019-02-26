@@ -41,5 +41,6 @@ const toolbarMenuItemsSelectors = {
 };
 
 export async function clickToolbarMenu(page: Page, menu: ToolbarMenuItem) {
+  await page.waitForSelector(toolbarMenuItemsSelectors[menu]);
   await page.click(toolbarMenuItemsSelectors[menu]);
 }

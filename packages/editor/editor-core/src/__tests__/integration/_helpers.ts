@@ -76,13 +76,6 @@ export const fullpageWithImport: EditorHelper = {
   placeholder: '.ProseMirror',
 };
 
-export const message: EditorHelper = {
-  name: 'message',
-  appearance: 'message',
-  path: getExampleUrl('editor', 'editor-core', 'message'),
-  placeholder: '.ProseMirror',
-};
-
 export const editors = [comment, fullpage];
 
 export const clipboardHelper = getExampleUrl(

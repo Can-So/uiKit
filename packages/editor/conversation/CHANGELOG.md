@@ -1,5 +1,21 @@
 # @atlaskit/conversation
 
+## 12.1.0
+- [minor] [b9a541a266](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9a541a266):
+
+  - Add ability to pass down a portal prop to the renderer
+
+## 12.0.2
+- [patch] [a3875fd978](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3875fd978):
+
+  - Don't auto scroll editor into view on reply
+
+## 12.0.1
+- Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+  - @atlaskit/comment@6.0.43
+  - @atlaskit/editor-core@101.0.0
+  - @atlaskit/renderer@40.0.0
+
 ## 12.0.0
 - [major] [dce41f798f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dce41f798f):
 

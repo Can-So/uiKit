@@ -1,54 +1,67 @@
-import { initEditor, clearEditor, insertTable, snapshot } from '../_utils';
-import { selectTableDisplayOption } from './_table-utils';
+import {
+  snapshot,
+  initFullPageEditorWithAdf,
+  initCommentEditorWithAdf,
+} from '../_utils';
+import * as adf from './__fixtures__/default-table.adf.json';
+import {
+  clickFirstCell,
+  clickTableOptions,
+  clickCellOptions,
+  getSelectorForTableCell,
+  selectCellOption,
+} from '../../__helpers/page-objects/_table';
 
-describe.skip('Snapshot Test: table floating toolbar', () => {
-  ['full-page'].forEach(appearance => {
-    let page;
+describe('Table floating toolbar:fullpage', () => {
+  let page;
+  beforeAll(async () => {
+    // @ts-ignore
+    page = global.page;
+    await initFullPageEditorWithAdf(page, adf);
+    await clickFirstCell(page);
+  });
 
-    describe(`${appearance}`, () => {
-      beforeAll(async () => {
-        // @ts-ignore
-        page = global.page;
-        await initEditor(page, appearance);
-      });
+  it('display options', async () => {
+    await clickTableOptions(page);
+    await snapshot(page);
+  });
 
-      beforeEach(async () => {
-        await clearEditor(page);
-        await insertTable(page);
-      });
+  it('display cell options', async () => {
+    await getSelectorForTableCell({ row: 2, cell: 2 });
+    await clickCellOptions(page);
+    await snapshot(page);
+  });
 
-      it('table display options', async () => {
-        const headerRowOptionSelector =
-          'div[data-role="droplistContent"] span[role="button"]:nth-of-type(1)';
-        const headerColumnOptionSelector =
-          'div[data-role="droplistContent"] span[role="button"]:nth-of-type(2)';
-        const numberedColumnOptionSelector =
-          'div[data-role="droplistContent"] span[role="button"]:nth-of-type(3)';
+  it('display cell background', async () => {
+    await getSelectorForTableCell({ row: 2, cell: 2 });
+    await selectCellOption(page, 'Cell background');
+    await snapshot(page);
+  });
+});
 
-        // Remove default header row styling
-        await selectTableDisplayOption(page, headerRowOptionSelector);
-        await snapshot(page);
-        // Add header row and column options
-        await selectTableDisplayOption(page, headerColumnOptionSelector);
-        await selectTableDisplayOption(page, headerRowOptionSelector);
-        await snapshot(page);
-        // Add numbered column
-        await selectTableDisplayOption(page, numberedColumnOptionSelector);
-        await snapshot(page);
-        // Remove header column style
-        await selectTableDisplayOption(page, headerColumnOptionSelector);
-        await snapshot(page);
-        // Remove header row style
-        await selectTableDisplayOption(page, headerRowOptionSelector);
-        await snapshot(page);
-        // Re-add header column style
-        await selectTableDisplayOption(page, headerColumnOptionSelector);
-        await snapshot(page);
-        // Remove header column style and numbered columns
-        await selectTableDisplayOption(page, headerColumnOptionSelector);
-        await selectTableDisplayOption(page, numberedColumnOptionSelector);
-        await snapshot(page);
-      });
-    });
+describe('Table floating toolbar:comment', () => {
+  let page;
+  beforeAll(async () => {
+    // @ts-ignore
+    page = global.page;
+    await initCommentEditorWithAdf(page, adf);
+    await clickFirstCell(page);
+  });
+
+  it('display options', async () => {
+    await clickTableOptions(page);
+    await snapshot(page);
+  });
+
+  it('display cell options', async () => {
+    await getSelectorForTableCell({ row: 2, cell: 2 });
+    await clickCellOptions(page);
+    await snapshot(page);
+  });
+
+  it('display cell background', async () => {
+    await getSelectorForTableCell({ row: 2, cell: 2 });
+    await selectCellOption(page, 'Cell background');
+    await snapshot(page);
   });
 });

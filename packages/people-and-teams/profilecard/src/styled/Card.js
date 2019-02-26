@@ -1,7 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { akBorderRadius } from '@atlaskit/util-shared-styles';
-import { gridSize, math, fontSizeSmall } from '@atlaskit/theme';
+import { borderRadius, gridSize, math, fontSizeSmall } from '@atlaskit/theme';
 
 import {
   headerBgColor,
@@ -95,7 +94,7 @@ export const JobTitleLabel = styled.span`
 export const AppTitleLabel = styled.span`
   background: ${appLabelBgColor};
   color: ${appLabelTextColor};
-  border-radius: ${akBorderRadius};
+  border-radius: ${borderRadius()};
   padding: 0 6px;
   width: fit-content;
   font-weight: bold;

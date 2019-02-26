@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 32.2.0
+- [minor] [3672ec23ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3672ec23ef):
+
+  - [ED-5788] Add new layout Breakout button for CodeBlock and Layout
+
 ## 32.1.0
 - [minor] [5dc1e046b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dc1e046b2):
 

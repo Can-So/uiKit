@@ -16,6 +16,7 @@ import { name, version } from '../package.json';
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { DevTools } from '../example-helpers/DevTools';
+import withSentry from '../example-helpers/withSentry';
 
 const SAVE_ACTION = () => console.log('Save');
 const CANCEL_ACTION = () => console.log('Cancel');
@@ -59,7 +60,7 @@ export type State = {
   isExpanded?: boolean;
 };
 
-export class CommentEditorWithFeedback extends React.Component<Props, State> {
+class CommentEditorWithFeedbackComponent extends React.Component<Props, State> {
   state = {
     hasJquery: false,
     isExpanded: false,
@@ -194,6 +195,10 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
     document.body.appendChild(scriptElem);
   };
 }
+
+export const CommentEditorWithFeedback = withSentry(
+  CommentEditorWithFeedbackComponent,
+);
 
 export default function CommentExample(props?: Props) {
   return <CommentEditorWithFeedback {...props} />;

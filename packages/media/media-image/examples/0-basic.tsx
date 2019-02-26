@@ -1,143 +1,112 @@
 import * as React from 'react';
 import { Component } from 'react';
 import FieldText from '@atlaskit/field-text';
-import { Auth, isClientBasedAuth } from '@atlaskit/media-core';
 import {
   genericFileId,
-  defaultParams,
-  defaultCollectionName,
-  StoryBookAuthProvider,
+  gifFileId,
+  largeImageFileId,
+  imageFileId,
+  docFileId,
+  errorFileId,
+  createStorybookContext,
 } from '@atlaskit/media-test-helpers';
+import Spinner from '@atlaskit/spinner';
+import Select from '@atlaskit/select';
 import { MediaImage } from '../src';
+import { OptionsWrapper, MediaImageWrapper } from '../example-helpers/styled';
 
 export interface ExampleProps {}
 
+export type MediaImageId = {
+  label: string;
+  value: any;
+};
 export interface ExampleState {
-  token: string;
-  imageId: string;
-  collectionName: string;
-  clientId: string;
-  baseUrl: string;
+  imageId: MediaImageId;
+  width: number;
+  height: number;
 }
 
-export default class Example extends Component<ExampleProps, ExampleState> {
-  constructor(props: ExampleProps) {
-    super(props);
+const context = createStorybookContext();
+const imageIds: MediaImageId[] = [
+  { label: 'Generic', value: genericFileId },
+  { label: 'Gif', value: gifFileId },
+  { label: 'Large', value: largeImageFileId },
+  { label: 'Image', value: imageFileId },
+  { label: 'Doc', value: docFileId },
+  { label: 'Error', value: errorFileId },
+];
+class Example extends Component<ExampleProps, ExampleState> {
+  state: ExampleState = {
+    imageId: imageIds[0],
+    width: 100,
+    height: 100,
+  };
 
-    this.state = {
-      token: '',
-      imageId: genericFileId.id,
-      collectionName: defaultCollectionName,
-      clientId: defaultParams.clientId,
-      baseUrl: defaultParams.baseUrl,
-    };
-  }
-
-  componentDidMount() {
-    const authProvider = StoryBookAuthProvider.create(false);
-    authProvider({ collectionName: defaultCollectionName }).then(
-      (auth: Auth) => {
-        this.setState({
-          token: auth.token,
-        });
-
-        if (isClientBasedAuth(auth)) {
-          this.setState({
-            clientId: auth.clientId,
-          });
-        }
-      },
-    );
-  }
-
-  onIdChange = (e: any) => {
+  onWidthChange = (e: any) => {
     this.setState({
-      imageId: e.target.value,
+      width: parseInt(e.currentTarget.value),
     });
   };
 
-  onCollectionChange = (e: any) => {
+  onHeightChange = (e: any) => {
     this.setState({
-      collectionName: e.target.value,
-    });
-  };
-
-  onTokenChange = (e: any) => {
-    this.setState({
-      token: e.target.value,
-    });
-  };
-
-  onClientIdChange = (e: any) => {
-    this.setState({
-      clientId: e.target.value,
-    });
-  };
-
-  onBaseUrlChange = (e: any) => {
-    this.setState({
-      baseUrl: e.target.value,
+      height: parseInt(e.currentTarget.value),
     });
   };
 
   render() {
-    const { token, imageId, collectionName, clientId, baseUrl } = this.state;
-    const apiConfig = {
-      token,
-      clientId,
-      baseUrl,
-    };
+    const { imageId, width, height } = this.state;
 
     return (
       <div>
-        <div
-          style={{
-            display: 'flex',
-            padding: '10px',
-          }}
-        >
-          <div>
-            <FieldText
-              label="Image id"
-              placeholder="Image id..."
-              value={imageId}
-              onChange={this.onIdChange}
-            />
-            <FieldText
-              label="Collection name"
-              placeholder="Collection name..."
-              value={collectionName}
-              onChange={this.onCollectionChange}
-            />
-            <FieldText
-              label="Token"
-              placeholder="Token..."
-              value={token}
-              onChange={this.onTokenChange}
-            />
-            <FieldText
-              label="Client id"
-              placeholder="Client id..."
-              value={clientId}
-              onChange={this.onClientIdChange}
-            />
-            <FieldText
-              label="Service host"
-              placeholder="Service host..."
-              value={baseUrl}
-              onChange={this.onBaseUrlChange}
-            />
-          </div>
-          <div style={{ marginLeft: 'auto' }}>
-            <MediaImage
-              id={imageId}
-              mediaApiConfig={apiConfig}
-              collectionName={collectionName}
-              width={300}
-            />
-          </div>
-        </div>
+        <OptionsWrapper>
+          <Select
+            options={imageIds}
+            defaultValue={imageId}
+            onChange={(imageId: any) => {
+              this.setState({ imageId });
+            }}
+          />
+          <FieldText
+            label="width"
+            placeholder="width"
+            value={`${width}`}
+            onChange={this.onWidthChange}
+          />
+          <FieldText
+            label="height"
+            placeholder="height"
+            value={`${height}`}
+            onChange={this.onHeightChange}
+          />
+        </OptionsWrapper>
+        <MediaImageWrapper>
+          <MediaImage
+            identifier={imageId.value}
+            context={context}
+            apiConfig={{ width, height }}
+          >
+            {({ loading, error, data }) => {
+              if (loading) {
+                return <Spinner />;
+              }
+
+              if (error) {
+                return <div>Error :(</div>;
+              }
+
+              if (!data) {
+                return null;
+              }
+
+              return <img src={data.src} />;
+            }}
+          </MediaImage>
+        </MediaImageWrapper>
       </div>
     );
   }
 }
+
+export default () => <Example />;
