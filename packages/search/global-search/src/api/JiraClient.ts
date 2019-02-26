@@ -1,4 +1,4 @@
-import get from 'lodash.get';
+import * as get from 'lodash/get';
 import {
   RequestServiceOptions,
   utils,
