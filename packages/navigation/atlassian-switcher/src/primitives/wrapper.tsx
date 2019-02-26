@@ -4,8 +4,10 @@ import { gridSize, colors } from '@atlaskit/theme';
 import ManageButton from './manage-button';
 
 const Wrapper = styled.div`
+  box-sizing: border-box;
   height: calc(100vh - 3 * ${gridSize()}px);
   padding-right: ${gridSize() * 4}px;
+  padding-top: 5px;
 `;
 
 const Body = styled.div`

@@ -14,13 +14,12 @@ const SectionTitle = styled.h1`
   ${typography.h100};
   text-transform: uppercase;
   margin-bottom: ${gridSize()}px;
+  margin-left: ${gridSize()}px;
 `;
 
 type SectionProps = {
   sectionId: string;
   title: string;
-  isAdmin?: boolean;
-  isCustom?: boolean;
   children?: React.ReactNode;
 };
 
@@ -32,22 +31,12 @@ type SectionAnalyticsContext = {
 };
 
 const Section = (props: SectionProps) => {
-  const { title, isAdmin = false, isCustom = false, children } = props;
+  const { title, children } = props;
 
-  const childrenWithAddedProps = React.Children.map(
-    children,
-    child =>
-      React.isValidElement(child) &&
-      React.cloneElement(child as JSX.Element, {
-        isAdmin,
-        isCustom,
-      }),
-  );
-
-  return childrenWithAddedProps.length ? (
+  return React.Children.count(children) ? (
     <SectionContainer>
       <SectionTitle>{title}</SectionTitle>
-      {childrenWithAddedProps}
+      {children}
     </SectionContainer>
   ) : null;
 };
