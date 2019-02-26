@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import type { Interpolation } from 'emotion';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
 const gridSize = gridSizeFn();
@@ -13,7 +14,11 @@ const listBaseStyles = {
   width: '100%',
 };
 
-export const Container = (props: *) => {
+export type ContainerProps = {
+  styles: Interpolation,
+};
+
+export const Container = (props: ContainerProps) => {
   const { styles, ...rest } = props;
   return <div css={styles} {...rest} />;
 };
