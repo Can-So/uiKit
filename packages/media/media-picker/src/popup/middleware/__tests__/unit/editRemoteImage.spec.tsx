@@ -42,7 +42,7 @@ describe('editRemoteImage', () => {
       item: file,
       collectionName,
     };
-    getImageUrl.mockRejectedValue(Promise.reject('some-error'));
+    getImageUrl.mockImplementation(() => Promise.reject('some-error'));
 
     await editRemoteImage(store, action);
 
