@@ -143,6 +143,7 @@ const InsertButton = () => `
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER} {
     position: absolute;
     z-index: ${akEditorUnitZIndex};
+    bottom: 1px;
   }
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER},
   .${ClassName.CONTROLS_INSERT_BUTTON} {
@@ -316,7 +317,7 @@ export const tableStyles = css`
       ${InsertButtonHover()}
       ${InsertLine(`
         width: 2px;
-        left: 8px;
+        left: 9px;
         top: ${tableInsertColumnButtonSize - 2}px;
       `)}
     }

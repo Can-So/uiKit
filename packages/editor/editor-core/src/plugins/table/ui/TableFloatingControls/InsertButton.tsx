@@ -18,7 +18,8 @@ export interface ButtonProps {
 }
 
 const getInsertLineHeight = (tableRef: HTMLElement) => {
-  return tableRef.offsetHeight + tableToolbarSize;
+  const LINE_OFFSET = 3;
+  return tableRef.offsetHeight + tableToolbarSize + LINE_OFFSET;
 };
 
 const getToolbarSize = (tableRef: HTMLElement): number => {
@@ -33,14 +34,17 @@ const getToolbarSize = (tableRef: HTMLElement): number => {
 };
 
 const getInsertLineWidth = (tableRef: HTMLElement) => {
+  const LINE_OFFSET = 4;
   const { parentElement, offsetWidth } = tableRef;
   const parentOffsetWidth = parentElement!.offsetWidth;
   const { scrollLeft } = parentElement!;
   const diff = offsetWidth - parentOffsetWidth;
   const toolbarSize = getToolbarSize(tableRef);
-  return Math.min(
-    offsetWidth + toolbarSize,
-    parentOffsetWidth + toolbarSize - Math.max(scrollLeft - diff, 0),
+  return (
+    Math.min(
+      offsetWidth + toolbarSize,
+      parentOffsetWidth + toolbarSize - Math.max(scrollLeft - diff, 0),
+    ) + LINE_OFFSET
   );
 };
 
