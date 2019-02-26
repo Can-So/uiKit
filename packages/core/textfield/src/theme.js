@@ -165,10 +165,7 @@ const getContainerBorderColor = ({
   };
 };
 
-const getPlaceholderColor = ({ isDisabled, mode }, ...p) => {
-  if (p.placeholderTextColor) {
-    return p.placeholderTextColor;
-  }
+const getPlaceholderColor = ({ isDisabled, mode }) => {
   return isDisabled
     ? disabledRules[mode].textColor
     : componentTokens.placeholderTextColor[mode];
@@ -250,7 +247,7 @@ export const Theme = createTheme<ThemeTokens, ThemeProps>(props => ({
     maxWidth: getMaxWidth(props),
     overflow: 'hidden',
     transition: `background-color 0.2s ease-in-out, border-color 0.2s ease-in-out`,
-    wordWrap: 'bread-word',
+    wordWrap: 'break-word',
     verticalAlign: 'top',
     pointerEvents: props.isDisabled ? 'none' : 'auto',
     padding: `${props.isCompact ? gridSize() / 2 : gridSize()}px ${gridSize() -
