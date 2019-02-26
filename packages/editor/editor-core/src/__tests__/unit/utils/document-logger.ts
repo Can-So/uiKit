@@ -24,20 +24,20 @@ describe('document logger', () => {
   it('gets document structure for one block node', () => {
     checkDocument(doc(p()), {
       type: 'doc',
-      start: 0,
-      end: 3,
-      content: [{ type: 'paragraph', start: 1, end: 2 }],
+      pos: 0,
+      nodeSize: 4,
+      content: [{ type: 'paragraph', pos: 1, nodeSize: 2 }],
     });
   });
 
   it('gets document structure for multiple block nodes', () => {
     checkDocument(doc(p(), p()), {
       type: 'doc',
-      start: 0,
-      end: 5,
+      pos: 0,
+      nodeSize: 6,
       content: [
-        { type: 'paragraph', start: 1, end: 2 },
-        { type: 'paragraph', start: 3, end: 4 },
+        { type: 'paragraph', pos: 1, nodeSize: 2 },
+        { type: 'paragraph', pos: 3, nodeSize: 2 },
       ],
     });
   });
@@ -45,14 +45,14 @@ describe('document logger', () => {
   it('gets document structure for nested block nodes', () => {
     checkDocument(doc(panel({ panelType: 'info' })(p())), {
       type: 'doc',
-      start: 0,
-      end: 5,
+      pos: 0,
+      nodeSize: 6,
       content: [
         {
           type: 'panel',
-          start: 1,
-          end: 4,
-          content: [{ type: 'paragraph', start: 2, end: 3 }],
+          pos: 1,
+          nodeSize: 4,
+          content: [{ type: 'paragraph', pos: 2, nodeSize: 2 }],
         },
       ],
     });
@@ -69,17 +69,17 @@ describe('document logger', () => {
       ),
       {
         type: 'doc',
-        start: 0,
-        end: 10,
+        pos: 0,
+        nodeSize: 11,
         content: [
           {
             type: 'paragraph',
-            start: 1,
-            end: 9,
+            pos: 1,
+            nodeSize: 9,
             content: [
-              { type: 'text', start: 1, end: 6 },
-              { type: 'status', start: 6, end: 7 },
-              { type: 'date', start: 7, end: 8 },
+              { type: 'text', pos: 1, nodeSize: 5 },
+              { type: 'status', pos: 6, nodeSize: 1 },
+              { type: 'date', pos: 7, nodeSize: 1 },
             ],
           },
         ],
@@ -98,21 +98,21 @@ describe('document logger', () => {
       ),
       {
         type: 'doc',
-        start: 0,
-        end: 35,
+        pos: 0,
+        nodeSize: 36,
         content: [
           {
             type: 'paragraph',
-            start: 1,
-            end: 34,
+            pos: 1,
+            nodeSize: 34,
             content: [
-              { type: 'text', marks: ['underline'], start: 1, end: 11 },
-              { type: 'text', marks: ['strong'], start: 11, end: 15 },
+              { type: 'text', marks: ['underline'], pos: 1, nodeSize: 10 },
+              { type: 'text', marks: ['strong'], pos: 11, nodeSize: 4 },
               {
                 type: 'text',
                 marks: ['strong', 'underline'],
-                start: 15,
-                end: 33,
+                pos: 15,
+                nodeSize: 18,
               },
             ],
           },
@@ -133,26 +133,26 @@ describe('document logger', () => {
       ),
       {
         type: 'doc',
-        start: 0,
-        end: 15,
+        pos: 0,
+        nodeSize: 16,
         content: [
           {
             type: 'paragraph',
-            start: 1,
-            end: 9,
+            pos: 1,
+            nodeSize: 9,
             content: [
-              { type: 'text', start: 1, end: 6 },
-              { type: 'status', start: 6, end: 7 },
-              { type: 'date', start: 7, end: 8 },
+              { type: 'text', pos: 1, nodeSize: 5 },
+              { type: 'status', pos: 6, nodeSize: 1 },
+              { type: 'date', pos: 7, nodeSize: 1 },
             ],
           },
           {
             type: 'paragraph',
-            start: 10,
-            end: 14,
+            pos: 10,
+            nodeSize: 5,
             content: [
-              { type: 'text', start: 10, end: 12 },
-              { type: 'emoji', start: 12, end: 13 },
+              { type: 'text', pos: 10, nodeSize: 2 },
+              { type: 'emoji', pos: 12, nodeSize: 1 },
             ],
           },
         ],
@@ -171,29 +171,29 @@ describe('document logger', () => {
       ),
       {
         type: 'doc',
-        start: 0,
-        end: 38,
+        pos: 0,
+        nodeSize: 39,
         content: [
           {
             type: 'table',
-            start: 1,
-            end: 37,
+            pos: 1,
+            nodeSize: 37,
             content: [
               {
                 type: 'tableRow',
-                start: 2,
-                end: 13,
+                pos: 2,
+                nodeSize: 12,
                 content: [
                   {
                     type: 'tableHeader',
-                    start: 3,
-                    end: 12,
+                    pos: 3,
+                    nodeSize: 10,
                     content: [
                       {
                         type: 'paragraph',
-                        start: 4,
-                        end: 11,
-                        content: [{ type: 'text', start: 4, end: 10 }],
+                        pos: 4,
+                        nodeSize: 8,
+                        content: [{ type: 'text', pos: 4, nodeSize: 6 }],
                       },
                     ],
                   },
@@ -201,19 +201,19 @@ describe('document logger', () => {
               },
               {
                 type: 'tableRow',
-                start: 14,
-                end: 24,
+                pos: 14,
+                nodeSize: 11,
                 content: [
                   {
                     type: 'tableCell',
-                    start: 15,
-                    end: 23,
+                    pos: 15,
+                    nodeSize: 9,
                     content: [
                       {
                         type: 'paragraph',
-                        start: 16,
-                        end: 22,
-                        content: [{ type: 'text', start: 16, end: 21 }],
+                        pos: 16,
+                        nodeSize: 7,
+                        content: [{ type: 'text', pos: 16, nodeSize: 5 }],
                       },
                     ],
                   },
@@ -221,19 +221,19 @@ describe('document logger', () => {
               },
               {
                 type: 'tableRow',
-                start: 25,
-                end: 36,
+                pos: 25,
+                nodeSize: 12,
                 content: [
                   {
                     type: 'tableCell',
-                    start: 26,
-                    end: 35,
+                    pos: 26,
+                    nodeSize: 10,
                     content: [
                       {
                         type: 'paragraph',
-                        start: 27,
-                        end: 34,
-                        content: [{ type: 'text', start: 27, end: 33 }],
+                        pos: 27,
+                        nodeSize: 8,
+                        content: [{ type: 'text', pos: 27, nodeSize: 6 }],
                       },
                     ],
                   },

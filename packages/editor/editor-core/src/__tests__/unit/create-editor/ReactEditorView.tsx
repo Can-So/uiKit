@@ -222,22 +222,22 @@ describe(name, () => {
       const documents = {
         new: {
           type: 'doc',
-          start: 0,
-          end: 4,
+          pos: 0,
+          nodeSize: 5,
           content: [
             {
               type: 'codeBlock',
-              start: 1,
-              end: 3,
-              content: [{ type: 'date', start: 1, end: 2 }],
+              pos: 1,
+              nodeSize: 3,
+              content: [{ type: 'date', pos: 1, nodeSize: 1 }],
             },
           ],
         },
         prev: {
           type: 'doc',
-          start: 0,
-          end: 3,
-          content: [{ type: 'paragraph', start: 1, end: 2 }],
+          pos: 0,
+          nodeSize: 4,
+          content: [{ type: 'paragraph', pos: 1, nodeSize: 2 }],
         },
       };
 
