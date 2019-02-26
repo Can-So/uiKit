@@ -52,6 +52,8 @@ export const tablePadding = 8;
 export const contextualMenuTriggerSize = 16;
 export const contextualMenuDropdownWidth = 180;
 export const layoutButtonSize = 32;
+export const tableInsertColumnButtonLeftOffset = 22;
+export const tableInsertColumnButtonTopOffset = 22;
 
 const isIE11 = browser.ie_version === 11;
 
@@ -290,7 +292,7 @@ export const tableStyles = css`
         }
       }
       .${ClassName.CONTROLS_INSERT_COLUMN} {
-        top: -${tableInsertColumnButtonSize - 2}px;
+        top: -${tableInsertColumnButtonTopOffset}px;
         right: -${tableInsertColumnButtonSize / 2}px;
       }
       .${ClassName.CONTROLS_INSERT_ROW} {
@@ -405,7 +407,7 @@ export const tableStyles = css`
       .${ClassName.CONTROLS_INSERT_BUTTON_WRAP} {
         position: absolute;
         bottom: -${tableInsertColumnButtonSize / 2}px;
-        left: -${tableInsertColumnButtonSize - 2}px;
+        left: -${tableInsertColumnButtonLeftOffset}px;
         height: ${tableInsertColumnButtonSize}px;
         width: ${tableInsertColumnButtonSize}px;
         z-index: ${akEditorSmallZIndex};
