@@ -26,6 +26,7 @@ import {
   sleep,
   insertText,
   sendKeyToPm,
+  mountWithIntl,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -35,8 +36,8 @@ import {
 } from '../../../../plugins/media/pm-plugins/main';
 import { setNodeSelection, setTextSelection } from '../../../../utils';
 import { AnalyticsHandler, analyticsService } from '../../../../analytics';
-import mediaPlugin from '../../../../plugins/media';
 import listPlugin from '../../../../plugins/lists';
+import mediaPlugin, { renderSmartMediaEditor } from '../../../../plugins/media';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
@@ -44,6 +45,8 @@ import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { temporaryMedia, temporaryMediaGroup } from './_utils';
+
+import { SmartMediaEditor } from '@atlaskit/media-editor';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -74,7 +77,13 @@ describe('Media plugin', () => {
   const mediaProvider = getFreshMediaProvider();
   const temporaryFileId = `temporary:${randomId()}`;
   const providerFactory = ProviderFactory.create({ mediaProvider });
+
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  const mediaPluginOptions = dropzoneContainer => ({
+    provider: mediaProvider,
+    allowMediaSingle: true,
+    customDropzoneContainer: dropzoneContainer,
+  });
 
   const editor = (
     doc: any,
@@ -87,11 +96,7 @@ describe('Media plugin', () => {
       doc,
       editorPlugins: [
         listPlugin,
-        mediaPlugin({
-          provider: mediaProvider,
-          allowMediaSingle: true,
-          customDropzoneContainer: dropzoneContainer,
-        }),
+        mediaPlugin(mediaPluginOptions(dropzoneContainer)),
         codeBlockPlugin(),
         rulePlugin,
         tablePlugin(),
@@ -1396,6 +1401,158 @@ describe('Media plugin', () => {
             })(),
           ),
           p(''),
+        ),
+      );
+    });
+  });
+
+  describe('media editor', () => {
+    it('sets the selected editing media id', () => {
+      const { pluginState, editorView } = editor(
+        doc(
+          p('hello'),
+          mediaSingle({ layout: 'center' })(
+            media({
+              id: 'media',
+              type: 'file',
+              collection: testCollectionName,
+            })(),
+          ),
+        ),
+      );
+
+      setNodeSelection(editorView, 7);
+
+      pluginState.openMediaEditor();
+      expect(pluginState.editingMediaSinglePos).toEqual(7);
+    });
+
+    it('opens the media editor', async () => {
+      const { pluginState, editorView } = editor(
+        doc(
+          mediaSingle({ layout: 'center' })(
+            media({
+              id: 'media',
+              type: 'file',
+              collection: testCollectionName,
+            })(),
+          ),
+        ),
+      );
+
+      // wait for media provider so we set the upload context
+      await pluginState.setMediaProvider(mediaProvider);
+
+      setNodeSelection(editorView, 0);
+
+      pluginState.openMediaEditor();
+
+      const toolbar = renderSmartMediaEditor(pluginState);
+      expect(toolbar).toBeDefined();
+
+      const mountedToolbar = mountWithIntl(toolbar!);
+      expect(mountedToolbar.find(SmartMediaEditor).length).toEqual(1);
+    });
+
+    it('passes the selected media identifier to the smart editor', async () => {
+      const { pluginState, editorView } = editor(
+        doc(
+          mediaSingle({ layout: 'center' })(
+            media({
+              id: 'media',
+              type: 'file',
+              collection: testCollectionName,
+            })(),
+          ),
+        ),
+      );
+
+      await pluginState.setMediaProvider(mediaProvider);
+      setNodeSelection(editorView, 0);
+      pluginState.openMediaEditor();
+
+      const toolbar = mountWithIntl(renderSmartMediaEditor(pluginState)!);
+      expect(toolbar.prop('identifier')).toEqual({
+        id: 'media',
+        mediaItemType: 'file',
+        collectionName: testCollectionName,
+      });
+    });
+
+    it('replaces the editing media node with a new one', async () => {
+      const { pluginState, editorView } = editor(
+        doc(
+          mediaSingle({ layout: 'center' })(
+            media({
+              id: 'media',
+              type: 'file',
+              collection: testCollectionName,
+            })(),
+          ),
+        ),
+      );
+
+      await pluginState.setMediaProvider(mediaProvider);
+      setNodeSelection(editorView, 0);
+      pluginState.openMediaEditor();
+      pluginState.replaceEditingMedia({
+        id: 'media2',
+        collectionName: 'collection2',
+        mediaItemType: 'file',
+      });
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          mediaSingle({ layout: 'center' })(
+            media({
+              id: 'media2',
+              type: 'file',
+              collection: 'collection2',
+            })(),
+          ),
+        ),
+      );
+    });
+
+    it('replaces the editing media node even if selection changes', async () => {
+      const { pluginState, editorView, refs } = editor(
+        doc(
+          mediaSingle({ layout: 'center' })(
+            media({
+              id: 'media',
+              type: 'file',
+              collection: testCollectionName,
+            })(),
+          ),
+          p('hello {<>}world'),
+        ),
+      );
+
+      await pluginState.setMediaProvider(mediaProvider);
+      setNodeSelection(editorView, 0);
+      pluginState.openMediaEditor();
+
+      // move selection to paragraph
+      setTextSelection(editorView, refs['<>']);
+      insertText(editorView, 'add', refs['<>']);
+
+      // should replace the old one
+      pluginState.replaceEditingMedia({
+        id: 'media2',
+        collectionName: 'collection2',
+        mediaItemType: 'file',
+      });
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          mediaSingle({ layout: 'center' })(
+            media({
+              id: 'media2',
+              type: 'file',
+              collection: 'collection2',
+            })(),
+          ),
+          p('hello {<>}addworld'),
         ),
       );
     });
