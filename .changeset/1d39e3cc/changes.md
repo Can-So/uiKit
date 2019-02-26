@@ -1,0 +1,1 @@
+- Added ability to toggle animations in atlaskit/select, updated UserPicker to disable animations using this new behaviour
