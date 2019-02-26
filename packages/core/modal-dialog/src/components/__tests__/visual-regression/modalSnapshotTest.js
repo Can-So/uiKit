@@ -8,7 +8,7 @@ const openModalBtn = "[type='button']";
 const modalDialog = "[role='dialog']";
 
 // TODO: https://ecosystem.atlassian.net/browse/AK-5842
-describe('Snapshot Test', () => {
+describe.skip('Snapshot Test', () => {
   it('Basic example should match production example', async () => {
     const url = getExampleUrl(
       'core',

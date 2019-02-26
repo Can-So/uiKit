@@ -14,6 +14,7 @@ import {
 
 describe('Table floating toolbar:fullpage', () => {
   let page;
+  const threshold = 0.01;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
@@ -23,19 +24,19 @@ describe('Table floating toolbar:fullpage', () => {
 
   it('display options', async () => {
     await clickTableOptions(page);
-    await snapshot(page);
+    await snapshot(page, threshold);
   });
 
   it('display cell options', async () => {
     await getSelectorForTableCell({ row: 2, cell: 2 });
     await clickCellOptions(page);
-    await snapshot(page);
+    await snapshot(page, threshold);
   });
 
   it('display cell background', async () => {
     await getSelectorForTableCell({ row: 2, cell: 2 });
     await selectCellOption(page, 'Cell background');
-    await snapshot(page);
+    await snapshot(page, threshold);
   });
 });
 
