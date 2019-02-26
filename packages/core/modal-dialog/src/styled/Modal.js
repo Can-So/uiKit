@@ -96,7 +96,7 @@ export const PositionerAbsolute = styled.div`
 export const PositionerRelative = styled.div`
   margin: ${gutter}px auto;
   position: relative;
-  max-width: ${dialogWidth};
+  width: ${dialogWidth};
   z-index: ${layers.modal};
   pointer-events: none;
 
