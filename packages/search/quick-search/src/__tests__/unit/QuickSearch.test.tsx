@@ -215,6 +215,21 @@ describe('<QuickSearch />', () => {
   });
 
   describe('Keyboard controls', () => {
+    let originalWindowAssign;
+    let locationAssignSpy;
+
+    beforeAll(() => {
+      originalWindowAssign = window.location.assign;
+    });
+
+    beforeEach(() => {
+      locationAssignSpy = jest.fn();
+      window.location.assign = locationAssignSpy;
+    });
+
+    afterAll(() => {
+      window.location.assign = originalWindowAssign;
+    });
     it('should select the first result on first DOWN keystroke', () => {
       wrapper
         .find(AkSearch)
@@ -302,7 +317,6 @@ describe('<QuickSearch />', () => {
     });
 
     it('should call window.location.assign() with item`s href property', () => {
-      const locationAssignSpy = jest.spyOn(window.location, 'assign');
       try {
         const url = 'http://www.atlassian.com';
         wrapper.setProps({

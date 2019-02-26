@@ -1,4 +1,3 @@
-import * as get from 'lodash.get';
 import {
   RequestServiceOptions,
   utils,
@@ -168,13 +167,12 @@ export default class JiraClientImpl implements JiraClient {
       JiraMyPermissionsResponse
     >(this.serviceConfig, options);
 
-    this.canSearchUsersCache = !!get(
-      permissionsResponse,
-      'permissions.USER_PICKER.havePermission',
-      false,
-    );
-
-    return this.canSearchUsersCache;
+    this.canSearchUsersCache =
+      permissionsResponse &&
+      permissionsResponse.permissions &&
+      permissionsResponse.permissions.USER_PICKER &&
+      permissionsResponse.permissions.USER_PICKER.havePermission;
+    return !!this.canSearchUsersCache;
   }
 
   private recentItemGroupToItems(

@@ -32,7 +32,7 @@ export type ReferralContextIdentifiers = {
 };
 
 export type AdvancedSearchEvent = {
-  preventDefault: Function;
+  preventDefault: () => void;
   query: String; // query entered by the user
   category: String;
 };
@@ -212,7 +212,6 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
       useCPUSForPeopleResults,
       logger,
       disableJiraPreQueryPeopleSearch,
-      onAdvancedSearch,
     } = this.props;
 
     return (
@@ -226,7 +225,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
           useCPUSForPeopleResults={useCPUSForPeopleResults}
           disableJiraPreQueryPeopleSearch={disableJiraPreQueryPeopleSearch}
           logger={logger}
-          onAdvancedSearch={onAdvancedSearch}
+          onAdvancedSearch={this.onAdvancedSearch}
         />
       </MessagesIntlProvider>
     );

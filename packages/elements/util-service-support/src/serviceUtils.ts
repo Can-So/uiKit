@@ -110,10 +110,10 @@ export const requestService = <T>(
     } else if (response.ok) {
       const contentType =
         (response.headers &&
-          response.headers.get('Content-Type') &&
+          response.headers.get &&
           response.headers.get('Content-Type')) ||
         '';
-      if (contentType.toLowerCase().startsWith('application/json')) {
+      if (contentType.toLowerCase().includes('json')) {
         return response.json();
       } else {
         return Promise.resolve();
