@@ -822,8 +822,9 @@ describe('Renderer - Validator', () => {
         ).to.deep.equal({
           type: 'mention',
           attrs: {
-            text: '@Oscar',
             id: 'abcd-abcd-abcd',
+            text: '@Oscar',
+            accessLevel: '',
           },
         });
       });
@@ -839,6 +840,7 @@ describe('Renderer - Validator', () => {
           attrs: {
             text: '@Oscar',
             id: 'abcd-abcd-abcd',
+            accessLevel: '',
           },
         });
       });
@@ -855,6 +857,7 @@ describe('Renderer - Validator', () => {
           attrs: {
             text: '@Oscar',
             id: 'abcd-abcd-abcd',
+            accessLevel: '',
           },
         });
       });
@@ -867,6 +870,7 @@ describe('Renderer - Validator', () => {
           attrs: {
             text: '@unknown',
             id: 'abcd-abcd-abcd',
+            accessLevel: '',
           },
         });
       });
@@ -1088,6 +1092,7 @@ describe('Renderer - Validator', () => {
             {
               type: 'mention',
               attrs: {
+                accessLevel: '',
                 id: 'abcd-abcd-abcd',
                 text: '@Oscar',
               },

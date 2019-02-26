@@ -1,5 +1,10 @@
 # @atlaskit/user-picker
 
+## 1.0.22
+- [patch] [46ffd45f21](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46ffd45f21):
+
+  - Added ability to toggle animations in atlaskit/select, updated UserPicker to disable animations using this new behaviour
+
 ## 1.0.21
 - [patch] [b38b2098e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b38b2098e3):
 

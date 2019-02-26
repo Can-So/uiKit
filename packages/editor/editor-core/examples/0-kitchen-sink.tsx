@@ -27,6 +27,7 @@ import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
 import ErrorReport, { Error } from '../example-helpers/ErrorReport';
 import KitchenSinkEditor from '../example-helpers/KitchenSinkEditor';
+import withSentry from '../example-helpers/withSentry';
 
 const Container = styled.div`
   display: flex;
@@ -162,10 +163,7 @@ export type State = {
   waitingToValidate: boolean;
 };
 
-export default class FullPageRendererExample extends React.Component<
-  Props,
-  State
-> {
+class FullPageRendererExample extends React.Component<Props, State> {
   private getJSONFromStorage = (key: string, fallback: any = undefined) => {
     const localADF = (localStorage && localStorage.getItem(key)) || undefined;
 
@@ -448,3 +446,5 @@ export default class FullPageRendererExample extends React.Component<
 
   private getLocalTag = (locale: string) => locale.substring(0, 2);
 }
+
+export default withSentry(FullPageRendererExample);

@@ -1,5 +1,10 @@
 # @atlaskit/media-card
 
+## 54.1.0
+- [minor] [eda74c4dce](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/eda74c4dce):
+
+  - Add shouldOpenMediaViewer + mediaViewerDataSource optional props to Card api to simplify MediaViewer integration
+
 ## 54.0.0
 - [major] [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):
 

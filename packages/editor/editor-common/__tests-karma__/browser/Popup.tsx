@@ -28,11 +28,11 @@ describe('Popup', () => {
     });
 
     describe('#findOverflowScrollParent', () => {
-      let boundary;
-      let target;
+      let boundary: HTMLDivElement;
+      let target: HTMLDivElement;
 
       afterEach(() => {
-        boundary.parentElement.removeChild(boundary);
+        boundary.parentElement!.removeChild(boundary);
       });
 
       it('should find scroll parent of target', () => {
@@ -240,7 +240,7 @@ describe('Popup', () => {
         offsetParent: body,
       };
 
-      function insertCss(code) {
+      function insertCss(code: string) {
         const style = document.createElement('style');
         style.type = 'text/css';
         style.innerHTML = code;
@@ -248,9 +248,9 @@ describe('Popup', () => {
         return style;
       }
 
-      let scrollParent;
-      let oldMargin;
-      let style;
+      let scrollParent: HTMLDivElement;
+      let oldMargin: string | null;
+      let style: HTMLStyleElement;
       beforeEach(() => {
         scrollParent = document.createElement('div');
         scrollParent.className = 'no-scrollbars';
@@ -270,8 +270,8 @@ describe('Popup', () => {
       });
 
       afterEach(() => {
-        scrollParent.parentElement.removeChild(scrollParent);
-        style.parentElement.removeChild(style);
+        scrollParent.parentElement!.removeChild(scrollParent);
+        style.parentElement!.removeChild(style);
         document.body.style.margin = oldMargin;
       });
 
@@ -574,7 +574,7 @@ describe('Popup', () => {
   });
 
   describe('UI', () => {
-    let target;
+    let target: HTMLDivElement;
     beforeEach(() => {
       target = document.createElement('div');
       document.body.appendChild(target);

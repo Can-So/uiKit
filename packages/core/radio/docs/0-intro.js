@@ -7,7 +7,7 @@ export default md`
 ${(
   <SectionMessage appearance="warning">
     <p>
-      <strong>Note: @atlaskit/form is currently a developer preview.</strong>
+      <strong>Note: @atlaskit/radio is currently a developer preview.</strong>
     </p>
     <p>
       Please experiment with and test this package but be aware that the API may

@@ -1,11 +1,6 @@
 import { Node, Schema } from 'prosemirror-model';
 import { Transaction, Selection } from 'prosemirror-state';
-import {
-  validator,
-  ADFEntity,
-  VALIDATION_ERRORS,
-  ValidationError,
-} from '@atlaskit/adf-utils';
+import { validator, ADFEntity, ValidationError } from '@atlaskit/adf-utils';
 import { analyticsService } from '../analytics';
 import { ContentNodeWithPos } from 'prosemirror-utils';
 
@@ -118,11 +113,12 @@ function fireAnalyticsEvent(
   error: ValidationError,
   type: 'block' | 'inline' | 'mark' = 'block',
 ) {
-  const { code } = error;
+  const { code, meta } = error;
   analyticsService.trackEvent('atlassian.editor.unsupported', {
     name: entity.type || 'unknown',
     type,
     errorCode: code,
+    meta: meta && JSON.stringify(meta),
   });
 }
 
@@ -185,7 +181,7 @@ export function processRawValue(
         if (marks.indexOf(entity.type) > -1) {
           if (
             !(
-              error.code === VALIDATION_ERRORS.INVALID_TYPE &&
+              error.code === 'INVALID_TYPE' &&
               FALSE_POSITIVE_MARKS.indexOf(entity.type) > -1
             )
           ) {
@@ -200,7 +196,7 @@ export function processRawValue(
          * And, also empty `text` node is not valid.
          */
         if (
-          error.code === VALIDATION_ERRORS.MISSING_PROPERTY &&
+          error.code === 'MISSING_PROPERTIES' &&
           entity.type === 'paragraph'
         ) {
           return { type: 'paragraph', content: [] };
@@ -208,7 +204,7 @@ export function processRawValue(
 
         // Can't fix it by wrapping
         // TODO: We can repair missing content like `panel` without a `paragraph`.
-        if (error.code === VALIDATION_ERRORS.INVALID_CONTENT_LENGTH) {
+        if (error.code === 'INVALID_CONTENT_LENGTH') {
           return entity;
         }
 
