@@ -385,7 +385,8 @@ export class QuickSearch extends React.Component<Props, State> {
             event,
           });
         }
-        if (result.props.href) {
+
+        if (result.props.href && !event.isDefaultPrevented) {
           window.location.assign(result.props.href);
         }
       }
