@@ -27,7 +27,8 @@ export default function() {
     <div>
       <label htmlFor="default-value">Default Value</label>
       <TextField
-        theme={(props: TextFieldThemeProps) => skyBlueTheme(props)}
+        appearance="blue"
+        // theme={(props: TextFieldThemeProps) => skyBlueTheme(props)}
         name="default-value"
         defaultValue="Tacos are yummy!"
       />

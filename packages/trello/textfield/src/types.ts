@@ -4,26 +4,30 @@ export type TextFieldStyleAppearance = TextFieldAppearance | 'disabled';
 
 export type TextFieldThemeStyles = {
   container?: TextFieldStyleProps;
-  input?: {};
+  input?: TextFieldStyleProps;
 };
 
-type TextFieldStyleMap =
+export type TextFieldStyleMap =
   | string
   | Object
   | {
-      [index: keyof TextFieldStyleAppearance]: {
+      [index: string]: string;
+    }
+  | {
+      [appearance in TextFieldStyleAppearance]: {
         [state in TextFieldStyleState]?: string
-      };
-    };
+      }
+    }
+  | undefined;
 
 export type TextFieldStyleProps = {
-  backgroundColor: TextFieldStyleMap;
-  borderColor: TextFieldStyleMap;
-  color: TextFieldStyleMap;
-  cursor: TextFieldStyleMap;
-  padding: string | number;
-  lineHeight: string | number;
-  placeholder: { [key: string]: string };
+  backgroundColor?: TextFieldStyleMap;
+  borderColor?: TextFieldStyleMap;
+  color?: TextFieldStyleMap;
+  cursor?: TextFieldStyleMap;
+  padding?: string | number;
+  lineHeight?: string | number;
+  placeholder?: { [key: string]: string };
 };
 
 export type TextFieldThemeProps = {

@@ -1,9 +1,4 @@
-import { ThemeProps } from '@atlaskit/textfield';
-import {
-  TextFieldThemeProps,
-  TextFieldThemeStyles,
-  TextFieldStyleProps,
-} from './types';
+import { TextFieldThemeProps, TextFieldStyleProps } from './types';
 import { colors } from './colors';
 
 const textFieldNachosTheme: TextFieldStyleProps = {
@@ -46,9 +41,9 @@ const textFieldNachosTheme: TextFieldStyleProps = {
 export function applyPropertyStyle(
   property: keyof TextFieldStyleProps,
   { appearance = 'default', ...props }: TextFieldThemeProps,
-  baseThemeStyles,
+  baseThemeStyles: TextFieldStyleProps,
 ) {
-  const propertyStyles = textFieldNachosTheme[property];
+  const propertyStyles: any = textFieldNachosTheme[property];
   if (!propertyStyles) return 'initial';
 
   // Check for relevant fallbacks.
@@ -67,46 +62,22 @@ export function applyPropertyStyle(
   if (isFocused) appearanceStyle = propertyStyles[appearance].focus;
   if (isHovered) appearanceStyle = propertyStyles[appearance].hover;
 
-  // if (!stateStyles) return 'inherit';
   return appearanceStyle;
 }
-
-const getColor = (color, { appearance, state, isDisabled }) => {
-  if (isDisabled) return color.disabled;
-  if (appearance === 'default') {
-    if (!color[appearance][state]) {
-      return color.default.idle;
-    }
-    return color[appearance][state];
-  }
-  if (!color[appearance]) {
-    return color.default.idle;
-  }
-  return color[appearance];
-};
-
-const getCursor = (cursor, { isDisabled }) => {
-  if (isDisabled) return cursor.disabled;
-  return cursor.default;
-};
 
 const getTextFieldStyles = (
   adgContainerStyles: TextFieldStyleProps,
   props: TextFieldThemeProps,
 ) => {
   return {
-    // the "OR" statement kicks in if the `get` function doesn't return a truthy value
-    // this is for the situation where you don't want to change the value
-    // of the default theme provided
-    borderColor:
-      applyPropertyStyle('borderColor', props, adgContainerStyles) ||
-      adgContainerStyles.borderColor,
-    backgroundColor:
-      applyPropertyStyle('backgroundColor', props, adgContainerStyles) ||
-      adgContainerStyles.backgroundColor,
-    color:
-      getColor(textFieldNachosTheme.color, props) || adgContainerStyles.color,
-    cursor: getCursor(textFieldNachosTheme.cursor, props),
+    borderColor: applyPropertyStyle('borderColor', props, adgContainerStyles),
+    backgroundColor: applyPropertyStyle(
+      'backgroundColor',
+      props,
+      adgContainerStyles,
+    ),
+    color: applyPropertyStyle('color', props, adgContainerStyles),
+    cursor: applyPropertyStyle('cursor', props, adgContainerStyles),
     lineHeight: textFieldNachosTheme.lineHeight,
     padding: textFieldNachosTheme.padding,
   };
@@ -127,7 +98,7 @@ const theme = (adgTheme: Function, themeProps: TextFieldThemeProps) => {
       // hack to style the placeholder, this overwrites the pseudoselector
       // being used in ADG Textfield Theme
       '&::placeholder': {
-        color: textFieldNachosTheme.placeholder.color,
+        color: textFieldNachosTheme.placeholder!.color,
       },
     },
   };
