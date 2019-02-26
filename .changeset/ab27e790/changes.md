@@ -1,0 +1,1 @@
+- FS-3605 expose prop to disable input

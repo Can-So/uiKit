@@ -366,6 +366,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
       menuPortalTarget,
       addMoreMessage,
       allowEmail,
+      disableInput,
     } = this.props;
 
     const SelectComponent = allowEmail ? CreatableSelect : Select;
@@ -420,6 +421,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         clearValueLabel={clearValueLabel}
         menuMinWidth={menuMinWidth}
         menuPortalTarget={menuPortalTarget}
+        disableInput={disableInput}
         {...getCreatableProps(allowEmail)}
       />
     );
