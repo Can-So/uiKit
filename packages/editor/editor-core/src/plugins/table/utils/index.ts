@@ -5,7 +5,6 @@ export * from './paste';
 export * from './dom';
 export * from './column-controls';
 export * from './row-controls';
-export * from './fix-tables';
 export {
   generateColgroup,
   renderColgroupFromNode,

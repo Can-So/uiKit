@@ -33,11 +33,8 @@ import {
   handleClick,
   handleTripleClick,
 } from '../event-handlers';
-import {
-  findControlsHoverDecoration,
-  fixTables,
-  normalizeSelection,
-} from '../utils';
+import { findControlsHoverDecoration, normalizeSelection } from '../utils';
+import { fixTables } from '../transforms';
 import { TableCssClassName as ClassName } from '../types';
 
 export const pluginKey = new PluginKey('tablePlugin');

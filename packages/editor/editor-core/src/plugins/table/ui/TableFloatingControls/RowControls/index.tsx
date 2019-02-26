@@ -2,11 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { EditorView } from 'prosemirror-view';
 import { isCellSelection } from 'prosemirror-utils';
-import {
-  clearHoverSelection,
-  insertRow,
-  deleteSelectedRows,
-} from '../../../actions';
+import { clearHoverSelection, insertRow } from '../../../actions';
 import InsertButton from '../InsertButton';
 import DeleteButton from '../DeleteButton';
 import {
@@ -20,6 +16,8 @@ import {
 } from '../../../utils';
 import { TableCssClassName as ClassName } from '../../../types';
 import tableMessages from '../../messages';
+import { deleteRows } from '../../../transforms';
+import { getPluginState } from '../../../pm-plugins/main';
 
 export interface Props {
   editorView: EditorView;
@@ -106,7 +104,7 @@ export default class RowControls extends Component<Props, any> {
               key="delete"
               removeLabel={tableMessages.removeRows}
               style={{ top: deleteBtnParams.top }}
-              onClick={this.deleteSelectedRows}
+              onClick={this.deleteRows}
               onMouseEnter={() =>
                 this.props.hoverRows(deleteBtnParams.indexes, true)
               }
@@ -128,9 +126,12 @@ export default class RowControls extends Component<Props, any> {
     insertRow(row)(state, dispatch);
   };
 
-  private deleteSelectedRows = () => {
+  private deleteRows = () => {
     const { state, dispatch } = this.props.editorView;
-    deleteSelectedRows(state, dispatch);
+    const {
+      pluginConfig: { isHeaderRowRequired },
+    } = getPluginState(state);
+    dispatch(deleteRows([], isHeaderRowRequired)(state.tr));
     this.clearHoverSelection();
   };
 }
