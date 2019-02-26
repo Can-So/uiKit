@@ -14,7 +14,7 @@ import {
 
 describe('Table floating toolbar:fullpage', () => {
   let page;
-  const threshold = 0.01;
+  const threshold = 0.1;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
