@@ -1,83 +1,247 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
-import { default as MediaImage } from '../../mediaImage';
+import { shallow } from 'enzyme';
+import { Observable } from 'rxjs';
+import { nextTick } from '@atlaskit/media-test-helpers';
+import MediaImage, { MediaImageProps } from '../../mediaImage';
 
-const commonProps = {
-  id: 'dummy-id',
-  className: 'media-image',
-  mediaApiConfig: {
-    clientId: 'clientId',
-    token: 'token',
-    baseUrl: 'https://atlassian.com',
-  },
+import { imageFileId } from '@atlaskit/media-test-helpers';
+
+const shallowRender = async (props: MediaImageProps) => {
+  const wrapper = shallow(
+    <MediaImage {...props}>
+      {({ loading, error, data }) => {
+        if (loading) {
+          return <div>loading</div>;
+        }
+
+        if (error) {
+          return <div>error</div>;
+        }
+
+        if (!data) {
+          return null;
+        }
+
+        return <img src={data.src} />;
+      }}
+    </MediaImage>,
+  );
+
+  await nextTick();
+
+  return wrapper;
 };
 
 describe('<MediaImage />', () => {
-  it('should not add <img /> if it receives an empty clientId', () => {
-    const props = {
-      ...commonProps,
-      mediaApiConfig: {
-        ...commonProps.mediaApiConfig,
-        clientId: '',
-      },
-    };
+  let defaultProps: Partial<MediaImageProps>;
+  const getFileState = jest.fn();
+  const getImage = jest.fn();
+  beforeEach(() => {
+    jest.spyOn(URL, 'revokeObjectURL');
 
-    const wrapper = mount(<MediaImage {...props} />);
-    expect(wrapper.find('img')).toHaveLength(0);
-  });
-
-  it('should not add <img /> if it receives an empty token', () => {
-    const props = {
-      ...commonProps,
-      mediaApiConfig: {
-        ...commonProps.mediaApiConfig,
-        token: '',
-      },
-    };
-
-    const wrapper = mount(<MediaImage {...props} />);
-    expect(wrapper.find('img')).toHaveLength(0);
-  });
-
-  it('should not add <img /> if it receives an empty baseUrl', () => {
-    const props = {
-      ...commonProps,
-      mediaApiConfig: {
-        ...commonProps.mediaApiConfig,
-        baseUrl: '',
-      },
-    };
-
-    const wrapper = mount(<MediaImage {...props} />);
-    expect(wrapper.find('img')).toHaveLength(0);
-  });
-
-  it('should add width and height styles if props exist', () => {
-    const wrapper = mount(
-      <MediaImage {...commonProps} width={10} height={20} />,
+    getFileState.mockReturnValue(
+      Observable.of({
+        status: 'processed',
+        mediaType: 'image',
+      }),
     );
-    expect(wrapper.find('img').props().style).toMatchObject({
-      width: '10px',
-      height: '20px',
-    });
+
+    getImage.mockReturnValue({});
+
+    const context: any = {
+      file: { getFileState },
+      getImage,
+    };
+
+    defaultProps = {
+      apiConfig: {
+        width: 100,
+        height: 100,
+        upscale: true,
+        mode: 'full-fit',
+      },
+      identifier: imageFileId,
+      context: context,
+    };
   });
 
-  describe('When it builds src endpoint', () => {
-    it('should add clientId and token as query parameters', () => {
-      const wrapper = mount(<MediaImage {...commonProps} />);
-      expect(wrapper.find('img').props().src).toEqual(
-        'https://atlassian.com/file/dummy-id/image?client=clientId&token=token',
-      );
-    });
+  afterEach(() => {
+    getFileState.mockReset();
+    getImage.mockReset();
+  });
 
-    it('should add clientId and token as query parameters', () => {
-      const collectionName = 'my-collection-name';
-      const wrapper = mount(
-        <MediaImage {...commonProps} collectionName={collectionName} />,
+  it('should render error placeholder if request fails', async () => {
+    const getFileState = jest.fn().mockReturnValue(
+      Observable.create((observer: { error: Function }) => {
+        observer.error('');
+      }),
+    );
+    const getImage = jest.fn().mockReturnValue({});
+    const context: any = {
+      file: { getFileState },
+      getImage,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
+    };
+    const wrapper = await shallowRender(props as MediaImageProps);
+
+    expect(wrapper.find('div').text()).toEqual('error');
+  });
+
+  it('should render error placeholder if the media type is NOT an image', async () => {
+    const getFileState = jest
+      .fn()
+      .mockReturnValue(
+        Observable.of({ status: 'processed', mediaType: 'doc' }),
       );
-      expect(wrapper.find('img').props().src).toEqual(
-        `https://atlassian.com/file/dummy-id/image?client=clientId&token=token&collection=${collectionName}`,
+    const getImage = jest.fn().mockReturnValue({});
+    const context: any = {
+      file: { getFileState },
+      getImage,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
+    };
+    const wrapper = await shallowRender(props as MediaImageProps);
+
+    expect(wrapper.find('div').text()).toEqual('error');
+  });
+
+  it('should render error placeholder if the request status is `error`', async () => {
+    const getFileState = jest
+      .fn()
+      .mockReturnValue(Observable.of({ status: 'error', mediaType: 'image' }));
+    const getImage = jest.fn().mockReturnValue({});
+    const context: any = {
+      file: { getFileState },
+      getImage,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
+    };
+    const wrapper = await shallowRender(props as MediaImageProps);
+
+    expect(wrapper.find('div').text()).toEqual('error');
+  });
+
+  it('should remove subscription if the component is unmounted', async () => {
+    const wrapper = await shallowRender(defaultProps as MediaImageProps);
+    const instance = wrapper.instance() as MediaImage;
+    jest.spyOn(instance, 'unsubscribe');
+
+    wrapper.unmount();
+
+    expect(instance.unsubscribe).toHaveBeenCalledTimes(1);
+    expect(URL.revokeObjectURL).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render a placeholder while the src is loading', async () => {
+    const getFileState = jest
+      .fn()
+      .mockReturnValue(
+        Observable.of({ status: 'loading', mediaType: 'image' }),
       );
-    });
+    const getImage = jest.fn().mockReturnValue({});
+    const context: any = {
+      file: { getFileState },
+      getImage,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
+    };
+    const wrapper = await shallowRender(props as MediaImageProps);
+
+    expect(wrapper.find('div').text()).toEqual('loading');
+  });
+
+  it('should NOT trigger subscribe if new dimension is smaller than the current used', async () => {
+    const wrapper = await shallowRender(defaultProps as MediaImageProps);
+    expect(getFileState).toHaveBeenCalledTimes(1);
+
+    wrapper.setProps({ apiConfig: { width: 90, heigth: 90 } });
+    await wrapper.update();
+
+    expect(getFileState).toHaveBeenCalledTimes(1);
+  });
+
+  it('should NOT trigger subscribe if new dimension is smaller than the current used', async () => {
+    const wrapper = await shallowRender(defaultProps as MediaImageProps);
+    expect(getFileState).toHaveBeenCalledTimes(1);
+
+    wrapper.setProps({ identifier: defaultProps.identifier });
+    await wrapper.update();
+
+    expect(getFileState).toHaveBeenCalledTimes(1);
+  });
+
+  it('should trigger subscribe if new dimension is smaller than the current used', async () => {
+    const wrapper = await shallowRender(defaultProps as MediaImageProps);
+    expect(getFileState).toHaveBeenCalledTimes(1);
+
+    wrapper.setProps({ apiConfig: { width: 110, heigth: 110 } });
+    await wrapper.update();
+
+    expect(getFileState).toHaveBeenCalledTimes(2);
+  });
+
+  it('should render preview image based on create object url output', async () => {
+    const getFileState = jest.fn().mockReturnValue(
+      Observable.of({
+        status: 'processed',
+        mediaType: 'image',
+        preview: Promise.resolve(new Blob()),
+      }),
+    );
+    const img = 'img.jpg';
+    jest.spyOn(URL as any, 'createObjectURL').mockReturnValue(img);
+    const getImage = jest.fn().mockReturnValue({});
+    const context: any = {
+      file: { getFileState },
+      getImage,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
+    };
+    const wrapper = await shallowRender(props as MediaImageProps);
+
+    expect(getImage).toHaveBeenCalledTimes(0);
+    expect(wrapper.find('img').props().src).toEqual(img);
+  });
+
+  it('should render preview image based on getImage output', async () => {
+    const getFileState = jest
+      .fn()
+      .mockReturnValue(
+        Observable.of({ status: 'processed', mediaType: 'image' }),
+      );
+    const img = 'img2.jpg';
+    jest.spyOn(URL as any, 'createObjectURL').mockReturnValue(img);
+    const getImage = jest
+      .fn()
+      .mockReturnValue(new Blob([img], { type: 'image/jpeg' }));
+    const context: any = {
+      file: { getFileState },
+      getImage,
+    };
+
+    const props = {
+      ...defaultProps,
+      context,
+    };
+    const wrapper = await shallowRender(props as MediaImageProps);
+
+    expect(getImage).toHaveBeenCalledTimes(1);
+    expect(wrapper.find('img').props().src).toEqual(img);
   });
 });
