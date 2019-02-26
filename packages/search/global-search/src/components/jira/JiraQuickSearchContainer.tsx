@@ -7,6 +7,7 @@ import {
 import styled from 'styled-components';
 import { gridSize } from '@atlaskit/theme';
 import { withAnalytics } from '@atlaskit/analytics';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import StickyFooter from '../common/StickyFooter';
 import { CreateAnalyticsEventFn } from '../analytics/types';
 import { SearchScreenCounter } from '../../util/ScreenCounter';
@@ -90,10 +91,6 @@ export interface State {
 
 const LOGGER_NAME = 'AK.GlobalSearch.JiraQuickSearchContainer';
 
-type CancelableMouseEvent = {
-  stopPropagation: () => void;
-  preventDefault: () => void;
-};
 /**
  * Container/Stateful Component that handles the data fetching and state handling when the user interacts with Search.
  */
@@ -112,11 +109,28 @@ export class JiraQuickSearchContainer extends React.Component<
 
   handleSearchSubmit = ({ target }) => {
     const query = target.value;
-    redirectToJiraAdvancedSearch(this.state.selectedAdvancedSearchType, query);
+    let preventRedirectToAdvancedSearch = false;
+    this.onAdvancedSearch(
+      {
+        preventDefault() {
+          preventRedirectToAdvancedSearch = true;
+        },
+        stopPropagation: () => {},
+      },
+      this.state.selectedAdvancedSearchType,
+      query,
+    );
+
+    if (!preventRedirectToAdvancedSearch) {
+      redirectToJiraAdvancedSearch(
+        this.state.selectedAdvancedSearchType,
+        query,
+      );
+    }
   };
 
   onAdvancedSearch = (
-    e: CancelableMouseEvent,
+    e: CancelableEvent,
     entity: JiraEntityTypes,
     query: String,
   ) => {

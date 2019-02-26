@@ -15,14 +15,14 @@ import {
   JiraEntityTypes,
   ADVANCED_JIRA_SEARCH_RESULT_ID,
 } from '../SearchResultsUtil';
-import { CancelableMouseEvent } from './JiraQuickSearchContainer';
+import { CancelableEvent } from './JiraQuickSearchContainer';
 
 export interface Props {
   query: string;
   showKeyboardLozenge?: boolean;
   showSearchIcon?: boolean;
   analyticsData?: object;
-  onClick?: (e: CancelableMouseEvent, entity: JiraEntityTypes) => void;
+  onClick?: (e: CancelableEvent, entity: JiraEntityTypes) => void;
 }
 
 interface State {
