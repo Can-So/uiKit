@@ -68,6 +68,7 @@ export type ConnectedLayoutManagerProps = {
   datasets?: {|
     globalNavigation: Dataset,
     contextualNavigation: Dataset,
+    navigation: Dataset,
   |},
   /** A function to access the refs of some elements within the LayoutManager
    * component. */
