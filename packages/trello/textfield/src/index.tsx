@@ -3,9 +3,9 @@ import Textfield from '@atlaskit/textfield';
 import nachosTFTheme from './theme';
 import { TextFieldProps } from './types';
 
-export default (
+export function TextField(
   textFieldProps: TextFieldProps & React.HTMLProps<HTMLButtonElement>,
-) => {
+) {
   const nachosTheme = (adgTheme: any, themeProps: TextFieldProps) => ({
     container: {
       ...nachosTFTheme(adgTheme, themeProps).container,
@@ -17,7 +17,11 @@ export default (
     },
   });
 
-  console.log(...textFieldProps);
-
   return <Textfield {...textFieldProps} theme={nachosTheme} />;
+}
+
+TextField.defaultProps = {
+  appearance: 'default',
 };
+
+export default TextField;

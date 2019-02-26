@@ -6,28 +6,31 @@ import {
 } from './types';
 import { colors } from './colors';
 
-const textField: TextFieldStyleProps = {
+const textFieldNachosTheme: TextFieldStyleProps = {
   backgroundColor: {
     default: {
       idle: colors.N10,
       hover: colors.N30,
       focus: colors.N0,
+      disabled: colors.N30,
     },
-    disabled: colors.N30,
+    transparent: {
+      idle: 'transparent',
+    },
   },
   borderColor: {
     default: {
       idle: colors.N40,
       hover: colors.N40,
       focus: colors['blue-500'],
+      disabled: colors.N30,
     },
-    disabled: colors.N30,
   },
   color: {
     default: {
       idle: colors.N800,
+      disabled: colors.N70,
     },
-    disabled: colors.N70,
   },
   padding: '6px 10px',
   lineHeight: '20px',
@@ -35,36 +38,38 @@ const textField: TextFieldStyleProps = {
     default: 'initial',
     disabled: 'not-allowed',
   },
-  placeholderTextColor: colors.N200,
+  placeholder: {
+    color: 'blue',
+  },
 };
 
-const getBackgroundColor = (
-  backgroundColor,
-  { appearance, isDisabled, isFocused, isInvalid },
-) => {
-  if (isDisabled) return backgroundColor.disabled;
-  if (isFocused) return backgroundColor[appearance].focus;
-  if (isInvalid) return;
-  if (!backgroundColor[appearance]) {
-    return backgroundColor.default['idle'];
-  }
-  return backgroundColor[appearance]['idle'];
-};
+export function applyPropertyStyle(
+  property: keyof TextFieldStyleProps,
+  { appearance = 'default', ...props }: TextFieldThemeProps,
+  baseThemeStyles,
+) {
+  const propertyStyles = textFieldNachosTheme[property];
+  if (!propertyStyles) return 'initial';
 
-const getBorderColor = (
-  borderColor,
-  { appearance, isDisabled, isFocused, isInvalid }: TextFieldThemeProps,
-) => {
-  if (!borderColor[appearance]) {
-    return borderColor.default['idle'];
+  // Check for relevant fallbacks.
+  // This will fall back to the ADG theme if there is an appearance
+  // that is not in the styles map, or if there are no styles for
+  // for a default appearance
+  if (!propertyStyles[appearance] || !propertyStyles['default']) {
+    return baseThemeStyles[property] ? baseThemeStyles[property] : 'initial';
   }
 
-  if (isDisabled) return borderColor.disabled;
-  if (isFocused) return borderColor[appearance].focus;
-  if (isInvalid) return;
+  const { isDisabled, isInvalid, isFocused, isHovered } = props;
 
-  return borderColor[appearance]['idle'];
-};
+  let appearanceStyle = propertyStyles[appearance]['idle'];
+  if (isDisabled) appearanceStyle = propertyStyles[appearance].disabled;
+  if (isInvalid) appearanceStyle = '';
+  if (isFocused) appearanceStyle = propertyStyles[appearance].focus;
+  if (isHovered) appearanceStyle = propertyStyles[appearance].hover;
+
+  // if (!stateStyles) return 'inherit';
+  return appearanceStyle;
+}
 
 const getColor = (color, { appearance, state, isDisabled }) => {
   if (isDisabled) return color.disabled;
@@ -93,18 +98,17 @@ const getTextFieldStyles = (
     // the "OR" statement kicks in if the `get` function doesn't return a truthy value
     // this is for the situation where you don't want to change the value
     // of the default theme provided
-
     borderColor:
-      getBorderColor(textField.borderColor, props) ||
+      applyPropertyStyle('borderColor', props, adgContainerStyles) ||
       adgContainerStyles.borderColor,
     backgroundColor:
-      getBackgroundColor(textField.backgroundColor, props) ||
+      applyPropertyStyle('backgroundColor', props, adgContainerStyles) ||
       adgContainerStyles.backgroundColor,
-    color: getColor(textField.color, props) || adgContainerStyles.color,
-    cursor: getCursor(textField.cursor, props),
-    lineHeight: textField.lineHeight,
-    padding: textField.padding,
-    placeholderTextColor: textField.placeholderTextColor,
+    color:
+      getColor(textFieldNachosTheme.color, props) || adgContainerStyles.color,
+    cursor: getCursor(textFieldNachosTheme.cursor, props),
+    lineHeight: textFieldNachosTheme.lineHeight,
+    padding: textFieldNachosTheme.padding,
   };
 };
 
@@ -113,8 +117,6 @@ const theme = (adgTheme: Function, themeProps: TextFieldThemeProps) => {
     themeProps,
   );
 
-  console.log('in theme', themeProps.appearance);
-
   return {
     container: {
       ...adgContainerStyles,
@@ -122,6 +124,11 @@ const theme = (adgTheme: Function, themeProps: TextFieldThemeProps) => {
     },
     input: {
       ...adgInputStyles,
+      // hack to style the placeholder, this overwrites the pseudoselector
+      // being used in ADG Textfield Theme
+      '&::placeholder': {
+        color: textFieldNachosTheme.placeholder.color,
+      },
     },
   };
 };

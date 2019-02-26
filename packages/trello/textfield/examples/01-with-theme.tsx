@@ -1,15 +1,10 @@
 import * as React from 'react';
-import TextField, {
-  colors,
-  TextFieldThemeProps,
-  TextFieldAppearance,
-} from '..';
+import TextField, { colors, TextFieldThemeProps } from '..';
 
 export default function() {
   const skyBlueTheme = (props: TextFieldThemeProps) => {
     let backgroundColor = colors['sky-500'];
     let borderColor = colors['sky-400'];
-    console.log(props);
     if (props.isInvalid) {
       backgroundColor = colors['sky-50'];
       borderColor = colors['sky-100'];
@@ -32,7 +27,6 @@ export default function() {
     <div>
       <label htmlFor="default-value">Default Value</label>
       <TextField
-        appearance="blue"
         theme={(props: TextFieldThemeProps) => skyBlueTheme(props)}
         name="default-value"
         defaultValue="Tacos are yummy!"
