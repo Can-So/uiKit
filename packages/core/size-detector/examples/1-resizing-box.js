@@ -50,7 +50,6 @@ type SizeMetrics = {
 };
 
 const displayResults = ({ width, height }: SizeMetrics) => {
-  console.log({ width, height });
   return width !== null ? (
     <ResultBox>
       {width} x {height}
