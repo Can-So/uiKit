@@ -77,6 +77,7 @@ describe('UploadService', () => {
     jest.spyOn(context.file, 'touchFiles').mockResolvedValue(touchedFiles);
     jest.spyOn(context.file, 'upload').mockReturnValue({
       subscribe() {},
+      pipe() {},
     });
 
     (getPreviewFromImage.getPreviewFromImage as any).mockReturnValue(

@@ -1,3 +1,5 @@
+// We need to import fetch polyfill for media components
+import 'whatwg-fetch';
 import * as assert from 'assert';
 import { undo } from 'prosemirror-history';
 import { EditorView } from 'prosemirror-view';
