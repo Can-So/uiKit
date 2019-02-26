@@ -118,8 +118,10 @@ export default class Switcher extends React.Component<SwitcherProps> {
       return <Skeleton />;
     }
 
+    const isAdmin = managePermissionData;
     const hasAdminLinks = managePermissionData || addProductsPermissionData;
     const hasSuggestedLinks = !!(isXFlowEnabledData && suggestedProductLink);
+    const shouldShowManageListButton = isAdmin && customLinksData![0];
 
     const fixedProductLinks = getFixedProductLinks();
     const licensedProductLinks = getLicensedProductLinks(
@@ -226,7 +228,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
               </NavigationAnalyticsContext>
             ))}
           </Section>
-          <Section sectionId="recent" title="Recent Containers">
+          <Section sectionId="recent" title="Recent">
             {recentLinks.map(
               ({ key, label, href, type, description, Icon }, idx) => (
                 <NavigationAnalyticsContext
@@ -257,7 +259,9 @@ export default class Switcher extends React.Component<SwitcherProps> {
               </NavigationAnalyticsContext>
             ))}
           </Section>
-          {customLinksData && <ManageButton href={customLinksData[1]} />}
+          {shouldShowManageListButton && (
+            <ManageButton href={customLinksData![1]} />
+          )}
         </SwitcherWrapper>
       </NavigationAnalyticsContext>
     );
