@@ -4,6 +4,7 @@ import { encode } from '..';
 import { paragraph } from './paragraph';
 import { unknown } from './unknown';
 import { codeBlock } from './code-block';
+import { mediaGroup } from './media-group';
 
 export const listItem = (node: PMNode, prefix: string): string => {
   const result: string[] = [];
@@ -34,6 +35,11 @@ export const listItem = (node: PMNode, prefix: string): string => {
       }
       case 'codeBlock': {
         contentBuffer.push(codeBlock(n));
+        break;
+      }
+      case 'mediaSingle': {
+        // mediaSingle and mediaGroup are holding the same conversion logic
+        contentBuffer.push(mediaGroup(n));
         break;
       }
       default:
