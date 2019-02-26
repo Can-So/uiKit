@@ -338,11 +338,12 @@ if (process.env.VISUAL_REGRESSION) {
     await global.browser.disconnect();
   });
 
-  // A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
+  // 20 pixels difference to support blinking cursor
   const customConfig = { threshold: 0.0 };
   const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
     customDiffConfig: customConfig,
-    failureThreshold: '1800',
+
+    failureThreshold: '20',
     failureThresholdType: 'pixel',
     noColors: true,
   });

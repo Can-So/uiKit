@@ -5,7 +5,6 @@ import { pressKey, KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
 
 describe('Gap cursor:', () => {
   let page;
-  const minThreshold = 0.01;
 
   beforeAll(async () => {
     // @ts-ignore
@@ -13,18 +12,21 @@ describe('Gap cursor:', () => {
     await initFullPageEditorWithAdf(page, gapcursor, Device.LaptopMDPI);
   });
 
+  afterEach(async () => {
+    const threshold = 0.01;
+    await snapshot(page, threshold);
+  });
+
   it('should render gap cursor for code when ArrowRight', async () => {
     await page.click(selectors.codeContent);
     await pressKey(page, KeyboardKeys.arrowRight);
     await page.waitForSelector(selectors.gapCursor);
-    await snapshot(page, minThreshold);
   });
 
   it(' should render gap cursor on panel when ArrowLeft', async () => {
     await page.click(selectors.panelContent);
     await pressKey(page, KeyboardKeys.arrowLeft);
     await page.waitForSelector(selectors.gapCursor);
-    await snapshot(page, minThreshold);
   });
 
   it(' should render gap cursor on table on ArrowUp', async () => {
@@ -32,7 +34,6 @@ describe('Gap cursor:', () => {
     await pressKey(page, KeyboardKeys.arrowLeft);
     await pressKey(page, KeyboardKeys.arrowUp);
     await page.waitForSelector(selectors.gapCursor);
-    await snapshot(page, minThreshold);
   });
 
   it(' should render gap cursor on table on ArrowDown', async () => {
@@ -40,6 +41,5 @@ describe('Gap cursor:', () => {
     await pressKey(page, KeyboardKeys.arrowRight);
     await pressKey(page, KeyboardKeys.arrowDown);
     await page.waitForSelector(selectors.gapCursor);
-    await snapshot(page, minThreshold);
   });
 });

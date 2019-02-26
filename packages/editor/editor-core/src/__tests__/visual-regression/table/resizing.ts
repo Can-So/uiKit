@@ -22,10 +22,10 @@ describe('Snapshot Test: table resizing', () => {
     it(`resize a column with content width`, async () => {
       await resizeColumn(page, { colIdx: 2, amount: 123, row: 2 });
       await animationFrame(page);
-      await snapshot(page);
+      await snapshot(page, 0.002);
       await resizeColumn(page, { colIdx: 2, amount: -100, row: 2 });
       await animationFrame(page);
-      await snapshot(page);
+      await snapshot(page, 0.002);
     });
 
     it(`snaps back to layout width after column removal`, async () => {
