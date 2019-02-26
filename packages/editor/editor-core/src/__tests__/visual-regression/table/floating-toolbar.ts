@@ -1,8 +1,4 @@
-import {
-  snapshot,
-  initFullPageEditorWithAdf,
-  initCommentEditorWithAdf,
-} from '../_utils';
+import { snapshot, initFullPageEditorWithAdf } from '../_utils';
 import * as adf from './__fixtures__/default-table.adf.json';
 import {
   clickFirstCell,
@@ -14,38 +10,10 @@ import {
 
 describe('Table floating toolbar:fullpage', () => {
   let page;
-  const threshold = 0.1;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
     await initFullPageEditorWithAdf(page, adf);
-    await clickFirstCell(page);
-  });
-
-  it('display options', async () => {
-    await clickTableOptions(page);
-    await snapshot(page, threshold);
-  });
-
-  it('display cell options', async () => {
-    await getSelectorForTableCell({ row: 2, cell: 2 });
-    await clickCellOptions(page);
-    await snapshot(page, threshold);
-  });
-
-  it('display cell background', async () => {
-    await getSelectorForTableCell({ row: 2, cell: 2 });
-    await selectCellOption(page, 'Cell background');
-    await snapshot(page, threshold);
-  });
-});
-
-describe('Table floating toolbar:comment', () => {
-  let page;
-  beforeAll(async () => {
-    // @ts-ignore
-    page = global.page;
-    await initCommentEditorWithAdf(page, adf);
     await clickFirstCell(page);
   });
 
