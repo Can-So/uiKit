@@ -1,5 +1,6 @@
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import HomeQuickSearchContainer from './home/HomeQuickSearchContainer';
 import ConfluenceQuickSearchContainer from './confluence/ConfluenceQuickSearchContainer';
 import JiraQuickSearchContainer from './jira/JiraQuickSearchContainer';
@@ -180,6 +181,22 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
         .reduce((acc, value) => acc || value, false) || this.state !== nextState
     );
   }
+
+  onAdvancedSearch = (e: CancelableEvent, entity: String, query: String) => {
+    if (this.props.onAdvancedSearch) {
+      let preventEventDefault = false;
+      this.props.onAdvancedSearch({
+        preventDefault: () => (preventEventDefault = true),
+        query, // query entered by the user
+        category: entity,
+      });
+
+      if (preventEventDefault) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  };
 
   render() {
     const ContainerComponent = this.getContainerComponent();

@@ -7,6 +7,7 @@ import DropdownMenu, {
   DropdownItemGroup,
   DropdownItem,
 } from '@atlaskit/dropdown-menu';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import { messages } from '../../messages';
 import AdvancedSearchResult from '../AdvancedSearchResult';
 import { AnalyticsType } from '../../model/Result';
@@ -15,7 +16,6 @@ import {
   JiraEntityTypes,
   ADVANCED_JIRA_SEARCH_RESULT_ID,
 } from '../SearchResultsUtil';
-import { CancelableEvent } from './JiraQuickSearchContainer';
 
 export interface Props {
   query: string;

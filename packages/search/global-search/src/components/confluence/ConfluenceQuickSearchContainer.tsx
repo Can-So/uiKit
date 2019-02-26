@@ -5,6 +5,7 @@ import {
   FormattedHTMLMessage,
 } from 'react-intl';
 import { withAnalytics, FireAnalyticsEvent } from '@atlaskit/analytics';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import { ConfluenceClient } from '../../api/ConfluenceClient';
 import {
   CrossProductSearchClient,
@@ -20,7 +21,6 @@ import {
   LinkComponent,
   ReferralContextIdentifiers,
   Logger,
-  AdvancedSearchEvent,
 } from '../GlobalQuickSearchWrapper';
 import {
   redirectToConfluenceAdvancedSearch,
@@ -52,7 +52,11 @@ export interface Props {
   useQuickNavForPeopleResults?: boolean;
   useCPUSForPeopleResults?: boolean;
   logger: Logger;
-  onAdvancedSearch?: (e: AdvancedSearchEvent) => void;
+  onAdvancedSearch?: (
+    e: CancelableEvent,
+    entity: String,
+    query: String,
+  ) => void;
 }
 
 const LOGGER_NAME = 'AK.GlobalSearch.ConfluenceQuickSearchContainer';
@@ -69,7 +73,22 @@ export class ConfluenceQuickSearchContainer extends React.Component<
 
   handleSearchSubmit = ({ target }) => {
     const query = target.value;
-    redirectToConfluenceAdvancedSearch(query);
+    const { onAdvancedSearch = () => {} } = this.props;
+    let preventRedirectToAdvancedSearch = false;
+    onAdvancedSearch(
+      {
+        preventDefault() {
+          preventRedirectToAdvancedSearch = true;
+        },
+        stopPropagation: () => {},
+      },
+      'pages',
+      query,
+    );
+
+    if (!preventRedirectToAdvancedSearch) {
+      redirectToConfluenceAdvancedSearch(query);
+    }
   };
 
   async searchCrossProductConfluence(
@@ -262,6 +281,7 @@ export class ConfluenceQuickSearchContainer extends React.Component<
     keepPreQueryState,
     searchSessionId,
   }) => {
+    const { onAdvancedSearch = () => {} } = this.props;
     return (
       <SearchResultsComponent
         query={latestSearchQuery}
@@ -283,11 +303,21 @@ export class ConfluenceQuickSearchContainer extends React.Component<
             key="advanced"
             query={latestSearchQuery}
             analyticsData={analyticsData}
+            onClick={(event, entity) =>
+              onAdvancedSearch(event, entity, latestSearchQuery)
+            }
           />
         )}
         getPreQueryGroups={() => mapRecentResultsToUIGroups(recentItems)}
         getPostQueryGroups={() => mapSearchResultsToUIGroups(searchResults)}
-        renderNoResult={() => <NoResultsState query={latestSearchQuery} />}
+        renderNoResult={() => (
+          <NoResultsState
+            query={latestSearchQuery}
+            onClick={(event, entity) =>
+              onAdvancedSearch(event, entity, latestSearchQuery)
+            }
+          />
+        )}
       />
     );
   };

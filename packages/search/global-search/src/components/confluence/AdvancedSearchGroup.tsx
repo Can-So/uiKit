@@ -4,6 +4,7 @@ import SearchIcon from '@atlaskit/icon/glyph/search';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { gridSize, math } from '@atlaskit/theme';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import { messages } from '../../messages';
 import StickyFooter from '../common/StickyFooter';
 import SearchPeopleItem from '../SearchPeopleItem';
@@ -17,6 +18,7 @@ const PeopleSearchWrapper = styled.div`
 export interface Props {
   query: string;
   analyticsData?: object;
+  onClick?: (e: CancelableEvent, entity: String) => void;
 }
 
 export default class AdvancedSearchGroup extends React.Component<Props> {
@@ -41,6 +43,11 @@ export default class AdvancedSearchGroup extends React.Component<Props> {
           icon={
             <Icon glyph={PeopleIconGlyph} size="medium" label="Search people" />
           }
+          onClick={({ event }) => {
+            if (this.props.onClick) {
+              this.props.onClick(event, 'people');
+            }
+          }}
         />
       </PeopleSearchWrapper>,
       <StickyFooter key="advanced-search">
@@ -50,6 +57,11 @@ export default class AdvancedSearchGroup extends React.Component<Props> {
           text={text}
           icon={<SearchIcon size="medium" label="Advanced search" />}
           showKeyboardLozenge={true}
+          onClick={({ event }) => {
+            if (this.props.onClick) {
+              this.props.onClick(event, 'pages');
+            }
+          }}
         />
       </StickyFooter>,
     ];

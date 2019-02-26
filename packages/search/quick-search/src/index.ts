@@ -33,4 +33,4 @@ export {
 export { default as ResultBase } from './components/Results/ResultBase';
 // types
 export { Props as ResultBaseProps } from './components/Results/ResultBase';
-export { CancelableEvent } from './components/Results/types';
+export { CancelableEvent, ResultData } from './components/Results/types';

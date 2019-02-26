@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { messages } from '../../messages';
 import Return from '../../assets/Return';
 import { AnalyticsType } from '../../model/Result';
-import { ResultData } from '../../../../quick-search/src/components/Results/types';
+import { ResultData } from '@atlaskit/quick-search';
 
 const Wrapper = styled.div`
   padding: ${gridSize()}px 0;

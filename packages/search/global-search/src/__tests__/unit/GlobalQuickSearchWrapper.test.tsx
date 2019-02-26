@@ -1,4 +1,5 @@
 import * as React from 'react';
+import 'whatwg-fetch';
 import GlobalQuickSearch from '../../components/GlobalQuickSearchWrapper';
 import { HomeQuickSearchContainer } from '../../components/home/HomeQuickSearchContainer';
 import { ConfluenceQuickSearchContainer } from '../../components/confluence/ConfluenceQuickSearchContainer';
