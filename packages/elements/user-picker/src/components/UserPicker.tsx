@@ -381,6 +381,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
 
     return (
       <SelectComponent
+        enableAnimation={false}
         value={value}
         autoFocus={menuIsOpen}
         ref={this.handleSelectRef}
