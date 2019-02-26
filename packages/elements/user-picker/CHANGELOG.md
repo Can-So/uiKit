@@ -1,5 +1,10 @@
 # @atlaskit/user-picker
 
+## 1.0.23
+- [patch] [ad1bd2a92e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad1bd2a92e):
+
+  - FS-3605 expose prop to disable input
+
 ## 1.0.22
 - [patch] [46ffd45f21](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46ffd45f21):
 
