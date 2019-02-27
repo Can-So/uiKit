@@ -36,7 +36,9 @@ describe('Result Base', () => {
     const onClick = resultItem.prop('onClick');
     expect(onClick).toBeInstanceOf(Function);
     const mockedEvent = { preventDefault() {} } as MouseEvent;
-    onClick && onClick(mockedEvent);
+    if (onClick) {
+      onClick(mockedEvent);
+    }
     expect(spy).toBeCalledWith({
       resultId: 'testResult',
       type: 'base',
@@ -58,7 +60,9 @@ describe('Result Base', () => {
     const onMouseEnter = resultItem.prop('onMouseEnter');
     expect(onMouseEnter).toBeInstanceOf(Function);
     const mockedEvent = { preventDefault() {} } as MouseEvent;
-    onMouseEnter && onMouseEnter(mockedEvent);
+    if (onMouseEnter) {
+      onMouseEnter(mockedEvent);
+    }
     expect(spy).toBeCalledWith({
       resultId: 'testResult',
       type: 'base',
