@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.3.3
+- [patch] [e08b35abef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e08b35abef):
+
+  - StatusPicker event listeners cleaned up
+
 ## 101.3.2
 - [patch] [f5e8437365](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e8437365):
 
