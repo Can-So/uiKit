@@ -199,7 +199,14 @@ export class JiraQuickSearchContainer extends React.Component<
         getPostQueryGroups={() =>
           mapSearchResultsToUIGroups(searchResults as JiraResultsMap)
         }
-        renderNoResult={() => <NoResultsState query={query} />}
+        renderNoResult={() => (
+          <NoResultsState
+            query={query}
+            onAdvancedSearch={(mouseEvent, entity) =>
+              onAdvancedSearch(mouseEvent, entity, query)
+            }
+          />
+        )}
       />
     );
   };

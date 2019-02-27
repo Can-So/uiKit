@@ -75,6 +75,8 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
     ));
 
   selectedItem?: JiraEntityTypes;
+  nextSelectedItem?: JiraEntityTypes;
+
   enrichedAnalyticsData?: object;
 
   render() {
@@ -84,7 +86,9 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
       <AdvancedSearchResult
         onClick={e => {
           if (onClick) {
-            onClick(e.event, this.state.entity);
+            const selectedEntity = this.nextSelectedItem || this.state.entity;
+            onClick(e.event, selectedEntity);
+            this.nextSelectedItem = undefined;
           }
         }}
         href={getJiraAdvancedSearchUrl(this.state.entity, query)}
@@ -99,6 +103,7 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
               onClick={e => {
                 if (this.selectedItem) {
                   const entity = this.selectedItem;
+                  this.nextSelectedItem = entity;
                   this.setState({
                     entity,
                   });
