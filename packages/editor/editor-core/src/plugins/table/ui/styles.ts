@@ -142,7 +142,7 @@ const HeaderButtonDanger = () => `
 const InsertButton = () => `
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER} {
     position: absolute;
-    z-index: ${akEditorUnitZIndex};
+    z-index: ${akEditorUnitZIndex + 10};
     bottom: 1px;
   }
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER},
