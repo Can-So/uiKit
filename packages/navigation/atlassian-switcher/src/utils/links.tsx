@@ -3,10 +3,12 @@ import * as React from 'react';
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
 
-import { ConfluenceIcon } from '@atlaskit/logo';
-import { JiraSoftwareIcon } from '@atlaskit/logo';
-import { JiraServiceDeskIcon } from '@atlaskit/logo';
-import { JiraCoreIcon } from '@atlaskit/logo';
+import {
+  ConfluenceIcon,
+  JiraSoftwareIcon,
+  JiraServiceDeskIcon,
+  JiraCoreIcon,
+} from '@atlaskit/logo';
 import { LicenseInformationDataStructure } from '../providers/types';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
@@ -64,17 +66,17 @@ export const PRODUCT_DATA_MAP: {
   },
   [ProductKey.JIRA_CORE]: {
     label: 'Jira Core',
-    Icon: createIcon(JiraSoftwareIcon, { size: 'small' }),
+    Icon: createIcon(JiraCoreIcon, { size: 'small' }),
     href: '/secure/BrowseProjects.jspa?selectedProjectType=business',
   },
   [ProductKey.JIRA_SOFTWARE]: {
     label: 'Jira Software',
-    Icon: createIcon(JiraServiceDeskIcon, { size: 'small' }),
+    Icon: createIcon(JiraSoftwareIcon, { size: 'small' }),
     href: '/secure/BrowseProjects.jspa?selectedProjectType=software',
   },
   [ProductKey.JIRA_SERVICE_DESK]: {
     label: 'Jira Service Desk',
-    Icon: createIcon(JiraCoreIcon, { size: 'small' }),
+    Icon: createIcon(JiraServiceDeskIcon, { size: 'small' }),
     href: '/secure/BrowseProjects.jspa?selectedProjectType=service_desk',
   },
   [ProductKey.JIRA_OPS]: {
