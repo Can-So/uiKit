@@ -10,9 +10,6 @@ export default interface NativeToWebBridge {
   onSubClicked();
   onMentionSelect(id: string, displayName: string);
   onMentionPickerResult(result: string);
-  onMentionPickerDismissed();
-  onStatusUpdate(text: string, color: StatusColor, uuid: string);
-  onStatusPickerDismissed();
   setContent(content: string);
   getContent(): string;
   onMediaPicked(eventName: string, payload: string);

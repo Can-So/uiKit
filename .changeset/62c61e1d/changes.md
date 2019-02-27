@@ -1,0 +1,1 @@
+- ED-6189: registered insertBlockType() on mobile bridge
