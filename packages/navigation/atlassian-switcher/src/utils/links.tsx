@@ -3,10 +3,12 @@ import * as React from 'react';
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
 
-import ConfluenceIcon from '@atlaskit/logo/dist/esm/ConfluenceLogo/Icon';
-import JiraSoftwareIcon from '@atlaskit/logo/dist/esm/JiraSoftwareLogo/Icon';
-import JiraServiceDeskIcon from '@atlaskit/logo/dist/esm/JiraServiceDeskLogo/Icon';
-import JiraCoreIcon from '@atlaskit/logo/dist/esm/JiraCoreLogo/Icon';
+import {
+  ConfluenceIcon,
+  JiraSoftwareIcon,
+  JiraServiceDeskIcon,
+  JiraCoreIcon,
+} from '@atlaskit/logo';
 import { LicenseInformationDataStructure } from '../providers/types';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
