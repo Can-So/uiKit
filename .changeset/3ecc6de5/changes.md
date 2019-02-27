@@ -1,1 +1,0 @@
-- Adding upgrade guide docs to help consumers with the major bump
