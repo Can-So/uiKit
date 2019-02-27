@@ -1,6 +1,6 @@
 //@flow
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render, shallow, mount } from 'enzyme';
 import { ItemPrimitiveBase } from '../../primitives';
 import type {
   ItemRenderComponentProps,
@@ -42,6 +42,12 @@ describe('ItemPrimitiveBase', () => {
     expect(defaultProps.theme.mode.item).toHaveBeenCalledTimes(1);
   });
 
+  it('should render a div container element by default', () => {
+    expect(render(<ItemPrimitiveBase {...defaultProps} />).get(0).tagName).toBe(
+      'div',
+    );
+  });
+
   it('should render only component prop if present', () => {
     const wrapper = mount(
       <ItemPrimitiveBase {...defaultProps} component={TestComponent} />,
@@ -52,27 +58,33 @@ describe('ItemPrimitiveBase', () => {
     expect(wrapper.find('button').length).toBe(0);
   });
 
-  it('should pass all component props and innerRef as ref prop to component if present', () => {
+  it('should pass all relevant component props to the custom component', () => {
+    const innerRef = React.createRef();
     const wrapper = mount(
-      <ItemPrimitiveBase {...defaultProps} component={TestComponent} />,
+      <ItemPrimitiveBase
+        {...defaultProps}
+        innerRef={innerRef}
+        component={TestComponent}
+      />,
     );
     const componentWrapper = wrapper.find(TestComponent);
 
     const {
-      createAnalyticsEvent,
-      theme,
       isActive,
+      isFocused,
       isHover,
       isSelected,
-      isFocused,
-      isDragging,
-      ...componentProps
-    } = wrapper.props();
+      theme,
+      ...props
+    } = defaultProps;
 
-    expect(componentWrapper.props()).toEqual(
-      expect.objectContaining(componentProps),
-    );
-    expect(componentWrapper.prop('ref')).toEqual(wrapper.prop('innerRef'));
+    expect(componentWrapper.props()).toMatchObject({
+      innerRef,
+      dataset: {
+        'data-test-id': 'NavigationItem',
+      },
+      ...props,
+    });
   });
 
   it('should render an anchor element if href prop is present', () => {
@@ -216,5 +228,32 @@ describe('ItemPrimitiveBase', () => {
     );
 
     expect(wrapper).toMatchSnapshot();
+  });
+
+  [
+    { subject: 'the default element', props: {} },
+    { subject: 'an anchor', props: { href: '/' } },
+    { subject: 'a button', props: { onClick: jest.fn() } },
+  ].forEach(({ subject, props }) => {
+    it(`should apply a default dataset to ${subject} when dataset is not provided`, () => {
+      expect(
+        render(<ItemPrimitiveBase {...defaultProps} {...props} />).data(),
+      ).toEqual({ testId: 'NavigationItem' });
+    });
+
+    it(`should apply a custom dataset to ${subject} when dataset is provided`, () => {
+      expect(
+        render(
+          <ItemPrimitiveBase
+            {...defaultProps}
+            {...props}
+            dataset={{ 'data-foo': 'foo', 'data-bar': 'bar' }}
+          />,
+        ).data(),
+      ).toEqual({
+        foo: 'foo',
+        bar: 'bar',
+      });
+    });
   });
 });

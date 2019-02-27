@@ -5,17 +5,20 @@ import React from 'react';
 import GlobalNavigationSkeletonItem from './GlobalNavigationSkeletonItem';
 
 import {
+  Container,
   PrimaryItemsList,
   SecondaryItemsList,
   FirstPrimaryItemWrapper,
 } from './primitives';
-import type { GlobalNavigationSkeletonProps } from './types';
+import type { GlobalNavigationSkeletonBaseProps } from './types';
 
-const GlobalNavigationSkeleton = ({ theme }: GlobalNavigationSkeletonProps) => {
+const GlobalNavigationSkeleton = (props: GlobalNavigationSkeletonBaseProps) => {
+  const { dataset, theme, ...rest } = props;
+
   const wrapperStyles = theme.mode.globalNav();
 
   return (
-    <div css={wrapperStyles}>
+    <Container styles={wrapperStyles} {...dataset} {...rest}>
       <PrimaryItemsList>
         <FirstPrimaryItemWrapper>
           <GlobalNavigationSkeletonItem />
@@ -30,8 +33,14 @@ const GlobalNavigationSkeleton = ({ theme }: GlobalNavigationSkeletonProps) => {
         <GlobalNavigationSkeletonItem />
         <GlobalNavigationSkeletonItem />
       </SecondaryItemsList>
-    </div>
+    </Container>
   );
+};
+
+GlobalNavigationSkeleton.defaultProps = {
+  dataset: {
+    'data-test-id': 'GlobalNavigationSkeleton',
+  },
 };
 
 export default GlobalNavigationSkeleton;
