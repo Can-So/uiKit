@@ -1,1 +1,0 @@
-- [ED-6342] Fix remove bodied extension when it is selected
