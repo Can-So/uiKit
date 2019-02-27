@@ -19,7 +19,7 @@ describe('Table with block looks correct for fullpage:', () => {
   });
 
   afterEach(async () => {
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 
   it('default layout ', async () => {
@@ -49,7 +49,7 @@ describe('Table with block looks correct for comment:', () => {
   });
 
   afterEach(async () => {
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 
   it('default layout ', async () => {

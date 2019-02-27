@@ -23,6 +23,9 @@ describe('Snapshot Test', () => {
   it(`should render emoji picker`, async () => {
     const image = await takeScreenShot(page, url);
     // @ts-ignore
-    expect(image).toMatchProdImageSnapshot();
+    expect(image).toMatchProdImageSnapshot({
+      failureThreshold: '100',
+      failureThresholdType: 'pixel',
+    });
   });
 });

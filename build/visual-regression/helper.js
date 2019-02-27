@@ -10,18 +10,6 @@ const pageSelector = '#examples';
 
 async function takeScreenShot(page /*:any*/, url /*:string*/) {
   await page.goto(url, { waitUntil: 'networkidle0' });
-  // make cursor transparent to clear snapshot
-  const styleContent = `
-  input {
-    color: transparent;
-    text-shadow: 0 0 0 black;
-  }
-  input:focus {
-    outline: none;
-  }
-`;
-
-  await page.addStyleTag({ content: styleContent });
   await page.waitForSelector(pageSelector);
   return page.screenshot();
 }

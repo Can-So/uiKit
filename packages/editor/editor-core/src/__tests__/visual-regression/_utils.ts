@@ -141,16 +141,6 @@ export const initEditorWithAdf = async (
   page,
   { appearance, adf = {}, device = Device.Default }: InitEditorWithADFOptions,
 ) => {
-  const styleContent = `
-  input {
-    color: transparent;
-    text-shadow: 0 0 0 black;
-  }
-  input:focus {
-    outline: none;
-  }
-`;
-
   const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
 
   const currentUrl = page.url();
@@ -169,8 +159,6 @@ export const initEditorWithAdf = async (
     defaultValue: JSON.stringify(adf),
     ...getEditorProps(appearance),
   });
-
-  await page.addStyleTag({ content: styleContent });
 };
 
 export const initFullPageEditorWithAdf = async (
