@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 32.4.1
+- [patch] [42b78a6133](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/42b78a6133):
+
+  - ED-6278: a complete rewrite of mergeCells, deleteColumns and deleteRows
+
 ## 32.4.0
 - [minor] [30b4e99377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/30b4e99377):
 
