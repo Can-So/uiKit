@@ -76,6 +76,8 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     getDisplayedResults: results => results || ({} as GenericResultMap),
   };
 
+  stopAll: Boolean = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -109,6 +111,10 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     });
   }
 
+  componentWillUnmount() {
+    this.stopAll = true;
+  }
+
   doSearch = async (query: string) => {
     const startTime: number = performanceNow();
 
@@ -125,24 +131,25 @@ export class QuickSearchContainer extends React.Component<Props, State> {
 
       const elapsedMs = performanceNow() - startTime;
       if (this.state.latestSearchQuery === query) {
-        this.setState(
-          {
-            searchResults: results,
-            isError: false,
-            isLoading: false,
-            keepPreQueryState: false,
-          },
-          () => {
-            this.fireShownPostQueryEvent(
-              startTime,
-              elapsedMs,
-              this.state.searchResults || {},
-              timings || {},
-              this.state.searchSessionId,
-              this.state.latestSearchQuery,
-            );
-          },
-        );
+        !this.stopAll &&
+          this.setState(
+            {
+              searchResults: results,
+              isError: false,
+              isLoading: false,
+              keepPreQueryState: false,
+            },
+            () => {
+              this.fireShownPostQueryEvent(
+                startTime,
+                elapsedMs,
+                this.state.searchResults || {},
+                timings || {},
+                this.state.searchSessionId,
+                this.state.latestSearchQuery,
+              );
+            },
+          );
       }
     } catch (e) {
       this.props.logger.safeError(
@@ -312,22 +319,23 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         this.state.searchSessionId,
       );
       const renderStartTime = performanceNow();
-      this.setState(
-        {
-          recentItems: results,
-          isLoading: false,
-        },
-        async () => {
-          const experimentRequestDurationMs = (await abTestPromise).elapsedMs;
-          this.fireShownPreQueryEvent(
-            this.state.searchSessionId,
-            this.state.recentItems || {},
-            startTime,
-            experimentRequestDurationMs,
-            renderStartTime,
-          );
-        },
-      );
+      !this.stopAll &&
+        this.setState(
+          {
+            recentItems: results,
+            isLoading: false,
+          },
+          async () => {
+            const experimentRequestDurationMs = (await abTestPromise).elapsedMs;
+            this.fireShownPreQueryEvent(
+              this.state.searchSessionId,
+              this.state.recentItems || {},
+              startTime,
+              experimentRequestDurationMs,
+              renderStartTime,
+            );
+          },
+        );
     } catch (e) {
       this.props.logger.safeError(
         LOGGER_NAME,
