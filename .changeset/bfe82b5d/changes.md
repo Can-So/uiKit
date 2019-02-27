@@ -1,0 +1,1 @@
+- ED-6327: highlight smart cards when selecting backwards in document
