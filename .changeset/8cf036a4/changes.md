@@ -1,0 +1,1 @@
+- ED-6381: Gather max layout sizes based on dynamic text sizing

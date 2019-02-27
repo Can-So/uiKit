@@ -80,7 +80,13 @@ class TableComponent extends React.Component<ComponentProps, TableState> {
     }
 
     if (allowColumnResizing) {
-      const { view, node, containerWidth, getPos } = this.props;
+      const {
+        view,
+        node,
+        containerWidth,
+        getPos,
+        dynamicTextSizing,
+      } = this.props;
 
       if (node.attrs.__autoSize === false) {
         this.scaleTableDebounced(
@@ -91,6 +97,7 @@ class TableComponent extends React.Component<ComponentProps, TableState> {
           getPos(),
           containerWidth.width,
           true,
+          dynamicTextSizing,
         );
       }
 
@@ -237,7 +244,13 @@ class TableComponent extends React.Component<ComponentProps, TableState> {
   };
 
   private handleTableResizing = prevProps => {
-    const { view, node, getPos, containerWidth } = this.props;
+    const {
+      view,
+      node,
+      getPos,
+      containerWidth,
+      dynamicTextSizing,
+    } = this.props;
 
     const prevAttrs = prevProps.node.attrs;
     const currentAttrs = node.attrs;
@@ -263,6 +276,8 @@ class TableComponent extends React.Component<ComponentProps, TableState> {
         prevProps.node,
         getPos(),
         containerWidth.width,
+        false,
+        dynamicTextSizing,
       );
     }
 
