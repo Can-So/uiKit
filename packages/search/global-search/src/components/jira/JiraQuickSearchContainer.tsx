@@ -114,9 +114,22 @@ export class JiraQuickSearchContainer extends React.Component<
     const { onAdvancedSearch = () => {} } = this.props;
     const target = event.target;
     const query = target.value;
-    onAdvancedSearch(event, this.state.selectedAdvancedSearchType, query);
+    let defaultPrevented = false;
 
-    if (!event.isDefaultPrevented) {
+    onAdvancedSearch(
+      Object.assign(event, {
+        preventDefault() {
+          defaultPrevented = true;
+          event.preventDefault();
+          event.stopPropogation();
+        },
+        stopPropagation() {},
+      }),
+      this.state.selectedAdvancedSearchType,
+      query,
+    );
+
+    if (!defaultPrevented) {
       redirectToJiraAdvancedSearch(
         this.state.selectedAdvancedSearchType,
         query,

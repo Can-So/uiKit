@@ -383,12 +383,12 @@ export class QuickSearch extends React.Component<Props, State> {
           result.props.onClick({
             resultId: result.props.resultId,
             type: result.props.type,
-            event: {
+            event: Object.assign(event, {
               preventDefault() {
                 preventDefault = true;
               },
               stopPropagation() {},
-            },
+            }),
           });
         }
 

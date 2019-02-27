@@ -72,12 +72,25 @@ export class ConfluenceQuickSearchContainer extends React.Component<
   };
 
   handleSearchSubmit = event => {
+    const { onAdvancedSearch = () => {} } = this.props;
     const target = event.target;
     const query = target.value;
-    const { onAdvancedSearch = () => {} } = this.props;
-    onAdvancedSearch(event, 'pages', query);
+    let defaultPrevented = false;
 
-    if (!event.isDefaultPrevented) {
+    onAdvancedSearch(
+      Object.assign(event, {
+        preventDefault() {
+          defaultPrevented = true;
+          event.preventDefault();
+          event.stopPropogation();
+        },
+        stopPropagation() {},
+      }),
+      'pages',
+      query,
+    );
+
+    if (!defaultPrevented) {
       redirectToConfluenceAdvancedSearch(query);
     }
   };

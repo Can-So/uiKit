@@ -1,6 +1,5 @@
 import * as React from 'react';
 import 'whatwg-fetch';
-import { CancelableEvent } from '@atlaskit/quick-search';
 import GlobalQuickSearch from '../../components/GlobalQuickSearchWrapper';
 import { HomeQuickSearchContainer } from '../../components/home/HomeQuickSearchContainer';
 import { ConfluenceQuickSearchContainer } from '../../components/confluence/ConfluenceQuickSearchContainer';
