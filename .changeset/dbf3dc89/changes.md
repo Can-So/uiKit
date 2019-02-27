@@ -1,1 +1,0 @@
-- Expose the possibility of encoding a single node
