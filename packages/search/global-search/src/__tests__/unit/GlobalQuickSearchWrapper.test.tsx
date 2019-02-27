@@ -104,7 +104,7 @@ describe('advanced search callback', () => {
           onAdvancedSearch={spy}
         />,
       );
-      const mockedEvent: CancelableEvent = {
+      const mockedEvent = {
         stopPropagation: jest.fn(),
         preventDefault: jest.fn(),
       };

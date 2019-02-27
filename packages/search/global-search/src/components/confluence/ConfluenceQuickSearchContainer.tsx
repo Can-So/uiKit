@@ -71,22 +71,13 @@ export class ConfluenceQuickSearchContainer extends React.Component<
     postQueryScreenCounter: new SearchScreenCounter(),
   };
 
-  handleSearchSubmit = ({ target }) => {
+  handleSearchSubmit = event => {
+    const target = event.target;
     const query = target.value;
     const { onAdvancedSearch = () => {} } = this.props;
-    let preventRedirectToAdvancedSearch = false;
-    onAdvancedSearch(
-      {
-        preventDefault() {
-          preventRedirectToAdvancedSearch = true;
-        },
-        stopPropagation: () => {},
-      },
-      'pages',
-      query,
-    );
+    onAdvancedSearch(event, 'pages', query);
 
-    if (!preventRedirectToAdvancedSearch) {
+    if (!event.isDefaultPrevented) {
       redirectToConfluenceAdvancedSearch(query);
     }
   };

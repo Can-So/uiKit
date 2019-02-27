@@ -110,22 +110,13 @@ export class JiraQuickSearchContainer extends React.Component<
     postQueryScreenCounter: new SearchScreenCounter(),
   };
 
-  handleSearchSubmit = ({ target }) => {
+  handleSearchSubmit = event => {
     const { onAdvancedSearch = () => {} } = this.props;
+    const target = event.target;
     const query = target.value;
-    let preventRedirectToAdvancedSearch = false;
-    onAdvancedSearch(
-      {
-        preventDefault() {
-          preventRedirectToAdvancedSearch = true;
-        },
-        stopPropagation: () => {},
-      },
-      this.state.selectedAdvancedSearchType,
-      query,
-    );
+    onAdvancedSearch(event, this.state.selectedAdvancedSearchType, query);
 
-    if (!preventRedirectToAdvancedSearch) {
+    if (!event.isDefaultPrevented) {
       redirectToJiraAdvancedSearch(
         this.state.selectedAdvancedSearchType,
         query,

@@ -4,10 +4,10 @@ export type AnalyticsData = Object;
 export type ResultId = string | number;
 export type SelectedResultId = ResultId | null;
 
-export type CancelableEvent = {
-  stopPropagation: () => void;
-  preventDefault: () => void;
-};
+export type CancelableEvent =
+  | KeyboardEvent
+  | MouseEvent
+  | React.KeyboardEvent<HTMLInputElement>;
 
 export type ResultData = {
   resultId: ResultId;
