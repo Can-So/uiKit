@@ -1,0 +1,12 @@
+{
+  "releases": [
+    { "name": "@atlaskit/editor-bitbucket-transformer", "type": "minor" },
+    { "name": "@atlaskit/editor-confluence-transformer", "type": "minor" },
+    { "name": "@atlaskit/editor-jira-transformer", "type": "minor" },
+    { "name": "@atlaskit/editor-json-transformer", "type": "minor" },
+    { "name": "@atlaskit/editor-markdown-transformer", "type": "minor" },
+    { "name": "@atlaskit/editor-wikimarkup-transformer", "type": "minor" },
+    { "name": "@atlaskit/json-schema-generator", "type": "minor" }
+  ],
+  "dependents": []
+}
