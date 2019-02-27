@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 32.3.1
+- [patch] [f5e8437365](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e8437365):
+
+  - ED-6373: Fix position of breakout controls while scrolling
+
 ## 32.3.0
 - [minor] [b1ff16a33f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ff16a33f):
 
