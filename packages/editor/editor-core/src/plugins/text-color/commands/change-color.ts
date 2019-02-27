@@ -9,21 +9,21 @@ import {
   ACTION_SUBJECT,
   ACTION_SUBJECT_ID,
   EVENT_TYPE,
-  HighOrderCommand,
+  HigherOrderCommand,
 } from '../../analytics';
 
 /**
- * Helper to create an high order analytics command
+ * Helper to create a higher order analytics command
  * @param newColor  - Color to be change in hex code
  * @param previousColor - Active color in hex code
  * @param palette - Current palette of colors
- * @return High order command with analytics logic inside.
+ * @return Higher order command with analytics logic inside.
  */
 function createWithColorAnalytics(
   newColor: string,
   previousColor: string,
   palette: Map<string, string>,
-): HighOrderCommand {
+): HigherOrderCommand {
   const newColorLabel = palette.get(newColor) || newColor;
   const previousColorLabel = palette.get(previousColor) || previousColor;
   return withAnalytics({
