@@ -1,15 +1,18 @@
 import { TextSelection } from 'prosemirror-state';
 import { pluginKey, ACTIONS } from '../pm-plugins/main';
 import { getDisabledState } from '../utils/disabled';
+import { Command } from '../../../types';
 
-export const toggleColor = color => (state, dispatch) => {
+export const toggleColor = (color: string): Command => (state, dispatch) => {
   const { textColor } = state.schema.marks;
 
   let tr = state.tr;
 
   const disabledState = getDisabledState(state);
   if (disabledState) {
-    dispatch(tr.setMeta(pluginKey, { action: ACTIONS.DISABLE }));
+    if (dispatch) {
+      dispatch(tr.setMeta(pluginKey, { action: ACTIONS.DISABLE }));
+    }
     return false;
   }
 
@@ -19,7 +22,9 @@ export const toggleColor = color => (state, dispatch) => {
     const mark = textColor.create({ color });
     tr = tr.addStoredMark(mark);
 
-    dispatch(tr.setMeta(pluginKey, { action: ACTIONS.SET_COLOR, color }));
+    if (dispatch) {
+      dispatch(tr.setMeta(pluginKey, { action: ACTIONS.SET_COLOR, color }));
+    }
     return true;
   }
 
@@ -30,6 +35,8 @@ export const toggleColor = color => (state, dispatch) => {
 
   tr = tr.scrollIntoView();
 
-  dispatch(tr.setMeta(pluginKey, { action: ACTIONS.SET_COLOR, color }));
+  if (dispatch) {
+    dispatch(tr.setMeta(pluginKey, { action: ACTIONS.SET_COLOR, color }));
+  }
   return true;
 };
