@@ -20,21 +20,27 @@ describe('Avatar SSR', () => {
   beforeAll(() => {
     // Mocking Image.prototype.src to call the onload or onerror
     // callbacks depending on the src passed to it
-    // Flow thinks a value property is necessary despite the accessors being present
-    // $FlowFixMe - https://github.com/facebook/flow/issues/5380
-    Object.defineProperty(global.Image.prototype, 'src', {
-      get() {
+    // N.B. the mockImplementation callbacks are regular functions to ensure they get the
+    // correct context (i.e. this: HTMLImageElement)
+    jest
+      .spyOn(global.Image.prototype, 'src', 'get')
+      .mockImplementation(function srcGetter() {
         return this._src;
-      },
-      set(src) {
+      });
+    jest
+      .spyOn(global.Image.prototype, 'src', 'set')
+      .mockImplementation(function srcSetter(src) {
         if (src === LOAD_FAILURE_SRC) {
           this.onerror(new Error('mocked error'));
         } else if (src === LOAD_SUCCESS_SRC) {
           this.onload();
         }
         this._src = src;
-      },
-    });
+      });
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
   });
 
   const avatar = {
@@ -56,19 +62,8 @@ describe('Avatar SSR', () => {
     const container = document.createElement('div');
     if (document.body) document.body.appendChild(container);
 
-    const loadImageSpy = jest.spyOn(AvatarImage.prototype, 'loadImage');
-    const loadSuccessHandlerSpy = jest.spyOn(
-      AvatarImage.prototype,
-      'handleLoadSuccess',
-    );
-    const loadErrorHandlerSpy = jest.spyOn(
-      AvatarImage.prototype,
-      'handleLoadError',
-    );
     const avatarMarkup = ReactDOMServer.renderToString(<Avatar {...avatar} />);
     container.innerHTML = avatarMarkup;
-
-    expect(loadImageSpy).toHaveBeenCalledTimes(0);
 
     const hydratedWrapper = mount(<Avatar {...avatar} />, {
       hydrateIn: container,
@@ -76,11 +71,6 @@ describe('Avatar SSR', () => {
     const hydratedAvatar = hydratedWrapper.find(Avatar);
     const avatarImageInstance = hydratedAvatar.find(AvatarImage).instance();
     expect(hydratedAvatar.props().src).toBe(avatar.src);
-
-    // after hydration, expect the load method and fail handlers to be called
-    expect(loadImageSpy).toHaveBeenCalledTimes(1);
-    expect(loadErrorHandlerSpy).toHaveBeenCalledTimes(1);
-    expect(loadSuccessHandlerSpy).toHaveBeenCalledTimes(0);
 
     // when the load fails, expect that the error state is set
     expect(avatarImageInstance.state.hasError).toBe(true);

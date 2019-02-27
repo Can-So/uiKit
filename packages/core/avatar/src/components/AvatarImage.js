@@ -84,18 +84,11 @@ export default class AvatarImage extends PureComponent<Props, State> {
   };
   isComponentMounted: boolean;
 
-  constructor(props: Props) {
-    super(props);
-    // $FlowFixMe - flow thinks these aren't writeable
-    this.handleLoadError = this.handleLoadError.bind(this);
-    // $FlowFixMe
-    this.handleLoadSuccess = this.handleLoadSuccess.bind(this);
-  }
-
   componentDidMount() {
     this.isComponentMounted = true;
     this.loadImage();
   }
+
   // handle case where `src` is modified after mount
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.src && this.props.src !== nextProps.src) {
@@ -111,7 +104,8 @@ export default class AvatarImage extends PureComponent<Props, State> {
   componentWillUnmount() {
     this.isComponentMounted = false;
   }
-  loadImage() {
+
+  loadImage = () => {
     // nothing to load
     if (!this.props.src) {
       return;
@@ -121,21 +115,24 @@ export default class AvatarImage extends PureComponent<Props, State> {
     img.onload = this.handleLoadSuccess;
     img.onerror = this.handleLoadError;
     img.src = this.props.src;
-  }
+  };
+
   handleLoad = (hasError: boolean) => {
     if (this.isComponentMounted) {
       this.setState({ hasError, isLoading: false });
     }
   };
-  handleLoadSuccess() {
+
+  handleLoadSuccess = () => {
     if (typeof this.props.src === 'string') {
       cache[this.props.src] = true;
     }
     this.handleLoad(false);
-  }
-  handleLoadError() {
+  };
+
+  handleLoadError = () => {
     this.handleLoad(true);
-  }
+  };
 
   render() {
     const { alt, src, appearance, size } = this.props;
