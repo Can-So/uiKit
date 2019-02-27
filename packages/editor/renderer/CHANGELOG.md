@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 40.1.0
+- [minor] [09e8eb968f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09e8eb968f):
+
+  - ED-6256: render media items with occurenceKey; ignore link cards
+
 ## 40.0.0
 - [major] [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
 

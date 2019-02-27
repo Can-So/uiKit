@@ -26,7 +26,7 @@
     "bolt-query": "^1.1.4",
     "chalk": "^2.1.0",
     "extract-react-types-loader": "^0.3.0",
-    "netlify-cli": "^2.6.4",
+    "netlify-cli": "^2.8.1",
     "node-fetch": "^2.2.0",
     "tty-table": "^2.6.8"
   },

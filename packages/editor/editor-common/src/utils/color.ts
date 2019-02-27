@@ -25,8 +25,8 @@ export function normalizeHexColor(
     return rgbToHex(color);
   } else {
     // http://dev.w3.org/csswg/css-color/#named-colors
-    if (namedColors.default && namedColors.default[color]) {
-      color = namedColors.default[color];
+    if (namedColors.default && (namedColors as any).default[color]) {
+      color = (namedColors as any).default[color];
     } else if (namedColors && namedColors[color]) {
       color = namedColors[color];
     } else {

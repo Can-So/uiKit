@@ -9,10 +9,10 @@ export interface Props {
 }
 
 export class WithProviders extends PureComponent<Props, { providers: any }> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
-    const providers = {};
+    const providers: Record<string, Promise<any> | undefined> = {};
     this.props.providers.forEach(name => {
       providers[name] = undefined;
     });

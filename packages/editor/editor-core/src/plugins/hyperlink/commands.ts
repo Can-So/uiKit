@@ -6,7 +6,7 @@ import {
   canLinkBeCreatedInRange,
 } from './pm-plugins/main';
 import { EditorState, Selection } from 'prosemirror-state';
-import { filter } from '../../utils/commands';
+import { filter, Predicate } from '../../utils/commands';
 import { Mark, Node } from 'prosemirror-model';
 import {
   addAnalytics,
@@ -18,27 +18,44 @@ import {
 } from '../analytics';
 import { queueCardsFromChangedTr } from '../card/pm-plugins/doc';
 
-const isLinkAtPos = (pos: number) => (state: EditorState): boolean => {
-  const text = state.doc.nodeAt(pos);
-  if (text) {
-    const link = state.schema.marks.link;
-    return !!link.isInSet(text.marks);
-  }
-  return false;
-};
+export function isTextAtPos(pos: number): Predicate {
+  return (state: EditorState) => {
+    const node = state.doc.nodeAt(pos);
+    return !!node && node.isText;
+  };
+}
 
-export function setLinkHref(pos: number, href: string): Command {
-  return filter(isLinkAtPos(pos), (state, dispatch) => {
+export function isLinkAtPos(pos: number): Predicate {
+  return (state: EditorState) => {
+    const node = state.doc.nodeAt(pos);
+    return !!node && state.schema.marks.link.isInSet(node.marks);
+  };
+}
+
+export function setLinkHref(href: string, pos: number, to?: number): Command {
+  return filter(isTextAtPos(pos), (state, dispatch) => {
+    const $pos = state.doc.resolve(pos);
     const node = state.doc.nodeAt(pos) as Node;
-    const link = state.schema.marks.link;
-    const mark = link.isInSet(node.marks) as Mark;
+    const linkMark = state.schema.marks.link;
+    const mark = linkMark.isInSet(node.marks) as Mark | undefined;
     const url = normalizeUrl(href);
-    const tr = state.tr.removeMark(pos, pos + node.nodeSize, mark);
+    if (mark && mark.attrs.href === url) {
+      return false;
+    }
+
+    const rightBound =
+      to && pos !== to ? to : pos - $pos.textOffset + node.nodeSize;
+
+    const tr = state.tr.removeMark(pos, rightBound, linkMark);
+
     if (href.trim()) {
       tr.addMark(
         pos,
-        pos + node.nodeSize,
-        link.create({ ...mark.attrs, href: url }),
+        rightBound,
+        linkMark.create({
+          ...((mark && mark.attrs) || {}),
+          href: url,
+        }),
       );
       tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR);
     }
@@ -50,14 +67,17 @@ export function setLinkHref(pos: number, href: string): Command {
   });
 }
 
-export function setLinkText(pos: number, text: string): Command {
+export function setLinkText(text: string, pos: number, to?: number): Command {
   return filter(isLinkAtPos(pos), (state, dispatch) => {
+    const $pos = state.doc.resolve(pos);
     const node = state.doc.nodeAt(pos) as Node;
-    const link = state.schema.marks.link;
-    const mark = link.isInSet(node.marks) as Mark;
-    if (node && text && text !== node.text) {
+    const mark = state.schema.marks.link.isInSet(node.marks) as Mark;
+    if (node && text.length > 0 && text !== node.text) {
+      const rightBound =
+        to && pos !== to ? to : pos - $pos.textOffset + node.nodeSize;
       const tr = state.tr;
-      tr.insertText(text, pos, pos + node.nodeSize);
+
+      tr.insertText(text, pos, rightBound);
       tr.addMark(pos, pos + text.length, mark);
       tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR);
 
@@ -106,7 +126,7 @@ export function insertLink(
 }
 
 export function removeLink(pos: number): Command {
-  return setLinkHref(pos, '');
+  return setLinkHref('', pos);
 }
 
 export function showLinkToolbar(

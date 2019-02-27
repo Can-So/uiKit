@@ -1,5 +1,30 @@
 # @atlaskit/editor-core
 
+## 101.4.1
+- [patch] [c2360c53b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2360c53b2):
+
+  - fixed status selection loss when dragging and drop
+
+## 101.4.0
+- [minor] [30b4e99377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/30b4e99377):
+
+  - ED-5888 Add editor dark mode
+
+## 101.3.3
+- [patch] [e08b35abef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e08b35abef):
+
+  - StatusPicker event listeners cleaned up
+
+## 101.3.2
+- [patch] [f5e8437365](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e8437365):
+
+  - ED-6373: Fix position of breakout controls while scrolling
+
+## 101.3.1
+- [patch] [7308d1e0e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7308d1e0e9):
+
+  - ED-6061: support image annotations in editor
+
 ## 101.3.0
 - [minor] [3672ec23ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3672ec23ef):
 

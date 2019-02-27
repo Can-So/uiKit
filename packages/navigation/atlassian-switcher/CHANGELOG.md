@@ -1,5 +1,15 @@
 # @atlaskit/atlassian-switcher
 
+## 0.0.9
+- [patch] [e7fa9e1308](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7fa9e1308):
+
+  - Fixing icon imports
+
+## 0.0.8
+- [patch] [ebfdf1e915](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebfdf1e915):
+
+  - Update sections and grouping according to updated designs
+
 ## 0.0.7
 - [patch] [8a70a0db9f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a70a0db9f):
 

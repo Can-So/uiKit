@@ -100,7 +100,11 @@ export default class Popup extends React.Component<Props, State> {
     this.setState({ position });
   }
 
-  private cannotSetPopup(popup, target, overflowScrollParent) {
+  private cannotSetPopup(
+    popup: HTMLElement,
+    target?: HTMLElement,
+    overflowScrollParent?: HTMLElement | false,
+  ) {
     /**
      * Check whether:
      * 1. Popup's offset targets which means whether or not its possible to correctly position popup along with given target.
@@ -110,6 +114,7 @@ export default class Popup extends React.Component<Props, State> {
      * Add "position: relative" to "overflow: scroll" container or to some other FloatingPanel wrapper inside it.
      */
     return (
+      !target ||
       (document.body.contains(target) &&
         (popup.offsetParent && !popup.offsetParent.contains(target!))) ||
       (overflowScrollParent &&
@@ -143,7 +148,7 @@ export default class Popup extends React.Component<Props, State> {
     this.initPopup(popup);
   };
 
-  private scheduledUpdatePosition = rafSchedule(props =>
+  private scheduledUpdatePosition = rafSchedule((props: Props) =>
     this.updatePosition(props),
   );
 

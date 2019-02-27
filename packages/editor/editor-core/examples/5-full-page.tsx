@@ -45,7 +45,6 @@ Wrapper.displayName = 'Wrapper';
 export const Content: any = styled.div`
   padding: 0 20px;
   height: 100%;
-  background: #fff;
   box-sizing: border-box;
 `;
 Content.displayName = 'Content';
@@ -177,6 +176,7 @@ class ExampleEditorComponent extends React.Component<
                 provider: mediaProvider,
                 allowMediaSingle: true,
                 allowResizing: true,
+                allowAnnotation: true,
               }}
               placeholder="Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule."
               shouldFocus={false}
