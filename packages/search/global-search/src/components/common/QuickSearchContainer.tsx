@@ -76,6 +76,7 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     getDisplayedResults: results => results || ({} as GenericResultMap),
   };
 
+  // used to terminate if component is unmounted while waiting for a promise
   stopAll: Boolean = false;
 
   constructor(props) {
@@ -129,27 +130,30 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         startTime,
       );
 
+      if (this.stopAll) {
+        return;
+      }
+
       const elapsedMs = performanceNow() - startTime;
       if (this.state.latestSearchQuery === query) {
-        !this.stopAll &&
-          this.setState(
-            {
-              searchResults: results,
-              isError: false,
-              isLoading: false,
-              keepPreQueryState: false,
-            },
-            () => {
-              this.fireShownPostQueryEvent(
-                startTime,
-                elapsedMs,
-                this.state.searchResults || {},
-                timings || {},
-                this.state.searchSessionId,
-                this.state.latestSearchQuery,
-              );
-            },
-          );
+        this.setState(
+          {
+            searchResults: results,
+            isError: false,
+            isLoading: false,
+            keepPreQueryState: false,
+          },
+          () => {
+            this.fireShownPostQueryEvent(
+              startTime,
+              elapsedMs,
+              this.state.searchResults || {},
+              timings || {},
+              this.state.searchSessionId,
+              this.state.latestSearchQuery,
+            );
+          },
+        );
       }
     } catch (e) {
       this.props.logger.safeError(
@@ -319,23 +323,25 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         this.state.searchSessionId,
       );
       const renderStartTime = performanceNow();
-      !this.stopAll &&
-        this.setState(
-          {
-            recentItems: results,
-            isLoading: false,
-          },
-          async () => {
-            const experimentRequestDurationMs = (await abTestPromise).elapsedMs;
-            this.fireShownPreQueryEvent(
-              this.state.searchSessionId,
-              this.state.recentItems || {},
-              startTime,
-              experimentRequestDurationMs,
-              renderStartTime,
-            );
-          },
-        );
+      if (this.stopAll) {
+        return;
+      }
+      this.setState(
+        {
+          recentItems: results,
+          isLoading: false,
+        },
+        async () => {
+          const experimentRequestDurationMs = (await abTestPromise).elapsedMs;
+          this.fireShownPreQueryEvent(
+            this.state.searchSessionId,
+            this.state.recentItems || {},
+            startTime,
+            experimentRequestDurationMs,
+            renderStartTime,
+          );
+        },
+      );
     } catch (e) {
       this.props.logger.safeError(
         LOGGER_NAME,
