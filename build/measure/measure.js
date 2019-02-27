@@ -18,7 +18,7 @@ const { prepareForPrint } = require('./utils/print');
 const { printReport } = require('./reporters/console');
 const { printHowToReadStats } = require('./utils/how-to-read-stats');
 
-module.exports = function main(
+module.exports = async function main(
   filePath,
   isAnalyze,
   isJson,
@@ -142,7 +142,8 @@ module.exports = function main(
      * – node_modules bundle: includes all external dependencies
      * – package groups bundles: e.g. core, media, editor, etc...
      */
-    const mainConfig = createWebpackConfig({
+    const mainConfig = await createWebpackConfig({
+      //TODO: Fixme Probably broken
       outputDir: measureCompiledOutputPath,
       entryPoint: { main: filePath },
       optimization: {
@@ -157,7 +158,8 @@ module.exports = function main(
      * Config for a combined build. Used to better approximate bundle
      * size since gzip size is highly affected by the size of the input.
      */
-    const combinedConfig = createWebpackConfig({
+    const combinedConfig = await createWebpackConfig({
+      //TODO: Fixme Probably broken
       outputDir: measureCompiledOutputPath,
       entryPoint: { combined_sync: filePath },
       optimization: {
