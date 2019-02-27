@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.5.0
+- [minor] [bab8f06b0a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bab8f06b0a):
+
+  - ED-6285 When catch an invalid transaction, send the new & prev document structures
+
 ## 101.4.3
 - [patch] [06f8fd872b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06f8fd872b):
 
