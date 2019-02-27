@@ -13,6 +13,22 @@ import {
 } from '../../../components/ShareDialogWithTrigger';
 import { ShareData, ShareForm } from '../../../components/ShareForm';
 
+jest.mock('popper.js', () => {
+  // @ts-ignore: jest does not have type for requireActual
+  const PopperJS = jest.requireActual('popper.js');
+
+  return class Popper {
+    static placements = PopperJS.placements;
+
+    constructor() {
+      return {
+        destroy: () => {},
+        scheduleUpdate: () => {},
+      };
+    }
+  };
+});
+
 let wrapper: ShallowWrapper<Props, State, ShareDialogWithTrigger>;
 let mockOnShareSubmit: jest.Mock;
 const mockLoadOptions = () => [];

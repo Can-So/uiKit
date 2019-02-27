@@ -1,5 +1,10 @@
 # @atlaskit/editor-json-transformer
 
+## 4.2.0
+- [minor] [7697e275b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7697e275b0):
+
+  - Expose the possibility of encoding a single node
+
 ## 4.1.12
 - Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
   - @atlaskit/editor-test-helpers@7.0.1

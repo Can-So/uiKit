@@ -42,7 +42,13 @@ export function calcPctFromPx(width: number, lineLength: number): number {
   return (width + gutterSize) / maxWidth;
 }
 
-export const snapToGrid = (gridWidth, width, height, lineLength, gridSize) => {
+export const snapToGrid = (
+  gridWidth: number,
+  width: number,
+  height: number,
+  lineLength: number,
+  gridSize: number,
+) => {
   const pxWidth = calcPxFromPct(gridWidth / 100, lineLength);
 
   const columnSpan = Math.round(

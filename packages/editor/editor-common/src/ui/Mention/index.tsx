@@ -27,7 +27,7 @@ export interface MentionState {
 export default class Mention extends PureComponent<MentionProps, {}> {
   private providerFactory: ProviderFactory;
 
-  constructor(props) {
+  constructor(props: MentionProps) {
     super(props);
     this.providerFactory = props.providers || new ProviderFactory();
   }
@@ -40,7 +40,7 @@ export default class Mention extends PureComponent<MentionProps, {}> {
     }
   }
 
-  private renderWithProvider = providers => {
+  private renderWithProvider = (providers: Record<string, Promise<any>>) => {
     const { accessLevel, eventHandlers, id, portal, text } = this.props;
 
     const { mentionProvider, profilecardProvider } = providers;

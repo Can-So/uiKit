@@ -97,7 +97,7 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
     this.setState({ isMouseSelected: true });
   };
 
-  handleMouseLeave = e => {
+  handleMouseLeave = () => {
     this.props.context.onMouseLeave();
     this.setState({ isMouseSelected: false });
   };

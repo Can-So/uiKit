@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as PropTypes from 'prop-types';
 import { QuickSearch, ResultItemGroup, PersonResult } from '../..';
 import AkSearch from '../../components/Search/Search';
@@ -15,7 +15,7 @@ import {
 
 const noOp = () => {};
 
-const isInputFocused = wrapper =>
+const isInputFocused = (wrapper: ReactWrapper) =>
   wrapper.find('input').getDOMNode() === document.activeElement;
 
 describe('<QuickSearch />', () => {
@@ -32,8 +32,8 @@ describe('<QuickSearch />', () => {
     </ResultItemGroup>,
   ];
 
-  let wrapper;
-  let searchInput;
+  let wrapper: ReactWrapper;
+  let searchInput: ReactWrapper;
   let onSearchSubmitSpy: Object;
 
   const render = (props?: any) => {
@@ -225,7 +225,7 @@ describe('<QuickSearch />', () => {
       expect(
         wrapper
           .find(ResultItem)
-          .filterWhere(n => n.prop('isSelected'))
+          .filterWhere(n => !!n.prop('isSelected'))
           .prop('text'),
       ).toBe('one');
       expect(isInputFocused(searchInput)).toBe(true);
@@ -242,7 +242,7 @@ describe('<QuickSearch />', () => {
       expect(
         wrapper
           .find(ResultItem)
-          .filterWhere(n => n.prop('isSelected'))
+          .filterWhere(n => !!n.prop('isSelected'))
           .prop('text'),
       ).toBe('two');
       expect(isInputFocused(searchInput)).toBe(true);
@@ -256,7 +256,7 @@ describe('<QuickSearch />', () => {
       expect(
         wrapper
           .find(ResultItem)
-          .filterWhere(n => n.prop('isSelected'))
+          .filterWhere(n => !!n.prop('isSelected'))
           .prop('text'),
       ).toBe('one');
       expect(isInputFocused(searchInput)).toBe(true);
@@ -271,7 +271,7 @@ describe('<QuickSearch />', () => {
       expect(
         wrapper
           .find(ResultItem)
-          .filterWhere(n => n.prop('isSelected'))
+          .filterWhere(n => !!n.prop('isSelected'))
           .prop('text'),
       ).toBe('one');
       expect(isInputFocused(searchInput)).toBe(true);
@@ -283,7 +283,7 @@ describe('<QuickSearch />', () => {
       expect(
         wrapper
           .find(ResultItem)
-          .filterWhere(n => n.prop('isSelected'))
+          .filterWhere(n => !!n.prop('isSelected'))
           .prop('text'),
       ).toBe('three');
       expect(isInputFocused(searchInput)).toBe(true);
@@ -295,7 +295,7 @@ describe('<QuickSearch />', () => {
       expect(
         wrapper
           .find(ResultItem)
-          .filterWhere(n => n.prop('isSelected'))
+          .filterWhere(n => !!n.prop('isSelected'))
           .prop('text'),
       ).toBe('three');
       expect(isInputFocused(searchInput)).toBe(true);
@@ -367,7 +367,7 @@ describe('<QuickSearch />', () => {
       wrapper.setProps({ children: newChildren });
       wrapper.update();
       expect(
-        wrapper.find(ResultItem).filterWhere(n => n.prop('isSelected')),
+        wrapper.find(ResultItem).filterWhere(n => !!n.prop('isSelected')),
       ).toHaveLength(0);
       expect(isInputFocused(searchInput)).toBe(true);
     });
@@ -383,7 +383,7 @@ describe('<QuickSearch />', () => {
       expect(
         wrapper
           .find(ResultItem)
-          .filterWhere(n => n.prop('isSelected'))
+          .filterWhere(n => !!n.prop('isSelected'))
           .prop('text'),
       ).toBe('three');
     });
@@ -395,7 +395,7 @@ describe('<QuickSearch />', () => {
         .find(ResultItem)
         .simulate('mouseleave');
       expect(
-        wrapper.find(ResultItem).filterWhere(n => n.prop('isSelected')),
+        wrapper.find(ResultItem).filterWhere(n => !!n.prop('isSelected')),
       ).toHaveLength(0);
     });
 
@@ -403,7 +403,7 @@ describe('<QuickSearch />', () => {
       searchInput.simulate('blur');
       expect(wrapper.find(ResultItem).length).toBeGreaterThan(0);
       expect(
-        wrapper.find(ResultItem).filterWhere(n => n.prop('isSelected')),
+        wrapper.find(ResultItem).filterWhere(n => !!n.prop('isSelected')),
       ).toHaveLength(0);
     });
   });

@@ -55,6 +55,7 @@
     "./typings/postis.d.ts",
     "./typings/prosemirror-markdown.d.ts",
     "./typings/p-wait-for.d.ts",
+    "./typings/raf-schd.d.ts",
     "./typings/rusha.d.ts",
     "./typings/scrollparent.d.ts",
     "./typings/snake-case.d.ts",

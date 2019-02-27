@@ -131,4 +131,11 @@ export class JSONTransformer implements Transformer<JSONDocNode> {
     doc.check();
     return doc;
   }
+
+  /**
+   * This method is used to encode a single node
+   */
+  encodeNode(node: PMNode): JSONNode {
+    return toJSON(node);
+  }
 }

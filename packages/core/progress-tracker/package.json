@@ -12,9 +12,10 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Raja B",
-    "Ben C",
-    "Ajay M"
+    "Sean C",
+    "Ajay M",
+    "Daniel D",
+    "Kang C"
   ],
   "atlaskit": {
     "name": "Progress tracker",

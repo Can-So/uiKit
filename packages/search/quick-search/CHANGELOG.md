@@ -1,5 +1,10 @@
 # @atlaskit/quick-search
 
+## 5.3.0
+- [minor] [25fffe3e00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25fffe3e00):
+
+  - ED-6228 Enable stricter types for quick-search package
+
 ## 5.2.5
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

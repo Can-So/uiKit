@@ -946,10 +946,18 @@ describe('GlobalNavigation', () => {
     });
 
     it('should pass the triggerXFlow callback', () => {
+      const productKey = 'product.key';
+      const sourceComponent = 'source-component';
       globalNavWrapper = getDefaultWrapper();
       globalNavWrapper.find(AppSwitcherIcon).simulate('click');
-      globalNavWrapper.find(AtlassianSwitcher).prop('triggerXFlow')();
-      expect(triggerXFlowStub).toHaveBeenCalled();
+      globalNavWrapper.find(AtlassianSwitcher).prop('triggerXFlow')(
+        productKey,
+        sourceComponent,
+      );
+      expect(triggerXFlowStub).toHaveBeenCalledWith(
+        productKey,
+        sourceComponent,
+      );
     });
   });
 

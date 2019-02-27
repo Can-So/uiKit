@@ -15,15 +15,17 @@ export const getExtensionLozengeData = ({
   const { macroMetadata } = node.attrs.parameters;
   if (macroMetadata && macroMetadata.placeholder) {
     let placeholderData;
-    macroMetadata.placeholder.forEach(placeholder => {
-      if (
-        placeholder.type === type &&
-        placeholder.data &&
-        placeholder.data.url
-      ) {
-        placeholderData = placeholder.data;
-      }
-    });
+    macroMetadata.placeholder.forEach(
+      (placeholder: { type: Params['type']; data: any }) => {
+        if (
+          placeholder.type === type &&
+          placeholder.data &&
+          placeholder.data.url
+        ) {
+          placeholderData = placeholder.data;
+        }
+      },
+    );
 
     return placeholderData;
   }

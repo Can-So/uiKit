@@ -1,5 +1,35 @@
 # @atlaskit/editor-core
 
+## 101.3.1
+- [patch] [7308d1e0e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7308d1e0e9):
+
+  - ED-6061: support image annotations in editor
+
+## 101.3.0
+- [minor] [3672ec23ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3672ec23ef):
+
+  - [ED-5788] Add new layout Breakout button for CodeBlock and Layout
+
+## 101.2.0
+- [minor] [d5856900a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5856900a1):
+
+  - ED-6338: Dont allow nested nodes to be inserted with a non default layout.
+
+## 101.1.0
+- [minor] [e142e966c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e142e966c2):
+
+  - ED-6238, ED-5684 Add Analytcs GAS v3 to clear formatting and fix clear formatting on heading elements
+
+## 101.0.6
+- [patch] [60ea09b0cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60ea09b0cc):
+
+  - ED-6246 Add more metadata to Unsupported Node logging
+
+## 101.0.5
+- [patch] [c5683f8422](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5683f8422):
+
+  - ED-4998 Fix highlighting and disabling of meatball menu items in different contexts
+
 ## 101.0.4
 - [patch] [bd0f7a69ac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bd0f7a69ac):
 

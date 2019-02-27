@@ -1,4 +1,6 @@
 import { getExampleUrl } from '@atlaskit/visual-regression/helper';
+import { EditorProps } from '../../types';
+import { Page } from '../__helpers/page-objects/_types';
 
 export {
   setupMediaMocksProviders,
@@ -103,6 +105,11 @@ function getEditorProps(appearance: Appearance) {
       ...enableAllEditorProps,
       primaryToolbarComponents: true,
       contentComponents: true,
+      media: {
+        allowMediaSingle: true,
+        allowResizing: true,
+        allowMediaGroup: true,
+      },
     };
   }
 
@@ -135,11 +142,19 @@ type InitEditorWithADFOptions = {
   appearance: Appearance;
   adf?: Object;
   device?: Device;
+  viewport?: { width: number; height: number };
+  editorProps?: EditorProps;
 };
 
 export const initEditorWithAdf = async (
   page,
-  { appearance, adf = {}, device = Device.Default }: InitEditorWithADFOptions,
+  {
+    appearance,
+    adf = {},
+    device = Device.Default,
+    viewport,
+    editorProps = {},
+  }: InitEditorWithADFOptions,
 ) => {
   const url = getExampleUrl('editor', 'editor-core', 'vr-testing');
 
@@ -151,13 +166,18 @@ export const initEditorWithAdf = async (
   }
 
   // Set the viewport to the right one
-  await page.setViewport(deviceViewPorts[device]);
+  if (viewport) {
+    await page.setViewport(viewport);
+  } else {
+    await page.setViewport(deviceViewPorts[device]);
+  }
 
   // Mount the editor with the right attributes
   await mountEditor(page, {
     appearance: appearance,
     defaultValue: JSON.stringify(adf),
     ...getEditorProps(appearance),
+    ...editorProps,
   });
 };
 
@@ -193,7 +213,7 @@ export const clearEditor = async page => {
 };
 
 export const snapshot = async (
-  page,
+  page: Page,
   tolerance?: number,
   selector = '.akEditor',
 ) => {
