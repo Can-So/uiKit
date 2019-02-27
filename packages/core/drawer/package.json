@@ -5,6 +5,10 @@
   "main": "dist/cjs/index.js",
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "author": "Atlassian Pty Ltd",
+  "maintainers": [
+    "Harsha Ivaturi",
+    "Ajay M"
+  ],
   "license": "Apache-2.0",
   "atlaskit:src": "src/index.js",
   "sideEffects": false,

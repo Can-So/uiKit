@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import Switcher from './helpers';
+import { Switcher, withAnalyticsLogger } from './helpers';
+import ErrorBoundary from '../src/components/error-boundary';
 
-export default class SwitcherExample extends Component {
+class SwitcherExample extends Component {
   state = {
     isDrawerOpen: true,
   };
@@ -23,7 +24,9 @@ export default class SwitcherExample extends Component {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <Switcher />
+          <ErrorBoundary>
+            <Switcher />
+          </ErrorBoundary>
         </Drawer>
         <Button type="button" onClick={this.openDrawer}>
           Open drawer
@@ -32,3 +35,5 @@ export default class SwitcherExample extends Component {
     );
   }
 }
+
+export default withAnalyticsLogger(SwitcherExample);

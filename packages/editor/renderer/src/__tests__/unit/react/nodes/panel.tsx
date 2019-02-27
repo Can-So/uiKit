@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import Panel from '../../../../react/nodes/panel';
 
 describe('Renderer - React/Nodes/Panel', () => {
@@ -10,11 +9,11 @@ describe('Renderer - React/Nodes/Panel', () => {
     );
 
     it('should wrap content with <div>-tag', () => {
-      expect(infoPanel.name()).to.equal('div');
+      expect(infoPanel.name()).toEqual('div');
     });
 
     it('should have two children', () => {
-      expect(infoPanel.children()).to.have.length(2);
+      expect(infoPanel.children()).toHaveLength(2);
     });
   });
 
@@ -24,11 +23,11 @@ describe('Renderer - React/Nodes/Panel', () => {
     );
 
     it('should wrap content with <div>-tag', () => {
-      expect(notePanel.name()).to.equal('div');
+      expect(notePanel.name()).toEqual('div');
     });
 
     it('should have two children', () => {
-      expect(notePanel.children()).to.have.length(2);
+      expect(notePanel.children()).toHaveLength(2);
     });
   });
 
@@ -38,11 +37,11 @@ describe('Renderer - React/Nodes/Panel', () => {
     );
 
     it('should wrap content with <div>-tag', () => {
-      expect(tipPanel.name()).to.equal('div');
+      expect(tipPanel.name()).toEqual('div');
     });
 
     it('should have two children', () => {
-      expect(tipPanel.children()).to.have.length(2);
+      expect(tipPanel.children()).toHaveLength(2);
     });
   });
 
@@ -52,11 +51,11 @@ describe('Renderer - React/Nodes/Panel', () => {
     );
 
     it('should wrap content with <div>-tag', () => {
-      expect(warningPanel.name()).to.equal('div');
+      expect(warningPanel.name()).toEqual('div');
     });
 
     it('should have two children', () => {
-      expect(warningPanel.children()).to.have.length(2);
+      expect(warningPanel.children()).toHaveLength(2);
     });
   });
 });

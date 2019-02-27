@@ -23,6 +23,7 @@ import quickInsertProviderFactory from '../example-helpers/quick-insert-provider
 import { DevTools } from '../example-helpers/DevTools';
 import { TitleInput } from '../example-helpers/PageElements';
 import { EditorActions } from './../src';
+import withSentry from '../example-helpers/withSentry';
 
 /**
  * +-------------------------------+
@@ -44,7 +45,6 @@ Wrapper.displayName = 'Wrapper';
 export const Content: any = styled.div`
   padding: 0 20px;
   height: 100%;
-  background: #fff;
   box-sizing: border-box;
 `;
 Content.displayName = 'Content';
@@ -118,7 +118,7 @@ export interface ExampleProps {
   onTitleChange?: (title: string) => void;
 }
 
-export class ExampleEditor extends React.Component<
+class ExampleEditorComponent extends React.Component<
   EditorProps & ExampleProps,
   State
 > {
@@ -176,6 +176,7 @@ export class ExampleEditor extends React.Component<
                 provider: mediaProvider,
                 allowMediaSingle: true,
                 allowResizing: true,
+                allowAnnotation: true,
               }}
               placeholder="Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule."
               shouldFocus={false}
@@ -251,6 +252,8 @@ export class ExampleEditor extends React.Component<
     }
   };
 }
+
+export const ExampleEditor = withSentry(ExampleEditorComponent);
 
 export default function Example(props: EditorProps & ExampleProps) {
   return (

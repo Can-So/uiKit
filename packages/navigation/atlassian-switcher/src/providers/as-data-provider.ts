@@ -1,4 +1,5 @@
 import { Component, ReactNode } from 'react';
+import { isPromise } from '../utils/type-helper';
 
 export interface ChildrenProps<D> {
   data: D | null;
@@ -26,9 +27,9 @@ export default function<P, D>(
 
     componentDidMount() {
       const dataSource = mapPropsToPromise(this.props);
-      if (dataSource instanceof Promise) {
+      if (isPromise<D>(dataSource)) {
         dataSource
-          .then((result: D) => {
+          .then(result => {
             this.setState({
               data: result,
               isLoading: false,

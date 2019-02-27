@@ -57,6 +57,8 @@ export type UserPickerProps = {
   allowEmail?: boolean;
   /** Email option label */
   emailLabel?: string;
+  /** Whether to disable interaction with the input */
+  disableInput?: boolean;
 };
 
 export type UserPickerState = {

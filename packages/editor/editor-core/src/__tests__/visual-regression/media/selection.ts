@@ -1,26 +1,23 @@
-import {
-  initEditor,
-  snapshot,
-  insertMedia,
-  setupMediaMocksProviders,
-  editable,
-} from '../_utils';
+import { snapshot, Appearance, initEditorWithAdf, Device } from '../_utils';
+import { insertMedia } from '../../__helpers/page-objects/_media';
+import { clickEditableContent } from '../../__helpers/page-objects/_editor';
+import { pressKey, KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
 
-describe.skip('Snapshot Test: Media', () => {
-  // TODO: fix this for fullpage editor mode
-  describe.skip('full page editor', () => {
+// TODO: ED-6319 Selection is broken
+describe('Snapshot Test: Media', () => {
+  describe('full page editor', () => {
     let page;
     beforeAll(async () => {
       // @ts-ignore
       page = global.page;
 
-      await initEditor(page, 'full-page-with-toolbar');
-      await page.setViewport({ width: 1920, height: 1080 });
-      await setupMediaMocksProviders(page);
+      await initEditorWithAdf(page, {
+        appearance: Appearance.fullPage,
+        device: Device.LaptopHiDPI,
+      });
 
       // click into the editor
-      await page.waitForSelector(editable);
-      await page.click(editable);
+      await clickEditableContent(page);
 
       // insert single media item
       await insertMedia(page);
@@ -28,16 +25,15 @@ describe.skip('Snapshot Test: Media', () => {
 
     it('renders selection ring around media (via up)', async () => {
       await snapshot(page);
-      await page.keyboard.down('ArrowUp');
+      await pressKey(page, KeyboardKeys.arrowUp);
       await snapshot(page);
     });
 
     it('renders selection ring around media (via gap cursor)', async () => {
-      await page.keyboard.down('ArrowLeft');
-      await page.keyboard.down('ArrowLeft');
+      await pressKey(page, [KeyboardKeys.arrowLeft, KeyboardKeys.arrowLeft]);
       await snapshot(page);
 
-      await page.keyboard.down('ArrowLeft');
+      await pressKey(page, KeyboardKeys.arrowLeft);
       await snapshot(page);
     });
   });
@@ -48,12 +44,13 @@ describe.skip('Snapshot Test: Media', () => {
       // @ts-ignore
       page = global.page;
 
-      await initEditor(page, 'comment');
-      await setupMediaMocksProviders(page);
+      await initEditorWithAdf(page, {
+        appearance: Appearance.comment,
+        device: Device.LaptopHiDPI,
+      });
 
       // click into the editor
-      await page.waitForSelector(editable);
-      await page.click(editable);
+      await clickEditableContent(page);
 
       // insert 3 media items
       await insertMedia(page, ['one.svg', 'two.svg', 'three.svg']);
@@ -62,21 +59,20 @@ describe.skip('Snapshot Test: Media', () => {
     it('renders selection ring around last media group item (via up)', async () => {
       await snapshot(page);
 
-      await page.keyboard.down('ArrowUp');
+      await pressKey(page, KeyboardKeys.arrowUp);
       await snapshot(page);
     });
 
     it('renders selection ring around media group items', async () => {
       await snapshot(page);
 
-      await page.keyboard.down('ArrowLeft');
-      await page.keyboard.down('ArrowLeft');
+      await pressKey(page, [KeyboardKeys.arrowLeft, KeyboardKeys.arrowLeft]);
       await snapshot(page);
 
-      await page.keyboard.down('ArrowLeft');
+      await pressKey(page, KeyboardKeys.arrowLeft);
       await snapshot(page);
 
-      await page.keyboard.down('ArrowLeft');
+      await pressKey(page, KeyboardKeys.arrowLeft);
       await snapshot(page);
     });
   });

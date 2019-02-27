@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import DateComponent from '../../../../react/nodes/date';
 
 import { timestampToString } from '@atlaskit/editor-common';
@@ -10,11 +9,11 @@ describe('Renderer - React/Nodes/Date', () => {
   const date = shallow(<DateComponent timestamp={timestamp.toString()} />);
 
   it('should render a <span>-tag', () => {
-    expect(date.is('span')).to.equal(true);
+    expect(date.is('span')).toEqual(true);
   });
 
   it('should render formatted date', () => {
-    expect(date.text()).to.equal(timestampToString(timestamp));
+    expect(date.text()).toEqual(timestampToString(timestamp));
   });
 
   it('should render date formatted as today inside task task', () => {
@@ -24,6 +23,6 @@ describe('Renderer - React/Nodes/Date', () => {
         parentIsIncompleteTask={true}
       />,
     );
-    expect(date.text()).to.equal('Today');
+    expect(date.text()).toEqual('Today');
   });
 });

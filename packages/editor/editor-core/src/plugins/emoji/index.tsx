@@ -85,7 +85,6 @@ const emojiPlugin: EditorPlugin = {
     disabled,
   }) {
     const renderNode = (providers: Providers) => {
-      // numFollowingButtons must be changed if buttons are added after ToolbarEmojiPicker to the message editor
       return (
         <ToolbarEmojiPicker
           editorView={editorView}

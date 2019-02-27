@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors, themed } from '@atlaskit/theme';
 
 const TitleArea: any = styled.textarea`
   border: none;
@@ -11,6 +11,7 @@ const TitleArea: any = styled.textarea`
   width: 100%;
   resize: none;
   vertical-align: bottom;
+  color: ${themed({ light: 'black', dark: colors.DN900 })};
 
   &::placeholder {
     color: ${colors.N90};

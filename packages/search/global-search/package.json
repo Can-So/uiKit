@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/global-search",
-  "version": "5.15.3",
+  "version": "5.15.4",
   "description": "A cross-product search component (batteries included)",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -42,7 +42,6 @@
     "@atlaskit/quick-search": "^5.2.5",
     "@atlaskit/theme": "^7.0.1",
     "@atlaskit/util-service-support": "^3.0.5",
-    "@atlaskit/util-shared-styles": "^2.10.3",
     "babel-runtime": "^6.26.0",
     "date-fns": "^1.30.1",
     "lodash.debounce": "^4.0.8",

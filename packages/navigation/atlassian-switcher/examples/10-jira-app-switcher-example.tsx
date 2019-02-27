@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import JiraSwitcher from '../src/components/jira-switcher';
-import { mockEndpoints } from './helpers/mock-endpoints';
+import { mockEndpoints, REQUEST_FAST } from './helpers/mock-endpoints';
+import { withAnalyticsLogger } from './helpers';
+import AtlassianSwitcher from '../src';
 
-export default class JiraSwitcherExample extends Component {
+class JiraSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -14,7 +15,7 @@ export default class JiraSwitcherExample extends Component {
   }
 
   openDrawer = () => {
-    mockEndpoints('jira');
+    mockEndpoints('jira', undefined, REQUEST_FAST);
     this.setState({
       isDrawerOpen: true,
     });
@@ -26,15 +27,18 @@ export default class JiraSwitcherExample extends Component {
     });
   };
 
-  onTriggerXFlow = (productKey: string) => {
-    console.log(`Triggering xflow for => ${productKey}`);
+  onTriggerXFlow = (productKey: string, sourceComponent: string) => {
+    console.log(
+      `Triggering xflow for => ${productKey} from ${sourceComponent}`,
+    );
   };
 
   render() {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <JiraSwitcher
+          <AtlassianSwitcher
+            product="jira"
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />
@@ -46,3 +50,5 @@ export default class JiraSwitcherExample extends Component {
     );
   }
 }
+
+export default withAnalyticsLogger(JiraSwitcherExample);

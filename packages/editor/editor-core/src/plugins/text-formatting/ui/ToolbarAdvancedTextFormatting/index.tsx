@@ -23,7 +23,7 @@ import {
   Shortcut,
 } from '../../../../ui/styles';
 import * as commands from '../../commands/text-formatting';
-import { clearFormatting } from '../../commands/clear-formatting';
+import { clearFormattingWithAnalytics } from '../../commands/clear-formatting';
 import { INPUT_METHOD } from '../../../analytics';
 
 export interface Props {
@@ -266,13 +266,22 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
     tooltip?,
     isDisabled?: boolean,
   ) => {
+    let active = false;
+    let disabled = false;
+    if (this.props.textFormattingState) {
+      active = this.props.textFormattingState![`${value}Active`] || false;
+      disabled =
+        isDisabled ||
+        this.props.textFormattingState![`${value}Disabled`] ||
+        false;
+    }
     items.push({
       key: value,
       content,
       elemAfter: <Shortcut>{tooltip}</Shortcut>,
       value,
-      isActive: this.state[`${value}Active`],
-      isDisabled: isDisabled || this.state[`${value}Disabled`],
+      isActive: active,
+      isDisabled: disabled,
     });
   };
 
@@ -304,7 +313,7 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
         commands.toggleSuperscriptWithAnalytics()(state, dispatch);
         break;
       case 'clearFormatting':
-        clearFormatting()(state, dispatch);
+        clearFormattingWithAnalytics(INPUT_METHOD.TOOLBAR)(state, dispatch);
         break;
     }
     this.setState({ isOpen: false });

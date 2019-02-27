@@ -47,7 +47,7 @@ const twoColumnLayout = {
   ],
 };
 
-describe.skip('Snapshot Test: Layouts', () => {
+describe('Layouts', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
@@ -79,7 +79,7 @@ describe('Snapshot Test: Breakout Layouts', () => {
   });
 
   it(`should correctly render two column layout with a default breakout mark`, async () => {
-    await page.setViewport({ width: 1120, height: 500 });
+    await page.setViewport({ width: 1120, height: 700 });
     await page.waitFor(100);
     mountRenderer(page, {
       document: layoutWithDefaultBreakoutMark,

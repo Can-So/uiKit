@@ -1,7 +1,16 @@
 import { defaultSchema } from '@atlaskit/adf-schema';
 import WikiMarkupTransformer from '../../../index';
 
-import { doc, li, ol, p, ul, code_block } from '@atlaskit/editor-test-helpers';
+import {
+  doc,
+  li,
+  ol,
+  p,
+  ul,
+  code_block,
+  media,
+  mediaSingle,
+} from '@atlaskit/editor-test-helpers';
 
 describe('ADF => WikiMarkup - List', () => {
   const transformer = new WikiMarkupTransformer();
@@ -46,6 +55,27 @@ describe('ADF => WikiMarkup - List', () => {
   test('should convert codeblock node', () => {
     const node = doc(
       ul(li(p('item 1')), li(p('item 2'), code_block()('const i = 0;'))),
+    )(defaultSchema);
+    expect(transformer.encode(node)).toMatchSnapshot();
+  });
+
+  test('should convert mediaSingle node', () => {
+    const node = doc(
+      ul(
+        li(p('item 1')),
+        li(
+          p('item 2'),
+          mediaSingle()(
+            media({
+              id: 'file1.txt',
+              type: 'file',
+              collection: 'tmp',
+              width: 100,
+              height: 100,
+            })(),
+          ),
+        ),
+      ),
     )(defaultSchema);
     expect(transformer.encode(node)).toMatchSnapshot();
   });

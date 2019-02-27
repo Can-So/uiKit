@@ -52,13 +52,7 @@ export interface MediaAttributes extends MediaBaseAttributes {
 export interface ExternalMediaAttributes {
   type: 'external';
   url: string;
-  /**
-   * @type integer
-   */
   width?: number;
-  /**
-   * @type integer
-   */
   height?: number;
 }
 

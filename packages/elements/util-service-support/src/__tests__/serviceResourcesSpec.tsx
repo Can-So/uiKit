@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as sinon from 'sinon';
 
 import { AbstractResource } from '../serviceResources';
@@ -64,11 +63,11 @@ const testSubscriptions = (subCount: number) => {
   it('all listeners called on notifyResult', () => {
     resource.callNotifyResult(result);
     listeners.forEach(listener => {
-      expect(listener.result.calledWith(result), 'result(...)').to.equal(true);
-      expect(listener.result.calledOnce, 'result').to.equal(true);
-      expect(listener.error.calledOnce, 'error').to.equal(false);
-      expect(listener.info.calledOnce, 'info').to.equal(false);
-      expect(listener.notReady.calledOnce, 'notReady').to.equal(false);
+      expect(listener.result.calledWith(result)).toEqual(true);
+      expect(listener.result.calledOnce).toEqual(true);
+      expect(listener.error.calledOnce).toEqual(false);
+      expect(listener.info.calledOnce).toEqual(false);
+      expect(listener.notReady.calledOnce).toEqual(false);
     });
   });
 
@@ -77,39 +76,39 @@ const testSubscriptions = (subCount: number) => {
     const listener = new TestOnProviderChange();
     resource.subscribe(listener);
     resource.callNotifyResult(result);
-    expect(listener.result.calledWith(result), 'result(...)').to.equal(true);
-    expect(listener.result.calledOnce, 'result').to.equal(true);
+    expect(listener.result.calledWith(result)).toEqual(true);
+    expect(listener.result.calledOnce).toEqual(true);
   });
 
   it('all listeners called on notifyError', () => {
     resource.callNotifyError(errMsg);
     listeners.forEach(listener => {
-      expect(listener.error.calledWith(errMsg), 'error(...)').to.equal(true);
-      expect(listener.result.calledOnce, 'result').to.equal(false);
-      expect(listener.error.calledOnce, 'error').to.equal(true);
-      expect(listener.info.calledOnce, 'info').to.equal(false);
-      expect(listener.notReady.calledOnce, 'notReady').to.equal(false);
+      expect(listener.error.calledWith(errMsg)).toEqual(true);
+      expect(listener.result.calledOnce).toEqual(false);
+      expect(listener.error.calledOnce).toEqual(true);
+      expect(listener.info.calledOnce).toEqual(false);
+      expect(listener.notReady.calledOnce).toEqual(false);
     });
   });
 
   it('all listeners called on notifyInfo', () => {
     resource.callNotifyInfo(infoMsg);
     listeners.forEach(listener => {
-      expect(listener.info.calledWith(infoMsg), 'error(...)').to.equal(true);
-      expect(listener.result.calledOnce, 'result').to.equal(false);
-      expect(listener.error.calledOnce, 'error').to.equal(false);
-      expect(listener.info.calledOnce, 'info').to.equal(true);
-      expect(listener.notReady.calledOnce, 'notReady').to.equal(false);
+      expect(listener.info.calledWith(infoMsg)).toEqual(true);
+      expect(listener.result.calledOnce).toEqual(false);
+      expect(listener.error.calledOnce).toEqual(false);
+      expect(listener.info.calledOnce).toEqual(true);
+      expect(listener.notReady.calledOnce).toEqual(false);
     });
   });
 
   it('all listeners called on notifyNotReady', () => {
     resource.callNotifyNotReady();
     listeners.forEach(listener => {
-      expect(listener.result.calledOnce, 'result').to.equal(false);
-      expect(listener.error.calledOnce, 'error').to.equal(false);
-      expect(listener.info.calledOnce, 'info').to.equal(false);
-      expect(listener.notReady.calledOnce, 'notReady').to.equal(true);
+      expect(listener.result.calledOnce).toEqual(false);
+      expect(listener.error.calledOnce).toEqual(false);
+      expect(listener.info.calledOnce).toEqual(false);
+      expect(listener.notReady.calledOnce).toEqual(true);
     });
   });
 
@@ -121,15 +120,13 @@ const testSubscriptions = (subCount: number) => {
     resource.callNotifyInfo(infoMsg);
     resource.callNotifyNotReady();
     listeners.forEach(listener => {
-      expect(listener.result.calledOnce, 'result').to.equal(true);
-      expect(listener.error.calledOnce, 'error').to.equal(true);
-      expect(listener.info.calledOnce, 'info').to.equal(true);
-      expect(listener.notReady.calledOnce, 'notReady').to.equal(true);
+      expect(listener.result.calledOnce).toEqual(true);
+      expect(listener.error.calledOnce).toEqual(true);
+      expect(listener.info.calledOnce).toEqual(true);
+      expect(listener.notReady.calledOnce).toEqual(true);
     });
-    expect(minimalListener.result.calledWith(result), 'result(...)').to.equal(
-      true,
-    );
-    expect(minimalListener.result.calledOnce, 'result').to.equal(true);
+    expect(minimalListener.result.calledWith(result)).toEqual(true);
+    expect(minimalListener.result.calledOnce).toEqual(true);
   });
 
   if (subCount > 0) {
@@ -137,28 +134,28 @@ const testSubscriptions = (subCount: number) => {
       const removedListener = listeners[0];
       resource.unsubscribe(removedListener);
       resource.callNotifyResult(result);
-      expect(removedListener.result.calledOnce, 'result').to.equal(false);
+      expect(removedListener.result.calledOnce).toEqual(false);
     });
 
     it('unsubscribed listeners are not called on notifyResult', () => {
       const removedListener = listeners[0];
       resource.unsubscribe(removedListener);
       resource.callNotifyError(errMsg);
-      expect(removedListener.error.calledOnce, 'error').to.equal(false);
+      expect(removedListener.error.calledOnce).toEqual(false);
     });
 
     it('unsubscribed listeners are not called on notifyResult', () => {
       const removedListener = listeners[0];
       resource.unsubscribe(removedListener);
       resource.callNotifyInfo(infoMsg);
-      expect(removedListener.info.calledOnce, 'info').to.equal(false);
+      expect(removedListener.info.calledOnce).toEqual(false);
     });
 
     it('unsubscribed listeners are not called on notifyResult', () => {
       const removedListener = listeners[0];
       resource.unsubscribe(removedListener);
       resource.callNotifyNotReady();
-      expect(removedListener.notReady.calledOnce, 'notReady').to.equal(false);
+      expect(removedListener.notReady.calledOnce).toEqual(false);
     });
   }
 };

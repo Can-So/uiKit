@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ADF => WikiMarkup - Inline Card should convert inline-card 1`] = `"this is an inline-card[smart-link|https://product-fabric.atlassian.net/browse/EX-522]"`;
+exports[`ADF => WikiMarkup - Inline Card should convert inline-card 1`] = `"this is an inline-card[EX-522]"`;

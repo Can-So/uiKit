@@ -84,10 +84,6 @@ describe('JIRA wiki markup - Links', () => {
       '[CS-676] should trim escape in href',
       'This is a link https://extranet.atlassian.com/display/JPLAT/AtlasKit\\+components\\+needed\\+for\\+Bento',
     ],
-    [
-      '[CS-691] should be able to parse issue-link',
-      'This is an issue link [smart-link|https://product-fabric.atlassian.net/browse/EX-522]',
-    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

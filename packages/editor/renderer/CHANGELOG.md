@@ -1,5 +1,15 @@
 # @atlaskit/renderer
 
+## 40.1.0
+- [minor] [09e8eb968f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09e8eb968f):
+
+  - ED-6256: render media items with occurenceKey; ignore link cards
+
+## 40.0.0
+- [major] [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+
+  - ED-5766 Remove the deprecated 'message' appearance from Editor
+
 ## 39.0.2
 - Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
   - @atlaskit/editor-json-transformer@4.1.11

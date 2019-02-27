@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import {
   calculatePosition,
   getVerticalPlacement,
@@ -7,12 +7,12 @@ import {
 } from '../../../../ui/Popup/utils';
 
 describe('@atlaskit/editor-common popup utils', () => {
-  let offset;
-  let stick;
-  let wrapper;
-  let root;
-  let popup;
-  let target;
+  let offset: number[];
+  let stick: boolean;
+  let wrapper: ReactWrapper;
+  let root: Element;
+  let popup: HTMLElement;
+  let target: HTMLElement;
 
   beforeEach(() => {
     offset = [0, 0];
@@ -25,37 +25,72 @@ describe('@atlaskit/editor-common popup utils', () => {
     );
 
     root = wrapper.find('#root').getDOMNode();
-    popup = wrapper.find('#popup').getDOMNode();
-    target = wrapper.find('#target').getDOMNode();
+    popup = wrapper.find('#popup').getDOMNode() as HTMLElement;
+    target = wrapper.find('#target').getDOMNode() as HTMLElement;
 
-    root.getBoundingClientRect = () => ({
-      top: 2,
-      left: 3,
-      right: 5,
-      height: 7,
-      width: 11,
-    });
+    root.getBoundingClientRect = () =>
+      ({
+        top: 2,
+        left: 3,
+        right: 5,
+        height: 7,
+        width: 11,
+      } as ClientRect);
 
-    popup.getBoundingClientRect = () => ({
-      top: 13,
-      left: 17,
-      right: 19,
-      height: 23,
-      width: 29,
-    });
+    popup.getBoundingClientRect = () =>
+      ({
+        top: 13,
+        left: 17,
+        right: 19,
+        height: 23,
+        width: 29,
+      } as ClientRect);
 
-    target.getBoundingClientRect = () => ({
-      top: 31,
-      left: 37,
-      right: 41,
-      height: 47,
-      width: 53,
-    });
+    target.getBoundingClientRect = () =>
+      ({
+        top: 31,
+        left: 37,
+        right: 41,
+        height: 47,
+        width: 53,
+      } as ClientRect);
 
     Object.defineProperty(HTMLElement.prototype, 'offsetParent', {
       get() {
         return root;
       },
+    });
+  });
+
+  it('should calculatePosition for start and right placement', () => {
+    const placement = ['start', 'left'] as [string, string];
+    const calc = calculatePosition({
+      placement,
+      target,
+      popup,
+      offset,
+      stick,
+    });
+
+    expect(calc).toEqual({
+      top: 29,
+      left: 34,
+    });
+  });
+
+  it('should calculatePosition for start and end placement', () => {
+    const placement = ['start', 'end'] as [string, string];
+    const calc = calculatePosition({
+      placement,
+      target,
+      popup,
+      offset,
+      stick,
+    });
+
+    expect(calc).toEqual({
+      top: 29,
+      right: 34,
     });
   });
 

@@ -15,7 +15,7 @@ module.exports = {
   },
   'packages/media/media-image/src': {
     statements: 100,
-    branches: 100,
+    branches: 90,
     functions: 100,
     lines: 100,
   },
@@ -28,7 +28,7 @@ module.exports = {
   'packages/media/media-card/src': {
     statements: 92,
     branches: 86,
-    functions: 91,
+    functions: 90,
     lines: 92,
   },
   'packages/media/media-filmstrip/src': {
