@@ -6,7 +6,6 @@ import { Option } from './Option';
 import { SingleValue } from './SingleValue';
 import { Input } from './Input';
 import { SingleValueContainer } from './SingleValueContainer';
-import { Input } from './Input';
 
 /**
  * Memoize getComponents to avoid rerenders.
@@ -20,7 +19,6 @@ export const getComponents = memoizeOne(
       };
     } else {
       return {
-        Input,
         MultiValue,
         DropdownIndicator: null,
         SingleValue,
@@ -32,3 +30,12 @@ export const getComponents = memoizeOne(
     }
   },
 );
+
+export const getModalComponents = memoizeOne(() => ({
+  DropdownIndicator: null,
+  SingleValue,
+  ClearIndicator,
+  Option,
+  ValueContainer: SingleValueContainer,
+  Input,
+}));

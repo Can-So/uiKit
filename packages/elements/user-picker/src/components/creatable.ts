@@ -40,18 +40,11 @@ const isOptionDisabled = (
   return false;
 };
 
-export const getCreatableProps = memoizeOne(
-  (isCreatable?: boolean, isValidEmail?: EmailValidator) => {
-    if (isCreatable) {
-      return {
-        allowCreateWhileLoading: true,
-        createOptionPosition: 'first',
-        isValidNewOption: isValidNewOption(isValidEmail),
-        getNewOptionData,
-        formatCreateLabel,
-        isOptionDisabled: isOptionDisabled(isValidEmail),
-      };
-    }
-    return {};
-  },
-);
+export const getCreatableProps = memoizeOne((isValidEmail?: EmailValidator) => ({
+  allowCreateWhileLoading: true,
+  createOptionPosition: 'first',
+  isValidNewOption: isValidNewOption(isValidEmail),
+  getNewOptionData,
+  formatCreateLabel,
+  isOptionDisabled: isOptionDisabled(isValidEmail),
+}));

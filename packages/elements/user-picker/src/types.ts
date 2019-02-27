@@ -32,6 +32,8 @@ export type UserPickerProps = {
   onBlur?: OnPicker;
   /** Callback for when the value/s in the picker is cleared. */
   onClear?: OnPicker;
+  /** Callback that is triggered when modal picker is closed */
+  onClose?: OnPicker;
   /** Appearance of the user picker. */
   appearance?: Appearance;
   /** Display the picker with a subtle style. */
@@ -66,7 +68,7 @@ export type UserPickerProps = {
 
 export type PopupUserPickerProps = UserPickerProps & {
   /** Whether to use the modal version of the single picker */
-  target?: Element;
+  target: Element;
 };
 
 export type UserPickerState = {
@@ -77,7 +79,6 @@ export type UserPickerState = {
   hoveringClearIndicator: boolean;
   menuIsOpen: boolean;
   inputValue: string;
-  preventFilter: boolean;
 };
 
 export interface HighlightRange {

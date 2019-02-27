@@ -32,6 +32,7 @@ describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
     shallowWithIntl(<UserPicker {...props} />)
       .dive()
+      .dive()
       .dive();
 
   const options: User[] = [
@@ -78,9 +79,7 @@ describe('UserPicker', () => {
     const customMessage = 'Custom';
     const component = shallowUserPicker({ noOptionsMessage: customMessage });
     const select = component.find(Select);
-    expect(select.prop('noOptionsMessage')).toBeInstanceOf(Function);
-    const result = (select.prop('noOptionsMessage') as Function)();
-    expect(result).toEqual(customMessage);
+    expect(select.prop('noOptionsMessage')).toEqual(customMessage);
   });
 
   it('should trigger onChange with User', () => {
@@ -488,48 +487,6 @@ describe('UserPicker', () => {
     });
   });
 
-  describe('preventFilter', () => {
-    it('default: should set preventFilter to false', () => {
-      const component = shallowUserPicker();
-      expect(component.state('preventFilter')).toBeFalsy();
-    });
-
-    it('onInputChange: should set preventFilter to false', () => {
-      const component = shallowUserPicker();
-      const select = component.find(Select);
-      select.simulate('inputChange', 'some text', { action: 'input-change' });
-      expect(component.state('preventFilter')).toBeFalsy();
-    });
-
-    it('onBlur: should set preventFilter to false', () => {
-      const component = shallowUserPicker();
-      const select = component.find(Select);
-      select.simulate('blur');
-      expect(component.state('preventFilter')).toBeFalsy();
-    });
-
-    it('onFocus with no value: should not set preventFilter to true', () => {
-      const component = shallowUserPicker();
-      const select = component.find(Select);
-      select.simulate('focus', { target: {} });
-      expect(component.state('preventFilter')).toBeFalsy();
-    });
-
-    it('multi onFocus with value: should not set preventFilter to true', () => {
-      const component = shallowUserPicker({ isMulti: true, value: options[0] });
-      const select = component.find(Select);
-      select.simulate('focus', { target: {} });
-      expect(component.state('preventFilter')).toBeFalsy();
-    });
-
-    it('single onFocus with value: should set preventFilter to true', () => {
-      const component = shallowUserPicker({ value: options[0] });
-      const select = component.find(Select);
-      select.simulate('focus', { target: {} });
-      expect(component.state('preventFilter')).toBeTruthy();
-    });
-  });
-
   it('should blur on escape', () => {
     const component = shallowUserPicker();
     component.setState({ menuIsOpen: true });
@@ -932,7 +889,7 @@ describe('UserPicker', () => {
       const select = component.find(CreatableSelect);
       expect(select).toHaveLength(1);
       expect(getCreatableProps).toHaveBeenCalledTimes(1);
-      expect(getCreatableProps).toHaveBeenCalledWith(true, undefined);
+      expect(getCreatableProps).toHaveBeenCalledWith(undefined);
     });
   });
 });

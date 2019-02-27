@@ -2,26 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { ExampleWrapper } from '../example-helpers/ExampleWrapper';
 import { PopupUserPicker } from '../src/components/PopupUserPicker';
-import { PopupSelect } from '@atlaskit/select';
 
 const Table = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
-const options = [
-  { label: 'Adelaide', value: 'adelaide' },
-  { label: 'Brisbane', value: 'brisbane' },
-  { label: 'Canberra', value: 'canberra' },
-  { label: 'Darwin', value: 'darwin' },
-  { label: 'Hobart', value: 'hobart' },
-  { label: 'Melbourne', value: 'melbourne' },
-  { label: 'Perth', value: 'perth' },
-  { label: 'Sydney', value: 'sydney' },
-];
-
-const onChange = console.log;
-const defaults = { options, placeholder: 'Choose a City', onChange };
 
 const Row = styled.div`
   display: flex;
@@ -49,11 +35,9 @@ const renderRows = (count: number) => {
                 options={options}
                 onInputChange={onInputChange}
                 onChange={console.log}
+                width={200}
+                subtle
               />
-              // <PopupSelect
-              //   target={<button>Target</button> as any}
-              //   options={options}
-              // />
             )}
           </ExampleWrapper>
         </Cell>

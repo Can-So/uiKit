@@ -28,19 +28,22 @@ export const getStyles = memoizeOne((width: string | number) => ({
     '&:hover .fabric-user-picker__clear-indicator': { opacity: 1 },
     ':hover': {
       ...css[':hover'],
-      borderColor:
-        state.isFocused && css[':hover']
+      borderColor: state.isFocused
+        ? css[':hover']
           ? css[':hover'].borderColor
-          : state.selectProps.subtle
-          ? state.selectProps.hoveringClearIndicator
-            ? colors.R50
-            : colors.N30
-          : colors.N40,
+          : colors.B100
+        : state.selectProps.subtle
+        ? state.selectProps.hoveringClearIndicator
+          ? colors.R50
+          : colors.N30
+        : colors.N40,
       backgroundColor:
         state.selectProps.subtle && state.selectProps.hoveringClearIndicator
           ? colors.R50
-          : state.isFocused && css[':hover']
-          ? css[':hover'].backgroundColor
+          : state.isFocused
+          ? css[':hover']
+            ? css[':hover'].backgroundColor
+            : colors.N0
           : colors.N30,
     },
     padding: 0,
@@ -129,5 +132,13 @@ export const getStyles = memoizeOne((width: string | number) => ({
       /* Internet Explorer 10-11 */
       color: colors.N100,
     },
+  }),
+}));
+
+export const getModalStyles = memoizeOne((width: string | number) => ({
+  ...getStyles(width),
+  container: (css: any) => ({
+    ...css,
+    width,
   }),
 }));
