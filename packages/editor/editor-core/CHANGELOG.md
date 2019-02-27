@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.4.0
+- [minor] [30b4e99377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/30b4e99377):
+
+  - ED-5888 Add editor dark mode
+
 ## 101.3.3
 - [patch] [e08b35abef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e08b35abef):
 
