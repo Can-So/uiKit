@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.5.2
+- [patch] [1ede48ac5b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ede48ac5b):
+
+  - ED-6381: Gather max layout sizes based on dynamic text sizing
+
 ## 101.5.1
 - [patch] [42b78a6133](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/42b78a6133):
 
