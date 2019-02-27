@@ -20,7 +20,7 @@ describe('Dynamic Text Sizing:', () => {
     it(`should correctly render ${size.width}`, async () => {
       await page.setViewport(size);
       await page.waitFor(100);
-      await snapshot(page, 0.03);
+      await snapshot(page, 10);
     });
   });
 });
