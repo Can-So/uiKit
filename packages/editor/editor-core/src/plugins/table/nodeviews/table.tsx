@@ -23,6 +23,7 @@ export interface Props {
   cellMinWidth?: number;
   portalProviderAPI: PortalProviderAPI;
   getPos: () => number;
+  dynamicTextSizing?: boolean;
 }
 
 const tableAttributes = (node: PmNode) => {
@@ -107,11 +108,10 @@ export default class TableView extends ReactNodeView {
   }
 }
 
-export const createTableView = (portalProviderAPI: PortalProviderAPI) => (
-  node,
-  view,
-  getPos,
-): NodeView => {
+export const createTableView = (
+  portalProviderAPI: PortalProviderAPI,
+  dynamicTextSizing?: boolean,
+) => (node, view, getPos): NodeView => {
   const { pluginConfig } = getPluginState(view.state);
   const { allowColumnResizing } = getPluginConfig(pluginConfig);
 
@@ -121,5 +121,6 @@ export const createTableView = (portalProviderAPI: PortalProviderAPI) => (
     allowColumnResizing,
     portalProviderAPI,
     getPos,
+    dynamicTextSizing,
   }).init();
 };

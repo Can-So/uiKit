@@ -5,6 +5,8 @@ import {
   resizeColumn,
   insertTable,
   grabResizeHandle,
+  clickFirstCell,
+  toggleBreakout,
 } from '../../__helpers/page-objects/_table';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
 import { animationFrame } from '../../__helpers/page-objects/_editor';
@@ -83,5 +85,23 @@ describe('Snapshot Test: table resize handle', () => {
       await grabResizeHandle(page, { colIdx: 2, row: 2 });
       await snapshot(page);
     });
+  });
+});
+
+describe('Snapshot Test: table scale', () => {
+  let page;
+  beforeEach(async () => {
+    // @ts-ignore
+    page = global.page;
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI, undefined, {
+      allowDynamicTextSizing: true,
+    });
+    await insertTable(page);
+    await clickFirstCell(page);
+  });
+
+  it(`should not overflow the table with dynamic text sizing enabled`, async () => {
+    await toggleBreakout(page, 1);
+    await snapshot(page);
   });
 });

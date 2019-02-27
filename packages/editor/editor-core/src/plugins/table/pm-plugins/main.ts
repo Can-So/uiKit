@@ -65,6 +65,7 @@ export const createPlugin = (
   eventDispatcher: EventDispatcher,
   pluginConfig: PluginConfig,
   appearance?: EditorAppearance,
+  dynamicTextSizing?: boolean,
 ) =>
   new Plugin({
     state: {
@@ -248,7 +249,7 @@ export const createPlugin = (
       },
 
       nodeViews: {
-        table: createTableView(portalProviderAPI),
+        table: createTableView(portalProviderAPI, dynamicTextSizing),
         tableCell: createCellView(portalProviderAPI, appearance),
         tableHeader: createCellView(portalProviderAPI, appearance),
       },
