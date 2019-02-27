@@ -166,7 +166,7 @@ export async function resizeMediaInPositionWithSnapshot(
 
   await moveHandle(page, distance, side);
 
-  await snapshot(page);
+  await snapshot(page, 0.01);
   await releaseHandle(page);
 }
 
