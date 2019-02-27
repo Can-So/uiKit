@@ -1,1 +1,0 @@
-- ED-5967: added API to enable links on hybrid editor

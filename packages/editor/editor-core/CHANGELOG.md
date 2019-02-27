@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.4.2
+- [patch] [27189951b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27189951b5):
+
+  - ED-5967: added API to enable links on hybrid editor
+
 ## 101.4.1
 - [patch] [c2360c53b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2360c53b2):
 

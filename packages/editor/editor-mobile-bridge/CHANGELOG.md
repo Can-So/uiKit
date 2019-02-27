@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.11.0
+- [minor] [27189951b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27189951b5):
+
+  - ED-5967: added API to enable links on hybrid editor
+
 ## 6.10.0
 - [minor] [30b4e99377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/30b4e99377):
 
