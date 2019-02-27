@@ -1,8 +1,6 @@
 import { Transaction } from 'prosemirror-state';
-import { getCellsInColumn } from 'prosemirror-utils';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { TableMap } from 'prosemirror-tables';
 import { TableLayout } from '@atlaskit/adf-schema';
 import {
   akEditorWideLayoutWidth,
@@ -18,7 +16,7 @@ import {
 import { getLayoutSize } from '../pm-plugins/table-resizing/utils';
 import { sendLogs } from '../../../utils/sendLogs';
 
-const fireAnalytics = (properties = {}) =>
+export const fireAnalytics = (properties = {}) =>
   sendLogs({
     events: [
       {
@@ -31,148 +29,6 @@ const fireAnalytics = (properties = {}) =>
       },
     ],
   });
-
-const removeEmptyRows = (
-  table: PMNode,
-  tablePos: number,
-  tr: Transaction,
-): Transaction => {
-  const rows: PMNode[] = [];
-  let hasProblems = false;
-
-  // detect if table has empty rows that we need to remove
-  for (let i = 0; i < table.childCount; i++) {
-    if (!table.child(i).childCount) {
-      hasProblems = true;
-      break;
-    }
-  }
-
-  if (!hasProblems) {
-    return tr;
-  }
-
-  for (let rowIndex = 0; rowIndex < table.childCount; rowIndex++) {
-    const row = table.child(rowIndex);
-    if (row.childCount) {
-      rows.push(row);
-    } else {
-      for (let j = rows.length - 1; j >= 0; j--) {
-        const cells: PMNode[] = [];
-        const rowToFix = rows[j];
-
-        for (let colIndex = 0; colIndex < rowToFix.childCount; colIndex++) {
-          const cell = rowToFix.child(colIndex);
-          const { rowspan } = cell.attrs;
-          if (rowspan + j - 1 >= rows.length) {
-            cells.push(
-              cell.type.createChecked(
-                {
-                  ...cell.attrs,
-                  rowspan: cell.attrs.rowspan - 1,
-                },
-                cell.content,
-                cell.marks,
-              ),
-            );
-          } else {
-            cells.push(cell);
-          }
-        }
-        // re-create the row with decremented rowspans @see ED-5802
-        if (cells.length) {
-          rows[j] = row.type.createChecked(row.attrs, cells, row.marks);
-        }
-      }
-    }
-  }
-
-  // remove the table if it's not fixable
-  if (!rows.length) {
-    // ED-6141: send analytics event
-    fireAnalytics({ message: 'removeEmptyRows' });
-    return tr.delete(tablePos, tablePos + table.nodeSize);
-  }
-
-  const newTable = table.type.createChecked(table.attrs, rows, table.marks);
-  return tr.replaceWith(tablePos, tablePos + table.nodeSize, newTable);
-};
-
-const removeEmptyColumns = (
-  table: PMNode,
-  tablePos: number,
-  tr: Transaction,
-): Transaction => {
-  // detect if a table has columns with minimum colspan > 1
-  // so that we know there's invisible columns that we need to remove
-  const map = TableMap.get(table);
-  const colsMinColspan: number[] = [];
-  for (let colIndex = 0; colIndex < map.width; colIndex++) {
-    const cellsPositions = map.cellsInRect({
-      left: colIndex,
-      right: colIndex + 1,
-      top: 0,
-      bottom: map.height,
-    });
-    const colspans = cellsPositions.map(cellPos => {
-      const cell = tr.doc.nodeAt(cellPos + tablePos + 1);
-      if (cell) {
-        return cell.attrs.colspan;
-      }
-    });
-    if (colspans.length) {
-      colsMinColspan[colIndex] = Math.min(...colspans);
-    }
-  }
-
-  if (!colsMinColspan.some(colspan => colspan > 1)) {
-    return tr;
-  }
-
-  const rows: PMNode[] = [];
-  for (let rowIndex = 0; rowIndex < map.height; rowIndex++) {
-    const rowCells: PMNode[] = [];
-
-    Object.keys(colsMinColspan)
-      .map(Number)
-      .forEach(colIndex => {
-        const cellPos = map.map[colIndex + rowIndex * map.width] + tablePos + 1;
-        const columnCells = getCellsInColumn(colIndex)(tr.selection);
-        const cell = (columnCells || []).find(cell => cell.pos === cellPos);
-        if (cell) {
-          if (colsMinColspan[colIndex] > 1) {
-            const colspan =
-              cell.node.attrs.colspan - colsMinColspan[colIndex] + 1;
-            const { colwidth } = cell.node.attrs;
-            const newCell = cell.node.type.createChecked(
-              {
-                ...cell.node.attrs,
-                colspan,
-                colwidth: colwidth ? colwidth.slice(0, colspan) : null,
-              },
-              cell.node.content,
-              cell.node.marks,
-            );
-            rowCells.push(newCell);
-          } else {
-            rowCells.push(cell.node);
-          }
-        }
-      });
-
-    const row = table.child(rowIndex);
-    if (row) {
-      rows.push(row.type.createChecked(row.attrs, rowCells, row.marks));
-    }
-  }
-
-  if (!rows.length) {
-    return tr;
-  }
-
-  const newTable = table.type.createChecked(table.attrs, rows, table.marks);
-  return tr.replaceWith(tablePos, tablePos + table.nodeSize, newTable);
-};
 
 // We attempt to patch the document when we have extra, unneeded, column widths
 // Take this node for example:
@@ -213,10 +69,7 @@ export const fixTables = (tr: Transaction): Transaction => {
   tr.doc.descendants((node, pos) => {
     if (node.type.name === 'table') {
       // in the unlikely event of having to fix multiple tables at the same time
-      const tablePos = tr.mapping.map(pos);
-      tr = removeEmptyRows(node, tablePos, tr);
-      tr = removeEmptyColumns(node, tablePos, tr);
-      tr = removeExtraneousColumnWidths(node, tablePos, tr);
+      tr = removeExtraneousColumnWidths(node, tr.mapping.map(pos), tr);
     }
   });
   return tr;
@@ -238,7 +91,7 @@ export const fixAutoSizedTable = (
   tableNode: PMNode,
   tableRef: HTMLTableElement,
   tablePos: number,
-) => {
+): Transaction => {
   let { tr } = view.state;
   const domAtPos = view.domAtPos.bind(view);
   const tableStart = tablePos + 1;
@@ -345,7 +198,7 @@ const replaceCells = (
   table: PMNode,
   tablePos: number,
   modifyCell: (cell: PMNode, rowIndex: number, colIndex: number) => PMNode,
-) => {
+): Transaction => {
   const rows: PMNode[] = [];
   let modifiedCells = 0;
   for (let rowIndex = 0; rowIndex < table.childCount; rowIndex++) {
