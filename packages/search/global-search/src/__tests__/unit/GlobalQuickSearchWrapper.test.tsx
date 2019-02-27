@@ -1,11 +1,11 @@
 import * as React from 'react';
 import 'whatwg-fetch';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import GlobalQuickSearch from '../../components/GlobalQuickSearchWrapper';
 import { HomeQuickSearchContainer } from '../../components/home/HomeQuickSearchContainer';
 import { ConfluenceQuickSearchContainer } from '../../components/confluence/ConfluenceQuickSearchContainer';
 import { mountWithIntl } from './helpers/_intl-enzyme-test-helper';
 import { JiraQuickSearchContainer } from '../../components/jira/JiraQuickSearchContainer';
-import { CancelableEvent } from '../../../../quick-search';
 
 it('should render the home container with context home', () => {
   const wrapper = mountWithIntl(
@@ -75,15 +75,13 @@ describe('advanced search callback', () => {
       const callback = component.prop('onAdvancedSearch');
       expect(callback).toBeInstanceOf(Function);
 
+      const event = {
+        stopPropagation: jest.fn(),
+        preventDefault: jest.fn(),
+      };
+
       if (callback) {
-        callback(
-          {
-            stopPropagation: jest.fn(),
-            preventDefault: jest.fn(),
-          },
-          category,
-          'query',
-        );
+        callback(event, category, 'query');
       }
 
       expect(spy).toBeCalledTimes(1);
@@ -91,6 +89,7 @@ describe('advanced search callback', () => {
         category,
         query: 'query',
         preventDefault: expect.any(Function),
+        orignialEvent: event,
       });
     });
 

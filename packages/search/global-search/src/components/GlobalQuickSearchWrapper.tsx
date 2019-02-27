@@ -45,6 +45,11 @@ export type AdvancedSearchEvent = {
    * if it is confluence it can be one of the following ['pages', 'people']
    */
   category: String;
+  /**
+   * original orignial event, this is useful when need to check if the click was to open in new tab or in same tab
+   * but if consumer wanna cancel the event {@link preventDefault} should be used
+   */
+  orignialEvent: Object;
 };
 export interface Props {
   /**
@@ -199,6 +204,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
         preventDefault: () => (preventEventDefault = true),
         query, // query entered by the user
         category: entity,
+        orignialEvent: e,
       });
 
       if (preventEventDefault) {
