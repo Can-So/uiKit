@@ -1,0 +1,1 @@
+- ED-6285 When catch an invalid transaction, send the new & prev document structures

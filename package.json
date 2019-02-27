@@ -347,6 +347,7 @@
     "deep-equal": "^1.0.1",
     "deep-object-diff": "^1.1.0",
     "deepcopy": "0.6.3",
+    "diff": "^4.0.1",
     "editor": "^1.0.0",
     "emotion": "^9.1.1",
     "emotion-theming": "^9.0.0",
