@@ -323,7 +323,12 @@ const calculateVerticalPlacement = ({
         offset[1],
     );
   } else if (placement === 'start') {
-    position.top = Math.ceil(targetTop - popupOffsetParentTop - offset[1]);
+    position.top = Math.ceil(
+      targetTop -
+        popupOffsetParentTop -
+        offset[1] +
+        (isPopupParentBody ? 0 : popupOffsetParentScrollTop),
+    );
   } else {
     let top = Math.ceil(
       targetTop -

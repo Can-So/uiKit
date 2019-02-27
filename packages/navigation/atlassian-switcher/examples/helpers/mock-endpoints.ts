@@ -1,4 +1,6 @@
 import fetchMock from 'fetch-mock';
+const iconUrl =
+  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHlsZT0iYmFja2dyb3VuZDojZmZmIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMwMEM3RTYiIGQ9Ik0wIDBoMTI4djEyOEgweiIvPjxwYXRoIGQ9Ik00MC4yODIgMTA5LjY2MmgtMi4xMTlhMy4xOTYgMy4xOTYgMCAwIDEtMy4xODYtMy4xODZWOTMuOTI4YTMuMTk2IDMuMTk2IDAgMCAxIDMuMTg2LTMuMTg2aDIuMTE5YTMuMTk2IDMuMTk2IDAgMCAxIDMuMTg2IDMuMTg2djEyLjU0OGEzLjE5NiAzLjE5NiAwIDAgMS0zLjE4NiAzLjE4NnpNODkuMDMyIDEwOS42NjJoLTIuMTE5YTMuMTk2IDMuMTk2IDAgMCAxLTMuMTg2LTMuMTg2VjkzLjkyOGEzLjE5NiAzLjE5NiAwIDAgMSAzLjE4Ni0zLjE4NmgyLjExOWEzLjE5NiAzLjE5NiAwIDAgMSAzLjE4NiAzLjE4NnYxMi41NDhhMy4xOTYgMy4xOTYgMCAwIDEtMy4xODYgMy4xODZ6IiBmaWxsPSIjNTI0M0FBIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48ZWxsaXBzZSBmaWxsPSIjNjU1NUMwIiBmaWxsLXJ1bGU9Im5vbnplcm8iIGN4PSI2My44NDIiIGN5PSI3NC43MDQiIHJ4PSI0My42MjIiIHJ5PSIzMC4wMTMiLz48ZWxsaXBzZSBmaWxsPSIjODc3N0Q5IiBmaWxsLXJ1bGU9Im5vbnplcm8iIGN4PSI2My45NjQiIGN5PSI2Ny42NTciIHJ4PSI1MC4zMDUiIHJ5PSIzMC4wMTMiLz48cGF0aCBkPSJNOTQuNzYyIDQ4LjU3OGMuMDM5LS42MjIuMDY1LTEuMjUzLjA2NS0xLjkwMSAwLTE3LjI0Ny0xMy45ODEtMzEuMjI4LTMxLjIyOC0zMS4yMjgtMTYuOTA1IDAtMzAuNjYzIDEzLjQzNS0zMS4yMDIgMzAuMjA4aC0uMDI2djguMjY4aC4wMjJjLjI2NiA5LjcxMSA1LjA2MiAxNi40NDEgMTIuMzc2IDIwLjM2NmwzNy42NjUuMDAyYzcuNTI5LTQuMDM3IDEyLjM5My0xMS4wNDQgMTIuMzkzLTIxLjIxNyAwLS42NDgtLjAyNi0xLjI5LS4wNjUtMS45Mjh2LTIuNTd6IiBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNMzIuNDc3IDQ0LjI1OGMtLjAzNi40NjQtLjA2NS45My0uMDggMS4zOTloLS4wMjZ2OC4yNjhoLjAyMmMuNDU2IDE2LjY2MSAxNC4yNDcgMjQuNTQ3IDMxLjIwNiAyNC41NDcgMTcuMjQ3IDAgMzEuMjI4LTguMTQ5IDMxLjIyOC0yNS4zOTUgMC0uNjQ4LS4wMjYtMS4yOS0uMDY1LTEuOTI4di0yLjU3Yy4wMzktLjYyMi4wNjUtMS4yNTMuMDY1LTEuOTAxIDAtLjkzNS0uMDQ5LTEuODU4LS4xMjktMi43NzEtOC41MDEtMy45MjEtMTkuMTU3LTYuMjYxLTMwLjczNC02LjI2MS0xMS45MjItLjAwMi0yMi44NjcgMi40NzctMzEuNDg3IDYuNjEyeiIgZmlsbD0iIzdGNENCRiIgZmlsbC1ydWxlPSJub256ZXJvIiBvcGFjaXR5PSIuMTUiLz48cGF0aCBkPSJNNjMuNTk5IDI4LjI1M2MtMTAuMzU5IDAtMTguODM0IDguNDc1LTE4LjgzNCAxOC44MzRWNzQuMjg5YzUuMjM2IDIuODA4IDExLjc1OSA0LjE4MiAxOC44MzQgNC4xODIgNy4wNzUgMCAxMy41OTgtMS4zNzQgMTguODM0LTQuMTgyVjQ3LjA4N2MwLTEwLjM1OS04LjQ3NS0xOC44MzQtMTguODM0LTE4LjgzNHoiIGZpbGw9IiMwMEM3RTYiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxjaXJjbGUgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJub256ZXJvIiBjeD0iNjMuODYiIGN5PSI1MC43MzUiIHI9IjExLjEzOSIvPjxjaXJjbGUgZmlsbD0iIzQwMzI5NCIgZmlsbC1ydWxlPSJub256ZXJvIiBjeD0iNjMuNDcyIiBjeT0iNTAuNjA4IiByPSI0LjQxOCIvPjwvZz48L3N2Zz4=';
 
 interface MockData {
   RECENT_CONTAINERS_DATA: any;
@@ -12,12 +14,18 @@ const ORIGINAL_MOCK_DATA: MockData = {
   RECENT_CONTAINERS_DATA: {
     data: [
       {
-        objectId: 'some-id',
+        objectId: 'some-id-0',
         type: 'jira-project',
         name: 'Jira Switcher',
         url: 'https://some-random-instance.atlassian.net/projects/CEN',
-        iconUrl:
-          'https://some-random-instance.atlassian.net/secure/secure/projectavatar?size=medium&avatarId=10324',
+        iconUrl,
+      },
+      {
+        objectId: 'some-id-1',
+        type: 'confluence-space',
+        name: 'My Project Space',
+        url: 'https://some-random-instance.atlassian.net/wiki/spaces/CEN',
+        iconUrl,
       },
     ],
   },
@@ -81,6 +89,30 @@ interface LoadTimes {
   permitted?: number;
   appswitcher?: number;
 }
+
+export const REQUEST_SLOW = {
+  containers: 2000,
+  xflow: 1200,
+  licenseInformation: 800,
+  permitted: 500,
+  appswitcher: 1500,
+};
+
+export const REQUEST_MEDIUM = {
+  containers: 1000,
+  xflow: 600,
+  licenseInformation: 400,
+  permitted: 250,
+  appswitcher: 750,
+};
+
+export const REQUEST_FAST = {
+  containers: 500,
+  xflow: 300,
+  licenseInformation: 200,
+  permitted: 125,
+  appswitcher: 375,
+};
 
 export const mockEndpoints = (
   product: string,

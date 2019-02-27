@@ -24,6 +24,8 @@ export type ItemPresentationProps = {|
   spacing: Spacing,
 |};
 
+export type Dataset = { [name: string]: string | typeof undefined };
+
 export type ItemBaseProps = {|
   /** A component to render after the text. Typically used to render an icon or
    * a badge. This component will be passed the current UI state of the Item. */
@@ -32,6 +34,8 @@ export type ItemBaseProps = {|
    * an avatar. This component will be passed the current UI state of the Item.
    * */
   before?: ComponentType<ItemPresentationProps>,
+  /** A map of data attributes applied to the rendered item. */
+  dataset?: Dataset,
   /** Properties exclusive to Items within a SortableContext. */
   draggableProps?: {| ...$Exact<DraggableProps>, ...$Exact<DragHandleProps> |},
   /** An href which this Item links to. If this prop is provided the Item will

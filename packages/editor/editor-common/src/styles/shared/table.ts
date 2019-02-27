@@ -1,9 +1,11 @@
 import { css } from 'styled-components';
 import { TableLayout } from '@atlaskit/adf-schema';
-import { fontSize } from '@atlaskit/theme';
+import { fontSize, themed } from '@atlaskit/theme';
 import {
   akEditorTableBorder,
+  akEditorTableBorderDark,
   akEditorTableToolbar,
+  akEditorTableToolbarDark,
   akEditorWideLayoutWidth,
   akEditorTableNumberColumnWidth,
   akEditorFullWidthLayoutWidth,
@@ -51,7 +53,10 @@ const tableSharedStyle = css`
   .${TableSharedCssClassName.TABLE_NODE_WRAPPER} > table {
     border-collapse: collapse;
     margin: ${tableMarginTop}px ${tableMarginSides}px 0;
-    border: ${tableCellBorderWidth}px solid ${akEditorTableBorder};
+    border: ${tableCellBorderWidth}px solid ${themed({
+  light: akEditorTableBorder,
+  dark: akEditorTableBorderDark,
+})};
     table-layout: fixed;
     font-size: ${fontSize()}px;
     width: 100%;
@@ -77,7 +82,10 @@ const tableSharedStyle = css`
         min-width: ${tableCellMinWidth}px;
         height: 3em;
         vertical-align: top;
-        border: 1px solid ${akEditorTableBorder};
+        border: 1px solid ${themed({
+          light: akEditorTableBorder,
+          dark: akEditorTableBorderDark,
+        })};
         border-right-width: 0;
         border-bottom-width: 0;
         padding: 10px;
@@ -90,7 +98,10 @@ const tableSharedStyle = css`
         }
       }
       th {
-        background-color: ${akEditorTableToolbar};
+        background-color: ${themed({
+          light: akEditorTableToolbar,
+          dark: akEditorTableToolbarDark,
+        })};
         text-align: left;
         & *:not(strong) {
           font-weight: normal;

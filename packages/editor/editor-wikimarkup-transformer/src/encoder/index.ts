@@ -33,8 +33,12 @@ const nodeEncoderMapping = {
 
 export function encode(node: PMNode): string {
   const encoder = nodeEncoderMapping[node.type.name];
-  if (encoder) {
-    return encoder(node);
+  try {
+    if (encoder) {
+      return encoder(node);
+    }
+    return unknown(node);
+  } catch (err) {
+    return unknown(node);
   }
-  return unknown(node);
 }

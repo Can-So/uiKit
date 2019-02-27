@@ -219,9 +219,27 @@ describe(name, () => {
     });
 
     describe('when an invalid transaction is dispatched', () => {
-      let wrapper;
-      let editor;
-      let invalidTr;
+      const documents = {
+        new: {
+          type: 'doc',
+          pos: 0,
+          nodeSize: 5,
+          content: [
+            {
+              type: 'codeBlock',
+              pos: 1,
+              nodeSize: 3,
+              content: [{ type: 'date', pos: 1, nodeSize: 1 }],
+            },
+          ],
+        },
+        prev: {
+          type: 'doc',
+          pos: 0,
+          nodeSize: 4,
+          content: [{ type: 'paragraph', pos: 1, nodeSize: 2 }],
+        },
+      };
 
       /** dispatches an invalid transaction which adds a code block with a date node child */
       const dispatchInvalidTransaction = (tr = editor.view.state.tr) => {
@@ -233,6 +251,10 @@ describe(name, () => {
         );
         editor.view.dispatch(invalidTr);
       };
+
+      let wrapper;
+      let editor;
+      let invalidTr;
 
       beforeEach(() => {
         wrapper = mountWithIntl(
@@ -260,6 +282,7 @@ describe(name, () => {
 
         expect(analyticsService.trackEvent).toHaveBeenCalledWith(
           'atlaskit.fabric.editor.invalidtransaction',
+          { documents: JSON.stringify(documents) },
         );
       });
 
@@ -291,6 +314,7 @@ describe(name, () => {
                   payload: analyticsEventPayload,
                 },
               ],
+              documents,
             },
           },
         });

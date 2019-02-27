@@ -36,24 +36,32 @@ describe('hyperlink commands', () => {
     });
 
   describe('#setLinkHref', () => {
-    it('should not set the link href when pos is not inside a link node', () => {
+    it('should not set the link href when pos is not inside existing text node', () => {
       const { editorView: view, sel } = editor(doc(p('{<>}')));
       expect(
-        setLinkHref(sel, 'https://google.com')(view.state, view.dispatch),
+        setLinkHref('https://google.com', sel)(view.state, view.dispatch),
+      ).toBe(false);
+    });
+    it('should not set the link when href is same', () => {
+      const { editorView: view, sel } = editor(
+        doc(p(a({ href: 'http://google.com' })('{<>}text'))),
+      );
+      expect(
+        setLinkHref('http://google.com', sel)(view.state, view.dispatch),
       ).toBe(false);
     });
     it('should remove the link mark when the href is an empty string', () => {
       const { editorView: view, sel } = editor(
         doc(p(a({ href: 'google.com' })('{<>}text'))),
       );
-      expect(setLinkHref(sel, '')(view.state, view.dispatch)).toBe(true);
+      expect(setLinkHref('', sel)(view.state, view.dispatch)).toBe(true);
       expect(view.state.doc).toEqualDocument(doc(p('text')));
     });
     it('should set normalized link href when the href is non-empty', () => {
       const { editorView: view, sel } = editor(
         doc(p(a({ href: 'google.com' })('{<>}text'))),
       );
-      expect(setLinkHref(sel, 'google.com')(view.state, view.dispatch)).toBe(
+      expect(setLinkHref('google.com', sel)(view.state, view.dispatch)).toBe(
         true,
       );
       expect(view.state.doc).toEqualDocument(
@@ -65,29 +73,39 @@ describe('hyperlink commands', () => {
         doc(p(a({ href: 'google.com' })('{<>}text'))),
       );
       expect(
-        setLinkHref(sel, 'scott@google.com')(view.state, view.dispatch),
+        setLinkHref('scott@google.com', sel)(view.state, view.dispatch),
       ).toBe(true);
       expect(view.state.doc).toEqualDocument(
         doc(p(a({ href: 'mailto:scott@google.com' })('text'))),
+      );
+    });
+    it('should set link on selection only', () => {
+      const { editorView: view } = editor(doc(p('this is a {<}selection{>}')));
+      const { from, to } = view.state.selection;
+      expect(
+        setLinkHref('google.com', from, to)(view.state, view.dispatch),
+      ).toBe(true);
+      expect(view.state.doc).toEqualDocument(
+        doc(p('this is a ', a({ href: 'http://google.com' })('selection'))),
       );
     });
   });
   describe('#setLinkText', () => {
     it('should not set the link text when pos is not at a link node', () => {
       const { editorView: view, sel } = editor(doc(p('{<>}')));
-      expect(setLinkText(sel, 'google')(view.state, view.dispatch)).toBe(false);
+      expect(setLinkText('google', sel)(view.state, view.dispatch)).toBe(false);
     });
     it('should not set the link text when text is an empty string', () => {
       const { editorView: view, sel } = editor(
         doc(p(a({ href: 'google.com' })('{<>}text'))),
       );
-      expect(setLinkText(sel, '')(view.state, view.dispatch)).toBe(false);
+      expect(setLinkText('', sel)(view.state, view.dispatch)).toBe(false);
     });
     it('should not set the link text when text is equal to the node.text', () => {
       const { editorView: view, sel } = editor(
         doc(p(a({ href: 'google.com' })('{<>}google.com'))),
       );
-      expect(setLinkText(sel, 'google.com')(view.state, view.dispatch)).toBe(
+      expect(setLinkText('google.com', sel)(view.state, view.dispatch)).toBe(
         false,
       );
     });
@@ -95,9 +113,21 @@ describe('hyperlink commands', () => {
       const { editorView: view, sel } = editor(
         doc(p(a({ href: 'google.com' })('{<>}text'))),
       );
-      expect(setLinkText(sel, 'hi!')(view.state, view.dispatch)).toBe(true);
+      expect(setLinkText('hi!', sel)(view.state, view.dispatch)).toBe(true);
       expect(view.state.doc).toEqualDocument(
         doc(p(a({ href: 'google.com' })('hi!'))),
+      );
+    });
+    it('should set the link text on selection only', () => {
+      const { editorView: view } = editor(
+        doc(p('this is a ', a({ href: 'google.com' })('{<}link{>}'))),
+      );
+      const { from, to } = view.state.selection;
+      expect(
+        setLinkText('selection', from, to)(view.state, view.dispatch),
+      ).toBe(true);
+      expect(view.state.doc).toEqualDocument(
+        doc(p('this is a ', a({ href: 'google.com' })('{<}selection{>}'))),
       );
     });
   });

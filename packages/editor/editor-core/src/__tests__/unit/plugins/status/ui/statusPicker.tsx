@@ -11,6 +11,9 @@ describe('StatusPicker', () => {
   const onTextChanged = jest.fn();
   const onEnter = jest.fn();
   const fireEvent = jest.fn();
+  const preventDefault = jest.fn();
+  const stopImmediatePropagation = jest.fn();
+  const event = { preventDefault, nativeEvent: { stopImmediatePropagation } };
 
   beforeEach(() => {
     createAnalyticsEvent.mockReturnValue({
@@ -22,6 +25,12 @@ describe('StatusPicker', () => {
   afterEach(() => {
     createAnalyticsEvent.mockReset();
     fireEvent.mockReset();
+    preventDefault.mockReset();
+    stopImmediatePropagation.mockReset();
+    onEnter.mockReset();
+    onSelect.mockReset();
+    onTextChanged.mockReset();
+    closeStatusPicker.mockReset();
   });
 
   const mountStatusPicker = () =>
@@ -89,39 +98,80 @@ describe('StatusPicker', () => {
     expect(fireEvent).toBeCalledWith(FABRIC_CHANNEL);
   };
 
-  it('should fire statusPopup.opened analytics when StatusPicker is mounted', () => {
-    const wrapper = mountStatusPicker();
-    wrapper.unmount();
-    assertAnalyticsPayload(
-      createPayloadPopupOpened('opened', '12345', 'purple', 5, 'new'),
-    );
-    assertAnalyticsPayload(
-      createPayloadPopupClosed('closed', '12345', 'purple', 5, 'new'),
-    );
+  const registerDocumentListeners = (map = {}) => {
+    document.addEventListener = jest.fn((event, cb) => {
+      map[event] = cb;
+    });
+  };
+
+  describe('analytics', () => {
+    it('should fire statusPopup.opened analytics when StatusPicker is mounted', () => {
+      const wrapper = mountStatusPicker();
+      wrapper.unmount();
+      assertAnalyticsPayload(
+        createPayloadPopupOpened('opened', '12345', 'purple', 5, 'new'),
+      );
+      assertAnalyticsPayload(
+        createPayloadPopupClosed('closed', '12345', 'purple', 5, 'new'),
+      );
+    });
+
+    it('should fire statusPopup.closed for previous Status instance and statusPopup.opened for the new Status', () => {
+      const wrapper = mountStatusPicker();
+      wrapper.setProps({
+        defaultColor: 'red',
+        defaultText: 'Boo',
+        defaultLocalId: '45678',
+        isNew: false,
+        target: document.getElementById('second'),
+      });
+      wrapper.unmount();
+
+      assertAnalyticsPayload(
+        createPayloadPopupOpened('opened', '12345', 'purple', 5, 'new'),
+      );
+      assertAnalyticsPayload(
+        createPayloadPopupClosed('closed', '12345', 'purple', 5, 'new'),
+      );
+      assertAnalyticsPayload(
+        createPayloadPopupOpened('opened', '45678', 'red', 3, 'update'),
+      );
+      assertAnalyticsPayload(
+        createPayloadPopupClosed('closed', '45678', 'red', 3, 'update'),
+      );
+    });
   });
 
-  it('should fire statusPopup.closed for previous Status instance and statusPopup.opened for the new Status', () => {
-    const wrapper = mountStatusPicker();
-    wrapper.setProps({
-      defaultColor: 'red',
-      defaultText: 'Boo',
-      defaultLocalId: '45678',
-      isNew: false,
-      target: document.getElementById('second'),
+  describe('StatusPicker callbacks', () => {
+    it('should fire props.onEnter callback when Enter is pressed in the input field', () => {
+      const wrapper = mountStatusPicker();
+      const input = wrapper.find('input');
+      input.simulate('keypress', { which: 'enter', key: 'Enter', keyCode: 13 });
+      expect(onEnter).toHaveBeenCalled();
     });
-    wrapper.unmount();
 
-    assertAnalyticsPayload(
-      createPayloadPopupOpened('opened', '12345', 'purple', 5, 'new'),
-    );
-    assertAnalyticsPayload(
-      createPayloadPopupClosed('closed', '12345', 'purple', 5, 'new'),
-    );
-    assertAnalyticsPayload(
-      createPayloadPopupOpened('opened', '45678', 'red', 3, 'update'),
-    );
-    assertAnalyticsPayload(
-      createPayloadPopupClosed('closed', '45678', 'red', 3, 'update'),
-    );
+    it('should fire props.onEnter callback when Escape is pressed in the input field', () => {
+      const map: any = {};
+      registerDocumentListeners(map);
+
+      mountStatusPicker();
+      map.keydown({ code: 'Escape', preventDefault });
+
+      expect(preventDefault).toHaveBeenCalled();
+      expect(onEnter).toHaveBeenCalled();
+    });
+
+    it('should fire props.close callback when user clicks outside the popup', () => {
+      const map: any = {};
+      registerDocumentListeners(map);
+
+      mountStatusPicker();
+
+      // simulate user clicking outside the popup
+      map.click({ ...event, target: document.createElement('BUTTON') });
+
+      expect(preventDefault).toHaveBeenCalled();
+      expect(closeStatusPicker).toHaveBeenCalled();
+    });
   });
 });

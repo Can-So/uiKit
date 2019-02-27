@@ -133,6 +133,7 @@ export default class PopupSelect extends PureComponent<Props, State> {
   handleKeyDown = ({ key }: KeyboardEvent) => {
     switch (key) {
       case 'Escape':
+      case 'Esc':
         this.close();
         break;
       default:
