@@ -1,5 +1,8 @@
 import { toNativeBridge } from './editor/web-to-native';
 
+interface QueryParams {
+  mode?: 'dark' | 'light';
+}
 /**
  * Send an event to which ever bridge it can find.
  * @param bridgeName
@@ -44,4 +47,19 @@ export const sendToBridge = (bridgeName, eventName, props = {}) => {
   if (log) {
     log(bridgeName, eventName, props);
   }
+};
+
+export const parseLocationSearch = (): QueryParams => {
+  if (!window) {
+    return {};
+  }
+
+  return window.location.search
+    .slice(1)
+    .split('&')
+    .reduce((acc, current) => {
+      const [key, value] = current.split('=');
+      acc[key] = value;
+      return acc;
+    }, {});
 };
