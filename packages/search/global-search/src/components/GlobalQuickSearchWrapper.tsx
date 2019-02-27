@@ -32,8 +32,18 @@ export type ReferralContextIdentifiers = {
 };
 
 export type AdvancedSearchEvent = {
+  /**
+   * prevent navigation to advanced search page
+   */
   preventDefault: () => void;
-  query: String; // query entered by the user
+  /**
+   * query entered by user
+   */
+  query: String;
+  /**
+   * if it is jira it can be one of the following ['issues', 'boards', 'projects', 'filters', 'people']
+   * if it is confluence it can be one of the following ['pages', 'people']
+   */
   category: String;
 };
 export interface Props {

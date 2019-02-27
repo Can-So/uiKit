@@ -20,7 +20,6 @@ const Container = styled.div`
 
 export default class NoResultsState extends React.Component<Props> {
   render() {
-    debugger;
     const { query, onAdvancedSearch } = this.props;
 
     return (
