@@ -1,0 +1,1 @@
+- [ED-6351] Fix table insert columns/row UI positions
