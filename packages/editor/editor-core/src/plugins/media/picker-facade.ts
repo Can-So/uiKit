@@ -253,7 +253,7 @@ export default class PickerFacade {
 
   private handleMobileUploadEnd = (
     event: UploadEndEventPayload & {
-      file: { readonly collectionName?: string };
+      file: { readonly collectionName?: string; publicId?: string };
     },
   ) => {
     const { file } = event;

@@ -107,7 +107,6 @@ describe('Media plugin', async () => {
         {
           id: 'foo',
           fileMimeType: 'image/jpeg',
-          fileId: Promise.resolve('id'),
           status: 'preview',
         },
       ]);
@@ -115,7 +114,6 @@ describe('Media plugin', async () => {
         {
           id: 'bar',
           fileMimeType: 'image/jpeg',
-          fileId: Promise.resolve('id2'),
           status: 'preview',
         },
       ]);

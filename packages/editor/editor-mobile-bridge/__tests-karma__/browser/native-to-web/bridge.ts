@@ -5,7 +5,6 @@ import { mount } from 'enzyme';
 import { mountEditor } from './utils';
 import { toNativeBridge } from '../../../src/editor/web-to-native';
 import mobileEditor from '../../../src/editor/mobile-editor-element';
-import { browser } from '@atlaskit/editor-common';
 
 declare var bridge;
 
@@ -92,18 +91,12 @@ describe('insert media', () => {
     ],
   };
   it('should dispatch media picker events', async () => {
-    if (browser.ie) {
-      this.skip();
-    }
     sendSampleMediaEvents();
     const content = bridge.getContent();
     expect(JSON.parse(content)).to.be.deep.equal(contentWithMedia);
   });
 
   it('should update content on native side', async () => {
-    if (browser.ie) {
-      this.skip();
-    }
     const mock = sinon.mock(toNativeBridge);
     mock
       .expects('updateText')
@@ -120,8 +113,8 @@ function sendSampleMediaEvents() {
     '{"file":{"id":"116ba70f-9e28-41a1-ac81-6cdaef0665a0","name":"IMG_20180406_001117.jpg","type":"file"},"public":{}}',
   );
   bridge.onMediaPicked(
-    'upload-processing',
-    '{"file":{"id":"116ba70f-9e28-41a1-ac81-6cdaef0665a0","name":"IMG_20180406_001117.jpg","type":"file"},"public":{}}',
+    'upload-end',
+    '{"file":{"id":"116ba70f-9e28-41a1-ac81-6cdaef0665a0","name":"IMG_20180406_001117.jpg","type":"file","publicId":"e94c3f67-5ac3-42b2-bf6a-ce35bb787894"},"public":{}}',
   );
 }
 
