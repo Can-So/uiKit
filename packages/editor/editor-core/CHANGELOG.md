@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.5.3
+- [patch] [37ca429b01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37ca429b01):
+
+  - ED-6374: Fixes handling breakout content more efficiently.
+
 ## 101.5.2
 - [patch] [1ede48ac5b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ede48ac5b):
 
