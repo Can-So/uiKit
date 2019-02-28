@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@atlaskit/webpack-config", "type": "patch" }],
+  "dependents": []
+}

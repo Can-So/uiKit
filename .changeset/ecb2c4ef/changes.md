@@ -1,0 +1,1 @@
+- Prefer atlaskit:src over module when building
