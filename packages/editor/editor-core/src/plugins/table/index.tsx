@@ -82,12 +82,16 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
       },
       {
         name: 'tablePMColResizing',
-        plugin: ({ dispatch, props: { allowTables } }) => {
+        plugin: ({
+          dispatch,
+          props: { allowTables, allowDynamicTextSizing },
+        }) => {
           const { allowColumnResizing } = pluginConfig(allowTables);
           return allowColumnResizing
             ? createFlexiResizingPlugin(dispatch, {
                 handleWidth: HANDLE_WIDTH,
                 cellMinWidth: tableCellMinWidth,
+                dynamicTextSizing: allowDynamicTextSizing,
               } as ColumnResizingPlugin)
             : undefined;
         },

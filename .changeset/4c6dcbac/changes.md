@@ -1,0 +1,1 @@
+- ED-6411: Fix resizing the last column with dynamic text sizing enabled
