@@ -1,19 +1,16 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { TableMap } from 'prosemirror-tables';
-import { findParentNodeOfType, hasParentNodeOfType } from 'prosemirror-utils';
 import * as classnames from 'classnames';
 import { akEditorTableToolbarSize } from '@atlaskit/editor-common';
 
 import {
   updateControls,
   updateResizeHandle,
-  handleBreakoutContent,
   updateColumnWidth,
   resizeColumn,
 } from './actions';
 
 import Resizer from './resizer/resizer';
-import { contentWidth } from './resizer/contentWidth';
 
 import {
   getLayoutSize,
@@ -66,45 +63,6 @@ export function createPlugin(
         return pluginState;
       },
     },
-    view: () => ({
-      update(view) {
-        const { selection, schema } = view.state;
-        const table = findParentNodeOfType(schema.nodes.table)(selection);
-        const isInsideCells = hasParentNodeOfType([
-          schema.nodes.tableCell,
-          schema.nodes.tableHeader,
-        ])(selection);
-
-        if (table && isInsideCells) {
-          const cell = findParentNodeOfType([
-            schema.nodes.tableCell,
-            schema.nodes.tableHeader,
-          ])(selection);
-          const elem = view.domAtPos(cell!.start).node as HTMLElement; // nodeview
-          const elemOrWrapper =
-            closestElement(
-              elem,
-              `.${ClassName.TABLE_HEADER_NODE_WRAPPER}, .${
-                ClassName.TABLE_CELL_NODE_WRAPPER
-              }`,
-            ) || elem;
-          const { minWidth } = contentWidth(elem, elem);
-
-          // if the contents of the element are wider than the cell
-          // we resize the cell to the new min cell width.
-          // which should cater to the nowrap element and wrap others.
-          if (elemOrWrapper && elemOrWrapper.offsetWidth < minWidth) {
-            handleBreakoutContent(
-              view,
-              elemOrWrapper,
-              table.pos + 1,
-              minWidth,
-              table.node,
-            );
-          }
-        }
-      },
-    }),
     props: {
       attributes(state) {
         const pluginState = pluginKey.getState(state);

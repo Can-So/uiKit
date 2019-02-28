@@ -1,4 +1,4 @@
-import { initFullPageEditorWithAdf, snapshot } from '../_utils';
+import { initFullPageEditorWithAdf, snapshot, Device } from '../_utils';
 import { getSelectorForTableCell } from '../../__helpers/page-objects/_table';
 import * as table from './__fixtures__/toolbar-adf.json';
 
@@ -7,7 +7,7 @@ describe('Floating toolbars:', () => {
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initFullPageEditorWithAdf(page, table);
+    await initFullPageEditorWithAdf(page, table, Device.LaptopMDPI);
   });
 
   afterEach(async () => {
