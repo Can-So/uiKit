@@ -3,14 +3,9 @@
   "version": "27.1.0",
   "description": "It holds shared code between MediaComponents like models, providers, interfaces and utilities",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
-  "types": "dist/es5/index.d.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
+  "types": "index.d.ts",
+  "module": "index.js",
   "atlaskit:src": "src/index.ts",
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Jimmy L",

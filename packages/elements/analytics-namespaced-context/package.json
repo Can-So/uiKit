@@ -5,10 +5,9 @@
   "config": {
     "access": "public"
   },
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "files": [
     "dist",
     "src"

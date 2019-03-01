@@ -2,13 +2,9 @@
   "name": "@atlaskit/notification-indicator",
   "version": "4.1.2",
   "description": "A wrapped React component used to display whether user has any new notifications.",
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "module": "index.js",
+  "types": "index.d.ts",
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Notifications Platform",

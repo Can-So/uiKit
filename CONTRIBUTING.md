@@ -316,11 +316,9 @@ How you do this will completely depend on what *exactly* you are trying to achie
 >
 > **or** if you know that you are consuming the package as a module:
 >
-> NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/esm --root-mode upward
+> bolt build:typescript
 >
 > If your package is written in TS:
-> NODE_ENV=production bolt workspaces exec --only "@atlaskit/pkgName" -- tsc --project ./build/es5
-> **or** if you know that you are consuming the package as a module:
 > NODE_ENV=production bolt workspaces exec --only "@atlaskit/pkgName" -- tsc --project ./build/es2015
 >
 > **THESE WILL NOT COVER 100% OF USE CASES AND ARE PROVIDED WITHOUT WARRANTY**

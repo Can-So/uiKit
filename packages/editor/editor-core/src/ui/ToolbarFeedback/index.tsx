@@ -8,7 +8,7 @@ import Button, { ButtonGroup } from '@atlaskit/button';
 
 import { withAnalytics } from '../../analytics';
 import ToolbarButton from '../ToolbarButton';
-import { version as coreVersion } from '../../../package.json';
+import { version as coreVersion } from '../../version.json';
 import withOuterListeners from '../with-outer-listeners';
 
 import {

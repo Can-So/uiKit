@@ -5,11 +5,9 @@
     "access": "public"
   },
   "description": "Tasks and decisions react components",
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "files": [
     "dist",

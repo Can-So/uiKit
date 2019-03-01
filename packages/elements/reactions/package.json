@@ -5,9 +5,8 @@
     "access": "public"
   },
   "description": "Reactions component",
-  "main": "dist/es5/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "atlaskit:src": "src/index.ts",
   "files": [
     "dist",

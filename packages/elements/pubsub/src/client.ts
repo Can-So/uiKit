@@ -13,7 +13,7 @@ import NoopProtocol from './protocols/noop';
 import { logDebug, logError, logInfo } from './util/logger';
 import { utils as serviceUtils } from '@atlaskit/util-service-support';
 import { FeatureFlags } from './featureFlags';
-import { version } from '../package.json';
+import { version } from './version.json';
 
 const PLATFORM = 'WEB';
 

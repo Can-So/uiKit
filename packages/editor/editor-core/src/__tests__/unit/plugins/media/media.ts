@@ -1,4 +1,4 @@
-import { name } from '../../../../../package.json';
+import { name } from '../../../../version.json';
 import { mediaPlugin } from '../../../../plugins';
 import { EditorPlugin } from '../../../../types';
 

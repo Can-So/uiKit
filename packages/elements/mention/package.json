@@ -5,9 +5,8 @@
     "access": "public"
   },
   "description": "A React component used to display user profiles in a list for 'Mention' functionality",
-  "main": "dist/es5/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "atlaskit:src": "src/index.ts",
   "sideEffects": false,
   "files": [
