@@ -89,6 +89,12 @@ describe('hyperlink commands', () => {
         doc(p('this is a ', a({ href: 'http://google.com' })('selection'))),
       );
     });
+    it('should not set the link href when it contains XSS code', () => {
+      const { editorView: view, sel } = editor(doc(p('{<>}')));
+      expect(
+        setLinkHref('javascript:alert(1)', sel)(view.state, view.dispatch),
+      ).toBe(false);
+    });
   });
   describe('#setLinkText', () => {
     it('should not set the link text when pos is not at a link node', () => {
@@ -218,6 +224,17 @@ describe('hyperlink commands', () => {
         ],
         provider: null, // cardProvider would have been set yet
       });
+    });
+    it('should not insert a href which contains XSS', () => {
+      const { editorView: view, sel } = editor(doc(p('{<>}')));
+
+      expect(
+        insertLink(sel, sel, 'javascript:alert(1)')(view.state, view.dispatch),
+      ).toBe(true);
+
+      expect(view.state.doc).toEqualDocument(
+        doc(p(a({ href: '' })('javascript:alert(1)'))),
+      );
     });
   });
   describe('#removeLink', () => {

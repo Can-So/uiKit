@@ -1,0 +1,1 @@
+- ED-6412: Prevent inserting links containing 'javascript:'

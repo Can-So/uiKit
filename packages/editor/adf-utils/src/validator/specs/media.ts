@@ -16,8 +16,8 @@ export default {
         props: {
           type: { type: 'enum', values: ['external'] },
           url: { type: 'string' },
-          width: { type: 'integer', optional: true },
-          height: { type: 'integer', optional: true },
+          width: { type: 'number', optional: true },
+          height: { type: 'number', optional: true },
         },
       },
     ],

@@ -39,6 +39,7 @@ export function setLinkHref(href: string, pos: number, to?: number): Command {
     const linkMark = state.schema.marks.link;
     const mark = linkMark.isInSet(node.marks) as Mark | undefined;
     const url = normalizeUrl(href);
+
     if (mark && mark.attrs.href === url) {
       return false;
     }
