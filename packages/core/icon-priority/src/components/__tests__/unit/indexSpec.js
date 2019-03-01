@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 
 import path from 'path';
 import fs from 'fs';
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 import PriorityCritical from '../../../../glyph/priority-critical';
 import DefaultIcon, { metadata } from '../../../../src';
 

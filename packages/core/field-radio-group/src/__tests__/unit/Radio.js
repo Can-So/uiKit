@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 
 import AkRadio from '../../Radio';
 import Radio from '../../RadioBase';
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 describe(name, () => {
   describe('Radio', () => {

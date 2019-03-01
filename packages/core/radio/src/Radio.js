@@ -7,10 +7,7 @@ import {
   withAnalyticsEvents,
 } from '@atlaskit/analytics-next';
 
-import {
-  name as packageName,
-  version as packageVersion,
-} from '../package.json';
+import { name as packageName, version as packageVersion } from './version.json';
 
 import RadioIcon from './RadioIcon';
 import { RadioInputWrapper, HiddenInput } from './styled/RadioInput';

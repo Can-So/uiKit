@@ -3,8 +3,7 @@
   "version": "0.0.12",
   "description": "A React component rendering a collapsible panel",
   "license": "Apache-2.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "files": [
     "dist"

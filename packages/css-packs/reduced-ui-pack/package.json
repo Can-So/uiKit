@@ -3,8 +3,7 @@
   "version": "10.5.4",
   "description": "CSS classes which provide styling for a reduced number of Atlaskit components.",
   "license": "Apache-2.0",
-  "main": "dist/bundle.css",
-  "module": "dist/bundle.css",
+  "main": "bundle.css",
   "atlaskit:src": "src/bundle.css",
   "atlaskit:designLink": "https://atlassian.design/guidelines/product/overview",
   "files": [

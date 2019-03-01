@@ -7,10 +7,7 @@ import {
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
 import Base, { Label } from '@atlaskit/field-base';
-import {
-  name as packageName,
-  version as packageVersion,
-} from '../package.json';
+import { name as packageName, version as packageVersion } from './version.json';
 import Radio from './Radio';
 import type { RadioGroupStatelessPropTypes } from './types';
 

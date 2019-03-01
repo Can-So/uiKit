@@ -5,8 +5,7 @@
     "access": "public"
   },
   "description": "A component that collects feedback across Atlassian products.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
   "files": [

@@ -3,15 +3,9 @@
   "version": "4.3.0",
   "description": "The Atlassian navigation component.",
   "license": "Apache-2.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "!dist/{esm,cjs}/scripts",
-    "*.js*"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Harsha Ivaturi",
@@ -70,8 +64,5 @@
     "react-dom": "^16.4.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2"
-  },
-  "scripts": {
-    "build": "node src/scripts/build-entrypoints.js"
   }
 }

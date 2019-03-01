@@ -18,7 +18,7 @@ import DynamicTable, { DynamicTableStateless } from '../../..';
 import { rows, head, rowsWithKeys } from './_data';
 import { headNumeric, rowsNumeric } from './_dataNumeric';
 
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 
 describe(name, () => {
   describe('stateless', () => {

@@ -5,8 +5,7 @@
     "access": "public"
   },
   "description": "Renders inline code snippets and code blocks",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
   "files": [

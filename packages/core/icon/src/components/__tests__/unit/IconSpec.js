@@ -3,7 +3,7 @@ import React, { Component, type Node } from 'react';
 import { mount, render } from 'enzyme';
 
 import { colors } from '@atlaskit/theme';
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 import Icon, { size } from '../../..';
 import { IconWrapper } from '../../Icon';
 
