@@ -2,14 +2,10 @@
   "name": "@atlaskit/focused-task-close-account",
   "version": "0.8.1",
   "description": "This package contains all of the UI components needed to assemble the focused tasks for deactivating and deleting users' accounts in accordance with the GDPR \"Right to be forgotten\".",
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
   "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "module": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "i18n:push": "i18n-tools push --resource focused-task-close-account . --type ts",
     "i18n:pull": "i18n-tools pull --resource focused-task-close-account . --type ts"
