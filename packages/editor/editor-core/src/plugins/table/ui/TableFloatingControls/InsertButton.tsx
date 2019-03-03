@@ -18,6 +18,9 @@ export interface ButtonProps {
 }
 
 const getInsertLineHeight = (tableRef: HTMLElement) => {
+  // The line gets height 100% from the table,
+  // but since we have an overflow on the left,
+  // we should add an offset to make up for it.
   const LINE_OFFSET = 3;
   return tableRef.offsetHeight + tableToolbarSize + LINE_OFFSET;
 };
@@ -34,6 +37,9 @@ const getToolbarSize = (tableRef: HTMLElement): number => {
 };
 
 const getInsertLineWidth = (tableRef: HTMLElement) => {
+  // The line gets width 100% from the table,
+  // but since we have an overflow on the left,
+  // we should add an offset to make up for it.
   const LINE_OFFSET = 4;
   const { parentElement, offsetWidth } = tableRef;
   const parentOffsetWidth = parentElement!.offsetWidth;
