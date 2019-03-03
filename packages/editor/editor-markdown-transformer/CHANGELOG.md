@@ -1,5 +1,10 @@
 # @atlaskit/editor-markdown-transformer
 
+## 2.2.0
+- [minor] [1eb20bca95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1eb20bca95):
+
+  - ED-6368: No implicit any for editor-*-transformer packages
+
 ## 2.1.12
 - Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
   - @atlaskit/editor-test-helpers@7.0.1

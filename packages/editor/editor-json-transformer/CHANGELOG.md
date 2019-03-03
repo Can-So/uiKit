@@ -1,5 +1,10 @@
 # @atlaskit/editor-json-transformer
 
+## 4.3.0
+- [minor] [1eb20bca95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1eb20bca95):
+
+  - ED-6368: No implicit any for editor-*-transformer packages
+
 ## 4.2.0
 - [minor] [7697e275b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7697e275b0):
 
