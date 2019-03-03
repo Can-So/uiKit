@@ -15,11 +15,13 @@ export function addAnalytics(
   return tr.setMeta(analyticsPluginKey, analyticsMeta);
 }
 
+export type HigherOrderCommand = (command: Command) => Command;
+
 export function withAnalytics(
   payload: AnalyticsEventPayload,
   channel?: string,
-) {
-  return (command: Command): Command => (state, dispatch) =>
+): HigherOrderCommand {
+  return command => (state, dispatch) =>
     command(state, tr => {
       if (dispatch) {
         dispatch(addAnalytics(tr, payload, channel));
