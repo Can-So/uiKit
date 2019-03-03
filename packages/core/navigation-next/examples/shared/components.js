@@ -175,12 +175,19 @@ export const LinkItem = ({
       render={({ location: { pathname } }) => (
         <Component
           after={() => <LinkIcon size="small" />}
-          component={({ children, className, innerRef, draggableProps }) => (
+          component={({
+            children,
+            className,
+            innerRef,
+            dataset,
+            draggableProps,
+          }) => (
             <Link
               className={className}
               to={to}
               onClick={props.onClick}
               innerRef={innerRef}
+              {...dataset}
               {...draggableProps}
             >
               {children}

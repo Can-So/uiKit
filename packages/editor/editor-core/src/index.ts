@@ -39,6 +39,11 @@ export { textColorPluginKey, TextColorPluginState } from './plugins/text-color';
 export { changeColor } from './plugins/text-color/commands/change-color';
 export { blockPluginStateKey, BlockTypeState } from './plugins';
 export {
+  HyperlinkState,
+  InsertStatus as HyperlinkInsertStatus,
+  stateKey as hyperlinkStateKey,
+} from './plugins/hyperlink/pm-plugins/main';
+export {
   ListsPluginState as ListsState,
   pluginKey as listsStateKey,
 } from './plugins/lists/pm-plugins/main';
@@ -74,12 +79,19 @@ export {
 export { typeAheadPluginKey, TypeAheadPluginState } from './plugins/type-ahead';
 export { TypeAheadItem } from './plugins/type-ahead/types';
 export { selectItem } from './plugins/type-ahead/commands/select-item';
+export {
+  insertLink,
+  isTextAtPos,
+  isLinkAtPos,
+  setLinkHref,
+  setLinkText,
+} from './plugins/hyperlink/commands';
 
 // Used in editor-test-helpers
 export { setTextSelection } from './utils';
 export { ReactEditorView } from './create-editor';
 export { getDefaultPluginsList } from './create-editor/create-plugins-list';
-export { EditorPlugin, EditorProps, EditorInstance } from './types';
+export { Command, EditorPlugin, EditorProps, EditorInstance } from './types';
 export { default as EditorActions } from './actions';
 export { MacroProvider, MacroAttributes, ExtensionType } from './plugins/macro';
 export { CardProvider } from './plugins/card';

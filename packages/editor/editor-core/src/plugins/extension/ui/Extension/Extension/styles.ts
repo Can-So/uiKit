@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { colors, borderRadius, themed } from '@atlaskit/theme';
 import { blockNodesVerticalMargin } from '@atlaskit/editor-common';
 import { Wrapper as WrapperDefault, padding } from '../styles';
 
@@ -31,7 +31,13 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   padding: ${padding}px;
-  background: white;
+  background: ${themed({
+    light: 'white',
+    dark: colors.DN30,
+  })};
+  color: ${themed({
+    dark: colors.DN900,
+  })};
   border: 1px solid ${colors.N30};
   border-radius: ${borderRadius()}px;
 `;

@@ -1,4 +1,3 @@
-import { NodeSelection } from 'prosemirror-state';
 import { findParentNodeOfType } from 'prosemirror-utils';
 import { Slice, Schema } from 'prosemirror-model';
 import {
@@ -8,7 +7,7 @@ import {
 } from 'prosemirror-utils';
 import { pluginKey } from './plugin';
 import { MacroProvider, insertMacroFromMacroBrowser } from '../macro';
-import { getExtensionNode } from './utils';
+import { getExtensionNode, isSelectionNodeExtension } from './utils';
 import { mapFragment } from '../../utils/slice';
 import { Command } from '../../types';
 
@@ -71,11 +70,7 @@ export const removeExtension = (): Command => (state, dispatch) => {
   const pluginState = pluginKey.getState(state);
   let tr = state.tr.setMeta(pluginKey, { ...pluginState, element: null });
 
-  if (
-    selection instanceof NodeSelection &&
-    (selection.node.type === schema.nodes.inlineExtension ||
-      selection.node.type === schema.nodes.extension)
-  ) {
+  if (isSelectionNodeExtension(selection, schema)) {
     tr = removeSelectedNode(tr);
   } else {
     tr = removeParentNodeOfType(schema.nodes.bodiedExtension)(tr);

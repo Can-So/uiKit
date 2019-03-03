@@ -5,6 +5,8 @@ import {
   akEditorWideLayoutWidth,
   akEditorDefaultLayoutWidth,
   akEditorFullWidthLayoutWidth,
+  getBreakpoint,
+  mapBreakpointToLayoutMaxWidth,
 } from '@atlaskit/editor-common';
 
 export const tableLayoutToSize = {
@@ -21,11 +23,18 @@ export const tableLayoutToSize = {
 export function getLayoutSize(
   tableLayout: TableLayout,
   containerWidth: number = 0,
+  dynamicTextSizing?: boolean,
 ) {
   const calculatedTableWidth = calcTableWidth(tableLayout, containerWidth);
-  return calculatedTableWidth.endsWith('px')
-    ? parseInt(calculatedTableWidth, 10)
-    : tableLayoutToSize[tableLayout] || containerWidth;
+  if (calculatedTableWidth.endsWith('px')) {
+    return parseInt(calculatedTableWidth, 10);
+  }
+
+  if (dynamicTextSizing && tableLayout === 'default') {
+    return mapBreakpointToLayoutMaxWidth(getBreakpoint(containerWidth));
+  }
+
+  return tableLayoutToSize[tableLayout] || containerWidth;
 }
 
 /**

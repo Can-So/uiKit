@@ -21,7 +21,11 @@ const InlineExtension = ({ node }) => {
 };
 
 const BlockExtension = ({ node }) => {
-  return <FakeExtension colour="black">{node.content}</FakeExtension>;
+  return (
+    <FakeExtension colour="black">
+      <div style={{ minWidth: 200 }}>{node.content}</div>
+    </FakeExtension>
+  );
 };
 
 const BodiedExtension = () => {

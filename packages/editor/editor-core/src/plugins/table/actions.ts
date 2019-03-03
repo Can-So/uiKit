@@ -20,15 +20,9 @@ import {
   addRowAt,
   isCellSelection,
   removeTable,
-  removeSelectedColumns,
-  removeSelectedRows,
-  hasParentNodeOfType,
-  setTextSelection,
   findParentNodeOfType,
   safeInsert,
   createTable as createTableNode,
-  removeColumnAt,
-  removeRowAt,
   findCellClosestToPos,
   emptyCell,
   setCellAttrs,
@@ -40,10 +34,8 @@ import { getPluginState, pluginKey, ACTIONS } from './pm-plugins/main';
 import {
   checkIfHeaderRowEnabled,
   checkIfHeaderColumnEnabled,
-  isHeaderRowSelected,
   isIsolating,
   createControlsHoverDecoration,
-  fixAutoSizedTable,
 } from './utils';
 import { Command } from '../../types';
 import { analyticsService } from '../../analytics';
@@ -51,6 +43,7 @@ import { outdentList } from '../lists/commands';
 import { mapSlice } from '../../utils/slice';
 import { TableCssClassName as ClassName } from './types';
 import { closestElement } from '../../utils';
+import { deleteColumns, deleteRows, fixAutoSizedTable } from './transforms';
 
 export const clearHoverSelection: Command = (state, dispatch) => {
   if (dispatch) {
@@ -402,82 +395,6 @@ export const convertFirstRowToHeader = (schema: Schema) => (
   return tr;
 };
 
-export const deleteSelectedColumns: Command = (state, dispatch) => {
-  if (!isCellSelection(state.selection)) {
-    return false;
-  }
-  let tr = removeSelectedColumns(state.tr);
-  // sometimes cursor jumps out of the table when deleting last few columns
-  if (!hasParentNodeOfType(state.schema.nodes.table)(tr.selection)) {
-    // trying to put cursor back inside of the table
-    const { start } = findTable(state.tr.selection)!;
-    tr = setTextSelection(start)(tr);
-  }
-  const table = findTable(tr.selection)!;
-  const map = TableMap.get(table.node);
-  const rect = getSelectionRect(tr.selection);
-  const columnIndex = rect
-    ? Math.min(rect.left, rect.right) - 1
-    : map.width - 1;
-  const pos = map.positionAt(0, columnIndex < 0 ? 0 : columnIndex, table.node);
-  // move cursor to the column to the left of the deleted column
-  if (dispatch) {
-    dispatch(
-      tr.setSelection(Selection.near(tr.doc.resolve(table.start + pos))),
-    );
-  }
-  analyticsService.trackEvent(
-    'atlassian.editor.format.table.delete_column.button',
-  );
-  return true;
-};
-
-export const deleteSelectedRows: Command = (state, dispatch) => {
-  if (!isCellSelection(state.selection)) {
-    return false;
-  }
-  const {
-    schema: {
-      nodes: { tableHeader },
-    },
-  } = state;
-  let tr = removeSelectedRows(state.tr);
-  // sometimes cursor jumps out of the table when deleting last few columns
-  if (!hasParentNodeOfType(state.schema.nodes.table)(tr.selection)) {
-    // trying to put cursor back inside of the table
-    const { start } = findTable(state.tr.selection)!;
-    tr = setTextSelection(start)(tr);
-  }
-  const table = findTable(tr.selection)!;
-  const map = TableMap.get(table.node);
-  const rect = getSelectionRect(state.selection);
-  const rowIndex = rect ? Math.min(rect.top, rect.bottom) : 0;
-  const pos = map.positionAt(
-    rowIndex === map.height ? rowIndex - 1 : rowIndex,
-    0,
-    table.node,
-  );
-  // move cursor to the beginning of the next row, or prev row if deleted row was the last row
-  tr.setSelection(Selection.near(tr.doc.resolve(table.start + pos)));
-  // make sure header row is always present (for Bitbucket markdown)
-  const {
-    pluginConfig: { isHeaderRowRequired },
-  } = getPluginState(state);
-  if (isHeaderRowRequired && isHeaderRowSelected(state)) {
-    tr = convertFirstRowToHeader(state.schema)(tr);
-  }
-  if (dispatch) {
-    dispatch(tr);
-  }
-  const headerRow = hasParentNodeOfType(tableHeader)(tr.selection)
-    ? 'header_'
-    : '';
-  analyticsService.trackEvent(
-    `atlassian.editor.format.table.delete_${headerRow}row.button`,
-  );
-  return true;
-};
-
 export const toggleTableLayout: Command = (state, dispatch): boolean => {
   const table = findTable(state.selection);
   if (!table) {
@@ -621,37 +538,6 @@ export const moveCursorBackward: Command = (state, dispatch) => {
   }
 
   return true;
-};
-
-export const deleteColumns = (indexes: number[]): Command => (
-  state,
-  dispatch,
-) => {
-  let { tr } = state;
-  for (let i = indexes.length; i >= 0; i--) {
-    tr = removeColumnAt(indexes[i])(tr);
-  }
-  if (tr.docChanged) {
-    if (dispatch) {
-      dispatch(setTextSelection(tr.selection.$from.pos)(tr));
-    }
-    return true;
-  }
-  return false;
-};
-
-export const deleteRows = (indexes: number[]): Command => (state, dispatch) => {
-  let { tr } = state;
-  for (let i = indexes.length; i >= 0; i--) {
-    tr = removeRowAt(indexes[i])(tr);
-  }
-  if (tr.docChanged) {
-    if (dispatch) {
-      dispatch(setTextSelection(tr.selection.$from.pos)(tr));
-    }
-    return true;
-  }
-  return false;
 };
 
 export const emptyMultipleCells = (targetCellPosition?: number): Command => (
@@ -898,9 +784,18 @@ export const handleCut = (
 
     if (tr.selection instanceof CellSelection) {
       if (tr.selection.isRowSelection()) {
-        tr = removeSelectedRows(tr);
+        const {
+          pluginConfig: { isHeaderRowRequired },
+        } = getPluginState(newState);
+        tr = deleteRows([], isHeaderRowRequired)(tr);
+        analyticsService.trackEvent(
+          'atlassian.editor.format.table.delete_row.button',
+        );
       } else if (tr.selection.isColSelection()) {
-        tr = removeSelectedColumns(tr);
+        analyticsService.trackEvent(
+          'atlassian.editor.format.table.delete_column.button',
+        );
+        tr = deleteColumns()(tr);
       }
     }
   }

@@ -219,6 +219,7 @@ export function scaleTable(
   pos: number,
   containerWidth: number | undefined,
   initialScale?: boolean,
+  dynamicTextSizing?: boolean,
 ) {
   if (!tableElem) {
     return;
@@ -233,6 +234,7 @@ export function scaleTable(
     prevNode,
     containerWidth,
     initialScale,
+    dynamicTextSizing,
   );
 
   if (state) {
@@ -259,6 +261,7 @@ function scale(
   prevNode: PMNode,
   containerWidth: number | undefined,
   initialScale?: boolean,
+  dynamicTextSizing?: boolean,
 ): ResizeState | undefined {
   // If a table has not been resized yet, columns should be auto.
   if (hasTableBeenResized(node) === false) {
@@ -281,7 +284,11 @@ function scale(
   let previousMaxSize = tableLayoutToSize[prevNode.attrs.layout];
 
   if (!initialScale) {
-    previousMaxSize = getLayoutSize(prevNode.attrs.layout, containerWidth);
+    previousMaxSize = getLayoutSize(
+      prevNode.attrs.layout,
+      containerWidth,
+      dynamicTextSizing,
+    );
   }
 
   // Determine if table was overflow

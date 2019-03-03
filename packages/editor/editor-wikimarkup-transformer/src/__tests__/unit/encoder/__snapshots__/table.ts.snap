@@ -65,3 +65,9 @@ exports[`ADF => WikiMarkup - Table should convert Table node without a header ro
 "|Cell 1|Cell 2|
 |Cell 3|Cell 4|"
 `;
+
+exports[`ADF => WikiMarkup - Table should convert advanced Table node into {adf} macro 1`] = `
+"{adf:display=block}
+{\\"type\\":\\"table\\",\\"attrs\\":{\\"isNumberColumnEnabled\\":false,\\"layout\\":\\"default\\"},\\"content\\":[{\\"type\\":\\"tableRow\\",\\"content\\":[{\\"type\\":\\"tableCell\\",\\"attrs\\":{\\"colspan\\":2},\\"content\\":[{\\"type\\":\\"codeBlock\\",\\"attrs\\":{\\"language\\":\\"javascript\\"},\\"content\\":[{\\"type\\":\\"text\\",\\"text\\":\\"const i = 0;\\"}]}]}]},{\\"type\\":\\"tableRow\\",\\"content\\":[{\\"type\\":\\"tableCell\\",\\"attrs\\":{},\\"content\\":[{\\"type\\":\\"codeBlock\\",\\"attrs\\":{\\"language\\":\\"javascript\\"},\\"content\\":[{\\"type\\":\\"text\\",\\"text\\":\\"const i = 0;\\"}]}]},{\\"type\\":\\"tableCell\\",\\"attrs\\":{},\\"content\\":[{\\"type\\":\\"codeBlock\\",\\"attrs\\":{\\"language\\":\\"javascript\\"},\\"content\\":[{\\"type\\":\\"text\\",\\"text\\":\\"const i = 0;\\"}]}]}]}]}
+{adf}"
+`;

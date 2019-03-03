@@ -29,6 +29,7 @@ export const tableSelectors = {
   insertColumnButton: `.${ClassName.CONTROLS_INSERT_COLUMN}`,
   insertRowButton: `.${ClassName.CONTROLS_INSERT_ROW}`,
   cornerButton: `.${ClassName.CONTROLS_CORNER_BUTTON}`,
+  breakoutButton: `.${ClassName.LAYOUT_BUTTON}`,
   mergeCellsText: `Merge cells`,
   splitCellText: `Split cell`,
   tableOptionsText: `Table options`,
@@ -250,4 +251,13 @@ export const grabResizeHandle = async (
   await page.mouse.move(columnEndPosition, cell.top);
 
   await page.mouse.down();
+};
+
+export const toggleBreakout = async (page: any, times: number) => {
+  const timesArray = Array.from({ length: times });
+
+  await page.waitForSelector(tableSelectors.breakoutButton);
+  for (let _iter of timesArray) {
+    await page.click(tableSelectors.breakoutButton);
+  }
 };

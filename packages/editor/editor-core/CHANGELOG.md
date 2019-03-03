@@ -1,5 +1,55 @@
 # @atlaskit/editor-core
 
+## 101.5.3
+- [patch] [37ca429b01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37ca429b01):
+
+  - ED-6374: Fixes handling breakout content more efficiently.
+
+## 101.5.2
+- [patch] [1ede48ac5b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ede48ac5b):
+
+  - ED-6381: Gather max layout sizes based on dynamic text sizing
+
+## 101.5.1
+- [patch] [42b78a6133](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/42b78a6133):
+
+  - ED-6278: a complete rewrite of mergeCells, deleteColumns and deleteRows
+
+## 101.5.0
+- [minor] [bab8f06b0a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bab8f06b0a):
+
+  - ED-6285 When catch an invalid transaction, send the new & prev document structures
+
+## 101.4.3
+- [patch] [06f8fd872b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06f8fd872b):
+
+  - [ED-6342] Fix remove bodied extension when it is selected
+
+## 101.4.2
+- [patch] [27189951b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27189951b5):
+
+  - ED-5967: added API to enable links on hybrid editor
+
+## 101.4.1
+- [patch] [c2360c53b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2360c53b2):
+
+  - fixed status selection loss when dragging and drop
+
+## 101.4.0
+- [minor] [30b4e99377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/30b4e99377):
+
+  - ED-5888 Add editor dark mode
+
+## 101.3.3
+- [patch] [e08b35abef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e08b35abef):
+
+  - StatusPicker event listeners cleaned up
+
+## 101.3.2
+- [patch] [f5e8437365](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e8437365):
+
+  - ED-6373: Fix position of breakout controls while scrolling
+
 ## 101.3.1
 - [patch] [7308d1e0e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7308d1e0e9):
 

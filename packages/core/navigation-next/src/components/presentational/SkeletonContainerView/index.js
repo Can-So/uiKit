@@ -1,63 +1,59 @@
 // @flow
 
 import React, { Component } from 'react';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import Section from '../Section';
 import SkeletonContainerHeader from '../SkeletonContainerHeader';
 import SkeletonItem from '../SkeletonItem';
+import type { SkeletonContainerViewProps } from './types';
 
 import {
   ProductNavigationTheme,
   ContainerNavigationTheme,
 } from '../ContentNavigation/primitives';
 
-const gridSize = gridSizeFn();
-
-export type SkeletonContainerViewProps = {
-  type?: 'product' | 'container',
-};
+import { Container, HeaderContainer } from './primitives';
 
 export default class SkeletonContainerView extends Component<SkeletonContainerViewProps> {
-  static type = 'product';
+  static defaultProps = {
+    dataset: {
+      'data-test-id': 'ContextualNavigationSkeleton',
+    },
+  };
 
   render() {
-    const { type } = this.props;
+    const { dataset, type, ...props } = this.props;
 
     if (!type) {
       return null;
     }
 
-    const Wrapper =
+    const Theme =
       type === 'product' ? ProductNavigationTheme : ContainerNavigationTheme;
 
     return (
-      <Wrapper>
-        <Section>
-          {({ css }) => (
-            <div
-              css={{
-                ...css,
-                paddingTop: gridSize * 2.5,
-                paddingBottom: gridSize * 2.5,
-              }}
-            >
-              <SkeletonContainerHeader hasBefore />
-            </div>
-          )}
-        </Section>
-        <Section>
-          {({ className }) => (
-            <div className={className}>
-              <SkeletonItem hasBefore />
-              <SkeletonItem hasBefore />
-              <SkeletonItem hasBefore />
-              <SkeletonItem hasBefore />
-              <SkeletonItem hasBefore />
-            </div>
-          )}
-        </Section>
-      </Wrapper>
+      <Theme>
+        <Container {...dataset} {...props}>
+          <Section>
+            {({ css }) => (
+              <HeaderContainer styles={css}>
+                <SkeletonContainerHeader hasBefore />
+              </HeaderContainer>
+            )}
+          </Section>
+          <Section>
+            {({ className }) => (
+              <div className={className}>
+                <SkeletonItem hasBefore />
+                <SkeletonItem hasBefore />
+                <SkeletonItem hasBefore />
+                <SkeletonItem hasBefore />
+                <SkeletonItem hasBefore />
+              </div>
+            )}
+          </Section>
+        </Container>
+      </Theme>
     );
   }
 }

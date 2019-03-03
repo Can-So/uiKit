@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount, render, shallow } from 'enzyme';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 import ContentNavigation from '../../../ContentNavigation';
@@ -46,6 +46,93 @@ describe('LayoutManager', () => {
   it.skip('should render correctly', () => {
     const wrapper = shallow(<LayoutManager {...defaultProps} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should apply a default dataset to the navigation container when datasets is not provided', () => {
+    expect(
+      render(<LayoutManager {...defaultProps} />)
+        .find('[data-test-id="Navigation"]')
+        .data(),
+    ).toEqual({
+      testId: 'Navigation',
+    });
+  });
+
+  it('should apply a default dataset to the global navigation container when datasets is not provided', () => {
+    expect(
+      render(<LayoutManager {...defaultProps} />)
+        .find('[data-test-id="GlobalNavigation"]')
+        .data(),
+    ).toEqual({
+      testId: 'GlobalNavigation',
+    });
+  });
+
+  it('should apply a default dataset to the contextual navigation container element when datasets is not provided', () => {
+    expect(
+      render(<LayoutManager {...defaultProps} />)
+        .find('[data-test-id="ContextualNavigation"]')
+        .data(),
+    ).toEqual({
+      testId: 'ContextualNavigation',
+    });
+  });
+
+  it('should apply a custom dataset to the navigation container when datasets is provided', () => {
+    expect(
+      render(
+        <LayoutManager
+          {...defaultProps}
+          datasets={{
+            contextualNavigation: {},
+            globalNavigation: { 'data-navigation': '' },
+            navigation: {},
+          }}
+        />,
+      )
+        .find('[data-navigation]')
+        .data(),
+    ).toEqual({
+      navigation: '',
+    });
+  });
+
+  it('should apply a custom dataset to the global navigation container when datasets is provided', () => {
+    expect(
+      render(
+        <LayoutManager
+          {...defaultProps}
+          datasets={{
+            contextualNavigation: {},
+            globalNavigation: { 'data-global-navigation': '' },
+            navigation: {},
+          }}
+        />,
+      )
+        .find('[data-global-navigation]')
+        .data(),
+    ).toEqual({
+      globalNavigation: '',
+    });
+  });
+
+  it('should apply a custom dataset to the contextual navigation container when datasets is provided', () => {
+    expect(
+      render(
+        <LayoutManager
+          {...defaultProps}
+          datasets={{
+            contextualNavigation: { 'data-contextual-navigation': '' },
+            globalNavigation: {},
+            navigation: {},
+          }}
+        />,
+      )
+        .find('[data-contextual-navigation]')
+        .data(),
+    ).toEqual({
+      contextualNavigation: '',
+    });
   });
 
   describe('Flyout', () => {

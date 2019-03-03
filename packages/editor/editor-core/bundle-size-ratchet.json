@@ -1,1 +1,128 @@
-[]
+[
+  {
+    "id": "src.main",
+    "name": "main",
+    "stats": {
+      "size": 592809,
+      "gzipSize": 156980
+    },
+    "new": true
+  },
+  {
+    "id": "src.async",
+    "name": "async",
+    "stats": {
+      "size": 21913,
+      "gzipSize": 5657
+    },
+    "new": true
+  },
+  {
+    "id": "node_modules.main",
+    "name": "node_modules [main]",
+    "stats": {
+      "size": 694348,
+      "gzipSize": 201246
+    },
+    "new": true
+  },
+  {
+    "id": "node_modules.async",
+    "name": "node_modules [async]",
+    "stats": {
+      "size": 1428012,
+      "gzipSize": 406298
+    },
+    "new": true
+  },
+  {
+    "id": "atlaskit.core.main",
+    "name": "main",
+    "stats": {
+      "size": 422438,
+      "gzipSize": 91395
+    },
+    "new": true
+  },
+  {
+    "id": "atlaskit.core.async",
+    "name": "async",
+    "stats": {
+      "size": 200707,
+      "gzipSize": 41355
+    },
+    "new": true
+  },
+  {
+    "id": "atlaskit.editor.main",
+    "name": "main",
+    "stats": {
+      "size": 119640,
+      "gzipSize": 29192
+    },
+    "new": true
+  },
+  {
+    "id": "atlaskit.elements.main",
+    "name": "main",
+    "stats": {
+      "size": 141999,
+      "gzipSize": 38994
+    },
+    "new": true
+  },
+  {
+    "id": "atlaskit.elements.async",
+    "name": "async",
+    "stats": {
+      "size": 36984,
+      "gzipSize": 10152
+    },
+    "new": true
+  },
+  {
+    "id": "atlaskit.media.main",
+    "name": "main",
+    "stats": {
+      "size": 199838,
+      "gzipSize": 46510
+    },
+    "new": true
+  },
+  {
+    "id": "atlaskit.media.async",
+    "name": "async",
+    "stats": {
+      "size": 867002,
+      "gzipSize": 213592
+    },
+    "new": true
+  },
+  {
+    "id": "atlaskit.teamwork-ecosystem.main",
+    "name": "main",
+    "stats": {
+      "size": 624,
+      "gzipSize": 367
+    },
+    "new": true
+  },
+  {
+    "id": "combined.main",
+    "name": "main",
+    "stats": {
+      "size": 2164417,
+      "gzipSize": 577695
+    },
+    "new": true
+  },
+  {
+    "id": "combined.async",
+    "name": "async",
+    "stats": {
+      "size": 2552593,
+      "gzipSize": 680746
+    },
+    "new": true
+  }
+]

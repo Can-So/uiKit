@@ -65,7 +65,11 @@ export const fullpage: EditorHelper = {
 export const fullpageDisabled: EditorHelper = {
   name: 'fullpage-disabled',
   appearance: 'full-page',
-  path: getExampleUrl('editor', 'editor-core', 'full-page-with-content'),
+  path: getExampleUrl(
+    'editor',
+    'editor-core',
+    'full-page-with-content-disabled-flexi-tables',
+  ),
   placeholder: '.ProseMirror',
 };
 

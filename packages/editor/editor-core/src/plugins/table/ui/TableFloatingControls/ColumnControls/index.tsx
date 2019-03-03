@@ -20,11 +20,12 @@ import {
   clearHoverSelection,
   hoverColumns,
   insertColumn,
-  deleteSelectedColumns,
   selectColumn,
 } from '../../../actions';
 import { TableCssClassName as ClassName } from '../../../types';
 import tableMessages from '../../messages';
+import { deleteColumns } from '../../../transforms';
+import { analyticsService } from '../../../../../analytics';
 
 export interface Props {
   editorView: EditorView;
@@ -167,7 +168,10 @@ export default class ColumnControls extends Component<Props, any> {
   private deleteColumns = (event: SyntheticEvent) => {
     event.preventDefault();
     const { state, dispatch } = this.props.editorView;
-    deleteSelectedColumns(state, dispatch);
+    analyticsService.trackEvent(
+      'atlassian.editor.format.table.delete_column.button',
+    );
+    dispatch(deleteColumns()(state.tr));
     this.clearHoverSelection();
   };
 
