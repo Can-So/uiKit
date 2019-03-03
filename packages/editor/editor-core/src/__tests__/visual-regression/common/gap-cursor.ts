@@ -13,7 +13,7 @@ describe('Gap cursor:', () => {
   });
 
   afterEach(async () => {
-    const threshold = 0.01;
+    const threshold = 0.005;
     await snapshot(page, threshold);
   });
 
