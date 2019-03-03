@@ -1,1 +1,0 @@
-- ED-6289 Add analytics GAS V3 for color text formatting

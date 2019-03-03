@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.6.0
+- [minor] [8e407b5a24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e407b5a24):
+
+  - ED-6289 Add analytics GAS V3 for color text formatting
+
 ## 101.5.3
 - [patch] [37ca429b01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37ca429b01):
 
