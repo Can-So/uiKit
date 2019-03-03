@@ -338,18 +338,8 @@ if (process.env.VISUAL_REGRESSION) {
     await global.browser.disconnect();
   });
 
-  const toMatchProductionSnapshot = async (threshold, selector, type) => {
-    global.page.waitForSelector(selector);
-    const customConfig = { threshold: 0.0 };
-    const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
-      customDiffConfig: customConfig,
-      failureThreshold: '20' || threshold,
-      failureThresholdType: 'pixel' || type,
-      noColors: true,
-    });
-  };
-  // 20 pixels difference to support blinking cursor
-
+  // A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
+  const customConfig = { threshold: 0.0 };
   const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
     customDiffConfig: customConfig,
     failureThreshold: '20',
@@ -357,5 +347,5 @@ if (process.env.VISUAL_REGRESSION) {
     noColors: true,
   });
 
-  expect.extend({ toMatchProductionSnapshot });
+  expect.extend({ toMatchProdImageSnapshot });
 }
