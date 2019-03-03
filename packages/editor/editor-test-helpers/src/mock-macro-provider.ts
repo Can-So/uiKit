@@ -6,7 +6,10 @@ import {
 } from '@atlaskit/editor-core';
 import { bodiedExtensionData } from './mock-extension-data';
 
-const getMacroADFNode = (macroName, macroParams): MacroAttributes => {
+const getMacroADFNode = (
+  macroName: string,
+  macroParams: any,
+): MacroAttributes => {
   return {
     type: 'inlineExtension' as ExtensionType,
     attrs: {
@@ -30,9 +33,9 @@ const getMacroADFNode = (macroName, macroParams): MacroAttributes => {
 
 export class MockMacroProvider implements MacroProvider {
   public config = {};
-  private mockExtensionData;
+  private mockExtensionData: any;
 
-  constructor(mockExtensionData) {
+  constructor(mockExtensionData: any) {
     this.mockExtensionData = mockExtensionData;
   }
 

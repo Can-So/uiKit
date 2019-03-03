@@ -8,7 +8,7 @@ import { text } from './text';
 import { inlineCard } from './inline-card';
 import { unknown } from './unknown';
 
-const inlinesEncoderMapping = {
+const inlinesEncoderMapping: { [key: string]: NodeEncoder } = {
   emoji,
   hardBreak,
   mention,

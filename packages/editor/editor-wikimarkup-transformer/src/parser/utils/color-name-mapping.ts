@@ -1,4 +1,14 @@
-const mapping = {
+export interface RGBColors {
+  [key: string]: RGB;
+}
+
+export interface RGB {
+  r: number;
+  g: number;
+  b: number;
+}
+
+const mapping: RGBColors = {
   crimson: {
     r: 220,
     g: 20,

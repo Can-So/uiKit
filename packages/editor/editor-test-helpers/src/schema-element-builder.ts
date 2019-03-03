@@ -1,3 +1,4 @@
+import { Schema } from 'prosemirror-model';
 import {
   p,
   blockquote,
@@ -43,7 +44,8 @@ import {
   status,
 } from './schema-builder';
 
-export const createText: Function = txt => schema => text(txt, schema);
+export const createText: Function = (txt: string) => (schema: Schema) =>
+  text(txt, schema);
 
 export const pmNodeFactory: object = {
   doc,
@@ -77,20 +79,20 @@ export const pmNodeFactory: object = {
       localId: 'fake-status',
       text: 'In progress',
     }),
-  table: content => table()(content),
+  table: (content: any) => table()(content),
   tableCell: td({ colspan: 1, rowspan: 1 }),
   tableHeader: th({ colspan: 1, rowspan: 1 }),
   tableRow: tr,
   mediaSingle: mediaSingle({ layout: 'center' }),
   mediaGroup,
   media,
-  extension: content =>
+  extension: (content: any) =>
     extension({
       extensionKey: '123',
       extensionType: 'blockExtension',
       layout: 'default',
     })(content),
-  bodiedExtension: content =>
+  bodiedExtension: (content: any) =>
     bodiedExtension({
       extensionKey: '123',
       extensionType: 'bodiedExtension',

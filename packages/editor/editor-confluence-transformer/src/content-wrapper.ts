@@ -245,7 +245,7 @@ export function ensureBlock(
     return unsupportedBlock;
   };
 
-  let i;
+  let i: number;
   for (i = 0; i < nodes.length; i++) {
     const node = nodes[i];
     if (validContent(node)) {
