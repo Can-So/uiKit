@@ -62,7 +62,7 @@ describe('Snapshot Test: Media', () => {
       await snapshot(page);
 
       await pressKey(page, KeyboardKeys.arrowUp);
-      await snapshot(page);
+      await snapshot(page, threshold);
     });
 
     it('renders selection ring around media group items', async () => {

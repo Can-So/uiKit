@@ -1,6 +1,7 @@
 import { initEditor, snapshot } from './_utils';
 
-describe('Snapshot Test: Mobile Dark Editor', () => {
+// https://product-fabric.atlassian.net/browse/ED-6435
+describe.skip('Snapshot Test: Mobile Dark Editor', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
