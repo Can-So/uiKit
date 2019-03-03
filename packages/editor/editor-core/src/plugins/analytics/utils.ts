@@ -1,4 +1,4 @@
-import { analyticsChannel } from './index';
+import { editorAnalyticsChannel } from './index';
 import { AnalyticsEventPayload } from './types';
 import { Transaction, EditorState } from 'prosemirror-state';
 import { Command } from '../../types';
@@ -60,7 +60,7 @@ export function ruleWithAnalytics(
 
 export const fireAnalyticsEvent = createAnalyticsEvent => ({
   payload,
-  channel = analyticsChannel,
+  channel = editorAnalyticsChannel,
 }: {
   payload: AnalyticsEventPayload;
   channel?: string;

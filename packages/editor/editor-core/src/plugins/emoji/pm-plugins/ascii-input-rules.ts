@@ -8,6 +8,14 @@ import {
   leafNodeReplacementCharacter,
 } from '../../../utils/input-rules';
 import { isMarkTypeAllowedInCurrentSelection } from '../../../utils';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+} from '../../analytics';
 
 let matcher: AsciiEmojiMatcher;
 
@@ -223,7 +231,18 @@ class AsciiEmojiTransactionCreator {
   }
 
   create(): Transaction {
-    return this.state.tr.replaceWith(this.from, this.to, this.createNodes());
+    const tr = this.state.tr.replaceWith(
+      this.from,
+      this.to,
+      this.createNodes(),
+    );
+    return addAnalytics(tr, {
+      action: ACTION.INSERTED,
+      actionSubject: ACTION_SUBJECT.DOCUMENT,
+      actionSubjectId: ACTION_SUBJECT_ID.EMOJI,
+      attributes: { inputMethod: INPUT_METHOD.ASCII },
+      eventType: EVENT_TYPE.TRACK,
+    });
   }
 
   private get from(): number {

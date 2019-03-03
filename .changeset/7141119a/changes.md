@@ -1,0 +1,1 @@
+- ED-6212 Fire v3 analytics events when insert table or emojis
