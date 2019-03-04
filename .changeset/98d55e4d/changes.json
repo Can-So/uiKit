@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@atlaskit/media-editor", "type": "minor" }],
+  "dependents": []
+}

@@ -1,0 +1,1 @@
+- Numerous UI/UX improvements also dimensions as a second argument in onUploadStart callback
