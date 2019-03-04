@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import SizeDetector from '../src';
 
-const startSize = 100;
+const startSize = 50;
 const endSize = startSize * 2;
 
 const growAndShrink = keyframes`
@@ -45,15 +45,17 @@ const ResultBox = styled.div`
 `;
 
 type SizeMetrics = {
-  width: number,
-  height: number,
+  width: ?number,
+  height: ?number,
 };
 
-const displayResults = ({ width, height }: SizeMetrics) => (
-  <ResultBox>
-    {width} x {height}
-  </ResultBox>
-);
+const displayResults = ({ width, height }: SizeMetrics) => {
+  return width !== null ? (
+    <ResultBox>
+      {width} x {height}
+    </ResultBox>
+  ) : null;
+};
 
 export default function Example() {
   return (

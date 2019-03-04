@@ -17,8 +17,11 @@ export default class HeightDetector extends Component<Props> {
   render() {
     return (
       <SizeDetector>
-        {size => {
-          this.notifyHeight(size.height);
+        {({ height }) => {
+          if (height === null) {
+            return null;
+          }
+          this.notifyHeight(height);
           return this.props.children;
         }}
       </SizeDetector>
