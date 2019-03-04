@@ -42,7 +42,7 @@ export type AdvancedSearchEvent = {
   query: String;
   /**
    * if it is jira it can be one of the following ['issues', 'boards', 'projects', 'filters', 'people']
-   * if it is confluence it can be one of the following ['pages', 'people']
+   * if it is confluence it can be one of the following ['content', 'people']
    */
   category: String;
   /**
