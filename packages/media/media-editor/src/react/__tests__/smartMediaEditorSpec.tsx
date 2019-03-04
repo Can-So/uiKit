@@ -8,6 +8,7 @@ import {
 } from '@atlaskit/media-test-helpers';
 import * as uuid from 'uuid';
 import { Shortcut } from '@atlaskit/media-ui';
+import ModalDialog from '@atlaskit/modal-dialog';
 import Spinner from '@atlaskit/spinner';
 import {
   Context,
@@ -280,6 +281,40 @@ describe('Smart Media Editor', () => {
       const errorViewProps = component.find<ErrorViewProps>(ErrorView).props();
       errorViewProps.onCancel();
       expect(onFinish).toHaveBeenCalled();
+    });
+  });
+
+  describe('when changes has been made and cancel is pressed', () => {
+    let modalDialog: ShallowWrapper;
+
+    beforeEach(async () => {
+      await forFileToBeProcessed();
+      const editorView = component.find<EditorViewProps>(EditorView);
+      const { onAnyChange, onCancel } = editorView.props();
+      onAnyChange!();
+      onCancel();
+      modalDialog = component.find(ModalDialog);
+    });
+
+    it('should show confirmation dialog when user cancels', () => {
+      expect(modalDialog).toHaveLength(1);
+      expect(modalDialog.prop('heading')).toEqual('Unsaved changes');
+    });
+
+    it('should call onFinish when first action is chosen', () => {
+      const firstAction = (modalDialog.prop('actions') as any)[0];
+      expect(firstAction.text).toEqual('Close anyway');
+      firstAction.onClick();
+      expect(onFinish).toHaveBeenCalled();
+    });
+
+    it('should just close confirmation dialog and not call onFinish when second action is chosen', () => {
+      const secondAction = (modalDialog.prop('actions') as any)[1];
+      expect(secondAction.text).toEqual('Cancel');
+      secondAction.onClick();
+      expect(onFinish).not.toHaveBeenCalled();
+      modalDialog = component.find(ModalDialog);
+      expect(modalDialog).toHaveLength(0);
     });
   });
 });
