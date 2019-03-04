@@ -126,9 +126,10 @@ export const Dialog = styled.div`
   ${flexMaxHeightIEFix};
   outline: 0;
   pointer-events: auto;
-  
+
   @media (min-width: 320px) and (max-width: 480px) {
     height: 100%;
+    border-radius: 0px;
  }
 `;
 
