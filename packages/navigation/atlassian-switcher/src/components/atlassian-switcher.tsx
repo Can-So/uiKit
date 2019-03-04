@@ -1,6 +1,7 @@
 import * as React from 'react';
 import JiraSwitcher from './jira-switcher';
 import ConfluenceSwitcher from './confluence-switcher';
+import GenericSwitcher from './generic-switcher';
 import ErrorBoundary from './error-boundary';
 
 interface AtlassianSwitcherProps {
@@ -22,6 +23,11 @@ const AtlassianSwitcher = ({
       break;
     case 'confluence':
       Switcher = ConfluenceSwitcher;
+      break;
+    case 'trusted-admin':
+    case 'people':
+    case 'site-admin':
+      Switcher = GenericSwitcher;
       break;
     default:
       if (process.env.NODE_ENV !== 'production') {

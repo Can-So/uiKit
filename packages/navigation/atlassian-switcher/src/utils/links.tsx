@@ -21,7 +21,7 @@ enum ProductActivationStatus {
   DEACTIVATED = 'DEACTIVATED',
 }
 
-enum ProductKey {
+export enum ProductKey {
   CONFLUENCE = 'confluence.ondemand',
   JIRA_CORE = 'jira-core.ondemand',
   JIRA_SOFTWARE = 'jira-software.ondemand',
