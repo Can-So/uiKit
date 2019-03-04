@@ -60,12 +60,7 @@ export default (
   program.getSourceFiles().forEach(walk);
 
   waitForTicks()
-    .then(() =>
-      mkdirp(
-        flags.outDir,
-        (err: NodeJS.ErrnoException, made: mkdirp.Made) => {},
-      ),
-    )
+    .then(() => mkdirp(flags.outDir, () => {}))
     .then(() => {
       const { outDir, stage } = flags;
       const resolvedOutDir = resolve(outDir);
