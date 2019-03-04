@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/quick-search", "type": "minor" },
+    { "name": "@atlaskit/global-search", "type": "minor" }
+  ],
+  "dependents": []
+}
