@@ -51,7 +51,7 @@ module.exports = {
   },
   'packages/media/media-ui/src': {
     statements: 87,
-    branches: 79,
+    branches: 76,
     functions: 80,
     lines: 86,
   },
