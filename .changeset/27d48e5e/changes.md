@@ -1,0 +1,1 @@
+- Support wiki to smart link

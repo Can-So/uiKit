@@ -9,7 +9,7 @@ describe('ADF => WikiMarkup - Inline Card', () => {
   test('should convert inline-card', () => {
     const node = doc(
       p(
-        'this is an inline-card',
+        'this is an inline-card ',
         inlineCard({
           url: 'https://product-fabric.atlassian.net/browse/EX-522#icft=EX-522',
         })(),
@@ -21,7 +21,7 @@ describe('ADF => WikiMarkup - Inline Card', () => {
   test('should convert inline-card that is not an issue link', () => {
     const node = doc(
       p(
-        'this is an dropbox inline card',
+        'this is an dropbox inline card ',
         inlineCard({
           url:
             'https://www.dropbox.com/s/2mh79iuglsnmbwf/Get%20Started%20with%20Dropbox.pdf?dl=0',
