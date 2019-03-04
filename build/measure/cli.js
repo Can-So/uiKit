@@ -69,7 +69,7 @@ async function resolvePaths(paths) {
 
 async function executeMeasure(paths, c, errors = [], results = []) {
   const path = paths.pop();
-
+  console.log(path);
   try {
     const result = await measure(
       path,

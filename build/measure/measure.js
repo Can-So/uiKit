@@ -157,7 +157,6 @@ module.exports = async function main(
    * – package groups bundles: e.g. core, media, editor, etc...
    */
   const mainConfig = await createWebpackConfig({
-    //TODO: Fixme Probably broken
     outputDir: measureCompiledOutputPath,
     entryPoint: { main: filePath },
     optimization: {
@@ -173,7 +172,6 @@ module.exports = async function main(
    * size since gzip size is highly affected by the size of the input.
    */
   const combinedConfig = await createWebpackConfig({
-    //TODO: Fixme Probably broken
     outputDir: measureCompiledOutputPath,
     entryPoint: { combined_sync: filePath },
     optimization: {

@@ -2,11 +2,16 @@ const glob = require('glob');
 const bolt = require('bolt');
 const path = require('path');
 
+// Object.fromEntries polyfill, remove when upgraded to node 10
 function fromEntries(iterable) {
   return [...iterable].reduce(
     (obj, { 0: key, 1: val }) => Object.assign(obj, { [key]: val }),
     {},
   );
+}
+// Array.prototype.flat polyfill, remove when upgraded to node 10
+function flatten(array) {
+  return array.reduce((acc, a) => [...acc, ...a], []);
 }
 
 function getAliasesForWorkspace({ name: packageName, dir }) {
@@ -36,9 +41,10 @@ module.exports = async function getAlternativeEntryPointAliasList() {
     getAliasesForWorkspace(workspace),
   );
   const aliases = fromEntries(
-    (await Promise.all(aliasPromises))
-      .filter(aliases => aliases.length > 0)
-      .reduce((acc, a) => [...acc, ...a], []),
+    flatten(
+      (await Promise.all(aliasPromises)).filter(aliases => aliases.length > 0),
+    ),
   );
+
   return aliases;
 };
