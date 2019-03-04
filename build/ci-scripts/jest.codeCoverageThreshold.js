@@ -23,7 +23,7 @@ module.exports = {
     statements: 96,
     branches: 92,
     functions: 91,
-    lines: 97,
+    lines: 95,
   },
   'packages/media/media-card/src': {
     statements: 92,
