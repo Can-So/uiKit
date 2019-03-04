@@ -1,19 +1,27 @@
 /**
  * @jest-environment node
  */
+
 import { SSRHelper } from '@atlaskit/elements-test-helpers';
+import { whiteList } from '../../_ssr-config';
 import 'whatwg-fetch';
-import { whiteList } from './hydrate';
 
 describe('server side rendering', () => {
   const ssrHelper = new SSRHelper(whiteList);
+  let _window: any;
 
   beforeAll(() => {
-    ssrHelper.beforeAll();
+    if (global) {
+      _window = (global as any).window;
+      // note: emoji resource uses localStorage if available so gotta mock window to avoid errors there
+      (global as any).window = {};
+    }
   });
 
   afterAll(() => {
-    ssrHelper.afterAll();
+    if (global) {
+      (global as any).window = _window;
+    }
   });
 
   test('emoji server side rendering', async () => {
