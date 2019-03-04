@@ -220,12 +220,12 @@ Object {
             Object {
               "attrs": Object {
                 "__confluenceMetadata": null,
-                "href": "https://extranet.atlassian.com/display/JPLAT/AtlasKit+components+needed+for+Bento",
+                "href": "https://extranet.atlassian.com/display/JPLAT/Atlaskit+components+needed+for+Bento",
               },
               "type": "link",
             },
           ],
-          "text": "https://extranet.atlassian.com/display/JPLAT/AtlasKit\\\\+components\\\\+needed\\\\+for\\\\+Bento",
+          "text": "https://extranet.atlassian.com/display/JPLAT/Atlaskit\\\\+components\\\\+needed\\\\+for\\\\+Bento",
           "type": "text",
         },
       ],

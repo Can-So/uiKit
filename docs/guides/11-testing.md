@@ -48,7 +48,7 @@ We encourage adding tests to all components on **Atlaskit**.
     - run all tests under certain directories `yarn test:webdriver:browserstack <path_to_to_directory>`.
     - run single test `yarn test:webdriver:browserstack <path_to_file>`.
 
-For further details or a test template, please consult this [link](https://hello.atlassian.net/wiki/spaces/AtlasKit/pages/136112313/How+to+add+webdriver+browser+tests+for+components+in+Atlaskit).
+For further details or a test template, please consult this [link](https://hello.atlassian.net/wiki/spaces/Atlaskit/pages/136112313/How+to+add+webdriver+browser+tests+for+components+in+Atlaskit).
 
 ### Visual regression tests
 #### Prerequisite for Visual regression tests
@@ -66,7 +66,7 @@ For further details or a test template, please consult this [link](https://hello
 - on CI to run all packages in pipeline as a custom build, go to any branch, run pipeline for a branch and select **custom build:visual-regression**.
 - on CI, after every chamge to master branch, it runs all the vr tests.
 
-For further details or a test template, please consult this [link](https://hello.atlassian.net/wiki/spaces/AtlasKit/pages/136113035/How+to+add+visual+regression+tests+in+Atlaskit).
+For further details or a test template, please consult this [link](https://hello.atlassian.net/wiki/spaces/Atlaskit/pages/136113035/How+to+add+visual+regression+tests+in+Atlaskit).
 
 ### Flow tests
 - flow tests can be used to explicitly verify that components are being typed correctly from the consumers perspective.
