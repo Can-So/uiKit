@@ -217,8 +217,7 @@ export class SmartMediaEditor extends React.Component<
             actions={actions}
             onClose={closeDialog}
           >
-            You've made some changed. If you close it now without saving first
-            you will lose it.
+            You have some unsaved changes. Are you sure you want to leave?
           </ModalDialog>
         </ModalTransition>
       );
