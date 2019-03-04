@@ -17,7 +17,13 @@ import {
 import { Context } from '@atlaskit/media-core';
 
 import { ErrorReportingHandler } from '@atlaskit/editor-common';
-import { MediaStateManager, MediaState, CustomMediaPicker } from './types';
+
+import {
+  MediaStateManager,
+  MediaState,
+  CustomMediaPicker,
+  MobileUploadEndEventPayload,
+} from './types';
 
 export type PickerType = keyof MediaPickerComponents | 'customMediaPicker';
 export type ExtendedComponentConfigs = ComponentConfigs & {
@@ -245,23 +251,18 @@ export default class PickerFacade {
     }
 
     this.stateManager.updateState(error.fileId, {
-      id: error.fileId,
       status: 'error',
       error: error && { description: error.description, name: error.name },
     });
   };
 
-  private handleMobileUploadEnd = (
-    event: UploadEndEventPayload & {
-      file: { readonly collectionName?: string; publicId?: string };
-    },
-  ) => {
+  private handleMobileUploadEnd = (event: MobileUploadEndEventPayload) => {
     const { file } = event;
 
     this.stateManager.updateState(file.id, {
-      status: 'preview',
+      status: 'mobile-upload-end',
       collection: file.collectionName,
-      id: file.publicId,
+      publicId: file.publicId,
     });
   };
 
