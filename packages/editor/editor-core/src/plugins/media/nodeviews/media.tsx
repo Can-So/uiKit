@@ -124,7 +124,7 @@ class MediaNode extends Component<
     const isMobile = editorAppearance === 'mobile';
     let isMobileReady = isMobile ? typeof collection === 'string' : true;
 
-    if (!viewContext || !isMobileReady) {
+    if (type !== 'external' && (!viewContext || !isMobileReady)) {
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
 
@@ -136,7 +136,7 @@ class MediaNode extends Component<
             mediaItemType: 'external-image',
           }
         : {
-            id: id,
+            id,
             mediaItemType: 'file',
             collectionName: collection!,
           };
