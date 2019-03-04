@@ -1,0 +1,1 @@
+- ED-6232 Fix copy-pasting a table with numbered column drops one column
