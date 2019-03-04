@@ -58,7 +58,7 @@ export const renderSmartMediaEditor = (mediaState: MediaPluginState) => {
   if (!node) {
     return null;
   }
-  const { id } = node.firstChild!.attrs.id;
+  const { id } = node.firstChild!.attrs;
 
   if (mediaState.uploadContext && mediaState.showEditingDialog) {
     const identifier: FileIdentifier = {
