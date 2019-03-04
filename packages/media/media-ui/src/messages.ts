@@ -383,12 +383,14 @@ export const messages = defineMessages<Messages>({
   disable_fullscreen: {
     id: 'fabric.media.disable_fullscreen',
     defaultMessage: 'disable fullscreen',
-    description: 'Hint to let the user know they can disable the fullscreen mode',
+    description:
+      'Hint to let the user know they can disable the fullscreen mode',
   },
   enable_fullscreen: {
     id: 'fabric.media.enable_fullscreen',
     defaultMessage: 'enable fullscreen',
-    description: 'Hint to let the user know they can enable the fullscreen mode',
+    description:
+      'Hint to let the user know they can enable the fullscreen mode',
   },
   error_loading_file: {
     id: 'fabric.media.error_loading_file',
