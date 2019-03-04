@@ -188,7 +188,10 @@ export class SmartMediaEditor extends React.Component<
   };
 
   private renderDeleteConfirmation = () => {
-    const { onFinish } = this.props;
+    const {
+      onFinish,
+      intl: { formatMessage },
+    } = this.props;
     const { closeIntent } = this.state;
     const closeDialog = () => {
       this.setState({ closeIntent: false });
@@ -196,14 +199,14 @@ export class SmartMediaEditor extends React.Component<
     if (closeIntent) {
       const actions = [
         {
-          text: 'Close anyway',
+          text: formatMessage(messages.annotate_confirmation_close_anyway),
           onClick: () => {
             onFinish();
             closeDialog();
           },
         },
         {
-          text: 'Cancel',
+          text: formatMessage(messages.cancel),
           onClick: () => {
             closeDialog();
           },
@@ -214,11 +217,11 @@ export class SmartMediaEditor extends React.Component<
           <ModalDialog
             width="small"
             appearance="danger"
-            heading="Unsaved changes"
+            heading={formatMessage(messages.annotate_confirmation_heading)}
             actions={actions}
             onClose={closeDialog}
           >
-            You have some unsaved changes. Are you sure you want to leave?
+            {formatMessage(messages.annotate_confirmation_content)}
           </ModalDialog>
         </ModalTransition>
       );

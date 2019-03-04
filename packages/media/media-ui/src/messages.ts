@@ -57,6 +57,9 @@ export type MessageKey =
   | 'annotate_tool_blur'
   | 'annotate_tool_line_thickness'
   | 'annotate_tool_color'
+  | 'annotate_confirmation_close_anyway'
+  | 'annotate_confirmation_heading'
+  | 'annotate_confirmation_content'
   | 'drop_your_files_here'
   | 'share_files_instantly'
   | 'insert_files'
@@ -378,6 +381,22 @@ export const messages = defineMessages<Messages>({
   annotate_tool_color: {
     id: 'fabric.media.annotate.tool.color',
     defaultMessage: 'Color',
+    description: '',
+  },
+  annotate_confirmation_close_anyway: {
+    id: 'fabric.media.annotate.confirmation.close.anyway',
+    defaultMessage: 'Close anyway',
+    description: '',
+  },
+  annotate_confirmation_heading: {
+    id: 'fabric.media.annotate.confirmation.heading',
+    defaultMessage: 'Unsaved changes',
+    description: '',
+  },
+  annotate_confirmation_content: {
+    id: 'fabric.media.annotate.confirmation.content',
+    defaultMessage:
+      'You have some unsaved changes. Are you sure you want to leave?',
     description: '',
   },
   drop_your_files_here: {

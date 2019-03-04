@@ -39,7 +39,9 @@ describe('Smart Media Editor', () => {
   let formatMessage: jest.Mock<any>;
 
   beforeEach(() => {
-    formatMessage = jest.fn();
+    formatMessage = jest
+      .fn()
+      .mockImplementation((message: any) => message.defaultMessage);
     const fakeIntl: any = { formatMessage };
     fileId = 'some-file-id';
     fileIdPromise = Promise.resolve(fileId);
