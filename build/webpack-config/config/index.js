@@ -38,8 +38,7 @@ module.exports = async function createWebpackConfig(
   }*/,
 ) {
   const isProduction = mode === 'production';
-  const aliasList = await getAlternativeEntryPointAliasList();
-  console.log(aliasList);
+
   return {
     stats: statsOptions,
     mode,
@@ -195,7 +194,7 @@ module.exports = async function createWebpackConfig(
       mainFields: ['atlaskit:src', 'module', 'browser', 'main'],
       extensions: ['.js', '.ts', '.tsx'],
       alias: {
-        ...aliasList,
+        ...(await getAlternativeEntryPointAliasList()),
       },
     },
     resolveLoader: {
