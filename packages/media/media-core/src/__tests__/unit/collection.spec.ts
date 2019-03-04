@@ -151,7 +151,7 @@ describe('CollectionFetcher', () => {
         });
     });
 
-    it('should update nextInclusiveStartKey every', async done => {
+    it('should update nextInclusiveStartKey every time', async done => {
       const { collectionFetcher, getCollectionItems, contents } = setup();
 
       expect(collectionCache.recents).toBeUndefined();
