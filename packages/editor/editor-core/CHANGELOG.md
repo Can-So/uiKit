@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.7.0
+- [minor] [d4afa2713d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d4afa2713d):
+
+  - ED-6212 Fire v3 analytics events when insert table or emojis
+
 ## 101.6.3
 - Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
   - @atlaskit/editor-common@32.4.3
