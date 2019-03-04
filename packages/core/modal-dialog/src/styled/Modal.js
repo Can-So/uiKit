@@ -129,8 +129,8 @@ export const Dialog = styled.div`
 
   @media (min-width: 320px) and (max-width: 480px) {
     height: 100%;
-    border-radius: 0px;
- }
+    border-radius: 0;
+  }
 `;
 
 PositionerAbsolute.displayName = 'PositionerAbsolute';
