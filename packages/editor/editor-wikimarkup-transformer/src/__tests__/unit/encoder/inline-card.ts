@@ -17,4 +17,17 @@ describe('ADF => WikiMarkup - Inline Card', () => {
     )(defaultSchema);
     expect(transformer.encode(node)).toMatchSnapshot();
   });
+
+  test('should convert inline-card that is not an issue link', () => {
+    const node = doc(
+      p(
+        'this is an dropbox inline card',
+        inlineCard({
+          url:
+            'https://www.dropbox.com/s/2mh79iuglsnmbwf/Get%20Started%20with%20Dropbox.pdf?dl=0',
+        })(),
+      ),
+    )(defaultSchema);
+    expect(transformer.encode(node)).toMatchSnapshot();
+  });
 });
