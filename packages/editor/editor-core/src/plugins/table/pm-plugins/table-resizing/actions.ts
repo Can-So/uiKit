@@ -79,13 +79,14 @@ export function applyColumnWidths(view, state, table, start) {
 export function handleBreakoutContent(
   view: EditorView,
   elem: HTMLElement,
+  cellPos: number,
   start: number,
   minWidth: number,
   node: PMNode,
 ) {
-  const colIdx = Array.from((elem.parentNode as HTMLElement).children).indexOf(
-    elem,
-  );
+  const map = TableMap.get(node);
+  const rect = map.findCell(cellPos - start);
+  const colIdx = rect.left;
 
   const cellStyle = getComputedStyle(elem);
   const amount = addContainerLeftRightPadding(
