@@ -1,0 +1,1 @@
+- Bump version of typestyle for ssr compatibility
