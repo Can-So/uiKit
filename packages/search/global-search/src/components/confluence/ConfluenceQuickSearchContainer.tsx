@@ -78,11 +78,11 @@ export class ConfluenceQuickSearchContainer extends React.Component<
     let defaultPrevented = false;
 
     onAdvancedSearch(
-      Object.assign(event, {
+      Object.assign({}, event, {
         preventDefault() {
           defaultPrevented = true;
           event.preventDefault();
-          event.stopPropogation();
+          event.stopPropagation();
         },
         stopPropagation() {},
       }),

@@ -117,7 +117,7 @@ export class JiraQuickSearchContainer extends React.Component<
     let defaultPrevented = false;
 
     onAdvancedSearch(
-      Object.assign(event, {
+      Object.assign({}, event, {
         preventDefault() {
           defaultPrevented = true;
           event.preventDefault();
