@@ -121,7 +121,7 @@ export class JiraQuickSearchContainer extends React.Component<
         preventDefault() {
           defaultPrevented = true;
           event.preventDefault();
-          event.stopPropogation();
+          event.stopPropagation();
         },
         stopPropagation() {},
       }),
