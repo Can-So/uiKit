@@ -12,9 +12,6 @@
   "maintainers": [
     "Ben G"
   ],
-  "files": [
-    "dist"
-  ],
   "atlaskit": {
     "internal": true
   },
