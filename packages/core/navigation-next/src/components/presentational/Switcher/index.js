@@ -131,6 +131,7 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
     closeMenuOnCreate: true,
     components: {},
     navWidth: CONTENT_NAV_WIDTH,
+    isNavResizing: false,
   };
   static getDerivedStateFromProps(props: SwitcherProps, state: SwitcherState) {
     const newState = {};
