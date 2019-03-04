@@ -1,6 +1,6 @@
 import {
   fireAnalyticsEvent,
-  analyticsChannel,
+  editorAnalyticsChannel,
   AnalyticsEventPayload,
   ACTION,
   ACTION_SUBJECT,
@@ -38,7 +38,7 @@ describe('analytics', () => {
 
     it('fires analytics event to default channel if none specified', () => {
       triggerAnalyticsEvent({ payload });
-      expect(mockFire).toHaveBeenCalledWith(analyticsChannel);
+      expect(mockFire).toHaveBeenCalledWith(editorAnalyticsChannel);
     });
 
     it('fires analytics event payload to specific channel', () => {

@@ -54,6 +54,7 @@ const emojiPlugin: EditorPlugin = {
     providerFactory,
     popupsMountPoint,
     popupsBoundariesElement,
+    dispatchAnalyticsEvent,
   }) {
     const renderNode = (providers: Providers) => {
       return (
@@ -63,6 +64,7 @@ const emojiPlugin: EditorPlugin = {
           emojiProvider={providers.emojiProvider}
           popupsMountPoint={popupsMountPoint}
           popupsBoundariesElement={popupsBoundariesElement}
+          dispatchAnalyticsEvent={dispatchAnalyticsEvent}
         />
       );
     };
