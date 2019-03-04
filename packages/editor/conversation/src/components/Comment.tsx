@@ -76,12 +76,13 @@ export default class Comment extends React.Component<Props, State> {
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     const { isEditing, isReplying } = this.state;
-    const { isHighlighted } = this.props;
+    const { isHighlighted, portal } = this.props;
 
     if (
       nextState.isEditing !== isEditing ||
       nextState.isReplying !== isReplying ||
-      nextProps.isHighlighted !== isHighlighted
+      nextProps.isHighlighted !== isHighlighted ||
+      nextProps.portal !== portal
     ) {
       return true;
     }
