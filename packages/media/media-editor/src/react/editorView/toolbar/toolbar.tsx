@@ -136,7 +136,12 @@ export class Toolbar extends Component<
 
             <VerticalLine />
 
-            <Button appearance="primary" theme="dark" onClick={onSave}>
+            <Button
+              appearance="primary"
+              theme="dark"
+              onClick={onSave}
+              autoFocus={true}
+            >
               {formatMessage(messages.save)}
             </Button>
             <Button appearance="subtle" onClick={onCancel} theme="dark">
