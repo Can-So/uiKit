@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/share",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "config": {
     "access": "private"
   },
@@ -50,7 +50,6 @@
     "@atlaskit/util-data-test": "^10.0.29",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "enzyme-react-intl": "^2.0.3",
     "react": "^16.4.0",
     "react-intl": "^2.6.0"
   },

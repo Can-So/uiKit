@@ -15,7 +15,7 @@ let c = meow(
         --analyze               Opens bundle analyzer report
         --json                  Outputs measure stats as json
         --lint                  Lint mode fails build if size has been increased beyond threshold
-        --updateSnapshot       Update measure snapshots
+        --updateSnapshot        Update measure snapshots
 
       Examples
         $ measure editor-core editor-common

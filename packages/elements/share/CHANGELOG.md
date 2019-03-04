@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.13
+- [patch] [3f5be35333](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5be35333):
+
+  - Fixed errors and warnings in elements/share unit tests
+
 ## 0.1.12
 - [patch] [376926523b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/376926523b):
 
