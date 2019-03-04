@@ -11,5 +11,4 @@ export const whiteList = [
   '16-tone-selector.tsx',
   '17-emoji-upload-preview.tsx',
   '18-emoji-upload-preview-error.tsx',
-  '07-resourced-emoji-real-emoji-resource.tsx',
 ];

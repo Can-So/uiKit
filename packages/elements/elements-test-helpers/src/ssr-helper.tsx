@@ -19,12 +19,12 @@ export class SSRHelper {
     this.whiteList = whiteList;
   }
 
-  beforeAll() {
+  beforeHydration() {
     this.oldCanUseDOM = exenv.canUseDOM;
     this.consoleErrorSpy = jest.spyOn(global.console, 'error');
   }
 
-  afterAll() {
+  afterHydration() {
     jest.resetAllMocks();
     (exenv as any).canUseDOM = this.oldCanUseDOM;
   }
@@ -62,7 +62,7 @@ export class SSRHelper {
     });
   }
 
-  async hidrateSSRAndAssert(componentName: string) {
+  async hydrateSSRAndAssert(componentName: string) {
     (await getExamplesFor(componentName)).forEach((example: any) => {
       if (this.allowExample(example)) {
         const Example = require(example.filePath).default; // eslint-disable-line import/no-dynamic-require

@@ -6,14 +6,14 @@ describe('server side rendering - hydrate', () => {
   const ssrHelper = new SSRHelper(whiteList);
 
   beforeAll(() => {
-    ssrHelper.beforeAll();
+    ssrHelper.beforeHydration();
   });
 
   afterAll(() => {
-    ssrHelper.afterAll();
+    ssrHelper.afterHydration();
   });
 
   test('should ssr then hydrate tag correctly', async () => {
-    await ssrHelper.hidrateSSRAndAssert('emoji');
+    await ssrHelper.hydrateSSRAndAssert('emoji');
   });
 });

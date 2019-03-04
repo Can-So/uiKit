@@ -1,0 +1,35 @@
+{
+  "releases": [
+    { "name": "@atlaskit/date", "type": "minor" },
+    { "name": "@atlaskit/elements-test-helpers", "type": "minor" },
+    { "name": "@atlaskit/emoji", "type": "minor" },
+    { "name": "@atlaskit/status", "type": "minor" }
+  ],
+  "dependents": [
+    {
+      "name": "@atlaskit/editor-core",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/renderer",
+        "@atlaskit/date",
+        "@atlaskit/emoji",
+        "@atlaskit/status"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-mobile-bridge",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-core",
+        "@atlaskit/renderer",
+        "@atlaskit/emoji",
+        "@atlaskit/status"
+      ]
+    },
+    {
+      "name": "@atlaskit/renderer",
+      "type": "patch",
+      "dependencies": ["@atlaskit/status"]
+    }
+  ]
+}
