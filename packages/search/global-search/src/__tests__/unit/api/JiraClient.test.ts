@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import { utils } from '@atlaskit/util-service-support';
 
 import JiraClientImpl, { JiraClient } from '../../../api/JiraClient';
