@@ -400,6 +400,7 @@ export default class Comment extends React.Component<Props, State> {
       onEditorOpen,
       onEditorChange,
       sendAnalyticsEvent,
+      portal,
     } = this.props;
 
     if (!comments || comments.length === 0) {
@@ -430,6 +431,7 @@ export default class Comment extends React.Component<Props, State> {
         containerId={containerId}
         disableScrollTo={disableScrollTo}
         sendAnalyticsEvent={sendAnalyticsEvent}
+        portal={portal}
       />
     ));
   }
