@@ -10,9 +10,14 @@ import * as ReactDOM from 'react-dom';
  */
 export class SSRHelper {
   private oldCanUseDOM: any;
+  private whiteList?: string[];
 
   // @ts-ignore this variable is initialized in beforeAll()
   private consoleErrorSpy: jest.SpyInstance;
+
+  constructor(whiteList?: string[]) {
+    this.whiteList = whiteList;
+  }
 
   beforeAll() {
     this.oldCanUseDOM = exenv.canUseDOM;
@@ -40,34 +45,46 @@ export class SSRHelper {
     ReactDOM.hydrate(this.renderComponent(TheComponent), elem);
   }
 
+  private allowExample(example: any) {
+    if (this.whiteList) {
+      const res = this.whiteList.filter(f => example.filePath.includes(f));
+      return res && res.length > 0;
+    }
+    return true;
+  }
+
   async renderSSRAndAssert(componentName: string) {
-    (await getExamplesFor(componentName)).forEach((examples: any) => {
-      const Example = require(examples.filePath).default; // eslint-disable-line import/no-dynamic-require
-      expect(() => this.renderToString(Example)).not.toThrowError();
+    (await getExamplesFor(componentName)).forEach((example: any) => {
+      if (this.allowExample(example)) {
+        const Example = require(example.filePath).default; // eslint-disable-line import/no-dynamic-require
+        expect(() => this.renderToString(Example)).not.toThrowError();
+      }
     });
   }
 
   async hidrateSSRAndAssert(componentName: string) {
-    (await getExamplesFor(componentName)).forEach((examples: any) => {
-      const Example = require(examples.filePath).default; // eslint-disable-line import/no-dynamic-require
+    (await getExamplesFor(componentName)).forEach((example: any) => {
+      if (this.allowExample(example)) {
+        const Example = require(example.filePath).default; // eslint-disable-line import/no-dynamic-require
 
-      // server-side
-      (exenv as any).canUseDOM = false;
-      const serverHTML = this.renderToString(Example);
+        // server-side
+        (exenv as any).canUseDOM = false;
+        const serverHTML = this.renderToString(Example);
 
-      // client-side
-      (exenv as any).canUseDOM = true;
-      const elem = document.createElement('div');
-      elem.innerHTML = serverHTML;
+        // client-side
+        (exenv as any).canUseDOM = true;
+        const elem = document.createElement('div');
+        elem.innerHTML = serverHTML;
 
-      this.hydrate(Example, elem);
+        this.hydrate(Example, elem);
 
-      this.consoleErrorSpy.mock.calls.forEach(params => {
-        if (params.length) {
-          // HTML related warnings (can ignore)
-          expect(params[0].indexOf('Warning') === -1);
-        }
-      });
+        this.consoleErrorSpy.mock.calls.forEach(params => {
+          if (params.length) {
+            // HTML related warnings (can ignore)
+            expect(params[0].indexOf('Warning') === -1);
+          }
+        });
+      }
     });
   }
 }

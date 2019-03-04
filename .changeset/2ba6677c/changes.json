@@ -1,0 +1,13 @@
+{
+  "releases": [
+    { "name": "@atlaskit/elements-test-helpers", "type": "patch" },
+    { "name": "@atlaskit/emoji", "type": "patch" }
+  ],
+  "dependents": [
+    {
+      "name": "@atlaskit/date",
+      "type": "patch",
+      "dependencies": ["@atlaskit/elements-test-helpers"]
+    }
+  ]
+}
