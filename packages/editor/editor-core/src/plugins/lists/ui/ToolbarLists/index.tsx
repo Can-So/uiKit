@@ -22,9 +22,18 @@ import {
 } from '../../../../ui/styles';
 import { toggleBulletList, toggleOrderedList } from '../../commands';
 import { messages } from '../../messages';
+import {
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+  AnalyticsEventPayload,
+} from '../../../analytics';
 
 export interface Props {
   editorView: EditorView;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
   bulletListActive?: boolean;
   bulletListDisabled?: boolean;
   orderedListActive?: boolean;
@@ -174,7 +183,20 @@ class ToolbarLists extends PureComponent<Props & InjectedIntlProps, State> {
     'atlassian.editor.format.list.bullet.button',
     () => {
       if (!this.props.bulletListDisabled) {
-        return toggleBulletList(this.props.editorView);
+        if (toggleBulletList(this.props.editorView)) {
+          if (this.props.dispatchAnalyticsEvent) {
+            this.props.dispatchAnalyticsEvent({
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_LIST_BULLET,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.TOOLBAR,
+              },
+            });
+          }
+          return true;
+        }
       }
       return false;
     },
@@ -184,7 +206,20 @@ class ToolbarLists extends PureComponent<Props & InjectedIntlProps, State> {
     'atlassian.editor.format.list.numbered.button',
     () => {
       if (!this.props.orderedListDisabled) {
-        return toggleOrderedList(this.props.editorView);
+        if (toggleOrderedList(this.props.editorView)) {
+          if (this.props.dispatchAnalyticsEvent) {
+            this.props.dispatchAnalyticsEvent({
+              action: ACTION.FORMATTED,
+              actionSubject: ACTION_SUBJECT.TEXT,
+              actionSubjectId: ACTION_SUBJECT_ID.FORMAT_LIST_NUMBER,
+              eventType: EVENT_TYPE.TRACK,
+              attributes: {
+                inputMethod: INPUT_METHOD.TOOLBAR,
+              },
+            });
+          }
+          return true;
+        }
       }
       return false;
     },
