@@ -13,6 +13,7 @@ import {
   getOptionValue,
 } from '../../index';
 import Option from '../../Option';
+import { gridSize } from '@atlaskit/theme';
 
 const Target = () => <div>A target</div>;
 
@@ -175,13 +176,14 @@ describe('Switcher', () => {
   });
 
   it('should set correct width to <PopupSelect /> when collapse/expanding the nav', () => {
-    const wrapper = shallow(<BaseSwitcher {...baseProps} />);
-    expect(wrapper.props().navWidth).toBe(240);
+    const wrapper = mount(<BaseSwitcher {...baseProps} />);
     wrapper.setProps({
       navWidth: 300,
     });
-    wrapper.update();
-    expect(wrapper.props().navWidth).toBe(300);
+    wrapper.instance().forceUpdate();
+    expect(wrapper.find(PopupSelect).props().minMenuWidth).toBe(
+      300 - gridSize() * 2 - 60, // ¯\_(ツ)_/¯
+    );
   });
 });
 
