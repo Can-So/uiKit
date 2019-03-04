@@ -18,6 +18,7 @@ import {
   MediaBaseAttributes,
 } from '@atlaskit/adf-schema';
 import { ErrorReporter } from '@atlaskit/editor-common';
+import { Dimensions } from '@atlaskit/media-editor';
 
 import analyticsService from '../../../analytics/service';
 import { isImage, SetAttrsStep } from '../../../utils';
@@ -425,7 +426,10 @@ export class MediaPluginState {
     this.view.dispatch(this.view.state.tr.setMeta(stateKey, 'close-edit'));
   };
 
-  replaceEditingMedia = (fileIdentifier: FileIdentifier) => {
+  replaceEditingMedia = (
+    fileIdentifier: FileIdentifier,
+    dimensions: Dimensions,
+  ) => {
     if (typeof this.editingMediaSinglePos !== 'number') {
       return;
     }
@@ -446,6 +450,9 @@ export class MediaPluginState {
       collection:
         fileIdentifier.collectionName || oldMediaNode.attrs.collection,
       occurrenceKey: fileIdentifier.occurrenceKey,
+
+      width: dimensions.width,
+      height: dimensions.height,
     };
 
     const tr = state.tr.replaceWith(
