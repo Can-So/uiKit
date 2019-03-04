@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import cheerio from 'cheerio'; // eslint-disable-line import/no-extraneous-dependencies
-import { name } from '../../../version.json';
+import { name } from '../../../../package.json';
 import expectedSvgIds from '../../../internal/iconIds';
 
 const icons = fs.readFileSync(
