@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { Subscription } from 'rxjs/Subscription';
 import { Context, UploadableFile, FileIdentifier } from '@atlaskit/media-core';
 import { messages, Shortcut } from '@atlaskit/media-ui';
+import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
 import Spinner from '@atlaskit/spinner';
 import { intlShape, IntlProvider } from 'react-intl';
 import EditorView from './editorView/editorView';
@@ -22,6 +23,8 @@ export interface SmartMediaEditorState {
   hasError: boolean;
   errorMessage?: any;
   imageUrl?: string;
+  hasBeenModified: boolean;
+  closeIntent: boolean;
 }
 
 export class SmartMediaEditor extends React.Component<
@@ -31,6 +34,8 @@ export class SmartMediaEditor extends React.Component<
   fileName?: string;
   state: SmartMediaEditorState = {
     hasError: false,
+    hasBeenModified: false,
+    closeIntent: false,
   };
   getFileSubscription?: Subscription;
   uploadFileSubscription?: Subscription;
@@ -177,9 +182,58 @@ export class SmartMediaEditor extends React.Component<
     onUploadStart(newFileIdentifier);
   };
 
-  onCancel = () => {
+  private hasBeenModified = () => {
+    this.setState({ hasBeenModified: true });
+  };
+
+  private renderDeleteConfirmation = () => {
     const { onFinish } = this.props;
-    onFinish();
+    const { closeIntent } = this.state;
+    const closeDialog = () => {
+      this.setState({ closeIntent: false });
+    };
+    if (closeIntent) {
+      const actions = [
+        {
+          text: 'Close anyway',
+          onClick: () => {
+            onFinish();
+            closeDialog();
+          },
+        },
+        {
+          text: 'Cancel',
+          onClick: () => {
+            closeDialog();
+          },
+        },
+      ];
+      return (
+        <ModalTransition>
+          <ModalDialog
+            width="small"
+            appearance="danger"
+            heading="Unsaved changes"
+            actions={actions}
+            onClose={closeDialog}
+          >
+            You've made some changed. If you close it now without saving first
+            you will lose it.
+          </ModalDialog>
+        </ModalTransition>
+      );
+    }
+    return null;
+  };
+
+  onCancel = () => {
+    const { hasBeenModified } = this.state;
+    if (hasBeenModified) {
+      this.setState({ closeIntent: true });
+    } else {
+      const { onFinish } = this.props;
+      onFinish();
+    }
   };
 
   onError = (error: any) => {
@@ -204,6 +258,7 @@ export class SmartMediaEditor extends React.Component<
         onSave={this.onSave}
         onCancel={this.onCancel}
         onError={this.onError}
+        onAnyChange={this.hasBeenModified}
       />
     );
   };
@@ -227,6 +282,7 @@ export class SmartMediaEditor extends React.Component<
 
     return (
       <Blanket>
+        {this.renderDeleteConfirmation()}
         <Shortcut keyCode={27} handler={this.onCancel} />
         {content}
       </Blanket>

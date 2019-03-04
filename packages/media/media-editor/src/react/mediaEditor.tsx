@@ -60,6 +60,7 @@ export interface MediaEditorProps {
   onLoad: LoadHandler;
   onError: ErrorHandler;
   onShapeParametersChanged: ShapeParametersChangedHandler;
+  onCanvasClick?: () => void;
 }
 
 export interface MediaEditorState {
@@ -96,6 +97,9 @@ export class MediaEditor extends React.Component<
 
   componentDidMount() {
     this.loadEngine();
+    if (this.canvas) {
+      this.canvas.addEventListener('click', this.onCanvasClick, { once: true });
+    }
   }
 
   componentDidUpdate(prevProps: MediaEditorProps) {
@@ -154,6 +158,7 @@ export class MediaEditor extends React.Component<
   componentWillUnmount() {
     this.isUnmounted = true;
     this.unloadEngine();
+    this.canvas.removeEventListener('click', this.onCanvasClick);
   }
 
   private handleOutputAreaInnerRef = (outputArea: HTMLDivElement) => {
@@ -212,6 +217,13 @@ export class MediaEditor extends React.Component<
       </MediaEditorContainer>
     );
   }
+
+  private onCanvasClick = () => {
+    const { onCanvasClick } = this.props;
+    if (onCanvasClick) {
+      onCanvasClick();
+    }
+  };
 
   private loadEngine(): void {
     const { imageUrl } = this.props;
