@@ -82,7 +82,7 @@ describe('JIRA wiki markup - Links', () => {
     ],
     [
       '[CS-676] should trim escape in href',
-      'This is a link https://extranet.atlassian.com/display/JPLAT/AtlasKit\\+components\\+needed\\+for\\+Bento',
+      'This is a link https://extranet.atlassian.com/display/JPLAT/Atlaskit\\+components\\+needed\\+for\\+Bento',
     ],
     [
       '[CS-787] should convert back to inline card',
