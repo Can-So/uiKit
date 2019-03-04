@@ -1,0 +1,1 @@
+- Fixes minor bugs related to Switcher component and naviagtion-next resize
