@@ -1,0 +1,1 @@
+- Fixed errors and warnings in elements/share unit tests
