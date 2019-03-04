@@ -42,8 +42,8 @@ export interface State {
 class Example extends React.PureComponent<{}, State> {
   state: State = { source: '' };
 
-  handleChange = evt => {
-    this.setState({ source: evt.target.value });
+  handleChange = (evt: React.FormEvent<HTMLTextAreaElement>) => {
+    this.setState({ source: evt.currentTarget.value });
   };
 
   render() {

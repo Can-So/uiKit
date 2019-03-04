@@ -6,7 +6,6 @@ import {
   tr,
   td,
   th,
-  tdEmpty,
 } from '@atlaskit/editor-test-helpers';
 import {
   TablePluginState,
@@ -18,6 +17,7 @@ import tablesPlugin from '../../../../plugins/table';
 
 describe('fix tables', () => {
   const createEditor = createEditorFactory<TablePluginState>();
+  global['fetch'] = jest.fn();
 
   const editor = (doc: any) => {
     const tableOptions = {
@@ -36,17 +36,6 @@ describe('fix tables', () => {
       pluginKey: tablePluginKey,
     });
   };
-
-  describe('when document contains a table with empty rows', () => {
-    it('should remove the table node', () => {
-      global['fetch'] = jest.fn();
-
-      const { editorView } = editor(doc(p('one'), table()(tr()), p('two')));
-
-      expect(editorView.state.doc).toEqualDocument(doc(p('one'), p('two')));
-      expect(global['fetch']).toHaveBeenCalled();
-    });
-  });
 
   describe('removeExtraneousColumnWidths', () => {
     it('removes unneccesary column widths', () => {
@@ -80,30 +69,6 @@ describe('fix tables', () => {
               td({ colwidth: [100] })(p('5')),
               td({ colwidth: [480] })(p('6')),
             ),
-          ),
-        ),
-      );
-    });
-  });
-
-  describe('when minimum colspan of a column is > 1', () => {
-    it('should decrement colspans', () => {
-      const { editorView } = editor(
-        doc(
-          table({})(tr(td({})(p('{<>}')), tdEmpty)),
-          table({})(
-            tr(td({ colspan: 3 })(p('')), tdEmpty, tdEmpty),
-            tr(td({ colspan: 4 })(p('')), tdEmpty),
-          ),
-        ),
-      );
-
-      expect(editorView.state.doc).toEqualDocument(
-        doc(
-          table({})(tr(tdEmpty, tdEmpty)),
-          table({})(
-            tr(td({})(p('')), tdEmpty, tdEmpty),
-            tr(td({ colspan: 2 })(p('')), tdEmpty),
           ),
         ),
       );

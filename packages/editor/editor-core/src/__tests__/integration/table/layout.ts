@@ -97,6 +97,32 @@ BrowserTestCase(
 );
 
 BrowserTestCase(
+  'Maintains the wide layout size without overflow with dynamic text sizing',
+  { skip: ['ie', 'edge', 'safari', 'firefox'] },
+  async (client: any) => {
+    const page = await goToEditorTestingExample(client);
+
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      defaultValue: JSON.stringify(defaultTableResizedTable),
+      allowTables: {
+        advanced: true,
+      },
+      allowDynamicTextSizing: true,
+    });
+
+    await page.waitForSelector(TableCssClassName.TOP_LEFT_CELL);
+    await page.click(TableCssClassName.TOP_LEFT_CELL);
+
+    await page.waitForSelector(`.${TableCssClassName.LAYOUT_BUTTON}`);
+    await page.click(`.${TableCssClassName.LAYOUT_BUTTON}`);
+
+    const doc = await page.$eval(editable, getDocFromElement);
+    expect(doc).toMatchDocSnapshot();
+  },
+);
+
+BrowserTestCase(
   'Maintains the full-width layout size without overflow',
   { skip: ['ie', 'edge', 'safari', 'firefox'] },
   async (client: any) => {

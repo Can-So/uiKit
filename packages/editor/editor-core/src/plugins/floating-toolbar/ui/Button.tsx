@@ -11,20 +11,16 @@ import { hexToRgba } from '@atlaskit/editor-common';
 const editorButtonTheme = {
   danger: {
     background: {
-      default: themed({ light: 'none' }),
-      hover: themed({ light: colors.N30A }),
-      active: themed({ light: hexToRgba(colors.B75, 0.6) }),
-      disabled: themed({ light: 'none' }),
-      selected: themed({ light: colors.N700 }),
-      focusSelected: themed({ light: colors.N700 }),
+      default: themed({ light: 'inherit', dark: 'inherit' }),
+      hover: themed({ light: colors.N30A, dark: colors.N30A }),
+      active: themed({
+        light: hexToRgba(colors.B75, 0.6),
+        dark: hexToRgba(colors.B75, 0.6),
+      }),
     },
     color: {
-      default: themed({ light: colors.N400 }),
-      hover: themed({ light: colors.R300 }),
-      active: themed({ light: colors.R300 }),
-      disabled: themed({ light: colors.N70 }),
-      selected: themed({ light: colors.N20 }),
-      focusSelected: themed({ light: colors.N20 }),
+      hover: themed({ light: colors.R300, dark: colors.R300 }),
+      active: themed({ light: colors.R300, dark: colors.R300 }),
     },
   },
 };

@@ -29,8 +29,9 @@ export const getColumnsWidths = (view: EditorView): number[] => {
       const cells = getCellsInColumn(i)(selection)!;
       const cell = cells[0];
       if (cell) {
-        const cellRef = findDomRefAtPos(cell.pos, domAtPos);
-        widths[i] = (cellRef as HTMLElement).offsetWidth + 1;
+        const cellRef = findDomRefAtPos(cell.pos, domAtPos) as HTMLElement;
+        const rect = cellRef.getBoundingClientRect();
+        widths[i] = (rect ? rect.width : cellRef.offsetWidth) + 1;
         i += cell.node.attrs.colspan - 1;
       }
     }

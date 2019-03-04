@@ -12,7 +12,12 @@ const rejectedPromise = Promise.reject(
 );
 const pendingPromise = new Promise<any>(() => {});
 
-const providers = {
+interface Providers {
+  mentionProvider: any;
+  activityProvider: any;
+}
+
+const providers: Providers = {
   mentionProvider: {
     resolved: Promise.resolve(mention.storyData.resourceProvider),
     'resolved 2': Promise.resolve(
@@ -44,8 +49,15 @@ export interface State {
   document?: string;
 }
 
+export interface RenderEditorProps {
+  disabled: boolean;
+  onChange: (editorView: any) => void;
+  mentionProvider?: string;
+  activityProvider?: string;
+}
+
 export default class ToolsDrawer extends React.Component<any, State> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -57,7 +69,7 @@ export default class ToolsDrawer extends React.Component<any, State> {
     };
   }
 
-  private onChange = editorView => {
+  private onChange = (editorView: any) => {
     const { schema, doc } = editorView.state;
     const document = new WikiMarkupTransformer(schema).encode(doc);
     this.setState({

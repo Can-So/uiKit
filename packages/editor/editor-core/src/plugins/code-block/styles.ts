@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors, themed } from '@atlaskit/theme';
 import {
   blockNodesVerticalMargin,
   akEditorTableCellMinWidth,
@@ -8,8 +8,8 @@ import { akEditorCodeFontFamily, akEditorCodeBlockPadding } from '../../styles';
 
 export const codeBlockStyles = css`
   .ProseMirror .code-block {
+    background: ${themed({ light: colors.N20, dark: colors.DN50 })}
     font-family: ${akEditorCodeFontFamily};
-    background: ${colors.N20};
     border-radius: ${borderRadius()}px;
     font-size: 14px;
     line-height: 24px;
@@ -19,8 +19,11 @@ export const codeBlockStyles = css`
     min-width: ${akEditorTableCellMinWidth}px;
 
     .line-number-gutter {
+      background-color: ${themed({
+        light: 'rgba(9, 30, 66, 0.04)',
+        dark: colors.DN40,
+      })}
       color: ${colors.N300};
-      background-color: rgba(9, 30, 66, 0.04);
       text-align: right;
       user-select: none;
       padding: ${akEditorCodeBlockPadding} 8px;
@@ -40,8 +43,8 @@ export const codeBlockStyles = css`
     }
 
     .code-content {
+      color: ${themed({ light: colors.N800, dark: colors.DN500 })}
       padding: ${akEditorCodeBlockPadding} 16px;
-      color: ${colors.N800};
       overflow: auto;
       display: flex;
       flex: 1;

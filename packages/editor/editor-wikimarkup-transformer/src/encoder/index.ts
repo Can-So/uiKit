@@ -16,7 +16,7 @@ import { unknown } from './nodes/unknown';
 export type MarkEncoder = (text: string, attrs: any) => string;
 export type NodeEncoder = (node: PMNode, parent?: PMNode) => string;
 
-const nodeEncoderMapping = {
+const nodeEncoderMapping: { [key: string]: NodeEncoder } = {
   blockquote,
   bulletList,
   codeBlock,
@@ -33,8 +33,12 @@ const nodeEncoderMapping = {
 
 export function encode(node: PMNode): string {
   const encoder = nodeEncoderMapping[node.type.name];
-  if (encoder) {
-    return encoder(node);
+  try {
+    if (encoder) {
+      return encoder(node);
+    }
+    return unknown(node);
+  } catch (err) {
+    return unknown(node);
   }
-  return unknown(node);
 }

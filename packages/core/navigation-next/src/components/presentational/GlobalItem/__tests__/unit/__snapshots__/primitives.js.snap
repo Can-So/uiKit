@@ -17,6 +17,11 @@ exports[`GlobalNavigationItemPrimitive should render a CustomComponent when a co
     <MyComponent
       className="emotion-0"
       component={[Function]}
+      dataset={
+        Object {
+          "data-test-id": "GlobalNavigationItem",
+        }
+      }
       id="my-id"
       isSelected={false}
       label="my-label"
@@ -44,6 +49,7 @@ exports[`GlobalNavigationItemPrimitive should render a button when an onClick pr
   >
     <button
       className="emotion-0"
+      data-test-id="GlobalNavigationItem"
       onClick={[Function]}
     />
   </div>
@@ -66,6 +72,7 @@ exports[`GlobalNavigationItemPrimitive should render an anchor when an href prop
   >
     <a
       className="emotion-0"
+      data-test-id="GlobalNavigationItem"
       href="www.example.com"
     />
   </div>

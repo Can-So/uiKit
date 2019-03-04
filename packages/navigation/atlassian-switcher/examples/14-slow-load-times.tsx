@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import JiraSwitcher from '../src/components/jira-switcher';
 import { mockEndpoints } from './helpers/mock-endpoints';
 import { withAnalyticsLogger } from './helpers';
+import AtlassianSwitcher from '../src';
 
 class JiraSwitcherExample extends Component {
   state = {
@@ -33,15 +33,18 @@ class JiraSwitcherExample extends Component {
     });
   };
 
-  onTriggerXFlow = (productKey: string) => {
-    console.log(`Triggering xflow for => ${productKey}`);
+  onTriggerXFlow = (productKey: string, sourceComponent: string) => {
+    console.log(
+      `Triggering xflow for => ${productKey} from ${sourceComponent}`,
+    );
   };
 
   render() {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <JiraSwitcher
+          <AtlassianSwitcher
+            product="jira"
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />

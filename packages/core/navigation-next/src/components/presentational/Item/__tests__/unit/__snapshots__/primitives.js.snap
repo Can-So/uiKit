@@ -28,6 +28,11 @@ exports[`ItemPrimitiveBase should allow applying custom styles 1`] = `
 <ComponentSwitch
   as="div"
   className="emotion-5"
+  dataset={
+    Object {
+      "data-test-id": "NavigationItem",
+    }
+  }
 >
   <div
     className="emotion-0"

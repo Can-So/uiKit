@@ -2,6 +2,7 @@ import {
   MentionPluginState,
   TextFormattingState,
   EditorActions,
+  Command,
   CustomMediaPicker,
   BlockTypeState,
   ListsState,
@@ -26,6 +27,10 @@ import {
   changeColor,
   TypeAheadItem,
   selectItem as selectTypeAheadItem,
+  insertLink,
+  isTextAtPos,
+  setLinkHref,
+  setLinkText,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -34,6 +39,7 @@ import { Color as StatusColor } from '@atlaskit/status';
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
 import { ProseMirrorDOMChange } from '../../types';
+import { hasValue } from '../../utils';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';
 
 export default class WebBridgeImpl extends WebBridge
@@ -207,6 +213,32 @@ export default class WebBridgeImpl extends WebBridge
     if (this.listBridgeState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
     }
+  }
+
+  onLinkUpdate(text: string, url: string) {
+    if (!this.editorView) {
+      return;
+    }
+
+    const { state, dispatch } = this.editorView;
+    const { from, to } = state.selection;
+
+    if (!isTextAtPos(from)(state)) {
+      insertLink(from, to, url, text)(state, dispatch);
+      return;
+    }
+
+    [setLinkHref(url, from, to)]
+      .reduce(
+        (cmds, setLinkHrefCmd) =>
+          // if adding link => set link then set link text
+          // if removing link => execute this reversed
+          hasValue(url)
+            ? [setLinkHrefCmd, setLinkText(text, from, to), ...cmds]
+            : [setLinkText(text, from, to), setLinkHrefCmd, ...cmds],
+        [] as Command[],
+      )
+      .forEach(cmd => cmd(this.editorView!.state, dispatch));
   }
 
   insertBlockType(type) {

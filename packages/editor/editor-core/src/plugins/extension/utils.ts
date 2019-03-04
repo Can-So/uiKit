@@ -1,5 +1,5 @@
-import { Node as PmNode } from 'prosemirror-model';
-import { EditorState, NodeSelection } from 'prosemirror-state';
+import { Node as PmNode, Schema } from 'prosemirror-model';
+import { EditorState, NodeSelection, Selection } from 'prosemirror-state';
 import {
   findParentNodeOfType,
   findSelectedNodeOfType,
@@ -31,5 +31,17 @@ export const getExtensionNode = (state: EditorState): ExtensionNode => {
 
   return findParentNodeOfType([extension, inlineExtension, bodiedExtension])(
     selection,
+  );
+};
+
+export const isSelectionNodeExtension = (
+  selection: Selection,
+  schema: Schema,
+): boolean => {
+  return (
+    selection instanceof NodeSelection &&
+    (selection.node.type === schema.nodes.inlineExtension ||
+      selection.node.type === schema.nodes.extension ||
+      selection.node.type === schema.nodes.bodiedExtension)
   );
 };

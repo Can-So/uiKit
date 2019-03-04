@@ -21,7 +21,11 @@ const InlineExtension = ({ node }) => {
 };
 
 const BlockExtension = ({ node }) => {
-  return <FakeExtension colour="black">{node.content}</FakeExtension>;
+  return (
+    <FakeExtension colour="black">
+      <div style={{ minWidth: 200 }}>{node.content}</div>
+    </FakeExtension>
+  );
 };
 
 const BodiedExtension = () => {
@@ -40,6 +44,8 @@ export const extensionHandlers: ExtensionHandlers = {
 
     switch (extensionKey) {
       case 'block-eh':
+        return <BlockExtension {...macroProps} />;
+      case 'block-layout-eh':
         return <BlockExtension {...macroProps} />;
       case 'bodied-eh':
         return <BodiedExtension {...macroProps} />;

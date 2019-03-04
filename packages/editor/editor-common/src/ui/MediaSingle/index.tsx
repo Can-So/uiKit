@@ -4,6 +4,9 @@ import Wrapper from './styled';
 import * as classnames from 'classnames';
 import { calcPxFromPct, layoutSupportsWidth } from './grid';
 
+export const DEFAULT_IMAGE_WIDTH = 250;
+export const DEFAULT_IMAGE_HEIGHT = 200;
+
 export interface Props {
   children: React.ReactChild;
   layout: MediaSingleLayout;

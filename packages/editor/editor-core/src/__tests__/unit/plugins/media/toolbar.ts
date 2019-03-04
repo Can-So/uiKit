@@ -86,6 +86,7 @@ describe('media', () => {
         editorView.state,
         intl,
         undefined,
+        undefined,
         'full-page',
       );
       expect(toolbar).toBeDefined();
@@ -99,16 +100,39 @@ describe('media', () => {
         editorView.state,
         intl,
         true,
+        undefined,
         'full-page',
       );
       expect(toolbar).toBeDefined();
       expect(toolbar!.items.length).toEqual(8);
     });
 
+    it('can render regular toolbar with annotation in full page', () => {
+      const { editorView } = editor(docWithMediaSingle);
+
+      const toolbar = floatingToolbar(
+        editorView.state,
+        intl,
+        true,
+        true,
+        'full-page',
+      );
+      expect(toolbar).toBeDefined();
+      expect(toolbar!.items.length).toEqual(9);
+      const item = toolbar!.items.find(cmd => cmd.type === 'custom');
+      expect(item).toBeDefined();
+    });
+
     it('should not render any layout buttons when in comment', () => {
       const { editorView } = editor(docWithMediaSingle);
 
-      const toolbar = floatingToolbar(editorView.state, intl, true, 'comment');
+      const toolbar = floatingToolbar(
+        editorView.state,
+        intl,
+        true,
+        undefined,
+        'comment',
+      );
       expect(toolbar).toBeDefined();
       expect(toolbar!.items.length).toEqual(1);
     });
@@ -127,6 +151,7 @@ describe('media', () => {
         editorView.state,
         intl,
         true,
+        undefined,
         'full-page',
       );
       expect(toolbar).toBeDefined();
@@ -147,6 +172,7 @@ describe('media', () => {
         editorView.state,
         intl,
         true,
+        undefined,
         'full-page',
       );
       expect(toolbar).toBeDefined();
@@ -160,6 +186,7 @@ describe('media', () => {
         editorView.state,
         intl,
         true,
+        undefined,
         'full-page',
       );
       expect(toolbar).toBeDefined();
@@ -175,6 +202,7 @@ describe('media', () => {
         editorView.state,
         intl,
         true,
+        undefined,
         'full-page',
       );
       expect(toolbar).toBeDefined();
@@ -204,6 +232,7 @@ describe('media', () => {
         editorView.state,
         intl,
         true,
+        undefined,
         'full-page',
       );
       const button = toolbar!.items.find(

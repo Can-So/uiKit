@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-core",
-  "version": "101.1.0",
+  "version": "101.6.2",
   "description": "A package contains Atlassian editor core functionality",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@atlaskit/activity": "^1.0.1",
-    "@atlaskit/adf-schema": "^1.5.4",
+    "@atlaskit/adf-schema": "^1.6.0",
     "@atlaskit/adf-utils": "^5.7.1",
     "@atlaskit/analytics-gas-types": "^3.2.3",
     "@atlaskit/analytics-listeners": "^4.1.5",
@@ -38,7 +38,7 @@
     "@atlaskit/code": "^8.2.2",
     "@atlaskit/date": "^0.2.0",
     "@atlaskit/droplist": "^7.0.18",
-    "@atlaskit/editor-common": "^32.1.0",
+    "@atlaskit/editor-common": "^32.4.2",
     "@atlaskit/editor-json-transformer": "^4.1.12",
     "@atlaskit/editor-markdown-transformer": "^2.1.12",
     "@atlaskit/emoji": "^55.0.1",
@@ -46,6 +46,7 @@
     "@atlaskit/item": "^8.0.15",
     "@atlaskit/logo": "^9.2.7",
     "@atlaskit/media-card": "^54.0.0",
+    "@atlaskit/media-editor": "^28.0.0",
     "@atlaskit/media-filmstrip": "^27.0.0",
     "@atlaskit/media-picker": "^34.0.0",
     "@atlaskit/mention": "^16.2.1",
@@ -104,6 +105,7 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
+    "@atlaskit/textarea": "0.2.4",
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/dropdown-menu": "^6.1.26",
     "@atlaskit/editor-bitbucket-transformer": "^4.1.13",
@@ -113,12 +115,13 @@
     "@atlaskit/media-core": "^27.1.0",
     "@atlaskit/media-test-helpers": "^20.1.5",
     "@atlaskit/pubsub": "^3.0.7",
-    "@atlaskit/renderer": "^40.0.0",
+    "@atlaskit/renderer": "^40.1.0",
     "@atlaskit/section-message": "^1.0.16",
     "@atlaskit/util-data-test": "^10.2.1",
     "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.1",
     "clipboard-polyfill": "2.4.3",
+    "diff": "^4.0.1",
     "enzyme": "^3.7.0",
     "jest-sandbox": "^1.1.1",
     "jquery": "^3.2.1",
@@ -126,6 +129,7 @@
     "raf-stub": "^2.0.1",
     "react": "^16.4.0",
     "react-intl": "^2.6.0",
-    "sinon": "^2.2.0"
+    "sinon": "^2.2.0",
+    "whatwg-fetch": "^2.0.3"
   }
 }

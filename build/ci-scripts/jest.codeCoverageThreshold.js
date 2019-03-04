@@ -15,14 +15,14 @@ module.exports = {
   },
   'packages/media/media-image/src': {
     statements: 100,
-    branches: 100,
+    branches: 90,
     functions: 100,
     lines: 100,
   },
   'packages/media/media-core/src': {
     statements: 95,
     branches: 85,
-    functions: 88,
+    functions: 91,
     lines: 95,
   },
   'packages/media/media-card/src': {

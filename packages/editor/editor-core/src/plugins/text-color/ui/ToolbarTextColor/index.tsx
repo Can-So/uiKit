@@ -14,6 +14,8 @@ import {
   Wrapper,
   ExpandIconWrapper,
 } from './styles';
+import { EditorView } from 'prosemirror-view';
+import * as commands from '../../commands/change-color';
 
 export const messages = defineMessages({
   textColor: {
@@ -29,7 +31,7 @@ export interface State {
 
 export interface Props {
   pluginState: TextColorPluginState;
-  changeColor: (color: string) => void;
+  editorView: EditorView;
   popupsMountPoint?: HTMLElement;
   popupsBoundariesElement?: HTMLElement;
   popupsScrollableElement?: HTMLElement;
@@ -43,6 +45,12 @@ class ToolbarTextColor extends React.Component<
   state: State = {
     isOpen: false,
   };
+
+  changeColor = (color: string) =>
+    commands.changeColor(color)(
+      this.props.editorView.state,
+      this.props.editorView.dispatch,
+    );
 
   render() {
     const { isOpen } = this.state;
@@ -108,7 +116,7 @@ class ToolbarTextColor extends React.Component<
     (color, disabled) => {
       if (!disabled) {
         this.toggleOpen();
-        return this.props.changeColor(color);
+        return this.changeColor(color);
       }
 
       return false;

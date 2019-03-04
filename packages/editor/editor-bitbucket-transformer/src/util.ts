@@ -193,7 +193,7 @@ export function transformHtml(
       img.parentNode!.removeChild(img);
     });
 
-  function validateImageNodeParent(node: Node) {
+  function validateImageNodeParent(node: Node): boolean {
     const ALLOWED_PARENTS = [
       'LI',
       'UL',

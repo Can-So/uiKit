@@ -178,19 +178,29 @@ export const updateControls = (state: EditorState) => {
     ClassName.NUMBERED_COLUMN_BUTTON,
   );
 
+  const getWidth = (element: HTMLElement): number => {
+    const rect = element.getBoundingClientRect();
+    return rect ? rect.width : element.offsetWidth;
+  };
+
+  const getHeight = (element: HTMLElement): number => {
+    const rect = element.getBoundingClientRect();
+    return rect ? rect.height : element.offsetHeight;
+  };
+
   // update column controls width on resize
   for (let i = 0, count = columnControls.length; i < count; i++) {
     if (cols[i]) {
-      columnControls[i].style.width = `${cols[i].offsetWidth + 1}px`;
+      columnControls[i].style.width = `${getWidth(cols[i]) + 1}px`;
     }
   }
   // update rows controls height on resize
   for (let i = 0, count = rowControls.length; i < count; i++) {
     if (rows[i]) {
-      rowControls[i].style.height = `${rows[i].offsetHeight + 1}px`;
+      rowControls[i].style.height = `${getHeight(rows[i]) + 1}px`;
 
       if (numberedRows.length) {
-        numberedRows[i].style.height = `${rows[i].offsetHeight + 1}px`;
+        numberedRows[i].style.height = `${getHeight(rows[i]) + 1}px`;
       }
     }
   }
@@ -219,6 +229,7 @@ export function scaleTable(
   pos: number,
   containerWidth: number | undefined,
   initialScale?: boolean,
+  dynamicTextSizing?: boolean,
 ) {
   if (!tableElem) {
     return;
@@ -233,6 +244,7 @@ export function scaleTable(
     prevNode,
     containerWidth,
     initialScale,
+    dynamicTextSizing,
   );
 
   if (state) {
@@ -259,6 +271,7 @@ function scale(
   prevNode: PMNode,
   containerWidth: number | undefined,
   initialScale?: boolean,
+  dynamicTextSizing?: boolean,
 ): ResizeState | undefined {
   // If a table has not been resized yet, columns should be auto.
   if (hasTableBeenResized(node) === false) {
@@ -281,7 +294,11 @@ function scale(
   let previousMaxSize = tableLayoutToSize[prevNode.attrs.layout];
 
   if (!initialScale) {
-    previousMaxSize = getLayoutSize(prevNode.attrs.layout, containerWidth);
+    previousMaxSize = getLayoutSize(
+      prevNode.attrs.layout,
+      containerWidth,
+      dynamicTextSizing,
+    );
   }
 
   // Determine if table was overflow

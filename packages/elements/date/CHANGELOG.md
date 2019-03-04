@@ -1,5 +1,10 @@
 # @atlaskit/date
 
+## 0.2.1
+- [patch] [2762ffd47e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2762ffd47e):
+
+  - add SSR/hydration tests to Date element
+
 ## 0.2.0
 - [minor] [67d563a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67d563a):
 

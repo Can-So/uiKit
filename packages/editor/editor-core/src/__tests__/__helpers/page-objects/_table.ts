@@ -1,6 +1,7 @@
 import { clickElementWithText, getBoundingRect } from './_editor';
 import { clickToolbarMenu, ToolbarMenuItem } from './_toolbar';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
+import messages from '../../../messages';
 import {
   pressKey,
   pressKeyup,
@@ -28,6 +29,7 @@ export const tableSelectors = {
   insertColumnButton: `.${ClassName.CONTROLS_INSERT_COLUMN}`,
   insertRowButton: `.${ClassName.CONTROLS_INSERT_ROW}`,
   cornerButton: `.${ClassName.CONTROLS_CORNER_BUTTON}`,
+  breakoutButton: `.${ClassName.LAYOUT_BUTTON}`,
   mergeCellsText: `Merge cells`,
   splitCellText: `Split cell`,
   tableOptionsText: `Table options`,
@@ -40,9 +42,13 @@ export const tableSelectors = {
   wideState: `.ProseMirror table[data-layout="wide"]`,
   fullwidthState: `.ProseMirror table[data-layout="full-width"]`,
   defaultState: `.ProseMirror table[data-layout="center"]`,
-  fullwidthSelector: `div[aria-label="Full width"]`,
-  wideSelector: `div[aria-label="Wide"]`,
-  defaultSelector: `div[aria-label="Center"]`,
+  fullwidthSelector: `div[aria-label="${
+    messages.layoutFullWidth.defaultMessage
+  }"]`,
+  wideSelector: `div[aria-label="${messages.layoutWide.defaultMessage}"]`,
+  defaultSelector: `div[aria-label="${
+    messages.layoutFixedWidth.defaultMessage
+  }"]`,
   tableTd: 'table td',
   tableTh: 'table th',
 };
@@ -245,4 +251,13 @@ export const grabResizeHandle = async (
   await page.mouse.move(columnEndPosition, cell.top);
 
   await page.mouse.down();
+};
+
+export const toggleBreakout = async (page: any, times: number) => {
+  const timesArray = Array.from({ length: times });
+
+  await page.waitForSelector(tableSelectors.breakoutButton);
+  for (let _iter of timesArray) {
+    await page.click(tableSelectors.breakoutButton);
+  }
 };

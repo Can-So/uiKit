@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/global-navigation",
-  "version": "5.7.3",
+  "version": "5.7.5",
   "description": "Global navigation component for Atlassian",
   "main": "dist/cjs/index.js",
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
@@ -18,7 +18,7 @@
   "dependencies": {
     "@atlaskit/analytics-namespaced-context": "^2.1.5",
     "@atlaskit/analytics-next": "^3.1.2",
-    "@atlaskit/atlassian-switcher": "^0.0.7",
+    "@atlaskit/atlassian-switcher": "^0.0.9",
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/badge": "^9.2.2",
     "@atlaskit/blanket": "^7.0.12",

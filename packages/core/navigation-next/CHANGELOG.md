@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.3.0
+- [minor] [f54655ac1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f54655ac1a):
+
+  - Support custom data attributes
+
 ## 4.2.3
 - Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
   - @atlaskit/inline-dialog@9.0.15
