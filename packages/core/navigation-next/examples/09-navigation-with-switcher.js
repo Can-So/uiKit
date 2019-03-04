@@ -9,21 +9,17 @@
   `packages/core/navigation-next/src/__tests__/integration/navigation.js`
 */
 
-import React, { Component, type Node } from 'react';
+import React from 'react';
 import Avatar from '@atlaskit/avatar';
 import AddIcon from '@atlaskit/icon/glyph/add';
 import BacklogIcon from '@atlaskit/icon/glyph/backlog';
 import BoardIcon from '@atlaskit/icon/glyph/board';
-import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
 import ChevD from '@atlaskit/icon/glyph/chevron-down';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
 import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
-import IssuesIcon from '@atlaskit/icon/glyph/issues';
 import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
 import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
 import SearchIcon from '@atlaskit/icon/glyph/search';
-import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
-import { ToggleStateless } from '@atlaskit/toggle';
+import { JiraIcon } from '@atlaskit/logo';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import {
@@ -38,7 +34,6 @@ import {
   MenuSection,
   NavigationProvider,
   Separator,
-  Wordmark,
 } from '../src';
 
 const gridSize = gridSizeFn();
