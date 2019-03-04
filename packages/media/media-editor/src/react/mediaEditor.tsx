@@ -287,7 +287,7 @@ export class MediaEditor extends React.Component<
         };
 
         this.engine = new Engine(config);
-        const loadParameters = {
+        const loadParameters: LoadParameters = {
           imageGetter: (format?: string) => this.engine!.getBase64Image(format),
         };
 

@@ -11,11 +11,12 @@ import { Blanket, SpinnerWrapper } from './styled';
 import { fileToBase64 } from '../util';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import ErrorView from './editorView/errorView/errorView';
+import { Dimensions } from '../common';
 
 export interface SmartMediaEditorProps {
   identifier: FileIdentifier;
   context: Context;
-  onUploadStart: (identifier: FileIdentifier) => void;
+  onUploadStart: (identifier: FileIdentifier, dimensions: Dimensions) => void;
   onFinish: () => void;
 }
 
@@ -120,7 +121,7 @@ export class SmartMediaEditor extends React.Component<
     });
   };
 
-  private onSave = (imageData: string) => {
+  private onSave = (imageData: string, dimensions: Dimensions) => {
     const { fileName } = this;
     const {
       context,
@@ -179,7 +180,7 @@ export class SmartMediaEditor extends React.Component<
       collectionName,
       mediaItemType: 'file',
     };
-    onUploadStart(newFileIdentifier);
+    onUploadStart(newFileIdentifier, dimensions);
   };
 
   private hasBeenModified = () => {

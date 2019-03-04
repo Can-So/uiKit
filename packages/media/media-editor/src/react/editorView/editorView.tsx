@@ -19,7 +19,7 @@ const propertyLineWidth = 'media-editor-line-width';
 
 export interface EditorViewProps {
   readonly imageUrl: string;
-  readonly onSave: (image: string) => void;
+  readonly onSave: (image: string, dimensions: Dimensions) => void;
   readonly onCancel: () => void;
   readonly onError: (message: string) => void;
   readonly onAnyChange?: () => void;
@@ -159,8 +159,8 @@ class EditorView extends Component<
       intl: { formatMessage },
     } = this.props;
     this.saveProperties();
-    if (image.isExported && image.content) {
-      onSave(image.content);
+    if (image.isExported && image.content && image.dimensions) {
+      onSave(image.content, image.dimensions);
     } else {
       onError(formatMessage(messages.could_not_save_image));
     }

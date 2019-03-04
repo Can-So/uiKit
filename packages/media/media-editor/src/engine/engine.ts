@@ -65,7 +65,8 @@ export class Engine {
         const image = this.bitmapExporter.getBase64Image(
           format || defaultFormat,
         );
-        return { isExported: true, content: image };
+        const dimensions = this.bitmapExporter.getDimensions();
+        return { isExported: true, content: image, dimensions };
       }
     } catch (error) {
       return { isExported: false, error: error.message };

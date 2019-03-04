@@ -168,7 +168,7 @@ describe('Smart Media Editor', () => {
       asMock(context.file.upload).mockReturnValue(resultingFileStateObservable);
       const editorView = component.find<EditorViewProps>(EditorView);
       const { onSave } = editorView.props();
-      onSave('some-image-content');
+      onSave('some-image-content', { width: 200, height: 100 });
     });
 
     it('should upload a file', async () => {
@@ -211,6 +211,10 @@ describe('Smart Media Editor', () => {
           mediaItemType: 'file',
           id: 'uuid1',
           collectionName: fileIdentifier.collectionName,
+        },
+        {
+          width: 200,
+          height: 100,
         },
       ]);
     });

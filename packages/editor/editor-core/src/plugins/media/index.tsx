@@ -69,7 +69,8 @@ export const renderSmartMediaEditor = (mediaState: MediaPluginState) => {
       <SmartMediaEditor
         identifier={identifier}
         context={mediaState.uploadContext}
-        onUploadStart={(newFileIdentifier: FileIdentifier) => {
+        onUploadStart={(newFileIdentifier: FileIdentifier, dimensions) => {
+          console.log({ dimensions });
           mediaState.closeMediaEditor();
           mediaState.replaceEditingMedia(newFileIdentifier);
         }}
