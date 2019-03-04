@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 40.1.1
+- Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
+  - @atlaskit/editor-common@32.4.3
+  - @atlaskit/size-detector@6.0.0
+
 ## 40.1.0
 - [minor] [09e8eb968f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09e8eb968f):
 

@@ -1,5 +1,9 @@
 # @atlaskit/navigation
 
+## 33.3.10
+- Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
+  - @atlaskit/size-detector@6.0.0
+
 ## 33.3.9
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

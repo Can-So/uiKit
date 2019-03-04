@@ -1,5 +1,9 @@
 # @atlaskit/editor-common
 
+## 32.4.3
+- Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
+  - @atlaskit/size-detector@6.0.0
+
 ## 32.4.2
 - [patch] [4eb1af2892](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4eb1af2892):
 
