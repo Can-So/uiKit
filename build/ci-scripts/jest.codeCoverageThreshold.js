@@ -50,10 +50,10 @@ module.exports = {
     lines: 91,
   },
   'packages/media/media-ui/src': {
-    statements: 89,
-    branches: 79,
-    functions: 82,
-    lines: 88,
+    statements: 87,
+    branches: 76,
+    functions: 80,
+    lines: 86,
   },
   'packages/media/media-viewer/src': {
     statements: 91,
