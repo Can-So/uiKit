@@ -21,6 +21,7 @@ function createItem(): ProcessedFileState {
     mediaType: 'image',
     mimeType: 'jpeg',
     artifacts: {},
+    representations: {},
   };
 }
 

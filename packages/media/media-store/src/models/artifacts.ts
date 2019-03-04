@@ -18,7 +18,7 @@ export const getArtifactUrl = (
 ): string | undefined => {
   const artifact = artifacts[prop];
 
-  if (!artifact || artifact.processingStatus !== 'succeeded' || !artifact.url) {
+  if (!artifact || !artifact.url) {
     return undefined;
   }
 
