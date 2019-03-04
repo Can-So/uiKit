@@ -24,9 +24,10 @@ const AtlassianSwitcher = ({
     case 'confluence':
       Switcher = ConfluenceSwitcher;
       break;
-    case 'trusted-admin':
+    case 'home':
     case 'people':
     case 'site-admin':
+    case 'trusted-admin':
       Switcher = GenericSwitcher;
       break;
     default:
