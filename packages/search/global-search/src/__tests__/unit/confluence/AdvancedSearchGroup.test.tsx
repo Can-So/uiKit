@@ -39,7 +39,7 @@ it('should render advanced search text when a query is entered', () => {
 });
 
 [
-  { entity: 'pages', Component: SearchConfluenceItem },
+  { entity: 'content', Component: SearchConfluenceItem },
   { entity: 'people', Component: SearchPeopleItem },
 ].forEach(({ entity, Component }) => {
   it('should trigger on click', () => {

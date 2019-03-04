@@ -23,6 +23,7 @@ import {
   Logger,
 } from '../GlobalQuickSearchWrapper';
 import {
+  ConfluenceAdvancedSearchTypes,
   redirectToConfluenceAdvancedSearch,
   handlePromiseError,
 } from '../SearchResultsUtil';
@@ -86,7 +87,7 @@ export class ConfluenceQuickSearchContainer extends React.Component<
         },
         stopPropagation() {},
       }),
-      'pages',
+      ConfluenceAdvancedSearchTypes.Content,
       query,
     );
 

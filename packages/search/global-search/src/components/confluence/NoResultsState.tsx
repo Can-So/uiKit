@@ -8,6 +8,7 @@ import { messages } from '../../messages';
 import NoResults from '../NoResults';
 import SearchConfluenceItem from '../SearchConfluenceItem';
 import SearchPeopleItem from '../SearchPeopleItem';
+import { ConfluenceAdvancedSearchTypes } from '../SearchResultsUtil';
 export interface Props {
   query: string;
   onClick?: (e: CancelableEvent, entity: String) => void;
@@ -45,7 +46,10 @@ export default class NoResultsState extends React.Component<Props> {
               }
               onClick={({ event }) => {
                 if (this.props.onClick) {
-                  this.props.onClick(event, 'pages');
+                  this.props.onClick(
+                    event,
+                    ConfluenceAdvancedSearchTypes.Content,
+                  );
                 }
               }}
             />
@@ -60,7 +64,10 @@ export default class NoResultsState extends React.Component<Props> {
               }
               onClick={({ event }) => {
                 if (this.props.onClick) {
-                  this.props.onClick(event, 'people');
+                  this.props.onClick(
+                    event,
+                    ConfluenceAdvancedSearchTypes.People,
+                  );
                 }
               }}
             />

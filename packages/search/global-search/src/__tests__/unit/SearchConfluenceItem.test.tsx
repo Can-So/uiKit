@@ -44,7 +44,7 @@ it('should call onClick', () => {
   const resultData = {
     resultId: 'resultId',
     event: { preventDefault() {} } as CancelableEvent,
-    type: 'pages',
+    type: 'content',
   };
   if (onClick) {
     onClick(resultData);

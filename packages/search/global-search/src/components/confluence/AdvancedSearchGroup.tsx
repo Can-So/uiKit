@@ -10,6 +10,7 @@ import StickyFooter from '../common/StickyFooter';
 import SearchPeopleItem from '../SearchPeopleItem';
 import SearchConfluenceItem from '../SearchConfluenceItem';
 import PeopleIconGlyph from '../../assets/PeopleIconGlyph';
+import { ConfluenceAdvancedSearchTypes } from '../SearchResultsUtil';
 
 const PeopleSearchWrapper = styled.div`
   margin-top: ${math.multiply(gridSize, 3)}px;
@@ -45,7 +46,7 @@ export default class AdvancedSearchGroup extends React.Component<Props> {
           }
           onClick={({ event }) => {
             if (this.props.onClick) {
-              this.props.onClick(event, 'people');
+              this.props.onClick(event, ConfluenceAdvancedSearchTypes.People);
             }
           }}
         />
@@ -59,7 +60,7 @@ export default class AdvancedSearchGroup extends React.Component<Props> {
           showKeyboardLozenge={true}
           onClick={({ event }) => {
             if (this.props.onClick) {
-              this.props.onClick(event, 'pages');
+              this.props.onClick(event, ConfluenceAdvancedSearchTypes.Content);
             }
           }}
         />

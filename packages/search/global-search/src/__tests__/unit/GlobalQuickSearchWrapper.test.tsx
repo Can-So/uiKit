@@ -55,7 +55,7 @@ describe('advanced search callback', () => {
     {
       product: 'confluence',
       Component: ConfluenceQuickSearchContainer,
-      category: 'pages',
+      category: 'conent',
     },
   ].forEach(({ product, Component, category }) => {
     it(`should call on advnaced callback on ${product} component`, () => {
