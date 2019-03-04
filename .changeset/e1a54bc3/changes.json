@@ -1,7 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/date", "type": "patch" },
-    { "name": "@atlaskit/elements-test-helpers", "type": "patch" }
-  ],
-  "dependents": []
-}
