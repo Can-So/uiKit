@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 101.6.1
+- [patch] [3f4a4e4f49](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f4a4e4f49):
+
+  - [ED-6351] Fix table insert columns/row UI positions
+
 ## 101.6.0
 - [minor] [8e407b5a24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e407b5a24):
 
