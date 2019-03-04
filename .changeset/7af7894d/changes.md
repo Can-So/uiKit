@@ -1,1 +1,0 @@
-- ED-6265 fix external image call to media for dimensions
