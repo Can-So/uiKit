@@ -1,5 +1,10 @@
 # @atlaskit/elements-test-helpers
 
+## 0.1.0
+- [minor] [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+
+  - added/cleaned up ssr tests
+
 ## 0.0.1
 - [patch] [2762ffd47e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2762ffd47e):
 
