@@ -159,12 +159,17 @@ describe('ShareForm', () => {
         value: 'some comment',
       },
     };
+    const config: ConfigResponse = {
+      mode: 'EXISTING_USERS_ONLY',
+      allowComment: true,
+    };
     const component = shallow(
       <ShareForm
         copyLink={mockLink}
         loadOptions={loadOptions}
         title="some title"
         defaultValue={defaultValue}
+        config={config}
       />,
     );
     const formProps = {};

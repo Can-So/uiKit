@@ -1,5 +1,8 @@
 import { OptionData } from '@atlaskit/user-picker';
-import { showInviteWarning } from '../../../components/utils';
+import {
+  isValidEmailUsingConfig,
+  showInviteWarning,
+} from '../../../components/utils';
 import { ConfigResponse, ConfigResponseMode } from '../../../types';
 
 describe('utils functions', () => {
@@ -25,6 +28,7 @@ describe('utils functions', () => {
     ): ConfigResponse => ({
       mode,
       allowedDomains: domains,
+      allowComment: true,
     });
 
     /**
@@ -55,6 +59,50 @@ describe('utils functions', () => {
           expect(
             showInviteWarning(createConfig(mode, domains), options),
           ).toEqual(expected);
+        },
+      );
+    });
+  });
+
+  describe('isValidEmailUsingConfig', () => {
+    const defaultBehavior = [
+      ['INVALID', ''],
+      ['INVALID', ' '],
+      ['INVALID', 'abc'],
+      ['INVALID', '123'],
+      ['POTENTIAL', 'someEmail@'],
+      ['POTENTIAL', 'someEmail@atlassian'],
+      ['VALID', 'someEmail@atlassian.com'],
+    ];
+
+    const onlyDomainBasedBehavior = [
+      ['INVALID', ''],
+      ['INVALID', ' '],
+      ['INVALID', 'abc'],
+      ['INVALID', '123'],
+      ['POTENTIAL', 'someEmail@'],
+      ['POTENTIAL', 'someEmail@atlassian'],
+      ['POTENTIAL', 'someEmail@trello.com'],
+      ['VALID', 'someEmail@atlassian.com'],
+    ];
+    describe.each`
+      mode                          | domains              | behavior
+      ${undefined}                  | ${undefined}         | ${defaultBehavior}
+      ${'EXISTING_USERS_ONLY'}      | ${undefined}         | ${defaultBehavior}
+      ${'INVITE_NEEDS_APPROVAL'}    | ${undefined}         | ${defaultBehavior}
+      ${'ONLY_DOMAIN_BASED_INVITE'} | ${['atlassian.com']} | ${onlyDomainBasedBehavior}
+      ${'DOMAIN_BASED_INVITE'}      | ${['atlassian.com']} | ${defaultBehavior}
+      ${'ANYONE'}                   | ${undefined}         | ${defaultBehavior}
+    `('$mode', ({ mode, domains, behavior }) => {
+      const isValidEmail = isValidEmailUsingConfig({
+        mode,
+        allowedDomains: domains,
+        allowComment: true, // doesn't change anything
+      });
+      test.each(behavior)(
+        'should return "%s" for "%s" input text',
+        (expectation, inputText) => {
+          expect(isValidEmail(inputText)).toEqual(expectation);
         },
       );
     });

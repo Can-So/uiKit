@@ -1,27 +1,39 @@
 import { Email, isEmail, OptionData, Value } from '@atlaskit/user-picker';
 import {
+  EmailValidationResponse,
+  isValidEmail,
+} from '@atlaskit/user-picker/src/components/emailValidation';
+import memoizeOne from 'memoize-one';
+import {
   ConfigResponse,
   ConfigResponseMode,
   User,
   UserWithEmail,
 } from '../types';
 
+const matchAllowedDomains = memoizeOne(
+  (domain: string, config: ConfigResponse | undefined) => {
+    return (
+      config &&
+      config.allowedDomains &&
+      config.allowedDomains.indexOf(domain) !== -1
+    );
+  },
+);
+
 const cannotInvite = (
   config: ConfigResponse,
   userDomains: Set<string>,
 ): boolean => {
-  const { allowedDomains } = config;
-  if (allowedDomains) {
-    for (const domain of userDomains) {
-      if (allowedDomains.indexOf(domain) === -1) {
-        return true;
-      }
+  for (const domain of userDomains) {
+    if (!matchAllowedDomains(domain, config)) {
+      return true;
     }
   }
   return false;
 };
 
-const extractDomain = (user: Email) => user.id.replace(/^[^@]+@(.+)$/, '$1');
+const extractDomain = (email: string) => email.replace(/^[^@]+@(.+)$/, '$1');
 
 const removeDuplicates = (values: Set<string>, nextValue: string) =>
   values.add(nextValue);
@@ -31,7 +43,7 @@ const checkDomains = (
   selectedUsers: Email[],
 ): boolean => {
   const usersDomain = selectedUsers
-    .map(extractDomain)
+    .map(email => extractDomain(email.id))
     .reduce(removeDuplicates, new Set<string>());
   return cannotInvite(config, usersDomain);
 };
@@ -79,3 +91,26 @@ export const optionDataToUsers = (optionDataArray: OptionData[]): User[] =>
         };
     }
   });
+
+export const allowEmails = (config?: ConfigResponse) =>
+  config && config.mode !== 'EXISTING_USERS_ONLY';
+
+const needToCheckDomain = (config?: ConfigResponse) =>
+  config && config.mode === 'ONLY_DOMAIN_BASED_INVITE';
+
+export const isValidEmailUsingConfig = memoizeOne(
+  (config: ConfigResponse | undefined) => {
+    const checkDomain = needToCheckDomain(config);
+    return (inputText: string): EmailValidationResponse => {
+      const result = isValidEmail(inputText);
+      if (
+        result === 'VALID' &&
+        checkDomain &&
+        !matchAllowedDomains(extractDomain(inputText), config)
+      ) {
+        return 'POTENTIAL';
+      }
+      return result;
+    };
+  },
+);

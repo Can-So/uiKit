@@ -1,5 +1,7 @@
 jest.mock('../../../components/utils', () => ({
   showInviteWarning: jest.fn(),
+  allowEmails: jest.fn(),
+  isValidEmailUsingConfig: jest.fn(),
 }));
 
 import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
@@ -12,7 +14,7 @@ import {
   REQUIRED,
   UserPickerField,
 } from '../../../components/UserPickerField';
-import { showInviteWarning } from '../../../components/utils';
+import { allowEmails, showInviteWarning } from '../../../components/utils';
 import { messages } from '../../../i18n';
 import { ConfigResponse } from '../../../types';
 import { renderProp } from '../_testUtils';
@@ -27,6 +29,7 @@ describe('UserPickerField', () => {
 
   afterEach(() => {
     (showInviteWarning as jest.Mock).mockClear();
+    (allowEmails as jest.Mock).mockClear();
   });
 
   it('should render UserPicker', () => {
@@ -113,7 +116,10 @@ describe('UserPickerField', () => {
   describe('invite warning', () => {
     const setUpInviteWarningTest = () => {
       const loadOptions = jest.fn();
-      const config: ConfigResponse = { mode: 'EXISTING_USERS_ONLY' };
+      const config: ConfigResponse = {
+        mode: 'EXISTING_USERS_ONLY',
+        allowComment: true,
+      };
       const fieldProps = {
         onChange: jest.fn(),
         value: [],

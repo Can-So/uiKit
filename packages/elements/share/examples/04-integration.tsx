@@ -68,6 +68,7 @@ const client: ShareClient = {
     Promise.resolve<ConfigResponse>({
       mode: 'DOMAIN_BASED_INVITE',
       allowedDomains: ['atlassian.com'],
+      allowComment: true,
     }),
   share: (
     _content: Content,

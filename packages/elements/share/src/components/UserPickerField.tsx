@@ -8,7 +8,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';
 import { ConfigResponse, FieldChildrenArgs } from '../types';
-import { showInviteWarning } from './utils';
+import {
+  allowEmails,
+  isValidEmailUsingConfig,
+  showInviteWarning,
+} from './utils';
 
 export const REQUIRED = 'REQUIRED';
 const validate = (value: OptionData[]) =>
@@ -36,7 +40,8 @@ export const UserPickerField: React.StatelessComponent<Props> = props => (
                 <FormattedMessage {...messages.userPickerPlaceholder} />
               }
               addMoreMessage={addMore as string}
-              allowEmail
+              allowEmail={allowEmails(props.config)}
+              isValidEmail={isValidEmailUsingConfig(props.config)}
             />
           )}
         </FormattedMessage>
