@@ -402,6 +402,10 @@ export const inlineCard = (attrs: CardAttributes) =>
   nodeFactory(sampleSchema.nodes.inlineCard, attrs);
 export const blockCard = (attrs: CardAttributes) =>
   nodeFactory(sampleSchema.nodes.blockCard, attrs);
+export const unsupportedInline = (attrs: any) =>
+  nodeFactory(sampleSchema.nodes.unsupportedInline, attrs);
+export const unsupportedBlock = (attrs: any) =>
+  nodeFactory(sampleSchema.nodes.unsupportedBlock, attrs);
 
 //
 // Marks
