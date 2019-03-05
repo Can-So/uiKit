@@ -22,7 +22,7 @@ module.exports = {
   'packages/media/media-core/src': {
     statements: 95,
     branches: 85,
-    functions: 91,
+    functions: 88,
     lines: 95,
   },
   'packages/media/media-card/src': {
