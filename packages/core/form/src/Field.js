@@ -99,6 +99,10 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   getFieldId = memoizeOne(name => `${name}-${uuid()}`);
 
+  keysDown = new Set();
+  fieldRef = React.createRef();
+  inputRef = React.createRef();
+
   state = {
     // eslint-disable-next-line no-unused-vars
     onChange: (e, value) => {},
@@ -178,11 +182,41 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   componentDidMount() {
     this.unregisterField = this.register();
+    if (this.fieldRef.current) {
+      this.fieldRef.current.addEventListener('keydown', this.handleKeyDown);
+      // $FlowFixMe - already checking this.fieldRef.current is not null
+      this.fieldRef.current.addEventListener('keyup', this.handleKeyUp);
+    }
   }
 
   componentWillUnmount() {
     this.unregisterField();
+    if (this.fieldRef.current) {
+      this.fieldRef.current.removeEventListener('keydown', this.handleKeyDown);
+      // $FlowFixMe - already checking this.fieldRef.current is not null
+      this.fieldRef.current.removeEventListener('keyup', this.handleKeyUp);
+    }
   }
+
+  handleKeyDown = (event: SyntheticKeyboardEvent<any>) => {
+    if (event.key === 'Enter' || event.key === 'Meta') {
+      this.keysDown.add(event.key);
+      const submitKeys = new Set(['Enter', 'Meta']);
+      if (
+        this.keysDown.size === submitKeys.size &&
+        [...this.keysDown].every(value => submitKeys.has(value)) &&
+        this.inputRef.current
+      ) {
+        this.inputRef.current.click();
+      }
+    }
+  };
+
+  handleKeyUp = (event: SyntheticKeyboardEvent<any>) => {
+    if (event.key === 'Enter' || event.key === 'Meta') {
+      this.keysDown.delete(event.key);
+    }
+  };
 
   render() {
     const {
@@ -214,7 +248,7 @@ class FieldInner extends React.Component<InnerProps, State> {
       id: fieldId,
     };
     return (
-      <FieldWrapper>
+      <FieldWrapper innerRef={this.fieldRef}>
         {label && (
           <Label id={`${fieldId}-label`} htmlFor={fieldId}>
             {label}
@@ -223,6 +257,7 @@ class FieldInner extends React.Component<InnerProps, State> {
             )}
           </Label>
         )}
+        <input ref={this.inputRef} type="submit" hidden />
         <FieldId.Provider value={fieldId}>
           {children({ fieldProps, error, meta: rest })}
         </FieldId.Provider>
