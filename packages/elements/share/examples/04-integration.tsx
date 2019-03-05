@@ -102,6 +102,7 @@ export default () => (
     originTracingFactory={() => mockOriginTracing}
     productId="confluence"
     shareAri="ari"
+    shareContentType="page"
     shareLink={window.location.href}
     shareTitle="My Share"
   />

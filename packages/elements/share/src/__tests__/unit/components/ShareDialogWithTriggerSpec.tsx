@@ -180,6 +180,49 @@ describe('ShareDialogWithTrigger', () => {
     });
   });
 
+  describe('shareContentType prop', () => {
+    it('should pass the correct title prop to ShareForm', () => {
+      const wrapper: ShallowWrapper<
+        Props & InjectedIntlProps
+      > = shallowWithIntl<Props>(
+        <ShareDialogWithTrigger
+          copyLink="copyLink"
+          loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
+          shareContentType="page"
+        />,
+      );
+      wrapper.setState({ isDialogOpen: true });
+
+      const ShareFormProps = shallow(wrapper
+        .find(InlineDialog)
+        .prop('content') as any)
+        .find(ShareForm)
+        .props();
+      expect(ShareFormProps.title).toEqual('Share page');
+    });
+
+    it('should use the default message if shareContentType prop is not set', () => {
+      const wrapper: ShallowWrapper<
+        Props & InjectedIntlProps
+      > = shallowWithIntl<Props>(
+        <ShareDialogWithTrigger
+          copyLink="copyLink"
+          loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
+        />,
+      );
+      wrapper.setState({ isDialogOpen: true });
+
+      const ShareFormProps = shallow(wrapper
+        .find(InlineDialog)
+        .prop('content') as any)
+        .find(ShareForm)
+        .props();
+      expect(ShareFormProps.title).toEqual('Share');
+    });
+  });
+
   describe('handleOpenDialog', () => {
     it('should set the isDialogOpen state to true', () => {
       expect((wrapper.state() as State).isDialogOpen).toEqual(false);

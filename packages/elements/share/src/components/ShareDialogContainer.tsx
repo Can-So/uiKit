@@ -30,6 +30,7 @@ export type Props = {
   shareAri: string;
   shareLink: string;
   shareTitle: string;
+  shareContentType?: React.ReactNode;
   shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
 };
@@ -184,6 +185,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       formatCopyLink,
       loadUserOptions,
       shareLink,
+      shareContentType,
       shouldShowCommentField,
       shouldCloseOnEscapePress,
     } = this.props;
@@ -196,6 +198,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
         loadUserOptions={loadUserOptions}
         onLinkCopy={this.handleCopyLink}
         onShareSubmit={this.handleSubmitShare}
+        shareContentType={shareContentType}
         shouldShowCommentField={shouldShowCommentField}
         shouldCloseOnEscapePress={shouldCloseOnEscapePress}
       />
