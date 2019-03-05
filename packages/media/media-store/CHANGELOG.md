@@ -1,5 +1,13 @@
 # @atlaskit/media-store
 
+## 9.2.0
+- [patch] [6bd4c428e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bd4c428e2):
+
+  - load image preview as soon representation is present instead of waiting for file status to be processed
+- [minor] [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+
+  - added representations to file metadata
+
 ## 9.1.7
 - Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
 - Updated dependencies [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):

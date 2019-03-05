@@ -298,7 +298,7 @@ export default function createSelect(WrappedComponent: ComponentType<*>) {
         isMulti,
         ...props
       } = this.props; // eslint-disable-line
-      const isCompact = !isMulti && spacing === 'compact';
+      const isCompact = spacing === 'compact';
 
       // props must be spread first to stop `components` being overridden
       return (

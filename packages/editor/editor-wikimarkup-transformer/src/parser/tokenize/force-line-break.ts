@@ -28,7 +28,7 @@ export const forceLineBreak: TokenParser = ({ input, position, schema }) => {
   return fallback(input, position);
 };
 
-function fallback(input, position): Token {
+function fallback(input: string, position: number): Token {
   return {
     type: 'text',
     text: input.substr(position, 2),

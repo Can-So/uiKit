@@ -62,7 +62,7 @@ export class MarkdownSerializerState extends PMMarkdownSerializerState {
 
     const progress = (node: PMNode | null, _?: any, index?: number) => {
       let marks = node
-        ? node.marks.filter(mark => this.marks[mark.type.name])
+        ? node.marks.filter(mark => this.marks[mark.type.name as any])
         : [];
 
       let leading = trailing;
@@ -73,8 +73,8 @@ export class MarkdownSerializerState extends PMMarkdownSerializerState {
         node &&
         node.isText &&
         marks.some(mark => {
-          let info = this.marks[mark.type.name];
-          return info && info.expelEnclosingWhitespace;
+          let info = this.marks[mark.type.name as any];
+          return info && (info as any).expelEnclosingWhitespace;
         })
       ) {
         let [, lead, inner, trail] = /^(\s*)(.*?)(\s*)$/m.exec(node.text!)!;
@@ -100,12 +100,12 @@ export class MarkdownSerializerState extends PMMarkdownSerializerState {
       // active.
       outer: for (let i = 0; i < len; i++) {
         const mark: Mark = marks[i];
-        if (!this.marks[mark.type.name].mixable) {
+        if (!(this.marks[mark.type.name as any] as any).mixable) {
           break;
         }
         for (let j = 0; j < active.length; j++) {
           const other = active[j];
-          if (!this.marks[other.type.name].mixable) {
+          if (!(this.marks[other.type.name as any] as any).mixable) {
             break;
           }
           if (mark.eq(other)) {

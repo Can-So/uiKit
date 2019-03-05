@@ -709,9 +709,6 @@ export class MediaPluginState {
   }
 
   private handleMediaState = async (state: MediaState) => {
-    const isMediaSingle =
-      isImage(state.fileMimeType) && !!this.view.state.schema.nodes.mediaSingle;
-
     switch (state.status) {
       case 'error':
         this.removeNodeById(state);
@@ -722,7 +719,10 @@ export class MediaPluginState {
         }
         break;
 
-      case 'preview':
+      case 'mobile-upload-end':
+        const isMediaSingle =
+          isImage(state.fileMimeType) &&
+          !!this.view.state.schema.nodes.mediaSingle;
         let attrs: { id?: string; collection?: string } = {
           id: state.publicId || state.id,
         };
@@ -736,6 +736,7 @@ export class MediaPluginState {
         break;
 
       case 'ready':
+        delete this.mediaGroupNodes[state.id];
         this.stateManager.off(state.id, this.handleMediaState);
         break;
     }

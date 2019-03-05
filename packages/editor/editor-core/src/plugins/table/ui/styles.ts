@@ -52,6 +52,8 @@ export const tablePadding = 8;
 export const contextualMenuTriggerSize = 16;
 export const contextualMenuDropdownWidth = 180;
 export const layoutButtonSize = 32;
+export const tableInsertColumnButtonLeftOffset = 22;
+export const tableInsertColumnButtonTopOffset = 22;
 
 const isIE11 = browser.ie_version === 11;
 
@@ -140,7 +142,8 @@ const HeaderButtonDanger = () => `
 const InsertButton = () => `
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER} {
     position: absolute;
-    z-index: ${akEditorUnitZIndex};
+    z-index: ${akEditorUnitZIndex + 10};
+    bottom: 1px;
   }
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER},
   .${ClassName.CONTROLS_INSERT_BUTTON} {
@@ -290,7 +293,7 @@ export const tableStyles = css`
         }
       }
       .${ClassName.CONTROLS_INSERT_COLUMN} {
-        top: -${tableInsertColumnButtonSize - 2}px;
+        top: -${tableInsertColumnButtonTopOffset}px;
         right: -${tableInsertColumnButtonSize / 2}px;
       }
       .${ClassName.CONTROLS_INSERT_ROW} {
@@ -314,7 +317,7 @@ export const tableStyles = css`
       ${InsertButtonHover()}
       ${InsertLine(`
         width: 2px;
-        left: 8px;
+        left: 9px;
         top: ${tableInsertColumnButtonSize - 2}px;
       `)}
     }
@@ -405,7 +408,7 @@ export const tableStyles = css`
       .${ClassName.CONTROLS_INSERT_BUTTON_WRAP} {
         position: absolute;
         bottom: -${tableInsertColumnButtonSize / 2}px;
-        left: -${tableInsertColumnButtonSize - 2}px;
+        left: -${tableInsertColumnButtonLeftOffset}px;
         height: ${tableInsertColumnButtonSize}px;
         width: ${tableInsertColumnButtonSize}px;
         z-index: ${akEditorSmallZIndex};

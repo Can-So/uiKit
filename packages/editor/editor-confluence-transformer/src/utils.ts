@@ -1,4 +1,10 @@
-import { Fragment, Mark, Node as PMNode, Schema } from 'prosemirror-model';
+import {
+  Fragment,
+  Mark,
+  Node as PMNode,
+  Schema,
+  MarkType,
+} from 'prosemirror-model';
 
 import { normalizeHexColor } from '@atlaskit/editor-common';
 import { AC_XMLNS } from './encode-cxhtml';
@@ -63,7 +69,10 @@ export function addMarks(fragment: Fragment, marks: Mark[]): Fragment {
   return result;
 }
 
-export function getNodeMarkOfType(node: PMNode, markType): Mark | null {
+export function getNodeMarkOfType(
+  node: PMNode,
+  markType: MarkType,
+): Mark | null {
   if (!node.marks) {
     return null;
   }
@@ -86,8 +95,8 @@ export function findTraversalPath(roots: Node[]) {
   const inqueue = [...roots];
   const outqueue = [] as Node[];
 
-  let elem;
-  while ((elem = inqueue.shift())) {
+  let elem: Element | undefined;
+  while ((elem = inqueue.shift() as Element)) {
     outqueue.push(elem);
     let children;
     if (isNodeSupportedContent(elem) && (children = childrenOfNode(elem))) {
@@ -226,7 +235,7 @@ export function getMacroAttribute(node: Element, attribute: string): string {
 }
 
 export function getMacroParameters(node: Element): any {
-  const params = {};
+  const params: Record<string, string> = {};
 
   getMacroAttribute(node, 'parameters')
     .split('|')
@@ -318,8 +327,8 @@ export function getContent(
 export function parseMacro(node: Element): Macro {
   const macroName = getAcName(node) || 'Unnamed Macro';
   const macroId = node.getAttributeNS(AC_XMLNS, 'macro-id')!;
-  const properties = {};
-  const params = {};
+  const properties: Record<string, string | null> = {};
+  const params: Record<string, string | null> = {};
 
   for (let i = 0, len = node.childNodes.length; i < len; i++) {
     const child = node.childNodes[i] as Element;
@@ -344,8 +353,8 @@ export function parseMacro(node: Element): Macro {
   return { macroId, macroName, properties, params };
 }
 
-export const getExtensionMacroParams = (params: object) => {
-  const macroParams = {};
+export const getExtensionMacroParams = (params: Record<string, any>) => {
+  const macroParams: Record<string, { value: any }> = {};
   Object.keys(params).forEach(key => {
     /** Safe check for empty keys */
     if (key) {

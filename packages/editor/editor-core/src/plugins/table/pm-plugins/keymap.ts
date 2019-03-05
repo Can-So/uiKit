@@ -20,6 +20,23 @@ import {
 } from '../actions';
 import * as keymaps from '../../../keymaps';
 import { analyticsService } from '../../../analytics';
+import {
+  withAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+} from '../../analytics';
+
+const createTableWithAnalytics = () =>
+  withAnalytics({
+    action: ACTION.INSERTED,
+    actionSubject: ACTION_SUBJECT.DOCUMENT,
+    actionSubjectId: ACTION_SUBJECT_ID.TABLE,
+    attributes: { inputMethod: INPUT_METHOD.SHORTCUT },
+    eventType: EVENT_TYPE.TRACK,
+  })(createTable);
 
 export function keymapPlugin(): Plugin {
   const list = {};
@@ -34,7 +51,11 @@ export function keymapPlugin(): Plugin {
     goToNextCell(-1),
     list,
   );
-  keymaps.bindKeymapWithCommand(keymaps.toggleTable.common!, createTable, list);
+  keymaps.bindKeymapWithCommand(
+    keymaps.toggleTable.common!,
+    createTableWithAnalytics(),
+    list,
+  );
   keymaps.bindKeymapWithCommand(
     keymaps.backspace.common!,
     (state, dispatch) => {

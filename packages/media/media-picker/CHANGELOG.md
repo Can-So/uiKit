@@ -1,5 +1,17 @@
 # @atlaskit/media-picker
 
+## 35.0.0
+- [patch] [6bd4c428e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bd4c428e2):
+
+  - load image preview as soon representation is present instead of waiting for file status to be processed
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/media-card@55.0.0
+  - @atlaskit/media-editor@29.0.0
+  - @atlaskit/media-viewer@37.0.0
+  - @atlaskit/media-test-helpers@20.1.6
+  - @atlaskit/media-core@27.2.0
+  - @atlaskit/media-store@9.2.0
+
 ## 34.1.0
 - [minor] [f1b46bcb42](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1b46bcb42):
 

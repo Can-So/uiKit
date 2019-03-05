@@ -23,7 +23,7 @@ module.exports = {
     statements: 96,
     branches: 92,
     functions: 91,
-    lines: 97,
+    lines: 95,
   },
   'packages/media/media-card/src': {
     statements: 92,
@@ -45,15 +45,15 @@ module.exports = {
   },
   'packages/media/media-store/src': {
     statements: 91,
-    branches: 80,
+    branches: 79,
     functions: 89,
     lines: 91,
   },
   'packages/media/media-ui/src': {
-    statements: 89,
-    branches: 79,
-    functions: 82,
-    lines: 88,
+    statements: 87,
+    branches: 76,
+    functions: 80,
+    lines: 86,
   },
   'packages/media/media-viewer/src': {
     statements: 91,

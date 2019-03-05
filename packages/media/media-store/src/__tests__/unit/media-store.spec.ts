@@ -39,6 +39,7 @@ describe('MediaStore', () => {
       processingStatus: 'pending',
       size: 231392,
       artifacts: {},
+      representations: {},
     };
     let authProvider: jest.Mock<AuthProvider>;
     let mediaStore: MediaStore;
@@ -652,6 +653,7 @@ describe('MediaStore', () => {
                   name: 'file-1',
                   processingStatus: 'succeeded',
                   size: 1,
+                  representations: {},
                 },
               },
             ],
@@ -775,10 +777,7 @@ describe('MediaStore', () => {
 
       it('should throw if artifact cant be found', async () => {
         const artifacts = {
-          'audio.mp3': {
-            processingStatus: 'pending',
-            url: '/sd-video',
-          },
+          'audio.mp3': {},
         } as MediaFileArtifacts;
 
         await expect(

@@ -112,14 +112,6 @@ const wideTableResized = {
                   type: 'paragraph',
                   content: [
                     {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':confluence:',
-                        id: 'e09fe869-53a2-4e89-be70-3a1e4c48dc63',
-                        text: ':confluence:',
-                      },
-                    },
-                    {
                       type: 'text',
                       text: ' Confluence',
                     },
@@ -136,14 +128,6 @@ const wideTableResized = {
                 {
                   type: 'paragraph',
                   content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':check_mark:',
-                        id: 'atlassian-check_mark',
-                        text: ':check_mark:',
-                      },
-                    },
                     {
                       type: 'text',
                       text: ' ',
@@ -162,14 +146,6 @@ const wideTableResized = {
                   type: 'paragraph',
                   content: [
                     {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':check_mark:',
-                        id: 'atlassian-check_mark',
-                        text: ':check_mark:',
-                      },
-                    },
-                    {
                       type: 'text',
                       text: ' ',
                     },
@@ -186,14 +162,6 @@ const wideTableResized = {
                 {
                   type: 'paragraph',
                   content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
                     {
                       type: 'text',
                       text: ' CXHTML',
@@ -293,14 +261,6 @@ const wideTableResized = {
                   type: 'paragraph',
                   content: [
                     {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':jira:',
-                        id: 'b59bb68f-8d88-4f87-820b-d8b946390b72',
-                        text: ':jira:',
-                      },
-                    },
-                    {
                       type: 'text',
                       text: ' Jira',
                     },
@@ -316,16 +276,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':check_mark:',
-                        id: 'atlassian-check_mark',
-                        text: ':check_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
               ],
             },
@@ -337,16 +288,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':check_mark:',
-                        id: 'atlassian-check_mark',
-                        text: ':check_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
               ],
             },
@@ -359,14 +301,6 @@ const wideTableResized = {
                 {
                   type: 'paragraph',
                   content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
                     {
                       type: 'text',
                       text: ' Wiki',
@@ -532,14 +466,6 @@ const wideTableResized = {
                   type: 'paragraph',
                   content: [
                     {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':bitbucket:',
-                        id: 'e15e9a4c-7aef-4ec0-acb9-6cca350bcaf8',
-                        text: ':bitbucket:',
-                      },
-                    },
-                    {
                       type: 'text',
                       text: ' Bitbucket',
                     },
@@ -555,16 +481,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':check_mark:',
-                        id: 'atlassian-check_mark',
-                        text: ':check_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
               ],
             },
@@ -576,16 +493,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
                 {
                   type: 'paragraph',
@@ -617,14 +525,6 @@ const wideTableResized = {
                 {
                   type: 'paragraph',
                   content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
                     {
                       type: 'text',
                       text: ' MD',
@@ -738,14 +638,6 @@ const wideTableResized = {
                   type: 'paragraph',
                   content: [
                     {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':status-page:',
-                        id: '1d3c260c-01be-4e87-a63b-1132a84470aa',
-                        text: ':status-page:',
-                      },
-                    },
-                    {
                       type: 'text',
                       text: ' Statuspage',
                     },
@@ -761,16 +653,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':check_mark:',
-                        id: 'atlassian-check_mark',
-                        text: ':check_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
               ],
             },
@@ -782,16 +665,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
               ],
             },
@@ -804,14 +678,6 @@ const wideTableResized = {
                 {
                   type: 'paragraph',
                   content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
                     {
                       type: 'text',
                       text: ' MD',
@@ -878,14 +744,6 @@ const wideTableResized = {
                   type: 'paragraph',
                   content: [
                     {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':trello:',
-                        id: 'b34747f3-67a0-47c6-8675-aef8fc9ee687',
-                        text: ':trello:',
-                      },
-                    },
-                    {
                       type: 'text',
                       text: ' Trello',
                     },
@@ -901,16 +759,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
                 {
                   type: 'paragraph',
@@ -940,16 +789,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
               ],
             },
@@ -962,14 +802,6 @@ const wideTableResized = {
                 {
                   type: 'paragraph',
                   content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
                     {
                       type: 'text',
                       text: ' MD',
@@ -1035,16 +867,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
                 {
                   type: 'paragraph',
@@ -1070,16 +893,7 @@ const wideTableResized = {
               content: [
                 {
                   type: 'paragraph',
-                  content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
-                  ],
+                  content: [],
                 },
               ],
             },
@@ -1092,14 +906,6 @@ const wideTableResized = {
                 {
                   type: 'paragraph',
                   content: [
-                    {
-                      type: 'emoji',
-                      attrs: {
-                        shortName: ':cross_mark:',
-                        id: 'atlassian-cross_mark',
-                        text: ':cross_mark:',
-                      },
-                    },
                     {
                       type: 'text',
                       text: ' MD?',

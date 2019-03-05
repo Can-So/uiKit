@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { EditorView } from 'prosemirror-view';
 import { Editor } from '@atlaskit/editor-core';
 import { taskDecision } from '@atlaskit/util-data-test';
 import { JSONTransformer } from '../src';
@@ -31,7 +32,7 @@ export default class Example extends React.PureComponent<
   state = { output: '' };
   transformer = new JSONTransformer();
 
-  handleChangeInTheEditor = editorView => {
+  handleChangeInTheEditor = (editorView: EditorView) => {
     const output = JSON.stringify(
       this.transformer.encode(editorView.state.doc),
       null,

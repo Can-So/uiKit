@@ -1,3 +1,4 @@
+import { ButtonAppearances } from '@atlaskit/button';
 import { LoadOptions } from '@atlaskit/user-picker';
 import memoizeOne from 'memoize-one';
 import * as React from 'react';
@@ -20,7 +21,6 @@ import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 import { optionDataToUsers } from './utils';
 
 export type Props = {
-  buttonStyle?: ShareButtonStyle;
   client?: Client;
   cloudId: string;
   formatCopyLink: (origin: OriginTracing, link: string) => string;
@@ -32,6 +32,8 @@ export type Props = {
   shareTitle: string;
   shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
+  triggerButtonAppearance?: ButtonAppearances;
+  triggerButtonStyle?: ShareButtonStyle;
 };
 
 export type State = {
@@ -180,17 +182,17 @@ export class ShareDialogContainer extends React.Component<Props, State> {
 
   render() {
     const {
-      buttonStyle,
       formatCopyLink,
       loadUserOptions,
       shareLink,
       shouldShowCommentField,
       shouldCloseOnEscapePress,
+      triggerButtonAppearance,
+      triggerButtonStyle,
     } = this.props;
     const copyLink = formatCopyLink(this.state.copyLinkOrigin!, shareLink);
     return (
       <ShareDialogWithTrigger
-        buttonStyle={buttonStyle}
         capabilities={this.state.capabilities}
         copyLink={copyLink}
         loadUserOptions={loadUserOptions}
@@ -198,6 +200,8 @@ export class ShareDialogContainer extends React.Component<Props, State> {
         onShareSubmit={this.handleSubmitShare}
         shouldShowCommentField={shouldShowCommentField}
         shouldCloseOnEscapePress={shouldCloseOnEscapePress}
+        triggerButtonAppearance={triggerButtonAppearance}
+        triggerButtonStyle={triggerButtonStyle}
       />
     );
   }

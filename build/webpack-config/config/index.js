@@ -126,7 +126,7 @@ module.exports = function createWebpackConfig(
               options: {
                 babelrc: true,
                 rootMode: 'upward',
-                envName: 'production:cjs',
+                envName: 'production:esm',
                 cacheDirectory: path.resolve(baseCacheDir, 'babel'),
               },
             },

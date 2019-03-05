@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { ReactElement, PureComponent } from 'react';
 import { CardEvent, defaultImageCardDimensions } from '@atlaskit/media-card';
-import { FilmstripView } from '@atlaskit/media-filmstrip';
+import {
+  FilmstripView,
+  SizeEvent,
+  ScrollEvent,
+} from '@atlaskit/media-filmstrip';
 import { EventHandlers, CardSurroundings } from '@atlaskit/editor-common';
 import { Identifier } from '@atlaskit/media-core';
 import { MediaProps } from './media';
@@ -25,8 +29,8 @@ export default class MediaGroup extends PureComponent<
     offset: 0,
   };
 
-  private handleSize = ({ offset }) => this.setState({ offset });
-  private handleScroll = ({ animate, offset }) =>
+  private handleSize = ({ offset }: SizeEvent) => this.setState({ offset });
+  private handleScroll = ({ animate, offset }: ScrollEvent) =>
     this.setState({ animate, offset });
 
   render() {

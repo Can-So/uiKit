@@ -1,15 +1,16 @@
 // tslint:disable:no-console
 
 import * as React from 'react';
-
+import { mention } from '@atlaskit/util-data-test';
 import { Editor, EditorContext, CollapsedEditor } from '@atlaskit/editor-core';
-import ToolsDrawer from '../example-helpers/ToolsDrawer';
+import ToolsDrawer, { RenderEditorProps } from '../example-helpers/ToolsDrawer';
 
 const SAVE_ACTION = () => console.log('Save');
 const CANCEL_ACTION = () => console.log('Cancel');
 const EXPAND_ACTION = () => console.log('Expand');
 
-const analyticsHandler = (actionName, props) => console.log(actionName, props);
+const analyticsHandler = (actionName: string, props: any) =>
+  console.log(actionName, props);
 
 export type Props = {};
 export type State = {
@@ -42,11 +43,9 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
           <ToolsDrawer
             renderEditor={({
               mentionProvider,
-              emojiProvider,
-              imageUploadProvider,
               onChange,
               disabled,
-            }) => (
+            }: RenderEditorProps) => (
               <div style={{ padding: '20px' }}>
                 <CollapsedEditor
                   placeholder="What do you want to say?"
@@ -63,7 +62,9 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
                     allowLists={true}
                     allowRule={true}
                     disabled={disabled}
-                    mentionProvider={mentionProvider}
+                    mentionProvider={Promise.resolve(
+                      mention.storyData.resourceProvider,
+                    )}
                     onChange={onChange}
                     onSave={SAVE_ACTION}
                     onCancel={CANCEL_ACTION}

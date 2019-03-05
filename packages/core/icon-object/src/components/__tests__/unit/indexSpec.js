@@ -88,7 +88,7 @@ describe(name, () => {
       // * renaming an icon is a breaking change
       //
       // If we were to auto-generate this list, then renaming, adding or removing would NOT
-      // break any tests and thus not hint the developer at what kind of change he/she is making
+      // break any tests and thus not hint the developer at what kind of change they are making
     });
 
     describe('bundle', () => {

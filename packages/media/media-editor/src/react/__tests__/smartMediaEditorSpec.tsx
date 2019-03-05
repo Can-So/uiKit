@@ -111,6 +111,7 @@ describe('Smart Media Editor', () => {
       name: 'some-name',
       size: 42,
       artifacts: {},
+      representations: {},
     });
     await fileIdPromise;
     await imageUrlPromise;
@@ -229,6 +230,7 @@ describe('Smart Media Editor', () => {
         mimeType: 'image/gif',
         name: 'some-name',
         size: 42,
+        representations: {},
       });
       await new Promise(resolve => setTimeout(resolve, 0));
       resultingFileStateObservable.next({
@@ -238,6 +240,7 @@ describe('Smart Media Editor', () => {
         mimeType: 'image/gif',
         name: 'some-name',
         size: 42,
+        representations: {},
       });
       expect(onFinish).toHaveBeenCalledTimes(1);
     });
@@ -252,6 +255,7 @@ describe('Smart Media Editor', () => {
         name: 'some-name',
         size: 42,
         artifacts: [],
+        representations: {},
       });
       component.update();
       expect(component.find(EditorView)).toHaveLength(0);
@@ -282,6 +286,7 @@ describe('Smart Media Editor', () => {
         name: 'some-name',
         size: 42,
         artifacts: [],
+        representations: {},
       });
       component.update();
       const errorViewProps = component.find<ErrorViewProps>(ErrorView).props();

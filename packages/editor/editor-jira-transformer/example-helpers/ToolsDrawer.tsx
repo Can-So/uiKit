@@ -12,7 +12,12 @@ const rejectedPromise = Promise.reject(
 );
 const pendingPromise = new Promise<any>(() => {});
 
-const providers = {
+interface Providers {
+  mentionProvider: any;
+  activityProvider: any;
+}
+
+const providers: Providers = {
   mentionProvider: {
     resolved: Promise.resolve(mention.storyData.resourceProvider),
     'resolved 2': Promise.resolve(
@@ -36,6 +41,13 @@ const providers = {
 };
 rejectedPromise.catch(() => {});
 
+export interface RenderEditorProps {
+  disabled: boolean;
+  onChange: (editorView: any) => void;
+  mentionProvider: string;
+  activityProvider: string;
+}
+
 export interface State {
   reloadEditor: boolean;
   editorEnabled: boolean;
@@ -45,7 +57,7 @@ export interface State {
 }
 
 export default class ToolsDrawer extends React.Component<any, State> {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -57,7 +69,7 @@ export default class ToolsDrawer extends React.Component<any, State> {
     };
   }
 
-  private onChange = editorView => {
+  private onChange = (editorView: any) => {
     const { schema, doc } = editorView.state;
     const document = new JIRATransformer(schema).encode(doc);
     this.setState({
@@ -83,7 +95,7 @@ export default class ToolsDrawer extends React.Component<any, State> {
               mentionProvider: providers.mentionProvider[mentionProvider],
               activityProvider: providers.activityProvider[activityProvider],
               onChange: this.onChange,
-            })}
+            } as RenderEditorProps)}
         <legend>Output:</legend>
         <pre>{document}</pre>
       </Content>
