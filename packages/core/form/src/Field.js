@@ -99,7 +99,6 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   getFieldId = memoizeOne(name => `${name}-${uuid()}`);
 
-  keysDown = new Set();
   fieldRef = React.createRef();
   inputRef = React.createRef();
 
@@ -184,8 +183,6 @@ class FieldInner extends React.Component<InnerProps, State> {
     this.unregisterField = this.register();
     if (this.fieldRef.current) {
       this.fieldRef.current.addEventListener('keydown', this.handleKeyDown);
-      // $FlowFixMe - already checking this.fieldRef.current is not null
-      this.fieldRef.current.addEventListener('keyup', this.handleKeyUp);
     }
   }
 
@@ -193,28 +190,12 @@ class FieldInner extends React.Component<InnerProps, State> {
     this.unregisterField();
     if (this.fieldRef.current) {
       this.fieldRef.current.removeEventListener('keydown', this.handleKeyDown);
-      // $FlowFixMe - already checking this.fieldRef.current is not null
-      this.fieldRef.current.removeEventListener('keyup', this.handleKeyUp);
     }
   }
 
   handleKeyDown = (event: SyntheticKeyboardEvent<any>) => {
-    if (event.key === 'Enter' || event.key === 'Meta') {
-      this.keysDown.add(event.key);
-      const submitKeys = new Set(['Enter', 'Meta']);
-      if (
-        this.keysDown.size === submitKeys.size &&
-        [...this.keysDown].every(value => submitKeys.has(value)) &&
-        this.inputRef.current
-      ) {
-        this.inputRef.current.click();
-      }
-    }
-  };
-
-  handleKeyUp = (event: SyntheticKeyboardEvent<any>) => {
-    if (event.key === 'Enter' || event.key === 'Meta') {
-      this.keysDown.delete(event.key);
+    if (event.key === 'Enter' && event.metaKey && this.inputRef.current) {
+      this.inputRef.current.click();
     }
   };
 
