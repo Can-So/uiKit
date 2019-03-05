@@ -257,7 +257,6 @@ describe('extension', () => {
             mediaSingle({ layout: 'center' })(
               media({
                 id: temporaryFileId,
-                __key: temporaryFileId,
                 type: 'file',
                 collection: testCollectionName,
                 __fileMimeType: 'image/png',

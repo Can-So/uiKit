@@ -21,19 +21,21 @@ describe('Snapshot Test: table insert/delete', () => {
     await clickFirstCell(page);
   });
 
+  afterEach(async () => {
+    await snapshot(page, tolerance);
+  });
+
   // adding tolerance since tool tips can show from time to time
   it(`should be able insert after first row`, async () => {
     await page.waitForSelector(tableSelectors.firstRowControl);
     await page.hover(tableSelectors.firstRowControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
-    await snapshot(page, tolerance);
   });
 
   it(`should be able insert after last row`, async () => {
     await page.waitForSelector(tableSelectors.firstRowControl);
     await page.hover(tableSelectors.lastRowControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
-    await snapshot(page, tolerance);
   });
 
   // TODO: measure how flaky this is
@@ -43,18 +45,15 @@ describe('Snapshot Test: table insert/delete', () => {
     await page.waitForSelector(tableSelectors.firstColumnControl);
     await page.hover(tableSelectors.firstColumnControl);
     await page.waitForSelector(tableSelectors.hoverdCell);
-    await snapshot(page, tolerance);
   });
 
   // TODO: move this to integration tests in future
   it(`should be able to insert row`, async () => {
     await insertRow(page, 1);
-    await snapshot(page, tolerance);
   });
 
   // TODO: move this to integration tests in future
   it(`should be able to insert column`, async () => {
     await insertColumn(page, 1);
-    await snapshot(page, tolerance);
   });
 });

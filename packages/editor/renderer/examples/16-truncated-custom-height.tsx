@@ -9,7 +9,7 @@ interface State {
 }
 
 export default class Example extends Component<{}, State> {
-  constructor(props) {
+  constructor(props: object) {
     super(props);
     this.state = {
       maxHeight: 200,

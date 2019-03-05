@@ -22,24 +22,25 @@ describe('z-indexes:', () => {
     await insertTable(page);
   });
 
+  afterEach(async () => {
+    await snapshot(page, 0.02);
+  });
+
   it('should always position table trash icon below dropdowns from main menu', async () => {
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.insertBlock);
     await page.waitForSelector(selectors.dropList);
-    await snapshot(page, 0.02);
   });
 
   it('should always position table trash icon below emoji picker', async () => {
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.emoji);
     await page.waitForSelector(selectors.emojiPicker);
-    await snapshot(page, 0.02);
   });
 
   it('should always position table trash icon below mention picker', async () => {
     await page.waitForSelector(tableSelectors.removeTable);
     await clickToolbarMenu(page, ToolbarMenuItem.mention);
     await page.waitForSelector(selectors.mentionQuery);
-    await snapshot(page, 0.02);
   });
 });

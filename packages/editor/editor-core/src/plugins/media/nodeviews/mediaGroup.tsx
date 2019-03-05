@@ -91,9 +91,7 @@ export default class MediaGroup extends React.Component<
     const { node } = props;
     this.mediaNodes = [] as Array<PMNode>;
     node.forEach((item, childOffset) => {
-      this.mediaPluginState.mediaGroupNodes[
-        item.attrs.__key || item.attrs.id
-      ] = {
+      this.mediaPluginState.mediaGroupNodes[item.attrs.id] = {
         node: item,
         getPos: () => props.getPos() + childOffset + 1,
       };
@@ -104,11 +102,8 @@ export default class MediaGroup extends React.Component<
   renderChildNodes = () => {
     const { viewContext } = this.state;
     const items = this.mediaNodes.map((item, idx) => {
-      const getState = this.mediaPluginState.stateManager.getState(
-        item.attrs.__key || item.attrs.id,
-      );
       const identifier: FileIdentifier = {
-        id: getState ? getState.fileId : item.attrs.id,
+        id: item.attrs.id,
         mediaItemType: 'file',
         collectionName: item.attrs.collection,
       };

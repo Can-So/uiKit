@@ -1,5 +1,10 @@
 # @atlaskit/emoji
 
+## 56.1.0
+- [minor] [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+
+  - added/cleaned up ssr tests
+
 ## 56.0.0
 - Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
   - @atlaskit/editor-test-helpers@7.0.2

@@ -10,7 +10,14 @@ import { emoji as emojiData } from '@atlaskit/util-data-test';
 
 const { testData } = emojiData;
 
-const toEmojiAttrs = emoji => {
+type EmojiAttrs = {
+  id: string;
+  shortName: string;
+  fallback?: string;
+  text?: string;
+};
+
+const toEmojiAttrs = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return {
     shortName,
@@ -19,7 +26,7 @@ const toEmojiAttrs = emoji => {
   };
 };
 
-const toEmojiId = emoji => {
+const toEmojiId = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return { shortName, id, fallback };
 };
@@ -27,11 +34,11 @@ const toEmojiId = emoji => {
 export const grinEmojiAttrs = toEmojiAttrs(testData.grinEmoji);
 export const grinEmojiId = toEmojiId(testData.grinEmoji);
 
-const createMockFragment = fragment => {
+const createMockFragment = (fragment: any) => {
   const mock = sinon.createStubInstance(Fragment);
   if (fragment.content) {
     mock.content = createMockFragment(fragment.content);
-    mock.forEach = fn => mock.content.forEach(fn);
+    mock.forEach = (fn: Function) => mock.content.forEach(fn);
   }
   Object.keys(fragment).forEach(key => (mock[key] = fragment[key]));
   return mock;

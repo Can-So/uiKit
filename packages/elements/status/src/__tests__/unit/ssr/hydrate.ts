@@ -4,14 +4,14 @@ describe('SSR', () => {
   const ssrHelper = new SSRHelper();
 
   beforeAll(() => {
-    ssrHelper.beforeAll();
+    ssrHelper.beforeHydration();
   });
 
   afterAll(() => {
-    ssrHelper.afterAll();
+    ssrHelper.afterHydration();
   });
 
   test('should ssr then hydrate tag correctly', async () => {
-    await ssrHelper.hidrateSSRAndAssert('date');
+    await ssrHelper.hydrateSSRAndAssert('status');
   });
 });

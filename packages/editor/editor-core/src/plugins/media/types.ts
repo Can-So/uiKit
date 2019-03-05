@@ -6,7 +6,8 @@ export type MediaStateStatus =
   | 'ready'
   | 'cancelled'
   | 'preview'
-  | 'error';
+  | 'error'
+  | 'mobile-upload-end';
 
 export interface MediaState {
   id: string;
@@ -20,12 +21,12 @@ export interface MediaState {
     height: number | undefined;
   };
   scaleFactor?: number;
-  fileId: Promise<string>;
-  publicId?: string;
   error?: {
     name: string;
     description: string;
   };
+  /** still require to support Mobile */
+  publicId?: string;
 }
 
 export interface MediaStateManager {

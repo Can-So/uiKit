@@ -22,7 +22,6 @@ export const temporaryFileId = `temporary:${randomId()}`;
 
 export const temporaryMediaAttrs: MediaAttributes = {
   id: temporaryFileId,
-  __key: temporaryFileId,
   type: 'file',
   collection: testCollectionName,
 };
@@ -77,15 +76,10 @@ export const insertMediaGroupItem = (
   id: string,
   fileId = 'id',
 ) => {
-  insertMediaGroupNode(
-    view,
-    [{ id, fileId: Promise.resolve(fileId) }],
-    testCollectionName,
-  );
+  insertMediaGroupNode(view, [{ id }], testCollectionName);
 
   return media({
     id,
-    __key: id,
     type: 'file',
     collection: testCollectionName,
   })();
