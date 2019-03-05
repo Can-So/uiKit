@@ -1,0 +1,1 @@
+-  ED-6377 Add Analytics GAS V3 for numbered/bulleted list format
