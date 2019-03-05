@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 102.1.2
+- [patch] [f86078d629](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f86078d629):
+
+  - ED-6327: highlight smart cards when selecting backwards in document
+
 ## 102.1.1
 - Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
   - @atlaskit/renderer@41.0.1
