@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ResultData } from '@atlaskit/quick-search';
 import AdvancedSearchResult from './AdvancedSearchResult';
 import { ADVANCED_PEOPLE_SEARCH_RESULT_ID } from './SearchResultsUtil';
 import { AnalyticsType } from '../model/Result';
@@ -9,6 +10,7 @@ export interface Props {
   icon?: JSX.Element;
   analyticsData?: object;
   isCompact?: boolean;
+  onClick?: (resultData: ResultData) => void;
 }
 
 export default class SearchPeopleItem extends React.Component<Props> {
@@ -26,6 +28,7 @@ export default class SearchPeopleItem extends React.Component<Props> {
         type={AnalyticsType.AdvancedSearchPeople}
         target="_blank"
         isCompact={isCompact}
+        onClick={this.props.onClick}
       />
     );
   }
