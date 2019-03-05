@@ -64,7 +64,7 @@ class GenericSwitcherExample extends Component {
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
           <AtlassianSwitcher
-            product="trusted-admin"
+            product="site-admin"
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />

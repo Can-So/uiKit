@@ -26,7 +26,7 @@ class GenericSwitcherExample extends Component {
             maintenanceEndDate: '2017-04-24',
             maintenanceStartDate: '2017-04-17',
             products: {
-              'confluence.ondemand': {
+              'jira-software.ondemand': {
                 billingPeriod: 'ANNUAL',
                 state: 'ACTIVE',
               },

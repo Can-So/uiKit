@@ -41,7 +41,12 @@ const AtlassianSwitcher = ({
   }
   return (
     <ErrorBoundary>
-      <Switcher cloudId={cloudId} triggerXFlow={triggerXFlow} {...props} />
+      <Switcher
+        cloudId={cloudId}
+        triggerXFlow={triggerXFlow}
+        product={product}
+        {...props}
+      />
     </ErrorBoundary>
   );
 };
