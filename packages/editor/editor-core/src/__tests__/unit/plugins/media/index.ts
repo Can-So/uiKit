@@ -91,7 +91,9 @@ describe('Media plugin', () => {
     dropzoneContainer: HTMLElement = document.body,
     extraPlugins: any[] = [],
   ) => {
-    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    createAnalyticsEvent = jest.fn().mockReturnValue({
+      fire() {},
+    });
     return createEditor({
       doc,
       editorPlugins: [
@@ -1479,6 +1481,61 @@ describe('Media plugin', () => {
       });
     });
 
+    describe('when media editor sends back save action', () => {
+      let pluginState: MediaPluginState;
+      let editorView: EditorView;
+      let closeMediaEditorSpy: any;
+
+      beforeEach(async () => {
+        const _editor = editor(
+          doc(
+            mediaSingle({ layout: 'center' })(
+              media({
+                id: 'media',
+                type: 'file',
+                collection: testCollectionName,
+              })(),
+            ),
+          ),
+        );
+        editorView = _editor.editorView;
+        pluginState = _editor.pluginState;
+
+        // wait for media provider so we set the upload context
+        await pluginState.setMediaProvider(mediaProvider);
+
+        setNodeSelection(editorView, 0);
+        closeMediaEditorSpy = jest.spyOn(pluginState, 'closeMediaEditor');
+        pluginState.openMediaEditor();
+        const toolbar = mountWithIntl<SmartMediaEditor['props'], {}>(
+          renderSmartMediaEditor(pluginState)!,
+        );
+        const { onUploadStart } = toolbar.props();
+        onUploadStart(
+          { id: 'some-new-id', mediaItemType: 'file' },
+          { width: 200, height: 100 },
+        );
+      });
+      it('should close media editor', () => {
+        expect(closeMediaEditorSpy).toHaveBeenCalled();
+      });
+      it('should replace media in the content', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            mediaSingle({ layout: 'center' })(
+              media({
+                id: 'some-new-id',
+                collection: testCollectionName,
+                type: 'file',
+                height: 100,
+                width: 200,
+              })(),
+            ),
+          ),
+        );
+      });
+    });
+
     it('replaces the editing media node with a new one', async () => {
       const { pluginState, editorView } = editor(
         doc(
@@ -1495,11 +1552,17 @@ describe('Media plugin', () => {
       await pluginState.setMediaProvider(mediaProvider);
       setNodeSelection(editorView, 0);
       pluginState.openMediaEditor();
-      pluginState.replaceEditingMedia({
-        id: 'media2',
-        collectionName: 'collection2',
-        mediaItemType: 'file',
-      });
+      pluginState.replaceEditingMedia(
+        {
+          id: 'media2',
+          collectionName: 'collection2',
+          mediaItemType: 'file',
+        },
+        {
+          height: 100,
+          width: 200,
+        },
+      );
 
       expect(editorView.state.doc).toEqualDocument(
         doc(
@@ -1508,6 +1571,8 @@ describe('Media plugin', () => {
               id: 'media2',
               type: 'file',
               collection: 'collection2',
+              height: 100,
+              width: 200,
             })(),
           ),
         ),
@@ -1537,11 +1602,17 @@ describe('Media plugin', () => {
       insertText(editorView, 'add', refs['<>']);
 
       // should replace the old one
-      pluginState.replaceEditingMedia({
-        id: 'media2',
-        collectionName: 'collection2',
-        mediaItemType: 'file',
-      });
+      pluginState.replaceEditingMedia(
+        {
+          id: 'media2',
+          collectionName: 'collection2',
+          mediaItemType: 'file',
+        },
+        {
+          height: 100,
+          width: 200,
+        },
+      );
 
       expect(editorView.state.doc).toEqualDocument(
         doc(
@@ -1550,6 +1621,8 @@ describe('Media plugin', () => {
               id: 'media2',
               type: 'file',
               collection: 'collection2',
+              height: 100,
+              width: 200,
             })(),
           ),
           p('hello {<>}addworld'),
