@@ -5,9 +5,10 @@ import {
   animationFrame,
 } from './_utils';
 import { wideTableResized } from './__fixtures__/document-tables';
+import { Page } from 'puppeteer';
 
 describe('Snapshot Test: Table scaling', () => {
-  let page;
+  let page: Page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;

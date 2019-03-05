@@ -8,6 +8,7 @@ import {
 import * as adf from '../../../../examples/helper/media-resize-layout.adf.json';
 import { selectors as mediaSelectors } from '../../__helpers/page-objects/_media';
 import { selectors as rendererSelectors } from '../../__helpers/page-objects/_renderer';
+import { Page } from 'puppeteer';
 
 const devices = [
   Device.LaptopHiDPI,
@@ -19,7 +20,7 @@ const devices = [
 
 describe('Snapshot Test: Media', () => {
   describe('renderer', () => {
-    let page;
+    let page: Page;
 
     beforeAll(async () => {
       // @ts-ignore

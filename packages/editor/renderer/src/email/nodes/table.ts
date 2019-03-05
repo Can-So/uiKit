@@ -13,7 +13,7 @@ export default function table({ attrs, text }: NodeSerializerOpts) {
   let colgroup = '';
 
   if (attrs.columnWidths) {
-    const colTags = attrs.columnWidths.map(colwidth => {
+    const colTags = attrs.columnWidths.map((colwidth: string | number) => {
       const style = colwidth ? `width: ${colwidth}px` : undefined;
       return createTag('col', { style });
     });

@@ -54,8 +54,10 @@
     "@atlaskit/util-data-test": "^10.2.2",
     "@atlaskit/visual-regression": "^0.0.1",
     "@types/prosemirror-model": "^1.5.0",
+    "@types/puppeteer": "^1.12.1",
     "@types/react-loadable": "^5.4.1",
     "enzyme": "^3.7.0",
+    "puppeteer": "^1.10.0",
     "react": "^16.4.0",
     "react-live-clock": "^2.0.2",
     "sinon": "^2.2.0"

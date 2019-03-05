@@ -14,7 +14,7 @@ import Media from '../../../../react/nodes/media';
 import MediaGroup from '../../../../react/nodes/mediaGroup';
 
 describe('MediaGroup', () => {
-  let fixture;
+  let fixture: HTMLDivElement;
 
   const mediaProvider = storyMediaProviderFactory();
 
