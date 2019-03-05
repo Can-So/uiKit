@@ -932,7 +932,7 @@ describe('UserPicker', () => {
       const select = component.find(CreatableSelect);
       expect(select).toHaveLength(1);
       expect(getCreatableProps).toHaveBeenCalledTimes(1);
-      expect(getCreatableProps).toHaveBeenCalledWith(true);
+      expect(getCreatableProps).toHaveBeenCalledWith(true, undefined);
     });
   });
 });

@@ -183,7 +183,6 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     const copyLink = formatCopyLink(this.state.copyLinkOrigin!, shareLink);
     return (
       <ShareDialogWithTrigger
-        buttonStyle={buttonStyle}
         config={this.state.config}
         copyLink={copyLink}
         loadUserOptions={loadUserOptions}
