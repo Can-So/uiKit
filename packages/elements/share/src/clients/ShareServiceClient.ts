@@ -30,6 +30,7 @@ export type ShareResponse = {
 export type ConfigResponse = {
   mode: ConfigResponseMode;
   allowedDomains?: string[];
+  allowComment: boolean;
 };
 
 export type ConfigResponseMode =

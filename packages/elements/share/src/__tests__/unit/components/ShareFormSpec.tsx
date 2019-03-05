@@ -19,7 +19,10 @@ describe('ShareForm', () => {
     const mockLink = 'link';
     const loadOptions = jest.fn();
     const onShareClick = jest.fn();
-    const config: ConfigResponse = { mode: 'EXISTING_USERS_ONLY' };
+    const config: ConfigResponse = {
+      mode: 'EXISTING_USERS_ONLY',
+      allowComment: true,
+    };
     const component = shallow(
       <ShareForm
         copyLink={mockLink}

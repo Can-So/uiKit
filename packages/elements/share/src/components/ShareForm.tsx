@@ -87,7 +87,9 @@ class InternalForm extends React.PureComponent<InternalFormProps> {
             capabilitiesInfoMessage={capabilitiesInfoMessage}
             config={config}
           />
-          <CommentField defaultValue={defaultValue && defaultValue.comment} />
+          {config && config.allowComment && (
+            <CommentField defaultValue={defaultValue && defaultValue.comment} />
+          )}
         </FormSection>
         <FormFooter>
           <LeftAlignmentContainer>
