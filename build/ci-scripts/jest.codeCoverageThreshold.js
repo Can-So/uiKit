@@ -20,9 +20,9 @@ module.exports = {
     lines: 100,
   },
   'packages/media/media-core/src': {
-    statements: 96,
-    branches: 92,
-    functions: 91,
+    statements: 95,
+    branches: 85,
+    functions: 87,
     lines: 95,
   },
   'packages/media/media-card/src': {
