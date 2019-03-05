@@ -22,7 +22,7 @@ describe('Snapshot Test: Dynamic Text Sizing', () => {
         allowDynamicTextSizing: true,
         document,
       });
-      await snapshot(page);
+      await snapshot(page, 0.01);
     });
   });
 });

@@ -11,8 +11,8 @@ describe('Snapshot Test: Table scaling', () => {
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await goToRendererTestingExample(page);
     await page.setViewport({ width: 1485, height: 1175 });
+    await goToRendererTestingExample(page);
   });
 
   it(`should NOT render a right shadow`, async () => {

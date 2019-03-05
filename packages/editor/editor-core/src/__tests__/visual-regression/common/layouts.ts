@@ -11,22 +11,23 @@ describe('Layouts:', () => {
     page = global.page;
   });
 
+  afterEach(async () => {
+    await snapshot(page, 0.02);
+  });
+
   describe('2 columns', () => {
     it('should correctly render layout on MDPI', async () => {
       await initFullPageEditorWithAdf(page, col2, Device.LaptopMDPI);
-      await snapshot(page, 0.02);
     });
 
     it('should stack layout on smaller ipad', async () => {
       await initFullPageEditorWithAdf(page, col2, Device.iPad);
       await page.click(selectors.layoutDataSection);
-      await snapshot(page, 0.02);
     });
 
     it('should stack layout on smaller iPhone', async () => {
       await initFullPageEditorWithAdf(page, col2, Device.iPhonePlus);
       await page.click(selectors.layoutDataSection);
-      await snapshot(page, 0.02);
     });
   });
 
@@ -34,13 +35,11 @@ describe('Layouts:', () => {
     it('should correctly render layout', async () => {
       await initFullPageEditorWithAdf(page, col3, Device.LaptopMDPI);
       await page.click(selectors.layoutDataSection);
-      await snapshot(page, 0.02);
     });
 
     it('should stack layout on smaller screen sizes', async () => {
       await initFullPageEditorWithAdf(page, col3, Device.iPhonePlus);
       await page.click(selectors.layoutDataSection);
-      await snapshot(page, 0.02);
     });
   });
 });

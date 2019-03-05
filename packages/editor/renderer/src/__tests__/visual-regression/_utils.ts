@@ -84,7 +84,7 @@ export async function goToRendererTestingExample(page) {
     global.__BASEURL__,
   );
 
-  await page.goto(url);
+  await page.goto(url, { waitUntil: 'networkidle0' });
 }
 
 export async function animationFrame(page) {

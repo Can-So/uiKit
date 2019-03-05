@@ -9,7 +9,7 @@ const glob = require('glob');
 const pageSelector = '#examples';
 
 async function takeScreenShot(page /*:any*/, url /*:string*/) {
-  await page.goto(url);
+  await page.goto(url, { waitUntil: 'networkidle0' });
   await page.waitForSelector(pageSelector);
   return page.screenshot();
 }
