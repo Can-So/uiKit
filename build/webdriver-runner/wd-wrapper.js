@@ -61,6 +61,10 @@ export default class Page {
     return this.browser.url(url);
   }
 
+  hover(selector) {
+    return this.browser.moveToObject(selector).pause(500);
+  }
+
   title() {
     return this.browser.getTitle();
   }
