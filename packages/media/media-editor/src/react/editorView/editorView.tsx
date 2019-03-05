@@ -22,7 +22,7 @@ export interface EditorViewProps {
   readonly onSave: (image: string, dimensions: Dimensions) => void;
   readonly onCancel: () => void;
   readonly onError: (message: string) => void;
-  readonly onAnyChange?: () => void;
+  readonly onAnyEdit?: () => void;
 }
 
 export interface EditorViewState {
@@ -88,7 +88,7 @@ class EditorView extends Component<
       this.setState({ color, lineWidth });
     };
 
-    const { imageUrl } = this.props;
+    const { imageUrl, onAnyEdit } = this.props;
     const { dimensions, color, lineWidth, tool } = this.state;
 
     return (
@@ -98,7 +98,7 @@ class EditorView extends Component<
         backgroundColor={TRANSPARENT_COLOR}
         shapeParameters={{ color, lineWidth, addShadow: true }}
         tool={tool}
-        onCanvasClick={this.onAnyChange}
+        onAnyEdit={onAnyEdit}
         onLoad={this.onLoad}
         onError={onError}
         onShapeParametersChanged={onShapeParametersChanged}
@@ -127,13 +127,6 @@ class EditorView extends Component<
       />
     );
   }
-
-  private onAnyChange = () => {
-    const { onAnyChange } = this.props;
-    if (onAnyChange) {
-      onAnyChange();
-    }
-  };
 
   private onLoad = (_: string, loadParameters: LoadParameters): void => {
     this.loadParameters = loadParameters;

@@ -24,7 +24,7 @@ export interface SmartMediaEditorState {
   hasError: boolean;
   errorMessage?: any;
   imageUrl?: string;
-  hasBeenModified: boolean;
+  hasBeenEdited: boolean;
   closeIntent: boolean;
 }
 
@@ -35,7 +35,7 @@ export class SmartMediaEditor extends React.Component<
   fileName?: string;
   state: SmartMediaEditorState = {
     hasError: false,
-    hasBeenModified: false,
+    hasBeenEdited: false,
     closeIntent: false,
   };
   getFileSubscription?: Subscription;
@@ -183,33 +183,38 @@ export class SmartMediaEditor extends React.Component<
     onUploadStart(newFileIdentifier, dimensions);
   };
 
-  private hasBeenModified = () => {
-    this.setState({ hasBeenModified: true });
+  private onAnyEdit = () => {
+    const { hasBeenEdited } = this.state;
+    if (!hasBeenEdited) {
+      this.setState({ hasBeenEdited: true });
+    }
+  };
+
+  private closeConfirmationDialog = () => {
+    this.setState({ closeIntent: false });
+  };
+
+  private closeAnyway = () => {
+    const { onFinish } = this.props;
+    onFinish();
+    this.closeConfirmationDialog();
   };
 
   private renderDeleteConfirmation = () => {
     const {
-      onFinish,
       intl: { formatMessage },
     } = this.props;
     const { closeIntent } = this.state;
-    const closeDialog = () => {
-      this.setState({ closeIntent: false });
-    };
+
     if (closeIntent) {
       const actions = [
         {
           text: formatMessage(messages.annotate_confirmation_close_anyway),
-          onClick: () => {
-            onFinish();
-            closeDialog();
-          },
+          onClick: this.closeAnyway,
         },
         {
           text: formatMessage(messages.cancel),
-          onClick: () => {
-            closeDialog();
-          },
+          onClick: this.closeConfirmationDialog,
         },
       ];
       return (
@@ -219,7 +224,7 @@ export class SmartMediaEditor extends React.Component<
             appearance="danger"
             heading={formatMessage(messages.annotate_confirmation_heading)}
             actions={actions}
-            onClose={closeDialog}
+            onClose={this.closeConfirmationDialog}
           >
             {formatMessage(messages.annotate_confirmation_content)}
           </ModalDialog>
@@ -230,8 +235,8 @@ export class SmartMediaEditor extends React.Component<
   };
 
   onCancel = () => {
-    const { hasBeenModified } = this.state;
-    if (hasBeenModified) {
+    const { hasBeenEdited } = this.state;
+    if (hasBeenEdited) {
       this.setState({ closeIntent: true });
     } else {
       const { onFinish } = this.props;
@@ -261,7 +266,7 @@ export class SmartMediaEditor extends React.Component<
         onSave={this.onSave}
         onCancel={this.onCancel}
         onError={this.onError}
-        onAnyChange={this.hasBeenModified}
+        onAnyEdit={this.onAnyEdit}
       />
     );
   };

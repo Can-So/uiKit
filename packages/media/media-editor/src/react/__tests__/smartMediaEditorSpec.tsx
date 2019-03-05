@@ -296,8 +296,8 @@ describe('Smart Media Editor', () => {
     beforeEach(async () => {
       await forFileToBeProcessed();
       const editorView = component.find<EditorViewProps>(EditorView);
-      const { onAnyChange, onCancel } = editorView.props();
-      onAnyChange!();
+      const { onAnyEdit, onCancel } = editorView.props();
+      onAnyEdit!();
       onCancel();
       modalDialog = component.find(ModalDialog);
     });
