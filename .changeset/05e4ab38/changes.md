@@ -1,0 +1,1 @@
+- Popup select set focus to selected option, instead of the first option, when the menu opens
