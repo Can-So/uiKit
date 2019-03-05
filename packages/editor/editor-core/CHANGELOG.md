@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 102.0.1
+- [patch] [2787c79b6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2787c79b6a):
+
+  - ED-6296: Scale down table sizes when parent layout changes
+
 ## 102.0.0
 - Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
   - @atlaskit/editor-common@33.0.0

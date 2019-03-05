@@ -1,1 +1,0 @@
-- ED-6296: Scale down table sizes when parent layout changes
