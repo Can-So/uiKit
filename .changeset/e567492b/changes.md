@@ -1,1 +1,0 @@
-- Added possibility to add compact styling for multi select component
