@@ -288,37 +288,6 @@ describe('Renderer - React/Nodes/Table', () => {
     });
   });
 
-  describe('TinyMCE migrated table', () => {
-    it('should scale columnWidths if total size is less than layout', () => {
-      const columnWidths = [100, 100, 100];
-
-      const table = mount(
-        <Table
-          layout="default"
-          isNumberColumnEnabled={false}
-          columnWidths={columnWidths}
-          renderWidth={renderWidth}
-        >
-          <TableRow>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-          <TableRow>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-        </Table>,
-      );
-
-      expect(table.find('col')).toHaveLength(3);
-      table.find('col').forEach(col => {
-        expect(col.prop('style')!.width).toEqual(`226px`);
-      });
-    });
-  });
-
   describe('when renderWidth is 10% lower than table width', () => {
     it('should scale down columns widths by 10%', () => {
       const columnWidths = [200, 200, 280];
