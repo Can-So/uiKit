@@ -1,9 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/adf-schema", "type": "patch" },
-    { "name": "@atlaskit/editor-core", "type": "minor" },
-    { "name": "@atlaskit/editor-mobile-bridge", "type": "minor" },
-    { "name": "@atlaskit/media-card", "type": "patch" }
-  ],
-  "dependents": []
-}

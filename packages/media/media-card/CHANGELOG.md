@@ -1,5 +1,10 @@
 # @atlaskit/media-card
 
+## 55.0.1
+- [patch] [d18b085e2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d18b085e2a):
+
+  - Integrating truly upfront ID
+
 ## 55.0.0
 - [patch] [6bd4c428e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bd4c428e2):
 
