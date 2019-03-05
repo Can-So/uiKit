@@ -1,1 +1,0 @@
-- Pass portal prop through to nested comments in conversation threads and re-render comments when it changes
