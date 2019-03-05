@@ -3,7 +3,7 @@
  */
 
 import { SSRHelper } from '@atlaskit/elements-test-helpers';
-import { whiteList } from '../../_ssr-config';
+import { whiteList } from './_ssr-config';
 import 'whatwg-fetch';
 
 describe('server side rendering', () => {
