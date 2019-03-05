@@ -34,6 +34,7 @@ describe('getDataURIFromFileState()', () => {
       preview: {
         value: new File([], 'filename', { type: 'text/plain' }),
       },
+      representations: {},
     });
 
     expect(src).toBeUndefined();
@@ -68,6 +69,7 @@ describe('getDataURIFromFileState()', () => {
         value: new File([], 'filename', { type: 'video/mov' }),
       },
       artifacts: {},
+      representations: {},
     });
 
     expect(src).toEqual('video-preview');

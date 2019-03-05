@@ -76,6 +76,9 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     getDisplayedResults: results => results || ({} as GenericResultMap),
   };
 
+  // used to terminate if component is unmounted while waiting for a promise
+  unmounted: Boolean = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -109,6 +112,10 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     });
   }
 
+  componentWillUnmount() {
+    this.unmounted = true;
+  }
+
   doSearch = async (query: string) => {
     const startTime: number = performanceNow();
 
@@ -122,6 +129,10 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         this.state.searchSessionId,
         startTime,
       );
+
+      if (this.unmounted) {
+        return;
+      }
 
       const elapsedMs = performanceNow() - startTime;
       if (this.state.latestSearchQuery === query) {
@@ -312,6 +323,9 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         this.state.searchSessionId,
       );
       const renderStartTime = performanceNow();
+      if (this.unmounted) {
+        return;
+      }
       this.setState(
         {
           recentItems: results,

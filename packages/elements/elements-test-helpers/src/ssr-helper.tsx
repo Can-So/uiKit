@@ -9,25 +9,17 @@ import * as ReactDOM from 'react-dom';
  * Help class to test SSR and hidration within tests
  */
 export class SSRHelper {
-  private oldWindow: any;
   private oldCanUseDOM: any;
 
   // @ts-ignore this variable is initialized in beforeAll()
   private consoleErrorSpy: jest.SpyInstance;
 
   beforeAll() {
-    this.oldWindow = (global as any).window;
-    (global as any).window = global;
     this.oldCanUseDOM = exenv.canUseDOM;
     this.consoleErrorSpy = jest.spyOn(global.console, 'error');
   }
 
   afterAll() {
-    if (this.oldWindow) {
-      (global as any).window = this.oldWindow;
-    } else {
-      delete (global as any).window;
-    }
     jest.resetAllMocks();
     (exenv as any).canUseDOM = this.oldCanUseDOM;
   }

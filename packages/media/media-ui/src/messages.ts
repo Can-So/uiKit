@@ -119,7 +119,7 @@ export const messages = defineMessages<Messages>({
     id: 'fabric.media.search_all_gifs',
     defaultMessage: 'Search all the GIFs!',
     description:
-      'Used as input placeholder to let the user know that he can search for GIF image files',
+      'Used as input placeholder to let the user know that they can search for GIF image files',
   },
   cant_retrieve_gifs: {
     id: 'fabric.media.cant_retrieve_gifs',
@@ -383,12 +383,14 @@ export const messages = defineMessages<Messages>({
   disable_fullscreen: {
     id: 'fabric.media.disable_fullscreen',
     defaultMessage: 'disable fullscreen',
-    description: 'Hint to let the user know he can disable the fullscreen mode',
+    description:
+      'Hint to let the user know they can disable the fullscreen mode',
   },
   enable_fullscreen: {
     id: 'fabric.media.enable_fullscreen',
     defaultMessage: 'enable fullscreen',
-    description: 'Hint to let the user know he can enable the fullscreen mode',
+    description:
+      'Hint to let the user know they can enable the fullscreen mode',
   },
   error_loading_file: {
     id: 'fabric.media.error_loading_file',

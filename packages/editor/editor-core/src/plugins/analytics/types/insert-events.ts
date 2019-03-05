@@ -89,6 +89,7 @@ type InsertCodeBlockAEP = InsertAEP<
     inputMethod:
       | INPUT_METHOD.QUICK_INSERT
       | INPUT_METHOD.TOOLBAR
+      | INPUT_METHOD.INSERT_MENU
       | INPUT_METHOD.FORMATTING
       | INPUT_METHOD.INSERT_MENU;
   }
@@ -100,20 +101,9 @@ type InsertTableAEP = InsertAEP<
     inputMethod:
       | INPUT_METHOD.QUICK_INSERT
       | INPUT_METHOD.TOOLBAR
-      | INPUT_METHOD.FORMATTING;
-  }
->;
-
-type InsertMentionAEP = InsertAEP<
-  ACTION_SUBJECT_ID.DIVIDER,
-  {
-    inputMethod:
-      | INPUT_METHOD.QUICK_INSERT
-      | INPUT_METHOD.TOOLBAR
+      | INPUT_METHOD.INSERT_MENU
       | INPUT_METHOD.FORMATTING
-      | INPUT_METHOD.KEYBOARD
-      | INPUT_METHOD.AUTO
-      | INPUT_METHOD.EXTERNAL;
+      | INPUT_METHOD.SHORTCUT;
   }
 >;
 
@@ -123,6 +113,7 @@ type InsertActionDecisionAEP = InsertAEP<
     inputMethod:
       | INPUT_METHOD.QUICK_INSERT
       | INPUT_METHOD.TOOLBAR
+      | INPUT_METHOD.INSERT_MENU
       | INPUT_METHOD.FORMATTING
       | INPUT_METHOD.KEYBOARD;
     containerAri: string;
@@ -148,7 +139,10 @@ type InsertEmojiAEP = InsertAEP<
 type InsertStatusAEP = InsertAEP<
   ACTION_SUBJECT_ID.STATUS,
   {
-    inputMethod: INPUT_METHOD.QUICK_INSERT | INPUT_METHOD.TOOLBAR;
+    inputMethod:
+      | INPUT_METHOD.QUICK_INSERT
+      | INPUT_METHOD.TOOLBAR
+      | INPUT_METHOD.INSERT_MENU;
   }
 >;
 
@@ -207,7 +201,6 @@ export type InsertEventPayload =
   | InsertPanelAEP
   | InsertCodeBlockAEP
   | InsertTableAEP
-  | InsertMentionAEP
   | InsertActionDecisionAEP
   | InsertEmojiAEP
   | InsertStatusAEP

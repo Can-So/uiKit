@@ -1,0 +1,1 @@
+- Add support to register callback for category selection change on advanced search

@@ -1,5 +1,16 @@
 # @atlaskit/emoji
 
+## 56.0.0
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/util-data-test@10.2.2
+  - @atlaskit/media-core@27.2.0
+
+## 55.1.0
+- [minor] [9ab9e467d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ab9e467d2):
+
+  - Bump version of typestyle for ssr compatibility
+
 ## 55.0.2
 - [patch] [2d691c1e48](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d691c1e48):
 
