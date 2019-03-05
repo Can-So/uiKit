@@ -5,7 +5,7 @@
     "access": "private"
   },
   "description": "Analytics viewer for the examples",
-  "modules": "dist/es2015/index.js",
+  "modules": "index.js",
   "types": "dist/es5/types.d.ts",
   "atlaskit:src": "src/index.ts",
   "files": [

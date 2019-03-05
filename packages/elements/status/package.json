@@ -5,7 +5,7 @@
     "access": "public"
   },
   "description": "Fabric Status React Components",
-  "modules": "dist/es2015/index.js",
+  "modules": "index.js",
   "types": "dist/es5/types.d.ts",
   "atlaskit:src": "src/index.ts",
   "files": [

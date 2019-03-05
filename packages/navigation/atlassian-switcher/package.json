@@ -3,7 +3,7 @@
   "version": "0.0.9",
   "license": "Apache-2.0",
   "atlaskit:src": "src/index.ts",
-  "jsnext:main": "dist/es2015/index.js",
+  "jsnext:main": "index.js",
   "module": "index.js",
   "types": "index.d.ts",
   "sideEffects": false,
