@@ -1,1 +1,0 @@
-- ED-6409: set minWidth to 140px for all new columns in resized table
