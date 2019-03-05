@@ -118,6 +118,7 @@ function createEditorWindowBindings(win: Window) {
 
 export default function EditorExampleForTests({ clipboard = true }) {
   createEditorWindowBindings(window);
+  1;
   return (
     <React.Fragment>
       <div id="editor-container" style={{ height: '100%', width: '100%' }} />
