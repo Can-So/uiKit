@@ -11,7 +11,6 @@ import {
 } from '../../../components/ShareDialogContainer';
 import { ShareDialogWithTrigger } from '../../../components/ShareDialogWithTrigger';
 import { Client, OriginTracing } from '../../../types';
-import { ShareForm } from '../../../components/ShareForm';
 
 let wrapper: ShallowWrapper<Props, State, ShareDialogContainer>;
 let mockOriginTracing: OriginTracing;
@@ -25,7 +24,6 @@ const mockShareAri = 'ari';
 const mockShareLink = 'share-link';
 const mockShareTitle = 'Share Title';
 const mockShareContentType = 'page';
-const mockShareFormTitle = 'Share page';
 const mockButtonStyle = 'icon-with-text' as 'icon-with-text';
 const mockCopyLink = 'copy-link';
 const mockFormatCopyLink = jest.fn().mockReturnValue(mockCopyLink);
