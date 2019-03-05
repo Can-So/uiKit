@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import { TaskList as AkTaskList } from '@atlaskit/task-decision';
-import FabricAnalyticsListener from '@atlaskit/analytics-listeners';
+import FabricAnalyticsListener, {
+  AnalyticsWebClient,
+} from '@atlaskit/analytics-listeners';
 import TaskList from '../../../../react/nodes/taskList';
 import TaskItem from '../../../../react/nodes/taskItem';
 
 describe('Renderer - React/Nodes/TaskList', () => {
-  let analyticsWebClientMock;
+  let analyticsWebClientMock: AnalyticsWebClient;
 
   beforeEach(() => {
     analyticsWebClientMock = {

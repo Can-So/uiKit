@@ -301,7 +301,6 @@ describe('lists', () => {
                 mediaSingle({ layout: 'center' })(
                   media({
                     id: temporaryFileId,
-                    __key: temporaryFileId,
                     type: 'file',
                     collection: testCollectionName,
                     __fileMimeType: 'image/png',
@@ -321,7 +320,6 @@ describe('lists', () => {
                 mediaSingle({ layout: 'center' })(
                   media({
                     id: temporaryFileId,
-                    __key: temporaryFileId,
                     type: 'file',
                     collection: testCollectionName,
                     __fileMimeType: 'image/png',
@@ -344,7 +342,6 @@ describe('lists', () => {
                 mediaSingle({ layout: 'center' })(
                   media({
                     id: temporaryFileId,
-                    __key: temporaryFileId,
                     type: 'file',
                     collection: testCollectionName,
                     __fileMimeType: 'image/png',
@@ -365,7 +362,6 @@ describe('lists', () => {
                 mediaSingle({ layout: 'center' })(
                   media({
                     id: temporaryFileId,
-                    __key: temporaryFileId,
                     type: 'file',
                     collection: testCollectionName,
                     __fileMimeType: 'image/png',
@@ -389,7 +385,6 @@ describe('lists', () => {
                 mediaSingle({ layout: 'center' })(
                   media({
                     id: temporaryFileId,
-                    __key: temporaryFileId,
                     type: 'file',
                     collection: testCollectionName,
                     __fileMimeType: 'image/png',
@@ -1337,7 +1332,6 @@ describe('lists', () => {
           editorView,
           media({
             id: temporaryFileId,
-            __key: temporaryFileId,
             type: 'file',
             collection: testCollectionName,
             __fileMimeType: 'image/png',
@@ -1353,7 +1347,6 @@ describe('lists', () => {
                 mediaSingle({ layout: 'center' })(
                   media({
                     id: temporaryFileId,
-                    __key: temporaryFileId,
                     type: 'file',
                     collection: testCollectionName,
                     __fileMimeType: 'image/png',
@@ -1375,7 +1368,6 @@ describe('lists', () => {
           editorView,
           media({
             id: temporaryFileId,
-            __key: temporaryFileId,
             type: 'file',
             collection: testCollectionName,
             __fileMimeType: 'pdf',

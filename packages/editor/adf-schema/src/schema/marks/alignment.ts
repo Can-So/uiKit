@@ -2,7 +2,7 @@ import { MarkSpec } from 'prosemirror-model';
 import { ALIGNMENT, INDENTATION } from '../groups';
 
 /** TODO: Flip these positions for RTL */
-export const alignmentPositionMap = {
+export const alignmentPositionMap: { [key: string]: string } = {
   end: 'right',
   right: 'end',
   center: 'center',

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CSSProperties } from 'react';
 
-const TableHeader = props => {
+const TableHeader = (props: any) => {
   let style: CSSProperties = {};
 
   if (props.background) {

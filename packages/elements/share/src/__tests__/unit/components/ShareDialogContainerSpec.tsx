@@ -24,7 +24,8 @@ const mockShareAri = 'ari';
 const mockShareLink = 'share-link';
 const mockShareTitle = 'Share Title';
 const mockShareContentType = 'page';
-const mockButtonStyle = 'icon-with-text' as 'icon-with-text';
+const mockTriggerButtonStyle = 'icon-with-text' as 'icon-with-text';
+const mockTriggerButtonAppearance = 'subtle';
 const mockCopyLink = 'copy-link';
 const mockFormatCopyLink = jest.fn().mockReturnValue(mockCopyLink);
 const mockShouldShowCommentField = true;
@@ -77,7 +78,6 @@ beforeEach(() => {
     }));
   wrapper = shallow(
     <ShareDialogContainer
-      buttonStyle={mockButtonStyle}
       client={mockClient}
       cloudId={mockCloudId}
       loadUserOptions={mockLoadUserOptions}
@@ -90,6 +90,8 @@ beforeEach(() => {
       formatCopyLink={mockFormatCopyLink}
       shouldShowCommentField={mockShouldShowCommentField}
       shouldCloseOnEscapePress={mockShouldCloseOnEscapePress}
+      triggerButtonAppearance={mockTriggerButtonAppearance}
+      triggerButtonStyle={mockTriggerButtonStyle}
     />,
   );
 });
@@ -105,7 +107,12 @@ describe('ShareDialogContainer', () => {
     const shareDialogWithTrigger = wrapper.find(ShareDialogWithTrigger);
     expect(shareDialogWithTrigger).toHaveLength(1);
     expect(mockFormatCopyLink).toHaveBeenCalled();
-    expect(shareDialogWithTrigger.prop('buttonStyle')).toEqual(mockButtonStyle);
+    expect(shareDialogWithTrigger.prop('triggerButtonAppearance')).toEqual(
+      mockTriggerButtonAppearance,
+    );
+    expect(shareDialogWithTrigger.prop('triggerButtonStyle')).toEqual(
+      mockTriggerButtonStyle,
+    );
     expect(shareDialogWithTrigger.prop('copyLink')).toEqual(mockCopyLink);
     expect(shareDialogWithTrigger.prop('loadUserOptions')).toEqual(
       mockLoadUserOptions,

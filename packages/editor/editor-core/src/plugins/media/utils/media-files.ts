@@ -175,7 +175,6 @@ const createMediaFileNodes = (
       id,
       type: 'file',
       collection,
-      __key: id,
     });
     copyOptionalAttrsFromMediaState(mediaState, node);
     return node;

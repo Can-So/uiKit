@@ -148,30 +148,15 @@ export default class WebBridgeImpl extends WebBridge
 
       switch (eventName) {
         case 'upload-preview-update': {
-          const uploadPromise = new Promise(resolve => {
-            this.mediaMap.set(payload.file.id, resolve);
-          });
-          payload.file.upfrontId = uploadPromise;
           payload.preview = {
             dimensions: payload.file.dimensions,
           };
           this.mediaPicker.emit(eventName, payload);
-
           return;
         }
         case 'upload-end': {
-          if (typeof payload.file.collectionName === 'string') {
-            /**
-             * We call this custom event instead of `upload-end` to set the collection
-             * As when emitting `upload-end`, the `ready` handler will usually fire before
-             * the `publicId` is resolved which causes a noop, resulting in bad ADF.
-             */
-            this.mediaPicker.emit('collection', payload);
-          }
-          const getUploadPromise = this.mediaMap.get(payload.file.id);
-          if (getUploadPromise) {
-            getUploadPromise!(payload.file.publicId);
-          }
+          /** emit a mobile-only event */
+          this.mediaPicker.emit('mobile-upload-end', payload);
           return;
         }
       }

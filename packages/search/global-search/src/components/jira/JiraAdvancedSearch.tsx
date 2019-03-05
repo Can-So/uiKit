@@ -7,6 +7,7 @@ import DropdownMenu, {
   DropdownItemGroup,
   DropdownItem,
 } from '@atlaskit/dropdown-menu';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import { messages } from '../../messages';
 import AdvancedSearchResult from '../AdvancedSearchResult';
 import { AnalyticsType } from '../../model/Result';
@@ -21,6 +22,7 @@ export interface Props {
   showKeyboardLozenge?: boolean;
   showSearchIcon?: boolean;
   analyticsData?: object;
+  onClick?: (e: CancelableEvent, entity: JiraEntityTypes) => void;
 }
 
 interface State {
@@ -67,23 +69,28 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
 
   renderDropdownItems = () =>
     itemI18nKeySuffix.map(item => (
-      <DropdownItem
-        href={getJiraAdvancedSearchUrl(item, this.props.query)}
-        onClick={() => (this.selectedItem = item)}
-        key={item}
-      >
+      <DropdownItem onClick={() => (this.selectedItem = item)} key={item}>
         {getI18nItemName(item)}
       </DropdownItem>
     ));
 
   selectedItem?: JiraEntityTypes;
+  nextSelectedItem?: JiraEntityTypes;
+
   enrichedAnalyticsData?: object;
 
   render() {
-    const { query, showKeyboardLozenge, showSearchIcon } = this.props;
+    const { query, showKeyboardLozenge, showSearchIcon, onClick } = this.props;
 
     return (
       <AdvancedSearchResult
+        onClick={e => {
+          if (onClick) {
+            const selectedEntity = this.nextSelectedItem || this.state.entity;
+            onClick(e.event, selectedEntity);
+            this.nextSelectedItem = undefined;
+          }
+        }}
         href={getJiraAdvancedSearchUrl(this.state.entity, query)}
         key={`search-jira-${Date.now()}`}
         resultId={ADVANCED_JIRA_SEARCH_RESULT_ID}
@@ -95,8 +102,10 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
             <span
               onClick={e => {
                 if (this.selectedItem) {
+                  const entity = this.selectedItem;
+                  this.nextSelectedItem = entity;
                   this.setState({
-                    entity: this.selectedItem,
+                    entity,
                   });
                   this.enrichedAnalyticsData = {
                     ...this.props.analyticsData,

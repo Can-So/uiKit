@@ -1,3 +1,4 @@
+import { ButtonAppearances } from '@atlaskit/button';
 import InlineDialog from '@atlaskit/inline-dialog';
 import { LoadOptions } from '@atlaskit/user-picker';
 import * as React from 'react';
@@ -31,7 +32,6 @@ type ShareError = {
 };
 
 export type Props = {
-  buttonStyle?: ShareButtonStyle;
   capabilities?: InvitationsCapabilitiesResponse;
   children?: RenderChildren;
   copyLink: string;
@@ -42,6 +42,8 @@ export type Props = {
   shareContentType?: React.ReactNode;
   shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
+  triggerButtonAppearance?: ButtonAppearances;
+  triggerButtonStyle?: ShareButtonStyle;
 };
 
 // 448px is the max-width of a inline dialog
@@ -59,9 +61,10 @@ export const defaultShareContentState: DialogContentState = {
 
 export class ShareDialogWithTrigger extends React.Component<Props, State> {
   static defaultProps = {
-    buttonStyle: 'icon-only' as 'icon-only',
     isDisabled: false,
     shouldCloseOnEscapePress: false,
+    triggerButtonAppearance: 'subtle',
+    triggerButtonStyle: 'icon-only' as 'icon-only',
   };
   private containerRef = React.createRef<HTMLDivElement>();
 
@@ -155,11 +158,13 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
   render() {
     const { isDialogOpen, isSharing, shareError, defaultValue } = this.state;
     const {
+      capabilities,
       copyLink,
       isDisabled,
       loadUserOptions,
-      capabilities,
       shareContentType,
+      triggerButtonAppearance,
+      triggerButtonStyle,
     } = this.props;
     const title = this.getShareFormTitle(shareContentType);
 
@@ -198,8 +203,9 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
             })
           ) : (
             <ShareButton
+              appearance={triggerButtonAppearance}
               text={
-                this.props.buttonStyle === 'icon-with-text' ? (
+                triggerButtonStyle === 'icon-with-text' ? (
                   <FormattedMessage {...messages.shareTriggerButtonText} />
                 ) : null
               }

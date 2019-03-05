@@ -7,12 +7,17 @@ import styled from 'styled-components';
 import { messages } from '../../messages';
 import Return from '../../assets/Return';
 import { AnalyticsType } from '../../model/Result';
+import { ResultData } from '@atlaskit/quick-search';
 
 const Wrapper = styled.div`
   padding: ${gridSize()}px 0;
 `;
 
-export default class AdvancedIssueSearchLink extends React.Component {
+export interface Props {
+  onClick?: (resultData: ResultData) => void;
+}
+
+export default class AdvancedIssueSearchLink extends React.Component<Props> {
   render() {
     return (
       <Wrapper>
@@ -24,6 +29,7 @@ export default class AdvancedIssueSearchLink extends React.Component {
           type={AnalyticsType.TopLinkPreQueryAdvancedSearchJira}
           elemAfter={<Return />}
           key="advanced-search-link"
+          onClick={this.props.onClick}
         />
       </Wrapper>
     );
