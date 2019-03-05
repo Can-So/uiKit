@@ -20,7 +20,9 @@ import {
   media,
   sendKeyToPm,
   randomId,
+  insertText,
 } from '@atlaskit/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import {
   pluginKey,
   getPluginState,
@@ -36,8 +38,6 @@ import {
   toggleHeaderColumn,
   insertColumn,
   insertRow,
-  deleteSelectedColumns,
-  deleteSelectedRows,
 } from '../../../../plugins/table/actions';
 import {
   checkIfNumberColumnEnabled,
@@ -46,6 +46,7 @@ import {
 } from '../../../../plugins/table/utils';
 import tablesPlugin from '../../../../plugins/table';
 import codeBlockPlugin from '../../../../plugins/code-block';
+import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { mediaPlugin } from '../../../../plugins';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import listPlugin from '../../../../plugins/lists';
@@ -54,6 +55,8 @@ import { TextSelection } from 'prosemirror-state';
 describe('table plugin', () => {
   const createEditor = createEditorFactory<TablePluginState>();
 
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+
   const editor = (doc: any, trackEvent = () => {}) => {
     const tableOptions = {
       allowNumberColumn: true,
@@ -61,6 +64,7 @@ describe('table plugin', () => {
       allowHeaderColumn: true,
       permittedLayouts: 'all',
     } as PluginConfig;
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
     return createEditor({
       doc,
       editorPlugins: [
@@ -68,12 +72,15 @@ describe('table plugin', () => {
         tablesPlugin(tableOptions),
         codeBlockPlugin(),
         mediaPlugin({ allowMediaSingle: true }),
+        quickInsertPlugin,
       ],
       editorProps: {
         analyticsHandler: trackEvent,
         allowTables: tableOptions,
+        allowAnalyticsGASV3: true,
       },
       pluginKey,
+      createAnalyticsEvent,
     });
   };
 
@@ -433,195 +440,6 @@ describe('table plugin', () => {
     });
   });
 
-  describe('remove columns/rows/table', () => {
-    describe('when table has 3 columns', () => {
-      describe('when the first column is selected', () => {
-        it('it should remove the first column and move cursor to the first cell of the column to the left', () => {
-          const { editorView, refs } = editor(
-            doc(
-              p('text'),
-              table()(tr(td({})(p('{nextPos}')), tdCursor, tdEmpty)),
-            ),
-            trackEvent,
-          );
-          const { nextPos } = refs;
-
-          editorView.dispatch(selectColumn(0)(editorView.state.tr));
-          deleteSelectedColumns(editorView.state, editorView.dispatch);
-
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('text'), table()(tr(tdCursor, tdEmpty))),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.table.delete_column.button',
-          );
-          expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-        });
-      });
-
-      describe('when the middle column is selected', () => {
-        it('it should remove the middle column and move cursor to the first cell of the column to the left', () => {
-          const { editorView, refs } = editor(
-            doc(
-              p('text'),
-              table()(tr(td({})(p('{nextPos}')), tdCursor, tdEmpty)),
-            ),
-            trackEvent,
-          );
-          const { nextPos } = refs;
-
-          editorView.dispatch(selectColumn(1)(editorView.state.tr));
-          deleteSelectedColumns(editorView.state, editorView.dispatch);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('text'), table()(tr(tdCursor, tdEmpty))),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.table.delete_column.button',
-          );
-          expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-        });
-      });
-
-      describe('when the header row is selected', () => {
-        const editorTableHeader = (doc: any) =>
-          createEditor({
-            doc,
-            editorPlugins: [tablesPlugin({ isHeaderRowRequired: true })],
-            editorProps: {
-              allowTables: {
-                isHeaderRowRequired: true,
-              },
-            },
-            pluginKey,
-          });
-
-        it('it should convert first following row to header if isHeaderRowRequired is true', () => {
-          const { editorView } = editorTableHeader(
-            doc(table()(tr(thCursor), tr(tdEmpty), tr(tdEmpty))),
-          );
-
-          editorView.dispatch(selectRow(0)(editorView.state.tr));
-          deleteSelectedRows(editorView.state, editorView.dispatch);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(table()(tr(th({})(p())), tr(tdEmpty))),
-          );
-        });
-
-        it('it should move cursor to the first cell of the new header row', () => {
-          const { editorView, refs } = editorTableHeader(
-            doc(
-              table()(
-                tr(th({})(p('{nextPos}testing{<>}'))),
-                tr(tdEmpty),
-                tr(tdEmpty),
-              ),
-            ),
-          );
-          const { nextPos } = refs;
-
-          editorView.dispatch(selectRow(0)(editorView.state.tr));
-          deleteSelectedRows(editorView.state, editorView.dispatch);
-          expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-          expect(editorView.state.selection.$to.pos).toEqual(nextPos);
-        });
-      });
-
-      describe('when the last column is selected', () => {
-        it('it should remove the last column and move cursor to the first cell of the previous column', () => {
-          const { editorView, refs } = editor(
-            doc(
-              p('text'),
-              table()(tr(tdCursor, td({})(p('{nextPos}')), tdCursor)),
-            ),
-            trackEvent,
-          );
-          const { nextPos } = refs;
-
-          editorView.dispatch(selectColumn(2)(editorView.state.tr));
-          deleteSelectedColumns(editorView.state, editorView.dispatch);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('text'), table()(tr(tdCursor, tdEmpty))),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.table.delete_column.button',
-          );
-          expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-        });
-      });
-    });
-
-    describe('when table has 3 rows', () => {
-      describe('when the first row is selected', () => {
-        it('it should remove the first row and move cursor to the first cell of the first row', () => {
-          const { editorView, refs } = editor(
-            doc(
-              p('text'),
-              table()(tr(td({})(p('{nextPos}'))), tr(tdCursor), tr(tdEmpty)),
-            ),
-            trackEvent,
-          );
-          const { nextPos } = refs;
-
-          editorView.dispatch(selectRow(0)(editorView.state.tr));
-          deleteSelectedRows(editorView.state, editorView.dispatch);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('text'), table()(tr(tdCursor), tr(tdEmpty))),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.table.delete_row.button',
-          );
-          expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-        });
-      });
-
-      describe('when the middle row is selected', () => {
-        it('it should remove the middle row and move cursor to the first cell of the next row', () => {
-          const { editorView, refs } = editor(
-            doc(
-              p('text'),
-              table()(tr(tdCursor), tr(td({})(p('{nextPos}'))), tr(tdEmpty)),
-            ),
-            trackEvent,
-          );
-          const { nextPos } = refs;
-
-          editorView.dispatch(selectRow(1)(editorView.state.tr));
-          deleteSelectedRows(editorView.state, editorView.dispatch);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('text'), table()(tr(tdEmpty), tr(tdCursor))),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.table.delete_row.button',
-          );
-          expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-        });
-      });
-
-      describe('when the last row is selected', () => {
-        it('it should remove the middle row and move cursor to the first cell of the previous row', () => {
-          const { editorView, refs } = editor(
-            doc(
-              p('text'),
-              table()(tr(tdCursor), tr(td({})(p('{nextPos}'))), tr(tdEmpty)),
-            ),
-            trackEvent,
-          );
-          const { nextPos } = refs;
-
-          editorView.dispatch(selectRow(2)(editorView.state.tr));
-          deleteSelectedRows(editorView.state, editorView.dispatch);
-          expect(editorView.state.doc).toEqualDocument(
-            doc(p('text'), table()(tr(tdEmpty), tr(tdCursor))),
-          );
-          expect(trackEvent).toHaveBeenCalledWith(
-            'atlassian.editor.format.table.delete_row.button',
-          );
-          expect(editorView.state.selection.$from.pos).toEqual(nextPos);
-        });
-      });
-    });
-  });
-
   describe('toggleHeaderRow()', () => {
     describe("when there's no header row yet", () => {
       it('it should convert first row to a header row', () => {
@@ -914,7 +732,6 @@ describe('table plugin', () => {
         editorView,
         media({
           id: temporaryFileId,
-          __key: temporaryFileId,
           type: 'file',
           collection: testCollectionName,
           __fileMimeType: 'image/png',
@@ -934,7 +751,6 @@ describe('table plugin', () => {
                     mediaSingle()(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',
@@ -1020,6 +836,22 @@ describe('table plugin', () => {
 
       pluginState = getPluginState(editorView.state);
       expect(pluginState.targetCellPosition).toEqual(23);
+    });
+  });
+
+  describe('quick insert', () => {
+    it('should fire analytics event when table inserted', () => {
+      const { editorView, sel } = editor(doc(p('{<>}')));
+      insertText(editorView, '/Table', sel);
+      sendKeyToPm(editorView, 'Enter');
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'table',
+        attributes: { inputMethod: 'quickInsert' },
+        eventType: 'track',
+      });
     });
   });
 });

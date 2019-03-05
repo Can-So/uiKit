@@ -1,7 +1,7 @@
 import { Node as PMNode } from 'prosemirror-model';
 import { encode, NodeEncoder } from '..';
 
-const panelTypeColorMapping = {
+const panelTypeColorMapping: { [key: string]: string } = {
   info: '#deebff',
   note: '#eae6ff',
   success: '#e3fcef',

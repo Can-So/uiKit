@@ -51,7 +51,7 @@ export default md`
   browser.browse();
 `}
 
-  This little app will let the user browse a file on his hard drive and upload it by clicking the button.
+  This little app will let the user browse a file on their hard drive and upload it by clicking the button.
   The upload-end event provides the file selected/uploaded, with a new public id.
   You can read more detailed documentation of the MediaPickerBrowser component below.
 

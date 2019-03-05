@@ -22,6 +22,8 @@ import {
   SearchSession,
   ABTest,
 } from '../../../api/CrossProductSearchClient';
+import * as SearchUtils from '../../../components/SearchResultsUtil';
+
 import { mockLogger } from '../mocks/_mockLogger';
 
 const sessionId = 'sessionId';
@@ -223,5 +225,72 @@ describe('ConfluenceQuickSearchContainer', () => {
         resultId: expect.any(String),
       }),
     ]);
+  });
+
+  describe('Advanced Search callback', () => {
+    let redirectSpy;
+    let originalWindowAssign = window.location.assign;
+
+    beforeEach(() => {
+      window.location.assign = jest.fn();
+      redirectSpy = jest.spyOn(
+        SearchUtils,
+        'redirectToConfluenceAdvancedSearch',
+      );
+    });
+
+    afterEach(() => {
+      redirectSpy.mockReset();
+      redirectSpy.mockRestore();
+      window.location.assign = originalWindowAssign;
+    });
+
+    const mountComponent = spy => {
+      const wrapper = render({
+        onAdvancedSearch: spy,
+      });
+      const quickSearchContainer = wrapper.find(QuickSearchContainer);
+
+      const props = quickSearchContainer.props();
+      expect(props).toHaveProperty('handleSearchSubmit');
+
+      return props['handleSearchSubmit'];
+    };
+    const mockEvent = () => ({
+      preventDefault: jest.fn(),
+      stopPropagation: jest.fn(),
+      target: {
+        value: 'query',
+      },
+    });
+
+    it('should call onAdvancedSearch call', () => {
+      const spy = jest.fn();
+      const handleSearchSubmit = mountComponent(spy);
+      const mockedEvent = mockEvent();
+      handleSearchSubmit(mockedEvent);
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          preventDefault: expect.any(Function),
+        }),
+        'content',
+        'query',
+      );
+      expect(mockedEvent.preventDefault).toHaveBeenCalledTimes(0);
+      expect(mockedEvent.stopPropagation).toHaveBeenCalledTimes(0);
+      expect(redirectSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not call redriect', () => {
+      const spy = jest.fn(e => e.preventDefault());
+      const handleSearchSubmit = mountComponent(spy);
+      const mockedEvent = mockEvent();
+      handleSearchSubmit(mockedEvent);
+
+      expect(mockedEvent.preventDefault).toHaveBeenCalledTimes(1);
+      expect(mockedEvent.stopPropagation).toHaveBeenCalledTimes(1);
+      expect(redirectSpy).toHaveBeenCalledTimes(0);
+    });
   });
 });

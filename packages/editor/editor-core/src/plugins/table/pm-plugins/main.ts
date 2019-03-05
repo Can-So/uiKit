@@ -33,11 +33,8 @@ import {
   handleClick,
   handleTripleClick,
 } from '../event-handlers';
-import {
-  findControlsHoverDecoration,
-  fixTables,
-  normalizeSelection,
-} from '../utils';
+import { findControlsHoverDecoration, normalizeSelection } from '../utils';
+import { fixTables } from '../transforms';
 import { TableCssClassName as ClassName } from '../types';
 
 export const pluginKey = new PluginKey('tablePlugin');
@@ -68,6 +65,7 @@ export const createPlugin = (
   eventDispatcher: EventDispatcher,
   pluginConfig: PluginConfig,
   appearance?: EditorAppearance,
+  dynamicTextSizing?: boolean,
 ) =>
   new Plugin({
     state: {
@@ -251,7 +249,7 @@ export const createPlugin = (
       },
 
       nodeViews: {
-        table: createTableView(portalProviderAPI),
+        table: createTableView(portalProviderAPI, dynamicTextSizing),
         tableCell: createCellView(portalProviderAPI, appearance),
         tableHeader: createCellView(portalProviderAPI, appearance),
       },

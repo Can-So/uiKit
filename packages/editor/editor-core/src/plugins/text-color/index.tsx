@@ -9,7 +9,6 @@ import {
   TextColorPluginState,
 } from './pm-plugins/main';
 import ToolbarTextColor from './ui/ToolbarTextColor';
-import { changeColor } from './commands/change-color';
 
 const pluginConfig = (
   textColorConfig?: TextColorPluginConfig | boolean,
@@ -55,9 +54,7 @@ const textColorPlugin: EditorPlugin = {
           <ToolbarTextColor
             pluginState={textColor}
             isReducedSpacing={isToolbarReducedSpacing}
-            changeColor={(color: string) =>
-              changeColor(color)(editorView.state, editorView.dispatch)
-            }
+            editorView={editorView}
             popupsMountPoint={popupsMountPoint}
             popupsBoundariesElement={popupsBoundariesElement}
             popupsScrollableElement={popupsScrollableElement}

@@ -1,4 +1,4 @@
-import colorNameMapping from './color-name-mapping';
+import colorNameMapping, { RGB, RGBColors } from './color-name-mapping';
 
 const COLOR_TYPE_REGEX = {
   hexShort: /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
@@ -7,19 +7,13 @@ const COLOR_TYPE_REGEX = {
   prgb: /^#?rgb\((\d+)%,\s*(\d+)%,\s*(\d+)%\)$/,
 };
 
-const PANEL_TYPE_TO_RGB = {
+const PANEL_TYPE_TO_RGB: RGBColors = {
   info: { r: 222, g: 235, b: 255 },
   note: { r: 234, g: 230, b: 255 },
   success: { r: 227, g: 252, b: 239 },
   warning: { r: 255, g: 250, b: 230 },
   error: { r: 255, g: 235, b: 230 },
 };
-
-interface RGB {
-  r: number;
-  g: number;
-  b: number;
-}
 
 export function getPanelType(attrs: { [key: string]: string }): string {
   const rgb = generateRgb(attrs.bgColor);

@@ -14,6 +14,9 @@ import type {
 
 class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> {
   static defaultProps = {
+    dataset: {
+      'data-test-id': 'GlobalNavigationItem',
+    },
     isActive: false,
     isHover: false,
     isSelected: false,
@@ -81,11 +84,12 @@ class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> 
 
   renderChildren = (styles: GlobalItemStyles) => {
     const {
-      href,
-      onClick,
-      id,
-      target,
       component: CustomComponent,
+      dataset,
+      href,
+      id,
+      onClick,
+      target,
     } = this.props;
     const globalID = id && `${id}GlobalItem`;
 
@@ -108,6 +112,7 @@ class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> 
           onClick={onClick}
           target={target}
           className={css({ '&&': styles.itemBase })}
+          {...dataset}
         >
           {this.renderIconAndBadge(styles.badgeWrapper)}
         </a>
@@ -118,13 +123,18 @@ class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> 
           id={globalID}
           onClick={onClick}
           className={css({ '&&': styles.itemBase })}
+          {...dataset}
         >
           {this.renderIconAndBadge(styles.badgeWrapper)}
         </button>
       );
     } else {
       itemBase = (
-        <span id={globalID} className={css({ '&&': styles.itemBase })}>
+        <span
+          id={globalID}
+          className={css({ '&&': styles.itemBase })}
+          {...dataset}
+        >
           {this.renderIconAndBadge(styles.badgeWrapper)}
         </span>
       );

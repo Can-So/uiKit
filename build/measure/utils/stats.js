@@ -130,11 +130,16 @@ function diff(origOldStats, origNewStats) {
 }
 
 function clearStats(stats) {
-  return stats.map(item => ({
-    ...item,
-    threshold: undefined,
-    isTooBig: undefined,
-  }));
+  return stats
+    .filter(item => !item.deleted)
+    .map(item => {
+      const { new: added, ...details } = item;
+      return {
+        ...details,
+        threshold: undefined,
+        isTooBig: undefined,
+      };
+    });
 }
 
 module.exports = { buildStats, createAtlaskitStatsGroups, diff, clearStats };

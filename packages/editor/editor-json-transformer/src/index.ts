@@ -42,7 +42,7 @@ const isLinkMark = isType('link');
 const isUnsupportedNode = (node: PMNode) =>
   isType('unsupportedBlock')(node) || isType('unsupportedInline')(node);
 
-const filterNull = subject => {
+const filterNull = (subject: any) => {
   return Object.keys(subject).reduce((acc, key) => {
     let current = subject[key];
 
@@ -130,5 +130,12 @@ export class JSONTransformer implements Transformer<JSONDocNode> {
     const doc = defaultSchema.nodeFromJSON(content);
     doc.check();
     return doc;
+  }
+
+  /**
+   * This method is used to encode a single node
+   */
+  encodeNode(node: PMNode): JSONNode {
+    return toJSON(node);
   }
 }

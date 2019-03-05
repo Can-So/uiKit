@@ -86,6 +86,8 @@ export type ExternalGlobalItemProps = ElementConfig<typeof GlobalItem>;
 
 export type BaseGlobalItemProps = {
   ...$Exact<BaseItemProps>,
+  /** A map of data attributes applied to the rendered item. */
+  dataset?: { [name: string]: string | typeof undefined },
   /** A custom component to render instead of the default wrapper component.
    * Could be used to render a router Link, for example. The component will be
    * provided with the standard globalItem props. It will also be provided

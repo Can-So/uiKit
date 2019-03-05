@@ -5,7 +5,7 @@ import CommonDataProvider from '../providers/common-data-provider';
 
 interface ConfluenceSwitcherProps {
   cloudId: string;
-  triggerXFlow: (productKey: string) => void;
+  triggerXFlow: (productKey: string, sourceComponent: string) => void;
 }
 
 export default (props: ConfluenceSwitcherProps) => (

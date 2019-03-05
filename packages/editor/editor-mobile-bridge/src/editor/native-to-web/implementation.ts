@@ -2,6 +2,7 @@ import {
   MentionPluginState,
   TextFormattingState,
   EditorActions,
+  Command,
   CustomMediaPicker,
   BlockTypeState,
   ListsState,
@@ -26,6 +27,10 @@ import {
   changeColor,
   TypeAheadItem,
   selectItem as selectTypeAheadItem,
+  insertLink,
+  isTextAtPos,
+  setLinkHref,
+  setLinkText,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -34,6 +39,7 @@ import { Color as StatusColor } from '@atlaskit/status';
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
 import { ProseMirrorDOMChange } from '../../types';
+import { hasValue } from '../../utils';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';
 
 export default class WebBridgeImpl extends WebBridge
@@ -142,30 +148,15 @@ export default class WebBridgeImpl extends WebBridge
 
       switch (eventName) {
         case 'upload-preview-update': {
-          const uploadPromise = new Promise(resolve => {
-            this.mediaMap.set(payload.file.id, resolve);
-          });
-          payload.file.upfrontId = uploadPromise;
           payload.preview = {
             dimensions: payload.file.dimensions,
           };
           this.mediaPicker.emit(eventName, payload);
-
           return;
         }
         case 'upload-end': {
-          if (typeof payload.file.collectionName === 'string') {
-            /**
-             * We call this custom event instead of `upload-end` to set the collection
-             * As when emitting `upload-end`, the `ready` handler will usually fire before
-             * the `publicId` is resolved which causes a noop, resulting in bad ADF.
-             */
-            this.mediaPicker.emit('collection', payload);
-          }
-          const getUploadPromise = this.mediaMap.get(payload.file.id);
-          if (getUploadPromise) {
-            getUploadPromise!(payload.file.publicId);
-          }
+          /** emit a mobile-only event */
+          this.mediaPicker.emit('mobile-upload-end', payload);
           return;
         }
       }
@@ -207,6 +198,32 @@ export default class WebBridgeImpl extends WebBridge
     if (this.listBridgeState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
     }
+  }
+
+  onLinkUpdate(text: string, url: string) {
+    if (!this.editorView) {
+      return;
+    }
+
+    const { state, dispatch } = this.editorView;
+    const { from, to } = state.selection;
+
+    if (!isTextAtPos(from)(state)) {
+      insertLink(from, to, url, text)(state, dispatch);
+      return;
+    }
+
+    [setLinkHref(url, from, to)]
+      .reduce(
+        (cmds, setLinkHrefCmd) =>
+          // if adding link => set link then set link text
+          // if removing link => execute this reversed
+          hasValue(url)
+            ? [setLinkHrefCmd, setLinkText(text, from, to), ...cmds]
+            : [setLinkText(text, from, to), setLinkHrefCmd, ...cmds],
+        [] as Command[],
+      )
+      .forEach(cmd => cmd(this.editorView!.state, dispatch));
   }
 
   insertBlockType(type) {

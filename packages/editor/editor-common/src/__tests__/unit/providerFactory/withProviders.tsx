@@ -3,11 +3,12 @@ import { mount } from 'enzyme';
 import {
   default as ProviderFactory,
   WithProviders,
+  Providers,
 } from '../../../providerFactory';
 
 describe('WithProviders', () => {
   it('should pass multiple providers to UI component', () => {
-    const renderNode = providers => <div />;
+    const renderNode = (providers: Providers) => <div />;
     const providerFactory = new ProviderFactory();
     providerFactory.setProvider('providerA', Promise.resolve());
     providerFactory.setProvider('providerB', Promise.resolve());
@@ -19,7 +20,7 @@ describe('WithProviders', () => {
         renderNode={renderNode}
       />,
     );
-    const providers = component.state('providers');
+    const providers: Providers = component.state('providers');
     const nonEmptyProviders = Object.keys(providers).filter(
       providerName => providers[providerName],
     );

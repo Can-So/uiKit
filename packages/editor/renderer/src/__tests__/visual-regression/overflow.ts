@@ -1,8 +1,9 @@
 import { goToRendererTestingExample, snapshot, mountRenderer } from './_utils';
 import * as document from '../../../examples/helper/overflow.adf.json';
+import { Page } from 'puppeteer';
 
-describe.skip('Snapshot Test: Overflow shadows', () => {
-  let page;
+describe('Snapshot Test: Overflow shadows', () => {
+  let page: Page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
@@ -15,6 +16,6 @@ describe.skip('Snapshot Test: Overflow shadows', () => {
       appearance: 'full-page',
       document,
     });
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 });

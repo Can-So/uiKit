@@ -1,31 +1,36 @@
 import {
   snapshot,
   initFullPageEditorWithAdf,
-  DEFAULT_WIDTH,
-  DEFAULT_HEIGHT,
+  Device,
+  initCommentEditorWithAdf,
 } from '../_utils';
+import { getSelectorForTableCell } from '../../__helpers/page-objects/_table';
 import * as adf from './__fixtures__/numbered-table.adf.json';
 
-describe.skip('Snapshot Test: numbered table', () => {
+describe('Snapshot Test: numbered table', () => {
   let page;
 
-  const viewports = [
-    { width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT },
-    { width: 600, height: 600 },
-  ];
-
-  beforeEach(async () => {
+  beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await initFullPageEditorWithAdf(page, adf);
   });
 
-  viewports.forEach(dimensions => {
-    it(`looks correct at ${dimensions.width}x${
-      dimensions.height
-    }`, async () => {
-      await page.setViewport(dimensions);
-      await snapshot(page);
-    });
+  afterEach(async () => {
+    await snapshot(page);
+  });
+
+  it(`looks correct at LaptopMDPI for fullpage`, async () => {
+    await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
+    await page.click(getSelectorForTableCell({ row: 1, cell: 1 }));
+  });
+
+  it(`looks correct at iPadPro for fullpage`, async () => {
+    await initFullPageEditorWithAdf(page, adf, Device.iPadPro);
+    await page.click(getSelectorForTableCell({ row: 1, cell: 1 }));
+  });
+
+  it(`looks correct at LaptopMDPI for comment`, async () => {
+    await initCommentEditorWithAdf(page, adf, Device.LaptopMDPI);
+    await page.click(getSelectorForTableCell({ row: 1, cell: 1 }));
   });
 });

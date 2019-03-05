@@ -1,5 +1,6 @@
 import { goToRendererTestingExample, mountRenderer, snapshot } from './_utils';
 import { layoutWithDefaultBreakoutMark } from './__fixtures__/document-with-layout-default-breakout';
+import { Page } from 'puppeteer';
 
 const twoColumnLayout = {
   version: 1,
@@ -47,8 +48,8 @@ const twoColumnLayout = {
   ],
 };
 
-describe.skip('Snapshot Test: Layouts', () => {
-  let page;
+describe('Layouts', () => {
+  let page: Page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
@@ -71,7 +72,7 @@ describe.skip('Snapshot Test: Layouts', () => {
 });
 
 describe('Snapshot Test: Breakout Layouts', () => {
-  let page;
+  let page: Page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
@@ -79,7 +80,7 @@ describe('Snapshot Test: Breakout Layouts', () => {
   });
 
   it(`should correctly render two column layout with a default breakout mark`, async () => {
-    await page.setViewport({ width: 1120, height: 500 });
+    await page.setViewport({ width: 1120, height: 700 });
     await page.waitFor(100);
     mountRenderer(page, {
       document: layoutWithDefaultBreakoutMark,

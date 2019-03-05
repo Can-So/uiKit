@@ -70,6 +70,17 @@ export default class LayoutManager extends Component<
 
   static defaultProps = {
     collapseToggleTooltipContent: defaultTooltipContent,
+    datasets: {
+      contextualNavigation: {
+        'data-test-id': 'ContextualNavigation',
+      },
+      globalNavigation: {
+        'data-test-id': 'GlobalNavigation',
+      },
+      navigation: {
+        'data-test-id': 'Navigation',
+      },
+    },
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
     experimental_alternateFlyoutBehaviour: false,
@@ -163,12 +174,17 @@ export default class LayoutManager extends Component<
   renderGlobalNavigation = () => {
     const {
       containerNavigation,
+      datasets,
       globalNavigation: GlobalNavigation,
       // eslint-disable-next-line camelcase
       experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
     } = this.props;
+
+    const dataset = datasets ? datasets.globalNavigation : {};
+
     return (
       <div
+        {...dataset}
         onMouseOver={
           EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR ? this.closeFlyout : null
         }
@@ -196,6 +212,7 @@ export default class LayoutManager extends Component<
     const { transitionState, transitionStyle } = args;
     const {
       containerNavigation,
+      datasets,
       // eslint-disable-next-line camelcase
       experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
       navigationUIController,
@@ -207,12 +224,15 @@ export default class LayoutManager extends Component<
     const shouldDisableInteraction =
       isResizing || isTransitioning(transitionState);
 
+    const dataset = datasets ? datasets.contextualNavigation : {};
+
     return (
       <ContentNavigationWrapper
         key="product-nav-wrapper"
         innerRef={this.getNavRef}
         disableInteraction={shouldDisableInteraction}
         style={transitionStyle}
+        {...dataset}
       >
         <ContentNavigation
           container={containerNavigation}
@@ -251,6 +271,7 @@ export default class LayoutManager extends Component<
 
   renderNavigation = () => {
     const {
+      datasets,
       navigationUIController,
       // eslint-disable-next-line camelcase
       experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
@@ -271,6 +292,8 @@ export default class LayoutManager extends Component<
     const flyoutWidth = EXPERIMENTAL_FULL_WIDTH_FLYOUT
       ? productNavWidth
       : CONTENT_NAV_WIDTH_FLYOUT;
+
+    const dataset = datasets ? datasets.navigation : {};
 
     return (
       <LayoutEventListener
@@ -310,6 +333,7 @@ export default class LayoutManager extends Component<
                   : null;
               return (
                 <NavigationContainer
+                  {...dataset}
                   innerRef={this.getContainerRef}
                   onMouseEnter={this.mouseEnter}
                   onMouseOver={

@@ -152,16 +152,6 @@ export default class Editor extends React.Component<Props, State> {
     });
   };
 
-  private handleRef = (node: HTMLDivElement) => {
-    if (!this.props.disableScrollTo && this.props.isExpanded && node) {
-      if ((node as any).scrollIntoViewIfNeeded) {
-        (node as any).scrollIntoViewIfNeeded({ behavior: 'smooth' });
-      } else if (node.scrollIntoView) {
-        node.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
-
   private onChange = async (actions: EditorActions) => {
     if (this.props.onChange) {
       const value = await actions.getValue();
@@ -210,7 +200,7 @@ export default class Editor extends React.Component<Props, State> {
     };
 
     return (
-      <div ref={this.handleRef}>
+      <div>
         <CollapsedEditor
           placeholder={placeholder}
           isExpanded={this.state.isExpanded}

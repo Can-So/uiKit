@@ -1,60 +1,164 @@
-import * as React from 'react';
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
+import {
+  Context,
+  FileState,
+  FileIdentifier,
+  isDifferentIdentifier,
+} from '@atlaskit/media-core';
+import { Subscription } from 'rxjs/Subscription';
+import { MediaStoreGetFileImageParams } from '@atlaskit/media-store';
 
-export type MediaApiConfig = {
-  clientId: string;
-  token: string;
-  baseUrl: string;
-};
-
+export interface MediaImageChildrenProps {
+  /** Boolean with value to check if component is loading image source from API */
+  loading: boolean;
+  /** Boolean with value to check if there was an error during the image load from media API */
+  error: boolean;
+  /** Data structure with image data, if media API returned with success */
+  data: MediaImageState | undefined;
+}
 export interface MediaImageProps {
-  id: string;
-  mediaApiConfig: MediaApiConfig;
-  className?: string;
-  width?: number;
-  height?: number;
-  collectionName?: string;
+  /** Instance of file identifier */
+  identifier: FileIdentifier;
+  /** Instance of Media Context */
+  context: Context;
+  /** Media API Configuration object */
+  apiConfig?: MediaStoreGetFileImageParams;
+  /** Render props returning `MediaImageChildrenProps` data structure */
+  children: (props: MediaImageChildrenProps) => ReactNode;
 }
 
-export interface MediaImageState {}
+export interface MediaImageState {
+  /** Current status of the image to be loaded */
+  status: 'loading' | 'error' | 'processed' | 'succeeded';
+  /** Image source. It will be added in case the request for the image returns with success or image preview is available */
+  src?: string;
+}
 
 export class MediaImage extends Component<MediaImageProps, MediaImageState> {
-  private get imgSrc(): string {
+  subscription?: Subscription;
+  state: MediaImageState = {
+    status: 'loading',
+  };
+
+  static defaultProps = {
+    apiConfig: {},
+  };
+
+  componentDidMount() {
+    this.subscribe(this.props);
+  }
+
+  componentWillReceiveProps({
+    apiConfig: newApiConfig = {},
+    identifier: newIdentifier,
+    ...otherNewProps
+  }: MediaImageProps) {
+    const { apiConfig = {}, identifier } = this.props;
+    const isWidthBigger =
+      newApiConfig.width &&
+      apiConfig.width &&
+      newApiConfig.width > apiConfig.width;
+    const isHeightBigger =
+      newApiConfig.height &&
+      apiConfig.height &&
+      newApiConfig.height > apiConfig.height;
+
+    const isNewDimensionsBigger = isWidthBigger || isHeightBigger;
+
+    if (
+      (!!newIdentifier && isDifferentIdentifier(newIdentifier, identifier)) ||
+      isNewDimensionsBigger
+    ) {
+      this.subscribe({
+        identifier: newIdentifier,
+        apiConfig: newApiConfig,
+        ...otherNewProps,
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+    this.releaseSrc();
+  }
+
+  private releaseSrc = () => {
+    const { src } = this.state;
+    if (src) {
+      URL.revokeObjectURL(src);
+    }
+  };
+
+  private async subscribe(props: MediaImageProps) {
     const {
-      id,
-      mediaApiConfig: { clientId, token, baseUrl },
-      collectionName,
-    } = this.props;
+      context,
+      identifier: { id, collectionName },
+      apiConfig,
+    } = props;
+    this.unsubscribe();
+    this.setState({ status: 'loading' });
 
-    return `${baseUrl}/file/${id}/image?client=${clientId}&token=${token}${
-      collectionName ? `&collection=${collectionName}` : ''
-    }`;
+    const fileId = await id;
+
+    this.subscription = context.file
+      .getFileState(fileId, { collectionName })
+      .subscribe({
+        next: async (fileState: FileState) => {
+          if (fileState.status === 'error' || fileState.mediaType !== 'image') {
+            this.setState({ status: 'error' });
+            return;
+          }
+
+          const { preview } = fileState;
+
+          if (preview) {
+            const value = (await preview).value;
+
+            // NOTE: Preview is referring to the local image
+            // after page reload it will get the image src
+            // based on the API
+            // PS: it will the case for third-party, such as Giphy
+            if (typeof value !== 'string') {
+              this.setSourceFromBlob(value);
+              return;
+            }
+          }
+
+          if (fileState.status === 'processed') {
+            const blob = await context.getImage(fileId, {
+              collection: collectionName,
+              ...apiConfig,
+            });
+            this.setSourceFromBlob(blob);
+          }
+        },
+        error: () => this.setState({ status: 'error' }),
+      });
   }
 
-  private get hasAuth(): boolean {
-    const { clientId, token, baseUrl } = this.props.mediaApiConfig;
+  private setSourceFromBlob(blob: Blob) {
+    const src = URL.createObjectURL(blob);
+    this.releaseSrc();
 
-    return !!clientId && !!token && !!baseUrl;
+    this.setState({
+      status: 'succeeded',
+      src,
+    });
+    this.unsubscribe();
   }
 
-  private get style() {
-    const { width, height } = this.props;
-
-    return {
-      ...(width && { width: `${width}px` }),
-      ...(height && { height: `${height}px` }),
-    };
-  }
+  unsubscribe = () => {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  };
 
   render() {
-    const { hasAuth, style, imgSrc } = this;
-    if (!hasAuth) {
-      return null;
-    }
-
-    const { className } = this.props;
-
-    return <img src={imgSrc} style={style} className={className} />;
+    return this.props.children({
+      loading: this.state.status === 'loading',
+      error: this.state.status === 'error',
+      data: this.state.status === 'succeeded' ? this.state : undefined,
+    });
   }
 }
 

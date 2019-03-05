@@ -16,6 +16,9 @@ import { MediaProps } from './media';
 export interface Props {
   children: ReactElement<any>;
   layout: MediaSingleLayout;
+  width?: number;
+  allowDynamicTextSizing?: boolean;
+  rendererAppearance: RendererAppearance;
 }
 
 export interface State {
@@ -36,21 +39,19 @@ const ExtendedUIMediaSingle = styled(UIMediaSingle)`
       : ``} transition: all 0.1s linear;
 `;
 
-export default class MediaSingle extends Component<
-  {
-    layout: MediaSingleLayout;
-    width?: number;
-    allowDynamicTextSizing?: boolean;
-    rendererAppearance: RendererAppearance;
-  },
-  State
-> {
-  constructor(props) {
+export default class MediaSingle extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {}; // Need to initialize with empty state.
   }
 
-  private onExternalImageLoaded = ({ width, height }) => {
+  private onExternalImageLoaded = ({
+    width,
+    height,
+  }: {
+    width: number;
+    height: number;
+  }) => {
     this.setState({
       width,
       height,

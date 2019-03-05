@@ -1,5 +1,11 @@
 # @atlaskit/size-detector
 
+## 6.0.0
+- [major] [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
+
+  - Size-detector now calls children with null on inital load.
+  - As a consumer please do null check for width and height passed in size argument of render function.
+
 ## 5.0.9
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/docs@6.0.0

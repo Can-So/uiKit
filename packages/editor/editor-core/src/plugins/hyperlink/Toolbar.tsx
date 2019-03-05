@@ -37,9 +37,9 @@ const showTextToolbar = (text, pos): Array<FloatingToolbarItem<Command>> => {
   return [
     {
       type: 'input',
-      onSubmit: text => setLinkText(pos, text),
+      onSubmit: text => setLinkText(text, pos),
       placeholder: 'Text to display',
-      onBlur: text => setLinkText(pos, text),
+      onBlur: text => setLinkText(text, pos),
     },
   ];
 };
@@ -51,10 +51,10 @@ const showLinkEditToolbar = (
   return [
     {
       type: 'input',
-      onSubmit: link => setLinkHref(pos, link),
+      onSubmit: link => setLinkHref(link, pos),
       placeholder: 'Setup link here',
       defaultValue: link || '',
-      onBlur: link => setLinkHref(pos, link),
+      onBlur: link => setLinkHref(link, pos),
     },
   ];
 };

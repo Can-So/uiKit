@@ -26,10 +26,14 @@ export function createWidthContext(width: number = 0) {
 
 const { Provider, Consumer } = React.createContext(createWidthContext());
 
-export class WidthProvider extends React.Component<any, { width: number }> {
+export type WidthProviderState = {
+  width?: number;
+};
+
+export class WidthProvider extends React.Component<any, WidthProviderState> {
   state = { width: 0 };
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state.width = document.body.offsetWidth;
   }
@@ -43,8 +47,10 @@ export class WidthProvider extends React.Component<any, { width: number }> {
             borderStyle: 'none',
           }}
         >
-          {({ width }) => {
-            this.setWidth(width);
+          {({ width }: WidthProviderState) => {
+            if (width !== null) {
+              this.setWidth(width);
+            }
             return null;
           }}
         </SizeDetector>
@@ -55,7 +61,7 @@ export class WidthProvider extends React.Component<any, { width: number }> {
     );
   }
 
-  setWidth = rafSchedule(width => {
+  setWidth = rafSchedule((width: number) => {
     if (this.state.width === width) {
       return;
     }

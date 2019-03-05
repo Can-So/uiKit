@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 8.0.0
+- [major] [25952eca2f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25952eca2f):
+
+  - Adding upgrade guide docs to help consumers with the major bump
+
 ## 7.0.10
 - [patch] [f84de3bf0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f84de3bf0b):
 

@@ -4,23 +4,27 @@ import React, { PureComponent, type ElementType, type Ref } from 'react';
 import { css } from 'emotion';
 
 import { styleReducerNoOp, withContentTheme } from '../../../theme';
-import type { ItemPrimitiveProps } from './types';
+import type { Dataset, ItemPrimitiveProps } from './types';
 
 const isString = x => typeof x === 'string';
 
 type SwitchProps = {
   as: ElementType,
+  dataset: Dataset,
   draggableProps: {},
   innerRef: Ref<*>,
 };
 const ComponentSwitch = ({
   as,
+  dataset,
   draggableProps,
   innerRef,
   ...rest
 }: SwitchProps) => {
   const isElement = isString(as);
-  const props = isElement ? rest : { innerRef, draggableProps, ...rest };
+  const props = isElement
+    ? { ...dataset, ...rest }
+    : { innerRef, dataset, draggableProps, ...rest };
   // only pass the actual `ref` to an element, it's the responsibility of the
   // component author to use `innerRef` where applicable
   const ref = isElement ? innerRef : null;
@@ -45,6 +49,9 @@ const getItemComponentProps = (props: ItemPrimitiveProps) => {
 
 class ItemPrimitive extends PureComponent<ItemPrimitiveProps> {
   static defaultProps = {
+    dataset: {
+      'data-test-id': 'NavigationItem',
+    },
     isActive: false,
     isDragging: false,
     isHover: false,
@@ -60,6 +67,7 @@ class ItemPrimitive extends PureComponent<ItemPrimitiveProps> {
       after: After,
       before: Before,
       component: CustomComponent,
+      dataset,
       draggableProps,
       href,
       innerRef,
@@ -90,17 +98,24 @@ class ItemPrimitive extends PureComponent<ItemPrimitiveProps> {
     // base element switch
 
     let itemComponent = 'div';
-    let itemProps = { draggableProps, innerRef };
+    let itemProps = { draggableProps, innerRef, dataset };
 
     if (CustomComponent) {
       itemComponent = CustomComponent;
       itemProps = getItemComponentProps(this.props);
     } else if (href) {
       itemComponent = 'a';
-      itemProps = { href, onClick, target, draggableProps, innerRef };
+      itemProps = {
+        dataset,
+        href,
+        onClick,
+        target,
+        draggableProps,
+        innerRef,
+      };
     } else if (onClick) {
       itemComponent = 'button';
-      itemProps = { onClick, draggableProps, innerRef };
+      itemProps = { dataset, onClick, draggableProps, innerRef };
     }
 
     return (

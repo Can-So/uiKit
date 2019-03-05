@@ -2,7 +2,13 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { ResourcedMention } from '@atlaskit/mention';
 import MentionNode from '../../../../react/nodes/mention';
-import { Mention } from '@atlaskit/editor-common';
+import {
+  Mention,
+  EventHandlers,
+  MentionEventHandler,
+} from '@atlaskit/editor-common';
+
+const mentionHandler: MentionEventHandler = (mentionId, text, event?) => {};
 
 describe('Renderer - React/Nodes/Mention', () => {
   it('should render UI mention component', () => {
@@ -26,11 +32,11 @@ describe('Renderer - React/Nodes/Mention', () => {
   });
 
   it('should pass event handlers into resourced mention', () => {
-    const onClick = () => {};
-
-    const eventHandlers = {
+    const eventHandlers: EventHandlers = {
       mention: {
-        onClick,
+        onClick: mentionHandler,
+        onMouseEnter: mentionHandler,
+        onMouseLeave: mentionHandler,
       },
     };
 
@@ -43,7 +49,7 @@ describe('Renderer - React/Nodes/Mention', () => {
     );
     const resourcedMention = mention.find(ResourcedMention);
 
-    expect(resourcedMention.prop('onClick')).toEqual(onClick);
+    expect(resourcedMention.prop('onClick')).toEqual(mentionHandler);
     mention.unmount();
   });
 });

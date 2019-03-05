@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/panel",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A React component rendering a collapsible panel",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -21,7 +21,7 @@
   "dependencies": {
     "@atlaskit/button": "^10.1.2",
     "@atlaskit/icon": "^16.0.0",
-    "@atlaskit/size-detector": "^5.0.9",
+    "@atlaskit/size-detector": "^6.0.0",
     "@atlaskit/theme": "^7.0.1",
     "@babel/runtime": "^7.0.0",
     "react-animate-height": "^2.0.5",

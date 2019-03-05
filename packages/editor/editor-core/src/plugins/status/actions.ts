@@ -133,9 +133,7 @@ export const commitStatusPicker = () => (editorView: EditorView) => {
     );
   } else {
     // no content - remove node
-    tr = tr
-      .delete(showStatusPickerAt, showStatusPickerAt + 1)
-      .setSelection(Selection.near(state.tr.doc.resolve(showStatusPickerAt)));
+    tr = tr.delete(showStatusPickerAt, showStatusPickerAt + 1);
   }
 
   dispatch(tr);

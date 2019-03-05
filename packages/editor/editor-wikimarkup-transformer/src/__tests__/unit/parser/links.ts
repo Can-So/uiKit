@@ -82,11 +82,11 @@ describe('JIRA wiki markup - Links', () => {
     ],
     [
       '[CS-676] should trim escape in href',
-      'This is a link https://extranet.atlassian.com/display/JPLAT/AtlasKit\\+components\\+needed\\+for\\+Bento',
+      'This is a link https://extranet.atlassian.com/display/JPLAT/Atlaskit\\+components\\+needed\\+for\\+Bento',
     ],
     [
-      '[CS-691] should be able to parse issue-link',
-      'This is an issue link [smart-link|https://product-fabric.atlassian.net/browse/EX-522]',
+      '[CS-787] should convert back to inline card',
+      'This is a smart link [https://www.dropbox.com/s/2mh79iuglsnmbwf/Get%20Started%20with%20Dropbox.pdf?dl=0|https://www.dropbox.com/s/2mh79iuglsnmbwf/Get%20Started%20with%20Dropbox.pdf?dl=0|smart-link]',
     ],
   ];
 

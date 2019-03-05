@@ -9,7 +9,7 @@ describe('ProviderFactory', () => {
   const handler3 = jest.fn();
 
   describe('setProvider', () => {
-    let providerFactory;
+    let providerFactory: ProviderFactory;
 
     beforeEach(() => {
       providerFactory = new ProviderFactory();
@@ -47,7 +47,10 @@ describe('ProviderFactory', () => {
     });
 
     it('should trigger notifyUpdated', () => {
-      const spy = jest.spyOn(providerFactory, 'notifyUpdated');
+      const spy = jest.spyOn<ProviderFactory, any>(
+        providerFactory,
+        'notifyUpdated',
+      );
       providerFactory.setProvider(providerName1, provider);
       providerFactory.setProvider(providerName1, undefined);
 
@@ -71,7 +74,10 @@ describe('ProviderFactory', () => {
       });
 
       it('should not trigger notifyUpdated', () => {
-        const spy = jest.spyOn(providerFactory, 'notifyUpdated');
+        const spy = jest.spyOn<ProviderFactory, any>(
+          providerFactory,
+          'notifyUpdated',
+        );
         providerFactory.setProvider(providerName1, provider);
 
         expect(spy).not.toHaveBeenCalled();
@@ -91,7 +97,10 @@ describe('ProviderFactory', () => {
       });
 
       it('should not trigger notifyUpdated', () => {
-        const spy = jest.spyOn(providerFactory, 'notifyUpdated');
+        const spy = jest.spyOn<ProviderFactory, any>(
+          providerFactory,
+          'notifyUpdated',
+        );
         providerFactory.setProvider(providerName1, undefined);
 
         expect(spy).not.toHaveBeenCalled();
@@ -100,7 +109,7 @@ describe('ProviderFactory', () => {
   });
 
   describe('removeProvider', () => {
-    let providerFactory;
+    let providerFactory: ProviderFactory;
 
     beforeEach(() => {
       providerFactory = new ProviderFactory();
@@ -119,7 +128,10 @@ describe('ProviderFactory', () => {
     });
 
     it('should trigger notifyUpdated', () => {
-      const spy = jest.spyOn(providerFactory, 'notifyUpdated');
+      const spy = jest.spyOn<ProviderFactory, any>(
+        providerFactory,
+        'notifyUpdated',
+      );
       providerFactory.removeProvider(providerName1);
 
       expect(spy).toHaveBeenCalled();
@@ -129,7 +141,7 @@ describe('ProviderFactory', () => {
   });
 
   describe('subscribe', () => {
-    let providerFactory;
+    let providerFactory: ProviderFactory;
 
     beforeEach(() => {
       providerFactory = new ProviderFactory();
@@ -158,7 +170,7 @@ describe('ProviderFactory', () => {
   });
 
   describe('unsubscribe', () => {
-    let providerFactory;
+    let providerFactory: ProviderFactory;
 
     beforeEach(() => {
       providerFactory = new ProviderFactory();
@@ -185,7 +197,7 @@ describe('ProviderFactory', () => {
   });
 
   describe('notifyUpdated', () => {
-    let providerFactory;
+    let providerFactory: ProviderFactory;
 
     beforeEach(() => {
       providerFactory = new ProviderFactory();

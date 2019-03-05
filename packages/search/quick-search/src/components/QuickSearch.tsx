@@ -378,13 +378,21 @@ export class QuickSearch extends React.Component<Props, State> {
           });
         }
 
+        let preventDefault = false;
         if (result.props.onClick) {
           result.props.onClick({
             resultId: result.props.resultId,
             type: result.props.type,
+            event: Object.assign({}, event, {
+              preventDefault() {
+                preventDefault = true;
+              },
+              stopPropagation() {},
+            }),
           });
         }
-        if (result.props.href) {
+
+        if (result.props.href && !preventDefault) {
           window.location.assign(result.props.href);
         }
       }

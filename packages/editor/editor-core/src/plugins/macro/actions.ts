@@ -11,6 +11,8 @@ import {
   replaceParentNodeOfType,
 } from 'prosemirror-utils';
 
+import { normaliseNestedLayout } from '../../utils';
+
 export const insertMacroFromMacroBrowser = (
   macroProvider: MacroProvider,
   macroNode?: PmNode,
@@ -81,7 +83,7 @@ export const resolveMacro = (
     node = schema.nodes.inlineExtension.create(attrs);
   }
 
-  return node;
+  return normaliseNestedLayout(state, node);
 };
 
 // gets the macroProvider from the state and tries to autoConvert a given text

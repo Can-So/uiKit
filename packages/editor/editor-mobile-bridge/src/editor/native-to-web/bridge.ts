@@ -22,4 +22,5 @@ export default interface NativeToWebBridge {
   onOutdentList();
   onStatusUpdate(text: string, color: StatusColor, uuid: string);
   onStatusPickerDismissed();
+  onLinkUpdate(text: string, url: string);
 }

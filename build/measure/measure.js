@@ -26,23 +26,22 @@ module.exports = function main(
   updateSnapshot,
 ) {
   return new Promise((resolve, reject) => {
-    const measureOutputPath = path.join(
-      process.cwd(),
-      filePath,
-      '.measure-output',
-    );
+    const measureOutputPath = path.join(filePath, '.measure-output');
 
     const sanitizedFilePath = filePath.replace('/', '__');
     const measureCompiledOutputPath = path.join(
       measureOutputPath,
       sanitizedFilePath,
     );
-    const entryPoint = path.join(process.cwd(), filePath);
+    const dirs = filePath.split(path.sep);
+    const packageName = dirs[dirs.length - 1];
 
-    const spinner = ora(chalk.cyan(`Compiling "${filePath}"`)).start();
+    const atlaskitPackagesDir = path.join(__dirname, '..', '..', 'packages');
 
-    if (!fExists(entryPoint)) {
-      spinner.fail(chalk.red(`File "${entryPoint}" doesn't exist.`));
+    const spinner = ora(chalk.cyan(`Compiling "${packageName}"`)).start();
+
+    if (!fExists(filePath)) {
+      spinner.fail(chalk.red(`File "${filePath}" doesn't exist.`));
       process.exit(1);
     }
 
@@ -105,8 +104,8 @@ module.exports = function main(
         name: 'Atlaskit Dependencies',
         group: true,
         stats: createAtlaskitStatsGroups(
-          path.join(__dirname, '..', '..', 'packages'),
-          filePath,
+          atlaskitPackagesDir,
+          path.relative(atlaskitPackagesDir, filePath),
         ),
       },
     ];
@@ -145,7 +144,7 @@ module.exports = function main(
      */
     const mainConfig = createWebpackConfig({
       outputDir: measureCompiledOutputPath,
-      entryPoint: { main: entryPoint },
+      entryPoint: { main: filePath },
       optimization: {
         splitChunks: {
           cacheGroups: buildCacheGroups(mainStatsGroups),
@@ -160,7 +159,7 @@ module.exports = function main(
      */
     const combinedConfig = createWebpackConfig({
       outputDir: measureCompiledOutputPath,
-      entryPoint: { combined_sync: entryPoint },
+      entryPoint: { combined_sync: filePath },
       optimization: {
         splitChunks: {
           cacheGroups: buildCacheGroups(combinedStatsGroups),
@@ -185,7 +184,7 @@ module.exports = function main(
         exec(`rm -rf ${measureCompiledOutputPath}`);
       } catch (e) {}
 
-      const prevStatsPath = path.join(entryPoint, `bundle-size-ratchet.json`);
+      const prevStatsPath = path.join(filePath, `bundle-size-ratchet.json`);
 
       let prevStats;
       if (fExists(prevStatsPath)) {
@@ -196,19 +195,22 @@ module.exports = function main(
       const statsExceededSizeLimit = statsWithDiff.filter(
         stat => stat.isTooBig,
       );
+      const passedBundleSizeCheck = !statsExceededSizeLimit.length;
 
-      if (statsExceededSizeLimit.length) {
-        spinner.fail(
-          chalk.red(`Module "${filePath}" has exceeded size limit!`),
+      if (passedBundleSizeCheck) {
+        spinner.succeed(
+          chalk.cyan(`Module "${packageName}" passed bundle size check`),
         );
       } else {
-        spinner.succeed(chalk.cyan(`Module "${filePath}" successfully built`));
+        spinner.fail(
+          chalk.red(`Module "${packageName}" has exceeded size limit!`),
+        );
       }
 
+      console.log();
       if (isJson) {
         return console.log(JSON.stringify(stats, null, 2));
-      } else if (!isLint || statsExceededSizeLimit.length) {
-        console.log('');
+      } else if (!isLint || !passedBundleSizeCheck) {
         printHowToReadStats();
         printReport(prepareForPrint(joinedStatsGroups, statsWithDiff));
       }
@@ -220,10 +222,11 @@ module.exports = function main(
           'utf8',
         );
       } else if (statsExceededSizeLimit.length && isLint) {
-        return reject(`✖ Module "${filePath}" has exceeded size limit!`);
+        return reject(`✖ Module "${packageName}" has exceeded size limit!`);
       }
 
-      resolve();
+      const result = passedBundleSizeCheck ? 1 : 0;
+      resolve(result);
     });
   });
 };

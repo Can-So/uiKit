@@ -90,14 +90,14 @@ export default function overflowShadow<P extends OverflowShadowProps>(
       return width;
     };
 
-    handleContainer = (container: HTMLElement | null) => {
+    handleContainer = (container: HTMLElement | null): void => {
       if (!container || this.container) {
         return;
       }
       this.container = container;
       this.overflowContainer = container.querySelector(
         options.overflowSelector,
-      );
+      ) as HTMLElement;
       this.scrollable = container.querySelectorAll(options.scrollableSelector);
 
       if (!(this.overflowContainer && this.scrollable)) {

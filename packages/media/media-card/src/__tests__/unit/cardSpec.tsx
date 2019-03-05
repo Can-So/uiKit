@@ -24,6 +24,7 @@ import {
   FilePreview,
 } from '../../../src/utils/getDataURIFromFileState';
 import { InlinePlayer } from '../../../src/root/inlinePlayer';
+import { MediaViewer } from '@atlaskit/media-viewer';
 
 describe('Card', () => {
   const fileIdentifier: FileIdentifier = {
@@ -63,6 +64,7 @@ describe('Card', () => {
           mimeType: 'image/png',
           name: 'file-name',
           size: 10,
+          representations: { image: {} },
           ...fileState,
         }),
       },
@@ -528,8 +530,13 @@ describe('Card', () => {
     expect(component.find(CardView).prop('status')).toEqual('error');
   });
 
-  it('should fetch remote preview when file is processed and there is no local preview', async () => {
-    const context = createContextWithGetFile();
+  it('should fetch remote preview when image representation available and there is no local preview', async () => {
+    const context = createContextWithGetFile({
+      status: 'processing',
+      representations: {
+        image: {},
+      },
+    });
     setup(context, undefined, emptyPreview);
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
@@ -546,7 +553,7 @@ describe('Card', () => {
     });
   });
 
-  it('should not fetch remote preview when file is processed and there is local preview', async () => {
+  it('should not fetch remote preview when there is local preview', async () => {
     const subject = new ReplaySubject<FileState>(1);
     const baseState: FileState = {
       id: '123',
@@ -555,6 +562,9 @@ describe('Card', () => {
       mimeType: 'image/png',
       name: 'file-name',
       size: 10,
+      representations: {
+        image: {},
+      },
     };
     subject.next(baseState);
     const context = fakeContext({
@@ -797,6 +807,87 @@ describe('Card', () => {
       } as any);
 
       expect(component.state('isPlayingFile')).toBeTruthy();
+    });
+  });
+
+  describe('MediaViewer integration', () => {
+    const clickedIdentifier: any = {
+      mediaItemDetails: {
+        mediaType: 'file',
+      },
+    };
+
+    it('should render MV when shouldOpenMediaViewer=true', async () => {
+      const { component } = setup(undefined, { shouldOpenMediaViewer: true });
+      const instance = component.instance() as Card;
+
+      instance.onClick(clickedIdentifier);
+      await nextTick();
+
+      const MV = component.find(MediaViewer);
+
+      expect(component.state('mediaViewerSelectedItem')).toEqual(
+        fileIdentifier,
+      );
+      expect(MV).toHaveLength(1);
+      expect(MV.props()).toEqual(
+        expect.objectContaining({
+          collectionName: 'some-collection-name',
+          dataSource: { list: [fileIdentifier] },
+          selectedItem: fileIdentifier,
+        }),
+      );
+    });
+
+    it('should pass dataSource to MV', async () => {
+      const { component } = setup(undefined, {
+        shouldOpenMediaViewer: true,
+        mediaViewerDataSource: { list: [fileIdentifier, fileIdentifier] },
+      });
+      const instance = component.instance() as Card;
+
+      instance.onClick(clickedIdentifier);
+      await nextTick();
+      expect(component.find(MediaViewer).prop('dataSource')).toEqual({
+        list: [fileIdentifier, fileIdentifier],
+      });
+    });
+
+    it('should add card identifier to MV list if not present', async () => {
+      const otherIdentifier: any = {};
+      const { component } = setup(undefined, {
+        shouldOpenMediaViewer: true,
+        mediaViewerDataSource: { list: [otherIdentifier] },
+      });
+      const instance = component.instance() as Card;
+
+      instance.onClick(clickedIdentifier);
+      await nextTick();
+      expect(component.find(MediaViewer).prop('dataSource')).toEqual({
+        list: [fileIdentifier, otherIdentifier],
+      });
+    });
+
+    it('should not render MV if useInlinePlayer=true and identifier is video type', async () => {
+      const videoIdentifier: FileIdentifier = {
+        id: '1',
+        mediaItemType: 'file',
+      };
+      const { component } = setup(undefined, {
+        useInlinePlayer: true,
+        shouldOpenMediaViewer: true,
+        identifier: videoIdentifier,
+      });
+      const instance = component.instance() as Card;
+
+      instance.onClick({
+        mediaItemDetails: {
+          mediaType: 'video',
+        },
+      } as any);
+      await nextTick();
+
+      expect(component.find(MediaViewer)).toHaveLength(0);
     });
   });
 });

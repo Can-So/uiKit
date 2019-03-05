@@ -16,6 +16,14 @@ import {
   InsertType,
 } from '../../../../analytics/fabric-analytics-helper';
 import { EmojiState } from '../../pm-plugins/main';
+import {
+  AnalyticsEventPayload,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+} from '../../../analytics';
 
 export interface Props {
   editorView?: EditorView;
@@ -25,6 +33,7 @@ export interface Props {
   popupsMountPoint?: HTMLElement;
   popupsScrollableElement?: HTMLElement;
   emojiProvider: Promise<EmojiProvider>;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 }
 
 export interface State {
@@ -143,11 +152,21 @@ export default class EmojiTypeAhead extends PureComponent<Props, State> {
     emoji: OptionalEmojiDescription,
   ) => {
     const _emoji = emoji as EmojiDescription;
+    const { dispatchAnalyticsEvent } = this.props;
     this.fireTypeAheadSelectedAnalytics(
       _emoji,
       this.lastKeyTyped,
       this.pluginState!.query,
     );
+    if (dispatchAnalyticsEvent) {
+      dispatchAnalyticsEvent({
+        action: ACTION.INSERTED,
+        actionSubject: ACTION_SUBJECT.DOCUMENT,
+        actionSubjectId: ACTION_SUBJECT_ID.EMOJI,
+        attributes: { inputMethod: INPUT_METHOD.TYPEAHEAD },
+        eventType: EVENT_TYPE.TRACK,
+      });
+    }
     this.pluginState!.insertEmoji(emojiId);
   };
 
@@ -177,6 +196,7 @@ export default class EmojiTypeAhead extends PureComponent<Props, State> {
   ): void => {
     const queryLength = (query && query.length) || 0;
     const insertType = getInsertTypeForKey(key) || InsertType.SELECTED;
+    const { dispatchAnalyticsEvent } = this.props;
 
     analyticsService.trackEvent('atlassian.fabric.emoji.typeahead.select', {
       mode: insertType,
@@ -185,6 +205,15 @@ export default class EmojiTypeAhead extends PureComponent<Props, State> {
       type: (emoji && emoji.type) || '',
       queryLength,
     });
+    if (insertType === InsertType.SPACE && dispatchAnalyticsEvent) {
+      dispatchAnalyticsEvent({
+        action: ACTION.INSERTED,
+        actionSubject: ACTION_SUBJECT.DOCUMENT,
+        actionSubjectId: ACTION_SUBJECT_ID.EMOJI,
+        attributes: { inputMethod: INPUT_METHOD.ASCII },
+        eventType: EVENT_TYPE.TRACK,
+      });
+    }
   };
 
   handleSpaceTyped = (): void => {

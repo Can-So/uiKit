@@ -42,10 +42,14 @@ const renderEmoji = (fitToHeight: number = 24) => {
 export default function Example() {
   return (
     <div>
-      <p>{renderEmoji(12)}</p>
-      <p>{renderEmoji()}</p>
-      <p>{renderEmoji(40)}</p>
-      <p>{renderEmoji(64)}</p>
+      <div>{renderEmoji(12)}</div>
+      <br />
+      <div>{renderEmoji()}</div>
+      <br />
+      <div>{renderEmoji(40)}</div>
+      <br />
+      <div>{renderEmoji(64)}</div>
+      <br />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';
+import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { Editor, EditorProps, EventDispatcher } from './../src';
 import ClipboardHelper from './1-clipboard-helper';
 import { SaveAndCancelButtons } from './5-full-page';
@@ -73,7 +74,7 @@ function createEditorWindowBindings(win: Window) {
     if (props && props.UNSAFE_cards && props.UNSAFE_cards.provider) {
       props.UNSAFE_cards.provider = cardProviderPromise;
     }
-    if (props && props.quickInsert && props.quickInsert) {
+    if (props && props.quickInsert) {
       props.quickInsert = { provider: Promise.resolve(quickInsertProvider) };
     }
 
@@ -98,6 +99,10 @@ function createEditorWindowBindings(win: Window) {
       props.contentComponents = (
         <TitleInput placeholder="Give this page a title..." />
       );
+    }
+
+    if (props && props.allowExtension) {
+      props.extensionHandlers = extensionHandlers;
     }
 
     ReactDOM.unmountComponentAtNode(target);

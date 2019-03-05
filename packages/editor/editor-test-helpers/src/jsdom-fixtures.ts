@@ -15,7 +15,7 @@ export class NullSelectionReader {
   }
 
   // Store the current state of the DOM selection.
-  storeDOMState(selection) {
+  storeDOMState(selection: any) {
     this.warnOnce();
   }
 
@@ -26,13 +26,13 @@ export class NullSelectionReader {
   // : (?string) → bool
   // When the DOM selection changes in a notable manner, modify the
   // current selection state to match.
-  readFromDOM(origin) {
+  readFromDOM(origin: any) {
     this.warnOnce();
     return true;
   }
 }
 
-export default editorView => {
+export default (editorView: any) => {
   const warnOnce = (() => {
     return () => {
       if ((window as any).hasWarnedAboutJsdomFixtures) {
@@ -52,14 +52,18 @@ export default editorView => {
   (editorView as any).selectionReader = new NullSelectionReader(warnOnce);
 
   // Make sure that we don't attempt to scroll down to selection when dispatching a transaction
-  (editorView as any).updateState = function(state) {
+  (editorView as any).updateState = function(state: any) {
     warnOnce();
     state.scrollToSelection = 0;
     EditorView.prototype.updateState.apply(this, arguments);
   };
 
   // Do nothing to update selection
-  (editorView as any).setSelection = function(anchor, head, root) {
+  (editorView as any).setSelection = function(
+    anchor: any,
+    head: any,
+    root: any,
+  ) {
     warnOnce();
   };
 

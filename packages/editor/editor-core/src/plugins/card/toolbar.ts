@@ -43,7 +43,8 @@ const visit: Command = state => {
     const data = attrs.data || {};
     const url = attrs.url || data.url;
 
-    window.open(url);
+    // All card links should open in the same tab per https://product-fabric.atlassian.net/browse/MS-1583.
+    window.open(url, '_self');
     analyticsService.trackEvent('atlassian.editor.format.card.visit.button');
     return true;
   }

@@ -1,5 +1,39 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 3.5.1
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/editor-core@102.0.0
+  - @atlaskit/renderer@41.0.0
+  - @atlaskit/editor-json-transformer@4.3.1
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/util-data-test@10.2.2
+
+## 3.5.0
+- [minor] [9bb0ecb48a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9bb0ecb48a):
+
+  - Support wiki to smart link
+
+## 3.4.0
+- [minor] [1eb20bca95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1eb20bca95):
+
+  - ED-6368: No implicit any for editor-*-transformer packages
+
+## 3.3.0
+- [minor] [6b23c22b7d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6b23c22b7d):
+
+  - Advanced table fallback
+
+## 3.2.0
+- [minor] [06532fe23e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06532fe23e):
+
+  - Adds mediaSingle support for list
+
+## 3.1.0
+- [minor] [8709be280f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8709be280f):
+
+  - Add issue key token to convert into inline cards (Jira Smart Cards)
+
 ## 3.0.3
 - Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
   - @atlaskit/editor-json-transformer@4.1.12

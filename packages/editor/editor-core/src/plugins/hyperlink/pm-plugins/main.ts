@@ -1,7 +1,13 @@
 import { Node } from 'prosemirror-model';
-import { EditorState, Plugin, PluginKey, Transaction } from 'prosemirror-state';
+import { Schema } from 'prosemirror-model';
+import {
+  EditorState,
+  Plugin,
+  PluginKey,
+  Selection,
+  Transaction,
+} from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
-import { getCursor } from '../../../utils';
 
 export enum LinkAction {
   SHOW_INSERT_TOOLBAR = 'SHOW_INSERT_TOOLBAR',
@@ -46,22 +52,19 @@ export const canLinkBeCreatedInRange = (from: number, to: number) => (
   return false;
 };
 
-const isSelectionInsideLink = (state: EditorState | Transaction): boolean => {
-  const $cursor = getCursor(state.selection);
-  return $cursor
-    ? !!state.doc.type.schema.marks.link.isInSet($cursor.marks())
-    : false;
-};
+const isSelectionInsideLink = (state: EditorState | Transaction) =>
+  !!state.doc.type.schema.marks.link.isInSet(state.selection.$from.marks());
 
-const isSelectionAroundLink = (state: EditorState | Transaction): boolean => {
+const isSelectionAroundLink = (state: EditorState | Transaction) => {
   const { $from, $to } = state.selection;
   const node = $from.nodeAfter;
-  if (node && $from.textOffset === 0 && $to.pos - $from.pos === node.nodeSize) {
-    if (state.doc.type.schema.marks.link.isInSet(node.marks)) {
-      return true;
-    }
-  }
-  return false;
+
+  return (
+    !!node &&
+    $from.textOffset === 0 &&
+    $to.pos - $from.pos === node.nodeSize &&
+    !!state.doc.type.schema.marks.link.isInSet(node.marks)
+  );
 };
 
 const mapTransactionToState = (
@@ -149,23 +152,44 @@ const toState = (
   }
 };
 
-const getActiveLinkMark = (state: EditorState | Transaction) => {
-  if (isSelectionInsideLink(state)) {
-    const $cursor = getCursor(state.selection)!;
-    const pos = $cursor.pos - $cursor.textOffset;
-    const node = state.doc.nodeAt(pos);
-    return node && node.isText ? { node, pos } : undefined;
-  }
-  if (isSelectionAroundLink(state)) {
-    const { $from } = state.selection;
+const getActiveLinkMark = (
+  state: EditorState | Transaction,
+): { node: Node; pos: number } | undefined => {
+  const {
+    selection: { $from },
+  } = state;
+
+  if (isSelectionInsideLink(state) || isSelectionAroundLink(state)) {
     const pos = $from.pos - $from.textOffset;
     const node = state.doc.nodeAt(pos);
     return node && node.isText ? { node, pos } : undefined;
   }
+
   return undefined;
 };
 
+const getActiveText = (
+  schema: Schema,
+  selection: Selection,
+): string | undefined => {
+  const currentSlice = selection.content();
+
+  if (currentSlice.size === 0) {
+    return;
+  }
+
+  if (
+    currentSlice.content.childCount === 1 &&
+    [schema.nodes.paragraph, schema.nodes.text].indexOf(
+      currentSlice.content.firstChild!.type,
+    ) !== -1
+  ) {
+    return currentSlice.content.firstChild!.textContent;
+  }
+};
+
 export interface HyperlinkState {
+  activeText?: string;
   activeLinkMark?: LinkToolbarState;
   canInsertLink: boolean;
 }
@@ -181,6 +205,7 @@ export const plugin = (dispatch: Dispatch) =>
           state.selection.to,
         )(state);
         return {
+          activeText: getActiveText(state.schema, state.selection),
           canInsertLink,
           activeLinkMark: toState(
             undefined,
@@ -200,6 +225,7 @@ export const plugin = (dispatch: Dispatch) =>
 
         if (tr.docChanged) {
           state = {
+            activeText: state.activeText,
             canInsertLink: canLinkBeCreatedInRange(
               newState.selection.from,
               newState.selection.to,
@@ -210,6 +236,7 @@ export const plugin = (dispatch: Dispatch) =>
 
         if (action) {
           state = {
+            activeText: state.activeText,
             canInsertLink: state.canInsertLink,
             activeLinkMark: toState(state.activeLinkMark, action, newState),
           };
@@ -217,6 +244,7 @@ export const plugin = (dispatch: Dispatch) =>
 
         if (tr.selectionSet) {
           state = {
+            activeText: getActiveText(newState.schema, newState.selection),
             canInsertLink: canLinkBeCreatedInRange(
               newState.selection.from,
               newState.selection.to,

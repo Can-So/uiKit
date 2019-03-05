@@ -1,11 +1,26 @@
 // @flow
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { Popper } from '@atlaskit/popper';
+import { Popper as PopperComponent } from '@atlaskit/popper';
 
 import InlineDialogWithAnalytics from '../../..';
 import { InlineDialogWithoutAnalytics as InlineDialog } from '../..';
 import { Container } from '../../styled';
+
+jest.mock('popper.js', () => {
+  const PopperJS = jest.requireActual('popper.js');
+
+  return class Popper {
+    static placements = PopperJS.placements;
+
+    constructor() {
+      return {
+        destroy: () => {},
+        scheduleUpdate: () => {},
+      };
+    }
+  };
+});
 
 describe('inline-dialog', () => {
   describe('default', () => {
@@ -48,7 +63,7 @@ describe('inline-dialog', () => {
   describe('placement prop', () => {
     it('should be reflected onto the Popper component', () => {
       const wrapper = shallow(<InlineDialog placement="right" isOpen />);
-      const popper = wrapper.find(Popper);
+      const popper = wrapper.find(PopperComponent);
 
       expect(popper.length).toBeGreaterThan(0);
       expect(popper.prop('placement')).toBe('right');

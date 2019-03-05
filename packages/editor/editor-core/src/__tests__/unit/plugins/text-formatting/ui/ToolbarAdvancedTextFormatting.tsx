@@ -10,15 +10,20 @@ import {
   code,
   em,
   mountWithIntl,
+  code_block,
+  underline,
 } from '@atlaskit/editor-test-helpers';
 
+import { ReactWrapper } from 'enzyme';
 import { pluginKey } from '../../../../../plugins/text-formatting/pm-plugins/main';
 import { pluginKey as clearFormattingPluginKey } from '../../../../../plugins/text-formatting/pm-plugins/clear-formatting';
 import ToolbarAdvancedTextFormatting, {
   messages,
 } from '../../../../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
+import DropdownMenuWrapper from '../../../../../ui/DropdownMenu';
 import panelPlugin from '../../../../../plugins/panel';
+import codeBlockPlugin from '../../../../../plugins/code-block';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import {
   ACTION,
@@ -35,7 +40,7 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
     return createEditor({
       doc,
-      editorPlugins: [panelPlugin],
+      editorPlugins: [panelPlugin, codeBlockPlugin()],
       pluginKey: pluginKey,
       editorProps: {
         analyticsHandler: trackEvent,
@@ -300,6 +305,77 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
     );
     const toolbarButton = toolbarOption.find(ToolbarButton);
     expect(toolbarButton.prop('selected')).toBe(true);
+    toolbarOption.unmount();
+  });
+
+  /**
+   * Helper function to get the react element (not the DOM element) of menu items within the advanced text formatting menu.
+   */
+  function getMenuItem(toolbarOption: ReactWrapper, itemKey: string) {
+    return toolbarOption
+      .find(DropdownMenuWrapper)
+      .prop('items')[0]
+      .items.filter(i => i.key === itemKey)[0];
+  }
+
+  describe('menu options inside code block', () => {
+    let toolbarOption;
+
+    beforeEach(() => {
+      const { editorView, pluginState } = editor(
+        doc(code_block({ language: 'js' })('Hello {<>}world')),
+      );
+      const clearFormattingState = clearFormattingPluginKey.getState(
+        editorView.state,
+      );
+      toolbarOption = mountWithIntl(
+        <ToolbarAdvancedTextFormatting
+          textFormattingState={pluginState}
+          clearFormattingState={clearFormattingState}
+          editorView={editorView}
+        />,
+      );
+      toolbarOption.find('button').simulate('click');
+    });
+
+    afterEach(() => {
+      toolbarOption.unmount();
+    });
+
+    it('should have clear formatting available for a code block', () => {
+      const clearFormattingButton = getMenuItem(
+        toolbarOption,
+        'clearFormatting',
+      );
+      expect(clearFormattingButton.isDisabled).toBe(false);
+    });
+
+    it('should have other menu items disabled in a code block', () => {
+      const strikeButton = getMenuItem(toolbarOption, 'strike');
+      expect(strikeButton.isDisabled).toBe(true);
+    });
+  });
+
+  it('should only have selected menu options for the current selection', () => {
+    const { editorView, pluginState } = editor(
+      doc(p(strike(underline('{<}Formatted {>}text')))),
+    );
+    const toolbarOption = mountWithIntl(
+      <ToolbarAdvancedTextFormatting
+        textFormattingState={pluginState}
+        editorView={editorView}
+      />,
+    );
+    toolbarOption.find('button').simulate('click');
+
+    const strikeButton = getMenuItem(toolbarOption, 'strike');
+    const underlineButton = getMenuItem(toolbarOption, 'underline');
+    const codeButton = getMenuItem(toolbarOption, 'code');
+
+    expect(strikeButton.isActive).toBe(true);
+    expect(underlineButton.isActive).toBe(true);
+    expect(codeButton.isActive).toBe(false);
+
     toolbarOption.unmount();
   });
 

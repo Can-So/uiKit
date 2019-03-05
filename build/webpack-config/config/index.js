@@ -126,7 +126,7 @@ module.exports = function createWebpackConfig(
               options: {
                 babelrc: true,
                 rootMode: 'upward',
-                envName: 'production:cjs',
+                envName: 'production:esm',
                 cacheDirectory: path.resolve(baseCacheDir, 'babel'),
               },
             },
@@ -190,7 +190,7 @@ module.exports = function createWebpackConfig(
       ],
     },
     resolve: {
-      mainFields: ['module', 'atlaskit:src', 'browser', 'main'],
+      mainFields: ['atlaskit:src', 'module', 'browser', 'main'],
       extensions: ['.js', '.ts', '.tsx'],
     },
     resolveLoader: {

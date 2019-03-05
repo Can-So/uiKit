@@ -220,12 +220,12 @@ Object {
             Object {
               "attrs": Object {
                 "__confluenceMetadata": null,
-                "href": "https://extranet.atlassian.com/display/JPLAT/AtlasKit+components+needed+for+Bento",
+                "href": "https://extranet.atlassian.com/display/JPLAT/Atlaskit+components+needed+for+Bento",
               },
               "type": "link",
             },
           ],
-          "text": "https://extranet.atlassian.com/display/JPLAT/AtlasKit\\\\+components\\\\+needed\\\\+for\\\\+Bento",
+          "text": "https://extranet.atlassian.com/display/JPLAT/Atlaskit\\\\+components\\\\+needed\\\\+for\\\\+Bento",
           "type": "text",
         },
       ],
@@ -236,19 +236,19 @@ Object {
 }
 `;
 
-exports[`JIRA wiki markup - Links [CS-691] should be able to parse issue-link 1`] = `
+exports[`JIRA wiki markup - Links [CS-787] should convert back to inline card 1`] = `
 Object {
   "content": Array [
     Object {
       "content": Array [
         Object {
-          "text": "This is an issue link ",
+          "text": "This is a smart link ",
           "type": "text",
         },
         Object {
           "attrs": Object {
             "data": null,
-            "url": "https://product-fabric.atlassian.net/browse/EX-522",
+            "url": "https://www.dropbox.com/s/2mh79iuglsnmbwf/Get%20Started%20with%20Dropbox.pdf?dl=0",
           },
           "type": "inlineCard",
         },
@@ -575,7 +575,6 @@ Object {
             "__fileMimeType": null,
             "__fileName": null,
             "__fileSize": null,
-            "__key": null,
             "collection": "",
             "height": 183,
             "id": "image.jpg",
