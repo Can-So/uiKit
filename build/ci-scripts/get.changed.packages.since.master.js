@@ -18,15 +18,13 @@ const flattenDeep = require('lodash.flattendeep');
   );
   // Packages that are dependent on the changed packages.
   // If dependencies flag is passed, CHANGED_PACKAGES will return packages that are dependent on the changed packages.
-  // Get dependency graph for all packages.
   if (process.argv[2] && process.argv[2].includes('--dependents')) {
-    const typeOfDep = process.argv[2].split('=')[1];
     const dependencyGraph = await bolt.getDependentsGraph({ cwd });
-    // 1. Match with changed packages
-    // 2. Get the package.json from those packages
-    // 3. Map and filter the changed packages with its own dependent packages
-    // 4. Based on the argument passed, it will return the direct dependencies or all (dev and peer)
-    // 4. Return a flatten array of changed packages relative path
+    // 1. Match with changed packages.
+    // 2. Get the package.json from those packages.
+    // 3. Map and filter the changed packages with its own dependent packages.
+    // 4. Based on the argument passed, it will return the direct dependencies.
+    // 4. Return a flatten array of changed packages relative path.
     const getPackageJSON = pkgName =>
       allPackages.find(({ name }) => name === pkgName);
     const changedPackagesWithDependent = flattenDeep(
@@ -35,21 +33,11 @@ const flattenDeep = require('lodash.flattendeep');
           .get(changedPkgName)
           .filter(dependent => {
             const dependentPkgJSON = getPackageJSON(dependent).config;
-            // Direct dependencies will return packages with direct dependencies on the changed packages.
+            // --dependents='direct' flag will return packages with direct dependencies on the changed packages.
             // When a package does not have dependent or not required such as the build script.
-            if (typeOfDep.includes('direct'))
+            if (process.argv[2].split('=')[1].includes('direct'))
               return (
                 dependentPkgJSON.dependencies[changedPkgName] !== undefined
-              );
-            // All dependencies will return packages with direct, dev and peer dependencies on the changed packages.
-            // For peerDependencies, some packages do not have it that's why it needed to check for its existence.
-            if (typeOfDep.includes('all'))
-              return (
-                dependentPkgJSON.dependencies[changedPkgName] !== undefined ||
-                (dependentPkgJSON.peerDependencies &&
-                  dependentPkgJSON.peerDependencies[changedPkgName] !==
-                    undefined) ||
-                dependentPkgJSON.devDependencies[changedPkgName] !== undefined
               );
             else
               throw new Error(
