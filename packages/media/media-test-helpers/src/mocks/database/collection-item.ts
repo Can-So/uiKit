@@ -44,6 +44,9 @@ export function createCollectionItem({
       processingStatus: 'succeeded',
       mediaType: 'image',
       artifacts: {},
+      representations: {
+        image: {},
+      },
     },
     collectionName: collectionName || getHackerNoun(),
     blob: blob || mapDataUriToBlob(fakeImage),
