@@ -95,7 +95,6 @@ const client: Client = {
 
 export default () => (
   <ShareDialogContainer
-    buttonStyle="icon-with-text"
     client={client}
     cloudId="12345-12345-12345-12345"
     loadUserOptions={loadUserOptions}
@@ -104,5 +103,6 @@ export default () => (
     shareAri="ari"
     shareLink={window.location.href}
     shareTitle="My Share"
+    triggerButtonStyle="icon-with-text"
   />
 );

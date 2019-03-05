@@ -86,13 +86,42 @@ describe('ShareDialogWithTrigger', () => {
     });
   });
 
-  describe('buttonStyle prop', () => {
+  describe('triggerButtonAppearance prop', () => {
+    it('should pass to the value into ShareButton as appearance, and have a default value of "subtle"', () => {
+      const newWrapper: ShallowWrapper<
+        Props & InjectedIntlProps
+      > = shallowWithIntl<Props>(
+        <ShareDialogWithTrigger
+          copyLink="copyLink"
+          loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
+        />,
+      );
+      expect(
+        newWrapper
+          .find(InlineDialog)
+          .find(ShareButton)
+          .prop('appearance'),
+      ).toEqual('subtle');
+
+      const mockAppearance = 'primary';
+      newWrapper.setProps({ triggerButtonAppearance: mockAppearance });
+      expect(
+        newWrapper
+          .find(InlineDialog)
+          .find(ShareButton)
+          .prop('appearance'),
+      ).toEqual(mockAppearance);
+    });
+  });
+
+  describe('triggerButtonStyle prop', () => {
     it('should render no text in the share button if the value is "icon-only"', () => {
       const newWrapper: ShallowWrapper<
         Props & InjectedIntlProps
       > = shallowWithIntl<Props>(
         <ShareDialogWithTrigger
-          buttonStyle="icon-only"
+          triggerButtonStyle="icon-only"
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
           onShareSubmit={mockOnShareSubmit}
@@ -112,7 +141,7 @@ describe('ShareDialogWithTrigger', () => {
         Props & InjectedIntlProps
       > = shallowWithIntl<Props>(
         <ShareDialogWithTrigger
-          buttonStyle="icon-with-text"
+          triggerButtonStyle="icon-with-text"
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
           onShareSubmit={mockOnShareSubmit}
