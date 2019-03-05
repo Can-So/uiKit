@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.14
+- [patch] [4d3226b06b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d3226b06b):
+
+  - exposed trigger button appearance prop
+
 ## 0.1.13
 - [patch] [3f5be35333](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5be35333):
 
