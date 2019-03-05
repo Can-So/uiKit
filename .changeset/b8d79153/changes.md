@@ -1,0 +1,1 @@
+- Exposed shareContentType prop to customise Share Form title
