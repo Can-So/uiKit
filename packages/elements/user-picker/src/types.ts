@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { EmailValidator } from './components/emailValidation';
 
 export type UserPickerProps = {
   /** List of users or teams to be used as options by the user picker. */
@@ -59,6 +60,8 @@ export type UserPickerProps = {
   emailLabel?: string;
   /** Whether to disable interaction with the input */
   disableInput?: boolean;
+  /** Override default email validation function. */
+  isValidEmail?: EmailValidator;
 };
 
 export type UserPickerState = {
