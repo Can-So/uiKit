@@ -19,7 +19,6 @@ describe('nodeviews/mediaGroup', () => {
     id: 'foo',
     type: 'file',
     collection: 'collection',
-    __key: '12345',
   })();
   const view = {} as EditorView;
   beforeEach(() => {

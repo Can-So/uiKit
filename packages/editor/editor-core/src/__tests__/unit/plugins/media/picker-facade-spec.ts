@@ -117,10 +117,9 @@ describe('Media PickerFacade', () => {
       id: testFileId,
       fileName: 'test name',
       fileSize: 100,
-      fileId: Promise.resolve('publicid'),
       fileMimeType: 'test/file',
       dimensions: undefined,
-      publicId: testFileId,
+      scaleFactor: undefined,
     },
   ];
 
@@ -134,7 +133,7 @@ describe('Media PickerFacade', () => {
   function triggerEnd(payload?: Partial<MediaState>) {
     const [eventName, cb] = commonSpies.on.mock.calls[1];
     cb(endPayload);
-    expect(eventName).toBe('upload-end');
+    expect(eventName).toBe('upload-processing');
   }
 
   const pickerTypes: Array<PickerType> = [
@@ -185,7 +184,7 @@ describe('Media PickerFacade', () => {
           pickerType === 'dropzone' || pickerType === 'clipboard' ? 6 : 4,
         );
         expect(spies.on).toHaveBeenCalledWith('upload-preview-update', fn);
-        expect(spies.on).toHaveBeenCalledWith('upload-end', fn);
+        expect(spies.on).toHaveBeenCalledWith('upload-processing', fn);
 
         if (pickerType === 'dropzone') {
           expect(spies.on).toHaveBeenCalledWith('drag-enter', fn);
@@ -201,7 +200,9 @@ describe('Media PickerFacade', () => {
         expect(spies.removeAllListeners).toHaveBeenCalledWith(
           'upload-preview-update',
         );
-        expect(spies.removeAllListeners).toHaveBeenCalledWith('upload-end');
+        expect(spies.removeAllListeners).toHaveBeenCalledWith(
+          'upload-processing',
+        );
         if (pickerType === 'dropzone') {
           expect(spies.removeAllListeners).toHaveBeenCalledWith('drag-enter');
           expect(spies.removeAllListeners).toHaveBeenCalledWith('drag-leave');
