@@ -219,26 +219,32 @@ export default class Example extends Component<{}, State> {
   render() {
     const { shouldDisplayContainerNav } = this.state;
     return (
-      <NavigationProvider>
-        <LayoutManager
-          globalNavigation={GlobalNavigation}
-          productNavigation={ProductNavigation}
-          containerNavigation={
-            shouldDisplayContainerNav ? this.ContainerNavigation : null
-          }
-        >
-          <div
-            data-webdriver-test-key="content"
-            style={{ padding: `${gridSize * 4}px ${gridSize * 5}px` }}
+      <>
+        <div css={{ height: '200px', backgroundColor: 'salmon' }}>
+          Test banner 200px in height
+        </div>
+        <NavigationProvider>
+          <LayoutManager
+            globalNavigation={GlobalNavigation}
+            productNavigation={ProductNavigation}
+            containerNavigation={
+              shouldDisplayContainerNav ? this.ContainerNavigation : null
+            }
+            topOffset={'200px'}
           >
-            <ToggleStateless
-              isChecked={shouldDisplayContainerNav}
-              onChange={this.toggleContainerNav}
-            />{' '}
-            Display container navigation layer
-          </div>
-        </LayoutManager>
-      </NavigationProvider>
+            <div
+              data-webdriver-test-key="content"
+              style={{ padding: `${gridSize * 4}px ${gridSize * 5}px` }}
+            >
+              <ToggleStateless
+                isChecked={shouldDisplayContainerNav}
+                onChange={this.toggleContainerNav}
+              />{' '}
+              Display container navigation layer
+            </div>
+          </LayoutManager>
+        </NavigationProvider>
+      </>
     );
   }
 }

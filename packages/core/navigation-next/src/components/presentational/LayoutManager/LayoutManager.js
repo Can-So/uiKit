@@ -80,6 +80,7 @@ export default class LayoutManager extends Component<
       navigation: {
         'data-test-id': 'Navigation',
       },
+      topOffset: '0px',
     },
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
@@ -176,6 +177,7 @@ export default class LayoutManager extends Component<
       containerNavigation,
       datasets,
       globalNavigation: GlobalNavigation,
+      topOffset,
       // eslint-disable-next-line camelcase
       experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
     } = this.props;
@@ -192,6 +194,7 @@ export default class LayoutManager extends Component<
         <ThemeProvider
           theme={theme => ({
             mode: light, // If no theme already exists default to light mode
+            topOffset,
             ...theme,
           })}
         >
@@ -280,6 +283,7 @@ export default class LayoutManager extends Component<
       // eslint-disable-next-line camelcase
       experimental_fullWidthFlyout: EXPERIMENTAL_FULL_WIDTH_FLYOUT,
       collapseToggleTooltipContent,
+      topOffset,
     } = this.props;
     const { flyoutIsOpen, mouseIsOverNavigation, itemIsDragging } = this.state;
     const {
@@ -334,6 +338,7 @@ export default class LayoutManager extends Component<
               return (
                 <NavigationContainer
                   {...dataset}
+                  topOffset={topOffset}
                   innerRef={this.getContainerRef}
                   onMouseEnter={this.mouseEnter}
                   onMouseOver={
@@ -433,8 +438,9 @@ export default class LayoutManager extends Component<
   };
 
   render() {
+    const { topOffset } = this.props;
     return (
-      <LayoutContainer>
+      <LayoutContainer topOffset={topOffset}>
         {this.renderNavigation()}
         {this.renderPageContent()}
       </LayoutContainer>
