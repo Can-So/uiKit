@@ -22,6 +22,7 @@ We encourage adding tests to all components on **Atlaskit**.
 - on local these run against Chrome.
 - on CI these run against 5 different browsers across OS for changed packages only.
 - to run on local `yarn test:browser`.
+- to run on local using watch mode `yarn test:browser:watch`.
 - to run on *browserstack* :
     - set `BROWSERSTACK_USERNAME = <username>`.
     - set `BROWSERSTACK_KEY = <userkey>`.
@@ -67,6 +68,9 @@ For further details or a test template, please consult this [link](https://hello
 - to run all tests under a package on local `yarn test:vr <pkg>`.
 - to run all tests under certain directories on local `yarn test:vr <full_path_to_to_directory>`.
 - to run single test on local `yarn test:vr <full_path_to_file>`.
+- all the commands above can be run using *watch mode* :
+    - `yarn test:vr --watch` will run watch mode headlessly.
+    - `yarn test:vr --debug` will run watch mode only on Chrome browser.
 
 For further details or a test template, please consult this [link](https://hello.atlassian.net/wiki/spaces/Atlaskit/pages/136113035/How+to+add+visual+regression+tests+in+Atlaskit).
 
