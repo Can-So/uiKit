@@ -2,11 +2,12 @@ import * as React from 'react';
 import Switcher from './switcher';
 import CommonDataProvider from '../providers/common-data-provider';
 import { getSuggestedProductLink } from '../utils/links';
+import { Product } from '../types';
 
 interface GenericSwitcherProps {
   cloudId: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
-  product: string;
+  product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>;
 }
 
 const emptyCustomLink = {
@@ -15,15 +16,17 @@ const emptyCustomLink = {
   error: null,
 };
 
-const getPropsMap = (product: string) => {
+const getPropsMap = (
+  product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>,
+) => {
   switch (product) {
-    case 'site-admin':
+    case Product.SITE_ADMIN:
       return {
         suggestedProductLink: true,
       };
-    case 'home':
-    case 'people':
-    case 'trusted-admin':
+    case Product.HOME:
+    case Product.PEOPLE:
+    case Product.TRUSTED_ADMIN:
     default:
       return {
         suggestedProductLink: false,
