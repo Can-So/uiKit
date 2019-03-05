@@ -178,6 +178,7 @@ describe('<ItemViewer />', () => {
       name: '',
       size: 1,
       artifacts: {},
+      representations: {},
     };
     const context = makeFakeContext(Observable.of(state));
     const { el } = mountComponent(context, identifier);
@@ -215,6 +216,7 @@ describe('<ItemViewer />', () => {
       name: '',
       size: 0,
       mimeType: '',
+      representations: { image: {} },
     };
     const context = makeFakeContext(Observable.of(state));
     const { el } = mountComponent(context, identifier);

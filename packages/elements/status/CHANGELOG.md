@@ -1,5 +1,15 @@
 # @atlaskit/status
 
+## 0.4.0
+- [minor] [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+
+  - added/cleaned up ssr tests
+
+## 0.3.8
+- [patch] [e27ba4f443](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e27ba4f443):
+
+  - added SSR tests to status
+
 ## 0.3.7
 - [patch] [0e4dedafc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e4dedafc1):
 

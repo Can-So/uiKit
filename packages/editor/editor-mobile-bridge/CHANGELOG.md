@@ -1,5 +1,28 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.12.1
+- Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+  - @atlaskit/editor-core@102.1.1
+  - @atlaskit/renderer@41.0.1
+  - @atlaskit/emoji@56.1.0
+  - @atlaskit/status@0.4.0
+
+## 6.12.0
+- [minor] [d18b085e2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d18b085e2a):
+
+  - Integrating truly upfront ID
+
+## 6.11.1
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/editor-core@102.0.0
+  - @atlaskit/renderer@41.0.0
+  - @atlaskit/emoji@56.0.0
+  - @atlaskit/editor-json-transformer@4.3.1
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/task-decision@11.2.3
+  - @atlaskit/media-core@27.2.0
+
 ## 6.11.0
 - [minor] [27189951b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27189951b5):
 

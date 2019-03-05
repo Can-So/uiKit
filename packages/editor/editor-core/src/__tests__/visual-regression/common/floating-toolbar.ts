@@ -11,7 +11,8 @@ describe('Floating toolbars:', () => {
   });
 
   afterEach(async () => {
-    await snapshot(page, 0.01);
+    // currently set high need to revisit
+    await snapshot(page, 0.02);
   });
 
   describe('', () => {

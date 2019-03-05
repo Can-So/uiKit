@@ -1,8 +1,9 @@
 import { snapshot, mountRenderer, goToRendererTestingExample } from './_utils';
 import { document } from './__fixtures__/document-without-media';
+import { Page } from 'puppeteer';
 
 describe('Snapshot Test: Dynamic Text Sizing', () => {
-  let page;
+  let page: Page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
@@ -22,7 +23,7 @@ describe('Snapshot Test: Dynamic Text Sizing', () => {
         allowDynamicTextSizing: true,
         document,
       });
-      await snapshot(page);
+      await snapshot(page, 0.01);
     });
   });
 });

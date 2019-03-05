@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import Button from '@atlaskit/button';
 import { ResultItemGroup } from '@atlaskit/quick-search';
 import { FormattedMessage } from 'react-intl';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import { messages } from '../../messages';
 import NoResults from '../NoResults';
 import SearchConfluenceItem from '../SearchConfluenceItem';
 import SearchPeopleItem from '../SearchPeopleItem';
+import { ConfluenceAdvancedSearchTypes } from '../SearchResultsUtil';
 export interface Props {
   query: string;
+  onClick?: (e: CancelableEvent, entity: String) => void;
 }
 
 const Container = styled.div`
@@ -41,6 +44,14 @@ export default class NoResultsState extends React.Component<Props> {
                   />
                 </Button>
               }
+              onClick={({ event }) => {
+                if (this.props.onClick) {
+                  this.props.onClick(
+                    event,
+                    ConfluenceAdvancedSearchTypes.Content,
+                  );
+                }
+              }}
             />
             <SearchPeopleItem
               analyticsData={analyticsData}
@@ -51,6 +62,14 @@ export default class NoResultsState extends React.Component<Props> {
                   <FormattedMessage {...messages.people_advanced_search} />
                 </Button>
               }
+              onClick={({ event }) => {
+                if (this.props.onClick) {
+                  this.props.onClick(
+                    event,
+                    ConfluenceAdvancedSearchTypes.People,
+                  );
+                }
+              }}
             />
           </Container>
         </ResultItemGroup>

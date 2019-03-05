@@ -1,5 +1,12 @@
 # @atlaskit/media-test-helpers
 
+## 20.1.6
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/media-card@55.0.0
+  - @atlaskit/media-picker@35.0.0
+  - @atlaskit/media-core@27.2.0
+  - @atlaskit/media-store@9.2.0
+
 ## 20.1.5
 - Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
 - Updated dependencies [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):

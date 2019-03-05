@@ -20,6 +20,14 @@ import { getToolbarConfig } from './toolbar';
 import { ColumnResizingPlugin } from './types';
 import FloatingContextualMenu from './ui/FloatingContextualMenu';
 import { isLayoutSupported } from './utils';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+} from '../analytics';
 
 export const HANDLE_WIDTH = 6;
 
@@ -141,7 +149,14 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
         priority: 600,
         icon: () => <TableIcon label={formatMessage(messages.table)} />,
         action(insert, state) {
-          return insert(createTable(state.schema));
+          const tr = insert(createTable(state.schema));
+          return addAnalytics(tr, {
+            action: ACTION.INSERTED,
+            actionSubject: ACTION_SUBJECT.DOCUMENT,
+            actionSubjectId: ACTION_SUBJECT_ID.TABLE,
+            attributes: { inputMethod: INPUT_METHOD.QUICK_INSERT },
+            eventType: EVENT_TYPE.TRACK,
+          });
         },
       },
     ],

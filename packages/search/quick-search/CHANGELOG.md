@@ -1,5 +1,10 @@
 # @atlaskit/quick-search
 
+## 5.4.0
+- [minor] [7be03e992f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7be03e992f):
+
+  - Add support to register callback for category selection change on advanced search
+
 ## 5.3.0
 - [minor] [25fffe3e00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25fffe3e00):
 

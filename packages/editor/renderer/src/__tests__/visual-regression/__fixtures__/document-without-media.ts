@@ -3,7 +3,14 @@ import { emoji } from '@atlaskit/util-data-test';
 const emojiTestData = emoji.testData;
 const emojiStoryData = emoji.storyData;
 
-const toEmojiAttrs = emoji => {
+type EmojiAttrs = {
+  id: string;
+  shortName: string;
+  fallback?: string;
+  text?: string;
+};
+
+const toEmojiAttrs = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return {
     shortName,
@@ -12,7 +19,7 @@ const toEmojiAttrs = emoji => {
   };
 };
 
-const toEmojiId = emoji => {
+const toEmojiId = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return { shortName, id, fallback };
 };

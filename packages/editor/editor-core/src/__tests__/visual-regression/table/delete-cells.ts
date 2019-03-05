@@ -5,15 +5,13 @@ import {
   clickFirstCell,
 } from '../../__helpers/page-objects/_table';
 
+import { animationFrame } from '../../__helpers/page-objects/_editor';
+
 describe('Delete in table:', () => {
   let page;
 
-  const clickandSnapshot = async (page, selector) => {
-    await page.click(selector);
-    await page.waitForSelector(tableSelectors.tableTd);
-    await snapshot(page);
-  };
   describe(`Full page`, () => {
+    const threshold = 0.01;
     beforeAll(async () => {
       // @ts-ignore
       page = global.page;
@@ -22,43 +20,33 @@ describe('Delete in table:', () => {
     beforeEach(async () => {
       await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI);
       await clickFirstCell(page);
+      await animationFrame(page);
     });
 
-    // TODO: write table delete in integration test
-    it(`remove first row buttons in full width layout mode`, async () => {
+    afterEach(async () => {
+      await snapshot(page, threshold);
+    });
+
+    it('should show danger when hovers on remove for row', async () => {
       await page.waitForSelector(tableSelectors.firstRowControl);
       await page.click(tableSelectors.firstRowControl);
+      await page.waitForSelector(tableSelectors.removeRowButton);
       await page.hover(tableSelectors.removeRowButton);
       await page.waitForSelector(tableSelectors.removeDanger);
-      await snapshot(page);
-      await clickandSnapshot(page, tableSelectors.removeRowButton);
     });
 
-    // TODO: make it faster load with full-width-adf and doing too may things
-    it(`remove first column buttons in full width layout mode`, async () => {
-      await page.waitForSelector(tableSelectors.firstRowControl);
+    it(`should show danger when hovers on remove for column`, async () => {
+      await page.waitForSelector(tableSelectors.firstColumnControl);
       await page.click(tableSelectors.firstColumnControl);
-      await snapshot(page);
+      await page.waitForSelector(tableSelectors.removeColumnButton);
       await page.hover(tableSelectors.removeColumnButton);
       await page.waitForSelector(tableSelectors.removeDanger);
-      await snapshot(page);
-      await clickandSnapshot(page, tableSelectors.removeColumnButton);
     });
 
-    it(`remove last column buttons in full width layout mode`, async () => {
-      await page.waitForSelector(tableSelectors.firstRowControl);
-      await page.click(tableSelectors.lastColumnControl);
-      await page.hover(tableSelectors.removeColumnButton);
-      await page.waitForSelector(tableSelectors.removeDanger);
-      await snapshot(page);
-      await clickandSnapshot(page, tableSelectors.removeColumnButton);
-    });
-
-    it(`remove table button selection`, async () => {
+    it(`should show danger when hovers to remove table`, async () => {
       await page.waitForSelector(tableSelectors.removeTable);
       await page.hover(tableSelectors.removeTable);
       await page.waitForSelector(tableSelectors.removeDanger);
-      await snapshot(page);
     });
   });
 });

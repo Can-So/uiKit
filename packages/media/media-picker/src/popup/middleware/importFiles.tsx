@@ -174,6 +174,7 @@ export const touchSelectedFiles = (
         name: selectedFile.name,
         size: selectedFile.size,
         preview,
+        representations: {},
       };
       const subject = new ReplaySubject<FileState>(1);
       subject.next(state);

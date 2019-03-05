@@ -13,6 +13,7 @@ describe('getObjectUrlFromFileState()', () => {
       preview: {
         value: new Blob(),
       },
+      representations: {},
     };
 
     expect(await getObjectUrlFromFileState(fileState)).toEqual(
@@ -33,6 +34,7 @@ describe('getObjectUrlFromFileState()', () => {
       mimeType: '',
       name: '',
       size: 1,
+      representations: {},
     };
 
     expect(await getObjectUrlFromFileState(errorState)).toBeUndefined();

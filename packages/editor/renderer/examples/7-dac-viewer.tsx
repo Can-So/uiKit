@@ -16,7 +16,7 @@ import Renderer from '../src/ui/Renderer';
 
 export interface State {
   value: string;
-  validator?: (...args) => any;
+  validator?: (...args: any[]) => any;
   fetchingSchema: boolean;
   err?: Error;
 }

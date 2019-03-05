@@ -7,6 +7,7 @@ import {
 import styled from 'styled-components';
 import { gridSize } from '@atlaskit/theme';
 import { withAnalytics } from '@atlaskit/analytics';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import StickyFooter from '../common/StickyFooter';
 import { CreateAnalyticsEventFn } from '../analytics/types';
 import { SearchScreenCounter } from '../../util/ScreenCounter';
@@ -70,6 +71,11 @@ export interface Props {
   disableJiraPreQueryPeopleSearch?: boolean;
   logger: Logger;
   isSendSearchTermsEnabled?: boolean;
+  onAdvancedSearch?: (
+    e: CancelableEvent,
+    entity: String,
+    query: String,
+  ) => void;
 }
 
 const contentTypeToSection = {
@@ -104,9 +110,31 @@ export class JiraQuickSearchContainer extends React.Component<
     postQueryScreenCounter: new SearchScreenCounter(),
   };
 
-  handleSearchSubmit = ({ target }) => {
+  handleSearchSubmit = event => {
+    const { onAdvancedSearch = () => {} } = this.props;
+    const target = event.target;
     const query = target.value;
-    redirectToJiraAdvancedSearch(this.state.selectedAdvancedSearchType, query);
+    let defaultPrevented = false;
+
+    onAdvancedSearch(
+      Object.assign({}, event, {
+        preventDefault() {
+          defaultPrevented = true;
+          event.preventDefault();
+          event.stopPropagation();
+        },
+        stopPropagation() {},
+      }),
+      this.state.selectedAdvancedSearchType,
+      query,
+    );
+
+    if (!defaultPrevented) {
+      redirectToJiraAdvancedSearch(
+        this.state.selectedAdvancedSearchType,
+        query,
+      );
+    }
   };
 
   getSearchResultsComponent = ({
@@ -121,6 +149,10 @@ export class JiraQuickSearchContainer extends React.Component<
   }) => {
     const query = latestSearchQuery;
     const isPreQuery = !query; // it's true if the query is empty
+    const {
+      referralContextIdentifiers,
+      onAdvancedSearch = () => {},
+    } = this.props;
     return (
       <SearchResultsComponent
         query={query}
@@ -130,7 +162,7 @@ export class JiraQuickSearchContainer extends React.Component<
         keepPreQueryState={keepPreQueryState}
         searchSessionId={searchSessionId}
         {...this.screenCounters}
-        referralContextIdentifiers={this.props.referralContextIdentifiers}
+        referralContextIdentifiers={referralContextIdentifiers}
         renderNoRecentActivity={() => (
           <>
             <FormattedHTMLMessage {...messages.jira_no_recent_activity_body} />
@@ -138,6 +170,9 @@ export class JiraQuickSearchContainer extends React.Component<
               <JiraAdvancedSearch
                 query={query}
                 analyticsData={{ resultsCount: 0, wasOnNoResultsScreen: true }}
+                onClick={(mouseEvent, entity) =>
+                  onAdvancedSearch(mouseEvent, entity, query)
+                }
               />
             </NoResultsAdvancedSearchContainer>
           </>
@@ -149,19 +184,33 @@ export class JiraQuickSearchContainer extends React.Component<
               query={query}
               showKeyboardLozenge={!isPreQuery && !keepPreQueryState}
               showSearchIcon
+              onClick={(mouseEvent, entity) =>
+                onAdvancedSearch(mouseEvent, entity, query)
+              }
             />
           </StickyFooter>
         )}
         renderBeforePreQueryState={() => (
           <BeforePreQueryStateContainer>
-            <AdvancedIssueSearchLink />
+            <AdvancedIssueSearchLink
+              onClick={({ event }) =>
+                onAdvancedSearch(event, JiraEntityTypes.Issues, query)
+              }
+            />
           </BeforePreQueryStateContainer>
         )}
         getPreQueryGroups={() => mapRecentResultsToUIGroups(recentItems)}
         getPostQueryGroups={() =>
           mapSearchResultsToUIGroups(searchResults as JiraResultsMap)
         }
-        renderNoResult={() => <NoResultsState query={query} />}
+        renderNoResult={() => (
+          <NoResultsState
+            query={query}
+            onAdvancedSearch={(mouseEvent, entity) =>
+              onAdvancedSearch(mouseEvent, entity, query)
+            }
+          />
+        )}
       />
     );
   };

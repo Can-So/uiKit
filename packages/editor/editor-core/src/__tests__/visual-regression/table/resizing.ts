@@ -24,10 +24,10 @@ describe('Snapshot Test: table resizing', () => {
     it(`resize a column with content width`, async () => {
       await resizeColumn(page, { colIdx: 2, amount: 123, row: 2 });
       await animationFrame(page);
-      await snapshot(page);
+      await snapshot(page, 0.002);
       await resizeColumn(page, { colIdx: 2, amount: -100, row: 2 });
       await animationFrame(page);
-      await snapshot(page);
+      await snapshot(page, 0.002);
     });
 
     it(`snaps back to layout width after column removal`, async () => {
@@ -83,7 +83,7 @@ describe('Snapshot Test: table resize handle', () => {
   describe('when table has merged cells', () => {
     it(`should render resize handle spanning all rows`, async () => {
       await grabResizeHandle(page, { colIdx: 2, row: 2 });
-      await snapshot(page);
+      await snapshot(page, 0.01);
     });
   });
 });
@@ -102,6 +102,6 @@ describe('Snapshot Test: table scale', () => {
 
   it(`should not overflow the table with dynamic text sizing enabled`, async () => {
     await toggleBreakout(page, 1);
-    await snapshot(page);
+    await snapshot(page, 0.005);
   });
 });
