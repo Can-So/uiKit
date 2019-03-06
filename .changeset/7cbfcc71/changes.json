@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@atlaskit/updater-cli", "type": "patch" }],
+  "dependents": []
+}
