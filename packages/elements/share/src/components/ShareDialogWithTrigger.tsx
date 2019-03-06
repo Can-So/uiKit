@@ -5,11 +5,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { messages } from '../i18n';
-import {
-  DialogContentState,
-  InvitationsCapabilitiesResponse,
-  ShareButtonStyle,
-} from '../types';
+import { ConfigResponse, DialogContentState, ShareButtonStyle } from '../types';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 
@@ -32,14 +28,14 @@ type ShareError = {
 };
 
 export type Props = {
-  capabilities?: InvitationsCapabilitiesResponse;
+  buttonStyle?: ShareButtonStyle;
+  config?: ConfigResponse;
   children?: RenderChildren;
   copyLink: string;
   isDisabled?: boolean;
   loadUserOptions?: LoadOptions;
   onLinkCopy?: Function;
   onShareSubmit?: (shareContentState: DialogContentState) => Promise<any>;
-  shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
   triggerButtonAppearance?: ButtonAppearances;
   triggerButtonStyle?: ShareButtonStyle;
@@ -153,10 +149,10 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
   render() {
     const { isDialogOpen, isSharing, shareError, defaultValue } = this.state;
     const {
-      capabilities,
       copyLink,
       isDisabled,
       loadUserOptions,
+      config,
       triggerButtonAppearance,
       triggerButtonStyle,
     } = this.props;
@@ -180,7 +176,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
                 shareError={shareError}
                 onDismiss={this.handleFormDismiss}
                 defaultValue={defaultValue}
-                capabilities={capabilities}
+                config={config}
               />
             </InlineDialogFormWrapper>
           }

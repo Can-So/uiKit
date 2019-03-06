@@ -47,6 +47,8 @@
     "@atlaskit/editor-test-helpers": "^7.0.0",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/select": "^7.2.1",
+    "@atlaskit/toggle": "^5.0.15",
     "@atlaskit/util-data-test": "^10.0.29",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
