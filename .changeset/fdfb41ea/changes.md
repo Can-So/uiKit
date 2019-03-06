@@ -1,0 +1,1 @@
+- Changes to support new version of media-editor
