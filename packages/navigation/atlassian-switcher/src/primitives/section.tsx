@@ -20,7 +20,7 @@ const SectionTitle = styled.h1`
 
 type SectionProps = {
   sectionId: string;
-  title: React.ReactElement<FormattedMessage>;
+  title: React.ReactElement<FormattedMessage> | string;
   children?: React.ReactNode;
 };
 
