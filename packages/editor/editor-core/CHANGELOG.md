@@ -1,5 +1,12 @@
 # @atlaskit/editor-core
 
+## 102.1.4
+- [patch] [7a8d8ba656](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a8d8ba656):
+
+  - ED-6452: Validate documents on init through collab-editing
+
+  * Add unsupportedInline and unsupportedBlock to test-helpers.
+
 ## 102.1.3
 - [patch] [1c00bd6268](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c00bd6268):
 
