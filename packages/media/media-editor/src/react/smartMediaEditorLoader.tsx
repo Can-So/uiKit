@@ -8,12 +8,11 @@ import SmartMediaEditorType, {
 
 interface AsyncSmartMediaEditorState {
   SmartMediaEditor?: typeof SmartMediaEditorType;
-  isErrored: boolean;
 }
 
 export default class AsyncSmartMediaEditor extends React.PureComponent<
   SmartMediaEditorProps & AsyncSmartMediaEditorState,
-  AsyncSmartMediaEditorState
+  AsyncSmartMediaEditorState & { isErrored: boolean }
 > {
   static displayName = 'AsyncSmartMediaEditor';
   static SmartMediaEditor?: typeof SmartMediaEditorType;
@@ -32,6 +31,7 @@ export default class AsyncSmartMediaEditor extends React.PureComponent<
         AsyncSmartMediaEditor.SmartMediaEditor = module.default;
         this.setState({ SmartMediaEditor: module.default });
       } catch (e) {
+        // tslint:disable-next-line:no-console
         console.error(e);
         this.setState({ isErrored: true });
       }
