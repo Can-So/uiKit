@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/dynamic-table": "^10.0.22",
     "@atlaskit/section-message": "^1.0.16",

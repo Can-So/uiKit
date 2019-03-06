@@ -39,6 +39,7 @@
   "devDependencies": {
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/lozenge": "6.2.4",
     "@atlaskit/tooltip": "^12.1.15",

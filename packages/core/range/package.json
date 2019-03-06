@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/checkbox": "^5.0.14",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/tooltip": "^12.1.13",

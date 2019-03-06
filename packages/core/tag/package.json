@@ -39,6 +39,7 @@
   "devDependencies": {
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/section-message": "^1.0.16",
     "@atlaskit/visual-regression": "^0.0.1",

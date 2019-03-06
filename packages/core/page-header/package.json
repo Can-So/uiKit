@@ -31,6 +31,7 @@
   "devDependencies": {
     "@atlaskit/breadcrumbs": "^6.0.15",
     "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/inline-edit": "^7.1.7",
