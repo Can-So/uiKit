@@ -10,8 +10,6 @@ import { FormContext, IsDisabledContext } from './Form';
 import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
 import translateEvent from './utils/translateEvent';
 
-const isMac = /Mac OS X/.test(navigator.userAgent);
-
 type FieldProps = {
   id: string,
   isRequired: boolean,
@@ -196,14 +194,9 @@ class FieldInner extends React.Component<InnerProps, State> {
   }
 
   handleKeyDown = (event: SyntheticKeyboardEvent<any>) => {
-    if (isMac) {
-      if (event.key === 'Enter' && event.metaKey && this.inputRef.current) {
-        this.inputRef.current.click();
-        event.preventDefault();
-      }
-    } else if (
+    if (
       event.key === 'Enter' &&
-      event.ctrlKey &&
+      (event.ctrlKey || event.metaKey) &&
       this.inputRef.current
     ) {
       this.inputRef.current.click();
