@@ -1,3 +1,4 @@
-import { SSRHelper } from './ssr-helper';
+import { SSRHelper, SSRHydrationHelper } from './ssr-helper';
+import createHydrateExample from './demo-ssr-hydrate';
 
-export { SSRHelper };
+export { SSRHelper, SSRHydrationHelper, createHydrateExample };
