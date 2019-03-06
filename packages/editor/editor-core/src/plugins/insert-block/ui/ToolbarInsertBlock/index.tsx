@@ -201,7 +201,7 @@ export interface State {
   emojiPickerOpen: boolean;
 }
 
-type MENU_TYPE = INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU;
+export type TOOLBAR_MENU_TYPE = INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU;
 
 const blockTypeIcons = {
   codeblock: CodeIcon,
@@ -631,7 +631,7 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private createTable = withAnalytics(
     'atlassian.editor.format.table.button',
-    (inputMethod: MENU_TYPE): boolean => {
+    (inputMethod: TOOLBAR_MENU_TYPE): boolean => {
       const { editorView } = this.props;
       return commandWithAnalytics({
         action: ACTION.INSERTED,
@@ -700,33 +700,26 @@ class ToolbarInsertBlock extends React.PureComponent<
     },
   );
 
-  private insertDecision = withAnalytics(
-    'atlassian.fabric.decision.trigger.button',
-    (): boolean => {
-      const { editorView } = this.props;
-      if (!editorView) {
-        return false;
-      }
-      insertTaskDecision(editorView, 'decisionList');
-      return true;
-    },
-  );
-
-  private insertAction = withAnalytics(
-    'atlassian.fabric.action.trigger.button',
-    (): boolean => {
-      const { editorView } = this.props;
-      if (!editorView) {
-        return false;
-      }
-      insertTaskDecision(editorView, 'taskList');
-      return true;
-    },
-  );
+  private insertTaskDecision = (
+    name: 'action' | 'decision',
+    inputMethod: TOOLBAR_MENU_TYPE,
+  ) =>
+    withAnalytics(
+      `atlassian.fabric.${name}.trigger.button`,
+      (): boolean => {
+        const { editorView } = this.props;
+        if (!editorView) {
+          return false;
+        }
+        const listType = name === 'action' ? 'taskList' : 'decisionList';
+        insertTaskDecision(editorView, listType, inputMethod);
+        return true;
+      },
+    );
 
   private insertHorizontalRule = withAnalytics(
     'atlassian.editor.format.horizontalrule.button',
-    (inputMethod: MENU_TYPE): boolean => {
+    (inputMethod: TOOLBAR_MENU_TYPE): boolean => {
       const { editorView } = this.props;
       const tr = createHorizontalRule(
         editorView.state,
@@ -746,7 +739,7 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private insertBlockTypeWithAnalytics = (
     itemName: string,
-    inputMethod: MENU_TYPE,
+    inputMethod: TOOLBAR_MENU_TYPE,
   ) => {
     const {
       editorView,
@@ -810,7 +803,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     inputMethod,
   }: {
     item;
-    inputMethod: MENU_TYPE;
+    inputMethod: TOOLBAR_MENU_TYPE;
   }): void => {
     const {
       editorView,
@@ -848,10 +841,8 @@ class ToolbarInsertBlock extends React.PureComponent<
         this.insertBlockTypeWithAnalytics(item.value.name, inputMethod);
         break;
       case 'action':
-        this.insertAction();
-        break;
       case 'decision':
-        this.insertDecision();
+        this.insertTaskDecision(item.value.name, inputMethod)();
         break;
       case 'horizontalrule':
         this.insertHorizontalRule(inputMethod);
