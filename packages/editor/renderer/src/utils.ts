@@ -29,11 +29,11 @@ export const getEventHandler = (
   eventHandlers?: EventHandlers,
   type?: keyof EventHandlers,
   eventName: string = 'onClick',
-) => {
+): any => {
   return (
     eventHandlers &&
     type &&
     eventHandlers[type] &&
-    eventHandlers[type]![eventName]
+    (eventHandlers as any)[type][eventName]
   );
 };

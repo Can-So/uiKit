@@ -2,7 +2,14 @@ import { emoji } from '@atlaskit/util-data-test';
 
 const emojiTestData = emoji.testData;
 
-const toEmojiAttrs = emoji => {
+type EmojiAttrs = {
+  id: string;
+  shortName: string;
+  fallback?: string;
+  text?: string;
+};
+
+const toEmojiAttrs = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return {
     shortName,

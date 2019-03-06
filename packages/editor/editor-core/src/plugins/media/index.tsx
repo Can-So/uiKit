@@ -2,7 +2,7 @@ import * as React from 'react';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
 import { EditorPlugin, EditorAppearance } from '../../types';
-import { SmartMediaEditor } from '@atlaskit/media-editor';
+import { SmartMediaEditor, Dimensions } from '@atlaskit/media-editor';
 import { FileIdentifier } from '@atlaskit/media-core';
 import {
   stateKey as pluginKey,
@@ -55,10 +55,12 @@ export interface MediaSingleOptions {
 
 export const renderSmartMediaEditor = (mediaState: MediaPluginState) => {
   const node = mediaState.selectedMediaContainerNode();
+  if (!node) {
+    return null;
+  }
+  const { id } = node.firstChild!.attrs;
 
-  if (node && mediaState.uploadContext && mediaState.showEditingDialog) {
-    const state = mediaState.getMediaNodeState(node.firstChild!.attrs.id);
-    const id = (state && state.fileId) || node.firstChild!.attrs.id;
+  if (mediaState.uploadContext && mediaState.showEditingDialog) {
     const identifier: FileIdentifier = {
       id,
       mediaItemType: 'file',
@@ -69,9 +71,12 @@ export const renderSmartMediaEditor = (mediaState: MediaPluginState) => {
       <SmartMediaEditor
         identifier={identifier}
         context={mediaState.uploadContext}
-        onUploadStart={(newFileIdentifier: FileIdentifier) => {
+        onUploadStart={(
+          newFileIdentifier: FileIdentifier,
+          dimensions: Dimensions,
+        ) => {
           mediaState.closeMediaEditor();
-          mediaState.replaceEditingMedia(newFileIdentifier);
+          mediaState.replaceEditingMedia(newFileIdentifier, dimensions);
         }}
         onFinish={mediaState.closeMediaEditor}
       />

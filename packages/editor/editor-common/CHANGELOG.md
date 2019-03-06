@@ -1,5 +1,15 @@
 # @atlaskit/editor-common
 
+## 33.0.2
+- [patch] [2b4b290610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2b4b290610):
+
+  - ED-6461: Fix placement start when scrolling for Popup
+
+## 33.0.1
+- [patch] [1c00bd6268](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c00bd6268):
+
+  - ED-6409: set minWidth to 140px for all new columns in resized table
+
 ## 33.0.0
 - Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
   - @atlaskit/emoji@56.0.0

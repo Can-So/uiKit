@@ -103,14 +103,14 @@ function shouldAppendParagraph(
 export const insertMediaGroupNode = (
   view: EditorView,
   mediaStates: MediaState[],
-  collection?: string,
+  collection: string,
 ): void => {
   const { state, dispatch } = view;
   const { tr, schema } = state;
   const { media, paragraph } = schema.nodes;
 
   // Do nothing if no media found
-  if (!collection || !media || !mediaStates.length) {
+  if (!media || !mediaStates.length) {
     return;
   }
 
@@ -175,7 +175,6 @@ const createMediaFileNodes = (
       id,
       type: 'file',
       collection,
-      __key: id,
     });
     copyOptionalAttrsFromMediaState(mediaState, node);
     return node;

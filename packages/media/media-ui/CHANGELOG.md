@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 9.2.0
+- [minor] [b7ead07438](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b7ead07438):
+
+  - New messages to support media-editor changes
+
 ## 9.1.0
 - [minor] [41147bbc4c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/41147bbc4c):
 

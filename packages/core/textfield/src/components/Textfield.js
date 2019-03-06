@@ -13,21 +13,25 @@ import {
 } from '../../package.json';
 
 import Input from './Input';
-import { Wrapper } from '../styled';
 import { Theme } from '../theme';
 import type { TextFieldProps } from '../types';
 
 type State = {
   isFocused: boolean,
+  isHovered: boolean,
 };
 
 class Textfield extends Component<TextFieldProps, State> {
   static defaultProps = {
     appearance: 'standard',
+    isCompact: false,
+    isMonospaced: false,
+    isInvalid: false,
   };
 
   state = {
     isFocused: false,
+    isHovered: false,
   };
 
   input: ?HTMLInputElement;
@@ -52,6 +56,14 @@ class Textfield extends Component<TextFieldProps, State> {
     }
   }
 
+  onMouseEnter = () => {
+    this.setState({ isHovered: true });
+  };
+
+  onMouseLeave = () => {
+    this.setState({ isHovered: false });
+  };
+
   setInputRef = (input: ?HTMLInputElement) => {
     this.input = input;
     if (this.props.forwardedRef) {
@@ -60,15 +72,19 @@ class Textfield extends Component<TextFieldProps, State> {
   };
 
   render() {
-    const { isFocused } = this.state;
+    const { isFocused, isHovered } = this.state;
     const {
       appearance,
-      width,
-      forwardedRef,
-      theme,
       // createAnalytics passed through from analytics-next
       // we don't want to spread this onto our input
       createAnalyticsEvent, // eslint-disable-line react/prop-types
+      forwardedRef,
+      isCompact,
+      isDisabled,
+      isInvalid,
+      isMonospaced,
+      theme,
+      width,
       ...rest
     } = this.props;
 
@@ -76,18 +92,29 @@ class Textfield extends Component<TextFieldProps, State> {
       <Theme.Provider value={theme}>
         <GlobalTheme.Consumer>
           {({ mode }) => (
-            <Theme.Consumer appearance={appearance} mode={mode}>
+            <Theme.Consumer
+              appearance={appearance}
+              mode={mode}
+              width={width}
+              isDisabled={isDisabled}
+              isCompact={isCompact}
+              isMonospaced={isMonospaced}
+              isFocused={isFocused}
+              isHovered={isHovered}
+              isInvalid={isInvalid}
+            >
               {tokens => (
-                <Wrapper width={width}>
-                  <Input
-                    {...rest}
-                    theme={tokens}
-                    isFocused={isFocused}
-                    forwardedRef={forwardedRef}
-                    onFocus={this.handleOnFocus}
-                    onBlur={this.handleOnBlur}
-                  />
-                </Wrapper>
+                <Input
+                  {...rest}
+                  theme={tokens}
+                  isFocused={isFocused}
+                  isHovered={isHovered}
+                  onMouseEnter={this.onMouseEnter}
+                  onMouseLeave={this.onMouseLeave}
+                  forwardedRef={forwardedRef}
+                  onFocus={this.handleOnFocus}
+                  onBlur={this.handleOnBlur}
+                />
               )}
             </Theme.Consumer>
           )}

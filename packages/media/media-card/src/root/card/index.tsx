@@ -143,7 +143,7 @@ export class Card extends Component<CardProps, CardState> {
     }
 
     const { id, collectionName, occurrenceKey } = identifier;
-    const resolvedId = await id;
+    const resolvedId = typeof id === 'string' ? id : await id;
     this.unsubscribe();
     this.subscription = context.file
       .getFileState(resolvedId, { collectionName, occurrenceKey })

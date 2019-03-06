@@ -1,5 +1,9 @@
 # @atlaskit/renderer
 
+## 41.0.1
+- Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+  - @atlaskit/status@0.4.0
+
 ## 41.0.0
 - Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
   - @atlaskit/editor-common@33.0.0

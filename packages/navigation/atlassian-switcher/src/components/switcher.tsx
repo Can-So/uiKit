@@ -125,7 +125,8 @@ export default class Switcher extends React.Component<SwitcherProps> {
     const isAdmin = managePermissionData;
     const hasAdminLinks = managePermissionData || addProductsPermissionData;
     const hasSuggestedLinks = !!(isXFlowEnabledData && suggestedProductLink);
-    const shouldShowManageListButton = isAdmin && customLinksData![0];
+    const shouldShowManageListButton =
+      isAdmin && customLinksData && customLinksData[0];
 
     const fixedProductLinks = getFixedProductLinks();
     const licensedProductLinks = getLicensedProductLinks(
@@ -138,7 +139,9 @@ export default class Switcher extends React.Component<SwitcherProps> {
 
     const suggestedLinks = hasSuggestedLinks ? [suggestedProductLink!] : [];
     const recentLinks = getRecentLinkItems(recentContainersData!.data);
-    const customLinks = getCustomLinkItems(customLinksData![0]);
+    const customLinks = customLinksData
+      ? getCustomLinkItems(customLinksData[0])
+      : [];
 
     /**
      * It is essential that switchToLinks reflects the order corresponding nav items

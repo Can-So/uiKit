@@ -97,7 +97,7 @@ const Mention = Loadable({
   loading: () => null,
 });
 
-export const nodeToReact = {
+export const nodeToReact: { [key: string]: React.ComponentType<any> } = {
   blockquote: Blockquote,
   bulletList: BulletList,
   blockCard: BlockCard,
@@ -136,7 +136,7 @@ export const nodeToReact = {
   unknownBlock: UnknownBlock,
 };
 
-export const toReact = (node: Node): React.ComponentClass<any> => {
+export const toReact = (node: Node): React.ComponentType<any> => {
   return nodeToReact[node.type.name];
 };
 

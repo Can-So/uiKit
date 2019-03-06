@@ -72,26 +72,36 @@ export default class WebBridgeImpl extends WebBridge
       toggleUnderline()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
   onCodeClicked() {
     if (this.textFormatBridgeState && this.editorView) {
       toggleCode()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
   onStrikeClicked() {
     if (this.textFormatBridgeState && this.editorView) {
       toggleStrike()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
   onSuperClicked() {
     if (this.textFormatBridgeState && this.editorView) {
       toggleSuperscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
   onSubClicked() {
     if (this.textFormatBridgeState && this.editorView) {
       toggleSubscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
+  onMentionSelect(mention: string) {}
+
+  onMentionPickerResult(result: string) {}
+
+  onMentionPickerDismissed() {}
 
   onStatusUpdate(text: string, color: StatusColor, uuid: string) {
     if (this.statusBridgeState && this.editorView) {
@@ -108,12 +118,6 @@ export default class WebBridgeImpl extends WebBridge
       commitStatusPicker()(this.editorView);
     }
   }
-
-  onMentionSelect(mention: string) {}
-
-  onMentionPickerResult(result: string) {}
-
-  onMentionPickerDismissed() {}
 
   setContent(content: string) {
     if (this.editorActions) {
@@ -148,35 +152,21 @@ export default class WebBridgeImpl extends WebBridge
 
       switch (eventName) {
         case 'upload-preview-update': {
-          const uploadPromise = new Promise(resolve => {
-            this.mediaMap.set(payload.file.id, resolve);
-          });
-          payload.file.upfrontId = uploadPromise;
           payload.preview = {
             dimensions: payload.file.dimensions,
           };
-          this.mediaPicker.emit(eventName, payload);
-
+          this.mediaPicker.emit('upload-preview-update', payload);
           return;
         }
         case 'upload-end': {
-          if (typeof payload.file.collectionName === 'string') {
-            /**
-             * We call this custom event instead of `upload-end` to set the collection
-             * As when emitting `upload-end`, the `ready` handler will usually fire before
-             * the `publicId` is resolved which causes a noop, resulting in bad ADF.
-             */
-            this.mediaPicker.emit('collection', payload);
-          }
-          const getUploadPromise = this.mediaMap.get(payload.file.id);
-          if (getUploadPromise) {
-            getUploadPromise!(payload.file.publicId);
-          }
+          /** emit a mobile-only event */
+          this.mediaPicker.emit('mobile-upload-end', payload);
           return;
         }
       }
     }
   }
+
   onPromiseResolved(uuid: string, payload: string) {
     resolvePromise(uuid, JSON.parse(payload));
   }
@@ -241,7 +231,7 @@ export default class WebBridgeImpl extends WebBridge
       .forEach(cmd => cmd(this.editorView!.state, dispatch));
   }
 
-  insertBlockType(type) {
+  insertBlockType(type: string) {
     if (!this.editorView) {
       return;
     }

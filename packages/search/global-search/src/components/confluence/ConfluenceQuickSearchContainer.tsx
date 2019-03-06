@@ -5,6 +5,7 @@ import {
   FormattedHTMLMessage,
 } from 'react-intl';
 import { withAnalytics, FireAnalyticsEvent } from '@atlaskit/analytics';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import { ConfluenceClient } from '../../api/ConfluenceClient';
 import {
   CrossProductSearchClient,
@@ -22,6 +23,7 @@ import {
   Logger,
 } from '../GlobalQuickSearchWrapper';
 import {
+  ConfluenceAdvancedSearchTypes,
   redirectToConfluenceAdvancedSearch,
   handlePromiseError,
 } from '../SearchResultsUtil';
@@ -51,6 +53,11 @@ export interface Props {
   useQuickNavForPeopleResults?: boolean;
   useCPUSForPeopleResults?: boolean;
   logger: Logger;
+  onAdvancedSearch?: (
+    e: CancelableEvent,
+    entity: String,
+    query: String,
+  ) => void;
 }
 
 const LOGGER_NAME = 'AK.GlobalSearch.ConfluenceQuickSearchContainer';
@@ -65,9 +72,28 @@ export class ConfluenceQuickSearchContainer extends React.Component<
     postQueryScreenCounter: new SearchScreenCounter(),
   };
 
-  handleSearchSubmit = ({ target }) => {
+  handleSearchSubmit = event => {
+    const { onAdvancedSearch = () => {} } = this.props;
+    const target = event.target;
     const query = target.value;
-    redirectToConfluenceAdvancedSearch(query);
+    let defaultPrevented = false;
+
+    onAdvancedSearch(
+      Object.assign({}, event, {
+        preventDefault() {
+          defaultPrevented = true;
+          event.preventDefault();
+          event.stopPropagation();
+        },
+        stopPropagation() {},
+      }),
+      ConfluenceAdvancedSearchTypes.Content,
+      query,
+    );
+
+    if (!defaultPrevented) {
+      redirectToConfluenceAdvancedSearch(query);
+    }
   };
 
   async searchCrossProductConfluence(
@@ -260,6 +286,7 @@ export class ConfluenceQuickSearchContainer extends React.Component<
     keepPreQueryState,
     searchSessionId,
   }) => {
+    const { onAdvancedSearch = () => {} } = this.props;
     return (
       <SearchResultsComponent
         query={latestSearchQuery}
@@ -281,11 +308,21 @@ export class ConfluenceQuickSearchContainer extends React.Component<
             key="advanced"
             query={latestSearchQuery}
             analyticsData={analyticsData}
+            onClick={(event, entity) =>
+              onAdvancedSearch(event, entity, latestSearchQuery)
+            }
           />
         )}
         getPreQueryGroups={() => mapRecentResultsToUIGroups(recentItems)}
         getPostQueryGroups={() => mapSearchResultsToUIGroups(searchResults)}
-        renderNoResult={() => <NoResultsState query={latestSearchQuery} />}
+        renderNoResult={() => (
+          <NoResultsState
+            query={latestSearchQuery}
+            onClick={(event, entity) =>
+              onAdvancedSearch(event, entity, latestSearchQuery)
+            }
+          />
+        )}
       />
     );
   };

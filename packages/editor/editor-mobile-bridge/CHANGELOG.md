@@ -1,5 +1,32 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.13.1
+- [patch] [59fcd0bbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59fcd0bbc9):
+
+  - FM-1618: fixed media upload on mobile
+
+## 6.13.0
+- [minor] [6032a39f1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6032a39f1a):
+
+  - ED-6189: registered insertBlockType() on mobile bridge
+
+## 6.12.2
+- Updated dependencies [e9b824bf86](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9b824bf86):
+  - @atlaskit/form@5.1.7
+  - @atlaskit/textfield@0.2.0
+
+## 6.12.1
+- Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+  - @atlaskit/editor-core@102.1.1
+  - @atlaskit/renderer@41.0.1
+  - @atlaskit/emoji@56.1.0
+  - @atlaskit/status@0.4.0
+
+## 6.12.0
+- [minor] [d18b085e2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d18b085e2a):
+
+  - Integrating truly upfront ID
+
 ## 6.11.1
 - Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
   - @atlaskit/editor-common@33.0.0
