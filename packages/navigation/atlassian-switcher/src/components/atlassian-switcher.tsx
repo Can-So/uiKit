@@ -3,13 +3,32 @@ import JiraSwitcher from './jira-switcher';
 import ConfluenceSwitcher from './confluence-switcher';
 import GenericSwitcher from './generic-switcher';
 import ErrorBoundary from './error-boundary';
-import { Product } from '../types';
+import { FeatureFlagProps, Product } from '../types';
+import {
+  analyticsAttributes,
+  NavigationAnalyticsContext,
+} from '../utils/analytics';
 
-interface AtlassianSwitcherProps {
+type AtlassianSwitcherProps = {
   product: string;
   cloudId: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
-}
+} & FeatureFlagProps;
+
+const getAnalyticsContext = (props: { [key: string]: any }) => ({
+  source: 'atlassianSwitcher',
+  ...analyticsAttributes({
+    featureFlags: Object.keys(props)
+      .filter(key => key.startsWith('enable'))
+      .reduce(
+        (acc, key) => ({
+          ...acc,
+          [key]: props[key],
+        }),
+        {} as { [key: string]: any },
+      ),
+  }),
+});
 
 const AtlassianSwitcher = ({
   product,
@@ -17,19 +36,38 @@ const AtlassianSwitcher = ({
   triggerXFlow,
   ...props
 }: AtlassianSwitcherProps) => {
-  let Switcher: React.ReactType;
+  let switcher: React.ReactNode;
   switch (product) {
     case Product.JIRA:
-      Switcher = JiraSwitcher;
+      switcher = (
+        <JiraSwitcher
+          cloudId={cloudId}
+          triggerXFlow={triggerXFlow}
+          {...props}
+        />
+      );
       break;
     case Product.CONFLUENCE:
-      Switcher = ConfluenceSwitcher;
+      switcher = (
+        <ConfluenceSwitcher
+          cloudId={cloudId}
+          triggerXFlow={triggerXFlow}
+          {...props}
+        />
+      );
       break;
     case Product.HOME:
     case Product.PEOPLE:
     case Product.SITE_ADMIN:
     case Product.TRUSTED_ADMIN:
-      Switcher = GenericSwitcher;
+      switcher = (
+        <GenericSwitcher
+          cloudId={cloudId}
+          triggerXFlow={triggerXFlow}
+          product={product}
+          {...props}
+        />
+      );
       break;
     default:
       if (process.env.NODE_ENV !== 'production') {
@@ -42,14 +80,15 @@ const AtlassianSwitcher = ({
   }
   return (
     <ErrorBoundary>
-      <Switcher
-        cloudId={cloudId}
-        triggerXFlow={triggerXFlow}
-        product={product}
-        {...props}
-      />
+      <NavigationAnalyticsContext data={getAnalyticsContext(props)}>
+        {switcher}
+      </NavigationAnalyticsContext>
     </ErrorBoundary>
   );
+};
+
+AtlassianSwitcher.defaultProps = {
+  enableSingleJiraLink: false,
 };
 
 export default AtlassianSwitcher;

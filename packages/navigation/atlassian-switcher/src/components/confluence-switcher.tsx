@@ -2,11 +2,12 @@ import * as React from 'react';
 import Switcher from './switcher';
 import { CustomLinksProvider } from '../providers/confluence-data-providers';
 import CommonDataProvider from '../providers/common-data-provider';
+import { FeatureFlagProps } from '../types';
 
-interface ConfluenceSwitcherProps {
+type ConfluenceSwitcherProps = {
   cloudId: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
-}
+} & FeatureFlagProps;
 
 export default (props: ConfluenceSwitcherProps) => (
   <CustomLinksProvider>

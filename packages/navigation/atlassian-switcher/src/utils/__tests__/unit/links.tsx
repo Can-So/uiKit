@@ -3,6 +3,7 @@ import {
   getProductLink,
   getLicensedProductLinks,
   PRODUCT_DATA_MAP,
+  ProductKey,
   getProductIsActive,
   getAdministrationLinks,
   getSuggestedProductLink,
@@ -35,11 +36,10 @@ describe('utils/links', () => {
   });
 
   it('getProductLink should create a correct link config', () => {
-    const productKey = 'confluence.ondemand';
-    const productLink = getProductLink(productKey);
+    const productLink = getProductLink(ProductKey.CONFLUENCE);
     const expectedLink = {
       key: 'confluence.ondemand',
-      ...PRODUCT_DATA_MAP['confluence.ondemand'],
+      ...PRODUCT_DATA_MAP[ProductKey.CONFLUENCE],
     };
     expect(productLink).toMatchObject(expectedLink);
   });
@@ -63,7 +63,7 @@ describe('utils/links', () => {
       const licenseInformation = generateLicenseInformation([
         'confluence.ondemand',
       ]);
-      const result = getLicensedProductLinks(licenseInformation);
+      const result = getLicensedProductLinks(licenseInformation, false);
       expect(result.map(({ key }) => key)).toMatchObject([
         'confluence.ondemand',
       ]);
@@ -72,7 +72,7 @@ describe('utils/links', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-software.ondemand',
       ]);
-      const result = getLicensedProductLinks(licenseInformation);
+      const result = getLicensedProductLinks(licenseInformation, false);
       expect(result.map(({ key }) => key)).toMatchObject([
         'jira-software.ondemand',
       ]);
@@ -81,7 +81,7 @@ describe('utils/links', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-servicedesk.ondemand',
       ]);
-      const result = getLicensedProductLinks(licenseInformation);
+      const result = getLicensedProductLinks(licenseInformation, false);
       expect(result.map(({ key }) => key)).toMatchObject([
         'jira-servicedesk.ondemand',
       ]);
@@ -90,9 +90,30 @@ describe('utils/links', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-incident-manager.ondemand',
       ]);
-      const result = getLicensedProductLinks(licenseInformation);
+      const result = getLicensedProductLinks(licenseInformation, false);
       expect(result.map(({ key }) => key)).toMatchObject([
         'jira-incident-manager.ondemand',
+      ]);
+    });
+    it('should not use single Jira link if enabled without jira product', () => {
+      const licenseInformation = generateLicenseInformation([
+        'confluence.ondemand',
+      ]);
+      const result = getLicensedProductLinks(licenseInformation, true);
+      expect(result.map(({ key }) => key)).toMatchObject([
+        'confluence.ondemand',
+      ]);
+    });
+    it('should use single Jira link if enabled and there is jira product', () => {
+      const licenseInformation = generateLicenseInformation([
+        'jira-software.ondemand',
+        'jira-incident-manager.ondemand',
+        'confluence.ondemand',
+      ]);
+      const result = getLicensedProductLinks(licenseInformation, true);
+      expect(result.map(({ key }) => key)).toMatchObject([
+        'jira',
+        'confluence.ondemand',
       ]);
     });
   });

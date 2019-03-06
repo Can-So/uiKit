@@ -5,6 +5,7 @@ import SettingsGlyph from '@atlaskit/icon/glyph/settings';
 
 import {
   ConfluenceIcon,
+  JiraIcon,
   JiraSoftwareIcon,
   JiraServiceDeskIcon,
   JiraCoreIcon,
@@ -21,13 +22,15 @@ enum ProductActivationStatus {
   DEACTIVATED = 'DEACTIVATED',
 }
 
-enum ProductKey {
+export enum ProductKey {
   CONFLUENCE = 'confluence.ondemand',
   JIRA_CORE = 'jira-core.ondemand',
   JIRA_SOFTWARE = 'jira-software.ondemand',
   JIRA_SERVICE_DESK = 'jira-servicedesk.ondemand',
   JIRA_OPS = 'jira-incident-manager.ondemand',
 }
+
+const SINGLE_JIRA_PRODUCT: 'jira' = 'jira';
 
 interface StringDict {
   [index: string]: string;
@@ -53,11 +56,11 @@ export const OBJECT_TYPE_TO_LABEL_MAP: StringDict = {
 };
 
 export const PRODUCT_DATA_MAP: {
-  [productKey: string]: {
+  [productKey in ProductKey | typeof SINGLE_JIRA_PRODUCT]: {
     label: string;
     Icon: React.ComponentType<any>;
     href: string;
-  };
+  }
 } = {
   [ProductKey.CONFLUENCE]: {
     label: 'Confluence',
@@ -84,6 +87,11 @@ export const PRODUCT_DATA_MAP: {
     Icon: createIcon(JiraOpsLogo, { size: 'small' }),
     href: '/secure/BrowseProjects.jspa?selectedProjectType=ops',
   },
+  [SINGLE_JIRA_PRODUCT]: {
+    label: 'Jira',
+    Icon: createIcon(JiraIcon, { size: 'small' }),
+    href: '/secure/MyJiraHome.jspa',
+  },
 };
 
 export const getObjectTypeLabel = (type: string): string => {
@@ -99,7 +107,9 @@ export const getFixedProductLinks = (): SwitcherItemType[] => [
   },
 ];
 
-export const getProductLink = (productKey: string): SwitcherItemType => ({
+export const getProductLink = (
+  productKey: ProductKey | typeof SINGLE_JIRA_PRODUCT,
+): SwitcherItemType => ({
   key: productKey,
   ...PRODUCT_DATA_MAP[productKey],
 });
@@ -113,18 +123,29 @@ export const getProductIsActive = (
 
 export const getLicensedProductLinks = (
   licenseInformationData: LicenseInformationDataStructure,
+  enableSingleJiraLink: boolean,
 ): SwitcherItemType[] => {
-  return [
+  const activeJiraProducts = [
     ProductKey.JIRA_SOFTWARE,
     ProductKey.JIRA_SERVICE_DESK,
     ProductKey.JIRA_CORE,
     ProductKey.JIRA_OPS,
-    ProductKey.CONFLUENCE,
-  ]
-    .filter((productKey: string) =>
-      getProductIsActive(licenseInformationData, productKey),
-    )
-    .map((productKey: string) => getProductLink(productKey));
+  ].filter(productKey =>
+    getProductIsActive(licenseInformationData, productKey),
+  );
+
+  const jiraProducts =
+    enableSingleJiraLink && activeJiraProducts.length
+      ? [SINGLE_JIRA_PRODUCT]
+      : activeJiraProducts;
+
+  const otherProducts = [ProductKey.CONFLUENCE].filter(productKey =>
+    getProductIsActive(licenseInformationData, productKey),
+  );
+
+  return [...jiraProducts, ...otherProducts].map(productKey =>
+    getProductLink(productKey),
+  );
 };
 
 export const getAdministrationLinks = (
