@@ -1,0 +1,1 @@
+- added searchSessionId to advanced search handler

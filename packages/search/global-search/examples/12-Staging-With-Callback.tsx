@@ -43,7 +43,7 @@ export default class extends React.Component<{}, { cloudId: string }> {
           alert(
             `should redirect to advanced "${e.category}" search with query "${
               e.query
-            }"`,
+            }" and searchSessionId "${e.searchSessionId}"`,
           );
         }}
       />

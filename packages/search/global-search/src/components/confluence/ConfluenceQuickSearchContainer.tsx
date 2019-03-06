@@ -57,6 +57,7 @@ export interface Props {
     e: CancelableEvent,
     entity: String,
     query: String,
+    searchSessionId: String,
   ) => void;
 }
 
@@ -72,7 +73,7 @@ export class ConfluenceQuickSearchContainer extends React.Component<
     postQueryScreenCounter: new SearchScreenCounter(),
   };
 
-  handleSearchSubmit = event => {
+  handleSearchSubmit = (event, searchSessionId) => {
     const { onAdvancedSearch = () => {} } = this.props;
     const target = event.target;
     const query = target.value;
@@ -89,6 +90,7 @@ export class ConfluenceQuickSearchContainer extends React.Component<
       }),
       ConfluenceAdvancedSearchTypes.Content,
       query,
+      searchSessionId,
     );
 
     if (!defaultPrevented) {
@@ -309,7 +311,12 @@ export class ConfluenceQuickSearchContainer extends React.Component<
             query={latestSearchQuery}
             analyticsData={analyticsData}
             onClick={(event, entity) =>
-              onAdvancedSearch(event, entity, latestSearchQuery)
+              onAdvancedSearch(
+                event,
+                entity,
+                latestSearchQuery,
+                searchSessionId,
+              )
             }
           />
         )}
@@ -319,7 +326,12 @@ export class ConfluenceQuickSearchContainer extends React.Component<
           <NoResultsState
             query={latestSearchQuery}
             onClick={(event, entity) =>
-              onAdvancedSearch(event, entity, latestSearchQuery)
+              onAdvancedSearch(
+                event,
+                entity,
+                latestSearchQuery,
+                searchSessionId,
+              )
             }
           />
         )}
