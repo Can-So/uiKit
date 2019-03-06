@@ -7,7 +7,7 @@
 // Spanish
 export default {
   'fabric.atlassianSwitcher.switchTo': 'Ir a',
-  'fabric.atlassianSwitcher.switchToTooltip': 'Switch to …',
+  'fabric.atlassianSwitcher.switchToTooltip': 'Ir a …',
   'fabric.atlassianSwitcher.recent': 'Recent',
   'fabric.atlassianSwitcher.more': 'More',
   'fabric.atlassianSwitcher.try': 'Try',

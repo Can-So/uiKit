@@ -9,12 +9,12 @@ const getCodesFromLocale = (locale: string) => {
   return [language.toLowerCase(), country.toUpperCase()];
 };
 
-interface AtlassianSwitcherIntlProviderProps {
+interface SwitcherIntlProviderProps {
   children: React.ReactElement<any>;
   locale: string;
 }
 
-export default ({ children, locale }: AtlassianSwitcherIntlProviderProps) => {
+export default ({ children, locale }: SwitcherIntlProviderProps) => {
   const [language, country] = getCodesFromLocale(locale);
   const messages = i18n[`${language}_${country}`] || i18n[language] || i18n.en;
 

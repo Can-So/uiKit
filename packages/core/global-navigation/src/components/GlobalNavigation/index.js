@@ -319,12 +319,13 @@ export default class GlobalNavigation extends Component<
   };
 
   constructNavItems = () => {
+    const { locale } = this.props;
     const productConfig = generateProductConfig(
       this.props,
       this.openDrawer,
       this.isNotificationInbuilt,
     );
-    const defaultConfig = generateDefaultConfig();
+    const defaultConfig = generateDefaultConfig(locale);
     const badge = this.renderNotificationBadge;
     const { notificationCount: badgeCount } = this.isNotificationInbuilt
       ? this.state

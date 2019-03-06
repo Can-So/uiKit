@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { defineMessages, FormattedMessage } from 'react-intl';
+import SwitcherIntlProvider from '../components/intl-provider';
 
 const messages = defineMessages({
   switchTo: {
@@ -70,8 +71,10 @@ const messages = defineMessages({
   },
 });
 
-export const SwitchToTooltipText = (
-  <FormattedMessage {...messages.switchToTooltip} />
+export const SwitchToTooltipText = (locale: string) => (
+  <SwitcherIntlProvider locale={locale}>
+    <FormattedMessage {...messages.switchToTooltip} />
+  </SwitcherIntlProvider>
 );
 
 export default messages;
