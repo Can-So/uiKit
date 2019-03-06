@@ -2,10 +2,13 @@ import * as React from 'react';
 import JiraSwitcher from './jira-switcher';
 import ConfluenceSwitcher from './confluence-switcher';
 import ErrorBoundary from './error-boundary';
+import IntlProvider from './intl-provider';
+import messages from '../utils/messages';
 
 interface AtlassianSwitcherProps {
   product: string;
   cloudId: string;
+  locale?: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
 }
 
@@ -13,6 +16,7 @@ const AtlassianSwitcher = ({
   product,
   cloudId,
   triggerXFlow,
+  locale = 'en',
   ...props
 }: AtlassianSwitcherProps) => {
   let Switcher: React.ReactType;
@@ -34,7 +38,14 @@ const AtlassianSwitcher = ({
   }
   return (
     <ErrorBoundary>
-      <Switcher cloudId={cloudId} triggerXFlow={triggerXFlow} {...props} />
+      <IntlProvider locale={locale}>
+        <Switcher
+          cloudId={cloudId}
+          triggerXFlow={triggerXFlow}
+          messages={messages}
+          {...props}
+        />
+      </IntlProvider>
     </ErrorBoundary>
   );
 };

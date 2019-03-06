@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { defineMessages, FormattedMessage } from 'react-intl';
+import { FormattedMessage, Messages } from 'react-intl';
+
 import {
   SwitcherWrapper,
   SwitcherItem,
@@ -31,42 +32,10 @@ import {
 import now from '../utils/performance-now';
 import TryLozenge from '../primitives/try-lozenge';
 
-const messages = defineMessages({
-  switchTo: {
-    id: 'fabric.atlassianSwitcher.switchTo',
-    defaultMessage: 'Switch to',
-    description:
-      'In a context in which users are able to switch between products, this text is the title of the category displaying the products the user is able to switch to.',
-  },
-  switchToTooltip: {
-    id: 'fabric.atlassianSwitcher.switchToTooltip',
-    defaultMessage: 'Switch to …',
-    description:
-      'This text appears as a tooltip when a user hovers over the atlassian switcher icon before clicking on it.',
-  },
-  recent: {
-    id: 'fabric.atlassianSwitcher.recent',
-    defaultMessage: 'Recent',
-    description:
-      "In a context in which users are able to view recent projects or spaces they've viewed, this text is the title of the section displaying all the recent projects or spaces.",
-  },
-  more: {
-    id: 'fabric.atlassianSwitcher.more',
-    defaultMessage: 'More',
-    description:
-      'In a context in which users are able to view predefined custom links, this text is the title of the section displaying all existing custom links.',
-  },
-  try: {
-    id: 'fabric.atlassianSwitcher.try',
-    defaultMessage: 'Try',
-    description:
-      'This text appears as a way to encourage the user to try a new Atlassian product.',
-  },
-});
-
 interface SwitcherProps {
   cloudId: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
+  messages: Messages;
   customLinks: ChildrenProps<CustomLinksProviderDataStructure>;
   suggestedProductLink: SuggestedProductItemType;
   recentContainers: ChildrenProps<RecentContainersDataStructure>;
@@ -95,10 +64,6 @@ const getItemAnalyticsContext = (
   }),
 });
 
-export const SwitchToTooltipText = (
-  <FormattedMessage {...messages.switchToTooltip} />
-);
-
 export default class Switcher extends React.Component<SwitcherProps> {
   mountedAt?: number;
 
@@ -121,6 +86,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
     const {
       cloudId,
       suggestedProductLink,
+      messages,
       customLinks: { isLoading: isLoadingCustomLinks, data: customLinksData },
       recentContainers: {
         isLoading: isLoadingRecentContainers,

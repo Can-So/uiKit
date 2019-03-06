@@ -374,11 +374,12 @@ export default class GlobalNavigation extends Component<
   };
 
   renderAtlassianSwitcherDrawerContents = () => {
-    const { product, cloudId } = this.props;
+    const { product, cloudId, locale } = this.props;
     return (
       <AtlassianSwitcher
-        product={product}
         cloudId={cloudId}
+        locale={locale}
+        product={product}
         triggerXFlow={this.triggerXFlow}
       />
     );

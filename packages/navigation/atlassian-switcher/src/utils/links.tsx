@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { defineMessages, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
@@ -11,44 +11,12 @@ import {
   JiraCoreIcon,
 } from '@atlaskit/logo';
 import { LicenseInformationDataStructure } from '../providers/types';
+import messages from './messages';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
 import { CustomLink, RecentContainer } from '../types';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { createIcon, createImageIcon, IconType } from './icon-themes';
-
-const messages = defineMessages({
-  jiraProject: {
-    id: 'fabric.atlassianSwitcher.jiraProject',
-    defaultMessage: 'Jira project',
-    description:
-      'In a context in which several items are listed , this text describes that the specific type of a given item is a Jira project',
-  },
-  confluenceSpace: {
-    id: 'fabric.atlassianSwitcher.confluenceSpace',
-    defaultMessage: 'Confluence space',
-    description:
-      'In a context in which several items are listed , this text describes that the specific type of a given item is a Confluence space',
-  },
-  people: {
-    id: 'fabric.atlassianSwitcher.people',
-    defaultMessage: 'People',
-    description:
-      'The text of a link redirecting the user to the People directory',
-  },
-  administration: {
-    id: 'fabric.atlassianSwitcher.administration',
-    defaultMessage: 'Administration',
-    description:
-      'The text of a link redirecting the user to the site administration',
-  },
-  discoverMore: {
-    id: 'fabric.atlassianSwitcher.discoverMore',
-    defaultMessage: 'Discover more',
-    description:
-      'The text of a link redirecting the user to Discover More Atlassian products',
-  },
-});
 
 enum ProductActivationStatus {
   ACTIVE = 'ACTIVE',
