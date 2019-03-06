@@ -1,1 +1,0 @@
-- ED-6461: Fix placement start when scrolling for Popup
