@@ -1,7 +1,6 @@
-const util = require('util');
 const vm = require('vm');
 const fs = require('fs');
-import { fork } from 'child_process';
+
 import path from 'path';
 
 const ssr = async example =>
@@ -11,8 +10,8 @@ const ssr = async example =>
     );
     const context = vm.createContext({
       filePath: example,
-      require: require,
-      __dirname: __dirname,
+      require,
+      __dirname,
     });
     let html;
     try {
