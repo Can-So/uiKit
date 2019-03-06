@@ -121,6 +121,11 @@ export const Body = styled.div`
           padding: 0 ${outerGutter}px;
         `;
   }};
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    overflow-y: auto;
+    height: 100%;
+  }
 `;
 
 export const styledBody = (component: ?ElementType) =>

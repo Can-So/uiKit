@@ -5,6 +5,7 @@ import { colors as themeColors } from '@atlaskit/theme';
 import { hexToRgba } from '@atlaskit/editor-common';
 
 import { CollabEditOptions } from './types';
+import { processRawValue } from '../../utils/document';
 
 export interface Color {
   solid: string;
@@ -90,11 +91,13 @@ export const replaceDocument = (
   version?: number,
   options?: CollabEditOptions,
 ) => {
-  const { schema, tr } = state;
+  const { tr } = state;
 
-  const content = (doc.content || []).map(child => schema.nodeFromJSON(child));
+  // Process the value coming in, this allows us to wrap blocks unknown to us.
+  // Instead of throwing an error at this point.
+  const content = processRawValue(state.schema, doc);
 
-  if (content.length) {
+  if (content) {
     tr.setMeta('addToHistory', false);
     tr.replaceWith(0, state.doc.nodeSize - 2, content);
     tr.setSelection(Selection.atStart(tr.doc));

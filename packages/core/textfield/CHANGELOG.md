@@ -1,5 +1,39 @@
 # @atlaskit/textfield
 
+## 0.2.0
+- [minor] [e9b824bf86](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9b824bf86):
+
+  - **Breaking**: Changes to the `theme` prop. The type of this prop remains as `(ThemeTokens, ThemeProps) => ThemeTokens`.
+    - The shape of `ThemeTokens` has changed. `container` and `input` keys are now required. The value of these keys are style objects.
+    - More information has been added to ThemeProps.
+
+  ```diff
+  type ThemeTokens = {
+  - backgroundColor: string
+  - backgroundColorFocus: string
+  - backgroundColorHover: string
+  - borderColor: string
+  - borderColorFocus: string
+  - textColor: string
+  - disabledTextColor: string
+  - placeholderTextColor: string
+  + container: Object,
+  + input: Object
+  }
+
+  type ThemeProps = {
+    appearance: ThemeAppearance,
+    mode: 'dark' | 'light',
+  +  isDisabled: boolean,
+  +  isFocused: boolean,
+  +  isHovered: boolean,
+  +  isInvalid: boolean,
+  +  isMonospaced: boolean,
+  +  isCompact: boolean,
+  +  width?: string | number,
+  };
+  ```
+
 ## 0.1.6
 - [patch] [3d8322bd71](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3d8322bd71):
 

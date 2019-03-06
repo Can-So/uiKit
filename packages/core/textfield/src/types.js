@@ -40,15 +40,15 @@ export type TextFieldProps = {
   /** Sets a default value as input value */
   defaultValue?: string,
   /** Applies compact styling, making the field smaller */
-  isCompact?: boolean,
+  isCompact: boolean,
   /** Sets the field as uneditable, with a changed hover state. */
-  isDisabled?: boolean,
+  isDisabled: boolean,
   /** Sets styling to indicate that the input is focused. */
-  isFocused?: boolean,
+  isFocused: boolean,
   /** Sets styling to indicate that the input is invalid */
-  isInvalid?: boolean,
+  isInvalid: boolean,
   /** Sets content text value to monospace */
-  isMonospaced?: boolean,
+  isMonospaced: boolean,
   /** If true, prevents the value of the input from being edited. */
   isReadOnly?: boolean,
   /** Set required for form that the field is part of. */
@@ -61,7 +61,7 @@ export type TextFieldProps = {
   width?: string | number,
   /** The value of the input. */
   value?: string | number,
-  /** Forwarded ref */
+  /** This is an internal prop. Use "ref" prop to get a reference to input element. */
   forwardedRef: ElementRef<*>,
   /** The theme the component should use. */
   theme?: ThemeProp<ThemeTokens, ThemeProps>,

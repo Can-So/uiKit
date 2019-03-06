@@ -88,7 +88,7 @@ describe('advanced search callback', () => {
         category,
         query: 'query',
         preventDefault: expect.any(Function),
-        orignialEvent: event,
+        originalEvent: event,
       });
     });
 

@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.16.1
+- [patch] [707e08ecf8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/707e08ecf8):
+
+  - fix typo in api name
+
 ## 5.16.0
 - [minor] [7be03e992f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7be03e992f):
 

@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.11.2
+- Updated dependencies [e9b824bf86](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9b824bf86):
+  - @atlaskit/form@5.1.7
+  - @atlaskit/textfield@0.2.0
+
 ## 9.11.1
 - [patch] [2cb8c44165](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cb8c44165):
 

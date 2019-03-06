@@ -37,7 +37,6 @@ describe('Snapshot Test: table resizing', () => {
     });
 
     it('overflow table', async () => {
-      await snapshot(page);
       await resizeColumn(page, { colIdx: 2, amount: 500, row: 2 });
       await snapshot(page);
 
