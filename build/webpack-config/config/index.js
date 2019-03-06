@@ -279,7 +279,7 @@ function getOptimizations({ isProduction, noMinimizeFlag }) {
     parallel: Math.max(os.cpus().length - 1, 1),
     uglifyOptions: {
       compress: {
-        // Disabling following options speeds up minimization by 20 – 30s
+        // Disabling following options speeds up minimization by 20 - 30s
         // without any significant impact on a bundle size.
         arrows: false,
         booleans: false,
