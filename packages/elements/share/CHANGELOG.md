@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.15
+- [patch] [312572b5f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/312572b5f8):
+
+  - FS-3618 consume configuration in the UserPickerField
+
 ## 0.1.14
 - [patch] [4d3226b06b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d3226b06b):
 

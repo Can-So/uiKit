@@ -1,1 +1,0 @@
-- FS-3618 add isValidEmail prop to UserPicker

@@ -1,1 +1,0 @@
-- FS-3618 consume configuration in the UserPickerField
