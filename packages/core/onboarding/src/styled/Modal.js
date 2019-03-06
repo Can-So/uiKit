@@ -23,6 +23,10 @@ export const Image = styled.img`
   border-top-right-radius: ${borderRadius}px;
   height: auto;
   width: 100%;
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    border-radius: 0;
+  }
 `;
 export const Actions = styled.div`
   display: flex;

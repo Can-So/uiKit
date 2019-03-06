@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 33.0.2
+- [patch] [2b4b290610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2b4b290610):
+
+  - ED-6461: Fix placement start when scrolling for Popup
+
 ## 33.0.1
 - [patch] [1c00bd6268](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c00bd6268):
 

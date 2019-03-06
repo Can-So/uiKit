@@ -1,5 +1,27 @@
 # @atlaskit/editor-core
 
+## 102.1.7
+- [patch] [2e48ec26ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e48ec26ba):
+
+  - Changes to support new version of media-editor
+
+## 102.1.6
+- [patch] [59fcd0bbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59fcd0bbc9):
+
+  - FM-1618: fixed media upload on mobile
+
+## 102.1.5
+- [patch] [2b4b290610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2b4b290610):
+
+  - ED-6461: Fix placement start when scrolling for Popup
+
+## 102.1.4
+- [patch] [7a8d8ba656](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a8d8ba656):
+
+  - ED-6452: Validate documents on init through collab-editing
+
+  * Add unsupportedInline and unsupportedBlock to test-helpers.
+
 ## 102.1.3
 - [patch] [1c00bd6268](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c00bd6268):
 

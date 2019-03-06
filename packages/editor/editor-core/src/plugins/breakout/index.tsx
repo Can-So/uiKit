@@ -101,7 +101,13 @@ const breakoutPlugin: EditorPlugin = {
     return [{ name: 'breakout', mark: breakout }];
   },
 
-  contentComponent({ editorView, containerElement, appearance }) {
+  contentComponent({
+    editorView,
+    appearance,
+    popupsMountPoint,
+    popupsBoundariesElement,
+    popupsScrollableElement,
+  }) {
     return (
       <WithPluginState
         plugins={{
@@ -112,7 +118,9 @@ const breakoutPlugin: EditorPlugin = {
             {appearance === 'full-page' && (
               <LayoutButton
                 editorView={editorView}
-                boundariesElement={containerElement}
+                mountPoint={popupsMountPoint}
+                boundariesElement={popupsBoundariesElement}
+                scrollableElement={popupsScrollableElement}
                 node={pluginState.breakoutNode}
               />
             )}

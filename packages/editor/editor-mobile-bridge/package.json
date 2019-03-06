@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-mobile-bridge",
-  "version": "6.12.1",
+  "version": "6.13.1",
   "description": "Mobile distribution of the Editor",
   "main": "dist/es5/index.js",
   "module": "dist/es2015/index.js",
@@ -24,7 +24,7 @@
   "homepage": "https://bitbucket.org/atlaskit/atlaskit-mk-2#readme",
   "dependencies": {
     "@atlaskit/editor-common": "^33.0.0",
-    "@atlaskit/editor-core": "^102.1.1",
+    "@atlaskit/editor-core": "^102.1.6",
     "@atlaskit/editor-json-transformer": "^4.3.1",
     "@atlaskit/emoji": "^56.1.0",
     "@atlaskit/media-core": "^27.2.0",
@@ -47,9 +47,9 @@
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/editor-test-helpers": "^7.0.2",
-    "@atlaskit/form": "^5.1.5",
+    "@atlaskit/form": "^5.1.7",
     "@atlaskit/select": "^7.0.0",
-    "@atlaskit/textfield": "^0.1.5",
+    "@atlaskit/textfield": "^0.2.0",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "ajv": "^4.11.3",
     "babel-loader": "^8.0.2",
