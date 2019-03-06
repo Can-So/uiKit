@@ -5,9 +5,10 @@ import { mount, shallow } from 'enzyme';
 import Badge from '@atlaskit/badge';
 import { DropdownItem } from '@atlaskit/dropdown-menu';
 import Drawer from '@atlaskit/drawer';
-import AtlassianSwitcher from '@atlaskit/atlassian-switcher';
-import ConfluenceSwitcher from '@atlaskit/atlassian-switcher/src/components/confluence-switcher';
-import JiraSwitcher from '@atlaskit/atlassian-switcher/src/components/jira-switcher';
+import AtlassianSwitcher, {
+  ConfluenceSwitcher,
+  JiraSwitcher,
+} from '@atlaskit/atlassian-switcher';
 import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import CreateIcon from '@atlaskit/icon/glyph/add';
@@ -882,7 +883,7 @@ describe('GlobalNavigation', () => {
     const getDefaultWrapper = (propsToOverride: any = {}) =>
       mount(
         <GlobalNavigation
-          product={'jira'}
+          product="jira"
           productIcon={EmojiAtlassianIcon}
           productHref="#"
           cloudId={cloudId}

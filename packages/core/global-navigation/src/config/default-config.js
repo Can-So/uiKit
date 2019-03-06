@@ -11,7 +11,7 @@ import { SwitchToTooltipText } from '@atlaskit/atlassian-switcher';
 import type { DefaultConfigShape } from './types';
 
 export default function generateDefaultConfig(
-  locale: string,
+  locale?: string,
 ): DefaultConfigShape {
   return {
     product: {

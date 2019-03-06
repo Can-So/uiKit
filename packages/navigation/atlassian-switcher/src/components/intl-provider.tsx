@@ -11,10 +11,10 @@ const getCodesFromLocale = (locale: string) => {
 
 interface SwitcherIntlProviderProps {
   children: React.ReactElement<any>;
-  locale: string;
+  locale?: string;
 }
 
-export default ({ children, locale }: SwitcherIntlProviderProps) => {
+export default ({ children, locale = 'en' }: SwitcherIntlProviderProps) => {
   const [language, country] = getCodesFromLocale(locale);
   const messages = i18n[`${language}_${country}`] || i18n[language] || i18n.en;
 

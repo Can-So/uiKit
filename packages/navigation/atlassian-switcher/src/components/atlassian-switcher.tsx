@@ -18,7 +18,7 @@ const AtlassianSwitcher = ({
   product,
   cloudId,
   triggerXFlow,
-  locale = 'en',
+  locale,
   ...props
 }: AtlassianSwitcherProps) => {
   let Switcher: React.ReactType;
