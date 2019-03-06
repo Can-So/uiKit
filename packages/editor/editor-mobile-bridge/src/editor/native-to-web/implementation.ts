@@ -155,7 +155,7 @@ export default class WebBridgeImpl extends WebBridge
           payload.preview = {
             dimensions: payload.file.dimensions,
           };
-          this.mediaPicker.emit(eventName, payload);
+          this.mediaPicker.emit('upload-preview-update', payload);
           return;
         }
         case 'upload-end': {
