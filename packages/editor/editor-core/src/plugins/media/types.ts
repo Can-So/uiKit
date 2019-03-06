@@ -1,12 +1,13 @@
 import { Context } from '@atlaskit/media-core';
-import { UploadParams } from '@atlaskit/media-picker';
+import { MediaFile, UploadParams } from '@atlaskit/media-picker';
 
 export type MediaStateStatus =
   | 'unknown'
   | 'ready'
   | 'cancelled'
   | 'preview'
-  | 'error';
+  | 'error'
+  | 'mobile-upload-end';
 
 export interface MediaState {
   id: string;
@@ -20,12 +21,12 @@ export interface MediaState {
     height: number | undefined;
   };
   scaleFactor?: number;
-  fileId: Promise<string>;
-  publicId?: string;
   error?: {
     name: string;
     description: string;
   };
+  /** still require to support Mobile */
+  publicId?: string;
 }
 
 export interface MediaStateManager {
@@ -75,3 +76,10 @@ export interface CustomMediaPicker {
   destroy(): void;
   setUploadParams(uploadParams: UploadParams);
 }
+
+export type MobileUploadEndEventPayload = {
+  readonly file: MediaFile & {
+    readonly collectionName?: string;
+    readonly publicId?: string;
+  };
+};

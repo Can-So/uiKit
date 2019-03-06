@@ -17,6 +17,7 @@ import { taskDecision } from '@atlaskit/util-data-test';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { uuid } from '@atlaskit/adf-schema';
 import Button from '@atlaskit/button';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 import { pluginKey as blockTypePluginKey } from '../../../../../plugins/block-type/pm-plugins/main';
 import {
@@ -39,7 +40,7 @@ import {
   analyticsPluginKey,
   INPUT_METHOD,
 } from '../../../../../plugins/analytics';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import tablesPlugin from '../../../../../plugins/table';
 
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
@@ -85,7 +86,7 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
   let editorActions;
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
-  const editor = (doc: any) => {
+  const editor = (doc: any, editorPlugins?: any[]) => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
     return createEditor({
       doc,
@@ -102,6 +103,7 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
           taskDecision.getMockTaskDecisionResource(),
         ),
       },
+      editorPlugins,
       providerFactory,
       createAnalyticsEvent,
     });
@@ -193,11 +195,7 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
         isReducedSpacing={false}
       />,
     );
-    toolbarOption.find('button').simulate('click');
-    const emojiButton = toolbarOption
-      .find(Item)
-      .filterWhere(n => n.text().indexOf(messages.emoji.defaultMessage) > -1);
-    emojiButton.simulate('click');
+    clickInsertMenuOption(messages.emoji.defaultMessage, toolbarOption);
     expect(toolbarOption.state('emojiPickerOpen')).toEqual(true);
     toolbarOption.unmount();
   });
@@ -215,11 +213,7 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
         dispatchAnalyticsEvent={dispatchAnalyticsSpy}
       />,
     );
-    toolbarOption.find('button').simulate('click');
-    const emojiButton = toolbarOption
-      .find(Item)
-      .filterWhere(n => n.text().indexOf(messages.emoji.defaultMessage) > -1);
-    emojiButton.simulate('click');
+    clickInsertMenuOption(messages.emoji.defaultMessage, toolbarOption);
 
     expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
       action: 'opened',
@@ -244,6 +238,36 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     );
     toolbarOption.setState({ emojiPickerOpen: true });
     expect(toolbarOption.find(AkEmojiPicker).length).toEqual(1);
+    toolbarOption.unmount();
+  });
+
+  it('should trigger emoji inserted analytics event when emoji selected in picker', () => {
+    const { editorView } = editor(doc(p()));
+    const dispatchAnalyticsSpy = jest.fn();
+    const toolbarOption = mountWithIntl(
+      <ToolbarInsertBlock
+        emojiDisabled={false}
+        emojiProvider={emojiProvider}
+        editorView={editorView}
+        buttons={0}
+        isReducedSpacing={false}
+        insertEmoji={jest.fn()}
+        dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+      />,
+    );
+
+    clickInsertMenuOption(messages.emoji.defaultMessage, toolbarOption);
+    toolbarOption.update();
+    const onSelection = toolbarOption.find(AkEmojiPicker).prop('onSelection');
+    onSelection!({ id: '1f603', shortName: ':smiley:' }, undefined);
+
+    expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+      action: 'inserted',
+      actionSubject: 'document',
+      actionSubjectId: 'emoji',
+      attributes: { inputMethod: 'picker' },
+      eventType: 'track',
+    });
     toolbarOption.unmount();
   });
 
@@ -636,8 +660,8 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     uuid.setStatic(false);
   });
 
-  it('should track table creation event when table menu is clicked option is clicked', () => {
-    const { editorView } = editor(doc(p('text')));
+  it('should track table creation event when table option is clicked', () => {
+    const { editorView } = editor(doc(p('text')), [tablesPlugin()]);
     const toolbarOption = mountWithIntl(
       <ToolbarInsertBlock
         tableSupported={true}
@@ -646,15 +670,37 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
         isReducedSpacing={false}
       />,
     );
-    toolbarOption.find('button').simulate('click');
-    const tableButton = toolbarOption
-      .find(Item)
-      .filterWhere(n => n.text().indexOf(messages.table.defaultMessage) > -1);
-    tableButton.simulate('click');
+    clickInsertMenuOption(messages.table.defaultMessage, toolbarOption);
     expect(trackEvent).toHaveBeenCalledWith(
       'atlassian.editor.format.table.button',
     );
     toolbarOption.unmount();
+  });
+
+  menus.forEach(menu => {
+    it(`should fire v3 analytics event when table option clicked in ${
+      menu.name
+    } menu`, () => {
+      const { editorView } = editor(doc(p('text')), [tablesPlugin()]);
+      const toolbarOption = mountWithIntl(
+        <ToolbarInsertBlock
+          tableSupported={true}
+          editorView={editorView}
+          buttons={menu.numButtons}
+          isReducedSpacing={false}
+        />,
+      );
+      menu.clickButton(messages.table.defaultMessage, toolbarOption);
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'table',
+        attributes: { inputMethod: menu.name },
+        eventType: 'track',
+      });
+      toolbarOption.unmount();
+    });
   });
 
   it(`should trigger insertMacroFromMacroBrowser when "${

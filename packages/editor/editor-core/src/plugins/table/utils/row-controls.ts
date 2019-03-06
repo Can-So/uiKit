@@ -17,7 +17,8 @@ export const getRowHeights = (tableRef: HTMLTableElement): number[] => {
   const heights: number[] = [];
   const rows = tableRef.querySelectorAll('tr');
   for (let i = 0, count = rows.length; i < count; i++) {
-    heights[i] = rows[i].offsetHeight + 1;
+    const rect = rows[i].getBoundingClientRect();
+    heights[i] = (rect ? rect.height : rows[i].offsetHeight) + 1;
   }
   return heights;
 };

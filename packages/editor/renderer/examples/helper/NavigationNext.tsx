@@ -20,12 +20,14 @@ import AddIcon from '@atlaskit/icon/glyph/add';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
 
+type ClassNameProps = { className: string };
+
 const Nav = () => (
   <GlobalNav
     primaryItems={[
       {
         id: 'jira',
-        icon: ({ label }) => <JiraIcon size="medium" label={label} />,
+        icon: ({ label }: any) => <JiraIcon size="medium" label={label} />,
         label: 'Jira',
       },
       { id: 'search', icon: SearchIcon },
@@ -53,7 +55,7 @@ const Nav = () => (
 const ContainerNavigation = () => (
   <div>
     <HeaderSection>
-      {({ css }) => (
+      {({ css }: any) => (
         <div
           style={{
             ...css,
@@ -61,7 +63,7 @@ const ContainerNavigation = () => (
           }}
         >
           <ContainerHeader
-            before={itemState => (
+            before={(itemState: any) => (
               <ItemAvatar
                 itemState={itemState}
                 appearance="square"
@@ -75,7 +77,7 @@ const ContainerNavigation = () => (
       )}
     </HeaderSection>
     <MenuSection>
-      {({ className }) => (
+      {({ className }: ClassNameProps) => (
         <div className={className}>
           <Item before={BacklogIcon} text="Backlog" isSelected />
           <Item before={BoardIcon} text="Active sprints" />
@@ -90,14 +92,14 @@ const ContainerNavigation = () => (
 const ProductNavigation = () => (
   <div>
     <HeaderSection>
-      {({ className }) => (
+      {({ className }: ClassNameProps) => (
         <div className={className}>
           <Wordmark wordmark={JiraWordmark} />
         </div>
       )}
     </HeaderSection>
     <MenuSection>
-      {({ className }) => (
+      {({ className }: ClassNameProps) => (
         <div className={className}>
           <Item text="Dashboards" />
           <Item text="Projects" />
@@ -124,7 +126,7 @@ export const getDefaultShowSidebarState = (defaultValue = false) => {
   return defaultValue;
 };
 
-export function NavigationNext({ children }) {
+export function NavigationNext({ children }: { children: React.ReactNode }) {
   return (
     <NavigationProvider>
       <LayoutManager
@@ -138,11 +140,13 @@ export function NavigationNext({ children }) {
   );
 }
 
+type SidebarProps = { children: any; showSidebar: boolean };
+
 export default class Sidebar extends React.Component<
-  { children: any; showSidebar: boolean },
+  SidebarProps,
   { showSidebar: boolean }
 > {
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: SidebarProps) {
     if (prevProps.showSidebar !== this.props.showSidebar) {
       localStorage.setItem(
         LOCALSTORAGE_renderer_sidebar_key,

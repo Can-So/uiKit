@@ -16,7 +16,7 @@ export interface Props {
 export default class TaskItem extends PureComponent<Props, {}> {
   private providerFactory: ProviderFactory;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.providerFactory = props.providers || new ProviderFactory();
   }
@@ -29,7 +29,7 @@ export default class TaskItem extends PureComponent<Props, {}> {
     }
   }
 
-  private renderWithProvider = providers => {
+  private renderWithProvider = (providers: any) => {
     const { taskDecisionProvider, contextIdentifierProvider } = providers;
     const { children, localId, state, rendererContext } = this.props;
     let objectAri = '';

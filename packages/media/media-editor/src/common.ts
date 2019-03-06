@@ -39,4 +39,5 @@ export interface ExportedImage {
   isExported: boolean; // indicates whether the image export was successful
   content?: string; // base64 image if isExported is true
   error?: string; // failure reason if isExported is false
+  dimensions?: Dimensions;
 }

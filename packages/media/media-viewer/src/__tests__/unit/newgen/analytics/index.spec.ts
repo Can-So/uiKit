@@ -15,6 +15,7 @@ export const processedFile: ProcessedFileState = {
   mediaType: 'image',
   mimeType: 'jpg',
   artifacts: {},
+  representations: {},
 };
 
 export const processingFile: ProcessingFileState = {
@@ -24,6 +25,7 @@ export const processingFile: ProcessingFileState = {
   size: 100,
   mediaType: 'image',
   mimeType: 'jpg',
+  representations: {},
 };
 
 export const uploadingFile: UploadingFileState = {
@@ -50,6 +52,7 @@ export const processingError: ProcessingFailedState = {
   mediaType: 'image',
   mimeType: 'jpg',
   artifacts: {},
+  representations: {},
 };
 
 const commonFileProperties = {

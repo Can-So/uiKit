@@ -28,6 +28,7 @@ describe('metadata utils', () => {
         size: 10,
         mediaType: 'unknown',
         mimeType: 'foo/bar',
+        representations: {},
       };
       const existingMetadata: FileDetails = {
         id: '123',

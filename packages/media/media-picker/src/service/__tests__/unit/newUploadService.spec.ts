@@ -37,6 +37,10 @@ describe('UploadService', () => {
   const usersClientId = 'some-users-collection-client-id';
   const usersToken = 'some-users-collection-client-id';
   const previewObject: Preview = { someImagePreview: true } as any;
+  const defaultUploadMock = {
+    subscribe() {},
+    pipe() {},
+  };
   const userAuthProvider: AuthProvider = () =>
     Promise.resolve({
       clientId: usersClientId,
@@ -75,9 +79,7 @@ describe('UploadService', () => {
       ],
     };
     jest.spyOn(context.file, 'touchFiles').mockResolvedValue(touchedFiles);
-    jest.spyOn(context.file, 'upload').mockReturnValue({
-      subscribe() {},
-    });
+    jest.spyOn(context.file, 'upload').mockReturnValue(defaultUploadMock);
 
     (getPreviewFromImage.getPreviewFromImage as any).mockReturnValue(
       Promise.resolve(previewObject),
@@ -106,9 +108,7 @@ describe('UploadService', () => {
         .spyOn(userContext.file, 'touchFiles')
         .mockResolvedValue(touchedFiles);
       const userContextUpload = jest.spyOn(userContext.file, 'upload');
-      userContextUpload.mockReturnValue({
-        subscribe() {},
-      });
+      userContextUpload.mockReturnValue(defaultUploadMock);
 
       return { uploadService, filesAddedPromise, context, userContext };
     } else {

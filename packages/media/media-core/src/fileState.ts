@@ -1,10 +1,10 @@
 import {
-  MediaFileProcessingStatus,
   MediaFile,
   MediaStoreResponse,
   MediaType,
   MediaFileArtifacts,
   MediaCollectionItemFullDetails,
+  MediaRepresentations,
 } from '@atlaskit/media-store';
 
 export type FileStatus =
@@ -43,9 +43,11 @@ export interface ProcessingFileState {
   occurrenceKey?: string;
   name: string;
   size: number;
+  artifacts?: MediaFileArtifacts;
   mediaType: MediaType;
   mimeType: string;
   preview?: FilePreview | Promise<FilePreview>;
+  representations: MediaRepresentations;
 }
 
 export interface ProcessedFileState {
@@ -58,6 +60,7 @@ export interface ProcessedFileState {
   mediaType: MediaType;
   mimeType: string;
   preview?: FilePreview | Promise<FilePreview>;
+  representations: MediaRepresentations;
 }
 export interface ProcessingFailedState {
   status: 'failed-processing';
@@ -69,6 +72,7 @@ export interface ProcessingFailedState {
   mediaType: MediaType;
   mimeType: string;
   preview?: FilePreview | Promise<FilePreview>;
+  representations: MediaRepresentations;
 }
 export interface ErrorFileState {
   status: 'error';
@@ -88,18 +92,14 @@ export const isErrorFileState = (
 ): fileState is ErrorFileState =>
   (fileState as ErrorFileState).status === 'error';
 
-const apiProcessingStatusToFileStatus = (
-  fileStatus?: MediaFileProcessingStatus,
-): FileStatus => {
-  switch (fileStatus) {
-    case 'pending':
-      return 'processing';
-    case 'succeeded':
-      return 'processed';
-    case 'failed':
-      return 'failed-processing';
-    case undefined:
-      return 'processing';
+export const isImageRepresentationReady = (fileState: FileState): boolean => {
+  switch (fileState.status) {
+    case 'processing':
+    case 'processed':
+    case 'failed-processing':
+      return !!fileState.representations.image;
+    default:
+      return false;
   }
 };
 
@@ -114,40 +114,35 @@ export const mapMediaFileToFileState = (
     artifacts,
     mediaType,
     mimeType,
+    representations,
   } = mediaFile.data;
-  const status = apiProcessingStatusToFileStatus(processingStatus);
+  const baseState = {
+    id,
+    name,
+    size,
+    mediaType,
+    mimeType,
+    artifacts,
+    representations,
+  };
 
   switch (processingStatus) {
     case 'pending':
     case undefined:
       return {
-        id,
-        status,
-        name,
-        size,
-        mediaType,
-        mimeType,
-      } as ProcessingFileState;
+        ...baseState,
+        status: 'processing',
+      };
     case 'succeeded':
       return {
-        id,
-        status,
-        name,
-        size,
-        artifacts,
-        mediaType,
-        mimeType,
-      } as ProcessedFileState;
+        ...baseState,
+        status: 'processed',
+      };
     case 'failed':
       return {
-        id,
-        status,
-        name,
-        size,
-        artifacts,
-        mediaType,
-        mimeType,
-      } as ProcessingFailedState;
+        ...baseState,
+        status: 'failed-processing',
+      };
   }
 };
 

@@ -1,5 +1,10 @@
 # @atlaskit/form
 
+## 5.1.7
+- Updated dependencies [e9b824bf86](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9b824bf86):
+  - @atlaskit/modal-dialog@7.2.4
+  - @atlaskit/textfield@0.2.0
+
 ## 5.1.6
 - [patch] [887c85ffdc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/887c85ffdc):
 

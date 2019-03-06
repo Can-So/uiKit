@@ -15,8 +15,8 @@ const ResultBox = styled.div`
 
 /* eslint-disable react/no-unused-prop-types */
 type SizeMetrics = {
-  width: number,
-  height: number,
+  width: ?number,
+  height: ?number,
 };
 /* eslint-enable */
 

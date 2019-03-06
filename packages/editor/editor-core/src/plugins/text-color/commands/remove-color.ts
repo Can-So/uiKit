@@ -1,7 +1,8 @@
 import { TextSelection } from 'prosemirror-state';
 import { pluginKey, ACTIONS } from '../pm-plugins/main';
+import { Command } from '../../../types';
 
-export const removeColor = () => (state, dispatch) => {
+export const removeColor = (): Command => (state, dispatch) => {
   const { textColor } = state.schema.marks;
   const { from, to, $cursor } = state.selection as TextSelection;
 
@@ -12,6 +13,8 @@ export const removeColor = () => (state, dispatch) => {
   } else {
     tr = state.tr.removeMark(from, to, textColor);
   }
-
-  dispatch(tr.setMeta(pluginKey, { action: ACTIONS.RESET_COLOR }));
+  if (dispatch) {
+    dispatch(tr.setMeta(pluginKey, { action: ACTIONS.RESET_COLOR }));
+  }
+  return true;
 };

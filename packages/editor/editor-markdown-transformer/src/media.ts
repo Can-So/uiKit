@@ -1,10 +1,12 @@
-export interface Token {
-  new (type: string, tag: string, level: number);
+export type Token = {
+  new (type: string, tag: string, level: number): Token;
   type: string;
   content: string;
   level: number;
   tag: string;
-}
+  attrs?: string[][];
+  children?: any[];
+};
 
 export interface MdState {
   Token: Token;
@@ -39,20 +41,20 @@ function createRule() {
    * remaining inline content (bold, links, etc.) is kept intact!
    */
   return function media(
-    state: MdState,
+    State: MdState,
     startLine: number,
     endLine: number,
     silent?: boolean,
   ) {
     const getUrl = (str: string) => {
-      const res = state.md.helpers.parseLinkDestination(
+      const res = State.md.helpers.parseLinkDestination(
         str,
         str.indexOf('(') + 1,
         str.length,
       );
       if (res.ok) {
-        const href = state.md.normalizeLink(res.str);
-        if (state.md.validateLink(href)) {
+        const href = State.md.normalizeLink(res.str);
+        if (State.md.validateLink(href)) {
           return href;
         }
       }
@@ -61,10 +63,10 @@ function createRule() {
     };
 
     const createMediaTokens = (url: string) => {
-      const mediaSingleOpen = new state.Token('media_single_open', '', 1);
-      const media = new state.Token('media', '', 0);
+      const mediaSingleOpen = new State.Token('media_single_open', '', 1);
+      const media = new State.Token('media', '', 0);
       media.attrs = [['url', getUrl(url)], ['type', 'external']];
-      const mediaSingleClose = new state.Token('media_single_close', '', -1);
+      const mediaSingleClose = new State.Token('media_single_close', '', -1);
 
       return [mediaSingleOpen, media, mediaSingleClose];
     };
@@ -78,7 +80,7 @@ function createRule() {
         return [];
       }
 
-      const inlineBefore = new state.Token('inline', '', 1);
+      const inlineBefore = new State.Token('inline', '', 1);
       inlineBefore.content = str;
       inlineBefore.children = [];
 
@@ -86,7 +88,7 @@ function createRule() {
     };
 
     let processedTokens: string[] = [];
-    const newTokens = state.tokens.reduce(
+    const newTokens = State.tokens.reduce(
       (tokens: Token[], token: Token, i: number, arr: Token[]) => {
         if (token.type === 'inline' && regx.test(token.content)) {
           const openingTokens: Token[] = [];
@@ -113,7 +115,7 @@ function createRule() {
           const closingTokens = openingTokens
             .map(
               token =>
-                new state.Token(
+                new State.Token(
                   token.type.replace('_open', '_close'),
                   token.tag,
                   -1,
@@ -170,7 +172,7 @@ function createRule() {
       [],
     );
 
-    state.tokens = newTokens;
+    State.tokens = newTokens;
     return true;
   };
 }

@@ -1,14 +1,11 @@
+import { ButtonAppearances } from '@atlaskit/button';
 import InlineDialog from '@atlaskit/inline-dialog';
 import { LoadOptions } from '@atlaskit/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { messages } from '../i18n';
-import {
-  DialogContentState,
-  InvitationsCapabilitiesResponse,
-  ShareButtonStyle,
-} from '../types';
+import { ConfigResponse, DialogContentState, ShareButtonStyle } from '../types';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 
@@ -32,15 +29,16 @@ type ShareError = {
 
 export type Props = {
   buttonStyle?: ShareButtonStyle;
-  capabilities?: InvitationsCapabilitiesResponse;
+  config?: ConfigResponse;
   children?: RenderChildren;
   copyLink: string;
   isDisabled?: boolean;
   loadUserOptions?: LoadOptions;
   onLinkCopy?: Function;
   onShareSubmit?: (shareContentState: DialogContentState) => Promise<any>;
-  shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
+  triggerButtonAppearance?: ButtonAppearances;
+  triggerButtonStyle?: ShareButtonStyle;
 };
 
 // 448px is the max-width of a inline dialog
@@ -58,9 +56,10 @@ export const defaultShareContentState: DialogContentState = {
 
 export class ShareDialogWithTrigger extends React.Component<Props, State> {
   static defaultProps = {
-    buttonStyle: 'icon-only' as 'icon-only',
     isDisabled: false,
     shouldCloseOnEscapePress: false,
+    triggerButtonAppearance: 'subtle',
+    triggerButtonStyle: 'icon-only' as 'icon-only',
   };
   private containerRef = React.createRef<HTMLDivElement>();
 
@@ -149,7 +148,14 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
 
   render() {
     const { isDialogOpen, isSharing, shareError, defaultValue } = this.state;
-    const { copyLink, isDisabled, loadUserOptions, capabilities } = this.props;
+    const {
+      copyLink,
+      isDisabled,
+      loadUserOptions,
+      config,
+      triggerButtonAppearance,
+      triggerButtonStyle,
+    } = this.props;
 
     // for performance purposes, we may want to have a lodable content i.e. ShareForm
     return (
@@ -170,7 +176,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
                 shareError={shareError}
                 onDismiss={this.handleFormDismiss}
                 defaultValue={defaultValue}
-                capabilities={capabilities}
+                config={config}
               />
             </InlineDialogFormWrapper>
           }
@@ -185,8 +191,9 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
             })
           ) : (
             <ShareButton
+              appearance={triggerButtonAppearance}
               text={
-                this.props.buttonStyle === 'icon-with-text' ? (
+                triggerButtonStyle === 'icon-with-text' ? (
                   <FormattedMessage {...messages.shareTriggerButtonText} />
                 ) : null
               }

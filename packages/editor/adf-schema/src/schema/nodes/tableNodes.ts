@@ -23,7 +23,7 @@ import { TableCellContent } from './doc';
 const akEditorTableCellBackgroundOpacity = 0.5;
 const akEditorTableNumberColumnWidth = 42;
 
-const getCellAttrs = (dom: HTMLElement) => {
+const getCellAttrs = (dom: HTMLElement, defaultValues: CellAttributes = {}) => {
   const widthAttr = dom.getAttribute('data-colwidth');
   const width =
     widthAttr && /^\d+(,\d+)*$/.test(widthAttr)
@@ -35,7 +35,11 @@ const getCellAttrs = (dom: HTMLElement) => {
     colspan,
     rowspan: Number(dom.getAttribute('rowspan') || 1),
     colwidth: width && width.length === colspan ? width : null,
-    background: dom.style.backgroundColor || null,
+    background:
+      dom.style.backgroundColor &&
+      dom.style.backgroundColor !== defaultValues['background']
+        ? dom.style.backgroundColor
+        : null,
   };
 };
 
@@ -264,6 +268,11 @@ export const tableCell = {
   marks: 'alignment',
   isolating: true,
   parseDOM: [
+    // Ignore number cell copied from renderer
+    {
+      tag: '.ak-renderer-table-number-column',
+      ignore: true,
+    },
     {
       tag: 'td',
       getAttrs: (dom: HTMLElement) => getCellAttrs(dom),
@@ -296,7 +305,8 @@ export const tableHeader = {
   parseDOM: [
     {
       tag: 'th',
-      getAttrs: (dom: HTMLElement) => getCellAttrs(dom),
+      getAttrs: (dom: HTMLElement) =>
+        getCellAttrs(dom, { background: 'rgb(244, 245, 247)' }),
     },
   ],
   toDOM(node: PmNode) {

@@ -1,4 +1,4 @@
-import * as Core from '../binaries/mediaEditor';
+import Core from '../binaries/mediaEditor';
 import { Typeset } from './typeset';
 import { FontInfo } from './fontInfo';
 

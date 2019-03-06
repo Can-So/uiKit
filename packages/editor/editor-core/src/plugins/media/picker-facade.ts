@@ -17,7 +17,13 @@ import {
 import { Context } from '@atlaskit/media-core';
 
 import { ErrorReportingHandler } from '@atlaskit/editor-common';
-import { MediaStateManager, MediaState, CustomMediaPicker } from './types';
+
+import {
+  MediaStateManager,
+  MediaState,
+  CustomMediaPicker,
+  MobileUploadEndEventPayload,
+} from './types';
 
 export type PickerType = keyof MediaPickerComponents | 'customMediaPicker';
 export type ExtendedComponentConfigs = ComponentConfigs & {
@@ -62,9 +68,9 @@ export default class PickerFacade {
     }
 
     picker.on('upload-preview-update', this.handleUploadPreviewUpdate);
-    picker.on('upload-end', this.handleUploadEnd);
+    picker.on('upload-processing', this.handleReady);
     picker.on('upload-error', this.handleUploadError);
-    picker.on('collection', this.handleCollection);
+    picker.on('mobile-upload-end', this.handleMobileUploadEnd);
 
     if (isDropzone(picker)) {
       picker.on('drag-enter', this.handleDragEnter);
@@ -90,7 +96,7 @@ export default class PickerFacade {
     }
 
     (picker as any).removeAllListeners('upload-preview-update');
-    (picker as any).removeAllListeners('upload-end');
+    (picker as any).removeAllListeners('upload-processing');
     (picker as any).removeAllListeners('upload-error');
 
     if (isDropzone(picker)) {
@@ -220,16 +226,14 @@ export default class PickerFacade {
       fileName: file.name,
       fileSize: file.size,
       fileMimeType: file.type,
-      fileId: Promise.resolve(file.id),
       dimensions,
-      publicId: file.id,
       scaleFactor,
     });
 
     this.onStartListeners.forEach(cb => cb.call(cb, [states]));
   };
 
-  private handleUploadEnd = (event: UploadEndEventPayload) => {
+  private handleReady = (event: UploadEndEventPayload) => {
     const { file } = event;
     this.stateManager.updateState(file.id, {
       status: 'ready',
@@ -247,21 +251,18 @@ export default class PickerFacade {
     }
 
     this.stateManager.updateState(error.fileId, {
-      id: error.fileId,
       status: 'error',
       error: error && { description: error.description, name: error.name },
     });
   };
 
-  private handleCollection = (
-    event: UploadEndEventPayload & {
-      file: { readonly collectionName?: string };
-    },
-  ) => {
+  private handleMobileUploadEnd = (event: MobileUploadEndEventPayload) => {
     const { file } = event;
+
     this.stateManager.updateState(file.id, {
-      status: 'preview',
+      status: 'mobile-upload-end',
       collection: file.collectionName,
+      publicId: file.publicId,
     });
   };
 

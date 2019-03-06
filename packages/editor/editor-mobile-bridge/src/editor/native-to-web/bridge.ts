@@ -23,4 +23,5 @@ export default interface NativeToWebBridge {
   onStatusUpdate(text: string, color: StatusColor, uuid: string);
   onStatusPickerDismissed();
   onLinkUpdate(text: string, url: string);
+  insertBlockType(type: string);
 }

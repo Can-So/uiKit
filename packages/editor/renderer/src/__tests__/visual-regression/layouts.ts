@@ -1,5 +1,6 @@
 import { goToRendererTestingExample, mountRenderer, snapshot } from './_utils';
 import { layoutWithDefaultBreakoutMark } from './__fixtures__/document-with-layout-default-breakout';
+import { Page } from 'puppeteer';
 
 const twoColumnLayout = {
   version: 1,
@@ -48,7 +49,7 @@ const twoColumnLayout = {
 };
 
 describe('Layouts', () => {
-  let page;
+  let page: Page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
@@ -71,7 +72,7 @@ describe('Layouts', () => {
 });
 
 describe('Snapshot Test: Breakout Layouts', () => {
-  let page;
+  let page: Page;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;

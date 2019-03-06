@@ -26,8 +26,8 @@ export default class ColorPalette extends PureComponent<Props, any> {
       checkMarkColor,
     } = this.props;
 
-    const colors: [string, string][] = [];
-    palette.forEach((value, key) => colors.push([key, value]));
+    const colors: [string, string][] = Array.from(palette.entries());
+
     return (
       <ColorPaletteWrapper
         className={className}

@@ -147,7 +147,9 @@ export default function ToolbarWithSizeDetector(props: ToolbarProps) {
   return (
     <div style={{ width: '100%', minWidth: '254px' }}>
       <SizeDetector>
-        {({ width }) => <Toolbar {...props} width={width} />}
+        {({ width }) =>
+          width === null ? null : <Toolbar {...props} width={width} />
+        }
       </SizeDetector>
     </div>
   );

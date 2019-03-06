@@ -34,16 +34,20 @@ export const HiddenInput: React.ComponentType<InputProps> = React.forwardRef(
   ),
 );
 
-type Props = {
+export type Props = {
   onLinkCopy?: (link: string) => void;
   link: string;
+};
+
+export type State = {
+  shouldShowCopiedMessage: boolean;
 };
 
 export const NoPaddingButton = styled(Button)`
   padding: 0;
 `;
 
-export class CopyLinkButton extends React.Component<Props> {
+export class CopyLinkButton extends React.Component<Props, State> {
   private inputRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   state = {
@@ -62,7 +66,7 @@ export class CopyLinkButton extends React.Component<Props> {
     this.setState({ shouldShowCopiedMessage: true });
   };
 
-  handleDismissCopiedMessage = () => {
+  private handleDismissCopiedMessage = () => {
     this.setState({ shouldShowCopiedMessage: false });
   };
 

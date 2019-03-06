@@ -7,6 +7,7 @@ import { pressKey, KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
 describe('Snapshot Test: Media', () => {
   describe('full page editor', () => {
     let page;
+    const threshold = 0.01;
     beforeAll(async () => {
       // @ts-ignore
       page = global.page;
@@ -26,7 +27,7 @@ describe('Snapshot Test: Media', () => {
     it('renders selection ring around media (via up)', async () => {
       await snapshot(page);
       await pressKey(page, KeyboardKeys.arrowUp);
-      await snapshot(page);
+      await snapshot(page, threshold);
     });
 
     it('renders selection ring around media (via gap cursor)', async () => {
@@ -34,12 +35,13 @@ describe('Snapshot Test: Media', () => {
       await snapshot(page);
 
       await pressKey(page, KeyboardKeys.arrowLeft);
-      await snapshot(page);
+      await snapshot(page, threshold);
     });
   });
 
   describe('comment editor', () => {
     let page;
+    const threshold = 0.02;
     beforeEach(async () => {
       // @ts-ignore
       page = global.page;
@@ -60,20 +62,20 @@ describe('Snapshot Test: Media', () => {
       await snapshot(page);
 
       await pressKey(page, KeyboardKeys.arrowUp);
-      await snapshot(page);
+      await snapshot(page, threshold);
     });
 
     it('renders selection ring around media group items', async () => {
       await snapshot(page);
 
       await pressKey(page, [KeyboardKeys.arrowLeft, KeyboardKeys.arrowLeft]);
-      await snapshot(page);
+      await snapshot(page, threshold);
 
       await pressKey(page, KeyboardKeys.arrowLeft);
-      await snapshot(page);
+      await snapshot(page, threshold);
 
       await pressKey(page, KeyboardKeys.arrowLeft);
-      await snapshot(page);
+      await snapshot(page, threshold);
     });
   });
 });
