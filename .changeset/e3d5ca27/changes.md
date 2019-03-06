@@ -1,1 +1,0 @@
-- FM-1618: fixed media upload on mobile

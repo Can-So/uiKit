@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.13.1
+- [patch] [59fcd0bbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59fcd0bbc9):
+
+  - FM-1618: fixed media upload on mobile
+
 ## 6.13.0
 - [minor] [6032a39f1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6032a39f1a):
 
