@@ -1,1 +1,0 @@
-- Added media queries to make Modal Dialogs Responsive

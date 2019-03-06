@@ -1,5 +1,10 @@
 # @atlaskit/modal-dialog
 
+## 7.3.0
+- [minor] [f26a3d0235](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f26a3d0235):
+
+  - Added media queries to make Modal Dialogs Responsive
+
 ## 7.2.4
 - Updated dependencies [e9b824bf86](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9b824bf86):
   - @atlaskit/form@5.1.7
