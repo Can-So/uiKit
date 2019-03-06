@@ -113,4 +113,4 @@ const displayChangedPackagesSinceMaster = async () => {
   }
 };
 
-(async () => displayChangedPackagesSinceMaster(cli.input, cli.flags))();
+(() => displayChangedPackagesSinceMaster(cli.input, cli.flags))();
