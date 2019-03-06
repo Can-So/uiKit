@@ -1,1 +1,0 @@
-- use esm instead of cjs in MediaEditor.js bundle
