@@ -81,7 +81,7 @@ export default class LayoutManager extends Component<
         'data-test-id': 'Navigation',
       },
     },
-    topOffset: '0px',
+    topOffset: 0,
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
     experimental_alternateFlyoutBehaviour: false,
@@ -193,8 +193,8 @@ export default class LayoutManager extends Component<
       >
         <ThemeProvider
           theme={theme => ({
-            mode: light, // If no theme already exists default to light mode
             topOffset,
+            mode: light, // If no theme already exists default to light mode
             ...theme,
           })}
         >

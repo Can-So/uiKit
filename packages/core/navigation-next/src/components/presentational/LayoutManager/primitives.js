@@ -9,7 +9,7 @@ export const LayoutContainer = ({ topOffset, ...props }: *) => {
       css={{
         display: 'flex',
         flexDirection: 'row',
-        height: `calc(100vh - ${topOffset || 0})`,
+        height: `calc(100vh - ${topOffset || 0}px)`,
       }}
       {...props}
     />
@@ -27,7 +27,7 @@ export const NavigationContainer = ({ topOffset, innerRef, ...props }: *) => (
       position: 'fixed',
       top: topOffset,
       zIndex: layers.navigation(),
-      height: `calc(100vh - ${topOffset})`,
+      height: `calc(100vh - ${topOffset}px)`,
     }}
     {...props}
   />

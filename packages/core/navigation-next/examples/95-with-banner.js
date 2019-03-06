@@ -1,14 +1,4 @@
 // @flow
-
-/*
-  NOTE
-  ----------------------------------------------------------------------------
-  This is the source file for the webdriver test. If you make changes here,
-  please update the tests to reflect those changes:
-
-  `packages/core/navigation-next/src/__tests__/integration/navigation.js`
-*/
-
 import React, { Component, type Node } from 'react';
 import Avatar from '@atlaskit/avatar';
 import AddIcon from '@atlaskit/icon/glyph/add';
@@ -24,7 +14,6 @@ import SearchIcon from '@atlaskit/icon/glyph/search';
 import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
 import { ToggleStateless } from '@atlaskit/toggle';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
-import InlineDialog from '@atlaskit/inline-dialog';
 
 import {
   ContainerHeader,
@@ -42,10 +31,9 @@ import {
 
 const gridSize = gridSizeFn();
 
-const Item = ({ testKey, ...props }: { testKey?: string }) => {
-  const item = <ItemComponent {...props} />;
-  return testKey ? <div data-webdriver-test-key={testKey}>{item}</div> : item;
-};
+const Item = ({ testKey, ...props }: { testKey?: string }) => (
+  <ItemComponent {...props} />
+);
 
 /**
  * Global navigation
@@ -83,29 +71,22 @@ const globalNavSecondaryItems = [
 ];
 
 const GlobalNavigation = () => (
-  <div data-webdriver-test-key="global-navigation">
+  <div>
     <GlobalNav
       primaryItems={globalNavPrimaryItems}
       secondaryItems={globalNavSecondaryItems}
     />
   </div>
 );
-
-const TestMark = ({ id, children }: { id: string, children: Node }) => (
-  <div data-webdriver-test-key={id}>{children}</div>
-);
-
 /**
  * Content navigation
  */
 const ProductNavigation = () => (
-  <div data-webdriver-test-key="product-navigation">
+  <div>
     <HeaderSection>
       {({ className }) => (
         <div className={className}>
-          <TestMark id="product-header">
-            <Wordmark wordmark={JiraWordmark} />
-          </TestMark>
+          <Wordmark wordmark={JiraWordmark} />
         </div>
       )}
     </HeaderSection>
@@ -133,11 +114,16 @@ const ProductNavigation = () => (
   </div>
 );
 
-type State = { shouldDisplayContainerNav: boolean, dialogOpen: boolean };
+type State = {
+  shouldDisplayContainerNav: boolean,
+  isBannerVisible: boolean,
+  bannerHeight: number,
+};
 export default class Example extends Component<{}, State> {
   state = {
     shouldDisplayContainerNav: true,
-    dialogOpen: false,
+    isBannerVisible: true,
+    bannerHeight: 200,
   };
 
   toggleContainerNav = () => {
@@ -146,11 +132,10 @@ export default class Example extends Component<{}, State> {
     }));
   };
   ContainerNavigation = () => (
-    <div data-webdriver-test-key="container-navigation">
+    <div>
       <HeaderSection>
         {({ css }) => (
           <div
-            data-webdriver-test-key="container-header"
             css={{
               ...css,
               paddingBottom: gridSize * 2.5,
@@ -192,53 +177,57 @@ export default class Example extends Component<{}, State> {
             <Separator />
             <GroupHeading>Shortcuts</GroupHeading>
             <Item before={ShortcutIcon} text="Project space" />
-            <Item before={ShortcutIcon} text="Project repo" />
-            <InlineDialog
-              onClose={() => {
-                this.setState({ dialogOpen: false });
-              }}
-              content={<div>Renders correctly without getting chopped off</div>}
-              isOpen={this.state.dialogOpen}
-              placement="right"
-            >
-              <Item
-                onClick={() => {
-                  this.setState({ dialogOpen: true });
-                }}
-                before={GraphLineIcon}
-                text="Item with InlineDialog"
-                testKey="container-item-click"
-              />
-            </InlineDialog>
           </div>
         )}
       </MenuSection>
     </div>
   );
 
+  toggleBanner = () => {
+    this.setState(state => ({
+      isBannerVisible: !state.isBannerVisible,
+    }));
+  };
+
   render() {
-    const { shouldDisplayContainerNav } = this.state;
+    const {
+      bannerHeight,
+      isBannerVisible,
+      shouldDisplayContainerNav,
+    } = this.state;
     return (
-      <NavigationProvider>
-        <LayoutManager
-          globalNavigation={GlobalNavigation}
-          productNavigation={ProductNavigation}
-          containerNavigation={
-            shouldDisplayContainerNav ? this.ContainerNavigation : null
-          }
-        >
-          <div
-            data-webdriver-test-key="content"
-            style={{ padding: `${gridSize * 4}px ${gridSize * 5}px` }}
-          >
-            <ToggleStateless
-              isChecked={shouldDisplayContainerNav}
-              onChange={this.toggleContainerNav}
-            />{' '}
-            Display container navigation layer
+      <>
+        {isBannerVisible && (
+          <div css={{ height: `${bannerHeight}px`, backgroundColor: 'salmon' }}>
+            HTML banner
           </div>
-        </LayoutManager>
-      </NavigationProvider>
+        )}
+        <NavigationProvider>
+          <LayoutManager
+            globalNavigation={GlobalNavigation}
+            productNavigation={ProductNavigation}
+            containerNavigation={
+              shouldDisplayContainerNav ? this.ContainerNavigation : null
+            }
+            topOffset={isBannerVisible ? bannerHeight : 0}
+          >
+            <div style={{ padding: `${gridSize * 4}px ${gridSize * 5}px` }}>
+              <ToggleStateless
+                isChecked={shouldDisplayContainerNav}
+                onChange={this.toggleContainerNav}
+              />{' '}
+              Display container navigation layer
+              <div>
+                <ToggleStateless
+                  isChecked={isBannerVisible}
+                  onChange={this.toggleBanner}
+                />{' '}
+                Show Banner
+              </div>
+            </div>
+          </LayoutManager>
+        </NavigationProvider>
+      </>
     );
   }
 }

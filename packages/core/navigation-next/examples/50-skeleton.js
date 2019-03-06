@@ -121,66 +121,57 @@ export default class Example extends Component<{}, State> {
       ? this.renderSkeleton
       : this.renderNavigation;
     return (
-      <>
-        <div css={{ height: '200px', backgroundColor: 'salmon' }}>
-          Test banner 200px in height
-        </div>
-        <NavigationProvider>
-          <ThemeProvider
-            theme={theme => ({
-              ...theme,
-              mode: themeModes[themeMode],
-            })}
+      <NavigationProvider>
+        <ThemeProvider
+          theme={theme => ({
+            ...theme,
+            mode: themeModes[themeMode],
+          })}
+        >
+          <LayoutManager
+            globalNavigation={
+              shouldRenderSkeleton
+                ? this.renderGlobalNavigationSkeleton
+                : GlobalNavigation
+            }
+            productNavigation={renderer}
+            containerNavigation={shouldShowContainer ? renderer : null}
           >
-            <LayoutManager
-              topOffset={'200px'}
-              globalNavigation={
-                shouldRenderSkeleton
-                  ? this.renderGlobalNavigationSkeleton
-                  : GlobalNavigation
-              }
-              productNavigation={renderer}
-              containerNavigation={shouldShowContainer ? renderer : null}
-            >
-              <div css={{ padding: '32px 40px' }}>
-                <p>
-                  <label htmlFor="should-render-skeleton-toggle">
-                    <input
-                      checked={shouldRenderSkeleton}
-                      id="should-render-skeleton-toggle"
-                      onChange={this.handleRenderSkeletonChange}
-                      type="checkbox"
-                    />{' '}
-                    Render skeleton
-                  </label>
-                </p>
-                <p>
-                  <label htmlFor="should-show-container-toggle">
-                    <input
-                      checked={shouldShowContainer}
-                      id="should-show-container-toggle"
-                      onChange={this.handleShowContainerChange}
-                      type="checkbox"
-                    />{' '}
-                    Show container navigation
-                  </label>
-                </p>
-                <p>
-                  <select
-                    onChange={this.handleThemeModeChange}
-                    value={themeMode}
-                  >
-                    <option value="light">Light mode</option>
-                    <option value="dark">Dark mode</option>
-                    <option value="settings">Settings mode</option>
-                    <option value="custom">Custom mode</option>
-                  </select>
-                </p>
-              </div>
-            </LayoutManager>
-          </ThemeProvider>
-        </NavigationProvider>
-      </>
+            <div css={{ padding: '32px 40px' }}>
+              <p>
+                <label htmlFor="should-render-skeleton-toggle">
+                  <input
+                    checked={shouldRenderSkeleton}
+                    id="should-render-skeleton-toggle"
+                    onChange={this.handleRenderSkeletonChange}
+                    type="checkbox"
+                  />{' '}
+                  Render skeleton
+                </label>
+              </p>
+              <p>
+                <label htmlFor="should-show-container-toggle">
+                  <input
+                    checked={shouldShowContainer}
+                    id="should-show-container-toggle"
+                    onChange={this.handleShowContainerChange}
+                    type="checkbox"
+                  />{' '}
+                  Show container navigation
+                </label>
+              </p>
+              <p>
+                <select onChange={this.handleThemeModeChange} value={themeMode}>
+                  <option value="light">Light mode</option>
+                  <option value="dark">Dark mode</option>
+                  <option value="settings">Settings mode</option>
+                  <option value="custom">Custom mode</option>
+                </select>
+              </p>
+            </div>
+          </LayoutManager>
+        </ThemeProvider>
+      </NavigationProvider>
     );
   }
 }
