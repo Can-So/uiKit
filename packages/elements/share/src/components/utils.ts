@@ -42,9 +42,10 @@ const checkDomains = (
   config: ConfigResponse,
   selectedUsers: Email[],
 ): boolean => {
-  const usersDomain = selectedUsers
-    .map(email => extractDomain(email.id))
-    .reduce(removeDuplicates, new Set<string>());
+  const usersDomain = selectedUsers.reduce(
+    (set, email) => removeDuplicates(set, extractDomain(email.id)),
+    new Set<string>(),
+  );
   return cannotInvite(config, usersDomain);
 };
 

@@ -25,7 +25,6 @@ const mockTriggerButtonStyle = 'icon-with-text' as 'icon-with-text';
 const mockTriggerButtonAppearance = 'subtle';
 const mockCopyLink = 'copy-link';
 const mockFormatCopyLink = jest.fn().mockReturnValue(mockCopyLink);
-const mockShouldShowCommentField = true;
 const mockShouldCloseOnEscapePress = true;
 const mockUsers: OptionData[] = [
   { type: 'user', id: 'id', name: 'User 1' },
@@ -38,6 +37,7 @@ const mockComment = {
 const mockLoadUserOptions = () => [];
 const mockConfig = {
   mode: 'EXISTING_USERS_ONLY',
+  allowComment: true,
 };
 const mockGetConfig = jest.fn().mockResolvedValue(mockConfig);
 const mockShare = jest.fn().mockResolvedValue({});
@@ -73,7 +73,6 @@ beforeEach(() => {
       shareLink={mockShareLink}
       shareTitle={mockShareTitle}
       formatCopyLink={mockFormatCopyLink}
-      shouldShowCommentField={mockShouldShowCommentField}
       shouldCloseOnEscapePress={mockShouldCloseOnEscapePress}
       triggerButtonAppearance={mockTriggerButtonAppearance}
       triggerButtonStyle={mockTriggerButtonStyle}
@@ -103,9 +102,6 @@ describe('ShareDialogContainer', () => {
     );
     expect(shareDialogWithTrigger.prop('onLinkCopy')).toBe(
       wrapper.instance().handleCopyLink,
-    );
-    expect(shareDialogWithTrigger.prop('shouldShowCommentField')).toEqual(
-      mockShouldShowCommentField,
     );
     expect(shareDialogWithTrigger.prop('shouldCloseOnEscapePress')).toEqual(
       mockShouldCloseOnEscapePress,
@@ -140,7 +136,6 @@ describe('ShareDialogContainer', () => {
         shareLink={mockShareLink}
         shareTitle={mockShareTitle}
         formatCopyLink={mockFormatCopyLink}
-        shouldShowCommentField={mockShouldShowCommentField}
         shouldCloseOnEscapePress={mockShouldCloseOnEscapePress}
       />,
     );

@@ -30,7 +30,6 @@ export type Props = {
   shareAri: string;
   shareLink: string;
   shareTitle: string;
-  shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
   triggerButtonAppearance?: ButtonAppearances;
   triggerButtonStyle?: ShareButtonStyle;
@@ -104,10 +103,10 @@ export class ShareDialogContainer extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.fetchCapabilities();
+    this.fetchConfig();
   }
 
-  fetchCapabilities = () => {
+  fetchConfig = () => {
     this.client
       .getConfig(this.props.productId, this.props.cloudId)
       .then((config: ConfigResponse) => {
@@ -175,7 +174,6 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       formatCopyLink,
       loadUserOptions,
       shareLink,
-      shouldShowCommentField,
       shouldCloseOnEscapePress,
       triggerButtonAppearance,
       triggerButtonStyle,
@@ -188,7 +186,6 @@ export class ShareDialogContainer extends React.Component<Props, State> {
         loadUserOptions={loadUserOptions}
         onLinkCopy={this.handleCopyLink}
         onShareSubmit={this.handleSubmitShare}
-        shouldShowCommentField={shouldShowCommentField}
         shouldCloseOnEscapePress={shouldCloseOnEscapePress}
         triggerButtonAppearance={triggerButtonAppearance}
         triggerButtonStyle={triggerButtonStyle}
