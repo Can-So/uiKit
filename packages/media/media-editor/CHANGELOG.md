@@ -1,5 +1,10 @@
 # @atlaskit/media-editor
 
+## 29.1.0
+- [minor] [d6a3c8ec43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d6a3c8ec43):
+
+  - Numerous UI/UX improvements also dimensions as a second argument in onUploadStart callback
+
 ## 29.0.0
 - Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
   - @atlaskit/media-card@55.0.0

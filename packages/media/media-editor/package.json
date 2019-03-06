@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/media-editor",
-  "version": "29.0.0",
+  "version": "29.1.0",
   "description": "Media component for image annotations",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -23,7 +23,7 @@
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/inline-dialog": "^9.0.14",
     "@atlaskit/media-card": "^55.0.0",
-    "@atlaskit/media-ui": "^9.0.0",
+    "@atlaskit/media-ui": "^9.2.0",
     "@atlaskit/modal-dialog": "^7.2.3",
     "@atlaskit/spinner": "^9.0.6",
     "@atlaskit/theme": "^7.0.2",
