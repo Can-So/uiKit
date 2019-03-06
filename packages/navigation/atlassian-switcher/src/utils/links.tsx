@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { defineMessages, FormattedMessage } from 'react-intl';
 
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
@@ -16,6 +17,39 @@ import { CustomLink, RecentContainer } from '../types';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { createIcon, createImageIcon, IconType } from './icon-themes';
 
+const messages = defineMessages({
+  jiraProject: {
+    id: 'fabric.atlassianSwitcher.jiraProject',
+    defaultMessage: 'Jira project',
+    description:
+      'In a context in which several items are listed , this text describes that the specific type of a given item is a Jira project',
+  },
+  confluenceSpace: {
+    id: 'fabric.atlassianSwitcher.confluenceSpace',
+    defaultMessage: 'Confluence space',
+    description:
+      'In a context in which several items are listed , this text describes that the specific type of a given item is a Confluence space',
+  },
+  people: {
+    id: 'fabric.atlassianSwitcher.people',
+    defaultMessage: 'People',
+    description:
+      'The text of a link redirecting the user to the People directory',
+  },
+  administration: {
+    id: 'fabric.atlassianSwitcher.administration',
+    defaultMessage: 'Administration',
+    description:
+      'The text of a link redirecting the user to the site administration',
+  },
+  discoverMore: {
+    id: 'fabric.atlassianSwitcher.discoverMore',
+    defaultMessage: 'Discover more',
+    description:
+      'The text of a link redirecting the user to Discover More Atlassian products',
+  },
+});
+
 enum ProductActivationStatus {
   ACTIVE = 'ACTIVE',
   DEACTIVATED = 'DEACTIVATED',
@@ -29,27 +63,33 @@ enum ProductKey {
   JIRA_OPS = 'jira-incident-manager.ondemand',
 }
 
-interface StringDict {
-  [index: string]: string;
+interface MessagesDict {
+  [index: string]: {
+    id: string;
+    defaultMessage: string;
+    description: string;
+  };
 }
+
+type TranslatedLabel = React.ReactElement<FormattedMessage> | string;
 
 export type SwitcherItemType = {
   key: string;
-  label: string;
+  label: TranslatedLabel;
   Icon: IconType;
   href: string;
 };
 
 export type RecentItemType = SwitcherItemType & {
   type: string;
-  description: string;
+  description: TranslatedLabel;
 };
 
 export type SuggestedProductItemType = SwitcherItemType | null;
 
-export const OBJECT_TYPE_TO_LABEL_MAP: StringDict = {
-  'jira-project': 'Jira project',
-  'confluence-space': 'Confluence space',
+export const OBJECT_TYPE_TO_LABEL_MAP: MessagesDict = {
+  'jira-project': messages.jiraProject,
+  'confluence-space': messages.confluenceSpace,
 };
 
 export const PRODUCT_DATA_MAP: {
@@ -86,14 +126,14 @@ export const PRODUCT_DATA_MAP: {
   },
 };
 
-export const getObjectTypeLabel = (type: string): string => {
-  return OBJECT_TYPE_TO_LABEL_MAP[type] || type;
+export const getObjectTypeLabel = (type: string): TranslatedLabel => {
+  return <FormattedMessage {...OBJECT_TYPE_TO_LABEL_MAP[type]} /> || type;
 };
 
 export const getFixedProductLinks = (): SwitcherItemType[] => [
   {
     key: 'people',
-    label: 'People',
+    label: <FormattedMessage {...messages.people} />,
     Icon: createIcon(PeopleLogo, { size: 'small' }),
     href: `/people`,
   },
@@ -135,13 +175,13 @@ export const getAdministrationLinks = (
   return [
     {
       key: 'discover-applications',
-      label: 'Discover more',
+      label: <FormattedMessage {...messages.discoverMore} />,
       Icon: createIcon(DiscoverFilledGlyph, { size: 'medium' }),
       href: `${adminBaseUrl}/billing/addapplication`,
     },
     {
       key: 'administration',
-      label: 'Administration',
+      label: <FormattedMessage {...messages.administration} />,
       Icon: createIcon(SettingsGlyph, { size: 'medium' }),
       href: adminBaseUrl,
     },

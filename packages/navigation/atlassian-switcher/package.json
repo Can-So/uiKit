@@ -8,6 +8,10 @@
   "module": "dist/es2015/index.js",
   "types": "dist/es5/index.d.ts",
   "sideEffects": false,
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource atlassian-switcher . --type ts",
+    "i18n:pull": "rm -rf ./src/i18n && i18n-tools pull --resource atlassian-switcher . --type ts"
+  },
   "files": [
     "dist"
   ],
@@ -34,12 +38,15 @@
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/drawer": "^2.6.1",
+    "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/navigation": "^33.3.8",
     "enzyme": "^3.7.0",
-    "fetch-mock": "^6.5.2"
+    "fetch-mock": "^6.5.2",
+    "react-intl": "^2.6.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",
+    "react-intl": "^2.6.0",
     "styled-components": "^3.2.6"
   }
 }
