@@ -209,8 +209,8 @@ describe('ShareDialogWithTrigger', () => {
     });
   });
 
-  describe('shareContentType prop', () => {
-    it('should pass the correct title prop to ShareForm', () => {
+  describe('shareFormTitle prop', () => {
+    it('should be passed to the ShareForm', () => {
       const wrapper: ShallowWrapper<
         Props & InjectedIntlProps
       > = shallowWithIntl<Props>(
@@ -218,7 +218,7 @@ describe('ShareDialogWithTrigger', () => {
           copyLink="copyLink"
           loadUserOptions={mockLoadOptions}
           onShareSubmit={mockOnShareSubmit}
-          shareContentType="page"
+          shareFormTitle="Share this page"
         />,
       );
       wrapper.setState({ isDialogOpen: true });
@@ -228,27 +228,7 @@ describe('ShareDialogWithTrigger', () => {
         .prop('content') as any)
         .find(ShareForm)
         .props();
-      expect(ShareFormProps.title).toEqual('Share page');
-    });
-
-    it('should use the default message if shareContentType prop is not set', () => {
-      const wrapper: ShallowWrapper<
-        Props & InjectedIntlProps
-      > = shallowWithIntl<Props>(
-        <ShareDialogWithTrigger
-          copyLink="copyLink"
-          loadUserOptions={mockLoadOptions}
-          onShareSubmit={mockOnShareSubmit}
-        />,
-      );
-      wrapper.setState({ isDialogOpen: true });
-
-      const ShareFormProps = shallow(wrapper
-        .find(InlineDialog)
-        .prop('content') as any)
-        .find(ShareForm)
-        .props();
-      expect(ShareFormProps.title).toEqual('Share');
+      expect(ShareFormProps.title).toEqual('Share this page');
     });
   });
 

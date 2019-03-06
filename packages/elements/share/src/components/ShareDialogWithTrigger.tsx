@@ -39,7 +39,7 @@ export type Props = {
   loadUserOptions?: LoadOptions;
   onLinkCopy?: Function;
   onShareSubmit?: (shareContentState: DialogContentState) => Promise<any>;
-  shareContentType?: React.ReactNode;
+  shareFormTitle?: React.ReactNode;
   shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
   triggerButtonAppearance?: ButtonAppearances;
@@ -151,10 +151,6 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     // will need a prop to pass through the error message to the ShareForm
   };
 
-  getShareFormTitle = type => {
-    return type ? `Share ${type}` : 'Share';
-  };
-
   render() {
     const { isDialogOpen, isSharing, shareError, defaultValue } = this.state;
     const {
@@ -162,11 +158,10 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
       copyLink,
       isDisabled,
       loadUserOptions,
-      shareContentType,
+      shareFormTitle,
       triggerButtonAppearance,
       triggerButtonStyle,
     } = this.props;
-    const title = this.getShareFormTitle(shareContentType);
 
     // for performance purposes, we may want to have a lodable content i.e. ShareForm
     return (
@@ -184,7 +179,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
                 loadOptions={loadUserOptions}
                 isSharing={isSharing}
                 onShareClick={this.handleShareSubmit}
-                title={title}
+                title={shareFormTitle}
                 shareError={shareError}
                 onDismiss={this.handleFormDismiss}
                 defaultValue={defaultValue}
