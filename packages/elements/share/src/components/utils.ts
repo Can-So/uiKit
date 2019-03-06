@@ -1,8 +1,11 @@
-import { Email, isEmail, OptionData, Value } from '@atlaskit/user-picker';
 import {
+  Email,
   EmailValidationResponse,
+  isEmail,
   isValidEmail,
-} from '@atlaskit/user-picker/src/components/emailValidation';
+  OptionData,
+  Value,
+} from '@atlaskit/user-picker';
 import memoizeOne from 'memoize-one';
 import {
   ConfigResponse,
