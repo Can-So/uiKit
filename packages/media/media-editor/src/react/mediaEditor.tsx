@@ -60,6 +60,7 @@ export interface MediaEditorProps {
   onLoad: LoadHandler;
   onError: ErrorHandler;
   onShapeParametersChanged: ShapeParametersChangedHandler;
+  onAnyEdit?: () => void;
 }
 
 export interface MediaEditorState {
@@ -205,6 +206,7 @@ export class MediaEditor extends React.Component<
           />
 
           <DrawingCanvas
+            onClick={this.onCanvasClick}
             innerRef={this.handleDrawingCanvasInnerRef}
             style={{ width, height }}
           />
@@ -212,6 +214,13 @@ export class MediaEditor extends React.Component<
       </MediaEditorContainer>
     );
   }
+
+  private onCanvasClick = () => {
+    const { onAnyEdit } = this.props;
+    if (onAnyEdit) {
+      onAnyEdit();
+    }
+  };
 
   private loadEngine(): void {
     const { imageUrl } = this.props;
@@ -275,7 +284,7 @@ export class MediaEditor extends React.Component<
         };
 
         this.engine = new Engine(config);
-        const loadParameters = {
+        const loadParameters: LoadParameters = {
           imageGetter: (format?: string) => this.engine!.getBase64Image(format),
         };
 

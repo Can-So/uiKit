@@ -1,3 +1,5 @@
+import { Dimensions } from '../../../common';
+
 declare namespace MediaEditor {
   /*
    * Types exposed by the native part.
@@ -139,6 +141,8 @@ declare namespace MediaEditor {
       buffer: number,
       bufferLength: number,
     ): void;
+
+    getDimensions(): Dimensions;
   }
 
   // Interface described in src/typeset.h

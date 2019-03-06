@@ -1,4 +1,5 @@
 import * as Core from './binaries/mediaEditor';
+import { Dimensions } from '../../common';
 
 // Responsible for receiving the image
 export class BitmapExporter implements Core.BitmapExporterInterop {
@@ -48,5 +49,12 @@ export class BitmapExporter implements Core.BitmapExporterInterop {
 
   getBase64Image(format: string): string {
     return this.supplementaryCanvas.toDataURL(format);
+  }
+
+  getDimensions(): Dimensions {
+    return {
+      width: this.supplementaryCanvas.width,
+      height: this.supplementaryCanvas.height,
+    };
   }
 }
