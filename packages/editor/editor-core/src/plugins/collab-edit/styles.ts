@@ -17,6 +17,7 @@ const telepointerColorStyle = (color: Color, index: number) => `
 export const telepointerStyle = css`
   .ProseMirror .telepointer {
     position: relative;
+    transition: opacity 200ms;
 
     &.telepointer-selection {
       line-height: 1.2;
@@ -35,6 +36,10 @@ export const telepointerStyle = css`
       left: -1px;
       border-radius: 2px 2px 2px 0;
       line-height: initial;
+    }
+
+    &.telepointer-dim {
+      opacity: 0.2;
     }
 
     ${colors.map((color, index) => telepointerColorStyle(color, index))};
