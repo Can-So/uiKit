@@ -82,7 +82,7 @@ export type ConnectedLayoutManagerProps = {
   ...$Exact<CollapseListeners>,
   ...$Exact<ExperimentalFeatureFlags>,
   /** The top offset value to be used in navigation */
-  topOffset: string,
+  topOffset?: string,
 };
 
 export type LayoutManagerProps = {

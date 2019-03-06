@@ -193,6 +193,27 @@ export default class Example extends Component<{}, State> {
             <GroupHeading>Shortcuts</GroupHeading>
             <Item before={ShortcutIcon} text="Project space" />
             <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+            <Item before={ShortcutIcon} text="Project space" />
+            <Item before={ShortcutIcon} text="Project repo" />
+
             <InlineDialog
               onClose={() => {
                 this.setState({ dialogOpen: false });

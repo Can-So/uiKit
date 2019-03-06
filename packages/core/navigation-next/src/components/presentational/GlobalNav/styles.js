@@ -21,11 +21,15 @@ const baseStyles = {
   width: GLOBAL_NAV_WIDTH,
 };
 
-export default ({ product }: ModeColors) => ({
-  topOffset,
-}: {
-  topOffset: string,
-}) => ({
+export default ({ product }: ModeColors) => (
+  {
+    topOffset,
+  }: {
+    topOffset: string,
+  } = {
+    topOffset: '0px',
+  },
+) => ({
   ...baseStyles,
   height: `calc(100vh - ${topOffset})`,
   backgroundColor: product.background.default,

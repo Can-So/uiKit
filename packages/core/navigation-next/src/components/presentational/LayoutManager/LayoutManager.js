@@ -80,8 +80,8 @@ export default class LayoutManager extends Component<
       navigation: {
         'data-test-id': 'Navigation',
       },
-      topOffset: '0px',
     },
+    topOffset: '0px',
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
     experimental_alternateFlyoutBehaviour: false,

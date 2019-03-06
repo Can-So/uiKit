@@ -3,18 +3,13 @@
 import React, { type ElementRef } from 'react';
 import { layers } from '@atlaskit/theme';
 
-export const LayoutContainer = ({
-  topOffset,
-  ...props
-}: {
-  topOffset: string,
-}) => {
+export const LayoutContainer = ({ topOffset, ...props }: *) => {
   return (
     <div
       css={{
         display: 'flex',
         flexDirection: 'row',
-        height: `calc(100vh - ${topOffset})`,
+        height: `calc(100vh - ${topOffset || 0})`,
       }}
       {...props}
     />
