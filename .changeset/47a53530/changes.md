@@ -1,0 +1,1 @@
+- ED-6008 Dim telepointers that overlaps the cursor.
