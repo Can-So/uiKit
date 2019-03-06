@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 102.1.8
+- [patch] [97a9ca095b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97a9ca095b):
+
+  - ED-6452: Put collab document validation behind a flag
+
 ## 102.1.7
 - [patch] [2e48ec26ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e48ec26ba):
 

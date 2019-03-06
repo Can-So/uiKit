@@ -1,1 +1,0 @@
-- ED-6452: Put collab document validation behind a flag
