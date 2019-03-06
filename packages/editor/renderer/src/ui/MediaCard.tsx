@@ -135,7 +135,7 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       useInlinePlayer !== undefined ? useInlinePlayer : true;
     const onCardClick =
       eventHandlers && eventHandlers.media && eventHandlers.media.onClick;
-    const shouldOpenMediaViewer = !isMobile && !!onCardClick;
+    const shouldOpenMediaViewer = !isMobile && !onCardClick;
 
     if (type === 'external') {
       return this.renderExternal();
