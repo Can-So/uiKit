@@ -1,14 +1,50 @@
 const bolt = require('bolt');
 const path = require('path');
+const meow = require('meow');
 const packages = require('../utils/packages');
 const flattenDeep = require('lodash.flattendeep');
-/**
- * NOTE: This prints the list of changed packages and dependent packages since master ONLY if they have been commited.
- * It will print them all out as a json array of relative paths
- * i.e: $ node build/ci-scripts/get.changed.packages.since.master.js
- *        ["packages/core/avatar", "packages/core/badge"]
- * */
-(async () => {
+
+// /**
+//  * NOTE: This prints the list of changed packages and dependent packages since master ONLY if they have been commited.
+//  * It will print them all out as a json array of relative paths
+//  * i.e: $ node build/ci-scripts/get.changed.packages.since.master.js
+//  *        ["packages/core/avatar", "packages/core/badge"]
+//  * */
+
+const cli = meow(
+  `
+    Usage
+      $ node build/ci-scripts/get.changed.packages.since.master.js
+ 
+    Options
+      --dependents='direct' Include "direct" dependent packages
+
+      --spaceDelimited      Only for the measure tool, change the output of changed packages script from an array to a space delimited output
+
+      --only='packages'     Only for the measure tool, target only 'packages' folder name
+ 
+    Examples
+      $ node build/ci-scripts/get.changed.packages.since.master.js --dependents='direct'
+
+      $ node build/ci-scripts/get.changed.packages.since.master.js --spaceDelimited --only='packages'
+`,
+  {
+    description: 'Display an array of changed packages since master',
+    flags: {
+      dependents: {
+        type: 'string',
+      },
+      spaceDelimited: {
+        type: 'boolean',
+      },
+      only: {
+        type: 'string',
+      },
+    },
+  },
+);
+
+const displayChangedPackagesSinceMaster = async () => {
   const cwd = process.cwd();
   const allPackages = await bolt.getWorkspaces({ cwd });
   // Changed packages that have been worked on since master.
@@ -18,7 +54,7 @@ const flattenDeep = require('lodash.flattendeep');
   );
   // Packages that are dependent on the changed packages.
   // If dependencies flag is passed, CHANGED_PACKAGES will return packages that are dependent on the changed packages.
-  if (process.argv[2] && process.argv[2].includes('--dependents')) {
+  if (cli.flags.dependents) {
     const dependencyGraph = await bolt.getDependentsGraph({ cwd });
     // 1. Match with changed packages.
     // 2. Get the package.json from those packages.
@@ -35,7 +71,7 @@ const flattenDeep = require('lodash.flattendeep');
             const dependentPkgJSON = getPackageJSON(dependent).config;
             // --dependents='direct' flag will return packages with direct dependencies on the changed packages.
             // When a package does not have dependent or not required such as the build script.
-            if (process.argv[2].split('=')[1].includes('direct'))
+            if (cli.flags.dependents === 'direct')
               return (
                 dependentPkgJSON.dependencies[changedPkgName] !== undefined
               );
@@ -58,8 +94,8 @@ const flattenDeep = require('lodash.flattendeep');
   } else {
     // Those exceptions scripts are related to the measure of the bundle size.
     // This check if the `--only='folderName'` flag is set when using the measure tool.
-    if (process.argv[3] && process.argv[3].includes('--only')) {
-      const includedPattern = process.argv[3].split('=')[1];
+    if (cli.flags.only) {
+      const includedPattern = cli.flags.only;
       // For example, if we need to `only` include the component 'packages' when measuring the package bundle size.
       changedPackagesRelativePaths = changedPackagesRelativePaths.filter(pkg =>
         pkg.includes(includedPattern),
@@ -69,10 +105,12 @@ const flattenDeep = require('lodash.flattendeep');
     // '--spaceDelimited' - using the measure tool, will return the changedPackages
     // like 'packages/core/button packages/editor/editor-core ...'.
     // Otherwise, the standard output will be ["packages/core/button", "packages/editor/editor-core", ...].
-    if (process.argv.includes('--spaceDelimited')) {
+    if (cli.flags.spaceDelimited) {
       console.log(changedPackagesRelativePaths.join(' '));
     } else {
       console.log(JSON.stringify(changedPackagesRelativePaths));
     }
   }
-})();
+};
+
+(async () => displayChangedPackagesSinceMaster(cli.input, cli.flags))();
