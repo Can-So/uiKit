@@ -10,7 +10,6 @@ import { Product } from '../types';
 interface AtlassianSwitcherProps {
   product: string;
   cloudId: string;
-  locale?: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
 }
 
@@ -18,7 +17,6 @@ const AtlassianSwitcher = ({
   product,
   cloudId,
   triggerXFlow,
-  locale,
   ...props
 }: AtlassianSwitcherProps) => {
   let Switcher: React.ReactType;

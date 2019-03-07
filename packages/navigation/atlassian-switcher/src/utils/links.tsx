@@ -32,25 +32,19 @@ enum ProductKey {
 }
 
 interface MessagesDict {
-  [index: string]: {
-    id: string;
-    defaultMessage: string;
-    description: string;
-  };
+  [index: string]: FormattedMessage.MessageDescriptor;
 }
-
-type TranslatedLabel = React.ReactNode | string;
 
 export type SwitcherItemType = {
   key: string;
-  label: TranslatedLabel;
+  label: React.ReactNode;
   Icon: IconType;
   href: string;
 };
 
 export type RecentItemType = SwitcherItemType & {
   type: string;
-  description: TranslatedLabel;
+  description: React.ReactNode;
 };
 
 export type SuggestedProductItemType = SwitcherItemType | null;
@@ -94,7 +88,7 @@ export const PRODUCT_DATA_MAP: {
   },
 };
 
-export const getObjectTypeLabel = (type: string): TranslatedLabel => {
+export const getObjectTypeLabel = (type: string): React.ReactNode => {
   return <FormattedMessage {...OBJECT_TYPE_TO_LABEL_MAP[type]} /> || type;
 };
 

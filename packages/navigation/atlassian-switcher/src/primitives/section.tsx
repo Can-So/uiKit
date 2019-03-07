@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { gridSize, typography } from '@atlaskit/theme';
 import styled from 'styled-components';
 import {
@@ -20,7 +19,7 @@ const SectionTitle = styled.h1`
 
 type SectionProps = {
   sectionId: string;
-  title: React.ReactElement<FormattedMessage> | string;
+  title: React.ReactNode | string;
   children?: React.ReactNode;
 };
 
