@@ -1,0 +1,1 @@
+- Add enableSingleJiraLink to allow only single jira link displayed if there are jira products
