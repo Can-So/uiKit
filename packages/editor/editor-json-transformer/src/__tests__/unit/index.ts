@@ -38,8 +38,9 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { emoji as emojiData } from '@atlaskit/util-data-test';
+import { Node as PMNode } from 'prosemirror-model';
 
-import { JSONTransformer } from '../../index';
+import { JSONTransformer, JSONDocNode } from '../../index';
 import emojiPlugin from '../../../../editor-core/src/plugins/emoji';
 import mentionsPlugin from '../../../../editor-core/src/plugins/mentions';
 import codeBlockPlugin from '../../../../editor-core/src/plugins/code-block';
@@ -51,8 +52,8 @@ import rulePlugin from '../../../../editor-core/src/plugins/rule';
 import tablesPlugin from '../../../../editor-core/src/plugins/table';
 
 const transformer = new JSONTransformer();
-const toJSON = node => transformer.encode(node);
-const parseJSON = node => transformer.parse(node);
+const toJSON = (node: PMNode) => transformer.encode(node);
+const parseJSON = (node: JSONDocNode) => transformer.parse(node);
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
 describe('JSONTransformer:', () => {
@@ -501,7 +502,7 @@ describe('JSONTransformer:', () => {
 
   describe('parse', () => {
     it('should convert ADF to PM representation', () => {
-      const adf = {
+      const adf: JSONDocNode = {
         version: 1,
         type: 'doc',
         content: [
@@ -521,7 +522,7 @@ describe('JSONTransformer:', () => {
   });
 
   it('should throw an error if not ADF-like', () => {
-    const badADF = {
+    const badADF: any = {
       type: 'paragraph',
       content: [{ type: 'text', content: 'hello' }],
     };
@@ -531,7 +532,7 @@ describe('JSONTransformer:', () => {
   });
 
   it('should throw an error if not a valid PM document', () => {
-    const badADF = {
+    const badADF: any = {
       type: 'doc',
       content: [{ type: 'fakeNode', content: 'hello' }],
     };

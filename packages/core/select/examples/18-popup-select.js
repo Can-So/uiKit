@@ -22,6 +22,7 @@ const PopupSelectExample = () => (
     <div css={{ display: 'flex', justifyContent: 'space-between' }}>
       <PopupSelect
         {...defaults}
+        value={options[2]}
         target={({ ref }) => <button ref={ref}>Target</button>}
       />
       <PopupSelect

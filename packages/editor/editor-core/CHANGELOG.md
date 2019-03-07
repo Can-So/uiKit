@@ -1,5 +1,112 @@
 # @atlaskit/editor-core
 
+## 102.1.9
+- [patch] [9b0f6671ae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b0f6671ae):
+
+  - ED-6244: Fix Resizable Media to allow images go smaller size than videos
+
+## 102.1.8
+- [patch] [97a9ca095b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97a9ca095b):
+
+  - ED-6452: Put collab document validation behind a flag
+
+## 102.1.7
+- [patch] [2e48ec26ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e48ec26ba):
+
+  - Changes to support new version of media-editor
+
+## 102.1.6
+- [patch] [59fcd0bbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59fcd0bbc9):
+
+  - FM-1618: fixed media upload on mobile
+
+## 102.1.5
+- [patch] [2b4b290610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2b4b290610):
+
+  - ED-6461: Fix placement start when scrolling for Popup
+
+## 102.1.4
+- [patch] [7a8d8ba656](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a8d8ba656):
+
+  - ED-6452: Validate documents on init through collab-editing
+
+  * Add unsupportedInline and unsupportedBlock to test-helpers.
+
+## 102.1.3
+- [patch] [1c00bd6268](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c00bd6268):
+
+  - ED-6409: set minWidth to 140px for all new columns in resized table
+
+## 102.1.2
+- [patch] [f86078d629](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f86078d629):
+
+  - ED-6327: highlight smart cards when selecting backwards in document
+
+## 102.1.1
+- Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+  - @atlaskit/renderer@41.0.1
+  - @atlaskit/date@0.3.0
+  - @atlaskit/emoji@56.1.0
+  - @atlaskit/status@0.4.0
+
+## 102.1.0
+- [minor] [d18b085e2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d18b085e2a):
+
+  - Integrating truly upfront ID
+
+## 102.0.2
+- [patch] [4d0c196597](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d0c196597):
+
+  - ED-6232 Fix copy-pasting a table with numbered column drops one column
+
+## 102.0.1
+- [patch] [2787c79b6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2787c79b6a):
+
+  - ED-6296: Scale down table sizes when parent layout changes
+
+## 102.0.0
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/renderer@41.0.0
+  - @atlaskit/emoji@56.0.0
+  - @atlaskit/media-card@55.0.0
+  - @atlaskit/media-filmstrip@28.0.0
+  - @atlaskit/media-picker@35.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.2.1
+  - @atlaskit/editor-json-transformer@4.3.1
+  - @atlaskit/editor-markdown-transformer@2.2.1
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/task-decision@11.2.3
+  - @atlaskit/util-data-test@10.2.2
+  - @atlaskit/media-test-helpers@20.1.6
+  - @atlaskit/media-core@27.2.0
+
+## 101.7.0
+- [minor] [d4afa2713d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d4afa2713d):
+
+  - ED-6212 Fire v3 analytics events when insert table or emojis
+
+## 101.6.3
+- Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
+  - @atlaskit/editor-common@32.4.3
+  - @atlaskit/renderer@40.1.1
+  - @atlaskit/size-detector@6.0.0
+
+## 101.6.2
+- [patch] [4eb1af2892](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4eb1af2892):
+
+  - ED-6265 fix external image call to media for dimensions
+
+## 101.6.1
+- [patch] [3f4a4e4f49](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f4a4e4f49):
+
+  - [ED-6351] Fix table insert columns/row UI positions
+
+## 101.6.0
+- [minor] [8e407b5a24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e407b5a24):
+
+  - ED-6289 Add analytics GAS V3 for color text formatting
+
 ## 101.5.3
 - [patch] [37ca429b01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37ca429b01):
 

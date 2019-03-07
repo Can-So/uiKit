@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { InputWrapper } from '../styled';
+import { css } from 'emotion';
 import type { InputProps } from '../types';
 
 export default ({
@@ -10,6 +10,7 @@ export default ({
   isCompact,
   isDisabled,
   isFocused,
+  isHovered,
   isInvalid,
   isMonospaced,
   isReadOnly,
@@ -17,23 +18,14 @@ export default ({
   theme,
   ...rest
 }: InputProps) => (
-  <InputWrapper
-    {...theme}
-    appearance={appearance}
-    isCompact={isCompact}
-    isDisabled={isDisabled}
-    isFocused={isFocused}
-    isMonospaced={isMonospaced}
-    isReadOnly={isReadOnly}
-    isRequired={isRequired}
-    isInvalid={isInvalid}
-  >
+  <div className={css(theme.container)}>
     <input
       ref={forwardedRef}
       disabled={isDisabled}
       readOnly={isReadOnly}
       required={isRequired}
+      className={css(theme.input)}
       {...rest}
     />
-  </InputWrapper>
+  </div>
 );

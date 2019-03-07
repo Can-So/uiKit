@@ -10,7 +10,7 @@ export interface Props extends AlignmentAttributes {
 }
 
 const MarkWrapper = styled.div`
-  ${props =>
+  ${(props: { 'data-align': 'end' | 'right' | 'center' }) =>
     props['data-align'] &&
     css`
       text-align: ${alignmentPositionMap[props['data-align']]};

@@ -20,7 +20,9 @@ import {
   media,
   sendKeyToPm,
   randomId,
+  insertText,
 } from '@atlaskit/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import {
   pluginKey,
   getPluginState,
@@ -44,6 +46,7 @@ import {
 } from '../../../../plugins/table/utils';
 import tablesPlugin from '../../../../plugins/table';
 import codeBlockPlugin from '../../../../plugins/code-block';
+import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { mediaPlugin } from '../../../../plugins';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import listPlugin from '../../../../plugins/lists';
@@ -52,6 +55,8 @@ import { TextSelection } from 'prosemirror-state';
 describe('table plugin', () => {
   const createEditor = createEditorFactory<TablePluginState>();
 
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+
   const editor = (doc: any, trackEvent = () => {}) => {
     const tableOptions = {
       allowNumberColumn: true,
@@ -59,6 +64,7 @@ describe('table plugin', () => {
       allowHeaderColumn: true,
       permittedLayouts: 'all',
     } as PluginConfig;
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
     return createEditor({
       doc,
       editorPlugins: [
@@ -66,12 +72,15 @@ describe('table plugin', () => {
         tablesPlugin(tableOptions),
         codeBlockPlugin(),
         mediaPlugin({ allowMediaSingle: true }),
+        quickInsertPlugin,
       ],
       editorProps: {
         analyticsHandler: trackEvent,
         allowTables: tableOptions,
+        allowAnalyticsGASV3: true,
       },
       pluginKey,
+      createAnalyticsEvent,
     });
   };
 
@@ -723,7 +732,6 @@ describe('table plugin', () => {
         editorView,
         media({
           id: temporaryFileId,
-          __key: temporaryFileId,
           type: 'file',
           collection: testCollectionName,
           __fileMimeType: 'image/png',
@@ -743,7 +751,6 @@ describe('table plugin', () => {
                     mediaSingle()(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',
@@ -829,6 +836,22 @@ describe('table plugin', () => {
 
       pluginState = getPluginState(editorView.state);
       expect(pluginState.targetCellPosition).toEqual(23);
+    });
+  });
+
+  describe('quick insert', () => {
+    it('should fire analytics event when table inserted', () => {
+      const { editorView, sel } = editor(doc(p('{<>}')));
+      insertText(editorView, '/Table', sel);
+      sendKeyToPm(editorView, 'Enter');
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'table',
+        attributes: { inputMethod: 'quickInsert' },
+        eventType: 'track',
+      });
     });
   });
 });

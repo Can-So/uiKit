@@ -1,4 +1,4 @@
-import * as Core from '../../binaries/mediaEditor';
+import Core from '../../binaries/mediaEditor';
 import { BitmapExporter } from '../../bitmapExporter';
 
 type Module = Core.NativeModule;

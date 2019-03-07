@@ -1,11 +1,12 @@
 {
   "name": "@atlaskit/status",
-  "version": "0.3.7",
+  "version": "0.4.0",
   "config": {
     "access": "public"
   },
   "description": "Fabric Status React Components",
-  "modules": "index.js",
+  "main": "dist/es5/index.js",
+  "modules": "dist/es2015/index.js",
   "types": "dist/es5/types.d.ts",
   "atlaskit:src": "src/index.ts",
   "files": [
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/editor-test-helpers": "^7.0.0",
+    "@atlaskit/elements-test-helpers": "^0.1.0",
     "@atlaskit/i18n-tools": "^0.4.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",

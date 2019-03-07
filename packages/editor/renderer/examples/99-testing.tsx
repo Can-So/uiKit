@@ -15,7 +15,8 @@ const mediaProvider = storyMediaProviderFactory();
 const emojiProvider = emoji.storyData.getEmojiResource();
 const contextIdentifierProvider = storyContextIdentifierProviderFactory();
 const mentionProvider = Promise.resolve({
-  shouldHighlightMention: mention => mention.id === 'ABCDE-ABCDE-ABCDE-ABCDE',
+  shouldHighlightMention: (mention: { id: string }) =>
+    mention.id === 'ABCDE-ABCDE-ABCDE-ABCDE',
 });
 const taskDecisionProvider = Promise.resolve(
   taskDecision.getMockTaskDecisionResource(),
@@ -34,7 +35,7 @@ function createRendererWindowBindings(win: Window) {
     return;
   }
 
-  window['__mountRenderer'] = props => {
+  (window as any)['__mountRenderer'] = (props: { showSidebar?: boolean }) => {
     const target = document.getElementById('renderer-container');
 
     if (!target) {
@@ -46,8 +47,8 @@ function createRendererWindowBindings(win: Window) {
     ReactDOM.unmountComponentAtNode(target);
     ReactDOM.render(
       <Provider>
-        <Sidebar showSidebar={showSidebar}>
-          {additionalRendererProps => (
+        <Sidebar showSidebar={!!showSidebar}>
+          {(additionalRendererProps: any) => (
             <Renderer
               dataProviders={providerFactory}
               document={doc}

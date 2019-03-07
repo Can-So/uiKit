@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/atlassian-switcher",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "atlaskit:src": "src/index.ts",
   "jsnext:main": "index.js",

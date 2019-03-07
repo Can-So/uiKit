@@ -42,7 +42,7 @@ const isLinkMark = isType('link');
 const isUnsupportedNode = (node: PMNode) =>
   isType('unsupportedBlock')(node) || isType('unsupportedInline')(node);
 
-const filterNull = subject => {
+const filterNull = (subject: any) => {
   return Object.keys(subject).reduce((acc, key) => {
     let current = subject[key];
 

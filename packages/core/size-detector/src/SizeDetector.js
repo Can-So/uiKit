@@ -1,7 +1,11 @@
 // @flow
 
-import React, { Component, type Node } from 'react';
+import React, { Component } from 'react';
 import rafSchedule from 'raf-schd';
+import type {
+  SizeDetectorPropType,
+  SizeDetectorSizeMetricsType,
+} from './types';
 
 // Need to make outer div full height in case consumer wants to align
 // child content vertically center. These styles can be overridden by the
@@ -27,67 +31,35 @@ const objectStyle = {
   zIndex: -1,
 };
 
-type SizeMetrics = {
-  width: number,
-  height: number,
+type SizeDetectorStateType = {
+  sizeMetrics: SizeDetectorSizeMetricsType,
 };
 
-type Props = {
-  /** Function that accepts an object parameter containing 'height' and 'width' properties */
-  children: SizeMetrics => Node,
-  /** Optional styles object to be applied to the containing element */
-  containerStyle?: Object,
-  /** Called when the component is resized. */
-  onResize?: SizeMetrics => void,
-};
+export default class SizeDetector extends Component<
+  SizeDetectorPropType,
+  SizeDetectorStateType,
+> {
+  resizeObjectDocument: ?window;
 
-type State = {
-  sizeMetrics?: SizeMetrics,
-};
-
-export default class SizeDetector extends Component<Props, State> {
-  props: Props;
-  state: State;
-
-  constructor(props: Object) {
-    super(props);
-    this.state = {};
-  }
+  containerRef = React.createRef();
+  objectElementRef = React.createRef();
 
   static defaultProps = {
-    // eslint-disable-line react/sort-comp
     containerStyle: {},
   };
 
-  container: ?HTMLDivElement;
-  resizeObjectDocument: ?window;
-  resizeObject: ?HTMLElement;
-
-  handleResize = rafSchedule(() => {
-    const { container } = this;
-    if (!container) {
-      return;
-    }
-
-    const sizeMetrics = {
-      width: container.offsetWidth,
-      height: container.offsetHeight,
-    };
-
-    this.setState({
-      sizeMetrics,
-    });
-
-    if (this.props.onResize) {
-      this.props.onResize(sizeMetrics);
-    }
-  });
+  state = {
+    sizeMetrics: {
+      width: null,
+      height: null,
+    },
+  };
 
   componentDidMount() {
-    if (this.resizeObject) {
-      // $FlowFixMe - resizeObject is HTMLElement which doesn't contain .data prop
-      this.resizeObject.data = 'about:blank';
+    if (this.objectElementRef.current) {
+      this.objectElementRef.current.data = 'about:blank';
     }
+    this.handleResize();
   }
 
   componentWillUnmount() {
@@ -100,60 +72,57 @@ export default class SizeDetector extends Component<Props, State> {
       );
     }
   }
-
-  handleContainerRef = (ref: ?HTMLDivElement) => {
-    if (!ref) {
-      return;
-    }
-    this.container = ref;
-    this.handleResize();
-  };
-
-  handleObjectRef = (ref: ?HTMLElement) => {
-    if (!ref) {
-      return;
-    }
-    this.resizeObject = ref;
-  };
-
+  // Attach the resize event to object when it loads
   handleObjectLoad = () => {
-    if (!this.resizeObject) {
+    if (!this.objectElementRef.current) {
       return;
     }
 
-    // $FlowFixMe - resizeObject is typed as HTMLElement which has no contentDocument prop
-    this.resizeObjectDocument = this.resizeObject.contentDocument.defaultView;
+    this.resizeObjectDocument = this.objectElementRef.current.contentDocument.defaultView;
     this.resizeObjectDocument.addEventListener('resize', this.handleResize);
 
-    // Calculate width first time, after object has loaded.
-    // Prevents it from getting in a weird state where width is always 0.
     this.handleResize();
   };
 
-  renderChildren = () => {
-    const { sizeMetrics } = this.state;
-    if (!sizeMetrics) {
-      return null;
+  // limit the resize event occure only once per requestAnimationFrame
+  handleResize = rafSchedule(() => {
+    const { containerRef } = this;
+    if (!containerRef.current) {
+      return;
     }
-    return this.props.children(sizeMetrics);
-  };
+
+    const sizeMetrics = {
+      width: containerRef.current.offsetWidth,
+      height: containerRef.current.offsetHeight,
+    };
+
+    this.setState({
+      sizeMetrics,
+    });
+
+    if (this.props.onResize) {
+      this.props.onResize(sizeMetrics);
+    }
+  });
 
   render() {
+    const { sizeMetrics } = this.state;
+    const { children } = this.props;
     return (
       <div
         style={{ ...containerDivStyle, ...this.props.containerStyle }}
-        ref={this.handleContainerRef}
+        ref={this.containerRef}
       >
         {/* eslint-disable jsx-a11y/alt-text */}
         <object
           type="text/html"
           style={objectStyle}
-          ref={this.handleObjectRef}
+          ref={this.objectElementRef}
           onLoad={this.handleObjectLoad}
           aria-hidden
           tabIndex={-1}
         />
-        {this.renderChildren()}
+        {children(sizeMetrics)}
       </div>
     );
   }

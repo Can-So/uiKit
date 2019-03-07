@@ -51,7 +51,7 @@ export default class JSONSchemaNode {
     if (!this.definitions.has(this.root)) {
       throw new Error(`${this.root} not found in the added definitions`);
     }
-    const definitions = {};
+    const definitions: any = {};
     for (const [k, { node, used }] of this.definitions) {
       if (used) {
         definitions[k] = node;

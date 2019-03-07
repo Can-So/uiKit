@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Context, FileItem, FileState } from '@atlaskit/media-core';
+import {
+  Context,
+  FileItem,
+  FileState,
+  isImageRepresentationReady,
+} from '@atlaskit/media-core';
 import { getOrientation } from '@atlaskit/media-ui';
 import { Outcome } from '../../domain';
 import { createError, MediaViewerError } from '../../error';
@@ -57,7 +62,8 @@ export class ImageViewer extends BaseViewer<
     try {
       let orientation = 1;
       let objectUrl: string;
-      if (file.status === 'processed') {
+
+      if (isImageRepresentationReady(file)) {
         const item = processedFileStateToMediaItem(file);
         const controller =
           typeof AbortController !== 'undefined'

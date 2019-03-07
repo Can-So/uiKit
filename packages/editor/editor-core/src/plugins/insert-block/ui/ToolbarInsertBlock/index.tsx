@@ -63,6 +63,7 @@ import { insertMentionQuery } from '../../../mentions/commands/insert-mention-qu
 import { updateStatus } from '../../../status/actions';
 import {
   AnalyticsEventPayload,
+  withAnalytics as commandWithAnalytics,
   ACTION,
   ACTION_SUBJECT,
   INPUT_METHOD,
@@ -199,6 +200,8 @@ export interface State {
   isOpen: boolean;
   emojiPickerOpen: boolean;
 }
+
+type MENU_TYPE = INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU;
 
 const blockTypeIcons = {
   codeblock: CodeIcon,
@@ -628,10 +631,15 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private createTable = withAnalytics(
     'atlassian.editor.format.table.button',
-    (): boolean => {
+    (inputMethod: MENU_TYPE): boolean => {
       const { editorView } = this.props;
-      createTable(editorView.state, editorView.dispatch);
-      return true;
+      return commandWithAnalytics({
+        action: ACTION.INSERTED,
+        actionSubject: ACTION_SUBJECT.DOCUMENT,
+        actionSubjectId: ACTION_SUBJECT_ID.TABLE,
+        attributes: { inputMethod },
+        eventType: EVENT_TYPE.TRACK,
+      })(createTable)(editorView.state, editorView.dispatch);
     },
   );
 
@@ -718,7 +726,7 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private insertHorizontalRule = withAnalytics(
     'atlassian.editor.format.horizontalrule.button',
-    (inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU): boolean => {
+    (inputMethod: MENU_TYPE): boolean => {
       const { editorView } = this.props;
       const tr = createHorizontalRule(
         editorView.state,
@@ -738,7 +746,7 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private insertBlockTypeWithAnalytics = (
     itemName: string,
-    inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU,
+    inputMethod: MENU_TYPE,
   ) => {
     const {
       editorView,
@@ -779,7 +787,19 @@ class ToolbarInsertBlock extends React.PureComponent<
   private handleSelectedEmoji = withAnalytics(
     'atlassian.editor.emoji.button',
     (emojiId: EmojiId): boolean => {
-      this.props.insertEmoji!(emojiId);
+      const { insertEmoji, dispatchAnalyticsEvent } = this.props;
+      if (insertEmoji) {
+        insertEmoji(emojiId);
+        if (dispatchAnalyticsEvent) {
+          dispatchAnalyticsEvent({
+            action: ACTION.INSERTED,
+            actionSubject: ACTION_SUBJECT.DOCUMENT,
+            actionSubjectId: ACTION_SUBJECT_ID.EMOJI,
+            attributes: { inputMethod: INPUT_METHOD.PICKER },
+            eventType: EVENT_TYPE.TRACK,
+          });
+        }
+      }
       this.toggleEmojiPicker();
       return true;
     },
@@ -790,7 +810,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     inputMethod,
   }: {
     item;
-    inputMethod: INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU;
+    inputMethod: MENU_TYPE;
   }): void => {
     const {
       editorView,
@@ -805,7 +825,7 @@ class ToolbarInsertBlock extends React.PureComponent<
         this.toggleLinkPanel();
         break;
       case 'table':
-        this.createTable();
+        this.createTable(inputMethod);
         break;
       case 'image upload':
         if (handleImageUpload) {

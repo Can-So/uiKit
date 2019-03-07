@@ -1,5 +1,19 @@
 # @atlaskit/conversation
 
+## 12.1.2
+- [patch] [6eb409e5cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6eb409e5cc):
+
+  - Pass portal prop through to nested comments in conversation threads and re-render comments when it changes
+
+## 12.1.1
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/editor-core@102.0.0
+  - @atlaskit/renderer@41.0.0
+  - @atlaskit/comment@6.0.44
+  - @atlaskit/reactions@15.5.1
+  - @atlaskit/util-data-test@10.2.2
+
 ## 12.1.0
 - [minor] [b9a541a266](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9a541a266):
 

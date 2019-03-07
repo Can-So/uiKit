@@ -31,13 +31,13 @@ export default class ObjectSchemaNode extends SchemaNodeWithValidators<
 
   toJSON(): object {
     const obj: object = { type: 'object' };
-    return Object.keys(this.properties).reduce((obj, key) => {
+    return Object.keys(this.properties).reduce((obj: any, key: string) => {
       const { value, required } = this.properties[key];
-      obj['properties'] = obj['properties'] || {};
-      obj['properties'][key] = value.toJSON();
+      obj.properties = obj.properties || {};
+      obj.properties[key] = value.toJSON();
       if (required) {
-        obj['required'] = obj['required'] || [];
-        obj['required'].push(key);
+        obj.required = obj.required || [];
+        obj.required.push(key);
       }
 
       return this.mergeValidationInfo(['additionalProperties'], obj);
@@ -45,22 +45,25 @@ export default class ObjectSchemaNode extends SchemaNodeWithValidators<
   }
 
   toSpec() {
-    const spec = Object.keys(this.properties).reduce((obj, key) => {
-      const { value, required } = this.properties[key];
-      obj['props'] = obj['props'] || {};
-      const spec = (obj['props'][key] = value.toSpec());
-      if (isObject(spec) && !Array.isArray(spec)) {
-        if (!required) {
-          spec['optional'] = true;
+    const spec = Object.keys(this.properties).reduce(
+      (obj: any, key: string) => {
+        const { value, required } = this.properties[key];
+        obj.props = obj.props || {};
+        const spec: any = (obj.props[key] = value.toSpec());
+        if (isObject(spec) && !Array.isArray(spec)) {
+          if (!required) {
+            spec.optional = true;
+          }
+        } else {
+          if (required) {
+            obj.required = obj.required || [];
+            obj.required.push(key);
+          }
         }
-      } else {
-        if (required) {
-          obj['required'] = obj['required'] || [];
-          obj['required'].push(key);
-        }
-      }
-      return obj;
-    }, {});
+        return obj;
+      },
+      {},
+    );
 
     return spec;
   }

@@ -31,6 +31,7 @@ const videoItem: ProcessedFileState = {
       processingStatus: 'succeeded',
     },
   },
+  representations: {},
 };
 const sdVideoItem: ProcessedFileState = {
   id: 'some-id',
@@ -45,6 +46,7 @@ const sdVideoItem: ProcessedFileState = {
       processingStatus: 'succeeded',
     },
   },
+  representations: {},
 };
 
 const videoItemWithNoArtifacts: ProcessedFileState = {

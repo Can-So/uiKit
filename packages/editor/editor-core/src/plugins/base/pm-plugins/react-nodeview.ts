@@ -2,7 +2,7 @@ import { Schema } from 'prosemirror-model';
 import { EditorState, Plugin, PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 
-export type StateChangeHandler = (anchorPos: number, headPos: number) => any;
+export type StateChangeHandler = (fromPos: number, toPos: number) => any;
 
 export class ReactNodeViewState {
   private changeHandlers: StateChangeHandler[] = [];
@@ -19,8 +19,8 @@ export class ReactNodeViewState {
     this.changeHandlers = this.changeHandlers.filter(ch => ch !== cb);
   }
 
-  notifyNewSelection(anchorPos: number, headPos: number) {
-    this.changeHandlers.forEach(cb => cb(anchorPos, headPos));
+  notifyNewSelection(fromPos: number, toPos: number) {
+    this.changeHandlers.forEach(cb => cb(fromPos, toPos));
   }
 }
 
@@ -41,8 +41,8 @@ export const plugin = new Plugin({
 
     return {
       update: (view: EditorView, prevState: EditorState) => {
-        const { $anchor, $head } = view.state.selection;
-        pluginState.notifyNewSelection($anchor.pos, $head.pos);
+        const { from, to } = view.state.selection;
+        pluginState.notifyNewSelection(from, to);
       },
     };
   },

@@ -1419,7 +1419,7 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@types/js-search/-/js-search-1.4.0.tgz#f2d4afa176a4fc7b17fb46a1593847887fa1fb7b"
 
-"@types/linkify-it@^2.0.4":
+"@types/linkify-it@*", "@types/linkify-it@^2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/linkify-it/-/linkify-it-2.0.4.tgz#80a7f9aec4c9283e8333debda5a88511d4a529a7"
 
@@ -1435,6 +1435,13 @@
   dependencies:
     "@types/lodash" "*"
 
+"@types/lodash.sample@^4.2.4":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@types/lodash.sample/-/lodash.sample-4.2.5.tgz#cd9beed7daf60ccc578202d0beacefa5ef51d831"
+  integrity sha512-JRwic6Hm107S9br9MDfRgE52ZRc5SIdni9iq5VeApsW9edKaxVN6TR1u7KpfdzUp52M4RBopqRYy51zVxuIT1Q==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash@*", "@types/lodash@^4.14.106":
   version "4.14.106"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.106.tgz#6093e9a02aa567ddecfe9afadca89e53e5dce4dd"
@@ -1442,6 +1449,13 @@
 "@types/lorem-ipsum@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/lorem-ipsum/-/lorem-ipsum-1.0.2.tgz#77b11b0284fe315efedb9a31c0f1e1488469d99c"
+
+"@types/markdown-it@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.7.tgz#75070485a3d8ad11e7deb8287f4430be15bf4d39"
+  integrity sha512-WyL6pa76ollQFQNEaLVa41ZUUvDvPY+qAUmlsphnrpL6I9p1m868b26FyeoOmo7X3/Ta/S9WKXcEYXUSHnxoVQ==
+  dependencies:
+    "@types/linkify-it" "*"
 
 "@types/memoize-one@^3.0.1":
   version "3.1.2"
@@ -1462,6 +1476,13 @@
 "@types/minimist@*":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.0.tgz#69a23a3ad29caf0097f06eda59b361ee2f0639f6"
+
+"@types/mkdirp@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@types/mkdirp/-/mkdirp-0.5.2.tgz#503aacfe5cc2703d5484326b1b27efa67a339c1f"
+  integrity sha512-U5icWpv7YnZYGsN4/cmh3WD2onMY0aJIiTE6+51TwJCttdHvtCYmkBNOobHlXwrJRL0nkH9jH4kD+1FAdMN4Tg==
+  dependencies:
+    "@types/node" "*"
 
 "@types/mocha@^2.2.39":
   version "2.2.44"
@@ -1486,6 +1507,11 @@
 "@types/orderedmap@*":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/orderedmap/-/orderedmap-1.0.0.tgz#807455a192bba52cbbb4517044bc82bdbfa8c596"
+
+"@types/prettier@^1.15.2":
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-1.16.1.tgz#328d1c9b54402e44119398bcb6a31b7bbd606d59"
+  integrity sha512-db6pZL5QY3JrlCHBhYQzYDci0xnoDuxfseUuguLRr3JNk+bnCfpkK6p8quiUDyO8A0vbpBKkk59Fw125etrNeA==
 
 "@types/prop-types@*":
   version "15.5.6"
@@ -4662,9 +4688,10 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codesandboxer@^0.7.1, codesandboxer@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/codesandboxer/-/codesandboxer-0.7.2.tgz#f14d8cab9971cf6c535d83b0f40c24c62256d511"
+codesandboxer@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/codesandboxer/-/codesandboxer-1.0.1.tgz#b294a55de488da2eae5cfc6fdd663f07fbe6bb3c"
+  integrity sha512-5V/MGuAPyrdlkrjRZsyBGeBeyyW0a4a+EgmlmyWttgN+AiOB/i0LLNhzVx0DlwYu/fZ38e+hdiLCe0DJQNa6oA==
   dependencies:
     babel-runtime "^6.26.0"
     form-data "^2.3.2"
@@ -7392,9 +7419,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-free-style@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/free-style/-/free-style-2.4.1.tgz#4ef5a6d8a873f7b99beaf6410b428e0ba1b0f376"
+free-style@2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/free-style/-/free-style-2.5.1.tgz#5e3f684c470d3bba7e4dbb43524e0a08917e873c"
+  integrity sha512-X7dtUSTrlS1KRQBtiQ618NWIRDdRgD91IeajKCSh0fgTqArSixv+n3ea6F/OSvrvg14tPLR+yCq2s+O602+pRw==
 
 fresh@0.5.2:
   version "0.5.2"
@@ -13785,11 +13813,14 @@ react-clientside-effect@^1.0.0:
   dependencies:
     shallowequal "^1.1.0"
 
-react-codesandboxer@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/react-codesandboxer/-/react-codesandboxer-3.1.1.tgz#e7af0f00509d0292f91d3730f71565dbf781b0d7"
+react-codesandboxer@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/react-codesandboxer/-/react-codesandboxer-3.1.3.tgz#0492685f965eb6466f841af52d46b6776c72d22e"
+  integrity sha512-1Qzw+UbnwkRdCCPLGdgmuCLhGzzBRPsJWDEBPlbDZQxvWXysapgPImOqva3Dp6jt3nSniZFKw4VaNdUzDnjXRA==
   dependencies:
-    codesandboxer "^0.7.1"
+    codesandboxer "^1.0.1"
+    lodash.isequal "^4.5.0"
+    lodash.pick "^4.4.0"
     react-node-resolver "^1.0.1"
 
 react-deprecate@^0.1.0:
@@ -16832,11 +16863,12 @@ typescript@~3.1.0:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
 
-typestyle@^1.3.8:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/typestyle/-/typestyle-1.4.2.tgz#4fe803b8e63db108583fd5793cc39d3524db6135"
+typestyle@^1.4.4:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/typestyle/-/typestyle-1.7.2.tgz#22ca9dfeaf334f755030cc6d7799b468bb1ee132"
+  integrity sha512-tqkWXC6PWidyPZojL60xapIdwCEix+UFiKys+j4xBGepZJwEs9stvsGr2WU4/yk5F+7qgyyR88njn7/OtR6rhg==
   dependencies:
-    free-style "2.4.1"
+    free-style "2.5.1"
 
 typewise-core@^1.2, typewise-core@^1.2.0:
   version "1.2.0"

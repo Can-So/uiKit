@@ -18,6 +18,11 @@ export default md`
     />
   )}
 
+  ## SSR support
+
+  When server side rendering, we cannot check the size of the container thus size-detector call children with 
+  \`{ height: null, width: null }\`. Thus, enabling us to create DOM with proper checks and then hydrate on client with no errors.
+
   ${(
     <Props
       heading="SizeDetector Props"

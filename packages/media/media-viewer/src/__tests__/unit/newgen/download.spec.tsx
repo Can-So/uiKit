@@ -24,6 +24,7 @@ describe('download', () => {
     artifacts: {},
     mediaType: 'image',
     mimeType: 'some-mime-type',
+    representations: {},
   };
 
   const errorState: ErrorFileState = {

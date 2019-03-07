@@ -1,5 +1,23 @@
 # @atlaskit/media-core
 
+## 27.2.2
+- [patch] [9b0f6671ae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b0f6671ae):
+
+  - ED-6244: Fix Resizable Media to allow images go smaller size than videos
+
+## 27.2.1
+- [patch] [5a01d648a3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a01d648a3):
+
+  - Fixing download binary file content in Safari browsers due CORS issue "safari error [Error] Refused to display in a frame because it set 'X-Frame-Options' to 'SAMEORIGIN'."
+
+## 27.2.0
+- [patch] [6bd4c428e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bd4c428e2):
+
+  - load image preview as soon representation is present instead of waiting for file status to be processed
+- [minor] [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+
+  - added representations to file metadata
+
 ## 27.1.0
 - [minor] [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
 

@@ -108,7 +108,7 @@ export function text(value: string, schema: Schema): RefsContentItem {
   const refs: Refs = {};
 
   // Helpers
-  const isEven = n => n % 2 === 0;
+  const isEven = (n: number) => n % 2 === 0;
 
   for (const match of matches(value, /([\\]+)?{(\w+|<|>|<>|<cell|cell>)}/g)) {
     const [refToken, skipChars, refName] = match;
@@ -402,6 +402,10 @@ export const inlineCard = (attrs: CardAttributes) =>
   nodeFactory(sampleSchema.nodes.inlineCard, attrs);
 export const blockCard = (attrs: CardAttributes) =>
   nodeFactory(sampleSchema.nodes.blockCard, attrs);
+export const unsupportedInline = (attrs: any) =>
+  nodeFactory(sampleSchema.nodes.unsupportedInline, attrs);
+export const unsupportedBlock = (attrs: any) =>
+  nodeFactory(sampleSchema.nodes.unsupportedBlock, attrs);
 
 //
 // Marks
