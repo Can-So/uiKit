@@ -19,7 +19,7 @@ const SectionTitle = styled.h1`
 
 type SectionProps = {
   sectionId: string;
-  title: React.ReactNode | string;
+  title: React.ReactNode;
   children?: React.ReactNode;
 };
 
