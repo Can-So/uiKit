@@ -1,5 +1,4 @@
 import {
-  UploadPreviewUpdateEventPayload,
   MediaPickerComponents,
   MediaPickerComponent,
 } from '@atlaskit/media-picker';
@@ -8,16 +7,9 @@ import {
   StoryBookAuthProvider,
   userAuthProvider,
 } from '@atlaskit/media-test-helpers';
-import { randomId } from '@atlaskit/editor-test-helpers';
 
-import {
-  DefaultMediaStateManager,
-  MediaStateManager,
-  MediaState,
-} from '../../../../plugins/media';
 import PickerFacade, {
   PickerType,
-  PickerFacadeConfig,
 } from '../../../../plugins/media/picker-facade';
 import { ErrorReportingHandler } from '@atlaskit/editor-common';
 
@@ -32,15 +24,10 @@ describe('Media PickerFacade', () => {
     userAuthProvider,
   });
 
-  const getPickerFacadeConfig = (
-    stateManager: MediaStateManager,
-  ): PickerFacadeConfig => ({
+  const pickerFacadeConfig = {
     context,
-    stateManager,
     errorReporter,
-  });
-
-  const testFileId = randomId();
+  };
 
   // Spies
   const commonSpies: { [S in keyof MediaPickerComponent]: jest.Mock } = {
@@ -94,48 +81,6 @@ describe('Media PickerFacade', () => {
     },
   };
 
-  const previewPayload: UploadPreviewUpdateEventPayload = {
-    file: {
-      id: testFileId,
-      name: 'test name',
-      size: 100,
-      type: 'test/file',
-      upfrontId: Promise.resolve('publicid'),
-      creationDate: 10,
-    },
-    preview: {},
-  };
-
-  const endPayload = {
-    file: {
-      id: testFileId,
-    },
-  };
-
-  const insertPayload: MediaState[] = [
-    {
-      id: testFileId,
-      fileName: 'test name',
-      fileSize: 100,
-      fileMimeType: 'test/file',
-      dimensions: undefined,
-      scaleFactor: undefined,
-    },
-  ];
-
-  // Helpers
-  function triggerStart(payload?: Partial<MediaState>) {
-    const [eventName, cb] = commonSpies.on.mock.calls[0];
-    cb(previewPayload);
-    expect(eventName).toBe('upload-preview-update');
-  }
-
-  function triggerEnd(payload?: Partial<MediaState>) {
-    const [eventName, cb] = commonSpies.on.mock.calls[1];
-    cb(endPayload);
-    expect(eventName).toBe('upload-processing');
-  }
-
   const pickerTypes: Array<PickerType> = [
     'popup',
     'binary',
@@ -146,7 +91,6 @@ describe('Media PickerFacade', () => {
 
   pickerTypes.forEach(pickerType => {
     describe(`Picker: ${pickerType}`, () => {
-      let stateManager: MediaStateManager;
       let facade: PickerFacade;
       let spies = specificSpies[pickerType];
 
@@ -161,10 +105,9 @@ describe('Media PickerFacade', () => {
           .fn()
           .mockReturnValue(Promise.resolve(new MockPopup()));
 
-        stateManager = new DefaultMediaStateManager();
         facade = new PickerFacade(
           pickerType,
-          getPickerFacadeConfig(stateManager),
+          pickerFacadeConfig,
           {
             uploadParams: { collection: '' },
           },
@@ -175,7 +118,6 @@ describe('Media PickerFacade', () => {
 
       afterEach(() => {
         facade.destroy();
-        stateManager.destroy();
       });
 
       it(`listens to picker events`, () => {
@@ -207,34 +149,6 @@ describe('Media PickerFacade', () => {
           expect(spies.removeAllListeners).toHaveBeenCalledWith('drag-enter');
           expect(spies.removeAllListeners).toHaveBeenCalledWith('drag-leave');
         }
-      });
-
-      describe('proxies events to MediaStateManager', () => {
-        const spy = jest.fn();
-
-        beforeEach(() => {
-          spy.mockClear();
-          stateManager.on(testFileId, spy);
-        });
-
-        it('for new uploads via onNewMedia()', () => {
-          const spy = jest.fn();
-          facade.onNewMedia(spy);
-
-          triggerStart();
-
-          expect(spy).toHaveBeenCalledTimes(1);
-          expect(spy).toHaveBeenCalledWith(insertPayload);
-        });
-
-        it('for upload end', () => {
-          triggerEnd();
-          expect(spy).toHaveBeenCalledTimes(1);
-          expect(spy).toHaveBeenCalledWith({
-            status: 'ready',
-            id: testFileId,
-          });
-        });
       });
 
       // Picker Specific Tests

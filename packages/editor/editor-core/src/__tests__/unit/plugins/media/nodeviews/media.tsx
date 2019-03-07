@@ -28,7 +28,6 @@ describe('nodeviews/media', () => {
     providerFactory.unsubscribe = jest.fn();
     pluginState.handleMediaNodeMount = jest.fn();
     pluginState.handleMediaNodeUnmount = jest.fn();
-    pluginState.getMediaNodeState = jest.fn();
   });
 
   it('should render Media', () => {
