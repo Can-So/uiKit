@@ -18,13 +18,13 @@ import {
   UserPickerSession,
 } from '../analytics';
 import {
+  Appearance,
   AtlasKitSelectChange,
   InputActionTypes,
   Option,
   OptionData,
   UserPickerProps,
   UserPickerState,
-  Appearance,
 } from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
@@ -367,6 +367,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
       addMoreMessage,
       allowEmail,
       disableInput,
+      isValidEmail,
     } = this.props;
 
     const SelectComponent = allowEmail ? CreatableSelect : Select;
@@ -422,7 +423,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         menuMinWidth={menuMinWidth}
         menuPortalTarget={menuPortalTarget}
         disableInput={disableInput}
-        {...getCreatableProps(allowEmail)}
+        {...getCreatableProps(allowEmail, isValidEmail)}
       />
     );
   }

@@ -1,5 +1,10 @@
 # @atlaskit/media-editor
 
+## 29.1.1
+- [patch] [cd7ed32895](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd7ed32895):
+
+  - use esm instead of cjs in MediaEditor.js bundle
+
 ## 29.1.0
 - [minor] [d6a3c8ec43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d6a3c8ec43):
 

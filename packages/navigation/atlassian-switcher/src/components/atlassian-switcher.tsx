@@ -3,6 +3,8 @@ import JiraSwitcher from './jira-switcher';
 import ConfluenceSwitcher from './confluence-switcher';
 import GenericSwitcher from './generic-switcher';
 import ErrorBoundary from './error-boundary';
+import IntlProvider from './intl-provider';
+import messages from '../utils/messages';
 import { FeatureFlagProps, Product } from '../types';
 import {
   analyticsAttributes,
@@ -37,7 +39,7 @@ const AtlassianSwitcher = ({
   enableSplitJira = false,
   ...props
 }: AtlassianSwitcherProps) => {
-  let switcher: React.ReactNode;
+  let switcher: React.ReactElement<any>;
   switch (product) {
     case Product.JIRA:
       switcher = (
@@ -45,6 +47,7 @@ const AtlassianSwitcher = ({
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}
           enableSplitJira={enableSplitJira}
+          messages={messages}
           {...props}
         />
       );
@@ -55,6 +58,7 @@ const AtlassianSwitcher = ({
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}
           enableSplitJira={enableSplitJira}
+          messages={messages}
           {...props}
         />
       );
@@ -69,6 +73,7 @@ const AtlassianSwitcher = ({
           triggerXFlow={triggerXFlow}
           product={product}
           enableSplitJira={enableSplitJira}
+          messages={messages}
           {...props}
         />
       );
@@ -85,7 +90,7 @@ const AtlassianSwitcher = ({
   return (
     <ErrorBoundary>
       <NavigationAnalyticsContext data={getAnalyticsContext(props)}>
-        {switcher}
+        <IntlProvider>{switcher}</IntlProvider>
       </NavigationAnalyticsContext>
     </ErrorBoundary>
   );

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
@@ -11,6 +12,7 @@ import {
   JiraCoreIcon,
 } from '@atlaskit/logo';
 import { LicenseInformationDataStructure } from '../providers/types';
+import messages from './messages';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
 import { CustomLink, RecentContainer } from '../types';
@@ -32,27 +34,27 @@ export enum ProductKey {
 
 const SINGLE_JIRA_PRODUCT: 'jira' = 'jira';
 
-interface StringDict {
-  [index: string]: string;
+interface MessagesDict {
+  [index: string]: FormattedMessage.MessageDescriptor;
 }
 
 export type SwitcherItemType = {
   key: string;
-  label: string;
+  label: React.ReactNode;
   Icon: IconType;
   href: string;
 };
 
 export type RecentItemType = SwitcherItemType & {
   type: string;
-  description: string;
+  description: React.ReactNode;
 };
 
 export type SuggestedProductItemType = SwitcherItemType | null;
 
-export const OBJECT_TYPE_TO_LABEL_MAP: StringDict = {
-  'jira-project': 'Jira project',
-  'confluence-space': 'Confluence space',
+export const OBJECT_TYPE_TO_LABEL_MAP: MessagesDict = {
+  'jira-project': messages.jiraProject,
+  'confluence-space': messages.confluenceSpace,
 };
 
 export const PRODUCT_DATA_MAP: {
@@ -94,14 +96,14 @@ export const PRODUCT_DATA_MAP: {
   },
 };
 
-export const getObjectTypeLabel = (type: string): string => {
-  return OBJECT_TYPE_TO_LABEL_MAP[type] || type;
+export const getObjectTypeLabel = (type: string): React.ReactNode => {
+  return <FormattedMessage {...OBJECT_TYPE_TO_LABEL_MAP[type]} /> || type;
 };
 
 export const getFixedProductLinks = (): SwitcherItemType[] => [
   {
     key: 'people',
-    label: 'People',
+    label: <FormattedMessage {...messages.people} />,
     Icon: createIcon(PeopleLogo, { size: 'small' }),
     href: `/people`,
   },
@@ -156,13 +158,13 @@ export const getAdministrationLinks = (
   return [
     {
       key: 'discover-applications',
-      label: 'Discover more',
+      label: <FormattedMessage {...messages.discoverMore} />,
       Icon: createIcon(DiscoverFilledGlyph, { size: 'medium' }),
       href: `${adminBaseUrl}/billing/addapplication`,
     },
     {
       key: 'administration',
-      label: 'Administration',
+      label: <FormattedMessage {...messages.administration} />,
       Icon: createIcon(SettingsGlyph, { size: 'medium' }),
       href: adminBaseUrl,
     },

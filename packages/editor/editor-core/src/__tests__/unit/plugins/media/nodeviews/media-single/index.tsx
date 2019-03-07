@@ -8,10 +8,7 @@ import {
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
 import { defaultSchema, MediaAttributes } from '@atlaskit/adf-schema';
-import {
-  stateKey as mediaStateKey,
-  DefaultMediaStateManager,
-} from '../../../../../../plugins/media/pm-plugins/main';
+import { stateKey as mediaStateKey } from '../../../../../../plugins/media/pm-plugins/main';
 import MediaSingle, {
   ReactMediaSingleNode,
 } from '../../../../../../plugins/media/nodeviews/mediaSingle';
@@ -20,19 +17,16 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import { EventDispatcher } from '../../../../../../event-dispatcher';
 import { PortalProviderAPI } from '../../../../../../ui/PortalProvider';
 
-const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 const getFreshMediaProvider = () =>
   storyMediaProviderFactory({
     collectionName: testCollectionName,
-    stateManager,
     includeUserAuthProvider: true,
   });
 
 describe('nodeviews/mediaSingle', () => {
   let pluginState;
-  const stateManager = new DefaultMediaStateManager();
   const mediaNodeAttrs = {
     id: 'foo',
     type: 'file',
@@ -85,8 +79,6 @@ describe('nodeviews/mediaSingle', () => {
         width: 100,
       });
     };
-
-    pluginState.stateManager = stateManager;
 
     jest.spyOn(mediaStateKey, 'getState').mockImplementation(() => pluginState);
   });

@@ -1,5 +1,10 @@
 # @atlaskit/reactions
 
+## 15.6.0
+- [minor] [aa6176aad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aa6176aad1):
+
+  - added SSR tests to reactions
+
 ## 15.5.1
 - Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
   - @atlaskit/emoji@56.0.0

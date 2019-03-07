@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Messages } from 'react-intl';
 import Switcher from './switcher';
 import CommonDataProvider from '../providers/common-data-provider';
 import { getSuggestedProductLink } from '../utils/links';
@@ -6,6 +7,7 @@ import { FeatureFlagProps, Product } from '../types';
 
 type GenericSwitcherProps = {
   cloudId: string;
+  messages: Messages;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
   product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>;
 } & FeatureFlagProps;
