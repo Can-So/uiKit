@@ -223,6 +223,7 @@ export const setCursorForTopLevelBlocks = (
       top: number;
     },
   ) => { pos: number; inside: number } | null | void,
+  editorFocused: boolean,
 ): Command => (state, dispatch) => {
   // plugin is disabled
   if (!pluginKey.get(state)) {
@@ -258,8 +259,9 @@ export const setCursorForTopLevelBlocks = (
     }
     return true;
   }
-  // try to set text selection
-  else {
+  // try to set text selection if the editor isnt focused
+  // if the editor is focused, we are most likely dragging a selection outside.
+  else if (editorFocused === false) {
     const selection = Selection.findFrom(
       $pos,
       cursorCoords.side === Side.LEFT ? 1 : -1,

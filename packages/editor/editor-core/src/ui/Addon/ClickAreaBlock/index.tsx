@@ -67,6 +67,7 @@ export default class ClickAreaBlock extends React.Component<Props> {
         event,
         dom as HTMLElement,
         view.posAtCoords.bind(view),
+        editorFocused,
       )(view.state, dispatch);
 
       if (isParagraphAppended || isGapCursorSet) {
