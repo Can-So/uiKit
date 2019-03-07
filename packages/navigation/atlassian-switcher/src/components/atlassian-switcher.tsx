@@ -46,7 +46,7 @@ const AtlassianSwitcher = ({
   }
   return (
     <ErrorBoundary>
-      <IntlProvider locale={locale}>
+      <IntlProvider>
         <Switcher
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}

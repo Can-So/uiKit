@@ -959,18 +959,6 @@ describe('GlobalNavigation', () => {
         sourceComponent,
       );
     });
-
-    it('should pass the locale sent to global nav', () => {
-      const locale = 'es';
-      globalNavWrapper = getDefaultWrapper({
-        locale,
-      });
-      globalNavWrapper.find(AppSwitcherIcon).simulate('click');
-      globalNavWrapper.find(AtlassianSwitcher).prop('locale');
-      expect(globalNavWrapper.find(AtlassianSwitcher).prop('locale')).toBe(
-        locale,
-      );
-    });
   });
 
   describe('Help', () => {

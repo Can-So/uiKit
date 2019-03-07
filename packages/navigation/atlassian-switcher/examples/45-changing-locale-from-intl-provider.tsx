@@ -4,7 +4,7 @@ import Drawer from '@atlaskit/drawer';
 import { mockEndpoints, REQUEST_FAST } from './helpers/mock-endpoints';
 import { withAnalyticsLogger } from './helpers';
 import AtlassianSwitcher from '../src';
-import { addLocaleData } from 'react-intl';
+import { addLocaleData, IntlProvider } from 'react-intl';
 import es from 'react-intl/locale-data/es';
 
 addLocaleData([...es]);
@@ -39,19 +39,20 @@ class JiraSwitcherExample extends Component {
 
   render() {
     return (
-      <div style={{ padding: '2rem' }}>
-        <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <AtlassianSwitcher
-            product="jira"
-            cloudId="some-cloud-id"
-            locale="es"
-            triggerXFlow={this.onTriggerXFlow}
-          />
-        </Drawer>
-        <Button type="button" onClick={this.openDrawer}>
-          Open drawer
-        </Button>
-      </div>
+      <IntlProvider locale="es">
+        <div style={{ padding: '2rem' }}>
+          <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
+            <AtlassianSwitcher
+              product="jira"
+              cloudId="some-cloud-id"
+              triggerXFlow={this.onTriggerXFlow}
+            />
+          </Drawer>
+          <Button type="button" onClick={this.openDrawer}>
+            Open drawer
+          </Button>
+        </div>
+      </IntlProvider>
     );
   }
 }

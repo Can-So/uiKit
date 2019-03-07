@@ -10,9 +10,7 @@ import { SwitchToTooltipText } from '@atlaskit/atlassian-switcher';
 
 import type { DefaultConfigShape } from './types';
 
-export default function generateDefaultConfig(
-  locale?: string,
-): DefaultConfigShape {
+export default function generateDefaultConfig(): DefaultConfigShape {
   return {
     product: {
       label: 'Atlassian',
@@ -79,7 +77,7 @@ export default function generateDefaultConfig(
       label: 'Atlassian Switcher',
       section: 'secondary',
       rank: 3,
-      tooltip: SwitchToTooltipText(locale),
+      tooltip: SwitchToTooltipText,
       id: 'atlassianSwitcher',
     },
     profile: {

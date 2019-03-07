@@ -319,13 +319,12 @@ export default class GlobalNavigation extends Component<
   };
 
   constructNavItems = () => {
-    const { locale } = this.props;
     const productConfig = generateProductConfig(
       this.props,
       this.openDrawer,
       this.isNotificationInbuilt,
     );
-    const defaultConfig = generateDefaultConfig(locale);
+    const defaultConfig = generateDefaultConfig();
     const badge = this.renderNotificationBadge;
     const { notificationCount: badgeCount } = this.isNotificationInbuilt
       ? this.state
@@ -375,11 +374,10 @@ export default class GlobalNavigation extends Component<
   };
 
   renderAtlassianSwitcherDrawerContents = () => {
-    const { product, cloudId, locale } = this.props;
+    const { product, cloudId } = this.props;
     return (
       <AtlassianSwitcher
         cloudId={cloudId}
-        locale={locale}
         product={product}
         triggerXFlow={this.triggerXFlow}
       />

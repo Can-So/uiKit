@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { addLocaleData } from 'react-intl';
+import { IntlProvider, addLocaleData } from 'react-intl';
 import es from 'react-intl/locale-data/es';
 import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
 import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
@@ -29,7 +29,6 @@ const getGlobalNavigation = enableAtlassianSwitcher => () => (
     <GlobalNavigation
       product="jira"
       cloudId="some-cloud-id"
-      locale="es"
       productIcon={EmojiAtlassianIcon}
       enableAtlassianSwitcher={enableAtlassianSwitcher}
       triggerXFlow={(...props) => {
@@ -62,21 +61,23 @@ export default class extends Component<{}, State> {
   render() {
     const { enableAtlassianSwitcher } = this.state;
     return (
-      <NavigationProvider>
-        <LayoutManager
-          globalNavigation={getGlobalNavigation(enableAtlassianSwitcher)}
-          productNavigation={() => null}
-          containerNavigation={() => null}
-        >
-          <div css={{ padding: '32px 40px' }}>
-            Using Atlassian Switcher:
-            <ToggleStateless
-              isChecked={enableAtlassianSwitcher}
-              onChange={this.toggleAppSwitcher}
-            />
-          </div>
-        </LayoutManager>
-      </NavigationProvider>
+      <IntlProvider locale="es">
+        <NavigationProvider>
+          <LayoutManager
+            globalNavigation={getGlobalNavigation(enableAtlassianSwitcher)}
+            productNavigation={() => null}
+            containerNavigation={() => null}
+          >
+            <div css={{ padding: '32px 40px' }}>
+              Using Atlassian Switcher:
+              <ToggleStateless
+                isChecked={enableAtlassianSwitcher}
+                onChange={this.toggleAppSwitcher}
+              />
+            </div>
+          </LayoutManager>
+        </NavigationProvider>
+      </IntlProvider>
     );
   }
 }
