@@ -1,1 +1,0 @@
-- CS-840 Email renderer now supports indentations
