@@ -140,4 +140,48 @@ describe('MediaGroup', () => {
     );
     expect(mediaGroup.find(Media).prop('useInlinePlayer')).toBe(false);
   });
+
+  it('should pass onClick callback only if eventHandlers.media.onClick its defined', () => {
+    const mediaGroupWithoutHandlers = mount(
+      <MediaGroup>
+        <Media
+          id={imageFileId.id}
+          type={imageFileId.mediaItemType}
+          collection={imageFileId.collectionName}
+        />
+        <Media
+          id={imageFileId.id}
+          type={imageFileId.mediaItemType}
+          collection={imageFileId.collectionName}
+        />
+      </MediaGroup>,
+    );
+    const mediaGroupWithHandlers = mount(
+      <MediaGroup eventHandlers={{ media: { onClick: jest.fn() } }}>
+        <Media
+          id={imageFileId.id}
+          type={imageFileId.mediaItemType}
+          collection={imageFileId.collectionName}
+        />
+        <Media
+          id={imageFileId.id}
+          type={imageFileId.mediaItemType}
+          collection={imageFileId.collectionName}
+        />
+      </MediaGroup>,
+    );
+
+    expect(
+      mediaGroupWithoutHandlers
+        .find(Media)
+        .first()
+        .prop('eventHandlers')!.media!.onClick,
+    ).toBeUndefined();
+    expect(
+      mediaGroupWithHandlers
+        .find(Media)
+        .first()
+        .prop('eventHandlers')!.media!.onClick,
+    ).toBeDefined();
+  });
 });
