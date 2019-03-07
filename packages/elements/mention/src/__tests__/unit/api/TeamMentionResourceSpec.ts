@@ -3,9 +3,7 @@ import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
 import * as queryString from 'query-string';
-import TeamMentionResource, {
-  TeamMentionResourceConfig,
-} from '../../../api/TeamMentionResource';
+import TeamMentionResource from '../../../api/TeamMentionResource';
 import {
   resultCr,
   resultCraig,
@@ -31,9 +29,6 @@ const options = (
   omitCredentials,
 });
 
-// const getSecurityHeader = (call: any) =>
-//   call[1].headers.get(defaultSecurityHeader);
-
 const defaultSecurityCode = '10804';
 
 const apiUserMentionConfig: MentionResourceConfig = {
@@ -43,12 +38,11 @@ const apiUserMentionConfig: MentionResourceConfig = {
   },
 };
 
-const apiTeamMentionConfig: TeamMentionResourceConfig = {
+const apiTeamMentionConfig: MentionResourceConfig = {
   url: baseTeamUrl,
   securityProvider() {
     return options(defaultSecurityCode, false);
   },
-  currentUserId: 'test-current-user-id',
 };
 
 const FULL_CONTEXT = {
@@ -94,6 +88,21 @@ describe('TeamMentionResourceSpec', () => {
       )
       .mock(/\/teams\/mentions\/search\?.*q=cr(&|$)/, {
         body: [],
+      })
+      .mock(/\/users\/mentions\/search\?.*query=query-only-teams-fail(&|$)/, {
+        body: {
+          mentions: resultCr,
+        },
+      })
+      .mock(/\/teams\/mentions\/search\?.*q=query-only-teams-fail(&|$)/, 500)
+      .mock(
+        /\/users\/mentions\/search\?.*query=query-only-users-fail(&|$)/,
+        500,
+      )
+      .mock(/\/teams\/mentions\/search\?.*q=query-only-users-fail(&|$)/, {
+        body: {
+          mentions: teamResultsCraig,
+        },
       });
 
     resource = new TeamMentionResource(
@@ -183,6 +192,22 @@ describe('TeamMentionResourceSpec', () => {
 
       resource.filter('esoares');
     });
+
+    it('subscribe should still receive updates when one of users or teams requests fails', done => {
+      resource.subscribe('test1', mentions => {
+        expect(mentions).toHaveLength(resultCr.length);
+        done();
+      });
+
+      resource.filter('query-only-teams-fail');
+
+      resource.subscribe('test2', mentions => {
+        expect(mentions).toHaveLength(teamResultsCraig.length);
+        done();
+      });
+
+      resource.filter('query-only-users-fail');
+    });
   });
 
   describe('#unsubscribe', () => {
@@ -203,12 +228,6 @@ describe('TeamMentionResourceSpec', () => {
   describe('#shouldHighlightMention', () => {
     it('should return false by default', () => {
       expect(resource.shouldHighlightMention(testMentionDesc)).toBe(false);
-    });
-
-    it('should return true when currentUserId is equal to user mention id', () => {
-      expect(
-        resource.shouldHighlightMention({ id: 'test-current-user-id' }),
-      ).toBe(true);
     });
   });
 });

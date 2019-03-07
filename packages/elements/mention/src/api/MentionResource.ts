@@ -12,7 +12,7 @@ import {
 } from '../types';
 import debug from '../util/logger';
 
-export const MAX_QUERY_ITEMS = 100;
+const MAX_QUERY_ITEMS = 100;
 const MAX_NOTIFIED_ITEMS = 20;
 
 export type MentionStats = { [key: string]: any };

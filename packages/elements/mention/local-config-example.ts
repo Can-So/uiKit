@@ -20,9 +20,7 @@ export default {
   },
   sessionServiceWithTeam: {
     user: {
-      url:
-        'https://pug.jira-dev.com/gateway/api/mentions/DUMMY-a5a01d21-1cc3-4f29-9565-f2bb8cd969f5/',
-      // url: 'http://www.example.org/mentions/some-cloud-id',
+      url: 'http://www.example.org/mentions/some-cloud-id',
       productId: 'micros-group/confluence',
       securityProvider: () => ({
         headers: {
@@ -31,8 +29,7 @@ export default {
       }),
     },
     team: {
-      url: 'https://pug.jira-dev.com/gateway/api/teams/v2',
-      // url: 'http://www.example.org/mentions/some-cloud-id',
+      url: 'http://www.example.org/teams/mentions',
       productId: 'micros-group/confluence',
       securityProvider: () => ({
         headers: {

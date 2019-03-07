@@ -28,6 +28,8 @@ export interface MentionDescription {
   accessLevel?: string;
   inContext?: boolean;
   userType?: string;
+  // Team mention can use context to store members data
+  context?: any;
 }
 
 export interface MentionsResult {
@@ -50,6 +52,12 @@ enum TeamRestriction {
   ORG_MEMBERS = 'ORG_MEMBERS',
   NO_RESTRICTION = 'NO_RESTRICTION',
 }
+
+export interface TeamMember {
+  id: string;
+  name: string;
+}
+
 // data is returned from team search service
 export interface Team {
   id: string;
@@ -64,6 +72,7 @@ export interface Team {
   discoverable: TeamDiscoverable;
   organizationId: string;
   restriction?: TeamRestriction;
+  members: TeamMember[];
 }
 
 export type MentionEventHandler = (

@@ -1,19 +1,17 @@
 import * as React from 'react';
 import * as debounce from 'lodash.debounce';
-import TeamMentionResource, {
-  TeamMentionResourceConfig,
-} from '../src/api/TeamMentionResource';
+import TeamMentionResource from '../src/api/TeamMentionResource';
 import { MentionResourceConfig } from '../src/api/MentionResource';
 
 export interface Props {
   children?: any;
   userMentionConfig: MentionResourceConfig;
-  teamMentionConfig: TeamMentionResourceConfig;
+  teamMentionConfig: MentionResourceConfig;
 }
 
 export interface State {
   resourceProvider: TeamMentionResource | null;
-  teamMentionConfig: TeamMentionResourceConfig;
+  teamMentionConfig: MentionResourceConfig;
   userMentionConfig: MentionResourceConfig;
 }
 

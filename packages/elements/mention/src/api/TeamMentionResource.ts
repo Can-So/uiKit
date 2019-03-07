@@ -11,15 +11,12 @@ import {
   MentionDescription,
 } from '../types';
 import MentionResource, {
-  MAX_QUERY_ITEMS,
   MentionContextIdentifier,
   MentionResourceConfig,
 } from './MentionResource';
 import debug from '../util/logger';
 
-export interface TeamMentionResourceConfig extends MentionResourceConfig {
-  currentUserId?: string;
-}
+const MAX_QUERY_TEAMS = 20;
 
 /**
  * Provides a Javascript API to fetch users and teams
@@ -27,11 +24,11 @@ export interface TeamMentionResourceConfig extends MentionResourceConfig {
  * remove this class at this point
  */
 export default class TeamMentionResource extends MentionResource {
-  private readonly teamMentionConfig: TeamMentionResourceConfig;
+  private readonly teamMentionConfig: MentionResourceConfig;
 
   constructor(
     userMentionConfig: MentionResourceConfig,
-    teamMentionConfig: TeamMentionResourceConfig,
+    teamMentionConfig: MentionResourceConfig,
   ) {
     super(userMentionConfig);
     this.verifyMentionConfig(teamMentionConfig);
@@ -45,13 +42,13 @@ export default class TeamMentionResource extends MentionResource {
     const p1 = this.remoteUserSearch(query, contextIdentifier);
     const p2 = this.remoteTeamSearch(query, contextIdentifier);
 
-    const [result1, result2] = await Promise.all([p1, p2]);
+    const [userResults, teamResults] = await Promise.all([p1, p2]);
 
     // combine results of 2 requests
     return {
-      mentions: [...result1.mentions, ...result2.mentions],
-      query: result1.query,
-    };
+      mentions: [...userResults.mentions, ...teamResults.mentions],
+      query: userResults.query,
+    } as MentionsResult;
   }
 
   /**
@@ -62,33 +59,27 @@ export default class TeamMentionResource extends MentionResource {
     contextIdentifier?: MentionContextIdentifier,
   ): Promise<MentionsResult> {
     const query = '';
-    const promise1 = super.remoteInitialState(contextIdentifier);
+    const getUserPromise = super.remoteInitialState(contextIdentifier);
 
     const queryParams: KeyValues = this.getQueryParamsOfTeamMentionConfig(
       contextIdentifier,
     );
-    let getTeamsPromise: Promise<{ entities: Team[] }> = Promise.resolve({
-      entities: [],
-    });
 
-    if (this.teamMentionConfig.currentUserId) {
-      // TODO: In https://product-fabric.atlassian.net/browse/TEAMS-313, we will supply a new endpoint for this
-      const options = {
-        path: `/of-user/${this.teamMentionConfig.currentUserId}`,
-        queryParams,
-      };
-      getTeamsPromise = serviceUtils.requestService<{ entities: Team[] }>(
-        this.teamMentionConfig,
-        options,
-      );
-    }
+    const options = {
+      path: 'bootstrap',
+      queryParams,
+    };
+    const getTeamsPromise = serviceUtils.requestService<Team[]>(
+      this.teamMentionConfig,
+      options,
+    );
 
     const [usersResult, teamsResult] = await Promise.all([
-      promise1,
+      getUserPromise,
       getTeamsPromise,
     ]);
     const teamsMentionResult = this.convertTeamResultToMentionResult(
-      teamsResult.entities,
+      teamsResult,
       query,
     );
 
@@ -96,15 +87,7 @@ export default class TeamMentionResource extends MentionResource {
     return {
       mentions: [...usersResult.mentions, ...teamsMentionResult.mentions],
       query: usersResult.query,
-    };
-  }
-
-  shouldHighlightMention(mention: MentionDescription) {
-    if (this.teamMentionConfig.currentUserId === mention.id) {
-      return true;
-    }
-
-    return super.shouldHighlightMention(mention);
+    } as MentionsResult;
   }
 
   private getQueryParamsOfTeamMentionConfig(
@@ -133,10 +116,10 @@ export default class TeamMentionResource extends MentionResource {
     } catch (err) {
       debug('ak-mention-resource.remoteUserSearch', err);
 
-      return Promise.resolve({
+      return {
         mentions: [],
         query,
-      });
+      };
     }
   }
 
@@ -148,9 +131,9 @@ export default class TeamMentionResource extends MentionResource {
       path: 'search',
       queryParams: {
         // TODO: User mention uses `query`, but current search teams API requires `q` parameter
-        // need update back-end to accept `query` paramaeter
+        // need update back-end to accept `query` parameter so that it's consistent with user mention
         q: query,
-        limit: MAX_QUERY_ITEMS,
+        limit: MAX_QUERY_TEAMS,
         ...this.getQueryParamsOfTeamMentionConfig(contextIdentifier),
       },
     };
@@ -164,10 +147,10 @@ export default class TeamMentionResource extends MentionResource {
     } catch (err) {
       debug('ak-mention-resource.remoteTeamSearch', err);
 
-      return Promise.resolve({
+      return {
         mentions: [],
         query,
-      });
+      };
     }
   }
 
@@ -175,7 +158,7 @@ export default class TeamMentionResource extends MentionResource {
     result: Team[],
     query: string,
   ): MentionsResult {
-    const mentions = result.map((team: Team) => {
+    const mentions: MentionDescription[] = result.map((team: Team) => {
       return {
         id: team.id,
         avatarUrl: team.smallAvatarImageUrl,
@@ -184,6 +167,9 @@ export default class TeamMentionResource extends MentionResource {
         userType: UserType[UserType.TEAM],
         lozenge: UserType[UserType.TEAM],
         query,
+        context: {
+          members: team.members,
+        },
       };
     });
 
