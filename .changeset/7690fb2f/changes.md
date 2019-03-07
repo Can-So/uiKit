@@ -1,1 +1,0 @@
-- ED-6244: Fix Resizable Media to allow images go smaller size than videos

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-core",
-  "version": "102.1.8",
+  "version": "102.1.9",
   "description": "A package contains Atlassian editor core functionality",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -98,7 +98,7 @@
     "uuid": "^3.1.0"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^27.2.0",
+    "@atlaskit/media-core": "^27.2.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
     "react-intl": "^2.6.0",
@@ -111,7 +111,7 @@
     "@atlaskit/editor-test-helpers": "^7.0.3",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/lozenge": "^6.2.4",
-    "@atlaskit/media-core": "^27.2.0",
+    "@atlaskit/media-core": "^27.2.2",
     "@atlaskit/media-test-helpers": "^20.1.6",
     "@atlaskit/pubsub": "^3.0.7",
     "@atlaskit/renderer": "^41.0.1",
