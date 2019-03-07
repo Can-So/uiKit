@@ -1,0 +1,1 @@
+- Update editor-common and editor-core types
