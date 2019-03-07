@@ -11,6 +11,124 @@ const render = (doc: any) => {
 };
 
 describe('Renderer - EmailSerializer', () => {
+  it('should align paragraph correctly', () => {
+    const doc = {
+      type: 'doc',
+      version: 1,
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'Plain Paragraph',
+            },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [
+            {
+              type: 'alignment',
+              attrs: {
+                align: 'center',
+              },
+            },
+          ],
+          content: [
+            {
+              type: 'text',
+              text: 'Paragraph with center alignment',
+            },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [
+            {
+              type: 'alignment',
+              attrs: {
+                align: 'end',
+              },
+            },
+          ],
+          content: [
+            {
+              type: 'text',
+              text: 'Paragraph with end alignment',
+            },
+          ],
+        },
+      ],
+    };
+    const output = render(doc);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should align heading correctly', () => {
+    const doc = {
+      type: 'doc',
+      version: 1,
+      content: [
+        {
+          type: 'heading',
+          attrs: {
+            level: 1,
+          },
+          content: [
+            {
+              type: 'text',
+              text: 'Plain Heading',
+            },
+          ],
+        },
+        {
+          type: 'heading',
+          attrs: {
+            level: 1,
+          },
+          marks: [
+            {
+              type: 'alignment',
+              attrs: {
+                align: 'center',
+              },
+            },
+          ],
+          content: [
+            {
+              type: 'text',
+              text: 'Heading with center alignment',
+            },
+          ],
+        },
+        {
+          type: 'heading',
+          attrs: {
+            level: 1,
+          },
+          marks: [
+            {
+              type: 'alignment',
+              attrs: {
+                align: 'end',
+              },
+            },
+          ],
+          content: [
+            {
+              type: 'text',
+              text: 'Heading with end alignment',
+            },
+          ],
+        },
+      ],
+    };
+
+    const output = render(doc);
+    expect(output).toMatchSnapshot();
+  });
+
   it('should inline text properties correctly', () => {
     const doc = {
       type: 'doc',
