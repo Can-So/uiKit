@@ -16,12 +16,7 @@ import { RenderOutputStat } from '../../render-document';
 import { Wrapper } from './style';
 import { TruncatedWrapper } from './truncated-wrapper';
 
-export type RendererAppearance =
-  | 'inline-comment'
-  | 'comment'
-  | 'full-page'
-  | 'mobile'
-  | undefined;
+export type RendererAppearance = 'comment' | 'full-page' | 'mobile' | undefined;
 
 export interface Extension<T> {
   extensionKey: string;
