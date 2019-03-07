@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 102.2.1
+- [patch] [c427333c46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c427333c46):
+
+  - ED-6008 Dim telepointers that overlaps the cursor.
+
 ## 102.2.0
 - [minor] [4a9a7487f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a9a7487f1):
 
