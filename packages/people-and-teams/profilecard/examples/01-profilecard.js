@@ -17,8 +17,6 @@ export default function Example() {
         email="rfranklin@acme.com"
         timestring="18:45"
         location="Somewhere, World"
-        presence="busy"
-        presenceMessage="In a meeting"
         actions={[
           {
             label: 'View profile',

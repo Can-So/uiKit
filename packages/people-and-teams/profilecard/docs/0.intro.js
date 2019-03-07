@@ -87,7 +87,6 @@ class CustomProfileClient extends ProfileClient {
     //   "email": string,
     //   "location": string,
     //   "meta": string,
-    //   "presence": oneOf(["none", "available", "busy", "unavailable"]),
     //   "timestring": string
     // }
 

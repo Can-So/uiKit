@@ -27,9 +27,6 @@ const profiles = [
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
     },
-    Presence: {
-      state: 'available',
-    },
   },
   {
     User: {
@@ -42,9 +39,6 @@ const profiles = [
       remoteTimeString: getTimeString(),
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
-    },
-    Presence: {
-      state: 'unavailable',
     },
   },
   {
@@ -59,9 +53,6 @@ const profiles = [
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
     },
-    Presence: {
-      state: 'unavailable',
-    },
   },
   {
     User: {
@@ -70,9 +61,6 @@ const profiles = [
       nickname: 'crodriquez',
       email: 'crodriquez@slofast.com',
       meta: 'Manager',
-    },
-    Presence: {
-      state: 'available',
     },
   },
   {
@@ -87,9 +75,6 @@ const profiles = [
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
     },
-    Presence: {
-      state: 'unavailable',
-    },
   },
   {
     User: {
@@ -102,9 +87,6 @@ const profiles = [
       remoteTimeString: getTimeString(),
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
-    },
-    Presence: {
-      state: 'busy',
     },
   },
   {
@@ -119,9 +101,6 @@ const profiles = [
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
     },
-    Presence: {
-      state: 'available',
-    },
   },
   {
     User: {
@@ -134,9 +113,6 @@ const profiles = [
       remoteTimeString: getTimeString(),
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
-    },
-    Presence: {
-      state: 'busy',
     },
   },
   {
@@ -151,9 +127,6 @@ const profiles = [
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
     },
-    Presence: {
-      state: 'unavailable',
-    },
   },
   {
     User: {
@@ -167,9 +140,6 @@ const profiles = [
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
     },
-    Presence: {
-      state: 'busy',
-    },
   },
   {
     User: {
@@ -182,9 +152,6 @@ const profiles = [
       remoteTimeString: getTimeString(),
       remoteWeekdayIndex: getWeekday().index,
       remoteWeekdayString: getWeekday().string,
-    },
-    Presence: {
-      state: 'available',
     },
   },
 ];

@@ -12,7 +12,6 @@ import HeightTransitionWrapper from './components/HeightTransitionWrapper';
 import IconLabel from './components/IconLabel';
 import MessagesIntlProvider from './components/MessagesIntlProvider';
 import relativeDate from './relative-date';
-import presences from './internal/presences';
 import messages from './messages';
 
 import type { ProfilecardProps } from './types';
@@ -37,13 +36,11 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
     status: 'active',
     isBot: false,
     isNotMentionable: false,
-    presence: 'none',
     actions: [],
     isLoading: false,
     hasError: false,
     analytics: () => {},
     clientFetchProfile: () => {},
-    presenceMessage: '',
     hasDisabledAccountLozenge: true,
   };
 
@@ -125,8 +122,6 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   renderCardDetailsDefault() {
     const {
       meta,
-      presence,
-      presenceMessage,
       nickname,
       fullName,
       location,
@@ -135,15 +130,10 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
       companyName,
     } = this.props;
 
-    const validPresence = presences[presence || 'none'];
-
     return (
       <DetailsGroup>
         <FullNameLabel noMeta={!meta}>{fullName}</FullNameLabel>
         {meta && <JobTitleLabel>{meta}</JobTitleLabel>}
-        <IconLabel icon={presence}>
-          {(!!validPresence && presenceMessage) || validPresence}
-        </IconLabel>
         <IconLabel icon="email">{email}</IconLabel>
         <IconLabel icon="mention">{nickname && `@${nickname}`}</IconLabel>
         <IconLabel icon="time">{timestring}</IconLabel>
