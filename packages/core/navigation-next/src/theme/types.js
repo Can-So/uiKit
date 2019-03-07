@@ -55,6 +55,7 @@ export type ProductTheme = {
 export type GlobalTheme = {
   mode: Mode,
   context?: string,
+  topOffset?: string,
 };
 
 export type Theme = GlobalTheme | ProductTheme | void;
