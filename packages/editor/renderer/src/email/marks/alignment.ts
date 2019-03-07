@@ -8,10 +8,10 @@ export const emailAlignmentsMap: { [key: string]: string } = {
   center: 'center',
 };
 
-const css = (alignment: AlignmentAttributes) =>
+const css = ({ align }: AlignmentAttributes) =>
   serializeStyle({
     width: '100%',
-    'text-align': emailAlignmentsMap[alignment],
+    'text-align': emailAlignmentsMap[align],
   });
 
 export default function alignment({ mark, text }: MarkSerializerOpts) {
