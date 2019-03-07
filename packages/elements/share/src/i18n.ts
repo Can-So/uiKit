@@ -45,7 +45,7 @@ export const messages = defineMessages({
   },
   copyLinkButtonText: {
     id: 'fabric.elements.share.copylink.button.text',
-    defaultMessage: 'Copy page link',
+    defaultMessage: 'Copy link',
     description: 'Default text for the Copy Link button',
   },
   copiedToClipboardMessage: {
