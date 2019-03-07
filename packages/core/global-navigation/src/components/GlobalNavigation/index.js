@@ -374,12 +374,15 @@ export default class GlobalNavigation extends Component<
   };
 
   renderAtlassianSwitcherDrawerContents = () => {
-    const { product, cloudId } = this.props;
+    // eslint-disable-next-line camelcase
+    const { product, cloudId, experimental_enableSingleJiraLink } = this.props;
     return (
       <AtlassianSwitcher
         product={product}
         cloudId={cloudId}
         triggerXFlow={this.triggerXFlow}
+        // eslint-disable-next-line camelcase
+        enableSingleJiraLink={experimental_enableSingleJiraLink}
       />
     );
   };
