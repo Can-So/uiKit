@@ -5,6 +5,7 @@ import { colors as themeColors } from '@atlaskit/theme';
 import { hexToRgba } from '@atlaskit/editor-common';
 
 import { CollabEditOptions } from './types';
+import { processRawValue } from '../../utils/document';
 
 export interface Color {
   solid: string;
@@ -92,9 +93,20 @@ export const replaceDocument = (
 ) => {
   const { schema, tr } = state;
 
-  const content = (doc.content || []).map(child => schema.nodeFromJSON(child));
+  let content;
+  let hasContent;
+  // This can be default when we fix the unsupported nodes we currently produce.
+  if (options && options.allowUnsupportedContent) {
+    // Process the value coming in, this allows us to wrap blocks unknown to us.
+    // Instead of throwing an error at this point.
+    content = processRawValue(state.schema, doc);
+    hasContent = content;
+  } else {
+    content = (doc.content || []).map(child => schema.nodeFromJSON(child));
+    hasContent = content.length;
+  }
 
-  if (content.length) {
+  if (hasContent) {
     tr.setMeta('addToHistory', false);
     tr.replaceWith(0, state.doc.nodeSize - 2, content);
     tr.setSelection(Selection.atStart(tr.doc));

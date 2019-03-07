@@ -72,26 +72,36 @@ export default class WebBridgeImpl extends WebBridge
       toggleUnderline()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
   onCodeClicked() {
     if (this.textFormatBridgeState && this.editorView) {
       toggleCode()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
   onStrikeClicked() {
     if (this.textFormatBridgeState && this.editorView) {
       toggleStrike()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
   onSuperClicked() {
     if (this.textFormatBridgeState && this.editorView) {
       toggleSuperscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
   onSubClicked() {
     if (this.textFormatBridgeState && this.editorView) {
       toggleSubscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
+
+  onMentionSelect(mention: string) {}
+
+  onMentionPickerResult(result: string) {}
+
+  onMentionPickerDismissed() {}
 
   onStatusUpdate(text: string, color: StatusColor, uuid: string) {
     if (this.statusBridgeState && this.editorView) {
@@ -108,12 +118,6 @@ export default class WebBridgeImpl extends WebBridge
       commitStatusPicker()(this.editorView);
     }
   }
-
-  onMentionSelect(mention: string) {}
-
-  onMentionPickerResult(result: string) {}
-
-  onMentionPickerDismissed() {}
 
   setContent(content: string) {
     if (this.editorActions) {
@@ -151,7 +155,7 @@ export default class WebBridgeImpl extends WebBridge
           payload.preview = {
             dimensions: payload.file.dimensions,
           };
-          this.mediaPicker.emit(eventName, payload);
+          this.mediaPicker.emit('upload-preview-update', payload);
           return;
         }
         case 'upload-end': {
@@ -162,6 +166,7 @@ export default class WebBridgeImpl extends WebBridge
       }
     }
   }
+
   onPromiseResolved(uuid: string, payload: string) {
     resolvePromise(uuid, JSON.parse(payload));
   }
@@ -226,7 +231,7 @@ export default class WebBridgeImpl extends WebBridge
       .forEach(cmd => cmd(this.editorView!.state, dispatch));
   }
 
-  insertBlockType(type) {
+  insertBlockType(type: string) {
     if (!this.editorView) {
       return;
     }

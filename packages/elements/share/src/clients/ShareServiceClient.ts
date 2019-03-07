@@ -1,12 +1,19 @@
 import {
   RequestServiceOptions,
-  utils,
   ServiceConfig,
+  utils,
 } from '@atlaskit/util-service-support';
-import { Content, Comment, MetaData, User } from '../types';
+import { Comment, Content, MetaData, User } from '../types';
 
 export interface ShareClient {
-  share: ShareRequest;
+  share(
+    content: Content,
+    recipients: User[],
+    metadata: MetaData,
+    comment?: Comment,
+  ): Promise<ShareResponse>;
+
+  getConfig(product: string, cloudId: string): Promise<ConfigResponse>;
 }
 
 export type ShareRequest = (
@@ -20,7 +27,21 @@ export type ShareResponse = {
   shareRequestId: string;
 };
 
+export type ConfigResponse = {
+  mode: ConfigResponseMode;
+  allowedDomains?: string[];
+  allowComment: boolean;
+};
+
+export type ConfigResponseMode =
+  | 'EXISTING_USERS_ONLY'
+  | 'INVITE_NEEDS_APPROVAL'
+  | 'ONLY_DOMAIN_BASED_INVITE'
+  | 'DOMAIN_BASED_INVITE'
+  | 'ANYONE';
+
 export const DEFAULT_SHARE_PATH = 'share';
+export const SHARE_CONFIG_PATH = 'share/config';
 // TODO: replace with the real stargate namespace
 export const DEFAULT_SHARE_SERVICE_URL = '/gateway/api';
 
@@ -58,6 +79,15 @@ export class ShareServiceClient implements ShareClient {
       },
     };
 
+    return utils.requestService(this.serviceConfig, options);
+  }
+
+  public getConfig(product: string, cloudId: string): Promise<ConfigResponse> {
+    const options = {
+      path: SHARE_CONFIG_PATH,
+      queryParams: { product, cloudId },
+      requestInit: { method: 'get' },
+    };
     return utils.requestService(this.serviceConfig, options);
   }
 }

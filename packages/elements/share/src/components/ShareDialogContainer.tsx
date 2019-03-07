@@ -2,26 +2,26 @@ import { ButtonAppearances } from '@atlaskit/button';
 import { LoadOptions } from '@atlaskit/user-picker';
 import memoizeOne from 'memoize-one';
 import * as React from 'react';
-import { InvitationsCapabilitiesResource } from '../api/InvitationsCapabilitiesResource';
-import { ShareServiceClient } from '../clients/ShareServiceClient';
 import {
-  Client,
+  ConfigResponse,
+  ShareClient,
+  ShareServiceClient,
+} from '../clients/ShareServiceClient';
+import {
   Content,
   DialogContentState,
-  InvitationsCapabilitiesProvider,
-  InvitationsCapabilitiesResponse,
   MetaData,
   OriginTracing,
   OriginTracingFactory,
   ShareButtonStyle,
-  ShareClient,
   ShareResponse,
 } from '../types';
 import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 import { optionDataToUsers } from './utils';
 
 export type Props = {
-  client?: Client;
+  buttonStyle?: ShareButtonStyle;
+  client?: ShareClient;
   cloudId: string;
   formatCopyLink: (origin: OriginTracing, link: string) => string;
   loadUserOptions: LoadOptions;
@@ -31,14 +31,13 @@ export type Props = {
   shareLink: string;
   shareTitle: string;
   shareFormTitle?: React.ReactNode;
-  shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
   triggerButtonAppearance?: ButtonAppearances;
   triggerButtonStyle?: ShareButtonStyle;
 };
 
 export type State = {
-  capabilities: InvitationsCapabilitiesResponse | undefined;
+  config?: ConfigResponse;
   copyLinkOrigin: OriginTracing | null;
   prevShareLink: string | null;
   shareActionCount: number;
@@ -57,7 +56,7 @@ const memoizedFormatCopyLink: (
  * to ShareDialogTrigger component
  */
 export class ShareDialogContainer extends React.Component<Props, State> {
-  private client: Client;
+  private client: ShareClient;
 
   static defaultProps = {
     shareLink: window && window.location!.href,
@@ -70,18 +69,10 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     if (props.client) {
       this.client = props.client;
     } else {
-      const defaultInvitationsCapabilitiesResource: InvitationsCapabilitiesProvider = new InvitationsCapabilitiesResource(
-        props.cloudId,
-      );
-      const defaultShareSericeClient: ShareClient = new ShareServiceClient();
-      this.client = {
-        getCapabilities: defaultInvitationsCapabilitiesResource.getCapabilities,
-        share: defaultShareSericeClient.share,
-      };
+      this.client = new ShareServiceClient();
     }
 
     this.state = {
-      capabilities: undefined,
       copyLinkOrigin: null,
       prevShareLink: null,
       shareActionCount: 0,
@@ -113,17 +104,15 @@ export class ShareDialogContainer extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.fetchCapabilities();
+    this.fetchConfig();
   }
 
-  fetchCapabilities = () => {
+  fetchConfig = () => {
     this.client
-      .getCapabilities()
-      .then((capabilities: InvitationsCapabilitiesResponse) => {
+      .getConfig(this.props.productId, this.props.cloudId)
+      .then((config: ConfigResponse) => {
         // TODO: Send analytics event
-        this.setState({
-          capabilities,
-        });
+        this.setState({ config });
       })
       .catch(() => {
         // TODO: Send analytics event
@@ -187,7 +176,6 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       loadUserOptions,
       shareLink,
       shareFormTitle,
-      shouldShowCommentField,
       shouldCloseOnEscapePress,
       triggerButtonAppearance,
       triggerButtonStyle,
@@ -195,13 +183,12 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     const copyLink = formatCopyLink(this.state.copyLinkOrigin!, shareLink);
     return (
       <ShareDialogWithTrigger
-        capabilities={this.state.capabilities}
+        config={this.state.config}
         copyLink={copyLink}
         loadUserOptions={loadUserOptions}
         onLinkCopy={this.handleCopyLink}
         onShareSubmit={this.handleSubmitShare}
         shareFormTitle={shareFormTitle}
-        shouldShowCommentField={shouldShowCommentField}
         shouldCloseOnEscapePress={shouldCloseOnEscapePress}
         triggerButtonAppearance={triggerButtonAppearance}
         triggerButtonStyle={triggerButtonStyle}

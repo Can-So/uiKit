@@ -122,7 +122,9 @@ class MediaNode extends Component<
      * Render loading until we do.
      */
     const isMobile = editorAppearance === 'mobile';
-    let isMobileReady = isMobile ? typeof collection === 'string' : true;
+    let isMobileReady = isMobile
+      ? typeof collection === 'string' && collection.length > 0
+      : true;
 
     if (type !== 'external' && (!viewContext || !isMobileReady)) {
       return <CardView status="loading" dimensions={cardDimensions} />;
