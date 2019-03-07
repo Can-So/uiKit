@@ -2,13 +2,13 @@ import * as React from 'react';
 import Switcher from './switcher';
 import CommonDataProvider from '../providers/common-data-provider';
 import { getSuggestedProductLink } from '../utils/links';
-import { Product } from '../types';
+import { FeatureFlagProps, Product } from '../types';
 
-interface GenericSwitcherProps {
+type GenericSwitcherProps = {
   cloudId: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
   product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>;
-}
+} & FeatureFlagProps;
 
 const emptyCustomLink = {
   data: null,

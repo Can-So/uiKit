@@ -13,7 +13,7 @@ type AtlassianSwitcherProps = {
   product: string;
   cloudId: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
-} & FeatureFlagProps;
+} & Partial<FeatureFlagProps>;
 
 const getAnalyticsContext = (props: { [key: string]: any }) => ({
   source: 'atlassianSwitcher',
@@ -34,6 +34,7 @@ const AtlassianSwitcher = ({
   product,
   cloudId,
   triggerXFlow,
+  enableSingleJiraLink = false,
   ...props
 }: AtlassianSwitcherProps) => {
   let switcher: React.ReactNode;
@@ -43,6 +44,7 @@ const AtlassianSwitcher = ({
         <JiraSwitcher
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}
+          enableSingleJiraLink={enableSingleJiraLink}
           {...props}
         />
       );
@@ -52,6 +54,7 @@ const AtlassianSwitcher = ({
         <ConfluenceSwitcher
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}
+          enableSingleJiraLink={enableSingleJiraLink}
           {...props}
         />
       );
@@ -65,6 +68,7 @@ const AtlassianSwitcher = ({
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}
           product={product}
+          enableSingleJiraLink={enableSingleJiraLink}
           {...props}
         />
       );
@@ -85,10 +89,6 @@ const AtlassianSwitcher = ({
       </NavigationAnalyticsContext>
     </ErrorBoundary>
   );
-};
-
-AtlassianSwitcher.defaultProps = {
-  enableSingleJiraLink: false,
 };
 
 export default AtlassianSwitcher;
