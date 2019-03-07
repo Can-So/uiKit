@@ -1,5 +1,10 @@
 # @atlaskit/editor-test-helpers
 
+## 7.0.4
+- [patch] [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
+
+  - ED-6286: remove StateManager from media plugin and provider
+
 ## 7.0.3
 - [patch] [7a8d8ba656](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a8d8ba656):
 
