@@ -74,7 +74,7 @@ const ORIGINAL_MOCK_DATA: MockData = {
   CUSTOM_LINKS_DATA: [
     {
       key: 'home',
-      link: 'https://some-random-instance.atlassian.net/secure',
+      link: 'https://some-random-instance.atlassian.net/secure/MyJiraHome.jspa',
       label: 'Jira',
       local: true,
       self: false,
@@ -82,7 +82,7 @@ const ORIGINAL_MOCK_DATA: MockData = {
     },
     {
       key: 'home',
-      link: 'https://some-random-instance.atlassian.net/wiki',
+      link: 'https://some-random-instance.atlassian.net/wiki/',
       label: 'Confluence',
       local: true,
       self: false,
