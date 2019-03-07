@@ -11,8 +11,9 @@ import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 /* Url to test the example */
 const urlFormCreateRepo = getExampleUrl('core', 'form', 'create-repository');
+const urlTextFields = getExampleUrl('core', 'form', 'text-fields');
 
-/* Css selectors used for the test */
+/* Css selectors used for the repository form test */
 const createForm = 'form[name="create-repo"]';
 const owner = 'div#owner-select';
 const project = 'div#project-select';
@@ -21,6 +22,11 @@ const accessLevel = 'input[type="checkbox"][name="access-level"]';
 const includeReadme = 'div#include-readme-select';
 const createRepoBtn = 'button[type="submit"]#create-repo-button';
 const cancelBtn = 'button[type="button"]#create-repo-cancel';
+
+/** Css selectors used for the text fields test */
+const textFieldsForm = 'form[name="text-fields"]';
+const textFieldsTextarea = 'textarea[name="description"]';
+const textFieldsTextField = 'input[name="firstname"]';
 
 BrowserTestCase(
   'Create repository form should render without errors',
@@ -43,6 +49,20 @@ BrowserTestCase(
     expect(includeReadmeIsVisible).toBe(true);
     expect(createRepoBtnIsVisible).toBe(true);
     expect(cancelBtnIsVisible).toBe(true);
+    await formTest.checkConsoleErrors();
+  },
+);
+
+BrowserTestCase(
+  'Pressing ctrl + enter in the text area in the text fields form should put focus on invalid field',
+  { skip: [] },
+  async client => {
+    const formTest = new Page(client);
+    await formTest.goto(urlTextFields);
+    await formTest.waitForSelector(textFieldsForm);
+    await formTest.click(textFieldsTextarea);
+    await formTest.keys(['Control', 'Enter']);
+    expect(await formTest.hasFocus(textFieldsTextField)).toBe(true);
     await formTest.checkConsoleErrors();
   },
 );
