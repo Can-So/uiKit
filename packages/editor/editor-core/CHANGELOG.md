@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 102.2.2
+- [patch] [06c4a70a2e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06c4a70a2e):
+
+  - ED-6031: Dont reset selection if editor still has focus.
+
 ## 102.2.1
 - [patch] [c427333c46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c427333c46):
 

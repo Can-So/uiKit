@@ -1,1 +1,0 @@
-- ED-6031: Dont reset selection if editor still has focus.
