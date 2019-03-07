@@ -1,6 +1,7 @@
 import { Page } from './_types';
 export const selectors = {
   editor: '.ProseMirror',
+  scrollContainer: '.fabric-editor-popup-scroll-parent',
   dropList: 'div[data-role="droplistContent"]',
   emojiPicker: 'div[data-emoji-picker-container="true"]',
   mentionQuery: 'span[data-type-ahead-query]',
