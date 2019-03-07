@@ -195,11 +195,11 @@ export type GlobalNavigationProps = {
   /**
     NOTE: This property is experimental and may be removed in a minor release.
 
-    Feature flag for Atlassian Switcher, whether to enable consolidation of
-    all jira products link into 1 link in atlassian switcher
-    e.g. instead of showing Jira Software and Jira Service Desk links; shows only Jira link
+    Feature flag for Atlassian Switcher, whether to enable multiple link of
+    each jira products in atlassian switcher
+    e.g. instead of showing only Jira link, shows Jira Software and Jira Service Desk links
   */
-  experimental_enableSingleJiraLink?: boolean,
+  experimental_enableSplitJira?: boolean,
 
   ...$Exact<GlobalNavDrawerProps>,
 };
