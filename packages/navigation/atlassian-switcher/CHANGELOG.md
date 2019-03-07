@@ -1,5 +1,10 @@
 # @atlaskit/atlassian-switcher
 
+## 0.1.0
+- [minor] [6ee7b60c4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ee7b60c4a):
+
+  - Create generic switcher for satellite products
+
 ## 0.0.9
 - [patch] [e7fa9e1308](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7fa9e1308):
 

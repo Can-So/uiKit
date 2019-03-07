@@ -10,9 +10,9 @@ import styled from 'styled-components';
 import { messages } from '../i18n';
 import {
   Comment,
+  ConfigResponse,
   DialogContentState,
   FormChildrenArgs,
-  InvitationsCapabilitiesResponse,
 } from '../types';
 import { CommentField } from './CommentField';
 import { CopyLinkButton } from './CopyLinkButton';
@@ -40,7 +40,7 @@ export type ShareData = {
 
 export type Props = {
   capabilitiesInfoMessage?: React.ReactNode;
-  capabilities?: InvitationsCapabilitiesResponse;
+  config?: ConfigResponse;
   copyLink: string;
   isSharing?: boolean;
   loadOptions?: LoadOptions;
@@ -73,7 +73,7 @@ class InternalForm extends React.PureComponent<InternalFormProps> {
       copyLink,
       submitButtonLabel,
       defaultValue,
-      capabilities,
+      config,
       shareError,
       isSharing,
     } = this.props;
@@ -85,9 +85,11 @@ class InternalForm extends React.PureComponent<InternalFormProps> {
             loadOptions={loadOptions}
             defaultValue={defaultValue && defaultValue.users}
             capabilitiesInfoMessage={capabilitiesInfoMessage}
-            capabilities={capabilities}
+            config={config}
           />
-          <CommentField defaultValue={defaultValue && defaultValue.comment} />
+          {config && config.allowComment && (
+            <CommentField defaultValue={defaultValue && defaultValue.comment} />
+          )}
         </FormSection>
         <FormFooter>
           <LeftAlignmentContainer>

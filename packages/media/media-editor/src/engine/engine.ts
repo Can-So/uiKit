@@ -1,4 +1,4 @@
-import * as Core from './core/binaries/mediaEditor';
+import Core from './core/binaries/mediaEditor';
 import { ExportedImage, ShapeParameters, TextDirection, Tool } from '../common';
 import { ResourceManager } from './resourceManager';
 
@@ -65,7 +65,8 @@ export class Engine {
         const image = this.bitmapExporter.getBase64Image(
           format || defaultFormat,
         );
-        return { isExported: true, content: image };
+        const dimensions = this.bitmapExporter.getDimensions();
+        return { isExported: true, content: image, dimensions };
       }
     } catch (error) {
       return { isExported: false, error: error.message };

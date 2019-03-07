@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.16.2
+- [patch] [83e94783d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/83e94783d0):
+
+  - fix onclick to advanced search
+
 ## 5.16.1
 - [patch] [707e08ecf8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/707e08ecf8):
 

@@ -1,5 +1,5 @@
 import { TextDirection } from '../../../common';
-import * as Core from '../binaries/mediaEditor';
+import Core from '../binaries/mediaEditor';
 import { FontInfo, FontMetrics } from './fontInfo';
 import { Fragment, FragmentPosition } from './fragment';
 import { Paragraph } from './paragraph';

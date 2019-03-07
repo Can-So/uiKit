@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 7.2.2
+- [patch] [39850f9615](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/39850f9615):
+
+  - Popup select set focus to selected option, instead of the first option, when the menu opens
+
 ## 7.2.1
 - [patch] [37c2eeec43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37c2eeec43):
 

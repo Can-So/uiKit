@@ -1,6 +1,7 @@
 import { FileState } from '../fileState';
 import { LRUCache } from 'lru-fast';
 import { Observable } from 'rxjs/Observable';
+import { observableToPromise } from '../utils/observableToPromise';
 
 export class FileStreamCache {
   private readonly fileStreams: LRUCache<string, Observable<FileState>>;
@@ -23,7 +24,7 @@ export class FileStreamCache {
     const deferred = this.stateDeferreds.get(id);
 
     if (deferred) {
-      fileStream.toPromise().then(state => {
+      observableToPromise(fileStream).then(state => {
         deferred.resolve(state);
       });
     }
@@ -37,7 +38,7 @@ export class FileStreamCache {
     const state = this.get(id);
 
     if (state) {
-      return state.toPromise();
+      return observableToPromise(state);
     }
     const deferred = this.stateDeferreds.get(id);
     if (deferred) {
