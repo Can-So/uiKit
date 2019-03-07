@@ -16,8 +16,8 @@ const customTextStyle = {
 const createSingleLineTextInput = props => (
   <SingleLineTextInput
     readOnly={false}
-    onChange={console.log('onChange')}
-    onConfirm={console.log('onConfirm')}
+    onChange={() => console.log('onChange')}
+    onConfirm={() => console.log('onConfirm')}
     isEditing={false}
     {...props}
   />
