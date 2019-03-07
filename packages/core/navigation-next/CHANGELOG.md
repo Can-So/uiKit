@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.4.0
+- [minor] [8ebfb7165d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ebfb7165d):
+
+  - New props: topOffset - The top offset value to be used in navigation
+
 ## 4.3.1
 - [patch] [5cf4e22048](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5cf4e22048):
 
