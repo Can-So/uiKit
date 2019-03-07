@@ -1,0 +1,1 @@
+- ED-6374: Switch to MutationObserver instead of rAF + nodeview update for handling breakout content inside a table cell.

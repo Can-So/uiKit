@@ -2,10 +2,8 @@ import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Node as PmNode } from 'prosemirror-model';
 import { EditorView, NodeView } from 'prosemirror-view';
-import { findParentNodeOfType } from 'prosemirror-utils';
 import { setCellAttrs } from '@atlaskit/adf-schema';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import rafSchedule from 'raf-schd';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import ToolbarButton from '../../../ui/ToolbarButton';
@@ -24,9 +22,6 @@ import {
   EditorDisabledPluginState,
   pluginKey as editorDisabledPluginKey,
 } from '../../editor-disabled';
-
-import { contentWidth } from '../pm-plugins/table-resizing/resizer/contentWidth';
-import { handleBreakoutContent } from '../pm-plugins/table-resizing/actions';
 
 export interface CellViewProps {
   node: PmNode;
@@ -171,51 +166,6 @@ class CellView extends ReactNodeView {
     }
     return false;
   }
-
-  update(node, decorations) {
-    this.handleBreakoutContentDebounced(node);
-    return super.update(node, decorations);
-  }
-
-  private handleBreakoutContent = (node: PmNode) => {
-    if (!this.contentDOM || node.attrs.colwidth === null) {
-      return;
-    }
-
-    const elem = this.contentDOM as HTMLElement;
-    const table = findParentNodeOfType(this.view.state.schema.nodes.table)(
-      this.view.state.selection,
-    );
-
-    if (!table) {
-      return;
-    }
-
-    const elemOrWrapper =
-      closestElement(
-        elem,
-        `.${ClassName.TABLE_HEADER_NODE_WRAPPER}, .${
-          ClassName.TABLE_CELL_NODE_WRAPPER
-        }`,
-      ) || elem;
-    const { minWidth } = contentWidth(elem, elem);
-
-    if (table && elemOrWrapper && elemOrWrapper.offsetWidth < minWidth) {
-      const cellPos = this.getPos();
-      handleBreakoutContent(
-        this.view,
-        elemOrWrapper,
-        cellPos,
-        table.pos + 1,
-        minWidth,
-        table.node,
-      );
-    }
-  };
-
-  private handleBreakoutContentDebounced = rafSchedule(
-    this.handleBreakoutContent,
-  );
 }
 
 export const createCellView = (

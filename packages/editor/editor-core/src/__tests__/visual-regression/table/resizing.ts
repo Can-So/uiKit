@@ -131,7 +131,7 @@ describe('Snapshot Test: table breakout content', () => {
   it(`should resize the column based on the content`, async () => {
     const selector = getSelectorForTableCell({ row: 2, cell: 1 });
     await page.click(selector);
-    await clickBlockMenuItem(page, BlockMenuItem.date);
+    await clickBlockMenuItem(page, BlockMenuItem.blockExtension);
     await page.keyboard.press(KeyboardKeys.enter);
     await snapshot(page);
   });
