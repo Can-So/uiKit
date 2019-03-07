@@ -55,7 +55,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'Pressing ctrl + enter in the text area in the text fields form should put focus on invalid field',
-  { skip: [] },
+  { skip: ['ie'] },
   async client => {
     const formTest = new Page(client);
     await formTest.goto(urlTextFields);
