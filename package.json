@@ -1,7 +1,7 @@
 {
   "name": "@atlaskit/fabric",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Fabric components for Atlassian's Atlaskit",
   "main": "index.js",
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
@@ -41,7 +41,6 @@
     "test:webdriver:browserstack:changed": " CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) yarn test:webdriver:browserstack",
     "test:vr": "                             node ./build/visual-regression/index.js",
     "test:vr:changed": "                     CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) yarn test:vr",
-    "test:vr:dependents": "                  CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js --dependents='direct') yarn test:vr",
     "lint": "                                yarn run lint:eslint && yarn run lint:tslint && yarn run lint:stylelint",
     "lint:stylelint": "                      stylelint '**/*.{js,ts,tsx}'",
     "lint:eslint": "                         eslint --print-config .eslintrc.json | eslint-config-prettier-check && eslint '**/*.js'",
