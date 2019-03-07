@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 102.2.0
+- [minor] [4a9a7487f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a9a7487f1):
+
+  - ED-6240 Add Analytics GAS V3 for insert new line
+
 ## 102.1.10
 - Updated dependencies [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
   - @atlaskit/renderer@41.1.1
