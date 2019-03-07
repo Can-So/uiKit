@@ -25,7 +25,11 @@ import {
   insertColgroupFromNode as recreateResizeColsByNode,
 } from '../../utils';
 import { closestElement } from '../../../../utils';
-import { getLayoutSize, tableLayoutToSize } from './utils';
+import {
+  getLayoutSize,
+  getDefaultLayoutMaxWidth,
+  tableLayoutToSize,
+} from './utils';
 
 export function updateColumnWidth(view, cell, movedWidth, resizer) {
   let $cell = view.state.doc.resolve(cell);
@@ -289,10 +293,19 @@ function scale(
   initialScale?: boolean,
   dynamicTextSizing?: boolean,
 ): ResizeState | undefined {
-  const maxSize = getLayoutSize(node.attrs.layout, containerWidth);
+  const maxSize = getLayoutSize(
+    node.attrs.layout,
+    containerWidth,
+    dynamicTextSizing,
+  );
 
-  let prevTableWidth = getTableWidth(prevNode);
-  let previousMaxSize = tableLayoutToSize[prevNode.attrs.layout];
+  const prevTableWidth = getTableWidth(prevNode);
+  const previousLayout = prevNode.attrs.layout;
+
+  let previousMaxSize = tableLayoutToSize[previousLayout];
+  if (dynamicTextSizing && previousLayout === 'default') {
+    previousMaxSize = getDefaultLayoutMaxWidth(containerWidth);
+  }
 
   if (!initialScale) {
     previousMaxSize = getLayoutSize(

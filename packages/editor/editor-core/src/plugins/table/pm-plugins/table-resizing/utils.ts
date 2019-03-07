@@ -31,10 +31,14 @@ export function getLayoutSize(
   }
 
   if (dynamicTextSizing && tableLayout === 'default') {
-    return mapBreakpointToLayoutMaxWidth(getBreakpoint(containerWidth));
+    return getDefaultLayoutMaxWidth(containerWidth);
   }
 
   return tableLayoutToSize[tableLayout] || containerWidth;
+}
+
+export function getDefaultLayoutMaxWidth(containerWidth) {
+  return mapBreakpointToLayoutMaxWidth(getBreakpoint(containerWidth));
 }
 
 /**
