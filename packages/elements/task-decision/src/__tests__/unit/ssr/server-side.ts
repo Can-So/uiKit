@@ -7,7 +7,7 @@ import { blackList } from './_ssr-config';
 describe('server side rendering', () => {
   const ssrHelper = new SSRHelper({ blackList });
 
-  test('emoji server side rendering', async () => {
-    await ssrHelper.renderSSRAndAssert('emoji');
+  test('task-decision server side rendering', async () => {
+    await ssrHelper.renderSSRAndAssert('task-decision');
   });
 });

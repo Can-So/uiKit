@@ -102,8 +102,9 @@ export class TaskItem extends PureComponent<
           onChange={this.handleOnChange}
           checked={!!isDone}
           disabled={!!disabled}
+          suppressHydrationWarning={true}
         />
-        <label htmlFor={this.checkBoxId} />
+        <label htmlFor={this.checkBoxId} suppressHydrationWarning={true} />
       </CheckBoxWrapper>
     );
 

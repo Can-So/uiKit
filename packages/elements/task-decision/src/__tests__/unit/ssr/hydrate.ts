@@ -6,6 +6,6 @@ describe('server side rendering - hydrate', () => {
   const ssrHelper = new SSRHydrationHelper({ blackList });
 
   test('should ssr then hydrate tag correctly', async () => {
-    await ssrHelper.hydrateSSRAndAssert('emoji');
+    await ssrHelper.hydrateSSRAndAssert('task-decision');
   });
 });
