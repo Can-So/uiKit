@@ -3,13 +3,19 @@ import styled from 'styled-components';
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes, ComponentClass } from 'react';
 import { fontSize } from '@atlaskit/theme';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { colors, borderRadius, themed } from '@atlaskit/theme';
 
 export const padding = 8;
 
 export const Wrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
-  background: ${colors.N20};
+  background: ${themed({
+    light: colors.N20,
+    dark: colors.DN50,
+  })};
   border-radius: ${borderRadius()}px;
+  color: ${themed({
+    dark: colors.DN700,
+  })};
   position: relative;
   vertical-align: middle;
   font-size: ${fontSize()}px;

@@ -1,4 +1,9 @@
-export function error(message, input, line, column) {
+export function error(
+  message: string,
+  input: string,
+  line: number,
+  column: number,
+) {
   throw createError({
     message,
     line,
@@ -6,7 +11,7 @@ export function error(message, input, line, column) {
   });
 }
 
-function createError(props) {
+function createError(props: any) {
   const err = Object.create(SyntaxError.prototype);
 
   Object.assign(err, props, {

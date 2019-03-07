@@ -13,6 +13,10 @@ function isNodeOrFragment(thing: any): thing is Node | Fragment {
   return thing && typeof thing.eq === 'function';
 }
 
+function isNode(thing: any): thing is Node {
+  return thing && thing.type && thing.type.schema;
+}
+
 function isSlice(thing: any): thing is Slice {
   return (
     typeof thing.openStart === 'number' &&
@@ -41,12 +45,8 @@ export default (chai: any) => {
         //
         // Also it fixes issues that happens sometimes when actual schema and expected schema
         // are different objects, making this case impossible by always using actual schema to create expected node.
-        if (
-          typeof right === 'function' &&
-          left['type'] &&
-          left['type'].schema
-        ) {
-          right = right(left['type'].schema);
+        if (typeof right === 'function' && isNode(left)) {
+          right = right(left.type.schema);
         }
 
         this.assert(

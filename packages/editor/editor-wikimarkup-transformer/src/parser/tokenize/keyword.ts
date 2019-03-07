@@ -1,7 +1,12 @@
 import { TokenType } from './';
 import { EMOJIS } from './emoji';
 
-const macroKeywordTokenMap = [
+interface KeywordToken {
+  type: TokenType;
+  regex: RegExp;
+}
+
+const macroKeywordTokenMap: KeywordToken[] = [
   {
     type: TokenType.ADF_MACRO,
     regex: /^{adf/i,
@@ -40,7 +45,7 @@ const macroKeywordTokenMap = [
  * The order of this mapping determind which keyword
  * will be checked first, so it matters.
  */
-const keywordTokenMap = {
+const keywordTokenMap: { [key: string]: TokenType } = {
   '[': TokenType.LINK_FORMAT,
   http: TokenType.LINK_TEXT,
   irc: TokenType.LINK_TEXT,
@@ -75,7 +80,7 @@ export function parseMacroKeyword(input: string) {
   return null;
 }
 
-export function parseOtherKeyword(input: string) {
+export function parseOtherKeyword(input: string): { type: TokenType } | null {
   for (const name in keywordTokenMap) {
     if (keywordTokenMap.hasOwnProperty(name) && input.startsWith(name)) {
       return {
@@ -107,7 +112,7 @@ export function parseOtherKeyword(input: string) {
  * The order of the mapping matters. We should not put
  * LIST in front of RULER for example.
  */
-const leadingKeywordTokenMap = [
+const leadingKeywordTokenMap: KeywordToken[] = [
   {
     type: TokenType.QUOTE,
     regex: /^bq\./,
@@ -145,6 +150,16 @@ export function parseLeadingKeyword(input: string) {
         type: keyword.type,
       };
     }
+  }
+
+  return null;
+}
+
+export function parseIssueKeyword(input: string, issueKeyRegex?: RegExp) {
+  if (issueKeyRegex && issueKeyRegex.test(input)) {
+    return {
+      type: TokenType.ISSUE_KEY,
+    };
   }
 
   return null;

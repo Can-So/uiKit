@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/atlassian-switcher",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
@@ -19,6 +19,10 @@
     "Harsha Ivaturi"
   ],
   "dependencies": {
+    "@atlaskit/analytics-gas-types": "^3.2.4",
+    "@atlaskit/analytics-namespaced-context": "^2.2.0",
+    "@atlaskit/analytics-next": "^3.2.1",
+    "@atlaskit/analytics-next-types": "^3.2.0",
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/item": "^8.0.14",

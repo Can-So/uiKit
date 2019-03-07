@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import InlineExtension from '../../../../react/nodes/inlineExtension';
 import { RendererContext } from '../../../../react';
 import ReactSerializer from '../../../../react';
@@ -80,7 +79,7 @@ describe('Renderer - React/Nodes/InlineExtension', () => {
         .find('span')
         .first()
         .text(),
-    ).to.equal('This is the default text');
+    ).toEqual('This is the default text');
     extension.unmount();
   });
 
@@ -100,7 +99,7 @@ describe('Renderer - React/Nodes/InlineExtension', () => {
         .find('span')
         .first()
         .text(),
-    ).to.equal('This is a react element');
+    ).toEqual('This is a react element');
     extension.unmount();
   });
 
@@ -120,7 +119,7 @@ describe('Renderer - React/Nodes/InlineExtension', () => {
         .find('span')
         .first()
         .text(),
-    ).to.equal('This is a ADF node');
+    ).toEqual('This is a ADF node');
     extension.unmount();
   });
 
@@ -140,7 +139,7 @@ describe('Renderer - React/Nodes/InlineExtension', () => {
         .find('span')
         .first()
         .text(),
-    ).to.equal('inlineExtension');
+    ).toEqual('inlineExtension');
     extension.unmount();
   });
 
@@ -160,7 +159,7 @@ describe('Renderer - React/Nodes/InlineExtension', () => {
       />,
     );
 
-    expect(extensionHandler.mock.calls[0][0]).to.eql({
+    expect(extensionHandler.mock.calls[0][0]).toEqual({
       type: 'inlineExtension',
       extensionType: 'com.atlassian.fabric',
       extensionKey: 'react',

@@ -12,7 +12,7 @@ export interface EmojiProps extends EmojiId {
 export default class EmojiNode extends PureComponent<EmojiProps, {}> {
   private providerFactory: ProviderFactory;
 
-  constructor(props) {
+  constructor(props: EmojiProps) {
     super(props);
     this.providerFactory = props.providers || new ProviderFactory();
   }
@@ -25,7 +25,7 @@ export default class EmojiNode extends PureComponent<EmojiProps, {}> {
     }
   }
 
-  private renderWithProvider = providers => {
+  private renderWithProvider = (providers: Record<string, Promise<any>>) => {
     const {
       allowTextFallback,
       shortName,

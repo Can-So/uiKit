@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Lozenge from '@atlaskit/lozenge';
 import ToolsDrawer from '../example-helpers/ToolsDrawer';
-import { Editor, EditorContext, getPropsPreset, mediaPluginKey } from '../src';
+import { Editor, EditorContext, mediaPluginKey } from '../src';
 import WithPluginState from '../src/ui/WithPluginState';
 import { pluginKey as typeAheadPluginKey } from '../src/plugins/type-ahead/pm-plugins/main';
 
@@ -56,7 +56,6 @@ export default function Example() {
             onChange,
           }) => (
             <Editor
-              {...getPropsPreset('message')}
               analyticsHandler={analyticsHandler}
               disabled={disabled}
               mediaProvider={mediaProvider}

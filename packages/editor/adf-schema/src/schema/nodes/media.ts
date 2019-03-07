@@ -40,9 +40,6 @@ export interface MediaBaseAttributes {
   __fileMimeType?: string | null;
   // For JIRA
   __displayType?: DisplayType | null;
-
-  // Need this until there is actual "upfront" media ID
-  __key?: string | null;
 }
 
 export interface MediaAttributes extends MediaBaseAttributes {
@@ -52,13 +49,7 @@ export interface MediaAttributes extends MediaBaseAttributes {
 export interface ExternalMediaAttributes {
   type: 'external';
   url: string;
-  /**
-   * @type integer
-   */
   width?: number;
-  /**
-   * @type integer
-   */
   height?: number;
 }
 
@@ -76,7 +67,6 @@ export const defaultAttrs: DefaultAttributes<
   __fileSize: { default: null },
   __fileMimeType: { default: null },
   __displayType: { default: null },
-  __key: { default: null },
 };
 
 export const media: NodeSpec = {

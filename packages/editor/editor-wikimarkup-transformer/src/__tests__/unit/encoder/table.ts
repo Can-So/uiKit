@@ -124,4 +124,21 @@ describe('ADF => WikiMarkup - Table', () => {
     )(defaultSchema);
     expect(transformer.encode(node)).toMatchSnapshot();
   });
+
+  test('should convert advanced Table node into {adf} macro', () => {
+    const node = doc(
+      table()(
+        tr(
+          td({ colspan: 2 })(
+            code_block({ language: 'javascript' })('const i = 0;'),
+          ),
+        ),
+        tr(
+          td()(code_block({ language: 'javascript' })('const i = 0;')),
+          td()(code_block({ language: 'javascript' })('const i = 0;')),
+        ),
+      ),
+    )(defaultSchema);
+    expect(transformer.encode(node)).toMatchSnapshot();
+  });
 });

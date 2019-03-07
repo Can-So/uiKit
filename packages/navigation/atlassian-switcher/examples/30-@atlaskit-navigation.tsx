@@ -5,10 +5,11 @@ import Tooltip from '@atlaskit/tooltip';
 import SwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
 import { colors } from '@atlaskit/theme';
 import AkDrawer from '@atlaskit/drawer';
-import ConfluenceSwitcher from '../src/components/confluence-switcher';
 import { mockEndpoints } from './helpers/mock-endpoints';
+import { withAnalyticsLogger } from './helpers';
+import AtlassianSwitcher from '../src';
 
-export default class ConfluenceSwitcherExample extends Component {
+class ConfluenceSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -26,8 +27,10 @@ export default class ConfluenceSwitcherExample extends Component {
     });
   };
 
-  onTriggerXFlow = (productKey: string) => {
-    console.log(`Triggering xflow for => ${productKey}`);
+  onTriggerXFlow = (productKey: string, sourceComponent: string) => {
+    console.log(
+      `Triggering xflow for => ${productKey} from ${sourceComponent}`,
+    );
   };
 
   render() {
@@ -39,7 +42,8 @@ export default class ConfluenceSwitcherExample extends Component {
             isOpen={this.state.isDrawerOpen}
             onClose={this.onClose}
           >
-            <ConfluenceSwitcher
+            <AtlassianSwitcher
+              product="confluence"
               cloudId="some-cloud-id"
               triggerXFlow={this.onTriggerXFlow}
             />
@@ -63,3 +67,5 @@ export default class ConfluenceSwitcherExample extends Component {
     );
   }
 }
+
+export default withAnalyticsLogger(ConfluenceSwitcherExample);

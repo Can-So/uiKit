@@ -8,6 +8,7 @@ import {
   PromiseBridge,
   ListBridge,
   StatusBridge,
+  LinkBridge,
 } from './bridge';
 
 import { sendToBridge } from '../../bridge-utils';
@@ -19,6 +20,7 @@ export default class AndroidBridge implements NativeBridge {
   promiseBridge: PromiseBridge;
   listBridge: ListBridge;
   statusBridge: StatusBridge;
+  linkBridge: LinkBridge;
 
   constructor() {
     this.mentionBridge = window.mentionsBridge as MentionBridge;
@@ -27,6 +29,7 @@ export default class AndroidBridge implements NativeBridge {
     this.promiseBridge = window.promiseBridge as PromiseBridge;
     this.listBridge = window.listBridge as ListBridge;
     this.statusBridge = window.statusBridge as StatusBridge;
+    this.linkBridge = window.linkBridge as LinkBridge;
   }
 
   showMentions(query: String) {
@@ -76,6 +79,10 @@ export default class AndroidBridge implements NativeBridge {
 
   dismissStatusPicker(isNew: boolean) {
     this.statusBridge.dismissStatusPicker(isNew);
+  }
+
+  currentSelection(text: string, url: string) {
+    this.linkBridge.currentSelection(text, url);
   }
 
   call<T extends EditorPluginBridges>(

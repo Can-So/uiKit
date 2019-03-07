@@ -1,5 +1,25 @@
 # @atlaskit/global-navigation
 
+## 5.7.6
+- Updated dependencies [6ee7b60c4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ee7b60c4a):
+  - @atlaskit/atlassian-switcher@0.1.0
+
+## 5.7.5
+- Updated dependencies [e7fa9e1308](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7fa9e1308):
+  - @atlaskit/atlassian-switcher@0.0.9
+
+## 5.7.4
+- Updated dependencies [ebfdf1e915](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebfdf1e915):
+  - @atlaskit/atlassian-switcher@0.0.8
+
+## 5.7.3
+- Updated dependencies [8a70a0db9f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a70a0db9f):
+  - @atlaskit/atlassian-switcher@0.0.7
+
+## 5.7.2
+- Updated dependencies [3437ac9990](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3437ac9990):
+  - @atlaskit/atlassian-switcher@0.0.6
+
 ## 5.7.1
 - [patch] [9184dbf08b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9184dbf08b):
 

@@ -80,7 +80,7 @@ describe('Fetcher', () => {
       it('should pass rating=pg as a query parameter', () => {
         const offset = 0;
         const fetcher = new MediaApiFetcher();
-        fetchMock.get('*', {});
+        fetchMock.get('*', response);
         fetcher.fetchTrendingGifs(offset);
 
         expect(fetchMock.lastUrl()).toContain('rating=pg');
@@ -89,7 +89,7 @@ describe('Fetcher', () => {
       it('should append passed in offset to the query string when it is greater than 0', () => {
         const offset = 25;
         const fetcher = new MediaApiFetcher();
-        fetchMock.get('*', {});
+        fetchMock.get('*', response);
         fetcher.fetchTrendingGifs(offset);
         expect(fetchMock.lastUrl()).toContain(`offset=${offset}`);
       });
@@ -123,7 +123,7 @@ describe('Fetcher', () => {
       it('should pass rating=pg as a query parameter', () => {
         const queryString = 'some-gif-search';
         const fetcher = new MediaApiFetcher();
-        fetchMock.get('*', {});
+        fetchMock.get('*', response);
         fetcher.fetchGifsRelevantToSearch(queryString);
 
         expect(fetchMock.lastUrl()).toContain('rating=pg');
@@ -132,7 +132,7 @@ describe('Fetcher', () => {
       it('should append passed in query string to the queried url', () => {
         const queryString = 'some-gif-search';
         const fetcher = new MediaApiFetcher();
-        fetchMock.get('*', {});
+        fetchMock.get('*', response);
         fetcher.fetchGifsRelevantToSearch(queryString);
         expect(fetchMock.lastUrl()).toContain(`q=${queryString}`);
       });
@@ -141,7 +141,7 @@ describe('Fetcher', () => {
         const queryString = 'some-gif-search';
         const offset = 25;
         const fetcher = new MediaApiFetcher();
-        fetchMock.get('*', {});
+        fetchMock.get('*', response);
         fetcher.fetchGifsRelevantToSearch(queryString, offset);
         expect(fetchMock.lastUrl()).toContain(`offset=${offset}`);
       });

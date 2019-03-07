@@ -3,12 +3,13 @@ import { userPickerData } from '@atlaskit/util-data-test';
 import * as React from 'react';
 import { ShareDialogContainer } from '../src';
 import {
-  Client,
   Comment,
+  ConfigResponse,
   Content,
   KeysOfType,
   MetaData,
   OriginTracing,
+  ShareClient,
   User,
 } from '../src/types';
 
@@ -62,18 +63,12 @@ const loadUserOptions = (searchText?: string): OptionData[] => {
     });
 };
 
-const client: Client = {
-  getCapabilities: () =>
-    Promise.resolve({
-      directInvite: {
-        mode: 'DOMAIN_RESTRICTED' as 'DOMAIN_RESTRICTED',
-        domains: ['atlassian.com'],
-        permittedResources: [],
-      },
-      invitePendingApproval: {
-        mode: 'NONE' as 'NONE',
-        permittedResources: [],
-      },
+const client: ShareClient = {
+  getConfig: () =>
+    Promise.resolve<ConfigResponse>({
+      mode: 'DOMAIN_BASED_INVITE',
+      allowedDomains: ['atlassian.com'],
+      allowComment: true,
     }),
   share: (
     _content: Content,
@@ -95,7 +90,6 @@ const client: Client = {
 
 export default () => (
   <ShareDialogContainer
-    buttonStyle="icon-with-text"
     client={client}
     cloudId="12345-12345-12345-12345"
     loadUserOptions={loadUserOptions}
@@ -104,5 +98,6 @@ export default () => (
     shareAri="ari"
     shareLink={window.location.href}
     shareTitle="My Share"
+    triggerButtonStyle="icon-with-text"
   />
 );

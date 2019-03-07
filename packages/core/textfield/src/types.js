@@ -61,7 +61,7 @@ export type TextFieldProps = {
   width?: string | number,
   /** The value of the input. */
   value?: string | number,
-  /** Forwarded ref */
+  /** This is an internal prop. Use "ref" prop to get a reference to input element. */
   forwardedRef: ElementRef<*>,
   /** The theme the component should use. */
   theme?: ThemeProp<ThemeTokens, ThemeProps>,

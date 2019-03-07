@@ -2,12 +2,15 @@ import * as React from 'react';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
 import { EditorPlugin, EditorAppearance } from '../../types';
+import { SmartMediaEditor, Dimensions } from '@atlaskit/media-editor';
+import { FileIdentifier } from '@atlaskit/media-core';
 import {
   stateKey as pluginKey,
   createPlugin,
   MediaState,
   MediaStateManager,
   DefaultMediaStateManager,
+  MediaPluginState,
 } from './pm-plugins/main';
 import keymapMediaSinglePlugin from './pm-plugins/keymap-media-single';
 import keymapPlugin from './pm-plugins/keymap';
@@ -26,6 +29,7 @@ import {
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
 } from '../analytics';
+import WithPluginState from '../../ui/WithPluginState';
 
 export {
   MediaState,
@@ -42,11 +46,45 @@ export interface MediaOptions {
   customDropzoneContainer?: HTMLElement;
   customMediaPicker?: CustomMediaPicker;
   allowResizing?: boolean;
+  allowAnnotation?: boolean;
 }
 
 export interface MediaSingleOptions {
   disableLayout?: boolean;
 }
+
+export const renderSmartMediaEditor = (mediaState: MediaPluginState) => {
+  const node = mediaState.selectedMediaContainerNode();
+  if (!node) {
+    return null;
+  }
+  const { id } = node.firstChild!.attrs;
+
+  if (mediaState.uploadContext && mediaState.showEditingDialog) {
+    const identifier: FileIdentifier = {
+      id,
+      mediaItemType: 'file',
+      collectionName: node.firstChild!.attrs.collection,
+    };
+
+    return (
+      <SmartMediaEditor
+        identifier={identifier}
+        context={mediaState.uploadContext}
+        onUploadStart={(
+          newFileIdentifier: FileIdentifier,
+          dimensions: Dimensions,
+        ) => {
+          mediaState.closeMediaEditor();
+          mediaState.replaceEditingMedia(newFileIdentifier, dimensions);
+        }}
+        onFinish={mediaState.closeMediaEditor}
+      />
+    );
+  }
+
+  return null;
+};
 
 const mediaPlugin = (
   options?: MediaOptions,
@@ -127,6 +165,18 @@ const mediaPlugin = (
     );
   },
 
+  contentComponent({ editorView }) {
+    return (
+      <WithPluginState
+        editorView={editorView}
+        plugins={{
+          mediaState: pluginKey,
+        }}
+        render={({ mediaState }) => renderSmartMediaEditor(mediaState)}
+      />
+    );
+  },
+
   secondaryToolbarComponent({ editorView, eventDispatcher, disabled }) {
     return (
       <ToolbarMedia
@@ -168,6 +218,7 @@ const mediaPlugin = (
         state,
         intl,
         options && options.allowResizing,
+        options && options.allowAnnotation,
         appearance,
       ),
   },

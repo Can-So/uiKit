@@ -5,8 +5,8 @@ import { getText } from '../../utils';
 
 describe('Renderer - utils', () => {
   describe('ADFEncoder', () => {
-    let transformerProvider;
-    let transformer;
+    let transformerProvider: any;
+    let transformer: any;
 
     beforeEach(() => {
       transformer = { encode: jest.fn(), parse: jest.fn() };

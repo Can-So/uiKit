@@ -18,6 +18,7 @@ export const subscript: TokenParser = ({
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
+    TokenType.ISSUE_KEY,
   ];
   // Adding subsup mark to all text
   const contentDecorator = (n: PMNode) => {

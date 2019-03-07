@@ -143,10 +143,11 @@ export default class JiraClientImpl implements JiraClient {
         search_id: searchSessionId,
       },
     };
-    const recentItems = await utils.requestService<JiraRecentItemGroup[]>(
-      this.serviceConfig,
-      options,
-    );
+    const recentItems =
+      (await utils.requestService<JiraRecentItemGroup[]>(
+        this.serviceConfig,
+        options,
+      )) || [];
     return recentItems
       .filter(group => JiraResponseGroupToContentType.hasOwnProperty(group.id))
       .map(group => this.recentItemGroupToItems(group, searchSessionId))
@@ -166,11 +167,12 @@ export default class JiraClientImpl implements JiraClient {
       JiraMyPermissionsResponse
     >(this.serviceConfig, options);
 
-    this.canSearchUsersCache = permissionsResponse.permissions.USER_PICKER
-      ? permissionsResponse.permissions.USER_PICKER.havePermission
-      : false;
-
-    return this.canSearchUsersCache;
+    this.canSearchUsersCache =
+      permissionsResponse &&
+      permissionsResponse.permissions &&
+      permissionsResponse.permissions.USER_PICKER &&
+      permissionsResponse.permissions.USER_PICKER.havePermission;
+    return !!this.canSearchUsersCache;
   }
 
   private recentItemGroupToItems(

@@ -6,6 +6,7 @@ export {
   tableMarginBottom,
   tableMarginSides,
   tableCellMinWidth,
+  tableNewColumnMinWidth,
   tableCellBorderWidth,
   calcTableWidth,
   TableSharedCssClassName,

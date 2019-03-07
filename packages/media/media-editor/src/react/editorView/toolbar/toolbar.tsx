@@ -2,16 +2,17 @@ import * as React from 'react';
 import { Component } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import Button from '@atlaskit/button';
+import Tooltip from '@atlaskit/tooltip';
 import { Tool, Color } from '../../../common';
 
-import { LineWidthButton } from './buttons/lineWidthButton';
-import { ColorButton } from './buttons/colorButton';
+import LineWidthButton from './buttons/lineWidthButton';
+import ColorButton from './buttons/colorButton';
 import { ToolButton } from './buttons/toolButton';
 import { LineWidthPopup } from './popups/lineWidthPopup';
 import { ColorPopup } from './popups/colorPopup';
 import { ToolbarContainer, CenterButtons, VerticalLine } from './styles';
 import { ShapePopup, shapeTools } from './popups/shapePopup';
-import { ShapeButton } from './buttons/shapeButton';
+import ShapeButton from './buttons/shapeButton';
 import { ButtonGroup } from './buttons/buttonGroup';
 import { messages } from '@atlaskit/media-ui';
 
@@ -85,8 +86,12 @@ export class Toolbar extends Component<
       <ToolbarContainer>
         <CenterButtons>
           <ButtonGroup>
-            {this.renderSimpleTool('arrow')}
-            {this.renderSimpleTool('text')}
+            <Tooltip content={formatMessage(messages.annotate_tool_arrow)}>
+              {this.renderSimpleTool('arrow')}
+            </Tooltip>
+            <Tooltip content={formatMessage(messages.annotate_tool_text)}>
+              {this.renderSimpleTool('text')}
+            </Tooltip>
 
             <ShapePopup
               isOpen={showShapePopup}
@@ -102,8 +107,12 @@ export class Toolbar extends Component<
               </div>
             </ShapePopup>
 
-            {this.renderSimpleTool('brush')}
-            {this.renderSimpleTool('blur')}
+            <Tooltip content={formatMessage(messages.annotate_tool_brush)}>
+              {this.renderSimpleTool('brush')}
+            </Tooltip>
+            <Tooltip content={formatMessage(messages.annotate_tool_blur)}>
+              {this.renderSimpleTool('blur')}
+            </Tooltip>
 
             <VerticalLine />
             <LineWidthPopup
@@ -136,10 +145,15 @@ export class Toolbar extends Component<
 
             <VerticalLine />
 
-            <Button appearance="primary" theme="dark" onClick={onSave}>
+            <Button
+              appearance="primary"
+              theme="dark"
+              onClick={onSave}
+              autoFocus={true}
+            >
               {formatMessage(messages.save)}
             </Button>
-            <Button appearance="subtle" onClick={onCancel} theme="dark">
+            <Button appearance="default" onClick={onCancel} theme="dark">
               {formatMessage(messages.cancel)}
             </Button>
           </ButtonGroup>

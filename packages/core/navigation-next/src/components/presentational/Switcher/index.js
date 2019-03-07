@@ -130,6 +130,8 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
   static defaultProps = {
     closeMenuOnCreate: true,
     components: {},
+    navWidth: CONTENT_NAV_WIDTH,
+    isNavResizing: false,
   };
   static getDerivedStateFromProps(props: SwitcherProps, state: SwitcherState) {
     const newState = {};
@@ -147,10 +149,18 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
   componentDidMount() {
     this.setTargetWidth();
   }
-  componentDidUpdate({ navWidth }: SwitcherProps) {
+  componentDidUpdate({ navWidth, isNavResizing }: SwitcherProps) {
     // reset the target width if the user has resized the navigation pane
     if (navWidth !== this.props.navWidth) {
       this.setTargetWidth();
+    }
+
+    if (
+      isNavResizing &&
+      this.selectRef.current &&
+      this.selectRef.current.state.isOpen
+    ) {
+      this.selectRef.current.close();
     }
   }
   resolveTargetRef = (popupRef: ElementRef<*>) => (ref: HTMLElement) => {
@@ -161,12 +171,7 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
     }
   };
   setTargetWidth = () => {
-    // best efforts if target ref fails
-    const defaultWidth = CONTENT_NAV_WIDTH - gridSize * 2;
-
-    this.targetWidth = this.targetRef
-      ? this.targetRef.clientWidth
-      : defaultWidth;
+    this.targetWidth = this.props.navWidth - gridSize * 2;
   };
   getFooter = () => {
     const { closeMenuOnCreate, create, footer } = this.props;
@@ -217,6 +222,12 @@ export { Switcher as BaseSwitcher };
 
 export default (props: SwitcherBaseProps) => (
   <UIControllerSubscriber>
-    {({ state }) => <Switcher navWidth={state.productNavWidth} {...props} />}
+    {({ state }) => (
+      <Switcher
+        navWidth={state.productNavWidth}
+        isNavResizing={state.isResizing}
+        {...props}
+      />
+    )}
   </UIControllerSubscriber>
 );

@@ -61,6 +61,10 @@ export default class Page {
     return this.browser.url(url);
   }
 
+  hover(selector) {
+    return this.browser.moveToObject(selector).pause(500);
+  }
+
   title() {
     return this.browser.getTitle();
   }
@@ -239,8 +243,12 @@ export default class Page {
   }
 
   // Wait
-  waitForSelector(selector, options = {}) {
-    return this.browser.waitForExist(selector, options.timeout || WAIT_TIMEOUT);
+  waitForSelector(selector, options = {}, reverse = false) {
+    return this.browser.waitForExist(
+      selector,
+      options.timeout || WAIT_TIMEOUT,
+      reverse,
+    );
   }
 
   waitForVisible(selector, options = {}) {

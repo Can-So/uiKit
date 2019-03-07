@@ -1,10 +1,10 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import FieldBase from '@atlaskit/field-base';
 import Search from '../../Search';
 
 describe('Search', () => {
-  const isInputFocused = wrapper =>
+  const isInputFocused = (wrapper: ReactWrapper) =>
     wrapper.find('input').getDOMNode() === document.activeElement;
 
   it('should auto focus on mount', () => {

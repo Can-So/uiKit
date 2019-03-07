@@ -56,6 +56,7 @@ describe('nodeviews/mediaSingle', () => {
     },
     remove() {},
   } as any;
+  let getDimensions;
 
   beforeEach(() => {
     const mediaProvider = getFreshMediaProvider();
@@ -72,6 +73,17 @@ describe('nodeviews/mediaSingle', () => {
       handleMediaNodeMount: () => {},
       updateElement: jest.fn(),
       updateMediaNodeAttrs: jest.fn(),
+    };
+
+    getDimensions = wrapper => (): Promise<any> => {
+      if (wrapper.props().node.firstChild.attrs.type === 'external') {
+        return Promise.resolve(false);
+      }
+      return Promise.resolve({
+        id: 'foo',
+        height: 100,
+        width: 100,
+      });
     };
 
     pluginState.stateManager = stateManager;
@@ -185,12 +197,9 @@ describe('nodeviews/mediaSingle', () => {
         />,
       );
 
-      (wrapper.instance() as MediaSingle).getRemoteDimensions = () =>
-        Promise.resolve({
-          id: 'foo',
-          height: 100,
-          width: 100,
-        });
+      (wrapper.instance() as MediaSingle).getRemoteDimensions = getDimensions(
+        wrapper,
+      );
 
       await (wrapper.instance() as MediaSingle).componentDidMount();
       expect(pluginState.updateMediaNodeAttrs).toHaveBeenCalledWith(
@@ -201,6 +210,37 @@ describe('nodeviews/mediaSingle', () => {
         },
         true,
       );
+    });
+
+    it('does not ask media for dimensions when the image type is external', async () => {
+      const mediaNodeAttrs = {
+        id: 'foo',
+        type: 'external',
+        collection: 'collection',
+      };
+
+      const mediaNode = media(mediaNodeAttrs as MediaAttributes)();
+      const mediaSingleNodeWithoutDimensions = mediaSingle()(mediaNode);
+
+      const wrapper = mount(
+        <MediaSingle
+          view={view}
+          eventDispatcher={eventDispatcher}
+          node={mediaSingleNodeWithoutDimensions(defaultSchema)}
+          lineLength={680}
+          getPos={getPos}
+          width={123}
+          selected={() => 1}
+          editorAppearance="full-page"
+        />,
+      );
+
+      (wrapper.instance() as MediaSingle).getRemoteDimensions = getDimensions(
+        wrapper,
+      );
+
+      await (wrapper.instance() as MediaSingle).componentDidMount();
+      expect(pluginState.updateMediaNodeAttrs).toHaveBeenCalledTimes(0);
     });
   });
   afterEach(() => {

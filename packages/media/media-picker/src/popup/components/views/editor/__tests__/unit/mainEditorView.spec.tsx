@@ -90,7 +90,7 @@ describe('MainEditorView', () => {
     mainView
       .find(EditorView)
       .props()
-      .onSave('some-image-string');
+      .onSave('some-image-string', { width: 200, height: 100 });
     expectFunctionToHaveBeenCalledWith(binaryUploader.upload, [
       'some-image-string',
       'some-file-name',

@@ -40,6 +40,7 @@ export type SwitcherProps = {
   ...$Exact<SwitcherBaseProps>,
   // internal `navWidth` property isn't part of the public API
   navWidth: number,
+  isNavResizing: boolean,
 };
 
 export type SwitcherState = {

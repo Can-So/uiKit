@@ -37,7 +37,7 @@ export default function withOuterListeners<P>(
       }
     }
 
-    handleClick = evt => {
+    handleClick = (evt: Event) => {
       const domNode = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
 
       if (
@@ -48,7 +48,7 @@ export default function withOuterListeners<P>(
       }
     };
 
-    handleKeydown = evt => {
+    handleKeydown = (evt: KeyboardEvent) => {
       if (evt.code === 'Escape') {
         (this.props.handleEscapeKeydown as SimpleEventHandler)();
       }

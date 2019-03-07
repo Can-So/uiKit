@@ -6,7 +6,7 @@ export const DEFAULT_HEIGHT = 600;
 const adfInputSelector = '#adf-input';
 const importAdfBtnSelector = '#import-adf';
 
-export const loadFullPageEditorWithAdf = async (page, adf: Object) => {
+export const loadFullPageEditorWithAdf = async (page: any, adf: any) => {
   const url = getExampleUrl(
     'editor',
     'editor-core',
@@ -16,8 +16,10 @@ export const loadFullPageEditorWithAdf = async (page, adf: Object) => {
   await page.goto(url);
 
   await page.evaluate(
-    (adfInputSelector, adf) => {
-      document.querySelector(adfInputSelector).value = JSON.stringify(adf);
+    (adfInputSelector: string, adf: object) => {
+      (document as any).querySelector(adfInputSelector).value = JSON.stringify(
+        adf,
+      );
     },
     adfInputSelector,
     adf,
@@ -26,7 +28,7 @@ export const loadFullPageEditorWithAdf = async (page, adf: Object) => {
 };
 
 export const snapshot = async (
-  page,
+  page: any,
   tolerance?: number,
   selector = '.akEditor',
 ) => {

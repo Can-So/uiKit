@@ -12,11 +12,7 @@ import StatusNodeView from './nodeviews/status';
 import { ReactNodeView } from '../../nodeviews';
 import { PMPluginFactory } from '../../types';
 import { ZWSP } from '../../utils';
-import {
-  mayGetStatusNodeAt,
-  isEmptyStatus,
-  setSelectionNearPos,
-} from './utils';
+import { mayGetStatusNodeAt, isEmptyStatus } from './utils';
 
 export const pluginKey = new PluginKey('statusPlugin');
 
@@ -110,6 +106,7 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
           );
 
           const newState = {
+            ...state,
             showStatusPickerAt: deleted ? null : pos,
             selectedStatus: null,
           };
@@ -142,7 +139,6 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
           if (isEmptyStatus(oldStatus)) {
             const pos = oldEditorState.selection.from;
             tr.delete(tr.mapping.map(pos), tr.mapping.map(pos + 1));
-            setSelectionNearPos(tr, pos); // without forcing the selection the selection border in status react component gets lost
             changed = true;
           }
         }

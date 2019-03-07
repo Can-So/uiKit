@@ -2,15 +2,19 @@ import { TableMap } from 'prosemirror-tables';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
+import { findDomRefAtPos } from 'prosemirror-utils';
+import { gridSize } from '@atlaskit/theme';
 import {
   tableCellMinWidth,
   akEditorTableNumberColumnWidth,
+  akEditorTableToolbarSize,
 } from '@atlaskit/editor-common';
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
 
 import Resizer from './resizer/resizer';
 import ResizeState from './resizer/resizeState';
+import { pluginKey as resizePluginKey } from './plugin';
 
 import { getPluginState } from '../main';
 import { updateRightShadow } from '../../nodeviews/TableComponent';
@@ -20,7 +24,7 @@ import {
   getTableWidth,
   insertColgroupFromNode as recreateResizeColsByNode,
 } from '../../utils';
-
+import { closestElement } from '../../../../utils';
 import { getLayoutSize, tableLayoutToSize } from './utils';
 
 export function updateColumnWidth(view, cell, movedWidth, resizer) {
@@ -113,6 +117,43 @@ export function resizeColumn(view, cell, width, resizer) {
   return newState;
 }
 
+export const updateResizeHandle = (view: EditorView) => {
+  const { state } = view;
+  const { activeHandle } = resizePluginKey.getState(state);
+  if (activeHandle === -1) {
+    return false;
+  }
+
+  const $cell = view.state.doc.resolve(activeHandle);
+  const tablePos = $cell.start(-1) - 1;
+  const tableWrapperRef = findDomRefAtPos(
+    tablePos,
+    view.domAtPos.bind(view),
+  ) as HTMLDivElement;
+
+  const resizeHandleRef = tableWrapperRef.querySelector(
+    `.${ClassName.COLUMN_RESIZE_HANDLE}`,
+  ) as HTMLDivElement;
+
+  const tableRef = tableWrapperRef.querySelector(`table`) as HTMLTableElement;
+
+  if (tableRef && resizeHandleRef) {
+    const cellRef = findDomRefAtPos(
+      activeHandle,
+      view.domAtPos.bind(view),
+    ) as HTMLTableCellElement;
+    const tableActive = closestElement(tableRef, `.${ClassName.WITH_CONTROLS}`);
+    resizeHandleRef.style.height = `${
+      tableActive
+        ? tableRef.offsetHeight + akEditorTableToolbarSize
+        : tableRef.offsetHeight
+    }px`;
+
+    resizeHandleRef.style.left = `${cellRef.offsetLeft +
+      cellRef.offsetWidth}px`;
+  }
+};
+
 /**
  * Updates the column controls on resize
  */
@@ -138,19 +179,29 @@ export const updateControls = (state: EditorState) => {
     ClassName.NUMBERED_COLUMN_BUTTON,
   );
 
+  const getWidth = (element: HTMLElement): number => {
+    const rect = element.getBoundingClientRect();
+    return rect ? rect.width : element.offsetWidth;
+  };
+
+  const getHeight = (element: HTMLElement): number => {
+    const rect = element.getBoundingClientRect();
+    return rect ? rect.height : element.offsetHeight;
+  };
+
   // update column controls width on resize
   for (let i = 0, count = columnControls.length; i < count; i++) {
     if (cols[i]) {
-      columnControls[i].style.width = `${cols[i].offsetWidth + 1}px`;
+      columnControls[i].style.width = `${getWidth(cols[i]) + 1}px`;
     }
   }
   // update rows controls height on resize
   for (let i = 0, count = rowControls.length; i < count; i++) {
     if (rows[i]) {
-      rowControls[i].style.height = `${rows[i].offsetHeight + 1}px`;
+      rowControls[i].style.height = `${getHeight(rows[i]) + 1}px`;
 
       if (numberedRows.length) {
-        numberedRows[i].style.height = `${rows[i].offsetHeight + 1}px`;
+        numberedRows[i].style.height = `${getHeight(rows[i]) + 1}px`;
       }
     }
   }
@@ -179,21 +230,38 @@ export function scaleTable(
   pos: number,
   containerWidth: number | undefined,
   initialScale?: boolean,
+  parentWidth?: number,
+  dynamicTextSizing?: boolean,
 ) {
   if (!tableElem) {
     return;
   }
 
+  // If a table has not been resized yet, columns should be auto.
+  if (hasTableBeenResized(node) === false) {
+    // If its not a re-sized table, we still want to re-create cols
+    // To force reflow of columns upon delete.
+    recreateResizeColsByNode(tableElem, node);
+    return;
+  }
+
   const start = pos + 1;
-  const state = scale(
-    view,
-    tableElem,
-    node,
-    start,
-    prevNode,
-    containerWidth,
-    initialScale,
-  );
+
+  let state;
+  if (parentWidth) {
+    state = scaleWithParent(view, tableElem, parentWidth, node, start);
+  } else {
+    state = scale(
+      view,
+      tableElem,
+      node,
+      start,
+      prevNode,
+      containerWidth,
+      initialScale,
+      dynamicTextSizing,
+    );
+  }
 
   if (state) {
     const tr = applyColumnWidths(view, state, node, start);
@@ -217,32 +285,24 @@ function scale(
   node: PMNode,
   start: number,
   prevNode: PMNode,
-  containerWidth: number | undefined,
+  containerWidth?: number,
   initialScale?: boolean,
+  dynamicTextSizing?: boolean,
 ): ResizeState | undefined {
-  // If a table has not been resized yet, columns should be auto.
-  if (hasTableBeenResized(node) === false) {
-    // If its not a re-sized table, we still want to re-create cols
-    // To force reflow of columns upon delete.
-    recreateResizeColsByNode(tableElem, node);
-    return;
-  }
-
   const maxSize = getLayoutSize(node.attrs.layout, containerWidth);
-  const resizer = Resizer.fromDOM(view, tableElem, {
-    minWidth: tableCellMinWidth,
-    maxSize,
-    node,
-    start,
-  });
 
-  let newWidth = maxSize;
   let prevTableWidth = getTableWidth(prevNode);
   let previousMaxSize = tableLayoutToSize[prevNode.attrs.layout];
 
   if (!initialScale) {
-    previousMaxSize = getLayoutSize(prevNode.attrs.layout, containerWidth);
+    previousMaxSize = getLayoutSize(
+      prevNode.attrs.layout,
+      containerWidth,
+      dynamicTextSizing,
+    );
   }
+
+  let newWidth = maxSize;
 
   // Determine if table was overflow
   if (prevTableWidth > previousMaxSize) {
@@ -254,7 +314,38 @@ function scale(
     newWidth -= akEditorTableNumberColumnWidth;
   }
 
+  const resizer = Resizer.fromDOM(view, tableElem, {
+    minWidth: tableCellMinWidth,
+    maxSize,
+    node,
+    start,
+  });
+
   return resizer.scale(newWidth);
+}
+
+function scaleWithParent(
+  view: EditorView,
+  tableElem: HTMLTableElement,
+  parentWidth: number,
+  tableNode: PMNode,
+  start: number,
+) {
+  const resizer = Resizer.fromDOM(view, tableElem, {
+    minWidth: tableCellMinWidth,
+    maxSize: parentWidth,
+    node: tableNode,
+    start,
+  });
+
+  // Need to acount for the padding of the extension.
+  parentWidth -= gridSize() * 4;
+
+  if (tableNode.attrs.isNumberColumnEnabled) {
+    parentWidth -= akEditorTableNumberColumnWidth;
+  }
+
+  return resizer.scale(Math.floor(parentWidth));
 }
 
 /**

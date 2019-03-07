@@ -49,4 +49,5 @@ export interface CollabEditOptions {
   isInviteToEditButtonSelected?: boolean;
   userId?: string;
   useNativePlugin?: boolean;
+  allowUnsupportedContent?: boolean;
 }

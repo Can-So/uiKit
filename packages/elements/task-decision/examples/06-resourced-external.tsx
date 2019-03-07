@@ -27,7 +27,7 @@ interface NotifyChangesProps {
 class NotifyChanges extends PureComponent<NotifyChangesProps, {}> {
   private renderDocument: RenderDocument | undefined;
 
-  componentWillMount() {
+  componentDidMount() {
     const { taskDecisionProvider } = this.props;
     if (taskDecisionProvider) {
       this.renderDocument = createRenderer(taskDecisionProvider);

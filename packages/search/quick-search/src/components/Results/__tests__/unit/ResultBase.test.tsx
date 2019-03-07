@@ -1,10 +1,11 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import ResultBase from '../../ResultBase';
+import ResultItem from '../../../ResultItem/ResultItem';
 import { ResultContextType } from '../../../context';
 
 describe('Result Base', () => {
-  let resultWrapper;
+  let resultWrapper: ReactWrapper;
   beforeEach(() => {
     const context: ResultContextType = {
       registerResult: () => {},
@@ -30,8 +31,19 @@ describe('Result Base', () => {
   it('should pass { `resultId`,  `type` } to onClick handler', () => {
     const spy = jest.fn();
     resultWrapper.setProps({ onClick: spy });
-    resultWrapper.simulate('click');
-    expect(spy).toBeCalledWith({ resultId: 'testResult', type: 'base' });
+    const resultItem = resultWrapper.find(ResultItem);
+    expect(resultItem).toHaveLength(1);
+    const onClick = resultItem.prop('onClick');
+    expect(onClick).toBeInstanceOf(Function);
+    const mockedEvent = { preventDefault() {} } as MouseEvent;
+    if (onClick) {
+      onClick(mockedEvent);
+    }
+    expect(spy).toBeCalledWith({
+      resultId: 'testResult',
+      type: 'base',
+      event: mockedEvent,
+    });
   });
 
   it('should pass { `resultId`,  `type` } to onMouseEnter handler', () => {
@@ -42,8 +54,20 @@ describe('Result Base', () => {
         registerResult: () => {},
       },
     });
-    resultWrapper.simulate('mouseenter');
-    expect(spy).toBeCalledWith({ resultId: 'testResult', type: 'base' });
+
+    const resultItem = resultWrapper.find(ResultItem);
+    expect(resultItem).toHaveLength(1);
+    const onMouseEnter = resultItem.prop('onMouseEnter');
+    expect(onMouseEnter).toBeInstanceOf(Function);
+    const mockedEvent = { preventDefault() {} } as MouseEvent;
+    if (onMouseEnter) {
+      onMouseEnter(mockedEvent);
+    }
+    expect(spy).toBeCalledWith({
+      resultId: 'testResult',
+      type: 'base',
+      event: mockedEvent,
+    });
   });
 
   it('should unregister itself on unmount event', () => {

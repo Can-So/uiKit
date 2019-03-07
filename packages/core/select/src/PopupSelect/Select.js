@@ -133,6 +133,7 @@ export default class PopupSelect extends PureComponent<Props, State> {
   handleKeyDown = ({ key }: KeyboardEvent) => {
     switch (key) {
       case 'Escape':
+      case 'Esc':
         this.close();
         break;
       default:
@@ -170,7 +171,7 @@ export default class PopupSelect extends PureComponent<Props, State> {
     if (onOpen) onOpen();
 
     this.setState({ isOpen: true }, this.initialiseFocusTrap);
-    this.selectRef.select.focusOption('first'); // HACK
+    this.selectRef.select.openMenu('first'); // HACK
 
     if (typeof window === 'undefined') return;
     window.addEventListener('keydown', this.handleKeyDown);

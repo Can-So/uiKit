@@ -1,14 +1,22 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
+import { getSelectionRect } from 'prosemirror-utils';
+import { Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { splitCell, mergeCells } from 'prosemirror-tables';
+import { splitCell } from 'prosemirror-tables';
 import { colors } from '@atlaskit/theme';
 import {
   tableBackgroundColorPalette,
   tableBackgroundBorderColors,
 } from '@atlaskit/adf-schema';
-
+import {
+  mergeCells,
+  canMergeCells,
+  deleteColumns,
+  deleteRows,
+} from '../../transforms';
+import { getPluginState } from '../../pm-plugins/main';
 import {
   hoverColumns,
   hoverRows,
@@ -16,8 +24,6 @@ import {
   insertColumn,
   insertRow,
   toggleContextualMenu,
-  deleteColumns,
-  deleteRows,
   emptyMultipleCells,
   setMultipleCellAttrs,
 } from '../../actions';
@@ -59,7 +65,8 @@ export const messages = defineMessages({
 export interface Props {
   editorView: EditorView;
   isOpen: boolean;
-  selectionRect: CellRect;
+  columnSelectionRect: CellRect;
+  rowSelectionRect: CellRect;
   targetCellPosition?: number;
   mountPoint?: HTMLElement;
   allowMergeCells?: boolean;
@@ -129,7 +136,8 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
       editorView: { state },
       targetCellPosition,
       isOpen,
-      selectionRect,
+      columnSelectionRect,
+      rowSelectionRect,
       intl: { formatMessage },
     } = this.props;
     const items: any[] = [];
@@ -179,7 +187,8 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
       value: { name: 'insert_row' },
     });
 
-    const { right, left, top, bottom } = selectionRect;
+    const { right, left } = columnSelectionRect;
+    const { top, bottom } = rowSelectionRect;
     const noOfColumns = right - left;
     const noOfRows = bottom - top;
 
@@ -201,7 +210,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
       items.push({
         content: formatMessage(messages.mergeCells),
         value: { name: 'merge' },
-        isDisabled: !mergeCells(state),
+        isDisabled: !canMergeCells(state.tr),
       });
       items.push({
         content: formatMessage(messages.splitCell),
@@ -222,13 +231,18 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
   };
 
   private onMenuItemActivated = ({ item }) => {
-    const { editorView, selectionRect, targetCellPosition } = this.props;
+    const {
+      editorView,
+      columnSelectionRect,
+      rowSelectionRect,
+      targetCellPosition,
+    } = this.props;
     const { state, dispatch } = editorView;
 
     switch (item.value.name) {
       case 'merge':
         analytics.trackEvent('atlassian.editor.format.table.merge.button');
-        mergeCells(state, dispatch);
+        dispatch(mergeCells(state.tr));
         this.toggleOpen();
         break;
       case 'split':
@@ -242,23 +256,35 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
         this.toggleOpen();
         break;
       case 'insert_column':
-        insertColumn(selectionRect.right)(state, dispatch);
+        insertColumn(columnSelectionRect.right)(state, dispatch);
         this.toggleOpen();
         break;
       case 'insert_row':
-        insertRow(selectionRect.bottom)(state, dispatch);
+        insertRow(rowSelectionRect.bottom)(state, dispatch);
         this.toggleOpen();
         break;
       case 'delete_column':
         analytics.trackEvent(
           'atlassian.editor.format.table.delete_column.button',
         );
-        deleteColumns(getSelectedColumnIndexes(selectionRect))(state, dispatch);
+        dispatch(
+          deleteColumns(
+            getSelectedColumnIndexes(state.tr, columnSelectionRect),
+          )(state.tr),
+        );
         this.toggleOpen();
         break;
       case 'delete_row':
         analytics.trackEvent('atlassian.editor.format.table.delete_row.button');
-        deleteRows(getSelectedRowIndexes(selectionRect))(state, dispatch);
+        const {
+          pluginConfig: { isHeaderRowRequired },
+        } = getPluginState(state);
+        dispatch(
+          deleteRows(
+            getSelectedRowIndexes(state.tr, rowSelectionRect),
+            isHeaderRowRequired,
+          )(state.tr),
+        );
         this.toggleOpen();
         break;
     }
@@ -288,7 +314,8 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
   private handleItemMouseEnter = ({ item }) => {
     const {
       editorView: { state, dispatch },
-      selectionRect,
+      columnSelectionRect,
+      rowSelectionRect,
     } = this.props;
 
     if (item.value.name === 'background') {
@@ -298,13 +325,16 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     }
 
     if (item.value.name === 'delete_column') {
-      hoverColumns(getSelectedColumnIndexes(selectionRect), true)(
+      hoverColumns(
+        getSelectedColumnIndexes(state.tr, columnSelectionRect),
+        true,
+      )(state, dispatch);
+    }
+    if (item.value.name === 'delete_row') {
+      hoverRows(getSelectedRowIndexes(state.tr, rowSelectionRect), true)(
         state,
         dispatch,
       );
-    }
-    if (item.value.name === 'delete_row') {
-      hoverRows(getSelectedRowIndexes(selectionRect), true)(state, dispatch);
     }
   };
 
@@ -341,17 +371,37 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
   );
 }
 
-export const getSelectedColumnIndexes = (selectionRect: CellRect): number[] => {
+export const getSelectedColumnIndexes = (
+  tr: Transaction,
+  selectionRect: CellRect,
+): number[] => {
+  let from = selectionRect.left;
+  let to = selectionRect.right;
+  const rect = getSelectionRect(tr.selection);
+  if (rect) {
+    from = Math.min(rect.left, selectionRect.left);
+    to = Math.max(rect.right, selectionRect.right);
+  }
   const columnIndexes: number[] = [];
-  for (let i = selectionRect.left; i < selectionRect.right; i++) {
+  for (let i = from; i < to; i++) {
     columnIndexes.push(i);
   }
   return columnIndexes;
 };
 
-export const getSelectedRowIndexes = (selectionRect: CellRect): number[] => {
+export const getSelectedRowIndexes = (
+  tr: Transaction,
+  selectionRect: CellRect,
+): number[] => {
+  let from = selectionRect.top;
+  let to = selectionRect.bottom;
+  const rect = getSelectionRect(tr.selection);
+  if (rect) {
+    from = Math.min(rect.top, selectionRect.top);
+    to = Math.max(rect.bottom, selectionRect.bottom);
+  }
   const rowIndexes: number[] = [];
-  for (let i = selectionRect.top; i < selectionRect.bottom; i++) {
+  for (let i = from; i < to; i++) {
     rowIndexes.push(i);
   }
   return rowIndexes;

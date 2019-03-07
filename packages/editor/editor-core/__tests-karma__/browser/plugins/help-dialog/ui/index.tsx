@@ -78,14 +78,6 @@ describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
       ).to.equal(true);
     });
 
-    it('should return undefined keymap for links in message editor', () => {
-      expect(
-        formatting(intl).filter(f => f.type === 'link')[0].keymap!({
-          appearance: 'message',
-        }),
-      ).to.equal(undefined);
-    });
-
     it('should have correct value for auto-formatting', () => {
       const autoFormat = formatting(intl).filter(
         f => f.type === 'blockquote',

@@ -10,6 +10,7 @@ import {
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 
 import { CardAction } from './actions';
+import { MediaViewerDataSource } from '@atlaskit/media-viewer';
 
 // the only components we expose to consumers is Card and CardView
 export { default as Card } from './root/card/cardLoader';
@@ -129,17 +130,20 @@ export interface CardProps extends SharedCardProps, CardEventProps {
   // only relevant to file card with image appearance
   readonly disableOverlay?: boolean;
   readonly useInlinePlayer?: boolean;
+  readonly shouldOpenMediaViewer?: boolean;
+  readonly mediaViewerDataSource?: MediaViewerDataSource;
 }
 
 export interface CardState {
   status: CardStatus;
   isCardVisible: boolean;
   previewOrientation: number;
-  readonly isPlayingFile: boolean;
+  isPlayingFile: boolean;
+  mediaViewerSelectedItem?: Identifier;
   metadata?: FileDetails;
   dataURI?: string;
   progress?: number;
-  readonly error?: Error;
+  error?: Error;
 }
 
 export { defaultImageCardDimensions } from './utils';

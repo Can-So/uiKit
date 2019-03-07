@@ -27,10 +27,22 @@ export const messages = defineMessages({
     defaultMessage: 'Emoji name',
     description: 'Placeholder for emoji',
   },
+  emojiNameAriaLabel: {
+    id: 'fabric.emoji.name.ariaLabel',
+    defaultMessage: 'Enter a name for the new emoji',
+    description: 'Explains to enter a name for a new emoji',
+  },
   emojiChooseFileTitle: {
     id: 'fabric.emoji.choose.file.title',
     defaultMessage: 'Choose file',
     description: 'Choose custom emoji file',
+  },
+  emojiChooseFileAriaLabel: {
+    id: 'fabric.emoji.choose.file.ariaLabel',
+    defaultMessage:
+      'Choose a file for the emoji. JPG, PNG or GIF. Max size 1 MB.',
+    description:
+      'Message indicating the purpose of choosing the file and requirements for the file',
   },
   emojiImageRequirements: {
     id: 'fabric.emoji.image.requirements',

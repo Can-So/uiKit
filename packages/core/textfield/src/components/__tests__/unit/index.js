@@ -146,3 +146,17 @@ describe('Textfield', () => {
     });
   });
 });
+
+test('textfield ref should be an input', () => {
+  let ref;
+  mount(
+    <div>
+      <Textfield
+        ref={input => {
+          ref = input;
+        }}
+      />
+    </div>,
+  );
+  expect(ref).toBeInstanceOf(HTMLInputElement);
+});

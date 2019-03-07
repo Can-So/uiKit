@@ -1,4 +1,4 @@
-import { analyticsChannel } from './index';
+import { editorAnalyticsChannel } from './index';
 import { AnalyticsEventPayload } from './types';
 import { Transaction, EditorState } from 'prosemirror-state';
 import { Command } from '../../types';
@@ -15,11 +15,13 @@ export function addAnalytics(
   return tr.setMeta(analyticsPluginKey, analyticsMeta);
 }
 
+export type HigherOrderCommand = (command: Command) => Command;
+
 export function withAnalytics(
   payload: AnalyticsEventPayload,
   channel?: string,
-) {
-  return (command: Command): Command => (state, dispatch) =>
+): HigherOrderCommand {
+  return command => (state, dispatch) =>
     command(state, tr => {
       if (dispatch) {
         dispatch(addAnalytics(tr, payload, channel));
@@ -60,7 +62,7 @@ export function ruleWithAnalytics(
 
 export const fireAnalyticsEvent = createAnalyticsEvent => ({
   payload,
-  channel = analyticsChannel,
+  channel = editorAnalyticsChannel,
 }: {
   payload: AnalyticsEventPayload;
   channel?: string;

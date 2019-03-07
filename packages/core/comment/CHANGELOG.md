@@ -1,5 +1,13 @@
 # @atlaskit/comment
 
+## 6.0.44
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-core@102.0.0
+
+## 6.0.43
+- Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+  - @atlaskit/editor-core@101.0.0
+
 ## 6.0.42
 - Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
   - @atlaskit/editor-core@100.0.0

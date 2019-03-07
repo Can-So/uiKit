@@ -1,54 +1,43 @@
+import { snapshot, initFullPageEditorWithAdf, Device } from '../_utils';
 import {
-  initEditor,
-  snapshot,
+  clickEditableContent,
+  typeInEditor,
+} from '../../__helpers/page-objects/_editor';
+import {
   insertMedia,
-  editable,
-  setupMediaMocksProviders,
-} from '../_utils';
+  waitForMediaToBeLoaded,
+} from '../../__helpers/page-objects/_media';
 
-describe.skip('Snapshot Test: Media', () => {
+describe('Snapshot Test: Media', () => {
   let page;
-  beforeAll(async () => {
+  beforeEach(async () => {
     // @ts-ignore
     page = global.page;
-    await initEditor(page, 'full-page-with-toolbar');
-    await page.setViewport({ width: 1920, height: 1080 });
-    await setupMediaMocksProviders(page);
+    await initFullPageEditorWithAdf(page, {}, Device.LaptopHiDPI);
 
     // click into the editor
-    await page.waitForSelector(editable);
-    await page.click(editable);
-
-    // prepare media
-    await setupMediaMocksProviders(page);
+    await clickEditableContent(page);
   });
 
-  afterEach(async () => {
-    const image = await page.screenshot();
-    // @ts-ignore
-    expect(image).toMatchProdImageSnapshot();
-  });
-  // TODO: AK-5551
-  describe.skip('Lists', async () => {
+  describe('Lists', async () => {
     it('can insert a media single inside a bullet list', async () => {
-      // type some text
-      await page.click(editable);
-      await page.type(editable, '* ');
+      await typeInEditor(page, '* ');
 
       // now we can insert media as necessary
       await insertMedia(page);
-      await page.waitForSelector('.media-card');
+      await waitForMediaToBeLoaded(page);
+
       await snapshot(page);
     });
 
     it('can insert a media single inside a numbered list', async () => {
       // type some text
-      await page.click(editable);
-      await page.type(editable, '1. ');
+      await typeInEditor(page, '1. ');
 
       // now we can insert media as necessary
       await insertMedia(page);
-      await page.waitForSelector('.media-card');
+      await waitForMediaToBeLoaded(page);
+
       await snapshot(page);
     });
   });

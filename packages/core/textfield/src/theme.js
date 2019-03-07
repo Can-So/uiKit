@@ -71,15 +71,11 @@ const borderColorFocus = {
 const getContainerBackgroundColor = ({
   appearance,
   isFocused,
+  isHovered,
   isDisabled,
   isInvalid,
   mode,
 }: ThemeProps) => {
-  if (!backgroundColor[appearance]) {
-    return {
-      backgroundColor: backgroundColor.standard[mode],
-    };
-  }
   if (isDisabled) {
     // switch on focus then switch on hover
     if (isFocused) {
@@ -87,11 +83,14 @@ const getContainerBackgroundColor = ({
         backgroundColor: disabledRules[mode].backgroundColorFocus,
       };
     }
+
+    if (isHovered) {
+      return {
+        backgroundColor: disabledRules[mode].backgroundColorHover,
+      };
+    }
     return {
       backgroundColor: disabledRules[mode].backgroundColor,
-      '&:hover': {
-        backgroundColor: disabledRules[mode].backgroundColorHover,
-      },
     };
   } else if (isInvalid) {
     // switch on focus then switch on hover
@@ -100,11 +99,14 @@ const getContainerBackgroundColor = ({
         backgroundColor: invalidRules[mode].backgroundColorFocus,
       };
     }
+
+    if (isHovered) {
+      return {
+        backgroundColor: invalidRules[mode].backgroundColorHover,
+      };
+    }
     return {
       backgroundColor: invalidRules[mode].backgroundColor,
-      '&:hover': {
-        backgroundColor: invalidRules[mode].backgroundColorHover,
-      },
     };
   }
   // switch on appearance then focus then switch on hover
@@ -113,11 +115,14 @@ const getContainerBackgroundColor = ({
       backgroundColor: backgroundColorFocus[appearance][mode],
     };
   }
+
+  if (isHovered) {
+    return {
+      backgroundColor: backgroundColorHover[appearance][mode],
+    };
+  }
   return {
     backgroundColor: backgroundColor[appearance][mode],
-    '&:hover': {
-      backgroundColor: backgroundColorHover[appearance][mode],
-    },
   };
 };
 
@@ -128,11 +133,6 @@ const getContainerBorderColor = ({
   isInvalid,
   mode,
 }: ThemeProps) => {
-  if (!borderColor[appearance]) {
-    return {
-      borderColor: borderColor.standard[mode],
-    };
-  }
   if (isDisabled) {
     // switch on focus then switch on hover
     if (isFocused) {
@@ -165,10 +165,11 @@ const getContainerBorderColor = ({
   };
 };
 
-const getPlaceholderColor = ({ isDisabled, mode }) =>
-  isDisabled
+const getPlaceholderColor = ({ isDisabled, mode }) => {
+  return isDisabled
     ? disabledRules[mode].textColor
     : componentTokens.placeholderTextColor[mode];
+};
 
 // can't group these placeholder styles into one block because browsers drop
 // entire style blocks when any single selector fails to parse
@@ -246,7 +247,7 @@ export const Theme = createTheme<ThemeTokens, ThemeProps>(props => ({
     maxWidth: getMaxWidth(props),
     overflow: 'hidden',
     transition: `background-color 0.2s ease-in-out, border-color 0.2s ease-in-out`,
-    wordWrap: 'bread-word',
+    wordWrap: 'break-word',
     verticalAlign: 'top',
     pointerEvents: props.isDisabled ? 'none' : 'auto',
     padding: `${props.isCompact ? gridSize() / 2 : gridSize()}px ${gridSize() -

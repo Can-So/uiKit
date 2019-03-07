@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Drawer from '@atlaskit/drawer';
 import Button from '@atlaskit/button';
 import Skeleton from '../src/primitives/skeleton';
+import { withAnalyticsLogger } from './helpers';
 
-export default class SkeletonExample extends Component {
+class SkeletonExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -37,3 +38,5 @@ export default class SkeletonExample extends Component {
     );
   }
 }
+
+export default withAnalyticsLogger(SkeletonExample);

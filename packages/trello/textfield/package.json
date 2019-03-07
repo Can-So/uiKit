@@ -21,7 +21,7 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/textfield": "^0.1.6",
+    "@atlaskit/textfield": "^0.2.0",
     "@babel/runtime": "^7.0.0",
     "tslib": "^1.8.0"
   },

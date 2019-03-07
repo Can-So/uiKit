@@ -52,6 +52,8 @@ export const tablePadding = 8;
 export const contextualMenuTriggerSize = 16;
 export const contextualMenuDropdownWidth = 180;
 export const layoutButtonSize = 32;
+export const tableInsertColumnButtonLeftOffset = 22;
+export const tableInsertColumnButtonTopOffset = 22;
 
 const isIE11 = browser.ie_version === 11;
 
@@ -140,7 +142,8 @@ const HeaderButtonDanger = () => `
 const InsertButton = () => `
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER} {
     position: absolute;
-    z-index: ${akEditorUnitZIndex};
+    z-index: ${akEditorUnitZIndex + 10};
+    bottom: 1px;
   }
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER},
   .${ClassName.CONTROLS_INSERT_BUTTON} {
@@ -290,7 +293,7 @@ export const tableStyles = css`
         }
       }
       .${ClassName.CONTROLS_INSERT_COLUMN} {
-        top: -${tableInsertColumnButtonSize - 2}px;
+        top: -${tableInsertColumnButtonTopOffset}px;
         right: -${tableInsertColumnButtonSize / 2}px;
       }
       .${ClassName.CONTROLS_INSERT_ROW} {
@@ -298,7 +301,7 @@ export const tableStyles = css`
         left: -${tableDeleteButtonSize + 2}px;
       }
     }
-    :not(.${ClassName.IS_RESIZING}) .${ClassName.COLUMN_CONTROLS}, 
+    :not(.${ClassName.IS_RESIZING}) .${ClassName.COLUMN_CONTROLS},
     :not(.${ClassName.IS_RESIZING}) .${ClassName.CORNER_CONTROLS} {
       ${ DeleteButtonHover()}
     }
@@ -314,7 +317,7 @@ export const tableStyles = css`
       ${InsertButtonHover()}
       ${InsertLine(`
         width: 2px;
-        left: 8px;
+        left: 9px;
         top: ${tableInsertColumnButtonSize - 2}px;
       `)}
     }
@@ -405,7 +408,7 @@ export const tableStyles = css`
       .${ClassName.CONTROLS_INSERT_BUTTON_WRAP} {
         position: absolute;
         bottom: -${tableInsertColumnButtonSize / 2}px;
-        left: -${tableInsertColumnButtonSize - 2}px;
+        left: -${tableInsertColumnButtonLeftOffset}px;
         height: ${tableInsertColumnButtonSize}px;
         width: ${tableInsertColumnButtonSize}px;
         z-index: ${akEditorSmallZIndex};
@@ -491,7 +494,7 @@ export const tableStyles = css`
           color: ${N0};
         }
       }
-  
+
       /* scroll shadows */
       .${ClassName.TABLE_RIGHT_SHADOW},
       .${ClassName.TABLE_LEFT_SHADOW}::after {
@@ -571,7 +574,7 @@ export const tableStyles = css`
         pointer-events: none;
       }
     }
-    :not(.${ClassName.IS_RESIZING}) .${ClassName.TABLE_NODE_WRAPPER} > table { 
+    :not(.${ClassName.IS_RESIZING}) .${ClassName.TABLE_NODE_WRAPPER} > table {
       .${ClassName.HOVERED_CELL} {
         position: relative;
         border: 1px solid ${tableBorderSelectedColor};
@@ -608,35 +611,21 @@ export const tableStyles = css`
       overflow: ${isIE11 ? 'none' : 'auto'};
       position: relative;
     }
+    /* =============== TABLE COLUMN RESIZING ================== */
     .${ClassName.COLUMN_RESIZE_HANDLE} {
+      position: absolute;
       bottom: 0;
-      top: -1px;
-      right: -2px;
       width: 2px;
-      height: calc(100% + 2px);
+      pointer-events: none;
+      background-color: ${tableBorderSelectedColor};
+      z-index: ${akEditorUnitZIndex};
     }
   }
 
-  /* =============== TABLE COLUMN RESIZING ================== */
   .ProseMirror.${ClassName.IS_RESIZING} {
     .${ClassName.TABLE_NODE_WRAPPER} {
       overflow-x: ${isIE11 ? 'none' : 'auto'};
       ${!isIE11 ? scrollbarStyles : ''};
-    }
-    .${ClassName.COLUMN_RESIZE_HANDLE} {
-      background-color: ${tableBorderSelectedColor};
-      position: absolute;
-      bottom: 0;
-      top: -1px;
-      right: -2px;
-      width: 2px;
-      height: calc(100% + 2px);
-      pointer-events: none;
-      z-index: ${akEditorUnitZIndex};
-    }
-    .${ClassName.WITH_CONTROLS} .${ClassName.COLUMN_RESIZE_HANDLE} {
-      top: -${tableToolbarSize}px;
-      height: calc(100% + ${tableToolbarSize}px);
     }
   }
 

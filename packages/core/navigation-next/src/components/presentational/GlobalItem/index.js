@@ -15,6 +15,7 @@ export class GlobalItemBase extends PureComponent<GlobalItemProps> {
     size: 'large',
     styles: styleReducerNoOp,
   };
+
   renderItem = (state: InteractionState) => {
     const { createAnalyticsEvent, theme, ...props } = this.props;
     return <GlobalItemPrimitive {...state} {...props} />;

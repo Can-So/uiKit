@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 
 import RendererEmoji from '../../../../react/nodes/emoji';
 import { Emoji } from '@atlaskit/editor-common';
@@ -10,7 +9,7 @@ describe('Emoji', () => {
     const component = mount(
       <RendererEmoji shortName="shortname" id="id" text="fallback" />,
     );
-    expect(component.find(Emoji)).to.have.length(1);
+    expect(component.find(Emoji)).toHaveLength(1);
     component.unmount();
   });
 
@@ -19,7 +18,7 @@ describe('Emoji', () => {
       <RendererEmoji shortName="shortname" id="id" text="fallback" />,
     );
 
-    expect(component.find(Emoji).prop('fallback')).to.equal('fallback');
+    expect(component.find(Emoji).prop('fallback')).toEqual('fallback');
     component.unmount();
   });
 });

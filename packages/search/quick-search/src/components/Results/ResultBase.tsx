@@ -73,7 +73,7 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
     };
   }
 
-  handleClick = (e?: MouseEvent) => {
+  handleClick = (e: MouseEvent) => {
     const { onClick, resultId, type, context } = this.props;
 
     if (context.sendAnalytics) {
@@ -85,19 +85,20 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
     }
 
     if (onClick) {
-      onClick({ resultId, type });
+      onClick({ resultId, type, event: e });
     }
   };
 
-  handleMouseEnter = () => {
+  handleMouseEnter = (event: MouseEvent) => {
     this.props.context.onMouseEnter({
       resultId: this.props.resultId,
       type: this.props.type,
+      event,
     });
     this.setState({ isMouseSelected: true });
   };
 
-  handleMouseLeave = e => {
+  handleMouseLeave = () => {
     this.props.context.onMouseLeave();
     this.setState({ isMouseSelected: false });
   };

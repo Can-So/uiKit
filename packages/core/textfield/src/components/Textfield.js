@@ -60,7 +60,7 @@ class Textfield extends Component<TextFieldProps, State> {
     this.setState({ isHovered: true });
   };
 
-  onMouseLeave: React.MouseEventHandler = () => {
+  onMouseLeave = () => {
     this.setState({ isHovered: false });
   };
 

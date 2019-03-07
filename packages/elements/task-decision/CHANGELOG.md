@@ -1,5 +1,20 @@
 # @atlaskit/task-decision
 
+## 11.3.0
+- [minor] [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+
+  - added SSR tests to task-decision
+
+## 11.2.3
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/renderer@41.0.0
+  - @atlaskit/util-data-test@10.2.2
+
+## 11.2.2
+- Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+  - @atlaskit/renderer@40.0.0
+
 ## 11.2.1
 - Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
   - @atlaskit/editor-common@32.0.0

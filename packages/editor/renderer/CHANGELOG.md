@@ -1,5 +1,46 @@
 # @atlaskit/renderer
 
+## 41.1.1
+- Updated dependencies [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+  - @atlaskit/status@0.5.0
+  - @atlaskit/task-decision@11.3.0
+
+## 41.1.0
+- [minor] [e385e90f31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e385e90f31):
+
+  - CS-840 Email renderer now supports indentations
+
+## 41.0.1
+- Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+  - @atlaskit/status@0.4.0
+
+## 41.0.0
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/media-card@55.0.0
+  - @atlaskit/media-filmstrip@28.0.0
+  - @atlaskit/editor-json-transformer@4.3.1
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/task-decision@11.2.3
+  - @atlaskit/util-data-test@10.2.2
+  - @atlaskit/media-test-helpers@20.1.6
+  - @atlaskit/media-core@27.2.0
+
+## 40.1.1
+- Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
+  - @atlaskit/editor-common@32.4.3
+  - @atlaskit/size-detector@6.0.0
+
+## 40.1.0
+- [minor] [09e8eb968f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09e8eb968f):
+
+  - ED-6256: render media items with occurenceKey; ignore link cards
+
+## 40.0.0
+- [major] [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
+
+  - ED-5766 Remove the deprecated 'message' appearance from Editor
+
 ## 39.0.2
 - Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
   - @atlaskit/editor-json-transformer@4.1.11

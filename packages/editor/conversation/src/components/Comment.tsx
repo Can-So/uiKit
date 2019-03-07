@@ -76,12 +76,13 @@ export default class Comment extends React.Component<Props, State> {
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     const { isEditing, isReplying } = this.state;
-    const { isHighlighted } = this.props;
+    const { isHighlighted, portal } = this.props;
 
     if (
       nextState.isEditing !== isEditing ||
       nextState.isReplying !== isReplying ||
-      nextProps.isHighlighted !== isHighlighted
+      nextProps.isHighlighted !== isHighlighted ||
+      nextProps.portal !== portal
     ) {
       return true;
     }
@@ -340,6 +341,7 @@ export default class Comment extends React.Component<Props, State> {
       allowFeedbackAndHelpButtons,
       onEditorClose,
       onEditorOpen,
+      portal,
     } = this.props;
     const { isEditing } = this.state;
 
@@ -372,6 +374,7 @@ export default class Comment extends React.Component<Props, State> {
         document={comment.document.adf}
         dataProviders={dataProviders}
         disableHeadingIDs={true}
+        portal={portal}
       />
     );
   }
@@ -398,6 +401,7 @@ export default class Comment extends React.Component<Props, State> {
       onEditorOpen,
       onEditorChange,
       sendAnalyticsEvent,
+      portal,
     } = this.props;
 
     if (!comments || comments.length === 0) {
@@ -428,6 +432,7 @@ export default class Comment extends React.Component<Props, State> {
         containerId={containerId}
         disableScrollTo={disableScrollTo}
         sendAnalyticsEvent={sendAnalyticsEvent}
+        portal={portal}
       />
     ));
   }

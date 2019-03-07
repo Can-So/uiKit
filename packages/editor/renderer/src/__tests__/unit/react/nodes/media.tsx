@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import { MediaType } from '@atlaskit/adf-schema';
 import { MediaCard } from '../../../../ui/MediaCard';
 import Media from '../../../../react/nodes/media';
@@ -24,7 +23,7 @@ describe('Media', () => {
       />,
     );
 
-    expect(mediaComponent.find(MediaCard).length).to.equal(1);
+    expect(mediaComponent.find(MediaCard).length).toEqual(1);
     mediaComponent.unmount();
   });
 
@@ -33,7 +32,7 @@ describe('Media', () => {
       <Media type="external" url="http://image.jpg" />,
     );
 
-    expect(mediaComponent.find(MediaCard).length).to.equal(1);
+    expect(mediaComponent.find(MediaCard).length).toEqual(1);
     mediaComponent.unmount();
   });
 });

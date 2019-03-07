@@ -1,5 +1,10 @@
 # @atlaskit/measure
 
+## 0.3.0
+- [minor] [0b87425d4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0b87425d4a):
+
+  - ED-6371 Support passing in package name only as opposed to path from root dir
+
 ## 0.2.1
 - [patch] [a6a76aa7cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6a76aa7cd):
 

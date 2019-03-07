@@ -34,6 +34,8 @@ type ReactSelectProps = {
   components?: {},
   /* Delimiter used to join multiple values into a single HTML Input value */
   delimiter?: string,
+  /* enables default animated behaviour in components */
+  enableAnimation: boolean,
   /* Clear all values when the user presses escape AND the menu is closed */
   escapeClearsValue?: boolean,
   /* Custom method to filter whether an option should be displayed in the menu */
@@ -254,22 +256,30 @@ export default function createSelect(WrappedComponent: ComponentType<*>) {
       this.cacheComponents = memoizeOne(this.cacheComponents, isEqual).bind(
         this,
       );
-      this.cacheComponents(props.components);
+      this.cacheComponents(props.components, props.enableAnimation);
     }
     static defaultProps = {
+      enableAnimation: true,
       validationState: 'default',
       spacing: 'default',
       onClickPreventDefault: true,
       tabSelectsValue: false,
     };
     componentWillReceiveProps(nextProps: Props) {
-      this.cacheComponents(nextProps.components);
+      this.cacheComponents(nextProps.components, nextProps.enableAnimation);
     }
-    cacheComponents = (components?: {}) => {
-      this.components = makeAnimated({
-        ...defaultComponents,
-        ...components,
-      });
+    cacheComponents = (components?: {}, enableAnimation: boolean) => {
+      if (enableAnimation) {
+        this.components = makeAnimated({
+          ...defaultComponents,
+          ...components,
+        });
+      } else {
+        this.components = {
+          ...defaultComponents,
+          ...components,
+        };
+      }
     };
     focus() {
       this.select.focus();
@@ -288,7 +298,7 @@ export default function createSelect(WrappedComponent: ComponentType<*>) {
         isMulti,
         ...props
       } = this.props; // eslint-disable-line
-      const isCompact = !isMulti && spacing === 'compact';
+      const isCompact = spacing === 'compact';
 
       // props must be spread first to stop `components` being overridden
       return (

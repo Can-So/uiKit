@@ -13,6 +13,7 @@ export const deleted: TokenParser = ({ input, position, schema, context }) => {
     TokenType.DOUBLE_DASH_SYMBOL,
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
+    TokenType.ISSUE_KEY,
   ];
   /** Add strike mark to each text */
   const contentDecorator = (n: PMNode) => {

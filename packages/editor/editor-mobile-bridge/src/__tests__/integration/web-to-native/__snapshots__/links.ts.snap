@@ -1,0 +1,358 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`links.ts currentSelection when cursor is on link 1`] = `
+Array [
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+]
+`;
+
+exports[`links.ts currentSelection when cursor is selecting a link 1`] = `
+Array [
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "Atlassian",
+    "url": "https://www.atlassian.com",
+  },
+]
+`;
+
+exports[`links.ts currentSelection when cursor is selecting text and link 1`] = `
+Array [
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "link",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "link",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "link",
+    "url": "https://www.atlassian.com",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": " ",
+    "url": "",
+  },
+  Object {
+    "text": " i",
+    "url": "",
+  },
+  Object {
+    "text": " is",
+    "url": "",
+  },
+  Object {
+    "text": " is ",
+    "url": "",
+  },
+  Object {
+    "text": " is a",
+    "url": "",
+  },
+  Object {
+    "text": " is a ",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+]
+`;
+
+exports[`links.ts currentSelection when no selection 1`] = `
+Array [
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+]
+`;
+
+exports[`links.ts currentSelection when selection 1`] = `
+Array [
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "",
+    "url": "",
+  },
+  Object {
+    "text": "T",
+    "url": "",
+  },
+  Object {
+    "text": "Te",
+    "url": "",
+  },
+  Object {
+    "text": "Tex",
+    "url": "",
+  },
+  Object {
+    "text": "Text",
+    "url": "",
+  },
+]
+`;

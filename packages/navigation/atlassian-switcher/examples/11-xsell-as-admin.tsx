@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import JiraSwitcher from '../src/components/jira-switcher';
-import { mockEndpoints } from './helpers/mock-endpoints';
+import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
+import { withAnalyticsLogger } from './helpers';
+import AtlassianSwitcher from '../src';
 
-export default class JiraSwitcherExample extends Component {
+class JiraSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
   };
@@ -14,23 +15,27 @@ export default class JiraSwitcherExample extends Component {
   }
 
   openDrawer = () => {
-    mockEndpoints('jira', originalMockData => {
-      return {
-        ...originalMockData,
-        LICENSE_INFORMATION_DATA: {
-          hostname: 'https://some-random-instance.atlassian.net',
-          firstActivationDate: 1492488658539,
-          maintenanceEndDate: '2017-04-24',
-          maintenanceStartDate: '2017-04-17',
-          products: {
-            'jira-software.ondemand': {
-              billingPeriod: 'ANNUAL',
-              state: 'ACTIVE',
+    mockEndpoints(
+      'jira',
+      originalMockData => {
+        return {
+          ...originalMockData,
+          LICENSE_INFORMATION_DATA: {
+            hostname: 'https://some-random-instance.atlassian.net',
+            firstActivationDate: 1492488658539,
+            maintenanceEndDate: '2017-04-24',
+            maintenanceStartDate: '2017-04-17',
+            products: {
+              'jira-software.ondemand': {
+                billingPeriod: 'ANNUAL',
+                state: 'ACTIVE',
+              },
             },
           },
-        },
-      };
-    });
+        };
+      },
+      REQUEST_MEDIUM,
+    );
     this.setState({
       isDrawerOpen: true,
     });
@@ -42,15 +47,18 @@ export default class JiraSwitcherExample extends Component {
     });
   };
 
-  onTriggerXFlow = (productKey: string) => {
-    console.log(`Triggering xflow for => ${productKey}`);
+  onTriggerXFlow = (productKey: string, sourceComponent: string) => {
+    console.log(
+      `Triggering xflow for => ${productKey} from ${sourceComponent}`,
+    );
   };
 
   render() {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
-          <JiraSwitcher
+          <AtlassianSwitcher
+            product="jira"
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
           />
@@ -62,3 +70,5 @@ export default class JiraSwitcherExample extends Component {
     );
   }
 }
+
+export default withAnalyticsLogger(JiraSwitcherExample);

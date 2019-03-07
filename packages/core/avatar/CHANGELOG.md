@@ -1,5 +1,10 @@
 # @atlaskit/avatar
 
+## 14.1.9
+- [patch] [92d8e6317c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92d8e6317c):
+
+  - Check if the DOM is available when rendering an AvatarImage so that SSR rendered Avatars will render with the provided image.
+
 ## 14.1.8
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

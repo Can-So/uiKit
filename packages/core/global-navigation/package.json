@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/global-navigation",
-  "version": "5.7.1",
+  "version": "5.7.6",
   "description": "Global navigation component for Atlassian",
   "main": "dist/cjs/index.js",
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
@@ -8,13 +8,17 @@
   "license": "Apache-2.0",
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
+  "maintainers": [
+    "Harsha Ivaturi",
+    "Ajay M"
+  ],
   "files": [
     "dist"
   ],
   "dependencies": {
     "@atlaskit/analytics-namespaced-context": "^2.1.5",
     "@atlaskit/analytics-next": "^3.1.2",
-    "@atlaskit/atlassian-switcher": "^0.0.5",
+    "@atlaskit/atlassian-switcher": "^0.1.0",
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/badge": "^9.2.2",
     "@atlaskit/blanket": "^7.0.12",

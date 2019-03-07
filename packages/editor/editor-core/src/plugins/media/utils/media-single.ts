@@ -117,7 +117,6 @@ export const createMediaSingleNode = (schema: Schema, collection: string) => (
     collection,
     width: Math.round(width / scaleFactor),
     height: Math.round(height / scaleFactor),
-    __key: id,
   });
 
   copyOptionalAttrsFromMediaState(mediaState, mediaNode);

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
+import { CancelableEvent } from '@atlaskit/quick-search';
 import HomeQuickSearchContainer from './home/HomeQuickSearchContainer';
 import ConfluenceQuickSearchContainer from './confluence/ConfluenceQuickSearchContainer';
 import JiraQuickSearchContainer from './jira/JiraQuickSearchContainer';
@@ -30,6 +31,30 @@ export type ReferralContextIdentifiers = {
   currentContentId: string;
 };
 
+export type AdvancedSearchEvent = {
+  /**
+   * prevent navigation to advanced search page
+   */
+  preventDefault: () => void;
+  /**
+   * query entered by user
+   */
+  query: string;
+  /**
+   * if it is jira it can be one of the following ['issues', 'boards', 'projects', 'filters', 'people']
+   * if it is confluence it can be one of the following ['content', 'people']
+   */
+  category: string;
+  /**
+   * orignial event, this is useful when need to check if the click was to open in new tab or in same tab
+   * but if consumer wanna cancel the event {@link preventDefault} should be used
+   */
+  originalEvent: object;
+  /**
+   * searchSessionId from the quick search session, it should be used for the advanced search session
+   */
+  searchSessionId: string;
+};
 export interface Props {
   /**
    * The cloudId of the site the component is embedded in.
@@ -107,6 +132,11 @@ export interface Props {
    * logger with 3 levels error, warn and info
    */
   logger?: Logger;
+
+  /**
+   * call back, to be called when advanced search is clicked
+   */
+  onAdvancedSearch?: (e: AdvancedSearchEvent) => void;
 }
 
 /**
@@ -171,6 +201,29 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
     );
   }
 
+  onAdvancedSearch = (
+    e: CancelableEvent,
+    entity: string,
+    query: string,
+    searchSessionId: string,
+  ) => {
+    if (this.props.onAdvancedSearch) {
+      let preventEventDefault = false;
+      this.props.onAdvancedSearch({
+        preventDefault: () => (preventEventDefault = true),
+        query, // query entered by the user
+        category: entity,
+        originalEvent: e,
+        searchSessionId,
+      });
+
+      if (preventEventDefault) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  };
+
   render() {
     const ContainerComponent = this.getContainerComponent();
     const searchClients = this.memoizedConfigureSearchClients(
@@ -198,6 +251,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
           useCPUSForPeopleResults={useCPUSForPeopleResults}
           disableJiraPreQueryPeopleSearch={disableJiraPreQueryPeopleSearch}
           logger={logger}
+          onAdvancedSearch={this.onAdvancedSearch}
         />
       </MessagesIntlProvider>
     );

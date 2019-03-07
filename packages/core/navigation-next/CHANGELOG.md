@@ -1,5 +1,18 @@
 # @atlaskit/navigation-next
 
+## 4.3.1
+- [patch] [5cf4e22048](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5cf4e22048):
+
+  - Fixes the issue where the switcher stayed open while navigation is being resized.
+  - Fixes the issue where collapse/expanding the navigation caused the Switcher to reset to it's default size.
+
+  [Jira ticket NAV-237](https://product-fabric.atlassian.net/browse/NAV-237)
+
+## 4.3.0
+- [minor] [f54655ac1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f54655ac1a):
+
+  - Support custom data attributes
+
 ## 4.2.3
 - Updated dependencies [06713e0a0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06713e0a0c):
   - @atlaskit/inline-dialog@9.0.15

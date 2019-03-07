@@ -52,6 +52,22 @@ describe('extension', () => {
 
   const extensionAttrs = bodiedExtensionData[1].attrs;
 
+  describe('when extension is selected', () => {
+    it('should delete the bodied extension', () => {
+      const { editorView } = editor(
+        doc(bodiedExtension(extensionAttrs)(paragraph('a{<>}'))),
+      );
+
+      const nodeSelection = new NodeSelection(editorView.state.doc.resolve(0));
+
+      editorView.dispatch(editorView.state.tr.setSelection(nodeSelection));
+
+      removeExtension()(editorView.state, editorView.dispatch);
+
+      expect(editorView.state.doc).toEqualDocument(doc(paragraph('')));
+    });
+  });
+
   describe('when cursor is in between two paragraphs in an extension', () => {
     it("shouldn't create a new extension node on Enter", () => {
       const { editorView } = editor(
@@ -241,7 +257,6 @@ describe('extension', () => {
             mediaSingle({ layout: 'center' })(
               media({
                 id: temporaryFileId,
-                __key: temporaryFileId,
                 type: 'file',
                 collection: testCollectionName,
                 __fileMimeType: 'image/png',

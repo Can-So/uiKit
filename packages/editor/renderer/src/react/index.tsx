@@ -1,7 +1,7 @@
 import * as React from 'react';
 // @ts-ignore: unused variable
 // prettier-ignore
-import { ComponentClass, Consumer, Provider } from 'react';
+import { ComponentType, Consumer, Provider } from 'react';
 import { Fragment, Mark, MarkType, Node, Schema } from 'prosemirror-model';
 
 import { Serializer } from '../';
@@ -13,7 +13,6 @@ import {
   mergeTextNodes,
   isTextWrapper,
   TextWrapper,
-  isEmojiDoc,
   toReact,
 } from './nodes';
 
@@ -26,7 +25,6 @@ import {
   EventHandlers,
   ExtensionHandlers,
 } from '@atlaskit/editor-common';
-import { bigEmojiHeight } from '../utils';
 
 export interface RendererContext {
   objectAri?: string;
@@ -122,7 +120,6 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
       this.resetState();
     }
 
-    const emojiBlock = isEmojiDoc(fragment, props);
     const content = ReactSerializer.getChildNodes(fragment).map(
       (node, index) => {
         if (isTextWrapper(node)) {
@@ -131,9 +128,7 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
 
         let props;
 
-        if (emojiBlock && this.appearance === 'message') {
-          props = this.getEmojiBlockProps(node);
-        } else if (node.type.name === 'table') {
+        if (node.type.name === 'table') {
           props = this.getTableProps(node);
         } else if (node.type.name === 'date') {
           props = this.getDateProps(node, parentInfo);
@@ -188,8 +183,8 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
       return (mark as any).text;
     }
 
-    const content = ((mark as any).content || []).map((child, index) =>
-      this.serializeMark(child, index),
+    const content = ((mark as any).content || []).map(
+      (child: Mark, index: number) => this.serializeMark(child, index),
     );
     return this.renderMark(
       markToReact(mark),
@@ -200,7 +195,7 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
   }
 
   private renderNode(
-    NodeComponent: ComponentClass<any>,
+    NodeComponent: ComponentType<any>,
     props: any,
     key: string,
     content: string | JSX.Element | any[] | null | undefined,
@@ -213,7 +208,7 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
   }
 
   private renderMark(
-    MarkComponent: ComponentClass<any>,
+    MarkComponent: ComponentType<any>,
     props: any,
     key: string,
     content: any,
@@ -223,13 +218,6 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
         {content}
       </MarkComponent>
     );
-  }
-
-  private getEmojiBlockProps(node: Node) {
-    return {
-      ...this.getProps(node),
-      fitToHeight: bigEmojiHeight,
-    };
   }
 
   private getTableProps(node: Node) {
@@ -280,13 +268,13 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
 
     const headingId = (node as any).content
       .toJSON()
-      .reduce((acc, node) => acc.concat(getText(node) || ''), '')
+      .reduce((acc: string, node: any) => acc.concat(getText(node) || ''), '')
       .replace(/ /g, '-');
 
     return this.getUniqueHeadingId(headingId);
   }
 
-  private getUniqueHeadingId(baseId, counter = 0) {
+  private getUniqueHeadingId(baseId: string, counter = 0): string {
     if (counter === 0 && this.headingIds.indexOf(baseId) === -1) {
       this.headingIds.push(baseId);
       return baseId;

@@ -78,9 +78,9 @@ pipelines:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
               # Run the non-editor tests, --passWithNoTests has been added in case of no tests found to avoid failure in CI.
-              - TEST_ONLY_PATTERN='!packages/editor' yarn run test:changed --passWithNoTests
-              # Run the editor tests (runInBand is required or it fails in CI).
-              - TEST_ONLY_PATTERN='packages/editor' yarn run test:changed --runInBand --passWithNoTests
+              - TEST_ONLY_PATTERN='!packages/editor' yarn test:changed --passWithNoTests
+              # Run the editor tests (runInBand is required or it fails in CI)
+              - TEST_ONLY_PATTERN='packages/editor' yarn test:changed --runInBand --passWithNoTests
               # This script acts like a unit test to check changes to @atlaskit/adf-schema.
               - node build/ci-scripts/run.if.package.changed.js @atlaskit/adf-schema -- yarn build:adf-schema:checkuptodate
             caches:
@@ -236,6 +236,7 @@ pipelines:
             - yarn test
             - yarn test:browser:browserstack
             - yarn test:webdriver:browserstack
+            - yarn test:vr
             - cd website
             # don't worry about deploying, this build will always be run alongside a branch build
             - yarn build
@@ -322,6 +323,21 @@ pipelines:
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
                 - LANDKID=true yarn test:webdriver:browserstack:changed
+          - step:
+              name: Running Visual Regression tests
+              image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
+              script:
+                - source ./build-setup.sh
+                - git merge master --no-edit
+                - git lfs pull
+                - bolt install --pure-lockfile
+                - yarn test:vr:dependents
+              after-script:
+                # Extract all the diff images and store them into a folder for download.
+                - mkdir ./imageSnapshotFailures && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
+              # If a failure occurs, you can download the image snapshot of the differences.
+              artifacts: 
+                - imageSnapshotFailures/**
       - step:
           name: Wait until no master is running
           script:

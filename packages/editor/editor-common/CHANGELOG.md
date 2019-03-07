@@ -1,5 +1,57 @@
 # @atlaskit/editor-common
 
+## 33.0.2
+- [patch] [2b4b290610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2b4b290610):
+
+  - ED-6461: Fix placement start when scrolling for Popup
+
+## 33.0.1
+- [patch] [1c00bd6268](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c00bd6268):
+
+  - ED-6409: set minWidth to 140px for all new columns in resized table
+
+## 33.0.0
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/emoji@56.0.0
+  - @atlaskit/media-card@55.0.0
+  - @atlaskit/editor-json-transformer@4.3.1
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/media-core@27.2.0
+
+## 32.4.3
+- Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
+  - @atlaskit/size-detector@6.0.0
+
+## 32.4.2
+- [patch] [4eb1af2892](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4eb1af2892):
+
+  - ED-6265 fix external image call to media for dimensions
+
+## 32.4.1
+- [patch] [42b78a6133](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/42b78a6133):
+
+  - ED-6278: a complete rewrite of mergeCells, deleteColumns and deleteRows
+
+## 32.4.0
+- [minor] [30b4e99377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/30b4e99377):
+
+  - ED-5888 Add editor dark mode
+
+## 32.3.1
+- [patch] [f5e8437365](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e8437365):
+
+  - ED-6373: Fix position of breakout controls while scrolling
+
+## 32.3.0
+- [minor] [b1ff16a33f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ff16a33f):
+
+  - Improved typings for editor-common
+
+## 32.2.0
+- [minor] [3672ec23ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3672ec23ef):
+
+  - [ED-5788] Add new layout Breakout button for CodeBlock and Layout
+
 ## 32.1.0
 - [minor] [5dc1e046b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dc1e046b2):
 

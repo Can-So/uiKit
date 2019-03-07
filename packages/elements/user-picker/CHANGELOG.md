@@ -1,5 +1,20 @@
 # @atlaskit/user-picker
 
+## 1.0.24
+- [patch] [97307d9dd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97307d9dd1):
+
+  - FS-3618 add isValidEmail prop to UserPicker
+
+## 1.0.23
+- [patch] [ad1bd2a92e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad1bd2a92e):
+
+  - FS-3605 expose prop to disable input
+
+## 1.0.22
+- [patch] [46ffd45f21](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46ffd45f21):
+
+  - Added ability to toggle animations in atlaskit/select, updated UserPicker to disable animations using this new behaviour
+
 ## 1.0.21
 - [patch] [b38b2098e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b38b2098e3):
 

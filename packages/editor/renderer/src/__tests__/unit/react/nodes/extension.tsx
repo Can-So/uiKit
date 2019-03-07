@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import Extension from '../../../../react/nodes/extension';
 import { RendererContext } from '../../../../react';
 import ReactSerializer from '../../../../react';
@@ -89,7 +88,7 @@ describe('Renderer - React/Nodes/Extension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('This is the default text');
+    ).toEqual('This is the default text');
     extension.unmount();
   });
 
@@ -109,7 +108,7 @@ describe('Renderer - React/Nodes/Extension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('This is a react element');
+    ).toEqual('This is a react element');
     extension.unmount();
   });
 
@@ -129,7 +128,7 @@ describe('Renderer - React/Nodes/Extension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('This is a ADF node');
+    ).toEqual('This is a ADF node');
     extension.unmount();
   });
 
@@ -149,7 +148,7 @@ describe('Renderer - React/Nodes/Extension', () => {
         .find('div')
         .first()
         .text(),
-    ).to.equal('extension');
+    ).toEqual('extension');
     extension.unmount();
   });
 
@@ -169,7 +168,7 @@ describe('Renderer - React/Nodes/Extension', () => {
       />,
     );
 
-    expect(extensionHandler.mock.calls[0][0]).to.eql({
+    expect(extensionHandler.mock.calls[0][0]).toEqual({
       type: 'extension',
       extensionType: 'com.atlassian.fabric',
       extensionKey: 'react',

@@ -317,6 +317,19 @@ export class PluginState {
       });
     }
 
+    const { selection } = tr;
+    decorationSet.find().forEach((deco: any) => {
+      if (deco.type.toDOM) {
+        if (deco.from === selection.from && deco.to === selection.to) {
+          deco.type.toDOM.classList.add('telepointer-dim');
+          deco.type.side = -1;
+        } else {
+          deco.type.toDOM.classList.remove('telepointer-dim');
+          deco.type.side = 0;
+        }
+      }
+    });
+
     if (remove.length) {
       decorationSet = decorationSet.remove(remove);
     }

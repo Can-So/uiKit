@@ -27,7 +27,6 @@ const createMediaState = (
   id,
   status: 'preview',
   dimensions: { width, height },
-  fileId: Promise.resolve('hello'),
 });
 
 describe('media-single', () => {
@@ -59,7 +58,6 @@ describe('media-single', () => {
             editorView,
             media({
               id: temporaryFileId,
-              __key: temporaryFileId,
               type: 'file',
               collection: testCollectionName,
               __fileMimeType: 'pdf',
@@ -77,7 +75,6 @@ describe('media-single', () => {
             editorView,
             media({
               id: temporaryFileId,
-              __key: temporaryFileId,
               type: 'file',
               collection: testCollectionName,
               __fileMimeType: 'image/png',
@@ -90,7 +87,6 @@ describe('media-single', () => {
               mediaSingle({ layout: 'center' })(
                 media({
                   id: temporaryFileId,
-                  __key: temporaryFileId,
                   type: 'file',
                   collection: testCollectionName,
                   __fileMimeType: 'image/png',
@@ -143,7 +139,6 @@ describe('media-single', () => {
             mediaSingle({ layout: 'center' })(
               media({
                 id: temporaryFileId,
-                __key: temporaryFileId,
                 type: 'file',
                 collection: testCollectionName,
                 width: 256,
@@ -153,7 +148,6 @@ describe('media-single', () => {
             mediaSingle({ layout: 'center' })(
               media({
                 id: temporaryFileId + '1',
-                __key: temporaryFileId + '1',
                 type: 'file',
                 collection: testCollectionName,
                 width: 256,
@@ -163,7 +157,6 @@ describe('media-single', () => {
             mediaSingle({ layout: 'center' })(
               media({
                 id: temporaryFileId + '2',
-                __key: temporaryFileId + '2',
                 type: 'file',
                 collection: testCollectionName,
                 width: 256,

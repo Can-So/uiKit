@@ -28,8 +28,9 @@ export function insertText(
 
 export type BuilderContent = (schema: Schema) => RefsNode | RefsNode[];
 
-const processText = (schema, content: Array<string>) => coerce(content, schema);
-const processNodeMark = (schema, content: BuilderContent) => {
+const processText = (schema: Schema, content: Array<string>) =>
+  coerce(content, schema);
+const processNodeMark = (schema: Schema, content: BuilderContent) => {
   const nodes = content(schema);
   const refs = ([] as RefsNode[])
     .concat(nodes)
