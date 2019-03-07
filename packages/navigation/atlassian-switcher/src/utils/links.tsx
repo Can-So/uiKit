@@ -39,7 +39,7 @@ interface MessagesDict {
   };
 }
 
-type TranslatedLabel = React.ReactElement<FormattedMessage> | string;
+type TranslatedLabel = React.ReactNode | string;
 
 export type SwitcherItemType = {
   key: string;
