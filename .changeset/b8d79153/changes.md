@@ -1,2 +1,0 @@
-- Exposed shareFormTitle prop to customise Share Form title
-- Removed object type from Copy link button

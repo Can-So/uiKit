@@ -1,5 +1,11 @@
 # @atlaskit/share
 
+## 0.1.16
+- [patch] [aca247a78b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aca247a78b):
+
+  - Exposed shareFormTitle prop to customise Share Form title
+  - Removed object type from Copy link button
+
 ## 0.1.15
 - [patch] [312572b5f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/312572b5f8):
 
