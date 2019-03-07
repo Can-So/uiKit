@@ -52,7 +52,7 @@ export interface Props {
   createAnalyticsEvent?: CreateAnalyticsEventFn;
   handleSearchSubmit?(
     event: React.KeyboardEvent<HTMLInputElement>,
-    searchSessionId: String,
+    searchSessionId: string,
   ): void;
   isSendSearchTermsEnabled?: boolean;
   placeholder?: string;
@@ -359,7 +359,7 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     }
   };
 
-  handleSearchSubmit = event => {
+  handleSearchSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { handleSearchSubmit } = this.props;
     if (handleSearchSubmit) {
       handleSearchSubmit(event, this.state.searchSessionId);

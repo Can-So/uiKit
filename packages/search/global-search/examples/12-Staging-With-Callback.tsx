@@ -39,7 +39,7 @@ export default class extends React.Component<{}, { cloudId: string }> {
         {...config}
         onAdvancedSearch={e => {
           e.preventDefault();
-          console.log('on advacned search', e);
+          console.log('on advanced search', e);
           alert(
             `should redirect to advanced "${e.category}" search with query "${
               e.query

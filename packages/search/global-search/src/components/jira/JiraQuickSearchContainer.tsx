@@ -73,9 +73,9 @@ export interface Props {
   isSendSearchTermsEnabled?: boolean;
   onAdvancedSearch?: (
     e: CancelableEvent,
-    entity: String,
-    query: String,
-    searchSessionId: String,
+    entity: string,
+    query: string,
+    searchSessionId: string,
   ) => void;
 }
 
@@ -111,9 +111,12 @@ export class JiraQuickSearchContainer extends React.Component<
     postQueryScreenCounter: new SearchScreenCounter(),
   };
 
-  handleSearchSubmit = (event, searchSessionId) => {
+  handleSearchSubmit = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+    searchSessionId: string,
+  ) => {
     const { onAdvancedSearch = () => {} } = this.props;
-    const target = event.target;
+    const target = event.target as HTMLInputElement;
     const query = target.value;
     let defaultPrevented = false;
 
