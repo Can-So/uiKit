@@ -328,8 +328,8 @@ pipelines:
               image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
               script:
                 - source ./build-setup.sh
-                - git lfs pull
                 - git merge master --no-edit
+                - git lfs pull
                 - bolt install --pure-lockfile
                 - yarn test:vr:dependents
               after-script:
