@@ -21,7 +21,7 @@ describe('Columns:', () => {
     await snapshot(page);
   });
 
-  it('should place: start,end on scroll', async () => {
+  it('should place breakout at the start/end of the scroll', async () => {
     const columnNumber = 1;
     const offset = 100;
 
