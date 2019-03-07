@@ -99,9 +99,6 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   getFieldId = memoizeOne(name => `${name}-${uuid()}`);
 
-  fieldRef = React.createRef();
-  inputRef = React.createRef();
-
   state = {
     // eslint-disable-next-line no-unused-vars
     onChange: (e, value) => {},
@@ -181,28 +178,11 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   componentDidMount() {
     this.unregisterField = this.register();
-    if (this.fieldRef.current) {
-      this.fieldRef.current.addEventListener('keydown', this.handleKeyDown);
-    }
   }
 
   componentWillUnmount() {
     this.unregisterField();
-    if (this.fieldRef.current) {
-      this.fieldRef.current.removeEventListener('keydown', this.handleKeyDown);
-    }
   }
-
-  handleKeyDown = (event: SyntheticKeyboardEvent<any>) => {
-    if (
-      event.key === 'Enter' &&
-      (event.ctrlKey || event.metaKey) &&
-      this.inputRef.current
-    ) {
-      this.inputRef.current.click();
-      event.preventDefault();
-    }
-  };
 
   render() {
     const {
@@ -234,7 +214,7 @@ class FieldInner extends React.Component<InnerProps, State> {
       id: fieldId,
     };
     return (
-      <FieldWrapper innerRef={this.fieldRef}>
+      <FieldWrapper>
         {label && (
           <Label id={`${fieldId}-label`} htmlFor={fieldId}>
             {label}
@@ -243,7 +223,6 @@ class FieldInner extends React.Component<InnerProps, State> {
             )}
           </Label>
         )}
-        <input ref={this.inputRef} type="submit" hidden />
         <FieldId.Provider value={fieldId}>
           {children({ fieldProps, error, meta: rest })}
         </FieldId.Provider>

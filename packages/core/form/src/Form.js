@@ -125,6 +125,17 @@ class Form extends React.Component<Props, State> {
     }
   };
 
+  handleKeyDown = (e: SyntheticKeyboardEvent<HTMLFormElement>) => {
+    if (
+      e.key === 'Enter' &&
+      (e.ctrlKey || e.metaKey) &&
+      this.formRef.current &&
+      this.formRef.current.reportValidity()
+    ) {
+      this.form.submit();
+    }
+  };
+
   render() {
     const { isDisabled, children } = this.props;
     const { dirty, submitting } = this.state;
@@ -135,6 +146,7 @@ class Form extends React.Component<Props, State> {
             formProps: {
               onSubmit: this.handleSubmit,
               ref: this.formRef,
+              onKeyDown: this.handleKeyDown,
             },
             dirty,
             submitting,
