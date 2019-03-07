@@ -126,13 +126,12 @@ class Form extends React.Component<Props, State> {
   };
 
   handleKeyDown = (e: SyntheticKeyboardEvent<HTMLFormElement>) => {
-    if (
-      e.key === 'Enter' &&
-      (e.ctrlKey || e.metaKey) &&
-      this.formRef.current &&
-      this.formRef.current.reportValidity()
-    ) {
-      this.form.submit();
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && this.formRef.current) {
+      const submitButton = this.formRef.current.querySelector(
+        'button:not([type]), button[type="submit"], input[type="submit"]',
+      );
+      if (submitButton) submitButton.click();
+      e.preventDefault();
     }
   };
 
