@@ -1,6 +1,5 @@
 import { createTag, serializeStyle } from '../util';
 import { MarkSerializerOpts } from '../interfaces';
-import { AlignmentAttributes } from '@atlaskit/adf-schema';
 
 export const emailAlignmentsMap: { [key: string]: string } = {
   end: 'right',
@@ -8,10 +7,10 @@ export const emailAlignmentsMap: { [key: string]: string } = {
   center: 'center',
 };
 
-const css = ({ align }: AlignmentAttributes) =>
+const css = (alignment: any) =>
   serializeStyle({
     width: '100%',
-    'text-align': emailAlignmentsMap[align],
+    'text-align': emailAlignmentsMap[alignment],
   });
 
 export default function alignment({ mark, text }: MarkSerializerOpts) {
