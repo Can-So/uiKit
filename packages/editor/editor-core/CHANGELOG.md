@@ -1,5 +1,13 @@
 # @atlaskit/editor-core
 
+## 102.1.10
+- Updated dependencies [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+  - @atlaskit/renderer@41.1.1
+  - @atlaskit/date@0.4.0
+  - @atlaskit/emoji@56.2.0
+  - @atlaskit/status@0.5.0
+  - @atlaskit/task-decision@11.3.0
+
 ## 102.1.9
 - [patch] [9b0f6671ae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b0f6671ae):
 

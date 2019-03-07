@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/elements-test-helpers",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "common test helpers",
   "config": {
     "access": "public"
@@ -23,7 +23,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
     "react-intl": "^2.6.0"
-  },  
+  },
   "author": "Atlassian Pty. Ltd",
   "maintainers": [
     "Eduardo S"
