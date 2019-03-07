@@ -26,5 +26,5 @@ export enum Product {
 }
 
 export type FeatureFlagProps = {
-  enableSingleJiraLink: boolean;
+  enableSplitJira: boolean;
 };

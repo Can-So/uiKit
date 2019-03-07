@@ -123,7 +123,7 @@ export const getProductIsActive = (
 
 export const getLicensedProductLinks = (
   licenseInformationData: LicenseInformationDataStructure,
-  enableSingleJiraLink: boolean,
+  enableSplitJira: boolean,
 ): SwitcherItemType[] => {
   const activeJiraProducts = [
     ProductKey.JIRA_SOFTWARE,
@@ -135,7 +135,7 @@ export const getLicensedProductLinks = (
   );
 
   const jiraProducts =
-    enableSingleJiraLink && activeJiraProducts.length
+    !enableSplitJira && activeJiraProducts.length
       ? [SINGLE_JIRA_PRODUCT]
       : activeJiraProducts;
 

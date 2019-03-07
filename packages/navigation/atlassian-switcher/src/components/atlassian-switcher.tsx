@@ -34,7 +34,7 @@ const AtlassianSwitcher = ({
   product,
   cloudId,
   triggerXFlow,
-  enableSingleJiraLink = false,
+  enableSplitJira = false,
   ...props
 }: AtlassianSwitcherProps) => {
   let switcher: React.ReactNode;
@@ -44,7 +44,7 @@ const AtlassianSwitcher = ({
         <JiraSwitcher
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}
-          enableSingleJiraLink={enableSingleJiraLink}
+          enableSplitJira={enableSplitJira}
           {...props}
         />
       );
@@ -54,7 +54,7 @@ const AtlassianSwitcher = ({
         <ConfluenceSwitcher
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}
-          enableSingleJiraLink={enableSingleJiraLink}
+          enableSplitJira={enableSplitJira}
           {...props}
         />
       );
@@ -68,7 +68,7 @@ const AtlassianSwitcher = ({
           cloudId={cloudId}
           triggerXFlow={triggerXFlow}
           product={product}
-          enableSingleJiraLink={enableSingleJiraLink}
+          enableSplitJira={enableSplitJira}
           {...props}
         />
       );

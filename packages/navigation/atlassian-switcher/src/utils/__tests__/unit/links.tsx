@@ -68,52 +68,43 @@ describe('utils/links', () => {
         'confluence.ondemand',
       ]);
     });
-    it('should not add Jira Core for Jira Software', () => {
-      const licenseInformation = generateLicenseInformation([
-        'jira-software.ondemand',
-      ]);
-      const result = getLicensedProductLinks(licenseInformation, false);
-      expect(result.map(({ key }) => key)).toMatchObject([
-        'jira-software.ondemand',
-      ]);
-    });
-    it('should not add Jira Core for Jira Service Desk', () => {
-      const licenseInformation = generateLicenseInformation([
-        'jira-servicedesk.ondemand',
-      ]);
-      const result = getLicensedProductLinks(licenseInformation, false);
-      expect(result.map(({ key }) => key)).toMatchObject([
-        'jira-servicedesk.ondemand',
-      ]);
-    });
-    it('should not add Jira Core for Jira Ops', () => {
-      const licenseInformation = generateLicenseInformation([
-        'jira-incident-manager.ondemand',
-      ]);
-      const result = getLicensedProductLinks(licenseInformation, false);
-      expect(result.map(({ key }) => key)).toMatchObject([
-        'jira-incident-manager.ondemand',
-      ]);
-    });
-    it('should not use single Jira link if enabled without jira product', () => {
-      const licenseInformation = generateLicenseInformation([
-        'confluence.ondemand',
-      ]);
-      const result = getLicensedProductLinks(licenseInformation, true);
-      expect(result.map(({ key }) => key)).toMatchObject([
-        'confluence.ondemand',
-      ]);
-    });
-    it('should use single Jira link if enabled and there is jira product', () => {
+    it('should use single Jira link if split jira disabled and there is jira product', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-software.ondemand',
         'jira-incident-manager.ondemand',
         'confluence.ondemand',
       ]);
-      const result = getLicensedProductLinks(licenseInformation, true);
+      const result = getLicensedProductLinks(licenseInformation, false);
       expect(result.map(({ key }) => key)).toMatchObject([
         'jira',
         'confluence.ondemand',
+      ]);
+    });
+    it('should not add Jira Core for Jira Software if jira split enabled', () => {
+      const licenseInformation = generateLicenseInformation([
+        'jira-software.ondemand',
+      ]);
+      const result = getLicensedProductLinks(licenseInformation, true);
+      expect(result.map(({ key }) => key)).toMatchObject([
+        'jira-software.ondemand',
+      ]);
+    });
+    it('should not add Jira Core for Jira Service Desk if jira split enabled', () => {
+      const licenseInformation = generateLicenseInformation([
+        'jira-servicedesk.ondemand',
+      ]);
+      const result = getLicensedProductLinks(licenseInformation, true);
+      expect(result.map(({ key }) => key)).toMatchObject([
+        'jira-servicedesk.ondemand',
+      ]);
+    });
+    it('should not add Jira Core for Jira Ops if jira split enabled', () => {
+      const licenseInformation = generateLicenseInformation([
+        'jira-incident-manager.ondemand',
+      ]);
+      const result = getLicensedProductLinks(licenseInformation, true);
+      expect(result.map(({ key }) => key)).toMatchObject([
+        'jira-incident-manager.ondemand',
       ]);
     });
   });

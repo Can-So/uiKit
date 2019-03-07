@@ -82,7 +82,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
   render() {
     const {
       cloudId,
-      enableSingleJiraLink,
+      enableSplitJira,
       suggestedProductLink,
       customLinks: { isLoading: isLoadingCustomLinks, data: customLinksData },
       recentContainers: {
@@ -128,7 +128,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
     const fixedProductLinks = getFixedProductLinks();
     const licensedProductLinks = getLicensedProductLinks(
       licenseInformationData!,
-      enableSingleJiraLink,
+      enableSplitJira,
     );
 
     const adminLinks = hasAdminLinks

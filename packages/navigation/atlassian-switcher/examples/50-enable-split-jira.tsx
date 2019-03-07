@@ -41,7 +41,7 @@ class JiraSwitcherExample extends Component {
             product="jira"
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
-            enableSingleJiraLink={true}
+            enableSplitJira={true}
           />
         </Drawer>
         <Button type="button" onClick={this.openDrawer}>

@@ -1,1 +1,1 @@
-- Add enableSingleJiraLink to allow only single jira link displayed if there are jira products
+- Add enableSplitJira to allow multiple jira link displayed if there are jira products
