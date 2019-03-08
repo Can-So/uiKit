@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { mount, shallow } from 'enzyme';
 
 import FieldRadioGroup, { AkFieldRadioGroup } from '../..';
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 import Radio from '../../RadioBase';
 import type { ItemsPropTypeSmart } from '../../types';
 

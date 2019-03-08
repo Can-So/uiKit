@@ -7,6 +7,7 @@ const mockMediaPickerFacade = {
       on: jest.fn(),
       onClose: jest.fn().mockReturnValue(removeOnCloseListener),
       onNewMedia: jest.fn(),
+      onMediaEvent: jest.fn(),
       onDrag: jest.fn(),
       hide: jest.fn(),
       setUploadParams: jest.fn(),
@@ -38,17 +39,14 @@ import {
 import {
   stateKey as mediaPluginKey,
   MediaPluginState,
-  DefaultMediaStateManager,
 } from '../../../../plugins/media/pm-plugins/main';
 import mediaPlugin from '../../../../plugins/media';
 
-const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 const getFreshMediaProvider = () =>
   storyMediaProviderFactory({
     collectionName: testCollectionName,
-    stateManager,
     includeUserAuthProvider: true,
   });
 

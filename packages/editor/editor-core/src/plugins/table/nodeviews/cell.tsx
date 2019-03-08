@@ -187,6 +187,10 @@ class CellView extends ReactNodeView {
       this.view.state.selection,
     );
 
+    if (!table) {
+      return;
+    }
+
     const elemOrWrapper =
       closestElement(
         elem,
@@ -197,9 +201,11 @@ class CellView extends ReactNodeView {
     const { minWidth } = contentWidth(elem, elem);
 
     if (table && elemOrWrapper && elemOrWrapper.offsetWidth < minWidth) {
+      const cellPos = this.getPos();
       handleBreakoutContent(
         this.view,
         elemOrWrapper,
+        cellPos,
         table.pos + 1,
         minWidth,
         table.node,

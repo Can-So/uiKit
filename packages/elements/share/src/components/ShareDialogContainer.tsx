@@ -28,8 +28,10 @@ export type Props = {
   originTracingFactory: OriginTracingFactory;
   productId: string;
   shareAri: string;
+  shareContentType: string;
   shareLink: string;
   shareTitle: string;
+  shareFormTitle?: React.ReactNode;
   shouldCloseOnEscapePress?: boolean;
   triggerButtonAppearance?: ButtonAppearances;
   triggerButtonStyle?: ShareButtonStyle;
@@ -126,6 +128,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       originTracingFactory,
       productId,
       shareAri,
+      shareContentType,
       shareLink,
       shareTitle,
     } = this.props;
@@ -134,6 +137,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       // original share link is used here
       link: shareLink,
       title: shareTitle,
+      type: shareContentType,
     };
     const metaData: MetaData = {
       productId,
@@ -174,6 +178,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       formatCopyLink,
       loadUserOptions,
       shareLink,
+      shareFormTitle,
       shouldCloseOnEscapePress,
       triggerButtonAppearance,
       triggerButtonStyle,
@@ -186,6 +191,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
         loadUserOptions={loadUserOptions}
         onLinkCopy={this.handleCopyLink}
         onShareSubmit={this.handleSubmitShare}
+        shareFormTitle={shareFormTitle}
         shouldCloseOnEscapePress={shouldCloseOnEscapePress}
         triggerButtonAppearance={triggerButtonAppearance}
         triggerButtonStyle={triggerButtonStyle}

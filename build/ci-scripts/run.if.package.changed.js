@@ -36,7 +36,7 @@ async function getNewFSChangesets(cwd) {
 }
 
 /**
- * This is a helper to run a script if a certaing package changed.
+ * This is a helper to run a script if a certain package changed.
  * It works by returning a zero code if a tool should be run, so that the normal usage becomes:
  *
  * `node build/ci-scripts/run.if.package.changed @full/package-name -- yarn toolName`.

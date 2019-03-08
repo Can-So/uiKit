@@ -81,6 +81,8 @@ export type ConnectedLayoutManagerProps = {
   collapseToggleTooltipContent: CollapseToggleTooltipContent,
   ...$Exact<CollapseListeners>,
   ...$Exact<ExperimentalFeatureFlags>,
+  /** The top offset value to be used in navigation */
+  topOffset?: number,
 };
 
 export type LayoutManagerProps = {

@@ -209,6 +209,29 @@ describe('ShareDialogWithTrigger', () => {
     });
   });
 
+  describe('shareFormTitle prop', () => {
+    it('should be passed to the ShareForm', () => {
+      const wrapper: ShallowWrapper<
+        Props & InjectedIntlProps
+      > = shallowWithIntl<Props>(
+        <ShareDialogWithTrigger
+          copyLink="copyLink"
+          loadUserOptions={mockLoadOptions}
+          onShareSubmit={mockOnShareSubmit}
+          shareFormTitle="Share this page"
+        />,
+      );
+      wrapper.setState({ isDialogOpen: true });
+
+      const ShareFormProps = shallow(wrapper
+        .find(InlineDialog)
+        .prop('content') as any)
+        .find(ShareForm)
+        .props();
+      expect(ShareFormProps.title).toEqual('Share this page');
+    });
+  });
+
   describe('handleOpenDialog', () => {
     it('should set the isDialogOpen state to true', () => {
       expect((wrapper.state() as State).isDialogOpen).toEqual(false);

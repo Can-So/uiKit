@@ -91,6 +91,7 @@ export const fixAutoSizedTable = (
   tableNode: PMNode,
   tableRef: HTMLTableElement,
   tablePos: number,
+  opts: { dynamicTextSizing: boolean; containerWidth: number },
 ): Transaction => {
   let { tr } = view.state;
   const domAtPos = view.domAtPos.bind(view);
@@ -106,7 +107,11 @@ export const fixAutoSizedTable = (
     0,
   );
   const tableLayout = getLayoutBasedOnWidth(totalContentWidth);
-  const maxLayoutSize = getLayoutSize(tableLayout);
+  const maxLayoutSize = getLayoutSize(
+    tableLayout,
+    opts.containerWidth,
+    opts.dynamicTextSizing,
+  );
 
   // Content width will generally not meet the constraints of the layout
   // whether it be below or above, so we scale our columns widths

@@ -3,32 +3,32 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 5822,
-      "gzipSize": 2185
+      "size": 5762,
+      "gzipSize": 2182
     }
   },
   {
     "id": "node_modules.main",
     "name": "node_modules [main]",
     "stats": {
-      "size": 31131,
-      "gzipSize": 8013
+      "size": 31132,
+      "gzipSize": 8015
     }
   },
   {
     "id": "atlaskit.core.main",
     "name": "main",
     "stats": {
-      "size": 56479,
-      "gzipSize": 13559
+      "size": 56668,
+      "gzipSize": 13619
     }
   },
   {
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 92666,
-      "gzipSize": 22331
+      "size": 92795,
+      "gzipSize": 22451
     }
   }
 ]

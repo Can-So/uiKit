@@ -8,12 +8,7 @@ export { default as CollapsedEditor } from './ui/CollapsedEditor';
 export { default as ToolbarHelp } from './ui/ToolbarHelp';
 export { default as ToolbarFeedback } from './ui/ToolbarFeedback';
 export { EmojiResource } from '@atlaskit/emoji';
-export {
-  DefaultMediaStateManager,
-  MediaStateManager,
-  MediaProvider,
-  CustomMediaPicker,
-} from './plugins/media';
+export { MediaProvider, CustomMediaPicker } from './plugins/media';
 export { CollabEditProvider } from './plugins/collab-edit';
 export { MediaOptions } from './plugins/media';
 export {

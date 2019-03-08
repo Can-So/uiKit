@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import ChevronLeftLargeIcon from '@atlaskit/icon/glyph/chevron-left-large';
 
-import { name } from '../../../../../package.json';
+import { name } from '../../../../version.json';
 import LeftNavigator from '../../../../components/Navigators/LeftNavigator';
 
 describe(`${name} - LeftNavigator`, () => {

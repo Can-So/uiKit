@@ -16,7 +16,7 @@ import { parse, format, isValid } from 'date-fns';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../package.json';
+} from '../version.json';
 
 import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';

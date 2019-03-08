@@ -3,6 +3,8 @@ import JiraSwitcher from './jira-switcher';
 import ConfluenceSwitcher from './confluence-switcher';
 import GenericSwitcher from './generic-switcher';
 import ErrorBoundary from './error-boundary';
+import IntlProvider from './intl-provider';
+import messages from '../utils/messages';
 import { Product } from '../types';
 
 interface AtlassianSwitcherProps {
@@ -42,12 +44,14 @@ const AtlassianSwitcher = ({
   }
   return (
     <ErrorBoundary>
-      <Switcher
-        cloudId={cloudId}
-        triggerXFlow={triggerXFlow}
-        product={product}
-        {...props}
-      />
+      <IntlProvider>
+        <Switcher
+          cloudId={cloudId}
+          triggerXFlow={triggerXFlow}
+          messages={messages}
+          {...props}
+        />
+      </IntlProvider>
     </ErrorBoundary>
   );
 };

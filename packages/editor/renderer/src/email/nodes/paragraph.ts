@@ -1,4 +1,4 @@
-import { createTag, serializeStyle } from '../util';
+import { createTag, serializeStyle, applyMarks } from '../util';
 import { NodeSerializerOpts } from '../interfaces';
 
 const css = serializeStyle({
@@ -6,6 +6,7 @@ const css = serializeStyle({
   'word-wrap': 'break-word',
 });
 
-export default function paragraph({ text }: NodeSerializerOpts) {
-  return createTag('p', { style: css }, text);
+export default function paragraph({ text, marks }: NodeSerializerOpts) {
+  const paragraph = createTag('p', { style: css }, text);
+  return applyMarks(marks, paragraph);
 }

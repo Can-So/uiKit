@@ -1,5 +1,14 @@
 # @atlaskit/icon-file-type
 
+## 3.0.4
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/field-text@8.0.0
+  - @atlaskit/modal-dialog@8.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/tooltip@13.0.0
+
 ## 3.0.3
 - [patch] [1d1f6d1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d1f6d1):
 

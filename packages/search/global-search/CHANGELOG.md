@@ -1,5 +1,33 @@
 # @atlaskit/global-search
 
+## 5.16.4
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/icon-file-type@3.0.4
+  - @atlaskit/icon-object@3.0.4
+  - @atlaskit/analytics-gas-types@3.2.5
+  - @atlaskit/util-service-support@3.1.1
+  - @atlaskit/quick-search@5.4.1
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+  - @atlaskit/analytics@5.0.0
+  - @atlaskit/avatar@15.0.0
+  - @atlaskit/drawer@3.0.0
+  - @atlaskit/dropdown-menu@7.0.0
+  - @atlaskit/field-text-area@5.0.0
+  - @atlaskit/flag@10.0.0
+  - @atlaskit/logo@10.0.0
+  - @atlaskit/modal-dialog@8.0.0
+  - @atlaskit/navigation@34.0.0
+  - @atlaskit/page@9.0.0
+  - @atlaskit/theme@8.0.0
+
+## 5.16.3
+- [patch] [ea6c801333](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea6c801333):
+
+  - added searchSessionId to advanced search handler
+
 ## 5.16.2
 - [patch] [83e94783d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/83e94783d0):
 

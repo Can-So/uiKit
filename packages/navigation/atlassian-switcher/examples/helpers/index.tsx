@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { IntlProvider } from 'react-intl';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 
@@ -107,4 +108,10 @@ export const withAnalyticsLogger = WrappedComponent => props => (
   <AnalyticsLogger>
     <WrappedComponent {...props} />
   </AnalyticsLogger>
+);
+
+export const withIntlProvider = WrappedComponent => props => (
+  <IntlProvider>
+    <WrappedComponent {...props} />
+  </IntlProvider>
 );

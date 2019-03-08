@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { MultiSelectStateless } from '../..';
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 import type { ItemType, GroupType } from '../../types';
 
 /**

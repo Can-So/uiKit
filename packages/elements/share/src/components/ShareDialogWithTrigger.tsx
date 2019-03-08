@@ -36,6 +36,7 @@ export type Props = {
   loadUserOptions?: LoadOptions;
   onLinkCopy?: Function;
   onShareSubmit?: (shareContentState: DialogContentState) => Promise<any>;
+  shareFormTitle?: React.ReactNode;
   shouldCloseOnEscapePress?: boolean;
   triggerButtonAppearance?: ButtonAppearances;
   triggerButtonStyle?: ShareButtonStyle;
@@ -152,6 +153,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
       copyLink,
       isDisabled,
       loadUserOptions,
+      shareFormTitle,
       config,
       triggerButtonAppearance,
       triggerButtonStyle,
@@ -173,6 +175,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
                 loadOptions={loadUserOptions}
                 isSharing={isSharing}
                 onShareClick={this.handleShareSubmit}
+                title={shareFormTitle}
                 shareError={shareError}
                 onDismiss={this.handleFormDismiss}
                 defaultValue={defaultValue}

@@ -312,7 +312,7 @@ How you do this will completely depend on what *exactly* you are trying to achie
 >
 > If your package is a flow package run:
 >
-> NODE_ENV=production BABEL_ENV=production:cjs bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/cjs --root-mode upward
+> bolt build:babel
 >
 > **or** if you know that you are consuming the package as a module:
 >

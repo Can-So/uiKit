@@ -13,6 +13,7 @@ exports[`Switcher should render correctly 1`] = `
   filterOption={[Function]}
   footer={null}
   getOptionValue={[Function]}
+  isNavResizing={false}
   isOptionSelected={[Function]}
   maxMenuHeight={300}
   maxMenuWidth={0}

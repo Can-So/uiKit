@@ -42,6 +42,7 @@ export function createPlugin(
     handleWidth = 5,
     cellMinWidth = 25,
     lastColumnResizable = true,
+    dynamicTextSizing = false,
   }: ColumnResizingPlugin = {},
 ) {
   return new Plugin({
@@ -92,7 +93,7 @@ export function createPlugin(
         mousedown(view, event) {
           const { activeHandle, dragging } = pluginKey.getState(view.state);
           if (activeHandle > -1 && !dragging) {
-            handleMouseDown(view, event, cellMinWidth);
+            handleMouseDown(view, event, cellMinWidth, dynamicTextSizing);
             updateResizeHandle(view);
             return true;
           }
@@ -200,7 +201,7 @@ function createResizeHandle(tableRef: HTMLTableElement): HTMLDivElement | null {
   return resizeHandleRef;
 }
 
-function handleMouseDown(view, event, cellMinWidth) {
+function handleMouseDown(view, event, cellMinWidth, dynamicTextSizing) {
   const { state } = view;
   const { activeHandle } = pluginKey.getState(state);
 
@@ -218,7 +219,11 @@ function handleMouseDown(view, event, cellMinWidth) {
   const containerWidth = widthPluginKey.getState(view.state).width;
   const resizer = Resizer.fromDOM(view, dom, {
     minWidth: cellMinWidth,
-    maxSize: getLayoutSize(dom.getAttribute('data-layout'), containerWidth),
+    maxSize: getLayoutSize(
+      dom.getAttribute('data-layout'),
+      containerWidth,
+      dynamicTextSizing,
+    ),
     node: $cell.node(-1),
     start,
   });

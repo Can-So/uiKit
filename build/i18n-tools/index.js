@@ -43,7 +43,7 @@ function createApp() {
       $ i18n-tools push --resource global-search --type typescript packages/search/global-search
       $ i18n-tools pull --resource media-ui --type typescript packages/media/media-ui
 
-      $ i18n-tools push --resource core --searchDir dist/esm packages/core/avatar
+      $ i18n-tools push --resource core --searchDir ./ packages/core/avatar
       $ i18n-tools pull --resource editor-core --type typescript packages/editor/editor-core
 
     Notes

@@ -10,7 +10,6 @@ import {
 import {
   stateKey as mediaPluginKey,
   MediaPluginState,
-  DefaultMediaStateManager,
 } from '../../../../plugins/media/pm-plugins/main';
 import mediaPlugin from '../../../../plugins/media';
 import { EditorPlugin } from '../../../../types';
@@ -44,10 +43,8 @@ export const mediaEditor = (
   additionalPlugins: Array<EditorPlugin> = [],
   uploadErrorHandler?: () => void,
 ) => {
-  const stateManager = new DefaultMediaStateManager();
   const mediaProvider = storyMediaProviderFactory({
     collectionName: testCollectionName,
-    stateManager,
     includeUserAuthProvider: true,
   });
 

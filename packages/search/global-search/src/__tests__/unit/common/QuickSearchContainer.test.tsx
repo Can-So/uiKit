@@ -24,6 +24,7 @@ const defaultProps = {
   ),
   getAbTestData: jest.fn((sesionId: string) => Promise.resolve(undefined)),
   createAnalyticsEvent: jest.fn(),
+  handleSearchSubmit: jest.fn(),
 };
 
 const mountQuickSearchContainer = (partialProps?: Partial<Props>) => {
@@ -123,6 +124,7 @@ describe('QuickSearchContainer', () => {
     defaultProps.getRecentItems.mockReset();
     defaultProps.getSearchResults.mockReset();
     defaultProps.getSearchResultsComponent.mockReset();
+    defaultProps.handleSearchSubmit.mockReset();
     firePostQueryShownEventSpy.mockReset();
     firePreQueryShownEventSpy.mockReset();
   });
@@ -176,6 +178,20 @@ describe('QuickSearchContainer', () => {
 
     assertPreQueryAnalytics(recentItems);
     assertExposureEventAnalytics(abTest);
+  });
+
+  it('should add searchSessionId to handleSearchSubmit', () => {
+    const wrapper = mountQuickSearchContainer();
+    wrapper.find('input').simulate('keydown', { key: 'Enter' });
+    wrapper.update();
+
+    const { searchSessionId } = wrapper.find(QuickSearchContainer).state();
+    expect(searchSessionId).not.toBeNull();
+
+    expect(defaultProps.handleSearchSubmit).toHaveBeenCalledWith(
+      expect.anything(),
+      searchSessionId,
+    );
   });
 
   describe('Search', () => {
