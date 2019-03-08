@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 41.3.0
+- [minor] [b8d146fb27](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8d146fb27):
+
+  - CS-843 Email renderer codeblock support for outlook
+
 ## 41.2.1
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3
