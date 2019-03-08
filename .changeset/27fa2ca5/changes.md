@@ -1,1 +1,0 @@
-- Make more avatar colors available to the collab plugin 
