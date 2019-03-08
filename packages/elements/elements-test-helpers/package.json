@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/elements-test-helpers",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "common test helpers",
   "config": {
     "access": "public"
@@ -17,10 +17,12 @@
   "dependencies": {
     "@atlaskit/build-utils": "^2.0.0",
     "tslib": "^1.8.0",
-    "exenv": "^1.2.2",
-    "react-intl": "^2.6.0",
+    "exenv": "^1.2.2"
+  },
+  "peerDependencies": {
     "react": "^16.4.0",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-intl": "^2.6.0"
   },
   "author": "Atlassian Pty. Ltd",
   "maintainers": [
@@ -30,9 +32,6 @@
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
-  },
-  "peerDependencies": {
-    "react": "^16.4.0"
   },
   "atlaskit": {
     "internal": true

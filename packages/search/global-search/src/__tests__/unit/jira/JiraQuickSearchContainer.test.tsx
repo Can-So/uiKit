@@ -306,12 +306,13 @@ describe('Jira Quick Search Container', () => {
           value: 'query',
         },
       });
+      const mockSearchSessionId = 'someSearchSessionId';
 
       it('should call onAdvancedSearch call', () => {
         const spy = jest.fn();
         const handleSearchSubmit = mountComponent(spy);
         const mockedEvent = mockEvent();
-        handleSearchSubmit(mockedEvent);
+        handleSearchSubmit(mockedEvent, mockSearchSessionId);
         expect(spy).toHaveBeenCalledTimes(1);
         expect(spy).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -319,6 +320,7 @@ describe('Jira Quick Search Container', () => {
           }),
           'issues',
           'query',
+          mockSearchSessionId,
         );
         expect(mockedEvent.preventDefault).toHaveBeenCalledTimes(0);
         expect(mockedEvent.stopPropagation).toHaveBeenCalledTimes(0);
@@ -329,7 +331,7 @@ describe('Jira Quick Search Container', () => {
         const spy = jest.fn(e => e.preventDefault());
         const handleSearchSubmit = mountComponent(spy);
         const mockedEvent = mockEvent();
-        handleSearchSubmit(mockedEvent);
+        handleSearchSubmit(mockedEvent, mockSearchSessionId);
 
         expect(mockedEvent.preventDefault).toHaveBeenCalledTimes(1);
         expect(mockedEvent.stopPropagation).toHaveBeenCalledTimes(1);

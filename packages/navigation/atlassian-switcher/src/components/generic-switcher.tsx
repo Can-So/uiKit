@@ -3,9 +3,11 @@ import Switcher from './switcher';
 import CommonDataProvider from '../providers/common-data-provider';
 import { getSuggestedProductLink } from '../utils/links';
 import { Product } from '../types';
+import { Messages } from 'react-intl';
 
 interface GenericSwitcherProps {
   cloudId: string;
+  messages: Messages;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
   product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>;
 }

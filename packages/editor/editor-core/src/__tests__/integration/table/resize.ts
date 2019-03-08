@@ -14,6 +14,7 @@ import {
   tableWithRowSpan,
   tableWithRowSpanAndColSpan,
   twoColFullWidthTableWithContent,
+  tableWithDynamicLayoutSizing,
 } from './__fixtures__/resize-documents';
 import { tableWithMinWidthColumnsDocument } from './__fixtures__/table-with-min-width-columns-document';
 
@@ -127,6 +128,28 @@ BrowserTestCase(
     });
 
     await insertColumn(page, 1);
+
+    const doc = await page.$eval(editable, getDocFromElement);
+    expect(doc).toMatchDocSnapshot();
+  },
+);
+
+BrowserTestCase(
+  "Can't resize the last column of a table with dynamic sizing enabled.",
+  { skip: ['ie'] },
+  async (client: any) => {
+    const page = await goToEditorTestingExample(client);
+
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      defaultValue: JSON.stringify(tableWithDynamicLayoutSizing),
+      allowTables: {
+        advanced: true,
+      },
+      allowDynamicTextSizing: true,
+    });
+
+    await resizeColumn(page, { cellHandlePos: 10, resizeWidth: -100 });
 
     const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();

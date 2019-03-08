@@ -64,7 +64,7 @@ export class ReactionConsumer<
     this.forceUpdate();
   };
 
-  componentWillMount() {
+  componentDidMount() {
     Promise.resolve(this.props.store).then(store => {
       this.setState({ store });
       store.onChange(this.handleOnChange);

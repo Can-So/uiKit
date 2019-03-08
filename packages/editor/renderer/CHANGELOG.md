@@ -1,5 +1,20 @@
 # @atlaskit/renderer
 
+## 41.2.0
+- [minor] [bdde0f4f25](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bdde0f4f25):
+
+  - CS-858: Alignment support for email html rendering
+
+## 41.1.1
+- Updated dependencies [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+  - @atlaskit/status@0.5.0
+  - @atlaskit/task-decision@11.3.0
+
+## 41.1.0
+- [minor] [e385e90f31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e385e90f31):
+
+  - CS-840 Email renderer now supports indentations
+
 ## 41.0.1
 - Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
   - @atlaskit/status@0.4.0

@@ -50,7 +50,10 @@ export interface Props {
    */
   getDisplayedResults?(results: GenericResultMap | null): GenericResultMap;
   createAnalyticsEvent?: CreateAnalyticsEventFn;
-  handleSearchSubmit?(event: React.KeyboardEvent<HTMLInputElement>): void;
+  handleSearchSubmit?(
+    event: React.KeyboardEvent<HTMLInputElement>,
+    searchSessionId: string,
+  ): void;
   isSendSearchTermsEnabled?: boolean;
   placeholder?: string;
   selectedResultId?: string;
@@ -356,6 +359,13 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     }
   };
 
+  handleSearchSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const { handleSearchSubmit } = this.props;
+    if (handleSearchSubmit) {
+      handleSearchSubmit(event, this.state.searchSessionId);
+    }
+  };
+
   render() {
     const {
       linkComponent,
@@ -379,7 +389,7 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       <GlobalQuickSearch
         onMount={this.handleMount}
         onSearch={this.handleSearch}
-        onSearchSubmit={this.props.handleSearchSubmit}
+        onSearchSubmit={this.handleSearchSubmit}
         isLoading={isLoading}
         placeholder={placeholder}
         linkComponent={linkComponent}

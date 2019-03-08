@@ -377,8 +377,8 @@ export default class GlobalNavigation extends Component<
     const { product, cloudId } = this.props;
     return (
       <AtlassianSwitcher
-        product={product}
         cloudId={cloudId}
+        product={product}
         triggerXFlow={this.triggerXFlow}
       />
     );

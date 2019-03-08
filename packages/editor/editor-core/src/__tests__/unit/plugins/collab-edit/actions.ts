@@ -55,14 +55,14 @@ describe('collab-edit: actions', () => {
   };
 
   describe('handleInit', () => {
-    it('should wrap invalid nodes in unsupported', () => {
+    it('should wrap invalid nodes in unsupported when the allowUnsupportedContent option is enabled.', () => {
       const { editorView } = editor(doc(p('')));
 
       const initData: InitData = {
         doc: unknownNodesDoc,
       };
 
-      handleInit(initData, editorView);
+      handleInit(initData, editorView, { allowUnsupportedContent: true });
 
       expect(editorView.state.doc).toEqualDocument(
         doc(

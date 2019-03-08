@@ -91,6 +91,7 @@ const getQueryAttributes = (query: string): Object => {
     wordCount:
       sanitizedQuery.length > 0 ? sanitizedQuery.split(/\s/).length : 0,
     queryHash: sanitizedQuery ? hash(sanitizedQuery) : '',
+    isNonZeroNumericQuery: !!+sanitizedQuery,
   };
 };
 

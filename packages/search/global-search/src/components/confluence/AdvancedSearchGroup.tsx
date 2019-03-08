@@ -19,7 +19,7 @@ const PeopleSearchWrapper = styled.div`
 export interface Props {
   query: string;
   analyticsData?: object;
-  onClick?: (e: CancelableEvent, entity: String) => void;
+  onClick?: (e: CancelableEvent, entity: string) => void;
 }
 
 export default class AdvancedSearchGroup extends React.Component<Props> {

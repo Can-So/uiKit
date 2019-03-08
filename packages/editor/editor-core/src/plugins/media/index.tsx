@@ -8,8 +8,6 @@ import {
   stateKey as pluginKey,
   createPlugin,
   MediaState,
-  MediaStateManager,
-  DefaultMediaStateManager,
   MediaPluginState,
 } from './pm-plugins/main';
 import keymapMediaSinglePlugin from './pm-plugins/keymap-media-single';
@@ -31,13 +29,7 @@ import {
 } from '../analytics';
 import WithPluginState from '../../ui/WithPluginState';
 
-export {
-  MediaState,
-  MediaStateManager,
-  DefaultMediaStateManager,
-  MediaProvider,
-  CustomMediaPicker,
-};
+export { MediaState, MediaProvider, CustomMediaPicker };
 
 export interface MediaOptions {
   provider?: Promise<MediaProvider>;

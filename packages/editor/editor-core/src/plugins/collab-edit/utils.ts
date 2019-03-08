@@ -91,13 +91,22 @@ export const replaceDocument = (
   version?: number,
   options?: CollabEditOptions,
 ) => {
-  const { tr } = state;
+  const { schema, tr } = state;
 
-  // Process the value coming in, this allows us to wrap blocks unknown to us.
-  // Instead of throwing an error at this point.
-  const content = processRawValue(state.schema, doc);
+  let content;
+  let hasContent;
+  // This can be default when we fix the unsupported nodes we currently produce.
+  if (options && options.allowUnsupportedContent) {
+    // Process the value coming in, this allows us to wrap blocks unknown to us.
+    // Instead of throwing an error at this point.
+    content = processRawValue(state.schema, doc);
+    hasContent = content;
+  } else {
+    content = (doc.content || []).map(child => schema.nodeFromJSON(child));
+    hasContent = content.length;
+  }
 
-  if (content) {
+  if (hasContent) {
     tr.setMeta('addToHistory', false);
     tr.replaceWith(0, state.doc.nodeSize - 2, content);
     tr.setSelection(Selection.atStart(tr.doc));
