@@ -5,9 +5,6 @@
   "license": "Apache-2.0",
   "module": "index.js",
   "sideEffects": false,
-  "files": [
-    "*.js"
-  ],
   "atlaskit": {
     "internal": true
   },

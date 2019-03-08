@@ -8,10 +8,6 @@
   "module": "index.js",
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "src"
-  ],
   "dependencies": {
     "@atlaskit/theme": "^7.0.1",
     "@babel/runtime": "^7.0.0",

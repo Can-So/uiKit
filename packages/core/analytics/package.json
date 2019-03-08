@@ -7,10 +7,6 @@
   "atlaskit:src": "src/index.js",
   "types": "src/index.d.ts",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "src/index.d.ts"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
