@@ -1,5 +1,6 @@
 {
   "name": "@nachos/textfield",
+  "private": true,
   "version": "0.0.2",
   "description": "A React component that is a textfield.",
   "license": "Apache-2.0",
