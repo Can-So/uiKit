@@ -1,1 +1,0 @@
-- ED-6219: Use TableMap to get column index over dom children index
