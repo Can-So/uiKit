@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.5.0
+- [minor] [bfe0b36312](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfe0b36312):
+
+  - added the topoffset height to navigation-next: layout manager
+
 ## 4.4.1
 - [patch] [e71cc26e15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e71cc26e15):
 
