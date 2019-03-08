@@ -1,5 +1,5 @@
 import { NodeSerializerOpts } from '../interfaces';
-import { createTag, serializeStyle } from '../util';
+import { createTag, serializeStyle, withTable } from '../util';
 import { codeFontFamily } from '@atlaskit/theme';
 
 const codeTagCss = serializeStyle({
@@ -14,11 +14,22 @@ const codeTagCss = serializeStyle({
 const preTagCss = serializeStyle({
   background: 'rgb(244, 245, 247)',
   'border-radius': '3px',
-  padding: '8px 16px',
+  '-webkit-border-radius': '3px',
+  '-moz-border-radius': '3px',
   margin: '0px',
 });
 
 export default function codeBlock({ attrs, text }: NodeSerializerOpts) {
   const codeTag = createTag('code', { style: codeTagCss }, text);
-  return createTag('pre', { style: preTagCss }, codeTag);
+  const codeTagWithTable = withTable(codeTag, {
+    padding: '8px 16px',
+    'background-color': 'rgb(244, 245, 247)',
+    'border-radius': '3px',
+    '-webkit-border-radius': '3px',
+    '-moz-border-radius': '3px',
+    'font-size': '12px',
+    'line-height': '20px',
+    color: 'rgb(23, 43, 77)',
+  });
+  return createTag('pre', { style: preTagCss }, codeTagWithTable);
 }
