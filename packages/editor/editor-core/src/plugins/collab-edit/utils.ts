@@ -5,21 +5,39 @@ import { colors as themeColors } from '@atlaskit/theme';
 import { hexToRgba } from '@atlaskit/editor-common';
 
 import { CollabEditOptions } from './types';
-import { processRawValue } from '../../utils/document';
+import { processRawValue } from '../../utils';
 
 export interface Color {
   solid: string;
   selection: string;
 }
 
-const { R400, Y400, G400, B400, T400, P400, N800 } = themeColors;
-
-export const colors: Color[] = [R400, Y400, G400, T400, B400, P400, N800].map(
-  solid => ({
-    solid,
-    selection: hexToRgba(solid, 0.2)!,
-  }),
-);
+export const colors: Color[] = [
+  themeColors.R100,
+  themeColors.R300,
+  themeColors.R500,
+  themeColors.Y100,
+  themeColors.Y300,
+  themeColors.Y500,
+  themeColors.G100,
+  themeColors.G300,
+  themeColors.G500,
+  themeColors.T100,
+  themeColors.T300,
+  themeColors.T500,
+  themeColors.B100,
+  themeColors.B300,
+  themeColors.B500,
+  themeColors.P100,
+  themeColors.P300,
+  themeColors.P500,
+  themeColors.N70,
+  themeColors.N200,
+  themeColors.N800,
+].map(solid => ({
+  solid,
+  selection: hexToRgba(solid, 0.2)!,
+}));
 
 // tslint:disable:no-bitwise
 export const getAvatarColor = (str: string) => {
