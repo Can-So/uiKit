@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.1.0
+- [minor] [58932a27f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58932a27f4):
+
+  - ED-6220 Fire v3 analytics events when insert actions or decisions
+
 ## 103.0.3
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

@@ -1,1 +1,0 @@
-- ED-6220 Fire v3 analytics events when insert actions or decisions
