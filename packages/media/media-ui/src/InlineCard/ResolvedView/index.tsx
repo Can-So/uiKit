@@ -3,6 +3,7 @@ import { Frame } from '../Frame';
 import Lozenge from '@atlaskit/lozenge';
 import { LozengeViewModel } from '../../common';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
+import { LozengeWrapper } from '../IconAndTitleLayout/styled';
 
 export interface InlineCardResolvedViewProps {
   /** The optional con of the service (e.g. Dropbox/Asana/Google/etc) to display */
@@ -28,12 +29,14 @@ export class InlineCardResolvedView extends React.Component<
       return null;
     }
     return (
-      <Lozenge
-        appearance={lozenge.appearance || 'default'}
-        isBold={lozenge.isBold}
-      >
-        {lozenge.text}
-      </Lozenge>
+      <LozengeWrapper>
+        <Lozenge
+          appearance={lozenge.appearance || 'default'}
+          isBold={lozenge.isBold}
+        >
+          {lozenge.text}
+        </Lozenge>
+      </LozengeWrapper>
     );
   }
 
@@ -41,9 +44,8 @@ export class InlineCardResolvedView extends React.Component<
     const { title, isSelected, onClick, icon, link } = this.props;
     return (
       <Frame link={link} isSelected={isSelected} onClick={onClick}>
-        <IconAndTitleLayout icon={icon} title={title}>
-          {this.renderLozenge()}
-        </IconAndTitleLayout>
+        <IconAndTitleLayout icon={icon} title={title} />
+        {this.renderLozenge()}
       </Frame>
     );
   }
