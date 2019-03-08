@@ -1,0 +1,1 @@
+- Allow text formatting marks only on text nodes.

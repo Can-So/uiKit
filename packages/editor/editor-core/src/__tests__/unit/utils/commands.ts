@@ -4,6 +4,7 @@ import {
   isEmptySelectionAtStart,
   isFirstChildOfParent,
   findCutBefore,
+  toggleMark,
 } from '../../../utils/commands';
 import {
   createEditorFactory,
@@ -14,6 +15,10 @@ import {
   ul,
   li,
   doc,
+  hardBreak,
+  strong,
+  em,
+  subsup,
 } from '@atlaskit/editor-test-helpers';
 import { tablesPlugin, listsPlugin } from '../../../plugins';
 import { Command } from '../../../types';
@@ -388,6 +393,113 @@ describe('utils -> commands', () => {
 
       const $cut = findCutBefore($from);
       expect($cut).toBeNull();
+    });
+  });
+
+  describe('toggleMark', () => {
+    const editor = (doc: any) => {
+      return createEditor({
+        doc,
+      });
+    };
+
+    it('enables the bold mark', () => {
+      const { editorView } = editor(doc(p('{<}text', hardBreak(), 'here{>}')));
+
+      toggleMark(editorView.state.schema.marks.strong)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(p(strong('text'), hardBreak(), strong('here'))),
+      );
+    });
+
+    it('removes the bold mark when only part of the selection has the mark', () => {
+      const { editorView } = editor(
+        doc(p('{<}text', hardBreak(), strong('here{>}'))),
+      );
+
+      toggleMark(editorView.state.schema.marks.strong)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(p('text', hardBreak(), 'here')),
+      );
+    });
+
+    it('enables mutliple marks when toggled', () => {
+      const { editorView } = editor(doc(p('{<}text', hardBreak(), 'here{>}')));
+
+      toggleMark(editorView.state.schema.marks.strong)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      toggleMark(editorView.state.schema.marks.em)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(p(em(strong('text')), hardBreak(), em(strong('here')))),
+      );
+    });
+
+    it('can toggle a mark on and off', () => {
+      const { editorView } = editor(doc(p('{<}text', hardBreak(), 'here{>}')));
+
+      toggleMark(editorView.state.schema.marks.strong)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      toggleMark(editorView.state.schema.marks.strong)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(p('text', hardBreak(), 'here')),
+      );
+    });
+
+    it('can toggle a mark for the current cursor position', () => {
+      const {
+        editorView,
+        refs: { nextCursorPos },
+      } = editor(doc(p('text here{<>}{nextCursorPos}')));
+
+      toggleMark(editorView.state.schema.marks.strong)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      toggleMark(editorView.state.schema.marks.strong)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(editorView.state.selection.from).toEqual(nextCursorPos);
+      expect(editorView.state.doc).toEqualDocument(
+        doc(p('text here', strong())),
+      );
+    });
+
+    it('enables a mark with attributes', () => {
+      const { editorView } = editor(doc(p('{<}text here{>}')));
+
+      toggleMark(editorView.state.schema.marks.subsup, { type: 'sup' })(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(p(subsup({ type: 'sup' })('text here'))),
+      );
     });
   });
 });
