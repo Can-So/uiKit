@@ -1,4 +1,5 @@
 import { snapshot, initFullPageEditorWithAdf, Device } from '../_utils';
+import * as resziedTableWithMergedCells from './__fixtures__/resized-table-with-merged-cells.adf.json';
 import * as adf from '../common/__fixtures__/noData-adf.json';
 import {
   deleteColumn,
@@ -7,9 +8,15 @@ import {
   grabResizeHandle,
   clickFirstCell,
   toggleBreakout,
+  getSelectorForTableCell,
 } from '../../__helpers/page-objects/_table';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
 import { animationFrame } from '../../__helpers/page-objects/_editor';
+import {
+  clickBlockMenuItem,
+  BlockMenuItem,
+} from '../../__helpers/page-objects/_blocks';
+import { KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
 
 describe('Snapshot Test: table resizing', () => {
   describe('Re-sizing', () => {
@@ -102,5 +109,30 @@ describe('Snapshot Test: table scale', () => {
   it(`should not overflow the table with dynamic text sizing enabled`, async () => {
     await toggleBreakout(page, 1);
     await snapshot(page, 0.005);
+  });
+});
+
+describe('Snapshot Test: table breakout content', () => {
+  let page;
+  beforeEach(async () => {
+    // @ts-ignore
+    page = global.page;
+    await initFullPageEditorWithAdf(
+      page,
+      resziedTableWithMergedCells,
+      Device.LaptopHiDPI,
+      undefined,
+      {
+        allowDynamicTextSizing: true,
+      },
+    );
+  });
+
+  it(`should resize the column based on the content`, async () => {
+    const selector = getSelectorForTableCell({ row: 2, cell: 1 });
+    await page.click(selector);
+    await clickBlockMenuItem(page, BlockMenuItem.date);
+    await page.keyboard.press(KeyboardKeys.enter);
+    await snapshot(page);
   });
 });

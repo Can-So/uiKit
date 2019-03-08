@@ -27,7 +27,7 @@ export const customInsertMenuItems = [
     value: { name: 'inline-eh' },
     tooltipDescription: 'Inline macro (Using extension handlers)',
     tooltipPosition: 'right',
-    elemBefore: <DevIcon label="dev" />,
+    elemBefore: <DevIcon label="Inline macro (EH)" />,
     onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
         type: 'inlineExtension',
@@ -55,7 +55,7 @@ export const customInsertMenuItems = [
     value: { name: 'block-eh' },
     tooltipDescription: 'Block macro (Using extension handlers)',
     tooltipPosition: 'right',
-    elemBefore: <DevIcon label="dev" />,
+    elemBefore: <DevIcon label="Block macro (EH)" />,
     className: 'block-macro',
     onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
@@ -84,7 +84,7 @@ export const customInsertMenuItems = [
     value: { name: 'bodied-eh' },
     tooltipDescription: 'Bodied macro (Using extension handlers)',
     tooltipPosition: 'right',
-    elemBefore: <DevIcon label="dev" />,
+    elemBefore: <DevIcon label="Bodied macro (EH)" />,
     className: 'bodied-macro',
     onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
@@ -118,7 +118,7 @@ export const customInsertMenuItems = [
     value: { name: 'bodied-non-eh' },
     tooltipDescription: 'Bodied macro',
     tooltipPosition: 'right',
-    elemBefore: <DevIcon label="dev" />,
+    elemBefore: <DevIcon label="Bodied macro (NON-EH)" />,
     onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
         type: 'bodiedExtension',
