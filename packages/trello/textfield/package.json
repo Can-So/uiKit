@@ -1,6 +1,7 @@
 {
   "name": "@nachos/textfield",
-  "version": "0.0.1",
+  "private": true,
+  "version": "0.0.2",
   "description": "A React component that is a textfield.",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -29,7 +30,7 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/build-utils": "^2.2.0",
     "@atlaskit/docs": "^6.0.1",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0"

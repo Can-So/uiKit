@@ -1,5 +1,10 @@
 # @atlaskit/build-utils
 
+## 2.2.0
+- [minor] [cfb830c23b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfb830c23b):
+
+  - getExamplesFor will look for an exact match when passed a scoped package name
+
 ## 2.1.0
 - [minor] [fd6a020](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd6a020):
 
