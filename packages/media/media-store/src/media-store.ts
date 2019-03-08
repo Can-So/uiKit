@@ -282,7 +282,6 @@ export class MediaStore {
     });
   };
 
-  // TODO [MS-1352]: add WEBP header
   getImage = async (
     id: string,
     params?: MediaStoreGetFileImageParams,
