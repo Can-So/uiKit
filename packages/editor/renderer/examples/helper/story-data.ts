@@ -756,10 +756,7 @@ export const document = {
     {
       type: 'heading',
       attrs: { level: 3 },
-      marks: [
-        { type: 'alignment', attrs: { align: 'end' } },
-        { type: 'indentation', attrs: { level: 3 } },
-      ],
+      marks: [{ type: 'alignment', attrs: { align: 'end' } }],
       content: [
         {
           type: 'text',

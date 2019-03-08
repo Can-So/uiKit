@@ -2,6 +2,7 @@ export type Content = {
   ari: string;
   link: string;
   title: string;
+  type: string;
 };
 
 export type Comment = {

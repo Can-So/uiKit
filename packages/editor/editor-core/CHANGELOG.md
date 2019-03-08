@@ -1,5 +1,15 @@
 # @atlaskit/editor-core
 
+## 103.0.2
+- [patch] [44f4d1293a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44f4d1293a):
+
+  - ED-6219: Use TableMap to get column index over dom children index
+
+## 103.0.1
+- [patch] [b346b44c05](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b346b44c05):
+
+  - ED-6411: Fix resizing the last column with dynamic text sizing enabled
+
 ## 103.0.0
 - [major] [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
 

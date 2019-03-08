@@ -2,6 +2,8 @@ import { EmailSerializer } from '../../../index';
 import { defaultSchema as schema } from '@atlaskit/adf-schema';
 
 const paragraphIndents = require('../../__fixtures__/paragraph-indents.adf');
+const paragraphAlign = require('../../__fixtures__/paragraph-align.adf');
+const headingAlign = require('../../__fixtures__/heading-align.adf');
 const em = require('../../__fixtures__/em.adf');
 const codeBlock = require('../../__fixtures__/code-block.adf');
 const inlineCodeProps = require('../../__fixtures__/inline-code-props.adf');
@@ -19,6 +21,16 @@ const render = (doc: any) => {
 describe('Renderer - EmailSerializer', () => {
   it('should render text with em inside of a paragraph correctly', () => {
     const output = render(em);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should align paragraph correctly', () => {
+    const output = render(paragraphAlign);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should align heading correctly', () => {
+    const output = render(headingAlign);
     expect(output).toMatchSnapshot();
   });
 

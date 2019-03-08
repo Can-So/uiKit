@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.17
+- [patch] [af38e4649a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af38e4649a):
+
+  - exposed shareContentType prop
+
 ## 0.1.16
 - [patch] [aca247a78b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aca247a78b):
 
