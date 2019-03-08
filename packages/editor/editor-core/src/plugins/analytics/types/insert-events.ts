@@ -123,7 +123,7 @@ type InsertActionDecisionAEP = InsertAEP<
       | INPUT_METHOD.INSERT_MENU
       | INPUT_METHOD.FORMATTING
       | INPUT_METHOD.KEYBOARD;
-    containerAri: string;
+    containerAri?: string;
     objectAri?: string;
     localId: string;
     listLocalId: string;

@@ -13,18 +13,28 @@ import {
   media,
   br,
   panel,
+  insertText,
 } from '@atlaskit/editor-test-helpers';
 import { uuid } from '@atlaskit/adf-schema';
-import {
-  TaskDecisionListType,
-  insertTaskDecision,
-} from '../../../../plugins/tasks-and-decisions/commands';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { ProviderFactory } from '@atlaskit/editor-common';
+import { insertTaskDecision } from '../../../../plugins/tasks-and-decisions/commands';
+import { TaskDecisionListType } from '../../../../plugins/tasks-and-decisions/types';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import mediaPlugin from '../../../../plugins/media';
 import panelPlugin from '../../../../plugins/panel';
 
 describe('tasks and decisions - commands', () => {
   const createEditor = createEditorFactory();
+
+  const contextIdentifierProvider = Promise.resolve({
+    containerId: 'DUMMY-CONTAINER-ID',
+    objectId: 'DUMMY-OBJECT-ID',
+    userContext: 'edit',
+  });
+
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  let providerFactory: ProviderFactory;
 
   beforeEach(() => {
     uuid.setStatic('local-uuid');
@@ -34,11 +44,22 @@ describe('tasks and decisions - commands', () => {
     uuid.setStatic(false);
   });
 
-  const editorFactory = (doc: any) =>
-    createEditor({
+  const editorFactory = (doc: any) => {
+    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    providerFactory = new ProviderFactory();
+    providerFactory.setProvider(
+      'contextIdentifierProvider',
+      contextIdentifierProvider,
+    );
+
+    return createEditor({
       doc,
       editorPlugins: [tasksAndDecisionsPlugin, mediaPlugin(), panelPlugin],
+      editorProps: { allowAnalyticsGASV3: true },
+      createAnalyticsEvent,
+      providerFactory,
     });
+  };
 
   describe('insertTaskDecision', () => {
     const scenarios = [
@@ -278,6 +299,50 @@ describe('tasks and decisions - commands', () => {
           ),
         ),
       );
+    });
+
+    describe('analytics', () => {
+      const generatePayload = (position, listSize) => ({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'action',
+        eventType: 'track',
+        attributes: {
+          inputMethod: 'toolbar',
+          containerAri: 'DUMMY-CONTAINER-ID',
+          objectAri: 'DUMMY-OBJECT-ID',
+          localId: 'local-uuid',
+          listLocalId: 'local-uuid',
+          userContext: 'edit',
+          position,
+          listSize,
+        },
+      });
+
+      it('should fire analytics event when add new item when no parent list', async () => {
+        const { editorView } = editorFactory(doc(p('{<>}')));
+        await contextIdentifierProvider;
+        insertTaskDecision(editorView, 'taskList');
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(
+          generatePayload(0, 1),
+        );
+      });
+
+      it('should fire analytics event when add item to existing list', async () => {
+        const { editorView, sel } = editorFactory(doc(p('{<>}')));
+        await contextIdentifierProvider;
+        insertTaskDecision(editorView, 'taskList');
+        insertText(editorView, 'task 1', sel + 1);
+        insertTaskDecision(editorView, 'taskList');
+        insertText(editorView, 'task 2', sel + 9);
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(
+          generatePayload(1, 2),
+        );
+        insertTaskDecision(editorView, 'taskList');
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(
+          generatePayload(2, 3),
+        );
+      });
     });
   });
 });
