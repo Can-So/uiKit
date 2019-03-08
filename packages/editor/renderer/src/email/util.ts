@@ -1,6 +1,7 @@
 import { Mark } from 'prosemirror-model';
 import { Style } from './interfaces';
 import { markSerializers } from './serializers';
+import { commonStyle } from '.';
 
 export const createTag = (
   tagName: string,
@@ -47,4 +48,21 @@ export const applyMarks = (marks: Mark[], text: string): string => {
   }
 
   return output;
+};
+
+// For older Outlook clients, padding can be worked around with tables
+export const withTable = (text: string, style: Style = {}): string => {
+  // Tables override font size, weight and other stuff, thus we reset it here with commonStyle
+  const nullifyCss = serializeStyle({
+    ...commonStyle,
+    margin: '0px',
+    padding: '0px',
+    'border-spacing': '0px',
+  });
+
+  const css = serializeStyle(style);
+
+  const td = createTag('td', { style: css }, text);
+  const table = createTag('table', { style: nullifyCss }, td);
+  return table;
 };

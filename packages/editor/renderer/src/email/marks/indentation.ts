@@ -1,25 +1,12 @@
 import { MarkSerializerOpts } from '../interfaces';
-import { createTag, serializeStyle } from '../util';
-import { commonStyle } from '..';
+import { withTable } from '../util';
 
 export default function code({ mark, text }: MarkSerializerOpts) {
   // level 1 = 30px, level 2 = 60px, ...
-  const indent = mark.attrs.level * 30;
+  const style = {
+    'padding-left': mark.attrs.level * 30 + 'px',
+  };
 
-  // Tables override font size, weight and other stuff, thus we reset it here with commonStyle
-  const nullifyCss = serializeStyle({
-    ...commonStyle,
-    margin: '0px',
-    padding: '0px',
-    'border-spacing': '0px',
-  });
-
-  // Outlook accepts padding on <td> element
-  const css = serializeStyle({
-    'padding-left': `${indent}px`,
-  });
-
-  const td = createTag('td', { style: css }, text);
-  const table = createTag('table', { style: nullifyCss }, td);
-  return table;
+  // Outlook accepts padding on <td> element, thus we wrap it with table here
+  return withTable(text, style);
 }
