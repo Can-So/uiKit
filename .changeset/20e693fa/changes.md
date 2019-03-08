@@ -1,1 +1,0 @@
-- getExamplesFor will look for an exact match when passed a scoped package name
