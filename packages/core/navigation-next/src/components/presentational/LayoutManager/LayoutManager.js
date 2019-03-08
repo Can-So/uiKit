@@ -7,7 +7,7 @@ import { colors } from '@atlaskit/theme';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../../package.json';
+} from '../../../version.json';
 import { Shadow } from '../../../common/primitives';
 import { light, ThemeProvider } from '../../../theme';
 import ContentNavigation from '../ContentNavigation';

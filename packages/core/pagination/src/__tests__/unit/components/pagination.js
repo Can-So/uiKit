@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import Pagination from '../../..';
 import Page from '../../../components/Page';
 import { LeftNavigator } from '../../../components/Navigators';
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 
 describe(`${name} - Pagination component`, () => {
   it('should not throw error on mount', () => {

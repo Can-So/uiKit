@@ -10,7 +10,7 @@ import {
 import {
   name as packageName,
   version as packageVersion,
-} from '../../package.json';
+} from '../version.json';
 
 import Input from './Input';
 import { Theme } from '../theme';

@@ -1,5 +1,9 @@
 # @atlaskit/adf-utils
 
+## 5.7.2
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/docs@7.0.0
+
 ## 5.7.1
 - [patch] [60ea09b0cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60ea09b0cc):
 

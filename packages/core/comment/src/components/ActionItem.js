@@ -11,7 +11,7 @@ import Button from '@atlaskit/button';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../package.json';
+} from '../version.json';
 
 type Props = {
   /** The content to render inside the action button. */
