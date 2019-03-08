@@ -6,6 +6,7 @@
   "author": "Atlassian Pty Ltd",
   "license": "Apache-2.0",
   "atlaskit:src": "src/index.js",
+  "module": "index.js",
   "sideEffects": false,
   "maintainers": [
     "Harsha Ivaturi",
