@@ -1,1 +1,0 @@
-- exposed shareContentType prop
