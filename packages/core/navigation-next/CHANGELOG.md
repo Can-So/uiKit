@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.4.1
+- [patch] [e71cc26e15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e71cc26e15):
+
+  - Change padding-top of SectionHeading to margin-top
+
 ## 4.4.0
 - [minor] [8ebfb7165d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ebfb7165d):
 

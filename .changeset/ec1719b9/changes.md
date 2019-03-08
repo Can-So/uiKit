@@ -1,1 +1,0 @@
-- Change padding-top of SectionHeading to margin-top
