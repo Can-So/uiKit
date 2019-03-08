@@ -18,5 +18,6 @@ test('should ssr then hydrate textarea correctly', async () => {
   elem.innerHTML = await ssr(example.filePath);
 
   ReactDOM.hydrate(<Example />, elem);
-  expect(console.error).not.toBeCalled(); // eslint-disable-line no-console
+  // tslint:disable-next-line:no-console
+  expect(console.error).not.toBeCalled();
 });
