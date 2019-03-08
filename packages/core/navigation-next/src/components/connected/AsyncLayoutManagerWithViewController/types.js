@@ -21,6 +21,7 @@ export type AsyncLayoutManagerWithViewControllerProps = {|
   globalNavigation: ComponentType<{}>,
   itemsRenderer: ComponentType<*>,
   view: ?ActiveView,
+  topOffset?: number,
 |};
 
 export type AsyncLayoutManagerWithViewControllerState = {

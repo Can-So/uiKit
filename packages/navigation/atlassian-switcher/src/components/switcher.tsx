@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage, Messages } from 'react-intl';
+
 import {
   SwitcherWrapper,
   SwitcherItem,
@@ -33,6 +35,7 @@ import TryLozenge from '../primitives/try-lozenge';
 interface SwitcherProps {
   cloudId: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
+  messages: Messages;
   customLinks: ChildrenProps<CustomLinksProviderDataStructure>;
   suggestedProductLink: SuggestedProductItemType;
   recentContainers: ChildrenProps<RecentContainersDataStructure>;
@@ -83,6 +86,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
     const {
       cloudId,
       suggestedProductLink,
+      messages,
       customLinks: { isLoading: isLoadingCustomLinks, data: customLinksData },
       recentContainers: {
         isLoading: isLoadingRecentContainers,
@@ -160,7 +164,10 @@ export default class Switcher extends React.Component<SwitcherProps> {
             subject={SWITCHER_SUBJECT}
             data={{ duration: this.timeSinceMounted() }}
           />
-          <Section sectionId="switchTo" title="Switch to">
+          <Section
+            sectionId="switchTo"
+            title={<FormattedMessage {...messages.switchTo} />}
+          >
             {licensedProductLinks.map(item => (
               <NavigationAnalyticsContext
                 key={item.key}
@@ -192,7 +199,9 @@ export default class Switcher extends React.Component<SwitcherProps> {
                   onClick={this.triggerXFlow}
                 >
                   {item.label}
-                  <TryLozenge>Try</TryLozenge>
+                  <TryLozenge>
+                    <FormattedMessage {...messages.try} />
+                  </TryLozenge>
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
@@ -231,7 +240,10 @@ export default class Switcher extends React.Component<SwitcherProps> {
               </NavigationAnalyticsContext>
             ))}
           </Section>
-          <Section sectionId="recent" title="Recent">
+          <Section
+            sectionId="recent"
+            title={<FormattedMessage {...messages.recent} />}
+          >
             {recentLinks.map(
               ({ key, label, href, type, description, Icon }, idx) => (
                 <NavigationAnalyticsContext
@@ -249,7 +261,10 @@ export default class Switcher extends React.Component<SwitcherProps> {
               ),
             )}
           </Section>
-          <Section sectionId="customLinks" title="More">
+          <Section
+            sectionId="customLinks"
+            title={<FormattedMessage {...messages.more} />}
+          >
             {customLinks.map(({ label, href, Icon }, idx) => (
               // todo: id in SwitcherItem should be consumed from custom link resolver
               <NavigationAnalyticsContext

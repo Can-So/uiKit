@@ -74,9 +74,8 @@ function createEditorWindowBindings(win: Window) {
     if (props && props.UNSAFE_cards && props.UNSAFE_cards.provider) {
       props.UNSAFE_cards.provider = cardProviderPromise;
     }
-    if (props && props.quickInsert) {
-      props.quickInsert = { provider: Promise.resolve(quickInsertProvider) };
-    }
+
+    props.quickInsert = { provider: Promise.resolve(quickInsertProvider) };
 
     if (props && props.media) {
       props.media = {

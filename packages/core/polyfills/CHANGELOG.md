@@ -1,5 +1,9 @@
 # @atlaskit/polyfills
 
+## 3.0.5
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/docs@7.0.0
+
 ## 3.0.4
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/docs@6.0.0

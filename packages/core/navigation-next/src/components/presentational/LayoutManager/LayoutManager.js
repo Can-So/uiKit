@@ -7,7 +7,7 @@ import { colors } from '@atlaskit/theme';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../../package.json';
+} from '../../../version.json';
 import { Shadow } from '../../../common/primitives';
 import { light, ThemeProvider } from '../../../theme';
 import ContentNavigation from '../ContentNavigation';
@@ -81,6 +81,7 @@ export default class LayoutManager extends Component<
         'data-test-id': 'Navigation',
       },
     },
+    topOffset: 0,
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
     experimental_alternateFlyoutBehaviour: false,
@@ -176,6 +177,7 @@ export default class LayoutManager extends Component<
       containerNavigation,
       datasets,
       globalNavigation: GlobalNavigation,
+      topOffset,
       // eslint-disable-next-line camelcase
       experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
     } = this.props;
@@ -191,6 +193,7 @@ export default class LayoutManager extends Component<
       >
         <ThemeProvider
           theme={theme => ({
+            topOffset,
             mode: light, // If no theme already exists default to light mode
             ...theme,
           })}
@@ -280,6 +283,7 @@ export default class LayoutManager extends Component<
       // eslint-disable-next-line camelcase
       experimental_fullWidthFlyout: EXPERIMENTAL_FULL_WIDTH_FLYOUT,
       collapseToggleTooltipContent,
+      topOffset,
     } = this.props;
     const { flyoutIsOpen, mouseIsOverNavigation, itemIsDragging } = this.state;
     const {
@@ -334,6 +338,7 @@ export default class LayoutManager extends Component<
               return (
                 <NavigationContainer
                   {...dataset}
+                  topOffset={topOffset}
                   innerRef={this.getContainerRef}
                   onMouseEnter={this.mouseEnter}
                   onMouseOver={
@@ -433,8 +438,9 @@ export default class LayoutManager extends Component<
   };
 
   render() {
+    const { topOffset } = this.props;
     return (
-      <LayoutContainer>
+      <LayoutContainer topOffset={topOffset}>
         {this.renderNavigation()}
         {this.renderPageContent()}
       </LayoutContainer>

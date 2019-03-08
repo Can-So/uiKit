@@ -39,17 +39,21 @@ export type AdvancedSearchEvent = {
   /**
    * query entered by user
    */
-  query: String;
+  query: string;
   /**
    * if it is jira it can be one of the following ['issues', 'boards', 'projects', 'filters', 'people']
    * if it is confluence it can be one of the following ['content', 'people']
    */
-  category: String;
+  category: string;
   /**
    * orignial event, this is useful when need to check if the click was to open in new tab or in same tab
    * but if consumer wanna cancel the event {@link preventDefault} should be used
    */
-  originalEvent: Object;
+  originalEvent: object;
+  /**
+   * searchSessionId from the quick search session, it should be used for the advanced search session
+   */
+  searchSessionId: string;
 };
 export interface Props {
   /**
@@ -197,7 +201,12 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
     );
   }
 
-  onAdvancedSearch = (e: CancelableEvent, entity: String, query: String) => {
+  onAdvancedSearch = (
+    e: CancelableEvent,
+    entity: string,
+    query: string,
+    searchSessionId: string,
+  ) => {
     if (this.props.onAdvancedSearch) {
       let preventEventDefault = false;
       this.props.onAdvancedSearch({
@@ -205,6 +214,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
         query, // query entered by the user
         category: entity,
         originalEvent: e,
+        searchSessionId,
       });
 
       if (preventEventDefault) {

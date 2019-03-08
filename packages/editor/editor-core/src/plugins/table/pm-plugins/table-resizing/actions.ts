@@ -25,7 +25,11 @@ import {
   insertColgroupFromNode as recreateResizeColsByNode,
 } from '../../utils';
 import { closestElement } from '../../../../utils';
-import { getLayoutSize, tableLayoutToSize } from './utils';
+import {
+  getLayoutSize,
+  getDefaultLayoutMaxWidth,
+  tableLayoutToSize,
+} from './utils';
 
 export function updateColumnWidth(view, cell, movedWidth, resizer) {
   let $cell = view.state.doc.resolve(cell);
@@ -79,13 +83,14 @@ export function applyColumnWidths(view, state, table, start) {
 export function handleBreakoutContent(
   view: EditorView,
   elem: HTMLElement,
+  cellPos: number,
   start: number,
   minWidth: number,
   node: PMNode,
 ) {
-  const colIdx = Array.from((elem.parentNode as HTMLElement).children).indexOf(
-    elem,
-  );
+  const map = TableMap.get(node);
+  const rect = map.findCell(cellPos - start);
+  const colIdx = rect.left;
 
   const cellStyle = getComputedStyle(elem);
   const amount = addContainerLeftRightPadding(
@@ -289,10 +294,19 @@ function scale(
   initialScale?: boolean,
   dynamicTextSizing?: boolean,
 ): ResizeState | undefined {
-  const maxSize = getLayoutSize(node.attrs.layout, containerWidth);
+  const maxSize = getLayoutSize(
+    node.attrs.layout,
+    containerWidth,
+    dynamicTextSizing,
+  );
 
-  let prevTableWidth = getTableWidth(prevNode);
-  let previousMaxSize = tableLayoutToSize[prevNode.attrs.layout];
+  const prevTableWidth = getTableWidth(prevNode);
+  const previousLayout = prevNode.attrs.layout;
+
+  let previousMaxSize = tableLayoutToSize[previousLayout];
+  if (dynamicTextSizing && previousLayout === 'default') {
+    previousMaxSize = getDefaultLayoutMaxWidth(containerWidth);
+  }
 
   if (!initialScale) {
     previousMaxSize = getLayoutSize(

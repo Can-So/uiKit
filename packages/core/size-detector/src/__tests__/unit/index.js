@@ -2,7 +2,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import SizeDetector from '../..';
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 describe(name, () => {
   const createChildWithSpy = spy => args => spy(args);

@@ -3,120 +3,120 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 49639,
-      "gzipSize": 12574
+      "size": 49972,
+      "gzipSize": 12669
     }
   },
   {
     "id": "src.async",
     "name": "async",
     "stats": {
-      "size": 6711,
-      "gzipSize": 1944
+      "size": 6833,
+      "gzipSize": 1978
     }
   },
   {
     "id": "node_modules.main",
     "name": "node_modules [main]",
     "stats": {
-      "size": 1161578,
-      "gzipSize": 382477
+      "size": 245806,
+      "gzipSize": 70554
     }
   },
   {
     "id": "node_modules.async",
     "name": "node_modules [async]",
     "stats": {
-      "size": 1376218,
-      "gzipSize": 388625
+      "size": 1687770,
+      "gzipSize": 502559
     }
   },
   {
     "id": "atlaskit.core.main",
     "name": "main",
     "stats": {
-      "size": 154201,
-      "gzipSize": 36616
+      "size": 120441,
+      "gzipSize": 30495
     }
   },
   {
     "id": "atlaskit.core.async",
     "name": "async",
     "stats": {
-      "size": 172918,
-      "gzipSize": 33528
+      "size": 138859,
+      "gzipSize": 26921
     }
   },
   {
     "id": "atlaskit.editor.main",
     "name": "main",
     "stats": {
-      "size": 93761,
-      "gzipSize": 22918
+      "size": 94282,
+      "gzipSize": 22890
     }
   },
   {
     "id": "atlaskit.editor.async",
     "name": "async",
     "stats": {
-      "size": 2143,
-      "gzipSize": 886
+      "size": 2139,
+      "gzipSize": 882
     }
   },
   {
     "id": "atlaskit.elements.main",
     "name": "main",
     "stats": {
-      "size": 35008,
-      "gzipSize": 8928
+      "size": 34780,
+      "gzipSize": 8902
     }
   },
   {
     "id": "atlaskit.elements.async",
     "name": "async",
     "stats": {
-      "size": 15504,
-      "gzipSize": 5132
+      "size": 15418,
+      "gzipSize": 5086
     }
   },
   {
     "id": "atlaskit.media.async",
     "name": "async",
     "stats": {
-      "size": 354348,
-      "gzipSize": 82380
+      "size": 353908,
+      "gzipSize": 82520
     }
   },
   {
     "id": "atlaskit.people-and-teams.main",
     "name": "main",
     "stats": {
-      "size": 84083,
-      "gzipSize": 14841
+      "size": 69458,
+      "gzipSize": 12512
     }
   },
   {
     "id": "atlaskit.teamwork-ecosystem.async",
     "name": "async",
     "stats": {
-      "size": 625,
-      "gzipSize": 367
+      "size": 624,
+      "gzipSize": 366
     }
   },
   {
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 1573891,
-      "gzipSize": 479079
+      "size": 606783,
+      "gzipSize": 157086
     }
   },
   {
     "id": "combined.async",
     "name": "async",
     "stats": {
-      "size": 1924966,
-      "gzipSize": 515768
+      "size": 2202558,
+      "gzipSize": 623969
     }
   }
 ]

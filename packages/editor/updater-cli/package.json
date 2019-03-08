@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/updater-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Updater CLI for Atlaskit components.",
   "license": "Apache-2.0",
   "sideEffects": false,
@@ -25,6 +25,7 @@
     "ora": "^3.0.0",
     "semver": "^5.4.1",
     "terminal-link": "^1.2.0",
+    "tslib": "^1.8.0",
     "yarn-deduplicate": "^1.0.5"
   },
   "devDependencies": {

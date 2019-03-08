@@ -73,8 +73,9 @@ export interface Props {
   isSendSearchTermsEnabled?: boolean;
   onAdvancedSearch?: (
     e: CancelableEvent,
-    entity: String,
-    query: String,
+    entity: string,
+    query: string,
+    searchSessionId: string,
   ) => void;
 }
 
@@ -110,9 +111,12 @@ export class JiraQuickSearchContainer extends React.Component<
     postQueryScreenCounter: new SearchScreenCounter(),
   };
 
-  handleSearchSubmit = event => {
+  handleSearchSubmit = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+    searchSessionId: string,
+  ) => {
     const { onAdvancedSearch = () => {} } = this.props;
-    const target = event.target;
+    const target = event.target as HTMLInputElement;
     const query = target.value;
     let defaultPrevented = false;
 
@@ -127,6 +131,7 @@ export class JiraQuickSearchContainer extends React.Component<
       }),
       this.state.selectedAdvancedSearchType,
       query,
+      searchSessionId,
     );
 
     if (!defaultPrevented) {
@@ -171,7 +176,7 @@ export class JiraQuickSearchContainer extends React.Component<
                 query={query}
                 analyticsData={{ resultsCount: 0, wasOnNoResultsScreen: true }}
                 onClick={(mouseEvent, entity) =>
-                  onAdvancedSearch(mouseEvent, entity, query)
+                  onAdvancedSearch(mouseEvent, entity, query, searchSessionId)
                 }
               />
             </NoResultsAdvancedSearchContainer>
@@ -185,7 +190,7 @@ export class JiraQuickSearchContainer extends React.Component<
               showKeyboardLozenge={!isPreQuery && !keepPreQueryState}
               showSearchIcon
               onClick={(mouseEvent, entity) =>
-                onAdvancedSearch(mouseEvent, entity, query)
+                onAdvancedSearch(mouseEvent, entity, query, searchSessionId)
               }
             />
           </StickyFooter>
@@ -194,7 +199,12 @@ export class JiraQuickSearchContainer extends React.Component<
           <BeforePreQueryStateContainer>
             <AdvancedIssueSearchLink
               onClick={({ event }) =>
-                onAdvancedSearch(event, JiraEntityTypes.Issues, query)
+                onAdvancedSearch(
+                  event,
+                  JiraEntityTypes.Issues,
+                  query,
+                  searchSessionId,
+                )
               }
             />
           </BeforePreQueryStateContainer>
@@ -207,7 +217,7 @@ export class JiraQuickSearchContainer extends React.Component<
           <NoResultsState
             query={query}
             onAdvancedSearch={(mouseEvent, entity) =>
-              onAdvancedSearch(mouseEvent, entity, query)
+              onAdvancedSearch(mouseEvent, entity, query, searchSessionId)
             }
           />
         )}
@@ -378,7 +388,9 @@ export class JiraQuickSearchContainer extends React.Component<
       issueResults &&
       issueResults.length > 0 &&
       typeof issueResults[0].objectKey === 'string' &&
-      issueResults[0].objectKey!.toLowerCase() === query.toLowerCase()
+      (issueResults[0].objectKey!.toLowerCase() === query.toLowerCase() ||
+        (!!+query &&
+          issueResults[0].objectKey!.toLowerCase().endsWith(`${-query}`)))
     ) {
       this.setState({
         selectedResultId: getUniqueResultId(issueResults[0]),

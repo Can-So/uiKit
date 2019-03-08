@@ -1,5 +1,36 @@
 # @atlaskit/share
 
+## 0.1.18
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/user-picker@1.0.25
+  - @atlaskit/util-data-test@10.2.3
+  - @atlaskit/util-service-support@3.1.1
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/field-text-area@5.0.0
+  - @atlaskit/form@5.1.8
+  - @atlaskit/inline-dialog@10.0.0
+  - @atlaskit/section-message@2.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/tooltip@13.0.0
+
+## 0.1.17
+- [patch] [af38e4649a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af38e4649a):
+
+  - exposed shareContentType prop
+
+## 0.1.16
+- [patch] [aca247a78b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aca247a78b):
+
+  - Exposed shareFormTitle prop to customise Share Form title
+  - Removed object type from Copy link button
+
+## 0.1.15
+- [patch] [312572b5f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/312572b5f8):
+
+  - FS-3618 consume configuration in the UserPickerField
+
 ## 0.1.14
 - [patch] [4d3226b06b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d3226b06b):
 

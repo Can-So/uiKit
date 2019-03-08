@@ -1,5 +1,18 @@
 # @atlaskit/media-core
 
+## 27.2.3
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/media-card@55.0.2
+  - @atlaskit/media-store@9.2.1
+  - @atlaskit/media-test-helpers@20.1.7
+  - @atlaskit/docs@7.0.0
+
+## 27.2.2
+- [patch] [9b0f6671ae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b0f6671ae):
+
+  - ED-6244: Fix Resizable Media to allow images go smaller size than videos
+
 ## 27.2.1
 - [patch] [5a01d648a3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a01d648a3):
 

@@ -11,7 +11,7 @@ import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../package.json';
+} from '../../version.json';
 import Container, {
   Description,
   DismissButton,

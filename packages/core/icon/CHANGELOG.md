@@ -1,5 +1,20 @@
 # @atlaskit/icon
 
+## 16.0.4
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon-file-type@3.0.4
+  - @atlaskit/icon-object@3.0.4
+  - @atlaskit/icon-priority@3.0.1
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/dynamic-table@11.0.0
+  - @atlaskit/field-text@8.0.0
+  - @atlaskit/logo@10.0.0
+  - @atlaskit/modal-dialog@8.0.0
+  - @atlaskit/section-message@2.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/tooltip@13.0.0
+
 ## 16.0.3
 - Updated dependencies [ecf21be58f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ecf21be58f):
   - @atlaskit/icon-priority@3.0.0

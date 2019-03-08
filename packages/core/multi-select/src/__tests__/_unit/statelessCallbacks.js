@@ -6,7 +6,7 @@ import type { GroupType } from '../../types';
 
 import { MultiSelectStateless } from '../..';
 
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 describe(`${name} - stateless`, () => {
   const animStub = window.cancelAnimationFrame;

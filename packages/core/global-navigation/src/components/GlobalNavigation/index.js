@@ -11,7 +11,7 @@ import AtlassianSwitcher from '@atlaskit/atlassian-switcher';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../package.json';
+} from '../../version.json';
 import generateDefaultConfig from '../../config/default-config';
 import generateProductConfig from '../../config/product-config';
 import ItemComponent from '../ItemComponent';
@@ -377,8 +377,8 @@ export default class GlobalNavigation extends Component<
     const { product, cloudId } = this.props;
     return (
       <AtlassianSwitcher
-        product={product}
         cloudId={cloudId}
+        product={product}
         triggerXFlow={this.triggerXFlow}
       />
     );

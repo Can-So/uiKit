@@ -200,9 +200,9 @@
             "placeholder": [
               {
                 "data": {
-                  "url": "//pug.jira-dev.com/wiki/plugins/servlet/confluence/placeholder/macro?definition=e2V4cGFuZH0&locale=en_GB&version=2"
+                  "url": ""
                 },
-                "type": "image"
+                "type": "icon"
               }
             ]
           }

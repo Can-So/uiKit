@@ -11,6 +11,124 @@ const render = (doc: any) => {
 };
 
 describe('Renderer - EmailSerializer', () => {
+  it('should align paragraph correctly', () => {
+    const doc = {
+      type: 'doc',
+      version: 1,
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'Plain Paragraph',
+            },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [
+            {
+              type: 'alignment',
+              attrs: {
+                align: 'center',
+              },
+            },
+          ],
+          content: [
+            {
+              type: 'text',
+              text: 'Paragraph with center alignment',
+            },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [
+            {
+              type: 'alignment',
+              attrs: {
+                align: 'end',
+              },
+            },
+          ],
+          content: [
+            {
+              type: 'text',
+              text: 'Paragraph with end alignment',
+            },
+          ],
+        },
+      ],
+    };
+    const output = render(doc);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should align heading correctly', () => {
+    const doc = {
+      type: 'doc',
+      version: 1,
+      content: [
+        {
+          type: 'heading',
+          attrs: {
+            level: 1,
+          },
+          content: [
+            {
+              type: 'text',
+              text: 'Plain Heading',
+            },
+          ],
+        },
+        {
+          type: 'heading',
+          attrs: {
+            level: 1,
+          },
+          marks: [
+            {
+              type: 'alignment',
+              attrs: {
+                align: 'center',
+              },
+            },
+          ],
+          content: [
+            {
+              type: 'text',
+              text: 'Heading with center alignment',
+            },
+          ],
+        },
+        {
+          type: 'heading',
+          attrs: {
+            level: 1,
+          },
+          marks: [
+            {
+              type: 'alignment',
+              attrs: {
+                align: 'end',
+              },
+            },
+          ],
+          content: [
+            {
+              type: 'text',
+              text: 'Heading with end alignment',
+            },
+          ],
+        },
+      ],
+    };
+
+    const output = render(doc);
+    expect(output).toMatchSnapshot();
+  });
+
   it('should inline text properties correctly', () => {
     const doc = {
       type: 'doc',
@@ -68,6 +186,59 @@ describe('Renderer - EmailSerializer', () => {
           attrs: {
             language: 'javascript',
           },
+        },
+      ],
+    };
+    const output = render(doc);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should render paragraph with indentations', () => {
+    const doc = {
+      type: 'doc',
+      version: 1,
+      content: [
+        {
+          type: 'paragraph',
+          marks: [{ type: 'indentation', attrs: { level: 1 } }],
+          content: [
+            { type: 'text', text: 'Paragraph with 1 level of indentation' },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [{ type: 'indentation', attrs: { level: 2 } }],
+          content: [
+            { type: 'text', text: 'Paragraph with 2 levels of indentation' },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [{ type: 'indentation', attrs: { level: 3 } }],
+          content: [
+            { type: 'text', text: 'Paragraph with 3 levels of indentation' },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [{ type: 'indentation', attrs: { level: 4 } }],
+          content: [
+            { type: 'text', text: 'Paragraph with 4 levels of indentation' },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [{ type: 'indentation', attrs: { level: 5 } }],
+          content: [
+            { type: 'text', text: 'Paragraph with 5 levels of indentation' },
+          ],
+        },
+        {
+          type: 'paragraph',
+          marks: [{ type: 'indentation', attrs: { level: 6 } }],
+          content: [
+            { type: 'text', text: 'Paragraph with 6 levels of indentation' },
+          ],
         },
       ],
     };
