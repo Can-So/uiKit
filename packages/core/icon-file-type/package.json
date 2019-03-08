@@ -4,14 +4,8 @@
   "description": "A React package that contains file-type icons",
   "license": "SEE LICENSE IN LICENSE",
   "main": "cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "glyph",
-    "svgs",
-    "cjs"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",

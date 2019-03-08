@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import CheckboxIcon from '@atlaskit/icon/glyph/checkbox';
 import CheckboxIndeterminateIcon from '@atlaskit/icon/glyph/checkbox-indeterminate';
 import Checkbox, { CheckboxWithoutAnalytics } from '../../Checkbox';
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 describe(name, () => {
   const mountCheckbox = (overridingProps: any) =>

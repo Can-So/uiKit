@@ -5,7 +5,7 @@ import Layer from '@atlaskit/layer';
 import Spinner from '@atlaskit/spinner';
 import Item, { ItemGroup } from '@atlaskit/item';
 
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 import DroplistWithAnalytics from '../../../src';
 import { DroplistWithoutAnalytics as Droplist } from '../../components/Droplist';

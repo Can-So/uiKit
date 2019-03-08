@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import Page from '../../../components/Page';
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 
 describe(`${name} - Page component`, () => {
   it('renders child props', () => {

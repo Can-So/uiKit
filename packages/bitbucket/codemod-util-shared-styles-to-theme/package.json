@@ -3,8 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "description": "Converts @atlaskit/util-shared-styles to @atlaskit/theme",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "scripts": {
     "test": "jest"
@@ -12,9 +11,6 @@
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Ben G"
-  ],
-  "files": [
-    "dist"
   ],
   "atlaskit": {
     "internal": true

@@ -11,7 +11,7 @@ import InitialLoadingElement from '../../styled/InitialLoading';
 import Content from '../../styled/Content';
 import Trigger from '../../styled/Trigger';
 
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 describe(name, () => {
   const animStub = window.cancelAnimationFrame;

@@ -9,7 +9,7 @@ import {
 import {
   name as packageName,
   version as packageVersion,
-} from '../../package.json';
+} from '../version.json';
 import TabsNavigation from './TabsNavigation';
 import DefaultTabContent from './TabContent';
 import DefaultTabItem from './TabItem';

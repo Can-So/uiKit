@@ -4,14 +4,14 @@
     "name": "main",
     "stats": {
       "size": 85584,
-      "gzipSize": 15566
+      "gzipSize": 15561
     }
   },
   {
     "id": "node_modules.main",
     "name": "node_modules [main]",
     "stats": {
-      "size": 139319,
+      "size": 139322,
       "gzipSize": 39372
     }
   },
@@ -19,16 +19,16 @@
     "id": "atlaskit.core.main",
     "name": "main",
     "stats": {
-      "size": 125764,
-      "gzipSize": 30335
+      "size": 125923,
+      "gzipSize": 30362
     }
   },
   {
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 349456,
-      "gzipSize": 86423
+      "size": 349617,
+      "gzipSize": 86448
     }
   }
 ]
