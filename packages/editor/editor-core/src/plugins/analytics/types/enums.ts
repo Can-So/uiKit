@@ -66,6 +66,7 @@ export const enum ACTION_SUBJECT_ID {
   FORMAT_SUB = 'subscript',
   FORMAT_SUPER = 'superscript',
   FORMAT_UNDERLINE = 'underline',
+  LINE_BREAK = 'lineBreak',
   LINK = 'link',
   LINK_PREVIEW = 'linkPreview',
   MEDIA = 'media',

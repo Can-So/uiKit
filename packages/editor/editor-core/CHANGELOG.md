@@ -1,5 +1,48 @@
 # @atlaskit/editor-core
 
+## 103.0.2
+- [patch] [44f4d1293a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44f4d1293a):
+
+  - ED-6219: Use TableMap to get column index over dom children index
+
+## 103.0.1
+- [patch] [b346b44c05](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b346b44c05):
+
+  - ED-6411: Fix resizing the last column with dynamic text sizing enabled
+
+## 103.0.0
+- [major] [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
+
+  - ED-6286: remove StateManager from media plugin and provider
+
+## 102.2.2
+- [patch] [06c4a70a2e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06c4a70a2e):
+
+  - ED-6031: Dont reset selection if editor still has focus.
+
+## 102.2.1
+- [patch] [c427333c46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c427333c46):
+
+  - ED-6008 Dim telepointers that overlaps the cursor.
+
+## 102.2.0
+- [minor] [4a9a7487f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a9a7487f1):
+
+  - ED-6240 Add Analytics GAS V3 for insert new line
+
+## 102.1.10
+- Updated dependencies [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+  - @atlaskit/renderer@41.1.1
+  - @atlaskit/date@0.4.0
+  - @atlaskit/emoji@56.2.0
+  - @atlaskit/status@0.5.0
+  - @atlaskit/task-decision@11.3.0
+
+## 102.1.9
+- [patch] [9b0f6671ae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b0f6671ae):
+
+  - ED-6244: Fix Resizable Media to allow images go smaller size than videos
+
 ## 102.1.8
 - [patch] [97a9ca095b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97a9ca095b):
 

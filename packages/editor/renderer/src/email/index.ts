@@ -45,12 +45,14 @@ const traverseTree = (fragment: Fragment): string => {
   return output;
 };
 
-const wrapperCSS = serializeStyle({
+export const commonStyle = {
   'font-family': fontFamily(),
   'font-size': fontSize(),
   'font-weight': 400,
   'line-height': '24px',
-});
+};
+
+const wrapperCSS = serializeStyle(commonStyle);
 
 export default class EmailSerializer implements Serializer<string> {
   serializeFragment(fragment: Fragment): string {

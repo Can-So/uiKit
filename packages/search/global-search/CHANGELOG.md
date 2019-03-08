@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.16.3
+- [patch] [ea6c801333](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea6c801333):
+
+  - added searchSessionId to advanced search handler
+
 ## 5.16.2
 - [patch] [83e94783d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/83e94783d0):
 

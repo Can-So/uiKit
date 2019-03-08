@@ -23,7 +23,7 @@ export default class GlobalNavigation extends Component<GlobalNavigationProps> {
       secondaryItems,
       theme,
     } = this.props;
-    const wrapperStyles = theme.mode.globalNav();
+    const wrapperStyles = theme.mode.globalNav({ topOffset: theme.topOffset });
 
     return (
       <NavigationAnalyticsContext

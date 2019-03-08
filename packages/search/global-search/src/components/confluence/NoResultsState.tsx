@@ -11,7 +11,7 @@ import SearchPeopleItem from '../SearchPeopleItem';
 import { ConfluenceAdvancedSearchTypes } from '../SearchResultsUtil';
 export interface Props {
   query: string;
-  onClick?: (e: CancelableEvent, entity: String) => void;
+  onClick?: (e: CancelableEvent, entity: string) => void;
 }
 
 const Container = styled.div`

@@ -85,7 +85,7 @@ type State = {
   selected: *,
 };
 
-export default class extends React.Component<*, State> {
+export default class MySwitcher extends React.Component<*, State> {
   state = { selected: projects[0].options[0] };
   create = () => ({
     onClick: () => {

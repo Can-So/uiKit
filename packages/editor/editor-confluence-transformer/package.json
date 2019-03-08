@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-confluence-transformer",
-  "version": "5.2.1",
+  "version": "5.2.2",
   "description": "Editor Confluence Transformer",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -29,8 +29,8 @@
   "devDependencies": {
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/docs": "^6.0.0",
-    "@atlaskit/editor-core": "^102.0.0",
-    "@atlaskit/editor-test-helpers": "^7.0.2",
+    "@atlaskit/editor-core": "^103.0.0",
+    "@atlaskit/editor-test-helpers": "^7.0.4",
     "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/theme": "^7.0.1",
     "@atlaskit/util-data-test": "^10.2.2",

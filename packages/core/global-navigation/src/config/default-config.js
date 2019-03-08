@@ -6,6 +6,7 @@ import StarLargeIcon from '@atlaskit/icon/glyph/star-large';
 import NotificationIcon from '@atlaskit/icon/glyph/notification';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import AtlassianSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
+import { SwitchToTooltipText } from '@atlaskit/atlassian-switcher';
 
 import type { DefaultConfigShape } from './types';
 
@@ -76,7 +77,7 @@ export default function generateDefaultConfig(): DefaultConfigShape {
       label: 'Atlassian Switcher',
       section: 'secondary',
       rank: 3,
-      tooltip: 'Switch to…',
+      tooltip: SwitchToTooltipText,
       id: 'atlassianSwitcher',
     },
     profile: {

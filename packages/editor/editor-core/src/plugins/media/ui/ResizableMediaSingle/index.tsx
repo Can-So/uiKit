@@ -20,6 +20,7 @@ import {
   imageAlignmentMap,
   alignmentLayouts,
 } from './utils';
+import { Context } from '@atlaskit/media-core';
 
 type State = {
   offsetLeft: number;
@@ -57,7 +58,10 @@ export default class ResizableMediaSingle extends React.Component<
   }
 
   async componentDidMount() {
-    this.checkVideoFile(this.props.viewContext);
+    const { viewContext } = this.props;
+    if (viewContext) {
+      this.checkVideoFile(viewContext);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,7 +70,7 @@ export default class ResizableMediaSingle extends React.Component<
     }
   }
 
-  async checkVideoFile(viewContext) {
+  async checkVideoFile(viewContext: Context) {
     const $pos = this.$pos;
     if (!$pos || !viewContext) {
       return;

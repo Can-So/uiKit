@@ -12,11 +12,8 @@ import {
 } from 'prosemirror-state';
 import { Context, FileIdentifier } from '@atlaskit/media-core';
 import { UploadParams } from '@atlaskit/media-picker';
-import {
-  MediaType,
-  MediaSingleLayout,
-  MediaBaseAttributes,
-} from '@atlaskit/adf-schema';
+import { MediaSingleLayout, MediaBaseAttributes } from '@atlaskit/adf-schema';
+
 import { ErrorReporter } from '@atlaskit/editor-common';
 import { Dimensions } from '@atlaskit/media-editor';
 
@@ -29,19 +26,16 @@ import DropPlaceholder, { PlaceholderType } from '../ui/Media/DropPlaceholder';
 import { MediaPluginOptions } from '../media-plugin-options';
 import { insertMediaGroupNode } from '../utils/media-files';
 import { removeMediaNode, splitMediaGroup } from '../utils/media-common';
-import PickerFacade, { PickerFacadeConfig } from '../picker-facade';
-import {
-  MediaState,
-  MediaProvider,
-  MediaStateStatus,
-  MediaStateManager,
-} from '../types';
-import DefaultMediaStateManager from '../default-state-manager';
+import PickerFacade, {
+  PickerFacadeConfig,
+  MediaStateEventListener,
+  MediaStateEventSubscriber,
+} from '../picker-facade';
+import { MediaState, MediaProvider, MediaStateStatus } from '../types';
 import { insertMediaSingleNode } from '../utils/media-single';
 
 import { findDomRefAtPos } from 'prosemirror-utils';
-export { DefaultMediaStateManager };
-export { MediaState, MediaProvider, MediaStateStatus, MediaStateManager };
+export { MediaState, MediaProvider, MediaStateStatus };
 
 const MEDIA_RESOLVED_STATES = ['ready', 'error', 'cancelled'];
 
@@ -54,7 +48,6 @@ export class MediaPluginState {
   public allowsUploads: boolean = false;
   public mediaContext: Context;
   public uploadContext?: Context;
-  public stateManager: MediaStateManager;
   public ignoreLinks: boolean = false;
   public waitForMediaUpload: boolean = true;
   public allUploadsFinished: boolean = true;
@@ -66,7 +59,6 @@ export class MediaPluginState {
   private pendingTask = Promise.resolve<MediaState | null>(null);
   public options: MediaPluginOptions;
   private view: EditorView;
-  private useDefaultStateManager = true;
   private destroyed = false;
   public mediaProvider: MediaProvider;
   private errorReporter: ErrorReporter;
@@ -108,7 +100,6 @@ export class MediaPluginState {
       'Editor: unable to init media plugin - media or mediaGroup/mediaSingle node absent in schema',
     );
 
-    this.stateManager = new DefaultMediaStateManager();
     options.providerFactory.subscribe(
       'mediaProvider',
       (name, provider?: Promise<MediaProvider>) =>
@@ -163,17 +154,6 @@ export class MediaPluginState {
     }
 
     this.mediaContext = await this.mediaProvider.viewContext;
-
-    // release all listeners for default state manager
-    const { stateManager } = this.mediaProvider;
-    if (stateManager && this.useDefaultStateManager) {
-      (stateManager as DefaultMediaStateManager).destroy();
-      this.useDefaultStateManager = false;
-    }
-
-    if (stateManager) {
-      this.stateManager = stateManager;
-    }
 
     this.allowsUploads = !!this.mediaProvider.uploadContext;
     const { view, allowsUploads } = this;
@@ -238,8 +218,15 @@ export class MediaPluginState {
     }
   }
 
-  insertFiles = (mediaStates: MediaState[]): void => {
-    const { stateManager } = this;
+  /**
+   * we insert a new file by inserting a initial state for that file.
+   *
+   * called when we insert a new file via the picker (connected via pickerfacade)
+   */
+  insertFile = (
+    mediaState: MediaState,
+    onMediaStateChanged: MediaStateEventSubscriber,
+  ) => {
     const { mediaSingle } = this.view.state.schema.nodes;
     const collection = this.collectionFromProvider();
     if (collection === undefined) {
@@ -248,51 +235,41 @@ export class MediaPluginState {
 
     this.allUploadsFinished = false;
 
-    const imageAttachments = mediaStates.filter(media =>
-      isImage(media.fileMimeType),
-    );
-
-    let nonImageAttachments = mediaStates.filter(
-      media => !isImage(media.fileMimeType),
-    );
-
-    mediaStates.forEach(mediaState => {
-      this.stateManager.on(mediaState.id, this.handleMediaState);
-    });
-
-    if (mediaSingle) {
-      insertMediaGroupNode(this.view, nonImageAttachments, collection);
-      imageAttachments.forEach(mediaState => {
-        insertMediaSingleNode(this.view, mediaState, collection);
-      });
+    if (mediaSingle && isImage(mediaState.fileMimeType)) {
+      insertMediaSingleNode(this.view, mediaState, collection);
     } else {
-      insertMediaGroupNode(this.view, mediaStates, collection);
+      insertMediaGroupNode(this.view, [mediaState], collection);
     }
 
+    // do events when media state changes
+    onMediaStateChanged(this.handleMediaState);
+
+    // handle waiting for upload complete
     const isEndState = (state: MediaState) =>
       state.status && MEDIA_RESOLVED_STATES.indexOf(state.status) !== -1;
 
-    this.pendingTask = mediaStates
-      .filter(state => !isEndState(state))
-      .reduce((promise, state) => {
+    if (!isEndState(mediaState)) {
+      const updater = promise => {
         // Chain the previous promise with a new one for this media item
         return new Promise<MediaState | null>((resolve, reject) => {
-          const onStateChange = newState => {
+          const onStateChange: MediaStateEventListener = newState => {
             // When media item reaches its final state, remove listener and resolve
             if (isEndState(newState)) {
-              stateManager.off(state.id, onStateChange);
               resolve(newState);
             }
           };
 
-          stateManager.on(state.id, onStateChange);
+          onMediaStateChanged(onStateChange);
         }).then(() => promise);
-      }, this.pendingTask);
+      };
+      this.pendingTask = updater(this.pendingTask);
 
-    this.pendingTask.then(() => {
-      this.allUploadsFinished = true;
-    });
+      this.pendingTask.then(() => {
+        this.allUploadsFinished = true;
+      });
+    }
 
+    // refocus the view
     const { view } = this;
     if (!view.hasFocus()) {
       view.focus();
@@ -587,12 +564,11 @@ export class MediaPluginState {
     if (this.destroyed) {
       return;
     }
-    const { errorReporter, pickers, stateManager } = this;
+    const { errorReporter, pickers } = this;
     // create pickers if they don't exist, re-use otherwise
     if (!pickers.length) {
       const pickerFacadeConfig: PickerFacadeConfig = {
         context,
-        stateManager,
         errorReporter,
       };
       const defaultPickerConfig = {
@@ -653,7 +629,7 @@ export class MediaPluginState {
       }
 
       pickers.forEach(picker => {
-        picker.onNewMedia(this.insertFiles);
+        picker.onNewMedia(this.insertFile);
         picker.onNewMedia(this.trackNewMediaEvent(picker.type));
       });
     }
@@ -663,15 +639,13 @@ export class MediaPluginState {
   }
 
   private trackNewMediaEvent(pickerType) {
-    return (mediaStates: MediaState[]) => {
-      mediaStates.forEach(mediaState => {
-        analyticsService.trackEvent(
-          `atlassian.editor.media.file.${pickerType}`,
-          mediaState.fileMimeType
-            ? { fileMimeType: mediaState.fileMimeType }
-            : {},
-        );
-      });
+    return (mediaState: MediaState) => {
+      analyticsService.trackEvent(
+        `atlassian.editor.media.file.${pickerType}`,
+        mediaState.fileMimeType
+          ? { fileMimeType: mediaState.fileMimeType }
+          : {},
+      );
     };
   }
 
@@ -708,12 +682,10 @@ export class MediaPluginState {
     );
   }
 
-  private handleMediaState = async (state: MediaState) => {
+  private handleMediaState: MediaStateEventListener = state => {
     switch (state.status) {
       case 'error':
-        this.removeNodeById(state);
         const { uploadErrorHandler } = this.options;
-
         if (uploadErrorHandler) {
           uploadErrorHandler(state);
         }
@@ -723,6 +695,7 @@ export class MediaPluginState {
         const isMediaSingle =
           isImage(state.fileMimeType) &&
           !!this.view.state.schema.nodes.mediaSingle;
+
         let attrs: { id?: string; collection?: string } = {
           id: state.publicId || state.id,
         };
@@ -733,11 +706,6 @@ export class MediaPluginState {
 
         this.updateMediaNodeAttrs(state.id, attrs, isMediaSingle);
         delete this.mediaGroupNodes[state.id];
-        break;
-
-      case 'ready':
-        delete this.mediaGroupNodes[state.id];
-        this.stateManager.off(state.id, this.handleMediaState);
         break;
     }
   };
@@ -778,19 +746,6 @@ export class MediaPluginState {
     ) {
       return selection.node;
     }
-  };
-
-  /**
-   * Since we replace nodes with public id when node is finalized
-   * stateManager contains no information for public ids
-   */
-  getMediaNodeStateStatus = (id: string) => {
-    const state = this.getMediaNodeState(id);
-    return (state && state.status) || 'ready';
-  };
-
-  getMediaNodeState = (id: string) => {
-    return this.stateManager.getState(id);
   };
 
   private handleDrag = (dragState: 'enter' | 'leave') => {
@@ -941,8 +896,3 @@ export const createPlugin = (
     },
   });
 };
-
-export interface MediaData {
-  id: string;
-  type?: MediaType;
-}

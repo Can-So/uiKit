@@ -19,6 +19,7 @@ let mockShareServiceClient: jest.Mock;
 const mockCloudId = 'cloudId';
 const mockProductId = 'productId';
 const mockShareAri = 'ari';
+const mockShareContentType = 'issue';
 const mockShareLink = 'share-link';
 const mockShareTitle = 'Share Title';
 const mockTriggerButtonStyle = 'icon-with-text' as 'icon-with-text';
@@ -70,6 +71,7 @@ beforeEach(() => {
       originTracingFactory={mockOriginTracingFactory}
       productId={mockProductId}
       shareAri={mockShareAri}
+      shareContentType={mockShareContentType}
       shareLink={mockShareLink}
       shareTitle={mockShareTitle}
       formatCopyLink={mockFormatCopyLink}
@@ -133,6 +135,7 @@ describe('ShareDialogContainer', () => {
         originTracingFactory={mockOriginTracingFactory}
         productId={mockProductId}
         shareAri={mockShareAri}
+        shareContentType={mockShareContentType}
         shareLink={mockShareLink}
         shareTitle={mockShareTitle}
         formatCopyLink={mockFormatCopyLink}
@@ -175,6 +178,7 @@ describe('ShareDialogContainer', () => {
           ari: mockShareAri,
           link: mockShareLink,
           title: mockShareTitle,
+          type: mockShareContentType,
         },
         [{ type: 'user', id: 'id' }, { type: 'user', email: 'mock@email.com' }],
         {

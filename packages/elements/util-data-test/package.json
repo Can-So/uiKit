@@ -5,6 +5,7 @@
   "config": {
     "access": "public"
   },
+  "private": true,
   "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
   "jsnext:main": "dist/es2015/index.js",
