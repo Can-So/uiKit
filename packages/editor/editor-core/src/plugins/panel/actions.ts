@@ -16,7 +16,6 @@ import { PANEL_TYPE } from '../analytics/types/node-events';
 export type DomAtPos = (pos: number) => { node: HTMLElement; offset: number };
 
 export const removePanel = (): Command => (state, dispatch) => {
-  console.log('removePanel');
   const {
     schema: { nodes },
     tr,

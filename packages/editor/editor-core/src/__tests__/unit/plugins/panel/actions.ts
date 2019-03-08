@@ -67,7 +67,7 @@ describe('panel actions', () => {
 
     panelTypes.forEach(type => {
       it(`trigger GAS3 analytics when changing panel type to ${type}`, () => {
-        let startType = type == 'info' ? 'note' : 'info';
+        let startType = type === 'info' ? 'note' : 'info';
         const { editorView } = editor(
           doc(panel({ panelType: startType })(p('text{<>}'))),
         );
