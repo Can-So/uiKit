@@ -1,5 +1,9 @@
 # @atlaskit/outbound-auth-flow-client
 
+## 1.0.4
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/docs@7.0.0
+
 ## 1.0.3
 - [patch] [63acecf699](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63acecf699):
 

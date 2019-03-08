@@ -1,5 +1,9 @@
 # @atlaskit/analytics-viewer
 
+## 0.1.7
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/analytics-next@4.0.0
+
 ## 0.1.6
 - [patch] [8c65a38bfc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c65a38bfc):
 

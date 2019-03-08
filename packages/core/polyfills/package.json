@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/polyfills",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "A package containing polyfills for native methods.",
   "license": "Apache-2.0",
   "module": "index.js",
@@ -20,7 +20,7 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^6.0.0"
+    "@atlaskit/docs": "^7.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0"

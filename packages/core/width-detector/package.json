@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/width-detector",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Wrapper for components that need to respond to width changes",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/docs": "^7.0.0",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "lodash.debounce": "^4.0.8",
