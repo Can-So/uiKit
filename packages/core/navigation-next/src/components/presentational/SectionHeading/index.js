@@ -22,7 +22,7 @@ export default class SectionHeading extends Component<SectionHeadingProps> {
           height: gridSize * 5.5,
           paddingLeft: gridSize * 1.5,
           paddingRight: gridSize * 1.5,
-          paddingTop: gridSize,
+          marginTop: gridSize,
         }}
       >
         {children}
