@@ -19,8 +19,15 @@ async function getExamplesFor(
   });
   let examplesArr = [];
   project.workspaces.forEach(workspace => {
-    if (workspace.pkg && workspace.pkg.name.split('/')[1] === pkgName) {
-      examplesArr.push(...workspace.files.examples);
+    if (workspace.pkg) {
+      if (
+        // compare like for like if pkgName includes scope
+        (pkgName[0] === '@' && workspace.pkg.name === pkgName) ||
+        // otherwise compare text after scope
+        workspace.pkg.name.split('/')[1] === pkgName
+      ) {
+        examplesArr.push(...workspace.files.examples);
+      }
     }
   });
   return examplesArr;
