@@ -45,7 +45,9 @@ export function applyPropertyStyle(
   baseThemeStyles: TextFieldStyleProps,
 ) {
   const propertyStyles: any = textFieldNachosTheme[property];
-  if (!propertyStyles) return 'initial';
+  if (!propertyStyles) {
+    return 'initial';
+  }
 
   // Check for relevant fallbacks.
   // This will fall back to the ADG theme if there is an appearance
@@ -59,10 +61,18 @@ export function applyPropertyStyle(
 
   let appearanceStyle = propertyStyles[appearance]['idle'];
   // least to most important precedence
-  if (isHovered) appearanceStyle = propertyStyles[appearance].hover;
-  if (isFocused) appearanceStyle = propertyStyles[appearance].focus;
-  if (isInvalid) appearanceStyle = propertyStyles[appearance].invalid;
-  if (isDisabled) appearanceStyle = propertyStyles[appearance].disabled;
+  if (isHovered) {
+    appearanceStyle = propertyStyles[appearance].hover;
+  }
+  if (isFocused) {
+    appearanceStyle = propertyStyles[appearance].focus;
+  }
+  if (isInvalid) {
+    appearanceStyle = propertyStyles[appearance].invalid;
+  }
+  if (isDisabled) {
+    appearanceStyle = propertyStyles[appearance].disabled;
+  }
 
   return appearanceStyle;
 }

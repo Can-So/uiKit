@@ -35,7 +35,7 @@ export type TextFieldThemeProps = {
    * `transparent` has transparent background.
    * `none` hides all field styling.
    */
-  appearance: TextFieldAppearance;
+  appearance?: TextFieldAppearance;
   /** Applies compact styling, making the field smaller */
   isCompact?: boolean;
   /** Sets the field as uneditable, with a changed hover state. */
