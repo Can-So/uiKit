@@ -1,13 +1,13 @@
 import { EmailSerializer } from '../../../index';
 import { defaultSchema as schema } from '@atlaskit/adf-schema';
 
-const paragraphIndents = require('../../__fixtures__/paragraph-indents.adf');
-const paragraphAlign = require('../../__fixtures__/paragraph-align.adf');
-const headingAlign = require('../../__fixtures__/heading-align.adf');
-const em = require('../../__fixtures__/em.adf');
-const codeBlock = require('../../__fixtures__/code-block.adf');
-const inlineCodeProps = require('../../__fixtures__/inline-code-props.adf');
-const inlineTextProps = require('../../__fixtures__/inline-text-props.adf');
+import * as paragraphIndents from '../../__fixtures__/paragraph-indents.adf.json';
+import * as paragraphAlign from '../../__fixtures__/paragraph-align.adf.json';
+import * as headingAlign from '../../__fixtures__/heading-align.adf.json';
+import * as em from '../../__fixtures__/em.adf.json';
+import * as codeBlock from '../../__fixtures__/code-block.adf.json';
+import * as inlineCodeProps from '../../__fixtures__/inline-code-props.adf.json';
+import * as inlineTextProps from '../../__fixtures__/inline-text-props.adf.json';
 
 const render = (doc: any) => {
   const serializer = EmailSerializer.fromSchema(schema);

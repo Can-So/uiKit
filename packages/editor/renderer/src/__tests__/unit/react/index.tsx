@@ -5,8 +5,8 @@ import { Action } from '../../../react/marks';
 import { Heading } from '../../../react/nodes';
 import { Emoji } from '../../../react/nodes';
 
-const doc = require('../../__fixtures__/hello-world.adf.json');
-const headingDoc = require('../../__fixtures__/heading-doc.adf.json');
+import * as doc from '../../__fixtures__/hello-world.adf.json';
+import * as headingDoc from '../../__fixtures__/heading-doc.adf.json';
 
 const docFromSchema = schema.nodeFromJSON(doc);
 const headingDocFromSchema = schema.nodeFromJSON(headingDoc);
