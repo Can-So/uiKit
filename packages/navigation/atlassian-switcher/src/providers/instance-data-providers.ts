@@ -15,7 +15,9 @@ export const RecentContainersProvider = asDataProvider(
   ({ cloudId }: WithCloudId) =>
     fetchJson<RecentContainersDataStructure>(
       `/gateway/api/activity/api/client/recent/containers?cloudId=${cloudId}`,
-    ),
+    ).then((recentContainersData: RecentContainersDataStructure) => ({
+      data: recentContainersData.data.slice(0, 6),
+    })),
 );
 
 export const LicenseInformationProvider = asDataProvider(

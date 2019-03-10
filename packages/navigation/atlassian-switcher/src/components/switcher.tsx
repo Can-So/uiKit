@@ -140,7 +140,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
     const suggestedLinks = hasSuggestedLinks ? [suggestedProductLink!] : [];
     const recentLinks = getRecentLinkItems(recentContainersData!.data);
     const customLinks = customLinksData
-      ? getCustomLinkItems(customLinksData[0])
+      ? getCustomLinkItems(customLinksData[0], licenseInformationData!)
       : [];
 
     /**
