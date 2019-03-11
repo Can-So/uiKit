@@ -1,4 +1,4 @@
-import Core from './binaries/mediaEditor';
+import * as Core from './binaries/mediaEditor';
 import { Dimensions } from '../../common';
 
 // Responsible for receiving the image
