@@ -165,7 +165,7 @@ export const getSuggestedProductLink = (
 
 export const getCustomLinkItems = (
   list: Array<CustomLink>,
-  licenseInformationData: LicenseInformationDataStructure,
+  licenseInformationData: LicenseInformationResponse,
 ): SwitcherItemType[] => {
   const defaultProductCustomLinks = [
     `${licenseInformationData.hostname}/secure/MyJiraHome.jspa`,

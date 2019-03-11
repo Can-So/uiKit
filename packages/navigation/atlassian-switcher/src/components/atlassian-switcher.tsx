@@ -13,12 +13,9 @@ interface AtlassianSwitcherProps {
   triggerXFlow: TriggerXFlowCallback;
 }
 
-const AtlassianSwitcher = ({
-  product,
-  cloudId,
-  triggerXFlow,
-  ...props
-}: AtlassianSwitcherProps) => {
+const AtlassianSwitcher = (props: AtlassianSwitcherProps) => {
+  const { product } = props;
+
   let Switcher: React.ReactType;
   switch (product) {
     case Product.JIRA:
@@ -45,12 +42,7 @@ const AtlassianSwitcher = ({
   return (
     <ErrorBoundary>
       <IntlProvider>
-        <Switcher
-          cloudId={cloudId}
-          triggerXFlow={triggerXFlow}
-          messages={messages}
-          {...props}
-        />
+        <Switcher messages={messages} {...props} />
       </IntlProvider>
     </ErrorBoundary>
   );

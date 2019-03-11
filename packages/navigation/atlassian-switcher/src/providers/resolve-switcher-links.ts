@@ -86,13 +86,16 @@ function collectRecentLinks(
   }
 }
 
-function collectCustomLinks(customLinks: ProviderResults['customLinks']) {
-  if (isError(customLinks)) {
+function collectCustomLinks(
+  customLinks: ProviderResults['customLinks'],
+  licenseInformation: ProviderResults['licenseInformation'],
+) {
+  if (customLinks === undefined || isError(customLinks)) {
     return [];
   }
 
-  if (isComplete(customLinks)) {
-    return getCustomLinkItems(customLinks.data[0]);
+  if (isComplete(customLinks) && isComplete(licenseInformation)) {
+    return getCustomLinkItems(customLinks.data[0], licenseInformation.data);
   }
 }
 
@@ -109,7 +112,7 @@ function createCollector() {
 }
 
 interface ProviderResults {
-  customLinks: ProviderResult<CustomLinksResponse>;
+  customLinks?: ProviderResult<CustomLinksResponse>;
   recentContainers: ProviderResult<RecentContainersResponse>;
   licenseInformation: ProviderResult<LicenseInformationResponse>;
   managePermission: ProviderResult<boolean>;
@@ -159,7 +162,10 @@ export function resolveSwitcherLinks(
       [],
     ),
     recentLinks: collect(collectRecentLinks(recentContainers), []),
-    customLinks: collect(collectCustomLinks(customLinks), []),
+    customLinks: collect(
+      collectCustomLinks(customLinks, licenseInformation),
+      [],
+    ),
 
     showManageLink: collect(collectCanManageLinks(managePermission), false),
     isLoading: isLoading(licenseInformation),

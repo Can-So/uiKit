@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import { mockEndpoints } from './helpers/mock-endpoints';
+import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
 import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher from '../src';
 
@@ -34,13 +34,7 @@ class GenericSwitcherExample extends Component {
           },
         };
       },
-      {
-        containers: 1000,
-        xflow: 500,
-        licenseInformation: 250,
-        permitted: 2000,
-        appswitcher: 1500,
-      },
+      REQUEST_MEDIUM,
     );
     this.setState({
       isDrawerOpen: true,

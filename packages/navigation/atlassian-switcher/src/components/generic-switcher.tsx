@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Switcher from './switcher';
 import CommonDataProvider from '../providers/common-data-provider';
-import { getSuggestedProductLink } from '../utils/links';
 import { Product } from '../types';
 import { Messages } from 'react-intl';
+import { resolveSwitcherLinks } from '../providers/resolve-switcher-links';
 
 interface GenericSwitcherProps {
   cloudId: string;
@@ -12,44 +12,34 @@ interface GenericSwitcherProps {
   product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>;
 }
 
-const emptyCustomLink = {
-  data: null,
-  isLoading: false,
-  error: null,
-};
-
-const getPropsMap = (
+const getFeatures = (
   product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>,
 ) => {
   switch (product) {
     case Product.SITE_ADMIN:
       return {
-        suggestedProductLink: true,
+        xflow: true,
       };
     case Product.HOME:
     case Product.PEOPLE:
     case Product.TRUSTED_ADMIN:
     default:
       return {
-        suggestedProductLink: false,
+        xflow: false,
       };
   }
 };
 
 export default (props: GenericSwitcherProps) => (
   <CommonDataProvider cloudId={props.cloudId}>
-    {({ licenseInformation, ...dataProps }) => (
-      <Switcher
-        {...props}
-        {...dataProps}
-        licenseInformation={licenseInformation}
-        suggestedProductLink={
-          getPropsMap(props.product).suggestedProductLink
-            ? getSuggestedProductLink(licenseInformation.data)
-            : null
-        }
-        customLinks={emptyCustomLink}
-      />
-    )}
+    {({ licenseInformation, ...providerResults }) => {
+      const { showManageLink, ...switcherLinks } = resolveSwitcherLinks(
+        props.cloudId,
+        { licenseInformation, ...providerResults },
+        getFeatures(props.product),
+      );
+
+      return <Switcher {...props} {...switcherLinks} />;
+    }}
   </CommonDataProvider>
 );

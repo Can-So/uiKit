@@ -6,7 +6,7 @@ import SwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
 import { colors } from '@atlaskit/theme';
 import AkDrawer from '@atlaskit/drawer';
 import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
-import { withAnalyticsLogger } from './helpers';
+import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher from '../src';
 import PrefetchTrigger from '../src/components/prefetch-trigger';
 
@@ -74,4 +74,4 @@ class ConfluenceSwitcherExample extends Component {
   }
 }
 
-export default withAnalyticsLogger(ConfluenceSwitcherExample);
+export default withIntlProvider(withAnalyticsLogger(ConfluenceSwitcherExample));
