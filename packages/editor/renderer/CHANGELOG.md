@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 41.6.0
+- [minor] [345bc86152](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345bc86152):
+
+  - Email renderer does not underline links anymore
+
 ## 41.5.0
 - [minor] [8ec7dd4cb2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ec7dd4cb2):
 

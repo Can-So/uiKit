@@ -1,1 +1,0 @@
-- Email renderer does not underline links anymore
