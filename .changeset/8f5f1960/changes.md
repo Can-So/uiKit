@@ -1,1 +1,1 @@
-- An onKeyDown method which submits the form on Ctrl + Enter and Cmd + Enter is now being passed through formProps
+- Feature: Submit form on Cmd + Enter on Mac and Ctrl + Enter on Mac and Windows
