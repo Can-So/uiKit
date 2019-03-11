@@ -311,6 +311,20 @@ describe('CollectionFetcher', () => {
         'some-occurrence-key',
       );
     });
+
+    it("should NOT remove items from cache and cache collection if ID doesn't exist", async () => {
+      const { collectionFetcher } = setup();
+
+      const removeSpy = spyOn(fileStreamsCache, 'remove');
+      await collectionFetcher.removeFile(
+        'some-inexistent-id',
+        'some-collection-name',
+        'some-occurrence-key',
+      );
+      expect(collectionCache['some-collection-name'].items).toHaveLength(1);
+      expect(removeSpy).not.toHaveBeenCalled();
+    });
+
     it('should remove item from cache', async () => {
       const { collectionFetcher } = setup();
 
