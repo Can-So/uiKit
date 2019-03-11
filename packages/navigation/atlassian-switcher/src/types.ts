@@ -35,7 +35,7 @@ export enum Product {
   TRUSTED_ADMIN = 'trusted-admin',
 }
 
-export type CustomLinksResponse = [Array<CustomLink>, string];
+export type CustomLinksResponse = CustomLink[];
 
 export interface LicenseInformationResponse {
   hostname: string;

@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage, Messages } from 'react-intl';
+import isEqual from 'lodash.isequal';
 
 import {
   SwitcherWrapper,
@@ -52,7 +53,7 @@ const getItemAnalyticsContext = (
   }),
 });
 
-export default class Switcher extends React.Component<SwitcherProps> {
+export default class Switcher extends Component<SwitcherProps> {
   mountedAt?: number;
 
   componentDidMount() {
@@ -69,6 +70,10 @@ export default class Switcher extends React.Component<SwitcherProps> {
       triggerXFlow(suggestedProductLinks[0].key, 'atlassian-switcher');
     }
   };
+
+  shouldComponentUpdate(nextProps) {
+    return !isEqual(this.props, nextProps);
+  }
 
   render() {
     const {

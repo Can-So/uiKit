@@ -27,15 +27,6 @@ describe('as-data-provider', () => {
     expect(wrapper.contains(CHILDREN_PROP_RETURN_VALUE)).toBe(true);
     expect(childrenPropMock).toHaveBeenCalled();
   });
-  it('should resolve with static data', () => {
-    const DataProvider = asDataProvider(() => RESOLVED_VALUE);
-
-    shallow(<DataProvider>{childrenPropMock}</DataProvider>);
-    expect(childrenPropMock).toHaveBeenCalledTimes(2);
-    expect(childrenPropMock.mock.calls[1][0].status).toBe('complete');
-    expect(childrenPropMock.mock.calls[1][0].isLoading).toBe(false);
-    expect(childrenPropMock.mock.calls[1][0].data).toBe(RESOLVED_VALUE);
-  });
 
   it('should send isLoading and data parameters to children render prop', () => {
     const promise = new Promise(accept =>

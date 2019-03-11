@@ -82,7 +82,7 @@ function collectRecentLinks(
   }
 
   if (isComplete(recentContainers)) {
-    return getRecentLinkItems(recentContainers.data.data);
+    return getRecentLinkItems(recentContainers.data.data.slice(0, 6));
   }
 }
 
@@ -95,7 +95,7 @@ function collectCustomLinks(
   }
 
   if (isComplete(customLinks) && isComplete(licenseInformation)) {
-    return getCustomLinkItems(customLinks.data[0], licenseInformation.data);
+    return getCustomLinkItems(customLinks.data, licenseInformation.data);
   }
 }
 

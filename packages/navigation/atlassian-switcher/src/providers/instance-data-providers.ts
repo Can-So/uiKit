@@ -11,14 +11,12 @@ import {
 import { cached } from '../utils/cached';
 
 // Recent activity api
-export const RecentContainersProvider = asDataProvider(
-  ({ cloudId }: WithCloudId) =>
-    fetchJson<RecentContainersResponse>(
-      `/gateway/api/activity/api/client/recent/containers?cloudId=${cloudId}`,
-    ).then((result: RecentContainersResponse) => ({
-      data: result.data.slice(0, 6),
-    })),
-);
+const fetchRecentContainers = ({ cloudId }: WithCloudId) =>
+  fetchJson<RecentContainersResponse>(
+    `/gateway/api/activity/api/client/recent/containers?cloudId=${cloudId}`,
+  );
+
+export const RecentContainersProvider = asDataProvider(fetchRecentContainers);
 
 // License information api
 const fetchLicenseInformation = cached(({ cloudId }: WithCloudId) =>
@@ -28,7 +26,8 @@ const fetchLicenseInformation = cached(({ cloudId }: WithCloudId) =>
 );
 
 export const LicenseInformationProvider = asDataProvider(
-  ({ cloudId }: WithCloudId) => fetchLicenseInformation({ cloudId }),
+  fetchLicenseInformation,
+  fetchLicenseInformation.cached,
 );
 
 // Permissions api
@@ -44,7 +43,8 @@ const fetchPermission = cached(
 );
 
 export const UserPermissionProvider = asDataProvider(
-  (params: FetchPermissionParamsType) => fetchPermission(params),
+  fetchPermission,
+  fetchPermission.cached,
 );
 
 // Xflow settings api
@@ -59,19 +59,18 @@ const fetchXflowSettings = cached(({ cloudId }: WithCloudId) =>
 );
 
 export const XFlowSettingsProvider = asDataProvider(
-  ({ cloudId }: WithCloudId) => fetchXflowSettings({ cloudId }),
+  fetchXflowSettings,
+  fetchXflowSettings.cached,
 );
 
 export const prefetchAll = ({ cloudId }: WithCloudId) => {
-  window.requestIdleCallback(() => {
-    fetchLicenseInformation.prefetch({ cloudId });
-    fetchXflowSettings.prefetch({ cloudId });
-    fetchPermission.prefetch({
-      cloudId,
-      permissionId: Permissions.ADD_PRODUCTS,
-    });
-    fetchPermission.prefetch({ cloudId, permissionId: Permissions.MANAGE });
+  fetchLicenseInformation.prefetch({ cloudId });
+  fetchXflowSettings.prefetch({ cloudId });
+  fetchPermission.prefetch({
+    cloudId,
+    permissionId: Permissions.ADD_PRODUCTS,
   });
+  fetchPermission.prefetch({ cloudId, permissionId: Permissions.MANAGE });
 };
 
 export const resetAll = () => {

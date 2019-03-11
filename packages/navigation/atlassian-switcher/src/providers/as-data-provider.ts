@@ -1,5 +1,4 @@
 import { Component, ReactNode } from 'react';
-import { isPromise } from '../utils/type-helper';
 
 export interface ResultComplete<T> {
   status: 'complete';
@@ -31,7 +30,7 @@ export const isLoading = <T>(
 export type ProviderResult<T> = ResultComplete<T> | ResultLoading | ResultError;
 
 interface PropsToPromiseMapper<P, D> {
-  (props: P): Promise<D> | D;
+  (props: P): Promise<D>;
 }
 
 export interface DataProviderProps<D> {
@@ -40,6 +39,7 @@ export interface DataProviderProps<D> {
 
 export default function<P, D>(
   mapPropsToPromise: PropsToPromiseMapper<Readonly<P>, D>,
+  mapPropsToInitialValue?: PropsToPromiseMapper<Readonly<P>, D | void>,
 ) {
   return class extends Component<P & DataProviderProps<D>> {
     state: ProviderResult<D> = {
@@ -48,28 +48,30 @@ export default function<P, D>(
     };
 
     componentDidMount() {
-      const dataSource = mapPropsToPromise(this.props);
-
-      if (isPromise<D>(dataSource)) {
-        dataSource
-          .then(result => {
+      if (mapPropsToInitialValue) {
+        mapPropsToInitialValue(this.props).then(initialValue => {
+          if (initialValue !== undefined) {
             this.setState({
-              data: result,
+              data: initialValue,
               status: 'complete',
             });
-          })
-          .catch(error => {
-            this.setState({
-              error,
-              status: 'error',
-            });
-          });
-      } else {
-        this.setState({
-          data: dataSource,
-          status: 'complete',
+          }
         });
       }
+
+      mapPropsToPromise(this.props)
+        .then(result => {
+          this.setState({
+            data: result,
+            status: 'complete',
+          });
+        })
+        .catch(error => {
+          this.setState({
+            error,
+            status: 'error',
+          });
+        });
     }
 
     render() {

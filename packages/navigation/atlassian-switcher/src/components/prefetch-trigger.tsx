@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import throttle from 'lodash.throttle';
 import now from '../utils/performance-now';
 import { prefetchAll } from '../providers/instance-data-providers';
-import { withAnalyticsEvents } from '../utils/analytics';
+import {
+  NAVIGATION_CHANNEL,
+  OPERATIONAL_EVENT_TYPE,
+  withAnalyticsEvents,
+} from '../utils/analytics';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 
 const TRIGGER_SUBJECT = 'atlassianSwitcherPrefetchTrigger';
-const PREFETCH_EXPIRES = 60 * 1000; // 60 seconds
-const THROTTLE_OPTIONS = [
-  PREFETCH_EXPIRES,
-  {
-    leading: true,
-    trailing: false,
-  },
-];
+const THROTTLE_EXPIRES = 60 * 1000; // 60 seconds
+const THROTTLE_OPTIONS = {
+  leading: true,
+  trailing: false,
+};
 
 interface PrefetchTriggerProps {
   cloudId: string;
+  Container?: React.ReactType;
 }
 
 class PrefetchTrigger extends Component<
@@ -24,15 +26,28 @@ class PrefetchTrigger extends Component<
 > {
   private lastEnteredAt?: number;
 
-  private triggerPrefetch: typeof prefetchAll = throttle(params => {
-    prefetchAll(params);
+  private fireOperationalEvent = payload => {
+    if (this.props.createAnalyticsEvent) {
+      this.props
+        .createAnalyticsEvent({
+          eventType: OPERATIONAL_EVENT_TYPE,
+          actionSubject: TRIGGER_SUBJECT,
+          ...payload,
+        })
+        .fire(NAVIGATION_CHANNEL);
+    }
+  };
 
-    this.props.createAnalyticsEvent!({
-      eventType: 'operational',
-      action: 'triggeredPrefetch',
-      actionSubject: TRIGGER_SUBJECT,
-    }).fire('navigation');
-  }, ...THROTTLE_OPTIONS);
+  private triggerPrefetch: typeof prefetchAll = throttle(
+    params => {
+      prefetchAll(params);
+      this.fireOperationalEvent({
+        action: 'triggeredPrefetch',
+      });
+    },
+    THROTTLE_EXPIRES,
+    THROTTLE_OPTIONS,
+  );
 
   private handleMouseEnter = () => {
     this.triggerPrefetch({ cloudId: this.props.cloudId });
@@ -43,21 +58,23 @@ class PrefetchTrigger extends Component<
     if (this.lastEnteredAt) {
       const hoverToClick = now() - this.lastEnteredAt;
 
-      this.props.createAnalyticsEvent!({
-        eventType: 'operational',
+      this.fireOperationalEvent({
         action: 'clicked',
-        actionSubject: TRIGGER_SUBJECT,
         attributes: { hoverToClick },
-      }).fire('navigation');
+      });
     }
   };
 
   render() {
-    const { children } = this.props;
+    const { children, Container = 'div' } = this.props;
     return (
-      <div onMouseEnter={this.handleMouseEnter} onClick={this.handleMouseClick}>
+      <Container
+        onFocus={this.handleMouseEnter}
+        onMouseEnter={this.handleMouseEnter}
+        onClick={this.handleMouseClick}
+      >
         {children}
-      </div>
+      </Container>
     );
   }
 }

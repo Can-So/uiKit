@@ -1,14 +1,27 @@
 interface Cached<T, A> {
   (a: A): Promise<T>;
   prefetch: (a: A) => Promise<T>;
+  cached: (a: A) => Promise<T | void>;
   reset: () => void;
 }
 
 export const cached = <T, A>(fn: (a: A) => Promise<T>): Cached<T, A> => {
   const promiseCache = new Map<string, Promise<T>>();
 
-  const populateCaches = (a: A) => {
-    const cacheKey = JSON.stringify(a);
+  function getCacheKey(a: A) {
+    return JSON.stringify(a);
+  }
+
+  const getCachedValue = (a: A) => {
+    const cacheKey = getCacheKey(a);
+    if (promiseCache.has(cacheKey)) {
+      return promiseCache.get(getCacheKey(a)) as Promise<T>;
+    }
+    return Promise.resolve();
+  };
+
+  const execute = (a: A) => {
+    const cacheKey = getCacheKey(a);
 
     const promise = fn(a);
     promiseCache.set(cacheKey, promise);
@@ -19,23 +32,12 @@ export const cached = <T, A>(fn: (a: A) => Promise<T>): Cached<T, A> => {
     });
   };
 
-  const execute = (a: A) => {
-    const cacheKey = JSON.stringify(a);
-
-    if (promiseCache.has(cacheKey)) {
-      const promise = promiseCache.get(cacheKey) as Promise<T>;
-      populateCaches(a).catch(/* swallow cache errors */ () => {});
-      return promise;
-    }
-
-    return populateCaches(a);
-  };
-
   const reset = () => {
     promiseCache.clear();
   };
 
-  execute.prefetch = populateCaches;
+  execute.cached = getCachedValue;
+  execute.prefetch = execute;
   execute.reset = reset;
   return execute;
 };
