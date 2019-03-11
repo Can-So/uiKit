@@ -1,0 +1,1 @@
+- fix padding, wrapping for inline smart links.
