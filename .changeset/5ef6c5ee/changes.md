@@ -1,0 +1,1 @@
+- Fixes package.json to not exclude built files
