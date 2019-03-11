@@ -486,17 +486,15 @@ export function validator(
               const attrOption = attrOptions[i];
 
               [, invalidAttrs] = partitionObject(attrOption.props, (k, v) => {
+                // We need to validate the content from that kind of
+                // array against the nodes and marks. @see ED-6325
                 if (
-                  v.type === 'array' &&
-                  (v as ArrayForceContentValidationAttributesSpec)
-                    .forceContentValidation
+                  isForceContentValidationSpec(v) &&
+                  v.forceContentValidation
                 ) {
-                  // We need to validate the content from that kind of
-                  // array against the nodes and marks. @see ED-6325
                   const items = (entity.attrs as any)[k] || [];
                   const newItems: Array<ADFEntity> = [];
-                  const specItemsAllowed = (v as ArrayForceContentValidationAttributesSpec)
-                    .items;
+                  const specItemsAllowed = v.items;
                   const entitySet = specItemsAllowed.reduce((xs, x) =>
                     xs.concat(x),
                   );
