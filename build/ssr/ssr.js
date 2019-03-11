@@ -1,5 +1,3 @@
-const path = require('path');
-
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
