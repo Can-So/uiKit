@@ -11,6 +11,7 @@ export const IsDisabledContext = createContext(false);
 type FormProps = {
   ref: Ref<'form'>,
   onSubmit: (SyntheticEvent<HTMLFormElement> | any) => any,
+  onKeyDown: (SyntheticKeyboardEvent<HTMLFormElement>) => void,
 };
 
 type Props = {
