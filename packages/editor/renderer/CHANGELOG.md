@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 41.6.1
+- [patch] [8ed53a1cbb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ed53a1cbb):
+
+  - fix padding, wrapping for inline smart links.
+
 ## 41.6.0
 - [minor] [345bc86152](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345bc86152):
 

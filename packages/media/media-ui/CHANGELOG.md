@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 9.2.3
+- [patch] [8ed53a1cbb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ed53a1cbb):
+
+  - fix padding, wrapping for inline smart links.
+
 ## 9.2.2
 - [patch] [be479e2335](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be479e2335):
 
