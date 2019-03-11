@@ -9,12 +9,7 @@ import {
   ACTION_SUBJECT_ID,
 } from '../../analytics';
 
-export const FORMATTING_NODE_TYPES = [
-  'heading',
-  'codeBlock',
-  'blockquote',
-  'panel',
-];
+export const FORMATTING_NODE_TYPES = ['heading', 'codeBlock', 'blockquote'];
 export const FORMATTING_MARK_TYPES = [
   'em',
   'code',
