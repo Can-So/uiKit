@@ -1,0 +1,1 @@
+- ED-5019 Panels are no longer cleared by clear-formatting
