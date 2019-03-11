@@ -220,8 +220,11 @@ export default class WebBridgeImpl extends WebBridge
     }
 
     // if cursor is on link => modify the whole link
-    const { leftBound, rightBound = undefined } = isLinkAtPos(from)(state)
-      ? { leftBound: from - state.doc.resolve(from).textOffset }
+    const { leftBound, rightBound } = isLinkAtPos(from)(state)
+      ? {
+          leftBound: from - state.doc.resolve(from).textOffset,
+          rightBound: undefined,
+        }
       : { leftBound: from, rightBound: to };
 
     [setLinkHref(url, leftBound, rightBound)]
