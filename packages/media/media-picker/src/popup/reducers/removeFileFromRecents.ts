@@ -7,25 +7,27 @@ export default function removeFileFromRecents(
   state: State,
   action: Action,
 ): State {
-  if (isRemoveFileFromRecentsAction(action)) {
-    const selectedItems = state.selectedItems.filter(
-      item => item.id !== action.id,
-    );
-
-    const uploadIdsToDelete = Object.keys(state.uploads).filter(
-      uploadId => state.uploads[uploadId].file.metadata.id === action.id,
-    );
-    const uploads = { ...state.uploads };
-    uploadIdsToDelete.forEach(uploadId => {
-      delete uploads[uploadId];
-    });
-
-    return {
-      ...state,
-      selectedItems,
-      uploads,
-    };
-  } else {
+  if (!isRemoveFileFromRecentsAction(action)) {
     return state;
   }
+
+  const selectedItems = state.selectedItems.filter(
+    item => item.id !== action.id,
+  );
+
+  const uploads = Object.keys(state.uploads)
+    .filter(uploadId => state.uploads[uploadId].file.metadata.id !== action.id)
+    .reduce(
+      (uploadObject, uploadId) => ({
+        ...uploadObject,
+        [uploadId]: state.uploads[uploadId],
+      }),
+      {},
+    );
+
+  return {
+    ...state,
+    selectedItems,
+    uploads,
+  };
 }
