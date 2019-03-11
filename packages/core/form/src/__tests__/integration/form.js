@@ -11,7 +11,7 @@ import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 /* Url to test the example */
 const urlFormCreateRepo = getExampleUrl('core', 'form', 'create-repository');
-const urlTextFields = getExampleUrl('core', 'form', 'text-fields');
+const urlSubmitForm = getExampleUrl('core', 'form', 'submit-form');
 
 /* Css selectors used for the repository form test */
 const createForm = 'form[name="create-repo"]';
@@ -23,10 +23,11 @@ const includeReadme = 'div#include-readme-select';
 const createRepoBtn = 'button[type="submit"]#create-repo-button';
 const cancelBtn = 'button[type="button"]#create-repo-cancel';
 
-/** Css selectors used for the text fields test */
-const textFieldsForm = 'form[name="text-fields"]';
-const textFieldsTextarea = 'textarea[name="description"]';
-const textFieldsTextField = 'input[name="firstname"]';
+/** Css selectors used for the submit form test */
+const submitForm = 'form[name="submit-form"]';
+const submitFormTextarea = 'textarea[name="description"]';
+const submitFormTextfield = 'input[name="name"]';
+const submitFormSubmitted = 'div#submitted';
 
 BrowserTestCase(
   'Create repository form should render without errors',
@@ -54,15 +55,33 @@ BrowserTestCase(
 );
 
 BrowserTestCase(
-  'Pressing ctrl + enter in the text area in the text fields form should put focus on invalid field',
+  'Pressing ctrl + enter in the text area should put focus on invalid field',
   { skip: ['ie'] },
   async client => {
     const formTest = new Page(client);
-    await formTest.goto(urlTextFields);
-    await formTest.waitForSelector(textFieldsForm);
-    await formTest.click(textFieldsTextarea);
-    await formTest.keys(['Control', 'Enter']);
-    expect(await formTest.hasFocus(textFieldsTextField)).toBe(true);
+    await formTest.goto(urlSubmitForm);
+    await formTest.waitForSelector(submitForm);
+    await formTest.click(submitFormTextarea);
+    await formTest.keys(['Control', 'Enter', 'NULL']);
+    expect(await formTest.hasFocus(submitFormTextfield)).toBe(true);
+    await formTest.checkConsoleErrors();
+  },
+);
+
+BrowserTestCase(
+  'Pressing ctrl + enter in the text area after entering input should submit the form',
+  { skip: ['ie', 'safari'] },
+  async client => {
+    const formTest = new Page(client);
+    await formTest.goto(urlSubmitForm);
+    await formTest.waitForSelector(submitForm);
+    await formTest.type(submitFormTextfield, 'Jane Chan');
+    await formTest.click(submitFormTextarea);
+    await formTest.keys(['Control', 'Enter', 'NULL']);
+    await formTest.waitForSelector(submitFormSubmitted);
+    expect(await formTest.getText(submitFormSubmitted)).toBe(
+      'You have successfully submitted!',
+    );
     await formTest.checkConsoleErrors();
   },
 );
