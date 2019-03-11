@@ -35,9 +35,85 @@ export const deleteRows = (
   }
 
   const rows: PMNode[] = [];
+  const seen: number[] = [];
+  const deletedCells: number[] = [];
+
   for (let rowIndex = 0; rowIndex < map.height; rowIndex++) {
-    if (rowsToDelete.indexOf(rowIndex) === -1) {
-      rows.push(table.node.child(rowIndex));
+    const rowCells: PMNode[] = [];
+    const row = table.node.child(rowIndex);
+
+    for (let colIndex = 0; colIndex < map.width; colIndex++) {
+      const cellPos = map.map[rowIndex * map.width + colIndex];
+      const cell = table.node.nodeAt(cellPos);
+      if (!cell) {
+        continue;
+      }
+      const cellsInRow = map.cellsInRect({
+        left: 0,
+        top: rowIndex,
+        right: map.width,
+        bottom: rowIndex + 1,
+      });
+      if (
+        rowsToDelete.indexOf(rowIndex) === -1 &&
+        seen.indexOf(cellPos) === -1
+      ) {
+        // decrement rowspans for row-spanning cells that overlap deleted rows
+        if (cellsInRow.indexOf(cellPos) > -1) {
+          let overlappingRows = 0;
+          rowsToDelete.forEach(rowIndexToDelete => {
+            if (
+              rowIndex < rowIndexToDelete &&
+              cell.attrs.rowspan + rowIndex - 1 >= rowIndexToDelete
+            ) {
+              overlappingRows += 1;
+            }
+          });
+          if (overlappingRows > 0) {
+            const newCell = cell.type.createChecked(
+              {
+                ...cell.attrs,
+                rowspan: cell.attrs.rowspan - overlappingRows,
+              },
+              cell.content,
+              cell.marks,
+            );
+            rowCells.push(newCell);
+            seen.push(cellPos);
+            continue;
+          }
+        } else if (deletedCells.indexOf(cellPos) > -1) {
+          // if we're removing a row-spanning cell, we need to add missing cells to rows below
+          const attrs = {
+            ...cell.attrs,
+            colspan: 1,
+            rowspan: 1,
+          };
+          if (cell.attrs.colwidth) {
+            const pos = colIndex > 0 ? colIndex - map.colCount(cellPos) : 0;
+            attrs['colwidth'] = cell.attrs.colwidth.slice().splice(pos, 1);
+          }
+          const newCell = cell.type.createChecked(
+            attrs,
+            cell.type.schema.nodes.paragraph.createChecked(),
+            cell.marks,
+          );
+          rowCells.push(newCell);
+          continue;
+        }
+
+        // normal cells that we want to keep
+        if (seen.indexOf(cellPos) === -1) {
+          seen.push(cellPos);
+          rowCells.push(cell);
+        }
+      } else if (cellsInRow.indexOf(cellPos) > -1) {
+        deletedCells.push(cellPos);
+      }
+    }
+
+    if (rowCells.length) {
+      rows.push(row.type.createChecked(row.attrs, rowCells, row.marks));
     }
   }
 

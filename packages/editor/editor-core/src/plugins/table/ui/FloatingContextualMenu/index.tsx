@@ -1,14 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { EditorView } from 'prosemirror-view';
-import { Transaction, EditorState } from 'prosemirror-state';
-import { TableMap } from 'prosemirror-tables';
+import { EditorState } from 'prosemirror-state';
 import {
   findDomRefAtPos,
-  getSelectionRangeInRow,
-  getSelectionRangeInColumn,
-  findCellClosestToPos,
-  findTable,
+  getSelectionRect,
+  findCellRectClosestToPos,
+  isCellSelection,
 } from 'prosemirror-utils';
 import {
   Popup,
@@ -62,11 +60,12 @@ const FloatingContextualMenu = ({
     return null;
   }
 
-  const { tr } = editorView.state;
-  const columnSelectionRect = getColumnsRect(tr);
-  const rowSelectionRect = getRowsRect(tr);
+  const { selection } = editorView.state;
+  const selectionRect = isCellSelection(selection)
+    ? getSelectionRect(selection)!
+    : findCellRectClosestToPos(selection.$from);
 
-  if (!columnSelectionRect || !rowSelectionRect) {
+  if (!selectionRect) {
     return null;
   }
   const domAtPos = editorView.domAtPos.bind(editorView);
@@ -100,41 +99,11 @@ const FloatingContextualMenu = ({
           targetCellPosition={targetCellPosition}
           allowMergeCells={pluginConfig!.allowMergeCells}
           allowBackgroundColor={pluginConfig!.allowBackgroundColor}
-          columnSelectionRect={columnSelectionRect}
-          rowSelectionRect={rowSelectionRect}
+          selectionRect={selectionRect}
         />
       </MenuWrapper>
     </Popup>
   );
 };
-
-// returns a selection rect that spans merged cells
-// TODO: ED-6348
-function getColumnsRect(tr: Transaction) {
-  const cell = findCellClosestToPos(tr.selection.$from);
-  if (!cell) {
-    return null;
-  }
-  const table = findTable(tr.selection)!;
-  const pos = cell.pos - table.start;
-  const map = TableMap.get(table.node);
-  const rect = map.rectBetween(pos, pos);
-  const { $anchor, $head } = getSelectionRangeInColumn(rect.left)(tr);
-  return map.rectBetween($anchor.pos - table.start, $head.pos - table.start);
-}
-
-// TODO: ED-6348
-function getRowsRect(tr: Transaction) {
-  const cell = findCellClosestToPos(tr.selection.$from);
-  if (!cell) {
-    return null;
-  }
-  const table = findTable(tr.selection)!;
-  const pos = cell.pos - table.start;
-  const map = TableMap.get(table.node);
-  const rect = map.rectBetween(pos, pos);
-  const { $anchor, $head } = getSelectionRangeInRow(rect.top)(tr);
-  return map.rectBetween($anchor.pos - table.start, $head.pos - table.start);
-}
 
 export default FloatingContextualMenu;
