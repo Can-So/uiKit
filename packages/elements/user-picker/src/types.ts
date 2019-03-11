@@ -32,7 +32,7 @@ export type UserPickerProps = {
   onBlur?: OnPicker;
   /** Callback for when the value/s in the picker is cleared. */
   onClear?: OnPicker;
-  /** Callback that is triggered when modal picker is closed */
+  /** Callback that is triggered when popup picker is closed */
   onClose?: OnPicker;
   /** Appearance of the user picker. */
   appearance?: Appearance;
@@ -67,7 +67,7 @@ export type UserPickerProps = {
 };
 
 export type PopupUserPickerProps = UserPickerProps & {
-  /** Whether to use the modal version of the single picker */
+  /** Whether to use the popup version of the single picker */
   target: Target;
 };
 

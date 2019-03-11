@@ -135,7 +135,7 @@ export const getStyles = memoizeOne((width: string | number) => ({
   }),
 }));
 
-export const getModalStyles = memoizeOne(
+export const getPopupStyles = memoizeOne(
   (width: string | number, flip?: boolean) => ({
     ...getStyles(width),
     container: (css: any) => ({

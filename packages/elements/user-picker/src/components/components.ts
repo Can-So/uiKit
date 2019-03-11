@@ -32,7 +32,7 @@ export const getComponents = memoizeOne(
   },
 );
 
-export const getModalComponents = memoizeOne(() => ({
+export const getPopupComponents = memoizeOne(() => ({
   DropdownIndicator: null,
   SingleValue,
   ClearIndicator,

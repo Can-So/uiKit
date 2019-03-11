@@ -242,6 +242,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
       inputValue: '',
     });
     callCallback(this.props.onInputChange, '');
+    this.executeLoadOptions('');
   };
 
   private handleBlur = () => {

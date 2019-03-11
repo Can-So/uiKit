@@ -1,9 +1,9 @@
 import { PopupSelect } from '@atlaskit/select';
 import * as React from 'react';
 import { PopupUserPickerProps } from '../types';
-import { getModalComponents } from './components';
-import { getModalStyles } from './styles';
-import { getModalProps } from './modal';
+import { getPopupComponents } from './components';
+import { getPopupStyles } from './styles';
+import { getPopupProps } from './popup';
 import { BaseUserPicker } from './BaseUserPicker';
 
 interface State {
@@ -41,7 +41,7 @@ export class PopupUserPicker extends React.Component<
     const { target } = this.props;
     const { flipped } = this.state;
     const width = this.props.width as string | number;
-    const styles = getModalStyles(width, flipped);
+    const styles = getPopupStyles(width, flipped);
 
     return (
       <BaseUserPicker
@@ -49,8 +49,8 @@ export class PopupUserPicker extends React.Component<
         SelectComponent={PopupSelect}
         width={width}
         styles={styles}
-        components={getModalComponents()}
-        pickerProps={getModalProps(width, target, this.handleFlipStyle)}
+        components={getPopupComponents()}
+        pickerProps={getPopupProps(width, target, this.handleFlipStyle)}
       />
     );
   }
