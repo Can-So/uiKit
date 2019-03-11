@@ -3,6 +3,7 @@ import { ResolvedPos } from 'prosemirror-model';
 import { EditorState, Transaction, Plugin } from 'prosemirror-state';
 import { setTextSelection } from 'prosemirror-utils';
 
+// Somewhat broken and subverted: https://product-fabric.atlassian.net/browse/ED-6504
 export function keymapPlugin(): Plugin | undefined {
   const deleteCurrentItem = ($from: ResolvedPos, tr: Transaction) => {
     return tr.delete($from.before($from.depth) - 1, $from.end($from.depth) + 1);
