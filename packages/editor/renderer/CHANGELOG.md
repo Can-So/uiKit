@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 41.5.0
+- [minor] [8ec7dd4cb2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ec7dd4cb2):
+
+  - email rendering - fixed a bug with em
+
 ## 41.4.0
 - [minor] [3a2836d6d7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a2836d6d7):
 
