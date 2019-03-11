@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as debounce from 'lodash.debounce';
 import TeamMentionResource from '../src/api/TeamMentionResource';
 import { MentionResourceConfig } from '../src/api/MentionResource';
 
@@ -53,23 +52,23 @@ export default class ConfigurableTeamMentionPicker extends React.Component<
     }
   }
 
-  configTextAreaChange = debounce(
-    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      let config;
+  configTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const strJSON = event.target.value;
 
-      try {
-        config = JSON.parse(event.target.value);
-        const stateName = event.target.name;
-        // @ts-ignore
-        this.setState({
-          [stateName]: config,
-        });
-      } catch (err) {
-        // do not need to catch this error
-      }
-    },
-    200,
-  );
+    let config;
+
+    try {
+      config = JSON.parse(strJSON.trim());
+      const stateName = event.target.name;
+      // @ts-ignore
+      this.setState({
+        [stateName]: config,
+      });
+    } catch (err) {
+      // tslint:disable-next-line
+      console.error('ERROR: cannot parse JSON', event.target.value);
+    }
+  };
 
   render() {
     const { userMentionConfig, teamMentionConfig } = this.props;
