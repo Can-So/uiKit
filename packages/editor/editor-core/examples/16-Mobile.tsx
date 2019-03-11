@@ -2,7 +2,11 @@ import * as React from 'react';
 import { Editor } from '../src/index';
 import EditorContext from '../src/ui/EditorContext';
 import WithEditorActions from '../src/ui/WithEditorActions';
-import { MentionDescription, MentionProvider } from '@atlaskit/mention';
+import {
+  MentionDescription,
+  MentionProvider,
+  MentionResourceConfig,
+} from '@atlaskit/mention';
 
 class MentionProviderImpl implements MentionProvider {
   filter(query?: string): void {}
@@ -21,6 +25,11 @@ class MentionProviderImpl implements MentionProvider {
     allResultsCallback?,
   ): void {}
   unsubscribe(key: string): void {}
+  getMentionConfig(): MentionResourceConfig {
+    return {
+      url: 'https://example.com/',
+    };
+  }
 }
 
 export function mobileEditor() {
