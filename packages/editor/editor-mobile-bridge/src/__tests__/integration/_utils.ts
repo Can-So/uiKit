@@ -52,6 +52,10 @@ export const callNativeBridge = async (
   );
 };
 
+export const copyAsPlaintextButton = '.copy-as-plaintext';
+
+export const clipboardInput = 'textarea';
+
 const clearBridgeOutput = async (browser: any) => {
   await browser.browser.execute(() => {
     // @ts-ignore

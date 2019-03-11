@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Editor from './../src/editor/mobile-editor-element';
+import { cardProvider } from '@atlaskit/editor-test-helpers';
 
 export const Wrapper: any = styled.div`
   position: absolute;
@@ -21,7 +22,7 @@ window.logBridge = window.logBridge || [];
 export default function Example() {
   return (
     <Wrapper>
-      <Editor />
+      <Editor cardProvider={Promise.resolve(cardProvider)} />
     </Wrapper>
   );
 }
