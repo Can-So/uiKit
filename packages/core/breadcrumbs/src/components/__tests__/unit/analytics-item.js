@@ -9,7 +9,7 @@ import Button from '@atlaskit/button';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../../package.json';
+} from '../../../version.json';
 // Because we are mocking the hocs, the default import from this file is null
 // thats why we need to import the version without analytics to test the analytics
 // context is overridden

@@ -180,11 +180,13 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     items.push({
       content: formatMessage(tableMessages.insertColumn),
       value: { name: 'insert_column' },
+      elemAfter: <Shortcut>⌃⌥→</Shortcut>,
     });
 
     items.push({
       content: formatMessage(tableMessages.insertRow),
       value: { name: 'insert_row' },
+      elemAfter: <Shortcut>⌃⌥↓</Shortcut>,
     });
 
     const { right, left } = columnSelectionRect;

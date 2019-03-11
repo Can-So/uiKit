@@ -1,5 +1,20 @@
 # @atlaskit/atlassian-switcher
 
+## 0.1.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/analytics-gas-types@3.2.5
+  - @atlaskit/analytics-namespaced-context@2.2.1
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+  - @atlaskit/drawer@3.0.0
+  - @atlaskit/item@9.0.0
+  - @atlaskit/logo@10.0.0
+  - @atlaskit/lozenge@7.0.0
+  - @atlaskit/navigation@34.0.0
+  - @atlaskit/theme@8.0.0
+
 ## 0.1.0
 - [minor] [6ee7b60c4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ee7b60c4a):
 

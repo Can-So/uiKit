@@ -5,7 +5,6 @@ import IconRecent from '@atlaskit/icon/glyph/recent';
 import IconMention from '@atlaskit/icon/glyph/mention';
 import IconEmail from '@atlaskit/icon/glyph/email';
 import OfficeBuildingIcon from '@atlaskit/icon/glyph/office-building';
-import { Presence } from '@atlaskit/avatar';
 
 import {
   DetailsLabel,
@@ -19,10 +18,6 @@ const icons = {
   mention: IconMention,
   email: IconEmail,
   companyName: OfficeBuildingIcon,
-  available: () => <Presence presence="online" borderColor="transparent" />,
-  unavailable: () => <Presence presence="offline" borderColor="transparent" />,
-  busy: () => <Presence presence="busy" borderColor="transparent" />,
-  focus: () => <Presence presence="focus" borderColor="transparent" />,
 };
 
 type Props = {

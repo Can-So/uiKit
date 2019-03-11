@@ -170,39 +170,42 @@ export class StatelessUploadView extends Component<
     const closeDialog = () => {
       this.setState({ deletionCandidate: undefined });
     };
-    if (deletionCandidate) {
-      const { id, occurrenceKey, userFileId } = deletionCandidate;
-      const actions = [
-        {
-          text: 'Delete permanently',
-          onClick: () => {
-            removeFileFromRecents(id, occurrenceKey, userFileId);
-            closeDialog();
-          },
-        },
-        {
-          text: 'Cancel',
-          onClick: () => {
-            closeDialog();
-          },
-        },
-      ];
-      return (
-        <ModalTransition>
-          <ModalDialog
-            width="small"
-            appearance="danger"
-            heading="Delete forever?"
-            actions={actions}
-            onClose={closeDialog}
-          >
-            This file is about to be permanently deleted. Once you delete, it's
-            gone for good.
-          </ModalDialog>
-        </ModalTransition>
-      );
+
+    if (!deletionCandidate) {
+      return null;
     }
-    return null;
+
+    const { id, occurrenceKey, userFileId } = deletionCandidate;
+    const actions = [
+      {
+        text: 'Delete permanently',
+        onClick: () => {
+          removeFileFromRecents(id, occurrenceKey, userFileId);
+          closeDialog();
+        },
+      },
+      {
+        text: 'Cancel',
+        onClick: () => {
+          closeDialog();
+        },
+      },
+    ];
+
+    return (
+      <ModalTransition>
+        <ModalDialog
+          width="small"
+          appearance="danger"
+          heading="Delete forever?"
+          actions={actions}
+          onClose={closeDialog}
+        >
+          This file is about to be permanently deleted. Once you delete, it's
+          gone for good.
+        </ModalDialog>
+      </ModalTransition>
+    );
   };
 
   private onThresholdReachedListener = () => {

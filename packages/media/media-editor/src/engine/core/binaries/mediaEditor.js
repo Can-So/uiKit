@@ -25,5 +25,10 @@ var Qd=[o$,Ur,Ms,qF,UQ,o$,o$,o$];var Rd=[p$,LO,rO,p$];var Sd=[q$,qL,$O,WO,NO,GO,
 
   return Module;
 };
-
-export default {createModule: function () { return Module(null); }};
+if (typeof exports === 'object' && typeof module === 'object')
+  module.exports = Module;
+else if (typeof define === 'function' && define['amd'])
+  define([], function() { return Module; });
+else if (typeof exports === 'object')
+  exports["Module"] = Module;
+module.exports = {createModule: function () { return Module(null); }};

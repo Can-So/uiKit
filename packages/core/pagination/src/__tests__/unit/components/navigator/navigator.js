@@ -2,7 +2,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
-import { name } from '../../../../../package.json';
+import { name } from '../../../../version.json';
 import Navigator from '../../../../components/Navigators/Navigator';
 
 const createAnalyticsEventMock = jest.fn();

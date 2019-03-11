@@ -5,6 +5,7 @@ const css = serializeStyle({
   border: 'none',
   background: 'transparent',
   color: '#0052cc',
+  'text-decoration': 'none',
 });
 
 export default function link({ mark, text }: MarkSerializerOpts) {

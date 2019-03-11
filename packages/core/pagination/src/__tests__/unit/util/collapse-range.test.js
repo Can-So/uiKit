@@ -1,7 +1,7 @@
 //@flow
 import renderEllipsis from '../../../components/renderEllipsis';
 import collapseRange from '../../../util/collapseRange';
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 
 describe(`${name} - collapse range`, () => {
   it('should not throw', () => {

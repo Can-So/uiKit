@@ -169,13 +169,23 @@ export const getSuggestedProductLink = (
 
 export const getCustomLinkItems = (
   list: Array<CustomLink>,
-): SwitcherItemType[] =>
-  list.map(customLink => ({
-    key: customLink.key,
-    label: customLink.label,
-    Icon: createIcon(WorldIcon),
-    href: customLink.link,
-  }));
+  licenseInformationData: LicenseInformationDataStructure,
+): SwitcherItemType[] => {
+  const defaultProductCustomLinks = [
+    `${licenseInformationData.hostname}/secure/MyJiraHome.jspa`,
+    `${licenseInformationData.hostname}/wiki/`,
+  ];
+  return list
+    .filter(
+      customLink => defaultProductCustomLinks.indexOf(customLink.link) === -1,
+    )
+    .map(customLink => ({
+      key: customLink.key,
+      label: customLink.label,
+      Icon: createIcon(WorldIcon),
+      href: customLink.link,
+    }));
+};
 
 export const getRecentLinkItems = (
   list: Array<RecentContainer>,

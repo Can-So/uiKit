@@ -5,7 +5,7 @@ import SearchIcon from '@atlaskit/icon/glyph/search';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
 import MultiSelect, { MultiSelectStateless } from '../..';
 import type { GroupType } from '../../types';
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 describe(`${name} - smart`, () => {
   const animStub = window.cancelAnimationFrame;

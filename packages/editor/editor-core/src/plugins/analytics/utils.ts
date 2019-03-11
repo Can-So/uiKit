@@ -21,13 +21,17 @@ export function withAnalytics(
   payload: AnalyticsEventPayload,
   channel?: string,
 ): HigherOrderCommand {
-  return command => (state, dispatch) =>
-    command(state, tr => {
-      if (dispatch) {
-        dispatch(addAnalytics(tr, payload, channel));
-      }
-      return true;
-    });
+  return command => (state, dispatch, view?) =>
+    command(
+      state,
+      tr => {
+        if (dispatch) {
+          dispatch(addAnalytics(tr, payload, channel));
+        }
+        return true;
+      },
+      view,
+    );
 }
 
 export function ruleWithAnalytics(

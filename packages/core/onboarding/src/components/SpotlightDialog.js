@@ -11,7 +11,7 @@ import { Popper, type Placement } from '@atlaskit/popper';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../package.json';
+} from '../version.json';
 
 import type { ActionsType } from '../types';
 import { Image } from '../styled/Dialog';

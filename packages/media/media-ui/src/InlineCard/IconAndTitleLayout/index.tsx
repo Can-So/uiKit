@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IconTitleWrapper, OtherWrapper } from './styled';
+import { IconTitleWrapper, IconWrapper } from './styled';
 import { Icon } from '../Icon';
 
 export interface IconAndTitleLayoutProps {
@@ -13,20 +13,26 @@ export class IconAndTitleLayout extends React.Component<
 > {
   renderIcon() {
     const { icon } = this.props;
-    return !icon ? null : (
-      <Icon>{typeof icon === 'string' ? <img src={icon} /> : icon}</Icon>
-    );
+    // We render two kinds of icons here:
+    // - Image: acquired from either DAC or Teamwork Platform Apps;
+    // - Atlaskit Icon: an Atlaskit SVG;
+    // Each of these are scaled down to 12x12.
+    if (icon) {
+      if (typeof icon === 'string') {
+        return <Icon src={icon} />;
+      } else {
+        return <IconWrapper>{icon}</IconWrapper>;
+      }
+    }
+    return null;
   }
 
   render() {
-    const { icon, title, children } = this.props;
+    const { title } = this.props;
     return (
       <>
-        <IconTitleWrapper hasIcon={!!icon}>
-          {this.renderIcon()}
-          {title}
-        </IconTitleWrapper>
-        {children && <OtherWrapper>{children}</OtherWrapper>}
+        {this.renderIcon()}
+        <IconTitleWrapper>{title}</IconTitleWrapper>
       </>
     );
   }

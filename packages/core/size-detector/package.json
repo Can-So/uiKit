@@ -1,15 +1,11 @@
 {
   "name": "@atlaskit/size-detector",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "Wrapper for components that need to respond to size changes",
   "license": "Apache-2.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
@@ -33,7 +29,8 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/ssr": "^0.0.1",
+    "@atlaskit/docs": "^7.0.0",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"

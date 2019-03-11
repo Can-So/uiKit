@@ -124,6 +124,7 @@ export default class Example extends React.Component<{}, State> {
           originTracingFactory={() => mockOriginTracing}
           productId="confluence"
           shareAri="ari"
+          shareContentType="issue"
           shareLink={window.location.href}
           shareTitle="My Share"
         />

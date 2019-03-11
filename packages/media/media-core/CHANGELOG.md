@@ -1,5 +1,18 @@
 # @atlaskit/media-core
 
+## 27.2.4
+- [patch] [ff3f40bc38](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ff3f40bc38):
+
+  - Fix remove from cache function, which fixes issue when user is deleting recent image in media picker
+
+## 27.2.3
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/media-card@55.0.2
+  - @atlaskit/media-store@9.2.1
+  - @atlaskit/media-test-helpers@20.1.7
+  - @atlaskit/docs@7.0.0
+
 ## 27.2.2
 - [patch] [9b0f6671ae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b0f6671ae):
 

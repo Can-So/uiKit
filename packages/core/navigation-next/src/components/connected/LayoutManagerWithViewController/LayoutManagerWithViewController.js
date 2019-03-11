@@ -22,6 +22,7 @@ const LayoutManagerWithViewController = ({
   onCollapseStart,
   onCollapseEnd,
   getRefs,
+  topOffset,
 }: LayoutManagerWithViewControllerProps) => {
   return (
     <AsyncLayoutManagerWithViewController
@@ -44,6 +45,7 @@ const LayoutManagerWithViewController = ({
       }
       itemsRenderer={ItemsRenderer}
       firstSkeletonToRender={firstSkeletonToRender}
+      topOffset={topOffset}
     >
       {children}
     </AsyncLayoutManagerWithViewController>

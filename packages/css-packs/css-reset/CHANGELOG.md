@@ -1,5 +1,10 @@
 # @atlaskit/css-reset
 
+## 3.0.6
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/theme@8.0.0
+
 ## 3.0.5
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/theme@7.0.1

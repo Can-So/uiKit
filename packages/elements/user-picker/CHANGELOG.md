@@ -1,5 +1,20 @@
 # @atlaskit/user-picker
 
+## 1.0.25
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/util-data-test@10.2.3
+  - @atlaskit/analytics-viewer@0.1.7
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+  - @atlaskit/avatar@15.0.0
+  - @atlaskit/lozenge@7.0.0
+  - @atlaskit/section-message@2.0.0
+  - @atlaskit/select@8.0.0
+  - @atlaskit/tag@7.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/tooltip@13.0.0
+
 ## 1.0.24
 - [patch] [97307d9dd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97307d9dd1):
 
