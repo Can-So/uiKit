@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.3.0
+- [minor] [738f58ef9e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/738f58ef9e):
+
+  - ED-5019 Panels are no longer cleared by clear-formatting
+
 ## 103.2.0
 - [minor] [08a09ae767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/08a09ae767):
 
