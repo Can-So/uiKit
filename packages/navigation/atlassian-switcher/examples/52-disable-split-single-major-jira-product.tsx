@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
 import { mockEndpoints, REQUEST_FAST } from './helpers/mock-endpoints';
-import { withAnalyticsLogger } from './helpers';
+import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher from '../src';
 
 class JiraSwitcherExample extends Component {
@@ -15,7 +15,27 @@ class JiraSwitcherExample extends Component {
   }
 
   openDrawer = () => {
-    mockEndpoints('jira', undefined, REQUEST_FAST);
+    mockEndpoints(
+      'jira',
+      originalMockData => {
+        return {
+          ...originalMockData,
+          LICENSE_INFORMATION_DATA: {
+            hostname: 'https://some-random-instance.atlassian.net',
+            firstActivationDate: 1492488658539,
+            maintenanceEndDate: '2017-04-24',
+            maintenanceStartDate: '2017-04-17',
+            products: {
+              'jira-servicedesk.ondemand': {
+                billingPeriod: 'ANNUAL',
+                state: 'ACTIVE',
+              },
+            },
+          },
+        };
+      },
+      REQUEST_FAST,
+    );
     this.setState({
       isDrawerOpen: true,
     });
@@ -41,7 +61,7 @@ class JiraSwitcherExample extends Component {
             product="jira"
             cloudId="some-cloud-id"
             triggerXFlow={this.onTriggerXFlow}
-            enableSplitJira={true}
+            enableSplitJira={false}
           />
         </Drawer>
         <Button type="button" onClick={this.openDrawer}>
@@ -52,4 +72,4 @@ class JiraSwitcherExample extends Component {
   }
 }
 
-export default withAnalyticsLogger(JiraSwitcherExample);
+export default withIntlProvider(withAnalyticsLogger(JiraSwitcherExample));

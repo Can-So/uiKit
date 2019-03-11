@@ -80,31 +80,42 @@ describe('utils/links', () => {
         'confluence.ondemand',
       ]);
     });
-    it('should not add Jira Core for Jira Software if jira split enabled', () => {
+    it('should ignore Jira Core when a major Jira product is present', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-software.ondemand',
+        'jira-core.ondemand',
+        'confluence.ondemand',
+      ]);
+      const result = getLicensedProductLinks(licenseInformation, false);
+      expect(result.map(({ key }) => key)).toMatchObject([
+        'jira-software.ondemand',
+        'confluence.ondemand',
+      ]);
+    });
+    it('should only render Jira Core when it is the only Jira product', () => {
+      const licenseInformation = generateLicenseInformation([
+        'jira-core.ondemand',
+        'confluence.ondemand',
+      ]);
+      const result = getLicensedProductLinks(licenseInformation, false);
+      expect(result.map(({ key }) => key)).toMatchObject([
+        'jira-core.ondemand',
+        'confluence.ondemand',
+      ]);
+    });
+    it('should return exactly what license information returns', () => {
+      const licenseInformation = generateLicenseInformation([
+        'jira-software.ondemand',
+        'jira-servicedesk.ondemand',
+        'jira-incident-manager.ondemand',
+        'jira-core.ondemand',
       ]);
       const result = getLicensedProductLinks(licenseInformation, true);
       expect(result.map(({ key }) => key)).toMatchObject([
         'jira-software.ondemand',
-      ]);
-    });
-    it('should not add Jira Core for Jira Service Desk if jira split enabled', () => {
-      const licenseInformation = generateLicenseInformation([
         'jira-servicedesk.ondemand',
-      ]);
-      const result = getLicensedProductLinks(licenseInformation, true);
-      expect(result.map(({ key }) => key)).toMatchObject([
-        'jira-servicedesk.ondemand',
-      ]);
-    });
-    it('should not add Jira Core for Jira Ops if jira split enabled', () => {
-      const licenseInformation = generateLicenseInformation([
         'jira-incident-manager.ondemand',
-      ]);
-      const result = getLicensedProductLinks(licenseInformation, true);
-      expect(result.map(({ key }) => key)).toMatchObject([
-        'jira-incident-manager.ondemand',
+        'jira-core.ondemand',
       ]);
     });
   });
