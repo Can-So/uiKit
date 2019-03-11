@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.1.3
+- [patch] [ed6ef51cfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed6ef51cfe):
+
+  - ED-6158: added a shortcut to contextual menu for insertRow and insertColumn
+
 ## 103.1.2
 - [patch] [abb200b0b4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abb200b0b4):
 

@@ -1,1 +1,0 @@
-- ED-6158: added a shortcut to contextual menu for insertRow and insertColumn
