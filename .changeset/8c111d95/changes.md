@@ -1,1 +1,0 @@
-- Fix remove from cache function, which fixes issue when user is deleting recent image in media picker
