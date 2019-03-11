@@ -1,0 +1,1 @@
+- fix link opening logic for view and edit mode.
