@@ -26,6 +26,15 @@ export enum Permissions {
   ADD_PRODUCTS = 'add-products',
 }
 
+export enum Product {
+  CONFLUENCE = 'confluence',
+  HOME = 'home',
+  JIRA = 'jira',
+  PEOPLE = 'people',
+  SITE_ADMIN = 'site-admin',
+  TRUSTED_ADMIN = 'trusted-admin',
+}
+
 export type CustomLinksResponse = [Array<CustomLink>, string];
 
 export interface LicenseInformationResponse {

@@ -98,7 +98,7 @@ function setLocalClients() /*: Array<?Object>*/ {
   let isHeadless = process.env.HEADLESS !== 'false';
   // Keep only chrome for watch mode
   if (process.env.WATCH === 'true') isHeadless === 'false';
-  const windowSize = '--window-size=1920,1080';
+  const windowSize = '--window-size=1920,1200';
   const options = {
     port,
     desiredCapabilities: {

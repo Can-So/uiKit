@@ -1,5 +1,41 @@
 # @atlaskit/media-editor
 
+## 29.1.3
+- [patch] [7b2510da6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b2510da6c):
+
+  - Revert "use esm instead of cjs in MediaEditor.js bundle"
+
+## 29.1.2
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/media-card@55.0.2
+  - @atlaskit/media-core@27.2.3
+  - @atlaskit/media-store@9.2.1
+  - @atlaskit/media-ui@9.2.1
+  - @atlaskit/media-test-helpers@20.1.7
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/inline-dialog@10.0.0
+  - @atlaskit/spinner@10.0.0
+  - @atlaskit/theme@8.0.0
+
+## 29.1.1
+- [patch] [cd7ed32895](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd7ed32895):
+
+  - use esm instead of cjs in MediaEditor.js bundle
+
+## 29.1.0
+- [minor] [d6a3c8ec43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d6a3c8ec43):
+
+  - Numerous UI/UX improvements also dimensions as a second argument in onUploadStart callback
+
+## 29.0.0
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/media-card@55.0.0
+  - @atlaskit/media-test-helpers@20.1.6
+  - @atlaskit/media-core@27.2.0
+  - @atlaskit/media-store@9.2.0
+
 ## 28.0.0
 - Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
 - Updated dependencies [190c4b7bd3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/190c4b7bd3):

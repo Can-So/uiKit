@@ -50,7 +50,10 @@ export interface Props {
    */
   getDisplayedResults?(results: GenericResultMap | null): GenericResultMap;
   createAnalyticsEvent?: CreateAnalyticsEventFn;
-  handleSearchSubmit?(event: React.KeyboardEvent<HTMLInputElement>): void;
+  handleSearchSubmit?(
+    event: React.KeyboardEvent<HTMLInputElement>,
+    searchSessionId: string,
+  ): void;
   isSendSearchTermsEnabled?: boolean;
   placeholder?: string;
   selectedResultId?: string;
@@ -75,6 +78,9 @@ export class QuickSearchContainer extends React.Component<Props, State> {
   static defaultProps = {
     getDisplayedResults: results => results || ({} as GenericResultMap),
   };
+
+  // used to terminate if component is unmounted while waiting for a promise
+  unmounted: Boolean = false;
 
   constructor(props) {
     super(props);
@@ -109,6 +115,10 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     });
   }
 
+  componentWillUnmount() {
+    this.unmounted = true;
+  }
+
   doSearch = async (query: string) => {
     const startTime: number = performanceNow();
 
@@ -122,6 +132,10 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         this.state.searchSessionId,
         startTime,
       );
+
+      if (this.unmounted) {
+        return;
+      }
 
       const elapsedMs = performanceNow() - startTime;
       if (this.state.latestSearchQuery === query) {
@@ -312,6 +326,9 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         this.state.searchSessionId,
       );
       const renderStartTime = performanceNow();
+      if (this.unmounted) {
+        return;
+      }
       this.setState(
         {
           recentItems: results,
@@ -342,6 +359,13 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     }
   };
 
+  handleSearchSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const { handleSearchSubmit } = this.props;
+    if (handleSearchSubmit) {
+      handleSearchSubmit(event, this.state.searchSessionId);
+    }
+  };
+
   render() {
     const {
       linkComponent,
@@ -365,7 +389,7 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       <GlobalQuickSearch
         onMount={this.handleMount}
         onSearch={this.handleSearch}
-        onSearchSubmit={this.props.handleSearchSubmit}
+        onSearchSubmit={this.handleSearchSubmit}
         isLoading={isLoading}
         placeholder={placeholder}
         linkComponent={linkComponent}

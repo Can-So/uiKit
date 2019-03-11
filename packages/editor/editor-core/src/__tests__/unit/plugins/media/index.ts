@@ -1,5 +1,6 @@
+// We need to import fetch polyfill for media components
+import 'whatwg-fetch';
 import * as assert from 'assert';
-import { undo } from 'prosemirror-history';
 import { EditorView } from 'prosemirror-view';
 
 import { ProviderFactory } from '@atlaskit/editor-common';
@@ -32,7 +33,6 @@ import {
 import {
   stateKey as mediaPluginKey,
   MediaPluginState,
-  DefaultMediaStateManager,
 } from '../../../../plugins/media/pm-plugins/main';
 import { setNodeSelection, setTextSelection } from '../../../../utils';
 import { AnalyticsHandler, analyticsService } from '../../../../analytics';
@@ -45,16 +45,13 @@ import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { temporaryMedia, temporaryMediaGroup } from './_utils';
-
 import { SmartMediaEditor } from '@atlaskit/media-editor';
 
-const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 const getFreshMediaProvider = () =>
   storyMediaProviderFactory({
     collectionName: testCollectionName,
-    stateManager,
     includeUserAuthProvider: true,
   });
 
@@ -91,7 +88,9 @@ describe('Media plugin', () => {
     dropzoneContainer: HTMLElement = document.body,
     extraPlugins: any[] = [],
   ) => {
-    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
+    createAnalyticsEvent = jest.fn().mockReturnValue({
+      fire() {},
+    });
     return createEditor({
       doc,
       editorPlugins: [
@@ -167,48 +166,30 @@ describe('Media plugin', () => {
         const { editorView, pluginState } = editor(doc(p('')));
         await mediaProvider;
 
-        const foo = [
-          {
-            id: '1',
-            fileMimeType: 'image/jpeg',
-            fileId: Promise.resolve('foo'),
-            fileName: 'foo.jpg',
-            fileSize: 100,
-            dimensions: {
-              height: 100,
-              width: 100,
-            },
+        const foo = {
+          id: '1',
+          fileMimeType: 'image/jpeg',
+          fileName: 'foo.jpg',
+          fileSize: 100,
+          dimensions: {
+            height: 100,
+            width: 100,
           },
-        ];
+        };
 
-        const bar = [
-          {
-            id: '2',
-            fileMimeType: 'image/png',
-            fileId: Promise.resolve('bar'),
-            fileName: 'bar.png',
-            fileSize: 200,
-            dimensions: {
-              height: 200,
-              width: 200,
-            },
+        const bar = {
+          id: '2',
+          fileMimeType: 'image/png',
+          fileName: 'bar.png',
+          fileSize: 200,
+          dimensions: {
+            height: 200,
+            width: 200,
           },
-        ];
+        };
 
-        pluginState.insertFiles(foo);
-        pluginState.insertFiles(bar);
-
-        pluginState.stateManager.updateState('1', {
-          ...foo[0],
-          status: 'preview',
-          publicId: 'foo',
-        });
-
-        pluginState.stateManager.updateState('2', {
-          ...bar[0],
-          status: 'preview',
-          publicId: 'bar',
-        });
+        pluginState.insertFile(foo, () => {});
+        pluginState.insertFile(bar, () => {});
 
         expect(editorView.state.doc).toEqualDocument(
           doc(
@@ -216,8 +197,7 @@ describe('Media plugin', () => {
               layout: 'center',
             })(
               media({
-                id: 'foo',
-                __key: '1',
+                id: '1',
                 type: 'file',
                 collection: testCollectionName,
                 __fileName: 'foo.jpg',
@@ -231,8 +211,7 @@ describe('Media plugin', () => {
               layout: 'center',
             })(
               media({
-                id: 'bar',
-                __key: '2',
+                id: '2',
                 type: 'file',
                 collection: testCollectionName,
                 __fileName: 'bar.png',
@@ -257,7 +236,6 @@ describe('Media plugin', () => {
             editorView,
             media({
               id: temporaryFileId,
-              __key: temporaryFileId,
               type: 'file',
               collection: testCollectionName,
               __fileMimeType: 'image/png',
@@ -268,7 +246,6 @@ describe('Media plugin', () => {
             editorView,
             media({
               id: temporaryFileId,
-              __key: temporaryFileId,
               type: 'file',
               collection: testCollectionName,
               __fileMimeType: 'image/png',
@@ -283,7 +260,6 @@ describe('Media plugin', () => {
                     mediaSingle({ layout: 'center' })(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',
@@ -292,7 +268,6 @@ describe('Media plugin', () => {
                     mediaSingle({ layout: 'center' })(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',
@@ -317,7 +292,6 @@ describe('Media plugin', () => {
             editorView,
             media({
               id: temporaryFileId,
-              __key: temporaryFileId,
               type: 'file',
               collection: testCollectionName,
               __fileMimeType: 'image/png',
@@ -333,7 +307,6 @@ describe('Media plugin', () => {
                     mediaSingle({ layout: 'center' })(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',
@@ -355,52 +328,30 @@ describe('Media plugin', () => {
       it('inserts pdf as a media group and images as single', async () => {
         const { editorView, pluginState } = editor(doc(p('')));
         await mediaProvider;
-        const id1 = `${randomId()}`;
-        const id2 = `${randomId()}`;
-        const lala = [
-          {
-            id: id1,
-            fileName: 'lala.pdf',
-            fileSize: 200,
-            fileMimeType: 'pdf',
-            dimensions: { width: 200, height: 200 },
-            fileId: Promise.resolve('lala'),
-          },
-        ];
+        const lala = {
+          id: 'lala',
+          fileName: 'lala.pdf',
+          fileSize: 200,
+          fileMimeType: 'pdf',
+          dimensions: { width: 200, height: 200 },
+        };
 
-        const bar = [
-          {
-            id: id2,
-            fileName: 'bar.png',
-            fileSize: 200,
-            fileMimeType: 'image/png',
-            dimensions: { width: 200, height: 200 },
-            fileId: Promise.resolve('bar'),
-          },
-        ];
+        const bar = {
+          id: 'bar',
+          fileName: 'bar.png',
+          fileSize: 200,
+          fileMimeType: 'image/png',
+          dimensions: { width: 200, height: 200 },
+        };
 
-        pluginState.insertFiles(lala);
-        pluginState.insertFiles(bar);
-
-        pluginState.stateManager.updateState(id1, {
-          ...lala[0],
-          status: 'preview',
-          publicId: 'lala',
-        });
-
-        pluginState.stateManager.updateState(id2, {
-          ...bar[0],
-
-          status: 'preview',
-          publicId: 'bar',
-        });
+        pluginState.insertFile(lala, () => {});
+        pluginState.insertFile(bar, () => {});
 
         expect(editorView.state.doc).toEqualDocument(
           doc(
             mediaGroup(
               media({
                 id: 'lala',
-                __key: id1,
                 type: 'file',
                 __fileMimeType: 'pdf',
                 __fileSize: 200,
@@ -411,7 +362,6 @@ describe('Media plugin', () => {
             mediaSingle({ layout: 'center' })(
               media({
                 id: 'bar',
-                __key: id2,
                 __fileName: 'bar.png',
                 __fileSize: 200,
                 height: 200,
@@ -426,168 +376,6 @@ describe('Media plugin', () => {
         );
       });
     });
-
-    describe('when all media are non-images', () => {
-      it('should insert as media group', async () => {
-        const { editorView, pluginState } = editor(doc(p('')));
-        await mediaProvider;
-
-        pluginState.insertFiles([
-          { id: 'foo', fileMimeType: 'pdf', fileId: Promise.resolve('id1') },
-          { id: 'bar', fileMimeType: 'pdf', fileId: Promise.resolve('id2') },
-          { id: 'foobar', fileMimeType: 'pdf', fileId: Promise.resolve('id3') },
-        ]);
-
-        expect(editorView.state.doc).toEqualDocument(
-          doc(
-            mediaGroup(
-              media({
-                id: 'foo',
-                __key: 'foo',
-                type: 'file',
-                __fileMimeType: 'pdf',
-                collection: testCollectionName,
-              })(),
-              media({
-                id: 'bar',
-                __key: 'bar',
-                type: 'file',
-                __fileMimeType: 'pdf',
-                collection: testCollectionName,
-              })(),
-              media({
-                id: 'foobar',
-                __key: 'foobar',
-                type: 'file',
-                __fileMimeType: 'pdf',
-                collection: testCollectionName,
-              })(),
-            ),
-            p(''),
-          ),
-        );
-      });
-    });
-  });
-
-  it('should swap temporary id with public id', async () => {
-    const { editorView, pluginState } = editor(doc(p(), p('{<>}')));
-
-    const tempFileId = `temporary:${randomId()}`;
-
-    // wait until mediaProvider has been set
-    const provider = await mediaProvider;
-    // wait until mediaProvider's uploadContext has been set
-    await provider.uploadContext;
-
-    const publicId = 'public-id';
-    const fileState = [
-      { id: tempFileId, fileId: Promise.resolve('hello'), fileMimeType: 'pdf' },
-    ];
-
-    pluginState.insertFiles(fileState);
-    expect(editorView.state.doc).toEqualDocument(
-      doc(
-        p(),
-        mediaGroup(
-          media({
-            id: tempFileId,
-            __key: tempFileId,
-            type: 'file',
-            __fileMimeType: 'pdf',
-            collection: testCollectionName,
-          })(),
-        ),
-        p(),
-      ),
-    );
-
-    pluginState.stateManager.updateState(tempFileId, {
-      ...fileState[0],
-      status: 'preview',
-      publicId,
-    });
-
-    expect(editorView.state.doc).toEqualDocument(
-      doc(
-        p(),
-        mediaGroup(
-          media({
-            id: publicId,
-            __key: tempFileId,
-            type: 'file',
-            __fileMimeType: 'pdf',
-            collection: testCollectionName,
-          })(),
-        ),
-        p(),
-      ),
-    );
-
-    pluginState.destroy();
-  });
-
-  it('should not revert to temporary media nodes after upload finished and we undo', async () => {
-    const { editorView, pluginState } = editor(doc(p(), p('{<>}')));
-    const collectionFromProvider = jest.spyOn(
-      pluginState,
-      'collectionFromProvider' as any,
-    );
-    collectionFromProvider.mockImplementation(() => testCollectionName);
-    const tempFileId = `temporary:${randomId()}`;
-
-    // wait until mediaProvider has been set
-    const provider = await mediaProvider;
-    // wait until mediaProvider's uploadContext has been set
-    await provider.uploadContext;
-
-    pluginState.insertFiles([
-      { id: tempFileId, fileId: Promise.resolve('id') },
-    ]);
-
-    expect(editorView.state.doc).toEqualDocument(
-      doc(
-        p(),
-        mediaGroup(
-          media({
-            id: tempFileId,
-            __key: tempFileId,
-            type: 'file',
-            collection: testCollectionName,
-          })(),
-        ),
-        p(),
-      ),
-    );
-
-    // mark the upload as finished, triggering replacement of media node
-    stateManager.updateState(tempFileId, {
-      publicId: tempFileId,
-      status: 'preview',
-    });
-
-    expect(editorView.state.doc).toEqualDocument(
-      doc(
-        p(),
-        mediaGroup(
-          media({
-            id: tempFileId,
-            __key: tempFileId,
-            type: 'file',
-            collection: testCollectionName,
-          })(),
-        ),
-        p(),
-      ),
-    );
-
-    // undo last change
-    expect(undo(editorView.state, editorView.dispatch)).toBe(true);
-
-    expect(editorView.state.doc).toEqualDocument(doc(p(), p()));
-    collectionFromProvider.mockRestore();
-
-    pluginState.destroy();
   });
 
   it('should set new pickers exactly when new media provider is set', async () => {
@@ -937,22 +725,20 @@ describe('Media plugin', () => {
 
     const spy = jest.spyOn(editorView, 'focus');
 
-    pluginState.insertFiles([{ id: 'foo', fileId: Promise.resolve('id') }]);
+    pluginState.insertFile({ id: 'foo' }, () => {});
     expect(spy).toHaveBeenCalled();
 
-    pluginState.insertFiles([{ id: 'bar', fileId: Promise.resolve('id') }]);
+    pluginState.insertFile({ id: 'bar' }, () => {});
     expect(editorView.state.doc).toEqualDocument(
       doc(
         mediaGroup(
           media({
             id: 'bar',
-            __key: 'bar',
             type: 'file',
             collection: testCollectionName,
           })(),
           media({
             id: 'foo',
-            __key: 'foo',
             type: 'file',
             collection: testCollectionName,
           })(),
@@ -973,23 +759,22 @@ describe('Media plugin', () => {
     );
     collectionFromProvider.mockImplementation(() => testCollectionName);
 
-    pluginState.insertFiles([
+    pluginState.insertFile(
       {
         id: temporaryFileId,
-        fileId: Promise.resolve('id'),
         status: 'preview',
         fileName: 'foo.png',
         fileSize: 1234,
         fileMimeType: 'pdf',
       },
-    ]);
+      () => {},
+    );
 
     expect(editorView.state.doc).toEqualDocument(
       doc(
         mediaGroup(
           media({
             id: temporaryFileId,
-            __key: temporaryFileId,
             type: 'file',
             collection: testCollectionName,
             __fileName: 'foo.png',
@@ -1309,7 +1094,7 @@ describe('Media plugin', () => {
       const { pluginState, editorView } = editor(listDoc);
       await mediaProvider;
 
-      pluginState.insertFiles([pdfFile]);
+      pluginState.insertFile(pdfFile, () => {});
 
       expect(editorView.state.doc).toEqualDocument(
         doc(
@@ -1317,7 +1102,6 @@ describe('Media plugin', () => {
           mediaGroup(
             media({
               id: pdfFile.id,
-              __key: pdfFile.id,
               type: 'file',
               __fileMimeType: pdfFile.fileMimeType,
               __fileName: pdfFile.fileName,
@@ -1335,7 +1119,7 @@ describe('Media plugin', () => {
       const { pluginState, editorView } = editor(listDoc);
       await mediaProvider;
 
-      pluginState.insertFiles([pdfFile]);
+      pluginState.insertFile(pdfFile, () => {});
 
       expect(editorView.state.doc).toEqualDocument(
         doc(
@@ -1343,7 +1127,6 @@ describe('Media plugin', () => {
           mediaGroup(
             media({
               id: pdfFile.id,
-              __key: pdfFile.id,
               type: 'file',
               __fileMimeType: pdfFile.fileMimeType,
               __fileName: pdfFile.fileName,
@@ -1362,7 +1145,6 @@ describe('Media plugin', () => {
         mediaGroup(
           media({
             id: pdfFile.id,
-            __key: pdfFile.id,
             type: 'file',
             __fileMimeType: pdfFile.fileMimeType,
             __fileName: pdfFile.fileName,
@@ -1375,7 +1157,7 @@ describe('Media plugin', () => {
       const { pluginState, editorView } = editor(listDoc);
       await mediaProvider;
 
-      pluginState.insertFiles([pdfFile]);
+      pluginState.insertFile(pdfFile, () => {});
 
       expect(editorView.state.doc).toEqualDocument(
         doc(
@@ -1383,7 +1165,7 @@ describe('Media plugin', () => {
           mediaGroup(
             media({
               id: pdfFile.id,
-              __key: pdfFile.id,
+
               type: 'file',
               __fileMimeType: pdfFile.fileMimeType,
               __fileName: pdfFile.fileName,
@@ -1392,7 +1174,7 @@ describe('Media plugin', () => {
             })(),
             media({
               id: pdfFile.id,
-              __key: pdfFile.id,
+
               type: 'file',
               __fileMimeType: pdfFile.fileMimeType,
               __fileName: pdfFile.fileName,
@@ -1479,6 +1261,61 @@ describe('Media plugin', () => {
       });
     });
 
+    describe('when media editor sends back save action', () => {
+      let pluginState: MediaPluginState;
+      let editorView: EditorView;
+      let closeMediaEditorSpy: any;
+
+      beforeEach(async () => {
+        const _editor = editor(
+          doc(
+            mediaSingle({ layout: 'center' })(
+              media({
+                id: 'media',
+                type: 'file',
+                collection: testCollectionName,
+              })(),
+            ),
+          ),
+        );
+        editorView = _editor.editorView;
+        pluginState = _editor.pluginState;
+
+        // wait for media provider so we set the upload context
+        await pluginState.setMediaProvider(mediaProvider);
+
+        setNodeSelection(editorView, 0);
+        closeMediaEditorSpy = jest.spyOn(pluginState, 'closeMediaEditor');
+        pluginState.openMediaEditor();
+        const toolbar = mountWithIntl<SmartMediaEditor['props'], {}>(
+          renderSmartMediaEditor(pluginState)!,
+        );
+        const { onUploadStart } = toolbar.props();
+        onUploadStart(
+          { id: 'some-new-id', mediaItemType: 'file' },
+          { width: 200, height: 100 },
+        );
+      });
+      it('should close media editor', () => {
+        expect(closeMediaEditorSpy).toHaveBeenCalled();
+      });
+      it('should replace media in the content', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            mediaSingle({ layout: 'center' })(
+              media({
+                id: 'some-new-id',
+                collection: testCollectionName,
+                type: 'file',
+                height: 100,
+                width: 200,
+              })(),
+            ),
+          ),
+        );
+      });
+    });
+
     it('replaces the editing media node with a new one', async () => {
       const { pluginState, editorView } = editor(
         doc(
@@ -1495,11 +1332,17 @@ describe('Media plugin', () => {
       await pluginState.setMediaProvider(mediaProvider);
       setNodeSelection(editorView, 0);
       pluginState.openMediaEditor();
-      pluginState.replaceEditingMedia({
-        id: 'media2',
-        collectionName: 'collection2',
-        mediaItemType: 'file',
-      });
+      pluginState.replaceEditingMedia(
+        {
+          id: 'media2',
+          collectionName: 'collection2',
+          mediaItemType: 'file',
+        },
+        {
+          height: 100,
+          width: 200,
+        },
+      );
 
       expect(editorView.state.doc).toEqualDocument(
         doc(
@@ -1508,6 +1351,8 @@ describe('Media plugin', () => {
               id: 'media2',
               type: 'file',
               collection: 'collection2',
+              height: 100,
+              width: 200,
             })(),
           ),
         ),
@@ -1537,11 +1382,17 @@ describe('Media plugin', () => {
       insertText(editorView, 'add', refs['<>']);
 
       // should replace the old one
-      pluginState.replaceEditingMedia({
-        id: 'media2',
-        collectionName: 'collection2',
-        mediaItemType: 'file',
-      });
+      pluginState.replaceEditingMedia(
+        {
+          id: 'media2',
+          collectionName: 'collection2',
+          mediaItemType: 'file',
+        },
+        {
+          height: 100,
+          width: 200,
+        },
+      );
 
       expect(editorView.state.doc).toEqualDocument(
         doc(
@@ -1550,6 +1401,8 @@ describe('Media plugin', () => {
               id: 'media2',
               type: 'file',
               collection: 'collection2',
+              height: 100,
+              width: 200,
             })(),
           ),
           p('hello {<>}addworld'),

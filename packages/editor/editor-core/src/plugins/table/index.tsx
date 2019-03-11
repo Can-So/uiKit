@@ -20,6 +20,14 @@ import { getToolbarConfig } from './toolbar';
 import { ColumnResizingPlugin } from './types';
 import FloatingContextualMenu from './ui/FloatingContextualMenu';
 import { isLayoutSupported } from './utils';
+import {
+  addAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  INPUT_METHOD,
+  EVENT_TYPE,
+} from '../analytics';
 
 export const HANDLE_WIDTH = 6;
 
@@ -57,7 +65,7 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
       {
         name: 'table',
         plugin: ({
-          props: { allowTables, appearance },
+          props: { allowTables, appearance, allowDynamicTextSizing },
           eventDispatcher,
           dispatch,
           portalProviderAPI,
@@ -68,17 +76,22 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
             eventDispatcher,
             pluginConfig(allowTables),
             appearance,
+            allowDynamicTextSizing,
           );
         },
       },
       {
         name: 'tablePMColResizing',
-        plugin: ({ dispatch, props: { allowTables } }) => {
+        plugin: ({
+          dispatch,
+          props: { allowTables, allowDynamicTextSizing },
+        }) => {
           const { allowColumnResizing } = pluginConfig(allowTables);
           return allowColumnResizing
             ? createFlexiResizingPlugin(dispatch, {
                 handleWidth: HANDLE_WIDTH,
                 cellMinWidth: tableCellMinWidth,
+                dynamicTextSizing: allowDynamicTextSizing,
               } as ColumnResizingPlugin)
             : undefined;
         },
@@ -140,7 +153,14 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
         priority: 600,
         icon: () => <TableIcon label={formatMessage(messages.table)} />,
         action(insert, state) {
-          return insert(createTable(state.schema));
+          const tr = insert(createTable(state.schema));
+          return addAnalytics(tr, {
+            action: ACTION.INSERTED,
+            actionSubject: ACTION_SUBJECT.DOCUMENT,
+            actionSubjectId: ACTION_SUBJECT_ID.TABLE,
+            attributes: { inputMethod: INPUT_METHOD.QUICK_INSERT },
+            eventType: EVENT_TYPE.TRACK,
+          });
         },
       },
     ],

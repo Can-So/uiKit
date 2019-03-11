@@ -1,5 +1,9 @@
 # @atlaskit/analytics-gas-types
 
+## 3.2.5
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/docs@7.0.0
+
 ## 3.2.4
 - [patch] [a3b8046](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3b8046):
 

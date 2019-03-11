@@ -34,7 +34,7 @@ export type BuildInlineTaskProps = BuildInlineProps<
 >;
 
 const buildInlineTaskIcon: BuildInlineTaskProps = json => {
-  // Render AtlasKit icons for all supported Jira issue types.
+  // Render Atlaskit icons for all supported Jira issue types.
   if (
     json.generator &&
     json.generator['@id'] === JIRA_GENERATOR_ID &&

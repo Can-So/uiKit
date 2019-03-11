@@ -1,5 +1,32 @@
 # @atlaskit/media-viewer
 
+## 37.0.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/analytics-gas-types@3.2.5
+  - @atlaskit/media-card@55.0.2
+  - @atlaskit/media-core@27.2.3
+  - @atlaskit/media-store@9.2.1
+  - @atlaskit/media-ui@9.2.1
+  - @atlaskit/media-test-helpers@20.1.7
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+  - @atlaskit/field-range@6.0.0
+  - @atlaskit/modal-dialog@8.0.0
+  - @atlaskit/spinner@10.0.0
+  - @atlaskit/theme@8.0.0
+
+## 37.0.0
+- [patch] [6bd4c428e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bd4c428e2):
+
+  - load image preview as soon representation is present instead of waiting for file status to be processed
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/media-card@55.0.0
+  - @atlaskit/media-test-helpers@20.1.6
+  - @atlaskit/media-core@27.2.0
+  - @atlaskit/media-store@9.2.0
+
 ## 36.1.0
 - [minor] [f1b46bcb42](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1b46bcb42):
 

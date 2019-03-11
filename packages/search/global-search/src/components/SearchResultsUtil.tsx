@@ -10,6 +10,11 @@ export enum JiraEntityTypes {
   People = 'people',
 }
 
+export enum ConfluenceAdvancedSearchTypes {
+  Content = 'content',
+  People = 'people',
+}
+
 const JIRA_ADVANCED_SEARCH_URLS = {
   [JiraEntityTypes.Issues]: query =>
     `/secure/QuickSearch.jspa?searchString=${query}`,

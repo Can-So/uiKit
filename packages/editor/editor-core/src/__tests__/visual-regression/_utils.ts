@@ -185,11 +185,15 @@ export const initFullPageEditorWithAdf = async (
   page,
   adf: Object,
   device?: Device,
+  viewport?: { width: number; height: number },
+  editorProps: EditorProps = {},
 ) => {
   await initEditorWithAdf(page, {
     adf,
     appearance: Appearance.fullPage,
     device,
+    viewport,
+    editorProps,
   });
 };
 

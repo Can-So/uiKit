@@ -19,9 +19,10 @@ const propertyLineWidth = 'media-editor-line-width';
 
 export interface EditorViewProps {
   readonly imageUrl: string;
-  readonly onSave: (image: string) => void;
+  readonly onSave: (image: string, dimensions: Dimensions) => void;
   readonly onCancel: () => void;
   readonly onError: (message: string) => void;
+  readonly onAnyEdit?: () => void;
 }
 
 export interface EditorViewState {
@@ -87,7 +88,7 @@ class EditorView extends Component<
       this.setState({ color, lineWidth });
     };
 
-    const { imageUrl } = this.props;
+    const { imageUrl, onAnyEdit } = this.props;
     const { dimensions, color, lineWidth, tool } = this.state;
 
     return (
@@ -97,6 +98,7 @@ class EditorView extends Component<
         backgroundColor={TRANSPARENT_COLOR}
         shapeParameters={{ color, lineWidth, addShadow: true }}
         tool={tool}
+        onAnyEdit={onAnyEdit}
         onLoad={this.onLoad}
         onError={onError}
         onShapeParametersChanged={onShapeParametersChanged}
@@ -150,8 +152,8 @@ class EditorView extends Component<
       intl: { formatMessage },
     } = this.props;
     this.saveProperties();
-    if (image.isExported && image.content) {
-      onSave(image.content);
+    if (image.isExported && image.content && image.dimensions) {
+      onSave(image.content, image.dimensions);
     } else {
       onError(formatMessage(messages.could_not_save_image));
     }

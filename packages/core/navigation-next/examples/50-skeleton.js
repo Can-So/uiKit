@@ -9,6 +9,7 @@ import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import {
   GlobalNav,
+  GlobalNavigationSkeleton,
   LayoutManager,
   NavigationProvider,
   MenuSection,
@@ -91,6 +92,8 @@ export default class Example extends Component<{}, State> {
     );
   };
 
+  renderGlobalNavigationSkeleton = () => <GlobalNavigationSkeleton />;
+
   renderSkeleton = () => {
     const { shouldShowContainer } = this.state;
     return (
@@ -126,7 +129,11 @@ export default class Example extends Component<{}, State> {
           })}
         >
           <LayoutManager
-            globalNavigation={GlobalNavigation}
+            globalNavigation={
+              shouldRenderSkeleton
+                ? this.renderGlobalNavigationSkeleton
+                : GlobalNavigation
+            }
             productNavigation={renderer}
             containerNavigation={shouldShowContainer ? renderer : null}
           >

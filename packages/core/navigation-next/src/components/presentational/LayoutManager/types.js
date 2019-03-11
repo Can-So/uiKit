@@ -57,11 +57,19 @@ export type GetRefs = ({
   expandCollapseAffordance: NonStringRef<'button'>,
 }) => void;
 
+type Dataset = { [name: string]: string | typeof undefined };
+
 export type ConnectedLayoutManagerProps = {
   /** Your page content. */
   children: Node,
   /** A component which will render the container navigation layer. */
   containerNavigation: ?ComponentType<{}>,
+  /** A map of data attributes applied to the global and contextual navigation elements. */
+  datasets?: {|
+    globalNavigation: Dataset,
+    contextualNavigation: Dataset,
+    navigation: Dataset,
+  |},
   /** A function to access the refs of some elements within the LayoutManager
    * component. */
   getRefs?: GetRefs,
@@ -73,6 +81,8 @@ export type ConnectedLayoutManagerProps = {
   collapseToggleTooltipContent: CollapseToggleTooltipContent,
   ...$Exact<CollapseListeners>,
   ...$Exact<ExperimentalFeatureFlags>,
+  /** The top offset value to be used in navigation */
+  topOffset?: number,
 };
 
 export type LayoutManagerProps = {

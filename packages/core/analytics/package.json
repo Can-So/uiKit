@@ -1,17 +1,12 @@
 {
   "name": "@atlaskit/analytics",
-  "version": "4.0.7",
+  "version": "5.0.0",
   "description": "The Atlaskit Component Analytics Framework",
   "license": "Apache-2.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "types": "src/index.d.ts",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "src/index.d.ts"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
@@ -33,7 +28,8 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/ssr": "^0.0.1",
+    "@atlaskit/docs": "^7.0.0",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.0",

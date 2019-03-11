@@ -43,6 +43,9 @@ export default class DummyBridge implements NativeBridge {
   dismissStatusPicker(isNew: boolean) {
     this.log(`dismissStatusPicker(isNew=${isNew})`);
   }
+  currentSelection(text: string, url: string) {
+    this.log(`currentSelection(text=${text}, url=${url})`);
+  }
 
   call<T extends EditorPluginBridges>(
     bridge: T,

@@ -25,7 +25,7 @@ export default function keymapPlugin(schema: Schema): Plugin {
     keymaps.insertNewLine.common!,
     trackAndInvoke(
       'atlassian.editor.newline.keyboard',
-      commands.insertNewLine(),
+      commands.insertNewLineWithAnalytics,
     ),
     list,
   );

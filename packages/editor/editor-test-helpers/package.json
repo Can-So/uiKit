@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-test-helpers",
-  "version": "7.0.1",
+  "version": "7.0.4",
   "description": "Test Helpers for Atlassian Editor components",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -22,11 +22,11 @@
   "dependencies": {
     "@atlaskit/adf-schema": "^1.5.4",
     "@atlaskit/analytics-next-types": "^3.1.0",
-    "@atlaskit/editor-common": "^32.0.2",
-    "@atlaskit/editor-core": "^101.0.0",
+    "@atlaskit/editor-common": "^33.0.0",
+    "@atlaskit/editor-core": "^103.0.0",
     "@atlaskit/icon": "^16.0.0",
-    "@atlaskit/media-core": "^27.1.0",
-    "@atlaskit/media-test-helpers": "^20.1.5",
+    "@atlaskit/media-core": "^27.2.0",
+    "@atlaskit/media-test-helpers": "^20.1.6",
     "@atlaskit/smart-card": "^9.4.1",
     "enzyme": "^3.7.0",
     "prosemirror-commands": "^1.0.7",

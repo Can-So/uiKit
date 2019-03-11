@@ -64,6 +64,7 @@ describe('Card', () => {
           mimeType: 'image/png',
           name: 'file-name',
           size: 10,
+          representations: { image: {} },
           ...fileState,
         }),
       },
@@ -529,8 +530,13 @@ describe('Card', () => {
     expect(component.find(CardView).prop('status')).toEqual('error');
   });
 
-  it('should fetch remote preview when file is processed and there is no local preview', async () => {
-    const context = createContextWithGetFile();
+  it('should fetch remote preview when image representation available and there is no local preview', async () => {
+    const context = createContextWithGetFile({
+      status: 'processing',
+      representations: {
+        image: {},
+      },
+    });
     setup(context, undefined, emptyPreview);
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
@@ -547,7 +553,7 @@ describe('Card', () => {
     });
   });
 
-  it('should not fetch remote preview when file is processed and there is local preview', async () => {
+  it('should not fetch remote preview when there is local preview', async () => {
     const subject = new ReplaySubject<FileState>(1);
     const baseState: FileState = {
       id: '123',
@@ -556,6 +562,9 @@ describe('Card', () => {
       mimeType: 'image/png',
       name: 'file-name',
       size: 10,
+      representations: {
+        image: {},
+      },
     };
     subject.next(baseState);
     const context = fakeContext({

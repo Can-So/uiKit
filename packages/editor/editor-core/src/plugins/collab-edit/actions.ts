@@ -1,6 +1,11 @@
 import { receiveTransaction } from 'prosemirror-collab';
 import { Step } from 'prosemirror-transform';
-import { AllSelection, NodeSelection, Selection } from 'prosemirror-state';
+import {
+  AllSelection,
+  NodeSelection,
+  Selection,
+  Transaction,
+} from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 
 import {
@@ -78,7 +83,7 @@ export const applyRemoteSteps = (
 
   const steps = json.map(step => Step.fromJSON(schema, step));
 
-  let tr;
+  let tr: Transaction;
 
   if (options && options.useNativePlugin) {
     tr = receiveTransaction(state, steps, userIds);
@@ -90,6 +95,18 @@ export const applyRemoteSteps = (
   if (tr) {
     tr.setMeta('addToHistory', false);
     tr.setMeta('isRemote', true);
+
+    const { from, to } = state.selection;
+    const [firstStep] = json;
+
+    /**
+     * If the cursor is a the same position as the first step in
+     * the remote data, we need to manually set it back again
+     * in order to prevent the cursor from moving.
+     */
+    if (from === firstStep.from && to === firstStep.to) {
+      tr.setSelection(state.selection);
+    }
 
     const newState = state.apply(tr);
     view.updateState(newState);

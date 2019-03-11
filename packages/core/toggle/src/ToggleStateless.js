@@ -8,10 +8,7 @@ import {
 } from '@atlaskit/analytics-next';
 import CloseIcon from '@atlaskit/icon/glyph/cross';
 import ConfirmIcon from '@atlaskit/icon/glyph/check';
-import {
-  name as packageName,
-  version as packageVersion,
-} from '../package.json';
+import { name as packageName, version as packageVersion } from './version.json';
 import { Handle, IconWrapper, Inner, Input, Label, Slide } from './styled';
 import defaultBaseProps from './defaultBaseProps';
 import type { StatelessProps, DefaultBaseProps } from './types';

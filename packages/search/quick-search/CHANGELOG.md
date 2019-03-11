@@ -1,5 +1,22 @@
 # @atlaskit/quick-search
 
+## 5.4.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics@5.0.0
+  - @atlaskit/avatar@15.0.0
+  - @atlaskit/drawer@3.0.0
+  - @atlaskit/field-base@12.0.0
+  - @atlaskit/item@9.0.0
+  - @atlaskit/navigation@34.0.0
+  - @atlaskit/theme@8.0.0
+
+## 5.4.0
+- [minor] [7be03e992f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7be03e992f):
+
+  - Add support to register callback for category selection change on advanced search
+
 ## 5.3.0
 - [minor] [25fffe3e00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25fffe3e00):
 

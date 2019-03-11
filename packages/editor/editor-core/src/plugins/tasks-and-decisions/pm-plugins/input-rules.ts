@@ -1,6 +1,5 @@
-import { uuid } from '@atlaskit/adf-schema';
 import { inputRules, InputRule } from 'prosemirror-inputrules';
-import { Schema, NodeType, Node } from 'prosemirror-model';
+import { Schema, Node } from 'prosemirror-model';
 import {
   NodeSelection,
   Plugin,
@@ -13,18 +12,11 @@ import {
   leafNodeReplacementCharacter,
 } from '../../../utils/input-rules';
 import { canInsert } from 'prosemirror-utils';
-import { changeInDepth } from '../commands';
+import { changeInDepth, insertTaskDecisionWithAnalytics } from '../commands';
+import { INPUT_METHOD } from '../../analytics';
+import { TaskDecisionListType, AddItemTransactionCreator } from '../types';
 
-const createListRule = (
-  regex: RegExp,
-  _name: string,
-  list: NodeType,
-  item: NodeType,
-  schema: Schema,
-  analyticType: string,
-) => {
-  const { paragraph, hardBreak } = schema.nodes;
-
+const createListRule = (regex: RegExp, listType: TaskDecisionListType) => {
   return createInputRule(
     regex,
     (
@@ -33,68 +25,84 @@ const createListRule = (
       start: number,
       end: number,
     ) => {
-      const {
-        tr,
-        selection: { $from },
-      } = state;
-
-      const content = $from.node($from.depth).content;
-      let shouldBreakNode = false;
-      content.forEach((node, offset) => {
-        if (node.type === hardBreak && offset < start) {
-          shouldBreakNode = true;
-        }
-      });
-
-      const $end = state.doc.resolve(end);
-      const $endOfParent = state.doc.resolve($end.after());
-      // Only allow creating list in nodes that support them.
-      // Parent must be a paragraph as we don't want this applying to headings
-      if (
-        $end.parent.type !== paragraph ||
-        !canInsert($endOfParent, list.createAndFill() as Node)
-      ) {
-        return null;
-      }
-
-      const where = $from.before($from.depth);
-
-      analyticsService.trackEvent(
-        `atlassian.fabric.${analyticType}.trigger.shortcut`,
+      const insertTr = insertTaskDecisionWithAnalytics(
+        state,
+        listType,
+        INPUT_METHOD.FORMATTING,
+        addItem(start, end),
       );
 
-      if (!shouldBreakNode) {
-        tr.delete(where, $from.end($from.depth))
-          .replaceSelectionWith(
-            list.create({ localId: uuid.generate() }, [
-              item.create({ localId: uuid.generate() }, content),
-            ]),
-          )
-          .delete(start + 1, end + 1)
-          .setSelection(new TextSelection(tr.doc.resolve(start + 1)));
-      } else {
-        const depthAdjustment = changeInDepth($from, tr.selection.$from);
-        tr.split($from.pos)
-          .setSelection(new NodeSelection(tr.doc.resolve($from.pos + 1)))
-          .replaceSelectionWith(
-            list.create({ localId: uuid.generate() }, [
-              item.create(
-                { localId: uuid.generate() },
-                // TODO: [ts30] handle void and null properly
-                (tr.doc.nodeAt($from.pos + 1) as Node).content,
-              ),
-            ]),
-          )
-          .setSelection(
-            new TextSelection(tr.doc.resolve($from.pos + depthAdjustment)),
-          )
-          .delete(start, end + 1);
-      }
-
-      return tr;
+      return insertTr;
     },
     true,
   );
+};
+
+const addItem = (start: number, end: number): AddItemTransactionCreator => ({
+  tr,
+  state,
+  list,
+  item,
+  listLocalId,
+  itemLocalId,
+}) => {
+  const {
+    selection: { $from },
+    schema,
+  } = state;
+  const { paragraph, hardBreak } = schema.nodes;
+
+  const content = $from.node($from.depth).content;
+  let shouldBreakNode = false;
+  content.forEach((node, offset) => {
+    if (node.type === hardBreak && offset < start) {
+      shouldBreakNode = true;
+    }
+  });
+
+  const $end = state.doc.resolve(end);
+  const $endOfParent = state.doc.resolve($end.after());
+  // Only allow creating list in nodes that support them.
+  // Parent must be a paragraph as we don't want this applying to headings
+  if (
+    $end.parent.type !== paragraph ||
+    !canInsert($endOfParent, list.createAndFill() as Node)
+  ) {
+    return null;
+  }
+
+  const where = $from.before($from.depth);
+
+  analyticsService.trackEvent(`atlassian.fabric.${item.name}.trigger.shortcut`);
+
+  if (!shouldBreakNode) {
+    tr.delete(where, $from.end($from.depth))
+      .replaceSelectionWith(
+        list.create({ localId: listLocalId }, [
+          item.create({ localId: itemLocalId }, content),
+        ]),
+      )
+      .delete(start + 1, end + 1)
+      .setSelection(new TextSelection(tr.doc.resolve(start + 1)));
+  } else {
+    const depthAdjustment = changeInDepth($from, tr.selection.$from);
+    tr.split($from.pos)
+      .setSelection(new NodeSelection(tr.doc.resolve($from.pos + 1)))
+      .replaceSelectionWith(
+        list.create({ localId: listLocalId }, [
+          item.create(
+            { localId: itemLocalId },
+            // TODO: [ts30] handle void and null properly
+            (tr.doc.nodeAt($from.pos + 1) as Node).content,
+          ),
+        ]),
+      )
+      .setSelection(
+        new TextSelection(tr.doc.resolve($from.pos + depthAdjustment)),
+      )
+      .delete(start, end + 1);
+  }
+  return tr;
 };
 
 export function inputRulePlugin(schema: Schema): Plugin {
@@ -106,11 +114,7 @@ export function inputRulePlugin(schema: Schema): Plugin {
     rules.push(
       createListRule(
         new RegExp(`(^|${leafNodeReplacementCharacter})\\<\\>\\s$`),
-        'decisionlist',
-        decisionList,
-        decisionItem,
-        schema,
-        'decision',
+        'decisionList',
       ),
     );
   }
@@ -119,11 +123,7 @@ export function inputRulePlugin(schema: Schema): Plugin {
     rules.push(
       createListRule(
         new RegExp(`(^|${leafNodeReplacementCharacter})\\[\\]\\s$`),
-        'tasklist',
-        taskList,
-        taskItem,
-        schema,
-        'action',
+        'taskList',
       ),
     );
   }

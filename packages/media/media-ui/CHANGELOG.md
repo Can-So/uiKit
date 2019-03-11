@@ -1,5 +1,28 @@
 # @atlaskit/media-ui
 
+## 9.2.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/media-test-helpers@20.1.7
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/avatar-group@3.0.0
+  - @atlaskit/avatar@15.0.0
+  - @atlaskit/badge@10.0.0
+  - @atlaskit/checkbox@6.0.0
+  - @atlaskit/dropdown-menu@7.0.0
+  - @atlaskit/field-text@8.0.0
+  - @atlaskit/lozenge@7.0.0
+  - @atlaskit/page@9.0.0
+  - @atlaskit/spinner@10.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/tooltip@13.0.0
+
+## 9.2.0
+- [minor] [b7ead07438](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b7ead07438):
+
+  - New messages to support media-editor changes
+
 ## 9.1.0
 - [minor] [41147bbc4c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/41147bbc4c):
 

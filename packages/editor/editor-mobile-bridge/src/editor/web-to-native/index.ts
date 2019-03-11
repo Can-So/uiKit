@@ -6,6 +6,7 @@ import {
   TextFormattingBridge,
   StatusBridge,
   TypeAheadBridge,
+  LinkBridge,
 } from './bridge';
 import AndroidBridge from './android-impl';
 import IosBridge from './ios-impl';
@@ -22,6 +23,7 @@ export interface EditorBridges {
   blockFormatBridge?: TextFormattingBridge;
   statusBridge?: StatusBridge;
   typeAheadBridge?: TypeAheadBridge;
+  linkBridge?: LinkBridge;
 }
 
 export type EditorPluginBridges = keyof EditorBridges;

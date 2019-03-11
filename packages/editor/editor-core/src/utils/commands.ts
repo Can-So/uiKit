@@ -90,6 +90,7 @@ function findCutBefore($pos: ResolvedPos): ResolvedPos | null {
 }
 
 export {
+  Predicate,
   filter,
   isEmptySelectionAtStart,
   isFirstChildOfParent,

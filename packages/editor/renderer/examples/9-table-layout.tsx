@@ -13,7 +13,7 @@ const providerFactory = ProviderFactory.create({ mediaProvider });
 export default function Example() {
   return (
     <Sidebar showSidebar={true}>
-      {additionalProps => (
+      {(additionalProps: object) => (
         <Renderer
           dataProviders={providerFactory}
           document={document}

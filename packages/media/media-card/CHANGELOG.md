@@ -1,5 +1,44 @@
 # @atlaskit/media-card
 
+## 55.0.3
+- [patch] [3591859b2f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3591859b2f):
+
+  - use ReactDOM.createPortal to render MediaViewer when shouldOpenMediaViewer=true
+
+## 55.0.2
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/media-core@27.2.3
+  - @atlaskit/media-store@9.2.1
+  - @atlaskit/media-ui@9.2.1
+  - @atlaskit/media-viewer@37.0.1
+  - @atlaskit/media-test-helpers@20.1.7
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+  - @atlaskit/checkbox@6.0.0
+  - @atlaskit/dropdown-menu@7.0.0
+  - @atlaskit/field-radio-group@5.0.0
+  - @atlaskit/field-range@6.0.0
+  - @atlaskit/field-text@8.0.0
+  - @atlaskit/spinner@10.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/toggle@6.0.0
+
+## 55.0.1
+- [patch] [d18b085e2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d18b085e2a):
+
+  - Integrating truly upfront ID
+
+## 55.0.0
+- [patch] [6bd4c428e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bd4c428e2):
+
+  - load image preview as soon representation is present instead of waiting for file status to be processed
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/media-test-helpers@20.1.6
+  - @atlaskit/media-core@27.2.0
+  - @atlaskit/media-store@9.2.0
+
 ## 54.1.0
 - [minor] [eda74c4dce](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/eda74c4dce):
 

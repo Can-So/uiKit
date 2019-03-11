@@ -27,6 +27,7 @@ import {
 import { makeJiraObjectResult, makePersonResult } from '../_test-util';
 import { ContentType, Result } from '../../../model/Result';
 import { Scope } from '../../../api/types';
+import * as SearchUtils from '../../../components/SearchResultsUtil';
 import { ShallowWrapper } from 'enzyme';
 
 const issues = [
@@ -270,6 +271,72 @@ describe('Jira Quick Search Container', () => {
         },
       });
       expect(logger.safeError).toHaveBeenCalledTimes(0);
+    });
+
+    describe('Advanced Search callback', () => {
+      let redirectSpy;
+      let originalWindowAssign = window.location.assign;
+
+      beforeEach(() => {
+        window.location.assign = jest.fn();
+        redirectSpy = jest.spyOn(SearchUtils, 'redirectToJiraAdvancedSearch');
+      });
+
+      afterEach(() => {
+        window.location.assign = originalWindowAssign;
+        redirectSpy.mockReset();
+        redirectSpy.mockRestore();
+      });
+
+      const mountComponent = spy => {
+        const wrapper = renderComponent({
+          onAdvancedSearch: spy,
+        });
+        const quickSearchContainer = wrapper.find(QuickSearchContainer);
+
+        const props = quickSearchContainer.props();
+        expect(props).toHaveProperty('handleSearchSubmit');
+
+        return props['handleSearchSubmit'];
+      };
+      const mockEvent = () => ({
+        preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
+        target: {
+          value: 'query',
+        },
+      });
+      const mockSearchSessionId = 'someSearchSessionId';
+
+      it('should call onAdvancedSearch call', () => {
+        const spy = jest.fn();
+        const handleSearchSubmit = mountComponent(spy);
+        const mockedEvent = mockEvent();
+        handleSearchSubmit(mockedEvent, mockSearchSessionId);
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(
+          expect.objectContaining({
+            preventDefault: expect.any(Function),
+          }),
+          'issues',
+          'query',
+          mockSearchSessionId,
+        );
+        expect(mockedEvent.preventDefault).toHaveBeenCalledTimes(0);
+        expect(mockedEvent.stopPropagation).toHaveBeenCalledTimes(0);
+        expect(redirectSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should not call redriect', () => {
+        const spy = jest.fn(e => e.preventDefault());
+        const handleSearchSubmit = mountComponent(spy);
+        const mockedEvent = mockEvent();
+        handleSearchSubmit(mockedEvent, mockSearchSessionId);
+
+        expect(mockedEvent.preventDefault).toHaveBeenCalledTimes(1);
+        expect(mockedEvent.stopPropagation).toHaveBeenCalledTimes(1);
+        expect(redirectSpy).toHaveBeenCalledTimes(0);
+      });
     });
   });
 });

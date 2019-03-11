@@ -12,7 +12,7 @@ import baseItem, { withItemClick, withItemFocus } from '@atlaskit/item';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../package.json';
+} from '../../version.json';
 import NavigationItemAction from '../styled/NavigationItemAction';
 import NavigationItemAfter from '../styled/NavigationItemAfter';
 import NavigationItemCaption from '../styled/NavigationItemCaption';

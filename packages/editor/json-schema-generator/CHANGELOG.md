@@ -1,5 +1,10 @@
 # @atlaskit/json-schema-generator
 
+## 1.3.0
+- [minor] [1eb20bca95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1eb20bca95):
+
+  - ED-6368: No implicit any for editor-*-transformer packages
+
 ## 1.2.3
 - [patch] [9f43a40e1e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f43a40e1e):
 

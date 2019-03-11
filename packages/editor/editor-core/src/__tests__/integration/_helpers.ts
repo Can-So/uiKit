@@ -3,6 +3,7 @@ import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/T
 import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
 import { EditorAppearance } from '../../types';
 import { pluginKey as tableResizingPluginKey } from '../../plugins/table/pm-plugins/table-resizing';
+import messages from '../../messages';
 
 /**
  * This function will in browser context. Make sure you call `toJSON` otherwise you will get:
@@ -65,7 +66,11 @@ export const fullpage: EditorHelper = {
 export const fullpageDisabled: EditorHelper = {
   name: 'fullpage-disabled',
   appearance: 'full-page',
-  path: getExampleUrl('editor', 'editor-core', 'full-page-with-content'),
+  path: getExampleUrl(
+    'editor',
+    'editor-core',
+    'full-page-with-content-disabled-flexi-tables',
+  ),
   placeholder: '.ProseMirror',
 };
 
@@ -258,6 +263,23 @@ export const changeSelectedNodeLayout = async (
   await page.click(buttonSelector);
 };
 
+export const toggleBreakout = async (page: any, times: number) => {
+  const timesArray = Array.from({ length: times });
+
+  const breakoutSelector = [
+    messages.layoutFixedWidth.defaultMessage,
+    messages.layoutWide.defaultMessage,
+    messages.layoutFullWidth.defaultMessage,
+  ]
+    .map(label => `[aria-label="${label}"]`)
+    .join();
+
+  for (let _iter of timesArray) {
+    await page.waitForSelector(breakoutSelector);
+    await page.click(breakoutSelector);
+  }
+};
+
 export const quickInsert = async (browser: any, insertTitle: string) => {
   await browser.type(editable, `/${insertTitle.split(' ')[0]}`);
   await browser.waitForSelector('div[aria-label="Popup"]');
@@ -373,4 +395,10 @@ export const resizeColumn = async (page: any, resizeOptions: ResizeOptions) => {
     resizeOptions.cellHandlePos,
     resizeOptions.startX || 600,
   );
+};
+
+export const animationFrame = async page => {
+  await page.browser.executeAsync(done => {
+    window.requestAnimationFrame(done);
+  });
 };

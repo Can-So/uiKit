@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Switcher from './switcher';
 import {
   CustomLinksProvider,
@@ -6,9 +6,11 @@ import {
 } from '../providers/confluence-data-providers';
 import CommonDataProvider from '../providers/common-data-provider';
 import { resolveSwitcherLinks } from '../providers/resolve-switcher-links';
+import { Messages } from 'react-intl';
 
 interface ConfluenceSwitcherProps {
   cloudId: string;
+  messages: Messages;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
 }
 

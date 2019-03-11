@@ -1,19 +1,19 @@
+import { ButtonAppearances } from '@atlaskit/button';
 import { LoadOptions } from '@atlaskit/user-picker';
 import memoizeOne from 'memoize-one';
 import * as React from 'react';
-import { InvitationsCapabilitiesResource } from '../api/InvitationsCapabilitiesResource';
-import { ShareServiceClient } from '../clients/ShareServiceClient';
 import {
-  Client,
+  ConfigResponse,
+  ShareClient,
+  ShareServiceClient,
+} from '../clients/ShareServiceClient';
+import {
   Content,
   DialogContentState,
-  InvitationsCapabilitiesProvider,
-  InvitationsCapabilitiesResponse,
   MetaData,
   OriginTracing,
   OriginTracingFactory,
   ShareButtonStyle,
-  ShareClient,
   ShareResponse,
 } from '../types';
 import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
@@ -21,21 +21,24 @@ import { optionDataToUsers } from './utils';
 
 export type Props = {
   buttonStyle?: ShareButtonStyle;
-  client?: Client;
+  client?: ShareClient;
   cloudId: string;
   formatCopyLink: (origin: OriginTracing, link: string) => string;
   loadUserOptions: LoadOptions;
   originTracingFactory: OriginTracingFactory;
   productId: string;
   shareAri: string;
+  shareContentType: string;
   shareLink: string;
   shareTitle: string;
-  shouldShowCommentField?: boolean;
+  shareFormTitle?: React.ReactNode;
   shouldCloseOnEscapePress?: boolean;
+  triggerButtonAppearance?: ButtonAppearances;
+  triggerButtonStyle?: ShareButtonStyle;
 };
 
 export type State = {
-  capabilities: InvitationsCapabilitiesResponse | undefined;
+  config?: ConfigResponse;
   copyLinkOrigin: OriginTracing | null;
   prevShareLink: string | null;
   shareActionCount: number;
@@ -54,7 +57,7 @@ const memoizedFormatCopyLink: (
  * to ShareDialogTrigger component
  */
 export class ShareDialogContainer extends React.Component<Props, State> {
-  private client: Client;
+  private client: ShareClient;
 
   static defaultProps = {
     shareLink: window && window.location!.href,
@@ -67,18 +70,10 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     if (props.client) {
       this.client = props.client;
     } else {
-      const defaultInvitationsCapabilitiesResource: InvitationsCapabilitiesProvider = new InvitationsCapabilitiesResource(
-        props.cloudId,
-      );
-      const defaultShareSericeClient: ShareClient = new ShareServiceClient();
-      this.client = {
-        getCapabilities: defaultInvitationsCapabilitiesResource.getCapabilities,
-        share: defaultShareSericeClient.share,
-      };
+      this.client = new ShareServiceClient();
     }
 
     this.state = {
-      capabilities: undefined,
       copyLinkOrigin: null,
       prevShareLink: null,
       shareActionCount: 0,
@@ -110,17 +105,15 @@ export class ShareDialogContainer extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.fetchCapabilities();
+    this.fetchConfig();
   }
 
-  fetchCapabilities = () => {
+  fetchConfig = () => {
     this.client
-      .getCapabilities()
-      .then((capabilities: InvitationsCapabilitiesResponse) => {
+      .getConfig(this.props.productId, this.props.cloudId)
+      .then((config: ConfigResponse) => {
         // TODO: Send analytics event
-        this.setState({
-          capabilities,
-        });
+        this.setState({ config });
       })
       .catch(() => {
         // TODO: Send analytics event
@@ -135,6 +128,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       originTracingFactory,
       productId,
       shareAri,
+      shareContentType,
       shareLink,
       shareTitle,
     } = this.props;
@@ -143,6 +137,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       // original share link is used here
       link: shareLink,
       title: shareTitle,
+      type: shareContentType,
     };
     const metaData: MetaData = {
       productId,
@@ -180,24 +175,26 @@ export class ShareDialogContainer extends React.Component<Props, State> {
 
   render() {
     const {
-      buttonStyle,
       formatCopyLink,
       loadUserOptions,
       shareLink,
-      shouldShowCommentField,
+      shareFormTitle,
       shouldCloseOnEscapePress,
+      triggerButtonAppearance,
+      triggerButtonStyle,
     } = this.props;
     const copyLink = formatCopyLink(this.state.copyLinkOrigin!, shareLink);
     return (
       <ShareDialogWithTrigger
-        buttonStyle={buttonStyle}
-        capabilities={this.state.capabilities}
+        config={this.state.config}
         copyLink={copyLink}
         loadUserOptions={loadUserOptions}
         onLinkCopy={this.handleCopyLink}
         onShareSubmit={this.handleSubmitShare}
-        shouldShowCommentField={shouldShowCommentField}
+        shareFormTitle={shareFormTitle}
         shouldCloseOnEscapePress={shouldCloseOnEscapePress}
+        triggerButtonAppearance={triggerButtonAppearance}
+        triggerButtonStyle={triggerButtonStyle}
       />
     );
   }

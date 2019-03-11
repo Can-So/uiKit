@@ -48,7 +48,9 @@ export class WidthProvider extends React.Component<any, WidthProviderState> {
           }}
         >
           {({ width }: WidthProviderState) => {
-            this.setWidth(width);
+            if (width !== null) {
+              this.setWidth(width);
+            }
             return null;
           }}
         </SizeDetector>

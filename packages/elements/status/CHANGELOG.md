@@ -1,5 +1,35 @@
 # @atlaskit/status
 
+## 0.5.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/analytics-gas-types@3.2.5
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+  - @atlaskit/field-text@8.0.0
+  - @atlaskit/lozenge@7.0.0
+  - @atlaskit/theme@8.0.0
+
+## 0.5.0
+- [minor] [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+
+  - added SSR tests to task-decision
+
+## 0.4.0
+- [minor] [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+
+  - added/cleaned up ssr tests
+
+## 0.3.8
+- [patch] [e27ba4f443](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e27ba4f443):
+
+  - added SSR tests to status
+
+## 0.3.7
+- [patch] [0e4dedafc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e4dedafc1):
+
+  - Fix incorrect dependency listings
+
 ## 0.3.6
 - Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
   - @atlaskit/editor-test-helpers@7.0.0

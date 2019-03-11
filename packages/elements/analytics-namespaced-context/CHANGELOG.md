@@ -1,5 +1,11 @@
 # @atlaskit/analytics-namespaced-context
 
+## 2.2.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/analytics-listeners@4.2.1
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+
 ## 2.2.0
 - [minor] [8c65a38bfc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c65a38bfc):
 

@@ -58,7 +58,7 @@ describe('as-data-provider', () => {
   });
 
   it('should send an error parameter when the promise rejects', () => {
-    const promise = new Promise((accept, reject) =>
+    const promise = new Promise((_, reject) =>
       setTimeout(() => reject(EXPECTED_ERROR_VALUE), 20),
     );
     const DataProvider = asDataProvider(() => promise);

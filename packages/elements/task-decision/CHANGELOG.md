@@ -1,5 +1,33 @@
 # @atlaskit/task-decision
 
+## 11.3.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/renderer@41.2.1
+  - @atlaskit/analytics-listeners@4.2.1
+  - @atlaskit/analytics-namespaced-context@2.2.1
+  - @atlaskit/util-data-test@10.2.3
+  - @atlaskit/util-service-support@3.1.1
+  - @atlaskit/editor-common@33.0.3
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+  - @atlaskit/avatar-group@3.0.0
+  - @atlaskit/avatar@15.0.0
+  - @atlaskit/spinner@10.0.0
+  - @atlaskit/theme@8.0.0
+
+## 11.3.0
+- [minor] [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+
+  - added SSR tests to task-decision
+
+## 11.2.3
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/renderer@41.0.0
+  - @atlaskit/util-data-test@10.2.2
+
 ## 11.2.2
 - Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
   - @atlaskit/renderer@40.0.0

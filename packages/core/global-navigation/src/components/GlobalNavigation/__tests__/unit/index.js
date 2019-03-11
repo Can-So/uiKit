@@ -1,13 +1,14 @@
 // @flow
 
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 import { mount, shallow } from 'enzyme';
 import Badge from '@atlaskit/badge';
 import { DropdownItem } from '@atlaskit/dropdown-menu';
 import Drawer from '@atlaskit/drawer';
 import AtlassianSwitcher, {
-  JiraSwitcher,
   ConfluenceSwitcher,
+  JiraSwitcher,
 } from '@atlaskit/atlassian-switcher';
 import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
 import SearchIcon from '@atlaskit/icon/glyph/search';
@@ -882,25 +883,27 @@ describe('GlobalNavigation', () => {
     AppSwitcher.displayName = 'AppSwitcher';
     const getDefaultWrapper = (propsToOverride: any = {}) =>
       mount(
-        <GlobalNavigation
-          product={'jira'}
-          productIcon={EmojiAtlassianIcon}
-          productHref="#"
-          cloudId={cloudId}
-          onProductClick={noop}
-          onCreateClick={noop}
-          onSearchClick={noop}
-          onStarredClick={noop}
-          onNotificationClick={noop}
-          onSettingsClick={noop}
-          appSwitcherComponent={AppSwitcher}
-          appSwitcherTooltip="appSwitcher tooltip"
-          enableAtlassianSwitcher
-          loginHref="#login"
-          helpItems={() => <div>items</div>}
-          triggerXFlow={triggerXFlowStub}
-          {...propsToOverride}
-        />,
+        <IntlProvider locale="en">
+          <GlobalNavigation
+            product="jira"
+            productIcon={EmojiAtlassianIcon}
+            productHref="#"
+            cloudId={cloudId}
+            onProductClick={noop}
+            onCreateClick={noop}
+            onSearchClick={noop}
+            onStarredClick={noop}
+            onNotificationClick={noop}
+            onSettingsClick={noop}
+            appSwitcherComponent={AppSwitcher}
+            appSwitcherTooltip="appSwitcher tooltip"
+            enableAtlassianSwitcher
+            loginHref="#login"
+            helpItems={() => <div>items</div>}
+            triggerXFlow={triggerXFlowStub}
+            {...propsToOverride}
+          />
+        </IntlProvider>,
       );
     let globalNavWrapper = getDefaultWrapper();
 

@@ -1,5 +1,86 @@
 # @atlaskit/renderer
 
+## 41.5.0
+- [minor] [8ec7dd4cb2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ec7dd4cb2):
+
+  - email rendering - fixed a bug with em
+
+## 41.4.0
+- [minor] [3a2836d6d7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a2836d6d7):
+
+  - move MediaViewer opening logic into Card by passing shouldOpenMediaViewer flag when there is no click handler defined
+
+## 41.3.1
+- Updated dependencies [dbff4fdcf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dbff4fdcf9):
+  - @atlaskit/editor-common@33.0.4
+  - @atlaskit/profilecard@8.0.0
+
+## 41.3.0
+- [minor] [b8d146fb27](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8d146fb27):
+
+  - CS-843 Email renderer codeblock support for outlook
+
+## 41.2.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/editor-json-transformer@4.3.3
+  - @atlaskit/analytics-listeners@4.2.1
+  - @atlaskit/analytics-namespaced-context@2.2.1
+  - @atlaskit/mention@16.2.2
+  - @atlaskit/status@0.5.1
+  - @atlaskit/task-decision@11.3.1
+  - @atlaskit/util-data-test@10.2.3
+  - @atlaskit/media-card@55.0.2
+  - @atlaskit/media-core@27.2.3
+  - @atlaskit/media-filmstrip@28.0.1
+  - @atlaskit/smart-card@9.11.3
+  - @atlaskit/media-test-helpers@20.1.7
+  - @atlaskit/editor-common@33.0.3
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/code@9.0.0
+  - @atlaskit/field-range@6.0.0
+  - @atlaskit/navigation-next@5.0.0
+  - @atlaskit/size-detector@7.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/profilecard@7.0.0
+
+## 41.2.0
+- [minor] [bdde0f4f25](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bdde0f4f25):
+
+  - CS-858: Alignment support for email html rendering
+
+## 41.1.1
+- Updated dependencies [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+  - @atlaskit/status@0.5.0
+  - @atlaskit/task-decision@11.3.0
+
+## 41.1.0
+- [minor] [e385e90f31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e385e90f31):
+
+  - CS-840 Email renderer now supports indentations
+
+## 41.0.1
+- Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+  - @atlaskit/status@0.4.0
+
+## 41.0.0
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/media-card@55.0.0
+  - @atlaskit/media-filmstrip@28.0.0
+  - @atlaskit/editor-json-transformer@4.3.1
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/task-decision@11.2.3
+  - @atlaskit/util-data-test@10.2.2
+  - @atlaskit/media-test-helpers@20.1.6
+  - @atlaskit/media-core@27.2.0
+
+## 40.1.1
+- Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
+  - @atlaskit/editor-common@32.4.3
+  - @atlaskit/size-detector@6.0.0
+
 ## 40.1.0
 - [minor] [09e8eb968f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09e8eb968f):
 

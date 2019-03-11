@@ -1,19 +1,16 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { TableMap } from 'prosemirror-tables';
-import { findParentNodeOfType, hasParentNodeOfType } from 'prosemirror-utils';
 import * as classnames from 'classnames';
 import { akEditorTableToolbarSize } from '@atlaskit/editor-common';
 
 import {
   updateControls,
   updateResizeHandle,
-  handleBreakoutContent,
   updateColumnWidth,
   resizeColumn,
 } from './actions';
 
 import Resizer from './resizer/resizer';
-import { contentWidth } from './resizer/contentWidth';
 
 import {
   getLayoutSize,
@@ -45,6 +42,7 @@ export function createPlugin(
     handleWidth = 5,
     cellMinWidth = 25,
     lastColumnResizable = true,
+    dynamicTextSizing = false,
   }: ColumnResizingPlugin = {},
 ) {
   return new Plugin({
@@ -66,45 +64,6 @@ export function createPlugin(
         return pluginState;
       },
     },
-    view: () => ({
-      update(view) {
-        const { selection, schema } = view.state;
-        const table = findParentNodeOfType(schema.nodes.table)(selection);
-        const isInsideCells = hasParentNodeOfType([
-          schema.nodes.tableCell,
-          schema.nodes.tableHeader,
-        ])(selection);
-
-        if (table && isInsideCells) {
-          const cell = findParentNodeOfType([
-            schema.nodes.tableCell,
-            schema.nodes.tableHeader,
-          ])(selection);
-          const elem = view.domAtPos(cell!.start).node as HTMLElement; // nodeview
-          const elemOrWrapper =
-            closestElement(
-              elem,
-              `.${ClassName.TABLE_HEADER_NODE_WRAPPER}, .${
-                ClassName.TABLE_CELL_NODE_WRAPPER
-              }`,
-            ) || elem;
-          const { minWidth } = contentWidth(elem, elem);
-
-          // if the contents of the element are wider than the cell
-          // we resize the cell to the new min cell width.
-          // which should cater to the nowrap element and wrap others.
-          if (elemOrWrapper && elemOrWrapper.offsetWidth < minWidth) {
-            handleBreakoutContent(
-              view,
-              elemOrWrapper,
-              table.pos + 1,
-              minWidth,
-              table.node,
-            );
-          }
-        }
-      },
-    }),
     props: {
       attributes(state) {
         const pluginState = pluginKey.getState(state);
@@ -134,7 +93,7 @@ export function createPlugin(
         mousedown(view, event) {
           const { activeHandle, dragging } = pluginKey.getState(view.state);
           if (activeHandle > -1 && !dragging) {
-            handleMouseDown(view, event, cellMinWidth);
+            handleMouseDown(view, event, cellMinWidth, dynamicTextSizing);
             updateResizeHandle(view);
             return true;
           }
@@ -242,7 +201,7 @@ function createResizeHandle(tableRef: HTMLTableElement): HTMLDivElement | null {
   return resizeHandleRef;
 }
 
-function handleMouseDown(view, event, cellMinWidth) {
+function handleMouseDown(view, event, cellMinWidth, dynamicTextSizing) {
   const { state } = view;
   const { activeHandle } = pluginKey.getState(state);
 
@@ -260,7 +219,11 @@ function handleMouseDown(view, event, cellMinWidth) {
   const containerWidth = widthPluginKey.getState(view.state).width;
   const resizer = Resizer.fromDOM(view, dom, {
     minWidth: cellMinWidth,
-    maxSize: getLayoutSize(dom.getAttribute('data-layout'), containerWidth),
+    maxSize: getLayoutSize(
+      dom.getAttribute('data-layout'),
+      containerWidth,
+      dynamicTextSizing,
+    ),
     node: $cell.node(-1),
     start,
   });

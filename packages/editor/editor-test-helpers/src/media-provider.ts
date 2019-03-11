@@ -5,11 +5,10 @@ import {
   mediaPickerAuthProvider,
   defaultMediaPickerAuthProvider,
 } from '@atlaskit/media-test-helpers';
-import { MediaProvider, MediaStateManager } from '@atlaskit/editor-core';
+import { MediaProvider } from '@atlaskit/editor-core';
 
 export interface MediaProviderFactoryConfig {
   collectionName?: string;
-  stateManager?: MediaStateManager;
   dropzoneContainer?: HTMLElement;
   includeUploadContext?: boolean;
   includeUserAuthProvider?: boolean;
@@ -25,7 +24,6 @@ export function storyMediaProviderFactory(
 ) {
   const {
     collectionName,
-    stateManager,
     includeUploadContext,
     includeUserAuthProvider,
     useMediaPickerAuthProvider = true,
@@ -41,7 +39,6 @@ export function storyMediaProviderFactory(
 
   return Promise.resolve<MediaProvider>({
     featureFlags: {},
-    stateManager,
     uploadParams: { collection },
     viewContext: Promise.resolve<Context>(context),
     uploadContext:
@@ -52,10 +49,10 @@ export function storyMediaProviderFactory(
 }
 
 export type promisedString = Promise<string>;
-export type resolveFn = (...any) => any;
+export type resolveFn = (...v: any) => any;
 export type thumbnailStore = { [id: string]: promisedString | resolveFn };
 
-export function fileToBase64(blob) {
+export function fileToBase64(blob: Blob) {
   return new Promise((resolve, reject) => {
     const reader = new (window as any).FileReader();
     reader.onloadend = function() {
@@ -64,7 +61,7 @@ export function fileToBase64(blob) {
     reader.onabort = function() {
       reject('abort');
     };
-    reader.onerror = function(err) {
+    reader.onerror = function(err: ErrorEvent) {
       reject(err);
     };
     reader.readAsDataURL(blob);

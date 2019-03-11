@@ -52,6 +52,7 @@ export interface ColumnResizingPlugin {
   handleWidth?: number;
   cellMinWidth?: number;
   lastColumnResizable?: boolean;
+  dynamicTextSizing?: boolean;
 }
 
 export const TableDecorations = {

@@ -1,1 +1,0 @@
-- ED-6373: Fix position of breakout controls while scrolling

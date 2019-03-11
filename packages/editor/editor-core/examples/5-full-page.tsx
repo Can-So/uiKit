@@ -45,7 +45,6 @@ Wrapper.displayName = 'Wrapper';
 export const Content: any = styled.div`
   padding: 0 20px;
   height: 100%;
-  background: #fff;
   box-sizing: border-box;
 `;
 Content.displayName = 'Content';
@@ -167,6 +166,7 @@ class ExampleEditorComponent extends React.Component<
               }}
               allowTextAlignment={true}
               allowIndentation={true}
+              allowDynamicTextSizing={true}
               allowTemplatePlaceholders={{ allowInserting: true }}
               UNSAFE_cards={{
                 provider: Promise.resolve(cardProvider),

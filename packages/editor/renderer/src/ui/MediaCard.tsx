@@ -133,6 +133,9 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
     const isMobile = rendererAppearance === 'mobile';
     const shouldPlayInline =
       useInlinePlayer !== undefined ? useInlinePlayer : true;
+    const onCardClick =
+      eventHandlers && eventHandlers.media && eventHandlers.media.onClick;
+    const shouldOpenMediaViewer = !isMobile && !onCardClick;
 
     if (type === 'external') {
       return this.renderExternal();
@@ -168,13 +171,12 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
         identifier={identifier}
         context={context}
         dimensions={cardDimensions}
-        onClick={
-          eventHandlers && eventHandlers.media && eventHandlers.media.onClick
-        }
+        onClick={onCardClick}
         resizeMode={resizeMode}
         isLazy={!isMobile}
         disableOverlay={disableOverlay}
         useInlinePlayer={isMobile ? false : shouldPlayInline}
+        shouldOpenMediaViewer={shouldOpenMediaViewer}
       />
     );
   }

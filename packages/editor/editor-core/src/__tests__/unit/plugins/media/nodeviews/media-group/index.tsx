@@ -6,7 +6,6 @@ import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
-  DefaultMediaStateManager,
 } from '../../../../../../plugins/media/pm-plugins/main';
 import MediaGroup from '../../../../../../plugins/media/nodeviews/mediaGroup';
 
@@ -14,17 +13,14 @@ import { EditorAppearance } from '../../../../../../types';
 
 describe('nodeviews/mediaGroup', () => {
   let pluginState;
-  const stateManager = new DefaultMediaStateManager();
   const mediaNode = media({
     id: 'foo',
     type: 'file',
     collection: 'collection',
-    __key: '12345',
   })();
   const view = {} as EditorView;
   beforeEach(() => {
     pluginState = {} as MediaPluginState;
-    pluginState.stateManager = stateManager;
     pluginState.getMediaOptions = () => ({});
     pluginState.getMediaNodeState = () => ({});
     pluginState.mediaGroupNodes = {};

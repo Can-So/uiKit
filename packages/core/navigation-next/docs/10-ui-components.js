@@ -97,6 +97,30 @@ ${(
 
 ${<Hr />}
 
+${<H>GlobalNavigationSkeleton</H>}
+
+Renders a skeleton view to be used with the GlobalNavigation component.
+
+${(
+      <Example
+        packageName="@atlaskit/navigation-next"
+        Component={
+          require('./examples/ui-components/GlobalNavigationSkeleton').default
+        }
+        title="GlobalNavigationSkeleton"
+        source={require('!!raw-loader!./examples/ui-components/GlobalNavigationSkeleton')}
+      />
+    )}
+
+${(
+      <Props
+        heading="GlobalNavigationSkeleton props"
+        props={require('!!extract-react-types-loader!../src/components/presentational/GlobalNavigationSkeleton')}
+      />
+    )}
+
+${<Hr />}
+
 ${<H>GoToItem</H>}
 
 GoToItem is a special [Item](#item) that when clicked will cause a transition to the view specified by the 'goTo' prop. You will need to ensure that both the view you're
@@ -342,8 +366,6 @@ ${<H>SkeletonContainerView</H>}
 
 Renders a skeleton view. The \`LayoutManagerWithViewController\` will automatically render a skeleton when there is no active view data to display, so you should only need to use this component directly if you're using custom view rendering logic.
 
-This component takes no props.
-
 ${(
       <Example
         packageName="@atlaskit/navigation-next"
@@ -352,6 +374,13 @@ ${(
         }
         title="SkeletonContainerView"
         source={require('!!raw-loader!./examples/ui-components/SkeletonContainerView')}
+      />
+    )}
+
+${(
+      <Props
+        heading="SkeletonContainerView props"
+        props={require('!!extract-react-types-loader!../src/components/presentational/SkeletonContainerView')}
       />
     )}
 

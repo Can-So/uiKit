@@ -6,9 +6,11 @@ import {
 } from '../providers/jira-data-providers';
 import CommonDataProvider from '../providers/common-data-provider';
 import { resolveSwitcherLinks } from '../providers/resolve-switcher-links';
+import { Messages } from 'react-intl';
 
 interface JiraSwitcherProps {
   cloudId: string;
+  messages: Messages;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
 }
 

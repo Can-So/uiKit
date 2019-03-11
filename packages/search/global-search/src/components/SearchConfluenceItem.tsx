@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ResultData } from '@atlaskit/quick-search';
 import AdvancedSearchResult from './AdvancedSearchResult';
 import {
   getConfluenceAdvancedSearchLink,
@@ -13,6 +14,7 @@ export interface Props {
   showKeyboardLozenge?: boolean;
   analyticsData?: object;
   isCompact?: boolean;
+  onClick?: (resultData: ResultData) => void;
 }
 
 export default class SearchConfluenceItem extends React.Component<Props> {
@@ -41,6 +43,7 @@ export default class SearchConfluenceItem extends React.Component<Props> {
         showKeyboardLozenge={showKeyboardLozenge}
         analyticsData={analyticsData}
         isCompact={isCompact}
+        onClick={this.props.onClick}
       />
     );
   }

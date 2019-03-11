@@ -75,7 +75,7 @@ export type GlobalNavDrawerProps = {
   /** A callback function which will be fired when the notification drawer has finished its close transition. **/
   onNotificationDrawerCloseComplete?: (node: HTMLElement) => void,
 
-  /** Locale to be passed to the notification iFrame */
+  /** Locale to be passed to the notification iFrame*/
   locale?: string,
   /** Prop to let notification iframe know which product it's being rendered in*/
   product?: 'jira' | 'confluence',

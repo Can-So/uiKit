@@ -1,5 +1,21 @@
 # @atlaskit/media-image
 
+## 8.0.1
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/media-core@27.2.3
+  - @atlaskit/media-store@9.2.1
+  - @atlaskit/media-test-helpers@20.1.7
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/field-text@8.0.0
+  - @atlaskit/select@8.0.0
+  - @atlaskit/spinner@10.0.0
+  - @atlaskit/theme@8.0.0
+
+## 8.0.0
+- [major] [25952eca2f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25952eca2f):
+
+  - Adding upgrade guide docs to help consumers with the major bump
+
 ## 7.0.10
 - [patch] [f84de3bf0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f84de3bf0b):
 

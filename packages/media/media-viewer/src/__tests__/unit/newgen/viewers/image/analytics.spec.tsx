@@ -29,6 +29,9 @@ const imageItem: ProcessedFileState = {
   mediaType: 'image',
   mimeType: 'jpeg',
   artifacts: {},
+  representations: {
+    image: {},
+  },
 };
 
 export function createFixture(response: Promise<Blob>) {
