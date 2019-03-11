@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/docs": "^7.0.0",
     "@atlaskit/logo": "^10.0.0",
     "@atlaskit/select": "^8.0.0",
