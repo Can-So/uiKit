@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.1.2
+- [patch] [abb200b0b4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abb200b0b4):
+
+  - ED-6374: Switch to MutationObserver instead of rAF + nodeview update for handling breakout content inside a table cell.
+
 ## 103.1.1
 - [patch] [109158320c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/109158320c):
 
