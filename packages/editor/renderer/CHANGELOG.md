@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 41.4.0
+- [minor] [3a2836d6d7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a2836d6d7):
+
+  - move MediaViewer opening logic into Card by passing shouldOpenMediaViewer flag when there is no click handler defined
+
 ## 41.3.1
 - Updated dependencies [dbff4fdcf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dbff4fdcf9):
   - @atlaskit/editor-common@33.0.4

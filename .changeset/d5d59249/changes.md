@@ -1,1 +1,0 @@
-- move MediaViewer opening logic into Card by passing shouldOpenMediaViewer flag when there is no click handler defined

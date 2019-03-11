@@ -1,1 +1,0 @@
-- use ReactDOM.createPortal to render MediaViewer when shouldOpenMediaViewer=true
