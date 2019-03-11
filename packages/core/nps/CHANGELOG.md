@@ -1,5 +1,10 @@
 # @atlaskit/nps
 
+## 5.0.1
+- [patch] [147eb61bf6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/147eb61bf6):
+
+  - Internal changes. Updates tested example to be SSR ready.
+
 ## 5.0.0
 - [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 
