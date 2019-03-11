@@ -1,5 +1,10 @@
 # @atlaskit/media-editor
 
+## 29.1.3
+- [patch] [7b2510da6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b2510da6c):
+
+  - Revert "use esm instead of cjs in MediaEditor.js bundle"
+
 ## 29.1.2
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3
