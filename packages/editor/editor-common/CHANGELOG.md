@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 33.1.0
+- [minor] [6739aea208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6739aea208):
+
+  - Update editor-common and editor-core types
+
 ## 33.0.4
 - Updated dependencies [dbff4fdcf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dbff4fdcf9):
   - @atlaskit/profilecard@8.0.0

@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.4.0
+- [minor] [6739aea208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6739aea208):
+
+  - Update editor-common and editor-core types
+
 ## 103.3.0
 - [minor] [738f58ef9e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/738f58ef9e):
 
