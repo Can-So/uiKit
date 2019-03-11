@@ -64,8 +64,6 @@ export type UserPickerProps = {
   disableInput?: boolean;
   /** Override default email validation function. */
   isValidEmail?: EmailValidator;
-  flip?: boolean;
-  scheduleUpdate?: boolean;
 };
 
 export type PopupUserPickerProps = UserPickerProps & {

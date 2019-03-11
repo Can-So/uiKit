@@ -435,7 +435,6 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         menuMinWidth={menuMinWidth}
         menuPortalTarget={menuPortalTarget}
         disableInput={disableInput}
-        scheduleUpdate={this.props.scheduleUpdate}
         {...pickerProps}
       />
     );

@@ -1,11 +1,8 @@
 import memoizeOne from 'memoize-one';
+import { Target } from '../types';
 
 export const getModalProps = memoizeOne(
-  (
-    width: string | number,
-    target: (ref: any) => Element,
-    onFlip: Function,
-  ) => ({
+  (width: string | number, target: Target, onFlip: (data: any) => any) => ({
     searchThreshold: -1,
     controlShouldRenderValue: true,
     minMenuWidth: width,

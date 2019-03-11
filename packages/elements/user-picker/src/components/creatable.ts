@@ -40,11 +40,13 @@ const isOptionDisabled = (
   return false;
 };
 
-export const getCreatableProps = memoizeOne((isValidEmail?: EmailValidator) => ({
-  allowCreateWhileLoading: true,
-  createOptionPosition: 'first',
-  isValidNewOption: isValidNewOption(isValidEmail),
-  getNewOptionData,
-  formatCreateLabel,
-  isOptionDisabled: isOptionDisabled(isValidEmail),
-}));
+export const getCreatableProps = memoizeOne(
+  (isValidEmail?: EmailValidator) => ({
+    allowCreateWhileLoading: true,
+    createOptionPosition: 'first',
+    isValidNewOption: isValidNewOption(isValidEmail),
+    getNewOptionData,
+    formatCreateLabel,
+    isOptionDisabled: isOptionDisabled(isValidEmail),
+  }),
+);
