@@ -85,20 +85,17 @@ export class FileCard extends Component<FileCardProps, {}> {
   }
 
   private _getActions(): Array<CardAction> {
-    const { details } = this.props;
+    const { details, actions = [] } = this.props;
     if (!details) {
       return [];
     }
-    const actions = this.props.actions || [];
 
-    return actions.map((action: CardAction) => {
-      return {
-        ...action,
-        handler: () => {
-          action.handler({ type: 'file', details });
-        },
-      };
-    });
+    return actions.map((action: CardAction) => ({
+      ...action,
+      handler: () => {
+        action.handler({ type: 'file', details });
+      },
+    }));
   }
 
   private get isError(): boolean {
