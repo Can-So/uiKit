@@ -1,1 +1,0 @@
-- Remove presence from profilecard now that users cannot use Stride to control it
