@@ -5,6 +5,7 @@ import {
   analyticsAttributes,
   withAnalyticsContextData,
 } from '../utils/analytics';
+import { FadeIn } from './fade-in';
 
 const SectionContainer = styled.section`
   padding: ${gridSize()}px 0;
@@ -19,7 +20,7 @@ const SectionTitle = styled.h1`
 
 type SectionProps = {
   sectionId: string;
-  title: string;
+  title: React.ReactNode;
   children?: React.ReactNode;
 };
 
@@ -35,7 +36,9 @@ const Section = (props: SectionProps) => {
 
   return React.Children.count(children) ? (
     <SectionContainer>
-      <SectionTitle>{title}</SectionTitle>
+      <FadeIn>
+        <SectionTitle>{title}</SectionTitle>
+      </FadeIn>
       {children}
     </SectionContainer>
   ) : null;

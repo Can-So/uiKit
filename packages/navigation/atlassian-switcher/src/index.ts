@@ -3,3 +3,6 @@ export {
   default as ConfluenceSwitcher,
 } from './components/confluence-switcher';
 export { default } from './components/atlassian-switcher';
+export {
+  default as AtlassianSwitcherPrefetchTrigger,
+} from './components/prefetch-trigger';

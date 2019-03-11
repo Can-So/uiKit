@@ -1,66 +1,73 @@
 import { fetchJson, postJson } from '../utils/fetch';
-import asDataProvider, { DataProviderProps } from './as-data-provider';
-import { WithCloudId, RecentContainer } from '../types';
-import { LicenseInformationDataStructure } from './types';
+import asDataProvider from './as-data-provider';
+import {
+  LicenseInformationResponse,
+  Permissions,
+  RecentContainersResponse,
+  UserPermissionResponse,
+  WithCloudId,
+  XFlowSettingsResponse,
+} from '../types';
+import { cached } from '../utils/cached';
 
-export interface CloudIdDataProvider<T>
-  extends DataProviderProps<T>,
-    WithCloudId {}
-
-export interface RecentContainersDataStructure {
-  data: Array<RecentContainer>;
-}
-
+// Recent activity api
 export const RecentContainersProvider = asDataProvider(
   ({ cloudId }: WithCloudId) =>
-    fetchJson<RecentContainersDataStructure>(
+    fetchJson<RecentContainersResponse>(
       `/gateway/api/activity/api/client/recent/containers?cloudId=${cloudId}`,
     ),
 );
 
-export const LicenseInformationProvider = asDataProvider(
-  ({ cloudId }: WithCloudId) =>
-    fetchJson<LicenseInformationDataStructure>(
-      `/gateway/api/xflow/${cloudId}/license-information`,
-    ),
+// License information api
+const fetchLicenseInformation = cached(({ cloudId }: WithCloudId) =>
+  fetchJson<LicenseInformationResponse>(
+    `/gateway/api/xflow/${cloudId}/license-information`,
+  ),
 );
 
-export interface UserPermissionDataStructure {
-  permitted: boolean;
-}
+export const LicenseInformationProvider = asDataProvider(
+  ({ cloudId }: WithCloudId) => fetchLicenseInformation({ cloudId }),
+);
 
-export enum Permissions {
-  MANAGE = 'manage',
-  CAN_INVITE_USERS = 'invite-users',
-  ADD_PRODUCTS = 'add-products',
-}
+// Permissions api
+type FetchPermissionParamsType = WithCloudId & {
+  permissionId: Permissions;
+};
+const fetchPermission = cached(
+  ({ cloudId, permissionId }: FetchPermissionParamsType) =>
+    postJson<UserPermissionResponse>(`/gateway/api/permissions/permitted`, {
+      permissionId,
+      resourceId: `ari:cloud:platform::site/${cloudId}`,
+    }).then(permission => permission.permitted),
+);
 
 export const UserPermissionProvider = asDataProvider(
-  ({
-    cloudId,
-    permissionId,
-  }: WithCloudId & {
-    permissionId: Permissions;
-  }) =>
-    postJson<UserPermissionDataStructure>(
-      `/gateway/api/permissions/permitted`,
-      {
-        permissionId,
-        resourceId: `ari:cloud:platform::site/${cloudId}`,
-      },
-    ).then((permission): boolean => permission.permitted),
+  (params: FetchPermissionParamsType) => fetchPermission(params),
 );
 
-export interface XFlowSettings {
-  [s: string]: any;
-}
+// Xflow settings api
+const fetchXflowSettings = cached(({ cloudId }: WithCloudId) =>
+  fetchJson<XFlowSettingsResponse>(
+    `/gateway/api/site/${cloudId}/setting/xflow`,
+  ).then(xFlowSettings =>
+    xFlowSettings['product-suggestions-enabled'] !== undefined
+      ? xFlowSettings['product-suggestions-enabled']
+      : true,
+  ),
+);
 
 export const XFlowSettingsProvider = asDataProvider(
-  ({ cloudId }: WithCloudId) =>
-    fetchJson<XFlowSettings>(`/gateway/api/site/${cloudId}/setting/xflow`).then(
-      (xFlowSettings): boolean =>
-        xFlowSettings.hasOwnProperty('product-suggestions-enabled')
-          ? xFlowSettings['product-suggestions-enabled']
-          : true,
-    ),
+  ({ cloudId }: WithCloudId) => fetchXflowSettings({ cloudId }),
 );
+
+export const prefetchAll = ({ cloudId }: WithCloudId) => {
+  window.requestIdleCallback(() => {
+    fetchLicenseInformation.prefetch({ cloudId });
+    fetchXflowSettings.prefetch({ cloudId });
+    fetchPermission.prefetch({
+      cloudId,
+      permissionId: Permissions.ADD_PRODUCTS,
+    });
+    fetchPermission.prefetch({ cloudId, permissionId: Permissions.MANAGE });
+  });
+};

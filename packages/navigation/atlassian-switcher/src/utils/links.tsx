@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
 
@@ -9,7 +8,7 @@ import {
   JiraServiceDeskIcon,
   JiraCoreIcon,
 } from '@atlaskit/logo';
-import { LicenseInformationDataStructure } from '../providers/types';
+import { LicenseInformationResponse } from '../types';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
 import { CustomLink, RecentContainer } from '../types';
@@ -44,8 +43,6 @@ export type RecentItemType = SwitcherItemType & {
   type: string;
   description: string;
 };
-
-export type SuggestedProductItemType = SwitcherItemType | null;
 
 export const OBJECT_TYPE_TO_LABEL_MAP: StringDict = {
   'jira-project': 'Jira project',
@@ -105,14 +102,14 @@ export const getProductLink = (productKey: string): SwitcherItemType => ({
 });
 
 export const getProductIsActive = (
-  { products }: LicenseInformationDataStructure,
+  { products }: LicenseInformationResponse,
   productKey: string,
 ): boolean =>
   products.hasOwnProperty(productKey) &&
   products[productKey].state === ProductActivationStatus.ACTIVE;
 
 export const getLicensedProductLinks = (
-  licenseInformationData: LicenseInformationDataStructure,
+  licenseInformationData: LicenseInformationResponse,
 ): SwitcherItemType[] => {
   return [
     ProductKey.JIRA_SOFTWARE,
@@ -149,20 +146,18 @@ export const getAdministrationLinks = (
 };
 
 export const getSuggestedProductLink = (
-  licenseInformationData: LicenseInformationDataStructure | null,
-): SuggestedProductItemType => {
-  if (!licenseInformationData) {
-    return null;
-  }
+  licenseInformationData: LicenseInformationResponse,
+): SwitcherItemType[] => {
   if (!getProductIsActive(licenseInformationData, ProductKey.CONFLUENCE)) {
-    return getProductLink(ProductKey.CONFLUENCE);
+    return [getProductLink(ProductKey.CONFLUENCE)];
   }
   if (
     !getProductIsActive(licenseInformationData, ProductKey.JIRA_SERVICE_DESK)
   ) {
-    return getProductLink(ProductKey.JIRA_SERVICE_DESK);
+    return [getProductLink(ProductKey.JIRA_SERVICE_DESK)];
   }
-  return null;
+
+  return [];
 };
 
 export const getCustomLinkItems = (

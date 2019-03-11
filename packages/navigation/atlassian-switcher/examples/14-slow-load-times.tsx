@@ -18,7 +18,7 @@ class JiraSwitcherExample extends Component {
     mockEndpoints('jira', undefined, {
       containers: 1000,
       xflow: 500,
-      licenseInformation: 250,
+      licenseInformation: 1000,
       permitted: 2000,
       appswitcher: 1500,
     });

@@ -2,11 +2,12 @@ import * as React from 'react';
 import JiraSwitcher from './jira-switcher';
 import ConfluenceSwitcher from './confluence-switcher';
 import ErrorBoundary from './error-boundary';
+import { TriggerXFlowCallback } from '../types';
 
 interface AtlassianSwitcherProps {
   product: string;
   cloudId: string;
-  triggerXFlow: (productKey: string, sourceComponent: string) => void;
+  triggerXFlow: TriggerXFlowCallback;
 }
 
 const AtlassianSwitcher = ({

@@ -8,6 +8,7 @@ import {
   UI_EVENT_TYPE,
   SWITCHER_ITEM_SUBJECT,
 } from '../utils/analytics';
+import { FadeIn } from './fade-in';
 
 const itemTheme = {
   padding: {
@@ -26,15 +27,18 @@ type SwitcherItemProps = {
   description?: React.ReactNode;
   onClick?: Function;
   href?: string;
+  isDisabled?: boolean;
 };
 class SwitcherItem extends React.Component<SwitcherItemProps> {
   render() {
     const { icon, description, ...rest } = this.props;
 
     return (
-      <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
-        <Item elemBefore={icon} description={description} {...rest} />
-      </ThemeProvider>
+      <FadeIn>
+        <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
+          <Item elemBefore={icon} description={description} {...rest} />
+        </ThemeProvider>
+      </FadeIn>
     );
   }
 }

@@ -1,8 +1,11 @@
 import * as React from 'react';
 import Switcher from './switcher';
-import { CustomLinksProvider } from '../providers/jira-data-providers';
+import {
+  CustomLinksProvider,
+  MANAGE_HREF,
+} from '../providers/jira-data-providers';
 import CommonDataProvider from '../providers/common-data-provider';
-import { getSuggestedProductLink } from '../utils/links';
+import { resolveSwitcherLinks } from '../providers/resolve-switcher-links';
 
 interface JiraSwitcherProps {
   cloudId: string;
@@ -13,17 +16,20 @@ export default (props: JiraSwitcherProps) => (
   <CustomLinksProvider>
     {customLinks => (
       <CommonDataProvider cloudId={props.cloudId}>
-        {({ licenseInformation, ...dataProps }) => (
-          <Switcher
-            {...props}
-            {...dataProps}
-            licenseInformation={licenseInformation}
-            suggestedProductLink={getSuggestedProductLink(
-              licenseInformation.data,
-            )}
-            customLinks={customLinks}
-          />
-        )}
+        {({ licenseInformation, ...providerResults }) => {
+          const { showManageLink, ...switcherLinks } = resolveSwitcherLinks(
+            props.cloudId,
+            { licenseInformation, customLinks, ...providerResults },
+          );
+
+          return (
+            <Switcher
+              {...props}
+              {...switcherLinks}
+              manageLink={showManageLink ? MANAGE_HREF : undefined}
+            />
+          );
+        }}
       </CommonDataProvider>
     )}
   </CustomLinksProvider>

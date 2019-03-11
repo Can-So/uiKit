@@ -1,23 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
-
-const SkeletonWrapper = styled.div`
-  margin-top: 10px;
-`;
-
-const LineWrapper = styled.div`
-  display: flex;
-  padding: 8px;
-  align-items: center;
-`;
+import Section from './section';
+import SwitcherItem from './item';
 
 const IconSkeleton = styled.div`
   background-color: ${colors.N20};
   display: inline-block;
   width: 32px;
   height: 32px;
-  margin-right: 8px;
   border-radius: 8px;
 `;
 
@@ -30,21 +21,15 @@ const LineSkeleton = styled.div`
 `;
 
 export default () => (
-  <SkeletonWrapper>
-    <LineWrapper>
+  <Section sectionId="skeleton" title={<LineSkeleton />}>
+    <SwitcherItem icon={<IconSkeleton />} isDisabled>
       <LineSkeleton />
-    </LineWrapper>
-    <LineWrapper>
-      <IconSkeleton />
+    </SwitcherItem>
+    <SwitcherItem icon={<IconSkeleton />} isDisabled>
       <LineSkeleton />
-    </LineWrapper>
-    <LineWrapper>
-      <IconSkeleton />
+    </SwitcherItem>
+    <SwitcherItem icon={<IconSkeleton />} isDisabled>
       <LineSkeleton />
-    </LineWrapper>
-    <LineWrapper>
-      <IconSkeleton />
-      <LineSkeleton />
-    </LineWrapper>
-  </SkeletonWrapper>
+    </SwitcherItem>
+  </Section>
 );

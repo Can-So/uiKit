@@ -1,61 +1,81 @@
 import { Component, ReactNode } from 'react';
 import { isPromise } from '../utils/type-helper';
 
-export interface ChildrenProps<D> {
-  data: D | null;
-  isLoading: boolean;
-  error: any;
+export interface ResultComplete<T> {
+  status: 'complete';
+  data: T;
 }
+
+export interface ResultLoading {
+  status: 'loading';
+  data: null;
+}
+
+export interface ResultError {
+  status: 'error';
+  error: any;
+  data: null;
+}
+
+export const isComplete = <T>(
+  result: ProviderResult<T>,
+): result is ResultComplete<T> => result.status === 'complete';
+
+export const isError = <T>(result: ProviderResult<T>): result is ResultError =>
+  result.status === 'error';
+
+export const isLoading = <T>(
+  result: ProviderResult<T>,
+): result is ResultLoading => result.status === 'loading';
+
+export type ProviderResult<T> = ResultComplete<T> | ResultLoading | ResultError;
 
 interface PropsToPromiseMapper<P, D> {
   (props: P): Promise<D> | D;
 }
 
 export interface DataProviderProps<D> {
-  children: (props: ChildrenProps<D>) => ReactNode;
+  children: (props: ProviderResult<D> & { isLoading: boolean }) => ReactNode;
 }
 
 export default function<P, D>(
   mapPropsToPromise: PropsToPromiseMapper<Readonly<P>, D>,
 ) {
   return class extends Component<P & DataProviderProps<D>> {
-    state = {
-      isLoading: true,
+    state: ProviderResult<D> = {
+      status: 'loading',
       data: null,
-      error: null,
     };
 
     componentDidMount() {
       const dataSource = mapPropsToPromise(this.props);
+
       if (isPromise<D>(dataSource)) {
         dataSource
           .then(result => {
             this.setState({
               data: result,
-              isLoading: false,
+              status: 'complete',
             });
           })
           .catch(error => {
             this.setState({
               error,
-              isLoading: false,
+              status: 'error',
             });
           });
       } else {
         this.setState({
           data: dataSource,
-          isLoading: false,
+          status: 'complete',
         });
       }
     }
 
     render() {
-      const { isLoading, data, error } = this.state;
-      const { children } = this.props;
-      return children({
-        data,
-        isLoading,
-        error,
+      return this.props.children({
+        ...this.state,
+        isLoading: isLoading(this.state),
       });
     }
   };

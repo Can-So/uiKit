@@ -29,7 +29,10 @@
     "@atlaskit/logo": "^9.2.6",
     "@atlaskit/lozenge": "^6.2.4",
     "@atlaskit/theme": "^7.0.1",
-    "babel-runtime": "^6.26.0"
+    "@atlaskit/type-helpers": "^2.1.0",
+    "@types/es6-promise": "^3.3.0",
+    "lodash.throttle": "^4.1.1",
+    "tslib": "^1.8.0"
   },
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
