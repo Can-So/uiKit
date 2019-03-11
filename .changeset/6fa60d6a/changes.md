@@ -1,1 +1,0 @@
-- Add enableSplitJira to allow multiple jira link displayed if there are jira products
