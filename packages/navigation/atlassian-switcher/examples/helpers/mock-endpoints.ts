@@ -93,7 +93,7 @@ interface LoadTimes {
 export const REQUEST_SLOW = {
   containers: 2000,
   xflow: 1200,
-  licenseInformation: 800,
+  licenseInformation: 1000,
   permitted: 500,
   appswitcher: 1500,
 };

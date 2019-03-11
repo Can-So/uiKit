@@ -1,6 +1,7 @@
 interface Cached<T, A> {
   (a: A): Promise<T>;
   prefetch: (a: A) => Promise<T>;
+  reset: () => void;
 }
 
 export const cached = <T, A>(fn: (a: A) => Promise<T>): Cached<T, A> => {
@@ -30,6 +31,11 @@ export const cached = <T, A>(fn: (a: A) => Promise<T>): Cached<T, A> => {
     return populateCaches(a);
   };
 
+  const reset = () => {
+    promiseCache.clear();
+  };
+
   execute.prefetch = populateCaches;
+  execute.reset = reset;
   return execute;
 };

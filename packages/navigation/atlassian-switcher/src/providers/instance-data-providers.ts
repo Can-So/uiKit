@@ -71,3 +71,9 @@ export const prefetchAll = ({ cloudId }: WithCloudId) => {
     fetchPermission.prefetch({ cloudId, permissionId: Permissions.MANAGE });
   });
 };
+
+export const resetAll = () => {
+  fetchLicenseInformation.reset();
+  fetchXflowSettings.reset();
+  fetchPermission.reset();
+};
