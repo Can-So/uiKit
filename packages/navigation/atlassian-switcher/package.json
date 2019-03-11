@@ -30,7 +30,6 @@
     "@atlaskit/lozenge": "^6.2.4",
     "@atlaskit/theme": "^7.0.1",
     "@atlaskit/type-helpers": "^2.1.0",
-    "@types/es6-promise": "^3.3.0",
     "lodash.throttle": "^4.1.1",
     "tslib": "^1.8.0"
   },
