@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 9.2.2
+- [patch] [be479e2335](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be479e2335):
+
+  - fix link opening logic for view and edit mode.
+
 ## 9.2.1
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

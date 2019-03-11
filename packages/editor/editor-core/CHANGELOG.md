@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.1.4
+- [patch] [be479e2335](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be479e2335):
+
+  - fix link opening logic for view and edit mode.
+
 ## 103.1.3
 - [patch] [ed6ef51cfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed6ef51cfe):
 
