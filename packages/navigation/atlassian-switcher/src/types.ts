@@ -24,3 +24,7 @@ export enum Product {
   SITE_ADMIN = 'site-admin',
   TRUSTED_ADMIN = 'trusted-admin',
 }
+
+export type FeatureFlagProps = {
+  enableSplitJira: boolean;
+};
