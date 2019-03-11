@@ -3,24 +3,24 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 12975,
-      "gzipSize": 3855
+      "size": 12345,
+      "gzipSize": 3822
     }
   },
   {
     "id": "src.async",
     "name": "async",
     "stats": {
-      "size": 1681,
-      "gzipSize": 723
+      "size": 1679,
+      "gzipSize": 721
     }
   },
   {
     "id": "node_modules.main",
     "name": "node_modules [main]",
     "stats": {
-      "size": 54433,
-      "gzipSize": 9687
+      "size": 54413,
+      "gzipSize": 9671
     }
   },
   {
@@ -28,23 +28,23 @@
     "name": "node_modules [async]",
     "stats": {
       "size": 13708,
-      "gzipSize": 4672
+      "gzipSize": 4671
     }
   },
   {
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 67031,
-      "gzipSize": 13609
+      "size": 66406,
+      "gzipSize": 12968
     }
   },
   {
     "id": "combined.async",
     "name": "async",
     "stats": {
-      "size": 15329,
-      "gzipSize": 5199
+      "size": 15327,
+      "gzipSize": 5191
     }
   }
 ]
