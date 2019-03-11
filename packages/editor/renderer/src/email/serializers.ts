@@ -22,7 +22,7 @@ import text from './nodes/text';
 import unknownBlock from './nodes/unknown-block';
 
 import code from './marks/code';
-import em from './marks/strong';
+import em from './marks/em';
 import link from './marks/link';
 import strike from './marks/strike';
 import strong from './marks/strong';

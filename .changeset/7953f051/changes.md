@@ -1,0 +1,1 @@
+- email rendering - fixed a bug with em
