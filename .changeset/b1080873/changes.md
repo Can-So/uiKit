@@ -1,1 +1,0 @@
-- [ED-6325] Add forceContentValidation to array specs
