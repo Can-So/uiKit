@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.13.5
+- [patch] [4bb4f46a6f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4bb4f46a6f):
+
+  - ED-5603: fixed updating links on mobile
+
 ## 6.13.4
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3
