@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { defineMessages, FormattedMessage } from 'react-intl';
+import { defineMessages } from 'react-intl';
+import FormattedMessage from '../primitives/formatted-message';
+
 import IntlProvider from '../components/intl-provider';
 
 const messages = defineMessages({
