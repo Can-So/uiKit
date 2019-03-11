@@ -15,14 +15,14 @@ const cli = meow(
   `
     Usage
       $ node build/ci-scripts/get.changed.packages.since.master.js
- 
+
     Options
       --dependents='direct' Include "direct" dependent packages
 
-      --spaceDelimited      Only for the measure tool, change the output of changed packages script from an array to a space delimited output
+      --spaceDelimited      Change the output of changed packages script from an array to a space delimited output
 
-      --only='packages'     Only for the measure tool, target only 'packages' folder name
- 
+      --only='packages'     Target only 'packages' folder name
+
     Examples
       $ node build/ci-scripts/get.changed.packages.since.master.js --dependents='direct'
 
@@ -85,31 +85,31 @@ const displayChangedPackagesSinceMaster = async () => {
       ),
     );
     // Set is used to avoid the case of multiple changed packages with the same dependent packages.
-    const changedPackagesRelativePathsWithDependent = [
+    changedPackagesRelativePaths = [
       ...new Set(
         changedPackagesRelativePaths.concat(changedPackagesWithDependent),
       ),
     ];
-    console.log(JSON.stringify(changedPackagesRelativePathsWithDependent));
+  }
+
+  // Those exceptions scripts are related to the measure of the bundle size.
+  // This check if the `--only='folderName'` flag is set when using the measure tool.
+  if (cli.flags.only) {
+    const includedPattern = cli.flags.only;
+    // For example, if we need to `only` include the component 'packages' when measuring the package bundle size.
+    changedPackagesRelativePaths = changedPackagesRelativePaths.filter(pkg =>
+      pkg.includes(includedPattern),
+    );
+  }
+
+  // This check is only for the way of changed packages output is displayed:
+  // '--spaceDelimited' - using the measure tool, will return the changedPackages
+  // like 'packages/core/button packages/editor/editor-core ...'.
+  // Otherwise, the standard output will be ["packages/core/button", "packages/editor/editor-core", ...].
+  if (cli.flags.spaceDelimited) {
+    console.log(changedPackagesRelativePaths.join(' '));
   } else {
-    // Those exceptions scripts are related to the measure of the bundle size.
-    // This check if the `--only='folderName'` flag is set when using the measure tool.
-    if (cli.flags.only) {
-      const includedPattern = cli.flags.only;
-      // For example, if we need to `only` include the component 'packages' when measuring the package bundle size.
-      changedPackagesRelativePaths = changedPackagesRelativePaths.filter(pkg =>
-        pkg.includes(includedPattern),
-      );
-    }
-    // This check is only for the way of changed packages output is displayed:
-    // '--spaceDelimited' - using the measure tool, will return the changedPackages
-    // like 'packages/core/button packages/editor/editor-core ...'.
-    // Otherwise, the standard output will be ["packages/core/button", "packages/editor/editor-core", ...].
-    if (cli.flags.spaceDelimited) {
-      console.log(changedPackagesRelativePaths.join(' '));
-    } else {
-      console.log(JSON.stringify(changedPackagesRelativePaths));
-    }
+    console.log(JSON.stringify(changedPackagesRelativePaths));
   }
 };
 
