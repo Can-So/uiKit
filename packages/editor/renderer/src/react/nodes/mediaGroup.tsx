@@ -6,7 +6,11 @@ import {
   SizeEvent,
   ScrollEvent,
 } from '@atlaskit/media-filmstrip';
-import { EventHandlers, CardSurroundings } from '@atlaskit/editor-common';
+import {
+  EventHandlers,
+  CardSurroundings,
+  CardEventClickHandler,
+} from '@atlaskit/editor-common';
 import { Identifier } from '@atlaskit/media-core';
 import { MediaProps } from './media';
 
@@ -71,34 +75,37 @@ export default class MediaGroup extends PureComponent<
     } as MediaProps);
   }
 
+  onMediaClick = (
+    cardClickHandler: CardEventClickHandler,
+    child: ReactElement<MediaProps>,
+    surroundingItems: Identifier[],
+  ) => (event: CardEvent, analyticsEvent?: any) => {
+    const surroundings: CardSurroundings = {
+      collectionName: child.props.collection!,
+      list: surroundingItems,
+    };
+    cardClickHandler(event, surroundings, analyticsEvent);
+  };
+
   cloneFileCard(
     child: ReactElement<MediaProps>,
     surroundingItems: Identifier[],
   ) {
+    const cardClickHandler =
+      this.props &&
+      this.props.eventHandlers &&
+      this.props.eventHandlers.media &&
+      this.props.eventHandlers.media.onClick;
+    const onClick = cardClickHandler
+      ? this.onMediaClick(cardClickHandler, child, surroundingItems)
+      : undefined;
+
     return React.cloneElement(child, {
       useInlinePlayer: false,
       eventHandlers: {
         ...child.props.eventHandlers,
         media: {
-          onClick: (event: CardEvent, analyticsEvent?: any) => {
-            if (
-              !this.props ||
-              !this.props.eventHandlers ||
-              !this.props.eventHandlers.media ||
-              !this.props.eventHandlers.media.onClick
-            ) {
-              return;
-            }
-            const surroundings: CardSurroundings = {
-              collectionName: child.props.collection!,
-              list: surroundingItems,
-            };
-            this.props.eventHandlers.media.onClick(
-              event,
-              surroundings,
-              analyticsEvent,
-            );
-          },
+          onClick,
         },
       },
     } as MediaProps);
