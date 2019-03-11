@@ -34,6 +34,10 @@ class JiraSwitcherExample extends Component {
                 billingPeriod: 'ANNUAL',
                 state: 'ACTIVE',
               },
+              'jira-core.ondemand': {
+                billingPeriod: 'ANNUAL',
+                state: 'ACTIVE',
+              },
             },
           },
         };
