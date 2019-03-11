@@ -225,7 +225,7 @@ class ToolbarLists extends PureComponent<Props & InjectedIntlProps, State> {
     },
   );
 
-  private onItemActivated = ({ item }) => {
+  private onItemActivated = ({ item }: { item: any }) => {
     this.setState({ isDropdownOpen: false });
     switch (item.value.name) {
       case 'bullet_list':

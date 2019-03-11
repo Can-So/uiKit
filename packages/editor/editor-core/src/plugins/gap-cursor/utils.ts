@@ -28,7 +28,7 @@ const getDomNodeVerticalMargin = (
   let margin = 0;
   while (ref && ref.nodeType === 1) {
     const css = window.getComputedStyle(ref);
-    const curMargin = parseInt(css[`margin-${side}`], 10);
+    const curMargin = parseInt((css as any)[`margin-${side}`], 10);
     if (curMargin > margin) {
       margin = curMargin;
     }

@@ -1,7 +1,7 @@
 import { getCellsInTable, selectColumn, selectTable } from 'prosemirror-utils';
 import { CellSelection } from 'prosemirror-tables';
 import { Node as ProsemirrorNode, Fragment, Slice } from 'prosemirror-model';
-import { TextSelection } from 'prosemirror-state';
+import { TextSelection, Transaction } from 'prosemirror-state';
 // @ts-ignore
 import { __serializeForClipboard } from 'prosemirror-view';
 import {
@@ -29,16 +29,17 @@ import {
   transformSliceToRemoveOpenTable,
 } from '../../../../plugins/table/utils/paste';
 
-const array = (...args): Node[] => args.map(i => i(defaultSchema));
-const fragment = (...args) => Fragment.from(args.map(i => i(defaultSchema)));
+const array = (...args: any): Node[] => args.map((i: any) => i(defaultSchema));
+const fragment = (...args: any) =>
+  Fragment.from(args.map((i: any) => i(defaultSchema)));
 
 const selectCell = (cell: {
   pos: number;
   start: number;
   node: ProsemirrorNode;
-}) => tr => {
+}) => (tr: Transaction) => {
   const $anchor = tr.doc.resolve(cell.pos);
-  return tr.setSelection(new CellSelection($anchor, $anchor));
+  return tr.setSelection(new CellSelection($anchor, $anchor) as any);
 };
 
 describe('table plugin', () => {

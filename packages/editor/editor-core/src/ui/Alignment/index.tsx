@@ -4,14 +4,15 @@ import AlignmentButton from './AlignmentButton';
 
 import { AlignmentWrapper } from './styles';
 import { iconMap } from '../../plugins/alignment/ui/ToolbarAlignment';
+import { AlignmentState } from '../../plugins/alignment/pm-plugins/main';
 
 export interface Props {
   selectedAlignment?: string;
-  onClick: (value: string) => void;
+  onClick: (value: AlignmentState) => void;
   className?: string;
 }
 
-const alignmentOptions = [
+const alignmentOptions: Array<{ title: string; value: AlignmentState }> = [
   { title: 'Align left', value: 'start' },
   { title: 'Align center', value: 'center' },
   { title: 'Align right', value: 'end' },

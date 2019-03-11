@@ -4,7 +4,7 @@ import { Node as PmNode } from 'prosemirror-model';
 import { EditorView, NodeView } from 'prosemirror-view';
 import { setCellAttrs } from '@atlaskit/adf-schema';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import ReactNodeView from '../../../nodeviews/ReactNodeView';
+import ReactNodeView, { ForwardRef } from '../../../nodeviews/ReactNodeView';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import ToolbarButton from '../../../ui/ToolbarButton';
 import WithPluginState from '../../../ui/WithPluginState';
@@ -42,7 +42,7 @@ export type CellProps = {
 };
 
 class Cell extends React.Component<CellProps & InjectedIntlProps> {
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: CellProps & InjectedIntlProps) {
     return (
       this.props.withCursor !== nextProps.withCursor ||
       this.props.isResizing !== nextProps.isResizing ||
@@ -109,17 +109,18 @@ class CellView extends ReactNodeView {
     return { dom };
   }
 
-  setDomAttrs(node) {
+  setDomAttrs(node: PmNode) {
     const { cell } = this;
     if (cell) {
       const attrs = setCellAttrs(node, cell);
-      Object.keys(attrs).forEach(attr => {
-        cell.setAttribute(attr, attrs[attr]);
+      (Object.keys(attrs) as Array<keyof typeof attrs>).forEach(attr => {
+        let attrValue = attrs[attr];
+        cell.setAttribute(attr, attrValue as any);
       });
     }
   }
 
-  render(props, forwardRef) {
+  render(props: CellViewProps, forwardRef: ForwardRef) {
     // nodeview does not re-render on selection changes
     // so we trigger render manually to hide/show contextual menu button when `targetCellPosition` is updated
     return (
@@ -171,7 +172,7 @@ class CellView extends ReactNodeView {
 export const createCellView = (
   portalProviderAPI: PortalProviderAPI,
   appearance?: EditorAppearance,
-) => (node, view, getPos): NodeView => {
+) => (node: PmNode, view: EditorView, getPos: () => number): NodeView => {
   return new CellView({
     node,
     view,

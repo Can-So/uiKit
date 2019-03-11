@@ -19,9 +19,9 @@ describe('analytics', () => {
   };
 
   describe('fireAnalyticsEvent', () => {
-    let mockFire;
-    let mockCreateAnalyticsEvent;
-    let triggerAnalyticsEvent;
+    let mockFire: jest.Mock;
+    let mockCreateAnalyticsEvent: jest.Mock;
+    let triggerAnalyticsEvent: any;
 
     beforeEach(() => {
       mockFire = jest.fn();

@@ -135,11 +135,11 @@ Selection.jsonID(JSON_ID, GapCursorSelection);
 export class GapBookmark {
   constructor(private readonly pos: number) {}
 
-  map(mapping) {
+  map(mapping: any) {
     return new GapBookmark(mapping.map(this.pos));
   }
 
-  resolve(doc) {
+  resolve(doc: PMNode): GapCursorSelection | Selection {
     const $pos = doc.resolve(this.pos);
     return GapCursorSelection.valid($pos)
       ? new GapCursorSelection($pos)

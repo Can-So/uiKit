@@ -46,7 +46,7 @@ const getBlockNodeContent = (
   const { content } = node;
   if (content[0].isBlock) {
     // children are block nodes
-    let prevNode;
+    let prevNode: PMNode;
     blockNodeContent = content.map(node => {
       pos += prevNode ? prevNode.nodeSize : 1;
       prevNode = node;

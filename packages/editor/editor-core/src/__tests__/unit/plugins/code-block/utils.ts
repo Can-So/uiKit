@@ -9,8 +9,8 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { transformSliceToJoinAdjacentCodeBlocks } from '../../../../plugins/code-block/utils';
 
-const fragment = (...args) =>
-  Fragment.from(args.map(i => clean(i)(defaultSchema)) as Node[]);
+const fragment = (...args: any) =>
+  Fragment.from(args.map((i: any) => clean(i)(defaultSchema)) as Node[]);
 
 describe('codeBlock utils', () => {
   describe('transformSliceToJoinAdjacentCodeBlocks', () => {

@@ -18,7 +18,7 @@ export interface Props {
 }
 
 // we ignore all of the clicks made inside <div class="ak-editor-content-area" /> (but not clicks on the node itself)
-const insideContentArea = (ref: HTMLElement): boolean => {
+const insideContentArea = (ref: HTMLElement | null): boolean => {
   while (ref) {
     if (ref.classList && ref.classList.contains('ak-editor-content-area')) {
       return true;
@@ -29,28 +29,26 @@ const insideContentArea = (ref: HTMLElement): boolean => {
 };
 
 export default class ClickAreaBlock extends React.Component<Props> {
-  private handleClick = event => {
+  private handleClick = (event: React.MouseEvent<any>) => {
     const { editorView: view } = this.props;
     const contentArea = event.currentTarget.querySelector(
       '.ak-editor-content-area',
     );
     const editorFocused = view!.hasFocus();
+    const target = event.target as HTMLElement;
 
     // @see https://product-fabric.atlassian.net/browse/ED-4287
     // click event gets triggered twice on a checkbox (on <label> first and then on <input>)
     // by the time it gets triggered on input, PM already re-renders nodeView and detaches it from DOM
     // which doesn't pass the check !contentArea.contains(event.target)
-    const isInputClicked = event.target.nodeName === 'INPUT';
+    const isInputClicked = target.nodeName === 'INPUT';
     // @see ED-5126
-    const isPopupClicked = !!closestElement(
-      event.target,
-      '[data-editor-popup]',
-    );
+    const isPopupClicked = !!closestElement(target, '[data-editor-popup]');
     // Fixes issue when using a textarea for editor title in full page editor doesn't let user focus it.
-    const isTextAreaClicked = event.target.nodeName === 'TEXTAREA';
+    const isTextAreaClicked = target.nodeName === 'TEXTAREA';
     if (
       (!contentArea ||
-        !insideContentArea(event.target.parentNode) ||
+        !insideContentArea(target.parentNode as HTMLElement | null) ||
         editorFocused === false) &&
       !isInputClicked &&
       !isTextAreaClicked &&

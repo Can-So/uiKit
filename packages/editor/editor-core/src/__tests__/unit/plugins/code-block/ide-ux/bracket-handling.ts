@@ -5,7 +5,14 @@ import {
 } from '../../../../../plugins/code-block/ide-ux/bracket-handling';
 
 describe('IDE UX - Bracket handling', () => {
-  const forEachBracketPair = fn =>
+  const forEachBracketPair = (
+    fn: (
+      left: string,
+      right: string,
+      differentLeft: string,
+      differentRight: string,
+    ) => any,
+  ) =>
     [
       { left: '{', right: '}' },
       { left: '[', right: ']' },

@@ -209,7 +209,7 @@ export const copyOptionalAttrsFromMediaState = (
     .filter(isOptionalAttr)
     .forEach(key => {
       const mediaStateKey = key.substring(2);
-      const attrValue = mediaState[mediaStateKey];
+      const attrValue = mediaState[mediaStateKey as keyof typeof mediaState];
       if (attrValue !== undefined) {
         node.attrs[key] = attrValue;
       }

@@ -24,7 +24,7 @@ import { pluginKey as cardPluginKey } from '../../../../plugins/card/pm-plugins/
 describe('hyperlink commands', () => {
   const createEditor = createEditorFactory();
   const cardProvider = new EditorTestCardProvider();
-  const editor = doc =>
+  const editor = (doc: any) =>
     createEditor({
       doc,
       editorProps: {

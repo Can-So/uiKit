@@ -32,7 +32,13 @@ const quickInsertItem = (
   listType: TaskDecisionListType,
 ): Transaction => {
   const { list, item } = getListTypes(listType, state.schema);
-  const addItem = ({ listLocalId, itemLocalId }) =>
+  const addItem = ({
+    listLocalId,
+    itemLocalId,
+  }: {
+    listLocalId?: string;
+    itemLocalId?: string;
+  }) =>
     insert(
       list.createChecked(
         { localId: listLocalId },

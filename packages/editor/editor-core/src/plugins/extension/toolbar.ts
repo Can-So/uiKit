@@ -1,5 +1,7 @@
-import { defineMessages } from 'react-intl';
+import { defineMessages, InjectedIntl } from 'react-intl';
 import { hasParentNodeOfType } from 'prosemirror-utils';
+import { EditorState } from 'prosemirror-state';
+import { Node as PMNode } from 'prosemirror-model';
 
 import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
 import EditIcon from '@atlaskit/icon/glyph/editor/edit';
@@ -29,7 +31,10 @@ export const messages = defineMessages({
   },
 });
 
-const isLayoutSupported = (state, selectedExtNode) => {
+const isLayoutSupported = (
+  state: EditorState,
+  selectedExtNode: { pos: number; node: PMNode },
+) => {
   const {
     schema: {
       nodes: { bodiedExtension, extension, layoutSection, table },
@@ -50,9 +55,9 @@ const isLayoutSupported = (state, selectedExtNode) => {
 };
 
 const breakoutOptions = (
-  state,
-  formatMessage,
-  extensionState,
+  state: EditorState,
+  formatMessage: InjectedIntl['formatMessage'],
+  extensionState: ExtensionState,
 ): Array<FloatingToolbarItem<Command>> => {
   const { layout, allowBreakout, node } = extensionState;
   return allowBreakout && isLayoutSupported(state, node)

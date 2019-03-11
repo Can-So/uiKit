@@ -2,7 +2,7 @@ import { keymap } from 'prosemirror-keymap';
 import { EditorState, Plugin, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { analyticsService } from '../../analytics';
-import { EditorPlugin } from '../../types';
+import { EditorPlugin, CommandDispatch } from '../../types';
 import {
   analyticsEventKey,
   AnalyticsEventPayload,
@@ -13,6 +13,7 @@ import {
   ACTION_SUBJECT_ID,
 } from '../../plugins/analytics';
 import { Dispatch } from '../../event-dispatcher';
+import { ResolvedPos } from 'prosemirror-model';
 
 export function createPlugin(
   eventDispatch: Dispatch,
@@ -23,7 +24,11 @@ export function createPlugin(
   }
 
   return keymap({
-    Enter(state: EditorState, dispatch: (tr) => void, editorView: EditorView) {
+    Enter(
+      state: EditorState,
+      _dispatch: CommandDispatch,
+      editorView: EditorView,
+    ) {
       if (canSaveOnEnter(editorView)) {
         eventDispatch(analyticsEventKey, analyticsPayload(state));
         analyticsService.trackEvent('atlassian.editor.stop.submit');
@@ -46,7 +51,7 @@ function canSaveOnEnter(editorView: EditorView) {
   );
 }
 
-function isEmptyAtCursor($cursor) {
+function isEmptyAtCursor($cursor: ResolvedPos<any>) {
   const { content } = $cursor.parent;
   return !(content && content.size);
 }

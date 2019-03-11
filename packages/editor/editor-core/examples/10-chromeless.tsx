@@ -8,7 +8,9 @@ import WithEditorActions from '../src/ui/WithEditorActions';
 import ToolsDrawer from '../example-helpers/ToolsDrawer';
 
 const SAVE_ACTION = () => console.log('Save');
-const analyticsHandler = (actionName, props) => console.log(actionName, props);
+const analyticsHandler = (actionName: string, props?: {}) =>
+  console.log(actionName, props);
+
 const exampleDocument = {
   version: 1,
   type: 'doc',
@@ -59,7 +61,7 @@ export default function Example() {
             taskDecisionProvider,
             contextIdentifierProvider,
             onChange,
-          }) => (
+          }: any) => (
             <Editor
               appearance="chromeless"
               analyticsHandler={analyticsHandler}

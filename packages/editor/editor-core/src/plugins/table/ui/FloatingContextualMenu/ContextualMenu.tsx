@@ -114,7 +114,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     );
   }
 
-  private handleSubMenuRef = ref => {
+  private handleSubMenuRef = (ref: HTMLDivElement | null) => {
     const { boundariesElement } = this.props;
 
     if (!(boundariesElement && ref)) {
@@ -232,7 +232,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     return items.length ? [{ items }] : null;
   };
 
-  private onMenuItemActivated = ({ item }) => {
+  private onMenuItemActivated = ({ item }: { item: any }) => {
     const {
       editorView,
       columnSelectionRect,
@@ -305,7 +305,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     }
   };
 
-  private handleOpenChange = ({ isOpen }) => {
+  private handleOpenChange = () => {
     const {
       editorView: { state, dispatch },
     } = this.props;
@@ -313,7 +313,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     this.setState({ isSubmenuOpen: false });
   };
 
-  private handleItemMouseEnter = ({ item }) => {
+  private handleItemMouseEnter = ({ item }: { item: any }) => {
     const {
       editorView: { state, dispatch },
       columnSelectionRect,
@@ -340,7 +340,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     }
   };
 
-  private handleItemMouseLeave = ({ item }) => {
+  private handleItemMouseLeave = ({ item }: { item: any }) => {
     const { state, dispatch } = this.props.editorView;
     if (item.value.name === 'background') {
       this.closeSubmenu();
@@ -361,7 +361,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
 
   private setColor = withAnalytics(
     'atlassian.editor.format.table.backgroundColor.button',
-    color => {
+    (color: string) => {
       const { targetCellPosition, editorView } = this.props;
       const { state, dispatch } = editorView;
       setMultipleCellAttrs({ background: color }, targetCellPosition)(

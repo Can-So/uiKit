@@ -6,6 +6,7 @@ import {
 } from 'prosemirror-utils';
 
 import codeBlockNodeView from '../nodeviews/code-block';
+import { CommandDispatch, PMPluginFactoryParams } from '../../../types';
 
 export type CodeBlockState = {
   element?: HTMLElement;
@@ -17,7 +18,7 @@ export const getPluginState = (state: EditorState): CodeBlockState =>
 
 export const setPluginState = (stateProps: Object) => (
   state: EditorState,
-  dispatch: (tr) => void,
+  dispatch: CommandDispatch,
 ): boolean => {
   const pluginState = getPluginState(state);
   dispatch(
@@ -37,7 +38,7 @@ export const createPlugin = ({
   portalProviderAPI,
   dispatch,
   providerFactory,
-}) =>
+}: PMPluginFactoryParams) =>
   new Plugin({
     state: {
       init(config, state: EditorState): CodeBlockState {

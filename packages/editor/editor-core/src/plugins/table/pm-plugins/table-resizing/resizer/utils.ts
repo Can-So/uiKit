@@ -4,7 +4,7 @@ import { Node as PMNode } from 'prosemirror-model';
 import ColumnState from './columnState';
 
 export interface ColIdxPair {
-  col: ColumnState[];
+  col: ColumnState;
   idx: number;
 }
 
@@ -14,7 +14,7 @@ export const makeColIdxPair = (cols: ColumnState[]) => {
   });
 };
 
-export const findFreeCol = (colIdxObj, direction) => {
+export const findFreeCol = (colIdxObj: Array<ColIdxPair>) => {
   if (colIdxObj.length === 0) {
     return null;
   }
@@ -34,7 +34,10 @@ export const findFreeCol = (colIdxObj, direction) => {
   return freeIdx;
 };
 
-export const findNextFreeCol = (colIdxObj, direction: number): number => {
+export const findNextFreeCol = (
+  colIdxObj: Array<ColIdxPair>,
+  direction: number,
+): number => {
   if (colIdxObj.length === 0) {
     return -1;
   }

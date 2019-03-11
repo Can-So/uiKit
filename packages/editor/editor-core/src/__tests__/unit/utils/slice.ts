@@ -2,8 +2,8 @@ import { Fragment, Node } from 'prosemirror-model';
 import { p, defaultSchema, strong, clean } from '@atlaskit/editor-test-helpers';
 import { mapFragment } from '../../../utils/slice';
 
-const fragment = (...args) =>
-  Fragment.from(args.map(i => clean(i)(defaultSchema)) as Node[]);
+const fragment = (...args: any) =>
+  Fragment.from(args.map((i: any) => clean(i)(defaultSchema)) as Node[]);
 
 describe('@atlaskit/editor-core slice utils', () => {
   describe('mapFragment', () => {
@@ -39,7 +39,7 @@ describe('@atlaskit/editor-core slice utils', () => {
 
     it('should allow replacing one node with multiple nodes', () => {
       const content = fragment(p('content'));
-      const replaceMultiple = i =>
+      const replaceMultiple = (i: Node) =>
         [p('start'), p('end')].map(i => clean(i)(defaultSchema)) as Node[];
       expect(mapFragment(content, replaceMultiple)).toEqual(
         fragment(p('start'), p('end')),

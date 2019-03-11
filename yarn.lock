@@ -1521,6 +1521,15 @@
   version "15.5.2"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.2.tgz#3c6b8dceb2906cc87fe4358e809f9d20c8d59be1"
 
+"@types/prosemirror-collab@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/prosemirror-collab/-/prosemirror-collab-1.0.2.tgz#be5b8ae8821262174ad6fd0f4a53fb10acfc848a"
+  integrity sha512-m6QwhBPJ28FhaubopUwhAM9hF/+cNcLDq5cD/5xfIEYlbuzRS8Hm4npwvd8W7r9qQHVTnroA3lDrB9oo20zpHA==
+  dependencies:
+    "@types/prosemirror-model" "*"
+    "@types/prosemirror-state" "*"
+    "@types/prosemirror-transform" "*"
+
 "@types/prosemirror-commands@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/prosemirror-commands/-/prosemirror-commands-1.0.1.tgz#e23f75629d90eef8c25132257b1ea1c5f978db9e"

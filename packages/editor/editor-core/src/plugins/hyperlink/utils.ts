@@ -62,7 +62,11 @@ export class LinkMatcher {
 /**
  * Adds protocol to url if needed.
  */
-export function normalizeUrl(url: string) {
+export function normalizeUrl(url?: string | null) {
+  if (!url) {
+    return '';
+  }
+
   if (LINK_REGEXP.test(url)) {
     return url;
   }

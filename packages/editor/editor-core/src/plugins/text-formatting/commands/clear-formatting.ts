@@ -20,7 +20,7 @@ export const FORMATTING_MARK_TYPES = [
   'subsup',
 ];
 
-const formatTypes = {
+const formatTypes: Record<string, string> = {
   em: ACTION_SUBJECT_ID.FORMAT_ITALIC,
   code: ACTION_SUBJECT_ID.FORMAT_CODE,
   strike: ACTION_SUBJECT_ID.FORMAT_STRIKE,

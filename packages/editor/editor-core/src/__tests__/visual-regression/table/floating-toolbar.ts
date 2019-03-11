@@ -10,7 +10,7 @@ import {
 
 // Unskip in ED-6470
 describe.skip('Table floating toolbar:fullpage', () => {
-  let page;
+  let page: any;
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;

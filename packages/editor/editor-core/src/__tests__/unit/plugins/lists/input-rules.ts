@@ -9,7 +9,7 @@ import {
   ul,
   hardBreak,
 } from '@atlaskit/editor-test-helpers';
-import { analyticsService } from '../../../../analytics';
+import { analyticsService, AnalyticsHandler } from '../../../../analytics';
 import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import { EditorView } from 'prosemirror-view';
@@ -18,21 +18,24 @@ import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types'
 describe('inputrules', () => {
   const createEditor = createEditorFactory();
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
-  let trackEvent;
+  let trackEvent: jest.SpyInstance<AnalyticsHandler>;
 
   const editor = (doc: any) => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
     return createEditor({
       doc,
       editorPlugins: [listPlugin, codeBlockPlugin()],
-      editorProps: { analyticsHandler: trackEvent, allowAnalyticsGASV3: true },
+      editorProps: {
+        analyticsHandler: trackEvent as any,
+        allowAnalyticsGASV3: true,
+      },
       createAnalyticsEvent,
     });
   };
 
   beforeEach(() => {
     trackEvent = jest.fn();
-    analyticsService.trackEvent = trackEvent;
+    analyticsService.trackEvent = trackEvent as any;
   });
 
   describe('bullet list rule', () => {

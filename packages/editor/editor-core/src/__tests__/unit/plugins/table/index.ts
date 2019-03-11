@@ -1,3 +1,4 @@
+import { TextSelection } from 'prosemirror-state';
 import { CellSelection, TableMap } from 'prosemirror-tables';
 import { selectRow, selectColumn, selectTable } from 'prosemirror-utils';
 import {
@@ -50,14 +51,14 @@ import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { mediaPlugin } from '../../../../plugins';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import listPlugin from '../../../../plugins/lists';
-import { TextSelection } from 'prosemirror-state';
+import { AnalyticsHandler } from '../../../../analytics';
 
 describe('table plugin', () => {
   const createEditor = createEditorFactory<TablePluginState>();
 
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
-  const editor = (doc: any, trackEvent = () => {}) => {
+  const editor = (doc: any, trackEvent: AnalyticsHandler = () => {}) => {
     const tableOptions = {
       allowNumberColumn: true,
       allowHeaderRow: true,
@@ -84,7 +85,7 @@ describe('table plugin', () => {
     });
   };
 
-  let trackEvent;
+  let trackEvent: AnalyticsHandler;
   beforeEach(() => {
     trackEvent = jest.fn();
   });

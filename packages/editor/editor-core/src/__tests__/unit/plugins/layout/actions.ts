@@ -12,7 +12,7 @@ import {
 
 describe('layout actions', () => {
   const createEditor = createEditorFactory();
-  const editor = doc =>
+  const editor = (doc: any) =>
     createEditor({ doc, editorProps: { allowLayouts: true } });
 
   describe('#setActiveLayoutType', () => {

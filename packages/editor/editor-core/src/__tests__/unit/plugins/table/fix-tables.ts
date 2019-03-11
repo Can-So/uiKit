@@ -17,6 +17,7 @@ import tablesPlugin from '../../../../plugins/table';
 
 describe('fix tables', () => {
   const createEditor = createEditorFactory<TablePluginState>();
+  // @ts-ignore
   global['fetch'] = jest.fn();
 
   const editor = (doc: any) => {

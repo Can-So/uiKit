@@ -55,15 +55,15 @@ function createEditorWindowBindings(win: Window) {
   class EditorWithState extends Editor {
     onEditorCreated(instance: EditorInstance) {
       super.onEditorCreated(instance);
-      window['__editorView'] = instance.view;
+      (window as any)['__editorView'] = instance.view;
     }
     onEditorDestroyed(instance: EditorInstance) {
       super.onEditorDestroyed(instance);
-      window['__editorView'] = undefined;
+      (window as any)['__editorView'] = undefined;
     }
   }
 
-  window['__mountEditor'] = (props: EditorProps = {}) => {
+  (window as any)['__mountEditor'] = (props: EditorProps = {}) => {
     const target = document.getElementById('editor-container');
 
     if (!target) {

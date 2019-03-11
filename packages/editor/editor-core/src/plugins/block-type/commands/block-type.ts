@@ -1,5 +1,5 @@
 import { EditorState, Selection, TextSelection } from 'prosemirror-state';
-import { Node as PMNode } from 'prosemirror-model';
+import { Node as PMNode, NodeType } from 'prosemirror-model';
 import { findWrapping } from 'prosemirror-transform';
 import { Command } from '../../../types';
 import {
@@ -177,7 +177,7 @@ export const insertBlockTypesWithAnalytics = (
  * 2. If current block can not be wrapped inside wrapping block it will create a new block below selection,
  *  and set selection on it.
  */
-function wrapSelectionIn(type): Command {
+function wrapSelectionIn(type: NodeType<any>): Command {
   return function(state: EditorState, dispatch) {
     let { tr } = state;
     const { $from, $to } = state.selection;
@@ -197,7 +197,7 @@ function wrapSelectionIn(type): Command {
       tr.replaceRangeWith(
         $to.pos + 1,
         $to.pos + 1,
-        type.createAndFill({}, paragraph.create()),
+        type.createAndFill({}, paragraph.create())!,
       );
       tr.setSelection(Selection.near(tr.doc.resolve(state.selection.to + 1)));
     }

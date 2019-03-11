@@ -33,7 +33,10 @@ export const messages = defineMessages({
   },
 });
 
-const showTextToolbar = (text, pos): Array<FloatingToolbarItem<Command>> => {
+const showTextToolbar = (
+  text: string,
+  pos: number,
+): Array<FloatingToolbarItem<Command>> => {
   return [
     {
       type: 'input',
@@ -45,8 +48,8 @@ const showTextToolbar = (text, pos): Array<FloatingToolbarItem<Command>> => {
 };
 
 const showLinkEditToolbar = (
-  link,
-  pos,
+  link: string | undefined,
+  pos: number,
 ): Array<FloatingToolbarItem<Command>> => {
   return [
     {
@@ -59,11 +62,15 @@ const showLinkEditToolbar = (
   ];
 };
 
-const getToolbarToShow = (link, text, pos) => {
+const getToolbarToShow = (
+  link: string,
+  text: string | undefined | null,
+  pos: number,
+) => {
   const isLinkTextTheSameAsTheLinkUrl = link === normalizeUrl(text);
 
   return isLinkTextTheSameAsTheLinkUrl
-    ? showTextToolbar(text, pos)
+    ? showTextToolbar(text || '', pos)
     : showLinkEditToolbar(link, pos);
 };
 

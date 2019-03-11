@@ -28,6 +28,7 @@ import {
   insertText,
   sendKeyToPm,
   mountWithIntl,
+  Refs,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -892,7 +893,7 @@ describe('Media plugin', () => {
     const getWidgetDom = (editorView: EditorView): Node | null =>
       (editorView as any).docView.dom.querySelector('.ProseMirror-widget');
 
-    let dropzoneContainer;
+    let dropzoneContainer: HTMLElement | undefined;
 
     beforeEach(() => {
       dropzoneContainer = document.createElement('div');
@@ -915,13 +916,13 @@ describe('Media plugin', () => {
       await sleep(0);
       expect(getWidgetDom(editorView)).toBeNull();
 
-      dropzoneContainer.dispatchEvent(createDragOverOrLeaveEvent('dragover'));
+      dropzoneContainer!.dispatchEvent(createDragOverOrLeaveEvent('dragover'));
       const dragZoneDom = getWidgetDom(editorView);
       expect(dragZoneDom).toBeDefined();
       expect(dragZoneDom!.previousSibling!.textContent).toEqual('hello');
       expect(dragZoneDom!.nextSibling!.textContent).toEqual(' world');
 
-      dropzoneContainer.dispatchEvent(createDragOverOrLeaveEvent('dragleave'));
+      dropzoneContainer!.dispatchEvent(createDragOverOrLeaveEvent('dragleave'));
       // MediaPicker DropZone has a 50ms timeout on dragleave event, so we have to wait for at least 50ms
       await sleep(50);
       expect(getWidgetDom(editorView)).toBeNull();
@@ -940,7 +941,7 @@ describe('Media plugin', () => {
       await sleep(0);
       expect(getWidgetDom(editorView)).toBeNull();
 
-      dropzoneContainer.dispatchEvent(createDragOverOrLeaveEvent('dragover'));
+      dropzoneContainer!.dispatchEvent(createDragOverOrLeaveEvent('dragover'));
       const dragZoneDom = getWidgetDom(editorView);
       expect(dragZoneDom).toBeDefined();
       expect(dragZoneDom!.previousSibling!.textContent).toEqual(
@@ -948,7 +949,7 @@ describe('Media plugin', () => {
       );
       expect(dragZoneDom!.nextSibling!.textContent).toEqual('');
 
-      dropzoneContainer.dispatchEvent(createDragOverOrLeaveEvent('dragleave'));
+      dropzoneContainer!.dispatchEvent(createDragOverOrLeaveEvent('dragleave'));
       // MediaPicker DropZone has a 50ms timeout on dragleave event, so we have to wait for at least 50ms
       await sleep(50);
       expect(getWidgetDom(editorView)).toBeNull();
@@ -998,8 +999,8 @@ describe('Media plugin', () => {
     });
 
     describe('when cursor move from a mediaSingle node to another mediaSingle node', () => {
-      let pluginState;
-      let editorView;
+      let pluginState: MediaPluginState;
+      let editorView: EditorView;
 
       beforeEach(() => {
         const createdEditor = editor(
@@ -1039,8 +1040,8 @@ describe('Media plugin', () => {
     });
 
     describe('when cursor move to a mediaSingle node', () => {
-      let pluginState;
-      let editorView;
+      let pluginState: MediaPluginState;
+      let editorView: EditorView;
 
       beforeEach(() => {
         const createdEditor = editor(
@@ -1059,9 +1060,9 @@ describe('Media plugin', () => {
     });
 
     describe('when cursor move away from a mediaSingle node', () => {
-      let pluginState;
-      let editorView;
-      let refs;
+      let pluginState: MediaPluginState;
+      let editorView: EditorView;
+      let refs: Refs;
 
       beforeEach(() => {
         const createdEditor = editor(

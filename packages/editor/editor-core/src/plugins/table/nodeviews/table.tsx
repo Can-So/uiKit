@@ -5,7 +5,10 @@ import {
   DOMSerializer,
 } from 'prosemirror-model';
 import { EditorView, NodeView } from 'prosemirror-view';
-import ReactNodeView from '../../../nodeviews/ReactNodeView';
+import ReactNodeView, {
+  ForwardRef,
+  getPosHandler,
+} from '../../../nodeviews/ReactNodeView';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import { generateColgroup } from '../utils';
 import TableComponent from './TableComponent';
@@ -89,18 +92,18 @@ export default class TableView extends ReactNodeView {
     return rendered;
   }
 
-  setDomAttrs(node) {
+  setDomAttrs(node: PmNode) {
     if (!this.table) {
       return;
     }
 
     const attrs = tableAttributes(node);
-    Object.keys(attrs).forEach(attr => {
+    (Object.keys(attrs) as Array<keyof typeof attrs>).forEach(attr => {
       this.table!.setAttribute(attr, attrs[attr]);
     });
   }
 
-  render(props, forwardRef) {
+  render(props: Props, forwardRef: ForwardRef) {
     return (
       <WithPluginState
         plugins={{
@@ -183,7 +186,7 @@ export default class TableView extends ReactNodeView {
 export const createTableView = (
   portalProviderAPI: PortalProviderAPI,
   dynamicTextSizing?: boolean,
-) => (node, view, getPos): NodeView => {
+) => (node: PmNode, view: EditorView, getPos: getPosHandler): NodeView => {
   const { pluginConfig } = getPluginState(view.state);
   const { allowColumnResizing } = getPluginConfig(pluginConfig);
 

@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Node, Schema } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { EditorActionsOptions } from '../actions/index';
+import EditorActions from '../actions/index';
 
 import {
   Transformer,
@@ -48,7 +48,7 @@ export type InsertMenuCustomItem = {
   elemAfter?: ReactComponents | string;
   isDisabled?: boolean;
   className?: string;
-  onClick?: (editorActions: EditorActionsOptions) => void;
+  onClick?: (editorActions: EditorActions) => void;
 };
 
 export type AllowedBlockTypes =
@@ -230,7 +230,7 @@ export interface EditorProps {
 
   // Set to add custom menu items to the insert (plus) menu dropdown.
   insertMenuItems?: InsertMenuCustomItem[];
-  editorActions?: EditorActionsOptions;
+  editorActions?: EditorActions;
 
   // Set for an on change callback.
   onChange?: (editorView: EditorView) => void;

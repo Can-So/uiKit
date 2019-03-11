@@ -1,3 +1,4 @@
+import { EditorView } from 'prosemirror-view';
 import {
   createEditorFactory,
   doc,
@@ -12,7 +13,10 @@ import emojiPlugin from '../../../../plugins/emoji';
 import mentionsPlugin from '../../../../plugins/mentions';
 import compositionPlugin from '../../../../plugins/composition';
 
-const deleteContentBackward = (view, data: string | null = null) => {
+const deleteContentBackward = (
+  view: EditorView,
+  data: string | null = null,
+) => {
   ['beforeinput', 'input'].forEach(eventType => {
     view.dom.dispatchEvent(
       new (window as any).InputEvent(eventType, {

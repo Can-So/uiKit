@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import {
+  ProviderFactory,
+  ExtensionHandlers,
+  ExtensionParams,
+} from '@atlaskit/editor-common';
 import { macroProvider, extensionData } from '@atlaskit/editor-test-helpers';
 
 import Extension from '../../../../../plugins/extension/ui/Extension';
@@ -50,7 +54,7 @@ describe('@atlaskit/editor-core/ui/Extension', () => {
   it('should render from the extension handler when possible', () => {
     const GalleryComponent = () => <div>Gallery Extension</div>;
 
-    const extensionHandlers = {
+    const extensionHandlers: ExtensionHandlers = {
       'com.atlassian.confluence.macro.core': (ext, doc) => {
         if (ext.extensionKey === 'gallery') {
           return <GalleryComponent />;
@@ -91,7 +95,7 @@ describe('@atlaskit/editor-core/ui/Extension', () => {
     const invalidExtensions = () => {
       throw new Error('invalid extension');
     };
-    const extensionHandlers = {
+    const extensionHandlers: ExtensionHandlers = {
       'com.atlassian.confluence.macro.core': (ext, doc) => {
         if (ext.extensionKey === 'gallery') {
           expect(invalidExtensions).toThrow('invalid extension');
@@ -130,9 +134,11 @@ describe('@atlaskit/editor-core/ui/Extension', () => {
   });
 
   it('should pass the correct content to inlineExtension', () => {
-    const InlineCompontent = ({ node }) => <div>{node.content}</div>;
+    const InlineCompontent = ({ node }: { node: ExtensionParams<any> }) => (
+      <div>{node.content}</div>
+    );
 
-    const extensionHandlers = {
+    const extensionHandlers: ExtensionHandlers = {
       'com.atlassian.editor': ext => {
         if (ext.extensionKey === 'example-inline') {
           return <InlineCompontent node={ext} />;
@@ -178,9 +184,11 @@ describe('@atlaskit/editor-core/ui/Extension', () => {
   });
 
   it('should pass the correct content to extension', () => {
-    const ExtensionCompontent = ({ node }) => <div>{node.content}</div>;
+    const ExtensionCompontent = ({ node }: { node: ExtensionParams<any> }) => (
+      <div>{node.content}</div>
+    );
 
-    const extensionHandlers = {
+    const extensionHandlers: ExtensionHandlers = {
       'com.atlassian.editor': ext => {
         if (ext.extensionKey === 'example-extension') {
           return <ExtensionCompontent node={ext} />;
