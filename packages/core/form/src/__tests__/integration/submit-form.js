@@ -21,7 +21,7 @@ BrowserTestCase(
     await formTest.waitForSelector(submitForm);
     await formTest.type(submitFormTextfield, 'Jane Chan');
     await formTest.click(submitFormTextarea);
-    await formTest.keys(['Control', 'Enter', 'NULL']);
+    await formTest.keys(['Control', 'Enter']);
     await formTest.waitForSelector(submitFormSubmitted);
     expect(await formTest.getText(submitFormSubmitted)).toBe(
       'You have successfully submitted!',

@@ -19,7 +19,7 @@ BrowserTestCase(
     await formTest.goto(urlTextfields);
     await formTest.waitForSelector(textfieldsForm);
     await formTest.click(textfieldsTextarea);
-    await formTest.keys(['Control', 'Enter', 'NULL']);
+    await formTest.keys(['Control', 'Enter']);
     expect(await formTest.hasFocus(textfieldsTextfield)).toBe(true);
     await formTest.checkConsoleErrors();
   },
