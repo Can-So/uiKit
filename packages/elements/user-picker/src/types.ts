@@ -64,11 +64,13 @@ export type UserPickerProps = {
   disableInput?: boolean;
   /** Override default email validation function. */
   isValidEmail?: EmailValidator;
+  flip?: boolean;
+  scheduleUpdate?: boolean;
 };
 
 export type PopupUserPickerProps = UserPickerProps & {
   /** Whether to use the modal version of the single picker */
-  target: Element;
+  target: Target;
 };
 
 export type UserPickerState = {
@@ -182,3 +184,5 @@ export type AtlasKitSelectChange = (
 ) => void;
 
 export type Appearance = 'normal' | 'compact';
+
+export type Target = (withRef: { ref: any }) => any;

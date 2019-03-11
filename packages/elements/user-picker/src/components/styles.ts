@@ -135,10 +135,13 @@ export const getStyles = memoizeOne((width: string | number) => ({
   }),
 }));
 
-export const getModalStyles = memoizeOne((width: string | number) => ({
-  ...getStyles(width),
-  container: (css: any) => ({
-    ...css,
-    width,
+export const getModalStyles = memoizeOne(
+  (width: string | number, flip?: boolean) => ({
+    ...getStyles(width),
+    container: (css: any) => ({
+      ...css,
+      display: flip ? 'flex' : 'block',
+      flexDirection: 'column-reverse',
+    }),
   }),
-}));
+);

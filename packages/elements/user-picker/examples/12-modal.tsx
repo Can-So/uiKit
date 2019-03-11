@@ -31,12 +31,11 @@ const renderRows = (count: number) => {
           <ExampleWrapper>
             {({ options, onInputChange }) => (
               <PopupUserPicker
-                target={<button>Target</button> as any}
+                target={({ ref }) => <button ref={ref}>Target</button>}
                 options={options}
                 onInputChange={onInputChange}
                 onChange={console.log}
                 width={200}
-                subtle
               />
             )}
           </ExampleWrapper>

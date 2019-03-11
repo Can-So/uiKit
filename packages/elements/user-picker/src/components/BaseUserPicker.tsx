@@ -27,7 +27,6 @@ import {
 } from '../types';
 import { batchByKey } from './batch';
 import { messages } from './i18n';
-import { getStyles } from './styles';
 import {
   callCallback,
   extractOptionValue,
@@ -35,7 +34,7 @@ import {
   isIterable,
   isSingleValue,
   optionToSelectableOptions,
-  isPopupUserPicker,
+  isPopupUserPickerByComponent,
 } from './utils';
 
 type Props = UserPickerProps &
@@ -110,13 +109,13 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
   );
 
   public focus = () => {
-    if (this.selectRef) {
+    if (this.selectRef && this.selectRef.focus) {
       this.selectRef.focus();
     }
   };
 
   public blur = () => {
-    if (this.selectRef) {
+    if (this.selectRef && this.selectRef.blur) {
       this.selectRef.blur();
     }
   };
@@ -247,18 +246,18 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
 
   private handleBlur = () => {
     callCallback(this.props.onBlur);
-    if (isPopupUserPicker(this.props.SelectComponent)) {
+    if (isPopupUserPickerByComponent(this.props.SelectComponent)) {
       return;
     }
+    this.resetInputState();
     this.setState({
       menuIsOpen: false,
     });
-    this.resetInputState();
   };
 
   private handleClose = () => {
-    callCallback(this.props.onClose);
     this.resetInputState();
+    callCallback(this.props.onClose);
   };
 
   private handleInputChange = (
@@ -327,7 +326,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
   private handleKeyDown = (event: React.KeyboardEvent) => {
     // Escape
     if (event.keyCode === 27) {
-      this.selectRef.blur();
+      this.blur();
     }
 
     // Space
@@ -381,6 +380,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
       components,
       pickerProps,
       SelectComponent,
+      styles,
     } = this.props;
 
     const {
@@ -391,7 +391,6 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
       inputValue,
     } = this.state;
     const appearance = this.getAppearance();
-    const width = this.props.width as string | number;
 
     return (
       <SelectComponent
@@ -402,7 +401,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         isMulti={isMulti}
         options={this.getOptions()}
         onChange={this.handleChange}
-        styles={getStyles(width)}
+        styles={styles}
         components={components}
         inputValue={inputValue}
         menuIsOpen={menuIsOpen}
@@ -436,6 +435,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         menuMinWidth={menuMinWidth}
         menuPortalTarget={menuPortalTarget}
         disableInput={disableInput}
+        scheduleUpdate={this.props.scheduleUpdate}
         {...pickerProps}
       />
     );
