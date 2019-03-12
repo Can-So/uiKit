@@ -1,0 +1,1 @@
+- ED-6512 Fix subscript
