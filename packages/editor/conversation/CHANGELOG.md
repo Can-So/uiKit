@@ -1,5 +1,10 @@
 # @atlaskit/conversation
 
+## 12.2.0
+- [minor] [55d8c2a898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55d8c2a898):
+
+  - noImplicitAny for @atlaskit/conversation
+
 ## 12.1.5
 - Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
   - @atlaskit/comment@7.0.1

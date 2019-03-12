@@ -1,1 +1,0 @@
-- noImplicitAny for @atlaskit/conversation
