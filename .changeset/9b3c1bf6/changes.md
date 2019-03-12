@@ -1,1 +1,0 @@
-- ED-6286: fix post-PR for media upload on mobile

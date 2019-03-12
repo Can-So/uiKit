@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.13.6
+- [patch] [5e319bb725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e319bb725):
+
+  - ED-6286: fix post-PR for media upload on mobile
+
 ## 6.13.5
 - [patch] [4bb4f46a6f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4bb4f46a6f):
 

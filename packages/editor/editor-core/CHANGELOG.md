@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.4.1
+- [patch] [5e319bb725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e319bb725):
+
+  - ED-6286: fix post-PR for media upload on mobile
+
 ## 103.4.0
 - [minor] [6739aea208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6739aea208):
 
