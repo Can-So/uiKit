@@ -1,6 +1,7 @@
 const child = require('child_process');
 
-const numberOfTries = 2;
+// TODO: This script is only TEMPORARY while the issue on Netlify is fixed.
+const numberOfTries = 3;
 
 const token = process.env.NETLIFY_TOKEN;
 
