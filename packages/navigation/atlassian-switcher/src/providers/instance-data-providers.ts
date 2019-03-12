@@ -8,7 +8,7 @@ import {
   WithCloudId,
   XFlowSettingsResponse,
 } from '../types';
-import { cached } from '../utils/cached';
+import { withPrefetch } from '../utils/with-prefetch';
 
 // Recent activity api
 const fetchRecentContainers = ({ cloudId }: WithCloudId) =>
@@ -19,7 +19,7 @@ const fetchRecentContainers = ({ cloudId }: WithCloudId) =>
 export const RecentContainersProvider = asDataProvider(fetchRecentContainers);
 
 // License information api
-const fetchLicenseInformation = cached(({ cloudId }: WithCloudId) =>
+const fetchLicenseInformation = withPrefetch(({ cloudId }: WithCloudId) =>
   fetchJson<LicenseInformationResponse>(
     `/gateway/api/xflow/${cloudId}/license-information`,
   ),
@@ -34,7 +34,7 @@ export const LicenseInformationProvider = asDataProvider(
 type FetchPermissionParamsType = WithCloudId & {
   permissionId: Permissions;
 };
-const fetchPermission = cached(
+const fetchPermission = withPrefetch(
   ({ cloudId, permissionId }: FetchPermissionParamsType) =>
     postJson<UserPermissionResponse>(`/gateway/api/permissions/permitted`, {
       permissionId,
@@ -48,7 +48,7 @@ export const UserPermissionProvider = asDataProvider(
 );
 
 // Xflow settings api
-const fetchXflowSettings = cached(({ cloudId }: WithCloudId) =>
+const fetchXflowSettings = withPrefetch(({ cloudId }: WithCloudId) =>
   fetchJson<XFlowSettingsResponse>(
     `/gateway/api/site/${cloudId}/setting/xflow`,
   ).then(xFlowSettings =>
@@ -64,13 +64,13 @@ export const XFlowSettingsProvider = asDataProvider(
 );
 
 export const prefetchAll = ({ cloudId }: WithCloudId) => {
-  fetchLicenseInformation.prefetch({ cloudId });
-  fetchXflowSettings.prefetch({ cloudId });
-  fetchPermission.prefetch({
+  fetchLicenseInformation({ cloudId });
+  fetchXflowSettings({ cloudId });
+  fetchPermission({
     cloudId,
     permissionId: Permissions.ADD_PRODUCTS,
   });
-  fetchPermission.prefetch({ cloudId, permissionId: Permissions.MANAGE });
+  fetchPermission({ cloudId, permissionId: Permissions.MANAGE });
 };
 
 export const resetAll = () => {

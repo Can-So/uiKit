@@ -1,4 +1,4 @@
-interface WithPrefetch<T, A> {
+export interface WithPrefetch<A, T> {
   (a: A): Promise<T>;
 
   cached: (a: A) => T | void;
@@ -18,7 +18,9 @@ interface WithPrefetch<T, A> {
  * 3. Has methods to get `cached` value and `reset` caches
  * @param fn
  */
-export const withPrefetch = <T, A>(fn: (a: A) => Promise<T>): WithPrefetch<T, A> => {
+export const withPrefetch = <A, T>(
+  fn: (a: A) => Promise<T>,
+): WithPrefetch<A, T> => {
   const resultCache = new Map<string, T>();
   const promiseCache = new Map<string, Promise<T>>();
 
@@ -45,16 +47,16 @@ export const withPrefetch = <T, A>(fn: (a: A) => Promise<T>): WithPrefetch<T, A>
     const promise = fn(a);
     promiseCache.set(cacheKey, promise);
 
-    return promise
+    promise
       .then(result => {
         resultCache.set(cacheKey, result);
         promiseCache.delete(cacheKey);
-        return result;
       })
-      .catch((error: any) => {
+      .catch(() => {
         promiseCache.delete(cacheKey);
-        throw error;
       });
+
+    return promise;
   };
 
   const reset = () => {
