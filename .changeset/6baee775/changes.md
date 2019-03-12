@@ -1,0 +1,1 @@
+- ED-6410: remove opacity from cells background color
