@@ -52,7 +52,7 @@
     "@atlaskit/mention": "^16.2.2",
     "@atlaskit/modal-dialog": "^8.0.0",
     "@atlaskit/select": "^8.0.0",
-    "@atlaskit/size-detector": "^7.0.0",
+    "@atlaskit/width-detector": "^0.2.1",
     "@atlaskit/smart-card": "^9.11.3",
     "@atlaskit/spinner": "^10.0.0",
     "@atlaskit/status": "^0.5.1",
