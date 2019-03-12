@@ -4,6 +4,7 @@ import {
   Slice,
   NodeRange,
   NodeType,
+  Node,
 } from 'prosemirror-model';
 import {
   EditorState,
@@ -39,6 +40,7 @@ import {
   INPUT_METHOD,
   INDENT_DIR,
   INDENT_TYPE,
+  addAnalytics,
 } from '../analytics';
 
 const maxIndentation = 5;
@@ -544,7 +546,7 @@ export function liftListItems(): Command {
  * user intended - so we need to adjust the selection a bit in scenarios like that.
  */
 export function adjustSelectionInList(
-  doc,
+  doc: Node,
   selection: TextSelection,
 ): TextSelection {
   let { $from, $to } = selection;
@@ -639,6 +641,25 @@ export const toggleList = (
   }
 };
 
+/**
+ * Check of is selection is inside a list of the specified type
+ * @param state
+ * @param listType
+ */
+function isInsideList(
+  state: EditorState,
+  listType: 'bulletList' | 'orderedList',
+) {
+  const { $from } = state.selection;
+  const parent = $from.node(-2);
+  const grandgrandParent = $from.node(-3);
+
+  return (
+    (parent && parent.type === state.schema.nodes[listType]) ||
+    (grandgrandParent && grandgrandParent.type === state.schema.nodes[listType])
+  );
+}
+
 export function toggleListCommand(
   listType: 'bulletList' | 'orderedList',
 ): Command {
@@ -658,8 +679,6 @@ export function toggleListCommand(
     state = view.state;
 
     const { $from, $to } = state.selection;
-    const parent = $from.node(-2);
-    const grandgrandParent = $from.node(-3);
     const isRangeOfSingleType = isRangeOfType(
       state.doc,
       $from,
@@ -667,16 +686,11 @@ export function toggleListCommand(
       state.schema.nodes[listType],
     );
 
-    if (
-      ((parent && parent.type === state.schema.nodes[listType]) ||
-        (grandgrandParent &&
-          grandgrandParent.type === state.schema.nodes[listType])) &&
-      isRangeOfSingleType
-    ) {
+    if (isInsideList(state, listType) && isRangeOfSingleType) {
       // Untoggles list
       return liftListItems()(state, dispatch);
     } else {
-      // Wraps selection in list and converts list type e.g. bullet_list -> ordered_list if needed
+      // Converts list type e.g. bullet_list -> ordered_list if needed
       if (!isRangeOfSingleType) {
         liftListItems()(state, dispatch);
         state = view.state;
@@ -688,11 +702,44 @@ export function toggleListCommand(
         dispatch!(tr);
         state = view.state;
       }
-
+      // Wraps selection in list
       return wrapInList(state.schema.nodes[listType])(state, dispatch);
     }
   };
 }
+
+// TODO: Toggle list command dispatch more than one time, so commandWithAnalytics doesn't work as expected.
+// This is a helper to fix that.
+export const toggleListCommandWithAnalytics = (
+  inputMethod: INPUT_METHOD.KEYBOARD,
+  listType: 'bulletList' | 'orderedList',
+): Command => {
+  const listTypeActionSubjectId = {
+    bulletList: ACTION_SUBJECT_ID.FORMAT_LIST_BULLET,
+    orderedList: ACTION_SUBJECT_ID.FORMAT_LIST_NUMBER,
+  };
+  return (state, dispatch, view) => {
+    if (toggleListCommand(listType)(state, dispatch, view)) {
+      if (view && dispatch) {
+        dispatch(
+          addAnalytics(view.state.tr, {
+            action: ACTION.FORMATTED,
+            actionSubject: ACTION_SUBJECT.TEXT,
+            actionSubjectId: listTypeActionSubjectId[listType] as
+              | ACTION_SUBJECT_ID.FORMAT_LIST_BULLET
+              | ACTION_SUBJECT_ID.FORMAT_LIST_NUMBER,
+            eventType: EVENT_TYPE.TRACK,
+            attributes: {
+              inputMethod,
+            },
+          }),
+        );
+      }
+      return true;
+    }
+    return false;
+  };
+};
 
 export function toggleBulletList(view) {
   return toggleList(view.state, view.dispatch, view, 'bulletList');

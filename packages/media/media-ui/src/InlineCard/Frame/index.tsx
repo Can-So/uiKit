@@ -45,7 +45,6 @@ export class Frame extends React.Component<FrameViewProps> {
     const isInteractive = Boolean(onClick);
     return (
       <Wrapper
-        target="_blank"
         href={link}
         withoutBackground={withoutBackground}
         isSelected={isSelected}

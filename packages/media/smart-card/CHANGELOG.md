@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.11.4
+- [patch] [8ed53a1cbb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ed53a1cbb):
+
+  - fix padding, wrapping for inline smart links.
+
 ## 9.11.3
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

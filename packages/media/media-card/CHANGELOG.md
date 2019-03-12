@@ -1,5 +1,10 @@
 # @atlaskit/media-card
 
+## 55.0.4
+- [patch] [ff3f40bc38](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ff3f40bc38):
+
+  - Fix remove from cache function, which fixes issue when user is deleting recent image in media picker
+
 ## 55.0.3
 - [patch] [3591859b2f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3591859b2f):
 

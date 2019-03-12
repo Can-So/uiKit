@@ -3,8 +3,10 @@
 exports[`Wrapper it should have interactive styles 1`] = `
 .c0 {
   line-height: 1.1428571428571428;
-  margin: 0px 2px;
-  padding: 2px;
+  padding: 0px 0.24em 2px 0.24em;
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   border-radius: 3px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -50,8 +52,10 @@ exports[`Wrapper it should have interactive styles 1`] = `
 exports[`Wrapper it should have selected styles 1`] = `
 .c0 {
   line-height: 1.1428571428571428;
-  margin: 0px 2px;
-  padding: 2px;
+  padding: 0px 0.24em 2px 0.24em;
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   border-radius: 3px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -79,8 +83,10 @@ exports[`Wrapper it should have selected styles 1`] = `
 exports[`Wrapper it should not have interactive or selected styles 1`] = `
 .c0 {
   line-height: 1.1428571428571428;
-  margin: 0px 2px;
-  padding: 2px;
+  padding: 0px 0.24em 2px 0.24em;
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   border-radius: 3px;
   -webkit-user-select: none;
   -moz-user-select: none;
