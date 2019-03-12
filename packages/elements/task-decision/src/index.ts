@@ -1,6 +1,5 @@
 import DecisionItem from './components/DecisionItem';
 import DecisionList from './components/DecisionList';
-import ResourcedItemList from './components/ResourcedItemList';
 import ResourcedTaskItem from './components/ResourcedTaskItem';
 import TaskDecisionResource from './api/TaskDecisionResource';
 import TaskItem from './components/TaskItem';
@@ -17,7 +16,6 @@ export {
 export {
   DecisionItem,
   DecisionList,
-  ResourcedItemList,
   ResourcedTaskItem,
   TaskDecisionResource,
   TaskItem,
