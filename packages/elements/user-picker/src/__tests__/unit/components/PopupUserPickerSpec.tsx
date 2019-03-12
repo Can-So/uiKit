@@ -10,9 +10,9 @@ jest.mock('../../../components/popup', () => ({
   getPopupProps: jest.fn(),
 }));
 
+import * as React from 'react';
 import { PopupSelect } from '@atlaskit/select';
 import { shallowWithIntl } from 'enzyme-react-intl';
-import * as React from 'react';
 import { getPopupStyles } from '../../../components/styles';
 import { PopupUserPicker } from '../../../components/PopupUserPicker';
 import { UserPickerProps } from '../../../types';

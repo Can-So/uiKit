@@ -259,6 +259,9 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
   private handleClose = () => {
     this.resetInputState();
     callCallback(this.props.onClose);
+    this.setState({
+      menuIsOpen: false,
+    });
   };
 
   private handleInputChange = (
