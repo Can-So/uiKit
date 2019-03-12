@@ -1,0 +1,1 @@
+- Minor bug fixes in 2.4.2 react-select patch. See the release notes for details here https://github.com/JedWatson/react-select/releases/tag/v2.4.2
