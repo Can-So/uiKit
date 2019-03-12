@@ -1,1 +1,0 @@
-- ED-6484: Remove the 'inline-comment' appearance from Editor.

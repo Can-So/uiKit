@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 104.0.0
+- [major] [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+
+  - ED-6484: Remove the 'inline-comment' appearance from Editor.
+
 ## 103.4.4
 - [patch] [65acb722e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65acb722e3):
 

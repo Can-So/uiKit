@@ -1,5 +1,11 @@
 # @atlaskit/editor-jira-transformer
 
+## 5.3.4
+- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+  - @atlaskit/editor-json-transformer@4.3.4
+  - @atlaskit/editor-test-helpers@7.0.5
+  - @atlaskit/editor-core@104.0.0
+
 ## 5.3.3
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/editor-core@103.0.3
