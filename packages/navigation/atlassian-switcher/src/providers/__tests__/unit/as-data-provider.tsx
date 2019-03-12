@@ -37,12 +37,11 @@ describe('as-data-provider', () => {
     shallow(<DataProvider>{childrenPropMock}</DataProvider>);
     expect(childrenPropMock).toHaveBeenCalledTimes(1);
     expect(childrenPropMock.mock.calls[0][0].status).toBe('loading');
-    expect(childrenPropMock.mock.calls[0][0].isLoading).toBe(true);
     expect(childrenPropMock.mock.calls[0][0].data).toBe(null);
     jest.runAllTimers();
     promise.then(() => {
       expect(childrenPropMock).toHaveBeenCalledTimes(2);
-      expect(childrenPropMock.mock.calls[1][0].isLoading).toBe(false);
+      expect(childrenPropMock.mock.calls[1][0].status).toBe('complete');
       expect(childrenPropMock.mock.calls[1][0].data).toBe(RESOLVED_VALUE);
       expect(childrenPropMock.mock.calls[1][0].error).toBe(undefined);
     });
@@ -56,13 +55,13 @@ describe('as-data-provider', () => {
 
     shallow(<DataProvider>{childrenPropMock}</DataProvider>);
     expect(childrenPropMock).toHaveBeenCalledTimes(1);
-    expect(childrenPropMock.mock.calls[0][0].isLoading).toBe(true);
+    expect(childrenPropMock.mock.calls[0][0].status).toBe('loading');
     expect(childrenPropMock.mock.calls[0][0].data).toBe(null);
     expect(childrenPropMock.mock.calls[0][0].error).toBe(undefined);
     jest.runAllTimers();
     setTimeout(() => {
       expect(childrenPropMock).toHaveBeenCalledTimes(2);
-      expect(childrenPropMock.mock.calls[1][0].isLoading).toBe(false);
+      expect(childrenPropMock.mock.calls[1][0].status).toBe('error');
       expect(childrenPropMock.mock.calls[1][0].data).toBe(null);
       expect(childrenPropMock.mock.calls[1][0].error).toBe(
         EXPECTED_ERROR_VALUE,
