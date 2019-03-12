@@ -1,0 +1,1 @@
+- Modal-dialog no longer shows unnecessary scrollbars in modern browsers
