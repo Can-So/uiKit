@@ -19,7 +19,8 @@ export function createLinkInputRule(
       }
       const [link] = (match as any) as Match[];
 
-      const markType = schema.mark('link', { href: link.url });
+      const url = normalizeUrl(link.url);
+      const markType = schema.mark('link', { href: url });
 
       analyticsService.trackEvent(
         'atlassian.editor.format.hyperlink.autoformatting',
