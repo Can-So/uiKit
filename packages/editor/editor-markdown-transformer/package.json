@@ -7,10 +7,6 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
-  "files": [
-    "dist",
-    "src"
-  ],
   "author": "Atlassian Pty. Ltd",
   "license": "MIT",
   "dependencies": {

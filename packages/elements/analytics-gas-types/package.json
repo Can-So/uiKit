@@ -8,10 +8,6 @@
   "atlaskit:src": "src/index.ts",
   "module": "index.js",
   "types": "index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "dependencies": {
     "@atlaskit/analytics-next-types": "^3.0.0",
     "tslib": "^1.8.0"

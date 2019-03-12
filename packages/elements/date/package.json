@@ -8,10 +8,6 @@
   "modules": "index.js",
   "types": "dist/es5/types.d.ts",
   "atlaskit:src": "src/index.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"

@@ -9,10 +9,6 @@
   "types": "index.d.ts",
   "atlaskit:src": "src/index.ts",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "src"
-  ],
   "dependencies": {
     "@atlaskit/analytics": "^5.0.0",
     "@atlaskit/analytics-gas-types": "^3.2.5",

@@ -7,10 +7,6 @@
   "bin": {
     "akup": "./bin/akup.js"
   },
-  "files": [
-    "bin",
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Stanislav S"

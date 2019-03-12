@@ -9,10 +9,6 @@
   "jsnext:main": "index.js",
   "module": "index.js",
   "types": "index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "dependencies": {},
   "author": "Atlassian Pty. Ltd",
   "maintainers": [

@@ -8,10 +8,6 @@
   "atlaskit": {
     "internal": true
   },
-  "files": [
-    "dist",
-    "src"
-  ],
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"

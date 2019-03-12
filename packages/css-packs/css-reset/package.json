@@ -6,9 +6,6 @@
   "main": "dist/bundle.css",
   "atlaskit:src": "src/index.js",
   "atlaskit:designLink": "https://atlassian.design/guidelines/product/overview",
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
