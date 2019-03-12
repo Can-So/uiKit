@@ -1,5 +1,10 @@
 # @atlaskit/task-decision
 
+## 12.0.0
+- [major] [72c6f68226](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72c6f68226):
+
+  - removed ResourcedItemList component from task-decision
+
 ## 11.3.2
 - Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
   - @atlaskit/renderer@42.0.0
