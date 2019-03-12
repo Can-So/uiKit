@@ -1,3 +1,4 @@
+// @flow
 import path from 'path';
 
 export const ssr = async example =>
@@ -11,16 +12,17 @@ export const ssr = async example =>
       delete global['window'];
       const React = require('react');
       const ReactDOMServer = require('react-dom/server');
+      // $StringLitteral
       const Example = require(example).default;
       html = ReactDOMServer.renderToString(React.createElement(Example));
     } catch (e) {
-      error = error;
+      error = e;
     } finally {
       global.document = document;
       global.window = window;
     }
     if (error) {
-      reject(e);
+      reject(error);
     } else {
       resolve(html);
     }
