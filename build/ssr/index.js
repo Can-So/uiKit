@@ -1,30 +1,27 @@
-const vm = require('vm');
-const fs = require('fs');
-
 import path from 'path';
 
-const ssr = async example =>
+export const ssr = async example =>
   new Promise((resolve, reject) => {
-    const script = new vm.Script(
-      fs.readFileSync(path.join(__dirname, 'ssr.js')),
-    );
-    const context = vm.createContext({
-      filePath: example,
-      require,
-      __dirname,
-    });
-    let html;
+    jest.resetModules();
+    let document, window, html, error;
     try {
-      jest.resetModules();
-      html = script.runInNewContext(context);
+      document = global.document;
+      window = global.window;
+      delete global['document'];
+      delete global['window'];
+      const React = require('react');
+      const ReactDOMServer = require('react-dom/server');
+      const Example = require(example).default;
+      html = ReactDOMServer.renderToString(React.createElement(Example));
     } catch (e) {
-      reject(e);
+      error = error;
+    } finally {
+      global.document = document;
+      global.window = window;
     }
-    if (html) {
+    if (error) {
+      reject(e);
+    } else {
       resolve(html);
     }
   });
-
-module.exports = {
-  ssr,
-};
