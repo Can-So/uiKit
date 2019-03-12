@@ -3,7 +3,7 @@ import { Messages } from 'react-intl';
 import Switcher from './switcher';
 import CommonDataProvider from '../providers/common-data-provider';
 import { Product, FeatureFlagProps } from '../types';
-import { resolveSwitcherLinks } from '../providers/resolve-switcher-links';
+import { mapResultsToSwitcherProps } from '../providers/map-results-to-switcher-props';
 
 type GenericSwitcherProps = {
   cloudId: string;
@@ -32,10 +32,10 @@ const getFeatures = (
 
 export default (props: GenericSwitcherProps) => (
   <CommonDataProvider cloudId={props.cloudId}>
-    {({ licenseInformation, ...providerResults }) => {
-      const switcherLinks = resolveSwitcherLinks(
+    {providerResults => {
+      const switcherLinks = mapResultsToSwitcherProps(
         props.cloudId,
-        { licenseInformation, ...providerResults },
+        providerResults,
         {
           ...getFeatures(props.product),
           enableSplitJira: props.enableSplitJira,

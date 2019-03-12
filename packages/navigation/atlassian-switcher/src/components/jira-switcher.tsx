@@ -6,7 +6,7 @@ import {
   MANAGE_HREF,
 } from '../providers/jira-data-providers';
 import CommonDataProvider from '../providers/common-data-provider';
-import { resolveSwitcherLinks } from '../providers/resolve-switcher-links';
+import { mapResultsToSwitcherProps } from '../providers/map-results-to-switcher-props';
 import { FeatureFlagProps } from '../types';
 
 type JiraSwitcherProps = {
@@ -20,7 +20,10 @@ export default (props: JiraSwitcherProps) => (
     {customLinks => (
       <CommonDataProvider cloudId={props.cloudId}>
         {providerResults => {
-          const { showManageLink, ...switcherLinks } = resolveSwitcherLinks(
+          const {
+            showManageLink,
+            ...switcherLinks
+          } = mapResultsToSwitcherProps(
             props.cloudId,
             { customLinks, ...providerResults },
             { xflow: true, enableSplitJira: props.enableSplitJira },

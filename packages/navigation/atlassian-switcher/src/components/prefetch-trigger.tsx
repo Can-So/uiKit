@@ -59,7 +59,7 @@ class PrefetchTrigger extends Component<
 
   private handleMouseClick = () => {
     if (this.lastEnteredAt) {
-      const hoverToClick = now() - this.lastEnteredAt;
+      const hoverToClick = Math.round(now() - this.lastEnteredAt);
 
       this.fireOperationalEvent({
         action: 'clicked',

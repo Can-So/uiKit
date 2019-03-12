@@ -131,7 +131,7 @@ const DEFAULT_FEATURES = {
   enableSplitJira: false,
 };
 
-export function resolveSwitcherLinks(
+export function mapResultsToSwitcherProps(
   cloudId: string,
   results: ProviderResults,
   features: SwitcherFeatures = DEFAULT_FEATURES,
