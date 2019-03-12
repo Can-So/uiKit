@@ -244,5 +244,234 @@ describe('table plugin -> transforms -> delete columns', () => {
         );
       });
     });
+
+    describe('when a column-spanning cell is deleted', () => {
+      describe('when this cell has rowspan = 1', () => {
+        it('should append missing cells to the column(s) to the right from the deleted column', () => {
+          const { editorView } = editor(
+            doc(
+              table()(
+                tr(
+                  td({ colwidth: [110] })(p('a1')),
+                  td({ colwidth: [120] })(p('a2')),
+                  td({ colwidth: [130] })(p('a3')),
+                ),
+                tr(td({ colwidth: [110, 120, 130], colspan: 3 })(p('b1'))),
+                tr(
+                  td({ colwidth: [110] })(p('c1')),
+                  td({ colwidth: [120] })(p('c2')),
+                  td({ colwidth: [130] })(p('c3')),
+                ),
+              ),
+            ),
+          );
+          const { state, dispatch } = editorView;
+          dispatch(deleteColumns([0])(state.tr));
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              table()(
+                tr(
+                  td({ colwidth: [120] })(p('a2')),
+                  td({ colwidth: [130] })(p('a3')),
+                ),
+                tr(
+                  td({ colwidth: [120] })(p('')),
+                  td({ colwidth: [130] })(p('')),
+                ),
+                tr(
+                  td({ colwidth: [120] })(p('c2')),
+                  td({ colwidth: [130] })(p('c3')),
+                ),
+              ),
+            ),
+          );
+        });
+      });
+
+      describe('when this cell has rowspan > 1', () => {
+        it('should append missing cells to the column(s) to the right from the deleted column', () => {
+          const { editorView } = editor(
+            doc(
+              table()(
+                tr(
+                  td({ colwidth: [110] })(p('a1')),
+                  td({ colwidth: [120] })(p('a2')),
+                  td({ colwidth: [130] })(p('a3')),
+                  td({ colwidth: [140] })(p('a4')),
+                ),
+                tr(
+                  td({ colwidth: [110, 120, 130], colspan: 3, rowspan: 2 })(
+                    p('b1'),
+                  ),
+                  td({ colwidth: [140] })(p('b4')),
+                ),
+                tr(td({ colwidth: [140] })(p('c4'))),
+                tr(
+                  td({ colwidth: [110] })(p('d1')),
+                  td({ colwidth: [120] })(p('d2')),
+                  td({ colwidth: [130] })(p('d3')),
+                  td({ colwidth: [140] })(p('d4')),
+                ),
+              ),
+            ),
+          );
+          const { state, dispatch } = editorView;
+          dispatch(deleteColumns([0])(state.tr));
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              table()(
+                tr(
+                  td({ colwidth: [120] })(p('a2')),
+                  td({ colwidth: [130] })(p('a3')),
+                  td({ colwidth: [140] })(p('a4')),
+                ),
+                tr(
+                  td({ colwidth: [120] })(p('')),
+                  td({ colwidth: [130] })(p('')),
+                  td({ colwidth: [140] })(p('b4')),
+                ),
+                tr(
+                  td({ colwidth: [120] })(p('')),
+                  td({ colwidth: [130] })(p('')),
+                  td({ colwidth: [140] })(p('c4')),
+                ),
+                tr(
+                  td({ colwidth: [120] })(p('d2')),
+                  td({ colwidth: [130] })(p('d3')),
+                  td({ colwidth: [140] })(p('d4')),
+                ),
+              ),
+            ),
+          );
+        });
+      });
+    });
+
+    describe('when a column-spanning cell overlaps deleted column from the left', () => {
+      describe('when this cell has rowspan = 1', () => {
+        it('should decrement the colspan of that cell', () => {
+          const { editorView } = editor(
+            doc(
+              table()(
+                tr(
+                  td({ colwidth: [110] })(p('a1')),
+                  td({ colwidth: [120] })(p('a2')),
+                  td({ colwidth: [130] })(p('a3')),
+                ),
+                tr(td({ colwidth: [110, 120, 130], colspan: 3 })(p('b1'))),
+                tr(
+                  td({ colwidth: [110] })(p('c1')),
+                  td({ colwidth: [120] })(p('c2')),
+                  td({ colwidth: [130] })(p('c3')),
+                ),
+              ),
+            ),
+          );
+          const { state, dispatch } = editorView;
+          dispatch(deleteColumns([1])(state.tr));
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              table()(
+                tr(
+                  td({ colwidth: [110] })(p('a1')),
+                  td({ colwidth: [130] })(p('a3')),
+                ),
+                tr(td({ colwidth: [110, 130], colspan: 2 })(p('b1'))),
+                tr(
+                  td({ colwidth: [110] })(p('c1')),
+                  td({ colwidth: [130] })(p('c3')),
+                ),
+              ),
+            ),
+          );
+        });
+      });
+
+      describe('when this cell has rowspan > 1', () => {
+        it('should decrement the colspan of that cell', () => {
+          const { editorView } = editor(
+            doc(
+              table()(
+                tr(
+                  td({ colwidth: [110] })(p('a1')),
+                  td({ colwidth: [120] })(p('a2')),
+                  td({ colwidth: [130] })(p('a3')),
+                  td({ colwidth: [140] })(p('a4')),
+                ),
+                tr(
+                  td({ colwidth: [110, 120, 130], colspan: 3, rowspan: 2 })(
+                    p('b1'),
+                  ),
+                  td({ colwidth: [140] })(p('b4')),
+                ),
+                tr(td({ colwidth: [140] })(p('c4'))),
+                tr(
+                  td({ colwidth: [110] })(p('d1')),
+                  td({ colwidth: [120] })(p('d2')),
+                  td({ colwidth: [130] })(p('d3')),
+                  td({ colwidth: [140] })(p('d4')),
+                ),
+              ),
+            ),
+          );
+          const { state, dispatch } = editorView;
+          dispatch(deleteColumns([1])(state.tr));
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              table()(
+                tr(
+                  td({ colwidth: [110] })(p('a1')),
+                  td({ colwidth: [130] })(p('a3')),
+                  td({ colwidth: [140] })(p('a4')),
+                ),
+                tr(
+                  td({ colwidth: [110, 130], colspan: 2, rowspan: 2 })(p('b1')),
+                  td({ colwidth: [140] })(p('b4')),
+                ),
+                tr(td({ colwidth: [140] })(p('c4'))),
+                tr(
+                  td({ colwidth: [110] })(p('d1')),
+                  td({ colwidth: [130] })(p('d3')),
+                  td({ colwidth: [140] })(p('d4')),
+                ),
+              ),
+            ),
+          );
+        });
+      });
+    });
+
+    describe('when a column-spanning cell overlaps two deleted columns from the left', () => {
+      it('should decrement the colspan of that cell twice', () => {
+        const { editorView } = editor(
+          doc(
+            table()(
+              tr(
+                td({ colwidth: [110] })(p('a1')),
+                td({ colwidth: [120] })(p('a2')),
+                td({ colwidth: [130] })(p('a3')),
+              ),
+              tr(td({ colwidth: [110, 120, 130], colspan: 3 })(p('b1'))),
+              tr(
+                td({ colwidth: [110] })(p('c1')),
+                td({ colwidth: [120] })(p('c2')),
+                td({ colwidth: [130] })(p('c3')),
+              ),
+            ),
+          ),
+        );
+        const { state, dispatch } = editorView;
+        dispatch(deleteColumns([1, 2])(state.tr));
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            table()(
+              tr(td({ colwidth: [110] })(p('a1'))),
+              tr(td({ colwidth: [110] })(p('b1'))),
+              tr(td({ colwidth: [110] })(p('c1'))),
+            ),
+          ),
+        );
+      });
+    });
   });
 });
