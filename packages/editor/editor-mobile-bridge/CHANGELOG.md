@@ -1,5 +1,24 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.14.1
+- Updated dependencies [72c6f68226](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72c6f68226):
+  - @atlaskit/editor-core@104.1.1
+  - @atlaskit/renderer@42.0.1
+  - @atlaskit/task-decision@12.0.0
+
+## 6.14.0
+- [minor] [efc3cdd52e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/efc3cdd52e):
+
+  - ED-6354: added bridge for sending JS errors to native
+
+## 6.13.7
+- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+  - @atlaskit/editor-json-transformer@4.3.4
+  - @atlaskit/editor-test-helpers@7.0.5
+  - @atlaskit/task-decision@11.3.2
+  - @atlaskit/editor-core@104.0.0
+  - @atlaskit/renderer@42.0.0
+
 ## 6.13.6
 - [patch] [5e319bb725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e319bb725):
 

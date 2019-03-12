@@ -170,7 +170,7 @@ describe('table plugin', () => {
             })(
               tr(th()(p('{<>}1')), th()(p('2')), th()(p('3'))),
               tr(
-                td({ background: 'rgba(255, 252, 242, 0.5)' })(p('4')),
+                td({ background: '#fffcf2' })(p('4')),
                 td({ background: '#fffcf7' })(p('5')),
                 td()(p('6')),
               ),
@@ -204,7 +204,7 @@ describe('table plugin', () => {
             table({ layout: 'wide' })(
               tr(th()(p('1')), th()(p('2')), th()(p('3'))),
               tr(
-                td({ background: 'rgba(255, 252, 242, 0.5)' })(p('4')),
+                td({ background: '#fffcf2' })(p('4')),
                 td({ background: '#fffcf7' })(p('5')),
                 td()(p('6')),
               ),
@@ -213,8 +213,8 @@ describe('table plugin', () => {
             table({ layout: 'wide' })(
               tr(th()(p('1')), th()(p('2')), th()(p('3'))),
               tr(
-                td({ background: 'rgba(255, 252, 242, 0.5)' })(p('4')),
-                td({ background: 'rgba(255, 252, 247, 0.5)' })(p('5')),
+                td({ background: '#fffcf2' })(p('4')),
+                td({ background: '#fffcf7' })(p('5')),
                 td()(p('6')),
               ),
               tr(td()(p('7')), td()(p('8')), td()(p('9'))),

@@ -1,5 +1,21 @@
 # @atlaskit/editor-core
 
+## 104.1.1
+- Updated dependencies [72c6f68226](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72c6f68226):
+  - @atlaskit/renderer@42.0.1
+  - @atlaskit/util-data-test@10.2.4
+  - @atlaskit/task-decision@12.0.0
+
+## 104.1.0
+- [minor] [55eb63afac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55eb63afac):
+
+  - ED-6239 Add Analytics GAS V3 to autosubstituted
+
+## 104.0.0
+- [major] [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+
+  - ED-6484: Remove the 'inline-comment' appearance from Editor.
+
 ## 103.4.4
 - [patch] [65acb722e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65acb722e3):
 

@@ -14,6 +14,7 @@ import {
   code_block,
   hardBreak,
   BuilderContent,
+  createAnalyticsEventMock,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -26,16 +27,43 @@ import {
 } from '../../../../plugins/text-formatting/pm-plugins/input-rule';
 import { EditorView } from 'prosemirror-view';
 import { ProviderFactory } from '@atlaskit/editor-common';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import {
-  AnalyticsEventPayload,
-  ACTION,
-  ACTION_SUBJECT,
-  ACTION_SUBJECT_ID,
-  EVENT_TYPE,
-  INPUT_METHOD,
-} from '../../../../plugins/analytics';
 import { AnalyticsHandler } from '../../../../analytics';
+import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+
+const createProductPayload = (product: string, originalSpelling: string) => ({
+  action: 'autoSubstituted',
+  actionSubject: 'text',
+  actionSubjectId: 'productName',
+  eventType: 'track',
+  attributes: {
+    product,
+    originalSpelling,
+  },
+});
+
+const createPunctuationPayload = (
+  punctuation: 'ellipsis' | 'emDash' | 'singleQuote' | 'doubleQuote',
+) => ({
+  action: 'autoSubstituted',
+  actionSubject: 'text',
+  actionSubjectId: 'punctuation',
+  eventType: 'track',
+  attributes: {
+    punctuation,
+  },
+});
+
+const createFormattedPayload = (
+  actionSubjectId: 'strong' | 'italic' | 'strike' | 'code',
+) => ({
+  action: 'formatted',
+  actionSubject: 'text',
+  actionSubjectId: actionSubjectId,
+  eventType: 'track',
+  attributes: {
+    inputMethod: 'autoformatting',
+  },
+});
 
 const autoFormatPatterns = [
   {
@@ -43,27 +71,54 @@ const autoFormatPatterns = [
     doc: strong('abc'),
     name: 'strong',
     regex: strongRegex2,
+    analyticsGasV3Payload: createFormattedPayload('strong'),
   },
   {
     string: '__abc__',
     doc: strong('abc'),
     name: 'strong',
     regex: strongRegex1,
+    analyticsGasV3Payload: createFormattedPayload('strong'),
   },
-  { string: '*abc*', doc: em('abc'), name: 'em', regex: italicRegex2 },
-  { string: '_abc_', doc: em('abc'), name: 'em', regex: italicRegex1 },
-  { string: '~~abc~~', doc: strike('abc'), name: 'strike', regex: strikeRegex },
-  { string: '`abc`', doc: code('abc'), name: 'code', regex: codeRegex },
+  {
+    string: '*abc*',
+    doc: em('abc'),
+    name: 'em',
+    regex: italicRegex2,
+    analyticsGasV3Payload: createFormattedPayload('italic'),
+  },
+  {
+    string: '_abc_',
+    doc: em('abc'),
+    name: 'em',
+    regex: italicRegex1,
+    analyticsGasV3Payload: createFormattedPayload('italic'),
+  },
+  {
+    string: '~~abc~~',
+    doc: strike('abc'),
+    name: 'strike',
+    regex: strikeRegex,
+    analyticsGasV3Payload: createFormattedPayload('strike'),
+  },
+  {
+    string: '`abc`',
+    doc: code('abc'),
+    name: 'code',
+    regex: codeRegex,
+    analyticsGasV3Payload: createFormattedPayload('code'),
+  },
 ];
 
 describe('text-formatting input rules', () => {
   const createEditor = createEditorFactory();
 
   let trackEvent: AnalyticsHandler;
-  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  let createAnalyticsEvent: jest.MockInstance<UIAnalyticsEventInterface>;
+
   const editor = (doc: any, disableCode = false) => {
-    createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
-    return createEditor({
+    createAnalyticsEvent = createAnalyticsEventMock();
+    const editorWrapper = createEditor({
       doc,
       editorProps: {
         analyticsHandler: trackEvent,
@@ -73,11 +128,13 @@ describe('text-formatting input rules', () => {
         emojiProvider: new Promise(() => {}),
         mentionProvider: new Promise(() => {}),
       },
-      createAnalyticsEvent,
+      createAnalyticsEvent: createAnalyticsEvent as any,
       providerFactory: ProviderFactory.create({
         emojiProvider: new Promise(() => {}),
       }),
     });
+    createAnalyticsEvent.mockClear();
+    return editorWrapper;
   };
 
   beforeEach(() => {
@@ -88,16 +145,32 @@ describe('text-formatting input rules', () => {
     string: string,
     editorContent: BuilderContent,
     analyticsName: string,
+    analyticsV3Payload?: object,
     contentNode = p,
   ) => {
-    it(`should autoformat: ${string}`, () => {
-      const { editorView, sel } = editor(doc(contentNode('{<>}')));
-      insertText(editorView, string, sel);
-      expect(editorView.state.doc).toEqualDocument(doc(editorContent));
+    describe(`typing ${string}`, () => {
+      let editorView: EditorView;
+      let sel: number;
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(contentNode('{<>}'))));
+        insertText(editorView, string, sel);
+      });
 
-      expect(trackEvent).toHaveBeenCalledWith(
-        `atlassian.editor.format.${analyticsName}.autoformatting`,
-      );
+      it(`should autoformat`, () => {
+        expect(editorView.state.doc).toEqualDocument(doc(editorContent));
+      });
+
+      it('should track analytics v2 event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(
+          `atlassian.editor.format.${analyticsName}.autoformatting`,
+        );
+      });
+
+      if (analyticsV3Payload) {
+        it('should create analytics GAS V3 event', () => {
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(analyticsV3Payload);
+        });
+      }
     });
   };
 
@@ -149,38 +222,84 @@ describe('text-formatting input rules', () => {
   };
 
   describe('atlassian product rule', () => {
-    autoformats('atlassian ', p('Atlassian '), 'product');
+    autoformats(
+      'atlassian ',
+      p('Atlassian '),
+      'product',
+      createProductPayload('Atlassian', 'atlassian'),
+    );
     notautoformats('something-atlassian');
     notautoformats('atlassian');
     notautoformats('atlassian.com');
 
-    autoformats('jira and JIRA ', p('Jira and Jira '), 'product');
+    autoformats(
+      'jira and JIRA ',
+      p('Jira and Jira '),
+      'product',
+      createProductPayload('Jira', 'jira'),
+    );
     notautoformats('.jira');
     notautoformats('jira.atlassian.com');
 
-    autoformats('bitbucket ', p('Bitbucket '), 'product');
+    autoformats(
+      'bitbucket ',
+      p('Bitbucket '),
+      'product',
+      createProductPayload('Bitbucket', 'bitbucket'),
+    );
     notautoformats('.bitbucket');
     notautoformats('bitbucket.atlassian.com');
 
-    autoformats('hipchat and HipChat ', p('Hipchat and Hipchat '), 'product');
+    autoformats(
+      'hipchat and HipChat ',
+      p('Hipchat and Hipchat '),
+      'product',
+      createProductPayload('Hipchat', 'hipchat'),
+    );
     notautoformats('.hipchat');
     notautoformats('hipchat.atlassian.com');
 
-    autoformats('trello ', p('Trello '), 'product');
+    autoformats(
+      'trello ',
+      p('Trello '),
+      'product',
+      createProductPayload('Trello', 'trello'),
+    );
     notautoformats('.trello');
 
-    autoformats('  \t    atlassian   ', p('  \t    Atlassian   '), 'product');
+    autoformats(
+      '  \t    atlassian   ',
+      p('  \t    Atlassian   '),
+      'product',
+      createProductPayload('Atlassian', 'atlassian'),
+    );
   });
 
   describe('smart quotes rule', () => {
-    autoformats("'nice'", p('‘nice’'), 'quote');
-    autoformats("'hello' 'world'", p('‘hello’ ‘world’'), 'quote');
+    autoformats(
+      "'nice'",
+      p('‘nice’'),
+      'quote',
+      createPunctuationPayload('singleQuote'),
+    );
+    autoformats(
+      "'hello' 'world'",
+      p('‘hello’ ‘world’'),
+      'quote',
+      createPunctuationPayload('singleQuote'),
+    );
 
-    autoformats("don't hate, can't wait", p('don’t hate, can’t wait'), 'quote');
+    autoformats(
+      "don't hate, can't wait",
+      p('don’t hate, can’t wait'),
+      'quote',
+      createPunctuationPayload('singleQuote'),
+    );
     autoformats(
       "don't hate, can't 'wait'",
       p('don’t hate, can’t ‘wait’'),
       'quote',
+      createPunctuationPayload('singleQuote'),
     );
 
     notautoformats("':)");
@@ -190,12 +309,23 @@ describe('text-formatting input rules', () => {
     notautoformats("' test'");
     notautoformats("'test '");
 
-    autoformats('"hello" "world"', p('“hello” “world”'), 'quote');
-    autoformats('let " it\'d close"', p('let “ it’d close”'), 'quote');
+    autoformats(
+      '"hello" "world"',
+      p('“hello” “world”'),
+      'quote',
+      createPunctuationPayload('doubleQuote'),
+    );
+    autoformats(
+      'let " it\'d close"',
+      p('let “ it’d close”'),
+      'quote',
+      createPunctuationPayload('doubleQuote'),
+    );
     autoformats(
       'let " it\'d close" \'hey',
       p("let “ it’d close” 'hey"),
       'quote',
+      createPunctuationPayload('doubleQuote'),
     );
 
     describe('supports composed autoformatting for quotation', () => {
@@ -229,6 +359,7 @@ describe('text-formatting input rules', () => {
       '  \t   "hello" \'world\'   ',
       p('  \t   “hello” ‘world’   '),
       'quote',
+      createPunctuationPayload('doubleQuote'),
     );
 
     describe('cursor movement', () => {
@@ -242,6 +373,18 @@ describe('text-formatting input rules', () => {
   });
 
   describe('arrow rule', () => {
+    const createSymbolPayload = (
+      symbol: 'leftArrow' | 'rightArrow' | 'doubleArrow',
+    ) => ({
+      action: 'autoSubstituted',
+      actionSubject: 'text',
+      actionSubjectId: 'symbol',
+      eventType: 'track',
+      attributes: {
+        symbol,
+      },
+    });
+
     notautoformats('->');
     notautoformats('-->');
     notautoformats('<-');
@@ -255,11 +398,11 @@ describe('text-formatting input rules', () => {
     notautoformats('->> ');
 
     // autoformat only after space
-    autoformats('-> ', p('→ '), 'arrow');
-    autoformats('--> ', p('→ '), 'arrow');
-    autoformats('<- ', p('← '), 'arrow');
-    autoformats('<-- ', p('← '), 'arrow');
-    autoformats('<-> ', p('↔︎ '), 'arrow');
+    autoformats('-> ', p('→ '), 'arrow', createSymbolPayload('rightArrow'));
+    autoformats('--> ', p('→ '), 'arrow', createSymbolPayload('rightArrow'));
+    autoformats('<- ', p('← '), 'arrow', createSymbolPayload('leftArrow'));
+    autoformats('<-- ', p('← '), 'arrow', createSymbolPayload('leftArrow'));
+    autoformats('<-> ', p('↔︎ '), 'arrow', createSymbolPayload('doubleArrow'));
 
     // test spacing
     autoformatCombinations(
@@ -281,7 +424,12 @@ describe('text-formatting input rules', () => {
   describe('typography rule', () => {
     notautoformats('.. .');
 
-    autoformats('...', p('…'), 'typography');
+    autoformats(
+      '...',
+      p('…'),
+      'typography',
+      createPunctuationPayload('ellipsis'),
+    );
     autoformatCombinations(['...', '.'], '….', 'typography');
     autoformatCombinations(['...', '...'], '……', 'typography');
     autoformatCombinations(['...', '\t...'], '…\t…', 'typography');
@@ -294,8 +442,18 @@ describe('text-formatting input rules', () => {
     notautoformats('--');
     notautoformats('    --.');
 
-    autoformats('-- ', p('– '), 'typography');
-    autoformats('--\t', p('–\t'), 'typography');
+    autoformats(
+      '-- ',
+      p('– '),
+      'typography',
+      createPunctuationPayload('emDash'),
+    );
+    autoformats(
+      '--\t',
+      p('–\t'),
+      'typography',
+      createPunctuationPayload('emDash'),
+    );
 
     autoformatCombinations(
       ['\t -- ', '  \t text'],
@@ -315,15 +473,6 @@ describe('text-formatting input rules', () => {
 
   describe('strong rule', () => {
     it('should call analytics events', () => {
-      const expectedPayload: AnalyticsEventPayload = {
-        action: ACTION.FORMATTED,
-        actionSubject: ACTION_SUBJECT.TEXT,
-        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRONG,
-        eventType: EVENT_TYPE.TRACK,
-        attributes: {
-          inputMethod: INPUT_METHOD.FORMATTING,
-        },
-      };
       const { editorView, sel } = editor(doc(p('hello {<>} there')));
 
       insertText(editorView, '**text**', sel);
@@ -331,7 +480,9 @@ describe('text-formatting input rules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.strong.autoformatting',
       );
-      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        createFormattedPayload('strong'),
+      );
     });
 
     it('should convert text to strong for link also', () => {
@@ -389,15 +540,6 @@ describe('text-formatting input rules', () => {
 
   describe('em rule', () => {
     it('should call analytics events', () => {
-      const expectedPayload: AnalyticsEventPayload = {
-        action: ACTION.FORMATTED,
-        actionSubject: ACTION_SUBJECT.TEXT,
-        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_ITALIC,
-        eventType: EVENT_TYPE.TRACK,
-        attributes: {
-          inputMethod: INPUT_METHOD.FORMATTING,
-        },
-      };
       const { editorView, sel } = editor(doc(p('hello {<>} there')));
 
       insertText(editorView, '*text*', sel);
@@ -405,7 +547,9 @@ describe('text-formatting input rules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.em.autoformatting',
       );
-      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        createFormattedPayload('italic'),
+      );
     });
 
     it('should keep current marks when converting from markdown', () => {
@@ -456,15 +600,6 @@ describe('text-formatting input rules', () => {
 
   describe('strike rule', () => {
     it('should call analytics events', () => {
-      const expectedPayload: AnalyticsEventPayload = {
-        action: ACTION.FORMATTED,
-        actionSubject: ACTION_SUBJECT.TEXT,
-        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_STRIKE,
-        eventType: EVENT_TYPE.TRACK,
-        attributes: {
-          inputMethod: INPUT_METHOD.FORMATTING,
-        },
-      };
       const { editorView, sel } = editor(doc(p('hello {<>} there')));
 
       insertText(editorView, '~~text~~', sel);
@@ -472,7 +607,9 @@ describe('text-formatting input rules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.strike.autoformatting',
       );
-      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        createFormattedPayload('strike'),
+      );
     });
 
     it('should not apply strike to ~~ prefixed words when later ~~ pair found', () => {
@@ -490,15 +627,6 @@ describe('text-formatting input rules', () => {
 
   describe('code rule', () => {
     it('should call analytics events', () => {
-      const expectedPayload: AnalyticsEventPayload = {
-        action: ACTION.FORMATTED,
-        actionSubject: ACTION_SUBJECT.TEXT,
-        actionSubjectId: ACTION_SUBJECT_ID.FORMAT_CODE,
-        eventType: EVENT_TYPE.TRACK,
-        attributes: {
-          inputMethod: INPUT_METHOD.FORMATTING,
-        },
-      };
       const { editorView, sel } = editor(doc(p('hello {<>} there')));
 
       insertText(editorView, '`text`', sel);
@@ -506,7 +634,9 @@ describe('text-formatting input rules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.code.autoformatting',
       );
-      expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        createFormattedPayload('code'),
+      );
     });
 
     it('should convert mention to plain text', () => {
@@ -614,7 +744,13 @@ describe('text-formatting input rules', () => {
 
     describe('simple single word in heading', () => {
       autoFormatPatterns.forEach(pattern => {
-        autoformats(pattern.string, h1(pattern.doc), pattern.name, h1);
+        autoformats(
+          pattern.string,
+          h1(pattern.doc),
+          pattern.name,
+          pattern.analyticsGasV3Payload,
+          h1,
+        );
       });
     });
 

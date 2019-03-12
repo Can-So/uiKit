@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage as FormattedMessageNamespace } from 'react-intl';
 
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
@@ -11,6 +11,7 @@ import {
   JiraServiceDeskIcon,
   JiraCoreIcon,
 } from '@atlaskit/logo';
+import FormattedMessage from '../primitives/formatted-message';
 import { LicenseInformationDataStructure } from '../providers/types';
 import messages from './messages';
 import JiraOpsLogo from './assets/jira-ops-logo';
@@ -35,7 +36,7 @@ export enum ProductKey {
 const SINGLE_JIRA_PRODUCT: 'jira' = 'jira';
 
 interface MessagesDict {
-  [index: string]: FormattedMessage.MessageDescriptor;
+  [index: string]: FormattedMessageNamespace.MessageDescriptor;
 }
 
 export type SwitcherItemType = {

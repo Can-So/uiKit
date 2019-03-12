@@ -75,11 +75,6 @@ const appearanceOptions = [
       'should be used for things like comments where you have a field input but require a toolbar & save/cancel buttons',
   },
   // {
-  //   label: 'Inline comment',
-  //   value: 'inline-comment',
-  //   description: 'should be used for inline comments; no toolbar is displayed',
-  // },
-  // {
   //   label: 'Chromeless',
   //   value: 'chromeless',
   //   description: 'is essentially the `comment` editor but without the editor chrome, like toolbar & save/cancel buttons'

@@ -171,7 +171,7 @@ Object {
           "content": Array [
             Object {
               "attrs": Object {
-                "background": "rgb(68, 114, 196)",
+                "background": "#4472c4",
               },
               "content": Array [
                 Object {
@@ -188,7 +188,7 @@ Object {
             },
             Object {
               "attrs": Object {
-                "background": "rgb(68, 114, 196)",
+                "background": "#4472c4",
               },
               "content": Array [
                 Object {
@@ -205,7 +205,7 @@ Object {
             },
             Object {
               "attrs": Object {
-                "background": "rgb(68, 114, 196)",
+                "background": "#4472c4",
               },
               "content": Array [
                 Object {
@@ -1899,7 +1899,7 @@ Object {
           "content": Array [
             Object {
               "attrs": Object {
-                "background": "rgb(239, 239, 239)",
+                "background": "#efefef",
               },
               "content": Array [
                 Object {
@@ -1921,7 +1921,7 @@ Object {
             },
             Object {
               "attrs": Object {
-                "background": "rgb(239, 239, 239)",
+                "background": "#efefef",
               },
               "content": Array [
                 Object {
@@ -1943,7 +1943,7 @@ Object {
             },
             Object {
               "attrs": Object {
-                "background": "rgb(239, 239, 239)",
+                "background": "#efefef",
               },
               "content": Array [
                 Object {

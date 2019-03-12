@@ -3,7 +3,7 @@
 /* Currently, this test will check if the form and its component renders into different browsers.
 Some actual functional tests need to be added:
 - Interaction with all fields
-- Submit the form
+- Submit the form (DONE)
 Those tests should be added before the release candidate*/
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
@@ -12,7 +12,7 @@ import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 /* Url to test the example */
 const urlFormCreateRepo = getExampleUrl('core', 'form', 'create-repository');
 
-/* Css selectors used for the test */
+/* Css selectors used for the repository form test */
 const createForm = 'form[name="create-repo"]';
 const owner = 'div#owner-select';
 const project = 'div#project-select';

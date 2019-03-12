@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, Messages } from 'react-intl';
+import { Messages } from 'react-intl';
 
 import {
   SwitcherWrapper,
@@ -30,6 +30,7 @@ import {
   RenderTracker,
 } from '../utils/analytics';
 import now from '../utils/performance-now';
+import FormattedMessage from '../primitives/formatted-message';
 import TryLozenge from '../primitives/try-lozenge';
 import { FeatureFlagProps } from '../types';
 

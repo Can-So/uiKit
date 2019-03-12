@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import FormattedMessage from './formatted-message';
 import messages from '../utils/messages';
 import Button from '@atlaskit/button';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
