@@ -263,8 +263,9 @@ export default class PickerFacade {
 
     listeners.forEach(cb =>
       cb({
-        status: 'mobile-upload-end',
         id: file.id,
+        status: 'mobile-upload-end',
+        fileMimeType: file.type,
         collection: file.collectionName,
         publicId: file.publicId,
       }),
