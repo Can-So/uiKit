@@ -1,0 +1,1 @@
+- The internal mechanism for handling successfully retrieved conversations now resets the internal store to that collection instead of concatenating them to pre-existing ones.
