@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.4.3
+- [patch] [7641ec96cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7641ec96cd):
+
+  - ED-5998: improve cell selection with merged cells, deleting columns and rows
+
 ## 103.4.2
 - [patch] [6380484429](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6380484429):
 

@@ -1,1 +1,0 @@
-- ED-5998: improve cell selection with merged cells, deleting columns and rows
