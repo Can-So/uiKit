@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@atlaskit/build-releases": "^3.0.0",
-    "netlify-cli": "^2.8.1",
+    "netlify-cli": "^2.8.3",
     "query-string": "^4.3.2",
     "whatwg-fetch": "^2.0.3"
   }
