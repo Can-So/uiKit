@@ -1,1 +1,1 @@
-export * from './traverse';
+export * from './dist/es2015/traverse';

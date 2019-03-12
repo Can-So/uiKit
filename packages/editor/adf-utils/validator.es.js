@@ -1,2 +1,2 @@
 /* eslint flowtype/require-valid-file-annotation: 0 */
-export * from './validator';
+export * from './dist/es2015/validator';

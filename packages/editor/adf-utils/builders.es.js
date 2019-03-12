@@ -1,2 +1,2 @@
 /* eslint flowtype/require-valid-file-annotation: 0 */
-export * from './builders';
+export * from './dist/es2015/builders';
