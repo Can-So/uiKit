@@ -230,10 +230,7 @@ export const reducers = createReducer(initialState, {
       },
     );
 
-    const conversations: Conversation[] = [
-      ...state.conversations,
-      ...leveledConversations,
-    ];
+    const conversations: Conversation[] = [...leveledConversations];
 
     return {
       ...state,
