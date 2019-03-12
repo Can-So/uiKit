@@ -1,5 +1,10 @@
 # @atlaskit/form
 
+## 5.2.0
+- [minor] [fe7683f9d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe7683f9d6):
+
+  - Feature: Submit form on Cmd + Enter on Mac and Ctrl + Enter on Mac and Windows
+
 ## 5.1.8
 - [patch] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 

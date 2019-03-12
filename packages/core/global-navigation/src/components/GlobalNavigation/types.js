@@ -192,6 +192,15 @@ export type GlobalNavigationProps = {
   /** The text to display in the tooltip for the settings drawer item. */
   settingsTooltip?: string,
 
+  /**
+    NOTE: This property is experimental and may be removed in a minor release.
+
+    Feature flag for Atlassian Switcher, whether to enable multiple link of
+    each jira products in atlassian switcher
+    e.g. instead of showing only Jira link, shows Jira Software and Jira Service Desk links
+  */
+  experimental_enableSplitJira?: boolean,
+
   ...$Exact<GlobalNavDrawerProps>,
 };
 

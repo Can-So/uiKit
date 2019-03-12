@@ -26,9 +26,9 @@ import {
   findCellClosestToPos,
   emptyCell,
   setCellAttrs,
-  getSelectionRangeInRow,
-  getSelectionRangeInColumn,
   getSelectionRect,
+  selectColumn as selectColumnTransform,
+  selectRow as selectRowTransform,
 } from 'prosemirror-utils';
 import { getPluginState, pluginKey, ACTIONS } from './pm-plugins/main';
 import {
@@ -55,13 +55,9 @@ export const clearHoverSelection: Command = (state, dispatch) => {
 };
 
 export const hoverColumns = (
-  columns: number[],
+  hoveredColumns: number[],
   isInDanger?: boolean,
 ): Command => (state, dispatch) => {
-  const hoveredColumns = columns.reduce((acc: number[], index) => {
-    const { indexes } = getSelectionRangeInColumn(index)(state.tr);
-    return acc.concat(indexes.filter(index => acc.indexOf(index) === -1));
-  }, []);
   const cells = getCellsInColumn(hoveredColumns)(state.selection);
   if (!cells) {
     return false;
@@ -84,14 +80,10 @@ export const hoverColumns = (
   return true;
 };
 
-export const hoverRows = (rows: number[], isInDanger?: boolean): Command => (
-  state,
-  dispatch,
-) => {
-  const hoveredRows = rows.reduce((acc: number[], index) => {
-    const { indexes } = getSelectionRangeInRow(index)(state.tr);
-    return acc.concat(indexes.filter(index => acc.indexOf(index) === -1));
-  }, []);
+export const hoverRows = (
+  hoveredRows: number[],
+  isInDanger?: boolean,
+): Command => (state, dispatch) => {
   const cells = getCellsInRow(hoveredRows)(state.selection);
   if (!cells) {
     return false;
@@ -651,12 +643,10 @@ export const setTableRef = (tableRef?: HTMLElement | null): Command => (
 };
 
 export const selectColumn = (column: number): Command => (state, dispatch) => {
-  const { tr } = state;
-  const { $anchor, $head, indexes } = getSelectionRangeInColumn(column)(tr);
-  tr.setSelection(new CellSelection($anchor, $head) as any);
+  const tr = selectColumnTransform(column)(state.tr);
 
   let targetCellPosition;
-  const cells = getCellsInColumn(indexes[0])(tr.selection);
+  const cells = getCellsInColumn(column)(tr.selection);
   if (cells && cells.length) {
     targetCellPosition = cells[0].pos;
   }
@@ -675,12 +665,10 @@ export const selectColumn = (column: number): Command => (state, dispatch) => {
 };
 
 export const selectRow = (row: number): Command => (state, dispatch) => {
-  const { tr } = state;
-  const { $anchor, $head, indexes } = getSelectionRangeInRow(row)(tr);
-  tr.setSelection(new CellSelection($anchor, $head) as any);
+  const tr = selectRowTransform(row)(state.tr);
 
   let targetCellPosition;
-  const cells = getCellsInRow(indexes[0])(tr.selection);
+  const cells = getCellsInRow(row)(tr.selection);
   if (cells && cells.length) {
     targetCellPosition = cells[0].pos;
   }

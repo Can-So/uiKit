@@ -1,1 +1,0 @@
-- ED-5603: fixed updating links on mobile

@@ -8,7 +8,7 @@ import {
   td,
   tdEmpty,
 } from '@atlaskit/editor-test-helpers';
-import { tableBackgroundColorNames } from '@atlaskit/adf-schema';
+import { tableBackgroundColorNames, rgbToHex } from '@atlaskit/adf-schema';
 import { TablePluginState } from '../../../../../plugins/table/types';
 import { pluginKey } from '../../../../../plugins/table/pm-plugins/main';
 
@@ -34,10 +34,10 @@ describe('table -> nodeviews -> cell.tsx', () => {
       );
       const { state, dispatch } = editorView;
       const cell = findCellClosestToPos(state.doc.resolve(pos))!;
-      const background = 'red';
+      const background = tableBackgroundColorNames.get('red');
       dispatch(setCellAttrs(cell, { background })(state.tr));
       const cellDomNode = document.querySelector('td')!;
-      expect(cellDomNode.style.backgroundColor).toEqual(background);
+      expect(rgbToHex(cellDomNode.style.backgroundColor!)).toEqual(background);
     });
   });
 
