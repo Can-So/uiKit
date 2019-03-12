@@ -9,10 +9,11 @@ import { removeBreakout } from '../commands/remove-breakout';
 import { setBreakoutMode } from '../commands/set-breakout-mode';
 import { getBreakoutMode } from './get-breakout-mode';
 import { isBreakoutMarkAllowed } from './is-breakout-mark-allowed';
+import { InjectedIntl } from 'react-intl';
 
 export function createBreakoutToolbarItems(
   state: EditorState,
-  { formatMessage },
+  { formatMessage }: { formatMessage: InjectedIntl['formatMessage'] },
 ) {
   if (!isBreakoutMarkAllowed(state)) {
     return false;

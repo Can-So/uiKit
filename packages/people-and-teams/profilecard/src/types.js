@@ -2,13 +2,6 @@
 import { type Element as ReactElement, type Node as ReactNode } from 'react';
 import type { IntlShape } from 'react-intl';
 
-export type PresenceTypes =
-  | 'none'
-  | 'available'
-  | 'busy'
-  | 'unavailable'
-  | 'focus';
-
 export type StatusTypes = 'active' | 'inactive' | 'closed';
 
 export type StatusModifiedDateType =
@@ -38,14 +31,12 @@ export type ProfilecardProps = {
   location?: string,
   companyName?: string,
   timestring?: string,
-  presence?: PresenceTypes,
   actions?: ProfileCardAction[],
   isLoading?: boolean,
   hasError?: boolean,
   errorType?: ?ProfileCardErrorType,
   clientFetchProfile?: Function,
   analytics?: Function,
-  presenceMessage?: string,
   statusModifiedDate?: number,
   // allow to pass custom elevation, example value of this prop is: `e100`, `e200`, `e300`, `e400` and `e500`
   // Reference from `packages/core/theme/src/elevation.js` to see all valid values.

@@ -72,7 +72,7 @@ declare global {
  * Inspired from:
  * https://stackoverflow.com/questions/11219582/how-to-detect-my-browser-version-and-operating-system-using-javascript
  */
-export const getBrowserInfo = nAgt => {
+export const getBrowserInfo = (nAgt: string) => {
   let browserName;
   let browserVersion;
   let nameOffset;
@@ -140,9 +140,9 @@ export const getBrowserInfo = nAgt => {
  * Inspired from:
  * https://stackoverflow.com/questions/9514179/how-to-find-the-operating-system-version-using-javascript
  */
-export const getDeviceInfo = (nAgt, nVersion) => {
+export const getDeviceInfo = (nAgt: string, nVersion: string) => {
   let os = '';
-  let osVersion = '';
+  let osVersion: string | null = '';
 
   let clientStrings = [
     { s: 'Windows 3.11', r: /Win16/ },
@@ -200,7 +200,7 @@ export const getDeviceInfo = (nAgt, nVersion) => {
       break;
     case 'iOS':
       match = /OS (\d+)_(\d+)_?(\d+)?/.exec(nVersion);
-      osVersion = match && match[1] + '.' + match[2] + '.' + (match[3] | 0);
+      osVersion = match && match[1] + '.' + match[2] + '.' + (match[3] || 0);
   }
   return `${os} ${osVersion}`;
 };
@@ -215,7 +215,7 @@ export default class ToolbarFeedback extends PureComponent<Props, State> {
     showOptOutOption: false,
   };
 
-  private handleRef = ref => {
+  private handleRef = (ref: ToolbarButton | null) => {
     if (ref) {
       this.setState({
         target: ReactDOM.findDOMNode(ref || null) as HTMLElement,
@@ -332,7 +332,7 @@ export default class ToolbarFeedback extends PureComponent<Props, State> {
 
       // triggerFunction is executed as soon as JIRA issue collector script is loaded
       window.ATL_JQ_PAGE_PROPS = {
-        triggerFunction: showCollectorDialog => {
+        triggerFunction: (showCollectorDialog: () => void) => {
           this.setState({ jiraIssueCollectorScriptLoading: false });
 
           if (typeof showCollectorDialog === 'function') {

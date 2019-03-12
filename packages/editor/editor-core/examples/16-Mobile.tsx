@@ -13,13 +13,7 @@ class MentionProviderImpl implements MentionProvider {
   isFiltering(query: string): boolean {
     return false;
   }
-  subscribe(
-    key: string,
-    callback?,
-    errCallback?,
-    infoCallback?,
-    allResultsCallback?,
-  ): void {}
+  subscribe(): void {}
   unsubscribe(key: string): void {}
 }
 

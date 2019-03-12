@@ -90,7 +90,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
     }
   }
 
-  private deprecationWarnings(props) {
+  private deprecationWarnings(props: EditorProps) {
     const nextVersion = nextMajorVersion();
     const deprecatedProperties = {
       mediaProvider: {
@@ -133,9 +133,12 @@ export default class Editor extends React.Component<EditorProps, {}> {
       },
     };
 
-    Object.keys(deprecatedProperties).forEach(property => {
+    (Object.keys(deprecatedProperties) as Array<
+      keyof typeof deprecatedProperties
+    >).forEach(property => {
       if (props.hasOwnProperty(property)) {
-        const meta = deprecatedProperties[property];
+        const meta: { type?: string; message?: string } =
+          deprecatedProperties[property];
         const type = meta.type || 'enabled by default';
 
         // tslint:disable-next-line:no-console
@@ -159,7 +162,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
     if (
       props.hasOwnProperty('allowTables') &&
       typeof props.allowTables !== 'boolean' &&
-      !props.allowTables.advanced
+      (!props.allowTables || !props.allowTables.advanced)
     ) {
       // tslint:disable-next-line:no-console
       console.warn(

@@ -1,5 +1,10 @@
 # @atlaskit/atlassian-switcher
 
+## 0.1.2
+- [patch] [6ca66fceac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ca66fceac):
+
+  - Add enableSplitJira to allow multiple jira link displayed if there are jira products
+
 ## 0.1.1
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

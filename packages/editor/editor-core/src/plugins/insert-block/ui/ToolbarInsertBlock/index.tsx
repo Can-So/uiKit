@@ -39,7 +39,7 @@ import {
   findKeymapByDescription,
   addLink,
 } from '../../../../keymaps';
-import { InsertMenuCustomItem } from '../../../../types';
+import { InsertMenuCustomItem, CommandDispatch } from '../../../../types';
 import DropdownMenu from '../../../../ui/DropdownMenu';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import {
@@ -70,7 +70,9 @@ import {
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
   PANEL_TYPE,
+  InsertEventPayload,
 } from '../../../analytics';
+import { EditorState } from 'prosemirror-state';
 
 export const messages = defineMessages({
   action: {
@@ -192,7 +194,7 @@ export interface Props {
     macroProvider: MacroProvider,
     node?: PMNode,
     isEditing?: boolean,
-  ) => (state, dispatch) => void;
+  ) => (state: EditorState, dispatch: CommandDispatch) => void;
   dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 }
 
@@ -201,7 +203,7 @@ export interface State {
   emojiPickerOpen: boolean;
 }
 
-type MENU_TYPE = INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU;
+export type TOOLBAR_MENU_TYPE = INPUT_METHOD.TOOLBAR | INPUT_METHOD.INSERT_MENU;
 
 const blockTypeIcons = {
   codeblock: CodeIcon,
@@ -212,15 +214,15 @@ const blockTypeIcons = {
 /**
  * Checks if an element is detached (i.e. not in the current document)
  */
-const isDetachedElement = el => !document.body.contains(el);
+const isDetachedElement = (el: HTMLElement) => !document.body.contains(el);
 const noop = () => {};
 
 class ToolbarInsertBlock extends React.PureComponent<
   Props & InjectedIntlProps,
   State
 > {
-  private pickerRef: ReactInstance;
-  private button?;
+  private pickerRef?: ReactInstance;
+  private button?: HTMLElement;
 
   state: State = {
     isOpen: false,
@@ -301,14 +303,17 @@ class ToolbarInsertBlock extends React.PureComponent<
     );
   }
 
-  private handleButtonRef = (ref): void => {
+  private handleButtonRef = (ref: HTMLElement): void => {
     const buttonRef = ref || null;
     if (buttonRef) {
       this.button = ReactDOM.findDOMNode(buttonRef) as HTMLElement;
     }
   };
 
-  private handleDropDownButtonRef = (ref, items) => {
+  private handleDropDownButtonRef = (
+    ref: ToolbarButton | null,
+    items: Array<any>,
+  ) => {
     items.forEach(item => item.handleRef && item.handleRef(ref));
   };
 
@@ -321,15 +326,17 @@ class ToolbarInsertBlock extends React.PureComponent<
     this.pickerRef = ref;
   };
 
-  private handleClickOutside = e => {
-    const picker = ReactDOM.findDOMNode(this.pickerRef);
+  private handleClickOutside = (e: MouseEvent) => {
+    const picker = this.pickerRef && ReactDOM.findDOMNode(this.pickerRef);
     // Ignore click events for detached elements.
     // Workaround for FS-1322 - where two onClicks fire - one when the upload button is
     // still in the document, and one once it's detached. Does not always occur, and
     // may be a side effect of a react render optimisation
     if (
       !picker ||
-      (!isDetachedElement(e.target) && !picker.contains(e.target))
+      (e.target &&
+        !isDetachedElement(e.target as HTMLElement) &&
+        !picker.contains(e.target as HTMLElement))
     ) {
       this.toggleEmojiPicker();
     }
@@ -356,7 +363,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     }
 
     const labelInsertMenu = formatMessage(messages.insertMenu);
-    const toolbarButtonFactory = (disabled: boolean, items) => (
+    const toolbarButtonFactory = (disabled: boolean, items: Array<any>) => (
       <ToolbarButton
         ref={el => this.handleDropDownButtonRef(el, items)}
         selected={isOpen}
@@ -518,7 +525,8 @@ class ToolbarInsertBlock extends React.PureComponent<
     }
     if (availableWrapperBlockTypes) {
       availableWrapperBlockTypes.forEach(blockType => {
-        const BlockTypeIcon = blockTypeIcons[blockType.name];
+        const BlockTypeIcon =
+          blockTypeIcons[blockType.name as keyof typeof blockTypeIcons];
         const labelBlock = formatMessage(blockType.title);
         const shortcutBlock = tooltip(
           findKeymapByDescription(blockType.title.defaultMessage),
@@ -631,7 +639,7 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private createTable = withAnalytics(
     'atlassian.editor.format.table.button',
-    (inputMethod: MENU_TYPE): boolean => {
+    (inputMethod: TOOLBAR_MENU_TYPE): boolean => {
       const { editorView } = this.props;
       return commandWithAnalytics({
         action: ACTION.INSERTED,
@@ -700,33 +708,26 @@ class ToolbarInsertBlock extends React.PureComponent<
     },
   );
 
-  private insertDecision = withAnalytics(
-    'atlassian.fabric.decision.trigger.button',
-    (): boolean => {
-      const { editorView } = this.props;
-      if (!editorView) {
-        return false;
-      }
-      insertTaskDecision(editorView, 'decisionList');
-      return true;
-    },
-  );
-
-  private insertAction = withAnalytics(
-    'atlassian.fabric.action.trigger.button',
-    (): boolean => {
-      const { editorView } = this.props;
-      if (!editorView) {
-        return false;
-      }
-      insertTaskDecision(editorView, 'taskList');
-      return true;
-    },
-  );
+  private insertTaskDecision = (
+    name: 'action' | 'decision',
+    inputMethod: TOOLBAR_MENU_TYPE,
+  ) =>
+    withAnalytics(
+      `atlassian.fabric.${name}.trigger.button`,
+      (): boolean => {
+        const { editorView } = this.props;
+        if (!editorView) {
+          return false;
+        }
+        const listType = name === 'action' ? 'taskList' : 'decisionList';
+        insertTaskDecision(editorView, listType, inputMethod);
+        return true;
+      },
+    );
 
   private insertHorizontalRule = withAnalytics(
     'atlassian.editor.format.horizontalrule.button',
-    (inputMethod: MENU_TYPE): boolean => {
+    (inputMethod: TOOLBAR_MENU_TYPE): boolean => {
       const { editorView } = this.props;
       const tr = createHorizontalRule(
         editorView.state,
@@ -746,7 +747,7 @@ class ToolbarInsertBlock extends React.PureComponent<
 
   private insertBlockTypeWithAnalytics = (
     itemName: string,
-    inputMethod: MENU_TYPE,
+    inputMethod: TOOLBAR_MENU_TYPE,
   ) => {
     const {
       editorView,
@@ -755,7 +756,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     } = this.props;
     const { state, dispatch } = editorView;
 
-    let actionSubjectId;
+    let actionSubjectId: ACTION_SUBJECT_ID | undefined;
     let additionalAttrs = {};
     switch (itemName) {
       case 'panel':
@@ -778,7 +779,7 @@ class ToolbarInsertBlock extends React.PureComponent<
           ...additionalAttrs,
         },
         eventType: EVENT_TYPE.TRACK,
-      });
+      } as InsertEventPayload);
     }
 
     onInsertBlockType!(itemName)(state, dispatch);
@@ -809,8 +810,8 @@ class ToolbarInsertBlock extends React.PureComponent<
     item,
     inputMethod,
   }: {
-    item;
-    inputMethod: MENU_TYPE;
+    item: any;
+    inputMethod: TOOLBAR_MENU_TYPE;
   }): void => {
     const {
       editorView,
@@ -848,10 +849,8 @@ class ToolbarInsertBlock extends React.PureComponent<
         this.insertBlockTypeWithAnalytics(item.value.name, inputMethod);
         break;
       case 'action':
-        this.insertAction();
-        break;
       case 'decision':
-        this.insertDecision();
+        this.insertTaskDecision(item.value.name, inputMethod)();
         break;
       case 'horizontalrule':
         this.insertHorizontalRule(inputMethod);
@@ -889,13 +888,13 @@ class ToolbarInsertBlock extends React.PureComponent<
     }
   };
 
-  private insertToolbarMenuItem = btn =>
+  private insertToolbarMenuItem = (btn: any) =>
     this.onItemActivated({
       item: btn,
       inputMethod: INPUT_METHOD.TOOLBAR,
     });
 
-  private insertInsertMenuItem = ({ item }) =>
+  private insertInsertMenuItem = ({ item }: { item: any }) =>
     this.onItemActivated({
       item,
       inputMethod: INPUT_METHOD.INSERT_MENU,

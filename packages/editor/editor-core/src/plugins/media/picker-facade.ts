@@ -79,15 +79,14 @@ export default class PickerFacade {
       );
     }
 
-    // handles upload start, confusingly
-    picker.on('upload-preview-update', this.handleUploadPreviewUpdate);
-    picker.on('upload-processing', this.handleReady);
-    picker.on('upload-error', this.handleUploadError);
-    picker.on('mobile-upload-end', this.handleMobileUploadEnd);
+    (picker as any).on('upload-preview-update', this.handleUploadPreviewUpdate);
+    (picker as any).on('upload-processing', this.handleReady);
+    (picker as any).on('upload-error', this.handleUploadError);
+    (picker as any).on('mobile-upload-end', this.handleMobileUploadEnd);
 
     if (isDropzone(picker)) {
-      picker.on('drag-enter', this.handleDragEnter);
-      picker.on('drag-leave', this.handleDragLeave);
+      (picker as any).on('drag-enter', this.handleDragEnter);
+      (picker as any).on('drag-leave', this.handleDragLeave);
     }
 
     if (isDropzone(picker) || isClipboard(picker)) {
@@ -137,7 +136,7 @@ export default class PickerFacade {
     this.picker.setUploadParams(params);
   }
 
-  onClose(cb): () => void {
+  onClose(cb: () => void): () => void {
     const { picker } = this;
     if (isPopup(picker)) {
       picker.on('closed', cb);
@@ -264,8 +263,9 @@ export default class PickerFacade {
 
     listeners.forEach(cb =>
       cb({
-        status: 'mobile-upload-end',
         id: file.id,
+        status: 'mobile-upload-end',
+        fileMimeType: file.type,
         collection: file.collectionName,
         publicId: file.publicId,
       }),

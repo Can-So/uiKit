@@ -1,23 +1,27 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+export type ContextAdapter = Record<string, React.Context<any>>;
+
 // injects contexts via old context API to children
 // and gives access to the original Provider so that
 // the child can re-emit it
-export const createContextAdapter = createContextAdapter => {
+export const createContextAdapter = (createContextAdapter: ContextAdapter) => {
   return class extends React.Component<{}, { hasRendered: {} }> {
     static childContextTypes = {
       contextAdapter: PropTypes.object,
     };
 
-    contextState = {};
+    contextState: Record<string, any> = {};
 
     getChildContext() {
       return { contextAdapter: this.zipProvidersWithValues() };
     }
 
     zipProvidersWithValues() {
-      return Object.keys(createContextAdapter).reduce((zipped, name) => {
+      return Object.keys(createContextAdapter).reduce<
+        Record<string, React.Context<any> & { value: any }>
+      >((zipped, name) => {
         zipped[name] = {
           Provider: createContextAdapter[name].Provider,
           Consumer: createContextAdapter[name].Consumer,
@@ -42,6 +46,7 @@ export const createContextAdapter = createContextAdapter => {
                 this.contextState[name] = value;
                 this.forceUpdate();
               }
+              return null;
             }}
           </Consumer>
         );

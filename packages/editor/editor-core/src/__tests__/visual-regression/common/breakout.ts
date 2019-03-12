@@ -1,18 +1,33 @@
 import { initFullPageEditorWithAdf, Device, snapshot } from '../_utils';
-import { KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
 import * as adf from './__fixtures__/columns.adf.json';
+import {
+  clickOnColumn,
+  scrollToColumn,
+} from '../../__helpers/page-objects/_columns';
+import { Page } from '../../__helpers/page-objects/_types';
 
-describe.skip('Snapshot Test: Popup', () => {
-  it('placement: start,end is correct on scroll', async () => {
+describe('Columns:', () => {
+  let page: Page;
+  beforeEach(async () => {
     // @ts-ignore
-    const page = global.page;
+    page = global.page;
     await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI);
-    await page.click('div[data-layout-column] > p');
+  });
+
+  it('should show breakout', async () => {
+    const columnNumber = 1;
+    await clickOnColumn(page, columnNumber);
+
     await snapshot(page);
-    for (let _i of Array.from({ length: 40 })) {
-      await page.keyboard.press(KeyboardKeys.arrowDown);
-    }
-    await page.click('div[data-layout-column] > p');
+  });
+
+  it('should place breakout at the start/end of the scroll', async () => {
+    const columnNumber = 1;
+    const offset = 100;
+
+    await clickOnColumn(page, columnNumber);
+    await scrollToColumn(page, columnNumber, offset);
+
     await snapshot(page);
   });
 });

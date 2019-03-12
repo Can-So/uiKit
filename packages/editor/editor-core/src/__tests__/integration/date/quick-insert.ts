@@ -7,9 +7,10 @@ import {
 
 const dateLozenge = 'span[timestamp]';
 
+// ED-6506 - Unskip 'chrome' & 'safari' once date mocking is resolved
 BrowserTestCase(
   'quick-insert.ts: Insert date via quick insert',
-  { skip: ['firefox', 'edge', 'ie'] },
+  { skip: ['firefox', 'edge', 'ie', 'chrome', 'safari'] },
   async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await page.mockDate(1546261200000, 11); // 1st Jan 2019 00:00 AEST / 31st Dec 2018 13:00 UTC
@@ -29,9 +30,10 @@ BrowserTestCase(
   },
 );
 
+// ED-6506 - Unskip 'chrome' & 'safari' once date mocking is resolved
 BrowserTestCase(
   "quick-insert.ts: Uses today's date in user's local timezone as initial selection",
-  { skip: ['firefox', 'edge', 'ie'] },
+  { skip: ['firefox', 'edge', 'ie', 'chrome', 'safari'] },
   async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await page.mockDate(1546261200000, 11); // 1st Jan 2019 00:00 AEST / 31st Dec 2018 13:00 UTC

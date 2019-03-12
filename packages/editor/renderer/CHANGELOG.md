@@ -1,5 +1,35 @@
 # @atlaskit/renderer
 
+## 41.6.1
+- [patch] [8ed53a1cbb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ed53a1cbb):
+
+  - fix padding, wrapping for inline smart links.
+
+## 41.6.0
+- [minor] [345bc86152](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345bc86152):
+
+  - Email renderer does not underline links anymore
+
+## 41.5.0
+- [minor] [8ec7dd4cb2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ec7dd4cb2):
+
+  - email rendering - fixed a bug with em
+
+## 41.4.0
+- [minor] [3a2836d6d7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a2836d6d7):
+
+  - move MediaViewer opening logic into Card by passing shouldOpenMediaViewer flag when there is no click handler defined
+
+## 41.3.1
+- Updated dependencies [dbff4fdcf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dbff4fdcf9):
+  - @atlaskit/editor-common@33.0.4
+  - @atlaskit/profilecard@8.0.0
+
+## 41.3.0
+- [minor] [b8d146fb27](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8d146fb27):
+
+  - CS-843 Email renderer codeblock support for outlook
+
 ## 41.2.1
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

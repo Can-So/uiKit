@@ -6,11 +6,7 @@ import { AtlasKitThemeProvider, colors, themed } from '@atlaskit/theme';
 import { profiles } from '../../mock-helpers';
 import { AkProfilecard } from '../../src';
 
-import type {
-  PresenceTypes,
-  StatusTypes,
-  StatusModifiedDateType,
-} from '../../src/types';
+import type { StatusTypes, StatusModifiedDateType } from '../../src/types';
 
 const StoryWrapper = styled.div`
   label {
@@ -44,7 +40,6 @@ type Props = {};
 type State = {
   avatarUrl: string,
   email: string,
-  presence: PresenceTypes,
   fullName: string,
   nickname: string,
   companyName: string,
@@ -71,7 +66,6 @@ type State = {
   hasNoActions: boolean,
   hasLoadingState: boolean,
   hasErrorState: boolean,
-  hasLongPresenceMessage: string,
   hasDisabledAccountMessage: boolean,
   hasDisabledAccountLozenge: boolean,
 };
@@ -80,7 +74,6 @@ export default class ProfilecardInteractive extends Component<Props, State> {
   state = {
     avatarUrl: profiles[4].User.avatarUrl,
     email: 'nlindsey@example.com',
-    presence: 'available',
     fullName: 'Natalie Lindsey',
     nickname: 'natalie',
     meta: 'Senior Developer',
@@ -108,7 +101,6 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     hasNoActions: false,
     hasLoadingState: false,
     hasErrorState: false,
-    hasLongPresenceMessage: '',
     hasDisabledAccountMessage: false,
     hasDisabledAccountLozenge: false,
   };
@@ -132,21 +124,6 @@ export default class ProfilecardInteractive extends Component<Props, State> {
             this.setState({ [attribute]: !this.state[attribute] })
           }
           type="checkbox"
-        />
-        {attribute}
-      </label>
-    );
-  }
-
-  createRadioPresenceAttribute(attribute: PresenceTypes) {
-    const id = `label-${uid()}`;
-    return (
-      <label htmlFor={id}>
-        <input
-          checked={this.state.presence === attribute}
-          id={id}
-          onChange={() => this.setState({ presence: attribute })}
-          type="radio"
         />
         {attribute}
       </label>
@@ -282,16 +259,10 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               }
               meta={this.state.hasMeta ? meta : ''}
               nickname={this.state.nickname}
-              presence={this.state.presence}
               timestring={
                 this.state.hasTime ? getTimeString(this.state.hasWeekday) : ''
               }
               clientFetchProfile={handleActionClick('Retry')}
-              presenceMessage={
-                this.state.hasLongPresenceMessage
-                  ? 'I honestly have a very long and useless presence message'
-                  : ''
-              }
               disabledAccountMessage={
                 this.state.hasDisabledAccountMessage ? (
                   <React.Fragment>
@@ -338,17 +309,6 @@ export default class ProfilecardInteractive extends Component<Props, State> {
                 {this.createCheckboxBooleanAttribute('hasCustomElevation')}
               </li>
               <li>{this.createCheckboxBooleanAttribute('hasDarkTheme')}</li>
-            </ul>
-
-            <ul>
-              <li>{this.createRadioPresenceAttribute('available')}</li>
-              <li>{this.createRadioPresenceAttribute('busy')}</li>
-              <li>{this.createRadioPresenceAttribute('unavailable')}</li>
-              <li>{this.createRadioPresenceAttribute('focus')}</li>
-              <li>{this.createRadioPresenceAttribute('none')}</li>
-              <li>
-                {this.createCheckboxBooleanAttribute('hasLongPresenceMessage')}
-              </li>
             </ul>
           </div>
 

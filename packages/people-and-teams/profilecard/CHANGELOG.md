@@ -1,5 +1,15 @@
 # @atlaskit/profilecard
 
+## 8.0.1
+- [patch] [9a0c34d490](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a0c34d490):
+
+  - Fixes package.json to not exclude built files
+
+## 8.0.0
+- [major] [dbff4fdcf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dbff4fdcf9):
+
+  - Remove presence from profilecard now that users cannot use Stride to control it
+
 ## 7.0.0
 - [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 

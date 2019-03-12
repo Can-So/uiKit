@@ -52,8 +52,8 @@ const isFirstChildOfParent = (
  * is usually inside the text content.
  */
 const isNthParentOfType = (
-  nodeType,
-  depthAway,
+  nodeType: string,
+  depthAway: number,
 ): ((state: EditorState, view?: EditorView) => boolean) => {
   return (state: EditorState): boolean => {
     const { $from } = state.selection;

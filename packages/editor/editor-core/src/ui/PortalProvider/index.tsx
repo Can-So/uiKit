@@ -7,11 +7,15 @@ import {
 import { EventDispatcher } from '../../event-dispatcher';
 
 export type PortalProviderProps = {
-  render: (portalProviderAPI: PortalProviderAPI) => React.ReactChild | null;
+  render: (
+    portalProviderAPI: PortalProviderAPI,
+  ) => React.ReactChild | JSX.Element | null;
 };
 
+export type Portals = Map<HTMLElement, React.ReactChild>;
+
 export type PortalRendererState = {
-  portals: Map<HTMLElement, React.ReactChild>;
+  portals: Portals;
 };
 
 type MountedPortal = {
@@ -23,12 +27,12 @@ export class PortalProviderAPI extends EventDispatcher {
   portals: Map<HTMLElement, MountedPortal> = new Map();
   context: any;
 
-  setContext = context => {
+  setContext = (context: any) => {
     this.context = context;
   };
 
   render(
-    children: () => React.ReactChild | null,
+    children: () => React.ReactChild | JSX.Element | null,
     container: HTMLElement,
     hasReactContext: boolean = false,
   ) {
@@ -66,7 +70,7 @@ export class PortalProviderAPI extends EventDispatcher {
 export class PortalProvider extends React.Component<PortalProviderProps> {
   portalProviderAPI: PortalProviderAPI;
 
-  constructor(props) {
+  constructor(props: PortalProviderProps) {
     super(props);
     this.portalProviderAPI = new PortalProviderAPI();
   }
@@ -84,14 +88,14 @@ export class PortalRenderer extends React.Component<
   { portalProviderAPI: PortalProviderAPI },
   PortalRendererState
 > {
-  constructor(props) {
+  constructor(props: { portalProviderAPI: PortalProviderAPI }) {
     super(props);
     props.portalProviderAPI.setContext(this);
     props.portalProviderAPI.on('update', this.handleUpdate);
     this.state = { portals: new Map() };
   }
 
-  handleUpdate = portals => this.setState({ portals });
+  handleUpdate = (portals: Portals) => this.setState({ portals });
 
   render() {
     const { portals } = this.state;

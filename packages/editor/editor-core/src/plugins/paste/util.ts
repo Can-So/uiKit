@@ -55,7 +55,7 @@ export function getPasteSource(event: ClipboardEvent): string {
 }
 
 // TODO: Write JEST tests for this part
-export function isCode(str) {
+export function isCode(str: string) {
   const lines = str.split(/\r?\n|\r/);
   if (3 > lines.length) {
     return false;
@@ -96,7 +96,7 @@ export function isCode(str) {
 
 // @see https://product-fabric.atlassian.net/browse/ED-3159
 // @see https://github.com/markdown-it/markdown-it/issues/38
-export function escapeLinks(text) {
+export function escapeLinks(text: string) {
   return text.replace(/(\[([^\]]+)\]\()?((https?|ftp):\/\/[^\s]+)/g, str => {
     return str.match(/^(https?|ftp):\/\/[^\s]+$/) ? `<${str}>` : str;
   });

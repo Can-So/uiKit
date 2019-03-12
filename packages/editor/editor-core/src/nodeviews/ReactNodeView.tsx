@@ -5,6 +5,7 @@ import { PortalProviderAPI } from '../ui/PortalProvider';
 
 export type getPosHandler = () => number;
 export type ReactComponentProps = { [key: string]: any };
+export type ForwardRef = (node: HTMLElement | null) => void;
 
 export default class ReactNodeView implements NodeView {
   private domRef?: HTMLElement;
@@ -97,9 +98,9 @@ export default class ReactNodeView implements NodeView {
     return undefined;
   }
 
-  handleRef = (node: HTMLElement | undefined) => this._handleRef(node);
+  handleRef = (node: HTMLElement | null) => this._handleRef(node);
 
-  private _handleRef(node: HTMLElement | undefined) {
+  private _handleRef(node: HTMLElement | null) {
     const contentDOM = this.contentDOMWrapper || this.contentDOM;
 
     // move the contentDOM node inside the inner reference after rendering
@@ -110,7 +111,7 @@ export default class ReactNodeView implements NodeView {
 
   render(
     props: ReactComponentProps,
-    forwardRef?: (node: HTMLElement) => void,
+    forwardRef?: ForwardRef,
   ): React.ReactElement<any> | null {
     return this.reactComponent ? (
       <this.reactComponent

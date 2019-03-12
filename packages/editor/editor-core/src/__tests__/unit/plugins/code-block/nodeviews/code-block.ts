@@ -2,11 +2,11 @@ import createStub from 'raf-stub';
 import { code_block, defaultSchema } from '@atlaskit/editor-test-helpers';
 import codeBlockNodeView from '../../../../../plugins/code-block/nodeviews/code-block';
 
-const codeBlock = (attrs?) => (...args) =>
+const codeBlock = (attrs?: {}) => (...args: any) =>
   code_block(attrs)(...args)(defaultSchema);
 
 describe('Code Block - NodeView', () => {
-  let waitForAnimationFrame;
+  let waitForAnimationFrame: any;
 
   beforeEach(() => {
     let stub = createStub();

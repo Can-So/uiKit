@@ -32,7 +32,7 @@ describe('inputrules', () => {
   const createEditor = createEditorFactory();
 
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
-  let trackEvent;
+  let trackEvent: jest.SpyInstance | undefined;
 
   const editor = (doc: any) => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
@@ -40,7 +40,7 @@ describe('inputrules', () => {
       doc,
       editorPlugins: [listPlugin, codeBlockPlugin(), panelPlugin],
       editorProps: {
-        analyticsHandler: trackEvent,
+        analyticsHandler: trackEvent as any,
         allowAnalyticsGASV3: true,
       },
       createAnalyticsEvent,
@@ -57,7 +57,7 @@ describe('inputrules', () => {
 
   beforeEach(() => {
     trackEvent = jest.fn();
-    analyticsService.trackEvent = trackEvent;
+    analyticsService.trackEvent = trackEvent as any;
   });
 
   describe('heading rule', () => {

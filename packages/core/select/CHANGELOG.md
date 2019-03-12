@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 8.0.1
+- [patch] [69c6f6acb7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c6f6acb7):
+
+  - Minor bug fixes in 2.4.2 react-select patch. See the release notes for details here https://github.com/JedWatson/react-select/releases/tag/v2.4.2
+
 ## 8.0.0
 - [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 

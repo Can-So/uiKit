@@ -12,7 +12,7 @@ import MediaGroup from '../../../../../../plugins/media/nodeviews/mediaGroup';
 import { EditorAppearance } from '../../../../../../types';
 
 describe('nodeviews/mediaGroup', () => {
-  let pluginState;
+  let pluginState: MediaPluginState;
   const mediaNode = media({
     id: 'foo',
     type: 'file',
@@ -21,15 +21,14 @@ describe('nodeviews/mediaGroup', () => {
   const view = {} as EditorView;
   beforeEach(() => {
     pluginState = {} as MediaPluginState;
-    pluginState.getMediaOptions = () => ({});
-    pluginState.getMediaNodeState = () => ({});
+    pluginState.getMediaOptions = () => ({} as any);
     pluginState.mediaGroupNodes = {};
     pluginState.handleMediaNodeRemoval = () => {};
     jest.spyOn(mediaStateKey, 'getState').mockImplementation(() => pluginState);
   });
 
   it('should re-render for custom media picker with no thumb', () => {
-    pluginState.getMediaOptions = () => ({ customMediaPicker: {} });
+    pluginState.getMediaOptions = () => ({ customMediaPicker: {} } as any);
 
     const mediaGroupNode = mediaGroup(mediaNode);
     const props = {

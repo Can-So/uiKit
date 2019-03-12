@@ -1,5 +1,65 @@
 # @atlaskit/editor-core
 
+## 103.4.4
+- [patch] [65acb722e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65acb722e3):
+
+  - ED-6412: Prevent inserting links containing 'javascript:'
+
+## 103.4.3
+- [patch] [7641ec96cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7641ec96cd):
+
+  - ED-5998: improve cell selection with merged cells, deleting columns and rows
+
+## 103.4.2
+- [patch] [6380484429](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6380484429):
+
+  - ED-6485 Support breakout mark on layout-section. Retain breakout mark when toggling list nested within columns.
+
+## 103.4.1
+- [patch] [5e319bb725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e319bb725):
+
+  - ED-6286: fix post-PR for media upload on mobile
+
+## 103.4.0
+- [minor] [6739aea208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6739aea208):
+
+  - Update editor-common and editor-core types
+
+## 103.3.0
+- [minor] [738f58ef9e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/738f58ef9e):
+
+  - ED-5019 Panels are no longer cleared by clear-formatting
+
+## 103.2.0
+- [minor] [08a09ae767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/08a09ae767):
+
+  -  ED-6377 Add Analytics GAS V3 for numbered/bulleted list format
+
+## 103.1.4
+- [patch] [be479e2335](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be479e2335):
+
+  - fix link opening logic for view and edit mode.
+
+## 103.1.3
+- [patch] [ed6ef51cfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed6ef51cfe):
+
+  - ED-6158: added a shortcut to contextual menu for insertRow and insertColumn
+
+## 103.1.2
+- [patch] [abb200b0b4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abb200b0b4):
+
+  - ED-6374: Switch to MutationObserver instead of rAF + nodeview update for handling breakout content inside a table cell.
+
+## 103.1.1
+- [patch] [109158320c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/109158320c):
+
+  - Make more avatar colors available to the collab plugin
+
+## 103.1.0
+- [minor] [58932a27f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58932a27f4):
+
+  - ED-6220 Fire v3 analytics events when insert actions or decisions
+
 ## 103.0.3
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

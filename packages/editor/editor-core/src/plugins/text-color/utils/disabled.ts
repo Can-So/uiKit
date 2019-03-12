@@ -1,7 +1,7 @@
-import { TextSelection } from 'prosemirror-state';
+import { TextSelection, EditorState } from 'prosemirror-state';
 import { isMarkAllowedInRange, isMarkExcluded } from '../../../utils/mark';
 
-export const getDisabledState = (state): boolean => {
+export const getDisabledState = (state: EditorState): boolean => {
   const { textColor } = state.schema.marks;
   if (textColor) {
     const { empty, ranges, $cursor } = state.selection as TextSelection;

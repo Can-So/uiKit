@@ -88,7 +88,7 @@ function getHeadingRules(schema: Schema): InputRuleWithHandler[] {
 
   // Old analytics stuff
   const currentHandler = hashRule.handler;
-  hashRule.handler = (state, match: string[], start, end) => {
+  hashRule.handler = (state, match: string[], start: number, end: number) => {
     analyticsService.trackEvent(
       `atlassian.editor.format.heading${match[1].length}.autoformatting`,
     );
@@ -130,7 +130,7 @@ function getBlockQuoteRules(schema: Schema): InputRuleWithHandler[] {
 
   greatherThanRule.handler = trackAndInvoke(
     'atlassian.editor.format.blockquote.autoformatting',
-    greatherThanRule.handler,
+    greatherThanRule.handler as any,
   );
 
   const leftNodeReplacementGreatherRule = createInputRule(

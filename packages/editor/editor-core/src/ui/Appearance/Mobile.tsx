@@ -4,7 +4,10 @@ import PluginSlot from '../PluginSlot';
 import WithPluginState from '../WithPluginState';
 import ContentStyles from '../ContentStyles';
 import { EditorAppearanceComponentProps, EditorAppearance } from '../../types';
-import { pluginKey as maxContentSizePluginKey } from '../../plugins/max-content-size';
+import {
+  pluginKey as maxContentSizePluginKey,
+  MaxContentSizePluginState,
+} from '../../plugins/max-content-size';
 import { mentionPluginKey } from '../../plugins/mentions';
 import WithFlash from '../WithFlash';
 
@@ -51,14 +54,18 @@ export default class Editor extends React.Component<
   private appearance: EditorAppearance = 'mobile';
   private containerElement: HTMLElement | undefined;
 
-  private handleRef = ref => {
+  private handleRef = (ref: HTMLElement) => {
     this.containerElement = ref;
     if (this.props.onUiReady) {
       this.props.onUiReady(ref);
     }
   };
 
-  private renderMobile = ({ maxContentSize, mentions }) => {
+  private renderMobile = ({
+    maxContentSize,
+  }: {
+    maxContentSize: MaxContentSizePluginState;
+  }) => {
     const {
       editorView,
       eventDispatcher,

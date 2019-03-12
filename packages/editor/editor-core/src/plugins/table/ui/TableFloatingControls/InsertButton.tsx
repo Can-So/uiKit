@@ -54,17 +54,17 @@ const getInsertLineWidth = (tableRef: HTMLElement) => {
   );
 };
 
-const tooltipMessageByType = type => {
+const tooltipMessageByType = (type: string) => {
   return type === 'row' ? tableMessages.insertRow : tableMessages.insertColumn;
 };
 
-const shortcutMessageByType = type => {
+const shortcutMessageByType = (type?: string) => {
   return type === 'row'
     ? keymaps.tooltip(keymaps.addRowAfter)
     : keymaps.tooltip(keymaps.addColumnAfter);
 };
 
-const shortcutTooltip = (message, shortcut) => (
+const shortcutTooltip = (message: string, shortcut?: string) => (
   <span>
     {message} <small>{shortcut}</small>
   </span>

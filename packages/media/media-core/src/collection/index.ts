@@ -74,10 +74,15 @@ export class CollectionFetcher {
   }
 
   private removeFromCache(id: string, collectionName: string) {
-    fileStreamsCache.remove(id);
     const collectionCacheIndex = collectionCache[
       collectionName
     ].items.findIndex(item => item.id === id);
+
+    if (collectionCacheIndex === -1) {
+      return;
+    }
+
+    fileStreamsCache.remove(id);
     collectionCache[collectionName].items.splice(collectionCacheIndex, 1);
   }
 

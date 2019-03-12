@@ -17,6 +17,7 @@ import {
   INDENT_TYPE,
   ACTION_SUBJECT,
 } from '../../analytics';
+import { CommandDispatch } from '../../../types';
 
 /**
  * Return the current indentation level
@@ -31,7 +32,7 @@ function getIndentLevel(indentText: string, indentSize: number) {
   return indentText.length / indentSize;
 }
 
-export function indent(state: EditorState, dispatch) {
+export function indent(state: EditorState, dispatch?: CommandDispatch) {
   const { text, start } = getLinesFromSelection(state);
   const { tr, selection } = state;
   forEachLine(text, (line, offset) => {
@@ -68,12 +69,14 @@ export function indent(state: EditorState, dispatch) {
       );
     }
   });
-  dispatch(tr);
-  analyticsService.trackEvent(`atlassian.editor.codeblock.indent`);
+  if (dispatch) {
+    dispatch(tr);
+    analyticsService.trackEvent(`atlassian.editor.codeblock.indent`);
+  }
   return true;
 }
 
-export function outdent(state: EditorState, dispatch) {
+export function outdent(state: EditorState, dispatch?: CommandDispatch) {
   const { text, start } = getLinesFromSelection(state);
   const { tr } = state;
   forEachLine(text, (line, offset) => {
@@ -103,12 +106,14 @@ export function outdent(state: EditorState, dispatch) {
       });
     }
   });
-  dispatch(tr);
-  analyticsService.trackEvent('atlassian.editor.codeblock.outdent');
+  if (dispatch) {
+    dispatch(tr);
+    analyticsService.trackEvent('atlassian.editor.codeblock.outdent');
+  }
   return true;
 }
 
-export function insertIndent(state: EditorState, dispatch) {
+export function insertIndent(state: EditorState, dispatch: CommandDispatch) {
   const { text: textAtStartOfLine } = getStartOfCurrentLine(state);
   const { indentToken } = getLineInfo(textAtStartOfLine);
   const indentToAdd = indentToken.token.repeat(
@@ -120,10 +125,13 @@ export function insertIndent(state: EditorState, dispatch) {
   return true;
 }
 
-export function insertNewlineWithIndent(state: EditorState, dispatch) {
+export function insertNewlineWithIndent(
+  state: EditorState,
+  dispatch?: CommandDispatch,
+) {
   const { text: textAtStartOfLine } = getStartOfCurrentLine(state);
   const { indentText } = getLineInfo(textAtStartOfLine);
-  if (indentText) {
+  if (indentText && dispatch) {
     dispatch(state.tr.insertText('\n' + indentText));
     return true;
   }

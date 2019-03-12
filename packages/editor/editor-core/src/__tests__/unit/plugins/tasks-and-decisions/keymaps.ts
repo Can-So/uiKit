@@ -16,12 +16,15 @@ import {
   tr,
 } from '@atlaskit/editor-test-helpers';
 import { uuid } from '@atlaskit/adf-schema';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import mentionsPlugin from '../../../../plugins/mentions';
 import tablesPlugin from '../../../../plugins/table';
 
 describe('tasks and decisions - keymaps', () => {
   const createEditor = createEditorFactory();
+
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
   beforeEach(() => {
     uuid.setStatic('local-uuid');
@@ -31,15 +34,19 @@ describe('tasks and decisions - keymaps', () => {
     uuid.setStatic(false);
   });
 
-  const editorFactory = (doc: any) =>
-    createEditor({
+  const editorFactory = (doc: any) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorPlugins: [
         tablesPlugin(),
         tasksAndDecisionsPlugin,
         mentionsPlugin(),
       ],
+      editorProps: { allowAnalyticsGASV3: true },
+      createAnalyticsEvent,
     });
+  };
 
   const scenarios = [
     {
@@ -514,6 +521,22 @@ describe('tasks and decisions - keymaps', () => {
 
             expect(editorView.state.doc).toEqualDocument(expectedDoc);
             compareSelection(editorFactory, expectedDoc, editorView);
+          });
+        });
+
+        it(`should fire v3 analytics event when insert ${name}`, () => {
+          const { editorView } = editorFactory(
+            doc(list(listProps)(item(itemProps)('Hello World{<>}'))),
+          );
+
+          sendKeyToPm(editorView, 'Enter');
+
+          expect(createAnalyticsEvent).toHaveBeenCalledWith({
+            action: 'inserted',
+            actionSubject: 'document',
+            actionSubjectId: name,
+            attributes: expect.objectContaining({ inputMethod: 'keyboard' }),
+            eventType: 'track',
           });
         });
       });

@@ -56,10 +56,11 @@ export interface ToolbarProps {
 export interface ToolbarInnerProps extends ToolbarProps {
   toolbarSize: ToolbarSize;
   isToolbarReducedSpacing: boolean;
+  isReducedSpacing?: boolean;
 }
 
 export class ToolbarInner extends React.Component<ToolbarInnerProps> {
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: ToolbarInnerProps) {
     return (
       nextProps.toolbarSize !== this.props.toolbarSize ||
       nextProps.disabled !== this.props.disabled ||
@@ -147,7 +148,7 @@ export default function ToolbarWithSizeDetector(props: ToolbarProps) {
   return (
     <div style={{ width: '100%', minWidth: '254px' }}>
       <SizeDetector>
-        {({ width }) =>
+        {({ width }: { width: number | null }) =>
           width === null ? null : <Toolbar {...props} width={width} />
         }
       </SizeDetector>

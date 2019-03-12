@@ -100,7 +100,7 @@ class AlignmentToolbar extends React.Component<Props, State> {
     );
   }
 
-  private changeAlignment = align => {
+  private changeAlignment = (align: AlignmentState) => {
     this.toggleOpen();
     return this.props.changeAlignment(align);
   };
@@ -109,7 +109,7 @@ class AlignmentToolbar extends React.Component<Props, State> {
     this.handleOpenChange({ isOpen: !this.state.isOpen });
   };
 
-  private handleOpenChange = ({ isOpen }) => {
+  private handleOpenChange = ({ isOpen }: { isOpen: boolean }) => {
     this.setState({ isOpen });
   };
 }

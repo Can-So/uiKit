@@ -27,7 +27,6 @@ const fakeProfileData = {
   location: 'Sydney, Australia',
   timestring: '9:00am',
   meta: profiles[4].User.meta,
-  presence: 'available',
   actions: [
     {
       label: 'View profile',
@@ -59,11 +58,9 @@ const bestCaseProfile = fakeData();
 
 const worstCaseProfile = fakeData({
   avatarUrl: null,
-  presence: null,
   meta: null,
   timestring: null,
   location: null,
-  presenceMessage: null,
 });
 
 const botCaseProfile = fakeData({

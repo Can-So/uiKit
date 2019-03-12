@@ -23,7 +23,7 @@ import { Node } from 'prosemirror-model';
 describe('layout', () => {
   const createEditor = createEditorFactory();
   const layoutPlugin = createLayoutPlugin({ allowBreakout: true });
-  const editor = doc =>
+  const editor = (doc: any) =>
     createEditor({ doc, editorProps: { allowLayouts: true } });
   const toState = (node: RefsNode) =>
     EditorState.create({

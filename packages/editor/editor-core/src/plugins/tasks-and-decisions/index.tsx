@@ -7,8 +7,8 @@ import {
   decisionList,
   taskItem,
   taskList,
-  uuid,
 } from '@atlaskit/adf-schema';
+import { Node as PMNode } from 'prosemirror-model';
 import { EditorPlugin } from '../../types';
 import { messages as insertBlockMessages } from '../insert-block/ui/ToolbarInsertBlock';
 import { createPlugin } from './pm-plugins/main';
@@ -16,11 +16,44 @@ import inputRulePlugin from './pm-plugins/input-rules';
 import keymap from './pm-plugins/keymaps';
 import ToolbarDecision from './ui/ToolbarDecision';
 import ToolbarTask from './ui/ToolbarTask';
+import { INPUT_METHOD } from '../analytics';
+import { insertTaskDecisionWithAnalytics, getListTypes } from './commands';
+import { Transaction, EditorState } from 'prosemirror-state';
+import { TaskDecisionListType } from './types';
 
 // tslint:disable-next-line:variable-name
 const TaskDecisionToolbarGroup = styled.div`
   display: flex;
 `;
+
+const quickInsertItem = (
+  insert: (node: PMNode) => Transaction,
+  state: EditorState,
+  listType: TaskDecisionListType,
+): Transaction => {
+  const { list, item } = getListTypes(listType, state.schema);
+  const addItem = ({
+    listLocalId,
+    itemLocalId,
+  }: {
+    listLocalId?: string;
+    itemLocalId?: string;
+  }) =>
+    insert(
+      list.createChecked(
+        { localId: listLocalId },
+        item.createChecked({
+          localId: itemLocalId,
+        }),
+      ),
+    );
+  return insertTaskDecisionWithAnalytics(
+    state,
+    listType,
+    INPUT_METHOD.QUICK_INSERT,
+    addItem,
+  ) as Transaction;
+};
 
 const tasksAndDecisionsPlugin: EditorPlugin = {
   nodes() {
@@ -83,14 +116,7 @@ const tasksAndDecisionsPlugin: EditorPlugin = {
           <EditorTaskIcon label={formatMessage(insertBlockMessages.action)} />
         ),
         action(insert, state) {
-          return insert(
-            state.schema.nodes.taskList.createChecked(
-              { localId: uuid.generate() },
-              state.schema.nodes.taskItem.createChecked({
-                localId: uuid.generate(),
-              }),
-            ),
-          );
+          return quickInsertItem(insert, state, 'taskList');
         },
       },
       {
@@ -102,14 +128,7 @@ const tasksAndDecisionsPlugin: EditorPlugin = {
           />
         ),
         action(insert, state) {
-          return insert(
-            state.schema.nodes.decisionList.createChecked(
-              { localId: uuid.generate() },
-              state.schema.nodes.decisionItem.createChecked({
-                localId: uuid.generate(),
-              }),
-            ),
-          );
+          return quickInsertItem(insert, state, 'decisionList');
         },
       },
     ],

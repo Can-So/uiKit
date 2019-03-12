@@ -3,14 +3,22 @@ import { ADFEntity } from '../types';
 
 export type Content = Array<string | [string, object] | Array<string>>;
 
+type ArrayForceContentValidationAttributesSpec = {
+  type: 'array';
+  items: Array<Array<string>>;
+  optional?: boolean;
+  forceContentValidation: boolean;
+};
+
 type AttributesSpec =
+  | ArrayForceContentValidationAttributesSpec
   | { type: 'number'; optional?: boolean; minimum: number; maximum: number }
   | { type: 'integer'; optional?: boolean; minimum: number; maximum: number }
   | { type: 'boolean'; optional?: boolean }
   | { type: 'string'; optional?: boolean; minLength?: number; pattern?: RegExp }
   | { type: 'enum'; values: Array<string>; optional?: boolean }
-  | { type: 'array'; items: Array<AttributesSpec>; optional?: boolean }
-  | { type: 'object'; optional?: boolean };
+  | { type: 'object'; optional?: boolean }
+  | { type: 'array'; items: Array<AttributesSpec>; optional?: boolean };
 
 interface ValidatorSpec {
   props?: {
@@ -68,6 +76,12 @@ const copy = <
 // Helpers
 const makeArray = <T>(maybeArray: T | Array<T>) =>
   Array.isArray(maybeArray) ? maybeArray : [maybeArray];
+
+function isForceContentValidationSpec(
+  x: AttributesSpec,
+): x is ArrayForceContentValidationAttributesSpec {
+  return isDefined((x as any).forceContentValidation);
+}
 
 function mapMarksItems(spec: ValidatorSpec, fn = (x: any) => x) {
   const { items, ...rest } = spec.props!.marks!;
@@ -243,19 +257,24 @@ export function validateAttrs<T>(spec: AttributesSpec, value: T): boolean {
     case 'object':
       return isPlainObject(value);
     case 'array':
-      const types = spec.items;
-      const lastTypeIndex = types.length - 1;
-      if (Array.isArray(value)) {
-        // We are doing this to support tuple which can be defined as [number, string]
-        // NOTE: Not validating tuples strictly
-        return value.every((x, i) =>
-          validateAttrs(types[Math.min(i, lastTypeIndex)], x),
-        );
+      if (!isForceContentValidationSpec(spec)) {
+        const types = spec.items;
+        const lastTypeIndex = types.length - 1;
+        if (Array.isArray(value)) {
+          // We are doing this to support tuple which can be defined as [number, string]
+          // NOTE: Not validating tuples strictly
+          return value.every((x, i) =>
+            validateAttrs(types[Math.min(i, lastTypeIndex)], x),
+          );
+        }
       }
       return false;
+
     case 'enum':
       return isString(value) && spec.values.indexOf(value) > -1;
   }
+
+  return false;
 }
 
 const getUnsupportedOptions = (spec?: ValidatorSpec) => {
@@ -465,9 +484,43 @@ export function validator(
              */
             for (let i = 0, length = attrOptions.length; i < length; ++i) {
               const attrOption = attrOptions[i];
-              [, invalidAttrs] = partitionObject(attrOption.props, (k, v) =>
-                validateAttrs(v, (entity.attrs as any)[k]),
-              );
+
+              [, invalidAttrs] = partitionObject(attrOption.props, (k, v) => {
+                // We need to validate the content from that kind of
+                // array against the nodes and marks. @see ED-6325
+                if (
+                  isForceContentValidationSpec(v) &&
+                  v.forceContentValidation
+                ) {
+                  const items = (entity.attrs as any)[k] || [];
+                  const newItems: Array<ADFEntity> = [];
+                  const specItemsAllowed = v.items;
+                  const entitySet = specItemsAllowed.reduce((xs, x) =>
+                    xs.concat(x),
+                  );
+
+                  for (let i = 0; i < items.length; i++) {
+                    const validateResult = validate(
+                      items[i],
+                      errorCallback,
+                      entitySet,
+                      validator,
+                    );
+
+                    if (!validateResult.valid && validateResult.entity) {
+                      newItems.push(validateResult.entity);
+                    }
+                  }
+
+                  newEntity.attrs = { ...newEntity.attrs };
+                  newEntity.attrs![k] = newItems;
+
+                  return true;
+                } else {
+                  return validateAttrs(v, (entity.attrs as any)[k]);
+                }
+              });
+
               if (!invalidAttrs.length) {
                 validatorAttrs = attrOption;
                 break;

@@ -20,7 +20,7 @@ import {
   hideInsertColumnOrRowButton,
 } from './actions';
 
-export const handleBlur = (view: EditorView, event): boolean => {
+export const handleBlur = (view: EditorView, event: Event): boolean => {
   const { state, dispatch } = view;
   // fix for issue ED-4665
   if (browser.ie_version !== 11) {
@@ -30,14 +30,14 @@ export const handleBlur = (view: EditorView, event): boolean => {
   return false;
 };
 
-export const handleFocus = (view: EditorView, event): boolean => {
+export const handleFocus = (view: EditorView, event: Event): boolean => {
   const { state, dispatch } = view;
   setEditorFocus(true)(state, dispatch);
   event.preventDefault();
   return false;
 };
 
-export const handleClick = (view: EditorView, event): boolean => {
+export const handleClick = (view: EditorView, event: Event): boolean => {
   const element = event.target as HTMLElement;
   const table = findTable(view.state.selection)!;
 
@@ -49,7 +49,7 @@ export const handleClick = (view: EditorView, event): boolean => {
   if (
     !table ||
     !isElementInTableCell(element) ||
-    element[matches]('table .image, table p, table .image div')
+    element[matches as 'matches']('table .image, table p, table .image div')
   ) {
     return false;
   }
@@ -111,7 +111,7 @@ export const handleMouseLeave = (view: EditorView): boolean => {
   return false;
 };
 
-export function handleTripleClick(view, pos) {
+export function handleTripleClick(view: EditorView, pos: number) {
   const { state, dispatch } = view;
   const $cellPos = cellAround(state.doc.resolve(pos));
   if (!$cellPos) {

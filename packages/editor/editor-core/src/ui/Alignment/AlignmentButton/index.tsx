@@ -2,12 +2,13 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 
 import ToolbarButton from '../../ToolbarButton';
+import { AlignmentState } from '../../../plugins/alignment/pm-plugins/main';
 
 export interface Props {
-  value: string;
+  value: AlignmentState;
   label: string;
   isSelected?: boolean;
-  onClick: (value: string) => void;
+  onClick: (value: AlignmentState) => void;
   content: React.ReactElement<any>;
 }
 
@@ -25,7 +26,7 @@ class AlignmentButton extends PureComponent<Props> {
     );
   }
 
-  onClick = e => {
+  onClick = (e: any) => {
     const { onClick, value } = this.props;
     e.preventDefault();
     onClick(value);

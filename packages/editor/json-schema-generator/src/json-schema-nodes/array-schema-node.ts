@@ -48,6 +48,7 @@ export default class ArraySchemaNode extends SchemaNodeWithValidators<
         'maxItems',
         'allowUnsupportedBlock',
         'allowUnsupportedInline',
+        'forceContentValidation',
       ],
       obj,
     );

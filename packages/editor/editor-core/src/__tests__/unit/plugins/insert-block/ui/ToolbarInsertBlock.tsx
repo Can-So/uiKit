@@ -41,6 +41,9 @@ import {
   INPUT_METHOD,
 } from '../../../../../plugins/analytics';
 import tablesPlugin from '../../../../../plugins/table';
+import { AnalyticsHandler } from '../../../../../analytics';
+import { ReactWrapper } from 'enzyme';
+import { EditorView } from 'prosemirror-view';
 
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
@@ -51,15 +54,15 @@ const mediaProvider: Promise<MediaProvider> = Promise.resolve({
 
 const providerFactory = ProviderFactory.create({ mediaProvider });
 
-const clickToolbarButton = (title, toolbarOption) => {
+const clickToolbarButton = (title: string, toolbarOption: ReactWrapper) => {
   const toolbarButton = toolbarOption
     .find(ToolbarButton)
-    .filterWhere(n => n.prop('title').indexOf(title) > -1)
+    .filterWhere(n => n.prop('title')!.indexOf(title) > -1)
     .find(Button);
   toolbarButton.simulate('click');
 };
 
-const clickInsertMenuOption = (title, toolbarOption) => {
+const clickInsertMenuOption = (title: string, toolbarOption: ReactWrapper) => {
   toolbarOption.find('button').simulate('click');
   const insertMenuOption = toolbarOption
     .find(Item)
@@ -82,9 +85,12 @@ const menus = [
 
 describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
   const createEditor = createEditorFactory();
-  let trackEvent;
-  let editorActions;
+  let trackEvent: jest.SpyInstance<AnalyticsHandler>;
+  let editorView: EditorView;
+  let editorActions: EditorActions;
+  let toolbarOption: ReactWrapper;
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  let dispatchAnalyticsSpy: jest.Mock;
 
   const editor = (doc: any, editorPlugins?: any[]) => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
@@ -92,7 +98,7 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
       doc,
       pluginKey: blockTypePluginKey,
       editorProps: {
-        analyticsHandler: trackEvent,
+        analyticsHandler: trackEvent as any,
         allowCodeBlocks: true,
         allowLayouts: true,
         allowLists: true,
@@ -399,37 +405,6 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     dispatchSpy.mockRestore();
   });
 
-  menus.forEach(menu => {
-    it(`should fire analytics event when rule option clicked in ${
-      menu.name
-    }`, () => {
-      const { editorView } = editor(doc(p('text')));
-      const dispatchSpy = jest.spyOn(editorView, 'dispatch');
-      const toolbarOption = mountWithIntl(
-        <ToolbarInsertBlock
-          horizontalRuleEnabled={true}
-          editorView={editorView}
-          buttons={menu.numButtons}
-          isReducedSpacing={false}
-        />,
-      );
-      menu.clickButton(messages.horizontalRule.defaultMessage, toolbarOption);
-
-      const tr = dispatchSpy.mock.calls[0][0];
-      const analyticsMeta = tr.getMeta(analyticsPluginKey)[0];
-      expect(analyticsMeta).toMatchObject({
-        payload: {
-          action: 'inserted',
-          actionSubject: 'document',
-          actionSubjectId: 'divider',
-          attributes: { inputMethod: menu.name },
-          eventType: 'track',
-        },
-      });
-      toolbarOption.unmount();
-    });
-  });
-
   it('should trigger insertBlockType when Panel option is clicked', () => {
     const { editorView, pluginState: pluginStateBlockType } = editor(
       doc(p('text')),
@@ -466,34 +441,6 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     toolbarOption.unmount();
   });
 
-  menus.forEach(menu => {
-    it(`should fire analytics event when panel option is clicked in ${
-      menu.name
-    }`, () => {
-      const { editorView } = editor(doc(p('text')));
-      const dispatchAnalyticsSpy = jest.fn();
-      const toolbarOption = mountWithIntl(
-        <ToolbarInsertBlock
-          availableWrapperBlockTypes={[PANEL]}
-          onInsertBlockType={jest.fn(() => () => true)}
-          editorView={editorView}
-          buttons={menu.numButtons}
-          isReducedSpacing={false}
-          dispatchAnalyticsEvent={dispatchAnalyticsSpy}
-        />,
-      );
-      menu.clickButton(blockTypeMessages.panel.defaultMessage, toolbarOption);
-
-      expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
-        action: 'inserted',
-        actionSubject: 'document',
-        actionSubjectId: 'panel',
-        attributes: { inputMethod: menu.name, panelType: 'info' },
-        eventType: 'track',
-      });
-    });
-  });
-
   it('should trigger insertBlockType when code block option is clicked', () => {
     const { editorView, pluginState: pluginStateBlockType } = editor(
       doc(p('text')),
@@ -528,37 +475,6 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
       'atlassian.editor.format.codeblock.button',
     );
     toolbarOption.unmount();
-  });
-
-  menus.forEach(menu => {
-    it(`should fire analytics event when code block option clicked in ${
-      menu.name
-    }`, () => {
-      const { editorView } = editor(doc(p('text')));
-      const dispatchAnalyticsSpy = jest.fn();
-      const toolbarOption = mountWithIntl(
-        <ToolbarInsertBlock
-          availableWrapperBlockTypes={[CODE_BLOCK]}
-          onInsertBlockType={jest.fn(() => () => true)}
-          editorView={editorView}
-          buttons={menu.numButtons}
-          isReducedSpacing={false}
-          dispatchAnalyticsEvent={dispatchAnalyticsSpy}
-        />,
-      );
-      menu.clickButton(
-        blockTypeMessages.codeblock.defaultMessage,
-        toolbarOption,
-      );
-
-      expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
-        action: 'inserted',
-        actionSubject: 'document',
-        actionSubjectId: 'codeBlock',
-        attributes: { inputMethod: menu.name },
-        eventType: 'track',
-      });
-    });
   });
 
   it('should trigger insertBlockType when blockquote option is clicked', () => {
@@ -598,69 +514,7 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     toolbarOption.unmount();
   });
 
-  it('should insert action when action option is clicked', () => {
-    uuid.setStatic('local-highlight');
-    const { editorView } = editor(doc(p('text')));
-    const toolbarOption = mountWithIntl(
-      <ToolbarInsertBlock
-        actionSupported={true}
-        editorView={editorView}
-        buttons={0}
-        isReducedSpacing={false}
-      />,
-    );
-    toolbarOption.find('button').simulate('click');
-    const actionButton = toolbarOption
-      .find(Item)
-      .filterWhere(n => n.text().indexOf(messages.action.defaultMessage) > -1);
-    actionButton.simulate('click');
-    expect(editorView.state.doc).toEqualDocument(
-      doc(
-        taskList({ localId: 'local-highlight' })(
-          taskItem({ localId: 'local-highlight', state: 'TODO' })('text'),
-        ),
-      ),
-    );
-    expect(trackEvent).toHaveBeenCalledWith(
-      'atlassian.fabric.action.trigger.button',
-    );
-    toolbarOption.unmount();
-    uuid.setStatic(false);
-  });
-
-  it('should insert decision when decision option is clicked', () => {
-    uuid.setStatic('local-highlight');
-    const { editorView } = editor(doc(p('text')));
-    const toolbarOption = mountWithIntl(
-      <ToolbarInsertBlock
-        decisionSupported={true}
-        editorView={editorView}
-        buttons={0}
-        isReducedSpacing={false}
-      />,
-    );
-    toolbarOption.find('button').simulate('click');
-    const decisionButton = toolbarOption
-      .find(Item)
-      .filterWhere(
-        n => n.text().indexOf(messages.decision.defaultMessage) > -1,
-      );
-    decisionButton.simulate('click');
-    expect(editorView.state.doc).toEqualDocument(
-      doc(
-        decisionList({ localId: 'local-highlight' })(
-          decisionItem({ localId: 'local-highlight' })('text'),
-        ),
-      ),
-    );
-    expect(trackEvent).toHaveBeenCalledWith(
-      'atlassian.fabric.decision.trigger.button',
-    );
-    toolbarOption.unmount();
-    uuid.setStatic(false);
-  });
-
-  it('should track table creation event when table option is clicked', () => {
+  it('should track table creation event when table menu is clicked option is clicked', () => {
     const { editorView } = editor(doc(p('text')), [tablesPlugin()]);
     const toolbarOption = mountWithIntl(
       <ToolbarInsertBlock
@@ -675,32 +529,6 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
       'atlassian.editor.format.table.button',
     );
     toolbarOption.unmount();
-  });
-
-  menus.forEach(menu => {
-    it(`should fire v3 analytics event when table option clicked in ${
-      menu.name
-    } menu`, () => {
-      const { editorView } = editor(doc(p('text')), [tablesPlugin()]);
-      const toolbarOption = mountWithIntl(
-        <ToolbarInsertBlock
-          tableSupported={true}
-          editorView={editorView}
-          buttons={menu.numButtons}
-          isReducedSpacing={false}
-        />,
-      );
-      menu.clickButton(messages.table.defaultMessage, toolbarOption);
-
-      expect(createAnalyticsEvent).toHaveBeenCalledWith({
-        action: 'inserted',
-        actionSubject: 'document',
-        actionSubjectId: 'table',
-        attributes: { inputMethod: menu.name },
-        eventType: 'track',
-      });
-      toolbarOption.unmount();
-    });
   });
 
   it(`should trigger insertMacroFromMacroBrowser when "${
@@ -837,14 +665,14 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
         {
           content: 'Custom A',
           value: { name: 'custom-a' },
-          onClick: editorActions => {
+          onClick: (editorActions: EditorActions) => {
             editorActions.appendText('adding custom-a');
           },
         },
         {
           content: 'Custom B',
           value: { name: 'custom-b' },
-          onClick: editorActions => {
+          onClick: (editorActions: EditorActions) => {
             editorActions.appendText('adding custom-b');
           },
         },
@@ -881,6 +709,199 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
 
       expect(editorActions.appendText).toHaveBeenCalledWith('adding custom-a');
       plusMenu.unmount();
+    });
+  });
+
+  menus.forEach(menu => {
+    describe(`for menu type ${menu}`, () => {
+      beforeEach(() => {
+        ({ editorView } = editor(doc(p('text'))));
+        dispatchAnalyticsSpy = jest.fn();
+      });
+
+      afterEach(() => {
+        if (toolbarOption) {
+          toolbarOption.unmount();
+        }
+      });
+
+      it('should fire analytics event when rule option clicked', () => {
+        toolbarOption = mountWithIntl(
+          <ToolbarInsertBlock
+            horizontalRuleEnabled={true}
+            editorView={editorView}
+            buttons={menu.numButtons}
+            isReducedSpacing={false}
+          />,
+        );
+        menu.clickButton(messages.horizontalRule.defaultMessage, toolbarOption);
+
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'inserted',
+          actionSubject: 'document',
+          actionSubjectId: 'divider',
+          attributes: { inputMethod: menu.name },
+          eventType: 'track',
+        });
+      });
+
+      it('should fire analytics event when panel option is clicked', () => {
+        toolbarOption = mountWithIntl(
+          <ToolbarInsertBlock
+            availableWrapperBlockTypes={[PANEL]}
+            onInsertBlockType={jest.fn(() => () => true)}
+            editorView={editorView}
+            buttons={menu.numButtons}
+            isReducedSpacing={false}
+            dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+          />,
+        );
+        menu.clickButton(blockTypeMessages.panel.defaultMessage, toolbarOption);
+
+        expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+          action: 'inserted',
+          actionSubject: 'document',
+          actionSubjectId: 'panel',
+          attributes: { inputMethod: menu.name, panelType: 'info' },
+          eventType: 'track',
+        });
+      });
+
+      it('should fire analytics event when code block option clicked', () => {
+        toolbarOption = mountWithIntl(
+          <ToolbarInsertBlock
+            availableWrapperBlockTypes={[CODE_BLOCK]}
+            onInsertBlockType={jest.fn(() => () => true)}
+            editorView={editorView}
+            buttons={menu.numButtons}
+            isReducedSpacing={false}
+            dispatchAnalyticsEvent={dispatchAnalyticsSpy}
+          />,
+        );
+        menu.clickButton(
+          blockTypeMessages.codeblock.defaultMessage,
+          toolbarOption,
+        );
+
+        expect(dispatchAnalyticsSpy).toHaveBeenCalledWith({
+          action: 'inserted',
+          actionSubject: 'document',
+          actionSubjectId: 'codeBlock',
+          attributes: { inputMethod: menu.name },
+          eventType: 'track',
+        });
+      });
+
+      it('should fire v3 analytics event when table option clicked', () => {
+        ({ editorView } = editor(doc(p('text')), [tablesPlugin()]));
+        toolbarOption = mountWithIntl(
+          <ToolbarInsertBlock
+            tableSupported={true}
+            editorView={editorView}
+            buttons={menu.numButtons}
+            isReducedSpacing={false}
+          />,
+        );
+        menu.clickButton(messages.table.defaultMessage, toolbarOption);
+
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'inserted',
+          actionSubject: 'document',
+          actionSubjectId: 'table',
+          attributes: { inputMethod: menu.name },
+          eventType: 'track',
+        });
+      });
+
+      describe('click action option', () => {
+        beforeEach(() => {
+          uuid.setStatic('local-highlight');
+          toolbarOption = mountWithIntl(
+            <ToolbarInsertBlock
+              actionSupported={true}
+              editorView={editorView}
+              buttons={menu.numButtons}
+              isReducedSpacing={false}
+            />,
+          );
+          menu.clickButton(messages.action.defaultMessage, toolbarOption);
+        });
+
+        afterEach(() => {
+          uuid.setStatic(false);
+        });
+
+        it('should insert action', () => {
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              taskList({ localId: 'local-highlight' })(
+                taskItem({ localId: 'local-highlight', state: 'TODO' })('text'),
+              ),
+            ),
+          );
+        });
+
+        it('should fire v2 analytics event', () => {
+          expect(trackEvent).toHaveBeenCalledWith(
+            'atlassian.fabric.action.trigger.button',
+          );
+        });
+
+        it('should fire v3 analytics event', () => {
+          expect(createAnalyticsEvent).toHaveBeenCalledWith({
+            action: 'inserted',
+            actionSubject: 'document',
+            actionSubjectId: 'action',
+            attributes: expect.objectContaining({ inputMethod: menu.name }),
+            eventType: 'track',
+          });
+        });
+      });
+
+      describe('click decision option', () => {
+        beforeEach(() => {
+          uuid.setStatic('local-highlight');
+          toolbarOption = mountWithIntl(
+            <ToolbarInsertBlock
+              decisionSupported={true}
+              editorView={editorView}
+              buttons={menu.numButtons}
+              isReducedSpacing={false}
+            />,
+          );
+          menu.clickButton(messages.decision.defaultMessage, toolbarOption);
+        });
+
+        afterEach(() => {
+          uuid.setStatic(false);
+        });
+
+        it('should insert decision', () => {
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              decisionList({ localId: 'local-highlight' })(
+                decisionItem({ localId: 'local-highlight' })('text'),
+              ),
+            ),
+          );
+        });
+
+        it('should fire v2 analytics event', () => {
+          expect(trackEvent).toHaveBeenCalledWith(
+            'atlassian.fabric.decision.trigger.button',
+          );
+        });
+
+        it('should fire v3 analytics event', () => {
+          expect(createAnalyticsEvent).toHaveBeenCalledWith({
+            action: 'inserted',
+            actionSubject: 'document',
+            actionSubjectId: 'decision',
+            attributes: expect.objectContaining({ inputMethod: menu.name }),
+            eventType: 'track',
+          });
+        });
+      });
     });
   });
 });

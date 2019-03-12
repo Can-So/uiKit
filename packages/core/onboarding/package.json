@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/docs": "^7.0.0",
     "@atlaskit/icon": "^16.0.4",
     "@atlaskit/progress-indicator": "^6.0.0",

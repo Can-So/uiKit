@@ -31,7 +31,7 @@ export type Props = {
   primaryToolbarComponents: React.ReactElement<any>;
   popupMountPoint?: HTMLElement;
   validationTimeout?: number;
-  onDocumentChanged?: (adf) => void;
+  onDocumentChanged?: (adf: any) => void;
   onDocumentValidated?: (errors?: Error[]) => void;
 };
 

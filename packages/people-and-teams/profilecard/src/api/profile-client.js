@@ -4,29 +4,6 @@ import { LRUCache } from 'lru-fast';
 import { type AkProfileClientConfig } from '../types';
 
 /**
- * Transform presence response to atlaskit/avatar compatible presence value
- * @param presenceResponse
- * @returns {string}
- */
-const calculatePresence = presenceResponse => {
-  if (!presenceResponse) {
-    return null;
-  }
-
-  let state = presenceResponse.state;
-  const stateMetadata = presenceResponse.stateMetadata
-    ? JSON.parse(presenceResponse.stateMetadata)
-    : null;
-
-  if (state === 'busy') {
-    if (stateMetadata && stateMetadata.focus) {
-      state = 'focus';
-    }
-  }
-  return state;
-};
-
-/**
  * Transform response from GraphQL
  * - Prefix `timestring` with `remoteWeekdayString` depending on `remoteWeekdayIndex`
  * - Remove properties which will be not used later
@@ -35,11 +12,8 @@ const calculatePresence = presenceResponse => {
  * @return {object}
  */
 export const modifyResponse = (response: any) => {
-  const presence = calculatePresence(response.Presence);
   const data = {
     ...response.User,
-    presence,
-    presenceMessage: response.Presence && response.Presence.message,
   };
 
   const localWeekdayIndex = new Date().getDay().toString();
@@ -94,13 +68,6 @@ const buildUserQuery = (cloudId: string, userId: string) => ({
       remoteWeekdayIndex: localTime(format: "d"),
       remoteWeekdayString: localTime(format: "ddd"),
       remoteTimeString: localTime(format: "h:mma"),
-    }
-    Presence: Presence(organizationId: $cloudId, userId: $userId) {
-      state,
-      type,
-      date,
-      stateMetadata,
-      message
     }
   }`,
   variables: {

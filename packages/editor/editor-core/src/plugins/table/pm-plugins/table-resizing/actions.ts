@@ -31,12 +31,20 @@ import {
   tableLayoutToSize,
 } from './utils';
 
-export function updateColumnWidth(view, cell, movedWidth, resizer) {
+export function updateColumnWidth(
+  view: EditorView,
+  cell: number,
+  movedWidth: number,
+  resizer: Resizer,
+) {
   let $cell = view.state.doc.resolve(cell);
   let table = $cell.node(-1);
   let map = TableMap.get(table);
   let start = $cell.start(-1);
-  let col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
+  let col =
+    map.colCount($cell.pos - start) +
+    ($cell.nodeAfter ? $cell.nodeAfter.attrs.colspan : 1) -
+    1;
 
   const newState = resizer.resize(col, movedWidth);
   const tr = applyColumnWidths(view, newState, table, start);
@@ -46,14 +54,19 @@ export function updateColumnWidth(view, cell, movedWidth, resizer) {
   }
 }
 
-export function applyColumnWidths(view, state, table, start) {
+export function applyColumnWidths(
+  view: EditorView,
+  state: ResizeState,
+  table: PMNode,
+  start: number,
+) {
   let tr = view.state.tr;
   let map = TableMap.get(table);
 
   for (let i = 0; i < state.cols.length; i++) {
     const width = state.cols[i].width;
     // we need to recalculate table node to pick up attributes from the previous loop iteration
-    table = tr.doc.nodeAt(start - 1);
+    table = tr.doc.nodeAt(start - 1)!;
 
     for (let row = 0; row < map.height; row++) {
       let mapIndex = row * map.width + i;
@@ -62,7 +75,7 @@ export function applyColumnWidths(view, state, table, start) {
         continue;
       }
       let pos = map.map[mapIndex];
-      let { attrs } = table.nodeAt(pos);
+      let { attrs } = table.nodeAt(pos) || { attrs: {} };
       let index = attrs.colspan === 1 ? 0 : i - map.colCount(pos);
 
       if (attrs.colwidth && attrs.colwidth[index] === width) {
@@ -74,7 +87,7 @@ export function applyColumnWidths(view, state, table, start) {
         : Array.from({ length: attrs.colspan }, _ => 0);
 
       colwidth[index] = width;
-      tr = tr.setNodeMarkup(start + pos, null, { ...attrs, colwidth });
+      tr = tr.setNodeMarkup(start + pos, undefined, { ...attrs, colwidth });
     }
   }
   return tr;
@@ -107,13 +120,18 @@ export function handleBreakoutContent(
   }
 }
 
-export function resizeColumn(view, cell, width, resizer) {
+export function resizeColumn(
+  view: EditorView,
+  cell: number,
+  width: number,
+  resizer: Resizer,
+) {
   let $cell = view.state.doc.resolve(cell);
   let table = $cell.node(-1);
   let start = $cell.start(-1);
   let col =
     TableMap.get(table).colCount($cell.pos - start) +
-    $cell.nodeAfter.attrs.colspan -
+    $cell.nodeAfter!.attrs.colspan -
     1;
 
   const newState = resizer.resize(col, width);

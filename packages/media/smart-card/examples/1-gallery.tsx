@@ -161,7 +161,7 @@ class Example extends React.Component<{}, ExampleState> {
               </GridColumn>
               <GridColumn medium={6}>
                 <LoremText>
-                  {loremText()}
+                  {loremText()}{' '}
                   <Card
                     client={new Client(undefined, 'staging')}
                     url={example.url}

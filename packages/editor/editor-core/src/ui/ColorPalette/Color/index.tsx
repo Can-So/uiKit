@@ -79,7 +79,9 @@ class Color extends PureComponent<Props & InjectedIntlProps> {
           tabIndex={tabIndex}
           className={`${isSelected ? 'selected' : ''}`}
           title={
-            value && messages[value] ? formatMessage(messages[value]) : label
+            value && messages[value as keyof typeof messages]
+              ? formatMessage(messages[value as keyof typeof messages])
+              : label
           }
           style={{
             backgroundColor: value || 'transparent',
@@ -97,11 +99,11 @@ class Color extends PureComponent<Props & InjectedIntlProps> {
     );
   }
 
-  onMouseDown = e => {
+  onMouseDown = (e: React.MouseEvent<{}>) => {
     e.preventDefault();
   };
 
-  onClick = e => {
+  onClick = (e: React.MouseEvent<{}>) => {
     const { onClick, value } = this.props;
     e.preventDefault();
     onClick(value);

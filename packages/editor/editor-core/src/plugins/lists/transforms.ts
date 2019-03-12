@@ -1,18 +1,26 @@
 import { Fragment, NodeRange, Slice } from 'prosemirror-model';
-import { EditorState, Transaction, TextSelection } from 'prosemirror-state';
+import {
+  EditorState,
+  Transaction,
+  TextSelection,
+  Selection,
+} from 'prosemirror-state';
 import { liftTarget, ReplaceAroundStep } from 'prosemirror-transform';
 import { getListLiftTarget } from './utils';
 
 function liftListItem(
   state: EditorState,
-  selection,
+  selection: Selection,
   tr: Transaction,
 ): Transaction {
   let { $from, $to } = selection;
   const nodeType = state.schema.nodes.listItem;
   let range = $from.blockRange(
     $to,
-    node => node.childCount && node.firstChild.type === nodeType,
+    node =>
+      !!node.childCount &&
+      !!node.firstChild &&
+      node.firstChild.type === nodeType,
   );
   if (
     !range ||

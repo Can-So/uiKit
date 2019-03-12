@@ -4,7 +4,7 @@ import { PluginKey } from 'prosemirror-state';
 
 describe(name, () => {
   describe('Event Dispatcher', () => {
-    let eventDispatcher;
+    let eventDispatcher: EventDispatcher;
     beforeEach(() => {
       eventDispatcher = new EventDispatcher();
     });
@@ -13,8 +13,10 @@ describe(name, () => {
       describe('#on', () => {
         it('should add event listener', () => {
           eventDispatcher.on('event', () => {});
-          expect(Object.keys(eventDispatcher.listeners).length).toEqual(1);
-          expect(eventDispatcher.listeners['event'].length).toEqual(1);
+          expect(
+            Object.keys((eventDispatcher as any).listeners).length,
+          ).toEqual(1);
+          expect((eventDispatcher as any).listeners['event'].length).toEqual(1);
         });
       });
 
@@ -23,8 +25,10 @@ describe(name, () => {
           const listener = () => {};
           eventDispatcher.on('event', listener);
           eventDispatcher.off('event', listener);
-          expect(Object.keys(eventDispatcher.listeners).length).toEqual(1);
-          expect(eventDispatcher.listeners['event'].length).toEqual(0);
+          expect(
+            Object.keys((eventDispatcher as any).listeners).length,
+          ).toEqual(1);
+          expect((eventDispatcher as any).listeners['event'].length).toEqual(0);
         });
       });
 

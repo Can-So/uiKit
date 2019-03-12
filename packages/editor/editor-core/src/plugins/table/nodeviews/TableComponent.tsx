@@ -63,7 +63,7 @@ class TableComponent extends React.Component<ComponentProps, TableState> {
   private table: HTMLTableElement | null;
   private rightShadow: HTMLDivElement | null;
 
-  constructor(props) {
+  constructor(props: ComponentProps) {
     super(props);
 
     // Disable inline table editing and resizing controls in Firefox
@@ -123,7 +123,7 @@ class TableComponent extends React.Component<ComponentProps, TableState> {
     this.handleScrollDebounced.cancel();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: ComponentProps) {
     updateRightShadow(this.wrapper, this.table, this.rightShadow);
 
     if (this.props.node.attrs.__autoSize) {
@@ -253,7 +253,7 @@ class TableComponent extends React.Component<ComponentProps, TableState> {
     this.setState({ scroll: this.wrapper.scrollLeft });
   };
 
-  private handleTableResizing = prevProps => {
+  private handleTableResizing = (prevProps: ComponentProps) => {
     const {
       view,
       node,

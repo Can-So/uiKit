@@ -11,7 +11,10 @@ import { getExtensionNode, isSelectionNodeExtension } from './utils';
 import { mapFragment } from '../../utils/slice';
 import { Command } from '../../types';
 
-export const updateExtensionLayout = (layout): Command => (state, dispatch) => {
+export const updateExtensionLayout = (layout: string): Command => (
+  state,
+  dispatch,
+) => {
   const { selection, schema, tr } = state;
   const { bodiedExtension, extension, inlineExtension } = schema.nodes;
   const parentExtNode = findParentNodeOfType([bodiedExtension])(selection);
@@ -51,7 +54,7 @@ export const updateExtensionLayout = (layout): Command => (state, dispatch) => {
   return true;
 };
 
-export const editExtension = (macroProvider: MacroProvider | null) => (
+export const editExtension = (macroProvider: MacroProvider | null): Command => (
   state,
   dispatch,
 ): boolean => {

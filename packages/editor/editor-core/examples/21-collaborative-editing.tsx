@@ -17,6 +17,7 @@ import { EmojiProvider } from '@atlaskit/emoji';
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { CollabProvider } from '../src/plugins/collab-edit';
+import { EditorActions } from '../src';
 
 export const getRandomUser = () => {
   return Math.floor(Math.random() * 10000).toString();
@@ -46,9 +47,10 @@ export const Content: any = styled.div`
 `;
 Content.displayName = 'Content';
 
-const analyticsHandler = (actionName, props) => console.log(actionName, props);
+const analyticsHandler = (actionName: string, props?: {}) =>
+  console.log(actionName, props);
 
-const SaveAndCancelButtons = props => (
+const SaveAndCancelButtons = (props: { editorActions: EditorActions }) => (
   <ButtonGroup>
     <Button
       appearance="primary"
@@ -76,7 +78,7 @@ class DropzoneEditorWrapper extends React.Component<
 > {
   dropzoneContainer: HTMLElement | null = null;
 
-  handleRef = node => {
+  handleRef = (node: HTMLElement) => {
     this.dropzoneContainer = node;
     this.forceUpdate();
   };
@@ -110,10 +112,8 @@ export default class Example extends React.Component<Props, State> {
     hasError: false,
   };
 
-  componentDidCatch(error, info) {
-    this.setState({
-      hasError: true,
-    });
+  componentDidCatch() {
+    this.setState({ hasError: true });
   }
 
   renderErrorFlag() {
@@ -234,7 +234,7 @@ export default class Example extends React.Component<Props, State> {
     );
   }
 
-  private handleRef = input => {
+  private handleRef = (input: HTMLInputElement) => {
     this.setState({ input });
   };
 
