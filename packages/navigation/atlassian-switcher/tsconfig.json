@@ -8,10 +8,12 @@
     "examples/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/experimental"
   ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
     "baseUrl": "./",
     "paths": {
       "@atlaskit/analytics-next": [

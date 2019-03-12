@@ -70,7 +70,7 @@ export default class Switcher extends Component<SwitcherProps> {
     }
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: SwitcherProps) {
     return !isEqual(this.props, nextProps);
   }
 

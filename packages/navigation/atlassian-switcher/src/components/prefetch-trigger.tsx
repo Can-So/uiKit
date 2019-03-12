@@ -7,7 +7,10 @@ import {
   OPERATIONAL_EVENT_TYPE,
   withAnalyticsEvents,
 } from '../utils/analytics';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import {
+  AnalyticsEventPayload,
+  WithAnalyticsEventProps,
+} from '@atlaskit/analytics-next-types';
 
 const TRIGGER_SUBJECT = 'atlassianSwitcherPrefetchTrigger';
 const THROTTLE_EXPIRES = 60 * 1000; // 60 seconds
@@ -26,7 +29,7 @@ class PrefetchTrigger extends Component<
 > {
   private lastEnteredAt?: number;
 
-  private fireOperationalEvent = payload => {
+  private fireOperationalEvent = (payload: AnalyticsEventPayload) => {
     if (this.props.createAnalyticsEvent) {
       this.props
         .createAnalyticsEvent({

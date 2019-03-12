@@ -86,7 +86,7 @@ export default function<P, D>(
         });
     }
 
-    onResult(value) {
+    onResult(value: D) {
       if (this.acceptResults) {
         this.setState({
           data: value,
@@ -95,7 +95,7 @@ export default function<P, D>(
       }
     }
 
-    onError(error) {
+    onError(error: any) {
       if (this.acceptResults && isLoading(this.state)) {
         this.setState({
           error,

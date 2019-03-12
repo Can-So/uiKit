@@ -16,7 +16,7 @@ import { CustomLinksResponse } from '../types';
 import { RecentContainersResponse } from '../types';
 import { LicenseInformationResponse } from '../types';
 
-function collectProductsLinks(
+function collectProductLinks(
   cloudId: string,
   licenseInformation: ProviderResults['licenseInformation'],
   enableSplitJira: boolean,
@@ -153,7 +153,7 @@ export function resolveSwitcherLinks(
 
   return {
     licensedProductLinks: collect(
-      collectProductsLinks(
+      collectProductLinks(
         cloudId,
         licenseInformation,
         features.enableSplitJira,

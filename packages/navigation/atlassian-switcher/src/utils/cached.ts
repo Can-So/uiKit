@@ -18,12 +18,17 @@ export const cached = <T, A>(fn: (a: A) => Promise<T>): Cached<T, A> => {
     const cacheKey = getCacheKey(a);
 
     if (resultCache.has(cacheKey)) {
-      return resultCache.get(getCacheKey(a));
+      return resultCache.get(cacheKey);
     }
+    return;
   };
 
   const execute = (a: A) => {
     const cacheKey = getCacheKey(a);
+
+    if (promiseCache.has(cacheKey)) {
+      return promiseCache.get(cacheKey) as Promise<T>;
+    }
 
     const promise = fn(a);
     promiseCache.set(cacheKey, promise);
