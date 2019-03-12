@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 104.1.0
+- [minor] [55eb63afac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55eb63afac):
+
+  - ED-6239 Add Analytics GAS V3 to autosubstituted
+
 ## 104.0.0
 - [major] [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
 
