@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Switcher from './switcher';
 import CommonDataProvider from '../providers/common-data-provider';
 import { Product } from '../types';
@@ -33,7 +33,7 @@ const getFeatures = (
 export default (props: GenericSwitcherProps) => (
   <CommonDataProvider cloudId={props.cloudId}>
     {({ licenseInformation, ...providerResults }) => {
-      const { showManageLink, ...switcherLinks } = resolveSwitcherLinks(
+      const switcherLinks = resolveSwitcherLinks(
         props.cloudId,
         { licenseInformation, ...providerResults },
         getFeatures(props.product),

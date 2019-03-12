@@ -27,8 +27,8 @@ export class Switcher extends React.Component {
   render() {
     return (
       <MockProvider>
-        {({ isLoading, data }) =>
-          isLoading ? (
+        {({ status, data }) =>
+          status === 'loading' ? (
             <Skeleton />
           ) : (
             <SwitcherWrapper>

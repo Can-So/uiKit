@@ -18,10 +18,10 @@ export default (props: ConfluenceSwitcherProps) => (
   <CustomLinksProvider>
     {customLinks => (
       <CommonDataProvider cloudId={props.cloudId}>
-        {({ licenseInformation, ...providerResults }) => {
+        {providerResults => {
           const { showManageLink, ...switcherLinks } = resolveSwitcherLinks(
             props.cloudId,
-            { licenseInformation, customLinks, ...providerResults },
+            { customLinks, ...providerResults },
             { xflow: false },
           );
 

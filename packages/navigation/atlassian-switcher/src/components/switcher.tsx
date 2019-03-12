@@ -60,8 +60,8 @@ export default class Switcher extends Component<SwitcherProps> {
     this.mountedAt = now();
   }
 
-  timeSinceMounted() {
-    return Math.round(now() - this.mountedAt!);
+  timeSinceMounted(): number {
+    return this.mountedAt ? Math.round(now() - this.mountedAt) : 0;
   }
 
   triggerXFlow = () => {

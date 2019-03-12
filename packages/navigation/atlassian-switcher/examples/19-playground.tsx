@@ -101,6 +101,19 @@ class JiraSwitcherExample extends Component {
     });
   };
 
+  makeError = () => {
+    mockEndpoints(
+      'jira',
+      originalMockData => {
+        return {
+          ...originalMockData,
+          LICENSE_INFORMATION_DATA: 502,
+        };
+      },
+      { ...REQUEST_MEDIUM, licenseInformation: 2000 },
+    );
+  };
+
   openDrawer = () => {
     this.setState({
       isDrawerOpen: true,
@@ -145,6 +158,10 @@ class JiraSwitcherExample extends Component {
           <Separator />
           <Button type="button" onClick={this.toggleIsAdmin}>
             Toggle user is admin
+          </Button>
+          <Separator />
+          <Button type="button" onClick={this.makeError}>
+            Make error
           </Button>
           <Separator />
           <Button type="button" onClick={this.clearCache}>

@@ -1,31 +1,37 @@
 import { Component, ReactNode } from 'react';
 
+enum Status {
+  LOADING = 'loading',
+  COMPLETE = 'complete',
+  ERROR = 'error',
+}
+
 export interface ResultComplete<T> {
-  status: 'complete';
+  status: Status.COMPLETE;
   data: T;
 }
 
 export interface ResultLoading {
-  status: 'loading';
+  status: Status.LOADING;
   data: null;
 }
 
 export interface ResultError {
-  status: 'error';
+  status: Status.ERROR;
   error: any;
   data: null;
 }
 
 export const isComplete = <T>(
   result: ProviderResult<T>,
-): result is ResultComplete<T> => result.status === 'complete';
+): result is ResultComplete<T> => result.status === Status.COMPLETE;
 
 export const isError = <T>(result: ProviderResult<T>): result is ResultError =>
-  result.status === 'error';
+  result.status === Status.ERROR;
 
 export const isLoading = <T>(
   result: ProviderResult<T>,
-): result is ResultLoading => result.status === 'loading';
+): result is ResultLoading => result.status === Status.LOADING;
 
 export type ProviderResult<T> = ResultComplete<T> | ResultLoading | ResultError;
 
@@ -33,52 +39,73 @@ interface PropsToPromiseMapper<P, D> {
   (props: P): Promise<D>;
 }
 
+interface PropsToValueMapper<P, D> {
+  (props: P): D;
+}
+
 export interface DataProviderProps<D> {
-  children: (props: ProviderResult<D> & { isLoading: boolean }) => ReactNode;
+  children: (props: ProviderResult<D>) => ReactNode;
 }
 
 export default function<P, D>(
   mapPropsToPromise: PropsToPromiseMapper<Readonly<P>, D>,
-  mapPropsToInitialValue?: PropsToPromiseMapper<Readonly<P>, D | void>,
+  mapPropsToInitialValue?: PropsToValueMapper<Readonly<P>, D | void>,
 ) {
   return class extends Component<P & DataProviderProps<D>> {
-    state: ProviderResult<D> = {
-      status: 'loading',
-      data: null,
-    };
+    acceptResults = true;
+    state = this.getInitialState();
 
-    componentDidMount() {
+    getInitialState(): ProviderResult<D> {
       if (mapPropsToInitialValue) {
-        mapPropsToInitialValue(this.props).then(initialValue => {
-          if (initialValue !== undefined) {
-            this.setState({
-              data: initialValue,
-              status: 'complete',
-            });
-          }
-        });
+        const initialValue = mapPropsToInitialValue(this.props);
+        if (initialValue !== undefined) {
+          return {
+            status: Status.COMPLETE,
+            data: initialValue,
+          };
+        }
       }
 
+      return {
+        status: Status.LOADING,
+        data: null,
+      };
+    }
+
+    componentWillUnmount() {
+      this.acceptResults = false;
+    }
+
+    componentDidMount() {
       mapPropsToPromise(this.props)
         .then(result => {
-          this.setState({
-            data: result,
-            status: 'complete',
-          });
+          this.onResult(result);
         })
         .catch(error => {
-          this.setState({
-            error,
-            status: 'error',
-          });
+          this.onError(error);
         });
     }
 
+    onResult(value) {
+      if (this.acceptResults) {
+        this.setState({
+          data: value,
+          status: Status.COMPLETE,
+        });
+      }
+    }
+
+    onError(error) {
+      if (this.acceptResults && isLoading(this.state)) {
+        this.setState({
+          error,
+          status: Status.ERROR,
+        });
+      }
+    }
+
     render() {
-      return this.props.children({
-        ...this.state,
-        isLoading: isLoading(this.state),
-      });
+      return this.props.children(this.state);
     }
   };
 }
