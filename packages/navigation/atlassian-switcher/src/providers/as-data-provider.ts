@@ -35,7 +35,7 @@ export const isLoading = <T>(
 
 export type ProviderResult<T> = ResultComplete<T> | ResultLoading | ResultError;
 
-interface PropsToPromiseMapper<P, D> {
+interface PropsToPromiseMapper<P, D> extends Function {
   (props: P): Promise<D>;
 }
 
@@ -51,28 +51,31 @@ export default function<P, D>(
   mapPropsToPromise: PropsToPromiseMapper<Readonly<P>, D>,
   mapPropsToInitialValue?: PropsToValueMapper<Readonly<P>, D | void>,
 ) {
-  return class extends Component<P & DataProviderProps<D>> {
-    acceptResults = true;
-    state = this.getInitialState();
-
-    getInitialState(): ProviderResult<D> {
-      if (mapPropsToInitialValue) {
-        const initialValue = mapPropsToInitialValue(this.props);
-        if (initialValue !== undefined) {
-          return {
-            status: Status.COMPLETE,
-            data: initialValue,
-          };
-        }
+  const getInitialState = (props: Readonly<P>): ProviderResult<D> => {
+    if (mapPropsToInitialValue) {
+      const initialValue = mapPropsToInitialValue(props);
+      if (initialValue !== undefined) {
+        return {
+          status: Status.COMPLETE,
+          data: initialValue,
+        };
       }
-
-      return {
-        status: Status.LOADING,
-        data: null,
-      };
     }
 
+    return {
+      status: Status.LOADING,
+      data: null,
+    };
+  };
+
+  return class DataProvider extends Component<P & DataProviderProps<D>> {
+    acceptResults = true;
+    state = getInitialState(this.props);
+
     componentWillUnmount() {
+      /**
+       * Promise resolved after component is unmounted to be ignored
+       */
       this.acceptResults = false;
     }
 
@@ -96,7 +99,10 @@ export default function<P, D>(
     }
 
     onError(error: any) {
-      if (this.acceptResults && isLoading(this.state)) {
+      /**
+       * Do not transition from "complete" state to "error"
+       */
+      if (this.acceptResults && !isComplete(this.state)) {
         this.setState({
           error,
           status: Status.ERROR,

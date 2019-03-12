@@ -12,9 +12,12 @@ import {
   isLoading,
   ProviderResult,
 } from './as-data-provider';
-import { CustomLinksResponse } from '../types';
-import { RecentContainersResponse } from '../types';
-import { LicenseInformationResponse } from '../types';
+import {
+  CustomLinksResponse,
+  LicenseInformationResponse,
+  RecentContainersResponse,
+} from '../types';
+import { createCollector } from '../utils/create-collector';
 
 function collectProductLinks(
   cloudId: string,
@@ -98,18 +101,6 @@ function collectCustomLinks(
   if (isComplete(customLinks) && isComplete(licenseInformation)) {
     return getCustomLinkItems(customLinks.data, licenseInformation.data);
   }
-}
-
-function createCollector() {
-  let keepCollecting = true;
-
-  return <T, D extends T>(nextResult: T | undefined, defaultValue: D): T => {
-    if (keepCollecting && nextResult !== undefined) {
-      return nextResult;
-    }
-    keepCollecting = false;
-    return defaultValue;
-  };
 }
 
 interface ProviderResults {

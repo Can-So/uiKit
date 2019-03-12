@@ -1,4 +1,4 @@
-import { withPrefetch } from '../../with-prefetch';
+import { withCached } from '../../with-cached';
 
 describe('utils/with-prefetch', () => {
   /**
@@ -6,7 +6,7 @@ describe('utils/with-prefetch', () => {
    */
   it('should call original function and resolve to correct value', () => {
     const fn = jest.fn(a => Promise.resolve(a));
-    const wrappedFn = withPrefetch(fn);
+    const wrappedFn = withCached(fn);
     const a0 = { a: 0 };
     const p0 = wrappedFn(a0);
 
@@ -17,7 +17,7 @@ describe('utils/with-prefetch', () => {
 
   it('should NOT have cached value when promise is NOT resolved', () => {
     const fn = jest.fn(a => Promise.resolve(a));
-    const wrappedFn = withPrefetch(fn);
+    const wrappedFn = withCached(fn);
     const a0 = { a: 0 };
 
     expect(wrappedFn.cached(a0)).toBe(undefined);
@@ -27,7 +27,7 @@ describe('utils/with-prefetch', () => {
 
   it('should have cached value when promise is resolved', async () => {
     const fn = jest.fn(a => Promise.resolve(a));
-    const wrappedFn = withPrefetch(fn);
+    const wrappedFn = withCached(fn);
     const a0 = { a: 0 };
 
     expect(wrappedFn.cached(a0)).toBe(undefined);
@@ -40,7 +40,7 @@ describe('utils/with-prefetch', () => {
    */
   it('should return same promise for two subsequent calls', () => {
     const fn = jest.fn(a => Promise.resolve(a));
-    const wrappedFn = withPrefetch(fn);
+    const wrappedFn = withCached(fn);
     const a0 = { foo: 1 };
     const bar1 = { foo: 1 }; // similar object, different instance
 
@@ -59,7 +59,7 @@ describe('utils/with-prefetch', () => {
 
   it('should call original function twice if previous promise is resolved', async () => {
     const fn = jest.fn(a => Promise.resolve(a));
-    const wrappedFn = withPrefetch(fn);
+    const wrappedFn = withCached(fn);
     const foo = { foo: 1 };
 
     const p0 = wrappedFn(foo);
@@ -80,7 +80,7 @@ describe('utils/with-prefetch', () => {
    */
   it('should return different promises for two subsequent calls', () => {
     const fn = jest.fn(a => Promise.resolve(a));
-    const wrappedFn = withPrefetch(fn);
+    const wrappedFn = withCached(fn);
     const a0 = { foo: 1 };
     const bar1 = { bar: 1 };
 
@@ -100,7 +100,7 @@ describe('utils/with-prefetch', () => {
 
   it('should have correct cached values for two calls after both promises resolved', async () => {
     const fn = jest.fn(a => Promise.resolve(a));
-    const wrappedFn = withPrefetch(fn);
+    const wrappedFn = withCached(fn);
     const a0 = { foo: 1 };
     const bar1 = { bar: 1 };
 
@@ -118,7 +118,7 @@ describe('utils/with-prefetch', () => {
     expect.assertions(3);
 
     const fn = jest.fn(a => Promise.resolve(a));
-    const wrappedFn = withPrefetch(fn);
+    const wrappedFn = withCached(fn);
     const a0 = { a: 0 };
 
     await wrappedFn(a0);
@@ -135,8 +135,8 @@ describe('utils/with-prefetch', () => {
   });
 
   it('should NOT cache error when promise is rejected', async () => {
-    const fn = jest.fn(a => Promise.reject(a));
-    const wrappedFn = withPrefetch(fn);
+    const fn = jest.fn(a => Promise.reject(new Error()));
+    const wrappedFn = withCached(fn);
     const a0 = { a: 0 };
 
     expect(wrappedFn.cached(a0)).toBe(undefined);
@@ -145,5 +145,24 @@ describe('utils/with-prefetch', () => {
     } catch (error) {}
 
     expect(wrappedFn.cached(a0)).toBe(undefined);
+  });
+
+  /**
+   * Reset
+   */
+  it('should reset caches', async () => {
+    const fn = jest.fn(a => Promise.resolve(a));
+    const wrappedFn = withCached(fn);
+
+    await wrappedFn(1);
+    await wrappedFn(2);
+
+    expect(wrappedFn.cached(1)).toBe(1);
+    expect(wrappedFn.cached(2)).toBe(2);
+
+    wrappedFn.reset();
+
+    expect(wrappedFn.cached(1)).toBe(undefined);
+    expect(wrappedFn.cached(2)).toBe(undefined);
   });
 });

@@ -8,7 +8,7 @@ import {
   WithCloudId,
   XFlowSettingsResponse,
 } from '../types';
-import { withPrefetch } from '../utils/with-prefetch';
+import { withCached } from '../utils/with-cached';
 
 // Recent activity api
 const fetchRecentContainers = ({ cloudId }: WithCloudId) =>
@@ -19,7 +19,7 @@ const fetchRecentContainers = ({ cloudId }: WithCloudId) =>
 export const RecentContainersProvider = asDataProvider(fetchRecentContainers);
 
 // License information api
-const fetchLicenseInformation = withPrefetch(({ cloudId }: WithCloudId) =>
+const fetchLicenseInformation = withCached(({ cloudId }: WithCloudId) =>
   fetchJson<LicenseInformationResponse>(
     `/gateway/api/xflow/${cloudId}/license-information`,
   ),
@@ -34,7 +34,7 @@ export const LicenseInformationProvider = asDataProvider(
 type FetchPermissionParamsType = WithCloudId & {
   permissionId: Permissions;
 };
-const fetchPermission = withPrefetch(
+const fetchPermission = withCached(
   ({ cloudId, permissionId }: FetchPermissionParamsType) =>
     postJson<UserPermissionResponse>(`/gateway/api/permissions/permitted`, {
       permissionId,
@@ -48,7 +48,7 @@ export const UserPermissionProvider = asDataProvider(
 );
 
 // Xflow settings api
-const fetchXflowSettings = withPrefetch(({ cloudId }: WithCloudId) =>
+const fetchXflowSettings = withCached(({ cloudId }: WithCloudId) =>
   fetchJson<XFlowSettingsResponse>(
     `/gateway/api/site/${cloudId}/setting/xflow`,
   ).then(xFlowSettings =>
