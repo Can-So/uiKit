@@ -36,7 +36,10 @@ export default (props: GenericSwitcherProps) => (
       const switcherLinks = resolveSwitcherLinks(
         props.cloudId,
         { licenseInformation, ...providerResults },
-        {...getFeatures(props.product), enableSplitJira: props.enableSplitJira },
+        {
+          ...getFeatures(props.product),
+          enableSplitJira: props.enableSplitJira,
+        },
       );
 
       return <Switcher {...props} {...switcherLinks} />;

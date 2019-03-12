@@ -32,7 +32,7 @@ type SwitcherProps = {
   recentLinks: RecentItemType[];
   customLinks: SwitcherItemType[];
   manageLink?: string;
-} & FeatureFlagProps
+} & FeatureFlagProps;
 
 const getAnalyticsContext = (itemsCount: number) => ({
   ...analyticsAttributes({

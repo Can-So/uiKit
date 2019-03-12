@@ -153,7 +153,11 @@ export function resolveSwitcherLinks(
 
   return {
     licensedProductLinks: collect(
-      collectProductsLinks(cloudId, licenseInformation, features.enableSplitJira),
+      collectProductsLinks(
+        cloudId,
+        licenseInformation,
+        features.enableSplitJira,
+      ),
       [],
     ),
     suggestedProductLinks: features.xflow
