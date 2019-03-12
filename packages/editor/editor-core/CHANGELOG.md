@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.4.2
+- [patch] [6380484429](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6380484429):
+
+  - ED-6485 Support breakout mark on layout-section. Retain breakout mark when toggling list nested within columns.
+
 ## 103.4.1
 - [patch] [5e319bb725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e319bb725):
 

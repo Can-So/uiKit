@@ -1,1 +1,0 @@
-- ED-6485 Support breakout mark on layout-section. Retain breakout mark when toggling list nested within columns.
