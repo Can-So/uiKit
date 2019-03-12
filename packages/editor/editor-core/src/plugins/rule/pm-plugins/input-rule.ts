@@ -17,8 +17,8 @@ import {
 
 export const createHorizontalRule = (
   state: EditorState,
-  start,
-  end,
+  start: number,
+  end: number,
   inputMethod:
     | INPUT_METHOD.QUICK_INSERT
     | INPUT_METHOD.TOOLBAR
@@ -55,7 +55,11 @@ export const createHorizontalRule = (
   });
 };
 
-const createHorizontalRuleAutoformat = (state, start, end) => {
+const createHorizontalRuleAutoformat = (
+  state: EditorState,
+  start: number,
+  end: number,
+) => {
   analyticsService.trackEvent(
     `atlassian.editor.format.horizontalrule.autoformatting`,
   );

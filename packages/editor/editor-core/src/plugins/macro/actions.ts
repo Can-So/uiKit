@@ -10,6 +10,7 @@ import {
   replaceSelectedNode,
   replaceParentNodeOfType,
 } from 'prosemirror-utils';
+import { CommandDispatch } from '../../types';
 
 import { normaliseNestedLayout } from '../../utils';
 
@@ -17,7 +18,10 @@ export const insertMacroFromMacroBrowser = (
   macroProvider: MacroProvider,
   macroNode?: PmNode,
   isEditing?: boolean,
-) => async (state, dispatch): Promise<boolean> => {
+) => async (
+  state: EditorState,
+  dispatch?: CommandDispatch,
+): Promise<boolean> => {
   if (!macroProvider) {
     return false;
   }
@@ -52,7 +56,9 @@ export const insertMacroFromMacroBrowser = (
       tr = replaceSelectedNode(node)(tr);
     }
 
-    dispatch(tr.scrollIntoView());
+    if (dispatch) {
+      dispatch(tr.scrollIntoView());
+    }
     return true;
   }
 

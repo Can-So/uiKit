@@ -8,6 +8,7 @@ import {
   ACTION_SUBJECT_ID,
   INPUT_METHOD,
   EVENT_TYPE,
+  FormatEventPayload,
 } from '../../analytics';
 import { Transaction } from 'prosemirror-state';
 import { GetAttrsChange } from '../../../utils/getAttrsWithChangesRecorder';
@@ -19,7 +20,7 @@ export type IndentationChangesOptions = {
   direction: INDENT_DIR;
 };
 
-const indentTypes = {
+const indentTypes: Record<string, string> = {
   paragraph: INDENT_TYPE.PARAGRAPH,
   heading: INDENT_TYPE.HEADING,
 };
@@ -90,7 +91,7 @@ export function createAnalyticsDispatch(
           direction,
           indentType,
         },
-      });
+      } as FormatEventPayload);
     });
 
     // Dispatch analytics if exist

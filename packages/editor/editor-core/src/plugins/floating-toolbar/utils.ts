@@ -19,7 +19,7 @@ export const shallowEqual = (objA: Object, objB: Object) => {
       return false;
     }
 
-    if (objA[key] !== objB[key]) {
+    if ((objA as any)[key] !== (objB as any)[key]) {
       return false;
     }
   }

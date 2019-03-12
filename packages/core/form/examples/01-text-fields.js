@@ -18,7 +18,7 @@ export default () => (
   >
     <Form onSubmit={data => console.log(data)}>
       {({ formProps }) => (
-        <form {...formProps}>
+        <form {...formProps} name="text-fields">
           <Field name="firstname" defaultValue="" label="First name" isRequired>
             {({ fieldProps }) => <TextField {...fieldProps} />}
           </Field>

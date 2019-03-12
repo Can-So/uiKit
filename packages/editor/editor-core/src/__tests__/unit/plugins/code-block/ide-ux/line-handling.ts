@@ -15,7 +15,7 @@ import {
 describe('IDE UX - Line Handling', () => {
   const createEditor = createEditorFactory();
 
-  const getState = doc =>
+  const getState = (doc: any) =>
     createEditor({
       doc,
       editorProps: { allowCodeBlocks: { enableKeybindingsForIDE: true } },

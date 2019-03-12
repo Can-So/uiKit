@@ -173,7 +173,13 @@ export function keymapPlugin(schema: Schema): Plugin | undefined {
 
       if (nodeIsTaskOrDecisionItem) {
         if (!isEmpty) {
-          const addItem = ({ tr, itemLocalId }) =>
+          const addItem = ({
+            tr,
+            itemLocalId,
+          }: {
+            tr: Transaction;
+            itemLocalId?: string;
+          }) =>
             tr.split($from.pos, 1, [
               { type: nodeType, attrs: { localId: itemLocalId } },
             ]);

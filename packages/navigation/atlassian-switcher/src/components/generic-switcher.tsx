@@ -1,16 +1,16 @@
 import React from 'react';
+import { Messages } from 'react-intl';
 import Switcher from './switcher';
 import CommonDataProvider from '../providers/common-data-provider';
-import { Product } from '../types';
-import { Messages } from 'react-intl';
+import { Product, FeatureFlagProps } from '../types';
 import { resolveSwitcherLinks } from '../providers/resolve-switcher-links';
 
-interface GenericSwitcherProps {
+type GenericSwitcherProps = {
   cloudId: string;
   messages: Messages;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
   product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>;
-}
+} & FeatureFlagProps;
 
 const getFeatures = (
   product: Exclude<Product, Product.JIRA | Product.CONFLUENCE>,
@@ -36,7 +36,7 @@ export default (props: GenericSwitcherProps) => (
       const switcherLinks = resolveSwitcherLinks(
         props.cloudId,
         { licenseInformation, ...providerResults },
-        getFeatures(props.product),
+        {...getFeatures(props.product), enableSplitJira: props.enableSplitJira },
       );
 
       return <Switcher {...props} {...switcherLinks} />;

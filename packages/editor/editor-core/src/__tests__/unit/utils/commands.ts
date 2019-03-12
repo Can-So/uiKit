@@ -16,12 +16,13 @@ import {
   doc,
 } from '@atlaskit/editor-test-helpers';
 import { tablesPlugin, listsPlugin } from '../../../plugins';
+import { Command } from '../../../types';
 
 describe('utils -> commands', () => {
   const createEditor = createEditorFactory();
 
   describe('filter', () => {
-    let cb;
+    let cb: jest.Mock;
 
     beforeEach(() => {
       cb = jest.fn();
@@ -95,7 +96,7 @@ describe('utils -> commands', () => {
     it('passes through state, dispatch and view', () => {
       const trueFilter = jest.fn();
 
-      const command = (state, dispatch, view) => {
+      const command: Command = (state, dispatch, view) => {
         cb();
         expect(state).toBe(editorView.state);
         expect(dispatch).toBe(editorView.dispatch);

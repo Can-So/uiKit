@@ -1,9 +1,11 @@
+import { TypeAheadSelectItem } from '../../../../../plugins/type-ahead/types';
+
 export const createTypeAheadPlugin = ({
   getItems,
   selectItem,
 }: {
   getItems?: Function;
-  selectItem?: Function;
+  selectItem?: TypeAheadSelectItem;
 } = {}) => {
   return {
     pluginsOptions: {
@@ -16,8 +18,10 @@ export const createTypeAheadPlugin = ({
         selectItem:
           selectItem !== undefined
             ? selectItem
-            : (state, item, replaceWith) =>
-                replaceWith(state.schema.text(`${item.title} selected`)),
+            : (((state, item, replaceWith) =>
+                replaceWith(
+                  state.schema.text(`${item.title} selected`),
+                )) as TypeAheadSelectItem),
       },
     },
   };

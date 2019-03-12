@@ -44,7 +44,11 @@ export class InlineCardUnauthorizedView extends React.Component<
           ''
         ) : (
           <>
-            {' - '}
+            {/* 
+              NB: a non-breaking hyphen - hyphentation should be
+              handled by the browser, not us.
+            */}
+            {` \u2011 `}
             <Button
               spacing="none"
               appearance="link"

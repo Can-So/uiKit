@@ -1,13 +1,14 @@
 import { InputRule } from 'prosemirror-inputrules';
 import { EditorState, Transaction } from 'prosemirror-state';
+import { Mark as PMMark } from 'prosemirror-model';
 
 export type InputRuleWithHandler = InputRule & { handler: InputRuleHandler };
 
 export type InputRuleHandler = ((
   state: EditorState,
-  match,
-  start,
-  end,
+  match: Array<string>,
+  start: number,
+  end: number,
 ) => Transaction | null);
 
 export function defaultInputRuleHandler(
@@ -63,7 +64,7 @@ const hasUnsupportedMarkForBlockInputRule = (
     schema: { marks },
   } = state;
   let unsupportedMarksPresent = false;
-  const isUnsupportedMark = node =>
+  const isUnsupportedMark = (node: PMMark) =>
     node.type === marks.code ||
     node.type === marks.link ||
     node.type === marks.typeAheadQuery;
@@ -85,7 +86,7 @@ const hasUnsupportedMarkForInputRule = (
     schema: { marks },
   } = state;
   let unsupportedMarksPresent = false;
-  const isCodemark = node =>
+  const isCodemark = (node: PMMark) =>
     node.type === marks.code || node.type === marks.typeAheadQuery;
   doc.nodesBetween(start, end, node => {
     unsupportedMarksPresent =

@@ -7,13 +7,16 @@ import inlineCardNodeView from '../nodeviews/inlineCard';
 import blockCardNodeView from '../nodeviews/blockCard';
 import { replaceQueuedUrlWithCard } from './doc';
 import { CardNodeView } from '../nodeviews';
+import { PMPluginFactoryParams } from '../../../types';
 
 export const pluginKey = new PluginKey('cardPlugin');
 
 export const getPluginState = (editorState: EditorState) =>
   pluginKey.getState(editorState) as CardPluginState | undefined;
 
-const handleResolved = (view: EditorView, request: Request) => resolvedCard => {
+const handleResolved = (view: EditorView, request: Request) => (
+  resolvedCard: any,
+) => {
   replaceQueuedUrlWithCard(request.url, resolvedCard)(
     view.state,
     view.dispatch,
@@ -21,14 +24,14 @@ const handleResolved = (view: EditorView, request: Request) => resolvedCard => {
   return resolvedCard;
 };
 
-const handleRejected = (view: EditorView, request: Request) => rejected => {
+const handleRejected = (view: EditorView, request: Request) => () => {
   view.dispatch(resolveCard(request.url)(view.state.tr));
 };
 
 export const resolveWithProvider = (
   view: EditorView,
-  outstandingRequests,
-  provider,
+  outstandingRequests: any,
+  provider: any,
   request: Request,
 ) => {
   const $pos = view.state.doc.resolve(request.pos);
@@ -42,7 +45,7 @@ export const resolveWithProvider = (
 
   outstandingRequests[request.url] = provider
     .resolve(request.url, isBlock ? 'block' : 'inline')
-    .then(resolvedCard => {
+    .then((resolvedCard: any) => {
       delete outstandingRequests[request.url];
       return resolvedCard;
     })
@@ -53,7 +56,7 @@ export const createPlugin = ({
   portalProviderAPI,
   dispatch,
   providerFactory,
-}) =>
+}: PMPluginFactoryParams) =>
   new Plugin({
     state: {
       init(): CardPluginState {
@@ -86,8 +89,8 @@ export const createPlugin = ({
 
     view(view: EditorView) {
       // listen for card provider changes
-      const handleProvider = (name, provider) => {
-        if (name !== 'cardProvider') {
+      const handleProvider = (name: string, provider?: Promise<any>) => {
+        if (name !== 'cardProvider' || !provider) {
           return;
         }
 
@@ -128,7 +131,7 @@ export const createPlugin = ({
         destroy() {
           // cancel all outstanding requests
           Object.keys(outstandingRequests).forEach(url =>
-            Promise.reject(outstandingRequests[url]),
+            Promise.reject((outstandingRequests as any)[url]),
           );
 
           providerFactory.unsubscribe('cardProvider', handleProvider);

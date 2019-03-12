@@ -27,7 +27,7 @@ export interface Props {
 }
 
 export default class TableFloatingControls extends Component<Props> {
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     const {
       tableRef,
       isInDanger,
@@ -129,7 +129,7 @@ export default class TableFloatingControls extends Component<Props> {
     clearHoverSelection(editorView.state, dispatch);
   };
 
-  private hoverRows = (rows, danger) => {
+  private hoverRows = (rows: Array<number>, danger?: boolean) => {
     const { state, dispatch } = this.props.editorView;
     hoverRows(rows, danger)(state, dispatch);
   };

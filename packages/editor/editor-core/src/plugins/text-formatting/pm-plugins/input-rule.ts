@@ -21,7 +21,9 @@ const validCombos = {
   '~~': ['__', '_', '**', '*'],
 };
 
-const validRegex = (char: string, str: string): boolean => {
+export type ValidCombosKey = keyof typeof validCombos;
+
+const validRegex = (char: ValidCombosKey, str: string): boolean => {
   for (let i = 0; i < validCombos[char].length; i++) {
     const ch = validCombos[char][i];
     if (ch === str) {
@@ -29,7 +31,7 @@ const validRegex = (char: string, str: string): boolean => {
     }
     const matchLength = str.length - ch.length;
     if (str.substr(matchLength, str.length) === ch) {
-      return validRegex(ch, str.substr(0, matchLength));
+      return validRegex(ch as ValidCombosKey, str.substr(0, matchLength));
     }
   }
   return false;
@@ -39,7 +41,7 @@ function addMark(
   markType: MarkType,
   schema: Schema,
   charSize: number,
-  char: string,
+  char: ValidCombosKey,
 ): InputRuleHandler {
   return (state, match, start, end) => {
     const [, prefix, textWithCombo] = match;
@@ -68,7 +70,7 @@ function addMark(
     }
 
     // Prevent autoformatting across hardbreaks
-    let containsHardBreak;
+    let containsHardBreak: boolean | undefined;
     state.doc.nodesBetween(from, to, node => {
       if (node.type === schema.nodes.hardBreak) {
         containsHardBreak = true;

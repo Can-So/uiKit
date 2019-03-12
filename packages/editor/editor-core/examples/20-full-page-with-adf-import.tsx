@@ -9,7 +9,7 @@ import { DevTools } from '../example-helpers/DevTools';
 import WithEditorActions from '../src/ui/WithEditorActions';
 import { EditorActions } from '../src';
 
-export const Textarea: any = styled.textarea`
+export const Textarea = styled.textarea`
   box-sizing: border-box;
   border: 1px solid lightgray;
   font-family: monospace;
@@ -25,7 +25,7 @@ export interface State {
 export default class Example extends React.Component<any, State> {
   private inputRef?: HTMLTextAreaElement;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {};
   }
@@ -81,7 +81,9 @@ export default class Example extends React.Component<any, State> {
     }
   };
 
-  private handleInputChange = event => {
+  private handleInputChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
     this.setState({ inputValue: event.target.value });
   };
 

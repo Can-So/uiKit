@@ -1,7 +1,9 @@
-import { Plugin, PluginKey } from 'prosemirror-state';
+import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
 import { TableMap } from 'prosemirror-tables';
 import * as classnames from 'classnames';
+import { EditorView } from 'prosemirror-view';
 import { akEditorTableToolbarSize } from '@atlaskit/editor-common';
+import { TableLayout, CellAttributes } from '@atlaskit/adf-schema';
 
 import {
   updateControls,
@@ -78,7 +80,12 @@ export function createPlugin(
 
       handleDOMEvents: {
         mousemove(view, event) {
-          handleMouseMove(view, event, handleWidth, lastColumnResizable);
+          handleMouseMove(
+            view,
+            event as MouseEvent,
+            handleWidth,
+            lastColumnResizable,
+          );
           if (pluginKey.getState(view.state).dragging) {
             updateControls(view.state);
             updateResizeHandle(view);
@@ -93,7 +100,12 @@ export function createPlugin(
         mousedown(view, event) {
           const { activeHandle, dragging } = pluginKey.getState(view.state);
           if (activeHandle > -1 && !dragging) {
-            handleMouseDown(view, event, cellMinWidth, dynamicTextSizing);
+            handleMouseDown(
+              view,
+              event as MouseEvent,
+              cellMinWidth,
+              dynamicTextSizing,
+            );
             updateResizeHandle(view);
             return true;
           }
@@ -113,7 +125,7 @@ export class ResizeState {
     return Object.freeze(this);
   }
 
-  apply(tr, state) {
+  apply(tr: Transaction, state: EditorState) {
     const action = tr.getMeta(pluginKey);
     const { editorDisabled } = editorDisabledPluginKey.getState(
       state,
@@ -145,11 +157,16 @@ export class ResizeState {
   }
 }
 
-function handleMouseMove(view, event, handleWidth, lastColumnResizable) {
+function handleMouseMove(
+  view: EditorView,
+  event: MouseEvent,
+  handleWidth: number,
+  lastColumnResizable: boolean,
+) {
   let pluginState = pluginKey.getState(view.state);
 
   if (!pluginState.dragging) {
-    let target = domCellAround(event.target);
+    let target = domCellAround(event.target as HTMLElement | null);
     let cell = -1;
 
     if (target) {
@@ -168,7 +185,7 @@ function handleMouseMove(view, event, handleWidth, lastColumnResizable) {
         let map = TableMap.get(table);
         let start = $cell.start(-1);
         let col =
-          map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
+          map.colCount($cell.pos - start) + $cell.nodeAfter!.attrs.colspan - 1;
 
         if (col === map.width - 1) {
           return;
@@ -180,7 +197,7 @@ function handleMouseMove(view, event, handleWidth, lastColumnResizable) {
   }
 }
 
-function handleMouseLeave(view) {
+function handleMouseLeave(view: EditorView) {
   let pluginState = pluginKey.getState(view.state);
   if (pluginState.activeHandle > -1 && !pluginState.dragging) {
     view.dispatch(view.state.tr.setMeta(pluginKey, { setHandle: -1 }));
@@ -201,7 +218,12 @@ function createResizeHandle(tableRef: HTMLTableElement): HTMLDivElement | null {
   return resizeHandleRef;
 }
 
-function handleMouseDown(view, event, cellMinWidth, dynamicTextSizing) {
+function handleMouseDown(
+  view: EditorView,
+  event: MouseEvent,
+  cellMinWidth: number,
+  dynamicTextSizing: boolean,
+) {
   const { state } = view;
   const { activeHandle } = pluginKey.getState(state);
 
@@ -209,18 +231,20 @@ function handleMouseDown(view, event, cellMinWidth, dynamicTextSizing) {
   let $cell = view.state.doc.resolve(activeHandle);
   let $originalTable = $cell.node(-1);
   let start = $cell.start(-1);
-  let dom = view.domAtPos(start).node;
+  let dom: HTMLTableElement = view.domAtPos(start).node as HTMLTableElement;
   while (dom.nodeName !== 'TABLE') {
-    dom = dom.parentNode;
+    dom = dom.parentNode! as HTMLTableElement;
   }
 
-  let resizeHandleRef: HTMLDivElement | null = createResizeHandle(dom);
+  let resizeHandleRef: HTMLDivElement | null = createResizeHandle(
+    dom as HTMLTableElement,
+  );
 
   const containerWidth = widthPluginKey.getState(view.state).width;
   const resizer = Resizer.fromDOM(view, dom, {
     minWidth: cellMinWidth,
     maxSize: getLayoutSize(
-      dom.getAttribute('data-layout'),
+      dom.getAttribute('data-layout') as TableLayout,
       containerWidth,
       dynamicTextSizing,
     ),
@@ -230,14 +254,15 @@ function handleMouseDown(view, event, cellMinWidth, dynamicTextSizing) {
 
   resizer.apply(resizer.currentState);
 
-  const width = currentColWidth(view, activeHandle, cell.attrs);
+  const width = currentColWidth(view, activeHandle, cell!
+    .attrs as CellAttributes);
   view.dispatch(
     view.state.tr.setMeta(pluginKey, {
       setDragging: { startX: event.clientX, startWidth: width },
     }),
   );
 
-  function finish(event) {
+  function finish(event: MouseEvent) {
     const { clientX } = event;
 
     window.removeEventListener('mouseup', finish);
@@ -274,7 +299,7 @@ function handleMouseDown(view, event, cellMinWidth, dynamicTextSizing) {
     }
   }
 
-  function move(event) {
+  function move(event: MouseEvent) {
     const { clientX, which } = event;
 
     if (!which) {

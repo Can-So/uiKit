@@ -80,7 +80,7 @@ export default () => {
         const { positions } = inlineCursorTargetStateKey.getState(state);
 
         if (positions && positions.length) {
-          const decorations = positions.map(position => {
+          const decorations = positions.map((position: number) => {
             const node = document.createElement('span');
             node.appendChild(document.createTextNode(ZWSP));
             return Decoration.widget(position, node, {

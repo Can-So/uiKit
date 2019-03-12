@@ -76,7 +76,7 @@ export default class Dropdown extends Component<Props> {
     );
   }
 
-  private renderSelected(item) {
+  private renderSelected(item: DropdownOptionT<any>) {
     const { selected } = item;
     if (selected !== undefined) {
       return selected ? (
@@ -89,5 +89,7 @@ export default class Dropdown extends Component<Props> {
         <Spacer />
       );
     }
+
+    return;
   }
 }

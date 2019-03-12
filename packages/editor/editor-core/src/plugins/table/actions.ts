@@ -26,9 +26,9 @@ import {
   findCellClosestToPos,
   emptyCell,
   setCellAttrs,
-  getSelectionRangeInRow,
-  getSelectionRangeInColumn,
   getSelectionRect,
+  selectColumn as selectColumnTransform,
+  selectRow as selectRowTransform,
 } from 'prosemirror-utils';
 import { getPluginState, pluginKey, ACTIONS } from './pm-plugins/main';
 import {
@@ -55,13 +55,9 @@ export const clearHoverSelection: Command = (state, dispatch) => {
 };
 
 export const hoverColumns = (
-  columns: number[],
+  hoveredColumns: number[],
   isInDanger?: boolean,
 ): Command => (state, dispatch) => {
-  const hoveredColumns = columns.reduce((acc: number[], index) => {
-    const { indexes } = getSelectionRangeInColumn(index)(state.tr);
-    return acc.concat(indexes.filter(index => acc.indexOf(index) === -1));
-  }, []);
   const cells = getCellsInColumn(hoveredColumns)(state.selection);
   if (!cells) {
     return false;
@@ -84,14 +80,10 @@ export const hoverColumns = (
   return true;
 };
 
-export const hoverRows = (rows: number[], isInDanger?: boolean): Command => (
-  state,
-  dispatch,
-) => {
-  const hoveredRows = rows.reduce((acc: number[], index) => {
-    const { indexes } = getSelectionRangeInRow(index)(state.tr);
-    return acc.concat(indexes.filter(index => acc.indexOf(index) === -1));
-  }, []);
+export const hoverRows = (
+  hoveredRows: number[],
+  isInDanger?: boolean,
+): Command => (state, dispatch) => {
   const cells = getCellsInRow(hoveredRows)(state.selection);
   if (!cells) {
     return false;
@@ -487,7 +479,7 @@ export const moveCursorBackward: Command = (state, dispatch) => {
 
   // find the node before the cursor
   let before;
-  let cut;
+  let cut: number | undefined;
   if (!isIsolating($cursor.parent)) {
     for (let i = $cursor.depth - 1; !before && i >= 0; i--) {
       if ($cursor.index(i) > 0) {
@@ -524,7 +516,7 @@ export const moveCursorBackward: Command = (state, dispatch) => {
   }
 
   const { tr } = state;
-  const lastCellPos = cut - 4;
+  const lastCellPos = (cut || 0) - 4;
   // need to move cursor inside the table to be able to calculate table's offset
   tr.setSelection(new TextSelection(state.doc.resolve(lastCellPos)));
   const { $from } = tr.selection;
@@ -544,7 +536,7 @@ export const emptyMultipleCells = (targetCellPosition?: number): Command => (
   state,
   dispatch,
 ) => {
-  let cursorPos;
+  let cursorPos: number | undefined;
   let { tr } = state;
 
   if (isCellSelection(tr.selection)) {
@@ -559,7 +551,7 @@ export const emptyMultipleCells = (targetCellPosition?: number): Command => (
     tr = emptyCell(cell, state.schema)(tr);
     cursorPos = cell.pos;
   }
-  if (tr.docChanged) {
+  if (tr.docChanged && cursorPos) {
     const $pos = tr.doc.resolve(tr.mapping.map(cursorPos));
     const textSelection = Selection.findFrom($pos, 1, true);
     if (textSelection) {
@@ -578,7 +570,7 @@ export const setMultipleCellAttrs = (
   attrs: Object,
   targetCellPosition?: number,
 ): Command => (state, dispatch) => {
-  let cursorPos;
+  let cursorPos: number | undefined;
   let { tr } = state;
 
   if (isCellSelection(tr.selection)) {
@@ -593,8 +585,9 @@ export const setMultipleCellAttrs = (
     tr = setCellAttrs(cell, attrs)(tr);
     cursorPos = cell.pos;
   }
-  if (tr.docChanged) {
-    const $pos = tr.doc.resolve(tr.mapping.map(cursorPos));
+
+  if (tr.docChanged && cursorPos !== undefined) {
+    const $pos = tr.doc.resolve(tr.mapping.map(cursorPos!));
 
     if (dispatch) {
       dispatch(tr.setSelection(Selection.near($pos)));
@@ -632,7 +625,7 @@ export const setEditorFocus = (editorHasFocus: boolean): Command => (
   return true;
 };
 
-export const setTableRef = (tableRef?: HTMLElement): Command => (
+export const setTableRef = (tableRef?: HTMLElement | null): Command => (
   state,
   dispatch,
 ) => {
@@ -650,12 +643,10 @@ export const setTableRef = (tableRef?: HTMLElement): Command => (
 };
 
 export const selectColumn = (column: number): Command => (state, dispatch) => {
-  const { tr } = state;
-  const { $anchor, $head, indexes } = getSelectionRangeInColumn(column)(tr);
-  tr.setSelection(new CellSelection($anchor, $head) as any);
+  const tr = selectColumnTransform(column)(state.tr);
 
   let targetCellPosition;
-  const cells = getCellsInColumn(indexes[0])(tr.selection);
+  const cells = getCellsInColumn(column)(tr.selection);
   if (cells && cells.length) {
     targetCellPosition = cells[0].pos;
   }
@@ -674,12 +665,10 @@ export const selectColumn = (column: number): Command => (state, dispatch) => {
 };
 
 export const selectRow = (row: number): Command => (state, dispatch) => {
-  const { tr } = state;
-  const { $anchor, $head, indexes } = getSelectionRangeInRow(row)(tr);
-  tr.setSelection(new CellSelection($anchor, $head) as any);
+  const tr = selectRowTransform(row)(state.tr);
 
   let targetCellPosition;
-  const cells = getCellsInRow(indexes[0])(tr.selection);
+  const cells = getCellsInRow(row)(tr.selection);
   if (cells && cells.length) {
     targetCellPosition = cells[0].pos;
   }

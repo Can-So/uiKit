@@ -18,6 +18,7 @@ import { Command, EditorAppearance } from '../../../src/types';
 import {
   FloatingToolbarConfig,
   FloatingToolbarItem,
+  FloatingToolbarSeparator,
 } from '../../../src/plugins/floating-toolbar/types';
 import { stateKey, MediaPluginState } from './pm-plugins/main';
 import { MediaSingleLayout } from '@atlaskit/adf-schema';
@@ -66,7 +67,7 @@ const breakoutIcons: IconMap = [
   { value: 'full-width', icon: FullWidthIcon },
 ];
 
-const layoutToMessages = {
+const layoutToMessages: Record<string, any> = {
   'wrap-left': messages.wrapLeft,
   center: commonMessages.alignImageCenter,
   'wrap-right': messages.wrapRight,
@@ -94,7 +95,7 @@ const remove: Command = (state, dispatch) => {
 };
 
 const makeAlign = (layout: MediaSingleLayout) => {
-  return (state, dispatch) => {
+  return (state: EditorState) => {
     const pluginState: MediaPluginState | undefined = stateKey.getState(state);
     if (!pluginState) {
       return false;
@@ -104,20 +105,22 @@ const makeAlign = (layout: MediaSingleLayout) => {
   };
 };
 
-const mapIconsToToolbarItem = (icons, layout: MediaSingleLayout, intl) =>
-  icons.map(
-    (toolbarItem): FloatingToolbarItem<Command> => {
-      const { value } = toolbarItem;
+const mapIconsToToolbarItem = (
+  icons: Array<any>,
+  layout: MediaSingleLayout,
+  intl: InjectedIntl,
+) =>
+  icons.map<FloatingToolbarItem<Command>>(toolbarItem => {
+    const { value } = toolbarItem;
 
-      return {
-        type: 'button',
-        icon: toolbarItem.icon,
-        title: intl.formatMessage(layoutToMessages[value]),
-        selected: layout === value,
-        onClick: makeAlign(value),
-      };
-    },
-  );
+    return {
+      type: 'button',
+      icon: toolbarItem.icon,
+      title: intl.formatMessage(layoutToMessages[value]),
+      selected: layout === value,
+      onClick: makeAlign(value),
+    };
+  });
 
 const shouldHideToolbar = (selection: NodeSelection, { nodes }: Schema) =>
   hasParentNodeOfType(nodes.bodiedExtension)(selection) ||
@@ -146,13 +149,13 @@ const buildLayoutButtons = (
 
   let toolbarItems = [
     ...mapIconsToToolbarItem(alignmentIcons, layout, intl),
-    { type: 'separator' },
+    { type: 'separator' } as FloatingToolbarSeparator,
     ...mapIconsToToolbarItem(wrappingIcons, layout, intl),
   ];
 
   if (!allowResizing) {
     toolbarItems = toolbarItems.concat([
-      { type: 'separator' },
+      { type: 'separator' } as FloatingToolbarSeparator,
       ...mapIconsToToolbarItem(breakoutIcons, layout, intl),
     ]);
   }
@@ -229,7 +232,7 @@ const renderAnnotationButton = (
   pluginState: MediaPluginState,
   intl: InjectedIntl,
 ) => {
-  return (view, idx) => {
+  return (view?: EditorView, idx?: number) => {
     const selectedContainer = pluginState.selectedMediaContainerNode();
     if (!selectedContainer) {
       return null;

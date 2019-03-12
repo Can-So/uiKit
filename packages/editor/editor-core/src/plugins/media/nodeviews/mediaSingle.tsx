@@ -28,6 +28,7 @@ import { EventDispatcher } from '../../../event-dispatcher';
 import { MediaProvider } from '../types';
 import { EditorAppearance } from '../../../types';
 import { Context } from '@atlaskit/media-core';
+import { PortalProviderAPI } from '../../../ui/PortalProvider';
 
 export interface MediaSingleNodeProps {
   node: PMNode;
@@ -59,7 +60,7 @@ export default class MediaSingleNode extends Component<
     viewContext: undefined,
   };
 
-  constructor(props) {
+  constructor(props: MediaSingleNodeProps) {
     super(props);
     this.mediaPluginState = stateKey.getState(
       this.props.view.state,
@@ -121,7 +122,13 @@ export default class MediaSingleNode extends Component<
     };
   }
 
-  private onExternalImageLoaded = ({ width, height }) => {
+  private onExternalImageLoaded = ({
+    width,
+    height,
+  }: {
+    width: number;
+    height: number;
+  }) => {
     this.setState(
       {
         width,
@@ -309,9 +316,9 @@ class MediaSingleNodeView extends ReactNodeView {
 }
 
 export const ReactMediaSingleNode = (
-  portalProviderAPI,
-  eventDispatcher,
-  editorAppearance,
+  portalProviderAPI: PortalProviderAPI,
+  eventDispatcher: EventDispatcher,
+  editorAppearance?: EditorAppearance,
 ) => (node: PMNode, view: EditorView, getPos: () => number) => {
   return new MediaSingleNodeView(node, view, getPos, portalProviderAPI, {
     eventDispatcher,

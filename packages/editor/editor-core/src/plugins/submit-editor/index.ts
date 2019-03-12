@@ -2,7 +2,7 @@ import { keymap } from 'prosemirror-keymap';
 import { EditorState, Plugin } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { analyticsService } from '../../analytics';
-import { EditorPlugin } from '../../types';
+import { EditorPlugin, CommandDispatch } from '../../types';
 import * as keymaps from '../../keymaps';
 import { stateKey as mediaPluginKey } from '../../plugins/media/pm-plugins/main';
 import {
@@ -27,7 +27,7 @@ export function createPlugin(
   return keymap({
     [`${keymaps.submit.common}`]: (
       state: EditorState,
-      dispatch: (tr) => void,
+      _dispatch: CommandDispatch,
       editorView: EditorView,
     ) => {
       const mediaState = mediaPluginKey.getState(state);

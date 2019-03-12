@@ -20,7 +20,7 @@ export interface Props {
 export default class Extension extends Component<Props, any> {
   private providerFactory: ProviderFactory;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.providerFactory = props.providerFactory || new ProviderFactory();
   }
@@ -33,7 +33,7 @@ export default class Extension extends Component<Props, any> {
     }
   }
 
-  private renderWithProvider = providers => {
+  private renderWithProvider = (providers: Record<string, Promise<any>>) => {
     const {
       node,
       editorView,

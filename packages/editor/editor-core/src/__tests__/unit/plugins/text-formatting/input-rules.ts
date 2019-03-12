@@ -13,6 +13,7 @@ import {
   emoji,
   code_block,
   hardBreak,
+  BuilderContent,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -34,6 +35,7 @@ import {
   EVENT_TYPE,
   INPUT_METHOD,
 } from '../../../../plugins/analytics';
+import { AnalyticsHandler } from '../../../../analytics';
 
 const autoFormatPatterns = [
   {
@@ -57,7 +59,7 @@ const autoFormatPatterns = [
 describe('text-formatting input rules', () => {
   const createEditor = createEditorFactory();
 
-  let trackEvent;
+  let trackEvent: AnalyticsHandler;
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
   const editor = (doc: any, disableCode = false) => {
     createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });
@@ -83,9 +85,9 @@ describe('text-formatting input rules', () => {
   });
 
   const autoformats = (
-    string,
-    editorContent,
-    analyticsName,
+    string: string,
+    editorContent: BuilderContent,
+    analyticsName: string,
     contentNode = p,
   ) => {
     it(`should autoformat: ${string}`, () => {
@@ -99,13 +101,17 @@ describe('text-formatting input rules', () => {
     });
   };
 
-  const checkInvalidStrings = (regex, string, formatting) => {
+  const checkInvalidStrings = (
+    regex: RegExp,
+    string: string,
+    formatting: string,
+  ) => {
     it(`should return null for incorrect markdown style: ${formatting}, regex: ${regex}, string: ${string}`, () => {
       expect(regex.exec(string)).toEqual(null);
     });
   };
 
-  const notautoformats = string => {
+  const notautoformats = (string: string) => {
     it(`should not autoformat: ${string}`, () => {
       const { editorView, sel } = editor(doc(p('{<>}')));
       insertText(editorView, string, sel);
@@ -123,8 +129,8 @@ describe('text-formatting input rules', () => {
   }
 
   const autoformatCombinations = (
-    strings,
-    editorContent,
+    strings: Array<string>,
+    editorContent: BuilderContent,
     analyticsName?: string,
   ) => {
     it(`should autoformat combinations: ${strings}`, () => {
@@ -583,7 +589,10 @@ describe('text-formatting input rules', () => {
   });
 
   describe('autoformatting is not right inclusive', () => {
-    const autoformatsNotRightInclusive = (string, content) => {
+    const autoformatsNotRightInclusive = (
+      string: string,
+      content: BuilderContent,
+    ) => {
       it(`should not be right inclusive: ${string}`, () => {
         const { editorView, sel } = editor(doc(p('{<>}')));
         insertText(editorView, string, sel);
@@ -678,7 +687,7 @@ describe('text-formatting input rules', () => {
     });
 
     describe('when inside code block', () => {
-      const notautoformatsAfterInCodeBlock = string => {
+      const notautoformatsAfterInCodeBlock = (string: string) => {
         it(`should not autoformat: ${string}`, () => {
           const { editorView, sel } = editor(doc(code_block()('{<>}')));
           insertText(editorView, string, sel);
@@ -693,7 +702,10 @@ describe('text-formatting input rules', () => {
     });
 
     describe('when there is code mark in the line', () => {
-      const autoformatsAfterCodeMark = (string, content) => {
+      const autoformatsAfterCodeMark = (
+        string: string,
+        content: BuilderContent,
+      ) => {
         it(`should autoformat: ${string}`, () => {
           const { editorView, sel } = editor(doc(p(code('abc'), ' {<>}')));
           insertText(editorView, string, sel);

@@ -12,14 +12,15 @@ export function createLinkInputRule(
 ): InputRule {
   return createInputRule(
     regexp,
-    (state: EditorState, match: Match[], start: number, end: number) => {
+    (state: EditorState, match, start: number, end: number) => {
       const { schema } = state;
       if (state.doc.rangeHasMark(start, end, schema.marks.link)) {
         return null;
       }
-      const [link] = match;
+      const [link] = (match as any) as Match[];
 
-      const markType = schema.mark('link', { href: link.url });
+      const url = normalizeUrl(link.url);
+      const markType = schema.mark('link', { href: url });
 
       analyticsService.trackEvent(
         'atlassian.editor.format.hyperlink.autoformatting',

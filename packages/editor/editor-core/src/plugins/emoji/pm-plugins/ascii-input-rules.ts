@@ -54,7 +54,7 @@ function initMatcher(providerFactory: ProviderFactory) {
 
 function inputRuleHandler(
   state: EditorState,
-  matchParts: [string],
+  matchParts: Array<string>,
   start: number,
   end: number,
 ): Transaction | null {

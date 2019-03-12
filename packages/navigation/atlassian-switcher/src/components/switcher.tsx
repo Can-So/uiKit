@@ -19,9 +19,9 @@ import {
 } from '../utils/analytics';
 import now from '../utils/performance-now';
 import TryLozenge from '../primitives/try-lozenge';
-import { TriggerXFlowCallback } from '../types';
+import { TriggerXFlowCallback, FeatureFlagProps } from '../types';
 
-interface SwitcherProps {
+type SwitcherProps = {
   messages: Messages;
   triggerXFlow: TriggerXFlowCallback;
   isLoading: boolean;
@@ -32,10 +32,9 @@ interface SwitcherProps {
   recentLinks: RecentItemType[];
   customLinks: SwitcherItemType[];
   manageLink?: string;
-}
+} & FeatureFlagProps
 
 const getAnalyticsContext = (itemsCount: number) => ({
-  source: 'atlassianSwitcher',
   ...analyticsAttributes({
     itemsCount,
   }),

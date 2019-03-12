@@ -58,6 +58,7 @@ describe('hyperlink', () => {
       ['example.com', 'http://example.com'],
       ['http://example.com', 'http://example.com'],
       ['', ''],
+      ['javascript:alert(1)', ''],
     ];
 
     examples.forEach(([actual, expected]) => {

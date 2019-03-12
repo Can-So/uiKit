@@ -52,12 +52,25 @@ const isSelected = ({ isSelected }: WrapperProps) => {
   }
 };
 
+/* 
+  Inline smart cards should have the following layout:
+  ------------------------------------
+  | icon | title | action OR lozenge |
+  ------------------------------------
+  The aim is to ensure (1) all children are
+  in line with each other, (2) are vertically
+  centered.
+*/
+// NB: `padding` consistent with @mentions.
+// NB: `display: inline` required for `box-decoration-break` to work.
+// NB: `box-decoration-break` required for retaining properties (border-radius) on wrap.
 export const Wrapper: ComponentClass<
   AnchorHTMLAttributes<{}> & WrapperProps
 > = styled.a`
   line-height: ${16 / 14};
-  margin: 0px 2px;
-  padding: 2px;
+  padding: 0px 0.24em 2px 0.24em;
+  display: inline;
+  box-decoration-break: clone;
   border-radius: ${akBorderRadius()}px;
   user-select: none;
   ${background};

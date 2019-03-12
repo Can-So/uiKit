@@ -35,6 +35,10 @@ export enum Product {
   TRUSTED_ADMIN = 'trusted-admin',
 }
 
+export type FeatureFlagProps = {
+  enableSplitJira: boolean;
+};
+
 export type CustomLinksResponse = CustomLink[];
 
 export interface LicenseInformationResponse {

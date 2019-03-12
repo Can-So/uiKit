@@ -19,13 +19,14 @@ import { LicenseInformationResponse } from '../types';
 function collectProductsLinks(
   cloudId: string,
   licenseInformation: ProviderResults['licenseInformation'],
+  enableSplitJira: boolean,
 ) {
   if (isError(licenseInformation)) {
     return [];
   }
 
   if (isComplete(licenseInformation)) {
-    return getLicensedProductLinks(licenseInformation.data);
+    return getLicensedProductLinks(licenseInformation.data, enableSplitJira);
   }
 }
 
@@ -122,10 +123,12 @@ interface ProviderResults {
 
 interface SwitcherFeatures {
   xflow: boolean;
+  enableSplitJira: boolean;
 }
 
 const DEFAULT_FEATURES = {
   xflow: true,
+  enableSplitJira: false,
 };
 
 export function resolveSwitcherLinks(
@@ -150,7 +153,7 @@ export function resolveSwitcherLinks(
 
   return {
     licensedProductLinks: collect(
-      collectProductsLinks(cloudId, licenseInformation),
+      collectProductsLinks(cloudId, licenseInformation, features.enableSplitJira),
       [],
     ),
     suggestedProductLinks: features.xflow

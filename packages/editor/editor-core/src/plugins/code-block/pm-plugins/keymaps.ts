@@ -6,10 +6,11 @@ import {
   hasParentNodeOfType,
 } from 'prosemirror-utils';
 import { getCursor } from '../../../utils';
+import { CommandDispatch } from '../../../types';
 
 export function keymapPlugin(schema: Schema): Plugin | undefined {
   return keymap({
-    Backspace: (state: EditorState, dispatch) => {
+    Backspace: (state: EditorState, dispatch: CommandDispatch) => {
       const $cursor = getCursor(state.selection);
       const { paragraph, codeBlock, listItem } = state.schema.nodes;
       if (!$cursor || $cursor.parent.type !== codeBlock) {

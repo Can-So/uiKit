@@ -1,6 +1,6 @@
 import { Transaction, EditorState } from 'prosemirror-state';
 import { NodeType } from 'prosemirror-model';
-import { INPUT_METHOD } from '../analytics';
+import { INPUT_METHOD, USER_CONTEXT } from '../analytics';
 
 export type TaskDecisionListType = 'taskList' | 'decisionList';
 
@@ -14,7 +14,7 @@ export type TaskDecisionInputMethod =
 export type ContextData = {
   objectId: string;
   containerId: string;
-  userContext: 'edit' | 'new';
+  userContext: USER_CONTEXT;
 };
 
 export type AddItemTransactionCreator = (

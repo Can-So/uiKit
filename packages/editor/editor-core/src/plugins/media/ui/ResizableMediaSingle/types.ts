@@ -21,7 +21,7 @@ export type Props = MediaSingleProps & {
   lineLength: number;
   gridSize: number;
   containerWidth: number;
-  appearance: EditorAppearance;
+  appearance?: EditorAppearance;
   selected: boolean;
   viewContext?: Context;
 };

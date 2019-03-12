@@ -5,6 +5,7 @@ import { ProviderFactory, ExtensionHandlers } from '@atlaskit/editor-common';
 import { ReactNodeView } from '../../../nodeviews';
 import Extension from '../ui/Extension';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
+import { ForwardRef } from '../../../nodeviews/ReactNodeView';
 
 export interface Props {
   node: PmNode;
@@ -30,7 +31,13 @@ class ExtensionNode extends ReactNodeView {
     return { dom };
   }
 
-  render(props, forwardRef) {
+  render(
+    props: {
+      providerFactory: ProviderFactory;
+      extensionHandlers: ExtensionHandlers;
+    },
+    forwardRef: ForwardRef,
+  ) {
     return (
       <Extension
         editorView={this.view}

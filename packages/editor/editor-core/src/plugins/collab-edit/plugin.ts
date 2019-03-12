@@ -115,7 +115,7 @@ export const createPlugin = (
                 const { state } = view;
 
                 const { tr } = state;
-                steps.forEach(step => tr.step(step));
+                steps.forEach((step: Step) => tr.step(step));
 
                 const newState = state.apply(tr);
                 view.updateState(newState);
@@ -188,7 +188,7 @@ export class PluginState {
     this.sid = sessionId;
   }
 
-  getInitial(sessionId) {
+  getInitial(sessionId: string) {
     const participant = this.participants.get(sessionId);
     return participant ? participant.name.substring(0, 1).toUpperCase() : 'X';
   }

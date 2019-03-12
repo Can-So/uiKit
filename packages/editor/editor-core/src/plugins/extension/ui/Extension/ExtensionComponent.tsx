@@ -43,7 +43,7 @@ export default class ExtensionComponent extends Component<Props, State> {
     this.mounted = false;
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     const { macroProvider } = nextProps;
 
     if (this.props.macroProvider !== macroProvider) {
@@ -91,7 +91,7 @@ export default class ExtensionComponent extends Component<Props, State> {
     }
   };
 
-  private handleSelectExtension = hasBody => {
+  private handleSelectExtension = (hasBody: boolean) => {
     const {
       state,
       state: { selection, schema },

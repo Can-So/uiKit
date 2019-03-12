@@ -12,7 +12,12 @@ import tablesPlugin from '../../../../plugins/table';
 import extensionPlugin from '../../../../plugins/extension';
 import mediaPlugin from '../../../../plugins/media';
 
-import { blockNodes, leafBlockNodes } from './_utils';
+import {
+  blockNodes,
+  leafBlockNodes,
+  BlockNodesKeys,
+  LeafBlockNodesKeys,
+} from './_utils';
 
 const deleteContentBackward = (view: EditorView) => {
   view.dom.dispatchEvent(
@@ -47,11 +52,11 @@ describe('gap-cursor: composition events', () => {
 
   describe('when cursor is after a block node', () => {
     describe(`when pressing Backspace`, () => {
-      Object.keys(blockNodes).forEach(nodeName => {
+      (Object.keys(blockNodes) as BlockNodesKeys).forEach(nodeName => {
         describe(nodeName, () => {
           it(`should delete the ${nodeName}`, () => {
             const { editorView, refs } = editor(
-              doc(blockNodes[nodeName](), '{pos}'),
+              doc((blockNodes[nodeName] as any)(), '{pos}'),
             );
             setGapCursorSelection(editorView, refs.pos, Side.RIGHT);
             deleteContentBackward(editorView);
@@ -60,7 +65,8 @@ describe('gap-cursor: composition events', () => {
           });
         });
       });
-      Object.keys(leafBlockNodes).forEach(nodeName => {
+
+      (Object.keys(leafBlockNodes) as LeafBlockNodesKeys).forEach(nodeName => {
         describe(nodeName, () => {
           it(`should delete the ${nodeName}`, () => {
             const { editorView, refs } = editor(

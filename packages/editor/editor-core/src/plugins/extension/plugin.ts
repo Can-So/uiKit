@@ -9,13 +9,14 @@ import ExtensionNodeView from './nodeviews/extension';
 import { findDomRefAtPos, findSelectedNodeOfType } from 'prosemirror-utils';
 import { closestElement } from '../../utils';
 import { getExtensionNode } from './utils';
+import { ExtensionConfig } from '../../types';
 
 export const pluginKey = new PluginKey('extensionPlugin');
 
 export type ExtensionState = {
   element: HTMLElement | undefined;
   layout: ExtensionLayout;
-  node: PMNode;
+  node: { pos: number; node: PMNode };
   allowBreakout: boolean;
   stickToolbarToBottom: boolean;
 };
@@ -25,7 +26,7 @@ export default (
   providerFactory: ProviderFactory,
   extensionHandlers: ExtensionHandlers,
   portalProviderAPI: PortalProviderAPI,
-  allowExtension,
+  allowExtension?: ExtensionConfig | boolean,
 ) =>
   new Plugin({
     state: {

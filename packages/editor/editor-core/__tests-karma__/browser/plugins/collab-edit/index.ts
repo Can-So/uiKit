@@ -32,7 +32,7 @@ describe('editor/plugins/collab-edit', () => {
     };
   };
 
-  let sandbox;
+  let sandbox: sinon.SinonSandbox;
 
   beforeEach(function() {
     sandbox = sinon.sandbox.create();

@@ -48,6 +48,8 @@ export const blockNodes = {
     bodiedExtension(extensionAttrs)(p(cursorIfSelected(opts.selected))),
 };
 
+export type BlockNodesKeys = Array<keyof typeof blockNodes>;
+
 export const leafBlockNodes = {
   hr: hr(),
   extension: extension(extensionAttrs)(),
@@ -68,3 +70,5 @@ export const leafBlockNodes = {
     })(),
   ),
 };
+
+export type LeafBlockNodesKeys = Array<keyof typeof leafBlockNodes>;

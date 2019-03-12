@@ -85,10 +85,12 @@ class ToolbarTextColor extends React.Component<
               iconBefore={
                 <TriggerWrapper>
                   <TextColorIcon
-                    primaryColor={this.getIconColor(
-                      pluginState.color,
-                      pluginState.defaultColor,
-                    )}
+                    primaryColor={
+                      this.getIconColor(
+                        pluginState.color,
+                        pluginState.defaultColor,
+                      ) || undefined
+                    }
                     label={labelTextColor}
                   />
                   <ExpandIconWrapper>
@@ -113,7 +115,7 @@ class ToolbarTextColor extends React.Component<
 
   private changeTextColor = withAnalytics(
     'atlassian.editor.format.textcolor.button',
-    (color, disabled) => {
+    (color: string, disabled: boolean) => {
       if (!disabled) {
         this.toggleOpen();
         return this.changeColor(color);
@@ -127,11 +129,14 @@ class ToolbarTextColor extends React.Component<
     this.handleOpenChange({ isOpen: !this.state.isOpen });
   };
 
-  private handleOpenChange = ({ isOpen }) => {
+  private handleOpenChange = ({ isOpen }: { isOpen: boolean }) => {
     this.setState({ isOpen });
   };
 
-  private getIconColor = (color, defaultColor): string | undefined => {
+  private getIconColor = (
+    color?: string | null,
+    defaultColor?: string,
+  ): string | undefined | null => {
     const { isOpen } = this.state;
     const isDefaultColor = defaultColor === color;
     return isOpen || isDefaultColor ? undefined : color;
