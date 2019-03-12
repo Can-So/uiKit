@@ -26,14 +26,14 @@ export class RuntimeBridgeImpl implements RuntimeBridges {
   }
 }
 
-export const toNativeBridge = new RuntimeBridgeImpl();
+export const toRuntimeBridge = new RuntimeBridgeImpl();
 
 export function errorReporter(event: ErrorEvent) {
-  const { message, filename: source, lineno: line, colno: col, error } = event;
+  const { message, filename, lineno: line, colno: col, error } = event;
 
-  toNativeBridge.call('errorBridge', 'sendError', {
+  toRuntimeBridge.call('errorBridge', 'sendError', {
     message,
-    source,
+    source: filename || '',
     line,
     col,
     stackTrace:
