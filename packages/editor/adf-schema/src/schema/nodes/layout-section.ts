@@ -20,6 +20,7 @@ export type LayoutSectionDefinition = {
 export const layoutSection: NodeSpec = {
   content: 'layoutColumn{2,3}',
   isolating: true,
+  marks: 'breakout',
   parseDOM: [
     {
       context: 'layoutSection//|layoutColumn//',

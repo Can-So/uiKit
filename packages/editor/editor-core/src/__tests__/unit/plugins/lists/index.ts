@@ -18,6 +18,9 @@ import {
   simulatePlatform,
   Platforms,
   insertText,
+  layoutSection,
+  layoutColumn,
+  breakout,
 } from '@atlaskit/editor-test-helpers';
 import {
   toggleOrderedList,
@@ -40,11 +43,14 @@ describe('lists', () => {
     return createEditor({
       doc,
       editorProps: {
+        appearance: 'full-page',
         analyticsHandler: analyticsHandler,
         allowCodeBlocks: true,
         allowAnalyticsGASV3: true,
         allowPanel: true,
         allowLists: true,
+        allowBreakout: true,
+        allowLayouts: { allowBreakout: true },
         media: { allowMediaSingle: true },
       },
       createAnalyticsEvent,
@@ -774,6 +780,33 @@ describe('lists', () => {
         );
         const { editorView } = editor(
           doc(p('{<}One'), p(underline('Two')), p('Three{>}')),
+        );
+
+        toggleBulletList(editorView);
+        expect(editorView.state.doc).toEqualDocument(expectedOutput);
+      });
+
+      it('should retain breakout marks on ancestor when toggling list within a layout', () => {
+        const expectedOutput = doc(
+          breakout({ mode: 'wide' })(
+            layoutSection(
+              layoutColumn({ width: 33.33 })(p('')),
+              layoutColumn({ width: 33.33 })(ul(li(p('One')))),
+              layoutColumn({ width: 33.33 })(p('')),
+            ),
+          ),
+        );
+
+        const { editorView } = editor(
+          doc(
+            breakout({ mode: 'wide' })(
+              layoutSection(
+                layoutColumn({ width: 33.33 })(p('')),
+                layoutColumn({ width: 33.33 })(p('{<}One{>}')),
+                layoutColumn({ width: 33.33 })(p('')),
+              ),
+            ),
+          ),
         );
 
         toggleBulletList(editorView);
