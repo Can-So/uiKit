@@ -276,30 +276,18 @@ export default class Page {
   }
 
   mockDate(timestamp, timezoneOffset) {
-    return this.browser.execute(
+    this.browser.execute(
       (t, tz) => {
-        const _Date = Date;
+        const _Date = (window._Date = window.Date);
         const realDate = params => new _Date(params);
-        const mockedDate = new _Date(t);
+        let offset = 0;
 
         if (tz) {
-          const localDateOffset = new _Date().getTimezoneOffset() / 60;
-          const dateWithTimezoneOffset = new _Date(
-            t + (tz + localDateOffset) * 3600000,
-          );
-          const localDateMethods = [
-            'getFullYear',
-            'getYear',
-            'getMonth',
-            'getDate',
-            'getDay',
-            'getHours',
-            'getMinutes',
-          ];
-          localDateMethods.forEach(dateMethod => {
-            mockedDate[dateMethod] = () => dateWithTimezoneOffset[dateMethod]();
-          });
+          localDateOffset = new _Date(t).getTimezoneOffset() / 60;
+          offset = (tz + localDateOffset) * 3600000;
         }
+
+        const mockedDate = new _Date(t + offset);
 
         Date = function(...params) {
           if (params.length > 0) {
@@ -315,6 +303,12 @@ export default class Page {
       timestamp,
       timezoneOffset,
     );
+    return () => {
+      // Teardown function
+      this.browser.execute(() => {
+        window.Date = window._Date;
+      });
+    };
   }
 }
 //TODO: Maybe wrapping all functions?

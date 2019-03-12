@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-bitbucket-transformer",
-  "version": "4.2.3",
+  "version": "4.2.4",
   "description": "Editor Bitbucket transformer",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -28,8 +28,8 @@
   "devDependencies": {
     "@atlaskit/adf-schema": "^1.5.4",
     "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/editor-core": "^103.0.3",
-    "@atlaskit/editor-test-helpers": "^7.0.4",
+    "@atlaskit/editor-core": "^104.0.0",
+    "@atlaskit/editor-test-helpers": "^7.0.5",
     "@atlaskit/util-data-test": "^10.2.3"
   }
 }

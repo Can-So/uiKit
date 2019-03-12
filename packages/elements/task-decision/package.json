@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/task-decision",
-  "version": "11.3.1",
+  "version": "11.3.2",
   "config": {
     "access": "public"
   },
@@ -52,7 +52,7 @@
     "@atlaskit/docs": "^7.0.0",
     "@atlaskit/editor-common": "^33.0.3",
     "@atlaskit/elements-test-helpers": "^0.2.0",
-    "@atlaskit/renderer": "^41.2.1",
+    "@atlaskit/renderer": "^42.0.0",
     "@atlaskit/util-common-test": "^2.4.2",
     "@atlaskit/util-data-test": "^10.2.3",
     "@types/url-search-params": "^0.10.0",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage, Messages } from 'react-intl';
+import { Messages } from 'react-intl';
 import isEqual from 'lodash.isequal';
 
 import {
@@ -18,6 +18,7 @@ import {
   RenderTracker,
 } from '../utils/analytics';
 import now from '../utils/performance-now';
+import FormattedMessage from '../primitives/formatted-message';
 import TryLozenge from '../primitives/try-lozenge';
 import { TriggerXFlowCallback, FeatureFlagProps } from '../types';
 
