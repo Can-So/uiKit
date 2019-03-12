@@ -1,0 +1,1 @@
+- ED-6354: added bridge for sending JS errors to native
