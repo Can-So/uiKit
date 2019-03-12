@@ -77,6 +77,7 @@ export interface Team {
   organizationId: string;
   restriction?: TeamRestriction;
   members: TeamMember[];
+  highlight?: Highlight;
 }
 
 export type MentionEventHandler = (

@@ -170,7 +170,7 @@ export default class TeamMentionResource extends MentionResource {
         accessLevel: UserAccessLevel[UserAccessLevel.CONTAINER],
         userType: UserType[UserType.TEAM],
         lozenge: UserType[UserType.TEAM],
-        query,
+        highlight: team.highlight,
         context: {
           members: team.members,
         },
