@@ -1,6 +1,19 @@
 import { createTag, serializeStyle } from '../util';
 import { NodeSerializerOpts } from '../interfaces';
-import { colors } from '@atlaskit/theme';
+import {
+  B50,
+  B500,
+  R50,
+  R500,
+  Y75,
+  N800,
+  G50,
+  G500,
+  P50,
+  P500,
+  N40,
+  N500,
+} from '../../../../adf-schema/';
 
 type Color = 'neutral' | 'purple' | 'blue' | 'red' | 'yellow' | 'green';
 
@@ -10,28 +23,28 @@ type ColorMapping = {
 
 const colorMapping: ColorMapping = {
   blue: {
-    'background-color': colors.B50,
-    color: colors.B500,
+    'background-color': B50,
+    color: B500,
   },
   red: {
-    'background-color': colors.R50,
-    color: colors.R500,
+    'background-color': R50,
+    color: R500,
   },
   yellow: {
-    'background-color': colors.Y75,
-    color: colors.N800,
+    'background-color': Y75,
+    color: N800,
   },
   green: {
-    'background-color': colors.G50,
-    color: colors.G500,
+    'background-color': G50,
+    color: G500,
   },
   purple: {
-    'background-color': colors.P50,
-    color: colors.P500,
+    'background-color': P50,
+    color: P500,
   },
   neutral: {
-    'background-color': colors.N40,
-    color: colors.N500,
+    'background-color': N40,
+    color: N500,
   },
 };
 export default function status({ attrs, text }: NodeSerializerOpts) {
