@@ -69,7 +69,7 @@ export interface ResourceProvider {
     meta: any,
     objectId: string,
     containerId?: string,
-  );
+  ): void;
 }
 
 const getHighlightedComment = () => {
