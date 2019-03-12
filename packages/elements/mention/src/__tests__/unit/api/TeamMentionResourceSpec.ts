@@ -62,7 +62,7 @@ describe('TeamMentionResourceSpec', () => {
           mentions: resultCraig,
         },
       })
-      .mock(/\/teams\/mentions\/search\?.*q=craig(&|$)/, {
+      .mock(/\/teams\/mentions\/search\?.*query=craig(&|$)/, {
         body: teamResultsCraig,
       })
       .mock(/\/users\/mentions\/search\?.*query=esoares(&|$)/, {
@@ -70,7 +70,7 @@ describe('TeamMentionResourceSpec', () => {
           mentions: [],
         },
       })
-      .mock(/\/teams\/mentions\/search\?.*q=esoares(&|$)/, {
+      .mock(/\/teams\/mentions\/search\?.*query=esoares(&|$)/, {
         body: [],
       })
       .mock(
@@ -86,7 +86,7 @@ describe('TeamMentionResourceSpec', () => {
           }, 100);
         }),
       )
-      .mock(/\/teams\/mentions\/search\?.*q=cr(&|$)/, {
+      .mock(/\/teams\/mentions\/search\?.*query=cr(&|$)/, {
         body: [],
       })
       .mock(/\/users\/mentions\/search\?.*query=query-only-teams-fail(&|$)/, {
@@ -94,12 +94,15 @@ describe('TeamMentionResourceSpec', () => {
           mentions: resultCr,
         },
       })
-      .mock(/\/teams\/mentions\/search\?.*q=query-only-teams-fail(&|$)/, 500)
+      .mock(
+        /\/teams\/mentions\/search\?.*query=query-only-teams-fail(&|$)/,
+        500,
+      )
       .mock(
         /\/users\/mentions\/search\?.*query=query-only-users-fail(&|$)/,
         500,
       )
-      .mock(/\/teams\/mentions\/search\?.*q=query-only-users-fail(&|$)/, {
+      .mock(/\/teams\/mentions\/search\?.*query=query-only-users-fail(&|$)/, {
         body: {
           mentions: teamResultsCraig,
         },

@@ -134,9 +134,7 @@ export default class TeamMentionResource extends MentionResource {
     const options = {
       path: 'search',
       queryParams: {
-        // TODO: User mention uses `query`, but current search teams API requires `q` parameter
-        // need update back-end to accept `query` parameter so that it's consistent with user mention
-        q: query,
+        query,
         limit: MAX_QUERY_TEAMS,
         ...this.getQueryParamsOfTeamMentionConfig(contextIdentifier),
       },
