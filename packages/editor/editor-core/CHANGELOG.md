@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 103.4.4
+- [patch] [65acb722e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65acb722e3):
+
+  - ED-6412: Prevent inserting links containing 'javascript:'
+
 ## 103.4.3
 - [patch] [7641ec96cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7641ec96cd):
 
