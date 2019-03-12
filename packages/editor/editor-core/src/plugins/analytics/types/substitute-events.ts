@@ -4,6 +4,7 @@ import { ACTION, ACTION_SUBJECT, ACTION_SUBJECT_ID } from './enums';
 export const enum SYMBOL {
   ARROW_RIGHT = 'rightArrow',
   ARROW_LEFT = 'leftArrow',
+  ARROW_DOUBLE = 'doubleArrow',
 }
 
 export const enum PUNC {
@@ -31,7 +32,7 @@ type SubstituteProductAEP = SubstituteAEP<
 type SubstituteSymbolAEP = SubstituteAEP<
   ACTION_SUBJECT_ID.SYMBOL,
   {
-    symbol: SYMBOL.ARROW_RIGHT | SYMBOL.ARROW_LEFT;
+    symbol: SYMBOL.ARROW_RIGHT | SYMBOL.ARROW_LEFT | SYMBOL.ARROW_DOUBLE;
   }
 >;
 
