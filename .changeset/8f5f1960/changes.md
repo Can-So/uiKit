@@ -1,1 +1,0 @@
-- Feature: Submit form on Cmd + Enter on Mac and Ctrl + Enter on Mac and Windows
