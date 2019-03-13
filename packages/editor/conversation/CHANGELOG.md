@@ -1,5 +1,10 @@
 # @atlaskit/conversation
 
+## 13.0.0
+- [major] [68247a2490](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68247a2490):
+
+  - The internal mechanism for handling successfully retrieved conversations now resets the internal store to that collection instead of concatenating them to pre-existing ones.
+
 ## 12.2.0
 - [minor] [55d8c2a898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55d8c2a898):
 
