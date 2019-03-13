@@ -53,7 +53,7 @@ describe('Logo component', () => {
         .parent()[0].attribs.id;
     });
 
-    function hasDuplicates(array: Array) {
+    function hasDuplicates(array: Array<any>) {
       return new Set(array).size !== array.length;
     }
 
