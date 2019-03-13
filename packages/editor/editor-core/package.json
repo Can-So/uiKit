@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-core",
-  "version": "105.2.0",
+  "version": "105.2.1",
   "description": "A package contains Atlassian editor core functionality",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -117,7 +117,7 @@
     "@atlaskit/pubsub": "^3.0.8",
     "@atlaskit/renderer": "^43.0.0",
     "@atlaskit/section-message": "^2.0.0",
-    "@atlaskit/textarea": "0.2.5",
+    "@atlaskit/textarea": "0.2.6",
     "@atlaskit/util-data-test": "^10.2.5",
     "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.1",
