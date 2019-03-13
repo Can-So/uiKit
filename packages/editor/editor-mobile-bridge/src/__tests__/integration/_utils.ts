@@ -37,7 +37,6 @@ export const renderer = {
 };
 
 export const copyIcon = 'span[aria-label="copy"]';
-
 export const clipboardInput = '#input';
 
 export const callNativeBridge = async (
@@ -55,7 +54,6 @@ export const callNativeBridge = async (
     args || [],
   );
 };
-
 
 const clearBridgeOutput = async (browser: any) => {
   await browser.browser.execute(() => {
