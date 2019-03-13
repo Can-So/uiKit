@@ -21,11 +21,13 @@ import {
  */
 function createWithColorAnalytics(
   newColor: string,
-  previousColor: string,
+  previousColor: string | null,
   palette: Map<string, string>,
 ): HigherOrderCommand {
   const newColorLabel = palette.get(newColor) || newColor;
-  const previousColorLabel = palette.get(previousColor) || previousColor;
+  const previousColorLabel = previousColor
+    ? palette.get(previousColor) || previousColor
+    : '';
   return withAnalytics({
     action: ACTION.FORMATTED,
     actionSubject: ACTION_SUBJECT.TEXT,
@@ -42,7 +44,7 @@ export const changeColor = (color: string): Command => (state, dispatch) => {
   const { textColor } = state.schema.marks;
   if (textColor) {
     const pluginState = pluginKey.getState(state);
-    const activeColor = getActiveColor(state)!;
+    const activeColor = getActiveColor(state);
 
     const withColorAnalytics = createWithColorAnalytics(
       color,
