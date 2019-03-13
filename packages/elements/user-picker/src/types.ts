@@ -69,6 +69,8 @@ export type UserPickerProps = {
 export type PopupUserPickerProps = UserPickerProps & {
   /** Whether to use the popup version of the single picker */
   target: Target;
+  /** Optional title assigned to popup picker */
+  popupTitle?: string;
 };
 
 export type UserPickerState = {

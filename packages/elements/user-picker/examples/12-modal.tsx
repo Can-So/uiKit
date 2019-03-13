@@ -36,6 +36,7 @@ const renderRows = (count: number) => {
                 onInputChange={onInputChange}
                 onChange={console.log}
                 width={200}
+                popupTitle="Assignee"
               />
             )}
           </ExampleWrapper>
