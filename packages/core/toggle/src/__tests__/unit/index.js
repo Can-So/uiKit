@@ -36,6 +36,13 @@ describe('Toggle', () => {
       expect(wrapper.find(Input).prop('disabled')).toBe(false);
     });
 
+    it('Input id should match Label htmlFor', () => {
+      const wrapper = mount(<Toggle />);
+      expect(wrapper.find(Toggle).prop('htmlFor')).toEqual(
+        wrapper.find(Toggle).prop('id'),
+      );
+    });
+
     describe('input events handlers', () => {
       ['change', 'focus', 'blur'].forEach((eventName: string) => {
         it(`should trigger event handlers for ${eventName}`, () => {
