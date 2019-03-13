@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/calendar",
-  "version": "7.0.18",
+  "version": "7.0.19",
   "description": "A React component for displaying a calendar.",
   "license": "Apache-2.0",
   "module": "index.js",
