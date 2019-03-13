@@ -2,7 +2,7 @@ import { name } from '../../../../package.json';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { Plugin } from 'prosemirror-state';
-import SizeDetector from '@atlaskit/size-detector';
+import WidthDetector from '@atlaskit/width-detector';
 import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
 import { WidthProvider } from '@atlaskit/editor-common';
 
@@ -53,7 +53,7 @@ describe(name, () => {
         </WidthProvider>,
       );
 
-      const elm = wrapper.find(SizeDetector).getDOMNode();
+      const elm = wrapper.find(WidthDetector).getDOMNode();
       /**
        * JSDOM doesn't support offsetWidth. Also we can't set it directly, it will throw with
        * TypeError: Cannot set property offsetWidth of [object Object] which has only a getter
