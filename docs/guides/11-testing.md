@@ -65,7 +65,7 @@ For further details or a test template, please consult this [link](https://hello
 - on CI these are run against changed packages only.
 - to run all *visual regression tests* on local `yarn test:vr`.
 - to run all tests under a package on local `yarn test:vr <pkg>`.
-- to update all image snapshot for the package `yarn test:vr <pkg> --u`
+- to update all image snapshot for the package `yarn test:vr <pkg> --update-snapshot` or `yarn test:vr <pkg> --u`
 - to run all tests under certain directories on local `yarn test:vr <full_path_to_to_directory>`.
 - to run a single test on local `yarn test:vr <full_path_to_file>`.
 - to run a single test on local using *watch mode* :
@@ -73,7 +73,7 @@ For further details or a test template, please consult this [link](https://hello
     - `yarn test:vr <full_path_to_file> --watch` will run watch mode headlessly.
     - `yarn test:vr <full_path_to_file> --debug` will run watch mode only on Chrome browser.
 - to update image snapshot for a single test
-    - `yarn test:vr <full_path_to_file> --u` will update the snapshot if there is a change.  
+    - `yarn test:vr <full_path_to_file> --update-snapshot` or `yarn test:vr <full_path_to_file> -u` will update the snapshot if there is a change.  
 **Note:** you can still use the `--watch` and `--debug` flags with `<pkg>`, `<full_path_to_to_directory>` and for all tests but it is not recommended.
 
 For further details or a test template, please consult this [link](https://hello.atlassian.net/wiki/spaces/Atlaskit/pages/136113035/How+to+add+visual+regression+tests+in+Atlaskit).
