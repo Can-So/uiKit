@@ -1,0 +1,1 @@
+- use @atlaskit/ssr to ssr/hydrate mention examples
