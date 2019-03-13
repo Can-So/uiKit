@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import throttle from 'lodash.throttle';
 import now from '../utils/performance-now';
 import { prefetchAll } from '../providers/instance-data-providers';
@@ -24,7 +24,7 @@ interface PrefetchTriggerProps {
   Container?: React.ReactType;
 }
 
-class PrefetchTrigger extends Component<
+class PrefetchTrigger extends React.Component<
   PrefetchTriggerProps & WithAnalyticsEventProps
 > {
   private lastEnteredAt?: number;
@@ -42,7 +42,7 @@ class PrefetchTrigger extends Component<
   };
 
   private triggerPrefetch: typeof prefetchAll = throttle(
-    params => {
+    (params: any) => {
       prefetchAll(params);
       this.fireOperationalEvent({
         action: 'triggeredPrefetch',

@@ -1,4 +1,4 @@
-import { Component, ReactNode } from 'react';
+import * as React from 'react';
 
 enum Status {
   LOADING = 'loading',
@@ -44,7 +44,7 @@ interface PropsToValueMapper<P, D> {
 }
 
 export interface DataProviderProps<D> {
-  children: (props: ProviderResult<D>) => ReactNode;
+  children: (props: ProviderResult<D>) => React.ReactNode;
 }
 
 export default function<P, D>(
@@ -68,7 +68,7 @@ export default function<P, D>(
     };
   };
 
-  return class DataProvider extends Component<P & DataProviderProps<D>> {
+  return class DataProvider extends React.Component<P & DataProviderProps<D>> {
     acceptResults = true;
     state = getInitialState(this.props);
 

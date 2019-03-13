@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import AtlassianIcon from '@atlaskit/icon/glyph/atlassian';
 import Navigation, { AkGlobalItem } from '@atlaskit/navigation';
 import Tooltip from '@atlaskit/tooltip';
@@ -9,7 +9,7 @@ import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
 import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher from '../src';
 
-class ConfluenceSwitcherExample extends Component {
+class ConfluenceSwitcherExample extends React.Component {
   state = {
     isDrawerOpen: false,
   };

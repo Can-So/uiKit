@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Messages } from 'react-intl';
-import isEqual from 'lodash.isequal';
+import * as isEqual from 'lodash.isequal';
 
 import {
   SwitcherWrapper,
@@ -53,7 +53,7 @@ const getItemAnalyticsContext = (
   }),
 });
 
-export default class Switcher extends Component<SwitcherProps> {
+export default class Switcher extends React.Component<SwitcherProps> {
   mountedAt?: number;
 
   componentDidMount() {
@@ -72,7 +72,7 @@ export default class Switcher extends Component<SwitcherProps> {
   };
 
   shouldComponentUpdate(nextProps: SwitcherProps) {
-    return !isEqual(this.props, nextProps);
+    return !(isEqual(this.props, nextProps) as boolean);
   }
 
   render() {

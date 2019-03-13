@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
 import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
@@ -6,7 +6,7 @@ import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher, { AtlassianSwitcherPrefetchTrigger } from '../src';
 import { resetAll } from '../src/providers/instance-data-providers';
 
-class JiraSwitcherExample extends Component {
+class JiraSwitcherExample extends React.Component {
   state = {
     isDrawerOpen: false,
   };
