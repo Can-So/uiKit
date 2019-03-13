@@ -36,6 +36,10 @@ export const renderer = {
   placeholder: '#examples', // FIXME lets add something better to renderer
 };
 
+export const copyIcon = 'span[aria-label="copy"]';
+
+export const clipboardInput = '#input';
+
 export const callNativeBridge = async (
   browser: any,
   bridgeFn: string,
@@ -52,9 +56,6 @@ export const callNativeBridge = async (
   );
 };
 
-export const copyAsPlaintextButton = '.copy-as-plaintext';
-
-export const clipboardInput = 'textarea';
 
 const clearBridgeOutput = async (browser: any) => {
   await browser.browser.execute(() => {
