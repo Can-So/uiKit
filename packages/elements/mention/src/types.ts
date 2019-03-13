@@ -41,22 +41,6 @@ export interface MentionsResult {
   query: string;
 }
 
-/* Team types  */
-enum TeamState {
-  ACTIVE = 'ACTIVE',
-  DISBANDED = 'DISBANDED',
-}
-enum TeamMembershipSetting {
-  OPEN = 'OPEN',
-}
-enum TeamDiscoverable {
-  DISCOVERABLE = 'DISCOVERABLE',
-}
-enum TeamRestriction {
-  ORG_MEMBERS = 'ORG_MEMBERS',
-  NO_RESTRICTION = 'NO_RESTRICTION',
-}
-
 export interface TeamMember {
   id: string;
   name: string;
@@ -65,17 +49,8 @@ export interface TeamMember {
 // data is returned from team search service
 export interface Team {
   id: string;
-  largeHeaderImageUrl: string;
-  smallHeaderImageUrl: string;
-  largeAvatarImageUrl: string;
   smallAvatarImageUrl: string;
-  description: string;
   displayName: string;
-  state: TeamState;
-  membershipSettings?: TeamMembershipSetting;
-  discoverable: TeamDiscoverable;
-  organizationId: string;
-  restriction?: TeamRestriction;
   members: TeamMember[];
   highlight?: Highlight;
 }
