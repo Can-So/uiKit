@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/media-card",
-  "version": "55.0.4",
+  "version": "56.0.0",
   "description": "Includes all media card related components, CardView, CardViewSmall, Card...",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -30,7 +30,7 @@
     "@atlaskit/dropdown-menu": "^7.0.0",
     "@atlaskit/icon": "^16.0.4",
     "@atlaskit/media-ui": "^9.2.1",
-    "@atlaskit/media-viewer": "^37.0.1",
+    "@atlaskit/media-viewer": "^38.0.0",
     "@atlaskit/spinner": "^10.0.0",
     "@atlaskit/theme": "^8.0.0",
     "babel-runtime": "^6.26.0",
@@ -41,7 +41,7 @@
     "video-snapshot": "^1.0.3"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^27.2.4",
+    "@atlaskit/media-core": "^28.0.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
     "react-intl": "^2.6.0",
@@ -56,9 +56,9 @@
     "@atlaskit/field-radio-group": "^5.0.0",
     "@atlaskit/field-range": "^6.0.0",
     "@atlaskit/field-text": "^8.0.0",
-    "@atlaskit/media-core": "^27.2.4",
-    "@atlaskit/media-store": "^9.2.1",
-    "@atlaskit/media-test-helpers": "^20.1.7",
+    "@atlaskit/media-core": "^28.0.0",
+    "@atlaskit/media-store": "^10.0.0",
+    "@atlaskit/media-test-helpers": "^20.1.8",
     "@atlaskit/toggle": "^6.0.0",
     "@types/classnames": "^2.2.6",
     "deepcopy": "0.6.3",

@@ -1,1 +1,0 @@
-- Move checkWebpSupport util from media-core to media-store and use it to request webp from backend
