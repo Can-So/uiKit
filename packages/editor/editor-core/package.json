@@ -52,7 +52,7 @@
     "@atlaskit/mention": "^16.2.2",
     "@atlaskit/modal-dialog": "^8.0.0",
     "@atlaskit/select": "^8.0.0",
-    "@atlaskit/smart-card": "^9.11.3",
+    "@atlaskit/smart-card": "^9.11.4",
     "@atlaskit/spinner": "^10.0.0",
     "@atlaskit/status": "^0.5.1",
     "@atlaskit/task-decision": "^12.0.1",
