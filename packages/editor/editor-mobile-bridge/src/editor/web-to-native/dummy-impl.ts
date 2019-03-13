@@ -5,7 +5,7 @@ import NativeBridge from './bridge';
 import { sendToBridge } from '../../bridge-utils';
 
 export default class DummyBridge implements NativeBridge {
-  log = (...args) => {
+  log = (...args: any[]) => {
     console.log(...args);
   };
 
@@ -50,7 +50,7 @@ export default class DummyBridge implements NativeBridge {
   call<T extends EditorPluginBridges>(
     bridge: T,
     event: keyof Exclude<EditorBridges[T], undefined>,
-    ...args
+    ...args: any[]
   ) {
     sendToBridge(bridge, event, ...args);
   }

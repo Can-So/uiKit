@@ -1,5 +1,10 @@
 # @atlaskit/mention
 
+## 16.3.0
+- [minor] [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
+
+  - use @atlaskit/ssr to ssr/hydrate mention examples
+
 ## 16.2.2
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/icon@16.0.4

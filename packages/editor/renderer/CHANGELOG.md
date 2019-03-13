@@ -1,5 +1,27 @@
 # @atlaskit/renderer
 
+## 43.1.0
+- [minor] [feec817d38](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/feec817d38):
+
+  - add email renderer for status
+
+## 43.0.1
+- [patch] [5b226754b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b226754b8):
+
+  - ED-5939: Replace SizeDetector with WidthDetector in all editor components
+
+## 43.0.0
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-test-helpers@7.0.6
+  - @atlaskit/media-card@56.0.0
+  - @atlaskit/media-filmstrip@29.0.0
+  - @atlaskit/media-test-helpers@20.1.8
+  - @atlaskit/editor-json-transformer@4.3.5
+  - @atlaskit/task-decision@12.0.1
+  - @atlaskit/util-data-test@10.2.5
+  - @atlaskit/media-core@28.0.0
+
 ## 42.0.1
 - Updated dependencies [72c6f68226](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72c6f68226):
   - @atlaskit/util-data-test@10.2.4

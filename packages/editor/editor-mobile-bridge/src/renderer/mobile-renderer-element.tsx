@@ -30,12 +30,12 @@ export default class MobileRenderer extends React.Component<
   MobileRendererProps,
   MobileRendererState
 > {
-  private providerFactory;
+  private providerFactory: ProviderFactory;
   // TODO get these from native;
-  private objectAri;
-  private containerAri;
+  private objectAri: string;
+  private containerAri: string;
 
-  constructor(props) {
+  constructor(props: MobileRendererProps) {
     super(props);
 
     this.state = {
@@ -66,7 +66,7 @@ export default class MobileRenderer extends React.Component<
     });
   };
 
-  private onLinkClick(url) {
+  private onLinkClick(url?: string) {
     if (!url) {
       return;
     }

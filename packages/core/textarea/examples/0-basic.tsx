@@ -23,11 +23,13 @@ export default class extends React.Component {
         <p>Invalid:</p>
         <TextArea resize="auto" isInvalid />
         <p>Smart:</p>
-        <TextArea
-          ref={(ref: any) => {
-            this.textareaElement = ref;
-          }}
-        />
+        <div id="smart">
+          <TextArea
+            ref={(ref: any) => {
+              this.textareaElement = ref;
+            }}
+          />
+        </div>
         <button onClick={this.focus}>focus</button>
       </Div>
     );

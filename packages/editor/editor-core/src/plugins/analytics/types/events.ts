@@ -4,6 +4,7 @@ import { UIEventPayload } from './ui-events';
 import { FormatEventPayload } from './format-events';
 import { SubstituteEventPayload } from './substitute-events';
 import { InsertEventPayload } from './insert-events';
+import { NodeEventPayload } from './node-events';
 
 type AEP<Action, ActionSubject, ActionSubjectID, Attributes, EventType> = {
   action: Action;
@@ -33,7 +34,8 @@ export type AnalyticsEventPayload =
   | UIEventPayload
   | FormatEventPayload
   | SubstituteEventPayload
-  | InsertEventPayload;
+  | InsertEventPayload
+  | NodeEventPayload;
 
 export type AnalyticsDispatch = Dispatch<{
   payload: AnalyticsEventPayload;

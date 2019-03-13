@@ -5,7 +5,7 @@ class WebRendererBridge {
   call<T extends RendererPluginBridges>(
     bridge: T,
     event: keyof Exclude<RendererBridges[T], undefined>,
-    ...args
+    ...args: any[]
   ) {
     sendToBridge(bridge, event, ...args);
   }

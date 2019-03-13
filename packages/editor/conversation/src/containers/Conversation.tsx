@@ -174,7 +174,7 @@ export interface ContainerProps {
 }
 
 class ConversationContainer extends React.Component<ContainerProps, any> {
-  constructor(props) {
+  constructor(props: ContainerProps) {
     super(props);
     this.state = {
       localId: props.id || uuid.generate(),

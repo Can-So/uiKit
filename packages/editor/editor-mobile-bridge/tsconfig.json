@@ -2,6 +2,7 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "declaration": false,
+    "noImplicitAny": true
   },
   "include": [
     "./src/**/*.ts",

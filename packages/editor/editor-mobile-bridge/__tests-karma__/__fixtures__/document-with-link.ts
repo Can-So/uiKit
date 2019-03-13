@@ -1,4 +1,4 @@
-export default href => ({
+export default (href: string) => ({
   version: 1,
   type: 'doc',
   content: [

@@ -1,5 +1,42 @@
 # @atlaskit/editor-core
 
+## 105.3.0
+- [minor] [5b226754b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b226754b8):
+
+  - ED-5939: Replace SizeDetector with WidthDetector in all editor components
+
+## 105.2.1
+- Updated dependencies [1b952c437d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b952c437d):
+  - @atlaskit/textarea@0.2.6
+
+## 105.2.0
+- [minor] [b2c1f96b0d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b2c1f96b0d):
+
+  - Allow text formatting marks only on text nodes.
+
+## 105.1.0
+- [minor] [804597a281](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/804597a281):
+
+  - ED-6482 Add GAS v3 analytics for panel
+
+## 105.0.0
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-test-helpers@7.0.6
+  - @atlaskit/renderer@43.0.0
+  - @atlaskit/emoji@57.0.0
+  - @atlaskit/media-card@56.0.0
+  - @atlaskit/media-editor@30.0.0
+  - @atlaskit/media-filmstrip@29.0.0
+  - @atlaskit/media-picker@36.0.0
+  - @atlaskit/media-test-helpers@20.1.8
+  - @atlaskit/editor-bitbucket-transformer@4.2.5
+  - @atlaskit/editor-json-transformer@4.3.5
+  - @atlaskit/editor-markdown-transformer@2.2.5
+  - @atlaskit/task-decision@12.0.1
+  - @atlaskit/util-data-test@10.2.5
+  - @atlaskit/media-core@28.0.0
+
 ## 104.1.1
 - Updated dependencies [72c6f68226](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72c6f68226):
   - @atlaskit/renderer@42.0.1
