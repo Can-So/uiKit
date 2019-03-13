@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 105.1.0
+- [minor] [804597a281](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/804597a281):
+
+  - ED-6482 Add GAS v3 analytics for panel
+
 ## 105.0.0
 - Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
   - @atlaskit/editor-common@34.0.0
