@@ -3,22 +3,26 @@ import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
 import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
 import { withAnalyticsLogger, withIntlProvider } from './helpers';
-import AtlassianSwitcher from '../src';
+import AtlassianSwitcher, { AtlassianSwitcherPrefetchTrigger } from '../src';
+import { resetAll } from '../src/providers/instance-data-providers';
 
-class ConfluenceSwitcherExample extends React.Component {
+class JiraSwitcherExample extends React.Component {
   state = {
     isDrawerOpen: false,
   };
 
   componentDidMount() {
-    this.openDrawer();
+    mockEndpoints('jira', undefined, REQUEST_MEDIUM);
   }
 
   openDrawer = () => {
-    mockEndpoints('confluence', undefined, REQUEST_MEDIUM);
     this.setState({
       isDrawerOpen: true,
     });
+  };
+
+  clearCache = () => {
+    resetAll();
   };
 
   onClose = () => {
@@ -34,21 +38,31 @@ class ConfluenceSwitcherExample extends React.Component {
   };
 
   render() {
+    const CLOUD_ID = 'some-cloud-id';
+
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
           <AtlassianSwitcher
-            product="confluence"
-            cloudId="some-cloud-id"
+            product="jira"
+            cloudId={CLOUD_ID}
             triggerXFlow={this.onTriggerXFlow}
           />
         </Drawer>
-        <Button type="button" onClick={this.openDrawer}>
-          Open drawer
-        </Button>
+        <div style={{ display: 'flex' }}>
+          <AtlassianSwitcherPrefetchTrigger cloudId={CLOUD_ID}>
+            <Button type="button" onClick={this.openDrawer}>
+              Open drawer
+            </Button>
+          </AtlassianSwitcherPrefetchTrigger>
+          <div style={{ width: 16 }} />
+          <Button type="button" onClick={this.clearCache}>
+            Clear cache
+          </Button>
+        </div>
       </div>
     );
   }
 }
 
-export default withIntlProvider(withAnalyticsLogger(ConfluenceSwitcherExample));
+export default withIntlProvider(withAnalyticsLogger(JiraSwitcherExample));

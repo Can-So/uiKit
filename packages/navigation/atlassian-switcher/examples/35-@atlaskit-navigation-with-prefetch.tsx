@@ -8,14 +8,18 @@ import AkDrawer from '@atlaskit/drawer';
 import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
 import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher from '../src';
+import PrefetchTrigger from '../src/components/prefetch-trigger';
 
 class ConfluenceSwitcherExample extends React.Component {
   state = {
     isDrawerOpen: false,
   };
 
-  openDrawer = () => {
+  componentDidMount() {
     mockEndpoints('confluence', undefined, REQUEST_MEDIUM);
+  }
+
+  openDrawer = () => {
     this.setState({
       isDrawerOpen: true,
     });
@@ -52,16 +56,18 @@ class ConfluenceSwitcherExample extends React.Component {
         globalPrimaryIcon={<AtlassianIcon size="large" label="Atlassian" />}
         globalPrimaryItemHref="/"
         globalSecondaryActions={[
-          <AkGlobalItem key="switcher-global-item" onClick={this.openDrawer}>
-            <Tooltip content="Switch apps" position="right">
-              <SwitcherIcon
-                label="Switch apps"
-                size="medium"
-                primaryColor={colors.N0}
-                secondaryColor={colors.N800}
-              />
-            </Tooltip>
-          </AkGlobalItem>,
+          <PrefetchTrigger cloudId="some-cloud-id" key="switcher-global-item">
+            <AkGlobalItem onClick={this.openDrawer}>
+              <Tooltip content="Switch apps" position="right">
+                <SwitcherIcon
+                  label="Switch apps"
+                  size="medium"
+                  primaryColor={colors.N0}
+                  secondaryColor={colors.N800}
+                />
+              </Tooltip>
+            </AkGlobalItem>
+          </PrefetchTrigger>,
         ]}
       />
     );
