@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.15.0
+- [minor] [29870e89f2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29870e89f2):
+
+  - Enable noImplicitAny for mobile bridge
+
 ## 6.14.2
 - Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
   - @atlaskit/editor-common@34.0.0

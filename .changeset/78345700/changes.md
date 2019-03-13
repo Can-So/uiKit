@@ -1,1 +1,0 @@
-- Enable noImplicitAny for mobile bridge
