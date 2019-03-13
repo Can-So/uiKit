@@ -13,7 +13,7 @@ import {
   P500,
   N40,
   N500,
-} from '../../../../adf-schema/';
+} from '@atlaskit/adf-schema';
 
 type Color = 'neutral' | 'purple' | 'blue' | 'red' | 'yellow' | 'green';
 
