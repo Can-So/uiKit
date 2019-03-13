@@ -111,32 +111,6 @@ export default () => (
       </TaskItem>
     </SidebarContainer>
 
-    <h3>Simple TaskItem with 2 participant</h3>
-    <SidebarContainer>
-      <TaskItem
-        taskId="task-3"
-        contentRef={dumpRef}
-        onChange={action('onChange')}
-        participants={getParticipants(2)}
-        appearance="card"
-      >
-        <Renderer document={document} />
-      </TaskItem>
-    </SidebarContainer>
-
-    <h3>Simple TaskItem with 3 participants</h3>
-    <SidebarContainer>
-      <TaskItem
-        taskId="task-3"
-        contentRef={dumpRef}
-        onChange={action('onChange')}
-        participants={getParticipants(3)}
-        appearance="card"
-      >
-        <Renderer document={document} />
-      </TaskItem>
-    </SidebarContainer>
-
     <h3>Simple TaskItem with 4 participants</h3>
     <SidebarContainer>
       <TaskItem

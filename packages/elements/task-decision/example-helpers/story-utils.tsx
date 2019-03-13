@@ -1,53 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { ReactRenderer as Renderer } from '@atlaskit/renderer';
 
-import { TaskDecisionProvider } from '../src/types';
-import {
-  MockTaskDecisionResource,
-  MockTaskDecisionResourceConfig,
-  taskDecision,
-} from '@atlaskit/util-data-test';
+import { taskDecision } from '@atlaskit/util-data-test';
 
 export const {
   getMockTaskDecisionResource,
   document,
   getParticipants,
 } = taskDecision;
-
-export const createProviders = (
-  options?: MockTaskDecisionResourceConfig,
-): {
-  taskDecisionProvider: Promise<MockTaskDecisionResource>;
-  renderDocument: (document: any) => JSX.Element;
-} => {
-  const taskDecisionProvider = Promise.resolve(
-    getMockTaskDecisionResource(options),
-  );
-  const providerFactory = new ProviderFactory();
-  providerFactory.setProvider('taskDecisionProvider', taskDecisionProvider);
-  const renderDocument = (document: any) => (
-    <Renderer document={document} dataProviders={providerFactory} />
-  );
-
-  return {
-    taskDecisionProvider,
-    renderDocument,
-  };
-};
-
-export const createRenderer = (provider: TaskDecisionProvider) => {
-  const providerFactory = new ProviderFactory();
-  providerFactory.setProvider(
-    'taskDecisionProvider',
-    Promise.resolve(provider),
-  );
-  const renderDocument = (document: any) => (
-    <Renderer document={document} dataProviders={providerFactory} />
-  );
-  return renderDocument;
-};
 
 export const MessageContainer: React.ComponentClass<
   React.HTMLAttributes<{}>
@@ -83,19 +43,4 @@ export const dumpRef = (ref: HTMLElement | null) => {
 export const action = (action: string) => () => {
   // tslint:disable-next-line:no-console
   console.log({ action });
-};
-
-export const analyticsWebClientMock = {
-  sendUIEvent: (event: any) => {
-    console.log('sendUIEvent: ', event);
-  },
-  sendOperationalEvent: (event: any) => {
-    console.log('sendOperationalEvent: ', event);
-  },
-  sendTrackEvent: (event: any) => {
-    console.log('sendTrackEvent: ', event);
-  },
-  sendScreenEvent: (event: any) => {
-    console.log('sendScreenEvent: ', event);
-  },
 };

@@ -280,7 +280,7 @@ export class EmojiResource
         });
     });
 
-    if (window.localStorage) {
+    if (typeof window !== 'undefined' && window.localStorage) {
       this.selectedTone = this.loadStoredTone();
     }
 
