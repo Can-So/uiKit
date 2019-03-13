@@ -10,7 +10,7 @@ declare global {
 // Safari & Chrome should suffice for now.
 export const skipBrowsers: any = ['ie', 'firefox', 'edge'];
 
-export const navigateOrClear = async (browser, path) => {
+export const navigateOrClear = async (browser: any, path: string) => {
   const currentUrl = await browser.url();
 
   if (currentUrl === path) {
@@ -21,7 +21,7 @@ export const navigateOrClear = async (browser, path) => {
   }
 };
 
-export const getDocFromElement = el => el.pmViewDesc.node.toJSON();
+export const getDocFromElement = (el: any) => el.pmViewDesc.node.toJSON();
 export const editable = '.ProseMirror';
 
 export const editor = {
@@ -36,9 +36,13 @@ export const renderer = {
   placeholder: '#examples', // FIXME lets add something better to renderer
 };
 
-export const callNativeBridge = async (browser, bridgeFn, ...args) => {
+export const callNativeBridge = async (
+  browser: any,
+  bridgeFn: string,
+  ...args: any[]
+) => {
   return await browser.browser.execute(
-    (bridgeFn, args) => {
+    (bridgeFn: any, args: any[]) => {
       if (window.bridge && window.bridge[bridgeFn]) {
         window.bridge[bridgeFn].apply(window.bridge, args);
       }
@@ -48,16 +52,20 @@ export const callNativeBridge = async (browser, bridgeFn, ...args) => {
   );
 };
 
-const clearBridgeOutput = async browser => {
+const clearBridgeOutput = async (browser: any) => {
   await browser.browser.execute(() => {
     // @ts-ignore
     window.logBridge = [];
   });
 };
 
-export const getBridgeOutput = async (browser, bridge, bridgeFn) => {
+export const getBridgeOutput = async (
+  browser: any,
+  bridge: string,
+  bridgeFn: string,
+) => {
   const logs = await browser.browser.execute(
-    (bridge, bridgeFn) => {
+    (bridge: string, bridgeFn: string) => {
       // @ts-ignore
       let logs = window.logBridge;
 
@@ -74,7 +82,7 @@ export const getBridgeOutput = async (browser, bridge, bridgeFn) => {
   return logs.value;
 };
 
-export const clearEditor = async browser => {
+export const clearEditor = async (browser: any) => {
   await browser.browser.execute(() => {
     const dom = document.querySelector('.ProseMirror') as HTMLElement;
     dom.innerHTML = '<p><br /></p>';

@@ -8,14 +8,16 @@ import documentWithTask from '../../__fixtures__/document-with-task';
 
 import MobileRenderer from '../../../src/renderer/mobile-renderer-element';
 
-declare var rendererBridge;
+declare var rendererBridge: any;
 
-const mockAndroidBridgeHandler = (bridgeName, eventName) => spy => {
-  window[bridgeName] = {};
-  window[bridgeName][eventName] = spy;
+const mockAndroidBridgeHandler = (bridgeName: string, eventName: string) => (
+  spy: sinon.SinonSpy,
+) => {
+  (window as any)[bridgeName] = {};
+  (window as any)[bridgeName][eventName] = spy;
 };
 
-const mockiOSBridgeHandler = bridgeName => spy => {
+const mockiOSBridgeHandler = (bridgeName: string) => (spy: sinon.SinonSpy) => {
   window.webkit = {
     messageHandlers: {
       [bridgeName]: {
@@ -31,7 +33,7 @@ describe('Renderer bridge', () => {
     type: 'doc',
     content: [{ type: 'paragraph', content: [{ type: 'text', text: 'test' }] }],
   };
-  let renderer;
+  let renderer: any;
   let eventProperties = {
     preventDefault: () => {},
   };
