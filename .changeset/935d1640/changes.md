@@ -1,0 +1,1 @@
+- Change order of props spread to fix textarea focus glow, and smart resizing when onChange passed in

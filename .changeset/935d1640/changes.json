@@ -1,0 +1,10 @@
+{
+  "releases": [{ "name": "@atlaskit/textarea", "type": "patch" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/editor-core",
+      "type": "patch",
+      "dependencies": ["@atlaskit/textarea"]
+    }
+  ]
+}
