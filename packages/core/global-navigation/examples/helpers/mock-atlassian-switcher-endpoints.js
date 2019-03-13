@@ -132,7 +132,6 @@ export const mockJestEndpoints = (cloudId: string) => {
     }
 
     return Promise.resolve({
-      ok: true,
       json: () => Promise.resolve(response),
     });
   };
