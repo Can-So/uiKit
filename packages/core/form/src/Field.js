@@ -2,7 +2,7 @@
 import React, { type Node } from 'react';
 import arrayShallowEqual from 'shallow-equal/arrays';
 import objectShallowEqual from 'shallow-equal/objects';
-import uuid from 'uuid';
+import { uid } from 'react-uid';
 import memoizeOne from 'memoize-one';
 import invariant from 'tiny-invariant';
 import { type FieldState, type FieldSubscription } from 'final-form';
@@ -97,7 +97,7 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   unregisterField = () => {};
 
-  getFieldId = memoizeOne(name => `${name}-${uuid()}`);
+  getFieldId = memoizeOne(name => `${name}-${uid({ id: name })}`);
 
   state = {
     // eslint-disable-next-line no-unused-vars
