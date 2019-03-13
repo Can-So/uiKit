@@ -68,7 +68,7 @@ class DropdownMenuStateless extends Component<
   };
 
   state = {
-    id: uid({ id: this.componentName }),
+    id: uid({ id: this.constructor.name }),
     autoFocusDropdownItems: false,
   };
 
