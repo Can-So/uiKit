@@ -1,1 +1,0 @@
-- ED-5939: Replace SizeDetector with WidthDetector in all editor components

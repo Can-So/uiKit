@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 43.0.1
+- [patch] [5b226754b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b226754b8):
+
+  - ED-5939: Replace SizeDetector with WidthDetector in all editor components
+
 ## 43.0.0
 - Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
   - @atlaskit/editor-common@34.0.0

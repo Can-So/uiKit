@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 105.3.0
+- [minor] [5b226754b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b226754b8):
+
+  - ED-5939: Replace SizeDetector with WidthDetector in all editor components
+
 ## 105.2.1
 - Updated dependencies [1b952c437d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b952c437d):
   - @atlaskit/textarea@0.2.6
