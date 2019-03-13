@@ -1,7 +1,5 @@
-import { EditorCardProvider } from '@atlaskit/smart-card';
+import { EditorCardProvider, CardAppearance } from '@atlaskit/smart-card';
 import { createPromise } from '../cross-platform-promise';
-
-type CardAppearance = 'inline' | 'block';
 
 export class EditorMobileCardProvider extends EditorCardProvider {
   async resolve(url: string, appearance: CardAppearance): Promise<any> {
