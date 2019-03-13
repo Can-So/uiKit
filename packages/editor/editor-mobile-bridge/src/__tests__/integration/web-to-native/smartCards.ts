@@ -18,12 +18,14 @@ BrowserTestCase(
 
     // open up editor
     await browser.goto(editor.path);
+    await browser.waitForSelector(editable);
     await browser.isVisible(clipboardInput);
     await browser.type(clipboardInput, 'https://www.atlassian.com');
     await browser.click(copyIcon);
     await browser.waitForSelector(editor.placeholder);
     await browser.click(editor.placeholder);
     await browser.waitForSelector(editable);
+    await browser.type(editable, 'here is a link ');
 
     // // paste the link
     await browser.paste(editable);

@@ -6,6 +6,10 @@ Object {
     Object {
       "content": Array [
         Object {
+          "text": "here is a link ",
+          "type": "text",
+        },
+        Object {
           "attrs": Object {
             "data": Object {
               "@context": "https://www.w3.org/ns/activitystreams",
