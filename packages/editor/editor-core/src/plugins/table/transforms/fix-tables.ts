@@ -37,7 +37,11 @@ export const fireAnalytics = (properties = {}) =>
 //
 // This row only spans two columns, yet it contains widths for 3.
 // We remove the third width here, assumed duplicate content.
-export const removeExtraneousColumnWidths = (node, basePos, tr) => {
+export const removeExtraneousColumnWidths = (
+  node: PMNode,
+  basePos: number,
+  tr: Transaction,
+) => {
   let hasProblems = false;
 
   tr = replaceCells(tr, node, basePos, cell => {

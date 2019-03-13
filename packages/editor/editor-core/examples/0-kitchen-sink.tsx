@@ -75,11 +75,6 @@ const appearanceOptions = [
       'should be used for things like comments where you have a field input but require a toolbar & save/cancel buttons',
   },
   // {
-  //   label: 'Inline comment',
-  //   value: 'inline-comment',
-  //   description: 'should be used for inline comments; no toolbar is displayed',
-  // },
-  // {
   //   label: 'Chromeless',
   //   value: 'chromeless',
   //   description: 'is essentially the `comment` editor but without the editor chrome, like toolbar & save/cancel buttons'
@@ -99,7 +94,10 @@ const docs = [
   { label: 'With table', value: 'example-doc-with-table.ts' },
 ];
 
-const formatAppearanceOption = (option, { context }) => {
+const formatAppearanceOption = (
+  option: { label: string; description?: string },
+  { context }: { context: string },
+) => {
   if (context === 'menu') {
     return (
       <div
@@ -127,12 +125,12 @@ const formatAppearanceOption = (option, { context }) => {
 };
 
 const selectStyles = {
-  menu(styles) {
+  menu(styles: {}) {
     return { ...styles, zIndex: 9999 };
   },
 };
 
-export const Textarea: any = styled.textarea`
+export const Textarea = styled.textarea`
   box-sizing: border-box;
   border: 1px solid lightgray;
   font-family: monospace;
@@ -247,7 +245,7 @@ class FullPageRendererExample extends React.Component<Props, State> {
                   defaultValue={appearanceOptions.find(
                     opt => opt.value === this.state.appearance,
                   )}
-                  onChange={opt => {
+                  onChange={(opt: { value: EditorAppearance }) => {
                     this.setState({
                       appearance: opt.value,
                     });
@@ -260,7 +258,7 @@ class FullPageRendererExample extends React.Component<Props, State> {
                     <Select
                       formatOptionLabel={formatAppearanceOption}
                       options={docs}
-                      onChange={opt => this.loadDocument(opt, actions)}
+                      onChange={(opt: any) => this.loadDocument(opt, actions)}
                       placeholder="Load an example document..."
                       styles={selectStyles}
                     />
@@ -392,7 +390,7 @@ class FullPageRendererExample extends React.Component<Props, State> {
     );
   }
 
-  private importADF = actions => {
+  private importADF = (actions: EditorActions) => {
     if (!this.inputRef) {
       return;
     }
@@ -404,7 +402,10 @@ class FullPageRendererExample extends React.Component<Props, State> {
     });
   };
 
-  private loadDocument = async (opt, actions: EditorActions) => {
+  private loadDocument = async (
+    opt: { value: string | null },
+    actions: EditorActions,
+  ) => {
     if (opt.value === null) {
       actions.clear();
       return;
@@ -416,7 +417,7 @@ class FullPageRendererExample extends React.Component<Props, State> {
     actions.replaceDocument(adf, false);
   };
 
-  private onDocumentChanged = adf => {
+  private onDocumentChanged = (adf: any) => {
     this.setState({ adf, adfInput: JSON.stringify(adf, null, 2) });
 
     // run dat validation spinner
@@ -425,11 +426,13 @@ class FullPageRendererExample extends React.Component<Props, State> {
     }
   };
 
-  private onDocumentValidated = errors => {
-    this.setState({ errors, waitingToValidate: false });
+  private onDocumentValidated = (errors?: Array<Error>) => {
+    this.setState({ errors: errors || [], waitingToValidate: false });
   };
 
-  private handleInputChange = event => {
+  private handleInputChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
     this.setState({ adfInput: event.target.value });
     // the user loads the ADF via the load button; we just update the
     // state of the textarea here

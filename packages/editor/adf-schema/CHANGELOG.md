@@ -1,5 +1,15 @@
 # @atlaskit/adf-schema
 
+## 1.7.1
+- [patch] [0825fbe634](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0825fbe634):
+
+  - ED-6410: remove opacity from cells background color
+
+## 1.7.0
+- [minor] [6380484429](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6380484429):
+
+  - ED-6485 Support breakout mark on layout-section. Retain breakout mark when toggling list nested within columns.
+
 ## 1.6.2
 - [patch] [d18b085e2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d18b085e2a):
 

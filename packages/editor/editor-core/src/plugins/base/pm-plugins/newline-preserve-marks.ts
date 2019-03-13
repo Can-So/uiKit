@@ -3,6 +3,7 @@ import { keydownHandler } from 'prosemirror-keymap';
 import { filter } from '../../../utils/commands';
 import { typeAheadPluginKey } from '../../../plugins/type-ahead';
 import { emojiPluginKey } from '../../../plugins/emoji/pm-plugins/main';
+import { Command } from '../../../types';
 
 export const newlinePreserveMarksKey = new PluginKey(
   'newlinePreserveMarksPlugin',
@@ -21,8 +22,12 @@ const isTypeaheadNotDisplaying = (state: EditorState): boolean =>
   !typeAheadPluginKey.getState(state).active &&
   !emojiPluginKey.getState(state).queryActive;
 
-const splitBlockPreservingMarks = (state: EditorState, dispatch): boolean => {
-  dispatch(state.tr.split(state.tr.mapping.map(state.selection.$from.pos), 1));
+const splitBlockPreservingMarks: Command = (state, dispatch): boolean => {
+  if (dispatch) {
+    dispatch(
+      state.tr.split(state.tr.mapping.map(state.selection.$from.pos), 1),
+    );
+  }
   return true;
 };
 

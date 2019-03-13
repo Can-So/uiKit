@@ -31,8 +31,10 @@ const input = 'helloworld';
   );
 });
 
-const validateFormat = async (browser, heading) => {
-  const selector = 'span=' + messages['heading' + heading].defaultMessage;
+const validateFormat = async (browser: any, heading: number) => {
+  const selector =
+    'span=' +
+    messages[('heading' + heading) as keyof typeof messages].defaultMessage;
   await browser.click(changeFormatting);
   await browser.waitForSelector(selector);
   await browser.click(selector);

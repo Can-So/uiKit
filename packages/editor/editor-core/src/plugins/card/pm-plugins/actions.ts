@@ -2,11 +2,14 @@ import { pluginKey } from './main';
 import { CardProvider, CardPluginAction, Request } from '../types';
 import { Transaction } from 'prosemirror-state';
 
-export const cardAction = (tr, action: CardPluginAction): Transaction => {
+export const cardAction = (
+  tr: Transaction,
+  action: CardPluginAction,
+): Transaction => {
   return tr.setMeta(pluginKey, action);
 };
 
-export const resolveCard = url => (tr: Transaction) =>
+export const resolveCard = (url: string) => (tr: Transaction) =>
   cardAction(tr, {
     type: 'RESOLVE',
     url,

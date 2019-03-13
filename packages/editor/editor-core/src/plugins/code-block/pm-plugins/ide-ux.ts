@@ -21,6 +21,7 @@ import {
   indent,
   insertNewlineWithIndent,
 } from '../ide-ux/commands';
+import { CommandDispatch } from '../../../types';
 
 export default new Plugin({
   props: {
@@ -55,7 +56,7 @@ export default new Plugin({
       return false;
     },
     handleKeyDown: keydownHandler({
-      Backspace: (state: EditorState, dispatch) => {
+      Backspace: (state: EditorState, dispatch?: CommandDispatch) => {
         if (isCursorInsideCodeBlock(state)) {
           const $cursor = getCursor(state.selection)!;
           const beforeText = getStartOfCurrentLine(state).text;
@@ -66,7 +67,7 @@ export default new Plugin({
             right,
             hasTrailingMatchingBracket,
           } = getAutoClosingBracketInfo(beforeText, afterText);
-          if (left && right && hasTrailingMatchingBracket) {
+          if (left && right && hasTrailingMatchingBracket && dispatch) {
             dispatch(
               state.tr.delete(
                 $cursor.pos - left.length,
@@ -80,7 +81,7 @@ export default new Plugin({
             indentText,
           } = getLineInfo(beforeText);
           if (beforeText === indentText) {
-            if (indentText.endsWith(token.repeat(size))) {
+            if (indentText.endsWith(token.repeat(size)) && dispatch) {
               dispatch(
                 state.tr.delete(
                   $cursor.pos - (size - (indentText.length % size) || size),
@@ -101,7 +102,11 @@ export default new Plugin({
       'Mod-[': filter(isSelectionEntirelyInsideCodeBlock, outdent),
       Tab: filter(
         isSelectionEntirelyInsideCodeBlock,
-        (state: EditorState, dispatch) => {
+        (state: EditorState, dispatch?: CommandDispatch) => {
+          if (!dispatch) {
+            return false;
+          }
+
           if (isCursorInsideCodeBlock(state)) {
             return insertIndent(state, dispatch);
           }
@@ -109,13 +114,13 @@ export default new Plugin({
         },
       ),
       'Shift-Tab': filter(isSelectionEntirelyInsideCodeBlock, outdent),
-      'Mod-a': (state: EditorState, dispatch) => {
+      'Mod-a': (state: EditorState, dispatch?: CommandDispatch) => {
         if (isSelectionEntirelyInsideCodeBlock(state)) {
           const { $from, $to } = state.selection;
           const isFullCodeBlockSelection =
             $from.parentOffset === 0 &&
             $to.parentOffset === $to.parent.nodeSize - 2;
-          if (!isFullCodeBlockSelection) {
+          if (!isFullCodeBlockSelection && dispatch) {
             dispatch(
               state.tr.setSelection(
                 TextSelection.create(state.doc, $from.start(), $to.end()),

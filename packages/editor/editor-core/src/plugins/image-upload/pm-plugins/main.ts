@@ -12,6 +12,7 @@ import {
 } from '../types';
 import { EditorView } from 'prosemirror-view';
 import { startImageUpload, insertExternalImage } from './commands';
+import { PMPluginFactoryParams } from '../../../types';
 
 type DOMHandlerPredicate = ((e: Event) => boolean);
 const createDOMHandler = (pred: DOMHandlerPredicate, eventName: string) => (
@@ -48,19 +49,22 @@ const getNewActiveUpload = (
   return pluginState.activeUpload;
 };
 
-export const createPlugin = ({ dispatch, providerFactory }) => {
+export const createPlugin = ({
+  dispatch,
+  providerFactory,
+}: PMPluginFactoryParams) => {
   let uploadHandler: ImageUploadHandler | undefined;
 
   return new Plugin({
     state: {
-      init(config, state: EditorState): ImageUploadPluginState {
+      init(_config, state: EditorState): ImageUploadPluginState {
         return {
           active: false,
           enabled: canInsertMedia(state),
           hidden: !state.schema.nodes.media || !state.schema.nodes.mediaSingle,
         };
       },
-      apply(tr, pluginState: ImageUploadPluginState, oldState, newState) {
+      apply(tr, pluginState: ImageUploadPluginState, _oldState, newState) {
         const newActive = isMediaSelected(newState);
         const newEnabled = canInsertMedia(newState);
         const newActiveUpload = getNewActiveUpload(tr, pluginState);
@@ -77,7 +81,7 @@ export const createPlugin = ({ dispatch, providerFactory }) => {
             activeUpload: newActiveUpload,
           };
 
-          dispatch(newPluginState);
+          dispatch(stateKey, newPluginState);
           return newPluginState;
         }
 

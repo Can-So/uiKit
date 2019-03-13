@@ -77,16 +77,15 @@ export const removeBlockMarks = (
 export const sanitizeSelectionMarks = (
   state: EditorState,
 ): Transaction | undefined => {
-  let tr;
+  let tr: Transaction | undefined;
   const { $from, $to } = state.tr.selection;
-  const nodeType = $from.node().type;
   state.doc.nodesBetween($from.pos, $to.pos, (node, pos) => {
-    const nodePos = state.doc.resolve(pos);
     node.marks.forEach(mark => {
-      if (!nodeType.allowsMarkType(mark.type)) {
+      if (!node.type.allowsMarkType(mark.type)) {
         const filteredMarks = node.marks.filter(m => m.type !== mark.type);
+        const position = pos > 0 ? pos - 1 : 0;
         tr = (tr || state.tr).setNodeMarkup(
-          nodePos.pos,
+          position,
           undefined,
           node.attrs,
           filteredMarks,

@@ -77,7 +77,7 @@ export function createInitialPluginState(
 export function createPlugin(
   dispatch: Dispatch,
   reactContext: () => { [key: string]: any },
-  typeAhead,
+  typeAhead: Array<TypeAheadHandler>,
 ): Plugin {
   return new Plugin({
     key: pluginKey,

@@ -8,7 +8,9 @@ import {
   EVENT_TYPE,
   ACTION_SUBJECT_ID,
 } from '../../../../plugins/analytics';
+import { EditorState, Transaction } from 'prosemirror-state';
 import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
+import { CommandDispatch } from '../../../../types';
 
 describe('analytics', () => {
   const createEditor = createEditorFactory();
@@ -25,9 +27,9 @@ describe('analytics', () => {
 
   describe('addAnalytics', () => {
     let editorView;
-    let dispatch;
-    let state;
-    let tr;
+    let dispatch: CommandDispatch;
+    let state: EditorState;
+    let tr: Transaction;
 
     const editor = (doc: any) => {
       fireMock = jest.fn();

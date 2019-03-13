@@ -16,8 +16,7 @@ import {
 
 describe('FakeTextCursor -> Cursor', () => {
   const createEditor = createEditorFactory();
-
-  const editor = doc => createEditor({ doc });
+  const editor = (doc: any) => createEditor({ doc });
 
   describe('addFakeTextCursor', () => {
     it('should add placeholder cursor', () => {

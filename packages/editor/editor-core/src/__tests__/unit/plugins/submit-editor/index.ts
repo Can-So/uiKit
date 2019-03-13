@@ -6,11 +6,12 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import submitPlugin from '../../../../plugins/submit-editor';
+import { EditorProps } from '../../../../types';
 
 describe('submit-editor', () => {
   const createEditor = createEditorFactory();
 
-  let onSave;
+  let onSave: EditorProps['onSave'];
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
 
   const editor = (doc: any) => {

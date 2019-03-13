@@ -4,11 +4,12 @@ import {
   CollabEditProvider,
   CollabEvent,
 } from '../src/plugins/collab-edit/provider';
+import { Transaction, EditorState } from 'prosemirror-state';
 
 interface Participant {
   sid: string;
   name: string;
-  src: string;
+  avatar: string;
 }
 
 const participants = {
@@ -33,30 +34,28 @@ const participants = {
 };
 
 const others = (sid: string) =>
-  Object.keys(participants).reduce<Participant[]>(
-    (all, id) => (id === sid ? all : all.concat(participants[id])),
-    [],
-  );
+  (Object.keys(participants) as Array<keyof typeof participants>).reduce<
+    Participant[]
+  >((all, id) => (id === sid ? all : all.concat(participants[id])), []);
 
 class Mediator extends EventEmitter {
-  emit(eventName, data, ...args) {
+  emit(eventName: string, data: any) {
     switch (eventName) {
       case 'init': {
         const { sid, doc } = data as any;
         this.emit(`${sid}:init`, { doc });
         this.emit(`${sid}:connected`, { sid });
 
-        const joined = Object.keys(participants).reduce<Participant[]>(
-          (all, id) => {
-            const { sid: sessionId, ...rest } = participants[id];
-            return all.concat({
-              sessionId,
-              ...rest,
-              lastActive: 0,
-            });
-          },
-          [],
-        );
+        const joined = (Object.keys(participants) as Array<
+          keyof typeof participants
+        >).reduce<Array<Record<string, string | number>>>((all, id) => {
+          const { sid: sessionId, ...rest } = participants[id];
+          return all.concat({
+            sessionId,
+            ...rest,
+            lastActive: 0,
+          });
+        }, []);
 
         others(sid).forEach(({ sid: xSid }) => {
           window.setTimeout(() => {
@@ -74,7 +73,7 @@ class Mediator extends EventEmitter {
         return;
       }
     }
-    super.emit(eventName, data, ...args);
+    super.emit(eventName, data);
   }
 }
 
@@ -83,7 +82,7 @@ const mediator = new Mediator();
 export class MockCollabEditProvider implements CollabEditProvider {
   protected getState = () => {};
   protected createStep = (json: object) => {};
-  protected sid;
+  protected sid?: string;
   protected eventBus: any;
 
   constructor(eventBus: any, sid?: string) {
@@ -120,7 +119,7 @@ export class MockCollabEditProvider implements CollabEditProvider {
     return this;
   }
 
-  send(tr, oldState, newState) {
+  send(tr: Transaction, oldState: EditorState, newState: EditorState) {
     const { sid } = this;
     if (tr.steps && tr.steps.length) {
       const json = tr.steps.map(step => step.toJSON());
@@ -128,7 +127,7 @@ export class MockCollabEditProvider implements CollabEditProvider {
     }
   }
 
-  on(evt: CollabEvent, handler: (...args) => void) {
+  on(evt: CollabEvent, handler: (args: any) => void) {
     const { sid } = this;
     if (sid) {
       this.eventBus.on(`${sid}:${evt}`, handler);
@@ -138,7 +137,7 @@ export class MockCollabEditProvider implements CollabEditProvider {
     return this;
   }
 
-  emit(evt: CollabEvent, ...args) {
+  emit(evt: CollabEvent, ...args: any) {
     const { sid } = this;
     if (sid) {
       this.eventBus.emit(evt, { sid, ...args });

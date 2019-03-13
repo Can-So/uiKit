@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Node as PMNode } from 'prosemirror-model';
-import { EditorView, NodeView } from 'prosemirror-view';
+import { EditorView, NodeView, Decoration } from 'prosemirror-view';
 import { colors, themed } from '@atlaskit/theme';
 import InfoIcon from '@atlaskit/icon/glyph/editor/info';
 import SuccessIcon from '@atlaskit/icon/glyph/editor/success';
@@ -8,7 +8,7 @@ import NoteIcon from '@atlaskit/icon/glyph/editor/note';
 import WarningIcon from '@atlaskit/icon/glyph/editor/warning';
 import ErrorIcon from '@atlaskit/icon/glyph/editor/error';
 import TipIcon from '@atlaskit/icon/glyph/editor/hint';
-import ReactNodeView from '../../../nodeviews/ReactNodeView';
+import ReactNodeView, { ForwardRef } from '../../../nodeviews/ReactNodeView';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import { PanelType } from '@atlaskit/adf-schema';
 import styled from 'styled-components';
@@ -125,7 +125,7 @@ export const IconWrapper = styled.div`
 ` as React.ComponentType<PanelWrapperProps>;
 
 class PanelComponent extends React.Component<PanelComponentProps> {
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: PanelComponentProps) {
     return this.props.panelType !== nextProps.panelType;
   }
 
@@ -157,12 +157,12 @@ class Panel extends ReactNodeView {
     return { dom };
   }
 
-  render(props, forwardRef) {
+  render(_props: any, forwardRef: ForwardRef) {
     const { panelType } = this.node.attrs;
     return <PanelComponent panelType={panelType} forwardRef={forwardRef} />;
   }
 
-  update(node, decorations) {
+  update(node: PMNode, decorations: Decoration[]) {
     return super.update(
       node,
       decorations,

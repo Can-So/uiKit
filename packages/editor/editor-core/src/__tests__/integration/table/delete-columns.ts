@@ -2,8 +2,7 @@ import { IntlProvider } from 'react-intl';
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 
 import { editable, getDocFromElement, fullpage } from '../_helpers';
-import { documentWithMergedRows } from './__fixtures__/merged-rows-document';
-import { documentWithMergedColumns } from './__fixtures__/merged-columns-document';
+import { documentWithMergedCells } from './__fixtures__/merged-rows-and-cols-document';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
 import {
   goToEditorTestingExample,
@@ -12,8 +11,8 @@ import {
 import messages from '../../../plugins/table/ui/messages';
 
 BrowserTestCase(
-  'Should delete merged rows from contextual menu',
-  { skip: ['ie'] },
+  'Should delete merged columns from contextual menu and append missing cells to the table',
+  { skip: ['ie', 'edge', 'firefox', 'safari'] },
   async (client: any) => {
     const page = await goToEditorTestingExample(client);
     const intlProvider = new IntlProvider({ locale: 'en' });
@@ -21,13 +20,13 @@ BrowserTestCase(
 
     await mountEditor(page, {
       appearance: fullpage.appearance,
-      defaultValue: JSON.stringify(documentWithMergedRows),
+      defaultValue: JSON.stringify(documentWithMergedCells),
       allowTables: {
         advanced: true,
       },
     });
 
-    const controlSelector = `tbody tr:last-child td:last-child`;
+    const controlSelector = `tbody tr:first-child th:nth-child(2)`;
     await page.waitForSelector(controlSelector);
     await page.click(controlSelector);
 
@@ -35,8 +34,8 @@ BrowserTestCase(
     await page.waitForSelector(contextMenuTriggerSelector);
     await page.click(contextMenuTriggerSelector);
 
-    const message = await intl.formatMessage(messages.removeRows, {
-      0: 2,
+    const message = await intl.formatMessage(messages.removeColumns, {
+      0: 1,
     });
     const contextMenuItemSelector = `span=${message}`;
     await page.waitForSelector(contextMenuItemSelector);
@@ -48,8 +47,8 @@ BrowserTestCase(
 );
 
 BrowserTestCase(
-  'Should delete merged columns from contextual menu',
-  { skip: ['ie'] },
+  'Should delete merged columns from contextual menu and decrement colspan of the spanning cell',
+  { skip: ['ie', 'edge', 'firefox', 'safari'] },
   async (client: any) => {
     const page = await goToEditorTestingExample(client);
     const intlProvider = new IntlProvider({ locale: 'en' });
@@ -57,13 +56,13 @@ BrowserTestCase(
 
     await mountEditor(page, {
       appearance: fullpage.appearance,
-      defaultValue: JSON.stringify(documentWithMergedColumns),
+      defaultValue: JSON.stringify(documentWithMergedCells),
       allowTables: {
         advanced: true,
       },
     });
 
-    const controlSelector = `tbody > tr th + th`;
+    const controlSelector = `tbody tr:first-child th:nth-child(3)`;
     await page.waitForSelector(controlSelector);
     await page.click(controlSelector);
 
@@ -72,7 +71,7 @@ BrowserTestCase(
     await page.click(contextMenuTriggerSelector);
 
     const message = await intl.formatMessage(messages.removeColumns, {
-      0: 2,
+      0: 1,
     });
     const contextMenuItemSelector = `span=${message}`;
     await page.waitForSelector(contextMenuItemSelector);

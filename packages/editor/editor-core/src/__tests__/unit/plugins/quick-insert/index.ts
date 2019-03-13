@@ -10,6 +10,7 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { pluginKey as quickInsertPluginKey } from '../../../../plugins/quick-insert';
+import { TypeAheadInsert } from '../../../../plugins/type-ahead/types';
 
 describe('Quick Insert', () => {
   const createEditor = createEditorFactory();
@@ -47,7 +48,7 @@ describe('Quick Insert', () => {
         return Promise.resolve([
           {
             title: 'Custom item',
-            action(insert) {
+            action(insert: TypeAheadInsert) {
               return insert('custom item');
             },
           },

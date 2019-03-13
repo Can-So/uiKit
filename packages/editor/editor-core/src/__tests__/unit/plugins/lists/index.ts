@@ -1,4 +1,3 @@
-import { browser } from '@atlaskit/editor-common';
 import { pluginKey } from '../../../../plugins/lists/pm-plugins/main';
 import {
   createEditorFactory,
@@ -16,6 +15,12 @@ import {
   br,
   code_block,
   underline,
+  simulatePlatform,
+  Platforms,
+  insertText,
+  layoutSection,
+  layoutColumn,
+  breakout,
 } from '@atlaskit/editor-test-helpers';
 import {
   toggleOrderedList,
@@ -24,31 +29,28 @@ import {
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import { GapCursorSelection } from '../../../../plugins/gap-cursor';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import {
-  AnalyticsEventPayload,
-  ACTION_SUBJECT_ID,
-  INPUT_METHOD,
-  INDENT_DIR,
-  INDENT_TYPE,
-  ACTION,
-  ACTION_SUBJECT,
-  EVENT_TYPE,
-} from '../../../../plugins/analytics';
+import { AnalyticsHandler } from '../../../../analytics';
+import { EditorView } from 'prosemirror-view';
 
 describe('lists', () => {
   const createEditor = createEditorFactory();
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  let analyticsHandler: AnalyticsHandler;
 
   const editor = (doc: any, trackEvent?: () => {}) => {
     createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    analyticsHandler = trackEvent || jest.fn();
     return createEditor({
       doc,
       editorProps: {
-        analyticsHandler: trackEvent,
+        appearance: 'full-page',
+        analyticsHandler: analyticsHandler,
         allowCodeBlocks: true,
         allowAnalyticsGASV3: true,
         allowPanel: true,
         allowLists: true,
+        allowBreakout: true,
+        allowLayouts: { allowBreakout: true },
         media: { allowMediaSingle: true },
       },
       createAnalyticsEvent,
@@ -60,14 +62,17 @@ describe('lists', () => {
   const temporaryFileId = `temporary:${randomId()}`;
 
   describe('keymap', () => {
-    let trackEvent;
+    let trackEvent: jest.SpyInstance<AnalyticsHandler>;
     beforeEach(() => {
       trackEvent = jest.fn();
     });
 
     describe('when hit enter', () => {
       it('should split list item', () => {
-        const { editorView } = editor(doc(ul(li(p('text{<>}')))), trackEvent);
+        const { editorView } = editor(
+          doc(ul(li(p('text{<>}')))),
+          trackEvent as any,
+        );
         sendKeyToPm(editorView, 'Enter');
         expect(editorView.state.doc).toEqualDocument(
           doc(ul(li(p('text')), li(p()))),
@@ -76,46 +81,43 @@ describe('lists', () => {
     });
 
     describe('when hit Tab', () => {
-      it('should call indent analytics event', () => {
-        const { editorView } = editor(
-          doc(ol(li(p('text')), li(p('text{<>}')))),
-          trackEvent,
-        );
+      let editorView: EditorView;
+      beforeEach(() => {
+        ({ editorView } = editor(doc(ol(li(p('text')), li(p('text{<>}'))))));
         sendKeyToPm(editorView, 'Tab');
-        expect(trackEvent).toHaveBeenCalledWith(
+      });
+
+      it('should create a sublist', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(ol(li(p('text'), ol(li(p('text{<>}')))))),
+        );
+      });
+
+      it('should call indent analytics event', () => {
+        expect(analyticsHandler).toHaveBeenCalledWith(
           'atlassian.editor.format.list.indent.keyboard',
         );
       });
 
       it('should call indent analytics V3 event', () => {
-        const expectedPayload: AnalyticsEventPayload = {
-          action: ACTION.FORMATTED,
-          actionSubject: ACTION_SUBJECT.TEXT,
-          eventType: EVENT_TYPE.TRACK,
-          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'indentation',
           attributes: {
-            inputMethod: INPUT_METHOD.KEYBOARD,
+            inputMethod: 'keyboard',
             previousIndentationLevel: 1,
             newIndentLevel: 2,
-            direction: INDENT_DIR.INDENT,
-            indentType: INDENT_TYPE.LIST,
+            direction: 'indent',
+            indentType: 'list',
           },
-        };
-        const { editorView } = editor(
-          doc(ol(li(p('text')), li(p('text{<>}')))),
-          trackEvent,
-        );
-
-        sendKeyToPm(editorView, 'Tab');
-
-        expect(createAnalyticsEvent).toHaveBeenCalledWith(
-          expect.objectContaining(expectedPayload),
-        );
+        });
       });
     });
 
     describe('when hit Backspace', () => {
-      const backspaceCheck = (beforeDoc, afterDoc) => {
+      const backspaceCheck = (beforeDoc: any, afterDoc: any) => {
         const { editorView } = editor(beforeDoc);
         sendKeyToPm(editorView, 'Backspace');
 
@@ -401,70 +403,165 @@ describe('lists', () => {
     });
 
     describe('when hit Shift-Tab', () => {
-      it('should call outdent analytics event', () => {
-        const { editorView } = editor(
+      let editorView: EditorView;
+      beforeEach(() => {
+        ({ editorView } = editor(
           doc(ol(li(p('One'), ul(li(p('Two{<>}')))))),
-          trackEvent,
-        );
+          trackEvent as any,
+        ));
         sendKeyToPm(editorView, 'Shift-Tab');
-        expect(trackEvent).toHaveBeenCalledWith(
+      });
+
+      it('should outdent the list', () => {
+        expect(editorView.state.doc).toEqualDocument(
+          doc(ol(li(p('One')), li(p('Two{<>}')))),
+        );
+      });
+
+      it('should call outdent analytics event', () => {
+        expect(analyticsHandler).toHaveBeenCalledWith(
           'atlassian.editor.format.list.outdent.keyboard',
         );
       });
+
       it('should call outdent analytics V3 event', () => {
-        const expectedPayload: AnalyticsEventPayload = {
-          action: ACTION.FORMATTED,
-          actionSubject: ACTION_SUBJECT.TEXT,
-          eventType: EVENT_TYPE.TRACK,
-          actionSubjectId: ACTION_SUBJECT_ID.FORMAT_INDENT,
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'indentation',
           attributes: {
-            inputMethod: INPUT_METHOD.KEYBOARD,
+            inputMethod: 'keyboard',
             previousIndentationLevel: 2,
             newIndentLevel: 1,
-            direction: INDENT_DIR.OUTDENT,
-            indentType: INDENT_TYPE.LIST,
+            direction: 'outdent',
+            indentType: 'list',
           },
-        };
-        const { editorView } = editor(
-          doc(ol(li(p('One'), ul(li(p('Two{<>}')))))),
-          trackEvent,
-        );
-
-        sendKeyToPm(editorView, 'Shift-Tab');
-
-        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+        });
       });
     });
 
-    if (browser.mac) {
-      describe('when on a mac', () => {
-        describe('when hit Cmd-Alt-7', () => {
-          it('should toggle ordered list', () => {
-            const { editorView } = editor(doc(p('text{<>}')));
-            sendKeyToPm(editorView, 'Cmd-Alt-7');
-            expect(editorView.state.doc).toEqualDocument(
-              doc(ol(li(p('text')))),
-            );
-            expect(trackEvent).toHaveBeenCalledWith(
-              'atlassian.editor.format.list.numbered.keyboard',
-            );
-          });
-        });
+    describe('when hit Cmd-Shift-7', () => {
+      simulatePlatform(Platforms.Mac);
 
-        describe('when hit Cmd-Alt-8', () => {
-          it('should toggle bullet list', () => {
-            const { editorView } = editor(doc(p('text{<>}')));
-            sendKeyToPm(editorView, 'Cmd-Alt-8');
-            expect(editorView.state.doc).toEqualDocument(
-              doc(ul(li(p('text')))),
-            );
-            expect(trackEvent).toHaveBeenCalledWith(
-              'atlassian.editor.format.list.bullet.keyboard',
-            );
-          });
+      let editorView: EditorView;
+      beforeEach(() => {
+        ({ editorView } = editor(doc(p('One{<>}'))));
+        sendKeyToPm(editorView, 'Cmd-Shift-7');
+      });
+
+      it('should create a list', () => {
+        expect(editorView.state.doc).toEqualDocument(doc(ol(li(p('One')))));
+      });
+
+      it('should call numbered list analytics event', () => {
+        expect(analyticsHandler).toHaveBeenCalledWith(
+          'atlassian.editor.format.list.numbered.keyboard',
+        );
+      });
+
+      it('should call numbered list analytics V3 event', () => {
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'numberedList',
+          attributes: {
+            inputMethod: 'keyboard',
+          },
         });
       });
-    }
+    });
+
+    describe('when hit Cmd-Shift-8', () => {
+      simulatePlatform(Platforms.Mac);
+
+      let editorView: EditorView;
+      beforeEach(() => {
+        ({ editorView } = editor(doc(p('One{<>}'))));
+        sendKeyToPm(editorView, 'Cmd-Shift-8');
+      });
+
+      it('should create a list', () => {
+        expect(editorView.state.doc).toEqualDocument(doc(ul(li(p('One')))));
+      });
+
+      it('should call numbered list analytics event', () => {
+        expect(analyticsHandler).toHaveBeenCalledWith(
+          'atlassian.editor.format.list.bullet.keyboard',
+        );
+      });
+
+      it('should call numbered list analytics V3 event', () => {
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'bulletedList',
+          attributes: {
+            inputMethod: 'keyboard',
+          },
+        });
+      });
+    });
+  });
+
+  describe('quick insert', () => {
+    describe('Numbered list', () => {
+      let editorView: EditorView;
+      let sel: number;
+
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('{<>}'))));
+
+        insertText(editorView, '/Numbered List', sel);
+        sendKeyToPm(editorView, 'Enter');
+      });
+
+      it('should insert a numbered list', () => {
+        expect(editorView.state.doc).toEqualDocument(doc(ol(li(p('{<>}')))));
+      });
+
+      it('should fire Analytics GAS V3 events', () => {
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'numberedList',
+          attributes: {
+            inputMethod: 'quickInsert',
+          },
+        });
+      });
+    });
+
+    describe('Unordered list', () => {
+      let editorView: EditorView;
+      let sel: number;
+
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('{<>}'))));
+
+        insertText(editorView, '/Unordered List', sel);
+        sendKeyToPm(editorView, 'Enter');
+      });
+
+      it('should insert an unordered list', () => {
+        expect(editorView.state.doc).toEqualDocument(doc(ul(li(p('{<>}')))));
+      });
+
+      it('should fire Analytics GAS V3 events when inserting a unordered list', () => {
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'bulletedList',
+          attributes: {
+            inputMethod: 'quickInsert',
+          },
+        });
+      });
+    });
   });
 
   describe('API', () => {
@@ -683,6 +780,33 @@ describe('lists', () => {
         );
         const { editorView } = editor(
           doc(p('{<}One'), p(underline('Two')), p('Three{>}')),
+        );
+
+        toggleBulletList(editorView);
+        expect(editorView.state.doc).toEqualDocument(expectedOutput);
+      });
+
+      it('should retain breakout marks on ancestor when toggling list within a layout', () => {
+        const expectedOutput = doc(
+          breakout({ mode: 'wide' })(
+            layoutSection(
+              layoutColumn({ width: 33.33 })(p('')),
+              layoutColumn({ width: 33.33 })(ul(li(p('One')))),
+              layoutColumn({ width: 33.33 })(p('')),
+            ),
+          ),
+        );
+
+        const { editorView } = editor(
+          doc(
+            breakout({ mode: 'wide' })(
+              layoutSection(
+                layoutColumn({ width: 33.33 })(p('')),
+                layoutColumn({ width: 33.33 })(p('{<}One{>}')),
+                layoutColumn({ width: 33.33 })(p('')),
+              ),
+            ),
+          ),
         );
 
         toggleBulletList(editorView);

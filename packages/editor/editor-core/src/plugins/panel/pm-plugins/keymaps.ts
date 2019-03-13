@@ -1,15 +1,17 @@
 import { keymap } from 'prosemirror-keymap';
 import { ResolvedPos } from 'prosemirror-model';
-import { EditorState, Transaction, Plugin } from 'prosemirror-state';
+import { Transaction, Plugin } from 'prosemirror-state';
 import { setTextSelection } from 'prosemirror-utils';
+import { Command } from '../../../types';
 
+// Somewhat broken and subverted: https://product-fabric.atlassian.net/browse/ED-6504
 export function keymapPlugin(): Plugin | undefined {
   const deleteCurrentItem = ($from: ResolvedPos, tr: Transaction) => {
     return tr.delete($from.before($from.depth) - 1, $from.end($from.depth) + 1);
   };
 
-  const keymaps = {
-    Backspace: (state: EditorState, dispatch) => {
+  const keymaps: Record<string, Command> = {
+    Backspace: (state, dispatch) => {
       const {
         selection,
         schema: { nodes },
@@ -43,7 +45,9 @@ export function keymapPlugin(): Plugin | undefined {
         const content = $from.node($from.depth).content;
         const insertPos = previousPos.pos - 1;
         deleteCurrentItem($from, tr).insert(insertPos, content);
-        dispatch(setTextSelection(insertPos)(tr).scrollIntoView());
+        if (dispatch) {
+          dispatch(setTextSelection(insertPos)(tr).scrollIntoView());
+        }
         return true;
       }
 

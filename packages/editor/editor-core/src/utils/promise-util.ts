@@ -1,6 +1,6 @@
 export const promiseAllWithNonFailFast = (
   promises: Promise<any>[],
-  errorCollector?: (error) => void,
+  errorCollector?: (error: Error) => void,
 ) => {
   const wrappedPromises = promises.map(p =>
     p.catch(error => {

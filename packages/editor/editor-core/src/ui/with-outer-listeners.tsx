@@ -48,7 +48,7 @@ export default function withOuterListeners<P>(
       }
     };
 
-    handleKeydown = evt => {
+    handleKeydown = (evt: KeyboardEvent) => {
       if (evt.code === 'Escape' && this.props.handleEscapeKeydown) {
         (this.props.handleEscapeKeydown as SimpleEventHandler)(evt);
       } else if (evt.code === 'Enter' && this.props.handleEnterKeydown) {

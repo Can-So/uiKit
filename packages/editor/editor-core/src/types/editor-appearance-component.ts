@@ -12,7 +12,7 @@ import { CollabEditOptions } from '../plugins/collab-edit';
 import { AnalyticsEventPayload } from '../plugins/analytics';
 
 export interface EditorAppearanceComponentProps {
-  onUiReady?: (ref) => void;
+  onUiReady?: (ref: HTMLElement) => void;
   onSave?: (editorView: EditorView) => void;
   onCancel?: (editorView: EditorView) => void;
 

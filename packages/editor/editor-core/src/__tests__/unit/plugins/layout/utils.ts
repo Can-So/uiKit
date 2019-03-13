@@ -14,10 +14,11 @@ import {
 } from '../../../../plugins/layout/utils';
 import { flatmap } from '../../../../utils/slice';
 
-const removeRef = node => Node.fromJSON(defaultSchema, node.toJSON());
-const array = (...args): Node[] => args.map(i => removeRef(i(defaultSchema)));
-const fragment = (...args) =>
-  Fragment.from(args.map(i => removeRef(i(defaultSchema))));
+const removeRef = (node: Node) => Node.fromJSON(defaultSchema, node.toJSON());
+const array = (...args: any): Node[] =>
+  args.map((i: any) => removeRef(i(defaultSchema)));
+const fragment = (...args: any) =>
+  Fragment.from(args.map((i: any) => removeRef(i(defaultSchema))));
 
 describe('layout', () => {
   describe('#flatmap', () => {

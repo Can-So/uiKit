@@ -1,5 +1,94 @@
 # @atlaskit/editor-core
 
+## 105.1.0
+- [minor] [804597a281](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/804597a281):
+
+  - ED-6482 Add GAS v3 analytics for panel
+
+## 105.0.0
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-test-helpers@7.0.6
+  - @atlaskit/renderer@43.0.0
+  - @atlaskit/emoji@57.0.0
+  - @atlaskit/media-card@56.0.0
+  - @atlaskit/media-editor@30.0.0
+  - @atlaskit/media-filmstrip@29.0.0
+  - @atlaskit/media-picker@36.0.0
+  - @atlaskit/media-test-helpers@20.1.8
+  - @atlaskit/editor-bitbucket-transformer@4.2.5
+  - @atlaskit/editor-json-transformer@4.3.5
+  - @atlaskit/editor-markdown-transformer@2.2.5
+  - @atlaskit/task-decision@12.0.1
+  - @atlaskit/util-data-test@10.2.5
+  - @atlaskit/media-core@28.0.0
+
+## 104.1.1
+- Updated dependencies [72c6f68226](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72c6f68226):
+  - @atlaskit/renderer@42.0.1
+  - @atlaskit/util-data-test@10.2.4
+  - @atlaskit/task-decision@12.0.0
+
+## 104.1.0
+- [minor] [55eb63afac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55eb63afac):
+
+  - ED-6239 Add Analytics GAS V3 to autosubstituted
+
+## 104.0.0
+- [major] [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+
+  - ED-6484: Remove the 'inline-comment' appearance from Editor.
+
+## 103.4.4
+- [patch] [65acb722e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65acb722e3):
+
+  - ED-6412: Prevent inserting links containing 'javascript:'
+
+## 103.4.3
+- [patch] [7641ec96cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7641ec96cd):
+
+  - ED-5998: improve cell selection with merged cells, deleting columns and rows
+
+## 103.4.2
+- [patch] [6380484429](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6380484429):
+
+  - ED-6485 Support breakout mark on layout-section. Retain breakout mark when toggling list nested within columns.
+
+## 103.4.1
+- [patch] [5e319bb725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e319bb725):
+
+  - ED-6286: fix post-PR for media upload on mobile
+
+## 103.4.0
+- [minor] [6739aea208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6739aea208):
+
+  - Update editor-common and editor-core types
+
+## 103.3.0
+- [minor] [738f58ef9e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/738f58ef9e):
+
+  - ED-5019 Panels are no longer cleared by clear-formatting
+
+## 103.2.0
+- [minor] [08a09ae767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/08a09ae767):
+
+  -  ED-6377 Add Analytics GAS V3 for numbered/bulleted list format
+
+## 103.1.4
+- [patch] [be479e2335](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be479e2335):
+
+  - fix link opening logic for view and edit mode.
+
+## 103.1.3
+- [patch] [ed6ef51cfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed6ef51cfe):
+
+  - ED-6158: added a shortcut to contextual menu for insertRow and insertColumn
+
+## 103.1.2
+- [patch] [abb200b0b4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abb200b0b4):
+
+  - ED-6374: Switch to MutationObserver instead of rAF + nodeview update for handling breakout content inside a table cell.
+
 ## 103.1.1
 - [patch] [109158320c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/109158320c):
 

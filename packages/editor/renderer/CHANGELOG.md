@@ -1,5 +1,37 @@
 # @atlaskit/renderer
 
+## 43.0.0
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-test-helpers@7.0.6
+  - @atlaskit/media-card@56.0.0
+  - @atlaskit/media-filmstrip@29.0.0
+  - @atlaskit/media-test-helpers@20.1.8
+  - @atlaskit/editor-json-transformer@4.3.5
+  - @atlaskit/task-decision@12.0.1
+  - @atlaskit/util-data-test@10.2.5
+  - @atlaskit/media-core@28.0.0
+
+## 42.0.1
+- Updated dependencies [72c6f68226](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72c6f68226):
+  - @atlaskit/util-data-test@10.2.4
+  - @atlaskit/task-decision@12.0.0
+
+## 42.0.0
+- [major] [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+
+  - ED-6484: Remove the 'inline-comment' appearance from Editor.
+
+## 41.6.1
+- [patch] [8ed53a1cbb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ed53a1cbb):
+
+  - fix padding, wrapping for inline smart links.
+
+## 41.6.0
+- [minor] [345bc86152](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345bc86152):
+
+  - Email renderer does not underline links anymore
+
 ## 41.5.0
 - [minor] [8ec7dd4cb2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ec7dd4cb2):
 

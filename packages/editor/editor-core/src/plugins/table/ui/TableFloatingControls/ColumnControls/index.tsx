@@ -39,7 +39,7 @@ export interface Props {
 }
 
 export default class ColumnControls extends Component<Props, any> {
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     const {
       tableRef,
       selection,

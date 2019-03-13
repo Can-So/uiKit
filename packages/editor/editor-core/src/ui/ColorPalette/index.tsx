@@ -37,7 +37,9 @@ export default class ColorPalette extends PureComponent<Props, any> {
           <Color
             key={color}
             value={color}
-            borderColor={borderColors[label.toLowerCase() || 'transparent']}
+            borderColor={
+              (borderColors as any)[label.toLowerCase() || 'transparent']
+            }
             label={label}
             onClick={onClick}
             isSelected={color === selectedColor}

@@ -1,7 +1,7 @@
 import { find } from '../../../../plugins/quick-insert/search';
 
 describe('Quick Insert Search', () => {
-  const getTitles = item => item.title;
+  const getTitles = (item: { title: string }) => item.title;
 
   const items = [
     { priority: 1, title: 'Table' },

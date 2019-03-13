@@ -20,7 +20,7 @@ import { KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
 
 describe('Snapshot Test: table resizing', () => {
   describe('Re-sizing', () => {
-    let page;
+    let page: any;
     beforeEach(async () => {
       // @ts-ignore
       page = global.page;
@@ -49,9 +49,9 @@ describe('Snapshot Test: table resizing', () => {
 
       // Scroll to the end of col we are about to resize
       // Its in overflow.
-      await page.evaluate(ClassName => {
+      await page.evaluate((className: typeof ClassName) => {
         const element = document.querySelector(
-          `.${ClassName.TABLE_NODE_WRAPPER}`,
+          `.${className.TABLE_NODE_WRAPPER}`,
         ) as HTMLElement;
 
         if (element) {
@@ -62,9 +62,9 @@ describe('Snapshot Test: table resizing', () => {
       await resizeColumn(page, { colIdx: 2, amount: -550, row: 2 });
 
       // Scroll back so we can see the result of our resize.
-      await page.evaluate(ClassName => {
+      await page.evaluate((className: typeof ClassName) => {
         const element = document.querySelector(
-          `.${ClassName.TABLE_NODE_WRAPPER}`,
+          `.${className.TABLE_NODE_WRAPPER}`,
         ) as HTMLElement;
 
         if (element) {
@@ -132,7 +132,7 @@ describe.skip('Snapshot Test: table breakout content', () => {
   it(`should resize the column based on the content`, async () => {
     const selector = getSelectorForTableCell({ row: 2, cell: 1 });
     await page.click(selector);
-    await clickBlockMenuItem(page, BlockMenuItem.date);
+    await clickBlockMenuItem(page, BlockMenuItem.blockExtension);
     await page.keyboard.press(KeyboardKeys.enter);
     await snapshot(page);
   });

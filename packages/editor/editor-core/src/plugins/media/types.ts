@@ -57,10 +57,10 @@ export type Listener = (data: any) => void;
 
 export interface CustomMediaPicker {
   on(event: string, cb: Listener): void;
-  removeAllListeners(event: any);
+  removeAllListeners(event: any): void;
   emit(event: string, data: any): void;
   destroy(): void;
-  setUploadParams(uploadParams: UploadParams);
+  setUploadParams(uploadParams: UploadParams): void;
 }
 
 export type MobileUploadEndEventPayload = {

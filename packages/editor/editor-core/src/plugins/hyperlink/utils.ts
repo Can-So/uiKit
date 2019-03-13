@@ -1,6 +1,7 @@
 import { Slice, Node, Schema } from 'prosemirror-model';
 import * as LinkifyIt from 'linkify-it';
 import { mapSlice } from '../../utils/slice';
+import { isSafeUrl } from '@atlaskit/adf-schema';
 
 export const LINK_REGEXP = /(https?|ftp):\/\/[^\s]+/;
 
@@ -62,12 +63,16 @@ export class LinkMatcher {
 /**
  * Adds protocol to url if needed.
  */
-export function normalizeUrl(url: string) {
-  if (LINK_REGEXP.test(url)) {
+export function normalizeUrl(url?: string | null) {
+  if (!url) {
+    return '';
+  }
+
+  if (isSafeUrl(url)) {
     return url;
   }
   const match = getLinkMatch(url);
-  return (match && match.url) || url;
+  return (match && match.url) || '';
 }
 
 export function linkifyContent(schema: Schema): (slice: Slice) => Slice {

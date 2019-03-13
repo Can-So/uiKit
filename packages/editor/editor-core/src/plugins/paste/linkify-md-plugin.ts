@@ -3,19 +3,27 @@ import { linkifyMatch, LinkifyMatch } from '../hyperlink/utils';
 
 // modified version of the original Linkify plugin
 // https://github.com/markdown-it/markdown-it/blob/master/lib/rules_core/linkify.js
-const arrayReplaceAt = (src, pos, newElements) => {
-  return [].concat(src.slice(0, pos), newElements, src.slice(pos + 1));
+const arrayReplaceAt = (
+  src: Array<any>,
+  pos: number,
+  newElements: Array<any>,
+) => {
+  return ([] as Array<any>).concat(
+    src.slice(0, pos),
+    newElements,
+    src.slice(pos + 1),
+  );
 };
 
-const isLinkOpen = str => {
+const isLinkOpen = (str: string) => {
   return /^<a[>\s]/i.test(str);
 };
 
-const isLinkClose = str => {
+const isLinkClose = (str: string) => {
   return /^<\/a\s*>/i.test(str);
 };
 
-const linkify = state => {
+const linkify = (state: any) => {
   const blockTokens = state.tokens;
   const linkify = new LinkifyIt();
 
@@ -144,4 +152,4 @@ const linkify = state => {
   }
 };
 
-export default md => md.core.ruler.push('custom-linkify', linkify);
+export default (md: any) => md.core.ruler.push('custom-linkify', linkify);

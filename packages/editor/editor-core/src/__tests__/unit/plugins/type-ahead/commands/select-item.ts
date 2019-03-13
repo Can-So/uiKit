@@ -15,13 +15,14 @@ import {
   selectItem,
 } from '../../../../../plugins/type-ahead/commands/select-item';
 import { datePlugin, extensionPlugin } from '../../../../../plugins';
+import { TypeAheadSelectItem } from '../../../../../plugins/type-ahead/types';
 
 const createTypeAheadPlugin = ({
   getItems,
   selectItem,
 }: {
   getItems?: Function;
-  selectItem?: Function;
+  selectItem?: TypeAheadSelectItem;
 } = {}) => {
   return {
     pluginsOptions: {
@@ -34,8 +35,10 @@ const createTypeAheadPlugin = ({
         selectItem:
           selectItem !== undefined
             ? selectItem
-            : (state, item, insert) =>
-                insert(state.schema.text(`${item.title} selected`)),
+            : (((state, item, insert) =>
+                insert(
+                  state.schema.text(`${item.title} selected`),
+                )) as TypeAheadSelectItem),
       },
     },
   };

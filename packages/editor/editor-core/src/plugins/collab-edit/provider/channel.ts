@@ -10,6 +10,7 @@ import {
   MixedResponse,
 } from './types';
 import { logger } from './';
+import { Step } from 'prosemirror-transform';
 
 export interface RequestOptions {
   method: 'GET' | 'POST';
@@ -108,7 +109,7 @@ export class Channel {
   /**
    * Send steps to service
    */
-  async sendSteps(state: any, getState: () => any, localSteps?: any[]) {
+  async sendSteps(state: any, getState: () => any, localSteps?: Array<Step>) {
     if (this.isSending) {
       this.debounce(getState);
       return;
@@ -121,7 +122,8 @@ export class Channel {
       return;
     }
 
-    const { steps = [] } = localSteps || sendableSteps(state) || {}; // sendableSteps can return null..
+    const { steps }: { steps: Array<Step> } = localSteps ||
+      (sendableSteps(state) as any) || { steps: [] }; // sendableSteps can return null..
 
     if (steps.length === 0) {
       logger(`No steps to send. Aborting.`);
@@ -183,7 +185,7 @@ export class Channel {
   /**
    * Subscribe to events emitted by this channel
    */
-  on(evt: CollabEvent, handler: (...args) => void) {
+  on(evt: CollabEvent, handler: (...args: any) => void) {
     this.eventEmitter.on(evt, handler);
     return this;
   }
@@ -191,7 +193,7 @@ export class Channel {
   /**
    * Unsubscribe from events emitted by this channel
    */
-  off(evt: CollabEvent, handler: (...args) => void) {
+  off(evt: CollabEvent, handler: (...args: any) => void) {
     this.eventEmitter.off(evt, handler);
     return this;
   }

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
-import { getSelectionRect } from 'prosemirror-utils';
-import { Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { splitCell } from 'prosemirror-tables';
 import { colors } from '@atlaskit/theme';
@@ -65,8 +63,7 @@ export const messages = defineMessages({
 export interface Props {
   editorView: EditorView;
   isOpen: boolean;
-  columnSelectionRect: CellRect;
-  rowSelectionRect: CellRect;
+  selectionRect: CellRect;
   targetCellPosition?: number;
   mountPoint?: HTMLElement;
   allowMergeCells?: boolean;
@@ -114,7 +111,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     );
   }
 
-  private handleSubMenuRef = ref => {
+  private handleSubMenuRef = (ref: HTMLDivElement | null) => {
     const { boundariesElement } = this.props;
 
     if (!(boundariesElement && ref)) {
@@ -136,8 +133,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
       editorView: { state },
       targetCellPosition,
       isOpen,
-      columnSelectionRect,
-      rowSelectionRect,
+      selectionRect,
       intl: { formatMessage },
     } = this.props;
     const items: any[] = [];
@@ -180,15 +176,16 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     items.push({
       content: formatMessage(tableMessages.insertColumn),
       value: { name: 'insert_column' },
+      elemAfter: <Shortcut>⌃⌥→</Shortcut>,
     });
 
     items.push({
       content: formatMessage(tableMessages.insertRow),
       value: { name: 'insert_row' },
+      elemAfter: <Shortcut>⌃⌥↓</Shortcut>,
     });
 
-    const { right, left } = columnSelectionRect;
-    const { top, bottom } = rowSelectionRect;
+    const { top, bottom, right, left } = selectionRect;
     const noOfColumns = right - left;
     const noOfRows = bottom - top;
 
@@ -230,13 +227,8 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     return items.length ? [{ items }] : null;
   };
 
-  private onMenuItemActivated = ({ item }) => {
-    const {
-      editorView,
-      columnSelectionRect,
-      rowSelectionRect,
-      targetCellPosition,
-    } = this.props;
+  private onMenuItemActivated = ({ item }: { item: any }) => {
+    const { editorView, selectionRect, targetCellPosition } = this.props;
     const { state, dispatch } = editorView;
 
     switch (item.value.name) {
@@ -256,11 +248,11 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
         this.toggleOpen();
         break;
       case 'insert_column':
-        insertColumn(columnSelectionRect.right)(state, dispatch);
+        insertColumn(selectionRect.right)(state, dispatch);
         this.toggleOpen();
         break;
       case 'insert_row':
-        insertRow(rowSelectionRect.bottom)(state, dispatch);
+        insertRow(selectionRect.bottom)(state, dispatch);
         this.toggleOpen();
         break;
       case 'delete_column':
@@ -268,9 +260,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
           'atlassian.editor.format.table.delete_column.button',
         );
         dispatch(
-          deleteColumns(
-            getSelectedColumnIndexes(state.tr, columnSelectionRect),
-          )(state.tr),
+          deleteColumns(getSelectedColumnIndexes(selectionRect))(state.tr),
         );
         this.toggleOpen();
         break;
@@ -280,10 +270,9 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
           pluginConfig: { isHeaderRowRequired },
         } = getPluginState(state);
         dispatch(
-          deleteRows(
-            getSelectedRowIndexes(state.tr, rowSelectionRect),
-            isHeaderRowRequired,
-          )(state.tr),
+          deleteRows(getSelectedRowIndexes(selectionRect), isHeaderRowRequired)(
+            state.tr,
+          ),
         );
         this.toggleOpen();
         break;
@@ -303,7 +292,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     }
   };
 
-  private handleOpenChange = ({ isOpen }) => {
+  private handleOpenChange = () => {
     const {
       editorView: { state, dispatch },
     } = this.props;
@@ -311,11 +300,10 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     this.setState({ isSubmenuOpen: false });
   };
 
-  private handleItemMouseEnter = ({ item }) => {
+  private handleItemMouseEnter = ({ item }: { item: any }) => {
     const {
       editorView: { state, dispatch },
-      columnSelectionRect,
-      rowSelectionRect,
+      selectionRect,
     } = this.props;
 
     if (item.value.name === 'background') {
@@ -325,20 +313,17 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     }
 
     if (item.value.name === 'delete_column') {
-      hoverColumns(
-        getSelectedColumnIndexes(state.tr, columnSelectionRect),
-        true,
-      )(state, dispatch);
-    }
-    if (item.value.name === 'delete_row') {
-      hoverRows(getSelectedRowIndexes(state.tr, rowSelectionRect), true)(
+      hoverColumns(getSelectedColumnIndexes(selectionRect), true)(
         state,
         dispatch,
       );
     }
+    if (item.value.name === 'delete_row') {
+      hoverRows(getSelectedRowIndexes(selectionRect), true)(state, dispatch);
+    }
   };
 
-  private handleItemMouseLeave = ({ item }) => {
+  private handleItemMouseLeave = ({ item }: { item: any }) => {
     const { state, dispatch } = this.props.editorView;
     if (item.value.name === 'background') {
       this.closeSubmenu();
@@ -359,7 +344,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
 
   private setColor = withAnalytics(
     'atlassian.editor.format.table.backgroundColor.button',
-    color => {
+    (color: string) => {
       const { targetCellPosition, editorView } = this.props;
       const { state, dispatch } = editorView;
       setMultipleCellAttrs({ background: color }, targetCellPosition)(
@@ -371,37 +356,17 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
   );
 }
 
-export const getSelectedColumnIndexes = (
-  tr: Transaction,
-  selectionRect: CellRect,
-): number[] => {
-  let from = selectionRect.left;
-  let to = selectionRect.right;
-  const rect = getSelectionRect(tr.selection);
-  if (rect) {
-    from = Math.min(rect.left, selectionRect.left);
-    to = Math.max(rect.right, selectionRect.right);
-  }
+export const getSelectedColumnIndexes = (selectionRect: CellRect): number[] => {
   const columnIndexes: number[] = [];
-  for (let i = from; i < to; i++) {
+  for (let i = selectionRect.left; i < selectionRect.right; i++) {
     columnIndexes.push(i);
   }
   return columnIndexes;
 };
 
-export const getSelectedRowIndexes = (
-  tr: Transaction,
-  selectionRect: CellRect,
-): number[] => {
-  let from = selectionRect.top;
-  let to = selectionRect.bottom;
-  const rect = getSelectionRect(tr.selection);
-  if (rect) {
-    from = Math.min(rect.top, selectionRect.top);
-    to = Math.max(rect.bottom, selectionRect.bottom);
-  }
+export const getSelectedRowIndexes = (selectionRect: CellRect): number[] => {
   const rowIndexes: number[] = [];
-  for (let i = from; i < to; i++) {
+  for (let i = selectionRect.top; i < selectionRect.bottom; i++) {
     rowIndexes.push(i);
   }
   return rowIndexes;

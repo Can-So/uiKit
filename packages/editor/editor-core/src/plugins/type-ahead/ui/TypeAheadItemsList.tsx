@@ -100,7 +100,8 @@ export function TypeAheadItemsList({
               aria-describedby={item.title}
               ref={
                 index === currentIndex
-                  ? ref => ref && scrollIntoViewIfNeeded(ref.ref)
+                  ? (ref: { ref: HTMLDivElement } | null) =>
+                      ref && scrollIntoViewIfNeeded(ref.ref)
                   : null
               }
             >

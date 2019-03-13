@@ -50,7 +50,7 @@ export interface Props {
 }
 
 export default class RecentItem extends React.PureComponent<Props, {}> {
-  handleSelect = e => {
+  handleSelect = (e: React.MouseEvent) => {
     e.preventDefault(); // don't let editor lose focus
     const { item, onSelect } = this.props;
     onSelect(item.url, item.name);

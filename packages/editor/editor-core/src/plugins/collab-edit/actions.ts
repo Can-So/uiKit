@@ -85,7 +85,7 @@ export const applyRemoteSteps = (
 
   let tr: Transaction;
 
-  if (options && options.useNativePlugin) {
+  if (options && options.useNativePlugin && userIds) {
     tr = receiveTransaction(state, steps, userIds);
   } else {
     tr = state.tr;

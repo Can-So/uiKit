@@ -1,5 +1,10 @@
 # @atlaskit/modal-dialog
 
+## 8.0.1
+- [patch] [0f764dbd7c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f764dbd7c):
+
+  - Modal-dialog no longer shows unnecessary scrollbars in modern browsers
+
 ## 8.0.0
 - [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 

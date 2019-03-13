@@ -9,7 +9,7 @@ export interface State {
 export default class ClipboardHelper extends React.Component<{}, State> {
   state = { value: '' };
 
-  handleChange = e => {
+  handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.setState({ value: e.target.value });
   };
   clearValue = () => {

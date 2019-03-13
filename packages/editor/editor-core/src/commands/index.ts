@@ -21,6 +21,7 @@ import {
   ACTION_SUBJECT,
   ACTION_SUBJECT_ID,
 } from '../plugins/analytics';
+import { AlignmentState } from '../plugins/alignment/pm-plugins/main';
 
 export function preventDefault(): Command {
   return function(state, dispatch) {
@@ -218,7 +219,10 @@ export interface Command {
   ): boolean;
 }
 
-export const changeImageAlignment = (align): Command => (state, dispatch) => {
+export const changeImageAlignment = (align?: AlignmentState): Command => (
+  state,
+  dispatch,
+) => {
   const { from, to } = state.selection;
 
   const tr = state.tr;

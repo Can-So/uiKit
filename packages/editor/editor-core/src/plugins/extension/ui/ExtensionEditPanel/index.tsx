@@ -12,7 +12,7 @@ export interface Props {
   onEdit: () => void;
   onRemove: () => void;
   stickToolbarToBottom?: boolean;
-  onLayoutChange?: (mode) => void;
+  onLayoutChange?: (mode: string) => void;
   layout?: string;
   showLayoutOptions?: boolean;
 }

@@ -1,7 +1,7 @@
 import { Node as PmNode } from 'prosemirror-model';
 import {
-  hexToRgba,
-  isHex,
+  isRgb,
+  rgbToHex,
   N20,
   B50,
   T50,
@@ -20,8 +20,8 @@ import {
 } from '../../utils/colors';
 import { TableCellContent } from './doc';
 
-const akEditorTableCellBackgroundOpacity = 0.5;
 const akEditorTableNumberColumnWidth = 42;
+const DEFAULT_TABLE_HEADER_CELL_BACKGROUND = N20.toLocaleLowerCase();
 
 const getCellAttrs = (dom: HTMLElement, defaultValues: CellAttributes = {}) => {
   const widthAttr = dom.getAttribute('data-colwidth');
@@ -30,15 +30,18 @@ const getCellAttrs = (dom: HTMLElement, defaultValues: CellAttributes = {}) => {
       ? widthAttr.split(',').map(str => Number(str))
       : null;
   const colspan = Number(dom.getAttribute('colspan') || 1);
+  let { backgroundColor } = dom.style;
+  if (backgroundColor && isRgb(backgroundColor)) {
+    backgroundColor = rgbToHex(backgroundColor);
+  }
 
   return {
     colspan,
     rowspan: Number(dom.getAttribute('rowspan') || 1),
     colwidth: width && width.length === colspan ? width : null,
     background:
-      dom.style.backgroundColor &&
-      dom.style.backgroundColor !== defaultValues['background']
-        ? dom.style.backgroundColor
+      backgroundColor && backgroundColor !== defaultValues['background']
+        ? backgroundColor
         : null,
   };
 };
@@ -79,10 +82,7 @@ export const setCellAttrs = (node: PmNode, cell?: HTMLElement) => {
     if (ignored) {
       attrs.style = '';
     } else {
-      const color =
-        nodeType === 'tableCell' && isHex(background)
-          ? hexToRgba(background, akEditorTableCellBackgroundOpacity)
-          : background;
+      const color = isRgb(background) ? rgbToHex(background) : background;
 
       attrs.style = `${attrs.style || ''}background-color: ${color};`;
     }
@@ -306,7 +306,7 @@ export const tableHeader = {
     {
       tag: 'th',
       getAttrs: (dom: HTMLElement) =>
-        getCellAttrs(dom, { background: 'rgb(244, 245, 247)' }),
+        getCellAttrs(dom, { background: DEFAULT_TABLE_HEADER_CELL_BACKGROUND }),
     },
   ],
   toDOM(node: PmNode) {

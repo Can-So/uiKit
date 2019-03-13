@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, Messages } from 'react-intl';
+import { Messages } from 'react-intl';
 
 import {
   SwitcherWrapper,
@@ -30,9 +30,11 @@ import {
   RenderTracker,
 } from '../utils/analytics';
 import now from '../utils/performance-now';
+import FormattedMessage from '../primitives/formatted-message';
 import TryLozenge from '../primitives/try-lozenge';
+import { FeatureFlagProps } from '../types';
 
-interface SwitcherProps {
+type SwitcherProps = {
   cloudId: string;
   triggerXFlow: (productKey: string, sourceComponent: string) => void;
   messages: Messages;
@@ -43,10 +45,9 @@ interface SwitcherProps {
   managePermission: ChildrenProps<boolean>;
   addProductsPermission: ChildrenProps<boolean>;
   isXFlowEnabled: ChildrenProps<boolean>;
-}
+} & FeatureFlagProps;
 
 const getAnalyticsContext = (itemsCount: number) => ({
-  source: 'atlassianSwitcher',
   ...analyticsAttributes({
     itemsCount,
   }),
@@ -85,6 +86,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
   render() {
     const {
       cloudId,
+      enableSplitJira,
       suggestedProductLink,
       messages,
       customLinks: { isLoading: isLoadingCustomLinks, data: customLinksData },
@@ -131,6 +133,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
     const fixedProductLinks = getFixedProductLinks();
     const licensedProductLinks = getLicensedProductLinks(
       licenseInformationData!,
+      enableSplitJira,
     );
 
     const adminLinks = hasAdminLinks

@@ -3,7 +3,10 @@ import { findTypeAheadQuery } from '../utils/find-query-mark';
 import { isQueryActive } from '../utils/is-query-active';
 import { pluginKey, ACTIONS } from '../pm-plugins/main';
 
-export const updateQueryCommand = (query): Command => (state, dispatch) => {
+export const updateQueryCommand = (query: string): Command => (
+  state,
+  dispatch,
+) => {
   const queryMark = findTypeAheadQuery(state);
   const activeQuery = isQueryActive(
     state.schema.marks.typeAheadQuery,

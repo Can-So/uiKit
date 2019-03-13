@@ -22,7 +22,7 @@ export const dynamicTextViewportSizes = [
 ];
 
 // TODO: remove this gotoExample step
-export const initEditor = async (page, appearance: string) => {
+export const initEditor = async (page: any, appearance: string) => {
   const editor = '.ProseMirror';
   const url = getExampleUrl(
     'editor',

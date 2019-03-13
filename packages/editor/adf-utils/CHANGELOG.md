@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.8.0
+- [minor] [a7af8a8865](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a7af8a8865):
+
+  - [ED-6325] Add forceContentValidation to array specs
+
 ## 5.7.2
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/docs@7.0.0

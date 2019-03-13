@@ -8,6 +8,7 @@ import * as em from '../../__fixtures__/em.adf.json';
 import * as codeBlock from '../../__fixtures__/code-block.adf.json';
 import * as inlineCodeProps from '../../__fixtures__/inline-code-props.adf.json';
 import * as inlineTextProps from '../../__fixtures__/inline-text-props.adf.json';
+import * as link from '../../__fixtures__/link.adf.json';
 
 const render = (doc: any) => {
   const serializer = EmailSerializer.fromSchema(schema);
@@ -51,6 +52,11 @@ describe('Renderer - EmailSerializer', () => {
 
   it('should render paragraph with indentations', () => {
     const output = render(paragraphIndents);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should render link', () => {
+    const output = render(link);
     expect(output).toMatchSnapshot();
   });
 });

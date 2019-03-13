@@ -1,5 +1,6 @@
 import { Transaction } from 'prosemirror-state';
 import { filterChildrenBetween } from '../../../utils';
+import { Node } from 'prosemirror-model';
 
 const SMART_TO_ASCII = {
   '…': '...',
@@ -41,7 +42,9 @@ const replaceSmartCharsToAscii = (
   while ((match = FIND_SMART_CHAR.exec(textExtracted))) {
     const { 0: smartChar, index: offset } = match;
     const replacePos = tr.mapping.map(position + offset);
-    const replacementText = schema.text(SMART_TO_ASCII[smartChar]);
+    const replacementText = schema.text(
+      SMART_TO_ASCII[smartChar as keyof typeof SMART_TO_ASCII],
+    );
     tr.replaceWith(replacePos, replacePos + smartChar.length, replacementText);
   }
 };
@@ -53,7 +56,7 @@ const transformSmartCharsMentionsAndEmojis = (
 ): void => {
   const { schema } = tr.doc.type;
   const { mention, text, emoji } = schema.nodes;
-  const isNodeTextBlock = (node, _, parent) => {
+  const isNodeTextBlock = (node: Node, _: any, parent: Node) => {
     if (node.type === mention || node.type === emoji || node.type === text) {
       return parent.isTextblock;
     }

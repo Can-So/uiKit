@@ -106,3 +106,55 @@ Object {
   "type": "doc",
 }
 `;
+
+exports[`links.ts: change link href 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "marks": Array [
+            Object {
+              "attrs": Object {
+                "__confluenceMetadata": null,
+                "href": "https://www.google.com",
+              },
+              "type": "link",
+            },
+          ],
+          "text": "Google",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`links.ts: change link text 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "marks": Array [
+            Object {
+              "attrs": Object {
+                "__confluenceMetadata": null,
+                "href": "https://www.atlassian.com",
+              },
+              "type": "link",
+            },
+          ],
+          "text": "This is Atlassian",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+}
+`;

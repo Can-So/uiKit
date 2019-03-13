@@ -6,7 +6,7 @@ import { pressKey, KeyboardKeys } from '../../__helpers/page-objects/_keyboard';
 // TODO: ED-6319 Selection is broken
 describe('Snapshot Test: Media', () => {
   describe('full page editor', () => {
-    let page;
+    let page: any;
     const threshold = 0.01;
     beforeAll(async () => {
       // @ts-ignore
@@ -40,7 +40,7 @@ describe('Snapshot Test: Media', () => {
   });
 
   describe('comment editor', () => {
-    let page;
+    let page: any;
     const threshold = 0.02;
     beforeEach(async () => {
       // @ts-ignore

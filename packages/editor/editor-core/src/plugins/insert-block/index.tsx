@@ -40,7 +40,7 @@ import { ImageUploadPluginState } from '../image-upload/types';
 import { LayoutState } from '../layout/pm-plugins/main';
 import { INPUT_METHOD } from '../analytics';
 
-const toolbarSizeToButtons = toolbarSize => {
+const toolbarSizeToButtons = (toolbarSize: ToolbarSize) => {
   switch (toolbarSize) {
     case ToolbarSize.XXL:
     case ToolbarSize.XL:
@@ -66,14 +66,13 @@ export interface InsertBlockOptions {
  * Wrapper over insertBlockTypeWithAnalytics to autobind toolbar input method
  * @param name Block name
  */
-function handleInsertBlockType(name) {
+function handleInsertBlockType(name: string) {
   return insertBlockTypesWithAnalytics(name, INPUT_METHOD.TOOLBAR);
 }
 
 const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
   primaryToolbarComponent({
     editorView,
-    appearance,
     editorActions,
     dispatchAnalyticsEvent,
     providerFactory,
@@ -85,7 +84,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
     isToolbarReducedSpacing,
   }) {
     const buttons = toolbarSizeToButtons(toolbarSize);
-    const renderNode = providers => {
+    const renderNode = (providers: Record<string, Promise<any>>) => {
       return (
         <WithPluginState
           plugins={{

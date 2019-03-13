@@ -1,5 +1,5 @@
 import { cellAround, TableMap } from 'prosemirror-tables';
-import { TableLayout } from '@atlaskit/adf-schema';
+import { TableLayout, CellAttributes } from '@atlaskit/adf-schema';
 import {
   calcTableWidth,
   akEditorWideLayoutWidth,
@@ -8,8 +8,10 @@ import {
   getBreakpoint,
   mapBreakpointToLayoutMaxWidth,
 } from '@atlaskit/editor-common';
+import { EditorView } from 'prosemirror-view';
+import { ResolvedPos, NodeSpec } from 'prosemirror-model';
 
-export const tableLayoutToSize = {
+export const tableLayoutToSize: Record<string, number> = {
   default: akEditorDefaultLayoutWidth,
   wide: akEditorWideLayoutWidth,
   'full-width': akEditorFullWidthLayoutWidth,
@@ -37,7 +39,7 @@ export function getLayoutSize(
   return tableLayoutToSize[tableLayout] || containerWidth;
 }
 
-export function getDefaultLayoutMaxWidth(containerWidth) {
+export function getDefaultLayoutMaxWidth(containerWidth?: number) {
   return mapBreakpointToLayoutMaxWidth(getBreakpoint(containerWidth));
 }
 
@@ -45,8 +47,11 @@ export function getDefaultLayoutMaxWidth(containerWidth) {
  * Does the current position point at a cell.
  * @param $pos
  */
-export function pointsAtCell($pos) {
-  return $pos.parent.type.spec.tableRole === 'row' && $pos.nodeAfter;
+export function pointsAtCell($pos: ResolvedPos<any>) {
+  return (
+    ($pos.parent.type.spec as NodeSpec & { tableRole: string }).tableRole ===
+      'row' && $pos.nodeAfter
+  );
 }
 
 /**
@@ -55,7 +60,12 @@ export function pointsAtCell($pos) {
  * @param event
  * @param side
  */
-export function edgeCell(view, event, side, handleWidth) {
+export function edgeCell(
+  view: EditorView,
+  event: MouseEvent,
+  side: string,
+  handleWidth: number,
+) {
   const buffer = side === 'right' ? -handleWidth : handleWidth; // Fixes finicky bug where posAtCoords could return wrong pos.
   let posResult = view.posAtCoords({
     left: event.clientX + buffer,
@@ -87,16 +97,20 @@ export function edgeCell(view, event, side, handleWidth) {
  * @param cellPos
  * @param param2
  */
-export function currentColWidth(view, cellPos, { colspan, colwidth }) {
+export function currentColWidth(
+  view: EditorView,
+  cellPos: number,
+  { colspan, colwidth }: CellAttributes,
+) {
   let width = colwidth && colwidth[colwidth.length - 1];
   if (width) {
     return width;
   }
   // Not fixed, read current width from DOM
-  let domWidth = view.domAtPos(cellPos + 1).node.offsetWidth;
-  let parts = colspan;
+  let domWidth = (view.domAtPos(cellPos + 1).node as HTMLElement).offsetWidth;
+  let parts = colspan || 0;
   if (colwidth) {
-    for (let i = 0; i < colspan; i++) {
+    for (let i = 0; i < (colspan || 0); i++) {
       if (colwidth[i]) {
         domWidth -= colwidth[i];
         parts--;
@@ -111,11 +125,11 @@ export function currentColWidth(view, cellPos, { colspan, colwidth }) {
  * Attempts to find a parent TD/TH depending on target element.
  * @param target
  */
-export function domCellAround(target) {
+export function domCellAround(target: HTMLElement | null) {
   while (target && target.nodeName !== 'TD' && target.nodeName !== 'TH') {
     target = target.classList.contains('ProseMirror')
       ? null
-      : target.parentNode;
+      : (target.parentNode as HTMLElement | null);
   }
   return target;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/form",
-  "version": "5.1.8",
+  "version": "5.2.0",
   "description": "Form package provides layout & validation for form fields",
   "license": "Apache-2.0",
   "module": "index.js",

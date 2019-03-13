@@ -87,7 +87,7 @@ export class ConfluenceCardClient extends Client {
 const cardClient = new ConfluenceCardClient(undefined, 'staging');
 const cardProvider = new ConfluenceCardProvider('staging');
 
-export function Example(doc) {
+export function Example(doc: string | Object) {
   return (
     // We must wrap the <Editor> with a provider, passing cardClient via prop
     <SmartCardProvider client={cardClient}>
