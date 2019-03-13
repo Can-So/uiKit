@@ -1,5 +1,15 @@
 # @atlaskit/editor-core
 
+## 105.3.2
+- [patch] [b849dcb1e7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b849dcb1e7):
+
+  - bump smart cards version to include patches.
+
+## 105.3.1
+- [patch] [3f6501c569](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f6501c569):
+
+  - ED-6518: Fixes mark overflowing to the left
+
 ## 105.3.0
 - [minor] [5b226754b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b226754b8):
 

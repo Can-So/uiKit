@@ -1,14 +1,19 @@
 {
-  "extends": "../../../tsconfig.core.json",
+  "extends": "../../../tsconfig.base.json",
   "moduleResolution": "node",
   "include": [
     "src/**/*.ts",
-    "src/**/*.tsx"
+    "src/**/*.tsx",
+    "examples/**/*.ts",
+    "examples/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
   ],
   "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
     "baseUrl": "./",
     "paths": {
       "@atlaskit/analytics-next": [

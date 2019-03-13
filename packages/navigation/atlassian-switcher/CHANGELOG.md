@@ -1,5 +1,10 @@
 # @atlaskit/atlassian-switcher
 
+## 0.1.3
+- [patch] [269cd93118](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/269cd93118):
+
+  - Progressive loading and prefetch primitives
+
 ## 0.1.2
 - [patch] [6ca66fceac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ca66fceac):
 
