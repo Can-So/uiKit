@@ -60,7 +60,7 @@ class ToggleStateless extends Component<StatelessProps, State> {
       size,
     };
     const Icon = isChecked ? ConfirmIcon : CloseIcon;
-    const id = uid({ componentName: this.componentName });
+    const id = uid({ id: this.constructor.name });
 
     return (
       <Label size={size} isDisabled={isDisabled} htmlFor={id}>
