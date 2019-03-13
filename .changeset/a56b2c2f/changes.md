@@ -1,0 +1,1 @@
+- Quick change to TableTree is now compatible with SSR. This required moving setState to componentDidMount().
