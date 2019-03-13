@@ -3,6 +3,8 @@ import * as namedColors from 'css-color-names';
 /**
  * We're avoding importing these colors from @atlaskit/theme since we
  * do not want to have react as a dependency of this package.
+ * TODO: Refactor this once tokenization by Core team is ready
+ * https://product-fabric.atlassian.net/browse/CS-908
  */
 
 export const R50 = '#FFEBE6';
