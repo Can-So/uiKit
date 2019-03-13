@@ -115,8 +115,8 @@ const toggleMark = (
       return true;
     }
 
-    const from = pos;
-    const to = Math.min(pos + node.nodeSize, state.selection.to);
+    const from = Math.max(pos, $from.pos);
+    const to = Math.min(pos + node.nodeSize, $to.pos);
 
     if (markInRange) {
       tr = tr.removeMark(from, to, markType);

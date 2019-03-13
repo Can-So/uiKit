@@ -467,6 +467,17 @@ describe('utils -> commands', () => {
       );
     });
 
+    it('can apply a mark half way through a selection', () => {
+      const { editorView } = editor(doc(p('te{<}xt{>}')));
+
+      toggleMark(editorView.state.schema.marks.strong)(
+        editorView.state,
+        editorView.dispatch,
+      );
+
+      expect(editorView.state.doc).toEqualDocument(doc(p('te', strong('xt'))));
+    });
+
     it('can toggle a mark for the current cursor position', () => {
       const {
         editorView,
