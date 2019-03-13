@@ -5,13 +5,13 @@ import { Consumer } from '../consumers/consumer';
 import { Document as DocumentModel } from '../model';
 
 export interface Props {
-  render(actions: DocumentActions);
+  render(actions: DocumentActions): React.ReactNode;
 }
 
 export interface DocumentActions {
   createDocument(value: any): Promise<DocumentModel>;
-  editDocument();
-  cancelEdit();
+  editDocument(): void;
+  cancelEdit(): void;
   updateDocument(value: any): Promise<DocumentModel>;
 }
 
