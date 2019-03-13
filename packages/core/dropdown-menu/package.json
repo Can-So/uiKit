@@ -25,7 +25,7 @@
     "@babel/runtime": "^7.0.0",
     "array-find": "^1.0.0",
     "prop-types": "^15.5.10",
-    "uuid": "^3.1.0"
+    "react-uid": "^2.2.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",
