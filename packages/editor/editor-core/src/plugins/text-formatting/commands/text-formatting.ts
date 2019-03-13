@@ -1,11 +1,11 @@
 import { TextSelection, Selection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { toggleMark } from 'prosemirror-commands';
 import { hasCode } from '../utils';
 import { markActive } from '../utils';
 import { transformToCodeAction } from './transform-to-code';
 import { analyticsService } from '../../../analytics';
 import { Command } from '../../../types';
+import { toggleMark } from '../../../utils/commands';
 import {
   withAnalytics,
   ACTION,
