@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 43.1.0
+- [minor] [feec817d38](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/feec817d38):
+
+  - add email renderer for status
+
 ## 43.0.1
 - [patch] [5b226754b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b226754b8):
 
