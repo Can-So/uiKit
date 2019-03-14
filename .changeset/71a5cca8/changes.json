@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@atlaskit/user-picker", "type": "minor" }],
-  "dependents": []
-}
