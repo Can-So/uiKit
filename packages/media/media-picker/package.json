@@ -3,14 +3,9 @@
   "version": "36.0.0",
   "description": "Library for handling file uploads",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "module": "index.js",
+  "types": "index.d.ts",
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Hector Z",

@@ -307,7 +307,7 @@ describe('CardView', () => {
       expect(actualContext.componentName).toEqual('CardView');
       expect(actualContext.actionSubject).toEqual('MediaCard');
       expect(actualContext.packageVersion).toEqual(
-        require('../../../package.json').version,
+        require('../../version.json').version,
       );
       expect(actualContext.type).toEqual('file');
       expect(actualContext.actionSubjectId).toEqual('abcd');
@@ -346,7 +346,7 @@ describe('CardView', () => {
       expect(actualContext.componentName).toEqual('CardView');
       expect(actualContext.actionSubject).toEqual('MediaCard');
       expect(actualContext.packageVersion).toEqual(
-        require('../../../package.json').version,
+        require('../../version.json').version,
       );
       expect(actualContext.type).toEqual('file');
       expect(actualContext.actionSubjectId).toEqual(null);

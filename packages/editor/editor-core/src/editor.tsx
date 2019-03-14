@@ -19,7 +19,7 @@ import { EventDispatcher } from './event-dispatcher';
 import EditorContext from './ui/EditorContext';
 import { WithCreateAnalyticsEvent } from './ui/WithCreateAnalyticsEvent';
 import { PortalProvider, PortalRenderer } from './ui/PortalProvider';
-import { nextMajorVersion } from './version';
+import { nextMajorVersion } from './version-wrapper';
 import { createContextAdapter } from './nodeviews';
 
 export * from './types';

@@ -57,7 +57,8 @@ describe('NativeToWebBridge', () => {
   });
 });
 
-describe('insert media', () => {
+//TODO: ED-6534 Unskip
+describe.skip('insert media', () => {
   let editor: any;
   beforeEach(async () => {
     editor = await mountEditor();

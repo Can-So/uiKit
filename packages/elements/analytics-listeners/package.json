@@ -5,15 +5,9 @@
   "config": {
     "access": "public"
   },
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "module": "index.js",
+  "types": "index.d.ts",
   "dependencies": {
     "@atlaskit/analytics-gas-types": "^3.2.5",
     "@atlaskit/analytics-namespaced-context": "^2.2.1",

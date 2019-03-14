@@ -2,12 +2,8 @@
   "name": "@atlaskit/editor-mobile-bridge",
   "version": "6.15.0",
   "description": "Mobile distribution of the Editor",
-  "main": "dist/es5/index.js",
-  "module": "dist/es2015/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "start": "webpack --watch",
     "debug": "webpack -d --watch",

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import WidthDetector from '../..';
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 // requestAnimationFrame is stubbed with `raf-stub`
 const requestAnimationFrame = window.requestAnimationFrame as any;

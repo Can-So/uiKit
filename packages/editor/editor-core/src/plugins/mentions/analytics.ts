@@ -8,7 +8,7 @@ import { isSpecialMention, MentionDescription } from '@atlaskit/mention';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../package.json';
+} from '../../version.json';
 import { SelectItemMode } from '../type-ahead/commands/select-item.js';
 
 const componentName = 'mention';

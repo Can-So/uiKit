@@ -3,14 +3,10 @@
   "version": "5.16.4",
   "description": "A cross-product search component (batteries included)",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "jsnext:main": "index.js",
+  "module": "index.js",
+  "types": "index.d.ts",
   "atlaskit:src": "src/index.ts",
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Ahmed Fouad",

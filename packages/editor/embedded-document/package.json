@@ -3,15 +3,10 @@
   "version": "0.3.0",
   "description": "Embedded Document component",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
-  "jsnext:main": "dist/es2015/index.js",
   "atlaskit:src": "src/index.ts",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Oscar W"

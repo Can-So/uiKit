@@ -1,4 +1,4 @@
-import { name } from '../../../../../package.json';
+import { name } from '../../../../version.json';
 import { JSONDocNode } from '../../../../utils/index';
 import { sanitizeNode } from '../../../../utils/filter/node-filter';
 import { doc, p, strong, emoji, br } from '@atlaskit/adf-utils';

@@ -1,4 +1,4 @@
-import { name } from '../../../../../package.json';
+import { name } from '../../../../version.json';
 import { fromHTML, toDOM, schema } from '../../../../../test-helpers';
 
 describe(`${name}/schema mediaGroup node`, () => {

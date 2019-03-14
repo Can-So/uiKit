@@ -5,14 +5,9 @@
     "access": "public"
   },
   "description": "Reactions component",
-  "main": "dist/es5/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "atlaskit:src": "src/index.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "dependencies": {
     "@atlaskit/analytics-gas-types": "^3.2.5",
     "@atlaskit/analytics-namespaced-context": "^2.2.1",

@@ -3,15 +3,10 @@
   "version": "34.2.0",
   "description": "A package that contains common classes and components for editor and renderer",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Oscar W",

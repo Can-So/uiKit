@@ -9,9 +9,6 @@
   "types": "dist/es5/index.d.ts",
   "atlaskit:src": "./index.ts",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Jamie C",

@@ -1,4 +1,4 @@
-import { name } from '../../../../../package.json';
+import { name } from '../../../../version.json';
 import { createSchema } from '../../../../..';
 import { toHTML, fromHTML, textWithMarks } from '../../../../../test-helpers';
 import { Node } from 'prosemirror-model';

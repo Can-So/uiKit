@@ -5,8 +5,7 @@
     "access": "private"
   },
   "description": "Fabric Share Element",
-  "main": "dist/es5/index.js",
-  "modules": "dist/es2015/index.js",
+  "modules": "index.js",
   "types": "dist/es5/types.d.ts",
   "atlaskit:src": "src/index.ts",
   "files": [

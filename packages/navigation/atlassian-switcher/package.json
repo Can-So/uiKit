@@ -2,19 +2,14 @@
   "name": "@atlaskit/atlassian-switcher",
   "version": "0.1.4",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
     "i18n:push": "i18n-tools push --resource atlassian-switcher . --type ts",
     "i18n:pull": "rm -rf ./src/i18n && i18n-tools pull --resource atlassian-switcher . --type ts"
   },
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "description": "App switcher component for Atlassian products.",
   "maintainers": [

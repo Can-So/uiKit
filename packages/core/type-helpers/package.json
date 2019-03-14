@@ -3,10 +3,9 @@
   "version": "2.1.0",
   "description": "Some helpers for Typescript typing of Atlaskit",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
-  "module": "dist/es2015/index.js",
+  "module": "index.js",
   "atlaskit:src": "index.ts",
-  "types": "dist/es5/index.d.ts",
+  "types": "index.d.ts",
   "sideEffects": false,
   "files": [
     "dist",
