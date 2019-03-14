@@ -34,7 +34,7 @@ function getAliasesForWorkspace({ name: packageName, dir }) {
   });
 }
 
-module.exports = async function getAlternativeEntryPointAliasList() {
+module.exports = async function getAlternativeEntryPointAliasMap() {
   const workspaces = await bolt.getWorkspaces();
 
   const aliasPromises = workspaces.map(workspace =>
