@@ -70,6 +70,4 @@ export default class ContextMentionResource implements MentionProvider {
   shouldHighlightMention = this.callDefault('shouldHighlightMention');
 
   isFiltering = this.callDefault('isFiltering');
-
-  getMentionConfig = this.callDefault('getMentionConfig');
 }

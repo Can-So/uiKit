@@ -35,10 +35,6 @@ export default class TeamMentionResource extends MentionResource {
     this.teamMentionConfig = teamMentionConfig;
   }
 
-  getMentionConfig(): MentionResourceConfig {
-    return this.teamMentionConfig;
-  }
-
   protected async remoteSearch(
     query: string,
     contextIdentifier?: MentionContextIdentifier,

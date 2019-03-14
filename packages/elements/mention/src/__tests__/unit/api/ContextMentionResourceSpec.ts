@@ -19,7 +19,6 @@ describe('ContextMentionResource', () => {
       isFiltering: jest.fn(),
       subscribe: jest.fn(),
       unsubscribe: jest.fn(),
-      getMentionConfig: jest.fn(),
     };
 
     resourceWithContainerIdAndFriends = new ContextMentionResource(
