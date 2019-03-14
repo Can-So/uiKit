@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/calendar",
-  "version": "7.0.18",
+  "version": "7.0.19",
   "description": "A React component for displaying a calendar.",
   "license": "Apache-2.0",
   "module": "index.js",
@@ -27,7 +27,7 @@
     "@babel/runtime": "^7.0.0",
     "calendar-base": "^0.3.0",
     "lodash.pick": "^4.4.0",
-    "uuid": "^3.1.0"
+    "react-uid": "^2.2.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",

@@ -17,9 +17,9 @@ export interface State {
 let logId = 0;
 
 export default class WebToNativeReporter extends React.Component<Props, State> {
-  private oldLog;
+  private oldLog: string;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       logs: [],
@@ -35,7 +35,7 @@ export default class WebToNativeReporter extends React.Component<Props, State> {
     (toNativeBridge as any).log = this.oldLog;
   }
 
-  private handleNewLog = (bridge, event, props) => {
+  private handleNewLog = (bridge: string, event: string, props: any) => {
     const { filter } = this.props;
     const logText = `${bridge}:${event} ${JSON.stringify(props)}`;
     const isInFilter = (acc: boolean, filterBy: string) =>

@@ -18,7 +18,6 @@ describe('MultiValueContainer', () => {
   const selectProps = {
     value: [1],
     options: [1, 2, 3],
-    isLoading: false,
     isDisabled: false,
   };
 
@@ -36,14 +35,13 @@ describe('MultiValueContainer', () => {
     shallow(<MultiValueContainer selectProps={selectProps} {...props} />);
 
   test.each([
-    ['add more people...', selectProps.value, false, false],
-    ['Enter more...', selectProps.value, false, true],
-    [undefined, selectProps.options, false, false],
-    [undefined, [], false, false],
-    [undefined, [], true, false],
+    ['add more people...', selectProps.value, false],
+    ['Enter more...', selectProps.value, true],
+    ['add more people...', selectProps.options, false],
+    [undefined, [], false],
   ])(
-    'should set placeholder to "%s" when (value: %p, loading: %s)',
-    (placeholder, value, isLoading, override) => {
+    'should set placeholder to "%s" when (value: %p)',
+    (placeholder, value, override) => {
       const component = shallowValueContainer({
         children: [
           <div key="placeholder">Placeholder</div>,
@@ -52,7 +50,6 @@ describe('MultiValueContainer', () => {
         selectProps: {
           ...selectProps,
           value,
-          isLoading,
           addMoreMessage: override ? placeholder : undefined,
         },
       });

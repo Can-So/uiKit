@@ -52,13 +52,9 @@ export class MultiValueContainer extends React.PureComponent<Props, State> {
 
   private showPlaceholder = () => {
     const {
-      selectProps: { value, options, isLoading },
+      selectProps: { value },
     } = this.props;
-    return (
-      value &&
-      options &&
-      (value.length > 0 && (value.length < options.length || isLoading))
-    );
+    return value && value.length > 0;
   };
 
   private addPlaceholder = (placeholder: string) =>

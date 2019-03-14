@@ -188,8 +188,8 @@ export const initPluginListeners = (
   configs.forEach(config => {
     const { updater, pluginKey } = config;
     const state = pluginKey.getState(view.state);
-    bridge[`${config.bridge}State`] = {
-      ...bridge[`${config.bridge}State`],
+    (bridge as any)[`${config.bridge}State`] = {
+      ...(bridge as any)[`${config.bridge}State`],
       ...state,
     };
     if (config.sendInitialState && state) {
@@ -204,7 +204,7 @@ export const destroyPluginListeners = (
   bridge: WebBridgeImpl,
 ) => {
   configs.forEach(config => {
-    bridge[`${config.bridge}State`] = undefined;
+    (bridge as any)[`${config.bridge}State`] = undefined;
     eventDispatcher.off((config.pluginKey as any).key, config.updater);
   });
 };

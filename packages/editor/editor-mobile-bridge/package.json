@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-mobile-bridge",
-  "version": "6.14.2",
+  "version": "6.15.0",
   "description": "Mobile distribution of the Editor",
   "main": "dist/es5/index.js",
   "module": "dist/es2015/index.js",

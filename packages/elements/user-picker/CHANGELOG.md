@@ -1,5 +1,15 @@
 # @atlaskit/user-picker
 
+## 1.1.1
+- [patch] [64c306c904](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/64c306c904):
+
+  - FS-3599 remove logic to hide add more placeholder
+
+## 1.1.0
+- [minor] [14af4044ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14af4044ea):
+
+  - FS-3354 introduce PopupUserPicker to package
+
 ## 1.0.25
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/icon@16.0.4

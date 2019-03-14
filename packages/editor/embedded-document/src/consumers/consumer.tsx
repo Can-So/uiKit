@@ -15,6 +15,12 @@ export interface Props<
   ) => React.ReactNode;
 }
 
+export interface ConsumerProps<A, V, R> {
+  actions: A;
+  value: V;
+  renderProps: R;
+}
+
 export class Consumer<
   PropsFromState extends {},
   PropsFromActions extends {},
@@ -54,7 +60,11 @@ export class Consumer<
     return undefined;
   };
 
-  private renderChildren = ({ actions, value, renderProps }) => {
+  private renderChildren = ({
+    actions,
+    value,
+    renderProps,
+  }: ConsumerProps<Actions, State, RenderProps>) => {
     const props = Object.assign(
       {},
       this.getPropsFromState(value),

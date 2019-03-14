@@ -1,5 +1,10 @@
 # @atlaskit/calendar
 
+## 7.0.19
+- [patch] [f8cf9e271e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f8cf9e271e):
+
+  - Internal changes only. Calendar is now ssr-friendly.
+
 ## 7.0.18
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

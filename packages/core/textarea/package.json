@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/textarea",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Textarea Component",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",

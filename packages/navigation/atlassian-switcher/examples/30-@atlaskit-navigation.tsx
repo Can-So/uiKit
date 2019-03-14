@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import AtlassianIcon from '@atlaskit/icon/glyph/atlassian';
 import Navigation, { AkGlobalItem } from '@atlaskit/navigation';
 import Tooltip from '@atlaskit/tooltip';
 import SwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
 import { colors } from '@atlaskit/theme';
 import AkDrawer from '@atlaskit/drawer';
-import { mockEndpoints } from './helpers/mock-endpoints';
+import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
 import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher from '../src';
 
-class ConfluenceSwitcherExample extends Component {
+class ConfluenceSwitcherExample extends React.Component {
   state = {
     isDrawerOpen: false,
   };
 
   openDrawer = () => {
-    mockEndpoints('confluence');
+    mockEndpoints('confluence', undefined, REQUEST_MEDIUM);
     this.setState({
       isDrawerOpen: true,
     });
