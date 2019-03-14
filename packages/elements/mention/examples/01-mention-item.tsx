@@ -6,6 +6,7 @@ import {
   onSelection,
   sampleAvatarUrl as avatarUrl,
 } from '../example-helpers';
+import { IntlProvider } from 'react-intl';
 
 export default function Example() {
   const mention = {
@@ -39,11 +40,13 @@ export default function Example() {
   const description =
     'Selected mention with nickname, avatar, highlights presence, lozenge and restricted access';
   const component = (
-    <MentionItem
-      mention={mention}
-      selected={mention.selected}
-      onSelection={onSelection}
-    />
+    <IntlProvider locale="en">
+      <MentionItem
+        mention={mention}
+        selected={mention.selected}
+        onSelection={onSelection}
+      />
+    </IntlProvider>
   );
 
   return generateMentionItem(component, description);

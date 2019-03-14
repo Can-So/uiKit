@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/emoji",
-  "version": "57.0.0",
+  "version": "57.0.1",
   "config": {
     "access": "public"
   },
@@ -55,7 +55,7 @@
   "devDependencies": {
     "@atlaskit/docs": "^7.0.0",
     "@atlaskit/editor-test-helpers": "^7.0.6",
-    "@atlaskit/elements-test-helpers": "^0.2.0",
+    "@atlaskit/elements-test-helpers": "^0.3.0",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/layer": "^6.0.0",
     "@atlaskit/media-core": "^28.0.0",

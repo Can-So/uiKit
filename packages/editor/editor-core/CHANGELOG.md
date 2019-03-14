@@ -1,5 +1,44 @@
 # @atlaskit/editor-core
 
+## 105.4.2
+- [patch] [57fdb39e20](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/57fdb39e20):
+
+  - ED-6512 Fix subscript
+
+## 105.4.1
+- [patch] [fb679d390f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb679d390f):
+
+  - Add a new TeamMenioResource for @atlaskit/mention package. That allows to fetch teams data for mention from a team service (Legion service)
+
+## 105.4.0
+- [minor] [f6345bba88](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6345bba88):
+
+  - Ed-4131 Fix text decorations to respect the selected text colour
+
+## 105.3.2
+- [patch] [b849dcb1e7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b849dcb1e7):
+
+  - bump smart cards version to include patches.
+
+## 105.3.1
+- [patch] [3f6501c569](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f6501c569):
+
+  - ED-6518: Fixes mark overflowing to the left
+
+## 105.3.0
+- [minor] [5b226754b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b226754b8):
+
+  - ED-5939: Replace SizeDetector with WidthDetector in all editor components
+
+## 105.2.1
+- Updated dependencies [1b952c437d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b952c437d):
+  - @atlaskit/textarea@0.2.6
+
+## 105.2.0
+- [minor] [b2c1f96b0d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b2c1f96b0d):
+
+  - Allow text formatting marks only on text nodes.
+
 ## 105.1.0
 - [minor] [804597a281](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/804597a281):
 

@@ -134,6 +134,7 @@ export default {
     'confluenceInlineComment',
     'em',
     'strong',
+    'textColor',
     'strike',
     'action',
     'subsup',
@@ -141,7 +142,6 @@ export default {
     'code',
     'typeAheadQuery',
     'emojiQuery',
-    'textColor',
 
     // Block marks
     'alignment',

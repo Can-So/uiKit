@@ -8,6 +8,7 @@ import {
   mockMentionProvider as mentionProvider,
 } from '../src/__tests__/unit/_test-helpers';
 import ResourcedMention from '../src/components/Mention/ResourcedMention';
+import { IntlProvider } from 'react-intl';
 
 const style = {
   backgroundColor: colors.N20,
@@ -23,39 +24,41 @@ function listenerHandler(eventName: string, eventData: Object) {
 
 export default function Example() {
   return (
-    <div style={style}>
-      <div style={padding}>
-        <AnalyticsListener onEvent={listenerHandler} matchPrivate={true}>
+    <IntlProvider locale="en">
+      <div style={style}>
+        <div style={padding}>
+          <AnalyticsListener onEvent={listenerHandler} matchPrivate={true}>
+            <ResourcedMention
+              {...mentionData}
+              accessLevel={'CONTAINER'}
+              mentionProvider={mentionProvider}
+              onClick={onMentionEvent}
+              onMouseEnter={onMentionEvent}
+              onMouseLeave={onMentionEvent}
+            />
+          </AnalyticsListener>
+        </div>
+        <div style={padding}>
           <ResourcedMention
-            {...mentionData}
-            accessLevel={'CONTAINER'}
+            id="oscar"
+            text="@Oscar Wallhult"
             mentionProvider={mentionProvider}
             onClick={onMentionEvent}
             onMouseEnter={onMentionEvent}
             onMouseLeave={onMentionEvent}
           />
-        </AnalyticsListener>
+        </div>
+        <div style={padding}>
+          <ResourcedMention
+            {...mentionData}
+            accessLevel={'NONE'}
+            mentionProvider={mentionProvider}
+            onClick={onMentionEvent}
+            onMouseEnter={onMentionEvent}
+            onMouseLeave={onMentionEvent}
+          />
+        </div>
       </div>
-      <div style={padding}>
-        <ResourcedMention
-          id="oscar"
-          text="@Oscar Wallhult"
-          mentionProvider={mentionProvider}
-          onClick={onMentionEvent}
-          onMouseEnter={onMentionEvent}
-          onMouseLeave={onMentionEvent}
-        />
-      </div>
-      <div style={padding}>
-        <ResourcedMention
-          {...mentionData}
-          accessLevel={'NONE'}
-          mentionProvider={mentionProvider}
-          onClick={onMentionEvent}
-          onMouseEnter={onMentionEvent}
-          onMouseLeave={onMentionEvent}
-        />
-      </div>
-    </div>
+    </IntlProvider>
   );
 }

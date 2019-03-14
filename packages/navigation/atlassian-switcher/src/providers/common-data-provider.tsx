@@ -1,26 +1,25 @@
 import * as React from 'react';
-import { ChildrenProps } from './as-data-provider';
+import { ProviderResult } from './as-data-provider';
 
-import { LicenseInformationDataStructure } from './types';
+import { LicenseInformationResponse, RecentContainersResponse } from '../types';
 
 import {
   LicenseInformationProvider,
-  Permissions,
   RecentContainersProvider,
   UserPermissionProvider,
-  RecentContainersDataStructure,
   XFlowSettingsProvider,
 } from './instance-data-providers';
+import { Permissions } from '../types';
 
 interface CommonDataProviderProps {
   cloudId: string;
   children: (
     props: {
-      recentContainers: ChildrenProps<RecentContainersDataStructure>;
-      licenseInformation: ChildrenProps<LicenseInformationDataStructure>;
-      managePermission: ChildrenProps<boolean>;
-      addProductsPermission: ChildrenProps<boolean>;
-      isXFlowEnabled: ChildrenProps<boolean>;
+      recentContainers: ProviderResult<RecentContainersResponse>;
+      licenseInformation: ProviderResult<LicenseInformationResponse>;
+      managePermission: ProviderResult<boolean>;
+      addProductsPermission: ProviderResult<boolean>;
+      isXFlowEnabled: ProviderResult<boolean>;
     },
   ) => React.ReactElement<any>;
 }

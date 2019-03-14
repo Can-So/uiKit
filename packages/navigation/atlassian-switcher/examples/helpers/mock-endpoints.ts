@@ -135,7 +135,7 @@ interface LoadTimes {
 export const REQUEST_SLOW = {
   containers: 2000,
   xflow: 1200,
-  licenseInformation: 800,
+  licenseInformation: 1000,
   permitted: 500,
   appswitcher: 1500,
 };
@@ -174,49 +174,54 @@ export const mockEndpoints = (
   } = mockData;
   fetchMock.get(
     '/gateway/api/activity/api/client/recent/containers?cloudId=some-cloud-id',
-    new Promise(res =>
-      setTimeout(
-        () => res(RECENT_CONTAINERS_DATA),
-        loadTimes && loadTimes.containers,
+    () =>
+      new Promise(res =>
+        setTimeout(
+          () => res(RECENT_CONTAINERS_DATA),
+          loadTimes && loadTimes.containers,
+        ),
       ),
-    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.get(
     `${product === 'confluence' ? '/wiki' : ''}/rest/menu/latest/appswitcher`,
-    new Promise(res =>
-      setTimeout(
-        () => res(CUSTOM_LINKS_DATA),
-        loadTimes && loadTimes.appswitcher,
+    () =>
+      new Promise(res =>
+        setTimeout(
+          () => res(CUSTOM_LINKS_DATA),
+          loadTimes && loadTimes.appswitcher,
+        ),
       ),
-    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.get(
     '/gateway/api/xflow/some-cloud-id/license-information',
-    new Promise(res =>
-      setTimeout(
-        () => res(LICENSE_INFORMATION_DATA),
-        loadTimes && loadTimes.licenseInformation,
+    () =>
+      new Promise(res =>
+        setTimeout(
+          () => res(LICENSE_INFORMATION_DATA),
+          loadTimes && loadTimes.licenseInformation,
+        ),
       ),
-    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.post(
     '/gateway/api/permissions/permitted',
-    new Promise(res =>
-      setTimeout(
-        () => res(USER_PERMISSION_DATA),
-        loadTimes && loadTimes.permitted,
+    () =>
+      new Promise(res =>
+        setTimeout(
+          () => res(USER_PERMISSION_DATA),
+          loadTimes && loadTimes.permitted,
+        ),
       ),
-    ),
     { method: 'POST', overwriteRoutes: true },
   );
   fetchMock.get(
     '/gateway/api/site/some-cloud-id/setting/xflow',
-    new Promise(res =>
-      setTimeout(() => res(XFLOW_SETTINGS), loadTimes && loadTimes.xflow),
-    ),
+    () =>
+      new Promise(res =>
+        setTimeout(() => res(XFLOW_SETTINGS), loadTimes && loadTimes.xflow),
+      ),
     { method: 'GET', overwriteRoutes: true },
   );
 };

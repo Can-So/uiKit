@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import MentionItem from '../src/components/MentionItem';
 import { generateMentionItem, onSelection } from '../example-helpers';
+import { IntlProvider } from 'react-intl';
 
 export default function Example() {
   const mention = {
@@ -10,7 +11,11 @@ export default function Example() {
     mentionName: 'petch',
   };
   const description = 'Simple mention item with no nickname or avatar';
-  const component = <MentionItem mention={mention} onSelection={onSelection} />;
+  const component = (
+    <IntlProvider locale="en">
+      <MentionItem mention={mention} onSelection={onSelection} />
+    </IntlProvider>
+  );
 
   return generateMentionItem(component, description);
 }

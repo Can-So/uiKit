@@ -1,5 +1,9 @@
 # @atlaskit/status
 
+## 0.5.2
+- Updated dependencies [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
+  - @atlaskit/elements-test-helpers@0.3.0
+
 ## 0.5.1
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/icon@16.0.4
