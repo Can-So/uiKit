@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 8.0.2
+- [patch] [87808b7791](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/87808b7791):
+
+  - AK-5973 expose handleKeyDown as prop for PopupSelect
+
 ## 8.0.1
 - [patch] [69c6f6acb7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c6f6acb7):
 
