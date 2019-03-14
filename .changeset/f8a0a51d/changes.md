@@ -1,1 +1,0 @@
-- Add atlassian-switcher prefetch trigger in global-navigation
