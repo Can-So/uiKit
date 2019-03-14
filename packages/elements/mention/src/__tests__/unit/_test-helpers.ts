@@ -1,6 +1,7 @@
 import { ReactWrapper } from 'enzyme';
 import MentionItem from '../../components/MentionItem';
 import MentionResource from '../../api/MentionResource';
+import { MentionDescription } from '../../types';
 /* Component structure:
   ak-mention-picker
    > ak-popup (optional)
@@ -45,4 +46,21 @@ export function isMentionItemSelected(
 ) {
   const selectedItem = getSelectedMentionItem(component);
   return selectedItem.length && selectedItem.prop('mention').id === itemId;
+}
+
+export function checkOrder(
+  expected: MentionDescription[][],
+  actual: MentionDescription[][],
+) {
+  expect(actual).toHaveLength(expected.length);
+
+  for (let i = 0; i < expected.length; i++) {
+    expect(actual[i]).toHaveLength(expected[i].length);
+
+    if (expected[i].length) {
+      for (let j = 0; j < expected[i].length; j++) {
+        expect(actual[i][j].id).toEqual(expected[i][j].id);
+      }
+    }
+  }
 }
