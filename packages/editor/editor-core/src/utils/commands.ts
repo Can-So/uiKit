@@ -1,6 +1,7 @@
-import { EditorState } from 'prosemirror-state';
+import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { ResolvedPos } from 'prosemirror-model';
+import { ResolvedPos, MarkType } from 'prosemirror-model';
+import { toggleMark as defaultToggleMark } from 'prosemirror-commands';
 import { GapCursorSelection } from '../plugins/gap-cursor';
 import { Command } from '../types';
 
@@ -89,6 +90,51 @@ function findCutBefore($pos: ResolvedPos): ResolvedPos | null {
   return null;
 }
 
+/**
+ * A wrapper over the default toggleMark, except when we have a selection
+ * we only toggle marks on text nodes rather than inline nodes.
+ * @param markType
+ * @param attrs
+ */
+const toggleMark = (
+  markType: MarkType,
+  attrs?: { [key: string]: any },
+): Command => (state, dispatch) => {
+  // For cursor selections we can use the default behaviour.
+  if (state.selection instanceof TextSelection && state.selection.$cursor) {
+    return defaultToggleMark(markType)(state, dispatch);
+  }
+
+  let tr = state.tr;
+  const { $from, $to } = state.selection;
+  const markInRange = state.doc.rangeHasMark($from.pos, $to.pos, markType);
+  const mark = markType.create(attrs);
+
+  state.doc.nodesBetween($from.pos, $to.pos, (node, pos) => {
+    if (!node.isText) {
+      return true;
+    }
+
+    const from = Math.max(pos, $from.pos);
+    const to = Math.min(pos + node.nodeSize, $to.pos);
+
+    if (markInRange) {
+      tr = tr.removeMark(from, to, markType);
+      return true;
+    }
+
+    tr = tr.addMark(from, to, mark);
+    return true;
+  });
+
+  if (dispatch && tr.docChanged) {
+    dispatch(tr);
+    return true;
+  }
+
+  return false;
+};
+
 export {
   Predicate,
   filter,
@@ -96,4 +142,5 @@ export {
   isFirstChildOfParent,
   isNthParentOfType,
   findCutBefore,
+  toggleMark,
 };

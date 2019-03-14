@@ -1,5 +1,10 @@
 # @atlaskit/elements-test-helpers
 
+## 0.3.0
+- [minor] [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
+
+  - use @atlaskit/ssr to ssr/hydrate mention examples
+
 ## 0.2.0
 - [minor] [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
 

@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 6.1.0
+- [minor] [b08df363b7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b08df363b7):
+
+  - Add atlassian-switcher prefetch trigger in global-navigation
+
 ## 6.0.0
 - [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 

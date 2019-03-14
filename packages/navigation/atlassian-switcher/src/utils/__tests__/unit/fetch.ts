@@ -15,6 +15,7 @@ describe('utils fetch', () => {
     fetchMock = jest.fn();
     fetchMock.mockImplementation(() => {
       return Promise.resolve({
+        ok: true,
         json: () => Promise.resolve(RESPONSE_DATA),
       });
     });

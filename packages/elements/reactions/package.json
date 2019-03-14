@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/reactions",
-  "version": "15.6.2",
+  "version": "15.6.3",
   "config": {
     "access": "public"
   },
@@ -20,7 +20,7 @@
     "@atlaskit/analytics-next-types": "^3.1.2",
     "@atlaskit/analytics-viewer": "^0.1.7",
     "@atlaskit/button": "^10.1.3",
-    "@atlaskit/emoji": "^57.0.0",
+    "@atlaskit/emoji": "^57.0.1",
     "@atlaskit/icon": "^16.0.4",
     "@atlaskit/layer": "^6.0.0",
     "@atlaskit/theme": "^8.0.0",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "@atlaskit/docs": "^7.0.0",
     "@atlaskit/editor-test-helpers": "^7.0.6",
-    "@atlaskit/elements-test-helpers": "^0.2.0",
+    "@atlaskit/elements-test-helpers": "^0.3.0",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/tooltip": "^13.0.0",
     "@atlaskit/util-common-test": "^2.4.2",

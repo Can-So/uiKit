@@ -43,12 +43,12 @@ export const markOrder = [
   'link',
   'em',
   'strong',
+  'textColor',
   'strike',
   'subsup',
   'underline',
   'code',
   'confluenceInlineComment',
-  'textColor',
   'annotation',
 ];
 

@@ -57,7 +57,7 @@ class EditorWithState extends Editor {
   }
 }
 
-export default function mobileEditor(props) {
+export default function mobileEditor(props: any) {
   return (
     <EditorWithState
       appearance="mobile"

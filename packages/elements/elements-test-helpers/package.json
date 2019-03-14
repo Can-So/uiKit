@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/elements-test-helpers",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "common test helpers",
   "config": {
     "access": "public"
@@ -16,8 +16,9 @@
   ],
   "dependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "tslib": "^1.8.0",
-    "exenv": "^1.2.2"
+    "@atlaskit/ssr": "^0.0.1",
+    "exenv": "^1.2.2",
+    "tslib": "^1.8.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",

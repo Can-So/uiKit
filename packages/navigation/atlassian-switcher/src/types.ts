@@ -1,3 +1,7 @@
+export interface TriggerXFlowCallback {
+  (productKey: string, sourceComponent: string): void;
+}
+
 export interface WithCloudId {
   cloudId: string;
 }
@@ -16,6 +20,12 @@ export interface CustomLink {
   link: string;
 }
 
+export enum Permissions {
+  MANAGE = 'manage',
+  CAN_INVITE_USERS = 'invite-users',
+  ADD_PRODUCTS = 'add-products',
+}
+
 export enum Product {
   CONFLUENCE = 'confluence',
   HOME = 'home',
@@ -28,3 +38,26 @@ export enum Product {
 export type FeatureFlagProps = {
   enableSplitJira: boolean;
 };
+
+export type CustomLinksResponse = CustomLink[];
+
+export interface LicenseInformationResponse {
+  hostname: string;
+  products: {
+    [key: string]: {
+      state: string;
+    };
+  };
+}
+
+export interface XFlowSettingsResponse {
+  'product-suggestions-enabled'?: boolean;
+}
+
+export interface UserPermissionResponse {
+  permitted: boolean;
+}
+
+export interface RecentContainersResponse {
+  data: Array<RecentContainer>;
+}

@@ -9,6 +9,7 @@ import Mention from '../src/components/Mention';
 import { ELEMENTS_CHANNEL } from '../src/constants';
 import debug from '../src/util/logger';
 import { mockMentionData as mentionData } from '../src/__tests__/unit/_test-helpers';
+import { IntlProvider } from 'react-intl';
 
 const padding = { padding: '10px' };
 
@@ -43,41 +44,43 @@ const handler = (
 
 export default function Example() {
   return (
-    <AtlaskitThemeProvider mode={'dark'}>
-      <div style={padding}>
-        <AnalyticsListenerNext
-          onEvent={listenerHandlerNext}
-          channel={ELEMENTS_CHANNEL}
-        >
-          <AnalyticsListener onEvent={listenerHandler} matchPrivate={true}>
-            <Mention
-              {...mentionData}
-              accessLevel={'CONTAINER'}
-              onClick={handler}
-              onMouseEnter={onMentionEvent}
-              onMouseLeave={onMentionEvent}
-            />
-          </AnalyticsListener>
-        </AnalyticsListenerNext>
-      </div>
-      <div style={padding}>
-        <Mention
-          {...mentionData}
-          isHighlighted={true}
-          onClick={onMentionEvent}
-          onMouseEnter={onMentionEvent}
-          onMouseLeave={onMentionEvent}
-        />
-      </div>
-      <div style={padding}>
-        <Mention
-          {...mentionData}
-          accessLevel={'NONE'}
-          onClick={onMentionEvent}
-          onMouseEnter={onMentionEvent}
-          onMouseLeave={onMentionEvent}
-        />
-      </div>
-    </AtlaskitThemeProvider>
+    <IntlProvider locale="en">
+      <AtlaskitThemeProvider mode={'dark'}>
+        <div style={padding}>
+          <AnalyticsListenerNext
+            onEvent={listenerHandlerNext}
+            channel={ELEMENTS_CHANNEL}
+          >
+            <AnalyticsListener onEvent={listenerHandler} matchPrivate={true}>
+              <Mention
+                {...mentionData}
+                accessLevel={'CONTAINER'}
+                onClick={handler}
+                onMouseEnter={onMentionEvent}
+                onMouseLeave={onMentionEvent}
+              />
+            </AnalyticsListener>
+          </AnalyticsListenerNext>
+        </div>
+        <div style={padding}>
+          <Mention
+            {...mentionData}
+            isHighlighted={true}
+            onClick={onMentionEvent}
+            onMouseEnter={onMentionEvent}
+            onMouseLeave={onMentionEvent}
+          />
+        </div>
+        <div style={padding}>
+          <Mention
+            {...mentionData}
+            accessLevel={'NONE'}
+            onClick={onMentionEvent}
+            onMouseEnter={onMentionEvent}
+            onMouseLeave={onMentionEvent}
+          />
+        </div>
+      </AtlaskitThemeProvider>
+    </IntlProvider>
   );
 }

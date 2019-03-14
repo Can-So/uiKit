@@ -7,7 +7,7 @@ export interface ErrorBridge {
     line: number,
     col: number,
     stackTrace: string[],
-  );
+  ): void;
 }
 
 export interface RuntimeBridges {
@@ -20,7 +20,7 @@ export class RuntimeBridgeImpl implements RuntimeBridges {
   call<T extends keyof RuntimeBridges>(
     bridge: T,
     event: keyof Exclude<RuntimeBridges[T], undefined>,
-    ...args
+    ...args: any
   ) {
     sendToBridge(bridge, event, ...args);
   }
@@ -39,7 +39,7 @@ export function errorReporter(event: ErrorEvent) {
     stackTrace:
       (error &&
         error.stack &&
-        error.stack.split('\n').map(trace => trace.trim())) ||
+        error.stack.split('\n').map((trace: string) => trace.trim())) ||
       [],
   });
 }

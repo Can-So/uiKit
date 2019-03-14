@@ -2,6 +2,7 @@ import * as React from 'react';
 import { onSelection, randomMentions } from '../example-helpers';
 import MentionList from '../src/components/MentionList';
 import { MentionDescription } from '../src/types';
+import { IntlProvider } from 'react-intl';
 
 export interface State {
   mentions: MentionDescription[];
@@ -71,7 +72,7 @@ export default class DemoMentionList extends React.Component<any, State> {
             Down
           </button>
         </div>
-        {mentionList}
+        <IntlProvider locale="en">{mentionList}</IntlProvider>
       </div>
     );
   }
