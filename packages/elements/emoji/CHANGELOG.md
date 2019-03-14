@@ -1,5 +1,23 @@
 # @atlaskit/emoji
 
+## 58.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+  - @atlaskit/docs@7.0.1
+  - @atlaskit/icon@16.0.5
+  - @atlaskit/section-message@2.0.1
+  - @atlaskit/spinner@10.0.1
+  - @atlaskit/theme@8.0.1
+  - @atlaskit/tooltip@13.0.1
+  - @atlaskit/i18n-tools@0.5.0
+  - @atlaskit/button@11.0.0
+  - @atlaskit/editor-test-helpers@8.0.0
+  - @atlaskit/util-data-test@11.0.0
+  - @atlaskit/util-service-support@4.0.0
+  - @atlaskit/media-core@29.0.0
+
 ## 57.0.1
 - Updated dependencies [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
   - @atlaskit/elements-test-helpers@0.3.0

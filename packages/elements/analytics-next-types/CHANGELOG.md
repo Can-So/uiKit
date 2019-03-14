@@ -1,5 +1,10 @@
 # @atlaskit/analytics-next-types
 
+## 4.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
 ## 3.2.0
 - [minor] [c3fa0b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3fa0b6):
 

@@ -1,5 +1,10 @@
 # @atlaskit/textarea
 
+## 0.3.0
+- [minor] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
 ## 0.2.6
 - [patch] [1b952c437d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b952c437d):
 

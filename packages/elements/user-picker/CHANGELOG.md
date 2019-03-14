@@ -1,5 +1,10 @@
 # @atlaskit/user-picker
 
+## 2.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
 ## 1.1.1
 - [patch] [64c306c904](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/64c306c904):
 

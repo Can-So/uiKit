@@ -1,5 +1,10 @@
 # @atlaskit/reactions
 
+## 16.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
 ## 15.6.3
 - Updated dependencies [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
   - @atlaskit/emoji@57.0.1
