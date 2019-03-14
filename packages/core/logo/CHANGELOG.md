@@ -1,5 +1,10 @@
 # @atlaskit/logo
 
+## 10.0.2
+- [patch] [e04a402953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e04a402953):
+
+  - Internal changes only. Ids relevant to Logo gradients are now ssr-friendly.
+
 ## 10.0.1
 - Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
   - @atlaskit/docs@7.0.1
