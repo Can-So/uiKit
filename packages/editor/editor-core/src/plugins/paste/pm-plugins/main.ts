@@ -9,7 +9,10 @@ import { MarkdownTransformer } from '@atlaskit/editor-markdown-transformer';
 import { analyticsService } from '../../../analytics';
 import * as clipboard from '../../../utils/clipboard';
 import { EditorAppearance } from '../../../types';
-import { insertMediaAsMediaSingle } from '../../media/utils/media-single';
+import {
+  insertMediaAsMediaSingle,
+  transformSliceForMedia,
+} from '../../media/utils/media-single';
 import linkify from '../linkify-md-plugin';
 import { escapeLinks, getPasteSource } from '../util';
 import { transformSliceToRemoveOpenBodiedExtension } from '../../extension/actions';
@@ -83,6 +86,9 @@ export function createPlugin(
         if (handlePasteAsPlainText(slice, event)(state, dispatch, view)) {
           return true;
         }
+
+        // transform slices based on destination
+        slice = transformSliceForMedia(slice, schema)(state.selection);
 
         // send analytics
         if (hasParentNodeOfType([decisionItem, taskItem])(state.selection)) {
