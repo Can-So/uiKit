@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 105.4.2
+- [patch] [57fdb39e20](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/57fdb39e20):
+
+  - ED-6512 Fix subscript
+
 ## 105.4.1
 - [patch] [fb679d390f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb679d390f):
 
