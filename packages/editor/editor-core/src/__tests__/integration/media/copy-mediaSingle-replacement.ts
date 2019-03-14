@@ -31,8 +31,8 @@ const baseADF = {
             id: 'a559980d-cd47-43e2-8377-27359fcb905f',
             type: 'file',
             collection: 'MediaServicesSample',
-            width: '2378',
-            height: '628',
+            width: 2378,
+            height: 628,
           },
         },
       ],
@@ -50,8 +50,8 @@ const baseADF = {
             id: 'a559980d-cd47-43e2-8377-27359fcb905f',
             type: 'file',
             collection: 'MediaServicesSample',
-            width: '2378',
-            height: '628',
+            width: 2378,
+            height: 628,
           },
         },
       ],
@@ -69,8 +69,8 @@ const baseADF = {
             id: 'a559980d-cd47-43e2-8377-27359fcb905f',
             type: 'file',
             collection: 'MediaServicesSample',
-            width: '2378',
-            height: '628',
+            width: 2378,
+            height: 628,
           },
         },
       ],
@@ -85,24 +85,27 @@ const baseADF = {
 BrowserTestCase(
   'copy-mediaSingle-replacement.ts: Copies and pastes mediaSingle on fullpage',
   { skip: ['edge', 'ie', 'safari'] },
-  async client => {
+  async (client: any) => {
     const page = await goToEditorTestingExample(client);
     await mountEditor(page, {
       appearance: fullpage.appearance,
       defaultValue: JSON.stringify(baseADF),
-      media: {},
+      media: {
+        allowMediaSingle: true,
+      },
     });
+
     // select the middle one and copy it
     //
     // uses .overlay since these error without being signed into Media Services
     // use the .wrapper selector if we're able to resolve the image
-    await page.waitForSelector('.ProseMirror :nth-child(3) .overlay');
-    await page.click('.ProseMirror :nth-child(3) .overlay');
+    await page.waitForSelector('.ProseMirror :nth-child(3) .wrapper');
+    await page.click('.ProseMirror :nth-child(3) .wrapper');
     await page.copy(editable);
 
     // select the last one and replace it
-    await page.waitForSelector('.ProseMirror :nth-child(4) .overlay');
-    await page.click('.ProseMirror :nth-child(4) .overlay');
+    await page.waitForSelector('.ProseMirror :nth-child(4) .wrapper');
+    await page.click('.ProseMirror :nth-child(4) .wrapper');
     await page.paste(editable);
 
     const doc = await page.$eval(editable, getDocFromElement);
