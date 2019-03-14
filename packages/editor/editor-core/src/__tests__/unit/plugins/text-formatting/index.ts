@@ -29,11 +29,12 @@ import {
   INPUT_METHOD,
   ACTION_SUBJECT_ID,
 } from '../../../../plugins/analytics';
+import { AnalyticsHandler } from '../../../../analytics';
 
 describe('text-formatting', () => {
   const createEditor = createEditorFactory<TextFormattingState>();
 
-  let trackEvent;
+  let trackEvent: AnalyticsHandler;
   let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
   const editor = (doc: any) => {
     createAnalyticsEvent = jest.fn().mockReturnValue({ fire() {} });

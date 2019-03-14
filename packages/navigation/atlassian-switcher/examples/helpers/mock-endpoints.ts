@@ -16,14 +16,56 @@ const ORIGINAL_MOCK_DATA: MockData = {
       {
         objectId: 'some-id-0',
         type: 'jira-project',
-        name: 'Jira Switcher',
+        name: 'Jira Switcher #1',
         url: 'https://some-random-instance.atlassian.net/projects/CEN',
         iconUrl,
       },
       {
         objectId: 'some-id-1',
         type: 'confluence-space',
-        name: 'My Project Space',
+        name: 'My Project Space #2',
+        url: 'https://some-random-instance.atlassian.net/wiki/spaces/CEN',
+        iconUrl,
+      },
+      {
+        objectId: 'some-id-2',
+        type: 'jira-project',
+        name: 'Jira Switcher #3',
+        url: 'https://some-random-instance.atlassian.net/projects/CEN',
+        iconUrl,
+      },
+      {
+        objectId: 'some-id-3',
+        type: 'confluence-space',
+        name: 'My Project Space #4',
+        url: 'https://some-random-instance.atlassian.net/wiki/spaces/CEN',
+        iconUrl,
+      },
+      {
+        objectId: 'some-id-4',
+        type: 'jira-project',
+        name: 'Jira Switcher #5',
+        url: 'https://some-random-instance.atlassian.net/projects/CEN',
+        iconUrl,
+      },
+      {
+        objectId: 'some-id-5',
+        type: 'confluence-space',
+        name: 'My Project Space #6',
+        url: 'https://some-random-instance.atlassian.net/wiki/spaces/CEN',
+        iconUrl,
+      },
+      {
+        objectId: 'some-id-6',
+        type: 'jira-project',
+        name: 'Jira Switcher #7',
+        url: 'https://some-random-instance.atlassian.net/projects/CEN',
+        iconUrl,
+      },
+      {
+        objectId: 'some-id-7',
+        type: 'confluence-space',
+        name: 'My Project Space #8',
         url: 'https://some-random-instance.atlassian.net/wiki/spaces/CEN',
         iconUrl,
       },
@@ -32,7 +74,7 @@ const ORIGINAL_MOCK_DATA: MockData = {
   CUSTOM_LINKS_DATA: [
     {
       key: 'home',
-      link: 'https://some-random-instance.atlassian.net/secure',
+      link: 'https://some-random-instance.atlassian.net/secure/MyJiraHome.jspa',
       label: 'Jira',
       local: true,
       self: false,
@@ -40,7 +82,7 @@ const ORIGINAL_MOCK_DATA: MockData = {
     },
     {
       key: 'home',
-      link: 'https://some-random-instance.atlassian.net/wiki',
+      link: 'https://some-random-instance.atlassian.net/wiki/',
       label: 'Confluence',
       local: true,
       self: false,
@@ -93,7 +135,7 @@ interface LoadTimes {
 export const REQUEST_SLOW = {
   containers: 2000,
   xflow: 1200,
-  licenseInformation: 800,
+  licenseInformation: 1000,
   permitted: 500,
   appswitcher: 1500,
 };
@@ -132,49 +174,54 @@ export const mockEndpoints = (
   } = mockData;
   fetchMock.get(
     '/gateway/api/activity/api/client/recent/containers?cloudId=some-cloud-id',
-    new Promise(res =>
-      setTimeout(
-        () => res(RECENT_CONTAINERS_DATA),
-        loadTimes && loadTimes.containers,
+    () =>
+      new Promise(res =>
+        setTimeout(
+          () => res(RECENT_CONTAINERS_DATA),
+          loadTimes && loadTimes.containers,
+        ),
       ),
-    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.get(
     `${product === 'confluence' ? '/wiki' : ''}/rest/menu/latest/appswitcher`,
-    new Promise(res =>
-      setTimeout(
-        () => res(CUSTOM_LINKS_DATA),
-        loadTimes && loadTimes.appswitcher,
+    () =>
+      new Promise(res =>
+        setTimeout(
+          () => res(CUSTOM_LINKS_DATA),
+          loadTimes && loadTimes.appswitcher,
+        ),
       ),
-    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.get(
     '/gateway/api/xflow/some-cloud-id/license-information',
-    new Promise(res =>
-      setTimeout(
-        () => res(LICENSE_INFORMATION_DATA),
-        loadTimes && loadTimes.licenseInformation,
+    () =>
+      new Promise(res =>
+        setTimeout(
+          () => res(LICENSE_INFORMATION_DATA),
+          loadTimes && loadTimes.licenseInformation,
+        ),
       ),
-    ),
     { method: 'GET', overwriteRoutes: true },
   );
   fetchMock.post(
     '/gateway/api/permissions/permitted',
-    new Promise(res =>
-      setTimeout(
-        () => res(USER_PERMISSION_DATA),
-        loadTimes && loadTimes.permitted,
+    () =>
+      new Promise(res =>
+        setTimeout(
+          () => res(USER_PERMISSION_DATA),
+          loadTimes && loadTimes.permitted,
+        ),
       ),
-    ),
     { method: 'POST', overwriteRoutes: true },
   );
   fetchMock.get(
     '/gateway/api/site/some-cloud-id/setting/xflow',
-    new Promise(res =>
-      setTimeout(() => res(XFLOW_SETTINGS), loadTimes && loadTimes.xflow),
-    ),
+    () =>
+      new Promise(res =>
+        setTimeout(() => res(XFLOW_SETTINGS), loadTimes && loadTimes.xflow),
+      ),
     { method: 'GET', overwriteRoutes: true },
   );
 };

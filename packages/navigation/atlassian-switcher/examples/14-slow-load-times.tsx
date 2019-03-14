@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
 import { mockEndpoints } from './helpers/mock-endpoints';
-import { withAnalyticsLogger } from './helpers';
+import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher from '../src';
 
-class JiraSwitcherExample extends Component {
+class JiraSwitcherExample extends React.Component {
   state = {
     isDrawerOpen: false,
   };
@@ -18,7 +18,7 @@ class JiraSwitcherExample extends Component {
     mockEndpoints('jira', undefined, {
       containers: 1000,
       xflow: 500,
-      licenseInformation: 250,
+      licenseInformation: 1000,
       permitted: 2000,
       appswitcher: 1500,
     });
@@ -57,4 +57,4 @@ class JiraSwitcherExample extends Component {
   }
 }
 
-export default withAnalyticsLogger(JiraSwitcherExample);
+export default withIntlProvider(withAnalyticsLogger(JiraSwitcherExample));

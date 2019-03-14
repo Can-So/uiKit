@@ -6,11 +6,12 @@ import {
   taskDecision,
 } from '@atlaskit/util-data-test';
 import { CardEvent } from '@atlaskit/media-card';
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema, ActionMarkAction } from '@atlaskit/adf-schema';
 import {
   CardSurroundings,
   ProviderFactory,
   ExtensionHandlers,
+  EventHandlers,
 } from '@atlaskit/editor-common';
 import Button from '@atlaskit/button';
 import {
@@ -39,7 +40,7 @@ const MockProfileClient = getMockProfileClientUtil(
 );
 
 const mentionProvider = Promise.resolve({
-  shouldHighlightMention(mention) {
+  shouldHighlightMention(mention: { id: string }) {
     return mention.id === 'ABCDE-ABCDE-ABCDE-ABCDE';
   },
 });
@@ -134,7 +135,7 @@ const extensionHandlers: ExtensionHandlers = {
   },
 };
 
-const eventHandlers = {
+const eventHandlers: EventHandlers = {
   mention: {
     onClick: () => console.log('onMentionClick'),
     onMouseEnter: () => console.log('onMentionMouseEnter'),
@@ -157,7 +158,8 @@ const eventHandlers = {
     },
   },
   action: {
-    onClick: event => console.log('onClick', '[react.MouseEvent]', event),
+    onClick: (event: ActionMarkAction) =>
+      console.log('onClick', '[react.MouseEvent]', event),
   },
 };
 
@@ -178,6 +180,7 @@ export interface DemoRendererState {
   portal?: HTMLElement;
   truncated: boolean;
   showSidebar: boolean;
+  shouldUseEventHandlers: boolean;
 }
 
 export default class RendererDemo extends React.Component<
@@ -198,6 +201,7 @@ export default class RendererDemo extends React.Component<
       input: JSON.stringify(doc, null, 2),
       truncated: true,
       showSidebar: getDefaultShowSidebarState(false),
+      shouldUseEventHandlers: false,
     };
   }
 
@@ -228,7 +232,7 @@ export default class RendererDemo extends React.Component<
   render() {
     return (
       <Sidebar showSidebar={this.state.showSidebar}>
-        {additionalRendererProps => (
+        {(additionalRendererProps: object) => (
           <div ref="root" style={{ padding: 20 }}>
             <fieldset style={{ marginBottom: 20 }}>
               <legend>Input</legend>
@@ -250,6 +254,9 @@ export default class RendererDemo extends React.Component<
                 value={this.state.input}
               />
               <button onClick={this.toggleSidebar}>Toggle Sidebar</button>
+              <button onClick={this.toggleEventHandlers}>
+                Toggle Event handlers
+              </button>
             </fieldset>
             {this.renderRenderer(additionalRendererProps)}
             {this.renderText()}
@@ -277,13 +284,14 @@ export default class RendererDemo extends React.Component<
     }
   }
 
-  private toggleTruncated(e) {
+  private toggleTruncated(e: Event) {
     this.setState(prevState => ({
       truncated: !prevState.truncated,
     }));
   }
 
-  private renderRenderer(additionalRendererProps) {
+  private renderRenderer(additionalRendererProps: any) {
+    const { shouldUseEventHandlers } = this.state;
     if (this.props.serializer !== 'react') {
       return null;
     }
@@ -294,7 +302,9 @@ export default class RendererDemo extends React.Component<
       };
 
       if (this.props.withProviders) {
-        props.eventHandlers = eventHandlers;
+        props.eventHandlers = shouldUseEventHandlers
+          ? eventHandlers
+          : undefined;
         props.dataProviders = providerFactory;
       }
 
@@ -323,7 +333,7 @@ export default class RendererDemo extends React.Component<
           <Button
             appearance={'link'}
             spacing={'none'}
-            onClick={e => this.toggleTruncated(e)}
+            onClick={(e: Event) => this.toggleTruncated(e)}
           >
             {this.state.truncated ? 'Expand text' : 'Collapse text'}
           </Button>
@@ -400,6 +410,12 @@ export default class RendererDemo extends React.Component<
 
   private toggleSidebar = () => {
     this.setState(prevState => ({ showSidebar: !prevState.showSidebar }));
+  };
+
+  private toggleEventHandlers = () => {
+    this.setState(prevState => ({
+      shouldUseEventHandlers: !prevState.shouldUseEventHandlers,
+    }));
   };
 
   private onDocumentChange = () => {

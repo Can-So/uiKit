@@ -1,3 +1,4 @@
+export { Refs } from './schema-builder';
 export * from './base64fileconverter';
 export { default as sendKeyToPm } from './send-key-to-pm';
 export { default as chaiPlugin } from './chai';
@@ -87,6 +88,8 @@ export {
   status,
   alignment,
   indentation,
+  unsupportedBlock,
+  unsupportedInline,
 } from './schema-builder';
 export { default as defaultSchema } from './schema';
 export * from './html-helpers';

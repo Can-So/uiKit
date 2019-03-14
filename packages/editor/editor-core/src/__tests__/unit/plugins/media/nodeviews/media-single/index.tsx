@@ -10,7 +10,8 @@ import {
 import { defaultSchema, MediaAttributes } from '@atlaskit/adf-schema';
 import {
   stateKey as mediaStateKey,
-  DefaultMediaStateManager,
+  MediaPluginState,
+  MediaState,
 } from '../../../../../../plugins/media/pm-plugins/main';
 import MediaSingle, {
   ReactMediaSingleNode,
@@ -20,19 +21,16 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import { EventDispatcher } from '../../../../../../event-dispatcher';
 import { PortalProviderAPI } from '../../../../../../ui/PortalProvider';
 
-const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 const getFreshMediaProvider = () =>
   storyMediaProviderFactory({
     collectionName: testCollectionName,
-    stateManager,
     includeUserAuthProvider: true,
   });
 
 describe('nodeviews/mediaSingle', () => {
-  let pluginState;
-  const stateManager = new DefaultMediaStateManager();
+  let pluginState: MediaPluginState;
   const mediaNodeAttrs = {
     id: 'foo',
     type: 'file',
@@ -51,19 +49,20 @@ describe('nodeviews/mediaSingle', () => {
   const eventDispatcher = {} as EventDispatcher;
   const getPos = jest.fn();
   const portalProviderAPI: PortalProviderAPI = {
-    render(component) {
+    render(component: () => React.ReactChild | null) {
       component();
     },
     remove() {},
   } as any;
+  let getDimensions;
 
   beforeEach(() => {
     const mediaProvider = getFreshMediaProvider();
     const providerFactory = ProviderFactory.create({ mediaProvider });
-    pluginState = {
+    pluginState = ({
       getMediaNodeStateStatus: (id: string) => 'ready',
       getMediaNodeState: (id: string) => {
-        return { state: 'ready' };
+        return ({ state: 'ready' } as any) as MediaState;
       },
       options: {
         allowResizing: false,
@@ -72,9 +71,18 @@ describe('nodeviews/mediaSingle', () => {
       handleMediaNodeMount: () => {},
       updateElement: jest.fn(),
       updateMediaNodeAttrs: jest.fn(),
-    };
+    } as any) as MediaPluginState;
 
-    pluginState.stateManager = stateManager;
+    getDimensions = wrapper => (): Promise<any> => {
+      if (wrapper.props().node.firstChild.attrs.type === 'external') {
+        return Promise.resolve(false);
+      }
+      return Promise.resolve({
+        id: 'foo',
+        height: 100,
+        width: 100,
+      });
+    };
 
     jest.spyOn(mediaStateKey, 'getState').mockImplementation(() => pluginState);
   });
@@ -185,12 +193,9 @@ describe('nodeviews/mediaSingle', () => {
         />,
       );
 
-      (wrapper.instance() as MediaSingle).getRemoteDimensions = () =>
-        Promise.resolve({
-          id: 'foo',
-          height: 100,
-          width: 100,
-        });
+      (wrapper.instance() as MediaSingle).getRemoteDimensions = getDimensions(
+        wrapper,
+      );
 
       await (wrapper.instance() as MediaSingle).componentDidMount();
       expect(pluginState.updateMediaNodeAttrs).toHaveBeenCalledWith(
@@ -201,6 +206,37 @@ describe('nodeviews/mediaSingle', () => {
         },
         true,
       );
+    });
+
+    it('does not ask media for dimensions when the image type is external', async () => {
+      const mediaNodeAttrs = {
+        id: 'foo',
+        type: 'external',
+        collection: 'collection',
+      };
+
+      const mediaNode = media(mediaNodeAttrs as MediaAttributes)();
+      const mediaSingleNodeWithoutDimensions = mediaSingle()(mediaNode);
+
+      const wrapper = mount(
+        <MediaSingle
+          view={view}
+          eventDispatcher={eventDispatcher}
+          node={mediaSingleNodeWithoutDimensions(defaultSchema)}
+          lineLength={680}
+          getPos={getPos}
+          width={123}
+          selected={() => 1}
+          editorAppearance="full-page"
+        />,
+      );
+
+      (wrapper.instance() as MediaSingle).getRemoteDimensions = getDimensions(
+        wrapper,
+      );
+
+      await (wrapper.instance() as MediaSingle).componentDidMount();
+      expect(pluginState.updateMediaNodeAttrs).toHaveBeenCalledTimes(0);
     });
   });
   afterEach(() => {

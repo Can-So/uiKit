@@ -4,12 +4,13 @@ import { Plugin } from 'prosemirror-state';
 import * as keymaps from '../../../keymaps';
 import { trackAndInvoke } from '../../../analytics';
 import {
-  toggleListCommand,
   indentList,
   outdentList,
   backspaceKeyCommand,
   enterKeyCommand,
+  toggleListCommandWithAnalytics,
 } from '../commands';
+import { INPUT_METHOD } from '../../analytics';
 
 export function keymapPlugin(schema: Schema): Plugin | undefined {
   const list = {};
@@ -18,7 +19,7 @@ export function keymapPlugin(schema: Schema): Plugin | undefined {
     keymaps.findShortcutByKeymap(keymaps.toggleOrderedList)!,
     trackAndInvoke(
       'atlassian.editor.format.list.numbered.keyboard',
-      toggleListCommand('orderedList'),
+      toggleListCommandWithAnalytics(INPUT_METHOD.KEYBOARD, 'orderedList'),
     ),
     list,
   );
@@ -26,7 +27,7 @@ export function keymapPlugin(schema: Schema): Plugin | undefined {
     keymaps.findShortcutByKeymap(keymaps.toggleBulletList)!,
     trackAndInvoke(
       'atlassian.editor.format.list.bullet.keyboard',
-      toggleListCommand('bulletList'),
+      toggleListCommandWithAnalytics(INPUT_METHOD.KEYBOARD, 'bulletList'),
     ),
     list,
   );

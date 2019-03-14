@@ -22,7 +22,7 @@ export interface State {
 export default class PanelTextInput extends PureComponent<Props, State> {
   private input?: HTMLInputElement;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

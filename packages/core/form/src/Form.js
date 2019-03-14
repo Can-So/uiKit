@@ -11,6 +11,7 @@ export const IsDisabledContext = createContext(false);
 type FormProps = {
   ref: Ref<'form'>,
   onSubmit: (SyntheticEvent<HTMLFormElement> | any) => any,
+  onKeyDown: (SyntheticKeyboardEvent<HTMLFormElement>) => void,
 };
 
 type Props = {
@@ -125,6 +126,16 @@ class Form extends React.Component<Props, State> {
     }
   };
 
+  handleKeyDown = (e: SyntheticKeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && this.formRef.current) {
+      const submitButton = this.formRef.current.querySelector(
+        'button:not([type]), button[type="submit"], input[type="submit"]',
+      );
+      if (submitButton) submitButton.click();
+      e.preventDefault();
+    }
+  };
+
   render() {
     const { isDisabled, children } = this.props;
     const { dirty, submitting } = this.state;
@@ -135,6 +146,7 @@ class Form extends React.Component<Props, State> {
             formProps: {
               onSubmit: this.handleSubmit,
               ref: this.formRef,
+              onKeyDown: this.handleKeyDown,
             },
             dirty,
             submitting,

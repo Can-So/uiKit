@@ -3,7 +3,9 @@ export type EmailValidationResponse = 'INVALID' | 'POTENTIAL' | 'VALID';
 const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
 const potentialRegex = /^[^\s@]+@[^\s@]*$/i;
 
-export const isValidEmail = (inputText: string): EmailValidationResponse => {
+export type EmailValidator = (inputText: string) => EmailValidationResponse;
+
+export const isValidEmail: EmailValidator = (inputText: string) => {
   if (inputText.match(validRegex)) {
     return 'VALID';
   }

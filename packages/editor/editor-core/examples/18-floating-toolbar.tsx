@@ -158,7 +158,7 @@ export default class Example extends Component {
     );
   }
 
-  renderButton = (name, label) => (
+  renderButton = (name: string, label: string) => (
     <Button
       theme="dark"
       spacing="compact"

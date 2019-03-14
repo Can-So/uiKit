@@ -17,7 +17,7 @@ const Boundary = styled.div`
 class CustomBoundryExample extends PureComponent<any, any> {
   state = { boundary: undefined };
 
-  handleBoundryRef = boundary => {
+  handleBoundryRef = (boundary: HTMLElement) => {
     this.setState({ boundary });
   };
 
@@ -47,7 +47,7 @@ class PortalExample extends PureComponent<any, any> {
     portal: undefined,
   };
 
-  handleRef = portal => {
+  handleRef = (portal: HTMLDivElement) => {
     this.setState({ portal });
   };
 
@@ -78,11 +78,11 @@ class PortalExample extends PureComponent<any, any> {
 class PortalWithCustomBoundaryExample extends PureComponent<any, any> {
   state = { portal: undefined, boundary: undefined };
 
-  handlePortalRef = portal => {
+  handlePortalRef = (portal: HTMLDivElement) => {
     this.setState({ portal });
   };
 
-  handleBoundryRef = boundary => {
+  handleBoundryRef = (boundary: HTMLDivElement) => {
     this.setState({ boundary });
   };
 
@@ -116,11 +116,11 @@ class PortalWithCustomBoundaryExample extends PureComponent<any, any> {
 class PortalInScrollContainerExample extends PureComponent<any, any> {
   state = { portal: undefined, boundary: undefined };
 
-  handlePortalRef = portal => {
+  handlePortalRef = (portal: HTMLDivElement) => {
     this.setState({ portal });
   };
 
-  handleBoundryRef = boundary => {
+  handleBoundryRef = (boundary: HTMLDivElement) => {
     this.setState({ boundary });
   };
 
@@ -174,15 +174,15 @@ class PortalInScrollContainerExample extends PureComponent<any, any> {
 class JiraSidebarEditor extends PureComponent<any, any> {
   state = { portal: undefined, boundary: undefined, scrollable: undefined };
 
-  handlePortalRef = portal => {
+  handlePortalRef = (portal: HTMLDivElement) => {
     this.setState({ portal });
   };
 
-  handleBoundryRef = boundary => {
+  handleBoundryRef = (boundary: HTMLDivElement) => {
     this.setState({ boundary });
   };
 
-  handleScrollableRef = scrollable => {
+  handleScrollableRef = (scrollable: HTMLDivElement) => {
     this.setState({ scrollable });
   };
 
@@ -220,7 +220,8 @@ class JiraSidebarEditor extends PureComponent<any, any> {
 
 const CANCEL_ACTION = () => console.log('Cancel');
 const SAVE_ACTION = () => console.log('Save');
-const analyticsHandler = (actionName, props) => console.log(actionName, props);
+const analyticsHandler = (actionName: string, props?: {}) =>
+  console.log(actionName, props);
 
 const mentionProvider = new Promise<any>(resolve =>
   resolve(mention.storyData.resourceProvider),

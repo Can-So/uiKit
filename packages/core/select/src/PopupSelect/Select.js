@@ -55,6 +55,7 @@ type Props = {
     ref: ElementRef<*>,
     isOpen: boolean,
   }) => ElementType<*>,
+  handleKeyDown?: KeyboardEvent => void,
 };
 type State = {
   isOpen: boolean,
@@ -130,13 +131,17 @@ export default class PopupSelect extends PureComponent<Props, State> {
   // Event Handlers
   // ==============================
 
-  handleKeyDown = ({ key }: KeyboardEvent) => {
+  handleKeyDown = (event: KeyboardEvent) => {
+    const { key } = event;
     switch (key) {
       case 'Escape':
       case 'Esc':
         this.close();
         break;
       default:
+    }
+    if (this.props.handleKeyDown) {
+      this.props.handleKeyDown(event);
     }
   };
   handleClick = ({ target }: MouseEvent) => {
@@ -171,7 +176,7 @@ export default class PopupSelect extends PureComponent<Props, State> {
     if (onOpen) onOpen();
 
     this.setState({ isOpen: true }, this.initialiseFocusTrap);
-    this.selectRef.select.focusOption('first'); // HACK
+    this.selectRef.select.openMenu('first'); // HACK
 
     if (typeof window === 'undefined') return;
     window.addEventListener('keydown', this.handleKeyDown);

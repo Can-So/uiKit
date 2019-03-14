@@ -4,7 +4,14 @@ import { videoLargeFileId } from '@atlaskit/media-test-helpers';
 const emojiTestData = emoji.testData;
 const emojiStoryData = emoji.storyData;
 
-const toEmojiAttrs = emoji => {
+type EmojiAttrs = {
+  id: string;
+  shortName: string;
+  fallback?: string;
+  text?: string;
+};
+
+const toEmojiAttrs = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return {
     shortName,
@@ -13,7 +20,7 @@ const toEmojiAttrs = emoji => {
   };
 };
 
-const toEmojiId = emoji => {
+const toEmojiId = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return { shortName, id, fallback };
 };
@@ -749,10 +756,7 @@ export const document = {
     {
       type: 'heading',
       attrs: { level: 3 },
-      marks: [
-        { type: 'alignment', attrs: { align: 'end' } },
-        { type: 'indentation', attrs: { level: 3 } },
-      ],
+      marks: [{ type: 'alignment', attrs: { align: 'end' } }],
       content: [
         {
           type: 'text',

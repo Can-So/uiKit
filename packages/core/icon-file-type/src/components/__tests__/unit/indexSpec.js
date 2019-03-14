@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 
 import path from 'path';
 import fs from 'fs';
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 import BookIcon from '../../../../glyph/source-code/24';
 import DefaultIcon, { metadata } from '../../../../src';
 
@@ -91,7 +91,7 @@ describe(name, () => {
       // * renaming an icon is a breaking change
       //
       // If we were to auto-generate this list, then renaming, adding or removing would NOT
-      // break any tests and thus not hint the developer at what kind of change he/she is making
+      // break any tests and thus not hint the developer at what kind of change they are making
     });
 
     describe('bundle', () => {

@@ -16,12 +16,7 @@ import { RenderOutputStat } from '../../render-document';
 import { Wrapper } from './style';
 import { TruncatedWrapper } from './truncated-wrapper';
 
-export type RendererAppearance =
-  | 'inline-comment'
-  | 'comment'
-  | 'full-page'
-  | 'mobile'
-  | undefined;
+export type RendererAppearance = 'comment' | 'full-page' | 'mobile' | undefined;
 
 export interface Extension<T> {
   extensionKey: string;
@@ -117,7 +112,7 @@ export default class Renderer extends PureComponent<Props, {}> {
       const rendererOutput = (
         <RendererWrapper
           appearance={appearance}
-          dynamicTextSizing={allowDynamicTextSizing}
+          dynamicTextSizing={!!allowDynamicTextSizing}
         >
           {result}
         </RendererWrapper>
@@ -132,7 +127,7 @@ export default class Renderer extends PureComponent<Props, {}> {
       return (
         <RendererWrapper
           appearance={appearance}
-          dynamicTextSizing={allowDynamicTextSizing}
+          dynamicTextSizing={!!allowDynamicTextSizing}
         >
           <UnsupportedBlock />
         </RendererWrapper>
@@ -151,7 +146,16 @@ export default class Renderer extends PureComponent<Props, {}> {
   }
 }
 
-export function RendererWrapper({ appearance, children, dynamicTextSizing }) {
+type RendererWrapperProps = {
+  appearance: RendererAppearance;
+  dynamicTextSizing: boolean;
+} & { children?: React.ReactNode };
+
+export function RendererWrapper({
+  appearance,
+  children,
+  dynamicTextSizing,
+}: RendererWrapperProps) {
   return (
     <WidthProvider>
       <BaseTheme dynamicTextSizing={dynamicTextSizing}>

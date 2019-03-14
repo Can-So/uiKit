@@ -169,7 +169,7 @@ export const setGapCursorAtPos = (
 // This function captures clicks outside of the ProseMirror contentEditable area
 // see also description of "handleClick" in gap-cursor pm-plugin
 const captureCursorCoords = (
-  event: MouseEvent,
+  event: React.MouseEvent<any>,
   editorRef: HTMLElement,
   posAtCoords: (
     coords: {
@@ -178,7 +178,7 @@ const captureCursorCoords = (
     },
   ) => { pos: number; inside: number } | null | void,
   state: EditorState,
-): { position: number; side: Side } | null => {
+): { position?: number; side: Side } | null => {
   const rect = editorRef.getBoundingClientRect();
 
   // capture clicks before the first block element
@@ -215,7 +215,7 @@ const captureCursorCoords = (
 };
 
 export const setCursorForTopLevelBlocks = (
-  event: MouseEvent,
+  event: React.MouseEvent<any>,
   editorRef: HTMLElement,
   posAtCoords: (
     coords: {
@@ -223,6 +223,7 @@ export const setCursorForTopLevelBlocks = (
       top: number;
     },
   ) => { pos: number; inside: number } | null | void,
+  editorFocused: boolean,
 ): Command => (state, dispatch) => {
   // plugin is disabled
   if (!pluginKey.get(state)) {
@@ -238,7 +239,15 @@ export const setCursorForTopLevelBlocks = (
     return false;
   }
 
-  const $pos = state.doc.resolve(cursorCoords.position);
+  const $pos =
+    cursorCoords.position !== undefined
+      ? state.doc.resolve(cursorCoords.position!)
+      : null;
+
+  if ($pos === null) {
+    return false;
+  }
+
   const isGapCursorAllowed =
     cursorCoords.side === Side.LEFT
       ? isValidTargetNode($pos.nodeAfter)
@@ -258,8 +267,9 @@ export const setCursorForTopLevelBlocks = (
     }
     return true;
   }
-  // try to set text selection
-  else {
+  // try to set text selection if the editor isnt focused
+  // if the editor is focused, we are most likely dragging a selection outside.
+  else if (editorFocused === false) {
     const selection = Selection.findFrom(
       $pos,
       cursorCoords.side === Side.LEFT ? 1 : -1,

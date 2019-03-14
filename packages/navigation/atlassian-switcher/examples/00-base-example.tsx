@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
 import { Switcher, withAnalyticsLogger } from './helpers';
 import ErrorBoundary from '../src/components/error-boundary';
 
-class SwitcherExample extends Component {
+class SwitcherExample extends React.Component {
   state = {
     isDrawerOpen: true,
   };

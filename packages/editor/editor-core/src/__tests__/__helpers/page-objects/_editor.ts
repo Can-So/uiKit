@@ -1,6 +1,7 @@
 import { Page } from './_types';
 export const selectors = {
   editor: '.ProseMirror',
+  scrollContainer: '.fabric-editor-popup-scroll-parent',
   dropList: 'div[data-role="droplistContent"]',
   emojiPicker: 'div[data-emoji-picker-container="true"]',
   mentionQuery: 'span[data-type-ahead-query]',
@@ -21,8 +22,20 @@ const replaceInputStr = (str: string) => {
   return `concat('${str.replace(/'/g, `', "'", '`)}', '')`;
 };
 
+const getElementPathWithText = (text: string, htmlTag: string = 'span') =>
+  `//${htmlTag}[contains(text(), ${replaceInputStr(text)})]`;
+
+export const waitForElementWithText = async (
+  page: Page,
+  text: string,
+  htmlTag = 'span',
+) => {
+  const elementPath = getElementPathWithText(text, htmlTag);
+  await page.waitForXPath(elementPath, 5000);
+};
+
 export const clickElementWithText = async ({ page, tag, text }) => {
-  const elementPath = `//${tag}[contains(text(), ${replaceInputStr(text)})]`;
+  const elementPath = getElementPathWithText(text, tag);
   await page.waitForXPath(elementPath, 5000);
   const target = await page.$x(elementPath);
   expect(target.length).toBeGreaterThan(0);

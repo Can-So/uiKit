@@ -7,5 +7,8 @@ export const IEMaxHeightCalcPx = 1;
  * For more information see https://github.com/philipwalton/flexbugs/issues/216
  */
 export const flexMaxHeightIEFix = `
-  max-height: calc(100% - ${IEMaxHeightCalcPx}px);
+  max-height: 100%;
+  @media only screen and (-ms-high-contrast:active), (-ms-high-contrast:none) {
+    max-height: calc(100% - ${IEMaxHeightCalcPx}px);
+  }
 `;

@@ -247,6 +247,7 @@ const calculateVerticalStickTop = ({
   popup,
   offset,
   position,
+  placement,
 }: {
   target: HTMLElement;
   targetTop: number;
@@ -257,6 +258,7 @@ const calculateVerticalStickTop = ({
   popup: HTMLElement;
   offset: Array<number>;
   position: Position;
+  placement: string;
 }): Position => {
   const scrollParent = findOverflowScrollParent(target);
   const newPos = { ...position };
@@ -266,18 +268,29 @@ const calculateVerticalStickTop = ({
     const topBoundary = targetTop - scrollParentTop;
     const scrollParentScrollTop = scrollParent.scrollTop;
     if (topBoundary < 0) {
-      if (
+      const isBelowNodeBoundary =
         targetTop +
           (scrollParentScrollTop - scrollParentTop) +
           targetHeight +
           offset[1] <
-        scrollParentScrollTop
-      ) {
-        newPos.bottom =
-          popupOffsetParentHeight -
-          (topBoundary + popupOffsetParent.scrollTop + targetHeight);
-      } else {
-        newPos.bottom = topBoundary + (newPos.bottom || 0);
+        scrollParentScrollTop;
+
+      if (placement === 'top') {
+        if (isBelowNodeBoundary) {
+          newPos.bottom =
+            popupOffsetParentHeight -
+            (topBoundary + popupOffsetParent.scrollTop + targetHeight);
+        } else {
+          newPos.bottom = topBoundary + (newPos.bottom || 0);
+        }
+      }
+
+      if (placement === 'start') {
+        if (isBelowNodeBoundary) {
+          newPos.top = topBoundary + popupOffsetParent.scrollTop + targetHeight;
+        } else {
+          newPos.top = Math.abs(topBoundary) + (newPos.top || 0) + offset[1];
+        }
       }
     }
   }
@@ -403,25 +416,25 @@ export function calculatePosition({
   });
 
   position = { ...position, ...verticalPosition };
-
-  if (verticalPlacement !== 'top' && stick) {
-    position = calculateVerticalStickBottom({
-      target,
-      targetTop,
-      targetHeight,
-      popup,
-      offset,
-      position,
-    });
-  }
-
-  if (verticalPlacement === 'top' && stick) {
+  if ((verticalPlacement === 'top' || verticalPlacement === 'start') && stick) {
     position = calculateVerticalStickTop({
       target,
       targetTop,
       targetHeight,
       popupOffsetParentHeight,
       popupOffsetParent,
+      popup,
+      offset,
+      position,
+      placement: verticalPlacement,
+    });
+  }
+
+  if (verticalPlacement !== 'top' && verticalPlacement !== 'start' && stick) {
+    position = calculateVerticalStickBottom({
+      target,
+      targetTop,
+      targetHeight,
       popup,
       offset,
       position,

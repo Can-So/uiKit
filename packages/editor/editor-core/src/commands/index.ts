@@ -14,6 +14,14 @@ import {
 import { canMoveDown, canMoveUp } from '../utils';
 import { Command } from '../types';
 import { EditorView } from 'prosemirror-view';
+import {
+  withAnalytics,
+  EVENT_TYPE,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+} from '../plugins/analytics';
+import { AlignmentState } from '../plugins/alignment/pm-plugins/main';
 
 export function preventDefault(): Command {
   return function(state, dispatch) {
@@ -48,6 +56,13 @@ export function insertNewLine(): Command {
     return false;
   };
 }
+
+export const insertNewLineWithAnalytics = withAnalytics({
+  action: ACTION.INSERTED,
+  actionSubject: ACTION_SUBJECT.TEXT,
+  actionSubjectId: ACTION_SUBJECT_ID.LINE_BREAK,
+  eventType: EVENT_TYPE.TRACK,
+})(insertNewLine());
 
 export function insertRule(): Command {
   return function(state, dispatch) {
@@ -204,7 +219,10 @@ export interface Command {
   ): boolean;
 }
 
-export const changeImageAlignment = (align): Command => (state, dispatch) => {
+export const changeImageAlignment = (align?: AlignmentState): Command => (
+  state,
+  dispatch,
+) => {
   const { from, to } = state.selection;
 
   const tr = state.tr;

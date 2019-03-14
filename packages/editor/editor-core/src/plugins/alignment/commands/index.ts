@@ -1,7 +1,7 @@
 import { AlignmentState } from '../pm-plugins/main';
 import { toggleBlockMark, changeImageAlignment } from '../../../commands';
-import { Command } from '../../../types/command';
-import { EditorState } from 'prosemirror-state';
+import { Command, CommandDispatch } from '../../../types/command';
+import { EditorState, Transaction } from 'prosemirror-state';
 
 /**
  * Iterates over the commands one after the other,
@@ -9,12 +9,12 @@ import { EditorState } from 'prosemirror-state';
  */
 export const cascadeCommands = (cmds: Array<Command>) => (
   state: EditorState,
-  dispatch,
+  dispatch?: CommandDispatch,
 ) => {
   let { tr: baseTr } = state;
   let shouldDispatch = false;
 
-  const onDispatchAction = tr => {
+  const onDispatchAction = (tr: Transaction) => {
     tr.steps.forEach(st => {
       baseTr.step(st);
     });

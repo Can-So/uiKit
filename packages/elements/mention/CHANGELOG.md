@@ -1,5 +1,29 @@
 # @atlaskit/mention
 
+## 16.4.0
+- [minor] [fb679d390f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb679d390f):
+
+  - Add a new TeamMenioResource for @atlaskit/mention package. That allows to fetch teams data for mention from a team service (Legion service)
+
+## 16.3.0
+- [minor] [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
+
+  - use @atlaskit/ssr to ssr/hydrate mention examples
+
+## 16.2.2
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/icon@16.0.4
+  - @atlaskit/analytics-gas-types@3.2.5
+  - @atlaskit/util-data-test@10.2.3
+  - @atlaskit/util-service-support@3.1.1
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/analytics-next@4.0.0
+  - @atlaskit/analytics@5.0.0
+  - @atlaskit/avatar@15.0.0
+  - @atlaskit/lozenge@7.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/tooltip@13.0.0
+
 ## 16.2.1
 - Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
   - @atlaskit/editor-test-helpers@7.0.0

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { EditorView } from 'prosemirror-view';
 import Button, { ButtonGroup } from '@atlaskit/button';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import WithEditorActions from './../src/ui/WithEditorActions';
@@ -7,11 +8,14 @@ import {
   LOCALSTORAGE_defaultDocKey,
   LOCALSTORAGE_defaultTitleKey,
 } from './5-full-page';
+import { EditorActions } from '../src';
 
-export const SaveAndCancelButtons = props => (
+export const SaveAndCancelButtons = (props: {
+  editorActions: EditorActions;
+}) => (
   <ButtonGroup>
     <Button
-      tabIndex="-1"
+      tabIndex={-1}
       appearance="primary"
       onClick={() => {
         location.href = location.href.replace('editor-core', 'renderer');
@@ -20,7 +24,7 @@ export const SaveAndCancelButtons = props => (
       Publish
     </Button>
     <Button
-      tabIndex="-1"
+      tabIndex={-1}
       appearance="subtle"
       onClick={() => {
         props.editorActions.clear();
@@ -37,7 +41,7 @@ export type Props = {};
 export default class ExampleEditor extends React.Component<Props> {
   transformer = new JSONTransformer();
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     // opens an iframe
@@ -58,7 +62,7 @@ export default class ExampleEditor extends React.Component<Props> {
     });
   }
 
-  private handleOnChange = editorView => {
+  private handleOnChange = (editorView: EditorView) => {
     const value = JSON.stringify(
       this.transformer.encode(editorView.state.doc),
       null,

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { EditorView } from 'prosemirror-view';
 import { mention, emoji, taskDecision } from '@atlaskit/util-data-test';
 import { ReactRenderer } from '@atlaskit/renderer';
 
@@ -24,7 +25,7 @@ export interface State {
 export default class ToolsDrawer extends React.Component<any, State> {
   private providerFactory: ProviderFactory;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
 
     this.providerFactory = new ProviderFactory();
@@ -45,13 +46,13 @@ export default class ToolsDrawer extends React.Component<any, State> {
     };
   }
 
-  private onChange = editorView => {
+  private onChange = (editorView: EditorView) => {
     this.setState({
       jsonDocument: JSON.stringify(toJSON(editorView.state.doc), null, 2),
     });
   };
 
-  private renderRenderer(doc) {
+  private renderRenderer(doc: string = '') {
     try {
       const props: any = {
         document: JSON.parse(doc),

@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
+import { CancelableEvent } from '@atlaskit/quick-search';
+import AdvancedSearchResult from '../../components/AdvancedSearchResult';
 import SearchConfluenceItem, {
   Props,
 } from '../../components/SearchConfluenceItem';
@@ -31,4 +33,22 @@ it('should append the url encoded query', () => {
   expect(wrapper.prop('href')).toEqual(
     '/wiki/dosearchsite.action?queryString=test%20query',
   );
+});
+
+it('should call onClick', () => {
+  const spy = jest.fn();
+  const wrapper = render({ query: 'test query', onClick: spy });
+  const advnacedComponent = wrapper.find(AdvancedSearchResult);
+  expect(advnacedComponent.exists()).toBe(true);
+  const onClick = advnacedComponent.prop('onClick');
+  const resultData = {
+    resultId: 'resultId',
+    event: { preventDefault() {} } as CancelableEvent,
+    type: 'content',
+  };
+  if (onClick) {
+    onClick(resultData);
+  }
+  expect(spy).toBeCalledTimes(1);
+  expect(spy).toBeCalledWith(resultData);
 });

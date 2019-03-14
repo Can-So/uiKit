@@ -14,17 +14,19 @@ import { NodeConfig, MarkConfig } from './editor-config';
 import { EditorProps, EditorAppearance } from './editor-props';
 import { AnalyticsEventPayload } from '../plugins/analytics';
 
+export type PMPluginFactoryParams = {
+  schema: Schema;
+  props: EditorProps;
+  dispatch: Dispatch;
+  eventDispatcher: EventDispatcher;
+  providerFactory: ProviderFactory;
+  errorReporter: ErrorReporter;
+  portalProviderAPI: PortalProviderAPI;
+  reactContext: () => { [key: string]: any };
+};
+
 export type PMPluginFactory = (
-  params: {
-    schema: Schema;
-    props: EditorProps;
-    dispatch: Dispatch;
-    eventDispatcher: EventDispatcher;
-    providerFactory: ProviderFactory;
-    errorReporter: ErrorReporter;
-    portalProviderAPI: PortalProviderAPI;
-    reactContext: () => { [key: string]: any };
-  },
+  params: PMPluginFactoryParams,
 ) => Plugin | undefined;
 
 export type UiComponentFactoryParams = {

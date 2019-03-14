@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
+import { Context } from '@atlaskit/media-core';
 import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
   akEditorWideLayoutWidth,
@@ -57,16 +58,19 @@ export default class ResizableMediaSingle extends React.Component<
   }
 
   async componentDidMount() {
-    this.checkVideoFile(this.props.viewContext);
+    const { viewContext } = this.props;
+    if (viewContext) {
+      this.checkVideoFile(viewContext);
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (this.props.viewContext !== nextProps.viewContext) {
       this.checkVideoFile(nextProps.viewContext);
     }
   }
 
-  async checkVideoFile(viewContext) {
+  async checkVideoFile(viewContext?: Context) {
     const $pos = this.$pos;
     if (!$pos || !viewContext) {
       return;

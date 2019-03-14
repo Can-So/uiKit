@@ -1,5 +1,120 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.15.0
+- [minor] [29870e89f2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29870e89f2):
+
+  - Enable noImplicitAny for mobile bridge
+
+## 6.14.2
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-core@105.0.0
+  - @atlaskit/editor-test-helpers@7.0.6
+  - @atlaskit/renderer@43.0.0
+  - @atlaskit/emoji@57.0.0
+  - @atlaskit/editor-json-transformer@4.3.5
+  - @atlaskit/task-decision@12.0.1
+  - @atlaskit/media-core@28.0.0
+
+## 6.14.1
+- Updated dependencies [72c6f68226](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72c6f68226):
+  - @atlaskit/editor-core@104.1.1
+  - @atlaskit/renderer@42.0.1
+  - @atlaskit/task-decision@12.0.0
+
+## 6.14.0
+- [minor] [efc3cdd52e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/efc3cdd52e):
+
+  - ED-6354: added bridge for sending JS errors to native
+
+## 6.13.7
+- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+  - @atlaskit/editor-json-transformer@4.3.4
+  - @atlaskit/editor-test-helpers@7.0.5
+  - @atlaskit/task-decision@11.3.2
+  - @atlaskit/editor-core@104.0.0
+  - @atlaskit/renderer@42.0.0
+
+## 6.13.6
+- [patch] [5e319bb725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e319bb725):
+
+  - ED-6286: fix post-PR for media upload on mobile
+
+## 6.13.5
+- [patch] [4bb4f46a6f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4bb4f46a6f):
+
+  - ED-5603: fixed updating links on mobile
+
+## 6.13.4
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/editor-core@103.0.3
+  - @atlaskit/editor-json-transformer@4.3.3
+  - @atlaskit/renderer@41.2.1
+  - @atlaskit/emoji@56.2.1
+  - @atlaskit/mention@16.2.2
+  - @atlaskit/status@0.5.1
+  - @atlaskit/task-decision@11.3.1
+  - @atlaskit/media-core@27.2.3
+  - @atlaskit/editor-common@33.0.3
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/form@5.1.8
+  - @atlaskit/select@8.0.0
+  - @atlaskit/textfield@0.3.0
+  - @atlaskit/theme@8.0.0
+
+## 6.13.3
+- Updated dependencies [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
+  - @atlaskit/editor-json-transformer@4.3.2
+  - @atlaskit/editor-core@103.0.0
+  - @atlaskit/editor-test-helpers@7.0.4
+
+## 6.13.2
+- Updated dependencies [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+  - @atlaskit/editor-core@102.1.10
+  - @atlaskit/renderer@41.1.1
+  - @atlaskit/emoji@56.2.0
+  - @atlaskit/status@0.5.0
+  - @atlaskit/task-decision@11.3.0
+
+## 6.13.1
+- [patch] [59fcd0bbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59fcd0bbc9):
+
+  - FM-1618: fixed media upload on mobile
+
+## 6.13.0
+- [minor] [6032a39f1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6032a39f1a):
+
+  - ED-6189: registered insertBlockType() on mobile bridge
+
+## 6.12.2
+- Updated dependencies [e9b824bf86](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9b824bf86):
+  - @atlaskit/form@5.1.7
+  - @atlaskit/textfield@0.2.0
+
+## 6.12.1
+- Updated dependencies [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+  - @atlaskit/editor-core@102.1.1
+  - @atlaskit/renderer@41.0.1
+  - @atlaskit/emoji@56.1.0
+  - @atlaskit/status@0.4.0
+
+## 6.12.0
+- [minor] [d18b085e2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d18b085e2a):
+
+  - Integrating truly upfront ID
+
+## 6.11.1
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/editor-core@102.0.0
+  - @atlaskit/renderer@41.0.0
+  - @atlaskit/emoji@56.0.0
+  - @atlaskit/editor-json-transformer@4.3.1
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/task-decision@11.2.3
+  - @atlaskit/media-core@27.2.0
+
 ## 6.11.0
 - [minor] [27189951b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27189951b5):
 

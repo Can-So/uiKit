@@ -3,6 +3,7 @@ import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
 import { findDomRefAtPos } from 'prosemirror-utils';
+import { gridSize } from '@atlaskit/theme';
 import {
   tableCellMinWidth,
   akEditorTableNumberColumnWidth,
@@ -24,14 +25,26 @@ import {
   insertColgroupFromNode as recreateResizeColsByNode,
 } from '../../utils';
 import { closestElement } from '../../../../utils';
-import { getLayoutSize, tableLayoutToSize } from './utils';
+import {
+  getLayoutSize,
+  getDefaultLayoutMaxWidth,
+  tableLayoutToSize,
+} from './utils';
 
-export function updateColumnWidth(view, cell, movedWidth, resizer) {
+export function updateColumnWidth(
+  view: EditorView,
+  cell: number,
+  movedWidth: number,
+  resizer: Resizer,
+) {
   let $cell = view.state.doc.resolve(cell);
   let table = $cell.node(-1);
   let map = TableMap.get(table);
   let start = $cell.start(-1);
-  let col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
+  let col =
+    map.colCount($cell.pos - start) +
+    ($cell.nodeAfter ? $cell.nodeAfter.attrs.colspan : 1) -
+    1;
 
   const newState = resizer.resize(col, movedWidth);
   const tr = applyColumnWidths(view, newState, table, start);
@@ -41,14 +54,19 @@ export function updateColumnWidth(view, cell, movedWidth, resizer) {
   }
 }
 
-export function applyColumnWidths(view, state, table, start) {
+export function applyColumnWidths(
+  view: EditorView,
+  state: ResizeState,
+  table: PMNode,
+  start: number,
+) {
   let tr = view.state.tr;
   let map = TableMap.get(table);
 
   for (let i = 0; i < state.cols.length; i++) {
     const width = state.cols[i].width;
     // we need to recalculate table node to pick up attributes from the previous loop iteration
-    table = tr.doc.nodeAt(start - 1);
+    table = tr.doc.nodeAt(start - 1)!;
 
     for (let row = 0; row < map.height; row++) {
       let mapIndex = row * map.width + i;
@@ -57,7 +75,7 @@ export function applyColumnWidths(view, state, table, start) {
         continue;
       }
       let pos = map.map[mapIndex];
-      let { attrs } = table.nodeAt(pos);
+      let { attrs } = table.nodeAt(pos) || { attrs: {} };
       let index = attrs.colspan === 1 ? 0 : i - map.colCount(pos);
 
       if (attrs.colwidth && attrs.colwidth[index] === width) {
@@ -69,7 +87,7 @@ export function applyColumnWidths(view, state, table, start) {
         : Array.from({ length: attrs.colspan }, _ => 0);
 
       colwidth[index] = width;
-      tr = tr.setNodeMarkup(start + pos, null, { ...attrs, colwidth });
+      tr = tr.setNodeMarkup(start + pos, undefined, { ...attrs, colwidth });
     }
   }
   return tr;
@@ -78,13 +96,14 @@ export function applyColumnWidths(view, state, table, start) {
 export function handleBreakoutContent(
   view: EditorView,
   elem: HTMLElement,
+  cellPos: number,
   start: number,
   minWidth: number,
   node: PMNode,
 ) {
-  const colIdx = Array.from((elem.parentNode as HTMLElement).children).indexOf(
-    elem,
-  );
+  const map = TableMap.get(node);
+  const rect = map.findCell(cellPos - start);
+  const colIdx = rect.left;
 
   const cellStyle = getComputedStyle(elem);
   const amount = addContainerLeftRightPadding(
@@ -101,13 +120,18 @@ export function handleBreakoutContent(
   }
 }
 
-export function resizeColumn(view, cell, width, resizer) {
+export function resizeColumn(
+  view: EditorView,
+  cell: number,
+  width: number,
+  resizer: Resizer,
+) {
   let $cell = view.state.doc.resolve(cell);
   let table = $cell.node(-1);
   let start = $cell.start(-1);
   let col =
     TableMap.get(table).colCount($cell.pos - start) +
-    $cell.nodeAfter.attrs.colspan -
+    $cell.nodeAfter!.attrs.colspan -
     1;
 
   const newState = resizer.resize(col, width);
@@ -178,19 +202,29 @@ export const updateControls = (state: EditorState) => {
     ClassName.NUMBERED_COLUMN_BUTTON,
   );
 
+  const getWidth = (element: HTMLElement): number => {
+    const rect = element.getBoundingClientRect();
+    return rect ? rect.width : element.offsetWidth;
+  };
+
+  const getHeight = (element: HTMLElement): number => {
+    const rect = element.getBoundingClientRect();
+    return rect ? rect.height : element.offsetHeight;
+  };
+
   // update column controls width on resize
   for (let i = 0, count = columnControls.length; i < count; i++) {
     if (cols[i]) {
-      columnControls[i].style.width = `${cols[i].offsetWidth + 1}px`;
+      columnControls[i].style.width = `${getWidth(cols[i]) + 1}px`;
     }
   }
   // update rows controls height on resize
   for (let i = 0, count = rowControls.length; i < count; i++) {
     if (rows[i]) {
-      rowControls[i].style.height = `${rows[i].offsetHeight + 1}px`;
+      rowControls[i].style.height = `${getHeight(rows[i]) + 1}px`;
 
       if (numberedRows.length) {
-        numberedRows[i].style.height = `${rows[i].offsetHeight + 1}px`;
+        numberedRows[i].style.height = `${getHeight(rows[i]) + 1}px`;
       }
     }
   }
@@ -219,23 +253,38 @@ export function scaleTable(
   pos: number,
   containerWidth: number | undefined,
   initialScale?: boolean,
+  parentWidth?: number,
   dynamicTextSizing?: boolean,
 ) {
   if (!tableElem) {
     return;
   }
 
+  // If a table has not been resized yet, columns should be auto.
+  if (hasTableBeenResized(node) === false) {
+    // If its not a re-sized table, we still want to re-create cols
+    // To force reflow of columns upon delete.
+    recreateResizeColsByNode(tableElem, node);
+    return;
+  }
+
   const start = pos + 1;
-  const state = scale(
-    view,
-    tableElem,
-    node,
-    start,
-    prevNode,
-    containerWidth,
-    initialScale,
-    dynamicTextSizing,
-  );
+
+  let state;
+  if (parentWidth) {
+    state = scaleWithParent(view, tableElem, parentWidth, node, start);
+  } else {
+    state = scale(
+      view,
+      tableElem,
+      node,
+      start,
+      prevNode,
+      containerWidth,
+      initialScale,
+      dynamicTextSizing,
+    );
+  }
 
   if (state) {
     const tr = applyColumnWidths(view, state, node, start);
@@ -259,29 +308,23 @@ function scale(
   node: PMNode,
   start: number,
   prevNode: PMNode,
-  containerWidth: number | undefined,
+  containerWidth?: number,
   initialScale?: boolean,
   dynamicTextSizing?: boolean,
 ): ResizeState | undefined {
-  // If a table has not been resized yet, columns should be auto.
-  if (hasTableBeenResized(node) === false) {
-    // If its not a re-sized table, we still want to re-create cols
-    // To force reflow of columns upon delete.
-    recreateResizeColsByNode(tableElem, node);
-    return;
+  const maxSize = getLayoutSize(
+    node.attrs.layout,
+    containerWidth,
+    dynamicTextSizing,
+  );
+
+  const prevTableWidth = getTableWidth(prevNode);
+  const previousLayout = prevNode.attrs.layout;
+
+  let previousMaxSize = tableLayoutToSize[previousLayout];
+  if (dynamicTextSizing && previousLayout === 'default') {
+    previousMaxSize = getDefaultLayoutMaxWidth(containerWidth);
   }
-
-  const maxSize = getLayoutSize(node.attrs.layout, containerWidth);
-  const resizer = Resizer.fromDOM(view, tableElem, {
-    minWidth: tableCellMinWidth,
-    maxSize,
-    node,
-    start,
-  });
-
-  let newWidth = maxSize;
-  let prevTableWidth = getTableWidth(prevNode);
-  let previousMaxSize = tableLayoutToSize[prevNode.attrs.layout];
 
   if (!initialScale) {
     previousMaxSize = getLayoutSize(
@@ -290,6 +333,8 @@ function scale(
       dynamicTextSizing,
     );
   }
+
+  let newWidth = maxSize;
 
   // Determine if table was overflow
   if (prevTableWidth > previousMaxSize) {
@@ -301,7 +346,38 @@ function scale(
     newWidth -= akEditorTableNumberColumnWidth;
   }
 
+  const resizer = Resizer.fromDOM(view, tableElem, {
+    minWidth: tableCellMinWidth,
+    maxSize,
+    node,
+    start,
+  });
+
   return resizer.scale(newWidth);
+}
+
+function scaleWithParent(
+  view: EditorView,
+  tableElem: HTMLTableElement,
+  parentWidth: number,
+  tableNode: PMNode,
+  start: number,
+) {
+  const resizer = Resizer.fromDOM(view, tableElem, {
+    minWidth: tableCellMinWidth,
+    maxSize: parentWidth,
+    node: tableNode,
+    start,
+  });
+
+  // Need to acount for the padding of the extension.
+  parentWidth -= gridSize() * 4;
+
+  if (tableNode.attrs.isNumberColumnEnabled) {
+    parentWidth -= akEditorTableNumberColumnWidth;
+  }
+
+  return resizer.scale(Math.floor(parentWidth));
 }
 
 /**

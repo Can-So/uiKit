@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { EmailValidator } from './components/emailValidation';
 
 export type UserPickerProps = {
   /** List of users or teams to be used as options by the user picker. */
@@ -31,6 +32,8 @@ export type UserPickerProps = {
   onBlur?: OnPicker;
   /** Callback for when the value/s in the picker is cleared. */
   onClear?: OnPicker;
+  /** Callback that is triggered when popup picker is closed */
+  onClose?: OnPicker;
   /** Appearance of the user picker. */
   appearance?: Appearance;
   /** Display the picker with a subtle style. */
@@ -59,6 +62,13 @@ export type UserPickerProps = {
   emailLabel?: string;
   /** Whether to disable interaction with the input */
   disableInput?: boolean;
+  /** Override default email validation function. */
+  isValidEmail?: EmailValidator;
+};
+
+export type PopupUserPickerProps = UserPickerProps & {
+  /** Whether to use the popup version of the single picker */
+  target: Target;
 };
 
 export type UserPickerState = {
@@ -69,7 +79,6 @@ export type UserPickerState = {
   hoveringClearIndicator: boolean;
   menuIsOpen: boolean;
   inputValue: string;
-  preventFilter: boolean;
 };
 
 export interface HighlightRange {
@@ -173,3 +182,5 @@ export type AtlasKitSelectChange = (
 ) => void;
 
 export type Appearance = 'normal' | 'compact';
+
+export type Target = (withRef: { ref: any }) => any;

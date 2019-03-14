@@ -6,7 +6,8 @@ const mockEditorCore = {
   toggleOrderedList: jest.fn(() => () => {}),
   toggleBulletList: jest.fn(() => () => {}),
   insertLink: jest.fn(() => () => {}),
-  isTextAtPos: jest.fn(pos => () => pos === 2),
+  isTextAtPos: jest.fn(pos => () => [2, 6].indexOf(pos) !== -1),
+  isLinkAtPos: jest.fn(pos => () => pos === 6),
   setLinkHref: jest.fn(() => () => mockCalls.push('setLinkHref')),
   setLinkText: jest.fn(() => () => mockCalls.push('setLinkText')),
 };
@@ -20,6 +21,7 @@ import {
   toggleBulletList,
   insertLink,
   isTextAtPos,
+  isLinkAtPos,
   setLinkHref,
   setLinkText,
 } from '@atlaskit/editor-core';
@@ -31,6 +33,7 @@ afterEach(() => {
   (toggleBulletList as jest.Mock<{}>).mockClear();
   (insertLink as jest.Mock<{}>).mockClear();
   (isTextAtPos as jest.Mock<{}>).mockClear();
+  (isLinkAtPos as jest.Mock<{}>).mockClear();
   (setLinkHref as jest.Mock<{}>).mockClear();
   (setLinkText as jest.Mock<{}>).mockClear();
 });
@@ -135,6 +138,8 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('text', 'url');
+
+    expect(isTextAtPos).toHaveBeenCalledWith(1);
     expect(insertLink).toHaveBeenCalledWith(1, 3, 'url', 'text');
   });
 
@@ -148,6 +153,9 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('text', 'url');
+
+    expect(isTextAtPos).toHaveBeenCalledWith(2);
+    expect(isLinkAtPos).toHaveBeenCalledWith(2);
     expect(setLinkHref).toHaveBeenCalledWith('url', 2, undefined);
     expect(setLinkText).toHaveBeenCalledWith('text', 2, undefined);
     expect(mockCalls).toEqual(
@@ -166,6 +174,9 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('text', 'url');
+
+    expect(isTextAtPos).toHaveBeenCalledWith(2);
+    expect(isLinkAtPos).toHaveBeenCalledWith(2);
     expect(setLinkHref).toHaveBeenCalledWith('url', 2, 4);
     expect(setLinkText).toHaveBeenCalledWith('text', 2, 4);
     expect(mockCalls).toEqual(
@@ -183,8 +194,14 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('', 'url');
+
+    expect(isTextAtPos).toHaveBeenCalledWith(2);
+    expect(isLinkAtPos).toHaveBeenCalledWith(2);
     expect(setLinkHref).toHaveBeenCalledWith('url', 2, undefined);
     expect(setLinkText).toHaveBeenCalledWith('', 2, undefined);
+    expect(mockCalls).toEqual(
+      expect.arrayContaining(['setLinkHref', 'setLinkText']),
+    );
   });
 
   it('should call setLinkHref then setLinkText when providing url only + selection', () => {
@@ -198,8 +215,38 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('', 'url');
+
+    expect(isTextAtPos).toHaveBeenCalledWith(2);
+    expect(isLinkAtPos).toHaveBeenCalledWith(2);
     expect(setLinkHref).toHaveBeenCalledWith('url', 2, 4);
     expect(setLinkText).toHaveBeenCalledWith('', 2, 4);
+    expect(mockCalls).toEqual(
+      expect.arrayContaining(['setLinkHref', 'setLinkText']),
+    );
+  });
+
+  it('should call setLinkHref then setLinkText using full link when on a link', () => {
+    bridge.editorView = {
+      state: {
+        doc: {
+          resolve: jest.fn(() => ({ textOffset: 1 })),
+        },
+        selection: {
+          from: 6, // mock will resolve pos as link
+        },
+      },
+    };
+
+    bridge.onLinkUpdate('link', 'href');
+
+    expect(isTextAtPos).toHaveBeenCalledWith(6);
+    expect(isLinkAtPos).toHaveBeenCalledWith(6);
+    expect(bridge.editorView.state.doc.resolve).toHaveBeenCalledWith(6);
+    expect(setLinkHref).toHaveBeenCalledWith('href', 5, undefined);
+    expect(setLinkText).toHaveBeenCalledWith('link', 5, undefined);
+    expect(mockCalls).toEqual(
+      expect.arrayContaining(['setLinkHref', 'setLinkText']),
+    );
   });
 
   it('should call setLinkText then setLinkHref when providing no url', () => {
@@ -212,6 +259,9 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('text', '');
+
+    expect(isTextAtPos).toHaveBeenCalledWith(2);
+    expect(isLinkAtPos).toHaveBeenCalledWith(2);
     expect(setLinkHref).toHaveBeenCalledWith('', 2, undefined);
     expect(setLinkText).toHaveBeenCalledWith('text', 2, undefined);
     expect(mockCalls).toEqual(
@@ -230,6 +280,9 @@ describe('links should work', () => {
     };
 
     bridge.onLinkUpdate('text', '');
+
+    expect(isTextAtPos).toHaveBeenCalledWith(2);
+    expect(isLinkAtPos).toHaveBeenCalledWith(2);
     expect(setLinkHref).toHaveBeenCalledWith('', 2, 4);
     expect(setLinkText).toHaveBeenCalledWith('text', 2, 4);
     expect(mockCalls).toEqual(

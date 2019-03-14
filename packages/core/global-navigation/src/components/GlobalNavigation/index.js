@@ -7,11 +7,13 @@ import { NotificationIndicator } from '@atlaskit/notification-indicator';
 import { NotificationLogClient } from '@atlaskit/notification-log-client';
 import { GlobalNav } from '@atlaskit/navigation-next';
 import Drawer from '@atlaskit/drawer';
-import AtlassianSwitcher from '@atlaskit/atlassian-switcher';
+import AtlassianSwitcher, {
+  AtlassianSwitcherPrefetchTrigger,
+} from '@atlaskit/atlassian-switcher';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../package.json';
+} from '../../version.json';
 import generateDefaultConfig from '../../config/default-config';
 import generateProductConfig from '../../config/product-config';
 import ItemComponent from '../ItemComponent';
@@ -19,7 +21,7 @@ import ScreenTracker from '../ScreenTracker';
 import { analyticsIdMap, fireDrawerDismissedEvents } from './analytics';
 import NotificationDrawerContents from '../../platform-integration';
 
-import type { NavItem } from '../../config/types';
+import type { GlobalNavItemData, NavItem } from '../../config/types';
 import type { GlobalNavigationProps, DrawerName } from './types';
 
 const noop = () => {};
@@ -290,6 +292,21 @@ export default class GlobalNavigation extends Component<
     }
   };
 
+  CustomizedItemComponent = (props: GlobalNavItemData) => {
+    if (
+      this.shouldRenderAtlassianSwitcher &&
+      props.id === 'atlassianSwitcher'
+    ) {
+      return (
+        <AtlassianSwitcherPrefetchTrigger cloudId={this.props.cloudId}>
+          <ItemComponent {...props} />
+        </AtlassianSwitcherPrefetchTrigger>
+      );
+    }
+
+    return <ItemComponent {...props} />;
+  };
+
   renderNotificationBadge = () => {
     if (this.state.isNotificationDrawerOpen) {
       // Unmount the badge when the drawer is open
@@ -374,12 +391,15 @@ export default class GlobalNavigation extends Component<
   };
 
   renderAtlassianSwitcherDrawerContents = () => {
-    const { product, cloudId } = this.props;
+    // eslint-disable-next-line camelcase
+    const { product, cloudId, experimental_enableSplitJira } = this.props;
     return (
       <AtlassianSwitcher
-        product={product}
         cloudId={cloudId}
+        product={product}
         triggerXFlow={this.triggerXFlow}
+        // eslint-disable-next-line camelcase
+        enableSplitJira={experimental_enableSplitJira}
       />
     );
   };
@@ -413,7 +433,7 @@ export default class GlobalNavigation extends Component<
       >
         <Fragment>
           <GlobalNav
-            itemComponent={ItemComponent}
+            itemComponent={this.CustomizedItemComponent}
             primaryItems={primaryItems}
             secondaryItems={secondaryItems}
           />

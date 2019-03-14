@@ -37,7 +37,11 @@ export const fireAnalytics = (properties = {}) =>
 //
 // This row only spans two columns, yet it contains widths for 3.
 // We remove the third width here, assumed duplicate content.
-export const removeExtraneousColumnWidths = (node, basePos, tr) => {
+export const removeExtraneousColumnWidths = (
+  node: PMNode,
+  basePos: number,
+  tr: Transaction,
+) => {
   let hasProblems = false;
 
   tr = replaceCells(tr, node, basePos, cell => {
@@ -91,6 +95,7 @@ export const fixAutoSizedTable = (
   tableNode: PMNode,
   tableRef: HTMLTableElement,
   tablePos: number,
+  opts: { dynamicTextSizing: boolean; containerWidth: number },
 ): Transaction => {
   let { tr } = view.state;
   const domAtPos = view.domAtPos.bind(view);
@@ -106,7 +111,11 @@ export const fixAutoSizedTable = (
     0,
   );
   const tableLayout = getLayoutBasedOnWidth(totalContentWidth);
-  const maxLayoutSize = getLayoutSize(tableLayout);
+  const maxLayoutSize = getLayoutSize(
+    tableLayout,
+    opts.containerWidth,
+    opts.dynamicTextSizing,
+  );
 
   // Content width will generally not meet the constraints of the layout
   // whether it be below or above, so we scale our columns widths

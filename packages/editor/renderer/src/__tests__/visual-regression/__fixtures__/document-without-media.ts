@@ -3,7 +3,14 @@ import { emoji } from '@atlaskit/util-data-test';
 const emojiTestData = emoji.testData;
 const emojiStoryData = emoji.storyData;
 
-const toEmojiAttrs = emoji => {
+type EmojiAttrs = {
+  id: string;
+  shortName: string;
+  fallback?: string;
+  text?: string;
+};
+
+const toEmojiAttrs = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return {
     shortName,
@@ -12,7 +19,7 @@ const toEmojiAttrs = emoji => {
   };
 };
 
-const toEmojiId = emoji => {
+const toEmojiId = (emoji: EmojiAttrs): EmojiAttrs => {
   const { shortName, id, fallback } = emoji;
   return { shortName, id, fallback };
 };
@@ -177,11 +184,94 @@ export const document = {
         },
         {
           type: 'text',
-          text: ' red text',
+          text: ' red text ',
           marks: [
             {
               type: 'textColor',
-              attrs: { color: '#ff0000' },
+              attrs: {
+                color: '#ff0000',
+              },
+            },
+          ],
+        },
+        {
+          type: 'text',
+          text: 'strike-through',
+          marks: [
+            {
+              type: 'strike',
+            },
+            {
+              type: 'textColor',
+              attrs: {
+                color: '#ff0000',
+              },
+            },
+          ],
+        },
+        {
+          type: 'text',
+          text: ' ',
+          marks: [
+            {
+              type: 'textColor',
+              attrs: {
+                color: '#ff0000',
+              },
+            },
+          ],
+        },
+        {
+          type: 'text',
+          text: 'underline',
+          marks: [
+            {
+              type: 'underline',
+            },
+            {
+              type: 'textColor',
+              attrs: {
+                color: '#ff0000',
+              },
+            },
+          ],
+        },
+        {
+          type: 'text',
+          text: ' ',
+          marks: [
+            {
+              type: 'textColor',
+              attrs: {
+                color: '#ff0000',
+              },
+            },
+          ],
+        },
+        {
+          type: 'text',
+          text: 'mixed',
+          marks: [
+            {
+              type: 'strong',
+            },
+            {
+              type: 'strike',
+            },
+            {
+              type: 'subsup',
+              attrs: {
+                type: 'sup',
+              },
+            },
+            {
+              type: 'underline',
+            },
+            {
+              type: 'textColor',
+              attrs: {
+                color: '#ff0000',
+              },
             },
           ],
         },

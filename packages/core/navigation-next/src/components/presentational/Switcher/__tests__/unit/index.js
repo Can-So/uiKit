@@ -1,8 +1,9 @@
 // @flow
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { PopupSelect } from '@atlaskit/select';
+import { gridSize } from '@atlaskit/theme';
 import {
   BaseSwitcher,
   Footer,
@@ -22,6 +23,7 @@ describe('Switcher', () => {
   beforeEach(() => {
     baseProps = {
       navWidth: 240,
+      isNavResizing: false,
       options: [
         {
           avatar: 'endeavour',
@@ -158,6 +160,29 @@ describe('Switcher', () => {
         text: create.text,
         onClick: expect.any(Function),
       }),
+    );
+  });
+
+  it('should close <PopupSelect /> when resizing the nav', () => {
+    const wrapper = mount(<BaseSwitcher {...baseProps} />);
+
+    wrapper.instance().selectRef.current.open();
+    expect(wrapper.instance().selectRef.current.state.isOpen).toBeTruthy();
+
+    wrapper.setProps({ isNavResizing: true });
+    wrapper.instance().forceUpdate();
+
+    expect(wrapper.instance().selectRef.current.state.isOpen).toBeFalsy();
+  });
+
+  it('should set correct width to <PopupSelect /> when collapse/expanding the nav', () => {
+    const wrapper = mount(<BaseSwitcher {...baseProps} />);
+    wrapper.setProps({
+      navWidth: 300,
+    });
+    wrapper.instance().forceUpdate();
+    expect(wrapper.find(PopupSelect).props().minMenuWidth).toBe(
+      300 - gridSize() * 2 - 60, // ¯\_(ツ)_/¯
     );
   });
 });

@@ -41,7 +41,7 @@ export class FakeTextCursorSelection extends Selection {
     return Slice.empty;
   }
 
-  eq(other): boolean {
+  eq(other: Selection): boolean {
     return other instanceof FakeTextCursorSelection && other.head === this.head;
   }
 

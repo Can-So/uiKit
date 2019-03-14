@@ -24,6 +24,7 @@ import {
   insertText,
   table,
   tr,
+  th,
   td,
   tdCursor,
   hardBreak,
@@ -790,6 +791,44 @@ describe('paste plugins', () => {
       dispatchPasteEvent(editorView, { html });
       expect(editorView.state.doc).toEqualDocument(
         doc(p('hello'), panel()(p('Inside panel')), p('world')),
+      );
+    });
+  });
+
+  describe('table copy-paste', () => {
+    it('should handle numbered table copied inside editor', () => {
+      const { editorView } = editor(doc(p('{<>}')));
+
+      const html = `<meta charset='utf-8'><table data-number-column="true" data-layout="default" data-autosize="false" data-pm-slice="1 1 []"><tbody><tr><th><p>One</p></th><th><p>Two</p></th></tr><tr><td><p>Three</p></td><td><p>Four</p></td></tr><tr><td><p>Five</p></td><td><p>Six</p></td></tr></tbody></table>`;
+
+      dispatchPasteEvent(editorView, { html });
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          table({ isNumberColumnEnabled: true })(
+            tr(th()(p('One')), th()(p('Two'))),
+            tr(td()(p('Three')), td()(p('Four'))),
+            tr(td()(p('Five')), td()(p('Six'))),
+          ),
+        ),
+      );
+    });
+
+    it('should handle numbered table copied from renderer', () => {
+      const { editorView } = editor(doc(p('{<>}')));
+
+      const html = `<meta charset='utf-8'><div class="pm-table-container " data-layout="default" style="margin: 0px auto 16px; padding: 0px; position: relative; box-sizing: border-box; transition: all 0.1s linear 0s; clear: both; color: rgb(23, 43, 77); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; width: inherit;"><div class="pm-table-wrapper" style="margin: 0px; padding: 0px; overflow-x: auto;"><table data-number-column="true" style="margin: 24px 0px 0px; border-collapse: collapse; width: 654px; border: 1px solid rgb(193, 199, 208); table-layout: fixed; font-size: 14px;"><colgroup style="box-sizing: border-box;"><col style="box-sizing: border-box; width: 42px;"><col style="box-sizing: border-box;"><col style="box-sizing: border-box;"></colgroup><tbody style="border-bottom: none; box-sizing: border-box;"><tr style="box-sizing: border-box;"><td class="ak-renderer-table-number-column" style="border-width: 1px 1px 0px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: center; box-sizing: border-box; min-width: 48px; height: 3em; vertical-align: top; background-clip: padding-box; background-color: rgb(244, 245, 247); width: 42px; color: rgb(107, 119, 140); font-size: 14px;"></td><th rowspan="1" colspan="1" style="border-width: 1px 0px 0px 1px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: left; vertical-align: top; box-sizing: border-box; min-width: 48px; height: 3em; background-clip: padding-box; background-color: rgb(244, 245, 247);"><p style="margin: 0px; padding: 0px; font-size: 1em; line-height: 1.714; font-weight: normal; letter-spacing: -0.005em; box-sizing: border-box;">One</p></th><th rowspan="1" colspan="1" style="border-width: 1px 0px 0px 1px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: left; vertical-align: top; box-sizing: border-box; min-width: 48px; height: 3em; background-clip: padding-box; background-color: rgb(244, 245, 247);"><p style="margin: 0px; padding: 0px; font-size: 1em; line-height: 1.714; font-weight: normal; letter-spacing: -0.005em; box-sizing: border-box;">Two</p></th></tr><tr style="box-sizing: border-box;"><td class="ak-renderer-table-number-column" style="border-width: 1px 1px 0px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: center; box-sizing: border-box; min-width: 48px; height: 3em; vertical-align: top; background-clip: padding-box; background-color: rgb(244, 245, 247); width: 42px; color: rgb(107, 119, 140); font-size: 14px;">1</td><td rowspan="1" colspan="1" style="border-width: 1px 0px 0px 1px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: left; box-sizing: border-box; min-width: 48px; height: 3em; vertical-align: top; background-clip: padding-box;"><p style="margin: 0px; padding: 0px; font-size: 1em; line-height: 1.714; font-weight: normal; letter-spacing: -0.005em; box-sizing: border-box;">Three</p></td><td rowspan="1" colspan="1" style="border-width: 1px 0px 0px 1px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: left; box-sizing: border-box; min-width: 48px; height: 3em; vertical-align: top; background-clip: padding-box;"><p style="margin: 0px; padding: 0px; font-size: 1em; line-height: 1.714; font-weight: normal; letter-spacing: -0.005em; box-sizing: border-box;">Four</p></td></tr><tr style="box-sizing: border-box;"><td class="ak-renderer-table-number-column" style="border-width: 1px 1px 0px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: center; box-sizing: border-box; min-width: 48px; height: 3em; vertical-align: top; background-clip: padding-box; background-color: rgb(244, 245, 247); width: 42px; color: rgb(107, 119, 140); font-size: 14px;">2</td><td rowspan="1" colspan="1" style="border-width: 1px 0px 0px 1px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: left; box-sizing: border-box; min-width: 48px; height: 3em; vertical-align: top; background-clip: padding-box;"><p style="margin: 0px; padding: 0px; font-size: 1em; line-height: 1.714; font-weight: normal; letter-spacing: -0.005em; box-sizing: border-box;">Five</p></td><td rowspan="1" colspan="1" style="border-width: 1px 0px 0px 1px; border-style: solid; border-color: rgb(193, 199, 208); border-image: initial; padding: 10px; text-align: left; box-sizing: border-box; min-width: 48px; height: 3em; vertical-align: top; background-clip: padding-box;"><p style="margin: 0px; padding: 0px; font-size: 1em; line-height: 1.714; font-weight: normal; letter-spacing: -0.005em; box-sizing: border-box;">Six</p></td></tr></tbody></table></div></div>`;
+
+      dispatchPasteEvent(editorView, { html });
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          table({ isNumberColumnEnabled: true })(
+            tr(th()(p('One')), th()(p('Two'))),
+            tr(td()(p('Three')), td()(p('Four'))),
+            tr(td()(p('Five')), td()(p('Six'))),
+          ),
+        ),
       );
     });
   });

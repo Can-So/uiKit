@@ -1,7 +1,7 @@
 // @flow
 import { getMargin, getMaxWidth, getPadding } from '../../internal/GridElement';
 
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 describe(name, () => {
   it('grid should have no max-width if fluid', () => {

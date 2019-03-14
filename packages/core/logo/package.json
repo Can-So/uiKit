@@ -1,16 +1,12 @@
 {
   "name": "@atlaskit/logo",
-  "version": "9.2.7",
+  "version": "10.0.0",
   "description": "A React component that highlights status for quick recognition",
   "license": "Apache-2.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "atlaskit:designLink": "https://atlassian.design/guidelines/product/components/logos-in-product",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
@@ -30,12 +26,13 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^10.1.1",
-    "@atlaskit/code": "^8.2.2",
-    "@atlaskit/docs": "^6.0.0",
-    "@atlaskit/field-radio-group": "^4.0.14",
-    "@atlaskit/select": "^7.0.0",
-    "@atlaskit/theme": "^7.0.1",
+    "@atlaskit/ssr": "^0.0.1",
+    "@atlaskit/button": "^10.1.3",
+    "@atlaskit/code": "^9.0.0",
+    "@atlaskit/docs": "^7.0.0",
+    "@atlaskit/field-radio-group": "^5.0.0",
+    "@atlaskit/select": "^8.0.0",
+    "@atlaskit/theme": "^8.0.0",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"

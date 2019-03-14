@@ -12,8 +12,8 @@ export const insertBlock = (
   state: EditorState,
   nodeType: NodeType,
   nodeName: string,
-  start,
-  end,
+  start: number,
+  end: number,
   attrs?: { [key: string]: any },
 ): Transaction | null => {
   // To ensure that match is done after HardBreak.

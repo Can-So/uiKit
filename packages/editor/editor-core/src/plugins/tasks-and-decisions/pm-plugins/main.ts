@@ -1,19 +1,57 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { Node as PMNode } from 'prosemirror-model';
 import { uuid } from '@atlaskit/adf-schema';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import {
+  ProviderFactory,
+  ContextIdentifierProvider,
+} from '@atlaskit/editor-common';
 import { findParentNodeOfType } from 'prosemirror-utils';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import { decisionItemNodeView } from '../nodeviews/decisionItem';
 import { taskItemNodeViewFactory } from '../nodeviews/taskItem';
-import { EditorAppearance } from '../../../types';
+import { EditorAppearance, Command } from '../../../types';
 import { Dispatch } from '../../../event-dispatcher';
 
 export const stateKey = new PluginKey('tasksAndDecisionsPlugin');
 
+enum ACTIONS {
+  SET_CURRENT_TASK_DECISION_ITEM,
+  SET_CONTEXT_PROVIDER,
+}
+
 export interface TaskDecisionPluginState {
   currentTaskDecisionItem: PMNode | undefined;
+  contextIdentifierProvider?: ContextIdentifierProvider;
 }
+
+const setCurrentTaskDecisionItem = (item: PMNode | undefined): Command => (
+  state,
+  dispatch,
+) => {
+  if (dispatch) {
+    dispatch(
+      state.tr.setMeta(stateKey, {
+        action: ACTIONS.SET_CURRENT_TASK_DECISION_ITEM,
+        data: item,
+      }),
+    );
+  }
+  return true;
+};
+
+const setContextIdentifierProvider = (
+  provider: ContextIdentifierProvider | undefined,
+): Command => (state, dispatch) => {
+  if (dispatch) {
+    dispatch(
+      state.tr.setMeta(stateKey, {
+        action: ACTIONS.SET_CONTEXT_PROVIDER,
+        data: provider,
+      }),
+    );
+  }
+  return true;
+};
 
 export function createPlugin(
   portalProviderAPI: PortalProviderAPI,
@@ -33,12 +71,57 @@ export function createPlugin(
         return { insideTaskDecisionItem: false };
       },
       apply(tr, pluginState) {
-        const newPluginState = tr.getMeta(stateKey) || pluginState;
+        const { action, data } = tr.getMeta(stateKey) || {
+          action: null,
+          data: null,
+        };
+        let newPluginState = pluginState;
+
+        switch (action) {
+          case ACTIONS.SET_CURRENT_TASK_DECISION_ITEM:
+            newPluginState = {
+              ...pluginState,
+              currentTaskDecisionItem: data,
+            };
+            break;
+
+          case ACTIONS.SET_CONTEXT_PROVIDER:
+            newPluginState = {
+              ...pluginState,
+              contextIdentifierProvider: data,
+            };
+            break;
+        }
+
         dispatch(stateKey, newPluginState);
         return newPluginState;
       },
     },
-    view() {
+    view(editorView) {
+      const providerHandler = (
+        name: string,
+        providerPromise?: Promise<ContextIdentifierProvider>,
+      ) => {
+        if (name === 'contextIdentifierProvider') {
+          if (!providerPromise) {
+            setContextIdentifierProvider(undefined)(
+              editorView.state,
+              editorView.dispatch,
+            );
+          } else {
+            (providerPromise as Promise<ContextIdentifierProvider>).then(
+              provider => {
+                setContextIdentifierProvider(provider)(
+                  editorView.state,
+                  editorView.dispatch,
+                );
+              },
+            );
+          }
+        }
+      };
+      providerFactory.subscribe('contextIdentifierProvider', providerHandler);
+
       return {
         update: view => {
           if (editorAppearance !== 'mobile') {
@@ -67,11 +150,7 @@ export function createPlugin(
           ])(selection);
 
           if (!taskDecisionItem && currentTaskDecisionItem) {
-            dispatch(
-              state.tr.setMeta(stateKey, {
-                currentTaskDecisionItem: undefined,
-              }),
-            );
+            setCurrentTaskDecisionItem(undefined)(state, dispatch);
             return;
           }
 
@@ -80,20 +159,12 @@ export function createPlugin(
             currentTaskDecisionItem &&
             taskDecisionItem.node.eq(currentTaskDecisionItem) === false
           ) {
-            dispatch(
-              state.tr.setMeta(stateKey, {
-                currentTaskDecisionItem: taskDecisionItem.node,
-              }),
-            );
+            setCurrentTaskDecisionItem(taskDecisionItem.node)(state, dispatch);
             return;
           }
 
           if (taskDecisionItem && !currentTaskDecisionItem) {
-            dispatch(
-              state.tr.setMeta(stateKey, {
-                currentTaskDecisionItem: taskDecisionItem.node,
-              }),
-            );
+            setCurrentTaskDecisionItem(taskDecisionItem.node)(state, dispatch);
             return;
           }
         },

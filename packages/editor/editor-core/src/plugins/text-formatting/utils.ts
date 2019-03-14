@@ -1,5 +1,5 @@
 import { EditorState } from 'prosemirror-state';
-import { Mark, MarkType } from 'prosemirror-model';
+import { Mark as PMMark, MarkType } from 'prosemirror-model';
 import {
   FORMATTING_MARK_TYPES,
   FORMATTING_NODE_TYPES,
@@ -30,7 +30,7 @@ export const domIndex = function(node: Node | null): number | undefined {
   }
 };
 
-export const deepEqual = (obj1, obj2) => {
+export const deepEqual = (obj1: any, obj2: any) => {
   for (let key in obj1) {
     if (obj1[key] !== obj2[key]) {
       return false;
@@ -52,7 +52,7 @@ export const hasCode = (state: EditorState, pos: number): boolean => {
 /**
  * Determine if a mark (with specific attribute values) exists anywhere in the selection.
  */
-export const markActive = (state: EditorState, mark: Mark): boolean => {
+export const markActive = (state: EditorState, mark: PMMark): boolean => {
   const { from, to, empty } = state.selection;
   // When the selection is empty, only the active marks apply.
   if (empty) {

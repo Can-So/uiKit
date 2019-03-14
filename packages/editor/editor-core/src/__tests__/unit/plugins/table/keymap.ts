@@ -34,21 +34,34 @@ import {
   rulePlugin,
   listsPlugin,
 } from '../../../../plugins';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { AnalyticsHandler } from '../../../../analytics';
 
 describe('table keymap', () => {
   const createEditor = createEditorFactory<TablePluginState>();
 
-  const editor = (doc: any, trackEvent = () => {}) =>
-    createEditor({
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  let trackEvent: AnalyticsHandler;
+  let editorView: EditorView;
+
+  const editor = (doc: any, trackEvent: AnalyticsHandler = () => {}) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       editorProps: {
         analyticsHandler: trackEvent,
+        allowAnalyticsGASV3: true,
       },
       pluginKey,
+      createAnalyticsEvent,
     });
+  };
 
-  const editorWithPlugins = (doc: any, trackEvent = () => {}) =>
+  const editorWithPlugins = (
+    doc: any,
+    trackEvent: AnalyticsHandler = () => {},
+  ) =>
     createEditor({
       doc,
       editorPlugins: [
@@ -66,8 +79,6 @@ describe('table keymap', () => {
       },
       pluginKey,
     });
-
-  let trackEvent;
 
   beforeEach(() => {
     trackEvent = jest.fn();
@@ -234,19 +245,6 @@ describe('table keymap', () => {
         );
       });
     });
-
-    describe('Shift-Alt-T keypress', () => {
-      it('should insert 3x3 table', () => {
-        const tableNode = table()(
-          tr(thEmpty, thEmpty, thEmpty),
-          tr(tdEmpty, tdEmpty, tdEmpty),
-          tr(tdEmpty, tdEmpty, tdEmpty),
-        );
-        const { editorView } = editor(doc(p('{<>}')));
-        sendKeyToPm(editorView, 'Shift-Alt-T');
-        expect(editorView.state.doc).toEqualDocument(doc(tableNode));
-      });
-    });
   });
 
   describe('Backspace keypress', () => {
@@ -291,7 +289,7 @@ describe('table keymap', () => {
           return;
         }
 
-        if (!pmNodeBuilder[nodeName]) {
+        if (!(pmNodeBuilder as Record<string, any>)[nodeName]) {
           return;
         }
 
@@ -299,7 +297,7 @@ describe('table keymap', () => {
           const { editorView, refs } = editorWithPlugins(
             doc(
               table()(tr(tdEmpty, td({})(p('hello{nextPos}')))),
-              pmNodeBuilder[nodeName],
+              (pmNodeBuilder as Record<string, any>)[nodeName],
             ),
           );
           const { nextPos } = refs;
@@ -584,6 +582,32 @@ describe('table keymap', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(table()(tr(thCursor, thEmpty, thEmpty))),
       );
+    });
+  });
+
+  describe('Shift-Alt-T keypress', () => {
+    beforeEach(() => {
+      ({ editorView } = editor(doc(p())));
+      sendKeyToPm(editorView, 'Shift-Alt-T');
+    });
+
+    it('should insert 3x3 table', () => {
+      const tableNode = table()(
+        tr(thEmpty, thEmpty, thEmpty),
+        tr(tdEmpty, tdEmpty, tdEmpty),
+        tr(tdEmpty, tdEmpty, tdEmpty),
+      );
+      expect(editorView.state.doc).toEqualDocument(doc(tableNode));
+    });
+
+    it('should dispatch analytics event', () => {
+      expect(createAnalyticsEvent).toHaveBeenCalledWith({
+        action: 'inserted',
+        actionSubject: 'document',
+        actionSubjectId: 'table',
+        attributes: { inputMethod: 'shortcut' },
+        eventType: 'track',
+      });
     });
   });
 });

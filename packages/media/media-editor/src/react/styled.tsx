@@ -14,7 +14,7 @@ export interface LineWidthFrontCircleProps {
 }
 
 export const blanketColor = colors.N700A;
-const overlayZindex = layers.modal() + 10;
+const overlayZindex = layers.modal();
 
 export const MediaEditorContainer: ComponentClass<
   HTMLAttributes<{}>

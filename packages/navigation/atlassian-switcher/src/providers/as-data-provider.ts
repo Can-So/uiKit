@@ -1,62 +1,117 @@
-import { Component, ReactNode } from 'react';
-import { isPromise } from '../utils/type-helper';
+import * as React from 'react';
 
-export interface ChildrenProps<D> {
-  data: D | null;
-  isLoading: boolean;
-  error: any;
+enum Status {
+  LOADING = 'loading',
+  COMPLETE = 'complete',
+  ERROR = 'error',
 }
 
-interface PropsToPromiseMapper<P, D> {
-  (props: P): Promise<D> | D;
+export interface ResultComplete<T> {
+  status: Status.COMPLETE;
+  data: T;
+}
+
+export interface ResultLoading {
+  status: Status.LOADING;
+  data: null;
+}
+
+export interface ResultError {
+  status: Status.ERROR;
+  error: any;
+  data: null;
+}
+
+export const isComplete = <T>(
+  result: ProviderResult<T>,
+): result is ResultComplete<T> => result.status === Status.COMPLETE;
+
+export const isError = <T>(result: ProviderResult<T>): result is ResultError =>
+  result.status === Status.ERROR;
+
+export const isLoading = <T>(
+  result: ProviderResult<T>,
+): result is ResultLoading => result.status === Status.LOADING;
+
+export type ProviderResult<T> = ResultComplete<T> | ResultLoading | ResultError;
+
+interface PropsToPromiseMapper<P, D> extends Function {
+  (props: P): Promise<D>;
+}
+
+interface PropsToValueMapper<P, D> {
+  (props: P): D;
 }
 
 export interface DataProviderProps<D> {
-  children: (props: ChildrenProps<D>) => ReactNode;
+  children: (props: ProviderResult<D>) => React.ReactNode;
 }
 
 export default function<P, D>(
   mapPropsToPromise: PropsToPromiseMapper<Readonly<P>, D>,
+  mapPropsToInitialValue?: PropsToValueMapper<Readonly<P>, D | void>,
 ) {
-  return class extends Component<P & DataProviderProps<D>> {
-    state = {
-      isLoading: true,
+  const getInitialState = (props: Readonly<P>): ProviderResult<D> => {
+    if (mapPropsToInitialValue) {
+      const initialValue = mapPropsToInitialValue(props);
+      if (initialValue !== undefined) {
+        return {
+          status: Status.COMPLETE,
+          data: initialValue,
+        };
+      }
+    }
+
+    return {
+      status: Status.LOADING,
       data: null,
-      error: null,
     };
+  };
+
+  return class DataProvider extends React.Component<P & DataProviderProps<D>> {
+    acceptResults = true;
+    state = getInitialState(this.props);
+
+    componentWillUnmount() {
+      /**
+       * Promise resolved after component is unmounted to be ignored
+       */
+      this.acceptResults = false;
+    }
 
     componentDidMount() {
-      const dataSource = mapPropsToPromise(this.props);
-      if (isPromise<D>(dataSource)) {
-        dataSource
-          .then(result => {
-            this.setState({
-              data: result,
-              isLoading: false,
-            });
-          })
-          .catch(error => {
-            this.setState({
-              error,
-              isLoading: false,
-            });
-          });
-      } else {
+      mapPropsToPromise(this.props)
+        .then(result => {
+          this.onResult(result);
+        })
+        .catch(error => {
+          this.onError(error);
+        });
+    }
+
+    onResult(value: D) {
+      if (this.acceptResults) {
         this.setState({
-          data: dataSource,
-          isLoading: false,
+          data: value,
+          status: Status.COMPLETE,
+        });
+      }
+    }
+
+    onError(error: any) {
+      /**
+       * Do not transition from "complete" state to "error"
+       */
+      if (this.acceptResults && !isComplete(this.state)) {
+        this.setState({
+          error,
+          status: Status.ERROR,
         });
       }
     }
 
     render() {
-      const { isLoading, data, error } = this.state;
-      const { children } = this.props;
-      return children({
-        data,
-        isLoading,
-        error,
-      });
+      return this.props.children(this.state);
     }
   };
 }

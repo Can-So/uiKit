@@ -146,7 +146,7 @@ describe('card', () => {
         const { dispatch } = editorView;
 
         // queue both links
-        Object.keys(hrefs).map(key => {
+        (Object.keys(hrefs) as Array<keyof typeof hrefs>).map(key => {
           dispatch(
             queueCards([
               { url: hrefs[key], pos: refs[key], appearance: 'inline' },

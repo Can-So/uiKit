@@ -18,7 +18,7 @@ export const showPlaceholderFloatingToolbar = (
   return true;
 };
 
-export const insertPlaceholderTextAtSelection = value => (
+export const insertPlaceholderTextAtSelection = (value: string) => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {

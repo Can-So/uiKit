@@ -21,7 +21,7 @@ describe('card', () => {
   };
 
   describe('reducers', () => {
-    let initialState;
+    let initialState: any;
     beforeAll(() => {
       const { pluginState } = editor(doc(p()));
       initialState = pluginState;

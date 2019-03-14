@@ -11,6 +11,6 @@ describe('Placeholder', () => {
 
   it('wraps long placeholder onto new line', async () => {
     await initFullPageEditorWithAdf(page, adf);
-    await snapshot(page);
+    await snapshot(page, 0.01);
   });
 });

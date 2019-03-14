@@ -1,14 +1,14 @@
 import { initFullPageEditorWithAdf, snapshot } from '../_utils';
 import * as dynamicTextExample from './__fixtures__/dynamic-text-adf.json';
 
-describe('Dynamic Text Sizing:', () => {
-  let page;
+describe('Dynamic Text Sizing', () => {
+  let page: any;
   // move this to the test since its used only here
   const dynamicTextViewportSizes = [
-    { width: 1440, height: 4000 },
-    { width: 1280, height: 4000 },
-    { width: 768, height: 4000 },
-    { width: 1024, height: 4000 },
+    { width: 768, height: 4500 },
+    { width: 1024, height: 5000 },
+    { width: 1280, height: 5500 },
+    { width: 1440, height: 6000 },
   ];
   beforeAll(async () => {
     // @ts-ignore

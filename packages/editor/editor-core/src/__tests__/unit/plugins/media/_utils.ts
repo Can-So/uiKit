@@ -10,7 +10,6 @@ import {
 import {
   stateKey as mediaPluginKey,
   MediaPluginState,
-  DefaultMediaStateManager,
 } from '../../../../plugins/media/pm-plugins/main';
 import mediaPlugin from '../../../../plugins/media';
 import { EditorPlugin } from '../../../../types';
@@ -22,7 +21,6 @@ export const temporaryFileId = `temporary:${randomId()}`;
 
 export const temporaryMediaAttrs: MediaAttributes = {
   id: temporaryFileId,
-  __key: temporaryFileId,
   type: 'file',
   collection: testCollectionName,
 };
@@ -45,10 +43,8 @@ export const mediaEditor = (
   additionalPlugins: Array<EditorPlugin> = [],
   uploadErrorHandler?: () => void,
 ) => {
-  const stateManager = new DefaultMediaStateManager();
   const mediaProvider = storyMediaProviderFactory({
     collectionName: testCollectionName,
-    stateManager,
     includeUserAuthProvider: true,
   });
 
@@ -77,15 +73,10 @@ export const insertMediaGroupItem = (
   id: string,
   fileId = 'id',
 ) => {
-  insertMediaGroupNode(
-    view,
-    [{ id, fileId: Promise.resolve(fileId) }],
-    testCollectionName,
-  );
+  insertMediaGroupNode(view, [{ id }], testCollectionName);
 
   return media({
     id,
-    __key: id,
     type: 'file',
     collection: testCollectionName,
   })();

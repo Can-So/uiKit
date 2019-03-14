@@ -23,6 +23,7 @@ import {
   mapResponseToBlob,
 } from './utils/request';
 import { MediaFileArtifacts, getArtifactUrl } from './models/artifacts';
+import { checkWebpSupport } from './utils/checkWebpSupport';
 
 const defaultImageOptions: MediaStoreGetFileImageParams = {
   'max-age': 3600,
@@ -40,6 +41,7 @@ const extendImageParams = (
 ): MediaStoreGetFileImageParams => {
   return { ...defaultImageOptions, ...params };
 };
+
 const jsonHeaders = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
@@ -280,15 +282,22 @@ export class MediaStore {
     });
   };
 
-  // TODO [MS-1352]: add WEBP header
-  getImage = (
+  getImage = async (
     id: string,
     params?: MediaStoreGetFileImageParams,
     controller?: AbortController,
   ): Promise<Blob> => {
+    const isWebpSupported = await checkWebpSupport();
+    let headers;
+    if (isWebpSupported) {
+      headers = {
+        accept: 'image/webp,image/*,*/*;q=0.8',
+      };
+    }
     return this.request(
       `/file/${id}/image`,
       {
+        headers,
         params: extendImageParams(params),
         authContext: { collectionName: params && params.collection },
       },

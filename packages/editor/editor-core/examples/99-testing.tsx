@@ -55,15 +55,15 @@ function createEditorWindowBindings(win: Window) {
   class EditorWithState extends Editor {
     onEditorCreated(instance: EditorInstance) {
       super.onEditorCreated(instance);
-      window['__editorView'] = instance.view;
+      (window as any)['__editorView'] = instance.view;
     }
     onEditorDestroyed(instance: EditorInstance) {
       super.onEditorDestroyed(instance);
-      window['__editorView'] = undefined;
+      (window as any)['__editorView'] = undefined;
     }
   }
 
-  window['__mountEditor'] = (props: EditorProps = {}) => {
+  (window as any)['__mountEditor'] = (props: EditorProps = {}) => {
     const target = document.getElementById('editor-container');
 
     if (!target) {
@@ -74,9 +74,8 @@ function createEditorWindowBindings(win: Window) {
     if (props && props.UNSAFE_cards && props.UNSAFE_cards.provider) {
       props.UNSAFE_cards.provider = cardProviderPromise;
     }
-    if (props && props.quickInsert) {
-      props.quickInsert = { provider: Promise.resolve(quickInsertProvider) };
-    }
+
+    props.quickInsert = { provider: Promise.resolve(quickInsertProvider) };
 
     if (props && props.media) {
       props.media = {

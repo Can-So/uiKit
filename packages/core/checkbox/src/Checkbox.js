@@ -9,10 +9,7 @@ import {
 import { ThemeProvider } from 'styled-components';
 import CheckboxIcon from './CheckboxIcon';
 
-import {
-  name as packageName,
-  version as packageVersion,
-} from '../package.json';
+import { name as packageName, version as packageVersion } from './version.json';
 import {
   HiddenCheckbox,
   Label,

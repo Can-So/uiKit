@@ -88,7 +88,7 @@ export default class AndroidBridge implements NativeBridge {
   call<T extends EditorPluginBridges>(
     bridge: T,
     event: keyof Exclude<EditorBridges[T], undefined>,
-    ...args
+    ...args: any[]
   ) {
     sendToBridge(bridge, event, ...args);
   }

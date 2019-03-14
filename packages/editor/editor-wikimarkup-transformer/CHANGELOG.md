@@ -1,5 +1,58 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 3.5.6
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-core@105.0.0
+  - @atlaskit/editor-test-helpers@7.0.6
+  - @atlaskit/renderer@43.0.0
+  - @atlaskit/editor-json-transformer@4.3.5
+  - @atlaskit/util-data-test@10.2.5
+
+## 3.5.5
+- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+  - @atlaskit/editor-json-transformer@4.3.4
+  - @atlaskit/editor-test-helpers@7.0.5
+  - @atlaskit/editor-core@104.0.0
+  - @atlaskit/renderer@42.0.0
+
+## 3.5.4
+- Updated dependencies [dbff4fdcf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dbff4fdcf9):
+  - @atlaskit/editor-common@33.0.4
+  - @atlaskit/renderer@41.3.1
+  - @atlaskit/profilecard@8.0.0
+
+## 3.5.3
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/editor-core@103.0.3
+  - @atlaskit/editor-json-transformer@4.3.3
+  - @atlaskit/renderer@41.2.1
+  - @atlaskit/util-data-test@10.2.3
+  - @atlaskit/editor-common@33.0.3
+  - @atlaskit/docs@7.0.0
+  - @atlaskit/theme@8.0.0
+  - @atlaskit/profilecard@7.0.0
+
+## 3.5.2
+- Updated dependencies [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
+  - @atlaskit/editor-json-transformer@4.3.2
+  - @atlaskit/editor-core@103.0.0
+  - @atlaskit/editor-test-helpers@7.0.4
+
+## 3.5.1
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/editor-core@102.0.0
+  - @atlaskit/renderer@41.0.0
+  - @atlaskit/editor-json-transformer@4.3.1
+  - @atlaskit/editor-test-helpers@7.0.2
+  - @atlaskit/util-data-test@10.2.2
+
+## 3.5.0
+- [minor] [9bb0ecb48a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9bb0ecb48a):
+
+  - Support wiki to smart link
+
 ## 3.4.0
 - [minor] [1eb20bca95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1eb20bca95):
 

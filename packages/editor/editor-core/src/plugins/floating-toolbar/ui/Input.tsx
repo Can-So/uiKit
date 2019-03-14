@@ -16,33 +16,33 @@ export interface State {
 }
 
 export default class TextField extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       text: props.defaultValue || '',
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (this.state.text !== nextProps.defaultValue) {
       this.setState({
-        text: nextProps.defaultValue,
+        text: nextProps.defaultValue || '',
       });
     }
   }
 
-  handleChange = e => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ text: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (this.props.onSubmit) {
       this.props.onSubmit(this.state.text);
     }
   };
 
-  handleBlur = e => {
+  handleBlur = (e: React.FocusEvent<{}>) => {
     e.preventDefault();
     if (this.props.onBlur) {
       this.props.onBlur(this.state.text);

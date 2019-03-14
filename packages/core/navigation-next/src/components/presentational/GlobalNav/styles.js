@@ -12,7 +12,6 @@ const baseStyles = {
   display: 'flex',
   flexDirection: 'column',
   flexShrink: 0,
-  height: '100vh',
   justifyContent: 'space-between',
   paddingBottom: gridSize * 3,
   paddingTop: gridSize * 3,
@@ -21,8 +20,17 @@ const baseStyles = {
   width: GLOBAL_NAV_WIDTH,
 };
 
-export default ({ product }: ModeColors) => () => ({
+export default ({ product }: ModeColors) => (
+  {
+    topOffset,
+  }: {
+    topOffset: string,
+  } = {
+    topOffset: '0',
+  },
+) => ({
   ...baseStyles,
+  height: `calc(100vh - ${topOffset}px)`,
   backgroundColor: product.background.default,
   color: product.text.default,
   fill: product.background.default,

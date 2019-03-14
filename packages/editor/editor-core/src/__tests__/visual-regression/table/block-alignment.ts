@@ -11,45 +11,49 @@ import {
 } from '../../__helpers/page-objects/_table';
 
 describe('Table with block looks correct for fullpage:', () => {
-  let page;
+  let page: any;
 
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
   });
 
+  afterEach(async () => {
+    await snapshot(page, 0.01);
+  });
+
   it('default layout ', async () => {
     await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
     await page.click(getSelectorForTableCell({ row: 4, cell: 1 }));
-    await snapshot(page);
   });
 
   it('wide layout ', async () => {
     await initFullPageEditorWithAdf(page, adf, Device.LaptopMDPI);
     await page.click(getSelectorForTableCell({ row: 4, cell: 1 }));
     await setTableLayout(page, 'wide');
-    await snapshot(page);
   });
 
   it('full-width layout ', async () => {
     await initFullPageEditorWithAdf(page, adf, Device.LaptopHiDPI);
     await page.click(getSelectorForTableCell({ row: 4, cell: 1 }));
     await setTableLayout(page, 'full-width');
-    await snapshot(page);
   });
 });
 
 describe('Table with block looks correct for comment:', () => {
-  let page;
+  let page: any;
 
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
   });
 
+  afterEach(async () => {
+    await snapshot(page, 0.01);
+  });
+
   it('default layout ', async () => {
     await initCommentEditorWithAdf(page, adf, Device.LaptopMDPI);
     await page.click(getSelectorForTableCell({ row: 4, cell: 1 }));
-    await snapshot(page);
   });
 });

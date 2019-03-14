@@ -6,7 +6,7 @@ import {
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../../package.json';
+} from '../../../version.json';
 import '../../../components/DropdownMenuStateless';
 
 // This is a global mock for this file that will mock all components wrapped with analytics

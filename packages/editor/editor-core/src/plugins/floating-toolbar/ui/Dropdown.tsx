@@ -41,7 +41,7 @@ const IconGroup = styled.div`
   display: flex;
 `;
 
-const CompositeIcon = ({ icon }) => (
+const CompositeIcon = ({ icon }: { icon: React.ReactChild }) => (
   <IconGroup>
     {icon}
     <DropdownExpandContainer>

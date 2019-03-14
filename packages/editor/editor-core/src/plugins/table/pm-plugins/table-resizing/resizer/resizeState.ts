@@ -93,7 +93,11 @@ export function getCandidates(
     : candidates.slice(destIdx + 1);
 }
 
-export function stackSpace(state, destIdx, amount) {
+export function stackSpace(
+  state: ResizeState,
+  destIdx: number,
+  amount: number,
+) {
   const candidates = getCandidates(state, destIdx, amount);
 
   while (candidates.length && amount) {
@@ -315,24 +319,14 @@ export default class ResizeState {
   scale(newWidth: number): ResizeState {
     const scaleFactor = newWidth / this.totalWidth;
 
-    let accumulatedWidth = 0;
     let newState = new ResizeState(
-      this.cols.map((col, index) => {
+      this.cols.map(col => {
         const { minWidth, width } = col;
         let newColWidth = Math.floor(width * scaleFactor);
 
         // enforce min width
         if (newColWidth < minWidth) {
           newColWidth = minWidth;
-        }
-
-        accumulatedWidth += newColWidth;
-
-        // Since we Math.floor above, often we fall short
-        // of `newWidth` by ~5px, attempt to apply
-        // remaining buffer to last cell.
-        if (index + 1 === this.cols.length && accumulatedWidth < newWidth) {
-          newColWidth = newColWidth + (newWidth - accumulatedWidth);
         }
 
         return col.clone(newColWidth);

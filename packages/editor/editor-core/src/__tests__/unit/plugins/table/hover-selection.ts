@@ -37,7 +37,10 @@ describe('table hover selection plugin', () => {
       pluginKey,
     });
 
-  const getTableDecorations = (editorView: EditorView, cells) => {
+  const getTableDecorations = (
+    editorView: EditorView,
+    cells: Array<{ pos: number }>,
+  ) => {
     const { decorationSet }: { decorationSet: DecorationSet } = getPluginState(
       editorView.state,
     );

@@ -156,6 +156,7 @@ class AsyncLayoutManagerWithViewControllerBase extends Component<
       onCollapseEnd,
       getRefs,
       view,
+      topOffset,
     } = this.props;
 
     return (
@@ -189,6 +190,7 @@ class AsyncLayoutManagerWithViewControllerBase extends Component<
           onCollapseStart={onCollapseStart}
           onCollapseEnd={onCollapseEnd}
           getRefs={getRefs}
+          topOffset={topOffset}
         >
           {children}
         </LayoutManager>

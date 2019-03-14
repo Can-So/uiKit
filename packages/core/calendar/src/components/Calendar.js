@@ -3,7 +3,7 @@
 import { Calendar as CalendarBase } from 'calendar-base';
 import pick from 'lodash.pick';
 import React, { Component } from 'react';
-import uuid from 'uuid/v1';
+import { uid } from 'react-uid';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
@@ -12,7 +12,7 @@ import {
 import {
   name as packageName,
   version as packageVersion,
-} from '../../package.json';
+} from '../version.json';
 import { dateToString, getShortDayName, makeArrayFromNumber } from '../util';
 import DateComponent from './Date';
 import Heading from './Heading';
@@ -94,7 +94,7 @@ type State = {
 };
 
 function getUniqueId(prefix: string) {
-  return `${prefix}-${uuid()}`;
+  return `${prefix}-${uid({ id: prefix })}`;
 }
 
 function padToTwo(number: number) {

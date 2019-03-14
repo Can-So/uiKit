@@ -153,6 +153,18 @@ describe('props', () => {
     const wrapper = mount(<TextArea data-foo="text-area-bar" />);
     expect(wrapper.find('textarea').prop('data-foo')).toBe('text-area-bar');
   });
+
+  it('should use forwardedRef prop when resize is smart', () => {
+    const spy = jest.fn();
+    mount(<TextArea resize="smart" forwardedRef={spy} />);
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should use forwardedRef prop when resize is not smart', () => {
+    const spy = jest.fn();
+    mount(<TextArea resize="vertical" forwardedRef={spy} />);
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe('TextAreaWithAnalytics', () => {

@@ -20,7 +20,7 @@ import { Transformer, ProviderFactory } from '@atlaskit/editor-common';
 import {
   MediaPluginState,
   stateKey as mediaPluginStateKey,
-  DefaultMediaStateManager,
+  MediaState,
 } from './../../../src/plugins/media/pm-plugins/main';
 import extensionPlugin from '../../../src/plugins/extension';
 import { name } from '../../../package.json';
@@ -43,12 +43,9 @@ describe(name, () => {
   describe('EditorActions', () => {
     const testTempFileId = `temporary:${randomId()}`;
     const testTempFileId2 = `temporary:${randomId()}`;
-    const testPubFileId = `${randomId()}`;
     const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
-    const stateManager = new DefaultMediaStateManager();
     const mediaProvider = storyMediaProviderFactory({
       collectionName: testCollectionName,
-      stateManager,
       includeUserAuthProvider: true,
     });
     let providerFactory: ProviderFactory;
@@ -74,8 +71,8 @@ describe(name, () => {
 
     describe('with waitForMediaUpload === true', () => {
       const createEditor = createEditorFactory();
-      let editorActions;
-      let editorView;
+      let editorActions: EditorActions;
+      let editorView: EditorView;
 
       beforeEach(() => {
         const editor = createEditor({
@@ -163,17 +160,10 @@ describe(name, () => {
 
         describe('with waitForMediaUpload === true', () => {
           it('should not resolve when all media operations are pending', async () => {
-            stateManager.updateState(testTempFileId, {
-              id: testTempFileId,
-              fileId: Promise.resolve('id'),
-            });
-
             const provider = await mediaProvider;
             await provider.uploadContext;
             const mediaPluginState = getMediaPluginState(editorView);
-            mediaPluginState.insertFiles([
-              { id: testTempFileId, fileId: Promise.resolve('id') },
-            ]);
+            mediaPluginState.insertFile({ id: testTempFileId }, () => {});
 
             let resolved: any;
 
@@ -190,18 +180,11 @@ describe(name, () => {
           });
 
           it('should reject after timeout is reached', async () => {
-            stateManager.updateState(testTempFileId, {
-              id: testTempFileId,
-              fileId: Promise.resolve('id'),
-            });
-
             const provider = await mediaProvider;
             await provider.uploadContext;
 
             const mediaPluginState = getMediaPluginState(editorView);
-            mediaPluginState.insertFiles([
-              { id: testTempFileId, fileId: Promise.resolve('id') },
-            ]);
+            mediaPluginState.insertFile({ id: testTempFileId }, () => {});
 
             // Note: getValue() public API doesn't yet support timeout, but the
             //       plugin state does and we want to have coverage of that.
@@ -214,23 +197,14 @@ describe(name, () => {
           });
 
           it('should not resolve when some media operations are pending', async () => {
-            stateManager.updateState(testTempFileId, {
-              id: testTempFileId,
-              fileId: Promise.resolve('id'),
-            });
-
-            stateManager.updateState(testTempFileId2, {
-              id: testTempFileId2,
-              fileId: Promise.resolve('id'),
-            });
-
             const provider = await mediaProvider;
             await provider.uploadContext;
             const mediaPluginState = getMediaPluginState(editorView);
 
-            mediaPluginState.insertFiles([
-              { id: testTempFileId, fileId: Promise.resolve('id') },
-            ]);
+            const evts: Array<(state: MediaState) => void> = [];
+            mediaPluginState.insertFile({ id: testTempFileId }, evt =>
+              evts.push(evt),
+            );
 
             let resolved: any;
 
@@ -238,15 +212,15 @@ describe(name, () => {
               .getValue()
               .then(potentialValue => (resolved = potentialValue));
 
-            mediaPluginState.insertFiles([
-              { id: testTempFileId2, fileId: Promise.resolve('id') },
-            ]);
+            mediaPluginState.insertFile({ id: testTempFileId2 }, () => {});
 
-            stateManager.updateState(testTempFileId, {
-              status: 'ready',
-              id: testTempFileId,
-              publicId: testPubFileId,
-            });
+            evts.forEach(cb =>
+              cb({
+                status: 'ready',
+                id: testTempFileId,
+                publicId: testTempFileId,
+              }),
+            );
 
             return new Promise(resolve => {
               window.setTimeout(() => {
@@ -257,25 +231,24 @@ describe(name, () => {
           });
 
           it('should resolve after media have resolved', async () => {
-            stateManager.updateState(testTempFileId, {
-              id: testTempFileId,
-              fileId: Promise.resolve('id'),
-            });
             const provider = await mediaProvider;
             await provider.uploadContext;
             const mediaPluginState = getMediaPluginState(editorView);
 
-            mediaPluginState.insertFiles([
-              { id: testTempFileId, fileId: Promise.resolve('id') },
-            ]);
+            const evts: Array<(state: MediaState) => void> = [];
+            mediaPluginState.insertFile({ id: testTempFileId }, evt =>
+              evts.push(evt),
+            );
 
             // To simulate async behavior, trigger ready on next tick
             window.setTimeout(() => {
-              stateManager.updateState(testTempFileId, {
-                status: 'ready',
-                id: testTempFileId,
-                publicId: testTempFileId,
-              });
+              evts.forEach(cb =>
+                cb({
+                  status: 'ready',
+                  id: testTempFileId,
+                  publicId: testTempFileId,
+                }),
+              );
             }, 0);
 
             const value = (await editorActions.getValue()) as any;
@@ -290,27 +263,25 @@ describe(name, () => {
           });
 
           it('should resolve after processing status', async () => {
-            stateManager.updateState(testTempFileId, {
-              id: testTempFileId,
-              fileId: Promise.resolve('id'),
-            });
-
             const provider = await mediaProvider;
             await provider.uploadContext;
             await provider.viewContext;
             const mediaPluginState = getMediaPluginState(editorView);
 
-            mediaPluginState.insertFiles([
-              { id: testTempFileId, fileId: Promise.resolve('id') },
-            ]);
+            const evts: Array<(state: MediaState) => void> = [];
+            mediaPluginState.insertFile({ id: testTempFileId }, evt =>
+              evts.push(evt),
+            );
 
             // To simulate async behavior, trigger ready on next tick
             window.setTimeout(() => {
-              stateManager.updateState(testTempFileId, {
-                status: 'ready',
-                id: testTempFileId,
-                publicId: testTempFileId,
-              });
+              evts.forEach(cb =>
+                cb({
+                  status: 'ready',
+                  id: testTempFileId,
+                  publicId: testTempFileId,
+                }),
+              );
             }, 0);
 
             const value = (await editorActions.getValue()) as any;
@@ -432,17 +403,10 @@ describe(name, () => {
 
         const mediaPluginState = getMediaPluginState(editorView);
 
-        stateManager.updateState(testTempFileId, {
-          id: testTempFileId,
-          fileId: Promise.resolve('id'),
-        });
-
         const provider = await mediaProvider;
         await provider.uploadContext;
 
-        mediaPluginState.insertFiles([
-          { id: testTempFileId, fileId: Promise.resolve('id') },
-        ]);
+        mediaPluginState.insertFile({ id: testTempFileId }, () => {});
 
         const value = (await editorActions.getValue()) as any;
 
@@ -457,14 +421,14 @@ describe(name, () => {
     describe('#replaceSelection', () => {
       const createEditor = createEditorFactory();
       const newDoc = doc(p('some new {<>}content'));
-      let editorActions;
-      let editorView;
+      let editorActions: EditorActions;
+      let editorView: EditorView;
 
       it('should accept JSON version of a prosemirror node', () => {
         const editor = createEditor({ doc: newDoc });
         editorView = editor.editorView;
         editorActions = new EditorActions();
-        editorActions._privateRegisterEditor(editorView);
+        editorActions._privateRegisterEditor(editorView, new EventDispatcher());
 
         editorActions.replaceSelection(
           blockquote(p('text'))(defaultSchema).toJSON(),
@@ -478,7 +442,7 @@ describe(name, () => {
         const editor = createEditor({ doc: newDoc });
         editorView = editor.editorView;
         editorActions = new EditorActions();
-        editorActions._privateRegisterEditor(editorView);
+        editorActions._privateRegisterEditor(editorView, new EventDispatcher());
 
         editorActions.replaceSelection(
           JSON.stringify(blockquote(p('text'))(defaultSchema).toJSON()),

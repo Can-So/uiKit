@@ -3,11 +3,9 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import AkButton from '@atlaskit/button';
-import { Presence } from '@atlaskit/avatar';
 import AkProfilecardResourced, { AkProfilecard, AkProfileClient } from '../..';
 import ErrorMessage from '../../components/ErrorMessage';
 import HeightTransitionWrapper from '../../components/HeightTransitionWrapper';
-import presences from '../../internal/presences';
 import { FullNameLabel, ActionButtonGroup } from '../../styled/Card';
 import mockGlobalDate from './helper/_mock-global-date';
 
@@ -67,62 +65,6 @@ describe('Profilecard', () => {
       it('should not render a card if full name is not set', () => {
         card.setProps({ fullName: undefined });
         expect(card.find(HeightTransitionWrapper).children()).toHaveLength(0);
-      });
-    });
-
-    describe('presence property', () => {
-      describe('presence properties should render label', () => {
-        const presenceWithoutNone = Object.keys(presences).filter(
-          p => p !== 'none',
-        );
-
-        presenceWithoutNone.forEach(presence => {
-          it(`should render label with content ${presence}`, () => {
-            const card = mount(
-              <AkProfilecard fullName="name" presence={presence} />,
-            );
-            const el = card.find('IconLabel').first();
-            expect(el.length).toBeGreaterThan(0);
-            expect(el.text()).toBe(presences[presence]);
-          });
-        });
-      });
-
-      it('should not render a presence label if property is not set', () => {
-        const card = mount(<AkProfilecard fullName="name" />);
-        const el = card.find(Presence);
-        expect(el.exists()).toBe(false);
-      });
-    });
-
-    describe('presenceMessage property', () => {
-      describe('presence properties should render presenceMessage if set', () => {
-        const presenceWithoutNone = Object.keys(presences).filter(
-          p => p !== 'none',
-        );
-
-        presenceWithoutNone.forEach(presence => {
-          it(`should render label with content ${presence}`, () => {
-            const card = mount(
-              <AkProfilecard
-                fullName="name"
-                presence={presence}
-                presenceMessage="Test message"
-              />,
-            );
-            const el = card.find('IconLabel').first();
-            expect(el.length).toBeGreaterThan(0);
-            expect(el.text()).toBe('Test message');
-          });
-        });
-      });
-
-      it('should not render a presence label if presenceMessage is set but presence is not', () => {
-        const card = mount(
-          <AkProfilecard fullName="name" presenceMessage="Test message" />,
-        );
-        const el = card.find(Presence);
-        expect(el.exists()).toBe(false);
       });
     });
 

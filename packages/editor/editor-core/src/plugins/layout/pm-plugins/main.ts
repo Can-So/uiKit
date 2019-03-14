@@ -59,7 +59,7 @@ const getNodeDecoration = (pos: number, node: Node) => [
 ];
 
 const getInitialPluginState = (
-  pluginConfig: { allowBreakout?: boolean },
+  pluginConfig: { allowBreakout?: boolean } | undefined | boolean,
   state: EditorState,
 ): LayoutState => {
   const maybeLayoutSection = findParentNodeOfType(
@@ -74,14 +74,14 @@ const getInitialPluginState = (
 
 export const pluginKey = new PluginKey('layout');
 
-export default pluginConfig =>
+export default (pluginConfig?: { allowBreakout: boolean } | boolean) =>
   new Plugin({
     key: pluginKey,
     state: {
       init: (_, state): LayoutState =>
         getInitialPluginState(pluginConfig, state),
 
-      apply: (tr, pluginState, oldState, newState) => {
+      apply: (tr, pluginState, _oldState, newState) => {
         if (tr.docChanged || tr.selectionSet) {
           const maybeLayoutSection = findParentNodeOfType(
             newState.schema.nodes.layoutSection,

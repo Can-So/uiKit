@@ -28,7 +28,7 @@ export const FILE_WIDTH = 156;
 
 export type Appearance = 'small' | 'image' | 'horizontal' | 'square';
 
-export interface MediaNodeProps extends ReactNodeProps {
+export interface MediaNodeProps extends ReactNodeProps, ImageLoaderProps {
   getPos: ProsemirrorGetPosHandler;
   view: EditorView;
   node: PMNode;
@@ -64,19 +64,19 @@ export interface MediaNodeState {
   viewContext?: Context;
 }
 
-class MediaNode extends Component<
-  MediaNodeProps & ImageLoaderProps,
-  MediaNodeState
-> {
+class MediaNode extends Component<MediaNodeProps, MediaNodeState> {
   private pluginState: MediaPluginState;
 
-  constructor(props) {
+  constructor(props: MediaNodeProps) {
     super(props);
     const { view } = this.props;
     this.pluginState = mediaStateKey.getState(view.state);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(
+    nextProps: MediaNodeProps & ImageLoaderProps,
+    nextState: MediaNodeState,
+  ) {
     if (
       this.props.selected !== nextProps.selected ||
       this.props.viewContext !== nextProps.viewContext ||
@@ -122,15 +122,13 @@ class MediaNode extends Component<
      * Render loading until we do.
      */
     const isMobile = editorAppearance === 'mobile';
-    let isMobileReady = isMobile ? typeof collection === 'string' : true;
+    let isMobileReady = isMobile
+      ? typeof collection === 'string' && collection.length > 0
+      : true;
 
     if (type !== 'external' && (!viewContext || !isMobileReady)) {
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
-
-    /** For new images, the media state will be loaded inside the plugin state */
-    const state = this.pluginState.getMediaNodeState(id);
-    const fileId = (state && state.fileId) || id;
 
     const identifier: Identifier =
       type === 'external'
@@ -140,7 +138,7 @@ class MediaNode extends Component<
             mediaItemType: 'external-image',
           }
         : {
-            id: fileId,
+            id,
             mediaItemType: 'file',
             collectionName: collection!,
           };

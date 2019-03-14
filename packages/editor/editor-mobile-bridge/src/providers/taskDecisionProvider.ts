@@ -13,7 +13,7 @@ import {
 
 type ToggleTaskCallback = (key: ObjectKey, state: TaskState) => void;
 
-export const objectKeyToString = objectKey => {
+export const objectKeyToString = (objectKey: ObjectKey) => {
   const { containerAri, objectAri, localId } = objectKey;
   return `${containerAri}:${objectAri}:${localId}`;
 };

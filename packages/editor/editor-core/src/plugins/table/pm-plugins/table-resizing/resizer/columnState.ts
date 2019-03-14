@@ -7,6 +7,8 @@ import {
   getCellsRefsInColumn,
 } from './utils';
 
+import { tableNewColumnMinWidth } from '@atlaskit/editor-common';
+
 export default class ColumnState {
   constructor(public width: number, public minWidth: number = 0) {
     return Object.freeze(this);
@@ -42,18 +44,22 @@ export default class ColumnState {
           return unitToNumber(computedStyle.width);
         }
 
-        const { minWidth } = contentWidth(col, col);
+        const { minWidth: minContentWidth } = contentWidth(col, col);
 
-        // Override the min width, if their is content that can't collapse
+        // for newly created column (where width < minWidth) we set minWidth = 140px
+        const minCellWidth =
+          width < minWidth ? tableNewColumnMinWidth : minWidth;
+        // Override the min width, if there is content that can't collapse
         // Past a certain width.
         return Math.max(
-          addContainerLeftRightPadding(minWidth, computedStyle),
-          minColWidth || minWidth,
+          addContainerLeftRightPadding(minContentWidth, computedStyle),
+          minContentWidth,
+          minCellWidth,
         );
       },
     );
 
-    return new ColumnState(width, Math.max(minWidth, minColWidth));
+    return new ColumnState(width, minColWidth);
   }
 
   clone(newWidth?: number): ColumnState {

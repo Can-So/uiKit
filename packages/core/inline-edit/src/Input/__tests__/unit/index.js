@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import Input from '../..';
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 
 describe(name, () => {
   it('selects the input when select() is called', () => {

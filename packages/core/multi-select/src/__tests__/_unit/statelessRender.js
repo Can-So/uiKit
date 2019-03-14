@@ -19,7 +19,7 @@ import Footer from '../../components/Footer';
 import FooterDiv from '../../styled/Footer';
 import type { GroupType } from '../../types';
 
-import { name } from '../../../package.json';
+import { name } from '../../version.json';
 
 describe(`${name} - stateless`, () => {
   const animStub = window.cancelAnimationFrame;

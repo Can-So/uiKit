@@ -7,6 +7,7 @@ import {
   pressKeyup,
   KeyboardKeys,
 } from '../../__helpers/page-objects/_keyboard';
+import { animationFrame } from '../../__helpers/page-objects/_editor';
 
 export const tableSelectors = {
   contextalMenu: `.${ClassName.CONTEXTUAL_MENU_BUTTON}`,
@@ -51,6 +52,8 @@ export const tableSelectors = {
   }"]`,
   tableTd: 'table td',
   tableTh: 'table th',
+  cellBackgroundText: 'Cell background',
+  cellBackgroundSubmenuSelector: `.${ClassName.CONTEXTUAL_SUBMENU}`,
 };
 // insert table from menu
 export const insertTable = async page => {
@@ -84,6 +87,36 @@ export const selectCellOption = async (page, option) => {
   await page.waitForSelector(tableSelectors.contextalMenu);
   await page.click(tableSelectors.contextalMenu);
   await clickElementWithText({ page, tag: 'span', text: option });
+};
+
+// colorIndex - index of the color button DOM node, values from 1 to 8
+export const selectCellBackground = async ({ page, from, to, colorIndex }) => {
+  const firstCell = getSelectorForTableCell({
+    row: from.row,
+    cell: from.column,
+    cellType: from.row === 1 ? 'th' : 'td',
+  });
+  const lastCell = getSelectorForTableCell({
+    row: to.row,
+    cell: to.column,
+    cellType: from.row === 1 ? 'th' : 'td',
+  });
+  await page.click(firstCell);
+  await pressKey(page, KeyboardKeys.shift);
+  await page.click(lastCell);
+  await pressKeyup(page, KeyboardKeys.shift);
+  await page.waitForSelector(tableSelectors.selectedCell);
+  await clickCellOptions(page);
+  await animationFrame(page);
+
+  const colorButtonSelector =
+    tableSelectors.cellBackgroundSubmenuSelector +
+    ` span:nth-child(${colorIndex}) button`;
+
+  await selectCellOption(page, tableSelectors.cellBackgroundText);
+  await page.waitForSelector(colorButtonSelector);
+  await page.click(colorButtonSelector);
+  await animationFrame(page);
 };
 
 // support for table layout

@@ -5,7 +5,7 @@ export interface ExtensionParams<T> {
   extensionType: string;
   type?: 'extension' | 'inlineExtension' | 'bodiedExtension';
   parameters?: T;
-  content?: Object; // This would be the original Atlassian Document Format
+  content?: Object | string; // This would be the original Atlassian Document Format
 }
 
 export type ExtensionHandler<T> = (

@@ -12,6 +12,14 @@ import {
   leafNodeReplacementCharacter,
   InputRuleWithHandler,
 } from '../../../utils/input-rules';
+import {
+  ruleWithAnalytics,
+  ACTION,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+  EVENT_TYPE,
+  INPUT_METHOD,
+} from '../../analytics';
 
 export function createInputRule(regexp: RegExp, nodeType: NodeType) {
   return wrappingInputRule(
@@ -65,69 +73,115 @@ export const insertList = (
   return tr;
 };
 
+/**
+ * Create input rules for bullet list node
+ *
+ * @param {Schema} schema
+ * @returns {InputRule[]}
+ */
+function getBulletListInputRules(schema: Schema): InputRule[] {
+  const ruleWithBulletListAnalytics = ruleWithAnalytics(() => ({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_LIST_BULLET,
+    eventType: EVENT_TYPE.TRACK,
+    attributes: {
+      inputMethod: INPUT_METHOD.FORMATTING,
+    },
+  }));
+
+  // NOTE: we decided to restrict the creation of bullet lists to only "*"x
+  const asteriskRule = defaultInputRuleHandler(
+    createInputRule(/^\s*([\*\-]) $/, schema.nodes.bulletList),
+    true,
+  );
+
+  asteriskRule.handler = trackAndInvoke(
+    'atlassian.editor.format.list.bullet.autoformatting',
+    asteriskRule.handler as any,
+  );
+
+  const leafNodeAsteriskRule = defaultCreateInputRule(
+    new RegExp(`${leafNodeReplacementCharacter}\\s*([\\*\\-]) $`),
+    (state, match, start, end) => {
+      return insertList(
+        state,
+        schema.nodes.bulletList,
+        'bullet',
+        start,
+        end,
+        1,
+      );
+    },
+    true,
+  );
+
+  return [
+    ruleWithBulletListAnalytics(asteriskRule),
+    ruleWithBulletListAnalytics(leafNodeAsteriskRule),
+  ];
+}
+
+/**
+ * Create input rules for strong mark
+ *
+ * @param {Schema} schema
+ * @returns {InputRule[]}
+ */
+function getOrderedListInputRules(schema: Schema): InputRule[] {
+  const ruleWithOrderedListAnalytics = ruleWithAnalytics(() => ({
+    action: ACTION.FORMATTED,
+    actionSubject: ACTION_SUBJECT.TEXT,
+    actionSubjectId: ACTION_SUBJECT_ID.FORMAT_LIST_NUMBER,
+    eventType: EVENT_TYPE.TRACK,
+    attributes: {
+      inputMethod: INPUT_METHOD.FORMATTING,
+    },
+  }));
+
+  // NOTE: There is a built in input rule for ordered lists in ProseMirror. However, that
+  // input rule will allow for a list to start at any given number, which isn't allowed in
+  // markdown (where a ordered list will always start on 1). This is a slightly modified
+  // version of that input rule.
+  const numberOneRule = defaultInputRuleHandler(
+    createInputRule(/^(1)[\.\)] $/, schema.nodes.orderedList),
+    true,
+  );
+  numberOneRule.handler = trackAndInvoke(
+    'atlassian.editor.format.list.numbered.autoformatting',
+    numberOneRule.handler as any,
+  );
+
+  const leafNodeNumberOneRule = defaultCreateInputRule(
+    new RegExp(`${leafNodeReplacementCharacter}(1)[\\.\\)] $`),
+    (state, match, start, end) => {
+      return insertList(
+        state,
+        schema.nodes.orderedList,
+        'numbered',
+        start,
+        end,
+        2,
+      );
+    },
+    true,
+  );
+
+  return [
+    ruleWithOrderedListAnalytics(numberOneRule),
+    ruleWithOrderedListAnalytics(leafNodeNumberOneRule),
+  ];
+}
+
 export default function inputRulePlugin(schema: Schema): Plugin | undefined {
   const rules: InputRule[] = [];
 
   if (schema.nodes.bulletList) {
-    // NOTE: we decided to restrict the creation of bullet lists to only "*"x
-    const rule = defaultInputRuleHandler(
-      createInputRule(/^\s*([\*\-]) $/, schema.nodes.bulletList),
-      true,
-    );
-
-    rule.handler = trackAndInvoke(
-      'atlassian.editor.format.list.bullet.autoformatting',
-      rule.handler,
-    );
-    rules.push(rule);
-    rules.push(
-      defaultCreateInputRule(
-        new RegExp(`${leafNodeReplacementCharacter}\\s*([\\*\\-]) $`),
-        (state, match, start, end) => {
-          return insertList(
-            state,
-            schema.nodes.bulletList,
-            'bullet',
-            start,
-            end,
-            1,
-          );
-        },
-        true,
-      ),
-    );
+    rules.push(...getBulletListInputRules(schema));
   }
 
   if (schema.nodes.orderedList) {
-    // NOTE: There is a built in input rule for ordered lists in ProseMirror. However, that
-    // input rule will allow for a list to start at any given number, which isn't allowed in
-    // markdown (where a ordered list will always start on 1). This is a slightly modified
-    // version of that input rule.
-    const rule = defaultInputRuleHandler(
-      createInputRule(/^(1)[\.\)] $/, schema.nodes.orderedList),
-      true,
-    );
-    rule.handler = trackAndInvoke(
-      'atlassian.editor.format.list.numbered.autoformatting',
-      rule.handler,
-    );
-    rules.push(rule);
-    rules.push(
-      defaultCreateInputRule(
-        new RegExp(`${leafNodeReplacementCharacter}(1)[\\.\\)] $`),
-        (state, match, start, end) => {
-          return insertList(
-            state,
-            schema.nodes.orderedList,
-            'numbered',
-            start,
-            end,
-            2,
-          );
-        },
-        true,
-      ),
-    );
+    rules.push(...getOrderedListInputRules(schema));
   }
 
   if (rules.length !== 0) {

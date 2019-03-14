@@ -8,7 +8,6 @@ import { getToolbarConfig } from './toolbar';
 import keymap from './pm-plugins/keymaps';
 import ideUX from './pm-plugins/ide-ux';
 import { messages } from '../block-type/types';
-import { EditorPlugin } from '../../types';
 import {
   addAnalytics,
   ACTION,
@@ -17,6 +16,7 @@ import {
   INPUT_METHOD,
   EVENT_TYPE,
 } from '../analytics';
+import { PMPluginFactoryParams, EditorPlugin } from '../../types';
 
 export interface CodeBlockOptions {
   enableKeybindingsForIDE?: boolean;
@@ -36,7 +36,7 @@ const codeBlockPlugin = (options: CodeBlockOptions = {}): EditorPlugin => ({
       },
       {
         name: 'codeBlockKeyMap',
-        plugin: ({ schema }) => keymap(schema),
+        plugin: ({ schema }: PMPluginFactoryParams) => keymap(schema),
       },
     ];
   },

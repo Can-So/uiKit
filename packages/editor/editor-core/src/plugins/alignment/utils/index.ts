@@ -1,7 +1,10 @@
 import { findParentNodeOfType } from 'prosemirror-utils';
 import { AlignmentState } from '../pm-plugins/main';
+import { EditorState } from 'prosemirror-state';
 
-export const getActiveAlignment = (state): AlignmentState | undefined => {
+export const getActiveAlignment = (
+  state: EditorState,
+): AlignmentState | undefined => {
   const node = findParentNodeOfType([
     state.schema.nodes.paragraph,
     state.schema.nodes.heading,

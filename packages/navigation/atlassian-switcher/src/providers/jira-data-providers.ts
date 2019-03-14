@@ -1,10 +1,10 @@
 import { fetchJson } from '../utils/fetch';
 import asDataProvider from './as-data-provider';
-import { CustomLink } from '../types';
+import { CustomLinksResponse } from '../types';
 
-export const CustomLinksProvider = asDataProvider(() =>
-  Promise.all([
-    fetchJson<Array<CustomLink>>(`/rest/menu/latest/appswitcher`),
-    '/plugins/servlet/customize-application-navigator',
-  ]),
-);
+export const MANAGE_HREF = '/plugins/servlet/customize-application-navigator';
+
+const fetchCustomLinks = () =>
+  fetchJson<CustomLinksResponse>(`/rest/menu/latest/appswitcher`);
+
+export const CustomLinksProvider = asDataProvider(fetchCustomLinks);

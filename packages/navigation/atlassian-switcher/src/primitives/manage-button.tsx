@@ -1,4 +1,6 @@
 import * as React from 'react';
+import FormattedMessage from './formatted-message';
+import messages from '../utils/messages';
 import Button from '@atlaskit/button';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 import { NAVIGATION_CHANNEL, UI_EVENT_TYPE } from '../utils/analytics';
@@ -21,7 +23,7 @@ export default class ManageButton extends React.Component<ManageButtonProps> {
     const { href } = this.props;
     return (
       <Button href={href} onClick={this.onClick}>
-        Manage list
+        <FormattedMessage {...messages.manageList} />
       </Button>
     );
   }

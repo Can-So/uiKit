@@ -29,7 +29,7 @@ const getRelevantConfig = (
   }
 
   // create mapping of node type name to configs
-  const configByNodeType = {};
+  const configByNodeType: Record<string, FloatingToolbarConfig> = {};
   configs.forEach(config => {
     if (Array.isArray(config.nodeType)) {
       config.nodeType.forEach(nodeType => {
@@ -50,6 +50,8 @@ const getRelevantConfig = (
       return matchedConfig;
     }
   }
+
+  return;
 };
 
 const getDomRefFromSelection = (view: EditorView) =>

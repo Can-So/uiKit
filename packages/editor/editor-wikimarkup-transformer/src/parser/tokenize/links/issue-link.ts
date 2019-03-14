@@ -8,7 +8,14 @@ export function issueLinkResolver(
   schema: Schema,
   context: Context,
 ): PMNode[] | undefined {
-  const { originalLinkText } = link;
+  const { originalLinkText, linkTitle, notLinkBody } = link;
+  if (linkTitle === 'smart-link') {
+    return [
+      schema.nodes.inlineCard.createChecked({
+        url: notLinkBody,
+      }),
+    ];
+  }
   const issue: Issue | null = getIssue(context, originalLinkText);
 
   if (issue) {

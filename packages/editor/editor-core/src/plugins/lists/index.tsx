@@ -11,6 +11,14 @@ import WithPluginState from '../../ui/WithPluginState';
 import EditorBulletListIcon from '@atlaskit/icon/glyph/editor/bullet-list';
 import EditorNumberedListIcon from '@atlaskit/icon/glyph/editor/number-list';
 import { messages } from '../lists/messages';
+import {
+  addAnalytics,
+  ACTION,
+  EVENT_TYPE,
+  INPUT_METHOD,
+  ACTION_SUBJECT,
+  ACTION_SUBJECT_ID,
+} from '../analytics';
 
 const listPlugin: EditorPlugin = {
   nodes() {
@@ -42,7 +50,7 @@ const listPlugin: EditorPlugin = {
           <EditorBulletListIcon label={formatMessage(messages.unorderedList)} />
         ),
         action(insert, state) {
-          return insert(
+          const tr = insert(
             state.schema.nodes.bulletList.createChecked(
               {},
               state.schema.nodes.listItem.createChecked(
@@ -51,6 +59,16 @@ const listPlugin: EditorPlugin = {
               ),
             ),
           );
+
+          return addAnalytics(tr, {
+            action: ACTION.FORMATTED,
+            actionSubject: ACTION_SUBJECT.TEXT,
+            actionSubjectId: ACTION_SUBJECT_ID.FORMAT_LIST_BULLET,
+            eventType: EVENT_TYPE.TRACK,
+            attributes: {
+              inputMethod: INPUT_METHOD.QUICK_INSERT,
+            },
+          });
         },
       },
       {
@@ -61,7 +79,7 @@ const listPlugin: EditorPlugin = {
           <EditorNumberedListIcon label={formatMessage(messages.orderedList)} />
         ),
         action(insert, state) {
-          return insert(
+          const tr = insert(
             state.schema.nodes.orderedList.createChecked(
               {},
               state.schema.nodes.listItem.createChecked(
@@ -70,6 +88,16 @@ const listPlugin: EditorPlugin = {
               ),
             ),
           );
+
+          return addAnalytics(tr, {
+            action: ACTION.FORMATTED,
+            actionSubject: ACTION_SUBJECT.TEXT,
+            actionSubjectId: ACTION_SUBJECT_ID.FORMAT_LIST_NUMBER,
+            eventType: EVENT_TYPE.TRACK,
+            attributes: {
+              inputMethod: INPUT_METHOD.QUICK_INSERT,
+            },
+          });
         },
       },
     ],
@@ -78,6 +106,7 @@ const listPlugin: EditorPlugin = {
   primaryToolbarComponent({
     editorView,
     appearance,
+    dispatchAnalyticsEvent,
     popupsMountPoint,
     popupsBoundariesElement,
     popupsScrollableElement,
@@ -98,6 +127,7 @@ const listPlugin: EditorPlugin = {
             isReducedSpacing={isToolbarReducedSpacing}
             disabled={disabled}
             editorView={editorView}
+            dispatchAnalyticsEvent={dispatchAnalyticsEvent}
             popupsMountPoint={popupsMountPoint}
             popupsBoundariesElement={popupsBoundariesElement}
             popupsScrollableElement={popupsScrollableElement}

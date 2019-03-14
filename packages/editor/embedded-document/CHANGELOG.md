@@ -1,5 +1,40 @@
 # @atlaskit/embedded-document
 
+## 0.3.0
+- [minor] [97cb912458](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97cb912458):
+
+  - ED-6520: Enable noImplicitAny for embedded-document
+
+## 0.2.9
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-core@105.0.0
+  - @atlaskit/renderer@43.0.0
+
+## 0.2.8
+- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+  - @atlaskit/editor-core@104.0.0
+  - @atlaskit/renderer@42.0.0
+
+## 0.2.7
+- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+  - @atlaskit/button@10.1.3
+  - @atlaskit/editor-core@103.0.3
+  - @atlaskit/renderer@41.2.1
+  - @atlaskit/util-service-support@3.1.1
+  - @atlaskit/editor-common@33.0.3
+  - @atlaskit/theme@8.0.0
+
+## 0.2.6
+- Updated dependencies [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
+  - @atlaskit/editor-core@103.0.0
+
+## 0.2.5
+- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
+  - @atlaskit/editor-common@33.0.0
+  - @atlaskit/editor-core@102.0.0
+  - @atlaskit/renderer@41.0.0
+
 ## 0.2.4
 - Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
   - @atlaskit/editor-core@101.0.0

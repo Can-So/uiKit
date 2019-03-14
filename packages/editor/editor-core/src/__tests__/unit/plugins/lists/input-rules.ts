@@ -9,77 +9,131 @@ import {
   ul,
   hardBreak,
 } from '@atlaskit/editor-test-helpers';
-import { analyticsService } from '../../../../analytics';
+import { analyticsService, AnalyticsHandler } from '../../../../analytics';
 import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
+import { EditorView } from 'prosemirror-view';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 describe('inputrules', () => {
   const createEditor = createEditorFactory();
+  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
+  let trackEvent: jest.SpyInstance<AnalyticsHandler>;
 
-  let trackEvent;
-  const editor = (doc: any) =>
-    createEditor({
+  const editor = (doc: any) => {
+    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+    return createEditor({
       doc,
       editorPlugins: [listPlugin, codeBlockPlugin()],
-      editorProps: { analyticsHandler: trackEvent },
+      editorProps: {
+        analyticsHandler: trackEvent as any,
+        allowAnalyticsGASV3: true,
+      },
+      createAnalyticsEvent,
     });
+  };
+
   beforeEach(() => {
     trackEvent = jest.fn();
-    analyticsService.trackEvent = trackEvent;
+    analyticsService.trackEvent = trackEvent as any;
   });
 
   describe('bullet list rule', () => {
-    it('should convert "* " to a bullet list item', () => {
-      const { editorView, sel } = editor(doc(p('{<>}')));
-      insertText(editorView, '* ', sel);
-      expect(editorView.state.doc).toEqualDocument(doc(ul(li(p()))));
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.bullet.autoformatting',
-      );
+    describe('type "* "', () => {
+      let editorView: EditorView;
+      let sel: number;
+
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('{<>}'))));
+
+        insertText(editorView, '* ', sel);
+      });
+
+      it('should convert to a bullet list item', () => {
+        expect(editorView.state.doc).toEqualDocument(doc(ul(li(p()))));
+      });
+
+      it('should track analytics V2 event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(
+          'atlassian.editor.format.list.bullet.autoformatting',
+        );
+      });
+
+      it('should create analytics GAS V3 event', () => {
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'bulletedList',
+          attributes: {
+            inputMethod: 'autoformatting',
+          },
+        });
+      });
+
+      it('should convert to a bullet list item after shift+enter ', () => {
+        const { editorView, sel } = editor(doc(p('test', hardBreak(), '{<>}')));
+        insertText(editorView, '* ', sel);
+
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p('test'), ul(li(p()))),
+        );
+      });
+
+      it('should convert to a bullet list item after multiple shift+enter', () => {
+        const { editorView, sel } = editor(
+          doc(p('test', hardBreak(), hardBreak(), '{<>}')),
+        );
+        insertText(editorView, '* ', sel);
+
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p('test', hardBreak()), ul(li(p()))),
+        );
+      });
+
+      it('should convert to a bullet list item after shift+enter for only current line', () => {
+        const { editorView, sel } = editor(
+          doc(p('test1', hardBreak(), '{<>}test2', hardBreak(), 'test3')),
+        );
+        insertText(editorView, '* ', sel);
+
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p('test1'), ul(li(p('test2'))), p('test3')),
+        );
+      });
     });
 
-    it('should convert "* " after shift+enter to a bullet list item', () => {
-      const { editorView, sel } = editor(doc(p('test', hardBreak(), '{<>}')));
-      insertText(editorView, '* ', sel);
-      expect(editorView.state.doc).toEqualDocument(doc(p('test'), ul(li(p()))));
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.bullet.autoformatting',
-      );
-    });
+    describe('type "- "', () => {
+      let editorView: EditorView;
+      let sel: number;
 
-    it('should convert "* " after multiple shift+enter to a bullet list item', () => {
-      const { editorView, sel } = editor(
-        doc(p('test', hardBreak(), hardBreak(), '{<>}')),
-      );
-      insertText(editorView, '* ', sel);
-      expect(editorView.state.doc).toEqualDocument(
-        doc(p('test', hardBreak()), ul(li(p()))),
-      );
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.bullet.autoformatting',
-      );
-    });
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('{<>}'))));
 
-    it('should convert "* " after shift+enter to a bullet list for only current line', () => {
-      const { editorView, sel } = editor(
-        doc(p('test1', hardBreak(), '{<>}test2', hardBreak(), 'test3')),
-      );
-      insertText(editorView, '* ', sel);
-      expect(editorView.state.doc).toEqualDocument(
-        doc(p('test1'), ul(li(p('test2'))), p('test3')),
-      );
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.bullet.autoformatting',
-      );
-    });
+        insertText(editorView, '- ', sel);
+      });
 
-    it('should convert "- " to a bullet list item', () => {
-      const { editorView, sel } = editor(doc(p('{<>}')));
-      insertText(editorView, '- ', sel);
-      expect(editorView.state.doc).toEqualDocument(doc(ul(li(p()))));
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.bullet.autoformatting',
-      );
+      it('should convert to a bullet list item', () => {
+        expect(editorView.state.doc).toEqualDocument(doc(ul(li(p()))));
+      });
+
+      it('should track analytics V2 event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(
+          'atlassian.editor.format.list.bullet.autoformatting',
+        );
+      });
+
+      it('should create analytics GAS V3 event', () => {
+        expect(createAnalyticsEvent).toHaveBeenCalledWith({
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'bulletedList',
+          attributes: {
+            inputMethod: 'autoformatting',
+          },
+        });
+      });
     });
 
     it('should be not be possible to convert a code_clock to a list item', () => {
@@ -90,46 +144,92 @@ describe('inputrules', () => {
   });
 
   describe('ordered list rule', () => {
-    it('should convert "1. " to a ordered list item', () => {
-      const { editorView, sel } = editor(doc(p('{<>}')));
+    describe('type "1. "', () => {
+      let editorView: EditorView;
+      let sel: number;
 
-      insertText(editorView, '1. ', sel);
-      expect(editorView.state.doc).toEqualDocument(doc(ol(li(p()))));
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.numbered.autoformatting',
-      );
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('{<>}'))));
+
+        insertText(editorView, '1. ', sel);
+      });
+
+      it('should convert to an ordered list item', () => {
+        expect(editorView.state.doc).toEqualDocument(doc(ol(li(p()))));
+      });
+
+      it('should track analytics V2 event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(
+          'atlassian.editor.format.list.numbered.autoformatting',
+        );
+      });
+
+      it('should create analytics GAS V3 event', () => {
+        const expectedPayload = {
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'numberedList',
+          attributes: {
+            inputMethod: 'autoformatting',
+          },
+        };
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      });
+
+      it('should convert to a ordered list item after shift+enter', () => {
+        const { editorView, sel } = editor(doc(p('test', hardBreak(), '{<>}')));
+        insertText(editorView, '1. ', sel);
+
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p('test'), ol(li(p()))),
+        );
+      });
+
+      it('should convert to a ordered list item after multiple shift+enter', () => {
+        const { editorView, sel } = editor(
+          doc(p('test', hardBreak(), hardBreak(), '{<>}')),
+        );
+        insertText(editorView, '1. ', sel);
+
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p('test', hardBreak()), ol(li(p()))),
+        );
+      });
     });
 
-    it('should convert "1. " after shift+enter to a ordered list item', () => {
-      const { editorView, sel } = editor(doc(p('test', hardBreak(), '{<>}')));
-      insertText(editorView, '1. ', sel);
-      expect(editorView.state.doc).toEqualDocument(doc(p('test'), ol(li(p()))));
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.numbered.autoformatting',
-      );
-    });
+    describe('type "1) "', () => {
+      let editorView: EditorView;
+      let sel: number;
 
-    it('should convert "1. " after multiple shift+enter to a ordered list item', () => {
-      const { editorView, sel } = editor(
-        doc(p('test', hardBreak(), hardBreak(), '{<>}')),
-      );
-      insertText(editorView, '1. ', sel);
-      expect(editorView.state.doc).toEqualDocument(
-        doc(p('test', hardBreak()), ol(li(p()))),
-      );
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.numbered.autoformatting',
-      );
-    });
+      beforeEach(() => {
+        ({ editorView, sel } = editor(doc(p('{<>}'))));
 
-    it('should convert "1) " to a ordered list item', () => {
-      const { editorView, sel } = editor(doc(p('{<>}')));
+        insertText(editorView, '1) ', sel);
+      });
 
-      insertText(editorView, '1) ', sel);
-      expect(editorView.state.doc).toEqualDocument(doc(ol(li(p()))));
-      expect(trackEvent).toHaveBeenCalledWith(
-        'atlassian.editor.format.list.numbered.autoformatting',
-      );
+      it('should convert to an ordered list item', () => {
+        expect(editorView.state.doc).toEqualDocument(doc(ol(li(p()))));
+      });
+
+      it('should track analytics V2 event', () => {
+        expect(trackEvent).toHaveBeenCalledWith(
+          'atlassian.editor.format.list.numbered.autoformatting',
+        );
+      });
+
+      it('should create analytics GAS V3 event', () => {
+        const expectedPayload = {
+          action: 'formatted',
+          actionSubject: 'text',
+          eventType: 'track',
+          actionSubjectId: 'numberedList',
+          attributes: {
+            inputMethod: 'autoformatting',
+          },
+        };
+        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+      });
     });
 
     describe('for numbers other than 1', () => {

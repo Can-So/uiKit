@@ -30,6 +30,7 @@ import panelPlugin from '../../../../../plugins/panel';
 import listPlugin from '../../../../../plugins/lists';
 import codeBlockPlugin from '../../../../../plugins/code-block';
 import { setBlockType } from '../../../../../plugins/block-type/commands';
+import { ReactWrapper } from 'enzyme';
 
 describe('@atlaskit/editor-core/ui/ToolbarBlockType', () => {
   const createEditor = createEditorFactory();
@@ -148,7 +149,7 @@ describe('@atlaskit/editor-core/ui/ToolbarBlockType', () => {
   });
 
   describe('blockType dropdown items', () => {
-    let toolbarOption;
+    let toolbarOption: ReactWrapper;
     beforeEach(() => {
       const { editorView, pluginState } = editor(doc(p('text')));
       const { state, dispatch } = editorView;
@@ -189,8 +190,8 @@ describe('@atlaskit/editor-core/ui/ToolbarBlockType', () => {
   });
 
   describe('analytics', () => {
-    let trackEvent;
-    let toolbarOption;
+    let trackEvent: jest.SpyInstance;
+    let toolbarOption: ReactWrapper;
     beforeEach(() => {
       const { editorView, pluginState } = editor(doc(p('text')));
       const { state, dispatch } = editorView;
@@ -202,7 +203,7 @@ describe('@atlaskit/editor-core/ui/ToolbarBlockType', () => {
       );
       toolbarOption.find('button').simulate('click');
       trackEvent = jest.fn();
-      analyticsService.trackEvent = trackEvent;
+      analyticsService.trackEvent = trackEvent as any;
     });
 
     afterEach(() => {

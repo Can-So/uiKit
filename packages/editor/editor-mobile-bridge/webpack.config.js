@@ -36,6 +36,7 @@ module.exports = {
   entry: {
     editor: './src/editor/index.tsx',
     renderer: './src/renderer/index.tsx',
+    'error-reporter': './src/error-reporter.ts',
   },
   stats: {
     warnings: false,
@@ -48,7 +49,6 @@ module.exports = {
     mainFields: ['atlaskit:src', 'browser', 'main'],
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
-      '@atlaskit/media-picker': emptyExportPath,
       '@atlaskit/modal-dialog': emptyExportPath,
       '@atlaskit/logo': emptyExportPath,
       '@atlaskit/avatar': emptyExportPath,
@@ -92,12 +92,14 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public/editor.html.ejs'),
-      excludeChunks: ['renderer'],
+      chunks: ['error-reporter', 'editor'],
+      chunksSortMode: 'manual',
       filename: 'editor.html',
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public/renderer.html.ejs'),
-      excludeChunks: ['editor'],
+      chunks: ['error-reporter', 'renderer'],
+      chunksSortMode: 'manual',
       filename: 'renderer.html',
     }),
     new webpack.optimize.LimitChunkCountPlugin({

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/mention",
-  "version": "16.2.1",
+  "version": "16.4.0",
   "config": {
     "access": "public"
   },
@@ -15,27 +15,29 @@
     "src"
   ],
   "dependencies": {
-    "@atlaskit/analytics": "^4.0.7",
-    "@atlaskit/analytics-gas-types": "^3.2.3",
-    "@atlaskit/analytics-next": "^3.1.2",
+    "@atlaskit/analytics": "^5.0.0",
+    "@atlaskit/analytics-gas-types": "^3.2.5",
+    "@atlaskit/analytics-next": "^4.0.0",
     "@atlaskit/analytics-next-types": "^3.0.1",
-    "@atlaskit/avatar": "^14.1.8",
-    "@atlaskit/icon": "^16.0.0",
-    "@atlaskit/lozenge": "^6.2.4",
-    "@atlaskit/theme": "^7.0.1",
-    "@atlaskit/tooltip": "^12.1.15",
-    "@atlaskit/util-service-support": "^3.0.5",
+    "@atlaskit/avatar": "^15.0.0",
+    "@atlaskit/icon": "^16.0.4",
+    "@atlaskit/lozenge": "^7.0.0",
+    "@atlaskit/theme": "^8.0.0",
+    "@atlaskit/tooltip": "^13.0.0",
+    "@atlaskit/util-service-support": "^3.1.1",
     "babel-runtime": "^6.26.0",
     "tslib": "^1.8.0",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^6.0.1",
+    "@atlaskit/docs": "^7.0.0",
     "@atlaskit/editor-test-helpers": "^7.0.0",
+    "@atlaskit/elements-test-helpers": "^0.3.0",
     "@atlaskit/i18n-tools": "^0.4.0",
+    "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^10.0.32",
+    "@atlaskit/util-data-test": "^10.2.6",
     "@types/fetch-mock": "^6.0.3",
     "@types/query-string": "^4.3.1",
     "enzyme": "^3.7.0",

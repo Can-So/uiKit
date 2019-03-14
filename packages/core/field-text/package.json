@@ -1,18 +1,13 @@
 {
   "name": "@atlaskit/field-text",
-  "version": "7.1.0",
+  "version": "8.0.0",
   "description": "Field Text Component",
   "license": "Apache-2.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.js",
   "atlaskit:designLink": "https://atlassian.design/guidelines/product/components/text-field",
   "types": "src/index.d.ts",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "src/index.d.ts"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Sean C",
@@ -22,9 +17,9 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/analytics-next": "^3.1.2",
-    "@atlaskit/field-base": "^11.0.13",
-    "@atlaskit/theme": "^7.0.1",
+    "@atlaskit/analytics-next": "^4.0.0",
+    "@atlaskit/field-base": "^12.0.0",
+    "@atlaskit/theme": "^8.0.0",
     "@babel/runtime": "^7.0.0"
   },
   "peerDependencies": {
@@ -33,8 +28,9 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^10.1.1",
-    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/ssr": "^0.0.1",
+    "@atlaskit/button": "^10.1.3",
+    "@atlaskit/docs": "^7.0.0",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },

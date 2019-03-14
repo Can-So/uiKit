@@ -114,7 +114,7 @@ module.exports = async function createWebpackConfig(
         },
         {
           test: /\.js$/,
-          exclude: /node_modules/,
+          exclude: /node_modules|packages\/media\/media-editor\/src\/engine\/core\/binaries\/mediaEditor.js/,
           use: [
             {
               loader: 'thread-loader',
@@ -127,7 +127,7 @@ module.exports = async function createWebpackConfig(
               options: {
                 babelrc: true,
                 rootMode: 'upward',
-                envName: 'production:cjs',
+                envName: 'production:esm',
                 cacheDirectory: path.resolve(baseCacheDir, 'babel'),
               },
             },
@@ -283,7 +283,7 @@ function getOptimizations({ isProduction, noMinimizeFlag }) {
     parallel: Math.max(os.cpus().length - 1, 1),
     uglifyOptions: {
       compress: {
-        // Disabling following options speeds up minimization by 20 – 30s
+        // Disabling following options speeds up minimization by 20 - 30s
         // without any significant impact on a bundle size.
         arrows: false,
         booleans: false,

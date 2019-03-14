@@ -2,8 +2,10 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import EditorActions from '../../actions';
 
+export type EditorContextProps = { editorActions?: EditorActions };
+
 export default class EditorContext extends React.Component<
-  { editorActions?: EditorActions },
+  EditorContextProps,
   {}
 > {
   static childContextTypes = {
@@ -12,7 +14,7 @@ export default class EditorContext extends React.Component<
 
   private editorActions: EditorActions;
 
-  constructor(props) {
+  constructor(props: EditorContextProps) {
     super(props);
     this.editorActions = props.editorActions || new EditorActions();
   }

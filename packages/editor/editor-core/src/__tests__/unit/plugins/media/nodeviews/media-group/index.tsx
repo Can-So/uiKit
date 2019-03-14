@@ -6,34 +6,29 @@ import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
-  DefaultMediaStateManager,
 } from '../../../../../../plugins/media/pm-plugins/main';
 import MediaGroup from '../../../../../../plugins/media/nodeviews/mediaGroup';
 
 import { EditorAppearance } from '../../../../../../types';
 
 describe('nodeviews/mediaGroup', () => {
-  let pluginState;
-  const stateManager = new DefaultMediaStateManager();
+  let pluginState: MediaPluginState;
   const mediaNode = media({
     id: 'foo',
     type: 'file',
     collection: 'collection',
-    __key: '12345',
   })();
   const view = {} as EditorView;
   beforeEach(() => {
     pluginState = {} as MediaPluginState;
-    pluginState.stateManager = stateManager;
-    pluginState.getMediaOptions = () => ({});
-    pluginState.getMediaNodeState = () => ({});
+    pluginState.getMediaOptions = () => ({} as any);
     pluginState.mediaGroupNodes = {};
     pluginState.handleMediaNodeRemoval = () => {};
     jest.spyOn(mediaStateKey, 'getState').mockImplementation(() => pluginState);
   });
 
   it('should re-render for custom media picker with no thumb', () => {
-    pluginState.getMediaOptions = () => ({ customMediaPicker: {} });
+    pluginState.getMediaOptions = () => ({ customMediaPicker: {} } as any);
 
     const mediaGroupNode = mediaGroup(mediaNode);
     const props = {

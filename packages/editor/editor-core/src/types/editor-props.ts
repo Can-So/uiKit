@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Node, Schema } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { EditorActionsOptions } from '../actions/index';
+import EditorActions from '../actions/index';
 
 import {
   Transformer,
@@ -31,7 +31,6 @@ import { CardProvider, CardOptions } from '../plugins/card/types';
 import { QuickInsertOptions } from '../plugins/quick-insert/types';
 
 export type EditorAppearance =
-  | 'inline-comment'
   | 'comment'
   | 'full-page'
   | 'chromeless'
@@ -48,7 +47,7 @@ export type InsertMenuCustomItem = {
   elemAfter?: ReactComponents | string;
   isDisabled?: boolean;
   className?: string;
-  onClick?: (editorActions: EditorActionsOptions) => void;
+  onClick?: (editorActions: EditorActions) => void;
 };
 
 export type AllowedBlockTypes =
@@ -65,7 +64,6 @@ export interface EditorProps {
   /*
   Configure the display mode of the editor. Different modes may have different feature sets supported.
 
-  - `inline-comment` - should be used for inline comments, no toolbar is displayed
   - `comment` - should be used for things like comments where you have a field input but require a toolbar & save/cancel buttons
   - `full-page` - should be used for a full page editor where it is the user focus of the page
   - `chromeless` - is essentially the `comment` editor but without the editor chrome, like toolbar & save/cancel buttons
@@ -230,7 +228,7 @@ export interface EditorProps {
 
   // Set to add custom menu items to the insert (plus) menu dropdown.
   insertMenuItems?: InsertMenuCustomItem[];
-  editorActions?: EditorActionsOptions;
+  editorActions?: EditorActions;
 
   // Set for an on change callback.
   onChange?: (editorView: EditorView) => void;

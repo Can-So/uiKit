@@ -1,16 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Plugin, PluginKey } from 'prosemirror-state';
+import { Plugin, PluginKey, EditorState } from 'prosemirror-state';
 import { findParentNode } from 'prosemirror-utils';
 import { breakout } from '@atlaskit/adf-schema';
 import { calcBreakoutWidth } from '@atlaskit/editor-common';
-import { EditorPlugin } from '../../types';
+import { EditorPlugin, PMPluginFactoryParams } from '../../types';
 import { ReactNodeView } from '../../nodeviews';
 import WithPluginState from '../../ui/WithPluginState';
 import { pluginKey as widthPluginKey, WidthPluginState } from '../width';
 import LayoutButton from './ui/LayoutButton';
 import { isSupportedNodeForBreakout } from './utils/is-supported-node';
 import { BreakoutCssClassName } from './constants';
+import { ForwardRef } from '../../nodeviews/ReactNodeView';
 
 export const Wrapper = styled.div`
   .ProseMirror > .breakoutView-content-wrap &[data-layout='full-width'],
@@ -21,7 +22,7 @@ export const Wrapper = styled.div`
 `;
 
 export const pluginKey = new PluginKey('breakoutPlugin');
-export const getPluginState = state => pluginKey.getState(state);
+export const getPluginState = (state: EditorState) => pluginKey.getState(state);
 
 class BreakoutView extends ReactNodeView {
   getContentDOM() {
@@ -31,7 +32,7 @@ class BreakoutView extends ReactNodeView {
     return { dom };
   }
 
-  render(props, forwardRef) {
+  render(_props: any, forwardRef: ForwardRef) {
     const { mode } = this.node.attrs;
     return (
       <WithPluginState
@@ -55,7 +56,11 @@ class BreakoutView extends ReactNodeView {
   }
 }
 
-function createPlugin({ portalProviderAPI, providerFactory, dispatch }) {
+function createPlugin({
+  portalProviderAPI,
+  providerFactory,
+  dispatch,
+}: PMPluginFactoryParams) {
   return new Plugin({
     state: {
       init() {
@@ -63,7 +68,7 @@ function createPlugin({ portalProviderAPI, providerFactory, dispatch }) {
           breakoutNode: null,
         };
       },
-      apply(tr, pluginState, oldState) {
+      apply(tr, pluginState) {
         const breakoutNode = findParentNode(isSupportedNodeForBreakout)(
           tr.selection,
         );
@@ -101,7 +106,13 @@ const breakoutPlugin: EditorPlugin = {
     return [{ name: 'breakout', mark: breakout }];
   },
 
-  contentComponent({ editorView, containerElement, appearance }) {
+  contentComponent({
+    editorView,
+    appearance,
+    popupsMountPoint,
+    popupsBoundariesElement,
+    popupsScrollableElement,
+  }) {
     return (
       <WithPluginState
         plugins={{
@@ -112,7 +123,9 @@ const breakoutPlugin: EditorPlugin = {
             {appearance === 'full-page' && (
               <LayoutButton
                 editorView={editorView}
-                boundariesElement={containerElement}
+                mountPoint={popupsMountPoint}
+                boundariesElement={popupsBoundariesElement}
+                scrollableElement={popupsScrollableElement}
                 node={pluginState.breakoutNode}
               />
             )}

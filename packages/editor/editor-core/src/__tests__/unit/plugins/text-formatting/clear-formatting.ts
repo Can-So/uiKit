@@ -91,11 +91,11 @@ describe('clear-formatting', () => {
       expect(pluginState.formattingIsPresent).toBe(true);
     });
 
-    it('should be true if panel is present', () => {
+    it('should be false if panel is present', () => {
       const { pluginState } = editor(
         doc(p('paragraph'), panel()(p('panel{<>}node'))),
       );
-      expect(pluginState.formattingIsPresent).toBe(true);
+      expect(pluginState.formattingIsPresent).toBe(false);
     });
 
     it('should be false if no marks or formatted blocks are present', () => {
@@ -167,11 +167,13 @@ describe('clear-formatting', () => {
       expect(editorView.state.doc).toEqualDocument(doc(p('text')));
     });
 
-    it('should remove panel if present', () => {
-      const { editorView } = editor(doc(panel()(p('te{<>}xt'))));
+    it('should not remove panel if present', () => {
+      const { editorView } = editor(doc(panel()(p(code('{<}text{>}')))));
 
       clearFormatting()(editorView.state, editorView.dispatch);
-      expect(editorView.state.doc).toEqualDocument(doc(p('text')));
+      expect(editorView.state.doc).toEqualDocument(
+        doc(panel()(p('{<}text{>}'))),
+      );
     });
 
     it('should remove superscript if present', () => {
@@ -304,22 +306,6 @@ describe('clear-formatting', () => {
           createClearFormattingPayloadWithAttributes({
             inputMethod: inputMethodToolbar,
             formattingCleared: ['blockquote'],
-          }),
-        );
-      });
-
-      it(`should create analytics for panel format cleared`, () => {
-        const { editorView } = editor(doc(panel()(p('t{<}ex{>}t'))));
-
-        clearFormattingWithAnalytics(inputMethodToolbar)(
-          editorView.state,
-          editorView.dispatch,
-        );
-
-        expect(createAnalyticsEvent).toHaveBeenCalledWith(
-          createClearFormattingPayloadWithAttributes({
-            inputMethod: inputMethodToolbar,
-            formattingCleared: ['panel'],
           }),
         );
       });

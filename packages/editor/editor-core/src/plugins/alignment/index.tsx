@@ -2,12 +2,17 @@ import * as React from 'react';
 import { alignment } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
-import { pluginKey, createPlugin, AlignmentState } from './pm-plugins/main';
+import {
+  pluginKey,
+  createPlugin,
+  AlignmentState,
+  AlignmentPluginState,
+} from './pm-plugins/main';
 import { changeAlignment } from './commands';
 import ToolbarAlignment from './ui/ToolbarAlignment';
 
-export const defaultConfig = {
-  align: 'left',
+export const defaultConfig: AlignmentPluginState = {
+  align: 'start',
 };
 
 const alignmentPlugin: EditorPlugin = {

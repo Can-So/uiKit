@@ -30,18 +30,18 @@ export interface TableProps {
 // we allow scaling down column widths by no more than 15%
 const MAX_SCALING_PERCENT = 0.15;
 
-const isHeaderRowEnabled = rows => {
+const isHeaderRowEnabled = (rows: React.ReactChild[]) => {
   if (!rows.length) {
     return false;
   }
-  const { children } = rows[0].props;
+  const { children } = (rows[0] as React.ReactElement<any>).props;
   if (!children.length) {
     return false;
   }
   return children[0].type === TableHeader;
 };
 
-const addNumberColumnIndexes = rows => {
+const addNumberColumnIndexes = (rows: React.ReactChild[]) => {
   const headerRowEnabled = isHeaderRowEnabled(rows);
   return React.Children.map(rows, (row, index) => {
     return React.cloneElement(React.Children.only(row), {
@@ -75,13 +75,8 @@ const fixColumnWidth = (
 
   // If the tables total width (including no zero widths col or cols without width) is less than the current layout
   // We scale up the columns to meet the minimum of the table layout.
-  if (zeroWidthColumnsCount === 0) {
-    if (scaleDownPercent) {
-      return Math.floor((1 - scaleDownPercent) * columnWidth);
-    }
-    if (tableWidth < layoutWidth) {
-      return Math.floor(columnWidth * (layoutWidth / tableWidth));
-    }
+  if (zeroWidthColumnsCount === 0 && scaleDownPercent) {
+    return Math.floor((1 - scaleDownPercent) * columnWidth);
   }
 
   return Math.max(
@@ -109,7 +104,7 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
             {this.renderColgroup()}
             <tbody>
               {isNumberColumnEnabled
-                ? addNumberColumnIndexes(children)
+                ? addNumberColumnIndexes(React.Children.toArray(children))
                 : children}
             </tbody>
           </table>

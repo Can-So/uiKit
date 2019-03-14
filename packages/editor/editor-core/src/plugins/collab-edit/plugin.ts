@@ -115,7 +115,7 @@ export const createPlugin = (
                 const { state } = view;
 
                 const { tr } = state;
-                steps.forEach(step => tr.step(step));
+                steps.forEach((step: Step) => tr.step(step));
 
                 const newState = state.apply(tr);
                 view.updateState(newState);
@@ -188,7 +188,7 @@ export class PluginState {
     this.sid = sessionId;
   }
 
-  getInitial(sessionId) {
+  getInitial(sessionId: string) {
     const participant = this.participants.get(sessionId);
     return participant ? participant.name.substring(0, 1).toUpperCase() : 'X';
   }
@@ -316,6 +316,19 @@ export class PluginState {
         });
       });
     }
+
+    const { selection } = tr;
+    decorationSet.find().forEach((deco: any) => {
+      if (deco.type.toDOM) {
+        if (deco.from === selection.from && deco.to === selection.to) {
+          deco.type.toDOM.classList.add('telepointer-dim');
+          deco.type.side = -1;
+        } else {
+          deco.type.toDOM.classList.remove('telepointer-dim');
+          deco.type.side = 0;
+        }
+      }
+    });
 
     if (remove.length) {
       decorationSet = decorationSet.remove(remove);

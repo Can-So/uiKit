@@ -18,6 +18,6 @@ export type MediaPluginOptions = {
   waitForMediaUpload?: boolean;
   customDropzoneContainer?: HTMLElement;
   customMediaPicker?: CustomMediaPicker;
-  appearance: EditorAppearance;
+  appearance?: EditorAppearance;
   allowResizing: boolean;
 };

@@ -350,7 +350,7 @@ export const getSupportedFormatting = (
   ];
 };
 
-export const getComponentFromKeymap = keymap => {
+export const getComponentFromKeymap = (keymap: keymaps.Keymap) => {
   const shortcut: string = keymap[browser.mac ? 'mac' : 'windows'];
   const keyParts = shortcut.replace(/\-(?=.)/g, ' + ').split(' ');
   return (
@@ -406,7 +406,7 @@ const ModalHeader = injectIntl(
   ),
 );
 
-const ModalFooter = ({ showKeyline }) => (
+const ModalFooter = ({ showKeyline }: { showKeyline: boolean }) => (
   <Footer showKeyline={showKeyline}>
     <FormattedMessage
       {...messages.helpDialogTips}
@@ -416,7 +416,7 @@ const ModalFooter = ({ showKeyline }) => (
 );
 
 class HelpDialog extends React.Component<Props & InjectedIntlProps> {
-  private formatting: Format[];
+  private formatting: Format[] = [];
 
   closeDialog = () => {
     const {
@@ -426,7 +426,7 @@ class HelpDialog extends React.Component<Props & InjectedIntlProps> {
     closeHelpCommand(tr, dispatch);
   };
 
-  handleEsc = e => {
+  handleEsc = (e: KeyboardEvent) => {
     if (e.key === 'Escape' && this.props.isVisible) {
       this.closeDialog();
     }

@@ -75,7 +75,7 @@ export type GlobalNavDrawerProps = {
   /** A callback function which will be fired when the notification drawer has finished its close transition. **/
   onNotificationDrawerCloseComplete?: (node: HTMLElement) => void,
 
-  /** Locale to be passed to the notification iFrame */
+  /** Locale to be passed to the notification iFrame*/
   locale?: string,
   /** Prop to let notification iframe know which product it's being rendered in*/
   product?: 'jira' | 'confluence',
@@ -191,6 +191,15 @@ export type GlobalNavigationProps = {
   onSettingsClick?: ?() => void,
   /** The text to display in the tooltip for the settings drawer item. */
   settingsTooltip?: string,
+
+  /**
+    NOTE: This property is experimental and may be removed in a minor release.
+
+    Feature flag for Atlassian Switcher, whether to enable multiple link of
+    each jira products in atlassian switcher
+    e.g. instead of showing only Jira link, shows Jira Software and Jira Service Desk links
+  */
+  experimental_enableSplitJira?: boolean,
 
   ...$Exact<GlobalNavDrawerProps>,
 };

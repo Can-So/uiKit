@@ -1,0 +1,15 @@
+{
+  "name": "@atlaskit/ssr",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "description": "utility script used to server side render components in an isolated non-virtual dom environment to ensure components can be properly rehydrated",
+  "peerDependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.2"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/polyfill": "^7.0.0"
+  }
+}
