@@ -1,5 +1,10 @@
 # @atlaskit/analytics-next-types
 
+## 4.0.1
+- [patch] [90a14be594](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90a14be594):
+
+  - Fix broken type-helpers
+
 ## 4.0.0
 - [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 

@@ -1,5 +1,10 @@
 # @atlaskit/textarea
 
+## 0.3.1
+- [patch] [90a14be594](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90a14be594):
+
+  - Fix broken type-helpers
+
 ## 0.3.0
 - [minor] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 
