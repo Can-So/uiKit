@@ -3,7 +3,7 @@
   "version": "38.0.0",
   "description": "MediaViewer is Atlassian's powerful solution for viewing files on the web. It's both powerful and extendable yet easy-to-integrate",
   "license": "Apache-2.0",
-  "atlaskit:src": "src/index.tsx",
+  "atlaskit:src": "src/index.ts",
   "module": "index.js",
   "types": "index.d.ts",
   "sideEffects": false,
