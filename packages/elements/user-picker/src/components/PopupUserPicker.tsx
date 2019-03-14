@@ -49,7 +49,7 @@ export class PopupUserPicker extends React.Component<
         SelectComponent={PopupSelect}
         width={width}
         styles={styles}
-        components={getPopupComponents(popupTitle)}
+        components={getPopupComponents(!!popupTitle)}
         pickerProps={getPopupProps(
           width,
           target,

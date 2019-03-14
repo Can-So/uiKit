@@ -30,9 +30,8 @@ describe('PopupUserPicker', () => {
       expect(getPopupStyles).toHaveBeenCalledWith(500, false);
     });
 
-    it('should add custom Control if popupTitle is passed in to getPopupComponents', () => {
+    it('should add custom Control if popupTitle is passed in', () => {
       const component = shallowPopupUserPicker({ popupTitle: 'title' });
-      expect(component.prop('components')).toBeDefined();
       expect(component.prop('components')).toEqual(
         expect.objectContaining({
           Control: PopupControl,
@@ -42,6 +41,7 @@ describe('PopupUserPicker', () => {
 
     it('should not add custom Control if no popupTitle passed in', () => {
       const component = shallowPopupUserPicker();
+      expect(component.prop('components')).toBeDefined();
       expect(component.prop('components')).not.toEqual(
         expect.objectContaining({
           Control: expect.any(Function),

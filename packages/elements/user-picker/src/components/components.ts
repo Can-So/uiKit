@@ -33,7 +33,7 @@ export const getComponents = memoizeOne(
   },
 );
 
-export const getPopupComponents = memoizeOne((popupTitle?: string) => {
+export const getPopupComponents = memoizeOne((hasPopupTitle: boolean) => {
   const baseProps = {
     DropdownIndicator: null,
     SingleValue,
@@ -42,7 +42,7 @@ export const getPopupComponents = memoizeOne((popupTitle?: string) => {
     ValueContainer: SingleValueContainer,
     Input: PopupInput,
   };
-  if (popupTitle) {
+  if (hasPopupTitle) {
     return {
       ...baseProps,
       Control: PopupControl,
