@@ -20,7 +20,7 @@ async function runBuild() {
 
   print(buildBanner());
 
-  const config = await createConfig({
+  const config = createConfig({
     mode,
     websiteEnv,
     noMinimize,

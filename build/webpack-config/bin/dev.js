@@ -31,7 +31,7 @@ const minimatch = require('minimatch');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const historyApiFallback = require('connect-history-api-fallback');
-const createWebpackConfig = require('../config');
+const createConfig = require('../config');
 const utils = require('../config/utils');
 const { print, devServerBanner, errorMsg } = require('../banner');
 let HOST = 'localhost';
@@ -91,7 +91,7 @@ async function runDevServer() {
   // Creating webpack instance
   //
 
-  const config = await createWebpackConfig({
+  const config = createConfig({
     globs,
     mode,
     websiteEnv,
