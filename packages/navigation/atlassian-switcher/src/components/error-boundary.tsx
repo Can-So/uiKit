@@ -3,7 +3,12 @@ import {
   AnalyticsEventPayload,
   WithAnalyticsEventProps,
 } from '@atlaskit/analytics-next-types';
-import { InjectedIntlProps, Messages, injectIntl } from 'react-intl';
+import {
+  FormattedHTMLMessage,
+  injectIntl,
+  InjectedIntlProps,
+  Messages,
+} from 'react-intl';
 import { ErrorBoundaryWrapper } from '../primitives/wrapper';
 import FormattedMessage from '../primitives/formatted-message';
 import {
@@ -62,7 +67,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
             <FormattedMessage {...messages.errorHeading} />
           </h3>
           <p>
-            <FormattedMessage {...messages.errorText} />
+            <FormattedHTMLMessage {...messages.errorText} />
           </p>
         </ErrorBoundaryWrapper>
       );

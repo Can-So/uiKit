@@ -80,7 +80,7 @@ const messages = defineMessages({
   errorText: {
     id: 'fabric.atlassianSwitcher.errorText',
     defaultMessage:
-      'We keep track of these errors, but feel free to contact us if refreshing the page does&apos;nt fix things',
+      'We keep track of these errors, but feel free to contact us if refreshing the page doesn&apos;t fix things',
     description:
       'Text that is displayed when an unknown error happens in the app switcher.',
   },
