@@ -1,0 +1,1 @@
+- FS-3599 remove logic to hide add more placeholder
