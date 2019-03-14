@@ -8,7 +8,7 @@ import * as React from 'react';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../package.json';
+} from '../version.json';
 import { Theme, ThemeTokens } from '../theme';
 import { TextAreaWrapper } from '../styled';
 import TextareaElement from './TextAreaElement';
@@ -171,9 +171,9 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
                     disabled={isDisabled}
                     readOnly={isReadOnly}
                     required={isRequired}
+                    {...rest}
                     onFocus={this.handleOnFocus}
                     onBlur={this.handleOnBlur}
-                    {...rest}
                   />
                 </TextAreaWrapper>
               )}

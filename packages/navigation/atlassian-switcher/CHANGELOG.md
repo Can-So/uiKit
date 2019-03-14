@@ -1,5 +1,20 @@
 # @atlaskit/atlassian-switcher
 
+## 0.2.0
+- [minor] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
+## 0.1.4
+- [patch] [b08df363b7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b08df363b7):
+
+  - Add atlassian-switcher prefetch trigger in global-navigation
+
+## 0.1.3
+- [patch] [269cd93118](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/269cd93118):
+
+  - Progressive loading and prefetch primitives
+
 ## 0.1.2
 - [patch] [6ca66fceac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ca66fceac):
 

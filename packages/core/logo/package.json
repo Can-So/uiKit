@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/logo",
-  "version": "10.0.0",
+  "version": "10.0.1",
   "description": "A React component that highlights status for quick recognition",
   "license": "Apache-2.0",
   "module": "index.js",
@@ -26,13 +26,13 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/button": "^10.1.3",
+    "@atlaskit/button": "^11.0.0",
     "@atlaskit/code": "^9.0.0",
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/field-radio-group": "^5.0.0",
-    "@atlaskit/select": "^8.0.0",
-    "@atlaskit/theme": "^8.0.0",
+    "@atlaskit/docs": "^7.0.1",
+    "@atlaskit/field-radio-group": "^5.0.1",
+    "@atlaskit/select": "^8.0.3",
+    "@atlaskit/ssr": "^0.0.1",
+    "@atlaskit/theme": "^8.0.1",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"

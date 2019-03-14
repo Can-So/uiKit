@@ -1,6 +1,6 @@
 import { utils, ServiceConfig } from '@atlaskit/util-service-support';
 import { Provider } from './provider';
-import { Document } from '../model';
+import { Document, BatchDocumentResponse } from '../model';
 
 export interface Config extends ServiceConfig {}
 
@@ -45,14 +45,13 @@ export default class ServiceProvider implements Provider {
         ...(language ? { language } : {}),
       });
 
-      const documents = await utils.requestService<Array<Document>>(
-        this.config,
-        {
-          path: `document?${queryString}`,
-        },
-      );
+      const documents = await utils.requestService<
+        Array<BatchDocumentResponse>
+      >(this.config, {
+        path: `document?${queryString}`,
+      });
       if (documents && documents.length) {
-        return documents[0].language![language || 'default'].versions[0];
+        return documents[0].language[language || 'default'].versions[0];
       }
       return null;
     } catch (err) {

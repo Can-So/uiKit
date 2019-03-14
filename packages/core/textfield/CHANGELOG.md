@@ -1,5 +1,13 @@
 # @atlaskit/textfield
 
+## 0.3.1
+- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+  - @atlaskit/docs@7.0.1
+  - @atlaskit/analytics-next@4.0.1
+  - @atlaskit/form@5.2.1
+  - @atlaskit/theme@8.0.1
+  - @atlaskit/button@11.0.0
+
 ## 0.3.0
 - [minor] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 

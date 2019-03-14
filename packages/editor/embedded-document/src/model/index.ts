@@ -9,3 +9,12 @@ export interface Document {
 }
 
 export interface User {}
+
+export interface BatchDocumentResponse {
+  documentId: string;
+  language: {
+    [key: string]: {
+      versions: Document[];
+    };
+  };
+}

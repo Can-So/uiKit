@@ -1,16 +1,11 @@
 {
   "name": "@atlaskit/editor-test-helpers",
-  "version": "7.0.4",
+  "version": "8.0.0",
   "description": "Test Helpers for Atlassian Editor components",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "module": "index.js",
+  "types": "index.d.ts",
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Stanislas S"
@@ -20,14 +15,14 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/adf-schema": "^1.5.4",
-    "@atlaskit/analytics-next-types": "^3.1.0",
-    "@atlaskit/editor-common": "^33.0.0",
-    "@atlaskit/editor-core": "^103.0.0",
-    "@atlaskit/icon": "^16.0.0",
-    "@atlaskit/media-core": "^27.2.0",
-    "@atlaskit/media-test-helpers": "^20.1.6",
-    "@atlaskit/smart-card": "^9.4.1",
+    "@atlaskit/adf-schema": "^2.0.0",
+    "@atlaskit/analytics-next-types": "^4.0.0",
+    "@atlaskit/editor-common": "^35.0.0",
+    "@atlaskit/editor-core": "^106.0.0",
+    "@atlaskit/icon": "^16.0.5",
+    "@atlaskit/media-core": "^29.0.0",
+    "@atlaskit/media-test-helpers": "^21.0.0",
+    "@atlaskit/smart-card": "^10.0.0",
     "enzyme": "^3.7.0",
     "prosemirror-commands": "^1.0.7",
     "prosemirror-keymap": "^1.0.1",

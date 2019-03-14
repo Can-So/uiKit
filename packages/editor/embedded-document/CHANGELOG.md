@@ -1,5 +1,26 @@
 # @atlaskit/embedded-document
 
+## 0.4.0
+- [minor] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
+## 0.3.0
+- [minor] [97cb912458](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97cb912458):
+
+  - ED-6520: Enable noImplicitAny for embedded-document
+
+## 0.2.9
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-core@105.0.0
+  - @atlaskit/renderer@43.0.0
+
+## 0.2.8
+- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+  - @atlaskit/editor-core@104.0.0
+  - @atlaskit/renderer@42.0.0
+
 ## 0.2.7
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

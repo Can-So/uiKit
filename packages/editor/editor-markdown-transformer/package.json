@@ -1,33 +1,27 @@
 {
   "name": "@atlaskit/editor-markdown-transformer",
-  "version": "2.2.3",
+  "version": "3.0.0",
   "description": "Editor Markdown transformer",
-  "main": "dist/es5/index.js",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
+  "module": "index.js",
   "atlaskit:src": "src/index.ts",
-  "types": "dist/es5/index.d.ts",
+  "types": "index.d.ts",
   "sideEffects": false,
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
-  "files": [
-    "dist",
-    "src"
-  ],
   "author": "Atlassian Pty. Ltd",
   "license": "MIT",
   "dependencies": {
-    "@atlaskit/adf-schema": "^1.5.4",
-    "@atlaskit/editor-common": "^33.0.3",
+    "@atlaskit/adf-schema": "^2.0.0",
+    "@atlaskit/editor-common": "^35.0.0",
     "markdown-it": "^8.4.0",
     "markdown-it-table": "^2.0.4",
     "prosemirror-markdown": "^1.2.0",
     "prosemirror-model": "^1.7.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/editor-core": "^103.0.3",
-    "@atlaskit/editor-test-helpers": "^7.0.4",
-    "@atlaskit/util-data-test": "^10.2.3"
+    "@atlaskit/docs": "^7.0.1",
+    "@atlaskit/editor-core": "^106.0.0",
+    "@atlaskit/editor-test-helpers": "^8.0.0",
+    "@atlaskit/util-data-test": "^11.0.0"
   },
   "peerDependencies": {
     "styled-components": "^3.2.6"

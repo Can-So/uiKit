@@ -4,18 +4,22 @@ import Item from '@atlaskit/item';
 import {
   doc,
   p,
-  panel,
   strike,
   createEditorFactory,
   code,
   em,
+  subsup,
   mountWithIntl,
   code_block,
   underline,
+  createAnalyticsEventMock,
 } from '@atlaskit/editor-test-helpers';
 
 import { ReactWrapper } from 'enzyme';
-import { pluginKey } from '../../../../../plugins/text-formatting/pm-plugins/main';
+import {
+  pluginKey,
+  TextFormattingState,
+} from '../../../../../plugins/text-formatting/pm-plugins/main';
 import { pluginKey as clearFormattingPluginKey } from '../../../../../plugins/text-formatting/pm-plugins/clear-formatting';
 import ToolbarAdvancedTextFormatting, {
   messages,
@@ -24,29 +28,27 @@ import ToolbarButton from '../../../../../ui/ToolbarButton';
 import DropdownMenuWrapper from '../../../../../ui/DropdownMenu';
 import panelPlugin from '../../../../../plugins/panel';
 import codeBlockPlugin from '../../../../../plugins/code-block';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import {
-  ACTION,
-  ACTION_SUBJECT,
-  EVENT_TYPE,
-  INPUT_METHOD,
-  ACTION_SUBJECT_ID,
-} from '../../../../../plugins/analytics';
+import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { EditorView } from 'prosemirror-view';
+import { AnalyticsHandler } from '../../../../../analytics';
 
 describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
   const createEditor = createEditorFactory();
-  let createAnalyticsEvent: CreateUIAnalyticsEventSignature;
-  const editor = (doc: any, trackEvent = () => {}) => {
-    createAnalyticsEvent = jest.fn(() => ({ fire() {} }));
+  let createAnalyticsEvent: jest.MockInstance<UIAnalyticsEventInterface>;
+  let analyticsHandler: AnalyticsHandler;
+
+  const editor = (doc: any) => {
+    createAnalyticsEvent = createAnalyticsEventMock();
+    analyticsHandler = jest.fn();
     return createEditor({
       doc,
       editorPlugins: [panelPlugin, codeBlockPlugin()],
       pluginKey: pluginKey,
       editorProps: {
-        analyticsHandler: trackEvent,
+        analyticsHandler,
         allowAnalyticsGASV3: true,
       },
-      createAnalyticsEvent,
+      createAnalyticsEvent: createAnalyticsEvent as any,
     });
   };
 
@@ -392,46 +394,13 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
       .simulate('click');
   }
 
-  describe('analytics', () => {
-    let trackEvent;
-    let toolbarOption;
+  describe('Toolbar Button', () => {
+    let toolbarOption: ReactWrapper;
+    let editorView: EditorView;
+    let pluginState: TextFormattingState;
+
     beforeEach(() => {
-      trackEvent = jest.fn();
-      const { editorView, pluginState: textFormattingPluginState } = editor(
-        doc(panel()(p(em('text')))),
-        trackEvent,
-      );
-      toolbarOption = mountWithIntl(
-        <ToolbarAdvancedTextFormatting
-          textFormattingState={textFormattingPluginState}
-          clearFormattingState={{ formattingIsPresent: true }}
-          editorView={editorView}
-        />,
-      );
-    });
-
-    afterEach(() => {
-      toolbarOption.unmount();
-    });
-
-    ['code', 'strike', 'subscript', 'superscript', 'clearFormatting'].forEach(
-      type => {
-        it(`should trigger analyticsService.trackEvent when ${
-          messages[type].defaultMessage
-        } is clicked`, () => {
-          clickToolbarOption(type, toolbarOption);
-          expect(trackEvent).toHaveBeenCalledWith(
-            `atlassian.editor.format.${type}.button`,
-          );
-        });
-      },
-    );
-  });
-
-  describe('analytics v3', () => {
-    let toolbarOption;
-    beforeEach(() => {
-      const { editorView, pluginState } = editor(doc(p('text')));
+      ({ editorView, pluginState } = editor(doc(p('{<}text{>}'))));
 
       toolbarOption = mountWithIntl(
         <ToolbarAdvancedTextFormatting
@@ -447,25 +416,55 @@ describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
     });
 
     [
-      ACTION_SUBJECT_ID.FORMAT_UNDERLINE,
-      ACTION_SUBJECT_ID.FORMAT_STRIKE,
-      ACTION_SUBJECT_ID.FORMAT_CODE,
-      ACTION_SUBJECT_ID.FORMAT_SUB,
-      ACTION_SUBJECT_ID.FORMAT_SUPER,
-    ].forEach((type: ACTION_SUBJECT_ID) => {
-      it(`should dispatch analytics toolbar event for ${type}`, async () => {
-        const expectedPayload = {
-          action: ACTION.FORMATTED,
-          actionSubject: ACTION_SUBJECT.TEXT,
-          actionSubjectId: type,
-          eventType: EVENT_TYPE.TRACK,
-          attributes: {
-            inputMethod: INPUT_METHOD.TOOLBAR,
-          },
-        };
+      {
+        type: 'underline',
+        expectedDocument: doc(p(underline('text'))),
+      },
+      {
+        type: 'strike',
+        expectedDocument: doc(p(strike('text'))),
+      },
+      {
+        type: 'code',
+        expectedDocument: doc(p(code('text'))),
+      },
+      {
+        type: 'subscript',
+        expectedDocument: doc(p(subsup({ type: 'sub' })('text'))),
+      },
+      {
+        type: 'superscript',
+        expectedDocument: doc(p(subsup({ type: 'sup' })('text'))),
+      },
+    ].forEach(({ type, expectedDocument }) => {
+      describe(`Toolbar ${type}`, () => {
+        it('should apply the right format', () => {
+          clickToolbarOption(type, toolbarOption);
 
-        clickToolbarOption(type, toolbarOption);
-        expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+          expect(editorView.state.doc).toEqualDocument(expectedDocument);
+        });
+
+        it('should call analytics v2 handler', () => {
+          clickToolbarOption(type, toolbarOption);
+          expect(analyticsHandler).toHaveBeenCalledWith(
+            `atlassian.editor.format.${type}.button`,
+          );
+        });
+
+        it(`should create analytics V3 events`, async () => {
+          const expectedPayload = {
+            action: 'formatted',
+            actionSubject: 'text',
+            actionSubjectId: type,
+            eventType: 'track',
+            attributes: {
+              inputMethod: 'toolbar',
+            },
+          };
+
+          clickToolbarOption(type, toolbarOption);
+          expect(createAnalyticsEvent).toHaveBeenCalledWith(expectedPayload);
+        });
       });
     });
   });

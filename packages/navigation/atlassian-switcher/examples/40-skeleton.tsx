@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import Drawer from '@atlaskit/drawer';
 import Button from '@atlaskit/button';
 import Skeleton from '../src/primitives/skeleton';
 import { withAnalyticsLogger } from './helpers';
 
-class SkeletonExample extends Component {
+class SkeletonExample extends React.Component {
   state = {
     isDrawerOpen: false,
   };

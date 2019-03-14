@@ -1,18 +1,13 @@
 {
   "name": "@atlaskit/date",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "config": {
     "access": "public"
   },
   "description": "Fabric Date React Components",
-  "main": "dist/es5/index.js",
-  "modules": "dist/es2015/index.js",
+  "modules": "index.js",
   "types": "dist/es5/types.d.ts",
   "atlaskit:src": "src/index.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
@@ -26,7 +21,7 @@
     "elements"
   ],
   "dependencies": {
-    "@atlaskit/theme": "^8.0.0",
+    "@atlaskit/theme": "^8.0.1",
     "@types/date-fns": "^2.6.0",
     "date-fns": "^1.30.1",
     "styled-components": "^3.2.6"
@@ -35,8 +30,8 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/elements-test-helpers": "^0.2.0",
+    "@atlaskit/docs": "^7.0.1",
+    "@atlaskit/elements-test-helpers": "^0.3.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "react": "^16.4.0"

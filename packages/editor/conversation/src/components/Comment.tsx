@@ -66,7 +66,7 @@ const Reactions: React.ComponentClass<React.HTMLAttributes<{}>> = styled.div`
 `;
 
 export default class Comment extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -119,7 +119,7 @@ export default class Comment extends React.Component<Props, State> {
   }
 
   private dispatch = (dispatch: string, ...args: any[]) => {
-    const handler = this.props[dispatch];
+    const handler = (this.props as any)[dispatch];
 
     if (handler) {
       handler.apply(handler, args);
@@ -161,7 +161,7 @@ export default class Comment extends React.Component<Props, State> {
       parentComment.commentId,
       value,
       undefined,
-      id => {
+      (id: string) => {
         sendAnalyticsEvent({
           actionSubjectId: id,
           action: trackEventActions.created,
@@ -204,17 +204,22 @@ export default class Comment extends React.Component<Props, State> {
       containerId,
     });
 
-    this.dispatch('onDeleteComment', conversationId, commentId, id => {
-      sendAnalyticsEvent({
-        actionSubjectId: id,
-        action: trackEventActions.deleted,
-        eventType: eventTypes.TRACK,
-        actionSubject: 'comment',
-        attributes: {
-          nestedDepth: nestedDepth || 0,
-        },
-      });
-    });
+    this.dispatch(
+      'onDeleteComment',
+      conversationId,
+      commentId,
+      (id: string) => {
+        sendAnalyticsEvent({
+          actionSubjectId: id,
+          action: trackEventActions.deleted,
+          eventType: eventTypes.TRACK,
+          actionSubject: 'comment',
+          attributes: {
+            nestedDepth: nestedDepth || 0,
+          },
+        });
+      },
+    );
   };
 
   private onEdit = (value: any, analyticsEvent: AnalyticsEvent) => {
@@ -249,7 +254,7 @@ export default class Comment extends React.Component<Props, State> {
       conversationId,
       comment.commentId,
       value,
-      id => {
+      (id: string) => {
         sendAnalyticsEvent({
           actionSubjectId: id,
           action: trackEventActions.updated,

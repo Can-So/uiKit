@@ -1,21 +1,15 @@
 {
   "name": "@atlaskit/analytics-gas-types",
-  "version": "3.2.5",
+  "version": "4.0.0",
   "description": "Shared analytics functions/components for Fabric Elements",
   "config": {
     "access": "public"
   },
-  "main": "dist/es5/index.js",
   "atlaskit:src": "src/index.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "module": "index.js",
+  "types": "index.d.ts",
   "dependencies": {
-    "@atlaskit/analytics-next-types": "^3.0.0",
+    "@atlaskit/analytics-next-types": "^4.0.0",
     "tslib": "^1.8.0"
   },
   "author": "Atlassian Pty. Ltd",
@@ -28,7 +22,7 @@
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.0"
+    "@atlaskit/docs": "^7.0.1"
   },
   "atlaskit": {
     "internal": true

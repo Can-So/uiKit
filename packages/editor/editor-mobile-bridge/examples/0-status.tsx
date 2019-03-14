@@ -44,7 +44,7 @@ export default class Example extends React.Component<Props, {}> {
     bridge.onStatusPickerDismissed();
   };
 
-  private submitOnStatusUpdate = data => {
+  private submitOnStatusUpdate = (data: any) => {
     const { text, color, uuid } = data;
     bridge.onStatusUpdate(text, color.value as StatusColor, uuid);
   };
@@ -56,13 +56,15 @@ export default class Example extends React.Component<Props, {}> {
         <div style={{ flex: '1 0 300px', padding: 8, margin: 16 }}>
           <h3>Native to Web</h3>
           <Form onSubmit={this.submitOnStatusUpdate}>
-            {({ formProps }) => (
+            {({ formProps }: { formProps: any }) => (
               <form {...formProps}>
                 <Field name="text" label="Text" defaultValue={text}>
-                  {({ fieldProps }) => <Textfield {...fieldProps} />}
+                  {({ fieldProps }: { fieldProps: any }) => (
+                    <Textfield {...fieldProps} />
+                  )}
                 </Field>
                 <Field name="color" label="Color" defaultValue={color}>
-                  {({ fieldProps: { id, ...rest } }) => (
+                  {({ fieldProps: { id, ...rest } }: { fieldProps: any }) => (
                     <AkSelect
                       className="single-select"
                       classNamePrefix="react-select"
@@ -73,7 +75,9 @@ export default class Example extends React.Component<Props, {}> {
                   )}
                 </Field>
                 <Field name="uuid" label="uuid" defaultValue={uuid}>
-                  {({ fieldProps }) => <Textfield {...fieldProps} />}
+                  {({ fieldProps }: { fieldProps: any }) => (
+                    <Textfield {...fieldProps} />
+                  )}
                 </Field>
                 <FormFooter>
                   <AkButton type="submit">onStatusUpdate</AkButton>
@@ -82,7 +86,7 @@ export default class Example extends React.Component<Props, {}> {
             )}
           </Form>
           <Form onSubmit={this.onStatusPickerDismissed}>
-            {({ formProps }) => (
+            {({ formProps }: { formProps: any }) => (
               <form {...formProps}>
                 <FormFooter>
                   <AkButton type="submit">onStatusPickerDismissed</AkButton>

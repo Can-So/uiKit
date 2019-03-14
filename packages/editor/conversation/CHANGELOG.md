@@ -1,5 +1,35 @@
 # @atlaskit/conversation
 
+## 14.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
+## 13.0.1
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/editor-common@34.0.0
+  - @atlaskit/editor-core@105.0.0
+  - @atlaskit/renderer@43.0.0
+  - @atlaskit/comment@7.0.2
+  - @atlaskit/reactions@15.6.2
+  - @atlaskit/util-data-test@10.2.5
+
+## 13.0.0
+- [major] [68247a2490](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68247a2490):
+
+  - The internal mechanism for handling successfully retrieved conversations now resets the internal store to that collection instead of concatenating them to pre-existing ones.
+
+## 12.2.0
+- [minor] [55d8c2a898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55d8c2a898):
+
+  - noImplicitAny for @atlaskit/conversation
+
+## 12.1.5
+- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
+  - @atlaskit/comment@7.0.1
+  - @atlaskit/editor-core@104.0.0
+  - @atlaskit/renderer@42.0.0
+
 ## 12.1.4
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/editor-core@103.0.3

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { FormattedMessage, Messages } from 'react-intl';
+import { Messages } from 'react-intl';
+import * as isEqual from 'lodash.isequal';
 
 import {
   SwitcherWrapper,
@@ -8,21 +9,8 @@ import {
   ManageButton,
   Skeleton,
 } from '../primitives';
-import {
-  getLicensedProductLinks,
-  getAdministrationLinks,
-  getCustomLinkItems,
-  getRecentLinkItems,
-  SuggestedProductItemType,
-  getFixedProductLinks,
-} from '../utils/links';
-import { ChildrenProps } from '../providers/as-data-provider';
+import { SwitcherItemType, RecentItemType } from '../utils/links';
 
-import {
-  CustomLinksProviderDataStructure,
-  LicenseInformationDataStructure,
-} from '../providers/types';
-import { RecentContainersDataStructure } from '../providers/instance-data-providers';
 import {
   analyticsAttributes,
   NavigationAnalyticsContext,
@@ -30,20 +18,21 @@ import {
   RenderTracker,
 } from '../utils/analytics';
 import now from '../utils/performance-now';
+import FormattedMessage from '../primitives/formatted-message';
 import TryLozenge from '../primitives/try-lozenge';
-import { FeatureFlagProps } from '../types';
+import { TriggerXFlowCallback, FeatureFlagProps } from '../types';
 
 type SwitcherProps = {
-  cloudId: string;
-  triggerXFlow: (productKey: string, sourceComponent: string) => void;
   messages: Messages;
-  customLinks: ChildrenProps<CustomLinksProviderDataStructure>;
-  suggestedProductLink: SuggestedProductItemType;
-  recentContainers: ChildrenProps<RecentContainersDataStructure>;
-  licenseInformation: ChildrenProps<LicenseInformationDataStructure>;
-  managePermission: ChildrenProps<boolean>;
-  addProductsPermission: ChildrenProps<boolean>;
-  isXFlowEnabled: ChildrenProps<boolean>;
+  triggerXFlow: TriggerXFlowCallback;
+  isLoading: boolean;
+  licensedProductLinks: SwitcherItemType[];
+  suggestedProductLinks: SwitcherItemType[];
+  fixedLinks: SwitcherItemType[];
+  adminLinks: SwitcherItemType[];
+  recentLinks: RecentItemType[];
+  customLinks: SwitcherItemType[];
+  manageLink?: string;
 } & FeatureFlagProps;
 
 const getAnalyticsContext = (itemsCount: number) => ({
@@ -71,79 +60,33 @@ export default class Switcher extends React.Component<SwitcherProps> {
     this.mountedAt = now();
   }
 
-  timeSinceMounted() {
-    return Math.round(now() - this.mountedAt!);
+  timeSinceMounted(): number {
+    return this.mountedAt ? Math.round(now() - this.mountedAt) : 0;
   }
 
   triggerXFlow = () => {
-    const { triggerXFlow, suggestedProductLink } = this.props;
-    if (suggestedProductLink) {
-      triggerXFlow(suggestedProductLink.key, 'atlassian-switcher');
+    const { triggerXFlow, suggestedProductLinks } = this.props;
+    if (suggestedProductLinks.length) {
+      triggerXFlow(suggestedProductLinks[0].key, 'atlassian-switcher');
     }
   };
 
+  shouldComponentUpdate(nextProps: SwitcherProps) {
+    return !(isEqual(this.props, nextProps) as boolean);
+  }
+
   render() {
     const {
-      cloudId,
-      enableSplitJira,
-      suggestedProductLink,
       messages,
-      customLinks: { isLoading: isLoadingCustomLinks, data: customLinksData },
-      recentContainers: {
-        isLoading: isLoadingRecentContainers,
-        data: recentContainersData,
-      },
-      licenseInformation: {
-        isLoading: isLoadingLicenseInformation,
-        data: licenseInformationData,
-      },
-      managePermission: {
-        isLoading: isLoadingManagePermission,
-        data: managePermissionData,
-      },
-      addProductsPermission: {
-        isLoading: isLoadingAddProductsPermission,
-        data: addProductsPermissionData,
-      },
-      isXFlowEnabled: {
-        isLoading: isLoadingIsXFlowEnabled,
-        data: isXFlowEnabledData,
-      },
+      licensedProductLinks,
+      suggestedProductLinks,
+      fixedLinks,
+      adminLinks,
+      recentLinks,
+      customLinks,
+      manageLink,
+      isLoading,
     } = this.props;
-
-    const isLoading =
-      isLoadingCustomLinks ||
-      isLoadingRecentContainers ||
-      isLoadingLicenseInformation ||
-      isLoadingManagePermission ||
-      isLoadingAddProductsPermission ||
-      isLoadingIsXFlowEnabled;
-
-    if (isLoading) {
-      return <Skeleton />;
-    }
-
-    const isAdmin = managePermissionData;
-    const hasAdminLinks = managePermissionData || addProductsPermissionData;
-    const hasSuggestedLinks = !!(isXFlowEnabledData && suggestedProductLink);
-    const shouldShowManageListButton =
-      isAdmin && customLinksData && customLinksData[0];
-
-    const fixedProductLinks = getFixedProductLinks();
-    const licensedProductLinks = getLicensedProductLinks(
-      licenseInformationData!,
-      enableSplitJira,
-    );
-
-    const adminLinks = hasAdminLinks
-      ? getAdministrationLinks(cloudId, managePermissionData!)
-      : [];
-
-    const suggestedLinks = hasSuggestedLinks ? [suggestedProductLink!] : [];
-    const recentLinks = getRecentLinkItems(recentContainersData!.data);
-    const customLinks = customLinksData
-      ? getCustomLinkItems(customLinksData[0], licenseInformationData!)
-      : [];
 
     /**
      * It is essential that switchToLinks reflects the order corresponding nav items
@@ -151,21 +94,25 @@ export default class Switcher extends React.Component<SwitcherProps> {
      */
     const switchToLinks = [
       ...licensedProductLinks,
-      ...suggestedLinks,
-      ...fixedProductLinks,
+      ...suggestedProductLinks,
+      ...fixedLinks,
       ...adminLinks,
     ];
 
     const itemsCount =
       switchToLinks.length + recentLinks.length + customLinks.length;
 
+    const firstContentArrived = Boolean(licensedProductLinks.length);
+
     return (
       <NavigationAnalyticsContext data={getAnalyticsContext(itemsCount)}>
         <SwitcherWrapper>
-          <RenderTracker
-            subject={SWITCHER_SUBJECT}
-            data={{ duration: this.timeSinceMounted() }}
-          />
+          {firstContentArrived && (
+            <RenderTracker
+              subject={SWITCHER_SUBJECT}
+              data={{ duration: this.timeSinceMounted() }}
+            />
+          )}
           <Section
             sectionId="switchTo"
             title={<FormattedMessage {...messages.switchTo} />}
@@ -187,7 +134,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
-            {suggestedLinks.map(item => (
+            {suggestedProductLinks.map(item => (
               <NavigationAnalyticsContext
                 key={item.key}
                 data={getItemAnalyticsContext(
@@ -207,7 +154,7 @@ export default class Switcher extends React.Component<SwitcherProps> {
                 </SwitcherItem>
               </NavigationAnalyticsContext>
             ))}
-            {fixedProductLinks.map(item => (
+            {fixedLinks.map(item => (
               <NavigationAnalyticsContext
                 key={item.key}
                 data={getItemAnalyticsContext(
@@ -279,9 +226,8 @@ export default class Switcher extends React.Component<SwitcherProps> {
               </NavigationAnalyticsContext>
             ))}
           </Section>
-          {shouldShowManageListButton && (
-            <ManageButton href={customLinksData![1]} />
-          )}
+          {isLoading && <Skeleton />}
+          {manageLink && <ManageButton href={manageLink} />}
         </SwitcherWrapper>
       </NavigationAnalyticsContext>
     );

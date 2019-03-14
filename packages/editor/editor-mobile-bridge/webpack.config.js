@@ -36,6 +36,7 @@ module.exports = {
   entry: {
     editor: './src/editor/index.tsx',
     renderer: './src/renderer/index.tsx',
+    'error-reporter': './src/error-reporter.ts',
   },
   stats: {
     warnings: false,
@@ -45,7 +46,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/bundle'),
   },
   resolve: {
-    mainFields: ['atlaskit:src', 'browser', 'main'],
+    mainFields: ['atlaskit:src', 'module', 'browser', 'main'],
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
       '@atlaskit/modal-dialog': emptyExportPath,
@@ -70,7 +71,7 @@ module.exports = {
           cacheDirectory: true,
           babelrc: true,
           rootMode: 'upward',
-          envName: 'production:cjs',
+          envName: 'production:esm',
         },
       },
       {
@@ -91,12 +92,14 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public/editor.html.ejs'),
-      excludeChunks: ['renderer'],
+      chunks: ['error-reporter', 'editor'],
+      chunksSortMode: 'manual',
       filename: 'editor.html',
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public/renderer.html.ejs'),
-      excludeChunks: ['editor'],
+      chunks: ['error-reporter', 'renderer'],
+      chunksSortMode: 'manual',
       filename: 'renderer.html',
     }),
     new webpack.optimize.LimitChunkCountPlugin({

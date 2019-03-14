@@ -1,5 +1,20 @@
 # @atlaskit/textarea
 
+## 0.3.1
+- [patch] [90a14be594](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90a14be594):
+
+  - Fix broken type-helpers
+
+## 0.3.0
+- [minor] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
+## 0.2.6
+- [patch] [1b952c437d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b952c437d):
+
+  - Change order of props spread to fix textarea focus glow, and smart resizing when onChange passed in
+
 ## 0.2.5
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/button@10.1.3

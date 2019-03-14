@@ -2,9 +2,14 @@ export const fetchJsonSameOrigin = <T>(
   url: string,
   init?: RequestInit,
 ): Promise<T> =>
-  fetch(url, { credentials: 'same-origin', ...init }).then(response =>
-    response.json(),
-  );
+  fetch(url, { credentials: 'same-origin', ...init }).then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(
+      `Unable to fetch ${url} ${response.status} ${response.statusText}`,
+    );
+  });
 
 export const fetchJson = <T>(url: string) => fetchJsonSameOrigin<T>(url);
 

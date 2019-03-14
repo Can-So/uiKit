@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage as FormattedMessageNamespace } from 'react-intl';
 
 import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
 import SettingsGlyph from '@atlaskit/icon/glyph/settings';
@@ -11,7 +11,8 @@ import {
   JiraServiceDeskIcon,
   JiraCoreIcon,
 } from '@atlaskit/logo';
-import { LicenseInformationDataStructure } from '../providers/types';
+import FormattedMessage from '../primitives/formatted-message';
+import { LicenseInformationResponse } from '../types';
 import messages from './messages';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
@@ -35,7 +36,7 @@ export enum ProductKey {
 const SINGLE_JIRA_PRODUCT: 'jira' = 'jira';
 
 interface MessagesDict {
-  [index: string]: FormattedMessage.MessageDescriptor;
+  [index: string]: FormattedMessageNamespace.MessageDescriptor;
 }
 
 export type SwitcherItemType = {
@@ -49,8 +50,6 @@ export type RecentItemType = SwitcherItemType & {
   type: string;
   description: React.ReactNode;
 };
-
-export type SuggestedProductItemType = SwitcherItemType | null;
 
 export const OBJECT_TYPE_TO_LABEL_MAP: MessagesDict = {
   'jira-project': messages.jiraProject,
@@ -117,7 +116,7 @@ export const getProductLink = (
 });
 
 export const getProductIsActive = (
-  { products }: LicenseInformationDataStructure,
+  { products }: LicenseInformationResponse,
   productKey: string,
 ): boolean =>
   products.hasOwnProperty(productKey) &&
@@ -126,7 +125,7 @@ export const getProductIsActive = (
 // This function will determine which product links to render based
 // on license information and if we're separating the jira products or not
 export const getLicensedProductLinks = (
-  licenseInformationData: LicenseInformationDataStructure,
+  licenseInformationData: LicenseInformationResponse,
   enableSplitJira: boolean,
 ): SwitcherItemType[] => {
   const majorJiraProducts = [
@@ -186,25 +185,23 @@ export const getAdministrationLinks = (
 };
 
 export const getSuggestedProductLink = (
-  licenseInformationData: LicenseInformationDataStructure | null,
-): SuggestedProductItemType => {
-  if (!licenseInformationData) {
-    return null;
-  }
+  licenseInformationData: LicenseInformationResponse,
+): SwitcherItemType[] => {
   if (!getProductIsActive(licenseInformationData, ProductKey.CONFLUENCE)) {
-    return getProductLink(ProductKey.CONFLUENCE);
+    return [getProductLink(ProductKey.CONFLUENCE)];
   }
   if (
     !getProductIsActive(licenseInformationData, ProductKey.JIRA_SERVICE_DESK)
   ) {
-    return getProductLink(ProductKey.JIRA_SERVICE_DESK);
+    return [getProductLink(ProductKey.JIRA_SERVICE_DESK)];
   }
-  return null;
+
+  return [];
 };
 
 export const getCustomLinkItems = (
   list: Array<CustomLink>,
-  licenseInformationData: LicenseInformationDataStructure,
+  licenseInformationData: LicenseInformationResponse,
 ): SwitcherItemType[] => {
   const defaultProductCustomLinks = [
     `${licenseInformationData.hostname}/secure/MyJiraHome.jspa`,

@@ -6,7 +6,7 @@ import { mountEditor } from './utils';
 import { toNativeBridge } from '../../../src/editor/web-to-native';
 import mobileEditor from '../../../src/editor/mobile-editor-element';
 
-declare var bridge;
+declare var bridge: any;
 
 describe('NativeToWebBridge', () => {
   const originalContent = {
@@ -14,7 +14,7 @@ describe('NativeToWebBridge', () => {
     type: 'doc',
     content: [{ type: 'paragraph', content: [{ type: 'text', text: 'test' }] }],
   };
-  let editor;
+  let editor: any;
   beforeEach(async () => {
     editor = mount(mobileEditor({}));
   });
@@ -57,8 +57,9 @@ describe('NativeToWebBridge', () => {
   });
 });
 
-describe('insert media', () => {
-  let editor;
+//TODO: ED-6534 Unskip
+describe.skip('insert media', () => {
+  let editor: any;
   beforeEach(async () => {
     editor = await mountEditor();
   });
@@ -119,7 +120,7 @@ function sendSampleMediaEvents() {
 }
 
 describe('set padding', () => {
-  let editor;
+  let editor: any;
   beforeEach(async () => {
     editor = await mountEditor();
   });

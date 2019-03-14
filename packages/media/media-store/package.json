@@ -1,17 +1,12 @@
 {
   "name": "@atlaskit/media-store",
-  "version": "9.2.1",
+  "version": "11.0.0",
   "description": "Media Store API Web Client Library",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
-  "types": "dist/es5/index.d.ts",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
+  "types": "index.d.ts",
+  "module": "index.js",
   "atlaskit:src": "src/index.ts",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Jimmy Luong"
@@ -26,10 +21,10 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.1.0",
-    "@atlaskit/button": "^10.1.3",
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/media-card": "^55.0.2",
-    "@atlaskit/media-test-helpers": "^20.1.7",
+    "@atlaskit/button": "^11.0.0",
+    "@atlaskit/docs": "^7.0.1",
+    "@atlaskit/media-card": "^57.0.0",
+    "@atlaskit/media-test-helpers": "^21.0.0",
     "@types/fetch-mock": "^6.0.3",
     "fetch-mock": "^6.5.2",
     "react": "^16.4.0",

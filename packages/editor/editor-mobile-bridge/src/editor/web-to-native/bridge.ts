@@ -2,15 +2,15 @@ import { Color as StatusColor } from '@atlaskit/status';
 import { EditorBridges, EditorPluginBridges } from './index';
 
 export interface MentionBridge {
-  showMentions(query: String);
-  dismissMentions();
+  showMentions(query: String): void;
+  dismissMentions(): void;
 }
 
 export interface TextFormattingBridge {
-  updateTextFormat(markStates: string);
-  updateText(content: string);
-  updateBlockState(currentBlockType: string);
-  updateTextColor(color: string);
+  updateTextFormat(markStates: string): void;
+  updateText(content: string): void;
+  updateBlockState(currentBlockType: string): void;
+  updateTextColor(color: string): void;
 }
 
 export interface MediaBridge {
@@ -19,11 +19,11 @@ export interface MediaBridge {
 }
 
 export interface PromiseBridge {
-  submitPromise(name: string, uuid: string, args?: string);
+  submitPromise(name: string, uuid: string, args?: string): void;
 }
 
 export interface ListBridge {
-  updateListState(listState: string);
+  updateListState(listState: string): void;
 }
 
 export interface StatusBridge {
@@ -32,17 +32,17 @@ export interface StatusBridge {
     color: StatusColor,
     uuid: string,
     isNew: boolean,
-  );
-  dismissStatusPicker(isNew: boolean);
+  ): void;
+  dismissStatusPicker(isNew: boolean): void;
 }
 
 export interface TypeAheadBridge {
-  dismissTypeAhead();
-  typeAheadQuery(query: string, trigger: string);
+  dismissTypeAhead(): void;
+  typeAheadQuery(query: string, trigger: string): void;
 }
 
 export interface LinkBridge {
-  currentSelection(text: string, url: string);
+  currentSelection(text: string, url: string): void;
 }
 
 export default interface NativeBridge
@@ -55,6 +55,6 @@ export default interface NativeBridge
   call<T extends EditorPluginBridges>(
     bridge: T,
     event: keyof Exclude<EditorBridges[T], undefined>,
-    ...args
-  );
+    ...args: any[]
+  ): void;
 }

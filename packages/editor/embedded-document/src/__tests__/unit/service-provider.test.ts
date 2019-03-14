@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import * as fetchMock from 'fetch-mock/src/client';
+import * as fetchMock from 'fetch-mock';
 import ServiceProvider from '../../provider/service-provider';
 import {
   docId,
@@ -13,7 +13,7 @@ import {
 } from './_test-helpers';
 
 describe('ServiceProvider', () => {
-  let serviceProvider;
+  let serviceProvider: ServiceProvider;
 
   beforeAll(() => {
     serviceProvider = new ServiceProvider({
@@ -27,14 +27,11 @@ describe('ServiceProvider', () => {
 
   describe('getDocument', () => {
     beforeAll(() => {
-      fetchMock.get({
-        matcher: `begin:${providerUrl}`,
-        response: (url: string) => {
-          if (url === `${providerUrl}/document/${docId}/`) {
-            return validGetResponse;
-          }
-          return 404;
-        },
+      fetchMock.get(`begin:${providerUrl}`, (url: string) => {
+        if (url === `${providerUrl}/document/${docId}/`) {
+          return validGetResponse;
+        }
+        return 404;
       });
     });
 
@@ -51,17 +48,14 @@ describe('ServiceProvider', () => {
 
   describe('getDocumentByObjectId', () => {
     beforeAll(() => {
-      fetchMock.get({
-        matcher: `begin:${providerUrl}`,
-        response: (url: string) => {
-          if (
-            url ===
-            `${providerUrl}/document?objectId=${encodeURIComponent(objectId)}`
-          ) {
-            return validBatchGetResponse;
-          }
-          return 404;
-        },
+      fetchMock.get(`begin:${providerUrl}`, (url: string) => {
+        if (
+          url ===
+          `${providerUrl}/document?objectId=${encodeURIComponent(objectId)}`
+        ) {
+          return validBatchGetResponse;
+        }
+        return 404;
       });
     });
     it('should return document from service with objectId', async () => {
@@ -79,22 +73,19 @@ describe('ServiceProvider', () => {
 
   describe('updateDocument', () => {
     beforeAll(() => {
-      fetchMock.put({
-        matcher: `begin:${providerUrl}`,
-        response: (url: string) => {
-          if (url === `${providerUrl}/document/${docId}`) {
-            return validPutResponse;
-          }
+      fetchMock.put(`begin:${providerUrl}`, (url: string) => {
+        if (url === `${providerUrl}/document/${docId}`) {
+          return validPutResponse;
+        }
 
-          return 500;
-        },
+        return 500;
       });
     });
 
     it('should return updated document from service', async () => {
       const response = await serviceProvider.updateDocument(
         docId,
-        updatedContent,
+        JSON.stringify(updatedContent),
         objectId,
       );
 
@@ -104,7 +95,7 @@ describe('ServiceProvider', () => {
     it('should return null if document does not exist', async () => {
       const response = await serviceProvider.updateDocument(
         'does-not-exist',
-        updatedContent,
+        JSON.stringify(updatedContent),
         objectId,
       );
 
@@ -114,31 +105,22 @@ describe('ServiceProvider', () => {
 
   describe('createDocument', () => {
     beforeAll(() => {
-      fetchMock.post({
-        matcher: `begin:${providerUrl}`,
-        response: (url: string) => {
-          if (url === `${providerUrl}/document`) {
-            return validGetResponse;
-          }
+      fetchMock.post(`begin:${providerUrl}`, (url: string) => {
+        if (url === `${providerUrl}/document`) {
+          return validGetResponse;
+        }
 
-          return 500;
-        },
+        return 500;
       });
     });
 
     it('should return new document from service', async () => {
       const response = await serviceProvider.createDocument(
-        validContent,
+        JSON.stringify(validContent),
         objectId,
       );
 
       expect(response).toEqual(validGetResponse);
-    });
-
-    it('should return null if something went wrong', async () => {
-      const response = await serviceProvider.createDocument(null, objectId);
-
-      expect(response).toEqual(null);
     });
   });
 });

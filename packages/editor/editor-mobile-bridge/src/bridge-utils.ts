@@ -22,15 +22,15 @@ interface QueryParams {
  *  window.<bridgeName>.<eventName>(...<props>)
  */
 
-export const sendToBridge = (bridgeName, eventName, props = {}) => {
+export const sendToBridge = (bridgeName: any, eventName: any, props = {}) => {
   if (window.webkit && window.webkit.messageHandlers[bridgeName]) {
     window.webkit.messageHandlers[bridgeName].postMessage({
       name: eventName,
       ...props,
     });
-  } else if (window[bridgeName]) {
-    const args = Object.keys(props).map(key => props[key]);
-    const bridge = window[bridgeName];
+  } else if ((window as any)[bridgeName]) {
+    const args = Object.keys(props).map(key => (props as any)[key]);
+    const bridge = (window as any)[bridgeName];
     if (bridge && bridge.hasOwnProperty(eventName)) {
       bridge[eventName as any](...args);
     }
@@ -57,7 +57,7 @@ export const parseLocationSearch = (): QueryParams => {
   return window.location.search
     .slice(1)
     .split('&')
-    .reduce((acc, current) => {
+    .reduce((acc: Record<string, string>, current) => {
       const [key, value] = current.split('=');
       acc[key] = value;
       return acc;

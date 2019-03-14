@@ -1,5 +1,42 @@
 # @atlaskit/media-picker
 
+## 37.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+  - @atlaskit/docs@7.0.1
+  - @atlaskit/analytics-next@4.0.1
+  - @atlaskit/dropdown-menu@7.0.1
+  - @atlaskit/field-text@8.0.1
+  - @atlaskit/flag@10.0.1
+  - @atlaskit/icon@16.0.5
+  - @atlaskit/modal-dialog@8.0.2
+  - @atlaskit/select@8.0.3
+  - @atlaskit/spinner@10.0.1
+  - @atlaskit/theme@8.0.1
+  - @atlaskit/toggle@6.0.1
+  - @atlaskit/media-card@57.0.0
+  - @atlaskit/media-editor@31.0.0
+  - @atlaskit/media-viewer@39.0.0
+  - @atlaskit/button@11.0.0
+  - @atlaskit/analytics-gas-types@4.0.0
+  - @atlaskit/analytics-listeners@5.0.0
+  - @atlaskit/analytics-next-types@4.0.0
+  - @atlaskit/media-core@29.0.0
+  - @atlaskit/media-store@11.0.0
+  - @atlaskit/media-test-helpers@21.0.0
+  - @atlaskit/media-ui@10.0.0
+
+## 36.0.0
+- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
+  - @atlaskit/media-card@56.0.0
+  - @atlaskit/media-editor@30.0.0
+  - @atlaskit/media-test-helpers@20.1.8
+  - @atlaskit/media-viewer@38.0.0
+  - @atlaskit/media-core@28.0.0
+  - @atlaskit/media-store@10.0.0
+
 ## 35.0.2
 - [patch] [ff3f40bc38](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ff3f40bc38):
 

@@ -1,5 +1,22 @@
 # @atlaskit/feedback-collector
 
+## 3.0.1
+- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+  - @atlaskit/docs@7.0.1
+  - @atlaskit/checkbox@6.0.1
+  - @atlaskit/flag@10.0.1
+  - @atlaskit/form@5.2.1
+  - @atlaskit/global-navigation@6.1.1
+  - @atlaskit/icon@16.0.5
+  - @atlaskit/logo@10.0.1
+  - @atlaskit/modal-dialog@8.0.2
+  - @atlaskit/navigation-next@5.0.1
+  - @atlaskit/section-message@2.0.1
+  - @atlaskit/select@8.0.3
+  - @atlaskit/theme@8.0.1
+  - @atlaskit/button@11.0.0
+  - @atlaskit/textarea@0.3.0
+
 ## 3.0.0
 - [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 
