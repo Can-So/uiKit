@@ -303,7 +303,7 @@ export const toggleSubscriptWithAnalytics = (): Command =>
     attributes: {
       inputMethod: INPUT_METHOD.TOOLBAR,
     },
-  })(toggleSuperscript());
+  })(toggleSubscript());
 
 export const toggleCode = (): Command => {
   return (state, dispatch) => {
