@@ -1,1 +1,0 @@
-- ED-6275: drop size and alignment when pasting images into page columns or a table
