@@ -12,7 +12,7 @@ describe('getCreatableProps', () => {
   let formatCreateLabel: any;
   let isOptionDisabled: any;
   beforeAll(() => {
-    const creatableProps = getCreatableProps(true);
+    const creatableProps = getCreatableProps();
     isValidNewOption = creatableProps.isValidNewOption;
     getNewOptionData = creatableProps.getNewOptionData;
     formatCreateLabel = creatableProps.formatCreateLabel;
@@ -23,8 +23,8 @@ describe('getCreatableProps', () => {
     (isValidEmail as jest.Mock).mockClear();
   });
 
-  it('should return creatableProps when called with true', () => {
-    expect(getCreatableProps(true)).toMatchObject({
+  it('should return creatableProps when called', () => {
+    expect(getCreatableProps()).toMatchObject({
       allowCreateWhileLoading: true,
       createOptionPosition: 'first',
       isValidNewOption: expect.any(Function),
@@ -32,10 +32,6 @@ describe('getCreatableProps', () => {
       formatCreateLabel: expect.any(Function),
       isOptionDisabled: expect.any(Function),
     });
-  });
-
-  it('should return empty object when called with false', () => {
-    expect(getCreatableProps(false)).toEqual({});
   });
 
   describe('isValidOption', () => {

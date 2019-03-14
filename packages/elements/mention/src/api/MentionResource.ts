@@ -225,7 +225,7 @@ class AbstractMentionResource extends AbstractResource<MentionDescription[]>
 /**
  * Provides a Javascript API
  */
-class MentionResource extends AbstractMentionResource {
+export class MentionResource extends AbstractMentionResource {
   private config: MentionResourceConfig;
   private lastReturnedSearch: number;
   private activeSearches: Set<string>;
@@ -233,13 +233,7 @@ class MentionResource extends AbstractMentionResource {
   constructor(config: MentionResourceConfig) {
     super();
 
-    if (!config.url) {
-      throw new Error('config.url is a required parameter');
-    }
-
-    if (!config.securityProvider) {
-      config.securityProvider = emptySecurityProvider;
-    }
+    this.verifyMentionConfig(config);
 
     this.config = config;
     this.lastReturnedSearch = 0;
@@ -310,6 +304,16 @@ class MentionResource extends AbstractMentionResource {
     return this.activeSearches.has(query);
   }
 
+  protected verifyMentionConfig(config: MentionResourceConfig) {
+    if (!config.url) {
+      throw new Error('config.url is a required parameter');
+    }
+
+    if (!config.securityProvider) {
+      config.securityProvider = emptySecurityProvider;
+    }
+  }
+
   private initialState(
     contextIdentifier?: MentionContextIdentifier,
   ): Promise<MentionsResult> {
@@ -340,7 +344,7 @@ class MentionResource extends AbstractMentionResource {
    * @param contextIdentifier
    * @returns Promise
    */
-  private remoteInitialState(
+  protected remoteInitialState(
     contextIdentifier?: MentionContextIdentifier,
   ): Promise<MentionsResult> {
     const queryParams: KeyValues = this.getQueryParams(contextIdentifier);
@@ -363,7 +367,7 @@ class MentionResource extends AbstractMentionResource {
     };
   }
 
-  private remoteSearch(
+  protected remoteSearch(
     query: string,
     contextIdentifier?: MentionContextIdentifier,
   ): Promise<MentionsResult> {
@@ -399,7 +403,7 @@ class MentionResource extends AbstractMentionResource {
     return { ...result, mentions, query: result.query || query };
   }
 
-  private recordSelection(
+  protected recordSelection(
     mention: MentionDescription,
     contextIdentifier?: MentionContextIdentifier,
   ): Promise<void> {

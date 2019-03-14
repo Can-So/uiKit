@@ -13,6 +13,7 @@ import {
   UserType,
   Value,
 } from '../types';
+import { PopupSelect } from '@atlaskit/select';
 
 export const isUser = (option: OptionData): option is User =>
   option.type === undefined || option.type === UserType;
@@ -95,3 +96,10 @@ export const getAvatarUrl = (optionData: OptionData) => {
   }
   return undefined;
 };
+
+export const isPopupUserPickerByComponent = (
+  SelectComponent: React.ComponentClass<any>,
+) => SelectComponent === PopupSelect;
+
+export const isPopupUserPickerByProps = (selectProps: any) =>
+  selectProps.searchThreshold === -1;

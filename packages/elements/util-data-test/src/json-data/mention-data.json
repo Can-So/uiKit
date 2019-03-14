@@ -278,6 +278,52 @@
         }
      ]
   }
-}
+},
+  {
+    "id":"team-1",
+    "name":"Team Alpha",
+    "mentionName":"",
+    "avatarUrl":"https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/0.svg",
+    "nickname":"",
+    "accessLevel":"CONTAINER",
+    "userType":"TEAM",
+    "lozenge":"TEAM",
+    "presence": null,
+    "context": {
+      "members": [
+        {
+          "id": "member-1",
+          "name": "Tung Dang"
+        },
+        {
+          "id": "member-2",
+          "name": "Ishan Somasiri"
+        }
+      ]
+    }
+  },
+  {
+    "id":"team-2",
+    "name":"Team Beta",
+    "mentionName":"",
+    "avatarUrl":"https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/1.svg",
+    "nickname":"",
+    "accessLevel":"CONTAINER",
+    "userType":"TEAM",
+    "lozenge":"TEAM",
+    "presence": null,
+    "context": {
+      "members": [
+        {
+          "id": "member-1",
+          "name": "Tung Dang"
+        },
+        {
+          "id": "member-2",
+          "name": "Ishan Somasiri"
+        }
+      ]
+    }
+  }
 ]
 }
