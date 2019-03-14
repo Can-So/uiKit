@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import { taskDecision } from '@atlaskit/util-data-test';
@@ -44,3 +45,39 @@ export const action = (action: string) => () => {
   // tslint:disable-next-line:no-console
   console.log({ action });
 };
+
+interface Props {
+  render: (
+    taskStates: Map<string, boolean>,
+    onChangeListener: (taskId: string, done: boolean) => void,
+  ) => JSX.Element;
+}
+
+interface State {
+  tick: number;
+}
+
+export class TaskStateManager extends PureComponent<Props, State> {
+  private taskStates = new Map<string, boolean>();
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      tick: 0,
+    };
+  }
+
+  private onChangeListener = (taskId: string, done: boolean) => {
+    action('onChange')();
+    this.taskStates.set(taskId, done);
+    this.setState({ tick: this.state.tick + 1 });
+  };
+
+  render() {
+    return (
+      <MessageContainer>
+        {this.props.render(this.taskStates, this.onChangeListener)}
+      </MessageContainer>
+    );
+  }
+}

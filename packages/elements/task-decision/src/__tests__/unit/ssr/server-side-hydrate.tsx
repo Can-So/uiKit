@@ -22,14 +22,14 @@ describe('server side rendering and hydration', async () => {
     },
   );
 
-  // TODO: https://product-fabric.atlassian.net/browse/FS-3681
-  test.skip.each([['_decision-card.tsx']])(
-    'ssr("%s")',
-    async (fileName: string) => {
-      await ssr_hydrate(__dirname, `${ExamplesPath}/${fileName}`);
+  test.skip.each([
+    ['_decision-card.tsx'], // TODO: https://product-fabric.atlassian.net/browse/FS-3681
+    ['_task-card.tsx'], // TODO: https://product-fabric.atlassian.net/browse/FS-3681
+    ['_task-inline.tsx'], // TODO: https://product-fabric.atlassian.net/browse/FS-3688
+  ])('ssr("%s")', async (fileName: string) => {
+    await ssr_hydrate(__dirname, `${ExamplesPath}/${fileName}`);
 
-      // tslint:disable-next-line:no-console
-      expect(console.error).not.toBeCalled();
-    },
-  );
+    // tslint:disable-next-line:no-console
+    expect(console.error).not.toBeCalled();
+  });
 });
