@@ -7,6 +7,7 @@ import MentionResource, {
   MentionResourceConfig,
 } from '../../../api/MentionResource';
 import { MentionDescription } from '../../../types';
+import { checkOrder } from '../_test-helpers';
 import {
   resultC,
   resultCr,
@@ -46,21 +47,6 @@ const apiConfigWithoutCredentials: MentionResourceConfig = {
     return options(defaultSecurityCode, true);
   },
 };
-
-function checkOrder(
-  expected: MentionDescription[][],
-  actual: MentionDescription[][],
-) {
-  expect(actual).toHaveLength(expected.length);
-  for (let i = 0; i < expected.length; i++) {
-    expect(actual[i]).toHaveLength(expected[i].length);
-    if (expected[i].length) {
-      for (let j = 0; j < expected[i].length; j++) {
-        expect(actual[i][j].id).toEqual(expected[i][j].id);
-      }
-    }
-  }
-}
 
 const FULL_CONTEXT = {
   containerId: 'someContainerId',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import rafSchedule from 'raf-schd';
-import SizeDetector from '@atlaskit/size-detector';
+import WidthDetector from '@atlaskit/width-detector';
 
 export const Breakpoints = {
   S: 'S',
@@ -41,19 +41,19 @@ export class WidthProvider extends React.Component<any, WidthProviderState> {
   render() {
     return (
       <>
-        <SizeDetector
+        <WidthDetector
           containerStyle={{
             height: '0',
             borderStyle: 'none',
           }}
         >
-          {({ width }: WidthProviderState) => {
-            if (width !== null) {
+          {width => {
+            if (width !== undefined) {
               this.setWidth(width);
             }
             return null;
           }}
-        </SizeDetector>
+        </WidthDetector>
         <Provider value={createWidthContext(this.state.width)}>
           {this.props.children}
         </Provider>

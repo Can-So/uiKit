@@ -1,15 +1,15 @@
 import { TaskState } from '@atlaskit/task-decision';
 
 export interface TaskDecisionBridge {
-  updateTask(taskId: string, state: TaskState);
+  updateTask(taskId: string, state: TaskState): void;
 }
 
 export interface LinkBridge {
-  onLinkClick(url: string);
+  onLinkClick(url: string): void;
 }
 
 export interface RenderBridge {
-  onContentRendered();
+  onContentRendered(): void;
 }
 
 export default interface WebBridge

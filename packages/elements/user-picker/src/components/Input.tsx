@@ -1,16 +1,19 @@
-import { components } from '@atlaskit/select';
 import * as React from 'react';
+import { components } from '@atlaskit/select';
 
-type Props = {
-  selectProps: { disableInput?: boolean };
+export type Props = {
+  selectProps?: { disableInput?: boolean };
+  innerRef: (ref: HTMLInputElement) => void;
 };
 
-export class Input extends React.PureComponent<Props> {
+export class Input extends React.Component<Props> {
   render() {
+    const { selectProps } = this.props;
     return (
       <components.Input
-        disabled={this.props.selectProps.disableInput}
         {...this.props}
+        innerRef={this.props.innerRef}
+        disabled={selectProps && selectProps.disableInput}
       />
     );
   }

@@ -1,5 +1,10 @@
 # @atlaskit/embedded-document
 
+## 0.3.0
+- [minor] [97cb912458](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97cb912458):
+
+  - ED-6520: Enable noImplicitAny for embedded-document
+
 ## 0.2.9
 - Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
   - @atlaskit/editor-common@34.0.0

@@ -177,7 +177,7 @@ export const failedEvent: EventCreator = (
   });
 
 function queryLength(state: UserPickerState) {
-  return state.preventFilter ? 0 : state.inputValue.length;
+  return state.inputValue.length;
 }
 
 function selectEventType(session?: UserPickerSession): string {
@@ -193,7 +193,7 @@ function downKeyCount(session?: UserPickerSession) {
 }
 
 function spaceInQuery(state: UserPickerState) {
-  return state.preventFilter ? false : state.inputValue.indexOf(' ') !== -1;
+  return state.inputValue.indexOf(' ') !== -1;
 }
 
 function sessionDuration(session?: UserPickerSession) {

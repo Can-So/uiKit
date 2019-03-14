@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/width-detector",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Wrapper for components that need to respond to width changes",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",

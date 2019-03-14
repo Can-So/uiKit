@@ -24,7 +24,7 @@ export default class MobileMediaPicker implements CustomMediaPicker {
       return;
     }
 
-    this.listeners[event].forEach(cb => cb(data));
+    this.listeners[event].forEach((cb: any) => cb(data));
   }
 
   destroy(): void {

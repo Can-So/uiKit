@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { EditorView } from 'prosemirror-view';
-import SizeDetector from '@atlaskit/size-detector';
+import WidthDetector from '@atlaskit/width-detector';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { EditorAppearance, ToolbarUIComponentFactory } from '../../types';
 import { EventDispatcher } from '../../event-dispatcher';
@@ -147,11 +147,11 @@ export function Toolbar(props: ToolbarProps) {
 export default function ToolbarWithSizeDetector(props: ToolbarProps) {
   return (
     <div style={{ width: '100%', minWidth: '254px' }}>
-      <SizeDetector>
-        {({ width }: { width: number | null }) =>
-          width === null ? null : <Toolbar {...props} width={width} />
+      <WidthDetector>
+        {width =>
+          width === undefined ? null : <Toolbar {...props} width={width} />
         }
-      </SizeDetector>
+      </WidthDetector>
     </div>
   );
 }

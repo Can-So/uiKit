@@ -147,8 +147,8 @@ describe('utils/links', () => {
         'jira-software.ondemand',
       ]);
       const result = getSuggestedProductLink(licenseInformation);
-      expect(result).not.toBe(null);
-      expect(result && result.key).toBe('confluence.ondemand');
+      expect(result.length).toEqual(1);
+      expect(result[0]).toHaveProperty('key', 'confluence.ondemand');
     });
     it('should offer Jira Service Desk if Confluence is active', () => {
       const licenseInformation = generateLicenseInformation([
@@ -156,16 +156,16 @@ describe('utils/links', () => {
         'confluence.ondemand',
       ]);
       const result = getSuggestedProductLink(licenseInformation);
-      expect(result).not.toBe(null);
-      expect(result && result.key).toBe('jira-servicedesk.ondemand');
+      expect(result.length).toEqual(1);
+      expect(result[0]).toHaveProperty('key', 'jira-servicedesk.ondemand');
     });
-    it('should return null if Confluence and JSD are active', () => {
+    it('should return empty array if Confluence and JSD are active', () => {
       const licenseInformation = generateLicenseInformation([
         'jira-servicedesk.ondemand',
         'confluence.ondemand',
       ]);
       const result = getSuggestedProductLink(licenseInformation);
-      expect(result && result.key).toBe(null);
+      expect(result).toEqual([]);
     });
   });
 });
