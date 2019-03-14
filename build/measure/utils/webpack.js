@@ -15,13 +15,13 @@ function buildCacheGroups(statsGroups) {
   }, {});
 }
 
-function createWebpackConfig({
+async function createWebpackConfig({
   entryPoint,
   outputDir,
   optimization,
   isAnalyze = false,
 }) {
-  const config = webpackConfig({
+  const config = await webpackConfig({
     mode: 'production',
     websiteEnv: 'production',
     noMinimize: false,
