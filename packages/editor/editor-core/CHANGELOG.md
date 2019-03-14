@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 105.4.1
+- [patch] [fb679d390f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb679d390f):
+
+  - Add a new TeamMenioResource for @atlaskit/mention package. That allows to fetch teams data for mention from a team service (Legion service)
+
 ## 105.4.0
 - [minor] [f6345bba88](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6345bba88):
 
