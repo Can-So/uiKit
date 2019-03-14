@@ -231,9 +231,9 @@ class AbstractMentionResource extends AbstractResource<MentionDescription[]>
  * Provides a Javascript API
  */
 export class MentionResource extends AbstractMentionResource {
-  protected config: MentionResourceConfig;
-  lastReturnedSearch: number;
-  activeSearches: Set<string>;
+  private config: MentionResourceConfig;
+  private lastReturnedSearch: number;
+  private activeSearches: Set<string>;
 
   constructor(config: MentionResourceConfig) {
     super();

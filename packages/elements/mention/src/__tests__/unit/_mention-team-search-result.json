@@ -17,10 +17,10 @@
         "name": "Tung Thanh Dang"
       }
     ],
-    "largeHeaderImageUrl": "https://dt-api.staging.atl-paas.net/file/0c470995-1ad9-4571-9b22-ec27480884d8/image?allowAnimated=false&width=1500&height=1500&mode=fit&upscale=false&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5NjUwY2Q1MS01ZTgyLTQ4ZTYtYjViZC1lOWVlNDk5ZjNiODAiLCJhY2Nlc3MiOnsidXJuOmZpbGVzdG9yZTpmaWxlOjBjNDcwOTk1LTFhZDktNDU3MS05YjIyLWVjMjc0ODA4ODRkOCI6WyJyZWFkIl19LCJuYmYiOjE1NTIwMDEyMjUsImV4cCI6MTU1MjAwNDgyNX0.GzF39Uo47kAOb_PQVkIe-UIO8xFR9EgEYonaavEsYqY&client=9650cd51-5e82-48e6-b5bd-e9ee499f3b80",
-    "smallHeaderImageUrl": "https://dt-api.staging.atl-paas.net/file/0c470995-1ad9-4571-9b22-ec27480884d8/image?allowAnimated=false&width=256&height=183&mode=crop&upscale=false&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5NjUwY2Q1MS01ZTgyLTQ4ZTYtYjViZC1lOWVlNDk5ZjNiODAiLCJhY2Nlc3MiOnsidXJuOmZpbGVzdG9yZTpmaWxlOjBjNDcwOTk1LTFhZDktNDU3MS05YjIyLWVjMjc0ODA4ODRkOCI6WyJyZWFkIl19LCJuYmYiOjE1NTIwMDEyMjUsImV4cCI6MTU1MjAwNDgyNX0.GzF39Uo47kAOb_PQVkIe-UIO8xFR9EgEYonaavEsYqY&client=9650cd51-5e82-48e6-b5bd-e9ee499f3b80",
-    "largeAvatarImageUrl": "https://dt-api.staging.atl-paas.net/file/0c470995-1ad9-4571-9b22-ec27480884d8/image?allowAnimated=false&width=183&height=183&mode=crop&upscale=false&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5NjUwY2Q1MS01ZTgyLTQ4ZTYtYjViZC1lOWVlNDk5ZjNiODAiLCJhY2Nlc3MiOnsidXJuOmZpbGVzdG9yZTpmaWxlOjBjNDcwOTk1LTFhZDktNDU3MS05YjIyLWVjMjc0ODA4ODRkOCI6WyJyZWFkIl19LCJuYmYiOjE1NTIwMDEyMjUsImV4cCI6MTU1MjAwNDgyNX0.GzF39Uo47kAOb_PQVkIe-UIO8xFR9EgEYonaavEsYqY&client=9650cd51-5e82-48e6-b5bd-e9ee499f3b80",
-    "smallAvatarImageUrl": "https://dt-api.staging.atl-paas.net/file/0c470995-1ad9-4571-9b22-ec27480884d8/image?allowAnimated=false&width=72&height=72&mode=crop&upscale=false&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5NjUwY2Q1MS01ZTgyLTQ4ZTYtYjViZC1lOWVlNDk5ZjNiODAiLCJhY2Nlc3MiOnsidXJuOmZpbGVzdG9yZTpmaWxlOjBjNDcwOTk1LTFhZDktNDU3MS05YjIyLWVjMjc0ODA4ODRkOCI6WyJyZWFkIl19LCJuYmYiOjE1NTIwMDEyMjUsImV4cCI6MTU1MjAwNDgyNX0.GzF39Uo47kAOb_PQVkIe-UIO8xFR9EgEYonaavEsYqY&client=9650cd51-5e82-48e6-b5bd-e9ee499f3b80"
+    "largeHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/0.svg",
+    "smallHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/0.svg",
+    "largeAvatarImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/0.svg",
+    "smallAvatarImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/0.svg"
   },
   {
     "id": "c368d8ec-bd71-4599-acfd-c9a4f20f04ba",
@@ -32,8 +32,8 @@
         "name": "Ishan Somasiri"
       }
     ],
-    "largeHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/gradients/1.svg",
-    "smallHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/gradients/1.svg",
+    "largeHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/1.svg",
+    "smallHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/1.svg",
     "largeAvatarImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/1.svg",
     "smallAvatarImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/1.svg"
   },
@@ -55,8 +55,8 @@
         "name": "Ran Ding"
       }
     ],
-    "largeHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/gradients/2.svg",
-    "smallHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/gradients/2.svg",
+    "largeHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/2.svg",
+    "smallHeaderImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/2.svg",
     "largeAvatarImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/2.svg",
     "smallAvatarImageUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/2.svg"
   }
