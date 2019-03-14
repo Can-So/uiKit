@@ -1,30 +1,35 @@
-const vm = require('vm');
-const fs = require('fs');
-
 import path from 'path';
 
-const ssr = async example =>
+// This function fakes a renderToString in a "server" environment.
+// First resetModules so that we can require a "fresh" copy of the example.
+// This is important so memory is not shared between renderToString and hydrate.
+// Before requiring anything we remove document and window globals.
+// This tricks modules into thinking they are running in a server environment.
+// After that we call renderToString and resolve with the html or reject with the error.
+// We make sure that window and document are restored before returning.
+export const ssr = async example =>
   new Promise((resolve, reject) => {
-    const script = new vm.Script(
-      fs.readFileSync(path.join(__dirname, 'ssr.js')),
-    );
-    const context = vm.createContext({
-      filePath: example,
-      require,
-      __dirname,
-    });
-    let html;
+    jest.resetModules();
+    let document, window, html, error;
     try {
-      jest.resetModules();
-      html = script.runInNewContext(context);
+      document = global.document;
+      window = global.window;
+      delete global['document'];
+      delete global['window'];
+      const React = require('react');
+      const ReactDOMServer = require('react-dom/server');
+      // $StringLitteral
+      const Example = require(example).default;
+      html = ReactDOMServer.renderToString(React.createElement(Example));
     } catch (e) {
-      reject(e);
+      error = e;
+    } finally {
+      global.document = document;
+      global.window = window;
     }
-    if (html) {
+    if (error) {
+      reject(error);
+    } else {
       resolve(html);
     }
   });
-
-module.exports = {
-  ssr,
-};

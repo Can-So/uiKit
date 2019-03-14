@@ -1,4 +1,4 @@
-{
+  {
     "version": 1,
     "type": "doc",
     "content": [
@@ -217,13 +217,97 @@
           },
           {
             "type": "text",
-            "text": " red text",
+            "text": " red text ",
             "marks": [
               {
                 "type": "textColor",
                 "attrs": {
                   "color": "#ff0000"
                 }
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "strike-through",
+            "marks": [
+              {
+                "type": "textColor",
+                "attrs": {
+                  "color": "#ff0000"
+                }
+              },
+              {
+                "type": "strike"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": " ",
+            "marks": [
+              {
+                "type": "textColor",
+                "attrs": {
+                  "color": "#ff0000"
+                }
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "underline",
+            "marks": [
+              {
+                "type": "textColor",
+                "attrs": {
+                  "color": "#ff0000"
+                }
+              },
+              {
+                "type": "underline"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": " ",
+            "marks": [
+              {
+                "type": "textColor",
+                "attrs": {
+                  "color": "#ff0000"
+                }
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "mixed",
+            "marks": [
+              {
+                "type": "em"
+              },
+              {
+                "type": "strong"
+              },
+              {
+                "type": "textColor",
+                "attrs": {
+                  "color": "#ff0000"
+                }
+              },
+              {
+                "type": "strike"
+              },
+              {
+                "type": "subsup",
+                "attrs": {
+                  "type": "sup"
+                }
+              },
+              {
+                "type": "underline"
               }
             ]
           }

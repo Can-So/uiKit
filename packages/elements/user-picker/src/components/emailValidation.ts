@@ -5,7 +5,7 @@ const potentialRegex = /^[^\s@]+@[^\s@]*$/i;
 
 export type EmailValidator = (inputText: string) => EmailValidationResponse;
 
-export const isValidEmail: EmailValidator = inputText => {
+export const isValidEmail: EmailValidator = (inputText: string) => {
   if (inputText.match(validRegex)) {
     return 'VALID';
   }

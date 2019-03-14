@@ -41,17 +41,12 @@ const isOptionDisabled = (
 };
 
 export const getCreatableProps = memoizeOne(
-  (isCreatable?: boolean, isValidEmail?: EmailValidator) => {
-    if (isCreatable) {
-      return {
-        allowCreateWhileLoading: true,
-        createOptionPosition: 'first',
-        isValidNewOption: isValidNewOption(isValidEmail),
-        getNewOptionData,
-        formatCreateLabel,
-        isOptionDisabled: isOptionDisabled(isValidEmail),
-      };
-    }
-    return {};
-  },
+  (isValidEmail?: EmailValidator) => ({
+    allowCreateWhileLoading: true,
+    createOptionPosition: 'first',
+    isValidNewOption: isValidNewOption(isValidEmail),
+    getNewOptionData,
+    formatCreateLabel,
+    isOptionDisabled: isOptionDisabled(isValidEmail),
+  }),
 );

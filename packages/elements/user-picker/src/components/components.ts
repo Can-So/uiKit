@@ -6,6 +6,7 @@ import { Option } from './Option';
 import { SingleValue } from './SingleValue';
 import { Input } from './Input';
 import { SingleValueContainer } from './SingleValueContainer';
+import { PopupInput } from './PopupInput';
 
 /**
  * Memoize getComponents to avoid rerenders.
@@ -30,3 +31,12 @@ export const getComponents = memoizeOne(
     }
   },
 );
+
+export const getPopupComponents = memoizeOne(() => ({
+  DropdownIndicator: null,
+  SingleValue,
+  ClearIndicator,
+  Option,
+  ValueContainer: SingleValueContainer,
+  Input: PopupInput,
+}));
