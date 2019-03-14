@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 105.4.0
+- [minor] [f6345bba88](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6345bba88):
+
+  - Ed-4131 Fix text decorations to respect the selected text colour
+
 ## 105.3.2
 - [patch] [b849dcb1e7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b849dcb1e7):
 

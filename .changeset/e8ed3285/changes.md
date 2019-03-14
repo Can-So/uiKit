@@ -1,1 +1,0 @@
-- Ed-4131 Fix text decorations to respect the selected text colour
