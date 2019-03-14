@@ -29,7 +29,7 @@ const webpackConfig = {
         options: {
           babelrc: true,
           rootMode: 'upward',
-          envName: 'production:cjs',
+          envName: 'production:esm',
         },
       },
     ],
