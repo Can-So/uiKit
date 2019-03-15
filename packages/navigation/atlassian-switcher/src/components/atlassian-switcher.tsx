@@ -47,13 +47,13 @@ const AtlassianSwitcher = (props: AtlassianSwitcherProps) => {
       Switcher = GenericSwitcher;
   }
   return (
-    <ErrorBoundary>
+    <IntlProvider>
       <NavigationAnalyticsContext data={getAnalyticsContext(props)}>
-        <IntlProvider>
+        <ErrorBoundary messages={messages}>
           <Switcher messages={messages} {...props} />
-        </IntlProvider>
+        </ErrorBoundary>
       </NavigationAnalyticsContext>
-    </ErrorBoundary>
+    </IntlProvider>
   );
 };
 

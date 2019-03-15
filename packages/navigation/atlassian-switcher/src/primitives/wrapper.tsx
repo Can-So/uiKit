@@ -25,6 +25,15 @@ const Footer = styled.footer`
   bottom: 0;
   background-color: ${colors.N0};
 `;
+const ErrorBoundaryWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 10rem;
+  padding-right: 2rem;
+`;
 
 type SwitcherWrapperProps = {
   children: React.ReactNode;
@@ -55,4 +64,5 @@ class SwitcherWrapper extends React.Component<SwitcherWrapperProps> {
   }
 }
 
+export { ErrorBoundaryWrapper };
 export default SwitcherWrapper;
