@@ -1,1 +1,0 @@
-- Internal changes only. DropdownMenu is now compatible with SSR.
