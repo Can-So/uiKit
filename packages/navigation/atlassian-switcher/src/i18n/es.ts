@@ -6,15 +6,20 @@
  */
 // Spanish
 export default {
-  'fabric.atlassianSwitcher.switchTo': 'Ir a',
-  'fabric.atlassianSwitcher.switchToTooltip': 'Ir a …',
-  'fabric.atlassianSwitcher.recent': 'Recent',
-  'fabric.atlassianSwitcher.more': 'More',
-  'fabric.atlassianSwitcher.try': 'Try',
-  'fabric.atlassianSwitcher.manageList': 'Manage list',
-  'fabric.atlassianSwitcher.jiraProject': 'Jira project',
-  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence space',
-  'fabric.atlassianSwitcher.people': 'People',
-  'fabric.atlassianSwitcher.administration': 'Administration',
-  'fabric.atlassianSwitcher.discoverMore': 'Discover more',
+  'fabric.atlassianSwitcher.switchTo': 'Cambiar a',
+  'fabric.atlassianSwitcher.switchToTooltip': 'Cambiar a…',
+  'fabric.atlassianSwitcher.recent': 'Recientes',
+  'fabric.atlassianSwitcher.more': 'Más',
+  'fabric.atlassianSwitcher.try': 'Pruébalo',
+  'fabric.atlassianSwitcher.manageList': 'Administrar lista',
+  'fabric.atlassianSwitcher.jiraProject': 'Proyecto Jira',
+  'fabric.atlassianSwitcher.confluenceSpace': 'Espacio de Confluence',
+  'fabric.atlassianSwitcher.people': 'Personas',
+  'fabric.atlassianSwitcher.administration': 'Administración',
+  'fabric.atlassianSwitcher.discoverMore': 'Descubrir más',
+  'fabric.atlassianSwitcher.errorHeading': 'Something went wrong',
+  'fabric.atlassianSwitcher.errorText':
+    'We keep track of these errors, but feel free to contact us if refreshing doesn’t fix things',
+  'fabric.atlassianSwitcher.errorImageAltText':
+    'A broken robot and a number of people busy fixing it.',
 };

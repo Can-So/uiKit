@@ -6,15 +6,20 @@
  */
 // Portuguese (Portugal)
 export default {
-  'fabric.atlassianSwitcher.switchTo': 'Switch to',
-  'fabric.atlassianSwitcher.switchToTooltip': 'Switch to …',
-  'fabric.atlassianSwitcher.recent': 'Recent',
-  'fabric.atlassianSwitcher.more': 'More',
-  'fabric.atlassianSwitcher.try': 'Try',
-  'fabric.atlassianSwitcher.manageList': 'Manage list',
-  'fabric.atlassianSwitcher.jiraProject': 'Jira project',
-  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence space',
-  'fabric.atlassianSwitcher.people': 'People',
-  'fabric.atlassianSwitcher.administration': 'Administration',
-  'fabric.atlassianSwitcher.discoverMore': 'Discover more',
+  'fabric.atlassianSwitcher.switchTo': 'Mudar para',
+  'fabric.atlassianSwitcher.switchToTooltip': 'Mudar para...',
+  'fabric.atlassianSwitcher.recent': 'Recente',
+  'fabric.atlassianSwitcher.more': 'Mais',
+  'fabric.atlassianSwitcher.try': 'Experimente',
+  'fabric.atlassianSwitcher.manageList': 'Gerir lista',
+  'fabric.atlassianSwitcher.jiraProject': 'Projeto do JIRA',
+  'fabric.atlassianSwitcher.confluenceSpace': 'Espaço do Confluence',
+  'fabric.atlassianSwitcher.people': 'Pessoas',
+  'fabric.atlassianSwitcher.administration': 'Administração',
+  'fabric.atlassianSwitcher.discoverMore': 'Descobrir mais',
+  'fabric.atlassianSwitcher.errorHeading': 'Something went wrong',
+  'fabric.atlassianSwitcher.errorText':
+    'We keep track of these errors, but feel free to contact us if refreshing doesn’t fix things',
+  'fabric.atlassianSwitcher.errorImageAltText':
+    'A broken robot and a number of people busy fixing it.',
 };

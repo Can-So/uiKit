@@ -6,15 +6,20 @@
  */
 // Korean
 export default {
-  'fabric.atlassianSwitcher.switchTo': 'Switch to',
-  'fabric.atlassianSwitcher.switchToTooltip': 'Switch to …',
-  'fabric.atlassianSwitcher.recent': 'Recent',
-  'fabric.atlassianSwitcher.more': 'More',
-  'fabric.atlassianSwitcher.try': 'Try',
-  'fabric.atlassianSwitcher.manageList': 'Manage list',
-  'fabric.atlassianSwitcher.jiraProject': 'Jira project',
-  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence space',
-  'fabric.atlassianSwitcher.people': 'People',
-  'fabric.atlassianSwitcher.administration': 'Administration',
-  'fabric.atlassianSwitcher.discoverMore': 'Discover more',
+  'fabric.atlassianSwitcher.switchTo': '전환 대상',
+  'fabric.atlassianSwitcher.switchToTooltip': '다음으로 전환 ...',
+  'fabric.atlassianSwitcher.recent': '최근 항목',
+  'fabric.atlassianSwitcher.more': '더 보기',
+  'fabric.atlassianSwitcher.try': '시도',
+  'fabric.atlassianSwitcher.manageList': '목록 관리',
+  'fabric.atlassianSwitcher.jiraProject': 'Jira 프로젝트',
+  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence 스페이스',
+  'fabric.atlassianSwitcher.people': '사람들',
+  'fabric.atlassianSwitcher.administration': '관리',
+  'fabric.atlassianSwitcher.discoverMore': '자세히 살펴보기',
+  'fabric.atlassianSwitcher.errorHeading': 'Something went wrong',
+  'fabric.atlassianSwitcher.errorText':
+    'We keep track of these errors, but feel free to contact us if refreshing doesn’t fix things',
+  'fabric.atlassianSwitcher.errorImageAltText':
+    'A broken robot and a number of people busy fixing it.',
 };

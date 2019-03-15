@@ -6,15 +6,20 @@
  */
 // Czech
 export default {
-  'fabric.atlassianSwitcher.switchTo': 'Switch to',
-  'fabric.atlassianSwitcher.switchToTooltip': 'Switch to …',
-  'fabric.atlassianSwitcher.recent': 'Recent',
-  'fabric.atlassianSwitcher.more': 'More',
-  'fabric.atlassianSwitcher.try': 'Try',
-  'fabric.atlassianSwitcher.manageList': 'Manage list',
-  'fabric.atlassianSwitcher.jiraProject': 'Jira project',
-  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence space',
-  'fabric.atlassianSwitcher.people': 'People',
-  'fabric.atlassianSwitcher.administration': 'Administration',
-  'fabric.atlassianSwitcher.discoverMore': 'Discover more',
+  'fabric.atlassianSwitcher.switchTo': 'Přepnout na',
+  'fabric.atlassianSwitcher.switchToTooltip': 'Přepnout na ...',
+  'fabric.atlassianSwitcher.recent': 'Nedávné',
+  'fabric.atlassianSwitcher.more': 'Více',
+  'fabric.atlassianSwitcher.try': 'Vyzkoušejte to',
+  'fabric.atlassianSwitcher.manageList': 'Spravovat seznam',
+  'fabric.atlassianSwitcher.jiraProject': 'Projekt Jira',
+  'fabric.atlassianSwitcher.confluenceSpace': 'Prostor Confluence',
+  'fabric.atlassianSwitcher.people': 'Lidé',
+  'fabric.atlassianSwitcher.administration': 'Správa',
+  'fabric.atlassianSwitcher.discoverMore': 'Objevte více',
+  'fabric.atlassianSwitcher.errorHeading': 'Something went wrong',
+  'fabric.atlassianSwitcher.errorText':
+    'We keep track of these errors, but feel free to contact us if refreshing doesn’t fix things',
+  'fabric.atlassianSwitcher.errorImageAltText':
+    'A broken robot and a number of people busy fixing it.',
 };

@@ -6,15 +6,20 @@
  */
 // Danish
 export default {
-  'fabric.atlassianSwitcher.switchTo': 'Switch to',
-  'fabric.atlassianSwitcher.switchToTooltip': 'Switch to …',
-  'fabric.atlassianSwitcher.recent': 'Recent',
-  'fabric.atlassianSwitcher.more': 'More',
-  'fabric.atlassianSwitcher.try': 'Try',
-  'fabric.atlassianSwitcher.manageList': 'Manage list',
-  'fabric.atlassianSwitcher.jiraProject': 'Jira project',
-  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence space',
-  'fabric.atlassianSwitcher.people': 'People',
+  'fabric.atlassianSwitcher.switchTo': 'Skift til',
+  'fabric.atlassianSwitcher.switchToTooltip': 'Skift til ...',
+  'fabric.atlassianSwitcher.recent': 'Seneste',
+  'fabric.atlassianSwitcher.more': 'Mere',
+  'fabric.atlassianSwitcher.try': 'Prøv',
+  'fabric.atlassianSwitcher.manageList': 'Administrér liste',
+  'fabric.atlassianSwitcher.jiraProject': 'Jira-projekt',
+  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence-område',
+  'fabric.atlassianSwitcher.people': 'Personer',
   'fabric.atlassianSwitcher.administration': 'Administration',
-  'fabric.atlassianSwitcher.discoverMore': 'Discover more',
+  'fabric.atlassianSwitcher.discoverMore': 'Se flere',
+  'fabric.atlassianSwitcher.errorHeading': 'Something went wrong',
+  'fabric.atlassianSwitcher.errorText':
+    'We keep track of these errors, but feel free to contact us if refreshing doesn’t fix things',
+  'fabric.atlassianSwitcher.errorImageAltText':
+    'A broken robot and a number of people busy fixing it.',
 };
