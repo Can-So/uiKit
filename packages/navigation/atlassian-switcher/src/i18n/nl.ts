@@ -6,15 +6,20 @@
  */
 // Dutch
 export default {
-  'fabric.atlassianSwitcher.switchTo': 'Switch to',
-  'fabric.atlassianSwitcher.switchToTooltip': 'Switch to …',
+  'fabric.atlassianSwitcher.switchTo': 'Overschakelen naar',
+  'fabric.atlassianSwitcher.switchToTooltip': 'Overschakelen naar...',
   'fabric.atlassianSwitcher.recent': 'Recent',
-  'fabric.atlassianSwitcher.more': 'More',
-  'fabric.atlassianSwitcher.try': 'Try',
-  'fabric.atlassianSwitcher.manageList': 'Manage list',
-  'fabric.atlassianSwitcher.jiraProject': 'Jira project',
-  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence space',
-  'fabric.atlassianSwitcher.people': 'People',
-  'fabric.atlassianSwitcher.administration': 'Administration',
-  'fabric.atlassianSwitcher.discoverMore': 'Discover more',
+  'fabric.atlassianSwitcher.more': 'Meer',
+  'fabric.atlassianSwitcher.try': 'Uitproberen',
+  'fabric.atlassianSwitcher.manageList': 'Lijst beheren',
+  'fabric.atlassianSwitcher.jiraProject': 'Jira-project',
+  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence-space',
+  'fabric.atlassianSwitcher.people': 'Gebruikers',
+  'fabric.atlassianSwitcher.administration': 'Beheer',
+  'fabric.atlassianSwitcher.discoverMore': 'Meer ontdekken',
+  'fabric.atlassianSwitcher.errorHeading': 'Something went wrong',
+  'fabric.atlassianSwitcher.errorText':
+    'We keep track of these errors, but feel free to contact us if refreshing doesn’t fix things',
+  'fabric.atlassianSwitcher.errorImageAltText':
+    'A broken robot and a number of people busy fixing it.',
 };

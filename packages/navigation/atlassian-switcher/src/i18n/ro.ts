@@ -6,15 +6,20 @@
  */
 // Romanian
 export default {
-  'fabric.atlassianSwitcher.switchTo': 'Switch to',
-  'fabric.atlassianSwitcher.switchToTooltip': 'Switch to …',
-  'fabric.atlassianSwitcher.recent': 'Recent',
-  'fabric.atlassianSwitcher.more': 'More',
-  'fabric.atlassianSwitcher.try': 'Try',
-  'fabric.atlassianSwitcher.manageList': 'Manage list',
-  'fabric.atlassianSwitcher.jiraProject': 'Jira project',
-  'fabric.atlassianSwitcher.confluenceSpace': 'Confluence space',
-  'fabric.atlassianSwitcher.people': 'People',
-  'fabric.atlassianSwitcher.administration': 'Administration',
-  'fabric.atlassianSwitcher.discoverMore': 'Discover more',
+  'fabric.atlassianSwitcher.switchTo': 'Comutați la',
+  'fabric.atlassianSwitcher.switchToTooltip': 'Comutați la…',
+  'fabric.atlassianSwitcher.recent': 'Recente',
+  'fabric.atlassianSwitcher.more': 'Mai mult',
+  'fabric.atlassianSwitcher.try': 'Încercați',
+  'fabric.atlassianSwitcher.manageList': 'Gestionați lista',
+  'fabric.atlassianSwitcher.jiraProject': 'Proiect Jira',
+  'fabric.atlassianSwitcher.confluenceSpace': 'Spațiu Confluence',
+  'fabric.atlassianSwitcher.people': 'Persoane',
+  'fabric.atlassianSwitcher.administration': 'Administrare',
+  'fabric.atlassianSwitcher.discoverMore': 'Descoperiți mai multe',
+  'fabric.atlassianSwitcher.errorHeading': 'Something went wrong',
+  'fabric.atlassianSwitcher.errorText':
+    'We keep track of these errors, but feel free to contact us if refreshing doesn’t fix things',
+  'fabric.atlassianSwitcher.errorImageAltText':
+    'A broken robot and a number of people busy fixing it.',
 };
