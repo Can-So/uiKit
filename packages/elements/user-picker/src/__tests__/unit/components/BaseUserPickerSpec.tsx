@@ -29,7 +29,7 @@ const getBasePicker = (props: Partial<UserPickerProps> = {}) => (
   />
 );
 
-describe('UserPicker', () => {
+describe('BaseUserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
     shallowWithIntl(getBasePicker(props))
       .dive()
@@ -128,6 +128,14 @@ describe('UserPicker', () => {
 
     component.simulate('blur');
     expect(onBlur).toHaveBeenCalled();
+  });
+
+  it('should call onClose handler', () => {
+    const onClose = jest.fn();
+    const component = shallowUserPicker({ onClose });
+
+    component.simulate('close');
+    expect(onClose).toHaveBeenCalled();
   });
 
   describe('Multiple users select', () => {

@@ -38,7 +38,7 @@ export class PopupUserPicker extends React.Component<
   };
 
   render() {
-    const { target } = this.props;
+    const { target, popupTitle } = this.props;
     const { flipped } = this.state;
     const width = this.props.width as string | number;
     const styles = getPopupStyles(width, flipped);
@@ -49,8 +49,13 @@ export class PopupUserPicker extends React.Component<
         SelectComponent={PopupSelect}
         width={width}
         styles={styles}
-        components={getPopupComponents()}
-        pickerProps={getPopupProps(width, target, this.handleFlipStyle)}
+        components={getPopupComponents(!!popupTitle)}
+        pickerProps={getPopupProps(
+          width,
+          target,
+          this.handleFlipStyle,
+          popupTitle,
+        )}
       />
     );
   }
