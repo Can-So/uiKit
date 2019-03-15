@@ -1,1 +1,0 @@
-- Internal changes only. Toggle is now SSR-friendly.

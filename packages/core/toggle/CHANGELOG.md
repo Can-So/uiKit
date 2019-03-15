@@ -1,5 +1,10 @@
 # @atlaskit/toggle
 
+## 6.0.2
+- [patch] [3ff7cfeeb7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ff7cfeeb7):
+
+  - Internal changes only. Toggle is now SSR-friendly.
+
 ## 6.0.1
 - Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
   - @atlaskit/docs@7.0.1
