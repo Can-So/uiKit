@@ -1,5 +1,5 @@
 // @flow
-import uuid from 'uuid';
+import { uid } from 'react-uid';
 import React, { Component } from 'react';
 import {
   withAnalyticsEvents,
@@ -60,7 +60,7 @@ class ToggleStateless extends Component<StatelessProps, State> {
       size,
     };
     const Icon = isChecked ? ConfirmIcon : CloseIcon;
-    const id = uuid();
+    const id = uid({ id: this.constructor.name });
 
     return (
       <Label size={size} isDisabled={isDisabled} htmlFor={id}>
