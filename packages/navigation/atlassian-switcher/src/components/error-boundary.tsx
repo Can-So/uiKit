@@ -13,7 +13,8 @@ import {
 } from '../utils/analytics';
 import notFoundImage from '../assets/something-went-wrong.png';
 
-const TRIGGER_SUBJECT = 'atlassianSwitcherErrorBoundaryTrigger';
+const TRIGGER_SUBJECT = 'errorBoundary';
+const ACTION_SUBJECT = 'rendered';
 
 type ErrorBoundaryProps = {
   messages: Messages;
@@ -42,7 +43,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
       },
       () => {
         this.fireOperationalEvent({
-          action: 'errorBoundaryRendered',
+          action: ACTION_SUBJECT,
         });
       },
     );
