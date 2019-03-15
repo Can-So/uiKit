@@ -1,5 +1,10 @@
 # @atlaskit/notification-indicator
 
+## 5.1.0
+- [minor] [de0c7c3258](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/de0c7c3258):
+
+  - Enable noImplicitAny for home/notification-indicator
+
 ## 5.0.0
 - [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 

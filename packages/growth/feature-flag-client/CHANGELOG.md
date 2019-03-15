@@ -1,5 +1,10 @@
 # @atlaskit/feature-flag-client
 
+## 2.1.0
+- [minor] [a89f1bf6cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a89f1bf6cd):
+
+  - Enable noImplicitAny for growth/feature-flag-client
+
 ## 2.0.0
 - [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 

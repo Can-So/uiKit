@@ -1,1 +1,0 @@
-- Enable noImplicitAny for home/notification-indicator
