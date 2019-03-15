@@ -1,16 +1,12 @@
 {
   "name": "@atlaskit/updater-cli",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Updater CLI for Atlaskit components.",
   "license": "Apache-2.0",
   "sideEffects": false,
   "bin": {
     "akup": "./bin/akup.js"
   },
-  "files": [
-    "bin",
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Stanislav S"

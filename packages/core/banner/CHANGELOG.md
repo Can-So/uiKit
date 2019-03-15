@@ -1,5 +1,12 @@
 # @atlaskit/banner
 
+## 8.0.1
+- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+  - @atlaskit/docs@7.0.1
+  - @atlaskit/icon@16.0.5
+  - @atlaskit/theme@8.0.1
+  - @atlaskit/button@11.0.0
+
 ## 8.0.0
 - [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
 

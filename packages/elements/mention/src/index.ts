@@ -3,7 +3,9 @@ import MentionResource, {
   MentionContextIdentifier,
   MentionProvider,
   MentionStats,
+  MentionResourceConfig,
 } from './api/MentionResource';
+import TeamMentionResource from './api/TeamMentionResource';
 import PresenceResource, {
   PresenceProvider,
   AbstractPresenceResource,
@@ -14,7 +16,12 @@ import ResourcedMentionList from './components/ResourcedMentionList';
 import { MentionPickerWithAnalytics as MentionPicker } from './components/MentionPicker';
 import Mention from './components/Mention';
 import ResourcedMention from './components/Mention/ResourcedMention';
-import { MentionDescription, MentionsResult, isSpecialMention } from './types';
+import {
+  MentionDescription,
+  MentionsResult,
+  isSpecialMention,
+  TeamMember,
+} from './types';
 import { ELEMENTS_CHANNEL } from './constants';
 import ContextMentionResource from './api/ContextMentionResource';
 
@@ -22,6 +29,7 @@ export {
   // Classes
   ContextMentionResource,
   MentionResource,
+  TeamMentionResource,
   PresenceResource,
   AbstractMentionResource,
   AbstractPresenceResource,
@@ -33,6 +41,8 @@ export {
   // types
   MentionContextIdentifier,
   MentionStats,
+  TeamMember,
+  MentionResourceConfig,
   // Components
   MentionItem,
   MentionList,

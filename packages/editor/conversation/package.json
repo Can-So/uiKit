@@ -1,19 +1,14 @@
 {
   "name": "@atlaskit/conversation",
-  "version": "13.0.1",
+  "version": "14.0.0",
   "config": {
     "access": "public"
   },
   "description": "Render conversation threads",
   "license": "Apache-2.0",
-  "main": "dist/es5/index.js",
-  "jsnext:main": "dist/es2015/index.js",
-  "module": "dist/es2015/index.js",
-  "types": "dist/es5/index.d.ts",
+  "module": "index.js",
+  "types": "index.d.ts",
   "src": "src/index.ts",
-  "files": [
-    "dist"
-  ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Oscar W"
@@ -24,13 +19,13 @@
     "styled-components": "^3.2.6"
   },
   "dependencies": {
-    "@atlaskit/analytics-next": "^4.0.0",
-    "@atlaskit/avatar": "^15.0.0",
-    "@atlaskit/comment": "^7.0.2",
-    "@atlaskit/editor-common": "^34.0.0",
-    "@atlaskit/editor-core": "^105.0.0",
-    "@atlaskit/reactions": "^15.6.2",
-    "@atlaskit/renderer": "^43.0.0",
+    "@atlaskit/analytics-next": "^4.0.1",
+    "@atlaskit/avatar": "^15.0.1",
+    "@atlaskit/comment": "^7.0.3",
+    "@atlaskit/editor-common": "^35.0.0",
+    "@atlaskit/editor-core": "^106.0.0",
+    "@atlaskit/reactions": "^16.0.0",
+    "@atlaskit/renderer": "^44.0.0",
     "date-fns": "^1.30.1",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.5.10",
@@ -41,10 +36,10 @@
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@atlaskit/analytics-listeners": "^4.2.1",
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/single-select": "^7.0.0",
-    "@atlaskit/util-data-test": "^10.2.5",
+    "@atlaskit/analytics-listeners": "^5.0.0",
+    "@atlaskit/docs": "^7.0.1",
+    "@atlaskit/single-select": "^7.0.1",
+    "@atlaskit/util-data-test": "^11.0.0",
     "enzyme": "^3.7.0"
   }
 }

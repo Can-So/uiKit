@@ -84,7 +84,7 @@ export class MockNonUploadingEmojiResource
       this.optimisticRendering = config.optimisticRendering;
     }
 
-    if (window.localStorage) {
+    if (typeof window !== 'undefined' && window.localStorage) {
       const storedTone = window.localStorage.getItem(selectedToneStorageKey);
       this.selectedTone = storedTone ? parseInt(storedTone, 10) : undefined;
     }

@@ -3,8 +3,8 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 19307,
-      "gzipSize": 5106
+      "size": 19306,
+      "gzipSize": 5105
     }
   },
   {
@@ -19,16 +19,16 @@
     "id": "atlaskit.core.main",
     "name": "main",
     "stats": {
-      "size": 132495,
-      "gzipSize": 30444
+      "size": 131312,
+      "gzipSize": 30511
     }
   },
   {
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 220954,
-      "gzipSize": 57206
+      "size": 219770,
+      "gzipSize": 57262
     }
   }
 ]

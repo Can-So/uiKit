@@ -46,7 +46,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/bundle'),
   },
   resolve: {
-    mainFields: ['atlaskit:src', 'browser', 'main'],
+    mainFields: ['atlaskit:src', 'module', 'browser', 'main'],
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
       '@atlaskit/modal-dialog': emptyExportPath,
@@ -71,7 +71,7 @@ module.exports = {
           cacheDirectory: true,
           babelrc: true,
           rootMode: 'upward',
-          envName: 'production:cjs',
+          envName: 'production:esm',
         },
       },
       {

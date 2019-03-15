@@ -23,7 +23,6 @@ import {
   MediaState,
 } from './../../../src/plugins/media/pm-plugins/main';
 import extensionPlugin from '../../../src/plugins/extension';
-import { name } from '../../../package.json';
 import tasksAndDecisionsPlugin from '../../../src/plugins/tasks-and-decisions';
 import mediaPlugin from '../../../src/plugins/media';
 import EditorActions from '../../../src/actions';
@@ -39,7 +38,7 @@ const dummyTransformer: Transformer<string> = {
   encode: node => node.textContent,
 };
 
-describe(name, () => {
+describe('@atlaskit/editor-core', () => {
   describe('EditorActions', () => {
     const testTempFileId = `temporary:${randomId()}`;
     const testTempFileId2 = `temporary:${randomId()}`;

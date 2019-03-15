@@ -1,4 +1,4 @@
-import { name } from '../../../../../package.json';
+import { name } from '../../../../version.json';
 import { createSchema } from '../../../../../';
 import { fromHTML, toHTML, textWithMarks } from '../../../../../test-helpers';
 

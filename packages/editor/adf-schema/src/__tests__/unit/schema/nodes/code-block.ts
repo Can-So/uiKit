@@ -1,7 +1,7 @@
 import { codeBlock, createSchema } from '../../../../..';
 import { DEFAULT_LANGUAGES } from '../../../../utils';
 import { fromHTML, toHTML } from '../../../../../test-helpers';
-import { name } from '../../../../../package.json';
+import { name } from '../../../../version.json';
 
 describe(`${name}/schema codeBlock node`, () => {
   const schema = makeSchema();

@@ -32,6 +32,8 @@ export type UserPickerProps = {
   onBlur?: OnPicker;
   /** Callback for when the value/s in the picker is cleared. */
   onClear?: OnPicker;
+  /** Callback that is triggered when popup picker is closed */
+  onClose?: OnPicker;
   /** Appearance of the user picker. */
   appearance?: Appearance;
   /** Display the picker with a subtle style. */
@@ -64,6 +66,13 @@ export type UserPickerProps = {
   isValidEmail?: EmailValidator;
 };
 
+export type PopupUserPickerProps = UserPickerProps & {
+  /** Whether to use the popup version of the single picker */
+  target: Target;
+  /** Optional title assigned to popup picker */
+  popupTitle?: string;
+};
+
 export type UserPickerState = {
   options: OptionData[];
   value?: AtlaskitSelectValue;
@@ -72,7 +81,6 @@ export type UserPickerState = {
   hoveringClearIndicator: boolean;
   menuIsOpen: boolean;
   inputValue: string;
-  preventFilter: boolean;
 };
 
 export interface HighlightRange {
@@ -176,3 +184,5 @@ export type AtlasKitSelectChange = (
 ) => void;
 
 export type Appearance = 'normal' | 'compact';
+
+export type Target = (withRef: { ref: any }) => any;

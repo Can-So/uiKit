@@ -4,6 +4,7 @@ import { mount } from 'enzyme';
 import {
   NotificationLogClient,
   NotificationCountResponse,
+  NotificationLogProvider,
 } from '@atlaskit/notification-log-client';
 
 import NotificationIndicator from '../../NotificationIndicator';
@@ -26,10 +27,10 @@ class MockNotificationLogClient extends NotificationLogClient {
 }
 
 describe('NotificationIndicator', () => {
-  let notificationLogClient;
-  let mockCreateAnalyticsEvent;
-  let mockClientPromise;
-  let notificationLogResponse;
+  let notificationLogClient: MockNotificationLogClient;
+  let mockCreateAnalyticsEvent: any;
+  let mockClientPromise: Promise<NotificationLogProvider>;
+  let notificationLogResponse: Promise<NotificationCountResponse>;
 
   function setMockResponseCount(count: number) {
     notificationLogResponse = Promise.resolve({ count });

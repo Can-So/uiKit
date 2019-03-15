@@ -1,5 +1,29 @@
 # @atlaskit/editor-mobile-bridge
 
+## 7.1.1
+- [patch] [205b101e2b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/205b101e2b):
+
+  - ED-6230: bump prosemirror-view to 1.8.3; workaround Chrome bug with copy paste multiple images
+
+## 7.1.0
+- [minor] [ce221ff69e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce221ff69e):
+
+  - Add smart cards to the mobile bridge
+
+## 7.0.1
+- Updated dependencies [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
+  - @atlaskit/editor-core@106.0.3
+  - @atlaskit/renderer@44.0.1
+  - @atlaskit/emoji@58.1.0
+  - @atlaskit/mention@17.1.0
+  - @atlaskit/status@0.7.0
+  - @atlaskit/task-decision@13.1.0
+
+## 7.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
 ## 6.15.0
 - [minor] [29870e89f2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29870e89f2):
 

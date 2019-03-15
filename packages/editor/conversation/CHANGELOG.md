@@ -1,5 +1,10 @@
 # @atlaskit/conversation
 
+## 14.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
 ## 13.0.1
 - Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
   - @atlaskit/editor-common@34.0.0

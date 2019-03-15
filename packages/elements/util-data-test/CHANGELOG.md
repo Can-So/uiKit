@@ -1,5 +1,20 @@
 # @atlaskit/util-data-test
 
+## 11.1.0
+- [minor] [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
+
+  - improvement of SSR tests and examples for Fabric Elements
+
+## 11.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
+## 10.2.6
+- [patch] [fb679d390f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb679d390f):
+
+  - Add a new TeamMenioResource for @atlaskit/mention package. That allows to fetch teams data for mention from a team service (Legion service)
+
 ## 10.2.5
 - Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
   - @atlaskit/emoji@57.0.0

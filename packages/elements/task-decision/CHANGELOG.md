@@ -1,5 +1,15 @@
 # @atlaskit/task-decision
 
+## 13.1.0
+- [minor] [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
+
+  - improvement of SSR tests and examples for Fabric Elements
+
+## 13.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
 ## 12.0.2
 - Updated dependencies [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
   - @atlaskit/elements-test-helpers@0.3.0

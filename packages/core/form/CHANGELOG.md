@@ -1,5 +1,32 @@
 # @atlaskit/form
 
+## 5.2.1
+- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+  - @atlaskit/docs@7.0.1
+  - @atlaskit/calendar@7.0.20
+  - @atlaskit/checkbox@6.0.1
+  - @atlaskit/datetime-picker@7.0.1
+  - @atlaskit/dropdown-menu@7.0.1
+  - @atlaskit/droplist@8.0.1
+  - @atlaskit/field-radio-group@5.0.1
+  - @atlaskit/field-text@8.0.1
+  - @atlaskit/field-text-area@5.0.1
+  - @atlaskit/icon@16.0.5
+  - @atlaskit/inline-edit@8.0.1
+  - @atlaskit/modal-dialog@8.0.2
+  - @atlaskit/multi-select@12.0.1
+  - @atlaskit/radio@0.5.1
+  - @atlaskit/section-message@2.0.1
+  - @atlaskit/select@8.0.3
+  - @atlaskit/single-select@7.0.1
+  - @atlaskit/textfield@0.3.1
+  - @atlaskit/theme@8.0.1
+  - @atlaskit/toggle@6.0.1
+  - @atlaskit/tooltip@13.0.1
+  - @atlaskit/field-range@6.0.1
+  - @atlaskit/button@11.0.0
+  - @atlaskit/textarea@0.3.0
+
 ## 5.2.0
 - [minor] [fe7683f9d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe7683f9d6):
 

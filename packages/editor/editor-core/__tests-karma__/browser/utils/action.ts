@@ -1,4 +1,3 @@
-import { name } from '../../../package.json';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { ProviderFactory } from '@atlaskit/editor-common';
@@ -26,7 +25,7 @@ const mediaProvider = getFreshMediaProvider();
 const providerFactory = new ProviderFactory();
 providerFactory.setProvider('mediaProvider', mediaProvider);
 
-describe(name, () => {
+describe('@atlaskit/editor-core', () => {
   const createEditor = createEditorFactory<MediaPluginState>();
 
   const editor = (doc: any, uploadErrorHandler?: () => void) =>

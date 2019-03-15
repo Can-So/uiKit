@@ -69,28 +69,6 @@ export default () => (
       </DecisionItem>
     </SidebarContainer>
 
-    <h3>Simple DecisionItem with 2 participant</h3>
-    <SidebarContainer>
-      <DecisionItem
-        contentRef={dumpRef}
-        participants={getParticipants(2)}
-        appearance="card"
-      >
-        <Renderer document={document} />
-      </DecisionItem>
-    </SidebarContainer>
-
-    <h3>Simple DecisionItem with 3 participants</h3>
-    <SidebarContainer>
-      <DecisionItem
-        contentRef={dumpRef}
-        participants={getParticipants(3)}
-        appearance="card"
-      >
-        <Renderer document={document} />
-      </DecisionItem>
-    </SidebarContainer>
-
     <h3>Simple DecisionItem with 4 participants</h3>
     <SidebarContainer>
       <DecisionItem

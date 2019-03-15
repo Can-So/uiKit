@@ -29,7 +29,9 @@ export const getStyles = memoizeOne((width: string | number) => ({
     ':hover': {
       ...css[':hover'],
       borderColor: state.isFocused
-        ? css[':hover'].borderColor
+        ? css[':hover']
+          ? css[':hover'].borderColor
+          : colors.B100
         : state.selectProps.subtle
         ? state.selectProps.hoveringClearIndicator
           ? colors.R50
@@ -39,7 +41,9 @@ export const getStyles = memoizeOne((width: string | number) => ({
         state.selectProps.subtle && state.selectProps.hoveringClearIndicator
           ? colors.R50
           : state.isFocused
-          ? css[':hover'].backgroundColor
+          ? css[':hover']
+            ? css[':hover'].backgroundColor
+            : colors.N0
           : colors.N30,
     },
     padding: 0,
@@ -130,3 +134,14 @@ export const getStyles = memoizeOne((width: string | number) => ({
     },
   }),
 }));
+
+export const getPopupStyles = memoizeOne(
+  (width: string | number, flip?: boolean) => ({
+    ...getStyles(width),
+    container: (css: any) => ({
+      ...css,
+      display: flip ? 'flex' : 'block',
+      flexDirection: 'column-reverse',
+    }),
+  }),
+);

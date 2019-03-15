@@ -1,4 +1,4 @@
-import { name } from '../../../../package.json';
+import { name } from '../../../version.json';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { Plugin, PluginKey } from 'prosemirror-state';

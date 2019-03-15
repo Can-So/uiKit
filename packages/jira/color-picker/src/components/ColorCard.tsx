@@ -15,11 +15,11 @@ export interface Props {
 }
 
 export default class ColorCard extends PureComponent<Props> {
-  onMouseDown = event => {
+  onMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
 
-  onClick = event => {
+  onClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const { onClick, value } = this.props;
 
     if (onClick) {

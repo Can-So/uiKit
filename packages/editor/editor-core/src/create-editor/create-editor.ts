@@ -13,7 +13,7 @@ import {
   EditorConfig,
   PluginsOptions,
 } from '../types';
-import { name, version } from '../version';
+import { name, version } from '../version-wrapper';
 import { Dispatch, EventDispatcher } from '../event-dispatcher';
 import { PortalProviderAPI } from '../ui/PortalProvider';
 import Ranks from '../plugins/rank';

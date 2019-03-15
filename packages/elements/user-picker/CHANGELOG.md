@@ -1,5 +1,25 @@
 # @atlaskit/user-picker
 
+## 2.0.1
+- [patch] [de8123519a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/de8123519a):
+
+  - FS-3675 add ability for integrator to add title to popup picker
+
+## 2.0.0
+- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
+## 1.1.1
+- [patch] [64c306c904](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/64c306c904):
+
+  - FS-3599 remove logic to hide add more placeholder
+
+## 1.1.0
+- [minor] [14af4044ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14af4044ea):
+
+  - FS-3354 introduce PopupUserPicker to package
+
 ## 1.0.25
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
   - @atlaskit/icon@16.0.4

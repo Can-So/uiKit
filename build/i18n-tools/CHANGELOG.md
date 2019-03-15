@@ -1,5 +1,10 @@
 # @atlaskit/i18n-tools
 
+## 0.5.0
+- [minor] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+
+  - Dropped ES5 distributables from the typescript packages
+
 ## 0.4.0
 - [minor] [941a687](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/941a687):
 

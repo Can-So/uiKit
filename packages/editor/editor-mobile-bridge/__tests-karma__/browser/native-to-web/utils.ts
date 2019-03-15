@@ -14,7 +14,6 @@ export async function mountEditor() {
   const editor = mount(mobileEditor({ mediaProvider: mediaProvider }), {
     attachTo: place,
   });
-  await editor.props().media.provider;
   await sleep(100);
   return editor;
 }

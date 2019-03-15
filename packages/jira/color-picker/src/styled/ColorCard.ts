@@ -23,7 +23,9 @@ const sharedColorContainerStyles = css`
   outline: none;
 `;
 
-export const ColorCardOption = styled.div<ColorCardProps>`
+export const ColorCardOption = styled.div<
+  ColorCardProps & JSX.IntrinsicElements['div']
+>`
   ${sharedColorContainerStyles};
 
   ${props => {
@@ -33,7 +35,9 @@ export const ColorCardOption = styled.div<ColorCardProps>`
   }};
 `;
 
-export const ColorCardButton = styled.button<ColorCardProps>`
+export const ColorCardButton = styled.button<
+  ColorCardProps & JSX.IntrinsicElements['button']
+>`
   ${sharedColorContainerStyles};
 
   &:focus {
