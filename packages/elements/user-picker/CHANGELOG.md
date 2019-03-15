@@ -1,5 +1,10 @@
 # @atlaskit/user-picker
 
+## 2.0.1
+- [patch] [de8123519a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/de8123519a):
+
+  - FS-3675 add ability for integrator to add title to popup picker
+
 ## 2.0.0
 - [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 
