@@ -8,7 +8,10 @@ import {
   NotificationCountResponse,
 } from '@atlaskit/notification-log-client';
 
-import NotificationIndicator from '../../NotificationIndicator';
+import NotificationIndicator, {
+  ValueUpdatingParams,
+  ValueUpdatingResult,
+} from '../../NotificationIndicator';
 
 class MockNotificationLogClient extends NotificationLogClient {
   private response?: Promise<NotificationCountResponse>;
@@ -32,7 +35,7 @@ class MockNotificationLogClient extends NotificationLogClient {
 }
 
 describe('NotificationIndicator', () => {
-  let notificationLogClient;
+  let notificationLogClient: MockNotificationLogClient;
 
   function returnCount(count: number): Promise<NotificationCountResponse> {
     return Promise.resolve({ count });
@@ -44,7 +47,7 @@ describe('NotificationIndicator', () => {
 
   async function renderNotificationIndicator(
     response: Promise<NotificationCountResponse>,
-    props: Object = {},
+    props: object = {},
   ) {
     notificationLogClient.setResponse(response);
     const clientPromise = Promise.resolve(notificationLogClient);
@@ -68,7 +71,7 @@ describe('NotificationIndicator', () => {
     return wrapper;
   }
 
-  function timeout(ms) {
+  function timeout(ms: number) {
     return new Promise(resolve => window.setTimeout(resolve, ms));
   }
 
@@ -119,7 +122,9 @@ describe('NotificationIndicator', () => {
   });
 
   it('Should not refresh when skip=true on call to onCountUpdating', async () => {
-    const onCountUpdating = event => ({ skip: true });
+    const onCountUpdating = (
+      event: ValueUpdatingParams,
+    ): ValueUpdatingResult => ({ skip: true });
     const onCountUpdated = sinon.spy();
     await renderNotificationIndicator(returnCount(1), {
       onCountUpdating,
@@ -129,7 +134,9 @@ describe('NotificationIndicator', () => {
   });
 
   it('Should override count when countOverride is set on call to onCountUpdating', async () => {
-    const onCountUpdating = event => ({ countOverride: 3 });
+    const onCountUpdating = (
+      event: ValueUpdatingParams,
+    ): ValueUpdatingResult => ({ countOverride: 3 });
     const onCountUpdated = sinon.spy();
     const wrapper = await renderNotificationIndicator(returnError(), {
       onCountUpdating,
@@ -249,8 +256,10 @@ describe('NotificationIndicator', () => {
   });
 
   it('Should not refresh on visibilitychange when skipping too many eager fetches on tab change', async () => {
-    const onCountUpdating = event => {
-      if (event.visibilityChangesSinceTimer > 1) {
+    const onCountUpdating = ({
+      visibilityChangesSinceTimer,
+    }: ValueUpdatingParams): ValueUpdatingResult => {
+      if ((visibilityChangesSinceTimer as number) > 1) {
         return { skip: true };
       }
       return {};
