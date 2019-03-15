@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 7.1.0
+- [minor] [ce221ff69e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce221ff69e):
+
+  - Add smart cards to the mobile bridge
+
 ## 7.0.1
 - Updated dependencies [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
   - @atlaskit/editor-core@106.0.3

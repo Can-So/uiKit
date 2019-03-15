@@ -1,1 +1,0 @@
-- Add smart cards to the mobile bridge
