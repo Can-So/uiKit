@@ -17,8 +17,8 @@
     "build:report": "yarn build --report",
     "build:no-minimize": "yarn build --no-minimize",
     "build:copy": "cp dist/index.html dist/404.html && cp -R public/* dist/",
-    "deploy:staging": "netlify deploy --dir dist/ -a $NETLIFY_TOKEN -s $NETLIFY_SITE_ID_STAGING",
-    "deploy:production": "netlify deploy --dir dist/ -a $NETLIFY_TOKEN -s $NETLIFY_SITE_ID --prod"
+    "deploy:staging": "STAGING=true node ./scripts/retry.publishing.website.js",
+    "deploy:production": "node ./scripts/retry.publishing.website.js"
   },
   "repository": "atlaskit/fabric",
   "devDependencies": {
