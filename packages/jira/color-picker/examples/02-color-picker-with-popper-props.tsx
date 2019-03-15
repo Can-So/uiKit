@@ -24,7 +24,7 @@ class ColorPickerExample extends React.Component<{}, { color: string }> {
             },
           }}
           cols={3}
-          onChange={newColor => this.setState({ color: newColor })}
+          onChange={(newColor: string) => this.setState({ color: newColor })}
         />
       </div>
     );

@@ -98,7 +98,7 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props> {
 
     return (
       <PopupSelect
-        target={({ ref, isOpen }) => (
+        target={({ ref, isOpen }: { ref: any; isOpen: boolean }) => (
           <ColorCardWrapper innerRef={ref}>
             <Trigger {...value} label={fullLabel} expanded={isOpen} />
           </ColorCardWrapper>

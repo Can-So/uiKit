@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PureComponent } from 'react';
 import { ColorCardButton, ColorCardContent } from '../styled/ColorCard';
 
 export interface Props {
@@ -9,12 +8,12 @@ export interface Props {
   expanded?: boolean;
 }
 
-export default class ColorCard extends PureComponent<Props> {
-  onMouseDown = event => {
+export default class ColorCard extends React.PureComponent<Props> {
+  onMouseDown = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 
-  onClick = event => {
+  onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { onClick } = this.props;
 
     if (onClick) {
