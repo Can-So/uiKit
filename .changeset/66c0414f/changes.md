@@ -1,1 +1,0 @@
-- ED-6230: bump prosemirror-view to 1.8.3; workaround Chrome bug with copy paste multiple images

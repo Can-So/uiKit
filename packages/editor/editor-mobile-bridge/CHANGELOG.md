@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 7.1.1
+- [patch] [205b101e2b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/205b101e2b):
+
+  - ED-6230: bump prosemirror-view to 1.8.3; workaround Chrome bug with copy paste multiple images
+
 ## 7.1.0
 - [minor] [ce221ff69e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce221ff69e):
 
