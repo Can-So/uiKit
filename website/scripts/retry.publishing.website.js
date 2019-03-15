@@ -1,5 +1,5 @@
 const child = require('child_process');
-
+const util = require('util');
 // TODO: This script is only TEMPORARY while the issue on Netlify is fixed.
 const numberOfTries = 3;
 
@@ -8,6 +8,8 @@ const token = process.env.NETLIFY_TOKEN;
 const stagingId = process.env.NETLIFY_SITE_ID_STAGING;
 
 const prodId = process.env.NETLIFY_SITE_ID;
+
+const sleep = util.promisify(setTimeout);
 
 function deployWebsite() {
   return new Promise((resolve, reject) => {
