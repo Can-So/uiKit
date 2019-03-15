@@ -1,7 +1,8 @@
 import * as React from 'react';
 import FeatureFlagClient from '../src/index';
+import { ExposureEvent } from '../src/types';
 
-const myAnalyticsHandler = event => {
+const myAnalyticsHandler = (event: ExposureEvent) => {
   console.log('Sending exposure event', event);
 };
 

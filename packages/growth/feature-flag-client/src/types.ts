@@ -53,3 +53,5 @@ export interface Flag {
 
   getJSONValue(): object;
 }
+
+export type AnalyticsHandler = (event: ExposureEvent) => void;
