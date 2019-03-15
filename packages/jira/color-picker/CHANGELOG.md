@@ -1,5 +1,10 @@
 # @atlaskit/color-picker
 
+## 0.4.0
+- [minor] [32f743afc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/32f743afc5):
+
+  - Enable noImplicitAny for @atlaskit/color-picker
+
 ## 0.3.0
 - [minor] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 

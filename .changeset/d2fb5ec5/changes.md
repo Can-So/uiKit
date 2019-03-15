@@ -1,1 +1,0 @@
-- Enable noImplicitAny for @atlaskit/color-picker
