@@ -1,5 +1,10 @@
 # @atlaskit/media-card
 
+## 57.0.1
+- [patch] [9192df506a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9192df506a):
+
+  - Do not call given onClick if it's a video file and inline video player is enabled
+
 ## 57.0.0
 - [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 
