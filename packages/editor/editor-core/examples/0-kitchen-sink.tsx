@@ -225,6 +225,15 @@ class FullPageRendererExample extends React.Component<Props, State> {
     );
   };
 
+  private legacyMediaEventHandlers = () => ({
+    media: {
+      onClick: () => {
+        // tslint:disable-next-line:no-console
+        console.log('legacy event handler click!');
+      },
+    },
+  });
+
   render() {
     const { locale, messages } = this.state;
     return (
@@ -364,6 +373,7 @@ class FullPageRendererExample extends React.Component<Props, State> {
                             adfStage="stage0"
                             dataProviders={this.dataProviders}
                             extensionHandlers={extensionHandlers}
+                            eventHandlers={this.legacyMediaEventHandlers()}
                             // @ts-ignore
                             appearance={this.state.appearance}
                           />

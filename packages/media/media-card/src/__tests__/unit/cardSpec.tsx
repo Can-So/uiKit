@@ -220,6 +220,27 @@ describe('Card', () => {
     expect(clickHandler).toHaveBeenCalledTimes(1);
   });
 
+  it('should NOT fire onClick when inlineVideo', () => {
+    const context = fakeContext() as any;
+    const clickHandler = jest.fn();
+    const card = shallow(
+      <Card
+        useInlinePlayer={true}
+        context={context}
+        identifier={fileIdentifier}
+        onClick={clickHandler}
+      />,
+    );
+    const cardViewOnClick = card.find(CardView).props().onClick;
+
+    cardViewOnClick!({
+      mediaItemDetails: {
+        mediaType: 'video',
+      },
+    } as any);
+    expect(clickHandler).not.toHaveBeenCalled();
+  });
+
   it('should pass onMouseEnter to CardView', () => {
     const context = fakeContext() as any;
     const hoverHandler = () => {};

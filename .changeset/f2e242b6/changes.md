@@ -1,0 +1,1 @@
+- Do not call given onClick if it's a video file and inline video player is enabled
