@@ -1,5 +1,10 @@
 # @atlaskit/status
 
+## 0.7.0
+- [minor] [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
+
+  - improvement of SSR tests and examples for Fabric Elements
+
 ## 0.6.0
 - [minor] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 

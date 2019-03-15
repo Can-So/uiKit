@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/status",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "config": {
     "access": "public"
   },
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@atlaskit/docs": "^7.0.1",
     "@atlaskit/editor-test-helpers": "^8.0.0",
-    "@atlaskit/elements-test-helpers": "^0.3.0",
+    "@atlaskit/elements-test-helpers": "^0.4.0",
     "@atlaskit/i18n-tools": "^0.5.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",

@@ -1,5 +1,10 @@
 # @atlaskit/reactions
 
+## 16.1.0
+- [minor] [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
+
+  - improvement of SSR tests and examples for Fabric Elements
+
 ## 16.0.0
 - [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
 

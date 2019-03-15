@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/emoji",
-  "version": "58.0.0",
+  "version": "58.1.0",
   "config": {
     "access": "public"
   },
@@ -50,13 +50,13 @@
   "devDependencies": {
     "@atlaskit/docs": "^7.0.1",
     "@atlaskit/editor-test-helpers": "^8.0.0",
-    "@atlaskit/elements-test-helpers": "^0.3.0",
+    "@atlaskit/elements-test-helpers": "^0.4.0",
     "@atlaskit/i18n-tools": "^0.5.0",
     "@atlaskit/layer": "^6.0.0",
     "@atlaskit/media-core": "^29.0.0",
     "@atlaskit/section-message": "^2.0.1",
     "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^11.0.0",
+    "@atlaskit/util-data-test": "^11.1.0",
     "@atlaskit/visual-regression": "^0.0.1",
     "@types/react-virtualized": "^9.18.12",
     "canvas-prebuilt": "^2.0.0-alpha.14",

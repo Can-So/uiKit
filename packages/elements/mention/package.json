@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/mention",
-  "version": "17.0.0",
+  "version": "17.1.0",
   "config": {
     "access": "public"
   },
@@ -28,11 +28,11 @@
     "@atlaskit/build-utils": "^2.0.0",
     "@atlaskit/docs": "^7.0.1",
     "@atlaskit/editor-test-helpers": "^8.0.0",
-    "@atlaskit/elements-test-helpers": "^0.3.0",
+    "@atlaskit/elements-test-helpers": "^0.4.0",
     "@atlaskit/i18n-tools": "^0.5.0",
     "@atlaskit/ssr": "^0.0.1",
     "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^11.0.0",
+    "@atlaskit/util-data-test": "^11.1.0",
     "@types/fetch-mock": "^6.0.3",
     "@types/query-string": "^4.3.1",
     "enzyme": "^3.7.0",
