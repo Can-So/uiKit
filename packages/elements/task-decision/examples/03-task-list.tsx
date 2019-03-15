@@ -1,51 +1,13 @@
 import * as React from 'react';
-import { PureComponent } from 'react';
 import { ReactRenderer as Renderer } from '@atlaskit/renderer';
-
 import TaskList from '../src/components/TaskList';
 import TaskItem from '../src/components/TaskItem';
 import {
   MessageContainer,
   dumpRef,
-  action,
   document,
+  TaskStateManager,
 } from '../example-helpers/story-utils';
-
-interface Props {
-  render: (
-    taskStates: Map<string, boolean>,
-    onChangeListener: (taskId: string, done: boolean) => void,
-  ) => JSX.Element;
-}
-
-interface State {
-  tick: number;
-}
-
-class TaskStateManager extends PureComponent<Props, State> {
-  private taskStates = new Map<string, boolean>();
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      tick: 0,
-    };
-  }
-
-  private onChangeListener = (taskId: string, done: boolean) => {
-    action('onChange')();
-    this.taskStates.set(taskId, done);
-    this.setState({ tick: this.state.tick + 1 });
-  };
-
-  render() {
-    return (
-      <MessageContainer>
-        {this.props.render(this.taskStates, this.onChangeListener)}
-      </MessageContainer>
-    );
-  }
-}
 
 export default () => (
   <div>

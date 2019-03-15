@@ -32,5 +32,8 @@
   },
   "atlaskit": {
     "internal": true
+  },
+  "devDependencies": {
+    "@atlaskit/docs": "^7.0.0"
   }
 }
