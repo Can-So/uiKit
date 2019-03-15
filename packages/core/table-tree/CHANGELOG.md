@@ -1,5 +1,10 @@
 # @atlaskit/table-tree
 
+## 6.0.2
+- [patch] [59eb35b62f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59eb35b62f):
+
+  - Quick change to TableTree is now compatible with SSR. This required moving setState to componentDidMount().
+
 ## 6.0.1
 - Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
   - @atlaskit/docs@7.0.1
