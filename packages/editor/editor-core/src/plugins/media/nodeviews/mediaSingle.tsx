@@ -12,6 +12,7 @@ import {
   WithProviders,
   DEFAULT_IMAGE_HEIGHT,
   DEFAULT_IMAGE_WIDTH,
+  browser,
 } from '@atlaskit/editor-common';
 import { CardEvent } from '@atlaskit/media-card';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
@@ -260,6 +261,16 @@ export default class MediaSingleNode extends Component<
 
 class MediaSingleNodeView extends ReactNodeView {
   lastOffsetLeft = 0;
+
+  createDomRef(): HTMLElement {
+    const domRef = document.createElement('div');
+    if (browser.chrome) {
+      // workaround Chrome bug in https://product-fabric.atlassian.net/browse/ED-5379
+      // see also: https://github.com/ProseMirror/prosemirror/issues/884
+      domRef.contentEditable = 'true';
+    }
+    return domRef;
+  }
 
   render() {
     const { eventDispatcher, editorAppearance } = this.reactComponentProps;
