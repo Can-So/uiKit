@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/editor-common",
+  "name": "@findable/editor-common",
   "version": "35.0.1",
   "description": "A package that contains common classes and components for editor and renderer",
   "license": "Apache-2.0",
@@ -15,16 +15,16 @@
   "atlaskit": {
     "internal": true
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/adf-schema": "^2.0.1",
-    "@atlaskit/emoji": "^58.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/media-card": "^57.0.0",
-    "@atlaskit/mention": "^17.0.0",
-    "@atlaskit/profilecard": "^8.0.2",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/width-detector": "^0.3.0",
+    "@findable/adf-schema": "^2.0.1",
+    "@findable/emoji": "^58.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/media-card": "^57.0.0",
+    "@findable/mention": "^17.0.0",
+    "@findable/profilecard": "^8.0.2",
+    "@findable/theme": "^8.0.1",
+    "@findable/width-detector": "^0.3.0",
     "@types/prosemirror-model": "^1.5.0",
     "@types/prosemirror-state": "^1.2.0",
     "@types/prosemirror-view": "^1.3.0",
@@ -36,17 +36,17 @@
     "raf-schd": "^2.1.0"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^29.0.0",
+    "@findable/media-core": "^29.0.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/editor-json-transformer": "^5.0.0",
-    "@atlaskit/editor-test-helpers": "^8.0.1",
-    "@atlaskit/media-core": "^29.0.0",
-    "@atlaskit/visual-regression": "^0.0.1",
-    "@atlaskit/webdriver-runner": "^0.1.0",
+    "@findable/editor-json-transformer": "^5.0.0",
+    "@findable/editor-test-helpers": "^8.0.1",
+    "@findable/media-core": "^29.0.0",
+    "@findable/visual-regression": "^0.0.1",
+    "@findable/webdriver-runner": "^0.1.0",
     "@types/chai": "^4.0.4",
     "chai": "^4.1.2",
     "enzyme": "^3.7.0",

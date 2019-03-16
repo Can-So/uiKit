@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import * as debounce from 'lodash.debounce';
-import { QuickSearch } from '@atlaskit/quick-search';
-import { withAnalyticsEvents, AnalyticsContext, } from '@atlaskit/analytics-next';
+import { QuickSearch } from '@findable/quick-search';
+import { withAnalyticsEvents, AnalyticsContext, } from '@findable/analytics-next';
 import { fireSelectedSearchResult, fireHighlightedSearchResult, fireSelectedAdvancedSearch, fireTextEnteredEvent, fireDismissedEvent, } from '../util/analytics-event-helper';
 import { isAdvancedSearchResult, ADVANCED_CONFLUENCE_SEARCH_RESULT_ID, } from './SearchResultsUtil';
 var ATLASKIT_QUICKSEARCH_NS = 'atlaskit.navigation.quick-search';

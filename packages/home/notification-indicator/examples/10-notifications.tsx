@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   NotificationLogClient,
   NotificationCountResponse,
-} from '@atlaskit/notification-log-client';
+} from '@findable/notification-log-client';
 
 import { NotificationIndicator } from '../src';
 

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory, ImageLoaderProps } from '@atlaskit/editor-common';
+import { ProviderFactory, ImageLoaderProps } from '@findable/editor-common';
 import { ProsemirrorGetPosHandler, ReactNodeProps } from '../../../nodeviews';
 import { MediaProvider } from '../pm-plugins/main';
-import { Context, ImageResizeMode } from '@atlaskit/media-core';
-import { CardDimensions, CardEventHandler, CardOnClickCallback } from '@atlaskit/media-card';
-import { MediaType, MediaBaseAttributes } from '@atlaskit/adf-schema';
-import { ImageStatus } from '@atlaskit/editor-common';
+import { Context, ImageResizeMode } from '@findable/media-core';
+import { CardDimensions, CardEventHandler, CardOnClickCallback } from '@findable/media-card';
+import { MediaType, MediaBaseAttributes } from '@findable/adf-schema';
+import { ImageStatus } from '@findable/editor-common';
 import { EditorAppearance } from '../../../types';
 export declare const MEDIA_HEIGHT = 125;
 export declare const FILE_WIDTH = 156;

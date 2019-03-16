@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { colors } from '@findable/theme';
 export var FolderViewerNavigation = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  justify-content: space-between;\n\n  /* Ensure header has height */\n  min-height: 60px;\n  padding: 15px 13px;\n  border-radius: 3px;\n  box-sizing: border-box;\n  background-color: ", ";\n"], ["\n  display: flex;\n  justify-content: space-between;\n\n  /* Ensure header has height */\n  min-height: 60px;\n  padding: 15px 13px;\n  border-radius: 3px;\n  box-sizing: border-box;\n  background-color: ", ";\n"])), colors.N0);
 FolderViewerNavigation.displayName = 'FolderViewerNavigation';
 export var ControlsWrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject([""], [""])));

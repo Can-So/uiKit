@@ -12,9 +12,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@atlaskit/analytics-next": ["node_modules/@atlaskit/analytics-next-types"],
-      "@atlaskit/dropdown-menu": ["typings/@atlaskit/dropdown-menu"],
-      "@atlaskit/item": ["typings/@atlaskit/item"]
+      "@findable/analytics-next": ["node_modules/@findable/analytics-next-types"],
+      "@findable/dropdown-menu": ["typings/@findable/dropdown-menu"],
+      "@findable/item": ["typings/@findable/item"]
     }
   }
 }

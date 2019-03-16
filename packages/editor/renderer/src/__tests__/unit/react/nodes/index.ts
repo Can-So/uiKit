@@ -6,7 +6,7 @@ import {
   isTextWrapper,
   isEmojiDoc,
 } from '../../../../react/nodes';
-import { emoji as emojiData } from '@atlaskit/util-data-test';
+import { emoji as emojiData } from '@findable/util-data-test';
 
 const { testData } = emojiData;
 

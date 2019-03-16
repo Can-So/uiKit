@@ -1,4 +1,4 @@
-import { MediaType } from '@atlaskit/media-core';
+import { MediaType } from '@findable/media-core';
 import VideoSnapshot from 'video-snapshot';
 import { Preview } from '../domain/preview';
 import { ImagePreview } from '../index';

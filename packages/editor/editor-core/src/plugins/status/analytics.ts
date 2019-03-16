@@ -5,7 +5,7 @@ import {
 import {
   CreateUIAnalyticsEventSignature,
   AnalyticsEventPayload,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 
 export const FABRIC_CHANNEL = 'fabric-elements';
 

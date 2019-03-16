@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -8,11 +8,11 @@ export default md`
   
   ## Usage
 
-  ${code`import { AkCode, AkCodeBlock } from '@atlaskit/code`}
+  ${code`import { AkCode, AkCodeBlock } from '@findable/code`}
 
   ${(
     <Example
-      packageName="@atlaskit/code"
+      packageName="@findable/code"
       Component={require('../examples/00-inline-code-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-inline-code-basic')}

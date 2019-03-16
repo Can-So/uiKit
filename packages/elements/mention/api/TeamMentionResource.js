@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { utils as serviceUtils, } from '@atlaskit/util-service-support';
+import { utils as serviceUtils, } from '@findable/util-service-support';
 import { UserType, UserAccessLevel, } from '../types';
 import MentionResource from './MentionResource';
 import debug from '../util/logger';

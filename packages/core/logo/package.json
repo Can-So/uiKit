@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/logo",
+  "name": "@findable/logo",
   "version": "10.0.2",
   "description": "A React component that highlights status for quick recognition",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "prop-types": "^15.5.10",
@@ -25,15 +25,15 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/code": "^9.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/field-radio-group": "^5.0.1",
-    "@atlaskit/select": "^8.0.3",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/button": "^11.0.0",
+    "@findable/code": "^9.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/field-radio-group": "^5.0.1",
+    "@findable/select": "^8.0.3",
+    "@findable/ssr": "^0.0.1",
+    "@findable/theme": "^8.0.1",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   }

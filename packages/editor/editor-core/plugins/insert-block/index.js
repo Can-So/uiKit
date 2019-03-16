@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WithProviders } from '@atlaskit/editor-common';
+import { WithProviders } from '@findable/editor-common';
 import { pluginKey as blockTypeStateKey, } from '../block-type/pm-plugins/main';
 import { stateKey as mediaStateKey, } from '../media/pm-plugins/main';
 import { stateKey as hyperlinkPluginKey, } from '../hyperlink/pm-plugins/main';

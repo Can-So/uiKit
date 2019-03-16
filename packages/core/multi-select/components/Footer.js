@@ -4,7 +4,7 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstruct
 import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import React, { PureComponent } from 'react';
-import { Item } from '@atlaskit/droplist';
+import { Item } from '@findable/droplist';
 import FooterDiv from '../styled/Footer';
 
 var Footer =

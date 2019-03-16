@@ -1,5 +1,5 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { EditorPlugin } from '../../types';
 import { AnalyticsEventPayload } from './types';
 import { fireAnalyticsEvent } from './utils';

@@ -3,7 +3,7 @@ import { Component, SyntheticEvent } from 'react';
 import { EditorView } from 'prosemirror-view';
 import { Selection } from 'prosemirror-state';
 import { isCellSelection } from 'prosemirror-utils';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import InsertButton from '../InsertButton';
 import DeleteButton from '../DeleteButton';
 import {

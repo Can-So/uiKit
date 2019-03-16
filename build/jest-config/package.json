@@ -1,11 +1,11 @@
 {
-  "name": "@atlaskit/jest-config",
+  "name": "@findable/jest-config",
   "version": "1.0.1",
   "private": true,
   "dependencies": {
     "enzyme-adapter-react-16": "^1.7.0",
     "raf-stub": "^2.0.1",
-    "@atlaskit/analytics-reporting": "0.1.0"
+    "@findable/analytics-reporting": "0.1.0"
   },
   "peerDependencies": {
     "enzyme": "^3.7.0"

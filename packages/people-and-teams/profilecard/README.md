@@ -1,4 +1,4 @@
-# `@atlaskit/profilecard`
+# `@findable/profilecard`
 
 ## i18n
 

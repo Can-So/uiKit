@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-mixed-operators */
 import styled, { css } from 'styled-components';
-import { elevation } from '@atlaskit/theme';
+import { elevation } from '@findable/theme';
 
 const sliderThumbSize = 16;
 const sliderThumbBorderThickness = 2;

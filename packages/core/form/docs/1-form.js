@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md, Props } from '@atlaskit/docs';
+import { code, md, Props } from '@findable/docs';
 
 export default md`
 
@@ -11,8 +11,8 @@ Responsible for managing the state of the form. Provides props to spread onto
 a form element and others to check the form state.
 
 ${code`
-import Form from '@atlaskit/form';
-import Button from '@atlaskit/button';
+import Form from '@findable/form';
+import Button from '@findable/button';
 
 const MyForm = () => (
   <Form onSubmit={data => console.log('form data', data)}>

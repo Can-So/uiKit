@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { MediaEditor, LoadParameters } from '../mediaEditor';
 import { Tool, Color, Dimensions, ShapeParameters } from '../../common';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import Toolbar, { tools } from './toolbar/toolbar';
 import { EditorContainer } from './styles';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, colors, fontSize } from '@atlaskit/theme';
+import { gridSize, colors, fontSize } from '@findable/theme';
 export var Contact = styled.div.withConfig({
   displayName: "followup__Contact",
   componentId: "sc-2c5dok-0"

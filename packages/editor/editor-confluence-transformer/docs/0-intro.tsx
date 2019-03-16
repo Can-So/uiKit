@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example, code } from '@atlaskit/docs';
+import { md, Example, code } from '@findable/docs';
 
 export default md`
 This transformer allows encoding ProseMirror Node in CXHTML or converting Confluence HTML to ProseMirror Node.
@@ -8,8 +8,8 @@ This transformer allows encoding ProseMirror Node in CXHTML or converting Conflu
 
   Use the encoder with editor-confluence-transformer as follows:
 
-  ${code`import { ConfluenceTransformer } from '@atlaskit/editor-confluence-transformer';
-  import { confluenceSchema as schema } from '@atlaskit/adf-schema';
+  ${code`import { ConfluenceTransformer } from '@findable/editor-confluence-transformer';
+  import { confluenceSchema as schema } from '@findable/adf-schema';
 
   const serializer = new ConfluenceTransformer(schema);
   // To encode editor content as markdown
@@ -19,7 +19,7 @@ This transformer allows encoding ProseMirror Node in CXHTML or converting Conflu
 
   ${(
     <Example
-      packageName="@atlaskit/editor-confluence-transformer"
+      packageName="@findable/editor-confluence-transformer"
       Component={require('../examples/0-cxhtml-transformer').default}
       title="Cxhtml Transformer"
       source={require('!!raw-loader!../examples/0-cxhtml-transformer')}

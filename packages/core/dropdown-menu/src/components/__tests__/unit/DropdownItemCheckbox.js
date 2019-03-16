@@ -3,9 +3,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import PropTypes from 'prop-types';
-import CheckboxIcon from '@atlaskit/icon/glyph/checkbox';
-import { colors } from '@atlaskit/theme';
-import Item from '@atlaskit/item';
+import CheckboxIcon from '@findable/icon/glyph/checkbox';
+import { colors } from '@findable/theme';
+import Item from '@findable/item';
 import { KEY_ENTER, KEY_SPACE } from '../../../util/keys';
 
 import DropdownMenu, {

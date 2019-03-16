@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEvent } from '@findable/analytics-next-types';
 
 export type ButtonAppearances =
   | 'default'

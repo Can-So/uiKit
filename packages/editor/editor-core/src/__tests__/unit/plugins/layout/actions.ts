@@ -4,7 +4,7 @@ import {
   doc,
   p,
   createEditorFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   deleteActiveLayoutNode,
   setPresetLayout,

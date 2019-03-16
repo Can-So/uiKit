@@ -1,4 +1,4 @@
-// NOTE: Only a subset of @atlaskit/dropdown-menu have been declared at the moment
+// NOTE: Only a subset of @findable/dropdown-menu have been declared at the moment
 export { default } from './components/DropdownMenu';
 export { default as DropdownItem } from './components/item/DropdownItem';
 export {

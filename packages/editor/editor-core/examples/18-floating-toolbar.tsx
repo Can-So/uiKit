@@ -7,10 +7,10 @@ import styled from 'styled-components';
 import {
   tableBackgroundColorPalette,
   tableBackgroundBorderColors,
-} from '@atlaskit/adf-schema';
-import { colors } from '@atlaskit/theme';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import { Skeleton } from '@atlaskit/icon';
+} from '@findable/adf-schema';
+import { colors } from '@findable/theme';
+import Button, { ButtonGroup } from '@findable/button';
+import { Skeleton } from '@findable/icon';
 
 import Toolbar from '../src/plugins/floating-toolbar/ui/Toolbar';
 import { FloatingToolbarItem } from '../src/plugins/floating-toolbar/types';

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
 
-import Badge from '@atlaskit/badge';
-import { NotificationLogProvider } from '@atlaskit/notification-log-client';
+import Badge from '@findable/badge';
+import { NotificationLogProvider } from '@findable/notification-log-client';
 
 const MAX_NOTIFICATIONS_COUNT: number = 9;
 const NAVIGATION_CHANNEL = 'navigation';

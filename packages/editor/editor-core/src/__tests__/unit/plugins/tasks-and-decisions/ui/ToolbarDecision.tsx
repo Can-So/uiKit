@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   doc,
   p,
   createEditorFactory,
   mountWithIntl,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import ToolbarDecision from '../../../../../plugins/tasks-and-decisions/ui/ToolbarDecision';
 import tasksAndDecisionsPlugin from '../../../../../plugins/tasks-and-decisions';
 
-describe('@atlaskit/editor-core/ui/ToolbarDecision', () => {
+describe('@findable/editor-core/ui/ToolbarDecision', () => {
   const createEditor = createEditorFactory();
 
   const providerFactory = new ProviderFactory();

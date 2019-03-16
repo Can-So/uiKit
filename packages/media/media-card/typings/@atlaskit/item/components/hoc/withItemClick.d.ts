@@ -6,7 +6,7 @@
 import { Component, ReactNode, ComponentType } from 'react';
 
 export type WithItemClickProps = {
-  /** Content to be displayed inside the item. Same as @atlaskit/item `children` prop. */
+  /** Content to be displayed inside the item. Same as @findable/item `children` prop. */
   children?: ReactNode;
   /** If true, the item appears greyed out and does not fire click events. */
   isDisabled?: boolean;
@@ -16,7 +16,7 @@ export type WithItemClickProps = {
   onClick?: Function;
 };
 
-// HOC that typically wraps @atlaskit/item
+// HOC that typically wraps @findable/item
 declare const withItemClick: (
   WrappedItem: ComponentType<any>,
 ) => ComponentType<WithItemClickProps>;

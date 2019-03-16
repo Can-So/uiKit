@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import ModalDialog, { ModalTransition } from '../src';
 
 const H4 = styled.h4`

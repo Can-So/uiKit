@@ -3,7 +3,7 @@ import {
   p,
   createEditorFactory,
   alignment as alignmentMark,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   AlignmentPluginState,
   pluginKey as alignmentPluginKey,

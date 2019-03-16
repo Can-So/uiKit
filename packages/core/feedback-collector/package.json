@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/feedback-collector",
+  "name": "@findable/feedback-collector",
   "version": "3.0.1",
   "config": {
     "access": "public"
@@ -9,27 +9,27 @@
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
   "dependencies": {
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/checkbox": "^6.0.1",
-    "@atlaskit/flag": "^10.0.1",
-    "@atlaskit/form": "^5.2.1",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/modal-dialog": "^8.0.2",
-    "@atlaskit/select": "^8.0.3",
-    "@atlaskit/textarea": "^0.3.0",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/checkbox": "^6.0.1",
+    "@findable/flag": "^10.0.1",
+    "@findable/form": "^5.2.1",
+    "@findable/icon": "^16.0.5",
+    "@findable/modal-dialog": "^8.0.2",
+    "@findable/select": "^8.0.3",
+    "@findable/textarea": "^0.3.0",
+    "@findable/theme": "^8.0.1",
     "@babel/runtime": "^7.0.0",
     "lodash.truncate": "^4.4.2"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.1",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/global-navigation": "^6.1.1",
-    "@atlaskit/logo": "^10.0.1",
-    "@atlaskit/navigation-next": "^5.0.1",
-    "@atlaskit/section-message": "^2.0.1",
-    "@atlaskit/ssr": "^0.0.1",
+    "@findable/build-utils": "^2.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/global-navigation": "^6.1.1",
+    "@findable/logo": "^10.0.1",
+    "@findable/navigation-next": "^5.0.1",
+    "@findable/section-message": "^2.0.1",
+    "@findable/ssr": "^0.0.1",
     "axios": "^0.17.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
@@ -51,7 +51,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "keywords": [
     "atlaskit",

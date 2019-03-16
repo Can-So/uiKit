@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 
 const disabledColor = themed({ light: colors.N80, dark: colors.N80 });
 

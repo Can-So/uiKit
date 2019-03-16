@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { typography, fontSize, colors } from '@atlaskit/theme';
+import { typography, fontSize, colors } from '@findable/theme';
 import gridSizeTimes from '../../util/gridSizeTimes';
 var baseHeading = function (size, lineHeight) { return "\n  font-size: " + size / fontSize() + "em;\n  font-style: inherit;\n  line-height: " + lineHeight / size + ";\n"; };
 export var UserInfoOuter = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  margin-bottom: ", "px;\n"], ["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  margin-bottom: ", "px;\n"])), gridSizeTimes(2));

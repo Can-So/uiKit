@@ -1,4 +1,4 @@
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 import { EmojiDescription, EmojiId, EmojiServiceDescription, EmojiUpload, MediaApiToken, OptionalEmojiDescription } from '../../types';
 import TokenManager from './TokenManager';
 export interface EmojiUploadResponse {

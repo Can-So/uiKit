@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { colors } from '@atlaskit/theme';
-import LockIcon from '@atlaskit/icon/glyph/lock-filled';
-import Button from '@atlaskit/button';
+import { colors } from '@findable/theme';
+import LockIcon from '@findable/icon/glyph/lock-filled';
+import Button from '@findable/button';
 import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';

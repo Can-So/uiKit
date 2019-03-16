@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Schema } from 'prosemirror-model';
 import { Plugin } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory, ErrorReporter } from '@atlaskit/editor-common';
+import { ProviderFactory, ErrorReporter } from '@findable/editor-common';
 import { Dispatch, EventDispatcher } from '../event-dispatcher';
 import EditorActions from '../actions';
 import { ToolbarSize } from '../ui/Toolbar';

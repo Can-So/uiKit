@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Component, type Node } from 'react';
-import Button from '@atlaskit/button';
-import Error from '@atlaskit/icon/glyph/error';
-import Info from '@atlaskit/icon/glyph/info';
-import Tick from '@atlaskit/icon/glyph/check-circle';
-import Warning from '@atlaskit/icon/glyph/warning';
-import { colors } from '@atlaskit/theme';
+import Button from '@findable/button';
+import Error from '@findable/icon/glyph/error';
+import Info from '@findable/icon/glyph/info';
+import Tick from '@findable/icon/glyph/check-circle';
+import Warning from '@findable/icon/glyph/warning';
+import { colors } from '@findable/theme';
 import Flag, { FlagGroup } from '../src';
 
 type State = {

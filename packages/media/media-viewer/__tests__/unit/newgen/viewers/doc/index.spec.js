@@ -7,8 +7,8 @@ import { createContext } from '../../../_stubs';
 import { Spinner } from '../../../../../newgen/loading';
 import { DocViewer } from '../../../../../newgen/viewers/doc/index';
 import { ErrorMessage, createError } from '../../../../../newgen/error';
-import Button from '@atlaskit/button';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import Button from '@findable/button';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 function createFixture(fetchPromise, item, collectionName) {
     var context = createContext(undefined);
     var onClose = jest.fn(function () { return fetchPromise; });

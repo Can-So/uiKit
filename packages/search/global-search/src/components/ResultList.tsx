@@ -3,7 +3,7 @@ import {
   ObjectResult as ObjectResultComponent,
   PersonResult as PersonResultComponent,
   ContainerResult as ContainerResultComponent,
-} from '@atlaskit/quick-search';
+} from '@findable/quick-search';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../messages';
 import {

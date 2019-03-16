@@ -2,12 +2,12 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component, type ElementConfig } from 'react';
 import { ThemeProvider } from 'styled-components';
-import DropdownMenu, { DropdownItemGroup } from '@atlaskit/dropdown-menu';
+import DropdownMenu, { DropdownItemGroup } from '@findable/dropdown-menu';
 import Avatar, {
   type AvatarClickType,
   type AvatarPropTypes,
   type SizeType,
-} from '@atlaskit/avatar';
+} from '@findable/avatar';
 import { Grid, Stack } from '../styled/AvatarGroup';
 import MoreIndicator from './MoreIndicator';
 import itemTheme from '../theme/itemTheme';

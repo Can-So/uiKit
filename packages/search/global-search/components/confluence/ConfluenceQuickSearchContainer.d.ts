@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
-import { CancelableEvent } from '@atlaskit/quick-search';
+import { FireAnalyticsEvent } from '@findable/analytics';
+import { CancelableEvent } from '@findable/quick-search';
 import { ConfluenceClient } from '../../api/ConfluenceClient';
 import { CrossProductSearchClient, CrossProductSearchResults, ABTest } from '../../api/CrossProductSearchClient';
 import { Result, ResultsWithTiming } from '../../model/Result';

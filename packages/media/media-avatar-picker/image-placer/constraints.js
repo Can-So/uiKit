@@ -1,4 +1,4 @@
-import { Rectangle, Vector2 } from '@atlaskit/media-ui';
+import { Rectangle, Vector2 } from '@findable/media-ui';
 export function zoomToFit(imageWidth, imageHeight, visibleBounds) {
     var itemRect = new Rectangle(imageWidth, imageHeight);
     var scaleFactor = itemRect.scaleToFitSmallestSide(visibleBounds);

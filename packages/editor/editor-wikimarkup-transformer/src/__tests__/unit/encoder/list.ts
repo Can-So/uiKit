@@ -1,4 +1,4 @@
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import WikiMarkupTransformer from '../../../index';
 
 import {
@@ -10,7 +10,7 @@ import {
   code_block,
   media,
   mediaSingle,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 describe('ADF => WikiMarkup - List', () => {
   const transformer = new WikiMarkupTransformer();

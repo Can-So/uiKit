@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var RootWrapper = styled.div.withConfig({
   displayName: "RootWrapper",
   componentId: "sc-1va80k6-0"

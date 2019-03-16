@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { AnalyticsContext } from '@atlaskit/analytics-next';
+import { AnalyticsContext } from '@findable/analytics-next';
 import { shouldDisplayImageThumbnail } from '../utils/shouldDisplayImageThumbnail';
 import { getBaseAnalyticsContext } from '../utils/analyticsUtils';
 var mapStatusToAnalyticsLoadStatus = function (status) {

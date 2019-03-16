@@ -1,4 +1,4 @@
-import { LoadOptions, OptionData } from '@atlaskit/user-picker';
+import { LoadOptions, OptionData } from '@findable/user-picker';
 import * as React from 'react';
 import { Comment, ConfigResponse, DialogContentState, FormChildrenArgs } from '../types';
 declare type ShareError = {

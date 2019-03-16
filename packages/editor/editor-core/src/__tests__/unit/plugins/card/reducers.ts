@@ -5,7 +5,7 @@ import {
   createEditorFactory,
   p,
   cardProvider,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import reduce from '../../../../plugins/card/pm-plugins/reducers';
 import { CardPluginState } from '../../../../plugins/card/types';
 

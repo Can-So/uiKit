@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Navigation, { AkNavigationItem } from '@atlaskit/navigation';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right';
+import Navigation, { AkNavigationItem } from '@findable/navigation';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import ChevronRightIcon from '@findable/icon/glyph/chevron-right';
 import Tree, {
   mutateTree,
   type RenderItemParams,

@@ -2,9 +2,9 @@ import { name } from '../../../version.json';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { Plugin } from 'prosemirror-state';
-import WidthDetector from '@atlaskit/width-detector';
-import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
-import { WidthProvider } from '@atlaskit/editor-common';
+import WidthDetector from '@findable/width-detector';
+import { createEditorFactory, doc, p } from '@findable/editor-test-helpers';
+import { WidthProvider } from '@findable/editor-common';
 
 import {
   pluginKey as widthPluginKey,

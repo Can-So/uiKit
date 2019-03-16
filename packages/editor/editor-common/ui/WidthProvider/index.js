@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import rafSchedule from 'raf-schd';
-import WidthDetector from '@atlaskit/width-detector';
+import WidthDetector from '@findable/width-detector';
 export var Breakpoints = {
     S: 'S',
     M: 'M',

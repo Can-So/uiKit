@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 import { errorIconColor, errorTitleColor, errorTextColor } from '../styled/constants';
 export var ErrorWrapper = styled.div.withConfig({
   displayName: "Error__ErrorWrapper",

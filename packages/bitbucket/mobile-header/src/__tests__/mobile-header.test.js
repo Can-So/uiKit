@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import AkButton, { ButtonGroup } from '@atlaskit/button';
+import AkButton, { ButtonGroup } from '@findable/button';
 
 import * as styles from '../styled';
 import MobileHeader from '../components/MobileHeader';

@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import { Editor, EditorContext, WithEditorActions, } from '@atlaskit/editor-core';
-import { ReactRenderer } from '@atlaskit/renderer';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { Editor, EditorContext, WithEditorActions, } from '@findable/editor-core';
+import { ReactRenderer } from '@findable/renderer';
+import { ProviderFactory } from '@findable/editor-common';
 var emptyDoc = '{ "type": "doc", "version": 1, "content": [] }';
 var Document = /** @class */ (function (_super) {
     tslib_1.__extends(Document, _super);

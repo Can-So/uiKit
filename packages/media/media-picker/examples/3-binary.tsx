@@ -4,9 +4,9 @@ import { Component } from 'react';
 import {
   defaultMediaPickerAuthProvider,
   defaultMediaPickerCollectionName,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { MediaPicker, BinaryUploader, BinaryConfig } from '../src';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 
 class BinaryWrapper extends Component<{}> {
   binary?: BinaryUploader;

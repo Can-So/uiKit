@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { components } from 'react-select';
-import SelectClearIcon from '@atlaskit/icon/glyph/select-clear';
+import SelectClearIcon from '@findable/icon/glyph/select-clear';
 
 export {
   ClearIndicator,

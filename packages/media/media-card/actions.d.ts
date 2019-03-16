@@ -1,4 +1,4 @@
-import { FileItem } from '@atlaskit/media-core';
+import { FileItem } from '@findable/media-core';
 import { ReactNode } from 'react';
 export interface CardAction {
     label?: string;

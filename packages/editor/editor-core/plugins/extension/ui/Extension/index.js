@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import { ProviderFactory, WithProviders, } from '@atlaskit/editor-common';
+import { ProviderFactory, WithProviders, } from '@findable/editor-common';
 import ExtensionComponent from './ExtensionComponent';
 var Extension = /** @class */ (function (_super) {
     tslib_1.__extends(Extension, _super);

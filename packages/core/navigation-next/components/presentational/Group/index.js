@@ -5,7 +5,7 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component, Fragment } from 'react';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
 import { GroupHeading, Separator } from '../../../';
 
 var Group =

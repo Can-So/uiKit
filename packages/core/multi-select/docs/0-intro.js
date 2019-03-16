@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   React component which allows selection of multiple items from a dropdown list. Substitute for the native multiple select element
@@ -9,10 +9,10 @@ export default md`
   ${(
     <SectionMessage appearance="error">
       <p>
-        <strong>Note: @atlaskit/multi-select is now deprecated.</strong>
+        <strong>Note: @findable/multi-select is now deprecated.</strong>
       </p>
       <p>
-        Please upgrade to @atlaskit/select, for any upgrade concerns please ping
+        Please upgrade to @findable/select, for any upgrade concerns please ping
         the Select Upgrade room on stride.
       </p>
     </SectionMessage>
@@ -22,7 +22,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/multi-select"
+      packageName="@findable/multi-select"
       Component={require('../examples/00-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic')}
@@ -31,7 +31,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/multi-select"
+      packageName="@findable/multi-select"
       Component={require('../examples/01-groupless').default}
       title="Appearance"
       source={require('!!raw-loader!../examples/01-groupless')}
@@ -40,7 +40,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/multi-select"
+      packageName="@findable/multi-select"
       Component={require('../examples/02-stateless').default}
       title="Custom"
       source={require('!!raw-loader!../examples/02-stateless')}

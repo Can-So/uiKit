@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/embedded-document",
+  "name": "@findable/embedded-document",
   "version": "0.4.0",
   "description": "Embedded Document component",
   "license": "Apache-2.0",
@@ -11,14 +11,14 @@
   "maintainers": [
     "Oscar W"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/editor-common": "^35.0.0",
-    "@atlaskit/editor-core": "^106.0.0",
-    "@atlaskit/renderer": "^44.0.0",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/util-service-support": "^4.0.0"
+    "@findable/button": "^11.0.0",
+    "@findable/editor-common": "^35.0.0",
+    "@findable/editor-core": "^106.0.0",
+    "@findable/renderer": "^44.0.0",
+    "@findable/theme": "^8.0.1",
+    "@findable/util-service-support": "^4.0.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",

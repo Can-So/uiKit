@@ -1,5 +1,5 @@
 import { StyledComponentClass } from 'styled-components';
-import { MediaType } from '@atlaskit/media-core';
+import { MediaType } from '@findable/media-core';
 import { HTMLAttributes, VideoHTMLAttributes, AudioHTMLAttributes, ImgHTMLAttributes, ComponentClass, ClassAttributes } from 'react';
 export declare const mediaTypeIconColors: {
     image: string;

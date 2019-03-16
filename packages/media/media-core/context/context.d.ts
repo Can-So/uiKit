@@ -1,4 +1,4 @@
-import { ContextConfig, MediaStoreGetFileImageParams, ImageMetadata } from '@atlaskit/media-store';
+import { ContextConfig, MediaStoreGetFileImageParams, ImageMetadata } from '@findable/media-store';
 import { CollectionFetcher } from '../collection';
 import { FileFetcher } from '../file';
 export interface Context {

@@ -1,4 +1,4 @@
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
+import { FireAnalyticsEvent } from '@findable/analytics';
 import * as PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';

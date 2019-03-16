@@ -2,8 +2,8 @@ import { InjectedIntl, defineMessages } from 'react-intl';
 import { EditorState, NodeSelection } from 'prosemirror-state';
 import { removeSelectedNode } from 'prosemirror-utils';
 
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import OpenIcon from '@atlaskit/icon/glyph/open';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
+import OpenIcon from '@findable/icon/glyph/open';
 
 import { analyticsService } from '../../analytics';
 import commonMessages from '../../messages';

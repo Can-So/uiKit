@@ -1,5 +1,5 @@
 import React from 'react';
-import { code, md, Example } from '@atlaskit/docs';
+import { code, md, Example } from '@findable/docs';
 
 export default md`
   This client makes it easy to work with feature flags and dark features.
@@ -9,7 +9,7 @@ export default md`
 
   ### Bootstrap
   ${code`
-  import FrontendFeatureFlagClient from '@atlaskit/feature-flag-client';
+  import FrontendFeatureFlagClient from '@findable/feature-flag-client';
 
   const client = new FrontendFeatureFlagClient({
     analyticsHandler: myAnalyticsHandler,

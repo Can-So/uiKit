@@ -1,7 +1,7 @@
 // @flow
 const fetch = require('node-fetch');
 const get = require('lodash.get');
-const sendLogs = require('@atlaskit/analytics-reporting');
+const sendLogs = require('@findable/analytics-reporting');
 /**
  * Test that fail, cause other blocks in the same file to cascade fail
  * So as a result we only pull out the first error as the cascade results aren't useful

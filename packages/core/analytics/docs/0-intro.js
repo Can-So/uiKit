@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   The analytics package exports several components and functions that work together
@@ -14,7 +14,7 @@ import {
   AnalyticsListener,
   cleanProps,
   withAnalytics
-} from '@atlaskit/analytics';
+} from '@findable/analytics';
 `}
 
   Using this library components can fire public and private events:
@@ -59,7 +59,7 @@ import {
 
   ${(
     <Example
-      packageName="@atlaskit/analytics"
+      packageName="@findable/analytics"
       Component={require('../examples/01-basic-example').default}
       title="Basic"
       source={require('!!raw-loader!../examples/01-basic-example')}

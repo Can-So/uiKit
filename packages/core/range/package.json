@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/range",
+  "name": "@findable/range",
   "version": "0.2.0",
   "description": "A styled version of the native input[range] element.",
   "license": "Apache-2.0",
@@ -13,9 +13,9 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/theme": "^8.0.0",
+    "@findable/theme": "^8.0.0",
     "@babel/runtime": "^7.0.0"
   },
   "peerDependencies": {
@@ -23,12 +23,12 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/checkbox": "^6.0.0",
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/tooltip": "^13.0.0",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/ssr": "^0.0.1",
+    "@findable/checkbox": "^6.0.0",
+    "@findable/docs": "^7.0.0",
+    "@findable/tooltip": "^13.0.0",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },

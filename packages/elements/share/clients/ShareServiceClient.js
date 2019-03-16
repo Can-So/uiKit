@@ -1,4 +1,4 @@
-import { utils, } from '@atlaskit/util-service-support';
+import { utils, } from '@findable/util-service-support';
 export var DEFAULT_SHARE_PATH = 'share';
 export var SHARE_CONFIG_PATH = 'share/config';
 // TODO: replace with the real stargate namespace

@@ -1,4 +1,4 @@
-import { UI_EVENT_TYPE, } from '@atlaskit/analytics-gas-types';
+import { UI_EVENT_TYPE, } from '@findable/analytics-gas-types';
 import fileUploadEndHandler from './fileUploadEndHandler';
 import fileUploadErrorHandler from './fileUploadErrorHandler';
 import fileUploadsStartHandler from './fileUploadsStartHandler';

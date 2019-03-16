@@ -1,4 +1,4 @@
-import { getExampleUrl } from '@atlaskit/visual-regression/helper';
+import { getExampleUrl } from '@findable/visual-regression/helper';
 
 export const DEFAULT_WIDTH = 800;
 export const DEFAULT_HEIGHT = 600;

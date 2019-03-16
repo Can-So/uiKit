@@ -1,4 +1,4 @@
-import { utils as serviceUtils, } from '@atlaskit/util-service-support';
+import { utils as serviceUtils, } from '@findable/util-service-support';
 // expire 30 seconds early to factor in latency, slow services, etc
 export var expireAdjustment = 30;
 var TokenManager = /** @class */ (function () {

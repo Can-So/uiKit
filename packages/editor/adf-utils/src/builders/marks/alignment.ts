@@ -3,7 +3,7 @@ import {
   AlignmentAttributes,
   ParagraphDefinition,
   HeadingDefinition,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark, WithAppliedMark } from '../types';
 

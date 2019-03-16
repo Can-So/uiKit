@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as pdfjsLib from 'pdfjs-dist/build/pdf';
 import * as PDFJSViewer from 'pdfjs-dist/web/pdf_viewer';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import {
   PDFRenderer,
   pdfViewerClassName,
@@ -11,7 +11,7 @@ import {
 import { ZoomControls } from '../../../../../newgen/zoomControls';
 import { Spinner } from '../../../../../newgen/loading';
 import { ErrorMessage } from '../../../../../newgen/error';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 
 function createFixture(documentPromise: Promise<any>) {
   const onClose = jest.fn();

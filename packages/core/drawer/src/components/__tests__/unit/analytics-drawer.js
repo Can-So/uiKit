@@ -5,9 +5,9 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import Blanket from '@atlaskit/blanket';
-import ArrowLeft from '@atlaskit/icon/glyph/arrow-left';
+} from '@findable/analytics-next';
+import Blanket from '@findable/blanket';
+import ArrowLeft from '@findable/icon/glyph/arrow-left';
 
 import {
   name as packageName,
@@ -18,7 +18,7 @@ import { DrawerBase } from '../../index';
 // This is a global mock for this file that will mock all components wrapped with analytics
 // and replace them with an empty SFC that returns null. This includes components imported
 // directly in this file and others imported as dependencies of those imports.
-jest.mock('@atlaskit/analytics-next', () => ({
+jest.mock('@findable/analytics-next', () => ({
   withAnalyticsEvents: jest.fn(() => jest.fn(args => args)),
   withAnalyticsContext: jest.fn(() => jest.fn(args => args)),
   createAndFireEvent: jest.fn(() =>

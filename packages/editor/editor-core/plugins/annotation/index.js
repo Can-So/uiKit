@@ -1,4 +1,4 @@
-import { annotation } from '@atlaskit/adf-schema';
+import { annotation } from '@findable/adf-schema';
 // tslint:disable-next-line:variable-name
 var annotationPlugin = {
     marks: function () {

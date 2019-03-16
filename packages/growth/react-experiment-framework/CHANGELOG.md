@@ -1,7 +1,7 @@
-# @atlaskit/react-experiment-framework
+# @findable/react-experiment-framework
 
 ## 0.3.0
-- [minor] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [minor] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -13,13 +13,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -33,14 +33,14 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 0.2.1
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/section-message@1.0.14
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/section-message@1.0.14
+  - @findable/docs@6.0.0
 
 ## 0.2.0
 
-- [minor] Resolver promises cache was extracted from state so it can be updated anytime during component's life cycle to remove react warnings [6ca88f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ca88f5)
+- [minor] Resolver promises cache was extracted from state so it can be updated anytime during component's life cycle to remove react warnings [6ca88f5](https://github.com/fnamazing/uiKit/commits/6ca88f5)
 
 ## 0.1.0
 
-- [minor] Initial Implementation [0092f03](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0092f03)
+- [minor] Initial Implementation [0092f03](https://github.com/fnamazing/uiKit/commits/0092f03)

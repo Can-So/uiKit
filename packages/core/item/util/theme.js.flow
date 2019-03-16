@@ -1,5 +1,5 @@
 // @flow
-import { colors, gridSize as akGridSize, borderRadius } from '@atlaskit/theme';
+import { colors, gridSize as akGridSize, borderRadius } from '@findable/theme';
 
 import type { ItemTheme } from '../types';
 

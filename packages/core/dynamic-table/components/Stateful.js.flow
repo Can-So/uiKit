@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { UIAnalyticsEvent } from '@findable/analytics-next';
 import DynamicTableStateless from './Stateless';
 import type { SortOrderType, StatefulProps, RankEnd, RowType } from '../types';
 import { reorderRows } from '../internal/helpers';

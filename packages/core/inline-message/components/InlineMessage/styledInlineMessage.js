@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 import { itemSpacing } from '../../constants';
 var getFocusColor = themed('appearance', {
   connectivity: {

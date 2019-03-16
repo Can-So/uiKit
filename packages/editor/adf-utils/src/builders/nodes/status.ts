@@ -1,4 +1,4 @@
-import { StatusDefinition } from '@atlaskit/adf-schema';
+import { StatusDefinition } from '@findable/adf-schema';
 
 export const status = (
   attrs: StatusDefinition['attrs'] = {

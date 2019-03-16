@@ -10,7 +10,7 @@ import {
 import {
   AnalyticsEventPayload,
   WithAnalyticsEventProps,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 
 const TRIGGER_SUBJECT = 'atlassianSwitcherPrefetchTrigger';
 const THROTTLE_EXPIRES = 60 * 1000; // 60 seconds

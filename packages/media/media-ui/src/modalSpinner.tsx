@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { layers } from '@atlaskit/theme';
-import Spinner from '@atlaskit/spinner';
+import { layers } from '@findable/theme';
+import Spinner from '@findable/spinner';
 import styled from 'styled-components';
 
 const overlayZindex = layers.modal() + 10;

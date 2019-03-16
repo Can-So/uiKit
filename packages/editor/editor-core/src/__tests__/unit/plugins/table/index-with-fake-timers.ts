@@ -1,5 +1,5 @@
 import * as sinon from 'sinon';
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import {
   doc,
   p,
@@ -8,7 +8,7 @@ import {
   tdEmpty,
   tdCursor,
   createEditorFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import tablesPlugin from '../../../../plugins/table';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import { mediaPlugin } from '../../../../plugins';

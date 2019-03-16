@@ -1,4 +1,4 @@
-import { MediaProvider } from '@atlaskit/editor-core';
+import { MediaProvider } from '@findable/editor-core';
 export interface MediaProviderFactoryConfig {
     collectionName?: string;
     dropzoneContainer?: HTMLElement;
@@ -7,7 +7,7 @@ export interface MediaProviderFactoryConfig {
     useMediaPickerAuthProvider?: boolean;
 }
 /**
- * Add "import * as mediaTestHelpers from '@atlaskit/media-test-helpers'"
+ * Add "import * as mediaTestHelpers from '@findable/media-test-helpers'"
  * at the beginning of your file and pass "mediaTestHelpers" into this function
  */
 export declare function storyMediaProviderFactory(mediaProviderFactoryConfig?: MediaProviderFactoryConfig): Promise<MediaProvider>;

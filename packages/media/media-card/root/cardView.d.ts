@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { MediaItemType, FileDetails, ImageResizeMode } from '@atlaskit/media-core';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { MediaItemType, FileDetails, ImageResizeMode } from '@findable/media-core';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import { SharedCardProps, CardStatus, CardEvent, OnSelectChangeFuncResult, CardOnClickCallback } from '../index';
 export interface CardViewOwnProps extends SharedCardProps {
     readonly status: CardStatus;

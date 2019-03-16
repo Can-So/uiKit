@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, type Node } from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import type { SpinnerSizeType } from '../types';
 
 import { LARGE, LOADING_CONTENTS_OPACITY } from '../internal/constants';

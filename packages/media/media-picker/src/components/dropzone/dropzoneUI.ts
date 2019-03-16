@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { parseHTML } from '../../util/parseHTML';
 import { wrapperStyles } from './styled';
 import { getAssetUrl } from '../../util/getAssetUrl';

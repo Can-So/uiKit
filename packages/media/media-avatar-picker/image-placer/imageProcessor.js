@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Rectangle, loadImage, getOrientation, } from '@atlaskit/media-ui';
+import { Rectangle, loadImage, getOrientation, } from '@findable/media-ui';
 import { getCanvas } from './util';
 export function radians(deg) {
     return deg * (Math.PI / 180);

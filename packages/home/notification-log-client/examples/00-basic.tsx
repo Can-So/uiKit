@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { NotificationIndicator } from '@atlaskit/notification-indicator';
+import { NotificationIndicator } from '@findable/notification-indicator';
 
 import { NotificationLogClient } from '../src';
 

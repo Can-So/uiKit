@@ -1,4 +1,4 @@
-import { OPERATIONAL_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { OPERATIONAL_EVENT_TYPE } from '@findable/analytics-gas-types';
 import { isFileUploadsStartAction } from '../../actions/fileUploadsStart';
 export default (function (action) {
     if (isFileUploadsStartAction(action)) {

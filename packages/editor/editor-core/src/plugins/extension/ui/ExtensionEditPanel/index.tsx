@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Popup } from '@atlaskit/editor-common';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import EditIcon from '@atlaskit/icon/glyph/editor/edit';
-import FullWidthIcon from '@atlaskit/icon/glyph/editor/media-full-width';
-import WideIcon from '@atlaskit/icon/glyph/editor/media-wide';
-import CenterIcon from '@atlaskit/icon/glyph/editor/media-center';
+import { Popup } from '@findable/editor-common';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
+import EditIcon from '@findable/icon/glyph/editor/edit';
+import FullWidthIcon from '@findable/icon/glyph/editor/media-full-width';
+import WideIcon from '@findable/icon/glyph/editor/media-wide';
+import CenterIcon from '@findable/icon/glyph/editor/media-center';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import { Toolbar, Separator } from './styles';
 export interface Props {

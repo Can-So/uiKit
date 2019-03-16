@@ -6,7 +6,7 @@ import _extends from "@babel/runtime/helpers/extends";
 import { css as _css } from "emotion";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 var gridSize = gridSizeFn();
 var listBaseStyles = {
   alignItems: 'center',

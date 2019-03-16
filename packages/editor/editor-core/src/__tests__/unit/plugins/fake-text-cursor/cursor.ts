@@ -5,7 +5,7 @@ import {
   doc,
   createEditorFactory,
   p as paragraph,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   addFakeTextCursor,
   removeFakeTextCursor,

@@ -5,7 +5,7 @@ import React, {
   type Element as ReactElement,
 } from 'react';
 import { findDOMNode } from 'react-dom';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import type { SpinnerSizeType } from '../types';
 
 import { LARGE, LOADING_CONTENTS_OPACITY } from '../internal/constants';

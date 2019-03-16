@@ -1,7 +1,7 @@
-# @atlaskit/range
+# @findable/range
 
 ## 0.2.0
-- [minor] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [minor] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -13,13 +13,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -33,23 +33,23 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 0.1.3
-- [patch] [aab267bb3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aab267bb3a):
+- [patch] [aab267bb3a](https://github.com/fnamazing/uiKit/commits/aab267bb3a):
 
   - Added test to make sure the props are passed down to hidden input
 
 ## 0.1.2
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/checkbox@5.0.9
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/tooltip@12.1.13
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/checkbox@5.0.9
+  - @findable/theme@7.0.1
+  - @findable/tooltip@12.1.13
+  - @findable/docs@6.0.0
 
 ## 0.1.1
-- [patch] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+- [patch] [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
 
   - Change API to experimental theming API to namespace component themes into separate contexts and make theming simpler. Update all dependant components.
 
 ## 0.1.0
-- [minor] [8945a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8945a58):
+- [minor] [8945a58](https://github.com/fnamazing/uiKit/commits/8945a58):
 
   - Initial release

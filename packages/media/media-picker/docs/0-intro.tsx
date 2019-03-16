@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example } from '@atlaskit/docs';
+import { md, code, Example } from '@findable/docs';
 
 import dropzone from './dropzone.png';
 import browser from './browser.png';
@@ -33,7 +33,7 @@ export default md`
   The easiest integration may look like this:
 
   
-  ${code`import { MediaPicker } from '@atlaskit/media-picker';
+  ${code`import { MediaPicker } from '@findable/media-picker';
 
   const authProvider = (context) => Promise.resolve({
     clientId: 'your-app-client-id',

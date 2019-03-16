@@ -2,7 +2,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import FabricAnalyticsListener, {
   AnalyticsWebClient,
-} from '@atlaskit/analytics-listeners';
+} from '@findable/analytics-listeners';
 import TaskList from '../../../components/TaskList';
 import TaskItem from '../../../components/TaskItem';
 

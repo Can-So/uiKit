@@ -1,13 +1,13 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { Editor } from '@atlaskit/editor-core';
+import { Editor } from '@findable/editor-core';
 import { toNativeBridge } from './web-to-native';
 import WebBridgeImpl from './native-to-web';
 import MobilePicker from './MobileMediaPicker';
 import { initPluginListeners, destroyPluginListeners, } from './plugin-subscription';
 import { MediaProvider, MentionProvider, TaskDecisionProvider, MockEmojiProvider, } from '../providers';
 import { parseLocationSearch } from '../bridge-utils';
-import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
+import { Provider as SmartCardProvider } from '@findable/smart-card';
 import { cardProvider } from '../providers/cardProvider';
 var params = parseLocationSearch();
 export var bridge = (window.bridge = new WebBridgeImpl());

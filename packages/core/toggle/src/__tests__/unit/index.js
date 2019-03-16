@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import CloseIcon from '@atlaskit/icon/glyph/cross';
-import ConfirmIcon from '@atlaskit/icon/glyph/check';
+import CloseIcon from '@findable/icon/glyph/cross';
+import ConfirmIcon from '@findable/icon/glyph/check';
 import ToggleStatelessWithAnalytics, {
   ToggleStatelessWithoutAnalytics as Toggle,
 } from '../../ToggleStateless';

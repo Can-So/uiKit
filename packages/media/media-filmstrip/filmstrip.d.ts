@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import { CardAction, CardOnClickCallback, CardEvent, OnSelectChangeFunc, OnLoadingChangeFunc } from '@atlaskit/media-card';
-import { Context, Identifier } from '@atlaskit/media-core';
+import { CardAction, CardOnClickCallback, CardEvent, OnSelectChangeFunc, OnLoadingChangeFunc } from '@findable/media-card';
+import { Context, Identifier } from '@findable/media-core';
 export interface FilmstripItem {
     readonly identifier: Identifier;
     readonly actions?: Array<CardAction>;

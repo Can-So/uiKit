@@ -1,6 +1,6 @@
 // @flow
-import { itemThemeNamespace } from '@atlaskit/item';
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { itemThemeNamespace } from '@findable/item';
+import { colors, gridSize, math, themed } from '@findable/theme';
 
 const dropdownPadding = {
   bottom: gridSize,

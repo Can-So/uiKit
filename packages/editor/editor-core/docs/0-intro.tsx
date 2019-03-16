@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
   ### Note:
@@ -17,7 +17,7 @@ export default md`
   The simplest editor in the world is just:
 
 ${code`
-  import { Editor } from '@atlaskit/editor-core';
+  import { Editor } from '@findable/editor-core';
 
   <Editor appearance="comment" />;
 `}
@@ -31,7 +31,7 @@ ${code`
   To add mention capabilities to the editor, you will need to pass in a "Mention Provider". At a high level, this is simply an object that will allow us to interface whatever mention source you want to use with the editor. This looks like:
 
 ${code`
-  import { Editor } from '@atlaskit/editor-core';
+  import { Editor } from '@findable/editor-core';
   import mentionProvider from './mentionProvider';
 
   <Editor
@@ -45,7 +45,7 @@ ${code`
   Sometimes we don't want to show the whole editor at the start and instead show a collapsed state for a user to click on to start typing. This looks like:
 
 ${code`
-  import { Editor, CollapsedEditor } from '@atlaskit/editor-core';
+  import { Editor, CollapsedEditor } from '@findable/editor-core';
 
   class CollapsibleEditor extends React.Component {
     state = { isExpanded: false };
@@ -80,7 +80,7 @@ ${code`
   EditorContext allows you, in conjunction with WithEditorActions, to manipulate the editor from anywhere inside the EditorContext. In the example below, notice that no reference is kept to the editor instance.
 
 ${code`
-  import { EditorContext, WithEditorActions } from '@atlaskit/editor-core';
+  import { EditorContext, WithEditorActions } from '@findable/editor-core';
   import { CollapsibleEditor } from 'previous-example';
 
   <EditorContext>
@@ -115,7 +115,7 @@ ${code`
   Using a custom storage format is fairly straightforward - you simply have to import the relevant transformer and pass it through to the editor. That's all!
 
 ${code`
-  import { Editor, BitbucketTransformer } from '@atlaskit/editor-core';
+  import { Editor, BitbucketTransformer } from '@findable/editor-core';
 
   <Editor
     appearance="comment"
@@ -227,7 +227,7 @@ ${code`
 
 ${(
   <Example
-    packageName="@atlaskit/editor-core"
+    packageName="@findable/editor-core"
     Component={require('../examples/1-basic').default}
     title="Basic"
     source={require('!!raw-loader!../examples/1-basic')}

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Item from '@atlaskit/item';
-import AkButton from '@atlaskit/button';
+import Item from '@findable/item';
+import AkButton from '@findable/button';
 import {
   doc,
   p,
@@ -9,8 +9,8 @@ import {
   blockquote,
   panel,
   mountWithIntl,
-} from '@atlaskit/editor-test-helpers';
-import TextStyleIcon from '@atlaskit/icon/glyph/editor/text-style';
+} from '@findable/editor-test-helpers';
+import TextStyleIcon from '@findable/icon/glyph/editor/text-style';
 
 import { pluginKey } from '../../../../../plugins/block-type/pm-plugins/main';
 import ToolbarBlockType from '../../../../../plugins/block-type/ui/ToolbarBlockType';
@@ -32,7 +32,7 @@ import codeBlockPlugin from '../../../../../plugins/code-block';
 import { setBlockType } from '../../../../../plugins/block-type/commands';
 import { ReactWrapper } from 'enzyme';
 
-describe('@atlaskit/editor-core/ui/ToolbarBlockType', () => {
+describe('@findable/editor-core/ui/ToolbarBlockType', () => {
   const createEditor = createEditorFactory();
 
   const editor = (doc: any) =>

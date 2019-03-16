@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 export const propChanges = [
   {
@@ -84,7 +84,7 @@ export const propChanges = [
     status: 'changed',
     label: 'items',
     content: md`
-      the items prop has been deprecated, instead @atlaskit/select exposes an options prop
+      the items prop has been deprecated, instead @findable/select exposes an options prop
       that is much less prescriptive in regards to its expected shape.
       For more details on usage, and how to implement behaviour previously afforded by the items prop
       please see the [Options](/packages/core/select/docs/upgrade-guide#options) section of this upgrade guide.
@@ -106,7 +106,7 @@ export const propChanges = [
       <span>
         {md`
           Previously loadingMessage was a string.
-          In @atlaskit/select loadingMessage is now a **function** that takes an inputValue and returns a string
+          In @findable/select loadingMessage is now a **function** that takes an inputValue and returns a string
         `}
         {code`({ inputValue: string }) => string`}
       </span>
@@ -127,7 +127,7 @@ export const propChanges = [
     content: (
       <div>
         {md`
-          noMatchesFound has been deprecated, we now use the **noOptionsMessage** prop in @atlaskit/select.
+          noMatchesFound has been deprecated, we now use the **noOptionsMessage** prop in @findable/select.
           The noOptionsMessage prop is a function that takes an inputValue and returns a string
         `}
         {code`({inputValue: string}) => string`}
@@ -142,7 +142,7 @@ export const propChanges = [
     content: (
       <div>
         {md`
-          onFilterChange has been changed to onInputChange in @atlaskit/select, it has the following shape:
+          onFilterChange has been changed to onInputChange in @findable/select, it has the following shape:
         `}
         {code`(ValueType, ActionMeta) => void`}
         {md`
@@ -160,7 +160,7 @@ export const propChanges = [
     content: (
       <div>
         {md`
-          onSelected has been deprecated in @atlaskit/select,
+          onSelected has been deprecated in @findable/select,
           its concerns are now a part of the onChange prop,
           which has the following shape:
         `}
@@ -237,7 +237,7 @@ and ActionMeta is of the type object with the following shape
     status: 'removed',
     label: 'shouldFitContainer',
     content:
-      'shouldFitContainer is deprecated in @atlaskit/select, as by default the select now fills its bounding parent.',
+      'shouldFitContainer is deprecated in @findable/select, as by default the select now fills its bounding parent.',
     packages: ['single', 'multi'],
   },
   {
@@ -291,7 +291,7 @@ and ActionMeta is of the type object with the following shape
     content: (
       <div>
         {md`
-          onRemoved has been deprecated in @atlaskit/select,
+          onRemoved has been deprecated in @findable/select,
           its concerns are now a part of the onChange prop,
           which has the following shape:
         `}

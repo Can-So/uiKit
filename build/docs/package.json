@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/docs",
+  "name": "@findable/docs",
   "version": "7.0.1",
   "description": "Utilities for building documentation",
   "license": "Apache-2.0",
@@ -13,12 +13,12 @@
     "name": "Atlaskit docs",
     "team": "core"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/code": "^9.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/code": "^9.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/theme": "^8.0.1",
     "babel-runtime": "^6.26.0",
     "codesandboxer": "^1.0.1",
     "pretty-proptypes": "^0.5.0",

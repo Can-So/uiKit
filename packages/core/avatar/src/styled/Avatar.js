@@ -3,7 +3,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import styled from 'styled-components';
-import { withTheme } from '@atlaskit/theme';
+import { withTheme } from '@findable/theme';
 import { Theme } from '../theme';
 import { getInnerStyles } from './utils';
 

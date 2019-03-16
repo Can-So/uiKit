@@ -1,5 +1,5 @@
 import { BitbucketTransformer } from '../..';
-import { bitbucketSchema as schema } from '@atlaskit/adf-schema';
+import { bitbucketSchema as schema } from '@findable/adf-schema';
 import {
   a,
   blockquote,
@@ -28,7 +28,7 @@ import {
   strike,
   mediaSingle,
   media,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { Mark, Node as PMNode } from 'prosemirror-model';
 
 const transformer = new BitbucketTransformer(schema);

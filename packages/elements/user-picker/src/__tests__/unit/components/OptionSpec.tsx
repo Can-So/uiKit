@@ -1,4 +1,4 @@
-import { components } from '@atlaskit/select';
+import { components } from '@findable/select';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { EmailOption } from '../../../components/EmailOption';

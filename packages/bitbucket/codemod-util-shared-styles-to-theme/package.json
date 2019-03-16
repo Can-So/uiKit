@@ -1,8 +1,8 @@
 {
-  "name": "@atlaskit/codemod-util-shared-styles-to-theme",
+  "name": "@findable/codemod-util-shared-styles-to-theme",
   "version": "2.0.0",
   "private": true,
-  "description": "Converts @atlaskit/util-shared-styles to @atlaskit/theme",
+  "description": "Converts @findable/util-shared-styles to @findable/theme",
   "module": "index.js",
   "atlaskit:src": "src/index.js",
   "scripts": {

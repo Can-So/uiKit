@@ -1,11 +1,11 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import ToolbarButton from '../../../ui/ToolbarButton';
 
 const noop = () => {};
 
-describe('@atlaskit/editor-core/ui/ToolbarButton', () => {
+describe('@findable/editor-core/ui/ToolbarButton', () => {
   it('should not render tooltip if title is not set', () => {
     const toolbarButtonElem = mount(
       <ToolbarButton onClick={noop} selected={false} disabled={false} />,

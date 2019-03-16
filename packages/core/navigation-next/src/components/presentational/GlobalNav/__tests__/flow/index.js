@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import SearchIcon from '@atlaskit/icon/glyph/search';
+import SearchIcon from '@findable/icon/glyph/search';
 import GlobalNav from '../../index';
 
 <GlobalNav primaryItems={[]} secondaryItems={[]} />;

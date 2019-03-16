@@ -4,7 +4,7 @@ import DelayedFunction from '../../delayed-function';
 jest.useFakeTimers();
 const mockCallback = jest.fn();
 
-describe('@atlaskit/tree - utils/delayed-function', () => {
+describe('@findable/tree - utils/delayed-function', () => {
   afterEach(() => {
     jest.resetAllMocks();
   });

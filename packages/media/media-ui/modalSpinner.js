@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { layers } from '@atlaskit/theme';
-import Spinner from '@atlaskit/spinner';
+import { layers } from '@findable/theme';
+import Spinner from '@findable/spinner';
 import styled from 'styled-components';
 var overlayZindex = layers.modal() + 10;
 export var Blanket = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  z-index: ", ";\n"], ["\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  z-index: ", ";\n"])), overlayZindex);

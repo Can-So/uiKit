@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 import { borderWidth, getHeight, getWidth, transition } from './constants';
 
 const colorOptions = {

@@ -5,7 +5,7 @@ Flags are used for confirmations, alerts, and acknowledgments that require minim
 ## Installation
 
 ```sh
-yarn add @atlaskit/flag
+yarn add @findable/flag
 ```
 
 ## Usage

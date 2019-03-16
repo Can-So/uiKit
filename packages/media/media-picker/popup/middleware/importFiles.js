@@ -2,7 +2,7 @@ var _this = this;
 import * as tslib_1 from "tslib";
 import * as uuid from 'uuid/v4';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { fileStreamsCache, getMediaTypeFromMimeType, isPreviewableType, } from '@atlaskit/media-core';
+import { fileStreamsCache, getMediaTypeFromMimeType, isPreviewableType, } from '@findable/media-core';
 import { isStartImportAction } from '../actions/startImport';
 import { finalizeUpload } from '../actions/finalizeUpload';
 import { remoteUploadStart } from '../actions/remoteUploadStart';

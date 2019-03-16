@@ -5,9 +5,9 @@ import { v4 } from 'uuid';
 import {
   BlockCardErroredView,
   InlineCardErroredView,
-} from '@atlaskit/media-ui';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+} from '@findable/media-ui';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import { ANALYTICS_CHANNEL } from '../analytics';
 
 export interface WithObjectRenderProps {

@@ -1,6 +1,6 @@
 // @flow
 import styled, { css, keyframes } from 'styled-components';
-import { colors, layers } from '@atlaskit/theme';
+import { colors, layers } from '@findable/theme';
 
 // NOTE:
 // Pulse color "rgb(101, 84, 192)" derived from "colors.P300"

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { Radio } from '../src';
 
 const Tr = styled.tr`

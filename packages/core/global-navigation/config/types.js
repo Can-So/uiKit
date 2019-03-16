@@ -1,1 +1,1 @@
-import { GlobalItem, GlobalNav } from '@atlaskit/navigation-next';
+import { GlobalItem, GlobalNav } from '@findable/navigation-next';

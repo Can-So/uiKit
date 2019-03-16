@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { calcTableWidth, WidthConsumer, TableSharedCssClassName, akEditorTableNumberColumnWidth, akEditorWideLayoutWidth, akEditorDefaultLayoutWidth, akEditorFullWidthLayoutWidth, akEditorTableLegacyCellMinWidth, tableCellBorderWidth, tableCellMinWidth, } from '@atlaskit/editor-common';
+import { calcTableWidth, WidthConsumer, TableSharedCssClassName, akEditorTableNumberColumnWidth, akEditorWideLayoutWidth, akEditorDefaultLayoutWidth, akEditorFullWidthLayoutWidth, akEditorTableLegacyCellMinWidth, tableCellBorderWidth, tableCellMinWidth, } from '@findable/editor-common';
 import overflowShadow from '../../ui/overflow-shadow';
 import TableHeader from './tableHeader';
 import { FullPagePadding } from '../../ui/Renderer/style';

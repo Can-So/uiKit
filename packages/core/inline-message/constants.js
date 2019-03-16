@@ -1,8 +1,8 @@
-import { gridSize } from '@atlaskit/theme';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
-import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
-import InfoIcon from '@atlaskit/icon/glyph/info';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
+import { gridSize } from '@findable/theme';
+import WarningIcon from '@findable/icon/glyph/warning';
+import CheckCircleIcon from '@findable/icon/glyph/check-circle';
+import InfoIcon from '@findable/icon/glyph/info';
+import ErrorIcon from '@findable/icon/glyph/error';
 export var itemSpacing = gridSize() / 2;
 export var typesMapping = {
   connectivity: {

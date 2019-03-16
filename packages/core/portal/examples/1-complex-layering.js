@@ -1,18 +1,18 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
 import React, { type Node } from 'react';
-import Button from '@atlaskit/button';
-import EmojiIcon from '@atlaskit/icon/glyph/emoji';
-import Flag, { FlagGroup } from '@atlaskit/flag';
-import InlineDialog from '@atlaskit/inline-dialog';
-import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
+import Button from '@findable/button';
+import EmojiIcon from '@findable/icon/glyph/emoji';
+import Flag, { FlagGroup } from '@findable/flag';
+import InlineDialog from '@findable/inline-dialog';
+import ModalDialog, { ModalTransition } from '@findable/modal-dialog';
 import {
   Spotlight,
   SpotlightManager,
   SpotlightTarget,
   SpotlightTransition,
-} from '@atlaskit/onboarding';
-import Tooltip from '@atlaskit/tooltip';
+} from '@findable/onboarding';
+import Tooltip from '@findable/tooltip';
 
 const TooltipButton = ({
   children,

@@ -1,5 +1,5 @@
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { EmojiDescription } from '@atlaskit/emoji';
+import { ProviderFactory } from '@findable/editor-common';
+import { EmojiDescription } from '@findable/emoji';
 import {
   insertText,
   createEditorFactory,
@@ -10,9 +10,9 @@ import {
   hardBreak,
   emojiQuery,
   emoji,
-} from '@atlaskit/editor-test-helpers';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import { emoji as emojiData } from '@atlaskit/util-data-test';
+} from '@findable/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
+import { emoji as emojiData } from '@findable/util-data-test';
 import emojiPlugin from '../../../../plugins/emoji';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import { EditorState } from 'prosemirror-state';
@@ -76,9 +76,9 @@ describe('ascii emojis - input rules', () => {
    * and uses a module level variable to store them.
    * Removing beforeAll will break any first `it` in this test suit.
    *
-   * https://bitbucket.org/atlassian/atlaskit-mk-2/src/d3016172f2f26d74bd25b2489743ff9292cbd75b/packages/fabric/editor-core/src/plugins/emojis/ascii-input-rules.ts#ascii-input-rules.ts-9
-   * https://bitbucket.org/atlassian/atlaskit-mk-2/src/d3016172f2f26d74bd25b2489743ff9292cbd75b/packages/fabric/editor-core/src/plugins/emojis/ascii-input-rules.ts#ascii-input-rules.ts-33:38
-   * https://bitbucket.org/atlassian/atlaskit-mk-2/src/d3016172f2f26d74bd25b2489743ff9292cbd75b/packages/fabric/editor-core/src/plugins/emojis/ascii-input-rules.ts#ascii-input-rules.ts-49:51
+   * https://github.com/fnamazing/uiKit/src/d3016172f2f26d74bd25b2489743ff9292cbd75b/packages/fabric/editor-core/src/plugins/emojis/ascii-input-rules.ts#ascii-input-rules.ts-9
+   * https://github.com/fnamazing/uiKit/src/d3016172f2f26d74bd25b2489743ff9292cbd75b/packages/fabric/editor-core/src/plugins/emojis/ascii-input-rules.ts#ascii-input-rules.ts-33:38
+   * https://github.com/fnamazing/uiKit/src/d3016172f2f26d74bd25b2489743ff9292cbd75b/packages/fabric/editor-core/src/plugins/emojis/ascii-input-rules.ts#ascii-input-rules.ts-49:51
    */
   beforeAll(async () => {
     editor(doc(p('')));

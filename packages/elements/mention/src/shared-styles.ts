@@ -1,4 +1,4 @@
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 
 export const noDialogContainerBorderColor = colors.N40; // This has not been confirmed by the ADG yet
 export const noDialogContainerBorderRadius = `${borderRadius()}px`;

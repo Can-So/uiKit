@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   ### Icons 🎉
@@ -29,20 +29,20 @@ export default md`
   ## Usage
   
 ${code`
-import Icon from '@atlaskit/icon';
+import Icon from '@findable/icon';
 `}
 
   To use one of Atlaskit's built-in icons you should import it directly.
 
 ${code`
-import BookIcon from '@atlaskit/icon/glyph/book';
+import BookIcon from '@findable/icon/glyph/book';
 `}
 
   You can explore all of our icons in the example below.
 
   ${(
     <Example
-      packageName="@atlaskit/icon"
+      packageName="@findable/icon"
       Component={require('../examples/01-icon-explorer').default}
       title="Basic"
       source={require('!!raw-loader!../examples/01-icon-explorer')}

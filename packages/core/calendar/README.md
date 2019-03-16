@@ -9,7 +9,7 @@ The calendar component displays a simple calendar that can be:
 ## Installation
 
 ```sh
-yarn add @atlaskit/calendar
+yarn add @findable/calendar
 ```
 
 ## Usage

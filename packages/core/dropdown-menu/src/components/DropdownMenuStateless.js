@@ -6,10 +6,10 @@ import { uid } from 'react-uid';
 import {
   withAnalyticsEvents,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import Button from '@atlaskit/button';
-import Droplist, { Item, Group } from '@atlaskit/droplist';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+} from '@findable/analytics-next';
+import Button from '@findable/button';
+import Droplist, { Item, Group } from '@findable/droplist';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 
 import {
   name as packageName,

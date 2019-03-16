@@ -1,7 +1,7 @@
 // @flow
 
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 const HORIZONTAL_SPACING = `${gridSize() / 2}px`;
 

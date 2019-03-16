@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import ImageLoader from 'react-render-image';
-import ImageIcon from '@atlaskit/icon/glyph/image';
+import ImageIcon from '@findable/icon/glyph/image';
 import NoImageIcon from './NoImageIcon';
 import { Wrapper, ImageWrapper, IconWrapper } from './styled';
 export var LoadingView = function () { return (React.createElement(IconWrapper, null,

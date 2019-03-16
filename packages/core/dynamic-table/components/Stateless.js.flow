@@ -5,7 +5,7 @@ import {
   withAnalyticsContext,
   createAndFireEvent,
   UIAnalyticsEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import ManagedPagination from './managedPagination';
 
 import {

@@ -9,7 +9,7 @@ Item is generally a layout component, concerned with visual presentation of the 
 ## Installation
 
 ```sh
-yarn add @atlaskit/item
+yarn add @findable/item
 ```
 
 ## Extending Item behaviour

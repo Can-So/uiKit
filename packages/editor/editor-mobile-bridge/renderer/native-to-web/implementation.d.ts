@@ -1,4 +1,4 @@
-import { TaskState } from '@atlaskit/task-decision';
+import { TaskState } from '@findable/task-decision';
 import RendererBridge from './bridge';
 import WebBridge from '../../web-bridge';
 import { TaskDecisionProviderImpl } from '../../providers/taskDecisionProvider';

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import { MediaSingle, WithProviders, DEFAULT_IMAGE_HEIGHT, DEFAULT_IMAGE_WIDTH, browser, } from '@atlaskit/editor-common';
+import { MediaSingle, WithProviders, DEFAULT_IMAGE_HEIGHT, DEFAULT_IMAGE_WIDTH, browser, } from '@findable/editor-common';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
 import { stateKey } from '../pm-plugins/main';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';

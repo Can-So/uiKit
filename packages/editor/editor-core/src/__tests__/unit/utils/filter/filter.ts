@@ -1,5 +1,5 @@
 import { Slice } from 'prosemirror-model';
-import { defaultSchema, doc, p, strong } from '@atlaskit/editor-test-helpers';
+import { defaultSchema, doc, p, strong } from '@findable/editor-test-helpers';
 
 import { toJSON } from '../../../../utils';
 import {
@@ -7,7 +7,7 @@ import {
   filterSliceByType,
 } from '../../../../utils/filter/filter';
 
-describe('@atlaskit/editor-core/utils/filter', () => {
+describe('@findable/editor-core/utils/filter', () => {
   describe('filterContentByType', () => {
     it('filtering by type', () => {
       const jsonDoc = toJSON(doc(p('some text'))(defaultSchema));

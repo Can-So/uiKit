@@ -9,8 +9,8 @@ jest.mock('video-snapshot', () => {
     default: FakeVideoSnapshot,
   };
 });
-jest.mock('@atlaskit/media-ui');
-import { getOrientation } from '@atlaskit/media-ui';
+jest.mock('@findable/media-ui');
+import { getOrientation } from '@findable/media-ui';
 import { getDataURIFromFileState } from '../../getDataURIFromFileState';
 
 describe('getDataURIFromFileState()', () => {

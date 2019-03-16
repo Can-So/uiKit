@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { AtlassianWordmark } from '@atlaskit/logo';
+import { AtlassianWordmark } from '@findable/logo';
 import Wordmark from '../../index';
 
 <Wordmark wordmark={AtlassianWordmark} />;

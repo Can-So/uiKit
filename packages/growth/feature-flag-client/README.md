@@ -8,7 +8,7 @@ By using it, exposure events will be fired automatically allowing analysis of im
 ### Bootstrap
 
 ```javascript
-import FrontendFeatureFlagClient from '@atlaskit/feature-flag-client';
+import FrontendFeatureFlagClient from '@findable/feature-flag-client';
 
 const client = new FrontendFeatureFlagClient({
   analyticsHandler: myAnalyticsHandler,

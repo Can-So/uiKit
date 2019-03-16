@@ -12,7 +12,7 @@ import {
   h5,
   h6,
   p,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   pluginKey as blockTypePluginKey,
   BlockTypeState,
@@ -27,7 +27,7 @@ import {
   insertBlockTypesWithAnalytics,
 } from '../../../../plugins/block-type/commands';
 import { HEADING_1 } from '../../../../plugins/block-type/types';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import {
   AnalyticsEventPayload,
   ACTION,

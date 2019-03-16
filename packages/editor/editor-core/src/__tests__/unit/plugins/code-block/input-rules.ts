@@ -8,7 +8,7 @@ import {
   code_block,
   panel,
   hardBreak,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import listPlugin from '../../../../plugins/lists';
 import panelPlugin from '../../../../plugins/panel';

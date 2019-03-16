@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
-const logger = require('@atlaskit/build-utils/logger');
+const logger = require('@findable/build-utils/logger');
 
 const getChangesetBase = require('./getChangesetBase');
 

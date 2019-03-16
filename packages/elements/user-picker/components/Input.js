@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { components } from '@atlaskit/select';
+import { components } from '@findable/select';
 var Input = /** @class */ (function (_super) {
     tslib_1.__extends(Input, _super);
     function Input() {

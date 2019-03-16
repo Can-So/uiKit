@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import ResultBase from './ResultBase';
 /**
  * Generic result type for Atlassian objects.

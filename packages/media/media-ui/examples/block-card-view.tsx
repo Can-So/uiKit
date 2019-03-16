@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import Button from '@atlaskit/button';
+import Page, { Grid, GridColumn } from '@findable/page';
+import Button from '@findable/button';
 import {
   BlockCardResolvingView,
   BlockCardErroredView,

@@ -3,7 +3,7 @@ import {
   doc,
   code_block,
   breakout,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { removeBreakout } from '../../../../../plugins/breakout/commands/remove-breakout';
 
 describe('Breakout Commands: remove-breakout', () => {

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as debounce from 'lodash.debounce';
 import styled from 'styled-components';
-import AkAvatar from '@atlaskit/avatar';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import AkAvatar from '@findable/avatar';
+import { ProviderFactory } from '@findable/editor-common';
 
 import {
   Editor as AkEditor,
@@ -15,7 +15,7 @@ import {
   ToolbarHelp,
   name as packageName,
   version as packageVersion,
-} from '@atlaskit/editor-core';
+} from '@findable/editor-core';
 
 import { User } from '../model';
 

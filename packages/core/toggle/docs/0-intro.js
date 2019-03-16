@@ -1,19 +1,19 @@
 // @flow
 import React from 'react';
-import { md, Props, Example, code } from '@atlaskit/docs';
+import { md, Props, Example, code } from '@findable/docs';
 
 export default md`
   A Toggle component. It is a checkbox displayed in an alternative way.
 
   ## Usage
 
-  ${code`import Toggle from '@atlaskit/toggle';`}
+  ${code`import Toggle from '@findable/toggle';`}
 
   The default export is a component that you can control and listen to events.
 
   ${(
     <Example
-      packageName="@atlaskit/toggle"
+      packageName="@findable/toggle"
       Component={require('../examples/0-stateful').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-stateful')}
@@ -25,7 +25,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/toggle"
+      packageName="@findable/toggle"
       Component={require('../examples/1-stateless').default}
       title="Stateless"
       source={require('!!raw-loader!../examples/1-stateless')}

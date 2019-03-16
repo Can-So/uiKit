@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { Editor as AkEditor, EditorProps } from '@atlaskit/editor-core';
+import { ProviderFactory } from '@findable/editor-common';
+import { Editor as AkEditor, EditorProps } from '@findable/editor-core';
 import { User } from '../model';
 export interface Props {
     defaultValue?: any;

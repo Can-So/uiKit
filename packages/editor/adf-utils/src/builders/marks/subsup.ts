@@ -1,4 +1,4 @@
-import { SubSupDefinition, SubSupAttributes } from '@atlaskit/adf-schema';
+import { SubSupDefinition, SubSupAttributes } from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

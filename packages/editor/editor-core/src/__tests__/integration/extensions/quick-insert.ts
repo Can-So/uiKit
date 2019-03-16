@@ -1,4 +1,4 @@
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
 import { messages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
 
 import {

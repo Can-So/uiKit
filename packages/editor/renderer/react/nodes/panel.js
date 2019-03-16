@@ -1,13 +1,13 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { colors } from '@atlaskit/theme';
-import InfoIcon from '@atlaskit/icon/glyph/editor/info';
-import TipIcon from '@atlaskit/icon/glyph/editor/hint';
-import SuccessIcon from '@atlaskit/icon/glyph/editor/success';
-import ErrorIcon from '@atlaskit/icon/glyph/editor/error';
-import NoteIcon from '@atlaskit/icon/glyph/editor/note';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
+import { colors } from '@findable/theme';
+import InfoIcon from '@findable/icon/glyph/editor/info';
+import TipIcon from '@findable/icon/glyph/editor/hint';
+import SuccessIcon from '@findable/icon/glyph/editor/success';
+import ErrorIcon from '@findable/icon/glyph/editor/error';
+import NoteIcon from '@findable/icon/glyph/editor/note';
+import WarningIcon from '@findable/icon/glyph/warning';
 var G50 = colors.G50, G400 = colors.G400, P50 = colors.P50, P400 = colors.P400, B400 = colors.B400, Y50 = colors.Y50, B50 = colors.B50, Y400 = colors.Y400, R50 = colors.R50, R400 = colors.R400;
 var config = {
     info: {

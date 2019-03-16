@@ -1,14 +1,14 @@
 import * as React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { Link } from '../../components/WrappedLink';
-import { gridSize, colors, math } from '@atlaskit/theme';
+import { gridSize, colors, math } from '@findable/theme';
 import debounce from 'lodash.debounce';
 
-import { AtlassianIcon } from '@atlaskit/logo';
-import PackagesIcon from '@atlaskit/icon/glyph/component';
-import BlogIcon from '@atlaskit/icon/glyph/component';
-import MediaDocIcon from '@atlaskit/icon/glyph/media-services/document';
-import CodeIcon from '@atlaskit/icon/glyph/code';
+import { AtlassianIcon } from '@findable/logo';
+import PackagesIcon from '@findable/icon/glyph/component';
+import BlogIcon from '@findable/icon/glyph/component';
+import MediaDocIcon from '@findable/icon/glyph/media-services/document';
+import CodeIcon from '@findable/icon/glyph/code';
 
 import rocket from '../../assets/Rocket.png';
 import platform from '../../assets/Platform.png';
@@ -230,7 +230,7 @@ const cards = [
       'Learn how to contribute code, report issues, and review our code of conduct.',
   },
   {
-    href: 'https://bitbucket.org/atlassian/atlaskit-mk-2',
+    href: 'https://github.com/fnamazing/uiKit',
     title: 'Atlaskit Repository',
     icon: () => (
       <CardIcon color={colors.Y400}>

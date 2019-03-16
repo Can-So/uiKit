@@ -7,22 +7,22 @@ import {
   CardEvent,
   CardAction,
   CardEventHandler,
-} from '@atlaskit/media-card';
+} from '@findable/media-card';
 import {
   Context,
   FileItem,
   FileDetails,
   FileIdentifier,
   getMediaTypeFromMimeType,
-} from '@atlaskit/media-core';
-import Spinner from '@atlaskit/spinner';
-import Flag, { FlagGroup } from '@atlaskit/flag';
-import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
-import TrashIcon from '@atlaskit/icon/glyph/trash';
-import EditorInfoIcon from '@atlaskit/icon/glyph/error';
+} from '@findable/media-core';
+import Spinner from '@findable/spinner';
+import Flag, { FlagGroup } from '@findable/flag';
+import AnnotateIcon from '@findable/icon/glyph/media-services/annotate';
+import TrashIcon from '@findable/icon/glyph/trash';
+import EditorInfoIcon from '@findable/icon/glyph/error';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
-import { messages, InfiniteScroll } from '@atlaskit/media-ui';
+import ModalDialog, { ModalTransition } from '@findable/modal-dialog';
+import { messages, InfiniteScroll } from '@findable/media-ui';
 import { Browser } from '../../../../components/types';
 import { isWebGLAvailable } from '../../../tools/webgl';
 import { Dropzone } from './dropzone';

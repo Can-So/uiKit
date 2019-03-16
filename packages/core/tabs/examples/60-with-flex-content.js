@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import Spinner from '@atlaskit/spinner';
-import { colors } from '@atlaskit/theme';
+import Spinner from '@findable/spinner';
+import { colors } from '@findable/theme';
 import Tabs from '../src';
 
 export default () => (

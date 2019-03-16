@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var RowStyle = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  align-items: center;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  overflow: hidden;\n  padding: 6px 14px;\n  text-overflow: ellipsis;\n  vertical-align: middle;\n"], ["\n  align-items: center;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  overflow: hidden;\n  padding: 6px 14px;\n  text-overflow: ellipsis;\n  vertical-align: middle;\n"])));
 export var AvatarStyle = styled.span(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  position: relative;\n  flex: initial;\n  opacity: ", ";\n"], ["\n  position: relative;\n  flex: initial;\n  opacity: ",
     ";\n"])), function (props) {

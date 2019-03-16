@@ -2,8 +2,8 @@ import {
   UIAnalyticsEventInterface,
   WithAnalyticsEventProps,
   CreateUIAnalyticsEventSignature,
-} from '@atlaskit/analytics-next-types';
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-next-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 
 import { ELEMENTS_CHANNEL } from '../constants';
 import {

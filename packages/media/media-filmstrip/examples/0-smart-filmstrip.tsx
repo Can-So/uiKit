@@ -9,9 +9,9 @@ import {
   gifFileId,
   externalImageIdentifier,
   defaultCollectionName,
-} from '@atlaskit/media-test-helpers';
-import { CardEvent, CardAction } from '@atlaskit/media-card';
-import EditorCloseIcon from '@atlaskit/icon/glyph/editor/close';
+} from '@findable/media-test-helpers';
+import { CardEvent, CardAction } from '@findable/media-card';
+import EditorCloseIcon from '@findable/icon/glyph/editor/close';
 import { Filmstrip, FilmstripItem } from '../src';
 import { ExampleWrapper, FilmstripWrapper } from '../example-helpers/styled';
 import {
@@ -19,8 +19,8 @@ import {
   UploadableFile,
   Context,
   FileIdentifier,
-} from '@atlaskit/media-core';
-import Button from '@atlaskit/button';
+} from '@findable/media-core';
+import Button from '@findable/button';
 
 export interface ExampleState {
   items: FilmstripItem[];

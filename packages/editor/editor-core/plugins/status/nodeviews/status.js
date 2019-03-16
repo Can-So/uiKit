@@ -2,10 +2,10 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import styled from 'styled-components';
-import { Status } from '@atlaskit/status';
+import { Status } from '@findable/status';
 import { pluginKey } from '../plugin';
 import { setStatusPickerAt } from '../actions';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 var B100 = colors.B100;
 export var StatusContainer = styled.span(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  cursor: pointer;\n\n  display: inline-block;\n  border-radius: 5px;\n  max-width: 100%;\n\n  /* Prevent responsive layouts increasing height of container by changing\n     font size and therefore line-height. */\n  line-height: 0;\n\n  opacity: ", ";\n\n  border: 2px solid ", ";\n  }\n\n  * ::selection {\n    background-color: transparent;\n  }\n"], ["\n  cursor: pointer;\n\n  display: inline-block;\n  border-radius: 5px;\n  max-width: 100%;\n\n  /* Prevent responsive layouts increasing height of container by changing\n     font size and therefore line-height. */\n  line-height: 0;\n\n  opacity: ",
     ";\n\n  border: 2px solid ",

@@ -1,4 +1,4 @@
-import { Auth, isClientBasedAuth } from '@atlaskit/media-core';
+import { Auth, isClientBasedAuth } from '@findable/media-core';
 
 export interface ClientBasedAuthHeaders {
   readonly 'X-Client-Id': string;

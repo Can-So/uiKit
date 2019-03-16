@@ -1,4 +1,4 @@
-import { MentionDescription, AbstractMentionResource } from '@atlaskit/mention';
+import { MentionDescription, AbstractMentionResource } from '@findable/mention';
 import { MockMentionConfig } from './MockMentionResource';
 export declare class MockMentionResourceWithInfoHints extends AbstractMentionResource {
     private config;

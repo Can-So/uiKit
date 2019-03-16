@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { mention, MockMentionResource } from '@atlaskit/util-data-test';
+import { mention, MockMentionResource } from '@findable/util-data-test';
 import {
   MentionDescription,
   OnMentionEvent,
   MentionEventHandler,
 } from '../src/types';
 import debug from '../src/util/logger';
-export { MockPresenceResource } from '@atlaskit/util-data-test';
+export { MockPresenceResource } from '@findable/util-data-test';
 
 export const resourceProvider: MockMentionResource =
   mention.storyData.resourceProvider;

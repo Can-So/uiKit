@@ -10,10 +10,10 @@ import safeContextCall from '../../util/safeContextCall';
 import { focusManagerContext } from '../../util/contextNamespace';
 import type { ItemId } from '../../types';
 
-// HOC that typically wraps @atlaskit/item
+// HOC that typically wraps @findable/item
 
 type Props = {
-  /** Content to be displayed inside the item. Same as @atlaskit/item `children` prop. */
+  /** Content to be displayed inside the item. Same as @findable/item `children` prop. */
   children?: Node,
   /** If true, the item appears greyed out and does not fire click events. */
   isDisabled?: boolean,

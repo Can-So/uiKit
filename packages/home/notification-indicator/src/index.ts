@@ -1,5 +1,5 @@
 import NotificationIndicator from './NotificationIndicator';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 
 const NotificationIndicatorWithAnalytics = withAnalyticsEvents()(
   NotificationIndicator,

@@ -1,9 +1,9 @@
 // @flow
 import styled from 'styled-components';
-import { colors, layers, themed } from '@atlaskit/theme';
+import { colors, layers, themed } from '@findable/theme';
 
 // NOTE:
-// we can't use @atlaskit/blanket
+// we can't use @findable/blanket
 // because it has to sit on top of other layered elements (i.e. Modal).
 
 const backgroundColor = themed({ light: colors.N100A, dark: colors.DN90A });

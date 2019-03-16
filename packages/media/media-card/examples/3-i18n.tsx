@@ -3,7 +3,7 @@ import {
   I18NWrapper,
   errorFileId,
   createStorybookContext,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { Card } from '../src';
 
 const context = createStorybookContext();

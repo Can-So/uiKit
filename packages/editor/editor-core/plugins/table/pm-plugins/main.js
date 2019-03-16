@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { findParentDomRefOfType } from 'prosemirror-utils';
 import { DecorationSet } from 'prosemirror-view';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import { createTableView } from '../nodeviews/table';
 import { createCellView } from '../nodeviews/cell';
 import { setTableRef, clearHoverSelection, handleCut } from '../actions';

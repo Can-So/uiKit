@@ -1,4 +1,4 @@
-import { ImageMetadata } from '@atlaskit/media-store';
+import { ImageMetadata } from '@findable/media-store';
 import { getPreviewFromMetadata } from '../../../domain/preview';
 
 describe('getPreviewFromMetadata()', () => {

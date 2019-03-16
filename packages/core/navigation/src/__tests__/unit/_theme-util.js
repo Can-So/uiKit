@@ -4,7 +4,7 @@ import React, { type Node } from 'react';
 import { mount, shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from 'styled-components';
-import { itemThemeNamespace } from '@atlaskit/item';
+import { itemThemeNamespace } from '@findable/item';
 import { prefix } from '../../theme/util';
 import * as presets from '../../theme/presets';
 import type { RootTheme, Provided } from '../../theme/types';

@@ -1,11 +1,11 @@
 import { Component } from 'react';
-import ArrowIcon from '@atlaskit/icon/glyph/media-services/arrow';
-import BrushIcon from '@atlaskit/icon/glyph/media-services/brush';
-import LineIcon from '@atlaskit/icon/glyph/media-services/line';
-import BlurIcon from '@atlaskit/icon/glyph/media-services/blur';
-import OvalIcon from '@atlaskit/icon/glyph/media-services/oval';
-import RectIcon from '@atlaskit/icon/glyph/media-services/rectangle';
-import TextIcon from '@atlaskit/icon/glyph/media-services/text';
+import ArrowIcon from '@findable/icon/glyph/media-services/arrow';
+import BrushIcon from '@findable/icon/glyph/media-services/brush';
+import LineIcon from '@findable/icon/glyph/media-services/line';
+import BlurIcon from '@findable/icon/glyph/media-services/blur';
+import OvalIcon from '@findable/icon/glyph/media-services/oval';
+import RectIcon from '@findable/icon/glyph/media-services/rectangle';
+import TextIcon from '@findable/icon/glyph/media-services/text';
 import { Tool } from '../../../../common';
 export declare const toolIcons: {
     line: typeof LineIcon;

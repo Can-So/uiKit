@@ -5,7 +5,7 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import ChevronLeftLargeIcon from '@atlaskit/icon/glyph/chevron-left-large';
+import ChevronLeftLargeIcon from '@findable/icon/glyph/chevron-left-large';
 import Navigator from './Navigator';
 
 var LeftNavigator =

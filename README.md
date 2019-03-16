@@ -18,7 +18,7 @@ It's strongly advised to use the Atlaskit CSS reset in your whole project, or so
 may diverge in appearance:
 
 ```javascript
-import '@atlaskit/css-reset';
+import '@findable/css-reset';
 ```
 
 In general, you should avoid directly styling base elements (ex. p, h1, h2) and uses classes instead.
@@ -27,12 +27,12 @@ In general, you should avoid directly styling base elements (ex. p, h1, h2) and 
 
 Atlaskit components are built for React. Here's an example of using the Avatar component:
 
-1. First, you specify a component into your project as a dependency using npm: `npm install @atlaskit/avatar`
+1. First, you specify a component into your project as a dependency using npm: `npm install @findable/avatar`
 2. Then you can use it in your React projects like this:
 
 ```javascript
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 
 export default (
   <Avatar
@@ -53,8 +53,8 @@ To use:
 1. You include these into your the HTML projects.
 
 ```html
-<link rel="stylesheet" href="//unpkg.com/@atlaskit/css-reset@latest" />
-<link rel="stylesheet" href="//unpkg.com/@atlaskit/reduced-ui-pack@latest" />
+<link rel="stylesheet" href="//unpkg.com/@findable/css-reset@latest" />
+<link rel="stylesheet" href="//unpkg.com/@findable/reduced-ui-pack@latest" />
 ```
 
 2. Then you can style HTML with
@@ -132,7 +132,7 @@ See the existing issues for things to start contributing. For bigger changes, ma
 
 #### Become a contributor
 
- If this is your _first time_ to raise a pull request, you need to be added to the 'atlaskit contributor' team in order to create branches for your pull requests. To be added, create an [issue](https://bitbucket.org/atlassian/atlaskit-mk-2/issues?status=new&status=open) and include the following:
+ If this is your _first time_ to raise a pull request, you need to be added to the 'atlaskit contributor' team in order to create branches for your pull requests. To be added, create an [issue](https://github.com/fnamazing/uiKit/issues?status=new&status=open) and include the following:
 
 1. Issue title - __"Become an Atlaskit contributor"__
 2. Your Bitbucket username and

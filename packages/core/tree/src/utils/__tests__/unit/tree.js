@@ -10,7 +10,7 @@ import {
 import { treeWithThreeLeaves } from '../../../../mockdata/treeWithThreeLeaves';
 import { treeWithTwoBranches } from '../../../../mockdata/treeWithTwoBranches';
 
-describe('@atlaskit/tree - utils/tree', () => {
+describe('@findable/tree - utils/tree', () => {
   describe('#flattenTree', () => {
     it('returns empty list if no children', () => {
       expect(flattenTree({ rootId: 'x', items: {} }).length).toBe(0);

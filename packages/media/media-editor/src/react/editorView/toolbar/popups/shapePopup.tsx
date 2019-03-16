@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
-import InlineDialog from '@atlaskit/inline-dialog';
-import Button from '@atlaskit/button';
+import InlineDialog from '@findable/inline-dialog';
+import Button from '@findable/button';
 
 import { ShapePopupContentWrapper } from './popupStyles';
 import { Tool } from '../../../../common';

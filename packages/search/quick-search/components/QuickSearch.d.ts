@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
+import { FireAnalyticsEvent } from '@findable/analytics';
 import { ResultData, SelectedResultId } from './Results/types';
 import { ResultContextType } from './context';
 import { ResultBase } from './Results/ResultBase';
@@ -110,6 +110,6 @@ declare const _default: React.ComponentClass<Props, any>;
  * HOCs:
  * `decorateWithAnalyticsData` - Wrapper that decorates analytics events with additional data.
  * `withAnalytics` - Injects analytics firing methods that are picked up by
- * @atlaskit/analytics/AnalyticsListener.
+ * @findable/analytics/AnalyticsListener.
  */
 export default _default;

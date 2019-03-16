@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 import { ImagePlacer, ImageActions } from '../src/image-placer';
 import {
   Slider,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Frame } from '../Frame';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
 import { SpinnerWrapper } from './styled';
 

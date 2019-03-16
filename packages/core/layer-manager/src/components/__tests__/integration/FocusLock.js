@@ -1,7 +1,7 @@
 // @flow
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
+import { getExampleUrl } from '@findable/webdriver-runner/utils/example';
+import Page from '@findable/webdriver-runner/wd-wrapper';
 
 const urlFocusLock = getExampleUrl('core', 'layer-manager', 'focus-lock');
 const FocusLockButton = '#examples p:nth-child(1) > button';

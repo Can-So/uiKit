@@ -1,4 +1,4 @@
-export { isClientBasedAuth, isAsapBasedAuth, UploadController, isPreviewableType, } from '@atlaskit/media-store';
+export { isClientBasedAuth, isAsapBasedAuth, UploadController, isPreviewableType, } from '@findable/media-store';
 export * from './context/context';
 export * from './utils';
 export * from './fileState';

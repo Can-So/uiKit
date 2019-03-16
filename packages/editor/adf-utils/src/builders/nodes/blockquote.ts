@@ -1,7 +1,7 @@
 import {
   ParagraphDefinition,
   BlockQuoteDefinition,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 
 export const blockQuote = (
   ...content: Array<ParagraphDefinition>

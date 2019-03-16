@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { borderRadius, colors, themed, layers } from '@atlaskit/theme';
+import { borderRadius, colors, themed, layers } from '@findable/theme';
 import { WIDTH_ENUM, gutter } from '../shared-variables';
 
 import {
@@ -50,7 +50,7 @@ export const dialogHeight = ({
 /**
   NOTE:
   z-index
-  - temporarily added to beat @atlaskit/navigation
+  - temporarily added to beat @findable/navigation
 
   absolute + top
   - rather than fixed position so popper.js children are properly positioned

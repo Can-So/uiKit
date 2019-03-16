@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
 import LayerManager from '../src';
 
 type State = {

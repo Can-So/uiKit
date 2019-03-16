@@ -5,9 +5,9 @@ import {
   FileIdentifier,
   FileState,
   MediaFileArtifacts,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import { Subscription } from 'rxjs/Subscription';
-import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { CustomMediaPlayer } from '@findable/media-ui';
 import { InlinePlayerWrapper } from './styled';
 import { CardDimensions, defaultImageCardDimensions } from '..';
 import { CardLoading } from '../utils/cardLoading';

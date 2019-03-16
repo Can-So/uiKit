@@ -1,14 +1,14 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
-import { isErrorFileState, } from '@atlaskit/media-core';
+import { messages } from '@findable/media-ui';
+import { isErrorFileState, } from '@findable/media-core';
 import { DownloadButtonWrapper } from './styled';
-import Button from '@atlaskit/button';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import Button from '@findable/button';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { downloadButtonEvent, downloadErrorButtonEvent, } from './analytics/download';
 import { channel } from './analytics';
-import DownloadIcon from '@atlaskit/icon/glyph/download';
+import DownloadIcon from '@findable/icon/glyph/download';
 var downloadIcon = React.createElement(DownloadIcon, { label: "Download" });
 // TODO: MS-1556
 export var DownloadButton = withAnalyticsEvents({

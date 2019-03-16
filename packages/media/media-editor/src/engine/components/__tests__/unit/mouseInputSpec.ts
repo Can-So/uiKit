@@ -1,4 +1,4 @@
-import { createMouseEvent } from '@atlaskit/media-test-helpers';
+import { createMouseEvent } from '@findable/media-test-helpers';
 import { DefaultMouseInput } from '../../mouseInput';
 
 describe('MediaEditor DefaultMouseInput', () => {

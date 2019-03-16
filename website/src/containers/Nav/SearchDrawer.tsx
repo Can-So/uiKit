@@ -5,10 +5,10 @@ import {
   AkSearchDrawer,
   AkNavigationItem,
   AkNavigationItemGroup,
-} from '@atlaskit/navigation';
-import { AkSearch } from '@atlaskit/quick-search';
+} from '@findable/navigation';
+import { AkSearch } from '@findable/quick-search';
 
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
 
 import * as fs from '../../utils/fs';
 import { Directory } from '../../types';

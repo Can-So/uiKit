@@ -1,5 +1,5 @@
 /* tslint:disable:variable-name */
-import { borderRadius } from '@atlaskit/theme';
+import { borderRadius } from '@findable/theme';
 import { defaultTransitionDuration } from './config';
 export var centerX = "\n  display: flex;\n  justify-content: center;\n";
 export var antialiased = "\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n";

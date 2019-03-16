@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { OPERATIONAL_EVENT_TYPE, UI_EVENT_TYPE, } from '@atlaskit/analytics-gas-types';
-import { isSpecialMention } from '@atlaskit/mention';
+import { OPERATIONAL_EVENT_TYPE, UI_EVENT_TYPE, } from '@findable/analytics-gas-types';
+import { isSpecialMention } from '@findable/mention';
 import { name as packageName, version as packageVersion, } from '../../version.json';
 var componentName = 'mention';
 export var buildAnalyticsPayload = function (actionSubject, action, eventType, sessionId, otherAttributes) {

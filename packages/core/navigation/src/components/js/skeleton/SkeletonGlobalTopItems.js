@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 
-import { Skeleton as SkeletonIcon } from '@atlaskit/icon';
+import { Skeleton as SkeletonIcon } from '@findable/icon';
 
 import SkeletonNavigationItems from './styled/SkeletonNavigationItems';
 import SkeletonGlobalPrimaryIconOuter from './styled/SkeletonGlobalPrimaryIconOuter';

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   Component which renders a native input[range] element, with atlassian stylings.
@@ -9,11 +9,11 @@ export default md`
 
   ## Usage
 
-  ${code`import FieldRange from '@atlaskit/range';`}
+  ${code`import FieldRange from '@findable/range';`}
 
   ${(
     <Example
-      packageName="@atlaskit/range"
+      packageName="@findable/range"
       Component={require('../examples/00-basic-example').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-example')}
@@ -24,7 +24,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/range"
+      packageName="@findable/range"
       Component={require('../examples/01-basic-example-controlled').default}
       title="Controlled Example"
       source={require('!!raw-loader!../examples/01-basic-example-controlled')}

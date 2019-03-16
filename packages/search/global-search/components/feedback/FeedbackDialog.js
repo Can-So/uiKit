@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import ModalPromise from './ModalWrapper';
-import FieldTextArea from '@atlaskit/field-text-area';
+import FieldTextArea from '@findable/field-text-area';
 import sendFeedback from './feedback-client';
 var FeedbackDialog = /** @class */ (function (_super) {
     tslib_1.__extends(FeedbackDialog, _super);

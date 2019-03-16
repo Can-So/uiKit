@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { ListenerProps, FabricChannel } from '../types';
 
 import { handleEvent } from './handle-event';
-import { UIAnalyticsEventHandlerSignature } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventHandlerSignature } from '@findable/analytics-next-types';
 
 export const ELEMENTS_TAG = 'fabricElements';
 

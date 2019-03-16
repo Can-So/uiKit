@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Tag from '@atlaskit/tag';
+import Tag from '@findable/tag';
 import TagGroup from '../..';
 import { Container } from '../../styled';
 

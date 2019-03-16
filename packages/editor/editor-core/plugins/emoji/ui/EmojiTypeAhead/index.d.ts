@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import { PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { EmojiTypeAhead as AkEmojiTypeAhead, EmojiProvider } from '@atlaskit/emoji';
+import { EmojiTypeAhead as AkEmojiTypeAhead, EmojiProvider } from '@findable/emoji';
 import { AnalyticsEventPayload } from '../../../analytics';
 export interface Props {
     editorView?: EditorView;

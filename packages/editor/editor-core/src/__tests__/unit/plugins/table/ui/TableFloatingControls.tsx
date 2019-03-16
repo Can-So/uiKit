@@ -10,7 +10,7 @@ import {
   tr,
   tdEmpty,
   tdCursor,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   pluginKey,

@@ -1,4 +1,4 @@
-import { FileState } from '@atlaskit/media-core';
+import { FileState } from '@findable/media-core';
 export interface FilePreview {
     src?: string;
     orientation?: number;

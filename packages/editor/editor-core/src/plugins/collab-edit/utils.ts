@@ -1,9 +1,9 @@
 import { EditorState, Selection } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
-import { colors as themeColors } from '@atlaskit/theme';
+import { colors as themeColors } from '@findable/theme';
 
-import { hexToRgba } from '@atlaskit/editor-common';
+import { hexToRgba } from '@findable/editor-common';
 
 import { CollabEditOptions } from './types';
 import { processRawValue } from '../../utils';

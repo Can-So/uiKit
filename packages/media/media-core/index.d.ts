@@ -1,5 +1,5 @@
 export * from './item';
-export { ClientBasedAuth, AsapBasedAuth, Auth, isClientBasedAuth, isAsapBasedAuth, AuthContext, AuthProvider, MediaApiConfig, ContextConfig, UploadableFile, UploadFileCallbacks, UploadFileResult, UploadController, MediaType, isPreviewableType, TouchFileDescriptor, MediaFileArtifacts, } from '@atlaskit/media-store';
+export { ClientBasedAuth, AsapBasedAuth, Auth, isClientBasedAuth, isAsapBasedAuth, AuthContext, AuthProvider, MediaApiConfig, ContextConfig, UploadableFile, UploadFileCallbacks, UploadFileResult, UploadController, MediaType, isPreviewableType, TouchFileDescriptor, MediaFileArtifacts, } from '@findable/media-store';
 export { FileFetcher } from './file';
 export * from './context/context';
 export * from './utils';

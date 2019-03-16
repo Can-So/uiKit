@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 import { Hr } from './shared';
 
@@ -24,13 +24,13 @@ export default md`
 
   ## Usage
 
-  ${code`import { MediaImage } from '@atlaskit/media-image';
+  ${code`import { MediaImage } from '@findable/media-image';
 
   `}
 
   ${(
     <Example
-      packageName="@atlaskit/media-image"
+      packageName="@findable/media-image"
       Component={require('../examples/0-basic').default}
       title="MediaImage Basic"
       source={require('!!raw-loader!../examples/0-basic')}

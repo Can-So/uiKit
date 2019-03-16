@@ -5,7 +5,7 @@ import {
   NotificationLogClient,
   NotificationCountResponse,
   NotificationLogProvider,
-} from '@atlaskit/notification-log-client';
+} from '@findable/notification-log-client';
 
 import NotificationIndicator from '../../NotificationIndicator';
 

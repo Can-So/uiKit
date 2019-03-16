@@ -3,7 +3,7 @@ import {
   GasScreenEventPayload,
   UI_EVENT_TYPE,
   EventType,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 
 import fileUploadEndHandler from './fileUploadEndHandler';
 import fileUploadErrorHandler from './fileUploadErrorHandler';

@@ -3,10 +3,10 @@ import { Component } from 'react';
 import {
   createStorybookContext,
   genericFileId,
-} from '@atlaskit/media-test-helpers';
-import Toggle from '@atlaskit/toggle';
-import Slider from '@atlaskit/field-range';
-import { Identifier } from '@atlaskit/media-core';
+} from '@findable/media-test-helpers';
+import Toggle from '@findable/toggle';
+import Slider from '@findable/field-range';
+import { Identifier } from '@findable/media-core';
 import { Card, CardDimensions } from '../src';
 import { CardDimensionsWrapper } from '../example-helpers/styled';
 import {

@@ -3,7 +3,7 @@ import * as React from 'react';
 import rafSchedule from 'raf-schd';
 import { TableMap } from 'prosemirror-tables';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
-import { browser, calcTableWidth, akEditorMobileBreakoutPoint, absoluteBreakoutWidth, } from '@atlaskit/editor-common';
+import { browser, calcTableWidth, akEditorMobileBreakoutPoint, absoluteBreakoutWidth, } from '@findable/editor-common';
 import TableFloatingControls from '../ui/TableFloatingControls';
 import ColumnControls from '../ui/TableFloatingControls/ColumnControls';
 import { getPluginState } from '../pm-plugins/main';

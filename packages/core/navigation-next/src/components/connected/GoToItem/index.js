@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/arrow-right-circle';
-import Spinner from '@atlaskit/spinner';
+import ArrowRightCircleIcon from '@findable/icon/glyph/arrow-right-circle';
+import Spinner from '@findable/spinner';
 
 import { withNavigationViewController } from '../../../view-controller';
 import ConnectedItem from '../ConnectedItem';

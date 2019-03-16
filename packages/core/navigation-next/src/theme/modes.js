@@ -1,6 +1,6 @@
 // @flow
 
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 import modeGenerator from './modeGenerator';
 

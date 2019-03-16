@@ -5,7 +5,7 @@ Table component with pagination and sorting functionality.
 ## Installation
 
 ```sh
-yarn add @atlaskit/dynamic-table
+yarn add @findable/dynamic-table
 ```
 
 ## Usage

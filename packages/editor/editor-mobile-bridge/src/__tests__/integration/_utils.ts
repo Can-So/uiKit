@@ -1,4 +1,4 @@
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
+import { getExampleUrl } from '@findable/webdriver-runner/utils/example';
 
 declare global {
   interface Window {

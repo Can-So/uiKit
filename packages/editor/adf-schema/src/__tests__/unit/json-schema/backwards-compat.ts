@@ -20,13 +20,13 @@ async function fetchJSONSchema(url: string) {
 
 function fetchLastPublishedJSONSchema() {
   return fetchJSONSchema(
-    `https://unpkg.com/@atlaskit/adf-schema@latest/dist/json-schema/v1/full.json`,
+    `https://unpkg.com/@findable/adf-schema@latest/dist/json-schema/v1/full.json`,
   );
 }
 
 function fetchMasterJSONSchema() {
   return fetchJSONSchema(
-    `https://bitbucket.org/atlassian/atlaskit-mk-2/raw/master/packages/editor/adf-schema/json-schema/v1/full.json`,
+    `https://github.com/fnamazing/uiKit/raw/master/packages/editor/adf-schema/json-schema/v1/full.json`,
   );
 }
 

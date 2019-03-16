@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var FolderViewerWrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n\n  height: 100%;\n"], ["\n  display: flex;\n  flex-direction: column;\n\n  height: 100%;\n"])));
 export var SpinnerWrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  /* Take up all of the available space between header and footer */\n  flex: 1;\n"], ["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  /* Take up all of the available space between header and footer */\n  flex: 1;\n"])));
 export var FolderViewerContent = styled.ul(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n  /* Take up all of the available space between header and footer */\n  flex: 1;\n\n  /* Ensure navigation header is pinned to top */\n  overflow: auto;\n\n  list-style: none;\n\n  /* Override default list styles */\n  margin-top: 0;\n  padding-left: 0;\n"], ["\n  /* Take up all of the available space between header and footer */\n  flex: 1;\n\n  /* Ensure navigation header is pinned to top */\n  overflow: auto;\n\n  list-style: none;\n\n  /* Override default list styles */\n  margin-top: 0;\n  padding-left: 0;\n"])));

@@ -1,4 +1,4 @@
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   doc,
   p,
@@ -6,7 +6,7 @@ import {
   mention,
   emoji,
   createEditorFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   TextFormattingState,
   pluginKey as textFormattingPluginKey,

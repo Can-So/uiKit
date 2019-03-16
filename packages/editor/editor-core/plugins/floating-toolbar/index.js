@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { findDomRefAtPos, findSelectedNodeOfType } from 'prosemirror-utils';
-import { Popup } from '@atlaskit/editor-common';
+import { Popup } from '@findable/editor-common';
 import WithPluginState from '../../ui/WithPluginState';
 import { ToolbarLoader } from './ui/ToolbarLoader';
 import { pluginKey as editorDisabledPluginKey, } from '../editor-disabled';

@@ -1,4 +1,4 @@
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import {
   sendKeyToPm,
   doc,
@@ -13,14 +13,14 @@ import {
   mention,
   insertText,
   code_block,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   TextFormattingState,
   pluginKey as textFormattingPluginKey,
 } from '../../../../plugins/text-formatting/pm-plugins/main';
 import * as commands from '../../../../plugins/text-formatting/commands/text-formatting';
 import { anyMarkActive } from '../../../../plugins/text-formatting/utils';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import {
   AnalyticsEventPayload,
   ACTION,

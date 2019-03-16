@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { AkCodeBlock } from '@atlaskit/code';
+import { AkCodeBlock } from '@findable/code';
 import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';
 
 function identity<T = any>(text: T): T {

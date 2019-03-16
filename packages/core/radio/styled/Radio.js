@@ -1,6 +1,6 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 var disabledColor = themed({
   light: colors.N80,
   dark: colors.N80

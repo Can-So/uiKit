@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
-import { MentionUserType as UserType } from '@atlaskit/adf-schema';
-import { MentionProvider } from '@atlaskit/mention';
+import { MentionUserType as UserType } from '@findable/adf-schema';
+import { MentionProvider } from '@findable/mention';
 import { ProfilecardProvider } from './types';
 import { MentionEventHandler } from '../EventHandlers';
 export interface Props {

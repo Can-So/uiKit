@@ -19,7 +19,7 @@ export default class ItemGroupStory extends Component<{}, {}> {
   render() {
     return (
       <div>
-        `@atlaskit/item - ItemGroup`
+        `@findable/item - ItemGroup`
         <div>
           simple group
           <GroupsWrapper>

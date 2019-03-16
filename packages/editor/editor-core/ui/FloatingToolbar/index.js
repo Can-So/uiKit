@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { Popup } from '@atlaskit/editor-common';
+import { Popup } from '@findable/editor-common';
 import { Container } from './styles';
 export { handlePositionCalculatedWith, getOffsetParent, getNearestNonTextNode, } from './utils';
 var FloatingToolbar = /** @class */ (function (_super) {

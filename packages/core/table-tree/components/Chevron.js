@@ -7,9 +7,9 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right';
+import Button from '@findable/button';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import ChevronRightIcon from '@findable/icon/glyph/chevron-right';
 import { ChevronContainer, ChevronIconContainer, iconColor } from '../styled';
 
 var Chevron =

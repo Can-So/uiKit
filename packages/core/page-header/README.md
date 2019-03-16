@@ -5,7 +5,7 @@ The page header pattern is a template that helps combine other components (bread
 ## Installation
 
 ```sh
-yarn add @atlaskit/page-header
+yarn add @findable/page-header
 ```
 
 ## Usage

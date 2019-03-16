@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { TokenType } from '../index';
-import { isSafeUrl } from '@atlaskit/adf-schema';
+import { isSafeUrl } from '@findable/adf-schema';
 import { parseString } from '../../text';
 import { hasAnyOfMarks } from '../../utils/text';
 export function urlLinkResolver(link, schema, context) {

@@ -6,9 +6,9 @@ import React, {
   type Node,
   type Ref,
 } from 'react';
-import { colors, fontSize, gridSize as gridSizeFn } from '@atlaskit/theme';
-import Avatar from '@atlaskit/avatar';
-import { components } from '@atlaskit/select';
+import { colors, fontSize, gridSize as gridSizeFn } from '@findable/theme';
+import Avatar from '@findable/avatar';
+import { components } from '@findable/select';
 
 const gridSize = gridSizeFn();
 

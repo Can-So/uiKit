@@ -7,8 +7,8 @@ import {
   tr,
   td,
   tdEmpty,
-} from '@atlaskit/editor-test-helpers';
-import { tableBackgroundColorNames, rgbToHex } from '@atlaskit/adf-schema';
+} from '@findable/editor-test-helpers';
+import { tableBackgroundColorNames, rgbToHex } from '@findable/adf-schema';
 import { TablePluginState } from '../../../../../plugins/table/types';
 import { pluginKey } from '../../../../../plugins/table/pm-plugins/main';
 

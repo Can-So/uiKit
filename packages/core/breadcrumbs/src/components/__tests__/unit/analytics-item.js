@@ -4,8 +4,8 @@ import { mount } from 'enzyme';
 import {
   withAnalyticsEvents,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import Button from '@atlaskit/button';
+} from '@findable/analytics-next';
+import Button from '@findable/button';
 import {
   name as packageName,
   version as packageVersion,
@@ -18,7 +18,7 @@ import { BreadcrumbsItemWithoutAnalytics as BreadcrumbsItem } from '../../../com
 // This is a global mock for this file that will mock all components wrapped with analytics
 // and replace them with an empty SFC that returns null. This includes components imported
 // directly in this file and others imported as dependencies of those imports.
-jest.mock('@atlaskit/analytics-next', () => ({
+jest.mock('@findable/analytics-next', () => ({
   withAnalyticsEvents: jest.fn(() => jest.fn(() => () => null)),
   withAnalyticsContext: jest.fn(() => jest.fn(() => () => null)),
   createAndFireEvent: jest.fn(() => jest.fn(args => args)),

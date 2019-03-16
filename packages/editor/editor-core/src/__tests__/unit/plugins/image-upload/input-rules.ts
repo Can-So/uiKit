@@ -6,7 +6,7 @@ import {
   code_block,
   media,
   mediaSingle,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import imageUpload from '../../../../plugins/image-upload';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import mediaPlugin from '../../../../plugins/media';

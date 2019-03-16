@@ -6,9 +6,9 @@ import { PlayIconWrapper, Wrapper, ProgressBarWrapper, Body, CardActionsWrapper,
 import { isLoadingImage } from '../../utils/isLoadingImage';
 import { MediaImage } from '../../utils/mediaImage';
 import { CardLoading } from '../../utils/cardLoading';
-import VidPlayIcon from '@atlaskit/icon/glyph/vid-play';
+import VidPlayIcon from '@findable/icon/glyph/vid-play';
 import { shouldDisplayImageThumbnail } from '../../utils/shouldDisplayImageThumbnail';
-import { Ellipsify } from '@atlaskit/media-ui';
+import { Ellipsify } from '@findable/media-ui';
 import { ProgressBar } from '../../utils/progressBar';
 import CardActions from '../../utils/cardActions';
 var FileCardImageView = /** @class */ (function (_super) {

@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
-import { colors, gridSize as akGridSize, layers as akLayers, themed, typography } from '@atlaskit/theme';
-var gridSize = akGridSize(); // @atlaskit/navigation has a specific z-index, so we need to layer the header
+import { colors, gridSize as akGridSize, layers as akLayers, themed, typography } from '@findable/theme';
+var gridSize = akGridSize(); // @findable/navigation has a specific z-index, so we need to layer the header
 // components relative to that.
 
 var navLayer = akLayers.navigation();
@@ -35,7 +35,7 @@ export var MobilePageHeaderContent = styled.div.withConfig({
   dark: colors.DN10
 }), mobileHeaderHeight, gridSize, layers.header);
 var opacityIn = keyframes(["\n  from { opacity: 0; }\n  to { opacity: 1; }\n"]);
-var opacityOut = keyframes(["\n  from { opacity: 1; }\n  to { opacity: 0; }\n"]); // @atlaskit/blanket has a z-index *higher* than @atlaskit/navigation,
+var opacityOut = keyframes(["\n  from { opacity: 1; }\n  to { opacity: 0; }\n"]); // @findable/blanket has a z-index *higher* than @findable/navigation,
 // so we can't display the AK blanket underneath the navigation.
 
 export var FakeBlanket = styled.div.withConfig({

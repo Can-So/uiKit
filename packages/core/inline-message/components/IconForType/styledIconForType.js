@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 import { itemSpacing } from '../../constants';
 // $FlowFixMe - theme is not found in props
 var getBaseColor = themed('appearance', {

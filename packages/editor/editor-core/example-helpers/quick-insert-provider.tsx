@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DevIcon from '@atlaskit/icon/glyph/editor/code';
+import DevIcon from '@findable/icon/glyph/editor/code';
 import {
   QuickInsertItem,
   QuickInsertProvider,

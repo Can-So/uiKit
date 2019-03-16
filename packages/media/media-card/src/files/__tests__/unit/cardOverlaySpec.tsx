@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { Ellipsify } from '@atlaskit/media-ui';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { Ellipsify } from '@findable/media-ui';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 import { CardOverlay } from '../../cardImageView/cardOverlay';
 import {
   TitleWrapper,

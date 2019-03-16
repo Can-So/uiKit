@@ -1,9 +1,9 @@
-import { ErrorMessage, Field, HelperMessage } from '@atlaskit/form';
+import { ErrorMessage, Field, HelperMessage } from '@findable/form';
 import UserPicker, {
   LoadOptions,
   OptionData,
   Value,
-} from '@atlaskit/user-picker';
+} from '@findable/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';

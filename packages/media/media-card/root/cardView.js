@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { withAnalyticsEvents, createAndFireEvent, } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents, createAndFireEvent, } from '@findable/analytics-next';
 import { FileCard } from '../files';
 import { breakpointSize } from '../utils/breakpoint';
 import { defaultImageCardDimensions, getDefaultCardDimensions, } from '../utils/cardDimensions';

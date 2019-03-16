@@ -1,4 +1,4 @@
-import { MediaCollection } from '@atlaskit/media-store';
+import { MediaCollection } from '@findable/media-store';
 import { getHackerNoun } from './mockData';
 
 export function createCollection(name?: string): MediaCollection {

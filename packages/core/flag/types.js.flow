@@ -46,7 +46,7 @@ export type AutoDismissFlagProps = {
   appearance?: AppearanceTypes,
   /** The secondary content shown below the flag title */
   description?: Node,
-  /** The icon displayed in the top-left of the flag. Should be an instance of `@atlaskit/icon`.
+  /** The icon displayed in the top-left of the flag. Should be an instance of `@findable/icon`.
    * Your icon will receive the appropriate default color, which you can override by wrapping the
    * icon in a containing element with CSS `color` set to your preferred icon color.
    */
@@ -59,7 +59,7 @@ export type AutoDismissFlagProps = {
   onDismissed?: FunctionType,
   /** The bold text shown at the top of the flag. */
   title: string,
-  /** A link component that is passed down to the `@atlaskit/button` used by actions,
+  /** A link component that is passed down to the `@findable/button` used by actions,
   to allow custom routers to be used. See the
   [button with router](https://atlaskit.atlassian.com/packages/core/button/example/ButtonWithRouter)
   example of what this component should look like. */

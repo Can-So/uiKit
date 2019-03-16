@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { fontSize } from '@atlaskit/theme';
-import { colors, borderRadius, themed } from '@atlaskit/theme';
+import { fontSize } from '@findable/theme';
+import { colors, borderRadius, themed } from '@findable/theme';
 export var padding = 8;
 export var Wrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  background: ", ";\n  border-radius: ", "px;\n  color: ", ";\n  position: relative;\n  vertical-align: middle;\n  font-size: ", "px;\n\n  .ProseMirror-selectednode > & > .extension-overlay {\n    border: 2px solid ", ";\n    top: -2px;\n    left: -2px;\n    opacity: 1;\n  }\n\n  &.with-overlay {\n    .extension-overlay {\n      background: ", ";\n      color: transparent;\n    }\n\n    &:hover .extension-overlay {\n      opacity: 1;\n    }\n  }\n"], ["\n  background: ",
     ";\n  border-radius: ", "px;\n  color: ",

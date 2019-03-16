@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import { Card, CardView, } from '@atlaskit/media-card';
-import { withImageLoader, } from '@atlaskit/editor-common';
+import { Card, CardView, } from '@findable/media-card';
+import { withImageLoader, } from '@findable/editor-common';
 var MediaCardInternal = /** @class */ (function (_super) {
     tslib_1.__extends(MediaCardInternal, _super);
     function MediaCardInternal() {

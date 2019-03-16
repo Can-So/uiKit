@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { createStorybookContext } from '@atlaskit/media-test-helpers';
-import { Card } from '@atlaskit/media-card';
-import { FileIdentifier, Identifier } from '@atlaskit/media-core';
+import { createStorybookContext } from '@findable/media-test-helpers';
+import { Card } from '@findable/media-card';
+import { FileIdentifier, Identifier } from '@findable/media-core';
 import { ButtonList, Container, Group } from '../example-helpers/styled';
 import {
   archiveItem,
@@ -21,9 +21,9 @@ import {
   videoSquareFileIdItem,
 } from '../example-helpers';
 import { MediaViewer } from '../src';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
-import { I18NWrapper } from '@atlaskit/media-test-helpers';
+import { AnalyticsListener } from '@findable/analytics-next';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
+import { I18NWrapper } from '@findable/media-test-helpers';
 const context = createStorybookContext();
 
 const handleEvent = (analyticsEvent: UIAnalyticsEventInterface) => {

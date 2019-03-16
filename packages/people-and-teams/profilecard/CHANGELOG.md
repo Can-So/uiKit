@@ -1,29 +1,29 @@
-# @atlaskit/profilecard
+# @findable/profilecard
 
 ## 8.0.2
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/avatar@15.0.1
-  - @atlaskit/dynamic-table@11.0.1
-  - @atlaskit/icon@16.0.5
-  - @atlaskit/spinner@10.0.1
-  - @atlaskit/theme@8.0.1
-  - @atlaskit/i18n-tools@0.5.0
-  - @atlaskit/button@11.0.0
-  - @atlaskit/util-data-test@11.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/avatar@15.0.1
+  - @findable/dynamic-table@11.0.1
+  - @findable/icon@16.0.5
+  - @findable/spinner@10.0.1
+  - @findable/theme@8.0.1
+  - @findable/i18n-tools@0.5.0
+  - @findable/button@11.0.0
+  - @findable/util-data-test@11.0.0
 
 ## 8.0.1
-- [patch] [9a0c34d490](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a0c34d490):
+- [patch] [9a0c34d490](https://github.com/fnamazing/uiKit/commits/9a0c34d490):
 
   - Fixes package.json to not exclude built files
 
 ## 8.0.0
-- [major] [dbff4fdcf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dbff4fdcf9):
+- [major] [dbff4fdcf9](https://github.com/fnamazing/uiKit/commits/dbff4fdcf9):
 
   - Remove presence from profilecard now that users cannot use Stride to control it
 
 ## 7.0.0
-- [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [major] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -35,13 +35,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -55,217 +55,217 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 6.2.0
-- [minor] [e0e5dd69a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e0e5dd69a7):
+- [minor] [e0e5dd69a7](https://github.com/fnamazing/uiKit/commits/e0e5dd69a7):
 
   - Support 2 new props "hasStatusLozengeForDisabledAccount" and "customMessageForDisabledAccount"
 
 ## 6.1.5
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/avatar@14.1.8
-  - @atlaskit/button@10.1.2
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/avatar@14.1.8
+  - @findable/button@10.1.2
+  - @findable/icon@16.0.0
 
 ## 6.1.4
-- [patch] [ba95c0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ba95c0e):
+- [patch] [ba95c0e](https://github.com/fnamazing/uiKit/commits/ba95c0e):
 
   - Remove typescript type InjectedIntlProps from flow js code
 
 ## 6.1.3
-- [patch] [3ef5292](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ef5292):
+- [patch] [3ef5292](https://github.com/fnamazing/uiKit/commits/3ef5292):
 
   - Include type definitions in npm package
 
 ## 6.1.2
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/avatar@14.1.7
-  - @atlaskit/button@10.1.1
-  - @atlaskit/dynamic-table@10.0.22
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/layer@5.0.10
-  - @atlaskit/lozenge@6.2.4
-  - @atlaskit/spinner@9.0.13
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/util-data-test@10.0.25
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/avatar@14.1.7
+  - @findable/button@10.1.1
+  - @findable/dynamic-table@10.0.22
+  - @findable/icon@15.0.2
+  - @findable/layer@5.0.10
+  - @findable/lozenge@6.2.4
+  - @findable/spinner@9.0.13
+  - @findable/theme@7.0.1
+  - @findable/util-data-test@10.0.25
+  - @findable/docs@6.0.0
 
 ## 6.1.1
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/button@10.0.4
-  - @atlaskit/dynamic-table@10.0.20
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/spinner@9.0.12
-  - @atlaskit/theme@7.0.0
-  - @atlaskit/avatar@14.1.6
-  - @atlaskit/lozenge@6.2.3
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/button@10.0.4
+  - @findable/dynamic-table@10.0.20
+  - @findable/icon@15.0.1
+  - @findable/spinner@9.0.12
+  - @findable/theme@7.0.0
+  - @findable/avatar@14.1.6
+  - @findable/lozenge@6.2.3
 
 ## 6.1.0
-- [minor] [a2da489](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2da489):
+- [minor] [a2da489](https://github.com/fnamazing/uiKit/commits/a2da489):
 
   - - wrap profile card in IntlProvider and support i18n
 
 ## 6.0.3
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/avatar@14.1.5
-  - @atlaskit/button@10.0.1
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/avatar@14.1.5
+  - @findable/button@10.0.1
+  - @findable/icon@15.0.0
 
 ## 6.0.2
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/avatar@14.1.4
-  - @atlaskit/dynamic-table@10.0.18
-  - @atlaskit/icon@14.6.1
-  - @atlaskit/spinner@9.0.11
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/avatar@14.1.4
+  - @findable/dynamic-table@10.0.18
+  - @findable/icon@14.6.1
+  - @findable/spinner@9.0.11
+  - @findable/theme@6.2.1
+  - @findable/button@10.0.0
 
 ## 6.0.1
-- [patch] [9d63842](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d63842):
+- [patch] [9d63842](https://github.com/fnamazing/uiKit/commits/9d63842):
 
   - Fixed a bug where content is not rendered for cards of users whose accounts are closed
 
 ## 6.0.0
-- [major] [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+- [major] [9c0844d](https://github.com/fnamazing/uiKit/commits/9c0844d):
 
   - Replace "isActive" prop with new "status" prop and adding react-intl messages
 
 ## 5.0.0
-- [major] [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
+- [major] [a6dd6e3](https://github.com/fnamazing/uiKit/commits/a6dd6e3):
 
   - Removed isCensored prop as this state no longer exists
 
 ## 4.0.10
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/avatar@14.0.11
-  - @atlaskit/button@9.0.13
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/avatar@14.0.11
+  - @findable/button@9.0.13
+  - @findable/icon@14.0.0
 
 ## 4.0.9
-- [patch] Remove promise polyfill to fix Jira SSR [e793f6e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e793f6e)
+- [patch] Remove promise polyfill to fix Jira SSR [e793f6e](https://github.com/fnamazing/uiKit/commits/e793f6e)
 
 ## 4.0.8
-- [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
-  - @atlaskit/util-data-test@10.0.7
+- [patch] Updated dependencies [b12f7e6](https://github.com/fnamazing/uiKit/commits/b12f7e6)
+  - @findable/util-data-test@10.0.7
 
 ## 4.0.7
-- [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/spinner@9.0.6
-  - @atlaskit/icon@13.2.5
-  - @atlaskit/dynamic-table@10.0.9
-  - @atlaskit/button@9.0.6
-  - @atlaskit/avatar@14.0.8
-  - @atlaskit/docs@5.0.6
+- [patch] Updated dependencies [df22ad8](https://github.com/fnamazing/uiKit/commits/df22ad8)
+  - @findable/theme@6.0.0
+  - @findable/spinner@9.0.6
+  - @findable/icon@13.2.5
+  - @findable/dynamic-table@10.0.9
+  - @findable/button@9.0.6
+  - @findable/avatar@14.0.8
+  - @findable/docs@5.0.6
 
 ## 4.0.6
-- [patch] Updated dependencies [8242529](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8242529)
-  - @atlaskit/layer@5.0.5
+- [patch] Updated dependencies [8242529](https://github.com/fnamazing/uiKit/commits/8242529)
+  - @findable/layer@5.0.5
 
 ## 4.0.5
-- [patch] use size prop small when using icon component [27e074e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27e074e)
-- [none] Updated dependencies [27e074e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27e074e)
+- [patch] use size prop small when using icon component [27e074e](https://github.com/fnamazing/uiKit/commits/27e074e)
+- [none] Updated dependencies [27e074e](https://github.com/fnamazing/uiKit/commits/27e074e)
 
 ## 4.0.4
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/util-data-test@10.0.4
-  - @atlaskit/dynamic-table@10.0.7
-  - @atlaskit/button@9.0.5
-  - @atlaskit/theme@5.1.3
-  - @atlaskit/spinner@9.0.5
-  - @atlaskit/layer@5.0.4
-  - @atlaskit/icon@13.2.4
-  - @atlaskit/avatar@14.0.6
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/util-data-test@10.0.4
+  - @findable/dynamic-table@10.0.7
+  - @findable/button@9.0.5
+  - @findable/theme@5.1.3
+  - @findable/spinner@9.0.5
+  - @findable/layer@5.0.4
+  - @findable/icon@13.2.4
+  - @findable/avatar@14.0.6
 
 ## 4.0.3
-- [patch] Bumping dependency on util-data-test [597e0bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/597e0bd)
+- [patch] Bumping dependency on util-data-test [597e0bd](https://github.com/fnamazing/uiKit/commits/597e0bd)
 
 
 
 
-- [none] Updated dependencies [597e0bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/597e0bd)
-  - @atlaskit/util-data-test@10.0.3
-- [none] Updated dependencies [61df453](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61df453)
-  - @atlaskit/util-data-test@10.0.3
-- [none] Updated dependencies [812a39c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/812a39c)
-  - @atlaskit/dynamic-table@10.0.6
-  - @atlaskit/util-data-test@10.0.3
-- [none] Updated dependencies [c8eb097](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8eb097)
-  - @atlaskit/util-data-test@10.0.3
-- [none] Updated dependencies [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)
-  - @atlaskit/util-data-test@10.0.3
+- [none] Updated dependencies [597e0bd](https://github.com/fnamazing/uiKit/commits/597e0bd)
+  - @findable/util-data-test@10.0.3
+- [none] Updated dependencies [61df453](https://github.com/fnamazing/uiKit/commits/61df453)
+  - @findable/util-data-test@10.0.3
+- [none] Updated dependencies [812a39c](https://github.com/fnamazing/uiKit/commits/812a39c)
+  - @findable/dynamic-table@10.0.6
+  - @findable/util-data-test@10.0.3
+- [none] Updated dependencies [c8eb097](https://github.com/fnamazing/uiKit/commits/c8eb097)
+  - @findable/util-data-test@10.0.3
+- [none] Updated dependencies [d02746f](https://github.com/fnamazing/uiKit/commits/d02746f)
+  - @findable/util-data-test@10.0.3
 
 ## 4.0.2
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/util-data-test@10.0.2
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/dynamic-table@10.0.5
-  - @atlaskit/button@9.0.4
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/spinner@9.0.4
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/layer@5.0.3
-  - @atlaskit/avatar@14.0.5
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/util-data-test@10.0.2
+  - @findable/icon@13.2.2
+  - @findable/dynamic-table@10.0.5
+  - @findable/button@9.0.4
+  - @findable/theme@5.1.2
+  - @findable/spinner@9.0.4
+  - @findable/docs@5.0.2
+  - @findable/layer@5.0.3
+  - @findable/avatar@14.0.5
 
 ## 4.0.1
-- [patch] Remove $FlowFixMe, move styled-components to peerDependencies and move tests under src and a unit folder [36b595c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36b595c)
-- [none] Updated dependencies [36b595c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36b595c)
+- [patch] Remove $FlowFixMe, move styled-components to peerDependencies and move tests under src and a unit folder [36b595c](https://github.com/fnamazing/uiKit/commits/36b595c)
+- [none] Updated dependencies [36b595c](https://github.com/fnamazing/uiKit/commits/36b595c)
 
 ## 4.0.0
 
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/dynamic-table@10.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/spinner@9.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/layer@5.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/avatar@14.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/dynamic-table@10.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/spinner@9.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/layer@5.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/avatar@14.0.0
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/util-data-test@10.0.0
+  - @findable/dynamic-table@10.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/spinner@9.0.0
+  - @findable/docs@5.0.0
+  - @findable/layer@5.0.0
+  - @findable/icon@13.0.0
+  - @findable/avatar@14.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/util-data-test@10.0.0
+  - @findable/dynamic-table@10.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/spinner@9.0.0
+  - @findable/docs@5.0.0
+  - @findable/layer@5.0.0
+  - @findable/icon@13.0.0
+  - @findable/avatar@14.0.0
 
 ## 3.13.4
 
 
-- [none] Updated dependencies [da63331](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da63331)
-  - @atlaskit/button@8.2.5
-  - @atlaskit/dynamic-table@9.2.6
-  - @atlaskit/avatar@13.0.0
-- [patch] Updated dependencies [7724115](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7724115)
-  - @atlaskit/avatar@13.0.0
-  - @atlaskit/button@8.2.5
-  - @atlaskit/dynamic-table@9.2.6
+- [none] Updated dependencies [da63331](https://github.com/fnamazing/uiKit/commits/da63331)
+  - @findable/button@8.2.5
+  - @findable/dynamic-table@9.2.6
+  - @findable/avatar@13.0.0
+- [patch] Updated dependencies [7724115](https://github.com/fnamazing/uiKit/commits/7724115)
+  - @findable/avatar@13.0.0
+  - @findable/button@8.2.5
+  - @findable/dynamic-table@9.2.6
 
 ## 3.13.3
-- [patch] Fix flow config and add back flow fix me [107da09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/107da09)
-- [none] Updated dependencies [107da09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/107da09)
+- [patch] Fix flow config and add back flow fix me [107da09](https://github.com/fnamazing/uiKit/commits/107da09)
+- [none] Updated dependencies [107da09](https://github.com/fnamazing/uiKit/commits/107da09)
 
 ## 3.13.2
-- [patch] Update package.json to point to correct build directories [2362f0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2362f0b)
-- [none] Updated dependencies [2362f0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2362f0b)
+- [patch] Update package.json to point to correct build directories [2362f0b](https://github.com/fnamazing/uiKit/commits/2362f0b)
+- [none] Updated dependencies [2362f0b](https://github.com/fnamazing/uiKit/commits/2362f0b)
 
 ## 3.13.1
 
-- [patch] Migrate Profilecard to AKM2 DIR-553 [9bac948](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9bac948)
-- [none] Updated dependencies [99446e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99446e3)
-  - @atlaskit/docs@4.2.2
-- [none] Updated dependencies [9bac948](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9bac948)
-  - @atlaskit/docs@4.2.2
+- [patch] Migrate Profilecard to AKM2 DIR-553 [9bac948](https://github.com/fnamazing/uiKit/commits/9bac948)
+- [none] Updated dependencies [99446e3](https://github.com/fnamazing/uiKit/commits/99446e3)
+  - @findable/docs@4.2.2
+- [none] Updated dependencies [9bac948](https://github.com/fnamazing/uiKit/commits/9bac948)
+  - @findable/docs@4.2.2
 
 ## 3.12.3 (2017-12-13)
 

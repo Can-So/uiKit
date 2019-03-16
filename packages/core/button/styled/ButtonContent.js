@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 import { getLoadingStyle } from './utils';
 var getAlignment = function (p) { return (p.followsIcon ? 'baseline' : 'center'); };
 var gridSizeDiv2 = math.divide(gridSize, 2);

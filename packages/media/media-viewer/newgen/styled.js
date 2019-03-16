@@ -4,8 +4,8 @@ import * as tslib_1 from "tslib";
 // @ts-ignore: unused variable
 // prettier-ignore
 import styled from 'styled-components';
-import { colors, layers, borderRadius } from '@atlaskit/theme';
-import { ellipsis } from '@atlaskit/media-ui';
+import { colors, layers, borderRadius } from '@findable/theme';
+import { ellipsis } from '@findable/media-ui';
 var overlayZindex = layers.modal() + 10;
 export var mediaTypeIconColors = {
     image: colors.Y200,

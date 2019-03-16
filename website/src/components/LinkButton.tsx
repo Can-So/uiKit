@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from './WrappedLink';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 export type LinkButtonProps = {
   to: string;

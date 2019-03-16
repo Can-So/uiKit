@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { messages } from '../../messages';
 import NoResults from '../NoResults';
-import { ResultItemGroup, CancelableEvent } from '@atlaskit/quick-search';
+import { ResultItemGroup, CancelableEvent } from '@findable/quick-search';
 import JiraAdvancedSearch from './JiraAdvancedSearch';
 import { JiraEntityTypes } from '../SearchResultsUtil';
 

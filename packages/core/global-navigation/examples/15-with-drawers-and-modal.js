@@ -1,19 +1,19 @@
 // @flow
 
 import React, { Fragment, Component } from 'react';
-import AppSwitcher from '@atlaskit/app-switcher';
-import Button from '@atlaskit/button';
-import { DropdownItemGroup, DropdownItem } from '@atlaskit/dropdown-menu';
-import { AkFieldRadioGroup as StatelessRadioGroup } from '@atlaskit/field-radio-group';
-import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
-import { AtlassianIcon } from '@atlaskit/logo';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+import AppSwitcher from '@findable/app-switcher';
+import Button from '@findable/button';
+import { DropdownItemGroup, DropdownItem } from '@findable/dropdown-menu';
+import { AkFieldRadioGroup as StatelessRadioGroup } from '@findable/field-radio-group';
+import AppSwitcherIcon from '@findable/icon/glyph/app-switcher';
+import { AtlassianIcon } from '@findable/logo';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
 import {
   GlobalItem,
   LayoutManager,
   NavigationProvider,
-} from '@atlaskit/navigation-next';
-import { ToggleStateless } from '@atlaskit/toggle';
+} from '@findable/navigation-next';
+import { ToggleStateless } from '@findable/toggle';
 import Lorem from 'react-lorem-component';
 import { mockEndpoints } from './helpers/mock-atlassian-switcher-endpoints';
 

@@ -1,4 +1,4 @@
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 import { MockRequest, MockResponse } from 'xhr-mock';
 import { exactMatch, fillInResponse, MockContext } from '../';
 import { userAuthProviderBaseURL } from '../../userAuthProvider';

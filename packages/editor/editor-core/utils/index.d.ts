@@ -1,7 +1,7 @@
 import { MarkType, Node, NodeType, ResolvedPos, Slice, Schema } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
 import { EditorState, Selection, TextSelection, Transaction } from 'prosemirror-state';
-import { JSONDocNode, JSONNode } from '@atlaskit/editor-json-transformer';
+import { JSONDocNode, JSONNode } from '@findable/editor-json-transformer';
 import { Side } from '../plugins/gap-cursor/selection';
 export * from './document';
 export * from './action';

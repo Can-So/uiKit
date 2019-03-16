@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { OnLoadHandler } from '../image-cropper';
-import { Camera, Rectangle, Vector2 } from '@atlaskit/media-ui';
+import { Camera, Rectangle, Vector2 } from '@findable/media-ui';
 export declare const CONTAINER_SIZE: number;
 export declare const CONTAINER_INNER_SIZE: number;
 export declare const CONTAINER_PADDING: number;

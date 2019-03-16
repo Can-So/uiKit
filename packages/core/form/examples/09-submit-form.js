@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import TextField from '@atlaskit/textfield';
-import TextArea from '@atlaskit/textarea';
+import Button from '@findable/button';
+import TextField from '@findable/textfield';
+import TextArea from '@findable/textarea';
 import Form, { Field, FormFooter } from '../src';
 
 type State = {

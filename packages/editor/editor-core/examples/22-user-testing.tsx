@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { EditorView } from 'prosemirror-view';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import Button, { ButtonGroup } from '@findable/button';
+import { JSONTransformer } from '@findable/editor-json-transformer';
 import WithEditorActions from './../src/ui/WithEditorActions';
 import {
   default as FullPageExample,

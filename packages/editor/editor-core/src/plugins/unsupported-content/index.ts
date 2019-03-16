@@ -3,7 +3,7 @@ import {
   confluenceUnsupportedInline,
   unsupportedBlock,
   unsupportedInline,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import { EditorState, Plugin, PluginKey } from 'prosemirror-state';
 import { EditorPlugin, PMPluginFactory } from '../../types';
 import { ReactNodeView } from '../../nodeviews';

@@ -5,10 +5,10 @@ import {
   userAuthProvider,
   defaultMediaPickerAuthProvider,
   defaultMediaPickerCollectionName,
-} from '@atlaskit/media-test-helpers';
-import Button from '@atlaskit/button';
-import Toggle from '@atlaskit/toggle';
-import Spinner from '@atlaskit/spinner';
+} from '@findable/media-test-helpers';
+import Button from '@findable/button';
+import Toggle from '@findable/toggle';
+import Spinner from '@findable/spinner';
 import { MediaPicker, Clipboard } from '../src';
 import {
   PopupHeader,
@@ -17,7 +17,7 @@ import {
   DropzoneItemsInfo,
   ClipboardContainer,
 } from '../example-helpers/styled';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 
 export interface ClipboardWrapperState {
   isConnectedToUsersCollection: boolean;

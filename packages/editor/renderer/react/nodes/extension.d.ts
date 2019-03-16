@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { RendererContext } from '..';
 import { Serializer } from '../..';
-import { ExtensionLayout } from '@atlaskit/adf-schema';
-import { ExtensionHandlers } from '@atlaskit/editor-common';
+import { ExtensionLayout } from '@findable/adf-schema';
+import { ExtensionHandlers } from '@findable/editor-common';
 export interface Props {
     serializer: Serializer<any>;
     extensionHandlers?: ExtensionHandlers;

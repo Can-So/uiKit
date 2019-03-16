@@ -4,7 +4,7 @@ React component which allows selection of an item or items from a dropdown list.
 ## Installation
 
 ```sh
-yarn add @atlaskit/select
+yarn add @findable/select
 ```
 
 ## Usage

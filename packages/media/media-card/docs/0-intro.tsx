@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
 This component provides 2 exports:
@@ -17,8 +17,8 @@ This component provides 2 exports:
   ### Card
 
   ${code`
-  import { Card } from '@atlaskit/media-card';
-  import { ContextFactory } from '@atlaskit/media-core';
+  import { Card } from '@findable/media-card';
+  import { ContextFactory } from '@findable/media-core';
 
   const context = ContextFactory.create({
     tokenProvider,
@@ -54,7 +54,7 @@ This component provides 2 exports:
 ### Card View
 
 ${code`
-import { CardView } from @atlaskit/media-card;
+import { CardView } from @findable/media-card;
 const resizeModes: Array<ImageResizeMode> = ['crop', 'fit', 'full-fit'];
 
 export const createCardsOfDifferentResizeModes = () => {

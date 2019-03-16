@@ -3,7 +3,7 @@ import { css, Styles, StyledComponentClass } from 'styled-components';
 import {
   blockquoteSharedStyles,
   headingsSharedStyles,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 export const blocktypeStyles = css`
   .ProseMirror {

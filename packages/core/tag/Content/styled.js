@@ -1,6 +1,6 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import styled, { css } from 'styled-components';
-import { gridSize, fontSize, colors, math } from '@atlaskit/theme';
+import { gridSize, fontSize, colors, math } from '@findable/theme';
 import { buttonWidthUnitless, maxTextWidth, maxTextWidthUnitless } from '../constants'; // Common styles for Text & Link
 
 var COMMON_STYLES = css(["\n  font-size: ", "px;\n  font-weight: normal;\n  line-height: 1;\n  margin-left: ", "px;\n  margin-right: ", "px;\n  padding: 2px 0;\n  max-width: ", ";\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n"], fontSize, math.divide(gridSize, 2), math.divide(gridSize, 2), function (_ref) {

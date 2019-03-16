@@ -25,7 +25,7 @@ import {
   JSONTransformer,
   JSONDocNode,
   JSONNode,
-} from '@atlaskit/editor-json-transformer';
+} from '@findable/editor-json-transformer';
 import { FakeTextCursorSelection } from '../plugins/fake-text-cursor/cursor';
 import { hasParentNodeOfType } from 'prosemirror-utils';
 import { GapCursorSelection, Side } from '../plugins/gap-cursor/selection';

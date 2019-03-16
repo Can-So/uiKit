@@ -9,4 +9,4 @@ export {
   isSchemaWithMedia,
   isSchemaWithTextColor,
   isSchemaWithTables,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';

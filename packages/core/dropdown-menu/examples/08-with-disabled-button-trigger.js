@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { defaultProps as defaultButtonProps } from '@atlaskit/button';
+import { defaultProps as defaultButtonProps } from '@findable/button';
 import DropdownMenu, { DropdownItemGroup, DropdownItem } from '../src';
 
 export default () => (

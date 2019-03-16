@@ -1,5 +1,5 @@
 import * as React from 'react';
-import AttachmentIcon from '@atlaskit/icon/glyph/editor/attachment';
+import AttachmentIcon from '@findable/icon/glyph/editor/attachment';
 import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import WithPluginState from '../../../../ui/WithPluginState';

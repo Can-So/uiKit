@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { codeFontFamily, borderRadius, gridSize, fontSize } from '@atlaskit/theme';
+import { codeFontFamily, borderRadius, gridSize, fontSize } from '@findable/theme';
 import { defaultColors } from './defaultTheme';
 var codeContainerStyle = {
   fontFamily: codeFontFamily,

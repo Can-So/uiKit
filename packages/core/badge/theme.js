@@ -1,6 +1,6 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
 import _typeof from "@babel/runtime/helpers/typeof";
-import { colors, createTheme } from '@atlaskit/theme';
+import { colors, createTheme } from '@findable/theme';
 export var backgroundColors = {
   added: {
     light: colors.G50,

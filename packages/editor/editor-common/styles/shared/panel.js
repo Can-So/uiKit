@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 // @ts-ignore: unused variable
 // prettier-ignore
 import { css } from 'styled-components';
-import { gridSize, borderRadius } from '@atlaskit/theme';
+import { gridSize, borderRadius } from '@findable/theme';
 import { relativeSize, akEditorTableCellMinWidth } from '../consts';
 export var PanelSharedCssClassName = {
     PANEL_CONTAINER: 'ak-editor-panel',

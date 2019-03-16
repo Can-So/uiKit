@@ -1,4 +1,4 @@
-import { MediaGroupDefinition, MediaDefinition } from '@atlaskit/adf-schema';
+import { MediaGroupDefinition, MediaDefinition } from '@findable/adf-schema';
 
 export const mediaGroup = (
   ...content: Array<MediaDefinition>

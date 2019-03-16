@@ -4,7 +4,7 @@ import { MediaStore, ImageMetadata } from '../src';
 import {
   createStorybookContext,
   imageFileId,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 export interface ExampleState {
   metadata?: ImageMetadata;

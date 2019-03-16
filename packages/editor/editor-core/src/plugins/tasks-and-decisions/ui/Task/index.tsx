@@ -5,9 +5,9 @@ import {
   Providers,
   ProviderFactory,
   WithProviders,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import TaskItemWithProviders from './task-item-with-providers';
-import { ContentRef } from '@atlaskit/task-decision';
+import { ContentRef } from '@findable/task-decision';
 
 const messages = defineMessages({
   placeholder: {

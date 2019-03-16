@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { AnalyticsContext, AnalyticsListener } from '../src';
 
 const SaveButton = () => (

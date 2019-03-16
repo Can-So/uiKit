@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import { getServiceDecisionsResponse, getServiceItemsResponse, getServiceTasksResponse, participants, } from './story-data';
 import { findIndex, objectKeyToString, toggleTaskState } from './utils';
-import { convertServiceItemResponseToItemResponse, convertServiceDecisionResponseToDecisionResponse, convertServiceTaskResponseToTaskResponse, } from '@atlaskit/task-decision';
+import { convertServiceItemResponseToItemResponse, convertServiceDecisionResponseToDecisionResponse, convertServiceTaskResponseToTaskResponse, } from '@findable/task-decision';
 import * as subMinutes from 'date-fns/sub_minutes';
 var debouncedTaskStateQuery = null;
 var debouncedTaskToggle = null;

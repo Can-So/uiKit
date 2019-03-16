@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
-import { EmojiId } from '@atlaskit/emoji';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { EmojiId } from '@findable/emoji';
+import { ProviderFactory } from '@findable/editor-common';
 export interface EmojiProps extends EmojiId {
     allowTextFallback?: boolean;
     providers?: ProviderFactory;

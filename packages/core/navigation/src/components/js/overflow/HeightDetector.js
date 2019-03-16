@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, type Node } from 'react';
-import SizeDetector from '@atlaskit/size-detector';
+import SizeDetector from '@findable/size-detector';
 import rafSchd from 'raf-schd';
 
 type Props = {

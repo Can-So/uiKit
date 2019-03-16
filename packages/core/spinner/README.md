@@ -5,7 +5,7 @@ A React component that displays a spinning icon to show a loading state.
 ## Installation
 
 ```sh
-yarn add @atlaskit/spinner
+yarn add @findable/spinner
 ```
 
 ## Usage

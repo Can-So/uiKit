@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { colors } from '@atlaskit/theme';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import Button from '@atlaskit/button';
+import { colors } from '@findable/theme';
+import ErrorIcon from '@findable/icon/glyph/error';
+import Button from '@findable/button';
 import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';

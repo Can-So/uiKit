@@ -18,8 +18,8 @@ import {
   doc,
   p,
   dispatchPasteEvent,
-} from '@atlaskit/editor-test-helpers';
-import { smallImage } from '@atlaskit/media-test-helpers';
+} from '@findable/editor-test-helpers';
+import { smallImage } from '@findable/media-test-helpers';
 import { dataURItoBlob } from '../../../../../../../media/media-test-helpers/src/mockData/utils';
 
 describe('paste plugin: third-party', () => {

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 import { Provider, Card, Client } from '../src';
 import { mockMultipleCards } from '../mocks';
-import Textarea from '@atlaskit/textarea';
+import Textarea from '@findable/textarea';
 
 mockMultipleCards();
 

@@ -6,7 +6,7 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstruct
 import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import React, { Component } from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import { withContentTheme } from '../../../theme';
 
 var ItemAvatar =

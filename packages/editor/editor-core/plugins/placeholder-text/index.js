@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Plugin, NodeSelection, TextSelection, } from 'prosemirror-state';
 import { PluginKey } from 'prosemirror-state';
-import { placeholder } from '@atlaskit/adf-schema';
+import { placeholder } from '@findable/adf-schema';
 import WithPluginState from '../../ui/WithPluginState';
 import { isEmptyNode } from '../../utils/document';
 import { FakeTextCursorSelection } from '../fake-text-cursor/cursor';

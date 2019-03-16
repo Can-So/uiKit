@@ -1,7 +1,7 @@
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
-import { EmojiProvider } from '@atlaskit/emoji';
-import Tooltip from '@atlaskit/tooltip';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
+import { EmojiProvider } from '@findable/emoji';
+import Tooltip from '@findable/tooltip';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { style } from 'typestyle';

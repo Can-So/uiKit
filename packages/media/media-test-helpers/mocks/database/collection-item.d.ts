@@ -1,4 +1,4 @@
-import { MediaCollectionItem } from '@atlaskit/media-store';
+import { MediaCollectionItem } from '@findable/media-store';
 export declare type CollectionItem = MediaCollectionItem & {
     readonly collectionName?: string;
     readonly blob: Blob;

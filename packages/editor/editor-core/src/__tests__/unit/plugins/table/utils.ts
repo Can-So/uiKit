@@ -7,7 +7,7 @@ import {
   td,
   tdCursor,
   tdEmpty,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   getColumnsWidths,
   getRowHeights,

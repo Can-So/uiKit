@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { colors, borderRadius, themed } from '@atlaskit/theme';
-import { blockNodesVerticalMargin } from '@atlaskit/editor-common';
+import { colors, borderRadius, themed } from '@findable/theme';
+import { blockNodesVerticalMargin } from '@findable/editor-common';
 import { Wrapper as WrapperDefault, padding } from '../styles';
 
 export const Wrapper = styled(WrapperDefault)`

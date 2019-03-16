@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStorybookContext } from '@atlaskit/media-test-helpers';
+import { createStorybookContext } from '@findable/media-test-helpers';
 import { imageItem, defaultCollectionName } from '../example-helpers';
 import { MediaViewer } from '../src';
 

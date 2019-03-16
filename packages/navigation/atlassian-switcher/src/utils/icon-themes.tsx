@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { colors, elevation, gridSize } from '@atlaskit/theme';
+import { colors, elevation, gridSize } from '@findable/theme';
 import { ComponentType } from 'react';
 
 interface IconBaseProps {

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Context, FileState, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileState, FileIdentifier } from '@findable/media-core';
 import { Outcome, MediaViewerFeatureFlags } from './domain';
 import { MediaViewerError } from './error';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 export declare type Props = Readonly<{
     identifier: FileIdentifier;
     context: Context;

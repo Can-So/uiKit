@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent, type Node } from 'react';
 import uuid from 'uuid';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 
 import MultiSelectStateless from './Stateless';
 

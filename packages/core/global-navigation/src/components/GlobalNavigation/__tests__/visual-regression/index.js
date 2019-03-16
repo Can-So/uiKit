@@ -3,7 +3,7 @@ import {
   getExamplesFor,
   getExampleUrl,
   takeScreenShot,
-} from '@atlaskit/visual-regression/helper';
+} from '@findable/visual-regression/helper';
 
 const examples = getExamplesFor('global-navigation');
 

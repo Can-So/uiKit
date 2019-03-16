@@ -11,7 +11,7 @@ import {
   calcTableWidth,
   akEditorMobileBreakoutPoint,
   absoluteBreakoutWidth,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 import TableFloatingControls from '../ui/TableFloatingControls';
 import ColumnControls from '../ui/TableFloatingControls/ColumnControls';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MentionEventHandler } from '../../types';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { FireAnalyticsEvent } from '@findable/analytics';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 export declare const ANALYTICS_HOVER_DELAY = 1000;
 export declare type OwnProps = {
     id: string;

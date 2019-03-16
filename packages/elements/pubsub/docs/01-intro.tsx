@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example, code } from '@atlaskit/docs';
+import { md, Example, code } from '@findable/docs';
 import PubSubExample from '../examples/00-client';
 
 const PubSubdSource = require('!!raw-loader!../examples/00-client');
@@ -55,7 +55,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/pubsub"
+      packageName="@findable/pubsub"
       Component={PubSubExample}
       title="Client"
       source={PubSubdSource}

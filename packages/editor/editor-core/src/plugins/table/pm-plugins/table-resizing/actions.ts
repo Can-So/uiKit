@@ -3,12 +3,12 @@ import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
 import { findDomRefAtPos } from 'prosemirror-utils';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import {
   tableCellMinWidth,
   akEditorTableNumberColumnWidth,
   akEditorTableToolbarSize,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
 

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { md, Props, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Props, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   # Concepts
@@ -9,9 +9,9 @@ export default md`
   ${(
     <SectionMessage appearance="error">
       <p>
-        <strong>Note: @atlaskit/navigation is now deprecated.</strong>
+        <strong>Note: @findable/navigation is now deprecated.</strong>
       </p>
-      <p>We recommend upgrading to @atlaskit/navigation-next</p>
+      <p>We recommend upgrading to @findable/navigation-next</p>
     </SectionMessage>
   )}
 
@@ -105,14 +105,14 @@ export default md`
 
   The quick-search component has been extracted and moved to a separate package.
   If you used AkQuickSearch, AkSearch or quickSearchResultTypes before you will
-  have to add the @atlaskit/quick-search dependency and update your imports:
+  have to add the @findable/quick-search dependency and update your imports:
 
   ${code`
   // Before
-  import { AkQuickSearch, AkSearch, quickSearchResultTypes } from '@atlaskit/navigation'
+  import { AkQuickSearch, AkSearch, quickSearchResultTypes } from '@findable/navigation'
 
   // After
-  import { AkQuickSearch, AkSearch, quickSearchResultTypes } from '@atlaskit/quick-search'
+  import { AkQuickSearch, AkSearch, quickSearchResultTypes } from '@findable/quick-search'
   `}
   
 

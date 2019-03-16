@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -9,7 +9,7 @@ export default md`
   ## Usage
 
 ${code`
-import RadioGroup, { AkFieldRadioGroup, AkRadio } from '@atlaskit/field-radio-group';
+import RadioGroup, { AkFieldRadioGroup, AkRadio } from '@findable/field-radio-group';
 `}
 
   RadioGroup exports a stateful component as the default export. This
@@ -22,7 +22,7 @@ AkRadio component to render. Both stateful and stateless
 
   ${(
     <Example
-      packageName="@atlaskit/field-radio-group"
+      packageName="@findable/field-radio-group"
       Component={require('../examples/00-basic-usage').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-usage')}
@@ -31,7 +31,7 @@ AkRadio component to render. Both stateful and stateless
 
   ${(
     <Example
-      packageName="@atlaskit/field-radio-group"
+      packageName="@findable/field-radio-group"
       Component={require('../examples/01-stateless-example').default}
       title="Stateless Checkbox"
       source={require('!!raw-loader!../examples/01-stateless-example')}
@@ -40,7 +40,7 @@ AkRadio component to render. Both stateful and stateless
 
   ${(
     <Example
-      packageName="@atlaskit/field-radio-group"
+      packageName="@findable/field-radio-group"
       Component={require('../examples/02-form-example').default}
       title="With a Form"
       source={require('!!raw-loader!../examples/02-form-example')}

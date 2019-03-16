@@ -1,11 +1,11 @@
 import { Serializer } from './serializer';
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import {
   getValidDocument,
   getValidNode,
   ADNode,
   ADFStage,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { Node as PMNode, Schema, Fragment } from 'prosemirror-model';
 
 export interface RenderOutput<T> {

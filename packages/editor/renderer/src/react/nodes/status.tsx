@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { Status as AkStatus, Color } from '@atlaskit/status';
-import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { Status as AkStatus, Color } from '@findable/status';
+import { FabricElementsAnalyticsContext } from '@findable/analytics-namespaced-context';
 
 export interface Props {
   text: string;

@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { borderRadius } from '@atlaskit/theme';
+import { borderRadius } from '@findable/theme';
 
 export default styled.span`
   ${props => `

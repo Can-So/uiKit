@@ -7,8 +7,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { layers } from '@atlaskit/theme';
-import Portal from '@atlaskit/portal';
+import { layers } from '@findable/theme';
+import Portal from '@findable/portal';
 import { ModalTransitionConsumer } from './ModalTransition';
 import StackConsumer from './StackConsumer';
 import Modal from './Modal';

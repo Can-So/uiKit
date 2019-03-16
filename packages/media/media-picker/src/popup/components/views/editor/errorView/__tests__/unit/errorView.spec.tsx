@@ -1,6 +1,6 @@
 import * as React from 'react'; // eslint-disable-line
-import Button from '@atlaskit/button';
-import { messages } from '@atlaskit/media-ui';
+import Button from '@findable/button';
+import { messages } from '@findable/media-ui';
 import ConnectedErrorView from '../../errorView';
 
 import {
@@ -9,7 +9,7 @@ import {
   ErrorMessage,
   ErrorHint,
 } from '../../styles';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 
 describe('ErrorView', () => {
   const message = 'some-message';

@@ -1,11 +1,11 @@
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import {
   packageAttributes,
   fileStateToFileGasPayload,
   FileGasPayload,
   PackageAttributes,
 } from './index';
-import { FileState, FileStatus } from '@atlaskit/media-core';
+import { FileState, FileStatus } from '@findable/media-core';
 import { MediaViewerError } from '../error';
 
 interface DownloadAttributes extends FileGasPayload {

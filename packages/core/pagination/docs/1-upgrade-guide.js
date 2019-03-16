@@ -1,7 +1,7 @@
 //@flow
 import React from 'react';
-import { code, md } from '@atlaskit/docs';
-import DynamicTable from '@atlaskit/dynamic-table';
+import { code, md } from '@findable/docs';
+import DynamicTable from '@findable/dynamic-table';
 
 export default md`
 ## v8 to v9
@@ -83,7 +83,7 @@ Have your designers check that this change does not break the look within your a
 Example:
 
 ${code`
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 <div>
     <div style={{marginBottom: (gridSize() * 3) + 'px'}}>
@@ -111,7 +111,7 @@ Before version 4:
 
 ${code`
 import React from 'react';
-import { PaginationStateless } from '@atlaskit/pagination';
+import { PaginationStateless } from '@findable/pagination';
 
 export default () => (
   <PaginationStateless
@@ -126,7 +126,7 @@ In version 4:
 
 ${code`
 import React from 'react';
-import Pagination from '@atlaskit/pagination';
+import Pagination from '@findable/pagination';
 
 export default () => (
   <Pagination

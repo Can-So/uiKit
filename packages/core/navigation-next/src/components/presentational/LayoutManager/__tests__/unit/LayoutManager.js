@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mount, render, shallow } from 'enzyme';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
 
 import ContentNavigation from '../../../ContentNavigation';
 import LayoutManager from '../../LayoutManager';
@@ -637,7 +637,7 @@ describe('LayoutManager', () => {
           fullWidthFlyoutEnabled: false,
         },
         componentName: 'navigation',
-        packageName: '@atlaskit/navigation-next',
+        packageName: '@findable/navigation-next',
         packageVersion: expect.any(String),
       });
     });
@@ -657,7 +657,7 @@ describe('LayoutManager', () => {
           fullWidthFlyoutEnabled: false,
         },
         componentName: 'navigation',
-        packageName: '@atlaskit/navigation-next',
+        packageName: '@findable/navigation-next',
         packageVersion: expect.any(String),
       });
     });
@@ -677,7 +677,7 @@ describe('LayoutManager', () => {
           fullWidthFlyoutEnabled: false,
         },
         componentName: 'navigation',
-        packageName: '@atlaskit/navigation-next',
+        packageName: '@findable/navigation-next',
         packageVersion: expect.any(String),
       });
     });
@@ -698,7 +698,7 @@ describe('LayoutManager', () => {
           fullWidthFlyoutEnabled: false,
         },
         componentName: 'navigation',
-        packageName: '@atlaskit/navigation-next',
+        packageName: '@findable/navigation-next',
         packageVersion: expect.any(String),
       });
     });

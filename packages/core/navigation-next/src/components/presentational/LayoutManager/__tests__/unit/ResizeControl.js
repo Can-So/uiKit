@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import ChevronLeft from '@atlaskit/icon/glyph/chevron-left';
+import ChevronLeft from '@findable/icon/glyph/chevron-left';
 import { ResizeControlBase, GrabArea } from '../../ResizeControl';
 import { navigationExpandedCollapsed } from '../../../../../common/analytics';
 
@@ -363,7 +363,7 @@ describe('ResizeControl', () => {
     const WrappedComp = () => null;
     const mockReturn = jest.fn(() => WrappedComp);
     const mockWithAnalyticsEvents = jest.fn(() => mockReturn);
-    jest.doMock('@atlaskit/analytics-next', () => ({
+    jest.doMock('@findable/analytics-next', () => ({
       createAndFireEvent: jest.fn(() => jest.fn()),
       withAnalyticsEvents: mockWithAnalyticsEvents,
       withAnalyticsContext: jest.fn(() => () => null),

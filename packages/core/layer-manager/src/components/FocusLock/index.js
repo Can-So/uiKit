@@ -7,7 +7,7 @@ import FocusTrap from 'react-focus-lock';
 type Props = {
   /**
     DOM Element to apply `aria-hidden=true` to when this component gains focus.
-    This is provided via context when used within @atlaskit/layer-manager.
+    This is provided via context when used within @findable/layer-manager.
   */
   ariaHiddenNode?: HTMLElement,
   /**
@@ -34,7 +34,7 @@ export default class FocusLock extends Component<Props> {
   initFromProps: boolean = false;
   teardownFromProps: boolean = false;
   static contextTypes = {
-    /** available when invoked within @atlaskit/layer-manager */
+    /** available when invoked within @findable/layer-manager */
     ariaHiddenNode: PropTypes.object,
   };
   static defaultProps = {
@@ -49,7 +49,7 @@ export default class FocusLock extends Component<Props> {
     if (typeof autoFocus === 'function') {
       // eslint-disable-next-line no-console
       console.warn(
-        '@atlaskit/layer-manager: Passing a function as autoFocus in FocusLock is deprecated. Please see "Auto focusing an element" in https://atlaskit.atlassian.com/packages/core/layer-manager',
+        '@findable/layer-manager: Passing a function as autoFocus in FocusLock is deprecated. Please see "Auto focusing an element" in https://atlaskit.atlassian.com/packages/core/layer-manager',
       );
     }
 

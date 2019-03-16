@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent, ReactNode } from 'react';
 import ListWrapper from '../styled/ListWrapper';
-import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { FabricElementsAnalyticsContext } from '@findable/analytics-namespaced-context';
 
 export interface Props {
   listId?: string;

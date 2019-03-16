@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { ProviderFactory, EventHandlers } from '@atlaskit/editor-common';
+import { ProviderFactory, EventHandlers } from '@findable/editor-common';
 export interface Props {
     id: string;
     providers?: ProviderFactory;

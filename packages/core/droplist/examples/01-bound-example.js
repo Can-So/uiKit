@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Item, { ItemGroup } from '@atlaskit/item';
+import Item, { ItemGroup } from '@findable/item';
 import DropList from '../src';
 
 export default class BoundingExample extends Component<void, void> {

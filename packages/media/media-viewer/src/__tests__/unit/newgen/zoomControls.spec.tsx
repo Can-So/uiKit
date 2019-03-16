@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import {
   ZoomControlsBase,
   ZoomControlsProps,
@@ -11,7 +11,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../../version.json';
-import { fakeIntl } from '@atlaskit/media-test-helpers';
+import { fakeIntl } from '@findable/media-test-helpers';
 
 describe('Zooming', () => {
   describe('<ZoomControls />', () => {

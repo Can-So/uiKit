@@ -2,8 +2,8 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import Lorem from 'react-lorem-component';
-import Button from '@atlaskit/button';
-import FieldRadioGroup from '@atlaskit/field-radio-group';
+import Button from '@findable/button';
+import FieldRadioGroup from '@findable/field-radio-group';
 import Modal, { ModalTransition } from '../src';
 
 const TallContainer = styled.div`

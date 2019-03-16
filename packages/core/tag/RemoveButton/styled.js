@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, borderRadius, themed } from '@atlaskit/theme';
+import { colors, borderRadius, themed } from '@findable/theme';
 import { buttonWidthUnitless, focusRingColor } from '../constants';
 var focusColor = themed({
   light: colors.R300,

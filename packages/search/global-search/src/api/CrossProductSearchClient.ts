@@ -11,7 +11,7 @@ import {
   RequestServiceOptions,
   ServiceConfig,
   utils,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 import { Scope, ConfluenceItem, JiraItem, PersonItem } from './types';
 
 export type CrossProductSearchResults = {

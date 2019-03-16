@@ -1,8 +1,8 @@
 // @flow
 
-import ArrowleftIcon from '@atlaskit/icon/glyph/chevron-left-large';
-import ArrowrightIcon from '@atlaskit/icon/glyph/chevron-right-large';
-import { colors } from '@atlaskit/theme';
+import ArrowleftIcon from '@findable/icon/glyph/chevron-left-large';
+import ArrowrightIcon from '@findable/icon/glyph/chevron-right-large';
+import { colors } from '@findable/theme';
 import React from 'react';
 import styled from 'styled-components';
 import { getMonthName } from '../util';

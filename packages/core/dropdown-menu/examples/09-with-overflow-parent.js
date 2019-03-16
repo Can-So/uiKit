@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { colors } from '@findable/theme';
 import { DropdownMenuStateless, DropdownItemGroup, DropdownItem } from '../src';
 
 const windowScroll = 1000;

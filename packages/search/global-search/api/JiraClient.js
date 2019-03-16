@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 var _a;
-import { utils, } from '@atlaskit/util-service-support';
+import { utils, } from '@findable/util-service-support';
 import { ResultType, AnalyticsType, ContentType, } from '../model/Result';
 import { addJiraResultQueryParams } from './JiraItemMapper';
 var RECENT_ITEMS_PATH = 'rest/internal/2/productsearch/recent';

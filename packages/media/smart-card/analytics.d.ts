@@ -1,4 +1,4 @@
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import { ObjectState } from './Client/types';
 export declare const ANALYTICS_CHANNEL = "media";
 export declare const context: {

@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
-import { DropdownItemGroup, DropdownItem } from '@atlaskit/dropdown-menu';
+import { LayoutManager, NavigationProvider } from '@findable/navigation-next';
+import { DropdownItemGroup, DropdownItem } from '@findable/dropdown-menu';
 
 import GlobalNavigation from '../src';
 

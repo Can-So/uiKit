@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs';
-import { mountWithIntlContext, fakeContext, } from '@atlaskit/media-test-helpers';
-import Spinner from '@atlaskit/spinner';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
+import { mountWithIntlContext, fakeContext, } from '@findable/media-test-helpers';
+import Spinner from '@findable/spinner';
+import ArrowRightCircleIcon from '@findable/icon/glyph/chevron-right-circle';
 import { createContext } from '../_stubs';
 import { Collection } from '../../../newgen/collection';
 import { ErrorMessage } from '../../../newgen/error';

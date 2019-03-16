@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -12,17 +12,17 @@ ${code`
 import DropList, {
   DroplistGroup,
   Item
-} from '@atlaskit/droplist';
+} from '@findable/droplist';
 `}
 
-  This is a base component on which such components as @atlaskit/dropdown-menu,
-  @atlaskit/single-select, @atlaskit/multi-select are built. It contains only styles and
+  This is a base component on which such components as @findable/dropdown-menu,
+  @findable/single-select, @findable/multi-select are built. It contains only styles and
   very basic logic. It does not have any keyboard interactions, selectable logic or
   open/close functionality
 
   ${(
     <Example
-      packageName="@atlaskit/droplist"
+      packageName="@findable/droplist"
       Component={require('../examples/00-basic-example').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-example')}
@@ -31,7 +31,7 @@ import DropList, {
 
   ${(
     <Example
-      packageName="@atlaskit/droplist"
+      packageName="@findable/droplist"
       Component={require('../examples/01-bound-example').default}
       title="With Label"
       source={require('!!raw-loader!../examples/01-bound-example')}

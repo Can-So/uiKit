@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { EditorProps } from '@atlaskit/editor-core';
-import { RendererProps } from '@atlaskit/renderer';
+import { EditorProps } from '@findable/editor-core';
+import { RendererProps } from '@findable/renderer';
 import { State } from '../context/context';
 import { Consumer } from './consumer';
 import { default as Document } from '../components/document';

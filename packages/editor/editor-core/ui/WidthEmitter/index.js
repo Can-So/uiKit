@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import { pluginKey as widthPluginKey } from '../../plugins/width';
-import { WidthConsumer } from '@atlaskit/editor-common';
+import { WidthConsumer } from '@findable/editor-common';
 var WidthEmitter = /** @class */ (function (_super) {
     tslib_1.__extends(WidthEmitter, _super);
     function WidthEmitter() {

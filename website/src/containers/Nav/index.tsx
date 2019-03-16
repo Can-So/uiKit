@@ -6,15 +6,15 @@ import { Link } from '../../components/WrappedLink';
 import Navigation, {
   AkContainerTitle,
   presetThemes,
-} from '@atlaskit/navigation';
-import { borderRadius, colors } from '@atlaskit/theme';
-import Tooltip from '@atlaskit/tooltip';
+} from '@findable/navigation';
+import { borderRadius, colors } from '@findable/theme';
+import Tooltip from '@findable/tooltip';
 
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import MenuIcon from '@atlaskit/icon/glyph/menu';
-import PackagesIcon from '@atlaskit/icon/glyph/component';
-import DocumentationIcon from '@atlaskit/icon/glyph/overview';
-import PatternsIcon from '@atlaskit/icon/glyph/issues';
+import SearchIcon from '@findable/icon/glyph/search';
+import MenuIcon from '@findable/icon/glyph/menu';
+import PackagesIcon from '@findable/icon/glyph/component';
+import DocumentationIcon from '@findable/icon/glyph/overview';
+import PatternsIcon from '@findable/icon/glyph/issues';
 
 import Groups from './Groups';
 import GroupDrawer from './GroupDrawer';

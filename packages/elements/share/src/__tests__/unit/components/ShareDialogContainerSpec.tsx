@@ -1,5 +1,5 @@
-import { OptionData } from '@atlaskit/user-picker';
-import { utils } from '@atlaskit/util-service-support';
+import { OptionData } from '@findable/user-picker';
+import { utils } from '@findable/util-service-support';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import * as ShareServiceExports from '../../../clients/ShareServiceClient';

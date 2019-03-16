@@ -6,7 +6,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import SizeDetector from '@atlaskit/size-detector';
+import SizeDetector from '@findable/size-detector';
 import rafSchd from 'raf-schd';
 
 var HeightDetector =

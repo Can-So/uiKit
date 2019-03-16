@@ -1,6 +1,6 @@
 // @flow
 
-import { md } from '@atlaskit/docs';
+import { md } from '@findable/docs';
 
 export default md`
   ### Breaking Changes in \`11.0.0\`

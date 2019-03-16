@@ -1,4 +1,4 @@
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import * as React from 'react';
 export declare type Event = {
     channel?: string;

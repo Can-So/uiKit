@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import Comment, { CommentAuthor, CommentAction, CommentEdited } from '../src';
 import avatarImg from './utils/sample-avatar.png';
 

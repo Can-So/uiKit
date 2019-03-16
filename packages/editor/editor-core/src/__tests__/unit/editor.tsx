@@ -3,8 +3,8 @@ import { mount } from 'enzyme';
 import * as React from 'react';
 import Editor from '../../editor';
 import { EditorView } from 'prosemirror-view';
-import Button from '@atlaskit/button';
-import { insertText, sendKeyToPm } from '@atlaskit/editor-test-helpers';
+import Button from '@findable/button';
+import { insertText, sendKeyToPm } from '@findable/editor-test-helpers';
 
 describe(name, () => {
   describe('Editor', () => {

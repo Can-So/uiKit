@@ -5,7 +5,7 @@ Comments enable discussions on an entity such as a page, blog post, issue or pul
 ## Installation
 
 ```sh
-yarn add @atlaskit/comment
+yarn add @findable/comment
 ```
 
 ## Usage

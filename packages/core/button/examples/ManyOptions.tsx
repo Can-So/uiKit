@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Calendar from '@atlaskit/icon/glyph/calendar';
-import Page from '@atlaskit/icon/glyph/page';
-import Question from '@atlaskit/icon/glyph/question';
-import Expand from '@atlaskit/icon/glyph/arrow-down';
-import Unlink from '@atlaskit/icon/glyph/editor/unlink';
-import Open from '@atlaskit/icon/glyph/editor/open';
+import Calendar from '@findable/icon/glyph/calendar';
+import Page from '@findable/icon/glyph/page';
+import Question from '@findable/icon/glyph/question';
+import Expand from '@findable/icon/glyph/arrow-down';
+import Unlink from '@findable/icon/glyph/editor/unlink';
+import Open from '@findable/icon/glyph/editor/open';
 
 import Button, { ButtonAppearances } from '../src';
 

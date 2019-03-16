@@ -5,7 +5,7 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import { LARGE, LOADING_CONTENTS_OPACITY } from '../internal/constants';
 import { Container, ContentsContainer, SpinnerContainer } from '../styled/LoadingContainer';
 

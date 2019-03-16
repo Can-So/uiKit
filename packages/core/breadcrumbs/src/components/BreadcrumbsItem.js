@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import {
   withAnalyticsEvents,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import AKTooltip from '@atlaskit/tooltip';
+} from '@findable/analytics-next';
+import AKTooltip from '@findable/tooltip';
 import {
   name as packageName,
   version as packageVersion,

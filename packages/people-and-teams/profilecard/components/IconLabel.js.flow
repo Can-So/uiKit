@@ -1,10 +1,10 @@
 // @flow
 import React, { PureComponent, type Node as ReactNode } from 'react';
-import IconLocation from '@atlaskit/icon/glyph/location';
-import IconRecent from '@atlaskit/icon/glyph/recent';
-import IconMention from '@atlaskit/icon/glyph/mention';
-import IconEmail from '@atlaskit/icon/glyph/email';
-import OfficeBuildingIcon from '@atlaskit/icon/glyph/office-building';
+import IconLocation from '@findable/icon/glyph/location';
+import IconRecent from '@findable/icon/glyph/recent';
+import IconMention from '@findable/icon/glyph/mention';
+import IconEmail from '@findable/icon/glyph/email';
+import OfficeBuildingIcon from '@findable/icon/glyph/office-building';
 
 import {
   DetailsLabel,

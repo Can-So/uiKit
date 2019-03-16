@@ -1,11 +1,11 @@
 import * as util from '../../../../../newgen/utils';
 const constructAuthTokenUrlSpy = jest.spyOn(util, 'constructAuthTokenUrl');
 import * as React from 'react';
-import Button from '@atlaskit/button';
-import { Auth, ProcessedFileState } from '@atlaskit/media-core';
-import Spinner from '@atlaskit/spinner';
-import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
-import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import Button from '@findable/button';
+import { Auth, ProcessedFileState } from '@findable/media-core';
+import Spinner from '@findable/spinner';
+import { awaitError, mountWithIntlContext } from '@findable/media-test-helpers';
+import { CustomMediaPlayer } from '@findable/media-ui';
 import { createContext } from '../../../_stubs';
 import { VideoViewer, Props } from '../../../../../newgen/viewers/video';
 import { ErrorMessage } from '../../../../../newgen/error';

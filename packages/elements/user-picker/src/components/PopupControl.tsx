@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Label } from '@atlaskit/field-base';
-import { components } from '@atlaskit/select';
+import { Label } from '@findable/field-base';
+import { components } from '@findable/select';
 import styled from 'styled-components';
 
 interface Props {

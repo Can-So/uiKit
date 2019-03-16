@@ -129,7 +129,7 @@ function parseChangelog(raw: string): Log[] {
               text.indexOf('Updated dependencies') !== -1
             )
           ) {
-            if (line.substr(4, 10) === '@atlaskit/') {
+            if (line.substr(4, 10) === '@findable/') {
               updated.push(line.substring(4, line.lastIndexOf('@')));
             } else {
               const match = isJiraTicket(text);

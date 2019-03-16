@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Component } from 'react';
 
-import MoreIcon from '@atlaskit/icon/glyph/more';
+import MoreIcon from '@findable/icon/glyph/more';
 import DropdownMenu, {
   DropdownItemGroup,
   DropdownItem,
-} from '@atlaskit/dropdown-menu';
+} from '@findable/dropdown-menu';
 
 import { CardAction } from '../../actions';
 import { CardActionButton } from './styled';

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import InlineDialog from '@atlaskit/inline-dialog';
+import InlineDialog from '@findable/inline-dialog';
 import { Content, ContentWrapper, ChildWrapper } from '../styled/Content';
 import ValidationElement from './ValidationElement';
 import type { FieldBaseStatelessProps } from '../types';

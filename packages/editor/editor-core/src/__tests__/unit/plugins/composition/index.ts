@@ -6,9 +6,9 @@ import {
   mention,
   p,
   strong,
-} from '@atlaskit/editor-test-helpers';
-import { emoji as emojiData } from '@atlaskit/util-data-test';
-import { ProviderFactory } from '@atlaskit/editor-common';
+} from '@findable/editor-test-helpers';
+import { emoji as emojiData } from '@findable/util-data-test';
+import { ProviderFactory } from '@findable/editor-common';
 import emojiPlugin from '../../../../plugins/emoji';
 import mentionsPlugin from '../../../../plugins/mentions';
 import compositionPlugin from '../../../../plugins/composition';

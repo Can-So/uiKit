@@ -1,4 +1,4 @@
-import { ContextIdentifierProvider } from '@atlaskit/editor-common';
+import { ContextIdentifierProvider } from '@findable/editor-common';
 
 export function storyContextIdentifierProviderFactory(
   config = {

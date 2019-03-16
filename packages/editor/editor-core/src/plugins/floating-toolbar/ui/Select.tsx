@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component, HTMLAttributes, ComponentClass } from 'react';
 import styled from 'styled-components';
 
-import Select from '@atlaskit/select';
+import Select from '@findable/select';
 
 export interface RenderOptionsPropsT<T> {
   hide: () => void;

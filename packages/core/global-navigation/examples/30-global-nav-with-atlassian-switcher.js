@@ -2,16 +2,16 @@
 
 import React, { Component } from 'react';
 import { IntlProvider } from 'react-intl';
-import AppSwitcher from '@atlaskit/app-switcher';
-import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
+import AppSwitcher from '@findable/app-switcher';
+import EmojiAtlassianIcon from '@findable/icon/glyph/emoji/atlassian';
 import {
   GlobalItem,
   LayoutManager,
   NavigationProvider,
-} from '@atlaskit/navigation-next';
-import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
-import { ToggleStateless } from '@atlaskit/toggle';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+} from '@findable/navigation-next';
+import AppSwitcherIcon from '@findable/icon/glyph/app-switcher';
+import { ToggleStateless } from '@findable/toggle';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { mockEndpoints } from './helpers/mock-atlassian-switcher-endpoints';
 
 import GlobalNavigation from '../src';

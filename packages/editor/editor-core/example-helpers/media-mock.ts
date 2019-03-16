@@ -1,4 +1,4 @@
-import { MediaMock } from '@atlaskit/media-test-helpers';
+import { MediaMock } from '@findable/media-test-helpers';
 import { fakeImage } from '../../../media/media-test-helpers/src/mocks/database/mockData';
 
 export default new MediaMock({

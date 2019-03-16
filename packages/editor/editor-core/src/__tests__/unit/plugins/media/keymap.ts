@@ -1,5 +1,5 @@
-import { doc, p, sendKeyToPm } from '@atlaskit/editor-test-helpers';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { doc, p, sendKeyToPm } from '@findable/editor-test-helpers';
+import { ProviderFactory } from '@findable/editor-common';
 
 import { mediaEditor, temporaryMediaGroup } from './_utils';
 

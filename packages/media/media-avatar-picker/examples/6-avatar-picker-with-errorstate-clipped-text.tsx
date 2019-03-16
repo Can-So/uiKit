@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Avatar, AvatarPickerDialog } from '../src';
 import { generateAvatars } from '../example-helpers';
-import { tallImage } from '@atlaskit/media-test-helpers';
+import { tallImage } from '@findable/media-test-helpers';
 
 const avatars: Array<Avatar> = generateAvatars(30);
 const errorMessage = `(start) 1. Image size is 3264px * 2448px.

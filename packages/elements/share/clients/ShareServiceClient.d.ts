@@ -1,4 +1,4 @@
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 import { Comment, Content, MetaData, User } from '../types';
 export interface ShareClient {
     share(content: Content, recipients: User[], metadata: MetaData, comment?: Comment): Promise<ShareResponse>;

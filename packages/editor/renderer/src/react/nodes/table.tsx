@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { TableLayout } from '@atlaskit/adf-schema';
+import { TableLayout } from '@findable/adf-schema';
 import {
   calcTableWidth,
   WidthConsumer,
@@ -12,7 +12,7 @@ import {
   akEditorTableLegacyCellMinWidth,
   tableCellBorderWidth,
   tableCellMinWidth,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';
 import TableHeader from './tableHeader';
 import { RendererAppearance } from '../../ui/Renderer';

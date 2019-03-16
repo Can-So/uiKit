@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { FormattedMessage } from 'react-intl';
 import {
   FileDetails,
   ImageResizeMode,
   MediaItemType,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import { SharedCardProps, CardStatus } from '../..';
 import { CardAction } from '../../actions';
 import { FileCardImageView } from '../cardImageView';

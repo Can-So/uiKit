@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, fontSize } from '@atlaskit/theme';
+import { gridSize, fontSize } from '@findable/theme';
 var height = gridSize() * 3 / parseInt(fontSize(), 10);
 var BreadcrumbsItemElement = styled.div.withConfig({
   displayName: "BreadcrumbsItem__BreadcrumbsItemElement",

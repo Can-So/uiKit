@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import styled from 'styled-components';
 import WithDocumentActions from '../consumers/with-document-actions';
 import { Mode } from '../context/context';

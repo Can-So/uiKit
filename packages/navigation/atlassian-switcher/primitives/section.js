@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { gridSize, typography } from '@atlaskit/theme';
+import { gridSize, typography } from '@findable/theme';
 import styled from 'styled-components';
 import { analyticsAttributes, withAnalyticsContextData, } from '../utils/analytics';
 import { FadeIn } from './fade-in';

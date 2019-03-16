@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ModalSpinner } from '@atlaskit/media-ui';
+import { ModalSpinner } from '@findable/media-ui';
 
 import { AvatarPickerDialog } from '.';
 import { AvatarPickerDialogProps } from './types';

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import Badge from '@atlaskit/badge';
+import Badge from '@findable/badge';
 var MAX_NOTIFICATIONS_COUNT = 9;
 var NAVIGATION_CHANNEL = 'navigation';
 var NotificationIndicator = /** @class */ (function (_super) {

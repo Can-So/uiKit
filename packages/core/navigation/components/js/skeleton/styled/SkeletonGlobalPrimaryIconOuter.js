@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 var SkeletonGlobalPrimaryIconOuter = styled.div.withConfig({
   displayName: "SkeletonGlobalPrimaryIconOuter",
   componentId: "p7w614-0"

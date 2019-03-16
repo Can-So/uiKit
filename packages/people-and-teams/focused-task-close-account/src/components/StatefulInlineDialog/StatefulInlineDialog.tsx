@@ -1,5 +1,5 @@
 import * as React from 'react';
-import InlineDialog from '@atlaskit/inline-dialog';
+import InlineDialog from '@findable/inline-dialog';
 
 interface Props {
   children: React.ReactNode;

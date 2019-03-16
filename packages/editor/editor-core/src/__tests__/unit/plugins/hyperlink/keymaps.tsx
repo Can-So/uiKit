@@ -8,14 +8,14 @@ import {
   code,
   hardBreak,
   a,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   HyperlinkState,
   InsertStatus,
   stateKey,
 } from '../../../../plugins/hyperlink/pm-plugins/main';
 import quickInsertPlugin from '../../../../plugins/quick-insert';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 describe('hyperlink - keymap', () => {
   const createEditor = createEditorFactory();

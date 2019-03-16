@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
+import { FireAnalyticsEvent } from '@findable/analytics';
 import { RecentSearchClient } from '../../api/RecentSearchClient';
 import { CrossProductSearchClient } from '../../api/CrossProductSearchClient';
 import { Scope } from '../../api/types';

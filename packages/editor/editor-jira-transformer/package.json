@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/editor-jira-transformer",
+  "name": "@findable/editor-jira-transformer",
   "version": "6.0.0",
   "description": "Editor JIRA transformer's",
   "license": "Apache-2.0",
@@ -11,10 +11,10 @@
   "maintainers": [
     "Stanislas S"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/adf-schema": "^2.0.0",
-    "@atlaskit/editor-common": "^35.0.0",
+    "@findable/adf-schema": "^2.0.0",
+    "@findable/editor-common": "^35.0.0",
     "collapse-whitespace": "^1.1.6",
     "prosemirror-model": "^1.7.0"
   },
@@ -22,12 +22,12 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/editor-core": "^106.0.0",
-    "@atlaskit/editor-json-transformer": "^5.0.0",
-    "@atlaskit/editor-test-helpers": "^8.0.0",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/util-data-test": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/editor-core": "^106.0.0",
+    "@findable/editor-json-transformer": "^5.0.0",
+    "@findable/editor-test-helpers": "^8.0.0",
+    "@findable/theme": "^8.0.1",
+    "@findable/util-data-test": "^11.0.0",
     "@types/prosemirror-model": "^1.5.0"
   }
 }

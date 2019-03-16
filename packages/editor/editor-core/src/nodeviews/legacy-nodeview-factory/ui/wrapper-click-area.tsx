@@ -3,7 +3,7 @@ import { PureComponent, ComponentClass, StatelessComponent } from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
 import styled from 'styled-components';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { ReactNodeViewState } from '../../../plugins/base/pm-plugins/react-nodeview';
 import { setNodeSelection } from '../../../utils';
 import {

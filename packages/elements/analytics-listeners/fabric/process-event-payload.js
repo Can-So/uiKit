@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { DEFAULT_SOURCE, } from '@atlaskit/analytics-gas-types';
-import { ELEMENTS_CONTEXT } from '@atlaskit/analytics-namespaced-context';
+import { DEFAULT_SOURCE, } from '@findable/analytics-gas-types';
+import { ELEMENTS_CONTEXT } from '@findable/analytics-namespaced-context';
 import * as merge from 'lodash.merge';
 var extractFieldsFromContext = function (fieldsToPick) { return function (contexts) {
     return contexts

@@ -4,7 +4,7 @@ import { changeService, searchGiphy } from '../../../../../actions';
 import {
   mockStore,
   getComponentClassWithStore,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 import { StatelessSidebarItem } from '../../sidebarItem';
 import {

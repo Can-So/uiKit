@@ -3,14 +3,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import BoldIcon from '@atlaskit/icon/glyph/editor/bold';
-import ItalicIcon from '@atlaskit/icon/glyph/editor/italic';
-import UnderlineIcon from '@atlaskit/icon/glyph/editor/underline';
-import LinkIcon from '@atlaskit/icon/glyph/editor/link';
-import BulletListIcon from '@atlaskit/icon/glyph/editor/bullet-list';
-import NumberListIcon from '@atlaskit/icon/glyph/editor/number-list';
-import CodeIcon from '@atlaskit/icon/glyph/editor/code';
-import { borderRadius, colors } from '@atlaskit/theme';
+import BoldIcon from '@findable/icon/glyph/editor/bold';
+import ItalicIcon from '@findable/icon/glyph/editor/italic';
+import UnderlineIcon from '@findable/icon/glyph/editor/underline';
+import LinkIcon from '@findable/icon/glyph/editor/link';
+import BulletListIcon from '@findable/icon/glyph/editor/bullet-list';
+import NumberListIcon from '@findable/icon/glyph/editor/number-list';
+import CodeIcon from '@findable/icon/glyph/editor/code';
+import { borderRadius, colors } from '@findable/theme';
 
 import Tooltip from '../src';
 

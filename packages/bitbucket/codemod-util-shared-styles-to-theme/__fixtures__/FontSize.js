@@ -1,6 +1,6 @@
 // @flow
-import { akFontSizeDefault as fontSize } from "@atlaskit/util-shared-styles";
-import { colors } from "@atlaskit/theme";
+import { akFontSizeDefault as fontSize } from "@findable/util-shared-styles";
+import { colors } from "@findable/theme";
 import styled from "styled-components";
 
 export const SourceLine = styled.td`
@@ -10,7 +10,7 @@ export const SourceLine = styled.td`
 `;
 //////
 // @flow
-import { colors, fontSize } from "@atlaskit/theme";
+import { colors, fontSize } from "@findable/theme";
 import styled from "styled-components";
 
 export const SourceLine = styled.td`

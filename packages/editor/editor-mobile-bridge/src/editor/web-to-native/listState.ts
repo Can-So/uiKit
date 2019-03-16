@@ -1,4 +1,4 @@
-import { ListsState } from '@atlaskit/editor-core';
+import { ListsState } from '@findable/editor-core';
 
 export class ListState {
   name: string;

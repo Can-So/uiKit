@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { MediaFile as MediaStoreMediaFile } from '@atlaskit/media-store';
+import { MediaFile as MediaStoreMediaFile } from '@findable/media-store';
 import {
   UploadEndEvent,
   UploadEndEventPayload,

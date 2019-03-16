@@ -1,4 +1,4 @@
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import * as React from 'react';
 import { PureComponent, ReactElement } from 'react';
 import { AkButton } from './styles';

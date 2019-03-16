@@ -4,12 +4,12 @@
 
 import * as React from 'react';
 import { Component } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import {
   defaultMediaPickerCollectionName,
   createUploadContext,
-} from '@atlaskit/media-test-helpers';
-import { Card } from '@atlaskit/media-card';
+} from '@findable/media-test-helpers';
+import { Card } from '@findable/media-card';
 import { MediaPicker, Popup } from '../src';
 import {
   PopupContainer,

@@ -2,7 +2,7 @@
 import {
   getExampleUrl,
   takeScreenShot,
-} from '@atlaskit/visual-regression/helper';
+} from '@findable/visual-regression/helper';
 
 describe('Snapshot Test', () => {
   it('Tooltip should match production example', async () => {

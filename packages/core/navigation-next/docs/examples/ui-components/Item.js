@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import Badge from '@atlaskit/badge';
-import CloseButton from '@atlaskit/icon/glyph/cross';
+import Badge from '@findable/badge';
+import CloseButton from '@findable/icon/glyph/cross';
 import { Item, ItemAvatar } from '../../../src';
 import { CONTENT_NAV_WIDTH } from '../../../src/common/constants';
 

@@ -1,4 +1,4 @@
-import { Context, FileState } from '@atlaskit/media-core';
+import { Context, FileState } from '@findable/media-core';
 import { Outcome } from '../../domain';
 import { MediaViewerError } from '../../error';
 import { Props as RendererProps } from './pdfRenderer';

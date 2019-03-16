@@ -1,6 +1,6 @@
 import rafSchedule from 'raf-schd';
 import { DOMSerializer } from 'prosemirror-model';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 var MATCH_NEWLINES = new RegExp('\n', 'g');
 // For browsers <= IE11, we apply style overrides to render a basic code box
 var isIE11 = browser.ie && browser.ie_version <= 11;

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Component } from 'react';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import Button from '@atlaskit/button';
-import Tooltip from '@atlaskit/tooltip';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import Button from '@findable/button';
+import Tooltip from '@findable/tooltip';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { toolIcons } from './toolButton';
 import { Tool } from '../../../../common';
 import { shapeTools } from '../popups/shapePopup';
 import { DropdownLeftIconWrapper, DropdownRightIconWrapper } from './styles';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 
 export interface ShapeButtonProps {
   readonly activeShape: Tool;

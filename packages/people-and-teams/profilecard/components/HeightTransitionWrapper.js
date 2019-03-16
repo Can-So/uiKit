@@ -7,7 +7,7 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { fontFamily, fontSize, borderRadius, gridSize, math, elevation } from '@atlaskit/theme';
+import { fontFamily, fontSize, borderRadius, gridSize, math, elevation } from '@findable/theme';
 import { bgColor } from '../styled/constants';
 var CardAnimationWrapper = styled.div.withConfig({
   displayName: "HeightTransitionWrapper__CardAnimationWrapper",

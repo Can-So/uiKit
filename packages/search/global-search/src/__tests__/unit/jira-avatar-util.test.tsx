@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import IssueIcon from '@atlaskit/icon/glyph/issue';
-import FilterIcon from '@atlaskit/icon/glyph/filter';
+import BoardIcon from '@findable/icon/glyph/board';
+import IssueIcon from '@findable/icon/glyph/issue';
+import FilterIcon from '@findable/icon/glyph/filter';
 
 import { getDefaultAvatar } from '../../../src/util/jira-avatar-util';
 import { ContentType } from '../../model/Result';

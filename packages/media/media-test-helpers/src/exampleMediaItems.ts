@@ -2,7 +2,7 @@ import {
   MediaItemType,
   FileDetails,
   ExternalImageIdentifier,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import {
   defaultCollectionName as collectionName,
   onlyAnimatedGifsCollectionName,

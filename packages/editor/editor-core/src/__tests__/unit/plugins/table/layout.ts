@@ -13,8 +13,8 @@ import {
   bodiedExtensionData,
   layoutSection,
   layoutColumn,
-} from '@atlaskit/editor-test-helpers';
-import { TableLayout } from '@atlaskit/adf-schema';
+} from '@findable/editor-test-helpers';
+import { TableLayout } from '@findable/adf-schema';
 import {
   pluginKey as tablePluginKey,
   getPluginState,

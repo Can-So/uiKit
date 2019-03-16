@@ -11,7 +11,7 @@ import {
   MediaApiToken,
 } from '../../types';
 import { convertMediaToImageRepresentation } from '../../type-helpers';
-import { emoji } from '@atlaskit/util-data-test';
+import { emoji } from '@findable/util-data-test';
 import EmojiRepository from '../../api/EmojiRepository';
 
 const testData = emoji.testData;

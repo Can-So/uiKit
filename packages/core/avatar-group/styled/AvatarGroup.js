@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
-import { BORDER_WIDTH } from '@atlaskit/avatar'; // TODO: use math utilities within styled component
+import { colors, gridSize } from '@findable/theme';
+import { BORDER_WIDTH } from '@findable/avatar'; // TODO: use math utilities within styled component
 
 var gutterUnitless = gridSize() / 2;
 var gutter = "".concat(gutterUnitless, "px");

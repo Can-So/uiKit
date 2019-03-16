@@ -6,7 +6,7 @@ var mockInteractiveImg = {
 };
 jest.mock('../../../../../newgen/viewers/image/interactive-img', function () { return mockInteractiveImg; });
 import * as React from 'react';
-import { awaitError, mountWithIntlContext, fakeContext, } from '@atlaskit/media-test-helpers';
+import { awaitError, mountWithIntlContext, fakeContext, } from '@findable/media-test-helpers';
 import { ImageViewer } from '../../../../../newgen/viewers/image';
 var collectionName = 'some-collection';
 var imageItem = {

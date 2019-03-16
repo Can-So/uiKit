@@ -27,7 +27,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     getStyledComponent(): React.StatelessComponent<any> | React.ComponentClass<any, any> | import("styled-components").StyledComponentClass<(React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -50,7 +50,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }) | (React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -90,7 +90,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }), any, (React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -113,7 +113,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }) | (React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -153,7 +153,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     })> | import("styled-components").StyledComponentClass<(React.ClassAttributes<HTMLAnchorElement> & React.AnchorHTMLAttributes<HTMLAnchorElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -176,7 +176,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }) | (React.ClassAttributes<HTMLAnchorElement> & React.AnchorHTMLAttributes<HTMLAnchorElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -216,7 +216,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }), any, (React.ClassAttributes<HTMLAnchorElement> & React.AnchorHTMLAttributes<HTMLAnchorElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -239,7 +239,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }) | (React.ClassAttributes<HTMLAnchorElement> & React.AnchorHTMLAttributes<HTMLAnchorElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -279,7 +279,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     })> | import("styled-components").StyledComponentClass<(React.ClassAttributes<HTMLSpanElement> & React.HTMLAttributes<HTMLSpanElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -302,7 +302,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }) | (React.ClassAttributes<HTMLSpanElement> & React.HTMLAttributes<HTMLSpanElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -342,7 +342,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }), any, (React.ClassAttributes<HTMLSpanElement> & React.HTMLAttributes<HTMLSpanElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;
@@ -365,7 +365,7 @@ export declare class Button extends React.Component<ButtonProps, ButtonState> {
     }) | (React.ClassAttributes<HTMLSpanElement> & React.HTMLAttributes<HTMLSpanElement> & Partial<{
         'aria-label': string | undefined;
         onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
-        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+        onClick: ((e: React.MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
         onFocus: (event: React.FocusEvent<HTMLButtonElement>) => void;
         onMouseDown: (e: Event) => void;
         onMouseEnter: () => void;

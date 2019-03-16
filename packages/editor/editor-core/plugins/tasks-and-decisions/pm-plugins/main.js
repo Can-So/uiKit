@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Plugin, PluginKey } from 'prosemirror-state';
-import { uuid } from '@atlaskit/adf-schema';
+import { uuid } from '@findable/adf-schema';
 import { findParentNodeOfType } from 'prosemirror-utils';
 import { decisionItemNodeView } from '../nodeviews/decisionItem';
 import { taskItemNodeViewFactory } from '../nodeviews/taskItem';

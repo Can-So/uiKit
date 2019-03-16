@@ -10,15 +10,15 @@ import {
   ContainerHeader,
   Separator,
   Wordmark,
-} from '@atlaskit/navigation-next';
-import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
-import Avatar from '@atlaskit/avatar';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
+} from '@findable/navigation-next';
+import { JiraIcon, JiraWordmark } from '@findable/logo';
+import BacklogIcon from '@findable/icon/glyph/backlog';
+import BoardIcon from '@findable/icon/glyph/board';
+import GraphLineIcon from '@findable/icon/glyph/graph-line';
+import Avatar from '@findable/avatar';
+import AddIcon from '@findable/icon/glyph/add';
+import SearchIcon from '@findable/icon/glyph/search';
+import QuestionCircleIcon from '@findable/icon/glyph/question-circle';
 
 type ClassNameProps = { className: string };
 

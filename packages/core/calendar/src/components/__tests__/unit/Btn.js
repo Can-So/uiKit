@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import Button from '@atlaskit/button';
-import ArrowleftIcon from '@atlaskit/icon/glyph/chevron-left-large';
+import Button from '@findable/button';
+import ArrowleftIcon from '@findable/icon/glyph/chevron-left-large';
 
 import Btn from '../../Btn';
 

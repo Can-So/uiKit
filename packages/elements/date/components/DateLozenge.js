@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { borderRadius, colors, themed } from '@atlaskit/theme';
+import { borderRadius, colors, themed } from '@findable/theme';
 import styled from 'styled-components';
 export var resolveColors = function (color) {
     if (!color || color === 'grey') {

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { borderRadius } from '@atlaskit/theme';
+import { borderRadius } from '@findable/theme';
 import { getCSSUnitValue } from '../utils/getCSSUnitValue';
 import { breakpointStyles } from '../utils/breakpoint';
 import { getSelectedBorderStyle } from '../styles/getSelectedBorderStyle';

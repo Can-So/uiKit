@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { mountWithIntl } from '@findable/editor-test-helpers';
 
 import DeleteButton from '../../../../../plugins/table/ui/TableFloatingControls/DeleteButton';
 import tableMessages from '../../../../../plugins/table/ui/messages';

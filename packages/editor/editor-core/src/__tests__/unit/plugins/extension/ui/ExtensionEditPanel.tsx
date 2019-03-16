@@ -3,7 +3,7 @@ import * as React from 'react';
 import ExtensionEditPanel from '../../../../../plugins/extension/ui/ExtensionEditPanel';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 
-describe('@atlaskit/editor-core ui/ExtensionEditPanel', () => {
+describe('@findable/editor-core ui/ExtensionEditPanel', () => {
   const noop: any = () => {};
 
   it('should return null if element prop equals null', () => {

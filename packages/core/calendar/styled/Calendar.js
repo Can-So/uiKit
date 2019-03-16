@@ -1,6 +1,6 @@
 /* eslint no-confusing-arrow: 0 */
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 var wrapperBackgroundColor = themed({
   light: colors.N0,
   dark: colors.N700
@@ -21,7 +21,7 @@ export var CalendarTbody = styled.tbody.withConfig({
   displayName: "Calendar__CalendarTbody",
   componentId: "sc-3j1sll-2"
 })(["\n  border: 0;\n"]); // FIXME: first-child
-// @atlaskit/css-reset should adjust default behaviours
+// @findable/css-reset should adjust default behaviours
 
 var thSpacing = css(["\n  padding: 8px 8px;\n  min-width: 40px;\n  box-sizing: border-box;\n"]);
 export var CalendarTh = styled.th.withConfig({

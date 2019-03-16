@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { colors, borderRadius } from '@findable/theme';
 
 export const BackgroundWrapper = styled.div<{ maxWidth: number }>`
   height: 2px;

@@ -2,16 +2,16 @@
 /* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import StarIcon from '@atlaskit/icon/glyph/star';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import Button from '@atlaskit/button';
-import { ConfluenceIcon } from '@atlaskit/logo';
+import AddIcon from '@findable/icon/glyph/add';
+import StarIcon from '@findable/icon/glyph/star';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
+import Button from '@findable/button';
+import { ConfluenceIcon } from '@findable/logo';
 import Lorem from 'react-lorem-component';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import Tooltip from '@atlaskit/tooltip';
-import { gridSize } from '@atlaskit/theme';
+import Page, { Grid, GridColumn } from '@findable/page';
+import SearchIcon from '@findable/icon/glyph/search';
+import Tooltip from '@findable/tooltip';
+import { gridSize } from '@findable/theme';
 
 import SecondaryActions from './utils/confluence-example/SecondaryActions';
 import Navigation, {

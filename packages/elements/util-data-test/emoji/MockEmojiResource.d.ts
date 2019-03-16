@@ -1,5 +1,5 @@
-import { AbstractResource } from '@atlaskit/util-service-support';
-import { EmojiDescription, EmojiId, EmojiSearchResult, EmojiUpload, OptionalEmojiDescription, SearchOptions, ToneSelection, User, OptionalUser, EmojiProvider, UploadingEmojiProvider, EmojiRepository, CategoryId } from '@atlaskit/emoji';
+import { AbstractResource } from '@findable/util-service-support';
+import { EmojiDescription, EmojiId, EmojiSearchResult, EmojiUpload, OptionalEmojiDescription, SearchOptions, ToneSelection, User, OptionalUser, EmojiProvider, UploadingEmojiProvider, EmojiRepository, CategoryId } from '@findable/emoji';
 import { PromiseBuilder, UploadDetail } from './utils';
 export interface MockEmojiResourceConfig {
     promiseBuilder?: PromiseBuilder<any>;

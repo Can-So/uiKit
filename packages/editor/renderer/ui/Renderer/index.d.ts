@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { Schema } from 'prosemirror-model';
-import { ADFStage, ProviderFactory, EventHandlers, ExtensionHandlers } from '@atlaskit/editor-common';
+import { ADFStage, ProviderFactory, EventHandlers, ExtensionHandlers } from '@findable/editor-common';
 import { RendererContext } from '../../';
 import { RenderOutputStat } from '../../render-document';
 export declare type RendererAppearance = 'comment' | 'full-page' | 'mobile' | undefined;

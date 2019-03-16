@@ -1,3 +1,3 @@
-import { RuleDefinition } from '@atlaskit/adf-schema';
+import { RuleDefinition } from '@findable/adf-schema';
 
 export const rule = (): RuleDefinition => ({ type: 'rule' });

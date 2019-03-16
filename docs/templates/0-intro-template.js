@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { code, md, Example, Props } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@findable/docs';
 
 // The core parts of the intro page for your examples documentation are:
 // 1. A summary description
@@ -19,7 +19,7 @@ export default md`
 
   ${/* This code snippet should show all the exports of a component */ ''}
   ${code`
-    import Component, { SubComponent } from '@atlaskit/component';
+    import Component, { SubComponent } from '@findable/component';
   `}
 
   TODO: Provide the base information that someone needs to render the component

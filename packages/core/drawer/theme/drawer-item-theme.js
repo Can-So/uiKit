@@ -1,8 +1,8 @@
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
-import { itemThemeNamespace } from '@atlaskit/item';
-import { colors, themed } from '@atlaskit/theme';
+import { itemThemeNamespace } from '@findable/item';
+import { colors, themed } from '@findable/theme';
 import chromatism from 'chromatism';
-import { gridSize, darkDrawerItemHoverBackground, darkDrawerItemActiveBackground } from '../constants'; // These themes are copied over from @atlaskit/global-navigation to preserve the theming
+import { gridSize, darkDrawerItemHoverBackground, darkDrawerItemActiveBackground } from '../constants'; // These themes are copied over from @findable/global-navigation to preserve the theming
 // of search and starred drawers.
 
 var focus = {

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { Mention, } from '@atlaskit/editor-common';
+import { Mention, } from '@findable/editor-common';
 var MentionItem = /** @class */ (function (_super) {
     tslib_1.__extends(MentionItem, _super);
     function MentionItem() {

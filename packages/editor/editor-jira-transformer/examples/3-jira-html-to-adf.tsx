@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { defaultSchema } from '@atlaskit/adf-schema';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { defaultSchema } from '@findable/adf-schema';
+import { JSONTransformer } from '@findable/editor-json-transformer';
 import { JIRATransformer } from '../src';
 
 const Container = styled.div`

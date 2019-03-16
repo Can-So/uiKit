@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -10,11 +10,11 @@ use the selected presence. Presence is displayed at the bottom right of the avat
 
 ## Usage
 
-${code`import { Presence } from '@atlaskit/avatar';`}
+${code`import { Presence } from '@findable/avatar';`}
 
 ${(
   <Example
-    packageName="@atlaskit/avatar"
+    packageName="@findable/avatar"
     Component={require('../examples/04-basicPresence').default}
     title="Presence"
     source={require('!!raw-loader!../examples/04-basicPresence')}

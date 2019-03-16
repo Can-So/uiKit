@@ -3,7 +3,7 @@ import {
   doc,
   p,
   status,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import statusPlugin from '../../../../plugins/status';
 import { pluginKey } from '../../../../plugins/status/plugin';
 import {

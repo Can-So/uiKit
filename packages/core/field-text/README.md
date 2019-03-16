@@ -5,7 +5,7 @@ Provides a standard way to create a text-based form input with an associated lab
 ## Installation
 
 ```sh
-yarn add @atlaskit/field-text
+yarn add @findable/field-text
 ```
 
 ## Usage

@@ -1,5 +1,5 @@
 import { LocalUploadComponent } from './localUpload';
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { Browser, BrowserConfig } from './types';
 export declare class BrowserImpl extends LocalUploadComponent implements Browser {
     private readonly browseElement;

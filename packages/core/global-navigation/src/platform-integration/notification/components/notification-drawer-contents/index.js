@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Fragment, Component } from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 
 import { externalContent, spinnerWrapper } from './styles';
 import addParamToUrl from '../../add-param-to-url';

@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import EditorFileIcon from '@atlaskit/icon/glyph/editor/file';
-import { getExtensionLozengeData } from '@atlaskit/editor-common';
+import EditorFileIcon from '@findable/icon/glyph/editor/file';
+import { getExtensionLozengeData } from '@findable/editor-common';
 import { PlaceholderFallback, PlaceholderFallbackParams } from './styles';
 export var capitalizeFirstLetter = function (str) {
     return str.charAt(0).toUpperCase() + str.slice(1);

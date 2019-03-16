@@ -1,4 +1,4 @@
-import { BlockCardResolvedViewProps } from '@atlaskit/media-ui';
+import { BlockCardResolvedViewProps } from '@findable/media-ui';
 import { genericExtractPropsFromJSONLD } from '../genericExtractPropsFromJSONLD';
 import { extractPropsFromObject } from './extractPropsFromObject';
 import { extractPropsFromDocument } from './extractPropsFromDocument';

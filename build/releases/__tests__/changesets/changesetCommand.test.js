@@ -5,18 +5,18 @@ import {
   askList,
   askConfirm,
   askQuestion,
-} from '@atlaskit/build-utils/cli';
-import { getChangedPackagesSinceMaster } from '@atlaskit/build-utils/packages';
-const git = require('@atlaskit/build-utils/git');
+} from '@findable/build-utils/cli';
+import { getChangedPackagesSinceMaster } from '@findable/build-utils/packages';
+const git = require('@findable/build-utils/git');
 
 import { changesetCommand } from '../../changeset';
 import { initializeCommand } from '../../initialize';
 import writeChangeset from '../../changeset/writeChangeset';
 
-jest.mock('@atlaskit/build-utils/logger');
-jest.mock('@atlaskit/build-utils/cli');
-jest.mock('@atlaskit/build-utils/packages');
-jest.mock('@atlaskit/build-utils/git');
+jest.mock('@findable/build-utils/logger');
+jest.mock('@findable/build-utils/cli');
+jest.mock('@findable/build-utils/packages');
+jest.mock('@findable/build-utils/git');
 jest.mock('../../changeset/writeChangeset');
 writeChangeset.mockImplementation(() => Promise.resolve('abcdefg'));
 git.commit.mockImplementation(() => Promise.resolve(true));

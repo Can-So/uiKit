@@ -9,8 +9,8 @@ import {
   sendKeyToPm,
   createEvent,
   insertText,
-} from '@atlaskit/editor-test-helpers';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+} from '@findable/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 import { pluginKey as codeBlockPluginKey } from '../../../../plugins/code-block/pm-plugins/main';
 import tablesPlugin from '../../../../plugins/table';

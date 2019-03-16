@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var FilmStripViewWrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  position: relative;\n  padding: 3px 0;\n  border-radius: 3px;\n\n  &:hover .arrow {\n    opacity: 1;\n  }\n\n  .ellipsed-text {\n    white-space: initial;\n  }\n"], ["\n  position: relative;\n  padding: 3px 0;\n  border-radius: 3px;\n\n  &:hover .arrow {\n    opacity: 1;\n  }\n\n  .ellipsed-text {\n    white-space: initial;\n  }\n"])));
 export var FilmStripListWrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  width: inherit;\n  overflow: hidden;\n  padding: 2px 0;\n"], ["\n  width: inherit;\n  overflow: hidden;\n  padding: 2px 0;\n"])));
 export var FilmStripList = styled.ul(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n  margin: 0;\n  padding: 0;\n  transition-property: transform;\n  transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);\n  white-space: nowrap;\n  display: inline-block;\n"], ["\n  margin: 0;\n  padding: 0;\n  transition-property: transform;\n  transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);\n  white-space: nowrap;\n  display: inline-block;\n"])));

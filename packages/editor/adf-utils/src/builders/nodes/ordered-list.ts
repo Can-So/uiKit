@@ -1,7 +1,7 @@
 import {
   ListItemDefinition,
   OrderedListDefinition,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 
 export const orderedList = (attrs?: OrderedListDefinition['attrs']) => (
   ...content: Array<ListItemDefinition>

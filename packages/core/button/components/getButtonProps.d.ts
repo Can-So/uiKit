@@ -2,7 +2,7 @@
 declare const getButtonProps: (component: import("./Button").Button) => {
     'aria-label': string | undefined;
     onBlur: (event: import("react").FocusEvent<HTMLButtonElement>) => void;
-    onClick: ((e: import("react").MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+    onClick: ((e: import("react").MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
     onFocus: (event: import("react").FocusEvent<HTMLButtonElement>) => void;
     onMouseDown: (e: Event) => void;
     onMouseEnter: () => void;
@@ -23,7 +23,7 @@ declare const getButtonProps: (component: import("./Button").Button) => {
 } | {
     'aria-label': string | undefined;
     onBlur: (event: import("react").FocusEvent<HTMLButtonElement>) => void;
-    onClick: ((e: import("react").MouseEvent<HTMLButtonElement>, analyticsEvent: import("@atlaskit/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
+    onClick: ((e: import("react").MouseEvent<HTMLButtonElement>, analyticsEvent: import("@findable/analytics-next-types").UIAnalyticsEvent) => void) | undefined;
     onFocus: (event: import("react").FocusEvent<HTMLButtonElement>) => void;
     onMouseDown: (e: Event) => void;
     onMouseEnter: () => void;

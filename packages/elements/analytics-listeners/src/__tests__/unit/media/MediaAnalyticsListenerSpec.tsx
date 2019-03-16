@@ -3,8 +3,8 @@ import {
   DEFAULT_SOURCE,
   GasPayload,
   UI_EVENT_TYPE,
-} from '@atlaskit/analytics-gas-types';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+} from '@findable/analytics-gas-types';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { createButtonWithAnalytics } from '../../../../examples/helpers';

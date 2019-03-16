@@ -1,4 +1,4 @@
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import {
   doc,
   h1,
@@ -9,7 +9,7 @@ import {
   h6,
   hardBreak,
   p,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { checkParseEncodeRoundTrips } from '../_test-helpers';
 
 // Nodes

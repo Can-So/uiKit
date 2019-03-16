@@ -1,9 +1,9 @@
-import { EditorProps, EditorInstance, PortalProviderAPI } from '@atlaskit/editor-core';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { EditorProps, EditorInstance, PortalProviderAPI } from '@findable/editor-core';
+import { ProviderFactory } from '@findable/editor-common';
 import { RefsNode, Refs } from './schema-builder';
 import { Schema } from 'prosemirror-model';
 import { PluginKey } from 'prosemirror-state';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 /**
  * Currently skipping these three failing tests
  * TODO: JEST-23 Fix these tests

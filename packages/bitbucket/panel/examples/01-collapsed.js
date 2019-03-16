@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 import Panel from '../src';
 
 const Header = <span>Description</span>;

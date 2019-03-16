@@ -7,7 +7,7 @@ import {
   OnToneSelected,
 } from '../../types';
 import EmojiButton from './EmojiButton';
-import { FireAnalyticsEvent, withAnalytics } from '@atlaskit/analytics';
+import { FireAnalyticsEvent, withAnalytics } from '@findable/analytics';
 import { analyticsEmojiPrefix } from '../../constants';
 
 export interface Props {

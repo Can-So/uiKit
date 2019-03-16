@@ -3,10 +3,10 @@
 import React, { Component } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import es from 'react-intl/locale-data/es';
-import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
-import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
-import { ToggleStateless } from '@atlaskit/toggle';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import EmojiAtlassianIcon from '@findable/icon/glyph/emoji/atlassian';
+import { LayoutManager, NavigationProvider } from '@findable/navigation-next';
+import { ToggleStateless } from '@findable/toggle';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { mockEndpoints } from './helpers/mock-atlassian-switcher-endpoints';
 
 import GlobalNavigation from '../src';

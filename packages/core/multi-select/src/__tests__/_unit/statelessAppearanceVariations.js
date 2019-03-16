@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import { FieldBaseStateless } from '@atlaskit/field-base';
+import { FieldBaseStateless } from '@findable/field-base';
 import { MultiSelectStateless } from '../..';
 
 import { name } from '../../version.json';

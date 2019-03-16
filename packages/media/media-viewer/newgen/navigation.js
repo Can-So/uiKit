@@ -1,12 +1,12 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
-import { colors } from '@atlaskit/theme';
-import Button from '@atlaskit/button';
-import { Shortcut } from '@atlaskit/media-ui';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import ArrowLeftCircleIcon from '@findable/icon/glyph/chevron-left-circle';
+import ArrowRightCircleIcon from '@findable/icon/glyph/chevron-right-circle';
+import { colors } from '@findable/theme';
+import Button from '@findable/button';
+import { Shortcut } from '@findable/media-ui';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { ArrowsWrapper, RightWrapper, LeftWrapper, Arrow, hideControlsClassName, } from './styled';
 import { getSelectedIndex } from './utils';
 import { channel } from './analytics';

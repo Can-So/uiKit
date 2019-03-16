@@ -3,7 +3,7 @@ import { PureComponent, type Node } from 'react';
 import type { TagType } from '../types';
 
 /** ************************************************************************************************
-  This file exists so that we have a component we can pass the @atlaskit/readme Props component
+  This file exists so that we have a component we can pass the @findable/readme Props component
   We reuse the definition to define the itemShape in StatelessMultiSelect as well
 **************************************************************************************************/
 // eslint-disable-line react/no-unused-prop-types
@@ -23,7 +23,7 @@ type Props = {
   isSelected: boolean, // eslint-disable-line react/no-unused-prop-types
   /** Element before item. Used to provide avatar when desired. */
   elemBefore: Node, // eslint-disable-line react/no-unused-prop-types
-  /** Object which will pass on some properties to the @atlaskit/tag element when selected. */
+  /** Object which will pass on some properties to the @findable/tag element when selected. */
   tag: TagType, // eslint-disable-line react/no-unused-prop-types
 };
 

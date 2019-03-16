@@ -2,7 +2,7 @@
 
 import React, { type Node, type ComponentType } from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import {
   borderRadius,
   gridSize,
@@ -11,7 +11,7 @@ import {
   typography,
   createTheme,
   type ThemeProp,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 import { ActionItems, ActionItem } from '../styled/Dialog';
 import type { ActionsType } from '../types';
 

@@ -1,6 +1,6 @@
 import { StoryBookAuthProvider } from './authProvider';
 import { collectionNames } from './collectionNames';
-import { ContextFactory, Context } from '@atlaskit/media-core';
+import { ContextFactory, Context } from '@findable/media-core';
 import { mediaPickerAuthProvider } from './mediaPickerAuthProvider';
 import { userAuthProvider } from './userAuthProvider';
 

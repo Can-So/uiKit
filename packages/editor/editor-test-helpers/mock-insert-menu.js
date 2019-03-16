@@ -2,7 +2,7 @@ var _this = this;
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { bodiedExtensionData } from './mock-extension-data';
-import DevIcon from '@atlaskit/icon/glyph/editor/code';
+import DevIcon from '@findable/icon/glyph/editor/code';
 export var customInsertMenuItems = [
     {
         content: 'Import',

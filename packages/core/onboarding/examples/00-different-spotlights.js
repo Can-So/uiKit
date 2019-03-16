@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { typography } from '@atlaskit/theme';
-import Button from '@atlaskit/button';
-import UndoIcon from '@atlaskit/icon/glyph/editor/undo';
+import { typography } from '@findable/theme';
+import Button from '@findable/button';
+import UndoIcon from '@findable/icon/glyph/editor/undo';
 import { SpotlightCard } from '../src';
 
 import welcomeImage from './assets/this-is-new-jira.png';

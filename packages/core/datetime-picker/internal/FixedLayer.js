@@ -7,9 +7,9 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { layers } from '@atlaskit/theme';
+import { layers } from '@findable/theme';
 import ScrollLock from 'react-scrolllock';
-import { Popper, Manager, Reference } from '@atlaskit/popper';
+import { Popper, Manager, Reference } from '@findable/popper';
 
 /**
  * This component renders layered content with fixed positioning.

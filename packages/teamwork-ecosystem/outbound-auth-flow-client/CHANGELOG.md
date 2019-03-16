@@ -1,25 +1,25 @@
-# @atlaskit/outbound-auth-flow-client
+# @findable/outbound-auth-flow-client
 
 ## 2.0.0
-- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+- [major] [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
 
   - Dropped ES5 distributables from the typescript packages
 
 ## 1.0.4
-- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
-  - @atlaskit/docs@7.0.0
+- Updated dependencies [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
+  - @findable/docs@7.0.0
 
 ## 1.0.3
-- [patch] [63acecf699](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63acecf699):
+- [patch] [63acecf699](https://github.com/fnamazing/uiKit/commits/63acecf699):
 
-  - Fix output module target for @atlaskit/outbound-auth-flow-client
+  - Fix output module target for @findable/outbound-auth-flow-client
 
 ## 1.0.2
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/docs@6.0.0
 
 ## 1.0.1
-- [patch] Fix dist/ folder [20a099f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/20a099f)
+- [patch] Fix dist/ folder [20a099f](https://github.com/fnamazing/uiKit/commits/20a099f)
 
 ## 1.0.0
-- [major] Add @atlaskit/outbound-auth-flow-client [2ebc128](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2ebc128)
+- [major] Add @findable/outbound-auth-flow-client [2ebc128](https://github.com/fnamazing/uiKit/commits/2ebc128)

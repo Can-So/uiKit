@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import { EmojiDescriptionWithVariations, OnToneSelected } from '../../types';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
+import { FireAnalyticsEvent } from '@findable/analytics';
 export interface Props {
     emoji: EmojiDescriptionWithVariations;
     onToneSelected: OnToneSelected;

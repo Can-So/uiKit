@@ -1,7 +1,7 @@
 // @flow
 import React, { Fragment } from 'react';
-import Select from '@atlaskit/select';
-import Button from '@atlaskit/button';
+import Select from '@findable/select';
+import Button from '@findable/button';
 import Form, { Field, FormFooter, ErrorMessage } from '../src';
 
 const colors = [

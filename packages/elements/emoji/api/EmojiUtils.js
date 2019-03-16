@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { utils as serviceUtils, } from '@atlaskit/util-service-support';
+import { utils as serviceUtils, } from '@findable/util-service-support';
 import { isImageRepresentation, isSpriteServiceRepresentation, convertImageToMediaRepresentation, buildEmojiDescriptionWithAltRepresentation, } from '../type-helpers';
 import debug from '../util/logger';
 export var emojiRequest = function (provider, options) {

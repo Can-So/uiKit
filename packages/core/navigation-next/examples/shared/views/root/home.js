@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react';
-import { JiraWordmark as JiraWordmarkLogo } from '@atlaskit/logo';
-import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
-import IssuesIcon from '@atlaskit/icon/glyph/issues';
+import { JiraWordmark as JiraWordmarkLogo } from '@findable/logo';
+import DashboardIcon from '@findable/icon/glyph/dashboard';
+import FolderIcon from '@findable/icon/glyph/folder';
+import IssuesIcon from '@findable/icon/glyph/issues';
 
 import { LinkItem } from '../../components';
 import type { NavigationRendererItemType } from '../../../../src/';

@@ -1,7 +1,7 @@
 // @flow
 
 import styled from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 
 const ThemeColor = {
   Restricted: {

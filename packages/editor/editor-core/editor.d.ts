@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { EditorView } from 'prosemirror-view';
 import { IntlShape } from 'react-intl';
-import { Transformer } from '@atlaskit/editor-common';
+import { Transformer } from '@findable/editor-common';
 import EditorActions from './actions';
 import { EditorProps } from './types/editor-props';
 import { EventDispatcher } from './event-dispatcher';

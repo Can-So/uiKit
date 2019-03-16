@@ -3,8 +3,8 @@
 import React from 'react';
 import type { Element } from 'react';
 
-import Spinner from '@atlaskit/spinner';
-import { ButtonGroup } from '@atlaskit/button';
+import Spinner from '@findable/spinner';
+import { ButtonGroup } from '@findable/button';
 
 import {
   ActionsContainer,

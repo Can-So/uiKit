@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, code, Props, Example } from '@atlaskit/docs';
+import { md, code, Props, Example } from '@findable/docs';
 
 export default md`
   ### Custom Icons
@@ -15,7 +15,7 @@ export default md`
   individual icons to stop application bloat, and import just the component itself
   using the following:
 
-  ${code`import Icon from '@atlaskit/icon/dist/cjs/components/Icon'`}
+  ${code`import Icon from '@findable/icon/dist/cjs/components/Icon'`}
 
   This icon has the same props as all icons. See the bottom of this page for those.
 
@@ -37,7 +37,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/icon"
+      packageName="@findable/icon"
       Component={require('../examples/IconCustomExample').default}
       title="Using a custom Icon"
       source={require('!!raw-loader!../examples/IconCustomExample')}

@@ -12,7 +12,7 @@ import {
   thEmpty,
   mountWithIntl,
   selectRows,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { pluginKey } from '../../../../../plugins/table/pm-plugins/main';
 import {
   TablePluginState,

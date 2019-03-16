@@ -1,7 +1,7 @@
 // @flow
 
 import type { ComponentType, Node } from 'react';
-import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
+import type { WithAnalyticsEventsProps } from '@findable/analytics-next';
 
 export type DrawerWidth = 'narrow' | 'medium' | 'wide' | 'extended' | 'full';
 

@@ -1,6 +1,6 @@
 // @ts-ignore: unused variable
 import { css, Styles, StyledComponentClass } from 'styled-components';
-import { borderRadius, colors, fontSize } from '@atlaskit/theme';
+import { borderRadius, colors, fontSize } from '@findable/theme';
 import {
   browser,
   tableMarginTop,
@@ -10,7 +10,7 @@ import {
   akEditorSmallZIndex,
   akEditorTableNumberColumnWidth,
   akEditorTableBorder,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { scrollbarStyles } from '../../../ui/styles';
 import { TableCssClassName as ClassName } from '../types';
 

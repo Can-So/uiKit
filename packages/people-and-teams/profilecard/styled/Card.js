@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, gridSize, math, fontSizeSmall } from '@atlaskit/theme';
+import { borderRadius, gridSize, math, fontSizeSmall } from '@findable/theme';
 import { headerBgColor, headerBgColorDisabledUser, headerTextColorInactive, headerTextColor, appLabelBgColor, appLabelTextColor, labelTextColor, labelIconColor } from '../styled/constants';
 
 var getFullNameMargin = function getFullNameMargin(props) {

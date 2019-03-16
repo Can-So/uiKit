@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import AkButton from '@atlaskit/button';
+import AkButton from '@findable/button';
 var FileChooser = /** @class */ (function (_super) {
     tslib_1.__extends(FileChooser, _super);
     function FileChooser() {

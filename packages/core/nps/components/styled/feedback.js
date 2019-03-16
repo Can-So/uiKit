@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, colors } from '@atlaskit/theme';
+import { gridSize, colors } from '@findable/theme';
 export var ScoreContainer = styled.section.withConfig({
   displayName: "feedback__ScoreContainer",
   componentId: "yyw2a6-0"

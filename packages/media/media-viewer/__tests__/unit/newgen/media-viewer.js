@@ -6,8 +6,8 @@ jest.mock('../../../newgen/analytics/media-viewer', function () { return mockMed
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { Subject } from 'rxjs/Subject';
-import Button from '@atlaskit/button';
-import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
+import Button from '@findable/button';
+import { KeyboardEventWithKeyCode } from '@findable/media-test-helpers';
 import { createContext } from '../_stubs';
 import { Content } from '../../../newgen/content';
 import { MediaViewer } from '../../../newgen/media-viewer';

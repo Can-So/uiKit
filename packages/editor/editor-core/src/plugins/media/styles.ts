@@ -1,8 +1,8 @@
 // @ts-ignore: unused variable
 // prettier-ignore
 import { css, Styles, StyledComponentClass } from 'styled-components';
-import { mediaSingleSharedStyle } from '@atlaskit/editor-common';
-import { colors } from '@atlaskit/theme';
+import { mediaSingleSharedStyle } from '@findable/editor-common';
+import { colors } from '@findable/theme';
 
 export const mediaStyles = css`
   .ProseMirror {

@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/quick-search",
+  "name": "@findable/quick-search",
   "version": "6.0.0",
   "description": "A quick-search component",
   "license": "Apache-2.0",
@@ -16,14 +16,14 @@
     "name": "Quick Search",
     "team": "Search"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/analytics": "^5.0.0",
-    "@atlaskit/avatar": "^15.0.1",
-    "@atlaskit/field-base": "^12.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/item": "^9.0.0",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/analytics": "^5.0.0",
+    "@findable/avatar": "^15.0.1",
+    "@findable/field-base": "^12.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/item": "^9.0.0",
+    "@findable/theme": "^8.0.1",
     "babel-runtime": "^6.26.0"
   },
   "peerDependencies": {
@@ -31,10 +31,10 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/avatar": "^15.0.1",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/drawer": "^3.0.1",
-    "@atlaskit/navigation": "^34.0.1",
+    "@findable/avatar": "^15.0.1",
+    "@findable/docs": "^7.0.1",
+    "@findable/drawer": "^3.0.1",
+    "@findable/navigation": "^34.0.1",
     "enzyme": "^3.7.0",
     "prop-types": "^15.5.10",
     "react": "^16.4.0",

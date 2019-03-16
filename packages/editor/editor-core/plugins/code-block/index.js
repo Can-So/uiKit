@@ -1,6 +1,6 @@
 import * as React from 'react';
-import EditorCodeIcon from '@atlaskit/icon/glyph/editor/code';
-import { codeBlock } from '@atlaskit/adf-schema';
+import EditorCodeIcon from '@findable/icon/glyph/editor/code';
+import { codeBlock } from '@findable/adf-schema';
 import { createPlugin } from './pm-plugins/main';
 import { getToolbarConfig } from './toolbar';
 import keymap from './pm-plugins/keymaps';

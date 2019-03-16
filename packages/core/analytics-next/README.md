@@ -5,7 +5,7 @@ Tools for tracking interactions with UI components. Easily capture UI context an
 ## Installation
 
 ```sh
-yarn add @atlaskit/analytics-next
+yarn add @findable/analytics-next
 ```
 
 ## Usage

@@ -1,4 +1,4 @@
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { ReactionTooltip } from '../../../components/ReactionTooltip';

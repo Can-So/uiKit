@@ -1,4 +1,4 @@
-import { p, panel, defaultSchema } from '@atlaskit/editor-test-helpers';
+import { p, panel, defaultSchema } from '@findable/editor-test-helpers';
 import { panelNodeView } from '../../../../../plugins/panel/nodeviews/panel';
 
 describe('Panel - NodeView', () => {

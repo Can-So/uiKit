@@ -8,7 +8,7 @@ import {
   RequestHandler,
   Database,
 } from 'kakapo';
-import { TouchFileDescriptor } from '@atlaskit/media-store';
+import { TouchFileDescriptor } from '@findable/media-store';
 import * as uuid from 'uuid/v4';
 
 import { mapDataUriToBlob } from '../../utils';

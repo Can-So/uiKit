@@ -1,8 +1,8 @@
-import ErrorIcon from '@atlaskit/icon/glyph/error';
+import ErrorIcon from '@findable/icon/glyph/error';
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { Message } from '../../types';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 
 export interface Props {
   message: Message;

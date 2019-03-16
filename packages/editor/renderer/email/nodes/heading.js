@@ -1,4 +1,4 @@
-import { typography } from '@atlaskit/theme';
+import { typography } from '@findable/theme';
 import { createTag, applyMarks } from '../util';
 var getTypoMixin = function (tagName) {
     switch (tagName) {

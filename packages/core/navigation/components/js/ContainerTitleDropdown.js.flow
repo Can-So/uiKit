@@ -1,9 +1,9 @@
 // @flow
 import React, { PureComponent, type Node } from 'react';
 import { ThemeProvider, withTheme } from 'styled-components';
-import { itemThemeNamespace } from '@atlaskit/item';
-import AkDropdownMenu from '@atlaskit/dropdown-menu';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import { itemThemeNamespace } from '@findable/item';
+import AkDropdownMenu from '@findable/dropdown-menu';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 import memoizeOne from 'memoize-one';
 import AkNavigationItem from './NavigationItem';
 import ContainerTitleIcon from '../styled/ContainerTitleIcon';

@@ -1,6 +1,6 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 export var HiddenInput = styled.input.withConfig({
   displayName: "Radio__HiddenInput",
   componentId: "sc-8cbspg-0"

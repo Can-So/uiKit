@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import MockServiceProvider from './helpers/mock-provider';
 import { Container, Toolbar } from './helpers/styles';
 import {

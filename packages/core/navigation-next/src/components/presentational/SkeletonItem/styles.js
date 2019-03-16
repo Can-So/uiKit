@@ -1,6 +1,6 @@
 // @flow
 
-import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
+import { colors, gridSize as gridSizeFn } from '@findable/theme';
 import type { ModeColors } from '../../../theme/types';
 
 const gridSize = gridSizeFn();

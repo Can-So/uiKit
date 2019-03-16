@@ -4,7 +4,7 @@
 import * as tslib_1 from "tslib";
 import * as last from 'lodash.last';
 import * as merge from 'lodash.merge';
-import { DEFAULT_SOURCE, UI_EVENT_TYPE, SCREEN_EVENT_TYPE, TRACK_EVENT_TYPE, OPERATIONAL_EVENT_TYPE, } from '@atlaskit/analytics-gas-types';
+import { DEFAULT_SOURCE, UI_EVENT_TYPE, SCREEN_EVENT_TYPE, TRACK_EVENT_TYPE, OPERATIONAL_EVENT_TYPE, } from '@findable/analytics-gas-types';
 import { getSources, getActionSubject, getExtraAttributes, getPackageInfo, getComponents, } from './extract-data-from-event';
 import { version as listenerVersion } from '../version.json';
 var ATLASKIT_TAG = 'atlaskit';
@@ -25,7 +25,7 @@ var ATLASKIT_TAG = 'atlaskit';
  *
  * Analytics platform event format:
  *  event {
- *      type: @atlaskit/analytics-gas-types.EventType
+ *      type: @findable/analytics-gas-types.EventType
  *      payload {
  *          ...mandatoryAttributesBasedOnEventType
  *          attributes: {

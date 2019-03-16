@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import Button from '@atlaskit/button';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import ChevronUpIcon from '@atlaskit/icon/glyph/chevron-up';
+import Button from '@findable/button';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import ChevronUpIcon from '@findable/icon/glyph/chevron-up';
 
 import * as Styled from './styled';
 import { DropDownListProps } from './types';

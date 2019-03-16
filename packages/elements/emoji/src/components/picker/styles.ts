@@ -1,5 +1,5 @@
 import { style } from 'typestyle';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 
 import {
   akEmojiSelectedBackgroundColor,

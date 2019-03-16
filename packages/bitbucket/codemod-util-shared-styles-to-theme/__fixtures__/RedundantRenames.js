@@ -2,7 +2,7 @@
 import {
   akTypographyMixins as typo,
   akGridSizeUnitless as gridSize,
-} from "@atlaskit/util-shared-styles";
+} from "@findable/util-shared-styles";
 import styled from "styled-components";
 const gridSizePx = `${gridSize}px`;
 const Fonty = styled.div`
@@ -11,7 +11,7 @@ const Fonty = styled.div`
 `;
 //////
 // @flow
-import { gridSize, typography } from "@atlaskit/theme";
+import { gridSize, typography } from "@findable/theme";
 import styled from "styled-components";
 const gridSizePx = `${gridSize()}px`;
 const Fonty = styled.div`

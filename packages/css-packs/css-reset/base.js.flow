@@ -5,7 +5,7 @@ import {
   gridSize,
   fontFamily,
   codeFontFamily,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 import evaluateInner from './utils/evaluate-inner';
 
 export default evaluateInner`

@@ -1,7 +1,7 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { TableMap } from 'prosemirror-tables';
 import * as classnames from 'classnames';
-import { akEditorTableToolbarSize } from '@atlaskit/editor-common';
+import { akEditorTableToolbarSize } from '@findable/editor-common';
 import { updateControls, updateResizeHandle, updateColumnWidth, resizeColumn, } from './actions';
 import Resizer from './resizer/resizer';
 import { getLayoutSize, pointsAtCell, edgeCell, currentColWidth, domCellAround, } from './utils';

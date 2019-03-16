@@ -1,7 +1,7 @@
 import rafSchedule from 'raf-schd';
 import { EditorView } from 'prosemirror-view';
 import { Node, DOMSerializer, DOMOutputSpec } from 'prosemirror-model';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 
 const MATCH_NEWLINES = new RegExp('\n', 'g');
 

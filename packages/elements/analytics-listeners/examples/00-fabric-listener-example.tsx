@@ -1,4 +1,4 @@
-import { AnalyticsContext } from '@atlaskit/analytics-next';
+import { AnalyticsContext } from '@findable/analytics-next';
 import * as React from 'react';
 import FabricAnalyticsListeners from '../src/FabricAnalyticsListeners';
 import { FabricChannel } from '../src/types';
@@ -42,7 +42,7 @@ function Example() {
         <AnalyticsContext
           data={{
             component: 'page',
-            packageName: '@atlaskit/page',
+            packageName: '@findable/page',
             packageVersion: '2.0.1',
             attributes: { pageName: 'myPage' },
             source: 'homePage',
@@ -51,7 +51,7 @@ function Example() {
           <AnalyticsContext
             data={{
               component: 'myComponent',
-              packageName: '@atlaskit/my-component',
+              packageName: '@findable/my-component',
               packageVersion: '1.0.0',
               attributes: { customAttr: true },
               source: 'componentPage',

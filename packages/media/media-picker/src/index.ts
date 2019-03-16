@@ -21,7 +21,7 @@ import {
   Dropzone,
 } from './components/types';
 
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 
 export const isBinaryUploader = (
   component: any,

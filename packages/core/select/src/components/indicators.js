@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { components } from 'react-select';
-import Spinner from '@atlaskit/spinner';
-import SelectClearIcon from '@atlaskit/icon/glyph/select-clear';
-import DownIcon from '@atlaskit/icon/glyph/hipchat/chevron-down';
+import Spinner from '@findable/spinner';
+import SelectClearIcon from '@findable/icon/glyph/select-clear';
+import DownIcon from '@findable/icon/glyph/hipchat/chevron-down';
 
 // indicators
 export const ClearIndicator = (props: any) => (

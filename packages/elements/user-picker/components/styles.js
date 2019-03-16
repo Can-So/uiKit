@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { AVATAR_SIZES, BORDER_WIDTH } from '@atlaskit/avatar';
-import { colors } from '@atlaskit/theme';
+import { AVATAR_SIZES, BORDER_WIDTH } from '@findable/avatar';
+import { colors } from '@findable/theme';
 import memoizeOne from 'memoize-one';
 import { getAvatarSize } from './utils';
 export var BORDER_PADDING = 6;

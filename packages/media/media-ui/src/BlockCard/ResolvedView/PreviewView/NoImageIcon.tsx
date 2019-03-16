@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-// TODO: This file should be removed as soon as we get the new Icons in @atlaskit/icon
+// TODO: This file should be removed as soon as we get the new Icons in @findable/icon
 // MD-33
 
 export default () => (

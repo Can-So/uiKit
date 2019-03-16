@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { md, Example, code } from '@atlaskit/docs';
+import { md, Example, code } from '@findable/docs';
 
 export default md`
-This component is an integration layer between @atlaskit/editor-core and native iOS and Android editors.
+This component is an integration layer between @findable/editor-core and native iOS and Android editors.
 
   ## Usage
 
   Use the component in your React app as follows:
   
-  ${code`import { MobileEditor } from '@atlaskit/editor-mobile-bridge';`}
+  ${code`import { MobileEditor } from '@findable/editor-mobile-bridge';`}
 
   ${(
     <Example
-      packageName="@atlaskit/editor-mobile-bridge"
+      packageName="@findable/editor-mobile-bridge"
       Component={require('../examples/0-status').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-status')}

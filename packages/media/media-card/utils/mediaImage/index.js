@@ -5,7 +5,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Component } from 'react';
-import { getCssFromImageOrientation, isRotated } from '@atlaskit/media-ui';
+import { getCssFromImageOrientation, isRotated } from '@findable/media-ui';
 import { ImageComponent } from './styled';
 var MediaImage = /** @class */ (function (_super) {
     tslib_1.__extends(MediaImage, _super);

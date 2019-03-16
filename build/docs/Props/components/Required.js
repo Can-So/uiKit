@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 var Required = styled.span.withConfig({
   displayName: "Required",
   componentId: "sc-4t69oz-0"

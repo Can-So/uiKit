@@ -1,6 +1,6 @@
 // @flow
-import { akCodeFontFamily as codeFont } from "@atlaskit/util-shared-styles";
-import { colors } from "@atlaskit/theme";
+import { akCodeFontFamily as codeFont } from "@findable/util-shared-styles";
+import { colors } from "@findable/theme";
 import styled from "styled-components";
 
 export const SourceLine = styled.td`
@@ -10,7 +10,7 @@ export const SourceLine = styled.td`
 `;
 //////
 // @flow
-import { colors, codeFontFamily } from "@atlaskit/theme";
+import { colors, codeFontFamily } from "@findable/theme";
 import styled from "styled-components";
 
 export const SourceLine = styled.td`

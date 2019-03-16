@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { FileIdentifier } from '@atlaskit/media-core';
-import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
-import { colors } from '@atlaskit/theme';
-import Button from '@atlaskit/button';
-import { Shortcut } from '@atlaskit/media-ui';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { FileIdentifier } from '@findable/media-core';
+import ArrowLeftCircleIcon from '@findable/icon/glyph/chevron-left-circle';
+import ArrowRightCircleIcon from '@findable/icon/glyph/chevron-right-circle';
+import { colors } from '@findable/theme';
+import Button from '@findable/button';
+import { Shortcut } from '@findable/media-ui';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import {
   ArrowsWrapper,
   RightWrapper,

@@ -5,7 +5,7 @@ This component displays content in a layer that sits above the rest of the page 
 # Installation
 
 ```sh
-yarn add @atlaskit/modal-dialog
+yarn add @findable/modal-dialog
 ```
 
 ## Usage

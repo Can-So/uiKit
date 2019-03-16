@@ -3,7 +3,7 @@ import _objectSpread from "@babel/runtime/helpers/objectSpread";
 import { css as _css } from "emotion";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 var gridSize = gridSizeFn();
 export var Container = function Container(props) {
   return React.createElement("div", props);

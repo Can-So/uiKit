@@ -11,13 +11,13 @@ import {
   isExternalImageIdentifier,
   isDifferentIdentifier,
   isImageRepresentationReady,
-} from '@atlaskit/media-core';
-import { AnalyticsContext } from '@atlaskit/analytics-next';
-import DownloadIcon from '@atlaskit/icon/glyph/download';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+} from '@findable/media-core';
+import { AnalyticsContext } from '@findable/analytics-next';
+import DownloadIcon from '@findable/icon/glyph/download';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import { Subscription } from 'rxjs/Subscription';
 import { IntlProvider } from 'react-intl';
-import { MediaViewer, MediaViewerDataSource } from '@atlaskit/media-viewer';
+import { MediaViewer, MediaViewerDataSource } from '@findable/media-viewer';
 import {
   CardAnalyticsContext,
   CardAction,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 
 type Props = {
   spacing: string;

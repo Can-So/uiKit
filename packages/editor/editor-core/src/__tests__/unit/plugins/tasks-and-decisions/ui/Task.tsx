@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ResourcedTaskItem, TaskItem } from '@atlaskit/task-decision';
-import { taskDecision } from '@atlaskit/util-data-test';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { ResourcedTaskItem, TaskItem } from '@findable/task-decision';
+import { taskDecision } from '@findable/util-data-test';
+import { ProviderFactory } from '@findable/editor-common';
+import { mountWithIntl } from '@findable/editor-test-helpers';
 import Task from '../../../../../plugins/tasks-and-decisions/ui/Task';
 // avoid polluting test logs with error message in console
 // please ensure you fix it if you expect console.error to be thrown
@@ -17,7 +17,7 @@ const contextIdentifierProvider = Promise.resolve({
   containerId: 'def',
 });
 
-describe('@atlaskit/editor-core/ui/Task', () => {
+describe('@findable/editor-core/ui/Task', () => {
   let providerFactory: ProviderFactory;
 
   beforeEach(() => {

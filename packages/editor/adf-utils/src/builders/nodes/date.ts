@@ -1,4 +1,4 @@
-import { DateDefinition } from '@atlaskit/adf-schema';
+import { DateDefinition } from '@findable/adf-schema';
 
 export const date = (
   attrs: DateDefinition['attrs'] = { timestamp: '' },

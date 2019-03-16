@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
-import { EditorProps } from '@atlaskit/editor-core';
-import { RendererProps } from '@atlaskit/renderer';
+import { EditorProps } from '@findable/editor-core';
+import { RendererProps } from '@findable/renderer';
 export interface Props {
     editorProps?: Partial<EditorProps>;
     rendererProps?: Partial<RendererProps>;

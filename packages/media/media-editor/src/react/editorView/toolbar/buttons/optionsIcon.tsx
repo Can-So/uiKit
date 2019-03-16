@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import MediaServicesButtonOptionIcon from '@atlaskit/icon/glyph/media-services/button-option';
+import MediaServicesButtonOptionIcon from '@findable/icon/glyph/media-services/button-option';
 import { OptionsIconWrapper } from './styles';
 
 export interface OptionsIconProps {

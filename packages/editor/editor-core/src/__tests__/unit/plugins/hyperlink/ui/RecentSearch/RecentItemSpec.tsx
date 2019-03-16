@@ -6,7 +6,7 @@ import RecentItem, {
 } from '../../../../../../plugins/hyperlink/ui/RecentSearch/RecentItem';
 
 const noop = () => {};
-describe('@atlaskit/editor-core/ui/RecentSearch/RecentItem', () => {
+describe('@findable/editor-core/ui/RecentSearch/RecentItem', () => {
   it('should render the item', () => {
     const item = {
       objectId: '1',

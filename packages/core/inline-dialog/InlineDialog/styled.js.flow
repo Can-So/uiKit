@@ -8,7 +8,7 @@ import {
   themed,
   elevation,
   layers,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 
 const backgroundColor = themed({ light: colors.N0, dark: colors.DN50 });
 const textColor = themed({ light: colors.N900, dark: colors.DN600 });

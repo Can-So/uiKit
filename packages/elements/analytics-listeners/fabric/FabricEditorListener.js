@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { FabricChannel } from '../types';
 import { handleEvent } from './handle-event';
 export var EDITOR_TAG = 'fabricEditor';

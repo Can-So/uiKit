@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
-  \`\`\`NotificationIndicator\`\`\` is a React component that wraps an existing @atlaskit/badge component with
+  \`\`\`NotificationIndicator\`\`\` is a React component that wraps an existing @findable/badge component with
   additional functionalities:
   
   * Populate its own state by fetching data through the provided notification-log-client.
@@ -11,7 +11,7 @@ export default md`
 
   ## Usage
 
-  ${code`import { NotificationIndicator } from '@atlaskit/notification-indicator';`}
+  ${code`import { NotificationIndicator } from '@findable/notification-indicator';`}
 
   ${(
     <Example

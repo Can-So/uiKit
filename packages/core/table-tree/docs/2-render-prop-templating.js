@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props } from '@findable/docs';
 
 export default md`
   For use cases that need fine-grained control, the \`TableTree\` allows for templating based on the 
@@ -14,7 +14,7 @@ export default md`
   
   ${(
     <Example
-      packageName="@atlaskit/table-tree"
+      packageName="@findable/table-tree"
       Component={
         require('../examples/render-prop-async-with-update-items').default
       }
@@ -28,7 +28,7 @@ export default md`
   
   ${(
     <Example
-      packageName="@atlaskit/table-tree"
+      packageName="@findable/table-tree"
       Component={require('../examples/render-prop-no-headers').default}
       source={require('!!raw-loader!../examples/render-prop-no-headers')}
       title="No headers"

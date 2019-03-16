@@ -5,7 +5,7 @@ A React package that contains icons.
 ## Installation
 
 ```sh
-yarn add @atlaskit/icon
+yarn add @findable/icon
 ```
 
 ## Usage

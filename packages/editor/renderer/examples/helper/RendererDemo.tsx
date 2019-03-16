@@ -4,20 +4,20 @@ import {
   profilecard as profilecardUtils,
   emoji,
   taskDecision,
-} from '@atlaskit/util-data-test';
-import { CardEvent } from '@atlaskit/media-card';
-import { defaultSchema, ActionMarkAction } from '@atlaskit/adf-schema';
+} from '@findable/util-data-test';
+import { CardEvent } from '@findable/media-card';
+import { defaultSchema, ActionMarkAction } from '@findable/adf-schema';
 import {
   CardSurroundings,
   ProviderFactory,
   ExtensionHandlers,
   EventHandlers,
-} from '@atlaskit/editor-common';
-import Button from '@atlaskit/button';
+} from '@findable/editor-common';
+import Button from '@findable/button';
 import {
   storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import * as Clock from 'react-live-clock';
 
 import { document } from './story-data';
@@ -27,7 +27,7 @@ import {
   RendererAppearance,
 } from '../../src/ui/Renderer';
 
-import { AkProfileClient, modifyResponse } from '@atlaskit/profilecard';
+import { AkProfileClient, modifyResponse } from '@findable/profilecard';
 
 import { EmailSerializer, renderDocument, TextSerializer } from '../../src';
 

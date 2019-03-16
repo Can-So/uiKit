@@ -1,5 +1,5 @@
 import { findPositionOfNodeBefore, findDomRefAtPos } from 'prosemirror-utils';
-import { tableMarginTop } from '@atlaskit/editor-common';
+import { tableMarginTop } from '@findable/editor-common';
 import { Side } from './selection';
 import { TableCssClassName } from '../table/types';
 import { tableInsertColumnButtonSize } from '../table/ui/styles';

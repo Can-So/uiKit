@@ -1,11 +1,11 @@
 import * as tslib_1 from "tslib";
-import { utils as serviceUtils, } from '@atlaskit/util-service-support';
+import { utils as serviceUtils, } from '@findable/util-service-support';
 import { buildEmojiDescriptionWithAltRepresentation, isMediaRepresentation, isMediaEmoji, convertImageToMediaRepresentation, isLoadedMediaEmoji, } from '../../type-helpers';
 import MediaEmojiCache from './MediaEmojiCache';
 import { denormaliseEmojiServiceResponse, emojiRequest, getAltRepresentation, } from '../EmojiUtils';
 import TokenManager from './TokenManager';
 import debug from '../../util/logger';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 // Assume media is 95% of total upload time.
 export var mediaProportionOfProgress = 95 / 100;
 var SiteEmojiResource = /** @class */ (function () {

@@ -1,6 +1,6 @@
 // @flow
 
-import { colors, fontSize, gridSize as gridSizeFn } from '@atlaskit/theme';
+import { colors, fontSize, gridSize as gridSizeFn } from '@findable/theme';
 
 import type { ItemPresentationProps } from './types';
 import type { ModeColors } from '../../../theme/types';

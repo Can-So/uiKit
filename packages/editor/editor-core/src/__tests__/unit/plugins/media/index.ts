@@ -3,7 +3,7 @@ import 'whatwg-fetch';
 import * as assert from 'assert';
 import { EditorView } from 'prosemirror-view';
 
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   doc,
   h1,
@@ -29,7 +29,7 @@ import {
   sendKeyToPm,
   mountWithIntl,
   Refs,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   stateKey as mediaPluginKey,
@@ -44,9 +44,9 @@ import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
 import quickInsertPlugin from '../../../../plugins/quick-insert';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { temporaryMedia, temporaryMediaGroup } from './_utils';
-import { SmartMediaEditor } from '@atlaskit/media-editor';
+import { SmartMediaEditor } from '@findable/media-editor';
 
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 

@@ -14,8 +14,8 @@
     "noImplicitAny": true,
     "baseUrl": "./",
     "paths": {
-      "@atlaskit/analytics-next": [
-        "node_modules/@atlaskit/analytics-next-types"
+      "@findable/analytics-next": [
+        "node_modules/@findable/analytics-next-types"
       ]
     }
   }

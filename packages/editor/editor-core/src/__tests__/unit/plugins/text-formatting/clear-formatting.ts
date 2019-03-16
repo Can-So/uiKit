@@ -1,4 +1,4 @@
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import {
   createEditorFactory,
   a as link,
@@ -23,7 +23,7 @@ import {
   strong,
   underline,
   textColor,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { pluginKey as clearFormattingPluginKey } from '../../../../plugins/text-formatting/pm-plugins/clear-formatting';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import textColorPlugin from '../../../../plugins/text-color';
@@ -34,7 +34,7 @@ import {
   clearFormattingWithAnalytics,
 } from '../../../../plugins/text-formatting/commands/clear-formatting';
 import { checkFormattingIsPresent } from '../../../../plugins/text-formatting/utils';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { INPUT_METHOD } from '../../../../plugins/analytics';
 
 describe('clear-formatting', () => {

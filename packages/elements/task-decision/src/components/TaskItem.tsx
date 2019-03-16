@@ -4,8 +4,8 @@ import { CheckBoxWrapper } from '../styled/TaskItem';
 
 import Item from './Item';
 import { Appearance, ContentRef, User } from '../types';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import { createAndFireEventInElementsChannel } from '../analytics';
 
 export interface Props {

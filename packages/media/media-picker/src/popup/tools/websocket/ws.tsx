@@ -1,5 +1,5 @@
 import * as url from 'url';
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 
 import { randomInt } from '../randomInt';
 import { WsMessageData } from './wsMessageData';

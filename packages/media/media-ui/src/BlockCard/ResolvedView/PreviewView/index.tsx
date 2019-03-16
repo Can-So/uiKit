@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ImageLoader from 'react-render-image';
-import ImageIcon from '@atlaskit/icon/glyph/image';
+import ImageIcon from '@findable/icon/glyph/image';
 import NoImageIcon from './NoImageIcon';
 import { Wrapper, ImageWrapper, IconWrapper } from './styled';
 

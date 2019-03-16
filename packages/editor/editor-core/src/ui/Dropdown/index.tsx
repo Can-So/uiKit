@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import DropdownList from '@atlaskit/droplist';
-import { Popup } from '@atlaskit/editor-common';
+import DropdownList from '@findable/droplist';
+import { Popup } from '@findable/editor-common';
 
 export interface Props {
   mountTo?: HTMLElement;
@@ -21,7 +21,7 @@ export interface State {
 }
 
 /**
- * Wrapper around @atlaskit/droplist which uses Popup and Portal to render
+ * Wrapper around @findable/droplist which uses Popup and Portal to render
  * droplist outside of "overflow: hidden" containers when needed.
  *
  * Also it controls popper's placement.

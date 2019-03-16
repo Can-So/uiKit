@@ -1,4 +1,4 @@
-import { md, code } from '@atlaskit/docs';
+import { md, code } from '@findable/docs';
 
 export default md`
   # Editor Labs
@@ -12,8 +12,8 @@ export default md`
   The new code will look like:
 
 ${code`
-import { CollapsedEditor } from '@atlaskit/editor-core';
-import { ConfluenceTransformer } from '@atlaskit/editor-confluence-transformer';
+import { CollapsedEditor } from '@findable/editor-core';
+import { ConfluenceTransformer } from '@findable/editor-confluence-transformer';
 
 class ExampleEditorIntegration extends React.Component {
   renderEditorAsync = (Editor, module) => (
@@ -39,7 +39,7 @@ class ExampleEditorIntegration extends React.Component {
 }
 `}
 
-  The \`renderEditor\` prop will code-split the rest of @atlaskit/editor-core behind the scenes, allowing products to consume the least amount of JS to load the initial page as possible.
+  The \`renderEditor\` prop will code-split the rest of @findable/editor-core behind the scenes, allowing products to consume the least amount of JS to load the initial page as possible.
 
   To get most of these benefits, the products will need to:
    * support tree-shaking in their source
@@ -52,7 +52,7 @@ class ExampleEditorIntegration extends React.Component {
   This change introduces a breaking API change that passes the EditorActions object as the argument instead.
 
 ${code`
-  import { EditorWithActions } from '@atlaskit/editor-core';
+  import { EditorWithActions } from '@findable/editor-core';
 
   handleSave = actions => {
     actions.getValue().then(value => console.log(value));
@@ -68,7 +68,7 @@ ${code`
     Editor,
     WithEditorActions,
     EditorContext,
-  } from '@atlaskit/editor-core';
+  } from '@findable/editor-core';
 
   handleSave = actions => () => {
     actions.getValue().then(value => console.log(value));
@@ -86,7 +86,7 @@ ${code`
   or
 
 ${code`
-  import { Editor, WithEditorActions, EditorContext } from '@atlaskit/editor-core';
+  import { Editor, WithEditorActions, EditorContext } from '@findable/editor-core';
 
   class ExtendedEditor extends React.Component {
     handleSave = () => {

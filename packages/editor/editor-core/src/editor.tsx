@@ -8,8 +8,8 @@ import {
   Transformer,
   BaseTheme,
   WidthProvider,
-} from '@atlaskit/editor-common';
-import { Context as CardContext } from '@atlaskit/smart-card';
+} from '@findable/editor-common';
+import { Context as CardContext } from '@findable/smart-card';
 
 import { getUiComponent } from './create-editor';
 import EditorActions from './actions';

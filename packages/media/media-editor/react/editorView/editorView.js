@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { injectIntl } from 'react-intl';
 import { MediaEditor } from '../mediaEditor';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import Toolbar, { tools } from './toolbar/toolbar';
 import { EditorContainer } from './styles';
 var DEFAULT_WIDTH = 845;

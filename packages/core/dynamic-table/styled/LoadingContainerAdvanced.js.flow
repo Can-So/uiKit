@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 export const Container = styled.div`
   margin-bottom: ${gridSize() * 3}px;

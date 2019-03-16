@@ -1,5 +1,5 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
-import { Transformer } from '@atlaskit/editor-common';
+import { Transformer } from '@findable/editor-common';
 export interface TransformerOptions {
     disableBitbucketLinkStripping?: boolean;
 }

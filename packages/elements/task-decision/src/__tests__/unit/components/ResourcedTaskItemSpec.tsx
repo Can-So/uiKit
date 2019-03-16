@@ -2,8 +2,8 @@ import * as React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import FabricAnalyticsListener, {
   AnalyticsWebClient,
-} from '@atlaskit/analytics-listeners';
-import { waitUntil } from '@atlaskit/util-common-test';
+} from '@findable/analytics-listeners';
+import { waitUntil } from '@findable/util-common-test';
 import ResourcedTaskItem from '../../../components/ResourcedTaskItem';
 import TaskItem from '../../../components/TaskItem';
 import Participants from '../../../components/Participants';

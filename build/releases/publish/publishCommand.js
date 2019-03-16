@@ -1,7 +1,7 @@
 /* eslint-disable */
 const bolt = require('bolt');
-const logger = require('@atlaskit/build-utils/logger');
-const git = require('@atlaskit/build-utils/git');
+const logger = require('@findable/build-utils/logger');
+const git = require('@findable/build-utils/git');
 const resolveUserConfig = require('../utils/resolveConfig');
 const baseConfig = require('../initialize/initial/config');
 

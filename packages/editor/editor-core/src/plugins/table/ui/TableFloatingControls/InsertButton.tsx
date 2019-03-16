@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { SyntheticEvent } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { akEditorTableNumberColumnWidth } from '@atlaskit/editor-common';
-import Tooltip from '@atlaskit/tooltip';
+import { akEditorTableNumberColumnWidth } from '@findable/editor-common';
+import Tooltip from '@findable/tooltip';
 import { TableCssClassName as ClassName } from '../../types';
 import { tableToolbarSize } from '../styles';
 import tableMessages from '../messages';

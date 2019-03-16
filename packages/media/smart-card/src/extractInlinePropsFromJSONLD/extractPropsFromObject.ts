@@ -1,4 +1,4 @@
-import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
+import { InlineCardResolvedViewProps } from '@findable/media-ui';
 
 export function extractInlineViewPropsFromObject(
   json: any,

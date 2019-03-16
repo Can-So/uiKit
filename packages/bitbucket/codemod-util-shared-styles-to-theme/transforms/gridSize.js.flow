@@ -7,7 +7,7 @@ export default function gridSize(root: any, j: any) {
   const sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles',
+      value: '@findable/util-shared-styles',
     },
   });
   if (!sharedStylesImport.size()) {
@@ -29,7 +29,7 @@ export default function gridSize(root: any, j: any) {
   localName = addNamedImport(
     root,
     j,
-    '@atlaskit/theme',
+    '@findable/theme',
     'gridSize',
     localName,
     sharedStylesImport,
@@ -114,7 +114,7 @@ export default function gridSize(root: any, j: any) {
   removeNamedImport(
     root,
     j,
-    '@atlaskit/util-shared-styles',
+    '@findable/util-shared-styles',
     'akGridSize',
     importSpecifier,
   );

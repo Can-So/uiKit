@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   Tags are designed to be displayed within a [Tag Group](/components/tag-group).
@@ -17,11 +17,11 @@ export default md`
 
   ## Usage
 
-  ${code`import Tag from '@atlaskit/tag';`}
+  ${code`import Tag from '@findable/tag';`}
 
   ${(
     <Example
-      packageName="@atlaskit/tag"
+      packageName="@findable/tag"
       Component={require('../examples/0-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-basic')}
@@ -30,7 +30,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/tag"
+      packageName="@findable/tag"
       Component={require('../examples/1-colors').default}
       title="Colors"
       source={require('!!raw-loader!../examples/1-colors')}

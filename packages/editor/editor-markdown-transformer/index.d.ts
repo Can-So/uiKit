@@ -1,4 +1,4 @@
-import { Transformer } from '@atlaskit/editor-common';
+import { Transformer } from '@findable/editor-common';
 import * as MarkdownIt from 'markdown-it';
 import { Schema, Node as PMNode } from 'prosemirror-model';
 export declare type Markdown = string;

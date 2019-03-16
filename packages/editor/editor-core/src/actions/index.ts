@@ -1,7 +1,7 @@
 import { Node } from 'prosemirror-model';
 import { TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { Transformer } from '@atlaskit/editor-common';
+import { Transformer } from '@findable/editor-common';
 import {
   compose,
   getEditorValueWithMedia,

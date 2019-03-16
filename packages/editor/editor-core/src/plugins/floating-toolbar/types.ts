@@ -7,7 +7,7 @@ import { Command } from '../../types';
 import { ButtonAppearance } from './ui/Button';
 import { DropdownOptions, RenderOptionsPropsT } from './ui/Dropdown';
 import { SelectOptions, SelectOption } from './ui/Select';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import React from 'react';
 
 export type Icon = React.ComponentType<{ label: string }>;

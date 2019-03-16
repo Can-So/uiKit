@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, gridSize, math } from '@atlaskit/theme';
+import { borderRadius, gridSize, math } from '@findable/theme';
 import { flagBackgroundColor, flagBorderColor, flagTextColor, flagShadowColor, flagFocusRingColor } from '../../theme';
 
 var getBoxShadow = function getBoxShadow(props) {

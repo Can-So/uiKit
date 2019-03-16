@@ -4,7 +4,7 @@ A component for displaying and editing values in fields.
 
 ## Installation
 
-yarn add @atlaskit/inline-edit
+yarn add @findable/inline-edit
 
 ## Usage
 

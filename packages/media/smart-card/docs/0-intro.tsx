@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { code, md, Example, Props } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@findable/docs';
 
 export default md`
   Turns a URL into a card with metadata sourced from either:
@@ -11,7 +11,7 @@ export default md`
 
   ## Usage
 
-  ${code`import { Provider, Card } from '@atlaskit/smart-card';`}
+  ${code`import { Provider, Card } from '@findable/smart-card';`}
 
   ${(
     <Example

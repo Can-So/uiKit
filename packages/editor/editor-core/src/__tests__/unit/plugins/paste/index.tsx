@@ -30,7 +30,7 @@ import {
   hardBreak,
   a,
   MockMacroProvider,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { TextSelection } from 'prosemirror-state';
 import mediaPlugin from '../../../../plugins/media';
 import codeBlockPlugin from '../../../../plugins/code-block';
@@ -38,7 +38,7 @@ import extensionPlugin from '../../../../plugins/extension';
 import listPlugin from '../../../../plugins/lists';
 import tablesPlugin from '../../../../plugins/table';
 import macroPlugin, { setMacroProvider } from '../../../../plugins/macro';
-import { uuid } from '@atlaskit/adf-schema';
+import { uuid } from '@findable/adf-schema';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import { panelPlugin } from '../../../../plugins';
 

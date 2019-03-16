@@ -7,7 +7,7 @@ import {
   getCellsRefsInColumn,
 } from './utils';
 
-import { tableNewColumnMinWidth } from '@atlaskit/editor-common';
+import { tableNewColumnMinWidth } from '@findable/editor-common';
 
 export default class ColumnState {
   constructor(public width: number, public minWidth: number = 0) {

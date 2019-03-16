@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 export var ResultItemGroupHeader = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  margin-left: -", "px;\n  margin-top: ", "px;\n"], ["\n  display: flex;\n  margin-left: -", "px;\n  margin-top: ", "px;\n"])), gridSize() * 1.5, gridSize() * 1.5);
 export var ResultItemGroupTitle = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  font-size: 11px;\n  line-height: ", "px;\n  font-weight: 600;\n"], ["\n  font-size: 11px;\n  line-height: ", "px;\n  font-weight: 600;\n"])), gridSize() * 2);
 export var ResultItemAfter = styled.div(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n  min-width: ", ";\n"], ["\n  min-width: ", ";\n"])), function (_a) {

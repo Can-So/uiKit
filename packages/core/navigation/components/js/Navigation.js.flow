@@ -1,5 +1,5 @@
 // @flow
-import '@atlaskit/polyfills/object-assign';
+import '@findable/polyfills/object-assign';
 import React, {
   PureComponent,
   type Node,
@@ -7,13 +7,13 @@ import React, {
   type Element,
   type ElementRef,
 } from 'react';
-import { getTheme } from '@atlaskit/theme';
+import { getTheme } from '@findable/theme';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
   type WithAnalyticsEventsProps,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import {
   name as packageName,
   version as packageVersion,

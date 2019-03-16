@@ -1,19 +1,19 @@
 // @flow
 
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
-import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
-import IssuesIcon from '@atlaskit/icon/glyph/issues';
-import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
-import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
-import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
+import Avatar from '@findable/avatar';
+import AddIcon from '@findable/icon/glyph/add';
+import BacklogIcon from '@findable/icon/glyph/backlog';
+import BoardIcon from '@findable/icon/glyph/board';
+import DashboardIcon from '@findable/icon/glyph/dashboard';
+import FolderIcon from '@findable/icon/glyph/folder';
+import GraphLineIcon from '@findable/icon/glyph/graph-line';
+import IssuesIcon from '@findable/icon/glyph/issues';
+import QuestionCircleIcon from '@findable/icon/glyph/question-circle';
+import SearchIcon from '@findable/icon/glyph/search';
+import ShortcutIcon from '@findable/icon/glyph/shortcut';
+import { JiraIcon, JiraWordmark } from '@findable/logo';
+import { colors, gridSize as gridSizeFn } from '@findable/theme';
 
 import {
   ContainerHeader,

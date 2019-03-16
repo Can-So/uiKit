@@ -2,12 +2,12 @@ import { expect } from 'chai';
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
-import { createSchema, doc } from '@atlaskit/adf-schema';
-import { browser } from '@atlaskit/editor-common';
+import { createSchema, doc } from '@findable/adf-schema';
+import { browser } from '@findable/editor-common';
 import {
   createEditorFactory,
   mountWithIntl,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import HelpDialog, {
   formatting,
   getComponentFromKeymap,
@@ -21,7 +21,7 @@ import { EventDispatcher } from '../../../../../src/event-dispatcher';
 const intlProvider = new IntlProvider({ locale: 'en' });
 const { intl } = intlProvider.getChildContext();
 
-describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
+describe('@findable/editor-core/editor/ui/HelpDialog', () => {
   let editorActions: EditorActions;
   let editorView: EditorView;
   const createEditor = createEditorFactory();

@@ -5,7 +5,7 @@ Use this component to display extra information about an element by displaying a
 ## Installation
 
 ```sh
-yarn add @atlaskit/tooltip
+yarn add @findable/tooltip
 ```
 
 ## Usage

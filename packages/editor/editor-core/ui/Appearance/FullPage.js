@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
-import { akEditorMenuZIndex } from '@atlaskit/editor-common';
+import { colors } from '@findable/theme';
+import { akEditorMenuZIndex } from '@findable/editor-common';
 import Avatars from '../../plugins/collab-edit/ui/avatars';
 import PluginSlot from '../PluginSlot';
 import Toolbar from '../Toolbar';

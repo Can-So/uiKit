@@ -1,4 +1,4 @@
-import { FileIdentifier, ExternalImageIdentifier } from '@atlaskit/media-core';
+import { FileIdentifier, ExternalImageIdentifier } from '@findable/media-core';
 import { generateIdentifierKey } from '../../utils/generateIdentifierKey';
 
 describe('generateIdentifierKey()', () => {

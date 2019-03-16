@@ -1,2 +1,2 @@
-import { Identifier } from '@atlaskit/media-core';
+import { Identifier } from '@findable/media-core';
 export declare const generateIdentifierKey: (identifier: Identifier) => string;

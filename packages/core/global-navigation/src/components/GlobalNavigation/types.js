@@ -1,7 +1,7 @@
 // @flow
 
 import type { ComponentType } from 'react';
-import type { DrawerWidth } from '@atlaskit/drawer';
+import type { DrawerWidth } from '@findable/drawer';
 
 export type DrawerContentProps = { closeDrawer: () => void };
 

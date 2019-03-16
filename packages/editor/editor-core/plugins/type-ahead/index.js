@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { typeAheadQuery } from '@atlaskit/adf-schema';
+import { typeAheadQuery } from '@findable/adf-schema';
 import WithPluginState from '../../ui/WithPluginState';
 import { createInitialPluginState, createPlugin, pluginKey as typeAheadPluginKey, } from './pm-plugins/main';
 import { inputRulePlugin } from './pm-plugins/input-rules';

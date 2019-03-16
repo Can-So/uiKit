@@ -1,6 +1,6 @@
 // @flow
 import type { Node } from 'react';
-import type { AppearanceType } from '@atlaskit/tag';
+import type { AppearanceType } from '@findable/tag';
 
 export type GroupType = {
   heading?: string,
@@ -30,7 +30,7 @@ export type ItemType = {
   isSelected?: boolean,
   /** Element before item. Used to provide avatar when desired. */
   elemBefore?: Node,
-  /** Object which will pass on some properties to the @atlaskit/tag element when selected. */
+  /** Object which will pass on some properties to the @findable/tag element when selected. */
   tag?: TagType, // eslint-disable-line react/no-unused-prop-types
 };
 

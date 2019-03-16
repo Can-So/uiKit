@@ -3,7 +3,7 @@ import {
   layers,
   colors,
   fontSize as defaultFontSize,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 
 const {
   B100,

@@ -8,12 +8,12 @@ import {
   p,
   ul,
   hardBreak,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { analyticsService, AnalyticsHandler } from '../../../../analytics';
 import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import { EditorView } from 'prosemirror-view';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 describe('inputrules', () => {
   const createEditor = createEditorFactory();

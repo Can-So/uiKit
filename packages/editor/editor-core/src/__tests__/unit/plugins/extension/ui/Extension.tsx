@@ -4,15 +4,15 @@ import {
   ProviderFactory,
   ExtensionHandlers,
   ExtensionParams,
-} from '@atlaskit/editor-common';
-import { macroProvider, extensionData } from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-common';
+import { macroProvider, extensionData } from '@findable/editor-test-helpers';
 
 import Extension from '../../../../../plugins/extension/ui/Extension';
 import ExtensionComponent from '../../../../../plugins/extension/ui/Extension/ExtensionComponent';
 
 const macroProviderPromise = Promise.resolve(macroProvider);
 
-describe('@atlaskit/editor-core/ui/Extension', () => {
+describe('@findable/editor-core/ui/Extension', () => {
   const node = extensionData[0] as any;
   const noop: any = () => {};
 

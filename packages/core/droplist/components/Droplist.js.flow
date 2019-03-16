@@ -6,11 +6,11 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import Layer from '@atlaskit/layer';
-import Spinner from '@atlaskit/spinner';
+} from '@findable/analytics-next';
+import Layer from '@findable/layer';
+import Spinner from '@findable/spinner';
 import { ThemeProvider } from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import {
   name as packageName,
   version as packageVersion,
@@ -44,7 +44,7 @@ type Props = {
   onClick?: any => mixed,
   onKeyDown?: any => mixed,
   onOpenChange?: any => mixed,
-  /** Position of the menu. See the documentation of @atlaskit/layer for more details. */
+  /** Position of the menu. See the documentation of @findable/layer for more details. */
   position?: string,
   /** Value passed to the Layer component to determine if the list will be fixed positioned. Useful for breaking out of overflow scroll/hidden containers. Note that the layer will become detached from the target element when scrolling so scroll lock or close on scroll handling may be necessary. */
   isMenuFixed: boolean,

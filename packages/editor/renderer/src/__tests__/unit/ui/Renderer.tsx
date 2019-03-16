@@ -41,7 +41,7 @@ const validDoc = {
   ],
 };
 
-describe('@atlaskit/renderer/ui/Renderer', () => {
+describe('@findable/renderer/ui/Renderer', () => {
   it('should catch errors and render unsupported content text', () => {
     const doc = {
       type: 'doc',

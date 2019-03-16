@@ -1,5 +1,5 @@
-import AkFieldBase from '@atlaskit/field-base';
-import SearchIcon from '@atlaskit/icon/glyph/search';
+import AkFieldBase from '@findable/field-base';
+import SearchIcon from '@findable/icon/glyph/search';
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';

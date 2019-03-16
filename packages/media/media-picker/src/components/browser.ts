@@ -1,5 +1,5 @@
 import { LocalUploadComponent } from './localUpload';
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import * as exenv from 'exenv';
 import { Browser, BrowserConfig } from './types';
 

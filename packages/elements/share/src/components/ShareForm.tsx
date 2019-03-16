@@ -1,9 +1,9 @@
-import Button from '@atlaskit/button';
-import Form, { FormFooter, FormSection } from '@atlaskit/form';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import { colors } from '@atlaskit/theme';
-import Tooltip from '@atlaskit/tooltip';
-import { LoadOptions, OptionData } from '@atlaskit/user-picker';
+import Button from '@findable/button';
+import Form, { FormFooter, FormSection } from '@findable/form';
+import ErrorIcon from '@findable/icon/glyph/error';
+import { colors } from '@findable/theme';
+import Tooltip from '@findable/tooltip';
+import { LoadOptions, OptionData } from '@findable/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';

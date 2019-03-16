@@ -4,7 +4,7 @@ import {
   createEditorFactory,
   p,
   sleep,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 import { TestingEditorView } from '../../../../../../editor-test-helpers/src/types/prosemirror';
 

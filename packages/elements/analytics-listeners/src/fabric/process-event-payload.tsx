@@ -2,12 +2,12 @@ import {
   DEFAULT_SOURCE,
   GasPayload,
   GasScreenEventPayload,
-} from '@atlaskit/analytics-gas-types';
-import { ELEMENTS_CONTEXT } from '@atlaskit/analytics-namespaced-context';
+} from '@findable/analytics-gas-types';
+import { ELEMENTS_CONTEXT } from '@findable/analytics-namespaced-context';
 import {
   ObjectType,
   UIAnalyticsEventInterface,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 import * as merge from 'lodash.merge';
 
 const extractFieldsFromContext = (fieldsToPick: string[]) => (

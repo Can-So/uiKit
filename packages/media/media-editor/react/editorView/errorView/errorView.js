@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { injectIntl } from 'react-intl';
 import { ErrorPopup, ErrorIconWrapper, ErrorMessage, ErrorHint, ErrorButton, } from './styles';
 import { errorIcon } from './icons';

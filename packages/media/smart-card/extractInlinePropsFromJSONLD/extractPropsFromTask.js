@@ -1,15 +1,15 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import DefaultTaskIcon from '@atlaskit/icon-object/glyph/task/16';
-import JiraTaskIcon from '@atlaskit/icon-object/glyph/task/16';
-import JiraSubTaskIcon from '@atlaskit/icon-object/glyph/subtask/16';
-import JiraStoryIcon from '@atlaskit/icon-object/glyph/story/16';
-import JiraBugIcon from '@atlaskit/icon-object/glyph/bug/16';
-import JiraEpicIcon from '@atlaskit/icon-object/glyph/epic/16';
-import JiraIncidentIcon from '@atlaskit/icon-object/glyph/incident/16';
-import JiraServiceRequestIcon from '@atlaskit/icon-object/glyph/issue/16';
-import JiraChangeIcon from '@atlaskit/icon-object/glyph/changes/16';
-import JiraProblemIcon from '@atlaskit/icon-object/glyph/problem/16';
+import DefaultTaskIcon from '@findable/icon-object/glyph/task/16';
+import JiraTaskIcon from '@findable/icon-object/glyph/task/16';
+import JiraSubTaskIcon from '@findable/icon-object/glyph/subtask/16';
+import JiraStoryIcon from '@findable/icon-object/glyph/story/16';
+import JiraBugIcon from '@findable/icon-object/glyph/bug/16';
+import JiraEpicIcon from '@findable/icon-object/glyph/epic/16';
+import JiraIncidentIcon from '@findable/icon-object/glyph/incident/16';
+import JiraServiceRequestIcon from '@findable/icon-object/glyph/issue/16';
+import JiraChangeIcon from '@findable/icon-object/glyph/changes/16';
+import JiraProblemIcon from '@findable/icon-object/glyph/problem/16';
 import { extractInlineViewPropsFromObject } from './extractPropsFromObject';
 import { JIRA_GENERATOR_ID, JIRA_TASK, JIRA_SUB_TASK, JIRA_STORY, JIRA_BUG, JIRA_EPIC, JIRA_INCIDENT, JIRA_SERVICE_REQUEST, JIRA_CHANGE, JIRA_PROBLEM, JIRA_CUSTOM_TASK_TYPE, } from './constants';
 var buildInlineTaskIcon = function (json) {

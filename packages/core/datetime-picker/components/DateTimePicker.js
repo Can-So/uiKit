@@ -7,10 +7,10 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import CalendarIcon from '@atlaskit/icon/glyph/calendar';
-import { mergeStyles } from '@atlaskit/select';
-import { borderRadius, colors } from '@atlaskit/theme';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
+import CalendarIcon from '@findable/icon/glyph/calendar';
+import { mergeStyles } from '@findable/select';
+import { borderRadius, colors } from '@findable/theme';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
 import pick from 'lodash.pick';
 import React, { Component } from 'react';
 import styled from 'styled-components';
@@ -70,7 +70,7 @@ var Flex = styled.div.withConfig({
 var FlexItem = styled.div.withConfig({
   displayName: "DateTimePicker__FlexItem",
   componentId: "sc-1kybx8t-1"
-})(["\n  flex-basis: 0;\n  flex-grow: 1;\n"]); // react-select overrides (via @atlaskit/select).
+})(["\n  flex-basis: 0;\n  flex-grow: 1;\n"]); // react-select overrides (via @findable/select).
 
 var styles = {
   control: function control(style) {

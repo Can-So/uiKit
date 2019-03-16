@@ -1,5 +1,5 @@
 // @flow
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 
 type Themes = {
   light: string | number,

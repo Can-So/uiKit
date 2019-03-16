@@ -1,4 +1,4 @@
-import { ExternalMediaAttributes, MediaAttributes, MentionAttributes, MediaSingleAttributes, ApplicationCardAttributes, CellAttributes, LinkAttributes, TableAttributes, CardAttributes, BreakoutMarkAttrs, AlignmentAttributes, IndentationMarkAttributes } from '@atlaskit/adf-schema';
+import { ExternalMediaAttributes, MediaAttributes, MentionAttributes, MediaSingleAttributes, ApplicationCardAttributes, CellAttributes, LinkAttributes, TableAttributes, CardAttributes, BreakoutMarkAttrs, AlignmentAttributes, IndentationMarkAttributes } from '@findable/adf-schema';
 import { MarkType, Node, NodeType, Schema, Slice, Mark } from 'prosemirror-model';
 /**
  * Represents a ProseMirror "position" in a document.

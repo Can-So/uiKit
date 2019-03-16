@@ -1,10 +1,10 @@
-import { mockCanvas } from '@atlaskit/media-test-helpers';
-import { FileInfo, Rectangle, Bounds } from '@atlaskit/media-ui';
+import { mockCanvas } from '@findable/media-test-helpers';
+import { FileInfo, Rectangle, Bounds } from '@findable/media-ui';
 import {
   mockLoadImage,
   mockLoadImageError,
   unMockLoadImage,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 const getCanvasMock = mockCanvas();
 const mockImagePlacerUtil = {

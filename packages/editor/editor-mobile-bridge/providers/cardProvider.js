@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { EditorCardProvider } from '@atlaskit/smart-card';
+import { EditorCardProvider } from '@findable/smart-card';
 import { createPromise } from '../cross-platform-promise';
 var EditorMobileCardProvider = /** @class */ (function (_super) {
     tslib_1.__extends(EditorMobileCardProvider, _super);

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import SectionMessage from '@atlaskit/section-message';
+import SectionMessage from '@findable/section-message';
 
 export default () => (
   <p style={{ paddingBottom: '8px' }}>

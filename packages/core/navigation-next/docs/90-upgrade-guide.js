@@ -1,6 +1,6 @@
 // @flow
 
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 export default md`
   # 3.x - 4.x
@@ -45,7 +45,7 @@ export default md`
   The \`icon\` prop of ConnectedItem, aka the \`'Item'\` in-built type, allowed you to pass in string names for a very limited set of icons and would render them as \`before\` components. This was never meant to be used in the final API and so has been removed in favour of providing the standard \`before\` prop.
 
   ${code`
-+ import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
++ import DashboardIcon from '@findable/icon/glyph/dashboard';
   {
     type: 'Item',
 -   icon: 'DashboardIcon'

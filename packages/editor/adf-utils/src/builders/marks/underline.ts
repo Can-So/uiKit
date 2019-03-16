@@ -1,4 +1,4 @@
-import { UnderlineDefinition } from '@atlaskit/adf-schema';
+import { UnderlineDefinition } from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

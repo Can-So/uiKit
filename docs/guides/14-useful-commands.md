@@ -61,4 +61,4 @@ Below is a list of useful commands while working on the atlaskit repository. The
 
 - `yarn measure`
 
-Measure the bundle size of a component. See [its readme](https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/build/measure/README.md) for a full explanation of how it works.
+Measure the bundle size of a component. See [its readme](https://github.com/fnamazing/uiKit/src/master/build/measure/README.md) for a full explanation of how it works.

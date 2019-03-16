@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 import DateStyledExample from '../examples/01-date-with-style';
 import CustomColorExample from '../examples/00-custom-colors';
 import CustomFormatExample from '../examples/02-custom-format';
@@ -15,11 +15,11 @@ This component is the implementation of the Date element in React.
 
 ## Usage
 
-  ${code`import { Date, Color } from '@atlaskit/date';`}
+  ${code`import { Date, Color } from '@findable/date';`}
 
   ${(
     <Example
-      packageName="@atlaskit/date"
+      packageName="@findable/date"
       Component={DateStyledExample}
       title="Date"
       source={DateStyledSource}

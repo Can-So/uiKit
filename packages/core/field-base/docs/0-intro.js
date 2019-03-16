@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md, Example, Props } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@findable/docs';
 
 export default md`
 
@@ -13,13 +13,13 @@ FieldBase provides an Atlassian Design Guidelines compatible implementation for:
 
 ## Usage
 
-${code`import FieldBase, {FieldBaseStateless,Label} from '@atlaskit/field-base';`}
+${code`import FieldBase, {FieldBaseStateless,Label} from '@findable/field-base';`}
 
 FieldBase components *will* work by themselves, but are really meant to be extended into a full field component.
 
   ${(
     <Example
-      packageName="@atlaskit/field-base"
+      packageName="@findable/field-base"
       Component={require('../examples/00-basic-example').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-example')}
@@ -28,7 +28,7 @@ FieldBase components *will* work by themselves, but are really meant to be exten
 
   ${(
     <Example
-      packageName="@atlaskit/field-base"
+      packageName="@findable/field-base"
       Component={require('../examples/01-stateless-example').default}
       title="With Stateless FieldBase"
       source={require('!!raw-loader!../examples/01-stateless-example')}
@@ -37,7 +37,7 @@ FieldBase components *will* work by themselves, but are really meant to be exten
 
   ${(
     <Example
-      packageName="@atlaskit/field-base"
+      packageName="@findable/field-base"
       Component={require('../examples/02-label-example').default}
       title="With Label"
       source={require('!!raw-loader!../examples/02-label-example')}

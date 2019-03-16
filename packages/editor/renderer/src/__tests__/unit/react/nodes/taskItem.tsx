@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
-import { ResourcedTaskItem as AkTaskItem } from '@atlaskit/task-decision';
+import { ResourcedTaskItem as AkTaskItem } from '@findable/task-decision';
 import FabricAnalyticsListener, {
   AnalyticsWebClient,
-} from '@atlaskit/analytics-listeners';
+} from '@findable/analytics-listeners';
 import TaskItem from '../../../../react/nodes/taskItem';
 
 describe('Renderer - React/Nodes/TaskItem', () => {

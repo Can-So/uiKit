@@ -1,6 +1,6 @@
 // @flow
 
-import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
+import type { WithAnalyticsEventsProps } from '@findable/analytics-next';
 
 import type { ViewControllerState } from '../../../view-controller/types';
 

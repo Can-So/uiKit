@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 var ThemeColor = themed({
   light: colors.N300,
   dark: colors.N300

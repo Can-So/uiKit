@@ -8,7 +8,7 @@ import {
   ImgHTMLAttributes,
   ButtonHTMLAttributes,
 } from 'react';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 
 // Using module augmentation to add crossOrigin attribute as it does not exist yet, PR has been opened in
 // DefinitelyTyped for it

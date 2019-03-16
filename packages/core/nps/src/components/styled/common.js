@@ -1,6 +1,6 @@
 //@flow
 import styled from 'styled-components';
-import { colors, fontSize } from '@atlaskit/theme';
+import { colors, fontSize } from '@findable/theme';
 
 export const Wrapper = styled.div`
   margin-top: 16px;

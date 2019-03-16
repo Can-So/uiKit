@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
 
-import Avatar from '@atlaskit/avatar';
-import UpArrow from '@atlaskit/icon/glyph/arrow-up';
-import DownArrow from '@atlaskit/icon/glyph/arrow-down';
-import LeftArrow from '@atlaskit/icon/glyph/arrow-left';
-import RightArrow from '@atlaskit/icon/glyph/arrow-right';
+import Avatar from '@findable/avatar';
+import UpArrow from '@findable/icon/glyph/arrow-up';
+import DownArrow from '@findable/icon/glyph/arrow-down';
+import LeftArrow from '@findable/icon/glyph/arrow-left';
+import RightArrow from '@findable/icon/glyph/arrow-right';
 
 import Select from '../src';
 

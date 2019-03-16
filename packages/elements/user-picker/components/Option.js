@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { components } from '@atlaskit/select';
+import { components } from '@findable/select';
 import * as React from 'react';
 import { EmailOption } from './EmailOption';
 import { TeamOption } from './TeamOption';

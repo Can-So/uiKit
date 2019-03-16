@@ -1,5 +1,5 @@
 import * as React from 'react';
-// TODO: This file should be removed as soon as we get the new Icons in @atlaskit/icon
+// TODO: This file should be removed as soon as we get the new Icons in @findable/icon
 // MD-33
 export default (function () { return (React.createElement("svg", { width: "55px", height: "55px", viewBox: "0 0 55 55", version: "1.1", xmlns: "http://www.w3.org/2000/svg" },
     React.createElement("defs", null),

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 var colorMap = {
   default: themed({
     light: colors.N50,

@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/webpack-config",
+  "name": "@findable/webpack-config",
   "private": true,
   "bin": {
     "webpack-dev": "./bin/dev.js",

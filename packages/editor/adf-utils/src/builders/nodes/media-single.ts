@@ -2,7 +2,7 @@ import {
   MediaSingleDefinition,
   MediaDefinition,
   MediaSingleAttributes,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 
 export const mediaSingle = (attrs: MediaSingleAttributes | undefined) => (
   content: MediaDefinition,

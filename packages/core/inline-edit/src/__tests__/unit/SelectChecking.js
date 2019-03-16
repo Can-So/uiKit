@@ -23,7 +23,7 @@ const props = {
   readView: ReadView,
 };
 
-describe('@atlaskit/inline-edit', () => {
+describe('@findable/inline-edit', () => {
   it('should call onEditRequested() when mouse does not move', () => {
     const spy = jest.fn();
 

@@ -6,11 +6,11 @@ import {
   createUploadContext,
   mediaPickerAuthProvider,
   defaultMediaPickerCollectionName,
-} from '@atlaskit/media-test-helpers';
-import Button from '@atlaskit/button';
-import Toggle from '@atlaskit/toggle';
-import Spinner from '@atlaskit/spinner';
-import { ContextFactory } from '@atlaskit/media-core';
+} from '@findable/media-test-helpers';
+import Button from '@findable/button';
+import Toggle from '@findable/toggle';
+import Spinner from '@findable/spinner';
+import { ContextFactory } from '@findable/media-core';
 import { MediaPicker, Dropzone } from '../src';
 import {
   DropzoneContainer,

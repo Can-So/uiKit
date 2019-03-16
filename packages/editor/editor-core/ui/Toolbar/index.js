@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import WidthDetector from '@atlaskit/width-detector';
+import WidthDetector from '@findable/width-detector';
 var ToolbarComponentsWrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n"], ["\n  display: flex;\n"])));
 export var ToolbarSize;
 (function (ToolbarSize) {

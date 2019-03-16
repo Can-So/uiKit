@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 
-import { Skeleton as SkeletonIcon } from '@atlaskit/icon';
+import { Skeleton as SkeletonIcon } from '@findable/icon';
 
 import { HiddenWhenCollapsed } from './ToggleWhenCollapsed';
 

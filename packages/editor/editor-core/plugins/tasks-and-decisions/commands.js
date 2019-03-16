@@ -1,4 +1,4 @@
-import { uuid } from '@atlaskit/adf-schema';
+import { uuid } from '@findable/adf-schema';
 import { TextSelection, } from 'prosemirror-state';
 import { safeInsert, hasParentNodeOfType, replaceParentNodeOfType, findParentNodeOfType, } from 'prosemirror-utils';
 import { GapCursorSelection } from '../gap-cursor';

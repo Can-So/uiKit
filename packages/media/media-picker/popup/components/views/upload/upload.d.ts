@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { CardEventHandler } from '@atlaskit/media-card';
-import { Context } from '@atlaskit/media-core';
+import { CardEventHandler } from '@findable/media-card';
+import { Context } from '@findable/media-core';
 import { InjectedIntlProps } from 'react-intl';
 import { Browser } from '../../../../components/types';
 import { FileReference, LocalUploads, Recents, SelectedItem, ServiceFile, ServiceName } from '../../../domain';

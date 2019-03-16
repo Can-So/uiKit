@@ -19,7 +19,7 @@ import {
   strong,
   em,
   subsup,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { tablesPlugin, listsPlugin } from '../../../plugins';
 import { Command } from '../../../types';
 

@@ -1,13 +1,13 @@
 import React from 'react';
-import { code, md, Example, Props } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { code, md, Example, Props } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   ${(
     <SectionMessage appearance="warning">
       <p>
         <strong>
-          Note: @atlaskit/focused-task-close-account is currently a developer
+          Note: @findable/focused-task-close-account is currently a developer
           preview.
         </strong>
       </p>
@@ -35,12 +35,12 @@ import {
   DeleteUserOverviewScreen,
   DeleteUserContentPreviewScreen,
   DeactivateUserOverviewScreen,
-} from '@atlaskit/focused-task-close-account';
+} from '@findable/focused-task-close-account';
   `}
 
   ${(
     <Example
-      packageName="@atlaskit/focused-task-close-account"
+      packageName="@findable/focused-task-close-account"
       title="Basic drawer assembly"
       Component={require('../examples/00-BasicDrawerAssembly').default}
       source={require('!!raw-loader!../examples/00-BasicDrawerAssembly')}
@@ -49,7 +49,7 @@ import {
 
   ${(
     <Example
-      packageName="@atlaskit/focused-task-close-account"
+      packageName="@findable/focused-task-close-account"
       title="Delete user drawer"
       Component={require('../examples/01-DeleteUserDrawer').default}
       source={require('!!raw-loader!../examples/01-DeleteUserDrawer')}
@@ -58,7 +58,7 @@ import {
 
   ${(
     <Example
-      packageName="@atlaskit/focused-task-close-account"
+      packageName="@findable/focused-task-close-account"
       title="Single screen drawer"
       Component={require('../examples/02-SingleScreenDrawer').default}
       source={require('!!raw-loader!../examples/02-SingleScreenDrawer')}
@@ -67,7 +67,7 @@ import {
 
   ${(
     <Example
-      packageName="@atlaskit/focused-task-close-account"
+      packageName="@findable/focused-task-close-account"
       title="Deactivate drawer"
       Component={require('../examples/03-DeactivateDrawer').default}
       source={require('!!raw-loader!../examples/03-DeactivateDrawer')}

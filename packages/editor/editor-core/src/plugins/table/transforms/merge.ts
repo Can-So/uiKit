@@ -2,7 +2,7 @@ import { CellSelection, TableMap } from 'prosemirror-tables';
 import { Transaction, Selection } from 'prosemirror-state';
 import { Node as PMNode, Fragment } from 'prosemirror-model';
 import { getSelectionRect, findTable } from 'prosemirror-utils';
-import { CellAttributes } from '@atlaskit/adf-schema';
+import { CellAttributes } from '@findable/adf-schema';
 import { CellRect } from '../types';
 import { fireAnalytics } from './fix-tables';
 

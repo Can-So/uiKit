@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import ConfluencePageIcon from '@atlaskit/icon-object/glyph/page/16';
+import ConfluencePageIcon from '@findable/icon-object/glyph/page/16';
 import { extractInlineViewPropsFromDocument } from './extractPropsFromDocument';
 import { CONFLUENCE_GENERATOR_ID } from './constants';
 export var buildTextDocumentIcon = function (json) {

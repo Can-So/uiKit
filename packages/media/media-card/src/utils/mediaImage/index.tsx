@@ -4,7 +4,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Component, CSSProperties } from 'react';
-import { getCssFromImageOrientation, isRotated } from '@atlaskit/media-ui';
+import { getCssFromImageOrientation, isRotated } from '@findable/media-ui';
 import { ImageComponent } from './styled';
 
 export interface MediaImageProps {

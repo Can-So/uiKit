@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
-import { Checkbox } from '@atlaskit/checkbox';
-import { colors } from '@atlaskit/theme';
+import { Checkbox } from '@findable/checkbox';
+import { colors } from '@findable/theme';
 import Range from '../src';
 
 const initialState = {

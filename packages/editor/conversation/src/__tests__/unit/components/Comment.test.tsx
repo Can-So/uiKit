@@ -1,6 +1,6 @@
-import AkAvatar from '@atlaskit/avatar';
-import AkComment, { CommentAction, CommentAuthor } from '@atlaskit/comment';
-import { ConnectedReactionsView } from '@atlaskit/reactions';
+import AkAvatar from '@findable/avatar';
+import AkComment, { CommentAction, CommentAuthor } from '@findable/comment';
+import { ConnectedReactionsView } from '@findable/reactions';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import {

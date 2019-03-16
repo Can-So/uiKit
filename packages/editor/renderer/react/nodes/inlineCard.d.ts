@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { EventHandlers } from '@atlaskit/editor-common';
+import { EventHandlers } from '@findable/editor-common';
 export default function InlineCard(props: {
     url?: string;
     data?: object;

@@ -32,11 +32,11 @@ import {
   isLinkAtPos,
   setLinkHref,
   setLinkText,
-} from '@atlaskit/editor-core';
+} from '@findable/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { EditorState } from 'prosemirror-state';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import { Color as StatusColor } from '@atlaskit/status';
+import { JSONTransformer } from '@findable/editor-json-transformer';
+import { Color as StatusColor } from '@findable/status';
 
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';

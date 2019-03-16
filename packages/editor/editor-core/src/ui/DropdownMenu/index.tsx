@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PureComponent, ReactElement } from 'react';
 import styled from 'styled-components';
-import DropList from '@atlaskit/droplist';
-import Item, { ItemGroup } from '@atlaskit/item';
-import Tooltip from '@atlaskit/tooltip';
-import { Popup, akEditorFloatingPanelZIndex } from '@atlaskit/editor-common';
+import DropList from '@findable/droplist';
+import Item, { ItemGroup } from '@findable/item';
+import Tooltip from '@findable/tooltip';
+import { Popup, akEditorFloatingPanelZIndex } from '@findable/editor-common';
 import withOuterListeners from '../with-outer-listeners';
 
 const Wrapper = styled.div`
@@ -62,7 +62,7 @@ const ItemContentWrapper: any = styled.span`
 `;
 
 /**
- * Wrapper around @atlaskit/droplist which uses Popup and Portal to render
+ * Wrapper around @findable/droplist which uses Popup and Portal to render
  * dropdown-menu outside of "overflow: hidden" containers when needed.
  *
  * Also it controls popper's placement.

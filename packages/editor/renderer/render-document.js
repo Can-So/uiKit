@@ -1,5 +1,5 @@
-import { defaultSchema } from '@atlaskit/adf-schema';
-import { getValidDocument, getValidNode, } from '@atlaskit/editor-common';
+import { defaultSchema } from '@findable/adf-schema';
+import { getValidDocument, getValidNode, } from '@findable/editor-common';
 import { Fragment } from 'prosemirror-model';
 var SUPPORTS_HIRES_TIMER_API = window.performance && performance.now;
 var withStopwatch = function (cb) {

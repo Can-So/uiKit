@@ -1,7 +1,7 @@
 // @flow
 
 export type Props = {
-  /** The size of the icon, uses the same sizing scheme as in @atlaskit/icon */
+  /** The size of the icon, uses the same sizing scheme as in @findable/icon */
   size?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge',
   /** CSS color to be applied to the wordmark portion of the logo SVG */
   textColor?: string,

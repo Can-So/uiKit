@@ -1,4 +1,4 @@
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 export declare const layoutSupportsWidth: (layout: MediaSingleLayout) => boolean;
 export declare function calcPxFromColumns(columns: number, lineLength: number, gridSize: number): number;
 export declare function calcColumnsFromPx(width: number, lineLength: number, gridSize: number): number;

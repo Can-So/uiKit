@@ -7,10 +7,10 @@ import {
   ProcessedFileState,
   ProcessingFileState,
   FileIdentifier,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
-import { messages, toHumanReadableMediaSize } from '@atlaskit/media-ui';
+import { messages, toHumanReadableMediaSize } from '@findable/media-ui';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Outcome } from './domain';
 import {

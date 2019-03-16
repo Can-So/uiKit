@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { injectIntl, defineMessages, FormattedMessage, } from 'react-intl';
-import { browser } from '@atlaskit/editor-common';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+import { browser } from '@findable/editor-common';
+import CrossIcon from '@findable/icon/glyph/cross';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
 import { Header, Footer, ContentWrapper, Line, Content, ColumnRight, ColumnLeft, Row, CodeSm, CodeMd, CodeLg, Title, } from './styles';
 import * as keymaps from '../../../keymaps';
 import ToolbarButton from '../../../ui/ToolbarButton';

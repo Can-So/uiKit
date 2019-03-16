@@ -10,7 +10,7 @@ function _templateObject() {
   return data;
 }
 
-import { colors, gridSize, typography } from '@atlaskit/theme';
+import { colors, gridSize, typography } from '@findable/theme';
 import evaluateInner from './utils/evaluate-inner';
 var tableBorderWdth = 2;
 export default evaluateInner(_templateObject(), tableBorderWdth, colors.N40, gridSize() / 2, gridSize(), typography.h600(), gridSize());

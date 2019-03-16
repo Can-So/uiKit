@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 
 import { Cell, TreeRowContainer, LoaderItemContainer } from '../styled';
 

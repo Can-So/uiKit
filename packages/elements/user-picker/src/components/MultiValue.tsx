@@ -1,4 +1,4 @@
-import Tag from '@atlaskit/tag';
+import Tag from '@findable/tag';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Option, UserPickerProps } from '../types';
@@ -7,7 +7,7 @@ import { messages } from './i18n';
 import { SizeableAvatar } from './SizeableAvatar';
 import { getAvatarUrl, isEmail } from './utils';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 export const scrollToValue = (
   valueContainer: HTMLDivElement,

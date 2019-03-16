@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Fragment, Node as PMNode, } from 'prosemirror-model';
-import { normalizeHexColor } from '@atlaskit/editor-common';
+import { normalizeHexColor } from '@findable/editor-common';
 import { AC_XMLNS } from './encode-cxhtml';
 /**
  * Deduce a set of marks from a style declaration.

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { colors, borderRadius } from '@atlaskit/theme';
-import DocumentFilledIcon from '@atlaskit/icon/glyph/document-filled';
-import { hexToRgba } from '@atlaskit/editor-common';
+import { colors, borderRadius } from '@findable/theme';
+import DocumentFilledIcon from '@findable/icon/glyph/document-filled';
+import { hexToRgba } from '@findable/editor-common';
 
 import { MEDIA_HEIGHT, FILE_WIDTH } from '../../nodeviews/media';
 

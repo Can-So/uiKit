@@ -1,4 +1,4 @@
-import { components } from '@atlaskit/select';
+import { components } from '@findable/select';
 import * as React from 'react';
 import styled from 'styled-components';
 import { SizeableAvatar } from './SizeableAvatar';

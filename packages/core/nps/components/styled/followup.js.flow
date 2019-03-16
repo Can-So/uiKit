@@ -1,6 +1,6 @@
 //@flow
 import styled from 'styled-components';
-import { gridSize, colors, fontSize } from '@atlaskit/theme';
+import { gridSize, colors, fontSize } from '@findable/theme';
 
 export const Contact = styled.div`
   margin-top: ${gridSize() * 2}px;

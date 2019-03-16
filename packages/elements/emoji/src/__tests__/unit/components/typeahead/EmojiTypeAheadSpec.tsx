@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import * as sinon from 'sinon';
-import { waitUntil } from '@atlaskit/util-common-test';
+import { waitUntil } from '@findable/util-common-test';
 
 import {
   atlassianBoomEmoji,

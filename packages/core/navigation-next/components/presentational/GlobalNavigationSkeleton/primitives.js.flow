@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { Interpolation } from 'emotion';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 
 const gridSize = gridSizeFn();
 

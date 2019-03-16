@@ -5,7 +5,7 @@ Renders inline code snippets and code blocks.
 ## Installation
 
 ```sh
-yarn add @atlaskit/code
+yarn add @findable/code
 ```
 
 ## Usage

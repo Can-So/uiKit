@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import FieldRange from '@atlaskit/field-range';
+import FieldRange from '@findable/field-range';
 import SectionMessage from '../src';
 
 class Example extends Component<*, *> {

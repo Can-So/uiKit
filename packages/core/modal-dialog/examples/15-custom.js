@@ -3,11 +3,11 @@ import React, { Component, type Node } from 'react';
 import styled from 'styled-components';
 import Lorem from 'react-lorem-component';
 
-import Avatar from '@atlaskit/avatar';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import InlineDialog from '@atlaskit/inline-dialog';
-import { colors } from '@atlaskit/theme';
+import Avatar from '@findable/avatar';
+import Button, { ButtonGroup } from '@findable/button';
+import CrossIcon from '@findable/icon/glyph/cross';
+import InlineDialog from '@findable/inline-dialog';
+import { colors } from '@findable/theme';
 
 import ModalDialog, { ModalFooter, ModalTransition } from '../src';
 

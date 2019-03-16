@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { ModalSpinner } from '@atlaskit/media-ui';
-import { colors } from '@atlaskit/theme';
+import { ModalSpinner } from '@findable/media-ui';
+import { colors } from '@findable/theme';
 var AsyncSmartMediaEditor = /** @class */ (function (_super) {
     tslib_1.__extends(AsyncSmartMediaEditor, _super);
     function AsyncSmartMediaEditor() {

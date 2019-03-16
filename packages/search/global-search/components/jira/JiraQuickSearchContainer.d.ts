@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import { CancelableEvent } from '@atlaskit/quick-search';
+import { CancelableEvent } from '@findable/quick-search';
 import { CreateAnalyticsEventFn } from '../analytics/types';
 import { SearchScreenCounter } from '../../util/ScreenCounter';
 import { JiraClient } from '../../api/JiraClient';

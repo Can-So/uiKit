@@ -5,7 +5,7 @@ This package provides component used for pagination. It truncates the total numb
 ## Installation
 
 ```sh
-yarn add @atlaskit/pagination
+yarn add @findable/pagination
 ```
 
 ## Usage

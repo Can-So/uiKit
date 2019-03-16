@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { I18NWrapper } from '@atlaskit/media-test-helpers';
+import { I18NWrapper } from '@findable/media-test-helpers';
 import Toolbar from '../src/react/editorView/toolbar/toolbar';
 import { Color, Tool } from '../src/common';
 

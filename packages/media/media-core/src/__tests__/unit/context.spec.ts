@@ -7,7 +7,7 @@ import {
   MediaStore,
   MediaStoreResponse,
   TouchedFiles,
-} from '@atlaskit/media-store';
+} from '@findable/media-store';
 import {
   AuthProvider,
   ProcessingFileState,

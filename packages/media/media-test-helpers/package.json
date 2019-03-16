@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/media-test-helpers",
+  "name": "@findable/media-test-helpers",
   "version": "21.0.0",
   "description": "Collection of test helpers used in media component stories and specs",
   "license": "Apache-2.0",
@@ -18,16 +18,16 @@
   "atlaskit": {
     "internal": true
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/dropdown-menu": "^7.0.1",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/media-card": "^57.0.0",
-    "@atlaskit/media-core": "^29.0.0",
-    "@atlaskit/media-picker": "^37.0.0",
-    "@atlaskit/media-store": "^11.0.0",
-    "@atlaskit/media-ui": "^10.0.0",
-    "@atlaskit/select": "^8.0.3",
+    "@findable/dropdown-menu": "^7.0.1",
+    "@findable/icon": "^16.0.5",
+    "@findable/media-card": "^57.0.0",
+    "@findable/media-core": "^29.0.0",
+    "@findable/media-picker": "^37.0.0",
+    "@findable/media-store": "^11.0.0",
+    "@findable/media-ui": "^10.0.0",
+    "@findable/select": "^8.0.3",
     "axios": "^0.17.1",
     "enzyme": "^3.7.0",
     "exenv": "^1.2.2",

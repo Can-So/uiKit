@@ -1,6 +1,6 @@
 // This custom config comes from atlaskit
 const getLinkMD = commit =>
-  `[${commit}](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/${commit})`;
+  `[${commit}](https://github.com/fnamazing/uiKit/commits/${commit})`;
 
 const getReleaseLine = async (changeset, versionType) => {
   const indentedSummary = changeset.summary

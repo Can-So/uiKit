@@ -16,14 +16,14 @@ ${chalk.yellow.bold('[update]')}
      ${chalk.yellow('--force')}       Forces update even when all provided packages are up-to-date
 
    ${chalk.green('Examples')}
-     ${chalk.dim('$ akup update @atlaskit/editor-core')}
-     ${chalk.dim('$ akup update @atlaskit/editor-core @atlaskit/renderer --exclude @atlaskit/analytics-next,@atlaskit/media-card')}
+     ${chalk.dim('$ akup update @findable/editor-core')}
+     ${chalk.dim('$ akup update @findable/editor-core @findable/renderer --exclude @findable/analytics-next,@findable/media-card')}
 
 ${chalk.yellow.bold('[changelog]')}
    Shows a changelog for a given package from current version to latest.
 
    ${chalk.green('Examples')}
-     ${chalk.dim('$ akup changelog @atlaskit/editor-core')}
+     ${chalk.dim('$ akup changelog @findable/editor-core')}
 `;
 
 export function run() {

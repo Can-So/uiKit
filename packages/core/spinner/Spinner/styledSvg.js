@@ -1,6 +1,6 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import styled, { css, keyframes } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 import { SIZES_MAP } from './constants';
 
 var getStrokeWidth = function getStrokeWidth(size) {

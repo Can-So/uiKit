@@ -6,7 +6,7 @@ import {
   sendKeyToPm,
   insertText,
   createAnalyticsEventMock,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { AllSelection } from 'prosemirror-state';
 import {
   AnalyticsEventPayload,
@@ -18,7 +18,7 @@ import {
   INDENT_DIR,
   INDENT_TYPE,
 } from '../../../../plugins/analytics';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 
 const createIndentationAttributes = (
   previousIndentationLevel: number,

@@ -14,6 +14,6 @@ var isConfluence = function () {
 };
 var promise = isConfluence()
     ? Promise.resolve(Modal)
-    : import('@atlaskit/modal-dialog').then(function (Modal) { return Modal.default; });
+    : import('@findable/modal-dialog').then(function (Modal) { return Modal.default; });
 export default promise;
 //# sourceMappingURL=ModalWrapper.js.map

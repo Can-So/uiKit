@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component, type Node } from 'react';
-import { layers } from '@atlaskit/theme';
+import { layers } from '@findable/theme';
 import ScrollLock from 'react-scrolllock';
-import { Popper, Manager, Reference } from '@atlaskit/popper';
+import { Popper, Manager, Reference } from '@findable/popper';
 
 type Props = {
   /** A ref to the container that the content should be layered around for height calculation

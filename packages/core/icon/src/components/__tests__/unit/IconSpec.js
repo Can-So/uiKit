@@ -2,7 +2,7 @@
 import React, { Component, type Node } from 'react';
 import { mount, render } from 'enzyme';
 
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { name } from '../../../version.json';
 import Icon, { size } from '../../..';
 import { IconWrapper } from '../../Icon';

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var Container = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  height: 100%;\n  overflow-y: scroll;\n\n  padding: 0 28px;\n"], ["\n  height: 100%;\n  overflow-y: scroll;\n\n  padding: 0 28px;\n"])));
 export var GridCell = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  ", " margin-top: 5px;\n"], ["\n  ", " margin-top: 5px;\n"])), function (_a) {
     var width = _a.width;

@@ -1,4 +1,4 @@
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import * as React from 'react';
 import { getAvatarSize } from './utils';
 

@@ -1,4 +1,4 @@
-import { ExtensionType } from '@atlaskit/editor-core';
+import { ExtensionType } from '@findable/editor-core';
 
 export const inlineExtensionData = [
   {

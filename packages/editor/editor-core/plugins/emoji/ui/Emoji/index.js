@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { ResourcedEmoji } from '@atlaskit/emoji';
-import { ProviderFactory, WithProviders, } from '@atlaskit/editor-common';
+import { ResourcedEmoji } from '@findable/emoji';
+import { ProviderFactory, WithProviders, } from '@findable/editor-common';
 var EmojiNode = /** @class */ (function (_super) {
     tslib_1.__extends(EmojiNode, _super);
     function EmojiNode(props) {

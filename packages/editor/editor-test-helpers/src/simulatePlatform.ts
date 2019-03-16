@@ -1,4 +1,4 @@
-import * as editorCommon from '@atlaskit/editor-common';
+import * as editorCommon from '@findable/editor-common';
 
 export enum Platforms {
   Mac,

@@ -6,10 +6,10 @@ import {
   sendKeyToPm,
   bodiedExtension,
   bodiedExtensionData,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import rulePlugin from '../../../../plugins/rule';
 import extensionPlugin from '../../../../plugins/extension';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 describe('rule', () => {
   const createEditor = createEditorFactory();

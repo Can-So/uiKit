@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import Blanket from '../src';
 
 type State = {

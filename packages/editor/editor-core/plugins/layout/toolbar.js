@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import { defineMessages } from 'react-intl';
 import { findDomRefAtPos } from 'prosemirror-utils';
-import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
-import LayoutThreeEqualIcon from '@atlaskit/icon/glyph/editor/layout-three-equal';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
+import LayoutTwoEqualIcon from '@findable/icon/glyph/editor/layout-two-equal';
+import LayoutThreeEqualIcon from '@findable/icon/glyph/editor/layout-three-equal';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
 import commonMessages from '../../messages';
 import { setPresetLayout, deleteActiveLayoutNode, getPresetLayout, } from './actions';
 export var messages = defineMessages({

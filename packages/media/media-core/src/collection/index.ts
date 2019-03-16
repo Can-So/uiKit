@@ -4,7 +4,7 @@ import {
   MediaCollectionItem,
   MediaCollectionItemFullDetails,
   MediaFile,
-} from '@atlaskit/media-store';
+} from '@findable/media-store';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { FileItem, FileDetails } from '../item';

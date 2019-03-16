@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 
-import { borderRadius, gridSize, math } from '@atlaskit/theme';
+import { borderRadius, gridSize, math } from '@findable/theme';
 
 import {
   flagBackgroundColor,

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import Tooltip from '@atlaskit/tooltip';
-import Button from '@atlaskit/button';
+import Tooltip from '@findable/tooltip';
+import Button from '@findable/button';
 import * as styles from '../../../../components/common/styles';
 import Emoji from '../../../../components/common/Emoji';
 import { spriteEmoji, imageEmoji } from '../../_test-data';

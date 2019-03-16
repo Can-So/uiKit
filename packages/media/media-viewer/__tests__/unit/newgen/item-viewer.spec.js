@@ -6,9 +6,9 @@ var mockImageViewer = {
 jest.mock('../../../newgen/viewers/image', function () { return mockImageViewer; });
 import * as React from 'react';
 import { Observable } from 'rxjs';
-import Spinner from '@atlaskit/spinner';
-import Button from '@atlaskit/button';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import Spinner from '@findable/spinner';
+import Button from '@findable/button';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 import { ItemViewer, ItemViewerBase, } from '../../../newgen/item-viewer';
 import { ErrorMessage } from '../../../newgen/error';
 import { ImageViewer } from '../../../newgen/viewers/image';

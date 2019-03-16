@@ -7,10 +7,10 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
-import Droplist, { Item, Group } from '@atlaskit/droplist';
-import FieldBase, { Label } from '@atlaskit/field-base';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import Spinner from '@atlaskit/spinner';
+import Droplist, { Item, Group } from '@findable/droplist';
+import FieldBase, { Label } from '@findable/field-base';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
+import Spinner from '@findable/spinner';
 import { mapAppearanceToFieldBase } from './appearances';
 import { AutocompleteWrapper, AutocompleteInput } from '../styled/Autocomplete';
 import Content from '../styled/Content';

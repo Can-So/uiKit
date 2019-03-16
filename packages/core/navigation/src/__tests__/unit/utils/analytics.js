@@ -71,7 +71,7 @@ describe('Analytics Util', () => {
       () => mockWithAnalyticsEventsReturn,
     );
     beforeEach(() => {
-      jest.doMock('@atlaskit/analytics-next', () => ({
+      jest.doMock('@findable/analytics-next', () => ({
         withAnalyticsEvents: mockWithAnalyticsEvents,
       }));
     });

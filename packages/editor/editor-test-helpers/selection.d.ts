@@ -1,5 +1,5 @@
 import { EditorView } from 'prosemirror-view';
-import { EditorInstance } from '@atlaskit/editor-core';
+import { EditorInstance } from '@findable/editor-core';
 export declare type EditorFactory = (doc: any) => EditorInstance;
 /**
  * Compares an expected document with selection {<>}, with the actual

@@ -7,8 +7,8 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
-import Base, { Label } from '@atlaskit/field-base';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
+import Base, { Label } from '@findable/field-base';
 import { name as packageName, version as packageVersion } from './version.json';
 import Input from './styled/Input';
 var Wrapper = styled.div.withConfig({

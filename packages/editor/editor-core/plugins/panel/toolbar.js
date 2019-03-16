@@ -1,10 +1,10 @@
 import { defineMessages } from 'react-intl';
-import SuccessIcon from '@atlaskit/icon/glyph/editor/success';
-import InfoIcon from '@atlaskit/icon/glyph/editor/info';
-import NoteIcon from '@atlaskit/icon/glyph/editor/note';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import WarningIcon from '@atlaskit/icon/glyph/editor/warning';
-import ErrorIcon from '@atlaskit/icon/glyph/editor/error';
+import SuccessIcon from '@findable/icon/glyph/editor/success';
+import InfoIcon from '@findable/icon/glyph/editor/info';
+import NoteIcon from '@findable/icon/glyph/editor/note';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
+import WarningIcon from '@findable/icon/glyph/editor/warning';
+import ErrorIcon from '@findable/icon/glyph/editor/error';
 import commonMessages from '../../messages';
 import { removePanel, changePanelType } from './actions';
 import { pluginKey } from './pm-plugins/main';

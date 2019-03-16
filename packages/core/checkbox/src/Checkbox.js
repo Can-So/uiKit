@@ -5,7 +5,7 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import { ThemeProvider } from 'styled-components';
 import CheckboxIcon from './CheckboxIcon';
 

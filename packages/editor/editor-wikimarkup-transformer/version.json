@@ -1,5 +1,5 @@
 {
-	"name": "@atlaskit/editor-wikimarkup-transformer",
+	"name": "@findable/editor-wikimarkup-transformer",
 	"version": "4.0.0",
 	"sideEffects": false
 }

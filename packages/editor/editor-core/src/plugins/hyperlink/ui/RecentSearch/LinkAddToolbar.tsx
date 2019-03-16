@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { KeyboardEvent, PureComponent } from 'react';
 import styled, { css } from 'styled-components';
-import { ActivityProvider, ActivityItem } from '@atlaskit/activity';
+import { ActivityProvider, ActivityItem } from '@findable/activity';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { analyticsService } from '../../../../analytics';
 import PanelTextInput from '../../../../ui/PanelTextInput';

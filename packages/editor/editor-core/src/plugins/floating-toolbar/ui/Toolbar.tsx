@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
 
-import { ButtonGroup } from '@atlaskit/button';
-import { borderRadius, gridSize, colors, themed } from '@atlaskit/theme';
+import { ButtonGroup } from '@findable/button';
+import { borderRadius, gridSize, colors, themed } from '@findable/theme';
 
 import { FloatingToolbarItem } from '../types';
 import { compareArrays } from '../utils';
@@ -12,7 +12,7 @@ import Dropdown from './Dropdown';
 import Select, { SelectOption } from './Select';
 import Separator from './Separator';
 import Input from './Input';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { EditorView } from 'prosemirror-view';
 
 const akGridSize = gridSize();

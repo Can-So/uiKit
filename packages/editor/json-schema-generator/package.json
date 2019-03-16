@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/json-schema-generator",
+  "name": "@findable/json-schema-generator",
   "version": "2.0.0",
   "private": true,
   "description": "A CLI tool for generating JSON Schema from typescript",
@@ -16,7 +16,7 @@
     "src",
     "bin.js"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
     "@types/meow": "^5.0.0",
     "@types/mkdirp": "^0.5.2",

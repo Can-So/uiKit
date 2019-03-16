@@ -1,6 +1,6 @@
 // tslint:disable-next-line no-implicit-dependencies
-import { GasPurePayload, UI_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { GasPurePayload, UI_EVENT_TYPE } from '@findable/analytics-gas-types';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { mount } from 'enzyme';
 import * as cases from 'jest-in-case';
 import * as React from 'react';
@@ -215,10 +215,10 @@ describe('AtlaskitListener', () => {
           eventType: UI_EVENT_TYPE,
         },
         context: [
-          { packageName: '@atlaskit/navigation-next', packageVersion: '0.0.7' },
+          { packageName: '@findable/navigation-next', packageVersion: '0.0.7' },
           {
             source: 'globalNavigation',
-            packageName: '@atlaskit/global-navigation',
+            packageName: '@findable/global-navigation',
             packageVersion: '0.0.4',
           },
         ],
@@ -229,9 +229,9 @@ describe('AtlaskitListener', () => {
           attributes: {
             sourceHierarchy: 'globalNavigation',
             packageHierarchy:
-              '@atlaskit/navigation-next@0.0.7,@atlaskit/global-navigation@0.0.4',
+              '@findable/navigation-next@0.0.7,@findable/global-navigation@0.0.4',
             componentHierarchy: undefined,
-            packageName: '@atlaskit/global-navigation',
+            packageName: '@findable/global-navigation',
             packageVersion: '0.0.4',
           },
           source: 'globalNavigation',

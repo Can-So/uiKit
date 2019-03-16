@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ItemGroup } from '@atlaskit/item';
+import { ItemGroup } from '@findable/item';
 import NavigationItemGroup from '../../components/js/NavigationItemGroup';
 import { mountWithRootTheme } from './_theme-util';
 import NavigationItemGroupTitle from '../../components/styled/NavigationItemGroupTitle';

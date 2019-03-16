@@ -1,248 +1,248 @@
-# @atlaskit/reduced-ui-pack
+# @findable/reduced-ui-pack
 
 ## 10.5.5
-- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
-  - @atlaskit/icon@16.0.4
-  - @atlaskit/css-reset@3.0.6
-  - @atlaskit/docs@7.0.0
-  - @atlaskit/section-message@2.0.0
-  - @atlaskit/theme@8.0.0
+- Updated dependencies [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
+  - @findable/icon@16.0.4
+  - @findable/css-reset@3.0.6
+  - @findable/docs@7.0.0
+  - @findable/section-message@2.0.0
+  - @findable/theme@8.0.0
 
 ## 10.5.4
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/section-message@1.0.16
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/section-message@1.0.16
+  - @findable/icon@16.0.0
 
 ## 10.5.3
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/section-message@1.0.14
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/css-reset@3.0.5
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/icon@15.0.2
+  - @findable/section-message@1.0.14
+  - @findable/theme@7.0.1
+  - @findable/css-reset@3.0.5
+  - @findable/docs@6.0.0
 
 ## 10.5.2
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/section-message@1.0.13
-  - @atlaskit/css-reset@3.0.4
-  - @atlaskit/theme@7.0.0
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/icon@15.0.1
+  - @findable/section-message@1.0.13
+  - @findable/css-reset@3.0.4
+  - @findable/theme@7.0.0
 
 ## 10.5.1
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/section-message@1.0.12
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/section-message@1.0.12
+  - @findable/icon@15.0.0
 
 ## 10.5.0
-- [minor] [29968f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29968f4):
+- [minor] [29968f4](https://github.com/fnamazing/uiKit/commits/29968f4):
 
   - Add a menu expand icon
 
 ## 10.4.0
-- [minor] [f5e26e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e26e1):
+- [minor] [f5e26e1](https://github.com/fnamazing/uiKit/commits/f5e26e1):
 
   - Add a retry icon
 
 ## 10.3.1
-- [patch] [f2f231c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2f231c):
+- [patch] [f2f231c](https://github.com/fnamazing/uiKit/commits/f2f231c):
 
   - Use fontSizeSmall from theme
 
 ## 10.3.0
-- [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
+- [minor] [dced9bf](https://github.com/fnamazing/uiKit/commits/dced9bf):
 
   - Remove StarOutlineIcon as it is not used
 
 ## 10.2.1
-- [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
+- [patch] [d15caa6](https://github.com/fnamazing/uiKit/commits/d15caa6):
 
   - adding editor image alignment icons
 
 ## 10.2.0
 - [minor] [fe3c283"
-d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe3c283"
+d](https://github.com/fnamazing/uiKit/commits/fe3c283"
 d):
 
   - ED-5600: add icons for new table ux
 
 ## 10.1.1
-- [patch] Consume smallFontSize from @atlaskit/theme [a6f8a43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6f8a43)
+- [patch] Consume smallFontSize from @findable/theme [a6f8a43](https://github.com/fnamazing/uiKit/commits/a6f8a43)
 
 ## 10.1.0
-- [minor] Add drag-handler [b0a64d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b0a64d6)
+- [minor] Add drag-handler [b0a64d6](https://github.com/fnamazing/uiKit/commits/b0a64d6)
 
 ## 10.0.1
-- [patch] Update build process to use babel-7 [0e9a221](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e9a221)
+- [patch] Update build process to use babel-7 [0e9a221](https://github.com/fnamazing/uiKit/commits/0e9a221)
 
 ## 10.0.0
-- [major] Icons that do not exist in the main icons package have been removed [6dd05b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6dd05b2)
+- [major] Icons that do not exist in the main icons package have been removed [6dd05b2](https://github.com/fnamazing/uiKit/commits/6dd05b2)
 
 ## 9.6.2
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/section-message@1.0.8
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/section-message@1.0.8
+  - @findable/icon@14.0.0
 
 ## 9.6.1
-- [patch] Moved to @atlaskit/theme for all the values from util-shared-styles [6d35164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d35164)
+- [patch] Moved to @findable/theme for all the values from util-shared-styles [6d35164](https://github.com/fnamazing/uiKit/commits/6d35164)
 
 ## 9.6.0
-- [minor] Add like icon [cd71c5f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd71c5f)
+- [minor] Add like icon [cd71c5f](https://github.com/fnamazing/uiKit/commits/cd71c5f)
 
 ## 9.5.0
-- [minor] Add the questions icon [ad96a89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad96a89)
+- [minor] Add the questions icon [ad96a89](https://github.com/fnamazing/uiKit/commits/ad96a89)
 
 ## 9.4.0
-- [minor] Add and edit star icons [55e3ec7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55e3ec7)
+- [minor] Add and edit star icons [55e3ec7](https://github.com/fnamazing/uiKit/commits/55e3ec7)
 
 ## 9.3.0
-- [minor] Add the new child-issues icon [8d3f8dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d3f8dd)
+- [minor] Add the new child-issues icon [8d3f8dd](https://github.com/fnamazing/uiKit/commits/8d3f8dd)
 
 ## 9.2.0
-- [minor] Add new icon [d36f760](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d36f760)
-- [patch] Add new icon for Roadmap [365460a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/365460a)
+- [minor] Add new icon [d36f760](https://github.com/fnamazing/uiKit/commits/d36f760)
+- [patch] Add new icon for Roadmap [365460a](https://github.com/fnamazing/uiKit/commits/365460a)
 
 ## 9.1.2
-- [patch] Update warning message and fix test for reduced-ui-pack [4b166d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b166d8)
-- [none] Updated dependencies [4b166d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b166d8)
-  - @atlaskit/icon@13.2.6
+- [patch] Update warning message and fix test for reduced-ui-pack [4b166d8](https://github.com/fnamazing/uiKit/commits/4b166d8)
+- [none] Updated dependencies [4b166d8](https://github.com/fnamazing/uiKit/commits/4b166d8)
+  - @findable/icon@13.2.6
 
 ## 9.1.1
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/css-reset@3.0.1
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/icon@13.2.2
+  - @findable/docs@5.0.2
+  - @findable/css-reset@3.0.1
 
 ## 9.1.0
-- [minor] Add a new star large icon [5dd7d0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dd7d0e)
-- [none] Updated dependencies [5dd7d0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5dd7d0e)
-  - @atlaskit/icon@13.1.0
+- [minor] Add a new star large icon [5dd7d0e](https://github.com/fnamazing/uiKit/commits/5dd7d0e)
+- [none] Updated dependencies [5dd7d0e](https://github.com/fnamazing/uiKit/commits/5dd7d0e)
+  - @findable/icon@13.1.0
 
 ## 9.0.0
 
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/css-reset@3.0.0
-  - @atlaskit/icon@13.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/css-reset@3.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/icon@13.0.0
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/docs@5.0.0
+  - @findable/css-reset@3.0.0
+  - @findable/icon@13.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/css-reset@3.0.0
+  - @findable/docs@5.0.0
+  - @findable/icon@13.0.0
 
 ## 8.19.0
-- [minor] Add new media viewer icons  and replace existing ones [623a2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/623a2a0)
-- [none] Updated dependencies [623a2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/623a2a0)
-  - @atlaskit/icon@12.8.0
+- [minor] Add new media viewer icons  and replace existing ones [623a2a0](https://github.com/fnamazing/uiKit/commits/623a2a0)
+- [none] Updated dependencies [623a2a0](https://github.com/fnamazing/uiKit/commits/623a2a0)
+  - @findable/icon@12.8.0
 
 ## 8.18.0
-- [minor] Added lozenges to reduced-ui-pack [9baf761](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9baf761)
+- [minor] Added lozenges to reduced-ui-pack [9baf761](https://github.com/fnamazing/uiKit/commits/9baf761)
 
 ## 8.17.0
-- [minor] Add chevron large icons [086b5d7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/086b5d7)
-- [none] Updated dependencies [086b5d7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/086b5d7)
-  - @atlaskit/icon@12.7.0
+- [minor] Add chevron large icons [086b5d7](https://github.com/fnamazing/uiKit/commits/086b5d7)
+- [none] Updated dependencies [086b5d7](https://github.com/fnamazing/uiKit/commits/086b5d7)
+  - @findable/icon@12.7.0
 
 ## 8.16.0
-- [minor] Updated form field styling to match latest ADG3 styles [e57e853](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e57e853)
+- [minor] Updated form field styling to match latest ADG3 styles [e57e853](https://github.com/fnamazing/uiKit/commits/e57e853)
 
 ## 8.15.0
-- [minor] Add a new badge id: department and suitcase [e46ff5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e46ff5e)
-- [none] Updated dependencies [e46ff5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e46ff5e)
-  - @atlaskit/icon@12.6.0
+- [minor] Add a new badge id: department and suitcase [e46ff5e](https://github.com/fnamazing/uiKit/commits/e46ff5e)
+- [none] Updated dependencies [e46ff5e](https://github.com/fnamazing/uiKit/commits/e46ff5e)
+  - @findable/icon@12.6.0
 
 ## 8.14.0
-- [minor] Add the new app-switcher icon [8c0cacd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c0cacd)
-- [none] Updated dependencies [8c0cacd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c0cacd)
-  - @atlaskit/icon@12.4.0
+- [minor] Add the new app-switcher icon [8c0cacd](https://github.com/fnamazing/uiKit/commits/8c0cacd)
+- [none] Updated dependencies [8c0cacd](https://github.com/fnamazing/uiKit/commits/8c0cacd)
+  - @findable/icon@12.4.0
 
 ## 8.13.0
-- [minor] Object icons color updated and adding file types icons [c49ce0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c49ce0b)
-- [none] Updated dependencies [c49ce0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c49ce0b)
-  - @atlaskit/icon@12.3.0
+- [minor] Object icons color updated and adding file types icons [c49ce0b](https://github.com/fnamazing/uiKit/commits/c49ce0b)
+- [none] Updated dependencies [c49ce0b](https://github.com/fnamazing/uiKit/commits/c49ce0b)
+  - @findable/icon@12.3.0
 
 ## 8.12.0
-- [minor] Fixes types for Flow 0.74 [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-- [none] Updated dependencies [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-  - @atlaskit/icon@12.2.0
+- [minor] Fixes types for Flow 0.74 [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+- [none] Updated dependencies [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+  - @findable/icon@12.2.0
 
 ## 8.11.2
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/css-reset@2.0.6
-  - @atlaskit/icon@12.1.2
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/css-reset@2.0.6
+  - @findable/icon@12.1.2
 
 ## 8.11.1
-- [patch] Update changelogs to remove duplicate [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-- [none] Updated dependencies [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-  - @atlaskit/css-reset@2.0.5
-  - @atlaskit/icon@12.1.1
-  - @atlaskit/docs@4.1.1
+- [patch] Update changelogs to remove duplicate [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+- [none] Updated dependencies [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+  - @findable/css-reset@2.0.5
+  - @findable/icon@12.1.1
+  - @findable/docs@4.1.1
 
 ## 8.11.0
-- [none] Updated dependencies [9d20f54](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d20f54)
-  - @atlaskit/icon@12.1.0
-  - @atlaskit/docs@4.1.0
-  - @atlaskit/css-reset@2.0.4
+- [none] Updated dependencies [9d20f54](https://github.com/fnamazing/uiKit/commits/9d20f54)
+  - @findable/icon@12.1.0
+  - @findable/docs@4.1.0
+  - @findable/css-reset@2.0.4
 
 ## 8.10.1
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/docs@4.0.0
-  - @atlaskit/css-reset@2.0.3
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/icon@12.0.0
+  - @findable/docs@4.0.0
+  - @findable/css-reset@2.0.3
 
 ## 8.10.0
-- [minor] Update emoji and add no-image [620557e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/620557e)
-- [none] Updated dependencies [620557e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/620557e)
-  - @atlaskit/icon@11.4.0
+- [minor] Update emoji and add no-image [620557e](https://github.com/fnamazing/uiKit/commits/620557e)
+- [none] Updated dependencies [620557e](https://github.com/fnamazing/uiKit/commits/620557e)
+  - @findable/icon@11.4.0
 
 ## 8.9.2
-- [patch] Fix unit tests [22337bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/22337bd)
-- [patch] Update for label with white background [a0d7ed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a0d7ed7)
-- [patch] Fix whitebackground for label [b8eb930](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8eb930)
-- [patch] Fix white background for label [229a63c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/229a63c)
-- [none] Updated dependencies [22337bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/22337bd)
-  - @atlaskit/icon@11.3.1
+- [patch] Fix unit tests [22337bd](https://github.com/fnamazing/uiKit/commits/22337bd)
+- [patch] Update for label with white background [a0d7ed7](https://github.com/fnamazing/uiKit/commits/a0d7ed7)
+- [patch] Fix whitebackground for label [b8eb930](https://github.com/fnamazing/uiKit/commits/b8eb930)
+- [patch] Fix white background for label [229a63c](https://github.com/fnamazing/uiKit/commits/229a63c)
+- [none] Updated dependencies [22337bd](https://github.com/fnamazing/uiKit/commits/22337bd)
+  - @findable/icon@11.3.1
 
 ## 8.9.1
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/docs@3.0.4
-  - @atlaskit/css-reset@2.0.2
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/icon@11.3.0
+  - @findable/docs@3.0.4
+  - @findable/css-reset@2.0.2
 
 ## 8.9.0
-- [minor] Add divider from editor  [5cbb8a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5cbb8a6)
-- [minor] Add divider fabric icon [8b794ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b794ed)
-- [minor] Add divider icon from fabric [c8adb64](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8adb64)
-- [none] Updated dependencies [5cbb8a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5cbb8a6)
-  - @atlaskit/icon@11.2.0
+- [minor] Add divider from editor  [5cbb8a6](https://github.com/fnamazing/uiKit/commits/5cbb8a6)
+- [minor] Add divider fabric icon [8b794ed](https://github.com/fnamazing/uiKit/commits/8b794ed)
+- [minor] Add divider icon from fabric [c8adb64](https://github.com/fnamazing/uiKit/commits/c8adb64)
+- [none] Updated dependencies [5cbb8a6](https://github.com/fnamazing/uiKit/commits/5cbb8a6)
+  - @findable/icon@11.2.0
 
 ## 8.8.0
-- [minor] Add label icon [72baa86](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72baa86)
+- [minor] Add label icon [72baa86](https://github.com/fnamazing/uiKit/commits/72baa86)
 
 ## 8.7.4
-- [patch] ED-4228 adding icons for table floating toolbar advance options. [b466410](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b466410)
+- [patch] ED-4228 adding icons for table floating toolbar advance options. [b466410](https://github.com/fnamazing/uiKit/commits/b466410)
 
 ## 8.7.2
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 8.7.1
-- [patch] Packages Flow types for elements components [3111e74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3111e74)
+- [patch] Packages Flow types for elements components [3111e74](https://github.com/fnamazing/uiKit/commits/3111e74)
 
 ## 8.7.0
-- [minor] Add React 16 support. [12ea6e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/12ea6e4)
+- [minor] Add React 16 support. [12ea6e4](https://github.com/fnamazing/uiKit/commits/12ea6e4)
 
 ## 8.6.0
-- [minor] Update svg stroke and fill color to match the spec for checkbox and radio button [aaeb66a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aaeb66a)
+- [minor] Update svg stroke and fill color to match the spec for checkbox and radio button [aaeb66a](https://github.com/fnamazing/uiKit/commits/aaeb66a)
 
 ## 8.5.0
-- [minor] Updated switcher icon [2815441](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2815441)
+- [minor] Updated switcher icon [2815441](https://github.com/fnamazing/uiKit/commits/2815441)
 
 ## 8.4.0
-- [minor] Move icon and reduced-ui pack to new repo, update build process [b3977f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3977f3)
+- [minor] Move icon and reduced-ui pack to new repo, update build process [b3977f3](https://github.com/fnamazing/uiKit/commits/b3977f3)
 
 ## 8.3.0 (2017-12-08)
 * feature; added new media layout icons for the editor (issues closed: ak-4012) ([ee770f5](https://bitbucket.org/atlassian/atlaskit/commits/ee770f5))

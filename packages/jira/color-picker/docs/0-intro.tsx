@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, code, Example, Props } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
 ${(
   <SectionMessage appearance="warning">
     <p>
       <strong>
-        Note: @atlaskit/color-picker is currently a developer preview.
+        Note: @findable/color-picker is currently a developer preview.
       </strong>
     </p>
     <p>
@@ -23,12 +23,12 @@ This component allows to pick colors from color palette.
 ## Usage
 
 ${code`
-  import ColorPicker from '@atlaskit/color-picker';
+  import ColorPicker from '@findable/color-picker';
 `}
 
 ${(
   <Example
-    packageName="@atlaskit/color-picker"
+    packageName="@findable/color-picker"
     Component={require('../examples/00-color-picker').default}
     source={require('!!raw-loader!../examples/00-color-picker')}
     title="Basic Usage"
@@ -38,7 +38,7 @@ ${(
 
 ${(
   <Example
-    packageName="@atlaskit/color-picker"
+    packageName="@findable/color-picker"
     Component={require('../examples/01-multi-columns-color-picker').default}
     source={require('!!raw-loader!../examples/01-multi-columns-color-picker')}
     title="Color picker with multiple columns palette"

@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Fragment } from 'react';
-import GlobalNavigation from '@atlaskit/global-navigation';
-import { AtlassianIcon, AtlassianWordmark } from '@atlaskit/logo';
+import GlobalNavigation from '@findable/global-navigation';
+import { AtlassianIcon, AtlassianWordmark } from '@findable/logo';
 import {
   GroupHeading,
   HeaderSection,

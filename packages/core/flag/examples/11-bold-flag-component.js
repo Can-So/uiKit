@@ -1,11 +1,11 @@
 // @flow
 
 import React from 'react';
-import Error from '@atlaskit/icon/glyph/error';
-import Info from '@atlaskit/icon/glyph/info';
-import Tick from '@atlaskit/icon/glyph/check-circle';
-import Warning from '@atlaskit/icon/glyph/warning';
-import { colors, gridSize } from '@atlaskit/theme';
+import Error from '@findable/icon/glyph/error';
+import Info from '@findable/icon/glyph/info';
+import Tick from '@findable/icon/glyph/check-circle';
+import Warning from '@findable/icon/glyph/warning';
+import { colors, gridSize } from '@findable/theme';
 import Flag from '../src';
 
 const actions = [

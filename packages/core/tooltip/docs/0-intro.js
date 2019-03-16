@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   This package exports \`Tooltip\` and \`TooltipPrimitive\` components.
@@ -15,11 +15,11 @@ export default md`
 
   ## Usage
 
-  ${code`import Tooltip, { TooltipPrimitive } from '@atlaskit/tooltip';`}
+  ${code`import Tooltip, { TooltipPrimitive } from '@findable/tooltip';`}
 
   ${(
     <Example
-      packageName="@atlaskit/tooltip"
+      packageName="@findable/tooltip"
       Component={require('../examples/basic').default}
       source={require('!!raw-loader!../examples/basic')}
       title="Basic"
@@ -30,7 +30,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/tooltip"
+      packageName="@findable/tooltip"
       Component={require('../examples/position').default}
       source={require('!!raw-loader!../examples/position')}
       title="Position"
@@ -46,7 +46,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/tooltip"
+      packageName="@findable/tooltip"
       Component={require('../examples/hover-intent').default}
       source={require('!!raw-loader!../examples/hover-intent')}
       title="Intent"

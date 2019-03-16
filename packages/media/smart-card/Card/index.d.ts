@@ -10,11 +10,11 @@ export declare const Card: React.ComponentClass<({
 } & {
     url: string;
     client?: import("../Client").Client | undefined;
-} & import("../../../../elements/analytics-gas-types/node_modules/@atlaskit/analytics-next-types").WithAnalyticsEventProps) | ({
+} & import("../../../../elements/analytics-gas-types/node_modules/@findable/analytics-next-types").WithAnalyticsEventProps) | ({
     appearance: CardAppearance;
     isSelected?: boolean | undefined;
     onClick?: (() => void) | undefined;
     importer?: ((target: any) => void) | undefined;
 } & {
     data: any;
-} & import("../../../../elements/analytics-gas-types/node_modules/@atlaskit/analytics-next-types").WithAnalyticsEventProps), any>;
+} & import("../../../../elements/analytics-gas-types/node_modules/@findable/analytics-next-types").WithAnalyticsEventProps), any>;

@@ -1,7 +1,7 @@
 // @flow
 import styled, { keyframes } from 'styled-components';
-import { akAnimationMixins } from '@atlaskit/util-shared-styles';
-import { gridSize } from '@atlaskit/theme';
+import { akAnimationMixins } from '@findable/util-shared-styles';
+import { gridSize } from '@findable/theme';
 
 const { createBold, interpolate } = akAnimationMixins;
 

@@ -1,5 +1,5 @@
 import { createTag, serializeStyle } from '../util';
-import { codeFontFamily } from '@atlaskit/theme';
+import { codeFontFamily } from '@findable/theme';
 var css = serializeStyle({
     background: 'rgb(244, 245, 247)',
     color: 'rgb(23, 43, 77)',

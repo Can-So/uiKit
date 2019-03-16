@@ -5,7 +5,7 @@ A set of UI elements for indicating progress through a user journey.
 ## Installation
 
 ```sh
-yarn add @atlaskit/progress-indicator
+yarn add @findable/progress-indicator
 ```
 
 ## Usage

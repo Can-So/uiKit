@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { withAnalyticsForSumTypeProps } from '@atlaskit/analytics-next';
+import { withAnalyticsForSumTypeProps } from '@findable/analytics-next';
 import { isCardWithData, CardWithDataRenderer, CardWithURLRenderer, } from './render';
 var PlainCard = /** @class */ (function (_super) {
     tslib_1.__extends(PlainCard, _super);

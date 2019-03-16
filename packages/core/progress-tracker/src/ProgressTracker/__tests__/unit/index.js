@@ -3,7 +3,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Grid } from '@atlaskit/page';
+import { Grid } from '@findable/page';
 import { ThemeProvider } from 'styled-components';
 import ProgressTracker from '../../index';
 import ProgressTrackerStage from '../../../ProgressTrackerStage';

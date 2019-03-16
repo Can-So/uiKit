@@ -1,6 +1,6 @@
 import { StoryBookAuthProvider } from './authProvider';
 import { collectionNames } from './collectionNames';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 import { mediaPickerAuthProvider } from './mediaPickerAuthProvider';
 import { userAuthProvider } from './userAuthProvider';
 export var defaultBaseUrl = 'https://dt-api.dev.atl-paas.net';

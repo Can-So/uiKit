@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import FieldRadioGroup, { AkRadio } from '../src';
 import type { ItemsPropTypeSmart } from '../src/types';
 

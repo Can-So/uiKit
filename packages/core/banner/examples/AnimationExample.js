@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
+import Button from '@findable/button';
+import WarningIcon from '@findable/icon/glyph/warning';
 import Banner from '../src';
 
 const Icon = <WarningIcon label="Warning icon" secondaryColor="inherit" />;

@@ -4,8 +4,8 @@ import { EditorState, Transaction, Selection } from 'prosemirror-state';
 import { EditorView, DirectEditorProps } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { intlShape } from 'react-intl';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
+import { ProviderFactory, Transformer } from '@findable/editor-common';
 
 import { EventDispatcher, createDispatch } from '../event-dispatcher';
 import { processRawValue } from '../utils';

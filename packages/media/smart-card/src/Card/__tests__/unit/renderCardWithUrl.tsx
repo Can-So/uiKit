@@ -8,12 +8,12 @@ import * as React from 'react';
 import { CardWithUrlContent } from '../../renderCardWithUrl';
 import { mount } from 'enzyme';
 import { Client, ResolveResponse } from '../../../Client';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import {
   AnalyticsEventPayload,
   UIAnalyticsEventInterface,
-} from '@atlaskit/analytics-next-types';
-import { InlineCardUnauthorizedView } from '@atlaskit/media-ui';
+} from '@findable/analytics-next-types';
+import { InlineCardUnauthorizedView } from '@findable/media-ui';
 
 class FakeClient extends Client {
   fetchData(): Promise<ResolveResponse> {

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {
   createStorybookContext,
   genericFileId,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { Card } from '../src';
 
 const GradientBackground: React.ComponentClass<

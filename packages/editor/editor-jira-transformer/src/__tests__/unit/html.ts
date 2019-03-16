@@ -15,7 +15,7 @@ import {
   strong,
   subsup,
   underline,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   checkParse,
   checkEncode,
@@ -24,7 +24,7 @@ import {
   parseWithSchema,
 } from './_test-helpers';
 import { Schema } from 'prosemirror-model';
-import { createJIRASchema } from '@atlaskit/adf-schema';
+import { createJIRASchema } from '@findable/adf-schema';
 
 export const schema = createJIRASchema({ allowSubSup: true });
 

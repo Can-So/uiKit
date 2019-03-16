@@ -1,4 +1,4 @@
-import { doc, createEditorFactory, p } from '@atlaskit/editor-test-helpers';
+import { doc, createEditorFactory, p } from '@findable/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 
 import { setGapCursorSelection } from '../../../../utils';

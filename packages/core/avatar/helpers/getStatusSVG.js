@@ -1,7 +1,7 @@
 import _extends from "@babel/runtime/helpers/extends";
 import React from 'react';
 import styled from 'styled-components';
-import { colors, themed, withTheme } from '@atlaskit/theme';
+import { colors, themed, withTheme } from '@findable/theme';
 
 var Svg = function Svg(props) {
   return React.createElement("svg", _extends({

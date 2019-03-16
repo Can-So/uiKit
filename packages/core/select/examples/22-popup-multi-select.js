@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import { Checkbox } from '@atlaskit/checkbox';
-import DownIcon from '@atlaskit/icon/glyph/hipchat/chevron-down';
+import Button from '@findable/button';
+import { Checkbox } from '@findable/checkbox';
+import DownIcon from '@findable/icon/glyph/hipchat/chevron-down';
 import { PopupSelect } from '../src';
 
 const options = [

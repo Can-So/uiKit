@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { themed, colors } from '@atlaskit/theme';
+import { themed, colors } from '@findable/theme';
 import Button, { ButtonGroup, themeNamespace, ButtonAppearances } from '../src';
 
 const appearances: ButtonAppearances[] = ['primary'];

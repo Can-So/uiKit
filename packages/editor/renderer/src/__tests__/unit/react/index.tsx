@@ -1,6 +1,6 @@
 import { mount, shallow } from 'enzyme';
 import { ReactSerializer } from '../../../index';
-import { defaultSchema as schema } from '@atlaskit/adf-schema';
+import { defaultSchema as schema } from '@findable/adf-schema';
 import { Action } from '../../../react/marks';
 import { Heading } from '../../../react/nodes';
 import { Emoji } from '../../../react/nodes';

@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   ${(
     <SectionMessage
       appearance="warning"
-      title="Note: @atlaskit/field-range is being deprecated in favor of @atlaskit/range."
+      title="Note: @findable/field-range is being deprecated in favor of @findable/range."
     >
       This is part of our forms update which will modernize all our form fields.
     </SectionMessage>
@@ -17,13 +17,13 @@ export default md`
 
     ## Usage
 
-  ${code`import FieldRange from '@atlaskit/field-range';`}
+  ${code`import FieldRange from '@findable/field-range';`}
 
   The onChange prop provides a way to subscribe to changes in the value.
 
   ${(
     <Example
-      packageName="@atlaskit/field-range"
+      packageName="@findable/field-range"
       Component={require('../examples/00-basic-example').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-example')}

@@ -1,4 +1,4 @@
-import { TaskState, ObjectKey } from '@atlaskit/task-decision';
+import { TaskState, ObjectKey } from '@findable/task-decision';
 
 import RendererBridge from './bridge';
 import WebBridge from '../../web-bridge';

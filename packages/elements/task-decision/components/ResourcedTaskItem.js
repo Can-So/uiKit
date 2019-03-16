@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
 import TaskItem from './TaskItem';
-import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { FabricElementsAnalyticsContext } from '@findable/analytics-namespaced-context';
 var ResourcedTaskItem = /** @class */ (function (_super) {
     tslib_1.__extends(ResourcedTaskItem, _super);
     function ResourcedTaskItem(props) {

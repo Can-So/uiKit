@@ -1,4 +1,4 @@
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 
 import { emojiPickerWidth } from './constants';
 

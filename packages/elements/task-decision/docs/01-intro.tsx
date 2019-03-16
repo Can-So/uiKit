@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 import TaskDecisionExample from '../examples/00-decision-item';
 const TaskDecisionSource = require('!!raw-loader!../examples/00-decision-item');
 
@@ -13,7 +13,7 @@ export default md`
   Use the component in your React app as follows:
 
   ${code`
-  import { DecisionList, DecisionItem } from '@atlaskit/task-decision';
+  import { DecisionList, DecisionItem } from '@findable/task-decision';
   ReactDOM.render(<DecisionItem>A decision</DecisionItem>, container);
   ReactDOM.render(
     <DecisionList>
@@ -26,7 +26,7 @@ export default md`
 
    ${(
      <Example
-       packageName="@atlaskit/status"
+       packageName="@findable/status"
        Component={TaskDecisionExample}
        title="Status Picker"
        source={TaskDecisionSource}

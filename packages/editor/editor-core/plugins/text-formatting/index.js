@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { em, strong, strike, subsup, underline, code, } from '@atlaskit/adf-schema';
+import { em, strong, strike, subsup, underline, code, } from '@findable/adf-schema';
 import { ButtonGroup } from '../../ui/styles';
 import { plugin as textFormattingPlugin, pluginKey as textFormattingPluginKey, } from './pm-plugins/main';
 import { plugin as clearFormattingPlugin, pluginKey as clearFormattingPluginKey, } from './pm-plugins/clear-formatting';

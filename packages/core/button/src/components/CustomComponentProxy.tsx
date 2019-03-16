@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { cleanProps } from '@atlaskit/analytics-next';
+import { cleanProps } from '@findable/analytics-next';
 
 /**
  * Styling a button is complicated and there are a number of properties which inform its appearance.

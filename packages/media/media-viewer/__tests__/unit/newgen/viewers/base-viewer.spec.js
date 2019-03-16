@@ -1,12 +1,12 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { BaseViewer } from '../../../../newgen/viewers/base-viewer';
 import { createContext } from '../../_stubs';
 import { Outcome } from '../../../../newgen/domain';
 import { createError, ErrorMessage, } from '../../../../newgen/error';
 import { Spinner } from '../../../../newgen/loading';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 function createItem() {
     return {
         id: 'some-id',

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 // Otherwise tslint complains about require not being declared
 declare const require: any;
@@ -13,7 +13,7 @@ This component provides a renderer for ADF documents.
 Use the component in your React app as follows:
 
 ${code`
-import { ReactRenderer } from '@atlaskit/renderer';
+import { ReactRenderer } from '@findable/renderer';
 ReactDOM.render(<ReactRenderer document={DOCUMENT} />, container);
 `}
 
@@ -32,8 +32,8 @@ You will need to use a transformer to convert your own storage format into the A
 We have provided helper utility to simplify this process:
 
 ${code`
-import { BitbucketTransformer } from '@atlaskit/editor-bitbucket-transformer';
-import { ReactRenderer, ADFEncoder } from '@atlaskit/renderer';
+import { BitbucketTransformer } from '@findable/editor-bitbucket-transformer';
+import { ReactRenderer, ADFEncoder } from '@findable/renderer';
 
 const adfEncoder = new ADFEncoder(schema => new BitbucketTransformer(schema));
 const document = adfEncoder.encode(DOCUMENT);
@@ -54,7 +54,7 @@ The props \`truncated\`, \`maxHeight\` and \`fadeOutHeight\` are all optional. \
 and \`fadeOutHeight\` will default to 30px unless defined.
 
 ${code`
-import { ReactRenderer } from '@atlaskit/renderer';
+import { ReactRenderer } from '@findable/renderer';
 ReactDOM.render(<ReactRenderer document={DOCUMENT} truncated={true} maxHeight={70} fadeOutHeight={30} />, container);
 `}
 

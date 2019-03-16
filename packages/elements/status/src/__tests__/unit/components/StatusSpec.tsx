@@ -1,6 +1,6 @@
-import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
-import Lozenge from '@atlaskit/lozenge';
+import { AnalyticsListener as AnalyticsListenerNext } from '@findable/analytics-next';
+import { mountWithIntl } from '@findable/editor-test-helpers';
+import Lozenge from '@findable/lozenge';
 import * as React from 'react';
 import { ELEMENTS_CHANNEL } from '../../../components/analytics';
 import { ANALYTICS_HOVER_DELAY } from '../../../components/constants';
@@ -15,7 +15,7 @@ const createPayload = (
     action,
     actionSubject,
     attributes: {
-      packageName: '@atlaskit/status',
+      packageName: '@findable/status',
       packageVersion: expect.any(String),
       componentName: 'status',
       localId,

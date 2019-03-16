@@ -1,7 +1,7 @@
-import Select from '@atlaskit/select';
-import { ToggleStateless as Toggle } from '@atlaskit/toggle';
-import { OptionData } from '@atlaskit/user-picker';
-import { userPickerData } from '@atlaskit/util-data-test';
+import Select from '@findable/select';
+import { ToggleStateless as Toggle } from '@findable/toggle';
+import { OptionData } from '@findable/user-picker';
+import { userPickerData } from '@findable/util-data-test';
 import * as React from 'react';
 import { ShareDialogContainer } from '../src';
 import {

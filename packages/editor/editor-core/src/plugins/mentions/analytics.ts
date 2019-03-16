@@ -3,8 +3,8 @@ import {
   GasPayload,
   OPERATIONAL_EVENT_TYPE,
   UI_EVENT_TYPE,
-} from '@atlaskit/analytics-gas-types';
-import { isSpecialMention, MentionDescription } from '@atlaskit/mention';
+} from '@findable/analytics-gas-types';
+import { isSpecialMention, MentionDescription } from '@findable/mention';
 import {
   name as packageName,
   version as packageVersion,

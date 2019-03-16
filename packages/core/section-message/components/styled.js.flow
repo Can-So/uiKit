@@ -6,7 +6,7 @@ import {
   math,
   gridSize,
   typography,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 
 export const Container = styled.section`
   display: flex;

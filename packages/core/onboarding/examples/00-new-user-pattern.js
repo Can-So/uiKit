@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { ProgressDots } from '@atlaskit/progress-indicator';
-import { gridSize } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { ProgressDots } from '@findable/progress-indicator';
+import { gridSize } from '@findable/theme';
 import { SpotlightCard } from '../src';
 
 const Wrapper = styled.div`

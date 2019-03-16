@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import Lorem from 'react-lorem-component';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import Modal, { ModalTransition } from '../src';
 
 type State = {

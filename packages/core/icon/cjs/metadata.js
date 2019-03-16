@@ -20,1727 +20,1727 @@ var _default = {
   activity: {
     keywords: ['activity', 'window', 'icon', 'core'],
     componentName: 'ActivityIcon',
-    package: '@atlaskit/icon/glyph/activity'
+    package: '@findable/icon/glyph/activity'
   },
   'add-circle': {
     keywords: ['add-circle', 'addcircle', 'plus', 'create', 'new', 'icon', 'core'],
     componentName: 'AddCircleIcon',
-    package: '@atlaskit/icon/glyph/add-circle'
+    package: '@findable/icon/glyph/add-circle'
   },
   'add-item': {
     keywords: ['add-item', 'additem', 'plus', 'create', 'new', 'icon', 'core'],
     componentName: 'AddItemIcon',
-    package: '@atlaskit/icon/glyph/add-item'
+    package: '@findable/icon/glyph/add-item'
   },
   add: {
     keywords: ['add', 'plus', 'create', 'new', 'icon', 'core'],
     componentName: 'AddIcon',
-    package: '@atlaskit/icon/glyph/add'
+    package: '@findable/icon/glyph/add'
   },
   addon: {
     keywords: ['addon', 'icon', 'core'],
     componentName: 'AddonIcon',
-    package: '@atlaskit/icon/glyph/addon'
+    package: '@findable/icon/glyph/addon'
   },
   'app-access': {
     keywords: ['app-access', 'appaccess', 'icon', 'core'],
     componentName: 'AppAccessIcon',
-    package: '@atlaskit/icon/glyph/app-access'
+    package: '@findable/icon/glyph/app-access'
   },
   'app-switcher': {
     keywords: ['app-switcher', 'appswitcher', 'icon', 'core'],
     componentName: 'AppSwitcherIcon',
-    package: '@atlaskit/icon/glyph/app-switcher'
+    package: '@findable/icon/glyph/app-switcher'
   },
   'arrow-down-circle': {
     keywords: ['arrow-down-circle', 'arrowdowncircle', 'icon', 'core'],
     componentName: 'ArrowDownCircleIcon',
-    package: '@atlaskit/icon/glyph/arrow-down-circle'
+    package: '@findable/icon/glyph/arrow-down-circle'
   },
   'arrow-down': {
     keywords: ['arrow-down', 'arrowdown', 'icon', 'core'],
     componentName: 'ArrowDownIcon',
-    package: '@atlaskit/icon/glyph/arrow-down'
+    package: '@findable/icon/glyph/arrow-down'
   },
   'arrow-left-circle': {
     keywords: ['arrow-left-circle', 'arrowleftcircle', 'back', 'previous', 'icon', 'core'],
     componentName: 'ArrowLeftCircleIcon',
-    package: '@atlaskit/icon/glyph/arrow-left-circle'
+    package: '@findable/icon/glyph/arrow-left-circle'
   },
   'arrow-left': {
     keywords: ['arrow-left', 'arrowleft', 'back', 'previous', 'icon', 'core'],
     componentName: 'ArrowLeftIcon',
-    package: '@atlaskit/icon/glyph/arrow-left'
+    package: '@findable/icon/glyph/arrow-left'
   },
   'arrow-right-circle': {
     keywords: ['arrow-right-circle', 'arrowrightcircle', 'forward', 'next', 'icon', 'core'],
     componentName: 'ArrowRightCircleIcon',
-    package: '@atlaskit/icon/glyph/arrow-right-circle'
+    package: '@findable/icon/glyph/arrow-right-circle'
   },
   'arrow-right': {
     keywords: ['arrow-right', 'arrowright', 'forward', 'next', 'icon', 'core'],
     componentName: 'ArrowRightIcon',
-    package: '@atlaskit/icon/glyph/arrow-right'
+    package: '@findable/icon/glyph/arrow-right'
   },
   'arrow-up-circle': {
     keywords: ['arrow-up-circle', 'arrowupcircle', 'icon', 'core'],
     componentName: 'ArrowUpCircleIcon',
-    package: '@atlaskit/icon/glyph/arrow-up-circle'
+    package: '@findable/icon/glyph/arrow-up-circle'
   },
   'arrow-up': {
     keywords: ['arrow-up', 'arrowup', 'icon', 'core'],
     componentName: 'ArrowUpIcon',
-    package: '@atlaskit/icon/glyph/arrow-up'
+    package: '@findable/icon/glyph/arrow-up'
   },
   attachment: {
     keywords: ['attachment', 'paperclip', 'icon', 'core'],
     componentName: 'AttachmentIcon',
-    package: '@atlaskit/icon/glyph/attachment'
+    package: '@findable/icon/glyph/attachment'
   },
   'audio-circle': {
     keywords: ['audio-circle', 'audiocircle', 'music', 'note', 'sound', 'icon', 'core'],
     componentName: 'AudioCircleIcon',
-    package: '@atlaskit/icon/glyph/audio-circle'
+    package: '@findable/icon/glyph/audio-circle'
   },
   audio: {
     keywords: ['audio', 'music', 'note', 'sound', 'icon', 'core'],
     componentName: 'AudioIcon',
-    package: '@atlaskit/icon/glyph/audio'
+    package: '@findable/icon/glyph/audio'
   },
   backlog: {
     keywords: ['backlog', 'icon', 'core'],
     componentName: 'BacklogIcon',
-    package: '@atlaskit/icon/glyph/backlog'
+    package: '@findable/icon/glyph/backlog'
   },
   'billing-filled': {
     keywords: ['billing-filled', 'billingfilled', 'icon', 'core'],
     componentName: 'BillingFilledIcon',
-    package: '@atlaskit/icon/glyph/billing-filled'
+    package: '@findable/icon/glyph/billing-filled'
   },
   billing: {
     keywords: ['billing', 'invoice', 'receipt', 'icon', 'core'],
     componentName: 'BillingIcon',
-    package: '@atlaskit/icon/glyph/billing'
+    package: '@findable/icon/glyph/billing'
   },
   'bitbucket/branches': {
     keywords: ['bitbucket/branches', 'bitbucketbranches', 'icon', 'core'],
     componentName: 'BitbucketBranchesIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/branches'
+    package: '@findable/icon/glyph/bitbucket/branches'
   },
   'bitbucket/builds': {
     keywords: ['bitbucket/builds', 'bitbucketbuilds', 'icon', 'core'],
     componentName: 'BitbucketBuildsIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/builds'
+    package: '@findable/icon/glyph/bitbucket/builds'
   },
   'bitbucket/clone': {
     keywords: ['bitbucket/clone', 'bitbucketclone', 'icon', 'core'],
     componentName: 'BitbucketCloneIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/clone'
+    package: '@findable/icon/glyph/bitbucket/clone'
   },
   'bitbucket/commits': {
     keywords: ['bitbucket/commits', 'bitbucketcommits', 'icon', 'core'],
     componentName: 'BitbucketCommitsIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/commits'
+    package: '@findable/icon/glyph/bitbucket/commits'
   },
   'bitbucket/compare': {
     keywords: ['bitbucket/compare', 'bitbucketcompare', 'icon', 'core'],
     componentName: 'BitbucketCompareIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/compare'
+    package: '@findable/icon/glyph/bitbucket/compare'
   },
   'bitbucket/forks': {
     keywords: ['bitbucket/forks', 'bitbucketforks', 'icon', 'core'],
     componentName: 'BitbucketForksIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/forks'
+    package: '@findable/icon/glyph/bitbucket/forks'
   },
   'bitbucket/output': {
     keywords: ['bitbucket/output', 'bitbucketoutput', 'icon', 'core'],
     componentName: 'BitbucketOutputIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/output'
+    package: '@findable/icon/glyph/bitbucket/output'
   },
   'bitbucket/pipelines': {
     keywords: ['bitbucket/pipelines', 'bitbucketpipelines', 'icon', 'core'],
     componentName: 'BitbucketPipelinesIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/pipelines'
+    package: '@findable/icon/glyph/bitbucket/pipelines'
   },
   'bitbucket/pullrequests': {
     keywords: ['bitbucket/pullrequests', 'bitbucketpullrequests', 'icon', 'core'],
     componentName: 'BitbucketPullrequestsIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/pullrequests'
+    package: '@findable/icon/glyph/bitbucket/pullrequests'
   },
   'bitbucket/repos': {
     keywords: ['bitbucket/repos', 'bitbucketrepos', 'icon', 'core'],
     componentName: 'BitbucketReposIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/repos'
+    package: '@findable/icon/glyph/bitbucket/repos'
   },
   'bitbucket/snippets': {
     keywords: ['bitbucket/snippets', 'bitbucketsnippets', 'scissors', 'icon', 'core'],
     componentName: 'BitbucketSnippetsIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/snippets'
+    package: '@findable/icon/glyph/bitbucket/snippets'
   },
   'bitbucket/source': {
     keywords: ['bitbucket/source', 'bitbucketsource', 'code', 'icon', 'core'],
     componentName: 'BitbucketSourceIcon',
-    package: '@atlaskit/icon/glyph/bitbucket/source'
+    package: '@findable/icon/glyph/bitbucket/source'
   },
   board: {
     keywords: ['board', 'icon', 'core'],
     componentName: 'BoardIcon',
-    package: '@atlaskit/icon/glyph/board'
+    package: '@findable/icon/glyph/board'
   },
   book: {
     keywords: ['book', 'icon', 'core'],
     componentName: 'BookIcon',
-    package: '@atlaskit/icon/glyph/book'
+    package: '@findable/icon/glyph/book'
   },
   'bullet-list': {
     keywords: ['bullet-list', 'bulletlist', 'ul', 'icon', 'core'],
     componentName: 'BulletListIcon',
-    package: '@atlaskit/icon/glyph/bullet-list'
+    package: '@findable/icon/glyph/bullet-list'
   },
   'calendar-filled': {
     keywords: ['calendar-filled', 'calendarfilled', 'date', 'icon', 'core'],
     componentName: 'CalendarFilledIcon',
-    package: '@atlaskit/icon/glyph/calendar-filled'
+    package: '@findable/icon/glyph/calendar-filled'
   },
   calendar: {
     keywords: ['calendar', 'date', 'icon', 'core'],
     componentName: 'CalendarIcon',
-    package: '@atlaskit/icon/glyph/calendar'
+    package: '@findable/icon/glyph/calendar'
   },
   'camera-filled': {
     keywords: ['camera-filled', 'camerafilled', 'photo', 'icon', 'core'],
     componentName: 'CameraFilledIcon',
-    package: '@atlaskit/icon/glyph/camera-filled'
+    package: '@findable/icon/glyph/camera-filled'
   },
   'camera-rotate': {
     keywords: ['camera-rotate', 'camerarotate', 'photo', 'icon', 'core'],
     componentName: 'CameraRotateIcon',
-    package: '@atlaskit/icon/glyph/camera-rotate'
+    package: '@findable/icon/glyph/camera-rotate'
   },
   'camera-take-picture': {
     keywords: ['camera-take-picture', 'cameratakepicture', 'photo', 'icon', 'core'],
     componentName: 'CameraTakePictureIcon',
-    package: '@atlaskit/icon/glyph/camera-take-picture'
+    package: '@findable/icon/glyph/camera-take-picture'
   },
   camera: {
     keywords: ['camera', 'photo', 'icon', 'core'],
     componentName: 'CameraIcon',
-    package: '@atlaskit/icon/glyph/camera'
+    package: '@findable/icon/glyph/camera'
   },
   canvas: {
     keywords: ['canvas', 'easel', 'icon', 'core'],
     componentName: 'CanvasIcon',
-    package: '@atlaskit/icon/glyph/canvas'
+    package: '@findable/icon/glyph/canvas'
   },
   'check-circle-outline': {
     keywords: ['check-circle-outline', 'checkcircleoutline', 'icon', 'core'],
     componentName: 'CheckCircleOutlineIcon',
-    package: '@atlaskit/icon/glyph/check-circle-outline'
+    package: '@findable/icon/glyph/check-circle-outline'
   },
   'check-circle': {
     keywords: ['check-circle', 'checkcircle', 'tick', 'icon', 'core'],
     componentName: 'CheckCircleIcon',
-    package: '@atlaskit/icon/glyph/check-circle'
+    package: '@findable/icon/glyph/check-circle'
   },
   check: {
     keywords: ['check', 'tick', 'confirm', 'icon', 'core'],
     componentName: 'CheckIcon',
-    package: '@atlaskit/icon/glyph/check'
+    package: '@findable/icon/glyph/check'
   },
   'checkbox-indeterminate': {
     keywords: ['checkbox-indeterminate', 'checkboxindeterminate', 'icon', 'core'],
     componentName: 'CheckboxIndeterminateIcon',
-    package: '@atlaskit/icon/glyph/checkbox-indeterminate'
+    package: '@findable/icon/glyph/checkbox-indeterminate'
   },
   checkbox: {
     keywords: ['checkbox', 'tick', 'icon', 'core'],
     componentName: 'CheckboxIcon',
-    package: '@atlaskit/icon/glyph/checkbox'
+    package: '@findable/icon/glyph/checkbox'
   },
   'chevron-down-circle': {
     keywords: ['chevron-down-circle', 'chevrondowncircle', 'expand', 'collapse', 'icon', 'core'],
     componentName: 'ChevronDownCircleIcon',
-    package: '@atlaskit/icon/glyph/chevron-down-circle'
+    package: '@findable/icon/glyph/chevron-down-circle'
   },
   'chevron-down': {
     keywords: ['chevron-down', 'chevrondown', 'expand', 'collapse', 'icon', 'core'],
     componentName: 'ChevronDownIcon',
-    package: '@atlaskit/icon/glyph/chevron-down'
+    package: '@findable/icon/glyph/chevron-down'
   },
   'chevron-left-circle': {
     keywords: ['chevron-left-circle', 'chevronleftcircle', 'back', 'previous', 'icon', 'core'],
     componentName: 'ChevronLeftCircleIcon',
-    package: '@atlaskit/icon/glyph/chevron-left-circle'
+    package: '@findable/icon/glyph/chevron-left-circle'
   },
   'chevron-left-large': {
     keywords: ['chevron-left-large', 'chevronleftlarge', 'icon', 'core'],
     componentName: 'ChevronLeftLargeIcon',
-    package: '@atlaskit/icon/glyph/chevron-left-large'
+    package: '@findable/icon/glyph/chevron-left-large'
   },
   'chevron-left': {
     keywords: ['chevron-left', 'chevronleft', 'back', 'previous', 'icon', 'core'],
     componentName: 'ChevronLeftIcon',
-    package: '@atlaskit/icon/glyph/chevron-left'
+    package: '@findable/icon/glyph/chevron-left'
   },
   'chevron-right-circle': {
     keywords: ['chevron-right-circle', 'chevronrightcircle', 'forward', 'next', 'icon', 'core'],
     componentName: 'ChevronRightCircleIcon',
-    package: '@atlaskit/icon/glyph/chevron-right-circle'
+    package: '@findable/icon/glyph/chevron-right-circle'
   },
   'chevron-right-large': {
     keywords: ['chevron-right-large', 'chevronrightlarge', 'icon', 'core'],
     componentName: 'ChevronRightLargeIcon',
-    package: '@atlaskit/icon/glyph/chevron-right-large'
+    package: '@findable/icon/glyph/chevron-right-large'
   },
   'chevron-right': {
     keywords: ['chevron-right', 'chevronright', 'forward', 'next', 'icon', 'core'],
     componentName: 'ChevronRightIcon',
-    package: '@atlaskit/icon/glyph/chevron-right'
+    package: '@findable/icon/glyph/chevron-right'
   },
   'chevron-up-circle': {
     keywords: ['chevron-up-circle', 'chevronupcircle', 'expand', 'collapse', 'icon', 'core'],
     componentName: 'ChevronUpCircleIcon',
-    package: '@atlaskit/icon/glyph/chevron-up-circle'
+    package: '@findable/icon/glyph/chevron-up-circle'
   },
   'chevron-up': {
     keywords: ['chevron-up', 'chevronup', 'expand', 'collapse', 'icon', 'core'],
     componentName: 'ChevronUpIcon',
-    package: '@atlaskit/icon/glyph/chevron-up'
+    package: '@findable/icon/glyph/chevron-up'
   },
   'child-issues': {
     keywords: ['child-issues', 'childissues', 'icon', 'core'],
     componentName: 'ChildIssuesIcon',
-    package: '@atlaskit/icon/glyph/child-issues'
+    package: '@findable/icon/glyph/child-issues'
   },
   code: {
     keywords: ['code', 'source', 'icon', 'core'],
     componentName: 'CodeIcon',
-    package: '@atlaskit/icon/glyph/code'
+    package: '@findable/icon/glyph/code'
   },
   comment: {
     keywords: ['comment', 'chat', 'speech', 'icon', 'core'],
     componentName: 'CommentIcon',
-    package: '@atlaskit/icon/glyph/comment'
+    package: '@findable/icon/glyph/comment'
   },
   component: {
     keywords: ['component', 'block', 'lego', 'icon', 'core'],
     componentName: 'ComponentIcon',
-    package: '@atlaskit/icon/glyph/component'
+    package: '@findable/icon/glyph/component'
   },
   copy: {
     keywords: ['copy', 'duplicate', 'icon', 'core'],
     componentName: 'CopyIcon',
-    package: '@atlaskit/icon/glyph/copy'
+    package: '@findable/icon/glyph/copy'
   },
   'creditcard-filled': {
     keywords: ['creditcard-filled', 'creditcardfilled', 'buy', 'pay', 'purchase', 'icon', 'core'],
     componentName: 'CreditcardFilledIcon',
-    package: '@atlaskit/icon/glyph/creditcard-filled'
+    package: '@findable/icon/glyph/creditcard-filled'
   },
   creditcard: {
     keywords: ['creditcard', 'buy', 'pay', 'purchase', 'icon', 'core'],
     componentName: 'CreditcardIcon',
-    package: '@atlaskit/icon/glyph/creditcard'
+    package: '@findable/icon/glyph/creditcard'
   },
   'cross-circle': {
     keywords: ['cross-circle', 'crosscircle', 'close', 'x', 'cancel', 'icon', 'core'],
     componentName: 'CrossCircleIcon',
-    package: '@atlaskit/icon/glyph/cross-circle'
+    package: '@findable/icon/glyph/cross-circle'
   },
   cross: {
     keywords: ['cross', 'close', 'x', 'cancel', 'icon', 'core'],
     componentName: 'CrossIcon',
-    package: '@atlaskit/icon/glyph/cross'
+    package: '@findable/icon/glyph/cross'
   },
   dashboard: {
     keywords: ['dashboard', 'window', 'grid', 'icon', 'core'],
     componentName: 'DashboardIcon',
-    package: '@atlaskit/icon/glyph/dashboard'
+    package: '@findable/icon/glyph/dashboard'
   },
   decision: {
     keywords: ['decision', 'icon', 'core'],
     componentName: 'DecisionIcon',
-    package: '@atlaskit/icon/glyph/decision'
+    package: '@findable/icon/glyph/decision'
   },
   department: {
     keywords: ['department', 'icon', 'core'],
     componentName: 'DepartmentIcon',
-    package: '@atlaskit/icon/glyph/department'
+    package: '@findable/icon/glyph/department'
   },
   'detail-view': {
     keywords: ['detail-view', 'detailview', 'icon', 'core'],
     componentName: 'DetailViewIcon',
-    package: '@atlaskit/icon/glyph/detail-view'
+    package: '@findable/icon/glyph/detail-view'
   },
   'discover-filled': {
     keywords: ['discover-filled', 'discoverfilled', 'compass', 'navigate', 'icon', 'core'],
     componentName: 'DiscoverFilledIcon',
-    package: '@atlaskit/icon/glyph/discover-filled'
+    package: '@findable/icon/glyph/discover-filled'
   },
   discover: {
     keywords: ['discover', 'compass', 'navigate', 'icon', 'core'],
     componentName: 'DiscoverIcon',
-    package: '@atlaskit/icon/glyph/discover'
+    package: '@findable/icon/glyph/discover'
   },
   'document-filled': {
     keywords: ['document-filled', 'documentfilled', 'page', 'paper', 'sheet', 'file', 'icon', 'core'],
     componentName: 'DocumentFilledIcon',
-    package: '@atlaskit/icon/glyph/document-filled'
+    package: '@findable/icon/glyph/document-filled'
   },
   document: {
     keywords: ['document', 'page', 'paper', 'sheet', 'file', 'icon', 'core'],
     componentName: 'DocumentIcon',
-    package: '@atlaskit/icon/glyph/document'
+    package: '@findable/icon/glyph/document'
   },
   documents: {
     keywords: ['documents', 'page', 'paper', 'sheet', 'file', 'icon', 'core'],
     componentName: 'DocumentsIcon',
-    package: '@atlaskit/icon/glyph/documents'
+    package: '@findable/icon/glyph/documents'
   },
   download: {
     keywords: ['download', 'cloud', 'icon', 'core'],
     componentName: 'DownloadIcon',
-    package: '@atlaskit/icon/glyph/download'
+    package: '@findable/icon/glyph/download'
   },
   'drag-handler': {
     keywords: ['drag-handler', 'draghandler', 'icon', 'core'],
     componentName: 'DragHandlerIcon',
-    package: '@atlaskit/icon/glyph/drag-handler'
+    package: '@findable/icon/glyph/drag-handler'
   },
   dropbox: {
     keywords: ['dropbox', 'icon', 'core'],
     componentName: 'DropboxIcon',
-    package: '@atlaskit/icon/glyph/dropbox'
+    package: '@findable/icon/glyph/dropbox'
   },
   'edit-filled': {
     keywords: ['edit-filled', 'editfilled', 'pencil', 'write', 'icon', 'core'],
     componentName: 'EditFilledIcon',
-    package: '@atlaskit/icon/glyph/edit-filled'
+    package: '@findable/icon/glyph/edit-filled'
   },
   edit: {
     keywords: ['edit', 'pencil', 'write', 'icon', 'core'],
     componentName: 'EditIcon',
-    package: '@atlaskit/icon/glyph/edit'
+    package: '@findable/icon/glyph/edit'
   },
   'editor/add': {
     keywords: ['editor/add', 'editoradd', 'plus', 'create', 'new', 'icon', 'core'],
     componentName: 'EditorAddIcon',
-    package: '@atlaskit/icon/glyph/editor/add'
+    package: '@findable/icon/glyph/editor/add'
   },
   'editor/addon': {
     keywords: ['editor/addon', 'editoraddon', 'jigsaw', 'icon', 'core'],
     componentName: 'EditorAddonIcon',
-    package: '@atlaskit/icon/glyph/editor/addon'
+    package: '@findable/icon/glyph/editor/addon'
   },
   'editor/advanced': {
     keywords: ['editor/advanced', 'editoradvanced', 'strikethrough', 'type', 'font', 'typography', 'icon', 'core'],
     componentName: 'EditorAdvancedIcon',
-    package: '@atlaskit/icon/glyph/editor/advanced'
+    package: '@findable/icon/glyph/editor/advanced'
   },
   'editor/align-center': {
     keywords: ['editor/align-center', 'editoraligncenter', 'icon', 'core'],
     componentName: 'EditorAlignCenterIcon',
-    package: '@atlaskit/icon/glyph/editor/align-center'
+    package: '@findable/icon/glyph/editor/align-center'
   },
   'editor/align-image-center': {
     keywords: ['editor/align-image-center', 'editoralignimagecenter', 'icon', 'core'],
     componentName: 'EditorAlignImageCenterIcon',
-    package: '@atlaskit/icon/glyph/editor/align-image-center'
+    package: '@findable/icon/glyph/editor/align-image-center'
   },
   'editor/align-image-left': {
     keywords: ['editor/align-image-left', 'editoralignimageleft', 'icon', 'core'],
     componentName: 'EditorAlignImageLeftIcon',
-    package: '@atlaskit/icon/glyph/editor/align-image-left'
+    package: '@findable/icon/glyph/editor/align-image-left'
   },
   'editor/align-image-right': {
     keywords: ['editor/align-image-right', 'editoralignimageright', 'icon', 'core'],
     componentName: 'EditorAlignImageRightIcon',
-    package: '@atlaskit/icon/glyph/editor/align-image-right'
+    package: '@findable/icon/glyph/editor/align-image-right'
   },
   'editor/align-left': {
     keywords: ['editor/align-left', 'editoralignleft', 'icon', 'core'],
     componentName: 'EditorAlignLeftIcon',
-    package: '@atlaskit/icon/glyph/editor/align-left'
+    package: '@findable/icon/glyph/editor/align-left'
   },
   'editor/align-right': {
     keywords: ['editor/align-right', 'editoralignright', 'icon', 'core'],
     componentName: 'EditorAlignRightIcon',
-    package: '@atlaskit/icon/glyph/editor/align-right'
+    package: '@findable/icon/glyph/editor/align-right'
   },
   'editor/attachment': {
     keywords: ['editor/attachment', 'editorattachment', 'paperclip', 'icon', 'core'],
     componentName: 'EditorAttachmentIcon',
-    package: '@atlaskit/icon/glyph/editor/attachment'
+    package: '@findable/icon/glyph/editor/attachment'
   },
   'editor/background-color': {
     keywords: ['editor/background-color', 'editorbackgroundcolor', 'fill', 'icon', 'core'],
     componentName: 'EditorBackgroundColorIcon',
-    package: '@atlaskit/icon/glyph/editor/background-color'
+    package: '@findable/icon/glyph/editor/background-color'
   },
   'editor/bold': {
     keywords: ['editor/bold', 'editorbold', 'icon', 'core'],
     componentName: 'EditorBoldIcon',
-    package: '@atlaskit/icon/glyph/editor/bold'
+    package: '@findable/icon/glyph/editor/bold'
   },
   'editor/bullet-list': {
     keywords: ['editor/bullet-list', 'editorbulletlist', 'ul', 'icon', 'core'],
     componentName: 'EditorBulletListIcon',
-    package: '@atlaskit/icon/glyph/editor/bullet-list'
+    package: '@findable/icon/glyph/editor/bullet-list'
   },
   'editor/close': {
     keywords: ['editor/close', 'editorclose', 'x', 'cancel', 'cross', 'icon', 'core'],
     componentName: 'EditorCloseIcon',
-    package: '@atlaskit/icon/glyph/editor/close'
+    package: '@findable/icon/glyph/editor/close'
   },
   'editor/code': {
     keywords: ['editor/code', 'editorcode', 'source', 'icon', 'core'],
     componentName: 'EditorCodeIcon',
-    package: '@atlaskit/icon/glyph/editor/code'
+    package: '@findable/icon/glyph/editor/code'
   },
   'editor/collapse': {
     keywords: ['editor/collapse', 'editorcollapse', 'close', 'icon', 'core'],
     componentName: 'EditorCollapseIcon',
-    package: '@atlaskit/icon/glyph/editor/collapse'
+    package: '@findable/icon/glyph/editor/collapse'
   },
   'editor/date': {
     keywords: ['editor/date', 'editordate', 'calendar', 'icon', 'core'],
     componentName: 'EditorDateIcon',
-    package: '@atlaskit/icon/glyph/editor/date'
+    package: '@findable/icon/glyph/editor/date'
   },
   'editor/decision': {
     keywords: ['editor/decision', 'editordecision', 'icon', 'core'],
     componentName: 'EditorDecisionIcon',
-    package: '@atlaskit/icon/glyph/editor/decision'
+    package: '@findable/icon/glyph/editor/decision'
   },
   'editor/divider': {
     keywords: ['editor/divider', 'editordivider', 'icon', 'core'],
     componentName: 'EditorDividerIcon',
-    package: '@atlaskit/icon/glyph/editor/divider'
+    package: '@findable/icon/glyph/editor/divider'
   },
   'editor/done': {
     keywords: ['editor/done', 'editordone', 'check', 'tick', 'icon', 'core'],
     componentName: 'EditorDoneIcon',
-    package: '@atlaskit/icon/glyph/editor/done'
+    package: '@findable/icon/glyph/editor/done'
   },
   'editor/edit': {
     keywords: ['editor/edit', 'editoredit', 'pencil', 'write', 'icon', 'core'],
     componentName: 'EditorEditIcon',
-    package: '@atlaskit/icon/glyph/editor/edit'
+    package: '@findable/icon/glyph/editor/edit'
   },
   'editor/emoji': {
     keywords: ['editor/emoji', 'editoremoji', 'emoticon', 'smiley', 'icon', 'core'],
     componentName: 'EditorEmojiIcon',
-    package: '@atlaskit/icon/glyph/editor/emoji'
+    package: '@findable/icon/glyph/editor/emoji'
   },
   'editor/error': {
     keywords: ['editor/error', 'editorerror', 'warning', 'alert', 'icon', 'core'],
     componentName: 'EditorErrorIcon',
-    package: '@atlaskit/icon/glyph/editor/error'
+    package: '@findable/icon/glyph/editor/error'
   },
   'editor/expand': {
     keywords: ['editor/expand', 'editorexpand', 'open', 'icon', 'core'],
     componentName: 'EditorExpandIcon',
-    package: '@atlaskit/icon/glyph/editor/expand'
+    package: '@findable/icon/glyph/editor/expand'
   },
   'editor/feedback': {
     keywords: ['editor/feedback', 'editorfeedback', 'announce', 'speaker', 'megaphone', 'icon', 'core'],
     componentName: 'EditorFeedbackIcon',
-    package: '@atlaskit/icon/glyph/editor/feedback'
+    package: '@findable/icon/glyph/editor/feedback'
   },
   'editor/file': {
     keywords: ['editor/file', 'editorfile', 'page', 'document', 'paper', 'sheet', 'icon', 'core'],
     componentName: 'EditorFileIcon',
-    package: '@atlaskit/icon/glyph/editor/file'
+    package: '@findable/icon/glyph/editor/file'
   },
   'editor/help': {
     keywords: ['editor/help', 'editorhelp', 'question', 'icon', 'core'],
     componentName: 'EditorHelpIcon',
-    package: '@atlaskit/icon/glyph/editor/help'
+    package: '@findable/icon/glyph/editor/help'
   },
   'editor/hint': {
     keywords: ['editor/hint', 'editorhint', 'light', 'idea', 'icon', 'core'],
     componentName: 'EditorHintIcon',
-    package: '@atlaskit/icon/glyph/editor/hint'
+    package: '@findable/icon/glyph/editor/hint'
   },
   'editor/horizontal-rule': {
     keywords: ['editor/horizontal-rule', 'editorhorizontalrule', 'rule', 'divider', 'icon', 'core'],
     componentName: 'EditorHorizontalRuleIcon',
-    package: '@atlaskit/icon/glyph/editor/horizontal-rule'
+    package: '@findable/icon/glyph/editor/horizontal-rule'
   },
   'editor/image-border': {
     keywords: ['editor/image-border', 'editorimageborder', 'marquee', 'box', 'icon', 'core'],
     componentName: 'EditorImageBorderIcon',
-    package: '@atlaskit/icon/glyph/editor/image-border'
+    package: '@findable/icon/glyph/editor/image-border'
   },
   'editor/image-resize': {
     keywords: ['editor/image-resize', 'editorimageresize', 'expand', 'icon', 'core'],
     componentName: 'EditorImageResizeIcon',
-    package: '@atlaskit/icon/glyph/editor/image-resize'
+    package: '@findable/icon/glyph/editor/image-resize'
   },
   'editor/image': {
     keywords: ['editor/image', 'editorimage', 'photo', 'picture', 'icon', 'core'],
     componentName: 'EditorImageIcon',
-    package: '@atlaskit/icon/glyph/editor/image'
+    package: '@findable/icon/glyph/editor/image'
   },
   'editor/indent': {
     keywords: ['editor/indent', 'editorindent', 'tab', 'spacing', 'padding', 'icon', 'core'],
     componentName: 'EditorIndentIcon',
-    package: '@atlaskit/icon/glyph/editor/indent'
+    package: '@findable/icon/glyph/editor/indent'
   },
   'editor/info': {
     keywords: ['editor/info', 'editorinfo', 'icon', 'core'],
     componentName: 'EditorInfoIcon',
-    package: '@atlaskit/icon/glyph/editor/info'
+    package: '@findable/icon/glyph/editor/info'
   },
   'editor/italic': {
     keywords: ['editor/italic', 'editoritalic', 'icon', 'core'],
     componentName: 'EditorItalicIcon',
-    package: '@atlaskit/icon/glyph/editor/italic'
+    package: '@findable/icon/glyph/editor/italic'
   },
   'editor/layout-three-equal': {
     keywords: ['editor/layout-three-equal', 'editorlayoutthreeequal', 'icon', 'core'],
     componentName: 'EditorLayoutThreeEqualIcon',
-    package: '@atlaskit/icon/glyph/editor/layout-three-equal'
+    package: '@findable/icon/glyph/editor/layout-three-equal'
   },
   'editor/layout-three-with-sidebars': {
     keywords: ['editor/layout-three-with-sidebars', 'editorlayoutthreewithsidebars', 'icon', 'core'],
     componentName: 'EditorLayoutThreeWithSidebarsIcon',
-    package: '@atlaskit/icon/glyph/editor/layout-three-with-sidebars'
+    package: '@findable/icon/glyph/editor/layout-three-with-sidebars'
   },
   'editor/layout-two-equal': {
     keywords: ['editor/layout-two-equal', 'editorlayouttwoequal', 'icon', 'core'],
     componentName: 'EditorLayoutTwoEqualIcon',
-    package: '@atlaskit/icon/glyph/editor/layout-two-equal'
+    package: '@findable/icon/glyph/editor/layout-two-equal'
   },
   'editor/layout-two-left-sidebar': {
     keywords: ['editor/layout-two-left-sidebar', 'editorlayouttwoleftsidebar', 'icon', 'core'],
     componentName: 'EditorLayoutTwoLeftSidebarIcon',
-    package: '@atlaskit/icon/glyph/editor/layout-two-left-sidebar'
+    package: '@findable/icon/glyph/editor/layout-two-left-sidebar'
   },
   'editor/layout-two-right-sidebar': {
     keywords: ['editor/layout-two-right-sidebar', 'editorlayouttworightsidebar', 'icon', 'core'],
     componentName: 'EditorLayoutTwoRightSidebarIcon',
-    package: '@atlaskit/icon/glyph/editor/layout-two-right-sidebar'
+    package: '@findable/icon/glyph/editor/layout-two-right-sidebar'
   },
   'editor/link': {
     keywords: ['editor/link', 'editorlink', 'icon', 'core'],
     componentName: 'EditorLinkIcon',
-    package: '@atlaskit/icon/glyph/editor/link'
+    package: '@findable/icon/glyph/editor/link'
   },
   'editor/media-center': {
     keywords: ['editor/media-center', 'editormediacenter', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaCenterIcon',
-    package: '@atlaskit/icon/glyph/editor/media-center'
+    package: '@findable/icon/glyph/editor/media-center'
   },
   'editor/media-full-width': {
     keywords: ['editor/media-full-width', 'editormediafullwidth', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaFullWidthIcon',
-    package: '@atlaskit/icon/glyph/editor/media-full-width'
+    package: '@findable/icon/glyph/editor/media-full-width'
   },
   'editor/media-wide': {
     keywords: ['editor/media-wide', 'editormediawide', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaWideIcon',
-    package: '@atlaskit/icon/glyph/editor/media-wide'
+    package: '@findable/icon/glyph/editor/media-wide'
   },
   'editor/media-wrap-left': {
     keywords: ['editor/media-wrap-left', 'editormediawrapleft', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaWrapLeftIcon',
-    package: '@atlaskit/icon/glyph/editor/media-wrap-left'
+    package: '@findable/icon/glyph/editor/media-wrap-left'
   },
   'editor/media-wrap-right': {
     keywords: ['editor/media-wrap-right', 'editormediawrapright', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaWrapRightIcon',
-    package: '@atlaskit/icon/glyph/editor/media-wrap-right'
+    package: '@findable/icon/glyph/editor/media-wrap-right'
   },
   'editor/mention': {
     keywords: ['editor/mention', 'editormention', '@', 'person', 'user', 'icon', 'core'],
     componentName: 'EditorMentionIcon',
-    package: '@atlaskit/icon/glyph/editor/mention'
+    package: '@findable/icon/glyph/editor/mention'
   },
   'editor/more': {
     keywords: ['editor/more', 'editormore', 'dots', 'ellipses', 'icon', 'core'],
     componentName: 'EditorMoreIcon',
-    package: '@atlaskit/icon/glyph/editor/more'
+    package: '@findable/icon/glyph/editor/more'
   },
   'editor/note': {
     keywords: ['editor/note', 'editornote', 'document', 'page', 'icon', 'core'],
     componentName: 'EditorNoteIcon',
-    package: '@atlaskit/icon/glyph/editor/note'
+    package: '@findable/icon/glyph/editor/note'
   },
   'editor/number-list': {
     keywords: ['editor/number-list', 'editornumberlist', 'ol', 'icon', 'core'],
     componentName: 'EditorNumberListIcon',
-    package: '@atlaskit/icon/glyph/editor/number-list'
+    package: '@findable/icon/glyph/editor/number-list'
   },
   'editor/open': {
     keywords: ['editor/open', 'editoropen', 'icon', 'core'],
     componentName: 'EditorOpenIcon',
-    package: '@atlaskit/icon/glyph/editor/open'
+    package: '@findable/icon/glyph/editor/open'
   },
   'editor/outdent': {
     keywords: ['editor/outdent', 'editoroutdent', 'indent', 'tab', 'spacing', 'padding', 'icon', 'core'],
     componentName: 'EditorOutdentIcon',
-    package: '@atlaskit/icon/glyph/editor/outdent'
+    package: '@findable/icon/glyph/editor/outdent'
   },
   'editor/panel': {
     keywords: ['editor/panel', 'editorpanel', 'info', 'icon', 'core'],
     componentName: 'EditorPanelIcon',
-    package: '@atlaskit/icon/glyph/editor/panel'
+    package: '@findable/icon/glyph/editor/panel'
   },
   'editor/photo': {
     keywords: ['editor/photo', 'editorphoto', 'camera', 'icon', 'core'],
     componentName: 'EditorPhotoIcon',
-    package: '@atlaskit/icon/glyph/editor/photo'
+    package: '@findable/icon/glyph/editor/photo'
   },
   'editor/quote': {
     keywords: ['editor/quote', 'editorquote', 'icon', 'core'],
     componentName: 'EditorQuoteIcon',
-    package: '@atlaskit/icon/glyph/editor/quote'
+    package: '@findable/icon/glyph/editor/quote'
   },
   'editor/recent': {
     keywords: ['editor/recent', 'editorrecent', 'clock', 'time', 'icon', 'core'],
     componentName: 'EditorRecentIcon',
-    package: '@atlaskit/icon/glyph/editor/recent'
+    package: '@findable/icon/glyph/editor/recent'
   },
   'editor/redo': {
     keywords: ['editor/redo', 'editorredo', 'icon', 'core'],
     componentName: 'EditorRedoIcon',
-    package: '@atlaskit/icon/glyph/editor/redo'
+    package: '@findable/icon/glyph/editor/redo'
   },
   'editor/remove': {
     keywords: ['editor/remove', 'editorremove', 'bin', 'trash', 'recycle', 'delete', 'icon', 'core'],
     componentName: 'EditorRemoveIcon',
-    package: '@atlaskit/icon/glyph/editor/remove'
+    package: '@findable/icon/glyph/editor/remove'
   },
   'editor/search': {
     keywords: ['editor/search', 'editorsearch', 'magnifying', 'glass', 'find', 'icon', 'core'],
     componentName: 'EditorSearchIcon',
-    package: '@atlaskit/icon/glyph/editor/search'
+    package: '@findable/icon/glyph/editor/search'
   },
   'editor/settings': {
     keywords: ['editor/settings', 'editorsettings', 'options', 'configuration', 'icon', 'core'],
     componentName: 'EditorSettingsIcon',
-    package: '@atlaskit/icon/glyph/editor/settings'
+    package: '@findable/icon/glyph/editor/settings'
   },
   'editor/strikethrough': {
     keywords: ['editor/strikethrough', 'editorstrikethrough', 'strikethrough', 'type', 'font', 'typography', 'icon', 'core'],
     componentName: 'EditorStrikethroughIcon',
-    package: '@atlaskit/icon/glyph/editor/strikethrough'
+    package: '@findable/icon/glyph/editor/strikethrough'
   },
   'editor/success': {
     keywords: ['editor/success', 'editorsuccess', 'luck', 'achievement', 'icon', 'core'],
     componentName: 'EditorSuccessIcon',
-    package: '@atlaskit/icon/glyph/editor/success'
+    package: '@findable/icon/glyph/editor/success'
   },
   'editor/table-display-options': {
     keywords: ['editor/table-display-options', 'editortabledisplayoptions', 'display-options', 'display', 'icon', 'core'],
     componentName: 'EditorTableDisplayOptionsIcon',
-    package: '@atlaskit/icon/glyph/editor/table-display-options'
+    package: '@findable/icon/glyph/editor/table-display-options'
   },
   'editor/table': {
     keywords: ['editor/table', 'editortable', 'grid', 'icon', 'core'],
     componentName: 'EditorTableIcon',
-    package: '@atlaskit/icon/glyph/editor/table'
+    package: '@findable/icon/glyph/editor/table'
   },
   'editor/task': {
     keywords: ['editor/task', 'editortask', 'checkbox', 'tick', 'icon', 'core'],
     componentName: 'EditorTaskIcon',
-    package: '@atlaskit/icon/glyph/editor/task'
+    package: '@findable/icon/glyph/editor/task'
   },
   'editor/text-color': {
     keywords: ['editor/text-color', 'editortextcolor', 'font', 'icon', 'core'],
     componentName: 'EditorTextColorIcon',
-    package: '@atlaskit/icon/glyph/editor/text-color'
+    package: '@findable/icon/glyph/editor/text-color'
   },
   'editor/text-style': {
     keywords: ['editor/text-style', 'editortextstyle', 'type', 'font', 'typography', 'icon', 'core'],
     componentName: 'EditorTextStyleIcon',
-    package: '@atlaskit/icon/glyph/editor/text-style'
+    package: '@findable/icon/glyph/editor/text-style'
   },
   'editor/underline': {
     keywords: ['editor/underline', 'editorunderline', 'font', 'text', 'icon', 'core'],
     componentName: 'EditorUnderlineIcon',
-    package: '@atlaskit/icon/glyph/editor/underline'
+    package: '@findable/icon/glyph/editor/underline'
   },
   'editor/undo': {
     keywords: ['editor/undo', 'editorundo', 'icon', 'core'],
     componentName: 'EditorUndoIcon',
-    package: '@atlaskit/icon/glyph/editor/undo'
+    package: '@findable/icon/glyph/editor/undo'
   },
   'editor/unlink': {
     keywords: ['editor/unlink', 'editorunlink', 'icon', 'core'],
     componentName: 'EditorUnlinkIcon',
-    package: '@atlaskit/icon/glyph/editor/unlink'
+    package: '@findable/icon/glyph/editor/unlink'
   },
   'editor/warning': {
     keywords: ['editor/warning', 'editorwarning', 'alert', 'error', 'icon', 'core'],
     componentName: 'EditorWarningIcon',
-    package: '@atlaskit/icon/glyph/editor/warning'
+    package: '@findable/icon/glyph/editor/warning'
   },
   email: {
     keywords: ['email', 'icon', 'core'],
     componentName: 'EmailIcon',
-    package: '@atlaskit/icon/glyph/email'
+    package: '@findable/icon/glyph/email'
   },
   'emoji-add': {
     keywords: ['emoji-add', 'emojiadd', 'icon', 'core'],
     componentName: 'EmojiAddIcon',
-    package: '@atlaskit/icon/glyph/emoji-add'
+    package: '@findable/icon/glyph/emoji-add'
   },
   emoji: {
     keywords: ['emoji', 'emoticon', 'smiley', 'icon', 'core'],
     componentName: 'EmojiIcon',
-    package: '@atlaskit/icon/glyph/emoji'
+    package: '@findable/icon/glyph/emoji'
   },
   'emoji/activity': {
     keywords: ['emoji/activity', 'emojiactivity', 'tennis', 'ball', 'icon', 'core'],
     componentName: 'EmojiActivityIcon',
-    package: '@atlaskit/icon/glyph/emoji/activity'
+    package: '@findable/icon/glyph/emoji/activity'
   },
   'emoji/atlassian': {
     keywords: ['emoji/atlassian', 'emojiatlassian', 'icon', 'core'],
     componentName: 'EmojiAtlassianIcon',
-    package: '@atlaskit/icon/glyph/emoji/atlassian'
+    package: '@findable/icon/glyph/emoji/atlassian'
   },
   'emoji/custom': {
     keywords: ['emoji/custom', 'emojicustom', 'plus', 'add', 'create', 'new', 'icon', 'core'],
     componentName: 'EmojiCustomIcon',
-    package: '@atlaskit/icon/glyph/emoji/custom'
+    package: '@findable/icon/glyph/emoji/custom'
   },
   'emoji/emoji': {
     keywords: ['emoji/emoji', 'emojiemoji', 'emoticon', 'smiley', 'icon', 'core'],
     componentName: 'EmojiEmojiIcon',
-    package: '@atlaskit/icon/glyph/emoji/emoji'
+    package: '@findable/icon/glyph/emoji/emoji'
   },
   'emoji/flags': {
     keywords: ['emoji/flags', 'emojiflags', 'icon', 'core'],
     componentName: 'EmojiFlagsIcon',
-    package: '@atlaskit/icon/glyph/emoji/flags'
+    package: '@findable/icon/glyph/emoji/flags'
   },
   'emoji/food': {
     keywords: ['emoji/food', 'emojifood', 'icon', 'core'],
     componentName: 'EmojiFoodIcon',
-    package: '@atlaskit/icon/glyph/emoji/food'
+    package: '@findable/icon/glyph/emoji/food'
   },
   'emoji/frequent': {
     keywords: ['emoji/frequent', 'emojifrequent', 'time', 'clock', 'icon', 'core'],
     componentName: 'EmojiFrequentIcon',
-    package: '@atlaskit/icon/glyph/emoji/frequent'
+    package: '@findable/icon/glyph/emoji/frequent'
   },
   'emoji/keyboard': {
     keywords: ['emoji/keyboard', 'emojikeyboard', 'type', 'icon', 'core'],
     componentName: 'EmojiKeyboardIcon',
-    package: '@atlaskit/icon/glyph/emoji/keyboard'
+    package: '@findable/icon/glyph/emoji/keyboard'
   },
   'emoji/nature': {
     keywords: ['emoji/nature', 'emojinature', 'tree', 'icon', 'core'],
     componentName: 'EmojiNatureIcon',
-    package: '@atlaskit/icon/glyph/emoji/nature'
+    package: '@findable/icon/glyph/emoji/nature'
   },
   'emoji/objects': {
     keywords: ['emoji/objects', 'emojiobjects', 'light', 'icon', 'core'],
     componentName: 'EmojiObjectsIcon',
-    package: '@atlaskit/icon/glyph/emoji/objects'
+    package: '@findable/icon/glyph/emoji/objects'
   },
   'emoji/people': {
     keywords: ['emoji/people', 'emojipeople', 'smiley', 'face', 'icon', 'core'],
     componentName: 'EmojiPeopleIcon',
-    package: '@atlaskit/icon/glyph/emoji/people'
+    package: '@findable/icon/glyph/emoji/people'
   },
   'emoji/productivity': {
     keywords: ['emoji/productivity', 'emojiproductivity', 'icon', 'core'],
     componentName: 'EmojiProductivityIcon',
-    package: '@atlaskit/icon/glyph/emoji/productivity'
+    package: '@findable/icon/glyph/emoji/productivity'
   },
   'emoji/symbols': {
     keywords: ['emoji/symbols', 'emojisymbols', 'heart', 'love', 'icon', 'core'],
     componentName: 'EmojiSymbolsIcon',
-    package: '@atlaskit/icon/glyph/emoji/symbols'
+    package: '@findable/icon/glyph/emoji/symbols'
   },
   'emoji/travel': {
     keywords: ['emoji/travel', 'emojitravel', 'train', 'transport', 'icon', 'core'],
     componentName: 'EmojiTravelIcon',
-    package: '@atlaskit/icon/glyph/emoji/travel'
+    package: '@findable/icon/glyph/emoji/travel'
   },
   error: {
     keywords: ['error', 'warning', 'alert', 'icon', 'core'],
     componentName: 'ErrorIcon',
-    package: '@atlaskit/icon/glyph/error'
+    package: '@findable/icon/glyph/error'
   },
   export: {
     keywords: ['export', 'upload', 'icon', 'core'],
     componentName: 'ExportIcon',
-    package: '@atlaskit/icon/glyph/export'
+    package: '@findable/icon/glyph/export'
   },
   feedback: {
     keywords: ['feedback', 'announce', 'speaker', 'megaphone', 'icon', 'core'],
     componentName: 'FeedbackIcon',
-    package: '@atlaskit/icon/glyph/feedback'
+    package: '@findable/icon/glyph/feedback'
   },
   file: {
     keywords: ['file', 'document', 'paper', 'page', 'sheet', 'icon', 'core'],
     componentName: 'FileIcon',
-    package: '@atlaskit/icon/glyph/file'
+    package: '@findable/icon/glyph/file'
   },
   filter: {
     keywords: ['filter', 'icon', 'core'],
     componentName: 'FilterIcon',
-    package: '@atlaskit/icon/glyph/filter'
+    package: '@findable/icon/glyph/filter'
   },
   'flag-filled': {
     keywords: ['flag-filled', 'flagfilled', 'icon', 'core'],
     componentName: 'FlagFilledIcon',
-    package: '@atlaskit/icon/glyph/flag-filled'
+    package: '@findable/icon/glyph/flag-filled'
   },
   'folder-filled': {
     keywords: ['folder-filled', 'folderfilled', 'directory', 'icon', 'core'],
     componentName: 'FolderFilledIcon',
-    package: '@atlaskit/icon/glyph/folder-filled'
+    package: '@findable/icon/glyph/folder-filled'
   },
   folder: {
     keywords: ['folder', 'directory', 'icon', 'core'],
     componentName: 'FolderIcon',
-    package: '@atlaskit/icon/glyph/folder'
+    package: '@findable/icon/glyph/folder'
   },
   followers: {
     keywords: ['followers', 'person', 'user', 'icon', 'core'],
     componentName: 'FollowersIcon',
-    package: '@atlaskit/icon/glyph/followers'
+    package: '@findable/icon/glyph/followers'
   },
   following: {
     keywords: ['following', 'person', 'user', 'icon', 'core'],
     componentName: 'FollowingIcon',
-    package: '@atlaskit/icon/glyph/following'
+    package: '@findable/icon/glyph/following'
   },
   googledrive: {
     keywords: ['googledrive', 'icon', 'core'],
     componentName: 'GoogledriveIcon',
-    package: '@atlaskit/icon/glyph/googledrive'
+    package: '@findable/icon/glyph/googledrive'
   },
   'graph-bar': {
     keywords: ['graph-bar', 'graphbar', 'chart', 'growth', 'data', 'statistics', 'analytics', 'icon', 'core'],
     componentName: 'GraphBarIcon',
-    package: '@atlaskit/icon/glyph/graph-bar'
+    package: '@findable/icon/glyph/graph-bar'
   },
   'graph-line': {
     keywords: ['graph-line', 'graphline', 'chart', 'growth', 'data', 'statistics', 'analytics', 'icon', 'core'],
     componentName: 'GraphLineIcon',
-    package: '@atlaskit/icon/glyph/graph-line'
+    package: '@findable/icon/glyph/graph-line'
   },
   gsuite: {
     keywords: ['gsuite', 'icon', 'core'],
     componentName: 'GsuiteIcon',
-    package: '@atlaskit/icon/glyph/gsuite'
+    package: '@findable/icon/glyph/gsuite'
   },
   highlights: {
     keywords: ['highlights', 'icon', 'core'],
     componentName: 'HighlightsIcon',
-    package: '@atlaskit/icon/glyph/highlights'
+    package: '@findable/icon/glyph/highlights'
   },
   'hipchat/audio-only': {
     keywords: ['hipchat/audio-only', 'hipchataudioonly', 'audio', 'icon', 'core'],
     componentName: 'HipchatAudioOnlyIcon',
-    package: '@atlaskit/icon/glyph/hipchat/audio-only'
+    package: '@findable/icon/glyph/hipchat/audio-only'
   },
   'hipchat/chevron-double-down': {
     keywords: ['hipchat/chevron-double-down', 'hipchatchevrondoubledown', 'icon', 'core'],
     componentName: 'HipchatChevronDoubleDownIcon',
-    package: '@atlaskit/icon/glyph/hipchat/chevron-double-down'
+    package: '@findable/icon/glyph/hipchat/chevron-double-down'
   },
   'hipchat/chevron-double-up': {
     keywords: ['hipchat/chevron-double-up', 'hipchatchevrondoubleup', 'icon', 'core'],
     componentName: 'HipchatChevronDoubleUpIcon',
-    package: '@atlaskit/icon/glyph/hipchat/chevron-double-up'
+    package: '@findable/icon/glyph/hipchat/chevron-double-up'
   },
   'hipchat/chevron-down': {
     keywords: ['hipchat/chevron-down', 'hipchatchevrondown', 'icon', 'core'],
     componentName: 'HipchatChevronDownIcon',
-    package: '@atlaskit/icon/glyph/hipchat/chevron-down'
+    package: '@findable/icon/glyph/hipchat/chevron-down'
   },
   'hipchat/chevron-up': {
     keywords: ['hipchat/chevron-up', 'hipchatchevronup', 'icon', 'core'],
     componentName: 'HipchatChevronUpIcon',
-    package: '@atlaskit/icon/glyph/hipchat/chevron-up'
+    package: '@findable/icon/glyph/hipchat/chevron-up'
   },
   'hipchat/dial-out': {
     keywords: ['hipchat/dial-out', 'hipchatdialout', 'dial', 'call', 'icon', 'core'],
     componentName: 'HipchatDialOutIcon',
-    package: '@atlaskit/icon/glyph/hipchat/dial-out'
+    package: '@findable/icon/glyph/hipchat/dial-out'
   },
   'hipchat/lobby': {
     keywords: ['hipchat/lobby', 'hipchatlobby', 'bell', 'icon', 'core'],
     componentName: 'HipchatLobbyIcon',
-    package: '@atlaskit/icon/glyph/hipchat/lobby'
+    package: '@findable/icon/glyph/hipchat/lobby'
   },
   'hipchat/media-attachment-count': {
     keywords: ['hipchat/media-attachment-count', 'hipchatmediaattachmentcount', 'dot', 'icon', 'core'],
     componentName: 'HipchatMediaAttachmentCountIcon',
-    package: '@atlaskit/icon/glyph/hipchat/media-attachment-count'
+    package: '@findable/icon/glyph/hipchat/media-attachment-count'
   },
   'hipchat/outgoing-sound': {
     keywords: ['hipchat/outgoing-sound', 'hipchatoutgoingsound', 'sound', 'icon', 'core'],
     componentName: 'HipchatOutgoingSoundIcon',
-    package: '@atlaskit/icon/glyph/hipchat/outgoing-sound'
+    package: '@findable/icon/glyph/hipchat/outgoing-sound'
   },
   'hipchat/sd-video': {
     keywords: ['hipchat/sd-video', 'hipchatsdvideo', 'video', 'definition', 'icon', 'core'],
     componentName: 'HipchatSdVideoIcon',
-    package: '@atlaskit/icon/glyph/hipchat/sd-video'
+    package: '@findable/icon/glyph/hipchat/sd-video'
   },
   'home-circle': {
     keywords: ['home-circle', 'homecircle', 'icon', 'core'],
     componentName: 'HomeCircleIcon',
-    package: '@atlaskit/icon/glyph/home-circle'
+    package: '@findable/icon/glyph/home-circle'
   },
   'home-filled': {
     keywords: ['home-filled', 'homefilled', 'icon', 'core'],
     componentName: 'HomeFilledIcon',
-    package: '@atlaskit/icon/glyph/home-filled'
+    package: '@findable/icon/glyph/home-filled'
   },
   'image-border': {
     keywords: ['image-border', 'imageborder', 'marquee', 'box', 'icon', 'core'],
     componentName: 'ImageBorderIcon',
-    package: '@atlaskit/icon/glyph/image-border'
+    package: '@findable/icon/glyph/image-border'
   },
   'image-resize': {
     keywords: ['image-resize', 'imageresize', 'expand', 'icon', 'core'],
     componentName: 'ImageResizeIcon',
-    package: '@atlaskit/icon/glyph/image-resize'
+    package: '@findable/icon/glyph/image-resize'
   },
   image: {
     keywords: ['image', 'picture', 'photo', 'icon', 'core'],
     componentName: 'ImageIcon',
-    package: '@atlaskit/icon/glyph/image'
+    package: '@findable/icon/glyph/image'
   },
   info: {
     keywords: ['info', 'icon', 'core'],
     componentName: 'InfoIcon',
-    package: '@atlaskit/icon/glyph/info'
+    package: '@findable/icon/glyph/info'
   },
   'invite-team': {
     keywords: ['invite-team', 'inviteteam', 'add', 'person', 'user', 'icon', 'core'],
     componentName: 'InviteTeamIcon',
-    package: '@atlaskit/icon/glyph/invite-team'
+    package: '@findable/icon/glyph/invite-team'
   },
   'issue-raise': {
     keywords: ['issue-raise', 'issueraise', 'add', 'create', 'plus', 'new', 'icon', 'core'],
     componentName: 'IssueRaiseIcon',
-    package: '@atlaskit/icon/glyph/issue-raise'
+    package: '@findable/icon/glyph/issue-raise'
   },
   issue: {
     keywords: ['issue', 'tick', 'check', 'confirm', 'task', 'icon', 'core'],
     componentName: 'IssueIcon',
-    package: '@atlaskit/icon/glyph/issue'
+    package: '@findable/icon/glyph/issue'
   },
   issues: {
     keywords: ['issues', 'tick', 'check', 'confirm', 'task', 'icon', 'core'],
     componentName: 'IssuesIcon',
-    package: '@atlaskit/icon/glyph/issues'
+    package: '@findable/icon/glyph/issues'
   },
   'jira/capture': {
     keywords: ['jira/capture', 'jiracapture', 'icon', 'core'],
     componentName: 'JiraCaptureIcon',
-    package: '@atlaskit/icon/glyph/jira/capture'
+    package: '@findable/icon/glyph/jira/capture'
   },
   'jira/failed-build-status': {
     keywords: ['jira/failed-build-status', 'jirafailedbuildstatus', 'icon', 'core'],
     componentName: 'JiraFailedBuildStatusIcon',
-    package: '@atlaskit/icon/glyph/jira/failed-build-status'
+    package: '@findable/icon/glyph/jira/failed-build-status'
   },
   'jira/labs': {
     keywords: ['jira/labs', 'jiralabs', 'icon', 'core'],
     componentName: 'JiraLabsIcon',
-    package: '@atlaskit/icon/glyph/jira/labs'
+    package: '@findable/icon/glyph/jira/labs'
   },
   'jira/test-session': {
     keywords: ['jira/test-session', 'jiratestsession', 'icon', 'core'],
     componentName: 'JiraTestSessionIcon',
-    package: '@atlaskit/icon/glyph/jira/test-session'
+    package: '@findable/icon/glyph/jira/test-session'
   },
   label: {
     keywords: ['label', 'icon', 'core'],
     componentName: 'LabelIcon',
-    package: '@atlaskit/icon/glyph/label'
+    package: '@findable/icon/glyph/label'
   },
   'lightbulb-filled': {
     keywords: ['lightbulb-filled', 'lightbulbfilled', 'idea', 'hint', 'icon', 'core'],
     componentName: 'LightbulbFilledIcon',
-    package: '@atlaskit/icon/glyph/lightbulb-filled'
+    package: '@findable/icon/glyph/lightbulb-filled'
   },
   lightbulb: {
     keywords: ['lightbulb', 'idea', 'hint', 'icon', 'core'],
     componentName: 'LightbulbIcon',
-    package: '@atlaskit/icon/glyph/lightbulb'
+    package: '@findable/icon/glyph/lightbulb'
   },
   like: {
     keywords: ['like', 'icon', 'core'],
     componentName: 'LikeIcon',
-    package: '@atlaskit/icon/glyph/like'
+    package: '@findable/icon/glyph/like'
   },
   'link-filled': {
     keywords: ['link-filled', 'linkfilled', 'icon', 'core'],
     componentName: 'LinkFilledIcon',
-    package: '@atlaskit/icon/glyph/link-filled'
+    package: '@findable/icon/glyph/link-filled'
   },
   link: {
     keywords: ['link', 'icon', 'core'],
     componentName: 'LinkIcon',
-    package: '@atlaskit/icon/glyph/link'
+    package: '@findable/icon/glyph/link'
   },
   list: {
     keywords: ['list', 'justify', 'ul', 'icon', 'core'],
     componentName: 'ListIcon',
-    package: '@atlaskit/icon/glyph/list'
+    package: '@findable/icon/glyph/list'
   },
   location: {
     keywords: ['location', 'pin', 'gps', 'map', 'icon', 'core'],
     componentName: 'LocationIcon',
-    package: '@atlaskit/icon/glyph/location'
+    package: '@findable/icon/glyph/location'
   },
   'lock-circle': {
     keywords: ['lock-circle', 'lockcircle', 'closed', 'permissions', 'privacy', 'restrict', 'secure', 'icon', 'core'],
     componentName: 'LockCircleIcon',
-    package: '@atlaskit/icon/glyph/lock-circle'
+    package: '@findable/icon/glyph/lock-circle'
   },
   'lock-filled': {
     keywords: ['lock-filled', 'lockfilled', 'closed', 'permissions', 'privacy', 'restrict', 'secure', 'icon', 'core'],
     componentName: 'LockFilledIcon',
-    package: '@atlaskit/icon/glyph/lock-filled'
+    package: '@findable/icon/glyph/lock-filled'
   },
   lock: {
     keywords: ['lock', 'closed', 'permissions', 'privacy', 'restrict', 'secure', 'icon', 'core'],
     componentName: 'LockIcon',
-    package: '@atlaskit/icon/glyph/lock'
+    package: '@findable/icon/glyph/lock'
   },
   marketplace: {
     keywords: ['marketplace', 'store', 'shop', 'icon', 'core'],
     componentName: 'MarketplaceIcon',
-    package: '@atlaskit/icon/glyph/marketplace'
+    package: '@findable/icon/glyph/marketplace'
   },
   'media-services/actual-size': {
     keywords: ['media-services/actual-size', 'mediaservicesactualsize', 'icon', 'core'],
     componentName: 'MediaServicesActualSizeIcon',
-    package: '@atlaskit/icon/glyph/media-services/actual-size'
+    package: '@findable/icon/glyph/media-services/actual-size'
   },
   'media-services/add-comment': {
     keywords: ['media-services/add-comment', 'mediaservicesaddcomment', 'chat', 'new', 'create', 'icon', 'core'],
     componentName: 'MediaServicesAddCommentIcon',
-    package: '@atlaskit/icon/glyph/media-services/add-comment'
+    package: '@findable/icon/glyph/media-services/add-comment'
   },
   'media-services/annotate': {
     keywords: ['media-services/annotate', 'mediaservicesannotate', 'icon', 'core'],
     componentName: 'MediaServicesAnnotateIcon',
-    package: '@atlaskit/icon/glyph/media-services/annotate'
+    package: '@findable/icon/glyph/media-services/annotate'
   },
   'media-services/arrow': {
     keywords: ['media-services/arrow', 'mediaservicesarrow', 'icon', 'core'],
     componentName: 'MediaServicesArrowIcon',
-    package: '@atlaskit/icon/glyph/media-services/arrow'
+    package: '@findable/icon/glyph/media-services/arrow'
   },
   'media-services/audio': {
     keywords: ['media-services/audio', 'mediaservicesaudio', 'music', 'note', 'sound', 'icon', 'core'],
     componentName: 'MediaServicesAudioIcon',
-    package: '@atlaskit/icon/glyph/media-services/audio'
+    package: '@findable/icon/glyph/media-services/audio'
   },
   'media-services/blur': {
     keywords: ['media-services/blur', 'mediaservicesblur', 'pixelate', 'icon', 'core'],
     componentName: 'MediaServicesBlurIcon',
-    package: '@atlaskit/icon/glyph/media-services/blur'
+    package: '@findable/icon/glyph/media-services/blur'
   },
   'media-services/brush': {
     keywords: ['media-services/brush', 'mediaservicesbrush', 'paint', 'icon', 'core'],
     componentName: 'MediaServicesBrushIcon',
-    package: '@atlaskit/icon/glyph/media-services/brush'
+    package: '@findable/icon/glyph/media-services/brush'
   },
   'media-services/button-option': {
     keywords: ['media-services/button-option', 'mediaservicesbuttonoption', 'icon', 'core'],
     componentName: 'MediaServicesButtonOptionIcon',
-    package: '@atlaskit/icon/glyph/media-services/button-option'
+    package: '@findable/icon/glyph/media-services/button-option'
   },
   'media-services/code': {
     keywords: ['media-services/code', 'mediaservicescode', 'source', 'icon', 'core'],
     componentName: 'MediaServicesCodeIcon',
-    package: '@atlaskit/icon/glyph/media-services/code'
+    package: '@findable/icon/glyph/media-services/code'
   },
   'media-services/document': {
     keywords: ['media-services/document', 'mediaservicesdocument', 'text', 'icon', 'core'],
     componentName: 'MediaServicesDocumentIcon',
-    package: '@atlaskit/icon/glyph/media-services/document'
+    package: '@findable/icon/glyph/media-services/document'
   },
   'media-services/filter': {
     keywords: ['media-services/filter', 'mediaservicesfilter', 'icon', 'core'],
     componentName: 'MediaServicesFilterIcon',
-    package: '@atlaskit/icon/glyph/media-services/filter'
+    package: '@findable/icon/glyph/media-services/filter'
   },
   'media-services/fit-to-page': {
     keywords: ['media-services/fit-to-page', 'mediaservicesfittopage', 'icon', 'core'],
     componentName: 'MediaServicesFitToPageIcon',
-    package: '@atlaskit/icon/glyph/media-services/fit-to-page'
+    package: '@findable/icon/glyph/media-services/fit-to-page'
   },
   'media-services/full-screen': {
     keywords: ['media-services/full-screen', 'mediaservicesfullscreen', 'icon', 'core'],
     componentName: 'MediaServicesFullScreenIcon',
-    package: '@atlaskit/icon/glyph/media-services/full-screen'
+    package: '@findable/icon/glyph/media-services/full-screen'
   },
   'media-services/grid': {
     keywords: ['media-services/grid', 'mediaservicesgrid', 'table', 'icon', 'core'],
     componentName: 'MediaServicesGridIcon',
-    package: '@atlaskit/icon/glyph/media-services/grid'
+    package: '@findable/icon/glyph/media-services/grid'
   },
   'media-services/image': {
     keywords: ['media-services/image', 'mediaservicesimage', 'photo', 'picture', 'icon', 'core'],
     componentName: 'MediaServicesImageIcon',
-    package: '@atlaskit/icon/glyph/media-services/image'
+    package: '@findable/icon/glyph/media-services/image'
   },
   'media-services/line-thickness': {
     keywords: ['media-services/line-thickness', 'mediaserviceslinethickness', 'icon', 'core'],
     componentName: 'MediaServicesLineThicknessIcon',
-    package: '@atlaskit/icon/glyph/media-services/line-thickness'
+    package: '@findable/icon/glyph/media-services/line-thickness'
   },
   'media-services/line': {
     keywords: ['media-services/line', 'mediaservicesline', 'icon', 'core'],
     componentName: 'MediaServicesLineIcon',
-    package: '@atlaskit/icon/glyph/media-services/line'
+    package: '@findable/icon/glyph/media-services/line'
   },
   'media-services/no-image': {
     keywords: ['media-services/no-image', 'mediaservicesnoimage', 'icon', 'core'],
     componentName: 'MediaServicesNoImageIcon',
-    package: '@atlaskit/icon/glyph/media-services/no-image'
+    package: '@findable/icon/glyph/media-services/no-image'
   },
   'media-services/open-mediaviewer': {
     keywords: ['media-services/open-mediaviewer', 'mediaservicesopenmediaviewer', 'icon', 'core'],
     componentName: 'MediaServicesOpenMediaviewerIcon',
-    package: '@atlaskit/icon/glyph/media-services/open-mediaviewer'
+    package: '@findable/icon/glyph/media-services/open-mediaviewer'
   },
   'media-services/oval': {
     keywords: ['media-services/oval', 'mediaservicesoval', 'ellipse', 'icon', 'core'],
     componentName: 'MediaServicesOvalIcon',
-    package: '@atlaskit/icon/glyph/media-services/oval'
+    package: '@findable/icon/glyph/media-services/oval'
   },
   'media-services/pdf': {
     keywords: ['media-services/pdf', 'mediaservicespdf', 'document', 'icon', 'core'],
     componentName: 'MediaServicesPdfIcon',
-    package: '@atlaskit/icon/glyph/media-services/pdf'
+    package: '@findable/icon/glyph/media-services/pdf'
   },
   'media-services/preselected': {
     keywords: ['media-services/preselected', 'mediaservicespreselected', 'circle', 'icon', 'core'],
     componentName: 'MediaServicesPreselectedIcon',
-    package: '@atlaskit/icon/glyph/media-services/preselected'
+    package: '@findable/icon/glyph/media-services/preselected'
   },
   'media-services/presentation': {
     keywords: ['media-services/presentation', 'mediaservicespresentation', 'chart', 'graph', 'icon', 'core'],
     componentName: 'MediaServicesPresentationIcon',
-    package: '@atlaskit/icon/glyph/media-services/presentation'
+    package: '@findable/icon/glyph/media-services/presentation'
   },
   'media-services/rectangle': {
     keywords: ['media-services/rectangle', 'mediaservicesrectangle', 'box', 'icon', 'core'],
     componentName: 'MediaServicesRectangleIcon',
-    package: '@atlaskit/icon/glyph/media-services/rectangle'
+    package: '@findable/icon/glyph/media-services/rectangle'
   },
   'media-services/scale-large': {
     keywords: ['media-services/scale-large', 'mediaservicesscalelarge', 'photo', 'picture', 'image', 'icon', 'core'],
     componentName: 'MediaServicesScaleLargeIcon',
-    package: '@atlaskit/icon/glyph/media-services/scale-large'
+    package: '@findable/icon/glyph/media-services/scale-large'
   },
   'media-services/scale-small': {
     keywords: ['media-services/scale-small', 'mediaservicesscalesmall', 'photo', 'picture', 'image', 'icon', 'core'],
     componentName: 'MediaServicesScaleSmallIcon',
-    package: '@atlaskit/icon/glyph/media-services/scale-small'
+    package: '@findable/icon/glyph/media-services/scale-small'
   },
   'media-services/spreadsheet': {
     keywords: ['media-services/spreadsheet', 'mediaservicesspreadsheet', 'document', 'excel', 'sheets', 'table', 'icon', 'core'],
     componentName: 'MediaServicesSpreadsheetIcon',
-    package: '@atlaskit/icon/glyph/media-services/spreadsheet'
+    package: '@findable/icon/glyph/media-services/spreadsheet'
   },
   'media-services/text': {
     keywords: ['media-services/text', 'mediaservicestext', 'type', 'typography', 'font', 'icon', 'core'],
     componentName: 'MediaServicesTextIcon',
-    package: '@atlaskit/icon/glyph/media-services/text'
+    package: '@findable/icon/glyph/media-services/text'
   },
   'media-services/unknown': {
     keywords: ['media-services/unknown', 'mediaservicesunknown', 'document', 'file', 'icon', 'core'],
     componentName: 'MediaServicesUnknownIcon',
-    package: '@atlaskit/icon/glyph/media-services/unknown'
+    package: '@findable/icon/glyph/media-services/unknown'
   },
   'media-services/video': {
     keywords: ['media-services/video', 'mediaservicesvideo', 'film', 'camera', 'icon', 'core'],
     componentName: 'MediaServicesVideoIcon',
-    package: '@atlaskit/icon/glyph/media-services/video'
+    package: '@findable/icon/glyph/media-services/video'
   },
   'media-services/zip': {
     keywords: ['media-services/zip', 'mediaserviceszip', 'compress', 'icon', 'core'],
     componentName: 'MediaServicesZipIcon',
-    package: '@atlaskit/icon/glyph/media-services/zip'
+    package: '@findable/icon/glyph/media-services/zip'
   },
   'media-services/zoom-in': {
     keywords: ['media-services/zoom-in', 'mediaserviceszoomin', 'magnify', 'icon', 'core'],
     componentName: 'MediaServicesZoomInIcon',
-    package: '@atlaskit/icon/glyph/media-services/zoom-in'
+    package: '@findable/icon/glyph/media-services/zoom-in'
   },
   'media-services/zoom-out': {
     keywords: ['media-services/zoom-out', 'mediaserviceszoomout', 'magnify', 'icon', 'core'],
     componentName: 'MediaServicesZoomOutIcon',
-    package: '@atlaskit/icon/glyph/media-services/zoom-out'
+    package: '@findable/icon/glyph/media-services/zoom-out'
   },
   mention: {
     keywords: ['mention', 'user', 'person', '@', 'icon', 'core'],
     componentName: 'MentionIcon',
-    package: '@atlaskit/icon/glyph/mention'
+    package: '@findable/icon/glyph/mention'
   },
   'menu-expand': {
     keywords: ['menu-expand', 'menuexpand', 'icon', 'core'],
     componentName: 'MenuExpandIcon',
-    package: '@atlaskit/icon/glyph/menu-expand'
+    package: '@findable/icon/glyph/menu-expand'
   },
   menu: {
     keywords: ['menu', 'hamburger', 'navigation', 'switcher', 'app switcher', 'icon', 'core'],
     componentName: 'MenuIcon',
-    package: '@atlaskit/icon/glyph/menu'
+    package: '@findable/icon/glyph/menu'
   },
   'more-vertical': {
     keywords: ['more-vertical', 'morevertical', 'dots', 'icon', 'core'],
     componentName: 'MoreVerticalIcon',
-    package: '@atlaskit/icon/glyph/more-vertical'
+    package: '@findable/icon/glyph/more-vertical'
   },
   more: {
     keywords: ['more', 'dots', 'ellipses', 'icon', 'core'],
     componentName: 'MoreIcon',
-    package: '@atlaskit/icon/glyph/more'
+    package: '@findable/icon/glyph/more'
   },
   'notification-all': {
     keywords: ['notification-all', 'notificationall', 'bell', 'alarm', 'icon', 'core'],
     componentName: 'NotificationAllIcon',
-    package: '@atlaskit/icon/glyph/notification-all'
+    package: '@findable/icon/glyph/notification-all'
   },
   'notification-direct': {
     keywords: ['notification-direct', 'notificationdirect', 'bell', 'alarm', 'icon', 'core'],
     componentName: 'NotificationDirectIcon',
-    package: '@atlaskit/icon/glyph/notification-direct'
+    package: '@findable/icon/glyph/notification-direct'
   },
   notification: {
     keywords: ['notification', 'bell', 'alarm', 'icon', 'core'],
     componentName: 'NotificationIcon',
-    package: '@atlaskit/icon/glyph/notification'
+    package: '@findable/icon/glyph/notification'
   },
   'office-building-filled': {
     keywords: ['office-building-filled', 'officebuildingfilled', 'icon', 'core'],
     componentName: 'OfficeBuildingFilledIcon',
-    package: '@atlaskit/icon/glyph/office-building-filled'
+    package: '@findable/icon/glyph/office-building-filled'
   },
   'office-building': {
     keywords: ['office-building', 'officebuilding', 'icon', 'core'],
     componentName: 'OfficeBuildingIcon',
-    package: '@atlaskit/icon/glyph/office-building'
+    package: '@findable/icon/glyph/office-building'
   },
   open: {
     keywords: ['open', 'icon', 'core'],
     componentName: 'OpenIcon',
-    package: '@atlaskit/icon/glyph/open'
+    package: '@findable/icon/glyph/open'
   },
   overview: {
     keywords: ['overview', 'icon', 'core'],
     componentName: 'OverviewIcon',
-    package: '@atlaskit/icon/glyph/overview'
+    package: '@findable/icon/glyph/overview'
   },
   'page-filled': {
     keywords: ['page-filled', 'pagefilled', 'file', 'document', 'icon', 'core'],
     componentName: 'PageFilledIcon',
-    package: '@atlaskit/icon/glyph/page-filled'
+    package: '@findable/icon/glyph/page-filled'
   },
   page: {
     keywords: ['page', 'file', 'document', 'icon', 'core'],
     componentName: 'PageIcon',
-    package: '@atlaskit/icon/glyph/page'
+    package: '@findable/icon/glyph/page'
   },
   pdf: {
     keywords: ['pdf', 'document', 'file', 'icon', 'core'],
     componentName: 'PdfIcon',
-    package: '@atlaskit/icon/glyph/pdf'
+    package: '@findable/icon/glyph/pdf'
   },
   'people-group': {
     keywords: ['people-group', 'peoplegroup', 'person', 'user', 'group', 'icon', 'core'],
     componentName: 'PeopleGroupIcon',
-    package: '@atlaskit/icon/glyph/people-group'
+    package: '@findable/icon/glyph/people-group'
   },
   people: {
     keywords: ['people', 'person', 'user', 'group', 'icon', 'core'],
     componentName: 'PeopleIcon',
-    package: '@atlaskit/icon/glyph/people'
+    package: '@findable/icon/glyph/people'
   },
   'person-circle': {
     keywords: ['person-circle', 'personcircle', 'icon', 'core'],
     componentName: 'PersonCircleIcon',
-    package: '@atlaskit/icon/glyph/person-circle'
+    package: '@findable/icon/glyph/person-circle'
   },
   person: {
     keywords: ['person', 'person', 'user', 'avatar', 'icon', 'core'],
     componentName: 'PersonIcon',
-    package: '@atlaskit/icon/glyph/person'
+    package: '@findable/icon/glyph/person'
   },
   portfolio: {
     keywords: ['portfolio', 'icon', 'core'],
     componentName: 'PortfolioIcon',
-    package: '@atlaskit/icon/glyph/portfolio'
+    package: '@findable/icon/glyph/portfolio'
   },
   preferences: {
     keywords: ['preferences', 'settings', 'configuration', 'options', 'icon', 'core'],
     componentName: 'PreferencesIcon',
-    package: '@atlaskit/icon/glyph/preferences'
+    package: '@findable/icon/glyph/preferences'
   },
   'presence-active': {
     keywords: ['presence-active', 'presenceactive', 'dot', 'icon', 'core'],
     componentName: 'PresenceActiveIcon',
-    package: '@atlaskit/icon/glyph/presence-active'
+    package: '@findable/icon/glyph/presence-active'
   },
   'presence-busy': {
     keywords: ['presence-busy', 'presencebusy', 'block', 'do not disturb', 'icon', 'core'],
     componentName: 'PresenceBusyIcon',
-    package: '@atlaskit/icon/glyph/presence-busy'
+    package: '@findable/icon/glyph/presence-busy'
   },
   'presence-unavailable': {
     keywords: ['presence-unavailable', 'presenceunavailable', 'icon', 'core'],
     componentName: 'PresenceUnavailableIcon',
-    package: '@atlaskit/icon/glyph/presence-unavailable'
+    package: '@findable/icon/glyph/presence-unavailable'
   },
   'question-circle': {
     keywords: ['question-circle', 'questioncircle', 'help', 'icon', 'core'],
     componentName: 'QuestionCircleIcon',
-    package: '@atlaskit/icon/glyph/question-circle'
+    package: '@findable/icon/glyph/question-circle'
   },
   question: {
     keywords: ['question', 'help', 'icon', 'core'],
     componentName: 'QuestionIcon',
-    package: '@atlaskit/icon/glyph/question'
+    package: '@findable/icon/glyph/question'
   },
   questions: {
     keywords: ['questions', 'icon', 'core'],
     componentName: 'QuestionsIcon',
-    package: '@atlaskit/icon/glyph/questions'
+    package: '@findable/icon/glyph/questions'
   },
   queues: {
     keywords: ['queues', 'icon', 'core'],
     componentName: 'QueuesIcon',
-    package: '@atlaskit/icon/glyph/queues'
+    package: '@findable/icon/glyph/queues'
   },
   quote: {
     keywords: ['quote', 'icon', 'core'],
     componentName: 'QuoteIcon',
-    package: '@atlaskit/icon/glyph/quote'
+    package: '@findable/icon/glyph/quote'
   },
   radio: {
     keywords: ['radio', 'icon', 'core'],
     componentName: 'RadioIcon',
-    package: '@atlaskit/icon/glyph/radio'
+    package: '@findable/icon/glyph/radio'
   },
   recent: {
     keywords: ['recent', 'time', 'clock', 'icon', 'core'],
     componentName: 'RecentIcon',
-    package: '@atlaskit/icon/glyph/recent'
+    package: '@findable/icon/glyph/recent'
   },
   redo: {
     keywords: ['redo', 'icon', 'core'],
     componentName: 'RedoIcon',
-    package: '@atlaskit/icon/glyph/redo'
+    package: '@findable/icon/glyph/redo'
   },
   refresh: {
     keywords: ['refresh', 'cycle', 'icon', 'core'],
     componentName: 'RefreshIcon',
-    package: '@atlaskit/icon/glyph/refresh'
+    package: '@findable/icon/glyph/refresh'
   },
   retry: {
     keywords: ['retry', 'icon', 'core'],
     componentName: 'RetryIcon',
-    package: '@atlaskit/icon/glyph/retry'
+    package: '@findable/icon/glyph/retry'
   },
   roadmap: {
     keywords: ['roadmap', 'icon', 'core'],
     componentName: 'RoadmapIcon',
-    package: '@atlaskit/icon/glyph/roadmap'
+    package: '@findable/icon/glyph/roadmap'
   },
   'room-menu': {
     keywords: ['room-menu', 'roommenu', 'icon', 'core'],
     componentName: 'RoomMenuIcon',
-    package: '@atlaskit/icon/glyph/room-menu'
+    package: '@findable/icon/glyph/room-menu'
   },
   'schedule-filled': {
     keywords: ['schedule-filled', 'schedulefilled', 'icon', 'core'],
     componentName: 'ScheduleFilledIcon',
-    package: '@atlaskit/icon/glyph/schedule-filled'
+    package: '@findable/icon/glyph/schedule-filled'
   },
   schedule: {
     keywords: ['schedule', 'calendar', 'date', 'new', 'icon', 'core'],
     componentName: 'ScheduleIcon',
-    package: '@atlaskit/icon/glyph/schedule'
+    package: '@findable/icon/glyph/schedule'
   },
   screen: {
     keywords: ['screen', 'desktop', 'computer', 'monitor', 'icon', 'core'],
     componentName: 'ScreenIcon',
-    package: '@atlaskit/icon/glyph/screen'
+    package: '@findable/icon/glyph/screen'
   },
   search: {
     keywords: ['search', 'find', 'magnify', 'icon', 'core'],
     componentName: 'SearchIcon',
-    package: '@atlaskit/icon/glyph/search'
+    package: '@findable/icon/glyph/search'
   },
   'select-clear': {
     keywords: ['select-clear', 'selectclear', 'icon', 'core'],
     componentName: 'SelectClearIcon',
-    package: '@atlaskit/icon/glyph/select-clear'
+    package: '@findable/icon/glyph/select-clear'
   },
   send: {
     keywords: ['send', 'mail', 'icon', 'core'],
     componentName: 'SendIcon',
-    package: '@atlaskit/icon/glyph/send'
+    package: '@findable/icon/glyph/send'
   },
   settings: {
     keywords: ['settings', 'cog', 'options', 'configuration', 'icon', 'core'],
     componentName: 'SettingsIcon',
-    package: '@atlaskit/icon/glyph/settings'
+    package: '@findable/icon/glyph/settings'
   },
   share: {
     keywords: ['share', 'icon', 'core'],
     componentName: 'ShareIcon',
-    package: '@atlaskit/icon/glyph/share'
+    package: '@findable/icon/glyph/share'
   },
   ship: {
     keywords: ['ship', 'icon', 'core'],
     componentName: 'ShipIcon',
-    package: '@atlaskit/icon/glyph/ship'
+    package: '@findable/icon/glyph/ship'
   },
   shortcut: {
     keywords: ['shortcut', 'export', 'icon', 'core'],
     componentName: 'ShortcutIcon',
-    package: '@atlaskit/icon/glyph/shortcut'
+    package: '@findable/icon/glyph/shortcut'
   },
   'sign-in': {
     keywords: ['sign-in', 'signin', 'log', 'icon', 'core'],
     componentName: 'SignInIcon',
-    package: '@atlaskit/icon/glyph/sign-in'
+    package: '@findable/icon/glyph/sign-in'
   },
   'sign-out': {
     keywords: ['sign-out', 'signout', 'log', 'icon', 'core'],
     componentName: 'SignOutIcon',
-    package: '@atlaskit/icon/glyph/sign-out'
+    package: '@findable/icon/glyph/sign-out'
   },
   'star-filled': {
     keywords: ['star-filled', 'starfilled', 'icon', 'core'],
     componentName: 'StarFilledIcon',
-    package: '@atlaskit/icon/glyph/star-filled'
+    package: '@findable/icon/glyph/star-filled'
   },
   'star-large': {
     keywords: ['star-large', 'starlarge', 'icon', 'core'],
     componentName: 'StarLargeIcon',
-    package: '@atlaskit/icon/glyph/star-large'
+    package: '@findable/icon/glyph/star-large'
   },
   star: {
     keywords: ['star', 'icon', 'core'],
     componentName: 'StarIcon',
-    package: '@atlaskit/icon/glyph/star'
+    package: '@findable/icon/glyph/star'
   },
   status: {
     keywords: ['status', 'icon', 'core'],
     componentName: 'StatusIcon',
-    package: '@atlaskit/icon/glyph/status'
+    package: '@findable/icon/glyph/status'
   },
   subtask: {
     keywords: ['subtask', 'issue', 'task', 'icon', 'core'],
     componentName: 'SubtaskIcon',
-    package: '@atlaskit/icon/glyph/subtask'
+    package: '@findable/icon/glyph/subtask'
   },
   suitcase: {
     keywords: ['suitcase', 'icon', 'core'],
     componentName: 'SuitcaseIcon',
-    package: '@atlaskit/icon/glyph/suitcase'
+    package: '@findable/icon/glyph/suitcase'
   },
   switcher: {
     keywords: ['switcher', 'icon', 'core'],
     componentName: 'SwitcherIcon',
-    package: '@atlaskit/icon/glyph/switcher'
+    package: '@findable/icon/glyph/switcher'
   },
   table: {
     keywords: ['table', 'grid', 'icon', 'core'],
     componentName: 'TableIcon',
-    package: '@atlaskit/icon/glyph/table'
+    package: '@findable/icon/glyph/table'
   },
   task: {
     keywords: ['task', 'check', 'tick', 'icon', 'core'],
     componentName: 'TaskIcon',
-    package: '@atlaskit/icon/glyph/task'
+    package: '@findable/icon/glyph/task'
   },
   trash: {
     keywords: ['trash', 'bin', 'remove', 'delete', 'recycle', 'icon', 'core'],
     componentName: 'TrashIcon',
-    package: '@atlaskit/icon/glyph/trash'
+    package: '@findable/icon/glyph/trash'
   },
   tray: {
     keywords: ['tray', 'inbox', 'icon', 'core'],
     componentName: 'TrayIcon',
-    package: '@atlaskit/icon/glyph/tray'
+    package: '@findable/icon/glyph/tray'
   },
   undo: {
     keywords: ['undo', 'icon', 'core'],
     componentName: 'UndoIcon',
-    package: '@atlaskit/icon/glyph/undo'
+    package: '@findable/icon/glyph/undo'
   },
   unlink: {
     keywords: ['unlink', 'icon', 'core'],
     componentName: 'UnlinkIcon',
-    package: '@atlaskit/icon/glyph/unlink'
+    package: '@findable/icon/glyph/unlink'
   },
   'unlock-circle': {
     keywords: ['unlock-circle', 'unlockcircle', 'open', 'permissions', 'privacy', 'restrict', 'insecure', 'icon', 'core'],
     componentName: 'UnlockCircleIcon',
-    package: '@atlaskit/icon/glyph/unlock-circle'
+    package: '@findable/icon/glyph/unlock-circle'
   },
   'unlock-filled': {
     keywords: ['unlock-filled', 'unlockfilled', 'open', 'permissions', 'privacy', 'restrict', 'insecure', 'icon', 'core'],
     componentName: 'UnlockFilledIcon',
-    package: '@atlaskit/icon/glyph/unlock-filled'
+    package: '@findable/icon/glyph/unlock-filled'
   },
   unlock: {
     keywords: ['unlock', 'open', 'permissions', 'privacy', 'restrict', 'insecure', 'icon', 'core'],
     componentName: 'UnlockIcon',
-    package: '@atlaskit/icon/glyph/unlock'
+    package: '@findable/icon/glyph/unlock'
   },
   upload: {
     keywords: ['upload', 'cloud', 'icon', 'core'],
     componentName: 'UploadIcon',
-    package: '@atlaskit/icon/glyph/upload'
+    package: '@findable/icon/glyph/upload'
   },
   'user-avatar-circle': {
     keywords: ['user-avatar-circle', 'useravatarcircle', 'person', 'icon', 'core'],
     componentName: 'UserAvatarCircleIcon',
-    package: '@atlaskit/icon/glyph/user-avatar-circle'
+    package: '@findable/icon/glyph/user-avatar-circle'
   },
   'vid-audio-muted': {
     keywords: ['vid-audio-muted', 'vidaudiomuted', 'microphone', 'sound', 'icon', 'core'],
     componentName: 'VidAudioMutedIcon',
-    package: '@atlaskit/icon/glyph/vid-audio-muted'
+    package: '@findable/icon/glyph/vid-audio-muted'
   },
   'vid-audio-on': {
     keywords: ['vid-audio-on', 'vidaudioon', 'microphone', 'sound', 'icon', 'core'],
     componentName: 'VidAudioOnIcon',
-    package: '@atlaskit/icon/glyph/vid-audio-on'
+    package: '@findable/icon/glyph/vid-audio-on'
   },
   'vid-backward': {
     keywords: ['vid-backward', 'vidbackward', 'rewind', 'icon', 'core'],
     componentName: 'VidBackwardIcon',
-    package: '@atlaskit/icon/glyph/vid-backward'
+    package: '@findable/icon/glyph/vid-backward'
   },
   'vid-camera-off': {
     keywords: ['vid-camera-off', 'vidcameraoff', 'video', 'icon', 'core'],
     componentName: 'VidCameraOffIcon',
-    package: '@atlaskit/icon/glyph/vid-camera-off'
+    package: '@findable/icon/glyph/vid-camera-off'
   },
   'vid-camera-on': {
     keywords: ['vid-camera-on', 'vidcameraon', 'icon', 'core'],
     componentName: 'VidCameraOnIcon',
-    package: '@atlaskit/icon/glyph/vid-camera-on'
+    package: '@findable/icon/glyph/vid-camera-on'
   },
   'vid-connection-circle': {
     keywords: ['vid-connection-circle', 'vidconnectioncircle', 'signal', 'bar', 'icon', 'core'],
     componentName: 'VidConnectionCircleIcon',
-    package: '@atlaskit/icon/glyph/vid-connection-circle'
+    package: '@findable/icon/glyph/vid-connection-circle'
   },
   'vid-forward': {
     keywords: ['vid-forward', 'vidforward', 'fast', 'icon', 'core'],
     componentName: 'VidForwardIcon',
-    package: '@atlaskit/icon/glyph/vid-forward'
+    package: '@findable/icon/glyph/vid-forward'
   },
   'vid-full-screen-off': {
     keywords: ['vid-full-screen-off', 'vidfullscreenoff', 'collapse', 'close', 'icon', 'core'],
     componentName: 'VidFullScreenOffIcon',
-    package: '@atlaskit/icon/glyph/vid-full-screen-off'
+    package: '@findable/icon/glyph/vid-full-screen-off'
   },
   'vid-full-screen-on': {
     keywords: ['vid-full-screen-on', 'vidfullscreenon', 'expand', 'icon', 'core'],
     componentName: 'VidFullScreenOnIcon',
-    package: '@atlaskit/icon/glyph/vid-full-screen-on'
+    package: '@findable/icon/glyph/vid-full-screen-on'
   },
   'vid-hang-up': {
     keywords: ['vid-hang-up', 'vidhangup', 'end', 'call', 'icon', 'core'],
     componentName: 'VidHangUpIcon',
-    package: '@atlaskit/icon/glyph/vid-hang-up'
+    package: '@findable/icon/glyph/vid-hang-up'
   },
   'vid-hd-circle': {
     keywords: ['vid-hd-circle', 'vidhdcircle', 'high', 'definition', 'icon', 'core'],
     componentName: 'VidHdCircleIcon',
-    package: '@atlaskit/icon/glyph/vid-hd-circle'
+    package: '@findable/icon/glyph/vid-hd-circle'
   },
   'vid-pause': {
     keywords: ['vid-pause', 'vidpause', 'icon', 'core'],
     componentName: 'VidPauseIcon',
-    package: '@atlaskit/icon/glyph/vid-pause'
+    package: '@findable/icon/glyph/vid-pause'
   },
   'vid-play': {
     keywords: ['vid-play', 'vidplay', 'icon', 'core'],
     componentName: 'VidPlayIcon',
-    package: '@atlaskit/icon/glyph/vid-play'
+    package: '@findable/icon/glyph/vid-play'
   },
   'vid-raised-hand': {
     keywords: ['vid-raised-hand', 'vidraisedhand', 'person', 'question', 'user', 'arm', 'icon', 'core'],
     componentName: 'VidRaisedHandIcon',
-    package: '@atlaskit/icon/glyph/vid-raised-hand'
+    package: '@findable/icon/glyph/vid-raised-hand'
   },
   'vid-share-screen': {
     keywords: ['vid-share-screen', 'vidsharescreen', 'icon', 'core'],
     componentName: 'VidShareScreenIcon',
-    package: '@atlaskit/icon/glyph/vid-share-screen'
+    package: '@findable/icon/glyph/vid-share-screen'
   },
   'vid-speaking-circle': {
     keywords: ['vid-speaking-circle', 'vidspeakingcircle', 'sound', 'talk', 'audio', 'icon', 'core'],
     componentName: 'VidSpeakingCircleIcon',
-    package: '@atlaskit/icon/glyph/vid-speaking-circle'
+    package: '@findable/icon/glyph/vid-speaking-circle'
   },
   'vid-volume-full': {
     keywords: ['vid-volume-full', 'vidvolumefull', 'icon', 'core'],
     componentName: 'VidVolumeFullIcon',
-    package: '@atlaskit/icon/glyph/vid-volume-full'
+    package: '@findable/icon/glyph/vid-volume-full'
   },
   'vid-volume-half': {
     keywords: ['vid-volume-half', 'vidvolumehalf', 'icon', 'core'],
     componentName: 'VidVolumeHalfIcon',
-    package: '@atlaskit/icon/glyph/vid-volume-half'
+    package: '@findable/icon/glyph/vid-volume-half'
   },
   'vid-volume-muted': {
     keywords: ['vid-volume-muted', 'vidvolumemuted', 'icon', 'core'],
     componentName: 'VidVolumeMutedIcon',
-    package: '@atlaskit/icon/glyph/vid-volume-muted'
+    package: '@findable/icon/glyph/vid-volume-muted'
   },
   'video-circle': {
     keywords: ['video-circle', 'videocircle', 'video', 'camera', 'icon', 'core'],
     componentName: 'VideoCircleIcon',
-    package: '@atlaskit/icon/glyph/video-circle'
+    package: '@findable/icon/glyph/video-circle'
   },
   'video-filled': {
     keywords: ['video-filled', 'videofilled', 'video', 'camera', 'icon', 'core'],
     componentName: 'VideoFilledIcon',
-    package: '@atlaskit/icon/glyph/video-filled'
+    package: '@findable/icon/glyph/video-filled'
   },
   warning: {
     keywords: ['warning', 'error', 'alert', 'icon', 'core'],
     componentName: 'WarningIcon',
-    package: '@atlaskit/icon/glyph/warning'
+    package: '@findable/icon/glyph/warning'
   },
   'watch-filled': {
     keywords: ['watch-filled', 'watchfilled', 'visible', 'visibility', 'eye', 'icon', 'core'],
     componentName: 'WatchFilledIcon',
-    package: '@atlaskit/icon/glyph/watch-filled'
+    package: '@findable/icon/glyph/watch-filled'
   },
   watch: {
     keywords: ['watch', 'visible', 'visibility', 'eye', 'icon', 'core'],
     componentName: 'WatchIcon',
-    package: '@atlaskit/icon/glyph/watch'
+    package: '@findable/icon/glyph/watch'
   },
   'world-small': {
     keywords: ['world-small', 'worldsmall', 'icon', 'core'],
     componentName: 'WorldSmallIcon',
-    package: '@atlaskit/icon/glyph/world-small'
+    package: '@findable/icon/glyph/world-small'
   },
   world: {
     keywords: ['world', 'globe', 'earth', 'icon', 'core'],
     componentName: 'WorldIcon',
-    package: '@atlaskit/icon/glyph/world'
+    package: '@findable/icon/glyph/world'
   }
 };
 exports.default = _default;

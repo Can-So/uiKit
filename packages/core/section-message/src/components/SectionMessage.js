@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, type Node, type ElementType } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { baseAppearanceObj } from '../theme';
 import type { Appearance } from '../types';
 
@@ -34,13 +34,13 @@ type Props = {
   title?: string,
   /*
     Actions to be taken from the section message. These accept an object which
-    are applied to @atlaskit/button components. Middots are automatically added
+    are applied to @findable/button components. Middots are automatically added
     between the items. We generally recommend using no more than two actions.
   */
   actions?: Array<ActionType>,
   /*
     An Icon component to be rendered instead of the default icon for the component.
-    This should only be an `@atlaskit/icon` icon. You can check out [this example](/packages/core/section-message/example/custom-icon)
+    This should only be an `@findable/icon` icon. You can check out [this example](/packages/core/section-message/example/custom-icon)
     to see how to provide this icon.
   */
   icon?: ElementType,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withAnalyticsForSumTypeProps } from '@atlaskit/analytics-next';
+import { withAnalyticsForSumTypeProps } from '@findable/analytics-next';
 import { CardAppearance } from './types';
 import { CardProps } from './types';
 import {

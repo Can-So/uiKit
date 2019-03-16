@@ -5,13 +5,13 @@ import {
   doc,
   p,
   inlineCard,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { cardPlugin } from '../../../../plugins';
 import { pluginKey } from '../../../../plugins/card/pm-plugins/main';
 
 import commonMessages from '../../../../messages';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import OpenIcon from '@atlaskit/icon/glyph/open';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
+import OpenIcon from '@findable/icon/glyph/open';
 import { FloatingToolbarButton } from '../../../../plugins/floating-toolbar/types';
 import { setNodeSelection } from '../../../../utils';
 import { Command } from '../../../../types';

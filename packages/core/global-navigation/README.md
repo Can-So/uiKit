@@ -5,7 +5,7 @@ Global navigation component for Atlassian.
 ## Installation
 
 ```sh
-yarn add @atlaskit/global-navigation
+yarn add @findable/global-navigation
 ```
 
 ## Usage

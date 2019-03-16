@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 export var flagWidth = gridSize() * 50; // This is the translateX position that we target when animating a card out
 // towards the left of screen.
 

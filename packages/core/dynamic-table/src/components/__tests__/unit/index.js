@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
-import Button from '@atlaskit/button';
+import { UIAnalyticsEvent } from '@findable/analytics-next';
+import Button from '@findable/button';
 import Pagination from '../../managedPagination';
 import TableHead from '../../TableHead';
 import {

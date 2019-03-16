@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import { PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { EmojiProvider } from '@atlaskit/emoji';
+import { EmojiProvider } from '@findable/emoji';
 export interface Props {
     isReducedSpacing?: boolean;
     isDisabled?: boolean;

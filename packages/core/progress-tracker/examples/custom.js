@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { Link, BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { ProgressTracker } from '../src';

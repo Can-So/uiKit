@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StatelessComponent, ReactNode } from 'react';
-import { AnalyticsContext } from '@atlaskit/analytics-next';
+import { AnalyticsContext } from '@findable/analytics-next';
 
 export type Props = {
   children?: ReactNode;

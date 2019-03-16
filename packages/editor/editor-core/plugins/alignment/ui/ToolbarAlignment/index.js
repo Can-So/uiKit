@@ -1,12 +1,12 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { defineMessages } from 'react-intl';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import Dropdown from '../../../../ui/Dropdown';
-import EditorAlignLeftIcon from '@atlaskit/icon/glyph/editor/align-left';
-import EditorAlignCenterIcon from '@atlaskit/icon/glyph/editor/align-center';
-import EditorAlignRightIcon from '@atlaskit/icon/glyph/editor/align-right';
+import EditorAlignLeftIcon from '@findable/icon/glyph/editor/align-left';
+import EditorAlignCenterIcon from '@findable/icon/glyph/editor/align-center';
+import EditorAlignRightIcon from '@findable/icon/glyph/editor/align-right';
 export var iconMap = {
     start: React.createElement(EditorAlignLeftIcon, { label: "Align left" }),
     end: React.createElement(EditorAlignRightIcon, { label: "Align right" }),

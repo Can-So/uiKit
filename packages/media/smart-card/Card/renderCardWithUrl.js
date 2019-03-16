@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import LazyRender from 'react-lazily-render';
-import { CardLinkView, BlockCardResolvingView, BlockCardErroredView, BlockCardUnauthorisedView, BlockCardForbiddenView, BlockCardResolvedView, InlineCardResolvedView, InlineCardResolvingView, InlineCardErroredView, InlineCardForbiddenView, InlineCardUnauthorizedView, } from '@atlaskit/media-ui';
+import { CardLinkView, BlockCardResolvingView, BlockCardErroredView, BlockCardUnauthorisedView, BlockCardForbiddenView, BlockCardResolvedView, InlineCardResolvedView, InlineCardResolvingView, InlineCardErroredView, InlineCardForbiddenView, InlineCardUnauthorizedView, } from '@findable/media-ui';
 import { extractBlockPropsFromJSONLD } from '../extractBlockPropsFromJSONLD';
 import { extractInlinePropsFromJSONLD } from '../extractInlinePropsFromJSONLD';
 import { WithObject } from '../WithObject';

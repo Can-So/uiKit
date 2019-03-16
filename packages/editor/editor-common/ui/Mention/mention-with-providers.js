@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { ResourcedMention } from '@atlaskit/mention';
+import { ResourcedMention } from '@findable/mention';
 import ResourcedMentionWithProfilecard from './mention-with-profilecard';
 var GENERIC_USER_IDS = ['HipChat', 'all', 'here'];
 var noop = function () { };

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Lozenge from '@atlaskit/lozenge';
-import Arrow from '@atlaskit/icon/glyph/arrow-right';
+import Lozenge from '@findable/lozenge';
+import Arrow from '@findable/icon/glyph/arrow-right';
 import DropdownMenu, { DropdownItemGroup, DropdownItem } from '../src';
 
 const JiraItem = styled.div`

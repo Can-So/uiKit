@@ -2,12 +2,12 @@ import {
   pmNodeFactory as factory,
   pmNodeBuilder as builder,
   pmMarkBuilder as markBuilder,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { defaultSchema } from '../../../schema';
 import * as v1schema from '../../../../json-schema/v1/full.json';
 import * as Ajv from 'ajv';
 import { NodeType, MarkType, Node } from 'prosemirror-model';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { JSONTransformer } from '@findable/editor-json-transformer';
 
 /**
  * Check if JSON is valid according to JSON schema.

@@ -2,7 +2,7 @@
 
 import React, { Fragment, Component } from 'react';
 import { css } from 'emotion';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 
 import { styleReducerNoOp, withGlobalTheme } from '../../../theme';
 import type {

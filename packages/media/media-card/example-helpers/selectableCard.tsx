@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, Identifier } from '@atlaskit/media-core';
+import { Context, Identifier } from '@findable/media-core';
 import { Card, OnSelectChangeFunc } from '../src';
 
 export interface SelectableCardProps {

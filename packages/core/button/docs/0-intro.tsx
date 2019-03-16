@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -11,11 +11,11 @@ export default md`
 
   ## Usage
 
-  ${code`import Button, { ButtonGroup } from '@atlaskit/button';`}
+  ${code`import Button, { ButtonGroup } from '@findable/button';`}
 
   ${(
     <Example
-      packageName="@atlaskit/button"
+      packageName="@findable/button"
       Component={require('../examples/ButtonAppearances').default}
       title="Your Appearance Options"
       source={require('!!raw-loader!../examples/ButtonAppearances')}
@@ -33,7 +33,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/button"
+      packageName="@findable/button"
       Component={require('../examples/ButtonGroupExample').default}
       title="Simple Button Group"
       source={require('!!raw-loader!../examples/ButtonGroupExample')}

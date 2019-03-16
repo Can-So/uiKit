@@ -9,8 +9,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component, Fragment } from 'react';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
-import { colors } from '@atlaskit/theme';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
+import { colors } from '@findable/theme';
 import { name as packageName, version as packageVersion } from '../../../version.json';
 import { Shadow } from '../../../common/primitives';
 import { light, ThemeProvider } from '../../../theme';

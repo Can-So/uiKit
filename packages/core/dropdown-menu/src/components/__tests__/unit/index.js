@@ -2,10 +2,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Droplist from '@atlaskit/droplist';
-import Button, { defaultProps as defaultButtonProps } from '@atlaskit/button';
-import MoreIcon from '@atlaskit/icon/glyph/more';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import Droplist from '@findable/droplist';
+import Button, { defaultProps as defaultButtonProps } from '@findable/button';
+import MoreIcon from '@findable/icon/glyph/more';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 
 import Menu, {
   DropdownItem,

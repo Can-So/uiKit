@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { colors, themed, withTheme } from '@atlaskit/theme';
+import { colors, themed, withTheme } from '@findable/theme';
 import type { StatusType } from '../types';
 
 const Svg = props => (

@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import Button from '@atlaskit/button';
-import FieldText from '@atlaskit/field-text';
-import TextField from '@atlaskit/textfield';
+import Button from '@findable/button';
+import FieldText from '@findable/field-text';
+import TextField from '@findable/textfield';
 import Form, {
   Field,
   HelperMessage,

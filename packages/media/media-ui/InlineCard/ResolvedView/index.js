@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Frame } from '../Frame';
-import Lozenge from '@atlaskit/lozenge';
+import Lozenge from '@findable/lozenge';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
 import { LozengeWrapper } from '../IconAndTitleLayout/styled';
 var InlineCardResolvedView = /** @class */ (function (_super) {

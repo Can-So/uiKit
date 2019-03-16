@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component, ReactNode } from 'react';
-import { MediaType } from '@atlaskit/media-core';
+import { MediaType } from '@findable/media-core';
 import { CardAction, CardEventHandler } from '../../../actions';
 export interface CardOverlayProps {
     mediaType?: MediaType;

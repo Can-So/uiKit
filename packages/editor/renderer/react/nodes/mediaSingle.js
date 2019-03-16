@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
-import { MediaSingle as UIMediaSingle, WidthConsumer, akEditorFullPageMaxWidth, mapBreakpointToLayoutMaxWidth, } from '@atlaskit/editor-common';
+import { MediaSingle as UIMediaSingle, WidthConsumer, akEditorFullPageMaxWidth, mapBreakpointToLayoutMaxWidth, } from '@findable/editor-common';
 import { FullPagePadding } from '../../ui/Renderer/style';
 var DEFAULT_WIDTH = 250;
 var DEFAULT_HEIGHT = 200;

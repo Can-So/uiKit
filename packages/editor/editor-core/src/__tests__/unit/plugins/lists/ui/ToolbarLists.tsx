@@ -5,7 +5,7 @@ import {
   createEditorFactory,
   mountWithIntl,
   createAnalyticsEventMock,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { AnalyticsHandler } from '../../../../../analytics';
 import listPlugin from '../../../../../plugins/lists';
 import tasksAndDecisionsPlugin from '../../../../../plugins/tasks-and-decisions';
@@ -17,7 +17,7 @@ import { messages } from '../../../../../plugins/lists/messages';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import DropdownMenu from '../../../../../ui/DropdownMenu';
 import ToolbarLists from '../../../../../plugins/lists/ui/ToolbarLists';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import { ReactWrapper } from 'enzyme';
 import { AnalyticsEventPayload } from '../../../../../plugins/analytics';
 

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { ellipsis } from '../../../mixins';
 var widgetHeight = 24;
 export var Wrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  flex-grow: 1;\n  flex-wrap: wrap;\n  margin-top: 3px;\n\n  max-height: ", "px;\n  overflow: hidden;\n\n  & > * {\n    margin-right: 12px;\n  }\n  & > *:last-child {\n    margin-right: auto;\n  }\n"], ["\n  display: flex;\n  flex-grow: 1;\n  flex-wrap: wrap;\n  margin-top: 3px;\n\n  max-height: ", "px;\n  overflow: hidden;\n\n  & > * {\n    margin-right: 12px;\n  }\n  & > *:last-child {\n    margin-right: auto;\n  }\n"])), widgetHeight * 2);

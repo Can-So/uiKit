@@ -1,10 +1,10 @@
-import { code_block, doc, ul, li, p } from '@atlaskit/editor-test-helpers';
+import { code_block, doc, ul, li, p } from '@findable/editor-test-helpers';
 import {
   checkParseEncodeRoundTrips,
   checkEncode,
   checkParse,
 } from './_test-helpers';
-import { createJIRASchema } from '@atlaskit/adf-schema';
+import { createJIRASchema } from '@findable/adf-schema';
 
 const schema = createJIRASchema({ allowCodeBlock: true, allowLists: true });
 

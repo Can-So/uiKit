@@ -1,11 +1,11 @@
 import * as tslib_1 from "tslib";
 import { defineMessages } from 'react-intl';
 import { hasParentNodeOfType } from 'prosemirror-utils';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import EditIcon from '@atlaskit/icon/glyph/editor/edit';
-import FullWidthIcon from '@atlaskit/icon/glyph/editor/media-full-width';
-import WideIcon from '@atlaskit/icon/glyph/editor/media-wide';
-import CenterIcon from '@atlaskit/icon/glyph/editor/media-center';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
+import EditIcon from '@findable/icon/glyph/editor/edit';
+import FullWidthIcon from '@findable/icon/glyph/editor/media-full-width';
+import WideIcon from '@findable/icon/glyph/editor/media-wide';
+import CenterIcon from '@findable/icon/glyph/editor/media-center';
 import commonMessages from '../../messages';
 import { pluginKey as macroPluginKey } from '../macro';
 import { updateExtensionLayout, editExtension, removeExtension, } from './actions';

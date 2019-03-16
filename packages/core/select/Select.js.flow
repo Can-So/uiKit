@@ -5,7 +5,7 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import { name as packageName, version as packageVersion } from './version.json';
 import createSelect from './createSelect';
 

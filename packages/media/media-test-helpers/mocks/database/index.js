@@ -1,4 +1,4 @@
-import { MediaStore } from '@atlaskit/media-store';
+import { MediaStore } from '@findable/media-store';
 import { Database } from 'kakapo';
 import * as uuid from 'uuid';
 import { getFakeFileName, fakeImage } from './mockData';

@@ -1,7 +1,7 @@
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { themeNamespace as buttonThemeNamespace } from '@atlaskit/button';
-import { colors, themed } from '@atlaskit/theme';
+import { themeNamespace as buttonThemeNamespace } from '@findable/button';
+import { colors, themed } from '@findable/theme';
 export var getSpotlightTheme = function getSpotlightTheme(theme) {
   return _objectSpread({}, theme, _defineProperty({}, buttonThemeNamespace, _objectSpread({}, theme && theme[buttonThemeNamespace], {
     default: {

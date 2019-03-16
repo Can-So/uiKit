@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import LinkIcon from '@atlaskit/icon/glyph/link';
-import Button from '@atlaskit/button';
-import CodeIcon from '@atlaskit/icon/glyph/code';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import Flag, { FlagGroup } from '@atlaskit/flag';
-import Select from '@atlaskit/select';
-import Tooltip from '@atlaskit/tooltip';
-import { colors } from '@atlaskit/theme';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
+import LinkIcon from '@findable/icon/glyph/link';
+import Button from '@findable/button';
+import CodeIcon from '@findable/icon/glyph/code';
+import ErrorIcon from '@findable/icon/glyph/error';
+import Flag, { FlagGroup } from '@findable/flag';
+import Select from '@findable/select';
+import Tooltip from '@findable/tooltip';
+import { colors } from '@findable/theme';
 
 import ExampleDisplay from '../../components/Examples/ExampleDisplay';
 import * as fs from '../../utils/fs';

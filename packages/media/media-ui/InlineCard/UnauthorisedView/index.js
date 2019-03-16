@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 var InlineCardUnauthorizedView = /** @class */ (function (_super) {
     tslib_1.__extends(InlineCardUnauthorizedView, _super);
     function InlineCardUnauthorizedView() {

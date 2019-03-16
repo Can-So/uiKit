@@ -1,4 +1,4 @@
-declare module '@atlaskit/theme' {
+declare module '@findable/theme' {
   export const borderRadius: any;
   export const codeFontFamily: any;
   export const colors: Record<string, string>;

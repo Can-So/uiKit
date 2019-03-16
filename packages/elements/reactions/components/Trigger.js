@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import Button from '@atlaskit/button';
-import EmojiAddIcon from '@atlaskit/icon/glyph/emoji-add';
+import Button from '@findable/button';
+import EmojiAddIcon from '@findable/icon/glyph/emoji-add';
 import * as cx from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';

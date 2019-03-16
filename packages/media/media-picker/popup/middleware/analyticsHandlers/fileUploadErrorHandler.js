@@ -1,4 +1,4 @@
-import { TRACK_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { TRACK_EVENT_TYPE } from '@findable/analytics-gas-types';
 import { isFileUploadErrorAction } from '../../actions/fileUploadError';
 export default (function (action, store) {
     if (isFileUploadErrorAction(action)) {

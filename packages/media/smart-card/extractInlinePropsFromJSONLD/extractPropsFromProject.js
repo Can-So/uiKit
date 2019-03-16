@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import ProjectDefaultIcon from '@atlaskit/icon/glyph/people-group';
+import ProjectDefaultIcon from '@findable/icon/glyph/people-group';
 import { extractInlineViewPropsFromDocument } from './extractPropsFromDocument';
 export var buildProjectIcon = function (json) {
     if (json.icon && json.icon.url) {

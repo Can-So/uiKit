@@ -1,4 +1,4 @@
-const sendLogs = require('@atlaskit/analytics-reporting');
+const sendLogs = require('@findable/analytics-reporting');
 
 module.exports = {
   reportLongRunningTests(tests, threshold) {

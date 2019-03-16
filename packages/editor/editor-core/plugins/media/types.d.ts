@@ -1,5 +1,5 @@
-import { Context } from '@atlaskit/media-core';
-import { MediaFile, UploadParams } from '@atlaskit/media-picker';
+import { Context } from '@findable/media-core';
+import { MediaFile, UploadParams } from '@findable/media-picker';
 export declare type MediaStateStatus = 'unknown' | 'ready' | 'cancelled' | 'preview' | 'error' | 'mobile-upload-end';
 export interface MediaState {
     id: string;

@@ -88,7 +88,7 @@ once we've investigated if there's a better abstraction for this pattern.
 In order to get both controlled and uncontrolled behaviour from the `datetime-picker`, we used to have to do:
 
 ```js
-import { DatePicker, DatePickerStateless } from '@atlaskit/datetime-picker';
+import { DatePicker, DatePickerStateless } from '@findable/datetime-picker';
 
 // Uncontrolled.
 <DatePicker defaultValue="2000-01-01" />
@@ -100,7 +100,7 @@ import { DatePicker, DatePickerStateless } from '@atlaskit/datetime-picker';
 However, now, all we have to do is:
 
 ```js
-import { DatePicker } from '@atlaskit/datetime-picker';
+import { DatePicker } from '@findable/datetime-picker';
 
 // Uncontrolled.
 <DatePicker defaultValue="2000-01-01" />

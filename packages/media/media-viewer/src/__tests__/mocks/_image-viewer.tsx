@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, ProcessedFileState } from '@atlaskit/media-core';
+import { Context, ProcessedFileState } from '@findable/media-core';
 import {
   AnalyticViewerProps,
   ViewerLoadPayload,

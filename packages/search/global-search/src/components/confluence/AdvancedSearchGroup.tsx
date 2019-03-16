@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Icon from '@atlaskit/icon';
-import SearchIcon from '@atlaskit/icon/glyph/search';
+import Icon from '@findable/icon';
+import SearchIcon from '@findable/icon/glyph/search';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
-import { CancelableEvent } from '@atlaskit/quick-search';
+import { gridSize, math } from '@findable/theme';
+import { CancelableEvent } from '@findable/quick-search';
 import { messages } from '../../messages';
 import StickyFooter from '../common/StickyFooter';
 import SearchPeopleItem from '../SearchPeopleItem';

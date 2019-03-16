@@ -2,7 +2,7 @@ import _extends from "@babel/runtime/helpers/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import styled from 'styled-components';
-import { colors, themed, withTheme } from '@atlaskit/theme';
+import { colors, themed, withTheme } from '@findable/theme';
 import { Theme } from '../theme';
 export var ShapeGroup = withTheme(styled.g.withConfig({
   displayName: "AvatarImage__ShapeGroup",

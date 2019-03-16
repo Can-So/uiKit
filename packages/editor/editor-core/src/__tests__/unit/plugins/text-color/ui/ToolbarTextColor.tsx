@@ -6,7 +6,7 @@ import {
   createEditorFactory,
   mountWithIntl,
   createAnalyticsEventMock,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   TextColorPluginState,
@@ -21,7 +21,7 @@ import textColorPlugin from '../../../../../plugins/text-color';
 import codeBlockPlugin from '../../../../../plugins/code-block';
 import { ReactWrapper } from 'enzyme';
 import { AnalyticsHandler } from '../../../../../analytics';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 
 /**
  * Simulate a click color

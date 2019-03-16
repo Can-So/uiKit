@@ -1,8 +1,8 @@
 {
-  "name": "@atlaskit/drawer",
+  "name": "@findable/drawer",
   "version": "3.0.1",
   "description": "React component the renders a Drawer from the left of the screen",
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Harsha Ivaturi",
@@ -13,12 +13,12 @@
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
   "dependencies": {
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/blanket": "^8.0.1",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/item": "^9.0.0",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/blanket": "^8.0.1",
+    "@findable/docs": "^7.0.1",
+    "@findable/icon": "^16.0.5",
+    "@findable/item": "^9.0.0",
+    "@findable/theme": "^8.0.1",
     "@babel/runtime": "^7.0.0",
     "chromatism": "^2.6.0",
     "emotion": "^9.1.1",
@@ -34,11 +34,11 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/dropdown-menu": "^7.0.1",
-    "@atlaskit/quick-search": "^6.0.0",
-    "@atlaskit/section-message": "^2.0.1",
-    "@atlaskit/webdriver-runner": "^0.1.0",
+    "@findable/button": "^11.0.0",
+    "@findable/dropdown-menu": "^7.0.1",
+    "@findable/quick-search": "^6.0.0",
+    "@findable/section-message": "^2.0.1",
+    "@findable/webdriver-runner": "^0.1.0",
     "enzyme": "^3.7.0",
     "react-lorem-component": "^0.12.2"
   }

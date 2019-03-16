@@ -1,6 +1,6 @@
 // @flow
 const path = require('path');
-const buildIcons = require('@atlaskit/icon-build-process');
+const buildIcons = require('@findable/icon-build-process');
 const pkgDir = require('pkg-dir');
 const fs = require('fs-extra');
 const synonyms = require('../utils/synonyms');
@@ -19,7 +19,7 @@ const config = {
 buildIcons(config).then(icons => {
   const iconDocs = buildIcons.createIconDocs(
     icons,
-    '@atlaskit/icon',
+    '@findable/icon',
     synonyms,
     ['icon', 'core'],
   );

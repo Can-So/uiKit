@@ -1,20 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { defaultSchema } from '@atlaskit/adf-schema';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { defaultSchema } from '@findable/adf-schema';
+import { ProviderFactory } from '@findable/editor-common';
+import { JSONTransformer } from '@findable/editor-json-transformer';
 import { WikiMarkupTransformer } from '../src';
-import { ReactRenderer } from '@atlaskit/renderer';
+import { ReactRenderer } from '@findable/renderer';
 import {
   storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   profilecard as profilecardUtils,
   emoji,
   taskDecision,
-} from '@atlaskit/util-data-test';
-import { AkProfileClient, modifyResponse } from '@atlaskit/profilecard';
+} from '@findable/util-data-test';
+import { AkProfileClient, modifyResponse } from '@findable/profilecard';
 import { Context } from '../src/parser/tokenize';
 
 const Container = styled.div`

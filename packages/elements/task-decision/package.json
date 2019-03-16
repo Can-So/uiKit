@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/task-decision",
+  "name": "@findable/task-decision",
   "version": "13.1.0",
   "config": {
     "access": "public"
@@ -10,15 +10,15 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "dependencies": {
-    "@atlaskit/analytics-namespaced-context": "^3.0.0",
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/analytics-next-types": "^4.0.0",
-    "@atlaskit/avatar-group": "^3.0.1",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/spinner": "^10.0.1",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/util-service-support": "^4.0.0",
+    "@findable/analytics-namespaced-context": "^3.0.0",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/analytics-next-types": "^4.0.0",
+    "@findable/avatar-group": "^3.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/spinner": "^10.0.1",
+    "@findable/theme": "^8.0.1",
+    "@findable/util-service-support": "^4.0.0",
     "@types/react-loadable": "^5.4.1",
     "date-fns": "^1.30.1",
     "lodash.debounce": "^4.0.8",
@@ -41,14 +41,14 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "@atlaskit/analytics-listeners": "^5.0.0",
-    "@atlaskit/avatar": "^15.0.1",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/editor-common": "^35.0.0",
-    "@atlaskit/elements-test-helpers": "^0.4.0",
-    "@atlaskit/renderer": "^44.0.1",
-    "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^11.1.0",
+    "@findable/analytics-listeners": "^5.0.0",
+    "@findable/avatar": "^15.0.1",
+    "@findable/docs": "^7.0.1",
+    "@findable/editor-common": "^35.0.0",
+    "@findable/elements-test-helpers": "^0.4.0",
+    "@findable/renderer": "^44.0.1",
+    "@findable/util-common-test": "^2.4.2",
+    "@findable/util-data-test": "^11.1.0",
     "@types/url-search-params": "^0.10.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
@@ -59,5 +59,5 @@
     "url-search-params": "^0.10.0",
     "whatwg-fetch": "^2.0.3"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+  "repository": "https://github.com/fnamazing/uiKit"
 }

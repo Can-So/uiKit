@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/reactions",
+  "name": "@findable/reactions",
   "version": "16.1.0",
   "config": {
     "access": "public"
@@ -9,18 +9,18 @@
   "types": "index.d.ts",
   "atlaskit:src": "src/index.ts",
   "dependencies": {
-    "@atlaskit/analytics-gas-types": "^4.0.0",
-    "@atlaskit/analytics-namespaced-context": "^3.0.0",
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/analytics-next-types": "^4.0.0",
-    "@atlaskit/analytics-viewer": "^0.2.0",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/emoji": "^58.1.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/layer": "^6.0.0",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/tooltip": "^13.0.1",
-    "@atlaskit/util-service-support": "^4.0.0",
+    "@findable/analytics-gas-types": "^4.0.0",
+    "@findable/analytics-namespaced-context": "^3.0.0",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/analytics-next-types": "^4.0.0",
+    "@findable/analytics-viewer": "^0.2.0",
+    "@findable/button": "^11.0.0",
+    "@findable/emoji": "^58.1.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/layer": "^6.0.0",
+    "@findable/theme": "^8.0.1",
+    "@findable/tooltip": "^13.0.1",
+    "@findable/util-service-support": "^4.0.0",
     "classnames": "^2.2.5",
     "react-transition-group": "^2.2.1",
     "tslib": "^1.8.0",
@@ -51,13 +51,13 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/editor-test-helpers": "^8.0.0",
-    "@atlaskit/elements-test-helpers": "^0.4.0",
-    "@atlaskit/i18n-tools": "^0.5.0",
-    "@atlaskit/tooltip": "^13.0.1",
-    "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^11.1.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/editor-test-helpers": "^8.0.0",
+    "@findable/elements-test-helpers": "^0.4.0",
+    "@findable/i18n-tools": "^0.5.0",
+    "@findable/tooltip": "^13.0.1",
+    "@findable/util-common-test": "^2.4.2",
+    "@findable/util-data-test": "^11.1.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "es6-promise": "^4.0.5",
@@ -68,7 +68,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "scripts": {
     "i18n:push": "i18n-tools push --resource reactions . --type ts",

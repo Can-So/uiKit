@@ -1,7 +1,7 @@
 // tslint:disable:no-console
 import * as React from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { ReactRenderer } from '@atlaskit/renderer';
+import { ProviderFactory } from '@findable/editor-common';
+import { ReactRenderer } from '@findable/renderer';
 
 import RendererBridgeImpl from './native-to-web/implementation';
 import { toNativeBridge } from './web-to-native/implementation';
@@ -13,7 +13,7 @@ import {
 } from '../providers';
 
 import { eventDispatcher } from './dispatcher';
-import { ObjectKey, TaskState } from '@atlaskit/task-decision';
+import { ObjectKey, TaskState } from '@findable/task-decision';
 
 export interface MobileRendererProps {
   document?: string;

@@ -1,5 +1,5 @@
 //@flow
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 import css from './utils/evaluate-inner';
 
 const grid = gridSize() / 2;

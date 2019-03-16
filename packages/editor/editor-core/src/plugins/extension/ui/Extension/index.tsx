@@ -6,7 +6,7 @@ import {
   ProviderFactory,
   WithProviders,
   ExtensionHandlers,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import ExtensionComponent from './ExtensionComponent';
 
 export interface Props {

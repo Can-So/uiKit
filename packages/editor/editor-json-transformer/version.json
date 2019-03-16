@@ -1,5 +1,5 @@
 {
-	"name": "@atlaskit/editor-json-transformer",
+	"name": "@findable/editor-json-transformer",
 	"version": "5.0.0",
 	"sideEffects": false
 }

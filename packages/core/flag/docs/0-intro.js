@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   Flags are designed to place a message above the regular page content.
@@ -10,7 +10,7 @@ export default md`
 
   ## Usage
 
-  ${code`import Flag, { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';`}
+  ${code`import Flag, { AutoDismissFlag, FlagGroup } from '@findable/flag';`}
 
   It is recommended to wrap your application with the
   [Layer Manager](https://atlaskit.atlassian.com/components/layer-manager) component to
@@ -21,7 +21,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/flag"
+      packageName="@findable/flag"
       Component={require('../examples/01-flag-without-flagGroup').default}
       title="Flag without group"
       source={require('!!raw-loader!../examples/01-flag-without-flagGroup')}
@@ -30,7 +30,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/flag"
+      packageName="@findable/flag"
       Component={require('../examples/11-bold-flag-component').default}
       title="Flag using bold"
       source={require('!!raw-loader!../examples/11-bold-flag-component')}
@@ -39,7 +39,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/flag"
+      packageName="@findable/flag"
       Component={require('../examples/12-flag-group').default}
       title="Flag group"
       source={require('!!raw-loader!../examples/12-flag-group')}

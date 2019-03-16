@@ -6,9 +6,9 @@ import {
   OnProviderChange,
   SecurityOptions,
   ServiceConfig,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 
-import { waitUntil } from '@atlaskit/util-common-test';
+import { waitUntil } from '@findable/util-common-test';
 
 import {
   EmojiDescription,

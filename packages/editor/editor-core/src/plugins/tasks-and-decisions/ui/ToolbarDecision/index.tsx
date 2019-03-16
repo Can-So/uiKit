@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
-import DecisionIcon from '@atlaskit/icon/glyph/editor/decision';
+import DecisionIcon from '@findable/icon/glyph/editor/decision';
 import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import { insertTaskDecision } from '../../commands';

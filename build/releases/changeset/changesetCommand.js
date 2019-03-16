@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 const { green } = require('chalk');
 // TODO: Make these pull from the actual packages once we have a firm repo structure
-const cli = require('@atlaskit/build-utils/cli');
-const git = require('@atlaskit/build-utils/git');
-const logger = require('@atlaskit/build-utils/logger');
+const cli = require('@findable/build-utils/cli');
+const git = require('@findable/build-utils/git');
+const logger = require('@findable/build-utils/logger');
 const path = require('path');
 const {
   getChangedPackagesSinceMaster,
-} = require('@atlaskit/build-utils/packages');
+} = require('@findable/build-utils/packages');
 const fs = require('fs-extra');
 
 const writeChangeset = require('./writeChangeset');
@@ -34,7 +34,7 @@ async function run(opts) {
 
   if (!fs.existsSync(changesetBase)) {
     console.warn(
-      'There is no .changeset folder. If this is the first time `@atlaskit/build-releases` has been run in this project, run `yarn build-releases initialize to get set up. If you expected there to be changesets, you should check git history for when the folder was removed to ensure you do not lose any configuration.',
+      'There is no .changeset folder. If this is the first time `@findable/build-releases` has been run in this project, run `yarn build-releases initialize to get set up. If you expected there to be changesets, you should check git history for when the folder was removed to ensure you do not lose any configuration.',
     );
     return;
   }

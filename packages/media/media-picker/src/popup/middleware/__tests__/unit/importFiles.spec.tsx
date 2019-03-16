@@ -2,7 +2,7 @@ import {
   mockStore,
   mockWsConnectionHolder,
   mockPopupUploadEventEmitter,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 import {
   importFilesMiddleware,
@@ -37,7 +37,7 @@ import {
   SendUploadEventActionPayload,
 } from '../../../actions/sendUploadEvent';
 import { SCALE_FACTOR_DEFAULT } from '../../../../util/getPreviewFromImage';
-import { fileStreamsCache, FileState } from '@atlaskit/media-core';
+import { fileStreamsCache, FileState } from '@findable/media-core';
 import { ReplaySubject, Observable } from 'rxjs';
 
 describe('importFiles middleware', () => {

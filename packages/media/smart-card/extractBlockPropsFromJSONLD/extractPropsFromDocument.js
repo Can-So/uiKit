@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FormattedRelative } from 'react-intl';
 import { extractPropsFromObject } from './extractPropsFromObject';
-import ChatIcon from '@atlaskit/icon/glyph/comment';
-import { colors } from '@atlaskit/theme';
+import ChatIcon from '@findable/icon/glyph/comment';
+import { colors } from '@findable/theme';
 import { getIconForFileType, getLabelForFileType } from '../getIconForFileType';
 export function extractPropsFromDocument(json) {
     var props = extractPropsFromObject(json);

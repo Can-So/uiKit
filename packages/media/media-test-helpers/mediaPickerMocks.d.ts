@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 /// <reference types="react" />
-import { State } from '@atlaskit/media-picker/src/popup/domain';
+import { State } from '@findable/media-picker/src/popup/domain';
 import { Store } from 'react-redux';
 export declare const mockState: State;
 export declare const mockStore: (state?: Partial<State> | undefined) => {

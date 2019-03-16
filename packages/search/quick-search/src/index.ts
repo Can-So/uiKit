@@ -3,7 +3,7 @@ import * as resultTypes from './components/Results';
 /*
  This component is exported in two different ways.
 
- v0: A legacy, backwards compatible API from when quick-search was living inside @atlaskit/navigation. This API
+ v0: A legacy, backwards compatible API from when quick-search was living inside @findable/navigation. This API
  is deprecated and will be removed in the next major version.
 
  v1: An API tailored to a stand-alone quick-search component.

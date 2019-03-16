@@ -1,11 +1,11 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import Avatar from '@atlaskit/avatar';
-import AvatarGroup from '@atlaskit/avatar-group';
-import { gridSize, colors } from '@atlaskit/theme';
-import InviteTeamIcon from '@atlaskit/icon/glyph/editor/add';
-import { akEditorSmallZIndex } from '@atlaskit/editor-common';
+import Avatar from '@findable/avatar';
+import AvatarGroup from '@findable/avatar-group';
+import { gridSize, colors } from '@findable/theme';
+import InviteTeamIcon from '@findable/icon/glyph/editor/add';
+import { akEditorSmallZIndex } from '@findable/editor-common';
 import WithPluginState from '../../../ui/WithPluginState';
 import { pluginKey as collabEditPluginKey } from '../plugin';
 import { getAvatarColor } from '../utils';

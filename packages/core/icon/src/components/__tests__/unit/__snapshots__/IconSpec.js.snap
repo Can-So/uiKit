@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@atlaskit/icon Icon should match the DOM Snapshot 1`] = `
+exports[`@findable/icon Icon should match the DOM Snapshot 1`] = `
 .c0 {
   color: currentColor;
   display: inline-block;

@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { MentionEventHandlers, ProviderFactory } from '@atlaskit/editor-common';
+import { MentionEventHandlers, ProviderFactory } from '@findable/editor-common';
 export interface MentionProps {
     id: string;
     providers?: ProviderFactory;

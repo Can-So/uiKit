@@ -3,7 +3,7 @@
 /* eslint no-confusing-arrow: 0 */
 
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 
 const wrapperBackgroundColor = themed({ light: colors.N0, dark: colors.N700 });
 const getCalendarThColor = themed({ light: colors.N200, dark: colors.N200 });
@@ -30,7 +30,7 @@ export const CalendarTbody = styled.tbody`
 `;
 
 // FIXME: first-child
-// @atlaskit/css-reset should adjust default behaviours
+// @findable/css-reset should adjust default behaviours
 const thSpacing = css`
   padding: 8px 8px;
   min-width: 40px;

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { withAnalytics } from '@atlaskit/analytics';
+import { withAnalytics } from '@findable/analytics';
 import AkSearch from './Search/Search';
 import { ResultContext, SelectedResultIdContext, } from './context';
 import decorateWithAnalyticsData from './decorateWithAnalyticsData';
@@ -315,7 +315,7 @@ export { QuickSearch };
  * HOCs:
  * `decorateWithAnalyticsData` - Wrapper that decorates analytics events with additional data.
  * `withAnalytics` - Injects analytics firing methods that are picked up by
- * @atlaskit/analytics/AnalyticsListener.
+ * @findable/analytics/AnalyticsListener.
  */
 export default decorateWithAnalyticsData(withAnalytics(QuickSearch, {}, {}));
 //# sourceMappingURL=QuickSearch.js.map

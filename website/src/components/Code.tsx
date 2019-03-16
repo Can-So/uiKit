@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Prism from 'prismjs';
-import { colors, gridSize, themed } from '@atlaskit/theme';
+import { colors, gridSize, themed } from '@findable/theme';
 
 import '!style-loader!css-loader!prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-jsx';
-import { replaceSrc } from '@atlaskit/docs';
+import { replaceSrc } from '@findable/docs';
 import { replaceImports } from 'codesandboxer';
 
 const Code = styled.pre`

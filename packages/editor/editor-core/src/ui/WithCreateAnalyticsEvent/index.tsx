@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import {
   WithAnalyticsEventProps,
   CreateUIAnalyticsEventSignature,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 
 export type Props = {
   render: (

@@ -1,8 +1,8 @@
 // @flow
 import React, { Fragment } from 'react';
-import TextField from '@atlaskit/textfield';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import { Checkbox } from '@atlaskit/checkbox';
+import TextField from '@findable/textfield';
+import Button, { ButtonGroup } from '@findable/button';
+import { Checkbox } from '@findable/checkbox';
 import Form, {
   CheckboxField,
   Field,

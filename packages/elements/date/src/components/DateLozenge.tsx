@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { borderRadius, colors, themed } from '@atlaskit/theme';
+import { borderRadius, colors, themed } from '@findable/theme';
 import styled from 'styled-components';
 
 export type Color = 'grey' | 'red' | 'blue' | 'green' | 'purple' | 'yellow';

@@ -1,5 +1,5 @@
 // @flow
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 export default md`
 # Grid with custom width
@@ -7,7 +7,7 @@ export default md`
 Page can also be used for custom width pages. You need to use "fluid" layout for this
 
 ${code`
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 
 render(
   <Page>

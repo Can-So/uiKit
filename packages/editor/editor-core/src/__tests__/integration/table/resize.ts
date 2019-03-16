@@ -1,5 +1,5 @@
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import { tableNewColumnMinWidth } from '@atlaskit/editor-common';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
+import { tableNewColumnMinWidth } from '@findable/editor-common';
 import {
   editable,
   getDocFromElement,

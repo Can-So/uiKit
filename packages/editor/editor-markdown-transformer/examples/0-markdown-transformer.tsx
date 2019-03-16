@@ -4,8 +4,8 @@ import {
   Editor,
   EditorContext,
   WithEditorActions,
-} from '@atlaskit/editor-core';
-import { taskDecision } from '@atlaskit/util-data-test';
+} from '@findable/editor-core';
+import { taskDecision } from '@findable/util-data-test';
 import { MarkdownTransformer } from '../src';
 import exampleMarkdown from '../example-helpers/exampleMarkdown';
 

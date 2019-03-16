@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Observable } from 'rxjs';
-import { nextTick } from '@atlaskit/media-test-helpers';
+import { nextTick } from '@findable/media-test-helpers';
 import MediaImage, { MediaImageProps } from '../../mediaImage';
 
-import { imageFileId } from '@atlaskit/media-test-helpers';
+import { imageFileId } from '@findable/media-test-helpers';
 
 const shallowRender = async (props: MediaImageProps) => {
   const wrapper = shallow(

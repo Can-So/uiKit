@@ -1,7 +1,7 @@
-import { AnalyticsListener } from '@atlaskit/analytics';
-import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
-import Tooltip from '@atlaskit/tooltip';
+import { AnalyticsListener } from '@findable/analytics';
+import { AnalyticsListener as AnalyticsListenerNext } from '@findable/analytics-next';
+import { mountWithIntl } from '@findable/editor-test-helpers';
+import Tooltip from '@findable/tooltip';
 import * as React from 'react';
 import Mention, { ANALYTICS_HOVER_DELAY } from '../../../components/Mention';
 import ResourcedMention from '../../../components/Mention/ResourcedMention';
@@ -18,7 +18,7 @@ const createPayload = (actionSubject: string, action: string) => ({
     action,
     actionSubject,
     attributes: {
-      packageName: '@atlaskit/mention',
+      packageName: '@findable/mention',
       packageVersion: expect.any(String),
       componentName: 'mention',
       accessLevel: 'CONTAINER',

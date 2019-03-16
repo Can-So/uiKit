@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Search } from 'js-search';
-import { AbstractMentionResource, } from '@atlaskit/mention';
+import { AbstractMentionResource, } from '@findable/mention';
 import debug from '../logger';
 import { mentionResult } from './mention-data';
 import { HttpError } from './utils';

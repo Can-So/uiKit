@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import ModalDialog, { ModalFooter } from '@atlaskit/modal-dialog';
-import Button from '@atlaskit/button';
+import ModalDialog, { ModalFooter } from '@findable/modal-dialog';
+import Button from '@findable/button';
 import { FormattedMessage, intlShape, IntlProvider } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { Avatar } from '../avatar-list';
 import ImageNavigator, { CropProperties } from '../image-navigator';
 import { PredefinedAvatarList } from '../predefined-avatar-list';

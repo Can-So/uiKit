@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { EmojiRepository, denormaliseEmojiServiceResponse, UsageFrequencyTracker, } from '@atlaskit/emoji';
+import { EmojiRepository, denormaliseEmojiServiceResponse, UsageFrequencyTracker, } from '@findable/emoji';
 import { customCategory, customType } from './utils';
 import { mockNonUploadingEmojiResourceFactory, mockEmojiResourceFactory, } from './MockEmojiResource';
 export var spriteEmoji = {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 var Trigger = styled.div.withConfig({
   displayName: "Trigger",
   componentId: "sc-10ra0wx-0"

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import TextField from '@atlaskit/field-text';
+import Page, { Grid, GridColumn } from '@findable/page';
+import TextField from '@findable/field-text';
 import { InlineCardErroredView } from '../src/InlineCard/ErroredView';
 
 class Example extends React.Component {

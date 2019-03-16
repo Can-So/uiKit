@@ -6,7 +6,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import { Component } from 'react';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { navigationUILoaded } from '../../../common/analytics';
 
 var LayerInitialised =

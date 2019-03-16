@@ -8,7 +8,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component, Fragment } from 'react';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
 import PageComponent from './Page';
 import { LeftNavigator, RightNavigator } from './Navigators';
 import renderDefaultEllipsis from './renderEllipsis';

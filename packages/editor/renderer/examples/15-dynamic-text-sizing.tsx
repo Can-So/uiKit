@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { storyMediaProviderFactory } from '@atlaskit/editor-test-helpers';
+import { ProviderFactory } from '@findable/editor-common';
+import { storyMediaProviderFactory } from '@findable/editor-test-helpers';
 import { default as Renderer } from '../src/ui/Renderer';
 import { document } from './helper/story-data';
 

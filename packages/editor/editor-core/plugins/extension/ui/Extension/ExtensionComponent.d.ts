@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { MacroProvider } from '../../../macro';
-import { ExtensionHandlers } from '@atlaskit/editor-common';
+import { ExtensionHandlers } from '@findable/editor-common';
 export interface Props {
     editorView: EditorView;
     macroProvider?: Promise<MacroProvider>;

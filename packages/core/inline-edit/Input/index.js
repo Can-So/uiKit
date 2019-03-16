@@ -8,7 +8,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { fontSize } from '@atlaskit/theme';
+import { fontSize } from '@findable/theme';
 import styled from 'styled-components';
 var common = "\n  appearance: none;\n  color: inherit;\n  font-size: ".concat(fontSize(), "px;\n  font-family: inherit;\n  letter-spacing: inherit;\n");
 var ReadView = styled.div.withConfig({

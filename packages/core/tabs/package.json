@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/tabs",
+  "name": "@findable/tabs",
   "version": "9.0.0",
   "description": "A React component for displaying multiple panels within a single window",
   "license": "Apache-2.0",
@@ -18,10 +18,10 @@
     "name": "Tabs",
     "team": "core"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/analytics-next": "^4.0.0",
-    "@atlaskit/theme": "^8.0.0",
+    "@findable/analytics-next": "^4.0.0",
+    "@findable/theme": "^8.0.0",
     "@babel/runtime": "^7.0.0",
     "classnames": "^2.2.5",
     "css-element-queries": "^0.3.2",
@@ -33,12 +33,12 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/spinner": "^10.0.0",
-    "@atlaskit/tooltip": "^13.0.0",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/ssr": "^0.0.1",
+    "@findable/docs": "^7.0.0",
+    "@findable/spinner": "^10.0.0",
+    "@findable/tooltip": "^13.0.0",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-lorem-component": "^0.12.2"

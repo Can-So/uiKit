@@ -1,7 +1,7 @@
 import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
 
-import { colorPalette, borderColorPalette } from '@atlaskit/adf-schema';
-import { colors } from '@atlaskit/theme';
+import { colorPalette, borderColorPalette } from '@findable/adf-schema';
+import { colors } from '@findable/theme';
 
 import { Dispatch } from '../../../event-dispatcher';
 import { getActiveColor } from '../utils/color';

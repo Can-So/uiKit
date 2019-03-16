@@ -5,11 +5,11 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
-import IconLocation from '@atlaskit/icon/glyph/location';
-import IconRecent from '@atlaskit/icon/glyph/recent';
-import IconMention from '@atlaskit/icon/glyph/mention';
-import IconEmail from '@atlaskit/icon/glyph/email';
-import OfficeBuildingIcon from '@atlaskit/icon/glyph/office-building';
+import IconLocation from '@findable/icon/glyph/location';
+import IconRecent from '@findable/icon/glyph/recent';
+import IconMention from '@findable/icon/glyph/mention';
+import IconEmail from '@findable/icon/glyph/email';
+import OfficeBuildingIcon from '@findable/icon/glyph/office-building';
 import { DetailsLabel, DetailsLabelIcon, DetailsLabelText } from '../styled/Card';
 var icons = {
   location: IconLocation,

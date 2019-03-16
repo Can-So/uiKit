@@ -1,5 +1,5 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
-import { confluenceJiraIssue } from '@atlaskit/adf-schema';
+import { confluenceJiraIssue } from '@findable/adf-schema';
 import { ReactNodeView } from '../../nodeviews';
 import ReactJIRAIssueNode from './nodeviews/jira-issue';
 export var pluginKey = new PluginKey('jiraIssuePlugin');

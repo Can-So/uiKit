@@ -1,5 +1,5 @@
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { emoji as emojiData } from '@atlaskit/util-data-test';
+import { ProviderFactory } from '@findable/editor-common';
+import { emoji as emojiData } from '@findable/util-data-test';
 import {
   insertText,
   createEditorFactory,
@@ -10,12 +10,12 @@ import {
   emoji,
   mention,
   code_block,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { emojiPluginKey } from '../../../../plugins/emoji/pm-plugins/main';
 import emojiPlugin from '../../../../plugins/emoji';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import mentionsPlugin from '../../../../plugins/mentions';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { DEFAULT_GAS_CHANNEL } from '../../util/analytics-util';
 var UnwrappedAnalyticsEventFiredOnMount = /** @class */ (function (_super) {
     tslib_1.__extends(UnwrappedAnalyticsEventFiredOnMount, _super);

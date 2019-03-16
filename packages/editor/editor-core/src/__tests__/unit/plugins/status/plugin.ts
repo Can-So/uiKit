@@ -13,7 +13,7 @@ import {
   p,
   status,
   StatusLocalIdRegex,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   updateStatus,
   setStatusPickerAt,

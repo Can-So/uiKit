@@ -4,7 +4,7 @@ import React, { PureComponent, type Node } from 'react';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import Transition from 'react-transition-group/Transition';
 import { css as parseJss } from 'emotion';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
 
 import { transitionDurationMs } from '../../../common/constants';
 import getAnimationStyles from './getAnimationStyles';

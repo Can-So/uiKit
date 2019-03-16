@@ -1,6 +1,6 @@
 import * as React from 'react';
-import EditorDateIcon from '@atlaskit/icon/glyph/editor/date';
-import { date } from '@atlaskit/adf-schema';
+import EditorDateIcon from '@findable/icon/glyph/editor/date';
+import { date } from '@findable/adf-schema';
 import { findDomRefAtPos } from 'prosemirror-utils';
 import * as Loadable from 'react-loadable';
 import WithPluginState from '../../ui/WithPluginState';
@@ -9,7 +9,7 @@ import { insertDate, setDatePickerAt } from './actions';
 import createDatePlugin, { pluginKey as datePluginKey, } from './plugin';
 import keymap from './keymap';
 import { pluginKey as editorDisabledPluginKey, } from '../editor-disabled';
-import { todayTimestampInUTC } from '@atlaskit/editor-common';
+import { todayTimestampInUTC } from '@findable/editor-common';
 var DatePicker = Loadable({
     loader: function () {
         return import(/* webpackChunkName:"@atlaskit-internal-editor-datepicker" */ './ui/DatePicker').then(function (module) { return module.default; });

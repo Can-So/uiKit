@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 export declare type DecisionState = 'DECIDED';
 export declare type DecisionStatus = 'CREATED';
 export declare type TaskState = 'TODO' | 'DONE';

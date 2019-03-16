@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 
-import Button, { ButtonGroup } from '@atlaskit/button';
-import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
+import Button, { ButtonGroup } from '@findable/button';
+import LockCircleIcon from '@findable/icon/glyph/lock-circle';
 import Editor, { EditorProps } from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
 import WithEditorActions from './../src/ui/WithEditorActions';
@@ -13,7 +13,7 @@ import CollapsedEditor from '../src/ui/CollapsedEditor';
 import ToolbarFeedback from '../src/ui/ToolbarFeedback';
 import { name, version } from '../package.json';
 
-import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
+import { customInsertMenuItems } from '@findable/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { DevTools } from '../example-helpers/DevTools';
 import withSentry from '../example-helpers/withSentry';

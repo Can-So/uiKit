@@ -1,4 +1,4 @@
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { applyMiddleware, createStore, Store, Middleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 

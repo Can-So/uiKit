@@ -9,8 +9,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/arrow-right-circle';
-import Spinner from '@atlaskit/spinner';
+import ArrowRightCircleIcon from '@findable/icon/glyph/arrow-right-circle';
+import Spinner from '@findable/spinner';
 import { withNavigationViewController } from '../../../view-controller';
 import ConnectedItem from '../ConnectedItem';
 

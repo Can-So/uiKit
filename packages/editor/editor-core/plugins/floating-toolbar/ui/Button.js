@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Tooltip from '@atlaskit/tooltip';
-import UiButton, { themeNamespace } from '@atlaskit/button';
-import { colors, themed } from '@atlaskit/theme';
+import Tooltip from '@findable/tooltip';
+import UiButton, { themeNamespace } from '@findable/button';
+import { colors, themed } from '@findable/theme';
 import styled, { ThemeProvider } from 'styled-components';
-import { hexToRgba } from '@atlaskit/editor-common';
+import { hexToRgba } from '@findable/editor-common';
 var editorButtonTheme = {
     danger: {
         background: {

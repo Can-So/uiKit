@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right';
+import Button from '@findable/button';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import ChevronRightIcon from '@findable/icon/glyph/chevron-right';
 
 import { ChevronContainer, ChevronIconContainer, iconColor } from '../styled';
 

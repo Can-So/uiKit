@@ -1,6 +1,6 @@
 // @flow
 
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 export default md`
   ## 5.x - 6.x
@@ -14,7 +14,7 @@ export default md`
   In version 5.x we recommended rendering \`Spotlight\` in the following way:
 
   ${code`
-import { Spotlight } from '@atlaskit/onboarding'
+import { Spotlight } from '@findable/onboarding'
 
 const App = ({ isOpen, onClose }) => (
   {isOpen && <Spotlight heading="Hi there 👋" />}
@@ -25,7 +25,7 @@ In version 6.x we require wrapping the conditional render statement
 to be wrapped in a \`SpotlightTransition\`.
 
   ${code`
-import { Spotlight, SpotlightTransition } from '@atlaskit/onboarding';
+import { Spotlight, SpotlightTransition } from '@findable/onboarding';
 
 const App = ({ isOpen, onClose }) => (
   <SpotlightTransition>

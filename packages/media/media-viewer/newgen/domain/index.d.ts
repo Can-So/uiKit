@@ -1,4 +1,4 @@
-import { Identifier } from '@atlaskit/media-core';
+import { Identifier } from '@findable/media-core';
 export { Outcome } from './outcome';
 export declare type ItemSource = {
     kind: 'COLLECTION';

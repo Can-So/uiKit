@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs';
-import { Context, ContextConfig, FileItem, Auth, FileState } from '@atlaskit/media-core';
+import { Context, ContextConfig, FileItem, Auth, FileState } from '@findable/media-core';
 export declare class Stubs {
     static mediaViewer(overrides: any): {
         on: () => void;

@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { ResultItemGroup } from '@atlaskit/quick-search';
-import { ConfluenceIcon } from '@atlaskit/logo';
-import PeopleIcon from '@atlaskit/icon/glyph/people';
+import { ResultItemGroup } from '@findable/quick-search';
+import { ConfluenceIcon } from '@findable/logo';
+import PeopleIcon from '@findable/icon/glyph/people';
 import { take, isEmpty } from '../SearchResultsUtil';
 import ResultList from '../ResultList';
 import SearchJiraItem from '../SearchJiraItem';

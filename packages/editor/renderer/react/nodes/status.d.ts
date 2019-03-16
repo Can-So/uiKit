@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { Color } from '@atlaskit/status';
+import { Color } from '@findable/status';
 export interface Props {
     text: string;
     color: Color;

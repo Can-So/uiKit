@@ -1,5 +1,5 @@
-import { components } from '@atlaskit/select';
-import Tooltip from '@atlaskit/tooltip';
+import { components } from '@findable/select';
+import Tooltip from '@findable/tooltip';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { ClearIndicator } from '../../../components/ClearIndicator';

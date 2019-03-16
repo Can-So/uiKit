@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import Select from '../src';
 import type { GroupType, ItemType } from '../src/types';
 

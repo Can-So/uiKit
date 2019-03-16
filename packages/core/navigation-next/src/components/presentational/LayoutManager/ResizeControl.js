@@ -11,12 +11,12 @@ import raf from 'raf-schd';
 import {
   withAnalyticsEvents,
   type WithAnalyticsEventsProps,
-} from '@atlaskit/analytics-next';
-import { colors } from '@atlaskit/theme';
-import ChevronLeft from '@atlaskit/icon/glyph/chevron-left';
-import ChevronRight from '@atlaskit/icon/glyph/chevron-right';
-import MenuExpandIcon from '@atlaskit/icon/glyph/menu-expand';
-import Tooltip from '@atlaskit/tooltip';
+} from '@findable/analytics-next';
+import { colors } from '@findable/theme';
+import ChevronLeft from '@findable/icon/glyph/chevron-left';
+import ChevronRight from '@findable/icon/glyph/chevron-right';
+import MenuExpandIcon from '@findable/icon/glyph/menu-expand';
+import Tooltip from '@findable/tooltip';
 
 import { navigationExpandedCollapsed } from '../../../common/analytics';
 import {

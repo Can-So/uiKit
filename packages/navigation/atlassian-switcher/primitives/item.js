@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
-import Item, { itemThemeNamespace } from '@atlaskit/item';
-import { gridSize } from '@atlaskit/theme';
+import Item, { itemThemeNamespace } from '@findable/item';
+import { gridSize } from '@findable/theme';
 import { createAndFireNavigationEvent, withAnalyticsEvents, UI_EVENT_TYPE, SWITCHER_ITEM_SUBJECT, } from '../utils/analytics';
 import { FadeIn } from './fade-in';
 var itemTheme = {

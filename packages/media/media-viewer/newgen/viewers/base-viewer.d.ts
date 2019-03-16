@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, FileState } from '@atlaskit/media-core';
+import { Context, FileState } from '@findable/media-core';
 import { Outcome } from '../domain';
 import { MediaViewerError } from '../error';
 export declare type BaseProps = {

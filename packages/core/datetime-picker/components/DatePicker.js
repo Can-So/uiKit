@@ -8,11 +8,11 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import _extends from "@babel/runtime/helpers/extends";
-import Calendar from '@atlaskit/calendar';
-import CalendarIcon from '@atlaskit/icon/glyph/calendar';
-import Select, { mergeStyles } from '@atlaskit/select';
-import { borderRadius, colors, layers, elevation } from '@atlaskit/theme';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
+import Calendar from '@findable/calendar';
+import CalendarIcon from '@findable/icon/glyph/calendar';
+import Select, { mergeStyles } from '@findable/select';
+import { borderRadius, colors, layers, elevation } from '@findable/theme';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
 import { format, isValid, parse, getDaysInMonth } from 'date-fns';
 import pick from 'lodash.pick';
 import React, { Component } from 'react';
@@ -162,7 +162,7 @@ function (_Component) {
 
         if (isValid(parsed)) {
           // We format the parsed date to YYYY-MM-DD here because
-          // this is the format expected by the @atlaskit/calendar component
+          // this is the format expected by the @findable/calendar component
           _this.setState({
             view: format(parsed, 'YYYY-MM-DD')
           });

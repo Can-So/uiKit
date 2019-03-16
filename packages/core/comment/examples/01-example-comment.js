@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import Comment, {
   CommentAuthor,
   CommentTime,

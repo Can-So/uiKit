@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
   This package includes common components and utilities used by other media packages.
@@ -27,7 +27,7 @@ export default md`
     InlineCardErroredView,
     InlineCardForbiddenView,
     InlineCardUnauthorizedView,
-  } from '@atlaskit/media-ui';`}
+  } from '@findable/media-ui';`}
 
   ### BlockCard
 
@@ -37,7 +37,7 @@ export default md`
     BlockCardUnauthorisedView,
     BlockCardForbiddenView,
     BlockCardResolvedView,
-  } from '@atlaskit/media-ui';`}
+  } from '@findable/media-ui';`}
 
     ${(
       <Example

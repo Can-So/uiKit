@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { PopupSelect } from '@atlaskit/select';
-import { gridSize } from '@atlaskit/theme';
+import { PopupSelect } from '@findable/select';
+import { gridSize } from '@findable/theme';
 import {
   BaseSwitcher,
   Footer,

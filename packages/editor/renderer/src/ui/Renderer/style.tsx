@@ -8,7 +8,7 @@ import {
   fontSize,
   borderRadius,
   themed,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 import {
   tableSharedStyle,
   columnLayoutSharedStyle,
@@ -30,7 +30,7 @@ import {
   akEditorSmallZIndex,
   gridMediumMaxWidth,
   codeMarkSharedStyles,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { RendererAppearance } from './';
 import { RendererCssClassName } from '../../consts';
 

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import { CollapsedFrame } from '../CollapsedFrame';
 import { minWidth, maxWidth } from '../dimensions';
 import { SingleLineLayout } from '../SingleLineLayout';

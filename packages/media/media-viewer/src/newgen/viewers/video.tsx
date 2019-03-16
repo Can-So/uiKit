@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Context, ProcessedFileState, FileState } from '@atlaskit/media-core';
-import { getArtifactUrl } from '@atlaskit/media-store';
-import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { Context, ProcessedFileState, FileState } from '@findable/media-core';
+import { getArtifactUrl } from '@findable/media-store';
+import { CustomMediaPlayer } from '@findable/media-ui';
 import { constructAuthTokenUrl } from '../utils';
 import { Outcome, MediaViewerFeatureFlags } from '../domain';
 import { Video, CustomVideoPlayerWrapper } from '../styled';

@@ -4,7 +4,7 @@ const COMMON_EVENT_DATA = {
   context: expect.arrayContaining([
     {
       componentName: 'navigationSidebar',
-      packageName: '@atlaskit/navigation',
+      packageName: '@findable/navigation',
       packageVersion: expect.any(String),
     },
   ]),

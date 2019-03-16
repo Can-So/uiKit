@@ -1,6 +1,6 @@
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-import { waitUntil } from '@atlaskit/util-common-test';
-import { MockEmojiResource } from '@atlaskit/util-data-test';
+import CrossCircleIcon from '@findable/icon/glyph/cross-circle';
+import { waitUntil } from '@findable/util-common-test';
+import { MockEmojiResource } from '@findable/util-data-test';
 import { FormattedMessage } from 'react-intl';
 import EmojiRepository from '../../../../api/EmojiRepository';
 import Emoji from '../../../../components/common/Emoji';

@@ -1,5 +1,5 @@
 // same types defined in analytics-web-client but avoid creating dependency with that
-import { AnalyticsEventPayload } from '@atlaskit/analytics-next-types';
+import { AnalyticsEventPayload } from '@findable/analytics-next-types';
 export const UI_EVENT_TYPE = 'ui';
 export const TRACK_EVENT_TYPE = 'track';
 export const SCREEN_EVENT_TYPE = 'screen';

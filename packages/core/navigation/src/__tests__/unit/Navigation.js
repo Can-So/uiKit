@@ -4,7 +4,7 @@ import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React, { PureComponent } from 'react';
 import sinon from 'sinon';
-import AddIcon from '@atlaskit/icon/glyph/add';
+import AddIcon from '@findable/icon/glyph/add';
 import NavigationWithAnalytics, {
   NavigationWithoutAnalytics as Navigation,
 } from '../../components/js/Navigation';

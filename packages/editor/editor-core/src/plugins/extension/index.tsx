@@ -2,7 +2,7 @@ import {
   inlineExtension,
   extension,
   bodiedExtension,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import { EditorPlugin } from '../../types';
 import createPlugin from './plugin';
 import { getToolbarConfig } from './toolbar';

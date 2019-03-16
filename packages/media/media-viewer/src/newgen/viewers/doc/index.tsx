@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Context, FileState } from '@atlaskit/media-core';
+import { Context, FileState } from '@findable/media-core';
 import { Outcome } from '../../domain';
 import { createError, MediaViewerError } from '../../error';
 import { Spinner } from '../../loading';
 import { constructAuthTokenUrl } from '../../utils';
 import { Props as RendererProps } from './pdfRenderer';
 import { ComponentClass } from 'react';
-import { getArtifactUrl } from '@atlaskit/media-store';
+import { getArtifactUrl } from '@findable/media-store';
 import { BaseViewer } from '../base-viewer';
 import { getObjectUrlFromFileState } from '../../utils/getObjectUrlFromFileState';
 

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
-import { akEditorUnitZIndex } from '@atlaskit/editor-common';
+import { borderRadius, colors } from '@findable/theme';
+import { akEditorUnitZIndex } from '@findable/editor-common';
 export var Header = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  z-index: ", ";\n  min-height: 24px;\n  padding: 20px 40px;\n  font-size: 24px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-shadow: ", ";\n  color: ", ";\n  background-color: ", ";\n  border-radius: ", "px;\n"], ["\n  z-index: ", ";\n  min-height: 24px;\n  padding: 20px 40px;\n  font-size: 24px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-shadow: ",
     ";\n  color: ", ";\n  background-color: ", ";\n  border-radius: ", "px;\n"])), akEditorUnitZIndex, function (props) {
     return props.showKeyline ? "0 2px 0 " + colors.N30 : 'none';

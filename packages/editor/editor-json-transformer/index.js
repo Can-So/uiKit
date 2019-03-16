@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { codeBlockToJSON, defaultSchema, linkToJSON, mediaToJSON, mediaSingleToJSON, mentionToJSON, tableToJSON, toJSONTableCell, toJSONTableHeader, } from '@atlaskit/adf-schema';
+import { codeBlockToJSON, defaultSchema, linkToJSON, mediaToJSON, mediaSingleToJSON, mentionToJSON, tableToJSON, toJSONTableCell, toJSONTableHeader, } from '@findable/adf-schema';
 var isType = function (type) { return function (node) {
     return node.type.name === type;
 }; };

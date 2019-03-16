@@ -1,6 +1,6 @@
-import { Auth, FileDetails } from '@atlaskit/media-core';
+import { Auth, FileDetails } from '@findable/media-core';
 import { Service, ServiceAccountWithType, ServiceFolder, ServiceName } from '../../domain';
-import { MediaFile } from '@atlaskit/media-store';
+import { MediaFile } from '@findable/media-store';
 export interface GiphyImage {
     url: string;
     width: string;

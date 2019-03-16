@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import DynamicTable from '../src';
 import { caption, head, rows } from './content/sample-data';
 

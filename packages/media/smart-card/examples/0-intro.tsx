@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import Form, { Field, FormHeader } from '@atlaskit/form';
-import Textfield from '@atlaskit/textfield';
-import Button from '@atlaskit/button';
+import Page, { Grid, GridColumn } from '@findable/page';
+import Form, { Field, FormHeader } from '@findable/form';
+import Textfield from '@findable/textfield';
+import Button from '@findable/button';
 import { Provider, Card, Client } from '../src';
 import { CardAppearance } from '../src/Card/types';
-import { Checkbox } from '@atlaskit/checkbox';
-import { RadioGroup } from '@atlaskit/radio';
+import { Checkbox } from '@findable/checkbox';
+import { RadioGroup } from '@findable/radio';
 import urlsJSON from './example-urls.json';
 
 const params =

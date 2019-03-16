@@ -1,4 +1,4 @@
-import { CodeDefinition } from '@atlaskit/adf-schema';
+import { CodeDefinition } from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

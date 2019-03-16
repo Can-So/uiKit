@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
-import Question from '@atlaskit/icon/glyph/question';
+import Avatar from '@findable/avatar';
+import Question from '@findable/icon/glyph/question';
 import Dropdown, { DropdownItemGroup, DropdownItem } from '../src';
 
 const getDropDownData = () => (

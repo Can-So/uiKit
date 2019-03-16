@@ -8,7 +8,7 @@ type Props = {
   appearance?: 'warning' | 'error' | 'announcement',
   /** Content to be shown next to the icon. Typically text content but can contain links. */
   children?: Node,
-  /** Icon to be shown left of the main content. Typically an Atlaskit [@atlaskit/icon](packages/core/icon) */
+  /** Icon to be shown left of the main content. Typically an Atlaskit [@findable/icon](packages/core/icon) */
   icon?: Node,
   /** Defines whether the banner is shown. An animation is used when the value is changed. */
   isOpen?: boolean,

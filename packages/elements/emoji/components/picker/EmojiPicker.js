@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { withAnalytics } from '@atlaskit/analytics';
+import { withAnalytics } from '@findable/analytics';
 import * as React from 'react';
 import LoadingEmojiComponent from '../common/LoadingEmojiComponent';
 import { LoadingItem } from './EmojiPickerVirtualItems';

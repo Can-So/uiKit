@@ -5,7 +5,7 @@ This is a base (internal) component which should be used to build all the 'dropd
 ## Installation
 
 ```sh
-yarn add @atlaskit/droplist
+yarn add @findable/droplist
 ```
 
 ## Usage

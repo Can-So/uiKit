@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import Lorem from 'react-lorem-component';
 import styled from 'styled-components';
-import { elevation, borderRadius } from '@atlaskit/theme';
+import { elevation, borderRadius } from '@findable/theme';
 
 import { Manager, Reference, Popper } from '../src';
 

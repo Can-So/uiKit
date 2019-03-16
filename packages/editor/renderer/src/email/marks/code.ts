@@ -1,6 +1,6 @@
 import { MarkSerializerOpts } from '../interfaces';
 import { createTag, serializeStyle } from '../util';
-import { codeFontFamily } from '@atlaskit/theme';
+import { codeFontFamily } from '@findable/theme';
 
 const css = serializeStyle({
   background: 'rgb(244, 245, 247)',

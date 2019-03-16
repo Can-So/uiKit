@@ -2,8 +2,8 @@
 
 import React, { Component, type ElementType, type Node } from 'react';
 import { ThemeProvider } from 'styled-components';
-import Modal from '@atlaskit/modal-dialog';
-import Button from '@atlaskit/button';
+import Modal from '@findable/modal-dialog';
+import Button from '@findable/button';
 
 import { Actions, ActionItem, Body, Heading, Image } from '../styled/Modal';
 import { getModalTheme } from './theme';

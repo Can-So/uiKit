@@ -3,14 +3,14 @@
 import * as React from 'react';
 import { HTMLAttributes, ComponentClass, LabelHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { AkFieldRadioGroup as RadioGroup } from '@atlaskit/field-radio-group';
-import Slider from '@atlaskit/field-range';
-import Button from '@atlaskit/button';
-import { Card } from '@atlaskit/media-card';
+import { AkFieldRadioGroup as RadioGroup } from '@findable/field-radio-group';
+import Slider from '@findable/field-range';
+import Button from '@findable/button';
+import { Card } from '@findable/media-card';
 import {
   createStorybookContext,
   genericFileId,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { FilmstripView } from '../src/filmstripView';
 
 const StoryWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`

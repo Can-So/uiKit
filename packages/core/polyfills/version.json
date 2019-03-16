@@ -1,5 +1,5 @@
 {
-	"name": "@atlaskit/polyfills",
+	"name": "@findable/polyfills",
 	"version": "3.0.5",
 	"sideEffects": false
 }

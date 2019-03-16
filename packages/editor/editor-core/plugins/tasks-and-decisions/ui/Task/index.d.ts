@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { PureComponent, ReactElement } from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { ContentRef } from '@atlaskit/task-decision';
+import { ProviderFactory } from '@findable/editor-common';
+import { ContentRef } from '@findable/task-decision';
 export interface TaskProps {
     taskId: string;
     isDone: boolean;

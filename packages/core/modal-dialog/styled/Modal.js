@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { borderRadius, colors, themed, layers } from '@atlaskit/theme';
+import { borderRadius, colors, themed, layers } from '@findable/theme';
 import { WIDTH_ENUM, gutter } from '../shared-variables';
 import { flexMaxHeightIEFix, IEMaxHeightCalcPx } from '../utils/flex-max-height-ie-fix';
 
@@ -40,7 +40,7 @@ export var dialogHeight = function dialogHeight(_ref4) {
 /**
   NOTE:
   z-index
-  - temporarily added to beat @atlaskit/navigation
+  - temporarily added to beat @findable/navigation
 
   absolute + top
   - rather than fixed position so popper.js children are properly positioned

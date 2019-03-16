@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component, Fragment, type ElementRef } from 'react';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
-import { colors } from '@atlaskit/theme';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
+import { colors } from '@findable/theme';
 
 import {
   name as packageName,

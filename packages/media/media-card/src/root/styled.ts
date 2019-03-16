@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius } from '@atlaskit/theme';
+import { borderRadius } from '@findable/theme';
 import { CardDimensions, CardAppearance } from '../';
 import { getCSSUnitValue } from '../utils/getCSSUnitValue';
 import { BreakpointSizeValue, breakpointStyles } from '../utils/breakpoint';

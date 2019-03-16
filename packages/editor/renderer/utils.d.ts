@@ -1,5 +1,5 @@
 import { Schema } from 'prosemirror-model';
-import { Transformer, ADNode, EventHandlers } from '@atlaskit/editor-common';
+import { Transformer, ADNode, EventHandlers } from '@findable/editor-common';
 import { Node as PMNode } from 'prosemirror-model';
 export declare type TransformerProvider<T> = (schema: Schema) => Transformer<T>;
 export declare class ADFEncoder<T> {

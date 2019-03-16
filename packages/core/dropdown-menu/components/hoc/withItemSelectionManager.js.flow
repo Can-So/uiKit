@@ -10,7 +10,7 @@ type Props = {
   id: string,
 };
 
-// HOC that typically wraps @atlaskit/item/ItemGroup
+// HOC that typically wraps @findable/item/ItemGroup
 const withDropdownItemSelectionManager = (
   WrappedComponent: any,
   selectionBehavior: Behaviors,

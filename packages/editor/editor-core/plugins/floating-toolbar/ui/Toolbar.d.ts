@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { FloatingToolbarItem } from '../types';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { EditorView } from 'prosemirror-view';
 export interface Props {
     items: Array<FloatingToolbarItem<Function>>;

@@ -1,5 +1,5 @@
 import { couldNotLoadImage } from '../../../components/views/editor/phrases';
-import { mockStore } from '@atlaskit/media-test-helpers';
+import { mockStore } from '@findable/media-test-helpers';
 
 import { editRemoteImage } from '../../editRemoteImage';
 import { editorShowImage } from '../../../actions/editorShowImage';

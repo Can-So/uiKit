@@ -3,11 +3,11 @@ import {
   OPERATIONAL_EVENT_TYPE,
   TRACK_EVENT_TYPE,
   GasCorePayload,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 import { Action, Dispatch } from 'redux';
 import { State } from '../../../domain';
 import analyticsProcessing from '../../analyticsProcessing';
-import { mockStore } from '@atlaskit/media-test-helpers';
+import { mockStore } from '@findable/media-test-helpers';
 import { showPopup } from '../../../actions/showPopup';
 import { editorShowImage } from '../../../actions/editorShowImage';
 import { searchGiphy } from '../../../actions';
@@ -26,7 +26,7 @@ import { GET_PREVIEW } from '../../../actions/getPreview';
 import { MediaFile } from '../../../../domain/file';
 import { buttonClickPayload, Payload } from '../../analyticsHandlers';
 import { fileUploadError } from '../../../actions/fileUploadError';
-import { UIAnalyticsEventHandlerSignature } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventHandlerSignature } from '@findable/analytics-next-types';
 
 type TestPayload = GasCorePayload & { action: string; attributes: {} };
 type UploadType = 'cloudMedia' | 'localMedia';
@@ -58,7 +58,7 @@ const testFile2: MediaFile = {
 const attributes = {
   componentName: 'mediaPicker',
   componentVersion: expect.any(String),
-  packageName: '@atlaskit/media-picker',
+  packageName: '@findable/media-picker',
 };
 
 const makePayloadForOperationalFileUpload = (

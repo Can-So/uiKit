@@ -1,10 +1,10 @@
 import * as React from 'react';
-import AtlassianIcon from '@atlaskit/icon/glyph/atlassian';
-import Navigation, { AkGlobalItem } from '@atlaskit/navigation';
-import Tooltip from '@atlaskit/tooltip';
-import SwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
-import { colors } from '@atlaskit/theme';
-import AkDrawer from '@atlaskit/drawer';
+import AtlassianIcon from '@findable/icon/glyph/atlassian';
+import Navigation, { AkGlobalItem } from '@findable/navigation';
+import Tooltip from '@findable/tooltip';
+import SwitcherIcon from '@findable/icon/glyph/app-switcher';
+import { colors } from '@findable/theme';
+import AkDrawer from '@findable/drawer';
 import { mockEndpoints, REQUEST_MEDIUM } from './helpers/mock-endpoints';
 import { withAnalyticsLogger, withIntlProvider } from './helpers';
 import AtlassianSwitcher from '../src';

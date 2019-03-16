@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ItemGroup } from '@atlaskit/item';
+import { ItemGroup } from '@findable/item';
 import { ResultItemGroupTitle, ResultItemGroupHeader } from './styled';
 
 type Props = {

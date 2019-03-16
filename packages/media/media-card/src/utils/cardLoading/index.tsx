@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import FileIcon from '@atlaskit/icon/glyph/file';
+import FileIcon from '@findable/icon/glyph/file';
 import { Wrapper } from './styled';
 import { CardDimensions } from '../..';
 

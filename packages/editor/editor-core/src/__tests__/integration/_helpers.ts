@@ -1,4 +1,4 @@
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
+import { getExampleUrl } from '@findable/webdriver-runner/utils/example';
 import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
 import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
 import { EditorAppearance } from '../../types';

@@ -4,13 +4,13 @@ import {
   mediaGroup,
   mediaSingle,
   media,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   checkParse,
   checkEncode,
   checkParseEncodeRoundTrips,
 } from './_test-helpers';
-import { createJIRASchema } from '@atlaskit/adf-schema';
+import { createJIRASchema } from '@findable/adf-schema';
 import { JIRATransformer } from '../../index';
 
 const schema = createJIRASchema({ allowMedia: true });

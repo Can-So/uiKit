@@ -4,7 +4,7 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import PageComponent from './Page';
 import { LeftNavigator, RightNavigator } from './Navigators';
 import renderDefaultEllipsis from './renderEllipsis';

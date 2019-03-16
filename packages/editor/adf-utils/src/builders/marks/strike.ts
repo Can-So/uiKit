@@ -1,4 +1,4 @@
-import { StrikeDefinition } from '@atlaskit/adf-schema';
+import { StrikeDefinition } from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

@@ -8,7 +8,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { createElement, Component } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { Actions, ActionItem, Footer } from '../styled/Content';
 
 var JustifyShim = function JustifyShim(props) {

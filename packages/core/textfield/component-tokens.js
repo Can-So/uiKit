@@ -1,4 +1,4 @@
-import { colors } from '@atlaskit/theme'; // The following are the name for color mappings in @atlaskit/themes
+import { colors } from '@findable/theme'; // The following are the name for color mappings in @findable/themes
 // The exports are the functions, not the objects, so could not be used here
 
 export var disabledBackgroundColor = {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { Appearance, ContentRef, User } from '../types';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 export interface Props {
     taskId: string;
     isDone?: boolean;

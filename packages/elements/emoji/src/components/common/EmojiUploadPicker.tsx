@@ -1,4 +1,4 @@
-import AkFieldBase from '@atlaskit/field-base';
+import AkFieldBase from '@findable/field-base';
 import * as React from 'react';
 import { ChangeEvent, ChangeEventHandler, PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';

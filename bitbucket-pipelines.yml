@@ -17,7 +17,7 @@ pipelines:
             - bolt install --pure-lockfile
             - (cd build/ci-scripts && yarn stop-if-older-build)
             - yarn build
-            - node build/ci-scripts/run.if.package.changed.js @atlaskit/editor-mobile-bridge -- yarn build:editor-mobile-bridge
+            - node build/ci-scripts/run.if.package.changed.js @findable/editor-mobile-bridge -- yarn build:editor-mobile-bridge
             # Bump all packages and their dependents using saved changesets.
             - node ./build/releases/bin/build-releases.js version
             # We push the bumped packages to master now as it's much better to fail whilst BB is
@@ -42,7 +42,7 @@ pipelines:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
               - yarn build
-              - node build/ci-scripts/run.if.package.changed.js @atlaskit/editor-mobile-bridge -- yarn build:editor-mobile-bridge
+              - node build/ci-scripts/run.if.package.changed.js @findable/editor-mobile-bridge -- yarn build:editor-mobile-bridge
             caches:
               - node
         - step:
@@ -81,8 +81,8 @@ pipelines:
               - TEST_ONLY_PATTERN='!packages/editor' yarn test:changed --passWithNoTests
               # Run the editor tests (runInBand is required or it fails in CI)
               - TEST_ONLY_PATTERN='packages/editor' yarn test:changed --runInBand --passWithNoTests
-              # This script acts like a unit test to check changes to @atlaskit/adf-schema.
-              - node build/ci-scripts/run.if.package.changed.js @atlaskit/adf-schema -- yarn build:adf-schema:checkuptodate
+              # This script acts like a unit test to check changes to @findable/adf-schema.
+              - node build/ci-scripts/run.if.package.changed.js @findable/adf-schema -- yarn build:adf-schema:checkuptodate
             caches:
               - node
         - step:

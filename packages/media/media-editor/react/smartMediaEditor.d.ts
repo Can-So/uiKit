@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Subscription } from 'rxjs/Subscription';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@findable/media-core';
 import { InjectedIntlProps } from 'react-intl';
 import { Dimensions } from '../common';
 export interface SmartMediaEditorProps {

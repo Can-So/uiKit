@@ -4,7 +4,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { publishReplay } from 'rxjs/operators/publishReplay';
 import * as uuid from 'uuid/v4';
 import * as Dataloader from 'dataloader';
-import { uploadFile, } from '@atlaskit/media-store';
+import { uploadFile, } from '@findable/media-store';
 import * as isValidId from 'uuid-validate';
 import { mapMediaItemToFileState, } from '../fileState';
 import { fileStreamsCache } from '../context/fileStreamCache';

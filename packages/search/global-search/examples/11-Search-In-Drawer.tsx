@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { setupMocks, teardownMocks } from '../example-helpers/mockApis';
-import Drawer, { DrawerItemTheme } from '@atlaskit/drawer';
+import Drawer, { DrawerItemTheme } from '@findable/drawer';
 import { GlobalQuickSearch } from '../src';
 import LocaleIntlProvider from '../example-helpers/LocaleIntlProvider';
 

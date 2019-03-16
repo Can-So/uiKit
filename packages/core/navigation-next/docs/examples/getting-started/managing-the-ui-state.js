@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Fragment } from 'react';
-import GlobalNavigation from '@atlaskit/global-navigation';
-import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
-import { AtlassianIcon, AtlassianWordmark } from '@atlaskit/logo';
-import Button from '@atlaskit/button';
-import ChevronLeft from '@atlaskit/icon/glyph/chevron-left';
-import ChevronRight from '@atlaskit/icon/glyph/chevron-right';
+import GlobalNavigation from '@findable/global-navigation';
+import ShortcutIcon from '@findable/icon/glyph/shortcut';
+import { AtlassianIcon, AtlassianWordmark } from '@findable/logo';
+import Button from '@findable/button';
+import ChevronLeft from '@findable/icon/glyph/chevron-left';
+import ChevronRight from '@findable/icon/glyph/chevron-right';
 import {
   ContainerHeader,
   GroupHeading,

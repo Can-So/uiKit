@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import styled from 'styled-components';
 import { HTMLAttributes, ComponentClass } from 'react';
-import { size } from '@atlaskit/media-ui';
+import { size } from '@findable/media-ui';
 
 export const FileTypeIcon: ComponentClass<HTMLAttributes<{}>> = styled.div`
   float: left;

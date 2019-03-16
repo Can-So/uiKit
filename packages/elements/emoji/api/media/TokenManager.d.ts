@@ -1,5 +1,5 @@
 import { MediaApiToken } from '../../types';
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 export declare const expireAdjustment = 30;
 export declare type TokenType = 'read' | 'upload';
 export default class TokenManager {

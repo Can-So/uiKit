@@ -1,6 +1,6 @@
 import { promiseAllWithNonFailFast } from '../../../utils/promise-util';
 
-describe('@atlaskit/editor-core promise-util', () => {
+describe('@findable/editor-core promise-util', () => {
   describe('promiseAllWithNonFailFast', () => {
     it('should pass all promises for happy path', () => {
       return promiseAllWithNonFailFast([

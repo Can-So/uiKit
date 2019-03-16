@@ -1,5 +1,5 @@
 import { PureComponent, ReactNode } from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { RendererContext } from '../';
 export interface Props {
     localId: string;

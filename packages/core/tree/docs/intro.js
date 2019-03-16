@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
 
   ${(
     <SectionMessage appearance="warning">
       <p>
-        <strong>Note: @atlaskit/tree is currently a developer preview.</strong>
+        <strong>Note: @findable/tree is currently a developer preview.</strong>
       </p>
       <p>
         Please experiment with and test this package but be aware that the API
@@ -30,11 +30,11 @@ export default md`
 
   ## Usage
 
-  ${code`import Tree, { mutateTree, moveItemOnTree } from '@atlaskit/tree';`}
+  ${code`import Tree, { mutateTree, moveItemOnTree } from '@findable/tree';`}
 
   ${(
     <Example
-      packageName="@atlaskit/tree"
+      packageName="@findable/tree"
       Component={require('../examples/5-pure-tree').default}
       title="Drag-n-Drop Tree"
       source={require('!!raw-loader!../examples/5-pure-tree')}

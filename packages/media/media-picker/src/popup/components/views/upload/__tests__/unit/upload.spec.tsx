@@ -2,20 +2,20 @@ import { mount, ReactWrapper } from 'enzyme';
 import { IntlProvider } from 'react-intl';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import Spinner from '@atlaskit/spinner';
-import { FlagGroup } from '@atlaskit/flag';
-import { Card, CardAction } from '@atlaskit/media-card';
-import { MediaCollectionItem } from '@atlaskit/media-store';
+import Spinner from '@findable/spinner';
+import { FlagGroup } from '@findable/flag';
+import { Card, CardAction } from '@findable/media-card';
+import { MediaCollectionItem } from '@findable/media-store';
 import {
   asMock,
   fakeContext,
   fakeIntl,
   nextTick,
-} from '@atlaskit/media-test-helpers';
-import ModalDialog from '@atlaskit/modal-dialog';
-import Button from '@atlaskit/button';
-import { InfiniteScroll } from '@atlaskit/media-ui';
-import { Context } from '@atlaskit/media-core';
+} from '@findable/media-test-helpers';
+import ModalDialog from '@findable/modal-dialog';
+import Button from '@findable/button';
+import { InfiniteScroll } from '@findable/media-ui';
+import { Context } from '@findable/media-core';
 import {
   State,
   SelectedItem,
@@ -27,7 +27,7 @@ import {
   mockState,
   getComponentClassWithStore,
   mockIsWebGLNotAvailable,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 mockIsWebGLNotAvailable(); // mock WebGL fail check before StatelessUploadView is imported
 import { isWebGLAvailable } from '../../../../../tools/webgl';

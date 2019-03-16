@@ -1,4 +1,4 @@
-import { MediaType } from '@atlaskit/media-store';
+import { MediaType } from '@findable/media-store';
 
 export const getMediaTypeFromMimeType = (type: string): MediaType => {
   if (type.indexOf('image/') === 0) {

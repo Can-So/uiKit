@@ -1,6 +1,6 @@
 // @flow
 
-import { colors, createTheme } from '@atlaskit/theme';
+import { colors, createTheme } from '@findable/theme';
 
 /* Note:
  Lozenge does not support dark mode at the moment,

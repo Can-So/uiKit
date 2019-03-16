@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 // we apply overflow and maxheight to the GroupWrapper if we are displaying a footer so that the
 // footer is 'sticky' to the bottom (always visible)

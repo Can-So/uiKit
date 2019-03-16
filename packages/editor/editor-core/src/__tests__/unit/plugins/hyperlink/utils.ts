@@ -2,8 +2,8 @@ import {
   getLinkMatch,
   normalizeUrl,
 } from '../../../../plugins/hyperlink/utils';
-import { ActivityResource, ActivityItem } from '@atlaskit/activity';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ActivityResource, ActivityItem } from '@findable/activity';
+import { ProviderFactory } from '@findable/editor-common';
 
 /**
  * Provides sample data for this suite of tests.

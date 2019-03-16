@@ -1,4 +1,4 @@
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 
 export type ARI = string;
 export type AVI = string;

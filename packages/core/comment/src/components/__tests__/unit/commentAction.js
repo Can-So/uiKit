@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { shallow, mount } from 'enzyme';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 import CommentActionWithAnalytics, {
   CommentActionWithoutAnalytics as CommentAction,

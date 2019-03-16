@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 var Container = styled.li(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  background-color: ", ";\n  padding: 5px 8px;\n  cursor: pointer;\n  display: flex;\n"], ["\n  background-color: ",
     ";\n  padding: 5px 8px;\n  cursor: pointer;\n  display: flex;\n"])), function (props) {
     return props.selected ? colors.N20 : 'transparent';

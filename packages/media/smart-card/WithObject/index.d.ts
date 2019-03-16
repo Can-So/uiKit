@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Client, ObjectState } from '../Client';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 export interface WithObjectRenderProps {
     state: ObjectState;
     reload: () => void;

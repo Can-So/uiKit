@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { borderRadius, colors, gridSize, math, themed, withTheme } from '@atlaskit/theme';
+import { borderRadius, colors, gridSize, math, themed, withTheme } from '@findable/theme';
 var focusBorderColor = themed({
   light: colors.B200,
   dark: colors.B75

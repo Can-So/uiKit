@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import { FileIdentifier } from '@atlaskit/media-core';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { FileIdentifier } from '@findable/media-core';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 export declare type NavigationDirection = 'prev' | 'next';
 export declare type NavigationProps = Readonly<{
     items: FileIdentifier[];

@@ -5,7 +5,7 @@ import { EventType } from './types';
 import PubNubProtocol from './protocols/pubnub';
 import NoopProtocol from './protocols/noop';
 import { logDebug, logError, logInfo } from './util/logger';
-import { utils as serviceUtils } from '@atlaskit/util-service-support';
+import { utils as serviceUtils } from '@findable/util-service-support';
 import { FeatureFlags } from './featureFlags';
 import { version } from './version.json';
 var PLATFORM = 'WEB';

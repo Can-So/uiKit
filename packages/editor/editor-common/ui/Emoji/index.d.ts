@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { EmojiId } from '@atlaskit/emoji';
+import { EmojiId } from '@findable/emoji';
 import ProviderFactory from '../../providerFactory';
 export interface EmojiProps extends EmojiId {
     allowTextFallback?: boolean;

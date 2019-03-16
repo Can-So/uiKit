@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Button from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
-import LockFilledIcon from '@atlaskit/icon/glyph/lock-filled';
+import Button from '@findable/button';
+import { colors } from '@findable/theme';
+import LockFilledIcon from '@findable/icon/glyph/lock-filled';
 import { CollapsedFrame } from '../CollapsedFrame';
 import { minWidth, maxWidth } from '../dimensions';
 import { CollapsedIconTitleDescriptionLayout } from '../CollapsedIconTitleDescriptionLayout';

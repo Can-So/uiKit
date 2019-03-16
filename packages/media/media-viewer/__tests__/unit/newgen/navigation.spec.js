@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { Navigation, NavigationBase } from '../../../newgen/navigation';
-import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
-import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
+import ArrowLeftCircleIcon from '@findable/icon/glyph/chevron-left-circle';
+import ArrowRightCircleIcon from '@findable/icon/glyph/chevron-right-circle';
+import { KeyboardEventWithKeyCode } from '@findable/media-test-helpers';
 /**
  * Skipped two tests in here that are failing due to an issue with synthetic keyboard events
  * TODO: JEST-23 Fix these tests

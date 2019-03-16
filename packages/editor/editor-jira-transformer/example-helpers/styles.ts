@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes } from 'react';
 import * as React from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 export const Content: React.ComponentClass<HTMLAttributes<{}>> = styled.div`
   & div.toolsDrawer {

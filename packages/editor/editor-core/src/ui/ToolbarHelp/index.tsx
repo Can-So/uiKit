@@ -1,5 +1,5 @@
 import * as React from 'react';
-import QuestionIcon from '@atlaskit/icon/glyph/question';
+import QuestionIcon from '@findable/icon/glyph/question';
 import ToolbarButton from '../ToolbarButton';
 import WithHelpTrigger from '../WithHelpTrigger';
 

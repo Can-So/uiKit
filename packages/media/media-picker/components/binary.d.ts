@@ -1,5 +1,5 @@
 import { LocalUploadComponent } from './localUpload';
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { BinaryUploader, BinaryConfig } from './types';
 export declare class BinaryUploaderImpl extends LocalUploadComponent implements BinaryUploader {
     constructor(context: Context, config: BinaryConfig);

@@ -1,5 +1,5 @@
 import { PluginKey } from 'prosemirror-state';
-import { action } from '@atlaskit/adf-schema';
+import { action } from '@findable/adf-schema';
 export var stateKey = new PluginKey('inlineActionPlugin');
 var inlineActionPlugin = {
     marks: function () { return [{ name: 'action', mark: action }]; },

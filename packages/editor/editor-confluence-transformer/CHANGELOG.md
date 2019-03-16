@@ -1,262 +1,262 @@
-# @atlaskit/editor-cq-transformer
+# @findable/editor-cq-transformer
 
 ## 6.0.0
-- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+- [major] [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
 
   - Dropped ES5 distributables from the typescript packages
 
 ## 5.2.5
-- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
-  - @atlaskit/editor-common@34.0.0
-  - @atlaskit/editor-core@105.0.0
-  - @atlaskit/editor-test-helpers@7.0.6
-  - @atlaskit/util-data-test@10.2.5
+- Updated dependencies [7ab3e93996](https://github.com/fnamazing/uiKit/commits/7ab3e93996):
+  - @findable/editor-common@34.0.0
+  - @findable/editor-core@105.0.0
+  - @findable/editor-test-helpers@7.0.6
+  - @findable/util-data-test@10.2.5
 
 ## 5.2.4
-- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
-  - @atlaskit/editor-test-helpers@7.0.5
-  - @atlaskit/editor-core@104.0.0
+- Updated dependencies [4d17df92f8](https://github.com/fnamazing/uiKit/commits/4d17df92f8):
+  - @findable/editor-test-helpers@7.0.5
+  - @findable/editor-core@104.0.0
 
 ## 5.2.3
-- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
-  - @atlaskit/button@10.1.3
-  - @atlaskit/editor-core@103.0.3
-  - @atlaskit/util-data-test@10.2.3
-  - @atlaskit/editor-common@33.0.3
-  - @atlaskit/docs@7.0.0
-  - @atlaskit/spinner@10.0.0
-  - @atlaskit/theme@8.0.0
+- Updated dependencies [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
+  - @findable/button@10.1.3
+  - @findable/editor-core@103.0.3
+  - @findable/util-data-test@10.2.3
+  - @findable/editor-common@33.0.3
+  - @findable/docs@7.0.0
+  - @findable/spinner@10.0.0
+  - @findable/theme@8.0.0
 
 ## 5.2.2
-- Updated dependencies [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
-  - @atlaskit/editor-core@103.0.0
-  - @atlaskit/editor-test-helpers@7.0.4
+- Updated dependencies [60f0ad9a7e](https://github.com/fnamazing/uiKit/commits/60f0ad9a7e):
+  - @findable/editor-core@103.0.0
+  - @findable/editor-test-helpers@7.0.4
 
 ## 5.2.1
-- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
-  - @atlaskit/editor-common@33.0.0
-  - @atlaskit/editor-core@102.0.0
-  - @atlaskit/editor-test-helpers@7.0.2
-  - @atlaskit/util-data-test@10.2.2
+- Updated dependencies [4aee5f3cec](https://github.com/fnamazing/uiKit/commits/4aee5f3cec):
+  - @findable/editor-common@33.0.0
+  - @findable/editor-core@102.0.0
+  - @findable/editor-test-helpers@7.0.2
+  - @findable/util-data-test@10.2.2
 
 ## 5.2.0
-- [minor] [1eb20bca95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1eb20bca95):
+- [minor] [1eb20bca95](https://github.com/fnamazing/uiKit/commits/1eb20bca95):
 
   - ED-6368: No implicit any for editor-*-transformer packages
 
 ## 5.1.13
-- Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
-  - @atlaskit/editor-test-helpers@7.0.1
-  - @atlaskit/editor-core@101.0.0
+- Updated dependencies [4a84fc40e0](https://github.com/fnamazing/uiKit/commits/4a84fc40e0):
+  - @findable/editor-test-helpers@7.0.1
+  - @findable/editor-core@101.0.0
 
 ## 5.1.12
-- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
-  - @atlaskit/adf-schema@1.5.4
-  - @atlaskit/editor-common@32.0.2
-  - @atlaskit/editor-core@100.0.0
-  - @atlaskit/editor-test-helpers@7.0.0
+- Updated dependencies [4af5bd2a58](https://github.com/fnamazing/uiKit/commits/4af5bd2a58):
+  - @findable/adf-schema@1.5.4
+  - @findable/editor-common@32.0.2
+  - @findable/editor-core@100.0.0
+  - @findable/editor-test-helpers@7.0.0
 
 ## 5.1.11
-- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
-  - @atlaskit/editor-common@32.0.0
-  - @atlaskit/editor-core@99.0.0
-  - @atlaskit/editor-test-helpers@6.3.22
-  - @atlaskit/util-data-test@10.2.1
+- Updated dependencies [fc6164c8c2](https://github.com/fnamazing/uiKit/commits/fc6164c8c2):
+  - @findable/editor-common@32.0.0
+  - @findable/editor-core@99.0.0
+  - @findable/editor-test-helpers@6.3.22
+  - @findable/util-data-test@10.2.1
 
 ## 5.1.10
-- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+- [patch] [557a2b5734](https://github.com/fnamazing/uiKit/commits/557a2b5734):
 
   - ED-5788: bump prosemirror-view and prosemirror-model
 
 ## 5.1.9
-- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
-  - @atlaskit/editor-common@31.0.0
-  - @atlaskit/editor-core@98.0.0
-  - @atlaskit/editor-test-helpers@6.3.17
-  - @atlaskit/util-data-test@10.0.36
+- Updated dependencies [69c8d0c19c](https://github.com/fnamazing/uiKit/commits/69c8d0c19c):
+  - @findable/editor-common@31.0.0
+  - @findable/editor-core@98.0.0
+  - @findable/editor-test-helpers@6.3.17
+  - @findable/util-data-test@10.0.36
 
 ## 5.1.8
-- [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
+- [patch] [adff2caed7](https://github.com/fnamazing/uiKit/commits/adff2caed7):
 
   - Improve typings
 
 ## 5.1.7
-- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
-  - @atlaskit/editor-common@30.0.0
-  - @atlaskit/editor-core@97.0.0
-  - @atlaskit/editor-test-helpers@6.3.12
-  - @atlaskit/util-data-test@10.0.34
+- Updated dependencies [85d5d168fd](https://github.com/fnamazing/uiKit/commits/85d5d168fd):
+  - @findable/editor-common@30.0.0
+  - @findable/editor-core@97.0.0
+  - @findable/editor-test-helpers@6.3.12
+  - @findable/util-data-test@10.0.34
 
 ## 5.1.6
-- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
-  - @atlaskit/editor-common@29.0.0
-  - @atlaskit/editor-core@96.0.0
-  - @atlaskit/editor-test-helpers@6.3.11
-  - @atlaskit/util-data-test@10.0.33
+- Updated dependencies [dadef80](https://github.com/fnamazing/uiKit/commits/dadef80):
+  - @findable/editor-common@29.0.0
+  - @findable/editor-core@96.0.0
+  - @findable/editor-test-helpers@6.3.11
+  - @findable/util-data-test@10.0.33
 
 ## 5.1.5
-- Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
-  - @atlaskit/editor-test-helpers@6.3.8
-  - @atlaskit/editor-common@28.0.2
-  - @atlaskit/util-data-test@10.0.32
-  - @atlaskit/editor-core@95.0.0
+- Updated dependencies [0c116d6](https://github.com/fnamazing/uiKit/commits/0c116d6):
+  - @findable/editor-test-helpers@6.3.8
+  - @findable/editor-common@28.0.2
+  - @findable/util-data-test@10.0.32
+  - @findable/editor-core@95.0.0
 
 ## 5.1.4
-- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
-  - @atlaskit/editor-common@28.0.0
-  - @atlaskit/editor-core@94.0.0
-  - @atlaskit/editor-test-helpers@6.3.7
-  - @atlaskit/util-data-test@10.0.31
+- Updated dependencies [cbb8cb5](https://github.com/fnamazing/uiKit/commits/cbb8cb5):
+  - @findable/editor-common@28.0.0
+  - @findable/editor-core@94.0.0
+  - @findable/editor-test-helpers@6.3.7
+  - @findable/util-data-test@10.0.31
 
 ## 5.1.3
-- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
-  - @atlaskit/editor-common@27.0.0
-  - @atlaskit/editor-core@93.0.0
-  - @atlaskit/editor-test-helpers@6.3.6
-  - @atlaskit/util-data-test@10.0.30
+- Updated dependencies [72d37fb](https://github.com/fnamazing/uiKit/commits/72d37fb):
+  - @findable/editor-common@27.0.0
+  - @findable/editor-core@93.0.0
+  - @findable/editor-test-helpers@6.3.6
+  - @findable/util-data-test@10.0.30
 
 ## 5.1.2
-- Updated dependencies [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
-  - @atlaskit/editor-test-helpers@6.3.5
-  - @atlaskit/editor-common@26.0.0
-  - @atlaskit/editor-core@92.0.19
+- Updated dependencies [e858305](https://github.com/fnamazing/uiKit/commits/e858305):
+  - @findable/editor-test-helpers@6.3.5
+  - @findable/editor-common@26.0.0
+  - @findable/editor-core@92.0.19
 
 ## 5.1.1
-- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
-  - @atlaskit/editor-common@25.0.0
-  - @atlaskit/editor-core@92.0.0
-  - @atlaskit/editor-test-helpers@6.3.4
-  - @atlaskit/util-data-test@10.0.28
+- Updated dependencies [b3738ea](https://github.com/fnamazing/uiKit/commits/b3738ea):
+  - @findable/editor-common@25.0.0
+  - @findable/editor-core@92.0.0
+  - @findable/editor-test-helpers@6.3.4
+  - @findable/util-data-test@10.0.28
 
 ## 5.1.0
-- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+- [minor] [1205725](https://github.com/fnamazing/uiKit/commits/1205725):
 
   - Move schema to its own package
 
 ## 5.0.23
-- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
-  - @atlaskit/editor-common@23.0.0
-  - @atlaskit/editor-core@91.0.0
-  - @atlaskit/editor-test-helpers@6.3.2
-  - @atlaskit/util-data-test@10.0.26
+- Updated dependencies [80f765b](https://github.com/fnamazing/uiKit/commits/80f765b):
+  - @findable/editor-common@23.0.0
+  - @findable/editor-core@91.0.0
+  - @findable/editor-test-helpers@6.3.2
+  - @findable/util-data-test@10.0.26
 
 ## 5.0.22
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/button@10.1.1
-  - @atlaskit/spinner@9.0.13
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/editor-core@90.3.15
-  - @atlaskit/util-data-test@10.0.25
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/button@10.1.1
+  - @findable/spinner@9.0.13
+  - @findable/theme@7.0.1
+  - @findable/editor-core@90.3.15
+  - @findable/util-data-test@10.0.25
+  - @findable/docs@6.0.0
 
 ## 5.0.21
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/button@10.0.4
-  - @atlaskit/spinner@9.0.12
-  - @atlaskit/editor-common@22.2.3
-  - @atlaskit/editor-core@90.2.1
-  - @atlaskit/theme@7.0.0
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/button@10.0.4
+  - @findable/spinner@9.0.12
+  - @findable/editor-common@22.2.3
+  - @findable/editor-core@90.2.1
+  - @findable/theme@7.0.0
 
 ## 5.0.20
-- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
-  - @atlaskit/editor-test-helpers@6.2.23
-  - @atlaskit/editor-core@90.0.0
+- Updated dependencies [3a7224a](https://github.com/fnamazing/uiKit/commits/3a7224a):
+  - @findable/editor-test-helpers@6.2.23
+  - @findable/editor-core@90.0.0
 
 ## 5.0.19
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/spinner@9.0.11
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/editor-core@89.0.4
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/spinner@9.0.11
+  - @findable/theme@6.2.1
+  - @findable/editor-core@89.0.4
+  - @findable/button@10.0.0
 
 ## 5.0.18
-- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
-  - @atlaskit/editor-common@22.0.0
-  - @atlaskit/editor-core@89.0.0
-  - @atlaskit/editor-test-helpers@6.2.19
-  - @atlaskit/util-data-test@10.0.21
+- Updated dependencies [7e8b4b9](https://github.com/fnamazing/uiKit/commits/7e8b4b9):
+  - @findable/editor-common@22.0.0
+  - @findable/editor-core@89.0.0
+  - @findable/editor-test-helpers@6.2.19
+  - @findable/util-data-test@10.0.21
 
 ## 5.0.17
-- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
-  - @atlaskit/editor-common@21.0.0
-  - @atlaskit/editor-core@88.0.0
-  - @atlaskit/editor-test-helpers@6.2.16
-  - @atlaskit/util-data-test@10.0.20
+- Updated dependencies [2c21466](https://github.com/fnamazing/uiKit/commits/2c21466):
+  - @findable/editor-common@21.0.0
+  - @findable/editor-core@88.0.0
+  - @findable/editor-test-helpers@6.2.16
+  - @findable/util-data-test@10.0.20
 
 ## 5.0.16
-- [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
-  - @atlaskit/editor-test-helpers@6.2.8
-  - @atlaskit/editor-core@87.0.0
-  - @atlaskit/editor-common@20.1.2
+- [patch] Updated dependencies [052ce89](https://github.com/fnamazing/uiKit/commits/052ce89)
+  - @findable/editor-test-helpers@6.2.8
+  - @findable/editor-core@87.0.0
+  - @findable/editor-common@20.1.2
 
 ## 5.0.15
-- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
-  - @atlaskit/editor-common@20.0.0
-  - @atlaskit/editor-core@86.0.0
-  - @atlaskit/editor-test-helpers@6.2.7
-  - @atlaskit/util-data-test@10.0.16
+- [patch] Updated dependencies [b1ce691](https://github.com/fnamazing/uiKit/commits/b1ce691)
+  - @findable/editor-common@20.0.0
+  - @findable/editor-core@86.0.0
+  - @findable/editor-test-helpers@6.2.7
+  - @findable/util-data-test@10.0.16
 
 ## 5.0.14
-- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
-  - @atlaskit/editor-common@19.0.0
-  - @atlaskit/editor-core@85.0.0
-  - @atlaskit/editor-test-helpers@6.2.6
-  - @atlaskit/util-data-test@10.0.14
+- [patch] Updated dependencies [2afa60d](https://github.com/fnamazing/uiKit/commits/2afa60d)
+  - @findable/editor-common@19.0.0
+  - @findable/editor-core@85.0.0
+  - @findable/editor-test-helpers@6.2.6
+  - @findable/util-data-test@10.0.14
 
 ## 5.0.13
-- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
-- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
-  - @atlaskit/editor-common@18.0.0
-  - @atlaskit/editor-core@84.0.0
-  - @atlaskit/editor-test-helpers@6.2.5
-  - @atlaskit/util-data-test@10.0.12
+- [patch] Updated dependencies [8b2c4d3](https://github.com/fnamazing/uiKit/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://github.com/fnamazing/uiKit/commits/3302d51)
+  - @findable/editor-common@18.0.0
+  - @findable/editor-core@84.0.0
+  - @findable/editor-test-helpers@6.2.5
+  - @findable/util-data-test@10.0.12
 
 ## 5.0.12
-- [patch] Updated dependencies [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
-  - @atlaskit/editor-test-helpers@6.2.4
-  - @atlaskit/util-data-test@10.0.11
-  - @atlaskit/editor-core@83.0.0
+- [patch] Updated dependencies [23c7eca](https://github.com/fnamazing/uiKit/commits/23c7eca)
+  - @findable/editor-test-helpers@6.2.4
+  - @findable/util-data-test@10.0.11
+  - @findable/editor-core@83.0.0
 
 ## 5.0.11
-- [patch] Updated dependencies [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
-  - @atlaskit/editor-common@17.0.1
-  - @atlaskit/editor-core@82.0.0
-  - @atlaskit/editor-test-helpers@6.1.3
+- [patch] Updated dependencies [ef76f1f](https://github.com/fnamazing/uiKit/commits/ef76f1f)
+  - @findable/editor-common@17.0.1
+  - @findable/editor-core@82.0.0
+  - @findable/editor-test-helpers@6.1.3
 
 ## 5.0.10
-- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
-  - @atlaskit/editor-common@17.0.0
-  - @atlaskit/editor-core@81.0.0
-  - @atlaskit/util-data-test@10.0.10
-  - @atlaskit/editor-test-helpers@6.1.2
+- [patch] Updated dependencies [927ae63](https://github.com/fnamazing/uiKit/commits/927ae63)
+  - @findable/editor-common@17.0.0
+  - @findable/editor-core@81.0.0
+  - @findable/util-data-test@10.0.10
+  - @findable/editor-test-helpers@6.1.2
 
 ## 5.0.9
-- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
-  - @atlaskit/editor-common@16.0.0
-  - @atlaskit/editor-core@80.0.0
-  - @atlaskit/editor-test-helpers@6.0.9
-  - @atlaskit/util-data-test@10.0.9
+- [patch] Updated dependencies [6e1d642](https://github.com/fnamazing/uiKit/commits/6e1d642)
+  - @findable/editor-common@16.0.0
+  - @findable/editor-core@80.0.0
+  - @findable/editor-test-helpers@6.0.9
+  - @findable/util-data-test@10.0.9
 
 ## 5.0.8
-- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
-  - @atlaskit/editor-common@15.0.0
-  - @atlaskit/editor-core@79.0.0
-  - @atlaskit/editor-test-helpers@6.0.6
-  - @atlaskit/util-data-test@10.0.8
+- [patch] Updated dependencies [7545979](https://github.com/fnamazing/uiKit/commits/7545979)
+  - @findable/editor-common@15.0.0
+  - @findable/editor-core@79.0.0
+  - @findable/editor-test-helpers@6.0.6
+  - @findable/util-data-test@10.0.8
 
 ## 5.0.7
-- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
-  - @atlaskit/editor-test-helpers@6.0.5
-  - @atlaskit/editor-core@78.0.0
+- [patch] Updated dependencies [911a570](https://github.com/fnamazing/uiKit/commits/911a570)
+  - @findable/editor-test-helpers@6.0.5
+  - @findable/editor-core@78.0.0
 
 ## 5.0.6
-- [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
-  - @atlaskit/util-data-test@10.0.7
-  - @atlaskit/editor-common@14.0.11
-  - @atlaskit/editor-test-helpers@6.0.3
-  - @atlaskit/editor-core@77.1.4
+- [patch] Updated dependencies [b12f7e6](https://github.com/fnamazing/uiKit/commits/b12f7e6)
+  - @findable/util-data-test@10.0.7
+  - @findable/editor-common@14.0.11
+  - @findable/editor-test-helpers@6.0.3
+  - @findable/editor-core@77.1.4
 
 ## 5.0.5
 
@@ -264,313 +264,313 @@
 
 
 
-- [none] Updated dependencies [597e0bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/597e0bd)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/editor-core@77.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-common@14.0.0
-- [none] Updated dependencies [61df453](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61df453)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/editor-common@14.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-core@77.0.0
-- [none] Updated dependencies [812a39c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/812a39c)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/editor-core@77.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-common@14.0.0
-- [none] Updated dependencies [c8eb097](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8eb097)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/editor-common@14.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-core@77.0.0
-- [patch] Updated dependencies [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/editor-common@14.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-core@77.0.0
+- [none] Updated dependencies [597e0bd](https://github.com/fnamazing/uiKit/commits/597e0bd)
+  - @findable/util-data-test@10.0.3
+  - @findable/editor-core@77.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-common@14.0.0
+- [none] Updated dependencies [61df453](https://github.com/fnamazing/uiKit/commits/61df453)
+  - @findable/util-data-test@10.0.3
+  - @findable/editor-common@14.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-core@77.0.0
+- [none] Updated dependencies [812a39c](https://github.com/fnamazing/uiKit/commits/812a39c)
+  - @findable/util-data-test@10.0.3
+  - @findable/editor-core@77.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-common@14.0.0
+- [none] Updated dependencies [c8eb097](https://github.com/fnamazing/uiKit/commits/c8eb097)
+  - @findable/util-data-test@10.0.3
+  - @findable/editor-common@14.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-core@77.0.0
+- [patch] Updated dependencies [d02746f](https://github.com/fnamazing/uiKit/commits/d02746f)
+  - @findable/util-data-test@10.0.3
+  - @findable/editor-common@14.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-core@77.0.0
 
 ## 5.0.4
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/util-data-test@10.0.2
-  - @atlaskit/editor-common@13.2.7
-  - @atlaskit/editor-test-helpers@5.1.2
-  - @atlaskit/editor-core@76.4.5
-  - @atlaskit/button@9.0.4
-  - @atlaskit/spinner@9.0.4
-  - @atlaskit/docs@5.0.2
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/util-data-test@10.0.2
+  - @findable/editor-common@13.2.7
+  - @findable/editor-test-helpers@5.1.2
+  - @findable/editor-core@76.4.5
+  - @findable/button@9.0.4
+  - @findable/spinner@9.0.4
+  - @findable/docs@5.0.2
 
 ## 5.0.3
-- [patch] Bump prosemirror-model to 1.6 in order to use toDebugString on Text node spec [fdd5c5d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fdd5c5d)
-- [none] Updated dependencies [fdd5c5d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fdd5c5d)
-  - @atlaskit/editor-common@13.2.6
-  - @atlaskit/editor-test-helpers@5.1.1
-  - @atlaskit/editor-core@76.4.2
+- [patch] Bump prosemirror-model to 1.6 in order to use toDebugString on Text node spec [fdd5c5d](https://github.com/fnamazing/uiKit/commits/fdd5c5d)
+- [none] Updated dependencies [fdd5c5d](https://github.com/fnamazing/uiKit/commits/fdd5c5d)
+  - @findable/editor-common@13.2.6
+  - @findable/editor-test-helpers@5.1.1
+  - @findable/editor-core@76.4.2
 
 ## 5.0.2
-- [patch] Improves type coverage by removing casts to any [8928280](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8928280)
-- [none] Updated dependencies [8928280](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8928280)
-  - @atlaskit/editor-core@76.0.3
-  - @atlaskit/editor-common@13.0.3
+- [patch] Improves type coverage by removing casts to any [8928280](https://github.com/fnamazing/uiKit/commits/8928280)
+- [none] Updated dependencies [8928280](https://github.com/fnamazing/uiKit/commits/8928280)
+  - @findable/editor-core@76.0.3
+  - @findable/editor-common@13.0.3
 
 ## 5.0.1
 
 
-- [none] Updated dependencies [25353c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25353c3)
-  - @atlaskit/editor-core@76.0.0
-  - @atlaskit/editor-test-helpers@5.0.1
-- [patch] Updated dependencies [38c0543](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38c0543)
-  - @atlaskit/editor-core@76.0.0
-  - @atlaskit/editor-test-helpers@5.0.1
+- [none] Updated dependencies [25353c3](https://github.com/fnamazing/uiKit/commits/25353c3)
+  - @findable/editor-core@76.0.0
+  - @findable/editor-test-helpers@5.0.1
+- [patch] Updated dependencies [38c0543](https://github.com/fnamazing/uiKit/commits/38c0543)
+  - @findable/editor-core@76.0.0
+  - @findable/editor-test-helpers@5.0.1
 
 ## 5.0.0
 
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/editor-common@13.0.0
-  - @atlaskit/editor-test-helpers@5.0.0
-  - @atlaskit/editor-core@75.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/spinner@9.0.0
-  - @atlaskit/docs@5.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/editor-core@75.0.0
-  - @atlaskit/editor-test-helpers@5.0.0
-  - @atlaskit/editor-common@13.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/spinner@9.0.0
-  - @atlaskit/docs@5.0.0
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/util-data-test@10.0.0
+  - @findable/editor-common@13.0.0
+  - @findable/editor-test-helpers@5.0.0
+  - @findable/editor-core@75.0.0
+  - @findable/button@9.0.0
+  - @findable/spinner@9.0.0
+  - @findable/docs@5.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/util-data-test@10.0.0
+  - @findable/editor-core@75.0.0
+  - @findable/editor-test-helpers@5.0.0
+  - @findable/editor-common@13.0.0
+  - @findable/button@9.0.0
+  - @findable/spinner@9.0.0
+  - @findable/docs@5.0.0
 
 ## 4.1.10
 
 
-- [none] Updated dependencies [5f6ec84](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f6ec84)
-  - @atlaskit/editor-core@74.0.17
-  - @atlaskit/editor-test-helpers@4.2.4
-  - @atlaskit/editor-common@12.0.0
-- [patch] Updated dependencies [5958588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5958588)
-  - @atlaskit/editor-core@74.0.17
-  - @atlaskit/editor-test-helpers@4.2.4
-  - @atlaskit/editor-common@12.0.0
+- [none] Updated dependencies [5f6ec84](https://github.com/fnamazing/uiKit/commits/5f6ec84)
+  - @findable/editor-core@74.0.17
+  - @findable/editor-test-helpers@4.2.4
+  - @findable/editor-common@12.0.0
+- [patch] Updated dependencies [5958588](https://github.com/fnamazing/uiKit/commits/5958588)
+  - @findable/editor-core@74.0.17
+  - @findable/editor-test-helpers@4.2.4
+  - @findable/editor-common@12.0.0
 
 ## 4.1.9
-- [patch] Updated dependencies [af0cde6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af0cde6)
-  - @atlaskit/editor-core@74.0.0
-  - @atlaskit/editor-test-helpers@4.2.2
+- [patch] Updated dependencies [af0cde6](https://github.com/fnamazing/uiKit/commits/af0cde6)
+  - @findable/editor-core@74.0.0
+  - @findable/editor-test-helpers@4.2.2
 
 ## 4.1.8
-- [patch] Ensure nodes created by transformers are valid, otherwise throws an error. ED-3824 [b45fa8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b45fa8b)
+- [patch] Ensure nodes created by transformers are valid, otherwise throws an error. ED-3824 [b45fa8b](https://github.com/fnamazing/uiKit/commits/b45fa8b)
 
 ## 4.1.7
-- [patch] Add missing dependencies to packages to get the website to build [99446e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99446e3)
+- [patch] Add missing dependencies to packages to get the website to build [99446e3](https://github.com/fnamazing/uiKit/commits/99446e3)
 
-- [none] Updated dependencies [99446e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99446e3)
-  - @atlaskit/docs@4.2.2
-- [none] Updated dependencies [9bac948](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9bac948)
-  - @atlaskit/docs@4.2.2
+- [none] Updated dependencies [99446e3](https://github.com/fnamazing/uiKit/commits/99446e3)
+  - @findable/docs@4.2.2
+- [none] Updated dependencies [9bac948](https://github.com/fnamazing/uiKit/commits/9bac948)
+  - @findable/docs@4.2.2
 
 ## 4.1.6
-- [patch] Updated dependencies [8d5053e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d5053e)
-  - @atlaskit/util-data-test@9.1.15
-  - @atlaskit/editor-common@11.3.8
-  - @atlaskit/editor-test-helpers@4.1.9
-  - @atlaskit/editor-core@73.9.5
+- [patch] Updated dependencies [8d5053e](https://github.com/fnamazing/uiKit/commits/8d5053e)
+  - @findable/util-data-test@9.1.15
+  - @findable/editor-common@11.3.8
+  - @findable/editor-test-helpers@4.1.9
+  - @findable/editor-core@73.9.5
 
 ## 4.1.5
-- [patch] Updated dependencies [0cf2f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cf2f52)
-  - @atlaskit/util-data-test@9.1.14
-  - @atlaskit/editor-core@73.9.2
-  - @atlaskit/editor-test-helpers@4.1.8
-  - @atlaskit/editor-common@11.3.7
+- [patch] Updated dependencies [0cf2f52](https://github.com/fnamazing/uiKit/commits/0cf2f52)
+  - @findable/util-data-test@9.1.14
+  - @findable/editor-core@73.9.2
+  - @findable/editor-test-helpers@4.1.8
+  - @findable/editor-common@11.3.7
 
 ## 4.1.4
-- [patch] ED-4520, date renderer should render UTC value of date. [28e3c31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/28e3c31)
-- [none] Updated dependencies [28e3c31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/28e3c31)
-  - @atlaskit/editor-core@73.8.10
-  - @atlaskit/editor-common@11.3.2
+- [patch] ED-4520, date renderer should render UTC value of date. [28e3c31](https://github.com/fnamazing/uiKit/commits/28e3c31)
+- [none] Updated dependencies [28e3c31](https://github.com/fnamazing/uiKit/commits/28e3c31)
+  - @findable/editor-core@73.8.10
+  - @findable/editor-common@11.3.2
 
 ## 4.1.3
-- [patch] Remove pinned prosemirror-model@1.4.0 and move back to caret ranges for prosemirror-model@^1.5.0 [4faccc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4faccc0)
-- [patch] Updated dependencies [4faccc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4faccc0)
-  - @atlaskit/editor-common@11.3.0
-  - @atlaskit/editor-test-helpers@4.1.5
-  - @atlaskit/editor-core@73.8.6
+- [patch] Remove pinned prosemirror-model@1.4.0 and move back to caret ranges for prosemirror-model@^1.5.0 [4faccc0](https://github.com/fnamazing/uiKit/commits/4faccc0)
+- [patch] Updated dependencies [4faccc0](https://github.com/fnamazing/uiKit/commits/4faccc0)
+  - @findable/editor-common@11.3.0
+  - @findable/editor-test-helpers@4.1.5
+  - @findable/editor-core@73.8.6
 
 ## 4.1.2
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/util-data-test@9.1.13
-  - @atlaskit/editor-core@73.7.5
-  - @atlaskit/editor-test-helpers@4.1.2
-  - @atlaskit/editor-common@11.2.1
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/util-data-test@9.1.13
+  - @findable/editor-core@73.7.5
+  - @findable/editor-test-helpers@4.1.2
+  - @findable/editor-common@11.2.1
 
 ## 4.1.1
-- [patch] Update changelogs to remove duplicate [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-- [none] Updated dependencies [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-  - @atlaskit/util-data-test@9.1.12
-  - @atlaskit/editor-core@73.7.1
-  - @atlaskit/editor-test-helpers@4.1.1
-  - @atlaskit/editor-common@11.1.2
-  - @atlaskit/docs@4.1.1
+- [patch] Update changelogs to remove duplicate [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+- [none] Updated dependencies [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+  - @findable/util-data-test@9.1.12
+  - @findable/editor-core@73.7.1
+  - @findable/editor-test-helpers@4.1.1
+  - @findable/editor-common@11.1.2
+  - @findable/docs@4.1.1
 
 ## 4.1.0
-- [none] Updated dependencies [7217164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7217164)
-  - @atlaskit/editor-core@73.5.0
-  - @atlaskit/editor-test-helpers@4.1.0
-  - @atlaskit/util-data-test@9.1.11
-  - @atlaskit/editor-common@11.1.0
+- [none] Updated dependencies [7217164](https://github.com/fnamazing/uiKit/commits/7217164)
+  - @findable/editor-core@73.5.0
+  - @findable/editor-test-helpers@4.1.0
+  - @findable/util-data-test@9.1.11
+  - @findable/editor-common@11.1.0
 
 ## 4.0.13
-- [patch] Update and lock prosemirror-model version to 1.4.0 [febf753](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febf753)
-- [none] Updated dependencies [febf753](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febf753)
-  - @atlaskit/editor-common@11.0.6
-  - @atlaskit/editor-test-helpers@4.0.7
-  - @atlaskit/editor-core@73.4.4
+- [patch] Update and lock prosemirror-model version to 1.4.0 [febf753](https://github.com/fnamazing/uiKit/commits/febf753)
+- [none] Updated dependencies [febf753](https://github.com/fnamazing/uiKit/commits/febf753)
+  - @findable/editor-common@11.0.6
+  - @findable/editor-test-helpers@4.0.7
+  - @findable/editor-core@73.4.4
 
 ## 4.0.12
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/util-data-test@9.1.10
-  - @atlaskit/editor-core@73.0.0
-  - @atlaskit/editor-test-helpers@4.0.3
-  - @atlaskit/editor-common@11.0.0
-  - @atlaskit/docs@4.0.0
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/util-data-test@9.1.10
+  - @findable/editor-core@73.0.0
+  - @findable/editor-test-helpers@4.0.3
+  - @findable/editor-common@11.0.0
+  - @findable/docs@4.0.0
 
 ## 4.0.11
-- [patch] Updated dependencies [1c87e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c87e5a)
-  - @atlaskit/util-data-test@9.1.9
-  - @atlaskit/editor-core@72.2.2
-  - @atlaskit/editor-test-helpers@4.0.2
-  - @atlaskit/editor-common@10.1.9
+- [patch] Updated dependencies [1c87e5a](https://github.com/fnamazing/uiKit/commits/1c87e5a)
+  - @findable/util-data-test@9.1.9
+  - @findable/editor-core@72.2.2
+  - @findable/editor-test-helpers@4.0.2
+  - @findable/editor-common@10.1.9
 
 ## 4.0.10
-- [patch] ED-4689 add __confluenceMetadata to link mark schema [e76e4b4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e76e4b4)
-- [patch] Updated dependencies [e76e4b4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e76e4b4)
-  - @atlaskit/editor-common@10.1.6
+- [patch] ED-4689 add __confluenceMetadata to link mark schema [e76e4b4](https://github.com/fnamazing/uiKit/commits/e76e4b4)
+- [patch] Updated dependencies [e76e4b4](https://github.com/fnamazing/uiKit/commits/e76e4b4)
+  - @findable/editor-common@10.1.6
 
 ## 4.0.9
-- [none] Updated dependencies [febc44d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febc44d)
-  - @atlaskit/editor-core@72.0.0
-  - @atlaskit/editor-test-helpers@4.0.0
-  - @atlaskit/util-data-test@9.1.4
-  - @atlaskit/editor-common@10.0.0
+- [none] Updated dependencies [febc44d](https://github.com/fnamazing/uiKit/commits/febc44d)
+  - @findable/editor-core@72.0.0
+  - @findable/editor-test-helpers@4.0.0
+  - @findable/util-data-test@9.1.4
+  - @findable/editor-common@10.0.0
 
 ## 4.0.8
-- [none] Updated dependencies [8fd4dd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fd4dd1)
-  - @atlaskit/editor-test-helpers@3.1.8
-  - @atlaskit/util-data-test@9.1.3
-  - @atlaskit/editor-core@71.4.0
-  - @atlaskit/editor-common@9.3.9
+- [none] Updated dependencies [8fd4dd1](https://github.com/fnamazing/uiKit/commits/8fd4dd1)
+  - @findable/editor-test-helpers@3.1.8
+  - @findable/util-data-test@9.1.3
+  - @findable/editor-core@71.4.0
+  - @findable/editor-common@9.3.9
 
 ## 4.0.7
-- [patch] Adding a safe check for macro params [193c7fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/193c7fa)
+- [patch] Adding a safe check for macro params [193c7fa](https://github.com/fnamazing/uiKit/commits/193c7fa)
 
 ## 4.0.6
-- [patch] ED-4336 support loading dynamic/"auto" tables from confluence to fixed-width tables [0c2f72a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c2f72a)
+- [patch] ED-4336 support loading dynamic/"auto" tables from confluence to fixed-width tables [0c2f72a](https://github.com/fnamazing/uiKit/commits/0c2f72a)
 
 ## 4.0.4
-- [patch] ED-4334 fix column size calculation bug; don't emit default col/rowspan attrs [eb8f140](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/eb8f140)
+- [patch] ED-4334 fix column size calculation bug; don't emit default col/rowspan attrs [eb8f140](https://github.com/fnamazing/uiKit/commits/eb8f140)
 
 ## 4.0.1
-- [patch] Added missing dependencies and added lint rule to catch them all [0672503](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0672503)
+- [patch] Added missing dependencies and added lint rule to catch them all [0672503](https://github.com/fnamazing/uiKit/commits/0672503)
 
 ## 4.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 3.0.1
-- [patch] change table node builder constructor for tests, remove tableWithAttrs [cf43535](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf43535)
+- [patch] change table node builder constructor for tests, remove tableWithAttrs [cf43535](https://github.com/fnamazing/uiKit/commits/cf43535)
 
 ## 3.0.0
-- [major] CFE-1004: Rename anything "macro" to "extension" (i.e: MacroProvider to ExtensionProvider) [453aa52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/453aa52)
+- [major] CFE-1004: Rename anything "macro" to "extension" (i.e: MacroProvider to ExtensionProvider) [453aa52](https://github.com/fnamazing/uiKit/commits/453aa52)
 
 ## 2.10.9
-- [patch] support table colwidth in renderer, fix other table properties in email renderer [f78bef4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f78bef4)
+- [patch] support table colwidth in renderer, fix other table properties in email renderer [f78bef4](https://github.com/fnamazing/uiKit/commits/f78bef4)
 
 ## 2.10.8
-- [patch] ED-4214 fix Confluence table styling and number column handling  [22c4af6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/22c4af6)
+- [patch] ED-4214 fix Confluence table styling and number column handling  [22c4af6](https://github.com/fnamazing/uiKit/commits/22c4af6)
 
 ## 2.10.6
-- [patch] Upgrading ProseMirror Libs [35d14d5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/35d14d5)
+- [patch] Upgrading ProseMirror Libs [35d14d5](https://github.com/fnamazing/uiKit/commits/35d14d5)
 
 ## 2.10.5
-- [patch] Add "sideEffects: false" to AKM2 packages to allow consumer's to tree-shake [c3b018a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3b018a)
+- [patch] Add "sideEffects: false" to AKM2 packages to allow consumer's to tree-shake [c3b018a](https://github.com/fnamazing/uiKit/commits/c3b018a)
 
 ## 2.10.4
-- [patch] table cell/header attributes in the Confluence transformer [9415aaa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9415aaa)
+- [patch] table cell/header attributes in the Confluence transformer [9415aaa](https://github.com/fnamazing/uiKit/commits/9415aaa)
 
 ## 2.10.3
-- [patch] Use fab:adf to convert Macros and fallback [ece6c43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ece6c43)
+- [patch] Use fab:adf to convert Macros and fallback [ece6c43](https://github.com/fnamazing/uiKit/commits/ece6c43)
 
 ## 2.10.0
-- [minor] Add full width and wide layout support for single image [ae72acf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ae72acf)
+- [minor] Add full width and wide layout support for single image [ae72acf](https://github.com/fnamazing/uiKit/commits/ae72acf)
 
 ## 2.9.8
-- [patch] ED-4029: ignore divs wrapping table cells content [6e5361f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e5361f)
+- [patch] ED-4029: ignore divs wrapping table cells content [6e5361f](https://github.com/fnamazing/uiKit/commits/6e5361f)
 
 ## 2.9.2
-- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ed0bba)
+- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://github.com/fnamazing/uiKit/commits/9ed0bba)
 
 ## 2.9.0
-- [minor] add support for <fab:adf> and confluence decision list transforms [e08eccc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e08eccc)
-- [minor] add support for <fab:adf> and confluence decision list transforms [f43f928](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f43f928)
+- [minor] add support for <fab:adf> and confluence decision list transforms [e08eccc](https://github.com/fnamazing/uiKit/commits/e08eccc)
+- [minor] add support for <fab:adf> and confluence decision list transforms [f43f928](https://github.com/fnamazing/uiKit/commits/f43f928)
 
 ## 2.8.0
-- [minor] Support parse/encode of the <ac:placeholder /> node [79e0a2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/79e0a2a)
+- [minor] Support parse/encode of the <ac:placeholder /> node [79e0a2a](https://github.com/fnamazing/uiKit/commits/79e0a2a)
 
 ## 2.7.10
-- [patch] Encode and decode for Extension schemaVersion [0335988](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0335988)
+- [patch] Encode and decode for Extension schemaVersion [0335988](https://github.com/fnamazing/uiKit/commits/0335988)
 
 ## 2.7.9
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 2.7.8
-- [patch] Remove Confluence Macro resrouce identifier code [944c827](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/944c827)
+- [patch] Remove Confluence Macro resrouce identifier code [944c827](https://github.com/fnamazing/uiKit/commits/944c827)
 
 ## 2.7.7
-- [patch] Allow width/height for placeholder and polish rendering [6d9f809](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d9f809)
+- [patch] Allow width/height for placeholder and polish rendering [6d9f809](https://github.com/fnamazing/uiKit/commits/6d9f809)
 
 ## 2.7.5
-- [patch] bump editor-common to 6.1.2 [bb7802e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bb7802e)
+- [patch] bump editor-common to 6.1.2 [bb7802e](https://github.com/fnamazing/uiKit/commits/bb7802e)
 
 ## 2.7.4
-- [patch] Convert specific params to resource identifiers on encode and decode [778e2bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/778e2bf)
+- [patch] Convert specific params to resource identifiers on encode and decode [778e2bf](https://github.com/fnamazing/uiKit/commits/778e2bf)
 
 ## 2.7.3
-- [patch] remove mention name from encoder [130f15c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/130f15c)
+- [patch] remove mention name from encoder [130f15c](https://github.com/fnamazing/uiKit/commits/130f15c)
 
 ## 2.7.2
-- [patch] Allow macro provider to handle auto conversion during paste [b2c83f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b2c83f8)
+- [patch] Allow macro provider to handle auto conversion during paste [b2c83f8](https://github.com/fnamazing/uiKit/commits/b2c83f8)
 
 ## 2.7.0
-- [minor] added new panelType [9f693b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f693b9)
+- [minor] added new panelType [9f693b9](https://github.com/fnamazing/uiKit/commits/9f693b9)
 
 ## 2.6.0
-- [minor] added date plugin [f7b8a33](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f7b8a33)
+- [minor] added date plugin [f7b8a33](https://github.com/fnamazing/uiKit/commits/f7b8a33)
 
 ## 2.5.0
-- [minor] Add React 16 support. [12ea6e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/12ea6e4)
+- [minor] Add React 16 support. [12ea6e4](https://github.com/fnamazing/uiKit/commits/12ea6e4)
 
 ## 2.4.1
-- [patch] Minor bump of editor-confluence transformer to update editor-core [01a4a8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01a4a8b)
+- [patch] Minor bump of editor-confluence transformer to update editor-core [01a4a8b](https://github.com/fnamazing/uiKit/commits/01a4a8b)
 
 ## 2.4.0
-- [minor] added tasks/actions to full-page editor [49d3343](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d3343)
+- [minor] added tasks/actions to full-page editor [49d3343](https://github.com/fnamazing/uiKit/commits/49d3343)
 
 ## 2.2.4
-- [patch] Add support for single image wrap left/right layout [59d9a74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59d9a74)
+- [patch] Add support for single image wrap left/right layout [59d9a74](https://github.com/fnamazing/uiKit/commits/59d9a74)
 
 ## 2.2.3
-- [patch] Fix dependencies in CI [35c5914](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/35c5914)
+- [patch] Fix dependencies in CI [35c5914](https://github.com/fnamazing/uiKit/commits/35c5914)
 
 ## 2.2.0
-- [minor] Add Serializer for Single image [03405bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03405bf)
+- [minor] Add Serializer for Single image [03405bf](https://github.com/fnamazing/uiKit/commits/03405bf)
 
 ## 2.1.1
-- [patch] split extension node [4303d49](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4303d49)
+- [patch] split extension node [4303d49](https://github.com/fnamazing/uiKit/commits/4303d49)
 
 ## 2.0.1
-- [patch] Fix of the build scripts for editor-*-transformer packages [59b4ea5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59b4ea5)
+- [patch] Fix of the build scripts for editor-*-transformer packages [59b4ea5](https://github.com/fnamazing/uiKit/commits/59b4ea5)
 
 ## 2.0.0
-- [major] Adding separate transformer packages. [f734c01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f734c01)
+- [major] Adding separate transformer packages. [f734c01](https://github.com/fnamazing/uiKit/commits/f734c01)

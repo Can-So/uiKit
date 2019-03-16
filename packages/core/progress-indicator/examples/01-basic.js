@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import styled from 'styled-components';
 import { ProgressDots } from '../src';
 

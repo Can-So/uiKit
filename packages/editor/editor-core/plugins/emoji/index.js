@@ -1,7 +1,7 @@
 import * as React from 'react';
-import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
-import { emoji, emojiQuery } from '@atlaskit/adf-schema';
-import { WithProviders } from '@atlaskit/editor-common';
+import EmojiIcon from '@findable/icon/glyph/editor/emoji';
+import { emoji, emojiQuery } from '@findable/adf-schema';
+import { WithProviders } from '@findable/editor-common';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 import { createPlugin, emojiPluginKey } from './pm-plugins/main';
 import inputRulePlugin from './pm-plugins/input-rules';

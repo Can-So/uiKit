@@ -5,9 +5,9 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import CloseIcon from '@atlaskit/icon/glyph/cross';
-import ConfirmIcon from '@atlaskit/icon/glyph/check';
+} from '@findable/analytics-next';
+import CloseIcon from '@findable/icon/glyph/cross';
+import ConfirmIcon from '@findable/icon/glyph/check';
 import { name as packageName, version as packageVersion } from './version.json';
 import { Handle, IconWrapper, Inner, Input, Label, Slide } from './styled';
 import defaultBaseProps from './defaultBaseProps';

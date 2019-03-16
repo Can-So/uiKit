@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Layer from '@atlaskit/layer';
-import Spinner from '@atlaskit/spinner';
-import Item, { ItemGroup } from '@atlaskit/item';
+import Layer from '@findable/layer';
+import Spinner from '@findable/spinner';
+import Item, { ItemGroup } from '@findable/item';
 
 import { name } from '../../version.json';
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UnwrappedAnalyticsEventFiredOnMount } from '../../components/analytics/AnalyticsEventFiredOnMount';
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import { mount } from 'enzyme';
 import { CreateAnalyticsEventFn } from '../../components/analytics/types';
 import { DEFAULT_GAS_CHANNEL } from '../../util/analytics-util';

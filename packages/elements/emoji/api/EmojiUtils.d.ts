@@ -1,4 +1,4 @@
-import { RequestServiceOptions, ServiceConfig } from '@atlaskit/util-service-support';
+import { RequestServiceOptions, ServiceConfig } from '@findable/util-service-support';
 import { AltRepresentations, EmojiDescription, EmojiDescriptionWithVariations, EmojiMeta, EmojiRepresentation, EmojiResponse, EmojiServiceDescriptionWithVariations, EmojiServiceRepresentation, EmojiServiceResponse } from '../types';
 export interface EmojiLoaderConfig extends ServiceConfig {
     getRatio?: () => number;

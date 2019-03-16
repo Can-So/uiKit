@@ -1,4 +1,4 @@
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { createTag, serializeStyle } from '../util';
 var css = serializeStyle({
     border: 'none',

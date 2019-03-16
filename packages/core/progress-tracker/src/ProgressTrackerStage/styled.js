@@ -1,5 +1,5 @@
 // @flow
-import { colors, gridSize, fontSize } from '@atlaskit/theme';
+import { colors, gridSize, fontSize } from '@findable/theme';
 import styled from 'styled-components';
 import { spacing } from '../constants';
 

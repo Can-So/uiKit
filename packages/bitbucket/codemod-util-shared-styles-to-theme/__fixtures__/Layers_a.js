@@ -1,6 +1,6 @@
 // @flow
 import styled from "styled-components";
-import { akZIndexCard, akZIndexDialog, akZIndexNavigation, akZIndexLayer, akZIndexBlanket, akZIndexModal, akZIndexFlag } from "@atlaskit/util-shared-styles";
+import { akZIndexCard, akZIndexDialog, akZIndexNavigation, akZIndexLayer, akZIndexBlanket, akZIndexModal, akZIndexFlag } from "@findable/util-shared-styles";
 
 const blah = akZIndexCard;
 const MyCard = styled.div`
@@ -27,7 +27,7 @@ z-index: ${akZIndexFlag};
 //////
 // @flow
 import styled from "styled-components";
-import { layers } from "@atlaskit/theme";
+import { layers } from "@findable/theme";
 
 const blah = layers.card();
 const MyCard = styled.div`

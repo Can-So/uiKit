@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 
 import { User } from '../../types';
 import * as Styled from './styles';

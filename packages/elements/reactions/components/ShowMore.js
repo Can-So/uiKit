@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
-import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
-import { borderRadius, colors } from '@atlaskit/theme';
-import Tooltip from '@atlaskit/tooltip';
+import EditorMoreIcon from '@findable/icon/glyph/editor/more';
+import { borderRadius, colors } from '@findable/theme';
+import Tooltip from '@findable/tooltip';
 import * as cx from 'classnames';
 import * as React from 'react';
 import { style } from 'typestyle';

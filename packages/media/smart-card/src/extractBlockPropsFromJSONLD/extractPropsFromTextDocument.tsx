@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { BlockCardResolvedViewProps } from '@atlaskit/media-ui';
+import { BlockCardResolvedViewProps } from '@findable/media-ui';
 import { extractPropsFromDocument } from './extractPropsFromDocument';
-import Document24Icon from '@atlaskit/icon-file-type/glyph/document/24';
-import GoogleDoc24Icon from '@atlaskit/icon-file-type/glyph/google-sheet/24';
-import WordDocument24Icon from '@atlaskit/icon-file-type/glyph/word-document/24';
+import Document24Icon from '@findable/icon-file-type/glyph/document/24';
+import GoogleDoc24Icon from '@findable/icon-file-type/glyph/google-sheet/24';
+import WordDocument24Icon from '@findable/icon-file-type/glyph/word-document/24';
 
 export function extractPropsFromTextDocument(
   json: any,

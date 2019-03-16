@@ -1,12 +1,12 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Spinner from '@atlaskit/spinner';
-import { colors, gridSize } from '@atlaskit/theme';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
-import FieldRadioGroup from '@atlaskit/field-radio-group';
-import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
+import Spinner from '@findable/spinner';
+import { colors, gridSize } from '@findable/theme';
+import ErrorIcon from '@findable/icon/glyph/error';
+import WarningIcon from '@findable/icon/glyph/warning';
+import FieldRadioGroup from '@findable/field-radio-group';
+import SuccessIcon from '@findable/icon/glyph/check-circle';
 import Flag, { FlagGroup } from '../src';
 import { AppearanceArray, type AppearanceTypes } from '../src/types';
 

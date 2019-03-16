@@ -1,5 +1,5 @@
 // @flow
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 export const TRANSITION_DURATION = '200ms';
 

@@ -1,8 +1,8 @@
 // tslint:disable:no-console
 
 import * as React from 'react';
-import { mention } from '@atlaskit/util-data-test';
-import { Editor, EditorContext, CollapsedEditor } from '@atlaskit/editor-core';
+import { mention } from '@findable/util-data-test';
+import { Editor, EditorContext, CollapsedEditor } from '@findable/editor-core';
 import ToolsDrawer, { RenderEditorProps } from '../example-helpers/ToolsDrawer';
 import { JIRATransformer } from '../src';
 

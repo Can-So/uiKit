@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Component, ReactElement } from 'react';
 import styled from 'styled-components';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 import {
   MediaSingle as UIMediaSingle,
   WidthConsumer,
   akEditorFullPageMaxWidth,
   mapBreakpointToLayoutMaxWidth,
   ImageLoaderProps,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { FullPagePadding } from '../../ui/Renderer/style';
 import { RendererAppearance } from '../../ui/Renderer';
 import { MediaProps } from './media';

@@ -6,7 +6,7 @@ import {
   getHorizontalPlacement,
 } from '../../../../ui/Popup/utils';
 
-describe('@atlaskit/editor-common popup utils', () => {
+describe('@findable/editor-common popup utils', () => {
   let offset: number[];
   let stick: boolean;
   let wrapper: ReactWrapper;

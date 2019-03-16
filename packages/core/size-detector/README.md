@@ -5,7 +5,7 @@ This is a utility component that informs the child function of the available wid
 ## Installation
 
 ```sh
-yarn add @atlaskit/size-detector
+yarn add @findable/size-detector
 ```
 ## Usage
 

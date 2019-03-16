@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { colors } from '@atlaskit/theme';
-import { EventHandlers } from '@atlaskit/editor-common';
+import { colors } from '@findable/theme';
+import { EventHandlers } from '@findable/editor-common';
 import styled from 'styled-components';
 
 import { getEventHandler } from '../../utils';

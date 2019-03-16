@@ -8,7 +8,7 @@ instances where they may dominate the screen, such as in long tables.
 ## Installation
 
 ```sh
-yarn add @atlaskit/lozenge
+yarn add @findable/lozenge
 ```
 
 ## Usage

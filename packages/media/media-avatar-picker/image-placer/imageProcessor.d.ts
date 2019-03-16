@@ -1,4 +1,4 @@
-import { Rectangle, Bounds, FileInfo } from '@atlaskit/media-ui';
+import { Rectangle, Bounds, FileInfo } from '@findable/media-ui';
 export declare function radians(deg: number): number;
 export interface ViewInfo {
     containerRect: Rectangle;

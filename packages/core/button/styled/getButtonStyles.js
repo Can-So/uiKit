@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import { css } from 'styled-components';
-import { borderRadius, fontSize, gridSize, math } from '@atlaskit/theme';
+import { borderRadius, fontSize, gridSize, math } from '@findable/theme';
 import themeDefinitions from './themeDefinitions';
 import { themeNamespace } from '../theme';
-// TODO: Type correctly when @atlaskit/theme is typescript
+// TODO: Type correctly when @findable/theme is typescript
 var getProvidedTheme = function (_a) {
     var theme = _a.theme;
     return (theme && theme[themeNamespace]) || {};

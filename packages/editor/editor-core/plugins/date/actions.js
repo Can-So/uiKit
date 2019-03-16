@@ -1,5 +1,5 @@
 import { NodeSelection, Selection, } from 'prosemirror-state';
-import { todayTimestampInUTC } from '@atlaskit/editor-common';
+import { todayTimestampInUTC } from '@findable/editor-common';
 import { pluginKey } from './plugin';
 export var insertDate = function (date) { return function (state, dispatch) {
     var schema = state.schema;

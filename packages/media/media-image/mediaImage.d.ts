@@ -1,7 +1,7 @@
 import { Component, ReactNode } from 'react';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@findable/media-core';
 import { Subscription } from 'rxjs/Subscription';
-import { MediaStoreGetFileImageParams } from '@atlaskit/media-store';
+import { MediaStoreGetFileImageParams } from '@findable/media-store';
 export interface MediaImageChildrenProps {
     /** Boolean with value to check if component is loading image source from API */
     loading: boolean;

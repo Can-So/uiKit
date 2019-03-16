@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import SectionMessage from '@atlaskit/section-message';
+import SectionMessage from '@findable/section-message';
 import TableTree, {
   Headers,
   Header,

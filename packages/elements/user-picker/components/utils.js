@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import memoizeOne from 'memoize-one';
 import { EmailType, TeamType, UserType, } from '../types';
-import { PopupSelect } from '@atlaskit/select';
+import { PopupSelect } from '@findable/select';
 export var isUser = function (option) {
     return option.type === undefined || option.type === UserType;
 };

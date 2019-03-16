@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, colors, themed } from '@atlaskit/theme';
+import { borderRadius, colors, themed } from '@findable/theme';
 var Type = styled.span.withConfig({
   displayName: "Type",
   componentId: "tjk1x6-0"

@@ -6,7 +6,7 @@ import {
   MarkType,
 } from 'prosemirror-model';
 
-import { normalizeHexColor } from '@atlaskit/editor-common';
+import { normalizeHexColor } from '@findable/editor-common';
 import { AC_XMLNS } from './encode-cxhtml';
 import { Macro } from './types';
 

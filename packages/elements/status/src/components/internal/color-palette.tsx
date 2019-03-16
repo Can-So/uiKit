@@ -1,4 +1,4 @@
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 import * as React from 'react';
 import { ComponentClass, HTMLAttributes } from 'react';
 import styled from 'styled-components';

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import DropdownMenu, {
   DropdownItemGroup,
   DropdownItem,
-} from '@atlaskit/dropdown-menu';
-import WorldIcon from '@atlaskit/icon/glyph/world';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
+} from '@findable/dropdown-menu';
+import WorldIcon from '@findable/icon/glyph/world';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
 
 const DropdownContainer = styled.div`
   margin-right: ${gridSize()}px;

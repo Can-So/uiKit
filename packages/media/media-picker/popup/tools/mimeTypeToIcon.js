@@ -1,16 +1,16 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import FolderFilledIcon from '@atlaskit/icon/glyph/folder-filled';
-import ImageIcon from '@atlaskit/icon/glyph/media-services/image';
-import VideoIcon from '@atlaskit/icon/glyph/media-services/video';
-import AudioIcon from '@atlaskit/icon/glyph/media-services/audio';
-import SpreadSheetIcon from '@atlaskit/icon/glyph/media-services/spreadsheet';
-import PresentationIcon from '@atlaskit/icon/glyph/media-services/presentation';
-import DocumentIcon from '@atlaskit/icon/glyph/media-services/document';
-import PDFDocumentIcon from '@atlaskit/icon/glyph/media-services/pdf';
-import ZipDocumentIcon from '@atlaskit/icon/glyph/media-services/zip';
-import UnknownIcon from '@atlaskit/icon/glyph/media-services/unknown';
-import { colors } from '@atlaskit/theme';
+import FolderFilledIcon from '@findable/icon/glyph/folder-filled';
+import ImageIcon from '@findable/icon/glyph/media-services/image';
+import VideoIcon from '@findable/icon/glyph/media-services/video';
+import AudioIcon from '@findable/icon/glyph/media-services/audio';
+import SpreadSheetIcon from '@findable/icon/glyph/media-services/spreadsheet';
+import PresentationIcon from '@findable/icon/glyph/media-services/presentation';
+import DocumentIcon from '@findable/icon/glyph/media-services/document';
+import PDFDocumentIcon from '@findable/icon/glyph/media-services/pdf';
+import ZipDocumentIcon from '@findable/icon/glyph/media-services/zip';
+import UnknownIcon from '@findable/icon/glyph/media-services/unknown';
+import { colors } from '@findable/theme';
 import styled from 'styled-components';
 var IconWrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  ", ";\n"], ["\n  ", ";\n"])), function (_a) {
     var color = _a.color;

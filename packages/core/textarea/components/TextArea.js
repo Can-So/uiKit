@@ -1,12 +1,12 @@
 import * as tslib_1 from "tslib";
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent, } from '@atlaskit/analytics-next';
-import GlobalTheme from '@atlaskit/theme';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent, } from '@findable/analytics-next';
+import GlobalTheme from '@findable/theme';
 import * as React from 'react';
 import { name as packageName, version as packageVersion, } from '../version.json';
 import { Theme } from '../theme';
 import { TextAreaWrapper } from '../styled';
 import TextareaElement from './TextAreaElement';
-import { withDefaultProps } from '@atlaskit/type-helpers';
+import { withDefaultProps } from '@findable/type-helpers';
 var defaultProps = {
     resize: 'smart',
     appearance: 'standard',

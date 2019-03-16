@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
 
 import { gotoPopupSimplePage } from '../../../pages/popup-simple-page';
 

@@ -33,13 +33,13 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const historyApiFallback = require('connect-history-api-fallback');
 
-const createConfig = require('@atlaskit/webpack-config');
+const createConfig = require('@findable/webpack-config');
 const {
   print,
   devServerBanner,
   errorMsg,
-} = require('@atlaskit/webpack-config/banner');
-const utils = require('@atlaskit/webpack-config/config/utils');
+} = require('@findable/webpack-config/banner');
+const utils = require('@findable/webpack-config/config/utils');
 
 const HOST = '0.0.0.0';
 const PORT = 9000;

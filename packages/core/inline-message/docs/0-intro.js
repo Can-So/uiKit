@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   Creates a link that opens an [Inline Dialog](/components/inline-dialog).
@@ -9,11 +9,11 @@ export default md`
 
   ## Usage
 
-  ${code`import InlineMessage from '@atlaskit/inline-message';`}
+  ${code`import InlineMessage from '@findable/inline-message';`}
 
   ${(
     <Example
-      packageName="@atlaskit/inline-message"
+      packageName="@findable/inline-message"
       Component={require('../examples/01-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/01-basic')}
@@ -22,7 +22,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/inline-message"
+      packageName="@findable/inline-message"
       Component={require('../examples/02-different-types').default}
       title="Different Types"
       source={require('!!raw-loader!../examples/02-different-types')}

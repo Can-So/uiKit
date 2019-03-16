@@ -13,7 +13,7 @@ import {
   UserType,
   Value,
 } from '../types';
-import { PopupSelect } from '@atlaskit/select';
+import { PopupSelect } from '@findable/select';
 
 export const isUser = (option: OptionData): option is User =>
   option.type === undefined || option.type === UserType;

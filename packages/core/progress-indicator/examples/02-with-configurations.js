@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Lorem from 'react-lorem-component';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import { AtlasKitThemeProvider, colors, themed } from '@atlaskit/theme';
+import Button, { ButtonGroup } from '@findable/button';
+import { AtlasKitThemeProvider, colors, themed } from '@findable/theme';
 import { ProgressDots } from '../src';
 
 const appearances = ['default', 'primary', 'help', 'inverted'];

@@ -5,7 +5,7 @@ A component to view and switch between enabled or disabled states.
 ## Installation
 
 ```sh
-yarn add @atlaskit/toggle
+yarn add @findable/toggle
 ```
 
 ## Usage

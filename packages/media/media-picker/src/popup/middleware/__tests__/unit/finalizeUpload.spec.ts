@@ -1,11 +1,11 @@
-jest.mock('@atlaskit/media-store');
-import { MediaStore } from '@atlaskit/media-store';
+jest.mock('@findable/media-store');
+import { MediaStore } from '@findable/media-store';
 import {
   ContextFactory,
   fileStreamsCache,
   FileState,
-} from '@atlaskit/media-core';
-import { mockStore, mockFetcher } from '@atlaskit/media-test-helpers';
+} from '@findable/media-core';
+import { mockStore, mockFetcher } from '@findable/media-test-helpers';
 import { sendUploadEvent } from '../../../actions/sendUploadEvent';
 import finalizeUploadMiddleware, { finalizeUpload } from '../../finalizeUpload';
 import {

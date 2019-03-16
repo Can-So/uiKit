@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import PullRequestIcon from '@atlaskit/icon-object/glyph/pull-request/16';
+import PullRequestIcon from '@findable/icon-object/glyph/pull-request/16';
 import { extractInlineViewPropsFromObject } from './extractPropsFromObject';
 export var buildName = function (props, json) {
     var nextProps = tslib_1.__assign({}, props);

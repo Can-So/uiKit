@@ -2,16 +2,16 @@ jest.mock('../../../src/utils/getDataURIFromFileState');
 import { Observable, ReplaySubject } from 'rxjs';
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
-import { fakeContext, nextTick } from '@atlaskit/media-test-helpers';
+import { fakeContext, nextTick } from '@findable/media-test-helpers';
 import {
   Context,
   FileState,
   FileDetails,
   FileIdentifier,
   ExternalImageIdentifier,
-} from '@atlaskit/media-core';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+} from '@findable/media-core';
+import { AnalyticsListener } from '@findable/analytics-next';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import { CardAction, CardProps, CardDimensions } from '../../../src';
 
 import { CardView } from '../../../src/root/cardView';
@@ -24,7 +24,7 @@ import {
   FilePreview,
 } from '../../../src/utils/getDataURIFromFileState';
 import { InlinePlayer } from '../../../src/root/inlinePlayer';
-import { MediaViewer } from '@atlaskit/media-viewer';
+import { MediaViewer } from '@findable/media-viewer';
 
 describe('Card', () => {
   const fileIdentifier: FileIdentifier = {
@@ -368,7 +368,7 @@ describe('Card', () => {
         actionSubject: 'MediaCard',
         actionSubjectId: 'some-random-id',
         componentName: 'Card',
-        packageName: '@atlaskit/media-card',
+        packageName: '@findable/media-card',
       }),
     );
   });

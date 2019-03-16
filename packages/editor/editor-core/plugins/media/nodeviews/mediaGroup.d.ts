@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView, NodeView } from 'prosemirror-view';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { EditorAppearance } from '../../../types';
 export interface Props {
     children?: React.ReactNode;

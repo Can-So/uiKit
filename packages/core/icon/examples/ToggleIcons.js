@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { colors } from '@atlaskit/theme';
-import Button from '@atlaskit/button';
+import { colors } from '@findable/theme';
+import Button from '@findable/button';
 import CheckboxIcon from '../glyph/checkbox';
 import RadioIcon from '../glyph/radio';
 

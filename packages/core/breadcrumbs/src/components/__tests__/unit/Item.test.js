@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { mount, shallow } from 'enzyme';
 import ReactDOM from 'react-dom';
-import Button from '@atlaskit/button';
-import { AtlassianIcon } from '@atlaskit/logo';
+import Button from '@findable/button';
+import { AtlassianIcon } from '@findable/logo';
 
 import BreadcrumbsItemWithAnalytics, {
   BreadcrumbsItemWithoutAnalytics as BreadcrumbsItem,

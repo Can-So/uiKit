@@ -5,7 +5,7 @@ A component that creates and provide consistent feedback across Atlassian produc
 ## Installation
 
 ```sh
-yarn add @atlaskit/feedback-collector
+yarn add @findable/feedback-collector
 ```
 
 ## Usage

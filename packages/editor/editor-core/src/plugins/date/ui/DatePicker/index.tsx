@@ -5,9 +5,9 @@ import {
   timestampToUTCDate,
   timestampToIsoFormat,
   akEditorFloatingDialogZIndex,
-} from '@atlaskit/editor-common';
-import Calendar from '@atlaskit/calendar';
-import { colors, borderRadius } from '@atlaskit/theme';
+} from '@findable/editor-common';
+import Calendar from '@findable/calendar';
+import { colors, borderRadius } from '@findable/theme';
 import withOuterListeners from '../../../../ui/with-outer-listeners';
 import { DateType } from '../../index';
 

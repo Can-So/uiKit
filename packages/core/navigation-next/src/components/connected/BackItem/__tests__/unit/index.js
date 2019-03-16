@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/arrow-left-circle';
+import ArrowLeftCircleIcon from '@findable/icon/glyph/arrow-left-circle';
 
 import ConnectedItem from '../../../ConnectedItem';
 import BackItem from '../../index';

@@ -9,7 +9,7 @@ import {
   code_block,
   sendKeyToPm,
   dispatchPasteEvent,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import codeBlockPlugin from '../../../../plugins/code-block';
 
 describe('hyperlink', () => {

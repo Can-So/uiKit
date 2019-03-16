@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { borderRadius, gridSize, math } from '@atlaskit/theme';
+import { borderRadius, gridSize, math } from '@findable/theme';
 
 export const Body = styled.div`
   padding: 40px 20px;
@@ -8,7 +8,7 @@ export const Body = styled.div`
 `;
 
 // TODO: equivilant to H600, need to replace with mixin when available from
-// the @atlaskit/theme package
+// the @findable/theme package
 export const Heading = styled.h4`
   color: inherit;
   font-size: 20px;

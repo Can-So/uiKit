@@ -8,7 +8,7 @@ import {
   EmojiServiceResponse,
   EmojiRepository,
   denormaliseEmojiServiceResponse,
-} from '@atlaskit/emoji';
+} from '@findable/emoji';
 import { siteEmojiWtf } from './test-data';
 
 let emojisSets: Map<string, any[]>;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { colors, gridSize, math, themed } from '@findable/theme';
 export default styled.div.withConfig({
   displayName: "Group",
   componentId: "sc-1q26u8b-0"

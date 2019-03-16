@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ReactRenderer as Renderer } from '@atlaskit/renderer';
+import { ReactRenderer as Renderer } from '@findable/renderer';
 
 import TaskItem from '../src/components/TaskItem';
 import {

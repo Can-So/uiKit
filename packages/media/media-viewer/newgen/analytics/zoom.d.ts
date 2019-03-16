@@ -1,4 +1,4 @@
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import { PackageAttributes } from './index';
 export declare type ZoomType = 'zoomOut' | 'zoomIn';
 export interface ZoomControlsGasPayload extends GasPayload {

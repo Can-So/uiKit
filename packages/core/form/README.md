@@ -5,7 +5,7 @@ Form package provides layout & validation for form fields.
 ## Installation
 
 ```sh
-yarn add @atlaskit/form
+yarn add @findable/form
 ```
 
 ## Usage

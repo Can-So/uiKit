@@ -1,5 +1,5 @@
 // @flow
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 import memoizeOne from 'memoize-one';
 
 import type { Theme } from './themeBuilder';

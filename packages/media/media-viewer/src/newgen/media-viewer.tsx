@@ -4,18 +4,18 @@ import {
   Identifier,
   isFileIdentifier,
   FileIdentifier,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import { IntlProvider, intlShape } from 'react-intl';
 import { ThemeProvider } from 'styled-components';
-import { Shortcut, theme } from '@atlaskit/media-ui';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { Shortcut, theme } from '@findable/media-ui';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import { mediaViewerModalEvent } from './analytics/media-viewer';
 import { channel } from './analytics/index';
 import {
   GasPayload,
   GasScreenEventPayload,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 import { ItemSource, MediaViewerFeatureFlags } from './domain';
 import { List } from './list';
 import { Collection } from './collection';

@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
-import { md, Example, code, Props } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, code, Props } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   ${(
     <SectionMessage appearance="warning">
       <p>
         <strong>
-          Note: @atlaskit/react-experiment-framework is currently in developer
+          Note: @findable/react-experiment-framework is currently in developer
           preview.
         </strong>
       </p>
@@ -38,7 +38,7 @@ export default md`
     CohortTracker,
     ExperimentProvider,
     ExperimentConsumer,
-    ExperimentController } from '@atlaskit/@atlaskit/react-experiment-framework';`}
+    ExperimentController } from '@findable/@findable/react-experiment-framework';`}
 
   In some cases the enrollmentResolver will just be a sync call to featureFlag client, to lookup the cohort that a given user is in. However, sometimes it might be required to
   additionally do REST calls, or other adhoc checks to see whether your user should get an experience, e.g., a message that should only show once to a customer could require
@@ -52,7 +52,7 @@ export default md`
   
   ${(
     <Example
-      packageName="@atlaskit/growth"
+      packageName="@findable/growth"
       Component={require('../examples/00-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic')}

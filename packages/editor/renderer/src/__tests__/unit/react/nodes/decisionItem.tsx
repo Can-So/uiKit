@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { DecisionItem as AkDecisionItem } from '@atlaskit/task-decision';
+import { DecisionItem as AkDecisionItem } from '@findable/task-decision';
 import DecisionItem from '../../../../react/nodes/decisionItem';
 
 describe('Renderer - React/Nodes/DecisionItem', () => {

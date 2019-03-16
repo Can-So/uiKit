@@ -1,4 +1,4 @@
-import { createTheme } from '@atlaskit/theme';
+import { createTheme } from '@findable/theme';
 import * as componentTokens from './component-tokens';
 var disabledRules = {
     light: {

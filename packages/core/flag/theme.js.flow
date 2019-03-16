@@ -1,7 +1,7 @@
 // @flow
 
-import { colors, themed } from '@atlaskit/theme';
-import { themeNamespace as buttonThemeNamespace } from '@atlaskit/button';
+import { colors, themed } from '@findable/theme';
+import { themeNamespace as buttonThemeNamespace } from '@findable/button';
 
 const lightButtonBackground = 'rgba(255, 255, 255, 0.08)';
 

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   Spinners are used for showing a system process of unknown length going on
@@ -13,11 +13,11 @@ export default md`
 
   ## Usage
 
-  ${code`import Spinner from '@atlaskit/spinner';`}
+  ${code`import Spinner from '@findable/spinner';`}
 
   ${(
     <Example
-      packageName="@atlaskit/spinner"
+      packageName="@findable/spinner"
       Component={require('../examples/0-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-basic')}
@@ -26,7 +26,7 @@ export default md`
   
   ${(
     <Example
-      packageName="@atlaskit/spinner"
+      packageName="@findable/spinner"
       Component={require('../examples/1-usage').default}
       title="Animation Options"
       source={require('!!raw-loader!../examples/1-usage')}

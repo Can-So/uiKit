@@ -1,4 +1,4 @@
-import { md, code } from '@atlaskit/docs';
+import { md, code } from '@findable/docs';
 
 export default md`
   # Fabric aggregated listeners for analytics-next API
@@ -18,9 +18,9 @@ export default md`
   ## Installation
 
 ${code`
-  npm install @atlaskit/analytics-listeners
+  npm install @findable/analytics-listeners
   # or
-  yarn add @atlaskit/analytics-listeners
+  yarn add @findable/analytics-listeners
 `}
 
   ## Using the component
@@ -32,9 +32,9 @@ ${code`
   import {
     withAnalyticsEvents,
     createAndFireEvent,
-  } from '@atlaskit/analytics-next';
-  import FabricAnalyticsListeners from '@atlaskit/analytics-listeners';
-  import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+  } from '@findable/analytics-next';
+  import FabricAnalyticsListeners from '@findable/analytics-listeners';
+  import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 
   export type Props = WithAnalyticsEventProps & {
     onClick: (e) => void;
@@ -65,7 +65,7 @@ ${code`
   };
 
   // Pass the analyticsWebClient instance created by the Product
-  // Refer to type AnalyticsWebClient from @atlaskit/analytics-listeners
+  // Refer to type AnalyticsWebClient from @findable/analytics-listeners
   ReactDOM.render(
     <div>
       <FabricAnalyticsListeners client={analyticsWebClient}>

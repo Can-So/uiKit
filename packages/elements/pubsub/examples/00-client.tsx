@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import FieldText from '@atlaskit/field-text';
-import Lozenge from '@atlaskit/lozenge';
+import Button, { ButtonGroup } from '@findable/button';
+import FieldText from '@findable/field-text';
+import Lozenge from '@findable/lozenge';
 
 import Client, { PubSubClientConfig, SpecialEventType } from '../src';
 

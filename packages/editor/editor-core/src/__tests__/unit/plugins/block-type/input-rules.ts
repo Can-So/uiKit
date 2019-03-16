@@ -12,8 +12,8 @@ import {
   code,
   hardBreak,
   a as link,
-} from '@atlaskit/editor-test-helpers';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+} from '@findable/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { analyticsService } from '../../../../analytics';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import panelPlugin from '../../../../plugins/panel';

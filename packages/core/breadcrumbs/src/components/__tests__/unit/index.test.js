@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { mount } from 'enzyme';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 import Breadcrumbs, {
   BreadcrumbsStateless,

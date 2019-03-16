@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import InlineDialog from '@atlaskit/inline-dialog';
+import InlineDialog from '@findable/inline-dialog';
 import { LineWidthPopupContainer } from './popupStyles';
 import { LineWidthIcon } from './lineWidthIcon';
 

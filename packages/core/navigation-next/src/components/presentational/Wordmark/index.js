@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 import type { WordmarkProps } from './types';
 
 const gridSize = gridSizeFn();

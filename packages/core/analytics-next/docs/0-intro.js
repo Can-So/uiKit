@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 import { instrumentedComponents } from '../src/AnalyticsEventMap';
 
 type InstrumentedItem = {
@@ -66,7 +66,7 @@ and recording these events in which ever way you like.
 
   ### SaveButton.js
 ${code`
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 const SaveButton = ({ onClick }) => (
   <Button onClick={onClick}>Save</Button>
@@ -81,7 +81,7 @@ const SaveButton = ({ onClick }) => (
 
   ### SaveButton.js
 ${code`
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 const SaveButton = ({ onClick }) => (
   <Button
@@ -103,7 +103,7 @@ const SaveButton = ({ onClick }) => (
 
   ### App.js
 ${code`
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 import SaveButton from './SaveButton';
 
 const sendAnalytics = analytic => console.log(analytic);

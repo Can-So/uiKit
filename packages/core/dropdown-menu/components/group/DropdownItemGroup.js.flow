@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, type Node } from 'react';
-import { ItemGroup } from '@atlaskit/item';
+import { ItemGroup } from '@findable/item';
 
 type Props = {
   /** DropdownItems to be rendered inside the group.*/

@@ -1,4 +1,4 @@
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 export default md`
   # 7.x - 8.x
@@ -39,7 +39,7 @@ export default md`
   The \`className\` prop of MediaImage allowed you to specify a className via component props. Since we changed the components to use RenderProps approach, this will be solved from the package consumers.
 
   ${code`
-+ import { MediaImage } from '@atlaskit/media-image';
++ import { MediaImage } from '@findable/media-image';
 +
 + <MediaImage {...props}>
 +   {({ loading, error, data }) => {

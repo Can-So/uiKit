@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { EscHelper } from '../escHelper';
 import { CenterView } from '../styles';

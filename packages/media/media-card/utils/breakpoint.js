@@ -1,4 +1,4 @@
-import { size } from '@atlaskit/media-ui';
+import { size } from '@findable/media-ui';
 export var breakpointSize = function (width, sizes) {
     if (sizes === void 0) { sizes = cardBreakpointSizes; }
     var value = parseInt("" + width, 10); // Normalize value

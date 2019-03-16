@@ -1,15 +1,15 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { colors, themed } from '@atlaskit/theme';
-import InfoIcon from '@atlaskit/icon/glyph/editor/info';
-import SuccessIcon from '@atlaskit/icon/glyph/editor/success';
-import NoteIcon from '@atlaskit/icon/glyph/editor/note';
-import WarningIcon from '@atlaskit/icon/glyph/editor/warning';
-import ErrorIcon from '@atlaskit/icon/glyph/editor/error';
-import TipIcon from '@atlaskit/icon/glyph/editor/hint';
+import { colors, themed } from '@findable/theme';
+import InfoIcon from '@findable/icon/glyph/editor/info';
+import SuccessIcon from '@findable/icon/glyph/editor/success';
+import NoteIcon from '@findable/icon/glyph/editor/note';
+import WarningIcon from '@findable/icon/glyph/editor/warning';
+import ErrorIcon from '@findable/icon/glyph/editor/error';
+import TipIcon from '@findable/icon/glyph/editor/hint';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
 import styled from 'styled-components';
-import { hexToRgba } from '@atlaskit/editor-common';
+import { hexToRgba } from '@findable/editor-common';
 var lightPanelColor = {
     info: colors.B50,
     note: colors.P50,

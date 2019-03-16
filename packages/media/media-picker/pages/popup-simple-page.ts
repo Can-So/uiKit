@@ -1,6 +1,6 @@
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
+import { getExampleUrl } from '@findable/webdriver-runner/utils/example';
 import { PopupUploadEventPayloadMap } from '../src/components/types';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
+import Page from '@findable/webdriver-runner/wd-wrapper';
 
 export type Event = {
   readonly name: string;

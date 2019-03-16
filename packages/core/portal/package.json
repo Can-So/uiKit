@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/portal",
+  "name": "@findable/portal",
   "version": "0.2.1",
   "description": "Atlaskit wrapper for rendering components in React portals",
   "license": "Apache-2.0",
@@ -13,7 +13,7 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
@@ -25,15 +25,15 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/flag": "^10.0.1",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/inline-dialog": "^10.0.1",
-    "@atlaskit/modal-dialog": "^8.0.2",
-    "@atlaskit/onboarding": "^7.0.1",
-    "@atlaskit/tooltip": "^13.0.1",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/flag": "^10.0.1",
+    "@findable/icon": "^16.0.5",
+    "@findable/inline-dialog": "^10.0.1",
+    "@findable/modal-dialog": "^8.0.2",
+    "@findable/onboarding": "^7.0.1",
+    "@findable/tooltip": "^13.0.1",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "styled-components": "^3.2.6"
   },

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 import { getOrientation, getFileInfo } from '../src';
 import {
   InputWrapper,
@@ -10,7 +10,7 @@ import {
   OrientationSelectWrapper,
   PreviewImageContainer,
 } from '../example-helpers/styled';
-import Lozenge from '@atlaskit/lozenge';
+import Lozenge from '@findable/lozenge';
 
 const ORIENT_TRANSFORMS: { [key: number]: string } = {
   1: 'none',
@@ -73,7 +73,7 @@ class Example extends React.Component<{}, ExampleState> {
           <GridColumn>
             <h1>Image Orientation Preview</h1>
             <p>
-              <Lozenge>@atlaskit/media-ui</Lozenge> exports:{' '}
+              <Lozenge>@findable/media-ui</Lozenge> exports:{' '}
               <Code>async getOrientation(file:File): number</Code>
             </p>
             <p>

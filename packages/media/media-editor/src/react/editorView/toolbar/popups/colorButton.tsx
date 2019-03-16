@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import CheckIcon from '@atlaskit/icon/glyph/check';
+import CheckIcon from '@findable/icon/glyph/check';
 import { Color } from '../../../../common';
 
 import { ColorSample, CheckArea } from './colorButtonStyles';

@@ -1,4 +1,4 @@
-import { md, code } from '@atlaskit/docs';
+import { md, code } from '@findable/docs';
 
 export default md`
   ## Usage
@@ -8,7 +8,7 @@ export default md`
   ## Installation in your component/package
 
 ${code`
-  bolt add @atlaskit/elements-test-helpers --dev  
+  bolt add @findable/elements-test-helpers --dev  
 `}
 
   ## Using the component
@@ -18,7 +18,7 @@ ${code`
   To SSR/Hydrate a Status example:
 
 ${code`
-import { ssr_hydrate } from '@atlaskit/elements-test-helpers';
+import { ssr_hydrate } from '@findable/elements-test-helpers';
 
 const ExamplesPath = '../../../../examples';
 
@@ -50,7 +50,7 @@ Create a new example file, use createHydrateExample wrapper and then run the exa
 
 ${code`
 import Example from './01-mention-item.tsx';
-import createHydrateExample from '@atlaskit/elements-test-helpers/src/demo-ssr-hydrate';
+import createHydrateExample from '@findable/elements-test-helpers/src/demo-ssr-hydrate';
 
 export default createHydrateExample(Example);
 `}

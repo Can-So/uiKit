@@ -6,9 +6,9 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import styled from 'styled-components';
 import React, { Component } from 'react';
-import { colors } from '@atlaskit/theme';
-import Spinner from '@atlaskit/spinner';
-import Icon from '@atlaskit/icon/glyph/warning'; // exported for testing
+import { colors } from '@findable/theme';
+import Spinner from '@findable/spinner';
+import Icon from '@findable/icon/glyph/warning'; // exported for testing
 
 export var WarningIcon = styled.div.withConfig({
   displayName: "ValidationElement__WarningIcon",

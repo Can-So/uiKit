@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { EditorView } from 'prosemirror-view';
-import { Editor } from '@atlaskit/editor-core';
+import { Editor } from '@findable/editor-core';
 
 // @ts-ignore
-import { AtlaskitThemeProvider } from '@atlaskit/theme';
+import { AtlaskitThemeProvider } from '@findable/theme';
 import { toNativeBridge } from './web-to-native';
 import WebBridgeImpl from './native-to-web';
 import MobilePicker from './MobileMediaPicker';
@@ -19,7 +19,7 @@ import {
 } from '../providers';
 import { ProseMirrorDOMChange } from '../types';
 import { parseLocationSearch } from '../bridge-utils';
-import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
+import { Provider as SmartCardProvider } from '@findable/smart-card';
 import { cardProvider } from '../providers/cardProvider';
 
 const params = parseLocationSearch();

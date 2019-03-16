@@ -1,6 +1,6 @@
 // @flow
 import { css } from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 import { ASC, DESC } from '../internal/constants';
 import { arrow } from '../theme';
 

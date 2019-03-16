@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
-import { ContextIdentifierProvider } from '@atlaskit/editor-common';
-import { ContentRef, TaskDecisionProvider } from '@atlaskit/task-decision';
+import { ContextIdentifierProvider } from '@findable/editor-common';
+import { ContentRef, TaskDecisionProvider } from '@findable/task-decision';
 export interface Props {
     taskId: string;
     objectAri: string;

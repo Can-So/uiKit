@@ -1,4 +1,4 @@
-import { isSafeUrl } from '@atlaskit/adf-schema';
+import { isSafeUrl } from '@findable/adf-schema';
 // https://www.atlassian.com
 export var LINK_TEXT_REGEXP = /^(https?:\/\/|irc:\/\/|mailto:)([\w.?\/\\#-=@]+)/;
 export var linkText = function (_a) {

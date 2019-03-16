@@ -1,11 +1,11 @@
-# @atlaskit/media-avatar-picker
+# @findable/media-avatar-picker
 
 Provides a component to select, drag and resize image avatars. It also provides a default list of predefined avatars.
 
 ## Installation
 
 ~~~sh
-yarn add @atlaskit/media-avatar-picker
+yarn add @findable/media-avatar-picker
 ~~~
 
 ## Using the component
@@ -98,8 +98,8 @@ _(optional)_ This property allows the consumer to display an error message. This
 Below is an example of rendering an \`AvatarPickerDialog\`. The dialog should be wrapped in a \`ModalTransition\` component so it fades out when closed.
 
 ~~~
-import { AvatarPickerDialog, Avatar } from '@atlaskit/media-avatar-picker';
-import { ModalTransition } from '@atlaskit/modal-dialog';
+import { AvatarPickerDialog, Avatar } from '@findable/media-avatar-picker';
+import { ModalTransition } from '@findable/modal-dialog';
 
 const avatars: Array<Avatar> = [{ dataURI: 'some-data-uri' }];
 

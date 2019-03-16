@@ -1,6 +1,6 @@
 // @flow
 import React, { type Element } from 'react';
-import { md } from '@atlaskit/docs';
+import { md } from '@findable/docs';
 
 function getLabel(children) {
   let str = '';

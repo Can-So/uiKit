@@ -1,13 +1,13 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import Button from '@atlaskit/button';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import Tooltip from '@atlaskit/tooltip';
+import Button from '@findable/button';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import Tooltip from '@findable/tooltip';
 import { injectIntl } from 'react-intl';
 import { DropdownRightIconWrapper, DropdownLeftIconWrapper } from './styles';
 import { LineWidthIcon } from './lineWidthIcon';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 var LineWidthButton = /** @class */ (function (_super) {
     tslib_1.__extends(LineWidthButton, _super);
     function LineWidthButton() {

@@ -1,6 +1,6 @@
 import { contentWidth } from './contentWidth';
 import { calculateColWidth, unitToNumber, addContainerLeftRightPadding, getCellsRefsInColumn, } from './utils';
-import { tableNewColumnMinWidth } from '@atlaskit/editor-common';
+import { tableNewColumnMinWidth } from '@findable/editor-common';
 var ColumnState = /** @class */ (function () {
     function ColumnState(width, minWidth) {
         if (minWidth === void 0) { minWidth = 0; }

@@ -8,7 +8,7 @@ components to be swapped dynamically at run-time.
 ## Installing the framework
 
 ```sh
-npm i -S @atlaskit/react-experiment-framework
+npm i -S @findable/react-experiment-framework
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ npm i -S @atlaskit/react-experiment-framework
 Wrap your React app in the ExperimentController component
 
 ```js
-import { ExperimentController } from '@atlaskit/react-experiment-framework';
+import { ExperimentController } from '@findable/react-experiment-framework';
 
 ReactDOM.render(
   <ExperimentController experimentEnrollmentConfig={experimentEnrollmentConfig}>
@@ -31,7 +31,7 @@ The experimentEnrollmentConfig prop provided to the ExperimentController should 
 ```js
 
 // example of a resolver
-import type { EnrollmentDetails, ExperimentEnrollmentConfig } from '@atlaskit/react-experiment-framework';
+import type { EnrollmentDetails, ExperimentEnrollmentConfig } from '@findable/react-experiment-framework';
 
 const experimentEnrollmentResolver = async (): EnrollmentDetails => {
     // example where the cohort is provided by an async feature flag fetch, e.g., LD client, or graphql query

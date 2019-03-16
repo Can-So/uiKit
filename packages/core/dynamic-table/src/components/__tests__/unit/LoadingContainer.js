@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import {
   Container,
   ContentsContainer,

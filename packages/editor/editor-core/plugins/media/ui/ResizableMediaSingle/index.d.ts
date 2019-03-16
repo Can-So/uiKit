@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Context } from '@atlaskit/media-core';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { Context } from '@findable/media-core';
+import { MediaSingleLayout } from '@findable/adf-schema';
 import { Props } from './types';
 declare type State = {
     offsetLeft: number;

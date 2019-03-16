@@ -3,12 +3,12 @@ import { Component } from 'react';
 import { Dispatch, Store } from 'redux';
 import { connect, Provider } from 'react-redux';
 import { IntlShape } from 'react-intl';
-import { Context, ContextFactory } from '@atlaskit/media-core';
-import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
+import { Context, ContextFactory } from '@findable/media-core';
+import ModalDialog, { ModalTransition } from '@findable/modal-dialog';
 import {
   UIAnalyticsEventHandlerSignature,
   ObjectType,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 
 import { ServiceName, State } from '../domain';
 

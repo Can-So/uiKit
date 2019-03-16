@@ -3,7 +3,7 @@ import {
   BreakoutMarkDefinition,
   CodeBlockDefinition,
   LayoutSectionDefinition,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithAppliedMark } from '../types';
 

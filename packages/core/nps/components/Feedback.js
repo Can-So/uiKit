@@ -6,8 +6,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import FieldTextArea from '@atlaskit/field-text-area';
+import Button, { ButtonGroup } from '@findable/button';
+import FieldTextArea from '@findable/field-text-area';
 import { Header, Description } from './common';
 import { ScoreContainer, Scale, Comment as StyledComment } from './styled/feedback';
 import { Wrapper, ButtonWrapper } from './styled/common';

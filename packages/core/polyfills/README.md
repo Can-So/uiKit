@@ -16,12 +16,12 @@ The supported browser-list most Atlassian products use is:
   "last 2 ChromeAndroid version"
 ```
 
-This package contains @atlaskit/polyfills for native methods which are unsupported by some of the browsers that we target.
+This package contains @findable/polyfills for native methods which are unsupported by some of the browsers that we target.
 
 ## Installation
 
 ```sh
-yarn add @atlaskit/polyfills
+yarn add @findable/polyfills
 ```
 
 ## Usage

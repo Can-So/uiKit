@@ -7,7 +7,7 @@ whole page).
 ## Installation
 
 ```sh
-yarn add @atlaskit/empty-state
+yarn add @findable/empty-state
 ```
 
 ## Usage

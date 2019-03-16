@@ -1,5 +1,5 @@
 import * as React from 'react';
-import FabricAnalyticsListeners from '@atlaskit/analytics-listeners';
+import FabricAnalyticsListeners from '@findable/analytics-listeners';
 import FeatureFlag from '../FeatureFlag';
 import GoogleAnalyticsListener from './GoogleAnalyticsListener';
 

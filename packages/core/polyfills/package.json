@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/polyfills",
+  "name": "@findable/polyfills",
   "version": "3.0.5",
   "description": "A package containing polyfills for native methods.",
   "license": "Apache-2.0",
@@ -15,12 +15,12 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "peerDependencies": {
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.0"
+    "@findable/docs": "^7.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0"

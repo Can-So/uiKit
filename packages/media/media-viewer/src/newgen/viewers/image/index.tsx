@@ -4,8 +4,8 @@ import {
   FileItem,
   FileState,
   isImageRepresentationReady,
-} from '@atlaskit/media-core';
-import { getOrientation } from '@atlaskit/media-ui';
+} from '@findable/media-core';
+import { getOrientation } from '@findable/media-ui';
 import { Outcome } from '../../domain';
 import { createError, MediaViewerError } from '../../error';
 import { InteractiveImg } from './interactive-img';

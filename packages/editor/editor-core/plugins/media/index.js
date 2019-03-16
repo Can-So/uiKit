@@ -1,7 +1,7 @@
 import * as React from 'react';
-import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
-import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
-import { SmartMediaEditor } from '@atlaskit/media-editor';
+import EditorImageIcon from '@findable/icon/glyph/editor/image';
+import { media, mediaGroup, mediaSingle } from '@findable/adf-schema';
+import { SmartMediaEditor } from '@findable/media-editor';
 import { stateKey as pluginKey, createPlugin, } from './pm-plugins/main';
 import keymapMediaSinglePlugin from './pm-plugins/keymap-media-single';
 import keymapPlugin from './pm-plugins/keymap';

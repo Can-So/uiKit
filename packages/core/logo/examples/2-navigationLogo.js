@@ -1,6 +1,6 @@
 // @flow
 import React, { Fragment } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import styled from 'styled-components';
 
 import {

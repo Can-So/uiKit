@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { Vector2, Rectangle, FileInfo } from '@atlaskit/media-ui';
+import { Vector2, Rectangle, FileInfo } from '@findable/media-ui';
 import {
   nextTick,
   mockCanvas,
   mockLoadImage,
   mockLoadImageError,
   unMockLoadImage,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 const mockImagePlacerUtil = {
   getCanvas: mockCanvas,

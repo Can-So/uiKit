@@ -1,11 +1,11 @@
 import { Fragment, Node } from 'prosemirror-model';
-import { p, defaultSchema, strong, clean } from '@atlaskit/editor-test-helpers';
+import { p, defaultSchema, strong, clean } from '@findable/editor-test-helpers';
 import { mapFragment } from '../../../utils/slice';
 
 const fragment = (...args: any) =>
   Fragment.from(args.map((i: any) => clean(i)(defaultSchema)) as Node[]);
 
-describe('@atlaskit/editor-core slice utils', () => {
+describe('@findable/editor-core slice utils', () => {
   describe('mapFragment', () => {
     it('should return an equivalent node when given an identity function', () => {
       const content = fragment(p('start'), p('middle'), p('end'));

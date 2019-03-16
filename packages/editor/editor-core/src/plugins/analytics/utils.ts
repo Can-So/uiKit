@@ -1,5 +1,5 @@
 import { editorAnalyticsChannel } from './index';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { AnalyticsEventPayload } from './types';
 import { Transaction, EditorState } from 'prosemirror-state';
 import { Command } from '../../types';

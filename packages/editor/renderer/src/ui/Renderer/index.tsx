@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { Schema } from 'prosemirror-model';
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import {
   ADFStage,
   UnsupportedBlock,
@@ -10,7 +10,7 @@ import {
   ExtensionHandlers,
   BaseTheme,
   WidthProvider,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { ReactSerializer, renderDocument, RendererContext } from '../../';
 import { RenderOutputStat } from '../../render-document';
 import { Wrapper } from './style';

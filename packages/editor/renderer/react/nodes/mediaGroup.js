@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { defaultImageCardDimensions } from '@atlaskit/media-card';
-import { FilmstripView, } from '@atlaskit/media-filmstrip';
+import { defaultImageCardDimensions } from '@findable/media-card';
+import { FilmstripView, } from '@findable/media-filmstrip';
 var MediaGroup = /** @class */ (function (_super) {
     tslib_1.__extends(MediaGroup, _super);
     function MediaGroup() {

@@ -3,15 +3,15 @@ import { InjectedIntl, defineMessages } from 'react-intl';
 import { EditorState, NodeSelection } from 'prosemirror-state';
 import { removeSelectedNode, hasParentNodeOfType } from 'prosemirror-utils';
 
-import WrapLeftIcon from '@atlaskit/icon/glyph/editor/media-wrap-left';
-import WrapRightIcon from '@atlaskit/icon/glyph/editor/media-wrap-right';
-import WideIcon from '@atlaskit/icon/glyph/editor/media-wide';
-import FullWidthIcon from '@atlaskit/icon/glyph/editor/media-full-width';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import EditorAlignImageLeft from '@atlaskit/icon/glyph/editor/align-image-left';
-import EditorAlignImageRight from '@atlaskit/icon/glyph/editor/align-image-right';
-import EditorAlignImageCenter from '@atlaskit/icon/glyph/editor/align-image-center';
-import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
+import WrapLeftIcon from '@findable/icon/glyph/editor/media-wrap-left';
+import WrapRightIcon from '@findable/icon/glyph/editor/media-wrap-right';
+import WideIcon from '@findable/icon/glyph/editor/media-wide';
+import FullWidthIcon from '@findable/icon/glyph/editor/media-full-width';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
+import EditorAlignImageLeft from '@findable/icon/glyph/editor/align-image-left';
+import EditorAlignImageRight from '@findable/icon/glyph/editor/align-image-right';
+import EditorAlignImageCenter from '@findable/icon/glyph/editor/align-image-center';
+import AnnotateIcon from '@findable/icon/glyph/media-services/annotate';
 
 import commonMessages from '../../messages';
 import { Command, EditorAppearance } from '../../../src/types';
@@ -21,10 +21,10 @@ import {
   FloatingToolbarSeparator,
 } from '../../../src/plugins/floating-toolbar/types';
 import { stateKey, MediaPluginState } from './pm-plugins/main';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 import { Schema } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import Button from '../floating-toolbar/ui/Button';
 import Separator from '../floating-toolbar/ui/Separator';
 

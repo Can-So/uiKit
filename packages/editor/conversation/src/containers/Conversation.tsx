@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { Editor as AkEditor, EditorProps } from '@atlaskit/editor-core';
+import { ProviderFactory } from '@findable/editor-common';
+import { Editor as AkEditor, EditorProps } from '@findable/editor-core';
 import { Provider, connect, Dispatch } from 'react-redux';
 import Conversation, { Props as BaseProps } from '../components/Conversation';
 import { ResourceProvider } from '../api/ConversationResource';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 
 import {
   addComment,

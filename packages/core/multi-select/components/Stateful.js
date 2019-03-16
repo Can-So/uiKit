@@ -8,7 +8,7 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
 import uuid from 'uuid';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 import MultiSelectStateless from './Stateless';
 // =============================================================
 // NOTE: Duplicated in ./internal/appearances until docgen can follow imports.

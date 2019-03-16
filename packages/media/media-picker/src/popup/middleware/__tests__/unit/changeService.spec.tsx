@@ -1,6 +1,6 @@
 import { changeService as changeServiceActionCreator } from '../../../actions';
 import { changeService } from '../../changeService';
-import { mockStore } from '@atlaskit/media-test-helpers';
+import { mockStore } from '@findable/media-test-helpers';
 import { ServiceAccountWithType } from '../../../../popup/domain';
 
 describe('changeService()', () => {

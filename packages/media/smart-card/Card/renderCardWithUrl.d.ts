@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import { Client } from '../Client';
 import { CardAppearance } from './types';
 export declare type CardWithUrlContentProps = {

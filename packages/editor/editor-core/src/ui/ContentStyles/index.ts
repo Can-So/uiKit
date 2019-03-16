@@ -5,7 +5,7 @@ import {
   paragraphSharedStyles,
   indentationSharedStyles,
   blockMarksSharedStyles,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { telepointerStyle } from '../../plugins/collab-edit/styles';
 import { gapCursorStyles } from '../../plugins/gap-cursor/styles';
 import { tableStyles } from '../../plugins/table/ui/styles';

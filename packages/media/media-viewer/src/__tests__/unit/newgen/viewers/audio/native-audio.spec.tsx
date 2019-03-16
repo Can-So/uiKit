@@ -7,17 +7,17 @@ const constructAuthTokenUrlSpy = jest.spyOn(util, 'constructAuthTokenUrl');
 
 import * as React from 'react';
 import { createContext } from '../../../_stubs';
-import { Auth, ProcessedFileState } from '@atlaskit/media-core';
+import { Auth, ProcessedFileState } from '@findable/media-core';
 import {
   awaitError,
   mountWithIntlContext,
   nextTick,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { AudioViewer } from '../../../../../newgen/viewers/audio';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import { DefaultCoverWrapper, AudioCover } from '../../../../../newgen/styled';
 import { ErrorMessage } from '../../../../../newgen/error';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 const token = 'some-token';
 const clientId = 'some-client-id';

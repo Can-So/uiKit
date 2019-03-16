@@ -1,12 +1,12 @@
 import { Transaction } from 'prosemirror-state';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { TableLayout } from '@atlaskit/adf-schema';
+import { TableLayout } from '@findable/adf-schema';
 import {
   akEditorWideLayoutWidth,
   akEditorDefaultLayoutWidth,
   tableCellMinWidth,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 import { contentWidth } from '../pm-plugins/table-resizing/resizer/contentWidth';
 import {

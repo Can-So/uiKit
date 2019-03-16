@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { extractPropsFromDocument } from './extractPropsFromDocument';
-import Presentation24Icon from '@atlaskit/icon-file-type/glyph/presentation/24';
-import PowerpointPresentation24Icon from '@atlaskit/icon-file-type/glyph/powerpoint-presentation/24';
-import GoogleSlide24Icon from '@atlaskit/icon-file-type/glyph/google-slide/24';
+import Presentation24Icon from '@findable/icon-file-type/glyph/presentation/24';
+import PowerpointPresentation24Icon from '@findable/icon-file-type/glyph/powerpoint-presentation/24';
+import GoogleSlide24Icon from '@findable/icon-file-type/glyph/google-slide/24';
 export function extractPropsFromPresentation(json) {
     var props = extractPropsFromDocument(json);
     // We use vendor-specific variations of the icons, whenever possible

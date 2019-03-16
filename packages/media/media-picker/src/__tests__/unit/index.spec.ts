@@ -1,4 +1,4 @@
-import { AuthProvider, ContextFactory } from '@atlaskit/media-core';
+import { AuthProvider, ContextFactory } from '@findable/media-core';
 import { MediaPicker } from '../..';
 import { PopupImpl } from '../../components/popup';
 import { BinaryUploaderImpl } from '../../components/binary';

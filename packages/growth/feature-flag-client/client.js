@@ -23,7 +23,7 @@ var FeatureFlagClient = /** @class */ (function () {
                     ruleId: flag.explanation.ruleId,
                     value: flag.value,
                 },
-                source: '@atlaskit/feature-flag-client',
+                source: '@findable/feature-flag-client',
             });
             _this.trackedFlags[flagKey] = true;
         };

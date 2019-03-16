@@ -4,30 +4,30 @@ import * as ReactDOM from 'react-dom';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
-import AddIcon from '@atlaskit/icon/glyph/editor/add';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import TableIcon from '@atlaskit/icon/glyph/editor/table';
-import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
-import CodeIcon from '@atlaskit/icon/glyph/editor/code';
-import InfoIcon from '@atlaskit/icon/glyph/editor/info';
-import MentionIcon from '@atlaskit/icon/glyph/editor/mention';
-import TaskIcon from '@atlaskit/icon/glyph/editor/task';
-import DecisionIcon from '@atlaskit/icon/glyph/editor/decision';
-import QuoteIcon from '@atlaskit/icon/glyph/quote';
-import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
-import LinkIcon from '@atlaskit/icon/glyph/editor/link';
-import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
-import DateIcon from '@atlaskit/icon/glyph/editor/date';
-import StatusIcon from '@atlaskit/icon/glyph/status';
-import PlaceholderTextIcon from '@atlaskit/icon/glyph/media-services/text';
-import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
-import HorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rule';
+import AddIcon from '@findable/icon/glyph/editor/add';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
+import TableIcon from '@findable/icon/glyph/editor/table';
+import EditorImageIcon from '@findable/icon/glyph/editor/image';
+import CodeIcon from '@findable/icon/glyph/editor/code';
+import InfoIcon from '@findable/icon/glyph/editor/info';
+import MentionIcon from '@findable/icon/glyph/editor/mention';
+import TaskIcon from '@findable/icon/glyph/editor/task';
+import DecisionIcon from '@findable/icon/glyph/editor/decision';
+import QuoteIcon from '@findable/icon/glyph/quote';
+import EditorMoreIcon from '@findable/icon/glyph/editor/more';
+import LinkIcon from '@findable/icon/glyph/editor/link';
+import EmojiIcon from '@findable/icon/glyph/editor/emoji';
+import DateIcon from '@findable/icon/glyph/editor/date';
+import StatusIcon from '@findable/icon/glyph/status';
+import PlaceholderTextIcon from '@findable/icon/glyph/media-services/text';
+import LayoutTwoEqualIcon from '@findable/icon/glyph/editor/layout-two-equal';
+import HorizontalRuleIcon from '@findable/icon/glyph/editor/horizontal-rule';
 import {
   EmojiId,
   EmojiPicker as AkEmojiPicker,
   EmojiProvider,
-} from '@atlaskit/emoji';
-import { Popup, akEditorMenuZIndex } from '@atlaskit/editor-common';
+} from '@findable/emoji';
+import { Popup, akEditorMenuZIndex } from '@findable/editor-common';
 import EditorActions from '../../../../actions';
 import {
   analyticsService as analytics,

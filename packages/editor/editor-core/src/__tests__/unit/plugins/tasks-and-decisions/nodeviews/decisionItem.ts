@@ -1,4 +1,4 @@
-import { decisionItem, defaultSchema } from '@atlaskit/editor-test-helpers';
+import { decisionItem, defaultSchema } from '@findable/editor-test-helpers';
 import { decisionItemNodeView } from '../../../../../plugins/tasks-and-decisions/nodeviews/decisionItem';
 
 describe('Decision Item - NodeView', () => {

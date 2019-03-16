@@ -3,8 +3,8 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import { colors } from '@atlaskit/theme';
-import { borderRadius, size, center } from '@atlaskit/media-ui';
+import { colors } from '@findable/theme';
+import { borderRadius, size, center } from '@findable/media-ui';
 import { Root } from '../../styles';
 
 export const Wrapper: ComponentClass<HTMLAttributes<{}>> = styled(Root)`

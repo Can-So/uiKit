@@ -18,7 +18,7 @@ export default function gridSizeUnitless(root: any, j: any) {
   const localName = addNamedImport(
     root,
     j,
-    '@atlaskit/theme',
+    '@findable/theme',
     'gridSize',
     oldLocalName,
     sharedStylesImport,
@@ -47,7 +47,7 @@ export default function gridSizeUnitless(root: any, j: any) {
   removeNamedImport(
     root,
     j,
-    '@atlaskit/util-shared-styles',
+    '@findable/util-shared-styles',
     'akGridSizeUnitless',
     gridSizeImportSpecifier,
   );

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { MentionProvider, ResourcedMention } from '@atlaskit/mention';
+import { MentionProvider, ResourcedMention } from '@findable/mention';
 import {
   MentionEventHandlers,
   ProviderFactory,
   Providers,
   WithProviders,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 export interface MentionProps {
   id: string;

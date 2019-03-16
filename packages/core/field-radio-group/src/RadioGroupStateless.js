@@ -5,8 +5,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import Base, { Label } from '@atlaskit/field-base';
+} from '@findable/analytics-next';
+import Base, { Label } from '@findable/field-base';
 import { name as packageName, version as packageVersion } from './version.json';
 import Radio from './Radio';
 import type { RadioGroupStatelessPropTypes } from './types';

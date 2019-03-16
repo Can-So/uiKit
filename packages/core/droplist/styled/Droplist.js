@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { borderRadius, colors, gridSize, math } from '@atlaskit/theme';
+import { borderRadius, colors, gridSize, math } from '@findable/theme';
 /* When dropdown contains more than 9 elements (droplist items, droplist groups),
  * it should have scroll and cut off half of the 10th item to indicate that there are more
  * items then are seen. This was previously calculated by mapping over children, but with

@@ -1,7 +1,7 @@
 var _this = this;
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import styled from 'styled-components';
 import WithDocumentActions from '../consumers/with-document-actions';
 var Toolbar = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  padding: 0 20px;\n  height: 80px;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  padding: 0 20px;\n  height: 80px;\n"])));

@@ -11,7 +11,7 @@ import {
   RequestServiceOptions,
   utils,
   ServiceConfig,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 import * as URI from 'urijs';
 import * as unescapeHtml from 'unescape';
 

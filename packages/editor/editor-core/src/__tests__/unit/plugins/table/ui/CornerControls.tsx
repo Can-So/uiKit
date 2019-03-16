@@ -8,7 +8,7 @@ import {
   tdEmpty,
   thEmpty,
   mountWithIntl,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   pluginKey,

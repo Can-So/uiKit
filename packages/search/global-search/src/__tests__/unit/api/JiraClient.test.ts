@@ -1,4 +1,4 @@
-import { utils } from '@atlaskit/util-service-support';
+import { utils } from '@findable/util-service-support';
 
 import JiraClientImpl, { JiraClient } from '../../../api/JiraClient';
 import {

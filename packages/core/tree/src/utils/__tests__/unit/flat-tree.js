@@ -10,7 +10,7 @@ import { complexTree } from '../../../../mockdata/complexTree';
 const flatTreeWithTwoBranches = flattenTree(treeWithTwoBranches);
 const flatComplexTree = flattenTree(complexTree);
 
-describe('@atlaskit/tree - utils/flat-tree', () => {
+describe('@findable/tree - utils/flat-tree', () => {
   describe('#getSourcePath', () => {
     it('handles the top element', () => {
       expect(getSourcePath(flatTreeWithTwoBranches, 0)).toEqual([0]);

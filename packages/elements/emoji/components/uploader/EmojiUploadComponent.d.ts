@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { EmojiProvider } from '../../api/EmojiResource';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
+import { FireAnalyticsEvent } from '@findable/analytics';
 export interface UploadRefHandler {
     (ref: HTMLDivElement): void;
 }

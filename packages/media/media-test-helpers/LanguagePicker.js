@@ -2,9 +2,9 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
-import DropdownMenu, { DropdownItemGroup, DropdownItem, } from '@atlaskit/dropdown-menu';
-import WorldIcon from '@atlaskit/icon/glyph/world';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
+import DropdownMenu, { DropdownItemGroup, DropdownItem, } from '@findable/dropdown-menu';
+import WorldIcon from '@findable/icon/glyph/world';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
 var DropdownContainer = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  margin: 8px;\n  width: 200px;\n"], ["\n  margin: 8px;\n  width: 200px;\n"])));
 var LanguagePicker = /** @class */ (function (_super) {
     tslib_1.__extends(LanguagePicker, _super);

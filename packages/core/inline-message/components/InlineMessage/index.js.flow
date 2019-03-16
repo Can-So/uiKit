@@ -1,8 +1,8 @@
 // @flow
 import React, { Component, type Node } from 'react';
-import Button from '@atlaskit/button';
-import InlineDialog from '@atlaskit/inline-dialog';
-import type { Placement } from '@atlaskit/inline-dialog';
+import Button from '@findable/button';
+import InlineDialog from '@findable/inline-dialog';
+import type { Placement } from '@findable/inline-dialog';
 import IconForType from '../IconForType';
 import type { IconType } from '../../types';
 import { Root, ButtonContents, Text, Title } from './styledInlineMessage';

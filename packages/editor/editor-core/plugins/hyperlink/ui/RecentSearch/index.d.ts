@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 export interface Props {
     providerFactory: ProviderFactory;
     onBlur?: (text: string) => void;

@@ -1,4 +1,4 @@
-import { codeFontFamily, layers, colors, fontSize as defaultFontSize, } from '@atlaskit/theme';
+import { codeFontFamily, layers, colors, fontSize as defaultFontSize, } from '@findable/theme';
 var B100 = colors.B100, B300 = colors.B300, B400 = colors.B400, B50 = colors.B50, B75 = colors.B75, N0 = colors.N0, N20 = colors.N20, N40 = colors.N40, N50 = colors.N50, N100 = colors.N100, N500 = colors.N500, N700 = colors.N700, N900 = colors.N900, R300 = colors.R300, R50 = colors.R50, R75 = colors.R75, DN50 = colors.DN50, DN70 = colors.DN70;
 export var akEditorCodeFontFamily = codeFontFamily();
 export var akEditorInactiveForeground = N500;

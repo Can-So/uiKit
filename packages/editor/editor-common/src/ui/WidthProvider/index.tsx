@@ -1,6 +1,6 @@
 import * as React from 'react';
 import rafSchedule from 'raf-schd';
-import WidthDetector from '@atlaskit/width-detector';
+import WidthDetector from '@findable/width-detector';
 
 export const Breakpoints = {
   S: 'S',

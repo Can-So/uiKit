@@ -6,7 +6,7 @@ dialog footers and as stand-alone action triggers.
 ## Installation
 
 ```sh
-yarn add @atlaskit/color-picker
+yarn add @findable/color-picker
 ```
 
 ## Usage

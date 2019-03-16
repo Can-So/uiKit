@@ -7,7 +7,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent, UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent, UIAnalyticsEvent } from '@findable/analytics-next';
 import ManagedPagination from './managedPagination';
 import { name as packageName, version as packageVersion } from '../version.json';
 import { ASC, DESC, SMALL, LARGE } from '../internal/constants';

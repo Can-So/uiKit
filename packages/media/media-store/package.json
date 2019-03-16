@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/media-store",
+  "name": "@findable/media-store",
   "version": "11.0.0",
   "description": "Media Store API Web Client Library",
   "license": "Apache-2.0",
@@ -20,11 +20,11 @@
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.1.0",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/media-card": "^57.0.0",
-    "@atlaskit/media-test-helpers": "^21.0.0",
+    "@findable/build-utils": "^2.1.0",
+    "@findable/button": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/media-card": "^57.0.0",
+    "@findable/media-test-helpers": "^21.0.0",
     "@types/fetch-mock": "^6.0.3",
     "fetch-mock": "^6.5.2",
     "react": "^16.4.0",

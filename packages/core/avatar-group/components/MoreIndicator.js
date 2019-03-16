@@ -8,7 +8,7 @@ import _defineProperty from "@babel/runtime/helpers/defineProperty";
 
 /* eslint-disable react/no-unused-prop-types, react/prop-types, react/sort-comp */
 import React, { Component } from 'react';
-import { withPseudoState, getProps } from '@atlaskit/avatar';
+import { withPseudoState, getProps } from '@findable/avatar';
 import { Outer, Inner } from '../styled/MoreIndicator';
 var MAX_DISPLAY_COUNT = 99;
 

@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
-import Spinner from '@atlaskit/spinner';
-import { Popup } from '@atlaskit/editor-common';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Spinner from '@findable/spinner';
+import { Popup } from '@findable/editor-common';
+import Button, { ButtonGroup } from '@findable/button';
 
 import { withAnalytics } from '../../analytics';
 import ToolbarButton from '../ToolbarButton';

@@ -1,4 +1,4 @@
-import { EmailValidationResponse, OptionData, Value } from '@atlaskit/user-picker';
+import { EmailValidationResponse, OptionData, Value } from '@findable/user-picker';
 import { ConfigResponse, User } from '../types';
 /**
  * Decides if the warn message should be shown in the share form.

@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
-import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/arrow-left-circle';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import ArrowLeftCircleIcon from '@findable/icon/glyph/arrow-left-circle';
+import { gridSize as gridSizeFn } from '@findable/theme';
 
 import ConnectedItem from '../ConnectedItem';
 import type { BackItemProps } from './types';

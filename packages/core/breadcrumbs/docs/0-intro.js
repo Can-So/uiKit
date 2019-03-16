@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -15,17 +15,17 @@ export default md`
 
   ## Usage
 
-  ${code`import Breadcrumbs, { BreadcrumbsItem } from '@atlaskit/breadcrumbs';`}
+  ${code`import Breadcrumbs, { BreadcrumbsItem } from '@findable/breadcrumbs';`}
 
   or
 
-  ${code`import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';`}
+  ${code`import { BreadcrumbsStateless, BreadcrumbsItem } from '@findable/breadcrumbs';`}
 
   A BreadcrumbsStateless component with no items will not be rendered.
 
   ${(
     <Example
-      packageName="@atlaskit/breadcrumbs"
+      packageName="@findable/breadcrumbs"
       Component={require('../examples/0-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-basic')}
@@ -34,7 +34,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/breadcrumbs"
+      packageName="@findable/breadcrumbs"
       Component={require('../examples/1-expand').default}
       title="With Expand"
       source={require('!!raw-loader!../examples/1-expand')}

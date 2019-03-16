@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import { isChangeServiceAction } from '../../actions/changeService';
 import { buttonClickPayload } from '.';
-import { SCREEN_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { SCREEN_EVENT_TYPE } from '@findable/analytics-gas-types';
 export default (function (action) {
     if (isChangeServiceAction(action)) {
         if (action.serviceName === 'upload') {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@findable/media-core';
 import { MediaViewerFeatureFlags } from './domain';
 export declare type Props = Readonly<{
     onClose?: () => void;

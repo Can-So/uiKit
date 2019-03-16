@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import { FlagGroup } from '@atlaskit/flag';
+import Button from '@findable/button';
+import { FlagGroup } from '@findable/flag';
 import FeedbackCollector, { FeedbackFlag } from '../src';
 
 type State = { isOpen: boolean, displayFlag: boolean };

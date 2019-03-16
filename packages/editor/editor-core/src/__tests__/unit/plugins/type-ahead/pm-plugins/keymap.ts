@@ -4,7 +4,7 @@ import {
   p,
   typeAheadQuery,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { pluginKey } from '../../../../../plugins/type-ahead/pm-plugins/main';
 import { createTypeAheadPlugin } from './_create-type-ahead-plugin';
 

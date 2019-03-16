@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, code, Example } from '@atlaskit/docs';
+import { md, code, Example } from '@findable/docs';
 
 export default md`
 
@@ -9,7 +9,7 @@ of a field with both front-end and back-end validation.
 
 ${(
   <Example
-    packageName="@atlaskit/form"
+    packageName="@findable/form"
     Component={require('../examples/05-validation').default}
     title="Field validation"
     source={require('!!raw-loader!../examples/05-validation')}
@@ -27,8 +27,8 @@ gets passed the current field value and form state. If the validation fails,
 return the error. Otherwise, return undefined.
 
 ${code`
-import Form, { ErrorMessage, HelperMessage, ValidMessage } from '@atlaskit/form';
-import Button from '@atlaskit/button';
+import Form, { ErrorMessage, HelperMessage, ValidMessage } from '@findable/form';
+import Button from '@findable/button';
 import getUser from './api/getUser';
 
 const validate = value => {
@@ -83,9 +83,9 @@ key and the error as the value.
 If the submit succeeded, the onSubmit handler should return undefined.
 
 ${code`
-import Form, { Field } from '@atlaskit/form';
-import TextField from '@atlaskit/textfield';
-import Button from '@atlaskit/button';
+import Form, { Field } from '@findable/form';
+import TextField from '@findable/textfield';
+import Button from '@findable/button';
 import createUser from './api/createUser';
 
 const MyForm = () => (

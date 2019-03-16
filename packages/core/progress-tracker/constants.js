@@ -1,6 +1,6 @@
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 export var defaultGridSize = gridSize();
-/** Ideally these are exported by @atlaskit/page */
+/** Ideally these are exported by @findable/page */
 
 export var spacing = {
   comfortable: defaultGridSize * 5,

@@ -1,6 +1,6 @@
 // @flow
-import { itemThemeNamespace } from '@atlaskit/item';
-import { colors, themed } from '@atlaskit/theme';
+import { itemThemeNamespace } from '@findable/item';
+import { colors, themed } from '@findable/theme';
 import chromatism from 'chromatism';
 import {
   type DrawerTheme,
@@ -14,7 +14,7 @@ import {
   darkDrawerItemActiveBackground,
 } from '../constants';
 
-// These themes are copied over from @atlaskit/global-navigation to preserve the theming
+// These themes are copied over from @findable/global-navigation to preserve the theming
 // of search and starred drawers.
 
 const focus = {

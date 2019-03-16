@@ -1,4 +1,4 @@
-import { Transformer } from '@atlaskit/editor-common';
+import { Transformer } from '@findable/editor-common';
 import { Node as PMNode } from 'prosemirror-model';
 export declare type JSONNode = {
     type: string;

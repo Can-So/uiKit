@@ -4,7 +4,7 @@ A React component for displaying a clickable message which triggers an inline di
 
 ## Installation
 
-yarn add @atlaskit/inline-message
+yarn add @findable/inline-message
 
 ## Usage
 

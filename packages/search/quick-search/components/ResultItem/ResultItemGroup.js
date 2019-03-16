@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { ItemGroup } from '@atlaskit/item';
+import { ItemGroup } from '@findable/item';
 import { ResultItemGroupTitle, ResultItemGroupHeader } from './styled';
 var ResultItemGroup = /** @class */ (function (_super) {
     tslib_1.__extends(ResultItemGroup, _super);

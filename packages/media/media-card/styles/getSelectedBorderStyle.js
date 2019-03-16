@@ -1,5 +1,5 @@
-import { colors } from '@atlaskit/theme';
-import { borderRadius } from '@atlaskit/media-ui';
+import { colors } from '@findable/theme';
+import { borderRadius } from '@findable/media-ui';
 /*
  * Used to display the blue border around a selected card without
  * shrinking the image OR growing the card size

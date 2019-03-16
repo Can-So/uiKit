@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { AvatarItem } from '@atlaskit/avatar';
+import { AvatarItem } from '@findable/avatar';
 import * as React from 'react';
 import styled from 'styled-components';
 var AvatarComponent = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  &,\n  &:hover,\n  &:active,\n  &:focus {\n    padding: 0;\n    margin: 0;\n    border: none;\n  }\n"], ["\n  &,\n  &:hover,\n  &:active,\n  &:focus {\n    padding: 0;\n    margin: 0;\n    border: none;\n  }\n"])));

@@ -1,5 +1,5 @@
 // @flow
-import { akTypographyMixins as typo } from "@atlaskit/util-shared-styles";
+import { akTypographyMixins as typo } from "@findable/util-shared-styles";
 import styled from "styled-components";
 const VariousSizes = styled.div`
   ${typo.h100};
@@ -14,7 +14,7 @@ const VariousSizes = styled.div`
 `;
 //////
 // @flow
-import { typography } from "@atlaskit/theme";
+import { typography } from "@findable/theme";
 import styled from "styled-components";
 const VariousSizes = styled.div`
   ${typography.h100()};

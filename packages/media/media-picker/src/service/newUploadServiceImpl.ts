@@ -6,7 +6,7 @@ import {
   getMediaTypeFromMimeType,
   ContextFactory,
   fileStreamsCache,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import {
   MediaStore,
   MediaStoreCopyFileWithTokenBody,
@@ -16,7 +16,7 @@ import {
   MediaFile as MediaStoreMediaFile,
   TouchFileDescriptor,
   UploadableFileUpfrontIds,
-} from '@atlaskit/media-store';
+} from '@findable/media-store';
 import { EventEmitter2 } from 'eventemitter2';
 import { map } from 'rxjs/operators/map';
 import { MediaFile } from '../domain/file';

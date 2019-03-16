@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import WarningIcon from '@atlaskit/icon/glyph/editor/warning';
+import WarningIcon from '@findable/icon/glyph/editor/warning';
 
 import { ErrorIconWrapper } from './styled';
 

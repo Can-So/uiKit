@@ -1,27 +1,27 @@
-# @atlaskit/navigation
+# @findable/navigation
 
 ## 34.0.1
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/analytics-next@4.0.1
-  - @atlaskit/avatar@15.0.1
-  - @atlaskit/blanket@8.0.1
-  - @atlaskit/checkbox@6.0.1
-  - @atlaskit/dropdown-menu@7.0.1
-  - @atlaskit/field-text@8.0.1
-  - @atlaskit/icon@16.0.5
-  - @atlaskit/logo@10.0.1
-  - @atlaskit/page@9.0.1
-  - @atlaskit/section-message@2.0.1
-  - @atlaskit/single-select@7.0.1
-  - @atlaskit/theme@8.0.1
-  - @atlaskit/toggle@6.0.1
-  - @atlaskit/tooltip@13.0.1
-  - @atlaskit/button@11.0.0
-  - @atlaskit/quick-search@6.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/analytics-next@4.0.1
+  - @findable/avatar@15.0.1
+  - @findable/blanket@8.0.1
+  - @findable/checkbox@6.0.1
+  - @findable/dropdown-menu@7.0.1
+  - @findable/field-text@8.0.1
+  - @findable/icon@16.0.5
+  - @findable/logo@10.0.1
+  - @findable/page@9.0.1
+  - @findable/section-message@2.0.1
+  - @findable/single-select@7.0.1
+  - @findable/theme@8.0.1
+  - @findable/toggle@6.0.1
+  - @findable/tooltip@13.0.1
+  - @findable/button@11.0.0
+  - @findable/quick-search@6.0.0
 
 ## 34.0.0
-- [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [major] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -33,13 +33,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -53,604 +53,604 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 33.3.10
-- Updated dependencies [0de1251ad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0de1251ad1):
-  - @atlaskit/size-detector@6.0.0
+- Updated dependencies [0de1251ad1](https://github.com/fnamazing/uiKit/commits/0de1251ad1):
+  - @findable/size-detector@6.0.0
 
 ## 33.3.9
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/avatar@14.1.8
-  - @atlaskit/button@10.1.2
-  - @atlaskit/checkbox@5.0.11
-  - @atlaskit/dropdown-menu@6.1.26
-  - @atlaskit/item@8.0.15
-  - @atlaskit/section-message@1.0.16
-  - @atlaskit/single-select@6.0.12
-  - @atlaskit/toggle@5.0.15
-  - @atlaskit/tooltip@12.1.15
-  - @atlaskit/quick-search@5.2.5
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/avatar@14.1.8
+  - @findable/button@10.1.2
+  - @findable/checkbox@5.0.11
+  - @findable/dropdown-menu@6.1.26
+  - @findable/item@8.0.15
+  - @findable/section-message@1.0.16
+  - @findable/single-select@6.0.12
+  - @findable/toggle@5.0.15
+  - @findable/tooltip@12.1.15
+  - @findable/quick-search@5.2.5
+  - @findable/icon@16.0.0
 
 ## 33.3.8
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/analytics@4.0.7
-  - @atlaskit/analytics-next@3.1.2
-  - @atlaskit/avatar@14.1.7
-  - @atlaskit/blanket@7.0.12
-  - @atlaskit/button@10.1.1
-  - @atlaskit/checkbox@5.0.9
-  - @atlaskit/dropdown-menu@6.1.25
-  - @atlaskit/field-text@7.0.18
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/item@8.0.14
-  - @atlaskit/logo@9.2.6
-  - @atlaskit/page@8.0.12
-  - @atlaskit/polyfills@3.0.4
-  - @atlaskit/section-message@1.0.14
-  - @atlaskit/single-select@6.0.11
-  - @atlaskit/size-detector@5.0.9
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/toggle@5.0.14
-  - @atlaskit/tooltip@12.1.13
-  - @atlaskit/quick-search@5.2.4
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/analytics@4.0.7
+  - @findable/analytics-next@3.1.2
+  - @findable/avatar@14.1.7
+  - @findable/blanket@7.0.12
+  - @findable/button@10.1.1
+  - @findable/checkbox@5.0.9
+  - @findable/dropdown-menu@6.1.25
+  - @findable/field-text@7.0.18
+  - @findable/icon@15.0.2
+  - @findable/item@8.0.14
+  - @findable/logo@9.2.6
+  - @findable/page@8.0.12
+  - @findable/polyfills@3.0.4
+  - @findable/section-message@1.0.14
+  - @findable/single-select@6.0.11
+  - @findable/size-detector@5.0.9
+  - @findable/theme@7.0.1
+  - @findable/toggle@5.0.14
+  - @findable/tooltip@12.1.13
+  - @findable/quick-search@5.2.4
+  - @findable/docs@6.0.0
 
 ## 33.3.7
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/blanket@7.0.11
-  - @atlaskit/button@10.0.4
-  - @atlaskit/checkbox@5.0.8
-  - @atlaskit/dropdown-menu@6.1.24
-  - @atlaskit/field-text@7.0.16
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/item@8.0.13
-  - @atlaskit/logo@9.2.5
-  - @atlaskit/section-message@1.0.13
-  - @atlaskit/single-select@6.0.10
-  - @atlaskit/toggle@5.0.13
-  - @atlaskit/tooltip@12.1.12
-  - @atlaskit/quick-search@5.2.1
-  - @atlaskit/theme@7.0.0
-  - @atlaskit/avatar@14.1.6
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/blanket@7.0.11
+  - @findable/button@10.0.4
+  - @findable/checkbox@5.0.8
+  - @findable/dropdown-menu@6.1.24
+  - @findable/field-text@7.0.16
+  - @findable/icon@15.0.1
+  - @findable/item@8.0.13
+  - @findable/logo@9.2.5
+  - @findable/section-message@1.0.13
+  - @findable/single-select@6.0.10
+  - @findable/toggle@5.0.13
+  - @findable/tooltip@12.1.12
+  - @findable/quick-search@5.2.1
+  - @findable/theme@7.0.0
+  - @findable/avatar@14.1.6
 
 ## 33.3.6
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/avatar@14.1.5
-  - @atlaskit/button@10.0.1
-  - @atlaskit/checkbox@5.0.7
-  - @atlaskit/dropdown-menu@6.1.23
-  - @atlaskit/item@8.0.12
-  - @atlaskit/section-message@1.0.12
-  - @atlaskit/single-select@6.0.9
-  - @atlaskit/toggle@5.0.12
-  - @atlaskit/tooltip@12.1.11
-  - @atlaskit/quick-search@5.1.2
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/avatar@14.1.5
+  - @findable/button@10.0.1
+  - @findable/checkbox@5.0.7
+  - @findable/dropdown-menu@6.1.23
+  - @findable/item@8.0.12
+  - @findable/section-message@1.0.12
+  - @findable/single-select@6.0.9
+  - @findable/toggle@5.0.12
+  - @findable/tooltip@12.1.11
+  - @findable/quick-search@5.1.2
+  - @findable/icon@15.0.0
 
 ## 33.3.5
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/analytics-next@3.1.1
-  - @atlaskit/avatar@14.1.4
-  - @atlaskit/blanket@7.0.10
-  - @atlaskit/checkbox@5.0.6
-  - @atlaskit/dropdown-menu@6.1.22
-  - @atlaskit/field-text@7.0.15
-  - @atlaskit/icon@14.6.1
-  - @atlaskit/logo@9.2.4
-  - @atlaskit/page@8.0.11
-  - @atlaskit/section-message@1.0.11
-  - @atlaskit/single-select@6.0.8
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/toggle@5.0.11
-  - @atlaskit/tooltip@12.1.10
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/analytics-next@3.1.1
+  - @findable/avatar@14.1.4
+  - @findable/blanket@7.0.10
+  - @findable/checkbox@5.0.6
+  - @findable/dropdown-menu@6.1.22
+  - @findable/field-text@7.0.15
+  - @findable/icon@14.6.1
+  - @findable/logo@9.2.4
+  - @findable/page@8.0.11
+  - @findable/section-message@1.0.11
+  - @findable/single-select@6.0.8
+  - @findable/theme@6.2.1
+  - @findable/toggle@5.0.11
+  - @findable/tooltip@12.1.10
+  - @findable/button@10.0.0
 
 ## 33.3.4
-- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+- [patch] [abd3a39](https://github.com/fnamazing/uiKit/commits/abd3a39):
 
   - Bump react-beautiful-dnd dependency to v10.0.2
 
 ## 33.3.3
-- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+- [patch] [a637f5e](https://github.com/fnamazing/uiKit/commits/a637f5e):
 
-  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+  - Refine and fix some flow type errors found by fixing @findable/analytics-next HOCs to allow flow to type check properly
 
 ## 33.3.2
-- [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
+- [patch] [b332c91](https://github.com/fnamazing/uiKit/commits/b332c91):
 
   - upgrades verison of react-scrolllock to SSR safe version
 
 ## 33.3.1
-- Updated dependencies [2da04ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2da04ed):
-  - @atlaskit/quick-search@5.0.0
+- Updated dependencies [2da04ed](https://github.com/fnamazing/uiKit/commits/2da04ed):
+  - @findable/quick-search@5.0.0
 
 ## 33.3.0
-- [minor] [90f4995](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90f4995):
+- [minor] [90f4995](https://github.com/fnamazing/uiKit/commits/90f4995):
 
   Update drawer width with 'medium' width
 
 ## 33.2.1
-- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://github.com/fnamazing/uiKit/commits/b71751b)
 
 ## 33.2.0
-- [minor] Fire navigationItem clicked event on navigation channel for global item clicks if an id prop is provided [480d00b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/480d00b)
-- [minor] Fire expand/collapse analytics on navigation channel [6e90e67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e90e67)
+- [minor] Fire navigationItem clicked event on navigation channel for global item clicks if an id prop is provided [480d00b](https://github.com/fnamazing/uiKit/commits/480d00b)
+- [minor] Fire expand/collapse analytics on navigation channel [6e90e67](https://github.com/fnamazing/uiKit/commits/6e90e67)
 
 ## 33.1.11
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/avatar@14.0.11
-  - @atlaskit/button@9.0.13
-  - @atlaskit/checkbox@5.0.2
-  - @atlaskit/dropdown-menu@6.1.17
-  - @atlaskit/item@8.0.8
-  - @atlaskit/single-select@6.0.6
-  - @atlaskit/toggle@5.0.9
-  - @atlaskit/tooltip@12.1.1
-  - @atlaskit/quick-search@4.2.9
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/avatar@14.0.11
+  - @findable/button@9.0.13
+  - @findable/checkbox@5.0.2
+  - @findable/dropdown-menu@6.1.17
+  - @findable/item@8.0.8
+  - @findable/single-select@6.0.6
+  - @findable/toggle@5.0.9
+  - @findable/tooltip@12.1.1
+  - @findable/quick-search@4.2.9
+  - @findable/icon@14.0.0
 
 ## 33.1.10
-- [patch] Pulling the shared styles from @atlaskit/theme and removed dependency on util-shraed-styles [7d51a09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d51a09)
+- [patch] Pulling the shared styles from @findable/theme and removed dependency on util-shraed-styles [7d51a09](https://github.com/fnamazing/uiKit/commits/7d51a09)
 
 ## 33.1.9
-- [patch] Updated dependencies [80e1925](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80e1925)
-  - @atlaskit/button@9.0.9
-  - @atlaskit/checkbox@5.0.0
+- [patch] Updated dependencies [80e1925](https://github.com/fnamazing/uiKit/commits/80e1925)
+  - @findable/button@9.0.9
+  - @findable/checkbox@5.0.0
 
 ## 33.1.8
-- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://github.com/fnamazing/uiKit/commits/b5d6d04)
 
 ## 33.1.7
-- [patch] Make navigation SSR-friendly [59f7cb4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59f7cb4)
+- [patch] Make navigation SSR-friendly [59f7cb4](https://github.com/fnamazing/uiKit/commits/59f7cb4)
 
 ## 33.1.5
-- [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/quick-search@4.2.7
-  - @atlaskit/tooltip@12.0.9
-  - @atlaskit/toggle@5.0.6
-  - @atlaskit/single-select@6.0.4
-  - @atlaskit/item@8.0.5
-  - @atlaskit/icon@13.2.5
-  - @atlaskit/field-text@7.0.6
-  - @atlaskit/dropdown-menu@6.1.8
-  - @atlaskit/checkbox@4.0.4
-  - @atlaskit/button@9.0.6
-  - @atlaskit/blanket@7.0.5
-  - @atlaskit/avatar@14.0.8
-  - @atlaskit/docs@5.0.6
+- [patch] Updated dependencies [df22ad8](https://github.com/fnamazing/uiKit/commits/df22ad8)
+  - @findable/theme@6.0.0
+  - @findable/quick-search@4.2.7
+  - @findable/tooltip@12.0.9
+  - @findable/toggle@5.0.6
+  - @findable/single-select@6.0.4
+  - @findable/item@8.0.5
+  - @findable/icon@13.2.5
+  - @findable/field-text@7.0.6
+  - @findable/dropdown-menu@6.1.8
+  - @findable/checkbox@4.0.4
+  - @findable/button@9.0.6
+  - @findable/blanket@7.0.5
+  - @findable/avatar@14.0.8
+  - @findable/docs@5.0.6
 
 ## 33.1.4
-- [patch] Bumping react-beautiful-dnd to version 9. Making use of use onBeforeDragStart for dynamic table [9cbd494](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9cbd494)
-- [none] Updated dependencies [9cbd494](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9cbd494)
+- [patch] Bumping react-beautiful-dnd to version 9. Making use of use onBeforeDragStart for dynamic table [9cbd494](https://github.com/fnamazing/uiKit/commits/9cbd494)
+- [none] Updated dependencies [9cbd494](https://github.com/fnamazing/uiKit/commits/9cbd494)
 
 ## 33.1.3
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/quick-search@4.2.6
-  - @atlaskit/page@8.0.3
-  - @atlaskit/tooltip@12.0.5
-  - @atlaskit/logo@9.0.3
-  - @atlaskit/field-text@7.0.4
-  - @atlaskit/analytics-next@3.0.4
-  - @atlaskit/toggle@5.0.5
-  - @atlaskit/checkbox@4.0.3
-  - @atlaskit/button@9.0.5
-  - @atlaskit/theme@5.1.3
-  - @atlaskit/size-detector@5.0.4
-  - @atlaskit/analytics@4.0.4
-  - @atlaskit/blanket@7.0.4
-  - @atlaskit/item@8.0.4
-  - @atlaskit/icon@13.2.4
-  - @atlaskit/dropdown-menu@6.1.5
-  - @atlaskit/avatar@14.0.6
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/quick-search@4.2.6
+  - @findable/page@8.0.3
+  - @findable/tooltip@12.0.5
+  - @findable/logo@9.0.3
+  - @findable/field-text@7.0.4
+  - @findable/analytics-next@3.0.4
+  - @findable/toggle@5.0.5
+  - @findable/checkbox@4.0.3
+  - @findable/button@9.0.5
+  - @findable/theme@5.1.3
+  - @findable/size-detector@5.0.4
+  - @findable/analytics@4.0.4
+  - @findable/blanket@7.0.4
+  - @findable/item@8.0.4
+  - @findable/icon@13.2.4
+  - @findable/dropdown-menu@6.1.5
+  - @findable/avatar@14.0.6
 
 ## 33.1.2
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/logo@9.0.2
-  - @atlaskit/quick-search@4.2.4
-  - @atlaskit/page@8.0.2
-  - @atlaskit/tooltip@12.0.4
-  - @atlaskit/item@8.0.3
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/toggle@5.0.4
-  - @atlaskit/single-select@6.0.3
-  - @atlaskit/checkbox@4.0.2
-  - @atlaskit/button@9.0.4
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/field-text@7.0.3
-  - @atlaskit/blanket@7.0.3
-  - @atlaskit/analytics-next@3.0.3
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/size-detector@5.0.3
-  - @atlaskit/polyfills@3.0.1
-  - @atlaskit/analytics@4.0.3
-  - @atlaskit/dropdown-menu@6.1.4
-  - @atlaskit/avatar@14.0.5
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/logo@9.0.2
+  - @findable/quick-search@4.2.4
+  - @findable/page@8.0.2
+  - @findable/tooltip@12.0.4
+  - @findable/item@8.0.3
+  - @findable/icon@13.2.2
+  - @findable/toggle@5.0.4
+  - @findable/single-select@6.0.3
+  - @findable/checkbox@4.0.2
+  - @findable/button@9.0.4
+  - @findable/theme@5.1.2
+  - @findable/field-text@7.0.3
+  - @findable/blanket@7.0.3
+  - @findable/analytics-next@3.0.3
+  - @findable/docs@5.0.2
+  - @findable/size-detector@5.0.3
+  - @findable/polyfills@3.0.1
+  - @findable/analytics@4.0.3
+  - @findable/dropdown-menu@6.1.4
+  - @findable/avatar@14.0.5
 
 ## 33.1.1
-- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-- [none] Updated dependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-  - @atlaskit/tooltip@12.0.3
-  - @atlaskit/logo@9.0.1
-  - @atlaskit/field-text@7.0.2
-  - @atlaskit/analytics-next@3.0.2
-  - @atlaskit/toggle@5.0.3
-  - @atlaskit/page@8.0.1
-  - @atlaskit/checkbox@4.0.1
-  - @atlaskit/button@9.0.3
-  - @atlaskit/theme@5.1.1
-  - @atlaskit/size-detector@5.0.2
-  - @atlaskit/analytics@4.0.2
-  - @atlaskit/blanket@7.0.2
-  - @atlaskit/item@8.0.2
-  - @atlaskit/icon@13.2.1
-  - @atlaskit/dropdown-menu@6.1.3
-  - @atlaskit/avatar@14.0.4
+- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+- [none] Updated dependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+  - @findable/tooltip@12.0.3
+  - @findable/logo@9.0.1
+  - @findable/field-text@7.0.2
+  - @findable/analytics-next@3.0.2
+  - @findable/toggle@5.0.3
+  - @findable/page@8.0.1
+  - @findable/checkbox@4.0.1
+  - @findable/button@9.0.3
+  - @findable/theme@5.1.1
+  - @findable/size-detector@5.0.2
+  - @findable/analytics@4.0.2
+  - @findable/blanket@7.0.2
+  - @findable/item@8.0.2
+  - @findable/icon@13.2.1
+  - @findable/dropdown-menu@6.1.3
+  - @findable/avatar@14.0.4
 
 ## 33.1.0
-- [minor] Add `itemTextWidth` prop to SkeletonContainerItems and SkeletonContainerItem components. Add `isAvatarHidden` prop to SkeletonDefaultContainerHeader. This enables usage of skeleton components for Atlaskit drawers. [acd3271](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd3271)
-- [minor] Updated dependencies [acd3271](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd3271)
+- [minor] Add `itemTextWidth` prop to SkeletonContainerItems and SkeletonContainerItem components. Add `isAvatarHidden` prop to SkeletonDefaultContainerHeader. This enables usage of skeleton components for Atlaskit drawers. [acd3271](https://github.com/fnamazing/uiKit/commits/acd3271)
+- [minor] Updated dependencies [acd3271](https://github.com/fnamazing/uiKit/commits/acd3271)
 
 ## 33.0.5
-- [patch] Upgrading react-beautiful-dnd to 8.0.1 [87cd977](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/87cd977)
-- [patch] Upgrading react-beautiful-dnd to 8.0.0 [22efc08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/22efc08)
-- [none] Updated dependencies [87cd977](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/87cd977)
-- [none] Updated dependencies [22efc08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/22efc08)
+- [patch] Upgrading react-beautiful-dnd to 8.0.1 [87cd977](https://github.com/fnamazing/uiKit/commits/87cd977)
+- [patch] Upgrading react-beautiful-dnd to 8.0.0 [22efc08](https://github.com/fnamazing/uiKit/commits/22efc08)
+- [none] Updated dependencies [87cd977](https://github.com/fnamazing/uiKit/commits/87cd977)
+- [none] Updated dependencies [22efc08](https://github.com/fnamazing/uiKit/commits/22efc08)
 
 ## 33.0.4
-- [patch] Upgrading react-beautiful-dnd to 8.0.5 [6052132](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6052132)
-- [none] Updated dependencies [6052132](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6052132)
+- [patch] Upgrading react-beautiful-dnd to 8.0.5 [6052132](https://github.com/fnamazing/uiKit/commits/6052132)
+- [none] Updated dependencies [6052132](https://github.com/fnamazing/uiKit/commits/6052132)
 
 ## 33.0.3
-- [patch] add border radius back to navigation items [97eb578](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97eb578)
-- [none] Updated dependencies [97eb578](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/97eb578)
+- [patch] add border radius back to navigation items [97eb578](https://github.com/fnamazing/uiKit/commits/97eb578)
+- [none] Updated dependencies [97eb578](https://github.com/fnamazing/uiKit/commits/97eb578)
 
 ## 33.0.2
-- [patch] Move analytics tests and replace elements to core [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-- [none] Updated dependencies [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-  - @atlaskit/tooltip@12.0.1
-  - @atlaskit/single-select@6.0.1
-  - @atlaskit/field-text@7.0.1
-  - @atlaskit/analytics-next@3.0.1
-  - @atlaskit/toggle@5.0.1
-  - @atlaskit/button@9.0.2
-  - @atlaskit/docs@5.0.1
-  - @atlaskit/size-detector@5.0.1
-  - @atlaskit/analytics@4.0.1
-  - @atlaskit/blanket@7.0.1
-  - @atlaskit/dropdown-menu@6.1.2
-  - @atlaskit/avatar@14.0.2
+- [patch] Move analytics tests and replace elements to core [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+- [none] Updated dependencies [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+  - @findable/tooltip@12.0.1
+  - @findable/single-select@6.0.1
+  - @findable/field-text@7.0.1
+  - @findable/analytics-next@3.0.1
+  - @findable/toggle@5.0.1
+  - @findable/button@9.0.2
+  - @findable/docs@5.0.1
+  - @findable/size-detector@5.0.1
+  - @findable/analytics@4.0.1
+  - @findable/blanket@7.0.1
+  - @findable/dropdown-menu@6.1.2
+  - @findable/avatar@14.0.2
 
 ## 33.0.1
-- [patch] Updated dependencies [e6b1985](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6b1985)
-  - @atlaskit/tooltip@12.0.0
-  - @atlaskit/item@8.0.1
-  - @atlaskit/icon@13.1.1
-  - @atlaskit/dropdown-menu@6.1.1
-  - @atlaskit/avatar@14.0.1
+- [patch] Updated dependencies [e6b1985](https://github.com/fnamazing/uiKit/commits/e6b1985)
+  - @findable/tooltip@12.0.0
+  - @findable/item@8.0.1
+  - @findable/icon@13.1.1
+  - @findable/dropdown-menu@6.1.1
+  - @findable/avatar@14.0.1
 
 ## 33.0.0
-- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/logo@9.0.0
-  - @atlaskit/quick-search@4.0.0
-  - @atlaskit/single-select@6.0.0
-  - @atlaskit/field-text@7.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/toggle@5.0.0
-  - @atlaskit/page@8.0.0
-  - @atlaskit/checkbox@4.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/size-detector@5.0.0
-  - @atlaskit/polyfills@3.0.0
-  - @atlaskit/analytics@4.0.0
-  - @atlaskit/blanket@7.0.0
-  - @atlaskit/item@8.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/dropdown-menu@6.0.0
-  - @atlaskit/avatar@14.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/quick-search@4.0.0
-  - @atlaskit/page@8.0.0
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/logo@9.0.0
-  - @atlaskit/single-select@6.0.0
-  - @atlaskit/field-text@7.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/toggle@5.0.0
-  - @atlaskit/checkbox@4.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/size-detector@5.0.0
-  - @atlaskit/polyfills@3.0.0
-  - @atlaskit/analytics@4.0.0
-  - @atlaskit/blanket@7.0.0
-  - @atlaskit/item@8.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/dropdown-menu@6.0.0
-  - @atlaskit/avatar@14.0.0
+- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/tooltip@11.0.0
+  - @findable/logo@9.0.0
+  - @findable/quick-search@4.0.0
+  - @findable/single-select@6.0.0
+  - @findable/field-text@7.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/toggle@5.0.0
+  - @findable/page@8.0.0
+  - @findable/checkbox@4.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
+  - @findable/size-detector@5.0.0
+  - @findable/polyfills@3.0.0
+  - @findable/analytics@4.0.0
+  - @findable/blanket@7.0.0
+  - @findable/item@8.0.0
+  - @findable/icon@13.0.0
+  - @findable/dropdown-menu@6.0.0
+  - @findable/avatar@14.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/quick-search@4.0.0
+  - @findable/page@8.0.0
+  - @findable/tooltip@11.0.0
+  - @findable/logo@9.0.0
+  - @findable/single-select@6.0.0
+  - @findable/field-text@7.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/toggle@5.0.0
+  - @findable/checkbox@4.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
+  - @findable/size-detector@5.0.0
+  - @findable/polyfills@3.0.0
+  - @findable/analytics@4.0.0
+  - @findable/blanket@7.0.0
+  - @findable/item@8.0.0
+  - @findable/icon@13.0.0
+  - @findable/dropdown-menu@6.0.0
+  - @findable/avatar@14.0.0
 
 ## 32.3.3
 
 
-- [none] Updated dependencies [da63331](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da63331)
-  - @atlaskit/button@8.2.5
-  - @atlaskit/item@7.0.8
-  - @atlaskit/quick-search@3.0.1
-  - @atlaskit/single-select@5.2.5
-  - @atlaskit/dropdown-menu@5.2.3
-  - @atlaskit/avatar@13.0.0
-- [patch] Updated dependencies [7724115](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7724115)
-  - @atlaskit/avatar@13.0.0
-  - @atlaskit/quick-search@3.0.1
-  - @atlaskit/button@8.2.5
-  - @atlaskit/single-select@5.2.5
-  - @atlaskit/item@7.0.8
-  - @atlaskit/dropdown-menu@5.2.3
+- [none] Updated dependencies [da63331](https://github.com/fnamazing/uiKit/commits/da63331)
+  - @findable/button@8.2.5
+  - @findable/item@7.0.8
+  - @findable/quick-search@3.0.1
+  - @findable/single-select@5.2.5
+  - @findable/dropdown-menu@5.2.3
+  - @findable/avatar@13.0.0
+- [patch] Updated dependencies [7724115](https://github.com/fnamazing/uiKit/commits/7724115)
+  - @findable/avatar@13.0.0
+  - @findable/quick-search@3.0.1
+  - @findable/button@8.2.5
+  - @findable/single-select@5.2.5
+  - @findable/item@7.0.8
+  - @findable/dropdown-menu@5.2.3
 
 ## 32.3.2
 
 
-- [patch] Updated dependencies [8bf8e51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8bf8e51)
-  - @atlaskit/quick-search@3.0.0
-- [none] Updated dependencies [8b8ace1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b8ace1)
-  - @atlaskit/quick-search@3.0.0
+- [patch] Updated dependencies [8bf8e51](https://github.com/fnamazing/uiKit/commits/8bf8e51)
+  - @findable/quick-search@3.0.0
+- [none] Updated dependencies [8b8ace1](https://github.com/fnamazing/uiKit/commits/8b8ace1)
+  - @findable/quick-search@3.0.0
 
 ## 32.3.1
-- [patch] Updated dependencies [8a01bcd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a01bcd)
-  - @atlaskit/avatar@12.0.0
-  - @atlaskit/quick-search@2.3.4
-  - @atlaskit/single-select@5.2.4
-  - @atlaskit/item@7.0.7
-  - @atlaskit/dropdown-menu@5.2.2
+- [patch] Updated dependencies [8a01bcd](https://github.com/fnamazing/uiKit/commits/8a01bcd)
+  - @findable/avatar@12.0.0
+  - @findable/quick-search@2.3.4
+  - @findable/single-select@5.2.4
+  - @findable/item@7.0.7
+  - @findable/dropdown-menu@5.2.2
 
 ## 32.3.0
-- [minor] Drawer content is scrollable. Drawer header stays fixed in position. [d4b23f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d4b23f1)
-- [none] Updated dependencies [d4b23f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d4b23f1)
+- [minor] Drawer content is scrollable. Drawer header stays fixed in position. [d4b23f1](https://github.com/fnamazing/uiKit/commits/d4b23f1)
+- [none] Updated dependencies [d4b23f1](https://github.com/fnamazing/uiKit/commits/d4b23f1)
 
 ## 32.2.4
-- [patch] Remove or update $FlowFixMe [e8ad98a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8ad98a)
-- [none] Updated dependencies [e8ad98a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8ad98a)
-  - @atlaskit/field-text@6.1.1
-  - @atlaskit/button@8.2.4
-  - @atlaskit/icon@12.6.1
-  - @atlaskit/dropdown-menu@5.2.1
-  - @atlaskit/avatar@11.2.2
+- [patch] Remove or update $FlowFixMe [e8ad98a](https://github.com/fnamazing/uiKit/commits/e8ad98a)
+- [none] Updated dependencies [e8ad98a](https://github.com/fnamazing/uiKit/commits/e8ad98a)
+  - @findable/field-text@6.1.1
+  - @findable/button@8.2.4
+  - @findable/icon@12.6.1
+  - @findable/dropdown-menu@5.2.1
+  - @findable/avatar@11.2.2
 
 ## 32.2.3
-- [patch] Fix $FlowFixMe and release packages [25d0b2d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25d0b2d)
-- [none] Updated dependencies [25d0b2d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25d0b2d)
-  - @atlaskit/tooltip@10.3.1
-  - @atlaskit/single-select@5.2.1
-  - @atlaskit/button@8.2.2
-  - @atlaskit/analytics@3.0.6
-  - @atlaskit/checkbox@3.1.2
-  - @atlaskit/icon@12.3.1
-  - @atlaskit/avatar@11.2.1
+- [patch] Fix $FlowFixMe and release packages [25d0b2d](https://github.com/fnamazing/uiKit/commits/25d0b2d)
+- [none] Updated dependencies [25d0b2d](https://github.com/fnamazing/uiKit/commits/25d0b2d)
+  - @findable/tooltip@10.3.1
+  - @findable/single-select@5.2.1
+  - @findable/button@8.2.2
+  - @findable/analytics@3.0.6
+  - @findable/checkbox@3.1.2
+  - @findable/icon@12.3.1
+  - @findable/avatar@11.2.1
 
 ## 32.2.2
-- [patch] Replaces implementation of ScrollLock with [react-scrolllock](https://github.com/jossmac/react-scrolllock). Deprecates ScrollLock export in @atlaskit/layer-manager. [497d50d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/497d50d)
-- [none] Updated dependencies [497d50d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/497d50d)
+- [patch] Replaces implementation of ScrollLock with [react-scrolllock](https://github.com/jossmac/react-scrolllock). Deprecates ScrollLock export in @findable/layer-manager. [497d50d](https://github.com/fnamazing/uiKit/commits/497d50d)
+- [none] Updated dependencies [497d50d](https://github.com/fnamazing/uiKit/commits/497d50d)
 
 ## 32.2.1
-- [patch] Upgrading react-beautiful-dnd dependency to ^7.1.3 [024b7fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/024b7fb)
-- [patch] Updated dependencies [024b7fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/024b7fb)
+- [patch] Upgrading react-beautiful-dnd dependency to ^7.1.3 [024b7fb](https://github.com/fnamazing/uiKit/commits/024b7fb)
+- [patch] Updated dependencies [024b7fb](https://github.com/fnamazing/uiKit/commits/024b7fb)
 
 ## 32.2.0
-- [minor] Fixes types for Flow 0.74 [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-- [none] Updated dependencies [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-  - @atlaskit/quick-search@2.3.0
-  - @atlaskit/page@7.2.0
-  - @atlaskit/tooltip@10.3.0
-  - @atlaskit/single-select@5.2.0
-  - @atlaskit/button@8.2.0
-  - @atlaskit/checkbox@3.1.0
-  - @atlaskit/icon@12.2.0
-  - @atlaskit/dropdown-menu@5.1.0
-  - @atlaskit/avatar@11.2.0
+- [minor] Fixes types for Flow 0.74 [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+- [none] Updated dependencies [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+  - @findable/quick-search@2.3.0
+  - @findable/page@7.2.0
+  - @findable/tooltip@10.3.0
+  - @findable/single-select@5.2.0
+  - @findable/button@8.2.0
+  - @findable/checkbox@3.1.0
+  - @findable/icon@12.2.0
+  - @findable/dropdown-menu@5.1.0
+  - @findable/avatar@11.2.0
 
 ## 32.1.1
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/tooltip@10.2.1
-  - @atlaskit/single-select@5.1.2
-  - @atlaskit/field-text@6.0.4
-  - @atlaskit/button@8.1.2
-  - @atlaskit/toggle@4.0.3
-  - @atlaskit/page@7.1.1
-  - @atlaskit/theme@4.0.4
-  - @atlaskit/size-detector@4.1.2
-  - @atlaskit/polyfills@2.0.4
-  - @atlaskit/logo@8.1.2
-  - @atlaskit/checkbox@3.0.6
-  - @atlaskit/item@7.0.5
-  - @atlaskit/icon@12.1.2
-  - @atlaskit/dropdown-menu@5.0.4
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/tooltip@10.2.1
+  - @findable/single-select@5.1.2
+  - @findable/field-text@6.0.4
+  - @findable/button@8.1.2
+  - @findable/toggle@4.0.3
+  - @findable/page@7.1.1
+  - @findable/theme@4.0.4
+  - @findable/size-detector@4.1.2
+  - @findable/polyfills@2.0.4
+  - @findable/logo@8.1.2
+  - @findable/checkbox@3.0.6
+  - @findable/item@7.0.5
+  - @findable/icon@12.1.2
+  - @findable/dropdown-menu@5.0.4
 
 ## 32.1.0
-- [none] Updated dependencies [9d20f54](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d20f54)
-  - @atlaskit/single-select@5.1.0
-  - @atlaskit/quick-search@2.1.0
-  - @atlaskit/page@7.1.0
-  - @atlaskit/tooltip@10.2.0
-  - @atlaskit/item@7.0.3
-  - @atlaskit/dropdown-menu@5.0.2
-  - @atlaskit/avatar@11.1.0
-  - @atlaskit/icon@12.1.0
-  - @atlaskit/toggle@4.0.2
-  - @atlaskit/logo@8.1.0
-  - @atlaskit/checkbox@3.0.4
-  - @atlaskit/docs@4.1.0
-  - @atlaskit/theme@4.0.2
-  - @atlaskit/size-detector@4.1.0
-  - @atlaskit/field-text@6.0.2
-  - @atlaskit/blanket@6.0.2
-  - @atlaskit/analytics@3.0.4
-  - @atlaskit/button@8.1.0
+- [none] Updated dependencies [9d20f54](https://github.com/fnamazing/uiKit/commits/9d20f54)
+  - @findable/single-select@5.1.0
+  - @findable/quick-search@2.1.0
+  - @findable/page@7.1.0
+  - @findable/tooltip@10.2.0
+  - @findable/item@7.0.3
+  - @findable/dropdown-menu@5.0.2
+  - @findable/avatar@11.1.0
+  - @findable/icon@12.1.0
+  - @findable/toggle@4.0.2
+  - @findable/logo@8.1.0
+  - @findable/checkbox@3.0.4
+  - @findable/docs@4.1.0
+  - @findable/theme@4.0.2
+  - @findable/size-detector@4.1.0
+  - @findable/field-text@6.0.2
+  - @findable/blanket@6.0.2
+  - @findable/analytics@3.0.4
+  - @findable/button@8.1.0
 
 ## 32.0.2
-- [patch] Fixing onKeyDown callback on AkNavigationItem. [44137ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44137ed)
-- [patch] Updated dependencies [44137ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44137ed)
-  - @atlaskit/item@7.0.2
+- [patch] Fixing onKeyDown callback on AkNavigationItem. [44137ed](https://github.com/fnamazing/uiKit/commits/44137ed)
+- [patch] Updated dependencies [44137ed](https://github.com/fnamazing/uiKit/commits/44137ed)
+  - @findable/item@7.0.2
 
 ## 32.0.1
-- [patch] Updated dependencies [223cd67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/223cd67)
-  - @atlaskit/tooltip@10.0.1
-  - @atlaskit/page@7.0.1
-  - @atlaskit/item@7.0.1
-  - @atlaskit/icon@12.0.1
-  - @atlaskit/toggle@4.0.1
-  - @atlaskit/logo@8.0.1
-  - @atlaskit/field-text@6.0.1
-  - @atlaskit/checkbox@3.0.1
-  - @atlaskit/button@8.0.1
-  - @atlaskit/theme@4.0.1
-  - @atlaskit/blanket@6.0.1
-  - @atlaskit/docs@4.0.1
-  - @atlaskit/size-detector@4.0.1
-  - @atlaskit/polyfills@2.0.3
-  - @atlaskit/analytics@3.0.3
-  - @atlaskit/dropdown-menu@5.0.1
-  - @atlaskit/avatar@11.0.1
+- [patch] Updated dependencies [223cd67](https://github.com/fnamazing/uiKit/commits/223cd67)
+  - @findable/tooltip@10.0.1
+  - @findable/page@7.0.1
+  - @findable/item@7.0.1
+  - @findable/icon@12.0.1
+  - @findable/toggle@4.0.1
+  - @findable/logo@8.0.1
+  - @findable/field-text@6.0.1
+  - @findable/checkbox@3.0.1
+  - @findable/button@8.0.1
+  - @findable/theme@4.0.1
+  - @findable/blanket@6.0.1
+  - @findable/docs@4.0.1
+  - @findable/size-detector@4.0.1
+  - @findable/polyfills@2.0.3
+  - @findable/analytics@3.0.3
+  - @findable/dropdown-menu@5.0.1
+  - @findable/avatar@11.0.1
 
 ## 32.0.0
-- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/quick-search@2.0.0
-  - @atlaskit/page@7.0.0
-  - @atlaskit/tooltip@10.0.0
-  - @atlaskit/item@7.0.0
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/toggle@4.0.0
-  - @atlaskit/single-select@5.0.0
-  - @atlaskit/logo@8.0.0
-  - @atlaskit/field-text@6.0.0
-  - @atlaskit/checkbox@3.0.0
-  - @atlaskit/button@8.0.0
-  - @atlaskit/theme@4.0.0
-  - @atlaskit/blanket@6.0.0
-  - @atlaskit/docs@4.0.0
-  - @atlaskit/size-detector@4.0.0
-  - @atlaskit/polyfills@2.0.2
-  - @atlaskit/analytics@3.0.2
-  - @atlaskit/dropdown-menu@5.0.0
-  - @atlaskit/avatar@11.0.0
+- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/quick-search@2.0.0
+  - @findable/page@7.0.0
+  - @findable/tooltip@10.0.0
+  - @findable/item@7.0.0
+  - @findable/icon@12.0.0
+  - @findable/toggle@4.0.0
+  - @findable/single-select@5.0.0
+  - @findable/logo@8.0.0
+  - @findable/field-text@6.0.0
+  - @findable/checkbox@3.0.0
+  - @findable/button@8.0.0
+  - @findable/theme@4.0.0
+  - @findable/blanket@6.0.0
+  - @findable/docs@4.0.0
+  - @findable/size-detector@4.0.0
+  - @findable/polyfills@2.0.2
+  - @findable/analytics@3.0.2
+  - @findable/dropdown-menu@5.0.0
+  - @findable/avatar@11.0.0
 
 ## 31.0.5
-- [patch] Updated dependencies [1c87e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c87e5a)
-  - @atlaskit/page@6.0.4
-  - @atlaskit/quick-search@1.7.2
+- [patch] Updated dependencies [1c87e5a](https://github.com/fnamazing/uiKit/commits/1c87e5a)
+  - @findable/page@6.0.4
+  - @findable/quick-search@1.7.2
 
 ## 31.0.4
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/quick-search@1.4.2
-  - @atlaskit/tooltip@9.2.1
-  - @atlaskit/toggle@3.0.2
-  - @atlaskit/page@6.0.3
-  - @atlaskit/single-select@4.0.3
-  - @atlaskit/item@6.0.3
-  - @atlaskit/logo@7.0.1
-  - @atlaskit/field-text@5.0.3
-  - @atlaskit/dropdown-menu@4.0.3
-  - @atlaskit/checkbox@2.0.2
-  - @atlaskit/button@7.2.5
-  - @atlaskit/theme@3.2.2
-  - @atlaskit/blanket@5.0.2
-  - @atlaskit/avatar@10.0.6
-  - @atlaskit/docs@3.0.4
-  - @atlaskit/size-detector@3.1.1
-  - @atlaskit/polyfills@2.0.1
-  - @atlaskit/analytics@3.0.1
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/icon@11.3.0
+  - @findable/quick-search@1.4.2
+  - @findable/tooltip@9.2.1
+  - @findable/toggle@3.0.2
+  - @findable/page@6.0.3
+  - @findable/single-select@4.0.3
+  - @findable/item@6.0.3
+  - @findable/logo@7.0.1
+  - @findable/field-text@5.0.3
+  - @findable/dropdown-menu@4.0.3
+  - @findable/checkbox@2.0.2
+  - @findable/button@7.2.5
+  - @findable/theme@3.2.2
+  - @findable/blanket@5.0.2
+  - @findable/avatar@10.0.6
+  - @findable/docs@3.0.4
+  - @findable/size-detector@3.1.1
+  - @findable/polyfills@2.0.1
+  - @findable/analytics@3.0.1
 
 ## 31.0.2
-- [patch] Fix navigation item content and description (subtext) clipping in certain browsers [0f1252b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f1252b)
+- [patch] Fix navigation item content and description (subtext) clipping in certain browsers [0f1252b](https://github.com/fnamazing/uiKit/commits/0f1252b)
 
 ## 31.0.1
-- [patch] Remove unused dependencies [3cfb3fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3cfb3fe)
+- [patch] Remove unused dependencies [3cfb3fe](https://github.com/fnamazing/uiKit/commits/3cfb3fe)
 
 ## 31.0.0
-- [major] Remove quick-search component from navigation. See docs for how to upgrade. [5447ec2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5447ec2)
+- [major] Remove quick-search component from navigation. See docs for how to upgrade. [5447ec2](https://github.com/fnamazing/uiKit/commits/5447ec2)
 
 ## 30.0.3
-- [patch] exporting the skeleton header from navigation [7697346](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7697346)
+- [patch] exporting the skeleton header from navigation [7697346](https://github.com/fnamazing/uiKit/commits/7697346)
 
 ## 30.0.2
-- [patch] removes app-switcher dev dependency [fad3bbe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fad3bbe)
+- [patch] removes app-switcher dev dependency [fad3bbe](https://github.com/fnamazing/uiKit/commits/fad3bbe)
 
 ## 30.0.1
-- [patch] Upgrade react-scrolllock dependency [99b852c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99b852c)
+- [patch] Upgrade react-scrolllock dependency [99b852c](https://github.com/fnamazing/uiKit/commits/99b852c)
 
 ## 30.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 29.3.1
-- [patch] Update typing and examples [efdbf46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/efdbf46)
+- [patch] Update typing and examples [efdbf46](https://github.com/fnamazing/uiKit/commits/efdbf46)
 
 ## 29.3.0
-- [minor] Add `target` prop to ResultBase component [d4a3bed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d4a3bed)
+- [minor] Add `target` prop to ResultBase component [d4a3bed](https://github.com/fnamazing/uiKit/commits/d4a3bed)
 
 ## 29.2.2
-- [patch] stopped isSelected prop from being passed down to input [dd4d9c7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd4d9c7)
+- [patch] stopped isSelected prop from being passed down to input [dd4d9c7](https://github.com/fnamazing/uiKit/commits/dd4d9c7)
 
 ## 29.2.1
-- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ed0bba)
-- [patch] blocked the scrolling of background when nav is full width [ad65c8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad65c8a)
+- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://github.com/fnamazing/uiKit/commits/9ed0bba)
+- [patch] blocked the scrolling of background when nav is full width [ad65c8a](https://github.com/fnamazing/uiKit/commits/ad65c8a)
 
 ## 29.2.0
-- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ceccf30)
+- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://github.com/fnamazing/uiKit/commits/ceccf30)
 
 ## 29.1.0
-- [minor] Create skeleton representations of various components [cd628e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd628e4)
+- [minor] Create skeleton representations of various components [cd628e4](https://github.com/fnamazing/uiKit/commits/cd628e4)
 
 ## 29.0.3
-- [patch] Fixed globalPrimaryIcon's hover state css override for collapsed navigation state when primaryItemHref is provided [dfaf464](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfaf464)
+- [patch] Fixed globalPrimaryIcon's hover state css override for collapsed navigation state when primaryItemHref is provided [dfaf464](https://github.com/fnamazing/uiKit/commits/dfaf464)
 
 ## 29.0.2
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 29.0.1
-- [patch] fixes AK-4178 , added fix for double color icon in navigation [c6121d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c6121d6)
+- [patch] fixes AK-4178 , added fix for double color icon in navigation [c6121d6](https://github.com/fnamazing/uiKit/commits/c6121d6)
 
 ## 29.0.0
-- [major] update navigation and item's usage of react-beautiful-dnd from 2.x to 4.x. [aeefa01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aeefa01)
+- [major] update navigation and item's usage of react-beautiful-dnd from 2.x to 4.x. [aeefa01](https://github.com/fnamazing/uiKit/commits/aeefa01)
 
 ## 28.0.4
-- [patch] Packages Flow types for elements components [3111e74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3111e74)
+- [patch] Packages Flow types for elements components [3111e74](https://github.com/fnamazing/uiKit/commits/3111e74)
 
 ## 28.0.3
-- [patch] Fix nested navigation not working due to out of date react-transition-group usage [6d8db57](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d8db57)
+- [patch] Fix nested navigation not working due to out of date react-transition-group usage [6d8db57](https://github.com/fnamazing/uiKit/commits/6d8db57)
 
 ## 28.0.2
-- [patch] remove console.warn statement from Navigation [c803b87](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c803b87)
+- [patch] remove console.warn statement from Navigation [c803b87](https://github.com/fnamazing/uiKit/commits/c803b87)
 
 ## 28.0.1
-- [patch] Added slight delay on the resizer fade-in animation [3aff9b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3aff9b6)
+- [patch] Added slight delay on the resizer fade-in animation [3aff9b6](https://github.com/fnamazing/uiKit/commits/3aff9b6)
 
 ## 28.0.0
-- [major] add onSearchSubmit prop to QuickSearch which will be called when the user presses enter with no result selected. the first QuickSearch result is no longer selected by default. [b246f6f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b246f6f)
+- [major] add onSearchSubmit prop to QuickSearch which will be called when the user presses enter with no result selected. the first QuickSearch result is no longer selected by default. [b246f6f](https://github.com/fnamazing/uiKit/commits/b246f6f)
 
 ## 27.0.8
-- [patch] creating patch to handle avatar release [0356e85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0356e85)
+- [patch] creating patch to handle avatar release [0356e85](https://github.com/fnamazing/uiKit/commits/0356e85)
 
 ## 27.0.7
-- [patch] Minor manual bump for packages desync'd from npm [e988c58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e988c58)
+- [patch] Minor manual bump for packages desync'd from npm [e988c58](https://github.com/fnamazing/uiKit/commits/e988c58)
 
 ## 27.0.6
 - Manual bump to resolve desync with npm package version. 
 
 ## 27.0.5
-- [patch] Migrate Navigation from Ak repo to ak mk 2 repo, Fixed flow typing inconsistencies in ak mk 2 [bdeef5b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bdeef5b)
+- [patch] Migrate Navigation from Ak repo to ak mk 2 repo, Fixed flow typing inconsistencies in ak mk 2 [bdeef5b](https://github.com/fnamazing/uiKit/commits/bdeef5b)
 
 ## 27.0.4 (2017-12-13)
 * bug fix; use vh instead of percent ([e138d4b](https://bitbucket.org/atlassian/atlaskit/commits/e138d4b))
@@ -773,7 +773,7 @@
 * bug fix; change global nav items to use styled buttons or styled anchor ([c6ccb5d](https://bitbucket.org/atlassian/atlaskit/commits/c6ccb5d))
 
 ## 26.0.2 (2017-10-12)
-* bug fix; updated theme prop types to accept colors from @atlaskit/theme (issues closed: ak-3682) ([6c3097c](https://bitbucket.org/atlassian/atlaskit/commits/6c3097c))
+* bug fix; updated theme prop types to accept colors from @findable/theme (issues closed: ak-3682) ([6c3097c](https://bitbucket.org/atlassian/atlaskit/commits/6c3097c))
 
 ## 26.0.1 (2017-10-11)
 * bug fix; fix relative positioning of nav scroll container ([7d48f76](https://bitbucket.org/atlassian/atlaskit/commits/7d48f76))
@@ -841,8 +841,8 @@
 * feature; isElectronMac prop now pushes the navigation content down to avoid overlap with mac (issues closed: ak-3460) ([4e33100](https://bitbucket.org/atlassian/atlaskit/commits/4e33100))
 
 ## 23.0.0 (2017-09-13)
-* breaking; Navigation theming has been updated to take styles from @atlaskit/theme to support dark mode. Please ([4ee3080](https://bitbucket.org/atlassian/atlaskit/commits/4ee3080))
-* breaking; navigation now supports dark mode via @atlaskit/theme (issues closed: ak-3235) ([4ee3080](https://bitbucket.org/atlassian/atlaskit/commits/4ee3080))
+* breaking; Navigation theming has been updated to take styles from @findable/theme to support dark mode. Please ([4ee3080](https://bitbucket.org/atlassian/atlaskit/commits/4ee3080))
+* breaking; navigation now supports dark mode via @findable/theme (issues closed: ak-3235) ([4ee3080](https://bitbucket.org/atlassian/atlaskit/commits/4ee3080))
 
 ## 22.0.1 (2017-09-11)
 * bug fix; selected nav items with a custom theme now have correct hover/focus style (issues closed: ak-3449) ([53d54c2](https://bitbucket.org/atlassian/atlaskit/commits/53d54c2))
@@ -918,7 +918,7 @@
 * bug fix; fix navigation group title rendering action button twice (issues closed: ak-3219) ([b82bc4c](https://bitbucket.org/atlassian/atlaskit/commits/b82bc4c))
 
 ## 19.0.4 (2017-08-16)
-* bug fix; removing deprecated @atlaskit/drag-and-drop. Project can now be found at react-beaut ([c323890](https://bitbucket.org/atlassian/atlaskit/commits/c323890))
+* bug fix; removing deprecated @findable/drag-and-drop. Project can now be found at react-beaut ([c323890](https://bitbucket.org/atlassian/atlaskit/commits/c323890))
 
 ## 19.0.3 (2017-08-15)
 * bug fix; Add namespace to internal theming; clean up component internals (issues closed: ak-3255) ([a8cf551](https://bitbucket.org/atlassian/atlaskit/commits/a8cf551))
@@ -927,7 +927,7 @@
 * bug fix; nested nav pages have their own scroll containers (issues closed: ak-3222) ([865623d](https://bitbucket.org/atlassian/atlaskit/commits/865623d))
 
 ## 19.0.1 (2017-08-11)
-* bug fix; deprecating @atlaskit/drag-and-drop. It has been moved to react-natural-drag ([7183656](https://bitbucket.org/atlassian/atlaskit/commits/7183656))
+* bug fix; deprecating @findable/drag-and-drop. It has been moved to react-natural-drag ([7183656](https://bitbucket.org/atlassian/atlaskit/commits/7183656))
 
 ## 19.0.0 (2017-08-10)
 * breaking; AkContainerNavigation now extends React.Component rather than React.PureComponent - this should ([3afa823](https://bitbucket.org/atlassian/atlaskit/commits/3afa823))
@@ -965,8 +965,8 @@
 * breaking; nav headers refactored and new stories added ([def213d](https://bitbucket.org/atlassian/atlaskit/commits/def213d))
 
 ## 17.0.0 (2017-07-28)
-* breaking; The AkNavigationItem named export is now an extension of the generic @atlaskit/item. AkNavigationItem's isHoverStylesDisabled and tabIndex props have been removed. The AkNavigationItemGroup is now an extension of @atlaskit/item's ItemGroup.
-* breaking; Update Navigation items to use @atlaskit/item ([00c9e28](https://bitbucket.org/atlassian/atlaskit/commits/00c9e28))
+* breaking; The AkNavigationItem named export is now an extension of the generic @findable/item. AkNavigationItem's isHoverStylesDisabled and tabIndex props have been removed. The AkNavigationItemGroup is now an extension of @findable/item's ItemGroup.
+* breaking; Update Navigation items to use @findable/item ([00c9e28](https://bitbucket.org/atlassian/atlaskit/commits/00c9e28))
 
 ## 16.1.0 (2017-07-27)
 * fix; hiding the scrollbar corner and moved colours into the vars ([3439174](https://bitbucket.org/atlassian/atlaskit/commits/3439174))

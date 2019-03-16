@@ -2,11 +2,11 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import * as sinon from 'sinon';
 
-import Badge from '@atlaskit/badge';
+import Badge from '@findable/badge';
 import {
   NotificationLogClient,
   NotificationCountResponse,
-} from '@atlaskit/notification-log-client';
+} from '@findable/notification-log-client';
 
 import NotificationIndicator, {
   ValueUpdatingParams,

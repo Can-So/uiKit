@@ -1,7 +1,7 @@
 // @flow
 import React, { type Element } from 'react';
 import PropTypes from 'prop-types';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import { withContextFromProps } from '../src';
 
 type Props = {

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Base from '@atlaskit/field-base';
+import Base from '@findable/field-base';
 
 import FieldTextArea from '../..';
 import FieldTextAreaStatelessWithAnalytics, {

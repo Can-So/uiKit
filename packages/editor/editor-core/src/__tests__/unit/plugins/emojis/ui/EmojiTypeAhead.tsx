@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { EmojiProvider } from '@atlaskit/emoji';
+import { EmojiProvider } from '@findable/emoji';
 import EditorEmojiTypeAhead from '../../../../../plugins/emoji/ui/EmojiTypeAhead';
 import { analyticsService, AnalyticsHandler } from '../../../../../analytics';
 

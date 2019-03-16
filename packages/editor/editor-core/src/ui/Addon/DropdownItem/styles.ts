@@ -2,7 +2,7 @@ import styled from 'styled-components';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes, ComponentClass } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 export const DropdownItem: ComponentClass<HTMLAttributes<{}>> = styled.div`
   display: flex;

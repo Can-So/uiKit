@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 var _a;
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 import styled from 'styled-components';
 import { MentionType } from '../../types';
 var mentionStyle = (_a = {},

@@ -3,7 +3,7 @@ import { findTable } from 'prosemirror-utils';
 import { TextSelection, Selection } from 'prosemirror-state';
 import { TableMap, cellAround } from 'prosemirror-tables';
 import { Node as PmNode } from 'prosemirror-model';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 
 import {
   isElementInTableCell,

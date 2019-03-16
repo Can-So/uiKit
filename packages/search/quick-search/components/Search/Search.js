@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import FieldBase from '@atlaskit/field-base';
+import FieldBase from '@findable/field-base';
 import { SearchBox, SearchFieldBaseInner, SearchInner, SearchInput, } from './styled';
 var controlKeys = ['ArrowUp', 'ArrowDown', 'Enter'];
 var Search = /** @class */ (function (_super) {

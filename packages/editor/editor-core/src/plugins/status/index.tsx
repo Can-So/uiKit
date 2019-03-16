@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { status } from '@atlaskit/adf-schema';
-import StatusIcon from '@atlaskit/icon/glyph/status';
+import { status } from '@findable/adf-schema';
+import StatusIcon from '@findable/icon/glyph/status';
 import { findDomRefAtPos } from 'prosemirror-utils';
 import { EditorPlugin } from '../../types';
 import createStatusPlugin, {

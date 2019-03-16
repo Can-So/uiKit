@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/media-image",
+  "name": "@findable/media-image",
   "version": "10.0.0",
   "description": "Atlassian Editor component for JIRA",
   "license": "Apache-2.0",
@@ -11,23 +11,23 @@
   "maintainers": [
     "Hector Z"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/media-store": "^11.0.0",
+    "@findable/media-store": "^11.0.0",
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^29.0.0",
+    "@findable/media-core": "^29.0.0",
     "react": "^16.4.0",
     "rxjs": "^5.5.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/field-text": "^8.0.1",
-    "@atlaskit/media-test-helpers": "^21.0.0",
-    "@atlaskit/select": "^8.0.3",
-    "@atlaskit/spinner": "^10.0.1",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/docs": "^7.0.1",
+    "@findable/field-text": "^8.0.1",
+    "@findable/media-test-helpers": "^21.0.0",
+    "@findable/select": "^8.0.3",
+    "@findable/spinner": "^10.0.1",
+    "@findable/theme": "^8.0.1",
     "enzyme": "^3.7.0"
   }
 }

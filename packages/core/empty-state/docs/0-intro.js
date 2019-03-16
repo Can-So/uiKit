@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   Empty State is used for various scenarios, for example: empty search, 
@@ -10,11 +10,11 @@ export default md`
 
   ## Usage
 
-  ${code`import EmptyState from '@atlaskit/empty-state';`}
+  ${code`import EmptyState from '@findable/empty-state';`}
 
   ${(
     <Example
-      packageName="@atlaskit/empty-state"
+      packageName="@findable/empty-state"
       Component={require('../examples/0-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-basic')}

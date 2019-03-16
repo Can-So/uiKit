@@ -1,4 +1,4 @@
-import { AnalyticsViewerContainer } from '@atlaskit/analytics-viewer';
+import { AnalyticsViewerContainer } from '@findable/analytics-viewer';
 import * as React from 'react';
 import {
   assignToMe,

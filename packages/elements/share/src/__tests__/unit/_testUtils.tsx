@@ -1,4 +1,4 @@
-import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
+import { shallowWithIntl } from '@findable/editor-test-helpers';
 import { ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 

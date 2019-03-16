@@ -1,6 +1,6 @@
 // @flow
 
-import type { ThemeProp } from '@atlaskit/theme';
+import type { ThemeProp } from '@findable/theme';
 import type { ElementRef } from 'react';
 import type { ThemeProps, ThemeTokens } from './theme';
 

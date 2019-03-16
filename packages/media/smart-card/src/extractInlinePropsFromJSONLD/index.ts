@@ -1,4 +1,4 @@
-import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
+import { InlineCardResolvedViewProps } from '@findable/media-ui';
 import { genericExtractPropsFromJSONLD } from '../genericExtractPropsFromJSONLD';
 import { extractInlineViewPropsFromObject } from './extractPropsFromObject';
 import { extractInlineViewPropsFromTask } from './extractPropsFromTask';

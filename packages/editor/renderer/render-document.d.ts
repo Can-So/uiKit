@@ -1,5 +1,5 @@
 import { Serializer } from './serializer';
-import { ADNode, ADFStage } from '@atlaskit/editor-common';
+import { ADNode, ADFStage } from '@findable/editor-common';
 import { Schema } from 'prosemirror-model';
 export interface RenderOutput<T> {
     result: T;

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { injectIntl, FormattedHTMLMessage, } from 'react-intl';
-import { withAnalytics } from '@atlaskit/analytics';
+import { withAnalytics } from '@findable/analytics';
 import { EMPTY_CROSS_PRODUCT_SEARCH_RESPONSE, } from '../../api/CrossProductSearchClient';
 import { Scope } from '../../api/types';
 import { SearchScreenCounter } from '../../util/ScreenCounter';

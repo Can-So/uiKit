@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 export const OuterContainer = styled.span<{ width?: 'small' | 'large' }>`
   position: relative;

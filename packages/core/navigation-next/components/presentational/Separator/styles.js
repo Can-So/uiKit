@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 var dividerLineHeight = 2;
 var dividerTotalHeight = gridSize() * 5;
 var baseStyles = {

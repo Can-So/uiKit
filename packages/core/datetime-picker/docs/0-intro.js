@@ -1,12 +1,12 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
 The \`datetime-picker\` component is capable of rendering a date picker, time picker, or combinations of both, and is
-composed from several components including \`@atlaskit/select\` and \`@atlaskit/calendar\`.
+composed from several components including \`@findable/select\` and \`@findable/calendar\`.
 
 The date & time pickers will open onFocus while onBlur, 'Enter' or selecting via a click will trigger an onChange. A keypress of 'Escape'
 while the calendar or select is open will close it but not change or clear the value. When focussed 'Backspace' will clear the value.
@@ -15,11 +15,11 @@ If needed you can modify or these default behaviours by passing props to the sel
 
 ## Usage
 
-${code`import { DatePicker, DateTimePicker, TimePicker } from '@atlaskit/datetime-picker';`}
+${code`import { DatePicker, DateTimePicker, TimePicker } from '@findable/datetime-picker';`}
 
 ${(
   <Example
-    packageName="@atlaskit/datetime-picker"
+    packageName="@findable/datetime-picker"
     Component={require('../examples/00-basic').default}
     title="Basic"
     source={require('!!raw-loader!../examples/00-basic')}

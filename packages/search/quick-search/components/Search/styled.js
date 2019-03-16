@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled, { css } from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 export var SearchBox = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  position: sticky;\n  top: 0;\n  z-index: 1; /* required to keep the search box on top of icons in results when sticky */\n  background-color: ", ";\n  color: ", ";\n  display: flex;\n  height: 36px;\n  padding-bottom: 2px;\n  border-bottom: 2px solid ", ";\n  z-index: 10;\n"], ["\n  position: sticky;\n  top: 0;\n  z-index: 1; /* required to keep the search box on top of icons in results when sticky */\n  background-color: ", ";\n  color: ", ";\n  display: flex;\n  height: 36px;\n  padding-bottom: 2px;\n  border-bottom: 2px solid ", ";\n  z-index: 10;\n"])), colors.N0, colors.N500, colors.B200);
 export var SearchFieldBaseInner = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  padding-right: ", "px; /* pad search text from FieldBase's isLoading spinner */\n  display: flex;\n  flex-grow: 1;\n"], ["\n  padding-right: ",
     "px; /* pad search text from FieldBase's isLoading spinner */\n  display: flex;\n  flex-grow: 1;\n"])), gridSize() *

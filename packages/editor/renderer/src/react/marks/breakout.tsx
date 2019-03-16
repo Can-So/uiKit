@@ -4,7 +4,7 @@ import {
   blockNodesVerticalMargin,
   calcBreakoutWidth,
   WidthConsumer,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 export const Wrapper = styled.div`
   margin: ${blockNodesVerticalMargin} 0;

@@ -1,6 +1,6 @@
 jest.mock('../../ws');
 
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 import { WsConnection } from '../../wsConnection';
 import {
   Ws,

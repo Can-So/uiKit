@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import AkButton from '@atlaskit/button';
-import DropboxIcon from '@atlaskit/icon/glyph/dropbox';
-import GoogledriveIcon from '@atlaskit/icon/glyph/googledrive';
+import AkButton from '@findable/button';
+import DropboxIcon from '@findable/icon/glyph/dropbox';
+import GoogledriveIcon from '@findable/icon/glyph/googledrive';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { startAuth } from '../../../../actions';
 import { ServiceAccountLink, ServiceName, State } from '../../../../domain';
 import {

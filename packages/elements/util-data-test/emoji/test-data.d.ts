@@ -1,4 +1,4 @@
-import { EmojiRepository, EmojiDescription } from '@atlaskit/emoji';
+import { EmojiRepository, EmojiDescription } from '@findable/emoji';
 import { MockEmojiResourceConfig } from './MockEmojiResource';
 export declare const spriteEmoji: {
     id: string;

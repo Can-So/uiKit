@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { createTheme, codeFontFamily, gridSize, fontSize } from '@atlaskit/theme';
+import { createTheme, codeFontFamily, gridSize, fontSize } from '@findable/theme';
 import * as componentTokens from './component-tokens';
 var disabledRules = {
   light: {

@@ -11,15 +11,15 @@ import React, {
 } from 'react';
 import NodeResolver from 'react-node-resolver';
 import flushable from 'flushable';
-import { Popper } from '@atlaskit/popper';
-import Portal from '@atlaskit/portal';
-import { layers } from '@atlaskit/theme';
+import { Popper } from '@findable/popper';
+import Portal from '@findable/portal';
+import { layers } from '@findable/theme';
 
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import {
   name as packageName,
   version as packageVersion,

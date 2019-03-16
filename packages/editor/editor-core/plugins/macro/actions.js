@@ -3,7 +3,7 @@ import * as tslib_1 from "tslib";
 import { NodeSelection } from 'prosemirror-state';
 import { pluginKey } from './';
 import * as assert from 'assert';
-import { getValidNode } from '@atlaskit/editor-common';
+import { getValidNode } from '@findable/editor-common';
 import { safeInsert, replaceSelectedNode, replaceParentNodeOfType, } from 'prosemirror-utils';
 import { normaliseNestedLayout } from '../../utils';
 export var insertMacroFromMacroBrowser = function (macroProvider, macroNode, isEditing) { return function (state, dispatch) { return tslib_1.__awaiter(_this, void 0, void 0, function () {

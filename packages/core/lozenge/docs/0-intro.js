@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   Use lozenges to highlight an item's status for quick recognition. Use
@@ -9,11 +9,11 @@ export default md`
 
   ## Usage
 
-  ${code`import Lozenge from '@atlaskit/lozenge';`}
+  ${code`import Lozenge from '@findable/lozenge';`}
 
   ${(
     <Example
-      packageName="@atlaskit/lozenge"
+      packageName="@findable/lozenge"
       Component={require('../examples/0-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-basic')}

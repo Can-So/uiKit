@@ -1,4 +1,4 @@
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { Store } from 'redux';
 import { State } from '../popup/domain';
 import { PopupConfig, PopupUploadEventEmitter } from '../components/types';

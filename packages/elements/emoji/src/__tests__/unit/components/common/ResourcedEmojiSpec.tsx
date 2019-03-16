@@ -1,7 +1,7 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import { waitUntil } from '@atlaskit/util-common-test';
-import Tooltip from '@atlaskit/tooltip';
+import { waitUntil } from '@findable/util-common-test';
+import Tooltip from '@findable/tooltip';
 
 import { EmojiDescription } from '../../../../types';
 import Emoji from '../../../../components/common/Emoji';

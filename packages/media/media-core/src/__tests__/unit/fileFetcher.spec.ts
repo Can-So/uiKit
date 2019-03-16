@@ -1,4 +1,4 @@
-import { MediaStore, FileItem } from '@atlaskit/media-store';
+import { MediaStore, FileItem } from '@findable/media-store';
 import * as uuid from 'uuid';
 import { FileFetcherImpl, getItemsFromKeys } from '../../file';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 var FooterDiv = styled.div.withConfig({
   displayName: "Footer__FooterDiv",
   componentId: "sc-1xuos4y-0"

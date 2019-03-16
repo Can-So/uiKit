@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { isClientBasedAuth, } from '@atlaskit/media-core';
+import { isClientBasedAuth, } from '@findable/media-core';
 import { stringify } from 'query-string';
 // We want to remove constructAuthTokenUrl and use mediaStore instead
 // https://product-fabric.atlassian.net/browse/MSW-869

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { createTag, serializeStyle } from '../util';
-import { B50, B500, R50, R500, Y75, N800, G50, G500, P50, P500, N40, N500, } from '@atlaskit/adf-schema';
+import { B50, B500, R50, R500, Y75, N800, G50, G500, P50, P500, N40, N500, } from '@findable/adf-schema';
 var colorMapping = {
     blue: {
         'background-color': B50,

@@ -1,8 +1,8 @@
 //@flow
 
 import React, { type Node } from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import CloseIcon from '@atlaskit/icon/glyph/cross';
+import Button, { ButtonGroup } from '@findable/button';
+import CloseIcon from '@findable/icon/glyph/cross';
 import {
   Wrapper,
   Header as StyledHeader,

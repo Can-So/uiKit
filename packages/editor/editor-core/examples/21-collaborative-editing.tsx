@@ -2,8 +2,8 @@
 
 import styled from 'styled-components';
 import * as React from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import PubSubClient from '@atlaskit/pubsub';
+import Button, { ButtonGroup } from '@findable/button';
+import PubSubClient from '@findable/pubsub';
 
 import Editor from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
@@ -11,10 +11,10 @@ import WithEditorActions from './../src/ui/WithEditorActions';
 import {
   storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
-} from '@atlaskit/editor-test-helpers';
-import { mention, emoji, taskDecision } from '@atlaskit/util-data-test';
-import { EmojiProvider } from '@atlaskit/emoji';
-import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
+import { mention, emoji, taskDecision } from '@findable/util-data-test';
+import { EmojiProvider } from '@findable/emoji';
+import { customInsertMenuItems } from '@findable/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { CollabProvider } from '../src/plugins/collab-edit';
 import { EditorActions } from '../src';

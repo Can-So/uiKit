@@ -2,16 +2,16 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { ErrorMessageWrapper, ErrorImage } from './styled';
-import { FileState } from '@atlaskit/media-core';
-import { messages as i18nMessages } from '@atlaskit/media-ui';
+import { FileState } from '@findable/media-core';
+import { messages as i18nMessages } from '@findable/media-ui';
 import { cannotViewFile, errorLoadingFile } from './error-images';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import { mediaPreviewFailedEvent } from './analytics/item-viewer';
 import {
   GasPayload,
   GasScreenEventPayload,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 import { channel } from '../newgen/analytics';
 
 type MessagesType<Key extends string> = { [k in Key]: ReactNode };

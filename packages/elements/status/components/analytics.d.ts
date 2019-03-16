@@ -1,4 +1,4 @@
-import { CreateUIAnalyticsEventSignature, UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature, UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 export declare const ELEMENTS_CHANNEL = "fabric-elements";
 declare type EventPayload = {
     action: string;

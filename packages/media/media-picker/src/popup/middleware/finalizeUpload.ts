@@ -3,8 +3,8 @@ import {
   MediaStore,
   MediaStoreCopyFileWithTokenBody,
   MediaStoreCopyFileWithTokenParams,
-} from '@atlaskit/media-store';
-import { fileStreamsCache, FileState } from '@atlaskit/media-core';
+} from '@findable/media-store';
+import { fileStreamsCache, FileState } from '@findable/media-core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Fetcher } from '../tools/fetcher/fetcher';
 import {

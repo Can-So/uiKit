@@ -1,4 +1,4 @@
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   doc,
   insertText,
@@ -7,8 +7,8 @@ import {
   panel,
   sleep,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+} from '@findable/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { pluginKey as quickInsertPluginKey } from '../../../../plugins/quick-insert';
 import { TypeAheadInsert } from '../../../../plugins/type-ahead/types';
 

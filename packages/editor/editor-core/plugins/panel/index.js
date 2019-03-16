@@ -1,10 +1,10 @@
 import * as React from 'react';
-import InfoIcon from '@atlaskit/icon/glyph/editor/info';
-import EditorWarningIcon from '@atlaskit/icon/glyph/editor/warning';
-import EditorErrorIcon from '@atlaskit/icon/glyph/editor/error';
-import EditorSuccessIcon from '@atlaskit/icon/glyph/editor/success';
-import EditorNoteIcon from '@atlaskit/icon/glyph/editor/note';
-import { panel } from '@atlaskit/adf-schema';
+import InfoIcon from '@findable/icon/glyph/editor/info';
+import EditorWarningIcon from '@findable/icon/glyph/editor/warning';
+import EditorErrorIcon from '@findable/icon/glyph/editor/error';
+import EditorSuccessIcon from '@findable/icon/glyph/editor/success';
+import EditorNoteIcon from '@findable/icon/glyph/editor/note';
+import { panel } from '@findable/adf-schema';
 import { messages } from '../block-type/types';
 import { createPlugin } from './pm-plugins/main';
 import { getToolbarConfig } from './toolbar';

@@ -2,7 +2,7 @@
 
 import React, { Component, type ComponentType } from 'react';
 import { Transition } from 'react-transition-group';
-import { layers } from '@atlaskit/theme';
+import { layers } from '@findable/theme';
 
 import { transitionDurationMs, transitionTimingFunction } from '../constants';
 

@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
 ${(
   <SectionMessage appearance="warning">
     <p>
-      <strong>Note: @atlaskit/radio is currently a developer preview.</strong>
+      <strong>Note: @findable/radio is currently a developer preview.</strong>
     </p>
     <p>
       Please experiment with and test this package but be aware that the API may
@@ -23,10 +23,10 @@ ${(
   ## Usage
 
   ${code`
-  import { RadioGroup, Radio } from '@atlaskit/radio';
+  import { RadioGroup, Radio } from '@findable/radio';
   `}
 
-  @atlaskit/radio exports a controllable RadioGroup component. This
+  @findable/radio exports a controllable RadioGroup component. This
   handles the selection of items for you.
 
   It accepts a list of options that pass the properties on to a
@@ -34,7 +34,7 @@ ${(
 
   ${(
     <Example
-      packageName="@atlaskit/radio"
+      packageName="@findable/radio"
       Component={require('../examples/00-basic-usage').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-usage')}
@@ -46,7 +46,7 @@ ${(
 
   ${(
     <Example
-      packageName="@atlaskit/radio"
+      packageName="@findable/radio"
       Component={require('../examples/03-default-checked-value').default}
       title="defaultValue prop"
       source={require('!!raw-loader!../examples/03-default-checked-value')}
@@ -58,19 +58,19 @@ ${(
 
   ${(
     <Example
-      packageName="@atlaskit/radio"
+      packageName="@findable/radio"
       Component={require('../examples/01-controlled-example').default}
       title="value prop"
       source={require('!!raw-loader!../examples/01-controlled-example')}
     />
   )}
 
-  ### With @atlaskit/form
-  @atlaskit/radio is designed to play well with @atlaskit/form.
+  ### With @findable/form
+  @findable/radio is designed to play well with @findable/form.
 
   ${(
     <Example
-      packageName="@atlaskit/radio"
+      packageName="@findable/radio"
       Component={require('../examples/02-form-example').default}
       title="With a Form"
       source={require('!!raw-loader!../examples/02-form-example')}

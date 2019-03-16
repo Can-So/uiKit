@@ -2,9 +2,9 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { ImageWrapper } from '../../image-placer/styled';
 
-// mock @atlaskit/media-ui::mockIsImageRemote() ...
+// mock @findable/media-ui::mockIsImageRemote() ...
 const mockIsImageRemote = jest.fn();
-jest.mock('@atlaskit/media-core', () => ({
+jest.mock('@findable/media-core', () => ({
   isImageRemote: mockIsImageRemote,
 }));
 

@@ -2,21 +2,21 @@ import styled from 'styled-components';
 import * as React from 'react';
 import { Component } from 'react';
 import { pd } from 'pretty-data';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import {
   Editor,
   EditorContext,
   WithEditorActions,
-} from '@atlaskit/editor-core';
+} from '@findable/editor-core';
 import {
   storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
   macroProvider,
-} from '@atlaskit/editor-test-helpers';
-import { mention, emoji, taskDecision } from '@atlaskit/util-data-test';
-import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
-import Spinner from '@atlaskit/spinner';
-import { TitleInput } from '@atlaskit/editor-core/example-helpers/PageElements';
+} from '@findable/editor-test-helpers';
+import { mention, emoji, taskDecision } from '@findable/util-data-test';
+import { MockActivityResource } from '@findable/activity/dist/es5/support';
+import Spinner from '@findable/spinner';
+import { TitleInput } from '@findable/editor-core/example-helpers/PageElements';
 
 import {
   CODE_MACRO,

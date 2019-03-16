@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react';
 import { asyncComponent } from 'react-async-component';
-import Avatar from '@atlaskit/avatar';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import { JiraIcon } from '@atlaskit/logo';
-import { colors } from '@atlaskit/theme';
+import Avatar from '@findable/avatar';
+import AddIcon from '@findable/icon/glyph/add';
+import QuestionCircleIcon from '@findable/icon/glyph/question-circle';
+import SearchIcon from '@findable/icon/glyph/search';
+import { JiraIcon } from '@findable/logo';
+import { colors } from '@findable/theme';
 
 import {
   GlobalNav,

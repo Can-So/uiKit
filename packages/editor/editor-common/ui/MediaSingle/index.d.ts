@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 export declare const DEFAULT_IMAGE_WIDTH = 250;
 export declare const DEFAULT_IMAGE_HEIGHT = 200;
 export interface Props {

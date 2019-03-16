@@ -1,5 +1,5 @@
 import { ButtonAppearances } from '../types';
-import { PropsPasser } from '@atlaskit/type-helpers';
+import { PropsPasser } from '@findable/type-helpers';
 declare type AppearanceProps = {
     appearance?: ButtonAppearances;
 };

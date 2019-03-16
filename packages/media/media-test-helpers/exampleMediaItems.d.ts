@@ -1,4 +1,4 @@
-import { FileDetails, ExternalImageIdentifier } from '@atlaskit/media-core';
+import { FileDetails, ExternalImageIdentifier } from '@findable/media-core';
 export declare const genericFileId: {
     id: string;
     mediaItemType: "file";

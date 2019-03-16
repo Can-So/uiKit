@@ -11,7 +11,7 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Fragment, Component } from 'react';
 import { css } from 'emotion';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import { styleReducerNoOp, withGlobalTheme } from '../../../theme';
 var _ref = {
   pointerEvents: 'none'

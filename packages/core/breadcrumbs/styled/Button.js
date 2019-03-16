@@ -1,4 +1,4 @@
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import styled, { css } from 'styled-components';
 var ButtonElement = styled(Button).withConfig({
   displayName: "Button__ButtonElement",

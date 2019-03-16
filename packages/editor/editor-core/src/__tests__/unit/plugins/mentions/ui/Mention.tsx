@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { ResourcedMention } from '@atlaskit/mention';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ResourcedMention } from '@findable/mention';
+import { ProviderFactory } from '@findable/editor-common';
 import Mention from '../../../../../plugins/mentions/ui/Mention';
 // avoid polluting test logs with error message in console
 // please ensure you fix it if you expect console.error to be thrown
 // tslint:disable-next-line:no-console
 let consoleError = console.error;
 
-describe('@atlaskit/editor-core/ui/Mention', () => {
+describe('@findable/editor-core/ui/Mention', () => {
   beforeEach(() => {
     // tslint:disable-next-line:no-console
     console.error = jest.fn();

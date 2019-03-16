@@ -1,4 +1,4 @@
-import { MediaType } from '@atlaskit/media-core';
+import { MediaType } from '@findable/media-core';
 
 export const isLoadingImage = (
   mediaType?: MediaType,

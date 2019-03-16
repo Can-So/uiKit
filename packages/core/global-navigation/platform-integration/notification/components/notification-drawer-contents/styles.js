@@ -1,4 +1,4 @@
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 var externalContent = function externalContent(hasIframeLoaded) {
   return {

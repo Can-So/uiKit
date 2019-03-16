@@ -1,3 +1,3 @@
-declare module '@atlaskit/analytics-listeners' {
+declare module '@findable/analytics-listeners' {
   declare module.exports: any;
 }

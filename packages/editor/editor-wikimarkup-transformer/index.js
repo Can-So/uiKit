@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import { encode } from './encoder';
 import AbstractTree from './parser/abstract-tree';
 import { buildIssueKeyRegex } from './parser/tokenize/issue-key';

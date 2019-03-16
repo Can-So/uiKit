@@ -1,4 +1,4 @@
-import { Context, ContextFactory } from '@atlaskit/media-core';
+import { Context, ContextFactory } from '@findable/media-core';
 import { Store } from 'redux';
 import * as React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';

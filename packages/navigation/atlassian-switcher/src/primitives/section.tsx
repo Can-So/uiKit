@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { gridSize, typography } from '@atlaskit/theme';
+import { gridSize, typography } from '@findable/theme';
 import styled from 'styled-components';
 import {
   analyticsAttributes,

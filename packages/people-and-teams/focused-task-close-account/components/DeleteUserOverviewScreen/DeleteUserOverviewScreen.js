@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import Button from '@atlaskit/button';
-import SectionMessage from '@atlaskit/section-message';
-import InfoIcon from '@atlaskit/icon/glyph/info';
+import Button from '@findable/button';
+import SectionMessage from '@findable/section-message';
+import InfoIcon from '@findable/icon/glyph/info';
 import { commonMessages, overviewMessages } from '../../messages';
 import StatefulInlineDialog from '../StatefulInlineDialog';
 import UserInfo from '../UserInfo';

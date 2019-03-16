@@ -1,4 +1,4 @@
-import { confluenceUnsupportedBlock, confluenceUnsupportedInline, unsupportedBlock, unsupportedInline, } from '@atlaskit/adf-schema';
+import { confluenceUnsupportedBlock, confluenceUnsupportedInline, unsupportedBlock, unsupportedInline, } from '@findable/adf-schema';
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { ReactNodeView } from '../../nodeviews';
 import ReactUnsupportedBlockNode from './nodeviews/unsupported-block';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var HORIZONTAL_SPACING = "".concat(gridSize() / 2, "px");
 export default styled.span.withConfig({
   displayName: "styledContent",

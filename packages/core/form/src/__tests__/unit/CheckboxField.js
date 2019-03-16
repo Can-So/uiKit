@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import Button from '@atlaskit/button';
-import { Checkbox } from '@atlaskit/checkbox';
+import Button from '@findable/button';
+import { Checkbox } from '@findable/checkbox';
 import Form, { CheckboxField } from '../../../src';
 
 test('should default to false value', () => {

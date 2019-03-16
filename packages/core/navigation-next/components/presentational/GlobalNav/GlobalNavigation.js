@@ -12,7 +12,7 @@ import _inherits from "@babel/runtime/helpers/inherits";
  * opinionated 'GlobalNavigation' component.
  */
 import React, { Component, Fragment } from 'react';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
 import { FirstPrimaryItemWrapper, PrimaryItemsList, SecondaryItemsList } from './primitives';
 
 var GlobalNavigation =

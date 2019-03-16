@@ -27,7 +27,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _uuid = _interopRequireDefault(require("uuid"));
 
-var _theme = require("@atlaskit/theme");
+var _theme = require("@findable/theme");
 
 var _constants = require("../constants");
 

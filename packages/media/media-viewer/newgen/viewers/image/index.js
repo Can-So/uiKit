@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { isImageRepresentationReady, } from '@atlaskit/media-core';
-import { getOrientation } from '@atlaskit/media-ui';
+import { isImageRepresentationReady, } from '@findable/media-core';
+import { getOrientation } from '@findable/media-ui';
 import { Outcome } from '../../domain';
 import { createError } from '../../error';
 import { InteractiveImg } from './interactive-img';

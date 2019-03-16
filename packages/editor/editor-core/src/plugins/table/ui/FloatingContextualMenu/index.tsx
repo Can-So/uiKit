@@ -11,7 +11,7 @@ import {
 import {
   Popup,
   akEditorFloatingOverlapPanelZIndex,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import ContextualMenu from './ContextualMenu';
 import { contextualMenuTriggerSize, tablePopupStyles } from '../styles';
 import { pluginKey } from '../../pm-plugins/main';

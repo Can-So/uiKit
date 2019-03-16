@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { mountWithIntl } from '@findable/editor-test-helpers';
 import { StatusPickerWithoutAnalytcs as StatusPicker } from '../../../../../plugins/status/ui/statusPicker';
 import { FABRIC_CHANNEL } from '../../../../../plugins/status/analytics';
-import { AnalyticsEventPayload } from '@atlaskit/analytics-next-types';
+import { AnalyticsEventPayload } from '@findable/analytics-next-types';
 
 describe('StatusPicker', () => {
   const closeStatusPicker = jest.fn();
@@ -61,7 +61,7 @@ describe('StatusPicker', () => {
     attributes: expect.objectContaining({
       componentName: 'status',
       localId,
-      packageName: '@atlaskit/editor-core',
+      packageName: '@findable/editor-core',
       packageVersion: expect.any(String),
       selectedColor,
       textLength,
@@ -83,7 +83,7 @@ describe('StatusPicker', () => {
       duration: expect.any(Number),
       inputMethod: 'blur',
       localId,
-      packageName: '@atlaskit/editor-core',
+      packageName: '@findable/editor-core',
       packageVersion: expect.any(String),
       selectedColor,
       state,

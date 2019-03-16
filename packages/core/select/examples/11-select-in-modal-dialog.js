@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-import Button from '@atlaskit/button';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
+import Button from '@findable/button';
 import Select from '../src';
 
 type State = {

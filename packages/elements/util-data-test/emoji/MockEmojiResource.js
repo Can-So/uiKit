@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as uuid from 'uuid/v1';
-import { AbstractResource } from '@atlaskit/util-service-support';
-import { EmojiRepository, } from '@atlaskit/emoji';
+import { AbstractResource } from '@findable/util-service-support';
+import { EmojiRepository, } from '@findable/emoji';
 import { customCategory, customType, selectedToneStorageKey, } from './utils';
 import { loggedUser } from './story-data';
 var emojiFromUpload = function (upload) {

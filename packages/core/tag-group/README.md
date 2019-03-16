@@ -1,14 +1,14 @@
 # Tag-group
 
 This component displays an arbitrary number of
-[`@atlaskit/tag`](https://www.npmjs.com/package/@atlaskit/tag)s in a grouped
+[`@findable/tag`](https://www.npmjs.com/package/@findable/tag)s in a grouped
 manner. The group manages spacing and animation direction and allows for some
 alignment options.
 
 ## Installation
 
 ```sh
-yarn add @atlaskit/tag-group
+yarn add @findable/tag-group
 ```
 
 ## Usage

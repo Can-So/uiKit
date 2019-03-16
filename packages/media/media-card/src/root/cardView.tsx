@@ -4,12 +4,12 @@ import {
   MediaItemType,
   FileDetails,
   ImageResizeMode,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import {
   withAnalyticsEvents,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 
 import {
   SharedCardProps,

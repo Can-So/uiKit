@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Component } from 'react';
 
-import Button from '@atlaskit/button';
-import ArrowIcon from '@atlaskit/icon/glyph/media-services/arrow';
-import BrushIcon from '@atlaskit/icon/glyph/media-services/brush';
-import LineIcon from '@atlaskit/icon/glyph/media-services/line';
-import BlurIcon from '@atlaskit/icon/glyph/media-services/blur';
-import OvalIcon from '@atlaskit/icon/glyph/media-services/oval';
-import RectIcon from '@atlaskit/icon/glyph/media-services/rectangle';
-import TextIcon from '@atlaskit/icon/glyph/media-services/text';
+import Button from '@findable/button';
+import ArrowIcon from '@findable/icon/glyph/media-services/arrow';
+import BrushIcon from '@findable/icon/glyph/media-services/brush';
+import LineIcon from '@findable/icon/glyph/media-services/line';
+import BlurIcon from '@findable/icon/glyph/media-services/blur';
+import OvalIcon from '@findable/icon/glyph/media-services/oval';
+import RectIcon from '@findable/icon/glyph/media-services/rectangle';
+import TextIcon from '@findable/icon/glyph/media-services/text';
 import { Tool } from '../../../../common';
 import { ButtonIconWrapper } from './styles';
 

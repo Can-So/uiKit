@@ -1,4 +1,4 @@
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import * as React from 'react';
 import { style } from 'typestyle';
 import { ReactionSummary } from '../types/ReactionSummary';

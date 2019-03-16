@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props } from '@findable/docs';
 
 import SimpleFacadeExample from '../examples/single-component';
 
@@ -14,7 +14,7 @@ export default md`
   
   ${(
     <Example
-      packageName="@atlaskit/table-tree"
+      packageName="@findable/table-tree"
       Component={SimpleFacadeExample}
       source={require('!!raw-loader!../examples/single-component')}
       title="Single component facade"

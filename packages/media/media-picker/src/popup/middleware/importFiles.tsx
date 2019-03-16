@@ -9,7 +9,7 @@ import {
   FilePreview,
   isPreviewableType,
   MediaType,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import { State, SelectedItem, LocalUpload, ServiceName } from '../domain';
 import { isStartImportAction } from '../actions/startImport';
 import { finalizeUpload } from '../actions/finalizeUpload';

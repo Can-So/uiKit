@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { AkCustomDrawer } from '@atlaskit/navigation';
+import { AkCustomDrawer } from '@findable/navigation';
 
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
 import DefaultNav from './navigations/Default';
 
 import { AtlaskitIcon } from './index';

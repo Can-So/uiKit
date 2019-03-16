@@ -1,4 +1,4 @@
-import { EmojiId } from '@atlaskit/emoji';
+import { EmojiId } from '@findable/emoji';
 
 export const isLeftClick = (event: React.MouseEvent<HTMLElement>) =>
   event.button === 0 &&

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import FileIcon from '@atlaskit/icon/glyph/file';
+import FileIcon from '@findable/icon/glyph/file';
 import { Wrapper } from './styled';
 export var getDimensionsWithDefault = function (dimensions) {
     if (dimensions === void 0) { dimensions = { width: '100%', height: '100%' }; }

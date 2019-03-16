@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import styled from 'styled-components';
-import Tooltip from '@atlaskit/tooltip';
-import Button from '@atlaskit/button';
+import Tooltip from '@findable/tooltip';
+import Button from '@findable/button';
 import BookIcon from '../glyph/book';
 import ArrowUpIcon from '../glyph/arrow-up';
 import ArrowDownIcon from '../glyph/arrow-down';

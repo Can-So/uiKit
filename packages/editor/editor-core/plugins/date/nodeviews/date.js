@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
-import { timestampToString, timestampToTaskContext, isPastDate, } from '@atlaskit/editor-common';
-import { Date } from '@atlaskit/date';
+import { borderRadius, colors } from '@findable/theme';
+import { timestampToString, timestampToTaskContext, isPastDate, } from '@findable/editor-common';
+import { Date } from '@findable/date';
 import { setDatePickerAt } from '../actions';
 var SelectableDate = styled(Date)(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  .ProseMirror-selectednode & {\n    display: 'relative';\n    &::before {\n      content: '';\n      border: 2px solid ", ";\n      display: 'absolute';\n      background: transparent;\n      border-radius: ", "px;\n      box-sizing: border-box;\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      pointer-events: none;\n    }\n  }\n"], ["\n  .ProseMirror-selectednode & {\n    display: 'relative';\n    &::before {\n      content: '';\n      border: 2px solid ", ";\n      display: 'absolute';\n      background: transparent;\n      border-radius: ", "px;\n      box-sizing: border-box;\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      pointer-events: none;\n    }\n  }\n"])), colors.B200, borderRadius());
 var DateNodeView = /** @class */ (function (_super) {

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { ModalSpinner } from '@atlaskit/media-ui';
+import { ModalSpinner } from '@findable/media-ui';
 var AsyncEditorView = /** @class */ (function (_super) {
     tslib_1.__extends(AsyncEditorView, _super);
     function AsyncEditorView() {

@@ -1,6 +1,6 @@
 // @flow
 
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 export default md`
   ## 3.x - 4.x
@@ -12,8 +12,8 @@ export default md`
   Instead of using the stateless component, you now just use the stateful component and supply the props you want to be stateless.
 
   ${code`
-    - import { DatePickerStateless } from '@atlaskit/datetime-picker';
-    + import { DatePicker } from '@atlaskit/datetime-picker';
+    - import { DatePickerStateless } from '@findable/datetime-picker';
+    + import { DatePicker } from '@findable/datetime-picker';
 
     - <DatePickerStateless month={1} />
     + <DatePicker month={1} />

@@ -1,6 +1,6 @@
-import { ButtonAppearances } from '@atlaskit/button';
-import InlineDialog from '@atlaskit/inline-dialog';
-import { LoadOptions } from '@atlaskit/user-picker';
+import { ButtonAppearances } from '@findable/button';
+import InlineDialog from '@findable/inline-dialog';
+import { LoadOptions } from '@findable/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';

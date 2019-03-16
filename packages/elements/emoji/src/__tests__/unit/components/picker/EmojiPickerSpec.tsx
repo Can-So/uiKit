@@ -1,5 +1,5 @@
-import { waitUntil } from '@atlaskit/util-common-test';
-import { mockNonUploadingEmojiResourceFactory } from '@atlaskit/util-data-test';
+import { waitUntil } from '@findable/util-common-test';
+import { mockNonUploadingEmojiResourceFactory } from '@findable/util-data-test';
 import { ReactWrapper } from 'enzyme';
 import { FireAnalyticsEvent } from '../../../../../../../core/analytics/src';
 import EmojiRepository from '../../../../api/EmojiRepository';

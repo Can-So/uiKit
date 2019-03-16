@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { AbstractPresenceResource } from '@atlaskit/mention';
+import { AbstractPresenceResource } from '@findable/mention';
 var MockPresenceResource = /** @class */ (function (_super) {
     tslib_1.__extends(MockPresenceResource, _super);
     function MockPresenceResource(minTimeout, maxTimeout) {

@@ -1,7 +1,7 @@
 // tslint:disable:variable-name
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 var optionsColorNormal = colors.N500;
 var optionsColorActive = colors.B400;
 var colorSampleOutlineColor = 'rgba(255, 255, 255, 0.5)';

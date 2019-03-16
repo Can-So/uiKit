@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import { isCellSelection } from 'prosemirror-utils';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import InsertButton from '../InsertButton';
 import DeleteButton from '../DeleteButton';
 import { isSelectionUpdated, getColumnsWidths, isColumnDeleteButtonVisible, getColumnDeleteButtonParams, isColumnInsertButtonVisible, getColumnsParams, getColumnClassNames, } from '../../../utils';

@@ -1,4 +1,4 @@
-import { TableLayout } from '@atlaskit/adf-schema';
+import { TableLayout } from '@findable/adf-schema';
 export declare const tableMarginTop = 24;
 export declare const tableMarginBottom = 16;
 export declare const tableMarginSides = 8;

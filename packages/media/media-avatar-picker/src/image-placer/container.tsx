@@ -4,7 +4,7 @@
  */
 import * as React from 'react';
 import { ContainerWrapper } from './styled';
-import { Vector2 } from '@atlaskit/media-ui';
+import { Vector2 } from '@findable/media-ui';
 
 export interface ImagePlacerContainerProps {
   width: number;

@@ -1,4 +1,4 @@
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 export interface ClientBasedAuthHeaders {
     readonly 'X-Client-Id': string;
     readonly Authorization: string;

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import DropList from '@atlaskit/droplist';
-import Item from '@atlaskit/item';
+import DropList from '@findable/droplist';
+import Item from '@findable/item';
 import {
   doc,
   p,
@@ -13,7 +13,7 @@ import {
   code_block,
   underline,
   createAnalyticsEventMock,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import { ReactWrapper } from 'enzyme';
 import {
@@ -28,11 +28,11 @@ import ToolbarButton from '../../../../../ui/ToolbarButton';
 import DropdownMenuWrapper from '../../../../../ui/DropdownMenu';
 import panelPlugin from '../../../../../plugins/panel';
 import codeBlockPlugin from '../../../../../plugins/code-block';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import { EditorView } from 'prosemirror-view';
 import { AnalyticsHandler } from '../../../../../analytics';
 
-describe('@atlaskit/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
+describe('@findable/editor-core/ui/ToolbarAdvancedTextFormatting', () => {
   const createEditor = createEditorFactory();
   let createAnalyticsEvent: jest.MockInstance<UIAnalyticsEventInterface>;
   let analyticsHandler: AnalyticsHandler;

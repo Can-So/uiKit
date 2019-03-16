@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, gridSize, math } from '@atlaskit/theme';
+import { colors, gridSize, math } from '@findable/theme';
 import placeholderStyles from './placeholderStyles';
 
 /* Placeholder has been temporarily inlined until we have a helper library for such things */

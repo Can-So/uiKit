@@ -1,7 +1,7 @@
 import { EditorState, Plugin, PluginKey, Transaction } from 'prosemirror-state';
 import { findParentDomRefOfType } from 'prosemirror-utils';
 import { EditorView, DecorationSet } from 'prosemirror-view';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import { PluginConfig, TablePluginState } from '../types';
 import { EditorAppearance } from '../../../types';
 import { Dispatch } from '../../../event-dispatcher';

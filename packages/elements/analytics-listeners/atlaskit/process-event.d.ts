@@ -1,9 +1,9 @@
 /**
  * Inspired by analytics-web-react
  */
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import Logger from '../helpers/logger';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 declare const _default: (event: UIAnalyticsEventInterface, logger: Logger) => GasPayload | null;
 /**
  * This util exists to convert the Atlaskit event format into the analytics platform format.
@@ -22,7 +22,7 @@ declare const _default: (event: UIAnalyticsEventInterface, logger: Logger) => Ga
  *
  * Analytics platform event format:
  *  event {
- *      type: @atlaskit/analytics-gas-types.EventType
+ *      type: @findable/analytics-gas-types.EventType
  *      payload {
  *          ...mandatoryAttributesBasedOnEventType
  *          attributes: {

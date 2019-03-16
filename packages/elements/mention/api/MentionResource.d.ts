@@ -1,4 +1,4 @@
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 import { MentionDescription, MentionsResult } from '../types';
 export declare type MentionStats = {
     [key: string]: any;

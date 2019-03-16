@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FormattedMessage as FormattedMessageNamespace } from 'react-intl';
 
-import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
-import SettingsGlyph from '@atlaskit/icon/glyph/settings';
+import DiscoverFilledGlyph from '@findable/icon/glyph/discover-filled';
+import SettingsGlyph from '@findable/icon/glyph/settings';
 
 import {
   ConfluenceIcon,
@@ -10,14 +10,14 @@ import {
   JiraSoftwareIcon,
   JiraServiceDeskIcon,
   JiraCoreIcon,
-} from '@atlaskit/logo';
+} from '@findable/logo';
 import FormattedMessage from '../primitives/formatted-message';
 import { LicenseInformationResponse } from '../types';
 import messages from './messages';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
 import { CustomLink, RecentContainer } from '../types';
-import WorldIcon from '@atlaskit/icon/glyph/world';
+import WorldIcon from '@findable/icon/glyph/world';
 import { createIcon, createImageIcon, IconType } from './icon-themes';
 
 enum ProductActivationStatus {

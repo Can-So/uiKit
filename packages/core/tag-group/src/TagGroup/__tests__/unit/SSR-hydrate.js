@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import exenv from 'exenv';
-import Tag from '@atlaskit/tag';
+import Tag from '@findable/tag';
 import TagGroup from '../..';
 
 jest.mock('exenv', () => ({

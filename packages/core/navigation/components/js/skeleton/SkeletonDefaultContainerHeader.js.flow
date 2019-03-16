@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 
-import { Skeleton as SkeletonAvatar } from '@atlaskit/avatar';
+import { Skeleton as SkeletonAvatar } from '@findable/avatar';
 
 import { HiddenWhenCollapsed } from './ToggleWhenCollapsed';
 

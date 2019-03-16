@@ -1,7 +1,7 @@
-import Button from '@atlaskit/button';
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-import { colors } from '@atlaskit/theme';
-import Tooltip from '@atlaskit/tooltip';
+import Button from '@findable/button';
+import CrossCircleIcon from '@findable/icon/glyph/cross-circle';
+import { colors } from '@findable/theme';
+import Tooltip from '@findable/tooltip';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { MouseEvent, SyntheticEvent } from 'react';

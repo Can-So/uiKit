@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { gridSize, fontSize, colors, math } from '@atlaskit/theme';
+import { gridSize, fontSize, colors, math } from '@findable/theme';
 import {
   buttonWidthUnitless,
   maxTextWidth,

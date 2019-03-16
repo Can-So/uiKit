@@ -6,10 +6,10 @@ import {
   imageFileId,
   unknownFileId,
   errorFileId,
-} from '@atlaskit/media-test-helpers';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
-import { FileIdentifier } from '@atlaskit/media-core';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+} from '@findable/media-test-helpers';
+import { AnalyticsListener } from '@findable/analytics-next';
+import { FileIdentifier } from '@findable/media-core';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 
 import { Card } from '../src';
 import { createApiCards, actions } from '../example-helpers';

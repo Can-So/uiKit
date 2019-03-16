@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { ReactWrapper } from 'enzyme';
 import * as jsc from 'jsverify';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import {
   createMouseEvent,
   mountWithIntlContext,
-} from '@atlaskit/media-test-helpers';
-import { Rectangle, Camera, Vector2 } from '@atlaskit/media-ui';
+} from '@findable/media-test-helpers';
+import { Rectangle, Camera, Vector2 } from '@findable/media-ui';
 import {
   InteractiveImg,
   zoomLevelAfterResize,

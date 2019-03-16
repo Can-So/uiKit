@@ -1,7 +1,7 @@
-jest.mock('@atlaskit/media-ui');
+jest.mock('@findable/media-ui');
 
-import { getFileInfo, getImageInfo } from '@atlaskit/media-ui';
-import { asMock } from '@atlaskit/media-test-helpers';
+import { getFileInfo, getImageInfo } from '@findable/media-ui';
+import { asMock } from '@findable/media-test-helpers';
 import { getPreviewFromImage } from '../../getPreviewFromImage';
 import { ImagePreview, Preview } from '../../../domain/preview';
 

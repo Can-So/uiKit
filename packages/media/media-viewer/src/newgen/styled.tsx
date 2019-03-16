@@ -3,12 +3,12 @@
 // @ts-ignore: unused variable
 // prettier-ignore
 import styled, { StyledComponentClass } from 'styled-components';
-import { MediaType } from '@atlaskit/media-core';
+import { MediaType } from '@findable/media-core';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { HTMLAttributes, VideoHTMLAttributes, AudioHTMLAttributes, ImgHTMLAttributes, ComponentClass, ClassAttributes } from 'react';
-import { colors, layers, borderRadius } from '@atlaskit/theme';
-import { ellipsis } from '@atlaskit/media-ui';
+import { colors, layers, borderRadius } from '@findable/theme';
+import { ellipsis } from '@findable/media-ui';
 
 const overlayZindex = layers.modal() + 10;
 

@@ -1,11 +1,11 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { colors } from '@atlaskit/theme';
-import AkSpinner from '@atlaskit/spinner';
-import AkAvatar from '@atlaskit/avatar';
-import AkButton from '@atlaskit/button';
-import AkLozenge from '@atlaskit/lozenge';
+import { colors } from '@findable/theme';
+import AkSpinner from '@findable/spinner';
+import AkAvatar from '@findable/avatar';
+import AkButton from '@findable/button';
+import AkLozenge from '@findable/lozenge';
 
 import ErrorMessage from './components/ErrorMessage';
 import HeightTransitionWrapper from './components/HeightTransitionWrapper';

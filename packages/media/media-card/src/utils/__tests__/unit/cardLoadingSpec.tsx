@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import FileIcon from '@atlaskit/icon/glyph/file';
+import FileIcon from '@findable/icon/glyph/file';
 
 import { CardLoading } from '../..';
 import { getDimensionsWithDefault } from '../../cardLoading';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   AnalyticsEventPayload,
   WithAnalyticsEventProps,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 import { injectIntl, InjectedIntlProps, Messages } from 'react-intl';
 import { ErrorBoundaryWrapper } from '../primitives/wrapper';
 import FormattedMessage from '../primitives/formatted-message';

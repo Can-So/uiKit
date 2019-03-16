@@ -1,4 +1,4 @@
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { JSONTransformer } from '@findable/editor-json-transformer';
 var jsonTransformer = new JSONTransformer();
 export var unknown = function (node) {
     var content = JSON.stringify(jsonTransformer.encodeNode(node));

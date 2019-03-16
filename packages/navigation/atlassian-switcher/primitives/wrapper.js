@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { gridSize, colors } from '@atlaskit/theme';
+import { gridSize, colors } from '@findable/theme';
 import ManageButton from './manage-button';
 var Wrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  box-sizing: border-box;\n  height: calc(100vh - 3 * ", "px);\n  padding-right: ", "px;\n  padding-top: 5px;\n"], ["\n  box-sizing: border-box;\n  height: calc(100vh - 3 * ", "px);\n  padding-right: ", "px;\n  padding-top: 5px;\n"])), gridSize(), gridSize() * 4);
 var Body = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  min-height: calc(100% - 7.5 * ", "px);\n"], ["\n  min-height: calc(100% - 7.5 * ", "px);\n"])), gridSize);

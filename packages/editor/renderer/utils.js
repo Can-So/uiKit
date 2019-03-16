@@ -1,5 +1,5 @@
-import { defaultSchema } from '@atlaskit/adf-schema';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { defaultSchema } from '@findable/adf-schema';
+import { JSONTransformer } from '@findable/editor-json-transformer';
 function createEncoder(parser, encoder) {
     return function (value) { return encoder.encode(parser.parse(value)); };
 }

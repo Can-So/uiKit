@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { MediaStore, } from '@atlaskit/media-store';
+import { MediaStore, } from '@findable/media-store';
 import { CollectionFetcher } from '../collection';
 import { FileFetcherImpl } from '../file';
 var ContextFactory = /** @class */ (function () {

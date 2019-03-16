@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { JiraWordmark as JiraWordmarkLogo } from '@atlaskit/logo';
+import { JiraWordmark as JiraWordmarkLogo } from '@findable/logo';
 import { LinkItem } from '../../components';
 
 import ViewRegistrar from '../common/view-registrar';

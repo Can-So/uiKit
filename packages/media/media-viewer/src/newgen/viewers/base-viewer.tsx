@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import * as deepEqual from 'deep-equal';
-import { Context, FileState } from '@atlaskit/media-core';
+import { Context, FileState } from '@findable/media-core';
 import { Outcome } from '../domain';
 import ErrorMessage, { MediaViewerError } from '../error';
 import { Spinner } from '../loading';

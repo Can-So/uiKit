@@ -5,7 +5,7 @@ import {
   doc,
   p,
   panel,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { ClickAreaBlock } from '../../../../ui/Addon';
 import gapCursorPlugin, {
   GapCursorSelection,

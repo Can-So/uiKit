@@ -10,17 +10,17 @@
 */
 
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import ChevD from '@atlaskit/icon/glyph/chevron-down';
-import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
-import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
-import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import { JiraIcon } from '@atlaskit/logo';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import Avatar from '@findable/avatar';
+import AddIcon from '@findable/icon/glyph/add';
+import BacklogIcon from '@findable/icon/glyph/backlog';
+import BoardIcon from '@findable/icon/glyph/board';
+import ChevD from '@findable/icon/glyph/chevron-down';
+import GraphLineIcon from '@findable/icon/glyph/graph-line';
+import ShortcutIcon from '@findable/icon/glyph/shortcut';
+import QuestionCircleIcon from '@findable/icon/glyph/question-circle';
+import SearchIcon from '@findable/icon/glyph/search';
+import { JiraIcon } from '@findable/logo';
+import { gridSize as gridSizeFn } from '@findable/theme';
 
 import {
   ContainerHeader,

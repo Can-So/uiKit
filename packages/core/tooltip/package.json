@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/tooltip",
+  "name": "@findable/tooltip",
   "version": "13.0.1",
   "description": "A React Component for displaying Tooltips",
   "license": "Apache-2.0",
@@ -14,12 +14,12 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/popper": "^0.4.1",
-    "@atlaskit/portal": "^0.2.1",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/popper": "^0.4.1",
+    "@findable/portal": "^0.2.1",
+    "@findable/theme": "^8.0.1",
     "@babel/runtime": "^7.0.0",
     "flushable": "^1.0.0",
     "react-node-resolver": "^1.0.1",
@@ -31,12 +31,12 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/button": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/icon": "^16.0.5",
+    "@findable/ssr": "^0.0.1",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },

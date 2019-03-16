@@ -1,5 +1,5 @@
 import { cellAround, TableMap } from 'prosemirror-tables';
-import { TableLayout, CellAttributes } from '@atlaskit/adf-schema';
+import { TableLayout, CellAttributes } from '@findable/adf-schema';
 import {
   calcTableWidth,
   akEditorWideLayoutWidth,
@@ -7,7 +7,7 @@ import {
   akEditorFullWidthLayoutWidth,
   getBreakpoint,
   mapBreakpointToLayoutMaxWidth,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { EditorView } from 'prosemirror-view';
 import { ResolvedPos, NodeSpec } from 'prosemirror-model';
 

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -8,7 +8,7 @@ Blanket provides the overlay layer for components such as a modal dialog or a to
 
 ## Usage
 
-${code`import Blanket from '@atlaskit/blanket';`}
+${code`import Blanket from '@findable/blanket';`}
 
 The blanket component is designed to be used with a modal or popup, and
 overlay the rest of the page. It provides an onBlanketClicked option that is designed to catch clicks
@@ -19,7 +19,7 @@ shown or hidden with its parent element.
 
   ${(
     <Example
-      packageName="@atlaskit/blanket"
+      packageName="@findable/blanket"
       Component={require('../examples/00-basic-usage').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-usage')}
@@ -28,7 +28,7 @@ shown or hidden with its parent element.
 
   ${(
     <Example
-      packageName="@atlaskit/blanket"
+      packageName="@findable/blanket"
       Component={require('../examples/01-click-through').default}
       title="With click through enabled"
       source={require('!!raw-loader!../examples/01-click-through')}

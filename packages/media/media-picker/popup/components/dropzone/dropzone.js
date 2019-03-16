@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { Wrapper, Content, Label, Glass } from './styled';
 import { UploadIcon } from './icons';
 var Dropzone = /** @class */ (function (_super) {

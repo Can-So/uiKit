@@ -1,8 +1,8 @@
 // tslint:disable:variable-name
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
-import Button from '@atlaskit/button';
+import { colors } from '@findable/theme';
+import Button from '@findable/button';
 export var ErrorPopup = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  width: 290px;\n  padding: 16px;\n  background-color: ", ";\n  border-radius: 4px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n"], ["\n  width: 290px;\n  padding: 16px;\n  background-color: ", ";\n  border-radius: 4px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n"])), colors.N0);
 export var ErrorIconWrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  width: 92px;\n"], ["\n  width: 92px;\n"])));
 export var ErrorMessage = styled.div(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n  color: ", ";\n  margin-top: 16px;\n  margin-bottom: 4px;\n  width: 256px;\n  text-align: center;\n  font-weight: bold;\n"], ["\n  color: ", ";\n  margin-top: 16px;\n  margin-bottom: 4px;\n  width: 256px;\n  text-align: center;\n  font-weight: bold;\n"])), colors.N900);

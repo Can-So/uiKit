@@ -1,7 +1,7 @@
 // @flow
 import React, { Fragment } from 'react';
-import { DateTimePicker, DatePicker } from '@atlaskit/datetime-picker';
-import Button from '@atlaskit/button';
+import { DateTimePicker, DatePicker } from '@findable/datetime-picker';
+import Button from '@findable/button';
 import Form, { Field, FormFooter, ErrorMessage } from '../src';
 
 const validateOnSubmit = data => {

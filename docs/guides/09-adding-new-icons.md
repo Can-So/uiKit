@@ -1,6 +1,6 @@
 ---
 title: Adding New Icons
-description: How to add icons to @atlaskit/icon
+description: How to add icons to @findable/icon
 ---
 
 # Adding New Icons
@@ -16,21 +16,21 @@ Adding or updating a new icon:
 * Then run `yarn update:icons`
 
 This will:
-* build `@atlaskit/icon`
-* build `@atlaskit/icon-object`
-* build `@atlaskit/icons-file-type`
-* build `@atlaskit/reduced-ui-pack`
+* build `@findable/icon`
+* build `@findable/icon-object`
+* build `@findable/icons-file-type`
+* build `@findable/reduced-ui-pack`
 
 Once these are built you should:
 * Add your new icon to the list of icons in `packages/css-packs/reduced-ui-pack/src/internal/iconIds.js`
 * Add your new icon to the list of icons in `packages/core/icon/src/components/__tests__/unit/indexSpec.js`
-* locally check that the new/updated icons are rendered correctly on the website in `@atlaskit/icon`
-* locally check that the new/updated icons are rendered correctly on the website in `@atlaskit/reduced-ui-pack`
+* locally check that the new/updated icons are rendered correctly on the website in `@findable/icon`
+* locally check that the new/updated icons are rendered correctly on the website in `@findable/reduced-ui-pack`
 
 If your icon is used only in a specific context or product, place it in
   `/svgs_raw/{subfolder}` and it will be namespaced appropriately.
 
-Once your new icon is committed, make sure to include the maintainers of the `@atlaskit/icon` package in your PR.
+Once your new icon is committed, make sure to include the maintainers of the `@findable/icon` package in your PR.
 
 ## If you are updating an existing icon
 

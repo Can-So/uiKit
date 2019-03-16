@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { PopupSelect } from '@atlaskit/select';
+import { PopupSelect } from '@findable/select';
 import ModalDialog from '../src';
 
 const options = [

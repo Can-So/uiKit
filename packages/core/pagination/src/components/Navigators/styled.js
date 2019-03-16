@@ -1,7 +1,7 @@
 //@flow
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { gridSize } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { gridSize } from '@findable/theme';
 
 export const StyledButton = styled(Button)`
   [dir='rtl'] & {

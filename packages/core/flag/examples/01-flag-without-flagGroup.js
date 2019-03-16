@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import { colors } from '@atlaskit/theme';
-import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
+import { colors } from '@findable/theme';
+import SuccessIcon from '@findable/icon/glyph/check-circle';
 import Flag from '../src';
 
 export default () => (

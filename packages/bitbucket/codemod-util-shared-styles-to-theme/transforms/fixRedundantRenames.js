@@ -2,7 +2,7 @@ export default function redundantNames(root, j) {
   root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/theme'
+      value: '@findable/theme'
     }
   }).find(j.ImportSpecifier).filter(function (node) {
     // Filter renamed imports

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Frame } from '../Frame';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
 import { SpinnerWrapper } from './styled';
 var InlineCardResolvingView = /** @class */ (function (_super) {

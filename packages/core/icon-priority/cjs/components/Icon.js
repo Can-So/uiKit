@@ -37,7 +37,7 @@ var _react = _interopRequireWildcard(require('react'));
 
 var _styledComponents = _interopRequireDefault(require('styled-components'));
 
-var _theme = require('@atlaskit/theme');
+var _theme = require('@findable/theme');
 
 var sizes = {
   small: '16px',

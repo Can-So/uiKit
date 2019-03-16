@@ -6,7 +6,7 @@ import {
   CanvasHTMLAttributes,
   TextareaHTMLAttributes,
 } from 'react';
-import { layers, colors } from '@atlaskit/theme';
+import { layers, colors } from '@findable/theme';
 import { ButtonProps } from './toolbarButtons';
 
 export interface LineWidthFrontCircleProps {

@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/branch-installer",
+  "name": "@findable/branch-installer",
   "version": "0.0.8",
   "description": "Installs the Atlaskit dependency versions from the given branch.",
   "main": "index.js",

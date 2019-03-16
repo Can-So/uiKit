@@ -1,4 +1,4 @@
-import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
+import { InlineCardResolvedViewProps } from '@findable/media-ui';
 import { BuildInlineProps, AlterInlineProps } from './types';
 declare type BuildInlinePropsSourceCodePullRequest = BuildInlineProps<InlineCardResolvedViewProps>;
 declare type AlterInlinePropsSourceCodePullRequest = AlterInlineProps<InlineCardResolvedViewProps>;

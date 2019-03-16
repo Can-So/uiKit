@@ -1,11 +1,11 @@
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import { Trigger } from '../../../components/Trigger';
 
 const noop = () => {};
 
-describe('@atlaskit/reactions/trigger', () => {
+describe('@findable/reactions/trigger', () => {
   it('should render a button', () => {
     const trigger = shallow(<Trigger onClick={noop} />);
     expect(trigger.find(Button).length).toEqual(1);

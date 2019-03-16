@@ -5,7 +5,7 @@ import {
   MediaFileArtifacts,
   MediaCollectionItemFullDetails,
   MediaRepresentations,
-} from '@atlaskit/media-store';
+} from '@findable/media-store';
 
 export type FileStatus =
   | 'uploading'

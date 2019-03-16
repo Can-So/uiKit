@@ -2,9 +2,9 @@ import * as React from 'react';
 import {
   BlockCardResolvedViewProps,
   LozengeViewModel,
-} from '@atlaskit/media-ui';
-import ChatIcon from '@atlaskit/icon/glyph/comment';
-import { colors } from '@atlaskit/theme';
+} from '@findable/media-ui';
+import ChatIcon from '@findable/icon/glyph/comment';
+import { colors } from '@findable/theme';
 import { FormattedRelative } from 'react-intl';
 
 export const buildTaskTitle = (json: any) => {

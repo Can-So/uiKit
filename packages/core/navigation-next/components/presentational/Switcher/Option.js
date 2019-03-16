@@ -11,9 +11,9 @@ import { css as _css2 } from "emotion";
 import _extends from "@babel/runtime/helpers/extends";
 import { css as _css } from "emotion";
 import React, { PureComponent } from 'react';
-import { colors, fontSize, gridSize as gridSizeFn } from '@atlaskit/theme';
-import Avatar from '@atlaskit/avatar';
-import { components } from '@atlaskit/select';
+import { colors, fontSize, gridSize as gridSizeFn } from '@findable/theme';
+import Avatar from '@findable/avatar';
+import { components } from '@findable/select';
 var gridSize = gridSizeFn();
 var _ref = {
   display: 'flex',

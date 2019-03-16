@@ -1,5 +1,5 @@
 import { dataURItoFile, fileToDataURI } from '../../util';
-import { tallImage } from '@atlaskit/media-test-helpers';
+import { tallImage } from '@findable/media-test-helpers';
 
 describe('dataURItoFile, fileToDataURI Util', () => {
   const tallImageFile = dataURItoFile(tallImage);

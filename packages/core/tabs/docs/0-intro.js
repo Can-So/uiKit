@@ -1,17 +1,17 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   Use tabs to display multiple panels within a single window.
 
   ## Usage
 
-  ${code`import Tabs,  { TabContent, TabItem } from '@atlaskit/tabs';`}
+  ${code`import Tabs,  { TabContent, TabItem } from '@findable/tabs';`}
 
   ${(
     <Example
-      packageName="@atlaskit/tabs"
+      packageName="@findable/tabs"
       Component={require('../examples/00-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic')}
@@ -38,7 +38,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/tabs"
+      packageName="@findable/tabs"
       Component={require('../examples/30-custom-tab-content-component').default}
       title="Custom Content component"
       source={require('!!raw-loader!../examples/30-custom-tab-content-component')}
@@ -58,7 +58,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/tabs"
+      packageName="@findable/tabs"
       Component={require('../examples/20-custom-tab-item-components').default}
       title="Custom Item component"
       source={require('!!raw-loader!../examples/20-custom-tab-item-components')}

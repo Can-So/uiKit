@@ -1,4 +1,4 @@
-import { mockStore } from '@atlaskit/media-test-helpers';
+import { mockStore } from '@findable/media-test-helpers';
 import { removeFileFromRecents } from '../../removeFileFromRecents';
 import { RemoveFileFromRecentsAction } from '../../../actions/removeFileFromRecents';
 

@@ -7,8 +7,8 @@ import {
   gifFileId,
   videoFileId,
   largeImageFileId,
-} from '@atlaskit/media-test-helpers';
-import { MediaViewerDataSource } from '@atlaskit/media-viewer';
+} from '@findable/media-test-helpers';
+import { MediaViewerDataSource } from '@findable/media-viewer';
 import {
   MediaViewerExampleWrapper,
   MediaViewerExampleColumn,

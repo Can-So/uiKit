@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import Button from '@atlaskit/button';
-import Drawer from '@atlaskit/drawer';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
+import Button from '@findable/button';
+import Drawer from '@findable/drawer';
+import CrossIcon from '@findable/icon/glyph/cross';
+import ShortcutIcon from '@findable/icon/glyph/shortcut';
 import * as Styled from './styled';
 import Footer from '../Footer';
 import { commonMessages } from '../../messages';

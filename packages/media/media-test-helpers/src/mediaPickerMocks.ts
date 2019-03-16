@@ -1,4 +1,4 @@
-import { State } from '@atlaskit/media-picker/src/popup/domain';
+import { State } from '@findable/media-picker/src/popup/domain';
 import { Store } from 'react-redux';
 import { Observable } from 'rxjs/Observable';
 import { fakeContext } from './fakeContextProvider';
@@ -89,7 +89,7 @@ export const mockFetcher = () => ({
 });
 
 export const mockIsWebGLNotAvailable = () => {
-  jest.mock('@atlaskit/media-picker/src/popup/tools/webgl', () => {
+  jest.mock('@findable/media-picker/src/popup/tools/webgl', () => {
     return {
       isWebGLAvailable: jest.fn(() => {
         return false;

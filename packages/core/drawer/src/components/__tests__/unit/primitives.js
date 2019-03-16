@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import ArrowLeft from '@atlaskit/icon/glyph/arrow-left';
+import ArrowLeft from '@findable/icon/glyph/arrow-left';
 
 import DrawerPrimitive from '../../primitives';
 import { Slide } from '../../transitions';

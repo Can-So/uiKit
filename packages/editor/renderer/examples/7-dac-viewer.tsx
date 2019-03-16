@@ -6,8 +6,8 @@
  *
  *
  */
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { emoji } from '@atlaskit/util-data-test';
+import { ProviderFactory } from '@findable/editor-common';
+import { emoji } from '@findable/util-data-test';
 import * as Ajv from 'ajv';
 import * as React from 'react';
 import { ChangeEvent, PureComponent } from 'react';
@@ -88,7 +88,7 @@ export default class Example extends PureComponent<{}, State> {
     this.setState({ fetchingSchema: true });
 
     fetch(
-      'https://unpkg.com/@atlaskit/editor-common@latest/dist/json-schema/v1/full.json',
+      'https://unpkg.com/@findable/editor-common@latest/dist/json-schema/v1/full.json',
     )
       .then(res => {
         return res.json();

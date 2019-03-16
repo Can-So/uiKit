@@ -1,18 +1,18 @@
-# @atlaskit/inline-edit
+# @findable/inline-edit
 
 ## 8.0.1
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/analytics-next@4.0.1
-  - @atlaskit/field-radio-group@5.0.1
-  - @atlaskit/field-text@8.0.1
-  - @atlaskit/icon@16.0.5
-  - @atlaskit/multi-select@12.0.1
-  - @atlaskit/theme@8.0.1
-  - @atlaskit/button@11.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/analytics-next@4.0.1
+  - @findable/field-radio-group@5.0.1
+  - @findable/field-text@8.0.1
+  - @findable/icon@16.0.5
+  - @findable/multi-select@12.0.1
+  - @findable/theme@8.0.1
+  - @findable/button@11.0.0
 
 ## 8.0.0
-- [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [major] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -24,13 +24,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -44,328 +44,328 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 7.1.8
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/button@10.1.2
-  - @atlaskit/field-base@11.0.14
-  - @atlaskit/field-radio-group@4.0.15
-  - @atlaskit/multi-select@11.0.14
-  - @atlaskit/tag@6.1.4
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/button@10.1.2
+  - @findable/field-base@11.0.14
+  - @findable/field-radio-group@4.0.15
+  - @findable/multi-select@11.0.14
+  - @findable/tag@6.1.4
+  - @findable/icon@16.0.0
 
 ## 7.1.7
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/analytics-next@3.1.2
-  - @atlaskit/button@10.1.1
-  - @atlaskit/field-base@11.0.13
-  - @atlaskit/field-radio-group@4.0.14
-  - @atlaskit/field-text@7.0.18
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/multi-select@11.0.13
-  - @atlaskit/tag@6.1.3
-  - @atlaskit/tag-group@6.0.8
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/analytics-next@3.1.2
+  - @findable/button@10.1.1
+  - @findable/field-base@11.0.13
+  - @findable/field-radio-group@4.0.14
+  - @findable/field-text@7.0.18
+  - @findable/icon@15.0.2
+  - @findable/multi-select@11.0.13
+  - @findable/tag@6.1.3
+  - @findable/tag-group@6.0.8
+  - @findable/theme@7.0.1
+  - @findable/docs@6.0.0
 
 ## 7.1.6
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/button@10.0.4
-  - @atlaskit/field-base@11.0.12
-  - @atlaskit/field-radio-group@4.0.13
-  - @atlaskit/field-text@7.0.16
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/input@4.0.8
-  - @atlaskit/multi-select@11.0.12
-  - @atlaskit/tag@6.1.2
-  - @atlaskit/theme@7.0.0
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/button@10.0.4
+  - @findable/field-base@11.0.12
+  - @findable/field-radio-group@4.0.13
+  - @findable/field-text@7.0.16
+  - @findable/icon@15.0.1
+  - @findable/input@4.0.8
+  - @findable/multi-select@11.0.12
+  - @findable/tag@6.1.2
+  - @findable/theme@7.0.0
 
 ## 7.1.5
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/button@10.0.1
-  - @atlaskit/field-base@11.0.11
-  - @atlaskit/field-radio-group@4.0.12
-  - @atlaskit/multi-select@11.0.11
-  - @atlaskit/tag@6.1.1
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/button@10.0.1
+  - @findable/field-base@11.0.11
+  - @findable/field-radio-group@4.0.12
+  - @findable/multi-select@11.0.11
+  - @findable/tag@6.1.1
+  - @findable/icon@15.0.0
 
 ## 7.1.4
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/analytics-next@3.1.1
-  - @atlaskit/field-radio-group@4.0.11
-  - @atlaskit/field-text@7.0.15
-  - @atlaskit/icon@14.6.1
-  - @atlaskit/multi-select@11.0.10
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/analytics-next@3.1.1
+  - @findable/field-radio-group@4.0.11
+  - @findable/field-text@7.0.15
+  - @findable/icon@14.6.1
+  - @findable/multi-select@11.0.10
+  - @findable/theme@6.2.1
+  - @findable/button@10.0.0
 
 ## 7.1.3
-- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+- [patch] [a637f5e](https://github.com/fnamazing/uiKit/commits/a637f5e):
 
-  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+  - Refine and fix some flow type errors found by fixing @findable/analytics-next HOCs to allow flow to type check properly
 
 ## 7.1.2
-- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://github.com/fnamazing/uiKit/commits/b71751b)
 
 ## 7.1.1
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/button@9.0.13
-  - @atlaskit/field-base@11.0.8
-  - @atlaskit/field-radio-group@4.0.8
-  - @atlaskit/multi-select@11.0.7
-  - @atlaskit/tag@6.0.8
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/button@9.0.13
+  - @findable/field-base@11.0.8
+  - @findable/field-radio-group@4.0.8
+  - @findable/multi-select@11.0.7
+  - @findable/tag@6.0.8
+  - @findable/icon@14.0.0
 
 ## 7.1.0
-- [minor] Moved the internal @atlaskit/input component to a named export of inline-edit [c96c668](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c96c668)
+- [minor] Moved the internal @findable/input component to a named export of inline-edit [c96c668](https://github.com/fnamazing/uiKit/commits/c96c668)
 
 ## 7.0.8
-- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://github.com/fnamazing/uiKit/commits/b5d6d04)
 
 ## 7.0.6
-- [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/tag@6.0.5
-  - @atlaskit/multi-select@11.0.5
-  - @atlaskit/input@4.0.4
-  - @atlaskit/icon@13.2.5
-  - @atlaskit/field-text@7.0.6
-  - @atlaskit/field-radio-group@4.0.5
-  - @atlaskit/field-base@11.0.5
-  - @atlaskit/button@9.0.6
-  - @atlaskit/docs@5.0.6
+- [patch] Updated dependencies [df22ad8](https://github.com/fnamazing/uiKit/commits/df22ad8)
+  - @findable/theme@6.0.0
+  - @findable/tag@6.0.5
+  - @findable/multi-select@11.0.5
+  - @findable/input@4.0.4
+  - @findable/icon@13.2.5
+  - @findable/field-text@7.0.6
+  - @findable/field-radio-group@4.0.5
+  - @findable/field-base@11.0.5
+  - @findable/button@9.0.6
+  - @findable/docs@5.0.6
 
 ## 7.0.5
-- [patch] Remove blur of FieldBase wrapper when isEditing is false to fix edited fields not showing focus [75f032b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75f032b)
-- [patch] Updated dependencies [75f032b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75f032b)
+- [patch] Remove blur of FieldBase wrapper when isEditing is false to fix edited fields not showing focus [75f032b](https://github.com/fnamazing/uiKit/commits/75f032b)
+- [patch] Updated dependencies [75f032b](https://github.com/fnamazing/uiKit/commits/75f032b)
 
 ## 7.0.4
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/field-base@11.0.3
-  - @atlaskit/multi-select@11.0.4
-  - @atlaskit/input@4.0.3
-  - @atlaskit/field-text@7.0.4
-  - @atlaskit/analytics-next@3.0.4
-  - @atlaskit/tag@6.0.4
-  - @atlaskit/tag-group@6.0.4
-  - @atlaskit/button@9.0.5
-  - @atlaskit/theme@5.1.3
-  - @atlaskit/field-radio-group@4.0.4
-  - @atlaskit/icon@13.2.4
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/field-base@11.0.3
+  - @findable/multi-select@11.0.4
+  - @findable/input@4.0.3
+  - @findable/field-text@7.0.4
+  - @findable/analytics-next@3.0.4
+  - @findable/tag@6.0.4
+  - @findable/tag-group@6.0.4
+  - @findable/button@9.0.5
+  - @findable/theme@5.1.3
+  - @findable/field-radio-group@4.0.4
+  - @findable/icon@13.2.4
 
 ## 7.0.3
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/tag@6.0.3
-  - @atlaskit/tag-group@6.0.3
-  - @atlaskit/multi-select@11.0.3
-  - @atlaskit/field-radio-group@4.0.3
-  - @atlaskit/button@9.0.4
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/input@4.0.2
-  - @atlaskit/field-text@7.0.3
-  - @atlaskit/analytics-next@3.0.3
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/field-base@11.0.2
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/icon@13.2.2
+  - @findable/tag@6.0.3
+  - @findable/tag-group@6.0.3
+  - @findable/multi-select@11.0.3
+  - @findable/field-radio-group@4.0.3
+  - @findable/button@9.0.4
+  - @findable/theme@5.1.2
+  - @findable/input@4.0.2
+  - @findable/field-text@7.0.3
+  - @findable/analytics-next@3.0.3
+  - @findable/docs@5.0.2
+  - @findable/field-base@11.0.2
 
 ## 7.0.2
-- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-- [none] Updated dependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-  - @atlaskit/field-base@11.0.1
-  - @atlaskit/input@4.0.1
-  - @atlaskit/field-text@7.0.2
-  - @atlaskit/analytics-next@3.0.2
-  - @atlaskit/tag@6.0.2
-  - @atlaskit/tag-group@6.0.2
-  - @atlaskit/button@9.0.3
-  - @atlaskit/theme@5.1.1
-  - @atlaskit/field-radio-group@4.0.2
-  - @atlaskit/icon@13.2.1
+- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+- [none] Updated dependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+  - @findable/field-base@11.0.1
+  - @findable/input@4.0.1
+  - @findable/field-text@7.0.2
+  - @findable/analytics-next@3.0.2
+  - @findable/tag@6.0.2
+  - @findable/tag-group@6.0.2
+  - @findable/button@9.0.3
+  - @findable/theme@5.1.1
+  - @findable/field-radio-group@4.0.2
+  - @findable/icon@13.2.1
 
 ## 7.0.1
-- [patch] Move analytics tests and replace elements to core [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-- [none] Updated dependencies [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-  - @atlaskit/multi-select@11.0.1
-  - @atlaskit/field-text@7.0.1
-  - @atlaskit/analytics-next@3.0.1
-  - @atlaskit/tag@6.0.1
-  - @atlaskit/tag-group@6.0.1
-  - @atlaskit/button@9.0.2
-  - @atlaskit/docs@5.0.1
-  - @atlaskit/field-radio-group@4.0.1
+- [patch] Move analytics tests and replace elements to core [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+- [none] Updated dependencies [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+  - @findable/multi-select@11.0.1
+  - @findable/field-text@7.0.1
+  - @findable/analytics-next@3.0.1
+  - @findable/tag@6.0.1
+  - @findable/tag-group@6.0.1
+  - @findable/button@9.0.2
+  - @findable/docs@5.0.1
+  - @findable/field-radio-group@4.0.1
 
 ## 7.0.0
-- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/field-base@11.0.0
-  - @atlaskit/multi-select@11.0.0
-  - @atlaskit/input@4.0.0
-  - @atlaskit/field-text@7.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/tag@6.0.0
-  - @atlaskit/tag-group@6.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/field-radio-group@4.0.0
-  - @atlaskit/icon@13.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/field-base@11.0.0
-  - @atlaskit/multi-select@11.0.0
-  - @atlaskit/input@4.0.0
-  - @atlaskit/field-text@7.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/tag@6.0.0
-  - @atlaskit/tag-group@6.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/field-radio-group@4.0.0
-  - @atlaskit/icon@13.0.0
+- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/field-base@11.0.0
+  - @findable/multi-select@11.0.0
+  - @findable/input@4.0.0
+  - @findable/field-text@7.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/tag@6.0.0
+  - @findable/tag-group@6.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
+  - @findable/field-radio-group@4.0.0
+  - @findable/icon@13.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/field-base@11.0.0
+  - @findable/multi-select@11.0.0
+  - @findable/input@4.0.0
+  - @findable/field-text@7.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/tag@6.0.0
+  - @findable/tag-group@6.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
+  - @findable/field-radio-group@4.0.0
+  - @findable/icon@13.0.0
 
 ## 6.2.0
-- [minor] Updated prop description for button. Added button label props for inline-edit accessibility. [11205df](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/11205df)
-- [none] Updated dependencies [11205df](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/11205df)
-  - @atlaskit/button@8.2.6
+- [minor] Updated prop description for button. Added button label props for inline-edit accessibility. [11205df](https://github.com/fnamazing/uiKit/commits/11205df)
+- [none] Updated dependencies [11205df](https://github.com/fnamazing/uiKit/commits/11205df)
+  - @findable/button@8.2.6
 
 ## 6.1.4
-- [patch] Remove or update $FlowFixMe [e8ad98a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8ad98a)
-- [none] Updated dependencies [e8ad98a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8ad98a)
-  - @atlaskit/field-text@6.1.1
-  - @atlaskit/button@8.2.4
-  - @atlaskit/field-radio-group@3.1.3
-  - @atlaskit/icon@12.6.1
+- [patch] Remove or update $FlowFixMe [e8ad98a](https://github.com/fnamazing/uiKit/commits/e8ad98a)
+- [none] Updated dependencies [e8ad98a](https://github.com/fnamazing/uiKit/commits/e8ad98a)
+  - @findable/field-text@6.1.1
+  - @findable/button@8.2.4
+  - @findable/field-radio-group@3.1.3
+  - @findable/icon@12.6.1
 
 ## 6.1.3
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/field-base@10.1.2
-  - @atlaskit/multi-select@10.1.2
-  - @atlaskit/input@3.0.2
-  - @atlaskit/field-text@6.0.4
-  - @atlaskit/button@8.1.2
-  - @atlaskit/theme@4.0.4
-  - @atlaskit/tag@5.0.4
-  - @atlaskit/tag-group@5.1.1
-  - @atlaskit/field-radio-group@3.0.4
-  - @atlaskit/icon@12.1.2
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/field-base@10.1.2
+  - @findable/multi-select@10.1.2
+  - @findable/input@3.0.2
+  - @findable/field-text@6.0.4
+  - @findable/button@8.1.2
+  - @findable/theme@4.0.4
+  - @findable/tag@5.0.4
+  - @findable/tag-group@5.1.1
+  - @findable/field-radio-group@3.0.4
+  - @findable/icon@12.1.2
 
 ## 6.1.2
-- [patch] Update changelogs to remove duplicate [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-- [none] Updated dependencies [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-  - @atlaskit/theme@4.0.3
-  - @atlaskit/tag@5.0.3
-  - @atlaskit/multi-select@10.1.1
-  - @atlaskit/icon@12.1.1
-  - @atlaskit/field-radio-group@3.0.3
-  - @atlaskit/field-base@10.1.1
-  - @atlaskit/button@8.1.1
-  - @atlaskit/docs@4.1.1
+- [patch] Update changelogs to remove duplicate [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+- [none] Updated dependencies [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+  - @findable/theme@4.0.3
+  - @findable/tag@5.0.3
+  - @findable/multi-select@10.1.1
+  - @findable/icon@12.1.1
+  - @findable/field-radio-group@3.0.3
+  - @findable/field-base@10.1.1
+  - @findable/button@8.1.1
+  - @findable/docs@4.1.1
 
 ## 6.1.1
-- [patch] Updated dependencies [b9f0068](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9f0068)
-  - @atlaskit/input@3.0.1
-  - @atlaskit/field-text@6.0.3
+- [patch] Updated dependencies [b9f0068](https://github.com/fnamazing/uiKit/commits/b9f0068)
+  - @findable/input@3.0.1
+  - @findable/field-text@6.0.3
 
 ## 6.1.0
-- [none] Updated dependencies [9d20f54](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d20f54)
-  - @atlaskit/tag-group@5.1.0
-  - @atlaskit/tag@5.0.2
-  - @atlaskit/icon@12.1.0
-  - @atlaskit/field-radio-group@3.0.2
-  - @atlaskit/docs@4.1.0
-  - @atlaskit/theme@4.0.2
-  - @atlaskit/field-text@6.0.2
-  - @atlaskit/multi-select@10.1.0
-  - @atlaskit/field-base@10.1.0
-  - @atlaskit/button@8.1.0
+- [none] Updated dependencies [9d20f54](https://github.com/fnamazing/uiKit/commits/9d20f54)
+  - @findable/tag-group@5.1.0
+  - @findable/tag@5.0.2
+  - @findable/icon@12.1.0
+  - @findable/field-radio-group@3.0.2
+  - @findable/docs@4.1.0
+  - @findable/theme@4.0.2
+  - @findable/field-text@6.0.2
+  - @findable/multi-select@10.1.0
+  - @findable/field-base@10.1.0
+  - @findable/button@8.1.0
 
 
 ## 6.0.1
-- [patch] Update readme's [223cd67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/223cd67)
-- [patch] Updated dependencies [223cd67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/223cd67)
-  - @atlaskit/icon@12.0.1
-  - @atlaskit/tag@5.0.1
-  - @atlaskit/tag-group@5.0.1
-  - @atlaskit/field-radio-group@3.0.1
-  - @atlaskit/field-base@10.0.1
-  - @atlaskit/field-text@6.0.1
-  - @atlaskit/button@8.0.1
-  - @atlaskit/theme@4.0.1
-  - @atlaskit/docs@4.0.1
+- [patch] Update readme's [223cd67](https://github.com/fnamazing/uiKit/commits/223cd67)
+- [patch] Updated dependencies [223cd67](https://github.com/fnamazing/uiKit/commits/223cd67)
+  - @findable/icon@12.0.1
+  - @findable/tag@5.0.1
+  - @findable/tag-group@5.0.1
+  - @findable/field-radio-group@3.0.1
+  - @findable/field-base@10.0.1
+  - @findable/field-text@6.0.1
+  - @findable/button@8.0.1
+  - @findable/theme@4.0.1
+  - @findable/docs@4.0.1
 
 ## 6.0.0
-- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/tag@5.0.0
-  - @atlaskit/tag-group@5.0.0
-  - @atlaskit/multi-select@10.0.0
-  - @atlaskit/field-radio-group@3.0.0
-  - @atlaskit/field-base@10.0.0
-  - @atlaskit/input@3.0.0
-  - @atlaskit/field-text@6.0.0
-  - @atlaskit/button@8.0.0
-  - @atlaskit/theme@4.0.0
-  - @atlaskit/docs@4.0.0
+- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/icon@12.0.0
+  - @findable/tag@5.0.0
+  - @findable/tag-group@5.0.0
+  - @findable/multi-select@10.0.0
+  - @findable/field-radio-group@3.0.0
+  - @findable/field-base@10.0.0
+  - @findable/input@3.0.0
+  - @findable/field-text@6.0.0
+  - @findable/button@8.0.0
+  - @findable/theme@4.0.0
+  - @findable/docs@4.0.0
 
 ## 5.0.2
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/tag@4.1.1
-  - @atlaskit/tag-group@4.0.1
-  - @atlaskit/multi-select@9.0.2
-  - @atlaskit/field-radio-group@2.0.3
-  - @atlaskit/field-base@9.0.3
-  - @atlaskit/input@2.0.2
-  - @atlaskit/field-text@5.0.3
-  - @atlaskit/button@7.2.5
-  - @atlaskit/theme@3.2.2
-  - @atlaskit/docs@3.0.4
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/icon@11.3.0
+  - @findable/tag@4.1.1
+  - @findable/tag-group@4.0.1
+  - @findable/multi-select@9.0.2
+  - @findable/field-radio-group@2.0.3
+  - @findable/field-base@9.0.3
+  - @findable/input@2.0.2
+  - @findable/field-text@5.0.3
+  - @findable/button@7.2.5
+  - @findable/theme@3.2.2
+  - @findable/docs@3.0.4
 
 ## 5.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 4.6.3
-- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ed0bba)
+- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://github.com/fnamazing/uiKit/commits/9ed0bba)
 
 ## 4.6.2
-- [patch] Update links in documentation [c4f7497](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4f7497)
+- [patch] Update links in documentation [c4f7497](https://github.com/fnamazing/uiKit/commits/c4f7497)
 
 ## 4.6.0
-- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ceccf30)
+- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://github.com/fnamazing/uiKit/commits/ceccf30)
 
 ## 4.5.18
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 4.5.17
-- [patch] Fix inline edit not stretching all edit views correctly [f45f667](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f45f667)
+- [patch] Fix inline edit not stretching all edit views correctly [f45f667](https://github.com/fnamazing/uiKit/commits/f45f667)
 
 ## 4.5.16
-- [patch] tweaks confirm and cancel button sizes and position [f416077](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f416077)
+- [patch] tweaks confirm and cancel button sizes and position [f416077](https://github.com/fnamazing/uiKit/commits/f416077)
 
 ## 4.5.15
-- [patch] Packages Flow types for elements components [3111e74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3111e74)
+- [patch] Packages Flow types for elements components [3111e74](https://github.com/fnamazing/uiKit/commits/3111e74)
 
 ## 4.5.13
-- [patch] bump mention to 9.1.1 to fix mention autocomplete bug [c7708c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c7708c6)
+- [patch] bump mention to 9.1.1 to fix mention autocomplete bug [c7708c6](https://github.com/fnamazing/uiKit/commits/c7708c6)
 
 ## 4.5.10
-- [patch] Resolved low hanging flow errors in field-base field-text comment icon item and website, $ [007de27](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/007de27)
+- [patch] Resolved low hanging flow errors in field-base field-text comment icon item and website, $ [007de27](https://github.com/fnamazing/uiKit/commits/007de27)
 
 ## 4.5.9
-- [patch] Updated inline-edit test type, migrated item, updated pagination imports to account for removed root index file [b48c074](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b48c074)
+- [patch] Updated inline-edit test type, migrated item, updated pagination imports to account for removed root index file [b48c074](https://github.com/fnamazing/uiKit/commits/b48c074)
 
 ## 4.5.8
-- [patch] Manually bumped package ver to account for desync between ak and ak mk 2 versions [5518730](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5518730)
+- [patch] Manually bumped package ver to account for desync between ak and ak mk 2 versions [5518730](https://github.com/fnamazing/uiKit/commits/5518730)
 
 ## 4.5.7
-- [patch] Migrated to new mk2 repo & build system  [99089df](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99089df)
+- [patch] Migrated to new mk2 repo & build system  [99089df](https://github.com/fnamazing/uiKit/commits/99089df)
 
 ## 4.5.6 (2017-11-30)
 * bug fix; release stories with fixed console errors ([3321c2b](https://bitbucket.org/atlassian/atlaskit/commits/3321c2b))

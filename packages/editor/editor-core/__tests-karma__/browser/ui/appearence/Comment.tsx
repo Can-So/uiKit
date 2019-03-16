@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import Editor from '../../../../src/ui/Appearance/Comment';
 
-describe('@atlaskit/editor-core/editor/plugins/Comment', () => {
+describe('@findable/editor-core/editor/plugins/Comment', () => {
   const providerFactory = new ProviderFactory();
 
   it('should have Editor component defined', () => {

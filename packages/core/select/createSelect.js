@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { mergeStyles, makeAnimated } from 'react-select';
 import memoizeOne from 'memoize-one';
 import isEqual from 'react-fast-compare';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 import * as defaultComponents from './components'; // NOTE in the future, `Props` and `defaultProps` should come
 // directly from react-select
 

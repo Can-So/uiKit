@@ -4,7 +4,7 @@ import {
   p,
   bodiedExtension,
   extension,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   insertMacroFromMacroBrowser,
   MacroProvider,

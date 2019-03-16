@@ -1,4 +1,4 @@
-import { colors, gridSize as akGridSize, layers, themed } from '@atlaskit/theme';
+import { colors, gridSize as akGridSize, layers, themed } from '@findable/theme';
 /**
  * NOTE: changing the width of the Navigation is considered a breaking change
  */

@@ -3,11 +3,11 @@ import { hasParentNodeOfType } from 'prosemirror-utils';
 import { EditorState } from 'prosemirror-state';
 import { Node as PMNode } from 'prosemirror-model';
 
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import EditIcon from '@atlaskit/icon/glyph/editor/edit';
-import FullWidthIcon from '@atlaskit/icon/glyph/editor/media-full-width';
-import WideIcon from '@atlaskit/icon/glyph/editor/media-wide';
-import CenterIcon from '@atlaskit/icon/glyph/editor/media-center';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
+import EditIcon from '@findable/icon/glyph/editor/edit';
+import FullWidthIcon from '@findable/icon/glyph/editor/media-full-width';
+import WideIcon from '@findable/icon/glyph/editor/media-wide';
+import CenterIcon from '@findable/icon/glyph/editor/media-center';
 
 import { Command } from '../../types';
 import commonMessages from '../../messages';

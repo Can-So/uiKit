@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontSize, gridSize, colors } from '@atlaskit/theme';
+import { fontSize, gridSize, colors } from '@findable/theme';
 var gridSizeUnitless = gridSize();
 var lineHeightDefault = gridSizeUnitless * 2 / fontSize();
 

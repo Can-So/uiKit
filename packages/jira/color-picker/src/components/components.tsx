@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import { Color } from '../types';
 import ColorCard from './ColorCard';
 import { COLOR_CARD_SIZE } from '../constants';

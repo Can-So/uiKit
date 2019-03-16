@@ -1,5 +1,5 @@
 import { ShownAnalyticsAttributes, PerformanceTiming } from './analytics-util';
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import { CreateAnalyticsEventFn } from '../components/analytics/types';
 import { ABTest } from '../api/CrossProductSearchClient';
 export declare function firePreQueryShownEvent(eventAttributes: ShownAnalyticsAttributes, elapsedMs: number, renderTimeMs: number, searchSessionId: string, createAnalyticsEvent: CreateAnalyticsEventFn, experimentRequestDurationMs?: number): void;

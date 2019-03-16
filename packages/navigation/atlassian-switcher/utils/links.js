@@ -1,14 +1,14 @@
 import * as tslib_1 from "tslib";
 var _a;
 import * as React from 'react';
-import DiscoverFilledGlyph from '@atlaskit/icon/glyph/discover-filled';
-import SettingsGlyph from '@atlaskit/icon/glyph/settings';
-import { ConfluenceIcon, JiraIcon, JiraSoftwareIcon, JiraServiceDeskIcon, JiraCoreIcon, } from '@atlaskit/logo';
+import DiscoverFilledGlyph from '@findable/icon/glyph/discover-filled';
+import SettingsGlyph from '@findable/icon/glyph/settings';
+import { ConfluenceIcon, JiraIcon, JiraSoftwareIcon, JiraServiceDeskIcon, JiraCoreIcon, } from '@findable/logo';
 import FormattedMessage from '../primitives/formatted-message';
 import messages from './messages';
 import JiraOpsLogo from './assets/jira-ops-logo';
 import PeopleLogo from './assets/people';
-import WorldIcon from '@atlaskit/icon/glyph/world';
+import WorldIcon from '@findable/icon/glyph/world';
 import { createIcon, createImageIcon } from './icon-themes';
 var ProductActivationStatus;
 (function (ProductActivationStatus) {

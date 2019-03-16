@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';

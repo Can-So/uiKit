@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 
 import RendererDemo from './helper/RendererDemo';
-import FieldRange from '@atlaskit/field-range';
+import FieldRange from '@findable/field-range';
 
 interface State {
   maxHeight: number;

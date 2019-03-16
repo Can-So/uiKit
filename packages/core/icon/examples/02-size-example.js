@@ -1,7 +1,7 @@
 // @flow
 import React, { Component, type Element } from 'react';
 import styled from 'styled-components';
-import Btn, { ButtonGroup } from '@atlaskit/button';
+import Btn, { ButtonGroup } from '@findable/button';
 
 import ActivityIcon from '../glyph/activity';
 import AddCircleIcon from '../glyph/add-circle';

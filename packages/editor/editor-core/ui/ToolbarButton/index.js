@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { AkButton } from './styles';

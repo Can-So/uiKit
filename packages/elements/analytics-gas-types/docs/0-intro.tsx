@@ -1,4 +1,4 @@
-import { md } from '@atlaskit/docs';
+import { md } from '@findable/docs';
 
 export default md`
   # Analytics GAS types
@@ -8,9 +8,9 @@ export default md`
   ## Installation
 
   ~~~js
-  npm install @atlaskit/analitics-gas-types
+  npm install @findable/analitics-gas-types
   # or
-  yarn add  @atlaskit/analitics-gas-types
+  yarn add  @findable/analitics-gas-types
   ~~~
 
   ## Using the component
@@ -19,9 +19,9 @@ export default md`
 
   ~~~js
   import * as React from 'react';
-  import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+  import { withAnalyticsEvents } from '@findable/analytics-next';
 
-  import { GasPayload } from '@atlaskit/analytics-gas-types';
+  import { GasPayload } from '@findable/analytics-gas-types';
 
   export type Props = {
     onClick: e => void,

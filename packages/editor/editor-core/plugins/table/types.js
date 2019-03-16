@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { TableSharedCssClassName } from '@atlaskit/editor-common';
+import { TableSharedCssClassName } from '@findable/editor-common';
 export var TableDecorations = {
     CONTROLS_HOVER: 'CONTROLS_HOVER',
 };

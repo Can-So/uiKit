@@ -1,6 +1,6 @@
 // @flow
 
-import { type ThemeProp } from '@atlaskit/theme';
+import { type ThemeProp } from '@findable/theme';
 import React, { PureComponent, type Node } from 'react';
 import Container from './styledContainer';
 import Content from './styledContent';

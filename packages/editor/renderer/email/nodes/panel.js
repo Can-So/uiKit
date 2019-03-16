@@ -1,4 +1,4 @@
-import { colors, gridSize, borderRadius } from '@atlaskit/theme';
+import { colors, gridSize, borderRadius } from '@findable/theme';
 import { createTag, serializeStyle } from '../util';
 var config = {
     info: {

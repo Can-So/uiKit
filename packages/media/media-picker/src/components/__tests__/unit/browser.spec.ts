@@ -1,6 +1,6 @@
 jest.mock('../../../service/newUploadServiceImpl');
 
-import { Context, ContextFactory } from '@atlaskit/media-core';
+import { Context, ContextFactory } from '@findable/media-core';
 import { Browser, BrowserConfig } from '../../types';
 import { BrowserImpl } from '../../browser';
 

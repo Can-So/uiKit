@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var InitialLoading = styled.div.withConfig({
   displayName: "InitialLoading",
   componentId: "vq33zx-0"

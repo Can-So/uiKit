@@ -4,7 +4,7 @@ import {
   getComponentClassWithStore,
   mockState,
   mockStore,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { StatelessSidebar, default as ConnectedSidebar } from '../../sidebar';
 import { ServiceList, Separator } from '../../styled';
 import SidebarItem from '../../item/sidebarItem';

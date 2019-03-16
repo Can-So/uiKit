@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { ConfluenceObjectResult, ContentType } from '../model/Result';
-import PageIcon from '@atlaskit/icon-object/glyph/page/24';
-import BlogIcon from '@atlaskit/icon-object/glyph/blog/24';
-import ImageIcon from '@atlaskit/icon-file-type/glyph/image/24';
-import ExcelSpreadsheetIcon from '@atlaskit/icon-file-type/glyph/excel-spreadsheet/24';
-import VideoIcon from '@atlaskit/icon-file-type/glyph/video/24';
-import ArchiveIcon from '@atlaskit/icon-file-type/glyph/archive/24';
-import PowerpointPresentationIcon from '@atlaskit/icon-file-type/glyph/powerpoint-presentation/24';
-import SourceCodeIcon from '@atlaskit/icon-file-type/glyph/source-code/24';
-import AudioIcon from '@atlaskit/icon-file-type/glyph/audio/24';
-import WordDocumentIcon from '@atlaskit/icon-file-type/glyph/word-document/24';
-import PdfDocumentIcon from '@atlaskit/icon-file-type/glyph/pdf-document/24';
-import GenericIcon from '@atlaskit/icon-file-type/glyph/generic/24';
+import PageIcon from '@findable/icon-object/glyph/page/24';
+import BlogIcon from '@findable/icon-object/glyph/blog/24';
+import ImageIcon from '@findable/icon-file-type/glyph/image/24';
+import ExcelSpreadsheetIcon from '@findable/icon-file-type/glyph/excel-spreadsheet/24';
+import VideoIcon from '@findable/icon-file-type/glyph/video/24';
+import ArchiveIcon from '@findable/icon-file-type/glyph/archive/24';
+import PowerpointPresentationIcon from '@findable/icon-file-type/glyph/powerpoint-presentation/24';
+import SourceCodeIcon from '@findable/icon-file-type/glyph/source-code/24';
+import AudioIcon from '@findable/icon-file-type/glyph/audio/24';
+import WordDocumentIcon from '@findable/icon-file-type/glyph/word-document/24';
+import PdfDocumentIcon from '@findable/icon-file-type/glyph/pdf-document/24';
+import GenericIcon from '@findable/icon-file-type/glyph/generic/24';
 
-import Avatar from '@atlaskit/avatar';
-import { colors } from '@atlaskit/theme';
+import Avatar from '@findable/avatar';
+import { colors } from '@findable/theme';
 
 export interface ExtensionMatcher {
   regexp: RegExp;

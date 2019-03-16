@@ -1,696 +1,696 @@
-# @atlaskit/emoji
+# @findable/emoji
 
 ## 58.1.0
-- [minor] [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
+- [minor] [b684722884](https://github.com/fnamazing/uiKit/commits/b684722884):
 
   - improvement of SSR tests and examples for Fabric Elements
 
 ## 58.0.0
-- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+- [major] [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
 
   - Dropped ES5 distributables from the typescript packages
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/icon@16.0.5
-  - @atlaskit/section-message@2.0.1
-  - @atlaskit/spinner@10.0.1
-  - @atlaskit/theme@8.0.1
-  - @atlaskit/tooltip@13.0.1
-  - @atlaskit/i18n-tools@0.5.0
-  - @atlaskit/button@11.0.0
-  - @atlaskit/editor-test-helpers@8.0.0
-  - @atlaskit/util-data-test@11.0.0
-  - @atlaskit/util-service-support@4.0.0
-  - @atlaskit/media-core@29.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/icon@16.0.5
+  - @findable/section-message@2.0.1
+  - @findable/spinner@10.0.1
+  - @findable/theme@8.0.1
+  - @findable/tooltip@13.0.1
+  - @findable/i18n-tools@0.5.0
+  - @findable/button@11.0.0
+  - @findable/editor-test-helpers@8.0.0
+  - @findable/util-data-test@11.0.0
+  - @findable/util-service-support@4.0.0
+  - @findable/media-core@29.0.0
 
 ## 57.0.1
-- Updated dependencies [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
-  - @atlaskit/elements-test-helpers@0.3.0
+- Updated dependencies [7261577953](https://github.com/fnamazing/uiKit/commits/7261577953):
+  - @findable/elements-test-helpers@0.3.0
 
 ## 57.0.0
-- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
-  - @atlaskit/editor-test-helpers@7.0.6
-  - @atlaskit/util-data-test@10.2.5
-  - @atlaskit/media-core@28.0.0
+- Updated dependencies [7ab3e93996](https://github.com/fnamazing/uiKit/commits/7ab3e93996):
+  - @findable/editor-test-helpers@7.0.6
+  - @findable/util-data-test@10.2.5
+  - @findable/media-core@28.0.0
 
 ## 56.2.1
-- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
-  - @atlaskit/button@10.1.3
-  - @atlaskit/icon@16.0.4
-  - @atlaskit/util-data-test@10.2.3
-  - @atlaskit/util-service-support@3.1.1
-  - @atlaskit/media-core@27.2.3
-  - @atlaskit/docs@7.0.0
-  - @atlaskit/analytics@5.0.0
-  - @atlaskit/field-base@12.0.0
-  - @atlaskit/layer@6.0.0
-  - @atlaskit/section-message@2.0.0
-  - @atlaskit/spinner@10.0.0
-  - @atlaskit/theme@8.0.0
-  - @atlaskit/tooltip@13.0.0
+- Updated dependencies [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
+  - @findable/button@10.1.3
+  - @findable/icon@16.0.4
+  - @findable/util-data-test@10.2.3
+  - @findable/util-service-support@3.1.1
+  - @findable/media-core@27.2.3
+  - @findable/docs@7.0.0
+  - @findable/analytics@5.0.0
+  - @findable/field-base@12.0.0
+  - @findable/layer@6.0.0
+  - @findable/section-message@2.0.0
+  - @findable/spinner@10.0.0
+  - @findable/theme@8.0.0
+  - @findable/tooltip@13.0.0
 
 ## 56.2.0
-- [minor] [4072865c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4072865c1c):
+- [minor] [4072865c1c](https://github.com/fnamazing/uiKit/commits/4072865c1c):
 
   - added SSR tests to task-decision
 
 ## 56.1.0
-- [minor] [36bb743af0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36bb743af0):
+- [minor] [36bb743af0](https://github.com/fnamazing/uiKit/commits/36bb743af0):
 
   - added/cleaned up ssr tests
 
 ## 56.0.0
-- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
-  - @atlaskit/editor-test-helpers@7.0.2
-  - @atlaskit/util-data-test@10.2.2
-  - @atlaskit/media-core@27.2.0
+- Updated dependencies [4aee5f3cec](https://github.com/fnamazing/uiKit/commits/4aee5f3cec):
+  - @findable/editor-test-helpers@7.0.2
+  - @findable/util-data-test@10.2.2
+  - @findable/media-core@27.2.0
 
 ## 55.1.0
-- [minor] [9ab9e467d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ab9e467d2):
+- [minor] [9ab9e467d2](https://github.com/fnamazing/uiKit/commits/9ab9e467d2):
 
   - Bump version of typestyle for ssr compatibility
 
 ## 55.0.2
-- [patch] [2d691c1e48](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d691c1e48):
+- [patch] [2d691c1e48](https://github.com/fnamazing/uiKit/commits/2d691c1e48):
 
   - Added aria labels to Emoji upload component
 
 ## 55.0.1
-- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
-  - @atlaskit/editor-test-helpers@7.0.0
+- Updated dependencies [4af5bd2a58](https://github.com/fnamazing/uiKit/commits/4af5bd2a58):
+  - @findable/editor-test-helpers@7.0.0
 
 ## 55.0.0
-- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
-  - @atlaskit/editor-test-helpers@6.3.22
-  - @atlaskit/util-data-test@10.2.1
-  - @atlaskit/media-core@27.1.0
+- Updated dependencies [fc6164c8c2](https://github.com/fnamazing/uiKit/commits/fc6164c8c2):
+  - @findable/editor-test-helpers@6.3.22
+  - @findable/util-data-test@10.2.1
+  - @findable/media-core@27.1.0
 
 ## 54.1.0
-- [minor] [cf6799312a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf6799312a):
+- [minor] [cf6799312a](https://github.com/fnamazing/uiKit/commits/cf6799312a):
 
   - Enable striter types for emoji package
 
 ## 54.0.0
-- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
-  - @atlaskit/editor-test-helpers@6.3.17
-  - @atlaskit/util-data-test@10.0.36
-  - @atlaskit/media-core@27.0.0
+- Updated dependencies [69c8d0c19c](https://github.com/fnamazing/uiKit/commits/69c8d0c19c):
+  - @findable/editor-test-helpers@6.3.17
+  - @findable/util-data-test@10.0.36
+  - @findable/media-core@27.0.0
 
 ## 53.0.1
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/button@10.1.2
-  - @atlaskit/field-base@11.0.14
-  - @atlaskit/section-message@1.0.16
-  - @atlaskit/tooltip@12.1.15
-  - @atlaskit/editor-test-helpers@6.3.13
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/button@10.1.2
+  - @findable/field-base@11.0.14
+  - @findable/section-message@1.0.16
+  - @findable/tooltip@12.1.15
+  - @findable/editor-test-helpers@6.3.13
+  - @findable/icon@16.0.0
 
 ## 53.0.0
-- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
-  - @atlaskit/editor-test-helpers@6.3.12
-  - @atlaskit/util-data-test@10.0.34
-  - @atlaskit/media-core@26.2.0
+- Updated dependencies [85d5d168fd](https://github.com/fnamazing/uiKit/commits/85d5d168fd):
+  - @findable/editor-test-helpers@6.3.12
+  - @findable/util-data-test@10.0.34
+  - @findable/media-core@26.2.0
 
 ## 52.0.0
-- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
-  - @atlaskit/editor-test-helpers@6.3.11
-  - @atlaskit/util-data-test@10.0.33
-  - @atlaskit/media-core@26.1.0
+- Updated dependencies [dadef80](https://github.com/fnamazing/uiKit/commits/dadef80):
+  - @findable/editor-test-helpers@6.3.11
+  - @findable/util-data-test@10.0.33
+  - @findable/media-core@26.1.0
 
 ## 51.2.0
-- [minor] [6ef7a45](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ef7a45):
+- [minor] [6ef7a45](https://github.com/fnamazing/uiKit/commits/6ef7a45):
 
   - FS-1230 New standalone emoji upload component added
 
 ## 51.1.0
-- [minor] [e60d7aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e60d7aa):
+- [minor] [e60d7aa](https://github.com/fnamazing/uiKit/commits/e60d7aa):
 
   - updated i18n translations
 
 ## 51.0.0
-- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
-  - @atlaskit/editor-test-helpers@6.3.7
-  - @atlaskit/util-data-test@10.0.31
-  - @atlaskit/media-core@26.0.0
+- Updated dependencies [cbb8cb5](https://github.com/fnamazing/uiKit/commits/cbb8cb5):
+  - @findable/editor-test-helpers@6.3.7
+  - @findable/util-data-test@10.0.31
+  - @findable/media-core@26.0.0
 
 ## 50.0.0
-- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
-  - @atlaskit/util-data-test@10.0.30
-  - @atlaskit/media-core@25.0.0
+- Updated dependencies [72d37fb](https://github.com/fnamazing/uiKit/commits/72d37fb):
+  - @findable/util-data-test@10.0.30
+  - @findable/media-core@25.0.0
 
 ## 49.1.0
-- [patch] [53cb129](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53cb129):
+- [patch] [53cb129](https://github.com/fnamazing/uiKit/commits/53cb129):
 
   - show emoji preview error in a tooltip, render spinner outside button, css changes
-- [minor] [514790b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/514790b):
+- [minor] [514790b](https://github.com/fnamazing/uiKit/commits/514790b):
 
   - added i18n support to emoji
-- [patch] [686de31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/686de31):
+- [patch] [686de31](https://github.com/fnamazing/uiKit/commits/686de31):
 
   - added maxWidth to other buttons
 
 ## 49.0.0
-- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
-  - @atlaskit/util-data-test@10.0.28
-  - @atlaskit/media-core@24.7.0
+- Updated dependencies [b3738ea](https://github.com/fnamazing/uiKit/commits/b3738ea):
+  - @findable/util-data-test@10.0.28
+  - @findable/media-core@24.7.0
 
 ## 48.0.2
-- [patch] [0f19693](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f19693):
+- [patch] [0f19693](https://github.com/fnamazing/uiKit/commits/0f19693):
 
   - added tests for xregexp transformer, updated README and simplified code
-- [patch] [b789b3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b789b3a):
+- [patch] [b789b3a](https://github.com/fnamazing/uiKit/commits/b789b3a):
 
   - removed xregexp library dependency from emoji and mention components, added xregexp-transformer package to compile xregexp expressions to unicode charsets
 
 ## 48.0.1
-- [patch] [015fcd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/015fcd0):
+- [patch] [015fcd0](https://github.com/fnamazing/uiKit/commits/015fcd0):
 
   - Adjusted unit tests to test for the bug noticed in FS-3259. Added multiple atlassian-ftfy emoji to test this, so updated a unit test to confirm that there are 14 Atlassian emoji, and also added an additional unit test to confirm that FS-3259 was corrected.
-- [patch] [18203e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/18203e6):
+- [patch] [18203e6](https://github.com/fnamazing/uiKit/commits/18203e6):
 
   - FS-3259 Fixed bug that caused an emoji to be automatically inserted for a query including a closing colon even if there are multiple (an odd number specifically) emoji with an exact shortName match.
 
 ## 48.0.0
-- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
-  - @atlaskit/util-data-test@10.0.26
-  - @atlaskit/media-core@24.6.0
+- Updated dependencies [80f765b](https://github.com/fnamazing/uiKit/commits/80f765b):
+  - @findable/util-data-test@10.0.26
+  - @findable/media-core@24.6.0
 
 ## 47.0.8
-- [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
+- [patch] [b81da9b](https://github.com/fnamazing/uiKit/commits/b81da9b):
 
   - Fix typescript types to support strictFunctionTypes
 
 ## 47.0.7
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/analytics@4.0.7
-  - @atlaskit/button@10.1.1
-  - @atlaskit/field-base@11.0.13
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/layer@5.0.10
-  - @atlaskit/section-message@1.0.14
-  - @atlaskit/spinner@9.0.13
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/tooltip@12.1.13
-  - @atlaskit/util-data-test@10.0.25
-  - @atlaskit/util-service-support@3.0.5
-  - @atlaskit/media-core@24.5.2
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/analytics@4.0.7
+  - @findable/button@10.1.1
+  - @findable/field-base@11.0.13
+  - @findable/icon@15.0.2
+  - @findable/layer@5.0.10
+  - @findable/section-message@1.0.14
+  - @findable/spinner@9.0.13
+  - @findable/theme@7.0.1
+  - @findable/tooltip@12.1.13
+  - @findable/util-data-test@10.0.25
+  - @findable/util-service-support@3.0.5
+  - @findable/media-core@24.5.2
+  - @findable/docs@6.0.0
 
 ## 47.0.6
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/button@10.0.4
-  - @atlaskit/field-base@11.0.12
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/spinner@9.0.12
-  - @atlaskit/tooltip@12.1.12
-  - @atlaskit/theme@7.0.0
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/button@10.0.4
+  - @findable/field-base@11.0.12
+  - @findable/icon@15.0.1
+  - @findable/spinner@9.0.12
+  - @findable/tooltip@12.1.12
+  - @findable/theme@7.0.0
 
 ## 47.0.5
-- [patch] [31ac424](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/31ac424):
+- [patch] [31ac424](https://github.com/fnamazing/uiKit/commits/31ac424):
 
   - FS-1596 Changed sizes of example emojis in test00.
 
 ## 47.0.4
-- [patch] [90c4702](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90c4702):
+- [patch] [90c4702](https://github.com/fnamazing/uiKit/commits/90c4702):
 
   - FS-1734 Removed the try it out section from Emoji and Mentions documentation pages to match other pages. The section only contained a link to the same page, so was essentially redundant and potentially confusing.
 
 ## 47.0.3
-- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+- [patch] [3061b52](https://github.com/fnamazing/uiKit/commits/3061b52):
 
   - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
 
 ## 47.0.2
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/button@10.0.1
-  - @atlaskit/field-base@11.0.11
-  - @atlaskit/tooltip@12.1.11
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/button@10.0.1
+  - @findable/field-base@11.0.11
+  - @findable/tooltip@12.1.11
+  - @findable/icon@15.0.0
 
 ## 47.0.1
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/icon@14.6.1
-  - @atlaskit/spinner@9.0.11
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/tooltip@12.1.10
-  - @atlaskit/media-core@24.5.1
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/icon@14.6.1
+  - @findable/spinner@9.0.11
+  - @findable/theme@6.2.1
+  - @findable/tooltip@12.1.10
+  - @findable/media-core@24.5.1
+  - @findable/button@10.0.0
 
 ## 47.0.0
-- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
-  - @atlaskit/util-data-test@10.0.21
-  - @atlaskit/media-core@24.5.0
+- Updated dependencies [7e8b4b9](https://github.com/fnamazing/uiKit/commits/7e8b4b9):
+  - @findable/util-data-test@10.0.21
+  - @findable/media-core@24.5.0
 
 ## 46.0.1
-- [patch] [49a2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49a2a58):
+- [patch] [49a2a58](https://github.com/fnamazing/uiKit/commits/49a2a58):
 
   - Use onClick from button in emoji
 
 ## 46.0.0
-- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
-  - @atlaskit/util-data-test@10.0.20
-  - @atlaskit/media-core@24.4.0
+- Updated dependencies [2c21466](https://github.com/fnamazing/uiKit/commits/2c21466):
+  - @findable/util-data-test@10.0.20
+  - @findable/media-core@24.4.0
 
 ## 45.0.4
-- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+- [patch] [36c362f](https://github.com/fnamazing/uiKit/commits/36c362f):
 
   - FS-3174 - Fix usage of gridSize() and borderRadius()
 
 ## 45.0.3
-- [patch] [527b954](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/527b954):
+- [patch] [527b954](https://github.com/fnamazing/uiKit/commits/527b954):
 
   - FS-3174 - Remove usage of util-shared-styles from elements components
 
 ## 45.0.2
-- [patch] Tweak emoji tests to work better with newest EmojiOne v4 metadata [c034007](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c034007)
+- [patch] Tweak emoji tests to work better with newest EmojiOne v4 metadata [c034007](https://github.com/fnamazing/uiKit/commits/c034007)
 
 ## 45.0.1
-- [patch] Move canvas-prebuilt to devDep [7c3512e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c3512e)
+- [patch] Move canvas-prebuilt to devDep [7c3512e](https://github.com/fnamazing/uiKit/commits/7c3512e)
 
 ## 45.0.0
-- [major] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
-  - @atlaskit/util-data-test@10.0.16
-  - @atlaskit/media-core@24.3.0
+- [major] Updated dependencies [b1ce691](https://github.com/fnamazing/uiKit/commits/b1ce691)
+  - @findable/util-data-test@10.0.16
+  - @findable/media-core@24.3.0
 
 ## 44.0.0
-- [major] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
-  - @atlaskit/util-data-test@10.0.14
-  - @atlaskit/media-core@24.2.0
+- [major] Updated dependencies [2afa60d](https://github.com/fnamazing/uiKit/commits/2afa60d)
+  - @findable/util-data-test@10.0.14
+  - @findable/media-core@24.2.0
 
 ## 43.0.0
-- [patch] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
-- [major] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
-- [major] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
-  - @atlaskit/util-data-test@10.0.12
-  - @atlaskit/media-core@24.1.0
+- [patch] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [8b2c4d3](https://github.com/fnamazing/uiKit/commits/8b2c4d3)
+- [major] Updated dependencies [8b2c4d3](https://github.com/fnamazing/uiKit/commits/8b2c4d3)
+- [major] Updated dependencies [3302d51](https://github.com/fnamazing/uiKit/commits/3302d51)
+  - @findable/util-data-test@10.0.12
+  - @findable/media-core@24.1.0
 
 ## 42.0.2
-- [patch] Remove ua-parser-js to save some pageweight [cf18b9f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf18b9f)
+- [patch] Remove ua-parser-js to save some pageweight [cf18b9f](https://github.com/fnamazing/uiKit/commits/cf18b9f)
 
 ## 42.0.1
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/button@9.0.13
-  - @atlaskit/field-base@11.0.8
-  - @atlaskit/tooltip@12.1.1
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/button@9.0.13
+  - @findable/field-base@11.0.8
+  - @findable/tooltip@12.1.1
+  - @findable/icon@14.0.0
 
 ## 42.0.0
-- [major] Update RXJS dependency to ^5.5.0 [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
-- [major] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
-  - @atlaskit/util-data-test@10.0.10
-  - @atlaskit/media-core@24.0.0
+- [major] Update RXJS dependency to ^5.5.0 [927ae63](https://github.com/fnamazing/uiKit/commits/927ae63)
+- [major] Updated dependencies [927ae63](https://github.com/fnamazing/uiKit/commits/927ae63)
+  - @findable/util-data-test@10.0.10
+  - @findable/media-core@24.0.0
 
 ## 41.0.1
-- [patch] FS-1583 size placeholders in picker to square [a836b20](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a836b20)
+- [patch] FS-1583 size placeholders in picker to square [a836b20](https://github.com/fnamazing/uiKit/commits/a836b20)
 
 ## 41.0.0
-- [major] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
-  - @atlaskit/util-data-test@10.0.9
-  - @atlaskit/media-core@23.2.0
+- [major] Updated dependencies [6e1d642](https://github.com/fnamazing/uiKit/commits/6e1d642)
+  - @findable/util-data-test@10.0.9
+  - @findable/media-core@23.2.0
 
 ## 40.0.2
-- [patch] Update TS to 3.0 [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
-- [none] Updated dependencies [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
-  - @atlaskit/media-core@23.1.1
+- [patch] Update TS to 3.0 [f68d367](https://github.com/fnamazing/uiKit/commits/f68d367)
+- [none] Updated dependencies [f68d367](https://github.com/fnamazing/uiKit/commits/f68d367)
+  - @findable/media-core@23.1.1
 
 ## 40.0.1
-- [patch] FS-2941 Stop using Request object and upgrade fetch-mock [dff332a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dff332a)
+- [patch] FS-2941 Stop using Request object and upgrade fetch-mock [dff332a](https://github.com/fnamazing/uiKit/commits/dff332a)
 
 ## 40.0.0
-- [major] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
-  - @atlaskit/util-data-test@10.0.8
-  - @atlaskit/media-core@23.1.0
+- [major] Updated dependencies [7545979](https://github.com/fnamazing/uiKit/commits/7545979)
+  - @findable/util-data-test@10.0.8
+  - @findable/media-core@23.1.0
 
 ## 39.1.1
-- [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
-  - @atlaskit/util-data-test@10.0.7
+- [patch] Updated dependencies [b12f7e6](https://github.com/fnamazing/uiKit/commits/b12f7e6)
+  - @findable/util-data-test@10.0.7
 
 ## 39.1.0
-- [minor] FS-2892 add code splitting to emoji components [dd91bcf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd91bcf)
-- [none] Updated dependencies [dd91bcf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd91bcf)
+- [minor] FS-2892 add code splitting to emoji components [dd91bcf](https://github.com/fnamazing/uiKit/commits/dd91bcf)
+- [none] Updated dependencies [dd91bcf](https://github.com/fnamazing/uiKit/commits/dd91bcf)
 
 ## 39.0.4
-- [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/tooltip@12.0.9
-  - @atlaskit/spinner@9.0.6
-  - @atlaskit/icon@13.2.5
-  - @atlaskit/field-base@11.0.5
-  - @atlaskit/button@9.0.6
-  - @atlaskit/docs@5.0.6
+- [patch] Updated dependencies [df22ad8](https://github.com/fnamazing/uiKit/commits/df22ad8)
+  - @findable/theme@6.0.0
+  - @findable/tooltip@12.0.9
+  - @findable/spinner@9.0.6
+  - @findable/icon@13.2.5
+  - @findable/field-base@11.0.5
+  - @findable/button@9.0.6
+  - @findable/docs@5.0.6
 
 ## 39.0.3
-- [patch] FS-2819 use aria-label as selector rather than closest [84a7235](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84a7235)
-- [none] Updated dependencies [84a7235](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84a7235)
+- [patch] FS-2819 use aria-label as selector rather than closest [84a7235](https://github.com/fnamazing/uiKit/commits/84a7235)
+- [none] Updated dependencies [84a7235](https://github.com/fnamazing/uiKit/commits/84a7235)
 
 ## 39.0.2
-- [patch] Update emoji examples to use valid emoji in test data [62ebfd7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/62ebfd7)
-- [none] Updated dependencies [62ebfd7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/62ebfd7)
-  - @atlaskit/util-data-test@10.0.6
+- [patch] Update emoji examples to use valid emoji in test data [62ebfd7](https://github.com/fnamazing/uiKit/commits/62ebfd7)
+- [none] Updated dependencies [62ebfd7](https://github.com/fnamazing/uiKit/commits/62ebfd7)
+  - @findable/util-data-test@10.0.6
 
 ## 39.0.1
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/util-data-test@10.0.4
-  - @atlaskit/tooltip@12.0.5
-  - @atlaskit/field-base@11.0.3
-  - @atlaskit/button@9.0.5
-  - @atlaskit/theme@5.1.3
-  - @atlaskit/spinner@9.0.5
-  - @atlaskit/layer@5.0.4
-  - @atlaskit/analytics@4.0.4
-  - @atlaskit/icon@13.2.4
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/util-data-test@10.0.4
+  - @findable/tooltip@12.0.5
+  - @findable/field-base@11.0.3
+  - @findable/button@9.0.5
+  - @findable/theme@5.1.3
+  - @findable/spinner@9.0.5
+  - @findable/layer@5.0.4
+  - @findable/analytics@4.0.4
+  - @findable/icon@13.2.4
 
 ## 39.0.0
 
 
 
 
-- [patch] Synchronous property "serviceHost" as part of many Interfaces in media components (like MediaApiConfig) is removed and replaced with asynchronous "baseUrl" as part of Auth object. [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)
-- [none] Updated dependencies [597e0bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/597e0bd)
-  - @atlaskit/util-data-test@10.0.3
-- [none] Updated dependencies [61df453](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61df453)
-  - @atlaskit/util-data-test@10.0.3
-- [none] Updated dependencies [812a39c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/812a39c)
-  - @atlaskit/util-data-test@10.0.3
-- [none] Updated dependencies [c8eb097](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8eb097)
-  - @atlaskit/util-data-test@10.0.3
-- [major] Updated dependencies [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)
-  - @atlaskit/media-core@23.0.0
-  - @atlaskit/util-data-test@10.0.3
+- [patch] Synchronous property "serviceHost" as part of many Interfaces in media components (like MediaApiConfig) is removed and replaced with asynchronous "baseUrl" as part of Auth object. [d02746f](https://github.com/fnamazing/uiKit/commits/d02746f)
+- [none] Updated dependencies [597e0bd](https://github.com/fnamazing/uiKit/commits/597e0bd)
+  - @findable/util-data-test@10.0.3
+- [none] Updated dependencies [61df453](https://github.com/fnamazing/uiKit/commits/61df453)
+  - @findable/util-data-test@10.0.3
+- [none] Updated dependencies [812a39c](https://github.com/fnamazing/uiKit/commits/812a39c)
+  - @findable/util-data-test@10.0.3
+- [none] Updated dependencies [c8eb097](https://github.com/fnamazing/uiKit/commits/c8eb097)
+  - @findable/util-data-test@10.0.3
+- [major] Updated dependencies [d02746f](https://github.com/fnamazing/uiKit/commits/d02746f)
+  - @findable/media-core@23.0.0
+  - @findable/util-data-test@10.0.3
 
 ## 38.0.5
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/util-data-test@10.0.2
-  - @atlaskit/tooltip@12.0.4
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/button@9.0.4
-  - @atlaskit/media-core@22.2.1
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/spinner@9.0.4
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/util-service-support@3.0.1
-  - @atlaskit/layer@5.0.3
-  - @atlaskit/analytics@4.0.3
-  - @atlaskit/field-base@11.0.2
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/util-data-test@10.0.2
+  - @findable/tooltip@12.0.4
+  - @findable/icon@13.2.2
+  - @findable/button@9.0.4
+  - @findable/media-core@22.2.1
+  - @findable/theme@5.1.2
+  - @findable/spinner@9.0.4
+  - @findable/docs@5.0.2
+  - @findable/util-service-support@3.0.1
+  - @findable/layer@5.0.3
+  - @findable/analytics@4.0.3
+  - @findable/field-base@11.0.2
 
 ## 38.0.4
-- [patch] FS-2111 Code review feedback [cf930e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf930e3)
-- [patch] Fix emoji picker focus issue for IE11 [ce6eb48](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce6eb48)
-- [none] Updated dependencies [cf930e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf930e3)
-- [none] Updated dependencies [ce6eb48](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce6eb48)
+- [patch] FS-2111 Code review feedback [cf930e3](https://github.com/fnamazing/uiKit/commits/cf930e3)
+- [patch] Fix emoji picker focus issue for IE11 [ce6eb48](https://github.com/fnamazing/uiKit/commits/ce6eb48)
+- [none] Updated dependencies [cf930e3](https://github.com/fnamazing/uiKit/commits/cf930e3)
+- [none] Updated dependencies [ce6eb48](https://github.com/fnamazing/uiKit/commits/ce6eb48)
 
 ## 38.0.3
-- [patch] FS-2819 fix typechecking of target element [8edc3a2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8edc3a2)
-- [none] Updated dependencies [8edc3a2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8edc3a2)
+- [patch] FS-2819 fix typechecking of target element [8edc3a2](https://github.com/fnamazing/uiKit/commits/8edc3a2)
+- [none] Updated dependencies [8edc3a2](https://github.com/fnamazing/uiKit/commits/8edc3a2)
 
 ## 38.0.2
-- [patch] FS-2819 use internal version of closest [1cd9438](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1cd9438)
-- [none] Updated dependencies [1cd9438](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1cd9438)
+- [patch] FS-2819 use internal version of closest [1cd9438](https://github.com/fnamazing/uiKit/commits/1cd9438)
+- [none] Updated dependencies [1cd9438](https://github.com/fnamazing/uiKit/commits/1cd9438)
 
 ## 38.0.1
-- [patch] Updated dependencies [e6b1985](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6b1985)
-  - @atlaskit/tooltip@12.0.0
-  - @atlaskit/icon@13.1.1
+- [patch] Updated dependencies [e6b1985](https://github.com/fnamazing/uiKit/commits/e6b1985)
+  - @findable/tooltip@12.0.0
+  - @findable/icon@13.1.1
 
 ## 38.0.0
 
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/field-base@11.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/media-core@22.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/spinner@9.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/util-service-support@3.0.0
-  - @atlaskit/layer@5.0.0
-  - @atlaskit/analytics@4.0.0
-  - @atlaskit/icon@13.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/media-core@22.0.0
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/field-base@11.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/spinner@9.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/util-service-support@3.0.0
-  - @atlaskit/layer@5.0.0
-  - @atlaskit/analytics@4.0.0
-  - @atlaskit/icon@13.0.0
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/tooltip@11.0.0
+  - @findable/util-data-test@10.0.0
+  - @findable/field-base@11.0.0
+  - @findable/button@9.0.0
+  - @findable/media-core@22.0.0
+  - @findable/theme@5.0.0
+  - @findable/spinner@9.0.0
+  - @findable/docs@5.0.0
+  - @findable/util-service-support@3.0.0
+  - @findable/layer@5.0.0
+  - @findable/analytics@4.0.0
+  - @findable/icon@13.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/util-data-test@10.0.0
+  - @findable/media-core@22.0.0
+  - @findable/tooltip@11.0.0
+  - @findable/field-base@11.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/spinner@9.0.0
+  - @findable/docs@5.0.0
+  - @findable/util-service-support@3.0.0
+  - @findable/layer@5.0.0
+  - @findable/analytics@4.0.0
+  - @findable/icon@13.0.0
 
 ## 37.0.2
-- [patch] Move emoji tests [0c6d1c7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c6d1c7)
-- [none] Updated dependencies [0c6d1c7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c6d1c7)
+- [patch] Move emoji tests [0c6d1c7](https://github.com/fnamazing/uiKit/commits/0c6d1c7)
+- [none] Updated dependencies [0c6d1c7](https://github.com/fnamazing/uiKit/commits/0c6d1c7)
 
 ## 37.0.1
-- [patch] Move the tests under src and club the tests under unit, integration and visual regression [f1a9069](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1a9069)
-- [none] Updated dependencies [f1a9069](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1a9069)
-  - @atlaskit/util-service-support@2.0.12
-  - @atlaskit/util-data-test@9.1.18
+- [patch] Move the tests under src and club the tests under unit, integration and visual regression [f1a9069](https://github.com/fnamazing/uiKit/commits/f1a9069)
+- [none] Updated dependencies [f1a9069](https://github.com/fnamazing/uiKit/commits/f1a9069)
+  - @findable/util-service-support@2.0.12
+  - @findable/util-data-test@9.1.18
 
 ## 37.0.0
-- [major] FS-2011 change EmojiRepository to use CategoryId [f897c79](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f897c79)
-- [minor] FS-2011 fix scroll to user custom upload section [cacf096](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cacf096)
-- [none] Updated dependencies [f897c79](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f897c79)
-  - @atlaskit/util-data-test@9.1.17
-- [none] Updated dependencies [cacf096](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cacf096)
-  - @atlaskit/util-data-test@9.1.17
+- [major] FS-2011 change EmojiRepository to use CategoryId [f897c79](https://github.com/fnamazing/uiKit/commits/f897c79)
+- [minor] FS-2011 fix scroll to user custom upload section [cacf096](https://github.com/fnamazing/uiKit/commits/cacf096)
+- [none] Updated dependencies [f897c79](https://github.com/fnamazing/uiKit/commits/f897c79)
+  - @findable/util-data-test@9.1.17
+- [none] Updated dependencies [cacf096](https://github.com/fnamazing/uiKit/commits/cacf096)
+  - @findable/util-data-test@9.1.17
 
 ## 36.0.2
 
 
-- [none] Updated dependencies [8c711bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c711bd)
-- [patch] Updated dependencies [42ee1ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/42ee1ea)
-  - @atlaskit/media-core@21.0.0
+- [none] Updated dependencies [8c711bd](https://github.com/fnamazing/uiKit/commits/8c711bd)
+- [patch] Updated dependencies [42ee1ea](https://github.com/fnamazing/uiKit/commits/42ee1ea)
+  - @findable/media-core@21.0.0
 
 ## 36.0.1
-- [patch] Updated dependencies [8d5053e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d5053e)
-  - @atlaskit/media-picker@8.1.6
-  - @atlaskit/util-data-test@9.1.15
+- [patch] Updated dependencies [8d5053e](https://github.com/fnamazing/uiKit/commits/8d5053e)
+  - @findable/media-picker@8.1.6
+  - @findable/util-data-test@9.1.15
 
 ## 36.0.0
-- [major] remove MediaPicker and use media-core to upload files [0cf2f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cf2f52)
-- [patch] Updated dependencies [0cf2f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cf2f52)
-  - @atlaskit/util-data-test@9.1.14
+- [major] remove MediaPicker and use media-core to upload files [0cf2f52](https://github.com/fnamazing/uiKit/commits/0cf2f52)
+- [patch] Updated dependencies [0cf2f52](https://github.com/fnamazing/uiKit/commits/0cf2f52)
+  - @findable/util-data-test@9.1.14
 
 ## 35.1.4
-- [patch] Updated dependencies [c57e9c1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c57e9c1)
-  - @atlaskit/media-picker@8.1.4
-  - @atlaskit/media-core@20.0.0
+- [patch] Updated dependencies [c57e9c1](https://github.com/fnamazing/uiKit/commits/c57e9c1)
+  - @findable/media-picker@8.1.4
+  - @findable/media-core@20.0.0
 
 ## 35.1.3
-- [patch] FS-2056 defer input focus in EmojiPickerListSearch [b062ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b062ab4)
-- [none] Updated dependencies [b062ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b062ab4)
+- [patch] FS-2056 defer input focus in EmojiPickerListSearch [b062ab4](https://github.com/fnamazing/uiKit/commits/b062ab4)
+- [none] Updated dependencies [b062ab4](https://github.com/fnamazing/uiKit/commits/b062ab4)
 
 ## 35.1.2
-- [patch] Updated dependencies [cdba8b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cdba8b3)
-  - @atlaskit/spinner@8.0.0
-  - @atlaskit/media-picker@8.1.3
-  - @atlaskit/field-base@10.1.3
-  - @atlaskit/button@8.2.3
+- [patch] Updated dependencies [cdba8b3](https://github.com/fnamazing/uiKit/commits/cdba8b3)
+  - @findable/spinner@8.0.0
+  - @findable/media-picker@8.1.3
+  - @findable/field-base@10.1.3
+  - @findable/button@8.2.3
 
 ## 35.1.1
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/media-picker@8.1.2
-  - @atlaskit/util-data-test@9.1.13
-  - @atlaskit/media-core@19.1.3
-  - @atlaskit/tooltip@10.2.1
-  - @atlaskit/field-base@10.1.2
-  - @atlaskit/button@8.1.2
-  - @atlaskit/theme@4.0.4
-  - @atlaskit/layer@4.0.3
-  - @atlaskit/spinner@7.0.2
-  - @atlaskit/icon@12.1.2
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/media-picker@8.1.2
+  - @findable/util-data-test@9.1.13
+  - @findable/media-core@19.1.3
+  - @findable/tooltip@10.2.1
+  - @findable/field-base@10.1.2
+  - @findable/button@8.1.2
+  - @findable/theme@4.0.4
+  - @findable/layer@4.0.3
+  - @findable/spinner@7.0.2
+  - @findable/icon@12.1.2
 ## 35.1.0
-- [none] Updated dependencies [7217164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7217164)
-  - @atlaskit/util-data-test@9.1.11
+- [none] Updated dependencies [7217164](https://github.com/fnamazing/uiKit/commits/7217164)
+  - @findable/util-data-test@9.1.11
 ## 35.0.7
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/media-picker@8.0.0
-  - @atlaskit/util-data-test@9.1.10
-  - @atlaskit/media-core@19.0.0
-  - @atlaskit/tooltip@10.0.0
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/field-base@10.0.0
-  - @atlaskit/button@8.0.0
-  - @atlaskit/theme@4.0.0
-  - @atlaskit/spinner@6.0.0
-  - @atlaskit/docs@4.0.0
-  - @atlaskit/util-service-support@2.0.8
-  - @atlaskit/layer@4.0.0
-  - @atlaskit/analytics@3.0.2
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/media-picker@8.0.0
+  - @findable/util-data-test@9.1.10
+  - @findable/media-core@19.0.0
+  - @findable/tooltip@10.0.0
+  - @findable/icon@12.0.0
+  - @findable/field-base@10.0.0
+  - @findable/button@8.0.0
+  - @findable/theme@4.0.0
+  - @findable/spinner@6.0.0
+  - @findable/docs@4.0.0
+  - @findable/util-service-support@2.0.8
+  - @findable/layer@4.0.0
+  - @findable/analytics@3.0.2
 
 ## 35.0.6
-- [patch] Updated dependencies [1c87e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c87e5a)
-  - @atlaskit/media-picker@7.0.6
-  - @atlaskit/util-data-test@9.1.9
+- [patch] Updated dependencies [1c87e5a](https://github.com/fnamazing/uiKit/commits/1c87e5a)
+  - @findable/media-picker@7.0.6
+  - @findable/util-data-test@9.1.9
 
 ## 35.0.5
-- [patch] Updated dependencies [5ee48c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ee48c4)
-  - @atlaskit/media-picker@7.0.5
-  - @atlaskit/media-core@18.1.2
+- [patch] Updated dependencies [5ee48c4](https://github.com/fnamazing/uiKit/commits/5ee48c4)
+  - @findable/media-picker@7.0.5
+  - @findable/media-core@18.1.2
 
 ## 35.0.4
-- [patch] FS-1954 fix emoji remove button truncation [5ed86f9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ed86f9)
-- [none] Updated dependencies [5ed86f9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ed86f9)
+- [patch] FS-1954 fix emoji remove button truncation [5ed86f9](https://github.com/fnamazing/uiKit/commits/5ed86f9)
+- [none] Updated dependencies [5ed86f9](https://github.com/fnamazing/uiKit/commits/5ed86f9)
 
 ## 35.0.3
-- [patch] FS-1206 remove AtlassianEmojiMigrationResource [0edc6c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0edc6c8)
-- [none] Updated dependencies [0edc6c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0edc6c8)
+- [patch] FS-1206 remove AtlassianEmojiMigrationResource [0edc6c8](https://github.com/fnamazing/uiKit/commits/0edc6c8)
+- [none] Updated dependencies [0edc6c8](https://github.com/fnamazing/uiKit/commits/0edc6c8)
 
 ## 35.0.2
-- [patch] FS-1904 add support for emoji with ascii starting with ( [c83d567](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c83d567)
-- [none] Updated dependencies [c83d567](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c83d567)
-  - @atlaskit/util-data-test@9.1.5
+- [patch] FS-1904 add support for emoji with ascii starting with ( [c83d567](https://github.com/fnamazing/uiKit/commits/c83d567)
+- [none] Updated dependencies [c83d567](https://github.com/fnamazing/uiKit/commits/c83d567)
+  - @findable/util-data-test@9.1.5
 
 ## 35.0.1
-- [patch] Updated dependencies [bd26d3c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bd26d3c)
-  - @atlaskit/media-picker@7.0.1
-  - @atlaskit/media-core@18.1.1
+- [patch] Updated dependencies [bd26d3c](https://github.com/fnamazing/uiKit/commits/bd26d3c)
+  - @findable/media-picker@7.0.1
+  - @findable/media-core@18.1.1
 
 ## 35.0.0
-- [major] media-picker: <All but popup picker>.emitUploadEnd second argument shape has changed from MediaFileData to FileDetails; `upload-end` event payload body shape changed from MediaFileData to FileDetails; All the media pickers config now have new property `useNewUploadService: boolean` (false by default); popup media-picker .cancel can't be called with no argument, though types does allow for it; `File` is removed; --- media-store: MediaStore.createFile now has a required argument of type MediaStoreCreateFileParams; MediaStore.copyFileWithToken new method; uploadFile method result type has changed from just a promise to a UploadFileResult type; --- media-test-helpers: mediaPickerAuthProvider argument has changed from a component instance to just a boolean authEnvironment; [84f6f91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84f6f91)
-- [none] Updated dependencies [febc44d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febc44d)
-  - @atlaskit/util-data-test@9.1.4
-- [none] Updated dependencies [714ab32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/714ab32)
-  - @atlaskit/util-data-test@9.1.4
-- [major] Updated dependencies [84f6f91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84f6f91)
-  - @atlaskit/media-core@18.1.0
-  - @atlaskit/util-data-test@9.1.4
-  - @atlaskit/media-picker@7.0.0
-- [major] Updated dependencies [9041d71](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9041d71)
-  - @atlaskit/media-core@18.1.0
-  - @atlaskit/util-data-test@9.1.4
-  - @atlaskit/media-picker@7.0.0
+- [major] media-picker: <All but popup picker>.emitUploadEnd second argument shape has changed from MediaFileData to FileDetails; `upload-end` event payload body shape changed from MediaFileData to FileDetails; All the media pickers config now have new property `useNewUploadService: boolean` (false by default); popup media-picker .cancel can't be called with no argument, though types does allow for it; `File` is removed; --- media-store: MediaStore.createFile now has a required argument of type MediaStoreCreateFileParams; MediaStore.copyFileWithToken new method; uploadFile method result type has changed from just a promise to a UploadFileResult type; --- media-test-helpers: mediaPickerAuthProvider argument has changed from a component instance to just a boolean authEnvironment; [84f6f91](https://github.com/fnamazing/uiKit/commits/84f6f91)
+- [none] Updated dependencies [febc44d](https://github.com/fnamazing/uiKit/commits/febc44d)
+  - @findable/util-data-test@9.1.4
+- [none] Updated dependencies [714ab32](https://github.com/fnamazing/uiKit/commits/714ab32)
+  - @findable/util-data-test@9.1.4
+- [major] Updated dependencies [84f6f91](https://github.com/fnamazing/uiKit/commits/84f6f91)
+  - @findable/media-core@18.1.0
+  - @findable/util-data-test@9.1.4
+  - @findable/media-picker@7.0.0
+- [major] Updated dependencies [9041d71](https://github.com/fnamazing/uiKit/commits/9041d71)
+  - @findable/media-core@18.1.0
+  - @findable/util-data-test@9.1.4
+  - @findable/media-picker@7.0.0
 
 ## 34.2.1
-- [patch] FS-1976 sort emojis based on order property [70de5fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70de5fc)
-- [none] Updated dependencies [70de5fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70de5fc)
+- [patch] FS-1976 sort emojis based on order property [70de5fc](https://github.com/fnamazing/uiKit/commits/70de5fc)
+- [none] Updated dependencies [70de5fc](https://github.com/fnamazing/uiKit/commits/70de5fc)
 
 ## 34.2.0
-- [patch] FS-1580 add new atlassian emoji [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-- [minor] FS-1580 add new Atlassian emoji [89146bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89146bf)
-- [none] Updated dependencies [8fd4dd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fd4dd1)
-  - @atlaskit/util-data-test@9.1.3
-- [none] Updated dependencies [74f84c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74f84c6)
-  - @atlaskit/util-data-test@9.1.3
-- [none] Updated dependencies [92cdf83](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92cdf83)
-  - @atlaskit/util-data-test@9.1.3
-- [none] Updated dependencies [4151cc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4151cc5)
-  - @atlaskit/util-data-test@9.1.3
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/util-data-test@9.1.3
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/media-picker@6.0.5
-  - @atlaskit/tooltip@9.2.1
-  - @atlaskit/field-base@9.0.3
-  - @atlaskit/media-core@18.0.3
-  - @atlaskit/button@7.2.5
-  - @atlaskit/theme@3.2.2
-  - @atlaskit/spinner@5.0.2
-  - @atlaskit/docs@3.0.4
-  - @atlaskit/util-service-support@2.0.7
-  - @atlaskit/layer@3.1.1
-  - @atlaskit/analytics@3.0.1
-- [patch] Updated dependencies [89146bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89146bf)
-  - @atlaskit/util-data-test@9.1.3
+- [patch] FS-1580 add new atlassian emoji [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+- [minor] FS-1580 add new Atlassian emoji [89146bf](https://github.com/fnamazing/uiKit/commits/89146bf)
+- [none] Updated dependencies [8fd4dd1](https://github.com/fnamazing/uiKit/commits/8fd4dd1)
+  - @findable/util-data-test@9.1.3
+- [none] Updated dependencies [74f84c6](https://github.com/fnamazing/uiKit/commits/74f84c6)
+  - @findable/util-data-test@9.1.3
+- [none] Updated dependencies [92cdf83](https://github.com/fnamazing/uiKit/commits/92cdf83)
+  - @findable/util-data-test@9.1.3
+- [none] Updated dependencies [4151cc5](https://github.com/fnamazing/uiKit/commits/4151cc5)
+  - @findable/util-data-test@9.1.3
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/util-data-test@9.1.3
+  - @findable/icon@11.3.0
+  - @findable/media-picker@6.0.5
+  - @findable/tooltip@9.2.1
+  - @findable/field-base@9.0.3
+  - @findable/media-core@18.0.3
+  - @findable/button@7.2.5
+  - @findable/theme@3.2.2
+  - @findable/spinner@5.0.2
+  - @findable/docs@3.0.4
+  - @findable/util-service-support@2.0.7
+  - @findable/layer@3.1.1
+  - @findable/analytics@3.0.1
+- [patch] Updated dependencies [89146bf](https://github.com/fnamazing/uiKit/commits/89146bf)
+  - @findable/util-data-test@9.1.3
 
 ## 34.1.9
-- [patch] FS-1860 Fix site emoji stuck in a bad state [bf8622c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bf8622c)
+- [patch] FS-1860 Fix site emoji stuck in a bad state [bf8622c](https://github.com/fnamazing/uiKit/commits/bf8622c)
 
 ## 34.1.6
-- [patch] Expose the EmojiResourceConfig interface [3015b9d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3015b9d)
+- [patch] Expose the EmojiResourceConfig interface [3015b9d](https://github.com/fnamazing/uiKit/commits/3015b9d)
 
 ## 34.1.1
-- [patch] Fixed flex issue in IE11 [137d8bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/137d8bd)
-- [patch] Improve custom emoji upload failure and waiting experience [1ab5945](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ab5945)
+- [patch] Fixed flex issue in IE11 [137d8bd](https://github.com/fnamazing/uiKit/commits/137d8bd)
+- [patch] Improve custom emoji upload failure and waiting experience [1ab5945](https://github.com/fnamazing/uiKit/commits/1ab5945)
 
 ## 34.1.0
-- [minor] FS-1660 emoji upload preview uses new design [52a8dd9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52a8dd9)
+- [minor] FS-1660 emoji upload preview uses new design [52a8dd9](https://github.com/fnamazing/uiKit/commits/52a8dd9)
 
 ## 34.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 33.0.2
-- [patch] FS-1853 custom category button scrolls to Your Uploads if present [f42e14e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f42e14e)
+- [patch] FS-1853 custom category button scrolls to Your Uploads if present [f42e14e](https://github.com/fnamazing/uiKit/commits/f42e14e)
 
 ## 33.0.1
-- [patch] code clean up [6c1c0a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c1c0a0)
-- [patch] custom emoji pre-upload file validation for invalid image and files over 1Mb [86244f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86244f5)
+- [patch] code clean up [6c1c0a0](https://github.com/fnamazing/uiKit/commits/6c1c0a0)
+- [patch] custom emoji pre-upload file validation for invalid image and files over 1Mb [86244f5](https://github.com/fnamazing/uiKit/commits/86244f5)
 
 ## 33.0.0
-- [major] FS-1658 deleteSiteEmoji and getCurrentUser are required for EmojiProvider implementation [ecec57f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ecec57f)
+- [major] FS-1658 deleteSiteEmoji and getCurrentUser are required for EmojiProvider implementation [ecec57f](https://github.com/fnamazing/uiKit/commits/ecec57f)
 
 ## 32.0.0
-- [major] FS-1697 move elements packages to use util-data-test for test data [deb820a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/deb820a)
+- [major] FS-1697 move elements packages to use util-data-test for test data [deb820a](https://github.com/fnamazing/uiKit/commits/deb820a)
 
 ## 31.1.23
-- [patch] Fix painting issue after scrolling to top of emoji list [debbe10](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/debbe10)
+- [patch] Fix painting issue after scrolling to top of emoji list [debbe10](https://github.com/fnamazing/uiKit/commits/debbe10)
 
 ## 31.1.22
-- [patch] Add "sideEffects: false" to AKM2 packages to allow consumer's to tree-shake [c3b018a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3b018a)
+- [patch] Add "sideEffects: false" to AKM2 packages to allow consumer's to tree-shake [c3b018a](https://github.com/fnamazing/uiKit/commits/c3b018a)
 
 ## 31.1.20
-- [patch] FS-1843 fix incorrect emoji category [36473a8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36473a8)
+- [patch] FS-1843 fix incorrect emoji category [36473a8](https://github.com/fnamazing/uiKit/commits/36473a8)
 
 ## 31.1.19
-- [patch] code split MediaEditor in MediaPicker [bdc395a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bdc395a)
+- [patch] code split MediaEditor in MediaPicker [bdc395a](https://github.com/fnamazing/uiKit/commits/bdc395a)
 
 ## 31.1.16
-- [patch] FS-1834 check for undefined repository in EmojiResource [c97751f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c97751f)
+- [patch] FS-1834 check for undefined repository in EmojiResource [c97751f](https://github.com/fnamazing/uiKit/commits/c97751f)
 
 ## 31.1.13
-- [patch] add guard condition for nullable function emojiProvider.getCurrentUser [b8780e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8780e4)
+- [patch] add guard condition for nullable function emojiProvider.getCurrentUser [b8780e4](https://github.com/fnamazing/uiKit/commits/b8780e4)
 
 ## 31.1.12
-- [patch] Update links in documentation [c4f7497](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4f7497)
+- [patch] Update links in documentation [c4f7497](https://github.com/fnamazing/uiKit/commits/c4f7497)
 
 ## 31.1.10
-- [patch] code clean up [b6ecb4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b6ecb4a)
-- [patch] kept currentUser attribute consistent in all places, fixed typescript errors [6f375f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6f375f0)
-- [patch] added implementation for missing ES6 findIndex function [3ead412](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ead412)
-- [patch] removed service-data-site.json [653f2df](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/653f2df)
-- [patch] user parameter renamed to currentUser, user custom group logic moved to EmojiPickerList.buildGroups, tests added [7796a7c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7796a7c)
-- [patch] render user custom emoji separately [18f45ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/18f45ff)
+- [patch] code clean up [b6ecb4a](https://github.com/fnamazing/uiKit/commits/b6ecb4a)
+- [patch] kept currentUser attribute consistent in all places, fixed typescript errors [6f375f0](https://github.com/fnamazing/uiKit/commits/6f375f0)
+- [patch] added implementation for missing ES6 findIndex function [3ead412](https://github.com/fnamazing/uiKit/commits/3ead412)
+- [patch] removed service-data-site.json [653f2df](https://github.com/fnamazing/uiKit/commits/653f2df)
+- [patch] user parameter renamed to currentUser, user custom group logic moved to EmojiPickerList.buildGroups, tests added [7796a7c](https://github.com/fnamazing/uiKit/commits/7796a7c)
+- [patch] render user custom emoji separately [18f45ff](https://github.com/fnamazing/uiKit/commits/18f45ff)
 
 ## 31.1.8
-- [patch] show custom emojis regardless of upload support [efc7e9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/efc7e9a)
+- [patch] show custom emojis regardless of upload support [efc7e9a](https://github.com/fnamazing/uiKit/commits/efc7e9a)
 
 ## 31.1.7
-- [patch] removed UploadingEmojiResource.isCustomCategoryRequired function [9370179](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9370179)
-- [patch] only scroll to custom category after adding the emoji, fixed MockEmojiResource to not render custom category header if there is no custom emoji [22bc389](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/22bc389)
-- [patch] refactored tests  [d9e3745](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9e3745)
-- [patch] show "add custom emoji" button if user moves mouse away from Footer area [38a1c1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38a1c1c)
-- [patch] Fixed typescript error [26d187a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/26d187a)
-- [patch] added unit tests for EmojiPreview component [e136dff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e136dff)
-- [patch] New UX button for adding a custom emoji [e86d2f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e86d2f4)
+- [patch] removed UploadingEmojiResource.isCustomCategoryRequired function [9370179](https://github.com/fnamazing/uiKit/commits/9370179)
+- [patch] only scroll to custom category after adding the emoji, fixed MockEmojiResource to not render custom category header if there is no custom emoji [22bc389](https://github.com/fnamazing/uiKit/commits/22bc389)
+- [patch] refactored tests  [d9e3745](https://github.com/fnamazing/uiKit/commits/d9e3745)
+- [patch] show "add custom emoji" button if user moves mouse away from Footer area [38a1c1c](https://github.com/fnamazing/uiKit/commits/38a1c1c)
+- [patch] Fixed typescript error [26d187a](https://github.com/fnamazing/uiKit/commits/26d187a)
+- [patch] added unit tests for EmojiPreview component [e136dff](https://github.com/fnamazing/uiKit/commits/e136dff)
+- [patch] New UX button for adding a custom emoji [e86d2f4](https://github.com/fnamazing/uiKit/commits/e86d2f4)
 
 ## 31.1.6
-- [patch] fix mention and emoji bug related to MutationObserver API [dd0a69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd0a69c)
+- [patch] fix mention and emoji bug related to MutationObserver API [dd0a69c](https://github.com/fnamazing/uiKit/commits/dd0a69c)
 
 ## 31.1.3
-- [patch] IE11 does not calculate emoji picker width correctly so give it a min-width explicitly. [95bbc84](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95bbc84)
+- [patch] IE11 does not calculate emoji picker width correctly so give it a min-width explicitly. [95bbc84](https://github.com/fnamazing/uiKit/commits/95bbc84)
 
 ## 31.1.2
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 31.1.1
-- [patch] fixed typescript errors [fe6676e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe6676e)
-- [patch] added analytics to emoji picker [d9d4fb2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9d4fb2)
+- [patch] fixed typescript errors [fe6676e](https://github.com/fnamazing/uiKit/commits/fe6676e)
+- [patch] added analytics to emoji picker [d9d4fb2](https://github.com/fnamazing/uiKit/commits/d9d4fb2)
 
 ## 31.1.0
-- [minor] FS-1649 move emoji to mk-2 [6953ac1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6953ac1)
+- [minor] FS-1649 move emoji to mk-2 [6953ac1](https://github.com/fnamazing/uiKit/commits/6953ac1)
 
 ## 31.0.8 (2018-01-10)
 * bug fix; added nbsp to emoji sprite spans to allow for selection at start of paragraph (issues closed: fs-1622) ([77d6ca0](https://bitbucket.org/atlassian/atlaskit/commits/77d6ca0))

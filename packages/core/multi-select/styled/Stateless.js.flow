@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, gridSize, fontSize } from '@atlaskit/theme';
+import { colors, gridSize, fontSize } from '@findable/theme';
 
 const lineHeightDefault = (gridSize() * 2) / fontSize();
 

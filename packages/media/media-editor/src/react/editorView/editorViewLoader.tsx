@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ModalSpinner } from '@atlaskit/media-ui';
+import { ModalSpinner } from '@findable/media-ui';
 import EditorViewType, { EditorViewProps } from './editorView';
 
 interface AsyncEditorViewState {

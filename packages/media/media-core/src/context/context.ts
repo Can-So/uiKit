@@ -3,7 +3,7 @@ import {
   ContextConfig,
   MediaStoreGetFileImageParams,
   ImageMetadata,
-} from '@atlaskit/media-store';
+} from '@findable/media-store';
 import { CollectionFetcher } from '../collection';
 import { FileFetcherImpl, FileFetcher } from '../file';
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { gridSize, typography } from '@atlaskit/theme';
+import { gridSize, typography } from '@findable/theme';
 import { messages } from '../messages';
 import MaginfyingGlassImage from '../assets/MagnifyingGlassImage';
 

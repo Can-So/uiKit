@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import Select from '@atlaskit/select';
-import Button from '@atlaskit/button';
-import { DatePicker } from '@atlaskit/datetime-picker';
+import Select from '@findable/select';
+import Button from '@findable/button';
+import { DatePicker } from '@findable/datetime-picker';
 import InlineDialog from '../src';
 
 type State = {

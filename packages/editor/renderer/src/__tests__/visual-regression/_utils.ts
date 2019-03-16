@@ -1,4 +1,4 @@
-import { getExampleUrl } from '@atlaskit/visual-regression/helper';
+import { getExampleUrl } from '@findable/visual-regression/helper';
 import { Props } from '../../ui/Renderer';
 import { Page } from 'puppeteer';
 

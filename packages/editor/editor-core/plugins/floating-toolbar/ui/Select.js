@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
-import Select from '@atlaskit/select';
+import Select from '@findable/select';
 var SelectWrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  width: ", "px;\n"], ["\n  width: ", "px;\n"])), function (props) { return props.width; });
 var Search = /** @class */ (function (_super) {
     tslib_1.__extends(Search, _super);

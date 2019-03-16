@@ -1,4 +1,4 @@
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import { name as packageName, version as packageVersion } from './version.json';
 import { ObjectState } from './Client/types';
 

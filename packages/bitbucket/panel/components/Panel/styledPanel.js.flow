@@ -1,5 +1,5 @@
 // @flow
-import { borderRadius, gridSize, colors } from '@atlaskit/theme';
+import { borderRadius, gridSize, colors } from '@findable/theme';
 import { withFocusWithin } from 'react-focus-within';
 import styled, { css } from 'styled-components';
 

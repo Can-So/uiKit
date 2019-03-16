@@ -241,7 +241,7 @@ instead of a relative path.
 
 ```js
 import React from 'react';
-import { Presence } from '@atlaskit/avatar';
+import { Presence } from '@findable/avatar';
 
 export default function Example() {
   return <Presence presence="online" />;
@@ -319,7 +319,7 @@ How you do this will completely depend on what *exactly* you are trying to achie
 > bolt build:typescript
 >
 > If your package is written in TS:
-> NODE_ENV=production bolt workspaces exec --only "@atlaskit/pkgName" -- tsc --project ./build/es2015
+> NODE_ENV=production bolt workspaces exec --only "@findable/pkgName" -- tsc --project ./build/es2015
 >
 > **THESE WILL NOT COVER 100% OF USE CASES AND ARE PROVIDED WITHOUT WARRANTY**
 >
@@ -342,7 +342,7 @@ Each of these files looks something like this:
 ```js
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props } from '@findable/docs';
 
 export default md`
   # Avatar

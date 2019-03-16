@@ -1,8 +1,8 @@
 import { MouseEvent } from 'react';
-import { FileDetails, MediaType, FileProcessingStatus, Context, Identifier, ImageResizeMode } from '@atlaskit/media-core';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { FileDetails, MediaType, FileProcessingStatus, Context, Identifier, ImageResizeMode } from '@findable/media-core';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import { CardAction } from './actions';
-import { MediaViewerDataSource } from '@atlaskit/media-viewer';
+import { MediaViewerDataSource } from '@findable/media-viewer';
 export { default as Card } from './root/card/cardLoader';
 export { CardView } from './root/cardViewLoader';
 export { CardViewState, CardViewOwnProps as CardViewProps, } from './root/cardView';

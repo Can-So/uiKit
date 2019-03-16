@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import InlineDialog from '@atlaskit/inline-dialog';
+import InlineDialog from '@findable/inline-dialog';
 import { ColorButton } from './colorButton';
 import { ColorPopupContentWrapper } from './popupStyles';
 var colors = [

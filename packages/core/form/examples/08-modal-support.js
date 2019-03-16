@@ -1,14 +1,14 @@
 // @flow
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
-import { Checkbox } from '@atlaskit/checkbox';
-import Textfield from '@atlaskit/textfield';
-import RadioGroup, { AkRadio } from '@atlaskit/field-radio-group';
+import { Checkbox } from '@findable/checkbox';
+import Textfield from '@findable/textfield';
+import RadioGroup, { AkRadio } from '@findable/field-radio-group';
 import ModalDialog, {
   ModalFooter,
   ModalTransition,
-} from '@atlaskit/modal-dialog';
+} from '@findable/modal-dialog';
 import Form, { Field, CheckboxField } from '../../form/src';
 
 type State = { isOpen: boolean };

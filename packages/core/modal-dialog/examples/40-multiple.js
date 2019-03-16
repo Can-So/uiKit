@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import Lorem from 'react-lorem-component';
 import Modal, { ModalTransition } from '../src';
 

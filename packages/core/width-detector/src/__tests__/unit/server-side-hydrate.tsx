@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { getExamplesFor } from '@atlaskit/build-utils/getExamples';
+import { getExamplesFor } from '@findable/build-utils/getExamples';
 
-import { ssr } from '@atlaskit/ssr';
+import { ssr } from '@findable/ssr';
 
 jest.spyOn(global.console, 'error');
 

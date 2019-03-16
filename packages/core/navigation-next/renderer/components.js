@@ -11,7 +11,7 @@ import { css as _css2 } from "emotion";
 import { css as _css } from "emotion";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React, { PureComponent } from 'react';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 import { navigationItemClicked } from '../common/analytics';
 import RenderBlocker from '../components/common/RenderBlocker';
 import ContainerHeaderComponent from '../components/presentational/ContainerHeader';

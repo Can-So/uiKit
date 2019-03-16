@@ -3,7 +3,7 @@ import { ObjectState, DefinedState, ErroredState, ObjectStatus, AuthService, Not
 import { Store } from './store';
 import { StateWatch } from './stateWatcher';
 import { F1 } from './utils';
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import Environments from '../environments';
 export declare type RemoteResourceAuthConfig = {
     key: string;

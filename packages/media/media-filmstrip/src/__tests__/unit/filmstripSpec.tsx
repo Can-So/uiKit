@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Filmstrip, FilmstripView, FilmstripProps, FilmstripItem } from '../..';
-import { fakeContext } from '@atlaskit/media-test-helpers';
-import { Card } from '@atlaskit/media-card';
-import { Identifier } from '@atlaskit/media-core';
+import { fakeContext } from '@findable/media-test-helpers';
+import { Card } from '@findable/media-card';
+import { Identifier } from '@findable/media-core';
 
 describe('<Filmstrip />', () => {
   const firstIdenfier: Identifier = {

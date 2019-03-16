@@ -7,7 +7,7 @@ import PresenceResource, {
   DefaultPresenceParser,
   PresenceMap,
 } from '../../../api/PresenceResource';
-import { mention } from '@atlaskit/util-data-test';
+import { mention } from '@findable/util-data-test';
 
 // avoid polluting test logs with error message in console
 // please ensure you fix it if you expect console.error to be thrown

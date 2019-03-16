@@ -10,8 +10,8 @@ import {
   OnLoadingChangeFunc,
   defaultImageCardDimensions,
   CardView,
-} from '@atlaskit/media-card';
-import { Context, Identifier } from '@atlaskit/media-core';
+} from '@findable/media-card';
+import { Context, Identifier } from '@findable/media-core';
 import { FilmstripView } from './filmstripView';
 import { generateIdentifierKey } from './utils/generateIdentifierKey';
 

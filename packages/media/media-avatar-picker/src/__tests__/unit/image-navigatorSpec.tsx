@@ -2,9 +2,9 @@ declare var global: any; // we need define an interface for the Node global obje
 import * as util from '../../util';
 const fileSizeMbSpy = jest.spyOn(util, 'fileSizeMb');
 import * as React from 'react';
-import Spinner from '@atlaskit/spinner';
-import Button from '@atlaskit/button';
-import { Ellipsify, Camera, Rectangle } from '@atlaskit/media-ui';
+import Spinner from '@findable/spinner';
+import Button from '@findable/button';
+import { Ellipsify, Camera, Rectangle } from '@findable/media-ui';
 import ImageNavigator, {
   ImageNavigator as ImageNavigatorView,
   CONTAINER_INNER_SIZE,
@@ -20,12 +20,12 @@ import {
   PaddedBreak,
 } from '../../image-navigator/styled';
 import { ImageCropper } from '../../image-cropper';
-import Slider from '@atlaskit/field-range';
+import Slider from '@findable/field-range';
 import {
   createMouseEvent,
   smallImage,
   mountWithIntlContext,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { errorIcon } from '../../image-navigator/images';
 import { ReactWrapper } from 'enzyme';
 

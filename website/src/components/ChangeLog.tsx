@@ -2,7 +2,7 @@ import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
 import semver from 'semver';
 import styled, { css } from 'styled-components';
-import { math, gridSize, colors, borderRadius } from '@atlaskit/theme';
+import { math, gridSize, colors, borderRadius } from '@findable/theme';
 
 const gutter = math.multiply(gridSize, 3);
 

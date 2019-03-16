@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { startFileBrowser } from '../../../actions/startFileBrowser';
 import { Browser } from '../../../../components/types';
 import { State } from '../../../domain';

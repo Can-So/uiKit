@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { AkCodeBlock } from '@atlaskit/code';
-import Select from '@atlaskit/select';
+import { AkCodeBlock } from '@findable/code';
+import Select from '@findable/select';
 import styled from 'styled-components';
 import * as Logos from '../src';
 
@@ -62,7 +62,7 @@ export default class GetPath extends Component<*, *> {
         <p>This import statement will render the image below:</p>
         <AkCodeBlock
           language="javascript"
-          text={`import ${name} from '@atlaskit/logo/dist/esm/${
+          text={`import ${name} from '@findable/logo/dist/esm/${
             selectedProduct.value
           }Logo/${selectedFile.value}'`}
         />

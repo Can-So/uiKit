@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChangeEventHandler, PureComponent } from 'react';
 
-import AkButton from '@atlaskit/button';
+import AkButton from '@findable/button';
 
 export interface Props {
   label: string;

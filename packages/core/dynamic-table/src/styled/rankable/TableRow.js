@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, elevation } from '@atlaskit/theme';
+import { colors, elevation } from '@findable/theme';
 import { TableBodyRow } from '../TableRow';
 
 const rankingStyles = css`

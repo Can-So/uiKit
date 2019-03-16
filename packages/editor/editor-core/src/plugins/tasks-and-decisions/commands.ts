@@ -1,5 +1,5 @@
-import { uuid } from '@atlaskit/adf-schema';
-import { ContextIdentifierProvider } from '@atlaskit/editor-common';
+import { uuid } from '@findable/adf-schema';
+import { ContextIdentifierProvider } from '@findable/editor-common';
 import {
   Node as PMNode,
   ResolvedPos,

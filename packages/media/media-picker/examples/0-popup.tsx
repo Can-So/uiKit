@@ -2,19 +2,19 @@
 import * as React from 'react';
 import { Component } from 'react';
 import * as PropTypes from 'prop-types';
-import { ContextFactory } from '@atlaskit/media-core';
-import Button from '@atlaskit/button';
-import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
-import AKListeners from '@atlaskit/analytics-listeners';
+import { ContextFactory } from '@findable/media-core';
+import Button from '@findable/button';
+import DropdownMenu, { DropdownItem } from '@findable/dropdown-menu';
+import AKListeners from '@findable/analytics-listeners';
 import {
   userAuthProvider,
   mediaPickerAuthProvider,
   defaultCollectionName,
   defaultMediaPickerCollectionName,
   createStorybookContext,
-} from '@atlaskit/media-test-helpers';
-import { Card } from '@atlaskit/media-card';
-import Toggle from '@atlaskit/toggle';
+} from '@findable/media-test-helpers';
+import { Card } from '@findable/media-card';
+import Toggle from '@findable/toggle';
 import { MediaPicker, Popup, MediaProgress } from '../src';
 import {
   PopupContainer,

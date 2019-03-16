@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Item, Group } from '@atlaskit/droplist';
+import { Item, Group } from '@findable/droplist';
 
 import NoMatches from '../styled/NoMatch';
 import InitialLoading from '../styled/InitialLoading';

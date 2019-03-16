@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { ResultBase } from '@atlaskit/quick-search';
+import { ResultBase } from '@findable/quick-search';
 import Return from '../assets/Return';
 var AdvancedSearchResult = /** @class */ (function (_super) {
     tslib_1.__extends(AdvancedSearchResult, _super);

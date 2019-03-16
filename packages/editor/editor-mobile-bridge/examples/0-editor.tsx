@@ -4,9 +4,9 @@ import Editor from './../src/editor/mobile-editor-element';
 import {
   cardProvider,
   storyMediaProviderFactory,
-} from '@atlaskit/editor-test-helpers';
-import MediaServicesScaleLargeIcon from '@atlaskit/icon/glyph/media-services/scale-large';
-import CopyIcon from '@atlaskit/icon/glyph/copy';
+} from '@findable/editor-test-helpers';
+import MediaServicesScaleLargeIcon from '@findable/icon/glyph/media-services/scale-large';
+import CopyIcon from '@findable/icon/glyph/copy';
 
 export const Wrapper: any = styled.div`
   position: absolute;

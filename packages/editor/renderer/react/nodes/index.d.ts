@@ -35,20 +35,20 @@ declare const Emoji: (React.ComponentClass<import("./emoji").EmojiProps, any> & 
 declare const InlineCard: (React.ComponentClass<{
     url?: string | undefined;
     data?: object | undefined;
-    eventHandlers?: import("@atlaskit/editor-common/ui/EventHandlers").EventHandlers | undefined;
+    eventHandlers?: import("@findable/editor-common/ui/EventHandlers").EventHandlers | undefined;
 }, any> & Loadable.LoadableComponent) | (React.StatelessComponent<{
     url?: string | undefined;
     data?: object | undefined;
-    eventHandlers?: import("@atlaskit/editor-common/ui/EventHandlers").EventHandlers | undefined;
+    eventHandlers?: import("@findable/editor-common/ui/EventHandlers").EventHandlers | undefined;
 }> & Loadable.LoadableComponent);
 declare const BlockCard: (React.ComponentClass<{
     url?: string | undefined;
     data?: object | undefined;
-    eventHandlers?: import("@atlaskit/editor-common/ui/EventHandlers").EventHandlers | undefined;
+    eventHandlers?: import("@findable/editor-common/ui/EventHandlers").EventHandlers | undefined;
 }, any> & Loadable.LoadableComponent) | (React.StatelessComponent<{
     url?: string | undefined;
     data?: object | undefined;
-    eventHandlers?: import("@atlaskit/editor-common/ui/EventHandlers").EventHandlers | undefined;
+    eventHandlers?: import("@findable/editor-common/ui/EventHandlers").EventHandlers | undefined;
 }> & Loadable.LoadableComponent);
 declare const Media: (React.ComponentClass<import("./media").MediaProps, any> & Loadable.LoadableComponent) | (React.StatelessComponent<import("./media").MediaProps> & Loadable.LoadableComponent);
 declare const MediaGroup: (React.ComponentClass<import("./mediaGroup").MediaGroupProps, any> & Loadable.LoadableComponent) | (React.StatelessComponent<import("./mediaGroup").MediaGroupProps> & Loadable.LoadableComponent);

@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { codeFontFamily, colors, fontSize } from '@atlaskit/theme';
+import { codeFontFamily, colors, fontSize } from '@findable/theme';
 
 const getPlaceholderStyle = style => css`
   &::-webkit-input-placeholder {

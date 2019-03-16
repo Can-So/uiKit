@@ -18,7 +18,7 @@ import {
   mediaGroup,
   randomId,
   bodiedExtensionData,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 const extensionAttrs = bodiedExtensionData[0].attrs;
 

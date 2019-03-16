@@ -5,7 +5,7 @@ import {
   codeFontFamily,
   gridSize,
   fontSize,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 import * as componentTokens from './component-tokens';
 
 const disabledRules = {

@@ -5,12 +5,12 @@ import styled from 'styled-components';
 import Loadable from 'react-loadable';
 import { Helmet } from 'react-helmet';
 
-import CloseIcon from '@atlaskit/icon/glyph/cross';
+import CloseIcon from '@findable/icon/glyph/cross';
 
-import Button from '@atlaskit/button';
-import { gridSize, math } from '@atlaskit/theme';
-import { FieldTextStateless as Input } from '@atlaskit/field-text';
-import Modal, { ModalHeader as OgModalHeader } from '@atlaskit/modal-dialog';
+import Button from '@findable/button';
+import { gridSize, math } from '@findable/theme';
+import { FieldTextStateless as Input } from '@findable/field-text';
+import Modal, { ModalHeader as OgModalHeader } from '@findable/modal-dialog';
 
 import * as fs from '../../utils/fs';
 import Loading from '../../components/Loading';

@@ -10,10 +10,10 @@ import {
   Auth,
   fileStreamsCache,
   FileState,
-} from '@atlaskit/media-core';
-import { TouchedFiles } from '@atlaskit/media-store';
+} from '@findable/media-core';
+import { TouchedFiles } from '@findable/media-store';
 import * as uuid from 'uuid';
-import { asMock, fakeContext } from '@atlaskit/media-test-helpers';
+import { asMock, fakeContext } from '@findable/media-test-helpers';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs';
 import { NewUploadServiceImpl } from '../../newUploadServiceImpl';

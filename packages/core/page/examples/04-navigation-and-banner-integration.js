@@ -1,9 +1,9 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import Navigation, { AkNavigationItem } from '@atlaskit/navigation';
-import Banner from '@atlaskit/banner';
-import Button from '@atlaskit/button';
-import { AtlassianIcon } from '@atlaskit/logo';
+import Navigation, { AkNavigationItem } from '@findable/navigation';
+import Banner from '@findable/banner';
+import Button from '@findable/button';
+import { AtlassianIcon } from '@findable/logo';
 import Page, { Grid } from '../src';
 
 type State = {

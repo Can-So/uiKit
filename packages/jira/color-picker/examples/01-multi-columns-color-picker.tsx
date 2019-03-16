@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ColorPicker from '../src';
 import { simplePalette } from '../mock-data';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 class ColorPickerExample extends React.Component<{}, { color: string }> {
   state = {

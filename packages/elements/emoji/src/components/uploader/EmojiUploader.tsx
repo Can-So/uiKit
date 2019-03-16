@@ -10,7 +10,7 @@ import {
   Props as ComponentProps,
 } from './EmojiUploadComponent';
 import { EmojiProvider } from '../../api/EmojiResource';
-import { FireAnalyticsEvent, withAnalytics } from '@atlaskit/analytics';
+import { FireAnalyticsEvent, withAnalytics } from '@findable/analytics';
 
 const emojiUploadModuleLoader = () =>
   import(/* webpackChunkName:"@atlaskit-internal_emojiUploadComponent" */ './EmojiUploadComponent');

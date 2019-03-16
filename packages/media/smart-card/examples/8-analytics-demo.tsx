@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 import { Card, Client, Provider, ResolveResponse } from '..';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 
 const responses = {
   resolved: {

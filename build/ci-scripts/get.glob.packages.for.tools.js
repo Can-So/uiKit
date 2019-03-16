@@ -2,7 +2,7 @@
 const {
   getPackagesInfo,
   TOOL_NAME_TO_FILTERS,
-} = require('@atlaskit/build-utils/tools');
+} = require('@findable/build-utils/tools');
 
 (async () => {
   let cwd = process.cwd();

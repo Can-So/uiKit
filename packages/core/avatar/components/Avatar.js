@@ -9,8 +9,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
-import Tooltip from '@atlaskit/tooltip';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
+import Tooltip from '@findable/tooltip';
 import { name as packageName, version as packageVersion } from '../version.json';
 import { validIconSizes, propsOmittedFromClickData } from './constants';
 import Presence from './Presence';

@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, themed, gridSize } from '@atlaskit/theme';
+import { colors, themed, gridSize } from '@findable/theme';
 
 const spacing = gridSize();
 const fontSize = 12;

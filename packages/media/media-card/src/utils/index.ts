@@ -9,4 +9,4 @@ export * from './breakpoint';
 export * from './isValidPercentageUnit';
 export * from './getElementDimension';
 export * from './containsPixelUnit';
-export { toHumanReadableMediaSize } from '@atlaskit/media-ui';
+export { toHumanReadableMediaSize } from '@findable/media-ui';

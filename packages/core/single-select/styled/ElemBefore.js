@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var ElemBefore = styled.div.withConfig({
   displayName: "ElemBefore",
   componentId: "abhs7b-0"

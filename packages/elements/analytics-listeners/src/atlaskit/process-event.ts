@@ -12,7 +12,7 @@ import {
   TRACK_EVENT_TYPE,
   OPERATIONAL_EVENT_TYPE,
   GasPayload,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 
 import {
   getSources,
@@ -23,7 +23,7 @@ import {
 } from './extract-data-from-event';
 import Logger from '../helpers/logger';
 import { version as listenerVersion } from '../version.json';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 
 const ATLASKIT_TAG = 'atlaskit';
 
@@ -44,7 +44,7 @@ const ATLASKIT_TAG = 'atlaskit';
  *
  * Analytics platform event format:
  *  event {
- *      type: @atlaskit/analytics-gas-types.EventType
+ *      type: @findable/analytics-gas-types.EventType
  *      payload {
  *          ...mandatoryAttributesBasedOnEventType
  *          attributes: {

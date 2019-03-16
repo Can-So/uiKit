@@ -1,4 +1,4 @@
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 
 export type AnalyticsNextEvent = {
   payload: GasPayload;

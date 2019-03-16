@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import styled, { keyframes } from 'styled-components';
-import { center } from '@atlaskit/media-ui';
-import { colors, themed } from '@atlaskit/theme';
+import { center } from '@findable/media-ui';
+import { colors, themed } from '@findable/theme';
 import { CardDimensions } from '../..';
 
 export const blinkLoadingAnimation = keyframes`

@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { colors, themed, layers } from '@atlaskit/theme';
+import { colors, themed, layers } from '@findable/theme';
 
 const backgroundColor = themed({ light: colors.N100A, dark: colors.DN90A });
 export const opacity = (p: any) => (p.isTinted ? 1 : 0);

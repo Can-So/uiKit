@@ -1,5 +1,5 @@
 import { Node as PmNode } from 'prosemirror-model';
-import { ExtensionLayout } from '@atlaskit/adf-schema';
+import { ExtensionLayout } from '@findable/adf-schema';
 export declare type ExtensionType = 'extension' | 'bodiedExtension' | 'inlineExtension';
 export interface MacroAttributes {
     type: ExtensionType;

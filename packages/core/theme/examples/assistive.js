@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import SectionMessage from '@atlaskit/section-message';
+import SectionMessage from '@findable/section-message';
 import { assistive } from '../src';
 
 const AssitiveText = styled.span`

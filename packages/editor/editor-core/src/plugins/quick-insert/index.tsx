@@ -1,6 +1,6 @@
 import { InjectedIntl } from 'react-intl';
 import { Plugin, PluginKey } from 'prosemirror-state';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { analyticsService } from '../../analytics';
 import { EditorPlugin, Command } from '../../types';
 import { dedupe } from '../../utils';

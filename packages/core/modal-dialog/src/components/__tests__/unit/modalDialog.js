@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import Blanket from '@atlaskit/blanket';
+import Blanket from '@findable/blanket';
 
 import ModalDialog, { ModalTransition } from '../../..';
 import { Positioner } from '../../Modal';

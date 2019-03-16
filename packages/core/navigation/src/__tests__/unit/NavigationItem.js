@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Item from '@atlaskit/item';
+import Item from '@findable/item';
 import { toClass } from 'recompose';
 import { ThemeProvider } from 'styled-components';
 import Navigation from '../../components/js/Navigation';

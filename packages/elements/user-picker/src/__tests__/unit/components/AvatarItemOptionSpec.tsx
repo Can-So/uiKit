@@ -1,4 +1,4 @@
-import { AvatarItem } from '@atlaskit/avatar';
+import { AvatarItem } from '@findable/avatar';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import {

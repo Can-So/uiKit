@@ -2,7 +2,7 @@
 import {
   getExampleUrl,
   takeScreenShot,
-} from '@atlaskit/visual-regression/helper';
+} from '@findable/visual-regression/helper';
 
 // TODO - identify threshold or do not set cursor
 describe('Snapshot Test', () => {

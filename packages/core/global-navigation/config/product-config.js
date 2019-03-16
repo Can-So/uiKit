@@ -1,9 +1,9 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
 import React from 'react';
-import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
-import Badge from '@atlaskit/badge';
-import Avatar from '@atlaskit/avatar';
-import SignInIcon from '@atlaskit/icon/glyph/sign-in';
+import QuestionIcon from '@findable/icon/glyph/question-circle';
+import Badge from '@findable/badge';
+import Avatar from '@findable/avatar';
+import SignInIcon from '@findable/icon/glyph/sign-in';
 var MAX_NOTIFICATIONS_COUNT = 9;
 
 var isNotEmpty = function isNotEmpty(obj) {

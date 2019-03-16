@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import { colors, borderRadius, gridSize } from '@atlaskit/theme';
+import Button, { ButtonGroup } from '@findable/button';
+import { colors, borderRadius, gridSize } from '@findable/theme';
 import Toolbar from '../Toolbar';
 import PluginSlot from '../PluginSlot';
 import WithPluginState from '../WithPluginState';
@@ -12,7 +12,7 @@ import { stateKey as mediaPluginKey, } from '../../plugins/media/pm-plugins/main
 import { ClickAreaBlock } from '../Addon';
 import { tableCommentEditorStyles } from '../../plugins/table/ui/styles';
 import WithFlash from '../WithFlash';
-import { WidthConsumer, akEditorMobileBreakoutPoint, } from '@atlaskit/editor-common';
+import { WidthConsumer, akEditorMobileBreakoutPoint, } from '@findable/editor-common';
 import WidthEmitter from '../WidthEmitter';
 import { GRID_GUTTER } from '../../plugins/grid';
 import * as classnames from 'classnames';

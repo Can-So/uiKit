@@ -15,10 +15,10 @@ import {
   table,
   tr,
   td,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import commonMessages from '../../../../messages';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
 import { FloatingToolbarButton } from '../../../../plugins/floating-toolbar/types';
 import { setNodeSelection } from '../../../../utils';
 import { Command } from '../../../../types';

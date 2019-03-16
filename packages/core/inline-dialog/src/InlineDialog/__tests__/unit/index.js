@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { Popper as PopperComponent } from '@atlaskit/popper';
+import { Popper as PopperComponent } from '@findable/popper';
 
 import InlineDialogWithAnalytics from '../../..';
 import { InlineDialogWithoutAnalytics as InlineDialog } from '../..';

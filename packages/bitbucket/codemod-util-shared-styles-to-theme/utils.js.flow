@@ -1,6 +1,6 @@
 // @flow
 
-// Finds the ImportDeclaration from '@atlaskit/util-shared-styles' and
+// Finds the ImportDeclaration from '@findable/util-shared-styles' and
 // the child 'akGridSizeUnitless' ImportSpecifier. Returns undefined if
 // either are not found, otherwise an array of
 // [declaration, specifier, localName]
@@ -8,7 +8,7 @@ function getSharedStyles(root: any, j: any) {
   const sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles',
+      value: '@findable/util-shared-styles',
     },
   });
   if (!sharedStylesImport.size()) {

@@ -1,5 +1,5 @@
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { sleep } from '@atlaskit/media-test-helpers';
+import { sleep } from '@findable/media-test-helpers';
 import { observableToPromise } from '../../observableToPromise';
 
 describe('observableToPromise()', () => {

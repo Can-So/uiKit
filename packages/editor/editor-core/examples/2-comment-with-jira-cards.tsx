@@ -8,7 +8,7 @@ import {
   ResolveResponse,
   CardAppearance,
   EditorCardProvider,
-} from '@atlaskit/smart-card';
+} from '@findable/smart-card';
 
 import Editor from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontSize, fontSizeSmall } from '@atlaskit/theme';
+import { fontSize, fontSizeSmall } from '@findable/theme';
 import { getThemeStyle, themeNamespace, compactSmallFontSize, compactLineHeight } from '../util/theme'; // Checkbox/Radio wrapper -- sits left of the children
 
 export var InputWrapper = styled.span.withConfig({

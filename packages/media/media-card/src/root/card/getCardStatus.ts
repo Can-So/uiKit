@@ -1,4 +1,4 @@
-import { FileDetails } from '@atlaskit/media-core';
+import { FileDetails } from '@findable/media-core';
 import { CardState, CardProps, CardStatus } from '../../';
 
 // we don't want to show complete status for empty files, ideally there should be no such file on the media api,

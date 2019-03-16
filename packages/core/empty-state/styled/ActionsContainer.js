@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var ActionsContainer = styled.div.withConfig({
   displayName: "ActionsContainer",
   componentId: "sc-1e9zrwk-0"

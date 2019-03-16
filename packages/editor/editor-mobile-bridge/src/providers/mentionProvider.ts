@@ -2,7 +2,7 @@
  * In order to enable mentions in Editor we must set both properties: allowMentions and mentionProvider.
  * So this type is supposed to be a stub version of mention provider. We don't actually need it.
  */
-import { MentionDescription, MentionResource } from '@atlaskit/mention';
+import { MentionDescription, MentionResource } from '@findable/mention';
 import { AccountId } from '../types';
 import { createPromise } from '../cross-platform-promise';
 

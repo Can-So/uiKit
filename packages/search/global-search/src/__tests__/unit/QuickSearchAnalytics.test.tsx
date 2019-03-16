@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 import {
   setupMocks,
   teardownMocks,
@@ -9,7 +9,7 @@ import { GlobalQuickSearch, Props } from '../..';
 import { QuickSearchContainer } from '../../components/common/QuickSearchContainer';
 import BasicNavigation from '../../../example-helpers/BasicNavigation';
 import LocaleIntlProvider from '../../../example-helpers/LocaleIntlProvider';
-import { ResultBase } from '@atlaskit/quick-search';
+import { ResultBase } from '@findable/quick-search';
 
 import { mount, ReactWrapper } from 'enzyme';
 import { waitUntil } from './_test-util';

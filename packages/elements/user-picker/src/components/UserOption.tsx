@@ -1,4 +1,4 @@
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import * as React from 'react';
 import { User } from '../types';
 import { AvatarItemOption, TextWrapper } from './AvatarItemOption';

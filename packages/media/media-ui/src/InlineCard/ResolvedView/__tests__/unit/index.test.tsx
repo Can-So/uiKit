@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
-import Lozenge from '@atlaskit/lozenge';
+import Lozenge from '@findable/lozenge';
 import { InlineCardResolvedView } from '../../index';
 import { Icon } from '../../../../InlineCard/Icon';
 

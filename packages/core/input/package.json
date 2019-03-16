@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/input",
+  "name": "@findable/input",
   "version": "5.0.0",
   "description": "Internal component used by field-base to create field-text. DO NOT USE DIRECTLY",
   "license": "Apache-2.0",
@@ -13,9 +13,9 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/theme": "^8.0.0",
+    "@findable/theme": "^8.0.0",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
     "keycode": "^2.1.7"
@@ -26,9 +26,9 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/field-base": "^12.0.0",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/ssr": "^0.0.1",
+    "@findable/field-base": "^12.0.0",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, typography } from '@atlaskit/theme';
+import { gridSize, typography } from '@findable/theme';
 var Header = styled.h4.withConfig({
   displayName: "Header",
   componentId: "sc-1jhbfl6-0"

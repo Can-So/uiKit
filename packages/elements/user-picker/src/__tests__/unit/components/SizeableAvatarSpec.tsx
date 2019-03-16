@@ -1,4 +1,4 @@
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { Props, SizeableAvatar } from '../../../components/SizeableAvatar';

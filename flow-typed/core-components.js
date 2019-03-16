@@ -5,14 +5,14 @@
 // If you are importing a typescript package into a flow package,
 // you will have to add a definition here.
 
-declare module '@atlaskit/button' {
+declare module '@findable/button' {
   declare module.exports: any;
 }
 
-declare module '@atlaskit/textarea' {
+declare module '@findable/textarea' {
   declare module.exports: any;
 }
 
-declare module '@atlaskit/atlassian-switcher' {
+declare module '@findable/atlassian-switcher' {
   declare module.exports: any;
 }

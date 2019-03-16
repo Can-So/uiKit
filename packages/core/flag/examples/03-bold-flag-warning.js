@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import { colors } from '@atlaskit/theme';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
+import { colors } from '@findable/theme';
+import WarningIcon from '@findable/icon/glyph/warning';
 import Flag, { FlagGroup } from '../src';
 
 export default () => (

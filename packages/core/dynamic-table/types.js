@@ -1,1 +1,1 @@
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { UIAnalyticsEvent } from '@findable/analytics-next';

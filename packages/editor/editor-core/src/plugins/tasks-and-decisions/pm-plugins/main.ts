@@ -1,10 +1,10 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { Node as PMNode } from 'prosemirror-model';
-import { uuid } from '@atlaskit/adf-schema';
+import { uuid } from '@findable/adf-schema';
 import {
   ProviderFactory,
   ContextIdentifierProvider,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { findParentNodeOfType } from 'prosemirror-utils';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import { decisionItemNodeView } from '../nodeviews/decisionItem';

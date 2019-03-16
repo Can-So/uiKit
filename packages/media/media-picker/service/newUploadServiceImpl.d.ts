@@ -1,4 +1,4 @@
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { MediaFile } from '../domain/file';
 import { UploadParams } from '..';
 import { UploadService, UploadServiceEventListener, UploadServiceEventPayloadTypes } from './types';

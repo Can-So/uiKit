@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import Tag from '@atlaskit/tag';
+import Tag from '@findable/tag';
 import type { GroupType } from '../../types';
 
 import { MultiSelectStateless } from '../..';

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors, gridSize, fontSize } from '@atlaskit/theme';
+import { colors, gridSize, fontSize } from '@findable/theme';
 var lineHeightDefault = gridSize() * 2 / fontSize();
 
 var getPlaceholderStyle = function getPlaceholderStyle(style) {

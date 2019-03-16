@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import SearchError from '../../components/SearchError';
 import { mountWithIntl } from './helpers/_intl-enzyme-test-helper';
 

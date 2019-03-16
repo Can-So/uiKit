@@ -1,11 +1,11 @@
-import { Context, ContextFactory } from '@atlaskit/media-core';
+import { Context, ContextFactory } from '@findable/media-core';
 import {
   defaultCollectionName,
   userAuthProvider,
   mediaPickerAuthProvider,
   defaultMediaPickerAuthProvider,
-} from '@atlaskit/media-test-helpers';
-import { MediaProvider } from '@atlaskit/editor-core';
+} from '@findable/media-test-helpers';
+import { MediaProvider } from '@findable/editor-core';
 
 export interface MediaProviderFactoryConfig {
   collectionName?: string;
@@ -16,7 +16,7 @@ export interface MediaProviderFactoryConfig {
 }
 
 /**
- * Add "import * as mediaTestHelpers from '@atlaskit/media-test-helpers'"
+ * Add "import * as mediaTestHelpers from '@findable/media-test-helpers'"
  * at the beginning of your file and pass "mediaTestHelpers" into this function
  */
 export function storyMediaProviderFactory(

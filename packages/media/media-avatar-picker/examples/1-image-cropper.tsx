@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 import ImageCropper from '../src/image-cropper';
-import { tallImage } from '@atlaskit/media-test-helpers';
+import { tallImage } from '@findable/media-test-helpers';
 
 const naturalWidth = 5360;
 

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { fadeIn } from '../../../mixins';
 var borderRadius = "border-radius: 3px 3px 0 0;";
 export var Wrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  position: relative;\n  height: 0;\n  padding-bottom: 56.25%;\n  color: ", ";\n  ", " background-color: ", ";\n  ", ";\n"], ["\n  position: relative;\n  height: 0;\n  padding-bottom: 56.25%;\n  color: ", ";\n  ", " background-color: ", ";\n  ", ";\n"])), colors.N40A, borderRadius, colors.N30, fadeIn);

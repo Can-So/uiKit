@@ -1,7 +1,7 @@
 // @flow
 
-import RadioIcon from '@atlaskit/icon/glyph/radio';
-import Item, { withItemFocus } from '@atlaskit/item';
+import RadioIcon from '@findable/icon/glyph/radio';
+import Item, { withItemFocus } from '@findable/item';
 import withToggleInteraction from '../hoc/withToggleInteraction';
 import supportsVoiceover from '../../util/supportsVoiceover';
 

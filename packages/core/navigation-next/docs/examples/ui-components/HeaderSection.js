@@ -1,8 +1,8 @@
 // @flow
 
 import React, { type ElementConfig } from 'react';
-import { colors } from '@atlaskit/theme';
-import { AtlassianWordmark } from '@atlaskit/logo';
+import { colors } from '@findable/theme';
+import { AtlassianWordmark } from '@findable/logo';
 import { HeaderSection, Section, Wordmark } from '../../../src';
 
 import { CONTENT_NAV_WIDTH } from '../../../src/common/constants';

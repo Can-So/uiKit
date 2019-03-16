@@ -1,6 +1,6 @@
 import * as LinkifyIt from 'linkify-it';
 import { mapSlice } from '../../utils/slice';
-import { isSafeUrl } from '@atlaskit/adf-schema';
+import { isSafeUrl } from '@findable/adf-schema';
 export var LINK_REGEXP = /(https?|ftp):\/\/[^\s]+/;
 var linkify = LinkifyIt();
 linkify.add('sourcetree:', 'http:');

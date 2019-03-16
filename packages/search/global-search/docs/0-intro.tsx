@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
   A search component that connects to the Atlassian cross-product search backend.
@@ -9,7 +9,7 @@ export default md`
   Primary use case for the component is to be displayed in Navigation. Put in the drawers prop of the Navigation component as follows:
 
   ${code`
-  import { GlobalQuickSearch } from '@atlaskit/global-search';
+  import { GlobalQuickSearch } from '@findable/global-search';
 
   <Navigation
     drawers={[

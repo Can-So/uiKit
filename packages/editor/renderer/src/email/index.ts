@@ -1,11 +1,11 @@
-import { fontFamily, fontSize } from '@atlaskit/theme';
+import { fontFamily, fontSize } from '@findable/theme';
 
 import { Fragment, Node as PMNode, Schema } from 'prosemirror-model';
 
 import { Serializer } from '../serializer';
 import { nodeSerializers } from './serializers';
 import { serializeStyle } from './util';
-import { calcTableColumnWidths } from '@atlaskit/adf-schema';
+import { calcTableColumnWidths } from '@findable/adf-schema';
 
 const serializeNode = (node: PMNode, serializedHTML?: string): string => {
   // ignore nodes with unknown type

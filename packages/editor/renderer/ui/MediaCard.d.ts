@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { CardAppearance, CardDimensions, CardOnClickCallback } from '@atlaskit/media-card';
-import { Context, ImageResizeMode } from '@atlaskit/media-core';
-import { MediaType } from '@atlaskit/adf-schema';
-import { ImageStatus, ImageLoaderProps } from '@atlaskit/editor-common';
+import { CardAppearance, CardDimensions, CardOnClickCallback } from '@findable/media-card';
+import { Context, ImageResizeMode } from '@findable/media-core';
+import { MediaType } from '@findable/adf-schema';
+import { ImageStatus, ImageLoaderProps } from '@findable/editor-common';
 import { RendererAppearance } from './Renderer';
 export interface MediaProvider {
     viewContext?: Context;

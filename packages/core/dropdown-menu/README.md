@@ -5,7 +5,7 @@ Creates a dropdown menu, with optional groups, headings, icons, checkbox items, 
 ## Installation
 
 ```sh
-yarn add @atlaskit/dropdown-menu
+yarn add @findable/dropdown-menu
 ```
 
 ## Usage

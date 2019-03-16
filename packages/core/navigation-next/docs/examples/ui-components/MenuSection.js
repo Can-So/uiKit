@@ -1,10 +1,10 @@
 // @flow
 
 import React, { type ElementConfig } from 'react';
-import { colors } from '@atlaskit/theme';
-import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
-import IssuesIcon from '@atlaskit/icon/glyph/issues';
+import { colors } from '@findable/theme';
+import DashboardIcon from '@findable/icon/glyph/dashboard';
+import FolderIcon from '@findable/icon/glyph/folder';
+import IssuesIcon from '@findable/icon/glyph/issues';
 
 import { Item, MenuSection, Section } from '../../../src';
 

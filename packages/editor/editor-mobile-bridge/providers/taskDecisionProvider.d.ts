@@ -1,4 +1,4 @@
-import { TaskDecisionProvider, Query, DecisionResponse, TaskResponse, ItemResponse, RecentUpdatesId, RecentUpdateContext, ObjectKey, TaskState, Handler } from '@atlaskit/task-decision';
+import { TaskDecisionProvider, Query, DecisionResponse, TaskResponse, ItemResponse, RecentUpdatesId, RecentUpdateContext, ObjectKey, TaskState, Handler } from '@findable/task-decision';
 declare type ToggleTaskCallback = (key: ObjectKey, state: TaskState) => void;
 export declare const objectKeyToString: (objectKey: ObjectKey) => string;
 export declare class TaskDecisionProviderImpl implements TaskDecisionProvider {

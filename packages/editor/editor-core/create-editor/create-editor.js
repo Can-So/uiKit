@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import { Schema } from 'prosemirror-model';
-import { sanitizeNodes } from '@atlaskit/adf-schema';
-import { ErrorReporter, } from '@atlaskit/editor-common';
+import { sanitizeNodes } from '@findable/adf-schema';
+import { ErrorReporter, } from '@findable/editor-common';
 import { analyticsService } from '../analytics';
 import { name, version } from '../version-wrapper';
 import Ranks from '../plugins/rank';

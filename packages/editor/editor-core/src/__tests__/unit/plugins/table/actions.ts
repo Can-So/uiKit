@@ -2,7 +2,7 @@ import { Slice, Fragment } from 'prosemirror-model';
 import { TextSelection } from 'prosemirror-state';
 import { CellSelection } from 'prosemirror-tables';
 import { isColumnSelected, isRowSelected } from 'prosemirror-utils';
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import {
   doc,
   p,
@@ -14,7 +14,7 @@ import {
   tdCursor,
   tdEmpty,
   panelNote,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   transformSliceToAddTableHeaders,
   emptyMultipleCells,

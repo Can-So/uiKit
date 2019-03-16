@@ -1,4 +1,4 @@
-import { FileState, FileDetails } from '@atlaskit/media-core';
+import { FileState, FileDetails } from '@findable/media-core';
 
 export const extendMetadata = (
   state: FileState,

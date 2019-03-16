@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { ColorSquare, LineWidthBackCircle, LineWidthFrontCircle, ToolbarButton, ToolIcon, } from './styled';
-import Arrow from '@atlaskit/icon/glyph/media-services/arrow';
-import Brush from '@atlaskit/icon/glyph/media-services/brush';
-import Line from '@atlaskit/icon/glyph/media-services/line';
-import Text from '@atlaskit/icon/glyph/media-services/text';
+import Arrow from '@findable/icon/glyph/media-services/arrow';
+import Brush from '@findable/icon/glyph/media-services/brush';
+import Line from '@findable/icon/glyph/media-services/line';
+import Text from '@findable/icon/glyph/media-services/text';
 var ColorButton = /** @class */ (function (_super) {
     tslib_1.__extends(ColorButton, _super);
     function ColorButton() {

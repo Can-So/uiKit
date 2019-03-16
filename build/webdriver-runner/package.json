@@ -1,11 +1,11 @@
 {
-  "name": "@atlaskit/webdriver-runner",
+  "name": "@findable/webdriver-runner",
   "version": "0.1.1",
   "main": "index.js",
   "private": true,
   "dependencies": {
-    "@atlaskit/webpack-config": "^2.0.4",
-    "@atlaskit/analytics-reporting": "0.1.0",
+    "@findable/webpack-config": "^2.0.4",
+    "@findable/analytics-reporting": "0.1.0",
     "bolt-query": "^1.1.4",
     "browserstack-local": "^1.3.7",
     "loader-utils": "^1.1.0",

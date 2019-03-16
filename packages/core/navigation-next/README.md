@@ -8,7 +8,7 @@ These are entrypoints for specific components to be used carefully by the consum
 ## How to use it
 
 ```js
-import LayoutManagerWithViewController from '@atlaskit/navigation-next/LayoutManagerWithViewController';
+import LayoutManagerWithViewController from '@findable/navigation-next/LayoutManagerWithViewController';
 ```
 
 ## Exposed entrypoints

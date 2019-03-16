@@ -5,7 +5,7 @@ import {
   Camera,
   Vector2,
   getCssFromImageOrientation,
-} from '@atlaskit/media-ui';
+} from '@findable/media-ui';
 import { BaselineExtend, ImageWrapper, Img } from '../../styled';
 import { ZoomLevel } from '../../domain/zoomLevel';
 import { closeOnDirectClick } from '../../utils/closeOnDirectClick';

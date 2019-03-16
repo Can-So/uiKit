@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import TextArea from '@atlaskit/textarea';
-import { colors, codeFontFamily } from '@atlaskit/theme';
+import Button from '@findable/button';
+import TextArea from '@findable/textarea';
+import { colors, codeFontFamily } from '@findable/theme';
 import { diffLines } from 'diff';
 
 const Container = styled.div`

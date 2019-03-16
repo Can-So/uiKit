@@ -5,10 +5,10 @@ import { EditorView } from 'prosemirror-view';
 import {
   cardProvider,
   customInsertMenuItems,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
-import { validator, ErrorCallback, ADFEntity } from '@atlaskit/adf-utils';
-import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
+import { validator, ErrorCallback, ADFEntity } from '@findable/adf-utils';
+import { Provider as SmartCardProvider } from '@findable/smart-card';
 
 import Editor from './../src/editor';
 import { EditorAppearance } from '../src/types';

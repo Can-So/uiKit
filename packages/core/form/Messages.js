@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { typography, gridSize, math, colors } from '@atlaskit/theme';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import SuccessIcon from '@atlaskit/icon/glyph/editor/success';
+import { typography, gridSize, math, colors } from '@findable/theme';
+import ErrorIcon from '@findable/icon/glyph/error';
+import SuccessIcon from '@findable/icon/glyph/editor/success';
 import { FieldId } from './Field';
 var Message = styled.div.withConfig({
   displayName: "Messages__Message",

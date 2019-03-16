@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { MediaStore, UploadableFile, UploadController, MediaCollectionItemFullDetails, FileItem, MediaFileArtifacts, TouchFileDescriptor, TouchedFiles, UploadableFileUpfrontIds } from '@atlaskit/media-store';
+import { MediaStore, UploadableFile, UploadController, MediaCollectionItemFullDetails, FileItem, MediaFileArtifacts, TouchFileDescriptor, TouchedFiles, UploadableFileUpfrontIds } from '@findable/media-store';
 import { FileState, GetFileOptions } from '../fileState';
 export declare type DataloaderMap = {
     [id: string]: DataloaderResult;

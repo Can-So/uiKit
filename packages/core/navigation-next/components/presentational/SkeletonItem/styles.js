@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
+import { colors, gridSize as gridSizeFn } from '@findable/theme';
 var gridSize = gridSizeFn(); // These are the styles which are consistent regardless of theme
 
 var baseStyles = {

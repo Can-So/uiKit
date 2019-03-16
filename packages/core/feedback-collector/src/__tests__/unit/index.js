@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import Select from '@atlaskit/select';
-import { Checkbox } from '@atlaskit/checkbox';
-import { Field } from '@atlaskit/form';
+import Select from '@findable/select';
+import { Checkbox } from '@findable/checkbox';
+import { Field } from '@findable/form';
 
 import FeedbackCollector from '../../components/FeedbackCollector';
 import FeedbackForm, { fieldLabel } from '../../components/FeedbackForm';

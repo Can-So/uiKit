@@ -8,7 +8,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { createAndFireEvent, withAnalyticsContext, withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { createAndFireEvent, withAnalyticsContext, withAnalyticsEvents } from '@findable/analytics-next';
 import { name as packageName, version as packageVersion } from './version.json';
 import RadioIcon from './RadioIcon';
 import { RadioInputWrapper, HiddenInput } from './styled/RadioInput';

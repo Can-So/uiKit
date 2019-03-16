@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { SCREEN_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { SCREEN_EVENT_TYPE } from '@findable/analytics-gas-types';
 import { HandlerResult } from '.';
 import { isSearchGiphyAction } from '../../actions';
 

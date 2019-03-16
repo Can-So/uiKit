@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { ResultItemGroup } from '@atlaskit/quick-search';
+import { ResultItemGroup } from '@findable/quick-search';
 import ResultList from './ResultList';
 var ResultGroup = /** @class */ (function (_super) {
     tslib_1.__extends(ResultGroup, _super);

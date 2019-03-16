@@ -1,5 +1,5 @@
-import { Context, Identifier } from '@atlaskit/media-core';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { Context, Identifier } from '@findable/media-core';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import { ItemSource, MediaViewerFeatureFlags } from './domain';
 export declare type Props = Readonly<{
     onClose?: () => void;

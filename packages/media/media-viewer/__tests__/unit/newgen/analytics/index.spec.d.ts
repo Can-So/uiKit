@@ -1,4 +1,4 @@
-import { ProcessedFileState, ProcessingFileState, UploadingFileState, ErrorFileState, ProcessingFailedState } from '@atlaskit/media-core';
+import { ProcessedFileState, ProcessingFileState, UploadingFileState, ErrorFileState, ProcessingFailedState } from '@findable/media-core';
 export declare const processedFile: ProcessedFileState;
 export declare const processingFile: ProcessingFileState;
 export declare const uploadingFile: UploadingFileState;

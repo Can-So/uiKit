@@ -1,4 +1,4 @@
-import { GasCorePayload, GasScreenEventPayload } from '@atlaskit/analytics-gas-types';
+import { GasCorePayload, GasScreenEventPayload } from '@findable/analytics-gas-types';
 import { Action, MiddlewareAPI } from 'redux';
 import { State } from '../../domain';
 export declare type BasePayload = GasCorePayload | GasScreenEventPayload;

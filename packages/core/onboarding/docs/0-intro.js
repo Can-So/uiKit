@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   This package contains a number of components to help highlight product changes to users.
@@ -18,7 +18,7 @@ export default md`
   SpotlightTarget,
   SpotlightTransition,
   SpotlightPulse
-} from '@atlaskit/onboarding';`}
+} from '@findable/onboarding';`}
 
   ## Spotlight
 
@@ -26,7 +26,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/onboarding"
+      packageName="@findable/onboarding"
       Component={require('../examples/10-spotlight-basic').default}
       title="Spotlight Tour"
       source={require('!!raw-loader!../examples/10-spotlight-basic')}
@@ -46,7 +46,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/onboarding"
+      packageName="@findable/onboarding"
       Component={require('../examples/00-different-spotlights').default}
       title="Spotlight Cards"
       source={require('!!raw-loader!../examples/00-different-spotlights')}
@@ -67,7 +67,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/onboarding"
+      packageName="@findable/onboarding"
       Component={require('../examples/99-modal-basic').default}
       title="Benefits Modal"
       source={require('!!raw-loader!../examples/99-modal-basic')}

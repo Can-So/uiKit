@@ -1,4 +1,4 @@
-import { isClientBasedAuth } from '@atlaskit/media-core';
+import { isClientBasedAuth } from '@findable/media-core';
 import { WsConnectionHolder } from './wsConnectionHolder';
 // Helper class that provides a WsConnectionHolder instance for a given client.
 var WsProvider = /** @class */ (function () {

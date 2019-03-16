@@ -1,6 +1,6 @@
 import { EditorView, NodeView } from 'prosemirror-view';
 import { Node as PmNode } from 'prosemirror-model';
-import { ProviderFactory, ExtensionHandlers } from '@atlaskit/editor-common';
+import { ProviderFactory, ExtensionHandlers } from '@findable/editor-common';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 export interface Props {
     node: PmNode;

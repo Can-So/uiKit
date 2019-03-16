@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { code, md, Props, Example } from '@atlaskit/docs';
+import { code, md, Props, Example } from '@findable/docs';
 
-const newConversationSource = `import { Conversation, ConversationResource } from '@atlaskit/conversation';
+const newConversationSource = `import { Conversation, ConversationResource } from '@findable/conversation';
 
 const provider = new ConversationResource({
   url: 'https://conversation-service/',
@@ -11,7 +11,7 @@ const provider = new ConversationResource({
 <Conversation objectId="ari:cloud:platform::conversation/demo" provider={provider} />
 `;
 
-const existingConversationSource = `import { Conversation, ConversationResource } from '@atlaskit/conversation';
+const existingConversationSource = `import { Conversation, ConversationResource } from '@findable/conversation';
 
 const provider = new ConversationResource({
   url: 'https://conversation-service/',
@@ -22,7 +22,7 @@ const [conversation] = await provider.getConversations();
 <Conversation id={conversation.conversationId} objectId="ari:cloud:platform::conversation/demo" provider={provider} />;
 `;
 
-const customEditorSource = `import { Conversation, ConversationResource } from '@atlaskit/conversation';
+const customEditorSource = `import { Conversation, ConversationResource } from '@findable/conversation';
 
 const provider = new ConversationResource({
   url: 'https://conversation-service/',
@@ -326,9 +326,9 @@ export default md`
 
   The conversation component is a mini-app which comes with an internal store. It's completely driven by a provider (\`ConversationResource\`).
 
-  Using the component is fairly straight forward. Just import \`Conversation\` and \`ConversationResource\` from \`@atlaskit/conversation\`. The component can then be used like below.
+  Using the component is fairly straight forward. Just import \`Conversation\` and \`ConversationResource\` from \`@findable/conversation\`. The component can then be used like below.
   
-  ${code`import { Conversation, ConversationResource } from '@atlaskit/conversation';`}
+  ${code`import { Conversation, ConversationResource } from '@findable/conversation';`}
   
   ${(
     <Example

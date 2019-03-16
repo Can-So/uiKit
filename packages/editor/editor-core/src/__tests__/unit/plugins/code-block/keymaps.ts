@@ -7,7 +7,7 @@ import {
   li,
   code_block,
   breakout,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import breakoutPlugin from '../../../../plugins/breakout';
 import listPlugin from '../../../../plugins/lists';

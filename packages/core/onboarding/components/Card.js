@@ -2,8 +2,8 @@ import _extends from "@babel/runtime/helpers/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { borderRadius, gridSize, layers, math, typography, createTheme } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { borderRadius, gridSize, layers, math, typography, createTheme } from '@findable/theme';
 import { ActionItems, ActionItem } from '../styled/Dialog';
 var Container = styled.div.withConfig({
   displayName: "Card__Container",

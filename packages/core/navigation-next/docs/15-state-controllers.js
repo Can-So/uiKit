@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { code, md, Props } from '@atlaskit/docs';
+import { code, md, Props } from '@findable/docs';
 
 import { Contents, ContentsProvider, H, Hr } from './shared';
 
@@ -53,7 +53,7 @@ ${code`interface UIControllerInterface {
 
 A render component which provides the UI controller instance to its children.
 
-${code`import { UIControllerSubscriber } from '@atlaskit/navigation-next';
+${code`import { UIControllerSubscriber } from '@findable/navigation-next';
 
 const MyComponent = () => (
   <UIControllerSubscriber>
@@ -67,7 +67,7 @@ const MyComponent = () => (
 
 A higher-order component which provides the UI controller instance through the \`navigationUIController\` prop to the component it wraps.
 
-${code`import { withNavigationUIController } from '@atlaskit/navigation-next';
+${code`import { withNavigationUIController } from '@findable/navigation-next';
 
 class MyComponentBase extends Component {
   render() {
@@ -157,7 +157,7 @@ ${code`interface ViewControllerInterface {
 
 A render component which provides the view controller instance to its children.
 
-${code`import { ViewControllerSubscriber } from '@atlaskit/navigation-next';
+${code`import { ViewControllerSubscriber } from '@findable/navigation-next';
 
 const MyComponent = () => (
   <ViewControllerSubscriber>
@@ -173,7 +173,7 @@ const MyComponent = () => (
 
 A higher-order component which provides the view controller instance through the \`navigationViewController\` prop to the component it wraps.
 
-${code`import { withNavigationViewController } from '@atlaskit/navigation-next';
+${code`import { withNavigationViewController } from '@findable/navigation-next';
 
 class MyComponentBase extends Component {
   render() {
@@ -199,7 +199,7 @@ The items renderer is used to render the data representation of your view items 
 The default version can be used as follows:
 
 ${code`
-  import { ItemsRenderer } from '@atlaskit/navigation-next';
+  import { ItemsRenderer } from '@findable/navigation-next';
 
   <ItemsRenderer customComponents={...} items={...} />;
 `}
@@ -207,7 +207,7 @@ ${code`
 To use the typed version, which allows you to type any custom components passed in:
 
 ${code`
-  import { TypedItemsRenderer } from '@atlaskit/navigation-next';
+  import { TypedItemsRenderer } from '@findable/navigation-next';
 
   type CustomComponentType = { type: 'Foo', id: string, foo: boolean } | { type: 'Bar', id: string, bar: boolean };
 
@@ -263,7 +263,7 @@ For example,
 
 ${code`
   // @flow
-  import type { NavigationRendererItemType } from '@atlaskit/navigation-next';
+  import type { NavigationRendererItemType } from '@findable/navigation-next';
 
   // Note that you still need to use the <> prefix even when not using any custom components
   const itemsWithoutCustomComponents: NavigationRendererItemType<> = [...];
@@ -283,7 +283,7 @@ ${<H>Reducer utility functions</H>}
 
 The library exposes a number of utility functions for composing a reducer.
 
-${code`import { viewReducerUtils } from '@atlaskit/navigation-next';`}
+${code`import { viewReducerUtils } from '@findable/navigation-next';`}
 
 The lowest-level function that we provide is the \`walkView\` function. It has the following signature:
 
@@ -357,7 +357,7 @@ ${(
 
 Example usage:
 
-${code`import { viewReducerUtils } from '@atlaskit/navigation-next';
+${code`import { viewReducerUtils } from '@findable/navigation-next';
 
 const { findId } = viewReducerUtils;
 
@@ -433,7 +433,7 @@ ${(
 
 Example usage:
 
-${code`import { viewReducerUtils } from '@atlaskit/navigation-next';
+${code`import { viewReducerUtils } from '@findable/navigation-next';
 
 const { appendChildren } = viewReducerUtils;
 

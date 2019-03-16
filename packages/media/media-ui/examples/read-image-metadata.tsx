@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 import {
   readImageMetaData,
   getFileInfo,
@@ -15,7 +15,7 @@ import {
   Code,
   CloseButton,
 } from '../example-helpers/styled';
-import Lozenge from '@atlaskit/lozenge';
+import Lozenge from '@findable/lozenge';
 
 interface ExamplePreview {
   filename: string;
@@ -61,7 +61,7 @@ class Example extends React.Component<{}, ExampleState> {
           <GridColumn>
             <h1>Image MetaData Preview</h1>
             <p>
-              <Lozenge>@atlaskit/media-ui</Lozenge> exports:{' '}
+              <Lozenge>@findable/media-ui</Lozenge> exports:{' '}
               <Code>
                 async readImageMetaData(fileInfo:FileInfo):ImageMetaData
               </Code>

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { Grid } from '@atlaskit/page';
+import { Grid } from '@findable/page';
 import { ThemeProvider } from 'styled-components';
 import ProgressTrackerStage from '../ProgressTrackerStage';
 import { ProgressTrackerContainer } from './styled';

@@ -6,20 +6,20 @@ import React, {
   type ComponentType,
   type Node,
 } from 'react';
-import Avatar from '@atlaskit/avatar';
-import Drawer from '@atlaskit/drawer';
+import Avatar from '@findable/avatar';
+import Drawer from '@findable/drawer';
 import {
   DropdownItem,
   DropdownItemGroup,
   DropdownMenuStateless,
-} from '@atlaskit/dropdown-menu';
-import StarIcon from '@atlaskit/icon/glyph/star';
-import CreateIcon from '@atlaskit/icon/glyph/add';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import HelpIcon from '@atlaskit/icon/glyph/question-circle';
-import { AtlassianIcon } from '@atlaskit/logo';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-import { colors } from '@atlaskit/theme';
+} from '@findable/dropdown-menu';
+import StarIcon from '@findable/icon/glyph/star';
+import CreateIcon from '@findable/icon/glyph/add';
+import SearchIcon from '@findable/icon/glyph/search';
+import HelpIcon from '@findable/icon/glyph/question-circle';
+import { AtlassianIcon } from '@findable/logo';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
+import { colors } from '@findable/theme';
 
 import {
   GlobalItem,

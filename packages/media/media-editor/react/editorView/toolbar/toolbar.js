@@ -2,8 +2,8 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import { injectIntl } from 'react-intl';
-import Button from '@atlaskit/button';
-import Tooltip from '@atlaskit/tooltip';
+import Button from '@findable/button';
+import Tooltip from '@findable/tooltip';
 import LineWidthButton from './buttons/lineWidthButton';
 import ColorButton from './buttons/colorButton';
 import { ToolButton } from './buttons/toolButton';
@@ -13,7 +13,7 @@ import { ToolbarContainer, CenterButtons, VerticalLine } from './styles';
 import { ShapePopup, shapeTools } from './popups/shapePopup';
 import ShapeButton from './buttons/shapeButton';
 import { ButtonGroup } from './buttons/buttonGroup';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 export var tools = [
     'arrow',
     'rectangle',

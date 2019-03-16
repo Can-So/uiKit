@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import UploadIcon from '@atlaskit/icon/glyph/upload';
-import DropboxIcon from '@atlaskit/icon/glyph/dropbox';
-import GoogleDriveIcon from '@atlaskit/icon/glyph/googledrive';
+import UploadIcon from '@findable/icon/glyph/upload';
+import DropboxIcon from '@findable/icon/glyph/dropbox';
+import GoogleDriveIcon from '@findable/icon/glyph/googledrive';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { State } from '../../domain';
 import SidebarItem from './item/sidebarItem';
 import GiphySidebarItem from './item/giphySidebarItem';

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { getArtifactUrl } from '@atlaskit/media-store';
-import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { getArtifactUrl } from '@findable/media-store';
+import { CustomMediaPlayer } from '@findable/media-ui';
 import { constructAuthTokenUrl } from '../utils';
 import { Outcome } from '../domain';
 import { Video, CustomVideoPlayerWrapper } from '../styled';

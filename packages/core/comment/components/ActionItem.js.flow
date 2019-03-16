@@ -5,8 +5,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import Button from '@atlaskit/button';
+} from '@findable/analytics-next';
+import Button from '@findable/button';
 
 import {
   name as packageName,

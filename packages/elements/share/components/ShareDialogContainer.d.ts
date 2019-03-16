@@ -1,5 +1,5 @@
-import { ButtonAppearances } from '@atlaskit/button';
-import { LoadOptions } from '@atlaskit/user-picker';
+import { ButtonAppearances } from '@findable/button';
+import { LoadOptions } from '@findable/user-picker';
 import * as React from 'react';
 import { ConfigResponse, ShareClient } from '../clients/ShareServiceClient';
 import { DialogContentState, OriginTracing, OriginTracingFactory, ShareButtonStyle, ShareResponse } from '../types';

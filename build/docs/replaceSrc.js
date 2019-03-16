@@ -3,7 +3,7 @@ var regexString = /((?:import|export)\s*['"\`])(..\/src\/index.less)(['"\`]\s*)/
 export default function replaceSrc(content, name) {
   var replacedCode = content;
 
-  if (name === '@atlaskit/css-reset') {
+  if (name === '@findable/css-reset') {
     replacedCode = replacedCode.replace(regexString, "$1".concat(name, "$3"));
   }
 

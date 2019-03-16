@@ -1,4 +1,4 @@
-import { SCREEN_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { SCREEN_EVENT_TYPE } from '@findable/analytics-gas-types';
 import { Action } from 'redux';
 import { HandlerResult } from '.';
 import { isShowPopupAction } from '../../actions/showPopup';

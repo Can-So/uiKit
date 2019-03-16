@@ -2,8 +2,8 @@
 /* eslint-disable react/no-multi-comp */
 import React, { Component, PureComponent, type Node } from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { colors } from '@findable/theme';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import Modal, { ModalTransition } from '../src';
 

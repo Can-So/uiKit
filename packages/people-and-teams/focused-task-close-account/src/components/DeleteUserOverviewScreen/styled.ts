@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, typography } from '@atlaskit/theme';
+import { colors, typography } from '@findable/theme';
 import gridSizeTimes from '../../util/gridSizeTimes';
 
 export const Screen = styled.div`

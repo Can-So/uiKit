@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import RemoveIcon from '@atlaskit/icon/glyph/cross';
+import RemoveIcon from '@findable/icon/glyph/cross';
 import { Button } from './styled';
 
 type Props = {

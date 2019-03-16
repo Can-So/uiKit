@@ -4,9 +4,9 @@ jest.mock('../../../components/utils', () => ({
   isValidEmailUsingConfig: jest.fn(),
 }));
 
-import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
-import { ErrorMessage, Field, HelperMessage } from '@atlaskit/form';
-import UserPicker, { OptionData } from '@atlaskit/user-picker';
+import { shallowWithIntl } from '@findable/editor-test-helpers';
+import { ErrorMessage, Field, HelperMessage } from '@findable/form';
+import UserPicker, { OptionData } from '@findable/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {

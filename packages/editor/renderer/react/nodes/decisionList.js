@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent, Children } from 'react';
-import { DecisionList as AkDecisionList } from '@atlaskit/task-decision';
+import { DecisionList as AkDecisionList } from '@findable/task-decision';
 var DecisionList = /** @class */ (function (_super) {
     tslib_1.__extends(DecisionList, _super);
     function DecisionList() {

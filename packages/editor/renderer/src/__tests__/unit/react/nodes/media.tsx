@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { MediaType } from '@atlaskit/adf-schema';
-import { Card } from '@atlaskit/media-card';
+import { MediaType } from '@findable/adf-schema';
+import { Card } from '@findable/media-card';
 import { MediaCard, MediaCardInternal } from '../../../../ui/MediaCard';
 import Media from '../../../../react/nodes/media';
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { renderNodes } from '../..';
-import { WidthConsumer, } from '@atlaskit/editor-common';
-import { calcBreakoutWidth } from '@atlaskit/editor-common';
+import { WidthConsumer, } from '@findable/editor-common';
+import { calcBreakoutWidth } from '@findable/editor-common';
 import { RendererCssClassName } from '../../consts';
 export var renderExtension = function (content, layout) { return (React.createElement(WidthConsumer, null, function (_a) {
     var width = _a.width;

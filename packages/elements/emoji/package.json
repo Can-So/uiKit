@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/emoji",
+  "name": "@findable/emoji",
   "version": "58.1.0",
   "config": {
     "access": "public"
@@ -10,14 +10,14 @@
   "atlaskit:src": "src/index.ts",
   "sideEffects": false,
   "dependencies": {
-    "@atlaskit/analytics": "^5.0.0",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/field-base": "^12.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/spinner": "^10.0.1",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/tooltip": "^13.0.1",
-    "@atlaskit/util-service-support": "^4.0.0",
+    "@findable/analytics": "^5.0.0",
+    "@findable/button": "^11.0.0",
+    "@findable/field-base": "^12.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/spinner": "^10.0.1",
+    "@findable/theme": "^8.0.1",
+    "@findable/tooltip": "^13.0.1",
+    "@findable/util-service-support": "^4.0.0",
     "@types/js-search": "^1.4.0",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.5",
@@ -31,7 +31,7 @@
     "uuid": "^3.1.0"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^29.0.0",
+    "@findable/media-core": "^29.0.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
     "react-intl": "^2.6.0",
@@ -48,16 +48,16 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/editor-test-helpers": "^8.0.0",
-    "@atlaskit/elements-test-helpers": "^0.4.0",
-    "@atlaskit/i18n-tools": "^0.5.0",
-    "@atlaskit/layer": "^6.0.0",
-    "@atlaskit/media-core": "^29.0.0",
-    "@atlaskit/section-message": "^2.0.1",
-    "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^11.1.0",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/docs": "^7.0.1",
+    "@findable/editor-test-helpers": "^8.0.0",
+    "@findable/elements-test-helpers": "^0.4.0",
+    "@findable/i18n-tools": "^0.5.0",
+    "@findable/layer": "^6.0.0",
+    "@findable/media-core": "^29.0.0",
+    "@findable/section-message": "^2.0.1",
+    "@findable/util-common-test": "^2.4.2",
+    "@findable/util-data-test": "^11.1.0",
+    "@findable/visual-regression": "^0.0.1",
     "@types/react-virtualized": "^9.18.12",
     "canvas-prebuilt": "^2.0.0-alpha.14",
     "enzyme": "^3.7.0",
@@ -74,7 +74,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "scripts": {
     "i18n:push": "i18n-tools push --resource emoji . --type ts",

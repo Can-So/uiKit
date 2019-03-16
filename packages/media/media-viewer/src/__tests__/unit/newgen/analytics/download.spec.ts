@@ -7,7 +7,7 @@ import {
   fileWithError,
 } from './index.spec';
 import { version as packageVersion } from '../../../../version.json';
-import { ProcessedFileState } from '@atlaskit/media-core';
+import { ProcessedFileState } from '@findable/media-core';
 
 const unsupportedFile: ProcessedFileState = {
   ...processedFile,
@@ -23,7 +23,7 @@ const basePayload = {
 
 const contextPayload = {
   componentName: 'media-viewer',
-  packageName: '@atlaskit/media-viewer',
+  packageName: '@findable/media-viewer',
   packageVersion,
 };
 

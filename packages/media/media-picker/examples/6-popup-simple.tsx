@@ -3,11 +3,11 @@ import {
   defaultMediaPickerAuthProvider,
   userAuthProvider,
   mediaMock,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import * as React from 'react';
 import { Component } from 'react';
-import Button from '@atlaskit/button';
-import { ContextFactory } from '@atlaskit/media-core';
+import Button from '@findable/button';
+import { ContextFactory } from '@findable/media-core';
 
 import { MediaPicker } from '../src';
 import { Popup } from '../index';

@@ -1,5 +1,5 @@
-import { OptionData } from '@atlaskit/user-picker';
-import { userPickerData } from '@atlaskit/util-data-test';
+import { OptionData } from '@findable/user-picker';
+import { userPickerData } from '@findable/util-data-test';
 import * as React from 'react';
 import { ShareDialogContainer } from '../src';
 import {

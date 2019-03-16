@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { CardLinkView } from '@atlaskit/media-ui';
-import { auth } from '@atlaskit/outbound-auth-flow-client';
+import { CardLinkView } from '@findable/media-ui';
+import { auth } from '@findable/outbound-auth-flow-client';
 export var isCardWithData = function (props) {
     return !!props.data;
 };
@@ -24,7 +24,7 @@ var CardWithURLRenderer = /** @class */ (function (_super) {
     CardWithURLRenderer.prototype.render = function () {
         var _a = this.props, url = _a.url, client = _a.client, appearance = _a.appearance, isSelected = _a.isSelected, onClick = _a.onClick, createAnalyticsEvent = _a.createAnalyticsEvent;
         if (!url) {
-            throw new Error('@atlaskit/smart-card: url property is missing.');
+            throw new Error('@findable/smart-card: url property is missing.');
         }
         return CardWithURLRenderer.CardContent !== null ? (React.createElement(CardWithURLRenderer.CardContent, { url: url, client: client, appearance: appearance, onClick: onClick, isSelected: isSelected, createAnalyticsEvent: createAnalyticsEvent, authFn: auth })) : (React.createElement(CardLinkView, { key: 'chunk-placeholder', link: url }));
     };
@@ -51,7 +51,7 @@ var CardWithDataRenderer = /** @class */ (function (_super) {
     CardWithDataRenderer.prototype.render = function () {
         var _a = this.props, appearance = _a.appearance, data = _a.data, isSelected = _a.isSelected, onClick = _a.onClick;
         if (!data) {
-            throw new Error('@atlaskit/smart-cards: you are trying to render a card with data, but does not provide any');
+            throw new Error('@findable/smart-cards: you are trying to render a card with data, but does not provide any');
         }
         if (CardWithDataRenderer.CardContent) {
             return (React.createElement(CardWithDataRenderer.CardContent, { appearance: appearance, data: data, isSelected: isSelected, onClick: onClick }));

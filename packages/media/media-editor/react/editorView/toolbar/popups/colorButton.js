@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import CheckIcon from '@atlaskit/icon/glyph/check';
+import CheckIcon from '@findable/icon/glyph/check';
 import { ColorSample, CheckArea } from './colorButtonStyles';
 var ColorButton = /** @class */ (function (_super) {
     tslib_1.__extends(ColorButton, _super);

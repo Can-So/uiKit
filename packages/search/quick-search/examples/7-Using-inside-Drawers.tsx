@@ -1,11 +1,11 @@
 // About the issue:
 // > If you use the old drawer and add it into the new one it will work properly
-// > but using @atlaskit/drawer it's not working properly
+// > but using @findable/drawer it's not working properly
 
 import * as React from 'react';
-import { AkSearchDrawer } from '@atlaskit/navigation';
-import Drawer from '@atlaskit/drawer';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
+import { AkSearchDrawer } from '@findable/navigation';
+import Drawer from '@findable/drawer';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
 import BasicQuickSearch from './utils/BasicQuickSearch';
 
 type State = {
@@ -92,8 +92,8 @@ export default class IssueUsingDrawers extends React.Component<any, State> {
             Quick search is wrapped using drawer component from{' '}
             <strong>{`${
               this.state.shouldRenderNewDrawer
-                ? '@atlaskit/drawer'
-                : '@atlaskit/navigation-next'
+                ? '@findable/drawer'
+                : '@findable/navigation-next'
             }`}</strong>{' '}
           </div>
         </div>

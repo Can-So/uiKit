@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { textFormattingStateKey, blockPluginStateKey, listsStateKey, statusPluginKey, textColorPluginKey, typeAheadPluginKey, hyperlinkStateKey, HyperlinkInsertStatus, } from '@atlaskit/editor-core';
+import { textFormattingStateKey, blockPluginStateKey, listsStateKey, statusPluginKey, textColorPluginKey, typeAheadPluginKey, hyperlinkStateKey, HyperlinkInsertStatus, } from '@findable/editor-core';
 import { valueOf as valueOfListState } from '../web-to-native/listState';
 import { valueOf as valueOfMarkState } from '../web-to-native/markState';
 import { toNativeBridge } from '../web-to-native';

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   ${(
@@ -9,11 +9,11 @@ export default md`
       <p>
         <strong>
           The previous export of `AvatarGroup` has been moved to its own package
-          `@atlaskit/avatar-group`.
+          `@findable/avatar-group`.
         </strong>
       </p>
       <p>
-        Please update your dependencies to use the @atlaskit/avatar-group
+        Please update your dependencies to use the @findable/avatar-group
         package.
       </p>
     </SectionMessage>
@@ -36,11 +36,11 @@ export default md`
   
   ## Usage
 
-  ${code`import Avatar from '@atlaskit/avatar';`}
+  ${code`import Avatar from '@findable/avatar';`}
 
   ${(
     <Example
-      packageName="@atlaskit/avatar"
+      packageName="@findable/avatar"
       Component={require('../examples/01-basicAvatar').default}
       title="Avatar"
       source={require('!!raw-loader!../examples/01-basicAvatar')}

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
-import Tag from '@atlaskit/tag';
+import Avatar from '@findable/avatar';
+import Tag from '@findable/tag';
 import TagGroup from '../src';
 
 const tagNames = [

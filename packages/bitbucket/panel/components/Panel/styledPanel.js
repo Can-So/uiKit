@@ -1,4 +1,4 @@
-import { borderRadius, gridSize, colors } from '@atlaskit/theme';
+import { borderRadius, gridSize, colors } from '@findable/theme';
 import { withFocusWithin } from 'react-focus-within';
 import styled, { css } from 'styled-components';
 var transition = css(["\n  transition: all 200ms ease-in-out;\n"]);

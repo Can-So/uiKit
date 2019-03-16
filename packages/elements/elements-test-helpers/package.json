@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/elements-test-helpers",
+  "name": "@findable/elements-test-helpers",
   "version": "0.4.0",
   "description": "common test helpers",
   "config": {
@@ -11,8 +11,8 @@
   "module": "dist/es2015/index.js",
   "types": "dist/es5/index.d.ts",
   "dependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/ssr": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/ssr": "^0.0.1",
     "exenv": "^1.2.2",
     "tslib": "^1.8.0"
   },
@@ -28,12 +28,12 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "atlaskit": {
     "internal": true
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.0"
+    "@findable/docs": "^7.0.0"
   }
 }

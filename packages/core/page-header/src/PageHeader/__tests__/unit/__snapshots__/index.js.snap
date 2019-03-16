@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@atlaskit/page-header should render correctly 1`] = `
+exports[`@findable/page-header should render correctly 1`] = `
 .c0 {
   margin: 24px 0 16px 0;
 }
@@ -100,7 +100,7 @@ exports[`@atlaskit/page-header should render correctly 1`] = `
 </div>
 `;
 
-exports[`@atlaskit/page-header should render correctly with disableTitleStyles prop 1`] = `
+exports[`@findable/page-header should render correctly with disableTitleStyles prop 1`] = `
 .c0 {
   margin: 24px 0 16px 0;
 }

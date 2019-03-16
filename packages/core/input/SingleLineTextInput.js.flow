@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import keyCode from 'keycode';
-import { fontSize } from '@atlaskit/theme';
+import { fontSize } from '@findable/theme';
 import styled from 'styled-components';
 
 const common = `

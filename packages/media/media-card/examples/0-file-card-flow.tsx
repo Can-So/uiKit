@@ -16,14 +16,14 @@ import {
   gifFileId,
   noMetadataFileId,
   createUploadContext,
-} from '@atlaskit/media-test-helpers';
-import Button from '@atlaskit/button';
+} from '@findable/media-test-helpers';
+import Button from '@findable/button';
 import { Card, OnLoadingChangeState } from '../src';
 import {
   UploadController,
   FileIdentifier,
   FileState,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import { Observable } from 'rxjs/Observable';
 import {
   CardWrapper,

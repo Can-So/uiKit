@@ -2,7 +2,7 @@
 
 import React, { Fragment, type Node } from 'react';
 import { keyframes } from 'emotion';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 import {
   transitionDuration,

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
-import { TaskList as AkTaskList } from '@atlaskit/task-decision';
+import { TaskList as AkTaskList } from '@findable/task-decision';
 import FabricAnalyticsListener, {
   AnalyticsWebClient,
-} from '@atlaskit/analytics-listeners';
+} from '@findable/analytics-listeners';
 import TaskList from '../../../../react/nodes/taskList';
 import TaskItem from '../../../../react/nodes/taskItem';
 

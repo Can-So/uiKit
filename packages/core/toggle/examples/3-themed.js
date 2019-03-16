@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import Button from '@atlaskit/button';
-import { AtlaskitThemeProvider, gridSize } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { AtlaskitThemeProvider, gridSize } from '@findable/theme';
 import Toggle from '../src';
 
 type State = {|

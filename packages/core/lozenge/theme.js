@@ -1,6 +1,6 @@
 import _typeof from "@babel/runtime/helpers/typeof";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { colors, createTheme } from '@atlaskit/theme';
+import { colors, createTheme } from '@findable/theme';
 /* Note:
  Lozenge does not support dark mode at the moment,
  it will be implemented later.

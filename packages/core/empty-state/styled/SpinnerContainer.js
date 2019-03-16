@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var SpinnerContainer = styled.div.withConfig({
   displayName: "SpinnerContainer",
   componentId: "jd6kwc-0"

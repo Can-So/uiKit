@@ -1,6 +1,6 @@
 // @flow
 
-import { AtlaskitThemeProvider } from '@atlaskit/theme';
+import { AtlaskitThemeProvider } from '@findable/theme';
 import React from 'react';
 import Badge from '../src';
 

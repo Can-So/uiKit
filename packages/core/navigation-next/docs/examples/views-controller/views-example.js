@@ -1,19 +1,19 @@
 // @flow
 
 import React from 'react';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left-circle';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import ComponentIcon from '@atlaskit/icon/glyph/component';
-import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
-import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
-import IssueIcon from '@atlaskit/icon/glyph/issue';
-import PageIcon from '@atlaskit/icon/glyph/page';
-import PortfolioIcon from '@atlaskit/icon/glyph/portfolio';
-import ShipIcon from '@atlaskit/icon/glyph/ship';
-import { JiraWordmark } from '@atlaskit/logo';
-import { colors } from '@atlaskit/theme';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left-circle';
+import BacklogIcon from '@findable/icon/glyph/backlog';
+import BoardIcon from '@findable/icon/glyph/board';
+import ComponentIcon from '@findable/icon/glyph/component';
+import DashboardIcon from '@findable/icon/glyph/dashboard';
+import FolderIcon from '@findable/icon/glyph/folder';
+import GraphLineIcon from '@findable/icon/glyph/graph-line';
+import IssueIcon from '@findable/icon/glyph/issue';
+import PageIcon from '@findable/icon/glyph/page';
+import PortfolioIcon from '@findable/icon/glyph/portfolio';
+import ShipIcon from '@findable/icon/glyph/ship';
+import { JiraWordmark } from '@findable/logo';
+import { colors } from '@findable/theme';
 
 import {
   ContainerHeader,

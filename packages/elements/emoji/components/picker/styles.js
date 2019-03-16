@@ -1,6 +1,6 @@
 var _a, _b, _c, _d, _e, _f, _g, _h;
 import { style } from 'typestyle';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 import { akEmojiSelectedBackgroundColor, emojiFooterBoxShadow, emojiPickerBorderColor, emojiPickerBoxShadow, } from '../../shared-styles';
 import { emojiSprite, placeholder, emojiNode } from '../common/styles';
 import { emojiPickerHeight, emojiPickerWidth } from '../../constants';

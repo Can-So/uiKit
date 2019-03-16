@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withAnalytics, FireAnalyticsEvent } from '@atlaskit/analytics';
+import { withAnalytics, FireAnalyticsEvent } from '@findable/analytics';
 import { ResultData, SelectedResultId, ResultId } from './Results/types';
 import AkSearch from './Search/Search';
 import {
@@ -441,7 +441,7 @@ export class QuickSearch extends React.Component<Props, State> {
  * HOCs:
  * `decorateWithAnalyticsData` - Wrapper that decorates analytics events with additional data.
  * `withAnalytics` - Injects analytics firing methods that are picked up by
- * @atlaskit/analytics/AnalyticsListener.
+ * @findable/analytics/AnalyticsListener.
  */
 export default decorateWithAnalyticsData(
   withAnalytics<typeof QuickSearch>(QuickSearch, {}, {}),

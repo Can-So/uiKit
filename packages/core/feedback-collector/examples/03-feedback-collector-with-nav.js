@@ -1,8 +1,8 @@
 // @flow
 import React, { Fragment, Component } from 'react';
-import GlobalNavigation from '@atlaskit/global-navigation';
-import FeedbackIcon from '@atlaskit/icon/glyph/feedback';
-import { AtlassianIcon, AtlassianWordmark } from '@atlaskit/logo';
+import GlobalNavigation from '@findable/global-navigation';
+import FeedbackIcon from '@findable/icon/glyph/feedback';
+import { AtlassianIcon, AtlassianWordmark } from '@findable/logo';
 import {
   ContainerHeader,
   GroupHeading,
@@ -12,7 +12,7 @@ import {
   NavigationProvider,
   Section,
   Separator,
-} from '@atlaskit/navigation-next';
+} from '@findable/navigation-next';
 
 import FeedbackCollector from '../src';
 

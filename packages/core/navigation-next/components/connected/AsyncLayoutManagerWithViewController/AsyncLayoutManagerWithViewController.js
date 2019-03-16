@@ -8,7 +8,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component, Fragment } from 'react';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
 import { withNavigationUIController } from '../../../ui-controller';
 import { ViewControllerSubscriber } from '../../../view-controller';
 import LayoutManager from '../../presentational/LayoutManager';

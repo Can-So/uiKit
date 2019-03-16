@@ -4,8 +4,8 @@ import {
   InjectedIntlProps,
   FormattedHTMLMessage,
 } from 'react-intl';
-import { withAnalytics, FireAnalyticsEvent } from '@atlaskit/analytics';
-import { CancelableEvent } from '@atlaskit/quick-search';
+import { withAnalytics, FireAnalyticsEvent } from '@findable/analytics';
+import { CancelableEvent } from '@findable/quick-search';
 import { ConfluenceClient } from '../../api/ConfluenceClient';
 import {
   CrossProductSearchClient,

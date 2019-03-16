@@ -3,7 +3,7 @@ import _extends from "@babel/runtime/helpers/extends";
 import { css as _css } from "emotion";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
-import { layers } from '@atlaskit/theme';
+import { layers } from '@findable/theme';
 export var LayoutContainer = function LayoutContainer(_ref) {
   var topOffset = _ref.topOffset,
       props = _objectWithoutProperties(_ref, ["topOffset"]);

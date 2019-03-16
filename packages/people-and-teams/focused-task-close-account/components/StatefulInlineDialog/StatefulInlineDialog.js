@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import InlineDialog from '@atlaskit/inline-dialog';
+import InlineDialog from '@findable/inline-dialog';
 var StatefulInlineDialog = /** @class */ (function (_super) {
     tslib_1.__extends(StatefulInlineDialog, _super);
     function StatefulInlineDialog() {

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, type Node, type ComponentType } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import PropTypes from 'prop-types';
 import getDisplayName from '../../util/getDisplayName';
 import safeContextCall from '../../util/safeContextCall';
@@ -11,7 +11,7 @@ import type { Behaviors } from '../../types';
 import { KEY_ENTER, KEY_SPACE } from '../../util/keys';
 
 type Props = {
-  /** Content to be displayed inside the item. Same as @atlaskit/item `children` prop. */
+  /** Content to be displayed inside the item. Same as @findable/item `children` prop. */
   children?: Node,
   /** Unique identifier for the item, so that selection state can be tracked when the dropdown
    * is opened/closed. */
@@ -26,7 +26,7 @@ type Props = {
   onClick?: Function,
 };
 
-// HOC that typically wraps @atlaskit/item
+// HOC that typically wraps @findable/item
 const withToggleInteraction = (
   WrappedComponent: ComponentType<any>,
   SelectionIcon: ComponentType<any>,

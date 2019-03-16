@@ -1,15 +1,15 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
-import type { UIAnalyticsEvent } from '@atlaskit/analytics-next';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
-import { NotificationIndicator } from '@atlaskit/notification-indicator';
-import { NotificationLogClient } from '@atlaskit/notification-log-client';
-import { GlobalNav } from '@atlaskit/navigation-next';
-import Drawer from '@atlaskit/drawer';
+import type { UIAnalyticsEvent } from '@findable/analytics-next';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
+import { NotificationIndicator } from '@findable/notification-indicator';
+import { NotificationLogClient } from '@findable/notification-log-client';
+import { GlobalNav } from '@findable/navigation-next';
+import Drawer from '@findable/drawer';
 import AtlassianSwitcher, {
   AtlassianSwitcherPrefetchTrigger,
-} from '@atlaskit/atlassian-switcher';
+} from '@findable/atlassian-switcher';
 import {
   name as packageName,
   version as packageVersion,

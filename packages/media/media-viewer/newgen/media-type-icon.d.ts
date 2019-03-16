@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MediaType } from '@atlaskit/media-core';
+import { MediaType } from '@findable/media-core';
 export interface FileIconProps {
     type?: MediaType;
 }

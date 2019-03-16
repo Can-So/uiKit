@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { DropdownItem } from '@atlaskit/dropdown-menu';
-import Avatar, { withPseudoState, getProps } from '@atlaskit/avatar';
+import { DropdownItem } from '@findable/dropdown-menu';
+import Avatar, { withPseudoState, getProps } from '@findable/avatar';
 
 type Props = {
   avatar: {

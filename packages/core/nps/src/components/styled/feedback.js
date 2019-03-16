@@ -1,6 +1,6 @@
 //@flow
 import styled from 'styled-components';
-import { gridSize, colors } from '@atlaskit/theme';
+import { gridSize, colors } from '@findable/theme';
 
 export const ScoreContainer = styled.section`
   display: flex;

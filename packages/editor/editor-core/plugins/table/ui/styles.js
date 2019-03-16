@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 // @ts-ignore: unused variable
 import { css } from 'styled-components';
-import { borderRadius, colors, fontSize } from '@atlaskit/theme';
-import { browser, tableMarginTop, tableSharedStyle, akEditorTableToolbarSize, akEditorUnitZIndex, akEditorSmallZIndex, akEditorTableNumberColumnWidth, akEditorTableBorder, } from '@atlaskit/editor-common';
+import { borderRadius, colors, fontSize } from '@findable/theme';
+import { browser, tableMarginTop, tableSharedStyle, akEditorTableToolbarSize, akEditorUnitZIndex, akEditorSmallZIndex, akEditorTableNumberColumnWidth, akEditorTableBorder, } from '@findable/editor-common';
 import { scrollbarStyles } from '../../../ui/styles';
 import { TableCssClassName as ClassName } from '../types';
 var N40A = colors.N40A, B100 = colors.B100, B300 = colors.B300, N300 = colors.N300, B75 = colors.B75, N20 = colors.N20, N50 = colors.N50, R50 = colors.R50, R300 = colors.R300, R75 = colors.R75, N20A = colors.N20A, N60A = colors.N60A, N30 = colors.N30, N90 = colors.N90, N200 = colors.N200, N0 = colors.N0, R500 = colors.R500;

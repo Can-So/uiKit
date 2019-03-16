@@ -2,8 +2,8 @@
  * Largely taken from analytics-web-react
  */
 import * as merge from 'lodash.merge';
-import { NAVIGATION_CONTEXT } from '@atlaskit/analytics-namespaced-context';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { NAVIGATION_CONTEXT } from '@findable/analytics-namespaced-context';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 
 const extractFromEventContext = (
   propertyNames: string[],

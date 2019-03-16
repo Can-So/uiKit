@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { Context, FileState } from '@atlaskit/media-core';
+import { Context, FileState } from '@findable/media-core';
 import { Outcome, MediaViewerFeatureFlags } from '../domain';
 import { MediaViewerError } from '../error';
 import { BaseState, BaseViewer } from './base-viewer';

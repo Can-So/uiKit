@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var NoMatches = styled.div.withConfig({
   displayName: "NoMatch__NoMatches",
   componentId: "sc-1au7ofu-0"

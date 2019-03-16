@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import * as sinon from 'sinon';
-import { imageFileId, genericFileId } from '@atlaskit/media-test-helpers';
-import { storyMediaProviderFactory } from '@atlaskit/editor-test-helpers';
+import { imageFileId, genericFileId } from '@findable/media-test-helpers';
+import { storyMediaProviderFactory } from '@findable/editor-test-helpers';
 import {
   Card,
   CardEvent,
   defaultImageCardDimensions,
-} from '@atlaskit/media-card';
-import { FilmstripView } from '@atlaskit/media-filmstrip';
-import { ProviderFactory, EventHandlers } from '@atlaskit/editor-common';
+} from '@findable/media-card';
+import { FilmstripView } from '@findable/media-filmstrip';
+import { ProviderFactory, EventHandlers } from '@findable/editor-common';
 import Media from '../../../../react/nodes/media';
 import MediaGroup from '../../../../react/nodes/mediaGroup';
 

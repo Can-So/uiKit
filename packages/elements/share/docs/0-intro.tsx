@@ -1,12 +1,12 @@
-import { md } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 import * as React from 'react';
 
 export default md`
 ${(
   <SectionMessage appearance="warning">
     <p>
-      <strong>Note: @atlaskit/share is currently a developer preview.</strong>
+      <strong>Note: @findable/share is currently a developer preview.</strong>
     </p>
     <p>
       Please experiment and test this package, but be aware that the API may

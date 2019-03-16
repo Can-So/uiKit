@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { EditorActions, indentList, outdentList, toggleOrderedList, toggleBulletList, toggleSuperscript, toggleSubscript, toggleStrike, toggleCode, toggleUnderline, toggleEm, toggleStrong, updateStatus, commitStatusPicker, insertBlockType, setBlockType, createTable, insertTaskDecision, changeColor, selectItem as selectTypeAheadItem, insertLink, isTextAtPos, isLinkAtPos, setLinkHref, setLinkText, } from '@atlaskit/editor-core';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { EditorActions, indentList, outdentList, toggleOrderedList, toggleBulletList, toggleSuperscript, toggleSubscript, toggleStrike, toggleCode, toggleUnderline, toggleEm, toggleStrong, updateStatus, commitStatusPicker, insertBlockType, setBlockType, createTable, insertTaskDecision, changeColor, selectItem as selectTypeAheadItem, insertLink, isTextAtPos, isLinkAtPos, setLinkHref, setLinkText, } from '@findable/editor-core';
+import { JSONTransformer } from '@findable/editor-json-transformer';
 import WebBridge from '../../web-bridge';
 import { hasValue } from '../../utils';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';

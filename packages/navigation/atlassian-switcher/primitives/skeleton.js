@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import Section from './section';
 import SwitcherItem from './item';
 var IconSkeleton = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  background-color: ", ";\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  border-radius: 8px;\n"], ["\n  background-color: ", ";\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  border-radius: 8px;\n"])), colors.N20);

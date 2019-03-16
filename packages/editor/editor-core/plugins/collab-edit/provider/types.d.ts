@@ -1,4 +1,4 @@
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 import { Transaction, EditorState } from 'prosemirror-state';
 import { Step } from 'prosemirror-transform';
 import { InitData, ConnectionData, RemoteData, TelepointerData, PresenceData, Participant } from '../types';

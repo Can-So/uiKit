@@ -1,6 +1,6 @@
 import { PluginKey } from 'prosemirror-state';
 import { EditorPlugin } from '../../types';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 import { GridType } from './types';
 import { EventDispatcher } from '../../event-dispatcher';
 export declare const stateKey: PluginKey<any>;

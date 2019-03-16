@@ -9,7 +9,7 @@ import {
   RefsNode,
   createEditorFactory,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   default as createLayoutPlugin,
   pluginKey,

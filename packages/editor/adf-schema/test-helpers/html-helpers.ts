@@ -6,7 +6,7 @@ import {
   Node as PMNode,
   ParseOptions,
 } from 'prosemirror-model';
-import { RefsNode } from '@atlaskit/editor-test-helpers';
+import { RefsNode } from '@findable/editor-test-helpers';
 import { TextSelection } from 'prosemirror-state';
 
 export const fromHTML = (

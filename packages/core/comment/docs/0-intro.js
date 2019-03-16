@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -18,7 +18,7 @@ import Comment, {
   CommentEdited,
   CommentLayout,
   CommentTime
-} from @atlaskit/comment;
+} from @findable/comment;
 `}
 
 All subcomponents are expected as props with the same lowercased name.
@@ -27,7 +27,7 @@ All children components are displayed indented after the comment body, allowing 
 
 ${(
   <Example
-    packageName="@atlaskit/comment"
+    packageName="@findable/comment"
     Component={require('../examples/01-example-comment').default}
     title="Basic"
     source={require('!!raw-loader!../examples/01-example-comment')}
@@ -36,7 +36,7 @@ ${(
 
 ${(
   <Example
-    packageName="@atlaskit/comment"
+    packageName="@findable/comment"
     Component={require('../examples/02-comment-components').default}
     title="Comment as Components"
     source={require('!!raw-loader!../examples/02-comment-components')}
@@ -45,7 +45,7 @@ ${(
 
 ${(
   <Example
-    packageName="@atlaskit/comment"
+    packageName="@findable/comment"
     Component={require('../examples/03-nested-comments').default}
     title="Nested Comments"
     source={require('!!raw-loader!../examples/03-nested-comments')}

@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/code",
+  "name": "@findable/code",
   "version": "9.0.0",
   "config": {
     "access": "public"
@@ -9,16 +9,16 @@
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
   "dependencies": {
-    "@atlaskit/theme": "^8.0.0",
+    "@findable/theme": "^8.0.0",
     "@babel/runtime": "^7.0.0",
     "memoize-one": "^3.0.1",
     "react-syntax-highlighter": "^10.0.1"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/ssr": "^0.0.1",
+    "@findable/docs": "^7.0.0",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },
@@ -40,7 +40,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "keywords": [
     "atlaskit",

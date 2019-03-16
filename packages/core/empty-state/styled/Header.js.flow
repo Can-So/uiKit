@@ -1,7 +1,7 @@
 // @flow
 
 import styled from 'styled-components';
-import { gridSize, typography } from '@atlaskit/theme';
+import { gridSize, typography } from '@findable/theme';
 
 const Header = styled.h4`
   ${typography.h600()};

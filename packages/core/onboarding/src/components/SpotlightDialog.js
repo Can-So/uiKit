@@ -5,8 +5,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import { Popper, type Placement } from '@atlaskit/popper';
+} from '@findable/analytics-next';
+import { Popper, type Placement } from '@findable/popper';
 
 import {
   name as packageName,

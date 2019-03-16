@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ResultBase } from '@atlaskit/quick-search';
-import { gridSize } from '@atlaskit/theme';
-import SearchIcon from '@atlaskit/icon/glyph/search';
+import { ResultBase } from '@findable/quick-search';
+import { gridSize } from '@findable/theme';
+import SearchIcon from '@findable/icon/glyph/search';
 import styled from 'styled-components';
 import { messages } from '../../messages';
 import Return from '../../assets/Return';

@@ -10,7 +10,7 @@ exports[`LayoutManager should render correctly 1`] = `
           "isExpanded": true,
         },
         "componentName": "navigation",
-        "packageName": "@atlaskit/navigation-next",
+        "packageName": "@findable/navigation-next",
         "packageVersion": "3.16.0",
       }
     }

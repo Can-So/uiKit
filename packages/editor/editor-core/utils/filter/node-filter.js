@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { traverse } from '@atlaskit/adf-utils';
+import { traverse } from '@findable/adf-utils';
 export function removeMarks(node) {
     var newNode = tslib_1.__assign({}, node);
     delete newNode.marks;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@findable/media-core';
 import { ItemViewer } from './item-viewer';
 import { MediaViewerFeatureFlags } from './domain';
 import { HeaderWrapper, hideControlsClassName, ListWrapper } from './styled';

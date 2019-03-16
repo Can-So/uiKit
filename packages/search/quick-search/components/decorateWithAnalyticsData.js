@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { AnalyticsDecorator } from '@atlaskit/analytics';
+import { AnalyticsDecorator } from '@findable/analytics';
 import isReactElement from './isReactElement';
 import { QS_ANALYTICS_EV_SUBMIT } from './constants';
 export default function decorateWithAnalyticsData(WrappedQuickSearch) {

@@ -1,7 +1,7 @@
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
-import { EmojiProvider, ResourcedEmoji } from '@atlaskit/emoji';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
+import { EmojiProvider, ResourcedEmoji } from '@findable/emoji';
+import { borderRadius, colors } from '@findable/theme';
 import * as cx from 'classnames';
 import * as React from 'react';
 import { PureComponent, SyntheticEvent } from 'react';

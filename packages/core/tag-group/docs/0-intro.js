@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   A container around a [Tag](/components/tag) component that applies consistent
@@ -8,11 +8,11 @@ export default md`
 
   ## Usage
 
-  ${code`import TagGroup from '@atlaskit/tag-group';`}
+  ${code`import TagGroup from '@findable/tag-group';`}
 
   ${(
     <Example
-      packageName="@atlaskit/tag-group"
+      packageName="@findable/tag-group"
       Component={require('../examples/0-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-basic')}

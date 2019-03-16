@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { defaultSchema } from '@atlaskit/adf-schema';
-import { UnsupportedBlock, ProviderFactory, BaseTheme, WidthProvider, } from '@atlaskit/editor-common';
+import { defaultSchema } from '@findable/adf-schema';
+import { UnsupportedBlock, ProviderFactory, BaseTheme, WidthProvider, } from '@findable/editor-common';
 import { ReactSerializer, renderDocument } from '../../';
 import { Wrapper } from './style';
 import { TruncatedWrapper } from './truncated-wrapper';

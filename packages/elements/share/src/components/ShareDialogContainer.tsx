@@ -1,5 +1,5 @@
-import { ButtonAppearances } from '@atlaskit/button';
-import { LoadOptions } from '@atlaskit/user-picker';
+import { ButtonAppearances } from '@findable/button';
+import { LoadOptions } from '@findable/user-picker';
 import memoizeOne from 'memoize-one';
 import * as React from 'react';
 import {

@@ -1,5 +1,5 @@
 import { stateKey as imageUploadPluginKey } from '../../../../plugins/image-upload/pm-plugins/main';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   createEditorFactory,
   doc,
@@ -9,7 +9,7 @@ import {
   code_block,
   createEvent,
   dispatchPasteEvent,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { setNodeSelection } from '../../../../utils';
 import imageUpload from '../../../../plugins/image-upload';
 import codeBlockPlugin from '../../../../plugins/code-block';

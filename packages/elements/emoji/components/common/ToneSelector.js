@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
 import EmojiButton from './EmojiButton';
-import { withAnalytics } from '@atlaskit/analytics';
+import { withAnalytics } from '@findable/analytics';
 import { analyticsEmojiPrefix } from '../../constants';
 var extractAllTones = function (emoji) {
     if (emoji.skinVariations) {

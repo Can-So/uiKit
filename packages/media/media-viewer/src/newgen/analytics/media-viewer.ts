@@ -1,5 +1,5 @@
 import { packageAttributes } from './index';
-import { GasScreenEventPayload } from '@atlaskit/analytics-gas-types';
+import { GasScreenEventPayload } from '@findable/analytics-gas-types';
 
 export const mediaViewerModalEvent = (): GasScreenEventPayload => {
   return {

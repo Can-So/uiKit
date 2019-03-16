@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { colors, fontSize, gridSize as gridSizeFn } from '@atlaskit/theme';
+import { colors, fontSize, gridSize as gridSizeFn } from '@findable/theme';
 var gridSize = gridSizeFn();
 /**
  * Component tree structure:

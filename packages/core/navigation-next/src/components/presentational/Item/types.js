@@ -2,7 +2,7 @@
 
 import type { ComponentType, Node, Ref } from 'react';
 import type { DraggableProps, DragHandleProps } from 'react-beautiful-dnd';
-import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
+import type { WithAnalyticsEventsProps } from '@findable/analytics-next';
 
 import type { StyleReducerWithState, ProductTheme } from '../../../theme/types';
 import type { InteractionState } from '../InteractionStateManager/types';

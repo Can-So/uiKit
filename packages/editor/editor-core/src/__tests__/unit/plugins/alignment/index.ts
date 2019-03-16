@@ -11,7 +11,7 @@ import {
   tr,
   ul,
   li,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   AlignmentPluginState,
   pluginKey as alignmentPluginKey,

@@ -6,13 +6,13 @@ import {
   imageFileId,
   unknownFileId,
   errorFileId,
-} from '@atlaskit/media-test-helpers';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+} from '@findable/media-test-helpers';
+import { AnalyticsListener } from '@findable/analytics-next';
 
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 // @ts-ignore
-import { AtlaskitThemeProvider } from '@atlaskit/theme';
-import { FileIdentifier } from '@atlaskit/media-core';
+import { AtlaskitThemeProvider } from '@findable/theme';
+import { FileIdentifier } from '@findable/media-core';
 import { Card } from '../src';
 import { createApiCards, actions } from '../example-helpers';
 

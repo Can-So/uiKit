@@ -1,4 +1,4 @@
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 var textColors = themed('color', {
   standard: {
     light: colors.N700,

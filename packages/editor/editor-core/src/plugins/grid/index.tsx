@@ -4,12 +4,12 @@ import { withTheme } from 'styled-components';
 
 import { PluginKey } from 'prosemirror-state';
 import { EditorPlugin, EditorAppearance } from '../../types';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 import {
   akEditorFullPageMaxWidth,
   akEditorBreakoutPadding,
   breakoutWideScaleRatio,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 import { GridPluginState, GridType } from './types';
 import { pluginKey as widthPlugin, WidthPluginState } from '../width/index';

@@ -1,8 +1,8 @@
 // @flow
 
 import React, { PureComponent, type Node } from 'react';
-import Blanket from '@atlaskit/blanket';
-import { withAnalytics } from '@atlaskit/analytics';
+import Blanket from '@findable/blanket';
+import { withAnalytics } from '@findable/analytics';
 import ScrollLock from 'react-scrolllock';
 import DrawerTrigger from './DrawerTrigger';
 import DrawerBackIcon from './DrawerBackIcon';

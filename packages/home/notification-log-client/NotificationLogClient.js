@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { utils, } from '@atlaskit/util-service-support';
+import { utils, } from '@findable/util-service-support';
 import { version as npmPackageVersion } from './version.json';
 export var DEFAULT_SOURCE = 'atlaskitNotificationLogClient';
 var NotificationLogClient = /** @class */ (function () {

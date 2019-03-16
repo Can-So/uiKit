@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 
 export const Table = styled.table`
   ${({ isFixedSize }) =>

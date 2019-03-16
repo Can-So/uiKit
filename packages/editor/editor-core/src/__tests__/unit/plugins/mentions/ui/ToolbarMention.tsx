@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { doc, p, createEditorFactory } from '@atlaskit/editor-test-helpers';
-import MentionIcon from '@atlaskit/icon/glyph/editor/mention';
+import { doc, p, createEditorFactory } from '@findable/editor-test-helpers';
+import MentionIcon from '@findable/icon/glyph/editor/mention';
 import { analyticsService } from '../../../../../analytics';
 import mentionsPlugin from '../../../../../plugins/mentions';
 import ToolbarMention from '../../../../../plugins/mentions/ui/ToolbarMention';

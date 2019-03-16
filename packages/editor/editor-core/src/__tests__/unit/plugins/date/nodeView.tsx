@@ -5,12 +5,12 @@ import {
   doc,
   taskList,
   taskItem,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { insertDate } from '../../../../plugins/date/actions';
 import datePlugin from '../../../../plugins/date';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import DateNodeView from '../../../../plugins/date/nodeviews/date';
-import { uuid } from '@atlaskit/adf-schema';
+import { uuid } from '@findable/adf-schema';
 
 describe('date plugin', () => {
   const createEditor = createEditorFactory();

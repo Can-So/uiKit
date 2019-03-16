@@ -1,13 +1,13 @@
 // @flow
 
-import CalendarIcon from '@atlaskit/icon/glyph/calendar';
-import { mergeStyles } from '@atlaskit/select';
-import { borderRadius, colors } from '@atlaskit/theme';
+import CalendarIcon from '@findable/icon/glyph/calendar';
+import { mergeStyles } from '@findable/select';
+import { borderRadius, colors } from '@findable/theme';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import pick from 'lodash.pick';
 import React, { Component } from 'react';
 import styled from 'styled-components';
@@ -137,7 +137,7 @@ const FlexItem = styled.div`
   flex-grow: 1;
 `;
 
-// react-select overrides (via @atlaskit/select).
+// react-select overrides (via @findable/select).
 const styles = {
   control: style => ({
     ...style,

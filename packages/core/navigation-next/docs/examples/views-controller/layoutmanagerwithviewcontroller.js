@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
-import GlobalNavigation from '@atlaskit/global-navigation';
-import { JiraIcon } from '@atlaskit/logo';
+import GlobalNavigation from '@findable/global-navigation';
+import { JiraIcon } from '@findable/logo';
 import {
   LayoutManagerWithViewController,
   NavigationProvider,

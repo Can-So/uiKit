@@ -5,7 +5,7 @@ Use this component to display an expandable table with a tree-like hierarchy.
 ## Installation
 
 ```sh
-yarn add @atlaskit/table-tree
+yarn add @findable/table-tree
 ```
 
 ## Usage

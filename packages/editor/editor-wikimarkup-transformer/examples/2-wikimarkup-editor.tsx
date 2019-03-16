@@ -4,8 +4,8 @@ import {
   Editor,
   EditorContext,
   WithEditorActions,
-} from '@atlaskit/editor-core';
-import { mention, taskDecision } from '@atlaskit/util-data-test';
+} from '@findable/editor-core';
+import { mention, taskDecision } from '@findable/util-data-test';
 
 import { WikiMarkupTransformer } from '../src';
 

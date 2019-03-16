@@ -5,7 +5,7 @@ import { Schema, Slice, Node, Fragment } from 'prosemirror-model';
 import { Plugin, PluginKey, TextSelection, Selection } from 'prosemirror-state';
 import { closeHistory } from 'prosemirror-history';
 import { hasParentNodeOfType } from 'prosemirror-utils';
-import { MarkdownTransformer } from '@atlaskit/editor-markdown-transformer';
+import { MarkdownTransformer } from '@findable/editor-markdown-transformer';
 import { analyticsService } from '../../../analytics';
 import * as clipboard from '../../../utils/clipboard';
 import { EditorAppearance } from '../../../types';

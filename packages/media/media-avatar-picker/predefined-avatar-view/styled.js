@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors, borderRadius, gridSize } from '@atlaskit/theme';
+import { colors, borderRadius, gridSize } from '@findable/theme';
 var AvatarImage = styled.img(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  border-radius: ", ";\n  cursor: pointer;\n  ", ";\n"], ["\n  border-radius: ", ";\n  cursor: pointer;\n  ",
     ";\n"])), borderRadius(), function (_a) {
     var isSelected = _a.isSelected;

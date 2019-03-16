@@ -5,7 +5,7 @@ import { Wrapper, Header, Content, ContentWrapper } from './styles';
 import { Overlay } from '../styles';
 import ExtensionLozenge from '../Lozenge';
 import { pluginKey as widthPluginKey, } from '../../../../width';
-import { calcBreakoutWidth } from '@atlaskit/editor-common';
+import { calcBreakoutWidth } from '@findable/editor-common';
 import WithPluginState from '../../../../../ui/WithPluginState';
 var Extension = /** @class */ (function (_super) {
     tslib_1.__extends(Extension, _super);

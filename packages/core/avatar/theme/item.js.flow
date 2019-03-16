@@ -1,6 +1,6 @@
 // @flow
 
-import { createTheme } from '@atlaskit/theme';
+import { createTheme } from '@findable/theme';
 
 export type ThemeItemTokens = {
   backgroundColor: string,

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md, Example, Props } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@findable/docs';
 
 export default md`
   This component displays content in a layer that sits above the rest of the page content. Users won't be able to interact with the page until the dialog is closed.
@@ -10,7 +10,7 @@ export default md`
   Below is an example of how to use the \`ModalDialog\` component.
 
 ${code`
-  import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
+  import ModalDialog, { ModalTransition } from '@findable/modal-dialog';
 
   const App = ({ isOpen, onClose }) => (
     <ModalTransition>
@@ -32,7 +32,7 @@ ${code`
 
   ${(
     <Example
-      packageName="@atlaskit/modal-dialog"
+      packageName="@findable/modal-dialog"
       Component={require('../examples/00-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic')}
@@ -44,7 +44,7 @@ ${code`
 
   ${(
     <Example
-      packageName="@atlaskit/modal-dialog"
+      packageName="@findable/modal-dialog"
       Component={require('../examples/10-appearance').default}
       title="Appearance"
       source={require('!!raw-loader!../examples/10-appearance')}
@@ -59,7 +59,7 @@ ${code`
 
   ${(
     <Example
-      packageName="@atlaskit/modal-dialog"
+      packageName="@findable/modal-dialog"
       Component={require('../examples/15-custom').default}
       title="Custom"
       source={require('!!raw-loader!../examples/15-custom')}
@@ -71,7 +71,7 @@ ${code`
 
   ${(
     <Example
-      packageName="@atlaskit/modal-dialog"
+      packageName="@findable/modal-dialog"
       Component={require('../examples/45-form').default}
       title="Form"
       source={require('!!raw-loader!../examples/45-form')}

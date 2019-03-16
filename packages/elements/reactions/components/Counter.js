@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import * as cx from 'classnames';
 import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';

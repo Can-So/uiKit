@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { ReactElement, PureComponent } from 'react';
-import { CardEvent, defaultImageCardDimensions } from '@atlaskit/media-card';
+import { CardEvent, defaultImageCardDimensions } from '@findable/media-card';
 import {
   FilmstripView,
   SizeEvent,
   ScrollEvent,
-} from '@atlaskit/media-filmstrip';
+} from '@findable/media-filmstrip';
 import {
   EventHandlers,
   CardSurroundings,
   CardEventClickHandler,
-} from '@atlaskit/editor-common';
-import { Identifier } from '@atlaskit/media-core';
+} from '@findable/editor-common';
+import { Identifier } from '@findable/media-core';
 import { MediaProps } from './media';
 
 export interface MediaGroupProps {

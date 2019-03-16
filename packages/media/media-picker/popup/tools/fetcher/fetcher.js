@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as url from 'url';
 import { mapAuthToAuthHeaders } from '../../domain/auth';
-import { MediaStore } from '@atlaskit/media-store';
+import { MediaStore } from '@findable/media-store';
 var METADATA_POLL_INTERVAL_MS = 2000;
 var giphyApiKey = 'lBOxhhz1BM62Y3JsK0iQv1pRYyOGUjR8';
 var toJson = function (response) { return response.json(); };

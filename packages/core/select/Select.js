@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
 import { name as packageName, version as packageVersion } from './version.json';
 import createSelect from './createSelect';
 export var SelectWithoutAnalytics = createSelect(Select);

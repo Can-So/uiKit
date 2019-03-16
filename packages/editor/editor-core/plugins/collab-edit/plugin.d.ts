@@ -1,6 +1,6 @@
 import { Plugin, PluginKey, Transaction } from 'prosemirror-state';
 import { DecorationSet } from 'prosemirror-view';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { Dispatch } from '../../event-dispatcher';
 import { Participants, ReadOnlyParticipants } from './participants';
 import { CollabEditProvider } from './provider';

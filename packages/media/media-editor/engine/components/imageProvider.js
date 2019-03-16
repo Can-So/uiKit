@@ -1,4 +1,4 @@
-import { isImageRemote } from '@atlaskit/media-core';
+import { isImageRemote } from '@findable/media-core';
 export var urlImageLoader = function (url) {
     return new Promise(function (resolve, reject) {
         var img = document.createElement('img');

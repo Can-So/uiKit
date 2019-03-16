@@ -1,5 +1,5 @@
 jest.mock('react-dom');
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 import { render } from 'react-dom';
 import { PopupConfig } from '../../types';
 import { PopupImpl } from '../../popup';

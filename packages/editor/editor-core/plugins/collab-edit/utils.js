@@ -1,7 +1,7 @@
 import { Selection } from 'prosemirror-state';
 import { Decoration } from 'prosemirror-view';
-import { colors as themeColors } from '@atlaskit/theme';
-import { hexToRgba } from '@atlaskit/editor-common';
+import { colors as themeColors } from '@findable/theme';
+import { hexToRgba } from '@findable/editor-common';
 import { processRawValue } from '../../utils';
 export var colors = [
     themeColors.R100,

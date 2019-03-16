@@ -5,7 +5,7 @@ A React component that shows the steps and progress through a user journey.
 ## Installation
 
 ```sh
-yarn add @atlaskit/progress-tracker
+yarn add @findable/progress-tracker
 ```
 
 ## Usage

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 
 import Editor from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
 import WithEditorActions from './../src/ui/WithEditorActions';
-import { macroProvider, cardProvider } from '@atlaskit/editor-test-helpers';
+import { macroProvider, cardProvider } from '@findable/editor-test-helpers';
 import ToolsDrawer from '../example-helpers/ToolsDrawer';
 
-import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
+import { customInsertMenuItems } from '@findable/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { exampleDocument } from '../example-helpers/example-document';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';

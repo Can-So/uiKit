@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius } from '@atlaskit/theme';
+import { borderRadius } from '@findable/theme';
 export default styled.span.withConfig({
   displayName: "styledContainer",
   componentId: "sc-1vjy1uk-0"

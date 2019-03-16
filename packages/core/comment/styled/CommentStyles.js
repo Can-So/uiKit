@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 var ThemeColor = {
   text: {
     default: colors.N800,

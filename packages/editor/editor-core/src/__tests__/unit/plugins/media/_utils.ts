@@ -1,11 +1,11 @@
-import { MediaAttributes } from '@atlaskit/adf-schema';
+import { MediaAttributes } from '@findable/adf-schema';
 import {
   randomId,
   media,
   mediaGroup,
   storyMediaProviderFactory,
   createEditorFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   stateKey as mediaPluginKey,

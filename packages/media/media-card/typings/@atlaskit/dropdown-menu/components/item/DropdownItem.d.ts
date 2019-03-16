@@ -3,7 +3,7 @@ import Item, {
   ItemProps,
   WithItemClickProps,
   WithItemFocusProps,
-} from '@atlaskit/item';
+} from '@findable/item';
 
 declare const DropdownItem: ComponentType<
   ItemProps & WithItemClickProps & WithItemFocusProps

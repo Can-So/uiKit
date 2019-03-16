@@ -5,9 +5,9 @@ Some actual functional tests need to be added:
 - Interaction with all fields
 - Submit the form (DONE)
 Those tests should be added before the release candidate*/
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
+import { getExampleUrl } from '@findable/webdriver-runner/utils/example';
+import Page from '@findable/webdriver-runner/wd-wrapper';
 
 /* Url to test the example */
 const urlFormCreateRepo = getExampleUrl('core', 'form', 'create-repository');

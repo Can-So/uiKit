@@ -1,7 +1,7 @@
 // @flow
 
 import React, { type Node } from 'react';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
+import WarningIcon from '@findable/icon/glyph/warning';
 
 import {
   ActionsContainer,

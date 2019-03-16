@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ActivityProvider, ActivityItem } from '@atlaskit/activity';
+import { ActivityProvider, ActivityItem } from '@findable/activity';
 import { InjectedIntlProps } from 'react-intl';
 export declare const messages: {
     placeholder: {

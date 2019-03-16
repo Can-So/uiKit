@@ -1,4 +1,4 @@
-import { EditorView } from '@atlaskit/media-editor';
+import { EditorView } from '@findable/media-editor';
 import { deselectItem } from '../../../actions/deselectItem';
 import * as React from 'react';
 import { Component } from 'react';

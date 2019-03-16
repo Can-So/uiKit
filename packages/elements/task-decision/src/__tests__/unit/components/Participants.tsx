@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import Avatar from '@atlaskit/avatar';
-import AvatarGroup from '@atlaskit/avatar-group';
+import Avatar from '@findable/avatar';
+import AvatarGroup from '@findable/avatar-group';
 
 import Participants, {
   AvatarGroupLoadable,

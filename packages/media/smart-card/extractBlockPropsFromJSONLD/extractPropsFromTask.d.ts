@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { BlockCardResolvedViewProps, LozengeViewModel } from '@atlaskit/media-ui';
+import { BlockCardResolvedViewProps, LozengeViewModel } from '@findable/media-ui';
 export declare const buildTaskTitle: (json: any) => {
     title: {
         text: any;

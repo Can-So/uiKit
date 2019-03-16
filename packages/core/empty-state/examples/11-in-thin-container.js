@@ -2,8 +2,8 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { colors } from '@findable/theme';
 import EmptyState from '../src';
 import exampleImage from './img/example-image.png';
 

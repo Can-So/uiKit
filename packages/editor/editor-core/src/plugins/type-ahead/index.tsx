@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { typeAheadQuery } from '@atlaskit/adf-schema';
+import { typeAheadQuery } from '@findable/adf-schema';
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
 import { TypeAheadHandler } from './types';

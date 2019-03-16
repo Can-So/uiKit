@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import InlineDialog from '@atlaskit/inline-dialog';
-import Spinner from '@atlaskit/spinner';
+import InlineDialog from '@findable/inline-dialog';
+import Spinner from '@findable/spinner';
 import FieldBase, { FieldBaseStateless } from '../..';
 import { ChildWrapper, Content } from '../../styled/Content';
 import { WarningIcon } from '../../components/ValidationElement';

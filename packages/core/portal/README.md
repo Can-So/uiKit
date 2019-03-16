@@ -4,7 +4,7 @@ An Atlaskit wrapper for rendering components in React Portals.
 
 ## Installation
 
-yarn add @atlaskit/portal
+yarn add @findable/portal
 
 ## Usage
 

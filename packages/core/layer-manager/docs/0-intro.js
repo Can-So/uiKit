@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { code, md, Example, Props } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { code, md, Example, Props } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
 
@@ -9,19 +9,19 @@ export default md`
     <SectionMessage appearance="warning">
       <p>
         <strong>
-          @atlaskit/layer-manager is not needed anymore and has been deprecated.
+          @findable/layer-manager is not needed anymore and has been deprecated.
         </strong>
       </p>
       {md`
         As of component versions:
 
-        - \`@atlaskit/modal-dialog@7.0.0\`
-        - \`@atlaskit/tooltip@12.0.2\`
-        - \`@atlaskit/flag@9.0.6\`
-        - \`@atlaskit/onboarding@6.0.0\`
+        - \`@findable/modal-dialog@7.0.0\`
+        - \`@findable/tooltip@12.0.2\`
+        - \`@findable/flag@9.0.6\`
+        - \`@findable/onboarding@6.0.0\`
 
         No component requires global coordination to layer correctly.
-        All of these components are built using \`@atlaskit/portal\` which has full support for React Context.
+        All of these components are built using \`@findable/portal\` which has full support for React Context.
       `}
       <p>
         If you are after a scroll lock component we recommend{' '}
@@ -51,7 +51,7 @@ export default md`
   to the context it broadcasts, and inject your components where they belong.
 
 ${code`
-import LayerManager from '@atlaskit/layer-manager';
+import LayerManager from '@findable/layer-manager';
 
 export default class App extends Component {
   render() {
@@ -66,7 +66,7 @@ export default class App extends Component {
 
   ${(
     <Example
-      packageName="@atlaskit/layer-manager"
+      packageName="@findable/layer-manager"
       Component={require('../examples/0-basic').default}
       source={require('!!raw-loader!../examples/0-basic')}
       title="Supported Components"
@@ -80,7 +80,7 @@ export default class App extends Component {
 
   ${(
     <Example
-      packageName="@atlaskit/layer-manager"
+      packageName="@findable/layer-manager"
       Component={require('../examples/2-focus-lock').default}
       source={require('!!raw-loader!../examples/2-focus-lock')}
       title="Focus Lock"
@@ -132,7 +132,7 @@ const App = () => (
         </p>
       </SectionMessage>
       <Example
-        packageName="@atlaskit/layer-manager"
+        packageName="@findable/layer-manager"
         Component={require('../examples/1-scroll-lock').default}
         source={require('!!raw-loader!../examples/1-scroll-lock')}
         title="Scroll Lock - DEPRECATED"
@@ -144,11 +144,11 @@ const App = () => (
 
   There are a few patterns that are common among the supported packages, and have
   been abstracted into discrete components. While primarily for use internally,
-  they're available as named exports from \`@atlaskit/layer-manager\`.
+  they're available as named exports from \`@findable/layer-manager\`.
 
   ${(
     <Example
-      packageName="@atlaskit/layer-manager"
+      packageName="@findable/layer-manager"
       Component={require('../examples/3-with-context').default}
       source={require('!!raw-loader!../examples/3-with-context')}
       title="With Context from Props"

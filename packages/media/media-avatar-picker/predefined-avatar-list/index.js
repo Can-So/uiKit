@@ -2,8 +2,8 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { AvatarList } from '../avatar-list';
-import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
-import Button from '@atlaskit/button';
+import EditorMoreIcon from '@findable/icon/glyph/editor/more';
+import Button from '@findable/button';
 import { PredefinedAvatarsWrapper } from './styled';
 var ShowMoreButton = /** @class */ (function (_super) {
     tslib_1.__extends(ShowMoreButton, _super);

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 import { Contents, ContentsProvider, H, IframeExample } from './shared';
 
@@ -15,7 +15,7 @@ ${<H>The LayoutManager component</H>}
 
 If you've read the [Conceptual Model documentation](https://product-fabric.atlassian.net/wiki/spaces/NAV/pages/675251320/Navigation+conceptual+model+for+V2) you'll understand that the user interface of an Atlassian application is made up of a series of metaphorical 'layers'. These are, in order from lowest to highest, the global layer, the product layer, the container layer, and the page layer.
 
-We handle the placement and positioning of these layers using a component called the \`LayoutManager\`, which is essentially the entrypoint to \`@atlaskit/navigation-next\`. \`LayoutManager\` takes the following props:
+We handle the placement and positioning of these layers using a component called the \`LayoutManager\`, which is essentially the entrypoint to \`@findable/navigation-next\`. \`LayoutManager\` takes the following props:
 
 ${code`
 {
@@ -43,11 +43,11 @@ ${(
 
 ${<H>Configuring the global navigation</H>}
 
-As we begin composing the navigation we might as well start at the bottom - the global layer. Conceptually this layer is universal across every Atlassian product. In practice there will be some product-specific items in this area, and some of the actions will be contextual, but for the most part our customers should get a very consistent experience here no matter what Atlassian product they're using. To facilitate this consistency we provide a pre-configured \`@atlaskit/global-navigation\` component which accepts a simple set of props and will compose the global navigation layer for you. You can find the full props interface in the documentation for that component, but for now let's simply render the product icon.
+As we begin composing the navigation we might as well start at the bottom - the global layer. Conceptually this layer is universal across every Atlassian product. In practice there will be some product-specific items in this area, and some of the actions will be contextual, but for the most part our customers should get a very consistent experience here no matter what Atlassian product they're using. To facilitate this consistency we provide a pre-configured \`@findable/global-navigation\` component which accepts a simple set of props and will compose the global navigation layer for you. You can find the full props interface in the documentation for that component, but for now let's simply render the product icon.
 
 ${code`
-import GlobalNavigation from '@atlaskit/global-navigation';
-import AtlassianIcon from '@atlaskit/logo/dist/esm/AtlassianLogo/Icon';
+import GlobalNavigation from '@findable/global-navigation';
+import AtlassianIcon from '@findable/logo/dist/esm/AtlassianLogo/Icon';
 
 const MyGlobalNavigation = () => (
   <GlobalNavigation
@@ -72,13 +72,13 @@ ${<H>Composing the product navigation</H>}
 
 Let's move on to the next part of our navigation - the product area. This area will always contain the product layer. Depending on the part of the application we're in there may also be a container layer as well. The \`containerNavigation\` prop is nullable, so we'll remove it for now. We'll also create a component to render something in the product area.
 
-We can render basically anything we want in this section. All of the typical primitive UI components are provided by \`@atlaskit/navigation-next\` so let's start putting a few of these together.
+We can render basically anything we want in this section. All of the typical primitive UI components are provided by \`@findable/navigation-next\` so let's start putting a few of these together.
 
 ${code`
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { AtlassianWordmark } from '@atlaskit/logo';
-import { GroupHeading, Item, Section, Separator, Wordmark } from '@atlaskit/navigation-next';
+import { AtlassianWordmark } from '@findable/logo';
+import { GroupHeading, Item, Section, Separator, Wordmark } from '@findable/navigation-next';
 
 const MyProductNavigation = () => (
   <Fragment>
@@ -138,7 +138,7 @@ ${<H>Managing the UI state</H>}
 If you try you'll notice that you can expand, collapse, and resize your navigation right now, and this state will be controlled by the component. What if we want to manage or respond to this state somewhere in our application? Introducing the \`UIControllerSubscriber\`.
 
 ${code`
-import { UIControllerSubscriber } from '@atlaskit/navigation-next';
+import { UIControllerSubscriber } from '@findable/navigation-next';
 
 const ExpandToggleButton = () => (
   <UIControllerSubscriber>
@@ -164,6 +164,6 @@ ${(
 
 ${<H>Theming</H>}
 
-The current implementation of theming in \`@atlaskit/navigation-next\` is experimental and is likely to change soon. We'll add documentation and guides once the API has stabilised.
+The current implementation of theming in \`@findable/navigation-next\` is experimental and is likely to change soon. We'll add documentation and guides once the API has stabilised.
 `}</ContentsProvider>
 );

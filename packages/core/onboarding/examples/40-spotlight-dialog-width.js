@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import Lorem from 'react-lorem-component';
 import styled from 'styled-components';
-import ArrowUpIcon from '@atlaskit/icon/glyph/arrow-up';
-import ArrowDownIcon from '@atlaskit/icon/glyph/arrow-down';
+import ArrowUpIcon from '@findable/icon/glyph/arrow-up';
+import ArrowDownIcon from '@findable/icon/glyph/arrow-down';
 
 import {
   Spotlight,

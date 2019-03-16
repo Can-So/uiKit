@@ -6,7 +6,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
-import RemoveIcon from '@atlaskit/icon/glyph/cross';
+import RemoveIcon from '@findable/icon/glyph/cross';
 import { Button } from './styled';
 
 var RemoveButton =

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import ConfluenceBlogIcon from '@atlaskit/icon-object/glyph/blog/16';
+import ConfluenceBlogIcon from '@findable/icon-object/glyph/blog/16';
 import { CONFLUENCE_GENERATOR_ID } from './constants';
 import { extractInlineViewPropsFromTextDocument } from './extractPropsFromTextDocument';
 export var buildBlogPostIcon = function (json) {

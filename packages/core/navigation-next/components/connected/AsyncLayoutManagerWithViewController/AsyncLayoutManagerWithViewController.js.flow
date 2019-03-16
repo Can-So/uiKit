@@ -6,7 +6,7 @@ import React, {
   type ElementConfig,
   type Node,
 } from 'react';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
 
 import { withNavigationUIController } from '../../../ui-controller';
 import { ViewControllerSubscriber } from '../../../view-controller';

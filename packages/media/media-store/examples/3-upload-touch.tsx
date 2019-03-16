@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import styled from 'styled-components';
 import { MediaStore } from '../src';
 import { createUploadContext } from '../../media-test-helpers';

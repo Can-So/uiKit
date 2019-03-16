@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { typography, fontSize, colors } from '@atlaskit/theme';
+import { typography, fontSize, colors } from '@findable/theme';
 
 import gridSizeTimes from '../../util/gridSizeTimes';
 

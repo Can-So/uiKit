@@ -1,6 +1,6 @@
 // @flow
 
-import { colors, type ThemeProp } from '@atlaskit/theme';
+import { colors, type ThemeProp } from '@findable/theme';
 import React, { type Node, type ComponentType } from 'react';
 import { ThemeProvider } from 'styled-components';
 import Card, { type CardTokens } from './Card';

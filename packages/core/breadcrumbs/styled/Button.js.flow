@@ -1,5 +1,5 @@
 // @flow
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import styled, { css } from 'styled-components';
 
 const ButtonElement = styled(Button)`

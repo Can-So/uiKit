@@ -1,8 +1,8 @@
 //@flow
 import React from 'react';
 import { mount } from 'enzyme';
-import Button from '@atlaskit/button';
-import ChevronLeftLargeIcon from '@atlaskit/icon/glyph/chevron-left-large';
+import Button from '@findable/button';
+import ChevronLeftLargeIcon from '@findable/icon/glyph/chevron-left-large';
 
 import { name } from '../../../../version.json';
 import LeftNavigator from '../../../../components/Navigators/LeftNavigator';

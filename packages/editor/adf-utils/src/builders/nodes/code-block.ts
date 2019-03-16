@@ -2,7 +2,7 @@ import {
   CodeBlockDefinition,
   TextDefinition,
   NoMark,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 
 export type CodeBlockContent = TextDefinition & NoMark;
 

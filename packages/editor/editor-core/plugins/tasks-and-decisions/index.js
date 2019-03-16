@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import EditorTaskIcon from '@atlaskit/icon/glyph/editor/task';
-import EditorDecisionIcon from '@atlaskit/icon/glyph/editor/decision';
-import { decisionItem, decisionList, taskItem, taskList, } from '@atlaskit/adf-schema';
+import EditorTaskIcon from '@findable/icon/glyph/editor/task';
+import EditorDecisionIcon from '@findable/icon/glyph/editor/decision';
+import { decisionItem, decisionList, taskItem, taskList, } from '@findable/adf-schema';
 import { messages as insertBlockMessages } from '../insert-block/ui/ToolbarInsertBlock';
 import { createPlugin } from './pm-plugins/main';
 import inputRulePlugin from './pm-plugins/input-rules';

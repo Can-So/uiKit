@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { createEditorFactory } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory } from '@findable/editor-test-helpers';
 import maxContentSize from '../../../src/plugins/max-content-size';
 
 describe('editor/plugins/max-content-size', () => {

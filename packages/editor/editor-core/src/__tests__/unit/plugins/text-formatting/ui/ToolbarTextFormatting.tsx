@@ -1,12 +1,12 @@
 import * as React from 'react';
-import AkButton from '@atlaskit/button';
+import AkButton from '@findable/button';
 import { ReactWrapper } from 'enzyme';
 import {
   doc,
   p,
   createEditorFactory,
   mountWithIntl,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { analyticsService, AnalyticsHandler } from '../../../../../analytics';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import {
@@ -14,7 +14,7 @@ import {
   pluginKey,
 } from '../../../../../plugins/text-formatting/pm-plugins/main';
 import ToolbarTextFormatting from '../../../../../plugins/text-formatting/ui/ToolbarTextFormatting';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import {
   AnalyticsEventPayload,
   ACTION_SUBJECT_ID,

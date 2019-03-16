@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent, type Node } from 'react';
-import { Item } from '@atlaskit/droplist';
+import { Item } from '@findable/droplist';
 import FooterDiv from '../styled/Footer';
 
 type Props = {

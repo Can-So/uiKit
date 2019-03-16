@@ -1,5 +1,5 @@
 //@flow
-import { colors, gridSize, typography } from '@atlaskit/theme';
+import { colors, gridSize, typography } from '@findable/theme';
 import evaluateInner from './utils/evaluate-inner';
 
 const tableBorderWdth = 2;

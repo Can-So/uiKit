@@ -5,7 +5,7 @@ import {
   createUploadContext,
   defaultMediaPickerCollectionName,
   I18NWrapper,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { MediaPicker } from '../src';
 import {
   DropzoneContainer,

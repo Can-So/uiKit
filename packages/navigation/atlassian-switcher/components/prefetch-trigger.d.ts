@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 interface PrefetchTriggerProps {
     cloudId: string;
     Container?: React.ReactType;

@@ -13,7 +13,7 @@ export default function Layers(root, j) {
   var sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles'
+      value: '@findable/util-shared-styles'
     }
   });
 
@@ -45,9 +45,9 @@ export default function Layers(root, j) {
     }).replaceWith(function () {
       return j.callExpression(j.memberExpression(j.identifier('layers'), j.identifier(LayerMapping[spec.imported])), []);
     });
-  }); // Add an import of colors from @atlaskit/theme
+  }); // Add an import of colors from @findable/theme
 
-  addNamedImport(root, j, '@atlaskit/theme', 'layers', 'layers', sharedStylesImport); //Remove util shared styles if no named imports
+  addNamedImport(root, j, '@findable/theme', 'layers', 'layers', sharedStylesImport); //Remove util shared styles if no named imports
 
   if (sharedStylesImport.find(j.ImportSpecifier).size() === 0) {
     sharedStylesImport.remove();

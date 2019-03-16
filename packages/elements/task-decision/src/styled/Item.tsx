@@ -2,7 +2,7 @@ import styled from 'styled-components';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes, ComponentClass } from 'react';
-import { borderRadius, gridSize, colors, themed } from '@atlaskit/theme';
+import { borderRadius, gridSize, colors, themed } from '@findable/theme';
 import { Appearance } from '../types';
 
 const akGridSize = gridSize();

@@ -6,7 +6,7 @@ import {
   subsup,
   underline,
   code,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import { EditorPlugin } from '../../types';
 import { ButtonGroup } from '../../ui/styles';
 import {

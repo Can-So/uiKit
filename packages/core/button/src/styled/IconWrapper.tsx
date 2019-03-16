@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 import { getLoadingStyle } from './utils';
 
 type Props = {

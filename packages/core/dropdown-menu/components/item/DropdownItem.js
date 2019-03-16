@@ -1,2 +1,2 @@
-import Item, { withItemFocus, withItemClick } from '@atlaskit/item';
+import Item, { withItemFocus, withItemClick } from '@findable/item';
 export default withItemClick(withItemFocus(Item));

@@ -3,7 +3,7 @@ import { PureComponent } from 'react';
 import DummyItem from './DummyItem';
 
 /** ************************************************************************************************
-  This file exists so that we have a component we can pass the @atlaskit/readme Props component
+  This file exists so that we have a component we can pass the @findable/readme Props component
 **************************************************************************************************/
 
 type Props = {

@@ -1,4 +1,4 @@
-import { isClientBasedAuth } from '@atlaskit/media-core';
+import { isClientBasedAuth } from '@findable/media-core';
 export function mapAuthToSourceFileOwner(auth) {
     if (isClientBasedAuth(auth)) {
         return {

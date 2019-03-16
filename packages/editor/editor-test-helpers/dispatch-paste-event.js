@@ -1,4 +1,4 @@
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import createEvent from './create-event';
 /**
  * Dispatch a paste event on the given ProseMirror instance

@@ -14,10 +14,10 @@ import {
   br,
   panel,
   insertText,
-} from '@atlaskit/editor-test-helpers';
-import { uuid } from '@atlaskit/adf-schema';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import { ProviderFactory } from '@atlaskit/editor-common';
+} from '@findable/editor-test-helpers';
+import { uuid } from '@findable/adf-schema';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
+import { ProviderFactory } from '@findable/editor-common';
 import { insertTaskDecision } from '../../../../plugins/tasks-and-decisions/commands';
 import { TaskDecisionListType } from '../../../../plugins/tasks-and-decisions/types';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';

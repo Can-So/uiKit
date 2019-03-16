@@ -1,4 +1,4 @@
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { IntlProvider } from 'react-intl';
 import { LocalUploadComponent } from '../localUpload';
 import { whenDomReady } from '../../util/documentReady';

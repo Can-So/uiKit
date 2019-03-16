@@ -1,8 +1,8 @@
 import {
   createAndFireEvent,
   withAnalyticsEvents,
-} from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import * as React from 'react';
 
 export type Props = WithAnalyticsEventProps & {
@@ -29,7 +29,7 @@ export const createDummyComponentWithAnalytics = (channel?: string) =>
       eventType: 'ui',
       attributes: {
         packageVersion: '1.0.0',
-        packageName: '@atlaskit/foo',
+        packageName: '@findable/foo',
         componentName: 'foo',
         foo: 'bar',
       },

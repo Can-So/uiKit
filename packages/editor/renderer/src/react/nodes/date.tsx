@@ -4,7 +4,7 @@ import {
   isPastDate,
   timestampToString,
   timestampToTaskContext,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 export interface Props {
   timestamp: string;

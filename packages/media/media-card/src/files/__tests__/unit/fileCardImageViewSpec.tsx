@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { mount, shallow, ShallowWrapper, ReactWrapper } from 'enzyme';
-import VidPlayIcon from '@atlaskit/icon/glyph/vid-play';
-import { expectToEqual } from '@atlaskit/media-test-helpers';
-import { Ellipsify } from '@atlaskit/media-ui';
+import VidPlayIcon from '@findable/icon/glyph/vid-play';
+import { expectToEqual } from '@findable/media-test-helpers';
+import { Ellipsify } from '@findable/media-ui';
 
 import { FileCardImageView, FileCardImageViewProps } from '../..';
 import { CardOverlay } from '../../cardImageView/cardOverlay';

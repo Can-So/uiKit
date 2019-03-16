@@ -1,4 +1,4 @@
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
 import { editable, quickInsert, getDocFromElement } from '../_helpers';
 import {
   goToEditorTestingExample,

@@ -1,4 +1,4 @@
-import { AbstractResource } from '@atlaskit/util-service-support';
+import { AbstractResource } from '@findable/util-service-support';
 import Emoji from './components/common/Emoji';
 import EmojiPlaceholder from './components/common/EmojiPlaceholder';
 import ResourcedEmoji from './components/common/ResourcedEmoji';

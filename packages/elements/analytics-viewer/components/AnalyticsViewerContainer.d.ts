@@ -1,4 +1,4 @@
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEvent } from '@findable/analytics-next-types';
 import * as React from 'react';
 import { EventsArray } from './AnalyticsViewer';
 declare type Props = {

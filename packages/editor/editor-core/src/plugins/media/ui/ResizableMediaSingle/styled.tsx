@@ -1,7 +1,7 @@
 import {
   MediaSingleDimensionHelper,
   MediaSingleDimensionHelperProps,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import styled from 'styled-components';
 
 export const Wrapper: React.ComponentClass<

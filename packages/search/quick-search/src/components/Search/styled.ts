@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 
 export const SearchBox = styled.div`
   position: sticky;

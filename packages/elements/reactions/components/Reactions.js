@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import Tooltip from '@atlaskit/tooltip';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import Tooltip from '@findable/tooltip';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { style } from 'typestyle';

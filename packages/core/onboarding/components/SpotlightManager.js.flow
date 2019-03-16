@@ -6,8 +6,8 @@ import React, {
   type Node,
 } from 'react';
 import memoizeOne from 'memoize-one';
-import Portal from '@atlaskit/portal';
-import { layers } from '@atlaskit/theme';
+import Portal from '@findable/portal';
+import { layers } from '@findable/theme';
 
 import { Fade } from './Animation';
 import Blanket from '../styled/Blanket';

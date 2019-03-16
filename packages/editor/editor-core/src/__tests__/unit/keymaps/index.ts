@@ -1,4 +1,4 @@
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import * as keymaps from '../../../keymaps';
 
 describe('keymaps', () => {

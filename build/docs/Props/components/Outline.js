@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 var Outline = styled.span.withConfig({
   displayName: "Outline",
   componentId: "sc-19ldzpu-0"

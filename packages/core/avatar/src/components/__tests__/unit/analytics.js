@@ -1,5 +1,5 @@
 // @flow
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { UIAnalyticsEvent } from '@findable/analytics-next';
 import React from 'react';
 import { mount } from 'enzyme';
 

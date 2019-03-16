@@ -1,4 +1,4 @@
-import { gridSize } from '@atlaskit/theme'; // Border
+import { gridSize } from '@findable/theme'; // Border
 
 export var borderWidth = 1; // 1
 

@@ -3,10 +3,10 @@ import {
   defaultCollectionName,
   defaultMediaPickerAuthProvider,
   userAuthProvider,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import * as React from 'react';
 import { Component } from 'react';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 import { MediaPicker, Popup } from '../src';
 import { intlShape } from 'react-intl';
 

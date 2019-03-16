@@ -4,9 +4,9 @@ import {
   AnalyticsListener,
   AnalyticsContext,
   UIAnalyticsEvent,
-} from '@atlaskit/analytics-next';
-import Button from '@atlaskit/button';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+} from '@findable/analytics-next';
+import Button from '@findable/button';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
 import LayerManager from '../src';
 
 type State = {

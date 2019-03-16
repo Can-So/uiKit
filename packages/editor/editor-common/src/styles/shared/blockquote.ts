@@ -1,6 +1,6 @@
 // @ts-ignore: unused variable
 import { css, Styles, StyledComponentClass } from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import {
   akEditorBlockquoteBorderColor,
   blockNodesVerticalMargin,

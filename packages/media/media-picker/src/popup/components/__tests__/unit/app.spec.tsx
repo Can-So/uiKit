@@ -3,8 +3,8 @@ import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
 import { createStore, applyMiddleware, Middleware } from 'redux';
 import { Store } from 'react-redux';
 
-import { AuthProvider, ContextFactory } from '@atlaskit/media-core';
-import { waitUntil } from '@atlaskit/media-test-helpers';
+import { AuthProvider, ContextFactory } from '@findable/media-core';
+import { waitUntil } from '@findable/media-test-helpers';
 
 import { State } from '../../../domain';
 import ConnectedApp, { App, AppDispatchProps } from '../../app';
@@ -13,7 +13,7 @@ import Browser from '../../views/browser/browser';
 import {
   getComponentClassWithStore,
   mockStore,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { fileUploadsStart } from '../../../actions/fileUploadsStart';
 import { UploadParams } from '../../../../domain/config';
 import { LocalBrowserButton } from '../../views/upload/uploadButton';
@@ -403,7 +403,7 @@ describe('Connected App', () => {
           attributes: {
             componentName: 'mediaPicker',
             componentVersion: expect.any(String),
-            packageName: '@atlaskit/media-picker',
+            packageName: '@findable/media-picker',
           },
           eventType: 'screen',
           name: 'localFileBrowserModal',

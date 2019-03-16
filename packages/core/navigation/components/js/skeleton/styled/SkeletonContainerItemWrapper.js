@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var SkeletonContainerItemWrapper = styled.div.withConfig({
   displayName: "SkeletonContainerItemWrapper",
   componentId: "nffzbz-0"

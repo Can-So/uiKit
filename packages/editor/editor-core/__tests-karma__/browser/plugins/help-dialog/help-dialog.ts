@@ -4,7 +4,7 @@ import { EditorView } from 'prosemirror-view';
 import {
   createEditorFactory,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import helpDialog, {
   pluginKey,
   openHelpCommand,
@@ -14,7 +14,7 @@ import EditorActions from '../../../../src/actions';
 import { analyticsService } from '../../../../src/analytics';
 import { EventDispatcher } from '../../../../src/event-dispatcher';
 
-describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
+describe('@findable/editor-core/editor/ui/HelpDialog', () => {
   let editorActions: EditorActions;
   let editorView: EditorView;
   const createEditor = createEditorFactory();

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { typography } from '@atlaskit/theme';
+import { typography } from '@findable/theme';
 import gridSizeTimes from '../../util/gridSizeTimes';
 export var Screen = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  width: 640px;\n  margin-bottom: ", "px;\n  > p {\n    margin-top: ", "px;\n    margin-bottom: ", "px;\n  }\n"], ["\n  width: 640px;\n  margin-bottom: ", "px;\n  > p {\n    margin-top: ", "px;\n    margin-bottom: ", "px;\n  }\n"])), gridSizeTimes(2), gridSizeTimes(3), gridSizeTimes(2));
 export var LoadingWrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 500px;\n"], ["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 500px;\n"])));

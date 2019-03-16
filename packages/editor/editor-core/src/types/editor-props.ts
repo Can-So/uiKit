@@ -8,11 +8,11 @@ import {
   ContextIdentifierProvider,
   ExtensionHandlers,
   ErrorReportingHandler,
-} from '@atlaskit/editor-common';
-import { ActivityProvider } from '@atlaskit/activity';
-import { MentionProvider } from '@atlaskit/mention';
-import { EmojiProvider } from '@atlaskit/emoji';
-import { TaskDecisionProvider } from '@atlaskit/task-decision';
+} from '@findable/editor-common';
+import { ActivityProvider } from '@findable/activity';
+import { MentionProvider } from '@findable/mention';
+import { EmojiProvider } from '@findable/emoji';
+import { TaskDecisionProvider } from '@findable/task-decision';
 
 import { PluginConfig as TablesPluginConfig } from '../plugins/table/types';
 import { TextColorPluginConfig } from '../plugins/text-color/pm-plugins/main';

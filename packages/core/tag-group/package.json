@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/tag-group",
+  "name": "@findable/tag-group",
   "version": "7.0.0",
   "description": "A React component used for grouping and controlling @atlskit/tag components",
   "license": "Apache-2.0",
@@ -18,7 +18,7 @@
     "name": "Tag group",
     "team": "core"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0"
@@ -28,12 +28,12 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/avatar": "^15.0.0",
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/tag": "^7.0.0",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/avatar": "^15.0.0",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/ssr": "^0.0.1",
+    "@findable/docs": "^7.0.0",
+    "@findable/tag": "^7.0.0",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "exenv": "^1.2.2",
     "react-dom": "^16.4.2"

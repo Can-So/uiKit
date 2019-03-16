@@ -1,11 +1,11 @@
 import * as React from 'react'; // eslint-disable-line
 import { Component } from 'react';
 import { shallow } from 'enzyme';
-import { EditorView } from '@atlaskit/media-editor';
+import { EditorView } from '@findable/media-editor';
 import {
   expectFunctionToHaveBeenCalledWith,
   expectToEqual,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import {
   MainEditorView,
   MainEditorViewDispatchProps,

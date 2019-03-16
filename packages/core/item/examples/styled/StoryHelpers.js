@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { colors, gridSize, math } from '@atlaskit/theme';
+import { colors, gridSize, math } from '@findable/theme';
 
 export const GroupsWrapper = styled.div`
   padding: ${math.multiply(gridSize, 4)}px;

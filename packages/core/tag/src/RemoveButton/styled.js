@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { colors, borderRadius, themed } from '@atlaskit/theme';
+import { colors, borderRadius, themed } from '@findable/theme';
 import { buttonWidthUnitless, focusRingColor } from '../constants';
 
 const focusColor = themed({ light: colors.R300, dark: colors.R200 });

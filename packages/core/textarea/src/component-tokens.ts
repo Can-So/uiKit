@@ -1,6 +1,6 @@
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
-// The following are the name for color mappings in @atlaskit/themes
+// The following are the name for color mappings in @findable/themes
 // The exports are the functions, not the objects, so could not be used here
 export const disabled = { light: colors.N20, dark: colors.DN20 };
 // For validation red is the new 'yellow' which was { light: colors.Y300, dark: colors.Y300 }

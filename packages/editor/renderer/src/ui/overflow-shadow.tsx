@@ -1,6 +1,6 @@
 import * as React from 'react';
 import rafSchedule from 'raf-schd';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import { shadowClassNames } from './Renderer/style';
 
 export interface OverflowShadowProps {

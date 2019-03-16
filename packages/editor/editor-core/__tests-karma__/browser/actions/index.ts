@@ -1,7 +1,7 @@
 import * as chai from 'chai';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { createEditorFactory, chaiPlugin } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, chaiPlugin } from '@findable/editor-test-helpers';
 import {
   doc,
   p,
@@ -11,11 +11,11 @@ import {
   randomId,
   storyMediaProviderFactory,
   bodiedExtension,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import { defaultSchema } from '@atlaskit/adf-schema';
-import { Transformer, ProviderFactory } from '@atlaskit/editor-common';
+import { JSONTransformer } from '@findable/editor-json-transformer';
+import { defaultSchema } from '@findable/adf-schema';
+import { Transformer, ProviderFactory } from '@findable/editor-common';
 
 import {
   MediaPluginState,
@@ -38,7 +38,7 @@ const dummyTransformer: Transformer<string> = {
   encode: node => node.textContent,
 };
 
-describe('@atlaskit/editor-core', () => {
+describe('@findable/editor-core', () => {
   describe('EditorActions', () => {
     const testTempFileId = `temporary:${randomId()}`;
     const testTempFileId2 = `temporary:${randomId()}`;

@@ -3,7 +3,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import {
   createMouseEvent,
   createTouchEvent,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 import {
   ImagePlacerContainer,

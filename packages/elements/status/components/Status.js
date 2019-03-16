@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import Lozenge from '@atlaskit/lozenge';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import Lozenge from '@findable/lozenge';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { createStatusAnalyticsAndFire } from './analytics';
 import { ANALYTICS_HOVER_DELAY } from './constants';
 var colorToLozengeAppearanceMap = {

@@ -1,2 +1,2 @@
-import { FileState } from '@atlaskit/media-core';
+import { FileState } from '@findable/media-core';
 export declare const getObjectUrlFromFileState: (state: FileState) => Promise<string | undefined>;

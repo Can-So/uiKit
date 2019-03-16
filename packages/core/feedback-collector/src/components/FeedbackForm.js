@@ -1,11 +1,11 @@
 // @flow
 
 import React, { Fragment, Component } from 'react';
-import { Checkbox } from '@atlaskit/checkbox';
-import TextArea from '@atlaskit/textarea';
-import Form, { Field } from '@atlaskit/form';
-import Modal from '@atlaskit/modal-dialog';
-import Select from '@atlaskit/select';
+import { Checkbox } from '@findable/checkbox';
+import TextArea from '@findable/textarea';
+import Form, { Field } from '@findable/form';
+import Modal from '@findable/modal-dialog';
+import Select from '@findable/select';
 import type { FormFields, SelectValue } from '../types';
 
 type Props = {|

@@ -2,10 +2,10 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
 import styled from 'styled-components';
-import DropList from '@atlaskit/droplist';
-import Item, { ItemGroup } from '@atlaskit/item';
-import Tooltip from '@atlaskit/tooltip';
-import { Popup, akEditorFloatingPanelZIndex } from '@atlaskit/editor-common';
+import DropList from '@findable/droplist';
+import Item, { ItemGroup } from '@findable/item';
+import Tooltip from '@findable/tooltip';
+import { Popup, akEditorFloatingPanelZIndex } from '@findable/editor-common';
 import withOuterListeners from '../with-outer-listeners';
 var Wrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  line-height: 0;\n"], ["\n  line-height: 0;\n"])));
 var DropListWithOutsideListeners = withOuterListeners(DropList);
@@ -20,7 +20,7 @@ var ItemWrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__m
 });
 var ItemContentWrapper = styled.span(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n  ", ";\n"], ["\n  ", ";\n"])), function (props) { return (props.hasElemBefore ? 'margin-left: 8px;' : ''); });
 /**
- * Wrapper around @atlaskit/droplist which uses Popup and Portal to render
+ * Wrapper around @findable/droplist which uses Popup and Portal to render
  * dropdown-menu outside of "overflow: hidden" containers when needed.
  *
  * Also it controls popper's placement.

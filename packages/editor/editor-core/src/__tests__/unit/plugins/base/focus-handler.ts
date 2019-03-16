@@ -3,7 +3,7 @@ import {
   doc,
   p,
   createEvent,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { focusStateKey } from '../../../../plugins/base/pm-plugins/focus-handler';
 
 const event = createEvent('event');

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ExtensionHandlers, ExtensionParams } from '@atlaskit/editor-common';
+import { ExtensionHandlers, ExtensionParams } from '@findable/editor-common';
 
 const FakeExtension = ({
   colour,

@@ -3,12 +3,12 @@ import Navigation, {
   AkGlobalItem,
   AkSearchDrawer,
   presetThemes,
-} from '@atlaskit/navigation';
-import ArrowleftIcon from '@atlaskit/icon/glyph/arrow-left';
-import { AtlassianIcon } from '@atlaskit/logo';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
-import Avatar from '@atlaskit/avatar';
+} from '@findable/navigation';
+import ArrowleftIcon from '@findable/icon/glyph/arrow-left';
+import { AtlassianIcon } from '@findable/logo';
+import SearchIcon from '@findable/icon/glyph/search';
+import QuestionCircleIcon from '@findable/icon/glyph/question-circle';
+import Avatar from '@findable/avatar';
 
 export interface Props {
   searchDrawerContent: JSX.Element;

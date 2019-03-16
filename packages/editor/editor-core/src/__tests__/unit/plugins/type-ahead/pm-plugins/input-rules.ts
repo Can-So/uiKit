@@ -5,7 +5,7 @@ import {
   typeAheadQuery,
   insertText,
   em,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { createTypeAheadPlugin } from './_create-type-ahead-plugin';
 
 describe('typeAhead input rules', () => {

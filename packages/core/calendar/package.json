@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/calendar",
+  "name": "@findable/calendar",
   "version": "7.0.20",
   "description": "A React component for displaying a calendar.",
   "license": "Apache-2.0",
@@ -18,12 +18,12 @@
     "name": "Calendar",
     "team": "core"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/theme": "^8.0.1",
     "@babel/runtime": "^7.0.0",
     "calendar-base": "^0.3.0",
     "lodash.pick": "^4.4.0",
@@ -34,9 +34,9 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/ssr": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/ssr": "^0.0.1",
     "date-fns": "^1.30.1",
     "enzyme": "^3.7.0",
     "jest-in-case": "^1.0.2",

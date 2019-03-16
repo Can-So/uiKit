@@ -7,7 +7,7 @@ import {
   date,
   bodiedExtension,
   extension,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   selectCurrentItem,
   selectSingleItemOrDismiss,

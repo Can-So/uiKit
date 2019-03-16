@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 Pagination is helpful when you do not want to bloat your page by showing all the data at once. In this case we expect user to
@@ -11,12 +11,12 @@ This component is mostly used with tables, see [dynamic-table](https://atlaskit.
 ## Usage:
 
 ${code`
-import Pagination from '@atlaskit/pagination';
+import Pagination from '@findable/pagination';
 `}
 
 ${(
   <Example
-    packageName="@atlaskit/pagination"
+    packageName="@findable/pagination"
     Component={require('../examples/01-basic').default}
     title="Basic Pagination"
     source={require('!!raw-loader!../examples/01-basic')}
@@ -29,12 +29,12 @@ ${(
 
 You can replace parts of the pagination UI by passing in custom components.
 
-The following will render the pagination component by replacing the @atlaskit/button
+The following will render the pagination component by replacing the @findable/button
 component with the <Link> component from react-router.
 
 ${(
   <Example
-    packageName="@atlaskit/pagination"
+    packageName="@findable/pagination"
     Component={require('../examples/02-with-react-router').default}
     title="Usage with react router"
     source={require('!!raw-loader!../examples/02-with-react-router')}

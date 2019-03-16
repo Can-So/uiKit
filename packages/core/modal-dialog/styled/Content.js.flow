@@ -1,7 +1,7 @@
 // @flow
 import React, { type ElementType, type Node } from 'react';
 import styled, { css } from 'styled-components';
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { colors, gridSize, math, themed } from '@findable/theme';
 
 import { flexMaxHeightIEFix } from '../utils/flex-max-height-ie-fix';
 

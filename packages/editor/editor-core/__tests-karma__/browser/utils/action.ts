@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   doc,
   p,
   randomId,
   createEditorFactory,
   storyMediaProviderFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   MediaPluginState,
@@ -25,7 +25,7 @@ const mediaProvider = getFreshMediaProvider();
 const providerFactory = new ProviderFactory();
 providerFactory.setProvider('mediaProvider', mediaProvider);
 
-describe('@atlaskit/editor-core', () => {
+describe('@findable/editor-core', () => {
   const createEditor = createEditorFactory<MediaPluginState>();
 
   const editor = (doc: any, uploadErrorHandler?: () => void) =>

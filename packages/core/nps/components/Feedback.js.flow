@@ -1,7 +1,7 @@
 //@flow
 import React, { type Node } from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import FieldTextArea from '@atlaskit/field-text-area';
+import Button, { ButtonGroup } from '@findable/button';
+import FieldTextArea from '@findable/field-text-area';
 import { type Rating, type Comment } from './NPS';
 import { Header, Description } from './common';
 import {

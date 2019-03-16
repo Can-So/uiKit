@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import UnlockIcon from '@atlaskit/icon/glyph/unlock';
-import LockIcon from '@atlaskit/icon/glyph/lock';
+import UnlockIcon from '@findable/icon/glyph/unlock';
+import LockIcon from '@findable/icon/glyph/lock';
 import { FocusLock } from '../src';
 
 type Props = {};

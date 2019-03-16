@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
 MediaViewer is Atlassian's powerful solution for viewing files on the web. It's both powerful and extendable yet easy-to-integrate
@@ -9,11 +9,11 @@ MediaViewer is Atlassian's powerful solution for viewing files on the web. It's 
   ### Using a collection as data source
 
   ${code`
-  import { MediaViewer } from '@atlaskit/media-viewer';
+  import { MediaViewer } from '@findable/media-viewer';
   import {
     createStorybookContext,
     defaultCollectionName,
-  } from '@atlaskit/media-test-helpers';
+  } from '@findable/media-test-helpers';
 
   const context = createStorybookContext();
   const selectedItem = {
@@ -42,11 +42,11 @@ MediaViewer is Atlassian's powerful solution for viewing files on the web. It's 
   ### Using a list of media items as data source
 
   ${code`
-  import { MediaViewer } from '@atlaskit/media-viewer';
+  import { MediaViewer } from '@findable/media-viewer';
   import {
     createStorybookContext,
     defaultCollectionName,
-  } from '@atlaskit/media-test-helpers';
+  } from '@findable/media-test-helpers';
 
   const context = createStorybookContext();
 

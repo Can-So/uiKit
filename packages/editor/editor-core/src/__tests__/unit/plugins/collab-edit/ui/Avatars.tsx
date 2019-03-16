@@ -1,8 +1,8 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { doc, p, createEditorFactory } from '@atlaskit/editor-test-helpers';
+import { ProviderFactory } from '@findable/editor-common';
+import { doc, p, createEditorFactory } from '@findable/editor-test-helpers';
 
 import {
   PluginState,

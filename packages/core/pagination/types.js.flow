@@ -1,6 +1,6 @@
 //@flow
 import type { Node, ElementType } from 'react';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { UIAnalyticsEvent } from '@findable/analytics-next';
 
 export type PaginationPropTypes = {
   /** Custom collapse range function */
@@ -10,7 +10,7 @@ export type PaginationPropTypes = {
     { max: number, ellipsis: ({ key: string }) => Node },
   ) => Array<Node>,
   /** This prop should not be accessed under any circumstances. It is
-   provided by @atlaskit/analytics-next. */
+   provided by @findable/analytics-next. */
   createAnalyticsEvent?: any,
   /** Replace the built-in Page, Previous, Next and/ or Ellipsis component */
   components: {

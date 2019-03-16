@@ -1,4 +1,4 @@
-import { isSafeUrl } from '@atlaskit/adf-schema';
+import { isSafeUrl } from '@findable/adf-schema';
 import { Token, TokenParser } from './';
 
 // https://www.atlassian.com

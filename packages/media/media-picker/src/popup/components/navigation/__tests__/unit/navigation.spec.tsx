@@ -1,19 +1,19 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import Dropdown from '@atlaskit/dropdown-menu';
-import RefreshIcon from '@atlaskit/icon/glyph/refresh';
-import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
-import SettingsIcon from '@atlaskit/icon/glyph/settings';
+import Dropdown from '@findable/dropdown-menu';
+import RefreshIcon from '@findable/icon/glyph/refresh';
+import DropdownMenu, { DropdownItem } from '@findable/dropdown-menu';
+import SettingsIcon from '@findable/icon/glyph/settings';
 import {
   mountWithIntlContext,
   fakeIntl,
   nextTick,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import {
   getComponentClassWithStore,
   mockStore,
   mockState,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { Navigation, default as ConnectedNavigation } from '../../navigation';
 import {
   changeAccount,

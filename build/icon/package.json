@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/icon-build-process",
+  "name": "@findable/icon-build-process",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

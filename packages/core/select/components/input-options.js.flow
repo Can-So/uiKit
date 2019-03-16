@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component, type Element } from 'react';
-import RadioIcon from '@atlaskit/icon/glyph/radio';
-import CheckboxIcon from '@atlaskit/icon/glyph/checkbox';
-import { colors, themed, gridSize } from '@atlaskit/theme';
+import RadioIcon from '@findable/icon/glyph/radio';
+import CheckboxIcon from '@findable/icon/glyph/checkbox';
+import { colors, themed, gridSize } from '@findable/theme';
 import type { CommonProps, fn, InnerProps } from './types';
 
 const getPrimitiveStyles = props => {

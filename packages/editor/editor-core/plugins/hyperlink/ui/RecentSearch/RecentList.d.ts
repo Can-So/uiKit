@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { ActivityItem } from '@atlaskit/activity';
+import { ActivityItem } from '@findable/activity';
 export interface Props {
     items?: Array<ActivityItem>;
     isLoading: boolean;

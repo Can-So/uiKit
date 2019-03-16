@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import Lorem from 'react-lorem-component';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 
 import { WIDTH_ENUM } from '../src/shared-variables';
 import ModalDialog, { ModalTransition } from '../src';

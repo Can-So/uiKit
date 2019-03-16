@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Card } from '@atlaskit/smart-card';
-import { EventHandlers } from '@atlaskit/editor-common';
+import { Card } from '@findable/smart-card';
+import { EventHandlers } from '@findable/editor-common';
 
 import { getEventHandler } from '../../utils';
 

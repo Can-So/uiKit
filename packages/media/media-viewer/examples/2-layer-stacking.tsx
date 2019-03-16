@@ -1,13 +1,13 @@
 import * as React from 'react';
-import Button from '@atlaskit/button';
-import ModalDialog from '@atlaskit/modal-dialog';
+import Button from '@findable/button';
+import ModalDialog from '@findable/modal-dialog';
 import {
   createStorybookContext,
   defaultCollectionName,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { imageItem } from '../example-helpers';
 import { MediaViewer } from '..';
-import { Identifier } from '@atlaskit/media-core';
+import { Identifier } from '@findable/media-core';
 
 const context = createStorybookContext();
 

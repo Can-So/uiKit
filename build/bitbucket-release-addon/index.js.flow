@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import flattenChangesets from '@atlaskit/build-releases/version/flattenChangesets';
+import flattenChangesets from '@findable/build-releases/version/flattenChangesets';
 
 import getCommits from './get-commits';
 import getFSChangesets from './get-fs-changesets';
@@ -7,7 +7,7 @@ import getFSChangesets from './get-fs-changesets';
 const noChangesetMessage = `<div style="border: 2px solid red; padding: 10px; border-radius: 10px; display: inline-block;">
   <p><strong>Warning:</strong> No packages will be released with this PR</p>
   <p>If this was not intentional make sure you have run \`bolt changeset\` if you are trying to release packages.</p>
-  <p>See <a href="https://bitbucket.org/atlassian/atlaskit-mk-2/src/HEAD/docs/guides/07-releasing-packages.md" target="_parent">this guide</a> for more details.</p>
+  <p>See <a href="https://github.com/fnamazing/uiKit/src/HEAD/docs/guides/07-releasing-packages.md" target="_parent">this guide</a> for more details.</p>
 
 </div>`;
 const errorLoadingChangesetMessage = `<div style="color: red; border: 2px solid; padding: 10px; border-radius: 10px; display: inline-block;">

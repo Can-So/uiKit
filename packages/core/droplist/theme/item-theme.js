@@ -1,6 +1,6 @@
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
-import { itemThemeNamespace } from '@atlaskit/item';
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { itemThemeNamespace } from '@findable/item';
+import { colors, gridSize, math, themed } from '@findable/theme';
 var dropdownPadding = {
   bottom: gridSize,
   left: math.multiply(gridSize, 1.5),

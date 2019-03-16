@@ -1,5 +1,5 @@
-import { EmojiProvider } from '@atlaskit/emoji';
-import { emoji } from '@atlaskit/util-data-test';
+import { EmojiProvider } from '@findable/emoji';
+import { emoji } from '@findable/util-data-test';
 import * as React from 'react';
 import { ConnectedReactionPicker, ConnectedReactionsView } from '../src';
 import { ReactionsExampleWrapper } from './examples-util';

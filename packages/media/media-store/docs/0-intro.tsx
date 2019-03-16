@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { md, code, Example } from '@atlaskit/docs';
+import { md, code, Example } from '@findable/docs';
 
 export default md`
   This package is the Media Store API Web Client Library.
 
   ## Usage
 
-  ${code`import { MediaImage } from '@atlaskit/media-image';
+  ${code`import { MediaImage } from '@findable/media-image';
 
   `}
 

@@ -1,5 +1,5 @@
 import { resolveColors } from '../../../components/DateLozenge';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 describe('resolveColors', () => {
   it('return default colors', () => {

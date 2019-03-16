@@ -1,6 +1,6 @@
 // @flow
 
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 import { GLOBAL_NAV_WIDTH } from '../../../common/constants';
 import type { ModeColors } from '../../../theme/types';
 

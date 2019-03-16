@@ -14,9 +14,9 @@ import {
   tdCursor,
   tdEmpty,
   tr,
-} from '@atlaskit/editor-test-helpers';
-import { uuid } from '@atlaskit/adf-schema';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+} from '@findable/editor-test-helpers';
+import { uuid } from '@findable/adf-schema';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import mentionsPlugin from '../../../../plugins/mentions';
 import tablesPlugin from '../../../../plugins/table';

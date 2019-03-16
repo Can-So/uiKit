@@ -1,12 +1,12 @@
 import * as React from 'react';
 import CodeSandboxer from 'react-codesandboxer';
-import { replaceSrc } from '@atlaskit/docs';
+import { replaceSrc } from '@findable/docs';
 
 const getExampleUrl = (groupId, packageId, exampleId) =>
-  `https://bitbucket.org/atlassian/atlaskit-mk-2/raw/HEAD/packages/${groupId}/${packageId}/examples/${exampleId}`;
+  `https://github.com/fnamazing/uiKit/raw/HEAD/packages/${groupId}/${packageId}/examples/${exampleId}`;
 const getExamplePath = (groupId, packageId, exampleId) =>
   `packages/${groupId}/${packageId}/examples/${exampleId}`;
-const repoUrl = 'https://bitbucket.org/atlassian/atlaskit-mk-2';
+const repoUrl = 'https://github.com/fnamazing/uiKit';
 
 const baseFiles = (groupId, packageId, exampleId) => ({
   'index.js': {
@@ -26,7 +26,7 @@ const baseFiles = (groupId, packageId, exampleId) => ({
 */
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import '@atlaskit/css-reset';
+import '@findable/css-reset';
 import Example from './example';
 
 ReactDOM.render(
@@ -109,7 +109,7 @@ export default class CodeSandbox extends React.Component<Props, State> {
           ...cssLoaderExceptions(pkgJSON.name, groupId, packageId),
         ]}
         dependencies={{
-          '@atlaskit/css-reset': 'latest',
+          '@findable/css-reset': 'latest',
           'styled-components':
             pkgJSON.peerDependencies &&
             pkgJSON.peerDependencies['styled-components']

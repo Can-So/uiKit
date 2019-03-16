@@ -1,5 +1,5 @@
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import { getExampleUrl } from '@atlaskit/visual-regression/helper';
+import Page from '@findable/webdriver-runner/wd-wrapper';
+import { getExampleUrl } from '@findable/visual-regression/helper';
 import { EditorProps } from '../../types';
 import {
   clipboardInput,

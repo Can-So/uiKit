@@ -6,8 +6,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { createElement, Component } from 'react';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
+import ErrorIcon from '@findable/icon/glyph/error';
+import WarningIcon from '@findable/icon/glyph/warning';
 import { Header, Title, TitleText, TitleIconWrapper as IconWrapper } from '../styled/Content';
 var icon = {
   danger: ErrorIcon,

@@ -1,4 +1,4 @@
-import { OptionData } from '@atlaskit/user-picker';
+import { OptionData } from '@findable/user-picker';
 import { Comment } from './ShareEntities';
 import { User } from './User';
 export declare type ShareContentState = {

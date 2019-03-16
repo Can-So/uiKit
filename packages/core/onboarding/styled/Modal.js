@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { borderRadius, gridSize, math } from '@atlaskit/theme';
+import { borderRadius, gridSize, math } from '@findable/theme';
 export var Body = styled.div.withConfig({
   displayName: "Modal__Body",
   componentId: "qc9xxl-0"
 })(["\n  padding: 40px 20px;\n  text-align: center;\n"]); // TODO: equivilant to H600, need to replace with mixin when available from
-// the @atlaskit/theme package
+// the @findable/theme package
 
 export var Heading = styled.h4.withConfig({
   displayName: "Modal__Heading",

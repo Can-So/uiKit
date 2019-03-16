@@ -6,8 +6,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import Tooltip from '@atlaskit/tooltip';
+} from '@findable/analytics-next';
+import Tooltip from '@findable/tooltip';
 import {
   name as packageName,
   version as packageVersion,

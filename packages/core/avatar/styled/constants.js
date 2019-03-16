@@ -1,4 +1,4 @@
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 export var TRANSITION_DURATION = '200ms';
 var gridSizeValue = gridSize();
 export var AVATAR_SIZES = {

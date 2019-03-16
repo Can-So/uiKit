@@ -2,10 +2,10 @@
 import React, { Component, type ElementRef } from 'react';
 import styled from 'styled-components';
 
-import { FieldTextStateless } from '@atlaskit/field-text';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-import Tooltip from '@atlaskit/tooltip';
-import { colors, gridSize } from '@atlaskit/theme';
+import { FieldTextStateless } from '@findable/field-text';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
+import Tooltip from '@findable/tooltip';
+import { colors, gridSize } from '@findable/theme';
 
 const IconExplorerLink = styled.a`
   &,

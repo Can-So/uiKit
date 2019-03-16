@@ -10,12 +10,12 @@ import {
   Plugin,
   PluginKey,
 } from 'prosemirror-state';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
-import { UploadParams } from '@atlaskit/media-picker';
-import { MediaSingleLayout, MediaBaseAttributes } from '@atlaskit/adf-schema';
+import { Context, FileIdentifier } from '@findable/media-core';
+import { UploadParams } from '@findable/media-picker';
+import { MediaSingleLayout, MediaBaseAttributes } from '@findable/adf-schema';
 
-import { ErrorReporter } from '@atlaskit/editor-common';
-import { Dimensions } from '@atlaskit/media-editor';
+import { ErrorReporter } from '@findable/editor-common';
+import { Dimensions } from '@findable/media-editor';
 
 import analyticsService from '../../../analytics/service';
 import { isImage, SetAttrsStep } from '../../../utils';

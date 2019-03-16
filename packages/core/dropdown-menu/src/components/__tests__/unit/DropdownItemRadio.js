@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { mount } from 'enzyme';
-import RadioIcon from '@atlaskit/icon/glyph/radio';
-import { colors } from '@atlaskit/theme';
-import Item from '@atlaskit/item';
+import RadioIcon from '@findable/icon/glyph/radio';
+import { colors } from '@findable/theme';
+import Item from '@findable/item';
 
 import { KEY_ENTER, KEY_SPACE } from '../../../util/keys';
 import DropdownMenu, {

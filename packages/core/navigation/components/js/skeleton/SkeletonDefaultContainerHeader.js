@@ -5,7 +5,7 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { Skeleton as SkeletonAvatar } from '@atlaskit/avatar';
+import { Skeleton as SkeletonAvatar } from '@findable/avatar';
 import { HiddenWhenCollapsed } from './ToggleWhenCollapsed';
 import SkeletonContainerHeaderText from './styled/SkeletonContainerHeaderText';
 import SkeletonDefaultContainerHeaderInner from './styled/SkeletonDefaultContainerHeaderInner';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { layers } from '@atlaskit/theme';
+import { layers } from '@findable/theme';
 import MentionTextInput from '../example-helpers/demo-mention-text-input';
 import {
   onSelection,

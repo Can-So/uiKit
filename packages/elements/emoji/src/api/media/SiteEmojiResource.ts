@@ -1,7 +1,7 @@
 import {
   ServiceConfig,
   utils as serviceUtils,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 import {
   EmojiDescription,
   EmojiId,
@@ -28,7 +28,7 @@ import {
 import TokenManager from './TokenManager';
 
 import debug from '../../util/logger';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 
 export interface EmojiUploadResponse {
   emojis: EmojiServiceDescription[];

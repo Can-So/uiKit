@@ -1,5 +1,5 @@
 import { getObjectUrlFromFileState } from '../../../../newgen/utils/getObjectUrlFromFileState';
-import { FileState } from '@atlaskit/media-core';
+import { FileState } from '@findable/media-core';
 
 describe('getObjectUrlFromFileState()', () => {
   it('should return an objectUrl if there is available preview in the state', async () => {

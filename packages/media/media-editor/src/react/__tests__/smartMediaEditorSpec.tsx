@@ -5,18 +5,18 @@ import {
   expectFunctionToHaveBeenCalledWith,
   expectToEqual,
   fakeContext,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import * as uuid from 'uuid';
-import { Shortcut } from '@atlaskit/media-ui';
-import ModalDialog from '@atlaskit/modal-dialog';
-import Spinner from '@atlaskit/spinner';
+import { Shortcut } from '@findable/media-ui';
+import ModalDialog from '@findable/modal-dialog';
+import Spinner from '@findable/spinner';
 import {
   Context,
   FileState,
   UploadableFile,
   FileIdentifier,
-} from '@atlaskit/media-core';
-import { TouchedFiles, UploadableFileUpfrontIds } from '@atlaskit/media-store';
+} from '@findable/media-core';
+import { TouchedFiles, UploadableFileUpfrontIds } from '@findable/media-store';
 import {
   SmartMediaEditor,
   SmartMediaEditorProps,

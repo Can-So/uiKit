@@ -6,8 +6,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import InlineDialog from '@atlaskit/inline-dialog';
+import Button from '@findable/button';
+import InlineDialog from '@findable/inline-dialog';
 import IconForType from '../IconForType';
 import { Root, ButtonContents, Text, Title } from './styledInlineMessage';
 

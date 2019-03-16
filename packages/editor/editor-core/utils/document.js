@@ -1,5 +1,5 @@
 import { Node } from 'prosemirror-model';
-import { validator } from '@atlaskit/adf-utils';
+import { validator } from '@findable/adf-utils';
 import { analyticsService } from '../analytics';
 var FALSE_POSITIVE_MARKS = ['code', 'alignment', 'indentation'];
 /**

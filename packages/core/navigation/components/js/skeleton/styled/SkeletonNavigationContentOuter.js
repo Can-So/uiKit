@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var SkeletonNavigationContentOuter = styled.div.withConfig({
   displayName: "SkeletonNavigationContentOuter",
   componentId: "sc-196d4kq-0"

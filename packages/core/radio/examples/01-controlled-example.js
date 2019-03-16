@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Form, { Field } from '@atlaskit/form';
+import Form, { Field } from '@findable/form';
 import { RadioGroup } from '../src';
 import type { OptionsPropType } from '../src/types';
 

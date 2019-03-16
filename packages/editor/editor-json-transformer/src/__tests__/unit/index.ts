@@ -35,9 +35,9 @@ import {
   subsup,
   textColor,
   underline,
-} from '@atlaskit/editor-test-helpers';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { emoji as emojiData } from '@atlaskit/util-data-test';
+} from '@findable/editor-test-helpers';
+import { ProviderFactory } from '@findable/editor-common';
+import { emoji as emojiData } from '@findable/util-data-test';
 import { Node as PMNode } from 'prosemirror-model';
 
 import { JSONTransformer, JSONDocNode } from '../../index';

@@ -121,7 +121,7 @@ class FieldInner extends React.Component<InnerProps, State> {
     if (process.env.NODE_ENV !== 'production') {
       invariant(
         name,
-        '@atlaskit/form: Field components have a required name prop',
+        '@findable/form: Field components have a required name prop',
       );
     }
 

@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { borderRadius, colors, gridSize, math, themed } from '@atlaskit/theme';
+import { borderRadius, colors, gridSize, math, themed } from '@findable/theme';
 
 // dialog may not be smaller than 160px or larger than 600px
 const dialogWidth = ({ width }) => `${Math.min(Math.max(width, 160), 600)}px`;

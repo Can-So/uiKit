@@ -1,4 +1,4 @@
-import { AbstractResource, OnProviderChange, Provider, ServiceConfig } from '@atlaskit/util-service-support';
+import { AbstractResource, OnProviderChange, Provider, ServiceConfig } from '@findable/util-service-support';
 import { CategoryId } from '../components/picker/categories';
 import { EmojiDescription, EmojiId, EmojiResponse, EmojiSearchResult, EmojiUpload, OptionalEmojiDescription, OptionalUser, SearchOptions, ToneSelection, User } from '../types';
 import EmojiRepository from './EmojiRepository';

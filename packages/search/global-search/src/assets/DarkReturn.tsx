@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 export default () => (
   <svg

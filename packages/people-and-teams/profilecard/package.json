@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/profilecard",
+  "name": "@findable/profilecard",
   "version": "8.0.2",
   "config": {
     "access": "public"
@@ -8,21 +8,21 @@
   "module": "index.js",
   "atlaskit:src": "src/index.js",
   "scripts": {
-    "build:flow": "bolt workspaces exec --only \"@atlaskit/profilecard\" -- flow-copy-source -v -i '**/__tests__/**' src dist/esm/src",
-    "build:babel": "NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --parallel  --only \"@atlaskit/profilecard\" -- babel src -d dist/esm/src --root-mode upward",
+    "build:flow": "bolt workspaces exec --only \"@findable/profilecard\" -- flow-copy-source -v -i '**/__tests__/**' src dist/esm/src",
+    "build:babel": "NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --parallel  --only \"@findable/profilecard\" -- babel src -d dist/esm/src --root-mode upward",
     "build:for-i18n-push": "rm -rf ./dist && yarn build:flow && yarn build:babel",
     "i18n:push": "yarn build:for-i18n-push && i18n-tools push --resource profilecard ./dist/esm",
     "i18n:pull": "rm -rf ./src/i18n && i18n-tools pull --resource profilecard ."
   },
   "dependencies": {
-    "@atlaskit/avatar": "^15.0.1",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/layer": "^6.0.0",
-    "@atlaskit/lozenge": "^7.0.0",
-    "@atlaskit/spinner": "^10.0.1",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/util-shared-styles": "^2.10.3",
+    "@findable/avatar": "^15.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/layer": "^6.0.0",
+    "@findable/lozenge": "^7.0.0",
+    "@findable/spinner": "^10.0.1",
+    "@findable/theme": "^8.0.1",
+    "@findable/util-shared-styles": "^2.10.3",
     "babel-runtime": "^6.26.0",
     "date-fns": "^1.30.1",
     "es6-promise": "^4.0.5",
@@ -32,10 +32,10 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/dynamic-table": "^11.0.1",
-    "@atlaskit/i18n-tools": "^0.5.0",
-    "@atlaskit/util-data-test": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/dynamic-table": "^11.0.1",
+    "@findable/i18n-tools": "^0.5.0",
+    "@findable/util-data-test": "^11.0.0",
     "enzyme": "^3.7.0",
     "fetch-mock": "^6.5.2",
     "loader-utils": "^1.1.0",
@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "keywords": [
     "ui",

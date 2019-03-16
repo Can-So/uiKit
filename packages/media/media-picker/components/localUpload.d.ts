@@ -1,4 +1,4 @@
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { UploadService } from '../service/types';
 import { UploadEventPayloadMap } from '../domain/uploadEvent';
 import { UploadComponent } from './component';

@@ -15,7 +15,7 @@ export default function gridSizeUnitless(root, j) {
   // a different name, so we reassign that here.
 
 
-  var localName = addNamedImport(root, j, '@atlaskit/theme', 'gridSize', oldLocalName, sharedStylesImport);
+  var localName = addNamedImport(root, j, '@findable/theme', 'gridSize', oldLocalName, sharedStylesImport);
   root.find(j.Identifier, {
     name: oldLocalName
   }).filter(function (node) {
@@ -25,6 +25,6 @@ export default function gridSizeUnitless(root, j) {
   }).replaceWith(function () {
     return j.callExpression(j.identifier(localName), []);
   });
-  removeNamedImport(root, j, '@atlaskit/util-shared-styles', 'akGridSizeUnitless', gridSizeImportSpecifier);
+  removeNamedImport(root, j, '@findable/util-shared-styles', 'akGridSizeUnitless', gridSizeImportSpecifier);
   return root;
 }

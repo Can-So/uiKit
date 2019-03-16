@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import Portal from '@atlaskit/portal';
-import { layers } from '@atlaskit/theme';
+import Portal from '@findable/portal';
+import { layers } from '@findable/theme';
 import Flag from '../../..';
 import Container, { DismissButton } from '../../Flag/styledFlag';
 import FlagGroup from '../../FlagGroup';

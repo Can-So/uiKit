@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { colors, gridSize, math } from '@atlaskit/theme';
+import { colors, gridSize, math } from '@findable/theme';
 
 export type MetaItemProps = {
   href?: string;

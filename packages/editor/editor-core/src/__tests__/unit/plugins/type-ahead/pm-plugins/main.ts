@@ -6,7 +6,7 @@ import {
   insert,
   code_block,
   typeAheadQuery,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { createTypeAheadPlugin } from './_create-type-ahead-plugin';
 import { selectCurrentItem } from '../../../../../plugins/type-ahead/commands/select-item';
 import { pluginKey as typeAheadPluginKey } from '../../../../../plugins/type-ahead/pm-plugins/main';

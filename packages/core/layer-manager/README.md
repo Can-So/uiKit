@@ -5,7 +5,7 @@ The layer manager is used to render React DOM into a new context (aka "Portal").
 ## Installation
 
 ```sh
-yarn add @atlaskit/layer-manager
+yarn add @findable/layer-manager
 ```
 
 ## Usage

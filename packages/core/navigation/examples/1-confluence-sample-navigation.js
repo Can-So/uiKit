@@ -1,29 +1,29 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import AddonIcon from '@atlaskit/icon/glyph/addon';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import Button from '@atlaskit/button';
-import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right';
-import CalendarIcon from '@atlaskit/icon/glyph/calendar';
-import { ConfluenceIcon, ConfluenceWordmark, JiraIcon } from '@atlaskit/logo';
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-import DiscoverIcon from '@atlaskit/icon/glyph/discover';
-import EditorAlignLeftIcon from '@atlaskit/icon/glyph/editor/align-left';
-import EditorFeedbackIcon from '@atlaskit/icon/glyph/editor/feedback';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
+import AddIcon from '@findable/icon/glyph/add';
+import AddonIcon from '@findable/icon/glyph/addon';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
+import Button from '@findable/button';
+import ChevronRightIcon from '@findable/icon/glyph/chevron-right';
+import CalendarIcon from '@findable/icon/glyph/calendar';
+import { ConfluenceIcon, ConfluenceWordmark, JiraIcon } from '@findable/logo';
+import CrossCircleIcon from '@findable/icon/glyph/cross-circle';
+import DiscoverIcon from '@findable/icon/glyph/discover';
+import EditorAlignLeftIcon from '@findable/icon/glyph/editor/align-left';
+import EditorFeedbackIcon from '@findable/icon/glyph/editor/feedback';
+import FolderIcon from '@findable/icon/glyph/folder';
 import Lorem from 'react-lorem-component';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import PeopleIcon from '@atlaskit/icon/glyph/people';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import SettingsIcon from '@atlaskit/icon/glyph/settings';
-import Tooltip from '@atlaskit/tooltip';
-import TrayIcon from '@atlaskit/icon/glyph/tray';
-import WorldIcon from '@atlaskit/icon/glyph/world';
-import QuestionIcon from '@atlaskit/icon/glyph/question';
+import Page, { Grid, GridColumn } from '@findable/page';
+import PeopleIcon from '@findable/icon/glyph/people';
+import SearchIcon from '@findable/icon/glyph/search';
+import SettingsIcon from '@findable/icon/glyph/settings';
+import Tooltip from '@findable/tooltip';
+import TrayIcon from '@findable/icon/glyph/tray';
+import WorldIcon from '@findable/icon/glyph/world';
+import QuestionIcon from '@findable/icon/glyph/question';
 // $FlowFixMe: cannot resolve TS module
-import { AkSearch } from '@atlaskit/quick-search';
+import { AkSearch } from '@findable/quick-search';
 
 import { getProvided } from '../src/theme/util';
 import SecondaryActions from './utils/confluence-example/SecondaryActions';

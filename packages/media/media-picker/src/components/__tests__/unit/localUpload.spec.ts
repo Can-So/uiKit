@@ -1,5 +1,5 @@
 import { LocalUploadComponent } from '../../localUpload';
-import { Auth, ContextFactory } from '@atlaskit/media-core';
+import { Auth, ContextFactory } from '@findable/media-core';
 import { NewUploadServiceImpl } from '../../../service/newUploadServiceImpl';
 import { MediaFile } from '../../../domain/file';
 import { SCALE_FACTOR_DEFAULT } from '../../../util/getPreviewFromImage';

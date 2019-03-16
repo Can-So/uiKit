@@ -1,5 +1,5 @@
-import { AnalyticsEventPayload, CreateAndFireEventFunction, CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import { EventType } from '@atlaskit/analytics-gas-types';
+import { AnalyticsEventPayload, CreateAndFireEventFunction, CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
+import { EventType } from '@findable/analytics-gas-types';
 import { ReactionSummary, ReactionSource } from '../types';
 export declare type PreviousState = 'new' | 'existingNotReacted' | 'existingReacted';
 export declare const createAndFireEventInElementsChannel: CreateAndFireEventFunction;

@@ -1,7 +1,7 @@
 import { findTable } from 'prosemirror-utils';
 import { TextSelection, Selection } from 'prosemirror-state';
 import { TableMap, cellAround } from 'prosemirror-tables';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import { isElementInTableCell, setNodeSelection, isLastItemMediaGroup, closestElement, } from '../../utils/';
 import { isInsertColumnButton, isInsertRowButton, getIndex } from './utils';
 import { setEditorFocus, showInsertColumnButton, showInsertRowButton, handleShiftSelection, hideInsertColumnOrRowButton, } from './actions';

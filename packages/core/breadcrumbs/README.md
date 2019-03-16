@@ -5,7 +5,7 @@ Breadcrumbs help users visualize their current location in relation to the rest 
 ## Installation
 
 ```sh
-yarn add @atlaskit/breadcrumbs
+yarn add @findable/breadcrumbs
 ```
 
 ## Usage

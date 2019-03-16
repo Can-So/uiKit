@@ -1,4 +1,4 @@
-import { Rectangle, Vector2 } from '@atlaskit/media-ui';
+import { Rectangle, Vector2 } from '@findable/media-ui';
 import {
   constrainPos,
   constrainScale,

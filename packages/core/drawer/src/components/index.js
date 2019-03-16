@@ -10,8 +10,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   type WithAnalyticsEventsProps,
-} from '@atlaskit/analytics-next';
-import Blanket from '@atlaskit/blanket';
+} from '@findable/analytics-next';
+import Blanket from '@findable/blanket';
 import {
   name as packageName,
   version as packageVersion,

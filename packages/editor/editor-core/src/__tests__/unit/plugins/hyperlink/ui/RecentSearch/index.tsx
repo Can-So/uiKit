@@ -3,7 +3,7 @@ import * as React from 'react';
 import RecentSearch from '../../../../../../plugins/hyperlink/ui/RecentSearch/LinkAddToolbar';
 import RecentItem from '../../../../../../plugins/hyperlink/ui/RecentSearch/RecentItem';
 import { MockActivityResource } from '../../utils';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { mountWithIntl } from '@findable/editor-test-helpers';
 
 const timeout = () => new Promise(resolve => window.setTimeout(resolve, 1));
 
@@ -15,7 +15,7 @@ function pressReturnInputField(recentSearch: ReactWrapper<any, any>) {
   recentSearch.find('input').simulate('keydown', { keyCode: 13 });
 }
 
-describe('@atlaskit/editor-core/ui/RecentSearch', () => {
+describe('@findable/editor-core/ui/RecentSearch', () => {
   it('should render a list of recent activity items', async () => {
     const wrapper = mountWithIntl(
       <RecentSearch provider={Promise.resolve(new MockActivityResource())} />,

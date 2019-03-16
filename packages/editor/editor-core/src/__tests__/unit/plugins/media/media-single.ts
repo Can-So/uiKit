@@ -4,7 +4,7 @@ import {
   mediaSingle,
   media,
   createEditorFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   insertMediaSingleNode,

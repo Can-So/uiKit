@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 import { getHeight, paddingUnitless, transition } from './constants';
 
 const backgroundColor = themed({ light: colors.N0, dark: colors.DN600 });

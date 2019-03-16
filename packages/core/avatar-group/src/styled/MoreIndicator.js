@@ -1,12 +1,12 @@
 // @flow
 
 import styled from 'styled-components';
-import { colors, themed, withTheme } from '@atlaskit/theme';
+import { colors, themed, withTheme } from '@findable/theme';
 import {
   getBorderRadius,
   getInnerStyles,
   BORDER_WIDTH,
-} from '@atlaskit/avatar';
+} from '@findable/avatar';
 
 const EXCESS_INDICATOR_FONT_SIZE: {
   small: number,

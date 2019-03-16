@@ -1,6 +1,6 @@
 // @flow
 
-import GlobalTheme, { type ThemeProp } from '@atlaskit/theme';
+import GlobalTheme, { type ThemeProp } from '@findable/theme';
 import React, {
   cloneElement,
   Component,

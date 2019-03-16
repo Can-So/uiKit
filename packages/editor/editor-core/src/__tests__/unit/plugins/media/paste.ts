@@ -9,7 +9,7 @@ import {
   tr,
   table,
   td,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import { temporaryMedia } from './_utils';
 import { transformSliceForMedia } from '../../../../plugins/media/utils/media-single';

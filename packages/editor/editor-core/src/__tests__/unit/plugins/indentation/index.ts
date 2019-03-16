@@ -6,7 +6,7 @@ import {
   blockquote,
   indentation,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import * as indentationCommands from '../../../../plugins/indentation/commands';
 

@@ -5,14 +5,14 @@ import {
   mediaPickerAuthProvider,
   defaultCollectionName,
   defaultMediaPickerCollectionName,
-} from '@atlaskit/media-test-helpers';
-import Button from '@atlaskit/button';
-import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
+} from '@findable/media-test-helpers';
+import Button from '@findable/button';
+import DropdownMenu, { DropdownItem } from '@findable/dropdown-menu';
 import { MediaPicker, Browser, UploadParams, BrowserConfig } from '../src';
 import { PopupHeader, PopupContainer } from '../example-helpers/styled';
 import { UploadPreviews } from '../example-helpers/upload-previews';
 import { AuthEnvironment } from '../example-helpers/types';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 
 export interface BrowserWrapperState {
   collectionName: string;

@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { codeFontFamily, colors, fontSize, themed } from '@atlaskit/theme';
+import { codeFontFamily, colors, fontSize, themed } from '@findable/theme';
 
 const getPlaceholderColor = ({ disabled }) => {
   if (disabled) {

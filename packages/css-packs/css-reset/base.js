@@ -10,6 +10,6 @@ function _templateObject() {
   return data;
 }
 
-import { colors, typography, gridSize, fontFamily, codeFontFamily } from '@atlaskit/theme';
+import { colors, typography, gridSize, fontFamily, codeFontFamily } from '@findable/theme';
 import evaluateInner from './utils/evaluate-inner';
 export default evaluateInner(_templateObject(), colors.N800, fontFamily, gridSize() * 1.5, colors.B400, colors.B300, colors.B500, colors.B100, typography.h800(), typography.h700(), typography.h600(), typography.h500(), typography.h400(), typography.h300(), gridSize() * 5, gridSize() * 5, gridSize() / 2, gridSize() / 2, gridSize() * 5, gridSize() * 5, typography.h100(), codeFontFamily);

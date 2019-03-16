@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import LoadingEmojiComponent from '../common/LoadingEmojiComponent';
-import { withAnalytics } from '@atlaskit/analytics';
+import { withAnalytics } from '@findable/analytics';
 var emojiUploadModuleLoader = function () {
     return import(/* webpackChunkName:"@atlaskit-internal_emojiUploadComponent" */ './EmojiUploadComponent');
 };

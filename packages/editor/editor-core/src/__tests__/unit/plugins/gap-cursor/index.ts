@@ -10,7 +10,7 @@ import {
   tdCursor,
   sendKeyToPm,
   h1,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import { setTextSelection } from '../../../../index';
 import { setGapCursorSelection } from '../../../../utils';

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { sendEvent } from '../analytics-web-client-wrapper';
 import { FabricChannel } from '../types';
 import processEvent from './process-event';

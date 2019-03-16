@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { WithProviders } from '@atlaskit/editor-common';
+import { WithProviders } from '@findable/editor-common';
 import { MediaCard } from '../../ui/MediaCard';
 var Media = /** @class */ (function (_super) {
     tslib_1.__extends(Media, _super);

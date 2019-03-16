@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView, NodeView } from 'prosemirror-view';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
-import { PanelType } from '@atlaskit/adf-schema';
+import { PanelType } from '@findable/adf-schema';
 export interface Props {
     children?: React.ReactNode;
     view: EditorView;

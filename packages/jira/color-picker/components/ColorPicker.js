@@ -1,11 +1,11 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
-import { PopupSelect } from '@atlaskit/select';
+import { PopupSelect } from '@findable/select';
 import Trigger from './Trigger';
 import * as components from './components';
 import { name as packageName, version as packageVersion, } from '../version.json';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent, } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent, } from '@findable/analytics-next';
 import { ColorCardWrapper } from '../styled/ColorPicker';
 var defaultPopperProps = {
     positionFixed: true,

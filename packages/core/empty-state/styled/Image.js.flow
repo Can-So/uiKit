@@ -1,7 +1,7 @@
 // @flow
 
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 const Image = styled.img`
   max-width: ${props => props.maxWidth}px;

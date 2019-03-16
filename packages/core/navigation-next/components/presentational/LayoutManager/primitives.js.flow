@@ -1,7 +1,7 @@
 // @flow
 
 import React, { type ElementRef } from 'react';
-import { layers } from '@atlaskit/theme';
+import { layers } from '@findable/theme';
 
 export const LayoutContainer = ({ topOffset, ...props }: *) => {
   return (

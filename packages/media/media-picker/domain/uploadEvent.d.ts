@@ -1,4 +1,4 @@
-import { MediaFile as MediaStoreMediaFile } from '@atlaskit/media-store';
+import { MediaFile as MediaStoreMediaFile } from '@findable/media-store';
 import { MediaProgress } from './progress';
 import { MediaError } from './error';
 import { Preview, isImagePreview } from './preview';

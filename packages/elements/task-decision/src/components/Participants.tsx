@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import AvatarGroupType from '@atlaskit/avatar-group';
+import AvatarGroupType from '@findable/avatar-group';
 
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import * as Loadable from 'react-loadable';
 
 export const AvatarGroupLoadable = Loadable({
   loader: () =>
     import(/* webpackChunkName:"@atlaskit-internal-task-decision-avatargroup" */
-    '@atlaskit/avatar-group').then(module => module.default),
+    '@findable/avatar-group').then(module => module.default),
   loading: () => null,
 }) as typeof AvatarGroupType;
 

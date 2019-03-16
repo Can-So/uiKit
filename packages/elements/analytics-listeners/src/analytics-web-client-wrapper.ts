@@ -4,7 +4,7 @@ import {
   GasScreenEventPayload,
   GasPureScreenEventPayload,
   GasPurePayload,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 import Logger from './helpers/logger';
 
 const isPromise = (c: any): c is Promise<AnalyticsWebClient> => {

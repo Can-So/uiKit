@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { defineMessages } from 'react-intl';
-import OpenIcon from '@atlaskit/icon/glyph/editor/open';
-import UnlinkIcon from '@atlaskit/icon/glyph/editor/unlink';
+import OpenIcon from '@findable/icon/glyph/editor/open';
+import UnlinkIcon from '@findable/icon/glyph/editor/unlink';
 import { stateKey } from './pm-plugins/main';
 import { removeLink, setLinkText, setLinkHref, insertLink, hideLinkToolbar, } from './commands';
 import { normalizeUrl } from './utils';

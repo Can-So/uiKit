@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { fontSizeSmall } from '@atlaskit/theme';
+import { fontSizeSmall } from '@findable/theme';
 import { getThemeStyle, gridSize, themeNamespace } from '../util/theme';
 
 var getPadding = function getPadding(_ref) {

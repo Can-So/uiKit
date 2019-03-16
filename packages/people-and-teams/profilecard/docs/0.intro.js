@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, code, Props } from '@atlaskit/docs';
+import { md, Example, code, Props } from '@findable/docs';
 
 export default md`
   A React component to display a card with user information.
@@ -10,7 +10,7 @@ export default md`
   ### Using the AkProfilecardClient
 
   ${code`
-import AkProfilecardResourced, { AkProfileClient } from '@atlaskit/profilecard';
+import AkProfilecardResourced, { AkProfileClient } from '@findable/profilecard';
 
 const profileClient = new AkProfilecardClient({
   url: 'https://directory-graphql-service/endpoint' // GraphQL service endpoint
@@ -38,7 +38,7 @@ const analytics = (eventname, attributes) => {
   ### Using the LRU cache of the \`AkProfilecardClient\`
 
   ${code`
-import { AkProfileClient } from '@atlaskit/profilecard';
+import { AkProfileClient } from '@findable/profilecard';
 
 const profileClient = new AkProfilecardClient({
   url: 'https://directory-graphql-service/endpoint', // GraphQL service endpoint
@@ -50,7 +50,7 @@ const profileClient = new AkProfilecardClient({
   ### Customising / Extending the \`AkProfilecardClient\`
 
   ${code`
-import { AkProfileClient } from '@atlaskit/profilecard';
+import { AkProfileClient } from '@findable/profilecard';
 
 const getProfileDataFromSomewhereElse = (url, cloudId, userId) => {
   const fetchUrl = 'https://someservice.com/fetchuser?userId=' + userId;
@@ -102,7 +102,7 @@ const profileClient = new CustomProfileClient({
 
   ${(
     <Example
-      packageName="@atlaskit/profilecard"
+      packageName="@findable/profilecard"
       Component={require('../examples/01-profilecard').default}
       title="Profilecard"
       source={require('!!raw-loader!../examples/01-profilecard')}
@@ -111,7 +111,7 @@ const profileClient = new CustomProfileClient({
 
   ${(
     <Example
-      packageName="@atlaskit/profilecard"
+      packageName="@findable/profilecard"
       Component={require('../examples/02-profilecard-resourced').default}
       title="ProfilecardResourced"
       source={require('!!raw-loader!../examples/02-profilecard-resourced')}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ResultData } from '@atlaskit/quick-search';
+import { ResultData } from '@findable/quick-search';
 import AdvancedSearchGroup, {
   Props,
 } from '../../../components/confluence/AdvancedSearchGroup';

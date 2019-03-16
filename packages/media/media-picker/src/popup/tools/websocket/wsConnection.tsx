@@ -1,4 +1,4 @@
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 import { Ws, ConnectionLostHandler, WebsocketDataReceivedHandler } from './ws';
 import { WsMessageData } from './wsMessageData';
 

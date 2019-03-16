@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Popup, timestampToUTCDate, timestampToIsoFormat, akEditorFloatingDialogZIndex, } from '@atlaskit/editor-common';
-import Calendar from '@atlaskit/calendar';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { Popup, timestampToUTCDate, timestampToIsoFormat, akEditorFloatingDialogZIndex, } from '@findable/editor-common';
+import Calendar from '@findable/calendar';
+import { colors, borderRadius } from '@findable/theme';
 import withOuterListeners from '../../../../ui/with-outer-listeners';
 var PopupWithListeners = withOuterListeners(Popup);
 var calendarStyle = {

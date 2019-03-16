@@ -1,4 +1,4 @@
-import { MentionUserType as UserType } from '@atlaskit/adf-schema';
+import { MentionUserType as UserType } from '@findable/adf-schema';
 import { PureComponent } from 'react';
 import { MentionEventHandlers } from '../EventHandlers';
 import { ProfilecardProvider } from './types';

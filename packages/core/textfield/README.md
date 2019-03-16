@@ -5,7 +5,7 @@ Provides a standard way to create a text-based form input.
 ## Installation
 
 ```sh
-yarn add @atlaskit/textfield
+yarn add @findable/textfield
 ```
 
 ## Usage

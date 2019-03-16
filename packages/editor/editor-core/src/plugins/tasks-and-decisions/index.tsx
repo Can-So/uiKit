@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import EditorTaskIcon from '@atlaskit/icon/glyph/editor/task';
-import EditorDecisionIcon from '@atlaskit/icon/glyph/editor/decision';
+import EditorTaskIcon from '@findable/icon/glyph/editor/task';
+import EditorDecisionIcon from '@findable/icon/glyph/editor/decision';
 import {
   decisionItem,
   decisionList,
   taskItem,
   taskList,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorPlugin } from '../../types';
 import { messages as insertBlockMessages } from '../insert-block/ui/ToolbarInsertBlock';

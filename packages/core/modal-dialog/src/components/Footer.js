@@ -1,6 +1,6 @@
 // @flow
 import React, { createElement, Component, type ElementType } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 import type { AppearanceType } from '../types';
 import { Actions, ActionItem, Footer } from '../styled/Content';

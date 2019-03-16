@@ -5,9 +5,9 @@ import {
   EditorContext,
   EditorProps,
   WithEditorActions,
-} from '@atlaskit/editor-core';
-import { ReactRenderer, RendererProps } from '@atlaskit/renderer';
-import { ProviderFactory } from '@atlaskit/editor-common';
+} from '@findable/editor-core';
+import { ReactRenderer, RendererProps } from '@findable/renderer';
+import { ProviderFactory } from '@findable/editor-common';
 import { Props as BaseProps } from '../context/embedded-document';
 import { Mode } from '../context/context';
 import { Document as DocumentModel } from '../model';

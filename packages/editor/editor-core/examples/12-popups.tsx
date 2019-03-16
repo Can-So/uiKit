@@ -3,11 +3,11 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import styled from 'styled-components';
-import { mention, emoji } from '@atlaskit/util-data-test';
+import { mention, emoji } from '@findable/util-data-test';
 import { Editor } from '../src';
 import { Content } from '../example-helpers/styles';
 import imageUploadHandler from '../example-helpers/imageUpload';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 const Boundary = styled.div`
   border: 2px solid ${colors.N40};

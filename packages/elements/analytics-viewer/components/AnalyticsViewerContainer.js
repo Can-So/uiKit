@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 import * as React from 'react';
 import styled from 'styled-components';
 import { AnalyticsViewer } from './AnalyticsViewer';

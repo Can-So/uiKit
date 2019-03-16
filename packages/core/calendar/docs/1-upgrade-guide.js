@@ -1,6 +1,6 @@
 // @flow
 
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 export default md`
   ## 3.x - 4.x
@@ -12,8 +12,8 @@ export default md`
   Instead of using the stateless component, you now just use the stateful component and supply the props you want to be stateless.
 
   ${code`
-    - import { CalendarStateless } from '@atlaskit/calendar';
-    + import { Calendar } from '@atlaskit/calendar';
+    - import { CalendarStateless } from '@findable/calendar';
+    + import { Calendar } from '@findable/calendar';
 
     - <CalendarStateless month={1} />
     + <Calendar month={1} />

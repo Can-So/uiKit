@@ -1,7 +1,7 @@
 import {
   CreateUIAnalyticsEventSignature,
   UIAnalyticsEventInterface,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 import {
   name as packageName,
   version as packageVersion,

@@ -4,7 +4,7 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstruct
 import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
-import GlobalTheme from '@atlaskit/theme';
+import GlobalTheme from '@findable/theme';
 import React, { Component } from 'react';
 import { Container } from './Container';
 import { Format } from './Format';

@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Label } from '@atlaskit/field-base';
-import FieldText from '@atlaskit/field-text';
+import { Label } from '@findable/field-base';
+import FieldText from '@findable/field-text';
 import { DatePicker, TimePicker, DateTimePicker } from '../src';
 
 type State = {

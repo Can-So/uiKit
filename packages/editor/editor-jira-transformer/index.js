@@ -3,7 +3,7 @@ import { Fragment, Node as PMNode } from 'prosemirror-model';
 import parseHtml from './parse-html';
 import fixDoc from './fix-doc';
 import { bfsOrder, convert, ensureBlocks } from './utils';
-import { isSchemaWithLists, isSchemaWithMentions, isSchemaWithEmojis, isSchemaWithCodeBlock, isSchemaWithBlockQuotes, isSchemaWithMedia, isSchemaWithTables, } from '@atlaskit/adf-schema';
+import { isSchemaWithLists, isSchemaWithMentions, isSchemaWithEmojis, isSchemaWithCodeBlock, isSchemaWithBlockQuotes, isSchemaWithMedia, isSchemaWithTables, } from '@findable/adf-schema';
 var JIRATransformer = /** @class */ (function () {
     function JIRATransformer(schema, customEncoders, mediaContextInfo) {
         this.schema = schema;

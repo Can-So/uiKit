@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { editorFontSize, paragraphSharedStyles, indentationSharedStyles, blockMarksSharedStyles, } from '@atlaskit/editor-common';
+import { editorFontSize, paragraphSharedStyles, indentationSharedStyles, blockMarksSharedStyles, } from '@findable/editor-common';
 import { telepointerStyle } from '../../plugins/collab-edit/styles';
 import { gapCursorStyles } from '../../plugins/gap-cursor/styles';
 import { tableStyles } from '../../plugins/table/ui/styles';

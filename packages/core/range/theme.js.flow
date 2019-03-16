@@ -1,6 +1,6 @@
 // @flow
 
-import { colors, createTheme } from '@atlaskit/theme';
+import { colors, createTheme } from '@findable/theme';
 
 type ThemeTokensThumb = {
   background: string,

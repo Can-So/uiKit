@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/feature-flag-client",
+  "name": "@findable/feature-flag-client",
   "version": "2.1.0",
   "description": "A client to take care of feature flag evaluation and tracking of exposure events",
   "atlaskit:src": "src/index.ts",
@@ -15,12 +15,12 @@
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
+    "@findable/docs": "^7.0.1",
     "enzyme": "^3.7.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",
     "react-dom": "^16.4.2"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+  "repository": "https://github.com/fnamazing/uiKit"
 }

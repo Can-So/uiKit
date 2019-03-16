@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { PureComponent, ReactInstance } from 'react';
-import { MentionUserType as UserType } from '@atlaskit/adf-schema';
-import { MentionProvider, ResourcedMention } from '@atlaskit/mention';
+import { MentionUserType as UserType } from '@findable/adf-schema';
+import { MentionProvider, ResourcedMention } from '@findable/mention';
 
 import { ProfilecardProvider } from './types';
 import ProfileCard, {
   AkProfilecardTriggerActions,
-} from '@atlaskit/profilecard';
+} from '@findable/profilecard';
 import { MentionEventHandler } from '../EventHandlers';
 import Popup from '../Popup';
 import withOuterListeners from '../with-outer-listeners';

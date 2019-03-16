@@ -2,15 +2,15 @@ import {
   createEditorFactory,
   insertText,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
-import { doc, p } from '@atlaskit/editor-test-helpers';
-import { MockMentionResource } from '@atlaskit/util-data-test';
+} from '@findable/editor-test-helpers';
+import { doc, p } from '@findable/editor-test-helpers';
+import { MockMentionResource } from '@findable/util-data-test';
 import { selectCurrentItem } from '../../../../plugins/type-ahead/commands/select-item';
 import { dismissCommand } from '../../../../plugins/type-ahead/commands/dismiss';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { MentionProvider, MentionDescription } from '@atlaskit/mention';
+import { ProviderFactory } from '@findable/editor-common';
+import { MentionProvider, MentionDescription } from '@findable/mention';
 import { EditorView } from 'prosemirror-view';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 describe('mentionTypeahead', () => {
   const createEditor = createEditorFactory();
@@ -158,7 +158,7 @@ describe('mentionTypeahead', () => {
             actionSubject: expectedActionSubject,
             eventType: 'ui',
             attributes: expect.objectContaining({
-              packageName: '@atlaskit/editor-core',
+              packageName: '@findable/editor-core',
               packageVersion: expect.any(String),
               sessionId: expect.stringMatching(sessionIdRegex),
               spaceInQuery: false,
@@ -194,7 +194,7 @@ describe('mentionTypeahead', () => {
               actionSubject: expectedActionSubject,
               eventType: 'ui',
               attributes: expect.objectContaining({
-                packageName: '@atlaskit/editor-core',
+                packageName: '@findable/editor-core',
                 packageVersion: expect.any(String),
                 duration: expect.any(Number),
                 position: 0,
@@ -222,7 +222,7 @@ describe('mentionTypeahead', () => {
             actionSubject: expectedActionSubject,
             eventType: 'operational',
             attributes: expect.objectContaining({
-              packageName: '@atlaskit/editor-core',
+              packageName: '@findable/editor-core',
               packageVersion: expect.any(String),
               duration: expect.any(Number),
               queryLength: 0,
@@ -246,7 +246,7 @@ describe('mentionTypeahead', () => {
             actionSubject: expectedActionSubject,
             eventType: 'operational',
             attributes: expect.objectContaining({
-              packageName: '@atlaskit/editor-core',
+              packageName: '@findable/editor-core',
               packageVersion: expect.any(String),
               duration: expect.any(Number),
               queryLength: 3,

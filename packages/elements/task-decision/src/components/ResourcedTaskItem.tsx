@@ -9,7 +9,7 @@ import {
   User,
   DecisionState,
 } from '../types';
-import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { FabricElementsAnalyticsContext } from '@findable/analytics-namespaced-context';
 
 export interface Props {
   taskId: string;

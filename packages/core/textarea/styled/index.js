@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled, { css } from 'styled-components';
-import { codeFontFamily, fontSize, gridSize } from '@atlaskit/theme';
+import { codeFontFamily, fontSize, gridSize } from '@findable/theme';
 var grid = gridSize();
 var borderRadius = '3px';
 var borderWidth = 2;

@@ -10,7 +10,7 @@ import {
   RequestServiceOptions,
   ServiceConfig,
   utils,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 
 export interface RecentItemsResponse {
   data: RecentItem[];

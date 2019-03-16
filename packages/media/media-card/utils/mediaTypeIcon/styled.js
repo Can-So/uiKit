@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 var typeToColorMap = {
     image: colors.Y200,
     audio: colors.P200,

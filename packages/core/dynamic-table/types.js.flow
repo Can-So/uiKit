@@ -1,6 +1,6 @@
 // @flow
 import { type Node, type Element } from 'react';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { UIAnalyticsEvent } from '@findable/analytics-next';
 
 export type RowCellType = {
   key?: string | number,

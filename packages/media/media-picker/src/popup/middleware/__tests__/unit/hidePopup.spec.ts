@@ -2,7 +2,7 @@ import hidePopupMiddleware from '../../hidePopup';
 import {
   mockPopupUploadEventEmitter,
   mockStore,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { hidePopup, HIDE_POPUP } from '../../../actions/hidePopup';
 
 describe('hidePopupMiddleware', () => {

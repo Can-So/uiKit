@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Camera, Vector2 } from '@atlaskit/media-ui';
+import { Camera, Vector2 } from '@findable/media-ui';
 import { ZoomLevel } from '../../domain/zoomLevel';
 import { Outcome } from '../../domain';
 export declare function zoomLevelAfterResize(newCamera: Camera, oldCamera: Camera, oldZoomLevel: ZoomLevel): ZoomLevel;

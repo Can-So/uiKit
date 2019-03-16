@@ -11,7 +11,7 @@ var basePayload = {
 };
 var contextPayload = {
     componentName: 'media-viewer',
-    packageName: '@atlaskit/media-viewer',
+    packageName: '@findable/media-viewer',
     packageVersion: packageVersion,
 };
 var commonFileProperties = {

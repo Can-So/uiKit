@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 import { GLOBAL_NAV_WIDTH } from '../../../common/constants';
 var gridSize = gridSizeFn();
 var baseStyles = {

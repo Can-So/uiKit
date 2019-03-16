@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import FileIcon from '@atlaskit/icon-file-type/glyph/generic/16';
+import FileIcon from '@findable/icon-file-type/glyph/generic/16';
 import { extractInlineViewPropsFromDocument } from './extractPropsFromDocument';
 export var buildIcon = function (json) {
     var name = json.name;

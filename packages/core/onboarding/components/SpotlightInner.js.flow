@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { layers } from '@atlaskit/theme';
-import Portal from '@atlaskit/portal';
+import { layers } from '@findable/theme';
+import Portal from '@findable/portal';
 import ScrollLock from 'react-scrolllock';
 import NodeResovler from 'react-node-resolver';
 import scrollIntoView from 'scroll-into-view-if-needed';

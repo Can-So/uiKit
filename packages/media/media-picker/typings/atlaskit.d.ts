@@ -1,4 +1,4 @@
-declare module '@atlaskit/webdriver-runner/utils/example' {
+declare module '@findable/webdriver-runner/utils/example' {
   function getExampleUrl(
     group: string,
     packageName: string,
@@ -6,7 +6,7 @@ declare module '@atlaskit/webdriver-runner/utils/example' {
   ): string;
 }
 
-declare module '@atlaskit/webdriver-runner/runner' {
+declare module '@findable/webdriver-runner/runner' {
   type Browser = 'Chrome' | 'chrome' | 'edge' | 'ie' | 'safari' | 'firefox';
 
   type BrowserTestCaseOptions = {

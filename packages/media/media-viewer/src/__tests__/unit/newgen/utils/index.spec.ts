@@ -1,4 +1,4 @@
-import { Identifier } from '@atlaskit/media-core';
+import { Identifier } from '@findable/media-core';
 import {
   constructAuthTokenUrl,
   getSelectedIndex,

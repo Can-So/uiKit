@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { bodiedExtensionData } from './mock-extension-data';
-import DevIcon from '@atlaskit/icon/glyph/editor/code';
+import DevIcon from '@findable/icon/glyph/editor/code';
 
 interface EditorActions {
   replaceDocument: (input: any) => void;

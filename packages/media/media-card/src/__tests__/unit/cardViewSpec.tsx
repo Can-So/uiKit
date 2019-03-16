@@ -9,14 +9,14 @@ jest.mock('../../../src/utils/shouldDisplayImageThumbnail', () => ({
 import * as React from 'react';
 
 import { shallow, mount } from 'enzyme';
-import { FileDetails } from '@atlaskit/media-core';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { FileDetails } from '@findable/media-core';
+import { AnalyticsListener } from '@findable/analytics-next';
 
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import {
   mountWithIntlContext,
   expectToEqual,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import {
   CardView,
   CardViewBase,

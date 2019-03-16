@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { AvatarItem } from '@atlaskit/avatar';
+import { AvatarItem } from '@findable/avatar';
 import * as React from 'react';
 import styled from 'styled-components';
 import { SizeableAvatar } from './SizeableAvatar';

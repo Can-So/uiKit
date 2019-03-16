@@ -1,4 +1,4 @@
-import { borderRadius, gridSize, colors } from '@atlaskit/theme';
+import { borderRadius, gridSize, colors } from '@findable/theme';
 
 import { createTag, serializeStyle } from '../util';
 import { NodeSerializerOpts } from '../interfaces';

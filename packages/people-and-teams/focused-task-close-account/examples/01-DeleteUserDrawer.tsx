@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { Checkbox } from '@atlaskit/checkbox';
+import Button from '@findable/button';
+import { Checkbox } from '@findable/checkbox';
 
 import accessibleSites from '../src/mocks/accessibleSites';
 import { catherineHirons } from '../src/mocks/users';

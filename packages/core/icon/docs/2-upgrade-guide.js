@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import { md, code } from '@atlaskit/docs';
+import { md, code } from '@findable/docs';
 
-import { DynamicTableStateless } from '@atlaskit/dynamic-table';
+import { DynamicTableStateless } from '@findable/dynamic-table';
 
 const Table = ({ changedValues }: { changedValues: { [string]: string } }) => (
   <DynamicTableStateless
@@ -55,37 +55,37 @@ const SizeTable = () => (
 );
 
 const logoLocation = {
-  '@atlaskit/icon/glyph/atlassian':
-    '@atlaskit/logo/dist/esm/AtlassianLogo/Icon',
-  '@atlaskit/icon/glyph/bitbucket':
-    '@atlaskit/logo/dist/esm/BitbucketLogo/Icon',
-  '@atlaskit/icon/glyph/confluence':
-    '@atlaskit/logo/dist/esm/ConfluenceLogo/Icon',
-  '@atlaskit/icon/glyph/hipchat': '@atlaskit/logo/dist/esm/HipchatLogo/Icon',
-  '@atlaskit/icon/glyph/jira-core': '@atlaskit/logo/dist/esm/JiraCoreLogo/Icon',
-  '@atlaskit/icon/glyph/jira': '@atlaskit/logo/dist/esm/JiraLogo/Icon',
-  '@atlaskit/icon/glyph/jira-service-desk':
-    '@atlaskit/logo/dist/esm/JiraServiceDeskLogo/Icon',
-  '@atlaskit/icon/glyph/jira-software':
-    '@atlaskit/logo/dist/esm/JiraSoftwareLogo/Icon',
-  '@atlaskit/icon/glyph/statuspage':
-    '@atlaskit/logo/dist/esm/StatuspageLogo/Icon',
-  '@atlaskit/icon/glyph/stride': '@atlaskit/logo/dist/esm/StrideLogo/Icon',
+  '@findable/icon/glyph/atlassian':
+    '@findable/logo/dist/esm/AtlassianLogo/Icon',
+  '@findable/icon/glyph/bitbucket':
+    '@findable/logo/dist/esm/BitbucketLogo/Icon',
+  '@findable/icon/glyph/confluence':
+    '@findable/logo/dist/esm/ConfluenceLogo/Icon',
+  '@findable/icon/glyph/hipchat': '@findable/logo/dist/esm/HipchatLogo/Icon',
+  '@findable/icon/glyph/jira-core': '@findable/logo/dist/esm/JiraCoreLogo/Icon',
+  '@findable/icon/glyph/jira': '@findable/logo/dist/esm/JiraLogo/Icon',
+  '@findable/icon/glyph/jira-service-desk':
+    '@findable/logo/dist/esm/JiraServiceDeskLogo/Icon',
+  '@findable/icon/glyph/jira-software':
+    '@findable/logo/dist/esm/JiraSoftwareLogo/Icon',
+  '@findable/icon/glyph/statuspage':
+    '@findable/logo/dist/esm/StatuspageLogo/Icon',
+  '@findable/icon/glyph/stride': '@findable/logo/dist/esm/StrideLogo/Icon',
 };
 
 const priorityIconLocation = {
-  '@atlaskit/icon/glyph/jira/blocker':
-    '@atlaskit/icon-priority/glyph/priotity-blocker',
-  '@atlaskit/icon/glyph/jira/critical':
-    '@atlaskit/icon-priority/glyph/priority-critical',
-  '@atlaskit/icon/glyph/jira/major':
-    '@atlaskit/icon-priority/glyph/priority-major',
-  '@atlaskit/icon/glyph/jira/medium':
-    '@atlaskit/icon-priority/glyph/priority-medium',
-  '@atlaskit/icon/glyph/jira/minor':
-    '@atlaskit/icon-priority/glyph/priority-minor',
-  '@atlaskit/icon/glyph/jira/trivial':
-    '@atlaskit/icon-priority/glyph/priority-trivial',
+  '@findable/icon/glyph/jira/blocker':
+    '@findable/icon-priority/glyph/priotity-blocker',
+  '@findable/icon/glyph/jira/critical':
+    '@findable/icon-priority/glyph/priority-critical',
+  '@findable/icon/glyph/jira/major':
+    '@findable/icon-priority/glyph/priority-major',
+  '@findable/icon/glyph/jira/medium':
+    '@findable/icon-priority/glyph/priority-medium',
+  '@findable/icon/glyph/jira/minor':
+    '@findable/icon-priority/glyph/priority-minor',
+  '@findable/icon/glyph/jira/trivial':
+    '@findable/icon-priority/glyph/priority-trivial',
 };
 
 export default md`
@@ -93,7 +93,7 @@ export default md`
 
 We have moved the priority icons to its own package.
 
-The following icons have been removed from \`@atlaskit/icons\`. They can be imported from \`@atlaskit/icon-priority\` going
+The following icons have been removed from \`@findable/icons\`. They can be imported from \`@findable/icon-priority\` going
 forward. The icons are:
 
 ${<Table changedValues={priorityIconLocation} />}
@@ -105,7 +105,7 @@ In Version 15, we removed the onClick props. Icons are not focusable elements, t
 We recommend to wrap them into a link or a button if you need to click on them.
 
 ${code`
-import BookIcon from '@atlaskit/icon/glyph/book';
+import BookIcon from '@findable/icon/glyph/book';
 <Button onClick={() => {}}>
   <BookIcon
     label="Book"
@@ -117,7 +117,7 @@ import BookIcon from '@atlaskit/icon/glyph/book';
 `}
 
 ${code`
-import EmojiIcon from '@atlaskit/icon/glyph/emoji';
+import EmojiIcon from '@findable/icon/glyph/emoji';
 <Link>
   <EmojiIcon
     label="Yay"
@@ -155,7 +155,7 @@ These icons are named incorrectly in atlaskit, so we're taking the opportunity o
 
 ${<h2 id="logo">Product Logo Icons</h2>}
 
-The following icons have been removed from \`@atlaskit/icons\`. They can be imported from \`@atlaskit/logo\` going
+The following icons have been removed from \`@findable/icons\`. They can be imported from \`@findable/logo\` going
 forward. The icons are:
 
 ${<Table changedValues={logoLocation} />}
@@ -198,21 +198,21 @@ ${<h2 id="object">Object Icons</h2>}
 
 Similarly, object icons use different svgs for different sizes, and so are incompatible
 with the architecture of the \`@altaskit/icon\` package. As such, they are
-being given their own package: \`@atlaskit/icon-object\`. These icons can be
+being given their own package: \`@findable/icon-object\`. These icons can be
 identified with the following pattern:
 
 ${(
   <Table
     changedValues={{
-      '@atlaskit/icon/glyph/object/16/objects-16-ICON_NAME':
-        '@atlaskit/icon-object/glyph/ICON_NAME/16',
-      '@atlaskit/icon/glyph/object/24/objects-24-ICON_NAME':
-        '@atlaskit/icon-object/glyph/ICON_NAME/24',
+      '@findable/icon/glyph/object/16/objects-16-ICON_NAME':
+        '@findable/icon-object/glyph/ICON_NAME/16',
+      '@findable/icon/glyph/object/24/objects-24-ICON_NAME':
+        '@findable/icon-object/glyph/ICON_NAME/24',
     }}
   />
 )}
 
-You will need to install the \`@atlaskit/icon-object\` package to use these.
+You will need to install the \`@findable/icon-object\` package to use these.
 
 Other notable differences for object icons are:
 - They do not accept a sizing prop - their size is fixed to the imported svg
@@ -223,15 +223,15 @@ ${<h2 id="file-type">File-type Icons</h2>}
 
 Similarly, file-type icons use different svgs for different sizes, and so are incompatible
 with the architecture of the \`@altaskit/icon\` package. As such, they are
-being given their own package: \`@atlaskit/icon-file-type\`. These icons are:
+being given their own package: \`@findable/icon-file-type\`. These icons are:
 
 ${(
   <Table
     changedValues={{
-      '@atlaskit/icon/glyph/file-types/16/file-types-16-{ICON_NAME}':
-        '@atlaskit/icon-file-type/glyph/{ICON_NAME}/16',
-      '@atlaskit/icon/glyph/file-types/24/file-types-24-{ICON_NAME}':
-        '@atlaskit/icon-file-type/glyph/{ICON_NAME}/24',
+      '@findable/icon/glyph/file-types/16/file-types-16-{ICON_NAME}':
+        '@findable/icon-file-type/glyph/{ICON_NAME}/16',
+      '@findable/icon/glyph/file-types/24/file-types-24-{ICON_NAME}':
+        '@findable/icon-file-type/glyph/{ICON_NAME}/24',
     }}
   />
 )}
@@ -256,7 +256,7 @@ different to what other components in the atlaskit repository need.
 
 As we have evolved our visual style, we have had more and more items that from a
 design-perspective are definitely icons, however have failed to meet the architectural
-guidelines of the \`@atlaskit/icons\` package. We have generally endeavoured to add
+guidelines of the \`@findable/icons\` package. We have generally endeavoured to add
 these in to the icons package, but we have enough that we needed a better solution. The
 biggest driver of this was icons that had separate svgs for different sizes.
 

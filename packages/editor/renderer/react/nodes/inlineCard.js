@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card } from '@atlaskit/smart-card';
+import { Card } from '@findable/smart-card';
 import { getEventHandler } from '../../utils';
 export default function InlineCard(props) {
     var url = props.url, data = props.data, eventHandlers = props.eventHandlers;

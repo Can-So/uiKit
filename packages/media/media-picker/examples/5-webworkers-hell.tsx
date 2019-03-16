@@ -4,8 +4,8 @@ import { Component } from 'react';
 import {
   mediaPickerAuthProvider,
   defaultMediaPickerCollectionName,
-} from '@atlaskit/media-test-helpers';
-import Button from '@atlaskit/button';
+} from '@findable/media-test-helpers';
+import Button from '@findable/button';
 import { MediaPicker, Browser, BrowserConfig } from '../src';
 import {
   PreviewsWrapper,
@@ -14,7 +14,7 @@ import {
   PreviewsTitle,
 } from '../example-helpers/styled';
 import { UploadPreview } from '../example-helpers/upload-preview';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 
 export interface BrowserWrapperState {
   previewsData: any[];

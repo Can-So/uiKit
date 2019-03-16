@@ -5,7 +5,7 @@ import {
   isValidEmail,
   OptionData,
   Value,
-} from '@atlaskit/user-picker';
+} from '@findable/user-picker';
 import memoizeOne from 'memoize-one';
 import {
   ConfigResponse,

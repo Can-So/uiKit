@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Node, Schema, } from 'prosemirror-model';
-import { paragraph, createSchema } from '@atlaskit/adf-schema';
+import { paragraph, createSchema } from '@findable/adf-schema';
 export { Node, Schema };
 export default createSchema({
     nodes: [

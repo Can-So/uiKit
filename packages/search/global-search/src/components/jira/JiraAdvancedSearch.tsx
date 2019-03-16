@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import styled from 'styled-components';
-import SearchIcon from '@atlaskit/icon/glyph/search';
+import SearchIcon from '@findable/icon/glyph/search';
 import DropdownMenu, {
   DropdownItemGroup,
   DropdownItem,
-} from '@atlaskit/dropdown-menu';
-import { CancelableEvent } from '@atlaskit/quick-search';
+} from '@findable/dropdown-menu';
+import { CancelableEvent } from '@findable/quick-search';
 import { messages } from '../../messages';
 import AdvancedSearchResult from '../AdvancedSearchResult';
 import { AnalyticsType } from '../../model/Result';

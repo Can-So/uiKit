@@ -1,5 +1,5 @@
-import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
-import { FieldTextStateless } from '@atlaskit/field-text';
+import { shallowWithIntl } from '@findable/editor-test-helpers';
+import { FieldTextStateless } from '@findable/field-text';
 import * as React from 'react';
 import { StatusPicker } from '../../..';
 import ColorPalette from '../../../components/internal/color-palette';

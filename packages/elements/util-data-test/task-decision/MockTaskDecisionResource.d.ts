@@ -1,4 +1,4 @@
-import { BaseItem, DecisionResponse, DecisionState, Handler, ItemResponse, ObjectKey, Query, RecentUpdateContext, RecentUpdatesId, TaskDecisionProvider, TaskResponse, TaskState, User } from '@atlaskit/task-decision';
+import { BaseItem, DecisionResponse, DecisionState, Handler, ItemResponse, ObjectKey, Query, RecentUpdateContext, RecentUpdatesId, TaskDecisionProvider, TaskResponse, TaskState, User } from '@findable/task-decision';
 export interface MockTaskDecisionResourceConfig {
     hasMore?: boolean;
     lag?: number;

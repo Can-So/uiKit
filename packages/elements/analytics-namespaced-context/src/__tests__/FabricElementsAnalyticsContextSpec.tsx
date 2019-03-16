@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { FabricChannel } from '@atlaskit/analytics-listeners';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { FabricChannel } from '@findable/analytics-listeners';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { createDummyComponentWithAnalytics } from '../../examples/helpers';
 import { FabricElementsAnalyticsContext } from '../FabricElementsAnalyticsContext';
 
@@ -43,7 +43,7 @@ describe('<FabricElementsAnalyticsContext />', () => {
           attributes: {
             componentName: 'foo',
             foo: 'bar',
-            packageName: '@atlaskit/foo',
+            packageName: '@findable/foo',
             packageVersion: '1.0.0',
           },
           eventType: 'ui',

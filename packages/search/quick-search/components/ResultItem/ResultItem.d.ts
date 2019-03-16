@@ -6,7 +6,7 @@ declare type Props = {
     href?: string;
     /** Target frame for item `href` link to be aimed at. */
     target?: string;
-    /** React element to appear to the left of the text. This should be an @atlaskit/icon component. */
+    /** React element to appear to the left of the text. This should be an @findable/icon component. */
     icon?: React.ReactNode;
     /** Makes the navigation item appear with reduced padding and font size. */
     isCompact?: boolean;

@@ -10,8 +10,8 @@ import _extends from "@babel/runtime/helpers/extends";
 import { css as _css } from "emotion";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React, { Component } from 'react';
-import { colors, layers, gridSize } from '@atlaskit/theme';
-import ArrowLeft from '@atlaskit/icon/glyph/arrow-left';
+import { colors, layers, gridSize } from '@findable/theme';
+import ArrowLeft from '@findable/icon/glyph/arrow-left';
 import { Slide } from './transitions';
 // Misc.
 var widths = {

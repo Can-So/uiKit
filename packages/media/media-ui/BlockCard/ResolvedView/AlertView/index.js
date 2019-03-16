@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import * as debounce from 'lodash.debounce';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { Ellipsify } from '../../../ellipsify';
 import { Wrapper } from './styled';
 var contentWidthWhenCardIs400px = 384;

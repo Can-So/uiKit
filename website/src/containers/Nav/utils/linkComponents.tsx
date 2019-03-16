@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { toClass } from 'recompose';
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
-import { AkNavigationItem } from '@atlaskit/navigation';
+import { gridSize } from '@findable/theme';
+import { AkNavigationItem } from '@findable/navigation';
 import renderNav from './renderNav';
 import { Link } from '../../../components/WrappedLink';
 import { NavGroup } from '../../../types';

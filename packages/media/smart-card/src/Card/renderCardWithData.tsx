@@ -5,7 +5,7 @@ import { extractInlinePropsFromJSONLD } from '../extractInlinePropsFromJSONLD';
 import {
   BlockCardResolvedView,
   InlineCardResolvedView,
-} from '@atlaskit/media-ui';
+} from '@findable/media-ui';
 import { DefinedState } from '../Client/types';
 
 export interface CardWithDataContentProps {

@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from 'react';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
-import Pagination from '@atlaskit/pagination';
+import { UIAnalyticsEvent } from '@findable/analytics-next';
+import Pagination from '@findable/pagination';
 
 type Props = {
   value?: number,

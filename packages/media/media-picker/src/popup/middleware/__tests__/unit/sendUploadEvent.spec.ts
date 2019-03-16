@@ -1,7 +1,7 @@
 import {
   mockPopupUploadEventEmitter,
   mockStore,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import sendUploadEventMiddleware from '../../sendUploadEvent';
 import { sendUploadEvent } from '../../../actions/sendUploadEvent';
 import { MediaError } from '../../../../domain/error';

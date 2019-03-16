@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';
+import { BreadcrumbsStateless, BreadcrumbsItem } from '@findable/breadcrumbs';
 
 import PageHeader from '../src';
 

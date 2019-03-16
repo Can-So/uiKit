@@ -5,7 +5,7 @@ import {
   layoutSection,
   layoutColumn,
   hr,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   unwrapContentFromLayout,
   removeLayoutFromFirstChild,

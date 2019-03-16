@@ -1,5 +1,5 @@
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
-import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
+import { mountWithIntl } from '@findable/editor-test-helpers';
+import LockCircleIcon from '@findable/icon/glyph/lock-circle';
 import { ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import MentionItem from '../../../components/MentionItem';

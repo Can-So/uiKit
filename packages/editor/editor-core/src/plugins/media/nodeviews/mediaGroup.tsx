@@ -3,16 +3,16 @@ import { Node as PMNode } from 'prosemirror-model';
 import { EditorView, NodeView } from 'prosemirror-view';
 import ReactNodeView, { ForwardRef } from '../../../nodeviews/ReactNodeView';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
-import { Filmstrip } from '@atlaskit/media-filmstrip';
+import { Filmstrip } from '@findable/media-filmstrip';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
 } from '../pm-plugins/main';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@findable/media-core';
 import { setNodeSelection } from '../../../utils';
 import WithPluginState from '../../../ui/WithPluginState';
 import { stateKey as reactNodeViewStateKey } from '../../../plugins/base/pm-plugins/react-nodeview';
-import EditorCloseIcon from '@atlaskit/icon/glyph/editor/close';
+import EditorCloseIcon from '@findable/icon/glyph/editor/close';
 import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,

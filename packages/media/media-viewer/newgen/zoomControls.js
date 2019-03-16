@@ -1,15 +1,15 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import Button from '@atlaskit/button';
-import ZoomOutIcon from '@atlaskit/icon/glyph/media-services/zoom-out';
-import ZoomInIcon from '@atlaskit/icon/glyph/media-services/zoom-in';
+import Button from '@findable/button';
+import ZoomOutIcon from '@findable/icon/glyph/media-services/zoom-out';
+import ZoomInIcon from '@findable/icon/glyph/media-services/zoom-in';
 import { ZoomWrapper, ZoomControlsWrapper, hideControlsClassName, ZoomLevelIndicator, } from './styled';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { channel } from './analytics';
 import { createZoomEvent } from './analytics/zoom';
 import { injectIntl } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 var ZoomControlsBase = /** @class */ (function (_super) {
     tslib_1.__extends(ZoomControlsBase, _super);
     function ZoomControlsBase() {

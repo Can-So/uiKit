@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
   This component displays multiple media cards horizontally. Allows to navigate through the stored cards.
@@ -8,7 +8,7 @@ export default md`
 
   ${code`
   import React from 'react';
-  import { FilmstripView } from '@atlaskit/media-filmstrip';
+  import { FilmstripView } from '@findable/media-filmstrip';
 
   class FilmstripViewExample extends React.Component {
     state = {

@@ -1,15 +1,15 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
 ${(
   <SectionMessage appearance="warning">
     <p>
       <strong>
-        Note: @atlaskit/feedback-collector is currently a developer preview.
+        Note: @findable/feedback-collector is currently a developer preview.
       </strong>
     </p>
     <p>
@@ -24,11 +24,11 @@ Feedback collector is a wrapper around feedback form component that collects cus
 
 ## Usage
 
-${code`import FeedbackCollector, { FeedbackFlag, FeedbackForm } from '@atlaskit/feedback-collector';`}
+${code`import FeedbackCollector, { FeedbackFlag, FeedbackForm } from '@findable/feedback-collector';`}
 
 ${(
   <Example
-    packageName="@atlaskit/feedback-collector"
+    packageName="@findable/feedback-collector"
     Component={require('../examples/02-feedback-collector').default}
     title="As a button"
     source={require('!!raw-loader!../examples/02-feedback-collector')}
@@ -49,7 +49,7 @@ It is not tied to any particular feedback collector.
 
 ${(
   <Example
-    packageName="@atlaskit/feedback-collector"
+    packageName="@findable/feedback-collector"
     Component={require('../examples/01-feedback-form').default}
     title="As a button"
     source={require('!!raw-loader!../examples/01-feedback-form')}

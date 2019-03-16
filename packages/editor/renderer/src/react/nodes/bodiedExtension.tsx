@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RendererContext } from '..';
 import { renderNodes, Serializer } from '../..';
-import { ADNode, ExtensionHandlers } from '@atlaskit/editor-common';
+import { ADNode, ExtensionHandlers } from '@findable/editor-common';
 import { renderExtension } from './extension';
 
 export interface Props {

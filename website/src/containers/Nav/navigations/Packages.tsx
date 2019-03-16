@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PackageIcon from '@atlaskit/icon/glyph/chevron-right';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
+import PackageIcon from '@findable/icon/glyph/chevron-right';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
 import styled from 'styled-components';
 import { isSubNavExpanded } from '../utils/linkComponents';
 import renderNav from '../utils/renderNav';

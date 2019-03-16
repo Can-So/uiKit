@@ -1,4 +1,4 @@
-import { Context, Identifier } from '@atlaskit/media-core';
+import { Context, Identifier } from '@findable/media-core';
 import { MediaViewerFeatureFlags } from '../newgen/domain';
 export interface MediaViewerDataSource {
     list?: Array<Identifier>;

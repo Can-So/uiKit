@@ -1,6 +1,6 @@
 // @flow
 
-import { type ThemeProp } from '@atlaskit/theme';
+import { type ThemeProp } from '@findable/theme';
 import React, { Component } from 'react';
 import { Input } from './styled';
 import { Theme, type ThemeTokens } from './theme';
@@ -23,7 +23,7 @@ type Props = {
   /** Callback to receive a reference. */
   inputRef?: (input: ?HTMLInputElement) => mixed,
   /** The theme object to be passed down. See
-  [@atlaskit/theme](https://atlaskit.atlassian.com/packages/core/theme) for more details on themeing.
+  [@findable/theme](https://atlaskit.atlassian.com/packages/core/theme) for more details on themeing.
   */
   theme?: ThemeProp<ThemeTokens>,
 };

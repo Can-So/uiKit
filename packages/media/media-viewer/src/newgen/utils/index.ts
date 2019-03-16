@@ -2,9 +2,9 @@ import {
   Context,
   isClientBasedAuth,
   FileIdentifier,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import { stringify } from 'query-string';
-import { MediaCollectionItem } from '@atlaskit/media-store';
+import { MediaCollectionItem } from '@findable/media-store';
 
 // We want to remove constructAuthTokenUrl and use mediaStore instead
 // https://product-fabric.atlassian.net/browse/MSW-869

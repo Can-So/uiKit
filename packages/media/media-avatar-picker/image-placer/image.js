@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { ImageWrapper } from './styled';
-import { isImageRemote } from '@atlaskit/media-core';
+import { isImageRemote } from '@findable/media-core';
 // TODO: i18n https://product-fabric.atlassian.net/browse/MS-1261
 export var IMAGE_ERRORS = {
     BAD_URL: 'Invalid image url',

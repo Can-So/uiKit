@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import ResultBase from './ResultBase';
 var PersonResult = /** @class */ (function (_super) {
     tslib_1.__extends(PersonResult, _super);

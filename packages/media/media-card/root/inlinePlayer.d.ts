@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Context, FileIdentifier, FileState } from '@atlaskit/media-core';
+import { Context, FileIdentifier, FileState } from '@findable/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import { CardDimensions } from '..';
 export interface InlinePlayerProps {

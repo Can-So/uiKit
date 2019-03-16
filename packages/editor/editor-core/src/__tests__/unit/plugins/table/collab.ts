@@ -6,7 +6,7 @@ import {
   tr,
   td,
   th,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { removeColumnAt } from 'prosemirror-utils';
 import {
   TablePluginState,

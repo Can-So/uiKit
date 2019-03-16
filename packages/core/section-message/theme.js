@@ -1,9 +1,9 @@
-import { colors } from '@atlaskit/theme';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
-import InfoIcon from '@atlaskit/icon/glyph/info';
-import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
+import { colors } from '@findable/theme';
+import WarningIcon from '@findable/icon/glyph/warning';
+import ErrorIcon from '@findable/icon/glyph/error';
+import CheckCircleIcon from '@findable/icon/glyph/check-circle';
+import InfoIcon from '@findable/icon/glyph/info';
+import QuestionCircleIcon from '@findable/icon/glyph/question-circle';
 export var baseAppearanceObj = {
   info: {
     backgroundColor: colors.B50,

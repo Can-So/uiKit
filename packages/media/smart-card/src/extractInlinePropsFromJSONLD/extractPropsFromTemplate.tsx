@@ -1,7 +1,7 @@
 import * as React from 'react';
-import DocumentFilledIcon from '@atlaskit/icon/glyph/document-filled';
+import DocumentFilledIcon from '@findable/icon/glyph/document-filled';
 
-import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
+import { InlineCardResolvedViewProps } from '@findable/media-ui';
 import { BuildInlineProps } from './types';
 import { CONFLUENCE_GENERATOR_ID } from './constants';
 import { extractInlineViewPropsFromDocument } from './extractPropsFromDocument';

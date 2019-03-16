@@ -1,4 +1,4 @@
-import { utils, ServiceConfig } from '@atlaskit/util-service-support';
+import { utils, ServiceConfig } from '@findable/util-service-support';
 import { Provider } from './provider';
 import { Document, BatchDocumentResponse } from '../model';
 

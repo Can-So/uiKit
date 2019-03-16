@@ -2,7 +2,7 @@
 import {
   getExampleUrl,
   takeScreenShot,
-} from '@atlaskit/visual-regression/helper';
+} from '@findable/visual-regression/helper';
 
 describe('Snapshot Test', () => {
   // You can't use other example as they create dynamic content and will fail the test

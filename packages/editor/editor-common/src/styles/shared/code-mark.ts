@@ -1,4 +1,4 @@
-import { codeFontFamily, colors } from '@atlaskit/theme';
+import { codeFontFamily, colors } from '@findable/theme';
 import { css } from 'styled-components';
 import { relativeSize } from '../consts';
 

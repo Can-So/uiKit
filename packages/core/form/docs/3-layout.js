@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md, Props } from '@atlaskit/docs';
+import { code, md, Props } from '@findable/docs';
 
 export default md`
 
@@ -10,8 +10,8 @@ These components are can be used to help layout your form. They provide
 padding and styling for form headings and subheadings.
 
 ${code`
-import Form, { FormHeader, FormSection, FormFooter } from '@atlaskit/form';
-import Button from '@atlaskit/button';
+import Form, { FormHeader, FormSection, FormFooter } from '@findable/form';
+import Button from '@findable/button';
 
 const MyForm = () => (
   <Form onSubmit={data => console.log('form data', data)}>

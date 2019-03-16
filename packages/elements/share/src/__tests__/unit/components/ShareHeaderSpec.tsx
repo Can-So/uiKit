@@ -1,4 +1,4 @@
-import { FormHeader } from '@atlaskit/form';
+import { FormHeader } from '@findable/form';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';

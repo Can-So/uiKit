@@ -1,7 +1,7 @@
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import WikiMarkupTransformer from '../../../index';
 
-import { doc, h1, h2, h3, h4, h5, h6 } from '@atlaskit/editor-test-helpers';
+import { doc, h1, h2, h3, h4, h5, h6 } from '@findable/editor-test-helpers';
 
 describe('ADF => WikiMarkup => ADF - Heading', () => {
   const transformer = new WikiMarkupTransformer();

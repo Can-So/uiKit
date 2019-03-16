@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/flag",
+  "name": "@findable/flag",
   "version": "10.0.1",
   "description": "Flags are used for confirmations, alerts, and acknowledgments that require minimal user interaction.",
   "license": "Apache-2.0",
@@ -14,13 +14,13 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/portal": "^0.2.1",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/portal": "^0.2.1",
+    "@findable/theme": "^8.0.1",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
     "react-transition-group": "^2.2.1",
@@ -31,13 +31,13 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/field-radio-group": "^5.0.1",
-    "@atlaskit/spinner": "^10.0.1",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/field-radio-group": "^5.0.1",
+    "@findable/spinner": "^10.0.1",
+    "@findable/ssr": "^0.0.1",
+    "@findable/theme": "^8.0.1",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },

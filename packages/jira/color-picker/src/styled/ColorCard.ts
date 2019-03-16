@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 import { COLOR_CARD_SIZE } from '../constants';
 
 type ColorCardProps = {

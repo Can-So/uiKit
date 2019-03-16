@@ -1,6 +1,6 @@
 import * as React from 'react';
-import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
-import { layoutSection, layoutColumn } from '@atlaskit/adf-schema';
+import LayoutTwoEqualIcon from '@findable/icon/glyph/editor/layout-two-equal';
+import { layoutSection, layoutColumn } from '@findable/adf-schema';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 import { default as createLayoutPlugin, pluginKey, } from './pm-plugins/main';
 import { buildToolbar } from './toolbar';

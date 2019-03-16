@@ -3,8 +3,8 @@ import { PureComponent } from 'react';
 
 import { AvatarList, Avatar } from '../avatar-list';
 
-import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
-import Button from '@atlaskit/button';
+import EditorMoreIcon from '@findable/icon/glyph/editor/more';
+import Button from '@findable/button';
 import { PredefinedAvatarsWrapper } from './styled';
 
 interface ShowMoreButtonProps {

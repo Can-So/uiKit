@@ -3,7 +3,7 @@ import {
   getExampleUrl,
   takeScreenShot,
   takeElementScreenShot,
-} from '@atlaskit/visual-regression/helper';
+} from '@findable/visual-regression/helper';
 
 const openModalBtn = "[type='button']";
 const modalDialog = "[role='dialog']";

@@ -1,4 +1,4 @@
-import { indentation } from '@atlaskit/adf-schema';
+import { indentation } from '@findable/adf-schema';
 import { keymapPlugin } from './pm-plugins/keymap';
 var indentationPlugin = {
     name: 'indentationPlugin',

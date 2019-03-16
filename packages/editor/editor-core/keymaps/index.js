@@ -1,4 +1,4 @@
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 export var toggleBold = makeKeyMapWithCommon('Bold', 'Mod-b');
 export var toggleItalic = makeKeyMapWithCommon('Italic', 'Mod-i');
 export var toggleUnderline = makeKeyMapWithCommon('Underline', 'Mod-u');

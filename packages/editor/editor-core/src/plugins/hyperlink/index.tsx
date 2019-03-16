@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { link } from '@atlaskit/adf-schema';
+import { link } from '@findable/adf-schema';
 import { EditorPlugin } from '../../types';
 import { createInputRulePlugin } from './pm-plugins/input-rule';
 import { createKeymapPlugin } from './pm-plugins/keymap';
 import { plugin, stateKey, LinkAction } from './pm-plugins/main';
 import fakeCursorToolbarPlugin from './pm-plugins/fake-cursor-for-toolbar';
-import EditorSuccessIcon from '@atlaskit/icon/glyph/editor/success';
+import EditorSuccessIcon from '@findable/icon/glyph/editor/success';
 import {
   addAnalytics,
   ACTION,

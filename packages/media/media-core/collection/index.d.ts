@@ -1,4 +1,4 @@
-import { MediaStore, MediaStoreGetCollectionItemsParams, MediaCollectionItem } from '@atlaskit/media-store';
+import { MediaStore, MediaStoreGetCollectionItemsParams, MediaCollectionItem } from '@findable/media-store';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { FileItem, FileDetails } from '../item';

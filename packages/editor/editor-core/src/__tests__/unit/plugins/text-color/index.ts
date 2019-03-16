@@ -6,7 +6,7 @@ import {
   createEditorFactory,
   a,
   strong,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   TextColorPluginState,
   pluginKey as textColorPluginKey,

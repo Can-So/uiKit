@@ -2,7 +2,7 @@
 
 import { render, shallow } from 'enzyme';
 import React from 'react';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import GlobalNavigationItemPrimitive from '../../primitives';
 
 const styles = () => ({

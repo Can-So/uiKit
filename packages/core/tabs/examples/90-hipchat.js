@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import Tabs from '../src';
 
 export default () => (

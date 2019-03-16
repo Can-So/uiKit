@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
-import FileIcon from '@atlaskit/icon-file-type/glyph/generic/16';
+import { InlineCardResolvedViewProps } from '@findable/media-ui';
+import FileIcon from '@findable/icon-file-type/glyph/generic/16';
 
 import { BuildInlineProps } from './types';
 import { extractInlineViewPropsFromDocument } from './extractPropsFromDocument';

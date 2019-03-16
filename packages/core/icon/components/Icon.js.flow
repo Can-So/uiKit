@@ -2,7 +2,7 @@
 import React, { Component, type Node } from 'react';
 import styled from 'styled-components';
 import uuid from 'uuid';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { sizes } from '../constants';
 
 const getSize = props => {

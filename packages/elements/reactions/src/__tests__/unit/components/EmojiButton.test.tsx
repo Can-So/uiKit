@@ -5,9 +5,9 @@ import {
   EmojiProvider,
   OnEmojiEvent,
   toEmojiId,
-} from '@atlaskit/emoji';
-import { waitUntil } from '@atlaskit/util-common-test';
-import { emoji } from '@atlaskit/util-data-test';
+} from '@findable/emoji';
+import { waitUntil } from '@findable/util-common-test';
+import { emoji } from '@findable/util-data-test';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import { EmojiButton } from '../../../components/EmojiButton';
@@ -31,7 +31,7 @@ const renderEmojiButton = (onClick: OnEmojiEvent = () => {}) => {
   );
 };
 
-describe('@atlaskit/reactions/emoji-button', () => {
+describe('@findable/reactions/emoji-button', () => {
   it('should render a button', () => {
     const emojiButton = shallow(renderEmojiButton());
     expect(emojiButton.find('button').length).toEqual(1);

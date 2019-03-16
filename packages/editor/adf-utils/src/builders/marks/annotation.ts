@@ -1,7 +1,7 @@
 import {
   AnnotationMarkDefinition,
   AnnotationMarkAttributes,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

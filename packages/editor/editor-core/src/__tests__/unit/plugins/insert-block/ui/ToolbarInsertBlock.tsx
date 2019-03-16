@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Item from '@atlaskit/item';
-import { EmojiPicker as AkEmojiPicker } from '@atlaskit/emoji';
-import { emoji as emojiData } from '@atlaskit/util-data-test';
+import Item from '@findable/item';
+import { EmojiPicker as AkEmojiPicker } from '@findable/emoji';
+import { emoji as emojiData } from '@findable/util-data-test';
 import {
   doc,
   p,
@@ -12,12 +12,12 @@ import {
   taskList,
   taskItem,
   mountWithIntl,
-} from '@atlaskit/editor-test-helpers';
-import { taskDecision } from '@atlaskit/util-data-test';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { uuid } from '@atlaskit/adf-schema';
-import Button from '@atlaskit/button';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+} from '@findable/editor-test-helpers';
+import { taskDecision } from '@findable/util-data-test';
+import { ProviderFactory } from '@findable/editor-common';
+import { uuid } from '@findable/adf-schema';
+import Button from '@findable/button';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 import { pluginKey as blockTypePluginKey } from '../../../../../plugins/block-type/pm-plugins/main';
 import {
@@ -83,7 +83,7 @@ const menus = [
   },
 ];
 
-describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
+describe('@findable/editor-core/ui/ToolbarInsertBlock', () => {
   const createEditor = createEditorFactory();
   let trackEvent: jest.SpyInstance<AnalyticsHandler>;
   let editorView: EditorView;
@@ -150,7 +150,7 @@ describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
     toolbarOption.unmount();
   });
 
-  // Following test case is breaking due to trouble in @atlaskit/downdown.
+  // Following test case is breaking due to trouble in @findable/downdown.
   // isDisabled is always set to false.
   it('should disable mention option if mentionsEnabled is false', () => {
     const { editorView } = editor(

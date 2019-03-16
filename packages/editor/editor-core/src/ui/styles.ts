@@ -1,6 +1,6 @@
 import { HTMLAttributes, ComponentClass } from 'react';
 import styled, { css } from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 
 const akGridSize = gridSize() + 'px';
 

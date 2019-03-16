@@ -5,7 +5,7 @@ import {
   getComponentClassWithStore,
   mockStore,
   mockState,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { Footer, default as ConnectedFooter } from '../../footer';
 import { Wrapper, CancelButton, InsertButton } from '../../styled';
 import { startImport, hidePopup } from '../../../../actions';

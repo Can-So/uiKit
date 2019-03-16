@@ -1,5 +1,5 @@
-import Button, { ButtonAppearances } from '@atlaskit/button';
-import ShareIcon from '@atlaskit/icon/glyph/share';
+import Button, { ButtonAppearances } from '@findable/button';
+import ShareIcon from '@findable/icon/glyph/share';
 import * as React from 'react';
 
 export type Props = {

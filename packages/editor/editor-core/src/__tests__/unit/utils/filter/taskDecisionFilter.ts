@@ -8,7 +8,7 @@ import {
   p,
   status,
   date,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import { toJSON } from '../../../../utils';
 import {
@@ -16,7 +16,7 @@ import {
   taskDecisionSliceFilter,
 } from '../../../../utils/filter';
 
-describe('@atlaskit/editor-core/utils/filter', () => {
+describe('@findable/editor-core/utils/filter', () => {
   const now = Date.now();
 
   describe('taskDecisionDocFilter', () => {

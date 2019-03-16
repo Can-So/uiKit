@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { createItemDownloader, ToolbarDownloadButton, ErrorViewDownloadButton, DownloadButton, } from '../../../newgen/download';
 import { createContext } from '../_stubs';
 import * as React from 'react';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { MediaViewerError } from '../../../newgen/error';
 import { name as packageName, version as packageVersion, } from '../../../version.json';
 describe('download', function () {

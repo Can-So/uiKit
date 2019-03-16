@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { mockEmojiResourceFactory, UsageClearEmojiResource, } from './MockEmojiResource';
-import { EmojiRepository, denormaliseEmojiServiceResponse, } from '@atlaskit/emoji';
+import { EmojiRepository, denormaliseEmojiServiceResponse, } from '@findable/emoji';
 import { siteEmojiWtf } from './test-data';
 var emojisSets;
 export var getStandardEmojiData = function () {

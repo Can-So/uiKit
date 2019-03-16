@@ -1,4 +1,4 @@
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 import { ComponentClass, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { MentionType } from '../../types';

@@ -12,8 +12,8 @@ import {
   InlineCardErroredView,
   InlineCardForbiddenView,
   InlineCardUnauthorizedView,
-} from '@atlaskit/media-ui';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+} from '@findable/media-ui';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import { ObjectState, Client } from '../Client';
 import { extractBlockPropsFromJSONLD } from '../extractBlockPropsFromJSONLD';
 import { extractInlinePropsFromJSONLD } from '../extractInlinePropsFromJSONLD';

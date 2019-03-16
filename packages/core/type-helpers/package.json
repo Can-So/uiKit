@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/type-helpers",
+  "name": "@findable/type-helpers",
   "version": "3.0.1",
   "description": "Some helpers for Typescript typing of Atlaskit",
   "license": "Apache-2.0",
@@ -8,7 +8,7 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "author": "Atlassian Pty Ltd",
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
     "react": "^16.4.0"
   },

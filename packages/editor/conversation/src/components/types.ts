@@ -1,6 +1,6 @@
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { Comment as CommentType, User } from '../model';
-import { Editor as AkEditor, EditorProps } from '@atlaskit/editor-core';
+import { Editor as AkEditor, EditorProps } from '@findable/editor-core';
 import { SuccessHandler } from '../internal/actions';
 import { EventData } from '../internal/analytics';
 

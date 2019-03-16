@@ -1,7 +1,7 @@
 // @flow
 
 import React, { type Element } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 type Props = {
   onClick?: () => void,

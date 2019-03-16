@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import JiraLabsIcon from '@atlaskit/icon/glyph/jira/labs';
+import JiraLabsIcon from '@findable/icon/glyph/jira/labs';
 import SectionMessage from '../src';
 
 const Example = () => (

@@ -1,11 +1,11 @@
 // @flow
 
 import React from 'react';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
-import ShipIcon from '@atlaskit/icon/glyph/ship';
-import IssuesIcon from '@atlaskit/icon/glyph/issues';
+import BacklogIcon from '@findable/icon/glyph/backlog';
+import BoardIcon from '@findable/icon/glyph/board';
+import GraphLineIcon from '@findable/icon/glyph/graph-line';
+import ShipIcon from '@findable/icon/glyph/ship';
+import IssuesIcon from '@findable/icon/glyph/issues';
 
 import ViewRegistrar from '../../common/view-registrar';
 

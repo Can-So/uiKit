@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { Context, FileState, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileState, FileIdentifier } from '@findable/media-core';
 import { MediaViewerError } from './error';
 export declare const DownloadButton: any;
 export declare const createItemDownloader: (file: FileState, context: Context, collectionName?: string | undefined) => () => Promise<void>;

@@ -7,7 +7,7 @@ import * as styles from './styles';
 
 import { EmojiUpload } from '../../types';
 import { EmojiProvider, supportsUploadFeature } from '../../api/EmojiResource';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
+import { FireAnalyticsEvent } from '@findable/analytics';
 import EmojiUploadPicker from '../common/EmojiUploadPicker';
 import { uploadEmoji } from '../common/UploadEmoji';
 

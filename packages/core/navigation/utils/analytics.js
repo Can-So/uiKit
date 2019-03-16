@@ -1,4 +1,4 @@
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 export var navigationChannel = 'navigation';
 export var navigationExpandedCollapsed = function navigationExpandedCollapsed(createAnalyticsEvent, _ref) {
   var isCollapsed = _ref.isCollapsed,

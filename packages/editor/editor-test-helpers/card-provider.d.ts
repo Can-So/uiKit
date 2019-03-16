@@ -1,4 +1,4 @@
-import { EditorCardProvider } from '@atlaskit/smart-card';
+import { EditorCardProvider } from '@findable/smart-card';
 declare type CardAppearance = 'inline' | 'block';
 export declare class EditorTestCardProvider extends EditorCardProvider {
     testUrlMatch: RegExp;

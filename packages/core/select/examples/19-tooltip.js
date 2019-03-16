@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import Select, { components } from '../src';
 
 const Option = props => {

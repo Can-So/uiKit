@@ -5,7 +5,7 @@ import {
   doc,
   p,
   extension,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import FullPage from '../../../ui/Appearance/FullPage';
 

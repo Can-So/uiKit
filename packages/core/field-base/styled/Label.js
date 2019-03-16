@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors, themed, gridSize } from '@atlaskit/theme';
+import { colors, themed, gridSize } from '@findable/theme';
 var spacing = gridSize();
 var fontSize = 12;
 var innerHeight = spacing * 2; // 16px

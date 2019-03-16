@@ -1,7 +1,7 @@
 // @flow
 import React, { Fragment, PureComponent, type Node } from 'react';
-import Button from '@atlaskit/button';
-import MenuIcon from '@atlaskit/icon/glyph/menu';
+import Button from '@findable/button';
+import MenuIcon from '@findable/icon/glyph/menu';
 import * as styles from '../styled';
 
 type MobileHeaderProps = {

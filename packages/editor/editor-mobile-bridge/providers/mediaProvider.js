@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { ContextFactory as MediaContextFactory, } from '@atlaskit/media-core';
+import { ContextFactory as MediaContextFactory, } from '@findable/media-core';
 import { createPromise } from '../cross-platform-promise';
 var getMediaToken = function (context) {
     return createPromise('getAuth', 

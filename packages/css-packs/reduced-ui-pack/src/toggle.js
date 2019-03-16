@@ -1,5 +1,5 @@
 //@flow
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 import dataUri from './utils/data-uri';
 import evaluateInner from './utils/evaluate-inner';
 

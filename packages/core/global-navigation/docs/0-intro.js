@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, Props, md } from '@atlaskit/docs';
+import { code, Props, md } from '@findable/docs';
 
 import { Hr, IframeExample } from './shared';
 
@@ -12,7 +12,7 @@ ${<Hr />}
 
 ## Usage
 
-${code`import GlobalNavigation from '@atlaskit/global-navigation';`}
+${code`import GlobalNavigation from '@findable/global-navigation';`}
 
 ${(
   <IframeExample

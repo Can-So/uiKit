@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
-import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
+import DropdownMenu, { DropdownItem } from '@findable/dropdown-menu';
+import AnnotateIcon from '@findable/icon/glyph/media-services/annotate';
+import CrossIcon from '@findable/icon/glyph/cross';
 
 import {
   CardActionsView,

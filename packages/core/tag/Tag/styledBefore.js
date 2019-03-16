@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var gridSizeUnitless = gridSize();
 export default styled.span.withConfig({
   displayName: "styledBefore",

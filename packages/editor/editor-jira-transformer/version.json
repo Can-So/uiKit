@@ -1,5 +1,5 @@
 {
-	"name": "@atlaskit/editor-jira-transformer",
+	"name": "@findable/editor-jira-transformer",
 	"version": "6.0.0",
 	"sideEffects": false
 }

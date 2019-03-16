@@ -1,11 +1,11 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Avatar from '@atlaskit/avatar';
-import AvatarGroup from '@atlaskit/avatar-group';
-import Tooltip from '@atlaskit/tooltip';
-import Button from '@atlaskit/button';
+import Avatar from '@findable/avatar';
+import AvatarGroup from '@findable/avatar-group';
+import Tooltip from '@findable/tooltip';
+import Button from '@findable/button';
 import { ImageIcon } from '../ImageIcon';
-import LinkGlyph from '@atlaskit/icon/glyph/link';
+import LinkGlyph from '@findable/icon/glyph/link';
 import { minWidth, maxWidth } from '../dimensions';
 import { ExpandedFrame } from '../ExpandedFrame';
 import AlertView from './AlertView';

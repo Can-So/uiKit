@@ -1,7 +1,7 @@
 import * as React from 'react';
-import InlineMessage from '@atlaskit/inline-message';
-import Button from '@atlaskit/button';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import InlineMessage from '@findable/inline-message';
+import Button from '@findable/button';
+import Page, { Grid, GridColumn } from '@findable/page';
 import 'brace';
 import 'brace/mode/json';
 import 'brace/theme/tomorrow';

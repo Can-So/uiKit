@@ -2,8 +2,8 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { PureComponent } from 'react';
-import { ResourcedMention } from '@atlaskit/mention';
-import ProfileCard from '@atlaskit/profilecard';
+import { ResourcedMention } from '@findable/mention';
+import ProfileCard from '@findable/profilecard';
 import Popup from '../Popup';
 import withOuterListeners from '../with-outer-listeners';
 // tslint:disable-next-line:variable-name

@@ -1,5 +1,5 @@
-import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
-import { colors } from '@atlaskit/theme';
+import EditorDoneIcon from '@findable/icon/glyph/editor/done';
+import { colors } from '@findable/theme';
 import * as React from 'react';
 import {
   ButtonHTMLAttributes,

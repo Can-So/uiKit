@@ -7,7 +7,7 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstruct
 import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import Card from './Card';

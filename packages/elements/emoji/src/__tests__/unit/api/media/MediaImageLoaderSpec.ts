@@ -1,4 +1,4 @@
-import { waitUntil } from '@atlaskit/util-common-test';
+import { waitUntil } from '@findable/util-common-test';
 import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import * as fetchMock from 'fetch-mock/src/client';
 import 'whatwg-fetch';

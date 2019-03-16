@@ -5,7 +5,7 @@ import {
   mediaSingle,
   code_block,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import codeBlockPlugin from '../../../../plugins/code-block';
 import { temporaryMedia, mediaEditor } from './_utils';

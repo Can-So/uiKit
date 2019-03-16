@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var SkeletonGlobalTopItemsInner = styled.div.withConfig({
   displayName: "SkeletonGlobalTopItemsInner",
   componentId: "tl9k0o-0"

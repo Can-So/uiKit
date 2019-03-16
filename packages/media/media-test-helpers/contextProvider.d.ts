@@ -1,4 +1,4 @@
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 export declare const defaultBaseUrl = "https://dt-api.dev.atl-paas.net";
 export declare const defaultParams: {
     clientId: string;

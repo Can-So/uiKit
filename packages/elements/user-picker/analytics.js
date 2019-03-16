@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { createAndFireEvent } from '@atlaskit/analytics-next';
+import { createAndFireEvent } from '@findable/analytics-next';
 import * as uuid from 'uuid/v4';
 import { name as packageName, version as packageVersion } from './version.json';
 import { UserType, } from './types';

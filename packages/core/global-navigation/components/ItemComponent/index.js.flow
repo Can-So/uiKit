@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component, type ComponentType, type Node } from 'react';
-import { DropdownMenuStateless } from '@atlaskit/dropdown-menu';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
-import { GlobalItem } from '@atlaskit/navigation-next';
+import { DropdownMenuStateless } from '@findable/dropdown-menu';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
+import { GlobalItem } from '@findable/navigation-next';
 
 import type { GlobalNavItemData } from '../../config/types';
 

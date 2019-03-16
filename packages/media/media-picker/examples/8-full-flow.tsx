@@ -2,12 +2,12 @@ import * as React from 'react';
 import {
   defaultCollectionName,
   createUploadContext,
-} from '@atlaskit/media-test-helpers';
-import { Card } from '@atlaskit/media-card';
-import { MediaViewerDataSource } from '@atlaskit/media-viewer';
-import { FileIdentifier } from '@atlaskit/media-core';
-import Button from '@atlaskit/button';
-import Select from '@atlaskit/select';
+} from '@findable/media-test-helpers';
+import { Card } from '@findable/media-card';
+import { MediaViewerDataSource } from '@findable/media-viewer';
+import { FileIdentifier } from '@findable/media-core';
+import Button from '@findable/button';
+import Select from '@findable/select';
 import { SelectWrapper, OptionsWrapper } from '../example-helpers/styled';
 import {
   MediaPicker,

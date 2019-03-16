@@ -6,8 +6,8 @@ jest.mock('../../../newgen/analytics/item-viewer', function () { return mockItem
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { ErrorMessage, createError } from '../../../newgen/error';
-import Button from '@atlaskit/button';
-import { fakeIntl } from '@atlaskit/media-test-helpers';
+import Button from '@findable/button';
+import { fakeIntl } from '@findable/media-test-helpers';
 describe('Error Message', function () {
     it('should render the right error for retrieving metadata', function () {
         var el = mount(React.createElement(ErrorMessage, { intl: fakeIntl, error: createError('metadataFailed') }));

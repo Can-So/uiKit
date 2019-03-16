@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { PopupSelect } from '@atlaskit/select';
+import { PopupSelect } from '@findable/select';
 import * as React from 'react';
 import { getPopupComponents } from './components';
 import { getPopupStyles } from './styles';

@@ -10,7 +10,7 @@ function _templateObject() {
   return data;
 }
 
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import evaluateInner from './utils/evaluate-inner';
 /**
  * This exits as @ak-color-B75A: fade(@ak-color-B75, 60%);

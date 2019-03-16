@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Fragment } from 'react';
-import Button from '@atlaskit/button';
-import Form, { Field, FormFooter, HelperMessage } from '@atlaskit/form';
+import Button from '@findable/button';
+import Form, { Field, FormFooter, HelperMessage } from '@findable/form';
 import Textfield from '../src';
 
 export default function() {

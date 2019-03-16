@@ -1,4 +1,4 @@
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import {

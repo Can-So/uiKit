@@ -1,5 +1,5 @@
 import { setParentNodeMarkup, removeParentNodeOfType } from 'prosemirror-utils';
-import { PanelType } from '@atlaskit/adf-schema';
+import { PanelType } from '@findable/adf-schema';
 import { analyticsService } from '../../analytics';
 import { Command } from '../../types';
 import {

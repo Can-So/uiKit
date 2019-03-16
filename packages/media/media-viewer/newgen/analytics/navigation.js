@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { isFileIdentifier } from '@atlaskit/media-core';
+import { isFileIdentifier } from '@findable/media-core';
 import { packageAttributes } from './index';
 function actionFromDirection(direction) {
     switch (direction) {

@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -12,11 +12,11 @@ The calendar component displays a simple calendar that can be:
 
 ## Usage
 
-${code`import Calendar from '@atlaskit/calendar';`}
+${code`import Calendar from '@findable/calendar';`}
 
 ${(
   <Example
-    packageName="@atlaskit/calendar"
+    packageName="@findable/calendar"
     Component={require('../examples/0-basic').default}
     title="Basic"
     source={require('!!raw-loader!../examples/0-basic')}

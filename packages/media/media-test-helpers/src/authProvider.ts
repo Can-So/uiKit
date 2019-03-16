@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { defaultCollectionName } from './collectionNames';
-import { Auth, AuthProvider, AuthContext } from '@atlaskit/media-core';
+import { Auth, AuthProvider, AuthContext } from '@findable/media-core';
 
 const cachedAuths: { [key: string]: Promise<Auth> } = {};
 const authProviderBaseURL =

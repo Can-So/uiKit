@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@findable/media-core';
 import { Outcome, MediaViewerFeatureFlags } from './domain';
 import ErrorMessage, { createError, MediaViewerError } from './error';
 import { List } from './list';
 import { Subscription } from 'rxjs/Subscription';
 import { toIdentifier } from './utils';
 import { Spinner } from './loading';
-import { MediaCollectionItem } from '@atlaskit/media-store';
+import { MediaCollectionItem } from '@findable/media-store';
 
 export type Props = Readonly<{
   onClose?: () => void;

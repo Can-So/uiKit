@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import Logger from './helpers/logger';
-import { GasPurePayload, GasPureScreenEventPayload } from '@atlaskit/analytics-gas-types';
+import { GasPurePayload, GasPureScreenEventPayload } from '@findable/analytics-gas-types';
 export declare type AnalyticsWebClient = {
     sendUIEvent: (event: GasPurePayload) => void;
     sendOperationalEvent: (event: GasPurePayload) => void;

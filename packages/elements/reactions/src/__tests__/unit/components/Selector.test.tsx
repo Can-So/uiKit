@@ -1,7 +1,7 @@
-import { EmojiProvider, OnEmojiEvent } from '@atlaskit/emoji';
-import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
-import { emoji } from '@atlaskit/util-data-test';
-import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
+import { EmojiProvider, OnEmojiEvent } from '@findable/emoji';
+import EditorMoreIcon from '@findable/icon/glyph/editor/more';
+import { emoji } from '@findable/util-data-test';
+import { mountWithIntl, shallowWithIntl } from '@findable/editor-test-helpers';
 import * as React from 'react';
 import { EmojiButton } from '../../../components/EmojiButton';
 import {
@@ -28,7 +28,7 @@ const renderSelector = (
   );
 };
 
-describe('@atlaskit/reactions/selector', () => {
+describe('@findable/reactions/selector', () => {
   beforeEach(function() {
     jest.useFakeTimers();
   });

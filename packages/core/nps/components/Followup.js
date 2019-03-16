@@ -6,9 +6,9 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React from 'react';
-import Button from '@atlaskit/button';
-import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
-import { Checkbox } from '@atlaskit/checkbox';
+import Button from '@findable/button';
+import DropdownMenu, { DropdownItem } from '@findable/dropdown-menu';
+import { Checkbox } from '@findable/checkbox';
 import { Header, Description } from './common';
 import { Wrapper, ButtonWrapper } from './styled/common';
 import { Contact, RoleQuestion } from './styled/followup';

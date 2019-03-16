@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { GasPayload } from '@atlaskit/analytics-gas-types';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { GasPayload } from '@findable/analytics-gas-types';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { DEFAULT_GAS_CHANNEL } from '../../util/analytics-util';
 import { CreateAnalyticsEventFn } from './types';
 

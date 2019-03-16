@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Component } from 'react';
-import Button from '@atlaskit/button';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import Tooltip from '@atlaskit/tooltip';
+import Button from '@findable/button';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import Tooltip from '@findable/tooltip';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { DropdownRightIconWrapper, DropdownLeftIconWrapper } from './styles';
 import { LineWidthIcon } from './lineWidthIcon';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 
 export interface LineWidthButtonProps {
   readonly lineWidth: number;

@@ -4,7 +4,7 @@ export default function codeFont(root, j) {
   var sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles'
+      value: '@findable/util-shared-styles'
     }
   });
 
@@ -30,7 +30,7 @@ export default function codeFont(root, j) {
   }).replaceWith(function () {
     return j.callExpression(j.identifier(localName), []);
   });
-  addNamedImport(root, j, '@atlaskit/theme', 'codeFontFamily', localName, sharedStylesImport);
-  removeNamedImport(root, j, '@atlaskit/util-shared-styles', 'akCodeFontFamily', codeFontImportSpecifier);
+  addNamedImport(root, j, '@findable/theme', 'codeFontFamily', localName, sharedStylesImport);
+  removeNamedImport(root, j, '@findable/util-shared-styles', 'akCodeFontFamily', codeFontImportSpecifier);
   return root;
 }

@@ -3,7 +3,7 @@ import {
   doc,
   code_block,
   p,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { isBreakoutMarkAllowed } from '../../../../../plugins/breakout/utils/is-breakout-mark-allowed';
 
 describe('Breakout Commands: getBreakoutMode', () => {

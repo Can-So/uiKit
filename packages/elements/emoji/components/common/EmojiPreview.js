@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import AkButton from '@atlaskit/button';
-import AddIcon from '@atlaskit/icon/glyph/add';
+import AkButton from '@findable/button';
+import AddIcon from '@findable/icon/glyph/add';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';

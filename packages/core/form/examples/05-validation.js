@@ -1,7 +1,7 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import Button from '@atlaskit/button';
-import TextField from '@atlaskit/textfield';
+import Button from '@findable/button';
+import TextField from '@findable/textfield';
 import Form, {
   Field,
   FormFooter,

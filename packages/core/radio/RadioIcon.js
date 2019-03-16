@@ -4,7 +4,7 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/possibleConstruct
 import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import React, { Component } from 'react';
-import Icon from '@atlaskit/icon/glyph/radio';
+import Icon from '@findable/icon/glyph/radio';
 import { IconWrapper } from './styled/Radio';
 
 var RadioIcon =

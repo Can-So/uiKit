@@ -1,6 +1,6 @@
 // @flow
 const path = require('path');
-const iconBuild = require('@atlaskit/icon-build-process');
+const iconBuild = require('@findable/icon-build-process');
 const pkgDir = require('pkg-dir');
 const fs = require('fs-extra');
 
@@ -31,7 +31,7 @@ tidy(config16)
   .then(() => Promise.all([build(config16), build(config24)]))
   .then(([sixteen, twentyfour, fourtyeight]) => {
     let allIcons = [...sixteen, ...twentyfour];
-    const iconDocs = createIconDocs(allIcons, '@atlaskit/icon-object', {}, [
+    const iconDocs = createIconDocs(allIcons, '@findable/icon-object', {}, [
       'object',
       'icon-object',
     ]);

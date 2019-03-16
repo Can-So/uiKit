@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var Content = styled.div.withConfig({
   displayName: "Content",
   componentId: "sc-1devyv7-0"

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import Tabs, { TabItem } from '../src';
 import { Content } from './shared';
 import type { TabItemComponentProvided } from '../src/types';

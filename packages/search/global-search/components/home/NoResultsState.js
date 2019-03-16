@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ResultItemGroup } from '@atlaskit/quick-search';
-import { ConfluenceIcon } from '@atlaskit/logo';
-import PeopleIcon from '@atlaskit/icon/glyph/people';
+import { ResultItemGroup } from '@findable/quick-search';
+import { ConfluenceIcon } from '@findable/logo';
+import PeopleIcon from '@findable/icon/glyph/people';
 import { messages } from '../../messages';
 import NoResults from '../NoResults';
 import SearchConfluenceItem from '../SearchConfluenceItem';

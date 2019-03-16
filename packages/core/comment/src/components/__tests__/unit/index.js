@@ -1,12 +1,12 @@
 // @flow
 import React, { Component } from 'react';
 import { mount, shallow } from 'enzyme';
-import Avatar from '@atlaskit/avatar';
-import LockFilledIcon from '@atlaskit/icon/glyph/lock-filled';
-import Lozenge from '@atlaskit/lozenge';
-import Button from '@atlaskit/button';
+import Avatar from '@findable/avatar';
+import LockFilledIcon from '@findable/icon/glyph/lock-filled';
+import Lozenge from '@findable/lozenge';
+import Button from '@findable/button';
 
-import WarningIcon from '@atlaskit/icon/glyph/warning';
+import WarningIcon from '@findable/icon/glyph/warning';
 
 import Comment, {
   CommentAction,

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, type Node, type ElementRef } from 'react';
-import { ItemGroup } from '@atlaskit/item';
+import { ItemGroup } from '@findable/item';
 import NavigationItemGroupTitle from '../styled/NavigationItemGroupTitle';
 import NavigationItemGroupSeparator from '../styled/NavigationItemGroupSeparator';
 import NavigationItemGroupHeader from '../styled/NavigationItemGroupHeader';

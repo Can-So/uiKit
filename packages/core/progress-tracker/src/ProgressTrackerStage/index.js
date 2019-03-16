@@ -2,8 +2,8 @@
 
 import React, { PureComponent } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { colors } from '@atlaskit/theme';
-import { GridColumn } from '@atlaskit/page';
+import { colors } from '@findable/theme';
+import { GridColumn } from '@findable/page';
 import {
   ProgressTrackerStageContainer,
   ProgressTrackerStageMarker,

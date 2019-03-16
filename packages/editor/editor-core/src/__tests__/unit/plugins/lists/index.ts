@@ -21,14 +21,14 @@ import {
   layoutSection,
   layoutColumn,
   breakout,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   toggleOrderedList,
   toggleBulletList,
 } from '../../../../plugins/lists/commands';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
 import { GapCursorSelection } from '../../../../plugins/gap-cursor';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { AnalyticsHandler } from '../../../../analytics';
 import { EditorView } from 'prosemirror-view';
 

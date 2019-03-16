@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import { Label } from './styled/Field';
 var FieldsetLabel = styled(Label).withConfig({
   displayName: "Fieldset__FieldsetLabel",

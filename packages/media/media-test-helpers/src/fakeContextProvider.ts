@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of';
-import { Context, ContextConfig, FileFetcher } from '@atlaskit/media-core';
+import { Context, ContextConfig, FileFetcher } from '@findable/media-core';
 
 const getDefaultContextConfig = () => ({
   authProvider: jest.fn().mockReturnValue(() =>

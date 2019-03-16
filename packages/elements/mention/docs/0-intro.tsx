@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Props, Example, code } from '@atlaskit/docs';
+import { md, Props, Example, code } from '@findable/docs';
 import SimpleMentionExample from '../examples/00-simple-mention-item';
 const SimpleMentionSource = require('!!raw-loader!../examples/00-simple-mention-item');
 
@@ -15,7 +15,7 @@ export default md`
   Import the component in your React app as follows:
 
   ${code`
-  import MentionPicker, { MentionResource } from '@atlaskit/mention';
+  import MentionPicker, { MentionResource } from '@findable/mention';
 
   const mentionProvider = new MentionResource({
     url: 'http://example-mention-server/service',
@@ -68,7 +68,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/mention"
+      packageName="@findable/mention"
       Component={SimpleMentionExample}
       title="Simple Mention"
       source={SimpleMentionSource}

@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import { HashRouter, Link } from 'react-router-dom';
-import Question from '@atlaskit/icon/glyph/question';
-import Arrow from '@atlaskit/icon/glyph/arrow-right';
-import Avatar from '@atlaskit/avatar';
-import Lozenge from '@atlaskit/lozenge';
-import Tooltip from '@atlaskit/tooltip';
-import { colors, gridSize } from '@atlaskit/theme';
+import Question from '@findable/icon/glyph/question';
+import Arrow from '@findable/icon/glyph/arrow-right';
+import Avatar from '@findable/avatar';
+import Lozenge from '@findable/lozenge';
+import Tooltip from '@findable/tooltip';
+import { colors, gridSize } from '@findable/theme';
 import Item from '../src';
 import {
   DropImitation,
@@ -36,7 +36,7 @@ export default class ItemStory extends Component<{}, {}> {
   render() {
     return (
       <div>
-        `@atlaskit/item - ItemGroup`
+        `@findable/item - ItemGroup`
         <div>
           Simple Item
           <GroupsWrapper>

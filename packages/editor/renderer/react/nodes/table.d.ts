@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { TableLayout } from '@atlaskit/adf-schema';
+import { TableLayout } from '@findable/adf-schema';
 import { RendererAppearance } from '../../ui/Renderer';
 export interface TableProps {
     columnWidths?: Array<number>;

@@ -1,10 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import { Label } from '@atlaskit/field-base';
-import FieldRange from '@atlaskit/field-range';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+import Button from '@findable/button';
+import { Label } from '@findable/field-base';
+import FieldRange from '@findable/field-range';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
 import Lorem from 'react-lorem-component';
 import { DateTimePicker } from '../src';
 

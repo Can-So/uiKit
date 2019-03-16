@@ -1,5 +1,5 @@
 import { gridSize } from '../shared-variables'; // Converts the top-level 'Provided' container navigation theme into the
-// format the @atlaskit/item expects.
+// format the @findable/item expects.
 
 var itemThemeFromNavTheme = function itemThemeFromNavTheme(navigationTheme) {
   return {

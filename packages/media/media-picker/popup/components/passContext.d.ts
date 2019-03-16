@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { AppProxyReactContext } from './app';
 import { Store } from 'redux';
 import { State } from '../domain';
-import { UIAnalyticsEventHandlerSignature } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventHandlerSignature } from '@findable/analytics-next-types';
 export interface PassContextProps {
     store: Store<State>;
     proxyReactContext?: AppProxyReactContext;

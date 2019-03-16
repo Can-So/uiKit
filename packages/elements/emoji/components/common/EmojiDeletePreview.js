@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import AkButton from '@atlaskit/button';
+import AkButton from '@findable/button';
 import * as React from 'react';
 import { Component } from 'react';
 import { FormattedMessage } from 'react-intl';

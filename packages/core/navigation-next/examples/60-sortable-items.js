@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import type { DropResult } from 'react-beautiful-dnd';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 import { SortableItem, SortableGroup, SortableContext } from '../src';
 import { CONTENT_NAV_WIDTH } from '../src/common/constants';

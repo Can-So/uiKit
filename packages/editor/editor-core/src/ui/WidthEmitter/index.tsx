@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { EditorView } from 'prosemirror-view';
 import { pluginKey as widthPluginKey } from '../../plugins/width';
-import { WidthConsumer } from '@atlaskit/editor-common';
+import { WidthConsumer } from '@findable/editor-common';
 
 export interface Props {
   editorView: EditorView;

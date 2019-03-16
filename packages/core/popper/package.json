@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/popper",
+  "name": "@findable/popper",
   "version": "0.4.1",
   "description": "Wrapper for react-popper with common config and some helpers",
   "license": "Apache-2.0",
@@ -13,7 +13,7 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "memoize-one": "^3.0.1",
@@ -23,11 +23,11 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/button": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/ssr": "^0.0.1",
+    "@findable/theme": "^8.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-lorem-component": "^0.12.2",

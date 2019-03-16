@@ -4,7 +4,7 @@ import {
   code_block,
   breakout,
   p,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { setBreakoutMode } from '../../../../../plugins/breakout/commands/set-breakout-mode';
 
 describe('Breakout Commands: set-breakout-mode', () => {

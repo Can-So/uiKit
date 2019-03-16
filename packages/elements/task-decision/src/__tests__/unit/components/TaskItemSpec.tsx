@@ -3,7 +3,7 @@ import * as sinon from 'sinon';
 import { mount } from 'enzyme';
 import FabricAnalyticsListener, {
   AnalyticsWebClient,
-} from '@atlaskit/analytics-listeners';
+} from '@findable/analytics-listeners';
 import TaskItem from '../../../components/TaskItem';
 import Participants from '../../../components/Participants';
 import { AttributionWrapper, ContentWrapper } from '../../../styled/Item';

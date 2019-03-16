@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var CustomVideoWrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  user-select: none;\n"], ["\n  width: 100%;\n  height: 100%;\n  user-select: none;\n"])));
 export var VideoWrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n"], ["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n"])));
 export var TimebarWrapper = styled.div(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: white;\n  position: absolute;\n  width: 100%;\n  bottom: 10px;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: white;\n  position: absolute;\n  width: 100%;\n  bottom: 10px;\n"])));

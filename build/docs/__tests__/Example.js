@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import Example, { ToggleTitle, Toggle } from '../src/Example';
-import { AkCodeBlock } from '@atlaskit/code';
+import { AkCodeBlock } from '@findable/code';
 import { mount } from 'enzyme';
 import cases from 'jest-in-case';
 
@@ -26,7 +26,7 @@ cases(
       language: 'javascript',
       source: '<div>Mock Component</div>',
       title: 'Some title we have',
-      packageName: '@atlaskit/somewhere',
+      packageName: '@findable/somewhere',
     };
 
     let combinedProps = { ...defaultProps, ...props };

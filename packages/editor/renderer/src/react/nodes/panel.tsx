@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { colors } from '@atlaskit/theme';
-import InfoIcon from '@atlaskit/icon/glyph/editor/info';
-import TipIcon from '@atlaskit/icon/glyph/editor/hint';
-import SuccessIcon from '@atlaskit/icon/glyph/editor/success';
-import ErrorIcon from '@atlaskit/icon/glyph/editor/error';
-import NoteIcon from '@atlaskit/icon/glyph/editor/note';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
-import { PanelType } from '@atlaskit/adf-schema';
+import { colors } from '@findable/theme';
+import InfoIcon from '@findable/icon/glyph/editor/info';
+import TipIcon from '@findable/icon/glyph/editor/hint';
+import SuccessIcon from '@findable/icon/glyph/editor/success';
+import ErrorIcon from '@findable/icon/glyph/editor/error';
+import NoteIcon from '@findable/icon/glyph/editor/note';
+import WarningIcon from '@findable/icon/glyph/warning';
+import { PanelType } from '@findable/adf-schema';
 
 export interface Props {
   panelType: PanelType;

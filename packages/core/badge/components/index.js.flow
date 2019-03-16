@@ -1,6 +1,6 @@
 // @flow
 
-import GlobalTheme, { type ThemeProp } from '@atlaskit/theme';
+import GlobalTheme, { type ThemeProp } from '@findable/theme';
 import React, { Component } from 'react';
 import { Container } from './Container';
 import { Format } from './Format';
@@ -33,7 +33,7 @@ type Props = {
   /** The theme the component should use. */
   theme?: ThemeProp<ThemeTokens, ThemeProps>,
 
-  /** DEPRECATED - use `Max` from `@atlaskit/format`. The value displayed within the badge. */
+  /** DEPRECATED - use `Max` from `@findable/format`. The value displayed within the badge. */
   /** DEPRECATED - use children instead. The value displayed within the badge. */
   value?: number,
 };

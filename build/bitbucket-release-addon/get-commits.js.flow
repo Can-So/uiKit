@@ -1,4 +1,4 @@
-import parseChangesetCommit from '@atlaskit/build-releases/changeset/parseChangesetCommit';
+import parseChangesetCommit from '@findable/build-releases/changeset/parseChangesetCommit';
 
 function commitsToValues(response) {
   return response.values;

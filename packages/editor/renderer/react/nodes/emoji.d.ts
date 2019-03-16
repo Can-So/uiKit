@@ -1,6 +1,6 @@
-import { EmojiAttributes } from '@atlaskit/adf-schema';
+import { EmojiAttributes } from '@findable/adf-schema';
 import { PureComponent } from 'react';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 export interface EmojiProps extends EmojiAttributes {
     providers?: ProviderFactory;
     fitToHeight?: number;

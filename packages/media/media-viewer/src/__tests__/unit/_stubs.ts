@@ -7,7 +7,7 @@ import {
   FileItem,
   Auth,
   FileState,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 
 export class Stubs {
   static mediaViewer(overrides: any) {

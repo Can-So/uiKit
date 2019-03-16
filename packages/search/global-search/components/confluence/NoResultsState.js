@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { ResultItemGroup } from '@atlaskit/quick-search';
+import Button from '@findable/button';
+import { ResultItemGroup } from '@findable/quick-search';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../../messages';
 import NoResults from '../NoResults';

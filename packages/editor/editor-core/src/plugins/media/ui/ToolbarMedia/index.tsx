@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import AttachmentIcon from '@atlaskit/icon/glyph/editor/attachment';
+import AttachmentIcon from '@findable/icon/glyph/editor/attachment';
 import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import { MediaPluginState } from '../../pm-plugins/main';

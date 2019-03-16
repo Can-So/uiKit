@@ -6,11 +6,11 @@ import {
   Context,
   Identifier,
   ImageResizeMode,
-} from '@atlaskit/media-core';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+} from '@findable/media-core';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 
 import { CardAction } from './actions';
-import { MediaViewerDataSource } from '@atlaskit/media-viewer';
+import { MediaViewerDataSource } from '@findable/media-viewer';
 
 // the only components we expose to consumers is Card and CardView
 export { default as Card } from './root/card/cardLoader';

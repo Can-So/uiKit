@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import InlineDialog from '@atlaskit/inline-dialog';
-import Button from '@atlaskit/button';
+import InlineDialog from '@findable/inline-dialog';
+import Button from '@findable/button';
 import { ShapePopupContentWrapper } from './popupStyles';
 import { toolIcons } from '../buttons/toolButton';
 import { ShapeTitle } from '../buttons/styles';

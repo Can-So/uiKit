@@ -1,5 +1,5 @@
-import { emoji } from '@atlaskit/util-data-test';
-import { videoLargeFileId } from '@atlaskit/media-test-helpers';
+import { emoji } from '@findable/util-data-test';
+import { videoLargeFileId } from '@findable/media-test-helpers';
 
 const emojiTestData = emoji.testData;
 const emojiStoryData = emoji.storyData;

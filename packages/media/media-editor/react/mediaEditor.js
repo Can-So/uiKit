@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import { MediaEditorContainer, OutputArea, DrawingCanvas, HiddenTextArea, HiddenTextHelperDiv, SupplementaryCanvas, SpinnerWrapper, } from './styled';
 import { Engine } from '../engine/engine';
 import { colorSame, colorWithAlphaSame, dimensionsSame } from '../util';

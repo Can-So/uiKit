@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@findable/media-core';
 import { Outcome, MediaViewerFeatureFlags } from './domain';
 import { MediaViewerError } from './error';
-import { MediaCollectionItem } from '@atlaskit/media-store';
+import { MediaCollectionItem } from '@findable/media-store';
 export declare type Props = Readonly<{
     onClose?: () => void;
     defaultSelectedItem?: FileIdentifier;

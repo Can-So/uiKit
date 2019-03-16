@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 export var WithCreateAnalyticsEvent = withAnalyticsEvents()(/** @class */ (function (_super) {
     tslib_1.__extends(WithCreateAnalyticsEvent, _super);
     function WithCreateAnalyticsEvent() {

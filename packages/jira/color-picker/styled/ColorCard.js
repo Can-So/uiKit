@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled, { css } from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 import { COLOR_CARD_SIZE } from '../constants';
 var buttonFocusedBorder = "border-color: " + colors.B100 + ";";
 var sharedColorContainerStyles = css(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: inline-block;\n  position: relative;\n  width: ", "px;\n  height: ", "px;\n  border: 2px solid transparent;\n  box-sizing: border-box;\n  border-radius: ", "px;\n  transition: border-color 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38);\n  border-color: transparent;\n  padding: 0;\n  cursor: pointer;\n  outline: none;\n"], ["\n  display: inline-block;\n  position: relative;\n  width: ", "px;\n  height: ", "px;\n  border: 2px solid transparent;\n  box-sizing: border-box;\n  border-radius: ", "px;\n  transition: border-color 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38);\n  border-color: transparent;\n  padding: 0;\n  cursor: pointer;\n  outline: none;\n"])), COLOR_CARD_SIZE, COLOR_CARD_SIZE, borderRadius() * 2);

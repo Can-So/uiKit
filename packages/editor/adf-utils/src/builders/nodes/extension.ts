@@ -1,4 +1,4 @@
-import { ExtensionDefinition } from '@atlaskit/adf-schema';
+import { ExtensionDefinition } from '@findable/adf-schema';
 
 export const extension = (
   attrs: ExtensionDefinition['attrs'],

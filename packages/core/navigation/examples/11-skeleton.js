@@ -1,10 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import Page from '@atlaskit/page';
-import Toggle from '@atlaskit/toggle';
-import SingleSelect from '@atlaskit/single-select';
-import { colors } from '@atlaskit/theme';
+import Page from '@findable/page';
+import Toggle from '@findable/toggle';
+import SingleSelect from '@findable/single-select';
+import { colors } from '@findable/theme';
 
 import { Skeleton, presetThemes, createGlobalTheme } from '../src';
 

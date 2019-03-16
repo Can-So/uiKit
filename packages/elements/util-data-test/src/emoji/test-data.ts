@@ -3,7 +3,7 @@ import {
   denormaliseEmojiServiceResponse,
   EmojiDescription,
   UsageFrequencyTracker,
-} from '@atlaskit/emoji';
+} from '@findable/emoji';
 import { customCategory, customType } from './utils';
 import {
   mockNonUploadingEmojiResourceFactory,

@@ -1,5 +1,5 @@
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import { sleep } from '@atlaskit/editor-test-helpers';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
+import { sleep } from '@findable/editor-test-helpers';
 
 import { editable, getDocFromElement, fullpage } from '../_helpers';
 

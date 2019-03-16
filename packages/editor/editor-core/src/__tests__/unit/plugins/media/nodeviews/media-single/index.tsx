@@ -6,8 +6,8 @@ import {
   media,
   randomId,
   storyMediaProviderFactory,
-} from '@atlaskit/editor-test-helpers';
-import { defaultSchema, MediaAttributes } from '@atlaskit/adf-schema';
+} from '@findable/editor-test-helpers';
+import { defaultSchema, MediaAttributes } from '@findable/adf-schema';
 import {
   stateKey as mediaStateKey,
   MediaPluginState,
@@ -17,7 +17,7 @@ import MediaSingle, {
   ReactMediaSingleNode,
 } from '../../../../../../plugins/media/nodeviews/mediaSingle';
 import Media from '../../../../../../plugins/media/nodeviews/media';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { EventDispatcher } from '../../../../../../event-dispatcher';
 import { PortalProviderAPI } from '../../../../../../ui/PortalProvider';
 

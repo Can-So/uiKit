@@ -1,7 +1,7 @@
 import { EditorView } from 'prosemirror-view';
 import { UIComponentFactory, ToolbarUIComponentFactory } from './editor-plugin';
 import { EventDispatcher } from '../event-dispatcher';
-import { Transformer } from '@atlaskit/editor-common';
+import { Transformer } from '@findable/editor-common';
 import { InsertMenuCustomItem } from '../types';
 export interface EditorInstance {
     editorView: EditorView;

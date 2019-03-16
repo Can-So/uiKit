@@ -1,4 +1,4 @@
-import Select, { CreatableSelect } from '@atlaskit/select';
+import Select, { CreatableSelect } from '@findable/select';
 import * as React from 'react';
 import { UserPickerProps } from '../types';
 import { BaseUserPicker } from './BaseUserPicker';

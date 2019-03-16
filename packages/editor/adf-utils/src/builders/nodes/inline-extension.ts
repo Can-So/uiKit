@@ -1,4 +1,4 @@
-import { InlineExtensionDefinition } from '@atlaskit/adf-schema';
+import { InlineExtensionDefinition } from '@findable/adf-schema';
 
 export const inlineExtension = (
   attrs: InlineExtensionDefinition['attrs'],

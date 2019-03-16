@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes } from 'react';
 
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 // tslint:disable-next-line:variable-name
 export const Content: React.ComponentClass<HTMLAttributes<{}>> = styled.div`

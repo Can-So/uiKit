@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ButtonAppearances } from '../types';
-import { PropsPasser, PropsOf } from '@atlaskit/type-helpers';
+import { PropsPasser, PropsOf } from '@findable/type-helpers';
 
 const getComponentName = (target: React.ComponentType): string => {
   if (target.displayName && typeof target.displayName === 'string') {

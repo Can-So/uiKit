@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom';
 import { insertPoint } from 'prosemirror-transform';
 import { Decoration, DecorationSet } from 'prosemirror-view';
 import { NodeSelection, Plugin, PluginKey, } from 'prosemirror-state';
-import { ErrorReporter } from '@atlaskit/editor-common';
+import { ErrorReporter } from '@findable/editor-common';
 import analyticsService from '../../../analytics/service';
 import { isImage, SetAttrsStep } from '../../../utils';
 import DropPlaceholder from '../ui/Media/DropPlaceholder';

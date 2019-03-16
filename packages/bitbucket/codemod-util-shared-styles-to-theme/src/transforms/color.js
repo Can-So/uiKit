@@ -95,7 +95,7 @@ export default function colorTransform(root: any, j: any) {
   const sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles',
+      value: '@findable/util-shared-styles',
     },
   });
   if (!sharedStylesImport) {
@@ -134,11 +134,11 @@ export default function colorTransform(root: any, j: any) {
       .replaceWith(() => j.identifier(colorMappings[spec.imported]));
   });
 
-  // Add an import of colors from @atlaskit/theme
+  // Add an import of colors from @findable/theme
   addNamedImport(
     root,
     j,
-    '@atlaskit/theme',
+    '@findable/theme',
     'colors',
     'colors',
     sharedStylesImport,

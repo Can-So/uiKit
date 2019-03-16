@@ -3,8 +3,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Button, { ButtonGroup } from '@atlaskit/button';
-import Spinner from '@atlaskit/spinner';
+import Button, { ButtonGroup } from '@findable/button';
+import Spinner from '@findable/spinner';
 
 import EmptyState from '../../EmptyState';
 

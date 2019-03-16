@@ -4,20 +4,20 @@ import { EditorState, Plugin, PluginKey, StateField } from 'prosemirror-state';
 import {
   AnalyticsEventPayload,
   CreateUIAnalyticsEventSignature,
-} from '@atlaskit/analytics-next-types';
-import MentionIcon from '@atlaskit/icon/glyph/editor/mention';
+} from '@findable/analytics-next-types';
+import MentionIcon from '@findable/icon/glyph/editor/mention';
 import {
   MentionProvider,
   MentionItem,
   isSpecialMention,
   MentionDescription,
   ELEMENTS_CHANNEL,
-} from '@atlaskit/mention';
-import { mention } from '@atlaskit/adf-schema';
+} from '@findable/mention';
+import { mention } from '@findable/adf-schema';
 import {
   ProviderFactory,
   ContextIdentifierProvider,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 import { analyticsService } from '../../analytics';
 import { EditorPlugin, Command, EditorAppearance } from '../../types';

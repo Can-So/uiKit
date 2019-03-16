@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
 import * as Postis from 'postis';
-import { AuthProvider } from '@atlaskit/media-core';
+import { AuthProvider } from '@findable/media-core';
 
 import { CloudService } from '../../cloud-service';
 

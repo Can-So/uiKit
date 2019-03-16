@@ -7,7 +7,7 @@ import _defineProperty from "@babel/runtime/helpers/defineProperty";
 
 /**
  * NOTE: This GlobalNavigation is the layout primitive, which will be wrapped by
- * the more opinionated @atlaskit/global-navigation component.
+ * the more opinionated @findable/global-navigation component.
  */
 import React, { Component } from 'react';
 import GlobalItem from '../GlobalItem';

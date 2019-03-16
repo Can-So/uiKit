@@ -1,6 +1,6 @@
 // @flow
 import type { ComponentType, ElementConfig } from 'react';
-import { GlobalItem, GlobalNav } from '@atlaskit/navigation-next';
+import { GlobalItem, GlobalNav } from '@findable/navigation-next';
 
 type DefaultItemShape = {
   icon?: ComponentType<*>,

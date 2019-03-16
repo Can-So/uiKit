@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 import NoResultsImage from '../assets/NoResultsImage';
 var NoResultsWrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  text-align: center;\n  margin-top: ", "px;\n  margin-bottom: 0;\n"], ["\n  text-align: center;\n  margin-top: ", "px;\n  margin-bottom: 0;\n"])), math.multiply(gridSize, 15));
 var NoResults = /** @class */ (function (_super) {

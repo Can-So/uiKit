@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Link, MemoryRouter } from 'react-router-dom';
-import { AtlassianIcon } from '@atlaskit/logo';
+import { AtlassianIcon } from '@findable/logo';
 import { BreadcrumbsStateless, BreadcrumbsItem } from '../src';
 
 type Props = {

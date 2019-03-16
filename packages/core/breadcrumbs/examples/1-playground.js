@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
-import Button from '@atlaskit/button';
-import Select from '@atlaskit/select';
+import Button from '@findable/button';
+import Select from '@findable/select';
 import { BreadcrumbsStateless, BreadcrumbsItem } from '../src';
 
 const data = [

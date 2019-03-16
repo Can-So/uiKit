@@ -4,13 +4,13 @@ This component is displayed as an accessible tag with an optional link and/or
 button to remove it.
 
 Although the `tag` component can be used by itself, it works best in
-conjunction with the [`@atlaskit/tag-group`](https://www.npmjs.com/package/@atlaskit/tag-group)
+conjunction with the [`@findable/tag-group`](https://www.npmjs.com/package/@findable/tag-group)
 component.
 
 ## Installation
 
 ```sh
-yarn add @atlaskit/tag
+yarn add @findable/tag
 ```
 
 ## Usage

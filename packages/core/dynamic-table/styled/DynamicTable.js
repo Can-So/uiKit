@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 export var Table = styled.table.withConfig({
   displayName: "DynamicTable__Table",
   componentId: "sc-1naczgt-0"

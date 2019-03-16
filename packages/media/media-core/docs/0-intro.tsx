@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example } from '@atlaskit/docs';
+import { md, code, Example } from '@findable/docs';
 
 export default md`
   This package is required by other Media Components, and should not be used
@@ -17,7 +17,7 @@ export default md`
   be created using either \`token\` and either \`clientId\` or \`asapIssuer\`.
 
   ${code`
-import { Context, ContextConfig, ContextFactory } from '@atlaskit/media-core';
+import { Context, ContextConfig, ContextFactory } from '@findable/media-core';
 
 const authProvider = ({ collectionName }) =>
   new Promise((resolve, reject) => {

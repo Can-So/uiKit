@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import cssResetStyles from '@atlaskit/css-reset';
+import cssResetStyles from '@findable/css-reset';
 import 'regenerator-runtime/runtime';
 import insertStyleSheetInHead from './utils/insertStyleSheetInHead';
 import ExamplesLoader from './pages/Examples/loader';

@@ -4,7 +4,7 @@ import {
   MentionDescription,
   MentionsResult,
   AbstractMentionResource,
-} from '@atlaskit/mention';
+} from '@findable/mention';
 import debug from '../logger';
 import { mentionResult } from './mention-data';
 import { HttpError } from './utils';

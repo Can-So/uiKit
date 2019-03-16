@@ -1,5 +1,5 @@
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory, ExtensionHandlers } from '@atlaskit/editor-common';
+import { ProviderFactory, ExtensionHandlers } from '@findable/editor-common';
 import { EventDispatcher } from '../event-dispatcher';
 import EditorActions from '../actions';
 import {

@@ -6,15 +6,15 @@ import {
   MediaSingleLayout,
   MediaAttributes,
   ExternalMediaAttributes,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import {
   MediaSingle,
   WithProviders,
   DEFAULT_IMAGE_HEIGHT,
   DEFAULT_IMAGE_WIDTH,
   browser,
-} from '@atlaskit/editor-common';
-import { CardEvent } from '@atlaskit/media-card';
+} from '@findable/editor-common';
+import { CardEvent } from '@findable/media-card';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
 import { stateKey, MediaPluginState } from '../pm-plugins/main';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
@@ -28,7 +28,7 @@ import { createDisplayGrid } from '../../../plugins/grid';
 import { EventDispatcher } from '../../../event-dispatcher';
 import { MediaProvider } from '../types';
 import { EditorAppearance } from '../../../types';
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 
 export interface MediaSingleNodeProps {

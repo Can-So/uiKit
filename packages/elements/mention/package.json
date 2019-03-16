@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/mention",
+  "name": "@findable/mention",
   "version": "17.1.0",
   "config": {
     "access": "public"
@@ -10,29 +10,29 @@
   "atlaskit:src": "src/index.ts",
   "sideEffects": false,
   "dependencies": {
-    "@atlaskit/analytics": "^5.0.0",
-    "@atlaskit/analytics-gas-types": "^4.0.0",
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/analytics-next-types": "^4.0.0",
-    "@atlaskit/avatar": "^15.0.1",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/lozenge": "^7.0.0",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/tooltip": "^13.0.1",
-    "@atlaskit/util-service-support": "^4.0.0",
+    "@findable/analytics": "^5.0.0",
+    "@findable/analytics-gas-types": "^4.0.0",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/analytics-next-types": "^4.0.0",
+    "@findable/avatar": "^15.0.1",
+    "@findable/icon": "^16.0.5",
+    "@findable/lozenge": "^7.0.0",
+    "@findable/theme": "^8.0.1",
+    "@findable/tooltip": "^13.0.1",
+    "@findable/util-service-support": "^4.0.0",
     "babel-runtime": "^6.26.0",
     "tslib": "^1.8.0",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/editor-test-helpers": "^8.0.0",
-    "@atlaskit/elements-test-helpers": "^0.4.0",
-    "@atlaskit/i18n-tools": "^0.5.0",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^11.1.0",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/editor-test-helpers": "^8.0.0",
+    "@findable/elements-test-helpers": "^0.4.0",
+    "@findable/i18n-tools": "^0.5.0",
+    "@findable/ssr": "^0.0.1",
+    "@findable/util-common-test": "^2.4.2",
+    "@findable/util-data-test": "^11.1.0",
     "@types/fetch-mock": "^6.0.3",
     "@types/query-string": "^4.3.1",
     "enzyme": "^3.7.0",
@@ -62,7 +62,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "scripts": {
     "i18n:push": "i18n-tools push --resource mention . --type ts",

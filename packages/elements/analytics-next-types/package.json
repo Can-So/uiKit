@@ -1,7 +1,7 @@
 {
-  "name": "@atlaskit/analytics-next-types",
+  "name": "@findable/analytics-next-types",
   "version": "4.0.1",
-  "description": "TypeScript Type Definitions for @atlaskit/analytics-next",
+  "description": "TypeScript Type Definitions for @findable/analytics-next",
   "config": {
     "access": "public"
   },
@@ -15,7 +15,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "atlaskit": {
     "internal": true
@@ -31,6 +31,6 @@
     "react": "^16.4.0"
   },
   "dependencies": {
-    "@atlaskit/type-helpers": "^3.0.1"
+    "@findable/type-helpers": "^3.0.1"
   }
 }

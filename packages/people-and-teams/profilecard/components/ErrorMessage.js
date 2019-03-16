@@ -6,8 +6,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
-import IconError from '@atlaskit/icon/glyph/cross-circle';
-import AkButton from '@atlaskit/button';
+import IconError from '@findable/icon/glyph/cross-circle';
+import AkButton from '@findable/button';
 import { ErrorWrapper, ErrorTitle, ErrorText } from '../styled/Error';
 
 var ErrorMessage =

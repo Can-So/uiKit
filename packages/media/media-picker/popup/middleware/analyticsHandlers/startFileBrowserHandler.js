@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { SCREEN_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { SCREEN_EVENT_TYPE } from '@findable/analytics-gas-types';
 import { buttonClickPayload } from '.';
 import { isStartFileBrowserAction } from '../../actions/startFileBrowser';
 export default (function (action) {

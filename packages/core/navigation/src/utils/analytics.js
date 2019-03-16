@@ -4,7 +4,7 @@ import { type ComponentType } from 'react';
 import {
   withAnalyticsEvents,
   type WithAnalyticsEventsProps,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 
 export const navigationChannel = 'navigation';
 

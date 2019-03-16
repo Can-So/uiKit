@@ -1,4 +1,4 @@
-import { SCREEN_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { SCREEN_EVENT_TYPE } from '@findable/analytics-gas-types';
 import { isSearchGiphyAction } from '../../actions';
 export default (function (action) {
     if (isSearchGiphyAction(action)) {

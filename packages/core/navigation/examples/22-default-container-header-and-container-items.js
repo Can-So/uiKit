@@ -1,17 +1,17 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import Button from '@atlaskit/button';
-import { ConfluenceIcon, JiraIcon } from '@atlaskit/logo';
-import EditorAlignLeftIcon from '@atlaskit/icon/glyph/editor/align-left';
+import AddIcon from '@findable/icon/glyph/add';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
+import Button from '@findable/button';
+import { ConfluenceIcon, JiraIcon } from '@findable/logo';
+import EditorAlignLeftIcon from '@findable/icon/glyph/editor/align-left';
 import Lorem from 'react-lorem-component';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import Tooltip from '@atlaskit/tooltip';
+import Page, { Grid, GridColumn } from '@findable/page';
+import SearchIcon from '@findable/icon/glyph/search';
+import Tooltip from '@findable/tooltip';
 // $FlowFixMe: cannot resolve TS module
-import { AkSearch } from '@atlaskit/quick-search';
+import { AkSearch } from '@findable/quick-search';
 
 import SecondaryActions from './utils/confluence-example/SecondaryActions';
 import Navigation, {

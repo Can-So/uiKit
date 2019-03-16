@@ -1,23 +1,23 @@
-# @atlaskit/dropdown-menu
+# @findable/dropdown-menu
 
 ## 7.0.2
-- [patch] [dc114c4ce6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc114c4ce6):
+- [patch] [dc114c4ce6](https://github.com/fnamazing/uiKit/commits/dc114c4ce6):
 
   - Internal changes only. DropdownMenu is now compatible with SSR.
 
 ## 7.0.1
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/analytics-next@4.0.1
-  - @atlaskit/avatar@15.0.1
-  - @atlaskit/droplist@8.0.1
-  - @atlaskit/icon@16.0.5
-  - @atlaskit/theme@8.0.1
-  - @atlaskit/tooltip@13.0.1
-  - @atlaskit/button@11.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/analytics-next@4.0.1
+  - @findable/avatar@15.0.1
+  - @findable/droplist@8.0.1
+  - @findable/icon@16.0.5
+  - @findable/theme@8.0.1
+  - @findable/tooltip@13.0.1
+  - @findable/button@11.0.0
 
 ## 7.0.0
-- [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [major] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -29,13 +29,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -49,371 +49,371 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 6.1.26
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/avatar@14.1.8
-  - @atlaskit/button@10.1.2
-  - @atlaskit/droplist@7.0.18
-  - @atlaskit/item@8.0.15
-  - @atlaskit/tooltip@12.1.15
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/avatar@14.1.8
+  - @findable/button@10.1.2
+  - @findable/droplist@7.0.18
+  - @findable/item@8.0.15
+  - @findable/tooltip@12.1.15
+  - @findable/icon@16.0.0
 
 ## 6.1.25
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/analytics-next@3.1.2
-  - @atlaskit/avatar@14.1.7
-  - @atlaskit/button@10.1.1
-  - @atlaskit/droplist@7.0.17
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/item@8.0.14
-  - @atlaskit/lozenge@6.2.4
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/tooltip@12.1.13
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/analytics-next@3.1.2
+  - @findable/avatar@14.1.7
+  - @findable/button@10.1.1
+  - @findable/droplist@7.0.17
+  - @findable/icon@15.0.2
+  - @findable/item@8.0.14
+  - @findable/lozenge@6.2.4
+  - @findable/theme@7.0.1
+  - @findable/tooltip@12.1.13
+  - @findable/docs@6.0.0
 
 ## 6.1.24
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/button@10.0.4
-  - @atlaskit/droplist@7.0.16
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/item@8.0.13
-  - @atlaskit/tooltip@12.1.12
-  - @atlaskit/theme@7.0.0
-  - @atlaskit/avatar@14.1.6
-  - @atlaskit/lozenge@6.2.3
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/button@10.0.4
+  - @findable/droplist@7.0.16
+  - @findable/icon@15.0.1
+  - @findable/item@8.0.13
+  - @findable/tooltip@12.1.12
+  - @findable/theme@7.0.0
+  - @findable/avatar@14.1.6
+  - @findable/lozenge@6.2.3
 
 ## 6.1.23
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/avatar@14.1.5
-  - @atlaskit/button@10.0.1
-  - @atlaskit/droplist@7.0.14
-  - @atlaskit/item@8.0.12
-  - @atlaskit/tooltip@12.1.11
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/avatar@14.1.5
+  - @findable/button@10.0.1
+  - @findable/droplist@7.0.14
+  - @findable/item@8.0.12
+  - @findable/tooltip@12.1.11
+  - @findable/icon@15.0.0
 
 ## 6.1.22
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/analytics-next@3.1.1
-  - @atlaskit/avatar@14.1.4
-  - @atlaskit/droplist@7.0.13
-  - @atlaskit/icon@14.6.1
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/tooltip@12.1.10
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/analytics-next@3.1.1
+  - @findable/avatar@14.1.4
+  - @findable/droplist@7.0.13
+  - @findable/icon@14.6.1
+  - @findable/theme@6.2.1
+  - @findable/tooltip@12.1.10
+  - @findable/button@10.0.0
 
 ## 6.1.21
-- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+- [patch] [1fb2c2a](https://github.com/fnamazing/uiKit/commits/1fb2c2a):
 
   - Fixed issue where tooltips and modals would initially render in the wrong location
 
 ## 6.1.20
 - [patch] [fe943bb"
-d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe943bb"
+d](https://github.com/fnamazing/uiKit/commits/fe943bb"
 d):
 
   - Make sure we check userAgent only if we have a DOM
 
 ## 6.1.19
-- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://github.com/fnamazing/uiKit/commits/b71751b)
 
 ## 6.1.18
-- [patch] Fix the dropdown menu height exceeding viewport height when appearance prop is set to ‘tall’ [0deec63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0deec63)
+- [patch] Fix the dropdown menu height exceeding viewport height when appearance prop is set to ‘tall’ [0deec63](https://github.com/fnamazing/uiKit/commits/0deec63)
 
 ## 6.1.17
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/avatar@14.0.11
-  - @atlaskit/button@9.0.13
-  - @atlaskit/droplist@7.0.10
-  - @atlaskit/item@8.0.8
-  - @atlaskit/tooltip@12.1.1
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/avatar@14.0.11
+  - @findable/button@9.0.13
+  - @findable/droplist@7.0.10
+  - @findable/item@8.0.8
+  - @findable/tooltip@12.1.1
+  - @findable/icon@14.0.0
 
 ## 6.1.16
-- [patch] Fixing dropdown-menu analytics [c4098d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4098d0)
+- [patch] Fixing dropdown-menu analytics [c4098d0](https://github.com/fnamazing/uiKit/commits/c4098d0)
 
 ## 6.1.15
-- [patch] Updated dependencies [7d51a09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d51a09)
-  - @atlaskit/button@9.0.10
-  - @atlaskit/lozenge@6.2.1
+- [patch] Updated dependencies [7d51a09](https://github.com/fnamazing/uiKit/commits/7d51a09)
+  - @findable/button@9.0.10
+  - @findable/lozenge@6.2.1
 
 ## 6.1.14
-- [patch] Updated dependencies [4b36fd6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b36fd6)
-  - @atlaskit/lozenge@6.2.0
+- [patch] Updated dependencies [4b36fd6](https://github.com/fnamazing/uiKit/commits/4b36fd6)
+  - @findable/lozenge@6.2.0
 
 ## 6.1.13
-- [patch] Updated dependencies [969233e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/969233e)
-  - @atlaskit/lozenge@6.1.8
+- [patch] Updated dependencies [969233e](https://github.com/fnamazing/uiKit/commits/969233e)
+  - @findable/lozenge@6.1.8
 
 ## 6.1.12
-- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://github.com/fnamazing/uiKit/commits/b5d6d04)
 
 ## 6.1.11
-- [patch] Fix initial position glitch when opening dropdown menu [d79e361](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d79e361)
+- [patch] Fix initial position glitch when opening dropdown menu [d79e361](https://github.com/fnamazing/uiKit/commits/d79e361)
 
 ## 6.1.9
-- [patch] Fix dropdown menu calls onOpenChange unnecessarily [2868a72](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2868a72)
-- [patch] Updated dependencies [2868a72](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2868a72)
+- [patch] Fix dropdown menu calls onOpenChange unnecessarily [2868a72](https://github.com/fnamazing/uiKit/commits/2868a72)
+- [patch] Updated dependencies [2868a72](https://github.com/fnamazing/uiKit/commits/2868a72)
 
 ## 6.1.8
-- [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/tooltip@12.0.9
-  - @atlaskit/lozenge@6.1.5
-  - @atlaskit/item@8.0.5
-  - @atlaskit/icon@13.2.5
-  - @atlaskit/droplist@7.0.7
-  - @atlaskit/button@9.0.6
-  - @atlaskit/avatar@14.0.8
-  - @atlaskit/docs@5.0.6
+- [patch] Updated dependencies [df22ad8](https://github.com/fnamazing/uiKit/commits/df22ad8)
+  - @findable/theme@6.0.0
+  - @findable/tooltip@12.0.9
+  - @findable/lozenge@6.1.5
+  - @findable/item@8.0.5
+  - @findable/icon@13.2.5
+  - @findable/droplist@7.0.7
+  - @findable/button@9.0.6
+  - @findable/avatar@14.0.8
+  - @findable/docs@5.0.6
 
 ## 6.1.7
-- [patch] Updated dependencies [8242529](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8242529)
-  - @atlaskit/droplist@7.0.6
+- [patch] Updated dependencies [8242529](https://github.com/fnamazing/uiKit/commits/8242529)
+  - @findable/droplist@7.0.6
 
 ## 6.1.6
-- [patch] Fix scroll to top of container issue when menu is opened via keydown [0a09918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a09918)
-- [patch] Updated dependencies [0a09918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a09918)
+- [patch] Fix scroll to top of container issue when menu is opened via keydown [0a09918](https://github.com/fnamazing/uiKit/commits/0a09918)
+- [patch] Updated dependencies [0a09918](https://github.com/fnamazing/uiKit/commits/0a09918)
 
 ## 6.1.5
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [patch] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/tooltip@12.0.5
-  - @atlaskit/analytics-next@3.0.4
-  - @atlaskit/button@9.0.5
-  - @atlaskit/theme@5.1.3
-  - @atlaskit/lozenge@6.1.4
-  - @atlaskit/item@8.0.4
-  - @atlaskit/icon@13.2.4
-  - @atlaskit/droplist@7.0.5
-  - @atlaskit/avatar@14.0.6
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [patch] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/tooltip@12.0.5
+  - @findable/analytics-next@3.0.4
+  - @findable/button@9.0.5
+  - @findable/theme@5.1.3
+  - @findable/lozenge@6.1.4
+  - @findable/item@8.0.4
+  - @findable/icon@13.2.4
+  - @findable/droplist@7.0.5
+  - @findable/avatar@14.0.6
 
 ## 6.1.4
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/tooltip@12.0.4
-  - @atlaskit/item@8.0.3
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/button@9.0.4
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/lozenge@6.1.3
-  - @atlaskit/analytics-next@3.0.3
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/droplist@7.0.4
-  - @atlaskit/avatar@14.0.5
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/tooltip@12.0.4
+  - @findable/item@8.0.3
+  - @findable/icon@13.2.2
+  - @findable/button@9.0.4
+  - @findable/theme@5.1.2
+  - @findable/lozenge@6.1.3
+  - @findable/analytics-next@3.0.3
+  - @findable/docs@5.0.2
+  - @findable/droplist@7.0.4
+  - @findable/avatar@14.0.5
 
 ## 6.1.3
-- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-- [patch] Updated dependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-  - @atlaskit/tooltip@12.0.3
-  - @atlaskit/analytics-next@3.0.2
-  - @atlaskit/button@9.0.3
-  - @atlaskit/theme@5.1.1
-  - @atlaskit/lozenge@6.1.2
-  - @atlaskit/item@8.0.2
-  - @atlaskit/icon@13.2.1
-  - @atlaskit/droplist@7.0.3
-  - @atlaskit/avatar@14.0.4
+- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+- [patch] Updated dependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+  - @findable/tooltip@12.0.3
+  - @findable/analytics-next@3.0.2
+  - @findable/button@9.0.3
+  - @findable/theme@5.1.1
+  - @findable/lozenge@6.1.2
+  - @findable/item@8.0.2
+  - @findable/icon@13.2.1
+  - @findable/droplist@7.0.3
+  - @findable/avatar@14.0.4
 
 ## 6.1.2
-- [patch] Move analytics tests and replace elements to core [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-- [patch] Updated dependencies [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-  - @atlaskit/tooltip@12.0.1
-  - @atlaskit/analytics-next@3.0.1
-  - @atlaskit/button@9.0.2
-  - @atlaskit/lozenge@6.1.1
-  - @atlaskit/docs@5.0.1
-  - @atlaskit/droplist@7.0.2
-  - @atlaskit/avatar@14.0.2
+- [patch] Move analytics tests and replace elements to core [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+- [patch] Updated dependencies [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+  - @findable/tooltip@12.0.1
+  - @findable/analytics-next@3.0.1
+  - @findable/button@9.0.2
+  - @findable/lozenge@6.1.1
+  - @findable/docs@5.0.1
+  - @findable/droplist@7.0.2
+  - @findable/avatar@14.0.2
 
 ## 6.1.1
-- [patch] Updated dependencies [e6b1985](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6b1985)
-  - @atlaskit/tooltip@12.0.0
-  - @atlaskit/item@8.0.1
-  - @atlaskit/icon@13.1.1
-  - @atlaskit/droplist@7.0.1
-  - @atlaskit/avatar@14.0.1
+- [patch] Updated dependencies [e6b1985](https://github.com/fnamazing/uiKit/commits/e6b1985)
+  - @findable/tooltip@12.0.0
+  - @findable/item@8.0.1
+  - @findable/icon@13.1.1
+  - @findable/droplist@7.0.1
+  - @findable/avatar@14.0.1
 
 ## 6.1.0
-- [minor] Updated dependencies [ebf6b97](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebf6b97)
-  - @atlaskit/lozenge@6.1.0
+- [minor] Updated dependencies [ebf6b97](https://github.com/fnamazing/uiKit/commits/ebf6b97)
+  - @findable/lozenge@6.1.0
 
 ## 6.0.0
-- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/lozenge@6.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/item@8.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/droplist@7.0.0
-  - @atlaskit/avatar@14.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/lozenge@6.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/item@8.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/droplist@7.0.0
-  - @atlaskit/avatar@14.0.0
+- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/tooltip@11.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/lozenge@6.0.0
+  - @findable/docs@5.0.0
+  - @findable/item@8.0.0
+  - @findable/icon@13.0.0
+  - @findable/droplist@7.0.0
+  - @findable/avatar@14.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/tooltip@11.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/lozenge@6.0.0
+  - @findable/docs@5.0.0
+  - @findable/item@8.0.0
+  - @findable/icon@13.0.0
+  - @findable/droplist@7.0.0
+  - @findable/avatar@14.0.0
 
 ## 5.2.3
 
 
-- [none] Updated dependencies [da63331](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da63331)
-  - @atlaskit/button@8.2.5
-  - @atlaskit/item@7.0.8
-  - @atlaskit/avatar@13.0.0
-- [patch] Updated dependencies [7724115](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7724115)
-  - @atlaskit/avatar@13.0.0
-  - @atlaskit/button@8.2.5
-  - @atlaskit/item@7.0.8
+- [none] Updated dependencies [da63331](https://github.com/fnamazing/uiKit/commits/da63331)
+  - @findable/button@8.2.5
+  - @findable/item@7.0.8
+  - @findable/avatar@13.0.0
+- [patch] Updated dependencies [7724115](https://github.com/fnamazing/uiKit/commits/7724115)
+  - @findable/avatar@13.0.0
+  - @findable/button@8.2.5
+  - @findable/item@7.0.8
 
 ## 5.2.2
-- [patch] Updated dependencies [8a01bcd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a01bcd)
-  - @atlaskit/avatar@12.0.0
-  - @atlaskit/item@7.0.7
+- [patch] Updated dependencies [8a01bcd](https://github.com/fnamazing/uiKit/commits/8a01bcd)
+  - @findable/avatar@12.0.0
+  - @findable/item@7.0.7
 
 ## 5.2.1
-- [patch] Remove or update $FlowFixMe [e8ad98a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8ad98a)
-- [none] Updated dependencies [e8ad98a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8ad98a)
-  - @atlaskit/button@8.2.4
-  - @atlaskit/icon@12.6.1
-  - @atlaskit/droplist@6.2.2
-  - @atlaskit/avatar@11.2.2
+- [patch] Remove or update $FlowFixMe [e8ad98a](https://github.com/fnamazing/uiKit/commits/e8ad98a)
+- [none] Updated dependencies [e8ad98a](https://github.com/fnamazing/uiKit/commits/e8ad98a)
+  - @findable/button@8.2.4
+  - @findable/icon@12.6.1
+  - @findable/droplist@6.2.2
+  - @findable/avatar@11.2.2
 
 ## 5.2.0
-- [minor] Add optional onPositioned prop to inform when the menu has been positioned by the underlying Layer component. [95a4592](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95a4592)
-- [minor] Updated dependencies [95a4592](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95a4592)
-  - @atlaskit/droplist@6.2.0
+- [minor] Add optional onPositioned prop to inform when the menu has been positioned by the underlying Layer component. [95a4592](https://github.com/fnamazing/uiKit/commits/95a4592)
+- [minor] Updated dependencies [95a4592](https://github.com/fnamazing/uiKit/commits/95a4592)
+  - @findable/droplist@6.2.0
 
 ## 5.1.0
-- [minor] Fixes types for Flow 0.74 [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-- [none] Updated dependencies [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-  - @atlaskit/tooltip@10.3.0
-  - @atlaskit/button@8.2.0
-  - @atlaskit/icon@12.2.0
-  - @atlaskit/avatar@11.2.0
+- [minor] Fixes types for Flow 0.74 [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+- [none] Updated dependencies [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+  - @findable/tooltip@10.3.0
+  - @findable/button@8.2.0
+  - @findable/icon@12.2.0
+  - @findable/avatar@11.2.0
 
 ## 5.0.4
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [patch] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/tooltip@10.2.1
-  - @atlaskit/button@8.1.2
-  - @atlaskit/theme@4.0.4
-  - @atlaskit/lozenge@5.0.4
-  - @atlaskit/item@7.0.5
-  - @atlaskit/icon@12.1.2
-  - @atlaskit/droplist@6.1.2
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [patch] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/tooltip@10.2.1
+  - @findable/button@8.1.2
+  - @findable/theme@4.0.4
+  - @findable/lozenge@5.0.4
+  - @findable/item@7.0.5
+  - @findable/icon@12.1.2
+  - @findable/droplist@6.1.2
 
 ## 5.0.3
-- [patch] Updated dependencies [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-  - @atlaskit/theme@4.0.3
-  - @atlaskit/lozenge@5.0.3
-  - @atlaskit/item@7.0.4
-  - @atlaskit/icon@12.1.1
-  - @atlaskit/droplist@6.1.1
-  - @atlaskit/button@8.1.1
-  - @atlaskit/avatar@11.1.1
-  - @atlaskit/docs@4.1.1
+- [patch] Updated dependencies [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+  - @findable/theme@4.0.3
+  - @findable/lozenge@5.0.3
+  - @findable/item@7.0.4
+  - @findable/icon@12.1.1
+  - @findable/droplist@6.1.1
+  - @findable/button@8.1.1
+  - @findable/avatar@11.1.1
+  - @findable/docs@4.1.1
 
 ## 5.0.2
-- [none] Updated dependencies [9d20f54](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d20f54)
-  - @atlaskit/tooltip@10.2.0
-  - @atlaskit/item@7.0.3
-  - @atlaskit/avatar@11.1.0
-  - @atlaskit/icon@12.1.0
-  - @atlaskit/docs@4.1.0
-  - @atlaskit/theme@4.0.2
-  - @atlaskit/lozenge@5.0.2
-  - @atlaskit/droplist@6.1.0
-  - @atlaskit/button@8.1.0
+- [none] Updated dependencies [9d20f54](https://github.com/fnamazing/uiKit/commits/9d20f54)
+  - @findable/tooltip@10.2.0
+  - @findable/item@7.0.3
+  - @findable/avatar@11.1.0
+  - @findable/icon@12.1.0
+  - @findable/docs@4.1.0
+  - @findable/theme@4.0.2
+  - @findable/lozenge@5.0.2
+  - @findable/droplist@6.1.0
+  - @findable/button@8.1.0
 
 ## 5.0.0
-- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/tooltip@10.0.0
-  - @atlaskit/item@7.0.0
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/button@8.0.0
-  - @atlaskit/theme@4.0.0
-  - @atlaskit/lozenge@5.0.0
-  - @atlaskit/docs@4.0.0
-  - @atlaskit/droplist@6.0.0
-  - @atlaskit/avatar@11.0.0
+- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/tooltip@10.0.0
+  - @findable/item@7.0.0
+  - @findable/icon@12.0.0
+  - @findable/button@8.0.0
+  - @findable/theme@4.0.0
+  - @findable/lozenge@5.0.0
+  - @findable/docs@4.0.0
+  - @findable/droplist@6.0.0
+  - @findable/avatar@11.0.0
 
 ## 4.1.1
-- [patch] Updated dependencies [535d585](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/535d585)
-  - @atlaskit/droplist@5.1.1
+- [patch] Updated dependencies [535d585](https://github.com/fnamazing/uiKit/commits/535d585)
+  - @findable/droplist@5.1.1
 
 ## 4.1.0
-- [minor] Add `isMenuFixed` prop to force menu to render with position fixed to allow it to break out of non-visible overflow containers at the cost of detachment from the trigger on scroll. [e710cfa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e710cfa)
-- [none] Updated dependencies [e710cfa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e710cfa)
-  - @atlaskit/droplist@5.1.0
+- [minor] Add `isMenuFixed` prop to force menu to render with position fixed to allow it to break out of non-visible overflow containers at the cost of detachment from the trigger on scroll. [e710cfa](https://github.com/fnamazing/uiKit/commits/e710cfa)
+- [none] Updated dependencies [e710cfa](https://github.com/fnamazing/uiKit/commits/e710cfa)
+  - @findable/droplist@5.1.0
 
 ## 4.0.5
-- [patch] Updated dependencies [0838cb0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0838cb0)
-  - @atlaskit/lozenge@4.1.1
-- [patch] Updated dependencies [979aff5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/979aff5)
-  - @atlaskit/lozenge@4.1.1
+- [patch] Updated dependencies [0838cb0](https://github.com/fnamazing/uiKit/commits/0838cb0)
+  - @findable/lozenge@4.1.1
+- [patch] Updated dependencies [979aff5](https://github.com/fnamazing/uiKit/commits/979aff5)
+  - @findable/lozenge@4.1.1
 
 ## 4.0.4
-- [patch] Updated dependencies [b42eaa5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b42eaa5)
-  - @atlaskit/lozenge@4.1.0
+- [patch] Updated dependencies [b42eaa5](https://github.com/fnamazing/uiKit/commits/b42eaa5)
+  - @findable/lozenge@4.1.0
 
 ## 4.0.3
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/tooltip@9.2.1
-  - @atlaskit/item@6.0.3
-  - @atlaskit/droplist@5.0.3
-  - @atlaskit/button@7.2.5
-  - @atlaskit/theme@3.2.2
-  - @atlaskit/avatar@10.0.6
-  - @atlaskit/docs@3.0.4
-  - @atlaskit/lozenge@4.0.1
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/icon@11.3.0
+  - @findable/tooltip@9.2.1
+  - @findable/item@6.0.3
+  - @findable/droplist@5.0.3
+  - @findable/button@7.2.5
+  - @findable/theme@3.2.2
+  - @findable/avatar@10.0.6
+  - @findable/docs@3.0.4
+  - @findable/lozenge@4.0.1
 
 ## 4.0.1
-- [patch] Fix clipping of dropdown item content due to line height issues [a0392ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a0392ec)
+- [patch] Fix clipping of dropdown item content due to line height issues [a0392ec](https://github.com/fnamazing/uiKit/commits/a0392ec)
 
 ## 4.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 3.12.3
-- [patch] Update flow typing [bef13c9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef13c9)
+- [patch] Update flow typing [bef13c9](https://github.com/fnamazing/uiKit/commits/bef13c9)
 
 ## 3.12.2
-- [patch] Makes packages Flow types compatible with version 0.67 [25daac0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25daac0)
+- [patch] Makes packages Flow types compatible with version 0.67 [25daac0](https://github.com/fnamazing/uiKit/commits/25daac0)
 
 ## 3.12.1
-- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ed0bba)
+- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://github.com/fnamazing/uiKit/commits/9ed0bba)
 
 ## 3.12.0
-- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ceccf30)
+- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://github.com/fnamazing/uiKit/commits/ceccf30)
 
 ## 3.11.10
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 3.11.8
-- [patch] Packages Flow types for elements components [3111e74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3111e74)
+- [patch] Packages Flow types for elements components [3111e74](https://github.com/fnamazing/uiKit/commits/3111e74)
 
 ## 3.11.7
-- [patch] added logic to close dropdown menu when tabbing out of the component [8279a46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8279a46)
+- [patch] added logic to close dropdown menu when tabbing out of the component [8279a46](https://github.com/fnamazing/uiKit/commits/8279a46)
 
 ## 3.11.6
-- [patch] updated item dependency version [23771b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23771b9)
+- [patch] updated item dependency version [23771b9](https://github.com/fnamazing/uiKit/commits/23771b9)
 
 ## 3.11.5
-- [patch] migrate from ak to mk-2 [34a9cbb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34a9cbb)
+- [patch] migrate from ak to mk-2 [34a9cbb](https://github.com/fnamazing/uiKit/commits/34a9cbb)
 
 ## 3.11.4 (2017-11-30)
 * bug fix; fix dropdown menu opening on disabled button click (issues closed: ak-3644) ([4d8c35d](https://bitbucket.org/atlassian/atlaskit/commits/4d8c35d))

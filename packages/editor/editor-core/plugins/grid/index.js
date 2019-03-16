@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as classnames from 'classnames';
 import { withTheme } from 'styled-components';
 import { PluginKey } from 'prosemirror-state';
-import { akEditorFullPageMaxWidth, akEditorBreakoutPadding, breakoutWideScaleRatio, } from '@atlaskit/editor-common';
+import { akEditorFullPageMaxWidth, akEditorBreakoutPadding, breakoutWideScaleRatio, } from '@findable/editor-common';
 import { pluginKey as widthPlugin } from '../width/index';
 import WithPluginState from '../../ui/WithPluginState';
 import { createDispatch } from '../../event-dispatcher';

@@ -5,9 +5,9 @@ import {
   FormattedHTMLMessage,
 } from 'react-intl';
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
-import { withAnalytics } from '@atlaskit/analytics';
-import { CancelableEvent } from '@atlaskit/quick-search';
+import { gridSize } from '@findable/theme';
+import { withAnalytics } from '@findable/analytics';
+import { CancelableEvent } from '@findable/quick-search';
 import StickyFooter from '../common/StickyFooter';
 import { CreateAnalyticsEventFn } from '../analytics/types';
 import { SearchScreenCounter } from '../../util/ScreenCounter';

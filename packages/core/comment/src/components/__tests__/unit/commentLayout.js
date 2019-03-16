@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { mount, shallow } from 'enzyme';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 
 import { CommentLayout } from '../../..';
 import {

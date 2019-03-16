@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { createUserContext } from '@atlaskit/media-test-helpers';
+import { createUserContext } from '@findable/media-test-helpers';
 import { Subscription } from 'rxjs/Subscription';
 import { FileIdentifier } from '..';
-import { Card } from '@atlaskit/media-card';
-import Button from '@atlaskit/button';
+import { Card } from '@findable/media-card';
+import Button from '@findable/button';
 import { CardsWrapper, Header } from '../example-helpers/styled';
 
 const context = createUserContext();

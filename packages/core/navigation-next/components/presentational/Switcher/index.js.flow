@@ -2,9 +2,9 @@
 import React, { PureComponent, cloneElement, type ElementRef } from 'react';
 import NodeResolver from 'react-node-resolver';
 import shallowEqualObjects from 'shallow-equal/objects';
-import { components, PopupSelect, mergeStyles } from '@atlaskit/select';
-import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
-import AddIcon from '@atlaskit/icon/glyph/add';
+import { components, PopupSelect, mergeStyles } from '@findable/select';
+import { colors, gridSize as gridSizeFn } from '@findable/theme';
+import AddIcon from '@findable/icon/glyph/add';
 
 import {
   type SwitcherState,

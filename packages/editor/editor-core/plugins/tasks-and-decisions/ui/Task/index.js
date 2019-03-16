@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { PureComponent } from 'react';
-import { ProviderFactory, WithProviders, } from '@atlaskit/editor-common';
+import { ProviderFactory, WithProviders, } from '@findable/editor-common';
 import TaskItemWithProviders from './task-item-with-providers';
 var messages = defineMessages({
     placeholder: {

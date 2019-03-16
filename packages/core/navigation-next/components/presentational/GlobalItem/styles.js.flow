@@ -1,6 +1,6 @@
 // @flow
 
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 import type { Mode, ModeColors } from '../../../theme/types';
 
 const baseStyles = {

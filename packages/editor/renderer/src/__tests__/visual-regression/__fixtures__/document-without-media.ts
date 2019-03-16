@@ -1,4 +1,4 @@
-import { emoji } from '@atlaskit/util-data-test';
+import { emoji } from '@findable/util-data-test';
 
 const emojiTestData = emoji.testData;
 const emojiStoryData = emoji.storyData;

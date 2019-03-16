@@ -29,7 +29,7 @@ function (_Component) {
           autoFocus = _this$props.autoFocus;
 
       if (process.env.NODE_ENV !== 'production') {
-        invariant(typeof autoFocus === 'boolean', '@atlaskit/modal-dialog: Passing a function as autoFocus is deprecated. Instead call focus on the element ref or use the autofocus property.');
+        invariant(typeof autoFocus === 'boolean', '@findable/modal-dialog: Passing a function as autoFocus is deprecated. Instead call focus on the element ref or use the autofocus property.');
       }
 
       if (typeof autoFocus === 'function' && isEnabled) {

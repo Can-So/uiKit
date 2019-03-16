@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, doc, p } from '@findable/editor-test-helpers';
 import Comment from '../../../ui/Appearance/Comment';
 
 describe('comment editor', () => {

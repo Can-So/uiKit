@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/icon-priority",
+  "name": "@findable/icon-priority",
   "version": "3.0.2",
   "description": "A React package that contains priority icons",
   "license": "SEE LICENSE IN LICENSE",
@@ -13,13 +13,13 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "scripts": {
     "update": "node ./build/index.js && yarn build:babel:cjs",
     "build:babel:cjs": "NODE_ENV=production BABEL_ENV=production:cjs babel src -d cjs --root-mode=\"upward\""
   },
   "dependencies": {
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/theme": "^8.0.1",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
     "uuid": "^3.1.0"
@@ -29,14 +29,14 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/field-text": "^8.0.1",
-    "@atlaskit/icon-build-process": "^0.1.0",
-    "@atlaskit/modal-dialog": "^8.0.2",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/tooltip": "^13.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/button": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/field-text": "^8.0.1",
+    "@findable/icon-build-process": "^0.1.0",
+    "@findable/modal-dialog": "^8.0.2",
+    "@findable/ssr": "^0.0.1",
+    "@findable/tooltip": "^13.0.1",
     "enzyme": "^3.7.0",
     "fs-extra": "^4.0.2",
     "react-dom": "^16.4.2"

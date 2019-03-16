@@ -1,7 +1,7 @@
 // @ts-ignore: unused variable
 // prettier-ignore
 import { css, Styles, StyledComponentClass, InterpolationFunction, ThemeProps } from 'styled-components';
-import { gridSize, borderRadius } from '@atlaskit/theme';
+import { gridSize, borderRadius } from '@findable/theme';
 import { relativeSize, akEditorTableCellMinWidth } from '../consts';
 
 export const PanelSharedCssClassName = {

@@ -5,7 +5,7 @@ import {
   p as paragraph,
   date,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   setDatePickerAt,

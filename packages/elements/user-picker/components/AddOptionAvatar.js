@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { Skeleton } from '@atlaskit/icon';
-import InviteTeamIcon from '@atlaskit/icon/glyph/invite-team';
+import { Skeleton } from '@findable/icon';
+import InviteTeamIcon from '@findable/icon/glyph/invite-team';
 import * as React from 'react';
 import styled from 'styled-components';
 var AddOptionAvatarWrapper = styled.span(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  color: black;\n  padding: 2px;\n"], ["\n  color: black;\n  padding: 2px;\n"])));

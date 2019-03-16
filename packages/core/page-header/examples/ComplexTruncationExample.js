@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import TextField from '@atlaskit/textfield';
-import Select from '@atlaskit/select';
+import { BreadcrumbsStateless, BreadcrumbsItem } from '@findable/breadcrumbs';
+import Button, { ButtonGroup } from '@findable/button';
+import TextField from '@findable/textfield';
+import Select from '@findable/select';
 
 import PageHeader from '../src';
 

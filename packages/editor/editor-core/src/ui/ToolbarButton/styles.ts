@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import AkButtonDefault from '@atlaskit/button';
+import AkButtonDefault from '@findable/button';
 
 interface ButtonProps {
   spacing: string;

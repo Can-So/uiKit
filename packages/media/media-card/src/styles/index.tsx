@@ -3,8 +3,8 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import { fontFamily } from '@atlaskit/theme';
-import { fadeIn } from '@atlaskit/media-ui';
+import { fontFamily } from '@findable/theme';
+import { fadeIn } from '@findable/media-ui';
 
 export * from './config';
 export * from './mixins';

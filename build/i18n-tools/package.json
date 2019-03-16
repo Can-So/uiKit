@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/i18n-tools",
+  "name": "@findable/i18n-tools",
   "version": "0.5.0",
   "description": "A tool for extracting, pushing and pulling translation strings from react components",
   "main": "index.js",

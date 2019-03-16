@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 import { ContentsProvider, H } from './shared';
 
@@ -33,22 +33,22 @@ export default (
   ${<H>How to use it</H>}
 
   ${code`
-  import LayoutManagerWithViewController from '@atlaskit/navigation-next/LayoutManagerWithViewController';
-  import ItemsRenderer from '@atlaskit/navigation-next/ItemsRenderer';
-  import SkeletonContainerView from '@atlaskit/navigation-next/SkeletonContainerView';
-  import NavigationProvider from '@atlaskit/navigation-next/NavigationProvider';
-  import AsyncLayoutManagerWithViewController from '@atlaskit/navigation-next/AsyncLayoutManagerWithViewController';
+  import LayoutManagerWithViewController from '@findable/navigation-next/LayoutManagerWithViewController';
+  import ItemsRenderer from '@findable/navigation-next/ItemsRenderer';
+  import SkeletonContainerView from '@findable/navigation-next/SkeletonContainerView';
+  import NavigationProvider from '@findable/navigation-next/NavigationProvider';
+  import AsyncLayoutManagerWithViewController from '@findable/navigation-next/AsyncLayoutManagerWithViewController';
   import {
     ViewController,
     ViewControllerSubscriber,
     withNavigationViewController,
     viewReducerUtils,
-  } from '@atlaskit/navigation-next/view-controller';
+  } from '@findable/navigation-next/view-controller';
   import {
     UIController,
     UIControllerSubscriber,
     withNavigationUIController,
-  } from '@atlaskit/navigation-next/ui-controller';
+  } from '@findable/navigation-next/ui-controller';
   `}
 
   ## Exposed entrypoints

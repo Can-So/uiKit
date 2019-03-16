@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
-import { fontSize } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
+import { fontSize } from '@findable/theme';
 
 const BlockNode = styled.div`
   align-items: center;

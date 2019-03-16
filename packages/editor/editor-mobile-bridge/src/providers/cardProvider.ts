@@ -1,4 +1,4 @@
-import { EditorCardProvider, CardAppearance } from '@atlaskit/smart-card';
+import { EditorCardProvider, CardAppearance } from '@findable/smart-card';
 import { createPromise } from '../cross-platform-promise';
 
 export class EditorMobileCardProvider extends EditorCardProvider {

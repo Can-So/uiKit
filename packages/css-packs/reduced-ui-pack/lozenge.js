@@ -10,7 +10,7 @@ function _templateObject() {
   return data;
 }
 
-import { colors, fontSizeSmall } from '@atlaskit/theme';
+import { colors, fontSizeSmall } from '@findable/theme';
 import evaluateInner from './utils/evaluate-inner';
 var lozengeBorderRadius = '3px';
 export default evaluateInner(_templateObject(), lozengeBorderRadius, fontSizeSmall(), colors.N40, colors.N500, colors.N500, colors.N0, colors.B50, colors.B500, colors.B400, colors.N0, colors.Y75, colors.N800, colors.Y500, colors.N800, colors.P50, colors.P500, colors.P400, colors.N0, colors.R50, colors.R500, colors.R400, colors.N0, colors.G50, colors.G500, colors.G400, colors.N0);

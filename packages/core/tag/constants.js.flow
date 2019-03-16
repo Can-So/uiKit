@@ -1,5 +1,5 @@
 // @flow
-import { gridSize, themed, colors } from '@atlaskit/theme';
+import { gridSize, themed, colors } from '@findable/theme';
 
 export const focusRingColor = themed({ light: colors.B100, dark: colors.B75 });
 export const tagHeightUnitless = 2.5 * gridSize();

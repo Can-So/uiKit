@@ -7,7 +7,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
-import AkLayer from '@atlaskit/layer';
+import AkLayer from '@findable/layer';
 import PositionWrapper from './components/PositionWrapper';
 import withOuterListeners from './components/withOuterListeners';
 import AkProfilecardResourced from './profilecard-resourced';

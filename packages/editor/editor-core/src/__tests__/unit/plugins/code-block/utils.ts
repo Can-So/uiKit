@@ -6,7 +6,7 @@ import {
   code_block,
   layoutSection,
   layoutColumn,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { transformSliceToJoinAdjacentCodeBlocks } from '../../../../plugins/code-block/utils';
 
 const fragment = (...args: any) =>

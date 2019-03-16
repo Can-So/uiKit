@@ -1,4 +1,4 @@
-import { EmojiId, EmojiProvider, OnEmojiEvent } from '@atlaskit/emoji';
+import { EmojiId, EmojiProvider, OnEmojiEvent } from '@findable/emoji';
 import * as React from 'react';
 import { PureComponent } from 'react';
 export interface Props {

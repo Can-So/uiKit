@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import SearchIcon from '@findable/icon/glyph/search';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 import MultiSelect, { MultiSelectStateless } from '../..';
 import type { GroupType } from '../../types';
 import { name } from '../../version.json';

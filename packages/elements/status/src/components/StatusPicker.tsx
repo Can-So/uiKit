@@ -1,5 +1,5 @@
-import { FieldTextStateless } from '@atlaskit/field-text';
-import { gridSize } from '@atlaskit/theme';
+import { FieldTextStateless } from '@findable/field-text';
+import { gridSize } from '@findable/theme';
 import * as React from 'react';
 import { FormEvent, PureComponent } from 'react';
 import styled from 'styled-components';

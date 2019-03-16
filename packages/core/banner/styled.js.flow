@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { colors, gridSize, math, themed } from '@findable/theme';
 
 const TRANSITION_DURATION = '0.25s ease-in-out';
 

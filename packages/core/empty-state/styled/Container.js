@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var verticalMarginSize = gridSize() * 6;
 var columnWidth = gridSize() * 8;
 var gutter = gridSize() * 2;

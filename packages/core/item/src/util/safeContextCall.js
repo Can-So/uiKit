@@ -1,6 +1,6 @@
 // @flow
 // There are cases where the context is not available, such as when a dropdown item is used
-// inside @atlaskit/navigation. For this reason we have this helper function which safely calls
+// inside @findable/navigation. For this reason we have this helper function which safely calls
 // the context functions if they are available.
 export default (instance: { context: {} }, contextKey: string) => (
   fnToCall: string,

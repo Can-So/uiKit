@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Provider, connect } from 'react-redux';
 import Conversation from '../components/Conversation';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { addComment, updateComment, deleteComment, revertComment, updateUser, createConversation, HIGHLIGHT_COMMENT, saveDraft, } from '../internal/actions';
 import { getComments, getConversation, getUser } from '../internal/selectors';
 import { uuid } from '../internal/uuid';

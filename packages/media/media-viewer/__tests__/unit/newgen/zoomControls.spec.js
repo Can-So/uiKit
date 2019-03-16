@@ -1,12 +1,12 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { mount } from 'enzyme';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { ZoomControlsBase, } from '../../../newgen/zoomControls';
 import { ZoomLevelIndicator } from '../../../newgen/styled';
 import { ZoomLevel } from '../../../newgen/domain/zoomLevel';
 import { name as packageName, version as packageVersion, } from '../../../version.json';
-import { fakeIntl } from '@atlaskit/media-test-helpers';
+import { fakeIntl } from '@findable/media-test-helpers';
 describe('Zooming', function () {
     describe('<ZoomControls />', function () {
         var setupBase = function (props) {

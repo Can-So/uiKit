@@ -1,5 +1,5 @@
 const path = require('path');
-const webpackConfig = require('@atlaskit/webpack-config');
+const webpackConfig = require('@findable/webpack-config');
 
 function buildCacheGroups(statsGroups) {
   return statsGroups.reduce((acc, group) => {

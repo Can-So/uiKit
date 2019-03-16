@@ -3,6 +3,6 @@ declare var require: {
 };
 
 // tslint:disable-next-line:no-var-requires
-const userPickerData = require('../json-data/user-picker-data.json') as any; // User from @atlaskit/user-picker
+const userPickerData = require('../json-data/user-picker-data.json') as any; // User from @findable/user-picker
 
 export default userPickerData;

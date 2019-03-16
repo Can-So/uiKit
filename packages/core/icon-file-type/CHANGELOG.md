@@ -1,62 +1,62 @@
-# @atlaskit/icon-file-type
+# @findable/icon-file-type
 
 ## 3.0.5
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/field-text@8.0.1
-  - @atlaskit/modal-dialog@8.0.2
-  - @atlaskit/theme@8.0.1
-  - @atlaskit/tooltip@13.0.1
-  - @atlaskit/button@11.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/field-text@8.0.1
+  - @findable/modal-dialog@8.0.2
+  - @findable/theme@8.0.1
+  - @findable/tooltip@13.0.1
+  - @findable/button@11.0.0
 
 ## 3.0.4
-- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
-  - @atlaskit/button@10.1.3
-  - @atlaskit/docs@7.0.0
-  - @atlaskit/field-text@8.0.0
-  - @atlaskit/modal-dialog@8.0.0
-  - @atlaskit/theme@8.0.0
-  - @atlaskit/tooltip@13.0.0
+- Updated dependencies [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
+  - @findable/button@10.1.3
+  - @findable/docs@7.0.0
+  - @findable/field-text@8.0.0
+  - @findable/modal-dialog@8.0.0
+  - @findable/theme@8.0.0
+  - @findable/tooltip@13.0.0
 
 ## 3.0.3
-- [patch] [1d1f6d1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d1f6d1):
+- [patch] [1d1f6d1](https://github.com/fnamazing/uiKit/commits/1d1f6d1):
 
   - Make icon glyphs not import metadata
 
 ## 3.0.2
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/button@10.1.1
-  - @atlaskit/field-text@7.0.18
-  - @atlaskit/modal-dialog@7.1.1
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/tooltip@12.1.13
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/button@10.1.1
+  - @findable/field-text@7.0.18
+  - @findable/modal-dialog@7.1.1
+  - @findable/theme@7.0.1
+  - @findable/tooltip@12.1.13
+  - @findable/docs@6.0.0
 
 ## 3.0.1
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/button@10.0.4
-  - @atlaskit/field-text@7.0.16
-  - @atlaskit/modal-dialog@7.0.14
-  - @atlaskit/tooltip@12.1.12
-  - @atlaskit/theme@7.0.0
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/button@10.0.4
+  - @findable/field-text@7.0.16
+  - @findable/modal-dialog@7.0.14
+  - @findable/tooltip@12.1.12
+  - @findable/theme@7.0.0
 
 ## 3.0.0
-- [major] [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+- [major] [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
 
   - Remove onClick props as icon is only a presentational placeholder. Please wrap icon into a Button or a Link component.
 
 ## 2.0.1
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/field-text@7.0.15
-  - @atlaskit/modal-dialog@7.0.12
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/tooltip@12.1.10
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/field-text@7.0.15
+  - @findable/modal-dialog@7.0.12
+  - @findable/theme@6.2.1
+  - @findable/tooltip@12.1.10
+  - @findable/button@10.0.0
 
 ## 2.0.0
-- [patch] [29b160f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29b160f):
+- [patch] [29b160f](https://github.com/fnamazing/uiKit/commits/29b160f):
 
   - Simplify the icons build process
 
@@ -64,7 +64,7 @@
   has come about by renaming the `es5` folder to `cjs`. If you weren't reaching
   into our package's internals, you shouldn't notice.
 
-- [major] [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
+- [major] [80304f0](https://github.com/fnamazing/uiKit/commits/80304f0):
 
   **NOTE** Unless you are using the `iconsInfo` export, this change is not breaking.
 
@@ -75,20 +75,20 @@
   metadata to get the packages, each should be required by your own code.
 
   The `icon-explorer` has an example of how to do this.
-- Updated dependencies [b29bec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b29bec1):
-  - @atlaskit/icon-build-process@0.1.0
+- Updated dependencies [b29bec1](https://github.com/fnamazing/uiKit/commits/b29bec1):
+  - @findable/icon-build-process@0.1.0
 
 ## 1.0.4
-- [patch] Update to use babel-7 for build processes [e7bb74d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7bb74d)
+- [patch] Update to use babel-7 for build processes [e7bb74d](https://github.com/fnamazing/uiKit/commits/e7bb74d)
 
 ## 1.0.3
-- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://github.com/fnamazing/uiKit/commits/b71751b)
 
 ## 1.0.2
-- [patch] Publish utils folder [272208b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/272208b)
+- [patch] Publish utils folder [272208b](https://github.com/fnamazing/uiKit/commits/272208b)
 
 ## 1.0.1
-- [patch] icon-file-type and icon-object publish glyphs, svgs, and es5 instead of just dist [0823d35](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0823d35)
+- [patch] icon-file-type and icon-object publish glyphs, svgs, and es5 instead of just dist [0823d35](https://github.com/fnamazing/uiKit/commits/0823d35)
 
 ## 1.0.0
-- [major] Release icon-object and icon-file-type [709b239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/709b239)
+- [major] Release icon-object and icon-file-type [709b239](https://github.com/fnamazing/uiKit/commits/709b239)

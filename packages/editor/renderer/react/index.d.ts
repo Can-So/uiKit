@@ -3,7 +3,7 @@ import { Fragment, Mark, Node, Schema } from 'prosemirror-model';
 import { Serializer } from '../';
 import { RendererAppearance } from '../ui/Renderer';
 import { TextWrapper } from './nodes';
-import { ProviderFactory, EventHandlers, ExtensionHandlers } from '@atlaskit/editor-common';
+import { ProviderFactory, EventHandlers, ExtensionHandlers } from '@findable/editor-common';
 export interface RendererContext {
     objectAri?: string;
     containerAri?: string;

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md, Props } from '@atlaskit/docs';
+import { code, md, Props } from '@findable/docs';
 
 export default md`
 
@@ -12,8 +12,8 @@ Each Field component is an entry in the form state. Passes down props to be spre
 onto the inner component as well as information about the field state.
 
 ${code`
-import { Field } from '@atlaskit/form';
-import TextField from '@atlaskit/textfield';
+import { Field } from '@findable/form';
+import TextField from '@findable/textfield';
 
 const UsernameField = () => (
   <Field name="username" defaultValue="" isRequired>
@@ -41,8 +41,8 @@ component is rendered with a \`value\` prop the form value will be an array.
 The array will contain \`value\` depending on whether the field is checked.
 
 ${code`
-import { CheckboxField } from '@atlaskit/form';
-import { Checkbox } from '@atlaskit/checkbox';
+import { CheckboxField } from '@findable/form';
+import { Checkbox } from '@findable/checkbox';
 
 const RememberMeField = () => (
   <CheckboxField name="remember" defaultIsChecked>
@@ -69,8 +69,8 @@ The \`Fieldset\` component is used to group a number of fields together. When mu
 them together. Using a fieldset in this situation makes the form a lot more accessible.
 
 ${code`
-import { CheckboxField, Fieldset } from '@atlaskit/form';
-import { Checkbox } from '@atlaskit/checkbox';
+import { CheckboxField, Fieldset } from '@findable/form';
+import { Checkbox } from '@findable/checkbox';
 
 const ProductField = () => (
   <Fieldset legend="Products">

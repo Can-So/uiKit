@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Color as StatusColor } from '@atlaskit/status';
-import Form, { Field, FormFooter } from '@atlaskit/form';
-import AkButton from '@atlaskit/button';
-import Textfield from '@atlaskit/textfield';
-import AkSelect from '@atlaskit/select';
+import { Color as StatusColor } from '@findable/status';
+import Form, { Field, FormFooter } from '@findable/form';
+import AkButton from '@findable/button';
+import Textfield from '@findable/textfield';
+import AkSelect from '@findable/select';
 import MobileEditor from '../src/editor/mobile-editor-element';
 import WebToNativeReporter from '../example-helpers/WebToNativeReporter';
 import { bridge } from '../src/editor/mobile-editor-element';

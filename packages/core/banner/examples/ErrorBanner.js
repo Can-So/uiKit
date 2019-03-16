@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
+import ErrorIcon from '@findable/icon/glyph/error';
 import Banner from '../src';
 
 const Icon = <ErrorIcon label="Error icon" secondaryColor="inherit" />;

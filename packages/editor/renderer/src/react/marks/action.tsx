@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { ActionMarkAttributes } from '@atlaskit/adf-schema';
-import { EventHandlers } from '@atlaskit/editor-common';
+import { ActionMarkAttributes } from '@findable/adf-schema';
+import { EventHandlers } from '@findable/editor-common';
 
 export interface Props extends ActionMarkAttributes {
   markKey?: string;

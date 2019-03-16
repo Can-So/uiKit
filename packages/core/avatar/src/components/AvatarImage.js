@@ -1,6 +1,6 @@
 // @flow
 
-import GlobalTheme from '@atlaskit/theme';
+import GlobalTheme from '@findable/theme';
 import React, { PureComponent } from 'react';
 import { canUseDOM } from 'exenv';
 import { Slot, ShapeGroup, Svg } from '../styled/AvatarImage';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { WithProviders } from '@atlaskit/editor-common';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { WithProviders } from '@findable/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { MediaCard, MediaCardProps, MediaProvider } from '../../ui/MediaCard';
 
 export interface MediaProps extends MediaCardProps {

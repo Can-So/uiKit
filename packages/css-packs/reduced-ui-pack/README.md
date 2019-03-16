@@ -17,7 +17,7 @@ The `css-reset` stylesheet provides the core typography rules which
 `reduced-ui-pack` builds upon. Install it with:
 
 ```sh
-npm install @atlaskit/css-reset
+npm install @findable/css-reset
 ```
 
 ## Using the component
@@ -40,7 +40,7 @@ element.
 ```html
 <html>
   <head>
-    <link rel="stylesheet" href="node_modules/@atlaskit/css-reset/dist/bundle.css" />
+    <link rel="stylesheet" href="node_modules/@findable/css-reset/dist/bundle.css" />
     <link rel="stylesheet" href="node_modules/reduced-ui-pack/dist/bundle.css" />
   </head>
   <body>

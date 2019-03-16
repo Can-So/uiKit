@@ -1,7 +1,7 @@
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import WikiMarkupTransformer from '../../../index';
 
-import { code_block, doc } from '@atlaskit/editor-test-helpers';
+import { code_block, doc } from '@findable/editor-test-helpers';
 
 describe('ADF => WikiMarkup => ADF - CodeBlock', () => {
   const transformer = new WikiMarkupTransformer();

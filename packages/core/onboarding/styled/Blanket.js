@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { colors, layers, themed } from '@atlaskit/theme'; // NOTE:
-// we can't use @atlaskit/blanket
+import { colors, layers, themed } from '@findable/theme'; // NOTE:
+// we can't use @findable/blanket
 // because it has to sit on top of other layered elements (i.e. Modal).
 
 var backgroundColor = themed({

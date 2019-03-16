@@ -4,7 +4,7 @@ import {
   doc,
   p,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 
 describe('Delete', () => {

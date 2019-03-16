@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import { Label } from '@atlaskit/field-base';
-import { gridSize } from '@atlaskit/theme';
+import { Label } from '@findable/field-base';
+import { gridSize } from '@findable/theme';
 import { DatePicker, DateTimePicker, TimePicker } from '../src';
 
 export default () => {

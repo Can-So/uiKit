@@ -1,5 +1,5 @@
 import { UsageClearEmojiResource, MockEmojiResourceConfig } from './MockEmojiResource';
-import { EmojiServiceResponse } from '@atlaskit/emoji';
+import { EmojiServiceResponse } from '@findable/emoji';
 export declare const getStandardEmojiData: () => EmojiServiceResponse;
 export declare const getAtlassianEmojiData: () => EmojiServiceResponse;
 export declare const loggedUser = "blackpanther";

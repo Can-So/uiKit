@@ -1,8 +1,8 @@
 // @flow
 
 import React, { type Node } from 'react';
-import Lozenge from '@atlaskit/lozenge';
-import LockFilledIcon from '@atlaskit/icon/glyph/lock-filled';
+import Lozenge from '@findable/lozenge';
+import LockFilledIcon from '@findable/icon/glyph/lock-filled';
 import {
   BulletSpacer,
   Restricted,

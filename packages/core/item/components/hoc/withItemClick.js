@@ -17,7 +17,7 @@ import getDisplayName from '../../util/getDisplayName';
 import safeContextCall from '../../util/safeContextCall';
 import { clickManagerContext } from '../../util/contextNamespace';
 
-// HOC that typically wraps @atlaskit/item
+// HOC that typically wraps @findable/item
 var withItemClick = function withItemClick(WrappedItem) {
   var _class, _temp;
 

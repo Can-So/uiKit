@@ -1,4 +1,4 @@
-import { Identifier } from '@atlaskit/media-core';
+import { Identifier } from '@findable/media-core';
 
 let lastKey = 1;
 const identifiersMap: Map<Promise<string>, string> = new Map();

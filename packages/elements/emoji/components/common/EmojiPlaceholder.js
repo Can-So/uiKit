@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 import { placeholder, placeholderContainer } from './styles';
 import { defaultEmojiHeight } from '../../constants';
 import { isImageRepresentation, isMediaRepresentation, } from '../../type-helpers';

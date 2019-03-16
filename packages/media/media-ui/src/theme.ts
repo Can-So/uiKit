@@ -1,4 +1,4 @@
-import { themed, colors } from '@atlaskit/theme';
+import { themed, colors } from '@findable/theme';
 
 const buttonTheme = {
   toolbar: {

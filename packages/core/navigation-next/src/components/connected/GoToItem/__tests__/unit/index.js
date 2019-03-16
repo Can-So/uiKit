@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/arrow-right-circle';
-import Spinner from '@atlaskit/spinner';
+import ArrowRightCircleIcon from '@findable/icon/glyph/arrow-right-circle';
+import Spinner from '@findable/spinner';
 
 import ConnectedItem from '../../../ConnectedItem';
 import { GoToItemBase } from '../../index';

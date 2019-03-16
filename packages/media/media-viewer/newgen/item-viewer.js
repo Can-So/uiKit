@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { Outcome } from './domain';
 import { ImageViewer } from './viewers/image';
 import { VideoViewer } from './viewers/video';
@@ -10,7 +10,7 @@ import { Spinner } from './loading';
 import * as deepEqual from 'deep-equal';
 import ErrorMessage, { createError, } from './error';
 import { ErrorViewDownloadButton } from './download';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { mediaFileCommencedEvent, mediaFileLoadSucceededEvent, mediaFileLoadFailedEvent, } from './analytics/item-viewer';
 import { channel } from './analytics/index';
 import { AudioViewer } from './viewers/audio';

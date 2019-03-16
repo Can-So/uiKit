@@ -1,4 +1,4 @@
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 import { reduce } from './nodes';
 var TextSerializer = /** @class */ (function () {
     function TextSerializer(schema) {

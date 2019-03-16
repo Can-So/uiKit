@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, colors } from '@atlaskit/theme';
+import { gridSize, colors } from '@findable/theme';
 var Description = styled.p.withConfig({
   displayName: "Description",
   componentId: "sc-13esrtr-0"

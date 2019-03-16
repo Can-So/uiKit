@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import FormattedMessage from './formatted-message';
 import messages from '../utils/messages';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { NAVIGATION_CHANNEL, UI_EVENT_TYPE } from '../utils/analytics';
 var ManageButton = /** @class */ (function (_super) {
     tslib_1.__extends(ManageButton, _super);

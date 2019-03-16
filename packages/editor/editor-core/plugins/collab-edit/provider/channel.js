@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { utils } from '@atlaskit/util-service-support';
+import { utils } from '@findable/util-service-support';
 import { EventEmitter2 } from 'eventemitter2';
 import { getVersion, sendableSteps } from 'prosemirror-collab';
 import { logger } from './';

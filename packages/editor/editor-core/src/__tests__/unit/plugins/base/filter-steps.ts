@@ -3,7 +3,7 @@ import {
   createEditorFactory,
   doc,
   p as paragraph,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 describe('filter steps', () => {
   const createEditor = createEditorFactory();

@@ -33,7 +33,7 @@ import {
   td,
   th,
   tr,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 const markdownSerializer = new MarkdownSerializer(nodes, marks);
 

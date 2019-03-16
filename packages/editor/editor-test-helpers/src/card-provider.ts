@@ -1,4 +1,4 @@
-import { EditorCardProvider } from '@atlaskit/smart-card';
+import { EditorCardProvider } from '@findable/smart-card';
 
 type CardAppearance = 'inline' | 'block';
 

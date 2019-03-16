@@ -27,7 +27,7 @@ declare const _default: React.ComponentClass<Pick<{
     onEditorOpen?: (() => void) | undefined;
     onEditorClose?: (() => void) | undefined;
     onEditorChange?: ((isLocal: boolean, value: any, conversationId: string, commentId: string | undefined, meta: any, objectId: string, containerId?: string | undefined) => void) | undefined;
-    dataProviders?: import("../../../editor-json-transformer/node_modules/@atlaskit/editor-common/providerFactory").default | undefined;
+    dataProviders?: import("../../../editor-json-transformer/node_modules/@findable/editor-common/providerFactory").default | undefined;
     onUserClick?: ((user: import("../model/User").User) => void) | undefined;
     onRetry?: ((localId?: string | undefined) => void) | undefined;
     renderEditor?: ((Editor: typeof import("../../../editor-core/editor").default, props: import("../../../editor-core/types/editor-props").EditorProps) => JSX.Element) | undefined;
@@ -56,7 +56,7 @@ declare const _default: React.ComponentClass<Pick<{
         onEditorOpen?: (() => void) | undefined;
         onEditorClose?: (() => void) | undefined;
         onEditorChange?: ((isLocal: boolean, value: any, conversationId: string, commentId: string | undefined, meta: any, objectId: string, containerId?: string | undefined) => void) | undefined;
-        dataProviders?: import("../../../editor-json-transformer/node_modules/@atlaskit/editor-common/providerFactory").default | undefined;
+        dataProviders?: import("../../../editor-json-transformer/node_modules/@findable/editor-common/providerFactory").default | undefined;
         onUserClick?: ((user: import("../model/User").User) => void) | undefined;
         onRetry?: ((localId?: string | undefined) => void) | undefined;
         renderEditor?: ((Editor: typeof import("../../../editor-core/editor").default, props: import("../../../editor-core/types/editor-props").EditorProps) => JSX.Element) | undefined;

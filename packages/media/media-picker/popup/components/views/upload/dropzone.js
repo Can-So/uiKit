@@ -3,7 +3,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import LocalBrowserButton from './uploadButton';
 import { filesIcon } from '../../../../icons';
 import { ButtonWrapper, DefaultImage, DropzoneText, DropzoneContainer, DropzoneContentWrapper, TextWrapper, } from './styled';

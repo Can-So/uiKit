@@ -1,4 +1,4 @@
-import { TableLayout, CellAttributes } from '@atlaskit/adf-schema';
+import { TableLayout, CellAttributes } from '@findable/adf-schema';
 import { EditorView } from 'prosemirror-view';
 import { ResolvedPos } from 'prosemirror-model';
 export declare const tableLayoutToSize: Record<string, number>;

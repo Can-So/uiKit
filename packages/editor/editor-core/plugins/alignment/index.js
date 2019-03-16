@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { alignment } from '@atlaskit/adf-schema';
+import { alignment } from '@findable/adf-schema';
 import WithPluginState from '../../ui/WithPluginState';
 import { pluginKey, createPlugin, } from './pm-plugins/main';
 import { changeAlignment } from './commands';

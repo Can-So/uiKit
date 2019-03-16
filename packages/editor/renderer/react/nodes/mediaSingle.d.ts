@@ -1,5 +1,5 @@
 import { Component, ReactElement } from 'react';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 import { RendererAppearance } from '../../ui/Renderer';
 export interface Props {
     children: ReactElement<any>;

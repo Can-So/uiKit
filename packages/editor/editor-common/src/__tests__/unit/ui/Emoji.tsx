@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
-import { EmojiProvider, ResourcedEmoji } from '@atlaskit/emoji';
+import { EmojiProvider, ResourcedEmoji } from '@findable/emoji';
 import ProviderFactory from '../../../providerFactory';
 import Emoji from '../../../ui/Emoji';
 

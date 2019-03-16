@@ -1,8 +1,8 @@
 var _a;
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
-import Item, { ItemGroup, itemThemeNamespace } from '@atlaskit/item';
-import { colors, themed } from '@atlaskit/theme';
+import Item, { ItemGroup, itemThemeNamespace } from '@findable/item';
+import { colors, themed } from '@findable/theme';
 var itemTheme = (_a = {},
     _a[itemThemeNamespace] = {
         padding: {

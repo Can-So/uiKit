@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react';
-import Form, { Field, ErrorMessage } from '@atlaskit/form';
+import Form, { Field, ErrorMessage } from '@findable/form';
 import { cities } from './common/data';
 import Select from '../src';
 

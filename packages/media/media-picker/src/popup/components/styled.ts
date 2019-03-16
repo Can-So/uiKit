@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import { colors, fontFamily } from '@atlaskit/theme';
+import { colors, fontFamily } from '@findable/theme';
 
 export const MediaPickerPopupWrapper: ComponentClass<
   HTMLAttributes<{}>

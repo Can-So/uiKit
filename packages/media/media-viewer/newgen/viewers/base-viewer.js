@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import * as deepEqual from 'deep-equal';
 import ErrorMessage from '../error';
 import { Spinner } from '../loading';

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { EditorView } from 'prosemirror-view';
-import { mediaGroup, media } from '@atlaskit/editor-test-helpers';
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { mediaGroup, media } from '@findable/editor-test-helpers';
+import { defaultSchema } from '@findable/adf-schema';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,

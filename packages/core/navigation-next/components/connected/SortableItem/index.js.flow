@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { Draggable } from 'react-beautiful-dnd';
 
 import Item from '../../presentational/Item';

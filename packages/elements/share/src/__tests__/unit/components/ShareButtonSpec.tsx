@@ -1,5 +1,5 @@
-import Button from '@atlaskit/button';
-import ShareIcon from '@atlaskit/icon/glyph/share';
+import Button from '@findable/button';
+import ShareIcon from '@findable/icon/glyph/share';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import { Props, ShareButton } from '../../../components/ShareButton';

@@ -8,7 +8,7 @@ import {
   date,
   code_block,
   sendKeyToPm,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   enterKeyCommand,
   backspaceKeyCommand,

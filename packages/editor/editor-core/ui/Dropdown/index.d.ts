@@ -16,7 +16,7 @@ export interface State {
     popupPlacement: [string, string];
 }
 /**
- * Wrapper around @atlaskit/droplist which uses Popup and Portal to render
+ * Wrapper around @findable/droplist which uses Popup and Portal to render
  * droplist outside of "overflow: hidden" containers when needed.
  *
  * Also it controls popper's placement.

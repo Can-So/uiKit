@@ -5,9 +5,9 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import NodeResolver from 'react-node-resolver';
-import { Manager, Reference, Popper } from '@atlaskit/popper';
+import { Manager, Reference, Popper } from '@findable/popper';
 import type { Props } from '../types';
 import {
   name as packageName,

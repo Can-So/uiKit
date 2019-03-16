@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { ResourcedEmoji, } from '@atlaskit/emoji';
+import { ResourcedEmoji, } from '@findable/emoji';
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { style } from 'typestyle';

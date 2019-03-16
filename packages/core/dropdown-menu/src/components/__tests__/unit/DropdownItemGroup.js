@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { ItemGroup } from '@atlaskit/item';
+import { ItemGroup } from '@findable/item';
 
 import { DropdownItemGroup } from '../../..';
 

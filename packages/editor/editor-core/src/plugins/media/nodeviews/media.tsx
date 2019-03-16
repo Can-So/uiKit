@@ -2,23 +2,23 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory, ImageLoaderProps } from '@atlaskit/editor-common';
+import { ProviderFactory, ImageLoaderProps } from '@findable/editor-common';
 import { ProsemirrorGetPosHandler, ReactNodeProps } from '../../../nodeviews';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
   MediaProvider,
 } from '../pm-plugins/main';
-import { Context, ImageResizeMode, Identifier } from '@atlaskit/media-core';
+import { Context, ImageResizeMode, Identifier } from '@findable/media-core';
 import {
   Card,
   CardDimensions,
   CardView,
   CardEventHandler,
   CardOnClickCallback,
-} from '@atlaskit/media-card';
-import { MediaType, MediaBaseAttributes } from '@atlaskit/adf-schema';
-import { withImageLoader, ImageStatus } from '@atlaskit/editor-common';
+} from '@findable/media-card';
+import { MediaType, MediaBaseAttributes } from '@findable/adf-schema';
+import { withImageLoader, ImageStatus } from '@findable/editor-common';
 
 import { EditorAppearance } from '../../../types';
 

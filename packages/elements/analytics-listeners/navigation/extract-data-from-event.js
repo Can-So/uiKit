@@ -2,7 +2,7 @@
  * Largely taken from analytics-web-react
  */
 import * as merge from 'lodash.merge';
-import { NAVIGATION_CONTEXT } from '@atlaskit/analytics-namespaced-context';
+import { NAVIGATION_CONTEXT } from '@findable/analytics-namespaced-context';
 var extractFromEventContext = function (propertyNames, event, namespacedContextOnly) {
     if (namespacedContextOnly === void 0) { namespacedContextOnly = true; }
     return event.context

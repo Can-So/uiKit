@@ -1,10 +1,10 @@
-import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { FabricElementsAnalyticsContext } from '@findable/analytics-namespaced-context';
 import {
   AnalyticsContext,
   AnalyticsListener,
   withAnalyticsEvents,
-} from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import {
@@ -118,7 +118,7 @@ describe('<FabricElementsListener />', () => {
           actionSubject: 'someComponent',
           source: 'unknown',
           attributes: {
-            packageName: '@atlaskit/foo',
+            packageName: '@findable/foo',
             packageVersion: '1.0.0',
             componentName: 'foo',
             fooBar: 'yay',

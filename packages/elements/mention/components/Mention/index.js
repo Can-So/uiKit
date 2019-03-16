@@ -4,8 +4,8 @@ import { MentionStyle } from './styles';
 import { NoAccessTooltip } from '../NoAccessTooltip';
 import { isRestricted, MentionType } from '../../types';
 import { fireAnalyticsMentionEvent, fireAnalytics } from '../../util/analytics';
-import { withAnalytics } from '@atlaskit/analytics';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalytics } from '@findable/analytics';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 export var ANALYTICS_HOVER_DELAY = 1000;
 var MentionInternal = /** @class */ (function (_super) {
     tslib_1.__extends(MentionInternal, _super);

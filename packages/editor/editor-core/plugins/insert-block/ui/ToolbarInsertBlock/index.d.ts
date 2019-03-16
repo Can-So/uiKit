@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
-import { EmojiId, EmojiProvider } from '@atlaskit/emoji';
+import { EmojiId, EmojiProvider } from '@findable/emoji';
 import EditorActions from '../../../../actions';
 import { InsertMenuCustomItem, CommandDispatch } from '../../../../types';
 import { BlockType } from '../../../block-type/types';

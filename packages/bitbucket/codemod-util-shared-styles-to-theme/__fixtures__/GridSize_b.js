@@ -1,7 +1,7 @@
 // @flow
-import { akGridSizeUnitless as gridSize } from "@atlaskit/util-shared-styles";
+import { akGridSizeUnitless as gridSize } from "@findable/util-shared-styles";
 import styled from "styled-components";
-import { colors } from "@atlaskit/theme";
+import { colors } from "@findable/theme";
 
 const blah = gridSize;
 const MyDiv = styled.div`
@@ -10,7 +10,7 @@ const MyDiv = styled.div`
 //////
 // @flow
 import styled from "styled-components";
-import { colors, gridSize } from "@atlaskit/theme";
+import { colors, gridSize } from "@findable/theme";
 
 const blah = gridSize();
 const MyDiv = styled.div`

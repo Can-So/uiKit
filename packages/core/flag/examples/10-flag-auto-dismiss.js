@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import { colors, gridSize, math } from '@atlaskit/theme';
-import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
+import Button from '@findable/button';
+import { colors, gridSize, math } from '@findable/theme';
+import SuccessIcon from '@findable/icon/glyph/check-circle';
 import { AutoDismissFlag, FlagGroup } from '../src';
 
 const appearances = ['error', 'info', 'normal', 'success', 'warning'];

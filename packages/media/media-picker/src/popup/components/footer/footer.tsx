@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { Wrapper, InsertButton, CancelButton } from './styled';
 import { startImport, hidePopup } from '../../actions';
 import { SelectedItem, State } from '../../domain';

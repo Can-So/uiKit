@@ -2,7 +2,7 @@ import { Transaction, Selection } from 'prosemirror-state';
 import { TableMap } from 'prosemirror-tables';
 import { findTable, getSelectionRect } from 'prosemirror-utils';
 import { Node as PMNode } from 'prosemirror-model';
-import { CellAttributes } from '@atlaskit/adf-schema';
+import { CellAttributes } from '@findable/adf-schema';
 
 export const deleteColumns = (columnsToDelete: number[] = []) => (
   tr: Transaction,

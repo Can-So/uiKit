@@ -1,6 +1,6 @@
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
-import { PopupSelect } from '@atlaskit/select';
+import { PopupSelect } from '@findable/select';
 import Trigger from './Trigger';
 import { Palette, Color } from '../types';
 import * as components from './components';
@@ -12,7 +12,7 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import { ColorCardWrapper } from '../styled/ColorPicker';
 
 export interface Props {
@@ -30,7 +30,7 @@ export interface Props {
   popperProps?: Object;
   /** onChange handler */
   onChange: (value: string, analyticsEvent?: object) => void;
-  /** You should not be accessing this prop under any circumstances. It is provided by @atlaskit/analytics-next. */
+  /** You should not be accessing this prop under any circumstances. It is provided by @findable/analytics-next. */
   createAnalyticsEvent?: any;
 }
 

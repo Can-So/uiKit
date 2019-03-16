@@ -2,7 +2,7 @@
 import {
   akGridSizeUnitless,
   akTypographyMixins
-} from "@atlaskit/util-shared-styles";
+} from "@findable/util-shared-styles";
 import styled from "styled-components";
 
 export const EventContainer = styled.div`
@@ -11,7 +11,7 @@ export const EventContainer = styled.div`
 `;
 //////
 // @flow
-import { gridSize, typography } from "@atlaskit/theme";
+import { gridSize, typography } from "@findable/theme";
 import styled from "styled-components";
 
 export const EventContainer = styled.div`

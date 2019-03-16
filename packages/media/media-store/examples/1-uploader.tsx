@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   defaultMediaPickerAuthProvider,
   tallImage,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import * as uuid from 'uuid/v4';
 import {
   ImagePreview,

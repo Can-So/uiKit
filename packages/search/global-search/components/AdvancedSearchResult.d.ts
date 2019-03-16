@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ResultBaseProps } from '@atlaskit/quick-search';
+import { ResultBaseProps } from '@findable/quick-search';
 export interface Props extends ResultBaseProps {
     showKeyboardLozenge?: boolean;
 }

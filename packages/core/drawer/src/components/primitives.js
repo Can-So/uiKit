@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component, type Node } from 'react';
-import { colors, layers, gridSize } from '@atlaskit/theme';
-import ArrowLeft from '@atlaskit/icon/glyph/arrow-left';
+import { colors, layers, gridSize } from '@findable/theme';
+import ArrowLeft from '@findable/icon/glyph/arrow-left';
 
 import { Slide } from './transitions';
 import type { DrawerPrimitiveProps, DrawerWidth } from './types';

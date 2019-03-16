@@ -17,7 +17,7 @@ import {
   hyperlinkStateKey,
   HyperlinkState,
   HyperlinkInsertStatus,
-} from '@atlaskit/editor-core';
+} from '@findable/editor-core';
 
 import { valueOf as valueOfListState } from '../web-to-native/listState';
 import { valueOf as valueOfMarkState } from '../web-to-native/markState';

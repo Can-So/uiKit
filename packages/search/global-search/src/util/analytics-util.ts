@@ -4,7 +4,7 @@ import {
   JiraResult,
   ResultType,
 } from '../model/Result';
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import { ReferralContextIdentifiers } from '../components/GlobalQuickSearchWrapper';
 
 export declare type ScreenEventSafeGasPayload = GasPayload & { name: string };

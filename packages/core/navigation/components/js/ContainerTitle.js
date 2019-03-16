@@ -8,7 +8,7 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
 import { ThemeProvider, withTheme } from 'styled-components';
-import { itemThemeNamespace } from '@atlaskit/item';
+import { itemThemeNamespace } from '@findable/item';
 import memoizeOne from 'memoize-one';
 import AkNavigationItem from './NavigationItem';
 import ContainerTitleIcon from '../styled/ContainerTitleIcon';

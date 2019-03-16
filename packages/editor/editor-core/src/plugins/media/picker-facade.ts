@@ -14,10 +14,10 @@ import {
   isPopup,
   isBinaryUploader,
   isBrowser,
-} from '@atlaskit/media-picker';
-import { Context } from '@atlaskit/media-core';
+} from '@findable/media-picker';
+import { Context } from '@findable/media-core';
 
-import { ErrorReportingHandler } from '@atlaskit/editor-common';
+import { ErrorReportingHandler } from '@findable/editor-common';
 
 import {
   MediaState,

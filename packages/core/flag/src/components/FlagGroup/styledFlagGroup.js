@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 
-import { gridSize, math, layers } from '@atlaskit/theme';
+import { gridSize, math, layers } from '@findable/theme';
 
 export default styled.div`
   bottom: ${math.multiply(gridSize, 6)}px;

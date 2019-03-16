@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
-import { gridSize, math, layers } from '@atlaskit/theme';
+import { gridSize, math, layers } from '@findable/theme';
 export default styled.div.withConfig({
   displayName: "styledFlagGroup",
   componentId: "sc-1dirlpz-0"

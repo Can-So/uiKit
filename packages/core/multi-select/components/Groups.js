@@ -1,6 +1,6 @@
 import _extends from "@babel/runtime/helpers/extends";
 import React from 'react';
-import { Item, Group } from '@atlaskit/droplist';
+import { Item, Group } from '@findable/droplist';
 import NoMatches from '../styled/NoMatch';
 import InitialLoading from '../styled/InitialLoading';
 import GroupsContainer from '../styled/GroupsContainer';

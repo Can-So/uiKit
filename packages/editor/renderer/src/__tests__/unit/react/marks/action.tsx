@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { EventHandlers } from '@atlaskit/editor-common';
+import { EventHandlers } from '@findable/editor-common';
 import Action from '../../../../react/marks/action';
 
 describe('Renderer - React/Marks/Action', () => {

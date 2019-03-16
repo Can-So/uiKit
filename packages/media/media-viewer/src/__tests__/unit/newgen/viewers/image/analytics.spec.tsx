@@ -12,12 +12,12 @@ jest.mock(
 );
 
 import * as React from 'react';
-import { ProcessedFileState } from '@atlaskit/media-core';
+import { ProcessedFileState } from '@findable/media-core';
 import {
   awaitError,
   mountWithIntlContext,
   fakeContext,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { ImageViewer } from '../../../../../newgen/viewers/image';
 
 const collectionName = 'some-collection';

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import { gridSize } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { gridSize } from '@findable/theme';
 import { ToggleStateless } from '../src';
 
 type State = {|

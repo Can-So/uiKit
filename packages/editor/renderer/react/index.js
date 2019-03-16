@@ -4,8 +4,8 @@ import { MarkType } from 'prosemirror-model';
 import { getText } from '../utils';
 import { Doc, mergeTextNodes, isTextWrapper, toReact, } from './nodes';
 import { toReact as markToReact } from './marks';
-import { calcTableColumnWidths } from '@atlaskit/adf-schema';
-import { getMarksByOrder, isSameMark, } from '@atlaskit/editor-common';
+import { calcTableColumnWidths } from '@findable/adf-schema';
+import { getMarksByOrder, isSameMark, } from '@findable/editor-common';
 function mergeMarks(marksAndNodes) {
     return marksAndNodes.reduce(function (acc, markOrNode) {
         var prev = (acc.length && acc[acc.length - 1]) || null;

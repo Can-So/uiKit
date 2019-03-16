@@ -10,7 +10,7 @@ import {
   createEditorFactory,
   p,
   insertText,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { setTextSelection } from '../../../../../utils';
 
 describe('hyperlink', () => {

@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
-import ErrorIcon from '@atlaskit/icon/glyph/error';
+import ErrorIcon from '@findable/icon/glyph/error';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import Tooltip from '@atlaskit/tooltip';
+import Tooltip from '@findable/tooltip';
 var EmojiErrorMessage = /** @class */ (function (_super) {
     tslib_1.__extends(EmojiErrorMessage, _super);
     function EmojiErrorMessage() {

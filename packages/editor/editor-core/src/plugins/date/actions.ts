@@ -4,7 +4,7 @@ import {
   NodeSelection,
   Selection,
 } from 'prosemirror-state';
-import { todayTimestampInUTC } from '@atlaskit/editor-common';
+import { todayTimestampInUTC } from '@findable/editor-common';
 import { pluginKey } from './plugin';
 import { DateType } from './index';
 import { Command } from '../../types';

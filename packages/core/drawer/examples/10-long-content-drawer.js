@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import Lorem from 'react-lorem-component';
 
 import Drawer from '../src';

@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 /* tslint:disable:variable-name */
 import styled from 'styled-components';
-import { absolute, borderRadius, size } from '@atlaskit/media-ui';
-import { colors, themed } from '@atlaskit/theme';
+import { absolute, borderRadius, size } from '@findable/media-ui';
+import { colors, themed } from '@findable/theme';
 import { Root, cardShadow } from '../../styles';
 import { getSelectedBorderStyle } from '../../styles/getSelectedBorderStyle';
 var getShadowAttribute = function (props) {

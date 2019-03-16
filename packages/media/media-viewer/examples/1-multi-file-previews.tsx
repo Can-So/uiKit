@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Subscription } from 'rxjs/Subscription';
-import Button from '@atlaskit/button';
-import AkSpinner from '@atlaskit/spinner';
-import { createStorybookContext } from '@atlaskit/media-test-helpers';
+import Button from '@findable/button';
+import AkSpinner from '@findable/spinner';
+import { createStorybookContext } from '@findable/media-test-helpers';
 import { ButtonList, Container, Group } from '../example-helpers/styled';
 import {
   docIdentifier,
@@ -18,13 +18,13 @@ import {
   audioItemNoCover,
 } from '../example-helpers';
 import { MediaViewer } from '../src';
-import { videoFileId } from '@atlaskit/media-test-helpers';
+import { videoFileId } from '@findable/media-test-helpers';
 import { MediaViewerDataSource } from '..';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
-import { I18NWrapper } from '@atlaskit/media-test-helpers';
-import { Identifier, FileIdentifier } from '@atlaskit/media-core';
-import { Card } from '@atlaskit/media-card';
+import { AnalyticsListener } from '@findable/analytics-next';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
+import { I18NWrapper } from '@findable/media-test-helpers';
+import { Identifier, FileIdentifier } from '@findable/media-core';
+import { Card } from '@findable/media-card';
 
 const context = createStorybookContext();
 

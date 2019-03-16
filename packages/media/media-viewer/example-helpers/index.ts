@@ -15,10 +15,10 @@ import {
   wideImageFileId,
   errorFileId,
   videoSquareFileId,
-} from '@atlaskit/media-test-helpers';
-import { FileIdentifier } from '@atlaskit/media-core';
+} from '@findable/media-test-helpers';
+import { FileIdentifier } from '@findable/media-core';
 
-export { defaultCollectionName } from '@atlaskit/media-test-helpers';
+export { defaultCollectionName } from '@findable/media-test-helpers';
 
 export const imageIdentifier: FileIdentifier = {
   ...imageFileId,

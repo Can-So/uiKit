@@ -1,4 +1,4 @@
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var thumb = {
   default: {
     background: colors.N0,

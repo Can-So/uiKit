@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Droplist from '@atlaskit/droplist';
+import Droplist from '@findable/droplist';
 import {
   name as packageName,
   version as packageVersion,

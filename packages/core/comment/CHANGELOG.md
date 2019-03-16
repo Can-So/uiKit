@@ -1,25 +1,25 @@
-# @atlaskit/comment
+# @findable/comment
 
 ## 7.0.3
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/analytics-next@4.0.1
-  - @atlaskit/avatar@15.0.1
-  - @atlaskit/icon@16.0.5
-  - @atlaskit/theme@8.0.1
-  - @atlaskit/editor-core@106.0.0
-  - @atlaskit/button@11.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/analytics-next@4.0.1
+  - @findable/avatar@15.0.1
+  - @findable/icon@16.0.5
+  - @findable/theme@8.0.1
+  - @findable/editor-core@106.0.0
+  - @findable/button@11.0.0
 
 ## 7.0.2
-- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
-  - @atlaskit/editor-core@105.0.0
+- Updated dependencies [7ab3e93996](https://github.com/fnamazing/uiKit/commits/7ab3e93996):
+  - @findable/editor-core@105.0.0
 
 ## 7.0.1
-- Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
-  - @atlaskit/editor-core@104.0.0
+- Updated dependencies [4d17df92f8](https://github.com/fnamazing/uiKit/commits/4d17df92f8):
+  - @findable/editor-core@104.0.0
 
 ## 7.0.0
-- [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [major] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -31,13 +31,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -51,390 +51,390 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 6.0.45
-- Updated dependencies [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
-  - @atlaskit/editor-core@103.0.0
+- Updated dependencies [60f0ad9a7e](https://github.com/fnamazing/uiKit/commits/60f0ad9a7e):
+  - @findable/editor-core@103.0.0
 
 ## 6.0.44
-- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
-  - @atlaskit/editor-core@102.0.0
+- Updated dependencies [4aee5f3cec](https://github.com/fnamazing/uiKit/commits/4aee5f3cec):
+  - @findable/editor-core@102.0.0
 
 ## 6.0.43
-- Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
-  - @atlaskit/editor-core@101.0.0
+- Updated dependencies [4a84fc40e0](https://github.com/fnamazing/uiKit/commits/4a84fc40e0):
+  - @findable/editor-core@101.0.0
 
 ## 6.0.42
-- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
-  - @atlaskit/editor-core@100.0.0
+- Updated dependencies [4af5bd2a58](https://github.com/fnamazing/uiKit/commits/4af5bd2a58):
+  - @findable/editor-core@100.0.0
 
 ## 6.0.41
-- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
-  - @atlaskit/editor-core@99.0.0
+- Updated dependencies [fc6164c8c2](https://github.com/fnamazing/uiKit/commits/fc6164c8c2):
+  - @findable/editor-core@99.0.0
 
 ## 6.0.40
-- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
-  - @atlaskit/editor-core@98.0.0
+- Updated dependencies [69c8d0c19c](https://github.com/fnamazing/uiKit/commits/69c8d0c19c):
+  - @findable/editor-core@98.0.0
 
 ## 6.0.39
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/avatar@14.1.8
-  - @atlaskit/button@10.1.2
-  - @atlaskit/editor-core@97.0.1
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/avatar@14.1.8
+  - @findable/button@10.1.2
+  - @findable/editor-core@97.0.1
+  - @findable/icon@16.0.0
 
 ## 6.0.38
-- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
-  - @atlaskit/editor-core@97.0.0
+- Updated dependencies [85d5d168fd](https://github.com/fnamazing/uiKit/commits/85d5d168fd):
+  - @findable/editor-core@97.0.0
 
 ## 6.0.37
-- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
-  - @atlaskit/editor-core@96.0.0
+- Updated dependencies [dadef80](https://github.com/fnamazing/uiKit/commits/dadef80):
+  - @findable/editor-core@96.0.0
 
 ## 6.0.36
-- [patch] [19783cb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/19783cb):
+- [patch] [19783cb](https://github.com/fnamazing/uiKit/commits/19783cb):
 
-  - Fixed @atlaskit/visual-regression being incorrectly listed as a dependency.
+  - Fixed @findable/visual-regression being incorrectly listed as a dependency.
 
 ## 6.0.35
-- Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
-  - @atlaskit/editor-core@95.0.0
+- Updated dependencies [0c116d6](https://github.com/fnamazing/uiKit/commits/0c116d6):
+  - @findable/editor-core@95.0.0
 
 ## 6.0.34
-- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
-  - @atlaskit/editor-core@94.0.0
+- Updated dependencies [cbb8cb5](https://github.com/fnamazing/uiKit/commits/cbb8cb5):
+  - @findable/editor-core@94.0.0
 
 ## 6.0.33
-- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
-  - @atlaskit/editor-core@93.0.0
+- Updated dependencies [72d37fb](https://github.com/fnamazing/uiKit/commits/72d37fb):
+  - @findable/editor-core@93.0.0
 
 ## 6.0.32
-- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
-  - @atlaskit/editor-core@92.0.0
+- Updated dependencies [b3738ea](https://github.com/fnamazing/uiKit/commits/b3738ea):
+  - @findable/editor-core@92.0.0
 
 ## 6.0.31
-- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
-  - @atlaskit/editor-core@91.0.0
+- Updated dependencies [80f765b](https://github.com/fnamazing/uiKit/commits/80f765b):
+  - @findable/editor-core@91.0.0
 
 ## 6.0.30
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/analytics-next@3.1.2
-  - @atlaskit/avatar@14.1.7
-  - @atlaskit/button@10.1.1
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/lozenge@6.2.4
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/editor-core@90.3.15
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/analytics-next@3.1.2
+  - @findable/avatar@14.1.7
+  - @findable/button@10.1.1
+  - @findable/icon@15.0.2
+  - @findable/lozenge@6.2.4
+  - @findable/theme@7.0.1
+  - @findable/editor-core@90.3.15
+  - @findable/docs@6.0.0
 
 ## 6.0.29
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/button@10.0.4
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/editor-core@90.2.1
-  - @atlaskit/theme@7.0.0
-  - @atlaskit/avatar@14.1.6
-  - @atlaskit/lozenge@6.2.3
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/button@10.0.4
+  - @findable/icon@15.0.1
+  - @findable/editor-core@90.2.1
+  - @findable/theme@7.0.0
+  - @findable/avatar@14.1.6
+  - @findable/lozenge@6.2.3
 
 ## 6.0.28
-- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
-  - @atlaskit/editor-core@90.0.0
+- Updated dependencies [3a7224a](https://github.com/fnamazing/uiKit/commits/3a7224a):
+  - @findable/editor-core@90.0.0
 
 ## 6.0.27
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/avatar@14.1.5
-  - @atlaskit/button@10.0.1
-  - @atlaskit/editor-core@89.0.6
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/avatar@14.1.5
+  - @findable/button@10.0.1
+  - @findable/editor-core@89.0.6
+  - @findable/icon@15.0.0
 
 ## 6.0.26
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/analytics-next@3.1.1
-  - @atlaskit/avatar@14.1.4
-  - @atlaskit/icon@14.6.1
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/editor-core@89.0.4
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/analytics-next@3.1.1
+  - @findable/avatar@14.1.4
+  - @findable/icon@14.6.1
+  - @findable/theme@6.2.1
+  - @findable/editor-core@89.0.4
+  - @findable/button@10.0.0
 
 ## 6.0.25
-- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
-  - @atlaskit/editor-core@89.0.0
+- Updated dependencies [7e8b4b9](https://github.com/fnamazing/uiKit/commits/7e8b4b9):
+  - @findable/editor-core@89.0.0
 
 ## 6.0.24
-- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
-  - @atlaskit/editor-core@88.0.0
+- Updated dependencies [2c21466](https://github.com/fnamazing/uiKit/commits/2c21466):
+  - @findable/editor-core@88.0.0
 
 ## 6.0.23
-- [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
-  - @atlaskit/editor-core@87.0.0
+- [patch] Updated dependencies [052ce89](https://github.com/fnamazing/uiKit/commits/052ce89)
+  - @findable/editor-core@87.0.0
 
 ## 6.0.22
-- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://github.com/fnamazing/uiKit/commits/b71751b)
 
 ## 6.0.21
-- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
-  - @atlaskit/editor-core@86.0.0
+- [patch] Updated dependencies [b1ce691](https://github.com/fnamazing/uiKit/commits/b1ce691)
+  - @findable/editor-core@86.0.0
 
 ## 6.0.20
-- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
-  - @atlaskit/editor-core@85.0.0
+- [patch] Updated dependencies [2afa60d](https://github.com/fnamazing/uiKit/commits/2afa60d)
+  - @findable/editor-core@85.0.0
 
 ## 6.0.19
-- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
-- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
-  - @atlaskit/editor-core@84.0.0
+- [patch] Updated dependencies [8b2c4d3](https://github.com/fnamazing/uiKit/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://github.com/fnamazing/uiKit/commits/3302d51)
+  - @findable/editor-core@84.0.0
 
 ## 6.0.18
-- [patch] Updated dependencies [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
-  - @atlaskit/editor-core@83.0.0
+- [patch] Updated dependencies [23c7eca](https://github.com/fnamazing/uiKit/commits/23c7eca)
+  - @findable/editor-core@83.0.0
 
 ## 6.0.17
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/avatar@14.0.11
-  - @atlaskit/button@9.0.13
-  - @atlaskit/editor-core@82.3.1
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/avatar@14.0.11
+  - @findable/button@9.0.13
+  - @findable/editor-core@82.3.1
+  - @findable/icon@14.0.0
 
 ## 6.0.16
-- [patch] Updated dependencies [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
-  - @atlaskit/editor-core@82.0.0
+- [patch] Updated dependencies [ef76f1f](https://github.com/fnamazing/uiKit/commits/ef76f1f)
+  - @findable/editor-core@82.0.0
 
 ## 6.0.15
-- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
-  - @atlaskit/editor-core@81.0.0
+- [patch] Updated dependencies [927ae63](https://github.com/fnamazing/uiKit/commits/927ae63)
+  - @findable/editor-core@81.0.0
 
 ## 6.0.14
-- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
-  - @atlaskit/editor-core@80.0.0
+- [patch] Updated dependencies [6e1d642](https://github.com/fnamazing/uiKit/commits/6e1d642)
+  - @findable/editor-core@80.0.0
 
 ## 6.0.13
-- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://github.com/fnamazing/uiKit/commits/b5d6d04)
 
 ## 6.0.12
-- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
-  - @atlaskit/editor-core@79.0.0
+- [patch] Updated dependencies [7545979](https://github.com/fnamazing/uiKit/commits/7545979)
+  - @findable/editor-core@79.0.0
 
 ## 6.0.11
-- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
-  - @atlaskit/editor-core@78.0.0
+- [patch] Updated dependencies [911a570](https://github.com/fnamazing/uiKit/commits/911a570)
+  - @findable/editor-core@78.0.0
 
 ## 6.0.9
-- [patch] Clean changelogs and exclude the editor example from the ssr test [ced154b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ced154b)
+- [patch] Clean changelogs and exclude the editor example from the ssr test [ced154b](https://github.com/fnamazing/uiKit/commits/ced154b)
 
 ## 6.0.8
-- [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
-  - @atlaskit/editor-core@77.1.4
+- [patch] Updated dependencies [b12f7e6](https://github.com/fnamazing/uiKit/commits/b12f7e6)
+  - @findable/editor-core@77.1.4
 
 ## 6.0.7
-- [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/editor-core@77.0.14
-  - @atlaskit/lozenge@6.1.5
-  - @atlaskit/icon@13.2.5
-  - @atlaskit/button@9.0.6
-  - @atlaskit/avatar@14.0.8
-  - @atlaskit/docs@5.0.6
+- [patch] Updated dependencies [df22ad8](https://github.com/fnamazing/uiKit/commits/df22ad8)
+  - @findable/theme@6.0.0
+  - @findable/editor-core@77.0.14
+  - @findable/lozenge@6.1.5
+  - @findable/icon@13.2.5
+  - @findable/button@9.0.6
+  - @findable/avatar@14.0.8
+  - @findable/docs@5.0.6
 
 ## 6.0.6
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/editor-core@77.0.2
-  - @atlaskit/analytics-next@3.0.4
-  - @atlaskit/button@9.0.5
-  - @atlaskit/theme@5.1.3
-  - @atlaskit/lozenge@6.1.4
-  - @atlaskit/icon@13.2.4
-  - @atlaskit/avatar@14.0.6
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/editor-core@77.0.2
+  - @findable/analytics-next@3.0.4
+  - @findable/button@9.0.5
+  - @findable/theme@5.1.3
+  - @findable/lozenge@6.1.4
+  - @findable/icon@13.2.4
+  - @findable/avatar@14.0.6
 
 ## 6.0.5
-- [none] Updated dependencies [597e0bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/597e0bd)
-  - @atlaskit/editor-core@77.0.0
+- [none] Updated dependencies [597e0bd](https://github.com/fnamazing/uiKit/commits/597e0bd)
+  - @findable/editor-core@77.0.0
 
 ## 6.0.4
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/editor-core@76.4.5
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/button@9.0.4
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/lozenge@6.1.3
-  - @atlaskit/analytics-next@3.0.3
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/avatar@14.0.5
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/editor-core@76.4.5
+  - @findable/icon@13.2.2
+  - @findable/button@9.0.4
+  - @findable/theme@5.1.2
+  - @findable/lozenge@6.1.3
+  - @findable/analytics-next@3.0.3
+  - @findable/docs@5.0.2
+  - @findable/avatar@14.0.5
 
 ## 6.0.3
-- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-- [none] Updated dependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-  - @atlaskit/analytics-next@3.0.2
-  - @atlaskit/button@9.0.3
-  - @atlaskit/theme@5.1.1
-  - @atlaskit/lozenge@6.1.2
-  - @atlaskit/icon@13.2.1
-  - @atlaskit/avatar@14.0.4
+- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+- [none] Updated dependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+  - @findable/analytics-next@3.0.2
+  - @findable/button@9.0.3
+  - @findable/theme@5.1.1
+  - @findable/lozenge@6.1.2
+  - @findable/icon@13.2.1
+  - @findable/avatar@14.0.4
 
 ## 6.0.2
-- [patch] Move analytics tests and replace elements to core [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-- [none] Updated dependencies [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-  - @atlaskit/analytics-next@3.0.1
-  - @atlaskit/button@9.0.2
-  - @atlaskit/lozenge@6.1.1
-  - @atlaskit/docs@5.0.1
-  - @atlaskit/avatar@14.0.2
+- [patch] Move analytics tests and replace elements to core [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+- [none] Updated dependencies [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+  - @findable/analytics-next@3.0.1
+  - @findable/button@9.0.2
+  - @findable/lozenge@6.1.1
+  - @findable/docs@5.0.1
+  - @findable/avatar@14.0.2
 
 ## 6.0.1
-- [none] Updated dependencies [25353c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25353c3)
-  - @atlaskit/editor-core@76.0.0
-- [patch] Updated dependencies [38c0543](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38c0543)
-  - @atlaskit/editor-core@76.0.0
+- [none] Updated dependencies [25353c3](https://github.com/fnamazing/uiKit/commits/25353c3)
+  - @findable/editor-core@76.0.0
+- [patch] Updated dependencies [38c0543](https://github.com/fnamazing/uiKit/commits/38c0543)
+  - @findable/editor-core@76.0.0
 
 ## 6.0.0
-- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/editor-core@75.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/lozenge@6.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/avatar@14.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/editor-core@75.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/lozenge@6.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/avatar@14.0.0
+- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/editor-core@75.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/lozenge@6.0.0
+  - @findable/docs@5.0.0
+  - @findable/icon@13.0.0
+  - @findable/avatar@14.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/editor-core@75.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/lozenge@6.0.0
+  - @findable/docs@5.0.0
+  - @findable/icon@13.0.0
+  - @findable/avatar@14.0.0
 
 ## 5.0.6
-- [none] Updated dependencies [da63331](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da63331)
-  - @atlaskit/button@8.2.5
-  - @atlaskit/editor-core@74.0.8
-  - @atlaskit/avatar@13.0.0
-- [patch] Updated dependencies [7724115](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7724115)
-  - @atlaskit/avatar@13.0.0
-  - @atlaskit/editor-core@74.0.8
-  - @atlaskit/button@8.2.5
+- [none] Updated dependencies [da63331](https://github.com/fnamazing/uiKit/commits/da63331)
+  - @findable/button@8.2.5
+  - @findable/editor-core@74.0.8
+  - @findable/avatar@13.0.0
+- [patch] Updated dependencies [7724115](https://github.com/fnamazing/uiKit/commits/7724115)
+  - @findable/avatar@13.0.0
+  - @findable/editor-core@74.0.8
+  - @findable/button@8.2.5
 
 ## 5.0.5
-- [patch] Updated dependencies [af0cde6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af0cde6)
-  - @atlaskit/editor-core@74.0.0
+- [patch] Updated dependencies [af0cde6](https://github.com/fnamazing/uiKit/commits/af0cde6)
+  - @findable/editor-core@74.0.0
 
 ## 5.0.4
-- [patch] Updated dependencies [8a01bcd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a01bcd)
-  - @atlaskit/avatar@12.0.0
-  - @atlaskit/editor-core@73.9.19
+- [patch] Updated dependencies [8a01bcd](https://github.com/fnamazing/uiKit/commits/8a01bcd)
+  - @findable/avatar@12.0.0
+  - @findable/editor-core@73.9.19
 
 ## 5.0.3
-- [patch] Updated dependencies [8d5053e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d5053e)
-  - @atlaskit/editor-core@73.9.5
+- [patch] Updated dependencies [8d5053e](https://github.com/fnamazing/uiKit/commits/8d5053e)
+  - @findable/editor-core@73.9.5
 
 ## 5.0.2
-- [patch] Updated dependencies [0cf2f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cf2f52)
-  - @atlaskit/editor-core@73.9.2
+- [patch] Updated dependencies [0cf2f52](https://github.com/fnamazing/uiKit/commits/0cf2f52)
+  - @findable/editor-core@73.9.2
 
 ## 5.0.1
 
 
-- [patch] Updated dependencies [5b79a19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b79a19)
-  - @atlaskit/editor-core@73.8.20
-- [none] Updated dependencies [d708792](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d708792)
-  - @atlaskit/editor-core@73.8.20
+- [patch] Updated dependencies [5b79a19](https://github.com/fnamazing/uiKit/commits/5b79a19)
+  - @findable/editor-core@73.8.20
+- [none] Updated dependencies [d708792](https://github.com/fnamazing/uiKit/commits/d708792)
+  - @findable/editor-core@73.8.20
 
 ## 5.0.0
-- [major] No longer add a "Restricted to " prefix to the value of the retrictedTo prop. The "restricted to" label will show whatever you set to the restrictedTo prop. [8efe0af](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8efe0af)
+- [major] No longer add a "Restricted to " prefix to the value of the retrictedTo prop. The "restricted to" label will show whatever you set to the restrictedTo prop. [8efe0af](https://github.com/fnamazing/uiKit/commits/8efe0af)
 
 ## 4.1.2
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/editor-core@73.7.5
-  - @atlaskit/button@8.1.2
-  - @atlaskit/theme@4.0.4
-  - @atlaskit/lozenge@5.0.4
-  - @atlaskit/icon@12.1.2
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/editor-core@73.7.5
+  - @findable/button@8.1.2
+  - @findable/theme@4.0.4
+  - @findable/lozenge@5.0.4
+  - @findable/icon@12.1.2
 
 ## 4.1.1
-- [patch] Update changelogs to remove duplicate [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-- [none] Updated dependencies [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-  - @atlaskit/editor-core@73.7.1
-  - @atlaskit/theme@4.0.3
-  - @atlaskit/lozenge@5.0.3
-  - @atlaskit/icon@12.1.1
-  - @atlaskit/button@8.1.1
-  - @atlaskit/avatar@11.1.1
-  - @atlaskit/docs@4.1.1
+- [patch] Update changelogs to remove duplicate [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+- [none] Updated dependencies [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+  - @findable/editor-core@73.7.1
+  - @findable/theme@4.0.3
+  - @findable/lozenge@5.0.3
+  - @findable/icon@12.1.1
+  - @findable/button@8.1.1
+  - @findable/avatar@11.1.1
+  - @findable/docs@4.1.1
 
 ## 4.1.0
-- [none] Updated dependencies [7217164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7217164)
-  - @atlaskit/editor-core@73.5.0
+- [none] Updated dependencies [7217164](https://github.com/fnamazing/uiKit/commits/7217164)
+  - @findable/editor-core@73.5.0
 
 ## 4.0.0
-- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/editor-core@73.0.0
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/button@8.0.0
-  - @atlaskit/theme@4.0.0
-  - @atlaskit/lozenge@5.0.0
-  - @atlaskit/docs@4.0.0
-  - @atlaskit/avatar@11.0.0
+- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/editor-core@73.0.0
+  - @findable/icon@12.0.0
+  - @findable/button@8.0.0
+  - @findable/theme@4.0.0
+  - @findable/lozenge@5.0.0
+  - @findable/docs@4.0.0
+  - @findable/avatar@11.0.0
 
 ## 3.1.9
-- [patch] Updated dependencies [1c87e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c87e5a)
-  - @atlaskit/editor-core@72.2.2
+- [patch] Updated dependencies [1c87e5a](https://github.com/fnamazing/uiKit/commits/1c87e5a)
+  - @findable/editor-core@72.2.2
 
 ## 3.1.8
-- [none] Updated dependencies [febc44d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febc44d)
-  - @atlaskit/editor-core@72.0.0
+- [none] Updated dependencies [febc44d](https://github.com/fnamazing/uiKit/commits/febc44d)
+  - @findable/editor-core@72.0.0
 
 ## 3.1.7
-- [patch] Remove button for Edited and replace it by a span [ad3cd34](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad3cd34)
+- [patch] Remove button for Edited and replace it by a span [ad3cd34](https://github.com/fnamazing/uiKit/commits/ad3cd34)
 
 ## 3.1.6
-- [none] Updated dependencies [8fd4dd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fd4dd1)
-  - @atlaskit/editor-core@71.4.0
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/editor-core@71.4.0
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/button@7.2.5
-  - @atlaskit/theme@3.2.2
-  - @atlaskit/avatar@10.0.6
-  - @atlaskit/docs@3.0.4
-  - @atlaskit/lozenge@4.0.1
+- [none] Updated dependencies [8fd4dd1](https://github.com/fnamazing/uiKit/commits/8fd4dd1)
+  - @findable/editor-core@71.4.0
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/editor-core@71.4.0
+  - @findable/icon@11.3.0
+  - @findable/button@7.2.5
+  - @findable/theme@3.2.2
+  - @findable/avatar@10.0.6
+  - @findable/docs@3.0.4
+  - @findable/lozenge@4.0.1
 ## 3.1.3
-- [patch] Avatar margin should be 8px [d4945ae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d4945ae)
+- [patch] Avatar margin should be 8px [d4945ae](https://github.com/fnamazing/uiKit/commits/d4945ae)
 
 ## 3.1.0
-- [minor] Adding permalink support [c79d549](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c79d549)
+- [minor] Adding permalink support [c79d549](https://github.com/fnamazing/uiKit/commits/c79d549)
 
 ## 3.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 2.7.2
-- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ed0bba)
+- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://github.com/fnamazing/uiKit/commits/9ed0bba)
 
 ## 2.7.0
-- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ceccf30)
+- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://github.com/fnamazing/uiKit/commits/ceccf30)
 
 ## 2.6.15
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 2.6.14
-- [patch] Packages Flow types for elements components [3111e74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3111e74)
+- [patch] Packages Flow types for elements components [3111e74](https://github.com/fnamazing/uiKit/commits/3111e74)
 
 ## 2.6.12
-- [patch] Fix comment layout to prevent unmount on every change [fbf6db3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fbf6db3)
+- [patch] Fix comment layout to prevent unmount on every change [fbf6db3](https://github.com/fnamazing/uiKit/commits/fbf6db3)
 
 ## 2.6.9
-- [patch] Resolved low hanging flow errors in field-base field-text comment icon item and website, $ [007de27](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/007de27)
+- [patch] Resolved low hanging flow errors in field-base field-text comment icon item and website, $ [007de27](https://github.com/fnamazing/uiKit/commits/007de27)
 
 ## 2.6.8
-- [patch] migrated ak to mk-2 [c3d17da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3d17da)
+- [patch] migrated ak to mk-2 [c3d17da](https://github.com/fnamazing/uiKit/commits/c3d17da)
 
 ## 2.6.7 (2017-10-26)
 * bug fix; fix to rebuild stories ([793b2a7](https://bitbucket.org/atlassian/atlaskit/commits/793b2a7))

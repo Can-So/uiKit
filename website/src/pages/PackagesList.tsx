@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Table from '@atlaskit/dynamic-table';
+import Table from '@findable/dynamic-table';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import * as fs from '../utils/fs';
 import Page, { Title, Section } from '../components/Page';
 import { externalPackages as packages, getConfig } from '../site';

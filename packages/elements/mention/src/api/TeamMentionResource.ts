@@ -1,7 +1,7 @@
 import {
   KeyValues,
   utils as serviceUtils,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 
 import {
   MentionsResult,

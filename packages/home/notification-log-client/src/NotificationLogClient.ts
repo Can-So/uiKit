@@ -2,7 +2,7 @@ import {
   RequestServiceOptions,
   ServiceConfig,
   utils,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 import { version as npmPackageVersion } from './version.json';
 import { NotificationLogProvider, NotificationCountResponse } from './types';
 

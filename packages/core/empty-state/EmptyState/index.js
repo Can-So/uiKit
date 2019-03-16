@@ -5,8 +5,8 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React from 'react';
-import Spinner from '@atlaskit/spinner';
-import { ButtonGroup } from '@atlaskit/button';
+import Spinner from '@findable/spinner';
+import { ButtonGroup } from '@findable/button';
 import { ActionsContainer, Container, Description, Header, Image, SpinnerContainer } from '../styled';
 
 var EmptyState =

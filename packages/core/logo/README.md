@@ -5,7 +5,7 @@ This package contains the Atlassian logo and a range of product logos as compone
 ## Installation
 
 ```sh
-yarn add @atlaskit/logo
+yarn add @findable/logo
 ```
 
 ## Usage

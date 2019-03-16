@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import styled from 'styled-components';
 import RecentItem from './RecentItem';
 // tslint:disable-next-line:variable-name

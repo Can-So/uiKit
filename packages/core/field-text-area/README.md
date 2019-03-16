@@ -5,7 +5,7 @@ The Text Field Area provides a standard way to create a text-based form input wi
 ## Installation
 
 ```sh
-yarn add @atlaskit/field-text-area
+yarn add @findable/field-text-area
 ```
 
 ## Usage

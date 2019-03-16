@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { FileDetails } from '@atlaskit/media-core';
+import { FileDetails } from '@findable/media-core';
 import { FormattedMessage } from 'react-intl';
 import { FileCard, FileCardImageView } from '../..';
 import { toHumanReadableMediaSize } from '../../../utils';

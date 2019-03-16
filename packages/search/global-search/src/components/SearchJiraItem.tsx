@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { JiraIcon } from '@atlaskit/logo';
+import { JiraIcon } from '@findable/logo';
 import AdvancedSearchResult from './AdvancedSearchResult';
 import { ADVANCED_JIRA_SEARCH_RESULT_ID } from './SearchResultsUtil';
 import { AnalyticsType } from '../model/Result';

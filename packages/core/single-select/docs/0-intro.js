@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, Props } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   React component which allows selection of a single item from a dropdown list. Substitute for the native select element
@@ -9,10 +9,10 @@ export default md`
   ${(
     <SectionMessage appearance="error">
       <p>
-        <strong>Note: @atlaskit/single-select is now deprecated.</strong>
+        <strong>Note: @findable/single-select is now deprecated.</strong>
       </p>
       <p>
-        Please upgrade to @atlaskit/select, for any upgrade concerns please ping
+        Please upgrade to @findable/select, for any upgrade concerns please ping
         the Select Upgrade room on stride.
       </p>
     </SectionMessage>
@@ -20,7 +20,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/single-select"
+      packageName="@findable/single-select"
       Component={require('../examples/00-basic').default}
       source={require('!!raw-loader!../examples/00-basic')}
       title="Basic"
@@ -29,7 +29,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/single-select"
+      packageName="@findable/single-select"
       Component={require('../examples/01-stateless').default}
       source={require('!!raw-loader!../examples/01-stateless')}
       title="With Stateless Select"

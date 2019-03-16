@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { ObjectResult as ObjectResultComponent, PersonResult as PersonResultComponent, ContainerResult as ContainerResultComponent, } from '@atlaskit/quick-search';
+import { ObjectResult as ObjectResultComponent, PersonResult as PersonResultComponent, ContainerResult as ContainerResultComponent, } from '@findable/quick-search';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../messages';
 import { ResultType, JiraProjectType, ContentType, } from '../model/Result';

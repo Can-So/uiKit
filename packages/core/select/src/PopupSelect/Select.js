@@ -19,7 +19,7 @@ import {
 import NodeResolver from 'react-node-resolver';
 import shallowEqualObjects from 'shallow-equal/objects';
 
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 import { MenuDialog, DummyControl, defaultComponents } from './components';
 

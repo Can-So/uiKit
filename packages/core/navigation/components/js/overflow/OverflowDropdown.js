@@ -7,10 +7,10 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components';
-import DropdownMenu from '@atlaskit/dropdown-menu';
-import Item from '@atlaskit/item';
-import MoreVerticalIcon from '@atlaskit/icon/glyph/more-vertical';
-import Tooltip from '@atlaskit/tooltip';
+import DropdownMenu from '@findable/dropdown-menu';
+import Item from '@findable/item';
+import MoreVerticalIcon from '@findable/icon/glyph/more-vertical';
+import Tooltip from '@findable/tooltip';
 import OverflowDropdownButtonWrapper from '../../styled/OverflowDropdownButtonWrapper';
 import { isDropdownOverflowKey } from '../../../theme/util';
 
@@ -48,7 +48,7 @@ function (_Component) {
       // The OverflowDropdownButtonWrapper is used to control the width of the button, because
       // setting DropdownMenu.shouldFitContainer causes the dropdown layer to receive the same
       // constrained width as the button, which is way too small. This can be fixed in the
-      // @atlaskit/dropdown-menu component then OverflowDropdownButtonWrapper can be removed.
+      // @findable/dropdown-menu component then OverflowDropdownButtonWrapper can be removed.
       var dropdownTrigger = React.createElement(OverflowDropdownButtonWrapper, null, React.createElement(Item, {
         "aria-haspopup": "true",
         "aria-expanded": this.state.isOpen

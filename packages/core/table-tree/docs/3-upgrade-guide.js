@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, Example, md } from '@atlaskit/docs';
+import { code, Example, md } from '@findable/docs';
 
 export default md`
 ## Upgrade from 4.x to 5.x
@@ -48,7 +48,7 @@ parent item. See the example below:
 
 ${(
   <Example
-    packageName="@atlaskit/table-tree"
+    packageName="@findable/table-tree"
     Component={
       require('../examples/upgrade-guide-examples/static-data').default
     }
@@ -121,7 +121,7 @@ tableTreeDataHelper.updateItems(<_items_to_add>, <_current_items_>, <_parent_ite
 
 ${(
   <Example
-    packageName="@atlaskit/table-tree"
+    packageName="@findable/table-tree"
     Component={
       require('../examples/upgrade-guide-examples/async-data-loading').default
     }

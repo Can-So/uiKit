@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
-import { gridSize } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { gridSize } from '@findable/theme';
 export var StyledButton = styled(Button).withConfig({
   displayName: "styled__StyledButton",
   componentId: "ox68oy-0"

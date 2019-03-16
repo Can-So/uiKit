@@ -4,7 +4,7 @@ import { Fragment, Slice, } from 'prosemirror-model';
 import { NodeSelection, TextSelection, } from 'prosemirror-state';
 import { liftTarget, findWrapping } from 'prosemirror-transform';
 import { LEFT } from '../keymaps';
-import { JSONTransformer, } from '@atlaskit/editor-json-transformer';
+import { JSONTransformer, } from '@findable/editor-json-transformer';
 import { FakeTextCursorSelection } from '../plugins/fake-text-cursor/cursor';
 import { hasParentNodeOfType } from 'prosemirror-utils';
 import { GapCursorSelection } from '../plugins/gap-cursor/selection';

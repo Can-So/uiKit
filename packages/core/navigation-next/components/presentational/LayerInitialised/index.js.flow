@@ -1,7 +1,7 @@
 // @flow
 
 import { Component } from 'react';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 
 import { navigationUILoaded } from '../../../common/analytics';
 import type { LayerInitialisedProps } from './types';

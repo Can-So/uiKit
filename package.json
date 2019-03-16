@@ -1,10 +1,10 @@
 {
-  "name": "@atlaskit/fabric",
+  "name": "@findable/fabric",
   "private": true,
   "version": "0.0.0",
   "description": "Fabric components for Atlassian's Atlaskit",
   "main": "index.js",
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "author": "Atlassian Pty Ltd",
   "license": "Apache-2.0",
   "scripts": {
@@ -20,7 +20,7 @@
     "build:typescript:es2015": "             NODE_ENV=production bolt workspaces exec --only-fs \"$(node ./build/ci-scripts/get.glob.packages.for.tools.js typescript)\" -- tsc --project ./build/es2015",
     "build:flowtypes": "                     run-p build:flowtypes:esm",
     "build:flowtypes:esm": "                 bolt workspaces exec --only-fs \"$(node ./build/ci-scripts/get.glob.packages.for.tools.js babel flow)\" -- flow-copy-source -v -i '**/__tests__/**' src ./",
-    "update:icons": "                        bolt w @atlaskit/icon update && bolt w @atlaskit/icon-object update && bolt w @atlaskit/icon-file-type update && bolt w @atlaskit/reduced-ui-pack update",
+    "update:icons": "                        bolt w @findable/icon update && bolt w @findable/icon-object update && bolt w @findable/icon-file-type update && bolt w @findable/reduced-ui-pack update",
     "delete": "                              yarn run delete:modules && yarn run delete:build",
     "delete:modules": "                      bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules",
     "delete:build": "                        bolt ws exec --parallel -- rm -rf dist",
@@ -81,8 +81,8 @@
     "build:media-editor:copy-binaries": "    cd packages/media/media-editor && cp -r src/engine/core/binaries engine/core",
     "build:navigation-next": "               cd packages/core/navigation-next && yarn build",
     "build:bundle-analysis": "               node ./build/ci-scripts/run.bundle.analysis",
-    "build:css-reset": "                     BABEL_ENV=production:esm bolt w @atlaskit/css-reset run build",
-    "build:reduced-ui-pack": "               BABEL_ENV=production:esm bolt w @atlaskit/reduced-ui-pack run build",
+    "build:css-reset": "                     BABEL_ENV=production:esm bolt w @findable/css-reset run build",
+    "build:reduced-ui-pack": "               BABEL_ENV=production:esm bolt w @findable/reduced-ui-pack run build",
     "build:adf-schema:checkuptodate": "      cd packages/editor/adf-schema && yarn run generate:json-schema && git diff --exit-code"
   },
   "bolt": {
@@ -95,7 +95,7 @@
     ]
   },
   "devDependencies": {
-    "@atlaskit/app-switcher": "^8.0.1",
+    "@findable/app-switcher": "^8.0.1",
     "@babel/node": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@types/chai": "^4.0.4",
@@ -247,9 +247,9 @@
     "xhr-mock": "^2.4.0"
   },
   "dependencies": {
-    "@atlaskit/activity": "^1.0.1",
-    "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-shared-styles": "^2.10.3",
+    "@findable/activity": "^1.0.1",
+    "@findable/util-common-test": "^2.4.2",
+    "@findable/util-shared-styles": "^2.10.3",
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
@@ -525,7 +525,7 @@
     "yarn-deduplicate": "^1.0.5"
   },
   "resolutions": {
-    "**/@atlaskit/theme/styled-components": "^3.2.6",
+    "**/@findable/theme/styled-components": "^3.2.6",
     "**/expand-range/fill-range": "2.2.3"
   },
   "engines": {

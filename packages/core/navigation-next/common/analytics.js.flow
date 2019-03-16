@@ -8,7 +8,7 @@ import {
   type WithAnalyticsEventsProps,
   type AnalyticsContextWrappedComp,
   type AnalyticsEventsWrappedComp,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import type { ViewLayer } from '../view-controller/types';
 
 type BaseItemClicked = {

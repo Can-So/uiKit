@@ -18,10 +18,10 @@ import {
   tdCursor,
   simulatePlatform,
   Platforms,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { AnalyticsHandler } from '../../../../analytics';
 import { setNodeSelection } from '../../../../utils';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { EditorView } from 'prosemirror-view';
 
 const codeBlockGASV3Payload = {

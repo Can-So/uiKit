@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { MediaCollectionItem } from '@atlaskit/media-store';
+import { MediaCollectionItem } from '@findable/media-store';
 export declare const GET_FILES_IN_RECENTS = "GET_FILES_IN_RECENTS";
 export interface GetFilesInRecentsAction extends Action {
     type: 'GET_FILES_IN_RECENTS';

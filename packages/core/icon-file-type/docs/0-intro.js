@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, code, Example } from '@atlaskit/docs';
+import { md, code, Example } from '@findable/docs';
 
 const PitchSentence = () => (
   <p>
@@ -19,12 +19,12 @@ This package includes the field-type icons. These are a subset of icons with the
     - a 48*64px icon
 - They do not have the sizing prop.
 - They have specific colours by default.
-- they have a different API to icons in the \`@atlaskit/icons\` package.
+- they have a different API to icons in the \`@findable/icons\` package.
 
 ## Usage
 
 ${code`
-import AudioIcon from '@atlaskit/icon-file-type/glyph/audio/16';
+import AudioIcon from '@findable/icon-file-type/glyph/audio/16';
 
 const MyComponent = () => (
     <AudioIcon />
@@ -35,7 +35,7 @@ If you want to use the AudioIcon at a different size, you would need
 to import the 24px version of the icon as follows:
 
 ${code`
-import AudioIcon from '@atlaskit/icon-file-type/glyph/audio/24';
+import AudioIcon from '@findable/icon-file-type/glyph/audio/24';
 
 const MyComponent = () => (
     <AudioIcon />
@@ -46,7 +46,7 @@ ${<PitchSentence />}
 
 ${(
   <Example
-    packageName="@atlaskit/icon-file-type"
+    packageName="@findable/icon-file-type"
     Component={require('../examples/icon-explorer').default}
     title="Icon Explorer"
     source={require('!!raw-loader!../examples/icon-explorer')}

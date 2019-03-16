@@ -3,15 +3,15 @@
 /* eslint-disable react/no-multi-comp */
 
 import React, { Component, createContext, Fragment, type Node } from 'react';
-import { Example } from '@atlaskit/docs';
-import { colors } from '@atlaskit/theme';
+import { Example } from '@findable/docs';
+import { colors } from '@findable/theme';
 
 /**
  * Load an example in an iframe
  */
 export const IframeExample = ({ source, title, id, path = '' }: *) => (
   <Example
-    packageName="@atlaskit/navigation-next"
+    packageName="@findable/navigation-next"
     Component={() => (
       <iframe
         src={`/examples.html?groupId=core&packageId=navigation-next&exampleId=${id}&examplesPath=docs/examples${path}`}

@@ -6,7 +6,7 @@ import JiraAdvancedSearch, {
 import AdvancedSearchResult from '../../../components/AdvancedSearchResult';
 import * as Utils from '../../../components/SearchResultsUtil';
 import { AnalyticsType } from '../../../model/Result';
-import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
+import DropdownMenu, { DropdownItem } from '@findable/dropdown-menu';
 
 const defaultProps: Props = {
   query: 'query',

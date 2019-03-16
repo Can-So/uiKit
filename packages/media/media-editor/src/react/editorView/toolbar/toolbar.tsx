@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import Button from '@atlaskit/button';
-import Tooltip from '@atlaskit/tooltip';
+import Button from '@findable/button';
+import Tooltip from '@findable/tooltip';
 import { Tool, Color } from '../../../common';
 
 import LineWidthButton from './buttons/lineWidthButton';
@@ -14,7 +14,7 @@ import { ToolbarContainer, CenterButtons, VerticalLine } from './styles';
 import { ShapePopup, shapeTools } from './popups/shapePopup';
 import ShapeButton from './buttons/shapeButton';
 import { ButtonGroup } from './buttons/buttonGroup';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 
 export type PopupState = 'none' | 'color' | 'lineWidth' | 'shape';
 

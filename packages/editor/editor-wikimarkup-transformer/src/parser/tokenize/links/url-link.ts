@@ -1,6 +1,6 @@
 import { ContentLink } from './link-parser';
 import { TokenType, Context } from '../index';
-import { isSafeUrl } from '@atlaskit/adf-schema';
+import { isSafeUrl } from '@findable/adf-schema';
 import { parseString } from '../../text';
 import { hasAnyOfMarks } from '../../utils/text';
 import { Node as PMNode, Schema } from 'prosemirror-model';

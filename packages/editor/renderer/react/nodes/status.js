@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { Status as AkStatus } from '@atlaskit/status';
-import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { Status as AkStatus } from '@findable/status';
+import { FabricElementsAnalyticsContext } from '@findable/analytics-namespaced-context';
 var Status = /** @class */ (function (_super) {
     tslib_1.__extends(Status, _super);
     function Status() {

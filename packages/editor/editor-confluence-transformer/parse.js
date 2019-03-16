@@ -1,5 +1,5 @@
-import { acNameToEmoji, acShortcutToEmoji, tableBackgroundColorNames, } from '@atlaskit/adf-schema';
-import { akEditorFullPageMaxWidth, akEditorTableNumberColumnWidth, } from '@atlaskit/editor-common';
+import { acNameToEmoji, acShortcutToEmoji, tableBackgroundColorNames, } from '@findable/adf-schema';
+import { akEditorFullPageMaxWidth, akEditorTableNumberColumnWidth, } from '@findable/editor-common';
 import { Fragment } from 'prosemirror-model';
 import parseCxhtml from './parse-cxhtml';
 import { AC_XMLNS, default as encodeCxhtml } from './encode-cxhtml';

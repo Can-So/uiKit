@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md, Props } from '@atlaskit/docs';
+import { code, md, Props } from '@findable/docs';
 
 export default md`
 
@@ -63,7 +63,7 @@ update(
 
   &nbsp;
 
-  ${code`import { withAnalyticsEvents } from '@atlaskit/analytics-next';`}
+  ${code`import { withAnalyticsEvents } from '@findable/analytics-next';`}
 
   A HOC which provides the wrapped component with a method for creating \`UIAnalyticsEvent\`s, via \`props.createAnalyticsEvent\`.
   See the section on [creating your own events](/packages/core/analytics-next/docs/concepts#creating-your-own-events) 
@@ -103,7 +103,7 @@ ${code`
 
   &nbsp;
 
-  ${code`import { AnalyticsListener } from '@atlaskit/analytics-next';`}
+  ${code`import { AnalyticsListener } from '@findable/analytics-next';`}
 
   An \`AnalyticsListener\` wraps your app and listens to any events which are fired within it.
 
@@ -119,7 +119,7 @@ ${code`
 
   &nbsp;
 
-  ${code`import { AnalyticsContext } from '@atlaskit/analytics-next';`}
+  ${code`import { AnalyticsContext } from '@findable/analytics-next';`}
 
   Wrap part of your tree in \`AnalyticsContext\` to provide data to any events created beneath it. When an event is created it snapshots all of the \`AnalyticsContext\`s above it in the tree and creates an array from the data. It's up to you to parse this information when you handle the event.
 
@@ -135,7 +135,7 @@ ${code`
 
   &nbsp;
 
-  ${code`import { withAnalyticsContext } from '@atlaskit/analytics-next';`}
+  ${code`import { withAnalyticsContext } from '@findable/analytics-next';`}
 
   This HOC wraps a component in an \`AnalyticsContext\` and allows you to provide a default \`data\` value for it.
 
@@ -170,7 +170,7 @@ const Form = (props) => (
 
   &nbsp;
 
-  ${code`import { AnalyticsEvent } from '@atlaskit/analytics-next';`}
+  ${code`import { AnalyticsEvent } from '@findable/analytics-next';`}
 
   A more generic type of event which only contains a payload and an update method. If you want to create an event outside of the UI you can create an instance of this class directly. Please see [UIAnalyticsEvent](#UIAnalyticsEvent) for more information.
 
@@ -179,7 +179,7 @@ const Form = (props) => (
 
   &nbsp;
 
-  ${code`import { createAndFireEvent } from '@atlaskit/analytics-next';`}
+  ${code`import { createAndFireEvent } from '@findable/analytics-next';`}
 
   A helper to make firing an analytics event on different channels easier.
 

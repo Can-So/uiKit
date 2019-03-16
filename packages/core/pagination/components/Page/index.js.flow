@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Button, {
   type ButtonProps,
   type ButtonAppearances,
-} from '@atlaskit/button';
+} from '@findable/button';
 
 type PagePropsType = $Diff<
   ButtonProps,

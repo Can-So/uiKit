@@ -1,6 +1,6 @@
-import { MediaPicker, MediaPickerComponents, ComponentConfigs, UploadParams } from '@atlaskit/media-picker';
-import { Context } from '@atlaskit/media-core';
-import { ErrorReportingHandler } from '@atlaskit/editor-common';
+import { MediaPicker, MediaPickerComponents, ComponentConfigs, UploadParams } from '@findable/media-picker';
+import { Context } from '@findable/media-core';
+import { ErrorReportingHandler } from '@findable/editor-common';
 import { MediaState, CustomMediaPicker } from './types';
 export declare type PickerType = keyof MediaPickerComponents | 'customMediaPicker';
 export declare type ExtendedComponentConfigs = ComponentConfigs & {

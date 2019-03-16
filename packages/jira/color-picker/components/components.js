@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import ColorCard from './ColorCard';
 import { COLOR_CARD_SIZE } from '../constants';
 import { ColorPaletteContainer, ColorCardWrapper, } from '../styled/ColorPalette';

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import RecentList from './LinkAddToolbar';
-import { WithProviders } from '@atlaskit/editor-common';
+import { WithProviders } from '@findable/editor-common';
 var HyperlinkAddToolbar = /** @class */ (function (_super) {
     tslib_1.__extends(HyperlinkAddToolbar, _super);
     function HyperlinkAddToolbar() {

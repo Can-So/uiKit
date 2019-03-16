@@ -1,4 +1,4 @@
-# @atlaskit/editor-wikimarkup-transformer
+# @findable/editor-wikimarkup-transformer
 
 ## 4.0.0
 - [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
@@ -7,51 +7,51 @@
 
 ## 3.5.6
 - Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
-  - @atlaskit/editor-common@34.0.0
-  - @atlaskit/editor-core@105.0.0
-  - @atlaskit/editor-test-helpers@7.0.6
-  - @atlaskit/renderer@43.0.0
-  - @atlaskit/editor-json-transformer@4.3.5
-  - @atlaskit/util-data-test@10.2.5
+  - @findable/editor-common@34.0.0
+  - @findable/editor-core@105.0.0
+  - @findable/editor-test-helpers@7.0.6
+  - @findable/renderer@43.0.0
+  - @findable/editor-json-transformer@4.3.5
+  - @findable/util-data-test@10.2.5
 
 ## 3.5.5
 - Updated dependencies [4d17df92f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d17df92f8):
-  - @atlaskit/editor-json-transformer@4.3.4
-  - @atlaskit/editor-test-helpers@7.0.5
-  - @atlaskit/editor-core@104.0.0
-  - @atlaskit/renderer@42.0.0
+  - @findable/editor-json-transformer@4.3.4
+  - @findable/editor-test-helpers@7.0.5
+  - @findable/editor-core@104.0.0
+  - @findable/renderer@42.0.0
 
 ## 3.5.4
 - Updated dependencies [dbff4fdcf9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dbff4fdcf9):
-  - @atlaskit/editor-common@33.0.4
-  - @atlaskit/renderer@41.3.1
-  - @atlaskit/profilecard@8.0.0
+  - @findable/editor-common@33.0.4
+  - @findable/renderer@41.3.1
+  - @findable/profilecard@8.0.0
 
 ## 3.5.3
 - Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
-  - @atlaskit/editor-core@103.0.3
-  - @atlaskit/editor-json-transformer@4.3.3
-  - @atlaskit/renderer@41.2.1
-  - @atlaskit/util-data-test@10.2.3
-  - @atlaskit/editor-common@33.0.3
-  - @atlaskit/docs@7.0.0
-  - @atlaskit/theme@8.0.0
-  - @atlaskit/profilecard@7.0.0
+  - @findable/editor-core@103.0.3
+  - @findable/editor-json-transformer@4.3.3
+  - @findable/renderer@41.2.1
+  - @findable/util-data-test@10.2.3
+  - @findable/editor-common@33.0.3
+  - @findable/docs@7.0.0
+  - @findable/theme@8.0.0
+  - @findable/profilecard@7.0.0
 
 ## 3.5.2
 - Updated dependencies [60f0ad9a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60f0ad9a7e):
-  - @atlaskit/editor-json-transformer@4.3.2
-  - @atlaskit/editor-core@103.0.0
-  - @atlaskit/editor-test-helpers@7.0.4
+  - @findable/editor-json-transformer@4.3.2
+  - @findable/editor-core@103.0.0
+  - @findable/editor-test-helpers@7.0.4
 
 ## 3.5.1
 - Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
-  - @atlaskit/editor-common@33.0.0
-  - @atlaskit/editor-core@102.0.0
-  - @atlaskit/renderer@41.0.0
-  - @atlaskit/editor-json-transformer@4.3.1
-  - @atlaskit/editor-test-helpers@7.0.2
-  - @atlaskit/util-data-test@10.2.2
+  - @findable/editor-common@33.0.0
+  - @findable/editor-core@102.0.0
+  - @findable/renderer@41.0.0
+  - @findable/editor-json-transformer@4.3.1
+  - @findable/editor-test-helpers@7.0.2
+  - @findable/util-data-test@10.2.2
 
 ## 3.5.0
 - [minor] [9bb0ecb48a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9bb0ecb48a):
@@ -80,28 +80,28 @@
 
 ## 3.0.3
 - Updated dependencies [4a84fc40e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a84fc40e0):
-  - @atlaskit/editor-json-transformer@4.1.12
-  - @atlaskit/editor-test-helpers@7.0.1
-  - @atlaskit/editor-core@101.0.0
-  - @atlaskit/renderer@40.0.0
+  - @findable/editor-json-transformer@4.1.12
+  - @findable/editor-test-helpers@7.0.1
+  - @findable/editor-core@101.0.0
+  - @findable/renderer@40.0.0
 
 ## 3.0.2
 - Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
-  - @atlaskit/editor-json-transformer@4.1.11
-  - @atlaskit/adf-schema@1.5.4
-  - @atlaskit/editor-common@32.0.2
-  - @atlaskit/renderer@39.0.2
-  - @atlaskit/editor-core@100.0.0
-  - @atlaskit/editor-test-helpers@7.0.0
+  - @findable/editor-json-transformer@4.1.11
+  - @findable/adf-schema@1.5.4
+  - @findable/editor-common@32.0.2
+  - @findable/renderer@39.0.2
+  - @findable/editor-core@100.0.0
+  - @findable/editor-test-helpers@7.0.0
 
 ## 3.0.1
 - Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
-  - @atlaskit/editor-common@32.0.0
-  - @atlaskit/editor-core@99.0.0
-  - @atlaskit/renderer@39.0.0
-  - @atlaskit/editor-json-transformer@4.1.10
-  - @atlaskit/editor-test-helpers@6.3.22
-  - @atlaskit/util-data-test@10.2.1
+  - @findable/editor-common@32.0.0
+  - @findable/editor-core@99.0.0
+  - @findable/renderer@39.0.0
+  - @findable/editor-json-transformer@4.1.10
+  - @findable/editor-test-helpers@6.3.22
+  - @findable/util-data-test@10.2.1
 
 ## 3.0.0
 - [major] [be24d8040f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be24d8040f):
@@ -120,12 +120,12 @@
 
 ## 2.10.1
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
-  - @atlaskit/editor-common@31.0.0
-  - @atlaskit/editor-core@98.0.0
-  - @atlaskit/editor-test-helpers@6.3.17
-  - @atlaskit/renderer@38.0.0
-  - @atlaskit/editor-json-transformer@4.1.8
-  - @atlaskit/util-data-test@10.0.36
+  - @findable/editor-common@31.0.0
+  - @findable/editor-core@98.0.0
+  - @findable/editor-test-helpers@6.3.17
+  - @findable/renderer@38.0.0
+  - @findable/editor-json-transformer@4.1.8
+  - @findable/util-data-test@10.0.36
 
 ## 2.10.0
 - [minor] [f56a86f8ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f56a86f8ff):
@@ -134,30 +134,30 @@
 
 ## 2.9.11
 - Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
-  - @atlaskit/editor-common@30.0.0
-  - @atlaskit/editor-core@97.0.0
-  - @atlaskit/renderer@37.0.0
-  - @atlaskit/editor-json-transformer@4.1.7
-  - @atlaskit/editor-test-helpers@6.3.12
-  - @atlaskit/util-data-test@10.0.34
+  - @findable/editor-common@30.0.0
+  - @findable/editor-core@97.0.0
+  - @findable/renderer@37.0.0
+  - @findable/editor-json-transformer@4.1.7
+  - @findable/editor-test-helpers@6.3.12
+  - @findable/util-data-test@10.0.34
 
 ## 2.9.10
 - Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
-  - @atlaskit/editor-common@29.0.0
-  - @atlaskit/editor-core@96.0.0
-  - @atlaskit/renderer@36.0.0
-  - @atlaskit/editor-json-transformer@4.1.6
-  - @atlaskit/editor-test-helpers@6.3.11
-  - @atlaskit/util-data-test@10.0.33
+  - @findable/editor-common@29.0.0
+  - @findable/editor-core@96.0.0
+  - @findable/renderer@36.0.0
+  - @findable/editor-json-transformer@4.1.6
+  - @findable/editor-test-helpers@6.3.11
+  - @findable/util-data-test@10.0.33
 
 ## 2.9.9
 - Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
-  - @atlaskit/editor-json-transformer@4.1.5
-  - @atlaskit/editor-test-helpers@6.3.8
-  - @atlaskit/editor-common@28.0.2
-  - @atlaskit/renderer@35.0.1
-  - @atlaskit/util-data-test@10.0.32
-  - @atlaskit/editor-core@95.0.0
+  - @findable/editor-json-transformer@4.1.5
+  - @findable/editor-test-helpers@6.3.8
+  - @findable/editor-common@28.0.2
+  - @findable/renderer@35.0.1
+  - @findable/util-data-test@10.0.32
+  - @findable/editor-core@95.0.0
 
 ## 2.9.8
 - [patch] [74bf476](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74bf476):
@@ -166,29 +166,29 @@
 
 ## 2.9.7
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
-  - @atlaskit/editor-common@28.0.0
-  - @atlaskit/editor-core@94.0.0
-  - @atlaskit/editor-test-helpers@6.3.7
-  - @atlaskit/renderer@35.0.0
-  - @atlaskit/editor-json-transformer@4.1.4
-  - @atlaskit/util-data-test@10.0.31
+  - @findable/editor-common@28.0.0
+  - @findable/editor-core@94.0.0
+  - @findable/editor-test-helpers@6.3.7
+  - @findable/renderer@35.0.0
+  - @findable/editor-json-transformer@4.1.4
+  - @findable/util-data-test@10.0.31
 
 ## 2.9.6
 - Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
-  - @atlaskit/editor-common@27.0.0
-  - @atlaskit/editor-core@93.0.0
-  - @atlaskit/editor-test-helpers@6.3.6
-  - @atlaskit/renderer@34.0.0
-  - @atlaskit/editor-json-transformer@4.1.3
-  - @atlaskit/util-data-test@10.0.30
+  - @findable/editor-common@27.0.0
+  - @findable/editor-core@93.0.0
+  - @findable/editor-test-helpers@6.3.6
+  - @findable/renderer@34.0.0
+  - @findable/editor-json-transformer@4.1.3
+  - @findable/util-data-test@10.0.30
 
 ## 2.9.5
 - Updated dependencies [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
-  - @atlaskit/editor-json-transformer@4.1.2
-  - @atlaskit/editor-test-helpers@6.3.5
-  - @atlaskit/renderer@33.0.4
-  - @atlaskit/editor-common@26.0.0
-  - @atlaskit/editor-core@92.0.19
+  - @findable/editor-json-transformer@4.1.2
+  - @findable/editor-test-helpers@6.3.5
+  - @findable/renderer@33.0.4
+  - @findable/editor-common@26.0.0
+  - @findable/editor-core@92.0.19
 
 ## 2.9.4
 - [patch] [aca2425](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aca2425):
@@ -217,12 +217,12 @@
 
 ## 2.8.2
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
-  - @atlaskit/editor-common@25.0.0
-  - @atlaskit/editor-core@92.0.0
-  - @atlaskit/renderer@33.0.0
-  - @atlaskit/editor-json-transformer@4.1.1
-  - @atlaskit/editor-test-helpers@6.3.4
-  - @atlaskit/util-data-test@10.0.28
+  - @findable/editor-common@25.0.0
+  - @findable/editor-core@92.0.0
+  - @findable/renderer@33.0.0
+  - @findable/editor-json-transformer@4.1.1
+  - @findable/editor-test-helpers@6.3.4
+  - @findable/util-data-test@10.0.28
 
 ## 2.8.1
 - [patch] [0a28c41](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a28c41):
@@ -236,22 +236,22 @@
 
 ## 2.7.6
 - Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
-  - @atlaskit/editor-common@23.0.0
-  - @atlaskit/editor-core@91.0.0
-  - @atlaskit/renderer@32.0.0
-  - @atlaskit/editor-json-transformer@4.0.25
-  - @atlaskit/editor-test-helpers@6.3.2
-  - @atlaskit/util-data-test@10.0.26
+  - @findable/editor-common@23.0.0
+  - @findable/editor-core@91.0.0
+  - @findable/renderer@32.0.0
+  - @findable/editor-json-transformer@4.0.25
+  - @findable/editor-test-helpers@6.3.2
+  - @findable/util-data-test@10.0.26
 
 ## 2.7.5
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/editor-core@90.3.15
-  - @atlaskit/editor-json-transformer@4.0.24
-  - @atlaskit/renderer@31.1.3
-  - @atlaskit/util-data-test@10.0.25
-  - @atlaskit/profilecard@6.1.2
-  - @atlaskit/docs@6.0.0
+  - @findable/theme@7.0.1
+  - @findable/editor-core@90.3.15
+  - @findable/editor-json-transformer@4.0.24
+  - @findable/renderer@31.1.3
+  - @findable/util-data-test@10.0.25
+  - @findable/profilecard@6.1.2
+  - @findable/docs@6.0.0
 
 ## 2.7.4
 - [patch] [77df0db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/77df0db):
@@ -260,27 +260,27 @@
 
 ## 2.7.3
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/editor-common@22.2.3
-  - @atlaskit/editor-core@90.2.1
-  - @atlaskit/renderer@31.0.7
-  - @atlaskit/profilecard@6.1.1
-  - @atlaskit/theme@7.0.0
+  - @findable/docs@5.2.3
+  - @findable/editor-common@22.2.3
+  - @findable/editor-core@90.2.1
+  - @findable/renderer@31.0.7
+  - @findable/profilecard@6.1.1
+  - @findable/theme@7.0.0
 
 ## 2.7.2
 - Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
-  - @atlaskit/editor-json-transformer@4.0.23
-  - @atlaskit/editor-test-helpers@6.2.23
-  - @atlaskit/editor-core@90.0.0
+  - @findable/editor-json-transformer@4.0.23
+  - @findable/editor-test-helpers@6.2.23
+  - @findable/editor-core@90.0.0
 
 ## 2.7.1
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
-  - @atlaskit/editor-common@22.0.0
-  - @atlaskit/editor-core@89.0.0
-  - @atlaskit/renderer@31.0.0
-  - @atlaskit/editor-json-transformer@4.0.22
-  - @atlaskit/editor-test-helpers@6.2.19
-  - @atlaskit/util-data-test@10.0.21
+  - @findable/editor-common@22.0.0
+  - @findable/editor-core@89.0.0
+  - @findable/renderer@31.0.0
+  - @findable/editor-json-transformer@4.0.22
+  - @findable/editor-test-helpers@6.2.19
+  - @findable/util-data-test@10.0.21
 
 ## 2.7.0
 - [minor] [37eaced](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37eaced):
@@ -319,9 +319,9 @@
 
 ## 2.4.6
 - Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
-  - @atlaskit/editor-common@21.2.2
-  - @atlaskit/renderer@30.2.1
-  - @atlaskit/profilecard@6.0.0
+  - @findable/editor-common@21.2.2
+  - @findable/renderer@30.2.1
+  - @findable/profilecard@6.0.0
 
 ## 2.4.5
 - [patch] [3148c95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3148c95):
@@ -400,12 +400,12 @@
 
 ## 2.1.26
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
-  - @atlaskit/editor-common@21.0.0
-  - @atlaskit/editor-core@88.0.0
-  - @atlaskit/renderer@30.0.0
-  - @atlaskit/editor-json-transformer@4.0.21
-  - @atlaskit/editor-test-helpers@6.2.16
-  - @atlaskit/util-data-test@10.0.20
+  - @findable/editor-common@21.0.0
+  - @findable/editor-core@88.0.0
+  - @findable/renderer@30.0.0
+  - @findable/editor-json-transformer@4.0.21
+  - @findable/editor-test-helpers@6.2.16
+  - @findable/util-data-test@10.0.20
 
 ## 2.1.25
 - [patch] [b64fc55](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b64fc55):
@@ -414,9 +414,9 @@
 
 ## 2.1.24
 - Updated dependencies [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
-  - @atlaskit/editor-common@20.3.1
-  - @atlaskit/renderer@29.3.1
-  - @atlaskit/profilecard@5.0.0
+  - @findable/editor-common@20.3.1
+  - @findable/renderer@29.3.1
+  - @findable/profilecard@5.0.0
 
 ## 2.1.23
 - [patch] [7ca5551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ca5551):
@@ -452,10 +452,10 @@ d):
 
 ## 2.1.15
 - [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
-  - @atlaskit/editor-json-transformer@4.0.19
-  - @atlaskit/editor-test-helpers@6.2.8
-  - @atlaskit/editor-core@87.0.0
-  - @atlaskit/editor-common@20.1.2
+  - @findable/editor-json-transformer@4.0.19
+  - @findable/editor-test-helpers@6.2.8
+  - @findable/editor-core@87.0.0
+  - @findable/editor-common@20.1.2
 
 ## 2.1.14
 - [patch] Ignore heading text when fails [d2ac796](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d2ac796)
@@ -471,45 +471,45 @@ d):
 
 ## 2.1.10
 - [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
-  - @atlaskit/editor-common@20.0.0
-  - @atlaskit/editor-core@86.0.0
-  - @atlaskit/renderer@29.0.0
-  - @atlaskit/editor-json-transformer@4.0.18
-  - @atlaskit/editor-test-helpers@6.2.7
-  - @atlaskit/util-data-test@10.0.16
+  - @findable/editor-common@20.0.0
+  - @findable/editor-core@86.0.0
+  - @findable/renderer@29.0.0
+  - @findable/editor-json-transformer@4.0.18
+  - @findable/editor-test-helpers@6.2.7
+  - @findable/util-data-test@10.0.16
 
 ## 2.1.9
 - [patch] Updated dependencies [6e510d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e510d8)
-  - @atlaskit/editor-core@85.5.1
-  - @atlaskit/editor-common@19.3.2
-  - @atlaskit/renderer@28.0.0
+  - @findable/editor-core@85.5.1
+  - @findable/editor-common@19.3.2
+  - @findable/renderer@28.0.0
 
 ## 2.1.8
 - [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
-  - @atlaskit/editor-common@19.0.0
-  - @atlaskit/editor-core@85.0.0
-  - @atlaskit/renderer@27.0.0
-  - @atlaskit/editor-json-transformer@4.0.17
-  - @atlaskit/editor-test-helpers@6.2.6
-  - @atlaskit/util-data-test@10.0.14
+  - @findable/editor-common@19.0.0
+  - @findable/editor-core@85.0.0
+  - @findable/renderer@27.0.0
+  - @findable/editor-json-transformer@4.0.17
+  - @findable/editor-test-helpers@6.2.6
+  - @findable/util-data-test@10.0.14
 
 ## 2.1.7
 - [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
 - [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
-  - @atlaskit/editor-common@18.0.0
-  - @atlaskit/editor-core@84.0.0
-  - @atlaskit/renderer@26.0.0
-  - @atlaskit/editor-json-transformer@4.0.16
-  - @atlaskit/editor-test-helpers@6.2.5
-  - @atlaskit/util-data-test@10.0.12
+  - @findable/editor-common@18.0.0
+  - @findable/editor-core@84.0.0
+  - @findable/renderer@26.0.0
+  - @findable/editor-json-transformer@4.0.16
+  - @findable/editor-test-helpers@6.2.5
+  - @findable/util-data-test@10.0.12
 
 ## 2.1.6
 - [patch] Updated dependencies [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
-  - @atlaskit/editor-json-transformer@4.0.15
-  - @atlaskit/editor-test-helpers@6.2.4
-  - @atlaskit/util-data-test@10.0.11
-  - @atlaskit/editor-core@83.0.0
-  - @atlaskit/renderer@25.0.0
+  - @findable/editor-json-transformer@4.0.15
+  - @findable/editor-test-helpers@6.2.4
+  - @findable/util-data-test@10.0.11
+  - @findable/editor-core@83.0.0
+  - @findable/renderer@25.0.0
 
 ## 2.1.5
 - [patch] change grey to gray to keep consistent across editor pkgs [1b2a0b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b2a0b3)
@@ -519,19 +519,19 @@ d):
 
 ## 2.1.3
 - [patch] Updated dependencies [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
-  - @atlaskit/editor-json-transformer@4.0.13
-  - @atlaskit/editor-common@17.0.1
-  - @atlaskit/editor-core@82.0.0
-  - @atlaskit/editor-test-helpers@6.1.3
+  - @findable/editor-json-transformer@4.0.13
+  - @findable/editor-common@17.0.1
+  - @findable/editor-core@82.0.0
+  - @findable/editor-test-helpers@6.1.3
 
 ## 2.1.2
 - [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
-  - @atlaskit/editor-common@17.0.0
-  - @atlaskit/editor-core@81.0.0
-  - @atlaskit/util-data-test@10.0.10
-  - @atlaskit/editor-test-helpers@6.1.2
-  - @atlaskit/renderer@24.0.0
-  - @atlaskit/editor-json-transformer@4.0.12
+  - @findable/editor-common@17.0.0
+  - @findable/editor-core@81.0.0
+  - @findable/util-data-test@10.0.10
+  - @findable/editor-test-helpers@6.1.2
+  - @findable/renderer@24.0.0
+  - @findable/editor-json-transformer@4.0.12
 
 ## 2.1.1
 - [patch] Use proper marks for texts under blockquote [7d31a25](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d31a25)
@@ -541,9 +541,9 @@ d):
 
 ## 2.0.28
 - [patch] Updated dependencies [2a6410f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2a6410f)
-  - @atlaskit/editor-common@16.2.0
-  - @atlaskit/editor-core@80.5.0
-  - @atlaskit/renderer@23.0.0
+  - @findable/editor-common@16.2.0
+  - @findable/editor-core@80.5.0
+  - @findable/renderer@23.0.0
 
 ## 2.0.27
 - [patch] link format takes higher priority over common formatters [b05205f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b05205f)
@@ -565,12 +565,12 @@ d):
 
 ## 2.0.21
 - [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
-  - @atlaskit/editor-common@16.0.0
-  - @atlaskit/editor-core@80.0.0
-  - @atlaskit/renderer@22.0.0
-  - @atlaskit/editor-json-transformer@4.0.11
-  - @atlaskit/editor-test-helpers@6.0.9
-  - @atlaskit/util-data-test@10.0.9
+  - @findable/editor-common@16.0.0
+  - @findable/editor-core@80.0.0
+  - @findable/renderer@22.0.0
+  - @findable/editor-json-transformer@4.0.11
+  - @findable/editor-test-helpers@6.0.9
+  - @findable/util-data-test@10.0.9
 
 ## 2.0.20
 - [patch] Convert file link to media group [d9331e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9331e6)
@@ -601,29 +601,29 @@ d):
 
 ## 2.0.11
 - [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
-  - @atlaskit/editor-common@15.0.0
-  - @atlaskit/editor-core@79.0.0
-  - @atlaskit/renderer@21.0.0
-  - @atlaskit/editor-json-transformer@4.0.8
-  - @atlaskit/editor-test-helpers@6.0.6
-  - @atlaskit/util-data-test@10.0.8
+  - @findable/editor-common@15.0.0
+  - @findable/editor-core@79.0.0
+  - @findable/renderer@21.0.0
+  - @findable/editor-json-transformer@4.0.8
+  - @findable/editor-test-helpers@6.0.6
+  - @findable/util-data-test@10.0.8
 
 ## 2.0.10
 - [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
-  - @atlaskit/editor-json-transformer@4.0.7
-  - @atlaskit/renderer@20.1.1
-  - @atlaskit/editor-test-helpers@6.0.5
-  - @atlaskit/editor-core@78.0.0
+  - @findable/editor-json-transformer@4.0.7
+  - @findable/renderer@20.1.1
+  - @findable/editor-test-helpers@6.0.5
+  - @findable/editor-core@78.0.0
 
 ## 2.0.9
 - [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
-  - @atlaskit/renderer@20.0.11
-  - @atlaskit/util-data-test@10.0.7
-  - @atlaskit/profilecard@4.0.8
-  - @atlaskit/editor-common@14.0.11
-  - @atlaskit/editor-test-helpers@6.0.3
-  - @atlaskit/editor-json-transformer@4.0.6
-  - @atlaskit/editor-core@77.1.4
+  - @findable/renderer@20.0.11
+  - @findable/util-data-test@10.0.7
+  - @findable/profilecard@4.0.8
+  - @findable/editor-common@14.0.11
+  - @findable/editor-test-helpers@6.0.3
+  - @findable/editor-json-transformer@4.0.6
+  - @findable/editor-core@77.1.4
 
 ## 2.0.8
 - [patch] Convert all media items to thumbnail [eb0f1f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/eb0f1f4)
@@ -633,11 +633,11 @@ d):
 
 ## 2.0.6
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/profilecard@4.0.7
-  - @atlaskit/renderer@20.0.7
-  - @atlaskit/editor-core@77.0.14
-  - @atlaskit/docs@5.0.6
+  - @findable/theme@6.0.0
+  - @findable/profilecard@4.0.7
+  - @findable/renderer@20.0.7
+  - @findable/editor-core@77.0.14
+  - @findable/docs@5.0.6
 
 ## 2.0.5
 - [patch] wikimarkup parser should parse media item with ( and ) correctly [76adf36](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76adf36)
@@ -649,156 +649,156 @@ d):
 
 
 - [none] Updated dependencies [597e0bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/597e0bd)
-  - @atlaskit/profilecard@4.0.3
-  - @atlaskit/renderer@20.0.0
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/editor-json-transformer@4.0.4
-  - @atlaskit/editor-core@77.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-common@14.0.0
+  - @findable/profilecard@4.0.3
+  - @findable/renderer@20.0.0
+  - @findable/util-data-test@10.0.3
+  - @findable/editor-json-transformer@4.0.4
+  - @findable/editor-core@77.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-common@14.0.0
 - [none] Updated dependencies [61df453](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61df453)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/profilecard@4.0.3
-  - @atlaskit/editor-common@14.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/renderer@20.0.0
-  - @atlaskit/editor-json-transformer@4.0.4
-  - @atlaskit/editor-core@77.0.0
+  - @findable/util-data-test@10.0.3
+  - @findable/profilecard@4.0.3
+  - @findable/editor-common@14.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/renderer@20.0.0
+  - @findable/editor-json-transformer@4.0.4
+  - @findable/editor-core@77.0.0
 - [none] Updated dependencies [812a39c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/812a39c)
-  - @atlaskit/profilecard@4.0.3
-  - @atlaskit/renderer@20.0.0
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/editor-json-transformer@4.0.4
-  - @atlaskit/editor-core@77.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-common@14.0.0
+  - @findable/profilecard@4.0.3
+  - @findable/renderer@20.0.0
+  - @findable/util-data-test@10.0.3
+  - @findable/editor-json-transformer@4.0.4
+  - @findable/editor-core@77.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-common@14.0.0
 - [none] Updated dependencies [c8eb097](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8eb097)
-  - @atlaskit/renderer@20.0.0
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/profilecard@4.0.3
-  - @atlaskit/editor-common@14.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-json-transformer@4.0.4
-  - @atlaskit/editor-core@77.0.0
+  - @findable/renderer@20.0.0
+  - @findable/util-data-test@10.0.3
+  - @findable/profilecard@4.0.3
+  - @findable/editor-common@14.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-json-transformer@4.0.4
+  - @findable/editor-core@77.0.0
 - [patch] Updated dependencies [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/profilecard@4.0.3
-  - @atlaskit/editor-json-transformer@4.0.4
-  - @atlaskit/editor-common@14.0.0
-  - @atlaskit/renderer@20.0.0
-  - @atlaskit/editor-test-helpers@6.0.0
-  - @atlaskit/editor-core@77.0.0
+  - @findable/util-data-test@10.0.3
+  - @findable/profilecard@4.0.3
+  - @findable/editor-json-transformer@4.0.4
+  - @findable/editor-common@14.0.0
+  - @findable/renderer@20.0.0
+  - @findable/editor-test-helpers@6.0.0
+  - @findable/editor-core@77.0.0
 
 ## 2.0.3
 - [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/renderer@19.2.6
-  - @atlaskit/util-data-test@10.0.2
-  - @atlaskit/profilecard@4.0.2
-  - @atlaskit/editor-json-transformer@4.0.3
-  - @atlaskit/editor-common@13.2.7
-  - @atlaskit/editor-test-helpers@5.1.2
-  - @atlaskit/editor-core@76.4.5
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/docs@5.0.2
+  - @findable/renderer@19.2.6
+  - @findable/util-data-test@10.0.2
+  - @findable/profilecard@4.0.2
+  - @findable/editor-json-transformer@4.0.3
+  - @findable/editor-common@13.2.7
+  - @findable/editor-test-helpers@5.1.2
+  - @findable/editor-core@76.4.5
+  - @findable/theme@5.1.2
+  - @findable/docs@5.0.2
 
 ## 2.0.2
 - [patch] Bump prosemirror-model to 1.6 in order to use toDebugString on Text node spec [fdd5c5d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fdd5c5d)
 - [none] Updated dependencies [fdd5c5d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fdd5c5d)
-  - @atlaskit/renderer@19.2.5
-  - @atlaskit/editor-common@13.2.6
-  - @atlaskit/editor-test-helpers@5.1.1
-  - @atlaskit/editor-json-transformer@4.0.2
-  - @atlaskit/editor-core@76.4.2
+  - @findable/renderer@19.2.5
+  - @findable/editor-common@13.2.6
+  - @findable/editor-test-helpers@5.1.1
+  - @findable/editor-json-transformer@4.0.2
+  - @findable/editor-core@76.4.2
 
 ## 2.0.1
 
 
 - [none] Updated dependencies [25353c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25353c3)
-  - @atlaskit/editor-core@76.0.0
-  - @atlaskit/editor-test-helpers@5.0.1
-  - @atlaskit/editor-json-transformer@4.0.1
+  - @findable/editor-core@76.0.0
+  - @findable/editor-test-helpers@5.0.1
+  - @findable/editor-json-transformer@4.0.1
 - [patch] Updated dependencies [38c0543](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38c0543)
-  - @atlaskit/editor-core@76.0.0
-  - @atlaskit/editor-test-helpers@5.0.1
-  - @atlaskit/editor-json-transformer@4.0.1
+  - @findable/editor-core@76.0.0
+  - @findable/editor-test-helpers@5.0.1
+  - @findable/editor-json-transformer@4.0.1
 
 ## 2.0.0
 
 
 - [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/renderer@19.0.0
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/profilecard@4.0.0
-  - @atlaskit/editor-json-transformer@4.0.0
-  - @atlaskit/editor-common@13.0.0
-  - @atlaskit/editor-test-helpers@5.0.0
-  - @atlaskit/editor-core@75.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
+  - @findable/renderer@19.0.0
+  - @findable/util-data-test@10.0.0
+  - @findable/profilecard@4.0.0
+  - @findable/editor-json-transformer@4.0.0
+  - @findable/editor-common@13.0.0
+  - @findable/editor-test-helpers@5.0.0
+  - @findable/editor-core@75.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
 - [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/renderer@19.0.0
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/profilecard@4.0.0
-  - @atlaskit/editor-json-transformer@4.0.0
-  - @atlaskit/editor-core@75.0.0
-  - @atlaskit/editor-test-helpers@5.0.0
-  - @atlaskit/editor-common@13.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
+  - @findable/renderer@19.0.0
+  - @findable/util-data-test@10.0.0
+  - @findable/profilecard@4.0.0
+  - @findable/editor-json-transformer@4.0.0
+  - @findable/editor-core@75.0.0
+  - @findable/editor-test-helpers@5.0.0
+  - @findable/editor-common@13.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
 
 ## 1.1.11
 
 
 - [none] Updated dependencies [5f6ec84](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f6ec84)
-  - @atlaskit/editor-core@74.0.17
-  - @atlaskit/editor-test-helpers@4.2.4
-  - @atlaskit/renderer@18.2.18
-  - @atlaskit/editor-common@12.0.0
-  - @atlaskit/editor-json-transformer@3.1.8
+  - @findable/editor-core@74.0.17
+  - @findable/editor-test-helpers@4.2.4
+  - @findable/renderer@18.2.18
+  - @findable/editor-common@12.0.0
+  - @findable/editor-json-transformer@3.1.8
 - [patch] Updated dependencies [5958588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5958588)
-  - @atlaskit/editor-core@74.0.17
-  - @atlaskit/editor-test-helpers@4.2.4
-  - @atlaskit/renderer@18.2.18
-  - @atlaskit/editor-common@12.0.0
-  - @atlaskit/editor-json-transformer@3.1.8
+  - @findable/editor-core@74.0.17
+  - @findable/editor-test-helpers@4.2.4
+  - @findable/renderer@18.2.18
+  - @findable/editor-common@12.0.0
+  - @findable/editor-json-transformer@3.1.8
 
 ## 1.1.10
 - [patch] Adds roundtrip testing for nodes and applys fixes [83a2ec7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/83a2ec7)
 
 ## 1.1.9
 - [patch] Updated dependencies [af0cde6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af0cde6)
-  - @atlaskit/editor-core@74.0.0
-  - @atlaskit/editor-test-helpers@4.2.2
-  - @atlaskit/editor-json-transformer@3.1.7
+  - @findable/editor-core@74.0.0
+  - @findable/editor-test-helpers@4.2.2
+  - @findable/editor-json-transformer@3.1.7
 
 ## 1.1.8
 - [patch] Add missing dependencies to packages to get the website to build [99446e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99446e3)
 
 - [none] Updated dependencies [99446e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99446e3)
-  - @atlaskit/renderer@18.2.11
-  - @atlaskit/profilecard@3.13.1
-  - @atlaskit/docs@4.2.2
+  - @findable/renderer@18.2.11
+  - @findable/profilecard@3.13.1
+  - @findable/docs@4.2.2
 - [none] Updated dependencies [9bac948](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9bac948)
-  - @atlaskit/renderer@18.2.11
-  - @atlaskit/docs@4.2.2
+  - @findable/renderer@18.2.11
+  - @findable/docs@4.2.2
 
 ## 1.1.7
 - [patch] Updated dependencies [8d5053e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d5053e)
-  - @atlaskit/util-data-test@9.1.15
-  - @atlaskit/renderer@18.2.9
-  - @atlaskit/editor-json-transformer@3.1.5
-  - @atlaskit/editor-common@11.3.8
-  - @atlaskit/editor-test-helpers@4.1.9
-  - @atlaskit/editor-core@73.9.5
+  - @findable/util-data-test@9.1.15
+  - @findable/renderer@18.2.9
+  - @findable/editor-json-transformer@3.1.5
+  - @findable/editor-common@11.3.8
+  - @findable/editor-test-helpers@4.1.9
+  - @findable/editor-core@73.9.5
 
 ## 1.1.6
 - [patch] Updated dependencies [0cf2f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cf2f52)
-  - @atlaskit/util-data-test@9.1.14
-  - @atlaskit/renderer@18.2.7
-  - @atlaskit/editor-json-transformer@3.1.4
-  - @atlaskit/editor-core@73.9.2
-  - @atlaskit/editor-test-helpers@4.1.8
-  - @atlaskit/editor-common@11.3.7
+  - @findable/util-data-test@9.1.14
+  - @findable/renderer@18.2.7
+  - @findable/editor-json-transformer@3.1.4
+  - @findable/editor-core@73.9.2
+  - @findable/editor-test-helpers@4.1.8
+  - @findable/editor-common@11.3.7
 
 ## 1.1.5
 - [patch] Fixes an issue where double line breaks doesn’t start a new paragraph [8242007](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8242007)
@@ -806,11 +806,11 @@ d):
 ## 1.1.4
 - [patch] Remove pinned prosemirror-model@1.4.0 and move back to caret ranges for prosemirror-model@^1.5.0 [4faccc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4faccc0)
 - [patch] Updated dependencies [4faccc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4faccc0)
-  - @atlaskit/renderer@18.2.5
-  - @atlaskit/editor-common@11.3.0
-  - @atlaskit/editor-test-helpers@4.1.5
-  - @atlaskit/editor-json-transformer@3.1.3
-  - @atlaskit/editor-core@73.8.6
+  - @findable/renderer@18.2.5
+  - @findable/editor-common@11.3.0
+  - @findable/editor-test-helpers@4.1.5
+  - @findable/editor-json-transformer@3.1.3
+  - @findable/editor-core@73.8.6
 
 ## 1.1.3
 - [patch] Remove the additional rows when encode code block from ADF to wikiMarkup [7b81171](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b81171)
@@ -821,59 +821,59 @@ d):
 ## 1.1.1
 - [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
 - [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/util-data-test@9.1.13
-  - @atlaskit/editor-json-transformer@3.1.2
-  - @atlaskit/renderer@18.1.2
-  - @atlaskit/editor-core@73.7.5
-  - @atlaskit/editor-test-helpers@4.1.2
-  - @atlaskit/editor-common@11.2.1
-  - @atlaskit/theme@4.0.4
+  - @findable/util-data-test@9.1.13
+  - @findable/editor-json-transformer@3.1.2
+  - @findable/renderer@18.1.2
+  - @findable/editor-core@73.7.5
+  - @findable/editor-test-helpers@4.1.2
+  - @findable/editor-common@11.2.1
+  - @findable/theme@4.0.4
 
 ## 1.1.0
 - [none] Updated dependencies [7217164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7217164)
-  - @atlaskit/editor-core@73.5.0
-  - @atlaskit/editor-test-helpers@4.1.0
-  - @atlaskit/renderer@18.1.0
-  - @atlaskit/util-data-test@9.1.11
-  - @atlaskit/editor-common@11.1.0
-  - @atlaskit/editor-json-transformer@3.1.0
+  - @findable/editor-core@73.5.0
+  - @findable/editor-test-helpers@4.1.0
+  - @findable/renderer@18.1.0
+  - @findable/util-data-test@9.1.11
+  - @findable/editor-common@11.1.0
+  - @findable/editor-json-transformer@3.1.0
 
 ## 1.0.10
 - [patch] Update and lock prosemirror-model version to 1.4.0 [febf753](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febf753)
 - [none] Updated dependencies [febf753](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febf753)
-  - @atlaskit/renderer@18.0.3
-  - @atlaskit/editor-common@11.0.6
-  - @atlaskit/editor-test-helpers@4.0.7
-  - @atlaskit/editor-json-transformer@3.0.11
-  - @atlaskit/editor-core@73.4.4
+  - @findable/renderer@18.0.3
+  - @findable/editor-common@11.0.6
+  - @findable/editor-test-helpers@4.0.7
+  - @findable/editor-json-transformer@3.0.11
+  - @findable/editor-core@73.4.4
 
 ## 1.0.9
 - [patch] Adding breakout to extensions [3d1b0ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3d1b0ab)
 - [none] Updated dependencies [3d1b0ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3d1b0ab)
-  - @atlaskit/editor-test-helpers@4.0.6
-  - @atlaskit/editor-core@73.4.3
-  - @atlaskit/editor-common@11.0.5
+  - @findable/editor-test-helpers@4.0.6
+  - @findable/editor-core@73.4.3
+  - @findable/editor-common@11.0.5
 
 ## 1.0.8
 - [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/util-data-test@9.1.10
-  - @atlaskit/editor-json-transformer@3.0.9
-  - @atlaskit/renderer@18.0.0
-  - @atlaskit/editor-core@73.0.0
-  - @atlaskit/editor-test-helpers@4.0.3
-  - @atlaskit/editor-common@11.0.0
-  - @atlaskit/theme@4.0.0
-  - @atlaskit/docs@4.0.0
+  - @findable/util-data-test@9.1.10
+  - @findable/editor-json-transformer@3.0.9
+  - @findable/renderer@18.0.0
+  - @findable/editor-core@73.0.0
+  - @findable/editor-test-helpers@4.0.3
+  - @findable/editor-common@11.0.0
+  - @findable/theme@4.0.0
+  - @findable/docs@4.0.0
 
 ## 1.0.7
 - [patch] Updated dependencies [1c87e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c87e5a)
-  - @atlaskit/editor-test-helpers@4.0.2
-  - @atlaskit/editor-common@10.1.9
+  - @findable/editor-test-helpers@4.0.2
+  - @findable/editor-common@10.1.9
 
 ## 1.0.6
 - [patch] ED-4689 add __confluenceMetadata to link mark schema [e76e4b4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e76e4b4)
 - [patch] Updated dependencies [e76e4b4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e76e4b4)
-  - @atlaskit/editor-common@10.1.6
+  - @findable/editor-common@10.1.6
 
 ## 1.0.5
 - [patch] Fix transformer throwing error when given an empty string to parse [bda0aac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bda0aac)
@@ -883,20 +883,20 @@ d):
 
 ## 1.0.3
 - [none] Updated dependencies [febc44d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febc44d)
-  - @atlaskit/editor-core@72.0.0
-  - @atlaskit/editor-test-helpers@4.0.0
-  - @atlaskit/renderer@17.0.0
-  - @atlaskit/util-data-test@9.1.4
-  - @atlaskit/editor-common@10.0.0
-  - @atlaskit/editor-json-transformer@3.0.7
+  - @findable/editor-core@72.0.0
+  - @findable/editor-test-helpers@4.0.0
+  - @findable/renderer@17.0.0
+  - @findable/util-data-test@9.1.4
+  - @findable/editor-common@10.0.0
+  - @findable/editor-json-transformer@3.0.7
 
 ## 1.0.2
 - [patch] Fix a issue where last table row is duplicated in Wiki parser [2fd3446](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2fd3446)
 
 ## 1.0.1
 - [none] Updated dependencies [8fd4dd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fd4dd1)
-  - @atlaskit/editor-test-helpers@3.1.8
-  - @atlaskit/editor-common@9.3.9
+  - @findable/editor-test-helpers@3.1.8
+  - @findable/editor-common@9.3.9
 
 ## 1.0.0
 - [major] Migrate wikimarkup transformer [b8cab45](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8cab45)

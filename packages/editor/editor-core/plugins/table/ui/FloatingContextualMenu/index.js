@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
 import { findDomRefAtPos, getSelectionRect, findCellRectClosestToPos, isCellSelection, } from 'prosemirror-utils';
-import { Popup, akEditorFloatingOverlapPanelZIndex, } from '@atlaskit/editor-common';
+import { Popup, akEditorFloatingOverlapPanelZIndex, } from '@findable/editor-common';
 import ContextualMenu from './ContextualMenu';
 import { contextualMenuTriggerSize, tablePopupStyles } from '../styles';
 import { pluginKey } from '../../pm-plugins/main';

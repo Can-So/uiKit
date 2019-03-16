@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 export declare type Color = 'neutral' | 'purple' | 'blue' | 'red' | 'yellow' | 'green';
 export declare type StatusStyle = 'bold' | 'subtle';
 export interface OwnProps {

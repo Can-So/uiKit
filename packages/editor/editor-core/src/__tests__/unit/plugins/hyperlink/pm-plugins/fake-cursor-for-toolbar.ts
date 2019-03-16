@@ -6,7 +6,7 @@ import {
   defaultSchema,
   insertText,
   a,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { DecorationSet, Decoration } from 'prosemirror-view';
 import { PluginSpec, EditorState } from 'prosemirror-state';
 import { showLinkToolbar } from '../../../../../plugins/hyperlink/commands';

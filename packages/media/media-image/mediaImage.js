@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Component } from 'react';
-import { isDifferentIdentifier, } from '@atlaskit/media-core';
+import { isDifferentIdentifier, } from '@findable/media-core';
 var MediaImage = /** @class */ (function (_super) {
     tslib_1.__extends(MediaImage, _super);
     function MediaImage() {

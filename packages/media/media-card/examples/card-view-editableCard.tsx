@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Component } from 'react';
-import FieldRadioGroup from '@atlaskit/field-radio-group';
+import FieldRadioGroup from '@findable/field-radio-group';
 import {
   videoFileDetails,
   imageFileDetails,
@@ -14,10 +14,10 @@ import {
   tallImage,
   wideImage,
   wideTransparentImage,
-} from '@atlaskit/media-test-helpers';
-import { ImageResizeMode, MediaItemType } from '@atlaskit/media-core';
-import Toggle from '@atlaskit/toggle';
-import Slider from '@atlaskit/field-range';
+} from '@findable/media-test-helpers';
+import { ImageResizeMode, MediaItemType } from '@findable/media-core';
+import Toggle from '@findable/toggle';
+import Slider from '@findable/field-range';
 import * as exenv from 'exenv';
 import { CardView } from '../src/root/cardView';
 import { CardAppearance, CardStatus, CardDimensions, CardAction } from '../src';

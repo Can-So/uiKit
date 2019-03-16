@@ -1,13 +1,13 @@
 import { Component } from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
-import { CardEvent } from '@atlaskit/media-card';
+import { MediaSingleLayout } from '@findable/adf-schema';
+import { CardEvent } from '@findable/media-card';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
 import { EventDispatcher } from '../../../event-dispatcher';
 import { MediaProvider } from '../types';
 import { EditorAppearance } from '../../../types';
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 export interface MediaSingleNodeProps {
     node: PMNode;

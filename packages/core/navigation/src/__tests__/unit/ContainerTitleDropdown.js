@@ -3,8 +3,8 @@ import React from 'react';
 import AkDropdownMenu, {
   DropdownItem,
   DropdownItemGroup,
-} from '@atlaskit/dropdown-menu';
-import { AtlassianIcon } from '@atlaskit/logo';
+} from '@findable/dropdown-menu';
+import { AtlassianIcon } from '@findable/logo';
 import ContainerTitleDropdown from '../../components/js/ContainerTitleDropdown';
 import { mountWithRootTheme } from './_theme-util';
 

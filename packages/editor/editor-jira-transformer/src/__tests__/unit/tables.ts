@@ -1,5 +1,5 @@
-import { doc, p, table, tr, th, td } from '@atlaskit/editor-test-helpers';
-import { createJIRASchema } from '@atlaskit/adf-schema';
+import { doc, p, table, tr, th, td } from '@findable/editor-test-helpers';
+import { createJIRASchema } from '@findable/adf-schema';
 import { checkParseEncodeRoundTrips } from './_test-helpers';
 
 const schema = createJIRASchema({ allowTables: true });

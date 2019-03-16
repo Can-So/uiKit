@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 export var EmptyViewWithFixedHeight = styled.div.withConfig({
   displayName: "EmptyBody__EmptyViewWithFixedHeight",
   componentId: "sc-2tfyf5-0"

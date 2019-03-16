@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { Label, FieldBaseStateless as FieldBase } from '@atlaskit/field-base';
-import Avatar from '@atlaskit/avatar';
-import Droplist, { Group, Item } from '@atlaskit/droplist';
-import Tag from '@atlaskit/tag';
-import TagGroup from '@atlaskit/tag-group';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import Spinner from '@atlaskit/spinner';
+import { Label, FieldBaseStateless as FieldBase } from '@findable/field-base';
+import Avatar from '@findable/avatar';
+import Droplist, { Group, Item } from '@findable/droplist';
+import Tag from '@findable/tag';
+import TagGroup from '@findable/tag-group';
+import SearchIcon from '@findable/icon/glyph/search';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
+import Spinner from '@findable/spinner';
 
 import { MultiSelectStateless } from '../../';
 import { SelectWrapper } from '../../styled/Stateless';

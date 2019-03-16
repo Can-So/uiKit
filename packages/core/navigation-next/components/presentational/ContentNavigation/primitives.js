@@ -9,7 +9,7 @@ import _extends from "@babel/runtime/helpers/extends";
 import { css as _css } from "emotion";
 import React, { Fragment } from 'react';
 import { keyframes } from 'emotion';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { transitionDuration, transitionTimingFunction } from '../../../common/constants';
 import { light, withContentTheme, ThemeProvider } from '../../../theme';
 import { applyDisabledProperties } from '../../../common/helpers';

@@ -1,8 +1,8 @@
-import { EmojiProvider, EmojiDescription } from '@atlaskit/emoji';
+import { EmojiProvider, EmojiDescription } from '@findable/emoji';
 import { inputRules } from 'prosemirror-inputrules';
 import { Schema, Node } from 'prosemirror-model';
 import { EditorState, Transaction, Plugin, PluginKey } from 'prosemirror-state';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   createInputRule,
   leafNodeReplacementCharacter,

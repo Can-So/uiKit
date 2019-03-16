@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { akEditorWideLayoutWidth, akEditorDefaultLayoutWidth, tableCellMinWidth, } from '@atlaskit/editor-common';
+import { akEditorWideLayoutWidth, akEditorDefaultLayoutWidth, tableCellMinWidth, } from '@findable/editor-common';
 import { contentWidth } from '../pm-plugins/table-resizing/resizer/contentWidth';
 import { calculateColWidth, getCellsRefsInColumn, } from '../pm-plugins/table-resizing/resizer/utils';
 import { getLayoutSize } from '../pm-plugins/table-resizing/utils';

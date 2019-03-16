@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ProcessedFileState, Context, FileState } from '@atlaskit/media-core';
-import AudioIcon from '@atlaskit/icon/glyph/media-services/audio';
+import { ProcessedFileState, Context, FileState } from '@findable/media-core';
+import AudioIcon from '@findable/icon/glyph/media-services/audio';
 import { constructAuthTokenUrl } from '../utils';
 import { Outcome, MediaViewerFeatureFlags } from '../domain';
 import {
@@ -12,10 +12,10 @@ import {
   CustomAudioPlayerWrapper,
 } from '../styled';
 import { createError, MediaViewerError } from '../error';
-import { getArtifactUrl } from '@atlaskit/media-store';
+import { getArtifactUrl } from '@findable/media-store';
 import { BaseState, BaseViewer } from './base-viewer';
 import { isIE } from '../utils/isIE';
-import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { CustomMediaPlayer } from '@findable/media-ui';
 import { getObjectUrlFromFileState } from '../utils/getObjectUrlFromFileState';
 
 export type Props = Readonly<{

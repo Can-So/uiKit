@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-import AkButton from '@atlaskit/button';
+import CrossCircleIcon from '@findable/icon/glyph/cross-circle';
+import AkButton from '@findable/button';
 import AkProfilecardResourced, { AkProfilecard, AkProfileClient } from '../..';
 import ErrorMessage from '../../components/ErrorMessage';
 import HeightTransitionWrapper from '../../components/HeightTransitionWrapper';

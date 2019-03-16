@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 
 // tslint:disable-next-line:variable-name
 const BlockNode = styled.div`

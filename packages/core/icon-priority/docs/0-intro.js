@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 const PitchSentence = () => (
   <p>
@@ -16,7 +16,7 @@ This package includes the priority icons. These are a subset of icons with speci
 ## Usage
 
 ${code`
-import PriorityLowest from '@atlaskit/icon-priority/glyph/priority-lowest';
+import PriorityLowest from '@findable/icon-priority/glyph/priority-lowest';
 
 const MyComponent = () => (
     <PriorityLowest size="medium" />
@@ -25,7 +25,7 @@ const MyComponent = () => (
 
 ${(
   <Example
-    packageName="@atlaskit/icon-priority"
+    packageName="@findable/icon-priority"
     Component={require('../examples/01-icon-explorer').default}
     title="Icon Explorer"
     source={require('!!raw-loader!../examples/01-icon-explorer')}

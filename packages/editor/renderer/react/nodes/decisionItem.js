@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DecisionItem as AkDecisionItem } from '@atlaskit/task-decision';
+import { DecisionItem as AkDecisionItem } from '@findable/task-decision';
 var DecisionItem = function (_a) {
     var children = _a.children;
     return React.createElement(AkDecisionItem, null, children);

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
-import { CustomMediaPlayer } from '@atlaskit/media-ui';
-import { MediaFileArtifacts } from '@atlaskit/media-store';
-import { FileIdentifier, FileState } from '@atlaskit/media-core';
+import { CustomMediaPlayer } from '@findable/media-ui';
+import { MediaFileArtifacts } from '@findable/media-store';
+import { FileIdentifier, FileState } from '@findable/media-core';
 import {
   InlinePlayer,
   InlinePlayerProps,

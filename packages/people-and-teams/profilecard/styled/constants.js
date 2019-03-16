@@ -1,4 +1,4 @@
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 export var bgColor = themed({
   light: colors.N0,
   dark: colors.DN50

@@ -2,7 +2,7 @@ import {
   RequestServiceOptions,
   ServiceConfig,
   utils,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 import { Reactions } from '../types/Reactions';
 import { ReactionSummary } from '../types/ReactionSummary';
 import { ReactionClient } from './ReactionClient';

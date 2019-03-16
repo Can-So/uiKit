@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { getImageInfo, getFileInfo } from '@atlaskit/media-ui';
+import { getImageInfo, getFileInfo } from '@findable/media-ui';
 export function getPreviewFromImage(file, devicePixelRatio) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
         var fileInfo, imageInfo, width, height, scaleFactor, preview;

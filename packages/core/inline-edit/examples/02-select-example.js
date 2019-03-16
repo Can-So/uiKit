@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import MultiSelect from '@atlaskit/multi-select';
-import Group from '@atlaskit/tag-group';
-import Tag from '@atlaskit/tag';
+import MultiSelect from '@findable/multi-select';
+import Group from '@findable/tag-group';
+import Tag from '@findable/tag';
 import InlineEditor from '../src';
 
 const MultiSelectItems: Array<any> = [

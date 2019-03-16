@@ -9,7 +9,7 @@ Detailed docs and example usage can be found [here](https://atlaskit.atlassian.c
 ## Installation
 
 ```sh
-yarn add @atlaskit/mobile-header
+yarn add @findable/mobile-header
 ```
 
 ## Usage

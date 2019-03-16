@@ -1,4 +1,4 @@
-import { EmojiProvider } from '@atlaskit/emoji';
+import { EmojiProvider } from '@findable/emoji';
 import * as React from 'react';
 import { ReactionStoreProp } from '../reaction-store/ReactionConsumer';
 export declare type Props = {

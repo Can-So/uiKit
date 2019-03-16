@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/util-service-support",
+  "name": "@findable/util-service-support",
   "version": "4.0.0",
   "description": "A library of support classes for integrating React components with REST HTTP services",
   "config": {
@@ -21,10 +21,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
+    "@findable/docs": "^7.0.1",
     "es6-promise": "^4.0.5",
     "fetch-mock": "^6.5.2",
     "sinon": "^2.2.0",

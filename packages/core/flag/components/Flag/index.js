@@ -7,10 +7,10 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import ChevronUpIcon from '@atlaskit/icon/glyph/chevron-up';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
+import CrossIcon from '@findable/icon/glyph/cross';
+import ChevronUpIcon from '@findable/icon/glyph/chevron-up';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
 import { name as packageName, version as packageVersion } from '../../version.json';
 import Container, { Description, DismissButton, Icon, Content, Title, Header } from './styledFlag';
 import Expander from '../Expander';

@@ -16,7 +16,7 @@ import {
   mediaSingle,
   underline,
   randomId,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { NodeSelection } from 'prosemirror-state';
 import {
   editExtension,

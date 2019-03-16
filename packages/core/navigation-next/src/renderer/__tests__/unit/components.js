@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { mount, shallow } from 'enzyme';
-import { JiraWordmark } from '@atlaskit/logo';
+import { JiraWordmark } from '@findable/logo';
 
 import BackItemComponent from '../../../components/connected/BackItem';
 import ConnectedItemComponent from '../../../components/connected/ConnectedItem';

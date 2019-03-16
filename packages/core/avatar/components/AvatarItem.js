@@ -8,7 +8,7 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
-import GlobalTheme from '@atlaskit/theme';
+import GlobalTheme from '@findable/theme';
 import React, { cloneElement, Component } from 'react';
 import { propsOmittedFromClickData } from './constants';
 import { omit } from '../utils';

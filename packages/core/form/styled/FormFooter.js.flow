@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 
 /**
  * Provide a styled container for form headers.

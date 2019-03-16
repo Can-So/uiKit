@@ -1,20 +1,20 @@
-import { md, code } from '@atlaskit/docs';
+import { md, code } from '@findable/docs';
 
 export default md`
-# @atlaskit/outbound-auth-flow-client
+# @findable/outbound-auth-flow-client
 
 Autenticate with \`outbound-auth-flow\` service in a popup.
 
 ## Installation
 
 ${code`
-yarn add @atlaskit/outbound-auth-flow-client
+yarn add @findable/outbound-auth-flow-client
 `}
 
 ## Usage
 
 ${code`
-import { auth } from '@atlaskit/outbound-auth-flow-client';
+import { auth } from '@findable/outbound-auth-flow-client';
 
 auth(
   'https://outbound-auth-service-url/outboundAuth/start?containerId=' + containerId + '&serviceKey=' + serviceKey

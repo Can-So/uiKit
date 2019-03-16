@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ReactElement, PureComponent } from 'react';
-import { CardEvent } from '@atlaskit/media-card';
-import { EventHandlers, CardEventClickHandler } from '@atlaskit/editor-common';
-import { Identifier } from '@atlaskit/media-core';
+import { CardEvent } from '@findable/media-card';
+import { EventHandlers, CardEventClickHandler } from '@findable/editor-common';
+import { Identifier } from '@findable/media-core';
 import { MediaProps } from './media';
 export interface MediaGroupProps {
     children?: React.ReactNode;

@@ -15,7 +15,7 @@ import {
   th,
   code_block,
   dispatchPasteEvent,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { pluginKey as tablePluginKey } from '../../../../plugins/table/pm-plugins/main';
 import {
   TablePluginState,

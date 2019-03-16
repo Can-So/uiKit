@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 import SectionMessage from '../src';
 
 export default md`
   ${(
     <SectionMessage
       appearance="warning"
-      title="Note: @atlaskit/section-message is currently a developer preview."
+      title="Note: @findable/section-message is currently a developer preview."
     >
       Please experiment with and test this package, but be aware that the API
       may change at any time. Use at your own risk, preferrably not in
@@ -27,11 +27,11 @@ export default md`
 
   ## Usage
 
-  ${code`import SectionMessage from '@atlaskit/section-message';`}
+  ${code`import SectionMessage from '@findable/section-message';`}
 
   ${(
     <Example
-      packageName="@atlaskit/section-message"
+      packageName="@findable/section-message"
       title="Basic"
       Component={require('../examples/0-basic-example').default}
       source={require('!!raw-loader!../examples/0-basic-example')}
@@ -42,7 +42,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/section-message"
+      packageName="@findable/section-message"
       title="Appearance Variations"
       Component={require('../examples/appearance-variations').default}
       source={require('!!raw-loader!../examples/appearance-variations')}

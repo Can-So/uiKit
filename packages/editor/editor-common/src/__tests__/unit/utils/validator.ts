@@ -6,7 +6,7 @@ import {
   isSafeUrl,
   defaultSchema as schema,
   createSchema,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import {
   ADDoc,
   isSubSupType,

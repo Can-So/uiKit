@@ -3,7 +3,7 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 import { CheckBoxWrapper } from '../styled/TaskItem';
 import Item from './Item';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { createAndFireEventInElementsChannel } from '../analytics';
 var taskCount = 0;
 var getCheckBoxId = function (localId) { return localId + "-" + taskCount++; };

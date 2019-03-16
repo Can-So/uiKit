@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { AbstractResource, utils as serviceUtils, } from '@atlaskit/util-service-support';
+import { AbstractResource, utils as serviceUtils, } from '@findable/util-service-support';
 import { selectedToneStorageKey } from '../constants';
 import { isMediaEmoji, isPromise, toEmojiId } from '../type-helpers';
 import debug from '../util/logger';

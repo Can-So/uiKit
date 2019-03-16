@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import EmptyState from '../src';
 import exampleImage from './img/example-image.png';
 

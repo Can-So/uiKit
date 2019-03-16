@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
-import { colors } from '@atlaskit/theme';
+import EditorDoneIcon from '@findable/icon/glyph/editor/done';
+import { colors } from '@findable/theme';
 import { ColorCardOption, ColorCardContent } from '../styled/ColorCard';
 var ColorCard = /** @class */ (function (_super) {
     tslib_1.__extends(ColorCard, _super);

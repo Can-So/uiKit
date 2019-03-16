@@ -2,13 +2,13 @@ import {
   EventType,
   GasPurePayload,
   GasPureScreenEventPayload,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 import {
   createAndFireEvent,
   withAnalyticsEvents,
-} from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
-import Button from '@atlaskit/button';
+} from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
+import Button from '@findable/button';
 import * as React from 'react';
 import { FabricChannel } from '../../src/types';
 
@@ -124,7 +124,7 @@ export const createComponentWithAttributesWithAnalytics = (
       actionSubject: 'someComponent',
       eventType: 'ui',
       attributes: {
-        packageName: '@atlaskit/foo',
+        packageName: '@findable/foo',
         packageVersion: '1.0.0',
         componentName: 'foo',
         fooBar: 'yay',

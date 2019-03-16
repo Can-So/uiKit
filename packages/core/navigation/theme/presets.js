@@ -1,5 +1,5 @@
 import chromatism from 'chromatism';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 // the following colors have been added at request of Venn. These should either
 // be added to theme.colors or moved to specific AK colors. They are using a new
 // method to generate colors dynamically based on the background color.

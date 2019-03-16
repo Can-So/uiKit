@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { PreviewImageWrapper, InfoWrapper } from './styled';
 import { PreviewData } from './types';
-import { Card } from '@atlaskit/media-card';
-import { FileIdentifier } from '@atlaskit/media-core';
-import { createUploadContext } from '@atlaskit/media-test-helpers';
+import { Card } from '@findable/media-card';
+import { FileIdentifier } from '@findable/media-core';
+import { createUploadContext } from '@findable/media-test-helpers';
 import { Preview, ImagePreview } from '../src/domain/preview';
 
 const context = createUploadContext();

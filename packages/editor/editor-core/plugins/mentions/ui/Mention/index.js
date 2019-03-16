@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { ResourcedMention } from '@atlaskit/mention';
-import { ProviderFactory, WithProviders, } from '@atlaskit/editor-common';
+import { ResourcedMention } from '@findable/mention';
+import { ProviderFactory, WithProviders, } from '@findable/editor-common';
 var Mention = /** @class */ (function (_super) {
     tslib_1.__extends(Mention, _super);
     function Mention(props) {

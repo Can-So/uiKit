@@ -9,7 +9,7 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
 import { Transition } from 'react-transition-group';
-import { layers } from '@atlaskit/theme';
+import { layers } from '@findable/theme';
 import { transitionDurationMs, transitionTimingFunction } from '../constants'; // Transitions
 // ------------------------------
 

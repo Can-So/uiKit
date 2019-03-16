@@ -10,7 +10,7 @@ import {
   pluginKey as widthPluginKey,
   WidthPluginState,
 } from '../../../../width';
-import { calcBreakoutWidth } from '@atlaskit/editor-common';
+import { calcBreakoutWidth } from '@findable/editor-common';
 import WithPluginState from '../../../../../ui/WithPluginState';
 
 export interface Props {

@@ -1,5 +1,5 @@
-import { Context } from '@atlaskit/media-core';
-import { MediaCollectionItem } from '@atlaskit/media-store';
+import { Context } from '@findable/media-core';
+import { MediaCollectionItem } from '@findable/media-store';
 import { Subscription } from 'rxjs/Subscription';
 import { LocalUploads } from './local-upload';
 

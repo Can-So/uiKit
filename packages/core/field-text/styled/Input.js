@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { codeFontFamily, colors, fontSize, themed } from '@atlaskit/theme';
+import { codeFontFamily, colors, fontSize, themed } from '@findable/theme';
 
 var getPlaceholderColor = function getPlaceholderColor(_ref) {
   var disabled = _ref.disabled;

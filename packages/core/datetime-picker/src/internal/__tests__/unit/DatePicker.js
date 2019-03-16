@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { parse, format } from 'date-fns';
 
-import Select from '@atlaskit/select';
+import Select from '@findable/select';
 import { DatePickerWithoutAnalytics as DatePicker } from '../../../components/DatePicker';
 
 test('DatePicker, custom formatDisplayLabel', () => {

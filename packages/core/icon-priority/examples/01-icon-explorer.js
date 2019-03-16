@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Button from '@atlaskit/button';
-import { FieldTextStateless } from '@atlaskit/field-text';
+import Button from '@findable/button';
+import { FieldTextStateless } from '@findable/field-text';
 
 import { metadata } from '../src';
 import IconExplorerCell from './utils/IconExplorerCell';

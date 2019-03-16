@@ -3,7 +3,7 @@ import {
   doc,
   code_block,
   breakout,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { getBreakoutMode } from '../../../../../plugins/breakout/utils/get-breakout-mode';
 
 describe('Breakout Commands: getBreakoutMode', () => {

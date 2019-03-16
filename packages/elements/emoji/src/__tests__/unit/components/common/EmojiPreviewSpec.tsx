@@ -1,5 +1,5 @@
-import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
-import { waitUntil } from '@atlaskit/util-common-test';
+import { mountWithIntl, shallowWithIntl } from '@findable/editor-test-helpers';
+import { waitUntil } from '@findable/util-common-test';
 import { ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import CachingEmoji from '../../../../components/common/CachingEmoji';

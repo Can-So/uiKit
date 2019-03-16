@@ -4,10 +4,10 @@ import {
   ObjectResult as ObjectResultComponent,
   PersonResult as PersonResultComponent,
   ContainerResult as ContainerResultComponent,
-} from '@atlaskit/quick-search';
+} from '@findable/quick-search';
 
-import PageIcon from '@atlaskit/icon-object/glyph/page/24';
-import BoardIcon from '@atlaskit/icon/glyph/board';
+import PageIcon from '@findable/icon-object/glyph/page/24';
+import BoardIcon from '@findable/icon/glyph/board';
 import ResultList, { Props } from '../../components/ResultList';
 import {
   Result,

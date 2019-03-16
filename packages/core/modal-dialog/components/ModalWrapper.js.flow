@@ -1,7 +1,7 @@
 // @flow
 import React, { Component, type ElementType, type Node } from 'react';
-import { layers } from '@atlaskit/theme';
-import Portal from '@atlaskit/portal';
+import { layers } from '@findable/theme';
+import Portal from '@findable/portal';
 import { ModalTransitionConsumer } from './ModalTransition';
 import StackConsumer from './StackConsumer';
 

@@ -4,7 +4,7 @@ Provides Grid layouts for content & components
 
 ## Installation
 
-yarn add @atlaskit/page
+yarn add @findable/page
 
 ## Usage
 

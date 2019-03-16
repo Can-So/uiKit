@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { generateUuid as uuid, defaultSchema, isSafeUrl, inlineNodes, } from '@atlaskit/adf-schema';
+import { generateUuid as uuid, defaultSchema, isSafeUrl, inlineNodes, } from '@findable/adf-schema';
 /*
  * It's important that this order follows the marks rank defined here:
  * https://product-fabric.atlassian.net/wiki/spaces/E/pages/11174043/Document+structure#Documentstructure-Rank

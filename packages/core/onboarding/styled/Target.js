@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import { colors, layers } from '@atlaskit/theme'; // NOTE:
+import { colors, layers } from '@findable/theme'; // NOTE:
 // Pulse color "rgb(101, 84, 192)" derived from "colors.P300"
 
 var baseShadow = "0 0 0 2px ".concat(colors.P300);

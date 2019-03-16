@@ -1,4 +1,4 @@
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { UploadComponent } from './component';
 import { UploadParams } from '../domain/config';
 import { PopupUploadEventPayloadMap, Popup, PopupUploadEventEmitter, PopupConfig } from './types';

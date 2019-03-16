@@ -5,7 +5,7 @@ A tab is a simple graphical element that allows to contain multiple panels withi
 ## Installation
 
 ```sh
-yarn add @atlaskit/tabs
+yarn add @findable/tabs
 ```
 
 ## Usage

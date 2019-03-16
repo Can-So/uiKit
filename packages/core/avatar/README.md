@@ -5,7 +5,7 @@ The Avatars represent users that are collaborating within the same application. 
 ## Installation
 
 ```sh
-yarn add @atlaskit/avatar
+yarn add @findable/avatar
 ```
 
 ## Usage

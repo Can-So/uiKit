@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { Rectangle, Vector2, Bounds, dataURItoFile, getFileInfo, getFileInfoFromSrc, } from '@atlaskit/media-ui';
+import { Rectangle, Vector2, Bounds, dataURItoFile, getFileInfo, getFileInfoFromSrc, } from '@findable/media-ui';
 import { ImagePlacerContainer } from './container';
 import { ImagePlacerImage } from './image';
 import { Margin } from './margin';

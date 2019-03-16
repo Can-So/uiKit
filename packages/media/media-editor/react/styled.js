@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { layers, colors } from '@atlaskit/theme';
+import { layers, colors } from '@findable/theme';
 export var blanketColor = colors.N700A;
 var overlayZindex = layers.modal();
 export var MediaEditorContainer = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  position: absolute;\n  top: 0;\n"], ["\n  position: absolute;\n  top: 0;\n"])));

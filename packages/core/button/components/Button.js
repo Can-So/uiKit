@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent, } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent, } from '@findable/analytics-next';
 import withDeprecationWarnings from './withDeprecationWarnings';
 import getButtonProps from './getButtonProps';
 import CustomComponentProxy from './CustomComponentProxy';
@@ -11,7 +11,7 @@ import ButtonWrapper from '../styled/ButtonWrapper';
 import IconWrapper from '../styled/IconWrapper';
 import LoadingSpinner from '../styled/LoadingSpinner';
 import { name as packageName, version as packageVersion, } from '../version.json';
-import { withDefaultProps } from '@atlaskit/type-helpers';
+import { withDefaultProps } from '@findable/type-helpers';
 var StyledButton = styled.button(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  ", ";\n"], ["\n  ", ";\n"])), getButtonStyles);
 StyledButton.displayName = 'StyledButton';
 // Target the <a> here to override a:hover specificity.

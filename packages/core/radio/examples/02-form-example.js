@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
-import Form, { CheckboxField, Field, FormFooter } from '@atlaskit/form';
+import Button from '@findable/button';
+import Form, { CheckboxField, Field, FormFooter } from '@findable/form';
 import { Radio, RadioGroup } from '../src';
 import type { OptionsPropType } from '../src/types';
 

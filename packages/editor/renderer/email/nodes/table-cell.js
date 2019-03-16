@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { createTag, serializeStyle } from '../util';
 var baseStyle = {
     'background-clip': 'padding-box',

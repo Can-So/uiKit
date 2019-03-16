@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Button from '@atlaskit/button';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
-import { colors } from '@atlaskit/theme';
+import Button from '@findable/button';
+import WarningIcon from '@findable/icon/glyph/warning';
+import { colors } from '@findable/theme';
 import { CollapsedFrame } from '../CollapsedFrame';
 import { minWidth, maxWidth } from '../dimensions';
 import { CollapsedIconTitleDescriptionLayout } from '../CollapsedIconTitleDescriptionLayout';

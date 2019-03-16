@@ -6,7 +6,7 @@ import {
   emoji,
   p,
   strong,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import { toJSON } from '../../../../utils';
 import {

@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
 import { HashRouter } from 'react-router-dom';
-import { Label } from '@atlaskit/field-base';
-import { ToggleStateless } from '@atlaskit/toggle';
+import { Label } from '@findable/field-base';
+import { ToggleStateless } from '@findable/toggle';
 
 import { LayoutManagerWithViewController, NavigationProvider } from '../src';
 

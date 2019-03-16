@@ -1,4 +1,4 @@
-import { UploadableFile, MediaType } from '@atlaskit/media-store';
+import { UploadableFile, MediaType } from '@findable/media-store';
 import { getMediaTypeFromMimeType } from './getMediaTypeFromMimeType';
 
 export const getMediaTypeFromUploadableFile = (

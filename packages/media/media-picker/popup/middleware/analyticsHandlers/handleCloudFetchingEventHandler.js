@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { TRACK_EVENT_TYPE, OPERATIONAL_EVENT_TYPE, } from '@atlaskit/analytics-gas-types';
+import { TRACK_EVENT_TYPE, OPERATIONAL_EVENT_TYPE, } from '@findable/analytics-gas-types';
 import { isHandleCloudFetchingEventAction } from '../../actions/handleCloudFetchingEvent';
 var commonPayload = {
     actionSubject: 'mediaUpload',

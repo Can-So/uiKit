@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { textColor } from '@atlaskit/adf-schema';
+import { textColor } from '@findable/adf-schema';
 import WithPluginState from '../../ui/WithPluginState';
 import { pluginKey as textColorPluginKey, createPlugin, } from './pm-plugins/main';
 import ToolbarTextColor from './ui/ToolbarTextColor';

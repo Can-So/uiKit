@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
-import { borderRadius as akBorderRadius } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
+import { borderRadius as akBorderRadius } from '@findable/theme';
 var selected = "\n  cursor: pointer;\n  box-shadow: 0 0 0 2px " + colors.B100 + ";\n  outline: none;\n  &, :hover, :focus, :active {\n    text-decoration: none;\n  }\n";
 var isInteractive = function (_a) {
     var isInteractive = _a.isInteractive;

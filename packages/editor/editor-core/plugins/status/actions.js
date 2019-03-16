@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import { Fragment } from 'prosemirror-model';
 import { NodeSelection, Selection, } from 'prosemirror-state';
-import { uuid } from '@atlaskit/adf-schema';
+import { uuid } from '@findable/adf-schema';
 import { pluginKey } from './plugin';
 export var DEFAULT_STATUS = {
     text: '',

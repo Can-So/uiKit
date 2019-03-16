@@ -1,6 +1,6 @@
 // @flow
 
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import {
   navigationItemClicked,
   navigationExpandedCollapsed,
@@ -10,7 +10,7 @@ const mockWithAnalyticsEvents: any = withAnalyticsEvents;
 
 const mockAnalyticsComp = jest.fn(() => () => null);
 
-jest.mock('@atlaskit/analytics-next', () => ({
+jest.mock('@findable/analytics-next', () => ({
   withAnalyticsEvents: jest.fn(() => mockAnalyticsComp),
   withAnalyticsContext: jest.fn(() => jest.fn(() => () => null)),
 }));

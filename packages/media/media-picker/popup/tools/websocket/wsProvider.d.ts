@@ -1,4 +1,4 @@
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 import { WsConnectionHolder } from './wsConnectionHolder';
 export declare class WsProvider {
     private connectionHolders;

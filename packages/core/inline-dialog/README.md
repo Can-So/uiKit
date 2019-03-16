@@ -5,7 +5,7 @@ An inline dialog React component for secondary content and controls that are dis
 ## Installation
 
 ```sh
-yarn add @atlaskit/inline-dialog
+yarn add @findable/inline-dialog
 ```
 
 ## Usage

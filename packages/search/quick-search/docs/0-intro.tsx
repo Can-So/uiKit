@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   This is a barebones quick-search component that can render different types of search results.
   
   ## Usage
-  ${code`import { QuickSearch, ObjectResult, ContainerResult, ResultItemGroup } from '@atlaskit/quick-search';
+  ${code`import { QuickSearch, ObjectResult, ContainerResult, ResultItemGroup } from '@findable/quick-search';
 
   // Inside a react component with proper state and stuff.. :
   render() {

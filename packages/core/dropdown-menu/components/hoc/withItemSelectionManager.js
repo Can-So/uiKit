@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import getDisplayName from '../../util/getDisplayName';
 import DropdownItemSelectionManager from '../context/DropdownItemSelectionManager';
 
-// HOC that typically wraps @atlaskit/item/ItemGroup
+// HOC that typically wraps @findable/item/ItemGroup
 var withDropdownItemSelectionManager = function withDropdownItemSelectionManager(WrappedComponent, selectionBehavior) {
   var _class, _temp;
 

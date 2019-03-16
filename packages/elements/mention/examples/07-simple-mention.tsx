@@ -1,6 +1,6 @@
-import { AnalyticsListener } from '@atlaskit/analytics';
-import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { AnalyticsListener } from '@findable/analytics';
+import { AnalyticsListener as AnalyticsListenerNext } from '@findable/analytics-next';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import * as React from 'react';
 import { onMentionEvent } from '../example-helpers/index';
 import Mention from '../src/components/Mention';

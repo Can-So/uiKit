@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import { code, md } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { code, md } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 import { Contents, ContentsProvider, IframeExample, H } from './shared';
 
@@ -131,7 +131,7 @@ ${<H>Managing the navigation state</H>}
 The View state controller contains the active view, and methods for adding and activating views. Since we often want to read this state or perform these actions in lifecycle methods it's easiest to use a higher-order component to access the state container.
 
 ${code`
-import { withNavigationViewController } from '@atlaskit/navigation-next';
+import { withNavigationViewController } from '@findable/navigation-next';
 
 const myView = {
   id: 'my-view',
@@ -382,7 +382,7 @@ We added a \`GrowthExperiment\` component:
 ${code`import {
   viewReducerUtils,
   withNavigationViewController,
-} from '@atlaskit/navigation-next';
+} from '@findable/navigation-next';
 
 class GrowthExperimentBase extends Component {
   componentDidMount() {

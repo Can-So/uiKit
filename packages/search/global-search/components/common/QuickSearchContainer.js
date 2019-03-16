@@ -5,7 +5,7 @@ import GlobalQuickSearch from '../GlobalQuickSearch';
 import performanceNow from '../../util/performance-now';
 import { buildShownEventDetails, } from '../../util/analytics-util';
 import { firePreQueryShownEvent, firePostQueryShownEvent, fireExperimentExposureEvent, } from '../../util/analytics-event-helper';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { objectValues } from '../SearchResultsUtil';
 var resultMapToArray = function (results) {
     return objectValues(results).reduce(function (acc, value) { return tslib_1.__spread(acc, [value]); }, []);

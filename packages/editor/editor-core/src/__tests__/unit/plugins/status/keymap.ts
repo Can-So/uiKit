@@ -4,7 +4,7 @@ import {
   p,
   sendKeyToPm,
   status,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   setSelectionAndPickerAt,
   validateSelection,

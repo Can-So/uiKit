@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import FieldText from '@atlaskit/field-text';
-import Button from '@atlaskit/button';
+import FieldText from '@findable/field-text';
+import Button from '@findable/button';
 import { AnalyticsListener } from '../src';
 
 class Form extends Component<*, { value: string }> {

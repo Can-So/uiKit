@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
   This component provides a way to do image annotations.
@@ -7,8 +7,8 @@ export default md`
   ## Usage
 
   ${code`
-  import { MediaEditor } from '@atlaskit/media-editor';
-  import { tallImage as imageDataUri } from '@atlaskit/media-test-helpers';
+  import { MediaEditor } from '@findable/media-editor';
+  import { tallImage as imageDataUri } from '@findable/media-test-helpers';
 
   const App = () => (
     <MediaEditor

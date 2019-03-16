@@ -1,6 +1,6 @@
 const mockCalls = [] as string[];
 const mockEditorCore = {
-  ...jest.genMockFromModule('@atlaskit/editor-core'),
+  ...jest.genMockFromModule('@findable/editor-core'),
   indentList: jest.fn(() => () => {}),
   outdentList: jest.fn(() => () => {}),
   toggleOrderedList: jest.fn(() => () => {}),
@@ -11,7 +11,7 @@ const mockEditorCore = {
   setLinkHref: jest.fn(() => () => mockCalls.push('setLinkHref')),
   setLinkText: jest.fn(() => () => mockCalls.push('setLinkText')),
 };
-jest.mock('@atlaskit/editor-core', () => mockEditorCore);
+jest.mock('@findable/editor-core', () => mockEditorCore);
 
 import WebBridgeImpl from '../../../../editor/native-to-web';
 import {
@@ -24,7 +24,7 @@ import {
   isLinkAtPos,
   setLinkHref,
   setLinkText,
-} from '@atlaskit/editor-core';
+} from '@findable/editor-core';
 
 afterEach(() => {
   (indentList as jest.Mock<{}>).mockClear();

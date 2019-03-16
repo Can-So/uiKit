@@ -2,14 +2,14 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 import { PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { Popup, akEditorFloatingDialogZIndex } from '@atlaskit/editor-common';
+import { Popup, akEditorFloatingDialogZIndex } from '@findable/editor-common';
 import {
   EmojiTypeAhead as AkEmojiTypeAhead,
   EmojiDescription,
   OptionalEmojiDescription,
   EmojiProvider,
   EmojiId,
-} from '@atlaskit/emoji';
+} from '@findable/emoji';
 import { analyticsService } from '../../../../analytics';
 import {
   getInsertTypeForKey,

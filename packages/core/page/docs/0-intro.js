@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md, Example, Props } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@findable/docs';
 
 export default md`
 
@@ -9,12 +9,12 @@ export default md`
   ## Usage
 
 ${code`
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 `}
 
   ${(
     <Example
-      packageName="@atlaskit/page"
+      packageName="@findable/page"
       Component={require('../examples/00-basic-usage').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-usage')}
@@ -23,7 +23,7 @@ import Page, { Grid, GridColumn } from '@atlaskit/page';
 
   ${(
     <Example
-      packageName="@atlaskit/page"
+      packageName="@findable/page"
       Component={require('../examples/01-layout-example').default}
       title="Layout"
       source={require('!!raw-loader!../examples/01-layout-example')}
@@ -32,7 +32,7 @@ import Page, { Grid, GridColumn } from '@atlaskit/page';
 
   ${(
     <Example
-      packageName="@atlaskit/page"
+      packageName="@findable/page"
       Component={require('../examples/02-nested-grid-example').default}
       title="Nested Grids"
       source={require('!!raw-loader!../examples/02-nested-grid-example')}
@@ -41,7 +41,7 @@ import Page, { Grid, GridColumn } from '@atlaskit/page';
 
   ${(
     <Example
-      packageName="@atlaskit/page"
+      packageName="@findable/page"
       Component={require('../examples/03-grid-spacing-example').default}
       title="Spacing"
       source={require('!!raw-loader!../examples/03-grid-spacing-example')}

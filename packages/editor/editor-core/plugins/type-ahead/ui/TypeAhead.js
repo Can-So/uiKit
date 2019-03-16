@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { borderRadius, colors, gridSize, math } from '@atlaskit/theme';
-import { Popup, akEditorFloatingDialogZIndex } from '@atlaskit/editor-common';
+import { borderRadius, colors, gridSize, math } from '@findable/theme';
+import { Popup, akEditorFloatingDialogZIndex } from '@findable/editor-common';
 import { TypeAheadItemsList } from './TypeAheadItemsList';
 import { selectByIndex } from '../commands/select-item';
 import { setCurrentIndex } from '../commands/set-current-index';

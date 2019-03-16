@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Lorem from 'react-lorem-component';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import Tabs from '../src';
 
 export default () => (

@@ -1,7 +1,7 @@
 // @flow
 
 import type { ComponentType, ElementConfig, Node } from 'react';
-import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
+import type { WithAnalyticsEventsProps } from '@findable/analytics-next';
 
 import type { StyleReducer, WithGlobalThemeProps } from '../../../theme/types';
 import type { InteractionState } from '../InteractionStateManager/types';

@@ -4,9 +4,9 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import { darken, mix } from 'polished';
 
-import Avatar from '@atlaskit/avatar';
-import { colors, gridSize, math } from '@atlaskit/theme';
-import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
+import Avatar from '@findable/avatar';
+import { colors, gridSize, math } from '@findable/theme';
+import CheckCircleIcon from '@findable/icon/glyph/check-circle';
 
 import type { ItemTheme } from '../src/types';
 

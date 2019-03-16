@@ -1,4 +1,4 @@
-import { OptionData } from '@atlaskit/user-picker';
+import { OptionData } from '@findable/user-picker';
 import {
   isValidEmailUsingConfig,
   showInviteWarning,

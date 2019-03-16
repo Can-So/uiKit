@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 
 import Tooltip from '../src';
 

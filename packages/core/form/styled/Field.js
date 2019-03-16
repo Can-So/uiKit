@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { typography, colors, gridSize, math } from '@atlaskit/theme';
+import { typography, colors, gridSize, math } from '@findable/theme';
 /**
  * Provide a styled container for field components
  */

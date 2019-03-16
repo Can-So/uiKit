@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Date, DateProps } from '../src';
 import styled, { css } from 'styled-components';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { colors, borderRadius } from '@findable/theme';
 
 type Props = {
   selected?: boolean;

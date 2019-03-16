@@ -17,7 +17,7 @@ export {
   isPreviewableType,
   TouchFileDescriptor,
   MediaFileArtifacts,
-} from '@atlaskit/media-store';
+} from '@findable/media-store';
 
 export { FileFetcher } from './file';
 export * from './context/context';

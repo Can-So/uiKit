@@ -1,5 +1,5 @@
 // @flow
-import IssueIcon from "@atlaskit/icon/glyph/issue";
+import IssueIcon from "@findable/icon/glyph/issue";
 import {
   akColorPrimary1,
   akColorPrimary2,
@@ -9,7 +9,7 @@ import {
   akColorSecondary3,
   akColorSecondary4,
   akColorSecondary5,
-} from "@atlaskit/util-shared-styles";
+} from "@findable/util-shared-styles";
 
 const myColors = [
   akColorPrimary1,
@@ -23,8 +23,8 @@ const myColors = [
 ];
 //////
 // @flow
-import IssueIcon from "@atlaskit/icon/glyph/issue";
-import { colors } from "@atlaskit/theme";
+import IssueIcon from "@findable/icon/glyph/issue";
+import { colors } from "@findable/theme";
 
 const myColors = [
   colors.N800,

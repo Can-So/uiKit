@@ -2,7 +2,7 @@ import styled from 'styled-components';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes, ComponentClass } from 'react';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 
 export const Placeholder: ComponentClass<HTMLAttributes<{}>> = styled.span`
   margin: 0 0 0 ${gridSize() * 3}px;

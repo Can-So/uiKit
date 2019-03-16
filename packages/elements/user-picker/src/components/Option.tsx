@@ -1,4 +1,4 @@
-import { components } from '@atlaskit/select';
+import { components } from '@findable/select';
 import * as React from 'react';
 import { Option as OptionType, UserPickerProps } from '../types';
 import { EmailOption } from './EmailOption';

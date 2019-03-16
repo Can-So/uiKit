@@ -1,514 +1,514 @@
-# @atlaskit/reactions
+# @findable/reactions
 
 ## 16.1.0
-- [minor] [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
+- [minor] [b684722884](https://github.com/fnamazing/uiKit/commits/b684722884):
 
   - improvement of SSR tests and examples for Fabric Elements
 
 ## 16.0.0
-- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+- [major] [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
 
   - Dropped ES5 distributables from the typescript packages
 
 ## 15.6.3
-- Updated dependencies [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
-  - @atlaskit/emoji@57.0.1
-  - @atlaskit/elements-test-helpers@0.3.0
+- Updated dependencies [7261577953](https://github.com/fnamazing/uiKit/commits/7261577953):
+  - @findable/emoji@57.0.1
+  - @findable/elements-test-helpers@0.3.0
 
 ## 15.6.2
-- Updated dependencies [7ab3e93996](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ab3e93996):
-  - @atlaskit/editor-test-helpers@7.0.6
-  - @atlaskit/emoji@57.0.0
-  - @atlaskit/util-data-test@10.2.5
+- Updated dependencies [7ab3e93996](https://github.com/fnamazing/uiKit/commits/7ab3e93996):
+  - @findable/editor-test-helpers@7.0.6
+  - @findable/emoji@57.0.0
+  - @findable/util-data-test@10.2.5
 
 ## 15.6.1
-- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
-  - @atlaskit/button@10.1.3
-  - @atlaskit/icon@16.0.4
-  - @atlaskit/analytics-gas-types@3.2.5
-  - @atlaskit/analytics-namespaced-context@2.2.1
-  - @atlaskit/emoji@56.2.1
-  - @atlaskit/util-data-test@10.2.3
-  - @atlaskit/util-service-support@3.1.1
-  - @atlaskit/analytics-viewer@0.1.7
-  - @atlaskit/docs@7.0.0
-  - @atlaskit/analytics-next@4.0.0
-  - @atlaskit/layer@6.0.0
-  - @atlaskit/theme@8.0.0
-  - @atlaskit/tooltip@13.0.0
+- Updated dependencies [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
+  - @findable/button@10.1.3
+  - @findable/icon@16.0.4
+  - @findable/analytics-gas-types@3.2.5
+  - @findable/analytics-namespaced-context@2.2.1
+  - @findable/emoji@56.2.1
+  - @findable/util-data-test@10.2.3
+  - @findable/util-service-support@3.1.1
+  - @findable/analytics-viewer@0.1.7
+  - @findable/docs@7.0.0
+  - @findable/analytics-next@4.0.0
+  - @findable/layer@6.0.0
+  - @findable/theme@8.0.0
+  - @findable/tooltip@13.0.0
 
 ## 15.6.0
-- [minor] [aa6176aad1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aa6176aad1):
+- [minor] [aa6176aad1](https://github.com/fnamazing/uiKit/commits/aa6176aad1):
 
   - added SSR tests to reactions
 
 ## 15.5.1
-- Updated dependencies [4aee5f3cec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4aee5f3cec):
-  - @atlaskit/emoji@56.0.0
-  - @atlaskit/editor-test-helpers@7.0.2
-  - @atlaskit/util-data-test@10.2.2
+- Updated dependencies [4aee5f3cec](https://github.com/fnamazing/uiKit/commits/4aee5f3cec):
+  - @findable/emoji@56.0.0
+  - @findable/editor-test-helpers@7.0.2
+  - @findable/util-data-test@10.2.2
 
 ## 15.5.0
-- [minor] [9ab9e467d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ab9e467d2):
+- [minor] [9ab9e467d2](https://github.com/fnamazing/uiKit/commits/9ab9e467d2):
 
   - Bump version of typestyle for ssr compatibility
 
 ## 15.4.2
-- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
-  - @atlaskit/emoji@55.0.1
-  - @atlaskit/editor-test-helpers@7.0.0
+- Updated dependencies [4af5bd2a58](https://github.com/fnamazing/uiKit/commits/4af5bd2a58):
+  - @findable/emoji@55.0.1
+  - @findable/editor-test-helpers@7.0.0
 
 ## 15.4.1
-- Updated dependencies [fc6164c8c2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc6164c8c2):
-  - @atlaskit/emoji@55.0.0
-  - @atlaskit/editor-test-helpers@6.3.22
-  - @atlaskit/util-data-test@10.2.1
+- Updated dependencies [fc6164c8c2](https://github.com/fnamazing/uiKit/commits/fc6164c8c2):
+  - @findable/emoji@55.0.0
+  - @findable/editor-test-helpers@6.3.22
+  - @findable/util-data-test@10.2.1
 
 ## 15.4.0
-- [minor] [68ef17af8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68ef17af8b):
+- [minor] [68ef17af8b](https://github.com/fnamazing/uiKit/commits/68ef17af8b):
 
   - Enable noImplicitAny for reactions, fix type issues.
 
 ## 15.3.4
-- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
-  - @atlaskit/editor-test-helpers@6.3.17
-  - @atlaskit/emoji@54.0.0
-  - @atlaskit/util-data-test@10.0.36
+- Updated dependencies [69c8d0c19c](https://github.com/fnamazing/uiKit/commits/69c8d0c19c):
+  - @findable/editor-test-helpers@6.3.17
+  - @findable/emoji@54.0.0
+  - @findable/util-data-test@10.0.36
 
 ## 15.3.3
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/button@10.1.2
-  - @atlaskit/tooltip@12.1.15
-  - @atlaskit/editor-test-helpers@6.3.13
-  - @atlaskit/emoji@53.0.1
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/button@10.1.2
+  - @findable/tooltip@12.1.15
+  - @findable/editor-test-helpers@6.3.13
+  - @findable/emoji@53.0.1
+  - @findable/icon@16.0.0
 
 ## 15.3.2
-- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
-  - @atlaskit/emoji@53.0.0
-  - @atlaskit/editor-test-helpers@6.3.12
-  - @atlaskit/util-data-test@10.0.34
+- Updated dependencies [85d5d168fd](https://github.com/fnamazing/uiKit/commits/85d5d168fd):
+  - @findable/emoji@53.0.0
+  - @findable/editor-test-helpers@6.3.12
+  - @findable/util-data-test@10.0.34
 
 ## 15.3.1
-- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
-  - @atlaskit/emoji@52.0.0
-  - @atlaskit/editor-test-helpers@6.3.11
-  - @atlaskit/util-data-test@10.0.33
+- Updated dependencies [dadef80](https://github.com/fnamazing/uiKit/commits/dadef80):
+  - @findable/emoji@52.0.0
+  - @findable/editor-test-helpers@6.3.11
+  - @findable/util-data-test@10.0.33
 
 ## 15.3.0
-- [minor] [e60d7aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e60d7aa):
+- [minor] [e60d7aa](https://github.com/fnamazing/uiKit/commits/e60d7aa):
 
   - updated i18n translations
 
 ## 15.2.2
-- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
-  - @atlaskit/editor-test-helpers@6.3.7
-  - @atlaskit/emoji@51.0.0
-  - @atlaskit/util-data-test@10.0.31
+- Updated dependencies [cbb8cb5](https://github.com/fnamazing/uiKit/commits/cbb8cb5):
+  - @findable/editor-test-helpers@6.3.7
+  - @findable/emoji@51.0.0
+  - @findable/util-data-test@10.0.31
 
 ## 15.2.1
-- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
-  - @atlaskit/emoji@50.0.0
-  - @atlaskit/util-data-test@10.0.30
+- Updated dependencies [72d37fb](https://github.com/fnamazing/uiKit/commits/72d37fb):
+  - @findable/emoji@50.0.0
+  - @findable/util-data-test@10.0.30
 
 ## 15.2.0
-- [minor] [277edda](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/277edda):
+- [minor] [277edda](https://github.com/fnamazing/uiKit/commits/277edda):
 
-  - replaced enzyme-react-intl with @atlaskit/editor-test-helpers
+  - replaced enzyme-react-intl with @findable/editor-test-helpers
 
 ## 15.1.0
-- [minor] [1296324](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1296324):
+- [minor] [1296324](https://github.com/fnamazing/uiKit/commits/1296324):
 
   - added i18n support to reactions
-- [minor] [ccf385a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ccf385a):
+- [minor] [ccf385a](https://github.com/fnamazing/uiKit/commits/ccf385a):
 
   - added i18n translations
 
 ## 15.0.11
-- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
-  - @atlaskit/emoji@49.0.0
-  - @atlaskit/util-data-test@10.0.28
+- Updated dependencies [b3738ea](https://github.com/fnamazing/uiKit/commits/b3738ea):
+  - @findable/emoji@49.0.0
+  - @findable/util-data-test@10.0.28
 
 ## 15.0.10
-- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
-  - @atlaskit/emoji@48.0.0
-  - @atlaskit/util-data-test@10.0.26
+- Updated dependencies [80f765b](https://github.com/fnamazing/uiKit/commits/80f765b):
+  - @findable/emoji@48.0.0
+  - @findable/util-data-test@10.0.26
 
 ## 15.0.9
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/analytics-next@3.1.2
-  - @atlaskit/button@10.1.1
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/layer@5.0.10
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/tooltip@12.1.13
-  - @atlaskit/analytics-gas-types@3.2.3
-  - @atlaskit/analytics-namespaced-context@2.1.5
-  - @atlaskit/emoji@47.0.7
-  - @atlaskit/util-data-test@10.0.25
-  - @atlaskit/util-service-support@3.0.5
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/analytics-next@3.1.2
+  - @findable/button@10.1.1
+  - @findable/icon@15.0.2
+  - @findable/layer@5.0.10
+  - @findable/theme@7.0.1
+  - @findable/tooltip@12.1.13
+  - @findable/analytics-gas-types@3.2.3
+  - @findable/analytics-namespaced-context@2.1.5
+  - @findable/emoji@47.0.7
+  - @findable/util-data-test@10.0.25
+  - @findable/util-service-support@3.0.5
+  - @findable/docs@6.0.0
 
 ## 15.0.8
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/button@10.0.4
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/tooltip@12.1.12
-  - @atlaskit/emoji@47.0.6
-  - @atlaskit/theme@7.0.0
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/button@10.0.4
+  - @findable/icon@15.0.1
+  - @findable/tooltip@12.1.12
+  - @findable/emoji@47.0.6
+  - @findable/theme@7.0.0
 
 ## 15.0.7
-- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+- [patch] [3061b52](https://github.com/fnamazing/uiKit/commits/3061b52):
 
   - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
 
 ## 15.0.6
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/button@10.0.1
-  - @atlaskit/tooltip@12.1.11
-  - @atlaskit/emoji@47.0.2
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/button@10.0.1
+  - @findable/tooltip@12.1.11
+  - @findable/emoji@47.0.2
+  - @findable/icon@15.0.0
 
 ## 15.0.5
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/analytics-next@3.1.1
-  - @atlaskit/icon@14.6.1
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/tooltip@12.1.10
-  - @atlaskit/emoji@47.0.1
-  - @atlaskit/button@10.0.0
-  - @atlaskit/analytics-next-types@3.1.2
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/analytics-next@3.1.1
+  - @findable/icon@14.6.1
+  - @findable/theme@6.2.1
+  - @findable/tooltip@12.1.10
+  - @findable/emoji@47.0.1
+  - @findable/button@10.0.0
+  - @findable/analytics-next-types@3.1.2
 
 ## 15.0.4
-- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
-  - @atlaskit/emoji@47.0.0
-  - @atlaskit/util-data-test@10.0.21
+- Updated dependencies [7e8b4b9](https://github.com/fnamazing/uiKit/commits/7e8b4b9):
+  - @findable/emoji@47.0.0
+  - @findable/util-data-test@10.0.21
 
 ## 15.0.3
-- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
-  - @atlaskit/emoji@46.0.0
-  - @atlaskit/util-data-test@10.0.20
+- Updated dependencies [2c21466](https://github.com/fnamazing/uiKit/commits/2c21466):
+  - @findable/emoji@46.0.0
+  - @findable/util-data-test@10.0.20
 
 ## 15.0.2
-- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+- [patch] [36c362f](https://github.com/fnamazing/uiKit/commits/36c362f):
 
   - FS-3174 - Fix usage of gridSize() and borderRadius()
 
 ## 15.0.1
-- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
-  - @atlaskit/emoji@45.0.0
-  - @atlaskit/util-data-test@10.0.16
+- [patch] Updated dependencies [b1ce691](https://github.com/fnamazing/uiKit/commits/b1ce691)
+  - @findable/emoji@45.0.0
+  - @findable/util-data-test@10.0.16
 
 ## 15.0.0
-- [major] Fix reactions. Remove context and receive store as a prop. [b1de9c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1de9c8)
+- [major] Fix reactions. Remove context and receive store as a prop. [b1de9c8](https://github.com/fnamazing/uiKit/commits/b1de9c8)
 
 ## 14.0.5
-- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
-  - @atlaskit/emoji@44.0.0
-  - @atlaskit/util-data-test@10.0.14
+- [patch] Updated dependencies [2afa60d](https://github.com/fnamazing/uiKit/commits/2afa60d)
+  - @findable/emoji@44.0.0
+  - @findable/util-data-test@10.0.14
 
 ## 14.0.4
-- [patch] Fix malformed operational analytics event [306cf0a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/306cf0a)
+- [patch] Fix malformed operational analytics event [306cf0a](https://github.com/fnamazing/uiKit/commits/306cf0a)
 
 ## 14.0.3
-- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
-- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
-  - @atlaskit/emoji@43.0.0
-  - @atlaskit/util-data-test@10.0.12
+- [patch] Updated dependencies [8b2c4d3](https://github.com/fnamazing/uiKit/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://github.com/fnamazing/uiKit/commits/3302d51)
+  - @findable/emoji@43.0.0
+  - @findable/util-data-test@10.0.12
 
 ## 14.0.2
-- [patch] Fix letter case 'actionSubjectID' => 'actionSubjectId' [3757992](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3757992)
+- [patch] Fix letter case 'actionSubjectID' => 'actionSubjectId' [3757992](https://github.com/fnamazing/uiKit/commits/3757992)
 
 ## 14.0.1
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/button@9.0.13
-  - @atlaskit/tooltip@12.1.1
-  - @atlaskit/emoji@42.0.1
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/button@9.0.13
+  - @findable/tooltip@12.1.1
+  - @findable/emoji@42.0.1
+  - @findable/icon@14.0.0
 
 ## 14.0.0
-- [major] Reactions state management revisited [7e8d079](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8d079)
+- [major] Reactions state management revisited [7e8d079](https://github.com/fnamazing/uiKit/commits/7e8d079)
 
 ## 13.1.3
-- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
-  - @atlaskit/util-data-test@10.0.10
-  - @atlaskit/emoji@42.0.0
+- [patch] Updated dependencies [927ae63](https://github.com/fnamazing/uiKit/commits/927ae63)
+  - @findable/util-data-test@10.0.10
+  - @findable/emoji@42.0.0
 
 ## 13.1.2
-- [patch] use new tsconfig for typechecking [09df171](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09df171)
+- [patch] use new tsconfig for typechecking [09df171](https://github.com/fnamazing/uiKit/commits/09df171)
 
 ## 13.1.1
-- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
-  - @atlaskit/emoji@41.0.0
-  - @atlaskit/util-data-test@10.0.9
+- [patch] Updated dependencies [6e1d642](https://github.com/fnamazing/uiKit/commits/6e1d642)
+  - @findable/emoji@41.0.0
+  - @findable/util-data-test@10.0.9
 
 ## 13.1.0
-- [minor] FS-2830 add new analytics to @atlaskit/reactions [e432c15](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e432c15)
+- [minor] FS-2830 add new analytics to @findable/reactions [e432c15](https://github.com/fnamazing/uiKit/commits/e432c15)
 
 ## 13.0.11
-- [patch] FS-2941 Stop using Request object and upgrade fetch-mock [dff332a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dff332a)
+- [patch] FS-2941 Stop using Request object and upgrade fetch-mock [dff332a](https://github.com/fnamazing/uiKit/commits/dff332a)
 
 ## 13.0.10
-- [patch] Change tsconfig of reactions [ecca4b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ecca4b6)
+- [patch] Change tsconfig of reactions [ecca4b6](https://github.com/fnamazing/uiKit/commits/ecca4b6)
 
 ## 13.0.9
-- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
-  - @atlaskit/emoji@40.0.0
-  - @atlaskit/util-data-test@10.0.8
+- [patch] Updated dependencies [7545979](https://github.com/fnamazing/uiKit/commits/7545979)
+  - @findable/emoji@40.0.0
+  - @findable/util-data-test@10.0.8
 
 ## 13.0.8
-- [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
-  - @atlaskit/util-data-test@10.0.7
-  - @atlaskit/emoji@39.1.1
+- [patch] Updated dependencies [b12f7e6](https://github.com/fnamazing/uiKit/commits/b12f7e6)
+  - @findable/util-data-test@10.0.7
+  - @findable/emoji@39.1.1
 
 ## 13.0.7
-- [patch] Updated dependencies [dd91bcf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd91bcf)
-  - @atlaskit/emoji@39.1.0
+- [patch] Updated dependencies [dd91bcf](https://github.com/fnamazing/uiKit/commits/dd91bcf)
+  - @findable/emoji@39.1.0
 
 ## 13.0.6
-- [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/emoji@39.0.4
-  - @atlaskit/tooltip@12.0.9
-  - @atlaskit/icon@13.2.5
-  - @atlaskit/button@9.0.6
-  - @atlaskit/docs@5.0.6
+- [patch] Updated dependencies [df22ad8](https://github.com/fnamazing/uiKit/commits/df22ad8)
+  - @findable/theme@6.0.0
+  - @findable/emoji@39.0.4
+  - @findable/tooltip@12.0.9
+  - @findable/icon@13.2.5
+  - @findable/button@9.0.6
+  - @findable/docs@5.0.6
 
 ## 13.0.5
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/util-data-test@10.0.4
-  - @atlaskit/emoji@39.0.1
-  - @atlaskit/tooltip@12.0.5
-  - @atlaskit/button@9.0.5
-  - @atlaskit/theme@5.1.3
-  - @atlaskit/layer@5.0.4
-  - @atlaskit/icon@13.2.4
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/util-data-test@10.0.4
+  - @findable/emoji@39.0.1
+  - @findable/tooltip@12.0.5
+  - @findable/button@9.0.5
+  - @findable/theme@5.1.3
+  - @findable/layer@5.0.4
+  - @findable/icon@13.2.4
 
 ## 13.0.4
 
 
-- [patch] Bumping to latest version of emoji (major bump) [a95ee92](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a95ee92)
+- [patch] Bumping to latest version of emoji (major bump) [a95ee92](https://github.com/fnamazing/uiKit/commits/a95ee92)
 
 
 
-- [none] Updated dependencies [597e0bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/597e0bd)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/emoji@39.0.0
-- [none] Updated dependencies [61df453](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61df453)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/emoji@39.0.0
-- [none] Updated dependencies [812a39c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/812a39c)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/emoji@39.0.0
-- [none] Updated dependencies [c8eb097](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8eb097)
-  - @atlaskit/util-data-test@10.0.3
-  - @atlaskit/emoji@39.0.0
-- [none] Updated dependencies [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)
-  - @atlaskit/emoji@39.0.0
-  - @atlaskit/util-data-test@10.0.3
+- [none] Updated dependencies [597e0bd](https://github.com/fnamazing/uiKit/commits/597e0bd)
+  - @findable/util-data-test@10.0.3
+  - @findable/emoji@39.0.0
+- [none] Updated dependencies [61df453](https://github.com/fnamazing/uiKit/commits/61df453)
+  - @findable/util-data-test@10.0.3
+  - @findable/emoji@39.0.0
+- [none] Updated dependencies [812a39c](https://github.com/fnamazing/uiKit/commits/812a39c)
+  - @findable/util-data-test@10.0.3
+  - @findable/emoji@39.0.0
+- [none] Updated dependencies [c8eb097](https://github.com/fnamazing/uiKit/commits/c8eb097)
+  - @findable/util-data-test@10.0.3
+  - @findable/emoji@39.0.0
+- [none] Updated dependencies [d02746f](https://github.com/fnamazing/uiKit/commits/d02746f)
+  - @findable/emoji@39.0.0
+  - @findable/util-data-test@10.0.3
 
 ## 13.0.3
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/util-data-test@10.0.2
-  - @atlaskit/emoji@38.0.5
-  - @atlaskit/tooltip@12.0.4
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/button@9.0.4
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/layer@5.0.3
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/util-data-test@10.0.2
+  - @findable/emoji@38.0.5
+  - @findable/tooltip@12.0.4
+  - @findable/icon@13.2.2
+  - @findable/button@9.0.4
+  - @findable/theme@5.1.2
+  - @findable/docs@5.0.2
+  - @findable/layer@5.0.3
 
 ## 13.0.2
-- [patch] Updated dependencies [e6b1985](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6b1985)
-  - @atlaskit/tooltip@12.0.0
-  - @atlaskit/emoji@38.0.1
-  - @atlaskit/icon@13.1.1
+- [patch] Updated dependencies [e6b1985](https://github.com/fnamazing/uiKit/commits/e6b1985)
+  - @findable/tooltip@12.0.0
+  - @findable/emoji@38.0.1
+  - @findable/icon@13.1.1
 
 ## 13.0.1
-- [patch] Ensure reactions wrap if insufficient horizontal space [bb7129d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bb7129d)
+- [patch] Ensure reactions wrap if insufficient horizontal space [bb7129d](https://github.com/fnamazing/uiKit/commits/bb7129d)
 
 ## 13.0.0
 
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/emoji@38.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/layer@5.0.0
-  - @atlaskit/icon@13.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/emoji@38.0.0
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/layer@5.0.0
-  - @atlaskit/icon@13.0.0
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/tooltip@11.0.0
+  - @findable/util-data-test@10.0.0
+  - @findable/emoji@38.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
+  - @findable/layer@5.0.0
+  - @findable/icon@13.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/util-data-test@10.0.0
+  - @findable/emoji@38.0.0
+  - @findable/tooltip@11.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
+  - @findable/layer@5.0.0
+  - @findable/icon@13.0.0
 
 ## 12.2.2
-- [patch] Move the tests under src and club the tests under unit, integration and visual regression [f1a9069](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1a9069)
-- [none] Updated dependencies [f1a9069](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1a9069)
-  - @atlaskit/util-data-test@9.1.18
-  - @atlaskit/emoji@37.0.1
+- [patch] Move the tests under src and club the tests under unit, integration and visual regression [f1a9069](https://github.com/fnamazing/uiKit/commits/f1a9069)
+- [none] Updated dependencies [f1a9069](https://github.com/fnamazing/uiKit/commits/f1a9069)
+  - @findable/util-data-test@9.1.18
+  - @findable/emoji@37.0.1
 
 ## 12.2.1
 
 
-- [patch] Updated dependencies [f897c79](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f897c79)
-  - @atlaskit/util-data-test@9.1.17
-  - @atlaskit/emoji@37.0.0
-- [none] Updated dependencies [cacf096](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cacf096)
-  - @atlaskit/emoji@37.0.0
-  - @atlaskit/util-data-test@9.1.17
+- [patch] Updated dependencies [f897c79](https://github.com/fnamazing/uiKit/commits/f897c79)
+  - @findable/util-data-test@9.1.17
+  - @findable/emoji@37.0.0
+- [none] Updated dependencies [cacf096](https://github.com/fnamazing/uiKit/commits/cacf096)
+  - @findable/emoji@37.0.0
+  - @findable/util-data-test@9.1.17
 
 ## 12.2.0
-- [minor] FS-1907 adding reaction sends itemCreationDate of object to service [ddcc42f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ddcc42f)
+- [minor] FS-1907 adding reaction sends itemCreationDate of object to service [ddcc42f](https://github.com/fnamazing/uiKit/commits/ddcc42f)
 
 ## 12.1.5
-- [patch] Updated dependencies [8d5053e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d5053e)
-  - @atlaskit/emoji@36.0.1
-  - @atlaskit/util-data-test@9.1.15
+- [patch] Updated dependencies [8d5053e](https://github.com/fnamazing/uiKit/commits/8d5053e)
+  - @findable/emoji@36.0.1
+  - @findable/util-data-test@9.1.15
 
 ## 12.1.4
-- [patch] Updated dependencies [0cf2f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cf2f52)
-  - @atlaskit/emoji@36.0.0
-  - @atlaskit/util-data-test@9.1.14
+- [patch] Updated dependencies [0cf2f52](https://github.com/fnamazing/uiKit/commits/0cf2f52)
+  - @findable/emoji@36.0.0
+  - @findable/util-data-test@9.1.14
 
 ## 12.1.3
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/emoji@35.1.1
-  - @atlaskit/util-data-test@9.1.13
-  - @atlaskit/tooltip@10.2.1
-  - @atlaskit/button@8.1.2
-  - @atlaskit/theme@4.0.4
-  - @atlaskit/layer@4.0.3
-  - @atlaskit/icon@12.1.2
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/emoji@35.1.1
+  - @findable/util-data-test@9.1.13
+  - @findable/tooltip@10.2.1
+  - @findable/button@8.1.2
+  - @findable/theme@4.0.4
+  - @findable/layer@4.0.3
+  - @findable/icon@12.1.2
 
 ## 12.1.2
-- [patch] FS-1993 fix reactions flaky test [54c5a7a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/54c5a7a)
+- [patch] FS-1993 fix reactions flaky test [54c5a7a](https://github.com/fnamazing/uiKit/commits/54c5a7a)
 
 ## 12.1.1
-- [patch] FS-1889 make reactions resource immutable [deba783](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/deba783)
+- [patch] FS-1889 make reactions resource immutable [deba783](https://github.com/fnamazing/uiKit/commits/deba783)
 
 ## 12.1.0
-- [none] Updated dependencies [7217164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7217164)
-  - @atlaskit/util-data-test@9.1.11
-  - @atlaskit/emoji@35.1.0
+- [none] Updated dependencies [7217164](https://github.com/fnamazing/uiKit/commits/7217164)
+  - @findable/util-data-test@9.1.11
+  - @findable/emoji@35.1.0
 
 ## 12.0.12
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/emoji@35.0.7
-  - @atlaskit/util-data-test@9.1.10
-  - @atlaskit/tooltip@10.0.0
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/button@8.0.0
-  - @atlaskit/theme@4.0.0
-  - @atlaskit/docs@4.0.0
-  - @atlaskit/layer@4.0.0
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/emoji@35.0.7
+  - @findable/util-data-test@9.1.10
+  - @findable/tooltip@10.0.0
+  - @findable/icon@12.0.0
+  - @findable/button@8.0.0
+  - @findable/theme@4.0.0
+  - @findable/docs@4.0.0
+  - @findable/layer@4.0.0
 
 ## 12.0.11
-- [patch] Updated dependencies [1c87e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c87e5a)
-  - @atlaskit/emoji@35.0.6
-  - @atlaskit/util-data-test@9.1.9
+- [patch] Updated dependencies [1c87e5a](https://github.com/fnamazing/uiKit/commits/1c87e5a)
+  - @findable/emoji@35.0.6
+  - @findable/util-data-test@9.1.9
 
 ## 12.0.10
-- [patch]  [f87724e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f87724e)
-- [none] Updated dependencies [f87724e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f87724e)
+- [patch]  [f87724e](https://github.com/fnamazing/uiKit/commits/f87724e)
+- [none] Updated dependencies [f87724e](https://github.com/fnamazing/uiKit/commits/f87724e)
 
 ## 12.0.9
-- [patch] FS-1959 use @atlaskit/tooltip for reactions tooltip [ec12b0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ec12b0e)
+- [patch] FS-1959 use @findable/tooltip for reactions tooltip [ec12b0e](https://github.com/fnamazing/uiKit/commits/ec12b0e)
 
 ## 12.0.8
-- [patch] FS-1975 place picker after reactions [4a6e1c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a6e1c5)
+- [patch] FS-1975 place picker after reactions [4a6e1c5](https://github.com/fnamazing/uiKit/commits/4a6e1c5)
 
 ## 12.0.7
-- [none] Updated dependencies [febc44d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/febc44d)
-  - @atlaskit/util-data-test@9.1.4
-  - @atlaskit/emoji@35.0.0
-- [none] Updated dependencies [714ab32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/714ab32)
-  - @atlaskit/util-data-test@9.1.4
-  - @atlaskit/emoji@35.0.0
-- [patch] Updated dependencies [84f6f91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84f6f91)
-  - @atlaskit/emoji@35.0.0
-  - @atlaskit/util-data-test@9.1.4
-- [patch] Updated dependencies [9041d71](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9041d71)
-  - @atlaskit/emoji@35.0.0
-  - @atlaskit/util-data-test@9.1.4
+- [none] Updated dependencies [febc44d](https://github.com/fnamazing/uiKit/commits/febc44d)
+  - @findable/util-data-test@9.1.4
+  - @findable/emoji@35.0.0
+- [none] Updated dependencies [714ab32](https://github.com/fnamazing/uiKit/commits/714ab32)
+  - @findable/util-data-test@9.1.4
+  - @findable/emoji@35.0.0
+- [patch] Updated dependencies [84f6f91](https://github.com/fnamazing/uiKit/commits/84f6f91)
+  - @findable/emoji@35.0.0
+  - @findable/util-data-test@9.1.4
+- [patch] Updated dependencies [9041d71](https://github.com/fnamazing/uiKit/commits/9041d71)
+  - @findable/emoji@35.0.0
+  - @findable/util-data-test@9.1.4
 
 ## 12.0.6
-- [patch] FS-1921 Don't refresh reactions when getting detailed response if requests [1764815](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1764815)
+- [patch] FS-1921 Don't refresh reactions when getting detailed response if requests [1764815](https://github.com/fnamazing/uiKit/commits/1764815)
 
 ## 12.0.5
-- [none] Updated dependencies [8fd4dd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fd4dd1)
-  - @atlaskit/util-data-test@9.1.3
-  - @atlaskit/emoji@34.2.0
-- [none] Updated dependencies [74f84c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74f84c6)
-  - @atlaskit/util-data-test@9.1.3
-  - @atlaskit/emoji@34.2.0
-- [none] Updated dependencies [92cdf83](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92cdf83)
-  - @atlaskit/util-data-test@9.1.3
-  - @atlaskit/emoji@34.2.0
-- [none] Updated dependencies [4151cc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4151cc5)
-  - @atlaskit/util-data-test@9.1.3
-  - @atlaskit/emoji@34.2.0
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/emoji@34.2.0
-  - @atlaskit/util-data-test@9.1.3
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/tooltip@9.2.1
-  - @atlaskit/button@7.2.5
-  - @atlaskit/theme@3.2.2
-  - @atlaskit/docs@3.0.4
-  - @atlaskit/layer@3.1.1
-- [patch] Updated dependencies [89146bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89146bf)
-  - @atlaskit/emoji@34.2.0
-  - @atlaskit/util-data-test@9.1.3
+- [none] Updated dependencies [8fd4dd1](https://github.com/fnamazing/uiKit/commits/8fd4dd1)
+  - @findable/util-data-test@9.1.3
+  - @findable/emoji@34.2.0
+- [none] Updated dependencies [74f84c6](https://github.com/fnamazing/uiKit/commits/74f84c6)
+  - @findable/util-data-test@9.1.3
+  - @findable/emoji@34.2.0
+- [none] Updated dependencies [92cdf83](https://github.com/fnamazing/uiKit/commits/92cdf83)
+  - @findable/util-data-test@9.1.3
+  - @findable/emoji@34.2.0
+- [none] Updated dependencies [4151cc5](https://github.com/fnamazing/uiKit/commits/4151cc5)
+  - @findable/util-data-test@9.1.3
+  - @findable/emoji@34.2.0
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/emoji@34.2.0
+  - @findable/util-data-test@9.1.3
+  - @findable/icon@11.3.0
+  - @findable/tooltip@9.2.1
+  - @findable/button@7.2.5
+  - @findable/theme@3.2.2
+  - @findable/docs@3.0.4
+  - @findable/layer@3.1.1
+- [patch] Updated dependencies [89146bf](https://github.com/fnamazing/uiKit/commits/89146bf)
+  - @findable/emoji@34.2.0
+  - @findable/util-data-test@9.1.3
 
 ## 12.0.4
-- [patch] FS-1890 Remove sinon dependency from reactions [b6ee84e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b6ee84e)
-- [patch] FS-1890 Migrate Reactions to Jest [8e0e31e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e0e31e)
+- [patch] FS-1890 Remove sinon dependency from reactions [b6ee84e](https://github.com/fnamazing/uiKit/commits/b6ee84e)
+- [patch] FS-1890 Migrate Reactions to Jest [8e0e31e](https://github.com/fnamazing/uiKit/commits/8e0e31e)
 
 ## 12.0.0
-- [major] FS-1023 Error handling for reactions [2202edc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2202edc)
-- [minor] FS-1023 - Handle error and show tooltip in case of error [f9f1040](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9f1040)
+- [major] FS-1023 Error handling for reactions [2202edc](https://github.com/fnamazing/uiKit/commits/2202edc)
+- [minor] FS-1023 - Handle error and show tooltip in case of error [f9f1040](https://github.com/fnamazing/uiKit/commits/f9f1040)
 
 ## 11.0.9
-- [patch] FS-1645 update reaction animations [c01d36d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c01d36d)
+- [patch] FS-1645 update reaction animations [c01d36d](https://github.com/fnamazing/uiKit/commits/c01d36d)
 
 ## 11.0.7
-- [patch] FS-1882 update reaction button to match mobile [acc8118](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acc8118)
+- [patch] FS-1882 update reaction button to match mobile [acc8118](https://github.com/fnamazing/uiKit/commits/acc8118)
 
 ## 11.0.6
-- [patch] FS-1876 update default reactions emoji [114cee6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/114cee6)
+- [patch] FS-1876 update default reactions emoji [114cee6](https://github.com/fnamazing/uiKit/commits/114cee6)
 
 ## 11.0.4
-- [patch] FS-1644 reactions ui changes [70ccf94](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70ccf94)
+- [patch] FS-1644 reactions ui changes [70ccf94](https://github.com/fnamazing/uiKit/commits/70ccf94)
 
 ## 11.0.3
-- [patch] FS-1868 always add new reactions to the end of the list [70fdbeb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70fdbeb)
+- [patch] FS-1868 always add new reactions to the end of the list [70fdbeb](https://github.com/fnamazing/uiKit/commits/70fdbeb)
 
 ## 11.0.1
-- [patch] Added missing dependencies and added lint rule to catch them all [0672503](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0672503)
+- [patch] Added missing dependencies and added lint rule to catch them all [0672503](https://github.com/fnamazing/uiKit/commits/0672503)
 
 ## 11.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 10.8.15
-- [patch] Remove import from es6 promise at src level [e27f2ac](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e27f2ac)
+- [patch] Remove import from es6 promise at src level [e27f2ac](https://github.com/fnamazing/uiKit/commits/e27f2ac)
 
 ## 10.8.0
-- [minor] Moved Reactions to MK2 repo [d0cecbf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d0cecbf)
+- [minor] Moved Reactions to MK2 repo [d0cecbf](https://github.com/fnamazing/uiKit/commits/d0cecbf)
 
 ## 10.7.1 (2017-12-14)
 * bug fix; fix TS errors in reactions ([21c92b6](https://bitbucket.org/atlassian/atlaskit/commits/21c92b6))

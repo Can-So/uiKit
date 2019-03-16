@@ -1,4 +1,4 @@
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 export declare type ARI = string;
 export declare type AVI = string;
 export interface PubSubClient {

@@ -1,5 +1,5 @@
-import { AnalyticsListener } from '@atlaskit/analytics-next';
-import Select from '@atlaskit/select';
+import { AnalyticsListener } from '@findable/analytics-next';
+import Select from '@findable/select';
 import { ReactWrapper } from 'enzyme';
 import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as debounce from 'lodash.debounce';
@@ -598,7 +598,7 @@ describe('BaseUserPicker', () => {
             eventType: 'ui',
             attributes: {
               sessionDuration: expect.any(Number),
-              packageName: '@atlaskit/user-picker',
+              packageName: '@findable/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               queryLength: 0,
@@ -636,7 +636,7 @@ describe('BaseUserPicker', () => {
             eventType: 'ui',
             attributes: {
               sessionDuration: expect.any(Number),
-              packageName: '@atlaskit/user-picker',
+              packageName: '@findable/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               queryLength: 0,
@@ -675,7 +675,7 @@ describe('BaseUserPicker', () => {
             eventType: 'ui',
             attributes: {
               sessionDuration: expect.any(Number),
-              packageName: '@atlaskit/user-picker',
+              packageName: '@findable/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               queryLength: 0,
@@ -708,7 +708,7 @@ describe('BaseUserPicker', () => {
             actionSubject: 'userPicker',
             eventType: 'ui',
             attributes: {
-              packageName: '@atlaskit/user-picker',
+              packageName: '@findable/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               values: [],
@@ -736,7 +736,7 @@ describe('BaseUserPicker', () => {
             actionSubject: 'userPickerItem',
             eventType: 'ui',
             attributes: {
-              packageName: '@atlaskit/user-picker',
+              packageName: '@findable/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               pickerOpen: true,
@@ -765,7 +765,7 @@ describe('BaseUserPicker', () => {
                 actionSubject: 'userPicker',
                 eventType: 'operational',
                 attributes: {
-                  packageName: '@atlaskit/user-picker',
+                  packageName: '@findable/user-picker',
                   packageVersion: expect.any(String),
                   pickerType: 'single',
                   sessionId: expect.any(String),
@@ -793,7 +793,7 @@ describe('BaseUserPicker', () => {
                 eventType: 'operational',
                 attributes: expect.objectContaining({
                   packageVersion: expect.any(String),
-                  packageName: '@atlaskit/user-picker',
+                  packageName: '@findable/user-picker',
                   sessionId: expect.any(String),
                   sessionDuration: expect.any(Number),
                   durationSinceInputChange: expect.any(Number),
@@ -863,7 +863,7 @@ describe('BaseUserPicker', () => {
                 eventType: 'operational',
                 attributes: expect.objectContaining({
                   packageVersion: expect.any(String),
-                  packageName: '@atlaskit/user-picker',
+                  packageName: '@findable/user-picker',
                   sessionId: expect.any(String),
                   sessionDuration: expect.any(Number),
                   durationSinceInputChange: expect.any(Number),

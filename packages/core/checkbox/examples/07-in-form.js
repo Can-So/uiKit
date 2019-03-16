@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import Button from '@atlaskit/button';
-import Form, { CheckboxField, FormFooter } from '@atlaskit/form';
+import Button from '@findable/button';
+import Form, { CheckboxField, FormFooter } from '@findable/form';
 import { Checkbox } from '../src';
 
 export default () => (

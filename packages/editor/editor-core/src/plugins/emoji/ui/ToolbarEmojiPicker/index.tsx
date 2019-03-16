@@ -3,13 +3,13 @@ import { PureComponent, ReactInstance } from 'react';
 import * as ReactDOM from 'react-dom';
 import { PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { Popup } from '@atlaskit/editor-common';
-import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
+import { Popup } from '@findable/editor-common';
+import EmojiIcon from '@findable/icon/glyph/editor/emoji';
 import {
   EmojiPicker as AkEmojiPicker,
   EmojiProvider,
   EmojiId,
-} from '@atlaskit/emoji';
+} from '@findable/emoji';
 import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import { EmojiState } from '../../pm-plugins/main';

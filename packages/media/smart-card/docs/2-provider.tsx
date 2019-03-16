@@ -1,4 +1,4 @@
-import { md, code } from '@atlaskit/docs';
+import { md, code } from '@findable/docs';
 
 export default md`
 # Intro

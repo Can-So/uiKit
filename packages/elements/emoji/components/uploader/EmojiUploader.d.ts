@@ -3,7 +3,7 @@ import { ComponentClass } from 'react';
 import LoadingEmojiComponent, { Props as LoadingProps, State as LoadingState } from '../common/LoadingEmojiComponent';
 import { UploadRefHandler, Props as ComponentProps } from './EmojiUploadComponent';
 import { EmojiProvider } from '../../api/EmojiResource';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
+import { FireAnalyticsEvent } from '@findable/analytics';
 export interface Props extends LoadingProps {
     onUploaderRef?: UploadRefHandler;
     firePrivateAnalyticsEvent?: FireAnalyticsEvent;

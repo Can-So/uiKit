@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { PanelType } from '@atlaskit/adf-schema';
+import { PanelType } from '@findable/adf-schema';
 export interface Props {
     panelType: PanelType;
 }

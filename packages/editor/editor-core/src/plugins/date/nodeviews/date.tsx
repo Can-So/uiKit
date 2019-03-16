@@ -2,13 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 import {
   timestampToString,
   timestampToTaskContext,
   isPastDate,
-} from '@atlaskit/editor-common';
-import { Date } from '@atlaskit/date';
+} from '@findable/editor-common';
+import { Date } from '@findable/date';
 import { setDatePickerAt } from '../actions';
 
 const SelectableDate = styled(Date)`

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import * as Styled from './styled';
 var Footer = /** @class */ (function (_super) {
     tslib_1.__extends(Footer, _super);

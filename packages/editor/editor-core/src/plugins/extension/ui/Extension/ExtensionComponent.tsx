@@ -9,7 +9,7 @@ import {
 import { MacroProvider } from '../../../macro';
 import InlineExtension from './InlineExtension';
 import Extension from './Extension';
-import { ExtensionHandlers } from '@atlaskit/editor-common';
+import { ExtensionHandlers } from '@findable/editor-common';
 import { setNodeSelection } from '../../../../utils';
 
 export interface Props {

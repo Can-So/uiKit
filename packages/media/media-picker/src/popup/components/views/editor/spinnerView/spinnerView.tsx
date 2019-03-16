@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 
 import { EscHelper } from '../escHelper';
 import { CenterView } from '../styles';

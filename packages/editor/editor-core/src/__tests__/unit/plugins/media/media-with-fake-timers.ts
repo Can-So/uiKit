@@ -1,11 +1,11 @@
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   doc,
   createEditorFactory,
   p,
   storyMediaProviderFactory,
   randomId,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import {
   stateKey as mediaPluginKey,

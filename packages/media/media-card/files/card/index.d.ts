@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { FileDetails, ImageResizeMode, MediaItemType } from '@atlaskit/media-core';
+import { FileDetails, ImageResizeMode, MediaItemType } from '@findable/media-core';
 import { SharedCardProps, CardStatus } from '../..';
 export interface FileCardProps extends SharedCardProps {
     readonly status: CardStatus;

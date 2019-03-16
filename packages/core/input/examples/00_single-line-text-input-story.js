@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import FieldBase from '@atlaskit/field-base';
+import FieldBase from '@findable/field-base';
 import SingleLineTextInput from '../src';
 
 const containerStyle = {

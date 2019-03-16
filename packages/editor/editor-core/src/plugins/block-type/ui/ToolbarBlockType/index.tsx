@@ -6,9 +6,9 @@ import {
   FormattedMessage,
   InjectedIntlProps,
 } from 'react-intl';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import TextStyleIcon from '@atlaskit/icon/glyph/editor/text-style';
-import { akEditorMenuZIndex } from '@atlaskit/editor-common';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
+import TextStyleIcon from '@findable/icon/glyph/editor/text-style';
+import { akEditorMenuZIndex } from '@findable/editor-common';
 
 import { analyticsService as analytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';

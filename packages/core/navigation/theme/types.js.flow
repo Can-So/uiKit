@@ -73,7 +73,7 @@ export type RootTheme = {
   isCollapsed: boolean,
 };
 
-// Ideally GenericItemTheme would be imported from @atlaskit/item.
+// Ideally GenericItemTheme would be imported from @findable/item.
 // I've tried it locally and not working at the moment, can revisit
 // once Flow is fully supported and documented in the repo.
 type GenericItemState = {

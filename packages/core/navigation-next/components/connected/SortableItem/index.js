@@ -7,7 +7,7 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
 import React, { Component } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { Draggable } from 'react-beautiful-dnd';
 import Item from '../../presentational/Item';
 

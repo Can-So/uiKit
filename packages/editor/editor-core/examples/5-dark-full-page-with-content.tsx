@@ -4,7 +4,7 @@ import { exampleDocument } from '../example-helpers/example-document';
 import { EditorProps } from './../src/editor';
 
 // @ts-ignore
-import { AtlaskitThemeProvider } from '@atlaskit/theme';
+import { AtlaskitThemeProvider } from '@findable/theme';
 
 export default function Example(props: EditorProps & ExampleProps) {
   return (

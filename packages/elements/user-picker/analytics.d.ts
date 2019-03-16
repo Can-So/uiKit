@@ -1,4 +1,4 @@
-import { AnalyticsEventPayload, CreateAndFireEventFunction } from '@atlaskit/analytics-next-types';
+import { AnalyticsEventPayload, CreateAndFireEventFunction } from '@findable/analytics-next-types';
 import { UserPickerProps, UserPickerState } from './types';
 export declare type UserPickerSession = {
     id: string;

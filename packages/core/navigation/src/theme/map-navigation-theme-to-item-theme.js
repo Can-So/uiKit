@@ -3,7 +3,7 @@ import type { Provided, GenericItemTheme } from './types';
 import { gridSize } from '../shared-variables';
 
 // Converts the top-level 'Provided' container navigation theme into the
-// format the @atlaskit/item expects.
+// format the @findable/item expects.
 const itemThemeFromNavTheme = (
   navigationTheme: Provided,
 ): GenericItemTheme => ({

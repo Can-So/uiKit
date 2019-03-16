@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { code, md, Props } from '@atlaskit/docs';
+import { code, md, Props } from '@findable/docs';
 
 export default md`
 
@@ -20,7 +20,7 @@ export default md`
 
   Import the component in your React app as follows:
 
-  ${code`import Layer from '@atlaskit/layer';
+  ${code`import Layer from '@findable/layer';
  
   const myContent = <div>I'm going to be aligned to the right!</div>;
 

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   Use the logo component to output SVG versions of the company and product logos.
@@ -11,11 +11,11 @@ export default md`
 
   ## Usage
 
-  ${code`AtlassianLogo, AtlassianIcon, AtlassianWordmark } from '@atlaskit/logo';`}
+  ${code`AtlassianLogo, AtlassianIcon, AtlassianWordmark } from '@findable/logo';`}
 
   ${(
     <Example
-      packageName="@atlaskit/logo"
+      packageName="@findable/logo"
       Component={require('../examples/0-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-basic')}

@@ -6,7 +6,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import RadioIcon from '@atlaskit/icon/glyph/radio';
+import RadioIcon from '@findable/icon/glyph/radio';
 import { HiddenInput, IconWrapper, Label, Wrapper } from './styled/Radio';
 
 var Radio =

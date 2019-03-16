@@ -1,6 +1,6 @@
 // @flow
 
-import type { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import type { UIAnalyticsEvent } from '@findable/analytics-next';
 import { NAVIGATION_CHANNEL } from '../../constants';
 import type { DrawerName } from './types';
 

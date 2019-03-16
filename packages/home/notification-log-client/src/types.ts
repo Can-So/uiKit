@@ -1,4 +1,4 @@
-import { RequestServiceOptions } from '@atlaskit/util-service-support';
+import { RequestServiceOptions } from '@findable/util-service-support';
 
 export interface NotificationCountResponse {
   count: number;

@@ -1,5 +1,5 @@
 import { PluginKey, Selection } from 'prosemirror-state';
-import { Color as ColorType } from '@atlaskit/status';
+import { Color as ColorType } from '@findable/status';
 import { PMPluginFactory } from '../../types';
 export declare const pluginKey: PluginKey<any>;
 export declare type StatusType = {

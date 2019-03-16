@@ -1,4 +1,4 @@
-import { Inline, TaskItemDefinition } from '@atlaskit/adf-schema';
+import { Inline, TaskItemDefinition } from '@findable/adf-schema';
 
 export const taskItem = (attrs: TaskItemDefinition['attrs']) => (
   ...content: Array<Inline>

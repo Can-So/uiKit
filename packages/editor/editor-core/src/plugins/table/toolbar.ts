@@ -1,5 +1,5 @@
 import { defineMessages } from 'react-intl';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
 
 import commonMessages from '../../messages';
 import { Command } from '../../types';

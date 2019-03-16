@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Props } from '@atlaskit/docs';
+import { md, code, Props } from '@findable/docs';
 
 export default md`
   ## Why?
@@ -9,7 +9,7 @@ export default md`
 
   ## Traverse
 
-  **@atlaskit/adf-utils/traverse** provides methods to extract and manipulate data inside
+  **@findable/adf-utils/traverse** provides methods to extract and manipulate data inside
   an ADF document.
 
   ${(
@@ -131,7 +131,7 @@ export default md`
   ### Example:
 
   ${code`
-  import { traverse } from '@atlaskit/adf-utils/traverse.es'; // .es for ES2015
+  import { traverse } from '@findable/adf-utils/traverse.es'; // .es for ES2015
 
   const doc = {/* some ADF doc */};
 
@@ -246,7 +246,7 @@ export default md`
   ### Example:
 
   ${code`
-  import { map } from '@atlaskit/adf-utils/traverse.es'; // .es for ES2015
+  import { map } from '@findable/adf-utils/traverse.es'; // .es for ES2015
 
   const doc = {/* some ADF doc */};
 
@@ -348,7 +348,7 @@ export default md`
   ### Example:
 
   ${code`
-  import { filter } from '@atlaskit/adf-utils/traverse.es'; // .es for ES2015
+  import { filter } from '@findable/adf-utils/traverse.es'; // .es for ES2015
 
   const doc = {/* some ADF doc */};
 
@@ -476,7 +476,7 @@ export default md`
   ### Example:
 
   ${code`
-  import { reduce } from '@atlaskit/adf-utils/traverse.es'; // .es for ES2015
+  import { reduce } from '@findable/adf-utils/traverse.es'; // .es for ES2015
 
   const doc = {/* some ADF doc */};
 
@@ -495,13 +495,13 @@ export default md`
 
   Builders are the set of composable functions that help with creating ADF documents.
 
-  > **@atlaskit/adf-utils** provides builders for all nodes and marks listed in [Atlassian Document Format](https://developer.atlassian.com/cloud/stride/apis/document/structure/)
+  > **@findable/adf-utils** provides builders for all nodes and marks listed in [Atlassian Document Format](https://developer.atlassian.com/cloud/stride/apis/document/structure/)
   specification.
 
   ### Usage:
 
   ${code`
-  import { doc, p, emoji } from '@atlaskit/adf-utils/builders.es'; // .es for ES2015
+  import { doc, p, emoji } from '@findable/adf-utils/builders.es'; // .es for ES2015
 
   const adfDoc = doc(
     p('My favourite emoji is ', emoji({ text: '🤦‍♂️', shortName: ':man_facepalming:' }), '. What is yours?'),

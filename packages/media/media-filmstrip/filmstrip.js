@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 /* tslint:disable variable-name */
 import * as React from 'react';
 import { Component } from 'react';
-import { Card, defaultImageCardDimensions, CardView, } from '@atlaskit/media-card';
+import { Card, defaultImageCardDimensions, CardView, } from '@findable/media-card';
 import { FilmstripView } from './filmstripView';
 import { generateIdentifierKey } from './utils/generateIdentifierKey';
 var Filmstrip = /** @class */ (function (_super) {

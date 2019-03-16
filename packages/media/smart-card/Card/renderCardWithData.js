@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { extractBlockPropsFromJSONLD } from '../extractBlockPropsFromJSONLD';
 import { extractInlinePropsFromJSONLD } from '../extractInlinePropsFromJSONLD';
-import { BlockCardResolvedView, InlineCardResolvedView, } from '@atlaskit/media-ui';
+import { BlockCardResolvedView, InlineCardResolvedView, } from '@findable/media-ui';
 var CardWithDataContent = /** @class */ (function (_super) {
     tslib_1.__extends(CardWithDataContent, _super);
     function CardWithDataContent() {

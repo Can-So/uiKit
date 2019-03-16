@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as uuid from 'uuid';
-import { getMediaTypeFromMimeType, ContextFactory, fileStreamsCache, } from '@atlaskit/media-core';
-import { MediaStore, UploadController, } from '@atlaskit/media-store';
+import { getMediaTypeFromMimeType, ContextFactory, fileStreamsCache, } from '@findable/media-core';
+import { MediaStore, UploadController, } from '@findable/media-store';
 import { EventEmitter2 } from 'eventemitter2';
 import { map } from 'rxjs/operators/map';
 import { RECENTS_COLLECTION } from '../popup/config';

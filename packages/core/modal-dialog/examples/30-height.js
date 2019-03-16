@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Lorem from 'react-lorem-component';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import ModalDialog, { ModalTransition } from '../src';
 
 const units = [420, '42em', '100%'];

@@ -1,7 +1,7 @@
 import {
   TRACK_EVENT_TYPE,
   OPERATIONAL_EVENT_TYPE,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 import { Action, MiddlewareAPI } from 'redux';
 import { State } from '../../domain';
 import { isHandleCloudFetchingEventAction } from '../../actions/handleCloudFetchingEvent';

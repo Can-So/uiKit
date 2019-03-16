@@ -1,8 +1,8 @@
 // @flow
 import React, { Children, cloneElement, Component } from 'react';
 import { Transition } from 'react-transition-group';
-import Portal from '@atlaskit/portal';
-import { layers } from '@atlaskit/theme';
+import Portal from '@findable/portal';
+import { layers } from '@findable/theme';
 
 import Wrapper from '../../styled/Wrapper';
 import Group, { SROnly, Inner } from './styledFlagGroup';

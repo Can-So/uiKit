@@ -1,21 +1,21 @@
 // @flow
 
 import React, { Component, type ComponentType } from 'react';
-import Badge from '@atlaskit/badge';
+import Badge from '@findable/badge';
 import {
   DropdownItem,
   DropdownItemGroup,
   DropdownMenuStateless,
-} from '@atlaskit/dropdown-menu';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import ChevronUpIcon from '@atlaskit/icon/glyph/chevron-up';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import EditIcon from '@atlaskit/icon/glyph/edit';
-import Lozenge from '@atlaskit/lozenge';
-import Tooltip from '@atlaskit/tooltip';
+} from '@findable/dropdown-menu';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
+import BacklogIcon from '@findable/icon/glyph/backlog';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import ChevronUpIcon from '@findable/icon/glyph/chevron-up';
+import BoardIcon from '@findable/icon/glyph/board';
+import CrossIcon from '@findable/icon/glyph/cross';
+import EditIcon from '@findable/icon/glyph/edit';
+import Lozenge from '@findable/lozenge';
+import Tooltip from '@findable/tooltip';
 
 import {
   Item,

@@ -1,4 +1,4 @@
-import { gridSize as akGridSize } from '@atlaskit/theme';
+import { gridSize as akGridSize } from '@findable/theme';
 export var transitionDuration = '0.22s';
 export var transitionDurationMs = 220;
 export var transitionTimingFunction = 'cubic-bezier(0.2, 0, 0, 1)';

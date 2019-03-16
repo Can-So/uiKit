@@ -1,4 +1,4 @@
-import { BlockCardResolvedViewProps } from '@atlaskit/media-ui';
+import { BlockCardResolvedViewProps } from '@findable/media-ui';
 
 export function extractPropsFromObject(json: any): BlockCardResolvedViewProps {
   if (!json) {

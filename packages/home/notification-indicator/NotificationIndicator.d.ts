@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { NotificationLogProvider } from '@atlaskit/notification-log-client';
+import { NotificationLogProvider } from '@findable/notification-log-client';
 export interface ValueUpdatingParams {
     source: string;
     visibilityChangesSinceTimer?: number;

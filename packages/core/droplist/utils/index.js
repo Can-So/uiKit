@@ -1,4 +1,4 @@
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export function getInputBackground(_ref) {
   var isChecked = _ref.isChecked,
       isDisabled = _ref.isDisabled,

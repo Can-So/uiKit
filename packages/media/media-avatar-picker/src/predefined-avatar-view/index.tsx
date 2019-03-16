@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { PredefinedAvatarViewWrapper, LargeAvatarImage } from './styled';
 import { Avatar } from '../avatar-list';
 
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import Button from '@atlaskit/button';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
+import Button from '@findable/button';
 
 export interface BackBtnProps {
   onClick?: () => void;

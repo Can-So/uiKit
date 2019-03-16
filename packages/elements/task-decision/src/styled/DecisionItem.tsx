@@ -2,7 +2,7 @@ import styled from 'styled-components';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes, ComponentClass } from 'react';
-import { gridSize, colors, themed } from '@atlaskit/theme';
+import { gridSize, colors, themed } from '@findable/theme';
 
 export interface EditorIconWrapperProps {
   showPlaceholder?: boolean;

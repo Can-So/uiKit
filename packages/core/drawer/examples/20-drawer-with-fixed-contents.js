@@ -1,11 +1,11 @@
 // @flow
 
 import React, { Component } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import DropdownMenu, {
   DropdownItemGroup,
   DropdownItem,
-} from '@atlaskit/dropdown-menu';
+} from '@findable/dropdown-menu';
 import Drawer from '../src';
 
 type State = {
@@ -39,7 +39,7 @@ export default class DrawersExample extends Component<{}, State> {
             <p id="paragraph">
               The drawer should not set a new stacking context by using a
               transform CSS property as this causes issues for fixed positioned
-              elements such as @atlaskit/dropdown-menu.
+              elements such as @findable/dropdown-menu.
             </p>
             {/* The position here is used by the withDropdown integration test. */}
             <div css={{ position: 'fixed', left: 100, top: 200 }}>

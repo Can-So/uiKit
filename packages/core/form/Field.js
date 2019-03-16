@@ -73,7 +73,7 @@ function (_React$Component) {
           validate = _this$props.validate;
 
       if (process.env.NODE_ENV !== 'production') {
-        invariant(name, '@atlaskit/form: Field components have a required name prop');
+        invariant(name, '@findable/form: Field components have a required name prop');
       }
 
       return registerField(name, defaultValue, function (_ref) {

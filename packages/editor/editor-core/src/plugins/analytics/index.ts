@@ -1,5 +1,5 @@
 import analyticsPlugin, { analyticsPluginKey as pluginKey } from './plugin';
-import { FabricChannel } from '@atlaskit/analytics-listeners';
+import { FabricChannel } from '@findable/analytics-listeners';
 
 export const analyticsEventKey = 'EDITOR_ANALYTICS_EVENT';
 export const editorAnalyticsChannel = FabricChannel.editor;

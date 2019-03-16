@@ -5,7 +5,7 @@ import {
   imageFileId,
   defaultCollectionName,
   mediaPickerAuthProvider,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { ContextFactory } from '../src';
 import { FilesWrapper, FileWrapper } from '../example-helpers/styled';
 import { Observable } from 'rxjs/Observable';

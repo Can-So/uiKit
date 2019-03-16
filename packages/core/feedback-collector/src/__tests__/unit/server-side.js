@@ -3,7 +3,7 @@
  */
 // @flow
 import React from 'react';
-import { getExamplesFor } from '@atlaskit/build-utils/getExamples';
+import { getExamplesFor } from '@findable/build-utils/getExamples';
 import ReactDOMServer from 'react-dom/server';
 
 test('Feedback collector server side rendering', async () => {

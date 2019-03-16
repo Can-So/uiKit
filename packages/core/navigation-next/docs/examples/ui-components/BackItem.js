@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 
-import { colors } from '@atlaskit/theme';
-import IssuesIcon from '@atlaskit/icon/glyph/issues';
-import { JiraWordmark } from '@atlaskit/logo';
+import { colors } from '@findable/theme';
+import IssuesIcon from '@findable/icon/glyph/issues';
+import { JiraWordmark } from '@findable/logo';
 import {
   BackItem,
   GoToItem,

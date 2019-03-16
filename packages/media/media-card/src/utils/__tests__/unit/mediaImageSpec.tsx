@@ -1,14 +1,14 @@
-jest.mock('@atlaskit/media-ui');
+jest.mock('@findable/media-ui');
 import * as React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-import { getCssFromImageOrientation, isRotated } from '@atlaskit/media-ui';
+import { getCssFromImageOrientation, isRotated } from '@findable/media-ui';
 import { MediaImage, MediaImageProps, MediaImageState } from '../../mediaImage';
 import { ImageComponent } from '../../mediaImage/styled';
 import {
   asMock,
   expectFunctionToHaveBeenCalledWith,
   expectToEqual,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 interface SetupParams {
   isCoverStrategy: boolean;

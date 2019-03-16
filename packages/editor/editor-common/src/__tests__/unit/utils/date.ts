@@ -6,7 +6,7 @@ import {
   // timestampToTaskContext,
 } from '../../../utils/date';
 
-describe('@atlaskit/editor-common date utils', () => {
+describe('@findable/editor-common date utils', () => {
   describe('timestampToString', () => {
     it('should correctly format date', () => {
       const date = Date.parse('2018-06-19');
@@ -41,7 +41,7 @@ describe('@atlaskit/editor-common date utils', () => {
   });
 
   // TODO: Currently skipped due to local issues
-  // https://bitbucket.org/atlassian/atlaskit-mk-2/addon/pipelines/home#!/results/27648/steps/%7Bab5d2f0d-39aa-4bad-9ba5-0b0852a7b81e%7D/test-report
+  // https://github.com/fnamazing/uiKit/addon/pipelines/home#!/results/27648/steps/%7Bab5d2f0d-39aa-4bad-9ba5-0b0852a7b81e%7D/test-report
   // describe('timestampToTaskContext', () => {
   //   const matchesYearFormat = date => {
   //     const currentYear = new Date().getUTCFullYear();

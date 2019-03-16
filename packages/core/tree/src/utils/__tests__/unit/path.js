@@ -1,7 +1,7 @@
 //@flow
 import { hasSameParent, isSamePath } from '../../path';
 
-describe('@atlaskit/tree - utils/flat-tree', () => {
+describe('@findable/tree - utils/flat-tree', () => {
   describe('#isSamePath', () => {
     it('returns true if for the same instances', () => {
       const path = [1, 1];

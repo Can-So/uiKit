@@ -3,10 +3,10 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import * as classnames from 'classnames';
 import { EditorView } from 'prosemirror-view';
 import { findTable } from 'prosemirror-utils';
-import { TableLayout } from '@atlaskit/adf-schema';
-import { Popup, tableMarginTop } from '@atlaskit/editor-common';
-import ExpandIcon from '@atlaskit/icon/glyph/editor/expand';
-import CollapseIcon from '@atlaskit/icon/glyph/editor/collapse';
+import { TableLayout } from '@findable/adf-schema';
+import { Popup, tableMarginTop } from '@findable/editor-common';
+import ExpandIcon from '@findable/icon/glyph/editor/expand';
+import CollapseIcon from '@findable/icon/glyph/editor/collapse';
 
 import commonMessages from '../../../../messages';
 import ToolbarButton from '../../../../ui/ToolbarButton';

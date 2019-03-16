@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 export default (function (props) {
   return React.createElement(Button, {
     appearance: "subtle",

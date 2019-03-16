@@ -17,9 +17,9 @@
   "atlaskit": {
     "internal": true
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/textfield": "^0.3.0",
+    "@findable/textfield": "^0.3.0",
     "@babel/runtime": "^7.0.0",
     "tslib": "^1.8.0"
   },
@@ -27,9 +27,9 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.2.0",
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/build-utils": "^2.2.0",
+    "@findable/docs": "^7.0.0",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0"
   }
 }

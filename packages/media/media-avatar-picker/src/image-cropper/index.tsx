@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
+import CrossIcon from '@findable/icon/glyph/cross';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { isImageRemote } from './isImageRemote';
 import {
   CircularMask,

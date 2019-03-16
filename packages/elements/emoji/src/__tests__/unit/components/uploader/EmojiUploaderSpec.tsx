@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { waitUntil } from '@atlaskit/util-common-test';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
-import { MockEmojiResource } from '@atlaskit/util-data-test';
+import { waitUntil } from '@findable/util-common-test';
+import { mountWithIntl } from '@findable/editor-test-helpers';
+import { MockEmojiResource } from '@findable/util-data-test';
 
 import * as ImageUtil from '../../../../util/image';
 
@@ -15,7 +15,7 @@ import {
 } from '../../_test-data';
 
 import FileChooser from '../../../../components/common/FileChooser';
-import AkFieldBase from '@atlaskit/field-base';
+import AkFieldBase from '@findable/field-base';
 
 import Emoji from '../../../../components/common/Emoji';
 import EmojiUploader, {

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { HTMLAttributes, ComponentClass } from 'react';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { colors, borderRadius } from '@findable/theme';
 import { dropShadow } from '../styles';
 
 export const Container: ComponentClass<

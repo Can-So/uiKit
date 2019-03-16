@@ -1,15 +1,15 @@
 /* tslint:disable:no-console */
 import * as React from 'react';
-import { atlassianLogoUrl, tallImage } from '@atlaskit/media-test-helpers';
-import { Checkbox } from '@atlaskit/checkbox';
+import { atlassianLogoUrl, tallImage } from '@findable/media-test-helpers';
+import { Checkbox } from '@findable/checkbox';
 import styled from 'styled-components';
-import DownloadIcon from '@atlaskit/icon/glyph/download';
-import BookIcon from '@atlaskit/icon/glyph/book';
-import EditIcon from '@atlaskit/icon/glyph/edit';
+import DownloadIcon from '@findable/icon/glyph/download';
+import BookIcon from '@findable/icon/glyph/book';
+import EditIcon from '@findable/icon/glyph/edit';
 import { CardAction, CardStatus, CardEvent } from '../src';
-import { MediaType } from '@atlaskit/media-store';
+import { MediaType } from '@findable/media-store';
 import { CardView } from '../src/root/cardView';
-import { FileDetails } from '@atlaskit/media-core';
+import { FileDetails } from '@findable/media-core';
 
 const CardWrapper = styled.div`
   width: 150px;

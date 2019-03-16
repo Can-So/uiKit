@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, colors, gridSize, math, themed } from '@atlaskit/theme'; // dialog may not be smaller than 160px or larger than 600px
+import { borderRadius, colors, gridSize, math, themed } from '@findable/theme'; // dialog may not be smaller than 160px or larger than 600px
 
 var dialogWidth = function dialogWidth(_ref) {
   var width = _ref.width;

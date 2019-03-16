@@ -1,5 +1,5 @@
-import { Auth, isClientBasedAuth } from '@atlaskit/media-core';
-export { SourceFile } from '@atlaskit/media-store';
+import { Auth, isClientBasedAuth } from '@findable/media-core';
+export { SourceFile } from '@findable/media-store';
 
 export type ClientBasedSourceFileOwner = {
   readonly id: string;

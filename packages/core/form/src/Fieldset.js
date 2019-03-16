@@ -1,7 +1,7 @@
 // @flow
 import React, { type Node } from 'react';
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 import { Label } from './styled/Field';
 
 const FieldsetLabel = styled(Label)`

@@ -3,7 +3,7 @@ import {
   doc,
   p,
   unsupportedInline,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import collabPlugin from '../../../../plugins/collab-edit';
 

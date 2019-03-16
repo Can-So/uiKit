@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 var NothingWasFoundElement = styled.div.withConfig({
   displayName: "NothingWasFound__NothingWasFoundElement",
   componentId: "sc-9uovt8-0"

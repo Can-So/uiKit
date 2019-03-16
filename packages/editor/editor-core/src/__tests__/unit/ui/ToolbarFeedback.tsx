@@ -1,8 +1,8 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import AkButton from '@atlaskit/button';
-import { Popup } from '@atlaskit/editor-common';
+import AkButton from '@findable/button';
+import { Popup } from '@findable/editor-common';
 import ToolbarFeedback, {
   getBrowserInfo,
   getDeviceInfo,
@@ -12,7 +12,7 @@ import { analyticsEventKey } from '../../../plugins/analytics';
 
 window.jQuery = {};
 
-describe('@atlaskit/editor-core/ui/ToolbarFeedback', () => {
+describe('@findable/editor-core/ui/ToolbarFeedback', () => {
   describe('analytics', () => {
     let toolbarOption;
     let mockEventDispatcher;

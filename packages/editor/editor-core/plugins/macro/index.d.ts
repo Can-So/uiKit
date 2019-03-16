@@ -1,6 +1,6 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { MacroProvider } from './types';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import { Dispatch } from '../../event-dispatcher';
 import { PMPluginFactoryParams } from '../../types';
 export * from './types';

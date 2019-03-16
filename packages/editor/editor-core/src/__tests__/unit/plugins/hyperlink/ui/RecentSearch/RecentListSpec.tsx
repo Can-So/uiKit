@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import RecentList from '../../../../../../plugins/hyperlink/ui/RecentSearch/RecentList';
 import RecentItem from '../../../../../../plugins/hyperlink/ui/RecentSearch/RecentItem';
 
 const noop = () => {};
-describe('@atlaskit/editor-core/ui/RecentSearch/RecentList', () => {
+describe('@findable/editor-core/ui/RecentSearch/RecentList', () => {
   it('should render the list when loaded', () => {
     const items = [
       {

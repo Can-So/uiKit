@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { isSchemaWithLists, isSchemaWithMentions, isSchemaWithLinks, isSchemaWithAdvancedTextFormattingMarks, isSchemaWithCodeBlock, isSchemaWithBlockQuotes, isSchemaWithMedia, isSchemaWithSubSupMark, isSchemaWithTextColor, isSchemaWithTables, } from '@atlaskit/adf-schema';
-import { normalizeHexColor } from '@atlaskit/editor-common';
+import { isSchemaWithLists, isSchemaWithMentions, isSchemaWithLinks, isSchemaWithAdvancedTextFormattingMarks, isSchemaWithCodeBlock, isSchemaWithBlockQuotes, isSchemaWithMedia, isSchemaWithSubSupMark, isSchemaWithTextColor, isSchemaWithTables, } from '@findable/adf-schema';
+import { normalizeHexColor } from '@findable/editor-common';
 import { Fragment, } from 'prosemirror-model';
 import { mapImageToEmoji } from './emojiHelper';
 /**

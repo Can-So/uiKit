@@ -1,6 +1,6 @@
 # codemod-util-shared-styles-to-theme
 
-Codemod for converting `@atlaskit/util-shared-styles` to `@atlaskit/theme`
+Codemod for converting `@findable/util-shared-styles` to `@findable/theme`
 
 ## Transformations
 
@@ -47,7 +47,7 @@ yarn jscodeshift \
 
 ## Mapping of util-shared-styles to theme
 
-| @atlaskit/util-shared-styles       | type     | @atlaskit/theme   | type     | Notes                   |
+| @findable/util-shared-styles       | type     | @findable/theme   | type     | Notes                   |
 | ---------------------------------- | -------- | ----------------- | -------- | ----------------------- |
 | akBorderRadius                     | string   | borderRadius      | function | old '3px' new () => 3   |
 | akColorPrimary1                    | string   | colors.N800       | string   |                         |

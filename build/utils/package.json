@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/build-utils",
+  "name": "@findable/build-utils",
   "version": "2.2.0",
   "description": "Collection of utilities to used during the release process of Atlaskit",
   "main": "index.js",
@@ -9,7 +9,7 @@
   "author": "Atlassian Pty Ltd",
   "license": "Apache-2.0",
   "dependencies": {
-    "@atlaskit/build-releases": "^3.0.0",
+    "@findable/build-releases": "^3.0.0",
     "bitbucket-build-status": "^1.0.3",
     "chalk": "^2.1.0",
     "editor": "^1.0.0",

@@ -1,4 +1,4 @@
-import { mockStore, mockFetcher } from '@atlaskit/media-test-helpers';
+import { mockStore, mockFetcher } from '@findable/media-test-helpers';
 import {
   getFilesInRecentsFullfilled,
   getFilesInRecentsFailed,

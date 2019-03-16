@@ -1,6 +1,6 @@
 import { NodeSerializerOpts } from '../interfaces';
 import { createTag, serializeStyle, withTable } from '../util';
-import { codeFontFamily } from '@atlaskit/theme';
+import { codeFontFamily } from '@findable/theme';
 
 const codeTagCss = serializeStyle({
   color: 'rgb(23, 43, 77)',

@@ -6,7 +6,7 @@ import {
   code_block,
   code,
   EditorTestCardProvider,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   setLinkHref,
   setLinkText,

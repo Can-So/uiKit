@@ -1,4 +1,4 @@
-// Copy of helper functions from @atlaskit/task-decision
+// Copy of helper functions from @findable/task-decision
 // NOTE: if this is changed in the original package, this must also be modified
 export var objectKeyToString = function (objectKey) {
     var containerAri = objectKey.containerAri, objectAri = objectKey.objectAri, localId = objectKey.localId;

@@ -1,7 +1,7 @@
 /* eslint-disable no-confusing-arrow */
 import styled, { css } from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
-import Button from '@atlaskit/button';
+import { gridSize, math } from '@findable/theme';
+import Button from '@findable/button';
 import { flagTextColor, flagFocusRingColor } from '../../theme'; // Outputs the styles for actions separator: mid-dot for non-bold flags, or space for bold flags.
 
 var getDivider = function getDivider(_ref) {

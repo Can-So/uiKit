@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import { createLanguageList, DEFAULT_LANGUAGES, getLanguageIdentifier, } from '@atlaskit/adf-schema';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
+import { createLanguageList, DEFAULT_LANGUAGES, getLanguageIdentifier, } from '@findable/adf-schema';
 import { findParentNodeOfType } from 'prosemirror-utils';
 import { removeCodeBlock, changeLanguage } from './actions';
 import commonMessages from '../../messages';

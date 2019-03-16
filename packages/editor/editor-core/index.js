@@ -7,8 +7,8 @@ export { default as WithHelpTrigger } from './ui/WithHelpTrigger';
 export { default as CollapsedEditor } from './ui/CollapsedEditor';
 export { default as ToolbarHelp } from './ui/ToolbarHelp';
 export { default as ToolbarFeedback } from './ui/ToolbarFeedback';
-export { EmojiResource } from '@atlaskit/emoji';
-export { AbstractMentionResource, MentionResource, PresenceResource, } from '@atlaskit/mention';
+export { EmojiResource } from '@findable/emoji';
+export { AbstractMentionResource, MentionResource, PresenceResource, } from '@findable/mention';
 // Used in mobile bridge
 export { stateKey as mediaPluginKey } from './plugins/media/pm-plugins/main';
 export { mentionPluginKey } from './plugins/mentions';

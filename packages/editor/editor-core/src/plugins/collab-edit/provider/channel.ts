@@ -1,4 +1,4 @@
-import { utils } from '@atlaskit/util-service-support';
+import { utils } from '@findable/util-service-support';
 import { EventEmitter2 } from 'eventemitter2';
 import { getVersion, sendableSteps } from 'prosemirror-collab';
 import {

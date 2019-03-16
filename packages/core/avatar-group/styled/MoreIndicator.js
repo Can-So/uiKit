@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { colors, themed, withTheme } from '@atlaskit/theme';
-import { getBorderRadius, getInnerStyles, BORDER_WIDTH } from '@atlaskit/avatar';
+import { colors, themed, withTheme } from '@findable/theme';
+import { getBorderRadius, getInnerStyles, BORDER_WIDTH } from '@findable/avatar';
 var EXCESS_INDICATOR_FONT_SIZE = {
   small: 10,
   medium: 11,

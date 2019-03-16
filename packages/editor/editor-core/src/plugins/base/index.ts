@@ -1,7 +1,7 @@
 import { baseKeymap } from 'prosemirror-commands';
 import { history } from 'prosemirror-history';
 import { keymap } from 'prosemirror-keymap';
-import { doc, paragraph, text } from '@atlaskit/adf-schema';
+import { doc, paragraph, text } from '@findable/adf-schema';
 import { EditorPlugin } from '../../types';
 import filterStepsPlugin from './pm-plugins/filter-steps';
 import focusHandlerPlugin from './pm-plugins/focus-handler';

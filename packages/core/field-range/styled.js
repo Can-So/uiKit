@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
 import styled, { css } from 'styled-components';
-import { colors, elevation } from '@atlaskit/theme';
+import { colors, elevation } from '@findable/theme';
 import { thumb, track } from './theme';
 var sliderThumbSize = 16;
 var sliderThumbBorderThickness = 2;

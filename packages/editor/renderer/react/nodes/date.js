@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { isPastDate, timestampToString, timestampToTaskContext, } from '@atlaskit/editor-common';
+import { isPastDate, timestampToString, timestampToTaskContext, } from '@findable/editor-common';
 var Date = /** @class */ (function (_super) {
     tslib_1.__extends(Date, _super);
     function Date() {

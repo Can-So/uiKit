@@ -2,11 +2,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from '../../components/WrappedLink';
 
-import Btn from '@atlaskit/button';
-import Lozenge from '@atlaskit/lozenge';
-import Icon from '@atlaskit/icon/glyph/bullet-list';
+import Btn from '@findable/button';
+import Lozenge from '@findable/lozenge';
+import Icon from '@findable/icon/glyph/bullet-list';
 
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { colors, gridSize, math, themed } from '@findable/theme';
 
 import Changelog, { Logs } from '../../components/ChangeLog';
 

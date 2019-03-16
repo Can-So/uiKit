@@ -1,6 +1,6 @@
-import { doc, p, typeAheadQuery } from '@atlaskit/editor-test-helpers';
+import { doc, p, typeAheadQuery } from '@findable/editor-test-helpers';
 import { encode } from './_test-helpers';
-import { createJIRASchema } from '@atlaskit/adf-schema';
+import { createJIRASchema } from '@findable/adf-schema';
 
 const schema = createJIRASchema({ allowLinks: true });
 

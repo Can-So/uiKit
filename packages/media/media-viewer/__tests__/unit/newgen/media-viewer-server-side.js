@@ -5,7 +5,7 @@ import * as tslib_1 from "tslib";
  */
 import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
-import { getExamplesFor } from '@atlaskit/build-utils/getExamples';
+import { getExamplesFor } from '@findable/build-utils/getExamples';
 test('media-viewer server side rendering', function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
     return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {

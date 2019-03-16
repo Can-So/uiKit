@@ -3,8 +3,8 @@
 import React from 'react';
 import { components } from 'react-select';
 
-import { colors, layers } from '@atlaskit/theme';
-import SearchIcon from '@atlaskit/icon/glyph/editor/search';
+import { colors, layers } from '@findable/theme';
+import SearchIcon from '@findable/icon/glyph/editor/search';
 
 // ==============================
 // Styled Components

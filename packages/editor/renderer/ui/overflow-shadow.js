@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import rafSchedule from 'raf-schd';
-import { browser } from '@atlaskit/editor-common';
+import { browser } from '@findable/editor-common';
 import { shadowClassNames } from './Renderer/style';
 var isIE11 = browser.ie_version === 11;
 export default function overflowShadow(Component, options) {

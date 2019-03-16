@@ -5,7 +5,7 @@ Provides a standard way to select a single option from a list.
 ## Installation
 
 ```sh
-yarn add @atlaskit/field-radio-group
+yarn add @findable/field-radio-group
 ```
 
 ## Usage

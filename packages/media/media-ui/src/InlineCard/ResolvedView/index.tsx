@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Frame } from '../Frame';
-import Lozenge from '@atlaskit/lozenge';
+import Lozenge from '@findable/lozenge';
 import { LozengeViewModel } from '../../common';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
 import { LozengeWrapper } from '../IconAndTitleLayout/styled';

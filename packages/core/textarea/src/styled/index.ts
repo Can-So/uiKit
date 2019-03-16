@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { codeFontFamily, fontSize, gridSize } from '@atlaskit/theme';
+import { codeFontFamily, fontSize, gridSize } from '@findable/theme';
 import { ThemeTokens } from '../theme';
 import { Props } from '../components/TextArea';
 

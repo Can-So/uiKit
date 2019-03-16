@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/css-reset",
+  "name": "@findable/css-reset",
   "version": "3.0.6",
   "description": "Base stylesheet for ADG",
   "license": "Apache-2.0",
@@ -13,12 +13,12 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "scripts": {
     "build": "babel-node --ignore WE_WILL_NOT_IGNORE_ANYTHING build/js-to-css.js --config-file=../../../babel.config.js --env-name=production:cjs"
   },
   "dependencies": {
-    "@atlaskit/theme": "^8.0.0",
+    "@findable/theme": "^8.0.0",
     "fbjs": "^1.0.0",
     "mkdirp": "^0.5.1"
   },
@@ -26,7 +26,7 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.0",
+    "@findable/docs": "^7.0.0",
     "@babel/node": "^7.0.0",
     "less": "^2.7.1"
   },

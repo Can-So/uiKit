@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { EditorView } from 'prosemirror-view';
-import WidthDetector from '@atlaskit/width-detector';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import WidthDetector from '@findable/width-detector';
+import { ProviderFactory } from '@findable/editor-common';
 import { EditorAppearance, ToolbarUIComponentFactory } from '../../types';
 import { EventDispatcher } from '../../event-dispatcher';
 import EditorActions from '../../actions';

@@ -1,8 +1,8 @@
 import {
   MediaCollectionItem,
   MediaCollectionItemDetails,
-} from '@atlaskit/media-store';
-import { nextTick } from '@atlaskit/media-test-helpers';
+} from '@findable/media-store';
+import { nextTick } from '@findable/media-test-helpers';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { CollectionFetcher, collectionCache } from '../../collection';
 import { fileStreamsCache } from '../../context/fileStreamCache';

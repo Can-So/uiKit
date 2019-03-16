@@ -2,9 +2,9 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
-import BulletListIcon from '@atlaskit/icon/glyph/editor/bullet-list';
-import NumberListIcon from '@atlaskit/icon/glyph/editor/number-list';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import BulletListIcon from '@findable/icon/glyph/editor/bullet-list';
+import NumberListIcon from '@findable/icon/glyph/editor/number-list';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 import { withAnalytics } from '../../../../analytics';
 import {
   toggleBulletList as toggleBulletListKeymap,

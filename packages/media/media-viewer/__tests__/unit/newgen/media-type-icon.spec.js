@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import UnknownIcon from '@atlaskit/icon/glyph/media-services/unknown';
+import UnknownIcon from '@findable/icon/glyph/media-services/unknown';
 import { MediaTypeIcon } from '../../../newgen/media-type-icon';
 describe('MediaTypeIcon', function () {
     it('MSW-741: should render the unknown icon for unexpected media types', function () {

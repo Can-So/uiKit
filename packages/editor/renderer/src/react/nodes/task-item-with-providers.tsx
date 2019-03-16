@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Component, ReactNode } from 'react';
-import { ContextIdentifierProvider } from '@atlaskit/editor-common';
+import { ContextIdentifierProvider } from '@findable/editor-common';
 import {
   ContentRef,
   TaskDecisionProvider,
   ResourcedTaskItem,
-} from '@atlaskit/task-decision';
+} from '@findable/task-decision';
 
 export interface Props {
   taskId: string;

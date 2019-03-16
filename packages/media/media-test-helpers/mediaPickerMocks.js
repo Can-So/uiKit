@@ -74,7 +74,7 @@ export var mockFetcher = function () { return ({
     fetchGifsRelevantToSearch: jest.fn(),
 }); };
 export var mockIsWebGLNotAvailable = function () {
-    jest.mock('@atlaskit/media-picker/src/popup/tools/webgl', function () {
+    jest.mock('@findable/media-picker/src/popup/tools/webgl', function () {
         return {
             isWebGLAvailable: jest.fn(function () {
                 return false;

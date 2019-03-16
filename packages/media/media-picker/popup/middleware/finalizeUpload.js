@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { MediaStore, } from '@atlaskit/media-store';
-import { fileStreamsCache } from '@atlaskit/media-core';
+import { MediaStore, } from '@findable/media-store';
+import { fileStreamsCache } from '@findable/media-core';
 import { isFinalizeUploadAction, } from '../actions/finalizeUpload';
 import { mapAuthToSourceFileOwner } from '../domain/source-file';
 import { sendUploadEvent, } from '../actions/sendUploadEvent';

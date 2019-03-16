@@ -2,7 +2,7 @@
 
 **YOU SHOULD ALMOST DEFINITELY NOT BE USING THIS COMPONENT DIRECTLY**
 
-**USE @atlaskit/field-text INSTEAD**
+**USE @findable/field-text INSTEAD**
 
 
 ## SingleLineTextInput

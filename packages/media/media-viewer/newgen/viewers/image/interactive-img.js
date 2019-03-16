@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { Rectangle, Camera, Vector2, getCssFromImageOrientation, } from '@atlaskit/media-ui';
+import { Rectangle, Camera, Vector2, getCssFromImageOrientation, } from '@findable/media-ui';
 import { BaselineExtend, ImageWrapper, Img } from '../../styled';
 import { ZoomLevel } from '../../domain/zoomLevel';
 import { closeOnDirectClick } from '../../utils/closeOnDirectClick';

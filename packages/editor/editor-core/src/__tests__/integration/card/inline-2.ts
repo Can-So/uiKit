@@ -1,5 +1,5 @@
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
+import Page from '@findable/webdriver-runner/wd-wrapper';
 import {
   getDocFromElement,
   fullpage,

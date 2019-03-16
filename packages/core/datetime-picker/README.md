@@ -5,7 +5,7 @@ A React component for picking date/time values.
 ## Installation
 
 ```sh
-yarn add @atlaskit/datetime-picker
+yarn add @findable/datetime-picker
 ```
 
 ## Usage

@@ -1,5 +1,5 @@
 // @flow
-import { md, code } from '@atlaskit/docs';
+import { md, code } from '@findable/docs';
 
 export default md`
 
@@ -16,8 +16,8 @@ ${code`
   <head>
     <meta charset="UTF-8">
     <title>Your page</title>
-    <link rel="stylesheet" href="node_modules/@atlaskit/css-reset/dist/bundle.css" />
-    <link rel="stylesheet" href="node_modules/@atlaskit/reduced-ui-pack/dist/bundle.css" />
+    <link rel="stylesheet" href="node_modules/@findable/css-reset/dist/bundle.css" />
+    <link rel="stylesheet" href="node_modules/@findable/reduced-ui-pack/dist/bundle.css" />
   </head>
   <body>
     <p>Hello world!</p>

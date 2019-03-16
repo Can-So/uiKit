@@ -1,14 +1,14 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import Form, {
   Field,
   FormFooter,
   FormHeader,
   ErrorMessage,
   ValidMessage,
-} from '@atlaskit/form';
+} from '@findable/form';
 import Textfield from '../src';
 
 function validate(value) {

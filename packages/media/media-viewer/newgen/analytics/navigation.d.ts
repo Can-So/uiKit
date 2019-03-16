@@ -1,5 +1,5 @@
-import { GasPayload } from '@atlaskit/analytics-gas-types';
-import { Identifier } from '@atlaskit/media-core';
+import { GasPayload } from '@findable/analytics-gas-types';
+import { Identifier } from '@findable/media-core';
 import { PackageAttributes } from './index';
 import { NavigationDirection, NavigationSource } from '../navigation';
 export interface NavigationAttributes {

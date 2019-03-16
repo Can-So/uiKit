@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/react-experiment-framework",
+  "name": "@findable/react-experiment-framework",
   "version": "0.3.0",
   "description": "Experimentation React components",
   "license": "Apache-2.0",
@@ -10,14 +10,14 @@
     "Growth team",
     "milavsky"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "peerDependencies": {
     "react": "^16.4.0",
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.0",
-    "@atlaskit/section-message": "^2.0.0",
+    "@findable/docs": "^7.0.0",
+    "@findable/section-message": "^2.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0"
   }

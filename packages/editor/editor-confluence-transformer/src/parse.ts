@@ -6,11 +6,11 @@ import {
   acShortcutToEmoji,
   tableBackgroundColorNames,
   NameToEmoji,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import {
   akEditorFullPageMaxWidth,
   akEditorTableNumberColumnWidth,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { Fragment, Node as PMNode, Schema } from 'prosemirror-model';
 import parseCxhtml from './parse-cxhtml';
 import { AC_XMLNS, default as encodeCxhtml } from './encode-cxhtml';

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileIdentifier } from '@findable/media-core';
 import {
   mountWithIntlContext,
   fakeContext,
-} from '@atlaskit/media-test-helpers';
-import { MediaCollectionItem } from '@atlaskit/media-store';
-import Spinner from '@atlaskit/spinner';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
+} from '@findable/media-test-helpers';
+import { MediaCollectionItem } from '@findable/media-store';
+import Spinner from '@findable/spinner';
+import ArrowRightCircleIcon from '@findable/icon/glyph/chevron-right-circle';
 import { createContext } from '../_stubs';
 import { Collection, Props, State } from '../../../newgen/collection';
 import { ErrorMessage } from '../../../newgen/error';

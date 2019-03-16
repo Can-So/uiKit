@@ -1,4 +1,4 @@
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 export var arrow = {
   defaultColor: themed({
     light: colors.N40,

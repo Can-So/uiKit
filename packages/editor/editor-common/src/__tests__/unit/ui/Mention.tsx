@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
-import { ResourcedMention } from '@atlaskit/mention';
+import { ResourcedMention } from '@findable/mention';
 import ProviderFactory from '../../../providerFactory';
 import Mention from '../../../ui/Mention';
 // avoid polluting test logs with error message in console
@@ -9,7 +9,7 @@ import Mention from '../../../ui/Mention';
 // tslint:disable-next-line:no-console
 let consoleError = console.error;
 
-describe('@atlaskit/editor-core/ui/Mention', () => {
+describe('@findable/editor-core/ui/Mention', () => {
   beforeEach(() => {
     // tslint:disable-next-line:no-console
     console.error = jest.fn();

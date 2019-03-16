@@ -1,4 +1,4 @@
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 import { WsMessageData } from './wsMessageData';
 export declare type ConnectionLostHandler = () => void;
 export declare type WebsocketDataReceivedHandler = (data: WsMessageData) => void;

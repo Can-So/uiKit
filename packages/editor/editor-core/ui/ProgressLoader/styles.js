@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled, { css } from 'styled-components';
-import { colors, borderRadius } from '@atlaskit/theme';
+import { colors, borderRadius } from '@findable/theme';
 export var BackgroundWrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  height: 2px;\n  background-color: ", ";\n  border: transparent;\n  border-radius: ", "px;\n  ", ";\n"], ["\n  height: 2px;\n  background-color: ", ";\n  border: transparent;\n  border-radius: ", "px;\n  ",
     ";\n"])), colors.N20, borderRadius(), function (_a) {
     var maxWidth = _a.maxWidth;

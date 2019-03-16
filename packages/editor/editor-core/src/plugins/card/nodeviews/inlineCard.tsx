@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Node as PMNode } from 'prosemirror-model';
-import { Card } from '@atlaskit/smart-card';
+import { Card } from '@findable/smart-card';
 
 import { EditorView } from 'prosemirror-view';
 import wrapComponentWithClickArea from '../../../nodeviews/legacy-nodeview-factory/ui/wrapper-click-area';

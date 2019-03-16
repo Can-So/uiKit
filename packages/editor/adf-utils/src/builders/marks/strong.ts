@@ -1,4 +1,4 @@
-import { StrongDefinition } from '@atlaskit/adf-schema';
+import { StrongDefinition } from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

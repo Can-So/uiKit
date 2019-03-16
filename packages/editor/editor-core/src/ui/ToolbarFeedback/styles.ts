@@ -2,7 +2,7 @@ import styled from 'styled-components';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes, ImgHTMLAttributes, ComponentClass } from 'react';
-import { gridSize, borderRadius, colors } from '@atlaskit/theme';
+import { gridSize, borderRadius, colors } from '@findable/theme';
 
 export const ButtonContent: ComponentClass<HTMLAttributes<{}>> = styled.span`
   display: flex;

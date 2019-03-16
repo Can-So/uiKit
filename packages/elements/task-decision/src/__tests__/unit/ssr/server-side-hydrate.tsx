@@ -1,4 +1,4 @@
-import { ssr_hydrate } from '@atlaskit/elements-test-helpers';
+import { ssr_hydrate } from '@findable/elements-test-helpers';
 const SamplesPath = './samples';
 const ExamplesPath = '../../../../examples';
 

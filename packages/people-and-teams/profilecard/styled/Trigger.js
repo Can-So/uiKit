@@ -41,8 +41,8 @@ function _templateObject() {
 }
 
 import styled, { keyframes } from 'styled-components';
-import { akAnimationMixins } from '@atlaskit/util-shared-styles';
-import { gridSize } from '@atlaskit/theme';
+import { akAnimationMixins } from '@findable/util-shared-styles';
+import { gridSize } from '@findable/theme';
 var createBold = akAnimationMixins.createBold,
     interpolate = akAnimationMixins.interpolate; // animation constants
 

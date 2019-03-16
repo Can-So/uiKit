@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Select from '@atlaskit/select';
+import Select from '@findable/select';
 
 const styles = {
   container: base => ({

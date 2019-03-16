@@ -1,9 +1,9 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
 import { EditorState, Plugin, PluginKey } from 'prosemirror-state';
-import { Context, FileIdentifier } from '@atlaskit/media-core';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
-import { Dimensions } from '@atlaskit/media-editor';
+import { Context, FileIdentifier } from '@findable/media-core';
+import { MediaSingleLayout } from '@findable/adf-schema';
+import { Dimensions } from '@findable/media-editor';
 import { Dispatch } from '../../../event-dispatcher';
 import { ProsemirrorGetPosHandler } from '../../../nodeviews';
 import { EditorAppearance } from '../../../types/editor-props';

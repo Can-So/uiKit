@@ -1,14 +1,14 @@
 // @flow
 
-import Calendar from '@atlaskit/calendar';
-import CalendarIcon from '@atlaskit/icon/glyph/calendar';
-import Select, { mergeStyles } from '@atlaskit/select';
-import { borderRadius, colors, layers, elevation } from '@atlaskit/theme';
+import Calendar from '@findable/calendar';
+import CalendarIcon from '@findable/icon/glyph/calendar';
+import Select, { mergeStyles } from '@findable/select';
+import { borderRadius, colors, layers, elevation } from '@findable/theme';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import { format, isValid, parse, getDaysInMonth } from 'date-fns';
 import pick from 'lodash.pick';
 import React, { Component, type Node, type ElementRef } from 'react';
@@ -259,7 +259,7 @@ class DatePicker extends Component<Props, State> {
       // Only try to set the date if we have month & day
       if (isValid(parsed)) {
         // We format the parsed date to YYYY-MM-DD here because
-        // this is the format expected by the @atlaskit/calendar component
+        // this is the format expected by the @findable/calendar component
         this.setState({ view: format(parsed, 'YYYY-MM-DD') });
       }
     }

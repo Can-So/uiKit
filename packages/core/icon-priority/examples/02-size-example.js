@@ -1,7 +1,7 @@
 // @flow
 import React, { Component, type Element } from 'react';
 import styled from 'styled-components';
-import Btn, { ButtonGroup } from '@atlaskit/button';
+import Btn, { ButtonGroup } from '@findable/button';
 
 import PriorityTrivial from '../glyph/priority-trivial';
 import PriorityLowest from '../glyph/priority-lowest';

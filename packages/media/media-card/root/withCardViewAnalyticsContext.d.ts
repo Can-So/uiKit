@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MediaItemType } from '@atlaskit/media-core';
+import { MediaItemType } from '@findable/media-core';
 import { CardViewOwnProps } from './cardView';
 export declare type WithCardViewAnalyticsContextProps = CardViewOwnProps & {
     readonly mediaItemType: MediaItemType;

@@ -6,9 +6,9 @@ import {
   panel,
   strong,
   underline,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { checkParseEncodeRoundTrips } from '../../_test-helpers';
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 
 // Nodes
 

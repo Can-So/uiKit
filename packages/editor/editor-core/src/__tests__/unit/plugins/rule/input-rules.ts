@@ -7,10 +7,10 @@ import {
   code_block,
   hardBreak,
   blockquote,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import rulePlugin from '../../../../plugins/rule';
 import codeBlockPlugin from '../../../../plugins/code-block';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 describe('inputrules', () => {
   const createEditor = createEditorFactory();

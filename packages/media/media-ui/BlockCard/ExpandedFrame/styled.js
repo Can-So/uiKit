@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled, { css } from 'styled-components';
-import { colors, fontFamily } from '@atlaskit/theme';
+import { colors, fontFamily } from '@findable/theme';
 import { borderRadius, size, ellipsis } from '../../mixins';
 var wrapperPadding = 8;
 export var className = 'media-card-frame';

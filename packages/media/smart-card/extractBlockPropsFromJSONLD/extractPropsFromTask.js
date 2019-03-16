@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import ChatIcon from '@atlaskit/icon/glyph/comment';
-import { colors } from '@atlaskit/theme';
+import ChatIcon from '@findable/icon/glyph/comment';
+import { colors } from '@findable/theme';
 import { FormattedRelative } from 'react-intl';
 export var buildTaskTitle = function (json) {
     var name = json.name && json.name.trim();

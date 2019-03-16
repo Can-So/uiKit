@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import Select from '@atlaskit/select';
-import Button from '@atlaskit/button';
+import Select from '@findable/select';
+import Button from '@findable/button';
 
 import { IntlProvider, addLocaleData } from 'react-intl';
-import { ReactRenderer } from '@atlaskit/renderer';
-import { colors } from '@atlaskit/theme';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ReactRenderer } from '@findable/renderer';
+import { colors } from '@findable/theme';
+import { ProviderFactory } from '@findable/editor-common';
 
 import enMessages from '../src/i18n/en';
 import languages from '../src/i18n/languages';
@@ -24,7 +24,7 @@ import { EditorAppearance } from '../src/types';
 import { EditorActions } from '../src';
 
 import { extensionHandlers } from '../example-helpers/extension-handlers';
-import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
+import { Provider as SmartCardProvider } from '@findable/smart-card';
 import ErrorReport, { Error } from '../example-helpers/ErrorReport';
 import KitchenSinkEditor from '../example-helpers/KitchenSinkEditor';
 import withSentry from '../example-helpers/withSentry';

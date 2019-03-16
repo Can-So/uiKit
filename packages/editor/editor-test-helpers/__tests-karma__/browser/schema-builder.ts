@@ -11,7 +11,7 @@ import {
   text,
 } from '../../src';
 
-describe('@atlaskit/editore-core/test-helper/schema-builder', () => {
+describe('@findable/editore-core/test-helper/schema-builder', () => {
   const clone = (object = {}) => ({ ...object });
 
   describe('text', () => {

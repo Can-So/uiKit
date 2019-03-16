@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEvent } from '@findable/analytics-next-types';
 export declare type ButtonAppearances = 'default' | 'danger' | 'link' | 'primary' | 'subtle' | 'subtle-link' | 'warning' | 'help';
 export declare type ButtonProps = {
     /** The base styling to apply to the button. */

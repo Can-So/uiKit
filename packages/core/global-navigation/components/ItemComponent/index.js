@@ -8,9 +8,9 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { DropdownMenuStateless } from '@atlaskit/dropdown-menu';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
-import { GlobalItem } from '@atlaskit/navigation-next';
+import { DropdownMenuStateless } from '@findable/dropdown-menu';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
+import { GlobalItem } from '@findable/navigation-next';
 
 var DropdownItem =
 /*#__PURE__*/

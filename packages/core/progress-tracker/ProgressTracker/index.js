@@ -7,7 +7,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
-import { Grid } from '@atlaskit/page';
+import { Grid } from '@findable/page';
 import { ThemeProvider } from 'styled-components';
 import ProgressTrackerStage from '../ProgressTrackerStage';
 import { ProgressTrackerContainer } from './styled';

@@ -1,4 +1,4 @@
-import { Vector2 } from '@atlaskit/media-ui';
+import { Vector2 } from '@findable/media-ui';
 import { CONTAINER_SIZE, CONTAINER_INNER_SIZE, CONTAINER_PADDING, } from './image-navigator';
 export function constrainPos(_a, _b) {
     var x = _a.x, y = _a.y;

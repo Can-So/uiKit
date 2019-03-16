@@ -1,11 +1,11 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { injectIntl } from 'react-intl';
 import { findParentDomRefOfType } from 'prosemirror-utils';
-import { Popup } from '@atlaskit/editor-common';
-import CollapseIcon from '@atlaskit/icon/glyph/editor/collapse';
-import ExpandIcon from '@atlaskit/icon/glyph/editor/expand';
+import { Popup } from '@findable/editor-common';
+import CollapseIcon from '@findable/icon/glyph/editor/collapse';
+import ExpandIcon from '@findable/icon/glyph/editor/expand';
 import ToolbarButton from '../../../ui/ToolbarButton';
 import styled from 'styled-components';
 import { getBreakoutMode } from '../utils/get-breakout-mode';

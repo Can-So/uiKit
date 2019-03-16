@@ -8,9 +8,9 @@ import {
   taskItem,
   decisionList,
   decisionItem,
-} from '@atlaskit/editor-test-helpers';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import { uuid } from '@atlaskit/adf-schema';
+} from '@findable/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
+import { uuid } from '@findable/adf-schema';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 import quickInsertPlugin from '../../../../plugins/quick-insert';
 

@@ -1,4 +1,4 @@
-import { Color as StatusColor } from '@atlaskit/status';
+import { Color as StatusColor } from '@findable/status';
 
 export default interface NativeToWebBridge {
   onBoldClicked(): void;

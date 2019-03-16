@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import FieldBase, { Label } from '@atlaskit/field-base';
-import Droplist, { Group, Item } from '@atlaskit/droplist';
-import UpIcon from '@atlaskit/icon/glyph/arrow-up';
-import Spinner from '@atlaskit/spinner';
+import FieldBase, { Label } from '@findable/field-base';
+import Droplist, { Group, Item } from '@findable/droplist';
+import UpIcon from '@findable/icon/glyph/arrow-up';
+import Spinner from '@findable/spinner';
 
 import { StatelessSelect } from '../..';
 import InitialLoadingElement from '../../styled/InitialLoading';

@@ -4,7 +4,7 @@ import {
   ImageResizeMode,
   MediaItemType,
   FileDetails,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import {
   wideTransparentImage,
   tallImage,
@@ -14,13 +14,13 @@ import {
   audioFileDetails,
   docFileDetails,
   unknownFileDetails,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import {
   StoryList,
   genericFileDetails,
   imageFileDetails,
   wideImage,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { CardView, CardAppearance, CardDimensions } from '../src';
 import {
   actions,

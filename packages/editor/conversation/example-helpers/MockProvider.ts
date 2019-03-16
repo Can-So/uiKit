@@ -1,7 +1,7 @@
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { MemoryReactionsStore } from '@atlaskit/reactions';
-import { MockReactionsClient } from '@atlaskit/reactions/src/client/MockReactionsClient';
-import { emoji, mention } from '@atlaskit/util-data-test';
+import { ProviderFactory } from '@findable/editor-common';
+import { MemoryReactionsStore } from '@findable/reactions';
+import { MockReactionsClient } from '@findable/reactions/src/client/MockReactionsClient';
+import { emoji, mention } from '@findable/util-data-test';
 import {
   AbstractConversationResource,
   ConversationResourceConfig,

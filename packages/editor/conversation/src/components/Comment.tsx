@@ -1,12 +1,12 @@
-import AkAvatar from '@atlaskit/avatar';
+import AkAvatar from '@findable/avatar';
 import AkComment, {
   CommentAction,
   CommentAuthor,
   CommentTime,
-} from '@atlaskit/comment';
-import { WithProviders } from '@atlaskit/editor-common';
-import { ConnectedReactionsView } from '@atlaskit/reactions';
-import { ReactRenderer } from '@atlaskit/renderer';
+} from '@findable/comment';
+import { WithProviders } from '@findable/editor-common';
+import { ConnectedReactionsView } from '@findable/reactions';
+import { ReactRenderer } from '@findable/renderer';
 import * as distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import * as React from 'react';
 import styled from 'styled-components';

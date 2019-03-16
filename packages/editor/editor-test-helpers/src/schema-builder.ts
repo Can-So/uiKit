@@ -11,7 +11,7 @@ import {
   BreakoutMarkAttrs,
   AlignmentAttributes,
   IndentationMarkAttributes,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import {
   Fragment,
   MarkType,

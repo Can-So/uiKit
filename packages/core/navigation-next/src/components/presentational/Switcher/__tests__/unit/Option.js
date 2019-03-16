@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { components } from '@atlaskit/select';
-import Avatar from '@atlaskit/avatar';
+import { components } from '@findable/select';
+import Avatar from '@findable/avatar';
 import Option from '../../Option';
 
 describe('Option', () => {

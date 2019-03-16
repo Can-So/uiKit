@@ -1,3 +1,3 @@
-import { EventDispatcher } from '@atlaskit/editor-core';
+import { EventDispatcher } from '@findable/editor-core';
 
 export const eventDispatcher = new EventDispatcher();

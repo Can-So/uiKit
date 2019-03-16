@@ -4,7 +4,7 @@ import {
   akEditorTableNumberColumnWidth,
   akEditorDefaultLayoutWidth,
   akEditorTableLegacyCellMinWidth as tableCellMinWidth,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import Table from '../../../../react/nodes/table';
 import TableCell from '../../../../react/nodes/tableCell';
 import TableHeader from '../../../../react/nodes/tableHeader';

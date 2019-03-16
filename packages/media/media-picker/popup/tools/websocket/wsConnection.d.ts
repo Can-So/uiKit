@@ -1,4 +1,4 @@
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 import { ConnectionLostHandler, WebsocketDataReceivedHandler } from './ws';
 export declare class WsConnection {
     private readonly auth;

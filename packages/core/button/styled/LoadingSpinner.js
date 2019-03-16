@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 var LoadingDiv = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n"], ["\n  display: flex;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n"])));
 var LoadingSpinner = /** @class */ (function (_super) {
     tslib_1.__extends(LoadingSpinner, _super);

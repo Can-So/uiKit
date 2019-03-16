@@ -1,441 +1,441 @@
-# @atlaskit/mention
+# @findable/mention
 
 ## 17.1.0
-- [minor] [b684722884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b684722884):
+- [minor] [b684722884](https://github.com/fnamazing/uiKit/commits/b684722884):
 
   - improvement of SSR tests and examples for Fabric Elements
 
 ## 17.0.0
-- [major] [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
+- [major] [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
 
   - Dropped ES5 distributables from the typescript packages
 
 ## 16.4.0
-- [minor] [fb679d390f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb679d390f):
+- [minor] [fb679d390f](https://github.com/fnamazing/uiKit/commits/fb679d390f):
 
-  - Add a new TeamMenioResource for @atlaskit/mention package. That allows to fetch teams data for mention from a team service (Legion service)
+  - Add a new TeamMenioResource for @findable/mention package. That allows to fetch teams data for mention from a team service (Legion service)
 
 ## 16.3.0
-- [minor] [7261577953](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7261577953):
+- [minor] [7261577953](https://github.com/fnamazing/uiKit/commits/7261577953):
 
-  - use @atlaskit/ssr to ssr/hydrate mention examples
+  - use @findable/ssr to ssr/hydrate mention examples
 
 ## 16.2.2
-- Updated dependencies [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
-  - @atlaskit/icon@16.0.4
-  - @atlaskit/analytics-gas-types@3.2.5
-  - @atlaskit/util-data-test@10.2.3
-  - @atlaskit/util-service-support@3.1.1
-  - @atlaskit/docs@7.0.0
-  - @atlaskit/analytics-next@4.0.0
-  - @atlaskit/analytics@5.0.0
-  - @atlaskit/avatar@15.0.0
-  - @atlaskit/lozenge@7.0.0
-  - @atlaskit/theme@8.0.0
-  - @atlaskit/tooltip@13.0.0
+- Updated dependencies [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
+  - @findable/icon@16.0.4
+  - @findable/analytics-gas-types@3.2.5
+  - @findable/util-data-test@10.2.3
+  - @findable/util-service-support@3.1.1
+  - @findable/docs@7.0.0
+  - @findable/analytics-next@4.0.0
+  - @findable/analytics@5.0.0
+  - @findable/avatar@15.0.0
+  - @findable/lozenge@7.0.0
+  - @findable/theme@8.0.0
+  - @findable/tooltip@13.0.0
 
 ## 16.2.1
-- Updated dependencies [4af5bd2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4af5bd2a58):
-  - @atlaskit/editor-test-helpers@7.0.0
+- Updated dependencies [4af5bd2a58](https://github.com/fnamazing/uiKit/commits/4af5bd2a58):
+  - @findable/editor-test-helpers@7.0.0
 
 ## 16.2.0
-- [minor] [ef368572dc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef368572dc):
+- [minor] [ef368572dc](https://github.com/fnamazing/uiKit/commits/ef368572dc):
 
-  - Update types for @atlaskit/mention
+  - Update types for @findable/mention
 
 ## 16.1.0
-- [minor] [0f3f9f0992](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f3f9f0992):
+- [minor] [0f3f9f0992](https://github.com/fnamazing/uiKit/commits/0f3f9f0992):
 
   - Fix context identifiers not being passed to mention provider's calls. MentionProvider interface was updated to include the optional contextIdentifier parameter in filter and recordMentionSelection methods.
 
 ## 16.0.1
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/avatar@14.1.8
-  - @atlaskit/tooltip@12.1.15
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/avatar@14.1.8
+  - @findable/tooltip@12.1.15
+  - @findable/icon@16.0.0
 
 ## 16.0.0
-- [major] [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+- [major] [0c116d6](https://github.com/fnamazing/uiKit/commits/0c116d6):
 
   - Removed client-side indexed cache of mention results. Also removed method 'getUsersInContext' from MentionResourceConfig, 'remoteSearch' from MentionStats and 'weight' from MentionDescription. If you used to use them, simply remove any references to them.
 
 ## 15.3.0
-- [minor] [c238c00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c238c00):
+- [minor] [c238c00](https://github.com/fnamazing/uiKit/commits/c238c00):
 
   - added i18n support to mentions
-- [minor] [3b1de17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b1de17):
+- [minor] [3b1de17](https://github.com/fnamazing/uiKit/commits/3b1de17):
 
   - added i18n translated files
 
 ## 15.2.2
-- [patch] [0f19693](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f19693):
+- [patch] [0f19693](https://github.com/fnamazing/uiKit/commits/0f19693):
 
   - added tests for xregexp transformer, updated README and simplified code
-- [patch] [b789b3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b789b3a):
+- [patch] [b789b3a](https://github.com/fnamazing/uiKit/commits/b789b3a):
 
   - removed xregexp library dependency from emoji and mention components, added xregexp-transformer package to compile xregexp expressions to unicode charsets
 
 ## 15.2.1
-- [patch] [cae5adb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cae5adb):
+- [patch] [cae5adb](https://github.com/fnamazing/uiKit/commits/cae5adb):
 
   - UR-197: Add queryLength to mentionTypeahead rendered event
 
 ## 15.2.0
-- [minor] [f62557c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f62557c):
+- [minor] [f62557c](https://github.com/fnamazing/uiKit/commits/f62557c):
 
   - ED-5888 Add dark mode for mention
 
 ## 15.1.9
-- [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
+- [patch] [b81da9b](https://github.com/fnamazing/uiKit/commits/b81da9b):
 
   - Fix typescript types to support strictFunctionTypes
 
 ## 15.1.8
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/analytics@4.0.7
-  - @atlaskit/analytics-next@3.1.2
-  - @atlaskit/avatar@14.1.7
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/lozenge@6.2.4
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/tooltip@12.1.13
-  - @atlaskit/analytics-gas-types@3.2.3
-  - @atlaskit/util-data-test@10.0.25
-  - @atlaskit/util-service-support@3.0.5
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/analytics@4.0.7
+  - @findable/analytics-next@3.1.2
+  - @findable/avatar@14.1.7
+  - @findable/icon@15.0.2
+  - @findable/lozenge@6.2.4
+  - @findable/theme@7.0.1
+  - @findable/tooltip@12.1.13
+  - @findable/analytics-gas-types@3.2.3
+  - @findable/util-data-test@10.0.25
+  - @findable/util-service-support@3.0.5
+  - @findable/docs@6.0.0
 
 ## 15.1.7
-- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
-  - @atlaskit/docs@5.2.3
-  - @atlaskit/icon@15.0.1
-  - @atlaskit/tooltip@12.1.12
-  - @atlaskit/theme@7.0.0
-  - @atlaskit/avatar@14.1.6
-  - @atlaskit/lozenge@6.2.3
+- Updated dependencies [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
+  - @findable/docs@5.2.3
+  - @findable/icon@15.0.1
+  - @findable/tooltip@12.1.12
+  - @findable/theme@7.0.0
+  - @findable/avatar@14.1.6
+  - @findable/lozenge@6.2.3
 
 ## 15.1.6
-- [patch] [90c4702](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90c4702):
+- [patch] [90c4702](https://github.com/fnamazing/uiKit/commits/90c4702):
 
   - FS-1734 Removed the try it out section from Emoji and Mentions documentation pages to match other pages. The section only contained a link to the same page, so was essentially redundant and potentially confusing.
 
 ## 15.1.5
-- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+- [patch] [3061b52](https://github.com/fnamazing/uiKit/commits/3061b52):
 
   - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
 
 ## 15.1.4
-- [patch] [01edbde](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01edbde):
+- [patch] [01edbde](https://github.com/fnamazing/uiKit/commits/01edbde):
 
   - Force patch release
 
 ## 15.1.3
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/avatar@14.1.5
-  - @atlaskit/tooltip@12.1.11
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/avatar@14.1.5
+  - @findable/tooltip@12.1.11
+  - @findable/icon@15.0.0
 
 ## 15.1.2
-- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+- [patch] [36c362f](https://github.com/fnamazing/uiKit/commits/36c362f):
 
   - FS-3174 - Fix usage of gridSize() and borderRadius()
 
 ## 15.1.1
-- [patch] [527b954](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/527b954):
+- [patch] [527b954](https://github.com/fnamazing/uiKit/commits/527b954):
 
   - FS-3174 - Remove usage of util-shared-styles from elements components
 
 ## 15.1.0
-- [minor] Use relative units for font size and paddings in Mention component [b711063](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b711063)
+- [minor] Use relative units for font size and paddings in Mention component [b711063](https://github.com/fnamazing/uiKit/commits/b711063)
 
 ## 15.0.11
-- [patch] Analytics event's 'source' field from GasPayload type is now optional. In most cases, the 'source' field is expected to be set by the integrator through AnalyticsContext. Thus it's recommended that components do not set it to avoid overriding the one provided by the integrating product. Analytics listeners are handling the case where the 'source' field couldn't be found by setting the default value "unknown" before sending the event through the client. [1c0ea95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c0ea95)
+- [patch] Analytics event's 'source' field from GasPayload type is now optional. In most cases, the 'source' field is expected to be set by the integrator through AnalyticsContext. Thus it's recommended that components do not set it to avoid overriding the one provided by the integrating product. Analytics listeners are handling the case where the 'source' field couldn't be found by setting the default value "unknown" before sending the event through the client. [1c0ea95](https://github.com/fnamazing/uiKit/commits/1c0ea95)
 
 ## 15.0.10
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/avatar@14.0.11
-  - @atlaskit/tooltip@12.1.1
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/avatar@14.0.11
+  - @findable/tooltip@12.1.1
+  - @findable/icon@14.0.0
 
 ## 15.0.9
-- [patch] Update TS to 3.0 [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
-- [none] Updated dependencies [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+- [patch] Update TS to 3.0 [f68d367](https://github.com/fnamazing/uiKit/commits/f68d367)
+- [none] Updated dependencies [f68d367](https://github.com/fnamazing/uiKit/commits/f68d367)
 
 ## 15.0.8
-- [patch] FS-2941 Stop using Request object and upgrade fetch-mock [dff332a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dff332a)
+- [patch] FS-2941 Stop using Request object and upgrade fetch-mock [dff332a](https://github.com/fnamazing/uiKit/commits/dff332a)
 
 ## 15.0.7
-- [patch] propagate sessionId to the mentionTypeahead rendered event and service endpoints [0c37666](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c37666)
+- [patch] propagate sessionId to the mentionTypeahead rendered event and service endpoints [0c37666](https://github.com/fnamazing/uiKit/commits/0c37666)
 
 ## 15.0.6
-- [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
-  - @atlaskit/util-data-test@10.0.7
+- [patch] Updated dependencies [b12f7e6](https://github.com/fnamazing/uiKit/commits/b12f7e6)
+  - @findable/util-data-test@10.0.7
 
 ## 15.0.5
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/util-data-test@10.0.4
-  - @atlaskit/analytics-next-types@3.0.1
-  - @atlaskit/tooltip@12.0.5
-  - @atlaskit/analytics-next@3.0.4
-  - @atlaskit/lozenge@6.1.4
-  - @atlaskit/analytics@4.0.4
-  - @atlaskit/icon@13.2.4
-  - @atlaskit/avatar@14.0.6
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/util-data-test@10.0.4
+  - @findable/analytics-next-types@3.0.1
+  - @findable/tooltip@12.0.5
+  - @findable/analytics-next@3.0.4
+  - @findable/lozenge@6.1.4
+  - @findable/analytics@4.0.4
+  - @findable/icon@13.2.4
+  - @findable/avatar@14.0.6
 
 ## 15.0.4
-- [patch] FS-2049 add userIds attribute to rendered event [a5d05bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5d05bc)
-- [none] Updated dependencies [a5d05bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5d05bc)
+- [patch] FS-2049 add userIds attribute to rendered event [a5d05bc](https://github.com/fnamazing/uiKit/commits/a5d05bc)
+- [none] Updated dependencies [a5d05bc](https://github.com/fnamazing/uiKit/commits/a5d05bc)
 
 ## 15.0.3
-- [patch] fixed TS errors [8eced90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8eced90)
-- [patch] fixed broken tests and added test for util/analytics [57b9d1e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/57b9d1e)
-- [patch] code improvements and tests added [0bc5732](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0bc5732)
-- [patch] added mentionTypeAhead rendered analytics [c536e60](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c536e60)
-- [none] Updated dependencies [8eced90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8eced90)
-- [none] Updated dependencies [57b9d1e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/57b9d1e)
-- [none] Updated dependencies [0bc5732](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0bc5732)
-- [none] Updated dependencies [c536e60](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c536e60)
+- [patch] fixed TS errors [8eced90](https://github.com/fnamazing/uiKit/commits/8eced90)
+- [patch] fixed broken tests and added test for util/analytics [57b9d1e](https://github.com/fnamazing/uiKit/commits/57b9d1e)
+- [patch] code improvements and tests added [0bc5732](https://github.com/fnamazing/uiKit/commits/0bc5732)
+- [patch] added mentionTypeAhead rendered analytics [c536e60](https://github.com/fnamazing/uiKit/commits/c536e60)
+- [none] Updated dependencies [8eced90](https://github.com/fnamazing/uiKit/commits/8eced90)
+- [none] Updated dependencies [57b9d1e](https://github.com/fnamazing/uiKit/commits/57b9d1e)
+- [none] Updated dependencies [0bc5732](https://github.com/fnamazing/uiKit/commits/0bc5732)
+- [none] Updated dependencies [c536e60](https://github.com/fnamazing/uiKit/commits/c536e60)
 
 ## 15.0.2
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/util-data-test@10.0.2
-  - @atlaskit/tooltip@12.0.4
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/lozenge@6.1.3
-  - @atlaskit/analytics-next@3.0.3
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/util-service-support@3.0.1
-  - @atlaskit/analytics-gas-types@3.1.2
-  - @atlaskit/analytics@4.0.3
-  - @atlaskit/avatar@14.0.5
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/util-data-test@10.0.2
+  - @findable/tooltip@12.0.4
+  - @findable/icon@13.2.2
+  - @findable/lozenge@6.1.3
+  - @findable/analytics-next@3.0.3
+  - @findable/docs@5.0.2
+  - @findable/util-service-support@3.0.1
+  - @findable/analytics-gas-types@3.1.2
+  - @findable/analytics@4.0.3
+  - @findable/avatar@14.0.5
 
 ## 15.0.1
-- [patch] FS-2020 add session id to typeahead plugin inside editor [5ae463f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae463f)
-- [none] Updated dependencies [5ae463f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae463f)
-  - @atlaskit/analytics-gas-types@3.1.1
+- [patch] FS-2020 add session id to typeahead plugin inside editor [5ae463f](https://github.com/fnamazing/uiKit/commits/5ae463f)
+- [none] Updated dependencies [5ae463f](https://github.com/fnamazing/uiKit/commits/5ae463f)
+  - @findable/analytics-gas-types@3.1.1
 
 ## 15.0.0
-- [major] ED-4769: wrap mentions like inline text [f6bf6c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6bf6c8)
-- [none] Updated dependencies [f6bf6c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6bf6c8)
-  - @atlaskit/util-data-test@10.0.1
+- [major] ED-4769: wrap mentions like inline text [f6bf6c8](https://github.com/fnamazing/uiKit/commits/f6bf6c8)
+- [none] Updated dependencies [f6bf6c8](https://github.com/fnamazing/uiKit/commits/f6bf6c8)
+  - @findable/util-data-test@10.0.1
 
 ## 14.0.2
-- [patch] Fallback to use containerId from MentionResourceConfig if ContextIdentifier promise fails [5ecb9a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ecb9a7)
-- [patch] add support for childObjectId in ContextIdentifiers and pass it to the mention service endpoints [6e31eb6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e31eb6)
-- [none] Updated dependencies [5ecb9a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ecb9a7)
-- [none] Updated dependencies [6e31eb6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e31eb6)
+- [patch] Fallback to use containerId from MentionResourceConfig if ContextIdentifier promise fails [5ecb9a7](https://github.com/fnamazing/uiKit/commits/5ecb9a7)
+- [patch] add support for childObjectId in ContextIdentifiers and pass it to the mention service endpoints [6e31eb6](https://github.com/fnamazing/uiKit/commits/6e31eb6)
+- [none] Updated dependencies [5ecb9a7](https://github.com/fnamazing/uiKit/commits/5ecb9a7)
+- [none] Updated dependencies [6e31eb6](https://github.com/fnamazing/uiKit/commits/6e31eb6)
 
 ## 14.0.1
-- [patch] Updated dependencies [e6b1985](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6b1985)
-  - @atlaskit/tooltip@12.0.0
-  - @atlaskit/icon@13.1.1
-  - @atlaskit/avatar@14.0.1
+- [patch] Updated dependencies [e6b1985](https://github.com/fnamazing/uiKit/commits/e6b1985)
+  - @findable/tooltip@12.0.0
+  - @findable/icon@13.1.1
+  - @findable/avatar@14.0.1
 
 ## 14.0.0
 
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/lozenge@6.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/util-service-support@3.0.0
-  - @atlaskit/analytics-gas-types@3.0.0
-  - @atlaskit/analytics@4.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/avatar@14.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/util-data-test@10.0.0
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/lozenge@6.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/util-service-support@3.0.0
-  - @atlaskit/analytics-gas-types@3.0.0
-  - @atlaskit/analytics@4.0.0
-  - @atlaskit/icon@13.0.0
-  - @atlaskit/avatar@14.0.0
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/tooltip@11.0.0
+  - @findable/util-data-test@10.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/lozenge@6.0.0
+  - @findable/docs@5.0.0
+  - @findable/util-service-support@3.0.0
+  - @findable/analytics-gas-types@3.0.0
+  - @findable/analytics@4.0.0
+  - @findable/icon@13.0.0
+  - @findable/avatar@14.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/util-data-test@10.0.0
+  - @findable/tooltip@11.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/lozenge@6.0.0
+  - @findable/docs@5.0.0
+  - @findable/util-service-support@3.0.0
+  - @findable/analytics-gas-types@3.0.0
+  - @findable/analytics@4.0.0
+  - @findable/icon@13.0.0
+  - @findable/avatar@14.0.0
 
 ## 13.1.10
-- [patch] fixed typescript build errors [c98857e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c98857e)
-- [patch] code improvements and MentionContextIdentifier attributes made mandatory to sync with editor-common ContextIdentifier [8a125a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a125a7)
-- [patch] include containerId and objectId passed from editor-core into mention service requests [cacfb53](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cacfb53)
-- [patch] Updated dependencies [c98857e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c98857e)
-  - @atlaskit/util-data-test@9.1.19
-- [patch] Updated dependencies [8a125a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a125a7)
-  - @atlaskit/util-data-test@9.1.19
-- [patch] Updated dependencies [cacfb53](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cacfb53)
-  - @atlaskit/util-data-test@9.1.19
+- [patch] fixed typescript build errors [c98857e](https://github.com/fnamazing/uiKit/commits/c98857e)
+- [patch] code improvements and MentionContextIdentifier attributes made mandatory to sync with editor-common ContextIdentifier [8a125a7](https://github.com/fnamazing/uiKit/commits/8a125a7)
+- [patch] include containerId and objectId passed from editor-core into mention service requests [cacfb53](https://github.com/fnamazing/uiKit/commits/cacfb53)
+- [patch] Updated dependencies [c98857e](https://github.com/fnamazing/uiKit/commits/c98857e)
+  - @findable/util-data-test@9.1.19
+- [patch] Updated dependencies [8a125a7](https://github.com/fnamazing/uiKit/commits/8a125a7)
+  - @findable/util-data-test@9.1.19
+- [patch] Updated dependencies [cacfb53](https://github.com/fnamazing/uiKit/commits/cacfb53)
+  - @findable/util-data-test@9.1.19
 
 ## 13.1.9
-- [patch] Move the tests under src and club the tests under unit, integration and visual regression [f1a9069](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1a9069)
-- [none] Updated dependencies [f1a9069](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1a9069)
-  - @atlaskit/util-service-support@2.0.12
-  - @atlaskit/util-data-test@9.1.18
-  - @atlaskit/analytics-gas-types@2.1.4
+- [patch] Move the tests under src and club the tests under unit, integration and visual regression [f1a9069](https://github.com/fnamazing/uiKit/commits/f1a9069)
+- [none] Updated dependencies [f1a9069](https://github.com/fnamazing/uiKit/commits/f1a9069)
+  - @findable/util-service-support@2.0.12
+  - @findable/util-data-test@9.1.18
+  - @findable/analytics-gas-types@2.1.4
 
 ## 13.1.8
-- [patch] FS-2093 add mention insert analytics event [30bbe5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/30bbe5a)
-- [none] Updated dependencies [30bbe5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/30bbe5a)
+- [patch] FS-2093 add mention insert analytics event [30bbe5a](https://github.com/fnamazing/uiKit/commits/30bbe5a)
+- [none] Updated dependencies [30bbe5a](https://github.com/fnamazing/uiKit/commits/30bbe5a)
 
 ## 13.1.7
 
 
-- [none] Updated dependencies [da63331](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da63331)
-  - @atlaskit/avatar@13.0.0
-- [patch] Updated dependencies [7724115](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7724115)
-  - @atlaskit/avatar@13.0.0
+- [none] Updated dependencies [da63331](https://github.com/fnamazing/uiKit/commits/da63331)
+  - @findable/avatar@13.0.0
+- [patch] Updated dependencies [7724115](https://github.com/fnamazing/uiKit/commits/7724115)
+  - @findable/avatar@13.0.0
 
 ## 13.1.6
-- [patch] FS-2092  add mention typeahead cancel analytics event [40bd3fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/40bd3fb)
-- [none] Updated dependencies [40bd3fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/40bd3fb)
+- [patch] FS-2092  add mention typeahead cancel analytics event [40bd3fb](https://github.com/fnamazing/uiKit/commits/40bd3fb)
+- [none] Updated dependencies [40bd3fb](https://github.com/fnamazing/uiKit/commits/40bd3fb)
 
 ## 13.1.5
-- [patch] Updated dependencies [8a01bcd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a01bcd)
-  - @atlaskit/avatar@12.0.0
+- [patch] Updated dependencies [8a01bcd](https://github.com/fnamazing/uiKit/commits/8a01bcd)
+  - @findable/avatar@12.0.0
 
 ## 13.1.4
-- [patch] added mention userId in the Mention lozenge analytics [d7dca64](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7dca64)
-- [patch] Updated dependencies [d7dca64](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7dca64)
-  - @atlaskit/util-data-test@9.1.16
+- [patch] added mention userId in the Mention lozenge analytics [d7dca64](https://github.com/fnamazing/uiKit/commits/d7dca64)
+- [patch] Updated dependencies [d7dca64](https://github.com/fnamazing/uiKit/commits/d7dca64)
+  - @findable/util-data-test@9.1.16
 
 ## 13.1.3
-- [patch] Updated dependencies [8d5053e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d5053e)
-  - @atlaskit/util-data-test@9.1.15
+- [patch] Updated dependencies [8d5053e](https://github.com/fnamazing/uiKit/commits/8d5053e)
+  - @findable/util-data-test@9.1.15
 
 ## 13.1.2
-- [patch] Updated dependencies [0cf2f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0cf2f52)
-  - @atlaskit/util-data-test@9.1.14
+- [patch] Updated dependencies [0cf2f52](https://github.com/fnamazing/uiKit/commits/0cf2f52)
+  - @findable/util-data-test@9.1.14
 
 ## 13.1.1
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/util-data-test@9.1.13
-  - @atlaskit/tooltip@10.2.1
-  - @atlaskit/lozenge@5.0.4
-  - @atlaskit/icon@12.1.2
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/util-data-test@9.1.13
+  - @findable/tooltip@10.2.1
+  - @findable/lozenge@5.0.4
+  - @findable/icon@12.1.2
 
 ## 13.1.0
-- [none] Updated dependencies [7217164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7217164)
-  - @atlaskit/util-data-test@9.1.11
+- [none] Updated dependencies [7217164](https://github.com/fnamazing/uiKit/commits/7217164)
+  - @findable/util-data-test@9.1.11
 
 ## 13.0.0
-- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/util-data-test@9.1.10
-  - @atlaskit/tooltip@10.0.0
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/analytics-next@2.1.4
-  - @atlaskit/lozenge@5.0.0
-  - @atlaskit/docs@4.0.0
-  - @atlaskit/util-service-support@2.0.8
-  - @atlaskit/analytics-gas-types@2.1.1
-  - @atlaskit/analytics@3.0.2
-  - @atlaskit/avatar@11.0.0
+- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/util-data-test@9.1.10
+  - @findable/tooltip@10.0.0
+  - @findable/icon@12.0.0
+  - @findable/analytics-next@2.1.4
+  - @findable/lozenge@5.0.0
+  - @findable/docs@4.0.0
+  - @findable/util-service-support@2.0.8
+  - @findable/analytics-gas-types@2.1.1
+  - @findable/analytics@3.0.2
+  - @findable/avatar@11.0.0
 
 ## 12.0.3
-- [patch] Updated dependencies [1c87e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c87e5a)
-  - @atlaskit/util-data-test@9.1.9
+- [patch] Updated dependencies [1c87e5a](https://github.com/fnamazing/uiKit/commits/1c87e5a)
+  - @findable/util-data-test@9.1.9
 
 ## 12.0.2
-- [patch] Moved event tag to FabricElementsListener [639ae5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/639ae5e)
-- [patch] Updated dependencies [639ae5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/639ae5e)
-  - @atlaskit/util-data-test@9.1.7
+- [patch] Moved event tag to FabricElementsListener [639ae5e](https://github.com/fnamazing/uiKit/commits/639ae5e)
+- [patch] Updated dependencies [639ae5e](https://github.com/fnamazing/uiKit/commits/639ae5e)
+  - @findable/util-data-test@9.1.7
 
 ## 12.0.1
-- [patch]  [f87724e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f87724e)
-- [none] Updated dependencies [f87724e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f87724e)
+- [patch]  [f87724e](https://github.com/fnamazing/uiKit/commits/f87724e)
+- [none] Updated dependencies [f87724e](https://github.com/fnamazing/uiKit/commits/f87724e)
 
 ## 12.0.0
-- [patch] code improvements [ba702bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ba702bc)
-- [major] fixed/added tests for analytics-next and code improvements [db1bafa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/db1bafa)
-- [patch] upgrade to analytics-next and GAS V3 [f150242](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f150242)
-- [patch] Updated dependencies [ba702bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ba702bc)
-  - @atlaskit/util-data-test@9.1.6
-- [major] Updated dependencies [db1bafa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/db1bafa)
-  - @atlaskit/util-data-test@9.1.6
-- [patch] Updated dependencies [f150242](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f150242)
-  - @atlaskit/util-data-test@9.1.6
+- [patch] code improvements [ba702bc](https://github.com/fnamazing/uiKit/commits/ba702bc)
+- [major] fixed/added tests for analytics-next and code improvements [db1bafa](https://github.com/fnamazing/uiKit/commits/db1bafa)
+- [patch] upgrade to analytics-next and GAS V3 [f150242](https://github.com/fnamazing/uiKit/commits/f150242)
+- [patch] Updated dependencies [ba702bc](https://github.com/fnamazing/uiKit/commits/ba702bc)
+  - @findable/util-data-test@9.1.6
+- [major] Updated dependencies [db1bafa](https://github.com/fnamazing/uiKit/commits/db1bafa)
+  - @findable/util-data-test@9.1.6
+- [patch] Updated dependencies [f150242](https://github.com/fnamazing/uiKit/commits/f150242)
+  - @findable/util-data-test@9.1.6
 
 ## 11.1.5
-- [patch] revert ED-2551 wrong cursor on special mentions [1cf64a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1cf64a6)
-- [none] Updated dependencies [1cf64a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1cf64a6)
+- [patch] revert ED-2551 wrong cursor on special mentions [1cf64a6](https://github.com/fnamazing/uiKit/commits/1cf64a6)
+- [none] Updated dependencies [1cf64a6](https://github.com/fnamazing/uiKit/commits/1cf64a6)
 
 ## 11.1.4
-- [none] Updated dependencies [8fd4dd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fd4dd1)
-  - @atlaskit/util-data-test@9.1.3
-- [none] Updated dependencies [74f84c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74f84c6)
-  - @atlaskit/util-data-test@9.1.3
-- [none] Updated dependencies [92cdf83](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92cdf83)
-  - @atlaskit/util-data-test@9.1.3
-- [none] Updated dependencies [4151cc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4151cc5)
-  - @atlaskit/util-data-test@9.1.3
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/util-data-test@9.1.3
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/tooltip@9.2.1
-  - @atlaskit/avatar@10.0.6
-  - @atlaskit/docs@3.0.4
-  - @atlaskit/util-service-support@2.0.7
-  - @atlaskit/lozenge@4.0.1
-  - @atlaskit/analytics@3.0.1
-- [patch] Updated dependencies [89146bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89146bf)
-  - @atlaskit/util-data-test@9.1.3
+- [none] Updated dependencies [8fd4dd1](https://github.com/fnamazing/uiKit/commits/8fd4dd1)
+  - @findable/util-data-test@9.1.3
+- [none] Updated dependencies [74f84c6](https://github.com/fnamazing/uiKit/commits/74f84c6)
+  - @findable/util-data-test@9.1.3
+- [none] Updated dependencies [92cdf83](https://github.com/fnamazing/uiKit/commits/92cdf83)
+  - @findable/util-data-test@9.1.3
+- [none] Updated dependencies [4151cc5](https://github.com/fnamazing/uiKit/commits/4151cc5)
+  - @findable/util-data-test@9.1.3
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/util-data-test@9.1.3
+  - @findable/icon@11.3.0
+  - @findable/tooltip@9.2.1
+  - @findable/avatar@10.0.6
+  - @findable/docs@3.0.4
+  - @findable/util-service-support@2.0.7
+  - @findable/lozenge@4.0.1
+  - @findable/analytics@3.0.1
+- [patch] Updated dependencies [89146bf](https://github.com/fnamazing/uiKit/commits/89146bf)
+  - @findable/util-data-test@9.1.3
 
 ## 11.1.3
-- [patch] ED-2551 use default cursor on mention if no onClick is provided [e9cc83c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9cc83c)
-- [patch] Updated dependencies [e9cc83c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9cc83c)
+- [patch] ED-2551 use default cursor on mention if no onClick is provided [e9cc83c](https://github.com/fnamazing/uiKit/commits/e9cc83c)
+- [patch] Updated dependencies [e9cc83c](https://github.com/fnamazing/uiKit/commits/e9cc83c)
 
 ## 11.1.2
-- [patch] Align font sizes for inline code, mentions and dates [d2ef1af](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d2ef1af)
-- [none] Updated dependencies [d2ef1af](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d2ef1af)
+- [patch] Align font sizes for inline code, mentions and dates [d2ef1af](https://github.com/fnamazing/uiKit/commits/d2ef1af)
+- [none] Updated dependencies [d2ef1af](https://github.com/fnamazing/uiKit/commits/d2ef1af)
 
 ## 11.1.0
-- [minor] If a Mention item is a team then render a TEAM lozenge automatically [d4976d4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d4976d4)
+- [minor] If a Mention item is a team then render a TEAM lozenge automatically [d4976d4](https://github.com/fnamazing/uiKit/commits/d4976d4)
 
 ## 11.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 10.0.0
-- [major] FS-1697 move elements packages to use util-data-test for test data [deb820a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/deb820a)
+- [major] FS-1697 move elements packages to use util-data-test for test data [deb820a](https://github.com/fnamazing/uiKit/commits/deb820a)
 
 ## 9.2.3
-- [patch] Add "sideEffects: false" to AKM2 packages to allow consumer's to tree-shake [c3b018a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3b018a)
+- [patch] Add "sideEffects: false" to AKM2 packages to allow consumer's to tree-shake [c3b018a](https://github.com/fnamazing/uiKit/commits/c3b018a)
 
 ## 9.2.2
-- [patch] Update links in documentation [c4f7497](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4f7497)
+- [patch] Update links in documentation [c4f7497](https://github.com/fnamazing/uiKit/commits/c4f7497)
 
 ## 9.2.1
-- [patch] Fix for styled-components types to support v1.4.x [75a2375](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75a2375)
+- [patch] Fix for styled-components types to support v1.4.x [75a2375](https://github.com/fnamazing/uiKit/commits/75a2375)
 
 ## 9.2.0
-- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ceccf30)
+- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://github.com/fnamazing/uiKit/commits/ceccf30)
 
 ## 9.1.5
-- [patch] fix mention and emoji bug related to MutationObserver API [dd0a69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd0a69c)
+- [patch] fix mention and emoji bug related to MutationObserver API [dd0a69c](https://github.com/fnamazing/uiKit/commits/dd0a69c)
 
 ## 9.1.4
-- [patch] Disable browser's spell check in mention lozenge [c04bf36](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c04bf36)
+- [patch] Disable browser's spell check in mention lozenge [c04bf36](https://github.com/fnamazing/uiKit/commits/c04bf36)
 
 ## 9.1.3
-- [patch] FS-1091 remove direct dependency on url-search-params [e680d67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e680d67)
+- [patch] FS-1091 remove direct dependency on url-search-params [e680d67](https://github.com/fnamazing/uiKit/commits/e680d67)
 
 ## 9.1.2
-- [patch] FS-1699 Fix mention sorting [ff33bef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ff33bef)
+- [patch] FS-1699 Fix mention sorting [ff33bef](https://github.com/fnamazing/uiKit/commits/ff33bef)
 
 ## 9.1.1
-- [patch] fixed mention picker style typos [8bb40f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8bb40f0)
+- [patch] fixed mention picker style typos [8bb40f0](https://github.com/fnamazing/uiKit/commits/8bb40f0)
 
 ## 9.1.0
-- [minor] FS-1633 Change the way we use getUsersInContext [86b615c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86b615c)
+- [minor] FS-1633 Change the way we use getUsersInContext [86b615c](https://github.com/fnamazing/uiKit/commits/86b615c)
 
 ## 9.0.0
-- [patch] Added eslint-disable to example file [49491a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49491a9)
-- [major] Migrated mentions to new atlaskit-mk2 [dad3ccc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dad3ccc)
+- [patch] Added eslint-disable to example file [49491a9](https://github.com/fnamazing/uiKit/commits/49491a9)
+- [major] Migrated mentions to new atlaskit-mk2 [dad3ccc](https://github.com/fnamazing/uiKit/commits/dad3ccc)
 
 ## 8.5.1 (2018-01-09)
 * bug fix; removed chai and sinon from tests (issues closed: fs-1606) ([f3a65cd](https://bitbucket.org/atlassian/atlaskit/commits/f3a65cd))

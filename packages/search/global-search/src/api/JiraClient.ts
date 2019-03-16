@@ -2,7 +2,7 @@ import {
   RequestServiceOptions,
   utils,
   ServiceConfig,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 import {
   ResultType,
   AnalyticsType,

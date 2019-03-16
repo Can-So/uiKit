@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { css } from 'styled-components';
-import { fontSize, themed } from '@atlaskit/theme';
+import { fontSize, themed } from '@findable/theme';
 import { akEditorTableBorder, akEditorTableBorderDark, akEditorTableToolbar, akEditorTableToolbarDark, akEditorWideLayoutWidth, akEditorTableNumberColumnWidth, akEditorFullWidthLayoutWidth, akEditorBreakoutPadding, } from '../consts';
 import { PanelSharedCssClassName } from './panel';
 export var tableMarginTop = 24;

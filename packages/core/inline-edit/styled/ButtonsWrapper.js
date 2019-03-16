@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var ButtonsWrapper = styled.div.withConfig({
   displayName: "ButtonsWrapper",
   componentId: "sc-21r0m4-0"

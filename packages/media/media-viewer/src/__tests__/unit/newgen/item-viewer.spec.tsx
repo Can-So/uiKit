@@ -11,16 +11,16 @@ jest.mock('../../../newgen/viewers/image', () => mockImageViewer);
 import * as React from 'react';
 import { ReactWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
-import Spinner from '@atlaskit/spinner';
-import Button from '@atlaskit/button';
+import Spinner from '@findable/spinner';
+import Button from '@findable/button';
 import {
   Context,
   ProcessedFileState,
   Identifier,
   FileIdentifier,
   FileState,
-} from '@atlaskit/media-core';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+} from '@findable/media-core';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 import {
   ItemViewer,
   ItemViewerBase,

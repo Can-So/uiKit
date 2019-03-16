@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example } from '@atlaskit/docs';
+import { md, code, Example } from '@findable/docs';
 
 export default md`
   \`notification-log-client\` is a fetch client implementation for making API calls to notification-log service.
@@ -8,7 +8,7 @@ export default md`
 
   ## Usage
 
-  ${code`import { NotificationLogClient } from '@atlaskit/notification-log-client';
+  ${code`import { NotificationLogClient } from '@findable/notification-log-client';
 
   const notificationLogClient = new NotificationLogClient(
     'http://base-url-to-notification-log-service',

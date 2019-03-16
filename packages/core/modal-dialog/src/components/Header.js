@@ -1,7 +1,7 @@
 // @flow
 import React, { createElement, Component, type ElementType } from 'react';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
+import ErrorIcon from '@findable/icon/glyph/error';
+import WarningIcon from '@findable/icon/glyph/warning';
 
 import type { AppearanceType } from '../types';
 import {

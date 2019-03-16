@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { Example, md, Props, Prop } from '@atlaskit/docs';
+import { Example, md, Props, Prop } from '@findable/docs';
 
 import { Contents, ContentsProvider, H, Hr } from './shared';
 
@@ -19,7 +19,7 @@ Its text prop defaults to 'Back' and its before prop defaults to an ArrowLeftCir
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/BackItem').default}
         title="BackItem"
         source={require('!!raw-loader!./examples/ui-components/BackItem')}
@@ -47,7 +47,7 @@ The ContainerHeader is intended to be used in the container navigation layer for
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/ContainerHeader').default}
         title="ContainerHeader"
         source={require('!!raw-loader!./examples/ui-components/ContainerHeader')}
@@ -66,7 +66,7 @@ GlobalItems are rendered inside the global navigation layer.
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/GlobalItem').default}
         title="GlobalItem"
         source={require('!!raw-loader!./examples/ui-components/GlobalItem')}
@@ -84,7 +84,7 @@ ${<Hr />}
 
 ${<H>GlobalNav</H>}
 
-If you're building an Atlassian product you probably don't want to use this component directly. Please take a look at the [@atlaskit/global-navigation component](/packages/core/global-navigation) instead.
+If you're building an Atlassian product you probably don't want to use this component directly. Please take a look at the [@findable/global-navigation component](/packages/core/global-navigation) instead.
 
 The GlobalNav component is a primitive layout component which renders GlobalItems into one of two slots.
 
@@ -103,7 +103,7 @@ Renders a skeleton view to be used with the GlobalNavigation component.
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={
           require('./examples/ui-components/GlobalNavigationSkeleton').default
         }
@@ -128,7 +128,7 @@ transitioning from and to use the same [MenuSection](#menusection) component ins
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/GoToItem').default}
         title="GoToItem"
         source={require('!!raw-loader!./examples/ui-components/GoToItem')}
@@ -145,7 +145,7 @@ A section of the product or container navigation may contain multiple groups.
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/Group').default}
         title="Group"
         source={require('!!raw-loader!./examples/ui-components/Group')}
@@ -180,7 +180,7 @@ A section for the header of your nav view. Applies some minor styling to the sta
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/HeaderSection').default}
         title="Header Section"
         source={require('!!raw-loader!./examples/ui-components/HeaderSection')}
@@ -200,7 +200,7 @@ ${<H>Item</H>}
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/Item').default}
         title="Item"
         source={require('!!raw-loader!./examples/ui-components/Item')}
@@ -250,7 +250,7 @@ views as animation relies on the component remaining mounted for view transition
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/MenuSection').default}
         title="Menu Section"
         source={require('!!raw-loader!./examples/ui-components/MenuSection')}
@@ -277,7 +277,7 @@ specific to headers and nested menu sections.
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('../examples/30-section').default}
         title="Section"
         source={require('!!raw-loader!../examples/30-section')}
@@ -299,7 +299,7 @@ Adds the ability to drag-and-drop items within a section. You must compose [Sort
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('../examples/60-sortable-items').default}
         title="Sortable items"
         source={require('!!raw-loader!../examples/60-sortable-items')}
@@ -368,7 +368,7 @@ Renders a skeleton view. The \`LayoutManagerWithViewController\` will automatica
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={
           require('./examples/ui-components/SkeletonContainerView').default
         }
@@ -394,7 +394,7 @@ It's recommended that the value be derived from the URL for accessibility, and t
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={require('./examples/ui-components/Switcher').default}
         title="Switcher"
         source={require('!!raw-loader!./examples/ui-components/Switcher')}
@@ -423,7 +423,7 @@ In case you want to override just a subset of the default styles, make sure to s
 
 ${(
       <Example
-        packageName="@atlaskit/navigation-next"
+        packageName="@findable/navigation-next"
         Component={
           require('./examples/ui-components/SwitcherCustomStyles').default
         }

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import * as debounce from 'lodash.debounce';
-import { QuickSearch } from '@atlaskit/quick-search';
+import { QuickSearch } from '@findable/quick-search';
 import { LinkComponent } from './GlobalQuickSearchWrapper';
 import {
   withAnalyticsEvents,
   AnalyticsContext,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 
 import {
   fireSelectedSearchResult,

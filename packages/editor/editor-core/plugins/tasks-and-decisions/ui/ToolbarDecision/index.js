@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { injectIntl } from 'react-intl';
-import DecisionIcon from '@atlaskit/icon/glyph/editor/decision';
+import DecisionIcon from '@findable/icon/glyph/editor/decision';
 import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import { insertTaskDecision } from '../../commands';

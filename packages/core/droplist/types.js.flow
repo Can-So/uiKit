@@ -1,6 +1,6 @@
 // @flow
 
-// TODO: work out how to import this from @atlaskit/item
+// TODO: work out how to import this from @findable/item
 
 type Color = string;
 type Background = Color;

@@ -1,9 +1,9 @@
 import { defineMessages, InjectedIntl } from 'react-intl';
 import { EditorState } from 'prosemirror-state';
 import { findDomRefAtPos } from 'prosemirror-utils';
-import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
-import LayoutThreeEqualIcon from '@atlaskit/icon/glyph/editor/layout-three-equal';
-import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
+import LayoutTwoEqualIcon from '@findable/icon/glyph/editor/layout-two-equal';
+import LayoutThreeEqualIcon from '@findable/icon/glyph/editor/layout-three-equal';
+import RemoveIcon from '@findable/icon/glyph/editor/remove';
 
 import commonMessages from '../../messages';
 import { MessageDescriptor } from '../../types/i18n';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
-import { CancelableEvent } from '@atlaskit/quick-search';
+import { CancelableEvent } from '@findable/quick-search';
 import HomeQuickSearchContainer from './home/HomeQuickSearchContainer';
 import ConfluenceQuickSearchContainer from './confluence/ConfluenceQuickSearchContainer';
 import JiraQuickSearchContainer from './jira/JiraQuickSearchContainer';

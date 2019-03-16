@@ -5,10 +5,10 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import Radio from '@atlaskit/icon/glyph/radio';
-import Checkbox from '@atlaskit/icon/glyph/checkbox';
-import Tooltip from '@atlaskit/tooltip';
+} from '@findable/analytics-next';
+import Radio from '@findable/icon/glyph/radio';
+import Checkbox from '@findable/icon/glyph/checkbox';
+import Tooltip from '@findable/tooltip';
 
 import {
   name as packageName,

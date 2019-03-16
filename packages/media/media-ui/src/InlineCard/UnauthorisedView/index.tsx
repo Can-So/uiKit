@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 export interface InlineCardUnauthorizedViewProps {
   /** The url to display */

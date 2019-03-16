@@ -1,6 +1,6 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { withAnalyticsEvents, withAnalyticsContext } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents, withAnalyticsContext } from '@findable/analytics-next';
 export var navigationChannel = 'navigation';
 
 var getDisplayName = function getDisplayName(component) {

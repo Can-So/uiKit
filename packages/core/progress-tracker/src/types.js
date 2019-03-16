@@ -3,7 +3,7 @@ import type { ComponentType, Element } from 'react';
 
 export type StatusType = 'unvisited' | 'visited' | 'current' | 'disabled';
 
-/** Ideally these are exported by @atlaskit/page */
+/** Ideally these are exported by @findable/page */
 export type Spacing = 'comfortable' | 'cosy' | 'compact';
 
 export type Stage = {

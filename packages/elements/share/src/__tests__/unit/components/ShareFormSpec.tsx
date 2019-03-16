@@ -1,7 +1,7 @@
-import Button from '@atlaskit/button';
-import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
-import Tooltip from '@atlaskit/tooltip';
+import Button from '@findable/button';
+import Form, { FormFooter, FormSection, HelperMessage } from '@findable/form';
+import ErrorIcon from '@findable/icon/glyph/error';
+import Tooltip from '@findable/tooltip';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';

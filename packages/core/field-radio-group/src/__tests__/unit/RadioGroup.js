@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { mount, shallow } from 'enzyme';
-import Base, { Label } from '@atlaskit/field-base';
+import Base, { Label } from '@findable/field-base';
 
 import Radio from '../../RadioBase';
 import AkFieldRadioGroupWithAnalytics, {

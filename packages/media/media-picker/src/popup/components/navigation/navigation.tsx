@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import DropdownMenu, {
   DropdownItemGroup,
   DropdownItem,
-} from '@atlaskit/dropdown-menu';
-import RefreshIcon from '@atlaskit/icon/glyph/refresh';
-import SettingsIcon from '@atlaskit/icon/glyph/settings';
+} from '@findable/dropdown-menu';
+import RefreshIcon from '@findable/icon/glyph/refresh';
+import SettingsIcon from '@findable/icon/glyph/settings';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { requestUnlinkCloudAccount, startAuth } from '../../actions';
 import { changeCloudAccountFolder } from '../../actions/changeCloudAccountFolder';
 import { changeAccount } from '../../actions/changeAccount';

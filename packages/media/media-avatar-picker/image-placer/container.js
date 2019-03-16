@@ -5,7 +5,7 @@ import * as tslib_1 from "tslib";
  */
 import * as React from 'react';
 import { ContainerWrapper } from './styled';
-import { Vector2 } from '@atlaskit/media-ui';
+import { Vector2 } from '@findable/media-ui';
 var ImagePlacerContainer = /** @class */ (function (_super) {
     tslib_1.__extends(ImagePlacerContainer, _super);
     function ImagePlacerContainer() {

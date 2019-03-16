@@ -1,5 +1,5 @@
 // @flow
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed } from '@findable/theme';
 
 export const arrow = {
   defaultColor: themed({ light: colors.N40, dark: colors.DN40 }),

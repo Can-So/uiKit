@@ -1,7 +1,7 @@
 import { EditorState, Plugin, PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { EmojiId, EmojiProvider, EmojiSearchResult, EmojiDescription } from '@atlaskit/emoji';
+import { ProviderFactory } from '@findable/editor-common';
+import { EmojiId, EmojiProvider, EmojiSearchResult, EmojiDescription } from '@findable/emoji';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 export declare const emojiPluginKey: PluginKey<any>;
 export declare type StateChangeHandler = (state: EmojiState) => any;

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
-import { akEditorWideLayoutWidth, calcPxFromColumns, calcPctFromPx, calcPxFromPct, akEditorBreakoutPadding, calcColumnsFromPx, breakoutWideScaleRatio, } from '@atlaskit/editor-common';
+import { akEditorWideLayoutWidth, calcPxFromColumns, calcPctFromPx, calcPxFromPct, akEditorBreakoutPadding, calcColumnsFromPx, breakoutWideScaleRatio, } from '@findable/editor-common';
 import { Wrapper } from './styled';
 import Resizer from './Resizer';
 import { snapTo, handleSides, imageAlignmentMap, alignmentLayouts, } from './utils';

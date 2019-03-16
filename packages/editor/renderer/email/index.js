@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
-import { fontFamily, fontSize } from '@atlaskit/theme';
+import { fontFamily, fontSize } from '@findable/theme';
 import { nodeSerializers } from './serializers';
 import { serializeStyle } from './util';
-import { calcTableColumnWidths } from '@atlaskit/adf-schema';
+import { calcTableColumnWidths } from '@findable/adf-schema';
 var serializeNode = function (node, serializedHTML) {
     // ignore nodes with unknown type
     if (!nodeSerializers[node.type.name]) {

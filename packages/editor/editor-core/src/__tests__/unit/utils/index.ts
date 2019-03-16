@@ -18,7 +18,7 @@ import {
   media,
   mediaGroup,
   mediaSingle,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { toggleMark } from 'prosemirror-commands';
 
 import {
@@ -37,7 +37,7 @@ import mentionsPlugin from '../../../plugins/mentions';
 import tasksAndDecisionsPlugin from '../../../plugins/tasks-and-decisions';
 import { Node, Schema } from 'prosemirror-model';
 
-describe('@atlaskit/editore-core/utils', () => {
+describe('@findable/editore-core/utils', () => {
   const createEditor = createEditorFactory();
 
   const editor = (doc: any) =>

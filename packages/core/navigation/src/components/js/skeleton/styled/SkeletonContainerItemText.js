@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 
 const SkeletonContainerItemText = styled.div`
   height: ${math.multiply(gridSize, 2.5)}px;

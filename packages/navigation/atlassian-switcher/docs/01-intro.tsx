@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { md } from '@atlaskit/docs';
-import { colors } from '@atlaskit/theme';
+import { md } from '@findable/docs';
+import { colors } from '@findable/theme';
 
 const Warning = p => (
   <div
@@ -18,7 +18,7 @@ ${(
   <Warning>
     <p>
       <strong>
-        Note: @atlaskit/atlassian-switcher is currently a developer preview.
+        Note: @findable/atlassian-switcher is currently a developer preview.
       </strong>
     </p>
     <p>

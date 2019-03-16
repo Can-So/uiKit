@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { keyframes } from 'styled-components';
-import { borderRadius as akBorderRadius } from '@atlaskit/theme';
+import { borderRadius as akBorderRadius } from '@findable/theme';
 export var ellipsis = function (maxWidth) {
     if (maxWidth === void 0) { maxWidth = '100%'; }
     var unit = typeof maxWidth === 'number' ? 'px' : '';

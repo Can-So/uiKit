@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   This package exports \`Drawer\` and \`DrawerBase\` components.
@@ -10,11 +10,11 @@ export default md`
 
 ## Usage
 
-  ${code`import Drawer from '@atlaskit/drawer';`}
+  ${code`import Drawer from '@findable/drawer';`}
 
   ${(
     <Example
-      packageName="@atlaskit/drawer"
+      packageName="@findable/drawer"
       Component={require('../examples/00-basic-drawer').default}
       source={require('!!raw-loader!../examples/00-basic-drawer')}
       title="Basic"
@@ -25,7 +25,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/drawer"
+      packageName="@findable/drawer"
       Component={require('../examples/05-drawer-widths').default}
       source={require('!!raw-loader!../examples/05-drawer-widths')}
       title="Drawer Width"
@@ -41,7 +41,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/drawer"
+      packageName="@findable/drawer"
       Component={
         require('../examples/15-retain-drawer-contents-on-close').default
       }

@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors, gridSize, fontFamily, fontSize, borderRadius, themed, } from '@atlaskit/theme';
-import { tableSharedStyle, columnLayoutSharedStyle, editorFontSize, blockquoteSharedStyles, headingsSharedStyles, panelSharedStyles, ruleSharedStyles, paragraphSharedStyles, indentationSharedStyles, blockMarksSharedStyles, mediaSingleSharedStyle, blockNodesVerticalMargin, akEditorTableToolbar, akEditorTableBorder, akEditorTableNumberColumnWidth, TableSharedCssClassName, tableMarginTop, akEditorSmallZIndex, gridMediumMaxWidth, codeMarkSharedStyles, } from '@atlaskit/editor-common';
+import { colors, gridSize, fontFamily, fontSize, borderRadius, themed, } from '@findable/theme';
+import { tableSharedStyle, columnLayoutSharedStyle, editorFontSize, blockquoteSharedStyles, headingsSharedStyles, panelSharedStyles, ruleSharedStyles, paragraphSharedStyles, indentationSharedStyles, blockMarksSharedStyles, mediaSingleSharedStyle, blockNodesVerticalMargin, akEditorTableToolbar, akEditorTableBorder, akEditorTableNumberColumnWidth, TableSharedCssClassName, tableMarginTop, akEditorSmallZIndex, gridMediumMaxWidth, codeMarkSharedStyles, } from '@findable/editor-common';
 import { RendererCssClassName } from '../../consts';
 export var FullPagePadding = 32;
 var shadowWidth = 8;

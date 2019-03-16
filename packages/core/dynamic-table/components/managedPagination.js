@@ -7,8 +7,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
-import Pagination from '@atlaskit/pagination';
+import { UIAnalyticsEvent } from '@findable/analytics-next';
+import Pagination from '@findable/pagination';
 
 var ManagedPagination =
 /*#__PURE__*/

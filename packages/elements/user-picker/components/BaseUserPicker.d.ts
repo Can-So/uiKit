@@ -1,4 +1,4 @@
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import * as React from 'react';
 import { UserPickerProps } from '../types';
 declare type Props = UserPickerProps & WithAnalyticsEventProps & {

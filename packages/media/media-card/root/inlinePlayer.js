@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { CustomMediaPlayer } from '@findable/media-ui';
 import { InlinePlayerWrapper } from './styled';
 import { defaultImageCardDimensions } from '..';
 import { CardLoading } from '../utils/cardLoading';

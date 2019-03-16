@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { colors, gridSize, math, themed } from '@atlaskit/theme';
+import { colors, gridSize, math, themed } from '@findable/theme';
 
 export default styled.div`
   box-sizing: border-box;

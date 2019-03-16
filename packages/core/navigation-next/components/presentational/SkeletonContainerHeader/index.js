@@ -8,7 +8,7 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
 import React, { PureComponent } from 'react';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 import SkeletonItem from '../SkeletonItem';
 import { styleReducerNoOp } from '../../../theme';
 var gridSize = gridSizeFn();

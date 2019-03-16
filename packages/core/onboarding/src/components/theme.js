@@ -1,7 +1,7 @@
 // @flow
 
-import { themeNamespace as buttonThemeNamespace } from '@atlaskit/button';
-import { colors, themed } from '@atlaskit/theme';
+import { themeNamespace as buttonThemeNamespace } from '@findable/button';
+import { colors, themed } from '@findable/theme';
 
 type Theme = { [string]: any };
 

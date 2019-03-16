@@ -1,4 +1,4 @@
-import { Auth } from '@atlaskit/media-core';
+import { Auth } from '@findable/media-core';
 import { WsActivity } from './wsActivity';
 export declare class WsConnectionHolder {
     private readonly auth;

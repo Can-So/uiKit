@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 export var Container = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  position: relative;\n  overflow: hidden;\n  border-radius: ", ";\n"], ["\n  position: relative;\n  overflow: hidden;\n  border-radius: ", ";\n"])), borderRadius());
 export var Image = styled.img(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  position: absolute;\n  /* Is needed so image is not selected, when dragged */\n  -webkit-user-select: none; /* Chrome all / Safari all */\n  -moz-user-select: none; /* Firefox all */\n  -ms-user-select: none; /* IE 10+ */\n  user-select: none; /* Likely future */\n  border-radius: ", ";\n"], ["\n  position: absolute;\n  /* Is needed so image is not selected, when dragged */\n  -webkit-user-select: none; /* Chrome all / Safari all */\n  -moz-user-select: none; /* Firefox all */\n  -ms-user-select: none; /* IE 10+ */\n  user-select: none; /* Likely future */\n  border-radius: ", ";\n"])), borderRadius());
 export var containerPadding = 28;

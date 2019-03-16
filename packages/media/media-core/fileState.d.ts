@@ -1,4 +1,4 @@
-import { MediaFile, MediaStoreResponse, MediaType, MediaFileArtifacts, MediaCollectionItemFullDetails, MediaRepresentations } from '@atlaskit/media-store';
+import { MediaFile, MediaStoreResponse, MediaType, MediaFileArtifacts, MediaCollectionItemFullDetails, MediaRepresentations } from '@findable/media-store';
 export declare type FileStatus = 'uploading' | 'processing' | 'processed' | 'error' | 'failed-processing';
 export interface FilePreview {
     value: Blob | string;

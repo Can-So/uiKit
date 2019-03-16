@@ -1,4 +1,4 @@
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 import css from './utils/evaluate-inner';
 var grid = gridSize() / 2;
 var fontSize = 3 * grid;

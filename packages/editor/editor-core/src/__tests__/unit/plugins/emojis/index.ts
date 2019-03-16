@@ -1,7 +1,7 @@
 import { Node as PMNode } from 'prosemirror-model';
-import { emoji as emojiData } from '@atlaskit/util-data-test';
-import { emoji as emojiNode } from '@atlaskit/adf-schema';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { emoji as emojiData } from '@findable/util-data-test';
+import { emoji as emojiNode } from '@findable/adf-schema';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   createEditorFactory,
   sendKeyToPm,
@@ -17,8 +17,8 @@ import {
   createEvent,
   spyOnReturnValue,
   insertText,
-} from '@atlaskit/editor-test-helpers';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+} from '@findable/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { emojiPluginKey } from '../../../../plugins/emoji/pm-plugins/main';
 import emojiPlugin from '../../../../plugins/emoji';
 import listPlugin from '../../../../plugins/lists';

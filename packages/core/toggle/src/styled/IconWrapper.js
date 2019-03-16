@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { themed, colors } from '@atlaskit/theme';
+import { themed, colors } from '@findable/theme';
 import { getWidth, paddingUnitless } from './constants';
 
 const iconPadding = `${paddingUnitless / 2}px`;

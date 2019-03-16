@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import SectionMessage from '@atlaskit/section-message';
+import SectionMessage from '@findable/section-message';
 import {
   Provider as SmartCardProvider,
   Client,
   ResolveResponse,
   CardAppearance,
   EditorCardProvider,
-} from '@atlaskit/smart-card';
+} from '@findable/smart-card';
 
 import { default as FullPageExample } from './5-full-page';
 

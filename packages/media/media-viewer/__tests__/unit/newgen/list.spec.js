@@ -3,10 +3,10 @@ import * as React from 'react';
 import { Observable } from 'rxjs';
 import { List } from '../../../newgen/list';
 import { ErrorMessage } from '../../../newgen/error';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
+import ArrowRightCircleIcon from '@findable/icon/glyph/chevron-right-circle';
 import { ItemViewer } from '../../../newgen/item-viewer';
-import Button from '@atlaskit/button';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import Button from '@findable/button';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 function createFixture(props) {
     var items = [];
     var selectedItem = {

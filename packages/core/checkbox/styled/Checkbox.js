@@ -1,6 +1,6 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import styled, { css } from 'styled-components';
-import { colors, themed, math, gridSize } from '@atlaskit/theme';
+import { colors, themed, math, gridSize } from '@findable/theme';
 export var HiddenCheckbox = styled.input.withConfig({
   displayName: "Checkbox__HiddenCheckbox",
   componentId: "sc-1asqokg-0"

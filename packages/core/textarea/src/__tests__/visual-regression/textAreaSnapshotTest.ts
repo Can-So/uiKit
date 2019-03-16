@@ -2,7 +2,7 @@ import {
   getExampleUrl,
   takeScreenShot,
   takeElementScreenShot,
-} from '@atlaskit/visual-regression/helper';
+} from '@findable/visual-regression/helper';
 
 describe('TextArea', () => {
   let page: any;

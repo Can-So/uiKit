@@ -16,7 +16,7 @@ export default function Layers(root: any, j: any) {
   const sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles',
+      value: '@findable/util-shared-styles',
     },
   });
   if (!sharedStylesImport.size()) {
@@ -62,11 +62,11 @@ export default function Layers(root: any, j: any) {
       );
   });
 
-  // Add an import of colors from @atlaskit/theme
+  // Add an import of colors from @findable/theme
   addNamedImport(
     root,
     j,
-    '@atlaskit/theme',
+    '@findable/theme',
     'layers',
     'layers',
     sharedStylesImport,

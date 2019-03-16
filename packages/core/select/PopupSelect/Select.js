@@ -15,7 +15,7 @@ import createFocusTrap from 'focus-trap';
 import { Manager, Reference, Popper } from 'react-popper';
 import NodeResolver from 'react-node-resolver';
 import shallowEqualObjects from 'shallow-equal/objects';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { MenuDialog, DummyControl, defaultComponents } from './components';
 /** Are we rendering on the client or server? */
 

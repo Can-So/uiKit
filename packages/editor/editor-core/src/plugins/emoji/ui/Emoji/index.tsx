@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { EmojiId, ResourcedEmoji } from '@atlaskit/emoji';
+import { EmojiId, ResourcedEmoji } from '@findable/emoji';
 import {
   ProviderFactory,
   Providers,
   WithProviders,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 export interface EmojiProps extends EmojiId {
   allowTextFallback?: boolean;

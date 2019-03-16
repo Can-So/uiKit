@@ -8,8 +8,8 @@ import {
   mountWithIntl,
   dispatchPasteEvent,
   status,
-} from '@atlaskit/editor-test-helpers';
-import { Status } from '@atlaskit/status';
+} from '@findable/editor-test-helpers';
+import { Status } from '@findable/status';
 import StatusNodeView, {
   Props as StatusNodeViewProps,
   State as StatusNodeViewState,

@@ -2,7 +2,7 @@ import {
   createEditorFactory,
   doc,
   p as paragraph,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import { pluginKey } from '../../../../plugins/width';
 

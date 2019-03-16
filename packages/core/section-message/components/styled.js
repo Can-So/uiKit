@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, colors, math, gridSize, typography } from '@atlaskit/theme';
+import { borderRadius, colors, math, gridSize, typography } from '@findable/theme';
 export var Container = styled.section.withConfig({
   displayName: "styled__Container",
   componentId: "sc-92zysz-0"

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, type ElementRef } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import Textfield from '../src';
 
 type Props = {};

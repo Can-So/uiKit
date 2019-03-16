@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/color-picker",
+  "name": "@findable/color-picker",
   "version": "0.4.0",
   "description": "Jira Color Picker Component",
   "modules": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "author": "Atlassian Pty Ltd",
   "license": "Apache-2.0",
@@ -21,10 +21,10 @@
     "palette"
   ],
   "dependencies": {
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/select": "^8.0.3",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/icon": "^16.0.5",
+    "@findable/select": "^8.0.3",
+    "@findable/theme": "^8.0.1",
     "memoize-one": "^3.0.1",
     "styled-components": "^3.2.6"
   },
@@ -32,8 +32,8 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/section-message": "^2.0.1",
+    "@findable/docs": "^7.0.1",
+    "@findable/section-message": "^2.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "react": "^16.4.0"

@@ -1,4 +1,4 @@
-import { taskItem, defaultSchema } from '@atlaskit/editor-test-helpers';
+import { taskItem, defaultSchema } from '@findable/editor-test-helpers';
 import { taskItemNodeViewFactory } from '../../../../../plugins/tasks-and-decisions/nodeviews/taskItem';
 
 describe('Task Item - NodeView', () => {

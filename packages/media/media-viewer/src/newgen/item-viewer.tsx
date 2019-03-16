@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Context, FileState, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileState, FileIdentifier } from '@findable/media-core';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { Outcome, MediaViewerFeatureFlags } from './domain';
 import { ImageViewer } from './viewers/image';
 import { VideoViewer } from './viewers/video';
@@ -15,8 +15,8 @@ import ErrorMessage, {
   ErrorName,
 } from './error';
 import { ErrorViewDownloadButton } from './download';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
 import {
   ViewerLoadPayload,
   mediaFileCommencedEvent,
@@ -27,7 +27,7 @@ import { channel } from './analytics/index';
 import {
   GasPayload,
   GasScreenEventPayload,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 import { AudioViewer } from './viewers/audio';
 
 export type Props = Readonly<{

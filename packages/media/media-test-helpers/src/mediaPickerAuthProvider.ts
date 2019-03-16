@@ -1,4 +1,4 @@
-import { Auth, AuthContext, AuthProvider } from '@atlaskit/media-core';
+import { Auth, AuthContext, AuthProvider } from '@findable/media-core';
 import { userAuthProviderBaseURL } from './userAuthProvider';
 import { defaultCollectionName } from './collectionNames';
 

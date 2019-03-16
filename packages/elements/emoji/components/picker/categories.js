@@ -1,14 +1,14 @@
-import EmojiActivityIcon from '@atlaskit/icon/glyph/emoji/activity';
-import EmojiCustomIcon from '@atlaskit/icon/glyph/emoji/custom';
-import EmojiFlagsIcon from '@atlaskit/icon/glyph/emoji/flags';
-import EmojiFoodIcon from '@atlaskit/icon/glyph/emoji/food';
-import EmojiFrequentIcon from '@atlaskit/icon/glyph/emoji/frequent';
-import EmojiNatureIcon from '@atlaskit/icon/glyph/emoji/nature';
-import EmojiObjectsIcon from '@atlaskit/icon/glyph/emoji/objects';
-import EmojiPeopleIcon from '@atlaskit/icon/glyph/emoji/people';
-import EmojiSymbolsIcon from '@atlaskit/icon/glyph/emoji/symbols';
-import EmojiTravelIcon from '@atlaskit/icon/glyph/emoji/travel';
-import EmojiProductivityIcon from '@atlaskit/icon/glyph/emoji/productivity';
+import EmojiActivityIcon from '@findable/icon/glyph/emoji/activity';
+import EmojiCustomIcon from '@findable/icon/glyph/emoji/custom';
+import EmojiFlagsIcon from '@findable/icon/glyph/emoji/flags';
+import EmojiFoodIcon from '@findable/icon/glyph/emoji/food';
+import EmojiFrequentIcon from '@findable/icon/glyph/emoji/frequent';
+import EmojiNatureIcon from '@findable/icon/glyph/emoji/nature';
+import EmojiObjectsIcon from '@findable/icon/glyph/emoji/objects';
+import EmojiPeopleIcon from '@findable/icon/glyph/emoji/people';
+import EmojiSymbolsIcon from '@findable/icon/glyph/emoji/symbols';
+import EmojiTravelIcon from '@findable/icon/glyph/emoji/travel';
+import EmojiProductivityIcon from '@findable/icon/glyph/emoji/productivity';
 import { customCategory, userCustomTitle, customTitle } from '../../constants';
 export var CategoryDescriptionMap = {
     SEARCH: {

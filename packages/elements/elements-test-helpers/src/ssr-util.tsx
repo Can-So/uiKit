@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { ssr } from '@atlaskit/ssr';
+import { ssr } from '@findable/ssr';
 import * as path from 'path';
 
 export const ssr_hydrate = async (

@@ -1,7 +1,7 @@
 // @flow
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
+import { getExampleUrl } from '@findable/webdriver-runner/utils/example';
+import Page from '@findable/webdriver-runner/wd-wrapper';
 
 /* Url to test the example */
 const urlSubmitForm = getExampleUrl('core', 'form', 'submit-form');

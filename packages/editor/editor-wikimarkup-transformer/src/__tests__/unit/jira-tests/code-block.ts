@@ -1,6 +1,6 @@
-import { doc, code_block } from '@atlaskit/editor-test-helpers';
+import { doc, code_block } from '@findable/editor-test-helpers';
 import { checkParse, checkParseEncodeRoundTrips } from '../_test-helpers';
-import { defaultSchema } from '@atlaskit/adf-schema';
+import { defaultSchema } from '@findable/adf-schema';
 
 // Nodes
 

@@ -1,6 +1,6 @@
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
+import CrossCircleIcon from '@findable/icon/glyph/cross-circle';
 import { ReactWrapper } from 'enzyme';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { mountWithIntl } from '@findable/editor-test-helpers';
 import * as React from 'react';
 import { List as VirtualList } from 'react-virtualized/dist/commonjs/List';
 import {

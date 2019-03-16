@@ -1,4 +1,4 @@
-import { UsageClearEmojiResource } from '@atlaskit/util-data-test';
+import { UsageClearEmojiResource } from '@findable/util-data-test';
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { EmojiProvider } from '../src/api/EmojiResource';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import Button from '@atlaskit/button';
+import CrossIcon from '@findable/icon/glyph/cross';
+import Button from '@findable/button';
 import {
   Container,
   BackgroundWrapper,

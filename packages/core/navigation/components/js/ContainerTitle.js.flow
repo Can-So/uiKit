@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent, type Node, type ComponentType } from 'react';
 import { ThemeProvider, withTheme } from 'styled-components';
-import { itemThemeNamespace } from '@atlaskit/item';
+import { itemThemeNamespace } from '@findable/item';
 import memoizeOne from 'memoize-one';
 import AkNavigationItem from './NavigationItem';
 import ContainerTitleIcon from '../styled/ContainerTitleIcon';
@@ -14,7 +14,7 @@ type Props = {
    component if one is provided. */
   href?: string,
   /** React element to appear to the left of the text. This should be an
-   @atlaskit/icon component. */
+   @findable/icon component. */
   icon?: Node,
   /** Component to be used as link, if default link component does not suit, such
   as if you are using a different router. Component is passed a href prop, and the content

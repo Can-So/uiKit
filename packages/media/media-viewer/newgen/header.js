@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import * as deepEqual from 'deep-equal';
-import { messages, toHumanReadableMediaSize } from '@atlaskit/media-ui';
+import { messages, toHumanReadableMediaSize } from '@findable/media-ui';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Outcome } from './domain';
 import { Header as HeaderWrapper, LeftHeader, RightHeader, MetadataWrapper, MetadataSubText, MedatadataTextWrapper, MetadataIconWrapper, MetadataFileName, hideControlsClassName, } from './styled';

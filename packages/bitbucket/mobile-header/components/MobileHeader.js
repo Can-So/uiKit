@@ -6,8 +6,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Fragment, PureComponent } from 'react';
-import Button from '@atlaskit/button';
-import MenuIcon from '@atlaskit/icon/glyph/menu';
+import Button from '@findable/button';
+import MenuIcon from '@findable/icon/glyph/menu';
 import * as styles from '../styled';
 
 var MobileHeader =

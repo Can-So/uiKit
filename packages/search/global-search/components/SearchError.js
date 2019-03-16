@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import Button from '@atlaskit/button';
-import { gridSize, math } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { gridSize, math } from '@findable/theme';
 import styled from 'styled-components';
 import { messages } from '../messages';
 import ErrorImage from '../assets/ErrorImage';

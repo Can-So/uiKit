@@ -1,5 +1,5 @@
 import { AlterProps, BuildProps } from './types';
-import { BlockCardResolvedViewProps } from '@atlaskit/media-ui';
+import { BlockCardResolvedViewProps } from '@findable/media-ui';
 export declare type AlterPropsRepository = AlterProps<BlockCardResolvedViewProps>;
 export declare type BuildPropsRepository = BuildProps<BlockCardResolvedViewProps>;
 export declare const buildRepositoryLink: BuildPropsRepository;

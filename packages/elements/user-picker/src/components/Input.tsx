@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { components } from '@atlaskit/select';
+import { components } from '@findable/select';
 
 export type Props = {
   selectProps?: { disableInput?: boolean };

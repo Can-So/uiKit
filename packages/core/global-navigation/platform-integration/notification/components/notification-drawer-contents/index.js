@@ -8,7 +8,7 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Fragment, Component } from 'react';
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import { externalContent, spinnerWrapper } from './styles';
 import addParamToUrl from '../../add-param-to-url';
 export var CONTENT_URL = '/home/notificationsDrawer/iframe.html';

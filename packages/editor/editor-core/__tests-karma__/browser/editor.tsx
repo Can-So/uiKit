@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import Editor from '../../src/editor';
 
-describe('@atlaskit/editor-core/editor', () => {
+describe('@findable/editor-core/editor', () => {
   let place: HTMLElement;
   beforeEach(() => {
     place = document.createElement('div');

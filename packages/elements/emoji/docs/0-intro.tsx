@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { md, Example, code } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Example, code } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 import SimpleEmojiExample from '../examples/00-simple-emoji';
 
 const SimpleEmojiSource = require('!!raw-loader!../examples/00-simple-emoji');
@@ -15,7 +15,7 @@ export default md`
   Import the component in your React app as follows:
 
   ${code`
-  import EmojiPicker, { EmojiResource } from '@atlaskit/emoji';
+  import EmojiPicker, { EmojiResource } from '@findable/emoji';
 
   const emojiProvider = new EmojiResource({
     providers: [
@@ -57,7 +57,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/emoji"
+      packageName="@findable/emoji"
       Component={SimpleEmojiExample}
       title="Emoji"
       source={SimpleEmojiSource}
@@ -71,7 +71,7 @@ export default md`
       actions={[
         {
           href:
-            'https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/packages/elements/emoji/src/components/common/Emoji.tsx',
+            'https://github.com/fnamazing/uiKit/src/master/packages/elements/emoji/src/components/common/Emoji.tsx',
           text: 'Emoji Props',
         },
       ]}

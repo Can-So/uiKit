@@ -6,7 +6,7 @@ export default function gridSizeUnitlessTransform(root: any, j: any) {
   const sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles',
+      value: '@findable/util-shared-styles',
     },
   });
   if (!sharedStylesImport.size()) {
@@ -40,7 +40,7 @@ export default function gridSizeUnitlessTransform(root: any, j: any) {
   addNamedImport(
     root,
     j,
-    '@atlaskit/theme',
+    '@findable/theme',
     'typography',
     localName,
     sharedStylesImport,
@@ -48,7 +48,7 @@ export default function gridSizeUnitlessTransform(root: any, j: any) {
   removeNamedImport(
     root,
     j,
-    '@atlaskit/util-shared-styles',
+    '@findable/util-shared-styles',
     'akTypographyMixins',
     typogImportSpecifier,
   );

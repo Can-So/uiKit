@@ -5,8 +5,8 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import Icon from '@atlaskit/icon/glyph/checkbox';
-import CheckboxIndeterminateIcon from '@atlaskit/icon/glyph/checkbox-indeterminate';
+import Icon from '@findable/icon/glyph/checkbox';
+import CheckboxIndeterminateIcon from '@findable/icon/glyph/checkbox-indeterminate';
 import { IconWrapper } from './styled/Checkbox';
 
 var CheckboxIcon =

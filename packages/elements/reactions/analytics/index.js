@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { createAndFireEvent } from '@atlaskit/analytics-next';
-import { UI_EVENT_TYPE, OPERATIONAL_EVENT_TYPE, } from '@atlaskit/analytics-gas-types';
+import { createAndFireEvent } from '@findable/analytics-next';
+import { UI_EVENT_TYPE, OPERATIONAL_EVENT_TYPE, } from '@findable/analytics-gas-types';
 import { name as packageName, version as packageVersion, } from '../version.json';
 export var createAndFireEventInElementsChannel = createAndFireEvent('fabric-elements');
 export var createAndFireSafe = function (createAnalyticsEvent, creator) {

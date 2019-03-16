@@ -1,4 +1,4 @@
-import { md } from '@atlaskit/docs';
+import { md } from '@findable/docs';
 
 export default md`
   # Util Service Support
@@ -8,14 +8,14 @@ export default md`
   ## Installation
 
   ~~~js
-  npm install @atlaskit/mention
+  npm install @findable/mention
   # or
-  yarn add  @atlaskit/mention
+  yarn add  @findable/mention
   ~~~
 
   ## Using the component
 
   Use the component in your React app as follows:
 
-  import { AbstractResource } from '@atlaskit/util-service-support';
+  import { AbstractResource } from '@findable/util-service-support';
 `;

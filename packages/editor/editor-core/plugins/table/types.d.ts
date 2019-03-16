@@ -1,7 +1,7 @@
 import { Node as PmNode } from 'prosemirror-model';
 import { Transaction } from 'prosemirror-state';
 import { DecorationSet } from 'prosemirror-view';
-import { TableLayout } from '@atlaskit/adf-schema';
+import { TableLayout } from '@findable/adf-schema';
 export declare type PermittedLayoutsDescriptor = TableLayout[] | 'all';
 export declare type Cell = {
     pos: number;

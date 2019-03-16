@@ -1,4 +1,4 @@
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import styled from 'styled-components';
 
 export const OptionsWrapper = styled.div`

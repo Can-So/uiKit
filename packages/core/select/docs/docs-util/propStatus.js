@@ -1,7 +1,7 @@
 // @flow
 import React, { Component, Fragment, type Node } from 'react';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-import Button from '@atlaskit/button';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
+import Button from '@findable/button';
 
 const Cell = ({ children }: { children: Node }) => (
   <td

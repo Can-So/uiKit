@@ -4,7 +4,7 @@ import {
   isSafeUrl,
   inlineNodes,
   CellAttributes,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import { Mark as PMMark, Schema } from 'prosemirror-model';
 
 export type ADFStage = 'stage0' | 'final';

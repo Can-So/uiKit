@@ -1,17 +1,17 @@
 import {
   MediaPickerComponents,
   MediaPickerComponent,
-} from '@atlaskit/media-picker';
-import { ContextFactory } from '@atlaskit/media-core';
+} from '@findable/media-picker';
+import { ContextFactory } from '@findable/media-core';
 import {
   StoryBookAuthProvider,
   userAuthProvider,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 import PickerFacade, {
   PickerType,
 } from '../../../../plugins/media/picker-facade';
-import { ErrorReportingHandler } from '@atlaskit/editor-common';
+import { ErrorReportingHandler } from '@findable/editor-common';
 
 describe('Media PickerFacade', () => {
   const errorReporter: ErrorReportingHandler = {

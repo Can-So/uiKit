@@ -22,10 +22,10 @@ import {
   InlineCardErroredView,
   InlineCardUnauthorizedView,
   InlineCardForbiddenView,
-} from '@atlaskit/media-ui';
+} from '@findable/media-ui';
 import { ClientConfig } from '../../../Client';
-import Button from '@atlaskit/button';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import Button from '@findable/button';
+import { AnalyticsListener } from '@findable/analytics-next';
 import { resolvedEvent } from '../../../analytics';
 
 function createClient(

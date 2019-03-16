@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent, Children } from 'react';
 
-import { DecisionList as AkDecisionList } from '@atlaskit/task-decision';
+import { DecisionList as AkDecisionList } from '@findable/task-decision';
 
 export interface Props {
   children?: JSX.Element | JSX.Element[];

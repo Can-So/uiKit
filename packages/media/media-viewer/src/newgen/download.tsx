@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import {
   Context,
   FileState,
   isErrorFileState,
   FileIdentifier,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 import { DownloadButtonWrapper } from './styled';
-import Button from '@atlaskit/button';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import Button from '@findable/button';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import {
   downloadButtonEvent,
   downloadErrorButtonEvent,
 } from './analytics/download';
 import { channel } from './analytics';
-import DownloadIcon from '@atlaskit/icon/glyph/download';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import DownloadIcon from '@findable/icon/glyph/download';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import { MediaViewerError } from './error';
 
 const downloadIcon = <DownloadIcon label="Download" />;

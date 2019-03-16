@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { gridSize, borderRadius, colors } from '@atlaskit/theme';
+import { gridSize, borderRadius, colors } from '@findable/theme';
 export var ButtonContent = styled.span(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  height: 24px;\n  line-height: 24px;\n  min-width: 70px;\n"], ["\n  display: flex;\n  height: 24px;\n  line-height: 24px;\n  min-width: 70px;\n"])));
 export var Wrapper = styled.span(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  margin-right: ", "px;\n"], ["\n  display: flex;\n  margin-right: ",
     "px;\n"])), function (_a) {

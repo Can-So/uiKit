@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import Blanket from '@atlaskit/blanket';
-import EmojiIcon from '@atlaskit/icon/glyph/emoji';
+import Blanket from '@findable/blanket';
+import EmojiIcon from '@findable/icon/glyph/emoji';
 
 import Drawer from '../../index';
 import DrawerPrimitive from '../../primitives';

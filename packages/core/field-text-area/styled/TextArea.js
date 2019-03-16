@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { codeFontFamily, colors, fontSize } from '@atlaskit/theme';
+import { codeFontFamily, colors, fontSize } from '@findable/theme';
 
 var getPlaceholderStyle = function getPlaceholderStyle(style) {
   return css(["\n  &::-webkit-input-placeholder {\n    /* WebKit, Blink, Edge */\n    ", ";\n  }\n  &::-moz-placeholder {\n    /* Mozilla Firefox 19+ */\n    ", " opacity: 1;\n  }\n  &::-ms-input-placeholder {\n    /* Microsoft Edge */\n    ", ";\n  }\n  &:-moz-placeholder {\n    /* Mozilla Firefox 4 to 18 */\n    ", " opacity: 1;\n  }\n  &:-ms-input-placeholder {\n    /* Internet Explorer 10-11 */\n    ", ";\n  }\n"], style, style, style, style, style);

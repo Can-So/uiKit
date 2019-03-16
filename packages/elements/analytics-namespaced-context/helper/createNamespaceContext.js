@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AnalyticsContext } from '@atlaskit/analytics-next';
+import { AnalyticsContext } from '@findable/analytics-next';
 var createNamespaceContext = function (namespace, displayName) {
     if (displayName === void 0) { displayName = 'NamespacedContext'; }
     var Component = function (props) {

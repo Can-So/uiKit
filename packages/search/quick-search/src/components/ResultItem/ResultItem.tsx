@@ -1,5 +1,5 @@
 import * as React from 'react';
-import baseItem, { withItemClick, withItemFocus } from '@atlaskit/item';
+import baseItem, { withItemClick, withItemFocus } from '@findable/item';
 
 import {
   ResultItemAfter,
@@ -19,7 +19,7 @@ type Props = {
   href?: string;
   /** Target frame for item `href` link to be aimed at. */
   target?: string;
-  /** React element to appear to the left of the text. This should be an @atlaskit/icon component. */
+  /** React element to appear to the left of the text. This should be an @findable/icon component. */
   icon?: React.ReactNode;
   /** Makes the navigation item appear with reduced padding and font size. */
   isCompact?: boolean;

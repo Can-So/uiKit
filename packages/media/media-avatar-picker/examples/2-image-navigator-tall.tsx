@@ -1,7 +1,7 @@
 /* tslint:disable:no-console */
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
-import { tallImage } from '@atlaskit/media-test-helpers';
+import { tallImage } from '@findable/media-test-helpers';
 import ImageNavigator from '../src/image-navigator';
 
 let onLoadParams: any;

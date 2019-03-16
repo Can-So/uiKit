@@ -1,5 +1,5 @@
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
-import { EmojiProvider } from '@atlaskit/emoji';
+import { WithAnalyticsEventProps } from '@findable/analytics-next-types';
+import { EmojiProvider } from '@findable/emoji';
 import * as React from 'react';
 import { OnEmoji, OnReaction } from '../types';
 import { ReactionStatus } from '../types/ReactionStatus';

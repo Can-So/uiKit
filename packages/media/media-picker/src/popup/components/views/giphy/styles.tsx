@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass, ImgHTMLAttributes } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 export const Container: ComponentClass<HTMLAttributes<{}>> = styled.div`
   height: 100%;

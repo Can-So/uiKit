@@ -1,7 +1,7 @@
 // @flow
 
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 export const Heading = styled.div`
   display: flex;

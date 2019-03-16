@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import Lorem from 'react-lorem-component';
-import Button, { ButtonGroup } from '@atlaskit/button';
+import Button, { ButtonGroup } from '@findable/button';
 import Modal, { ModalTransition } from '../src';
 
 const appearances = ['warning', 'danger'];

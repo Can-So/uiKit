@@ -1,7 +1,7 @@
 import { EditorState, PluginKey } from 'prosemirror-state';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import { MentionProvider, MentionDescription } from '@atlaskit/mention';
-import { ContextIdentifierProvider } from '@atlaskit/editor-common';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
+import { MentionProvider, MentionDescription } from '@findable/mention';
+import { ContextIdentifierProvider } from '@findable/editor-common';
 import { EditorPlugin, Command } from '../../types';
 declare const mentionsPlugin: (createAnalyticsEvent?: CreateUIAnalyticsEventSignature | undefined) => EditorPlugin;
 export default mentionsPlugin;

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
-import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
+import EditorImageIcon from '@findable/icon/glyph/editor/image';
+import { media, mediaGroup, mediaSingle } from '@findable/adf-schema';
 import {
   EditorPlugin,
   EditorAppearance,
   PMPluginFactoryParams,
 } from '../../types';
-import { SmartMediaEditor, Dimensions } from '@atlaskit/media-editor';
-import { FileIdentifier } from '@atlaskit/media-core';
+import { SmartMediaEditor, Dimensions } from '@findable/media-editor';
+import { FileIdentifier } from '@findable/media-core';
 import {
   stateKey as pluginKey,
   createPlugin,

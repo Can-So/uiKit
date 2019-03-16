@@ -1,4 +1,4 @@
-import { AnalyticsEventPayload } from '@atlaskit/analytics-next-types';
+import { AnalyticsEventPayload } from '@findable/analytics-next-types';
 export declare const UI_EVENT_TYPE = "ui";
 export declare const TRACK_EVENT_TYPE = "track";
 export declare const SCREEN_EVENT_TYPE = "screen";

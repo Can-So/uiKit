@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 var pulseBackground = keyframes(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  50% {\n    background-color: ", ";\n  }\n"], ["\n  50% {\n    background-color: ", ";\n  }\n"])), colors.R100);
 var pulseBackgroundReverse = keyframes(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  0% {\n    background-color: ", ";\n  }\n  50% {\n    background-color: auto;\n  }\n  100% {\n    background-color: ", ";\n  }\n"], ["\n  0% {\n    background-color: ", ";\n  }\n  50% {\n    background-color: auto;\n  }\n  100% {\n    background-color: ", ";\n  }\n"])), colors.R100, colors.R100);
 var Wrapper = styled.div(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n  &.-flash > div {\n    animation: 0.25s ease-in-out ", ";\n  }\n\n  & > div {\n    animation: ", ";\n  }\n"], ["\n  &.-flash > div {\n    animation: 0.25s ease-in-out ", ";\n  }\n\n  & > div {\n    animation: ",

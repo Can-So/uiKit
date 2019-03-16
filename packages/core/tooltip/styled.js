@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { borderRadius, colors, themed, layers } from '@atlaskit/theme';
+import { borderRadius, colors, themed, layers } from '@findable/theme';
 var backgroundColor = themed({
   light: colors.N800,
   dark: colors.DN0

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { ModalSpinner } from '@atlaskit/media-ui';
-import { colors } from '@atlaskit/theme';
+import { ModalSpinner } from '@findable/media-ui';
+import { colors } from '@findable/theme';
 import SmartMediaEditorType, {
   SmartMediaEditorProps,
 } from './smartMediaEditor';

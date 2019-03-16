@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { gridSize, fontSize, colors, themed } from '@atlaskit/theme';
+import { gridSize, fontSize, colors, themed } from '@findable/theme';
 import { getBackgroundColor, getBackgroundColorFocus, getBackgroundColorHover, getBorderColor, getBorderColorFocus } from './theme';
 var borderRadius = '3px';
 var borderWidth = 2;

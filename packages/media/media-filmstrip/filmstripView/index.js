@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 /* tslint:disable variable-name */
 import * as React from 'react';
-import ArrowLeft from '@atlaskit/icon/glyph/arrow-left';
-import ArrowRight from '@atlaskit/icon/glyph/arrow-right';
+import ArrowLeft from '@findable/icon/glyph/arrow-left';
+import ArrowRight from '@findable/icon/glyph/arrow-right';
 import * as debounce from 'debounce';
 import { FilmStripViewWrapper, FilmStripListWrapper, FilmStripList, ArrowLeftWrapper, ArrowRightWrapper, ShadowLeft, ShadowRight, FilmStripListItem, } from './styled';
 var DURATION_MIN = 0.5;

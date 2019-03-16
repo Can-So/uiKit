@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import Tag from '@atlaskit/tag';
+import Tag from '@findable/tag';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AddOptionAvatar } from './AddOptionAvatar';
@@ -7,7 +7,7 @@ import { messages } from './i18n';
 import { SizeableAvatar } from './SizeableAvatar';
 import { getAvatarUrl, isEmail } from './utils';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var scrollToValue = function (valueContainer, control) {
     var _a = valueContainer.getBoundingClientRect(), top = _a.top, height = _a.height;
     var controlHeight = control.getBoundingClientRect().height;

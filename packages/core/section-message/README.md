@@ -5,7 +5,7 @@ A react component used to alert users of a particular screen area that needs use
 ## Installation
 
 ```sh
-yarn add @atlaskit/section-message
+yarn add @findable/section-message
 ```
 
 ## Usage

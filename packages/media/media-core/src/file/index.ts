@@ -15,7 +15,7 @@ import {
   TouchFileDescriptor,
   TouchedFiles,
   UploadableFileUpfrontIds,
-} from '@atlaskit/media-store';
+} from '@findable/media-store';
 import * as isValidId from 'uuid-validate';
 import {
   FilePreview,

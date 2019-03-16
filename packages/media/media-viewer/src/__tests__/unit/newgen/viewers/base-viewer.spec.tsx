@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Button from '@atlaskit/button';
-import { ProcessedFileState } from '@atlaskit/media-core';
+import Button from '@findable/button';
+import { ProcessedFileState } from '@findable/media-core';
 import { BaseProps, BaseViewer } from '../../../../newgen/viewers/base-viewer';
 import { createContext } from '../../_stubs';
 import { Outcome } from '../../../../newgen/domain';
@@ -10,7 +10,7 @@ import {
   MediaViewerError,
 } from '../../../../newgen/error';
 import { Spinner } from '../../../../newgen/loading';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { mountWithIntlContext } from '@findable/media-test-helpers';
 
 function createItem(): ProcessedFileState {
   return {

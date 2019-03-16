@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import EditorFeedbackIcon from '@atlaskit/icon/glyph/editor/feedback';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import EditorFeedbackIcon from '@findable/icon/glyph/editor/feedback';
+import Page, { Grid, GridColumn } from '@findable/page';
 import Panel from '../src';
 
 const Header = (

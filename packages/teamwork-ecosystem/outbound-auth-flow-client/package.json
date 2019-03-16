@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/outbound-auth-flow-client",
+  "name": "@findable/outbound-auth-flow-client",
   "version": "2.0.0",
   "description": "Front-end library for starting outbound auth flows",
   "config": {
@@ -17,10 +17,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1"
+    "@findable/docs": "^7.0.1"
   },
   "atlaskit": {
     "internal": true

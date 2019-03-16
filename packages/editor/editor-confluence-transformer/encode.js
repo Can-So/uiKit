@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { getEmojiAcName, hexToRgb, tableBackgroundColorPalette, calcTableColumnWidths, } from '@atlaskit/adf-schema';
-import { timestampToIsoFormat } from '@atlaskit/editor-common';
+import { getEmojiAcName, hexToRgb, tableBackgroundColorPalette, calcTableColumnWidths, } from '@findable/adf-schema';
+import { timestampToIsoFormat } from '@findable/editor-common';
 import parseCxhtml from './parse-cxhtml';
 import { AC_XMLNS, FAB_XMLNS, default as encodeCxhtml } from './encode-cxhtml';
 import { mapCodeLanguage } from './languageMap';

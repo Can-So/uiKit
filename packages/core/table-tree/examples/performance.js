@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import Select from '@atlaskit/select';
+import Select from '@findable/select';
 import TableTree, {
   Headers,
   Header,

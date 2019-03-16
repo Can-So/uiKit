@@ -3,9 +3,9 @@ import * as React from 'react';
 import { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import * as cx from 'classnames';
-import TickIcon from '@atlaskit/icon/glyph/check';
-import { Ellipsify } from '@atlaskit/media-ui';
-import { messages } from '@atlaskit/media-ui';
+import TickIcon from '@findable/icon/glyph/check';
+import { Ellipsify } from '@findable/media-ui';
+import { messages } from '@findable/media-ui';
 // We dont require things directly from "utils" to avoid circular dependencies
 import { FileIcon } from '../../../utils/fileIcon';
 import { ErrorIcon } from '../../../utils/errorIcon';

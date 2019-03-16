@@ -12,14 +12,14 @@ import {
   PortalProvider,
   PortalProviderAPI,
   PortalRenderer,
-} from '@atlaskit/editor-core';
-import { ProviderFactory } from '@atlaskit/editor-common';
+} from '@findable/editor-core';
+import { ProviderFactory } from '@findable/editor-common';
 import { mount, ReactWrapper } from 'enzyme';
 import { RefsNode, Refs } from './schema-builder';
 import { Schema } from 'prosemirror-model';
 import { PluginKey } from 'prosemirror-state';
 import patchEditorViewForJSDOM from './jsdom-fixtures';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 class TestReactEditorView extends ReactEditorView<{
   plugins?: EditorPlugin[];

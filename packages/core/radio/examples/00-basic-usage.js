@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Checkbox } from '@atlaskit/checkbox';
+import { Checkbox } from '@findable/checkbox';
 import { RadioGroup } from '../src';
 import type { OptionsPropType } from '../src/types';
 

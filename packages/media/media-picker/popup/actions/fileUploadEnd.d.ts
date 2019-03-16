@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { MediaFile as MediaStoreMediaFile } from '@atlaskit/media-store';
+import { MediaFile as MediaStoreMediaFile } from '@findable/media-store';
 import { UploadEndEvent, UploadEndEventPayload } from '../../domain/uploadEvent';
 import { MediaFile } from '../../domain/file';
 export declare const FILE_UPLOAD_END = "FILE_UPLOAD_END";

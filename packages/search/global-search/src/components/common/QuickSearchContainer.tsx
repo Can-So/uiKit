@@ -18,7 +18,7 @@ import {
   firePostQueryShownEvent,
   fireExperimentExposureEvent,
 } from '../../util/analytics-event-helper';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { CreateAnalyticsEventFn } from '../analytics/types';
 import { objectValues } from '../SearchResultsUtil';
 import { ABTest } from '../../api/CrossProductSearchClient';

@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { v4 as uuid } from 'uuid';
-import { messages, Shortcut } from '@atlaskit/media-ui';
-import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
-import Spinner from '@atlaskit/spinner';
+import { messages, Shortcut } from '@findable/media-ui';
+import ModalDialog, { ModalTransition } from '@findable/modal-dialog';
+import Spinner from '@findable/spinner';
 import { intlShape, IntlProvider } from 'react-intl';
 import EditorView from './editorView/editorView';
 import { Blanket, SpinnerWrapper } from './styled';

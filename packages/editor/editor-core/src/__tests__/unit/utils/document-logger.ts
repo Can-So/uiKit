@@ -11,7 +11,7 @@ import {
   td,
   underline,
   strong,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { getDocStructure } from '../../../utils/document-logger';
 import schema from '../../../../../editor-test-helpers/src/schema';
 

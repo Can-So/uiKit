@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import LocalBrowserButton from './uploadButton';
 import { filesIcon } from '../../../../icons';
 import { Browser } from '../../../../components/types';

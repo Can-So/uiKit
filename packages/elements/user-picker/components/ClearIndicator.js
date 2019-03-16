@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { components } from '@atlaskit/select';
-import Tooltip from '@atlaskit/tooltip';
+import { components } from '@findable/select';
+import Tooltip from '@findable/tooltip';
 import { isPopupUserPickerByProps } from './utils';
 var ClearIndicator = /** @class */ (function (_super) {
     tslib_1.__extends(ClearIndicator, _super);

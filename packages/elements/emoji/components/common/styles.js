@@ -1,5 +1,5 @@
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors } from '@findable/theme';
 import { defaultEmojiHeight } from '../../constants';
 import { akEmojiSelectedBackgroundColor } from '../../shared-styles';
 import { style } from 'typestyle';

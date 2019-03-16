@@ -1,7 +1,7 @@
 var _this = this;
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { awaitError, mountWithIntlContext, fakeContext, } from '@atlaskit/media-test-helpers';
+import { awaitError, mountWithIntlContext, fakeContext, } from '@findable/media-test-helpers';
 import { ImageViewer, REQUEST_CANCELLED, } from '../../../../../newgen/viewers/image';
 var collectionName = 'some-collection';
 var imageItem = {

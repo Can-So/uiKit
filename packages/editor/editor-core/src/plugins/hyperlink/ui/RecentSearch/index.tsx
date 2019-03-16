@@ -1,6 +1,6 @@
 import * as React from 'react';
 import RecentList from './LinkAddToolbar';
-import { ProviderFactory, WithProviders } from '@atlaskit/editor-common';
+import { ProviderFactory, WithProviders } from '@findable/editor-common';
 
 export interface Props {
   providerFactory: ProviderFactory;

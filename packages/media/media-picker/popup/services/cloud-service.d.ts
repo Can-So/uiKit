@@ -1,4 +1,4 @@
-import { AuthProvider } from '@atlaskit/media-core';
+import { AuthProvider } from '@findable/media-core';
 import { ServiceName } from '../domain';
 export declare class CloudService {
     private readonly userAuthProvider;

@@ -7,7 +7,7 @@ import {
   hr,
   mention,
   randomId,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { undo } from 'prosemirror-history';
 import { NodeSelection, TextSelection } from 'prosemirror-state';
 import { setNodeSelection } from '../../../../utils';

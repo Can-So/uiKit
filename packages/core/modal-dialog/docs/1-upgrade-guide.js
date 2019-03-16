@@ -1,6 +1,6 @@
 // @flow
 
-import { code, md } from '@atlaskit/docs';
+import { code, md } from '@findable/docs';
 
 export default md`
   ## 6.x - 7.x
@@ -14,7 +14,7 @@ export default md`
   In version 6.x we recommended rendering \`ModalDialog\` in the following way:
 
   ${code`
-import ModalDialog from '@atlaskit/modal-dialog'
+import ModalDialog from '@findable/modal-dialog'
 
 const App = ({ isOpen, onClose }) => (
   {isOpen && <ModalDialog heading="Hi there 👋" onClose={onClose} />}
@@ -25,7 +25,7 @@ In version 7.x we require wrapping the conditional render statement
 to be wrapped in a \`ModalTransition\`.
 
   ${code`
-import ModalDialog { ModalTransition } from '@atlaskit/modal-dialog';
+import ModalDialog { ModalTransition } from '@findable/modal-dialog';
 
 const App = ({ isOpen, onClose }) => (
   <ModalTransition>

@@ -1,7 +1,7 @@
 import { Node as PMNode, ResolvedPos, Schema } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
 import { findPositionOfNodeBefore, findDomRefAtPos } from 'prosemirror-utils';
-import { tableMarginTop } from '@atlaskit/editor-common';
+import { tableMarginTop } from '@findable/editor-common';
 
 import { GapCursorSelection, Side } from './selection';
 import { TableCssClassName } from '../table/types';

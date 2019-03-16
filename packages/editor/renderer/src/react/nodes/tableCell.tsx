@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   hexToRgba,
   akEditorTableCellBackgroundOpacity,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 type Props = {
   background?: string;

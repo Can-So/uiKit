@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import FieldTextArea from '@atlaskit/field-text-area';
-import { Field } from '@atlaskit/form';
+import FieldTextArea from '@findable/field-text-area';
+import { Field } from '@findable/form';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';

@@ -7,7 +7,7 @@ import {
   RemoveImageButton,
   Image,
 } from '../../image-cropper/styled';
-import { smallImage, mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { smallImage, mountWithIntlContext } from '@findable/media-test-helpers';
 
 const imageWidth = 600;
 const imageHeight = 400;

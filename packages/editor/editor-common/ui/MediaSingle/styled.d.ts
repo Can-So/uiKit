@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HTMLAttributes } from 'react';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 /**
  * Calculates the image width for non-resized images.
  *

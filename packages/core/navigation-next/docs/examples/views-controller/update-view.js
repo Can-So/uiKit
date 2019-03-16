@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import GlobalNavigation from '@atlaskit/global-navigation';
-import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
-import IssueIcon from '@atlaskit/icon/glyph/issue';
-import PortfolioIcon from '@atlaskit/icon/glyph/portfolio';
-import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
+import GlobalNavigation from '@findable/global-navigation';
+import DashboardIcon from '@findable/icon/glyph/dashboard';
+import FolderIcon from '@findable/icon/glyph/folder';
+import IssueIcon from '@findable/icon/glyph/issue';
+import PortfolioIcon from '@findable/icon/glyph/portfolio';
+import { JiraIcon, JiraWordmark } from '@findable/logo';
 import {
   LayoutManagerWithViewController,
   NavigationProvider,

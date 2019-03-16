@@ -1,10 +1,10 @@
 import * as React from 'react'; // eslint-disable-line
-import Button from '@atlaskit/button';
-import { messages } from '@atlaskit/media-ui';
+import Button from '@findable/button';
+import { messages } from '@findable/media-ui';
 import {
   expectToEqual,
   mountWithIntlContext,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 import ConnectedErrorView from '../../errorView';
 

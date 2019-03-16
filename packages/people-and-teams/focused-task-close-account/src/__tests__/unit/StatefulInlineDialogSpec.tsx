@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import InlineDialog from '@atlaskit/inline-dialog';
+import InlineDialog from '@findable/inline-dialog';
 import StatefulInlineDialog from '../../components/StatefulInlineDialog';
 
 const render = (props = {}) =>

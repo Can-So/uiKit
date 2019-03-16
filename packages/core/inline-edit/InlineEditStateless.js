@@ -6,11 +6,11 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component, cloneElement } from 'react';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
-import Button from '@atlaskit/button';
-import ConfirmIcon from '@atlaskit/icon/glyph/check';
-import CancelIcon from '@atlaskit/icon/glyph/cross';
-import FieldBase, { Label } from '@atlaskit/field-base';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
+import Button from '@findable/button';
+import ConfirmIcon from '@findable/icon/glyph/check';
+import CancelIcon from '@findable/icon/glyph/cross';
+import FieldBase, { Label } from '@findable/field-base';
 import { name as packageName, version as packageVersion } from './version.json';
 import RootWrapper from './styled/RootWrapper';
 import ContentWrapper from './styled/ContentWrapper';

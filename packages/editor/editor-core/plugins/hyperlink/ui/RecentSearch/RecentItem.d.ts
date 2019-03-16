@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HTMLAttributes, ComponentClass } from 'react';
-import { ActivityItem } from '@atlaskit/activity';
+import { ActivityItem } from '@findable/activity';
 export declare const Name: ComponentClass<HTMLAttributes<{}>>;
 export declare const ContainerName: ComponentClass<React.HTMLAttributes<{}>>;
 export interface Props {

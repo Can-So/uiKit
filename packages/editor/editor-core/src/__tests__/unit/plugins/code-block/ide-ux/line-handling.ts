@@ -3,7 +3,7 @@ import {
   doc,
   p,
   code_block,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   getStartOfCurrentLine,
   getEndOfCurrentLine,

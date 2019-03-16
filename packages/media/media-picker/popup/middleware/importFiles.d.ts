@@ -1,5 +1,5 @@
 import { Store, Middleware } from 'redux';
-import { TouchFileDescriptor } from '@atlaskit/media-core';
+import { TouchFileDescriptor } from '@findable/media-core';
 import { State, SelectedItem, LocalUpload, ServiceName } from '../domain';
 import { WsProvider } from '../tools/websocket/wsProvider';
 import { WsConnectionHolder } from '../tools/websocket/wsConnectionHolder';

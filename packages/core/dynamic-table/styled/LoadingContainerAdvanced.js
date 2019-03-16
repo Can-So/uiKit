@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 export var Container = styled.div.withConfig({
   displayName: "LoadingContainerAdvanced__Container",
   componentId: "sc-1s2zdt8-0"

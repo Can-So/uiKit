@@ -1,12 +1,12 @@
 import { EditorState, Plugin, PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   EmojiId,
   EmojiProvider,
   EmojiSearchResult,
   EmojiDescription,
-} from '@atlaskit/emoji';
+} from '@findable/emoji';
 import {
   isMarkTypeAllowedInCurrentSelection,
   isChromeWithSelectionBug,

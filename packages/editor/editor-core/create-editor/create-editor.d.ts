@@ -1,6 +1,6 @@
 import { Schema, MarkSpec } from 'prosemirror-model';
 import { Plugin } from 'prosemirror-state';
-import { ProviderFactory, ErrorReporter, ErrorReportingHandler } from '@atlaskit/editor-common';
+import { ProviderFactory, ErrorReporter, ErrorReportingHandler } from '@findable/editor-common';
 import { AnalyticsHandler } from '../analytics';
 import { EditorPlugin, EditorProps, EditorConfig } from '../types';
 import { Dispatch, EventDispatcher } from '../event-dispatcher';

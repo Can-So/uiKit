@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
-import { Context } from '@atlaskit/media-core';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { Context } from '@findable/media-core';
+import { MediaSingleLayout } from '@findable/adf-schema';
 import {
   akEditorWideLayoutWidth,
   calcPxFromColumns,
@@ -10,7 +10,7 @@ import {
   akEditorBreakoutPadding,
   calcColumnsFromPx,
   breakoutWideScaleRatio,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 import { Wrapper } from './styled';
 import { Props, EnabledHandles } from './types';

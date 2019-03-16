@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import styled from 'styled-components';
 import { getEventHandler } from '../../utils';
 // tslint:disable-next-line:variable-name

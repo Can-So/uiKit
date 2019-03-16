@@ -5,7 +5,7 @@ A checkbox element for use in forms and elsewhere.
 ## Installation
 
 ```sh
-yarn add @atlaskit/checkbox
+yarn add @findable/checkbox
 ```
 
 ## Usage

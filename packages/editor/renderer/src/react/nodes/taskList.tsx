@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent, Children, ReactNode } from 'react';
 
-import { TaskList as AkTaskList } from '@atlaskit/task-decision';
+import { TaskList as AkTaskList } from '@findable/task-decision';
 
 export interface Props {
   localId?: string;

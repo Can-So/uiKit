@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { OPERATIONAL_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { OPERATIONAL_EVENT_TYPE } from '@findable/analytics-gas-types';
 import { isFileUploadsStartAction } from '../../actions/fileUploadsStart';
 import { HandlerResult, Payload } from '.';
 import { MediaFile } from '../../../domain/file';

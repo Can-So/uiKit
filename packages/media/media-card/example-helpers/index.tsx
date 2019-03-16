@@ -1,10 +1,10 @@
 /* tslint:disable:no-console */
 
 import * as React from 'react';
-import { Context, FileItem, Identifier } from '@atlaskit/media-core';
-import { createStorybookContext } from '@atlaskit/media-test-helpers';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
+import { Context, FileItem, Identifier } from '@findable/media-core';
+import { createStorybookContext } from '@findable/media-test-helpers';
+import CrossIcon from '@findable/icon/glyph/cross';
+import AnnotateIcon from '@findable/icon/glyph/media-services/annotate';
 import { SelectableCard } from './selectableCard';
 import {
   Card,

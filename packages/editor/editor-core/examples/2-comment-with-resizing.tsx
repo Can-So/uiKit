@@ -1,4 +1,4 @@
-import { storyMediaProviderFactory } from '@atlaskit/editor-test-helpers';
+import { storyMediaProviderFactory } from '@findable/editor-test-helpers';
 import { exampleDocument } from '../example-helpers/grid-document';
 import CommentExample from './2-comment';
 

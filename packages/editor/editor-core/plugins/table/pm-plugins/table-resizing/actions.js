@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import { TableMap } from 'prosemirror-tables';
 import { findDomRefAtPos } from 'prosemirror-utils';
-import { gridSize } from '@atlaskit/theme';
-import { tableCellMinWidth, akEditorTableNumberColumnWidth, akEditorTableToolbarSize, } from '@atlaskit/editor-common';
+import { gridSize } from '@findable/theme';
+import { tableCellMinWidth, akEditorTableNumberColumnWidth, akEditorTableToolbarSize, } from '@findable/editor-common';
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
 import Resizer from './resizer/resizer';

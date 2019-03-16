@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import MoreIcon from '@atlaskit/icon/glyph/more';
-import DropdownMenu, { DropdownItemGroup, DropdownItem, } from '@atlaskit/dropdown-menu';
+import MoreIcon from '@findable/icon/glyph/more';
+import DropdownMenu, { DropdownItemGroup, DropdownItem, } from '@findable/dropdown-menu';
 import { CardActionButton } from './styled';
 var CardActionsDropdownMenu = /** @class */ (function (_super) {
     tslib_1.__extends(CardActionsDropdownMenu, _super);

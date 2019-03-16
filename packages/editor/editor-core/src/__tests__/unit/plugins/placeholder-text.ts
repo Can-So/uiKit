@@ -14,7 +14,7 @@ import {
   p,
   placeholder,
   insertText,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { Selection } from 'prosemirror-state';
 
 describe(name, () => {

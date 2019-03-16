@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import AkButton from '@atlaskit/button';
-import Spinner from '@atlaskit/spinner';
+import AkButton from '@findable/button';
+import Spinner from '@findable/spinner';
 import * as React from 'react';
 import { Component } from 'react';
 import { FormattedMessage } from 'react-intl';

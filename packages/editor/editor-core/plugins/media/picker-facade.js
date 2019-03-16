@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { MediaPicker, isDropzone, isClipboard, isPopup, isBinaryUploader, isBrowser, } from '@atlaskit/media-picker';
+import { MediaPicker, isDropzone, isClipboard, isPopup, isBinaryUploader, isBrowser, } from '@findable/media-picker';
 var PickerFacade = /** @class */ (function () {
     function PickerFacade(pickerType, config, pickerConfig, mediaPickerFactoryClass) {
         if (mediaPickerFactoryClass === void 0) { mediaPickerFactoryClass = MediaPicker; }

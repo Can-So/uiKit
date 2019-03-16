@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Page, { Grid, GridColumn } from '@findable/page';
 import { Card } from '../src';
 
 const defaultText = `{

@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent, type Element as ReactElement } from 'react';
-import AkLayer from '@atlaskit/layer';
+import AkLayer from '@findable/layer';
 
 import PositionWrapper from './components/PositionWrapper';
 import withOuterListeners from './components/withOuterListeners';

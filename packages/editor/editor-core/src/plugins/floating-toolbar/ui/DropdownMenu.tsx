@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
-import Item, { itemThemeNamespace } from '@atlaskit/item';
-import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
+import { colors, gridSize } from '@findable/theme';
+import Item, { itemThemeNamespace } from '@findable/item';
+import EditorDoneIcon from '@findable/icon/glyph/editor/done';
 
 import { DropdownOptionT } from './Dropdown';
 

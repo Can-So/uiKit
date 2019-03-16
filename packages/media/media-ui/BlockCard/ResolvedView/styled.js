@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { ellipsis, borderRadius, size } from '../../mixins';
 var thumbnailWidth = 40;
 export var maxAvatarCount = 6;

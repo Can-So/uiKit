@@ -2,8 +2,8 @@ import styled from 'styled-components';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { HTMLAttributes, ClassAttributes, ComponentClass } from 'react';
-import { fontSize } from '@atlaskit/theme';
-import { colors, borderRadius, themed } from '@atlaskit/theme';
+import { fontSize } from '@findable/theme';
+import { colors, borderRadius, themed } from '@findable/theme';
 
 export const padding = 8;
 

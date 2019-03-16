@@ -3,8 +3,8 @@ import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 import { CellSelection } from 'prosemirror-tables';
 import { findCellClosestToPos } from 'prosemirror-utils';
-import { ReactEditorView, setTextSelection, getDefaultPluginsList, PortalProvider, PortalRenderer, } from '@atlaskit/editor-core';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ReactEditorView, setTextSelection, getDefaultPluginsList, PortalProvider, PortalRenderer, } from '@findable/editor-core';
+import { ProviderFactory } from '@findable/editor-common';
 import { mount } from 'enzyme';
 import patchEditorViewForJSDOM from './jsdom-fixtures';
 var TestReactEditorView = /** @class */ (function (_super) {

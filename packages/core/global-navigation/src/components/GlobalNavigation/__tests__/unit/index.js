@@ -3,22 +3,22 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { mount, shallow } from 'enzyme';
-import Badge from '@atlaskit/badge';
-import { DropdownItem } from '@atlaskit/dropdown-menu';
-import Drawer from '@atlaskit/drawer';
+import Badge from '@findable/badge';
+import { DropdownItem } from '@findable/dropdown-menu';
+import Drawer from '@findable/drawer';
 import AtlassianSwitcher, {
   ConfluenceSwitcher,
   JiraSwitcher,
-} from '@atlaskit/atlassian-switcher';
-import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import CreateIcon from '@atlaskit/icon/glyph/add';
-import StarLargeIcon from '@atlaskit/icon/glyph/star-large';
-import NotificationIcon from '@atlaskit/icon/glyph/notification';
-import SettingsIcon from '@atlaskit/icon/glyph/settings';
-import SignInIcon from '@atlaskit/icon/glyph/sign-in';
-import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
-import { NotificationIndicator } from '@atlaskit/notification-indicator';
+} from '@findable/atlassian-switcher';
+import AppSwitcherIcon from '@findable/icon/glyph/app-switcher';
+import SearchIcon from '@findable/icon/glyph/search';
+import CreateIcon from '@findable/icon/glyph/add';
+import StarLargeIcon from '@findable/icon/glyph/star-large';
+import NotificationIcon from '@findable/icon/glyph/notification';
+import SettingsIcon from '@findable/icon/glyph/settings';
+import SignInIcon from '@findable/icon/glyph/sign-in';
+import QuestionIcon from '@findable/icon/glyph/question-circle';
+import { NotificationIndicator } from '@findable/notification-indicator';
 import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
 import ItemComponent from '../../../ItemComponent';

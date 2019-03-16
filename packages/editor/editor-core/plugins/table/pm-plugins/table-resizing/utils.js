@@ -1,5 +1,5 @@
 import { cellAround, TableMap } from 'prosemirror-tables';
-import { calcTableWidth, akEditorWideLayoutWidth, akEditorDefaultLayoutWidth, akEditorFullWidthLayoutWidth, getBreakpoint, mapBreakpointToLayoutMaxWidth, } from '@atlaskit/editor-common';
+import { calcTableWidth, akEditorWideLayoutWidth, akEditorDefaultLayoutWidth, akEditorFullWidthLayoutWidth, getBreakpoint, mapBreakpointToLayoutMaxWidth, } from '@findable/editor-common';
 export var tableLayoutToSize = {
     default: akEditorDefaultLayoutWidth,
     wide: akEditorWideLayoutWidth,

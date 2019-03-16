@@ -1,4 +1,4 @@
-import { Rectangle, Bounds, Vector2 } from '@atlaskit/media-ui';
+import { Rectangle, Bounds, Vector2 } from '@findable/media-ui';
 export declare function zoomToFit(imageWidth: number, imageHeight: number, visibleBounds: Bounds): Rectangle;
 export declare function applyConstraints(useConstraints: boolean, imageBounds: Bounds, visibleBounds: Bounds): Vector2;
 export declare function applyFullConstraints(imageBounds: Bounds, visibleBounds: Bounds): Vector2;

@@ -1,11 +1,11 @@
 // @ts-ignore: unused variable
 // prettier-ignore
 import { css, Styles, StyledComponentClass } from 'styled-components';
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 import {
   columnLayoutSharedStyle,
   gridMediumMaxWidth,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 export const layoutStyles = css`
   .ProseMirror {

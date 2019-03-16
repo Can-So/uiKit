@@ -8,7 +8,7 @@ import {
   DEFAULT_GAS_ATTRIBUTES,
   DEFAULT_GAS_SOURCE,
 } from './analytics-util';
-import { GasPayload, EventType } from '@atlaskit/analytics-gas-types';
+import { GasPayload, EventType } from '@findable/analytics-gas-types';
 import { CreateAnalyticsEventFn } from '../components/analytics/types';
 import { ABTest } from '../api/CrossProductSearchClient';
 

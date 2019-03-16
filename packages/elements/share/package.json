@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/share",
+  "name": "@findable/share",
   "version": "0.2.0",
   "config": {
     "access": "private"
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+    "url": "https://github.com/fnamazing/uiKit"
   },
   "author": "Atlassian Pty Ltd",
   "license": "Apache-2.0",
@@ -25,15 +25,15 @@
     "elements"
   ],
   "dependencies": {
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/field-text-area": "^5.0.1",
-    "@atlaskit/form": "^5.2.1",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/inline-dialog": "^10.0.1",
-    "@atlaskit/theme": "^8.0.1",
-    "@atlaskit/tooltip": "^13.0.1",
-    "@atlaskit/user-picker": "^2.0.0",
-    "@atlaskit/util-service-support": "^4.0.0",
+    "@findable/button": "^11.0.0",
+    "@findable/field-text-area": "^5.0.1",
+    "@findable/form": "^5.2.1",
+    "@findable/icon": "^16.0.5",
+    "@findable/inline-dialog": "^10.0.1",
+    "@findable/theme": "^8.0.1",
+    "@findable/tooltip": "^13.0.1",
+    "@findable/user-picker": "^2.0.0",
+    "@findable/util-service-support": "^4.0.0",
     "memoize-one": "^3.0.1",
     "styled-components": "^3.2.6"
   },
@@ -42,13 +42,13 @@
     "react-intl": "^2.6.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/editor-test-helpers": "^8.0.0",
-    "@atlaskit/i18n-tools": "^0.5.0",
-    "@atlaskit/section-message": "^2.0.1",
-    "@atlaskit/select": "^8.0.3",
-    "@atlaskit/toggle": "^6.0.1",
-    "@atlaskit/util-data-test": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/editor-test-helpers": "^8.0.0",
+    "@findable/i18n-tools": "^0.5.0",
+    "@findable/section-message": "^2.0.1",
+    "@findable/select": "^8.0.3",
+    "@findable/toggle": "^6.0.1",
+    "@findable/util-data-test": "^11.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "react": "^16.4.0",

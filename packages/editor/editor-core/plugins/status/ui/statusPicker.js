@@ -1,13 +1,13 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import styled from 'styled-components';
-import { Popup, akEditorFloatingDialogZIndex } from '@atlaskit/editor-common';
-import { colors, borderRadius, gridSize } from '@atlaskit/theme';
-import { StatusPicker as AkStatusPicker } from '@atlaskit/status';
+import { Popup, akEditorFloatingDialogZIndex } from '@findable/editor-common';
+import { colors, borderRadius, gridSize } from '@findable/theme';
+import { StatusPicker as AkStatusPicker } from '@findable/status';
 import { dropShadow } from '../../../ui/styles';
 import withOuterListeners from '../../../ui/with-outer-listeners';
 import { DEFAULT_STATUS } from '../actions';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { analyticsState, createStatusAnalyticsAndFire } from '../analytics';
 var PopupWithListeners = withOuterListeners(Popup);
 export var InputMethod;

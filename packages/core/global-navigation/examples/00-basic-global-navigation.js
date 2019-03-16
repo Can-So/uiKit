@@ -1,13 +1,13 @@
 // @flow
 
 import React from 'react';
-import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
+import EmojiAtlassianIcon from '@findable/icon/glyph/emoji/atlassian';
 import {
   GlobalItem,
   LayoutManager,
   NavigationProvider,
-} from '@atlaskit/navigation-next';
-import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
+} from '@findable/navigation-next';
+import AppSwitcherIcon from '@findable/icon/glyph/app-switcher';
 
 import GlobalNavigation from '../src';
 

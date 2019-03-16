@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CancelableEvent } from '@atlaskit/quick-search';
+import { CancelableEvent } from '@findable/quick-search';
 import configureSearchClients from '../api/configureSearchClients';
 export declare type LinkComponent = React.ComponentType<{
     className: string;

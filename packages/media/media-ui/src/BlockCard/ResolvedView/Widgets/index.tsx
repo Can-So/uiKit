@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Badge from '@atlaskit/badge';
-import Lozenge from '@atlaskit/lozenge';
-import Tooltip from '@atlaskit/tooltip';
+import Badge from '@findable/badge';
+import Lozenge from '@findable/lozenge';
+import Tooltip from '@findable/tooltip';
 import { ImageIcon } from '../../ImageIcon';
 import { DetailViewModel, BadgeViewModel } from '../../ResolvedView';
 import { Wrapper, WidgetWrapper, WidgetDetails, Title, Text } from './styled';

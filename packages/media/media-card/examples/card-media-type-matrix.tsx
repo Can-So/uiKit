@@ -7,7 +7,7 @@ import {
   imageFileId,
   docFileId,
   unknownFileId,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 
 import { Card } from '../src';
 

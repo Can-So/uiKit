@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
-import { setCellAttrs } from '@atlaskit/adf-schema';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import { setCellAttrs } from '@findable/adf-schema';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
 import ToolbarButton from '../../../ui/ToolbarButton';
 import WithPluginState from '../../../ui/WithPluginState';

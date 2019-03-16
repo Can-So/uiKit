@@ -7,7 +7,7 @@ import {
   td,
   tdCursor,
   tdEmpty,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { TablePluginState } from '../../../../../plugins/table/types';
 import tablesPlugin from '../../../../../plugins/table';
 import { deleteColumns } from '../../../../../plugins/table/transforms';

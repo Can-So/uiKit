@@ -15,7 +15,7 @@ export interface Props {
     popperProps?: Object;
     /** onChange handler */
     onChange: (value: string, analyticsEvent?: object) => void;
-    /** You should not be accessing this prop under any circumstances. It is provided by @atlaskit/analytics-next. */
+    /** You should not be accessing this prop under any circumstances. It is provided by @findable/analytics-next. */
     createAnalyticsEvent?: any;
 }
 export declare class ColorPickerWithoutAnalytics extends React.Component<Props> {

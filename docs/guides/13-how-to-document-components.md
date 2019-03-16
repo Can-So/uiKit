@@ -82,12 +82,12 @@ Only `.js` files directly within the docs folder are used. Sub-directories are n
 
 ### Writing a file in docs
 
-To allow maximum flexibility when writing your docs, we assume each files exports a react component which we will render, however to make writing these files simple for simple text, we are using [react-markings](https://github.com/Thinkmill/react-markings) filtered through `@atlaskit/docs` as a way to provide several helpers for writing docs files.
+To allow maximum flexibility when writing your docs, we assume each files exports a react component which we will render, however to make writing these files simple for simple text, we are using [react-markings](https://github.com/Thinkmill/react-markings) filtered through `@findable/docs` as a way to provide several helpers for writing docs files.
 
 An average intro file may look something like this:
 
 ```
-import { md, Props, Example } from '@atlaskit/docs'
+import { md, Props, Example } from '@findable/docs'
 import SpecialCustomThing from '../somwhere'
 
 export default md`
@@ -119,9 +119,9 @@ ${<Props
 ```
 #### Documentation template
 
-A documentation file template to use as a starter is available [here](https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/docs/templates/0-intro-template.js).
+A documentation file template to use as a starter is available [here](https://github.com/fnamazing/uiKit/src/master/docs/templates/0-intro-template.js).
 
-An example file template to use as a starter is available [here](https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/docs/templates/1-example-template.js).
+An example file template to use as a starter is available [here](https://github.com/fnamazing/uiKit/src/master/docs/templates/1-example-template.js).
 
 #### What your documentation text should cover
 
@@ -150,7 +150,7 @@ To explain what we are doing, we have written two bits of software that combine 
 
 The first is [extract-react-types](https://github.com/atlassian/extract-react-types), which we are using a webpack loader of to create an object representation of the prop types of the react class from the targeted file.
 
-The second is [pretty-proptypes](https://github.com/Noviny/pretty-proptypes), which is responsible for reading in this data. We export the `<Props />` from `@atlaskit/docs`, which is a re-exporting of the default export from `pretty-proptypes`.
+The second is [pretty-proptypes](https://github.com/Noviny/pretty-proptypes), which is responsible for reading in this data. We export the `<Props />` from `@findable/docs`, which is a re-exporting of the default export from `pretty-proptypes`.
 
 For anything other than the standard use-case, see the pretty-proptypes docs.
 
@@ -182,7 +182,7 @@ export default () => (
 
 ### Quick gotcha: pointing at src, not the component.
 
-Because examples are written within the mono-repo, we point to the `../src` file to get the exports instead of `@atlaskit/packageName`. We correct this in the examples themselves. Pointing to the package as if it were an export will cause odd errors.
+Because examples are written within the mono-repo, we point to the `../src` file to get the exports instead of `@findable/packageName`. We correct this in the examples themselves. Pointing to the package as if it were an export will cause odd errors.
 
 Pointing to `../src/` or `../src/index` will stop the path from being transformed. It should be explicitly `../src`.
 

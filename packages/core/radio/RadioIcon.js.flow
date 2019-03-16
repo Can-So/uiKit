@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Icon from '@atlaskit/icon/glyph/radio';
+import Icon from '@findable/icon/glyph/radio';
 import { IconWrapper } from './styled/Radio';
 import type { RadioIconProps } from './types';
 

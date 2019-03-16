@@ -1,15 +1,15 @@
 // @flow
 
 import React from 'react';
-import { Example } from '@atlaskit/docs';
-import { colors } from '@atlaskit/theme';
+import { Example } from '@findable/docs';
+import { colors } from '@findable/theme';
 
 /**
  * Load an example in an iframe
  */
 export const IframeExample = ({ source, title, url }: *) => (
   <Example
-    packageName="@atlaskit/global-navigation"
+    packageName="@findable/global-navigation"
     Component={() => (
       <iframe
         src={url}

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, Identifier } from '@atlaskit/media-core';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { Context, Identifier } from '@findable/media-core';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 import { Subscription } from 'rxjs/Subscription';
-import { MediaViewerDataSource } from '@atlaskit/media-viewer';
+import { MediaViewerDataSource } from '@findable/media-viewer';
 import { CardAnalyticsContext, CardAction, CardDimensions, CardProps, CardState, CardEvent } from '../..';
 export declare class Card extends Component<CardProps, CardState> {
     private hasBeenMounted;

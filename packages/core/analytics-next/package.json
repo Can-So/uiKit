@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/analytics-next",
+  "name": "@findable/analytics-next",
   "version": "4.0.1",
   "description": "The 🆕 Atlaskit component analytics framework",
   "license": "Apache-2.0",
@@ -17,7 +17,7 @@
     "name": "Analytics next",
     "team": "core"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
@@ -27,11 +27,11 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/field-text": "^8.0.1",
-    "@atlaskit/ssr": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/button": "^11.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/field-text": "^8.0.1",
+    "@findable/ssr": "^0.0.1",
     "enzyme": "^3.7.0",
     "lodash.isequal": "^4.5.0",
     "react-dom": "^16.4.2",

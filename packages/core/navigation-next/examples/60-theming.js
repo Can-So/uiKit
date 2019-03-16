@@ -1,8 +1,8 @@
 // @flow
 
 import React, { type ComponentType } from 'react';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import ArrowRightIcon from '@atlaskit/icon/glyph/arrow-right';
+import BoardIcon from '@findable/icon/glyph/board';
+import ArrowRightIcon from '@findable/icon/glyph/arrow-right';
 
 import {
   GroupHeading,

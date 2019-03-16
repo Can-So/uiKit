@@ -22,7 +22,7 @@ import {
   convertServiceItemResponseToItemResponse,
   convertServiceDecisionResponseToDecisionResponse,
   convertServiceTaskResponseToTaskResponse,
-} from '@atlaskit/task-decision';
+} from '@findable/task-decision';
 
 import * as subMinutes from 'date-fns/sub_minutes';
 

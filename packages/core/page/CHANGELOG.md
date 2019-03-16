@@ -1,16 +1,16 @@
-# @atlaskit/page
+# @findable/page
 
 ## 9.0.1
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/banner@8.0.1
-  - @atlaskit/logo@10.0.1
-  - @atlaskit/navigation@34.0.1
-  - @atlaskit/toggle@6.0.1
-  - @atlaskit/button@11.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/banner@8.0.1
+  - @findable/logo@10.0.1
+  - @findable/navigation@34.0.1
+  - @findable/toggle@6.0.1
+  - @findable/button@11.0.0
 
 ## 9.0.0
-- [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [major] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -22,13 +22,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -42,168 +42,168 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 8.0.12
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/banner@7.0.12
-  - @atlaskit/button@10.1.1
-  - @atlaskit/logo@9.2.6
-  - @atlaskit/navigation@33.3.8
-  - @atlaskit/toggle@5.0.14
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/banner@7.0.12
+  - @findable/button@10.1.1
+  - @findable/logo@9.2.6
+  - @findable/navigation@33.3.8
+  - @findable/toggle@5.0.14
+  - @findable/docs@6.0.0
 
 ## 8.0.11
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/banner@7.0.9
-  - @atlaskit/logo@9.2.4
-  - @atlaskit/navigation@33.3.5
-  - @atlaskit/toggle@5.0.11
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/banner@7.0.9
+  - @findable/logo@9.2.4
+  - @findable/navigation@33.3.5
+  - @findable/toggle@5.0.11
+  - @findable/button@10.0.0
 
 ## 8.0.10
-- [patch] [84e8015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84e8015):
+- [patch] [84e8015](https://github.com/fnamazing/uiKit/commits/84e8015):
 
   - Bump react-syntax-highlighter to 10.0.1
 
 ## 8.0.9
-- [patch] Fix webpack 3 support for page & code [03af95e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03af95e)
+- [patch] Fix webpack 3 support for page & code [03af95e](https://github.com/fnamazing/uiKit/commits/03af95e)
 
 ## 8.0.8
-- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://github.com/fnamazing/uiKit/commits/b71751b)
 
 ## 8.0.7
-- [patch] Upgrade react-syntax-highlighter again and use async loaded prism [260d66a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/260d66a)
+- [patch] Upgrade react-syntax-highlighter again and use async loaded prism [260d66a](https://github.com/fnamazing/uiKit/commits/260d66a)
 
 ## 8.0.6
-- [patch] Upgraded react-syntax-highlighter to 8.0.2 [7cc7000](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cc7000)
+- [patch] Upgraded react-syntax-highlighter to 8.0.2 [7cc7000](https://github.com/fnamazing/uiKit/commits/7cc7000)
 
 ## 8.0.5
-- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://github.com/fnamazing/uiKit/commits/b5d6d04)
 
 ## 8.0.3
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/navigation@33.1.3
-  - @atlaskit/toggle@5.0.5
-  - @atlaskit/button@9.0.5
-  - @atlaskit/banner@7.0.3
-  - @atlaskit/icon@13.2.4
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/navigation@33.1.3
+  - @findable/toggle@5.0.5
+  - @findable/button@9.0.5
+  - @findable/banner@7.0.3
+  - @findable/icon@13.2.4
 
 ## 8.0.2
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/navigation@33.1.2
-  - @atlaskit/toggle@5.0.4
-  - @atlaskit/banner@7.0.2
-  - @atlaskit/docs@5.0.2
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/navigation@33.1.2
+  - @findable/toggle@5.0.4
+  - @findable/banner@7.0.2
+  - @findable/docs@5.0.2
 
 ## 8.0.1
-- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-- [none] Updated dependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-  - @atlaskit/toggle@5.0.3
-  - @atlaskit/banner@7.0.1
-  - @atlaskit/navigation@33.1.1
+- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+- [none] Updated dependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+  - @findable/toggle@5.0.3
+  - @findable/banner@7.0.1
+  - @findable/navigation@33.1.1
 
 ## 8.0.0
 
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/toggle@5.0.0
-  - @atlaskit/banner@7.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/navigation@33.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/navigation@33.0.0
-  - @atlaskit/toggle@5.0.0
-  - @atlaskit/banner@7.0.0
-  - @atlaskit/docs@5.0.0
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/toggle@5.0.0
+  - @findable/banner@7.0.0
+  - @findable/docs@5.0.0
+  - @findable/navigation@33.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/navigation@33.0.0
+  - @findable/toggle@5.0.0
+  - @findable/banner@7.0.0
+  - @findable/docs@5.0.0
 
 ## 7.2.1
-- [patch] Fixed typo in grid component [c1fda8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1fda8b)
-- [none] Updated dependencies [c1fda8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1fda8b)
+- [patch] Fixed typo in grid component [c1fda8b](https://github.com/fnamazing/uiKit/commits/c1fda8b)
+- [none] Updated dependencies [c1fda8b](https://github.com/fnamazing/uiKit/commits/c1fda8b)
 
 ## 7.2.0
-- [minor] Fixes types for Flow 0.74 [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-- [none] Updated dependencies [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-  - @atlaskit/navigation@32.2.0
+- [minor] Fixes types for Flow 0.74 [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+- [none] Updated dependencies [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+  - @findable/navigation@32.2.0
 
 ## 7.1.1
-- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-- [none] Updated dependencies [e7756cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7756cd)
-  - @atlaskit/toggle@4.0.3
-  - @atlaskit/navigation@32.1.1
+- [patch] Clean Changelogs - remove duplicates and empty entries [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+- [none] Updated dependencies [e7756cd](https://github.com/fnamazing/uiKit/commits/e7756cd)
+  - @findable/toggle@4.0.3
+  - @findable/navigation@32.1.1
 
 ## 7.1.0
-- [none] Updated dependencies [9d20f54](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d20f54)
-  - @atlaskit/navigation@32.1.0
-  - @atlaskit/toggle@4.0.2
-  - @atlaskit/banner@6.1.0
-  - @atlaskit/docs@4.1.0
+- [none] Updated dependencies [9d20f54](https://github.com/fnamazing/uiKit/commits/9d20f54)
+  - @findable/navigation@32.1.0
+  - @findable/toggle@4.0.2
+  - @findable/banner@6.1.0
+  - @findable/docs@4.1.0
 
 ## 7.0.1
-- [patch] Update readme's [223cd67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/223cd67)
-- [patch] Updated dependencies [223cd67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/223cd67)
-  - @atlaskit/navigation@32.0.1
-  - @atlaskit/toggle@4.0.1
-  - @atlaskit/banner@6.0.1
-  - @atlaskit/docs@4.0.1
+- [patch] Update readme's [223cd67](https://github.com/fnamazing/uiKit/commits/223cd67)
+- [patch] Updated dependencies [223cd67](https://github.com/fnamazing/uiKit/commits/223cd67)
+  - @findable/navigation@32.0.1
+  - @findable/toggle@4.0.1
+  - @findable/banner@6.0.1
+  - @findable/docs@4.0.1
 
 ## 7.0.0
-- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/navigation@32.0.0
-  - @atlaskit/toggle@4.0.0
-  - @atlaskit/banner@6.0.0
-  - @atlaskit/docs@4.0.0
+- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/navigation@32.0.0
+  - @findable/toggle@4.0.0
+  - @findable/banner@6.0.0
+  - @findable/docs@4.0.0
 
 ## 6.0.4
-- [patch] Updated dependencies [1c87e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c87e5a)
-  - @atlaskit/banner@5.0.3
-  - @atlaskit/navigation@31.0.5
+- [patch] Updated dependencies [1c87e5a](https://github.com/fnamazing/uiKit/commits/1c87e5a)
+  - @findable/banner@5.0.3
+  - @findable/navigation@31.0.5
 
 ## 6.0.3
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/toggle@3.0.2
-  - @atlaskit/navigation@31.0.4
-  - @atlaskit/banner@5.0.2
-  - @atlaskit/docs@3.0.4
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/toggle@3.0.2
+  - @findable/navigation@31.0.4
+  - @findable/banner@5.0.2
+  - @findable/docs@3.0.4
 
 ## 6.0.2
-- [patch] Remove unused dependencies [3cfb3fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3cfb3fe)
+- [patch] Remove unused dependencies [3cfb3fe](https://github.com/fnamazing/uiKit/commits/3cfb3fe)
 
 ## 6.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 5.1.2
-- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ed0bba)
+- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://github.com/fnamazing/uiKit/commits/9ed0bba)
 
 ## 5.1.1
-- [patch] Update links in documentation [c4f7497](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4f7497)
+- [patch] Update links in documentation [c4f7497](https://github.com/fnamazing/uiKit/commits/c4f7497)
 
 ## 5.1.0
-- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ceccf30)
+- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://github.com/fnamazing/uiKit/commits/ceccf30)
 
 ## 5.0.15
-- [patch] added min-with on text to enable text truncating [44fc258](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44fc258)
+- [patch] added min-with on text to enable text truncating [44fc258](https://github.com/fnamazing/uiKit/commits/44fc258)
 
 ## 5.0.14
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 5.0.12
-- [patch] Packages Flow types for elements components [3111e74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3111e74)
+- [patch] Packages Flow types for elements components [3111e74](https://github.com/fnamazing/uiKit/commits/3111e74)
 
 ## 5.0.10
-- [patch] Minor documentation fixes [f0e96bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0e96bd)
+- [patch] Minor documentation fixes [f0e96bd](https://github.com/fnamazing/uiKit/commits/f0e96bd)
 
 ## 5.0.9
-- [patch] Minor manual bump for packages desync'd from npm [e988c58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e988c58)
+- [patch] Minor manual bump for packages desync'd from npm [e988c58](https://github.com/fnamazing/uiKit/commits/e988c58)
 
 ## 5.0.8
 - Manual bump to resolve desync with npm package version.
 
 ## 5.0.7
-- [patch] Enabling syntax highlighter language auto-detect [4831bd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4831bd2)
+- [patch] Enabling syntax highlighter language auto-detect [4831bd2](https://github.com/fnamazing/uiKit/commits/4831bd2)
 
 ## 5.0.6
-- [patch] Migrated to mk2 repo, build system & docs. [64e83f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/64e83f3)
+- [patch] Migrated to mk2 repo, build system & docs. [64e83f3](https://github.com/fnamazing/uiKit/commits/64e83f3)
 
 ## 5.0.5 (2017-12-05)
 * bug fix; remove the object literal being passed to the ThemeProvider which was causing unnece (issues closed: ak-3988) ([96ebc12](https://bitbucket.org/atlassian/atlaskit/commits/96ebc12))

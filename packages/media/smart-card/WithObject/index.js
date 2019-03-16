@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import Context from '../Context';
 import { v4 } from 'uuid';
-import { BlockCardErroredView, InlineCardErroredView, } from '@atlaskit/media-ui';
+import { BlockCardErroredView, InlineCardErroredView, } from '@findable/media-ui';
 import { ANALYTICS_CHANNEL } from '../analytics';
 var InnerWithObject = /** @class */ (function (_super) {
     tslib_1.__extends(InnerWithObject, _super);

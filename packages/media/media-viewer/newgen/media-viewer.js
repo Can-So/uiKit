@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { isFileIdentifier, } from '@atlaskit/media-core';
+import { isFileIdentifier, } from '@findable/media-core';
 import { IntlProvider, intlShape } from 'react-intl';
 import { ThemeProvider } from 'styled-components';
-import { Shortcut, theme } from '@atlaskit/media-ui';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { Shortcut, theme } from '@findable/media-ui';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import { mediaViewerModalEvent } from './analytics/media-viewer';
 import { channel } from './analytics/index';
 import { List } from './list';

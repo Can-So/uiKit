@@ -1,4 +1,4 @@
-import { LinkDefinition, LinkAttributes } from '@atlaskit/adf-schema';
+import { LinkDefinition, LinkAttributes } from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

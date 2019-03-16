@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import Tooltip from '../src';
 import { Target } from './styled';
 

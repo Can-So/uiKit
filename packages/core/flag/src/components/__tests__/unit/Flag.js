@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import ChevronUpIcon from '@atlaskit/icon/glyph/chevron-up';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import ChevronUpIcon from '@findable/icon/glyph/chevron-up';
+import CrossIcon from '@findable/icon/glyph/cross';
 import { FlagWithoutAnalytics as Flag } from '../../Flag';
 import Container, {
   Description,

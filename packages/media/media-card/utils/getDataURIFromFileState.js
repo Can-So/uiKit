@@ -1,8 +1,8 @@
 var _this = this;
 import * as tslib_1 from "tslib";
 import VideoSnapshot from 'video-snapshot';
-import { getMediaTypeFromMimeType } from '@atlaskit/media-core';
-import { getOrientation } from '@atlaskit/media-ui';
+import { getMediaTypeFromMimeType } from '@findable/media-core';
+import { getOrientation } from '@findable/media-ui';
 export var getDataURIFromFileState = function (state) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
     var value, type, mediaType, orientation_1, src, snapshoter, src;
     return tslib_1.__generator(this, function (_a) {

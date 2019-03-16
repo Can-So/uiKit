@@ -4,7 +4,7 @@ export default function gridSize(root, j) {
   var sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles'
+      value: '@findable/util-shared-styles'
     }
   });
 
@@ -26,7 +26,7 @@ export default function gridSize(root, j) {
   var localName = importSpecifier.get(0).node.local.name; // There is a chance that gridSize is already imported from akTheme under
   // a different name, so we reassign that here.
 
-  localName = addNamedImport(root, j, '@atlaskit/theme', 'gridSize', localName, sharedStylesImport); // Convert uses of the old akBorderRadius to template `${akBorderRadius()}px`
+  localName = addNamedImport(root, j, '@findable/theme', 'gridSize', localName, sharedStylesImport); // Convert uses of the old akBorderRadius to template `${akBorderRadius()}px`
 
   root.find(j.Identifier, {
     name: localName
@@ -67,6 +67,6 @@ export default function gridSize(root, j) {
 
     n.closest(j.TemplateLiteral).replaceWith(j.callExpression(j.identifier(localName), []));
   });
-  removeNamedImport(root, j, '@atlaskit/util-shared-styles', 'akGridSize', importSpecifier);
+  removeNamedImport(root, j, '@findable/util-shared-styles', 'akGridSize', importSpecifier);
   return root;
 }

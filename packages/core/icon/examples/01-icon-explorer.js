@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Button from '@atlaskit/button';
-import { FieldTextStateless } from '@atlaskit/field-text';
+import Button from '@findable/button';
+import { FieldTextStateless } from '@findable/field-text';
 
-import { metadata as objectIconMetadata } from '@atlaskit/icon-object';
-import { metadata as fileTypeIconMetadata } from '@atlaskit/icon-file-type';
-import { metadata as priorityIconMetadata } from '@atlaskit/icon-priority';
+import { metadata as objectIconMetadata } from '@findable/icon-object';
+import { metadata as fileTypeIconMetadata } from '@findable/icon-file-type';
+import { metadata as priorityIconMetadata } from '@findable/icon-priority';
 
 import { metadata } from '../src';
 import IconExplorerCell from './utils/IconExplorerCell';
@@ -35,7 +35,7 @@ const objectIconInfo = Promise.all(
   Object.keys(objectIconMetadata).map(
     async (name: $Keys<typeof objectIconMetadata>) => {
       // $ExpectError - we are fine with this being dynamic
-      const icon = await import(`@atlaskit/icon-object/glyph/${name}.js`);
+      const icon = await import(`@findable/icon-object/glyph/${name}.js`);
       return { name, icon: icon.default };
     },
   ),
@@ -50,7 +50,7 @@ const fileTypeIconInfo = Promise.all(
   Object.keys(fileTypeIconMetadata).map(
     async (name: $Keys<typeof fileTypeIconMetadata>) => {
       // $ExpectError - we are fine with this being dynamic
-      const icon = await import(`@atlaskit/icon-file-type/glyph/${name}.js`);
+      const icon = await import(`@findable/icon-file-type/glyph/${name}.js`);
       return { name, icon: icon.default };
     },
   ),
@@ -66,7 +66,7 @@ const priorityIconInfo = Promise.all(
   Object.keys(priorityIconMetadata).map(
     async (name: $Keys<typeof priorityIconMetadata>) => {
       // $ExpectError - we are fine with this being dynamic
-      const icon = await import(`@atlaskit/icon-priority/glyph/${name}.js`);
+      const icon = await import(`@findable/icon-priority/glyph/${name}.js`);
       return { name, icon: icon.default };
     },
   ),
@@ -86,35 +86,35 @@ const getAllIcons = async () => {
   return {
     first: {
       componentName: 'divider-icons',
-      component: () => 'exported from @atlaskit/icon',
+      component: () => 'exported from @findable/icon',
       keywords: getKeywords(metadata),
       divider: true,
     },
     ...iconData,
     firstTwo: {
       componentName: 'divider-product',
-      component: () => 'exported from @atlaskit/logo',
+      component: () => 'exported from @findable/logo',
       keywords: getKeywords(logoIcons),
       divider: true,
     },
     ...logoIcons,
     second: {
       componentName: 'divider-object-icons',
-      component: () => 'exported from @atlaskit/icon-object',
+      component: () => 'exported from @findable/icon-object',
       keywords: getKeywords(objectIconMetadata),
       divider: true,
     },
     ...objectData,
     third: {
       componentName: 'divider-file-type-icons',
-      component: () => 'exported from @atlaskit/icon-file-type',
+      component: () => 'exported from @findable/icon-file-type',
       keywords: getKeywords(fileTypeIconMetadata),
       divider: true,
     },
     ...filetypeData,
     forth: {
       componentName: 'divider-priority-icons',
-      component: () => 'exported from @atlaskit/icon-priority',
+      component: () => 'exported from @findable/icon-priority',
       keywords: getKeywords(priorityIconMetadata),
       divider: true,
     },

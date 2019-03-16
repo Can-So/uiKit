@@ -4,7 +4,7 @@ import {
   createStorybookContext,
   imageFileId,
   audioFileId,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import { MediaStore, ItemsPayload } from '../src';
 
 const context = createStorybookContext();

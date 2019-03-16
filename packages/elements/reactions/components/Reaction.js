@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { ResourcedEmoji } from '@atlaskit/emoji';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { withAnalyticsEvents } from '@findable/analytics-next';
+import { ResourcedEmoji } from '@findable/emoji';
+import { borderRadius, colors } from '@findable/theme';
 import * as cx from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';

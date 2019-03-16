@@ -6,20 +6,20 @@ import { Redirect } from 'react-router-dom';
 import { Link } from '../../components/WrappedLink';
 import { Helmet } from 'react-helmet';
 
-import CodeIcon from '@atlaskit/icon/glyph/code';
-import CloseIcon from '@atlaskit/icon/glyph/cross';
-import ScreenIcon from '@atlaskit/icon/glyph/screen';
-import LinkIcon from '@atlaskit/icon/glyph/link';
+import CodeIcon from '@findable/icon/glyph/code';
+import CloseIcon from '@findable/icon/glyph/cross';
+import ScreenIcon from '@findable/icon/glyph/screen';
+import LinkIcon from '@findable/icon/glyph/link';
 
-import Button, { ButtonGroup } from '@atlaskit/button';
-import { FlagGroup } from '@atlaskit/flag';
-import Tooltip from '@atlaskit/tooltip';
+import Button, { ButtonGroup } from '@findable/button';
+import { FlagGroup } from '@findable/flag';
+import Tooltip from '@findable/tooltip';
 import Modal, {
   ModalBody as Body,
   ModalHeader as OgModalHeader,
   ModalTitle,
-} from '@atlaskit/modal-dialog';
-import { colors, elevation, gridSize } from '@atlaskit/theme';
+} from '@findable/modal-dialog';
+import { colors, elevation, gridSize } from '@findable/theme';
 
 import * as fs from '../../utils/fs';
 import packageResolver, { getLoaderUrl } from '../../utils/packageResolver';

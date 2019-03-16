@@ -6,9 +6,9 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents, withAnalyticsContext, createAndFireEvent } from '@findable/analytics-next';
 import NodeResolver from 'react-node-resolver';
-import { Manager, Reference, Popper } from '@atlaskit/popper';
+import { Manager, Reference, Popper } from '@findable/popper';
 import { name as packageName, version as packageVersion } from '../version.json';
 import { Container } from './styled';
 

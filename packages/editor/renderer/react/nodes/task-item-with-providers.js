@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
-import { ResourcedTaskItem, } from '@atlaskit/task-decision';
+import { ResourcedTaskItem, } from '@findable/task-decision';
 var TaskItemWithProviders = /** @class */ (function (_super) {
     tslib_1.__extends(TaskItemWithProviders, _super);
     function TaskItemWithProviders() {

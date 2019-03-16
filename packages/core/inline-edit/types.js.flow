@@ -7,7 +7,7 @@ type BaseProps = {
   label: string,
   /** Component to be shown when reading only */
   readView: Node,
-  /** Component to be shown when editing. Should be an @atlaskit/input. */
+  /** Component to be shown when editing. Should be an @findable/input. */
   editView?: Node,
   /** Set whether the read view should fit width, most obvious when hovered. */
   isFitContainerWidthReadView?: boolean,
@@ -33,7 +33,7 @@ type BaseProps = {
   shouldConfirmOnEnter?: boolean,
   /** Set whether default stylings should be disabled when editing. */
   disableEditViewFieldBase?: boolean,
-  /** Component to be shown in an @atlaskit/inline-dialog when edit view is open. */
+  /** Component to be shown in an @findable/inline-dialog when edit view is open. */
   invalidMessage?: Node,
   /** The text announced to screen readers when focusing on the edit button */
   editButtonLabel: string,

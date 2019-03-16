@@ -16,8 +16,8 @@ import {
   ol,
   li,
   insertText,
-} from '@atlaskit/editor-test-helpers';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+} from '@findable/editor-test-helpers';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 import panelPlugin from '../../../../plugins/panel';
 import listPlugin from '../../../../plugins/lists';
 import tablesPlugin from '../../../../plugins/table';
@@ -27,7 +27,7 @@ import {
   changePanelType,
 } from '../../../../plugins/panel/actions';
 
-describe('@atlaskit/editor-core ui/PanelPlugin', () => {
+describe('@findable/editor-core ui/PanelPlugin', () => {
   const createEditor = createEditorFactory<PanelState>();
 
   const event = createEvent('event');

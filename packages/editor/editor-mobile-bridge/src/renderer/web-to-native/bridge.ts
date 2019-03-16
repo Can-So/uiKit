@@ -1,4 +1,4 @@
-import { TaskState } from '@atlaskit/task-decision';
+import { TaskState } from '@findable/task-decision';
 
 export interface TaskDecisionBridge {
   updateTask(taskId: string, state: TaskState): void;

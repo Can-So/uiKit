@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var Wrapper = styled.li(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  color: ", ";\n  padding: 6px 25px;\n  list-style-type: none;\n  opacity: 1;\n\n  ", ";\n  &:hover {\n    ", ";\n  }\n"], ["\n  color: ",
     ";\n  padding: 6px 25px;\n  list-style-type: none;\n  opacity: 1;\n\n  ", ";\n  &:hover {\n    ",
     ";\n  }\n"])), function (_a) {

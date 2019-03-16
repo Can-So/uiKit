@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
+import { InlineCardResolvedViewProps } from '@findable/media-ui';
 
-import ConfluenceBlogIcon from '@atlaskit/icon-object/glyph/blog/16';
+import ConfluenceBlogIcon from '@findable/icon-object/glyph/blog/16';
 import { CONFLUENCE_GENERATOR_ID } from './constants';
 
 import { BuildInlineProps } from './types';

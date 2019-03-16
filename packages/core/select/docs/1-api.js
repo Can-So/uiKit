@@ -1,5 +1,5 @@
 // @flow
-import { code } from '@atlaskit/docs';
+import { code } from '@findable/docs';
 import md from './docs-util/md';
 
 const onChange = `onChange = (newValue, actionMeta) => console.log(actionMeta);
@@ -80,7 +80,7 @@ export default md`
   <a name="controllable-props"></a>
   ## Controllable Props
 
-  **@atlaskit/single-select** and **@atlaskit/multi-select** had the concept of **stateful** and **stateless** components.
+  **@findable/single-select** and **@findable/multi-select** had the concept of **stateful** and **stateless** components.
   Where the exported **stateful** component, internally managed specific (in state) props available in the stateless component.
   These props were:
 
@@ -90,10 +90,10 @@ export default md`
 
   There's a lot of value in this idea, as it allows users to opt into controlling certain aspects of the select in one export while being happy with default behaviour
   in the **Stateless** version. However, what if I only want to control one of the three controllable props, and want the package to internally manage the rest?
-  This was not possible in @atlaskit/single-select or @atlaskit/multi-select, if you opt into using the stateless component, you opt into being responsible for _all_ of the prop values specified.
+  This was not possible in @findable/single-select or @findable/multi-select, if you opt into using the stateless component, you opt into being responsible for _all_ of the prop values specified.
 
-  We've taken this concept and refined it in @atlaskit/select.
-  In @atlaskit/select, there are three _optional_ props you can use to control the state of the component:
+  We've taken this concept and refined it in @findable/select.
+  In @findable/select, there are three _optional_ props you can use to control the state of the component:
 
   * **value** controls the select value
   * **inputValue** controls the search input value
@@ -104,7 +104,7 @@ export default md`
 
   ${code`${controlledPropExample}`}
 
-  If you don't use the controlled props, @atlaskit/select has props that let you default their value when it mounts:
+  If you don't use the controlled props, @findable/select has props that let you default their value when it mounts:
 
   ${code`${controlledDefaultPropExample}`}
 
@@ -114,7 +114,7 @@ export default md`
   ## Components API
 
   In single-select and multi-select, we've had several issues opened as a result of users wanting to customise
-  the appearance or functionality of the exported select in various ways. @atlaskit/select opens up the API
+  the appearance or functionality of the exported select in various ways. @findable/select opens up the API
   to allow customisation and configuration of any / every part of the select by exposing a new components prop.
 
   For example, to render a custom Option component:
@@ -135,7 +135,7 @@ export default md`
   <a name="styles-api"></a>
   ## Styles API
 
-  Each component that @atlaskit/select exposes also has a corresponding key that you can specify in the styles prop.
+  Each component that @findable/select exposes also has a corresponding key that you can specify in the styles prop.
   Each value you provide should be a function that takes the default styles, and returns your customised style object.
 
   For example, to give the control a white background:
@@ -147,8 +147,8 @@ export default md`
   <a name="custom-data-structure"></a>
   ## Custom Data Structure
 
-  @atlaskit/select enforces as little opinion about the shape of your options as possible. With the combination of custom components API, and the styling API,
-  your options can really take whatever shape you like. Of course by default, **assumptions** are made about how to render and filter options and values, however @atlaskit/select exposes
+  @findable/select enforces as little opinion about the shape of your options as possible. With the combination of custom components API, and the styling API,
+  your options can really take whatever shape you like. Of course by default, **assumptions** are made about how to render and filter options and values, however @findable/select exposes
   the following methods to allow you to configure this as you choose.
 
   ### getOptionValue
@@ -187,15 +187,15 @@ export default md`
 
   ### isOptionDisabled
 
-  By default @atlaskit/select looks for a isDisabled property your passed in options. However as is the case with all the methods mentioned above, @atlaskit/select exposes a 'isOptionDisabled' prop that allows you to override this inbuilt logic. This takes the following shape:
+  By default @findable/select looks for a isDisabled property your passed in options. However as is the case with all the methods mentioned above, @findable/select exposes a 'isOptionDisabled' prop that allows you to override this inbuilt logic. This takes the following shape:
 
   ${code`(option: OptionType) => boolean`}
 
   ### isOptionSelected
 
-  Similar to isOptionDisabled, for a select instance with isMulti active, @atlaskit/select provides an isOptionSelected prop to validate whether or not an option is already a selected value, before it decide whether to select or deselect an option.
+  Similar to isOptionDisabled, for a select instance with isMulti active, @findable/select provides an isOptionSelected prop to validate whether or not an option is already a selected value, before it decide whether to select or deselect an option.
 
-  By default @atlaskit/select performs a reference equality check between the candidate option and the value objects within our internally maintained dictionary of selected values.
+  By default @findable/select performs a reference equality check between the candidate option and the value objects within our internally maintained dictionary of selected values.
 
   However if you pass in a function of the following shape:
 
@@ -218,12 +218,12 @@ export default md`
   <a name="custom-filter"></a>
   ## Custom Filter
 
-  @atlaskit/select exposes a **filterOption** prop that allows you to configure how options in your select get filtered down by a search value.
+  @findable/select exposes a **filterOption** prop that allows you to configure how options in your select get filtered down by a search value.
   This takes the following shape:
 
   ${code`(option: OptionType, inputValue: string) => boolean`}
 
-  Additionally, @atlaskit/select also exports a \`createFilter\` closure which takes in a configuration object of the following shape:
+  Additionally, @findable/select also exports a \`createFilter\` closure which takes in a configuration object of the following shape:
 
   ${code`${createFilterConfigShape}`}
 

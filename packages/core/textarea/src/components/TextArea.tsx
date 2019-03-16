@@ -2,8 +2,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import GlobalTheme from '@atlaskit/theme';
+} from '@findable/analytics-next';
+import GlobalTheme from '@findable/theme';
 import * as React from 'react';
 import {
   name as packageName,
@@ -12,7 +12,7 @@ import {
 import { Theme, ThemeTokens } from '../theme';
 import { TextAreaWrapper } from '../styled';
 import TextareaElement from './TextAreaElement';
-import { withDefaultProps, PropsOf } from '@atlaskit/type-helpers';
+import { withDefaultProps, PropsOf } from '@findable/type-helpers';
 
 export type Props = {
   /**

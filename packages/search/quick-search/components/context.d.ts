@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ComponentType } from 'react';
-import { FireAnalyticsEvent } from '@atlaskit/analytics';
+import { FireAnalyticsEvent } from '@findable/analytics';
 import { ResultData, ResultId, SelectedResultId } from './Results/types';
 import { ResultBase } from './Results/ResultBase';
 export declare type ResultContextType = {

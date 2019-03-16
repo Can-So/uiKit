@@ -8,14 +8,14 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import PropTypes from 'prop-types';
 import getDisplayName from '../../util/getDisplayName';
 import safeContextCall from '../../util/safeContextCall';
 import { selectionManagerContext } from '../../util/contextNamespace';
 import { KEY_ENTER, KEY_SPACE } from '../../util/keys';
 
-// HOC that typically wraps @atlaskit/item
+// HOC that typically wraps @findable/item
 var withToggleInteraction = function withToggleInteraction(WrappedComponent, SelectionIcon, getAriaRole) {
   var WithToggleInteraction =
   /*#__PURE__*/

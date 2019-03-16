@@ -9,7 +9,7 @@ import {
   ObjectKey,
   TaskState,
   Handler,
-} from '@atlaskit/task-decision';
+} from '@findable/task-decision';
 
 type ToggleTaskCallback = (key: ObjectKey, state: TaskState) => void;
 

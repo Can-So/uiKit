@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { Link } from '../../components/WrappedLink';
 import Loadable from '../../components/WrappedLoader';
 import { Helmet } from 'react-helmet';
-import { gridSize, colors, math } from '@atlaskit/theme';
-import Button from '@atlaskit/button';
-import ExamplesIcon from '@atlaskit/icon/glyph/screen';
-import { AtlassianIcon } from '@atlaskit/logo';
+import { gridSize, colors, math } from '@findable/theme';
+import Button from '@findable/button';
+import ExamplesIcon from '@findable/icon/glyph/screen';
+import { AtlassianIcon } from '@findable/logo';
 
 import Loading from '../../components/Loading';
 import Page from '../../components/Page';
@@ -178,7 +178,7 @@ class Package extends React.Component<Props> {
         <Intro>{pkg.description}</Intro>
         <MetaData
           packageName={pkg.name as string}
-          packageSrc={`https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/packages/${groupId}/${pkgId}`}
+          packageSrc={`https://github.com/fnamazing/uiKit/src/master/packages/${groupId}/${pkgId}`}
         />
         <LatestChangelog
           changelog={changelog}

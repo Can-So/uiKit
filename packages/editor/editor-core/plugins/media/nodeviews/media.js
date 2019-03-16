@@ -2,8 +2,8 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { Component } from 'react';
 import { stateKey as mediaStateKey, } from '../pm-plugins/main';
-import { Card, CardView, } from '@atlaskit/media-card';
-import { withImageLoader } from '@atlaskit/editor-common';
+import { Card, CardView, } from '@findable/media-card';
+import { withImageLoader } from '@findable/editor-common';
 // This is being used by DropPlaceholder now
 export var MEDIA_HEIGHT = 125;
 export var FILE_WIDTH = 156;

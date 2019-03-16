@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import ArrowDown from '@atlaskit/icon/glyph/arrow-down';
-import ArrowUp from '@atlaskit/icon/glyph/arrow-up';
-import { Label } from '@atlaskit/field-base';
-import { ToggleStateless } from '@atlaskit/toggle';
-import { AVATAR_SIZES } from '@atlaskit/avatar';
+import Button, { ButtonGroup } from '@findable/button';
+import ArrowDown from '@findable/icon/glyph/arrow-down';
+import ArrowUp from '@findable/icon/glyph/arrow-up';
+import { Label } from '@findable/field-base';
+import { ToggleStateless } from '@findable/toggle';
+import { AVATAR_SIZES } from '@findable/avatar';
 import { Note, Code } from '../examples-util/helpers';
 import AvatarGroup from '../src';
 import { avatarUrl } from '../examples-util/data';

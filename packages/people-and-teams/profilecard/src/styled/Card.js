@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { borderRadius, gridSize, math, fontSizeSmall } from '@atlaskit/theme';
+import { borderRadius, gridSize, math, fontSizeSmall } from '@findable/theme';
 
 import {
   headerBgColor,

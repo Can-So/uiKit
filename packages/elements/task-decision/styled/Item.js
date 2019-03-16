@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { borderRadius, gridSize, colors, themed } from '@atlaskit/theme';
+import { borderRadius, gridSize, colors, themed } from '@findable/theme';
 var akGridSize = gridSize();
 export var ContentWrapper = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  margin: 0;\n  word-wrap: break-word;\n  min-width: 0;\n  flex: 1 1 auto;\n"], ["\n  margin: 0;\n  word-wrap: break-word;\n  min-width: 0;\n  flex: 1 1 auto;\n"])));
 export var Wrapper = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  flex-direction: ", ";\n\n  line-height: 20px;\n  border-radius: ", "px;\n  margin: ", "px 0;\n  padding: ", "px ", "px;\n  min-height: 36px;\n  box-sizing: border-box;\n  box-shadow: ", ";\n\n  &:hover {\n    box-shadow: ", ";\n    transition: box-shadow 0.2s ease-in-out;\n  }\n\n  background-color: ", ";\n  border: 1px solid: ", ";\n"], ["\n  display: flex;\n  flex-direction: ", ";\n\n  line-height: 20px;\n  border-radius: ", "px;\n  margin: ", "px 0;\n  padding: ", "px ", "px;\n  min-height: 36px;\n  box-sizing: border-box;\n  box-shadow: ",

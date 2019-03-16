@@ -4,7 +4,7 @@ Standalone library to help monorepos that are using bolt to bump version across 
 
 ## Core Concepts
 
-The core concept that `@atlaskit/build-releases` follows is that contributors to a mono-repo should be able to declare an intent to release, and that multiple intents should be able to be combined sensibly. Sensibly here refers to if there is one intent to release button as a 'minor' and another to release button as a 'patch', only one release will be made, at the higher of the two versions.
+The core concept that `@findable/build-releases` follows is that contributors to a mono-repo should be able to declare an intent to release, and that multiple intents should be able to be combined sensibly. Sensibly here refers to if there is one intent to release button as a 'minor' and another to release button as a 'patch', only one release will be made, at the higher of the two versions.
 
 We are using the term `changeset` for this. A changeset is an intent to release stored as data, with tthe information we need to combine multiple changesets and coordinate releases. We also work with bolt's structure to make sure that changesets will create valid new bolt repositories after versioning has occurred.
 
@@ -60,15 +60,15 @@ The information in the `changes.json` will look like:
 ```json
 {
   "releases": [
-    { "name": "@atlaskit/analytics-listeners", "type": "major" },
-    { "name": "@atlaskit/website", "type": "patch" }
+    { "name": "@findable/analytics-listeners", "type": "major" },
+    { "name": "@findable/website", "type": "patch" }
   ],
   "dependents": [
     {
-      "name": "@atlaskit/global-navigation",
+      "name": "@findable/global-navigation",
       "type": "patch",
       "dependencies": [
-        "@atlaskit/analytics-listeners"
+        "@findable/analytics-listeners"
       ]
     }
   ]
@@ -101,8 +101,8 @@ Example of commit message:
 RELEASING: Releasing 2 package(s)
 
 Releases:
-  @atlaskit/icon@13.3.0
-  @atlaskit/reduced-ui-pack@9.2.0
+  @findable/icon@13.3.0
+  @findable/reduced-ui-pack@9.2.0
 
 Dependents:
   []
@@ -111,7 +111,7 @@ Deleted:
   []
 
 ---
-{"releases":[{"name":"@atlaskit/icon","commits":["d36f760","7cf05b3"],"version":"13.3.0"},{"name":"@atlaskit/reduced-ui-pack","commits":["d36f760","365460a"],"version":"9.2.0"}],"changesets":[{"commit":"d36f760","summary":"Add new icon"},{"commit":"365460a","summary":"Add new icon for Roadmap"},{"commit":"7cf05b3","summary":"Add new icon for Roadmap"}]}
+{"releases":[{"name":"@findable/icon","commits":["d36f760","7cf05b3"],"version":"13.3.0"},{"name":"@findable/reduced-ui-pack","commits":["d36f760","365460a"],"version":"9.2.0"}],"changesets":[{"commit":"d36f760","summary":"Add new icon"},{"commit":"365460a","summary":"Add new icon for Roadmap"},{"commit":"7cf05b3","summary":"Add new icon for Roadmap"}]}
 ---
 
 [skip ci]

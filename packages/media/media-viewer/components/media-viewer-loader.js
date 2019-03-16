@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { colors } from '@atlaskit/theme';
-import { ModalSpinner } from '@atlaskit/media-ui';
+import { colors } from '@findable/theme';
+import { ModalSpinner } from '@findable/media-ui';
 var AsyncMediaViewer = /** @class */ (function (_super) {
     tslib_1.__extends(AsyncMediaViewer, _super);
     function AsyncMediaViewer() {

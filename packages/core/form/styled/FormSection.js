@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, math, typography } from '@atlaskit/theme';
+import { gridSize, math, typography } from '@findable/theme';
 /**
  * Provide a styled container for form sections.
  */

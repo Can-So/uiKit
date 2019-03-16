@@ -1,4 +1,4 @@
-import { inlineExtension, extension, bodiedExtension, } from '@atlaskit/adf-schema';
+import { inlineExtension, extension, bodiedExtension, } from '@findable/adf-schema';
 import createPlugin from './plugin';
 import { getToolbarConfig } from './toolbar';
 var extensionPlugin = {

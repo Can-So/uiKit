@@ -3,17 +3,17 @@ jest.mock('../../../../../tools/gridCellScaler');
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import Button from '@atlaskit/button';
-import Spinner from '@atlaskit/spinner';
-import FieldText from '@atlaskit/field-text';
-import { CardView } from '@atlaskit/media-card';
-import { fakeIntl, mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import Button from '@findable/button';
+import Spinner from '@findable/spinner';
+import FieldText from '@findable/field-text';
+import { CardView } from '@findable/media-card';
+import { fakeIntl, mountWithIntlContext } from '@findable/media-test-helpers';
 
 import {
   mockStore,
   mockState,
   getComponentClassWithStore,
-} from '@atlaskit/media-test-helpers';
+} from '@findable/media-test-helpers';
 import ConnectedGiphyView, { GiphyView } from '../../giphyView';
 import { BricksLayout } from '../../bricksGrid';
 import {

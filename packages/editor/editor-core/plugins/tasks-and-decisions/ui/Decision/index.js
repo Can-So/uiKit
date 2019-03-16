@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import { DecisionItem } from '@atlaskit/task-decision';
+import { DecisionItem } from '@findable/task-decision';
 var messages = defineMessages({
     placeholder: {
         id: 'fabric.editor.decisionPlaceholder',

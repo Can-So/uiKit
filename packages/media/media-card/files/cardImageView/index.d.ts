@@ -1,5 +1,5 @@
 import { Component, ReactNode } from 'react';
-import { MediaType, ImageResizeMode } from '@atlaskit/media-core';
+import { MediaType, ImageResizeMode } from '@findable/media-core';
 import { CardDimensions, CardStatus } from '../../index';
 import { CardAction } from '../../actions';
 export interface FileCardImageViewProps {

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { AnalyticsListener } from '@atlaskit/analytics';
-import { colors } from '@atlaskit/theme';
+import { AnalyticsListener } from '@findable/analytics';
+import { colors } from '@findable/theme';
 import debug from '../src/util/logger';
 import { onMentionEvent } from '../example-helpers/index';
 import {

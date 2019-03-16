@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { isEmail, isValidEmail, } from '@atlaskit/user-picker';
+import { isEmail, isValidEmail, } from '@findable/user-picker';
 import memoizeOne from 'memoize-one';
 var matchAllowedDomains = memoizeOne(function (domain, config) {
     return (config &&

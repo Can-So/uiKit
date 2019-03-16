@@ -7,7 +7,7 @@ import {
   pasteHandler,
 } from '../../src';
 
-describe('@atlaskit/editor-core/test-helper base64fileconverter', () => {
+describe('@findable/editor-core/test-helper base64fileconverter', () => {
   let savedFileReader: any;
 
   beforeEach(() => {

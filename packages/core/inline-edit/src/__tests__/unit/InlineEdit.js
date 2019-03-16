@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Button from '@atlaskit/button';
-import FieldBase, { Label } from '@atlaskit/field-base';
+import Button from '@findable/button';
+import FieldBase, { Label } from '@findable/field-base';
 
 import InlineEditStatelessWithAnalytics, {
   InlineEditStatelessWithoutAnalytics as InlineEditStateless,
@@ -26,7 +26,7 @@ const defaultProps = {
   editView: <Input value="test" />,
 };
 
-describe('@atlaskit/inline-edit', () => {
+describe('@findable/inline-edit', () => {
   it('should render read view inside FieldBase when in read mode', () => {
     const readView = <span>read</span>;
     const wrapper = mount(

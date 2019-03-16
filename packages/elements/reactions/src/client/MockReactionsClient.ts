@@ -1,4 +1,4 @@
-import { EmojiId } from '@atlaskit/emoji';
+import { EmojiId } from '@findable/emoji';
 import { defaultReactionsByShortName } from '../components/Selector';
 import { Reactions } from '../types/Reactions';
 import { ReactionSummary } from '../types/ReactionSummary';

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
-import ConfluencePageIcon from '@atlaskit/icon-object/glyph/page/16';
+import { InlineCardResolvedViewProps } from '@findable/media-ui';
+import ConfluencePageIcon from '@findable/icon-object/glyph/page/16';
 
 import { BuildInlineProps } from './types';
 import { extractInlineViewPropsFromDocument } from './extractPropsFromDocument';

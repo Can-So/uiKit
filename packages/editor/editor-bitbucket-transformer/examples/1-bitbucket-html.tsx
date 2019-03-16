@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 
-import { Editor, EditorContext, CollapsedEditor } from '@atlaskit/editor-core';
-import { taskDecision } from '@atlaskit/util-data-test';
+import { Editor, EditorContext, CollapsedEditor } from '@findable/editor-core';
+import { taskDecision } from '@findable/util-data-test';
 import ToolsDrawer from '../example-helpers/ToolsDrawer';
 import { BitbucketTransformer } from '../src';
 import exampleHTML from '../example-helpers/exampleHTML';

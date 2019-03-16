@@ -8,7 +8,7 @@ import {
 } from '../../../utils/calc-breakout-width';
 import { akEditorFullWidthLayoutWidth } from '../../../styles/consts';
 
-describe('@atlaskit/editor-common media utils', () => {
+describe('@findable/editor-common media utils', () => {
   describe('#calcLegacyWidth and #calcResizedWidth', () => {
     const containerWidth = 1225;
 

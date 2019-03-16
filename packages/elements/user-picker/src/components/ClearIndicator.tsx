@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { components } from '@atlaskit/select';
-import Tooltip from '@atlaskit/tooltip';
+import { components } from '@findable/select';
+import Tooltip from '@findable/tooltip';
 import { isPopupUserPickerByProps } from './utils';
 
 export class ClearIndicator extends React.PureComponent<any> {

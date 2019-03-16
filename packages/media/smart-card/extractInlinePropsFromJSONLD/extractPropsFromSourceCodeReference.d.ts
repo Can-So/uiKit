@@ -1,4 +1,4 @@
-import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
+import { InlineCardResolvedViewProps } from '@findable/media-ui';
 import { BuildInlineProps } from './types';
 declare type BuildInlinePropsSourceCodeReference = BuildInlineProps<InlineCardResolvedViewProps>;
 export declare const buildIcon: BuildInlinePropsSourceCodeReference;

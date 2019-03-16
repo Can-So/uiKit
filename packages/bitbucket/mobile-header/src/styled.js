@@ -6,11 +6,11 @@ import {
   layers as akLayers,
   themed,
   typography,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 
 const gridSize = akGridSize();
 
-// @atlaskit/navigation has a specific z-index, so we need to layer the header
+// @findable/navigation has a specific z-index, so we need to layer the header
 // components relative to that.
 const navLayer = akLayers.navigation();
 const layers = {
@@ -70,7 +70,7 @@ const opacityOut = keyframes`
   to { opacity: 0; }
 `;
 
-// @atlaskit/blanket has a z-index *higher* than @atlaskit/navigation,
+// @findable/blanket has a z-index *higher* than @findable/navigation,
 // so we can't display the AK blanket underneath the navigation.
 export const FakeBlanket = styled.div`
   background: ${colors.N100A};

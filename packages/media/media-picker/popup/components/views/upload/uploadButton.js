@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import { FormattedMessage } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { startFileBrowser } from '../../../actions/startFileBrowser';
 var LocalBrowserButton = /** @class */ (function (_super) {
     tslib_1.__extends(LocalBrowserButton, _super);

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import Button from '@atlaskit/button';
-import { colors } from '@atlaskit/theme';
+import Button from '@findable/button';
+import { colors } from '@findable/theme';
 
 export const FolderViewerNavigation: ComponentClass<
   HTMLAttributes<{}>

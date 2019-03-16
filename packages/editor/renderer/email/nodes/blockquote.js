@@ -1,4 +1,4 @@
-import { colors, gridSize } from '@atlaskit/theme';
+import { colors, gridSize } from '@findable/theme';
 import { createTag, serializeStyle } from '../util';
 var css = serializeStyle({
     'border-left': "2px solid " + colors.N40,

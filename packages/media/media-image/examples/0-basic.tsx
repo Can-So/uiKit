@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import FieldText from '@atlaskit/field-text';
+import FieldText from '@findable/field-text';
 import {
   genericFileId,
   gifFileId,
@@ -9,9 +9,9 @@ import {
   docFileId,
   errorFileId,
   createStorybookContext,
-} from '@atlaskit/media-test-helpers';
-import Spinner from '@atlaskit/spinner';
-import Select from '@atlaskit/select';
+} from '@findable/media-test-helpers';
+import Spinner from '@findable/spinner';
+import Select from '@findable/select';
 import { MediaImage } from '../src';
 import { OptionsWrapper, MediaImageWrapper } from '../example-helpers/styled';
 

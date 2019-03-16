@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 
-import DecisionIcon from '@atlaskit/icon/glyph/editor/decision';
+import DecisionIcon from '@findable/icon/glyph/editor/decision';
 
 import { EditorIconWrapper } from '../styled/DecisionItem';
 import Item from './Item';

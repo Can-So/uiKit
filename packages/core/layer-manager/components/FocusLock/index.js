@@ -70,7 +70,7 @@ function (_Component) {
 
       if (typeof autoFocus === 'function') {
         // eslint-disable-next-line no-console
-        console.warn('@atlaskit/layer-manager: Passing a function as autoFocus in FocusLock is deprecated. Please see "Auto focusing an element" in https://atlaskit.atlassian.com/packages/core/layer-manager');
+        console.warn('@findable/layer-manager: Passing a function as autoFocus in FocusLock is deprecated. Please see "Auto focusing an element" in https://atlaskit.atlassian.com/packages/core/layer-manager');
       }
 
       if (enabled) {
@@ -116,7 +116,7 @@ function (_Component) {
 }(Component);
 
 _defineProperty(FocusLock, "contextTypes", {
-  /** available when invoked within @atlaskit/layer-manager */
+  /** available when invoked within @findable/layer-manager */
   ariaHiddenNode: PropTypes.object
 });
 

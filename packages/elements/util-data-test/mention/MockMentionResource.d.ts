@@ -1,4 +1,4 @@
-import { MentionDescription, AbstractMentionResource } from '@atlaskit/mention';
+import { MentionDescription, AbstractMentionResource } from '@findable/mention';
 export interface MockMentionConfig {
     minWait?: number;
     maxWait?: number;

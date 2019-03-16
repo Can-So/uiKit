@@ -24,10 +24,10 @@ import {
   bodiedExtension,
   layoutColumn,
   layoutSection,
-} from '@atlaskit/editor-test-helpers';
-import { taskDecision } from '@atlaskit/util-data-test';
-import { uuid } from '@atlaskit/adf-schema';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+} from '@findable/editor-test-helpers';
+import { taskDecision } from '@findable/util-data-test';
+import { uuid } from '@findable/adf-schema';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 
 describe('tasks and decisions - input rules', () => {
   const createEditor = createEditorFactory();

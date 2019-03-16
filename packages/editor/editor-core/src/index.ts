@@ -7,7 +7,7 @@ export { default as WithHelpTrigger } from './ui/WithHelpTrigger';
 export { default as CollapsedEditor } from './ui/CollapsedEditor';
 export { default as ToolbarHelp } from './ui/ToolbarHelp';
 export { default as ToolbarFeedback } from './ui/ToolbarFeedback';
-export { EmojiResource } from '@atlaskit/emoji';
+export { EmojiResource } from '@findable/emoji';
 export { MediaProvider, CustomMediaPicker } from './plugins/media';
 export { CollabEditProvider } from './plugins/collab-edit';
 export { MediaOptions } from './plugins/media';
@@ -17,7 +17,7 @@ export {
   MentionResource,
   PresenceProvider,
   PresenceResource,
-} from '@atlaskit/mention';
+} from '@findable/mention';
 export {
   QuickInsertProvider,
   QuickInsertItem,

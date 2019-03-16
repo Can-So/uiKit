@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { FabricElementsAnalyticsContext } from '@findable/analytics-namespaced-context';
 import * as React from 'react';
 import { Reactions } from '../components/Reactions';
 import { ReactionConsumer, } from '../reaction-store/ReactionConsumer';

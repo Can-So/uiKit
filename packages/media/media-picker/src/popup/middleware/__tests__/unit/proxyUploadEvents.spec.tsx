@@ -1,5 +1,5 @@
 import { UploadProcessingEvent } from '../../../../domain/uploadEvent';
-import { mockStore } from '@atlaskit/media-test-helpers';
+import { mockStore } from '@findable/media-test-helpers';
 import { proxyUploadEvents } from '../../proxyUploadEvents';
 import { FINALIZE_UPLOAD } from '../../../actions/finalizeUpload';
 import { RECENTS_COLLECTION } from '../../../config';

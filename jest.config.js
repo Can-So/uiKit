@@ -50,13 +50,13 @@ const config = {
     // ignore tests under __tests__/vr (we override this if the VISUAL_REGRESSION flag is set)
     '/__tests__\\/visual-regression/',
   ],
-  // NOTE: This ignored list is required because the script is bundling `@atlaskit/navigation-next`
+  // NOTE: This ignored list is required because the script is bundling `@findable/navigation-next`
   // which causes infinite loop if run tests in watch mode
   watchPathIgnorePatterns: [
     '\\/packages\\/core\\/navigation-next\\/[^\\/]*\\.js$',
   ],
   modulePathIgnorePatterns: ['/__fixtures__/', './node_modules', '/dist/'],
-  // don't transform any files under node_modules except @atlaskit/* and react-syntax-highlighter (it
+  // don't transform any files under node_modules except @findable/* and react-syntax-highlighter (it
   // uses dynamic imports which are not valid in node)
   transformIgnorePatterns: [
     '\\/node_modules\\/(?!@atlaskit|react-syntax-highlighter)',

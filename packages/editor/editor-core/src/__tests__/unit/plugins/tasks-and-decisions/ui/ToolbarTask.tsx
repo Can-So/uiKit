@@ -4,13 +4,13 @@ import {
   p,
   createEditorFactory,
   mountWithIntl,
-} from '@atlaskit/editor-test-helpers';
-import { ProviderFactory } from '@atlaskit/editor-common';
+} from '@findable/editor-test-helpers';
+import { ProviderFactory } from '@findable/editor-common';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import ToolbarTask from '../../../../../plugins/tasks-and-decisions/ui/ToolbarTask';
 import tasksAndDecisionsPlugin from '../../../../../plugins/tasks-and-decisions';
 
-describe('@atlaskit/editor-core/ui/ToolbarTask', () => {
+describe('@findable/editor-core/ui/ToolbarTask', () => {
   const createEditor = createEditorFactory();
 
   const providerFactory = new ProviderFactory();

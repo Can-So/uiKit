@@ -1,4 +1,4 @@
-import { ButtonAppearances } from '@atlaskit/button';
+import { ButtonAppearances } from '@findable/button';
 import * as React from 'react';
 export declare type Props = {
     appearance?: ButtonAppearances;

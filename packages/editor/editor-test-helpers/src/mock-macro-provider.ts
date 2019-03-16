@@ -3,7 +3,7 @@ import {
   MacroProvider,
   MacroAttributes,
   ExtensionType,
-} from '@atlaskit/editor-core';
+} from '@findable/editor-core';
 import { bodiedExtensionData } from './mock-extension-data';
 
 const getMacroADFNode = (

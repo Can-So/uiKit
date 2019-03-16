@@ -3,8 +3,8 @@ import { mount } from 'enzyme';
 import InlineExtension from '../../../../react/nodes/inlineExtension';
 import { RendererContext } from '../../../../react';
 import ReactSerializer from '../../../../react';
-import { defaultSchema } from '@atlaskit/adf-schema';
-import { ExtensionHandlers } from '@atlaskit/editor-common';
+import { defaultSchema } from '@findable/adf-schema';
+import { ExtensionHandlers } from '@findable/editor-common';
 
 describe('Renderer - React/Nodes/InlineExtension', () => {
   const extensionHandlers: ExtensionHandlers = {

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
 
@@ -11,15 +11,15 @@ export default md`
 
       ## Usage
 
-      ${code`import DynamicTable from '@atlaskit/dynamic-table';`}
+      ${code`import DynamicTable from '@findable/dynamic-table';`}
 
       or 
 
-      ${code`import { DynamicTableStateless } from '@atlaskit/dynamic-table';`}
+      ${code`import { DynamicTableStateless } from '@findable/dynamic-table';`}
 
       ${(
         <Example
-          packageName="@atlaskit/dynamic-table"
+          packageName="@findable/dynamic-table"
           Component={require('../examples/0-stateful').default}
           title="Stateful"
           source={require('!!raw-loader!../examples/0-stateful')}
@@ -28,7 +28,7 @@ export default md`
 
       ${(
         <Example
-          packageName="@atlaskit/dynamic-table"
+          packageName="@findable/dynamic-table"
           Component={require('../examples/1-stateless').default}
           title="Stateless"
           source={require('!!raw-loader!../examples/1-stateless')}

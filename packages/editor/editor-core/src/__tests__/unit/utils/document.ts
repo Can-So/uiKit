@@ -14,7 +14,7 @@ import {
   hardBreak,
   mediaSingle,
   media,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   isEmptyNode,
   isEmptyParagraph,

@@ -1,5 +1,5 @@
 import { Action, MiddlewareAPI } from 'redux';
-import { TRACK_EVENT_TYPE } from '@atlaskit/analytics-gas-types';
+import { TRACK_EVENT_TYPE } from '@findable/analytics-gas-types';
 import { State } from '../../domain';
 import { isFileUploadEndAction } from '../../actions/fileUploadEnd';
 import { HandlerResult } from '.';

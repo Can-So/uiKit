@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { HTMLAttributes, ComponentClass } from 'react';
 import styled from 'styled-components';
-import { ActivityItem } from '@atlaskit/activity';
-import { colors } from '@atlaskit/theme';
+import { ActivityItem } from '@findable/activity';
+import { colors } from '@findable/theme';
 
 interface ContainerProps {
   selected: boolean;

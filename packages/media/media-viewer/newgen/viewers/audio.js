@@ -1,14 +1,14 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import AudioIcon from '@atlaskit/icon/glyph/media-services/audio';
+import AudioIcon from '@findable/icon/glyph/media-services/audio';
 import { constructAuthTokenUrl } from '../utils';
 import { Outcome } from '../domain';
 import { AudioPlayer, AudioCover, Audio, DefaultCoverWrapper, blanketColor, CustomAudioPlayerWrapper, } from '../styled';
 import { createError } from '../error';
-import { getArtifactUrl } from '@atlaskit/media-store';
+import { getArtifactUrl } from '@findable/media-store';
 import { BaseViewer } from './base-viewer';
 import { isIE } from '../utils/isIE';
-import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { CustomMediaPlayer } from '@findable/media-ui';
 import { getObjectUrlFromFileState } from '../utils/getObjectUrlFromFileState';
 var defaultCover = (React.createElement(DefaultCoverWrapper, null,
     React.createElement(AudioIcon, { label: "cover", size: "xlarge", primaryColor: blanketColor })));

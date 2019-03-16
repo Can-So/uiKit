@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md } from '@atlaskit/docs';
+import { md } from '@findable/docs';
 
 export default md`
   This package provides the following polyfills
@@ -8,13 +8,13 @@ export default md`
   ${(
     <div style={{ padding: '20px' }}>
       <h3>Object.assign</h3>
-      <pre>{"import '@atlaskit/polyfills/object-assign';"}</pre>
+      <pre>{"import '@findable/polyfills/object-assign';"}</pre>
       <h3>Array.prototype.includes</h3>
-      <pre>{"import '@atlaskit/polyfills/array-prototype-includes';"}</pre>
+      <pre>{"import '@findable/polyfills/array-prototype-includes';"}</pre>
       <h3>Array.prototype.find</h3>
-      <pre>{"import '@atlaskit/polyfills/array-prototype-find';"}</pre>
+      <pre>{"import '@findable/polyfills/array-prototype-find';"}</pre>
       <h3>String.prototype.includes</h3>
-      <pre>{"import '@atlaskit/polyfills/string-prototype-includes';"}</pre>
+      <pre>{"import '@findable/polyfills/string-prototype-includes';"}</pre>
     </div>
   )}
 
@@ -22,7 +22,7 @@ export default md`
 
   ${(
     <div style={{ padding: '20px' }}>
-      <pre>{"import '@atlaskit/polyfills';"}</pre>
+      <pre>{"import '@findable/polyfills';"}</pre>
     </div>
   )}
 `;

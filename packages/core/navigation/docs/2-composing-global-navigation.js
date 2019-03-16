@@ -1,15 +1,15 @@
 // @flow
 import React from 'react';
-import { md, Props } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
+import { md, Props } from '@findable/docs';
+import SectionMessage from '@findable/section-message';
 
 export default md`
   ${(
     <SectionMessage appearance="error">
       <p>
-        <strong>Note: @atlaskit/navigation is now deprecated.</strong>
+        <strong>Note: @findable/navigation is now deprecated.</strong>
       </p>
-      <p>We recommend upgrading to @atlaskit/navigation-next</p>
+      <p>We recommend upgrading to @findable/navigation-next</p>
     </SectionMessage>
   )}
 

@@ -1,4 +1,4 @@
-import { EmDefinition } from '@atlaskit/adf-schema';
+import { EmDefinition } from '@findable/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

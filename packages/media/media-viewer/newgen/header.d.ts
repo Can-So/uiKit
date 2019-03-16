@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, FileState, FileIdentifier } from '@atlaskit/media-core';
+import { Context, FileState, FileIdentifier } from '@findable/media-core';
 import { InjectedIntlProps } from 'react-intl';
 import { Outcome } from './domain';
 import { MediaViewerError } from './error';

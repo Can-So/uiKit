@@ -1,4 +1,4 @@
-import { codeFontFamily, colors } from '@atlaskit/theme';
+import { codeFontFamily, colors } from '@findable/theme';
 var B100 = colors.B100, B400 = colors.B400, B50 = colors.B50, N0 = colors.N0, N20 = colors.N20, N30 = colors.N30, N40 = colors.N40, N100 = colors.N100, N500 = colors.N500, N700 = colors.N700, N900 = colors.N900;
 export var akEditorCodeFontFamily = codeFontFamily();
 export var akEditorInactiveForeground = N500;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { gridSize, colors } from '@atlaskit/theme';
+import { gridSize, colors } from '@findable/theme';
 import ManageButton from './manage-button';
 
 const Wrapper = styled.div`

@@ -8,9 +8,9 @@ import {
 } from 'react-intl';
 import { Schema } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { browser } from '@atlaskit/editor-common';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+import { browser } from '@findable/editor-common';
+import CrossIcon from '@findable/icon/glyph/cross';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
 import {
   Header,
   Footer,

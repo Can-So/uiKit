@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/panel",
+  "name": "@findable/panel",
   "version": "0.1.1",
   "description": "A React component rendering a collapsible panel",
   "license": "Apache-2.0",
@@ -13,12 +13,12 @@
     "name": "Panel",
     "team": "bitbucket"
   },
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/size-detector": "^7.0.0",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/size-detector": "^7.0.0",
+    "@findable/theme": "^8.0.1",
     "@babel/runtime": "^7.0.0",
     "react-animate-height": "^2.0.5",
     "react-focus-within": "^2.0.1"
@@ -28,8 +28,8 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/page": "^9.0.1",
+    "@findable/docs": "^7.0.1",
+    "@findable/page": "^9.0.1",
     "enzyme": "^3.7.0"
   }
 }

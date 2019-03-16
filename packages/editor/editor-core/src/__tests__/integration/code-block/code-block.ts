@@ -1,4 +1,4 @@
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
 import { getDocFromElement, editable } from '../_helpers';
 import { messages } from '../../../plugins/block-type/types';
 import { EditorAppearance } from '../../../types';

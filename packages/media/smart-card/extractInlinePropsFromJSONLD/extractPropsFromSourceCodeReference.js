@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import BranchIcon from '@atlaskit/icon-object/glyph/branch/16';
+import BranchIcon from '@findable/icon-object/glyph/branch/16';
 import { extractInlineViewPropsFromObject } from './extractPropsFromObject';
 export var buildIcon = function (json) {
     var name = json.name;

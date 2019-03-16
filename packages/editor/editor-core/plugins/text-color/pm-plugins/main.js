@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import { Plugin, PluginKey } from 'prosemirror-state';
-import { colorPalette, borderColorPalette } from '@atlaskit/adf-schema';
-import { colors } from '@atlaskit/theme';
+import { colorPalette, borderColorPalette } from '@findable/adf-schema';
+import { colors } from '@findable/theme';
 import { getActiveColor } from '../utils/color';
 import { getDisabledState } from '../utils/disabled';
 export var DEFAULT_COLOR = {

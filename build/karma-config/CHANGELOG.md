@@ -1,10 +1,10 @@
-# @atlaskit/karma-config
+# @findable/karma-config
 
 ## 1.1.2
-- [patch] Upgrade to webpack 4 [ea8a4bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea8a4bb)
+- [patch] Upgrade to webpack 4 [ea8a4bb](https://github.com/fnamazing/uiKit/commits/ea8a4bb)
 
 ## 1.1.1
-- [patch] Extensions should have text [64e32a2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/64e32a2)
+- [patch] Extensions should have text [64e32a2](https://github.com/fnamazing/uiKit/commits/64e32a2)
 
 ## 1.1.0
-- [minor] Add React 16 support. [12ea6e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/12ea6e4)
+- [minor] Add React 16 support. [12ea6e4](https://github.com/fnamazing/uiKit/commits/12ea6e4)

@@ -9,8 +9,8 @@ import _defineProperty from "@babel/runtime/helpers/defineProperty";
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components';
-import DropdownMenu, { DropdownItemGroup } from '@atlaskit/dropdown-menu';
-import Avatar from '@atlaskit/avatar';
+import DropdownMenu, { DropdownItemGroup } from '@findable/dropdown-menu';
+import Avatar from '@findable/avatar';
 import { Grid, Stack } from '../styled/AvatarGroup';
 import MoreIndicator from './MoreIndicator';
 import itemTheme from '../theme/itemTheme';

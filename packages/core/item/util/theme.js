@@ -1,4 +1,4 @@
-import { colors, gridSize as akGridSize, borderRadius } from '@atlaskit/theme';
+import { colors, gridSize as akGridSize, borderRadius } from '@findable/theme';
 export var themeNamespace = '@atlaskit-shared-theme/item'; // Used for Group titles and Item descriptions
 
 export var compactSmallFontSize = 10;

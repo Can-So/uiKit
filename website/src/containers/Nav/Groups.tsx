@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Route, matchPath } from 'react-router-dom';
 
-import { AkContainerNavigationNested as NestedNav } from '@atlaskit/navigation';
+import { AkContainerNavigationNested as NestedNav } from '@findable/navigation';
 
 import DefaultNav from './navigations/Default';
 import PackagesNav from './navigations/Packages';

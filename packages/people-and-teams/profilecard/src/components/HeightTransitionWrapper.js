@@ -8,7 +8,7 @@ import {
   gridSize,
   math,
   elevation,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 
 import { bgColor } from '../styled/constants';
 

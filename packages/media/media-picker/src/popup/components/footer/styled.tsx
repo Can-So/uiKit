@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 export const Wrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   box-sizing: border-box;

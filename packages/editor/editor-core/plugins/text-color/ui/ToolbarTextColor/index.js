@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import TextColorIcon from '@atlaskit/icon/glyph/editor/text-color';
-import { akEditorMenuZIndex } from '@atlaskit/editor-common';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
+import TextColorIcon from '@findable/icon/glyph/editor/text-color';
+import { akEditorMenuZIndex } from '@findable/editor-common';
 import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import ColorPalette from '../../../../ui/ColorPalette';

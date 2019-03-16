@@ -2,7 +2,7 @@ import _extends from "@babel/runtime/helpers/extends";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
 import React from 'react';
 import styled from 'styled-components';
-import { withTheme } from '@atlaskit/theme';
+import { withTheme } from '@findable/theme';
 import { Theme } from '../theme';
 import { getInnerStyles } from './utils';
 export default (function (props) {

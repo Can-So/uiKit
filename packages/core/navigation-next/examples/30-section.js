@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import ArrowRightIcon from '@atlaskit/icon/glyph/arrow-right';
-import { colors } from '@atlaskit/theme';
+import ArrowLeftIcon from '@findable/icon/glyph/arrow-left';
+import ArrowRightIcon from '@findable/icon/glyph/arrow-right';
+import { colors } from '@findable/theme';
 
 import { Item, Section, SectionHeading, Separator } from '../src';
 import { CONTENT_NAV_WIDTH } from '../src/common/constants';

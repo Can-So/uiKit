@@ -1,4 +1,4 @@
-import Spinner from '@atlaskit/spinner';
+import Spinner from '@findable/spinner';
 import * as React from 'react';
 import { ReactNode } from 'react';
 import EmojiPickerCategoryHeading, {

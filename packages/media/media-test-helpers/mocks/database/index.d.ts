@@ -1,5 +1,5 @@
-import { ClientBasedAuth } from '@atlaskit/media-core';
-import { MediaCollection } from '@atlaskit/media-store';
+import { ClientBasedAuth } from '@findable/media-core';
+import { MediaCollection } from '@findable/media-store';
 import { Database } from 'kakapo';
 import { CollectionItem } from './collection-item';
 import { Upload } from './upload';

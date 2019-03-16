@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Rectangle, Vector2, Bounds, FileInfo } from '@atlaskit/media-ui';
+import { Rectangle, Vector2, Bounds, FileInfo } from '@findable/media-ui';
 export interface ImageActions {
     toCanvas: () => HTMLCanvasElement;
     toDataURL: () => string;

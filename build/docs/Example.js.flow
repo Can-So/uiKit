@@ -1,9 +1,9 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import styled from 'styled-components';
-import { colors, gridSize, themed } from '@atlaskit/theme';
-import { AkCodeBlock } from '@atlaskit/code';
-import ToggleIcon from '@atlaskit/icon/glyph/code';
+import { colors, gridSize, themed } from '@findable/theme';
+import { AkCodeBlock } from '@findable/code';
+import ToggleIcon from '@findable/icon/glyph/code';
 import ErrorBoundary from './ErrorBoundary';
 import replaceSrc from './replaceSrc';
 

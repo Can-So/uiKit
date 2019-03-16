@@ -1,6 +1,6 @@
 // @flow
 import React, { Fragment } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 
 import Tooltip from '../src';
 

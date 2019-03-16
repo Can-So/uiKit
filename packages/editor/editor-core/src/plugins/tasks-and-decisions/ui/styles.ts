@@ -1,8 +1,8 @@
 // @ts-ignore: unused variable
 // prettier-ignore
 import { css, Styles, StyledComponentClass } from 'styled-components';
-import { fontSize } from '@atlaskit/theme';
-import { akEditorTableCellMinWidth } from '@atlaskit/editor-common';
+import { fontSize } from '@findable/theme';
+import { akEditorTableCellMinWidth } from '@findable/editor-common';
 
 export const tasksAndDecisionsStyles = css`
   .ProseMirror .taskItemView-content-wrap,

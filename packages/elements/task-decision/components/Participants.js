@@ -1,11 +1,11 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import * as Loadable from 'react-loadable';
 export var AvatarGroupLoadable = Loadable({
     loader: function () {
-        return import(/* webpackChunkName:"@atlaskit-internal-task-decision-avatargroup" */ '@atlaskit/avatar-group').then(function (module) { return module.default; });
+        return import(/* webpackChunkName:"@atlaskit-internal-task-decision-avatargroup" */ '@findable/avatar-group').then(function (module) { return module.default; });
     },
     loading: function () { return null; },
 });

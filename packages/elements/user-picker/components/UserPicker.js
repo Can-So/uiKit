@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import Select, { CreatableSelect } from '@atlaskit/select';
+import Select, { CreatableSelect } from '@findable/select';
 import * as React from 'react';
 import { BaseUserPicker } from './BaseUserPicker';
 import { getStyles } from './styles';

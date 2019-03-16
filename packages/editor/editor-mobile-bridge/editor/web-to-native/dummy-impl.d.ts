@@ -1,4 +1,4 @@
-import { Color as StatusColor } from '@atlaskit/status';
+import { Color as StatusColor } from '@findable/status';
 import { EditorBridges, EditorPluginBridges } from './index';
 import NativeBridge from './bridge';
 export default class DummyBridge implements NativeBridge {

@@ -4,7 +4,7 @@ import {
   borderRadius,
   gridSize,
   fontSize,
-} from '@atlaskit/theme';
+} from '@findable/theme';
 
 import { defaultColors } from './defaultTheme';
 

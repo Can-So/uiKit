@@ -1,9 +1,9 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { ProviderFactory, WithProviders } from '@atlaskit/editor-common';
+import { ProviderFactory, WithProviders } from '@findable/editor-common';
 import TaskItemWithProviders from './task-item-with-providers';
-import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
+import { FabricElementsAnalyticsContext } from '@findable/analytics-namespaced-context';
 var TaskItem = /** @class */ (function (_super) {
     tslib_1.__extends(TaskItem, _super);
     function TaskItem(props) {

@@ -1,5 +1,5 @@
 import * as uuid from 'uuid/v1';
-import { AbstractResource } from '@atlaskit/util-service-support';
+import { AbstractResource } from '@findable/util-service-support';
 
 import {
   EmojiDescription,
@@ -15,7 +15,7 @@ import {
   UploadingEmojiProvider,
   EmojiRepository,
   CategoryId,
-} from '@atlaskit/emoji';
+} from '@findable/emoji';
 
 import {
   PromiseBuilder,

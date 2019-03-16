@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/pagination",
+  "name": "@findable/pagination",
   "version": "10.0.1",
   "description": "A react component to be used for pagination in components like tables.",
   "license": "Apache-2.0",
@@ -14,12 +14,12 @@
     "Daniel D",
     "Kang C"
   ],
-  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "repository": "https://github.com/fnamazing/uiKit",
   "dependencies": {
-    "@atlaskit/analytics-next": "^4.0.1",
-    "@atlaskit/button": "^11.0.0",
-    "@atlaskit/icon": "^16.0.5",
-    "@atlaskit/theme": "^8.0.1",
+    "@findable/analytics-next": "^4.0.1",
+    "@findable/button": "^11.0.0",
+    "@findable/icon": "^16.0.5",
+    "@findable/theme": "^8.0.1",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0"
   },
@@ -28,12 +28,12 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^7.0.1",
-    "@atlaskit/dynamic-table": "^11.0.1",
-    "@atlaskit/section-message": "^2.0.1",
-    "@atlaskit/ssr": "^0.0.1",
-    "@atlaskit/visual-regression": "^0.0.1",
+    "@findable/build-utils": "^2.0.0",
+    "@findable/docs": "^7.0.1",
+    "@findable/dynamic-table": "^11.0.1",
+    "@findable/section-message": "^2.0.1",
+    "@findable/ssr": "^0.0.1",
+    "@findable/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "exenv": "^1.2.2",
     "react-dom": "^16.4.2",

@@ -49,7 +49,7 @@ var analyticsEventMap = [{
   actionSubject: 'breadcrumbsItem',
   component: 'BreadcrumbsItem',
   overwrite: 'Button',
-  overwritePackage: '@atlaskit/button',
+  overwritePackage: '@findable/button',
   props: {
     onClick: 'clicked'
   },
@@ -200,7 +200,7 @@ var analyticsEventMap = [{
   component: 'DropdownMenuStateless',
   derivatives: ['DropdownMenu'],
   overwrite: 'Droplist',
-  overwritePackage: '@atlaskit/droplist',
+  overwritePackage: '@findable/droplist',
   props: {
     onOpenChange: 'toggled'
   },
@@ -525,7 +525,7 @@ module.exports.instrumentedComponents = analyticsEventMap.filter(function (pkg) 
   Object.keys(config.props).forEach(function (propName) {
     var components = config.derivatives ? [config.component].concat(config.derivatives).join(', ') : config.component;
     items.push({
-      packageName: "@atlaskit/".concat(packageSuffix),
+      packageName: "@findable/".concat(packageSuffix),
       component: components,
       actionSubject: config.actionSubject,
       prop: propName,

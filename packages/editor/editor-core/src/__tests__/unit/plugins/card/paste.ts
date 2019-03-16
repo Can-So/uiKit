@@ -8,7 +8,7 @@ import {
   p,
   dispatchPasteEvent,
   EditorTestCardProvider,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 describe('card', () => {
   const createEditor = createEditorFactory();

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { hexToRgba, akEditorTableCellBackgroundOpacity, } from '@atlaskit/editor-common';
+import { hexToRgba, akEditorTableCellBackgroundOpacity, } from '@findable/editor-common';
 // tslint:disable-next-line:variable-name
 var TableCell = function (props) {
     var style = {};

@@ -5,8 +5,8 @@ import * as uuid from 'uuid/v4';
 import {
   mediaPickerAuthProvider,
   defaultCollectionName,
-} from '@atlaskit/media-test-helpers';
-import { ContextFactory, FileIdentifier } from '@atlaskit/media-core';
+} from '@findable/media-test-helpers';
+import { ContextFactory, FileIdentifier } from '@findable/media-core';
 
 const context = ContextFactory.create({
   authProvider: mediaPickerAuthProvider('asap'),

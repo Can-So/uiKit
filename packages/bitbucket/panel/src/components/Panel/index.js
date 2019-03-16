@@ -1,7 +1,7 @@
 // @flow
-import Button from '@atlaskit/button';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right';
+import Button from '@findable/button';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import ChevronRightIcon from '@findable/icon/glyph/chevron-right';
 import React, { PureComponent } from 'react';
 import type { Element, Node } from 'react';
 import AnimateHeight from 'react-animate-height';

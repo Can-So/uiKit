@@ -3,8 +3,8 @@ import {
   EmojiProvider,
   OnEmojiEvent,
   OptionalEmojiDescription,
-} from '@atlaskit/emoji';
-import Tooltip from '@atlaskit/tooltip';
+} from '@findable/emoji';
+import Tooltip from '@findable/tooltip';
 import * as cx from 'classnames';
 import * as React from 'react';
 import { PureComponent, SyntheticEvent } from 'react';

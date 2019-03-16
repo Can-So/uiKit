@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, code, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@findable/docs';
 
 export default md`
 
@@ -43,8 +43,8 @@ export default md`
   Below is an example of rendering an \`AvatarPickerDialog\`. The dialog should be wrapped in a \`ModalTransition\` component so it fades out when closed.
 
 ${code`
-import { AvatarPickerDialog, Avatar } from '@atlaskit/media-avatar-picker';
-import { ModalTransition } from '@atlaskit/modal-dialog';
+import { AvatarPickerDialog, Avatar } from '@findable/media-avatar-picker';
+import { ModalTransition } from '@findable/modal-dialog';
 
 const avatars: Array<Avatar> = [{ dataURI: 'some-data-uri' }];
 

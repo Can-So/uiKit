@@ -3,11 +3,11 @@ import { Component } from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import { splitCell } from 'prosemirror-tables';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import {
   tableBackgroundColorPalette,
   tableBackgroundBorderColors,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 import {
   mergeCells,
   canMergeCells,

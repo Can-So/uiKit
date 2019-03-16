@@ -6,8 +6,8 @@ import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { PureComponent } from 'react';
-import Blanket from '@atlaskit/blanket';
-import { withAnalytics } from '@atlaskit/analytics';
+import Blanket from '@findable/blanket';
+import { withAnalytics } from '@findable/analytics';
 import ScrollLock from 'react-scrolllock';
 import DrawerTrigger from './DrawerTrigger';
 import DrawerBackIcon from './DrawerBackIcon';

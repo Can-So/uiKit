@@ -4,7 +4,7 @@ export default function fontSizeTransformation(root, j) {
   var sharedStylesImport = root.find(j.ImportDeclaration, {
     source: {
       type: 'Literal',
-      value: '@atlaskit/util-shared-styles'
+      value: '@findable/util-shared-styles'
     }
   });
 
@@ -30,7 +30,7 @@ export default function fontSizeTransformation(root, j) {
   }).replaceWith(function () {
     return j.binaryExpression('+', j.callExpression(j.identifier(localName), []), j.literal('px'));
   });
-  addNamedImport(root, j, '@atlaskit/theme', 'fontSize', localName, sharedStylesImport);
-  removeNamedImport(root, j, '@atlaskit/util-shared-styles', 'akFontSizeDefault', codeFontImportSpecifier);
+  addNamedImport(root, j, '@findable/theme', 'fontSize', localName, sharedStylesImport);
+  removeNamedImport(root, j, '@findable/util-shared-styles', 'akFontSizeDefault', codeFontImportSpecifier);
   return root;
 }

@@ -5,7 +5,7 @@ import {
   UploadingFileState,
   ErrorFileState,
   ProcessingFailedState,
-} from '@atlaskit/media-core';
+} from '@findable/media-core';
 
 export const processedFile: ProcessedFileState = {
   status: 'processed',

@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component, type Node } from 'react';
-import Button from '@atlaskit/button';
-import InfoIcon from '@atlaskit/icon/glyph/info';
-import { gridSize } from '@atlaskit/theme';
+import Button from '@findable/button';
+import InfoIcon from '@findable/icon/glyph/info';
+import { gridSize } from '@findable/theme';
 import Flag, { FlagGroup } from '../src';
 
 type State = {

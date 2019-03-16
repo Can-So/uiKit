@@ -1,4 +1,4 @@
-import { code, Example, md, Props } from '@atlaskit/docs';
+import { code, Example, md, Props } from '@findable/docs';
 import * as React from 'react';
 
 export default md`
@@ -9,11 +9,11 @@ export default md`
 
   Import the component in your React app as follows:
 
-  ${code`import UserPicker from '@atlaskit/user-picker';`}
+  ${code`import UserPicker from '@findable/user-picker';`}
 
   ${(
     <Example
-      packageName="@atlaskit/user-picker"
+      packageName="@findable/user-picker"
       Component={require('../examples/00-single').default}
       title="Single User Picker"
       source={require('!!raw-loader!../examples/00-single')}
@@ -22,7 +22,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/user-picker"
+      packageName="@findable/user-picker"
       Component={require('../examples/01-multi').default}
       title="Multi User Picker"
       source={require('!!raw-loader!../examples/01-multi')}
@@ -31,7 +31,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/user-picker"
+      packageName="@findable/user-picker"
       Component={require('../examples/09-watchers').default}
       title="Watchers"
       source={require('!!raw-loader!../examples/09-watchers')}

@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { UIAnalyticsEvent } from '@findable/analytics-next';
 import { version, name } from '../../version.json';
 import analyticsActionHandlers from './analyticsHandlers';
 // TODO https://product-fabric.atlassian.net/browse/MS-598

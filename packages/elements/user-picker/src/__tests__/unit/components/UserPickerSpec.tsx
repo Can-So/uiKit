@@ -10,7 +10,7 @@ jest.mock('../../../components/components', () => ({
   getComponents: jest.fn(),
 }));
 
-import Select, { CreatableSelect } from '@atlaskit/select';
+import Select, { CreatableSelect } from '@findable/select';
 import { shallowWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
 import { getComponents } from '../../../components/components';

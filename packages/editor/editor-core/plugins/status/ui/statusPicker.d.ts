@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Color } from '@atlaskit/status';
+import { Color } from '@findable/status';
 import { StatusType } from '../plugin';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { CreateUIAnalyticsEventSignature } from '@findable/analytics-next-types';
 export declare enum InputMethod {
     blur = "blur",
     escKey = "escKey",

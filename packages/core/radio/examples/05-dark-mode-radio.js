@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { AtlaskitThemeProvider } from '@atlaskit/theme';
+import { AtlaskitThemeProvider } from '@findable/theme';
 import { RadioGroup } from '../src';
 
 const options = [

@@ -4,8 +4,8 @@ import {
   createStorybookContext,
   atlassianLogoUrl,
   imageFileId,
-} from '@atlaskit/media-test-helpers';
-import { ExternalImageIdentifier } from '@atlaskit/media-core';
+} from '@findable/media-test-helpers';
+import { ExternalImageIdentifier } from '@findable/media-core';
 import { Card, CardView } from '../src';
 import { ExternalIdentifierWrapper } from '../example-helpers/styled';
 

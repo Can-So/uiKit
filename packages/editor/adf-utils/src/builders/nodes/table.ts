@@ -1,4 +1,4 @@
-import { TableDefinition, TableRowDefinition } from '@atlaskit/adf-schema';
+import { TableDefinition, TableRowDefinition } from '@findable/adf-schema';
 
 export const table = (
   ...content: Array<TableRowDefinition>

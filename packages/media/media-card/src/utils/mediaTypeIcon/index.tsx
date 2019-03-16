@@ -1,10 +1,10 @@
 /* tslint:disable:variable-name */
 import * as React from 'react';
-import ImageIcon from '@atlaskit/icon/glyph/image';
-import AudioIcon from '@atlaskit/icon/glyph/audio';
-import VideoIcon from '@atlaskit/icon/glyph/media-services/video';
-import DocIcon from '@atlaskit/icon/glyph/document';
-import UnknownIcon from '@atlaskit/icon/glyph/page';
+import ImageIcon from '@findable/icon/glyph/image';
+import AudioIcon from '@findable/icon/glyph/audio';
+import VideoIcon from '@findable/icon/glyph/media-services/video';
+import DocIcon from '@findable/icon/glyph/document';
+import UnknownIcon from '@findable/icon/glyph/page';
 import { IconWrapper } from './styled';
 
 const icons: any = {

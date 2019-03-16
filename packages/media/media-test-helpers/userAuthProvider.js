@@ -1,5 +1,5 @@
 import * as exenv from 'exenv';
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 export var userAuthProviderBaseURL = 'https://dt-api.dev.atl-paas.net';
 var userAuthProviderPromiseCache;
 export var userAuthProvider = function () {

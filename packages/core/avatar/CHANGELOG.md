@@ -1,18 +1,18 @@
-# @atlaskit/avatar
+# @findable/avatar
 
 ## 15.0.1
-- Updated dependencies [9d5cc39394](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d5cc39394):
-  - @atlaskit/docs@7.0.1
-  - @atlaskit/analytics-next@4.0.1
-  - @atlaskit/icon@16.0.5
-  - @atlaskit/section-message@2.0.1
-  - @atlaskit/theme@8.0.1
-  - @atlaskit/toggle@6.0.1
-  - @atlaskit/tooltip@13.0.1
-  - @atlaskit/button@11.0.0
+- Updated dependencies [9d5cc39394](https://github.com/fnamazing/uiKit/commits/9d5cc39394):
+  - @findable/docs@7.0.1
+  - @findable/analytics-next@4.0.1
+  - @findable/icon@16.0.5
+  - @findable/section-message@2.0.1
+  - @findable/theme@8.0.1
+  - @findable/toggle@6.0.1
+  - @findable/tooltip@13.0.1
+  - @findable/button@11.0.0
 
 ## 15.0.0
-- [major] [76299208e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76299208e6):
+- [major] [76299208e6](https://github.com/fnamazing/uiKit/commits/76299208e6):
 
   - Drop ES5 from all the flow modules
 
@@ -24,13 +24,13 @@
   The major reason for doing this is to allow us to support multiple entry points in packages, e.g:
 
   ```js
-  import colors from `@atlaskit/theme/colors`;
+  import colors from `@findable/theme/colors`;
   ```
 
   Previously this was sort of possible for consumers by doing something like:
 
   ```js
-  import colors from `@atlaskit/theme/dist/esm/colors`;
+  import colors from `@findable/theme/dist/esm/colors`;
   ```
 
   This has a couple of issues. 1, it treats the file system as API making internal refactors harder, we have to worry about how consumers might be using things that aren't *actually* supposed to be used. 2. We are unable to do this *internally* in @atlaskit packages. This leads to lots of packages bundling all of theme, just to use a single color, especially in situations where tree shaking fails.
@@ -44,327 +44,327 @@
   Please reach out to #fabric-build (if in Atlassian) or create an issue in [Design System Support](https://ecosystem.atlassian.net/secure/CreateIssue.jspa?pid=24670) (for external) if you have any questions or queries about this.
 
 ## 14.1.9
-- [patch] [92d8e6317c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92d8e6317c):
+- [patch] [92d8e6317c](https://github.com/fnamazing/uiKit/commits/92d8e6317c):
 
   - Check if the DOM is available when rendering an AvatarImage so that SSR rendered Avatars will render with the provided image.
 
 ## 14.1.8
-- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
-  - @atlaskit/docs@6.0.1
-  - @atlaskit/button@10.1.2
-  - @atlaskit/field-base@11.0.14
-  - @atlaskit/section-message@1.0.16
-  - @atlaskit/toggle@5.0.15
-  - @atlaskit/tooltip@12.1.15
-  - @atlaskit/icon@16.0.0
+- Updated dependencies [d7ef59d432](https://github.com/fnamazing/uiKit/commits/d7ef59d432):
+  - @findable/docs@6.0.1
+  - @findable/button@10.1.2
+  - @findable/field-base@11.0.14
+  - @findable/section-message@1.0.16
+  - @findable/toggle@5.0.15
+  - @findable/tooltip@12.1.15
+  - @findable/icon@16.0.0
 
 ## 14.1.7
-- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
-  - @atlaskit/analytics-next@3.1.2
-  - @atlaskit/button@10.1.1
-  - @atlaskit/field-base@11.0.13
-  - @atlaskit/icon@15.0.2
-  - @atlaskit/section-message@1.0.14
-  - @atlaskit/theme@7.0.1
-  - @atlaskit/toggle@5.0.14
-  - @atlaskit/tooltip@12.1.13
-  - @atlaskit/docs@6.0.0
+- Updated dependencies [58b84fa](https://github.com/fnamazing/uiKit/commits/58b84fa):
+  - @findable/analytics-next@3.1.2
+  - @findable/button@10.1.1
+  - @findable/field-base@11.0.13
+  - @findable/icon@15.0.2
+  - @findable/section-message@1.0.14
+  - @findable/theme@7.0.1
+  - @findable/toggle@5.0.14
+  - @findable/tooltip@12.1.13
+  - @findable/docs@6.0.0
 
 ## 14.1.6
-- [patch] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+- [patch] [d13242d](https://github.com/fnamazing/uiKit/commits/d13242d):
 
   - Change API to experimental theming API to namespace component themes into separate contexts and make theming simpler. Update all dependant components.
 
 ## 14.1.5
-- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
-  - @atlaskit/docs@5.2.2
-  - @atlaskit/button@10.0.1
-  - @atlaskit/field-base@11.0.11
-  - @atlaskit/section-message@1.0.12
-  - @atlaskit/toggle@5.0.12
-  - @atlaskit/tooltip@12.1.11
-  - @atlaskit/icon@15.0.0
+- Updated dependencies [ab9b69c](https://github.com/fnamazing/uiKit/commits/ab9b69c):
+  - @findable/docs@5.2.2
+  - @findable/button@10.0.1
+  - @findable/field-base@11.0.11
+  - @findable/section-message@1.0.12
+  - @findable/toggle@5.0.12
+  - @findable/tooltip@12.1.11
+  - @findable/icon@15.0.0
 
 ## 14.1.4
-- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
-  - @atlaskit/docs@5.2.1
-  - @atlaskit/analytics-next@3.1.1
-  - @atlaskit/icon@14.6.1
-  - @atlaskit/section-message@1.0.11
-  - @atlaskit/theme@6.2.1
-  - @atlaskit/toggle@5.0.11
-  - @atlaskit/tooltip@12.1.10
-  - @atlaskit/button@10.0.0
+- Updated dependencies [6998f11](https://github.com/fnamazing/uiKit/commits/6998f11):
+  - @findable/docs@5.2.1
+  - @findable/analytics-next@3.1.1
+  - @findable/icon@14.6.1
+  - @findable/section-message@1.0.11
+  - @findable/theme@6.2.1
+  - @findable/toggle@5.0.11
+  - @findable/tooltip@12.1.10
+  - @findable/button@10.0.0
 
 ## 14.1.3
-- [patch] [a981c43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a981c43):
+- [patch] [a981c43](https://github.com/fnamazing/uiKit/commits/a981c43):
 
   - Update Avatar to allow to use a custom icon as status.
 
 ## 14.1.2
-- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://github.com/fnamazing/uiKit/commits/b71751b)
 
 ## 14.1.1
-- [patch] Update avatar index exports to fix babel transpilation bug [0208158](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0208158)
+- [patch] Update avatar index exports to fix babel transpilation bug [0208158](https://github.com/fnamazing/uiKit/commits/0208158)
 
 ## 14.1.0
-- [minor] Adds new theming API to Avatar and AvatarItem components [79dd93f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/79dd93f)
+- [minor] Adds new theming API to Avatar and AvatarItem components [79dd93f](https://github.com/fnamazing/uiKit/commits/79dd93f)
 
 ## 14.0.11
-- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
-  - @atlaskit/docs@5.0.8
-  - @atlaskit/button@9.0.13
-  - @atlaskit/field-base@11.0.8
-  - @atlaskit/section-message@1.0.8
-  - @atlaskit/toggle@5.0.9
-  - @atlaskit/tooltip@12.1.1
-  - @atlaskit/icon@14.0.0
+- [patch] Updated dependencies [65c6514](https://github.com/fnamazing/uiKit/commits/65c6514)
+  - @findable/docs@5.0.8
+  - @findable/button@9.0.13
+  - @findable/field-base@11.0.8
+  - @findable/section-message@1.0.8
+  - @findable/toggle@5.0.9
+  - @findable/tooltip@12.1.1
+  - @findable/icon@14.0.0
 
 ## 14.0.10
-- [patch] Fix bug where analytics was causing avatar to always have an onClick and render with onClick styles/attributes. [966f1fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/966f1fb)
+- [patch] Fix bug where analytics was causing avatar to always have an onClick and render with onClick styles/attributes. [966f1fb](https://github.com/fnamazing/uiKit/commits/966f1fb)
 
 ## 14.0.8
-- [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
-  - @atlaskit/theme@6.0.0
-  - @atlaskit/tooltip@12.0.9
-  - @atlaskit/toggle@5.0.6
-  - @atlaskit/section-message@1.0.5
-  - @atlaskit/icon@13.2.5
-  - @atlaskit/field-base@11.0.5
-  - @atlaskit/button@9.0.6
-  - @atlaskit/docs@5.0.6
+- [patch] Updated dependencies [df22ad8](https://github.com/fnamazing/uiKit/commits/df22ad8)
+  - @findable/theme@6.0.0
+  - @findable/tooltip@12.0.9
+  - @findable/toggle@5.0.6
+  - @findable/section-message@1.0.5
+  - @findable/icon@13.2.5
+  - @findable/field-base@11.0.5
+  - @findable/button@9.0.6
+  - @findable/docs@5.0.6
 
 ## 14.0.7
-- [patch] updated the custom component proxy to be class instead of function to fix the errors related to innerRef [06690a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06690a6)
-- [none] Updated dependencies [06690a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06690a6)
+- [patch] updated the custom component proxy to be class instead of function to fix the errors related to innerRef [06690a6](https://github.com/fnamazing/uiKit/commits/06690a6)
+- [none] Updated dependencies [06690a6](https://github.com/fnamazing/uiKit/commits/06690a6)
 
 ## 14.0.6
-- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-- [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
-  - @atlaskit/tooltip@12.0.5
-  - @atlaskit/field-base@11.0.3
-  - @atlaskit/analytics-next@3.0.4
-  - @atlaskit/toggle@5.0.5
-  - @atlaskit/button@9.0.5
-  - @atlaskit/theme@5.1.3
-  - @atlaskit/section-message@1.0.4
-  - @atlaskit/icon@13.2.4
+- [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+- [none] Updated dependencies [a4bd557](https://github.com/fnamazing/uiKit/commits/a4bd557)
+  - @findable/tooltip@12.0.5
+  - @findable/field-base@11.0.3
+  - @findable/analytics-next@3.0.4
+  - @findable/toggle@5.0.5
+  - @findable/button@9.0.5
+  - @findable/theme@5.1.3
+  - @findable/section-message@1.0.4
+  - @findable/icon@13.2.4
 
 ## 14.0.5
-- [patch] Updated dependencies [acd86a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/acd86a1)
-  - @atlaskit/tooltip@12.0.4
-  - @atlaskit/icon@13.2.2
-  - @atlaskit/toggle@5.0.4
-  - @atlaskit/section-message@1.0.3
-  - @atlaskit/button@9.0.4
-  - @atlaskit/theme@5.1.2
-  - @atlaskit/analytics-next@3.0.3
-  - @atlaskit/docs@5.0.2
-  - @atlaskit/field-base@11.0.2
+- [patch] Updated dependencies [acd86a1](https://github.com/fnamazing/uiKit/commits/acd86a1)
+  - @findable/tooltip@12.0.4
+  - @findable/icon@13.2.2
+  - @findable/toggle@5.0.4
+  - @findable/section-message@1.0.3
+  - @findable/button@9.0.4
+  - @findable/theme@5.1.2
+  - @findable/analytics-next@3.0.3
+  - @findable/docs@5.0.2
+  - @findable/field-base@11.0.2
 
 ## 14.0.4
-- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-- [none] Updated dependencies [7e331b5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e331b5)
-  - @atlaskit/tooltip@12.0.3
-  - @atlaskit/field-base@11.0.1
-  - @atlaskit/analytics-next@3.0.2
-  - @atlaskit/toggle@5.0.3
-  - @atlaskit/button@9.0.3
-  - @atlaskit/theme@5.1.1
-  - @atlaskit/section-message@1.0.2
-  - @atlaskit/icon@13.2.1
+- [patch] Add a SSR test for every package, add react-dom and build-utils in devDependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+- [none] Updated dependencies [7e331b5](https://github.com/fnamazing/uiKit/commits/7e331b5)
+  - @findable/tooltip@12.0.3
+  - @findable/field-base@11.0.1
+  - @findable/analytics-next@3.0.2
+  - @findable/toggle@5.0.3
+  - @findable/button@9.0.3
+  - @findable/theme@5.1.1
+  - @findable/section-message@1.0.2
+  - @findable/icon@13.2.1
 
 ## 14.0.3
-- [patch] Update docs, change dev deps [25d6e48](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25d6e48)
-- [none] Updated dependencies [25d6e48](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25d6e48)
+- [patch] Update docs, change dev deps [25d6e48](https://github.com/fnamazing/uiKit/commits/25d6e48)
+- [none] Updated dependencies [25d6e48](https://github.com/fnamazing/uiKit/commits/25d6e48)
 
 ## 14.0.2
-- [patch] Move analytics tests and replace elements to core [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-- [none] Updated dependencies [49d4ab4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49d4ab4)
-  - @atlaskit/tooltip@12.0.1
-  - @atlaskit/analytics-next@3.0.1
-  - @atlaskit/toggle@5.0.1
-  - @atlaskit/button@9.0.2
-  - @atlaskit/docs@5.0.1
+- [patch] Move analytics tests and replace elements to core [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+- [none] Updated dependencies [49d4ab4](https://github.com/fnamazing/uiKit/commits/49d4ab4)
+  - @findable/tooltip@12.0.1
+  - @findable/analytics-next@3.0.1
+  - @findable/toggle@5.0.1
+  - @findable/button@9.0.2
+  - @findable/docs@5.0.1
 
 ## 14.0.1
-- [patch] Updated dependencies [e6b1985](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6b1985)
-  - @atlaskit/tooltip@12.0.0
-  - @atlaskit/icon@13.1.1
+- [patch] Updated dependencies [e6b1985](https://github.com/fnamazing/uiKit/commits/e6b1985)
+  - @findable/tooltip@12.0.0
+  - @findable/icon@13.1.1
 
 ## 14.0.0
-- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-- [major] Updates to React ^16.4.0 [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-- [major] Updated dependencies [563a7eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/563a7eb)
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/field-base@11.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/toggle@5.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/icon@13.0.0
-- [major] Updated dependencies [7edb866](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7edb866)
-  - @atlaskit/tooltip@11.0.0
-  - @atlaskit/field-base@11.0.0
-  - @atlaskit/analytics-next@3.0.0
-  - @atlaskit/toggle@5.0.0
-  - @atlaskit/button@9.0.0
-  - @atlaskit/theme@5.0.0
-  - @atlaskit/docs@5.0.0
-  - @atlaskit/icon@13.0.0
+- [major] Provides analytics for common component interations. See the [Instrumented Components](https://atlaskit.atlassian.com/packages/core/analytics-next) section for more details. If you are using enzyme for testing you will have to use [our forked version of the library](https://atlaskit.atlassian.com/docs/guides/testing#we-use-a-forked-version-of-enzyme). [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+- [major] Updates to React ^16.4.0 [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+- [major] Updated dependencies [563a7eb](https://github.com/fnamazing/uiKit/commits/563a7eb)
+  - @findable/tooltip@11.0.0
+  - @findable/field-base@11.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/toggle@5.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
+  - @findable/icon@13.0.0
+- [major] Updated dependencies [7edb866](https://github.com/fnamazing/uiKit/commits/7edb866)
+  - @findable/tooltip@11.0.0
+  - @findable/field-base@11.0.0
+  - @findable/analytics-next@3.0.0
+  - @findable/toggle@5.0.0
+  - @findable/button@9.0.0
+  - @findable/theme@5.0.0
+  - @findable/docs@5.0.0
+  - @findable/icon@13.0.0
 
 ## 13.0.0
 
-- [major] Remove unneeded componentType and functionType type exports [7724115](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7724115)
-- [none] Updated dependencies [da63331](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da63331)
-  - @atlaskit/button@8.2.5
-- [none] Updated dependencies [7724115](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7724115)
-  - @atlaskit/button@8.2.5
+- [major] Remove unneeded componentType and functionType type exports [7724115](https://github.com/fnamazing/uiKit/commits/7724115)
+- [none] Updated dependencies [da63331](https://github.com/fnamazing/uiKit/commits/da63331)
+  - @findable/button@8.2.5
+- [none] Updated dependencies [7724115](https://github.com/fnamazing/uiKit/commits/7724115)
+  - @findable/button@8.2.5
 
 ## 12.0.0
-- [major] Split avatar-group into its own package [8a01bcd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a01bcd)
-- [none] Updated dependencies [8a01bcd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a01bcd)
+- [major] Split avatar-group into its own package [8a01bcd](https://github.com/fnamazing/uiKit/commits/8a01bcd)
+- [none] Updated dependencies [8a01bcd](https://github.com/fnamazing/uiKit/commits/8a01bcd)
 
 ## 11.2.2
-- [patch] Remove or update $FlowFixMe [e8ad98a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8ad98a)
-- [none] Updated dependencies [e8ad98a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8ad98a)
-  - @atlaskit/button@8.2.4
-  - @atlaskit/icon@12.6.1
-  - @atlaskit/dropdown-menu@5.2.1
+- [patch] Remove or update $FlowFixMe [e8ad98a](https://github.com/fnamazing/uiKit/commits/e8ad98a)
+- [none] Updated dependencies [e8ad98a](https://github.com/fnamazing/uiKit/commits/e8ad98a)
+  - @findable/button@8.2.4
+  - @findable/icon@12.6.1
+  - @findable/dropdown-menu@5.2.1
 
 ## 11.2.1
-- [patch] Fix $FlowFixMe and release packages [25d0b2d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25d0b2d)
-- [none] Updated dependencies [25d0b2d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25d0b2d)
-  - @atlaskit/tooltip@10.3.1
-  - @atlaskit/button@8.2.2
-  - @atlaskit/icon@12.3.1
+- [patch] Fix $FlowFixMe and release packages [25d0b2d](https://github.com/fnamazing/uiKit/commits/25d0b2d)
+- [none] Updated dependencies [25d0b2d](https://github.com/fnamazing/uiKit/commits/25d0b2d)
+  - @findable/tooltip@10.3.1
+  - @findable/button@8.2.2
+  - @findable/icon@12.3.1
 
 ## 11.2.0
-- [minor] Fixes types for Flow 0.74 [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-- [none] Updated dependencies [dc50cd2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc50cd2)
-  - @atlaskit/tooltip@10.3.0
-  - @atlaskit/button@8.2.0
-  - @atlaskit/icon@12.2.0
-  - @atlaskit/dropdown-menu@5.1.0
+- [minor] Fixes types for Flow 0.74 [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+- [none] Updated dependencies [dc50cd2](https://github.com/fnamazing/uiKit/commits/dc50cd2)
+  - @findable/tooltip@10.3.0
+  - @findable/button@8.2.0
+  - @findable/icon@12.2.0
+  - @findable/dropdown-menu@5.1.0
 
 ## 11.1.1
-- [patch] Update changelogs to remove duplicate [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-- [none] Updated dependencies [cc58e17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc58e17)
-  - @atlaskit/theme@4.0.3
-  - @atlaskit/item@7.0.4
-  - @atlaskit/icon@12.1.1
-  - @atlaskit/field-base@10.1.1
-  - @atlaskit/dropdown-menu@5.0.3
-  - @atlaskit/button@8.1.1
-  - @atlaskit/docs@4.1.1
+- [patch] Update changelogs to remove duplicate [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+- [none] Updated dependencies [cc58e17](https://github.com/fnamazing/uiKit/commits/cc58e17)
+  - @findable/theme@4.0.3
+  - @findable/item@7.0.4
+  - @findable/icon@12.1.1
+  - @findable/field-base@10.1.1
+  - @findable/dropdown-menu@5.0.3
+  - @findable/button@8.1.1
+  - @findable/docs@4.1.1
 
 ## 11.1.0
-- [none] Updated dependencies [9d20f54](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d20f54)
-  - @atlaskit/tooltip@10.2.0
-  - @atlaskit/item@7.0.3
-  - @atlaskit/dropdown-menu@5.0.2
-  - @atlaskit/icon@12.1.0
-  - @atlaskit/toggle@4.0.2
-  - @atlaskit/docs@4.1.0
-  - @atlaskit/theme@4.0.2
-  - @atlaskit/field-base@10.1.0
-  - @atlaskit/button@8.1.0
+- [none] Updated dependencies [9d20f54](https://github.com/fnamazing/uiKit/commits/9d20f54)
+  - @findable/tooltip@10.2.0
+  - @findable/item@7.0.3
+  - @findable/dropdown-menu@5.0.2
+  - @findable/icon@12.1.0
+  - @findable/toggle@4.0.2
+  - @findable/docs@4.1.0
+  - @findable/theme@4.0.2
+  - @findable/field-base@10.1.0
+  - @findable/button@8.1.0
 
 ## 11.0.1
-- [patch] Update readme's [223cd67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/223cd67)
-- [patch] Updated dependencies [223cd67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/223cd67)
-  - @atlaskit/tooltip@10.0.1
-  - @atlaskit/item@7.0.1
-  - @atlaskit/icon@12.0.1
-  - @atlaskit/toggle@4.0.1
-  - @atlaskit/field-base@10.0.1
-  - @atlaskit/button@8.0.1
-  - @atlaskit/theme@4.0.1
-  - @atlaskit/docs@4.0.1
-  - @atlaskit/dropdown-menu@5.0.1
+- [patch] Update readme's [223cd67](https://github.com/fnamazing/uiKit/commits/223cd67)
+- [patch] Updated dependencies [223cd67](https://github.com/fnamazing/uiKit/commits/223cd67)
+  - @findable/tooltip@10.0.1
+  - @findable/item@7.0.1
+  - @findable/icon@12.0.1
+  - @findable/toggle@4.0.1
+  - @findable/field-base@10.0.1
+  - @findable/button@8.0.1
+  - @findable/theme@4.0.1
+  - @findable/docs@4.0.1
+  - @findable/dropdown-menu@5.0.1
 
 ## 11.0.0
-- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-- [patch] Updated dependencies [1e80619](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e80619)
-  - @atlaskit/tooltip@10.0.0
-  - @atlaskit/item@7.0.0
-  - @atlaskit/icon@12.0.0
-  - @atlaskit/toggle@4.0.0
-  - @atlaskit/field-base@10.0.0
-  - @atlaskit/button@8.0.0
-  - @atlaskit/theme@4.0.0
-  - @atlaskit/docs@4.0.0
-  - @atlaskit/dropdown-menu@5.0.0
+- [major] makes styled-components a peer dependency and upgrades version range from 1.4.6 - 3 to ^3.2.6 [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+- [patch] Updated dependencies [1e80619](https://github.com/fnamazing/uiKit/commits/1e80619)
+  - @findable/tooltip@10.0.0
+  - @findable/item@7.0.0
+  - @findable/icon@12.0.0
+  - @findable/toggle@4.0.0
+  - @findable/field-base@10.0.0
+  - @findable/button@8.0.0
+  - @findable/theme@4.0.0
+  - @findable/docs@4.0.0
+  - @findable/dropdown-menu@5.0.0
 
 ## 10.0.7
-- [patch] Fix text color for items with href in AvatarGroup [2cbb9ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cbb9ff)
-- [none] Updated dependencies [2cbb9ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cbb9ff)
+- [patch] Fix text color for items with href in AvatarGroup [2cbb9ff](https://github.com/fnamazing/uiKit/commits/2cbb9ff)
+- [none] Updated dependencies [2cbb9ff](https://github.com/fnamazing/uiKit/commits/2cbb9ff)
 
 ## 10.0.6
-- [patch] Updated dependencies [d662caa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d662caa)
-  - @atlaskit/icon@11.3.0
-  - @atlaskit/tooltip@9.2.1
-  - @atlaskit/toggle@3.0.2
-  - @atlaskit/item@6.0.3
-  - @atlaskit/field-base@9.0.3
-  - @atlaskit/dropdown-menu@4.0.3
-  - @atlaskit/button@7.2.5
-  - @atlaskit/theme@3.2.2
-  - @atlaskit/docs@3.0.4
+- [patch] Updated dependencies [d662caa](https://github.com/fnamazing/uiKit/commits/d662caa)
+  - @findable/icon@11.3.0
+  - @findable/tooltip@9.2.1
+  - @findable/toggle@3.0.2
+  - @findable/item@6.0.3
+  - @findable/field-base@9.0.3
+  - @findable/dropdown-menu@4.0.3
+  - @findable/button@7.2.5
+  - @findable/theme@3.2.2
+  - @findable/docs@3.0.4
 
 ## 10.0.4
-- [patch] Fix clipping of dropdown items in avatar group for certain browsers [7b82fa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b82fa6)
+- [patch] Fix clipping of dropdown items in avatar group for certain browsers [7b82fa6](https://github.com/fnamazing/uiKit/commits/7b82fa6)
 
 ## 10.0.3
-- [patch] Fix avatars appearing clickable when no onClick or href prop is provided [e6fec4f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6fec4f)
+- [patch] Fix avatars appearing clickable when no onClick or href prop is provided [e6fec4f](https://github.com/fnamazing/uiKit/commits/e6fec4f)
 
 ## 10.0.2
-- [patch] Fix native tooltips appearing for avatars without a src prop [6a3fb67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6a3fb67)
+- [patch] Fix native tooltips appearing for avatars without a src prop [6a3fb67](https://github.com/fnamazing/uiKit/commits/6a3fb67)
 
 ## 10.0.0
-- [major] Bump to React 16.3. [4251858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4251858)
+- [major] Bump to React 16.3. [4251858](https://github.com/fnamazing/uiKit/commits/4251858)
 
 ## 9.2.3
-- [patch] Remove dependency on @atlaskit/polyfill as it is not being used. [f0f9307](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0f9307)
-- [patch] Add "sideEffects: false" to AKM2 packages to allow consumer's to tree-shake [c3b018a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3b018a)
+- [patch] Remove dependency on @findable/polyfill as it is not being used. [f0f9307](https://github.com/fnamazing/uiKit/commits/f0f9307)
+- [patch] Add "sideEffects: false" to AKM2 packages to allow consumer's to tree-shake [c3b018a](https://github.com/fnamazing/uiKit/commits/c3b018a)
 
 ## 9.2.2
-- [patch] Makes packages Flow types compatible with version 0.67 [25daac0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25daac0)
+- [patch] Makes packages Flow types compatible with version 0.67 [25daac0](https://github.com/fnamazing/uiKit/commits/25daac0)
 
 ## 9.2.1
-- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ed0bba)
+- [patch] Re-releasing due to potentially broken babel release [9ed0bba](https://github.com/fnamazing/uiKit/commits/9ed0bba)
 
 ## 9.2.0
-- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ceccf30)
+- [minor] Update styled-components dependency to support versions 1.4.6 - 3 [ceccf30](https://github.com/fnamazing/uiKit/commits/ceccf30)
 
 ## 9.1.0
-- [minor] Create skeleton representations of various components [cd628e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd628e4)
+- [minor] Create skeleton representations of various components [cd628e4](https://github.com/fnamazing/uiKit/commits/cd628e4)
 
 ## 9.0.4
-- [patch] updated the repository url to https://bitbucket.org/atlassian/atlaskit-mk-2 [1e57e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e57e5a)
+- [patch] updated the repository url to https://github.com/fnamazing/uiKit [1e57e5a](https://github.com/fnamazing/uiKit/commits/1e57e5a)
 
 ## 9.0.2
-- [patch] Remove babel-plugin-react-flow-props-to-prop-types [06c1f08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/06c1f08)
+- [patch] Remove babel-plugin-react-flow-props-to-prop-types [06c1f08](https://github.com/fnamazing/uiKit/commits/06c1f08)
 
 ## 9.0.1
-- [patch] Packages Flow types for elements components [3111e74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3111e74)
+- [patch] Packages Flow types for elements components [3111e74](https://github.com/fnamazing/uiKit/commits/3111e74)
 
 ## 9.0.0
-- [major] onAvatarClick prop on AvatarGroup now has a second argument. This second argument is the item that was clicked on. [23a488e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23a488e)
+- [major] onAvatarClick prop on AvatarGroup now has a second argument. This second argument is the item that was clicked on. [23a488e](https://github.com/fnamazing/uiKit/commits/23a488e)
 
 ## 8.4.1
-- [patch] Migrate Navigation from Ak repo to ak mk 2 repo, Fixed flow typing inconsistencies in ak mk 2 [bdeef5b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bdeef5b)
+- [patch] Migrate Navigation from Ak repo to ak mk 2 repo, Fixed flow typing inconsistencies in ak mk 2 [bdeef5b](https://github.com/fnamazing/uiKit/commits/bdeef5b)
 
 ## 8.4.0
-- [minor] Add React 16 support. [12ea6e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/12ea6e4)
+- [minor] Add React 16 support. [12ea6e4](https://github.com/fnamazing/uiKit/commits/12ea6e4)
 
 ## 8.3.10
-- [patch] update flow dep, fix flow errors  [722ad83](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/722ad83)
-- [patch] update flow dep, fix flow errors  [722ad83](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/722ad83)
+- [patch] update flow dep, fix flow errors  [722ad83](https://github.com/fnamazing/uiKit/commits/722ad83)
+- [patch] update flow dep, fix flow errors  [722ad83](https://github.com/fnamazing/uiKit/commits/722ad83)
 
 ## 8.3.6
-- [patch] migrating avatar package to new repo [f3f5e51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f3f5e51)
+- [patch] migrating avatar package to new repo [f3f5e51](https://github.com/fnamazing/uiKit/commits/f3f5e51)
 
 ## 8.3.5 (2017-11-30)
 * bug fix; release stories with fixed console errors ([3321c2b](https://bitbucket.org/atlassian/atlaskit/commits/3321c2b))

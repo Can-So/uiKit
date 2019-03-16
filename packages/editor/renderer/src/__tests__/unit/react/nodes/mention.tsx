@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { ResourcedMention } from '@atlaskit/mention';
+import { ResourcedMention } from '@findable/mention';
 import MentionNode from '../../../../react/nodes/mention';
 import {
   Mention,
   EventHandlers,
   MentionEventHandler,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 const mentionHandler: MentionEventHandler = (mentionId, text, event?) => {};
 

@@ -1,14 +1,14 @@
-import { createAndFireEvent } from '@atlaskit/analytics-next';
+import { createAndFireEvent } from '@findable/analytics-next';
 import {
   AnalyticsEventPayload,
   CreateAndFireEventFunction,
   CreateUIAnalyticsEventSignature,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 import {
   UI_EVENT_TYPE,
   OPERATIONAL_EVENT_TYPE,
   EventType,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 import {
   name as packageName,
   version as packageVersion,

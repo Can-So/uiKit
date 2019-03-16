@@ -4,15 +4,15 @@ import { NoAccessTooltip } from '../NoAccessTooltip';
 import { isRestricted, MentionType, MentionEventHandler } from '../../types';
 import { fireAnalyticsMentionEvent, fireAnalytics } from '../../util/analytics';
 
-import { FireAnalyticsEvent, withAnalytics } from '@atlaskit/analytics';
+import { FireAnalyticsEvent, withAnalytics } from '@findable/analytics';
 
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 
 import {
   WithAnalyticsEventProps,
   CreateUIAnalyticsEventSignature,
   UIAnalyticsEventInterface,
-} from '@atlaskit/analytics-next-types';
+} from '@findable/analytics-next-types';
 
 export const ANALYTICS_HOVER_DELAY = 1000;
 

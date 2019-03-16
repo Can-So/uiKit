@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Question from '@atlaskit/icon/glyph/question';
-import Expand from '@atlaskit/icon/glyph/arrow-down';
+import Question from '@findable/icon/glyph/question';
+import Expand from '@findable/icon/glyph/arrow-down';
 
 import Button from '../src';
 

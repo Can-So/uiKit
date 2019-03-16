@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { ContextFactory } from '@atlaskit/media-core';
+import { ContextFactory } from '@findable/media-core';
 import * as React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import * as exenv from 'exenv';

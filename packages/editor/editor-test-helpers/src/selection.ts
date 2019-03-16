@@ -1,5 +1,5 @@
 import { EditorView } from 'prosemirror-view';
-import { EditorInstance } from '@atlaskit/editor-core';
+import { EditorInstance } from '@findable/editor-core';
 
 export type EditorFactory = (doc: any) => EditorInstance;
 

@@ -1,12 +1,12 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
-import { Filmstrip } from '@atlaskit/media-filmstrip';
+import { Filmstrip } from '@findable/media-filmstrip';
 import { stateKey as mediaStateKey, } from '../pm-plugins/main';
 import { setNodeSelection } from '../../../utils';
 import WithPluginState from '../../../ui/WithPluginState';
 import { stateKey as reactNodeViewStateKey } from '../../../plugins/base/pm-plugins/react-nodeview';
-import EditorCloseIcon from '@atlaskit/icon/glyph/editor/close';
+import EditorCloseIcon from '@findable/icon/glyph/editor/close';
 import { pluginKey as editorDisabledPluginKey, } from '../../editor-disabled';
 var MediaGroup = /** @class */ (function (_super) {
     tslib_1.__extends(MediaGroup, _super);

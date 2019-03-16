@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ResultItemGroup } from '@atlaskit/quick-search';
+import { ResultItemGroup } from '@findable/quick-search';
 import { Result } from '../model/Result';
 import ResultList from './ResultList';
 

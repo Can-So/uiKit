@@ -1,9 +1,9 @@
 import * as React from 'react';
-import HomeFilledIcon from '@atlaskit/icon/glyph/home-filled';
-import ComponentIcon from '@atlaskit/icon/glyph/component';
-import OverviewIcon from '@atlaskit/icon/glyph/overview';
-import { BitbucketIcon } from '@atlaskit/logo';
-import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
+import HomeFilledIcon from '@findable/icon/glyph/home-filled';
+import ComponentIcon from '@findable/icon/glyph/component';
+import OverviewIcon from '@findable/icon/glyph/overview';
+import { BitbucketIcon } from '@findable/logo';
+import DashboardIcon from '@findable/icon/glyph/dashboard';
 import renderNav from '../utils/renderNav';
 
 const defaultNavGroups = [
@@ -40,7 +40,7 @@ const defaultNavGroups = [
     title: 'Resources',
     items: [
       {
-        to: 'https://bitbucket.org/atlassian/atlaskit-mk-2',
+        to: 'https://github.com/fnamazing/uiKit',
         title: 'Repository',
         icon: <BitbucketIcon label="Repository" />,
         external: true,

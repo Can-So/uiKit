@@ -1,8 +1,8 @@
 import _extends from "@babel/runtime/helpers/extends";
 import React from 'react';
-import { AutoDismissFlag } from '@atlaskit/flag';
-import { colors } from '@atlaskit/theme';
-import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
+import { AutoDismissFlag } from '@findable/flag';
+import { colors } from '@findable/theme';
+import SuccessIcon from '@findable/icon/glyph/check-circle';
 
 var FeedbackFlag = function FeedbackFlag(props) {
   return React.createElement(AutoDismissFlag, _extends({

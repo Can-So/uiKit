@@ -1,6 +1,6 @@
-import { ModalTransition } from '@atlaskit/modal-dialog';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import GlobalTheme from '@atlaskit/theme';
+import { ModalTransition } from '@findable/modal-dialog';
+import Page, { Grid, GridColumn } from '@findable/page';
+import GlobalTheme from '@findable/theme';
 import * as React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { withRouter, RouteComponentProps } from 'react-router';

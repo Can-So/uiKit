@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import FieldText from '@atlaskit/field-text';
-import FieldRadioGroup from '@atlaskit/field-radio-group';
+import FieldText from '@findable/field-text';
+import FieldRadioGroup from '@findable/field-radio-group';
 import InlineEdit, { SingleLineTextInput } from '../src';
 
 const radioItems = [

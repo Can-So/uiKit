@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import {
   storyMediaProviderFactory,
   sleep,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 export async function mountEditor() {
   const elem = document.createElement('div');

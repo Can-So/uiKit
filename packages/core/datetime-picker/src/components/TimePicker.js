@@ -4,7 +4,7 @@ import Select, {
   CreatableSelect,
   components,
   mergeStyles,
-} from '@atlaskit/select';
+} from '@findable/select';
 import { format, isValid } from 'date-fns';
 import pick from 'lodash.pick';
 import React, { Component, type Node } from 'react';
@@ -12,8 +12,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
-import { colors } from '@atlaskit/theme';
+} from '@findable/analytics-next';
+import { colors } from '@findable/theme';
 
 import {
   name as packageName,

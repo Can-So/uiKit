@@ -1,7 +1,7 @@
 // @flow
 
 import styled from 'styled-components';
-import { gridSize, colors } from '@atlaskit/theme';
+import { gridSize, colors } from '@findable/theme';
 
 const Description = styled.p`
   color: ${colors.N800};

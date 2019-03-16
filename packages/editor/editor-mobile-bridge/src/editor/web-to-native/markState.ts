@@ -1,4 +1,4 @@
-import { TextFormattingState } from '@atlaskit/editor-core';
+import { TextFormattingState } from '@findable/editor-core';
 
 export class MarkState {
   name: string;

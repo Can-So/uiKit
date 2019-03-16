@@ -1,4 +1,4 @@
-import { typography } from '@atlaskit/theme';
+import { typography } from '@findable/theme';
 import { NodeSerializerOpts } from '../interfaces';
 import { createTag, applyMarks } from '../util';
 

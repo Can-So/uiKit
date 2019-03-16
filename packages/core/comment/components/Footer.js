@@ -1,5 +1,5 @@
 import React from 'react';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
+import WarningIcon from '@findable/icon/glyph/warning';
 import { ActionsContainer, ActionsItem, ErrorIcon } from '../styled/FooterStyles';
 
 var mapActions = function mapActions(items) {

@@ -1,6 +1,6 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { Node as PMNode } from 'prosemirror-model';
-import { ProviderFactory, ContextIdentifierProvider } from '@atlaskit/editor-common';
+import { ProviderFactory, ContextIdentifierProvider } from '@findable/editor-common';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import { EditorAppearance } from '../../../types';
 import { Dispatch } from '../../../event-dispatcher';

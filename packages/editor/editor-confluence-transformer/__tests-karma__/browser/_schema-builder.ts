@@ -4,12 +4,12 @@ import {
   nodeFactory,
   RefsNode,
   RefsTracker,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   confluenceSchemaWithMediaSingle as schema,
   MediaAttributes,
   MediaSingleAttributes,
-} from '@atlaskit/adf-schema';
+} from '@findable/adf-schema';
 
 export { RefsNode, RefsTracker, Node };
 // Nodes

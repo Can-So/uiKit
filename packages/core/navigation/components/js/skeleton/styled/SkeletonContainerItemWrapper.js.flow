@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 
 const SkeletonContainerItemWrapper = styled.div`
   box-sizing: border-box; /* to make width: 100%; work properly when padding or border is specified - so that item width is not bigger than container width */

@@ -4,7 +4,7 @@ import {
   Provider,
   ServiceConfig,
   utils as serviceUtils,
-} from '@atlaskit/util-service-support';
+} from '@findable/util-service-support';
 import { CategoryId } from '../components/picker/categories';
 import { selectedToneStorageKey } from '../constants';
 import { isMediaEmoji, isPromise, toEmojiId } from '../type-helpers';

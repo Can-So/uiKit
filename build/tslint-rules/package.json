@@ -1,5 +1,5 @@
 {
-  "name": "@atlaskit/tslint-rules",
+  "name": "@findable/tslint-rules",
   "private": true,
   "version": "1.0.0",
   "main": "tslint.json",

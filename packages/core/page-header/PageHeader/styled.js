@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { gridSize, typography } from '@atlaskit/theme';
+import { gridSize, typography } from '@findable/theme';
 var truncationStyles = css(["\n  overflow-x: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n"]);
 
 var getTruncationStyles = function getTruncationStyles(_ref) {

@@ -4,7 +4,7 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-} from '@atlaskit/analytics-next';
+} from '@findable/analytics-next';
 import withDeprecationWarnings from './withDeprecationWarnings';
 import getButtonProps from './getButtonProps';
 import CustomComponentProxy from './CustomComponentProxy';
@@ -20,7 +20,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../version.json';
-import { withDefaultProps } from '@atlaskit/type-helpers';
+import { withDefaultProps } from '@findable/type-helpers';
 
 const StyledButton = styled.button`
   ${getButtonStyles};

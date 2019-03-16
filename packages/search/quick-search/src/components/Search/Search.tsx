@@ -1,5 +1,5 @@
 import * as React from 'react';
-import FieldBase from '@atlaskit/field-base';
+import FieldBase from '@findable/field-base';
 import {
   SearchBox,
   SearchFieldBaseInner,

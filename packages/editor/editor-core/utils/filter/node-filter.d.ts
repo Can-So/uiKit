@@ -1,5 +1,5 @@
-import { ADFEntity } from '@atlaskit/adf-utils';
-import { JSONDocNode } from '@atlaskit/editor-json-transformer';
+import { ADFEntity } from '@findable/adf-utils';
+import { JSONDocNode } from '@findable/editor-json-transformer';
 export declare function removeMarks(node: ADFEntity): {
     [x: string]: any;
     type: string;

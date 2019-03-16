@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { tableEditing } from 'prosemirror-tables';
 import { createTable } from 'prosemirror-utils';
-import TableIcon from '@atlaskit/icon/glyph/editor/table';
-import { tableCellMinWidth } from '@atlaskit/editor-common';
-import { table, tableCell, tableHeader, tableRow } from '@atlaskit/adf-schema';
+import TableIcon from '@findable/icon/glyph/editor/table';
+import { tableCellMinWidth } from '@findable/editor-common';
+import { table, tableCell, tableHeader, tableRow } from '@findable/adf-schema';
 
 import LayoutButton from './ui/LayoutButton';
 import { EditorPlugin } from '../../types';

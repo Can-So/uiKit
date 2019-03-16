@@ -1,9 +1,9 @@
 // @flow
 
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 // $FlowFixMe: This is erroring because flow can't make sense of typescript files.
-import { Editor } from '@atlaskit/editor-core'; // eslint-disable-line import/extensions
+import { Editor } from '@findable/editor-core'; // eslint-disable-line import/extensions
 import avatarImg from './utils/sample-avatar.png';
 import { CommentLayout } from '../src';
 

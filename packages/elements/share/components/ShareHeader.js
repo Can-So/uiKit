@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { FormHeader } from '@atlaskit/form';
+import { FormHeader } from '@findable/form';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';

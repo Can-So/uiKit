@@ -1,4 +1,4 @@
-import { Inline, HeadingDefinition } from '@atlaskit/adf-schema';
+import { Inline, HeadingDefinition } from '@findable/adf-schema';
 
 export const heading = (attrs: HeadingDefinition['attrs']) => (
   ...content: Array<Inline>

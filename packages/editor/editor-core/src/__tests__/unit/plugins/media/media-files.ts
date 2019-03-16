@@ -11,7 +11,7 @@ import {
   mention,
   code_block,
   panel,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import {
   insertMediaGroupNode,
   getPosInList,

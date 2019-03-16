@@ -1,16 +1,16 @@
 // @flow
 import React, { Component } from 'react';
-import Tooltip from '@atlaskit/tooltip';
-import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-import Button from '@atlaskit/button';
+import Tooltip from '@findable/tooltip';
+import Modal, { ModalTransition } from '@findable/modal-dialog';
+import Button from '@findable/button';
 import {
   Spotlight,
   SpotlightManager,
   SpotlightTarget,
   SpotlightTransition,
-} from '@atlaskit/onboarding';
+} from '@findable/onboarding';
 
-// NOTE: @atlaskit/layer-manager is provided by the website
+// NOTE: @findable/layer-manager is provided by the website
 
 type Props = {};
 type State = {

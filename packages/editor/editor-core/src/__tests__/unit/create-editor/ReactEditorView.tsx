@@ -2,7 +2,7 @@ import { name } from '../../../version.json';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { TextSelection } from 'prosemirror-state';
-import { ProviderFactory } from '@atlaskit/editor-common';
+import { ProviderFactory } from '@findable/editor-common';
 import {
   doc,
   p,
@@ -10,13 +10,13 @@ import {
   media,
   defaultSchema,
   storyMediaProviderFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import ReactEditorView from '../../../create-editor/ReactEditorView';
 import { toJSON } from '../../../utils';
 import {
   patchEditorViewForJSDOM,
   mountWithIntl,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 import { EventDispatcher } from '../../../event-dispatcher';
 import * as AnalyticsPlugin from '../../../plugins/analytics';

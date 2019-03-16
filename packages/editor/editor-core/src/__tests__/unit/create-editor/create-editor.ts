@@ -1,6 +1,6 @@
 import { name } from '../../../version.json';
 import { Selection } from 'prosemirror-state';
-import { createEditorFactory } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory } from '@findable/editor-test-helpers';
 import {
   sortByRank,
   fixExcludes,

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Component } from 'react';
-import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import Tooltip from '@atlaskit/tooltip';
-import Button from '@atlaskit/button';
+import ChevronDownIcon from '@findable/icon/glyph/chevron-down';
+import Tooltip from '@findable/tooltip';
+import Button from '@findable/button';
 import {
   ColorSample,
   DropdownRightIconWrapper,
   DropdownLeftIconWrapper,
 } from './styles';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '@findable/media-ui';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Color } from '../../../../common';
 

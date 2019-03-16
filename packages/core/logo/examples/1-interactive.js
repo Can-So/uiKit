@@ -1,9 +1,9 @@
 // @flow
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Component } from 'react';
-import Button, { ButtonGroup } from '@atlaskit/button';
-import RadioGroup from '@atlaskit/field-radio-group';
-import { colors } from '@atlaskit/theme';
+import Button, { ButtonGroup } from '@findable/button';
+import RadioGroup from '@findable/field-radio-group';
+import { colors } from '@findable/theme';
 import styled from 'styled-components';
 import * as logos from '../src';
 

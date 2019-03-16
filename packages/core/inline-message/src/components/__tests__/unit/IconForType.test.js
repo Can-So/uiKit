@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { shallow } from 'enzyme';
-import WarningIcon from '@atlaskit/icon/glyph/warning';
-import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
-import InfoIcon from '@atlaskit/icon/glyph/info';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
+import WarningIcon from '@findable/icon/glyph/warning';
+import CheckCircleIcon from '@findable/icon/glyph/check-circle';
+import InfoIcon from '@findable/icon/glyph/info';
+import ErrorIcon from '@findable/icon/glyph/error';
 import IconForType from '../../IconForType';
 import IconWrapper from '../../IconForType/styledIconForType';
 

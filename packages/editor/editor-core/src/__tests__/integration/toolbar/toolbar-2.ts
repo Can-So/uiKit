@@ -1,4 +1,4 @@
-import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
+import { BrowserTestCase } from '@findable/webdriver-runner/runner';
 import { comment, fullpage, editable } from '../_helpers';
 import { messages as blockTypeMessages } from '../../../plugins/block-type/ui/ToolbarBlockType';
 import { messages } from '../../../plugins/block-type/types';

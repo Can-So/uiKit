@@ -2,11 +2,11 @@
 import mockPopper from '../_mockPopper';
 mockPopper();
 
-import Button from '@atlaskit/button';
-import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
-import InlineDialog from '@atlaskit/inline-dialog';
+import Button from '@findable/button';
+import CheckCircleIcon from '@findable/icon/glyph/check-circle';
+import InlineDialog from '@findable/inline-dialog';
 import { ReactWrapper } from 'enzyme';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { mountWithIntl } from '@findable/editor-test-helpers';
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import {

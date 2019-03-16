@@ -3,14 +3,14 @@
 
 import React, { Fragment, PureComponent } from 'react';
 import { withRouter, Link, Route } from 'react-router-dom';
-import Avatar from '@atlaskit/avatar';
-import Drawer from '@atlaskit/drawer';
-import ChevronDown from '@atlaskit/icon/glyph/chevron-down';
-import LinkIcon from '@atlaskit/icon/glyph/link';
-import AddIcon from '@atlaskit/icon/glyph/add';
-import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import { JiraIcon } from '@atlaskit/logo';
+import Avatar from '@findable/avatar';
+import Drawer from '@findable/drawer';
+import ChevronDown from '@findable/icon/glyph/chevron-down';
+import LinkIcon from '@findable/icon/glyph/link';
+import AddIcon from '@findable/icon/glyph/add';
+import QuestionCircleIcon from '@findable/icon/glyph/question-circle';
+import SearchIcon from '@findable/icon/glyph/search';
+import { JiraIcon } from '@findable/logo';
 
 import {
   ConnectedItem,

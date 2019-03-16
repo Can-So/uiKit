@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { GasPayload } from '@findable/analytics-gas-types';
 import { CreateAnalyticsEventFn } from './types';
 export declare type PayloadProvider = () => GasPayload;
 export interface Props {

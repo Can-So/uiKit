@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { AtlaskitThemeProvider } from '@atlaskit/theme';
-import Toggle from '@atlaskit/toggle';
+import { AtlaskitThemeProvider } from '@findable/theme';
+import Toggle from '@findable/toggle';
 import AvatarGroup from '../src';
 import { RANDOM_USERS, getAdorableAvatar } from '../examples-util/data';
 

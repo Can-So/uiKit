@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
-import { ErrorMessage, Field, HelperMessage } from '@atlaskit/form';
-import UserPicker from '@atlaskit/user-picker';
+import { ErrorMessage, Field, HelperMessage } from '@findable/form';
+import UserPicker from '@findable/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';

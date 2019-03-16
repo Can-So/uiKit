@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CodeIcon from '@atlaskit/icon/glyph/code';
+import CodeIcon from '@findable/icon/glyph/code';
 import { Directory } from '../../../types';
 import renderNav from '../utils/renderNav';
 import buildNavGroups from '../utils/buildNavGroups';

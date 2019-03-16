@@ -1,11 +1,11 @@
 import { Schema, MarkSpec, NodeSpec } from 'prosemirror-model';
 import { Plugin } from 'prosemirror-state';
-import { sanitizeNodes } from '@atlaskit/adf-schema';
+import { sanitizeNodes } from '@findable/adf-schema';
 import {
   ProviderFactory,
   ErrorReporter,
   ErrorReportingHandler,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { analyticsService, AnalyticsHandler } from '../analytics';
 import {
   EditorPlugin,

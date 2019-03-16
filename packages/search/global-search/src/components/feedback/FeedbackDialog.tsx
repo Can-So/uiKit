@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ModalPromise from './ModalWrapper';
-import FieldTextArea from '@atlaskit/field-text-area';
+import FieldTextArea from '@findable/field-text-area';
 import sendFeedback from './feedback-client';
 
 export interface Props {

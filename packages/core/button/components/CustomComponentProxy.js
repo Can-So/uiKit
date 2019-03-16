@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 // @flow
 import * as React from 'react';
-import { cleanProps } from '@atlaskit/analytics-next';
+import { cleanProps } from '@findable/analytics-next';
 var CustomComponentProxy = /** @class */ (function (_super) {
     tslib_1.__extends(CustomComponentProxy, _super);
     function CustomComponentProxy() {

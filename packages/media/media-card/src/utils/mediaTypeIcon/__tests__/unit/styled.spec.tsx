@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { IconWrapper } from '../../styled';
 
 describe('CardGenericViewSmall', () => {

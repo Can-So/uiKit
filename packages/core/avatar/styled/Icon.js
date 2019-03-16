@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, withTheme } from '@atlaskit/theme';
+import { colors, withTheme } from '@findable/theme';
 import { BORDER_WIDTH } from './constants'; // set fallbacks for border color/width to protect consumers from invalid values
 
 export var Outer = withTheme(styled.span.withConfig({

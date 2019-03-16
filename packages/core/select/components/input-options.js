@@ -14,9 +14,9 @@ import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
 import React, { Component } from 'react';
-import RadioIcon from '@atlaskit/icon/glyph/radio';
-import CheckboxIcon from '@atlaskit/icon/glyph/checkbox';
-import { colors, themed, gridSize } from '@atlaskit/theme';
+import RadioIcon from '@findable/icon/glyph/radio';
+import CheckboxIcon from '@findable/icon/glyph/checkbox';
+import { colors, themed, gridSize } from '@findable/theme';
 
 var getPrimitiveStyles = function getPrimitiveStyles(props) {
   var cx = props.cx,

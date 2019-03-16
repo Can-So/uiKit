@@ -3,14 +3,14 @@ import { shallow, mount } from 'enzyme';
 import {
   inlineExtensionData,
   bodiedExtensionData,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 
 import Lozenge, {
   ICON_SIZE,
 } from '../../../../../plugins/extension/ui/Extension/Lozenge';
 import { PlaceholderFallback } from '../../../../../plugins/extension/ui/Extension/styles';
 
-describe('@atlaskit/editor-core/ui/Extension/Lozenge', () => {
+describe('@findable/editor-core/ui/Extension/Lozenge', () => {
   it('should render image if extension has an image param', () => {
     const lozenge = shallow(<Lozenge node={inlineExtensionData[0] as any} />);
     expect(lozenge.find('img')).toHaveLength(1);

@@ -1,7 +1,7 @@
 // tslint:disable:no-console
 
 import * as React from 'react';
-import Lozenge from '@atlaskit/lozenge';
+import Lozenge from '@findable/lozenge';
 import ToolsDrawer from '../example-helpers/ToolsDrawer';
 import { Editor, EditorContext, mediaPluginKey } from '../src';
 import WithPluginState from '../src/ui/WithPluginState';

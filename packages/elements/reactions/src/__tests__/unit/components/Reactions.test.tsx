@@ -1,8 +1,8 @@
-import { AnalyticsListener } from '@atlaskit/analytics-next';
-import { EmojiProvider } from '@atlaskit/emoji';
-import Tooltip from '@atlaskit/tooltip';
-import { emoji } from '@atlaskit/util-data-test';
-import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
+import { AnalyticsListener } from '@findable/analytics-next';
+import { EmojiProvider } from '@findable/emoji';
+import Tooltip from '@findable/tooltip';
+import { emoji } from '@findable/util-data-test';
+import { mountWithIntl, shallowWithIntl } from '@findable/editor-test-helpers';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reaction } from '../../../client/MockReactionsClient';
@@ -16,7 +16,7 @@ import { ReactWrapper } from 'enzyme';
 
 const { getEmojiResourcePromise } = emoji.testData;
 
-describe('@atlaskit/reactions/reactions', () => {
+describe('@findable/reactions/reactions', () => {
   const renderReactions = (extraProps: Partial<Props> = {}) =>
     shallowWithIntl(
       <Reactions
@@ -116,7 +116,7 @@ describe('@atlaskit/reactions/reactions', () => {
             eventType: 'operational',
             attributes: {
               duration: expect.any(Number),
-              packageName: '@atlaskit/reactions',
+              packageName: '@findable/reactions',
               packageVersion: expect.any(String),
             },
           }),
@@ -139,7 +139,7 @@ describe('@atlaskit/reactions/reactions', () => {
               eventType: 'ui',
               attributes: {
                 reactionEmojiCount: 2,
-                packageName: '@atlaskit/reactions',
+                packageName: '@findable/reactions',
                 packageVersion: expect.any(String),
               },
             }),
@@ -163,7 +163,7 @@ describe('@atlaskit/reactions/reactions', () => {
               eventType: 'ui',
               attributes: {
                 duration: expect.any(Number),
-                packageName: '@atlaskit/reactions',
+                packageName: '@findable/reactions',
                 packageVersion: expect.any(String),
               },
             }),
@@ -190,7 +190,7 @@ describe('@atlaskit/reactions/reactions', () => {
                 emojiId: 'emoji-1',
                 previousState: 'new',
                 source: 'quickSelector',
-                packageName: '@atlaskit/reactions',
+                packageName: '@findable/reactions',
                 packageVersion: expect.any(String),
               },
             }),
@@ -217,7 +217,7 @@ describe('@atlaskit/reactions/reactions', () => {
                 emojiId: '1f44d',
                 previousState: 'existingNotReacted',
                 source: 'quickSelector',
-                packageName: '@atlaskit/reactions',
+                packageName: '@findable/reactions',
                 packageVersion: expect.any(String),
               },
             }),
@@ -245,7 +245,7 @@ describe('@atlaskit/reactions/reactions', () => {
                   emojiId: '1f525',
                   previousState: 'existingReacted',
                   source: 'quickSelector',
-                  packageName: '@atlaskit/reactions',
+                  packageName: '@findable/reactions',
                   packageVersion: expect.any(String),
                 },
               }),
@@ -271,7 +271,7 @@ describe('@atlaskit/reactions/reactions', () => {
               eventType: 'ui',
               attributes: {
                 duration: expect.any(Number),
-                packageName: '@atlaskit/reactions',
+                packageName: '@findable/reactions',
                 packageVersion: expect.any(String),
               },
             }),
@@ -296,7 +296,7 @@ describe('@atlaskit/reactions/reactions', () => {
                 emojiId: '1f525',
                 previousState: 'existingReacted',
                 source: 'emojiPicker',
-                packageName: '@atlaskit/reactions',
+                packageName: '@findable/reactions',
                 packageVersion: expect.any(String),
               },
             }),

@@ -1,7 +1,7 @@
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { colors, themed } from '@atlaskit/theme';
-import { themeNamespace as buttonThemeNamespace } from '@atlaskit/button';
+import { colors, themed } from '@findable/theme';
+import { themeNamespace as buttonThemeNamespace } from '@findable/button';
 var lightButtonBackground = 'rgba(255, 255, 255, 0.08)';
 export var flagBackgroundColor = themed('appearance', {
   error: {

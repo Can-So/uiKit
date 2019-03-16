@@ -17,14 +17,14 @@ import {
 } from './nodes';
 
 import { toReact as markToReact } from './marks';
-import { calcTableColumnWidths } from '@atlaskit/adf-schema';
+import { calcTableColumnWidths } from '@findable/adf-schema';
 import {
   ProviderFactory,
   getMarksByOrder,
   isSameMark,
   EventHandlers,
   ExtensionHandlers,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 
 export interface RendererContext {
   objectAri?: string;

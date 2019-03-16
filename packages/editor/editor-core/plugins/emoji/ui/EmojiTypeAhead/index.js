@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { Popup, akEditorFloatingDialogZIndex } from '@atlaskit/editor-common';
-import { EmojiTypeAhead as AkEmojiTypeAhead, } from '@atlaskit/emoji';
+import { Popup, akEditorFloatingDialogZIndex } from '@findable/editor-common';
+import { EmojiTypeAhead as AkEmojiTypeAhead, } from '@findable/emoji';
 import { analyticsService } from '../../../../analytics';
 import { getInsertTypeForKey, InsertType, } from '../../../../analytics/fabric-analytics-helper';
 var EmojiTypeAhead = /** @class */ (function (_super) {

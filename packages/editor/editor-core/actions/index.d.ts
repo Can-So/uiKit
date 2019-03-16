@@ -1,6 +1,6 @@
 import { Node } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { Transformer } from '@atlaskit/editor-common';
+import { Transformer } from '@findable/editor-common';
 import { EventDispatcher } from '../event-dispatcher';
 export declare type ContextUpdateHandler = (editorView: EditorView, eventDispatcher: EventDispatcher) => void;
 export interface EditorActionsOptions {

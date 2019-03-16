@@ -1,7 +1,7 @@
-import { MentionPluginState, TextFormattingState, EditorActions, CustomMediaPicker, BlockTypeState, ListsState, StatusState } from '@atlaskit/editor-core';
+import { MentionPluginState, TextFormattingState, EditorActions, CustomMediaPicker, BlockTypeState, ListsState, StatusState } from '@findable/editor-core';
 import { EditorView } from 'prosemirror-view';
-import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import { Color as StatusColor } from '@atlaskit/status';
+import { JSONTransformer } from '@findable/editor-json-transformer';
+import { Color as StatusColor } from '@findable/status';
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
 import { ProseMirrorDOMChange } from '../../types';

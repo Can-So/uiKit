@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component, ReactElement } from 'react';
 import styled from 'styled-components';
-import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
+import ExpandIcon from '@findable/icon/glyph/chevron-down';
 
 import UiDropdown from '../../../ui/Dropdown';
 import withOuterListeners from '../../../ui/with-outer-listeners';

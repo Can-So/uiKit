@@ -1,4 +1,4 @@
-import { ServiceConfig } from '@atlaskit/util-service-support';
+import { ServiceConfig } from '@findable/util-service-support';
 import { Provider } from './provider';
 import { Document } from '../model';
 export interface Config extends ServiceConfig {

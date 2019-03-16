@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { RendererContext } from '..';
 import { renderNodes, Serializer } from '../..';
-import { ExtensionLayout } from '@atlaskit/adf-schema';
+import { ExtensionLayout } from '@findable/adf-schema';
 import {
   ADNode,
   ExtensionHandlers,
   WidthConsumer,
-} from '@atlaskit/editor-common';
-import { calcBreakoutWidth } from '@atlaskit/editor-common';
+} from '@findable/editor-common';
+import { calcBreakoutWidth } from '@findable/editor-common';
 import { RendererCssClassName } from '../../consts';
 
 export interface Props {

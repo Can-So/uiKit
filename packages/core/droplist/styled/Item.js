@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors, fontSize, gridSize, math, themed } from '@atlaskit/theme';
+import { colors, fontSize, gridSize, math, themed } from '@findable/theme';
 var activeBackgroundColor = themed({
   light: colors.B75,
   dark: colors.DN30

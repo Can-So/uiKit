@@ -1,8 +1,8 @@
 import * as tslib_1 from "tslib";
 import * as React from 'react';
-import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
-import { createAndFireEvent, withAnalyticsEvents, } from '@atlaskit/analytics-next';
-import { UI_EVENT_TYPE, OPERATIONAL_EVENT_TYPE, } from '@atlaskit/analytics-gas-types';
+import { NavigationAnalyticsContext } from '@findable/analytics-namespaced-context';
+import { createAndFireEvent, withAnalyticsEvents, } from '@findable/analytics-next';
+import { UI_EVENT_TYPE, OPERATIONAL_EVENT_TYPE, } from '@findable/analytics-gas-types';
 export var NAVIGATION_CHANNEL = 'navigation';
 export var SWITCHER_SUBJECT = 'atlassianSwitcher';
 export var SWITCHER_ITEM_SUBJECT = 'atlassianSwitcherItem';

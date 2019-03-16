@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, code, Example } from '@atlaskit/docs';
+import { md, code, Example } from '@findable/docs';
 import { Link } from 'react-router-dom';
 
 export default md`
@@ -12,9 +12,9 @@ export default md`
   Below is an example of a form with a single text field.
 
   ${code`
-import Form, { Field } from '@atlaskit/form';
-import Button from '@atlaskit/button';
-import TextField from '@atlaskit/textfield';
+import Form, { Field } from '@findable/form';
+import Button from '@findable/button';
+import TextField from '@findable/textfield';
 
 const MyForm = () => (
   <Form onSubmit={data => console.log('form data', data)}>
@@ -36,7 +36,7 @@ const MyForm = () => (
 
   ${(
     <Example
-      packageName="@atlaskit/form"
+      packageName="@findable/form"
       Component={require('../examples/00-signup-form').default}
       title="Sign up example"
       source={require('!!raw-loader!../examples/00-signup-form')}

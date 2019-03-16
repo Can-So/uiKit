@@ -4,7 +4,7 @@ import { Outcome } from '../../domain';
 import { createError } from '../../error';
 import { Spinner } from '../../loading';
 import { constructAuthTokenUrl } from '../../utils';
-import { getArtifactUrl } from '@atlaskit/media-store';
+import { getArtifactUrl } from '@findable/media-store';
 import { BaseViewer } from '../base-viewer';
 import { getObjectUrlFromFileState } from '../../utils/getObjectUrlFromFileState';
 var moduleLoader = function () {

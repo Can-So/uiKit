@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math } from '@findable/theme';
 var SkeletonContainerHeaderText = styled.div.withConfig({
   displayName: "SkeletonContainerHeaderText",
   componentId: "s5b309-0"

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 export var Heading = styled.div.withConfig({
   displayName: "Heading",
   componentId: "kci65o-0"

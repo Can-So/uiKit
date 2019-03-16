@@ -1,4 +1,4 @@
-import { LoadOptions, OptionData } from '@atlaskit/user-picker';
+import { LoadOptions, OptionData } from '@findable/user-picker';
 import * as React from 'react';
 import { ConfigResponse } from '../types';
 export declare const REQUIRED = "REQUIRED";

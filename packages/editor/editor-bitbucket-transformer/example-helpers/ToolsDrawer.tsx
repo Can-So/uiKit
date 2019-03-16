@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { mention, emoji } from '@atlaskit/util-data-test';
-import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
+import { mention, emoji } from '@findable/util-data-test';
+import { MockActivityResource } from '@findable/activity/dist/es5/support';
 import { BitbucketTransformer } from '../src';
 
 import { Content } from './styles';
 
-import { MentionResource } from '@atlaskit/editor-core';
+import { MentionResource } from '@findable/editor-core';
 
 const rejectedPromise = Promise.reject(
   new Error('Simulated provider rejection'),

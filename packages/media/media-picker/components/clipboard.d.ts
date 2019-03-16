@@ -1,4 +1,4 @@
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 import { LocalUploadComponent } from './localUpload';
 import { Clipboard, ClipboardConfig } from './types';
 export declare const getFilesFromClipboard: (files: FileList) => File[];

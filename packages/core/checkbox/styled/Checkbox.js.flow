@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, themed, math, gridSize } from '@atlaskit/theme';
+import { colors, themed, math, gridSize } from '@findable/theme';
 
 export const HiddenCheckbox = styled.input`
   left: 50%;

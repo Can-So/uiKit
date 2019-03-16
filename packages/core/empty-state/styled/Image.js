@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize } from '@findable/theme';
 var Image = styled.img.withConfig({
   displayName: "Image",
   componentId: "sc-1fxcbfe-0"

@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { colors, createTheme, gridSize } from '@atlaskit/theme';
+import { colors, createTheme, gridSize } from '@findable/theme';
 var gridSizeValue = gridSize();
 var AVATAR_SIZES = {
   xsmall: gridSizeValue * 2,

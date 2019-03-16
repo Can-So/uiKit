@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
-import { borderRadius, colors, themed } from '@atlaskit/theme';
+import { borderRadius, colors, themed } from '@findable/theme';
 import {
   blockNodesVerticalMargin,
   akEditorTableCellMinWidth,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { akEditorCodeFontFamily, akEditorCodeBlockPadding } from '../../styles';
 
 export const codeBlockStyles = css`

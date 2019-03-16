@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { taskDecision, emoji } from '@atlaskit/util-data-test';
-import { Provider } from '@atlaskit/smart-card';
+import { ProviderFactory } from '@findable/editor-common';
+import { taskDecision, emoji } from '@findable/util-data-test';
+import { Provider } from '@findable/smart-card';
 import {
   storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { default as Renderer } from '../src/ui/Renderer';
 import { document as doc } from './helper/story-data';
 import Sidebar from './helper/NavigationNext';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 import ReactionsExample from '../examples/00-picker-and-reactions';
 
 const ReactionsSource = require('!!raw-loader!../examples/00-picker-and-reactions');
@@ -14,8 +14,8 @@ export default md`
   Import the component in your React app as follows:
 
   ${code`
-  import { ReactionStore, ConnectedReactionsView } from '@atlaskit/reactions';
-  import { EmojiResource } from '@atlaskit/emoji';
+  import { ReactionStore, ConnectedReactionsView } from '@findable/reactions';
+  import { EmojiResource } from '@findable/emoji';
 
   const emojiProvider = new EmojiResource({
     providers: [
@@ -59,7 +59,7 @@ export default md`
 
   ${(
     <Example
-      packageName="@atlaskit/reactions"
+      packageName="@findable/reactions"
       Component={ReactionsExample}
       title="Picker and Reactions"
       source={ReactionsSource}

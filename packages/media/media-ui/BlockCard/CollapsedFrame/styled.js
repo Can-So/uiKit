@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import styled from 'styled-components';
-import { fontFamily, colors } from '@atlaskit/theme';
+import { fontFamily, colors } from '@findable/theme';
 import { borderRadius } from '../../mixins';
 function minWidth(_a) {
     var minWidth = _a.minWidth;

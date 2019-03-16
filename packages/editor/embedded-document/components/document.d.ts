@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import { EditorProps } from '@atlaskit/editor-core';
-import { RendererProps } from '@atlaskit/renderer';
+import { EditorProps } from '@findable/editor-core';
+import { RendererProps } from '@findable/renderer';
 import { Props as BaseProps } from '../context/embedded-document';
 import { Mode } from '../context/context';
 import { Document as DocumentModel } from '../model';

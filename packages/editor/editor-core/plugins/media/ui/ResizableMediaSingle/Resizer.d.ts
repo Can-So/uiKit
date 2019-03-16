@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RefObject } from 'react';
-import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleLayout } from '@findable/adf-schema';
 import { Props as ResizableMediaSingleProps, EnabledHandles } from './types';
 import Resizable from 're-resizable';
 import { ResizableDirection, NumberSize } from 're-resizable';

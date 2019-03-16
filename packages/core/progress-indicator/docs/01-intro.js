@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@findable/docs';
 
 export default md`
   The progress dots are visual indicators used when stepping a user through
@@ -11,11 +11,11 @@ export default md`
 
   ## Usage
 
-  ${code`import { ProgressDots } from '@atlaskit/progress-indicator';`}
+  ${code`import { ProgressDots } from '@findable/progress-indicator';`}
 
   ${(
     <Example
-      packageName="@atlaskit/progress-indicator"
+      packageName="@findable/progress-indicator"
       Component={require('../examples/01-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/01-basic')}

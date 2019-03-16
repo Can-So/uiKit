@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsEvents } from '@findable/analytics-next';
 import * as React from 'react';
 import * as UtilAnalytics from '../../util/analytics';
 import uniqueId from '../../util/id';

@@ -3,7 +3,7 @@ import {
   doc,
   p,
   typeAheadQuery,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { isQueryActive } from '../../../../../plugins/type-ahead/utils/is-query-active';
 
 describe('findQueryMark', () => {

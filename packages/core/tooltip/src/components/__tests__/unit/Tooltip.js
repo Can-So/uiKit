@@ -2,9 +2,9 @@
 
 import React, { type Node } from 'react';
 import { mount } from 'enzyme';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
-import Portal from '@atlaskit/portal';
-import { layers } from '@atlaskit/theme';
+import { AnalyticsListener } from '@findable/analytics-next';
+import Portal from '@findable/portal';
+import { layers } from '@findable/theme';
 import Tooltip from '../../Tooltip';
 import { Tooltip as StyledTooltip } from '../../../styled';
 import { hoveredPayload } from '../../utils/analytics-payloads';

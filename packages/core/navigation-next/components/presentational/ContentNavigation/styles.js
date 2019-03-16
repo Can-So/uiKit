@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/objectSpread";
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 import { CONTENT_NAV_WIDTH } from '../../../common/constants';
 var baseStyles = {
   boxSizing: 'border-box',

@@ -1,12 +1,12 @@
 jest.mock('../../customMediaPlayer/fullscreen');
 import * as React from 'react';
 import { mount } from 'enzyme';
-import FullScreenIcon from '@atlaskit/icon/glyph/vid-full-screen-on';
-import VidPlayIcon from '@atlaskit/icon/glyph/vid-play';
-import VidHdCircleIcon from '@atlaskit/icon/glyph/vid-hd-circle';
-import Button from '@atlaskit/button';
-import Spinner from '@atlaskit/spinner';
-import { fakeIntl } from '@atlaskit/media-test-helpers';
+import FullScreenIcon from '@findable/icon/glyph/vid-full-screen-on';
+import VidPlayIcon from '@findable/icon/glyph/vid-play';
+import VidHdCircleIcon from '@findable/icon/glyph/vid-hd-circle';
+import Button from '@findable/button';
+import Spinner from '@findable/spinner';
+import { fakeIntl } from '@findable/media-test-helpers';
 import {
   CustomMediaPlayer,
   CustomMediaPlayerProps,

@@ -13,7 +13,7 @@ import {
   OPERATIONAL_EVENT_TYPE,
   GasPayload,
   GasScreenEventPayload,
-} from '@atlaskit/analytics-gas-types';
+} from '@findable/analytics-gas-types';
 
 import {
   getSources,
@@ -23,7 +23,7 @@ import {
 } from './extract-data-from-event';
 import Logger from '../helpers/logger';
 import { version as listenerVersion } from '../version.json';
-import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { UIAnalyticsEventInterface } from '@findable/analytics-next-types';
 
 const NAVIGATION_TAG = 'navigation';
 
@@ -44,7 +44,7 @@ const NAVIGATION_TAG = 'navigation';
  *
  * Analytics platform event format:
  *  event {
- *      type: @atlaskit/analytics-gas-types.EventType
+ *      type: @findable/analytics-gas-types.EventType
  *      payload {
  *          ...mandatoryAttributesBasedOnEventType
  *          attributes: {

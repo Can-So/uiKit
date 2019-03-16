@@ -1,4 +1,4 @@
-import { gridSize, themed, colors } from '@atlaskit/theme';
+import { gridSize, themed, colors } from '@findable/theme';
 export var focusRingColor = themed({
   light: colors.B100,
   dark: colors.B75

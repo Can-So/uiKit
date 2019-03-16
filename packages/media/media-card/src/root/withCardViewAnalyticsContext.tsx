@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { FileDetails, MediaItemType } from '@atlaskit/media-core';
+import { FileDetails, MediaItemType } from '@findable/media-core';
 
-import { AnalyticsContext } from '@atlaskit/analytics-next';
+import { AnalyticsContext } from '@findable/analytics-next';
 
 import { shouldDisplayImageThumbnail } from '../utils/shouldDisplayImageThumbnail';
 import { getBaseAnalyticsContext } from '../utils/analyticsUtils';

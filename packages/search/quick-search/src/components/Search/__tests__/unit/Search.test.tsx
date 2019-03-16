@@ -1,6 +1,6 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import FieldBase from '@atlaskit/field-base';
+import FieldBase from '@findable/field-base';
 import Search from '../../Search';
 
 describe('Search', () => {

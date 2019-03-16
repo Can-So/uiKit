@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ResultData } from '@atlaskit/quick-search';
+import { ResultData } from '@findable/quick-search';
 export interface Props {
     query: string;
     text: JSX.Element | string;

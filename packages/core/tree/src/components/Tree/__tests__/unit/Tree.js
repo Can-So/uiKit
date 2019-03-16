@@ -43,7 +43,7 @@ const dropResult: DropResult = {
 jest.mock('css-box-model');
 jest.useFakeTimers();
 
-describe('@atlaskit/tree - Tree', () => {
+describe('@findable/tree - Tree', () => {
   const mockRender = jest.fn(({ provided }) => (
     <div
       ref={provided.innerRef}

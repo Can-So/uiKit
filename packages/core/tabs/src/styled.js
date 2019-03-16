@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { borderRadius, colors, gridSize, math, themed } from '@atlaskit/theme';
+import { borderRadius, colors, gridSize, math, themed } from '@findable/theme';
 
 function lockSelectedColor(normal) {
   const selected = { light: colors.B400, dark: colors.B100 };

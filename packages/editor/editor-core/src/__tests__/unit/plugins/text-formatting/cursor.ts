@@ -4,7 +4,7 @@ import {
   p,
   code,
   strong,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import textFormattingCursorPlugin from '../../../../plugins/text-formatting/pm-plugins/cursor';
 import { EditorView } from 'prosemirror-view';
 

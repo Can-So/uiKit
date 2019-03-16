@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import TableTree from '../src';
 import staticData from './data-structured-nodes.json';
 

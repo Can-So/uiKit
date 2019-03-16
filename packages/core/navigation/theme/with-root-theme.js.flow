@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent, type Node } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { itemThemeNamespace } from '@atlaskit/item';
+import { itemThemeNamespace } from '@findable/item';
 import memoizeOne from 'memoize-one';
 import createItemTheme from './map-navigation-theme-to-item-theme';
 import type { Provided, RootTheme } from './types';

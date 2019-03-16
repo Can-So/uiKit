@@ -1,5 +1,5 @@
 // @flow
-import { colors } from '@atlaskit/theme';
+import { colors } from '@findable/theme';
 
 export const thumb = {
   default: {

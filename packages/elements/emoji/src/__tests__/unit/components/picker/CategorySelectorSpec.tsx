@@ -1,4 +1,4 @@
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { mountWithIntl } from '@findable/editor-test-helpers';
 import { ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import { messages } from '../../../../components/i18n';

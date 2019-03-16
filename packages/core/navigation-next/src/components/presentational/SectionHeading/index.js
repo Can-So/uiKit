@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { gridSize as gridSizeFn } from '@findable/theme';
 import type { SectionHeadingProps } from './types';
 
 const gridSize = gridSizeFn();

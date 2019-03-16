@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import Avatar from '@atlaskit/avatar';
+import Avatar from '@findable/avatar';
 import * as React from 'react';
 import { getAvatarSize } from './utils';
 var Props = /** @class */ (function () {

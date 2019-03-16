@@ -5,7 +5,7 @@ import PanelTextInput from '../../../ui/PanelTextInput';
 
 const noop = () => {};
 
-describe('@atlaskit/editor-core/ui/PanelTextInput', () => {
+describe('@findable/editor-core/ui/PanelTextInput', () => {
   it('should call onSubmit when ENTER key is pressed', () => {
     const onSubmitHandler = jest.fn();
     const panel = mount(<PanelTextInput onSubmit={onSubmitHandler} />);

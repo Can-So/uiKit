@@ -12,7 +12,7 @@ FieldBase components *will* work by themselves, but are really meant to be exten
 ## Installation
 
 ```sh
-yarn add @atlaskit/field-base
+yarn add @findable/field-base
 ```
 
 ## Usage

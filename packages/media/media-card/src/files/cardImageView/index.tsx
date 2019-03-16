@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component, ReactNode } from 'react';
-import { MediaType, ImageResizeMode } from '@atlaskit/media-core';
+import { MediaType, ImageResizeMode } from '@findable/media-core';
 
 import { CardDimensions, CardStatus } from '../../index';
 import { CardAction } from '../../actions';
@@ -19,9 +19,9 @@ import {
 import { isLoadingImage } from '../../utils/isLoadingImage';
 import { MediaImage } from '../../utils/mediaImage';
 import { CardLoading } from '../../utils/cardLoading';
-import VidPlayIcon from '@atlaskit/icon/glyph/vid-play';
+import VidPlayIcon from '@findable/icon/glyph/vid-play';
 import { shouldDisplayImageThumbnail } from '../../utils/shouldDisplayImageThumbnail';
-import { Ellipsify } from '@atlaskit/media-ui';
+import { Ellipsify } from '@findable/media-ui';
 import { ProgressBar } from '../../utils/progressBar';
 import CardActions from '../../utils/cardActions';
 

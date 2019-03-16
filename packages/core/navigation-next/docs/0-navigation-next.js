@@ -1,6 +1,6 @@
 // @flow
 
-import { md } from '@atlaskit/docs';
+import { md } from '@findable/docs';
 
 export default md`
 ## Documentation

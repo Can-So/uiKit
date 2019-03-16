@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import * as tslib_1 from "tslib";
 import styled, { keyframes } from 'styled-components';
-import { borderRadius, colors, gridSize } from '@atlaskit/theme';
+import { borderRadius, colors, gridSize } from '@findable/theme';
 import { checkeredBg } from './images';
 import { AVATAR_DIALOG_WIDTH } from '../avatar-picker-dialog/layout-const';
 var spin = keyframes(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n"], ["\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n"])));

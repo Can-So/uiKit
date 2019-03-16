@@ -5,7 +5,7 @@ React component for rendering an NPS survery dialog
 ## Installation
 
 ```sh
-yarn add @atlaskit/nps
+yarn add @findable/nps
 ```
 
 ## Usage

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, fontSize } from '@atlaskit/theme';
+import { colors, fontSize } from '@findable/theme';
 export var Wrapper = styled.div.withConfig({
   displayName: "common__Wrapper",
   componentId: "usjzau-0"

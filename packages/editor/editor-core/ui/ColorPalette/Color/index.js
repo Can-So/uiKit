@@ -2,10 +2,10 @@ import * as tslib_1 from "tslib";
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
-import { colors } from '@atlaskit/theme';
+import EditorDoneIcon from '@findable/icon/glyph/editor/done';
+import { colors } from '@findable/theme';
 import { Button, ButtonWrapper } from './styles';
-// IMO these should live inside @atlaskit/theme
+// IMO these should live inside @findable/theme
 var messages = defineMessages({
     '#172b4d': {
         id: 'fabric.theme.#172b4d',

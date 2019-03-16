@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, themed, gridSize, borderRadius } from '@atlaskit/theme';
+import { colors, themed, gridSize, borderRadius } from '@findable/theme';
 import { buttonWidthUnitless, tagHeight, focusRingColor } from '../constants';
 import { backgroundColor, backgroundColorHover, textColor, textColorHover } from '../theme';
 var gridSizeUnitless = gridSize();

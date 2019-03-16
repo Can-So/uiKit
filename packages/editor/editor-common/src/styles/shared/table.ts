@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
-import { TableLayout } from '@atlaskit/adf-schema';
-import { fontSize, themed } from '@atlaskit/theme';
+import { TableLayout } from '@findable/adf-schema';
+import { fontSize, themed } from '@findable/theme';
 import {
   akEditorTableBorder,
   akEditorTableBorderDark,

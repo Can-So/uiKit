@@ -1,11 +1,11 @@
 // @flow
 
 import React from 'react';
-import Avatar from '@atlaskit/avatar';
-import { AtlassianIcon } from '@atlaskit/logo';
-import SearchIcon from '@atlaskit/icon/glyph/search';
-import HelpIcon from '@atlaskit/icon/glyph/question';
-import { colors } from '@atlaskit/theme';
+import Avatar from '@findable/avatar';
+import { AtlassianIcon } from '@findable/logo';
+import SearchIcon from '@findable/icon/glyph/search';
+import HelpIcon from '@findable/icon/glyph/question';
+import { colors } from '@findable/theme';
 import { GlobalItem } from '../../../src';
 
 export default () => (

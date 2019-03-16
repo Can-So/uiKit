@@ -1,16 +1,16 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
-import { EmojiPicker as AkEmojiPicker } from '@atlaskit/emoji';
-import { emoji as emojiTestData } from '@atlaskit/util-data-test';
-import { Popup, ProviderFactory } from '@atlaskit/editor-common';
+import EmojiIcon from '@findable/icon/glyph/editor/emoji';
+import { EmojiPicker as AkEmojiPicker } from '@findable/emoji';
+import { emoji as emojiTestData } from '@findable/util-data-test';
+import { Popup, ProviderFactory } from '@findable/editor-common';
 import {
   doc,
   p,
   createEditorFactory,
   emoji,
   code_block,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import ToolbarEmojiPicker from '../../../../../plugins/emoji/ui/ToolbarEmojiPicker';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import {
@@ -31,7 +31,7 @@ const grinEmojiId = {
   fallback: grinEmoji.fallback,
 };
 
-describe('@atlaskit/editor-core/ui/ToolbarEmojiPicker', () => {
+describe('@findable/editor-core/ui/ToolbarEmojiPicker', () => {
   const createEditor = createEditorFactory();
 
   const providerFactory = ProviderFactory.create({ emojiProvider });

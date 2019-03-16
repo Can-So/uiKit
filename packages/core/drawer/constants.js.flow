@@ -1,5 +1,5 @@
 // @flow
-import { gridSize as akGridSize } from '@atlaskit/theme';
+import { gridSize as akGridSize } from '@findable/theme';
 
 export const transitionDuration = '0.22s';
 export const transitionDurationMs = 220;

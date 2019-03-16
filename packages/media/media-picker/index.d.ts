@@ -1,6 +1,6 @@
 export { DropzoneUploadEventPayloadMap, PopupUploadEventPayloadMap, } from './components/types';
 import { BinaryUploader, BinaryUploaderConstructor, BinaryConfig, Browser, BrowserConfig, BrowserConstructor, ClipboardConstructor, ClipboardConfig, Clipboard, Popup, PopupConfig, PopupConstructor, DropzoneConfig, DropzoneConstructor, Dropzone } from './components/types';
-import { Context } from '@atlaskit/media-core';
+import { Context } from '@findable/media-core';
 export declare const isBinaryUploader: (component: any) => component is BinaryUploader;
 export declare const isBrowser: (component: any) => component is Browser;
 export declare const isClipboard: (component: any) => component is Clipboard;

@@ -8,8 +8,8 @@ import _getPrototypeOf from "@babel/runtime/helpers/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
-import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/arrow-left-circle';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import ArrowLeftCircleIcon from '@findable/icon/glyph/arrow-left-circle';
+import { gridSize as gridSizeFn } from '@findable/theme';
 import ConnectedItem from '../ConnectedItem';
 var gridSize = gridSizeFn();
 

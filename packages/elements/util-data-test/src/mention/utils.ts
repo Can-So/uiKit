@@ -1,4 +1,4 @@
-// Copy of definition from @atlaskit/mention
+// Copy of definition from @findable/mention
 // NOTE: if this is changed in the original package, this must also be modified
 export class HttpError implements Error {
   name: string;

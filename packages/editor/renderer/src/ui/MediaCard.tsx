@@ -6,14 +6,14 @@ import {
   Card,
   CardView,
   CardOnClickCallback,
-} from '@atlaskit/media-card';
+} from '@findable/media-card';
 import {
   Context,
   ImageResizeMode,
   FileIdentifier,
   ExternalImageIdentifier,
-} from '@atlaskit/media-core';
-import { MediaType } from '@atlaskit/adf-schema';
+} from '@findable/media-core';
+import { MediaType } from '@findable/adf-schema';
 import {
   withImageLoader,
   ImageStatus,
@@ -21,7 +21,7 @@ import {
   ImageLoaderProps,
   // @ts-ignore
   ImageLoaderState,
-} from '@atlaskit/editor-common';
+} from '@findable/editor-common';
 import { RendererAppearance } from './Renderer';
 
 export interface MediaProvider {

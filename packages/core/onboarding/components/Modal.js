@@ -9,8 +9,8 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
 import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components';
-import Modal from '@atlaskit/modal-dialog';
-import Button from '@atlaskit/button';
+import Modal from '@findable/modal-dialog';
+import Button from '@findable/button';
 import { Actions, ActionItem, Body, Heading, Image } from '../styled/Modal';
 import { getModalTheme } from './theme';
 

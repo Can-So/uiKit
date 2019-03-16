@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import fetchMock from 'fetch-mock';
-import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
-import Button from '@atlaskit/button';
-import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
+import EmojiAtlassianIcon from '@findable/icon/glyph/emoji/atlassian';
+import Button from '@findable/button';
+import { LayoutManager, NavigationProvider } from '@findable/navigation-next';
+import { AnalyticsListener } from '@findable/analytics-next';
 
 import GlobalNavigation from '../src';
 

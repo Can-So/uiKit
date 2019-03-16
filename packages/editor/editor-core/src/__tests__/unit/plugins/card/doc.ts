@@ -4,7 +4,7 @@ import {
   p,
   a,
   insertText,
-} from '@atlaskit/editor-test-helpers';
+} from '@findable/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 import { Fragment, Slice } from 'prosemirror-model';
 

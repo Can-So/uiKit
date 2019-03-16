@@ -1,9 +1,9 @@
-import { ContextFactory, FileState } from '@atlaskit/media-core';
+import { ContextFactory, FileState } from '@findable/media-core';
 import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
 import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
 import * as sinon from 'sinon';
-import { waitUntil } from '@atlaskit/util-common-test';
+import { waitUntil } from '@findable/util-common-test';
 
 import SiteEmojiResource, {
   EmojiProgress,
@@ -32,7 +32,7 @@ import {
 } from '../../_test-data';
 import { Observable } from 'rxjs/Observable';
 
-jest.mock('@atlaskit/media-core');
+jest.mock('@findable/media-core');
 
 class TestSiteEmojiResource extends SiteEmojiResource {
   constructor(tokenManager: TokenManager) {

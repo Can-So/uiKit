@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { MentionProvider, ResourcedMention } from '@atlaskit/mention';
-import { MentionUserType as UserType } from '@atlaskit/adf-schema';
+import { MentionProvider, ResourcedMention } from '@findable/mention';
+import { MentionUserType as UserType } from '@findable/adf-schema';
 
 import { MentionEventHandlers } from '../EventHandlers';
 import ResourcedMentionWithProfilecard from './mention-with-profilecard';

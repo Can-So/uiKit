@@ -1,4 +1,4 @@
-import { MediaUpload } from '@atlaskit/media-store';
+import { MediaUpload } from '@findable/media-store';
 import * as uuid from 'uuid';
 import { ChunkId } from './chunk';
 import { getFutureDate } from './mockData';

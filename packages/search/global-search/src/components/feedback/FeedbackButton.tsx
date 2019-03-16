@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Button from '@atlaskit/button';
+import Button from '@findable/button';
 import FeedbackDialog from './FeedbackDialog';
-import { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
-import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
-import FeedbackIcon from '@atlaskit/icon/glyph/feedback';
-import { colors } from '@atlaskit/theme';
+import { AutoDismissFlag, FlagGroup } from '@findable/flag';
+import SuccessIcon from '@findable/icon/glyph/check-circle';
+import FeedbackIcon from '@findable/icon/glyph/feedback';
+import { colors } from '@findable/theme';
 
 // Positions the button at the top right of the drawer
 const AboveSearchInputPositionHack = styled.div`

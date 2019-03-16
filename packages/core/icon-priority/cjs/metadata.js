@@ -25,7 +25,7 @@ var _default = {
       'icon-priority',
     ],
     componentName: 'PriorityBlockerIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-blocker',
+    package: '@findable/icon-priority/glyph/priority-blocker',
   },
   'priority-critical': {
     keywords: [
@@ -35,12 +35,12 @@ var _default = {
       'icon-priority',
     ],
     componentName: 'PriorityCriticalIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-critical',
+    package: '@findable/icon-priority/glyph/priority-critical',
   },
   'priority-high': {
     keywords: ['priority-high', 'priorityhigh', 'priority', 'icon-priority'],
     componentName: 'PriorityHighIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-high',
+    package: '@findable/icon-priority/glyph/priority-high',
   },
   'priority-highest': {
     keywords: [
@@ -50,12 +50,12 @@ var _default = {
       'icon-priority',
     ],
     componentName: 'PriorityHighestIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-highest',
+    package: '@findable/icon-priority/glyph/priority-highest',
   },
   'priority-low': {
     keywords: ['priority-low', 'prioritylow', 'priority', 'icon-priority'],
     componentName: 'PriorityLowIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-low',
+    package: '@findable/icon-priority/glyph/priority-low',
   },
   'priority-lowest': {
     keywords: [
@@ -65,12 +65,12 @@ var _default = {
       'icon-priority',
     ],
     componentName: 'PriorityLowestIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-lowest',
+    package: '@findable/icon-priority/glyph/priority-lowest',
   },
   'priority-major': {
     keywords: ['priority-major', 'prioritymajor', 'priority', 'icon-priority'],
     componentName: 'PriorityMajorIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-major',
+    package: '@findable/icon-priority/glyph/priority-major',
   },
   'priority-medium': {
     keywords: [
@@ -80,12 +80,12 @@ var _default = {
       'icon-priority',
     ],
     componentName: 'PriorityMediumIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-medium',
+    package: '@findable/icon-priority/glyph/priority-medium',
   },
   'priority-minor': {
     keywords: ['priority-minor', 'priorityminor', 'priority', 'icon-priority'],
     componentName: 'PriorityMinorIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-minor',
+    package: '@findable/icon-priority/glyph/priority-minor',
   },
   'priority-trivial': {
     keywords: [
@@ -95,7 +95,7 @@ var _default = {
       'icon-priority',
     ],
     componentName: 'PriorityTrivialIcon',
-    package: '@atlaskit/icon-priority/glyph/priority-trivial',
+    package: '@findable/icon-priority/glyph/priority-trivial',
   },
 };
 exports.default = _default;
