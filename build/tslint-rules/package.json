@@ -1,6 +1,6 @@
 {
   "name": "@findable/tslint-rules",
-  "private": true,
+  "private": false,
   "version": "1.0.0",
   "main": "tslint.json",
   "description": "Custom tslint rules used in Atlaskit",

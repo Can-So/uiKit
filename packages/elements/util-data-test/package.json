@@ -5,7 +5,7 @@
   "config": {
     "access": "public"
   },
-  "private": true,
+  "private": false,
   "atlaskit:src": "src/index.ts",
   "module": "index.js",
   "types": "index.d.ts",

@@ -1,7 +1,7 @@
 {
   "name": "@findable/icon-build-process",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "svgo": "^0.7.0",
     "prettier": "^1.14.3",

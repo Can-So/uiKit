@@ -7,9 +7,14 @@ import { AkCodeBlock } from '@findable/code';
  * Template expressions aren't yet supported, and likely never will be.
  */
 
-export default function code( // Tagged Template Literal support is still WIP for flow: https://github.com/facebook/flow/issues/2616
-sources) {
-  for (var _len = arguments.length, substitutions = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+export default function code(sources) { // Tagged Template Literal support is still WIP for flow: https://github.com/facebook/flow/issues/2616
+  for (
+    var _len = arguments.length,
+      substitutions = new Array(_len > 1 ? _len - 1 : 0),
+      _key = 1;
+    _key < _len;
+    _key++
+  ) {
     substitutions[_key - 1] = arguments[_key];
   }
 
@@ -18,12 +23,16 @@ sources) {
 
   source = source.replace(/(\n\s*)+$/g, ''); // Remove trailing newlines
 
-  return React.createElement(CodeWrapper, null, React.createElement(AkCodeBlock, {
-    language: "javascript",
-    text: source
-  }));
+  return React.createElement(
+    CodeWrapper,
+    null,
+    React.createElement(AkCodeBlock, {
+      language: 'javascript',
+      text: source,
+    }),
+  );
 }
 var CodeWrapper = styled.div.withConfig({
-  displayName: "code__CodeWrapper",
-  componentId: "sc-3zahnc-0"
-})(["\n  margin-top: 8px;\n"]);
+  displayName: 'code__CodeWrapper',
+  componentId: 'na4n84-0',
+})(['\n  margin-top: 8px;\n']);

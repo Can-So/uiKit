@@ -1,7 +1,7 @@
 {
   "name": "@findable/atlaskid",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "Atlaskit specific implementation of Landkid for hosting on micros",
   "scripts": {
     "start": "landkid",

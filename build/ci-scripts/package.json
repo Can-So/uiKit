@@ -1,7 +1,7 @@
 {
   "name": "@findable/ci-scripts",
   "version": "1.0.1",
-  "private": true,
+  "private": false,
   "description": "A collection of scripts for use in CI",
   "main": "index.js",
   "scripts": {

@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "private": false,
   "name": "changelog fixtures",
   "description": "simple project with no content beside changelog variants",
   "version": "1.0.0",

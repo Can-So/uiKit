@@ -2,7 +2,7 @@
   "name": "@findable/visual-regression",
   "version": "0.0.1",
   "main": "index.js",
-  "private": true,
+  "private": false,
   "dependencies": {
      "@findable/analytics-reporting": "0.1.0",
      "docker-compose": "^0.9.3",

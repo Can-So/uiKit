@@ -1,7 +1,7 @@
 {
   "name": "@findable/jest-config",
   "version": "1.0.1",
-  "private": true,
+  "private": false,
   "dependencies": {
     "enzyme-adapter-react-16": "^1.7.0",
     "raf-stub": "^2.0.1",

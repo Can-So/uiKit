@@ -1,6 +1,6 @@
 {
   "name": "@findable/webpack-config",
-  "private": true,
+  "private": false,
   "bin": {
     "webpack-dev": "./bin/dev.js",
     "webpack-build": "./bin/build.js"

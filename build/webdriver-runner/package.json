@@ -2,7 +2,7 @@
   "name": "@findable/webdriver-runner",
   "version": "0.1.1",
   "main": "index.js",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@findable/webpack-config": "^2.0.4",
     "@findable/analytics-reporting": "0.1.0",

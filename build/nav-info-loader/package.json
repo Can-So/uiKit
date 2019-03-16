@@ -2,7 +2,7 @@
   "name": "nav-info-loader",
   "version": "0.0.0",
   "main": "index.js",
-  "private": true,
+  "private": false,
   "dependencies": {
     "bolt": "^0.22.1",
     "loader-utils": "^1.1.0",

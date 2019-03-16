@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "private": false,
   "name": "simple-tilde-peer-dep-copy",
   "version": "1.0.0",
   "bolt": {

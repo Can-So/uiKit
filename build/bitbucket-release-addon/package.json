@@ -1,7 +1,7 @@
 {
   "name": "@findable/bitbucket-releases-addon",
   "version": "1.1.0",
-  "private": true,
+  "private": false,
   "description": "Bitbucket addon for displaying releases section in PRs",
   "scripts": {
     "dev": "webpack-dev-server --content-base dist/",

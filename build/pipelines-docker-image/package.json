@@ -1,7 +1,7 @@
 {
   "name": "@findable/pipelines-docker-image",
   "version": "1.0.8",
-  "private": true,
+  "private": false,
   "description": "Docker image used to set up the Atlaskit repo in pipelines",
   "scripts": {
     "build-image": "docker build -t atlassianlabs/atlaskit-mk-2:$npm_package_version -t atlassianlabs/atlaskit-mk-2:latest .",

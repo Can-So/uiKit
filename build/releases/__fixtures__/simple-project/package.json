@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "private": false,
   "name": "simple-project",
   "description": "three projects, each depending on one other",
   "version": "1.0.0",

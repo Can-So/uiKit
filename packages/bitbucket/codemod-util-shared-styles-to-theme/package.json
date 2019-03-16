@@ -1,7 +1,7 @@
 {
   "name": "@findable/codemod-util-shared-styles-to-theme",
   "version": "2.0.0",
-  "private": true,
+  "private": false,
   "description": "Converts @findable/util-shared-styles to @findable/theme",
   "module": "index.js",
   "atlaskit:src": "src/index.js",
