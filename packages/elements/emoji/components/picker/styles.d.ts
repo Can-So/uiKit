@@ -1,0 +1,18 @@
+export declare const active = "emoji-picker-active";
+export declare const disable = "emoji-picker-disable";
+export declare const emojiPicker: string;
+export declare const addButton = "emoji-picker-add-button";
+export declare const categorySelector: string;
+export declare const category: string;
+export declare const emojiPickerList: string;
+export declare const virtualList: string;
+export declare const searchIcon = "search-icon";
+export declare const input = "input";
+export declare const pickerSearch: string;
+export declare const emojiPickerSpinner: string;
+export declare const emojiPickerRow: string;
+export declare const emojiCategoryTitle: string;
+export declare const emojiItem: string;
+export declare const addEmoji: string;
+export declare const emojiPickerFooter: string;
+export declare const emojiPickerFooterWithTopShadow: string;

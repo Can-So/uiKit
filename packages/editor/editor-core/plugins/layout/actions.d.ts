@@ -1,0 +1,11 @@
+import { Node } from 'prosemirror-model';
+import { Command } from '../../types';
+import { EditorState, Transaction } from 'prosemirror-state';
+export declare type PresetLayout = 'two_equal' | 'three_equal';
+export declare const getPresetLayout: (section: Node<any>) => "two_equal" | "three_equal" | undefined;
+export declare const createDefaultLayoutSection: (state: EditorState<any>) => Node<any>;
+export declare const insertLayoutColumns: Command;
+export declare function forceSectionToPresetLayout(state: EditorState, node: Node, pos: number, presetLayout: PresetLayout): Transaction;
+export declare const setPresetLayout: (layout: PresetLayout) => Command;
+export declare const fixColumnSizes: (changedTr: Transaction<any>, state: EditorState<any>) => undefined;
+export declare const deleteActiveLayoutNode: Command;

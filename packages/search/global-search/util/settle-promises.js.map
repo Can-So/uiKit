@@ -1,0 +1,1 @@
+{"version":3,"file":"settle-promises.js","sourceRoot":"","sources":["../src/util/settle-promises.ts"],"names":[],"mappings":";AAAA;;;;;;;;;GASG;AACH,MAAM,CAAC,OAAO,UAAgB,cAAc,CAAC,MAAsB;;;;wBAC1D,qBAAM,OAAO,CAAC,GAAG,CAAC,MAAM,CAAC,GAAG,CAAC,UAAA,CAAC,IAAI,OAAA,CAAC,CAAC,KAAK,CAAC,KAAK,CAAC,EAAd,CAAc,CAAC,CAAC,EAAA;wBAAzD,sBAAO,SAAkD,EAAC;;;;CAC3D"}

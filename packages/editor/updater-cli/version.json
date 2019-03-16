@@ -1,0 +1,5 @@
+{
+	"name": "@atlaskit/updater-cli",
+	"version": "2.0.0",
+	"sideEffects": false
+}

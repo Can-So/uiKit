@@ -1,0 +1,9 @@
+import * as tslib_1 from "tslib";
+// @ts-ignore: unused variable
+import { css } from 'styled-components';
+import { colors } from '@atlaskit/theme';
+import { akEditorGridLineZIndex } from '@atlaskit/editor-common';
+export var GRID_GUTTER = 12;
+export var gridStyles = css(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  .gridParent {\n    width: calc(100% + ", "px);\n    margin-left: -", "px;\n    margin-right: -", "px;\n    transform: scale(1);\n    z-index: ", ";\n  }\n\n  .gridContainer {\n    position: fixed;\n    height: 100vh;\n    width: 100%;\n    pointer-events: none;\n  }\n\n  .gridLine {\n    border-left: 1px solid ", ";\n    display: inline-block;\n    box-sizing: border-box;\n    height: 100%;\n    margin-left: -1px;\n\n    transition: border-color 0.15s linear;\n    z-index: 0;\n  }\n\n  .gridContainer.hidden .gridLine {\n    border-left: 1px solid transparent;\n  }\n\n  .highlight {\n    border-left: 1px solid ", ";\n  }\n"], ["\n  .gridParent {\n    width: calc(100% + ", "px);\n    margin-left: -", "px;\n    margin-right: -", "px;\n    transform: scale(1);\n    z-index: ", ";\n  }\n\n  .gridContainer {\n    position: fixed;\n    height: 100vh;\n    width: 100%;\n    pointer-events: none;\n  }\n\n  .gridLine {\n    border-left: 1px solid ", ";\n    display: inline-block;\n    box-sizing: border-box;\n    height: 100%;\n    margin-left: -1px;\n\n    transition: border-color 0.15s linear;\n    z-index: 0;\n  }\n\n  .gridContainer.hidden .gridLine {\n    border-left: 1px solid transparent;\n  }\n\n  .highlight {\n    border-left: 1px solid ", ";\n  }\n"])), GRID_GUTTER * 2, GRID_GUTTER, GRID_GUTTER, akEditorGridLineZIndex, colors.N30A, colors.B200);
+var templateObject_1;
+//# sourceMappingURL=styles.js.map

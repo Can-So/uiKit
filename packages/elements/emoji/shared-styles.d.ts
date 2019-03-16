@@ -1,0 +1,12 @@
+export declare const emojiPickerListWidth = 350;
+export declare const emojiPickerListHeight = 205;
+export declare const emojiPickerBorderColor: string;
+export declare const emojiPickerBoxShadow = "0 3px 6px rgba(0, 0, 0, 0.2)";
+export declare const emojiFooterBoxShadow = "0px -1px 1px 0px rgba(0, 0, 0, 0.1)";
+export declare const noDialogContainerBorderColor: string;
+export declare const noDialogContainerBorderRadius: string;
+export declare const noDialogContainerBoxShadow = "0 3px 6px rgba(0, 0, 0, 0.2)";
+export declare const akEmojiSelectedBackgroundColor: string;
+export declare const emojiPreviewSelectedColor: string;
+export declare const emojiTypeAheadMaxHeight = 350;
+export declare const emojiTypeAheadWidth = 350;

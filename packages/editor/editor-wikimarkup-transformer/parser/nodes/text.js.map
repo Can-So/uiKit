@@ -1,0 +1,1 @@
+{"version":3,"file":"text.js","sourceRoot":"","sources":["../../src/parser/nodes/text.ts"],"names":[],"mappings":"AAEA,MAAM,UAAU,cAAc,CAC5B,KAAa,EACb,MAAc,EACd,KAAgB;IAEhB,IAAI,KAAK,KAAK,EAAE,EAAE;QAChB,OAAO,EAAE,CAAC;KACX;IACD,IAAM,IAAI,GAAG,MAAM,CAAC,IAAI,CAAC,KAAK,EAAE,KAAK,IAAI,EAAE,CAAC,CAAC;IAC7C,OAAO,CAAC,IAAI,CAAC,CAAC;AAChB,CAAC"}

@@ -1,0 +1,8 @@
+import * as tslib_1 from "tslib";
+// @ts-ignore: unused variable
+// prettier-ignore
+import { css } from 'styled-components';
+import { colors } from '@atlaskit/theme';
+export var fakeCursorStyles = css(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  .ProseMirror {\n    .ProseMirror-fake-text-cursor {\n      display: inline;\n      pointer-events: none;\n      position: relative;\n      height: 15px;\n    }\n\n    .ProseMirror-fake-text-cursor::after {\n      content: '';\n      display: inline;\n      top: 0;\n      position: absolute;\n      height: 100%;\n      border-right: 1px solid rgba(0, 0, 0, 0.4);\n    }\n\n    .ProseMirror-fake-text-selection {\n      display: inline;\n      pointer-events: none;\n      position: relative;\n      background-color: ", ";\n    }\n  }\n"], ["\n  .ProseMirror {\n    .ProseMirror-fake-text-cursor {\n      display: inline;\n      pointer-events: none;\n      position: relative;\n      height: 15px;\n    }\n\n    .ProseMirror-fake-text-cursor::after {\n      content: '';\n      display: inline;\n      top: 0;\n      position: absolute;\n      height: 100%;\n      border-right: 1px solid rgba(0, 0, 0, 0.4);\n    }\n\n    .ProseMirror-fake-text-selection {\n      display: inline;\n      pointer-events: none;\n      position: relative;\n      background-color: ", ";\n    }\n  }\n"])), colors.B75);
+var templateObject_1;
+//# sourceMappingURL=styles.js.map

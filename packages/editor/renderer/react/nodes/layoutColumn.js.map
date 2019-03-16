@@ -1,0 +1,1 @@
+{"version":3,"file":"layoutColumn.js","sourceRoot":"","sources":["../../src/react/nodes/layoutColumn.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAE/B,MAAM,CAAC,OAAO,UAAU,aAAa,CACnC,KAA4C;IAE5C,OAAO,CACL,8EAEqB,KAAK,CAAC,KAAK,EAC9B,KAAK,EAAE,EAAE,SAAS,EAAK,KAAK,CAAC,KAAK,MAAG,EAAE,IAEtC,KAAK,CAAC,QAAQ,CACX,CACP,CAAC;AACJ,CAAC"}

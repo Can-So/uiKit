@@ -1,0 +1,1 @@
+{"version":3,"file":"performance-now.js","sourceRoot":"","sources":["../src/utils/performance-now.ts"],"names":[],"mappings":"AAAA,eAAe,CAAC,OAAO,MAAM,KAAK,WAAW;IAC3C,MAAM,CAAC,WAAW;IAClB,MAAM,CAAC,WAAW,CAAC,GAAG,CAAC,IAAI,CAAC,WAAW,CAAC,CAAC;IACzC,IAAI,CAAC,GAAG,CAAC"}

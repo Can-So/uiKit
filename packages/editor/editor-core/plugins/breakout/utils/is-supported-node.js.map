@@ -1,0 +1,1 @@
+{"version":3,"file":"is-supported-node.js","sourceRoot":"","sources":["../../../src/plugins/breakout/utils/is-supported-node.ts"],"names":[],"mappings":"AAEA,IAAM,yBAAyB,GAAG,CAAC,WAAW,EAAE,eAAe,CAAC,CAAC;AAEjE,MAAM,UAAU,0BAA0B,CAAC,IAAY;IACrD,OAAO,yBAAyB,CAAC,OAAO,CAAC,IAAI,CAAC,IAAI,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC,CAAC;AAClE,CAAC"}

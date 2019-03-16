@@ -1,0 +1,1 @@
+{"version":3,"file":"paragraph.js","sourceRoot":"","sources":["../../src/react/nodes/paragraph.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAC/B,OAAO,MAAM,MAAM,UAAU,CAAC;AAE9B,MAAM,CAAC,OAAO,UAAU,SAAS,CAAC,EAA6B;QAA3B,sBAAQ;IAC1C,OAAO,CACL;QACE,oBAAC,MAAM,QAAE,QAAQ,CAAU,CACzB,CACL,CAAC;AACJ,CAAC"}

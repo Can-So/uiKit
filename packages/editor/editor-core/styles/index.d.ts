@@ -1,0 +1,18 @@
+export declare const akEditorCodeFontFamily: any;
+export declare const akEditorInactiveForeground: string;
+export declare const akEditorFocus: string;
+export declare const akEditorSubtleAccent: string;
+export declare const akEditorActiveBackground: string;
+export declare const akEditorActiveForeground: string;
+export declare const akEditorBlockquoteBorderColor: string;
+export declare const akEditorDropdownActiveBackground: string;
+export declare const akEditorPopupBackground: string;
+export declare const akEditorPopupText: string;
+export declare const akEditorPrimaryButton: string;
+export declare const akEditorCodeBackground: string;
+export declare const akEditorCodeBlockPadding = "12px";
+export declare const akEditorCodeInlinePadding = "2px 4px";
+export declare const akEditorMentionSelected: string;
+export declare const akEditorRuleBackground: string;
+export declare const akEditorRuleBorderRadius = "1px";
+export declare const akEditorToolbarKeylineHeight = 2;

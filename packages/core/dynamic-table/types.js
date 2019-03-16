@@ -1,0 +1,1 @@
+import { UIAnalyticsEvent } from '@atlaskit/analytics-next';

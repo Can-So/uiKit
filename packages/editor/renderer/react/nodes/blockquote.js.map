@@ -1,0 +1,1 @@
+{"version":3,"file":"blockquote.js","sourceRoot":"","sources":["../../src/react/nodes/blockquote.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAC/B,MAAM,CAAC,OAAO,UAAU,UAAU,CAAC,KAAuB;IACxD,OAAO,wCAAa,KAAK,CAAC,QAAQ,CAAc,CAAC;AACnD,CAAC"}

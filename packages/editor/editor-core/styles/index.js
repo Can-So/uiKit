@@ -1,0 +1,21 @@
+import { codeFontFamily, colors } from '@atlaskit/theme';
+var B100 = colors.B100, B400 = colors.B400, B50 = colors.B50, N0 = colors.N0, N20 = colors.N20, N30 = colors.N30, N40 = colors.N40, N100 = colors.N100, N500 = colors.N500, N700 = colors.N700, N900 = colors.N900;
+export var akEditorCodeFontFamily = codeFontFamily();
+export var akEditorInactiveForeground = N500;
+export var akEditorFocus = B100;
+export var akEditorSubtleAccent = N40;
+export var akEditorActiveBackground = N500;
+export var akEditorActiveForeground = N0;
+export var akEditorBlockquoteBorderColor = N40;
+export var akEditorDropdownActiveBackground = N900;
+export var akEditorPopupBackground = N700;
+export var akEditorPopupText = B50;
+export var akEditorPrimaryButton = B400;
+export var akEditorCodeBackground = N20;
+export var akEditorCodeBlockPadding = '12px';
+export var akEditorCodeInlinePadding = '2px 4px';
+export var akEditorMentionSelected = N100;
+export var akEditorRuleBackground = N30;
+export var akEditorRuleBorderRadius = '1px';
+export var akEditorToolbarKeylineHeight = 2;
+//# sourceMappingURL=index.js.map

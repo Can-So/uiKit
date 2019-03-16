@@ -1,0 +1,11 @@
+import { Command } from '../../types';
+import { Predicate } from '../../utils/commands';
+import { INPUT_METHOD } from '../analytics';
+export declare function isTextAtPos(pos: number): Predicate;
+export declare function isLinkAtPos(pos: number): Predicate;
+export declare function setLinkHref(href: string, pos: number, to?: number): Command;
+export declare function setLinkText(text: string, pos: number, to?: number): Command;
+export declare function insertLink(from: number, to: number, href: string, text?: string): Command;
+export declare function removeLink(pos: number): Command;
+export declare function showLinkToolbar(inputMethod?: INPUT_METHOD.TOOLBAR | INPUT_METHOD.QUICK_INSERT | INPUT_METHOD.SHORTCUT): Command;
+export declare function hideLinkToolbar(): Command;

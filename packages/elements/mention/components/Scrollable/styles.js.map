@@ -1,0 +1,1 @@
+{"version":3,"file":"styles.js","sourceRoot":"","sources":["../../src/components/Scrollable/styles.ts"],"names":[],"mappings":";AAAA,OAAO,MAAM,MAAM,mBAAmB,CAAC;AAIvC,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAC;AAC/C,OAAO,EAAE,mBAAmB,EAAE,MAAM,qBAAqB,CAAC;AAE1D,MAAM,CAAC,IAAM,eAAe,GAExB,MAAM,CAAC,GAAG,0PAAA,4IASE,EAAmB,wBAEhB,EAAc,OAChC,KAHe,mBAAmB,EAEhB,YAAY,EAAE,CAChC,CAAC"}

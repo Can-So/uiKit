@@ -1,0 +1,36 @@
+import * as React from 'react';
+import { Component } from 'react';
+import { Context, Identifier } from '@atlaskit/media-core';
+import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { Subscription } from 'rxjs/Subscription';
+import { MediaViewerDataSource } from '@atlaskit/media-viewer';
+import { CardAnalyticsContext, CardAction, CardDimensions, CardProps, CardState, CardEvent } from '../..';
+export declare class Card extends Component<CardProps, CardState> {
+    private hasBeenMounted;
+    private onClickPayload?;
+    subscription?: Subscription;
+    static defaultProps: Partial<CardProps>;
+    state: CardState;
+    componentDidMount(): void;
+    componentWillReceiveProps(nextProps: CardProps): void;
+    shouldRefetchImage: (current?: CardDimensions | undefined, next?: CardDimensions | undefined) => boolean;
+    componentWillUnmount(): void;
+    releaseDataURI: () => void;
+    private onLoadingChangeCallback;
+    subscribe(identifier: Identifier, context: Context): Promise<void>;
+    notifyStateChange: (state: Partial<CardState>) => void;
+    unsubscribe: () => void;
+    private onRetry;
+    readonly analyticsContext: CardAnalyticsContext;
+    readonly actions: CardAction[];
+    onClick: (result: CardEvent, analyticsEvent?: UIAnalyticsEventInterface | undefined) => Promise<void>;
+    onInlinePlayerError: () => void;
+    onInlinePlayerClick: () => void;
+    renderInlinePlayer: () => JSX.Element;
+    onMediaViewerClose: () => void;
+    getMediaViewerDataSource: () => MediaViewerDataSource;
+    renderMediaViewer: () => React.ReactPortal | undefined;
+    renderCard: () => JSX.Element;
+    render(): JSX.Element;
+    onCardInViewport: () => void;
+}

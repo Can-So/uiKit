@@ -1,0 +1,31 @@
+import { ActionablePubSubClient, ARI, OnEvent, PubSubClient, PubSubClientConfig } from './apiTypes';
+import { Protocol } from './types';
+export declare const RETRY_STEP_IN_MILLISECONDS = 1000;
+export declare const MAX_RETRY = 10;
+export declare class Client implements ActionablePubSubClient {
+    private config;
+    private eventEmitter;
+    private currentChannels;
+    private capabilities;
+    private protocols;
+    private currentProtocol;
+    private retryCount;
+    private subscribeDebounced;
+    private subscribeBaseRequest;
+    private featureFlags;
+    constructor(config: PubSubClientConfig, protocols?: Protocol[]);
+    on(event: string, listener: OnEvent): PubSubClient;
+    off(event: string, listener: OnEvent): PubSubClient;
+    join(aris: ARI[]): Promise<PubSubClient>;
+    leave(aris: ARI[]): Promise<PubSubClient>;
+    networkUp(): void;
+    networkDown(): void;
+    private debouncedSubscribeToCurrentChannels;
+    private registerProtocols;
+    private subscribeToCurrentChannels;
+    private onMessage;
+    private onAccessDenied;
+    private onNetworkUp;
+    private onReconnect;
+    private fetchSubscribeProtocol;
+}

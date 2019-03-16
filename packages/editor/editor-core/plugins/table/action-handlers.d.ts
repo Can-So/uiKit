@@ -1,0 +1,16 @@
+import { EditorState, Transaction } from 'prosemirror-state';
+import { Decoration } from 'prosemirror-view';
+import { Dispatch } from '../../event-dispatcher';
+import { TablePluginState } from './types';
+export declare const handleSetFocus: (editorHasFocus: boolean) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleSetTableRef: (state: EditorState<any>, tableRef?: HTMLElement | undefined) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleSetTargetCellPosition: (targetCellPosition?: number | undefined) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleClearSelection: (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleHoverColumns: (state: EditorState<any>, hoverDecoration: Decoration[], hoveredColumns: number[], isInDanger: boolean) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleHoverRows: (state: EditorState<any>, hoverDecoration: Decoration[], hoveredRows: number[], isInDanger: boolean) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleHoverTable: (state: EditorState<any>, hoverDecoration: Decoration[], hoveredColumns: number[], hoveredRows: number[], isInDanger: boolean) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleDocOrSelectionChanged: (tr: Transaction<any>) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleToggleContextualMenu: (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleShowInsertColumnButton: (insertColumnButtonIndex?: number | undefined) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleShowInsertRowButton: (insertRowButtonIndex?: number | undefined) => (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;
+export declare const handleHideInsertColumnOrRowButton: (pluginState: TablePluginState, dispatch: Dispatch<any>) => TablePluginState;

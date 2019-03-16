@@ -1,0 +1,1 @@
+{"version":3,"file":"textColor.js","sourceRoot":"","sources":["../../src/react/marks/textColor.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAC/B,MAAM,CAAC,OAAO,UAAU,SAAS,CAAC,KAA2C;IAC3E,OAAO,8BAAM,KAAK,EAAE,EAAE,KAAK,EAAE,KAAK,CAAC,KAAK,EAAE,IAAG,KAAK,CAAC,QAAQ,CAAQ,CAAC;AACtE,CAAC"}

@@ -1,0 +1,10 @@
+import { Decision, Item, ObjectKey, RendererContext, ServiceDecision, ServiceItem, ServiceTask, Task, TaskState } from './types';
+export declare const isDecision: (item: Item) => item is Decision;
+export declare const isTask: (item: Item) => item is Task;
+export declare const isServiceDecision: (item: ServiceItem) => item is ServiceDecision;
+export declare const isServiceTask: (item: ServiceItem) => item is ServiceTask;
+export declare const isDateSortCriteria: (sortCriteria?: "creationDate" | "lastUpdateDate" | undefined) => boolean;
+export declare const toObjectKey: (item: ServiceDecision | ServiceTask | Decision | Task) => ObjectKey;
+export declare const toRendererContext: (item: ObjectKey | Decision | Task) => RendererContext;
+export declare const objectKeyToString: (objectKey: ObjectKey) => string;
+export declare const toggleTaskState: (state: TaskState) => TaskState;

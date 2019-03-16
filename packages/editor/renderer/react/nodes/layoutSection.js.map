@@ -1,0 +1,1 @@
+{"version":3,"file":"layoutSection.js","sourceRoot":"","sources":["../../src/react/nodes/layoutSection.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAE/B,MAAM,CAAC,OAAO,UAAU,aAAa,CAAC,KAAuB;IAC3D,OAAO,4DAA0B,KAAK,CAAC,QAAQ,CAAO,CAAC;AACzD,CAAC"}

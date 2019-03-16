@@ -1,0 +1,14 @@
+import { ReactionsReadyState } from '../types/ReactionsState';
+import { ReactionSummary } from '../types/ReactionSummary';
+import { Updater } from '../types/Updater';
+export declare const compareEmojiId: (l: string, r: string) => number;
+export declare type ReactionSummarySortFunction = (a: ReactionSummary, b: ReactionSummary) => number;
+export declare const sortByRelevance: ReactionSummarySortFunction;
+export declare const sortByPreviousPosition: (reactions: ReactionSummary[]) => ReactionSummarySortFunction;
+export declare const readyState: (reactions: ReactionSummary[]) => ReactionsReadyState;
+export declare const byEmojiId: (emojiId: string) => (reaction: ReactionSummary) => boolean;
+export declare const addOne: (reaction: ReactionSummary) => ReactionSummary;
+export declare const removeOne: (reaction: ReactionSummary) => ReactionSummary;
+export declare const updateByEmojiId: (emojiId: string, updater: ReactionSummary | Updater<ReactionSummary>) => (reaction: ReactionSummary) => void | ReactionSummary;
+export declare const getReactionsSortFunction: (reactions?: ReactionSummary[] | undefined) => ReactionSummarySortFunction;
+export declare const flattenAris: (a: string[], b: string[]) => string[];

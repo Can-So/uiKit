@@ -1,0 +1,16 @@
+import * as tslib_1 from "tslib";
+import styled from 'styled-components';
+import { colors, gridSize } from '@atlaskit/theme';
+export var ResultItemGroupHeader = styled.div(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  margin-left: -", "px;\n  margin-top: ", "px;\n"], ["\n  display: flex;\n  margin-left: -", "px;\n  margin-top: ", "px;\n"])), gridSize() * 1.5, gridSize() * 1.5);
+export var ResultItemGroupTitle = styled.div(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n  font-size: 11px;\n  line-height: ", "px;\n  font-weight: 600;\n"], ["\n  font-size: 11px;\n  line-height: ", "px;\n  font-weight: 600;\n"])), gridSize() * 2);
+export var ResultItemAfter = styled.div(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n  min-width: ", ";\n"], ["\n  min-width: ", ";\n"])), function (_a) {
+    var shouldTakeSpace = _a.shouldTakeSpace;
+    return (shouldTakeSpace ? '24px' : 0);
+});
+export var ResultItemAfterWrapper = styled.div(templateObject_4 || (templateObject_4 = tslib_1.__makeTemplateObject(["\n  display: flex;\n"], ["\n  display: flex;\n"])));
+export var ResultItemCaption = styled.span(templateObject_5 || (templateObject_5 = tslib_1.__makeTemplateObject(["\n  color: ", ";\n  font-size: 12px;\n  margin-left: ", "px;\n"], ["\n  color: ", ";\n  font-size: 12px;\n  margin-left: ", "px;\n"])), colors.N200, gridSize());
+export var ResultItemSubText = styled.span(templateObject_6 || (templateObject_6 = tslib_1.__makeTemplateObject(["\n  font-size: 12px;\n  color: ", ";\n"], ["\n  font-size: 12px;\n  color: ", ";\n"])), colors.N200);
+export var ResultItemIcon = styled.div(templateObject_7 || (templateObject_7 = tslib_1.__makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n  transition: padding 200ms;\n\n  > * {\n    flex: 1 0 auto;\n  }\n\n  /* We need to ensure that any image passed in as a child (<img/>, <svg/>\n    etc.) receives the correct width, height and border radius. We don't\n    currently assume that the image passed in is the correct dimensions, or has\n    width / height 100% */\n  > img {\n    height: ", "px;\n    width: ", "px;\n  }\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n  transition: padding 200ms;\n\n  > * {\n    flex: 1 0 auto;\n  }\n\n  /* We need to ensure that any image passed in as a child (<img/>, <svg/>\n    etc.) receives the correct width, height and border radius. We don't\n    currently assume that the image passed in is the correct dimensions, or has\n    width / height 100% */\n  > img {\n    height: ", "px;\n    width: ", "px;\n  }\n"])), gridSize() * 3, gridSize() * 3);
+export var ResultItemTextAfter = styled.div(templateObject_8 || (templateObject_8 = tslib_1.__makeTemplateObject(["\n  position: relative;\n  z-index: 1;\n"], ["\n  position: relative;\n  z-index: 1;\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8;
+//# sourceMappingURL=styled.js.map

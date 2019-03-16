@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/primitives/index.tsx"],"names":[],"mappings":"AAAA,OAAO,YAAY,MAAM,QAAQ,CAAC;AAClC,OAAO,OAAO,MAAM,WAAW,CAAC;AAChC,OAAO,eAAe,MAAM,WAAW,CAAC;AACxC,OAAO,YAAY,MAAM,iBAAiB,CAAC;AAC3C,OAAO,QAAQ,MAAM,YAAY,CAAC;AAElC,OAAO,EAAE,YAAY,EAAE,eAAe,EAAE,YAAY,EAAE,OAAO,EAAE,QAAQ,EAAE,CAAC"}

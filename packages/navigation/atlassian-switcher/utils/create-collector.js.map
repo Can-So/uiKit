@@ -1,0 +1,1 @@
+{"version":3,"file":"create-collector.js","sourceRoot":"","sources":["../src/utils/create-collector.ts"],"names":[],"mappings":"AAAA;;;GAGG;AACH,MAAM,UAAU,eAAe;IAC7B,IAAI,cAAc,GAAG,IAAI,CAAC;IAE1B,OAAO,UAAiB,UAAyB,EAAE,YAAe;QAChE,IAAI,cAAc,IAAI,UAAU,KAAK,SAAS,EAAE;YAC9C,OAAO,UAAU,CAAC;SACnB;QACD,cAAc,GAAG,KAAK,CAAC;QACvB,OAAO,YAAY,CAAC;IACtB,CAAC,CAAC;AACJ,CAAC"}
